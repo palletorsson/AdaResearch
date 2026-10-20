@@ -1,0 +1,7 @@
+# Ant Colony — one paragraph
+
+Walk among the same PointBody spheres in a twelve-metre field. Carry the ABM point's position, velocity and carrying flag; split the shared trace into home and food. A searching point reads food and leaves home; contact with food reverses that relationship. Hold one body, move it to a destination, release and step, predicting the channel it will read and write. Replace the population while retaining both traces, then clear them. Independently halve deposit strength and test the changed amount without writing the other channel. This is a two-channel foraging model, with no shortest-route guarantee. Carry the distinction between shared traces and a body's own remembered state into Particle Swarm Optimization.
+
+## Compressed instruction
+
+ACO5/7. Museum permanent walk-in12m;24 PointBodies,51cmdiameter,0.8mhigh. Sameclass asABM/Boids. Add home/food arrays; SEARCHreadfood/writehome; RETURNreadhome/writefood. Contact<1cell beforemotion flipsflag/reversesv/renewsenergy. No directhomesteering. Threeoldsamples; tiesstraight; stoppedfallbackE/W. Commitall; fade.995; deposit.5*energy cap8; replenish ownsourcecell8. Energy−.0025/tick.16²periodic; .05s; .75m/cell. Holdpauseall/relocate/zerov/preservecarry+energy; triggerselect. Replacekeepsfields/tally/clock; Clearresetsrecords retainsparams. Halfdepositpredict.249375tick. TwoMultiMeshes. Exactprintedcode=runtimecopies. Nooptimality/biology/headsetclaim. NextPSOpersonalbest/score. Keepfullscale forremaininghalls.

@@ -1,0 +1,13 @@
+# The thread and the work
+
+Sadie Plant's *Zeros + Ones: Digital Women + the New Technoculture* (1997) belongs beside this loom. Read its account of women and technological culture with Palle Torsson's *Mamma Mönster* (2022): a mother's textile practice, the labour of making, a child's patterned room, and the wish that different clothes might change how people live. [Book and edition record](https://books.google.com/books/about/Zeros_%2B_Ones.html?id=AEi0AAAAIAAJ).
+
+For Ada, the productive question is whose work becomes visible when a pattern is called a program. This is our use of Plant, not a claim that a shared grid proves textile work and computation identical, or that technical capacities belong naturally to one gender. A precise quotation from Plant should be checked against its page and edition before publication; none is invented here.
+
+The references to *Mamma Mönster* in Foundry, Array Patterns and the final garment hall draw on Palle Torsson's supplied manuscript, dated Vamlingbo, July 2022. Foundry returns to its account of the hope behind Kristina Torsson's soft, colourful clothing. The corridor passage follows the tennis-court work: Mimmi Torsson's drawings, experiments with stencils and paint, metal templates made locally, and a change of windbreak material because of weight. The garment passage returns to the author's description of his room filled with fabrics, mirrors, colours and reflections. These are paraphrases of that account, not newly invented memories.
+
+That material history does not establish that every textile is woven, that all handwork follows one structure, or that changing a garment necessarily changes its wearer. It gives the sequence a situated desire and a record of work. The museum can put some of those questions within reach while leaving their consequences open.
+
+Printing, weaving and knitting also need separate descriptions. Printing places colour on an existing textile. Weaving interlaces warp and weft. Knitting forms fabric through interlocking loops. The same textile may combine processes. The [V&A's weave analysis](https://www.vam.ac.uk/blog/projects/project-interwoven-studying-textiles-from-the-outside-in) and [knitting introduction](https://www.vam.ac.uk/blog/museum-life/how-things-are-made-knitting) make the structural distinction clear.
+
+The museum's new loom records over/under relationships as geometry. Its older machines render patterned images. Neither operation by itself simulates the tension and friction of yarn. That limit gives us a specific next question, rather than an invitation to treat every attractive patterned surface as woven cloth.

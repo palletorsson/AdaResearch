@@ -1,0 +1,206 @@
+extends Node3D
+## Permanent frame and removable circulation studies. No curriculum or game rules.
+const CONFIG := "res://commons/void/layout.json"
+var spec: Dictionary
+var floors: Array[Node3D] = []
+var temporary: Node3D
+var partitions: Node3D
+var mounts: Array[Marker3D] = []
+var concrete: StandardMaterial3D
+var steel: StandardMaterial3D
+var pink: StandardMaterial3D
+var pipe_material: StandardMaterial3D
+var timber: StandardMaterial3D
+
+func _ready() -> void:
+	spec = JSON.parse_string(FileAccess.get_file_as_string(CONFIG))
+	concrete = material(Color("c3bdb1"), 0.9)
+	steel = material(Color("313b43"), 0.36, 0.65)
+	pink = material(Color("d77894"), 0.45, 0.3)
+	pipe_material = material(Color("718d98"), 0.4, 0.5)
+	timber = material(Color("b78e59"), 0.85)
+	for level in spec.levels.size():
+		_build_floor(level)
+	_build_columns()
+	_build_services()
+	temporary = Node3D.new()
+	temporary.name = "TemporaryLandings"
+	add_child(temporary)
+	for level in range(spec.levels.size() - 1):
+		_build_landings(float(spec.levels[level]))
+	partitions = Node3D.new()
+	partitions.name = "OptionalPartitions"
+	add_child(partitions)
+	box(partitions, "SamplePartition", Vector3(0, -4.5, -5.4), Vector3(7, 3, 0.16), concrete)
+	partitions.hide()
+	set_partition_collision(false)
+	_build_roof_details()
+
+func material(colour: Color, roughness: float, metallic := 0.0) -> StandardMaterial3D:
+	var result := StandardMaterial3D.new()
+	result.albedo_color = colour
+	result.roughness = roughness
+	result.metallic = metallic
+	return result
+
+func box(parent: Node3D, title: String, at: Vector3, size: Vector3, mat: Material, solid := true) -> Node3D:
+	var body: Node3D = StaticBody3D.new() if solid else Node3D.new()
+	body.name = title
+	body.position = at
+	parent.add_child(body)
+	var mesh := MeshInstance3D.new()
+	var shape := BoxMesh.new()
+	shape.size = size
+	mesh.mesh = shape
+	mesh.material_override = mat
+	body.add_child(mesh)
+	if solid:
+		var collider := CollisionShape3D.new()
+		var bounds := BoxShape3D.new()
+		bounds.size = size
+		collider.shape = bounds
+		body.add_child(collider)
+	return body
+
+func pipe(parent: Node3D, title: String, from: Vector3, to: Vector3, radius: float, mat: Material, solid := false) -> MeshInstance3D:
+	var mesh := MeshInstance3D.new()
+	mesh.name = title
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = radius
+	cylinder.bottom_radius = radius
+	cylinder.height = from.distance_to(to)
+	cylinder.radial_segments = 12
+	mesh.mesh = cylinder
+	mesh.material_override = mat
+	parent.add_child(mesh)
+	mesh.position = (from + to) * 0.5
+	var direction := (to - from).normalized()
+	mesh.quaternion = Quaternion(Vector3.UP, direction)
+	if solid:
+		var body := StaticBody3D.new()
+		var collision := CollisionShape3D.new()
+		var capsule := CapsuleShape3D.new()
+		capsule.radius = radius
+		capsule.height = cylinder.height
+		collision.shape = capsule
+		body.add_child(collision)
+		mesh.add_child(body)
+	return mesh
+
+func _build_floor(index: int) -> void:
+	var floor_root := Node3D.new()
+	floor_root.name = "Floor%d" % index
+	floor_root.position.y = float(spec.levels[index])
+	add_child(floor_root)
+	floors.append(floor_root)
+	# Tile the slab around the holes. No invisible collision plane below the shafts.
+	var half_w: float = spec.width / 2.0
+	var half_d: float = spec.depth / 2.0
+	var half_hole: float = spec.shaft_depth / 2.0
+	var edge_z: float = (half_d + half_hole) / 2.0
+	var depth_strip: float = half_d - half_hole
+	for side in [-1, 1]:
+		box(floor_root, "SlabOuter%d" % side, Vector3(0, -spec.slab_thickness / 2.0, side * edge_z), Vector3(spec.width, spec.slab_thickness, depth_strip), concrete)
+	var cursor := -half_w
+	for shaft in spec.shafts:
+		var left: float = shaft.x - spec.shaft_width / 2.0
+		_add_slab_strip(floor_root, cursor, left)
+		cursor = shaft.x + spec.shaft_width / 2.0
+	_add_slab_strip(floor_root, cursor, half_w)
+	# A landing edge can be seen from above; these narrow strips do not bridge a hole.
+	for shaft in spec.shafts:
+		for side in [-1, 1]:
+			box(floor_root, "ShaftLip", Vector3(shaft.x, 0.012, side * (half_hole + 0.065)), Vector3(spec.shaft_width, 0.024, 0.13), pink, false)
+		var label := Label3D.new()
+		label.name = "ShaftMarker"
+		label.text = "%s  /  %02d" % [shaft.name, index]
+		label.font_size = 96
+		label.pixel_size = 0.006
+		label.modulate = Color("dce0d9")
+		label.outline_size = 0
+		label.position = Vector3(shaft.x, -0.85, -3.05)
+		floor_root.add_child(label)
+	# Mounts record attachment places, not instantiated exhibits.
+	for x in [-5.0, 5.0]:
+		for z in [-7.0, 7.0]:
+			var marker := Marker3D.new()
+			marker.name = "ArtifactMount"
+			marker.position = Vector3(x, 1.3, z - signf(z) * 0.55)
+			marker.set_meta("role", "pillar attachment; optional")
+			floor_root.add_child(marker)
+			mounts.append(marker)
+			box(floor_root, "MountPlate", marker.position, Vector3(0.45, 0.24, 0.04), steel, false)
+
+func _add_slab_strip(parent: Node3D, left: float, right: float) -> void:
+	if right <= left: return
+	box(parent, "SlabBetweenShafts", Vector3((left + right) / 2.0, -spec.slab_thickness / 2.0, 0), Vector3(right - left, spec.slab_thickness, spec.shaft_depth), concrete)
+
+func _build_columns() -> void:
+	var low: float = float(spec.levels.back()) - 3.0
+	var high := 2.0
+	var frame := Node3D.new()
+	frame.name = "PermanentColumns"
+	add_child(frame)
+	for x in spec.column_x:
+		for z in spec.column_z:
+			box(frame, "Column", Vector3(x, (high + low) / 2.0, z), Vector3(spec.column_width, high - low, spec.column_width), concrete)
+			for dx in [-0.23, 0.23]:
+				for dz in [-0.23, 0.23]:
+					pipe(frame, "Rebar", Vector3(x + dx, high, z + dz), Vector3(x + dx, high + 0.75, z + dz), 0.022, steel)
+	for y in spec.levels:
+		for z in spec.column_z:
+			box(frame, "DownstandBeam", Vector3(0, y - 0.55, z), Vector3(spec.width, 0.45, 0.65), concrete)
+
+func _build_services() -> void:
+	var services := Node3D.new()
+	services.name = "ServiceSpines"
+	add_child(services)
+	for x in spec.service_x:
+		pipe(services, "WaterRiser", Vector3(x, -14, spec.service_z), Vector3(x, 1.0, spec.service_z), 0.14, pipe_material)
+		pipe(services, "ElectricalRiser", Vector3(x + 0.42, -14, spec.service_z), Vector3(x + 0.42, 1.0, spec.service_z), 0.07, pink)
+		for level in range(1, spec.levels.size()):
+			var ceiling: float = float(spec.levels[level - 1]) - 0.95
+			pipe(services, "FloorBranch", Vector3(x, ceiling, spec.service_z), Vector3(x, ceiling, 7.0), 0.1, pipe_material)
+			box(services, "CableTray", Vector3(x + 0.42, ceiling + 0.18, 1.5), Vector3(0.34, 0.08, 11.0), steel, false)
+			for z in [-3, 0, 3, 6]:
+				pipe(services, "TrayHanger", Vector3(x + 0.42, ceiling + 0.18, z), Vector3(x + 0.42, ceiling + 0.6, z), 0.018, steel)
+
+func _build_landings(top_y: float) -> void:
+	# Route A alternates within the shaft without capping its centre.
+	for row in [[-8.4, top_y - 2.0, -1.7], [-11.6, top_y - 4.0, 1.7]]:
+		var at := Vector3(row[0], row[1], row[2])
+		box(temporary, "ShaftALedge", at - Vector3(0, 0.12, 0), Vector3(1.8, 0.24, 2.6), timber)
+		pipe(temporary, "LandingBrace", at - Vector3(0, 1.0, 0.9), at + Vector3(0.6, -0.15, 0.9), 0.055, steel)
+	# B offers a contrasting, wider landing with space left around it to look down.
+	var suspended := Vector3(10.0, top_y - 3.0, 1.9)
+	box(temporary, "ShaftBPlatform", suspended - Vector3(0, 0.13, 0), Vector3(3.4, 0.26, 1.8), steel)
+	box(temporary, "PlatformEdge", suspended + Vector3(0, 0.015, -0.82), Vector3(3.4, 0.03, 0.13), pink, false)
+	for x in [8.4, 11.6]:
+		pipe(temporary, "Suspension", Vector3(x, top_y - 3, 2.7), Vector3(x, top_y - 0.05, 3.1), 0.025, steel)
+
+func _build_roof_details() -> void:
+	var roof := floors[0]
+	# Incomplete edge protection belongs to the construction site, not a full enclosure.
+	for z in [-8.9, 8.9]:
+		for x in [-12, -6, 0, 6, 12]:
+			pipe(roof, "EdgePost", Vector3(x, 0, z), Vector3(x, 1.05, z), 0.035, steel, true)
+		pipe(roof, "EdgeRail", Vector3(-12, 1.05, z), Vector3(12, 1.05, z), 0.03, steel, true)
+	for i in range(5):
+		box(roof, "StoredBoard", Vector3(2.5, 0.05 + i * 0.09, -6.0), Vector3(3.7, 0.08, 0.65), timber)
+	var title := Label3D.new()
+	title.text = "THE VOID"
+	title.font_size = 128
+	title.pixel_size = 0.012
+	title.outline_size = 0
+	title.modulate = Color("272d34")
+	title.position = Vector3(0, 0.025, 4.5)
+	title.rotation.x = -PI / 2.0
+	roof.add_child(title)
+
+func set_partition_collision(enabled: bool) -> void:
+	for shape in partitions.find_children("*", "CollisionShape3D", true, false):
+		(shape as CollisionShape3D).set_deferred("disabled", not enabled)
+
+func show_partitions(enabled: bool) -> void:
+	partitions.visible = enabled
+	set_partition_collision(enabled)

@@ -1,0 +1,89 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: Custom solver bias for shapes is not supported when using Jolt Physics. Any such value will be ignored. This shape belongs to '<unknown>' and 0 other object(s).
+   at: set_solver_bias (modules/jolt_physics/shapes/jolt_shape_3d.cpp:91)
+   GDScript backtrace (most recent call first):
+       [0] run (res://tools/probes/jacquard_samples_test.gd:20)
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS Six named physical sample buttons are connected in the studio
+PASS stripes: selection labels agree
+PASS stripes: 96 committed passes shared by both views
+PASS stripes: complete sample stops at a cycle boundary
+PASS stripes: all 9,216 geometric crossings obey the recorded lifts
+PASS stripes: all 9,216 drawdown cells show the upper yarn colour
+PASS stripes: opening uses the same mesh and history
+PASS stripes: closing restores the cloth without changing its data
+PASS stripes: sixteen animated picks reproduce the fast sample exactly
+PASS checks: selection labels agree
+PASS checks: 96 committed passes shared by both views
+PASS checks: complete sample stops at a cycle boundary
+PASS checks: all 9,216 geometric crossings obey the recorded lifts
+PASS checks: all 9,216 drawdown cells show the upper yarn colour
+PASS checks: opening uses the same mesh and history
+PASS checks: closing restores the cloth without changing its data
+PASS checks: sixteen animated picks reproduce the fast sample exactly
+PASS tartan: selection labels agree
+PASS tartan: 96 committed passes shared by both views
+PASS tartan: complete sample stops at a cycle boundary
+PASS tartan: all 9,216 geometric crossings obey the recorded lifts
+PASS tartan: all 9,216 drawdown cells show the upper yarn colour
+PASS tartan: opening uses the same mesh and history
+PASS tartan: closing restores the cloth without changing its data
+PASS tartan: sixteen animated picks reproduce the fast sample exactly
+PASS chevron: selection labels agree
+PASS chevron: 96 committed passes shared by both views
+PASS chevron: complete sample stops at a cycle boundary
+PASS chevron: all 9,216 geometric crossings obey the recorded lifts
+PASS chevron: all 9,216 drawdown cells show the upper yarn colour
+PASS chevron: opening uses the same mesh and history
+PASS chevron: closing restores the cloth without changing its data
+PASS chevron: sixteen animated picks reproduce the fast sample exactly
+PASS herringbone: selection labels agree
+PASS herringbone: 96 committed passes shared by both views
+PASS herringbone: complete sample stops at a cycle boundary
+PASS herringbone: all 9,216 geometric crossings obey the recorded lifts
+PASS herringbone: all 9,216 drawdown cells show the upper yarn colour
+PASS herringbone: opening uses the same mesh and history
+PASS herringbone: closing restores the cloth without changing its data
+PASS herringbone: sixteen animated picks reproduce the fast sample exactly
+PASS houndstooth: selection labels agree
+PASS houndstooth: 96 committed passes shared by both views
+PASS houndstooth: complete sample stops at a cycle boundary
+PASS houndstooth: all 9,216 geometric crossings obey the recorded lifts
+PASS houndstooth: all 9,216 drawdown cells show the upper yarn colour
+PASS houndstooth: opening uses the same mesh and history
+PASS houndstooth: closing restores the cloth without changing its data
+PASS houndstooth: sixteen animated picks reproduce the fast sample exactly
+PASS Stripes and checks share plain weave; tartan changes the crossing structure
+PASS Tartan and houndstooth share the same 2/2 twill
+PASS Chevron has a pointed, twelve-end reversing draft
+PASS Herringbone offsets the two reversing seams instead of making chevron points
+PASS Houndstooth keeps its eight-thread colour period independent of twelve hooks
+PASS Houndstooth matches the independent 8×8 drawdown across every twelve-hook boundary
+PASS Unused colour steps are hidden and cannot receive invisible hits
+PASS A held card prevents a sample replacement without losing cloth
+PASS Manual colour edit preserves the in-flight pick and all earlier houndstooth
+PASS Modified samples are labelled as edited
+PASS A new selection replaces the sample and resets its edit state
+PASS An unknown preset cannot clear the cloth

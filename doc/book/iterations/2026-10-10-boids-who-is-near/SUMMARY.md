@@ -1,0 +1,7 @@
+# Boids — lesson paragraph
+
+In the Boids hall, find the ringed body and compare the three arrows before reading the whole flock. Carry the same PointBody and bounded steering from FlowFields; nearby points now supply the requests. Select neighbours by distance, exclude yourself, and build separation, alignment and cohesion one at a time before combining their weights. Read one old state and commit the next states together. Use six held points to change who is nearby; distinguish coasting with no neighbours from braking towards stationary neighbours. Predict the first tick, halve the alignment weight and test the result; reverse storage order to expose any accidental in-place update. Carry the local rule and the shared snapshot into Agent-Based Modeling, where an internal state can change how a point responds.
+
+## Short instruction
+
+Boids: carry PointBody + v + bounded steering. Six XZ points; radius selects indices, excludes self. SEP away/d² inside2cells → unit*speed; ALIGN mean neighbour velocity; COH mean offset → unit*speed. Weight/cap; read old arrays, commit next. None→coast; ALIGN mean0→brake; coincident skips separation division. Wrap motion; direct distances do not cross seam. Hold→pause/relocate; trigger→observe; reset bodies keeps rule/radius/weights. Predict first tick; halve ALIGN; reverse order. Next ABM: internal state. Full printed code, prepared museum/XR/button dependency. No headset claim.

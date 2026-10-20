@@ -1,0 +1,3 @@
+# Lesson paragraph
+
+Watch the same museum river under three search rules. Carry PointBody, traversal and seven vertex IDs from Layout; add the explicit 4–5 detour, then raise vertex 0 once to compare costs. Reconstruct a fewest-edge BFS path, count segment lengths with Dijkstra, and add a straight-line lower bound with A*. Compare route, distance and expanded IDs while positions and blocked vertices stay fixed. Predict the longer four-edge route versus the shorter five-edge route, then change one position and test again. Keep the same point. Carry search criteria into later questions about learning.

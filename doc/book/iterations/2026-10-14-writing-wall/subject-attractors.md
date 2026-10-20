@@ -1,0 +1,13 @@
+# Subject attractors in the writing wall
+
+Subjects are an optional, backward-compatible part of each hall's writing_wall.json. Every map can create subjects; older walls continue to load without them. A subject has a name, a free-wall position, an optional room-plan anchor, independent Tutorial and Final notes, and a list of attracted artifact IDs. Artifact membership is many-to-many and independent of Tutorial/Final tags, conceptual directed edges and encounter order.
+
+Use **+ Subject**, select the card and edit its name and both notes in the inspector. Check its attracted artifacts, or use **Connect** to choose a subject and an artifact. The artifact inspector also lists its subject memberships. Drag the subject card on the free wall, or its gold marker on the room overlay; arrow keys move focused subjects. Subject moves are planning edits saved with **Save wall**, not physical artifact moves. Selecting a subject on the room plan reveals its connections. The Subject attractors checkbox hides this layer.
+
+The **Subjects** tab lists subjects, their two notes and their artifacts. The text comparison includes the subject notes side by side. Both outline exports include their respective subject notes. Save/reload, JSON export, undo/redo and saved history retain the subjects. Removing a subject leaves its artifacts intact. Removing a missing artifact also removes its memberships; temporarily missing artifacts retain their writing and subject membership until explicitly removed.
+
+Random Definition has a reviewable seven-subject starter set: PRNG; Seed, state and replay; Physical sources / TRNG examples; What randomness looks like; What randomness feels like; Time and apparent randomness; Keeping random outcomes. The **Load Random Definition subjects** button appears only when that wall has no subjects. It loads a draft without overwriting the existing tags, room placement, notes or order. Edit the draft and use Save wall. Other maps begin with their own subjects rather than importing randomness topics.
+
+The attempted automatic save of the starter set through the local API was blocked by automatic approval review, with no detailed reason returned. It did not run. The starter set is therefore supplied through the explicit UI draft button; this implementation does not claim that it has already been persisted in the hall.
+
+Verification: 24 writing-wall tests cover old-wall compatibility, subject save/reload, multiple memberships, movement, removal, validation, export separation and explicit starter creation. The focused TypeScript check passes. Browser interaction and visual verification remain unavailable because of the earlier URL policy block.

@@ -1,0 +1,118 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+Vulkan 1.4.329 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: Custom solver bias for shapes is not supported when using Jolt Physics. Any such value will be ignored. This shape belongs to '<unknown>' and 0 other object(s).
+   at: set_solver_bias (modules/jolt_physics/shapes/jolt_shape_3d.cpp:91)
+   GDScript backtrace (most recent call first):
+       [0] run (res://tools/probes/jacquard_weaver_test.gd:26)
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS Twelve physical cards, eight programmable chain slots
+PASS Both artifacts arrive empty; no invented woven history
+PASS Reject a slot outside the chain
+PASS Reject a malformed card
+PASS Do not overwrite an occupied slot
+PASS Desktop pickup removes card from chain
+PASS A held card cannot be teleported into a slot
+PASS Dropping near an empty slot installs and aligns the actual card
+PASS Editing a card during a pass preserves the already read mask
+PASS A completed shuttle cycle commits one immutable pick
+PASS Layer sculpture receives exactly the loom record
+PASS Loading another card set preserves woven history
+PASS Editing a future mask does not rewrite cloth
+PASS Begin a valid card cycle
+PASS The second pass adds one layer
+PASS Unfolding layers leaves data unchanged
+PASS Every layer crossing preserves warp-over / warp-under and separates yarn surfaces
+PASS Two actual picks cross all 96 warp threads
+PASS External record is a deep copy
+PASS XR Tools pickup removes a card from the running chain
+PASS Held trigger selects that card's punch editor
+PASS XR release installs the card back into its slot
+PASS Pulling the actual XR handle unfolds the layer sculpture
+PASS Layer slider keeps its setting after release
+PASS An empty chain cannot produce a pick
+PASS Chain advances across empty sockets
+PASS A reinserted card carries its identity and new slot into history
+PASS One hundred twenty-eight picks bound geometry and stop the loom
+PASS Clear cloth resets both displays while retaining the card program
+PASS Visible plain-to-diamond transition keeps its first eight picks
+PASS Tartan uses the same twelve-thread colour repeat in warp and weft
+PASS Tartan + Clear explicitly starts a fresh sample
+PASS Physical weft button changes the repeat without recolouring a running shuttle pass
+PASS The next pass records the edited weft colour
+PASS Weft marker and actual shuttle identify the colour used by the second pass
+PASS Later weft edits leave the first coloured pick intact
+PASS Physical warp button edits a draft without silently rethreading existing cloth
+PASS Both displays retain the warp colours used to weave the sample
+PASS Match Weft copies the proposed warp repeat
+PASS Matching copies values; later warp edits cannot mutate the weft repeat
+PASS Thread + Clear applies the new warp and clears both histories
+PASS Rethreading keeps the selected card chain
+PASS Twenty-four passes combine an independent 12-step colour repeat with the 4-step 2/2 twill
+PASS Layer sculpture keeps the exact lift masks AND thread colours
+PASS Every drawdown cell displays the actual upper thread, never an invented mixed colour
+PASS Spreading the tartan into layers retains recorded colours and crossings
+PASS Actual yarn colour survives GPU storage within one RGBA8 step
+PASS Changing the weave cards leaves both colour program and finished cloth intact
+PASS Weave 96 Picks button commits 96 actual card cycles in both views
+PASS Every dense crossing repeats the recorded twelve-hook choice across 96 ends
+PASS Flattened yarns occupy more than 90 percent of the thread pitch
+PASS Closed cloth shows real yarn geometry with no coloured diagram filling the gaps
+PASS Slider opens the same mesh on the GPU without rebuilding or rewriting cloth
+PASS Fully open handle updates the shader and reveals the crossing diagram
+PASS Opening enlarges the crossing clearance while bounding total sample height
+PASS Ninety-six picks use one yarn surface with bounded vertex count
+PASS Batch weaving preserves an in-flight colour snapshot and every previous pick
+PASS Repeated batch presses stop at capacity without fabricating or dropping rows
+PASS Eight moving card frames linked by two continuous laces per join
+PASS Closed chain returns to the same reader transform without a seam
+PASS First physical punched card is seated in the reader on reset
+PASS Second physical card travels toward the reader instead of being replaced by a display copy
+PASS Indexing a card cannot prematurely create a woven row
+PASS Shuttle and hooks wait while the chain advances
+PASS Card two seats before its lift mask is displayed
+PASS Chain stays still while the shuttle crosses the open shed
+PASS The shuttle draws visible weft while the drum turns with the upward-feeding cards
+PASS One advance and one shuttle pass add exactly the second card's record
+PASS Completed travelling yarn becomes recorded cloth without leaving a loose display strand
+PASS Ninth pick wraps the chain and reads the actual first card again
+PASS Run/Stop completes exactly the current pick and parks the chain
+PASS Grabbing a chained card stops further automatic passes
+PASS A returned card aligns with its moving slot including the return-side rotation
+PASS Sparse deck physically indexes over empty frames to its next installed card
+PASS A single-card program revolves the complete chain before repeating
+PASS Fast sample leaves the physical chain at its actual last recorded card
+PASS Animated weaving resumes at the correct card after a fast sample
+PASS Chain animation preserves the full coloured history shared with the layer table
+PASS Visitor weaves one full chain with small time steps
+PASS Pressing hook 1 patches the real card and its installed program
+PASS Patching a hole leaves all eight previously woven rows unchanged
+PASS Only picks 9 and 17 change after editing card 1; other cards and yarn colours remain exact
+PASS One patched hook changes exactly eight physical crossings on each later use of its card
+PASS After three loops, the layer table and cloth keep the same original eight rows
+PASS Slow button preserves the current phase, card, shuttle and in-flight record
+PASS Two seconds in slow mode advance only 0.7 cycle-seconds without committing early
+PASS Returning to normal finishes exactly the same single pick
+PASS Stopped loom identifies the completed pick rather than appearing stuck in the beat phase
+PASS Slow pass is still running just before eight seconds
+PASS Eight-second slow pass commits one row

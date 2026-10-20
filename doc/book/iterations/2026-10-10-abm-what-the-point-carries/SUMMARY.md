@@ -1,0 +1,7 @@
+# ABM — one paragraph
+
+In the ABM hall, follow one point reaching food and returning to the nest. Carry the same PointBody, velocity and bounded steering from Boids, plus Physarum's three trail samples. Add one Boolean: searching points read the shared trace; carrying points request home and deposit. At each contact, predict which state and response the next tick will use. Hold the point, place it by food, release and step; move that same carrying body home and count one delivery. Replace the agent records while retaining the field, then clear both. Independently halve return speed and predict the first velocity and position. Carry the state transition and reset distinction into the next colony's separate home and food channels.
+
+## Compressed instruction
+
+ABM: same PointBody; six planar agents. Add carrying bool. SEARCH: three old-field samples, strongest wins/ties straight; food contact→RETURN. RETURN: known home, deposit; home contact→deliver once, SEARCH/east launch. Contact<1cell before motion. Bounded steering retained. Commit bodies, fade .92/tick, deposit returners +1 cap8. Infinite food; no collision/quality/recruitment; not full colony. Hold pauses/relocates/zerosv, preservescargo; trigger selects. Replace records keeps field/tick/delivered; ClearAll clears them, keeps parameters. Predict; half return speed; test faults. Next two channels. Museum supplied; exact printed code; no physical headset/independent learner claim.

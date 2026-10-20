@@ -1,0 +1,55 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: Custom solver bias for shapes is not supported when using Jolt Physics. Any such value will be ignored. This shape belongs to '<unknown>' and 0 other object(s).
+   at: set_solver_bias (modules/jolt_physics/shapes/jolt_shape_3d.cpp:91)
+   GDScript backtrace (most recent call first):
+       [0] add_button (res://commons/ui/control_panel.gd:170)
+       [1] _build (res://commons/artifacts/super_drag_mirror/super_drag_mirror.gd:101)
+       [2] _ready (res://commons/artifacts/super_drag_mirror/super_drag_mirror.gd:25)
+       [3] run (res://tools/probes/garment_vr_player_test.gd:22)
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS Mirror initially follows desktop visitor
+PlayerCustomization: Initialized with features: hands
+PlayerCustomization: Activated the costume — it will grow with the sequences
+PASS Production PlayerCustomization mounts a wardrobe on the VR rig
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS Wardrobe binds the actual XRCamera3D and both XRController3D nodes
+PASS WEAR resolves the active VR player even with a desktop wardrobe present
+PASS A-LINE button wears the garment on the VR player
+PASS VR dressing leaves the desktop visitor unchanged: A-LINE
+PASS GOWN button wears the garment on the VR player
+PASS VR dressing leaves the desktop visitor unchanged: GOWN
+PASS PLEATED button wears the garment on the VR player
+PASS VR dressing leaves the desktop visitor unchanged: PLEATED
+PASS Dress follows the headset position below the neck
+PASS Dress is visible to the headset camera when looking down
+PASS A moving XR controller moves the worn sleeve
+FAIL Garment faces with the VR rig after yaw 90.0
+FAIL Garment faces with the VR rig after yaw -90.0
+FAIL Garment faces with the VR rig after yaw 180.0
+FAIL Mirror switches to the headset and its wardrobe
+PASS Mirror sees the actual worn dress in the shared world
+FAIL Mirror names the tailored dress worn by the VR player
+PASS TAKE OFF restores the VR player's previous outfit
+PASS VR outfit choices do not grant curriculum progress

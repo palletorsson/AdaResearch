@@ -1,0 +1,5 @@
+# Flow — lesson paragraph
+
+Carry PointBody, seven vertex IDs and the complete route finder. Declare a new directed harbour plan with crate-slot capacities for one interval; keep the earlier build-cost model intact. Reuse breadth-first search on positive residual connections. Allocate the first delivery, then find a second route that cancels one previous commitment so both deliveries fit. Read the bottleneck, conservation and the two-slot limiting cut. Move the held point without changing capacities. Independently reduce the final link to one slot and predict the new maximum. Compare the existing forward-only preflow display without calling its blocked result a maximum. At the next hall, use the same possibility of revision to reconsider who gets which tool.
+
+Short instruction: Museum given. Carry point+IDs+queue+Route. Declare directed slot capacities, not costs. Residual>0→BFS; bottleneck=min. First1; second cancels1→3→total2; cut2 certifies. Reverse=revise before dispatch. Move point, preserve capacities. Transfer sink cap1→max1. Old preflow blocked≠maximum. Next: revise pairing.

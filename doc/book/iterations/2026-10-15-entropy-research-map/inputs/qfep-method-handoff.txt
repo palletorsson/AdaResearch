@@ -1,0 +1,125 @@
+ADA RESEARCH QFEP METHOD AND COMPUTER SESSION HANDOFF
+
+Purpose
+
+This handoff carries Palle Torsson’s proposed research method into the ChatGPT session that has access to the Ada Research project on his computer. Read the account first, then use the implementation instructions at the end. The method has been developed in conversation; the worked encounter below is a proposed experiment, not a report of measurements already taken. The first task is to inspect the actual project and run one small, documented investigation.
+
+1. What the approach changes
+
+Ada Research investigates algorithms by building and inhabiting the worlds they produce. Its book already contains observation research field notes: records of consequences that were not fully specified in advance but arose from the assemblage of code, JSON, geometry, materials, camera, collision, simulation, language and earlier decisions. These consequences can change the research question.
+
+Palle wants both book and game to proceed through material events and edge searching. A narrow passage, an obstruction, a seam, a repetition or an unexpected return can make a concept necessary. Explanation should grow from an encounter. A room need not begin as an illustration of a concept whose meaning is already settled.
+
+Observation is not reserved for the human researcher. Palle reports that the existing AI setup can capture screenshots inside the game and inspect the code and JSON used to build its scenes. With suitable controls, an AI agent can compare configurations, propose interventions, run them and follow unexpected differences. This does not establish equivalence between image analysis and embodied experience. Each observation should retain the conditions and limitations of the apparatus that produced it. Human and AI agents can participate in both generation and observation.
+
+The current museum is one stabilized configuration. Its procedural construction preserves possible alternatives around it. Movement therefore includes walking through a room and changing the conditions that generate the room: spacing, seed, scale, algorithm, collider, lighting, topology, boundary condition or simulation coefficient. These changes may alter what a body can do, what an image reveals, and what counts as a point, line, surface, passage or enclosure.
+
+The research object includes the instantiated world, its generator, the means of observing it and the recorded trajectories between configurations. A trajectory matters because it preserves why a particular difference was followed, including abandoned directions and unresolved observations. There is no requirement to exhaust the configuration space or find its globally best state.
+
+2. Where QFEP enters
+
+QFEP is used here as a proposed artistic research method for deciding when to hold an organization together and when to reopen it. A generator with many settings supplies possibilities. Parameter variation alone does not establish a QFEP process.
+
+The operative cycle is: establish a configuration, observe it, make a limited intervention, inspect the consequence, decide what to follow, and either widen the inquiry or provisionally consolidate it. An observation may justify revising the parameters being varied, the observation procedure, the category of the room, or the question being asked. The queer operation lies in keeping these commitments revisable and examining what their boundaries enable or exclude.
+
+Do not describe ordinary FEP as incapable of exploration. Active inference already includes information seeking and epistemic value. QFEP’s proposed emphasis here is on making the research apparatus, its preferences and its classifications available for reconsideration. This is a methodological proposal, not an experimentally validated replacement for variational free energy.
+
+Also distinguish several quantities often called entropy. Variational free energy, thermodynamic entropy, uncertainty in beliefs, diversity among sampled configurations, and visual complexity are not interchangeable. In this pilot, widening a search means increasing permitted variation or revising its constraints. Do not claim entropy has increased unless a probability distribution and estimator have actually been specified. The existing QFE equation is heuristic; this handoff does not implement it as a scientific objective function.
+
+3. A detailed proposed encounter
+
+Begin with a room containing an array of repeated solid objects. Between two rows is a passage. A viewpoint shows light through the gap; the player approaches and attempts to cross. At the baseline, crossing succeeds. Record what happens before naming it: the visible opening, the approach, the change in sound or framing if any, the points of contact, and the path taken.
+
+Save the scene configuration, generator revision, random seed, transforms, object dimensions, collision shapes, player settings, camera state, simulation time and capture settings. The baseline must be rerunnable. Use the existing scene if one provides these conditions; do not assume any example variable name is already in the repository.
+
+Now reduce spacing by a documented amount while holding object width, player collider, orientation and other relevant conditions fixed. Reset the player and simulation to the same starting state. Capture the same view and repeat the same crossing attempt. Continue with a modest number of steps until either the behavior changes or the chosen interval is exhausted.
+
+The target observation is not necessarily a dramatic image. The gap may remain visible while crossing becomes impossible. That disagreement between visibility and passage is a reason to investigate. It is not yet evidence of a dynamical phase transition. It could follow directly from the geometry, a collision margin, a hidden shape or the navigation procedure.
+
+For an idealized row of axis-aligned objects, let s be center-to-center spacing, w the object width across the gap and d the effective player width. The geometric gap is g = s - w. A simple crossing condition is g > d. Collision margins, shape orientation and engine behavior can move the practical boundary. This relation is a prediction to compare with the actual implementation, not a substitute for inspecting it.
+
+Once one setting passes and a nearby setting blocks, record the interval between them. If behavior is consistent and approximately monotonic, try intermediate settings to narrow that interval. Approach it from both increasing and decreasing spacing. If results disagree, retain the disagreement and inspect initial conditions, velocity, collision settings or state history. Do not hide it in a single averaged threshold.
+
+Next reopen the apparatus. Restore baseline spacing and change player width. Does the boundary move? Restore the collider and change camera height or field of view. Does the passage appear different even though collision remains identical? Disable collision in an isolated variant. Does the visually apparent barrier remain? These interventions distinguish geometry, collision and representation; they need not all lead to the same answer.
+
+Record the result as a situated event: under these body and camera conditions, this gap could be seen but could not be traversed. A field note can preserve uncertainty about why. Later interpretation might connect it to enclosure, accessibility, discreteness or the relation between mathematical form and rendered matter. That interpretation must remain attached to the observations that prompted it.
+
+The QFEP decision occurs when the inquiry can either choose a comfortable spacing and finish the room, or provisionally follow the mismatch by changing which conditions are examined. Either decision may be useful. Record why it was made. A new organization can be stabilized without erasing the branch from which it came.
+
+4. Practical research protocol
+
+A. Establish the apparatus. Identify the scene, generator, JSON schema, engine version, observation and navigation tools, existing field-note format and code revision. Record what the AI can actually see and control. A screenshot alone cannot demonstrate navigability; use runtime movement, collision evidence or another appropriate test.
+
+B. Preserve a baseline. Use an isolated branch or the project’s existing variant mechanism. Record any uncommitted dependencies. Keep the canonical museum available and avoid silently changing it during exploration. Save a reproducible configuration and one baseline observation bundle.
+
+C. Describe before interpreting. Record a concrete event and a question. Distinguish an observation from a prediction and from a proposed explanation. An initial note can be open-ended; not every encounter needs a measurable hypothesis.
+
+D. Choose a bounded intervention. Start with one parameter when possible. Record its prior and new values, the expected consequence if one was predicted, and why this intervention was chosen. Keep nuisance conditions fixed or document why that is impossible.
+
+E. Regenerate and observe. Use matched camera positions and matched simulation times for comparison, and additional exploratory views when useful. Keep both. Log build errors, missing captures and engine warnings rather than treating them as valid observations of the scene.
+
+F. Check a candidate edge. Repeat relevant observations. Inspect code, data and runtime behavior. Change viewpoint or apparatus when an apparent difference might be caused by occlusion, camera clipping, aliasing, collision or numerical effects. Such effects can themselves become research subjects; causal identification does not remove their artistic interest.
+
+G. Decide whether to open or consolidate. Follow a difference because it produces a material question, challenges an expectation, changes a possibility of action, or exposes a limitation in the present description. These are prompts for judgment, not a fixed novelty score. An AI may propose and follow a branch within agreed bounds; retain the decision and its reason.
+
+H. Preserve the trajectory. Link each state to its parent. Store unsuccessful and uninteresting trials compactly as well as selected encounters. Mark the present status as continue, consolidate, branch, unresolved or stop. A bounded stop is part of research, not evidence that the inquiry has been exhausted.
+
+5. What an observation bundle needs
+
+Reuse the project’s existing format wherever possible. Add only the missing fields needed to rerun and understand the experiment. A bundle should retain:
+
+- Experiment and parent identifiers, observer or agent identifier, and capture timestamp.
+- Scene identifier and actual repository-relative paths.
+- Code revision, relevant local changes, engine/build version and dependency information needed for replay.
+- Baseline and variant configurations, seed, parameter differences and initialization procedure.
+- Body and collider settings, camera transforms and projection settings, observation route and input sequence.
+- Simulation time or step count, capture resolution and any other condition that affects the comparison.
+- Screenshots and relevant runtime logs, movement or collision evidence, and measured values where available.
+- Description of the encounter, initial prediction if present, alternative explanations and unresolved details.
+- The decision to follow, reopen, consolidate or stop, including its reason.
+- Replay instructions and the result of a replay attempt.
+
+When changing code rather than a parameter, preserve the patch as part of the configuration. When an agent changes the observation procedure, give that procedure its own recorded version. A state hash can assist retrieval, but a hash without the corresponding files is not a reproducible record.
+
+Field-note example, with no fabricated outcomes:
+
+Question: At what spacing does this visible opening stop permitting passage for this body?
+Baseline: [actual scene, revision, configuration and capture references]
+Intervention: [actual parameter path and value change]
+Prediction: [record before the trial, or mark no prediction]
+Observation: [what was visible and what the crossing attempt did]
+Alternative explanation: [collision margin, camera effect, initialization, other]
+Next decision: [retest, vary body width, change view, retain unresolved, stop]
+Reason: [why this observed difference deserves another step]
+
+6. The book and the game
+
+The game stages encounters whose consequences can provoke inquiry. The book preserves selected trajectories through them. A chapter might begin with a gap, an attempt to cross, and a failure. It then records the interventions that changed the event before introducing the relevant formal concept. Conceptual language can reorganize what has been observed, but should leave the observation and its unresolved remainder recoverable.
+
+The book can contain baseline and variant images, field-note excerpts, short parameter differences and accounts of how the apparatus changed. It need not reproduce every trial. Link the selected account to the fuller experiment record. Selection is itself a commitment that may later be revised by either human or AI participants.
+
+Do not require every room to confirm QFEP. Record cases where a perturbation produces nothing useful, a purported edge disappears on replay, or a familiar explanation accounts for it. The method should leave room for its own inadequacy to become observable.
+
+7. Instructions for ChatGPT on the computer
+
+You are taking over a bounded Ada Research investigation for Palle Torsson. You are not being asked to generate a new museum or rewrite the project’s encyclopedia. Use the account above to implement and run one small experiment through the actual available tools.
+
+First inspect the repository instructions, relevant project help files, scene/JSON schema, screenshot and navigation tools, and existing observation research field notes. Determine the current branch, working-tree state and canonical configuration. Locate a suitable repeated-object scene or narrow passage. Report the actual paths and controls you found. If required game or screenshot access is absent, explain the missing capability and prepare the experiment specification without pretending to have observed it.
+
+Prefer an existing variant runner and field-note format. If they do not support the experiment, add the smallest reusable facility that can save baseline and variant state, apply one documented change, launch or regenerate the scene, capture observations, and restore the baseline. Verify JSON against the actual schema. Keep experiments isolated and preserve unrelated work. Choose paths from the repository rather than copying invented example paths from this handoff.
+
+Run a modest pilot with a documented trial budget. Begin with spacing and a fixed player body if the scene supports it. Capture a baseline, make a small sequence of changes, attempt the same crossing, and look for a disagreement between visible opening and traversability. If no transition appears within the interval, record that result. If a candidate transition appears, narrow its interval where justified and run at least one check that changes body or camera conditions.
+
+Before assigning theoretical meaning, write the encounter in material terms and inspect possible causes. Keep observation, inference and speculative interpretation distinguishable. Avoid automatically connecting every outcome to established Ada vocabulary. Propose the next branch from the evidence and record why it is worth following. Do not invent measurements, images or field notes.
+
+Replay one selected configuration from its saved record. Verify that the canonical scene is restored or remains untouched. Run only the checks appropriate to the code changes and actual project requirements. Report the implemented facility, actual trials, evidence paths, replay result, unresolved questions and one proposed next intervention.
+
+The expected deliverable is one reproducible research trajectory and a field note, plus any minimal tooling needed to produce it. Let the first observed event change the subsequent question. Keep the possibility of reopening the procedure itself.
+
+Start with this request:
+
+“Read this handoff and inspect my Ada Research project. Locate the existing game observation tools and a suitable scene. Implement the smallest reversible experiment that lets us traverse scene configurations, observe a material edge and preserve an observation research field note. Run one bounded pilot, retain its actual evidence and unresolved consequences, and verify that one saved configuration can be replayed.”
+
+Theoretical reference for the clarification about active inference:
+Friston, K., Rigoli, F., Ognibene, D., Mathys, C., Fitzgerald, T., and Pezzulo, G. (2015). Active inference and epistemic value. Cognitive Neuroscience, 6(4), 187–214. https://doi.org/10.1080/17588928.2015.1020053
+

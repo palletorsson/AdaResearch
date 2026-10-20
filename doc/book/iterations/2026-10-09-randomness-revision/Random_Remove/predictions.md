@@ -1,0 +1,3 @@
+# Predictions before running
+
+Range2..5 ×2..5 gives16 of64 addresses; first candidate18, not0. Checkerboard gives32. Row3 and column3 give8 each with corresponding transposed removal orders at the same seed. Empty predicate gives0; no request, no removal, return−1. Every successful draw shrinks the list once and leaves a visible slot. Exhaustion leaves exactly the excluded cubes visible. Reset restores candidates, cubes and seed. A4×4 transfer gives4 range members,8 checkerboard,4 row/column,0 empty. Faults: confusing list offset and address; retaining selected candidate; forgetting generator reset. None should pass.

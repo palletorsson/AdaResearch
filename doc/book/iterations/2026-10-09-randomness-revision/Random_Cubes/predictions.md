@@ -1,0 +1,3 @@
+# Predictions before execution
+
+[6,6,3] must retain three events, total15, closed true, limited false. A later result changes nothing. Five sixes reach30 with limited true and closed false. A non-six in the last place closes normally. Changing the continuation predicate to >=5 changes [6,5,2] from [6,5],total11 to [6,5,2],total13. A3-place cap leaves three sixes unfinished at18. Replay restores the generator before any draw. Terminal and invalid requests must not consume randomness. Geometry and joins retain each contribution. Faults use0..5, overwrite the total, conflate cap and closure, or consume a draw despite closure. All must be detected.

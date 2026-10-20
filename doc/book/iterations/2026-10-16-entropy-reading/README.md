@@ -1,0 +1,7 @@
+# Two related entropy halls
+
+User-directed curation: retain Entropy Types as prepared comparisons and Entropy Workshop as investigations of what the readings omit. Add a full-size chair reference, simplify the installed min-entropy scene to one colour question, and add four prepared jar states beside the live jar in the workshop. Prefab investigation, gallery and replay remain; Point is unchanged. Historical coffee/glass and pit/ticket records remain intact.
+
+Run `python -X utf8 doc/book/iterations/2026-10-16-entropy-reading/run.py`, then the two `tools/run_encounter_probe.py` commands with `--sequence randomness --render --no-bridges --output-tag entropy-reading`: Random_Entropies uses this folder's museum_probe.gd; Random_Entropy uses jar_probe.gd. Run each map's pathfinder and publish.py. The current reports record [89, 183, 18] passing checks. Native rendered views were inspected. A failed initial overview camera outside the workshop was moved onto its floor before publication; jar bases were seated on the shared tabletop. Model counts and snapshots are verified; headset and visitor comprehension remain pending.
+
+Sieve: the jar offers a concrete relation between an arrangement and the observation that reveals it. Prepared versions give up spontaneous dynamics; the adjacent live jar supplies a distinct intervention. The question left open is whether the chosen records help a visitor discover another account, rather than merely rehearse the displayed readings.

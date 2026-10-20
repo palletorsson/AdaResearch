@@ -1,0 +1,7 @@
+# Full-size entropy columns
+
+Palle asks for full-size columns and a restrained scientific appearance. The original four small-jar records remain unchanged. A display adapter maps them into two-metre columns with round beads, fixed colours, faint height divisions, matte plinths and metal collars. A separate side panel replaces the broad backing. The placement rotates to face the quieter entrance wall; front/rear approaches remain reachable. Source bodies are hidden with collision disabled; the full-size columns provide physical boundaries.
+
+The first native render looked into the busy workshop and the front overview stood too close to its entrance wall. Rotating the bank made the main background quieter and supplied clear standing space. Final native images were inspected; no generated mock-ups are used. The orthographic image is an explicitly labelled comparison camera, not visitor evidence.
+
+Run `python -X utf8 doc/book/iterations/2026-10-16-entropy-columns/run.py`; then `python -X utf8 tools/run_encounter_probe.py Random_Entropy --sequence randomness --render --no-bridges --output-tag entropy-columns --probe doc/book/iterations/2026-10-16-entropy-columns/museum_probe.gd`; then the map pathfinder and publish.py. Current checks: [43, 30], both Godot processes exit 0. Headset comfort and human reading remain open. The original live jar, prefab controls, saves, gallery, replay, hall relationship and first 48-value pilot are unchanged.

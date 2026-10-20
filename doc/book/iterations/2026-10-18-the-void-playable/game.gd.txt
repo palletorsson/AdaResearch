@@ -1,0 +1,383 @@
+extends "res://addons/godot-xr-tools/staging/scene_base.gd"
+## Roof + two floors. Checkpoints belong to safe main-floor landings, not height.
+const Architecture := preload("architecture.gd")
+const Walker := preload("walker.gd")
+const Jump := preload("jump.gd")
+const Direct := preload("res://addons/godot-xr-tools/functions/movement_direct.gd")
+const Turn := preload("res://addons/godot-xr-tools/functions/movement_turn.gd")
+const Player := preload("res://addons/godot-xr-tools/player/player_body.tscn")
+const Ground := preload("res://addons/godot-xr-tools/overrides/ground_physics_settings.gd")
+const Route := preload("res://commons/hazards/biome_ladder/route.gd")
+const FATAL_SPEED := 9.8
+const RESPAWN_SECONDS := 0.65
+
+signal checkpoint_saved(floor_index: int)
+signal died(reason: String)
+signal respawned(floor_index: int)
+
+var force_xr := false # Physics tests provide synthetic trackers; no headset required.
+var vr := false
+var building: Node3D
+var body: CharacterBody3D
+var camera: Camera3D
+var jump: Node3D
+var checkpoint := 0
+var deaths := 0
+var last_impact := 0.0
+var last_death := ""
+var airborne_speed := 0.0
+var stable_floor := -1
+var stable_time := 0.0
+var recovering := false
+var recovery_time := 0.0
+var recovery_placed := false
+var ready_for_play := false
+var returning := false
+var status: Label3D
+var fade: MeshInstance3D
+var fade_material: StandardMaterial3D
+var notice_time := 5.0
+var stuck: Node
+var old_stuck := false
+var mushroom: Node
+var old_mushroom_mode := Node.PROCESS_MODE_INHERIT
+var mushroom_connections: Array[Dictionary] = []
+var mushroom_layers: Array[CanvasLayer] = []
+
+func _ready() -> void:
+	process_physics_priority = 100 # Observe after XRTools' move_and_slide (-100).
+	var interface := XRServer.primary_interface
+	vr = force_xr or (interface != null and interface.is_initialized())
+	_suspend_global_tools()
+	building = Architecture.new()
+	building.name = "Building"
+	add_child(building)
+	_build_environment()
+	_build_player()
+	_build_signs()
+	_build_feedback()
+	place_player(spawn_for(0))
+	ready_for_play = true
+	_notice("THE VOID\nFind a landing below.\n" + ("A / trigger: jump   B: retry" if vr else "Space: jump   R: retry"))
+	print("[void] Ready. Roof + 2 floors. Left stick: move; right stick: snap turn; right A/trigger: jump; B: checkpoint; left Y: roof; left X: menu.")
+
+func _build_player() -> void:
+	var origin := get_node("XROrigin3D") as XROrigin3D
+	if vr:
+		var left := origin.get_node("LeftHand") as XRController3D
+		var right := origin.get_node("RightHand") as XRController3D
+		var move := Direct.new()
+		move.name = "Move"
+		move.max_speed = 3.5
+		move.strafe = true
+		move.add_to_group("movement_providers")
+		left.add_child(move)
+		var turn := Turn.new()
+		turn.name = "Turn"
+		turn.turn_mode = Turn.TurnMode.SNAP
+		turn.step_turn_angle = 30.0
+		turn.step_turn_delay = 0.0
+		turn.add_to_group("movement_providers")
+		right.add_child(turn)
+		jump = Jump.new()
+		jump.name = "Jump"
+		jump.add_to_group("movement_providers")
+		right.add_child(jump)
+		body = Player.instantiate()
+		body.name = "VoidPlayerBody"
+		# Keep the capsule aligned with the head. Hand-direction blending in
+		# this XRTools version has a zero-axis rotation when hands line up.
+		body.body_forward_mix = 0.0
+		var physics := Ground.new()
+		physics.jump_velocity = 4.6
+		body.physics = physics
+		body.ground_control = 2 # Air steering is necessary to choose a landing.
+		origin.add_child(body)
+		# XRTools gathers providers globally; keep this scene's three providers.
+		body._movement_providers = [turn, move, jump]
+		left.button_pressed.connect(_left_button)
+		right.button_pressed.connect(_right_button)
+		for hand in [left, right]:
+			var marker := MeshInstance3D.new()
+			var sphere := SphereMesh.new()
+			sphere.radius = 0.035
+			sphere.height = 0.07
+			marker.mesh = sphere
+			marker.material_override = building.pink
+			hand.add_child(marker)
+		camera = origin.get_node("XRCamera3D")
+	else:
+		origin.process_mode = Node.PROCESS_MODE_DISABLED
+		origin.hide()
+		body = Walker.new()
+		body.name = "DesktopWalker"
+		add_child(body)
+		camera = body.camera
+	camera.near = 0.05
+	camera.far = 350.0
+	camera.make_current()
+
+func _build_environment() -> void:
+	var world := WorldEnvironment.new()
+	var environment := Environment.new()
+	var sky := Sky.new()
+	var material := ProceduralSkyMaterial.new()
+	material.sky_top_color = Color("556d81")
+	material.sky_horizon_color = Color("b5bdbd")
+	material.ground_horizon_color = Color("b5bdbd")
+	material.ground_bottom_color = Color("526573")
+	sky.sky_material = material
+	environment.sky = sky
+	environment.background_mode = Environment.BG_SKY
+	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.ambient_light_color = Color("bdcddd")
+	environment.ambient_light_energy = 0.5
+	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	world.environment = environment
+	add_child(world)
+	var sun := DirectionalLight3D.new()
+	sun.rotation_degrees = Vector3(-32, -25, 0)
+	sun.light_color = Color("ffe9c8")
+	sun.light_energy = 0.9
+	sun.shadow_enabled = true
+	sun.directional_shadow_max_distance = 70.0
+	add_child(sun)
+
+func _build_signs() -> void:
+	for index in range(3):
+		var y: float = building.spec.levels[index]
+		building.box(building, "FloorSign", Vector3(-3, y + 1.35, -4.9), Vector3(3.7, 1.65, 0.12), building.steel)
+		var label := Label3D.new()
+		label.position = Vector3(-3, y + 1.35, -4.82)
+		label.font_size = 48 if index == 0 else 64
+		label.pixel_size = 0.003
+		label.outline_size = 0
+		label.modulate = Color("f0e9dd")
+		label.text = ["THE VOID / ROOF\nA or trigger: jump\nLeft stick: move / Right: turn\nB: retry / Left Y: roof / X: menu\nUse the ledges. A full floor drop kills.", "FLOOR 01\nCheckpoint on safe landing\nTwo shafts. Another floor below.", "FLOOR 02\nYou made the descent.\nB: retry here / Left Y: roof"][index]
+		add_child(label)
+		# A pale pink arrival strip sits on real concrete, outside both holes.
+		building.box(building, "CheckpointStrip", Vector3(-6, y + 0.015, 4.5), Vector3(1.8, 0.03, 0.12), building.pink, false)
+
+func _build_feedback() -> void:
+	status = Label3D.new()
+	status.position = Vector3(0, -0.19, -0.8)
+	status.font_size = 40
+	status.pixel_size = 0.00055
+	status.outline_size = 8
+	status.no_depth_test = true
+	camera.add_child(status)
+	fade = MeshInstance3D.new()
+	var quad := QuadMesh.new()
+	quad.size = Vector2(2, 2)
+	fade.mesh = quad
+	fade.position.z = -0.065
+	fade.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	fade_material = StandardMaterial3D.new()
+	fade_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	fade_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	fade_material.no_depth_test = true
+	fade_material.render_priority = 127
+	fade_material.albedo_color = Color(0, 0, 0, 0)
+	fade.material_override = fade_material
+	fade.extra_cull_margin = 100
+	camera.add_child(fade)
+	fade.hide()
+	if not vr:
+		var canvas := CanvasLayer.new()
+		add_child(canvas)
+		var help := Label.new()
+		help.position = Vector2(20, 18)
+		help.text = "THE VOID / descent test\nWASD: move   Mouse: look   Space: jump\nR: last floor   T: roof   M: menu   Esc: release mouse\nUse the ledges. A full six-metre drop is fatal."
+		help.add_theme_font_size_override("font_size", 18)
+		help.add_theme_color_override("font_shadow_color", Color.BLACK)
+		help.add_theme_constant_override("shadow_offset_y", 2)
+		canvas.add_child(help)
+
+func _physics_process(delta: float) -> void:
+	if not ready_for_play or returning: return
+	if recovering:
+		recovery_time += delta
+		_set_fade(minf(recovery_time / 0.14, 1.0))
+		if recovery_time >= 0.35 and not recovery_placed:
+			place_player(spawn_for(checkpoint))
+			recovery_placed = true
+		if recovery_time > 0.45:
+			_set_fade(clampf((RESPAWN_SECONDS - recovery_time) / 0.2, 0.0, 1.0))
+		if recovery_time >= RESPAWN_SECONDS:
+			recovering = false
+			_set_enabled(true)
+			_set_fade(0.0)
+			_notice("Back on %s" % floor_name(checkpoint))
+			respawned.emit(checkpoint)
+		return
+	notice_time -= delta
+	status.visible = notice_time > 0.0
+	var feet := body.global_position
+	if feet.y < -17.0 or absf(feet.x) > 18.0 or absf(feet.z) > 12.0:
+		die("Fell beyond the building")
+		return
+	if not body.is_on_floor():
+		airborne_speed = maxf(airborne_speed, -body.velocity.y)
+		stable_floor = -1
+		stable_time = 0.0
+		return
+	last_impact = airborne_speed if airborne_speed > 0 else last_impact
+	if airborne_speed >= FATAL_SPEED:
+		die("Hard landing")
+		return
+	airborne_speed = 0.0
+	var landed := _main_floor_contact()
+	if landed != stable_floor:
+		stable_floor = landed
+		stable_time = 0.0
+	stable_time += delta
+	if landed >= 0 and landed != checkpoint and stable_time >= 0.18:
+		checkpoint = landed
+		checkpoint_saved.emit(checkpoint)
+		_notice("%s / checkpoint saved%s" % [floor_name(checkpoint), "\nDescent complete" if checkpoint == 2 else ""])
+
+func _main_floor_contact() -> int:
+	for i in range(body.get_slide_collision_count()):
+		var hit := body.get_slide_collision(i)
+		var collider := hit.get_collider() as Node3D
+		if collider == null or hit.get_normal().y < 0.8: continue
+		var index := _floor_for(collider)
+		if index >= 0: return index
+	# Jolt may retain is_on_floor without producing a new slide collision
+	# for a stationary body. Confirm the slab directly under grounded feet.
+	var query := PhysicsRayQueryParameters3D.create(body.global_position + Vector3.UP * 0.06, body.global_position - Vector3.UP * 0.16, 1)
+	query.exclude = [body.get_rid()]
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if not hit.is_empty() and hit.normal.y > 0.8:
+		return _floor_for(hit.collider as Node3D)
+	return -1
+
+func _floor_for(collider: Node3D) -> int:
+	if collider == null: return -1
+	for index in range(building.floors.size()):
+		if collider.get_parent() == building.floors[index] and str(collider.name).begins_with("Slab") and absf(body.global_position.y - float(building.spec.levels[index])) < 0.16:
+			return index
+	return -1
+
+func spawn_for(index: int) -> Vector3:
+	return Vector3(-6.0, float(building.spec.levels[index]) + 0.06, 4.5)
+
+func floor_name(index: int) -> String:
+	return "Roof" if index == 0 else "Floor %02d" % index
+
+func place_player(at: Vector3) -> void:
+	if vr:
+		center_player_on(Transform3D(Basis.IDENTITY, at))
+		body.on_ground = false
+		body.ground_control_velocity = Vector2.ZERO
+		jump.queued = false
+	else:
+		body.global_position = at
+		body.rotation = Vector3.ZERO
+		body.camera.rotation = Vector3.ZERO
+		body.jump_queued = false
+	body.velocity = Vector3.ZERO
+	airborne_speed = 0.0
+	stable_floor = -1
+	stable_time = 0.0
+
+func die(reason: String) -> void:
+	if recovering or returning: return
+	deaths += 1
+	last_death = reason
+	recovering = true
+	recovery_time = 0.0
+	recovery_placed = false
+	_set_enabled(false)
+	_notice("%s\nReturning to %s" % [reason, floor_name(checkpoint)])
+	died.emit(reason)
+
+func _set_enabled(value: bool) -> void:
+	body.enabled = value
+	if vr:
+		for provider in body._movement_providers: provider.enabled = value
+
+func _set_fade(alpha: float) -> void:
+	fade_material.albedo_color.a = alpha
+	fade.visible = alpha > 0.0
+
+func _notice(message: String) -> void:
+	status.text = message
+	status.show()
+	notice_time = 4.0
+
+func _right_button(button: String) -> void:
+	if recovering or returning: return
+	if button == "ax_button" or button == "trigger_click": jump.queued = true
+	elif button == "by_button": die("Retry")
+
+func _left_button(button: String) -> void:
+	if returning: return
+	if button == "ax_button": return_to_menu()
+	elif button == "by_button" and not recovering:
+		checkpoint = 0
+		die("Restart from roof")
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not (event is InputEventKey) or not event.pressed or event.echo: return
+	if event.keycode == KEY_M: return_to_menu()
+	elif event.keycode == KEY_R: die("Retry")
+	elif event.keycode == KEY_T and not recovering:
+		checkpoint = 0
+		die("Restart from roof")
+
+func scene_loaded(_user_data = null) -> void:
+	if ready_for_play:
+		place_player(spawn_for(checkpoint))
+		camera.make_current()
+		if vr: get_node("XROrigin3D").current = true
+
+func scene_visible(_user_data = null) -> void:
+	if ready_for_play: camera.make_current()
+
+func is_map_ready() -> bool:
+	return ready_for_play
+
+func return_to_menu() -> void:
+	if returning: return
+	returning = true
+	_set_enabled(false)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	var ancestor := get_parent()
+	while ancestor != null:
+		if ancestor.has_method("return_to_main_menu"):
+			ancestor.return_to_main_menu()
+			return
+		ancestor = ancestor.get_parent()
+	Route.load_scene(self, "res://commons/scenes/vr_staging.tscn")
+
+func _suspend_global_tools() -> void:
+	stuck = get_node_or_null("/root/StuckDetector")
+	if stuck != null:
+		old_stuck = stuck.enabled
+		stuck.enabled = false
+	mushroom = get_node_or_null("/root/MushroomHand")
+	if mushroom == null: return
+	old_mushroom_mode = mushroom.process_mode
+	mushroom.process_mode = Node.PROCESS_MODE_DISABLED
+	for controller in get_tree().root.find_children("*", "XRController3D", true, false):
+		for connection in controller.get_signal_connection_list("button_pressed"):
+			var callback: Callable = connection.callable
+			if callback.get_object() == mushroom:
+				mushroom_connections.append({"controller": controller, "callback": callback, "flags": connection.flags})
+				controller.button_pressed.disconnect(callback)
+	for layer in mushroom.find_children("*", "CanvasLayer", true, false):
+		if layer.visible:
+			mushroom_layers.append(layer)
+			layer.hide()
+
+func _exit_tree() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if is_instance_valid(stuck): stuck.enabled = old_stuck
+	if is_instance_valid(mushroom):
+		mushroom.process_mode = old_mushroom_mode
+		for item in mushroom_connections:
+			if is_instance_valid(item.controller) and not item.controller.button_pressed.is_connected(item.callback):
+				item.controller.button_pressed.connect(item.callback, item.flags)
+		for layer in mushroom_layers:
+			if is_instance_valid(layer): layer.show()

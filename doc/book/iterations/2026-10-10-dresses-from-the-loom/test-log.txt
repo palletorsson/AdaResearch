@@ -1,0 +1,99 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: Custom solver bias for shapes is not supported when using Jolt Physics. Any such value will be ignored. This shape belongs to '<unknown>' and 0 other object(s).
+   at: set_solver_bias (modules/jolt_physics/shapes/jolt_shape_3d.cpp:91)
+   GDScript backtrace (most recent call first):
+       [0] run (res://tools/probes/garment_dresses_test.gd:16)
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS Loom saves committed optical cloth with an individual edited crossing
+PASS Cutting table loads the actual edited loom record
+PASS Ten named flat suit panels start on the table
+PASS Cannot wear an unfinished layout
+PASS Cannot assemble before cutting
+PASS CUT advances through individual pieces
+PASS PAUSE freezes the cutting operation
+PASS Cutting completes and removes the unused cloth from the layout
+PASS Robot places completed panels while the next travels
+PASS Second panel leaves its actual table position
+PASS RESET during assembly returns every piece to the layout
+PASS Fitted suit retains all original crossing and yarn data
+PASS Panel 1 retains its cut cloth addresses during folding
+PASS Panel 2 retains its cut cloth addresses during folding
+PASS Panel 3 retains its cut cloth addresses during folding
+PASS Panel 4 retains its cut cloth addresses during folding
+PASS Panel 5 retains its cut cloth addresses during folding
+PASS Panel 6 retains its cut cloth addresses during folding
+PASS Panel 7 retains its cut cloth addresses during folding
+PASS Panel 8 retains its cut cloth addresses during folding
+PASS Panel 9 retains its cut cloth addresses during folding
+PASS Panel 10 retains its cut cloth addresses during folding
+PASS WEAR equips the current player's real wardrobe
+PASS Player wears the same ten-panel suit and cloth snapshot
+PASS Cloth appearance preserves the 96 by 96 recorded crossing layout
+PASS Worn sleeve follows a moving hand
+PASS Saved outfit includes the complete cloth snapshot
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS Fresh wardrobe restores the suit and its cloth
+PASS Changing the table sample does not mutate the already worn suit
+PASS TAKE OFF restores the prior outfit
+PASS Existing wardrobe outfits still work after the suit
+PASS Invalid weave is rejected without changing the wardrobe
+PASS Making or wearing a suit grants no curriculum completion
+PASS Shape button previews aline
+PASS Choosing aline retains the loom record
+PASS aline labels the new skirt pieces
+PASS Previewing aline leaves the worn outfit alone
+PASS aline preview cannot be worn before assembly
+PASS aline retains ten panel addresses inside the saved cloth
+PASS aline is worn on the actual avatar
+PASS aline wears the original edited weave
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS aline and its cloth survive a fresh wardrobe
+PASS Shape button previews gown
+PASS Choosing gown retains the loom record
+PASS gown labels the new skirt pieces
+PASS Previewing gown leaves the worn outfit alone
+PASS gown preview cannot be worn before assembly
+PASS gown retains ten panel addresses inside the saved cloth
+PASS gown is worn on the actual avatar
+PASS gown wears the original edited weave
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS gown and its cloth survive a fresh wardrobe
+PASS Shape button previews pleated
+PASS Choosing pleated retains the loom record
+PASS pleated labels the new skirt pieces
+PASS Previewing pleated leaves the worn outfit alone
+PASS pleated preview cannot be worn before assembly
+PASS pleated retains ten panel addresses inside the saved cloth
+PASS pleated is worn on the actual avatar
+PASS pleated wears the original edited weave
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS pleated and its cloth survive a fresh wardrobe
+PASS All three dresses have distinct hem lengths
+PASS Pleats change the skirt geometry, not just its texture
+PASS Later shape edits do not mutate the worn dress
+PASS TAKE OFF restores both the previous dress and its original cloth
+PASS Unknown shapes cannot change the table or wardrobe
+[costume] 0 extra limb(s), 8 slot(s), stage 0
+PASS Old saved suits load as suits

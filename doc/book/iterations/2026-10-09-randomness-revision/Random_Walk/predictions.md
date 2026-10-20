@@ -1,0 +1,3 @@
+# Predictions before execution
+
+One draw gives a fixed-length XZ proposal, added to current position. Reflection at0.85 sends0.90 to0.80; clamping sends it to0.85. At a corner both axes fold. Accepted endpoints are joined by chords and can be closer than the proposal length.128 steps retain129 positions and128 segments; no draw after completion. Equal step counts replay only with same seed, start and rule. Clearing stored history must not steer the next step. Doubling the step doubles the first displacement before boundaries; changing cadence leaves equal-step paths unchanged. Held time draws nothing; release projects a local start; trigger+release restores the previous origin. Wrong assignment, absent boundary, missing last record and partial replay must fail.

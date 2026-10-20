@@ -1,0 +1,1 @@
+Rejected: SCRIPT ERROR stopped the probe after five startup checks. Godot converts the soft body mesh to ArrayMesh after insertion; the checker incorrectly called PrimitiveMesh.get_mesh_arrays(). No completed-run marker. Exit zero and 5/5 are insufficient. Correct checker to surface_get_arrays(0); learner code unchanged.

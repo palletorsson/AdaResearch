@@ -1,0 +1,18 @@
+{
+  "status": "Shared architectural frame for the playable roof and two-floor prototype. Dimensions remain provisional.",
+  "width": 30.0,
+  "depth": 18.0,
+  "storey_height": 6.0,
+  "slab_thickness": 0.36,
+  "levels": [0.0, -6.0, -12.0],
+  "shafts": [{"name": "A", "x": -10.0}, {"name": "B", "x": 10.0}],
+  "shaft_width": 5.0,
+  "shaft_depth": 6.0,
+  "column_x": [-14.0, -5.0, 5.0, 14.0],
+  "column_z": [-7.0, 7.0],
+  "column_width": 0.9,
+  "service_x": [-6.5, 6.5],
+  "service_z": -4.2,
+  "floor_roles": ["Roof / arrival", "Floor 01 / explore the descent", "Floor 02 / another landing"],
+  "route_note": "A: staggered temporary ledges. B: alternate suspended landing. Both routes pass native Jolt physics tests with desktop and XRTools bodies. Physical headset playtesting is still needed. Main-floor safe landings save checkpoints; temporary landings do not."
+}

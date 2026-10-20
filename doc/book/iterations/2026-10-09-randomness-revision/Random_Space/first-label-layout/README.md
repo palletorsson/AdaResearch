@@ -1,0 +1,1 @@
+Rejected first layout: combined captions did not align with screens/actions and parked point covered part of the middle screen. Corrected positions and action-label regression test are in the accepted version.

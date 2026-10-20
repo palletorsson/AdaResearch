@@ -1,0 +1,140 @@
+# A level body on a sloping journey
+
+## Learning elements
+
+- Displacement in a named coordinate frame
+- Vector interpolation between positions
+- A one-way journey that stops at its destination
+- A condition choosing between two route segments
+
+Watch the installed carrier whose route slopes while its top stays level. Translation changes where a body is without making it turn. At the exit, the guided handle's bend and the freer handle's diagonal give the same destination different journeys.
+
+## Bring the travelling body
+
+Start with a copy of Introduction's completed `lesson.gd` and `box_body.gd`, edition 2026-10-16. Keep `box_body.gd` and the entire `box(size, at)` function unchanged. They already construct and place the visual. Keep the name `travel` for the body we continue.
+
+Carried unchanged from [Introduction](../Trans_Introduction/tutorial.md): `box_body.gd`.
+
+Use the same empty `TransformStudy` host in the prepared museum: floor-level origin, zero rotation and unit scale. The positions below are metres in that host's local frame. This visual study has no rider physics; the museum's installed carriers supply the ride. Work on the copy so your three-way comparison remains available.
+
+## 1. Give it a destination
+
+In `lesson.gd`, keep the `BoxBody` preload, `var travel` and `var elapsed`. Replace the declarations from `var grow` through `var period` with:
+
+<!-- student-edit:route-values -->
+```gdscript
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
+```
+
+Introduction's `period` described a complete out-and-back cycle. Here `duration` is the time to reach the destination once. Four seconds will take the body from `start` to `finish`; it will then stay there.
+
+Replace `_ready()` with this complete function. Keep `box()` exactly as it is:
+
+<!-- student-edit:one-body -->
+```gdscript
+func _ready() -> void:
+    assert(duration > 0.0)
+    travel = box(Vector3(1.2, 0.2, 0.8), start)
+    apply_pose(0.0)
+```
+
+Only the travelling body is constructed now. Its dimensions are unchanged from Introduction. The banks, growing cube and turning plank are no longer created. `_ready()` still creates the visual before asking `apply_pose()` to position it.
+
+## 2. Use the clock once
+
+In `_process(delta)`, keep the header and `elapsed += delta`. Replace the remaining lines of that function with:
+
+<!-- student-edit:one-way-clock -->
+```gdscript
+    apply_pose(elapsed / duration)
+```
+
+Dividing elapsed seconds by the journey's duration gives its fraction: after two of four seconds, 0.5. We keep the clamp already inside `apply_pose()`. Once the fraction exceeds one, the pose stays at one instead of returning.
+
+In `apply_pose(value)`, keep the header and `var t := clampf(value, 0.0, 1.0)`. Replace the three transform assignments below it with:
+
+<!-- student-edit:direct-route -->
+```gdscript
+    travel.position = start.lerp(finish, t)
+```
+
+Run this direct version. `start.lerp(finish, t)` interpolates the three coordinates together. This extends the single-number interpolation in Introduction to a `Vector3`. At `t = 0.5`, the body is at `(0, 2, 0)`, halfway along the diagonal. At four seconds it reaches `(2, 3, 0)` and stops.
+
+`finish - start` is the displacement `(4, 2, 0)`: four metres along X and two upward. Its components describe a combined change, not an instruction to finish X before beginning Y. Neither rotation nor scale changes during the journey, so the sloping route leaves the surface level.
+
+## 3. Give the same displacement another route
+
+In `apply_pose(value)`, replace only `travel.position = start.lerp(finish, t)` with this conditional. Keep the clamp above it:
+
+<!-- student-edit:corner-route -->
+```gdscript
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t < 0.5:
+            travel.position = start.lerp(corner, t * 2.0)
+        else:
+            travel.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        travel.position = start.lerp(finish, t)
+```
+
+Set `via_corner` to `true`. The corner is directly above the start, at the destination's height. The first half of the time takes the body upward; the second takes it across. The condition chooses a segment. Each segment needs its own zero-to-one fraction: `t * 2.0` gives it to the first half, and `(t - 0.5) * 2.0` gives it to the second.
+
+At two seconds, the direct version reaches `(0, 2, 0)`; the corner version reaches `(-2, 3, 0)`. At four seconds they meet at the same destination. Each leg gets two seconds, but their lengths differ: two metres up, four across. The second leg therefore moves twice as fast. A constant-speed route would require another timing rule.
+
+## Predict another journey
+
+Keep `via_corner = true` and change `finish` to `Vector3(2, 3, 2)`. Predict the halfway and final positions before running. The corner stays above the start; the second leg now changes X and Z together. Explain why the body still does not turn to face its travel.
+
+Then change `duration` to `8.0`. Both legs should take twice as long, with the same endpoints. The unchanged `BoxBody` creates the shape; the route and time now determine where it goes.
+
+Trace kept positions after a movement. Here positions prescribe a movement. A longer route could store them in an array; these two branches are enough to understand the choice first. Carry the body, placement function, clock and separate pose function onward. Rotation next gives turning its own axis and centre.
+
+[Complete files, edition 2026-10-16](../../../doc/book/iterations/2026-10-16-translation-carried-body/files.html#complete) · [lesson.gd](../../../doc/book/iterations/2026-10-16-translation-carried-body/complete/lesson.gd) · [unchanged box_body.gd](../../../doc/book/iterations/2026-10-16-translation-carried-body/complete/box_body.gd) · [Download files and variants](../../../doc/book/iterations/2026-10-16-translation-carried-body/translation-studies.zip)
+
+<details class="full-program">
+<summary>Complete lesson.gd — online reference</summary>
+
+<!-- student-code:lesson.gd -->
+```gdscript
+extends Node3D
+const BoxBody = preload("box_body.gd")
+
+var travel: MeshInstance3D
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
+var elapsed := 0.0
+
+func _ready() -> void:
+    assert(duration > 0.0)
+    travel = box(Vector3(1.2, 0.2, 0.8), start)
+    apply_pose(0.0)
+
+func box(size: Vector3, at: Vector3) -> MeshInstance3D:
+    var body := BoxBody.new(size)
+    body.position = at
+    add_child(body)
+    return body
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    apply_pose(elapsed / duration)
+
+func apply_pose(value: float) -> void:
+    var t := clampf(value, 0.0, 1.0)
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t < 0.5:
+            travel.position = start.lerp(corner, t * 2.0)
+        else:
+            travel.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        travel.position = start.lerp(finish, t)
+```
+
+</details>

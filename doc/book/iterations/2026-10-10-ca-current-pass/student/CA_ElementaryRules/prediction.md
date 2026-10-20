@@ -1,0 +1,1 @@
+Original centre states/counts are (1,11),(2,14),(0,5), following the printed small seed. Variation is a 2x2 square at x=2,3 z=2,3 y=3. The nominated centre (3,3,3) has (1,3),(2,0),(0,0). No cell can see six active neighbours initially, so all four fade then the entire field is empty. A fading centre with seven neighbours must still empty. Outer shell remains empty.

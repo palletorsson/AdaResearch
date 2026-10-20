@@ -1,0 +1,107 @@
+import 0  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+normal 0 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+CHECKS 166 FAILURES 0
+
+frame_based_clock 1 0/halfway
+FAIL corner/30/three_quarters
+FAIL corner/30/elapsed_seconds
+FAIL corner/120/quarter
+FAIL corner/120/halfway
+FAIL corner/120/three_quarters
+FAIL corner/120/elapsed_seconds
+FAIL diagonal/30/quarter
+FAIL diagonal/30/halfway
+FAIL diagonal/30/three_quarters
+FAIL diagonal/30/elapsed_seconds
+FAIL diagonal/120/quarter
+FAIL diagonal/120/halfway
+FAIL diagonal/120/three_quarters
+FAIL diagonal/120/elapsed_seconds
+FAIL slow/30/quarter
+FAIL slow/30/halfway
+FAIL slow/30/three_quarters
+FAIL slow/30/elapsed_seconds
+FAIL slow/120/quarter
+FAIL slow/120/halfway
+FAIL slow/120/three_quarters
+FAIL slow/120/elapsed_seconds
+FAIL zero/30/elapsed_seconds
+FAIL zero/120/elapsed_seconds
+CHECKS 166 FAILURES 34
+
+unbounded_pose 1 tengine.org
+
+FAIL base/30/stays_arrived
+FAIL base/30/lower_bound
+FAIL base/30/upper_bound
+FAIL base/120/stays_arrived
+FAIL base/120/lower_bound
+FAIL base/120/upper_bound
+FAIL corner/30/stays_arrived
+FAIL corner/30/lower_bound
+FAIL corner/30/upper_bound
+FAIL corner/120/stays_arrived
+FAIL corner/120/lower_bound
+FAIL corner/120/upper_bound
+FAIL diagonal/30/stays_arrived
+FAIL diagonal/30/lower_bound
+FAIL diagonal/30/upper_bound
+FAIL diagonal/120/stays_arrived
+FAIL diagonal/120/lower_bound
+FAIL diagonal/120/upper_bound
+FAIL slow/30/stays_arrived
+FAIL slow/30/lower_bound
+FAIL slow/30/upper_bound
+FAIL slow/120/stays_arrived
+FAIL slow/120/lower_bound
+FAIL slow/120/upper_bound
+CHECKS 166 FAILURES 24
+
+wrong_second_fraction 1 ame
+FAIL corner/120/stays_arrived
+FAIL corner/120/upper_bound
+FAIL diagonal/30/halfway
+FAIL diagonal/30/three_quarters
+FAIL diagonal/30/destination
+FAIL diagonal/30/world_frame
+FAIL diagonal/30/stays_arrived
+FAIL diagonal/30/upper_bound
+FAIL diagonal/120/three_quarters
+FAIL diagonal/120/destination
+FAIL diagonal/120/world_frame
+FAIL diagonal/120/stays_arrived
+FAIL diagonal/120/upper_bound
+FAIL slow/30/three_quarters
+FAIL slow/30/destination
+FAIL slow/30/world_frame
+FAIL slow/30/stays_arrived
+FAIL slow/30/upper_bound
+FAIL slow/120/three_quarters
+FAIL slow/120/destination
+FAIL slow/120/world_frame
+FAIL slow/120/stays_arrived
+FAIL slow/120/upper_bound
+FAIL corner/no_jump
+CHECKS 166 FAILURES 33
+
+turns_on_the_slope 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL base/30/level
+FAIL base/120/level
+CHECKS 166 FAILURES 2
+
+PASS 166 assertions; 3 exercise variants + 1 edge case; 4 behaviour faults; 10 bad anchors rejected.

@@ -1,0 +1,5 @@
+RESTORE prepares a full bridge. Change SOURCE to VISITOR and start RUN. Your position now takes the probe's place. Approach the marked region, wait, move away. The ordinary museum floor continues alongside the basin; recovery ramps rise at either end on the desk's side. On the bridge, lingering can cost you support. The faint tile can still be seen after it can no longer carry you.
+
+You can bring the black point from beside the desk into this relation. Hold it near the surface and use its trigger to give the rule another position. The same object that carried STEP in the previous hall now brings a location as well. Release it and continue stepping: the input has withdrawn, but its consequences remain.
+
+Look up to find W again. A gold frame holds its place on the frieze. Wait above the tile while watching its colour there. The change stays in front of you; the consequence arrives beneath your feet. When the surface gives way, you are still looking at the same address from a little lower down.

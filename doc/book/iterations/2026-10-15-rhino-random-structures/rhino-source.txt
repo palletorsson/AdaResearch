@@ -1,0 +1,381 @@
+import rhinoscriptsyntax as rs
+
+myfile = open("out.csv", "r")
+
+width = 256
+
+def box2pxRot(p1, p2, r1):
+    pt0 = p1
+    pt1 = rs.coerce3dpoint([p2[0], p1[1], p1[2]])
+    pt2 = rs.coerce3dpoint([p2[0], p2[1], p1[2]])
+    pt3 = rs.coerce3dpoint([p1[0], p2[1], p1[2]])
+    pt4 = rs.coerce3dpoint([p1[0], p1[1], p2[2]])
+    pt5 = rs.coerce3dpoint([p2[0], p1[1], p2[2]])
+    pt6 = p2
+    pt7 = rs.coerce3dpoint([p1[0], p2[1], p2[2]])
+    theBox = rs.AddBox([pt0, pt1, pt2, pt3, pt4, pt5, pt6, pt7])   
+    centroid = rs.SurfaceAreaCentroid(theBox)[0]
+    rs.RotateObject(theBox, centroid, r1, [1,0,0])
+
+x = 0
+y = 0
+index = 0
+skip = 2
+
+for line in myfile:
+    if index % skip == 0: 
+        if (x == width/skip):
+            print(x, y)
+            y = y + 1
+            x = 0
+            
+            if(y > width/skip): 
+                break
+                
+        point1 = (x, y, 0)
+        point2 = (x+skip, y+skip, skip)
+        
+        box2pxRot(point1, point2, int(line))
+        
+    x = x + 1 
+    index = index + 1
+
+myfile.close() 
+
+
+Generative pipe-struktur
+Unity:
+
+Render :
+
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
+import random as random
+import Rhino
+
+tol=sc.doc.ModelAbsoluteTolerance
+aTol=sc.doc.ModelAngleToleranceRadians
+
+point_start = [0,100,0]
+point_end = [10,1,1] 
+   
+def createPipe(start, end):
+    startPoint =  rs.AddPoint( start ) 
+    endPoint =rs.AddPoint( end )
+    crv = rs.AddLine(startPoint, endPoint)
+    crv=rs.coercecurve(crv)
+    rad=0.1
+  pipes=Rhino.Geometry.Brep.CreatePipe(crv,(0.0,1.0),(rad,rad),True,0,False,tol,aTol)
+    for pipe in pipes:    
+        sc.doc.Objects.AddBrep(pipe)
+    sc.doc.Views.Redraw()
+
+r = 7
+adding = 1
+prob = 0.6
+allLvls = []
+
+def createFirstLevel():
+    levelpoints = [] 
+    for x in range(r): 
+        for y in range(r): 
+            point= [x,y,0]
+            rs.AddPoint(point)
+            levelpoints.append(point)
+    return levelpoints
+
+firstlvl = createFirstLevel()
+
+allLvls.append(firstlvl)
+divation = 0
+def createNextLevel(prevLevel):
+    levelpoints = [] 
+    createlvl = prevLevel[:]
+    
+    for x in range(r): 
+        for y in range(r): 
+            pos = (x * r) + y
+            point = createlvl[pos]
+            pointtemp = [point[0] + ( random.random() * divation ) - divation/2, point[1] + ( random.random() * divation ) - divation/2, point[2] + ( random.random() * divation ) - divation/2 + 1]
+            rs.AddPoint(pointtemp)
+            levelpoints.append(pointtemp)
+    return levelpoints
+
+for z in range(3): 
+    allLvls.append(createNextLevel(allLvls[z]))
+
+def iterlevel(allLvls): 
+    for z in range(3): 
+        currentlvl = allLvls[z]
+        nextLvl = allLvls[z+1]       
+        for x in range(r-1): 
+            for y in range(r-1): 
+                pos = (x * r) + y
+
+                point_start = currentlvl[pos]
+                rs.AddSphere(point_start,0.1)
+                point_end_up = nextLvl[pos]
+                rs.AddSphere(point_end_up,0.1)
+                createPipe(point_start, point_end_up)
+                print(point_start, point_end_up)
+
+                if(x != 0 or x != r-1 or y != 0 or y != r-1):
+                #if(False):
+                    point_end_right = nextLvl[pos + 1]
+                    point_end_left = nextLvl[pos - 1]
+                    point_end_away_up = nextLvl[pos + r]
+                    point_end_away_left = nextLvl[pos  + r]
+                    point_end_away_right = nextLvl[pos + r - 1]
+                    point_end_back_up = nextLvl[pos - r]
+                    point_end_back_left = nextLvl[pos - r - 1]
+                    point_end_back_right = nextLvl[pos - r + 1]
+                    
+                    
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_right)
+                 
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_left)
+                    
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_away_up)
+                   
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_away_right)
+                    
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_away_left)
+                    
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_back_up)
+        
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_back_left)
+    
+                    rand = random.random()
+                    if rand > prob:
+                        createPipe(point_start, point_end_back_right)
+
+iterlevel(allLvls)
+
+ 
+Träd
+
+import rhinoscriptsyntax as rs
+import random
+import math 
+import Rhino
+import scriptcontext as sc
+tol=sc.doc.ModelAbsoluteTolerance
+aTol=sc.doc.ModelAngleToleranceRadians
+sizeX = 5
+sizeY = 5
+sizeZ = 10
+points = []
+
+this_point = []
+next_point = []
+prev_point = []
+
+def createPipe(start, end, rad):
+    startPoint =  rs.AddPoint( start ) #rs.coerce3dpoint(point_start, True)
+    endPoint =rs.AddPoint( end )
+    crv = rs.AddLine(startPoint, endPoint)
+    crv=rs.coercecurve(crv)
+    pipes=Rhino.Geometry.Brep.CreatePipe(crv,(0.0,1.0),(rad,rad),True,0,False,tol,aTol)
+    for pipe in pipes:    
+        sc.doc.Objects.AddBrep(pipe)
+    sc.doc.Views.Redraw()
+    rs.AddSphere(start,rad)
+    rs.AddSphere(end,rad)
+    if(rad < 0.3): 
+        rs.AddSphere(end,0.5)
+
+
+print(math.floor(sizeX/2-1))
+# move pip three up
+posX = random.randrange(math.floor(sizeX/2-1), math.floor(sizeX/2+1))
+posY = random.randrange(math.floor(sizeY/2-1), math.floor(sizeY/2+1))
+pos = [posX, posY, 0]
+myTempPoint = rs.AddPoint(pos)
+points.append(myTempPoint)
+posX = random.randrange(math.floor(sizeX/2-1), math.floor(sizeX/2+1))
+posY = random.randrange(math.floor(sizeY/2-1), math.floor(sizeY/2+1))
+pos = [posX, posY, 3]
+myTempPoint = rs.AddPoint(pos)
+points.append(myTempPoint)
+
+
+def firstVect():
+    posX = random.randrange(math.floor(sizeX/2-1), math.floor(sizeX/2+1))
+    posY = random.randrange(math.floor(sizeY/2-1), math.floor(sizeY/2+1))
+    vect = [posX, posY, 0]
+    return vect
+
+def newVector(vector, elevate):
+    posX = vector[0] + random.randrange(-2, 2)
+    posY = vector[1] + random.randrange(-2, 2)
+    elevate = vector[2] + elevate + random.randrange(-1, 1)
+    vect = [posX, posY, elevate]
+    return vect
+
+vAll = []
+def createThreeArrays(): 
+    for one_0 in range(1):
+        v_0 = firstVect()
+        vAll.append(v_0)
+        for one_1 in range(1): 
+            v_1 = newVector(v_0, 3) 
+            vAll.append(v_1)
+            for three_2 in range(3): 
+                v_2 = newVector(v_1, 3) 
+                vAll.append(v_2)
+                for three_3 in range(3):
+                    v_3 = newVector(v_2,  3) 
+                    vAll.append(v_3)
+                    for three_4 in range(3):
+                        v_4 = newVector(v_3,  3) 
+                        vAll.append(v_4)
+    return vAll
+
+v4 = createThreeArrays()
+print(v4)
+
+index = 0
+radbase = 0.8
+def buildFromArray(vectorlist, index, radbase):
+    print(vectorlist)
+    for one_0 in range(1):
+        v_0 = vectorlist[index]
+        index=index+1 
+        radbase = radbase - 0.1
+        for one_1 in range(1): 
+            v_1 = vectorlist[index]            
+            createPipe(v_0, v_1, radbase)
+            print(index)
+            index=index+1  
+            radbase = radbase - 0.1
+            for three_2 in range(3): 
+                v_2 = vectorlist[index]
+                print(index, v_1, v_2)
+                createPipe(v_1, v_2, radbase)
+                index=index+1
+                if three_2 == 0:
+                    radbase = radbase - 0.1
+                for three_3 in range(3):
+                    v_3 = vectorlist[index]
+                    print(v_3)
+                    createPipe(v_2, v_3, radbase)
+                    index=index+1
+                    if three_3 == 0:
+                        radbase = radbase - 0.1
+                    for three_4 in range(3):
+                        v_4 = vectorlist[index]
+                        print(v_4)
+                        createPipe(v_3, v_4, radbase)
+                        index=index+1
+
+buildFromArray(v4, index, radbase)
+
+
+def addXyVector(v1, v2):
+    v1[0] = v1[0] + v2[0]
+    v1[1] = v1[1] + v2[1]
+    return v1
+
+
+
+
+import rhinoscriptsyntax as rs
+import Rhino
+import random as random
+import scriptcontext as sc
+tol=sc.doc.ModelAbsoluteTolerance
+aTol=sc.doc.ModelAngleToleranceRadians
+
+area_1 = [0.0, 4.0]
+area_2 = [80.0, 84.0]
+area_3 = [40.0, 44.0, 0]
+mid =rs.AddPoint( area_3 )
+def createPipe(start, end, rad):
+    startPoint =  rs.AddPoint( start ) #rs.coerce3dpoint(point_start, True)
+    endPoint =rs.AddPoint( end )
+    crv = rs.AddLine(startPoint, endPoint)
+    crv=rs.coercecurve(crv)
+    pipes=Rhino.Geometry.Brep.CreatePipe(crv,(0.0,1.0),(rad,rad),True,0,False,tol,aTol)
+    for pipe in pipes:    
+        sc.doc.Objects.AddBrep(pipe)
+    sc.doc.Views.Redraw()
+    rs.AddSphere(start,rad)
+    rs.AddSphere(end,rad)
+
+startPosX = random.uniform(area_1[0], area_1[1])
+startPosY = random.uniform(area_1[0], area_1[1])
+startPos = [startPosX, startPosY, 0]
+startPoint = rs.AddPoint(startPos)
+startPosLow = [startPosX, startPosY, -3]
+startPointLow = rs.AddPoint(startPosLow)
+endPosX = random.uniform(area_2[0], area_2[1])
+endPosY = random.uniform(area_2[0], area_2[1])
+endPos = [endPosX, endPosY, 0]
+endPoint = rs.AddPoint(endPos)
+endPosLow = [endPosX, endPosY, 0]
+endPointLow = rs.AddPoint(endPosLow)
+
+def getNewPoint(vect, goal, elevate): 
+    orgDist = rs.Distance(vect, goal)
+    for x in range(5): 
+        newVect = newVector(vect, elevate)
+        newDist = rs.Distance(newVect, goal)
+        #print(orgDist,newDist)
+        if (orgDist > newDist): 
+            vect = newVect
+    return vect      
+
+def newVector(vector, elevate):
+    posX = vector[0] + random.uniform(-1.0, 5.0)
+    posY = vector[1] + random.uniform(-1.0, 5.0)
+    elevate = vector[2] + random.uniform(-1.0, 5.0)
+    vect = [posX, posY, elevate]
+    return vect
+
+def getDistance(vect1, vect2): 
+    v1 = rs.AddPoint(vect1)
+    v2 = rs.AddPoint(vect2)
+    dist = rs.Distance(v1, v2)
+    return dist
+
+polyline = [] 
+polyline.append(startPos)   
+for x in range(6): 
+    if (x > 3): 
+        elevate = -2
+    else: 
+        elevate = 3
+    newPos = getNewPoint(startPos, endPos, elevate)
+    print(newPos)
+    tempPoint = rs.AddPoint(newPos)
+    polyline.append(tempPoint)
+    startPos = newPos
+    if (x > 3): 
+
+        createPipe(tempPoint, mid, 2.4)
+    else: 
+        createPipe(tempPoint, mid, 2.4)
+    
+polyline.append(endPoint)
+rad = 2.2
+polycurve = rs.AddCurve(polyline)
+crv=rs.coercecurve(polycurve)
+pipes=Rhino.Geometry.Brep.CreatePipe(crv,(0.0,1.0),(rad,rad),True,0,False,tol,aTol)
+for pipe in pipes:    
+    sc.doc.Objects.AddBrep(pipe)
+sc.doc.Views.Redraw()
+

@@ -1,0 +1,1 @@
+The numerical state matched, but visual inspection found frozen-body display poses lagging behind the model. This capture harness disabled the learner host process. Keep it running with playing=false so its normal paint loop maintains body transforms. These images and passing numerical receipts are not accepted as final visual evidence. No lesson code changed.

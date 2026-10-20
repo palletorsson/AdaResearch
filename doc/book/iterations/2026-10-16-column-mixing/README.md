@@ -1,0 +1,9 @@
+# Four beginnings, continuing mixing
+
+The user asks for the full-size columns to keep mixing until their visible differences fade. The new model preserves the previous starting coordinates and uses one colour-blind bounded random-walk rule with four distinct derived PRNG streams. Symmetric moves outside the usable cylinder are rejected; there is no clamping, common target or forced equality. Interpolation stays inside the convex boundary. Eight seconds on approach expose the starts. PAUSE/RESUME and RESTART occupy the existing side panel. Both measurements use the visible interpolated positions.
+
+At 45 seconds the height readings in the native retained run span 0.946–0.961 bits. They fluctuate later. At 180 seconds one reaches 0.852: a finite record does not climb monotonically. Room images were inspected at 0 and 90 seconds, together with the live panel. The loss of recognisable starting boundaries is promising, but human perceptual identity is not verified. No physical headset trial was performed. Beads are point tracers with round glyphs: no bead collisions, heat or hydrodynamics.
+
+Reproduce: `python -X utf8 doc/book/iterations/2026-10-16-column-mixing/run.py`, then `python -X utf8 tools/run_encounter_probe.py Random_Entropy --sequence randomness --render --no-bridges --output-tag column-mixing --probe doc/book/iterations/2026-10-16-column-mixing/museum_probe.gd`, then `publish.py`. Both native processes exited 0; no script/shader errors. Tests and coordinate records are in verification.json; installed-room checks are in museum-report.json. Static captures advance the actual model to explicit times, then hold it during rendering. Orthographic views are comparison tools, not headset screenshots.
+
+Final, tutorial, catalog and planning notes follow the changed behavior. The hall order/placements, original hand-sized shakeable jar, prefab investigation and first 48-value research pilot remain unchanged.

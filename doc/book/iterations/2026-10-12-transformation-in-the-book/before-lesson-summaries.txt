@@ -1,0 +1,1415 @@
+# Every hall, one lesson
+
+Proposed teaching paragraphs in the live Endless Museum order. Read with the execution contract; these are plans, not new code-test results.
+
+For a future reconstructing reader: load the hall choice, named predecessor source, supplied support and exact evidence. The paragraph selects the lesson; it does not replace these dependencies.
+
+Review: doc/book/course/execution-plan/REVIEW.md. Edit: http://localhost:3003/tutorial-plan?view=summaries
+
+## Primitives: Points Build Worlds
+
+Make a running world available for construction: distinguish execution, position, frame, relation, record, representation, connectivity, generating rule and finite limit; compose with what those distinctions permit.
+
+Sequence demonstration: Offer an independent arrangement using generated positions, a preserved source and altered copy, a valid indexed face and two sphere resolutions. Ask for predictions, execution and an explanation of the choices. The exercise is assigned; independent learner understanding has not been observed.
+
+### Point_Zero
+
+Meet the existing frame counter. In the prepared museum study, create and attach the label in _ready, then read the engine frame count in _process. Move the reading to _ready and predict why it stops changing although the world continues. The complete example must initialize its own label. Carry the distinction between initialization and repeated execution; Day Zero supplies the room, view and player.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: not linked here.
+
+### Point_One
+
+The corridor separates an absent point, a visible sphere and a solid body. Build one small point with a named centre and radius, creating its body, mesh and collider in code. Change position and size, then separate visibility from collision. Explain which value controls which result. Carry this exact construction into Coordinates; the museum supplies its setting, not the point the learner builds.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Point_Coordinates
+
+Continue Point One's construction and give that body XRToolsPickable behaviour through the installed library. Create the coordinate readout, grip and release the point, then move the study's parent to distinguish local from world position. Predict which reading changes before trying it. Carry the same movable point and named reference frames into Lines. The configured hands are supplied; distance measurement belongs to the next lesson.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Point_Lines
+
+Extract the familiar point construction into PointBody and create two independent instances. Read both endpoints in the same frame, subtract them, and distinguish displacement, length and direction while the declared line renderer joins them. A coincident pair has no direction. Move either point, then arrange two segments as parallel lines, a cross or an X. Explain what changed in the endpoints and what remained in their construction. Carry the class and endpoint relation onward.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Point_Trace
+
+Move the point already built in Point One and made pickable in Coordinates. Trace keeps selected local positions in an array, uses a distance condition to admit a sample, and loops over neighbours to join them. Predict which motion is retained and try another threshold. Release the point to save its positions and existing drawing through the supplied archive. Bring that work into the next museum hall; Grid will receive the sculpture instead of asking for another gesture.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Point_Line_Grid
+
+Meet the drawing saved in Trace as a sculpture in Grid. One sampled record supports several representations: an ordered array, visible segments and rounded XYZ addresses. Keep the pink source intact while changing an independent green copy. Predict an address, compare pitches and flatten only the copy. Carry the preserved source into Triangle.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Point_Triangle_Context
+
+Bring the original saved Trace positions through Grid. Lines already connected positions; now choose three entries and store their ordered connection as a face recipe. Reuse PointBody handles, move a corner, reverse the front and collapse the face to test its guard. Preserve the archive. Carry positions and connectivity into the first enclosure.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+Reconcile: The hall-card teaching choice changed. Reconcile this plan before expanding it.
+
+### Primitives_Polythedra
+
+Reload the same three selected Trace positions and add an apex behind their plane. Store four positions once and address them with four face-index triples. Move the shared apex and see three faces change together; distinguish a closed visible surface from a collider. Carry the position/connectivity separation and FaceBody into Cube.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Point_Animatedcube
+
+Build CubeBody from eight shared corners and twelve triangles using the previous face renderer. Compare two independent instances with different front-face diagonals. Deform a corner, then move the whole node, distinguishing a construction edit from a placement. Keep the reusable cube for later composition, Transformation and Arrays.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Primitives_Ignorance
+
+Return to the authored position lists from Cube. Generate an octahedron list with a named function and a radius: positive and negative multiples of three axes. Render the supplied face recipe, call the function again and modify one independent result. Explain which choice belongs to the generating rule and which to a returned position. Carry parameters, return values and rule/output separation.
+
+Plan: draft; tutorial: unreviewed; behaviour contract: proposed; native evidence: stale.
+
+Reconcile: The hall-card teaching choice changed. Reconcile this plan before expanding it.
+
+Reconcile: The tutorial changed since this plan was reviewed. Re-read it before continuing.
+
+### Primitives_Godot
+
+Return to PointBody to study resolution as a construction parameter. Compare rings-only and segments-only changes on independent spheres while radius, appearance and spherical collision stay fixed. Pickup and the fully printed held-time controller support the comparison: holding reduces resolution, release pauses, and reset restores. Stop at valid lower bounds. Carry controllable construction into Columns and later abilities.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+Reconcile: The hall-card teaching choice changed. Reconcile this plan before expanding it.
+
+### Primitives_Columns
+
+Use a radius profile and two loops to generate stacked ring positions. Compare the same profile and height at 4, 6, 8, 12 and 16 sides with a supplied circle sampler and surface stitcher. Then change silhouette and height separately. Carry independent construction parameters and the profile/placement distinction into borrowed letter outlines.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+### Primitives_Profiles
+
+Return to Columns: a ring section carried through heights made a body. Borrow an O outline, including its hole, and carry that section through five parallel placements. Change sideways travel first; then compare width, depth and a C section. Preserve the supplied outline. Font extraction, triangulation and general curved-path frames stay supplied or deferred. Carry section and route as separate choices; visible hollow geometry does not supply collision.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+Reconcile: The hall-card teaching choice changed. Reconcile this plan before expanding it.
+
+### Primitives_Portals
+
+Reuse the supplied circle sampler and LineSkin to measure a closed polygon. Sum neighbour lengths, including last to first, and compare with the finite TAU-based circumference reference. Increase sides until the metre tolerance is met or the sample budget is spent. Trigonometric derivation stays supplied. Test a tighter tolerance and an unattainable request; carry a stopping rule that names both error and cost.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+Reconcile: The hall-card teaching choice changed. Reconcile this plan before expanding it.
+
+### Primitives_Melencolia
+
+Compose with learned CubeBody instances and the familiar PointBody. Change placements without changing construction data; reconstruct a second arrangement from script values. Scale and rotation wait for Transformation. Then attempt an independent arrangement: generate positions, retain a source and alter a copy, reuse a valid face and compare two sphere resolutions. Explain the construction choices and the arrangement; automated checks alone cannot establish that understanding.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: current.
+
+Reconcile: The hall-card teaching choice changed. Reconcile this plan before expanding it.
+
+## Transformation: What Stays the Same When Everything Changes
+
+Choose translation, rotation and scale; explain what each preserves and what it changes in the space available to a body.
+
+Sequence demonstration: Predict and make a changed pose or opening; identify the operation, frame and preserved properties. Test its timing or input only where used.
+
+### Trans_Pre
+
+Use one MeshInstance3D displaying a BoxMesh. Translate, rotate and scale the whole cube; keep its mesh fixed. Add elapsed time for a simple upward journey. Then attach an Area3D and a box collision shape, connect body_entered, recognise the supplied museum player and collect the cube by walking into it. No face lists, edge renderer or companion geometry scripts. Carry the same simple object from visual transformation to overlap detection and a signal-driven response.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: stale.
+
+### Trans_Introduction
+
+Compare the plate's travelling surface, growing cube and quarter-turn plank. Reuse the three operations in a small complete model beside the existing crossings: translation carries a surface between banks; scaling extends its reach about a fixed centre; rotation aligns its length with the gap. Hold a chosen pose and inspect whether the surfaces meet before adding travel, turning time or a pause. Move the far bank while keeping the plank's length and pivot fixed, then predict why the old angle no longer guarantees a crossing. Explain the supplied control's event connection only as needed to change that parameter. Rider transport and physical collision stay supplied. Carry transformation as a spatial relation between bodies.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: not linked here.
+
+### Trans_Translation
+
+The plate's carrier follows a sloping path while its top stays level: translation changes position without requiring a turn. Move the familiar cube along X, Y and Z, then combine components into a diagonal displacement. Reuse Lines to distinguish direction from distance and name the coordinate frame. First assign the destination; then interpolate between start and finish while retaining orientation and size. Compare a direct diagonal with a journey that rises before moving sideways, as in the two exit handles. A further step uses a short waypoint list: Trace kept movement as data; here data directs movement. Carry the ability to choose both displacement and route; the museum supplies rider carrying.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+### Trans_Rotation
+
+Use the plate's marked cube to distinguish a repeated outline from a returned orientation. Set an angle around X, Y or Z, then move the pivot and compare spinning in place with travelling around another centre. Reuse local coordinates and a small returning function for centre plus rotated offset; explain angle units at their first use. Follow a corner through intermediate poses to see why the swept space exceeds one resting pose. Predict a quarter-turn and verify that the body's dimensions remain fixed. Once this is clear, reverse a chosen X/Y turn pair and compare the face mark. Rider orientation and sweep drawings are supplied. Carry control of axis, angle and pivot.
+
+Plan: draft; tutorial: unreviewed; behaviour contract: proposed; native evidence: not linked here.
+
+Reconcile: The tutorial changed since this plan was reviewed. Re-read it before continuing.
+
+### Trans_Scale
+
+The plate's small doorway becomes usable while the visitor stays the same size. Begin with the familiar cube beside a fixed sphere: multiply all dimensions by one positive factor, then change only one axis and compare proportions. Make the distinction visible before introducing a group. Put two familiar cubes beneath one created parent and scale it; predict their world sizes and spacing while their local positions stay unchanged. Keep the sphere outside the group. Return to the museum's enlarged room and its separate visitor relocation: scaling the surroundings did not scale the visitor or walking speed. The bottle and physics remain supplied. Carry deliberate control of size, proportions and which objects share the change.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: not linked here.
+
+### Trans_Body
+
+Follow the plate's opening slats and shrinking blocks. Reuse a known rotation or scale, replacing elapsed time with the visitor's distance in a named frame. Give the familiar cube a bounded size response, then use the same input range to turn it instead; predict what happens at near, middle and far positions. The calculation and any reach condition now have an immediate spatial purpose. Leave and see the transform return. Compare this with the lattice's missing cells: removal changes the collection, rather than simply changing a surviving body's pose. A retained flag is an optional way to keep one response after departure. Tracking and collision remain supplied. Carry a transformation driven by bodily relation.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+### Trans_Pit
+
+The plate returns to translation, rotation and scale as changes in available space: a block arrives, a slab sweeps past, a cube grows into a gap. Inspect an intermediate pose, not just the beginning and end. Then reuse two CubeBody instances to make a small model of the hall's opening leaves, coordinating displacement, angle and scale through one bounded progress value. Keep the frame fixed and predict which operation produces each part of the opening. Supply occupancy and physical contact; choose a new timing or sequence of known operations and compare the resulting gap. Add no required syntax topic here. Carry an authored composition that Arrays can repeat and vary across many bodies.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+## Arrays and Regularity
+
+Address and change many independent things.
+
+Sequence demonstration: Change one stored value and one object through their indices, preserving unrelated entries; explain aliasing.
+
+### Array
+
+Make four independent copies of the familiar cube, keeping its construction and appearance. Store their references separately from occupancy, empty one slot without shifting neighbours, then extend to grid_data[x][z]. Predict what changes when spacing changes but addresses remain fixed. Collection and display adapters are supplied. Carry an addressed record and independent instances; the new work is organizing many cubes, not explaining a different cube from scratch.
+
+Plan: draft; tutorial: missing; behaviour contract: proposed; native evidence: not linked here.
+
+### Tutorial_3D
+
+Extend the occupancy plane into layers and make storage order explicit: displayed [x,y,z] is read from values[y][z][x]. Show the conversion from the earlier plane rather than silently swapping axes. Predict, change and read an unequal-index address while its neighbours remain intact. Flight and selection are supplied. Carry a tested space-to-storage mapping; drawing a volume and storing a volume are separate responsibilities.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+### Tutorial_Tiling_Floor
+
+Use a small 4×4 floor to connect an address with a tile-orientation rule. Predict the pattern produced by a remainder expression, change one rule and then introduce one explicit exception. Expand only after the small comparison is understood. Tile construction is supplied. Carry the motif, rule and exception as separate choices, so a global pattern can be explained through local decisions rather than copied by appearance.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+### Tutorial_Tiling_Walls
+
+Place the familiar floor image on a supplied upright receiver. Compare turning the image with turning the wall's geometry and collision, and predict which change can alter passage. Follow the surface axes instead of assuming floor coordinates still apply. Carry a distinction between pattern data, its display and the body's access. This is a reuse lesson; it need not introduce a new rendering system.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Tutorial_Disco
+
+Retain a short Boolean score separately from its tempo. Advance and wrap a playback index with elapsed time, then send each stored event to the declared sound and floor receivers. Change tempo without editing the score and change one event without changing tempo. Predict the next played address. Carry stored decisions and playback timing as independent objects into Colour and later musical studies.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+## Color and Composition
+
+Separate a calculated value, its receiver and its retained state.
+
+Sequence demonstration: Create two independent palettes, advance one, and apply a returned colour to a new receiver; explain the surface-painting states.
+
+### Color_Context_Placed
+
+Keep an existing arrangement's geometry fixed and assign colours from an explicit palette to named parts. Change a selected index so separated parts appear to belong together, then explain which data changed and which geometry did not. The display references are supplied and declared. Carry palette selection as an operation independent of placement; visual grouping need not become another geometry lesson.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Color_Flashlight
+
+Retain the named lamp reference and vary its colour while the receiver stays fixed; then keep the colour value fixed and change its aim. Predict a controlled difference before comparing the results. Grabbing, room geometry and rendering are supplied. Carry a light-to-surface comparison that distinguishes an assigned value from a viewed colour, without promising a full lighting implementation in this short lesson.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Color_Nails
+
+Write a small function that maps a position inside a declared positive-size box to a clamped Color value and returns it to one named receiver. Reuse local-frame conversion rather than mixing world coordinates into the mapping. Predict a corner and an out-of-bounds result, then test another box. Carry a function contract with explicit inputs and output; the reflective text separately considers skin, nails and permission.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+### Color_Rainbow
+
+Keep an arch's total width fixed while changing its number of colour bands, then compare the generated division with a hand-picked palette. Predict each band's width and identify what the palette can change independently of the route. The arch builder, accessible path and celebration are supplied. Carry the distinction between partition and choice; taking part does not depend on completing a coding edit.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Color_Pillar
+
+Reuse the position-to-Color interface but substitute HSV inputs for the previous mapping. Hold hue and saturation while varying value, and explain the separate conversion from hand height to the function's input. Predict two heights under one chosen range. The converter and readouts are supplied. Carry an interchangeable mapping with named assumptions; the pillar's fog-like meeting with its ceiling remains an experience to reflect on.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Color_Grid_Pallet
+
+Return to classes introduced in Lines and deepen them through owned state. Give a Palette its colours and current index, with current_colour() and next_colour() methods; create two instances and verify that advancing one does not advance the other. Write the returned colour to a named grid address. Carry independent state plus a reusable interface, making a class useful through behaviour rather than introducing terminology alone.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+### Color_Paint
+
+Continue the action-handler and palette work through one small paint operation. A named action changes the can's interaction state; a valid ray hit supplies a surface-local address, and one shared method deposits colour there. Test a miss, release and a second caller separately. Grip, aerosol effects and surface storage are declared support. Carry an input-to-receiver chain whose feedback distinguishes an attempted action from an actual mark.
+
+Plan: draft; tutorial: aligned; behaviour contract: proposed; native evidence: not linked here.
+
+### Color_Walls
+
+Make one small arrangement that combines a returning colour function, a bounded condition and independently owned state. Predict the result for a new input and demonstrate that changing one receiver leaves another's state intact. Keep the museum's large room and light apparatus supplied. Carry an explained composition of the foundations learned so far; the lesson's success is deliberate reuse, not another topic added at the exit.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: proposed; native evidence: not linked here.
+
+## Patterns: Dress the Architecture
+
+Separate a source from its repeated interpretations.
+
+Sequence demonstration: Keep the motif fixed while changing one lookup; predict a 4×4 sample and a larger result.
+
+### Pattern_Disco
+
+Return to the known score and patterned floor. Hold score and phase while substituting a colour pair, then hold the palette while advancing phase. Predict which values and which visible relations change in each comparison. Floor construction and controls are supplied. Carry a controlled distinction between replacing a receiver's palette and changing the pattern input, preparing a source motif that can be read in several ways.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Pattern_Foundry
+
+Create one small source[row][column] motif and read it through wrapped addresses into the supplied preview. Change one cell and predict its repeated appearances. On a later pass, make an independent nested copy and compare it with a live reference; a held screenshot is neither of these data relationships. Carry a motif, its reader and a declared copying policy into reflection and symmetry studies.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Tutorial_Pattern
+
+Choose an asymmetric mark so reversal is visible. First reflect the source address on alternate tile columns without editing stored cells; then separately reverse entries inside each source row. Predict where a coloured neighbour appears and identify which operation changes the source. Displays are supplied. Carry distinct transformed-reading and source-editing operations; a symmetric motif can hide the very difference this lesson needs to expose.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Array_Patterns
+
+Trace one tunnel surface address back to its fixed 4×4 source; earlier edits are not imported here. Declare origin, surface axes and cell width in metres, then compare floor and wall mappings. Predict the motif's total span after a width change without changing passage geometry. The tunnel and selector are supplied. Carry a surface-to-source conversion with units and a visible boundary convention.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Symmetry_Seventeen
+
+Use the same asymmetric mark to compare wrapping, reflection and a half-height glide on a four-row source. Predict two neighbouring blocks before inspecting their actual repeat period. The editor, held panel and classification display are supplied. Carry a tested rule and diagnostic motif; three available comparisons do not establish the full seventeen-group classification or the cultural meaning of every similar pattern.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Ribbon_Patterns_01
+
+Reuse values[y][z][x] and explicitly name its source plane SOURCE[z][x]. Repeat that source through layers, then shift the wrapped source column by the layer index. Predict an unequal-index lookup and compare hiding a slice with deleting data. Cube rendering is supplied. Carry a layer-dependent reader; zero now means a pale colour, not the vacancy used in the earlier occupancy lesson.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+### Ribbon_Patterns_02
+
+Hold two target colours numerically equal while changing their surrounds. Then put the same motif on a flat and curved carrier with equal surface width. Explain what the code guarantees separately from what the current view makes apparent, including arc length versus projected width. Controls and shading are supplied. Carry a controlled comparison method; this lesson does not require a particular perceptual response or a new shader system.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+### Ribbon_Patterns_03
+
+Use the declared studio host to write a first small shader: scale UV by repeat counts, add an offset and sample a supplied texture into ALBEDO. Predict repeats and offset separately, remembering that UV counts are not metre spacing. Texture conversion, materials and garments are supplied. Carry the sampling operation and compare a live recipe with SAVE and WEAR SAVED; the stored recipe does not contain arbitrary shader code.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+## Change: Rate, Accumulation, and Flow
+
+Distinguish a difference, a rate and an accumulated change.
+
+Sequence demonstration: Compare finite differences and finite sums at two step sizes, with units and a retained source.
+
+### Change_Intro
+
+Reuse a callable curve and position differences to calculate a finite rate over a nonzero interval. Predict its sign before comparing with a supplied tangent. In a second short step, sum sampled height-times-width contributions and predict one rectangle before the total. Plots are supplied. Carry separate rate and sum functions with named units; a finite comparison sum is not an exact integral, and this x denotes position rather than time.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Flow_Field
+
+Hold the field clock and follow one sampled direction from the current canvas position. Multiply direction by speed and elapsed seconds, update position, then sample again; predict two steps from another start. The field function, drawing and boundary policy are supplied. Carry a follower and its record without inventing retained velocity. Compare one step with two half-steps at equal duration, and identify misleading trail joins at a wrap.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Vectors & Forces: From Direction to Dynamics
+
+Connect position, velocity, acceleration and applied forces.
+
+Sequence demonstration: Compare the same timed force under two masses; reset and distinguish force, velocity assignment and engine integration.
+
+### Vectors_Act1_WhatAVectorIs
+
+Return to two endpoints and calculate their difference in world coordinates. Shift both together, predict the unchanged displacement and inspect what XY and XZ projections omit. Compare short, long and zero vectors; explain normalization and its small-length guard before using it independently. Projections and readouts are supplied. Carry direction and magnitude with a declared frame, keeping the measured vector distinct from the display's scale.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### VFM_02_Operations
+
+Add two displacements, then compare travelling their two legs with taking the direct result. Swap their order and predict the same destination but another corner; cancel with the opposite vector and explain a nonzero journey with zero displacement. Carriage and drawing are supplied. Carry separate endpoint and path-length accounts, with the instantaneous reset explicitly excluded from the reported trip.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Vectors_Act2_VectorArithmetic
+
+Project a measured gap onto a supplied unit rail using a dot product. Construct the retained component and subtract it to obtain a remainder, then recombine both to check the original. Predict rail reversal and movement perpendicular to the rail. Controls and diagrams are supplied. Carry a signed along-axis measurement, its omitted component and the requirement that the receiving axis be normalized.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### VFM_05_Launch
+
+Return to the familiar sphere as a flight marker, keeping its visual recipe. Drive it with the supplied constant-acceleration position formula and change one initial condition. Predict an apex or landing comparison; distinguish slower playback from different gravity. Angle conversion and duration are supplied. Carry the position-at-time function and its no-drag assumptions. This marker is prescribed motion; the next lesson introduces a physical receiver without redesigning the sphere.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### VFM_03_Motion
+
+Keep the familiar sphere's geometry and appearance, but explicitly replace frozen pickup behaviour with the declared dynamic-body setup. Author a finite force pulse and predict velocity change from force, mass and duration. Compare two masses with drag off before contact; COAST ends the command without erasing motion. The engine supplies integration and collision. Carry the sphere and force schedule, with its changed physical responsibility explained once.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Vectors_Act3_FieldsAndMotion
+
+Give a small numerical receiver position and velocity state. Compare assigning velocity from a sampled field with adding acceleration to retained velocity, then advance position using the new velocity. Predict two uniform-field steps before trying a sink. The runner, samples and drawing are supplied. Carry this explicit update convention and unit conversions; reversing an influence need not immediately reverse an already moving receiver.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Vectors_Act4a_KineticForces
+
+Write one linear resistance function, force equals minus coefficient times velocity, and send it through the supplied rigid-body adapter. Predict initial acceleration for two masses at equal speed and coefficient before comparing runs. Keep coefficient units explicit and let the engine integrate. Carry a reusable drag term into Oscillation; walking resistance, mower work and prescribed circular motion remain separate comparisons rather than extra required implementations.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Vectors_Act4b_Oscillation
+
+Adapt the numerical position/velocity study to one axis. Sum restoring force and the familiar drag term, update velocity from force and mass, then update displacement. Predict the force direction and explain why the body can cross zero displacement with continuing velocity. Rail, handle and timestep runner are supplied. Carry a spring-damper calculation, distinct from the earlier animation that prescribed a sine-shaped position.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Change_Choreography
+
+Return to timed angles and introduce period and phase through the rods. In the paired-dial study, halve the excess rate difference while retaining the period, and predict the gap after thirty seconds. SAME RATE should stop further drift without closing the existing gap. Displays are supplied. Carry a quantitative distinction between editing a stored angle and editing the rate that continues to change it.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### VFM_07_Gravity
+
+Use a supplied softened attraction law to calculate one pair's force. Apply opposite contributions to two receivers, dividing each by its own mass, and predict their unequal accelerations before integration. The pair loop and stepper are supplied. Compare a responsive source with an explicitly held one. Carry paired contributions and the omitted-response question; many-pair cost is a bounded introduction to computational work, not an optimization course.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### VFM_09_Legs
+
+Predict whether adjacent or diagonal support pads hold the same centred load, then release and compare. State the assumptions about pad positions, contact and load before interpreting a fall. Hull construction and the physics solver are supplied. Carry a testable support hypothesis, distinguishing the commanded walker from a plate whose movement responds to contact; this comparison does not require rebuilding either complete mechanism.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### VFM_08_Arena
+
+Hold positions fixed and insert a screen, then predict which target remains eligible before feeding begins. Trace a small eligibility condition separately from the selected target and completed-meal history. Sight testing, selection machinery and controller are supplied. Carry the distinction between an available action, a recorded event and an attributed intention, ready to use the same discipline when later agents appear purposeful.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Vectors_Act5_ForceAsPlace
+
+Compose the existing field controls and predict what zero acceleration does to a moving cube. Compare this with an immediate stop and with the visitor's separately implemented receiver. Membership, damping and contact handling are supplied. Carry a receiver-aware account of a place's influence: the same apparent region can change different bodies differently, and leaving an influence does not necessarily erase motion already acquired.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Form Finding: Rules, Constraints and Possible Shapes
+
+Change parameters by a criterion rather than draw a desired result directly.
+
+Sequence demonstration: Change a step size or boundary and distinguish convergence, a limit and a failed search.
+
+### FormFinding_Descent
+
+Reuse finite differences to estimate a cost gradient and propose a small search step against it. Predict the next address, then compare starts, step sizes and stopping thresholds on the supplied surface. Keep search iterations distinct from physical time and momentum. Carry an objective, update and stopping reason; reaching a low local value does not by itself establish a globally best form.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### FormFinding_Catenary
+
+Compare a hand-shaped spline with supplied formula curves. Choose one span or sag input, predict the changed profile and state which constraints the formula preserves. Sampling and tube construction are supplied. Carry a curve specification with explicit inputs and limits; a curve that resembles hanging material is not evidence that a physical equilibrium solver produced it.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### FormFinding_Relaxation
+
+Use a short connected chain with stated anchors and rest lengths. Correct neighbouring distance errors while respecting pinned endpoints and guarding zero separation, then compare correction counts with disturbance disabled. The runner and line renderer are supplied. Carry a small constrained network and explain why its result depends on correction order and budget, preparing a later distinction between an authored solver and supplied cloth physics.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### FormFinding_Equilibrium
+
+Calculate two arm lengths within a chosen span so the modelled mass-distance products agree. Change one mass, predict which side must move nearer the pivot and check the products before viewing the mobile. Disc masses and geometry are supplied. Carry a conditional balance calculation, explicitly omitting rod and wire mass; a static equality does not demonstrate dynamic stability.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### FormFinding_Annealing
+
+Return to an objective and bounded candidate step. Keep improvements, but compare a zero-to-one random draw with the supplied uphill probability for worse candidates. Retain current and best-so-far states separately and compare cooling schedules. Landscapes and controls are supplied. Carry an inspectable acceptance rule; introduce this bounded draw here while reserving generator state and sampling laws for Randomness.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### FormFinding_Forge
+
+Write an acceptance predicate using supplied height and movement measurements, accumulating duration only while the low-movement condition holds. Construct a still but too-short counterexample and predict its rejection. Contacts and measurements remain supplied. Carry a success criterion with a reset rule, distinguishing satisfying it from merely stopping an optimizer or watching the forge's clock-driven display.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Wavefunctions: What Returns
+
+Read periodic change in position, time and coupled state.
+
+Sequence demonstration: Predict amplitude, period and phase changes; combine two known signals and explain the sampling limits.
+
+### WaveFunctions_Intro
+
+Return to restoring motion through a pendulum. Compare releases at one angle with different angular velocities, following how the supplied restoring acceleration changes the next velocity and angle. Project the supplied hand velocity only where its direction is declared. Bob, constraint and input are supplied. Carry an angular state update and predict another release, rather than substituting a prescribed sine for the responding motion.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_Pendulum
+
+Extend the earlier trace record to include position and time as named fields. Sample a supplied pendulum, then bound history by count and age; compare coarse sampling with intervals related to its period. Predict which motion a sparse record can hide. Carry a recorder with explicit timing and deletion rules, while distinguishing its retained data from the drawing that presents them.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_Sine_Space
+
+Sample a product of spatial sine functions at a small grid of addresses and join neighbouring samples with the familiar triangles. Change one frequency or height parameter and predict the relief before releasing a supplied sphere over it. Collision construction is supplied and separate. Carry a static height-field recipe; this is a spatial function, not yet a simulation propagating waves through time.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_Unit_Circle
+
+Now open the circle sampler borrowed earlier. Write a position function from centre, radius and angle using cosine and sine; predict all four quarter turns and compare the graph receiver with the circle. Angle controls and reference display are supplied. Carry an understood sampler with radians and coordinate axes declared, closing the earlier bounded uses of sine without pretending they taught the whole construction.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_3D_Wave_Propagation
+
+Place a short row of restoring oscillators beside independent ones. Read old neighbouring displacements, calculate next states separately and apply one impulse; predict which addresses can respond on the next step. The timestep runner and display are supplied. Carry a local coupling rule with old/next storage, providing the first explicit synchronous-update pattern for later cellular automata.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_Effect_Sound
+
+Evaluate a carrier sine with another sine inside its phase. Retain a reference, change modulation depth and compare sampled values before listening through the supplied audio encoder and envelope. Predict a value at a selected time. Carry a phase-modulated signal with explicit time units and amplitude handling, without making playback infrastructure or spectral analysis another requirement.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Wavefunctions_Bernini
+
+Return to circular sampling and connected faces to build a short stack of rings, giving successive rings different angles. Stop any whole-object animation and inspect the twist that remains in the mesh. Reference column and lighting are supplied. Carry a shaft generator that separates geometric construction from motion; create a second pitch and explain which positions changed while connectivity stayed fixed.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_John_Cage
+
+Select a short event list from an explicit sound vocabulary using a bounded random draw. Keep the list, replay it and compare replay with generating a new performance. Sound construction and playback are supplied. Carry an inspectable chance score with event times and choices separated; the later Randomness sequence examines why the same seed also needs the same request order.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_AirMusic
+
+Give each sounding voice a start time and calculate its age and decaying response. Compare restriking one voice with adding a second independent voice, then sum their current contributions through supplied playback. Strike events and bar bodies are supplied. Carry explicit per-voice state and predict overlap; this is a bounded introduction to start, update and expiry, not a complete particle or audio engine.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Wavefunctions_Sky_Stairs
+
+Use circular positions with uniform rise to place a short tread segment. Predict centre-to-centre spacing, then compare the inner and outer edges where usable space differs. Tread and collision components are supplied. Carry a route recipe with separate geometry and support decisions; a regular mathematical centreline does not guarantee equal footing everywhere on its built width.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_TrigWalkingPath
+
+Sample two close frequencies at shared times and add their signed values. Predict a point where they reinforce or cancel, then compare the slow envelope with the individual signals. Drawing and frequency controls are supplied. Carry the raw sum alongside any display gain, so a normalized picture cannot silently change the quantity the learner believes they calculated.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### WaveFunctions_Synthesis_Lab
+
+Store a finite list of harmonic coefficients and loop over contributions at one shared time. Predict one term before changing the sum, then retain an alternate recipe for comparison. Sliders and plotting are supplied. Carry a finite signal description and explain which phases or shapes its permitted coefficients cannot express; the separate room-memory apparatus remains an encounter, not a claim of unlimited synthesis.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Randomness: What Can Chance Change?
+
+Make chance reproducible and examine distributions and consequences.
+
+Sequence demonstration: Replay a saved recipe; change draw order and compare distributions without claiming identical outcomes across engines.
+
+### Random_Definition
+
+Reset a local generator and use its ordered draws to colour an addressed collection. Predict the effect of moving the reset, consuming one extra draw or exchanging channel assignments, then compare replay. Generator internals and display are supplied. Carry seed, request order and assignment procedure together; a seed alone is not the complete recipe for a reproducible result.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Entropy
+
+Retain a symbol sequence, count its categories and compare the original arrangement with a sorted version containing the same counts. Use the supplied entropy calculation and predict whether its result changes. Carry the original record beside the summary; a count-based uncertainty measure leaves order out and cannot stand for every sense of difference or disorder in the reflective text.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Remove
+
+Build the eligible candidate list before drawing a member. Compare replacement with removing the chosen entry, and predict how the next eligible set changes. Board and hopper animation are supplied. Carry remaining candidates and a declared replacement policy; keep the list's shifting indices distinct from fixed spatial addresses, and explicitly handle an empty eligible set.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Randomness_10_PRINT_Algorithm
+
+At each grid address, choose between two diagonal marks using a declared threshold. Predict the effect of changing that threshold while keeping dimensions and drawing fixed, then replay with the same draw procedure. Screens are supplied. Carry an addressed binary-mark generator; an apparently connected image does not establish that the algorithm checked a traversable route.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Cubes
+
+Accept each supplied die-landing event once and append its outcome to a retained chain. Add to the total and continue only after a six, with an explicit cap and completion state. Predict a short known outcome sequence before using physical rolls. Die physics and event delivery are supplied. Carry separate outcomes, summary and termination policy; capped continuation must not be reported as natural completion.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Rotate_Random_XYZ
+
+Compare assigning a newly drawn angle with adding a sampled increment to an existing angle. Keep update cadence explicit and predict what reset must restore in each case. Stack display and controls are supplied. Carry a retained orientation and its update rule, distinguishing repeated independent states from a history-dependent turn before applying the same distinction to walking.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Walk
+
+Add a sampled displacement to retained position, then apply a declared boundary policy before recording the accepted endpoint. Predict a short known sequence of steps and inspect what its connecting line claims at a wrap or rejection. Timing and drawing are supplied. Carry proposal, accepted state and history separately; the record describes motion but does not itself choose the next step.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Gaussian
+
+Retain numerical samples from a declared supplied distribution and bin them for display. Change bin width without drawing again, then compare clipping and display-range choices. Predict where a boundary value is counted. Carry a rebinning procedure and the untouched samples; a histogram's shape depends on both the source and the reader that groups it.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Mushrooms
+
+Describe a small population with separate template, position and scale fields. Change one assignment while preserving other fields and the generator's draw consumption, then predict which specimens should differ. Builders and wardrobe interfaces are supplied. Carry a reproducible population record; a changed random call schedule must not masquerade as the isolated effect of one parameter.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Space_Geometry
+
+Sample independent draws and a supplied coherent field at matching coordinates. Compare adjacent differences before changing the spacing between those coordinates, predicting which comparison conditions remain fixed. The bench and field evaluator are supplied. Carry a matched profile experiment with a stated sample spacing, preparing Noise without treating independent variation and spatially related values as interchangeable.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Randomness_Examples_of_Randomness
+
+Sample uniformly inside a square, test each point against the inscribed circle and retain hit and sample counts. Predict the estimate from a small known sample, then compare longer runs. Plotting is supplied. Carry a sample-test-count estimator and its assumptions; more samples improve the method's statistical footing without guaranteeing that every next estimate is closer.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Pheromone
+
+Give a walker an addressed signal field. Deposit and decay values, then let neighbouring readings influence its next step; compare a retained trail with one reset at the same moment. Terrain and timing are supplied. Carry a feedback loop in which movement changes later guidance, keeping signal strength distinct from the terrain height used to display it.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Space
+
+Evaluate a supplied base field at several coordinate scales and retain each weighted contribution before summing. Predict one layer's effect, then remove or reorder the same contributions while keeping addresses fixed. Mixer display is supplied. Carry a finite field recipe whose components can be inspected separately, preparing later shader versions without concealing a whole noise implementation inside the example.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Random_Game
+
+Draw a duration once and store its deadline within a known event sequence. Compare a retained wait with drawing again on every update, and predict what information exists before the next draw. Crossing and collision timing are supplied. Carry an explicit event schedule, separating uncertain future choices from already determined but not yet completed waits.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Noise: Fields and Possible Bodies
+
+Sample related values and distinguish the field from its display.
+
+Sequence demonstration: Hold sample positions fixed while changing a generator setting; compare neighbour differences and preserve original values.
+
+### Random_Noise_Types
+
+Propose a position and compare it with accepted points before admission. Reject candidates inside the chosen separation and stop at a declared attempt budget; predict a deliberately crowded case. Slab display and counters are supplied. Carry a bounded placement sampler that reports accepted points, rejected proposals and unfilled requests separately, rather than promising every desired population can fit.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_Columns
+
+Send held, periodic and field-derived scalar values through the same column recipe. Hold the receiver fixed while changing the driver, then send a familiar sine to brightness instead of shape. The builder and local clock are supplied. Predict which property changes and carry the driver/receiver distinction into the sequence; a lively surface does not identify the mechanism that produced it.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_One
+
+Retain one signed field sample and give it two explicit readers: a position offset and a remapped colour. Predict minimum, zero and maximum inputs, then compare clipping with a mapping that uses the full declared range. Noise evaluation and reference mesh are supplied. Carry reusable mappings and an unchanged input witness, so disagreement between displays can be located in their receivers.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_Voxel
+
+Sample a supplied field into a small binary volume using a declared threshold and height bias. Predict a few occupied addresses before viewing the cells, then compare a visual section cut with changing the stored occupancy. Rendering and collision are supplied. Carry a volume that can be inspected independently of its display, preparing later surface extraction without teaching it prematurely.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_6_Wall
+
+Reuse the earlier shader host to map a supplied signed field value to colour. Change the mapping and predict selected sample colours while room geometry remains fixed. Cloud evaluation and collision are supplied. Carry a colour rule separate from support and shape; this lesson depends on first establishing the currently unwritten studio shader introduction, rather than assuming shader literacy from the exhibit alone.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_Inside_Noise
+
+Construct a new sampling address q from the original p and a supplied field-derived offset, then evaluate the same field at q. Compare this with displacing the resulting object after sampling. Predict a zero-offset case and retain address witnesses. Evaluation and displays are supplied. Carry a domain-warp function whose changed input remains distinguishable from its final appearance or geometry.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_Space_10
+
+Choose a line through the supplied terrain and sample its height profile. Compare this section with the recorded passage of one particular body, stating the height query, coordinate frame and collision assumptions. Terrain and player tracking are supplied. Carry a section tool and a specific passage question; a smooth-looking image does not establish what that body can cross.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Noise_Perlin_Simplex
+
+Evaluate two supplied generators at the same addresses and retain their settings alongside the differences. Change one setting, predict which comparison condition no longer agrees and inspect the paired outputs. Generator internals and displays are supplied. Carry a reproducible comparison procedure; the names of two noise families do not by themselves make differently configured outputs a controlled experiment.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Lab_Path
+
+Choose one Noise encounter and describe it twice: as a bodily passage and as changes to addresses, values and receivers. Identify one uncertain connection between those accounts, then propose a return experiment with one controlled change. The corridor and sphere are supplied. Carry a concrete question into Shaders; this reflective pause consolidates the vocabulary without requiring another constructed system.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Shaders: What a Surface Answers To
+
+Run a small spatial rule for every fragment.
+
+Sequence demonstration: Write a distance mask, repeat its coordinates, then specify the previous-state input needed to turn a recomputed image into a retained simulation. Do not claim the current display supplies working feedback.
+
+### Shader_01_Shaping
+
+Return to distance from a centre, now evaluated for each shader sample. Make a circular mask and vary centre, radius and bounded edge transition independently; predict a sample inside, outside and on the transition. The material binding and UV display are supplied. Carry a small mask function. Re-establish fragment inputs and outputs explicitly, because several earlier shader lessons are still missing rather than completed prerequisites.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+### Shader_05_Patterns
+
+Transform the retained asymmetric mask, repeat it over a 4×4 coordinate grid and use the integer tile address to select one variation. Predict a particular tile before expanding the display. The panel and parameter host are supplied. Carry mask, coordinate transformation and selection rule separately, linking the shader to earlier tiling while leaving the garden's world projection and blending outside the required example.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Shader_11_QueerRubber
+
+Use supplied same-frame normal and view vectors to add a rim through their alignment. Predict the effect of viewpoint, then compare the same material on a sphere and cube while keeping the rule fixed. Body and lamp setup are supplied. Carry a material function with its coordinate assumptions visible; a silhouette effect depends on its receiver and view, not only on a colour value.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+### Shader_09_FBM
+
+Combine a bounded number of supplied field samples at different scales and weights. Use the sum to disturb the retained mask's boundary, predicting the zero-amplitude case and the effect of another layer. Material host and base field are supplied. Carry a finite field function used by a mask; this reduced fragment study does not move the mesh or inherit the museum basin's separate displacement and support.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+### Shader_12_PinkExtravaganza
+
+Select a few known operations—mask, repetition, rim and field—and compose one material on a supplied body. Retain an alternate recipe, change one operation and explain the resulting difference from a second viewpoint. Lamps and any vertex deformation remain supplied. Carry an authored material with an inspectable construction; the synthesis should demonstrate choice and restraint rather than require every available effect.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Shader_10_ReactionDiffusion
+
+Trace the inputs of the existing recomputed image and ask what a persistent changed mark would need to read on the next update. Specify old-state storage, next-state output and a swap, contrasting these with a function of current coordinates and time. Panels and texture reading are supplied. Carry a previous-state contract into CA; the hall title alone does not prove a reaction-diffusion simulation is implemented.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+## Cellular Automata: Local Rules, Global Patterns
+
+Give a local rule a stored state and a generation boundary.
+
+Sequence demonstration: Update a tiny known state by hand, then match it in code; reverse traversal order and preserve the result.
+
+### CA_Introduction
+
+Build a small row update that reads three old cells and writes a separate next row. Choose an explicit boundary rule, predict a short generation by hand and swap buffers only after every address is processed. Display and controls are supplied. Carry the synchronous row engine and separate history storage; demonstrate that reversing traversal does not change a generation when all reads use the same old state.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_ElementaryRules
+
+Use the inspected empty/active/fading states rather than infer binary elementary rules from this hall's name. Write the transition table from a supplied 26-neighbour count and predict a few cases, distinguishing participating cells from a visible shell. Volume drawing is supplied. Carry a three-state transition function with explicit neighbourhood and participation rules, keeping classification labels subordinate to the actual operation.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_GameOfLife
+
+Return to the inspected Rule 30 row engine and copy each completed row into a separate history. Map generation and site indices to a drawing and supplied occupied pieces; change an old display without altering the current generation. Carry independently retained history and two receivers. The title is misleading here: do not teach Conway's Life until the following hall's actual binary B3/S23 operation.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_BeyondBinary
+
+Despite the hall name, the selected operation is binary B3/S23. Write its next-state decision from current state and a supplied eight-neighbour count, predict survival, birth and death cases, then connect one cell to a named lamp. Drawing and lamp construction are supplied. Carry a tested transition and output binding, distinguishing the rule's state from the appearance used to show it.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_ExpandingSpace
+
+Map a supplied visitor position to bounded cell-health changes and combine this with a neighbour recovery rule. Compare shared-old-state updates with in-place scanning on one small example and predict where order matters. Bridge drawing and collision thresholds are supplied. Carry an input-update-output pattern, keeping a displayed health value separate from the threshold that provides physical support.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_SoftRules
+
+Extend discrete cells to two concentration fields. Sum neighbour differences and combine them with a named supplied local reaction function, reading old fields and writing next fields separately. Predict a uniform-field diffusion result before adding a disturbance. Display and seeding input are supplied. Carry a two-field update; derive the local reaction terms later rather than pretending this wrapper already explains them.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_AgentsCircuits
+
+Explain one Rule 90 update from its old neighbours and compare it with one supplied recursive-copy construction. Change the seed and record which visual resemblances remain, rather than identifying mechanisms by their shared silhouette. Explorer and pyramid are supplied. Carry a precise question about what repeats and what each step reads, preparing recursion through an explicit comparison rather than a hidden prerequisite.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### CA_EdgeOfChaos
+
+Copy one beginning, alter a single address and run both states under the same update and forcing schedule. Record both the size and spatial spread of their difference while keeping display gain declared. Solver and slices are supplied. Carry a paired-state experiment; a visually dramatic divergence is evidence about this run, not by itself a general classification of the system as chaotic.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Fractals: Rules, Scale and Room to Move
+
+Describe repeated construction with a stopping rule.
+
+Sequence demonstration: Predict growth at a small depth and impose a node budget; distinguish recursion depth from physical size.
+
+### Fractal_Recursion
+
+Make one square, then let the constructor call itself with reduced size and depth. Trace one call before running the full result, and check both stopping conditions and work count. Line drawing is supplied. Carry a bounded recursive constructor; compare a branching version only after predicting how its call count grows, so an elegant rule does not conceal an uncontrolled workload.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Fractal_RecursiveTrees
+
+Create two child segments from a parent's endpoint, direction and length. Reuse the bounded recursive call and vary inherited length separately from the number of children; predict the next generation before rendering. Segment display and canopy collision are supplied. Carry explicit parent-to-child records and stopping conditions, giving later grammars a known geometric interpretation to separate from symbolic replacement.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Fractal_CantorSet
+
+Represent intervals in a list and build a new list containing each interval's first and last thirds. Retain previous rows separately and predict both interval count and kept length after another bounded step. Drawing is supplied. Carry a replacement rule and its removed complement; increasing the number of pieces and decreasing retained measure are compatible results, not a paradox created by the picture.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Fractal_KochSierpinski
+
+Replace one segment with the equilateral Koch construction using its endpoints, direction and length. Apply the operation into a new list and predict endpoint preservation and the changed total path length. Renderer and comparison triangle are supplied. Carry a geometric replacement function whose straight displacement and travelled boundary length remain distinct, without requiring all displayed fractals in the same lesson.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Fractal_MengerSponge
+
+Select twenty addresses from a 3×3×3 block and apply the subdivision to a bounded number of levels. Predict retained count and outer bounds before rendering another level; state the work budget. Blocks, collision and flight are supplied. Carry a finite volume-subdivision rule, distinguishing an increasingly detailed approximation from an infinite mathematical object or guaranteed traversable interior.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Fractal_GoldenSpiral
+
+Build a finite Fibonacci list from two starting values. Feed the same values into two named height mappings and compare both against an unchanged fixed-unit addition witness. Predict the next number before either display. Tower and logarithm implementation are supplied. Carry a recurrence and separate display readers; a numerical relationship does not establish a universal rule of beauty.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Fractal_Synthesis
+
+Choose one known construction and state its inputs, descendants, placement and stopping rule clearly enough to predict the next step. Change one of these while keeping the others fixed and compare retained history with current state. Reference displays are supplied. Carry a reconstructable recipe into L-systems; this consolidation asks the learner to explain their own operation rather than acquire another fractal by copying.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## L-Systems: Rules Grow Structure
+
+Separate rewriting a description from interpreting it.
+
+Sequence demonstration: Rewrite a short word in parallel; copy/restore turtle state at a branch and inspect the resulting connections.
+
+### LSystems_Grammar_Lab
+
+Separate a sentence from the geometry that interprets it. Read an old string, append each symbol's replacement into a new string and pass the result to a supplied turtle. Predict one rewrite, then interpret the same result under two turn angles. Carry an explicit production table and command vocabulary, distinguishing changes to the sentence from changes to its reader.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### LSystems_Growth
+
+Add bracket handlers to the supplied draw and turn commands. Push independent copies of position, orientation and length, then restore them when a branch closes; predict where drawing resumes after a nested branch. Rendering is supplied. Carry a stack of turtle-state records and define the response to an unmatched bracket, rather than hiding a state-management dependency inside an elaborate plant.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### LSystems_Grammars_And_Curves
+
+Retain one sentence and compare reflected readings, then follow its position path into a supplied tube construction. Change ring resolution while holding path and radius fixed, predicting which vertices change. Synchronized readers and tube receiver are supplied. Carry an explicit path-to-surface mapping; crossing skins and joined ports need different connection records even when their images appear similar.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### LSystems_Architecture
+
+Turn a short orthogonal centreline into a footprint with declared width and open ends. Predict clearance at one turn before using the supplied wall, junction and collision builder. Carry the path and footprint separately so another width can be tested without erasing the original. A branch drawing supplies architectural possibilities, but passage still depends on the resulting boundary and a particular body's dimensions.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### LSystems_Competition
+
+Keep a grammar fixed and trace resource state before two growth requests. Reverse their processing order from the same beginning and predict which request can proceed. The forest kernel and soil display are supplied. Carry a two-request schedule and resource record, distinguishing sequential competition from the shared-old-state updates already learned in CA.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### LSystems_Living
+
+Convert a short design record into bounded generation, angle and fork settings, then retain the exact record used for a planted specimen. Predict what one changed field can affect and rebuild from the retained version. Tree builder and planting interface are supplied. Carry a reproducible design description; the range of available parameters defines its reachable variation rather than granting unrestricted growth.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### LSystems_Shape_Grammars
+
+Return to indexed faces and specify a short sequence of named inset and extrusion operations. Predict which connections an operation changes before applying the supplied builders, and retain the input recipe separately from the resulting mesh. Carry a face-operation description with declared indices and builder contracts; this missing lesson must establish its actual editable host before prose promises a general shape grammar system.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+### Assemblage_Same_Desire
+
+Keep one binary decision sheet and interpret it as diagonals, bars and blocks. Predict what remains identical across these readings and identify an apparent path that the generator never checked. Displays and floor are supplied. Carry a comparison between decision data and interpretation, consolidating the grammar distinction before procedural generation gives generated bodies explicit scores and constraints.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Procedural Generation: Rules Build Worlds
+
+Keep the representation, evaluator and construction rule visible.
+
+Sequence demonstration: Change a fitness criterion or growth condition and explain which candidates or connections it excludes.
+
+### PG_Genetic_Evolution
+
+Use a retained population of design records and write a declared score for each candidate without rebuilding it during ranking. Predict the order for a small known population and identify features the score ignores. Primitive construction and reproduction are supplied. Carry evaluator and candidates separately; selection expresses a chosen criterion, not a general verdict on a form's value.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PG_Space_Colonization
+
+For one eligible growth site, normalize directions toward its supplied assigned attraction points, sum them and create one fixed-length child. Predict symmetric cancellation and name what happens when no direction remains. Assignment and drawing are supplied. Carry a direction accumulator with an explicit eligibility policy; this branching rule should not be relabelled diffusion-limited aggregation merely because both can look organic.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PG_Branching_Growth
+
+Search eligible targets, retain the chosen index and add one fixed-length child with parent and target recorded. Compare the number of records with the number of distinct positions, including a deliberately repeated location. Attraction layout and timing are supplied. Carry a selection-and-growth history, exposing what a nearest-target decision changes relative to the previous accumulated-direction rule.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PG_Percolation_Network
+
+Retain an occupied volume and propagate a separate flow state through six face neighbours, reading old flow and writing next flow. Predict one step and a blocked case before playback. Cubes and stepping controls are supplied. Carry local reachability over an unchanged lattice; a diagonal visual contact is not a face connection, and a connected centre record is not yet a passage wide enough for a body.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PG_Caves_Mazes
+
+Use retained carving centres to clear a declared footprint and headroom from a volume. Predict one cross-section and repeat with another clearance while preserving the original centre record. Cave drawing and collision are supplied. Carry a path-to-empty-volume operation; the maze demonstration remains context, and connected carving centres must still be checked for adequate width and a return route.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PG_Sculpted_Forms
+
+Convert supplied body centres into the construction's local frame, mark a declared neighbourhood of cells and submit exposed faces to a supplied mesh assembler. Predict which addresses one moved body affects. Carry a centre-to-occupancy-to-surface pipeline with an explicit approximation scale, distinguishing body geometry from the cell neighbourhood chosen to represent it.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PG_Mirrored_Patterns
+
+Read a retained array into a separate reflected result, checking the centre row and column rather than assuming every address has a distinct partner. Predict a small asymmetric example and verify the original remains unchanged. Field and network displays are supplied. Carry a reflection operation with a witness input; repeated image values do not by themselves create new network connections.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Soft Bodies & Morphogenesis: Matter That Finds Its Shape
+
+Distinguish a deformable state from the constraints applied to it.
+
+Sequence demonstration: Hold material and load fixed while changing pinned boundaries; explain solver response versus an authored animation.
+
+### SoftBodies_Soft_Body_Deformation
+
+Connect a supplied subdivided mesh to the Godot soft-body solver, retain its reference and pin one explicitly selected point. Predict which boundary should remain fixed while changing one response coefficient. Mesh generation and hand-contact rig are supplied. Carry a bounded solver setup and attachment; the learner controls conditions here rather than silently inheriting authorship of the engine's simulation.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SoftBodies_Cloth_Physics
+
+Compare pinning an upper row with pinning only corners, then change one load-array value on a supplied four-anchor membrane while keeping compliance fixed. Predict the affected region before running each comparison. Cloth construction and solver are supplied. Carry a controlled pin/load study and one authored load setting, using earlier constraint knowledge without requiring a second complete solver.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SoftBodies_Carusell
+
+Write a rate-based rotation for a driven anchor while its supplied hanging body retains simulation state. Stop or reverse the driver and predict why the body need not stop or reverse immediately. Hub, hinges and solver are supplied. Carry a driver rule and a separate response record, returning to the distinction between a command and motion already acquired.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SoftBodies_Obsticals
+
+Map a periodic scalar to pressure in a supplied soft body. Hold the signal's phase and compare that intervention with freezing the responding vertices; predict which state can continue changing. Wall mesh and solver are supplied. Carry a signal-to-pressure mapping with separate driver and receiver state, rather than describing every periodic deformation as direct sine displacement.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SoftBodies_Obsticals_Part2
+
+Define two body-contact cases by their full settings and select one intended difference. Reset, replay and record a chosen observable result while keeping other settings fixed. Gallery bodies and solver are supplied. Carry a comparison protocol that distinguishes a reproducible construction seed from guaranteed physical replay; the learner should report variation rather than conceal it behind a single attractive capture.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SoftBodies_Playground_of_Joy
+
+Copy the supplied solver's current vertex positions into a static mesh while retaining its face connectivity. Predict what a later solver step changes and verify that the snapshot does not follow it. Vertex access and mesh assembly are supplied. Carry a process-to-object snapshot with its sampling moment stated; one captured shape cannot reconstruct the motion and forces that preceded it.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SoftBodies_Affect_Theory_Visualization
+
+Choose two supplied forms and name the cues that make them appear alive. Hold a construction seed, vary one cue and compare the result without attributing an unimplemented biological mechanism. Geometry and effects are supplied. Carry a precise appearance question and a controlled variation; this reflective lesson evaluates interpretation rather than adding another solver under the same visual vocabulary.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ProceduralGeneration_Reaction_Diffusion_Systems
+
+Return to CA's two concentration fields and now write the local Gray–Scott reaction, feed and removal terms that were previously supplied. Combine them with known neighbour differences using old/next arrays. Predict a simple local case, then compare equal-step runs. Display and initial field are supplied. Carry the complete small update with explicit boundary and timestep settings, closing the earlier intentionally borrowed function.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Topology_Entropy_Morphogenesis
+
+Trace the master control into frequency, noise amplitude and extraction level. Vary each contribution separately before recombining them and predict which intervention changes sampled values versus the selected boundary. Field generation and surface extraction are supplied. Carry a named multi-parameter recipe; its title and changing appearance do not establish a general theory of entropy or morphogenesis.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Isosurfaces: Implicit to Explicit
+
+Turn sampled scalar values into a chosen boundary.
+
+Sequence demonstration: Classify one cell, interpolate one crossing, then vary level without mutating samples.
+
+### ISO_Introduction
+
+Reuse values sampled at volume addresses and compare the surface extracted at two levels. Then hold field, level and domain fixed while changing sample spacing, predicting which comparison is about classification and which is about resolution. Extractor and collider builder are supplied. Carry a controlled level/sampling study, keeping field, visible mesh and collision as distinct representations.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_LookupTable
+
+Calculate one crossing along an edge from endpoint values and a declared level. Compare pairs that keep the same inside/outside classification while moving the interpolated crossing. Corner cage and case table are supplied. Carry a tested interpolation with explicit corner order and degenerate-case handling; looking up topology and locating the surface along an edge are different parts of extraction.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_ShapesGallery
+
+Read a supplied cup field as joined and removed regions, introducing those set operations as a bounded preview before the later Boolean sequence. Keep the extractor fixed, change one field input or level and predict the retained region. Primitive field functions are supplied. Carry a readable field composition, with sign convention explicit and appearance separated from actual passage.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_TorusGyroid
+
+Change the coordinate multiplier in a supplied periodic field while retaining domain, level and sampling. Predict the changed spatial period and compare held surfaces; inspect what a straight capsule probe actually tests. Extraction and probe are supplied. Carry a frequency choice with sampling and clearance limits, without treating one successful straight probe as a proof of general navigability.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_Sculpting
+
+Compare ADD then ERASE with ERASE then ADD at the same location. Retain an earlier boundary and predict whether reversing order restores it, stating how the brush operations combine values. Input, brush field and extraction are supplied. Carry an ordered operation account; an operation history or current surface must not be presented as a complete reversible record unless that reconstruction is implemented.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_FlatTerrain
+
+Keep a height recipe fixed while altering an interior field contribution. Count boundary crossings along one marked vertical column and predict when a single upper height can no longer describe the result. Sampling and extraction are supplied. Carry separate upper profile and interior descriptions, then ask whether an entrance connects that interior to an accessible route.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_PortalLandscape
+
+Add one located contribution to the retained terrain field. Predict its region of influence before extracting the changed boundary and compare with a held original. Masks and extraction are supplied. Carry a terrain expression with named contributions and unchanged witnesses, reusing layered-field composition while keeping the sampled function separate from its geometric receiver.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_Caves
+
+Compare a ring opening with its height relative to the ground, then inspect the enclosing cave along a route that permits return. State the chosen body's dimensions and identify a blocked or uncertain entrance. Terrain and player are supplied. Carry an explicit entrance condition; a connected mathematical region and an opening that appears in the mesh do not automatically establish bodily access.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_CaveGeneration
+
+Compare two cave fields with one coordinate scale changed while other recipe and sampling settings remain fixed. Predict the spatial consequence and distinguish the extracted field from the neighbouring ring-built tunnel. Noise evaluation and displays are supplied. Carry a reproducible field recipe and construction distinction; resemblance between two tunnels does not imply that their generators offer the same editable operations.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_AnimatedNoise
+
+Record occupied or empty state at one fixed address while a supplied noise offset changes over time. Predict the result of stopping the offset and compare the local record with apparent surface travel. Sampling and drawing are supplied. Carry a short address-bound history; a moving image need not mean that the same material points moved through those positions.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_Metaballs
+
+Store located sources and sum their supplied falloff contributions at one sample position. Predict that value before changing source arrangement, then compare moving a source with changing its reach. Extraction is supplied. Carry a source list and accumulation loop that can define another field, keeping combined values distinct from the chosen level that turns them into a boundary.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_ImplicitModeling
+
+Compose one small field and send it to supplied mesh and raymarch views. Predict a region both should classify alike, then check collision through its separate builder. Carry one position-to-value description with three named receivers and their limits; agreeing pictures do not certify that a body meets the same boundary or that both renderers use identical approximation budgets.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ISO_RhizomeBody
+
+Walk the supplied chambers and sketch encountered junctions, alternatives and returns. Predict how narrowing a passage might preserve a graph edge while preventing a particular body from passing, and mark untested connections honestly. Generation and extraction are supplied. Carry a route sketch with access conditions; this missing tutorial can consolidate field and body distinctions without promising an unbuilt general navigation algorithm.
+
+Plan: draft; tutorial: missing; behaviour contract: still needed; native evidence: not linked here.
+
+## Boolean Surfaces: CSG as Composition
+
+Compose solids with ordered set operations.
+
+Sequence demonstration: Swap A−B and B−A; compare with union/intersection and test passage separately from appearance.
+
+### Boolean_Verbs
+
+Compare union, intersection and subtraction using explicitly named operands. Predict an empty intersection and reverse subtraction, distinguishing the operation from the different operand arrangements displayed in the museum. CSG construction and collision comparison are supplied. Carry a two-operand vocabulary that deepens the preview from implicit fields, with a small independently chosen example for each retained-region rule.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### Boolean_Gallery
+
+Arrange a short list of configurations from one Boolean family. Keep operation and operand identity explicit while changing one geometric parameter, and predict the next form before constructing the ordered display. Factory and stands are supplied. Carry a legible parameter sequence, separating its geometry from the rhetorical effect of showing selected results in a particular order.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Boolean_Works
+
+Translate one shared cutter through a wall, then test the resulting entrance and sightline. Hold cavity geometry fixed while comparing black and chalk materials, predicting which change can affect collision. Wall construction and player are supplied. Carry a cut and appearance choice with different consequences; the reflective encounter with casting and absence need not be confused with a claim that every facade uses Boolean operations.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Swarm Intelligence: Where Coordination Lives
+
+Give many agents local decisions and shared consequences.
+
+Sequence demonstration: Predict one agent update, then compare traversal orders and neighbourhoods in a small population.
+
+### SwarmIntelligence_PhysarumColony
+
+Return to walker-to-field feedback and compare three trail samples to choose a turn for a small population. Deposit, decay and compare two decay settings from the same beginning, predicting one agent's next choice. Diffusion and rendering are supplied. Carry a local sensing rule and shared environmental memory; the organism reference does not make this reduced model a biological reconstruction.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SwarmIntelligence_FlowFields
+
+Write a direction at each addressed field location and trace how a supplied agent samples it to update velocity. Predict the effect of changing one region before observing the population. Integrator and display are supplied. Carry a field with a declared sampling interface, contrasting guidance supplied by the environment with the trail that agents changed in the previous hall.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SwarmIntelligence_Boids_Algorithm
+
+Start with one agent: compare desired and current velocity, then bound its steering. Read a small frozen neighbourhood to calculate separation, mean velocity and mean position; write next states separately. Predict a zero-neighbour case and vary one weight. Runner and drawing are supplied. Carry three readable steering rules and verify traversal independence before scaling up; a larger flock should reuse understood updates.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SwarmIntelligence_Agent_Based_Modeling_ABM
+
+Give a foraging agent two explicit states, each choosing different sensing and deposition behaviour. Predict a transition and compare replacing agents with clearing their shared trail. Movement and field display are supplied. Carry an agent-state record and transition rule while keeping environmental memory separate from individual lifetime, so a reset's visible effect can be attributed to the state actually removed.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SwarmIntelligence_Ant_Colony_Optimization
+
+Keep home and food traces in separate channels and switch which channel an agent reads and writes at a declared destination event. Predict an outward and a returning step before comparing the field. Detection and movement are supplied. Carry a two-channel foraging rule; the hall name does not by itself prove that this reduced example solves a global optimization problem.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SwarmIntelligence_Particle_Swarm_Optimization
+
+Store each candidate's best position together with its evaluated score. Combine inertia, personal-best and shared-best motion terms, then predict what must be reconsidered when the objective changes. Population and landscape display are supplied. Carry accountable best-state records and a declared objective, avoiding a remembered score detached from the function that gave it meaning.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SwarmIntelligence_Swarm_Intelligence_Algorithms
+
+Trace births, losses and supplied replenishment as separate events. Choose an apparent population recovery and explain only what its record supports, then predict how disabling one support would change that account. Simulation and event feed are supplied. Carry an event-based explanation into learning systems; persistence can be produced by external maintenance as well as by the behaviours attributed to agents.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Machine Learning: What Changes, and Why?
+
+Separate prediction, error and parameter updates.
+
+Sequence demonstration: Train on one declared sample set and evaluate on held-out cases; explain what the score cannot establish.
+
+### ML_Evolution
+
+Copy a short movement recipe with bounded mutations, evaluate candidates under one declared rule and select which records continue. Predict a small ranking and retain the recipe used in each trial. Creature and arena are supplied. Carry candidate, score and reproduction policy separately, returning to procedural selection while naming the capacities the chosen fitness measure does not reward.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Gradient_Landscape
+
+Fit a one-parameter predictor to retained observations. Separate prediction, loss and slope-based update; keep a few observations outside fitting and evaluate them without changing parameters. Predict a small descent step, then compare two loss choices from the same beginning. Data and drawing are supplied. Carry predictor, loss and update separately; this proposed study must replace the current bare landscape example before training or generalization is claimed.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Classification
+
+Assign a small point set to its nearest centres, recompute means and repeat, preserving an empty group's previous centre. Predict one assignment and one mean before running the loop. Point display is supplied. Carry an inspectable clustering procedure and empty-group policy; despite the hall name, this operation is not supervised label training or a substitute for a perceptron lesson.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Neural_Networks
+
+Trace a tiny forward network through retained weights and an explicit activation. Predict how changing one weight affects a later output and compare prediction with loss on the same sample. Drawing and any training-step calculation are supplied. Carry a forward model whose parameters are separate from outputs; do not claim that inspecting it also teaches backpropagation or a complete training procedure.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Perception
+
+Apply a fixed Sobel kernel to one image neighbourhood, then traverse the image and combine its two directional responses into edge strength. Predict a uniform patch and a simple boundary before comparing displays. Input and boundary handling are supplied. Carry a weighted neighbourhood operation and its omissions; detecting edges is a specified transformation rather than evidence that the program understands the scene.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Sequence_Memory
+
+Separate retained and admitted contributions in one small gated recurrence. Compare two token histories ending in the same final input and predict why their resulting states can differ. Token input and display are supplied. Carry a state update and diagnostic histories, making memory's dependence on both earlier state and gate values visible without requiring a complete language-model architecture.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Generative
+
+Generate a small candidate batch and evaluate it with the supplied inspectable fixed critic. Predict a comparison and identify what the critic rewards or ignores. Carry generator, candidates and criterion separately, then name which two parameter states a real adversarial update would change. This lesson must not label a fixed scoring display as trained adversarial learning; implementing that extension remains a separate decision.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### ML_Synthesis
+
+Retain each coordinate's contribution to a score, compare the total with a declared threshold and preserve a flagged case for inspection. Predict a changed threshold and explain the supplied zero-spread convention. Samples and drawing are supplied. Carry the case with its reference and scaling, treating a flag as a reason for inquiry rather than an unexplained verdict about the object.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Graph Theory: What Connections Permit
+
+Separate identity and connectivity from drawing positions.
+
+Sequence demonstration: Reconstruct a route from predecessors; test an unreachable target; move the layout without changing connectivity.
+
+### GT_Foundations
+
+Represent a small graph with stable vertex identities and explicit connections. Compare taking the oldest pending vertex with taking the newest while leaving those connections fixed, and predict the next visit in each traversal. Lamps and controls are supplied. Carry adjacency, pending work and visited state separately, giving the earlier informal network encounters an explicit graph vocabulary.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Layout
+
+Keep the relation record fixed while computing attraction along listed edges and repulsion between positions. Predict which terms act on one vertex and compare another starting arrangement. Repulsion details, integrator and rendering are supplied. Carry a layout process whose moving picture remains separate from graph identity; proximity in a drawing does not add an edge.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Pathfinding
+
+Extend the known traversal by storing the predecessor of each newly reached vertex. Reconstruct a route when the goal is found and return an explicit unreachable result otherwise. Availability input and traveller display are supplied. Predict both cases on a small graph. Carry a path with its search assumptions; do not call it cheapest unless the edge costs and chosen search justify that claim.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Network_Analysis
+
+Use fictional directed relations with named sources and destinations. Remove one relation, predict the affected incoming and outgoing counts, then move the display without editing the relation data. Curved lines and layout controls are supplied. Carry counts with their underlying records and provenance, so a visually prominent position cannot silently substitute for a measured network property.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Connectivity
+
+From one chosen start, find reachable vertices in the directed graph and in its reversal, then intersect the results. Predict a one-way link that fails mutual reachability. Drawing and the larger Tarjan implementation are supplied. Carry a strongly connected group found by an understandable small procedure, leaving route costs and bodily clearance outside what this relation alone establishes.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Spanning_Trees
+
+Sort a small weighted edge list and accept an edge only when its endpoints lie in separate groups. Predict a rejected cycle edge, then deliberately restore one when an alternate route becomes the objective. Display is supplied. Carry a selected connection set with cost and connectivity assumptions, explaining why the minimal tree and the more resilient arrangement answer different design questions.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Flow
+
+Calculate one admissible push limited by available excess and residual capacity, including the reverse adjustment that can undo earlier allocation. Trace a small rerouting example and predict the remaining capacity after each step. Network, height-selection rule and display are supplied. Carry a reversible local allocation; a visually full route is not enough to explain why further flow is impossible.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### GT_Matching
+
+Run greedy pairing on the same graph in two edge orders, predicting different outcomes. Replace one selected edge with two along an explicit alternating path and verify that no endpoint is paired twice. Display is supplied. Carry a concrete counterexample and one augmentation, distinguishing a locally acceptable choice from a maximum result without hiding the reasoning in a general solver.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+## Foundations Crisis: The Limits of Formalization
+
+Distinguish a finite computation, an assumption and a warranted claim.
+
+Sequence demonstration: State what a bounded experiment establishes and what it cannot prove; change an assumption explicitly.
+
+### Euclid_Parallel
+
+Return to a triangle and declare its construction rules and distance convention. Predict a measured angle relation within that construction, then separate the example from a general theorem about every possible triangle. Line display and measurements are supplied. Carry a geometry with stated assumptions, opening a critical examination of foundations without treating a rendered diagram as a proof.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### NonEuclidean_Spaces
+
+Give endpoints to supplied plane, sphere and disk path samplers. Compare model-aware corner angles using each model's declared conventions, predicting why screen angles alone can mislead. Geometry routines and display are supplied. Carry a controlled comparison between models; the same coordinate picture does not guarantee the same meaning of straightness, distance or angle.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Russell_Paradox
+
+Trace both membership cases of the self-membership question, then implement a bounded filter over an explicitly given finite domain. Predict which entries the filter keeps and identify why that construction does not authorize an unrestricted set of everything satisfying a description. Display is supplied. Carry a finite membership procedure and its scope, keeping the paradox distinct from a programming exception.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Godel_Incompleteness
+
+Inspect one finite proof candidate using a supplied small rule system, then compare candidate checking with a search that finds nothing within a declared bound. Predict what either result licenses the program to report. Checker and sentence display are supplied. Carry an honest stopped-search result; this exercise illustrates distinctions around proof without pretending that a finite search demonstrates the incompleteness theorems.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Escher_Impossible
+
+Record height changes around a complete staircase circuit and sum them. Predict whether the route can return to its initial height, then inspect the same construction from another viewpoint. Treads and moving marker are supplied. Carry a circuit account with viewpoint assumptions, distinguishing a persuasive projection from a consistent three-dimensional route.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Brouwer_Intuitionism
+
+Retain a chosen finite bit prefix and query it for a position witnessing a one. Predict the result before extending the prefix, and distinguish no witness yet from a claim about every possible continuation. Controls and beads are supplied. Carry a bounded constructive query and its evidence, giving a precise operation to reflect on without reducing intuitionism to one search routine.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Florensky_Paraconsistent
+
+Store OPEN and CLOSED reports with their separate sources. Apply a declared small consequence table and test whether an unrelated alarm has support, rather than allowing the contradiction to justify any conclusion. Door display is supplied. Carry situated reports and a bounded inference rule; keeping conflicting data and choosing a practical response remain separate operations.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### Crisis_Synthesis
+
+Write one short sentence and send it through supplied label, strip and wall displays. Change pace and scale while keeping its wording fixed, then explain how its apparent authority changes without acquiring new evidence. Carry the sentence and a question about its warrant into QFEP. This is a reflective composition using known tools, not a requirement to invent another foundational system.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## QFEP Laboratory: The Formula Made Interactive
+
+Inspect a proposed research model and its measurement choices.
+
+Sequence demonstration: Preserve inputs, vary one weight, compare a stated measure and record the interpretive limit.
+
+### QFEP_Introduction
+
+Calculate the workbench's proposed weighted expression and retain all four inputs beside its total. Find two arrangements with similar totals but different inputs, predicting what the summary conceals. Controls and display are supplied. Carry an inspectable calculation and unreduced record; successful arithmetic does not validate QFEP as an established law or authorize its terms to stand for everything their names suggest.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_F_Term
+
+Keep one bit sample fixed and change the constant predictor. Count mistakes, predict which predictor fares better on that sample and compare error with the supplied source-uncertainty calculation. Generator and display are supplied. Carry observations, predictor and error count separately, so prediction failure is not silently identified with entropy or a universal free-energy claim.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_E_Term
+
+Count leaves in a small choice tree, close one branch and retain a record of what was excluded. Predict the changed count before proposing an additional alternative. Fan display and equal-weight logarithm are supplied. Carry choices, closures and a declared probability assumption; a larger pictured fan alone does not establish greater freedom for a particular participant.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_Lambda_Spectrum
+
+Propose another lit route through the same surroundings. Predict where the recommendation directs attention and separately test what a body can reach. Geometry, light controls and player are supplied. Carry a route proposal with access conditions, distinguishing an authored weighting from its justification and a coloured invitation from an available passage.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_Phi_Term
+
+Retain two supplied readings and the interval between them. Calculate change and rate separately, then multiply the same change by opposite signed weights and predict both results. Display is supplied. Carry a calculation with interval, weight and receiver named; changing the interpretation or preference attached to a quantity is not the same operation as changing the observations.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_Edge_Of_Chaos
+
+Run the supplied Gray–Scott update from one retained initial field using two step sizes and stop at equal simulated time. Choose a feature to compare before viewing the results. Solver and displays are supplied. Carry a numerical comparison with its conditions intact; a timestep-sensitive picture requires investigation and is not automatically evidence of a meaningful edge-of-chaos regime.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_Sandbox
+
+Move a disconnected handle and compare its displayed value with the value the receiver actually uses. Reconnect the declared path, predict the delivered change and test it. Input, indicator and light body are supplied. Carry an account of one working connection; a responsive interface and a changed downstream process are different claims until that connection is demonstrated.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### QFEP_Synthesis
+
+Hold a pressure pulse steady and compare one region of a supplied soft body through time. Identify which coefficients each control changes, then predict a controlled variation and retain both settings. Solver and trace display are supplied. Carry a specific response and its conditions, closing the sequence through an accountable example rather than treating a moving body as confirmation of the whole proposal.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+## Post-Crisis: Applied Limits
+
+Make a revisable work with accountable records and other people.
+
+Sequence demonstration: Compose an original work, retain its source/decisions and explain whose observations or participation are absent.
+
+### CriticalAlgorithms_Algorithmic_Bias_Visualization
+
+Choose a named pair of labels, compare them under compression and then hold geometry fixed while changing viewpoint. Predict one distinction the arrangement may obscure and inspect it from another position. Labels and controls are supplied. Carry a specific representational loss to preserve; the exhibit is a situated demonstration, not a comprehensive fairness test inferred from its title.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### CriticalAlgorithms_Applied_Ethics
+
+Count chairs and compare scale, approach and sightlines for a particular participant. Change the colour recommendation without moving the arrangement, predicting what remains physically available. Models and view markers are supplied. Carry an actionable design question tied to a body and situation, rather than an abstract ethics score detached from what the arrangement permits.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SpeculativeComputation_Paraconsistent_Engineering
+
+Retain two situated reports and add a separate decision record containing the chosen action and reason. Revise that decision without deleting either source, then reconstruct why both actions were considered. Input and display are supplied. Carry reports and response separately, extending the earlier contradiction study into accountable engineering rather than treating disagreement as a data-cleaning failure.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### SpeculativeComputation_Situated_Computation
+
+Compare delayed observations and exposure times while moving a supplied camera. Retain the pose and time associated with a held frame and predict why the camera's current pose cannot explain that earlier image. Capture and pickup are supplied. Carry an observation with its acquisition context, reusing local/world and snapshot distinctions instead of treating a picture as a view from nowhere.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SpeculativeComputation_Collective_Knowledge
+
+Retain contributions with distinct sources and trace one visible piece back to its contributor. Compare revising a record with adding a new version, then reconstruct which evidence each view uses. Arrival stream and geometry are supplied. Carry source and version information plus a concrete question about who may revise the rule, keeping a lively display separate from collective authorship claims.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### SpeculativeComputation_Rhizome_Network
+
+Walk a cave return before studying the separate fixed-point graph. Change a link rule or remove a relation in that model and predict its reachability consequence without claiming the cave changed. Chambers and graph display are supplied. Carry a proposed connection with two tests: its formal relation and its inhabitable route. The reflective encounter can investigate what either representation leaves out.
+
+Plan: draft; tutorial: aligned; behaviour contract: still needed; native evidence: not linked here.
+
+### AdvancedLaboratory_Lab_Equipment_Simulation
+
+Return to the learner's assembly record and change one joint position, then one connection endpoint, keeping an original witness. Predict which alteration changes geometry and which changes relationships before rebuilding. Handles, bond drawing and persistence are supplied. Carry the learner's revised body and explicit connectivity, bringing the opening points and lines back as editable parts of a more consequential whole.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.
+
+### PostCrisis_Synthesis
+
+Keep an earlier and a revised assembly with an optional note, then reconstruct both using the supplied renderer and persistence. Predict which differences the stored records preserve and identify what they omit from the original gesture or encounter. Carry two recoverable versions and choose a next body or passage. The tutorial converges on the capacity to build, explain, test and revise one's own work, while the museum remains open.
+
+Plan: draft; tutorial: needs_revision; behaviour contract: still needed; native evidence: not linked here.

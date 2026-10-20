@@ -1,0 +1,27 @@
+# Directions already in the ground
+
+If hundreds of agents turn together, must they be watching one another?
+
+<!-- @flow_field_table -->
+
+On the live table, find a direction mark near an agent and predict which way that agent will turn. Follow the automatic tour as an open field gains obstacles, then compare those scenes with wind and noise. Give each arrangement time: the tour changes roughly every ten seconds and eventually remains with the noise field.
+
+The arrows offer directions throughout the space. Many agents can follow the same organisation without consulting one another. Around an obstacle, a useful direction may initially point away from the destination you can see, because the direct route is blocked.
+
+During an obstacle scene, compare two agents that arrive at the same patch at different moments. Their immediate histories can differ while the arrow they encounter gives the same local recommendation. Then compare two nearby arrows on opposite sides of an obstacle. Nearness alone need not produce the same direction. This gives you two small checks on your explanation: the field organises movement by position, and the obstacle matters through its effect on that organisation.
+
+In the route-finding scenes, the model first spreads costs outward from a target through a grid. It then assigns directions towards neighbouring cells with lower costs. Each moving agent reads the direction at its present position and steers towards it. Steering has a precise meaning here. The agent compares the direction it has read with the velocity it already has, and pushes on the difference. A pull like gravity never asks how a body is moving; this rule asks first, and the answer is in the push. That comparison, made inside the mover, is what the word agent adds to the word particle. The expensive task of organising a route is shared through the field; it is not solved afresh by every agent at every step.
+
+Wind makes the distinction sharper. A field can give a direction without giving a destination. The route scenes are path finding: the field is a prepared route, flooded outward from a destination. The wind and noise scenes are field following, without a destination to reach. The agents behave the same in both; only the field knows which it is. Noise supplies local variation without the same coherent route.
+
+Physarum’s agents helped write the field they subsequently sensed. These agents receive a field prepared for them. From far away, both populations can look collectively intelligent. Looking at the relation between agent and field tells us which explanation the movement supports.
+
+The cost map also contains decisions: which cells are blocked, which routes are costly, and what destination matters. Shared navigation can reproduce those decisions very efficiently. Efficiency alone cannot tell us whether every traveller can use the permitted route. At the target, and inside a wall or a sealed region the costs never reached, the arrow is zero and the agent wanders. That wandering is a new random direction every frame, smoothed a little by the same steering, which is why an agent at the target buzzes rather than roams. Our small point study chooses to brake at a zero vector. Put the two behaviours beside one another: an absent direction is also a place where somebody has made a decision.
+
+Try following one arrow that surprises you instead of the largest stream of agents. The piece can be placed with its arrows hidden and one scene held still, and that placement is the test of this hall's thesis: without the arrows, would you still say the agents were following something, or would you say they agreed? This hall shows the arrows so that the cause stays visible. The version without them is one token away, and not yet placed.
+
+The sand at the side, where ants are already writing a field of their own, and the small box of prey and predators belong to later rooms; for now notice that neither has arrows.
+
+<!-- @ -->
+
+Boids will remove that supplied direction and let nearby agents become one another’s moving reference.

@@ -1,0 +1,1 @@
+Open index.html for native museum images, parallel.html for tutorial left and reflection right. printed/ contains all four tested student files; variation/ is the executed nested-rule edit. Use the prepared Endless Museum project with XRTools. This is not an empty Godot project. Tests are author-led and use supplied poses, not independent student or headset evidence.

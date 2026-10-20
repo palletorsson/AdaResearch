@@ -1,0 +1,51 @@
+Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 595.71 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070
+
+ERROR: Unrecognized UID: "uid://rwex60pqapc".
+   at: get_id_path (core/io/resource_uid.cpp:208)
+  - Skipped file (no valid sequences dictionary): boolean_surfaces.beats.json
+  - Skipped file (no valid sequences dictionary): color.beats.json
+  - Skipped file (no valid sequences dictionary): foundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): isosurfaces.beats.json
+  - Skipped file (no valid sequences dictionary): noise.beats.json
+  - Skipped file (no valid sequences dictionary): postfoundationscrisis.beats.json
+  - Skipped file (no valid sequences dictionary): primitives.beats.json
+  - Skipped file (no valid sequences dictionary): randomness.beats.json
+  - Skipped file (no valid sequences dictionary): sequence_index.json
+  - Skipped file (no valid sequences dictionary): softbodies.beats.json
+  - Skipped file (no valid sequences dictionary): transformation.beats.json
+  - Skipped file (no valid sequences dictionary): wavefunctions.beats.json
+MapProgressionManager: Loaded progress - 0 completed, 1 unlocked
+✅ Successfully loaded 66 ambient presets
+StuckDetector: Warning - could not find player body, will retry
+WARNING: Custom solver bias for shapes is not supported when using Jolt Physics. Any such value will be ignored. This shape belongs to '<unknown>' and 0 other object(s).
+   at: set_solver_bias (modules/jolt_physics/shapes/jolt_shape_3d.cpp:91)
+   GDScript backtrace (most recent call first):
+       [0] run (res://tools/probes/thread_loom_test.gd:17)
+WARNING: NatureRenderer: No WorldEnvironment found — fog/sky disabled.
+   at: push_warning (core/variant/variant_utility.cpp:1034)
+   GDScript backtrace (most recent call first):
+       [0] _deferred_init (res://commons/managers/NatureRenderer.gd:65)
+PASS Four declared starting passes
+PASS Twelve warp meshes and one continuous weft mesh
+PASS Weft follows every crossing and returns at the edges
+PASS Changing draft preserves already woven picks
+PASS Cannot beat without a shuttle pass
+PASS Jump from one edge to the other rejected
+PASS A path above the shed cannot weave
+PASS Full hand path retains the current lift row
+PASS Draft locked while a weft waits to be beaten
+PASS Beat commits exactly one pass
+PASS Next pass starts at the opposite selvedge
+PASS Future weave leaves four old records unchanged
+PASS Returning hand pass weaves a second row
+PASS Every crossing separates real yarn surfaces in its recorded over/under order
+PASS Undo removes only the last committed pass
+PASS Reset leaves bare warp, not a hidden fabric plane
+PASS XR Tools can pick up the actual shuttle
+PASS Held XR shuttle movement traverses the shed
+PASS Held shuttle trigger beats the pending weft
+PASS XR release leaves the existing shuttle available
+PASS Guided desktop pass goes through the same path validator
+PASS Finite sample fills to the declared capacity
+PASS Capacity bound prevents unbounded geometry growth

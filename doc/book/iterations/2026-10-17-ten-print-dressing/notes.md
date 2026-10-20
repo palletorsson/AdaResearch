@@ -1,0 +1,11 @@
+# 10 PRINT cloth and dressing room — 17 October 2026
+
+The existing textile_comparison in Randomness_10_PRINT_Algorithm is now a studio with three draped printed swatches, a fitting, three dress silhouettes and a changing alcove with a live full-length mirror. Existing tiling garment panels, active wearer selection, tracked sleeves and wardrobe persistence are reused. Printed motifs stay distinct from Jacquard crossing records.
+
+The retained record contains 252 integer draws, a seed, mark, palette and repeat count. Mark/palette/repeat changes keep those draws. KEEP/REPLAY round-trip the fabric exactly. WEAR snapshots it; subsequent studio edits do not repaint the wearer. TAKE OFF restores the previous outfit. A fresh wardrobe reconstructs the saved printed dress.
+
+The three tall ten_print_maze_3d placements select the existing character impression: mesh diagonals and cell frames. The frame geometry now shares one MultiMesh batch per field, and all glyphs share one mesh/material. Switching impressions keeps the existing bits and navigation. The cross-room field begins at 3 m so it does not mask the studio at standing height. The two side fields retain their placements. The linked floor uses low broad strokes and individual dark cell beds; every orientation still matches its screen.
+
+Native checks: 43 record/wardrobe/mesh tests and 77 installed-hall checks, all passing. Actual contact and pointer event dispatch, alcove entry/exit locomotion, XR node types and controlled controller poses were exercised. All test saves stay in this evidence directory or its isolated encounter run. Current native captures and source snapshots are retained here. The native harness reports cleanup-time ObjectDB/resource warnings, without script errors. Physical headset fit, stereo comfort and frame-rate acceptance remain untested. The mirror uses a single head-centred reflection; garments use inferred torso/legs and fixed geometric cloth panels.
+
+Source map, tutorial, final, registry descriptions and studio documentation reflect the new encounter. No commit or push was requested or performed. The main museum plan was not regenerated: the live hall loader consumed this map's placement/configuration changes, verified by the actual runtime.

@@ -1,0 +1,1 @@
+Native probe also reads doc/book/iterations/2026-09-28-pattern-a-facing-return/probe.gd, tools/probes/transformation_encounters.gd, tools/probes/array_entered_address.gd and tools/run_encounter_probe.py in the original project. Runtime source hashes are in museum/source_manifest.json.

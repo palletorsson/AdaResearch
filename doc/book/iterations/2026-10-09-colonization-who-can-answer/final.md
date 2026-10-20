@@ -1,0 +1,39 @@
+# Which points get a say?
+
+<!-- @space_colonization_algorithm -->
+
+Three pink points wait above a small root. Two sit apart at the same height; the third is higher, between them. Before pressing anything, follow a line from the root towards each point. Which way would you go if all three asked at once?
+
+Thin threads run from the root to each point: those are the requests. The short gold stubs at the root are their unit directions, one metre each; the white segment proposes the half-metre step. Press STEP and watch a pale branch take its place. The root has moved nowhere. It has acquired a child, half a metre above it. Neither side point has been reached. Something useful happened between their demands.
+
+In the last room, an evaluator compared whole bodies with a target number. Here the target has become a distribution of positions. We call them attraction points. They do not exert a simulated force, and they are not light sensors. They are coordinates that a rule consults while adding segments.
+
+A distant request gets no greater weight merely because it is farther away. Each offers a direction; the three directions meet at the root. The sideward demands cancel here. What remains points upwards, and a child takes one small step along it. The tutorial rebuilds this decision, including the cases where nothing remains to follow.
+
+The step is half a metre. The two side requests are at (-2, 3, 0) and (2, 3, 0); the upper request is at (0, 5, 0), measured from the model's root. The first new position is therefore (0, 0.5, 0). The geometry you predicted is the geometry the code builds. The gold construction now shows a decision for the next generation, not a replay of the previous one.
+
+![The root, three pink points, three gold unit directions and the white half-metre step of the opening decision](/book-images/figures/proceduralgeneration/first-step-three-requests.png)
+
+*The opening decision, drawn from the study’s own numbers. Unit directions (−0.55, 0.83), (0.55, 0.83) and (0, 1) sum to (0, 2.66); normalised and scaled by half a metre, the first child sits at (0, 0.5).*
+
+Press FIELD once. Eight known points replace the three, and growth starts again. Their arrangement is uneven. Press STEP several times and follow the strand. Some points pull it sideways; others remain behind. You can keep advancing, one generation at a time. A reached point becomes small and dark. It leaves the active calculation but stays visible, so the encounter does not erase every trace of what mattered.
+
+There is a restriction easy to miss under the name Space Colonization, the tree model of Runions, Lane and Prusinkiewicz, from which this study takes its attraction points and its kill distance.[^runions] Under TIPS, a growing end can produce one successor. That successor replaces it in the eligible set. From this single root, the rule makes a strand. A sufficiently crooked strand may suggest a tree in silhouette, but it has not made a fork.
+
+Press HOLD when you have a specimen worth comparing. It appears on the side plinth at 0.45 times the display scale; its proportions and parent relations are kept. This is a small witness, not evidence that the algorithm shrank its body. Now press POLICY. The same eight points and the same root return at generation zero, with NETWORK on the readout. Press STEP again.
+
+Watch for a site that has already produced a child and later produces another. The new policy lets earlier sites remain eligible to receive requests. Each active point chooses its nearest eligible site within eight metres. Requests assigned to one site are still summed; each site can add at most one child per generation. A fork becomes possible across generations because an earlier site can act again. Changing who may respond changes what this construction can become.
+
+The held strand remains beside the growing tree. Compare a local fork before comparing their overall outlines. NETWORK is the control's name; this implementation still attaches each new node to one parent. It builds a rooted tree, without joining existing branches into loops. Another topology will require another operation.
+
+FIELD once more opens a canopy of 96 fixed points. Its asymmetry is authored through sine offsets, using a tool we already know. It is not fresh randomness at each step. The field helps make the form; calling the result organic does not remove that authorship. A perfectly balanced field can cancel sideways directions and leave a stem. More points alone do not promise more branches.
+
+Some requests may remain when growth stops. RULE names the operations and the budgets: this study permits at most 192 nodes and 60 generations. A limit reached by the computer is not a tree's natural maturity. RESET restores the three-point opening and TIPS, while keeping the held witness. You can return without pretending that nothing has happened.
+
+Walk around the specimen and onto the rear deck by its side ramp. The museum supports your body. The drawn branches do not have collision surfaces. A connected parent record, a visible shape and a place you can inhabit are three relations we must learn to build together.
+
+We have changed eligibility while keeping the points. In Branching Growth, next, we will change what a site listens to: one nearest invitation, rather than the sum of several. Before admiring another tree, find that smaller difference.
+
+<!-- @ -->
+
+[^runions]: Adam Runions, Brendan Lane and Przemyslaw Prusinkiewicz, “Modeling Trees with a Space Colonization Algorithm”, *Eurographics Workshop on Natural Phenomena* (2007). Attraction points, an influence distance and a kill distance are theirs; the single-successor rule under TIPS is this study’s restriction.

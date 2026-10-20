@@ -1,0 +1,95 @@
+import 0  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+normal 0 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+CHECKS 131 FAILURES 0
+
+scale_children_only 1 Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL uniform/child_scales_unchanged
+FAIL uniform/opening_width
+FAIL uniform/opening_height
+FAIL uniform/posts_on_floor
+FAIL uniform/post_spacing
+FAIL uniform/lintel_meets_posts
+FAIL uniform/geometric_clearance
+FAIL uniform/opening_ratio
+FAIL width/child_scales_unchanged
+FAIL width/opening_width
+FAIL width/post_spacing
+FAIL width/ratio_changed
+FAIL xy/child_scales_unchanged
+FAIL xy/opening_width
+FAIL xy/opening_height
+FAIL xy/posts_on_floor
+FAIL xy/post_spacing
+FAIL xy/lintel_meets_posts
+FAIL xy/geometric_clearance
+FAIL depth/child_scales_unchanged
+FAIL pose/repeated_assignment
+FAIL pose/positive_fraction
+CHECKS 131 FAILURES 22
+
+witness_inside_group 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL base/three_doorway_parts
+FAIL base/witness_outside
+FAIL uniform/three_doorway_parts
+FAIL uniform/witness_outside
+FAIL uniform/witness_diameter
+FAIL uniform/witness_position
+FAIL width/three_doorway_parts
+FAIL width/witness_outside
+FAIL width/witness_diameter
+FAIL width/witness_position
+FAIL xy/three_doorway_parts
+FAIL xy/witness_outside
+FAIL xy/witness_diameter
+FAIL xy/witness_position
+FAIL depth/three_doorway_parts
+FAIL depth/witness_outside
+FAIL depth/witness_diameter
+FAIL pose/reference_untouched
+CHECKS 131 FAILURES 18
+
+origin_above_floor 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL base/opening_height
+FAIL base/posts_on_floor
+FAIL uniform/opening_height
+FAIL uniform/posts_on_floor
+FAIL uniform/opening_ratio
+FAIL width/opening_height
+FAIL width/posts_on_floor
+FAIL width/geometric_clearance
+FAIL width/ratio_changed
+FAIL xy/opening_height
+FAIL xy/posts_on_floor
+FAIL depth/opening_height
+FAIL depth/posts_on_floor
+FAIL pose/repeated_assignment
+FAIL pose/return_to_original
+FAIL pose/positive_fraction
+FAIL instances/independent_parent
+CHECKS 131 FAILURES 17
+
+multiply_instead_of_assign 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL pose/repeated_assignment
+FAIL pose/return_to_original
+FAIL pose/positive_fraction
+CHECKS 131 FAILURES 3
+
+PASS 131 assertions; 3 exercise variants + 1 depth case; 4 behaviour faults; 10 bad anchors rejected.

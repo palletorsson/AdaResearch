@@ -1,0 +1,55 @@
+import 0 1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (42 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+normal 0 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+Collected
+Collected
+Collected
+CHECKS 68 FAILURES 0
+
+curved_pre_timing 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL pre/steady_midleg
+FAIL pre/steady_return_midleg
+Collected
+Collected
+Collected
+CHECKS 68 FAILURES 2
+
+frozen_turn 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL pre/continuous_turn
+FAIL pre/slow_only_wave
+Collected
+Collected
+Collected
+CHECKS 68 FAILURES 2
+
+disconnected_pickup 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+FAIL pre/overlap_em_walker
+FAIL pre/overlap_player_body
+FAIL pre/new_place_collects
+CHECKS 68 FAILURES 3
+
+one_axis_growth 1 Godot Engine v4.6.stable.official.89cea1439 - https://godotengine.org
+
+Collected
+Collected
+Collected
+FAIL intro/start_growth
+FAIL intro/middle
+CHECKS 68 FAILURES 2
+
+PASS 68 native assertions; 8 variants; 4 behaviour faults detected; 16 bad anchors rejected

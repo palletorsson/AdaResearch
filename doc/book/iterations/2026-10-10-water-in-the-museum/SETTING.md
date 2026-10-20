@@ -1,0 +1,9 @@
+# FBM — a field becomes water
+
+Carry: field sampling, normal/view response, sphere/cube. Core: accumulate noise at increasing frequency and decreasing weight. Pool uses 1–4 value-noise octaves; frequency doubles, weight halves; normalize by weight sum to bound signed height. Supporting FBM graph retains its existing unnormalized sum. Compare one held field: colour → normal → vertex height. TIME moves/holds only the pool; RESET restores 3 scales, relief .22 m, height mode, phase 0 held. Relief maximum .25 m. Mean water -.40 m; fixed bridge top 0, bottom -.06 m. No water collider, buoyancy, fluid state, depth refraction or simulated reflections.
+
+Space: 26×29 m museum hall; 11×11 m basin, depth 1.2 m, no fire; explicit 1.8 m glass bridge; colonnade and existing chair prefabs. Original basin_water/dark_sphere/shader_09_fbm identities retained and relocated. Study is opt-in on BasinWater; other instances retain original shader. Four original graph shaders retained, full-square UV receivers, controls raised. Extra gate disabled; authored entrance/exit valid. Follow the left end of the graph wall onward to Pink Extravaganza.
+
+Evidence: report.json, native GPU/control/route/default checks and ten captures. Compatibility renderer, XR disabled. Capture disables costume only in the isolated harness. No headset/performance/learner reconstruction/next-hall travel claim.
+
+Text follow-up: preserve reflection's appearance/support question. Update obsolete 7×3 dimensions, whole glass lid, missing controls and sine-based pool claims. Explain the normalized study vs the supporting graph's raw sum. tutorial.md absent: reconstruct the small layered field, use supplied room/bridge/control infrastructure, one complete minimal runnable program, test printed code separately. Next spatial pass: Pink Extravaganza.

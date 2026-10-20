@@ -1,0 +1,1 @@
+Open index.html or parallel.html. Five complete scripts in printed/ run inside the existing AdaResearch Godot project with XRTools; this is not a standalone project export. fault-* contains intentionally wrong algorithms used to test the checks. Technical.md states verification scope.

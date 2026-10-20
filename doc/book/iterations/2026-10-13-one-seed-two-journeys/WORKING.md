@@ -1,0 +1,1 @@
+Complete: connected hand seed, explicit source bank, direction/distance, safe held-source changes and replay. Map and museum plan share the opt-in link. 98/98 runtime checks passed; six actual Godot images and review index published here. No physical Quest test, live network request, canonical text revision or commit.

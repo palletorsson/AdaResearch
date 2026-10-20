@@ -1,0 +1,3 @@
+# Predictions before execution
+
+The first input gives equal poses; later inputs need not. Supplied +10,+10,-5 degrees leave latest=-5 and sum=15. Opposite turns cancel. Two half-turns leave a full stored turn but an identity orientation. Replay keeps record and RNG; playback never draws. Equal elapsed time at different frame partitions reads the same prefix, including a slow frame. Pause retains its partial interval; manual STEP clears it. Amplitude40 doubles amplitude20 samples at the same seed; changing Z to X retains those values but changes poses. A finite or empty record cannot overrun. Reject overwriting the sum, drawing during replay, reading one entry per slow frame, and changing position with angle.

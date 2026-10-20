@@ -1,0 +1,75 @@
+# Foundry — further encounters
+
+These encounters remain in the museum. They are a return visit to the loom, studio and architectural controls, after the first reading has followed one source edit into its copies.
+
+<!-- @pattern_tile_mirror -->
+
+Make a recognisably asymmetric mark at the mirror station. A mark away from the centre, with a differently coloured neighbour on one side, makes reversal easier to notice than a centred dot would. Follow the pair through the preview and compare the directions in which it faces.
+
+The simple repetition keeps the tile's orientation. The mirror rule reverses selected copies along its directions. The source motif and the transformation applied to its copies do different work: changing either can change the field.
+
+Now try to make the mark appear only once while the rest of the field stays unchanged. Editing the shared source makes it recur. The instrument makes it easier to change every appearance than to keep just one different. A single stored cell holds all these places together.
+
+<!-- @pattern_machine_a -->
+
+At the loom, two upright samples wait beside the carpet. One is flat. The other bends towards you. Press MARK on their console, then look for the changed cell on both surfaces. Walk a little to one side. The mark narrows around the curve; has the machine given it less room?
+
+The samples have the same surface height and width: 1.2 metres high, 1.2 metres across the sheet. Across the curved one means following its arc. Its width seen head-on is smaller. Both receive the same colour image, with the same addresses in the same order. Bending the sheet changes where those addresses meet your view.
+
+The loom begins here with translation: a five-by-five card repeated four times in each direction on each sample. MARK changes one card cell. Touching the loom's pegs lets you choose other cells; its GROUP control changes the repetition rule. Try a mark away from the centre before changing that rule. A centred mark can hide what the operation has done.
+
+The current specimen is assembled one pixel at a time. At each address, the repetition rule reads the source card and returns a colour index. The palette supplies its colour. The receiving sheet supplies its shape. They meet in the visible pattern, but you can change them separately.
+
+With CURVE selected on the display, press LINK / HOLD. Now press MARK again. The flat sample follows; the curve keeps what it had. There is a difference between them, and the loom has continued running. Holding this sample means declining the next image. It does not stop time or let you edit just one of its repeated marks.
+
+Link the curve again, then take the passage into the runway annex and follow the side aisle into the curved room. The studio stands inside it. Its small source already supplies the pattern around the wall and beneath your feet.
+
+Choose a colour on the studio and paint one source cell. Look away from the little grid. Your mark has arrived in places you could not reach from here. It returns along the curve, then across the floor. The studio supplies these two surfaces; the larger hall still follows its selected machine.
+
+Walk towards one of the marks, then turn to find another. An arrangement held in a small square has become large enough to surround you. You can recognise its repeats without seeing the whole field at once. The floor carries them beneath your body; the curved wall brings them back into view.
+
+On the smaller surface console, choose ROOM FLOOR and press HOLD. Change the source cell again. The wall follows; the ground keeps its earlier image. You are standing between two moments of the same pattern. The opening still lets you leave, and the supports have stayed where they were. Yet wall and floor no longer agree about the room's present.
+
+![The curved room before and after a source edit with its floor held.](/book-images/iterations/2026-09-28-foundry-a-mark-in-the-room/room-pair.png)
+
+*The same view from inside the museum. On the right, the wall accepts another source edit while the floor keeps the earlier image.*
+
+APPLY LIVE lets the floor catch up. The difference can be kept or given up. It belongs to this connection between a source and a surface; it need not become a permanent division of the room.
+
+## On a return visit
+
+The first visit follows one edit into its copies, then lets one surface keep a difference. These further experiments ask what a saved source remembers, which surfaces follow it, and how much room each repeat receives.
+
+At the loom, link the specimens again. Press SAVE, change a peg or the group, then RESTORE. The saved card and palette return, along with the carpet's short history of bands and its saved animation phase. The carpet moves on from there. The two upright samples show only the current rule; the carpet carries earlier decisions as well. Saving the source does not save the curve's temporary held image.
+
+Turn towards the low wall behind you. The pattern has arrived there too. Follow a pair of marks along it: the wall has more repetitions, rather than a larger version of the image. Under the starting translation rule, one card occupies thirty centimetres on every surface. The wall remains solid. Its new appearance has supplied no new passage.
+
+Press TARGET until the display names WALL. Its mounted label picks up the selection. Hold it, then change the source again. The two samples move on; this piece of the room keeps what it had. It was easy to treat the wall as background while looking at the machine. Now the background participates in the same decision.
+
+Keep the wall held and press REPEAT SIZE. The source advances from thirty to sixty centimetres. Look for the same pair of marks on a sample: each now occupies more room, and fewer copies fit. The wall keeps its earlier spacing. Both labels say what each surface is carrying.
+
+Press again for fifteen centimetres, then once more to return to thirty. Nothing has been added to the card. The sheet has not grown. The address calculation now reaches the next source cell sooner or later as it moves across the same physical surface. In the starting translation rule, the 1.2 metre sheet holds eight, four or two card periods. Its edge may cut through a repeat; the surface does not stretch to finish the motif.
+
+SAVE remembers the source spacing too. Set the source to sixty centimetres and save it. Change spacing, then restore while the wall is held at thirty: the linked samples recover the saved scale, and the wall continues to keep its difference. The carpet remains a separate view of the loom's band history at its original spacing.
+
+Link the wall again, then press UNDO LINK. Its earlier held image returns. The carpet and the other machines continue their own work. Selecting a receiver changes who can follow; MARK, SAVE and RESTORE still act on the shared source.
+
+Leave one surface held. With the repeat size at thirty centimetres and the offset at U00, press OFFSET +5CM. Follow a pair of marks on a live sample. They have changed position without growing. The image on the held surface stays where it was.
+
+The offset advances the address sampled at each point on the sheet. U names that sheet's horizontal texture coordinate; it is not a shared compass direction through the museum. The curve carries the displacement around its bend. Neither surface moves, and the motif still has the same cells.
+
+Press five more times to reach U30. Under the starting translation rule, the image returns to its U00 appearance. The stored offset differs by one full repeat. Returning to an appearance need not undo the process that brought you there. One more press returns the control to zero. SAVE and RESTORE remember the source offset; a held surface keeps its own accepted offset until you link it again.
+
+Walk towards the wall beyond the loom, then around the grid block to its shorter east face. NORTH and EAST have received the pattern too. Their widths differ, but a card occupies the same number of centimetres. At sixty centimetres, the height of these low faces ends halfway through a repeat. The rule has continued further than the surface can show.
+
+Select ARCHITECTURE. This names three wall faces, leaving the two specimens outside the selection. If their states are mixed, press LINK / HOLD to bring the walls live; press again to hold them together. Change the repeat size. The samples change while their surroundings keep an earlier scale. Try the reverse: hold a specimen and let the walls follow.
+
+EAST can also be selected alone. Hold it, then return to ARCHITECTURE: the display now reports MIXED. One part of the background has separated from the others. ALL FIVE includes the three wall faces and both specimens. Neither name includes the whole museum. These names describe memberships we have made, and can revise.
+
+
+The studio can also supply a different source to a selected specimen or inner wall. WALL on its surface console means the low wall by the loom, not the curved wall around the studio. Select it and press APPLY LIVE, edit a cell, then return to the loom bay to see which surface followed. HOLD keeps the selected image. UNDO LINK restores the previous connection and held image; LOOM explicitly returns the selected surface to the loom. Here the name of a source tells you whose next decision will reach that part of the room.
+
+At DRESS THE ARCHITECTURE, TARGET selects ROOM, WALLS or FLOOR for subsequent updates. The surfaces left out keep the image they last received. REPEAT SIZE changes how much surface one complete output image occupies: two, four or eight metres. TINT multiplies the colours of that output by a pale colour or white. It does not rewrite the machine's own palette. To change the source design, use that machine's controls, then look back at the architectural surfaces receiving it.
+
+Press LIVE / HOLD. Both architectural receivers keep an independent image of what they were carrying. The machines continue their work. RESET reconnects the whole room to the loom, with white tint and a four-metre repeat. The smaller specimen controls beside the machines remain available for more precise comparisons; this console addresses the architectural skin.
+

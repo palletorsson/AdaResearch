@@ -1,0 +1,15 @@
+# What can collapse without changing the answer?
+
+Palle's clarification: “mini” names min-entropy, not miniature furniture. The proposed form is a pyramid of chairs. Four full-size stacks use 9 + 4 + 2 + 1 chairs each, with distributions 8/8, 8/4/4 types, 12/4 and all pink. The chairs retain the existing pink/dark materials. Earlier counting and glass arrangements remain prepared comparisons.
+
+Physical changes: full-size XR pickable rigid bodies, compound seat/leg/back/arm colliders, desktop carry/drop hooks, and a scoped desktop walking-contact hook. VR uses the existing player-body push. Bodies settle and sleep naturally; no frozen supports, scripted fall or upright snap. Initial armchairs sit at the lower corners to avoid intersections with upper legs. Every chair retains its lettered group and numbered ID wherever it is moved.
+
+The first native trial exposed an over-strong collision continuation. A kinematic avatar has effectively infinite mass, so chair motion now limits horizontal speed to 1.5 m/s, upward speed to 2 m/s, downward speed to 8 m/s and angular speed to 4 rad/s. Desktop contact force is capped at 60 N, scaled by timestep. This produces a bounded, dissipative interaction model; it is not a calibrated simulation of a particular real chair. The final walking trial's greatest chair displacement is about 1.41 m, including the following two seconds of settling.
+
+122 installed-room checks pass with no engine errors. Tests exercise physical contacts, desktop carry and the actual XR Tools grab driver with a supplied controller node. Button tests use hand-layer overlap and pointer dispatch. Receipts restore full pose/motion and replay the next 16 seeded IDs exactly. Physics continuations are not claimed bit-identical. All 64 chairs remain in their inventories. The central route is unobstructed at the baseline. Reset/restore refuse a held chair. Earlier failed reports are retained as implementation evidence; they are not reader evidence.
+
+The script-launch probe originally referenced an XR class before its autoload was available. Loading the pickup implementation at runtime resolved this harness startup error; production XR Tools was not modified. The immediate grab/drop test also needed a physics frame between carrying and release, as actual interaction has. Neither issue is evidence of a headset trial.
+
+The final now follows a seat taking the feet of another chair, then asks what a fall cannot change about the colour record. Tutorial, writing wall, plan and registry describe the same behavior. Placements, seven-stop order and museum plan stay. The first 48-value seed bench remains the first research pilot.
+
+Next: let a visitor approach without naming an action. Record the wanted change, whether a grip/contact is found, what actually moves, and what measurement they propose when the colour answer remains certain. Test re-stacking, weight/reach, material recognition and frame rate on the headset. No human learning or comfort result is claimed.

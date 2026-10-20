@@ -1,0 +1,1 @@
+Original: Rule 90 single 16 gives [15,17]; next [14,18]. Variation source seeds [3,5] gives [2,6], because cell 4 receives two true neighbours and cancels. Traversal cannot affect synchronous answers; original state must remain untouched. Saved rows must not alias the current array. Visible first row must match states.

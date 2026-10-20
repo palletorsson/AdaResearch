@@ -1,0 +1,27 @@
+# Predictions fixed before the first Godot execution
+
+Experienced coding AI; general GDScript/numerical knowledge allowed. The seven supplied pairs and images are my only lesson inputs. All predictions below are mine after reading those lessons. Supplied numerical examples are labelled where used, not claimed as independent discoveries.
+
+## Reconstructed models and hosts
+
+1. Physarum: an isolated left sensor mark turns point 0 by +PI/4, equal side marks preserve heading. Six agents deposit after fading, so the first empty-field tick sums to six. At an untouched cell a value of four should become 4*retention. Shared fields remain after a held point moves away. Hand motion without trigger does not deposit; trigger writes one mark. Holding any sphere blocks all ticks; reset restores the same start. Retention button retains RUN state.
+2. Flow: supplied first-step answer is v=(0.3,0), dx=.015. Motion leaves all vectors identical; zero cells brake. A held point clears only its own velocity; one trigger cycles its cell, release resumes RUN. Patch control preserves position/velocity, Reset pauses and clears edits.
+3. Boids: supplied one-step results should hold, but I also expect a point outside all neighbourhoods to coast even at nonzero velocity. Opposite velocities averaging zero brake in alignment. Reversing list order then remapping should agree within 1e-5 after one tick. Holding selects and relocates a point and blocks ticks; radius/weights survive Reset.
+4. ABM: contact is checked before moving, strictly within one cell. Starting at FOOD+(1,0) with v=(-3,0) should remain searching for one tick and collect on the second. Transporting cargo home counts exactly once. Replace retains trace, tick and deliveries; reset clears them. Hold itself does not collect. Cargo/sensor visibility must match the flag.
+5. Ant: opposite fields control searching/returning; a single isolated point writes only its complementary channel, while sources are replenished at tick end. Energy is .9975 on the first tick; no-contact energy should reach approximately zero after 400 ticks. Holding retains flag/energy, selecting works, both button banks act on one model.
+6. PSO: paired personal positions/scores are valid at startup; the supplied controlled terms add to (-.09,-.0375). Best score is nondecreasing under a fixed objective. Changing objective recalculates all pairs without changing positions/velocities. Hand placement is evaluated only on a step; a worse held placement leaves best intact. Both control banks work. I do not predict a guaranteed global optimum.
+7. Population: account copy protects history from caller mutation. The supplied 10+2-3+5 example gives 14. Actual supplied ecosystem counts should reconcile after each completed update. Filtering support should create a gap equal to cumulative supplied arrivals, even if some supplied bodies have died. Hold pauses and selects without rewriting origin; filter remains usable while held. Restart clears account and restores baseline.
+
+## Independent deeper question: can integration rate change whether a zero field traps a point?
+
+This is not the tutorial's turn-direction edit or the optional RIDGE exercise. I will copy Flow's complete printed files twice. In both copies, replace the patch with a zero-direction vertical strip covering x in [7,9), all y. Start point 0 at (7.6,1.5), moving (3,0). Other points cannot affect it. Keep response=.5 and max acceleration=6. Only the second copy changes DT from .05 to .025. Run both for ten seconds of model time and record position, speed, and first exit from the strip. Keep exact reconstructions unchanged.
+
+Prediction: at .05 s, velocity multiplies by .9 per tick, so semi-implicit total future travel inside zero is 3*.05*.9/(1-.9)=1.35 cells. It approaches x=8.95 and stays inside. At .025 s, the factor is .95 and the limiting travel is 1.425 cells, greater than the 1.4 cells available: it should cross x=9, read east again and accelerate. Predicted first crossing solves 1.425*(1-.95^n)>1.4: n=79 (about 1.975 s). Its exit occurs after movement and the east sample starts on the following tick. This is a controlled numerical-method effect, not random emergence. I will assert the categorical stay/escape outcomes, compare early samples against the geometric series and report actual float rounding.
+
+## Small transfer checks without claiming new lesson content
+
+Physarum: two equal sensor channels mean heading retention, not random arbitration. Boids: direct distance at the wrap seam excludes geometrically adjacent periodic points. ABM: the one-tick contact delay tests update order. Ant: zero deposit strength prevents agents from writing but does not silence destination emissions. PSO: create two equally best EDGE corners and reverse their storage order; strict greater-than should select the first corner, showing a tie policy can select a shared reference even without a score difference. Account: two errors can cancel (one invented birth and one invented loss), yielding zero gap with false history. These are my test choices; some mechanisms are explicitly warned about in the text.
+
+## Limits
+
+Synthetic desktop grab callbacks, action signals, key events and physical-button signals test wiring; they are not physical XR pickup, visual rendering QA, comfort, or novice comprehension. Images show installed encounters, not rendered reconstructions. I will not treat passing assertions alone as learning evidence. Runtime failures, help, and revised harness assumptions will remain recorded.

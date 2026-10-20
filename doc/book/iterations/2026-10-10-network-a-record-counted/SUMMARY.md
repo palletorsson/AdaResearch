@@ -1,0 +1,5 @@
+# Network Analysis — lesson paragraph
+
+Follow an arrow into its fictional source on the museum record wall, then continue our seven IDs and the same pickable point. Author one directed event for each existing endpoint pair and count incoming and outgoing active records. Omit P04 and predict the two affected counts; filter to reports and explain why omitting that payment has no further effect. Hold the point to move vertex 4 without changing the ledger. Independently reverse P04, update its source and test the new counts and arrow. Carry a directed record set into Connectivity, where a count alone cannot promise a return journey.
+
+Short instruction: Museum given. Carry PointBody + seven IDs + undirected scaffold. Author directed ledger, one event/pair; direction≠old adjacency. Count in/out over active records. Omit P04; filter reports; predict invariants. Hold4→localXY drawing only. Reverse P04 + source; test endpoints/arrow. Preserve ledger. Next: derive directed adjacency, test return paths.

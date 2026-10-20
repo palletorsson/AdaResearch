@@ -1,0 +1,63 @@
+# What keeps a body changing?
+
+Behind us, a proposed position had to find room among the points already admitted. Elsewhere in that hall, a number found a height in a wall: an opening moved, and the view changed. Here the number meets a body that already has folds, a foot, a capital. Can you tell how it changes just by looking at its strange shape?
+
+<!-- @MeltingBerniniScene -->
+
+Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. The little instrument between the silhouettes offers ways to look; it leaves the names until you ask. Stand where you can see all three at once and watch for a while before you press anything.
+
+![Three columns inside the museum, viewed from the standing approach before their drivers are revealed.](/book-images/figures/Noise_Columns/three-columns.png)
+
+One silhouette holds. The other two rise and sink. There may be a familiar movement among them, something the wave halls have already taught your body to expect. Choose one to follow. When it comes back, keep watching. Does the return arrive after the same interval?
+
+FREEZE holds the columns' local clock. You can take time to walk around the shape that was passing. The rest of the museum continues. Even here, stopping has an address.
+
+Try SPIN while the clock is held. The columns turn. A ridge slips out of sight and another arrives. The vertices of each shaft keep their local coordinates; their positions in the room change with the whole column. Transformation has returned as a way to inspect what we thought was deformation.
+
+Stop SPIN and press MARBLE. The shaft loses its veining. The folds remain. The base and capital retain their own patterned materials. Look at the edge of the shaft, then at the surface inside that edge. The veining was never fixed to the stone. Its pattern is sampled from each point's position relative to your eyes, so on a frozen shaft the veins slide as you walk around it, and under SPIN they stayed nearly in place while the folds turned through them. A changing appearance has several places to happen, and a picture can encourage us to fold them together.
+
+Put the veining back if you prefer it. The pleasure of the surface need not end when we learn how it works.
+
+Now REVEAL names the three drivers. BASELINE holds a fixed value. PERIODIC follows a sine. FIELD follows a path through a seeded coherent field. Release FREEZE and compare the names with the movement you watched.
+
+The sine repeats after a fixed interval. At the room's speed of 0.9, that interval is about seven seconds. The field has a different history. Nearby sample coordinates give related values; the path does not carry the sine's promise of a seven-second return. That does not make it unknowable. With the same seed, settings and coordinate, this implementation gives the same value again.
+
+Both drivers hand the shaft one number between zero and one. The code calls it a phase. For the sine, it is a remapped output rather than the angle inside `sin`. For the field, it is a sample remapped and bounded to the same range. The shared name makes the numbers interchangeable at the next operation, while their histories remain different.
+
+The wall in the previous hall gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
+
+Progress up the shaft is measured from zero to one. The square root gives different heights different shares of the same phase. At the top, the mapped drop can reach 0.70 metres. The phase also enters a bulge further down the function. Ribs, twists and offsets were already there before the field arrived.
+
+Look again at BASELINE. It is held at 0.10, and it is already strange. The fixed reference is itself a made body. We have chosen something to keep still so that another change can become legible.
+
+This gives a practical answer to what bodies are possible with the tools we have acquired. A coherent field can supply variation, but it does not contain a column. Rings of vertices, a spiral, a height rule and a material make that variation into this body. Give the same values another recipient and another world can appear.
+
+The recognisable column also brings an expectation: it should hold something up. These display columns have no supporting collision bodies. They carry the appearance of architecture without its load. Calling their movement melting names what we see; it does not establish that stone, heat or erosion is being simulated.
+
+There is a smaller interruption inside the smooth movement. Each moving shaft is rebuilt at most twelve times a second. Between updates, the mesh holds its last shape. The readout reports that budget and the last phase actually used. Our earlier trace had gaps between samples; this surface has intervals between rebuilds. What looks continuous is again being afforded in portions.
+
+<!-- @dark_sphere -->
+
+Leave the columns frozen for a moment and turn to the dark orb. Its sheen shifts. Stay long enough to notice the pulse, and the pool of shadow beneath it slowly deepening and fading. The room has not stopped breathing just because one instrument has stopped counting.
+
+This body uses another local clock and another sine. This time the value enters brightness and emission. It does not rebuild the sphere's mesh. The body also turns slowly, and the pool beneath it pulses in opacity on a slower sine. A single appearance gathers several operations that our earlier halls let us separate.
+
+The dark sphere was described as a neutral anchor. Looking for longer complicates that description. It is active, but its activity is easy to pass over beside the tall columns. The distinction between foreground and background is also a distribution of our attention.
+
+You need not make it illustrate the columns perfectly. It can keep its quieter presence. It gives the local pause an outside: another process goes on while we concentrate on this one.
+
+<!-- @synthesis_stand -->
+
+Nearby, the darkness has become six small orbs. They turn together in a ring, at alternating heights. There is an empty middle. Walk far enough around them for the gaps to change.
+
+This work belongs to the same dark-sphere family. The stand chooses a quieter presence and a construction with six members before the scene builds. Their common motion is the rotation of their parent; they are not steering themselves around one another.
+
+The array has come back inside a body. So have the circle and the alternating value. Earlier, a field varied a shaft while its mesh connections remained. Here, selecting a construction changes how many parts the body begins with. These are different kinds of change, and our toolbox contains both.
+
+The plaque's 35% comes from comparing a saved image of these six orbs with one of the original orb. The score looks at the pixels that changed most.[^image-score] It helped choose a difference in pictures; it cannot decide what you should want from this body. Perhaps the small gathering holds your attention precisely because it is difficult to resolve at a glance. Perhaps you prefer the solitary orb.
+
+A family offers possibilities, and choosing one still leaves other members unvisited. We can name the choice without closing the family. The same is true of our route through these halls: enough attention to make a discovery, with other directions still available.
+
+Noise One takes the next step. Two surfaces will receive the same field and spend it differently, as relief and as colour. We leave with a question about the receiver as well as the source: what can this body do with the value it has been given?
+
+[^image-score]: The comparison removes each image's corner background colour, converts it to greyscale at 160 × 160 pixels, and averages the largest 5% of absolute pixel differences on a scale from 0 to 1. The saved value 0.3509 is rounded to 35% on the plaque. It is not the percentage of the body, or of the pixels, that changed.

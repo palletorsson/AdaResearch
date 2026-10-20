@@ -1,0 +1,18 @@
+# Shader surface coverage
+
+Author reminder, 10 October: include bump maps and vertex shaders explicitly. Six halls remain; increase capability within their comparisons. A rendered effect is not evidence that its reconstruction has been taught.
+
+| Hall | Primary capability | Surface contract | Current evidence / next work |
+| --- | --- | --- | --- |
+| Shaping | UV → distance → mask → colour; uniforms | Fragment rule changes colour; shared wall/cube material, fixed geometry/collision. | New printed three-file reconstruction and separate native tests; see current Shaping review. |
+| Patterns | Transform and repeat sampling coordinates | Keep the mesh; change where the rule is read. | Museum setting built; focused printed continuation next. |
+| Queer Materials | Surface orientation, roughness and view response; bump/normal-map comparison | First hold a flat receiver still. Change per-pixel normals and watch light move while the silhouette stays fixed. A height/bump map stores a scalar used to derive slopes; a normal map encodes direction. Neither is a displacement map. | Existing small rim shader uses supplied mesh normals. **It does not teach bump mapping yet.** Add one controlled flat sample with a height-derived normal and an encoded tangent-space normal comparison. Print the small rule, declare UV/tangent frame and test changed illumination with unchanged silhouette. |
+| FBM Water | Layered field → normal response → vertex displacement | Reuse the held field. Colour only → normal only → vertex height. Vertex displacement needs enough vertices; shading does not update collision. Keep the fixed glass support separate. | Existing `layered_water.gdshader` changes NORMAL and VERTEX in `vertex()`. Normals interpolate over triangles: this is **not yet per-fragment bump/texture normal mapping**. Teach it as a return from Materials, compare low/high subdivision, name the finite-difference step and the bound. Native setting tests exist; printed reconstruction still required. |
+| Pink Extravaganza | Compose known material operations in a setting | Keep colour, rim and emission separable; use prior normal/displacement knowledge where relevant. | Stage built. Keep surreal water and foil as wider encounters, not mandatory new implementations. |
+| Reaction–Diffusion | Retain previous state and update separately | Data texture → rule → next texture; palette and receiver do not become the state. | Setting built and numerical tests passed. Supplied GPU scheduler; focused printed state lesson still required. |
+
+Test obligations: normal-only changes light response but not outline or mesh/collider; displacement changes rendered outline at sufficient resolution but not physics boundary; flat/constant field has no slope; zero relief restores the undeformed surface. Compare with held time, same lamps/camera/material controls. A normal-map texture must use the declared tangent frame and Godot's `hint_normal`; raw height is data, not a colour texture. Use `NORMAL_MAP` for the encoded per-fragment direction. The exact host and shader must be tested in the active renderer before calling the lesson complete.
+
+Keep runtime presence, printed code, reconstruction tests and human learning as separate statuses. Do not put all shader stages into Shaping. The sequence grows from colour → coordinates → light response → geometry → composition → retained state.
+
+Technical reference: [Godot 4.6 spatial shaders](https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/spatial_shader.html). These distinctions describe rendering; they make no claim that an apparently rough surface resists the hand or that a displaced surface supports the player.

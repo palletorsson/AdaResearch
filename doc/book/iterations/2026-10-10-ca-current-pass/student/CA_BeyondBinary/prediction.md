@@ -1,0 +1,1 @@
+Original glider shifts (1,1) after four steps; fixed A is lit at 8 and dark at 12. Variation replaces seed with a block at (2,2),(3,2),(2,3),(3,3) and SITE=(2,2). Its states and lamp stay true for every tested step. Unlinking darkens globe/light without changing the state or clock; replay preserves link. A block tests survival plus lack of births, not the worked blinker.

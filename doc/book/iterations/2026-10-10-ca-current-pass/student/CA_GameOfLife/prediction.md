@@ -1,0 +1,1 @@
+Original seed 7 gives [6,7,8]. Variation changes only screen X from .85 to .85 + .012*x, producing a diagonal screen; a cell at x=7 is at X=.934. Deck and collision retain the original mapping. Occupied recorded cells have both meshes and deck support; recorded false cells and future cells do not. Reading row zero cannot rewind the current state; saved rows must remain copies.
