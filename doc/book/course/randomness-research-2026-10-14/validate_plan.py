@@ -45,7 +45,7 @@ def main():
     tasks = [t for issue in issues for t in issue["tasks"]]
     by_id = {t["id"]:t for t in tasks}
     ids = set(by_id)
-    check("Twenty stable main IDs and five writing IDs", {t["id"] for t in issues[0]["tasks"]} == {f"randomness_research.{i:03}" for i in range(1,21)} and {t["id"] for t in issues[1]["tasks"]} == {f"randomness_research_writing.{i:03}" for i in range(1,6)} and len(ids) == len(tasks))
+    check("Twenty stable main IDs and ten writing IDs", {t["id"] for t in issues[0]["tasks"]} == {f"randomness_research.{i:03}" for i in range(1,21)} and {t["id"] for t in issues[1]["tasks"]} == {f"randomness_research_writing.{i:03}" for i in range(1,11)} and len(ids) == len(tasks))
     check("Required repository task fields", all({"id","title","spec","effort","skill","status"} <= set(t) for t in tasks))
     check("Repository status vocabulary", all(t["status"] in {"open","claimed","blocked","done","cancelled"} for t in tasks))
     check("Cross-goal dependencies exist", all(set(t["depends_on"]) <= ids for t in tasks))
@@ -78,7 +78,7 @@ def main():
     check("Five lessons and integration do not wait for optional research", not (ancestors("randomness_research.013") | ancestors("randomness_research.020")) & optional)
     check("Emitter lesson does not require distribution import", "randomness_research.005" not in ancestors("randomness_research.009"))
     check("Particle continuation order is P1 P2 P3 P4 P5", all(f"randomness_research.{a:03}" in ancestors(f"randomness_research.{b:03}") for a,b in [(8,9),(9,11),(11,10),(10,13)]))
-    check("Only static audit marked done in this specification", [t["id"] for t in tasks if t["status"] == "done"] == ["randomness_research.001"])
+    check("Only evidenced audit, scope selection and source binding are done", {t["id"] for t in tasks if t["status"] == "done"} == {"randomness_research.001", "randomness_research.002", "randomness_research_writing.001"} and all(t.get("evidence") for t in tasks if t["status"] == "done" and t["id"] != "randomness_research.001"))
     check("All three verification levels retained", all(t["verification_levels"] == ["artifact","experiment_cycle","specified_cross_hall"] for t in tasks))
     check("Runtime headset and learner evidence separate", all(set(t["separate_evidence"]) == {"scene_loading","runtime_stability","performance","physical_VR","independent_learner"} for t in tasks))
     missing = [(t["id"],m) for t in tasks for m in t.get("map_refs",[]) if not (ROOT / f"commons/maps/{m}/map_data.json").exists()]
@@ -125,7 +125,7 @@ def main():
     check("Predecessor prose and task graph preserved", all(digest(history / name) == item["sha256"] for name,item in before["files"].items()))
     revisions = load(HERE / "plan_revisions.json")["revisions"]
     current = revisions[-1]
-    check("Current plan revision is clarification rather than invented observation", current["basis_kind"] == "user_supplied_method_clarification" and current["status"] == "applied_to_spec_only" and not current["observations"] and current["runtime_changes"] is False)
+    check("Current writing revision distinguishes specification from execution", current["basis_kind"] == "user_supplied_writing_clarification" and current["status"] == "applied_to_spec_and_plan" and current["observations"] == [] and current["runtime_changes"] is False and current.get("human_gates") == "open")
     check("Plan revision matches current generated documents", all(digest(ROOT / path) == sha for path,sha in current["after_sha256"].items()))
     check("Revision preserves task IDs and names a real review", current["followup_task"] in ids and all(t["task_id"] in ids for t in current["task_changes"]))
     examples = load(HERE / "text_experiments.json")
@@ -159,7 +159,7 @@ def main():
             history_errors.append(revision["id"] + ": previous documents not recoverable")
     check("Earlier plan revisions remain recoverable", not history_errors, history_errors)
     book = route["book_architecture"]
-    check("Book entry modes and proposed pilot linked", book["reader_modes"] == ["read","reconstruct","investigate"] and book["pilot_status"] == "proposed_not_run" and book["edition_status"] == "not_frozen" and (ROOT / book["contract"]).exists() and (ROOT / book["pilot_record"]).exists() and book["pilot_record"] in examples["companion_records"])
+    check("Book entry modes and proposed pilot linked", book["reader_modes"] == ["read","reconstruct","investigate"] and book["pilot_status"] == "scripted_cycle_passed_human_pending" and book["edition_status"] == "not_frozen" and (ROOT / book["contract"]).exists() and (ROOT / book["pilot_record"]).exists() and book["pilot_record"] in examples["companion_records"])
     module_spec = importlib.util.spec_from_file_location("ada_book_companions", ROOT / "doc/book/experiments/validate_experiments.py")
     module = importlib.util.module_from_spec(module_spec)
     module_spec.loader.exec_module(module)
@@ -167,7 +167,7 @@ def main():
     check("Companion provenance, links and evidence boundaries valid", not companion_report["errors"], companion_report["errors"])
     progress_fields = ("status","claimed_by","done_at","blocked_reason","progress","evidence","notes")
     old_tasks = {t["id"]:t for name in ("randomness_research.json","randomness_research_writing.json") for t in load(architecture_history / name)["tasks"]}
-    check("Architecture retains task identities dependencies and progress", ids == set(old_tasks) and all(t["depends_on"] == old_tasks[t["id"]]["depends_on"] and all(t.get(k) == old_tasks[t["id"]].get(k) for k in progress_fields) for t in tasks))
+    check("Original task identities retained; progress changes have evidence", set(old_tasks) <= ids and all((t["depends_on"] == old_tasks[t["id"]]["depends_on"] or (t["id"] == "randomness_research_writing.004" and t["depends_on"] == old_tasks[t["id"]]["depends_on"] + ["randomness_research_writing.010"])) and (all(t.get(k) == old_tasks[t["id"]].get(k) for k in progress_fields) or bool(t.get("evidence"))) for t in tasks if t["id"] in old_tasks))
     two_texts = HERE / "imports/2026-10-14-two-texts"
     two_texts_manifest = load(two_texts / "manifest.json")
     check("Supplied two-text proposal preserved", all(digest(two_texts / name) == item["sha256"] for name,item in two_texts_manifest["files"].items()))
@@ -175,7 +175,30 @@ def main():
     check("Tutorial and final can initiate and receive experiments", loop["initiating_text_roles"] == loop["text_review_targets"] == ["tutorial","final"] and loop["review_decisions"] == ["revise","retain_with_reason","open_question"] and loop["both_rewrites_required"] is False and loop["next_experiment_basis"] == "actual_observations_or_reconstruction_difficulties")
     check("Writing tasks preserve both research roles", all(t["initiating_text_roles"] == t["text_review_targets"] == ["tutorial","final"] and t["text_review_decisions"] == ["revise","retain_with_reason","open_question"] for t in issues[1]["tasks"]))
     pilot = load(ROOT / book["pilot_record"])
-    check("Selected first pilot retains the 48-value comparison", book["first_pilot"] == pilot["id"] == "random-definition.seed-bench-001" and book["first_pilot_selection"] == "selected_by_user_for_plan" and pilot["record_contract"]["sample_count"] == 48 and pilot["record_contract"]["cells"] == 16 and pilot["record_contract"]["values_per_cell"] == 3 and pilot["simulation"]["godot"]["execution_status"] == "not_run")
+    check("Selected first pilot retains the 48-value comparison", book["first_pilot"] == pilot["id"] == "random-definition.seed-bench-001" and book["first_pilot_selection"] == "selected_by_user_for_plan" and pilot["record_contract"]["sample_count"] == 48 and pilot["record_contract"]["cells"] == 16 and pilot["record_contract"]["values_per_cell"] == 3 and pilot["simulation"]["godot"]["execution_status"] == "scripted_pass_human_pending")
+    writing_sources = HERE / "imports/2026-10-14-writing-composition"
+    writing_manifest = load(writing_sources / "manifest.json")
+    check("Both supplied writing notes preserved exactly", len(writing_manifest["files"]) == 2 and all(digest(writing_sources / name) == item["sha256"] for name,item in writing_manifest["files"].items()))
+    writing_example = load(HERE / "writing_pilot.json")
+    pool = writing_example["pool"]
+    cards = writing_example["paragraph_cards"]
+    routes = writing_example["routes"]
+    pool_ids = {item["id"] for item in pool}
+    card_ids = {item["id"] for item in cards}
+    check("Writing examples keep sources recoverable", all((ROOT / s["snapshot"]).exists() and digest(ROOT / s["snapshot"]) == s["sha256"] for s in writing_example["sources"].values()) and all(set(item["source_ids"]) <= set(writing_example["sources"]) and item["evidence_status"] and item["limits"] for item in pool))
+    check("Pool and paragraph identities are unique and references resolve", len(pool_ids) == len(pool) and len(card_ids) == len(cards) and not pool_ids & card_ids and all(set(c["information"]["pool_ids"]) <= pool_ids for c in cards))
+    fields = {"information","job","attitude","reader_gain","bridge","size","critical_pressure","experimental_potential"}
+    check("Eight card fields with optional critical pressure", all(fields <= set(c) for c in cards) and any(c["critical_pressure"] is None and c["experimental_potential"] is None for c in cards))
+    check("Competing reading routes retain explicit order and rationale", len(routes) >= 2 and len({r["id"] for r in routes}) == len(routes) and all(set(r["card_ids"]) <= card_ids and len(r["card_ids"]) == len(set(r["card_ids"])) and r["rationale"] for r in routes) and len({tuple(r["card_ids"]) for r in routes}) == len(routes))
+    check("Writing pilot does not fabricate reading or runtime evidence", writing_example["status"] == "design_example_not_run" and writing_example["selected_route"] is None and writing_example["editorial_decision"] is None and writing_example["ghost_reader_runs"] == [] and writing_example["human_reviews"] == [] and writing_example["runtime_changes"] is False and writing_example["first_experiment"] == pilot["id"])
+    fixture = writing_example["critical_fixture"]
+    check("Critical fixture is arithmetic, not an observed trial", fixture["kind"] == "constructed_arithmetic_example_not_observation" and fixture["execution_status"] == "not_run" and not fixture["observations"] and all(abs(sum(t)/3-fixture["mean"]) < 1e-12 for t in fixture["triples"]) and fixture["triples"][0] != fixture["triples"][1])
+    check("Critical proposition can be challenged by a rival", all(c["critical_pressure"] and c["experimental_potential"]["alternative"] and c["experimental_potential"]["revision_condition"] for c in cards if c["experimental_potential"] is not None))
+    prefix = "randomness_research_writing."
+    check("Writing composition starts without waiting for particle delivery", not {"randomness_research.013", prefix+"002"} & ancestors(prefix+"008") and by_id[prefix+"006"]["status"] == "open")
+    check("Edition review includes explicit reading selection", prefix+"010" in by_id[prefix+"004"]["depends_on"] and {prefix+"008",prefix+"009"} <= ancestors(prefix+"010") and not {prefix+f"{n:03}" for n in range(6,11)} & ancestors("randomness_research.013"))
+    before_writing = load(HERE / "history/2026-10-14-before-writing-composition/doc/tasks/randomness_research_writing.json")
+    check("Writing revision preserves existing execution progress", all(all(by_id[t["id"]].get(k) == t.get(k) for k in progress_fields) for t in before_writing["tasks"]))
     for p in HERE.glob("*.py"):
         ast.parse(p.read_text(encoding="utf-8"),filename=str(p))
     check("Proposal Python sources parse", True)
@@ -183,7 +206,7 @@ def main():
     report = {"date":"2026-10-14","scope":"Static specification/comparison validation only",
               "passed":len(checks)-len(errors),"total":len(checks),"errors":errors,"checks":checks,
               "stale_source_receipts":stale,"stale_comparison_receipts":stale_comparison,
-              "runtime":"not run","physical_VR":"not tested","independent_learner":"not tested"}
+              "runtime":"not executed by this validator; see pilot run receipts","physical_VR":"not tested","independent_learner":"not tested"}
     (HERE / "validation.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(json.dumps({k:report[k] for k in ["scope","passed","total","errors","stale_source_receipts","stale_comparison_receipts"]},ensure_ascii=False))
     if errors:

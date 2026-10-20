@@ -1,90 +1,115 @@
 {
-  "scope": "14 halls; one revision at a time. No production-code or sequence-order change.",
+  "scope": "14 teaching halls revised. Closing Biome_Ladder_Randomness deferred by Palle on 2026-10-09; Biome_Cage remains. Route has 15 museum spaces; no teaching hall reordered.",
   "halls": [
     {
       "map": "Random_Definition",
       "status": "revised; ready for review",
-      "tutorial_test": "22 + 23 + 23 passed; 2 faults rejected",
-      "museum_test": "15 passed; native images inspected",
-      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Definition/index.html"
+      "tutorial_test": "36 + 37 + 37 passed; 2 faults rejected",
+      "museum_test": "24 passed; adjustable 8x8 matrices; native images inspected",
+      "report": "doc/book/iterations/2026-10-09-random-matrix-size/index.html"
     },
     {
       "map": "Random_Entropy",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "31 + 31 + 31 passed; 3 faults rejected",
+      "museum_test": "26 passed; native images inspected; failed first placement retained",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Entropy/index.html"
     },
     {
       "map": "Random_Remove",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "30 checks × 5 programs passed; 3 faults rejected",
+      "museum_test": "34 passed; native images inspected",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Remove/index.html"
     },
     {
       "map": "Randomness_10_PRINT_Algorithm",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "25 checks × 3 programs passed; 3 faults rejected",
+      "museum_test": "36 passed; native images inspected",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Randomness_10_PRINT_Algorithm/index.html"
     },
     {
       "map": "Random_Cubes",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "32 checks × 3 programs passed; 4 faults rejected",
+      "museum_test": "32 passed; native images inspected",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Cubes/index.html"
     },
     {
       "map": "Random_Rotate_Random_XYZ",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "29 checks × 4 programs passed; 4 faults rejected",
+      "museum_test": "26 passed; native images inspected; first placement failed",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Rotate_Random_XYZ/index.html"
     },
     {
       "map": "Random_Walk",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "30 checks × 4 programs passed; 4 faults rejected",
+      "museum_test": "32 passed; native images inspected; supplied interaction events",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Walk/index.html"
     },
     {
       "map": "Random_Gaussian",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "30 checks × 4 programs passed; 4 faults rejected",
+      "museum_test": "28 passed; native images inspected; supplied point actions",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Gaussian/index.html"
     },
     {
       "map": "Random_Mushrooms",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "32 checks × 4 programs passed; 4 faults rejected",
+      "museum_test": "32 passed; native images inspected; supplied point actions",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Mushrooms/index.html"
     },
     {
       "map": "Random_Space_Geometry",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "27 checks × 4 programs passed; 4 faults rejected",
+      "museum_test": "29 passed; native images inspected; supplied point actions; lighting/layout limits recorded",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Space_Geometry/index.html"
     },
     {
       "map": "Randomness_Examples_of_Randomness",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "21 checks × 4 programs passed; 4 faults rejected",
+      "museum_test": "28 passed; native images inspected; current budget-console button signals and supplied point actions",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Randomness_Examples_of_Randomness/index.html"
     },
     {
       "map": "Random_Pheromone",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "31 checks × 6 programs passed; 4 faults rejected; reduced source-rule parity",
+      "museum_test": "28 passed; final native views inspected after two rejected placements; supplied actions",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Pheromone/index.html"
     },
     {
       "map": "Random_Space",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "33 checks × 6 programs passed; 4 faults rejected; source sum parity",
+      "museum_test": "27 passed; native comparison images inspected; supplied actions; existing entrance issue remains",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Space/index.html"
     },
     {
       "map": "Random_Game",
-      "status": "planned",
-      "tutorial_test": "not_yet_run",
-      "museum_test": "not_yet_run"
+      "status": "revised; ready for review",
+      "tutorial_test": "33 checks × 4 complete programs; 200 source waits per version; 4 faults rejected",
+      "museum_test": "30 native checks passed; source cycle and controls; images inspected; headset untested",
+      "report": "doc/book/iterations/2026-10-09-randomness-revision/Random_Game/index.html"
     }
-  ]
+  ],
+  "sequence_reading": "doc/book/iterations/2026-10-09-randomness-review-ready/index.html",
+  "previous_sequence_reading": "doc/book/iterations/2026-10-09-randomness-without-the-ladder/index.html",
+  "external_review_packet": "doc/book/iterations/2026-10-09-randomness-review-ready/randomness-review.zip",
+  "editorial_pass": {
+    "date": "2026-10-09",
+    "status": "tightened; external review pending",
+    "fresh_baseline_programs": 14,
+    "native_assertions_passed": 420,
+    "gdscript_unchanged": true,
+    "headset_tested": false,
+    "independent_student_tested": false
+  }
 }

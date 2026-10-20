@@ -1,0 +1,170 @@
+{
+  "schema": "ada.randomness-research.proposal.v2",
+  "date": "2026-10-14",
+  "status": "proposed",
+  "runtime_installed": false,
+  "baseline_commit": "e5414cb18",
+  "revision_basis": "COMPARISON.md",
+  "accepted_verification": "Seven-step cycle, three verification levels and separate runtime/headset/learner evidence",
+  "movements": [
+    "Return and source",
+    "Likelihood and eligibility",
+    "Marks and neighbours",
+    "Field and place",
+    "Memory and feedback",
+    "Measurement and omission",
+    "Sensitivity and selection",
+    "Revise the possible"
+  ],
+  "randomness_order": [
+    "Random_Definition",
+    "Random_Entropy",
+    "Random_Cubes",
+    "Random_Gaussian",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Mushrooms",
+    "Random_Space_Geometry",
+    "Randomness_Examples_of_Randomness",
+    "Random_Pheromone",
+    "Random_Space",
+    "Random_Game"
+  ],
+  "noise_order": [
+    "Random_Noise_Types",
+    "Noise_Columns",
+    "Noise_One",
+    "Noise_Voxel",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Cellular",
+    "Noise_Box",
+    "Noise_Space_10",
+    "Noise_Perlin_Simplex",
+    "Lab_Path"
+  ],
+  "particle_order": [
+    "Particles_SingleAndArrays",
+    "Particles_Emitters",
+    "Particles_Forces",
+    "Particles_LifetimeAndTypes",
+    "Particles_Collision"
+  ],
+  "required_new_maps": [],
+  "deferred_new_maps": [
+    "Random_Source_Lab",
+    "Random_Sensitivity_Lab",
+    "Random_Rule_Workshop",
+    "Particles_Field_Lab"
+  ],
+  "optional_stops": [
+    "Lab_Path"
+  ],
+  "museum_interludes": [
+    "Biome_Cage"
+  ],
+  "preserved_exit": {
+    "map": "Noise_Perlin_Simplex",
+    "destination_sequence": "shaders"
+  },
+  "later_returns": [
+    "PG_Genetic_Evolution",
+    "QFEP_Sandbox"
+  ],
+  "research_extensions": {
+    "source": [
+      "Random_Definition"
+    ],
+    "sensitivity": [
+      "Random_Space"
+    ],
+    "E1": [
+      "Particles_Forces",
+      "Random_Space_Geometry",
+      "Noise_Space_10"
+    ],
+    "E2": [
+      "Random_Space",
+      "Random_Game"
+    ]
+  },
+  "transfer_ids": [
+    "X1",
+    "X2",
+    "X3",
+    "X4",
+    "X5",
+    "X6",
+    "X7"
+  ],
+  "first_local_transfer": "X1",
+  "first_cross_hall_transfer": "X2",
+  "optional_extension_transfers": [
+    "X3",
+    "X6",
+    "X7"
+  ],
+  "imports_optional": true,
+  "destinations_have_local_baselines": true,
+  "book_architecture": {
+    "contract": "doc/book/RECURSIVE_ARCHITECTURE.md",
+    "pilot_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+    "reader_modes": [
+      "read",
+      "reconstruct",
+      "investigate"
+    ],
+    "first_pilot": "random-definition.seed-bench-001",
+    "first_pilot_selection": "selected_by_user_for_plan",
+    "pilot_status": "proposed_not_run",
+    "edition_status": "not_frozen"
+  },
+  "text_simulation_loop": {
+    "contract": "TEXT_SIMULATION.md",
+    "examples": "text_experiments.json",
+    "writing_cycle": [
+      "generate",
+      "read",
+      "question",
+      "test",
+      "revise",
+      "rediscover"
+    ],
+    "many_to_many": true,
+    "observations_can_revise_plan": true,
+    "initiating_text_roles": [
+      "tutorial",
+      "final"
+    ],
+    "text_review_targets": [
+      "tutorial",
+      "final"
+    ],
+    "review_decisions": [
+      "revise",
+      "retain_with_reason",
+      "open_question"
+    ],
+    "both_rewrites_required": false,
+    "next_experiment_basis": "actual_observations_or_reconstruction_difficulties",
+    "pilot_outcomes": [
+      "apparatus result",
+      "independent tutorial and final reviews",
+      "task-plan decision"
+    ]
+  },
+  "opening_trials": {
+    "status": "proposed_not_run",
+    "A": [
+      "Random_Definition",
+      "source comparison within Random_Definition"
+    ],
+    "B": [
+      "Random_Definition",
+      "Random_Entropy"
+    ],
+    "requires_new_hall": false
+  }
+}

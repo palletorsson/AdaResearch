@@ -30,6 +30,12 @@ The recurring object is an experiment record. At first it preserves a colour arr
 
 The first implementation should be a small complete encounter at the existing seed bench: baseline → one changed interpretation → observation/comparison → retained result → replay → independent reconstruction → proposed further change. Pair the pilot with a passage interpretation, scoped observations and a task-plan decision. Compare the source-oriented and Entropy-oriented openings as bounded trials without requiring a new hall; Definition → Entropy remains the current proposed route. Evidence may lead to branching, reprioritizing or abandoning proposed work. The five particle lessons remain a separate design track.
 
+## Writing specification extension — 14 October 2026
+
+The [writing specification](WRITING_SPEC.md) and [Random Definition trial plan](WRITING_PILOT.md) add a research pool, knowledge selection, eight-field paragraph cards, competing reading routes and separate ghost-reader/editorial review. `final.md` develops technically grounded critical and associative inquiry: edge, leak, technical bias and attachment are optional lenses, not required sections. An interpretation may propose an operational change, and the result may weaken or overturn it. Both texts retain their power to initiate and revise experiments.
+
+W006–W010 extend the existing writing tracker. The 48-value seed bench remains first; the hall and particle orders are unchanged. The supplied account of an earlier hybrid reading route is a reported precedent. No new literary A/B trial or human response is claimed.
+
 ## User Stories
 
 1. As a visitor, I want to encounter a work before reading its mechanism, so that my attention can begin with something I notice.
@@ -168,3 +174,21 @@ The ZIP comparison maps thirty-four imported task IDs into twenty stable main ta
 The new methodological sources and pre-revision documents are preserved with hashes. The current plan revision is based on the supplied clarification, not pilot evidence. A fifth writing task reviews what the pilot changes about future work; neither this review nor the supplied critique authorizes a complete museum rebuild.
 
 The [book architecture](../../RECURSIVE_ARCHITECTURE.md), [companion directory](../../experiments/README.md) and [blog draft](../../RECURSIVE_BOOK_BLOG.md) incorporate the later supplied architecture. The main and writing task IDs and dependencies remain stable; the edition candidate is part of the existing editorial task. No new hall is needed to make this connection.
+
+## First pilot execution — 14 October 2026
+
+The user authorized the first experiment loop. The 48-value seed bench now runs in an isolated Random_Definition museum instance. Native cycle (46 checks), fresh-process replay (3), printed-code reconstruction (46) and rendered museum probe (10) pass; four deliberate faults are detected. The tutorial receives a complete companion continuation after import/precision failures. The final passage is retained with reasons. Human encounter, independent reconstruction, physical VR and performance remain open. See [observations](../../experiments/random-definition/seed-bench-001/observations.md), [text reviews](../../experiments/random-definition/seed-bench-001/revision.md) and [human trial](../../experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md).
+
+The provisional next-work decision is defer expansion until the human return. Main .002 and W001 are complete for the bounded selection and source bindings; .003/W002/W005 retain their unmet gates. The separate source-first/Entropy-first opening trial has not run. Hall sequence and particle order/dependencies are retained. No edition is frozen or published.
+
+## Human return: compact VR controls
+
+The user requested the existing demo's VR interaction, rectangular buttons collected on one board, and close control. This authorizes the bounded interface revision. The pilot now uses eight rectangular hand/pointer buttons, one status display, CLOSE and a CONTROLS reopen tab. The model and mappings are unchanged. O5 preserves the human reply; O6 records 18 passing museum checks. Tutorial and task plan are updated; final is retained with reasons. Physical headset assessment, the full comparison account and independent reconstruction remain open. See [the interface return](../../experiments/random-definition/seed-bench-001/VR_BOARD.md).
+
+### Second human return: fixed-bottom bars
+
+The selected 48-value pilot now follows the user's request for gentler bars and narrower gutters **between cells**, leaving button spacing unchanged. The current [bar recipe](../../experiments/random-definition/seed-bench-001/ANCHORED_BARS.md) now uses 9 cm width/depth, 1.5 cm gutter and a fixed bottom at 8 cm, following the further request to fill the board. The grid fills 40.5 cm of each 45 cm tray. FLAT height is 4 cm; BARS height is `0.04 + 0.12 * mean(a,b,c)` metres, with centre `0.08 + height/2`. Within the current comparison, only height and the corresponding centre placement change; RGB and raw values remain fixed. Preserve the old floating-cube recipe for replay. The new request revises the apparatus and tutorial; it does not itself establish greater educational value.
+
+### Current pilot: five simultaneous spatial assignments
+
+The latest user direction supersedes the flat/bar toggle. Show FLAT RGB, neutral BARS, COMBO RGB+height, SCALE and ROTATE together, using the same sixteen triples. Colour uses the channels directly; the spatial views use their mean. Keep fixed bottoms, the gentler bar span and narrow cell gutters; add wider 54 cm frames around 46 cm dark insets. The [current recipe and limits](../../experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md) define the formulas, scene layout and schema v3. Earlier saved v1/v2 geometry must replay intact; entering CURRENT VIEWS explicitly forks it. Compare FLAT/COMBO and BARS/COMBO separately before interpreting the different scale/rotation shapes.

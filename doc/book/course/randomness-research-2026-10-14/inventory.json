@@ -1,12 +1,12 @@
 {
   "date": "2026-10-14",
   "method": "Static current-working-tree inventory; no Godot, headset, or learner test",
-  "git_head": "314f8ed5287098ec65416bc1f388d2602ef46417",
+  "git_head": "3cc6cbb87d8ed795ef953709dacb41b51ff40539",
   "working_tree": "Contains pre-existing edits; HEAD alone does not identify inspected content",
   "coverage": {
     "halls": 31,
-    "distinct_placed_artifacts": 111,
-    "hall_artifact_pairs": 135,
+    "distinct_placed_artifacts": 113,
+    "hall_artifact_pairs": 137,
     "missing_registry_keys": [],
     "missing_selected_scenes": []
   },
@@ -88,7 +88,19 @@
       "museum_only": [
         "Biome_Cage"
       ],
-      "artifact_key_differences": []
+      "artifact_key_differences": [
+        {
+          "map": "Random_Definition",
+          "only_in_map": [
+            "geiger_counter",
+            "lava_entropy_wall",
+            "seed_study"
+          ],
+          "only_in_live_plan": [
+            "catalyst_pickup"
+          ]
+        }
+      ]
     },
     "noise": {
       "declared_maps": [
@@ -171,56 +183,11 @@
       },
       "artifacts": [
         {
-          "key": "catalyst_pickup",
-          "placements": [
-            {
-              "x": 10,
-              "z": 8,
-              "cell": "catalyst_pickup:180#sequence_name:randomness#label_text:RANDOMNESS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20"
-            }
-          ],
-          "registrations": [
-            {
-              "registry": "commons/artifacts/registry/lab.json",
-              "name": "catalyst_pickup",
-              "description": "Pedestal with a floating glowing orb. Grab it to complete a sequence — LabManager records completion and the bracelet's matching catalyst mode unlocks. The closing gesture that turns a lab chamber from museum to course.",
-              "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
-              "exists": true,
-              "direct_scripts": [
-                {
-                  "path": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.gd",
-                  "exists": true,
-                  "lines": 475,
-                  "functions": [
-                    "_ready",
-                    "apply_grid_config",
-                    "_read_metadata_overrides",
-                    "_parse_color",
-                    "_build_pickup",
-                    "_start_pulse",
-                    "take_catalyst",
-                    "_offer_vitrine",
-                    "_offer_clamp",
-                    "_offer_shrine",
-                    "_offer_chute"
-                  ],
-                  "uses_global_draws": false,
-                  "has_local_rng": false,
-                  "uses_frame_process": false,
-                  "uses_physics_process": false,
-                  "uses_wall_clock": false,
-                  "inspection": "Static markers only; not a semantic or runtime verdict"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "key": "film_prng_register",
           "placements": [
             {
               "x": 1,
-              "z": 9,
+              "z": 10,
               "cell": "film_prng_register:90:0#plinth:0#pin:true"
             }
           ],
@@ -258,12 +225,122 @@
           ]
         },
         {
+          "key": "geiger_counter",
+          "placements": [
+            {
+              "x": 1,
+              "z": 6,
+              "cell": "geiger_counter:90:0#plinth:0#pin:true"
+            }
+          ],
+          "registrations": [
+            {
+              "registry": "commons/artifacts/registry/randomness.json",
+              "name": "Geiger Counter — Counting the Gaps",
+              "description": "HotBits-inspired Geiger simulation: listen to 96 seeded Poisson detection times, compare interval pairs and extract bits. Change event rate or clock resolution, keep and replay the exact clicks. Explicitly simulated events, not genuine radioactive measurements.",
+              "scene": "res://commons/artifacts/geiger_counter/geiger_counter.tscn",
+              "exists": true,
+              "direct_scripts": [
+                {
+                  "path": "res://commons/artifacts/geiger_counter/geiger_counter.gd",
+                  "exists": true,
+                  "lines": 214,
+                  "functions": [
+                    "_ready",
+                    "reset_model",
+                    "_set_record",
+                    "play_hold",
+                    "restart",
+                    "toggle_sound",
+                    "new_sample",
+                    "compare_rate",
+                    "compare_clock",
+                    "keep_baseline",
+                    "keep",
+                    "_save_error",
+                    "replay",
+                    "load_latest",
+                    "_process",
+                    "_finished",
+                    "_refresh_visuals",
+                    "_refresh_text",
+                    "_label",
+                    "_build"
+                  ],
+                  "uses_global_draws": false,
+                  "has_local_rng": false,
+                  "uses_frame_process": true,
+                  "uses_physics_process": false,
+                  "uses_wall_clock": true,
+                  "inspection": "Static markers only; not a semantic or runtime verdict"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "lava_entropy_wall",
+          "placements": [
+            {
+              "x": 11,
+              "z": 6,
+              "cell": "lava_entropy_wall:270:0#plinth:0#pin:true#seed:435"
+            }
+          ],
+          "registrations": [
+            {
+              "registry": "commons/artifacts/registry/randomness.json",
+              "name": "Lava Wall — What Can You Predict?",
+              "description": "Twelve virtual lava lamps feed a visible sampled-image → hash → 48-value pipeline. Hold a baseline, change heat or cover, compare, keep a receipt and replay. System random input is explicitly separate from the deterministic lamps; this exhibit is not a physical TRNG or cryptographic generator.",
+              "scene": "res://commons/artifacts/lava_entropy_wall/lava_entropy_wall.tscn",
+              "exists": true,
+              "direct_scripts": [
+                {
+                  "path": "res://commons/artifacts/lava_entropy_wall/lava_entropy_wall.gd",
+                  "exists": true,
+                  "lines": 268,
+                  "functions": [
+                    "apply_grid_config",
+                    "_ready",
+                    "_physics_process",
+                    "capture_baseline",
+                    "compare_heat",
+                    "compare_cover",
+                    "_compare",
+                    "toggle_run",
+                    "keep_current",
+                    "replay_kept",
+                    "replay_record",
+                    "load_latest",
+                    "fresh_system",
+                    "reset_model",
+                    "_restore_configuration",
+                    "_refresh_status",
+                    "_label",
+                    "_cylinder",
+                    "_build_wall",
+                    "_refresh_lamps",
+                    "_paint_record",
+                    "_build_board"
+                  ],
+                  "uses_global_draws": false,
+                  "has_local_rng": false,
+                  "uses_frame_process": false,
+                  "uses_physics_process": true,
+                  "uses_wall_clock": true,
+                  "inspection": "Static markers only; not a semantic or runtime verdict"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "key": "prng_crank_machine",
           "placements": [
             {
-              "x": 3,
+              "x": 1,
               "z": 4,
-              "cell": "prng_crank_machine:180:0.62"
+              "cell": "prng_crank_machine:90:1:2"
             }
           ],
           "registrations": [
@@ -327,9 +404,9 @@
           "key": "random_number_book_page_1955",
           "placements": [
             {
-              "x": 9,
-              "z": 16,
-              "cell": "random_number_book_page_1955:0:2.7:0.8"
+              "x": 2,
+              "z": 12,
+              "cell": "random_number_book_page_1955:270:3:1"
             }
           ],
           "registrations": [
@@ -391,7 +468,7 @@
           "placements": [
             {
               "x": 6,
-              "z": 11,
+              "z": 5,
               "cell": "random_return:180#route_link:random_definition"
             }
           ],
@@ -441,9 +518,9 @@
           "key": "seed_replay_demo",
           "placements": [
             {
-              "x": 6,
-              "z": 6,
-              "cell": "seed_replay_demo:180#display:wall#surface:glass#comparison:replicas#stand:table#controls:compact#control_front:1.0#side:4#atmosphere:true#seed:435#recorded_atmosphere:true#movement_seed:true#route_link:random_definition"
+              "x": 8,
+              "z": 14,
+              "cell": "seed_replay_demo:180#display:wall#surface:glass#comparison:replicas#stand:table#controls:compact#control_front:1.0#side:4#atmosphere:true#seed:435#recorded_atmosphere:true#movement_seed:true#route_link:random_definition#part_frame_timing:3.5,3.5,168#part_source_console:3.5,8.5,180#part_movement_sampler:3.5,16.5,180"
             }
           ],
           "registrations": [
@@ -457,7 +534,7 @@
                 {
                   "path": "res://algorithms/randomness/seed_replay/seed_replay_demo.gd",
                   "exists": true,
-                  "lines": 917,
+                  "lines": 936,
                   "functions": [
                     "raw_prefix",
                     "_draw_number_strips",
@@ -497,10 +574,46 @@
                     "replay",
                     "use_kept_seed",
                     "randomize_seed",
+                    "_place_editor_parts",
                     "apply_grid_config"
                   ],
                   "uses_global_draws": true,
                   "has_local_rng": true,
+                  "uses_frame_process": false,
+                  "uses_physics_process": false,
+                  "uses_wall_clock": false,
+                  "inspection": "Static markers only; not a semantic or runtime verdict"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "seed_study",
+          "placements": [
+            {
+              "x": 10,
+              "z": 17,
+              "cell": "seed_study:270:0#plinth:0#pin:true"
+            }
+          ],
+          "registrations": [
+            {
+              "registry": "commons/artifacts/registry/randomness.json",
+              "name": "Seed Study — 48 Values / Five Spatial Assignments",
+              "description": "One retained set of 48 seeded values appears simultaneously as RGB colour, anchored bars, colour plus height, smaller objects and rotation. Compare the same cell across five trays, keep a result and replay its stored values and recipe.",
+              "scene": "res://commons/artifacts/seed_study/seed_study.tscn",
+              "exists": true,
+              "direct_scripts": [
+                {
+                  "path": "res://commons/artifacts/seed_study/museum_seed_study.gd",
+                  "exists": true,
+                  "lines": 14,
+                  "functions": [
+                    "_input"
+                  ],
+                  "uses_global_draws": false,
+                  "has_local_rng": false,
                   "uses_frame_process": false,
                   "uses_physics_process": false,
                   "uses_wall_clock": false,
@@ -580,7 +693,7 @@
           "placements": [
             {
               "x": 3,
-              "z": 16,
+              "z": 14,
               "cell": "trng_vs_prng:180:1.12:0.1"
             }
           ],
@@ -10222,7 +10335,7 @@
     "algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn": "665e1f0178d48808c43711d03a85f378fe7017830081639f5b974a4daa4a8211",
     "algorithms/randomness/remove_random.tscn": "b883fa85094bb378a7603baf86343cdea215c059d5726c29c11b7e236a6cb103",
     "algorithms/randomness/sculpt_one.tscn": "ab0f4d387938c908949729fa2eb0245a60b49d21f5a01b7184e422bd60e8a3f8",
-    "algorithms/randomness/seed_replay/seed_replay_demo.gd": "2087b4f8871dc2a3294ff3e07ac418a805f4b0a36999671f79f37ea7050b2123",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": "b10d34cb9f583167607778c0285568f3f5f002a4188dcb266a45d33f85a6f2c1",
     "algorithms/randomness/seed_replay/seed_replay_demo.tscn": "10ea4bea4d4391659706c3ab0486db53340f249a78be81a730f87d1423e1e3e2",
     "algorithms/randomness/shadernoisespace/noiseroom.gd": "2516f30946ef779a207b2fdf041c48473e86e183431bbce431973939a307e78b",
     "algorithms/randomness/shadernoisespace/noiseroom.tscn": "51c68bad4569504b4fe336ccf91ef66765c83181d7e8ea3bd3f3447bca2d66c0",
@@ -10251,8 +10364,6 @@
     "commons/artifacts/blue_noise_planter/blue_noise_planter.tscn": "de22a0801df80d17aeefe92c603d0d14f1a705d011fd98a16c626ed06dcec56f",
     "commons/artifacts/blue_noise_toy/blue_noise_toy.gd": "bf0a43bb46dcf43a6138be6a99d96d2c05399fa1e3b484659c2252ac1de4b64e",
     "commons/artifacts/blue_noise_toy/blue_noise_toy.tscn": "846f6470ad7eaee6c76994e6aec7a34a8fb880e85eaeed215224f48194bd34bb",
-    "commons/artifacts/catalyst_pickup/catalyst_pickup.gd": "59b1860a17782cccb6d5900b7099cf23760a97b9f5f5a74de0d57df31fa27f48",
-    "commons/artifacts/catalyst_pickup/catalyst_pickup.tscn": "a79a9b3d94bec1c2b6261f1cdf8d32658d179f0a069e93c8f6c312db60bb6739",
     "commons/artifacts/composition_stochastique/composition_stochastique.gd": "bd359d455bb8f8654c1735fa6768be8be689eda41732daa7938af8b6070cbc53",
     "commons/artifacts/composition_stochastique/composition_stochastique.tscn": "8771a8af9fa6c01c0eef81a57af308310935a8a139201312e3b59499e66b1f7d",
     "commons/artifacts/concept_monitor/concept_monitor.gd": "033a5623a25a80bc308dbb2a74248d3be854fc1f269c9d1e02109efb493addd8",
@@ -10268,6 +10379,8 @@
     "commons/artifacts/door_timing_trials/door_timing_trials.tscn": "5f0a72877167207c5ed598f76c15dd8cc88e230f26909793d2c1582b817d29e1",
     "commons/artifacts/edge_of_chaos_bench/edge_of_chaos_bench.gd": "4dd032784afc5a32e1f33801a37e18ca9e0ba212f819e4fb0ded75fed4d3f026",
     "commons/artifacts/edge_of_chaos_bench/edge_of_chaos_bench.tscn": "3f4cd7105fb2ca10cf6f0d3b498a39e44a8f025999dd8cae1ea5183fd479c13e",
+    "commons/artifacts/geiger_counter/geiger_counter.gd": "ec7bbbb6dad6c89905b12032b0b8ea88f8917f916d4698a5039c3b6902e6bc1c",
+    "commons/artifacts/geiger_counter/geiger_counter.tscn": "0ff5801e08e6a0defa43ae6e8b78a74d8645f5aa0bdda6da7b9d6002453a567b",
     "commons/artifacts/geometry_noise/GeometryNoiseTest.gd": "bbab944f081c51bb5928f19015208df3ff4cd3979a9402578608f7e623cd92f6",
     "commons/artifacts/geometry_noise/GeometryNoiseTest.tscn": "e443369787a559b1f11439778582d8c4c3df59573bed52dd8fa2d018ae57c676",
     "commons/artifacts/grammar_bench/grammar_bench.gd": "415073cf51e0c7c00847a016c1799140c50fd42cc99a63ecb0da6b871c09dada",
@@ -10276,6 +10389,8 @@
     "commons/artifacts/grammar_provenance/grammar_provenance.tscn": "609a9160ac409ff2de26c5de9c2857f88c24715716361f98dbb06e3e008d296a",
     "commons/artifacts/graph_grammar_station/graph_grammar_station.gd": "b7e7eb82bdb519dd8ed3f3d73dbcedc8add6b2a9fe9888982f9b209ee04ef24e",
     "commons/artifacts/graph_grammar_station/graph_grammar_station.tscn": "294ad8b1bfb71f47b69847ecce9cf0ac3b34575327902cf450bdaaaf14931f12",
+    "commons/artifacts/lava_entropy_wall/lava_entropy_wall.gd": "86a4b4fd7eac19f66da03fd0c9e430976f3170e2aafa754be68657d248c8cee3",
+    "commons/artifacts/lava_entropy_wall/lava_entropy_wall.tscn": "0522f381704b328abf93958e656d16cef2ea0a0e7a547ebd7c8d8765ffee661c",
     "commons/artifacts/lyapunov_bench/lyapunov_bench.gd": "1a6a5f3142b539012f8671529db2fe5021620ef79253dc184f74b81e5eabd915",
     "commons/artifacts/lyapunov_bench/lyapunov_bench.tscn": "64b684e468575fdcd10c134e92c8132c6ad40f2282b43833c8108dd61524531b",
     "commons/artifacts/markov_blanket_room/markov_blanket_room.gd": "0f968409d9f8b59c5a8286ba1f4dfb12a8117fa7fa18343dd97fbfc35c3618e7",
@@ -10321,7 +10436,6 @@
     "commons/artifacts/registry/furniture.json": "b5ac262f694430904ef70e8763a18ce5637f7bb629a6b3259ab03e64f2859db3",
     "commons/artifacts/registry/grammar_systems.json": "87becb7495c17c3ca472435f7c0f20a10ebe6c0b3130128b7204e6c5526f9636",
     "commons/artifacts/registry/instruments.json": "92ca55b15555eb202b4f1e976d36c093dc4cfdb3b395dd37b70c13960a4c1ca8",
-    "commons/artifacts/registry/lab.json": "3341a00a4415db0e3ffd2ae4e65a90af99088b6a10ab34c02988c358a81dfcc1",
     "commons/artifacts/registry/living_paper.json": "b0cafba12a9fc6005c0e542d88592e57324dd2aa73e534c76a5a0ec42a671851",
     "commons/artifacts/registry/lsystems.json": "87445b05ddd1d411cc97cde986d5be486d4a4e82409d73fe110b488d8bf10b8e",
     "commons/artifacts/registry/markov_blanket_room.json": "6734c5c3577a17a6c6ea758d5015ccf5fd591dd7c003f89cd37db5efa730a21e",
@@ -10332,7 +10446,7 @@
     "commons/artifacts/registry/procgen_extra.json": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
     "commons/artifacts/registry/qfep.json": "44e043f5b144c6b756f26ef39d7a5b71d67473afe4033a6e4c28fa525cef7d8e",
     "commons/artifacts/registry/random_cubes.json": "300e52e3d34fdda5480641cc4819ca282f325bf05d95b4aa9dd5f1e66e111252",
-    "commons/artifacts/registry/randomness.json": "70f4208b42bc6e1e670cdbb37bd34910d58bdcc0bf359c9bbc3d3724f90e3b7d",
+    "commons/artifacts/registry/randomness.json": "27d977f36491c260c31d986eb3fc0bfcd185fc18ae7aea05d2a3cf5bc7b70e11",
     "commons/artifacts/registry/sdf_gallery.json": "0e11d01f8f8fc47bda42b2edc8b69ed39f959a4163a67cb9b9125f1141530c91",
     "commons/artifacts/registry/shaders.json": "d134e41a5eaced897a0abd6e37d678c30f7824b09cd73833af93e744c073f76b",
     "commons/artifacts/registry/signal_room.json": "494879bf4302216c999a044ba2ea63309f084149bd6a7fb494a0f7a59254fcdb",
@@ -10345,6 +10459,8 @@
     "commons/artifacts/sampling_hoppers/sampling_hoppers.tscn": "bc4b07b120a8b85d158d21f6ee96ada2fe23cb6903a13cf68b974bf65bd185a4",
     "commons/artifacts/science_screen/science_screen.gd": "d3f4b8728c0231eecb4ca3af959e11dbdd42d5b68913c5d442507a2370d286e0",
     "commons/artifacts/science_screen/science_screen.tscn": "3c67ce5e09a8a433d75343bc5feb16fb7d3f1ecea208d749477a4e73ac190f96",
+    "commons/artifacts/seed_study/museum_seed_study.gd": "a16527e35be8a689cd9dc7903366976a761680dd7d2b38f2930d64aa0247e6ed",
+    "commons/artifacts/seed_study/seed_study.tscn": "7fd55d45e62544afd200ccae1ab35ae20b5426ed66300a62f5853b7f93ef02fc",
     "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd": "9bce6461e86faf05b24d4c2a0170ca943e0a3f44364116bed78fe5fb7d964336",
     "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn": "def91e9cfe5731dd724b02e19539dade179ea3df9633bf4ae6152f4aabc5a0a8",
     "commons/artifacts/spine_films/monitors/film_chance_passage.tscn": "55959ae954037c6a9078f2b2f5c5e4b3bba89692a90f8a3a5ce41eee41f45246",
@@ -10464,7 +10580,7 @@
     "commons/maps/Random_Definition/blurb.md": "9c9b1fb8565ce567394c4d8ca7e3202fd1855d1b2059ceb0ee925eea762e6913",
     "commons/maps/Random_Definition/final.md": "591234ea2ef7b688bb6af55c780e721c7a903752125eb12506b4b0f2bb8b47a7",
     "commons/maps/Random_Definition/intent.md": "05c855643eb9b72b90c48ee0f3ea2e2b9e8f49d328f424d14b71b2099f7a9fa3",
-    "commons/maps/Random_Definition/map_data.json": "58f52333f7b0ad026aa740df0f4dd4e15b59baaba15d4fa9a0486ec181288f07",
+    "commons/maps/Random_Definition/map_data.json": "d6dd6b4c33efe1e0201bb11ab3bff0cd566a5fefadff398fb1275b86cf270cce",
     "commons/maps/Random_Definition/summary.md": "c9ba06e3ba566b4d046e6a8a80ca972f6b6913fd3ad171423c4ca62f49e67442",
     "commons/maps/Random_Definition/tutorial.md": "3ff25583b33f202139e8287dab68eda85fd84258301b9113a7c23695ef355b31",
     "commons/maps/Random_Entropy/blurb.md": "b88be3b7954e2e362efac6b7d02284accf1feb7ba500b3e543d0198d68e52c37",

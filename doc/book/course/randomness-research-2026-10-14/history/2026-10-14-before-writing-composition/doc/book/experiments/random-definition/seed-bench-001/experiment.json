@@ -1,0 +1,1566 @@
+{
+  "schema": "ada.book-experiment.v1",
+  "id": "random-definition.seed-bench-001",
+  "status": "in_progress",
+  "disposition": "experimental",
+  "runtime_verified": true,
+  "sources": [
+    {
+      "passage_id": "random-definition.values-and-assignment.v1",
+      "source_path": "commons/maps/Random_Definition/final.md",
+      "snapshot_path": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-book-architecture/Random_Definition.final.md",
+      "sha256": "591234ea2ef7b688bb6af55c780e721c7a903752125eb12506b4b0f2bb8b47a7",
+      "excerpt": "A picture needs one more agreement. Here, three successive draws supply the red, green and blue amounts of a cube.",
+      "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+      "text_role": "final"
+    },
+    {
+      "passage_id": "random-definition.channel-assignment.v1",
+      "text_role": "tutorial",
+      "source_path": "commons/maps/Random_Definition/tutorial.md",
+      "snapshot_path": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-book-architecture/Random_Definition.tutorial.md",
+      "sha256": "3ff25583b33f202139e8287dab68eda85fd84258301b9113a7c23695ef355b31",
+      "excerpt": "Now change only `Color(a, b, c)` to `Color(c, b, a)`. Predict which channel survives unchanged. Run it: red and blue exchange jobs, green stays, and the generator makes exactly the same requests. Restore the original assignment. Explain why matching seeds were insufficient to preserve the picture after that edit.",
+      "version_basis": "Archived exact working-tree tutorial; not an executed height comparison"
+    }
+  ],
+  "documents": {
+    "proposition": "doc/book/experiments/random-definition/seed-bench-001/proposition.md",
+    "text_simulation": "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md",
+    "observations": "doc/book/experiments/random-definition/seed-bench-001/observations.md",
+    "revision": "doc/book/experiments/random-definition/seed-bench-001/revision.md"
+  },
+  "interpretations": [
+    {
+      "id": "seed-bench.rgb-fixed.v1",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); local centre y=0.10 m",
+      "assumptions": [
+        "16 row-major triples in a shared 4x4 XZ study layout",
+        "All 48 values retained before display; no draws while switching",
+        "Same cube dimensions, XZ, material mapping, lighting and host transform in both modes"
+      ],
+      "exclusions": [
+        "No new random acquisition",
+        "No force or connection model"
+      ],
+      "status": "historical_recipe_replayable"
+    },
+    {
+      "id": "seed-bench.rgb-mean-height.v1",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); local centre y=0.10 m + 0.30 m * (a+b+c)/3",
+      "assumptions": [
+        "Same retained triples and RGB as the baseline",
+        "Only the local centre-height rule changes",
+        "Equal sums may give equal heights for different colours"
+      ],
+      "exclusions": [
+        "Not a neutral-colour height comparison",
+        "No claim that colour and geometry have equivalent perceptual meaning",
+        "No wearability or comfort result"
+      ],
+      "status": "historical_recipe_replayable"
+    },
+    {
+      "id": "seed-bench.rgb-fixed.v2",
+      "status": "historical_compact_layout_replayable",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); size=(0.04,0.04,0.04) m; bottom y=0.08 m; XZ pitch=0.055 m",
+      "assumptions": [
+        "Same retained triples, RGB, XZ, width/depth and bottom in the current A/B comparison",
+        "Bottom fixed at 0.08 m; only bar top rises",
+        "No acquisition during mapping changes; button spacing unchanged"
+      ],
+      "exclusions": [
+        "No claim of improved learning or comfort",
+        "Old-to-new apparatus comparison changes multiple conditions; not a single-factor test",
+        "No physical unpredictability claim from seeded new draws"
+      ]
+    },
+    {
+      "id": "seed-bench.rgb-mean-bar.v1",
+      "status": "historical_compact_layout_replayable",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); h=0.04+0.12*(a+b+c)/3 m; size=(0.04,h,0.04); centre y=0.08+h/2; XZ pitch=0.055 m",
+      "assumptions": [
+        "Same retained triples, RGB, XZ, width/depth and bottom in the current A/B comparison",
+        "Bottom fixed at 0.08 m; only bar top rises",
+        "No acquisition during mapping changes; button spacing unchanged"
+      ],
+      "exclusions": [
+        "No claim of improved learning or comfort",
+        "Old-to-new apparatus comparison changes multiple conditions; not a single-factor test",
+        "No physical unpredictability claim from seeded new draws"
+      ]
+    },
+    {
+      "id": "seed-bench.rgb-fixed.v2-filled-tray",
+      "status": "historical_two_view_layout_replayable",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); size=(0.09,0.04,0.09) m; bottom y=0.08 m; XZ pitch=0.105 m",
+      "assumptions": [
+        "Same retained triples, RGB, XZ, width/depth and bottom in the current A/B comparison",
+        "Bottom fixed at 0.08 m; only bar top rises",
+        "No acquisition during mapping changes; button spacing unchanged"
+      ],
+      "exclusions": [
+        "No claim of improved learning or comfort",
+        "Old-to-new apparatus comparison changes multiple conditions; not a single-factor test",
+        "No physical unpredictability claim from seeded new draws"
+      ]
+    },
+    {
+      "id": "seed-bench.rgb-mean-bar.v1-filled-tray",
+      "status": "historical_two_view_layout_replayable",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); h=0.04+0.12*(a+b+c)/3 m; size=(0.09,h,0.09); centre y=0.08+h/2; XZ pitch=0.105 m",
+      "assumptions": [
+        "Same retained triples, RGB, XZ, width/depth and bottom in the current A/B comparison",
+        "Bottom fixed at 0.08 m; only bar top rises",
+        "No acquisition during mapping changes; button spacing unchanged"
+      ],
+      "exclusions": [
+        "No claim of improved learning or comfort",
+        "Old-to-new apparatus comparison changes multiple conditions; not a single-factor test",
+        "No physical unpredictability claim from seeded new draws"
+      ]
+    },
+    {
+      "id": "seed-bench.space-flat.v1",
+      "status": "current",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); size=(0.09,0.04,0.09) m",
+      "assumptions": [
+        "u=(a+b+c)/3 from the same retained triple in every panel",
+        "Same 48 stored values; no draws while rendering or entering CURRENT VIEWS",
+        "Bottom fixed at 0.08 m; XZ pitch 0.105 m; current schema v3 records the complete suite"
+      ],
+      "exclusions": [
+        "No claim that RGB is one scalar",
+        "No claim of improved learning or headset comfort",
+        "Scale and rotation panels use distinct fixed shapes; comparison does not isolate one geometric variable"
+      ]
+    },
+    {
+      "id": "seed-bench.space-bars.v1",
+      "status": "current",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "Neutral RGB; size=(0.09,0.04+0.12*u,0.09) m",
+      "assumptions": [
+        "u=(a+b+c)/3 from the same retained triple in every panel",
+        "Same 48 stored values; no draws while rendering or entering CURRENT VIEWS",
+        "Bottom fixed at 0.08 m; XZ pitch 0.105 m; current schema v3 records the complete suite"
+      ],
+      "exclusions": [
+        "No claim that RGB is one scalar",
+        "No claim of improved learning or headset comfort",
+        "Scale and rotation panels use distinct fixed shapes; comparison does not isolate one geometric variable"
+      ]
+    },
+    {
+      "id": "seed-bench.space-combo.v1",
+      "status": "current",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); same geometry as neutral bars",
+      "assumptions": [
+        "u=(a+b+c)/3 from the same retained triple in every panel",
+        "Same 48 stored values; no draws while rendering or entering CURRENT VIEWS",
+        "Bottom fixed at 0.08 m; XZ pitch 0.105 m; current schema v3 records the complete suite"
+      ],
+      "exclusions": [
+        "No claim that RGB is one scalar",
+        "No claim of improved learning or headset comfort",
+        "Scale and rotation panels use distinct fixed shapes; comparison does not isolate one geometric variable"
+      ]
+    },
+    {
+      "id": "seed-bench.space-scale.v1",
+      "status": "current",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "Neutral cube; uniform side=0.09*(0.35+0.65*u) m",
+      "assumptions": [
+        "u=(a+b+c)/3 from the same retained triple in every panel",
+        "Same 48 stored values; no draws while rendering or entering CURRENT VIEWS",
+        "Bottom fixed at 0.08 m; XZ pitch 0.105 m; current schema v3 records the complete suite"
+      ],
+      "exclusions": [
+        "No claim that RGB is one scalar",
+        "No claim of improved learning or headset comfort",
+        "Scale and rotation panels use distinct fixed shapes; comparison does not isolate one geometric variable"
+      ]
+    },
+    {
+      "id": "seed-bench.space-turn.v1",
+      "status": "current",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "Neutral 0.09 x 0.04 x 0.04 m piece; yaw=360*u degrees; constant end mark",
+      "assumptions": [
+        "u=(a+b+c)/3 from the same retained triple in every panel",
+        "Same 48 stored values; no draws while rendering or entering CURRENT VIEWS",
+        "Bottom fixed at 0.08 m; XZ pitch 0.105 m; current schema v3 records the complete suite"
+      ],
+      "exclusions": [
+        "No claim that RGB is one scalar",
+        "No claim of improved learning or headset comfort",
+        "Scale and rotation panels use distinct fixed shapes; comparison does not isolate one geometric variable"
+      ]
+    }
+  ],
+  "simulation": {
+    "text": {
+      "path": "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md",
+      "kind": "text_thought_experiment",
+      "status": "authored_hypothesis"
+    },
+    "godot": {
+      "scene": "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_study.tscn",
+      "build": "4.6-stable (official)",
+      "execution_status": "scripted_pass_human_pending",
+      "runs": [
+        {
+          "id": "seed-bench.native.001",
+          "kind": "scripted_native",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/native.json",
+          "sha256": "5105387cd35612ba96c7cbaf4077b8917be98714a52b7e0958c00ab614ff4db6",
+          "passed": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+          "current": false,
+          "superseded_by": "seed-bench.native.002"
+        },
+        {
+          "id": "seed-bench.replay.001",
+          "kind": "fresh_process_replay",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/fresh-process.json",
+          "sha256": "c3a961f9006f1ca1db19a2f3926ec6b20e916d03459181c9e7063ca346fd122a",
+          "passed": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+          "current": false,
+          "superseded_by": "seed-bench.replay.002"
+        },
+        {
+          "id": "seed-bench.printed.001",
+          "kind": "automated_printed_reconstruction",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/printed-reconstruction.json",
+          "sha256": "ce368a3f019707736786068e467a181c1cf5365af3537e42828708635d5d05fe",
+          "passed": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+          "current": false,
+          "superseded_by": "seed-bench.printed.002"
+        },
+        {
+          "id": "seed-bench.museum.001",
+          "kind": "rendered_scripted_museum",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-input-fixed.json",
+          "sha256": "0efbddb936b1b61579d8c079cd5c14e417165bbcc9b150687ee62a2ab8f235a7",
+          "passed": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+          "current": false,
+          "superseded_by": "seed-bench.museum.002"
+        },
+        {
+          "id": "seed-bench.launcher.001",
+          "kind": "launcher_smoke",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-smoke.json",
+          "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+          "passed": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+          "current": false,
+          "superseded_by": "seed-bench.launcher.002"
+        },
+        {
+          "id": "seed-bench.native.002",
+          "kind": "scripted_native",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/native.json",
+          "sha256": "7c54bdc13e3aecdaaed51d71cde7cf2c4a194b7c744f8811138cdded9d331e68",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+          "superseded_by": "seed-bench.native.003"
+        },
+        {
+          "id": "seed-bench.replay.002",
+          "kind": "fresh_process_replay",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/fresh-process.json",
+          "sha256": "cfce07a6d32e042f887fac8f543a053fb4586d0ebf49a315c0860b4362cba47a",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+          "superseded_by": "seed-bench.replay.003"
+        },
+        {
+          "id": "seed-bench.printed.002",
+          "kind": "automated_printed_reconstruction",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/printed-reconstruction.json",
+          "sha256": "fe7a91ce845ed967004f2b0dc49f2948076015d65a4689f916adafee86341ab6",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+          "superseded_by": "seed-bench.printed.003"
+        },
+        {
+          "id": "seed-bench.museum.002",
+          "kind": "rendered_scripted_museum",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-vr-board.json",
+          "sha256": "1c6de8e47a3a1a8cfadd7207ac8a24df011fbfd23ad17f7ac9eda5932a519fa5",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+          "superseded_by": "seed-bench.museum.003"
+        },
+        {
+          "id": "seed-bench.launcher.002",
+          "kind": "launcher_smoke",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-vr-board.json",
+          "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+          "superseded_by": "seed-bench.launcher.003"
+        },
+        {
+          "id": "seed-bench.native.003",
+          "kind": "scripted_native",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/native.json",
+          "sha256": "0f1c5227d36659ae906002aae72de7ab64f3e2b048d1795269ec4c26a9d77f02",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+          "superseded_by": "seed-bench.native.004"
+        },
+        {
+          "id": "seed-bench.replay.003",
+          "kind": "fresh_process_replay",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/fresh-process.json",
+          "sha256": "5635dea0e7bda756579d06f1cb48fdee86e56f5a3059a09a5d3cfccb48635665",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+          "superseded_by": "seed-bench.replay.004"
+        },
+        {
+          "id": "seed-bench.printed.003",
+          "kind": "automated_printed_reconstruction",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/printed-reconstruction.json",
+          "sha256": "fdc7f60ad1d27b30bfbd979c9b412d9d25df27a79b6ab5f4572e6476d44c3e4a",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+          "superseded_by": "seed-bench.printed.004"
+        },
+        {
+          "id": "seed-bench.museum.003",
+          "kind": "rendered_scripted_museum",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-anchored-bars.json",
+          "sha256": "51bed02811ba8bfa601c3e28073d52e1e9e45b818711015070ca238c94b936b1",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+          "superseded_by": "seed-bench.museum.004"
+        },
+        {
+          "id": "seed-bench.launcher.003",
+          "kind": "launcher_smoke",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-anchored-bars.json",
+          "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+          "superseded_by": "seed-bench.launcher.004"
+        },
+        {
+          "id": "seed-bench.native.004",
+          "kind": "scripted_native",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/native.json",
+          "sha256": "e9457ff9868ce83f6e1c96fe9e2da5f3797f695fee3d45bddc4f34726ded2654",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json",
+          "superseded_by": "seed-bench.native.005"
+        },
+        {
+          "id": "seed-bench.replay.004",
+          "kind": "fresh_process_replay",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/fresh-process.json",
+          "sha256": "e54df18a5b84d70730c8ef1d7f7c194d181f096b55573ab186b9f14615625c45",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json",
+          "superseded_by": "seed-bench.replay.005"
+        },
+        {
+          "id": "seed-bench.printed.004",
+          "kind": "automated_printed_reconstruction",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/printed-reconstruction.json",
+          "sha256": "42676199ea5a252717c34d7bcb04cc1168bfbbcf6f1f81fb85586202af11d710",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json",
+          "superseded_by": "seed-bench.printed.005"
+        },
+        {
+          "id": "seed-bench.museum.004",
+          "kind": "rendered_scripted_museum",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-filled-trays.json",
+          "sha256": "0c4b084816bca34a74ed9112e19c4e06acd76c2a428b376f486b511afe2d0596",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json",
+          "superseded_by": "seed-bench.museum.005"
+        },
+        {
+          "id": "seed-bench.launcher.004",
+          "kind": "launcher_smoke",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-filled-trays.json",
+          "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+          "passed": true,
+          "current": false,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json",
+          "superseded_by": "seed-bench.launcher.005"
+        },
+        {
+          "id": "seed-bench.native.005",
+          "kind": "scripted_native",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/space-views/native.json",
+          "sha256": "0aa12fd4f797792eafb031a8dca4822e8f4fccd5eb4765b7f71d8b14828e3c9f",
+          "passed": true,
+          "current": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json"
+        },
+        {
+          "id": "seed-bench.replay.005",
+          "kind": "fresh_process_replay",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/space-views/fresh-process.json",
+          "sha256": "329191bef329ba174cce41f173305e61c5c2a5685d1d75d9b6b408cc1ffabf0f",
+          "passed": true,
+          "current": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json"
+        },
+        {
+          "id": "seed-bench.printed.005",
+          "kind": "automated_printed_reconstruction",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/space-views/printed-reconstruction.json",
+          "sha256": "7d17063eea507d75e4db1fb924645507511d5ba3d17fddce0b3dbcd9527f2274",
+          "passed": true,
+          "current": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json"
+        },
+        {
+          "id": "seed-bench.museum.005",
+          "kind": "rendered_scripted_museum",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-space-views.json",
+          "sha256": "35a72e9c71b622d4d41ea499cf44e4da4c223686801f8849f5759dcfc8614f13",
+          "passed": true,
+          "current": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json"
+        },
+        {
+          "id": "seed-bench.launcher.005",
+          "kind": "launcher_smoke",
+          "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-space-views.json",
+          "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+          "passed": true,
+          "current": true,
+          "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json"
+        }
+      ]
+    }
+  },
+  "record_contract": {
+    "raw_values": [
+      0.1183701902627945,
+      0.65903240442276,
+      0.2981868088245392,
+      0.03759671002626419,
+      0.759906530380249,
+      0.16013947129249573,
+      0.9373283386230469,
+      0.10131284594535828,
+      0.17885610461235046,
+      0.9684456586837769,
+      0.05930794030427933,
+      0.05738687142729759,
+      0.01388463657349348,
+      0.7422953844070435,
+      0.8453764319419861,
+      0.45976462960243225,
+      0.6499897241592407,
+      0.2611721456050873,
+      0.7672507762908936,
+      0.49597492814064026,
+      0.9278168082237244,
+      0.7242656946182251,
+      0.6615357398986816,
+      0.22539377212524414,
+      0.5280382633209229,
+      0.9741662740707397,
+      0.6502115726470947,
+      0.4430903494358063,
+      0.47946983575820923,
+      0.3840782642364502,
+      0.2182009071111679,
+      0.8517859578132629,
+      0.5812699198722839,
+      0.6177322268486023,
+      0.7689849734306335,
+      0.8499084711074829,
+      0.8181202411651611,
+      0.16143664717674255,
+      0.29023292660713196,
+      0.7314043045043945,
+      0.07484719902276993,
+      0.4429556131362915,
+      0.8643065690994263,
+      0.7168533802032471,
+      0.7312961220741272,
+      0.1624125987291336,
+      0.566006064414978,
+      0.39721864461898804
+    ],
+    "sample_count": 48,
+    "cells": 16,
+    "values_per_cell": 3,
+    "grid": [
+      4,
+      4
+    ],
+    "draw_order": "row-major triples; no discard in this comparison",
+    "layout": "Five simultaneous panels: FLAT/BARS/COMBO back, SCALE/ROTATE front; 54 cm frames, 46 cm dark insets",
+    "spacing_m": 0.105,
+    "cube_side_m": 0.04,
+    "base_centre_height_m": 0.1,
+    "height_span_m": 0.12,
+    "retained_fields": [
+      "generator/build",
+      "seed",
+      "state_before",
+      "state_after",
+      "raw_values",
+      "draw_order",
+      "parameters",
+      "mapping_version",
+      "host_transform",
+      "independent_kept_copy",
+      "ordered_interventions",
+      "observation",
+      "next_change"
+    ],
+    "replay": "Stored values and mapping version; generator rerun is a separate scoped check",
+    "fresh_acquisition": "Separate operation, never invoked by replay or interpretation change",
+    "captured_record": {
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/space-views/kept.json",
+      "sha256": "c9a863f934206680eadd22f72082e3bab996fa1bedb4ef82746bb3ea6d96b651"
+    },
+    "exact_value_encoding": "raw_values_f64_hex: Godot PackedByteArray encode_double/decode_double; readable JSON values checked within 1e-15; seed/state signed decimal strings",
+    "bottom_m": 0.08,
+    "schema": "ada.seed-bench.v3",
+    "mapping_versions": [
+      "space-assignments.v1"
+    ],
+    "cell_width_m": 0.09,
+    "parameters": {
+      "bottom_m": 0.08,
+      "cell_width_m": 0.09,
+      "cube_side_m": 0.04,
+      "frame_width_m": 0.54,
+      "grid": [
+        4,
+        4
+      ],
+      "height_span_m": 0.12,
+      "panel_layout": "five-trays.v1",
+      "scale_min": 0.35,
+      "scale_span": 0.65,
+      "spacing_m": 0.105,
+      "turn_degrees": 360.0,
+      "turn_depth_m": 0.04
+    },
+    "rendered_panels": 5,
+    "rendered_instances": 80
+  },
+  "reference_fixture": {
+    "kind": "invented_arithmetic_fixture_not_rng_output",
+    "values": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "expected_heights_m": [
+      0.04,
+      0.16,
+      0.08,
+      0.08,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1
+    ],
+    "evidence_status": "native_checked_invented_fixture",
+    "expected_centres_m": [
+      0.1,
+      0.16,
+      0.12,
+      0.12,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13,
+      0.13
+    ],
+    "bottom_m": 0.08,
+    "height_meaning": "bar length, not centre height",
+    "mapping_version": "space-assignments.v1",
+    "expected_scale_factors": [
+      0.35,
+      1,
+      0.5666666666666667,
+      0.5666666666666667,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675,
+      0.675
+    ],
+    "expected_turn_degrees": [
+      0,
+      360,
+      120,
+      120,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180,
+      180
+    ]
+  },
+  "observations": [
+    {
+      "id": "seed-bench.O1",
+      "kind": "executed_geometry",
+      "observer": "Codex; native probes and image inspection",
+      "run_ids": [
+        "seed-bench.native.001",
+        "seed-bench.museum.001"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "result": "Seed 42 produces sixteen unchanged RGB triples in both modes. B changes only height. The invented red/green fixture has distinct colours and identical 0.20 m heights.",
+      "limits": "Expected arithmetic confirmed; no novelty or human preference inferred.",
+      "method": "Native assertions and preserved run receipts"
+    },
+    {
+      "id": "seed-bench.O2",
+      "kind": "implementation_failure_and_repair",
+      "observer": "Codex; native probes and image inspection",
+      "run_ids": [
+        "seed-bench.native.001",
+        "seed-bench.replay.001"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "result": "The first importer rejected JSON-converted parameter types. After that repair, decimal round-trip changed five values by at most 1.111e-16. Exact float bytes plus validated readable values now preserve all 48 values and the mapping across a fresh process.",
+      "limits": "Failed reports are preserved; early failing source files were not snapshotted. Final repair source is snapshotted. No claim about new unpredictable randomness.",
+      "method": "Native assertions and preserved run receipts"
+    },
+    {
+      "id": "seed-bench.O3",
+      "kind": "automated_reconstruction",
+      "observer": "Codex; native probes and image inspection",
+      "run_ids": [
+        "seed-bench.printed.001"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "result": "All three printed scripts extract byte-equivalent source text. The extracted model passes the cycle, and the extracted study constructs the arrays and renders the measured heights. Four deliberate faults are detected.",
+      "limits": "Mechanical extraction by the authoring agent is not an independent human reconstruction or proof of understanding.",
+      "method": "Native assertions and preserved run receipts"
+    },
+    {
+      "id": "seed-bench.O4",
+      "kind": "ai_image_review",
+      "observer": "Codex; native probes and image inspection",
+      "run_ids": [
+        "seed-bench.museum.001"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "result": "Two museum captures show the fixed left reference and the right-hand height change. The carried point initially covered controls; parking it to the left makes those labels visible in the final capture. An input audit found museum F6/F7 conflicts. The study now consumes its keys in _input before the museum; the final probe dispatches real Godot key events through Input.parse_input_event and passes KEEP/export/new-seed/clear/import.",
+      "limits": "Codex image inspection only. VR reach, human legibility, interest, comfort and sustained performance remain untested.",
+      "method": "Codex image inspection, input-handler inspection and native engine input-event dispatch"
+    },
+    {
+      "id": "seed-bench.O5",
+      "kind": "human_interface_feedback",
+      "observer": "User in this conversation",
+      "method": "Direct reply to the first encounter question, preserved verbatim",
+      "run_ids": [
+        "seed-bench.museum.001"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "source": {
+        "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json",
+        "sha256": "5ad333cefef0e993d393a0045aaecc80fdc6865f2fd995f6acd145e30e122a53"
+      },
+      "result": "the interface has to be upgraded for vr like in interface_demo but with rectangular buttons and collect on one board that has the button close.",
+      "limits": "Reported design requirement; hardware use, understanding and interface acceptance not inferred."
+    },
+    {
+      "id": "seed-bench.O6",
+      "kind": "scripted_board_interaction",
+      "observer": "Codex native probe and image inspection",
+      "method": "Godot XR pointer events, actual physics area overlap near rectangular edge, input event dispatch and rendered board inspection",
+      "run_ids": [
+        "seed-bench.native.002",
+        "seed-bench.replay.002",
+        "seed-bench.printed.002",
+        "seed-bench.museum.002",
+        "seed-bench.launcher.002"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "result": "One board, eight rectangular action buttons, CLOSE and CONTROLS reopen; 18 museum checks pass, including board-only preservation/replay. Native and printed checks 46 each, fresh replay 3. Data and mappings unchanged.",
+      "limits": "Synthetic hand and controller events are not physical headset use or human comfort acceptance."
+    },
+    {
+      "id": "seed-bench.O7",
+      "kind": "human_experiment_feedback",
+      "observer": "User in this conversation",
+      "method": "Direct apparatus request and gutter clarification preserved verbatim",
+      "run_ids": [
+        "seed-bench.museum.002"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v1",
+        "seed-bench.rgb-mean-height.v1"
+      ],
+      "source": {
+        "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json",
+        "sha256": "1971f1d08895f574317480f8843ee27569b5729f2f482d9e8d549e88ce08dca5"
+      },
+      "result": "can we have a smaller gutter and the height values should be less amplified, actually for this experiment lets keep the bottom of the cube static and raise it as a bar. Its i artistic research in action Clarification: Between the cubes/bars",
+      "limits": "Design direction from the encounter; no claim of headset use, independent reconstruction or educational effectiveness."
+    },
+    {
+      "id": "seed-bench.O8",
+      "kind": "scripted_anchored_bar_revision",
+      "observer": "Codex native probes and image inspection",
+      "method": "Native arithmetic and geometry tests, legacy-file import, printed extraction, museum hand/pointer cycle and rendered image review",
+      "run_ids": [
+        "seed-bench.native.003",
+        "seed-bench.replay.003",
+        "seed-bench.printed.003",
+        "seed-bench.museum.003",
+        "seed-bench.launcher.003"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v2",
+        "seed-bench.rgb-mean-bar.v1"
+      ],
+      "result": "52 native and 52 printed checks pass; fresh-process replay 3; rendered museum 20. Five deliberate faults detected, including drifting bottom. All cells retain a fixed bottom and RGB, with 1.5 cm gutters and 4-16 cm bar lengths. Button spacing restored after human clarification. Old floating record imports unchanged; explicit mode selection forks to the current recipe. Image review shows closer bars can occlude rear cells from this camera, a question for the next encounter.",
+      "limits": "Programmatic interaction and Codex image inspection; no physical headset comfort, independent learner or sustained performance result."
+    },
+    {
+      "id": "seed-bench.O9",
+      "kind": "human_experiment_feedback",
+      "observer": "User in this conversation",
+      "method": "Direct request preserved verbatim",
+      "run_ids": [
+        "seed-bench.museum.003"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v2",
+        "seed-bench.rgb-mean-bar.v1"
+      ],
+      "source": {
+        "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-feedback.json",
+        "sha256": "e78f3bf1d5297ec232e75b7090e66051293108c8ffa0c8e9b55417830f72c79e"
+      },
+      "result": "we should fill the board",
+      "limits": "Spatial design direction; not a learning or headset result."
+    },
+    {
+      "id": "seed-bench.O10",
+      "kind": "scripted_filled_trays",
+      "observer": "Codex native probes and image inspection",
+      "method": "Native/printed geometry and replay tests, actual museum pointer/hand cycle, image inspection",
+      "run_ids": [
+        "seed-bench.native.004",
+        "seed-bench.replay.004",
+        "seed-bench.printed.004",
+        "seed-bench.museum.004",
+        "seed-bench.launcher.004"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v2-filled-tray",
+        "seed-bench.rgb-mean-bar.v1-filled-tray"
+      ],
+      "result": "58 native and 58 printed checks pass; fresh replay 3; museum 21. Five faults detected. Wider 9 cm cells fill 40.5 cm of each 45 cm tray, retaining 1.5 cm gutters, fixed bottoms, prior bar heights and button spacing. Both earlier layouts replay unchanged.",
+      "limits": "No physical VR, independent reconstruction or learning-effect evidence."
+    },
+    {
+      "id": "seed-bench.O11",
+      "kind": "human_experiment_feedback",
+      "observer": "User in this conversation",
+      "method": "Direct comparison request and scalar-control clarification preserved verbatim",
+      "run_ids": [
+        "seed-bench.museum.004"
+      ],
+      "interpretation_ids": [
+        "seed-bench.rgb-fixed.v2-filled-tray",
+        "seed-bench.rgb-mean-bar.v1-filled-tray"
+      ],
+      "source": {
+        "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-feedback.json",
+        "sha256": "df794364de99299598ab333c699e05910bc7603a2e87e27ae72b0d9b6c4b2c91"
+      },
+      "result": "in one way we can see the full demo at once one flat one one bars one combo then we can add scale down and rotate? This demo is about how the same random number can affect different aspects of space? Also make the border a bit bigger so there is more impact Clarification: Random values control objects",
+      "limits": "Design direction, not a measured learning result or headset acceptance."
+    },
+    {
+      "id": "seed-bench.O12",
+      "kind": "scripted_simultaneous_spatial_views",
+      "observer": "Codex native probes and image inspection",
+      "method": "Native/printed arithmetic and persistence, actual museum hand/pointer cycle, rendered image review",
+      "run_ids": [
+        "seed-bench.native.005",
+        "seed-bench.replay.005",
+        "seed-bench.printed.005",
+        "seed-bench.museum.005",
+        "seed-bench.launcher.005"
+      ],
+      "interpretation_ids": [
+        "seed-bench.space-flat.v1",
+        "seed-bench.space-bars.v1",
+        "seed-bench.space-combo.v1",
+        "seed-bench.space-scale.v1",
+        "seed-bench.space-turn.v1"
+      ],
+      "result": "66 native and 66 printed checks pass; fresh replay 3; museum 22. Five deliberate faults detected. Five panels reuse the same sixteen triples; neutral bars isolate added colour, scale and turn match independent arithmetic, fixed bottoms remain, and previous saved recipes replay. The image shows five framed trays together with wider bronze borders and turn markers.",
+      "limits": "No independent learner, physical headset comfort, sustained performance or learning-effect evidence."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "seed-bench.review.001",
+      "observation_ids": [
+        "seed-bench.O1",
+        "seed-bench.O2",
+        "seed-bench.O3",
+        "seed-bench.O4"
+      ],
+      "tutorial": "companion continuation authored; original source preserved",
+      "final": "original retained with reasons",
+      "apparatus": "atomic import, exact float bytes, point parking; final sources snapshotted",
+      "reviewer": "Codex; provisional technical/editorial review, not human acceptance"
+    },
+    {
+      "id": "seed-bench.review.002",
+      "observation_ids": [
+        "seed-bench.O5",
+        "seed-bench.O6"
+      ],
+      "tutorial": "Revised to board operations, close/reopen and declared XR dependencies",
+      "final": "Retained; interface feedback does not establish the meaning of height",
+      "apparatus": "Grouped rectangular controls replace floating labels/carried point; native hand and pointer paths reused",
+      "reviewer": "User direction; Codex implementation and scoped verification"
+    },
+    {
+      "id": "seed-bench.review.003",
+      "observation_ids": [
+        "seed-bench.O7",
+        "seed-bench.O8"
+      ],
+      "tutorial": "Revised mesh size/centre arithmetic, bar fixture, current recipe and explicit legacy fork/replay",
+      "final": "Retained with reason: the user changes the assignment; no learning benefit inferred",
+      "apparatus": "Fixed-bottom bars, 12 cm added span and 1.5 cm grid gutter; unchanged button spacing",
+      "reviewer": "Human design direction; Codex implementation and scoped verification"
+    },
+    {
+      "id": "seed-bench.review.004",
+      "observation_ids": [
+        "seed-bench.O9",
+        "seed-bench.O10"
+      ],
+      "tutorial": "Independent width and height documented; both earlier layouts remain replayable",
+      "final": "Retained; spatial preference initiates apparatus change without proving learning effect",
+      "apparatus": "Wide cells fill 90 percent of tray width, with heights and gutters unchanged",
+      "reviewer": "Human direction; Codex scoped implementation"
+    },
+    {
+      "id": "seed-bench.review.005",
+      "observation_ids": [
+        "seed-bench.O11",
+        "seed-bench.O12"
+      ],
+      "tutorial": "Rewritten continuation for five simultaneous assignments, scalar/RGB distinction, arithmetic, versioned replay and reconstruction",
+      "final": "Retained with reason: choosing a spatial assignment stays an open research question",
+      "apparatus": "Five panels, neutral bars, uniform shrinking, marked rotation and broader frames",
+      "reviewer": "User direction; Codex scoped implementation and image review"
+    }
+  ],
+  "learning_debt": [
+    {
+      "id": "seed-bench.debt.mapping",
+      "kind": "unverified_implementation",
+      "question": "Does a retained record survive switching, copying, export/import and replay without extra draws or mutation?",
+      "next_test": "Build the bounded variant and probe, including deliberate copy/draw faults.",
+      "status": "resolved_scoped",
+      "responsible_reviewer": "Codex native probe",
+      "resolution": "Scoped native/printed 66 checks each, fresh replay 3, museum 22, and five detected faults; prior recipe geometry remains replayable."
+    },
+    {
+      "id": "seed-bench.debt.reading",
+      "kind": "unresolved_interpretation",
+      "question": "Does height suggest a useful question, obscure the colour relation, or change nothing interesting for a visitor?",
+      "next_test": "Follow one corresponding cell across five views; compare FLAT/COMBO and BARS/COMBO, then describe what mean-driven scale and turn reveal or hide. Record headset reach/legibility separately.",
+      "status": "open",
+      "responsible_reviewer": null
+    },
+    {
+      "id": "seed-bench.debt.reconstruction",
+      "kind": "not_yet_understood",
+      "question": "Can an independent reader reconstruct the mapping and explain what the mean omits?",
+      "next_test": "Independent reader reconstructs tutorial.md and records borrowed code and assistance in HUMAN_TRIAL.md.",
+      "status": "open",
+      "responsible_reviewer": null
+    }
+  ],
+  "contributions": [
+    {
+      "role": "architecture and pilot direction",
+      "contributor": "User-supplied text; original sentence authorship not inferred",
+      "source": "doc/book/course/randomness-research-2026-10-14/imports/2026-10-14-book-architecture/concrete_book_architecture.md"
+    },
+    {
+      "role": "companion specification and hypothetical trace",
+      "contributor": "Codex in this conversation",
+      "model_version": null,
+      "note": "Model version not recorded; no simulated or human observation implied."
+    },
+    {
+      "role": "equal initiating and returning roles for tutorial and final; first pilot retained",
+      "contributor": "User direction in this conversation",
+      "source": "doc/book/course/randomness-research-2026-10-14/imports/2026-10-14-two-texts/two_texts_one_world.md"
+    },
+    {
+      "role": "implementation, scripted runs, image review and provisional writing/plan return",
+      "contributor": "Codex in this conversation",
+      "date": "2026-10-14",
+      "human_trial": "not performed"
+    },
+    {
+      "role": "Human interface finding and authorization to revise",
+      "contributor": "User in this conversation",
+      "source": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json"
+    },
+    {
+      "role": "Human geometry revision and cell-only gutter clarification",
+      "contributor": "User in this conversation",
+      "source": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json"
+    },
+    {
+      "role": "Human direction to fill the board",
+      "contributor": "User in this conversation",
+      "source": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-feedback.json"
+    },
+    {
+      "role": "Human simultaneous-view, random scale/rotation and broader-border direction",
+      "contributor": "User in this conversation",
+      "source": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-feedback.json"
+    }
+  ],
+  "related_tasks": [
+    "randomness_research.003",
+    "randomness_research_writing.001",
+    "randomness_research_writing.002",
+    "randomness_research_writing.005"
+  ],
+  "evidence_status": {
+    "artifact": "passed_native_scoped",
+    "experiment_cycle": "scripted_pass_human_pending",
+    "specified_cross_hall": "not_applicable_local_pilot",
+    "scene_loading": "passed_isolated_museum",
+    "runtime_stability": "short_scripted_run_only",
+    "performance": "not_tested",
+    "physical_VR": "not_tested",
+    "independent_learner": "not_tested",
+    "human_feedback": "received"
+  },
+  "edition": {
+    "id": null,
+    "status": "not_selected",
+    "publication_status": "not_published"
+  },
+  "initiation": {
+    "allowed_text_roles": [
+      "tutorial",
+      "final"
+    ],
+    "status": "selected_and_executed_scoped",
+    "questions": [
+      {
+        "text_role": "tutorial",
+        "passage_id": "random-definition.channel-assignment.v1",
+        "question": "Can a reader reconstruct and explain a changed assignment while the retained draws stay fixed?"
+      },
+      {
+        "text_role": "final",
+        "passage_id": "random-definition.values-and-assignment.v1",
+        "question": "What does assigning height allow us to notice or attempt with the same retained arrangement?"
+      }
+    ],
+    "reconsider_if": [
+      "Reconstruction exposes an untaught concept or hidden dependency.",
+      "Correct geometry yields no useful perceived difference or a contrary interpretation.",
+      "Kept values or generator state change during the mapping switch."
+    ]
+  },
+  "text_reviews": {
+    "final": {
+      "source_path": "commons/maps/Random_Definition/final.md",
+      "source_passage_ids": [
+        "random-definition.values-and-assignment.v1"
+      ],
+      "status": "reviewed_scoped",
+      "decision": "retain_with_reason",
+      "reason": "The source asks what else a picture needs and leaves assignment open. The five-view request is a concrete human decision about different jobs for the same values. Retain the passage and ask what each assignment reveals or hides; correct implementation alone does not establish a better learning encounter.",
+      "observation_ids": [
+        "seed-bench.O11",
+        "seed-bench.O12"
+      ],
+      "successor_source": null
+    },
+    "tutorial": {
+      "source_path": "commons/maps/Random_Definition/tutorial.md",
+      "source_passage_ids": [
+        "random-definition.channel-assignment.v1"
+      ],
+      "status": "reviewed_scoped",
+      "decision": "revise",
+      "reason": "The user requests simultaneous spatial assignments. Print how the same triple feeds RGB and how its mean feeds height, scale and rotation; isolate colour/height comparisons, explain periodicity and fixed bottoms, and retain old recipe replay. A person must still reconstruct and explain these choices.",
+      "observation_ids": [
+        "seed-bench.O11",
+        "seed-bench.O12"
+      ],
+      "successor_source": {
+        "path": "doc/book/experiments/random-definition/seed-bench-001/tutorial.md",
+        "sha256": "18a2079811e209b1659c44dc57386f80a8f20141477a8a57bd22d08a51b5b31e",
+        "status": "companion_continuation_not_installed_in_live_hall"
+      }
+    }
+  },
+  "review_contract": {
+    "targets": [
+      "tutorial",
+      "final"
+    ],
+    "allowed_decisions": [
+      "revise",
+      "retain_with_reason",
+      "open_question"
+    ],
+    "both_rewrites_required": false,
+    "each_review_requires": [
+      "source_version",
+      "observation_refs",
+      "reason"
+    ],
+    "pending_is_complete": false
+  },
+  "next_experiment": {
+    "selection_status": "selected_provisionally",
+    "allowed_decisions": [
+      "continue",
+      "redirect",
+      "defer",
+      "stop"
+    ],
+    "source_observation_ids": [
+      "seed-bench.O11",
+      "seed-bench.O12"
+    ],
+    "question": "What stays recognizable when the same retained triple becomes colour, height, size or orientation, and what does the mean discard?",
+    "decision": "continue",
+    "proposition": "Use all five views, preserve a result, reconstruct the mappings and let a human observation choose the next change. Keep physical VR, sustained performance and opening-order checks separate; defer route expansion."
+  },
+  "legacy_record_contract": {
+    "raw_values": [
+      0.1183701902627945,
+      0.65903240442276,
+      0.2981868088245392,
+      0.03759671002626419,
+      0.759906530380249,
+      0.16013947129249573,
+      0.9373283386230469,
+      0.10131284594535828,
+      0.17885610461235046,
+      0.9684456586837769,
+      0.05930794030427933,
+      0.05738687142729759,
+      0.01388463657349348,
+      0.7422953844070435,
+      0.8453764319419861,
+      0.45976462960243225,
+      0.6499897241592407,
+      0.2611721456050873,
+      0.7672507762908936,
+      0.49597492814064026,
+      0.9278168082237244,
+      0.7242656946182251,
+      0.6615357398986816,
+      0.22539377212524414,
+      0.5280382633209229,
+      0.9741662740707397,
+      0.6502115726470947,
+      0.4430903494358063,
+      0.47946983575820923,
+      0.3840782642364502,
+      0.2182009071111679,
+      0.8517859578132629,
+      0.5812699198722839,
+      0.6177322268486023,
+      0.7689849734306335,
+      0.8499084711074829,
+      0.8181202411651611,
+      0.16143664717674255,
+      0.29023292660713196,
+      0.7314043045043945,
+      0.07484719902276993,
+      0.4429556131362915,
+      0.8643065690994263,
+      0.7168533802032471,
+      0.7312961220741272,
+      0.1624125987291336,
+      0.566006064414978,
+      0.39721864461898804
+    ],
+    "sample_count": 48,
+    "cells": 16,
+    "values_per_cell": 3,
+    "grid": [
+      4,
+      4
+    ],
+    "draw_order": "row-major triples; no discard in this comparison",
+    "layout": "same pilot-local XZ layout in both modes; shipped vertical grids unchanged",
+    "spacing_m": 0.1,
+    "cube_side_m": 0.04,
+    "base_centre_height_m": 0.1,
+    "height_span_m": 0.3,
+    "retained_fields": [
+      "generator/build",
+      "seed",
+      "state_before",
+      "state_after",
+      "raw_values",
+      "draw_order",
+      "parameters",
+      "mapping_version",
+      "host_transform",
+      "independent_kept_copy",
+      "ordered_interventions",
+      "observation",
+      "next_change"
+    ],
+    "replay": "Stored values and mapping version; generator rerun is a separate scoped check",
+    "fresh_acquisition": "Separate operation, never invoked by replay or interpretation change",
+    "captured_record": {
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/kept.json",
+      "sha256": "f7235cd224c68531665151d657f258c7425cb9de7556e2c50e5804f353de0d3c"
+    },
+    "exact_value_encoding": "raw_values_f64_hex: Godot PackedByteArray encode_double/decode_double; readable JSON values checked within 1e-15; seed/state signed decimal strings"
+  },
+  "legacy_reference_fixture": {
+    "kind": "invented_arithmetic_fixture_not_rng_output",
+    "values": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "expected_heights_m": [
+      0.1,
+      0.4,
+      0.2,
+      0.2,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "evidence_status": "native_checked_invented_fixture"
+  },
+  "compact_bar_record_contract": {
+    "raw_values": [
+      0.1183701902627945,
+      0.65903240442276,
+      0.2981868088245392,
+      0.03759671002626419,
+      0.759906530380249,
+      0.16013947129249573,
+      0.9373283386230469,
+      0.10131284594535828,
+      0.17885610461235046,
+      0.9684456586837769,
+      0.05930794030427933,
+      0.05738687142729759,
+      0.01388463657349348,
+      0.7422953844070435,
+      0.8453764319419861,
+      0.45976462960243225,
+      0.6499897241592407,
+      0.2611721456050873,
+      0.7672507762908936,
+      0.49597492814064026,
+      0.9278168082237244,
+      0.7242656946182251,
+      0.6615357398986816,
+      0.22539377212524414,
+      0.5280382633209229,
+      0.9741662740707397,
+      0.6502115726470947,
+      0.4430903494358063,
+      0.47946983575820923,
+      0.3840782642364502,
+      0.2182009071111679,
+      0.8517859578132629,
+      0.5812699198722839,
+      0.6177322268486023,
+      0.7689849734306335,
+      0.8499084711074829,
+      0.8181202411651611,
+      0.16143664717674255,
+      0.29023292660713196,
+      0.7314043045043945,
+      0.07484719902276993,
+      0.4429556131362915,
+      0.8643065690994263,
+      0.7168533802032471,
+      0.7312961220741272,
+      0.1624125987291336,
+      0.566006064414978,
+      0.39721864461898804
+    ],
+    "sample_count": 48,
+    "cells": 16,
+    "values_per_cell": 3,
+    "grid": [
+      4,
+      4
+    ],
+    "draw_order": "row-major triples; no discard in this comparison",
+    "layout": "same 4x4 XZ layout in both current modes; 1.5 cm empty gutters; original floating recipe remains replayable",
+    "spacing_m": 0.055,
+    "cube_side_m": 0.04,
+    "base_centre_height_m": 0.1,
+    "height_span_m": 0.12,
+    "retained_fields": [
+      "generator/build",
+      "seed",
+      "state_before",
+      "state_after",
+      "raw_values",
+      "draw_order",
+      "parameters",
+      "mapping_version",
+      "host_transform",
+      "independent_kept_copy",
+      "ordered_interventions",
+      "observation",
+      "next_change"
+    ],
+    "replay": "Stored values and mapping version; generator rerun is a separate scoped check",
+    "fresh_acquisition": "Separate operation, never invoked by replay or interpretation change",
+    "captured_record": {
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/kept.json",
+      "sha256": "6f175e3e1dd8850c348e8bee904a54a132fdcd84621d893e965e4d686a194875"
+    },
+    "exact_value_encoding": "raw_values_f64_hex: Godot PackedByteArray encode_double/decode_double; readable JSON values checked within 1e-15; seed/state signed decimal strings",
+    "bottom_m": 0.08,
+    "schema": "ada.seed-bench.v2",
+    "mapping_versions": [
+      "rgb-fixed.v2",
+      "rgb-mean-bar.v1"
+    ]
+  },
+  "filled_tray_record_contract": {
+    "raw_values": [
+      0.1183701902627945,
+      0.65903240442276,
+      0.2981868088245392,
+      0.03759671002626419,
+      0.759906530380249,
+      0.16013947129249573,
+      0.9373283386230469,
+      0.10131284594535828,
+      0.17885610461235046,
+      0.9684456586837769,
+      0.05930794030427933,
+      0.05738687142729759,
+      0.01388463657349348,
+      0.7422953844070435,
+      0.8453764319419861,
+      0.45976462960243225,
+      0.6499897241592407,
+      0.2611721456050873,
+      0.7672507762908936,
+      0.49597492814064026,
+      0.9278168082237244,
+      0.7242656946182251,
+      0.6615357398986816,
+      0.22539377212524414,
+      0.5280382633209229,
+      0.9741662740707397,
+      0.6502115726470947,
+      0.4430903494358063,
+      0.47946983575820923,
+      0.3840782642364502,
+      0.2182009071111679,
+      0.8517859578132629,
+      0.5812699198722839,
+      0.6177322268486023,
+      0.7689849734306335,
+      0.8499084711074829,
+      0.8181202411651611,
+      0.16143664717674255,
+      0.29023292660713196,
+      0.7314043045043945,
+      0.07484719902276993,
+      0.4429556131362915,
+      0.8643065690994263,
+      0.7168533802032471,
+      0.7312961220741272,
+      0.1624125987291336,
+      0.566006064414978,
+      0.39721864461898804
+    ],
+    "sample_count": 48,
+    "cells": 16,
+    "values_per_cell": 3,
+    "grid": [
+      4,
+      4
+    ],
+    "draw_order": "row-major triples; no discard in this comparison",
+    "layout": "40.5 cm grid in a 45 cm tray; 1.5 cm gutters; heights unchanged",
+    "spacing_m": 0.105,
+    "cube_side_m": 0.04,
+    "base_centre_height_m": 0.1,
+    "height_span_m": 0.12,
+    "retained_fields": [
+      "generator/build",
+      "seed",
+      "state_before",
+      "state_after",
+      "raw_values",
+      "draw_order",
+      "parameters",
+      "mapping_version",
+      "host_transform",
+      "independent_kept_copy",
+      "ordered_interventions",
+      "observation",
+      "next_change"
+    ],
+    "replay": "Stored values and mapping version; generator rerun is a separate scoped check",
+    "fresh_acquisition": "Separate operation, never invoked by replay or interpretation change",
+    "captured_record": {
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/kept.json",
+      "sha256": "2c53549412c1ee0f6a3fe80e81f1a0f78b10c4195241a532d0f516515f4c4be0"
+    },
+    "exact_value_encoding": "raw_values_f64_hex: Godot PackedByteArray encode_double/decode_double; readable JSON values checked within 1e-15; seed/state signed decimal strings",
+    "bottom_m": 0.08,
+    "schema": "ada.seed-bench.v2",
+    "mapping_versions": [
+      "rgb-fixed.v2",
+      "rgb-mean-bar.v1"
+    ],
+    "cell_width_m": 0.09
+  },
+  "museum_installation": {
+    "status": "installed_scoped_verification",
+    "map": "Random_Definition",
+    "sequence": "randomness",
+    "artifact_key": "seed_study",
+    "map_cell": [
+      10,
+      17
+    ],
+    "rotation_degrees": 270,
+    "scene": "res://commons/artifacts/seed_study/seed_study.tscn",
+    "evidence": "doc/book/iterations/2026-10-14-seed-study-install/verification.json",
+    "notes": "Normal map/registry spawn verified. The three promoted scripts retain the printed experiment bytes; a museum adapter limits keyboard shortcuts to the board approach. Physical headset and independent learner checks remain open."
+  }
+}

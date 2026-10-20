@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Three network artists grouped separately",
+      "passed": true
+    },
+    {
+      "name": "Pulse Room opens Point Trace",
+      "passed": true
+    },
+    {
+      "name": "Trace shows Pulse Room connection",
+      "passed": true
+    },
+    {
+      "name": "Hall links back to the highlighted reference",
+      "passed": true
+    },
+    {
+      "name": "Donovan opens the exact 3D hall",
+      "passed": true
+    },
+    {
+      "name": "Hahm opens the existing walking-body hall",
+      "passed": true
+    },
+    {
+      "name": "Legs shows both gait and support references",
+      "passed": true
+    },
+    {
+      "name": "Saraceno opens Layout",
+      "passed": true
+    },
+    {
+      "name": "Layout shows material and expressive network references",
+      "passed": true
+    },
+    {
+      "name": "Existing graph still renders",
+      "passed": true
+    },
+    {
+      "name": "Published grouped references survive reload",
+      "passed": true
+    },
+    {
+      "name": "Network Analysis shows Lombardi and Shiota",
+      "passed": true
+    }
+  ],
+  "scope": "Browser grouping, links in both directions, saved selection and existing relation rendering; no museum runtime changes."
+}

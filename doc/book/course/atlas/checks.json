@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Every hall follows the independently read current spine exactly once",
+      "passed": true
+    },
+    {
+      "name": "No relationship source is stale at publication",
+      "passed": true
+    },
+    {
+      "name": "Every caption preserves the current carry declaration",
+      "passed": true
+    },
+    {
+      "name": "Every next-hall link follows the actual spine, including boundaries",
+      "passed": true
+    },
+    {
+      "name": "All captions remain short, at most 40 words",
+      "passed": true
+    },
+    {
+      "name": "Text links exist, and absent files are explicitly marked",
+      "passed": true
+    },
+    {
+      "name": "Every delivered image has an existing original, exact hash and capture evidence",
+      "passed": true
+    },
+    {
+      "name": "The only capture gap is exposed rather than replaced by another hall",
+      "passed": true
+    },
+    {
+      "name": "Original references remain, with the two source-checked cultural-data examples",
+      "passed": true
+    },
+    {
+      "name": "Reference applications and limits are explicit",
+      "passed": true
+    },
+    {
+      "name": "Unverified Hahm attribution remains marked",
+      "passed": true
+    },
+    {
+      "name": "Network references are Lombardi, Saraceno and Shiota",
+      "passed": true
+    },
+    {
+      "name": "Every reference links to specific current halls with a reason and source",
+      "passed": true
+    },
+    {
+      "name": "Accumulation, recordings and gait references are connected outside Graph Theory",
+      "passed": true
+    },
+    {
+      "name": "Art readings and questions remain separate from descriptions and applications",
+      "passed": true
+    },
+    {
+      "name": "The reading method returns to existing halls with inspectable sources",
+      "passed": true
+    },
+    {
+      "name": "Page data and inspectable JSON agree",
+      "passed": true
+    },
+    {
+      "name": "All image URLs return HTTP 200 as images",
+      "passed": true
+    },
+    {
+      "name": "Live page and JSON return HTTP 200",
+      "passed": true
+    }
+  ],
+  "halls": 206,
+  "photographed_halls": 205,
+  "image_files_checked": 278,
+  "scope": "Data, source provenance, files and HTTP delivery; browser interaction separately recorded. No runtime tutorial or headset claim."
+}

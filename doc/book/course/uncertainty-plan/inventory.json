@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-08",
-  "scope": "Static content-chain audit of selected candidates; no runtime certification for this proposal. Missing search hits are not proof of absence.",
+  "date": "2026-10-09",
+  "scope": "Static content-chain audit of selected candidates; runtime receipts for G0, G1, G2 and CA are linked separately. Missing search hits are not proof of absence.",
   "spine_count": 25,
   "sequences": [
     {
@@ -372,7 +372,13 @@
           ]
         }
       ],
-      "spine_placements": []
+      "spine_placements": [
+        {
+          "sequence": "forces",
+          "map": "VFM_05_Launch",
+          "token": "euler_drift:180#pin:1#plinth:0#lesson:step_study"
+        }
+      ]
     },
     {
       "key": "numerical_integration",
@@ -449,7 +455,7 @@
         {
           "sequence": "wavefunctions",
           "map": "WaveFunctions_Synthesis_Lab",
-          "token": "ambient_patch:0:0"
+          "token": "ambient_patch:180"
         }
       ]
     },
@@ -620,6 +626,66 @@
         }
       ],
       "spine_placements": []
+    },
+    {
+      "key": "geometry_noise",
+      "registrations": [
+        {
+          "registry": "commons/artifacts/registry/randomness.json",
+          "scene": "res://commons/artifacts/geometry_noise/GeometryNoiseTest.tscn",
+          "scene_exists": true,
+          "scripts": [
+            "res://commons/artifacts/geometry_noise/GeometryNoiseTest.gd"
+          ]
+        }
+      ],
+      "spine_placements": [
+        {
+          "sequence": "noise",
+          "map": "Random_Noise_Types",
+          "token": "geometry_noise:90#plinth:0#pin:true"
+        }
+      ]
+    },
+    {
+      "key": "pendulum_noise",
+      "registrations": [
+        {
+          "registry": "commons/artifacts/registry/wavefunctions.json",
+          "scene": "res://commons/artifacts/pendulum_noise/PendulumNoise.tscn",
+          "scene_exists": true,
+          "scripts": [
+            "res://commons/artifacts/pendulum_noise/PendulumNoise.gd"
+          ]
+        }
+      ],
+      "spine_placements": [
+        {
+          "sequence": "forces",
+          "map": "Vectors_Act4b_Oscillation",
+          "token": "pendulum_noise:90#pin:1#plinth:0"
+        }
+      ]
+    },
+    {
+      "key": "navigator_noise",
+      "registrations": [
+        {
+          "registry": "commons/artifacts/registry/swarmintelligence.json",
+          "scene": "res://commons/artifacts/navigator_noise/NavigatorNoise.tscn",
+          "scene_exists": true,
+          "scripts": [
+            "res://commons/artifacts/navigator_noise/NavigatorNoise.gd"
+          ]
+        }
+      ],
+      "spine_placements": [
+        {
+          "sequence": "swarmintelligence",
+          "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "token": "navigator_noise:180#pin:1#plinth:0"
+        }
+      ]
     }
   ],
   "spine_sha256": "fea5f0a0ad98ce94fbd3f1651cf1e4c162c0aa5d677451ae2d70efaaa743bead"

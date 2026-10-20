@@ -116,25 +116,45 @@
       "id": "editor", "kind": "concept",
       "forms": {"text": ["editor"], "code": []},
       "def": "Godot's window, where you build a scene.",
-      "introduced_at": "1.1", "synonyms": [], "depends_on": ["scene"]
+      "introduced_at": "1.3", "synonyms": [], "depends_on": ["scene"]
     },
     {
       "id": "scene_tree", "kind": "concept",
       "forms": {"text": ["scene tree"], "code": []},
       "def": "The list of a scene's nodes, in the editor.",
-      "introduced_at": "1.1", "synonyms": ["hierarchy"], "depends_on": ["scene", "node", "editor"]
+      "introduced_at": "1.3", "synonyms": ["hierarchy"], "depends_on": ["scene", "node", "editor"]
     },
     {
       "id": "FileSystem", "kind": "concept",
       "forms": {"text": ["FileSystem"], "code": []},
       "def": "The editor's panel of the project's files.",
-      "introduced_at": "1.1", "synonyms": ["file system", "file browser"], "depends_on": ["editor"],
+      "introduced_at": "1.3", "synonyms": ["file system", "file browser"], "depends_on": ["editor"],
       "note": "2 October 2026: named where 1.1 opens base.tscn in it, because put a script on a node (1.3) and the counter panel (1.6) start there. Godot's own label, so it matches as written: 'FileSystem', never 'file system'."
+    },
+    {
+      "id": "root_node", "kind": "concept",
+      "forms": {"text": ["root node", "root nodes"], "code": []},
+      "def": "The top node of a scene.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "scene"]
+    },
+    {
+      "id": "property", "kind": "concept",
+      "forms": {"text": ["property", "properties"], "code": []},
+      "def": "A named value, such as a node's mesh.",
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "mesh"]
+    },
+    {
+      "id": "first_sphere_script", "kind": "supplied",
+      "forms": {"text": ["first sphere script"], "code": ["first_sphere.gd"]},
+      "def": "The supplied script attached to the root node.",
+      "introduced_at": "supplied:1.1", "synonyms": [], "depends_on": ["supplied", "script", "root_node"],
+      "host": "res://first_sphere.gd",
+      "stub": "extends Node3D\n\nfunc _ready():\n\tpass\n"
     },
     {
       "id": "base_scene", "kind": "supplied",
       "forms": {"text": ["base scene", "course look"], "code": ["base.tscn"]},
-      "def": "Floor, sky, sun, camera and one node to place.",
+      "def": "A room, camera and lighting for the code you write.",
       "introduced_at": "supplied:1.1", "synonyms": [], "depends_on": ["node"],
       "note": "the course look (palette, sky, light) comes with it; 17.1 and 19.x borrow the Look by name. Merge of chapters 2 to 5 (2 October 2026): its Input Map leaves the arrows (ui_left, ui_right: 2.6) and Space (ui_accept: 4.6, 4.7, 18.8) to the student's code. kit-base binds the arrows to move_left and move_right and Space to pause; the course project must not, or one key does two things. Student readings (same day): every chapter from 2 on opens by deleting the nodes the student added (delete a node, 2.1); the base scene's own nodes stay."
     },
@@ -147,7 +167,7 @@
     {
       "id": "run_the_project", "kind": "admin",
       "forms": {"text": ["run the project", "ran the project", "running the project", "runs the project"], "code": []},
-      "def": "Press Play, at the top right. If Godot asks for a main scene, choose Select Current.",
+      "def": "Press Play, at the top right.",
       "introduced_at": "1.1",
       "synonyms": ["press Play", "click Play", "hit Play", "press F5", "run it", "run the game", "play the scene", "play the project", "play the game", "start the game", "start the project", "launch the project", "launch the game", "run your project", "run the room", "run your room", "run the study"],
       "step_phrases": ["Play", "F5", "Run Project", "Cmd+B", "\u25b6", "Select Current", {"phrase": "main scene", "cues": ["asks", "Select"]}, {"phrase": "top right", "cues": ["Play", "button", "arrow", "triangle"]}],
@@ -209,7 +229,7 @@
       "id": "$", "kind": "gdscript",
       "forms": {"text": [], "code": ["$"]},
       "def": "`$Name` gets the child node named Name.",
-      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "child"]
+      "introduced_at": "1.5", "synonyms": [], "depends_on": ["node", "child"]
     },
     {
       "id": "=", "kind": "gdscript",
@@ -282,7 +302,7 @@
       "id": "mesh", "kind": "concept",
       "forms": {"text": ["mesh", "meshes"], "code": ["mesh"]},
       "def": "What is seen.",
-      "introduced_at": "1.3", "synonyms": [], "depends_on": []
+      "introduced_at": "1.1", "synonyms": [], "depends_on": []
     },
     {
       "id": "shape", "kind": "concept",
@@ -302,13 +322,13 @@
       "id": "MeshInstance3D", "kind": "godot",
       "forms": {"text": [], "code": ["MeshInstance3D"]},
       "def": "A node that shows a mesh.",
-      "introduced_at": "1.3", "synonyms": [], "depends_on": ["node", "mesh"]
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "mesh"]
     },
     {
       "id": "SphereMesh", "kind": "godot",
       "forms": {"text": [], "code": ["SphereMesh"]},
       "def": "A round mesh.",
-      "introduced_at": "1.3", "synonyms": [], "depends_on": ["mesh"]
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["mesh"]
     },
     {
       "id": "StaticBody3D", "kind": "godot",
@@ -535,19 +555,19 @@
       "id": "add_child", "kind": "godot",
       "forms": {"text": [], "code": ["add_child"]},
       "def": "Puts a new node into the scene.",
-      "introduced_at": "1.7", "synonyms": [], "depends_on": ["node", "scene"]
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["node", "scene"]
     },
     {
       "id": "variable", "kind": "concept",
       "forms": {"text": ["variable", "variables"], "code": []},
       "def": "A name for a value.",
-      "introduced_at": "1.8", "synonyms": [], "depends_on": []
+      "introduced_at": "1.1", "synonyms": [], "depends_on": []
     },
     {
       "id": "var", "kind": "gdscript",
       "forms": {"text": [], "code": ["var"]},
       "def": "Makes a variable.",
-      "introduced_at": "1.8", "synonyms": [], "depends_on": ["variable"]
+      "introduced_at": "1.1", "synonyms": [], "depends_on": ["variable"]
     },
     {
       "id": ":=", "kind": "gdscript",
@@ -592,8 +612,8 @@
       "id": "height", "kind": "godot",
       "forms": {"text": [], "code": ["height"]},
       "def": "How tall a mesh is, in metres.",
-      "introduced_at": "1.8", "synonyms": [], "depends_on": ["mesh", "metre"],
-      "note": "restored from functional/ch01.md; the sketch never names it"
+      "introduced_at": "1.7", "synonyms": [], "depends_on": ["mesh", "metre"],
+      "note": "First used for the small trace dot in 1.7; reused for the spire in 1.8."
     },
     {
       "id": "delta", "kind": "godot",
@@ -832,8 +852,8 @@
       "id": "$/", "kind": "gdscript",
       "forms": {"text": [], "code": ["$/"]},
       "def": "Reaches a node's child by a path of names.",
-      "introduced_at": "2.7", "synonyms": [], "depends_on": ["child", "node"],
-      "note": "inferred: 2.7 teaches parent and child; $A/B reaches B under A"
+      "introduced_at": "missing", "synonyms": [], "depends_on": ["child", "node"],
+      "note": "Not taught in the code-created body lessons; existing-node lookup is introduced through $Supplied in 1.5."
     },
     {
       "id": "translate", "kind": "godot",
@@ -1235,8 +1255,8 @@
       "id": "new", "kind": "gdscript",
       "forms": {"text": [], "code": ["new"]},
       "def": "Makes a new one of the kind named before it.",
-      "introduced_at": "4.1", "synonyms": [], "depends_on": [],
-      "note": "4.1 makes each material in code: StandardMaterial3D.new(). 4.7 names the kind a class and the new one an object: SprayCan.new(). Moved from 4.8 by the chapter 4 writer, 2 October 2026; the old def needed class and object, which 4.7 gives."
+      "introduced_at": "1.1", "synonyms": [], "depends_on": [],
+      "note": "Teaching meshes are created in code from 1.1. Chapter 4 applies this to materials and user-defined classes."
     },
     {
       "id": "Pane", "kind": "name",
@@ -4054,6 +4074,23 @@
       "def": "What happens in response to something.",
       "introduced_at": "everyday", "synonyms": [], "depends_on": [],
       "note": "2 October 2026: pinned when action (2.6) became an entry, so 'reaction' (12.8, 'the same reaction rule') is no form of it. reaction-diffusion keeps its own entry."
+    },
+    {
+      "id": "radius",
+      "kind": "godot",
+      "forms": {
+        "text": [],
+        "code": [
+          "radius"
+        ]
+      },
+      "def": "The distance from a sphere's centre to its outer edge.",
+      "introduced_at": "1.7",
+      "synonyms": [],
+      "depends_on": [
+        "mesh",
+        "metre"
+      ]
     }
   ]
 }

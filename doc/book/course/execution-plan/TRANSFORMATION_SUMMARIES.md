@@ -1,75 +1,55 @@
-# Transformation — move, turn, change size
+# Transformation — seven lessons in sequence
 
-6 October 2026 · Revised after the author's focus correction and review of all seven Transformation comic plates. Lesson plans, ready for one-at-a-time expansion.
+12 October 2026. Current canonical tutorials; existing museum host. Full code and fresh evidence accompany this reading.
 
-## The sequence in one paragraph
+## Trans_Pre — A cube that moves, turns and grows
 
-Bring the familiar cube into the next museum hall. Move it without turning it, turn it without changing its dimensions, then change its size. Compare what each operation preserves and what happens to the space around it. A moving surface can carry you; a turn can align a crossing; an enlarged doorway can admit the same body that could not enter before. Learn to choose displacement, axis, pivot and scale, then let time or proximity vary those choices. At the end, combine the three operations into a passage. Keep the tutorial forms in black, white and grey. Programming develops because it gives the student control over these transformations, while the reflective text follows the possibilities and exclusions they create.
+Continue the cube shape from Primitives using one whole BoxMesh. Add a steady rise, a turn and a uniform pulse; compare what each operation changes. Elapsed time supplies the changing pose. Create an Area3D and connect its body_entered signal so walking into the cube collects it. The prepared museum supplies the player. Vary the period and explain why only rise and pulse slow down. Carry the box construction, three transforms and overlap collection onward.
 
-## What leads the teaching
+**Short AI:** BoxMesh → rise → turn → pulse → overlap collection. Keep mesh. Supply museum player. Vary period; turn rate stays fixed. Carry transforms + sensor.
 
-**Spatial operation → what changes and what remains → small working code → a deliberate variation.**
+## Trans_Introduction — Three ways to make a crossing
 
-A transformation need not be animated. Start with a changed pose; add animation when following intermediate poses helps explain the operation. Use a clock, list, event or flag when the chosen experiment needs it. Do not add a second programming syllabus to every hall. Several comparisons can use the same object without becoming simultaneous requirements.
+Reuse the BoxMesh construction in three visual models beside the installed crossings. A returning box function creates independent parts. One bounded fraction moves a platform, grows a cube and turns a plank. Hold the near, halfway and far poses before watching the return. Move the far bank while leaving the transform unchanged and inspect the remaining gap. The models do not carry a rider; use the installed crossings for standing. Carry interpolation and the relation between a changed body and the place it must reach.
 
-| Hall | Core comparison | Further step, after the core works |
-| --- | --- | --- |
-| Trans_Pre | Position, orientation and size are three different changes. | Animate one operation, then combine known ones. |
-| Trans_Introduction | Travel, turning and growth make different crossings. | Move the bank; connect one control to the changed parameter. |
-| Trans_Translation | Change position along an axis or a combined direction; keep facing and size. | Follow a short stored route. |
-| Trans_Rotation | Change axis, angle or pivot; keep the body's internal distances. | Reverse two turns and inspect the marked result. |
-| Trans_Scale | Equal factors preserve proportions; unequal factors change them. | Scale a group while keeping an outside witness fixed. |
-| Trans_Body | Replace time with proximity as the driver of turn or size. | Compare a returning response with a deliberately retained change. |
-| Trans_Pit | Combine operations; inspect the space left between moving bodies. | Choose a different timing or opening rule. |
+**Short AI:** Reuse box. Return instances from function. One fraction → move/grow/turn. Hold poses; move bank. Models visual; installed crossings supply riding. Carry interpolation.
 
-## 1. Trans_Pre — move, turn, change size
+## Trans_Translation — A level body on a sloping journey
 
-Use one MeshInstance3D displaying a BoxMesh. Translate, rotate and scale the whole cube; keep its mesh fixed. Add elapsed time for a simple upward journey. Then attach an Area3D and a box collision shape, connect body_entered, recognise the supplied museum player and collect the cube by walking into it. No face lists, edge renderer or companion geometry scripts. Carry the same simple object from visual transformation to overlap detection and a signal-driven response.
+Keep the travelling box and choose two positions in the study's local frame. Interpolate between them while retaining orientation and size. A condition selects either the direct diagonal or a two-part journey through a corner. Compare the intermediate positions and shared destination, including the different speeds produced by equal time for unequal legs. Change the destination along Z and predict the result. Recall Trace: positions previously recorded movement; here chosen positions prescribe it. Carry control over displacement and journey into Rotation.
 
-## 2. Trans_Introduction — three ways to make a crossing
+**Short AI:** Keep box level. Two endpoints + lerp; branch via corner. Same finish, different journey/speed. Recall Trace's ordered positions. Carry displacement versus route.
 
-Compare the plate's travelling surface, growing cube and quarter-turn plank. Reuse the three operations in a small complete model beside the existing crossings: translation carries a surface between banks; scaling extends its reach about a fixed centre; rotation aligns its length with the gap. Hold a chosen pose and inspect whether the surfaces meet before adding travel, turning time or a pause. Move the far bank while keeping the plank's length and pivot fixed, then predict why the old angle no longer guarantees a crossing. Explain the supplied control's event connection only as needed to change that parameter. Rider transport and physical collision stay supplied. Carry transformation as a spatial relation between bodies.
+## Trans_Rotation — Give the turn a centre
 
-## 3. Trans_Translation — choose a displacement and a journey
+Keep the box and clock, remove the translation route and place the box under a pivot. Use a face mark to distinguish a returning outline from a returned orientation. Convert degrees to radians for the chosen axis. Offset the child to turn spinning into an orbit: its local position stays fixed while its world position changes. Change the axis and predict the quarter-turn. The museum's rider support remains supplied. Carry the parent-child relation and the importance of the origin into Scale.
 
-The plate's carrier follows a sloping path while its top stays level: translation changes position without requiring a turn. Move the familiar cube along X, Y and Z, then combine components into a diagonal displacement. Reuse Lines to distinguish direction from distance and name the coordinate frame. First assign the destination; then interpolate between start and finish while retaining orientation and size. Compare a direct diagonal with a journey that rises before moving sideways, as in the two exit handles. A further step uses a short waypoint list: Trace kept movement as data; here data directs movement. Carry the ability to choose both displacement and route; the museum supplies rider carrying.
+**Short AI:** Box under pivot + face mark. Axis/angle; degrees → radians. Offset child: fixed local position, moving world position. Carry origin + hierarchy.
 
-## 4. Trans_Rotation — a turn needs a centre and room
+## Trans_Scale — Enlarge the opening, keep the witness
 
-Use the plate's marked cube to distinguish a repeated outline from a returned orientation. Set an angle around X, Y or Z, then move the pivot and compare spinning in place with travelling around another centre. Reuse local coordinates and a small returning function for centre plus rotated offset; explain angle units at their first use. Follow a corner through intermediate poses to see why the swept space exceeds one resting pose. Predict a quarter-turn and verify that the body's dimensions remain fixed. Once this is clear, reverse a chosen X/Y turn pair and compare the face mark. Rider orientation and sweep drawings are supplied. Carry control of axis, angle and pivot.
+Return to the parent-child relation with three boxes forming a doorway. Keep a fixed black sphere mesh outside that parent as a size witness; it is not the grabbable PointBody. Compare uniform enlargement with width-only scale. Predict the opening while local mesh dimensions remain fixed and world dimensions change. The threshold origin keeps the posts on the floor. This model has no blocking collision; the installed enlarged room supplies the bodily comparison. Carry a deliberate scale factor into a response chosen by approach.
 
-## 5. Trans_Scale — the same proportions, another possibility
+**Short AI:** Three boxes under doorway parent; fixed sphere mesh outside. Uniform versus unequal scale; local/world dimensions; origin at floor. No model collision. Carry factor.
 
-The plate's small doorway becomes usable while the visitor stays the same size. Begin with the familiar cube beside a fixed sphere: multiply all dimensions by one positive factor, then change only one axis and compare proportions. Make the distinction visible before introducing a group. Put two familiar cubes beneath one created parent and scale it; predict their world sizes and spacing while their local positions stay unchanged. Keep the sphere outside the group. Return to the museum's enlarged room and its separate visitor relocation: scaling the surroundings did not scale the visitor or walking speed. The bottle and physics remain supplied. Carry deliberate control of size, proportions and which objects share the change.
+## Trans_Body — Let your approach choose the transform
 
-## 6. Trans_Body — let distance turn into size or angle
+Return to one familiar box and replace the chosen scale factor with the horizontal world-space distance to the supplied museum body. Map a near/far range to a bounded fraction, then use it to shrink the box while keeping its base on the floor. Use the same input to turn the box instead. Predict near, midpoint and far responses, then extend the reach. Departure restores the pose, unlike Trace's kept positions or the installed lattice's retained cut. Carry a bodily input into a combined opening.
 
-Follow the plate's opening slats and shrinking blocks. Reuse a known rotation or scale, replacing elapsed time with the visitor's distance in a named frame. Give the familiar cube a bounded size response, then use the same input range to turn it instead; predict what happens at near, middle and far positions. The calculation and any reach condition now have an immediate spatial purpose. Leave and see the transform return. Compare this with the lattice's missing cells: removal changes the collection, rather than simply changing a surviving body's pose. A retained flag is an optional way to keep one response after departure. Tracking and collision remain supplied. Carry a transformation driven by bodily relation.
+**Short AI:** World horizontal distance → bounded closeness → scale or turn. Keep base on floor. Return on departure; no history. Contrast retained cut. Carry bodily input.
 
-## 7. Trans_Pit — compose an opening
+## Trans_Pit — Make room with three operations
 
-The plate returns to translation, rotation and scale as changes in available space: a block arrives, a slab sweeps past, a cube grows into a gap. Inspect an intermediate pose, not just the beginning and end. Then reuse two CubeBody instances to make a small model of the hall's opening leaves, coordinating displacement, angle and scale through one bounded progress value. Keep the frame fixed and predict which operation produces each part of the opening. Supply occupancy and physical contact; choose a new timing or sequence of known operations and compare the resulting gap. Add no required syntax topic here. Carry an authored composition that Arrays can repeat and vary across many bodies.
+Combine two familiar boxes, a fixed frame and Pre's detection area into a solid opening. Continuing player overlap chooses a target; a bounded progress value moves, turns and shrinks both leaves over physics time. Match visible size and collision dimensions. Use aligned arrays of references to update each leaf while leaving the frame fixed. Vary duration and sideways travel, and inspect intermediate clearance. Keep this composition; Arrays returns to Pre's still collectible cube, gives copies addresses and retains the other addresses after collection.
 
-## Programming foundations: present, then developed through use
+**Short AI:** Two solid leaves + fixed frame + overlap. Progress → move/turn/shrink; resize collision with mesh. Arrays align parts by index. Next: still Pre cubes, address + retained presence.
 
-Primitives already explains initialization, values and references, PointBody/CubeBody classes, arrays and indices, loops, conditions, parameters and returning functions. It offers practice and tested programs, not proof of human mastery. Transformation can reuse these foundations rather than finish every programming subject before beginning its own work.
+## Into Arrays
 
-Elapsed seconds help animate a transform. Events connect a control to a chosen value. A route needs an index that survives updates. A proximity response needs a calculation and possibly a condition. Parent-child relationships explain which bodies a scale reaches. Explain these where needed; keep general state-machine theory, exhaustive input design and matrix algebra outside this sequence. Sine may remain a short optional timing comparison once linear movement is understood; its derivation waits for Waves. Arrays and Colour provide further work with collections, functions and independent instances.
+Return to Trans_Pre’s still BoxMesh pickups; assign addresses and retain presence after collection. Arrays remains the next sequence to reconcile.
 
-The older foundation plan's first-class-in-Colour claim is superseded: PointBody now begins in Lines. Likewise, seeing the supplied timer in Godot Primitives does not establish an ability to author a timing rule. Keep the concept's role explicit: supplied, introduced or practised.
+## Reading and verification
 
-## Writing and testing contract
+One complete script per hall, one _ready function, geometry built in code, named existing museum support. The learner programs are byte-identical to the reviewed drafts. Fresh Godot execution checks the exact canonical text, 19 source variations and 12 deliberate faults. No headset or human-learning claim. Current final.md texts and map/runtime sources are preserved.
 
-- Select a spatial capability first: what can the student transform, predict and explain? Begin from the existing museum encounter and declare where the reduced study runs.
-- Print the smallest complete resulting program once in tutorial.md, identifying inherited classes and supplied support. Initialize lesson objects. A source link or unexplained scene lookup cannot replace the needed code.
-- Test the printed code, exact exercise variation and a relevant deliberate fault. Lead with the transformation claim: a displacement preserves orientation and size, a turn preserves internal distances, or a chosen scale changes the expected dimensions. Check timing, bounds and reset where the program uses them; the test harness need not become a second lesson.
-- Keep final.md's reflection distinct. Illustrations can connect both readings without turning every depicted artifact into a coding requirement.
-- Offer one small closing transfer to PointBody using a learned operation. If animation and grabbing coexist, declare which controls the transform; do not introduce an entire ownership framework merely to complete the chapter.
-
-## Illustration review and next step
-
-All seven [Transformation plates](http://localhost:3003/illustrations?plate=final-Trans_Pre) were inspected. Their strongest comparisons are the separate operations in Pre; the three crossings; level orientation on a diagonal journey; the marked face and swept space; a larger doorway beside an unchanged body; transformation versus removal; and the fixed frame around a changing opening. These illustrate final.md with imagined staging, not captures proving runtime behaviour. Several retain earlier coloured surfaces and overlays; future tutorial depictions should follow the current grayscale choice. The art remains intact in this pass.
-
-These summaries and the seven editable execution-plan entries now share this focus. Trans_Pre now has a complete tested reconstruction: 38 native checks, eight variants and three deliberate faults. The remaining six tutorial.md files still need this pass. The seven-hall order remains; it can change if writing or testing gives a reason. Continue with Trans_Introduction after reviewing [the first completed lesson](../../iterations/2026-10-06-trans-pre-three-operations/index.html). Only Trans_Pre tutorial.md has been rewritten so far; the planning review remains an earlier snapshot.
-
-[Illustrations beside these summaries](../../iterations/2026-10-06-transformation-first/index.html) · [Edit the live plan](http://localhost:3003/tutorial-plan?view=summaries&seq=transformation&map=Trans_Pre) · [Current spine order](../../../../commons/maps/sequences/transformation.json) · [Primitives takeaways](PRIMITIVES_TAKEAWAYS.md) · [Reconstruction rules](../functional_text/RECONSTRUCTION.md)
+[Seven paired readings](../../iterations/2026-10-12-transformation-in-the-book/index.html) · [Fresh evidence](../../iterations/2026-10-12-transformation-in-the-book/verification.json) · [Edit the plan](http://localhost:3003/tutorial-plan?view=summaries&map=Trans_Pre)

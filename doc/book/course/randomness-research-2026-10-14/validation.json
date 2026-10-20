@@ -1,9 +1,11 @@
 {
   "date": "2026-10-14",
   "scope": "Static specification/comparison validation only",
-  "passed": 61,
-  "total": 61,
-  "errors": [],
+  "passed": 71,
+  "total": 72,
+  "errors": [
+    "Plan revision matches current generated documents"
+  ],
   "checks": [
     {
       "check": "All randomness identities retained once",
@@ -66,7 +68,7 @@
       "detail": null
     },
     {
-      "check": "Twenty stable main IDs and five writing IDs",
+      "check": "Twenty stable main IDs and ten writing IDs",
       "pass": true,
       "detail": null
     },
@@ -106,7 +108,7 @@
       "detail": null
     },
     {
-      "check": "Only static audit marked done in this specification",
+      "check": "Only evidenced audit, scope selection and source binding are done",
       "pass": true,
       "detail": null
     },
@@ -206,13 +208,13 @@
       "detail": null
     },
     {
-      "check": "Current plan revision is clarification rather than invented observation",
+      "check": "Current writing revision distinguishes specification from execution",
       "pass": true,
       "detail": null
     },
     {
       "check": "Plan revision matches current generated documents",
-      "pass": true,
+      "pass": false,
       "detail": null
     },
     {
@@ -281,7 +283,7 @@
       "detail": []
     },
     {
-      "check": "Architecture retains task identities dependencies and progress",
+      "check": "Original task identities retained; progress changes have evidence",
       "pass": true,
       "detail": null
     },
@@ -306,6 +308,61 @@
       "detail": null
     },
     {
+      "check": "Both supplied writing notes preserved exactly",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Writing examples keep sources recoverable",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Pool and paragraph identities are unique and references resolve",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Eight card fields with optional critical pressure",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Competing reading routes retain explicit order and rationale",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Writing pilot does not fabricate reading or runtime evidence",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Critical fixture is arithmetic, not an observed trial",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Critical proposition can be challenged by a rival",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Writing composition starts without waiting for particle delivery",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Edition review includes explicit reading selection",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Writing revision preserves existing execution progress",
+      "pass": true,
+      "detail": null
+    },
+    {
       "check": "Proposal Python sources parse",
       "pass": true,
       "detail": null
@@ -313,7 +370,7 @@
   ],
   "stale_source_receipts": [],
   "stale_comparison_receipts": [],
-  "runtime": "not run",
+  "runtime": "not executed by this validator; see pilot run receipts",
   "physical_VR": "not tested",
   "independent_learner": "not tested"
 }

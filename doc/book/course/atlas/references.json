@@ -1,0 +1,178 @@
+[
+  {
+    "id": "manovich",
+    "group": "method",
+    "name": "Lev Manovich",
+    "work": "What Is Visualization? (2010)",
+    "fact": "Direct visualization arranges actual media alongside the familiar abstraction into graphical marks.",
+    "reading": "Keeping a hall image beside its diagram lets us move between two kinds of attention: how the room meets a body, and which relations we have selected to describe it. The photograph also has a frame. Returning to the source should let us question the overview, not merely decorate it.",
+    "question": "Can we follow a claim back through its representation to the record that supports it?",
+    "application": "Keep hall photographs, original text and source evidence reachable from the project graph. Change the view while preserving the selected hall.",
+    "limit": "A photograph is still selected and framed. An overview cannot prove that a lesson works.",
+    "url": "https://manovich.net/content/04-projects/068-what-is-visualization/61_article_2010.pdf",
+    "source": "Author's essay",
+    "additionalUrl": "https://docs.google.com/document/d/1Mf6qlFNqwLLvVPlWAOy0eK3HfbgLlJgIJSyEImM4uSg/edit",
+    "additionalSource": "Manovich's 2013 CUNY syllabus",
+    "sequences": ["graphtheory"],
+    "halls": [{"id": "GT_Matching", "reason": "Read the atlas through actual hall images alongside its abstract relations. The view changes while the selected hall stays the same.", "basis": "doc/book/course/atlas/README.md"}],
+    "status": "Source checked; Ada application is our proposal"
+  },
+  {
+    "id": "hahm",
+    "group": "across-spine",
+    "name": "Jun Seo Hahm",
+    "work": "Walking Follows Form",
+    "fact": "The artist describes characters whose gait depends on the structure of their bodies.",
+    "reading": "An unfamiliar body invites us to reconsider what a convincing walk could be. For Ada, the useful question is where that movement comes from: the arrangement of limbs, a prescribed gait, or the contacts that support it. We can enjoy the creature while opening those decisions to inspection.",
+    "question": "Which part of this walk follows from the body, and which part did its controller prescribe?",
+    "application": "Compare the walking bodies in Legs: what follows from their structure, and what has the gait controller chosen? Keep prescribed motion distinct from physical support.",
+    "limit": "The specific attribution of network sculpture and load optimisation has not been verified. It needs a work title or source; it is not recorded here as an established fact about Hahm.",
+    "url": "https://junseohahm.com/",
+    "source": "Artist's project descriptions",
+    "sequences": ["forces"],
+    "halls": [{"id": "VFM_09_Legs", "reason": "The one-, four- and six-legged bodies offer a concrete comparison of form and gait beside the support experiment. A convincing walk does not prove physical balance.", "basis": "commons/maps/VFM_09_Legs/map_data.json"}],
+    "status": "Movement reference checked; proposed load/weight reference unresolved"
+  },
+  {
+    "id": "donovan",
+    "group": "across-spine",
+    "name": "Tara Donovan",
+    "work": "Untitled (Pins) (2004)",
+    "fact": "Many ordinary pins form a cube. Museum accounts describe friction, density and gravity holding the packed material together.",
+    "reading": "From a distance, a cube; closer, many things keeping one another in place. The repeated unit acquires another role through its neighbours. Ada can return to the familiar array with a new question: what must happen between the copies for the arrangement to support itself?",
+    "question": "What holds this accumulation together besides its outline?",
+    "application": "Connect array repetition to contact and support: hold the unit constant and alter packing. Compare a generated outline with the material conditions that keep a body standing.",
+    "limit": "This is a reference for accumulation and support. Describing the contacts as a graph would be our analytical choice. Copies in a mesh do not acquire friction merely by being numerous.",
+    "url": "https://www.metmuseum.org/art/collection/search/498735",
+    "source": "The Metropolitan Museum of Art",
+    "additionalUrl": "https://www.taubmanmuseum.org/exhibition/tara-donovan-untitled/",
+    "additionalSource": "Taubman Museum: construction and support",
+    "sequences": ["array_tutorial", "forces"],
+    "halls": [
+      {"id": "Array", "reason": "Keep the repeated unit recognizable while changing its number and arrangement. An indexed collection and the sculpture it displays do different work.", "basis": "doc/book/course/execution-plan/plan.json"},
+      {"id": "Tutorial_3D", "reason": "Extend repetition into a volume. A filled address describes occupancy; it does not yet describe the friction holding a packed material together.", "basis": "doc/book/course/execution-plan/plan.json"},
+      {"id": "VFM_09_Legs", "reason": "Return from arranging copies to supporting a load. The removable leg makes the conditions that keep an accumulation standing visible.", "basis": "commons/maps/VFM_09_Legs/map_data.json"}
+    ],
+    "status": "Sources checked; Ada application is our proposal"
+  },
+  {
+    "id": "saraceno",
+    "group": "networks",
+    "name": "Tomás Saraceno",
+    "work": "Hybrid Webs / Webs of At-tent(s)ion (2018)",
+    "fact": "Webs made by different spider species form three-dimensional structures. In Webs of At-tent(s)ion, microphones amplify vibrations in some webs.",
+    "reading": "A thread can carry a disturbance as well as mark a connection. This gives Ada a reason to let the hand enter the network: a local pull can have consequences elsewhere. Which threads respond, which points stay fixed, and which material properties must our model include for that response to mean anything?",
+    "question": "What travels through a connection when one part moves?",
+    "application": "Follow a physical connection: what does it support, and what can pass along it? Bring that question to the moving graph in Layout and the anchored network in Relaxation.",
+    "limit": "A force-directed graph uses forces to arrange a drawing; it does not simulate spider silk or an ecosystem. Its numerical edge weight is not automatically a physical load. Aerocene is a separate atmospheric reference.",
+    "url": "https://studiotomassaraceno.org/webs-of-at-tentsion/",
+    "source": "Artist's studio: Webs of At-tent(s)ion",
+    "additionalUrl": "https://studiotomassaraceno.org/hybrid-webs/",
+    "additionalSource": "Artist's studio: Hybrid Webs",
+    "sequences": ["graphtheory", "formfinding"],
+    "halls": [
+      {"id": "GT_Layout", "reason": "Pull a vertex and watch its connected neighbours respond. Compare the graph's preserved adjacency with the changing shape of a web under tension.", "basis": "commons/maps/GT_Layout/final.md"},
+      {"id": "FormFinding_Relaxation", "reason": "Inspect anchors, rest lengths and repeated corrections. Ask which physical properties the model needs before its connections can stand for material threads.", "basis": "commons/maps/FormFinding_Relaxation/tutorial.md"}
+    ],
+    "status": "Source checked; Ada application is our proposal"
+  },
+  {
+    "id": "lozano-hemmer",
+    "group": "across-spine",
+    "name": "Rafael Lozano-Hemmer",
+    "work": "Pulse Room (2006)",
+    "fact": "A participant's pulse drives a light. Recorded rhythms advance through a queue of bulbs as new participants contribute.",
+    "reading": "A visitor leaves while a rhythm remains available to the room. That persistence has an arrangement and a capacity: another contribution moves the records along. In Ada, storage can become an encounter with succession. A place in the array is also a decision about whose trace is still present.",
+    "question": "What must leave when the next record arrives?",
+    "application": "Return to Trace and Arrays: record an action, keep its temporal structure and give the next visitor's contribution a place. Show which record is displaced when capacity is reached.",
+    "limit": "Pulse Room keeps an ordered archive of rhythms; it does not map social relationships between participants. Ada's saved position-only trace does not retain heartbeat or timing data.",
+    "url": "https://www.lozano-hemmer.com/pulse_room.php",
+    "source": "Artist's description",
+    "sequences": ["primitives", "array_tutorial"],
+    "halls": [
+      {"id": "Point_Trace", "reason": "A gesture becomes a selected record that can outlast the visitor. Compare what a position sample keeps with what a recorded rhythm keeps.", "basis": "doc/book/course/execution-plan/plan.json"},
+      {"id": "Array", "reason": "Give a retained record an address. Compare this hall's fixed slots with Pulse Room's advancing queue; keeping a slot and shifting a queue are different operations.", "basis": "doc/book/course/execution-plan/plan.json"},
+      {"id": "Tutorial_Disco", "reason": "Return to a stored score and its playback timing. The sequencer makes it possible to distinguish the recorded pattern from the clock that plays it.", "basis": "commons/maps/Tutorial_Disco/final.md"}
+    ],
+    "status": "Source checked; Ada application is our proposal"
+  },
+  {
+    "id": "shiota",
+    "group": "networks",
+    "name": "Chiharu Shiota",
+    "work": "The Key in the Hand (2015)",
+    "fact": "Previously used keys, red yarn and old boats form an installation around memory and connection.",
+    "reading": "A used key suggests a particular door, hand and absence, even when we cannot recover its history. Replacing every key with the same node would make some relations easier to count while losing that invitation. Ada can let particular objects stay visible beside an abstract network, without pretending their associations are measured facts.",
+    "question": "What does this connected object carry that a count cannot tell us?",
+    "application": "Let a network retain the particular objects and histories that its lines connect. Use a dense spatial encounter beside a sparse graph to ask what each representation can convey.",
+    "limit": "A thread's expressive connection need not be a measured edge. Do not label a poetic association as a verified dependency.",
+    "url": "https://venezia-biennale-japan.jpf.go.jp/wp/wp-content/uploads/2021/03/2015-56-nakano.pdf",
+    "source": "Japan Pavilion curator's essay",
+    "sequences": ["graphtheory"],
+    "halls": [
+      {"id": "GT_Layout", "reason": "Move around the same connections. Density, obstruction and the viewer's position change what can be noticed without adding a new relation.", "basis": "commons/maps/GT_Layout/final.md"},
+      {"id": "GT_Network_Analysis", "reason": "Ask what the connected objects carry that a count leaves out. Distinguish an expressive thread of memory from this hall's explicitly sourced fictional record.", "basis": "commons/maps/GT_Network_Analysis/final.md"}
+    ],
+    "status": "Source checked; Ada application is our proposal"
+  },
+  {
+    "id": "lombardi",
+    "group": "networks",
+    "name": "Mark Lombardi",
+    "work": "BCCI-ICIC & FAB, 1972–91 (4th Version)",
+    "fact": "His narrative structures trace financial and political connections between named people and institutions.",
+    "reading": "The attraction of a sweeping line can carry our eye before we have read its claim. Ada should make that pause possible: stop at an arrow, read the relation and inspect its record. A persuasive composition needs a way back to the evidence, especially when it makes power appear legible.",
+    "question": "What exactly does this line claim, and which record supports it?",
+    "application": "Give every atlas edge a relation type and an inspectable source. Distinguish a documented connection, a chronological succession and our interpretation.",
+    "limit": "A path is not proof of causation, agreement or guilt. Geometry and visual proximity cannot establish a political claim.",
+    "url": "https://whitney.org/artists/7340",
+    "source": "Whitney Museum collection entry",
+    "sequences": ["graphtheory"],
+    "halls": [
+      {"id": "GT_Network_Analysis", "reason": "Follow each directed connection to its record. Say what it asserts before counting it or reading prominence from the drawing.", "basis": "commons/maps/GT_Network_Analysis/final.md"},
+      {"id": "GT_Matching", "reason": "In the project atlas, separate chronology, declared prerequisites and shared artifacts. Keep the source of each kind of relation available for inspection.", "basis": "doc/book/course/atlas/README.md"}
+    ],
+    "status": "Source checked; Ada application is our proposal"
+  },
+  {
+    "id": "ghostcatching",
+    "group": "across-spine",
+    "name": "Bill T. Jones, Paul Kaiser and Shelley Eshkar",
+    "work": "Ghostcatching (1999)",
+    "fact": "Jones's captured dance phrases become material for a digital composition by Kaiser and Eshkar. The movement can be edited and staged as three-dimensional drawn figures.",
+    "reading": "The capture makes another composition possible while leaving the dancer's physical body behind. Ada's trace is much narrower: one tracked point leaves an ordered path. Bringing it into Grid lets us ask how a gesture becomes material for another work without claiming that the record contains the person who made it.",
+    "question": "What of your movement can another room keep, and what can it only suggest?",
+    "application": "Carry the same saved trace from Point Trace into Grid. Keep the received positions available while comparing their transformed display. Use Ghostcatching as a reference for composing with recorded movement.",
+    "limit": "Ghostcatching uses motion-captured dance phrases. Ada's position-only trace has neither a full-body recording nor retained timing; it cannot replay the original performance.",
+    "url": "https://openendedgroup.com/artworks/gc.html",
+    "source": "Artists' statement: Ghostcatching",
+    "additionalUrl": "https://openendedgroup.com/artworks/gc_credits.html",
+    "additionalSource": "Credits and original commission",
+    "sequences": ["primitives"],
+    "halls": [
+      {"id": "Point_Trace", "reason": "Follow the movement gate: positions are admitted to a list, while a pause need not leave a new entry. The record keeps selected movement, not the entire event.", "basis": "commons/maps/Point_Trace/final.md"},
+      {"id": "Point_Line_Grid", "reason": "The received trace becomes a sculpture at another centre and size. Compare the retained positions with the transformed display instead of recording a replacement gesture.", "basis": "commons/maps/Point_Line_Grid/final.md"}
+    ],
+    "status": "Sources checked; Ada reading is our interpretation. No new lesson requirement."
+  },
+  {
+    "id": "salavon",
+    "group": "across-spine",
+    "name": "Jason Salavon",
+    "work": "The Top Grossing Film of All Time, 1 x 1 (2000)",
+    "fact": "Salavon reduces each frame of Titanic to an average colour and arranges the results in the film's order, from left to right and top to bottom.",
+    "reading": "The image keeps a place for every frame while making its figures unavailable to recognition. The ordered colour field permits another kind of looking. Ada can make both the gain and the loss inspectable: a value occupies an address, but it cannot stand for everything that produced it.",
+    "question": "Which difference becomes visible when another difference is averaged away?",
+    "application": "Use Colour Grid to discuss the distinction between an address, its stored colour and the source of that value. A later optional comparison could place a museum capture beside its average colour; the current hall does not calculate image averages.",
+    "limit": "Keeping every frame's address does not preserve its full image, sound or narrative. The artist is named in the syllabus; this particular work is our selection from his practice.",
+    "url": "https://salavon.com/work/TopGrossingFilmAllTime/image/144/",
+    "source": "Artist's account of the operation",
+    "additionalUrl": "https://whitney.org/collection/works/13848",
+    "additionalSource": "Whitney Museum collection entry",
+    "sequences": ["color"],
+    "halls": [
+      {"id": "Color_Grid_Pallet", "reason": "An address keeps its current colour while selection moves elsewhere. Compare retaining an entry with retaining all the information that might have produced its value.", "basis": "commons/maps/Color_Grid_Pallet/final.md"}
+    ],
+    "status": "Sources checked; Ada reading is our interpretation. Image averaging remains a proposal."
+  }
+]

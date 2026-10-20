@@ -1,0 +1,304 @@
+{
+ "schema": "ada.book-experiment.v1",
+ "id": "situated-computation.forbidden-bands-001",
+ "status": "proposed",
+ "disposition": "experimental",
+ "runtime_verified": false,
+ "sources": [
+  {
+   "passage_id": "situated-computation.supplied-verdicts.v1",
+   "source_path": "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md",
+   "snapshot_path": "doc/book/experiments/situated-computation/forbidden-bands-001/sources/SpeculativeComputation_Situated_Computation.tutorial.md",
+   "sha256": "0ea5c3c13a2968c495cf72a0f6435d90f8e4fd48dcaff447b9426869de08c333",
+   "excerpt": "Their verdicts and percentages are supplied by their configuration. They do not measure the approaching player.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "tutorial"
+  },
+  {
+   "passage_id": "situated-computation.rule-on-a-body.v1",
+   "source_path": "commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+   "snapshot_path": "doc/book/experiments/situated-computation/forbidden-bands-001/sources/SpeculativeComputation_Situated_Computation.final.md",
+   "sha256": "865f648241ea8a1d4489e33d7eb3d58e5707116e44efb1b301a2c7222e4e5ef5",
+   "excerpt": "The creature is still hunting. Keep the two encounters distinguishable: an assigned judgement on a screen, and a rule that acts on a body. What would we need to observe before calling either one dangerous?",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "final"
+  }
+ ],
+ "documents": {
+  "proposition": "doc/book/experiments/situated-computation/forbidden-bands-001/proposition.md",
+  "text_simulation": "doc/book/experiments/situated-computation/forbidden-bands-001/text-simulation.md",
+  "observations": "doc/book/experiments/situated-computation/forbidden-bands-001/observations.md",
+  "revision": "doc/book/experiments/situated-computation/forbidden-bands-001/revision.md"
+ },
+ "interpretations": [
+  {
+   "id": "forbidden-bands.interp.control-first",
+   "passage_ids": [
+    "situated-computation.rule-on-a-body.v1"
+   ],
+   "mapping": "Operationalize 'what would we need to observe' as attribution-by-control on the bands export. Control: bands=\"none\", lean=\"firm\" — after is_settled() returns true, read at_rim() and rest_azimuth_deg(); the control earns the later claim only if the ball rests at the rim near azimuth 0 (the verdict plate's RESTS DOWNHILL branch). Condition: bands=\"pair\", lean=\"firm\" — read rest_azimuth_deg(), on_band(), nearest_band_edge_deg(). The band is 'forbidding' iff the condition's rest azimuth leaves the pair arc centered at 14.0 deg (half-width 28.0 deg, from _band_arcs()) while on_band() is false: refusal measured as the control-to-condition angular difference.",
+   "assumptions": [
+    "The fixed-step accumulator (FIXED_H = 1.0 / 240.0) makes the two runs integrate identically regardless of engine tick rate — the script's own stated claim, assumed here rather than treated as evidence — so control and condition differ only by the bands export",
+    "The deliberate 14-degree offset of the band arcs off the downhill axis breaks the knife-edge symmetry the same way every run (the script's stated design rationale, assumed here), so one condition run is representative",
+    "is_settled() true without the timeout suffix means a genuine rest, not a stall"
+   ],
+   "exclusions": [
+    "Says nothing about the belt value or the ON THE FORBIDDEN verdict branch",
+    "Does not vary lean; the gradient of consultability is a separate interpretation",
+    "Does not test headset legibility of the Label3D plate or the hall's creature encounter",
+    "Does not claim the deflection angle equals any particular number — only that it exits the band's sector"
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "forbidden-bands.interp.verdict-vocabulary",
+   "passage_ids": [
+    "situated-computation.supplied-verdicts.v1"
+   ],
+   "mapping": "Operationalize the tutorial's presentation-versus-stored-data lesson (its read()/COVER/REVEAL deep-copy discipline) on the artifact's own two layers: the Label3D plate text built by _verdict() is presentation; rest_azimuth_deg(), rest_rho_m(), on_band(), at_rim() and nearest_band_edge_deg() are the stored, probe-readable claim. A verdict counts as measured iff the azimuth printed in the plate's RESTS CLEAR / RESTS DOWNHILL / ON THE FORBIDDEN strings equals rest_azimuth_deg() recomputed from the settled shell, and the plate's color choice (band_color vs clear_color vs ball_color) agrees with on_band() and at_rim(). The hall's four readouts fail this test by design (their percentages are configuration); the dish is the proposed counter-exhibit.",
+   "assumptions": [
+    "The readable methods are the authoritative record, as the tutorial treats claims.records as authoritative over the returned view",
+    "_verdict() and the readable methods are called on the same settled state (physics is stopped by set_physics_process(false) at settle)"
+   ],
+   "exclusions": [
+    "Does not ask whether the deflection is physically correct, only whether display and record cohere",
+    "Excludes timing questions (SETTLE_TICKS, TIMEOUT_TICKS) except as a precondition",
+    "Does not compare against the hall's situated_readout code or modify any hall exhibit"
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "forbidden-bands.interp.foreclosure-gradient",
+   "passage_ids": [
+    "situated-computation.supplied-verdicts.v1",
+    "situated-computation.rule-on-a-body.v1"
+   ],
+   "mapping": "Operationalize 'a rule that acts on a body' as a threshold question on the lean export: at which of its four values {\"level\", \"faint\", \"firm\", \"steep\"} is the band rule ever consulted? From the script's own comment, the minimum of K*rho^2 - S*x sits at x = S/2K, interior unless S > 2*K*R: with DISH_K = 0.9 and dish_radius = 0.16 the threshold is S = 0.288, so LEANS \"level\" (0.0) and \"faint\" (0.12) predict a rest short of the rim with at_rim() false and the bands never met — \"level\" at the centre (predicted rest_rho_m() of 0.0, under _verdict()'s 0.05 m threshold: the CENTERED branch, 'the bands were never met'), \"faint\" at a predicted rest_rho_m() of 0.0667 m, interior but above that threshold, so the predicted plate branch is RESTS MID-DISH ('the bowl holds it short of the bands') — while \"firm\" (0.34) and \"steep\" (0.55) predict the rim is the constraint. Sweep lean with bands=\"pair\" and read at_rim(), rest_rho_m(), on_band() per value: the prediction is that the rule exists at every lean but acts on the body only past the threshold.",
+   "assumptions": [
+    "The point-mass paraboloid arithmetic approximates the verlet shell's rest well enough to classify interior versus rim (the shell's ball_radius = 0.06 offset is ignored by the hand calculation)",
+    "GRIP = 0.12 is low enough that friction does not hold the ball interior at firm or steep"
+   ],
+   "exclusions": [
+    "Does not predict the exact deflection azimuth at firm or steep, only rim-reached versus rim-never-consulted",
+    "Does not vary bands; pair is held as the fixed band shape",
+    "Makes no claim about the belt's no-escape geometry or about VR encounter quality"
+   ],
+   "status": "declared_alternative"
+  }
+ ],
+ "simulation": {
+  "text": {
+   "kind": "text_thought_experiment",
+   "status": "authored_hypothesis",
+   "path": "doc/book/experiments/situated-computation/forbidden-bands-001/text-simulation.md"
+  },
+  "godot": {
+   "scene": null,
+   "build": null,
+   "execution_status": "not_run",
+   "runs": []
+  }
+ },
+ "record_contract": {
+  "raw_values": null,
+  "apparatus_scene_reference": "res://commons/artifacts/forbidden_bands/forbidden_bands.tscn (reference only; no run is bound to this record)",
+  "baseline": "bands = \"none\", lean = \"firm\" — the control. Prediction (labelled a prediction, nothing has run under this record): the ball reaches the rim and rests straight downhill, i.e. is_settled() true, at_rim() true, rest_azimuth_deg() near 0, the plate's RESTS DOWNHILL branch.",
+  "single_change": "bands: \"none\" -> \"pair\" — the only edited export. Prediction (labelled): the rest azimuth exits the pair arc centered at 14.0 deg with half-width 28.0 deg, on_band() false, the RESTS CLEAR branch; the signed difference from the baseline azimuth is the measured refusal.",
+  "held_fixed": [
+   "lean = \"firm\" (LEANS value 0.34)",
+   "dish_radius = 0.16 (export default)",
+   "ball_radius = 0.06 (export default)",
+   "show_readout = true",
+   "dish_color, band_color, ball_color, clear_color at their export defaults",
+   "all script constants: DISH_K = 0.9, BAND_DEPTH = 0.06, BAND_H = 0.05, SUBSTEPS = 4 (declared at line 74 but never referenced by the current fixed-step loop), GRIP = 0.12, SETTLE_EPS = 0.0001, SETTLE_TICKS = 45, TIMEOUT_TICKS = 1200, FIXED_H = 1.0/240.0",
+   "the drop point: shell initialised at Vector3(0, ball_radius + 0.02, 0) by _rebuild()",
+   "the hall placement token and rotation (forbidden_bands:0:0.95 in map_data.json)",
+   "engine physics tick rate (the fixed-step accumulator is claimed by the script to make integration rate-independent — relied on as an assumption only, covered by the 60/90 Hz gate in debt.shell-offset's next_test, never treated as evidence)"
+  ],
+  "retained_fields": [
+   "export values set",
+   "verdict text",
+   "probe-readable measurements",
+   "tick rates gated (60 and 90 Hz)",
+   "scene and build identity"
+  ],
+  "replay": "Replaying a retained record means re-running the deterministic scene at the recorded exports and build; a changed build is a new run.",
+  "fresh_acquisition": "Any physics settle is a fresh acquisition at its tick rate; two rates are two observations."
+ },
+ "reference_fixture": {
+  "kind": "invented_arithmetic_fixture_not_rng_output",
+  "evidence_status": "calculated_expectation_not_executed",
+  "description": "Pen-and-paper rest-position arithmetic on the tilted paraboloid y = DISH_K * rho^2 - S * x, treating the ball as a point on the surface (the shell radius is deliberately ignored and logged as debt). Part 1 classifies each lean value as interior-minimum (rim never consulted) or wall-constrained, against the threshold S = 2 * DISH_K * dish_radius. Part 2, for lean=\"firm\" with bands=\"pair\", compares the dish height at the band face on the downhill axis against the rim height at the band's near edge (azimuth -14 deg), to predict whether deflection to the clear arc is energetically preferred. All outputs are predictions; no run has occurred under this record, and none of the registry's descriptive numbers were used.",
+  "constants_cited": [
+   "DISH_K = 0.9",
+   "LEANS = {\"level\": 0.0, \"faint\": 0.12, \"firm\": 0.34, \"steep\": 0.55}",
+   "dish_radius = 0.16 (export default)",
+   "BAND_DEPTH = 0.06",
+   "_band_arcs() for \"pair\" = [[14.0, 28.0], [194.0, 28.0]]"
+  ],
+  "values": [
+   0,
+   0.12,
+   0.34,
+   0.55
+  ],
+  "expected": [
+   "level (S=0.0): x* = 0.0 / 1.8 = 0.0000 m -> interior; predicted CENTERED, rim never consulted",
+   "faint (S=0.12): x* = 0.12 / 1.8 = 0.0667 m -> interior (0.0667 < 0.16); predicted rest short of the rim, bands never met — and since 0.0667 m is above _verdict()'s 0.05 m CENTERED threshold, the predicted plate branch with bands present is RESTS MID-DISH, not CENTERED",
+   "firm (S=0.34): x* = 0.34 / 1.8 = 0.1889 m -> past the wall (0.1889 > 0.16); the rim is the constraint",
+   "steep (S=0.55): x* = 0.55 / 1.8 = 0.3056 m -> past the wall (0.3056 > 0.16); the rim is the constraint",
+   "firm + pair: rim point at azimuth -14 deg sits 0.0047 m LOWER than the downhill-axis point at the band face (-0.0297 vs -0.0250), so the prediction is deflection out of the band's sector to a clear rest (on_band() false), not a park against the wall"
+  ],
+  "arithmetic": "Interior minimum along the downhill axis (z = 0): y(x) = DISH_K * x^2 - S * x, dy/dx = 0 at x* = S / (2 * DISH_K) = S / 1.8. Interior iff x* < dish_radius = 0.16, i.e. iff S < 2 * 0.9 * 0.16 = 0.288. level: 0.0/1.8 = 0.0000 (interior). faint: 0.12/1.8 = 0.0667 (interior). firm: 0.34/1.8 = 0.1889 (exterior). steep: 0.55/1.8 = 0.3056 (exterior). Clear-arc preference at lean=firm, bands=pair: band face radius = dish_radius - BAND_DEPTH = 0.16 - 0.06 = 0.10. Point A, downhill axis at the face: y_A = 0.9 * 0.10^2 - 0.34 * 0.10 = 0.009 - 0.034 = -0.0250 m. Point B, rim at the band's near edge, azimuth -14 deg (pair arc spans 14 +/- 28 deg, i.e. -14 to +42): x_B = 0.16 * cos(14 deg) = 0.16 * 0.9703 = 0.15525, rho_B = 0.16, y_B = 0.9 * 0.16^2 - 0.34 * 0.15525 = 0.02304 - 0.05278 = -0.0297 m. y_B - y_A = -0.0047 m: the clear edge is 4.7 mm lower, so sliding past the band's edge is predicted to be preferred over resting on the forbidden."
+ },
+ "observations": [],
+ "revisions": [],
+ "learning_debt": [
+  {
+   "id": "forbidden-bands.debt.shell-offset",
+   "kind": "unverified_claim",
+   "question": "The fixture's arithmetic treats the ball as a point on the paraboloid; the actual body is a verlet pressure shell of radius 0.06 with GRIP 0.12. Do the interior/exterior classifications (x* = S/1.8 vs 0.16) and the 4.7 mm clear-arc preference survive the finite, frictional body?",
+   "next_test": "Headless bench run (watchdog-wrapped, single Godot instance): instantiate forbidden_bands at lean=\"faint\", bands=\"none\", wait for is_settled(), read rest_rho_m() against the predicted 0.0667 m with a declared tolerance; then lean=\"firm\", bands=\"pair\", read on_band(), at_rim() and rest_azimuth_deg() against the predicted RESTS CLEAR classification. Gate at 60 and 90 Hz physics rates.",
+   "status": "open"
+  },
+  {
+   "id": "forbidden-bands.debt.hall-config",
+   "kind": "unverified_implementation",
+   "question": "The hall places the artifact as \"forbidden_bands:0:0.95\" (map_data.json line 1737, uncommitted). Does that token carry any bands/lean configuration, does the museum lane deliver it to apply_grid_config() before or after _ready() (the museum configures before _ready per project memory), and does the placed dish therefore stand at \"pair\"/\"firm\" defaults or at a chosen condition?",
+   "next_test": "Live map-load of SpeculativeComputation_Situated_Computation (not a worktree, not headless-only): read the placed root's config_* metadata and the artifact's bands/lean after load; confirm which _rebuild() ran last and that the plate reaches a settled verdict in situ.",
+   "status": "open"
+  },
+  {
+   "id": "forbidden-bands.debt.two-questions-one-dish",
+   "kind": "unresolved_interpretation",
+   "question": "The final passage asks what we would need to observe before calling either encounter 'dangerous'. The dish answers where a body may STAND, i.e. 'forbidding', not harm. Does the deflection reading genuinely operationalize the passage's question, or only its weaker neighbour — and between interp.control-first and interp.foreclosure-gradient, which does the hall text actually need?",
+   "next_test": "Write the companion's encounter protocol and run the hall's encounter lane (vr_agent look/interact or a human walk): the visitor states, before any revision of final.md, which question the dish answered for them; compare that account against the two interpretations and record which one the passage selects, or that neither does.",
+   "status": "open"
+  }
+ ],
+ "contributions": [
+  {
+   "role": "loop direction",
+   "contributor": "Palle Torsson (chat, 2026-10-14): start the research loop for some of the sequences",
+   "source": "doc/book/RECURSIVE_ARCHITECTURE.md"
+  },
+  {
+   "role": "apparatus construction",
+   "contributor": "Claude Fable 5 (claude-fable-5), separation-family build campaign of 2026-10-13, from the user's readings of the openai/math figures",
+   "source": "commons/artifacts/registry/forbidden_bands.json"
+  },
+  {
+   "role": "hall text authorship",
+   "contributor": "Not inferred; the hall texts predate this record",
+   "source": "commons/maps/SpeculativeComputation_Situated_Computation/"
+  },
+  {
+   "role": "record drafting",
+   "contributor": "Claude Fable 5 workflow agents (read, adversarial verify, draft), 2026-10-14",
+   "source": "doc/book/experiments/situated-computation/forbidden-bands-001/proposition.md"
+  }
+ ],
+ "related_tasks": [
+  "separation_research.001",
+  "separation_research.003"
+ ],
+ "task_sources": [
+  "doc/tasks/separation_research.json"
+ ],
+ "evidence_status": {
+  "artifact": "not_tested",
+  "experiment_cycle": "not_tested",
+  "specified_cross_hall": "not_applicable_local_pilot",
+  "scene_loading": "not_tested",
+  "runtime_stability": "not_tested",
+  "performance": "not_tested",
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested"
+ },
+ "edition": {
+  "id": null,
+  "status": "not_selected",
+  "publication_status": "not_published"
+ },
+ "initiation": {
+  "allowed_text_roles": [
+   "tutorial",
+   "final"
+  ],
+  "status": "proposed",
+  "questions": [
+   {
+    "text_role": "tutorial",
+    "passage_id": "situated-computation.supplied-verdicts.v1",
+    "question": "Can a readout's verdict be earned by measurement instead of supplied by configuration — and can a learner, before the run, reconstruct that verdict by hand from the apparatus's published constants, so that the printed azimuth is a prediction they made rather than a number they were handed?"
+   },
+   {
+    "text_role": "final",
+    "passage_id": "situated-computation.rule-on-a-body.v1",
+    "question": "When a rule acts on a body rather than being printed above it, what observation separates a constraint that actually refused the body from one the body never met — and what control condition must be witnessed before the red bands may be called forbidding at all?"
+   }
+  ],
+  "reconsider_if": [
+   "The control run (bands=\"none\", lean=\"firm\") does not rest at the rim near azimuth 0 — at_rim() false or |rest_azimuth_deg()| large after is_settled() — which would break attribution-by-control and show the point-mass fixture misclassifies the finite shell (ball_radius 0.06, GRIP 0.12)",
+   "Either condition reaches TIMEOUT_TICKS (the plate appends \"(still moving at timeout)\" / _timed_out true) in the hall: the verdict would then be a fact about a timeout, not a rest, and the settle criterion (SETTLE_EPS, SETTLE_TICKS) needs rework before any companion claim",
+   "Two launches of the same hall settle bands=\"pair\" to different sides or different verdict branches: the 14-degree symmetry break would be insufficient in situ, and 'where you come to rest is the shape of what refused you' stops being a reproducible answer",
+   "The hall's map token is found to carry bands/lean values that apply_grid_config() silently fails to set (BANDS_SET/LEANS membership checks fail and the dish stays at defaults \"pair\"/\"firm\"): the installed encounter would then differ from the configured one and the comparison must move to a bench scene",
+   "final.md's own proposed next experiment (panels revealing 'a distinct criterion and the observation it used') is implemented, changing what the bound passage asks and possibly superseding the dish's role as the hall's only earned verdict"
+  ]
+ },
+ "text_reviews": {
+  "tutorial": {
+   "source_path": "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md",
+   "source_passage_ids": [
+    "situated-computation.supplied-verdicts.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  },
+  "final": {
+   "source_path": "commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+   "source_passage_ids": [
+    "situated-computation.rule-on-a-body.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  }
+ },
+ "review_contract": {
+  "targets": [
+   "tutorial",
+   "final"
+  ],
+  "allowed_decisions": [
+   "revise",
+   "retain_with_reason",
+   "open_question"
+  ],
+  "both_rewrites_required": false,
+  "each_review_requires": [
+   "source_version",
+   "observation_refs",
+   "reason"
+  ],
+  "pending_is_complete": false
+ },
+ "next_experiment": {
+  "selection_status": "awaiting_observations",
+  "allowed_decisions": [
+   "continue",
+   "redirect",
+   "defer",
+   "stop"
+  ],
+  "source_observation_ids": [],
+  "question": null,
+  "decision": null,
+  "proposition": null
+ }
+}

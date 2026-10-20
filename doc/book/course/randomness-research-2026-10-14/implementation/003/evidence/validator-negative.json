@@ -1,0 +1,34 @@
+[
+  {
+    "case": "missing text review",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "unsupported human pass",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "fake completion",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "missing run",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "invented observation link",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "missing successor",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "ungrounded next work",
+    "rejected_for_expected_reason": true
+  },
+  {
+    "case": "changed baseline",
+    "rejected_for_expected_reason": true
+  }
+]

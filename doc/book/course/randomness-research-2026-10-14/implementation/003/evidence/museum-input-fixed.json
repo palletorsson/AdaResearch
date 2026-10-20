@@ -1,0 +1,82 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing seed instrument remains",
+      "passed": true
+    },
+    {
+      "name": "study creates both 16-cube arrays",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: A-flat",
+      "passed": true
+    },
+    {
+      "name": "inherited point signal selects B",
+      "passed": true
+    },
+    {
+      "name": "rendered pairs retain matching RGB",
+      "passed": true
+    },
+    {
+      "name": "point switch draws no values",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: B-mean-height",
+      "passed": true
+    },
+    {
+      "name": "desktop controls keep export clear import result",
+      "passed": true
+    },
+    {
+      "name": "study approach has actual museum floor",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "independent_learner": "not_tested",
+    "kind": "rendered_museum_encounter",
+    "observer": "Codex scripted native probe",
+    "physical_VR": "not_tested",
+    "rendered_heights_m": [
+      0.207558944821358,
+      0.195764273405075,
+      0.221749722957611,
+      0.208514049649239,
+      0.260155647993088,
+      0.237092643976212,
+      0.319104254245758,
+      0.261119514703751,
+      0.315241605043411,
+      0.230663850903511,
+      0.265125691890717,
+      0.323662579059601,
+      0.226978987455368,
+      0.224920704960823,
+      0.331245601177216,
+      0.212563723325729
+    ],
+    "study_hall_local": [
+      10.5,
+      0.0,
+      18.5
+    ],
+    "study_world": [
+      10.5,
+      0.0,
+      14.5
+    ]
+  },
+  "passed": true,
+  "room": "Random_Definition",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

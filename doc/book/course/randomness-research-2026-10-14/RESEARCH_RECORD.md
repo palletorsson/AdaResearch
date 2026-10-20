@@ -70,3 +70,11 @@ An initiating source has a `text_role` of tutorial or final, a passage ID, an ex
 Before execution, record what result or difficulty could change the interpretation or planned work. After execution, `text_reviews` contains a separate tutorial and final entry with source version, observation references, decision, reason and successor version if revised. Allowed decisions are revise, retain_with_reason and open_question; pending is not a completed review. A speculative passage need not be turned into a technical instruction or rewritten to claim agreement with the result.
 
 The companion's next-experiment decision remains empty until actual evidence can support continue, redirect, defer or stop. Link the selected question to that evidence in W005. Unexpected behaviour and reconstruction difficulties can motivate it; a mostly predictable first comparison is still useful for testing the method. Do not record the proposed second experiment as already run or require every cycle to generate a new hall.
+
+## First-pilot return
+
+The [seed-bench observations](../../experiments/random-definition/seed-bench-001/observations.md) now record a scoped execution and preservation repairs. The human reconstruction remains open. Retain the current hall/particle order; any later import should preserve exact values and distinguish stored replay from new draws. This local pilot does not certify a particle or cross-hall implementation.
+
+## Writing selection and reader evidence
+
+Link a versioned passage–encounter record to the existing companion: pool candidates and source status; card fields and selected order; exact draft/prefix versions; ghost-reader exposure and unedited responses; actual human review; editorial selection/reasons; optional critical proposition, rival and revision condition; separate tutorial/final reviews and next-work decision. Preserve unused candidates and rejected interpretations. Critical pressure and experimental potential may be null. See [WRITING_SPEC.md](WRITING_SPEC.md) and the explicitly unrun [design example](writing_pilot.json).

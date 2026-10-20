@@ -1,6 +1,6 @@
 {
   "schema": "tutorial-cards/1",
-  "updatedAt": "2026-10-06T11:55:08.249Z",
+  "updatedAt": "2026-10-17T05:24:08.612Z",
   "cards": {
     "Point_Coordinates": {
       "subjects": [
@@ -127,16 +127,80 @@
     },
     "Trans_Pre": {
       "subjects": [
+        "Reusable visual class",
         "Translation",
         "Rotation",
-        "Scale",
-        "Timed movement",
+        "Uniform scale",
+        "Elapsed time and a return cycle",
         "Overlap detection",
-        "Signals",
-        "Collect on contact"
+        "Signals and player filtering"
       ],
-      "focus": "Use one MeshInstance3D displaying a BoxMesh. Translate, rotate and scale the whole cube; keep its mesh fixed. Add elapsed time for a simple upward journey. Then attach an Area3D and a box collision shape, connect body_entered, recognise the supplied museum player and collect the cube by walking into it. No face lists, edge renderer or companion geometry scripts. Carry the same simple object from visual transformation to overlap detection and a signal-driven response.",
-      "updatedAt": "2026-10-06T11:55:08.249Z"
+      "focus": "Branch from the saved Melencolia arrangement. Name the deliberate change from bottom-origin CubeBody to centred BoxMesh. Create BoxBody once; place one instance and give it timed position, rotation and uniform scale. Then add an Area3D and player-filtered collection signal. The museum supplies the environment and player. Keep the complete collectible copy for Arrays and carry box_body.gd unchanged into Introduction.",
+      "updatedAt": "2026-10-16T16:40:41.116Z"
+    },
+    "Pattern_Temple": {
+      "subjects": [
+        "Receiver selection",
+        "Recipe copying",
+        "Independent edits"
+      ],
+      "focus": "Compose with the existing source, reading rules and receiver frames. Copy one recipe to another receiver, then edit one and show that the other keeps its own record. Use the court to choose where agreement ends.",
+      "updatedAt": "2026-10-09T19:16:09.807Z"
+    },
+    "Trans_Introduction": {
+      "subjects": [
+        "Reusing a visual class",
+        "Independent instances",
+        "Returning placement function",
+        "Bounded pose fraction",
+        "Interpolation",
+        "Pose versus clock"
+      ],
+      "focus": "Start with the exact completed Pre files. Carry box_body.gd unchanged; remove collection. Use a returning placement function to make three visual crossing models and their banks. Separate apply_pose from the clock, hold poses at 0, 0.5 and 1, then move the far bank without changing the end pose. Period remains one full return cycle. The models have no blocking collision; installed crossings supply riding.",
+      "updatedAt": "2026-10-16T16:40:42.810Z"
+    },
+    "Trans_Translation": {
+      "subjects": [
+        "Displacement in a coordinate frame",
+        "Vector interpolation",
+        "One-way duration and arrival",
+        "Conditions selecting route segments",
+        "Reusing the visual and placement function"
+      ],
+      "focus": "Continue the exact Introduction files. Keep BoxBody and box(size, at) unchanged; retain travel and the bounded apply_pose interface. Replace three comparison models with one level travelling surface. Use elapsed/duration for a one-way journey; compare direct interpolation with a route through one corner. Predict halfway and final positions, then add Z and change duration. The museum supplies installed riding; this study is visual. Waypoint indexing and constant-speed routes remain later topics.",
+      "updatedAt": "2026-10-16T17:34:09.240Z"
+    },
+    "Trans_Rotation": {
+      "subjects": [
+        "Axis, angle and pivot",
+        "Degrees and radians",
+        "Local offsets under a rotating parent",
+        "Reparenting while keeping local coordinates",
+        "An attached face mark"
+      ],
+      "focus": "Continue the tested Translation files. Keep BoxBody, box(), _process(), travel and the body dimensions. Add a pivot; reparent the body with its local transform retained. Convert a timed turn to radians and set the parent orientation. Attach a dark mark using the inherited constructor. Offset the child to make an orbit, then change the axis and duration. Compare fixed local coordinates, changing world positions and return of the face mark. Multiple-axis composition and rider counter-rotation remain later encounters.",
+      "updatedAt": "2026-10-16T21:21:40.570Z"
+    },
+    "Trans_Scale": {
+      "subjects": [
+        "Uniform and unequal scale factors",
+        "Child dimensions and child spacing",
+        "A threshold origin at floor level",
+        "A fixed reference outside the parent"
+      ],
+      "focus": "Continue Rotation’s exact tested files. Retain BoxBody, box(), the pivot declaration and local-preserving reparenting. Replace the moving body and clock with three doorway parts under the fixed parent and a sphere beside it. apply_pose explicitly changes from a float time fraction to Vector3 scale factors. Compare uniform, width-only and XY enlargement using predicted clear dimensions; keep stored local data and the reference sphere unchanged. Installed collision and room relocation remain supplied.",
+      "updatedAt": "2026-10-16T21:57:52.884Z"
+    },
+    "Trans_Body": {
+      "subjects": [
+        "The existing viewpoint as input",
+        "World positions and horizontal separation",
+        "Metres mapped to a bounded fraction",
+        "A fraction choosing scale",
+        "Reversible response without a stored path"
+      ],
+      "focus": "Continue the exact Scale files. Retain BoxBody, box(), apply_pose(), the doorway parent and three parts, and the fixed sphere. Three insertions read the existing active walking/XR camera, project world separation onto the floor, map near/far distance to a bounded fraction and interpolate an enlargement factor. Predict near, midpoint and far opening sizes. Test extended reach, width-only response and reversed output. The viewpoint is explicit input, not a collision body; installed multi-body collision, smoothing and retained cuts remain outside this visual study.",
+      "updatedAt": "2026-10-17T05:24:08.612Z"
     }
   }
 }

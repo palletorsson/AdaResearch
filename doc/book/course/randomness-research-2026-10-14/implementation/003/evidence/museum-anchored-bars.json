@@ -1,0 +1,122 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing seed instrument remains",
+      "passed": true
+    },
+    {
+      "name": "study creates both 16-cube arrays",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: A-flat",
+      "passed": true
+    },
+    {
+      "name": "shared XR pointer path selects B",
+      "passed": true
+    },
+    {
+      "name": "rendered pairs retain matching RGB",
+      "passed": true
+    },
+    {
+      "name": "rendered bars keep fixed bottoms and reduced range",
+      "passed": true
+    },
+    {
+      "name": "board switch draws no values",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: B-anchored-bars",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: control-board",
+      "passed": true
+    },
+    {
+      "name": "eight rectangular caps have rectangular unscaled touch targets",
+      "passed": true
+    },
+    {
+      "name": "grid has 15 mm gutters",
+      "passed": true
+    },
+    {
+      "name": "hand overlap at rectangular edge selects flat",
+      "passed": true
+    },
+    {
+      "name": "hand withdrawal releases button",
+      "passed": true
+    },
+    {
+      "name": "close leaves data kept and hides board",
+      "passed": true
+    },
+    {
+      "name": "closed controls cannot intercept hand or ray",
+      "passed": true
+    },
+    {
+      "name": "controls tab restores board without acquiring values",
+      "passed": true
+    },
+    {
+      "name": "board alone exports changes clears imports and replays",
+      "passed": true
+    },
+    {
+      "name": "desktop controls keep export clear import result",
+      "passed": true
+    },
+    {
+      "name": "study approach has actual museum floor",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "bar_heights_m": [
+      0.0830235779285431,
+      0.0783057063817978,
+      0.0886998921632767,
+      0.0834056213498116,
+      0.104062259197235,
+      0.094837062060833,
+      0.127641707658768,
+      0.104447811841965,
+      0.126096650958061,
+      0.0922655388712883,
+      0.10605026781559,
+      0.129465028643608,
+      0.0907915905117989,
+      0.0899682864546776,
+      0.132498249411583,
+      0.0850254893302917
+    ],
+    "independent_learner": "not_tested",
+    "kind": "rendered_museum_encounter",
+    "observer": "Codex scripted native probe",
+    "physical_VR": "not_tested",
+    "study_hall_local": [
+      10.5,
+      0.0,
+      18.5
+    ],
+    "study_world": [
+      10.5,
+      0.0,
+      14.5
+    ]
+  },
+  "passed": true,
+  "room": "Random_Definition",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,307 @@
+{
+ "schema": "ada.book-experiment.v1",
+ "id": "algorithmic-bias.filled-pocket-001",
+ "status": "proposed",
+ "disposition": "experimental",
+ "runtime_verified": false,
+ "sources": [
+  {
+   "passage_id": "algorithmic-bias.predict-one-change.v1",
+   "source_path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md",
+   "snapshot_path": "doc/book/experiments/algorithmic-bias/filled-pocket-001/sources/CriticalAlgorithms_Algorithmic_Bias_Visualization.tutorial.md",
+   "sha256": "0a9a585ea816c45fda90be31921513fa5f160bb2f8ed71030dd1c9f7ace0038b",
+   "excerpt": "Before HALF, predict warm gap 0.32 m and grey gap 0.66 m. Change the authored finish gap in code, predict its midpoint, and check a fresh layout.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "tutorial"
+  },
+  {
+   "passage_id": "algorithmic-bias.presence-vs-distinction.v1",
+   "source_path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+   "snapshot_path": "doc/book/experiments/algorithmic-bias/filled-pocket-001/sources/CriticalAlgorithms_Algorithmic_Bias_Visualization.final.md",
+   "sha256": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b",
+   "excerpt": "The words themselves remain. Their colours and brightness stay fixed while the space available to tell them apart changes. Presence in a representation is therefore different from being represented with useful distinctions.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "final"
+  }
+ ],
+ "documents": {
+  "proposition": "doc/book/experiments/algorithmic-bias/filled-pocket-001/proposition.md",
+  "text_simulation": "doc/book/experiments/algorithmic-bias/filled-pocket-001/text-simulation.md",
+  "observations": "doc/book/experiments/algorithmic-bias/filled-pocket-001/observations.md",
+  "revision": "doc/book/experiments/algorithmic-bias/filled-pocket-001/revision.md"
+ },
+ "interpretations": [
+  {
+   "id": "filled-pocket.interp.seal-census",
+   "passage_ids": [
+    "algorithmic-bias.presence-vs-distinction.v1"
+   ],
+   "mapping": "Operationalize 'presence in a representation' as the free-cell count of the hand-written layout (hand-countable from _layout(): 83 at wall=\"ring\", door=\"sealed\") and 'represented with useful distinctions' as reachable_cells(); their deficit is pocket_cells(). The final's distinction holds in the artifact exactly when pocket_cells() > 0 while those same cells are drawn (as 0.014-high boxes in pocket_color) rather than removed. Read through the probe methods pocket_cells(), reachable_cells(), route_steps() — no pixel reading required.",
+   "assumptions": [
+    "4-neighbour adjacency (the four cardinal Vector2i offsets in _flood()) is the hall-relevant notion of 'reach'",
+    "The character maps returned by _layout() are the whole ground truth: no RNG, so two placements of one token are the same argument (artifact's own header comment)",
+    "The amber fill is legible as 'absorbed floor', not merely a third colour"
+   ],
+   "exclusions": [
+    "No claim about trained embeddings, measured social data, or the hall's own six words — the artifact is a route-level analogy, exactly as the final's exhibit is an authored analogy",
+    "No perceptual measurement of the viewer; this interpretation reads counts, not experience",
+    "door axis excluded: held at \"sealed\""
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "filled-pocket.interp.door-drains",
+   "passage_ids": [
+    "algorithmic-bias.predict-one-change.v1",
+    "algorithmic-bias.presence-vs-distinction.v1"
+   ],
+   "mapping": "Operationalize 'change one thing' / 'give the region back' as the door axis: at wall=\"ring\", move door from \"sealed\" to \"single\", which per _door_cells() frees exactly Vector2i(5, 2) — a '#' in ring row 2, so _door_mattered becomes true. Predicted (labelled prediction, nothing run): pocket_cells() 9 -> 0, reachable_cells() 74 -> 84, route_steps() unchanged at 14, verdict line changing from 'POCKET: %d cells sealed -- filled' to 'every free cell reachable' with no '(the door names open floor)' suffix.",
+   "assumptions": [
+    "apply_grid_config lower-cases and validates against DOORS := [\"sealed\", \"single\", \"double\"], so the string \"single\" is carried, not silently refused",
+    "BFS tie-breaking does not affect route length: with one door and no right-side opening the through-door path dead-ends for y, so the 14-step detour stands",
+    "Both setters call _rebuild(), so set order (wall before door or after) cannot mask a value"
+   ],
+   "exclusions": [
+    "door=\"double\" excluded (second cell Vector2i(4, 2) not exercised)",
+    "wall=\"open\" and wall=\"u_bend\" excluded: there the door names cells that are already floor and the axis is declared conditional by the artifact itself",
+    "No claim that the route gets shorter; only reach and pocket counts are claimed"
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "filled-pocket.interp.severed-route",
+   "passage_ids": [
+    "algorithmic-bias.predict-one-change.v1"
+   ],
+   "mapping": "Operationalize 'the space available to tell them apart' at its far end as route existence: wall=\"split\", door=\"sealed\" places a full-height '#' column at x=5 (a '#' in all 9 rows of the split layout strings). Predicted from the layout strings alone (nothing run): the flood from x never reaches y, route_steps() returns -1 (the empty-route sentinel, per the method body _route.size() - 1 if not _route.is_empty() else -1), the verdict begins 'NO ROUTE', and pocket_cells() counts y's entire stranded half. The tutorial's continuously measurable separation becomes a binary the program can still measure.",
+   "assumptions": [
+    "The split layout's column 5 is '#' in all 9 rows as written, leaving no gap",
+    "-1 from route_steps() is read as 'no route', per the method body _route.size() - 1 if not _route.is_empty() else -1"
+   ],
+   "exclusions": [
+    "Not part of the bounded comparison below — a second changed condition (wall) would break the one-change rule",
+    "No gradual-compression analogue: unlike the hall's COMPRESSION handle, the artifact has no continuous blend export; its walls are discrete shapes",
+    "No claim about which half a visitor identifies with"
+   ],
+   "status": "declared_alternative"
+  }
+ ],
+ "simulation": {
+  "text": {
+   "kind": "text_thought_experiment",
+   "status": "authored_hypothesis",
+   "path": "doc/book/experiments/algorithmic-bias/filled-pocket-001/text-simulation.md"
+  },
+  "godot": {
+   "scene": null,
+   "build": null,
+   "execution_status": "not_run",
+   "runs": []
+  }
+ },
+ "record_contract": {
+  "raw_values": null,
+  "apparatus_scene_reference": "res://commons/artifacts/filled_pocket/filled_pocket.tscn (reference only; no run is bound to this record)",
+  "baseline": "wall = \"ring\", door = \"sealed\" — both are the export defaults as spelled in filled_pocket.gd (@export_enum ... var wall: String = \"ring\"; @export_enum ... var door: String = \"sealed\") — with cell = 0.036 and show_readout = true.",
+  "single_change": "door: \"sealed\" -> \"single\" (via the @export setter or apply_grid_config({\"door\": \"single\"}); \"single\" is carried by DOORS). Per _door_cells() at wall=\"ring\" this frees exactly one cell, Vector2i(5, 2).",
+  "held_fixed": [
+   "wall = \"ring\"",
+   "cell = 0.036",
+   "show_readout = true",
+   "good_color, bad_color, pocket_color, route_color, mark_color at their export defaults",
+   "the hand-written _layout() character strings (no RNG anywhere in the artifact)",
+   "start x and goal y positions, read from the layout characters at (0,3) and (10,3)",
+   "const W := 11 and const H := 9",
+   "the 4-neighbour flood in _flood() and the parent-chain route reconstruction"
+  ],
+  "retained_fields": [
+   "export values set",
+   "verdict text",
+   "probe-readable measurements",
+   "tick rates gated (60 and 90 Hz)",
+   "scene and build identity"
+  ],
+  "replay": "Replaying a retained record means re-running the deterministic scene at the recorded exports and build; a changed build is a new run.",
+  "fresh_acquisition": "Any physics settle is a fresh acquisition at its tick rate; two rates are two observations."
+ },
+ "reference_fixture": {
+  "kind": "invented_arithmetic_fixture_not_rng_output",
+  "evidence_status": "calculated_expectation_not_executed",
+  "description": "Invented pen-and-paper fixture: the ring board counted by hand from the _layout() character strings in filled_pocket.gd, under door \"sealed\" and then door \"single\". Every number below is derived from the .gd alone; none is taken from the registry description, any measured_* block, or any past probe or capture. Where a derived number happens to coincide with a registry phrase (the interior is 9 cells there too, and the registry's measured U-route cost of 14 equals the ring route derived here, because ring and u_bend share every route-blocking cell outside the mouth — each pair describes one hand-written layout), the authority here is the shown arithmetic. All expected values are PREDICTIONS: nothing has run under this record's identity.",
+  "constants_cited": [
+   "const W := 11",
+   "const H := 9",
+   "@export var cell: float = 0.036",
+   "const WALLS := [\"open\", \"u_bend\", \"ring\", \"split\"]",
+   "const DOORS := [\"sealed\", \"single\", \"double\"]",
+   "ring layout rows from _layout(): \"...........\" (rows 0, 1, 7, 8), \"...#####...\" (rows 2, 6), \"x..#...#..y\" (row 3), \"...#...#...\" (rows 4, 5)",
+   "_door_cells() for ring: cells.append(Vector2i(5, 2))",
+   "route_steps() returns _route.size() - 1 if not _route.is_empty() else -1",
+   "_at(): x = (p.x - (W-1)*0.5) * cell, z = (p.y - (H-1)*0.5) * cell; start/goal spheres placed at _at(e, 0.016)"
+  ],
+  "values": [
+   11,
+   9,
+   16,
+   15,
+   9,
+   0.036
+  ],
+  "expected": [
+   "PREDICTION (sealed baseline): route_steps() == 14, pocket_cells() == 9, reachable_cells() == 74; plate reads 'ROUTE: 14 steps' + 'POCKET: 9 cells sealed -- filled'",
+   "PREDICTION (door \"single\"): route_steps() == 14, pocket_cells() == 0, reachable_cells() == 84; plate reads 'ROUTE: 14 steps' + 'every free cell reachable', with NO '(the door names open floor)' line because _door_mattered is true at ring",
+   "PREDICTION (geometry): the x marker's local position is (-0.18, 0.016, -0.036) metres"
+  ],
+  "arithmetic": "Board: W*H = 11*9 = 99 cells. Ring walls counted off the layout strings: row2 has 5 '#' (cols 3-7), rows 3-5 have 2 each (cols 3 and 7), row6 has 5 -> 5+2+2+2+5 = 16 walls; free = 99-16 = 83. Enclosed interior = cols 4-6 x rows 3-5 = 3*3 = 9 free cells walled on all four sides, so the flood from x(0,3) reaches 83-9 = 74 and pocket = 9. Route: row 3 is blocked at (3,3)/(7,3) and row 2 at cols 3-7, so any x->y path must cross on row 1 (or symmetrically row 7): >= 2 vertical up + >= 10 horizontal + >= 2 vertical down = >= 14; achieved by (0,3)->(2,3)->(2,1)->(8,1)->(8,3)->(10,3) = 2+2+6+2+2 = 14, so BFS route_steps = 14 regardless of tie-breaking. Door \"single\" frees (5,2): walls 16-1 = 15, free 83+1 = 84; the interior drains through (5,2)->(5,1), so reachable = 84 and pocket = 0; with no second opening in the right wall the through-door path dead-ends for y, so the route stays 14. Marker: _at(Vector2i(0,3), 0.016) gives x = (0-5)*0.036 = -0.18, z = (3-4)*0.036 = -0.036."
+ },
+ "observations": [],
+ "revisions": [],
+ "learning_debt": [
+  {
+   "id": "filled-pocket.debt.flood-arithmetic",
+   "kind": "unverified_claim",
+   "question": "Do route_steps(), pocket_cells() and reachable_cells() match the pen-and-paper fixture (14/9/74 sealed; 14/0/84 with door \"single\") on the real node?",
+   "next_test": "A headless SceneTree probe that instantiates res://commons/artifacts/filled_pocket/filled_pocket.tscn, applies {\"wall\": \"ring\", \"door\": \"sealed\"} then {\"door\": \"single\"} via apply_grid_config, waits a frame after each, and prints the three methods; wrap in tools/godot_watchdog.py and compare line by line against this fixture.",
+   "status": "open"
+  },
+  {
+   "id": "filled-pocket.debt.encounter-legibility",
+   "kind": "unresolved_interpretation",
+   "question": "Standing in the bias hall, does the amber fill read as 'perfectly good floor, and it is wall' — the artifact's desire line — or merely as a third colour among exhibits built around warm/grey?",
+   "next_test": "A VR walk of CriticalAlgorithms_Algorithmic_Bias_Visualization with bridge SEND, asking the visitor to say which cells they believe a route could cross before and after toggling door, then reading ada_run/desktop_feedback.md; a desktop pass via the museum lane is the cheaper first step.",
+   "status": "open"
+  },
+  {
+   "id": "filled-pocket.debt.hall-placement",
+   "kind": "unverified_implementation",
+   "question": "Does the uncommitted placement \"filled_pocket:0:0.95\" in the hall's map_data.json stand the artifact on reachable floor with its plate facing the approach, without colliding with the existing distinctions bench?",
+   "next_test": "python tools/map_pathfinder.py check CriticalAlgorithms_Algorithmic_Bias_Visualization --verbose, then a capture_multi_angle map capture of the hall; walkability via tools/walk_evaluator.py --map=CriticalAlgorithms_Algorithmic_Bias_Visualization.",
+   "status": "open"
+  }
+ ],
+ "contributions": [
+  {
+   "role": "loop direction",
+   "contributor": "Palle Torsson (chat, 2026-10-14): start the research loop for some of the sequences",
+   "source": "doc/book/RECURSIVE_ARCHITECTURE.md"
+  },
+  {
+   "role": "apparatus construction",
+   "contributor": "Claude Fable 5 (claude-fable-5), separation-family build campaign of 2026-10-13, from the user's readings of the openai/math figures",
+   "source": "commons/artifacts/registry/filled_pocket.json"
+  },
+  {
+   "role": "hall text authorship",
+   "contributor": "Not inferred; the hall texts predate this record",
+   "source": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/"
+  },
+  {
+   "role": "record drafting",
+   "contributor": "Claude Fable 5 workflow agents (read, adversarial verify, draft), 2026-10-14",
+   "source": "doc/book/experiments/algorithmic-bias/filled-pocket-001/proposition.md"
+  }
+ ],
+ "related_tasks": [
+  "separation_research.001",
+  "separation_research.003"
+ ],
+ "task_sources": [
+  "doc/tasks/separation_research.json"
+ ],
+ "evidence_status": {
+  "artifact": "not_tested",
+  "experiment_cycle": "not_tested",
+  "specified_cross_hall": "not_applicable_local_pilot",
+  "scene_loading": "not_tested",
+  "runtime_stability": "not_tested",
+  "performance": "not_tested",
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested"
+ },
+ "edition": {
+  "id": null,
+  "status": "not_selected",
+  "publication_status": "not_published"
+ },
+ "initiation": {
+  "allowed_text_roles": [
+   "tutorial",
+   "final"
+  ],
+  "status": "proposed",
+  "questions": [
+   {
+    "text_role": "tutorial",
+    "passage_id": "algorithmic-bias.predict-one-change.v1",
+    "question": "Can the hall's predict-then-check discipline be carried from authored gaps to authored reachability: from the hand-written character map alone, predict before anything runs how many steps the route from x to y costs and how many free cells the flood will never reach, then change exactly one authored cell and predict again?"
+   },
+   {
+    "text_role": "final",
+    "passage_id": "algorithmic-bias.presence-vs-distinction.v1",
+    "question": "What does the encounter become at the limit the hall's slider never reaches — when a region of the map remains present, coloured and in place, yet no route arrives: does a visitor meet those cells as floor or as wall, and does opening a single door give the region back without any cell's occupancy changing?"
+   }
+  ],
+  "reconsider_if": [
+   "A hand recount of the ring layout gives counts other than 16 wall / 83 free / 9 interior, or a shorter-than-14 route is exhibited — the whole fixture is then wrong and must be rebuilt before any run is scored against it.",
+   "A live probe at wall=\"ring\" disagrees with the fixture (e.g. door \"single\" fails to drain the pocket) — test the handoff before the artifact, per the registry's own what_to_do_if_it_measures_lower: check _rejects.json and setter order before concluding anything about the design.",
+   "The hall texts are revised to mention filled_pocket (tutorial.md is already dirty in the working tree) — the binding's premise that the texts predate the artifact fails, and both excerpts must be re-selected against the new bytes.",
+   "In the headset the amber pocket reads as decoration or a third team colour rather than 'floor absorbed into wall' — the final-role encounter question is then unresolved, and a rendering interpretation (height, emission, or the plate's wording) becomes its own experiment rather than a repair.",
+   "The flood's neighbour set changes (e.g. diagonals added) or _layout() is edited — 'reach' no longer matches the hall's floor metaphor as mapped, and all three interpretations need remapping, not just renumbering."
+  ]
+ },
+ "text_reviews": {
+  "tutorial": {
+   "source_path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md",
+   "source_passage_ids": [
+    "algorithmic-bias.predict-one-change.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  },
+  "final": {
+   "source_path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+   "source_passage_ids": [
+    "algorithmic-bias.presence-vs-distinction.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  }
+ },
+ "review_contract": {
+  "targets": [
+   "tutorial",
+   "final"
+  ],
+  "allowed_decisions": [
+   "revise",
+   "retain_with_reason",
+   "open_question"
+  ],
+  "both_rewrites_required": false,
+  "each_review_requires": [
+   "source_version",
+   "observation_refs",
+   "reason"
+  ],
+  "pending_is_complete": false
+ },
+ "next_experiment": {
+  "selection_status": "awaiting_observations",
+  "allowed_decisions": [
+   "continue",
+   "redirect",
+   "defer",
+   "stop"
+  ],
+  "source_observation_ids": [],
+  "question": null,
+  "decision": null,
+  "proposition": null
+ }
+}

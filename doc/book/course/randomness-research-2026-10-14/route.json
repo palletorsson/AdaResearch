@@ -118,7 +118,7 @@
     ],
     "first_pilot": "random-definition.seed-bench-001",
     "first_pilot_selection": "selected_by_user_for_plan",
-    "pilot_status": "proposed_not_run",
+    "pilot_status": "scripted_cycle_passed_human_pending",
     "edition_status": "not_frozen"
   },
   "text_simulation_loop": {
@@ -166,5 +166,19 @@
       "Random_Entropy"
     ],
     "requires_new_hall": false
+  },
+  "writing_composition": {
+    "specification": "doc/book/course/randomness-research-2026-10-14/WRITING_SPEC.md",
+    "pilot": "doc/book/course/randomness-research-2026-10-14/writing_pilot.json",
+    "status": "specified_not_reader_tested",
+    "first_pilot": "random-definition.seed-bench-001",
+    "critical_lenses_optional": [
+      "edge",
+      "leak",
+      "technical_bias",
+      "attachment"
+    ],
+    "ai_reading_is_human_evidence": false,
+    "editorial_selection_automatic": false
   }
 }

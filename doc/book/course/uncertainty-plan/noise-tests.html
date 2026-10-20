@@ -1,0 +1,124 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Noise testing: a measured intervention</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f2efe7;color:#172a2e;font:18px/1.65 Georgia,serif}header,main,footer{max-width:1500px;margin:auto;padding:34px}header{padding-top:64px}h1{font-size:clamp(38px,5vw,70px);max-width:1100px;line-height:1.05}h2{margin-top:2.3em;line-height:1.2}h3{line-height:1.3}nav{display:flex;gap:20px;flex-wrap:wrap;font:14px/1.5 system-ui}a{color:#265d66;text-underline-offset:3px}.eyebrow,.tag{font:12px/1.6 system-ui;letter-spacing:.08em;text-transform:uppercase}.tag{display:inline-block;padding:5px 10px;background:#ddd5dc}.lead{font-size:25px;max-width:870px}.route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:30px 0}.card{background:#fffcf4;border-top:5px solid #8a627f;padding:23px;min-width:0}.card h3{margin:.5em 0}.card p{font-size:17px}.card small{font:12px/1.5 system-ui;color:#526568;overflow-wrap:anywhere}.card details{border-top:1px solid #dad8ce;padding-top:12px}.card summary{cursor:pointer;font:14px/1.6 system-ui}table{border-collapse:collapse;display:block;overflow:auto;font:15px/1.5 system-ui}td,th{vertical-align:top;text-align:left;padding:12px;border-bottom:1px solid #c9c9be;min-width:130px}td:first-child{font-weight:600}tr:nth-child(even){background:#e9e8df}p,li{max-width:88ch}pre{overflow:auto;background:#1e3033;color:white;padding:18px;font:13px/1.5 Consolas}code{font-size:.85em;overflow-wrap:anywhere}footer{border-top:1px solid #bec8c6}.quick{background:#e0e8e3;padding:22px;margin:25px 0;max-width:900px}@media(max-width:1080px){.route{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.route{display:block}.card{margin-bottom:20px}header,main,footer{padding:22px}}@media print{nav{display:none}body{font-size:11pt}.route{display:block}.card{break-inside:avoid}table{font-size:9pt}header,main,footer{padding:0}h1{font-size:28pt}}</style></head><body><header><div class="eyebrow">Endless Museum / editable plan / updated 9 October 2026</div><h1>Noise testing: a measured intervention</h1><nav><a href="index.html">Work packages</a><a href="sequences.html">25 sequences</a><a href="noise-tests.html">Noise experiments</a><a href="inventory.html">Source audit</a><a href="PLAN.md">Edit/read Markdown</a><a href="uncertainty-plan.zip">Review ZIP</a></nav></header><main><h1 id="noise-testing-a-measured-intervention">Noise testing: a measured intervention</h1>
+<p><strong>9 October 2026 — extension to the uncertainty plan</strong></p>
+<p>The two new notes make a useful change: hold a working object, intervene at a named point, and compare what follows. The first implemented experiment is <strong>G0, The Uncertain Surface</strong>, in <code>Random_Noise_Types</code>. It is a small opt-in addition to the Noise opening; the 25-sequence order and the other work packages remain intact.</p>
+<p>The broader “fuzzy computer” is a research direction. Gaussian displacement demonstrates neither fuzzy inference nor adaptation. Fuzz testing generates inputs and checks properties; noise injection adds a specified disturbance; fuzzy inference combines graded memberships under explicit rules. They can share a comparison apparatus without becoming one algorithm.</p>
+<h2 id="g0-keep-the-connections-move-the-positions">G0 — Keep the connections; move the positions</h2>
+<p>The student returns to an indexed mesh, a position array and a local seeded generator. Two 2 × 2 metre planes share 289 vertices and 512 triangles. One stays unchanged; the other receives three independent Gaussian draws per vertex. A physical strength slider scales the same saved sample. NEXT SEED changes the sample. ZERO and RESET recover their stated baselines. A removable edge overlay makes connectivity visible. The student predicts what halving strength will do, then verifies it from the stored positions.</p>
+<p><strong>New operation:</strong> <code>changed[i] = original[i] + saved_noise[i] * sigma</code>. <strong>Carry:</strong> original positions, index list, saved offsets, seed, units and measured deviation. <strong>Defer:</strong> topology mutation, collision, temporal variation, distribution switching and automatic failure classification.</p>
+<p>The prototype has bounded parameter ranges and fixed geometry counts, but the underlying Gaussian distribution has no finite support. No sample clipping or centroid recentering is hidden in the calculation. Both surfaces have the same material; plinths and controls are separate from the noncolliding experimental mesh. Readouts distinguish measured RMS from population RMS. A valid index list does not prove a nonintersecting embedding.</p>
+<p>The <a href="../../../../commons/artifacts/geometry_noise/README.md">artifact companion</a> records the implementation and units. The <a href="../../iterations/2026-10-09-geometry-noise-test/index.html">native museum review</a> includes before/after overhead, raised and visitor views, code, measurements and test receipts. Exact files are printed in the <a href="../../../../commons/artifacts/geometry_noise/tutorial.md">companion tutorial</a>. This optional study does not certify that the entire existing opening tutorial has been rewritten.</p>
+<h2 id="a-shared-experiment-contract">A shared experiment contract</h2>
+<p>Use the same <em>questions</em> for each substrate; introduce a shared implementation only when a second real experiment shows which code is reusable.</p>
+<ol>
+<li><strong>System and original:</strong> what runs, what data is preserved, and the version of its dependencies.</li>
+<li><strong>Injection point:</strong> exactly which input, state update or output is changed. The original remains separately addressable.</li>
+<li><strong>Process:</strong> distribution plus spatial/temporal dependence. Gaussian names a marginal distribution; white describes a correlation property. They are not mutually exclusive options in a single list.</li>
+<li><strong>Magnitude:</strong> value in the system's units. A percentage slider may control it, but does not make metres, newtons, seconds and missing messages comparable.</li>
+<li><strong>Clock and random stream:</strong> seed, draw order, fixed simulated duration where relevant, static versus resampled input. Sweeping amplitude with one sample is a paired comparison; testing robustness across seeds is another study.</li>
+<li><strong>Observation:</strong> defined difference from the reference, finite data and control bounds. A large difference is not automatically failure.</li>
+<li><strong>Failure criterion:</strong> an explicit task or invariant, named before measuring failure rates. Retain exceptions and do not invent a universal glitch score.</li>
+<li><strong>Recovery and transfer:</strong> replay/reset restores all relevant state; the student varies an independent case and predicts its consequence.</li>
+</ol>
+<p>If plotting failure incidence, record the sample population, number of trials, seeds, criterion and uncertainty. Do not present conceptual curves as Godot measurements. If claiming adaptation, identify what changes in the controller or model and test its response on held-out disturbances; a fixed damped pendulum is not learning.</p>
+<h2 id="where-the-twelve-proposed-interventions-belong">Where the twelve proposed interventions belong</h2>
+<p>These are candidates, not twelve new required lessons. Each reuses an earlier object and needs its own inspection before implementation.</p>
+<table>
+<thead>
+<tr>
+<th>Substrate</th>
+<th>Existing sequence / carrier</th>
+<th>Intervention and unit</th>
+<th>Observation / boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coordinates</td>
+<td>Transformation's cube; return in Noise</td>
+<td>Saved translation offset in metres, or angle in radians, one at a time</td>
+<td>Reference pose difference; don't conflate local and global axes.</td>
+</tr>
+<tr>
+<td>Mesh geometry</td>
+<td><strong>G0: Noise / Random_Noise_Types</strong></td>
+<td>Independent Gaussian xyz offsets; sigma 0–0.25 m</td>
+<td>Measured RMS/max/centroid; fixed index list. Implemented first.</td>
+</tr>
+<tr>
+<td>Physics</td>
+<td>Forces' point sphere and spring</td>
+<td>Add a recorded disturbance in newtons or a separate impulse in N·s</td>
+<td>Compare trajectories with same mass, clock and initial state; bounds and reset.</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Change → Forces P1 → Waves</td>
+<td>Vary one simulated timestep or a recorded delay in seconds</td>
+<td>Matched simulated duration; never perturb headset frame delivery.</td>
+</tr>
+<tr>
+<td>Collision</td>
+<td>Forces, later Soft Bodies</td>
+<td>Change one documented shape margin or sampling setting in an isolated study</td>
+<td>Actual contacts/penetration measured. A decorative wall cannot establish tunnelling.</td>
+</tr>
+<tr>
+<td>Materials</td>
+<td>Colour → Shaders P4</td>
+<td>Modify saved channel values or UV coordinates, separately</td>
+<td>Same source, receiver and camera; mapping and corruption distinguished.</td>
+</tr>
+<tr>
+<td>Rendering</td>
+<td>Shaders</td>
+<td>Change in-world render-target resolution in pixels</td>
+<td>Image difference and cost. Leave the live headset/stereo pipeline intact.</td>
+</tr>
+<tr>
+<td>Navigation</td>
+<td>Procedural Generation / Swarms</td>
+<td>Perturb goal or observed obstacle distance in metres</td>
+<td>Target reached, duration, path cost; distinguish sensing errors from graph changes.</td>
+</tr>
+<tr>
+<td>Perception</td>
+<td>Swarms → Machine Learning</td>
+<td>Recorded distance noise, delay or observation dropout</td>
+<td>Log true versus observed value and chosen command; missing is not zero.</td>
+</tr>
+<tr>
+<td>Memory/state</td>
+<td>CA → PostCrisis P6</td>
+<td>One delayed, skipped or aliased update</td>
+<td>Original versus changed history; violated synchronous/snapshot invariant.</td>
+</tr>
+<tr>
+<td>Procedural rules</td>
+<td>L-systems / Procedural Generation</td>
+<td>Mutate one symbol or parameter under declared constraints</td>
+<td>Syntax, budget, connectivity and reachability checked separately.</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td>Graph Theory / PostCrisis</td>
+<td>Simulate queue delay in seconds, duplicate or drop a numbered message</td>
+<td>Receiver histories and recovery. Bounded local queue first, not a network rewrite.</td>
+</tr>
+</tbody>
+</table>
+<p>Earlier Forces and Waves may show a recorded disturbance before students reconstruct its generator in Randomness/Noise. State that dependency rather than introducing an unannounced statistics lesson. Later halls return to the method only where it strengthens their main subject.</p>
+<h2 id="g1-and-g2-built">G1 and G2 built</h2>
+<p><strong>G1 — The same release / a recorded push. Built in Vectors_Act4b_Oscillation.</strong> Pull either inherited point to set the pair's release angle. OFF/ON matches drag and changes only the external input; SAME INPUT matches the saved force and changes B's drag. Forty saved Gaussian values, each held0.1s, provide four seconds of horizontal force. The angle model runs at120Hz for20s, stores a30Hz history, and reports peak absolute angle and a terminal settling window. There is no contact solver or Jolt hinge in this small study. The fixed-length projection follows existing constrained hand controls; the angular equation extends the museum's existing pendulum model. Springs remain the hall's primary reconstruction.</p>
+<p>43 native core checks and21 installed-room checks pass, including actual controls, supplied XR point/slider poses,176 supported capsule samples and native captures. The first headless teardown crashed after assertions; stopping the child handles and waiting through a physics frame before freeing the manually driven rig resolved it. Its log remains in the review. Headset and independent learner assessment remain open. <a href="../../iterations/2026-10-09-pendulum-a-recorded-push/index.html">Images, full code, text and evidence</a>; <a href="../../../../commons/artifacts/pendulum_noise/README.md">artifact contract</a>.</p>
+<p>This supplies a measured response, not closed-loop control, adaptation or stochastic resonance. The next P2 return still needs an explicit output measurement feeding a controller.</p>
+<p><strong>G2 — A navigator receives an imperfect observation. Built in SwarmIntelligence_Agent_Based_Modeling_ABM.</strong> Two inherited point spheres share an authored course, obstacle, goal, detour, speed and starting pose. One has accurate range; the other receives recorded Gaussian range error or dropout as separate modes. A missing value is null; STOP and HOLD give it different consequences. The fixed20Hz kinematic model checks swept disc contact and course exit, records the decision and actual path, and finishes within20simulated seconds. Known position/direction and waypoints are supplied; this is not a navmesh, learned policy or Jolt simulation. The colony remains primary, and the companion reconstructs this smaller policy explicitly rather than treating earlier ABM fragments as complete.</p>
+<p>40core assertions and40checks on freshly extracted printed code pass. Two real mutations—missing-as-zero and endpoint-only contact—fail the expected assertions.21native museum checks include supplied hand poses, six nearby buttons and72supported route samples. Seed1847 with65% missing blocks reaches contact at3.65s under HOLD and the goal at19.15s under STOP. All20paired results from seeds1847–1856 and the actual saved input arrays are retained; no population robustness estimate is claimed. The front-bay placement was rejected for pillar occlusion; the final study occupies the open end of the existing room. Physical headset and independent learner checks remain open. <a href="../../iterations/2026-10-09-navigator-an-imperfect-observation/index.html">Images, code and receipts</a>; <a href="../../../../commons/artifacts/navigator_noise/README.md">artifact contract</a>.</p>
+<p>The three G studies now make position, response and observation distinct intervention sites. P1 is built in Launch. P3 now extends the existing Monte Carlo dartboard with a replayable sample budget and eight-seed comparison; <a href="../../iterations/2026-10-09-samples-and-disagreement/index.html">native views and tests</a> distinguish all counted samples from visible markers. P4 now supplies the saved-record receiver and decoder; P2 feedback is next. No further generic injection framework is implied.</p>
+<p>Build one at a time. A generic NoiseInjection component that modifies arbitrary properties would obscure units, invariants and dependencies. G0's data helper is reusable for meshes; it does not pretend to operate a pendulum or navigation policy.</p>
+<h2 id="what-belongs-in-the-two-texts">What belongs in the two texts</h2>
+<p><strong>Tutorial:</strong> identify inherited code; save an original; sample once; apply scaled displacement; recompute normals; measure actual results; operate/replay; predict another case. Print runnable complete files and declare the museum controls as supplied infrastructure. The tiny formula does not excuse omitted construction code.</p>
+<p><strong>Reflection:</strong> a form can change while its connections remain. Which property was the viewer expecting to survive? What did the reference make visible, and what did it fail to name? A measured deviation gives a question a location; it does not settle recognition, pleasure or political meaning.</p>
+<p><strong>Compressed continuation:</strong> G0installedRandom_Noise_Types:289vertices512faces;xyzGaussian savedseed1847;strength*.25m;original+indicesfixed;measuredRMS/max/centroid;populationRMSseparate;no meshcolliders. Strength≠probability;Gaussian≠bounded;white≠Gaussianalternative;fuzz≠fuzzy. Core+museumreceipts. G1pendulum_noise installedForcesOscillation:43core+21museum;G2navigator_noise installedABM:40core+40printed+2mutants+21museum;P1+P3built;P3:24core+24printed+8exampleasserts+2mutants+25museum;P4built:37core+37printed+8exampleasserts+2mutants+121museum;P2nextoriginalpackage. Preserve25order/primarylessons;onecarrier/newoperation;noadaptationclaimwithoutpolicychange.</p>
+<h2 id="9-october-extension-camera-image-becomes-body">9 October extension: camera image becomes body</h2>
+<p><code>camera_glitch_study</code> is installed in Shader_05_Patterns: scanline strips, brightness relief, RGB planes, corrugation, curl, tile permutation, held/live bands, row-address offsets, luminance discard, torus wrap. One shared 640×360 camera; the source remains separately visible. Display mappings, not evidence of engine failure. <a href="../../iterations/2026-10-09-camera-image-becomes-body/index.html">Museum views and tests</a>. P4 now extends this same apparatus with its saved RGB8 record and decoder contract. <a href="../../iterations/2026-10-09-one-record-many-readings/index.html">P4 native views and exact-code tests</a>. P2/P5/P6 remain proposals. P3 has its separate sampling receipt.</p>
+<p>The PIXELS bank adds ten flat-screen operations to the same camera: chopping, wrong row width, scanline repetition, block permutation, channel misregistration, one-band tearing, retained blocks, quantisation, missing blocks and alternate reversed rows. Pixel addresses, values and image time are separate interventions. <a href="../../iterations/2026-10-09-cut-the-image-pixels/index.html">Ten native pixel views</a>. Source data stays intact; no vertex displacement, actual file corruption or invalid memory access is claimed.</p></main><footer>G0, G1, G2, P1, P3 and P4 have their own native test receipts. Other work packages remain proposals. Source and host checks do not establish headset or learner evidence. No new sequence added.</footer></body></html>

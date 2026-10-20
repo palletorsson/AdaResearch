@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "patterns": [
+    {
+      "id": "712cbb77-c6ea-4e0c-b8d7-78aaa4243d2f",
+      "title": "Random Definition — build and vary",
+      "role": "tutorial",
+      "origin": "Ada working variation",
+      "description": "Carry a familiar object into one new capacity. Give the student a reason, an explanation, a construction and a variation.",
+      "caution": "Keep the exact inherited files available. A passing program does not prove that the student understands it.",
+      "sources": [
+        {
+          "title": "Ada writing patterns and prose samples",
+          "url": "/book-review/doc/book/course/writing-patterns/PATTERNS.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Notice a difference",
+          "attitude": "Inviting",
+          "information": "One observable change in the carried object.",
+          "job": "Give the construction a purpose.",
+          "instruction": "Describe a difference the student can see in the current hall.",
+          "gain": "A reason to investigate this operation.",
+          "bridge": "What would have to change in our existing object?",
+          "words": 55,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "Recall the inheritance",
+          "attitude": "Patient",
+          "information": "The previous lesson, its object and usable code.",
+          "job": "Establish the starting state.",
+          "instruction": "Name the exact inherited file and what the student already knows; link rather than reprint.",
+          "gain": "A clear boundary between inherited and new work.",
+          "bridge": "Which part of that inheritance cannot yet do this?",
+          "words": 65,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Define the new part",
+          "attitude": "Exact",
+          "information": "The new concept and the conditions it needs.",
+          "job": "Supply an explanation before use.",
+          "instruction": "Define the operation, then name what it does to the carried data.",
+          "gain": "A usable account of the mechanism.",
+          "bridge": "What happens to a small concrete input?",
+          "words": 120,
+          "dependsOn": [
+            "n2"
+          ],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Trace a case",
+          "attitude": "Patient",
+          "information": "A small input, intermediate state and result.",
+          "job": "Make the operation followable.",
+          "instruction": "Follow the data step by step; let the student predict the last step.",
+          "gain": "A mental model for reading the code.",
+          "bridge": "Where will these steps appear in the program?",
+          "words": 120,
+          "dependsOn": [
+            "n3"
+          ],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Build and run",
+          "attitude": "Practical",
+          "information": "Complete new code, setup and execution.",
+          "job": "Turn the explanation into a working object.",
+          "instruction": "Introduce the code event, supply complete new code, then point out the important lines.",
+          "gain": "A reconstructable example with named dependencies.",
+          "bridge": "Does its behaviour match the trace?",
+          "words": 150,
+          "dependsOn": [
+            "n2",
+            "n3",
+            "n4"
+          ],
+          "event": "code"
+        },
+        {
+          "id": "n6",
+          "label": "Predict and vary",
+          "attitude": "Experimental",
+          "information": "One meaningful change and its expected consequence.",
+          "job": "Test understanding through a variation.",
+          "instruction": "Ask for a prediction before changing one relation. Run behavioural assertions and explain the result.",
+          "gain": "A capacity to modify the example deliberately.",
+          "bridge": "What can the next hall take as already available?",
+          "words": 150,
+          "dependsOn": [
+            "n5"
+          ],
+          "event": "action"
+        },
+        {
+          "id": "n7",
+          "label": "Carry onward",
+          "attitude": "Open",
+          "information": "The object, code and capacity retained.",
+          "job": "Hand over a useful state.",
+          "instruction": "Name what is kept and the next problem it makes possible.",
+          "gain": "A reason for the next lesson.",
+          "bridge": "The next hall puts the retained capacity to work.",
+          "words": 60,
+          "dependsOn": [
+            "n6"
+          ],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "build-vary",
+      "trial": {
+        "hall": "Random_Definition",
+        "textVersion": "Proposed route; compare with doc/book/course/text-plans/Random_Definition/tutorial.md",
+        "status": "Untested",
+        "observations": "",
+        "next": "Adapt the trace, build and variation to local generator state, successive draws and RGB assignment; then judge the written passage."
+      },
+      "updatedAt": "2026-10-13T10:22:29.995Z"
+    }
+  ]
+}

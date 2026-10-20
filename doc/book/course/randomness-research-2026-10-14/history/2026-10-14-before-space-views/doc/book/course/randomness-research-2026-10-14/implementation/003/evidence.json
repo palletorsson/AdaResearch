@@ -1,0 +1,290 @@
+{
+  "scope": "First pilot with human-directed fixed-bottom bar revision; physical VR and independent reconstruction remain open",
+  "runs": [
+    {
+      "id": "seed-bench.native.001",
+      "kind": "scripted_native",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/native.json",
+      "sha256": "5105387cd35612ba96c7cbaf4077b8917be98714a52b7e0958c00ab614ff4db6",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+      "current": false,
+      "superseded_by": "seed-bench.native.002"
+    },
+    {
+      "id": "seed-bench.replay.001",
+      "kind": "fresh_process_replay",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/fresh-process.json",
+      "sha256": "c3a961f9006f1ca1db19a2f3926ec6b20e916d03459181c9e7063ca346fd122a",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+      "current": false,
+      "superseded_by": "seed-bench.replay.002"
+    },
+    {
+      "id": "seed-bench.printed.001",
+      "kind": "automated_printed_reconstruction",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/printed-reconstruction.json",
+      "sha256": "ce368a3f019707736786068e467a181c1cf5365af3537e42828708635d5d05fe",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+      "current": false,
+      "superseded_by": "seed-bench.printed.002"
+    },
+    {
+      "id": "seed-bench.museum.001",
+      "kind": "rendered_scripted_museum",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-input-fixed.json",
+      "sha256": "0efbddb936b1b61579d8c079cd5c14e417165bbcc9b150687ee62a2ab8f235a7",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+      "current": false,
+      "superseded_by": "seed-bench.museum.002"
+    },
+    {
+      "id": "seed-bench.launcher.001",
+      "kind": "launcher_smoke",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-smoke.json",
+      "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json",
+      "current": false,
+      "superseded_by": "seed-bench.launcher.002"
+    },
+    {
+      "id": "seed-bench.native.002",
+      "kind": "scripted_native",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/native.json",
+      "sha256": "7c54bdc13e3aecdaaed51d71cde7cf2c4a194b7c744f8811138cdded9d331e68",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+      "superseded_by": "seed-bench.native.003"
+    },
+    {
+      "id": "seed-bench.replay.002",
+      "kind": "fresh_process_replay",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/fresh-process.json",
+      "sha256": "cfce07a6d32e042f887fac8f543a053fb4586d0ebf49a315c0860b4362cba47a",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+      "superseded_by": "seed-bench.replay.003"
+    },
+    {
+      "id": "seed-bench.printed.002",
+      "kind": "automated_printed_reconstruction",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/vr-board-final/printed-reconstruction.json",
+      "sha256": "fe7a91ce845ed967004f2b0dc49f2948076015d65a4689f916adafee86341ab6",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+      "superseded_by": "seed-bench.printed.003"
+    },
+    {
+      "id": "seed-bench.museum.002",
+      "kind": "rendered_scripted_museum",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-vr-board.json",
+      "sha256": "1c6de8e47a3a1a8cfadd7207ac8a24df011fbfd23ad17f7ac9eda5932a519fa5",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+      "superseded_by": "seed-bench.museum.003"
+    },
+    {
+      "id": "seed-bench.launcher.002",
+      "kind": "launcher_smoke",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-vr-board.json",
+      "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-sources.json",
+      "superseded_by": "seed-bench.launcher.003"
+    },
+    {
+      "id": "seed-bench.native.003",
+      "kind": "scripted_native",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/native.json",
+      "sha256": "0f1c5227d36659ae906002aae72de7ab64f3e2b048d1795269ec4c26a9d77f02",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+      "superseded_by": "seed-bench.native.004"
+    },
+    {
+      "id": "seed-bench.replay.003",
+      "kind": "fresh_process_replay",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/fresh-process.json",
+      "sha256": "5635dea0e7bda756579d06f1cb48fdee86e56f5a3059a09a5d3cfccb48635665",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+      "superseded_by": "seed-bench.replay.004"
+    },
+    {
+      "id": "seed-bench.printed.003",
+      "kind": "automated_printed_reconstruction",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/printed-reconstruction.json",
+      "sha256": "fdc7f60ad1d27b30bfbd979c9b412d9d25df27a79b6ab5f4572e6476d44c3e4a",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+      "superseded_by": "seed-bench.printed.004"
+    },
+    {
+      "id": "seed-bench.museum.003",
+      "kind": "rendered_scripted_museum",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-anchored-bars.json",
+      "sha256": "51bed02811ba8bfa601c3e28073d52e1e9e45b818711015070ca238c94b936b1",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+      "superseded_by": "seed-bench.museum.004"
+    },
+    {
+      "id": "seed-bench.launcher.003",
+      "kind": "launcher_smoke",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-anchored-bars.json",
+      "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+      "passed": true,
+      "current": false,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json",
+      "superseded_by": "seed-bench.launcher.004"
+    },
+    {
+      "id": "seed-bench.native.004",
+      "kind": "scripted_native",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/native.json",
+      "sha256": "e9457ff9868ce83f6e1c96fe9e2da5f3797f695fee3d45bddc4f34726ded2654",
+      "passed": true,
+      "current": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json"
+    },
+    {
+      "id": "seed-bench.replay.004",
+      "kind": "fresh_process_replay",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/fresh-process.json",
+      "sha256": "e54df18a5b84d70730c8ef1d7f7c194d181f096b55573ab186b9f14615625c45",
+      "passed": true,
+      "current": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json"
+    },
+    {
+      "id": "seed-bench.printed.004",
+      "kind": "automated_printed_reconstruction",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/printed-reconstruction.json",
+      "sha256": "42676199ea5a252717c34d7bcb04cc1168bfbbcf6f1f81fb85586202af11d710",
+      "passed": true,
+      "current": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json"
+    },
+    {
+      "id": "seed-bench.museum.004",
+      "kind": "rendered_scripted_museum",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-filled-trays.json",
+      "sha256": "0c4b084816bca34a74ed9112e19c4e06acd76c2a428b376f486b511afe2d0596",
+      "passed": true,
+      "current": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json"
+    },
+    {
+      "id": "seed-bench.launcher.004",
+      "kind": "launcher_smoke",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-filled-trays.json",
+      "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+      "passed": true,
+      "current": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json"
+    }
+  ],
+  "record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+  "observations": [
+    "seed-bench.O1",
+    "seed-bench.O2",
+    "seed-bench.O3",
+    "seed-bench.O4",
+    "seed-bench.O5",
+    "seed-bench.O6",
+    "seed-bench.O7",
+    "seed-bench.O8",
+    "seed-bench.O9",
+    "seed-bench.O10"
+  ],
+  "fault_reports": [
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/alias/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/bad-import-mutation/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/draw-on-switch/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/wrong-mean/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/alias/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/bad-import-mutation/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/draw-on-switch/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/drifting-bottom/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/anchored-bars-final/wrong-mean/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/alias/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/bad-import-mutation/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/draw-on-switch/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/drifting-bottom/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/filled-trays/wrong-mean/fault.json"
+  ],
+  "retained_failed_runs": [
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/native.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/import-diagnostic.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/import-fixed/native.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/import-fixed/fresh-process.json"
+  ],
+  "captures": [
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-vr-board/A-flat.png",
+      "sha256": "72eb8f88071417d282cdbda0774405a943fb18a34047cc241728842e1dac8055",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-vr-board/B-mean-height.png",
+      "sha256": "a7bd0589c1917c871345cb0695cb720ec9d3fe86a1b617945fb1c5432e1b8b53",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-vr-board/control-board.png",
+      "sha256": "bfcf3cf77d412e158ecf0427bdea7a06e371f2fda339fe08bbcd08c694cc8ee8",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-anchored-bars-final/A-flat.png",
+      "sha256": "14f99706583780c32d4fa830814bf84175206fddb59cfc018f42df6a092fa620",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-anchored-bars-final/B-anchored-bars.png",
+      "sha256": "b3d91a9cc0b8cde354c3e0219a04a56f40eccf895712f5f555fda9d242cc68ef",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-anchored-bars-final/control-board.png",
+      "sha256": "1955a492185cf94cb4002c36f5a960d6840979b6ea5d227e28cb22e1cc091ea6",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-filled-trays/A-flat.png",
+      "sha256": "d0fd0effdc0a5a51acb8615d84eae58e9f6174d9c1d3f380ffef9ac69c3ef641",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-filled-trays/B-anchored-bars.png",
+      "sha256": "7e36128f584e8d57224ecfb11b9f29260f613d76edf4d66bfa02572644fd005b",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-filled-trays/control-board.png",
+      "sha256": "cab5f804a761cc0f8b25d2a9aa5571c5633069e8e9081b5d83a30eb427e19497",
+      "storage": "local image; ignored by repository policy"
+    }
+  ],
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested",
+  "performance": "not_tested",
+  "human_feedback": [
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-feedback.json"
+  ]
+}

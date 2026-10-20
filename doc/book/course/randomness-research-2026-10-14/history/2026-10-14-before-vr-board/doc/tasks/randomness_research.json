@@ -1,0 +1,1032 @@
+{
+  "goal_id": "randomness_research",
+  "goal_title": "Randomness as shared experiment: existing halls and five particle lessons",
+  "kind": "spec",
+  "labels": [
+    "ready-for-agent"
+  ],
+  "label_meaning": "Usable planning input; not authorization for unrequested museum changes.",
+  "why": "Develop reconstructable experiments whose observations can change the apparatus and its writing.",
+  "specification": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\SPEC.md",
+  "decision_record": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\DECISIONS.md",
+  "implementation_authorization": "This request revises the spec. Record selected implementation scope in .002; prior authorization need not be asked again.",
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "randomness_research.001",
+      "title": "Establish the sequence, museum and artifact baseline",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Snapshot every artifact cell in randomness/noise/particle sequence maps plus museum-only Biome_Cage. Resolve registry candidates and direct scene scripts; record hashes and distinguish sequence from museum membership. Preserve the supplied research text and publish inventory and scoped findings. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/001. ",
+      "effort": "half-day",
+      "skill": "read",
+      "depends_on": [],
+      "status": "done",
+      "blocked_reason": null,
+      "claimed_by": null,
+      "done_at": "2026-10-14",
+      "map_refs": [],
+      "artifact_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.001",
+        "ada_random_noise_route.003",
+        "ada_particles_tutorial.001",
+        "ada_random_noise_artifacts.001"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/INVENTORY.md; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/comparison.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/audit_inventory.py'; python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/compare_package.py'",
+      "acceptance": "Static coverage includes 31 maps; every selected name/scene resolves at the snapshot. Duplicates and runtime/learner limits remain visible. No scene is certified by execution.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.002",
+      "title": "Record route scope and the selected 48-value seed-bench pilot",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/proposition.md. Review the revised HALLS.md, PARTICLE_PATH.md, COMPARISON.md and RESEARCH_RECORD.md against comparison.json. Select the six-stop early randomness trial, unchanged noise exit and five existing particle lessons, or record revisions. Four new halls are deferred; optional field/sensitivity/rule returns need separately selected scope. Existing seven-step verification is already accepted. A later implementation request may supply the needed authorization; do not demand redundant confirmation. Record concrete route, host, prose and pilot choices without changing live maps in this task. Include the Text Simulation Loop, a bounded source-versus-Entropy opening trial, and three pilot outcomes: apparatus result, independent tutorial/final reviews and a task-plan decision. The later supplied texts are methodological direction, not approval to execute every proposed world. The user has selected the 4x4, 48-value RGB/height seed bench as the first pilot in the plan. Record that decision without asking for it again, alongside any remaining route/host scope. Use the existing companion with both tutorial and final source questions; retain the established museum host and separate opening-order trial. This specification request does not execute the pilot. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/002. ",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "randomness_research.001"
+      ],
+      "status": "done",
+      "blocked_reason": null,
+      "claimed_by": null,
+      "done_at": "2026-10-14",
+      "map_refs": [],
+      "artifact_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.002",
+        "ada_random_noise_route.004",
+        "ada_random_noise_route.006"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/DECISIONS.md; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/route.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'",
+      "acceptance": "A decision record distinguishes author choices from alternatives. This review changes no live hall order. The first build is one complete bounded experiment.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ],
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md"
+      ],
+      "notes": "User authorized the first experiment loop. Bounded seed bench selected; both exact source questions bound. Broader route/Source Lab/sleeve deployment not selected."
+    },
+    {
+      "id": "randomness_research.003",
+      "title": "Complete one seed-bench experiment cycle and record adapter",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/proposition.md. Record accepted implementation scope in randomness_research.002 before this work. Extend the accepted pilot with baseline, one interpretation change, an independent kept result, replay and a small complete tutorial reconstruction. SAME RECORD changes colour/height interpretation without drawing again. Record draw roles/order, seed/captured state, values, procedure version, observation and next-change proposal. Build only record fields needed now. Preserve the atmospheric record, sphere and +1 DRAW encounter. Supply a native behaviour probe and exact printed-code reconstruction. Use RESEARCH_RECORD.md: explicit export/import/clear, parent lineage, replay scope, observation and next change. Every destination must retain a local baseline. Capture no raw headset/audio stream by default; minimum relevant target input is separately chosen. Reject invalid/oversized/unknown-version imports without silently replacing them. Bind a selected passage/interpretation record to this pilot; keep sampled variation, changed interpretation and revised relation rules distinct. Coordinate with writing .001-.002 so a passage can initiate a bounded variant and its observation can revise the passage. A speculative sleeve is not a mandatory pilot. Use the existing local baseline and record what the new observation proposes to change in the task plan. Use doc/book/experiments/random-definition/seed-bench-001 as the companion. Retain sixteen ordered triples (48 scalar values); compare fixed local centre height with 0.10 m + 0.30 m * the triple mean. Keep RGB visible, XZ layout, dimensions, host and lighting fixed; switch only the height rule with no new draws. Read proposition.md for the exact proposed layout and independently calculated fixture. Preserve the shipped vertical grids. The authored text simulation is a hypothesis; attach actual scene/build/run records only when they exist. Prove kept-copy independence and no draw on switching, then supply the exact printed continuation and independent reconstruction evidence. Both tutorial and final initiate this pilot; preserve their distinct source questions and review each after execution. Record what would change the interpretation before testing. W005 selects later experiments from actual evidence, including a reason to defer or stop. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Definition/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/003. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.002"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Awaiting actual human encounter / independent reconstruction. W002 also retains the separate opening-order trial; W005's defer-expansion decision is provisional.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Definition"
+      ],
+      "artifact_refs": [
+        "seed_replay_demo",
+        "random_return"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.007",
+        "ada_particles_tutorial.008"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/003/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Definition",
+      "acceptance": "Data replay matches under the declared build. Presentation changes consume no draws. A shared-reference mutation is rejected. The cycle ends with observation and a further question/change. Human reconstruction remains not tested until a person performs it.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ],
+      "progress": "Native 46/46, fresh-process 3/3, printed reconstruction 46/46, museum 10/10; four injected faults detected. Tutorial revised in companion; final retained with reasons. Human/headset evidence absent.",
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md"
+      ]
+    },
+    {
+      "id": "randomness_research.004",
+      "title": "Build an honest source recorder at the existing seed bench",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Correct simulated physical-source and body-weathering claims while retaining the artworks. Build the accepted recorder with a seeded stream, engine secure bytes and separately labelled timing measurements. Preserve the saved atmospheric response offline. Persist acquisitions/provenance. Implement X1: REPLAY RECORD cannot acquire again; NEW ACQUISITION is separate. Report platform/source failures without fabricated fallback. Host the comparison beside Definition first. New Source Lab is deferred. Timing acquisition is optional and never certified as entropy by a histogram; preserve the usable offline baseline. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Definition/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Entropy/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/004. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.003",
+        "randomness_research_writing.005"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy"
+      ],
+      "artifact_refs": [
+        "trng_vs_prng",
+        "hardware_entropy_decay",
+        "seed_replay_demo"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_artifacts.001",
+        "ada_random_noise_artifacts.002"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/004/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/004/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Definition",
+      "acceptance": "Replay needs no fresh source call. Acquisition records an event/provenance rather than just a changed picture. Failures stay explicit. The display makes no untested entropy-quality or quantum-hardware claim.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.005",
+      "title": "Connect distribution, birth and eligibility experiments",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Coordinate with existing tickets book_randomness.018, book_randomness.019, book_randomness.026, book_randomness.044; re-read their current status and reuse completed work, without duplicating or auto-closing them. Preserve uniform/Gaussian/rebinning and candidate-set lessons. Add the record adapter and law/parameters/birth-table export for X2. Keep clipping/bins separate from raw values. Retain exclusions and the empty-set outcome. Review physical throws and fixed recipes as retained route encounters. Extended laws need individually defined follow-ons; equal seeds alone do not imply matched samples. Trial Cubes before Gaussian in the six-stop opening. Preserve the existing sigma control and link completed book_randomness.044 instead of duplicating it. P2 can complete with a local birth table; X2 is an explicitly selected integration increment. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Gaussian/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Remove/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Cubes/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Mushrooms/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_randomness.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/005. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.003",
+        "randomness_research_writing.005"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Gaussian",
+        "Random_Remove",
+        "Random_Cubes",
+        "Random_Mushrooms"
+      ],
+      "artifact_refs": [
+        "distribution_sampler",
+        "remove_random",
+        "sampling_hoppers",
+        "mushrooms"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_randomness.018",
+        "book_randomness.019",
+        "book_randomness.026",
+        "book_randomness.044"
+      ],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.004",
+        "ada_random_noise_artifacts.005"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/005/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/005/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Gaussian",
+      "acceptance": "Rebinning preserves samples/RNG state. Empty sets do not draw invalid indices. Birth IDs/law metadata round-trip. Saved die outcomes are not presented as exact physical trajectory replay.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.006",
+      "title": "Carry decisions through marks and neighbours",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Coordinate with existing tickets book_randomness.001, book_randomness.017, book_randomness.020, book_randomness.021; re-read their current status and reuse completed work, without duplicating or auto-closing them. Retain input and receiver versions in the marks and matched-field studies. Compare independent heights and a correlated field at matched addresses. Separate sampling scale from physical spacing. Keep visual marks distinct from navigable connectivity. Stage revised prerequisite/handover paragraphs for the proposed order. The local textile is already in 10 PRINT; do not move it again. Existing book_randomness.001 is done: inspect its solution before changing geometry. Reuse geometry_noise; the imported 0.18 suggestion is not an accepted calibration or instruction to create a duplicate artifact. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Randomness_10_PRINT_Algorithm/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Space_Geometry/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_randomness.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/006. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.005"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Space_Geometry"
+      ],
+      "artifact_refs": [
+        "ten_print",
+        "ten_print_structure",
+        "perlin_noise_bridge"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_randomness.001",
+        "book_randomness.017",
+        "book_randomness.020",
+        "book_randomness.021"
+      ],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.003",
+        "ada_random_noise_route.005",
+        "ada_random_noise_artifacts.004",
+        "ada_random_noise_artifacts.006"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/006/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/006/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Randomness_10_PRINT_Algorithm",
+      "acceptance": "Receivers use the retained decision grid without new draws. Field queries are stable. Neighbour/count measures use declared fixtures. Maze appearance is not connectivity proof.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.007",
+      "title": "Make field receivers and spatial decisions reconstructable",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Coordinate with existing tickets book_noise.014, book_noise.017, book_noise.019, book_noise.020; re-read their current status and reuse completed work, without duplicating or auto-closing them. Work one selected noise encounter at a time using its current author focus. Preserve rejection/minimum-distance and Related Weather. Add field/receiver retention in Noise One, threshold/occupancy in Voxel and separate field/render/collision policies in Cellular. Define X3/X5 exports without treating scalar noise as force. Retain all eleven sequence identities and the optional Lab Path coda. Resolve tutorials marked proposed before declaring them reconstructable. Preserve the current Perlin/Simplex handover to Shaders. At Noise Space 10 add a bounded prediction/change/observation/retained-failure/next-question trial, with passage, collider and viewer-scale variables separate. Reuse mixer/Worley scenes; do not activate deferred maps or duplicate them. The local Lab Path/readout/global-input tickets are done; noise .020 remains separate open headset evidence. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Noise_Types/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_One/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Voxel/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Cellular/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Box/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Columns/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Inside_Noise/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_6_Wall/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Space_10/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Perlin_Simplex/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_noise.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/007. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.006"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Noise_Types",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_Cellular",
+        "Noise_Box",
+        "Noise_Columns",
+        "Noise_Inside_Noise",
+        "Noise_6_Wall",
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex"
+      ],
+      "artifact_refs": [
+        "randompoints",
+        "geometry_noise",
+        "related_weather",
+        "noisetorus",
+        "voxelnoise",
+        "cellular_atrium_space"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_noise.014",
+        "book_noise.017",
+        "book_noise.019",
+        "book_noise.020"
+      ],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.006",
+        "ada_random_noise_artifacts.006",
+        "ada_random_noise_artifacts.007",
+        "ada_random_noise_artifacts.008"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/007/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/007/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Noise_Types",
+      "acceptance": "Receiver/threshold changes preserve field data. Attempt/refusal records are visible. Collision checks distinguish support from visible displacement. Each selected printed lesson reconstructs from declared incoming state.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.008",
+      "title": "Write particle P1: one state becomes a population",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Build the small learner reference from the continuing point: explicit state, IDs, fixed tick, kept copies and bounded population. Production Particle is inspected comparison material, not a hidden dependency. Write the initial complete tutorial and behaviour probe. Provide STEP/RUN/PAUSE/KEEP/RESET in desktop and VR. First audit exact code inheritance, core Particle/Emitter/Confetti, scene dependencies, inputs and source/license notices. P1 teaches a simple fixed lifetime and retirement; curves and types come at P4. Require a prediction before the comparison and capture any missing reconstruction step as learning debt. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_SingleAndArrays/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/008. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.003"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Particles_SingleAndArrays"
+      ],
+      "artifact_refs": [
+        "example_4_1_single_particle_vr",
+        "example_4_2_array_particles_vr"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_particles_tutorial.001",
+        "ada_particles_tutorial.002",
+        "ada_particles_tutorial.008"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/008/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_SingleAndArrays/tutorial.md",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/008/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Particles_SingleAndArrays",
+      "acceptance": "Zero-force displacement, empty population, simultaneous retirement and independent copies pass. Render cadence does not alter fixed-tick state. Omitting the copy fails ordinary checks. Distinguish synthetic from physical input evidence.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.009",
+      "title": "Write particle P2: replayable births and emitters",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Continue exact P1 output with emission schedule/accumulator, source IDs, independent streams or birth tables and a full-cap policy. Prepare X2; verify it only after the sender in .005 is available, and keep the local deterministic birth table usable. Moving the emitter affects future births in a stated coordinate frame without silently moving old particles. Print exact edits and retain the assembled program. Compare regular versus burst schedules at equal total births over a stated interval, with cap/skipped births and event times recorded. Stochastic schedules are a later separate one-condition trial. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Emitters/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/009. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.008"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Particles_Emitters"
+      ],
+      "artifact_refs": [
+        "example_4_3_particle_emitter_vr",
+        "example_4_4_multiple_emitters_vr",
+        "example_particle_body"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_particles_tutorial.003",
+        "ada_particles_tutorial.008"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/009/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Emitters/tutorial.md",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/009/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Particles_Emitters",
+      "acceptance": "Zero rate/capacity/skipped births behave as declared. Independent emitters do not consume each other's draws. Replay restores accumulator/IDs/streams. Imports preserve existing live state.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.010",
+      "title": "Write particle P4: lifetime, kinds and bounded children",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Continue P3 with normalized age, appearance curves, a second update behaviour and retirement. Separate appearance from dynamics. Add bounded parent-child emission only after lifetime/identity. Preserve source attribution. A code type is not automatically a biological lineage. Retain the tested force update and compare turnover at fixed births. Curves/behaviour types do not replace the already taught fixed lifetime. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_LifetimeAndTypes/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Emitters/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/010. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.011"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Particles_LifetimeAndTypes",
+        "Particles_Emitters"
+      ],
+      "artifact_refs": [
+        "lifetime_curves",
+        "example_4_5_inheritance_polymorphism_vr",
+        "sub_emitters"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_particles_tutorial.005"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/010/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_LifetimeAndTypes/tutorial.md",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/010/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Particles_LifetimeAndTypes",
+      "acceptance": "Curve edits preserve trajectory/RNG. Simultaneous deaths work; child emission occurs once per event and respects depth/count budgets. Retained parents stay unchanged.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.011",
+      "title": "Write particle P3: forces with recorded input",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Continue P2 with force law, distance clamp, mass convention and recorded hand/desktop targets. Distinguish assigned velocity from integrated force. Define damping per second or per fixed tick rather than inheriting update-dependent drag. Print exact continuation edits. Field research is optional later work; completing this force lesson does not require randomness or noise chapters. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Forces/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/011. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.009"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Particles_Forces"
+      ],
+      "artifact_refs": [
+        "force_fields",
+        "example_2_6_single_attractor_vr"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_particles_tutorial.004"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/011/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Forces/tutorial.md",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/011/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Particles_Forces",
+      "acceptance": "Independent fixtures cover zero/opposite force, mass and coincident positions. Rotated/scaled hosts preserve coordinates. Replay uses recorded input, not the wall clock.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.012",
+      "title": "Add optional E1 particle field comparison in existing halls",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. This is an optional research extension; it does not gate the five-lesson delivery. Branch from completed P5 with matched births and independent-kick versus frozen-field modes. Trial a comparator at Particles Forces and define scalar-to-vector/receiver mappings. Correct curl labels to the sine-potential finite-difference implementation. Localize reference respawn draws and record boundary exits. Implement X3 and incompatibility handling. Scope any divergence/incompressibility claim numerically. A new Field Lab is deferred. Compare fixed motion, independent kicks and frozen field with the same births/integrator/renderer/boundaries; retain bounded dispersion/path measurements and exits. No mandatory sixth tutorial or new canonical curl implementation. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Forces/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Space_Geometry/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Noise_Space_10/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/012. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.013",
+        "randomness_research.007"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Particles_Forces",
+        "Random_Space_Geometry",
+        "Noise_Space_10"
+      ],
+      "artifact_refs": [
+        "curl_noise_particles",
+        "related_weather"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": true,
+      "imported_task_refs": [
+        "ada_particles_tutorial.007",
+        "ada_random_noise_artifacts.007",
+        "ada_random_noise_artifacts.009"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/012/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/012/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Particles_Forces",
+      "acceptance": "Static queries repeat without draws; appearance edits do not move particles. Respawn differs from wrap. Phase/ticks/stochastic events replay. Matched comparisons expose each changed condition.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.013",
+      "title": "Write particle P5 and verify the complete five-lesson chain",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Continue P4 with absorb/reflect/wrap on matched trajectories and a small pair-contact case before scaling. Separate repulsion from collision. Record hand input/event order. Offer campfire as a visual composition with physical omissions stated. Prepare X6 export using stable IDs. No field-lab dependency. Change one fire/ember/smoke parameter until the composition no longer reads as fire; retain the viewer judgment without a compulsory aesthetic conclusion. Independently reconstruct all five exact printed continuations in order P1/P2/P3/P4/P5, with predictions, variants, resets and a further change. Audit source/license notices. Record automation, human learner and actual headset evidence separately; never fill tutorial gaps from private context. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Collision/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/013. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.010"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Particles_Collision"
+      ],
+      "artifact_refs": [
+        "example_4_6_particle_repeller_vr",
+        "particle_campfire"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_particles_tutorial.006",
+        "ada_particles_tutorial.009"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/013/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Particles_Collision/tutorial.md",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/013/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Particles_Collision",
+      "acceptance": "Reflection changes the specified component; wrapping retains identity; absorption retires once; contacts remain finite. Measure approximation gain/loss. Test budgets on named hardware, without combustion claims. All five lessons have incoming/outgoing code versions, a full cycle record and explicit not-tested status for unavailable human/headset evidence.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.014",
+      "title": "Connect measurement to preserved arrangements and trials",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Resolve the selected duplicate entropy_axiom registration before asserting the loaded scene. Retain equal-count/different-arrangement fixtures and the existing Monte Carlo sample-budget study. Add comparison records with explicit variable, log units, order/reference. Implement the entropy side of X5 with task .007. Develop the adjacency companion early at Entropy so the route can meet measurement before distributions. Do not wait for the optional research extensions to complete this instrument. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Entropy/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Randomness_Examples_of_Randomness/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/014. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.003"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Entropy",
+        "Randomness_Examples_of_Randomness"
+      ],
+      "artifact_refs": [
+        "shannon_entropy_meter",
+        "entropy_axiom",
+        "monte_carlo_dartboard"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_artifacts.003"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/014/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/014/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Entropy",
+      "acceptance": "Rearrangement preserves counts while a declared neighbour measure changes. Rebinning spends no draws. Monte Carlo records trial count/error without requiring monotonic improvement. Selected registry resolution is unambiguous.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.015",
+      "title": "Follow a walk into feedback and retain the difference",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. Coordinate with existing tickets book_randomness.030; re-read their current status and reuse completed work, without duplicating or auto-closing them. Preserve assignment versus accumulated step versus deposited-signal distinctions. Implement X4 and matched CUT/CONNECT comparisons. Feedback creates a branch rather than replaying the old trajectory. Brownian, bounded long-step and Markov extensions remain individually defined optional studies. This uses current walk/signal lessons, not optional particle E1. Link the open pheromone headset ticket instead of duplicating or closing it. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Walk/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Pheromone/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_randomness.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/015. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.006",
+        "randomness_research.014"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Walk",
+        "Random_Pheromone"
+      ],
+      "artifact_refs": [
+        "random_walk_terrarium",
+        "random_position_rails",
+        "pheromone_terrain"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_randomness.030"
+      ],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.005"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/015/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/015/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Walk",
+      "acceptance": "The baseline trace has no influence when guidance is cut. Feedback acts only through the declared path. Replay includes history and update order. Record an observed difference or an inconclusive question.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.016",
+      "title": "Trial an optional deterministic pair in Random Space",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. This is an optional research extension; it does not gate the five-lesson delivery. Coordinate with existing tickets book_randomness.028, book_randomness.029; re-read their current status and reuse completed work, without duplicating or auto-closing them. Build one paired deterministic experiment with nearby starts, the same rule/fixed ticks, explicit precision/build and separation record. Keep Lyapunov landscape as companion. Percolation is a separate later connectivity study after preparation; thresholding alone is not criticality. Trial the apparatus inside the existing hall after its path issue is resolved. A new Sensitivity Lab is deferred unless spatial evidence justifies it. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Space/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_randomness.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/016. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.014",
+        "randomness_research.015"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Space"
+      ],
+      "artifact_refs": [
+        "lyapunov_bench",
+        "percolation_ca"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_randomness.028",
+        "book_randomness.029"
+      ],
+      "optional_extension": true,
+      "imported_task_refs": [],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/016/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/016/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Space",
+      "acceptance": "Identical starts match under the reference. Epsilon changes only the stated initial condition. The deterministic run spends no new draws. A step-size comparison and bounded interval clarify numerical effects.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.017",
+      "title": "Extend selection into one recorded mutation experiment",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. This is an optional research extension; it does not gate the five-lesson delivery. Keep the six-candidate target/ranking witness first. Add bounded mutation/offspring with parent IDs, retained genes and a selection/viability criterion. Permit visitor selection distinct from score. Preserve later-return prerequisites rather than moving all Procedural Generation forward. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/PG_Genetic_Evolution/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Mushrooms/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/017. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.016"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "PG_Genetic_Evolution",
+        "Random_Mushrooms"
+      ],
+      "artifact_refs": [
+        "mushrooms"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": true,
+      "imported_task_refs": [],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/017/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/017/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check PG_Genetic_Evolution",
+      "acceptance": "Evaluator changes do not mutate candidates. Mutation changes only declared fields and preserves parents. Selection/preference are distinct. The tutorial actually reconstructs offspring.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.018",
+      "title": "Trial optional E2 rule revision in Random Space",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. This is an optional research extension; it does not gate the five-lesson delivery. Coordinate with existing tickets book_randomness.028, book_randomness.029; re-read their current status and reuse completed work, without duplicating or auto-closing them. Use sixteen entities and the same inputs to compare old/new relation rules. Add one reversible detach/connect/sensor change, versions and rollback. Separate drawn links from force-bearing bonds. Use ParticleBody ideas without teaching its nearest-neighbour fallback as Delaunay. Implement X6 and optional E2. Defer the sleeve as a further investigation. A dedicated Rule Workshop is deferred. Keep the grid-route fixture independent of the particle learner portfolio. This is not a compulsory sixth particle lesson. Optional E2 can compare a fixed boundary with an explicit contact-count/permeability rule, or visible links with force-bearing connections, following TEXT_SIMULATION.md. Preserve the paragraph, interpretation and predecessor; a remembering wall is not installed behaviour. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Space/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Game/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/particle_emitter.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/core/confetti_particle.gd; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_randomness.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/018. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.013",
+        "randomness_research.017"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Random_Space",
+        "Random_Game"
+      ],
+      "artifact_refs": [
+        "example_particle_body",
+        "mushrooms",
+        "textile_comparison"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_randomness.028",
+        "book_randomness.029"
+      ],
+      "optional_extension": true,
+      "imported_task_refs": [
+        "ada_random_noise_route.005",
+        "ada_particles_tutorial.007",
+        "ada_random_noise_artifacts.010"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/018/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/018/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check Random_Space",
+      "acceptance": "A stated relation is impossible under the old fixture and possible under the new rule. Parent state survives, invalid links are handled, each rule replays, and independent reconstruction is separately recorded.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.019",
+      "title": "Return an experiment to QFEP and examine AI-assisted revision",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Record accepted implementation scope in randomness_research.002 before this work. This is an optional research extension; it does not gate the five-lesson delivery. Reuse CONNECT/CUT and a declared receiver. Build only one accepted explore/retain/revise study with named variable, viability criterion, feedback path and limits. X7 returns a record/provenance, not arbitrary grammar execution in the seed bench. If selected, add offline versioned AI comparisons separating fixed-model samples, prompt revision and model revision; record assistance and visitor judgment. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/QFEP_Sandbox/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/QFEP_Synthesis/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Definition/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/019. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "randomness_research.018"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "QFEP_Sandbox",
+        "QFEP_Synthesis",
+        "Random_Definition"
+      ],
+      "artifact_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [],
+      "optional_extension": true,
+      "imported_task_refs": [],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/019/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/019/probe.gd'; python 'C:/Users/palle/Documents/GitHub/AdaResearch_46/tools/map_pathfinder.py' check QFEP_Sandbox",
+      "acceptance": "Offered/used values stay distinct; cut input is not stopped time. Evidence may end in a question without endorsing QFEP. No universal lambda or untested Markov blanket is claimed. X7 preserves lineage and explains incompatible execution.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research.020",
+      "title": "Integrate the selected route and five lessons with scoped evidence",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/proposition.md. Record accepted implementation scope in randomness_research.002 before this work. Coordinate with existing tickets book_randomness.017, book_randomness.018, book_randomness.019, book_randomness.020, book_randomness.028, book_randomness.029, book_randomness.030, book_noise.020; re-read their current status and reuse completed work, without duplicating or auto-closing them. Reconcile the accepted manifest with sequences, Forces branch, map_authored and museum-plan derivation. Preserve Biome_Cage, the optional Lab_Path and Perlin/Simplex exit. Do not deploy deferred hall names. Stage exact before/after map-cell and prose-handover changes with rollback references; preserve unrelated local edits. Complete the writing subgoal and verify selected transfers, especially X2 with both sender and receiver available. The five-lesson delivery does not wait for optional .012 or .016-.019. Resolve or provide an explicitly accepted bypass for the current Random Space path issue before releasing a route that relies on that passage; keep the existing ticket and its evidence authoritative. Leave their transfers explicitly deferred/not tested until selected and built. Keep scene load, stability, performance, headset and independent learner evidence separate; do not expand source checking into unsupported claims. Include the reciprocal passage/apparatus record and the selected post-pilot plan revision. A deferred or rejected world remains retrievable and is never automatically promoted into the museum. Preserve Read/Reconstruct/Investigate links and the versioned companion sources. The reading route and research graph have different scopes; selected integration must not silently rewrite any frozen edition. Report the actual edition candidate and review status, not an assumed publication. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_noise.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/tasks/book_randomness.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/020. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "effort": "multi-day",
+      "skill": "verify",
+      "depends_on": [
+        "randomness_research.004",
+        "randomness_research.005",
+        "randomness_research.006",
+        "randomness_research.007",
+        "randomness_research.013",
+        "randomness_research.014",
+        "randomness_research.015",
+        "randomness_research_writing.004"
+      ],
+      "status": "blocked",
+      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [],
+      "artifact_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "existing_task_refs": [
+        "book_randomness.017",
+        "book_randomness.018",
+        "book_randomness.019",
+        "book_randomness.020",
+        "book_randomness.028",
+        "book_randomness.029",
+        "book_randomness.030",
+        "book_noise.020"
+      ],
+      "optional_extension": false,
+      "imported_task_refs": [
+        "ada_random_noise_route.008",
+        "ada_random_noise_route.009",
+        "ada_particles_tutorial.009"
+      ],
+      "output": "C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/020/REPORT.md, probe.gd, exact reconstruction and evidence.json; accepted edits named in the report",
+      "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/020/probe.gd'",
+      "acceptance": "Selected stops and local baselines remain usable with imports absent or incompatible. Both sides of every selected transfer preserve declared records. Route/handovers agree and all five printed programs reconstruct within declared evidence scope. Deferred investigations are not reported complete. Existing book tickets keep their owners/status; human/headset evidence stays open until observed.",
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    }
+  ],
+  "success_criteria": [
+    "All current hall identities retained with explicit prerequisites",
+    "Five particle tutorials complete without optional field/rule extensions",
+    "Seven-step cycles end in a next question/change",
+    "Selected transfers preserve records; deferred contracts stay visibly untested",
+    "Runtime, headset and learner evidence remain distinct"
+  ]
+}

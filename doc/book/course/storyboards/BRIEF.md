@@ -30,6 +30,8 @@ Write plainly, with a concrete action and consequence. Keep explanations close t
 
 ## How we work from now
 
+**Author direction, 11 October — AI critique:** follow [AI_CRITICAL_THREAD.md](AI_CRITICAL_THREAD.md). Keep the concrete operation and its enabling relations in view together, including Ada's own AI production. Revise dated capability claims when evidence changes; preserve consequences and unequal control. Let successful capabilities, pleasure and alternative arrangements enter the inquiry. This is a central thread through selected encounters, not a compulsory theoretical preamble for every lesson. The eight-hall ML route exists but its tutorials still need complete reconstruction; proposed attention/LLM and infrastructure connections are not yet built.
+
 Move between project, sequence, map and evidence using [CONTEXT.md](CONTEXT.md). Keep the current purpose while descending; carry consequential findings back up before leaving. Read the [sequence overview](SEQUENCES.md) for global orientation. Existing sequence arcs need their entry, exit, boundary reasons and open choices developed; this remains proposed summary work.
 
 Keep two versions of every summary: a full paragraph in `storyboard` and a compact AI alternative in `storyboard_short`. The short version selects the same teaching, not a different lesson. Use short instructions: **Use → Reuse → Teach/Do → Supply → Carry**. Add **Open** or **Defer** where a decision matters. Preserve dependencies, unresolved choices, supplied support and reflective purpose. Remove narrative padding; use explicit technical names rather than cryptic abbreviations. Shared constraints live here once. The review offers Full / Short AI, and a short-only Markdown export avoids reading both versions.

@@ -1,0 +1,303 @@
+{
+  "checks": [
+    {
+      "name": "portal: inverse traversal restores point",
+      "passed": true
+    },
+    {
+      "name": "portal: side changes from behind entrance to in front of exit",
+      "passed": true
+    },
+    {
+      "name": "portal: speed is preserved",
+      "passed": true
+    },
+    {
+      "name": "portal: separation of held point and hand preserved",
+      "passed": true
+    },
+    {
+      "name": "portal: handedness preserved",
+      "passed": true
+    },
+    {
+      "name": "topology: returns to same torus address",
+      "passed": true
+    },
+    {
+      "name": "topology: repeated wrapping is idempotent",
+      "passed": true
+    },
+    {
+      "name": "sphere: octant loop rotates tangent by ninety degrees",
+      "passed": true
+    },
+    {
+      "name": "sphere: transported tangent has unit length",
+      "passed": true
+    },
+    {
+      "name": "sphere: returned tangent stays tangent",
+      "passed": true
+    },
+    {
+      "name": "ball round trip r=0.0",
+      "passed": true
+    },
+    {
+      "name": "hyperboloid constraint r=0.0",
+      "passed": true
+    },
+    {
+      "name": "radial distance matches log ratio r=0.0",
+      "passed": true
+    },
+    {
+      "name": "ball round trip r=0.2",
+      "passed": true
+    },
+    {
+      "name": "hyperboloid constraint r=0.2",
+      "passed": true
+    },
+    {
+      "name": "radial distance matches log ratio r=0.2",
+      "passed": true
+    },
+    {
+      "name": "ball round trip r=0.5",
+      "passed": true
+    },
+    {
+      "name": "hyperboloid constraint r=0.5",
+      "passed": true
+    },
+    {
+      "name": "radial distance matches log ratio r=0.5",
+      "passed": true
+    },
+    {
+      "name": "ball round trip r=0.8",
+      "passed": true
+    },
+    {
+      "name": "hyperboloid constraint r=0.8",
+      "passed": true
+    },
+    {
+      "name": "radial distance matches log ratio r=0.8",
+      "passed": true
+    },
+    {
+      "name": "H2: nondegenerate triangle has positive deficit",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 0",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 0",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 0",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 0",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 0",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 1",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 1",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 1",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 1",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 1",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 2",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 2",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 2",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 2",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 2",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 3",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 3",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 3",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 3",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 3",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 4",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 4",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 4",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 4",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 4",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 5",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 5",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 5",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 5",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 5",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 6",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 6",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 6",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 6",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 6",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 7",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 7",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 7",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 7",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 7",
+      "passed": true
+    },
+    {
+      "name": "geodesic stays on hyperboloid 8",
+      "passed": true
+    },
+    {
+      "name": "geodesic equal intrinsic steps 8",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves norm 8",
+      "passed": true
+    },
+    {
+      "name": "H3 inverse boost 8",
+      "passed": true
+    },
+    {
+      "name": "H3 boost preserves distance 8",
+      "passed": true
+    },
+    {
+      "name": "disk: equal travel takes less display space near edge",
+      "passed": true
+    },
+    {
+      "name": "product: one horizontal plus two vertical distance sqrt5",
+      "passed": true
+    },
+    {
+      "name": "product: log-map respects diagonal",
+      "passed": true
+    },
+    {
+      "name": "H3: vertical distance is also hyperbolic",
+      "passed": true
+    },
+    {
+      "name": "H3: perpendicular unit legs obey hyperbolic cosine law",
+      "passed": true
+    },
+    {
+      "name": "H3: vertical plane also has angle deficit",
+      "passed": true
+    }
+  ],
+  "count": 74,
+  "passed": true,
+  "scope": "author feasibility, not ghost-student or XR verification"
+}

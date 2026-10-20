@@ -1,0 +1,1635 @@
+[
+  {
+    "sequence": "isosurfaces",
+    "arc": "The student turns sampled fields into boundaries, learns to compose their descriptions and finishes by testing what those boundaries let a body do. Extraction stays supplied where it would hide the meaningful construction; spatial recipes, ordered edits and comparisons become the learner's reusable work.",
+    "halls": [
+      {
+        "id": "ISO_Introduction",
+        "title": "Choose where a boundary appears",
+        "storyboard": "The student approaches the blue specimen until its pink triangle edges become visible. Bringing sampled fields and mesh faces, they would retain scalar samples and write a separate function classifying them against a chosen level. The supplied extractor receives the original samples and level, preserving magnitudes for locating crossings. Holding one result, they would change the level before changing sample spacing. The display and collider builder remain supplied. They learn to separate the field, selected boundary and finite approximation, carrying a reusable field-to-surface experiment into the local cube cases.",
+        "storyboard_short": "Use blue specimen's pink triangle edges. Reuse sampled fields and faces. Teach a separate level-classification function; retain scalar magnitudes for extraction. Hold a comparison; change level before sample spacing. Distinguish field, boundary and finite approximation. Supply extractor, display and collider builder. Carry retained samples and comparison. Open: study host; one cell or small volume.",
+        "mode": "make",
+        "brings": [
+          "sampled fields",
+          "triangle meshes"
+        ],
+        "learns": [
+          "level-set classification",
+          "sampling versus field"
+        ],
+        "carries": "Retained scalar samples, a level and an extracted comparison.",
+        "supplied": [
+          "voxel_noise_demo display",
+          "surface extractor",
+          "collider builder"
+        ],
+        "artifact_refs": [
+          "voxel_noise_demo"
+        ],
+        "review_note": "Choose the prepared study host and whether the first exercise exposes one cell or a small volume."
+      },
+      {
+        "id": "ISO_LookupTable",
+        "title": "Place a crossing before making a face",
+        "storyboard": "At the marked corners of the fifteen-case display, the student chooses an edge whose values lie on opposite sides of the level. Reusing interpolation and threshold classification, they would calculate its crossing position and draw a marker there. Changing the two values without changing their classifications moves that marker while retaining the local connection pattern. The corner cage, case table and triangle display are supplied. This introduces the separate jobs of classification and interpolation; the resulting edge-crossing function can serve every later sampled shape.",
+        "storyboard_short": "Use fifteen-case display. Reuse classification and interpolation; calculate and mark one crossing edge. Change values without changing classifications; observe crossing motion with unchanged connections. Supply corner cage, case table and triangle display. Carry reusable edge-crossing function. Defer bit-mask construction to another short lesson if it obscures interpolation.",
+        "mode": "make",
+        "brings": [
+          "threshold classification",
+          "interpolation"
+        ],
+        "learns": [
+          "edge crossing",
+          "classification versus connection"
+        ],
+        "carries": "A crossing calculation reusable across cells.",
+        "supplied": [
+          "corner cage",
+          "case table",
+          "triangle display"
+        ],
+        "artifact_refs": [
+          "fifteen_cases_demo"
+        ],
+        "review_note": "Keep bit-mask construction as a second short lesson if it obscures the crossing calculation."
+      },
+      {
+        "id": "ISO_ShapesGallery",
+        "title": "Describe a cup with fields",
+        "storyboard": "The chair and cup invite the student to find a joined part and a hollow before reading their recipes. Bringing field functions and extraction, they would compose supplied box, cylinder and ring fields into a small vessel beside the existing gallery, keeping one inner volume removable. The extractor, comparison display and primitive field functions are supplied with position-in, value-out contracts. They learn that changing a description differs from changing its sampling or level. Their reusable vessel expression becomes material for periodic surfaces and later Boolean composition.",
+        "storyboard_short": "Use chair joins and cup hollow. Reuse field functions and extraction; compose supplied box, cylinder and ring fields into a vessel with removable interior. State position-in, value-out contracts. Distinguish recipe changes from sampling or level. Supply primitive fields, extractor and comparison display. Carry vessel expression. Open: whole cup recipe or hollow first.",
+        "mode": "make",
+        "brings": [
+          "field functions",
+          "surface extraction"
+        ],
+        "learns": [
+          "composing scalar fields",
+          "description versus extraction"
+        ],
+        "carries": "A vessel described through component fields.",
+        "supplied": [
+          "primitive field functions",
+          "surface extractor",
+          "comparison display"
+        ],
+        "artifact_refs": [
+          "mc_shapes_gallery"
+        ],
+        "review_note": "Decide whether the learner begins with the cup's whole recipe or first constructs only its hollow."
+      },
+      {
+        "id": "ISO_TorusGyroid",
+        "title": "Follow a repeating surface",
+        "storyboard": "The student follows a torus opening, then a gyroid fold that continues beyond any apparent piece. Bringing periodic functions and field composition, they would change the coordinate scale of a supplied gyroid expression and preserve a comparison before adding one local intrusion. The expression, extractor and straight capsule probe are supplied. They learn how repeating a rule in space differs from copying separate objects, then compare a visible opening with the probe's limited clearance result. A controlled spatial frequency becomes another tool for making passages.",
+        "storyboard_short": "Use torus opening and continuous gyroid fold. Reuse periodic functions and field composition; change coordinate scale, retain comparison, then add one intrusion. Teach spatial repetition versus copied objects; opening versus clearance. Supply gyroid expression, extractor and straight capsule probe. Carry controlled spatial frequency. Open: walking alongside the probe's single-segment test.",
+        "mode": "deepen",
+        "brings": [
+          "periodic functions",
+          "field composition"
+        ],
+        "learns": [
+          "spatial periodicity",
+          "opening versus clearance"
+        ],
+        "carries": "A repeating field whose scale can be chosen deliberately.",
+        "supplied": [
+          "gyroid expression",
+          "surface extractor",
+          "straight capsule probe"
+        ],
+        "artifact_refs": [
+          "mc_torus_sculpture",
+          "GyroidDemo"
+        ],
+        "review_note": "The probe tests one straight segment; decide how much actual walking belongs beside that restricted comparison."
+      },
+      {
+        "id": "ISO_Sculpting",
+        "title": "Keep the order of a gesture",
+        "storyboard": "At the framed sculpting volume, the student watches two deposits join before placing a brush contribution of their own. Reusing lists, positions and field functions, they would record each contribution with its position, size and add-or-erase operation, then evaluate a short history in order. Input capture, brush field and extraction are supplied. Reversing two operations reveals that erasing is not undoing and that history changes the body. They carry an editable sequence of spatial operations toward terrain, retaining the limits of sampling and stored history.",
+        "storyboard_short": "Use joining deposits in sculpting volume. Reuse lists, positions and fields; record brush position, size and add-or-erase operation. Evaluate history in order; reverse two operations. Teach erase versus undo and history-dependent form. Supply input, brush field and extractor. Carry editable spatial history. Open: history limit and what happens when reached; retain sampling limits.",
+        "mode": "make",
+        "brings": [
+          "ordered lists",
+          "field composition"
+        ],
+        "learns": [
+          "ordered spatial operations",
+          "erase versus undo"
+        ],
+        "carries": "A short editable history of brush contributions.",
+        "supplied": [
+          "input capture",
+          "brush field",
+          "surface extractor"
+        ],
+        "artifact_refs": [
+          "mc_sculpt_vr"
+        ],
+        "review_note": "Choose a short history limit for the teaching study and expose what happens when that limit is reached."
+      },
+      {
+        "id": "ISO_FlatTerrain",
+        "title": "Make room below the height",
+        "storyboard": "A marked vertical column first meets the terrain once, then meets a folded surface more than once. Bringing noise, coordinate functions and level extraction, the student would begin with height minus vertical position and add a supplied interior contribution. The column sampler, noise source and extractor are supplied; the learner owns how the two fields combine. They learn why one height per horizontal address cannot describe every overhang or enclosure. Their composed volume carries onward to openings made by several local tendencies acting together.",
+        "storyboard_short": "Use column crossing terrain once, then folded surface repeatedly. Reuse noise and coordinate functions; combine height minus vertical position with supplied interior field. Teach height field versus volume and multiple crossings. Supply column sampler, noise source and extractor. Carry terrain with an interior. Treat second terrain as contrasting composition, not a matched one-parameter control.",
+        "mode": "make",
+        "brings": [
+          "noise fields",
+          "coordinate functions"
+        ],
+        "learns": [
+          "height field versus volume",
+          "multiple surface crossings"
+        ],
+        "carries": "A terrain field that can contain an interior.",
+        "supplied": [
+          "column sampler",
+          "noise source",
+          "surface extractor"
+        ],
+        "artifact_refs": [
+          "mc_flat_landscape",
+          "mc_overhang_landscape"
+        ],
+        "review_note": "Keep the second terrain as a contrasting composition, not a matched one-parameter control."
+      },
+      {
+        "id": "ISO_PortalLandscape",
+        "title": "Compose an opening",
+        "storyboard": "Beside the amber landscape and its held copy, the student chooses a ridge to preserve while seeking an opening beneath it. Bringing the terrain field, they would add one supplied, spatially masked contribution at a time and describe where it can act. Sampling, extraction and the held-copy display are supplied. The lesson is a purposeful composition of fields: the learner predicts a region of change, then inspects the result from above and below. A visible opening becomes a question about an actual route in the cave hall.",
+        "storyboard_short": "Use amber landscape and held copy; preserve a ridge while seeking an opening. Reuse terrain fields and weighted sums. Add masked contributions individually; predict affected regions and inspect above and below. Supply contributions, sampling, extractor and comparison. Carry an explainable opening recipe toward route testing. Open: first two terms; defer full five-term ladder.",
+        "mode": "make",
+        "brings": [
+          "terrain fields",
+          "weighted sums"
+        ],
+        "learns": [
+          "spatial masks",
+          "composing local contributions"
+        ],
+        "carries": "An opening with an explainable field recipe.",
+        "supplied": [
+          "masked field contributions",
+          "surface extractor",
+          "held-copy display"
+        ],
+        "artifact_refs": [
+          "marchingcubes_portal_landscape"
+        ],
+        "review_note": "Choose two useful terms for the first construction; the full five-term ladder can remain a later return."
+      },
+      {
+        "id": "ISO_Caves",
+        "title": "Find the enclosing side",
+        "storyboard": "The student walks the portal landscape's edge before looking back from an accessible cave opening. Bringing field boundaries, transforms and collision, they would alter the burial of one supplied ring field while preserving its size, then trace where it meets the ground. The terrain recipe, extractor and player remain supplied. This deepens the difference between a hole, an entrance and a usable route; the neighbouring cave is a comparison, not a duplicate recipe. The student carries an explicit entrance condition into their own cave study.",
+        "storyboard_short": "Use landscape edge and accessible cave opening. Reuse field boundaries, transforms and collision; vary burial of a supplied ring without resizing it. Trace ground intersections. Teach hole versus entrance versus usable route. Supply terrain recipe, extractor and player. Carry entrance conditions and bodily clearance. Open: accessible comparison location; neighbouring cave uses another recipe.",
+        "mode": "deepen",
+        "brings": [
+          "field boundaries",
+          "transforms",
+          "collision"
+        ],
+        "learns": [
+          "entrance versus opening"
+        ],
+        "carries": "An entrance judged against ground and bodily clearance.",
+        "supplied": [
+          "terrain recipe",
+          "surface extractor",
+          "museum player"
+        ],
+        "artifact_refs": [
+          "mc_portal_landscape",
+          "mc_inside_cave",
+          "queer_marching_cave"
+        ],
+        "review_note": "Choose an accessible comparison location before promising a route through either specimen."
+      },
+      {
+        "id": "ISO_CaveGeneration",
+        "title": "Give noise a spatial scale",
+        "storyboard": "The generated cave stands beside a striped tunnel built from rings. Bringing noise, sampling and enclosure, the student would prepare two cave fields with the same domain and level but different coordinate scales, predicting which passages or ridges will change. The noise evaluator, extractor and paired display are supplied. They learn that a noise setting gains physical scale through its relation to the sampled domain, while a similar-looking tunnel may use another construction altogether. They carry a reproducible field recipe into the study of changing fields.",
+        "storyboard_short": "Use generated cave beside ring-built tunnel. Reuse noise, sampling and enclosure; compare coordinate scales with domain and level fixed. Predict changed passages or ridges. Teach noise's physical scale and distinct cave constructions. Supply noise evaluator, extractor and paired display. Carry reproducible recipe. Supply controlled study: existing specimens change several settings together.",
+        "mode": "make",
+        "brings": [
+          "noise sampling",
+          "field enclosure"
+        ],
+        "learns": [
+          "noise scale in space",
+          "different constructions of a cave"
+        ],
+        "carries": "A repeatable cave recipe with explicit scale.",
+        "supplied": [
+          "noise evaluator",
+          "surface extractor",
+          "paired display"
+        ],
+        "artifact_refs": [
+          "marchingcubes_cave",
+          "marchingcave"
+        ],
+        "review_note": "The existing specimens change several settings together; the proposed paired study must supply the controlled comparison."
+      },
+      {
+        "id": "ISO_AnimatedNoise",
+        "title": "Keep an address while the image changes",
+        "storyboard": "The student watches one block-sized address fill and empty, then tries following an apparent traveller through the same display. Bringing grid addresses and time-dependent functions, they would retain a short history of occupancy at a chosen cell while a supplied noise sampler changes its offset. The grid display and clock are supplied. Their small recorder distinguishes changing values at fixed locations from persistent particles moving between them. That distinction carries into later animated fields without claiming that this block display already extracts a moving triangle surface.",
+        "storyboard_short": "Use one block address filling and emptying. Reuse grid addresses and time-dependent functions; record occupancy while noise offset changes. Teach fixed-location values versus persistent moving particles. Supply noise sampler, grid display and clock. Carry a history tied to an address. Use occupancy artifact as source; older mesh-animation tutorial describes another construction.",
+        "mode": "make",
+        "brings": [
+          "grid addresses",
+          "time-dependent functions"
+        ],
+        "learns": [
+          "occupancy versus object motion"
+        ],
+        "carries": "A history tied to a fixed spatial address.",
+        "supplied": [
+          "noise sampler",
+          "grid display",
+          "clock"
+        ],
+        "artifact_refs": [
+          "animated_noise_explorer"
+        ],
+        "review_note": "Choose the occupancy display as the teaching source; the older tutorial describes a different mesh animation."
+      },
+      {
+        "id": "ISO_Metaballs",
+        "title": "Sum influences before drawing bodies",
+        "storyboard": "A narrow neck joins two lobes before their source centres touch. Reusing lists, distance and accumulation, the student would write the loop that sums supplied falloff contributions at a sample position, then arrange the same sources into a pair and a ring. The falloff functions, extractor and held-copy display are supplied. They learn that one boundary can arise from several overlapping influences, and separate changing source positions from changing their reach. Their source list and sum become a reusable field description for comparing surface representations.",
+        "storyboard_short": "Use neck joining lobes before centres touch. Reuse distance, lists and accumulation; sum supplied falloffs at each sample. Arrange sources as pair and ring; distinguish source position, reach and visible lobe. Supply falloffs, extractor and held-copy display. Carry source list and summed field. Open: one finite, well-behaved kernel; retain others for comparison.",
+        "mode": "make",
+        "brings": [
+          "distance functions",
+          "list accumulation"
+        ],
+        "learns": [
+          "summed influence",
+          "source versus visible lobe"
+        ],
+        "carries": "A source list and a summed scalar field.",
+        "supplied": [
+          "falloff functions",
+          "surface extractor",
+          "held-copy display"
+        ],
+        "artifact_refs": [
+          "metaball_world",
+          "raymarched_metaballs"
+        ],
+        "review_note": "Choose one finite, well-behaved falloff first; the other kernels remain comparative material."
+      },
+      {
+        "id": "ISO_ImplicitModeling",
+        "title": "Let one description meet two renderers",
+        "storyboard": "The student circles a smooth join and notices that its convincing surface offers no matching bodily resistance. Bringing distance fields and extracted meshes, they would compose a two-part field and send the same description to supplied mesh and raymarch views in a prepared comparison. Rendering, normal estimation and collision construction are supplied separately. They learn that a rule for space can produce different representations, each with its own affordances. The field remains theirs to alter; the next hall asks what more is required when that description must contain a visitor.",
+        "storyboard_short": "Use smooth join without matching bodily resistance. Reuse distance fields and extracted meshes; compose one two-part field for proposed mesh and raymarch comparison. Teach field versus representation and rendering versus collision. Supply views, normal estimation and separate collider builder. Carry one editable description. Current hall partly relies on remembered specimens; paired study remains proposed.",
+        "mode": "deepen",
+        "brings": [
+          "distance fields",
+          "surface extraction"
+        ],
+        "learns": [
+          "field versus representation",
+          "rendering versus collision"
+        ],
+        "carries": "One field compared through two representations.",
+        "supplied": [
+          "mesh view",
+          "raymarch view",
+          "separate collider builder"
+        ],
+        "artifact_refs": [
+          "implicit_surface_modeling"
+        ],
+        "review_note": "This paired use of the same field is proposed; the current hall's comparison relies partly on remembered earlier specimens."
+      },
+      {
+        "id": "ISO_RhizomeBody",
+        "title": "Draw the route you could walk",
+        "storyboard": "The student enters the rhizome body and tries to return to a junction through another passage. Bringing generated surfaces and bodily clearance, they would sketch the junctions and connections actually encountered, marking where a promised connection could not be established. The chamber generator, shell extraction and player are supplied. They then propose narrowing one passage and predict which drawn connection would remain while access changes. This is a reflective synthesis of construction and encounter, carrying the distinction between a planned relation and an inhabitable passage into Boolean architecture.",
+        "storyboard_short": "Use a walk through rhizome body and attempted alternate return. Reuse surfaces and clearance; sketch encountered junctions, passages and unconfirmed connections. Predict how narrowing changes access while a drawn edge remains. Supply chamber generator, shell extraction and player. Carry route sketch distinguishing planned relations from usable passages. Open: paper or project record; no existing recorder assumed.",
+        "mode": "reflect",
+        "brings": [
+          "surface extraction",
+          "bodily clearance"
+        ],
+        "learns": [
+          "planned connection versus usable passage"
+        ],
+        "carries": "A route sketch grounded in a particular walk.",
+        "supplied": [
+          "chamber generator",
+          "shell extraction",
+          "museum player"
+        ],
+        "artifact_refs": [
+          "rhizome_inside"
+        ],
+        "review_note": "Decide whether the route sketch stays on paper or becomes a small in-project record; do not invent an existing map recorder."
+      }
+    ]
+  },
+  {
+    "sequence": "boolean_surfaces",
+    "arc": "Three operations become a vocabulary for making forms, comparing their authored alternatives and carving space at bodily scale. The final construction keeps the pleasures of hollows and dark interiors alongside the practical question of what a visitor can enter, see and leave.",
+    "halls": [
+      {
+        "id": "Boolean_Verbs",
+        "title": "Choose what a solid keeps",
+        "storyboard": "The recurring box and sphere let the student look for a vanished seam, a shared remainder and a new cavity wall. Bringing composed fields and meshes, they would build one supplied pair of CSG operands and select union, intersection or ordered subtraction while holding their transforms fixed. The prepared display and collision comparison are supplied. They learn the set operations through what survives, including an empty intersection, then reverse subtraction. The reusable two-operand construction gives the gallery's authored variants a vocabulary without treating its differently sized exhibits as controlled experiments.",
+        "storyboard_short": "Use box-and-sphere seam, remainder and cavity. Reuse fields, meshes and transforms; compare union, intersection and ordered subtraction with operands fixed. Include empty intersection; reverse subtraction. Supply CSG pair, display and collision comparison. Carry reusable two-operand construction. Existing differently sized exhibits are not controlled comparisons. Open: closing bench or prepared study host.",
+        "mode": "make",
+        "brings": [
+          "field composition",
+          "meshes and transforms"
+        ],
+        "learns": [
+          "solid set operations",
+          "ordered subtraction"
+        ],
+        "carries": "A controlled pair of operands and three operations.",
+        "supplied": [
+          "CSG operands",
+          "prepared display",
+          "collision comparison"
+        ],
+        "artifact_refs": [
+          "csg_union_demo",
+          "csg_intersection_demo",
+          "csg_difference_demo"
+        ],
+        "review_note": "Choose whether the small construction lives beside the closing bench or in a prepared study scene."
+      },
+      {
+        "id": "Boolean_Gallery",
+        "title": "Author a sequence of alternatives",
+        "storyboard": "The student crosses a row of four variants, then walks the same row in an order that tells a different story. Bringing CSG operations and lists, they would make a short ordered collection of one family's configurations, choosing which version arrives first and whether its operands remain visible. The artifact factory and display stands are supplied. They learn to distinguish a parameter that changes geometry from a presentation that explains it. Their authored comparison travels onward as a way to make a construction legible without assuming the default is its only possible form.",
+        "storyboard_short": "Use four variants in two walking orders. Reuse CSG and lists; order configurations from one family and choose when operands remain visible. Teach geometry changes versus explanatory presentation and authored defaults. Supply artifact factory and stands. Carry a deliberate comparison. Keep existing ordering disagreements as material; no registry repair.",
+        "mode": "deepen",
+        "brings": [
+          "CSG operations",
+          "ordered lists"
+        ],
+        "learns": [
+          "geometry versus disclosure",
+          "authored defaults"
+        ],
+        "carries": "A deliberately ordered comparison of one family.",
+        "supplied": [
+          "artifact factory",
+          "display stands"
+        ],
+        "artifact_refs": [
+          "csg_difference_demo",
+          "csg_union_demo",
+          "removal_room"
+        ],
+        "review_note": "Keep the existing gallery's ordering disagreements available as material; avoid turning this into registry repair."
+      },
+      {
+        "id": "Boolean_Works",
+        "title": "Make a cut that can be inhabited",
+        "storyboard": "The student enters the level-floor burrow, compares the raised cavern, then looks into an egg whose dark material hides a real concavity. Bringing Boolean operations, transforms and collision, they would compose a small room around a shared cutter and adjust its position to make a deliberate opening. The wall construction, player and material comparison are supplied. They test entry, withdrawal and sightline before changing the cavity's lighting response. The gain is an inhabitable composition whose geometry, contact and appearance can be changed separately, carrying those choices into later bodies.",
+        "storyboard_short": "Use burrow, raised cavern and dark concave egg. Reuse Boolean operations, transforms and collision; position a shared cutter to open a small room. Test entry, withdrawal and sightline. Then change the same cavity's depth cues. Supply walls, player and material comparison. Carry separate choices about geometry, contact and appearance. Keep two short lessons.",
+        "mode": "make",
+        "brings": [
+          "Boolean operations",
+          "transforms",
+          "collision"
+        ],
+        "learns": [
+          "inhabitable subtraction",
+          "geometry versus depth cues"
+        ],
+        "carries": "A carved room with an inspected route and sightline.",
+        "supplied": [
+          "wall construction",
+          "museum player",
+          "material comparison"
+        ],
+        "artifact_refs": [
+          "boolean_burrow",
+          "conical_sightline",
+          "kapoor_void_studies"
+        ],
+        "review_note": "This hall deserves two short lessons: carve a usable opening, then change how the same cavity presents depth."
+      }
+    ]
+  },
+  {
+    "sequence": "swarmintelligence",
+    "arc": "Coordination is rebuilt through shared trails, supplied directions, neighbours, state changes and remembered objectives. Each construction identifies where information lives and what support it needs; the closing ecosystem leaves room to ask how an apparently autonomous population is maintained.",
+    "halls": [
+      {
+        "id": "SwarmIntelligence_PhysarumColony",
+        "title": "Let movement leave a usable memory",
+        "storyboard": "The student follows a bright trail that persists after the agents making it have passed. Bringing grids, fields and movement, they would give a small supplied agent population three trail samples to compare, then deposit a value where each agent moves. The agent renderer, diffusion step and fixed anchors are supplied. They learn how a shared record can steer later actions without residing in one agent, then compare two decay choices. This environmental memory carries onward as one particular mechanism of coordination, not evidence that the simulation proves biological optimality.",
+        "storyboard_short": "Use trails persisting after agents pass. Reuse grids, fields and movement; compare three trail samples and deposit at each new position. Compare decay choices. Teach shared environmental memory without claiming biological optimality. Supply small repeatable population, renderer, diffusion and fixed anchors. Carry readable trail memory. Defer automatic anchor tour.",
+        "mode": "make",
+        "brings": [
+          "grids and fields",
+          "agent movement"
+        ],
+        "learns": [
+          "environmental memory",
+          "sensing and deposition"
+        ],
+        "carries": "A trail that later movement can read.",
+        "supplied": [
+          "agent renderer",
+          "diffusion step",
+          "fixed anchors"
+        ],
+        "artifact_refs": [
+          "PhysarumColony"
+        ],
+        "review_note": "Choose a small repeatable population and fixed anchors before studying the existing automatic anchor tour."
+      },
+      {
+        "id": "SwarmIntelligence_FlowFields",
+        "title": "Write the direction an agent will find",
+        "storyboard": "At the visible arrows, the student predicts an agent's next turn and checks another agent reaching that place later. Bringing grid lookup and steering, they would author a small vector field that curls around one region and guides agents through another. The agent display and steering integrator are supplied; the learner writes the direction returned for each address. They learn that coordinated motion can follow supplied infrastructure without agents consulting each other. That field-versus-neighbour distinction prepares the next flock, while goal-cost construction remains an optional later study.",
+        "storyboard_short": "Use arrows to predict agents' turns at one address. Reuse grid lookup and steering; author directions that curl around one region and guide through another. Teach shared infrastructure versus neighbour consultation. Supply agent display and steering integrator. Carry purposeful vector field into flocking. Defer obstacle routing and cost propagation to a separate lesson.",
+        "mode": "make",
+        "brings": [
+          "grid lookup",
+          "steering forces"
+        ],
+        "learns": [
+          "position-indexed direction",
+          "supplied guidance"
+        ],
+        "carries": "A vector field authored for a chosen movement.",
+        "supplied": [
+          "agent display",
+          "steering integrator"
+        ],
+        "artifact_refs": [
+          "FlowFieldMain"
+        ],
+        "review_note": "Choose a direct field construction first; the exhibit's obstacle route-finding would require a separate cost-propagation lesson."
+      },
+      {
+        "id": "SwarmIntelligence_Boids_Algorithm",
+        "title": "Let neighbours become the reference",
+        "storyboard": "The student follows the yellow-ringed boid's three arrows, then watches which neighbours disappear when it crosses the small box's boundary. Bringing steering and lists of moving positions, they would compute separation, mean heading and mean position for a small neighbourhood, combining the results deliberately. The boid renderer, update loop and boundary policy are supplied. They learn that both neighbour selection and weighting shape the flock, and compare alignment with room or body avoidance that the rule does not provide. Local relationships become reusable agent behaviour for the next hall.",
+        "storyboard_short": "Use ringed boid's arrows and neighbours lost across box boundary. Reuse steering and position lists; compute separation, mean heading and mean position, then weight them. Teach neighbour selection and flocking limits: alignment supplies neither room nor body avoidance. Supply renderer, update loop and boundary policy. Carry local behaviour. Open: split selection from force combination.",
+        "mode": "make",
+        "brings": [
+          "steering forces",
+          "lists of moving positions"
+        ],
+        "learns": [
+          "neighbour selection",
+          "weighted flocking rules"
+        ],
+        "carries": "An agent that responds to identified neighbours.",
+        "supplied": [
+          "boid renderer",
+          "update loop",
+          "boundary policy"
+        ],
+        "artifact_refs": [
+          "flocking_controls",
+          "boid_manager"
+        ],
+        "review_note": "Split neighbour selection from force combination if the three-rule construction becomes too large."
+      },
+      {
+        "id": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+        "title": "Separate travellers from their traces",
+        "storyboard": "The student replaces the colony's agents and sees old trails remain, then resets and watches both population and field begin again. Bringing state records and trail updates, they would give a small agent two named states with different sensing and depositing actions. The movement loop, field display and repeatable starting arrangement are supplied. They learn that individual state and shared history can change independently, testing the same evaporation rule under both kinds of restart. The state transition becomes the tool for explaining outward and returning travellers in the next colony.",
+        "storyboard_short": "Use agent replacement retaining trails, then full reset. Reuse state records and fields; give a foraging agent two states with different sensing and deposition. Compare the same evaporation under both restarts. Teach individual state versus shared history. Supply movement loop, field display and repeatable start. Carry explicit transitions into outward and returning travel.",
+        "mode": "make",
+        "brings": [
+          "state records",
+          "trail fields"
+        ],
+        "learns": [
+          "state transitions",
+          "population versus shared history"
+        ],
+        "carries": "An explicit agent state and a separately retained field.",
+        "supplied": [
+          "movement loop",
+          "field display",
+          "repeatable starting arrangement"
+        ],
+        "artifact_refs": [
+          "ant_colony_optimization",
+          "stigmergy_grid"
+        ],
+        "review_note": "Use the hall's foraging states rather than introducing a generic society simulator."
+      },
+      {
+        "id": "SwarmIntelligence_Ant_Colony_Optimization",
+        "title": "Give a trail two directions of meaning",
+        "storyboard": "The student follows an outward ant towards food and a returning ant towards home, noticing that they seek and leave different traces. Bringing agent states and shared fields, they would add separate home and food channels to the previous small colony, switching which channel is read and written on arrival. Destination detection, movement and the two-colour display are supplied. They learn how changing state changes the meaning of the same act of deposition. This usable communication mechanism travels toward remembered scores without being presented as a demonstrated shortest-tour solver.",
+        "storyboard_short": "Use outward and returning ants' different traces. Reuse states and fields; add home and food channels to the small colony. Switch read and write channels on arrival. Teach state-dependent communication and deposition. Supply destination detection, movement and two-colour display. Carry two-channel foraging; do not claim demonstrated shortest-tour optimisation.",
+        "mode": "make",
+        "brings": [
+          "agent states",
+          "shared trail fields"
+        ],
+        "learns": [
+          "two-channel communication",
+          "state-dependent sensing"
+        ],
+        "carries": "A stateful agent that reads and writes different channels.",
+        "supplied": [
+          "destination detection",
+          "movement",
+          "two-colour trail display"
+        ],
+        "artifact_refs": [
+          "AntColonyV2"
+        ],
+        "review_note": "The map name suggests optimisation; keep the teaching claim to demonstrated two-channel foraging."
+      },
+      {
+        "id": "SwarmIntelligence_Particle_Swarm_Optimization",
+        "title": "Remember a place and the rule that scored it",
+        "storyboard": "The student switches CONVERGE to SPREAD while the same particles keep moving, then repeats from the same beginning. Bringing state, vectors and scores, they would store each particle's best position separately from its score and combine motion towards personal and shared remembered positions. The repeatable population, landscape and motion display are supplied. They learn that changing the objective requires reconsidering what counts as best, especially when a novelty archive changes. A named objective and accountable memory become prerequisites for the machine-learning sequence rather than a claim that one landscape models a politics.",
+        "storyboard_short": "Use CONVERGE/SPREAD and repeated starts. Reuse state, vectors and scores; store best position separately from score. Combine motion toward personal and shared memories. Teach objective-dependent best; reconsider memory when objective changes. Supply repeatable population, landscape and motion display. Carry candidate with scoring rule. Teach fixed objective first; defer changing novelty archive to second comparison.",
+        "mode": "make",
+        "brings": [
+          "state and vectors",
+          "numerical scores"
+        ],
+        "learns": [
+          "objective-dependent memory",
+          "personal and shared best"
+        ],
+        "carries": "A remembered candidate with an explicit scoring rule.",
+        "supplied": [
+          "repeatable population",
+          "fitness landscape",
+          "motion display"
+        ],
+        "artifact_refs": [
+          "fitness_landscape_politics"
+        ],
+        "review_note": "Teach a fixed objective first; novelty's changing archive needs an explicit second comparison."
+      },
+      {
+        "id": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+        "title": "Notice what keeps a population going",
+        "storyboard": "The student follows one feeding or birth event, then checks the population count and its record of support. Bringing agent state and event histories, they would compose a small account that keeps local births and losses distinct from population-level replenishment, using the supplied ecosystem and event feed. The display and organisms remain supplied. This is a reflective synthesis: the learner explains one recovery only as far as the recorded events allow, then names what is still unknown. They carry visible support and inherited traits into evolution without treating continued activity as proof of autonomy.",
+        "storyboard_short": "Use feeding or birth, population count and support record. Reuse events and histories; distinguish local births and losses from replenishment. Explain one recovery within recorded evidence; name unknowns. Supply ecosystem, event feed and display. Carry enabling interventions toward evolution; continued activity does not prove autonomy. Open: construct an account or annotate existing support record.",
+        "mode": "reflect",
+        "brings": [
+          "agent events",
+          "retained histories"
+        ],
+        "learns": [
+          "local events versus support"
+        ],
+        "carries": "A population account that retains its enabling interventions.",
+        "supplied": [
+          "ecosystem simulation",
+          "event feed",
+          "population display"
+        ],
+        "artifact_refs": [
+          "ecosystem_simulation"
+        ],
+        "review_note": "Decide whether students construct the account from a supplied event stream or annotate the existing support record."
+      }
+    ]
+  },
+  {
+    "sequence": "machinelearning",
+    "arc": "The student makes candidate descriptions, scores and updates, then examines what gets retained as a learned state. Small working models accompany clustering, perception and memory; the staged generative encounter stays honest about its limits. The sequence ends with an unusual case that a score can flag but cannot explain away.",
+    "halls": [
+      {
+        "id": "ML_Evolution",
+        "title": "Decide what gets another generation",
+        "storyboard": "The student compares drifting bodies that reproduce through energy conditions with creatures selected by a declared score. Bringing agent state, inheritance and randomness, they would encode a small movement recipe as a list, copy it with bounded mutations and choose a stated selection rule. The creature body, trial arena and generation display are supplied. They learn to separate variation, evaluation and replacement, retaining a comparison with survival conditions that have no final target. Their explicit candidate-and-score construction prepares optimisation without making simulated reproduction stand for all biological evolution.",
+        "storyboard_short": "Use energy-conditioned reproduction beside scored creatures. Reuse agent state, inheritance and randomness; encode movement as a list, copy with bounded mutation and choose selection rule. Teach variation, evaluation and replacement separately from untargeted survival conditions. Supply body, trial arena and generation display. Carry explicit candidates and scores. Open: small recipe with observable short-trial consequence.",
+        "mode": "make",
+        "brings": [
+          "agent state",
+          "random variation"
+        ],
+        "learns": [
+          "genome as parameters",
+          "selection versus survival conditions"
+        ],
+        "carries": "Candidate recipes with explicit evaluation and replacement.",
+        "supplied": [
+          "creature body",
+          "trial arena",
+          "generation display"
+        ],
+        "artifact_refs": [
+          "non_teleological_evolution",
+          "evolved_creatures"
+        ],
+        "review_note": "Choose a small movement recipe that produces an observable consequence within one short trial."
+      },
+      {
+        "id": "ML_Gradient_Landscape",
+        "title": "Write what downhill means",
+        "storyboard": "The student follows three points fitting the same observations under different error measures. Bringing functions and numerical scores, they would make a straight-line predictor, sum one chosen loss over a supplied sample, and estimate its local slope by comparing nearby parameter values. The observation set and landscape renderer are supplied. A short update moves opposite that estimated slope; a second loss changes what improvement means. They learn that the surface is an authored evaluation of candidate parameters, carrying prediction, loss and update as separate operations into later learning.",
+        "storyboard_short": "Use points fitting identical observations under different losses. Reuse functions and scores; build line predictor, sum one loss and estimate slope from nearby parameter values. Update against slope; compare another loss. Teach prediction, evaluation and update separately. Supply observations and landscape renderer. Carry inspectable descent. Begin with one parameter; defer slope-and-intercept landscape.",
+        "mode": "make",
+        "brings": [
+          "functions",
+          "numerical scores"
+        ],
+        "learns": [
+          "loss over observations",
+          "numerical gradient update"
+        ],
+        "carries": "A predictor, loss function and inspectable update.",
+        "supplied": [
+          "observation set",
+          "landscape renderer"
+        ],
+        "artifact_refs": [
+          "loss_function_comparator"
+        ],
+        "review_note": "Keep the first descent to one adjustable parameter before extending the landscape to slope and intercept."
+      },
+      {
+        "id": "ML_Classification",
+        "title": "Move a centre without moving the points",
+        "storyboard": "At the stepped k-means display, the student chooses a stationary point that changes colour when a centre moves. Bringing distance, lists and averages, they would alternate nearest-centre assignment with recomputing each centre from its assigned positions. The point cloud and coloured display are supplied, with an explicit rule for an empty group. They learn that these groups are constructed by the chosen representation and procedure, rather than discovered labels supplied by an authority. Their small clustering loop carries forward a concrete example of adjustable model state.",
+        "storyboard_short": "Use stationary point recoloured as centres move. Reuse distance, lists and averages; alternate nearest-centre assignment with centre updates. Teach constructed clustering versus supplied class labels. Supply point cloud, colours and empty-group policy. Carry adjustable clustering loop. Open: dataset small enough for one hand-calculated update; keep supervised classifiers secondary.",
+        "mode": "make",
+        "brings": [
+          "distance",
+          "lists and averages"
+        ],
+        "learns": [
+          "assignment and update",
+          "clustering versus labelled classification"
+        ],
+        "carries": "A clustering loop with an explicit grouping rule.",
+        "supplied": [
+          "point cloud",
+          "coloured display",
+          "empty-group policy"
+        ],
+        "artifact_refs": [
+          "enhanced_kmeans"
+        ],
+        "review_note": "Choose a dataset small enough to calculate one update by hand; supervised classifiers remain secondary encounters."
+      },
+      {
+        "id": "ML_Neural_Networks",
+        "title": "Change a connection that changes an answer",
+        "storyboard": "The student watches activity pass through a connection and asks what remains after that signal has gone. Bringing weighted sums, function composition and loss, they would build a tiny two-layer forward calculation from retained weight lists, then trace one weight's change and its effect on the next prediction. The sample set, network drawing and training-step calculation are supplied and explained at their interfaces. They learn to distinguish activations from learned state, comparing a held-out example with training error. A working forward model becomes material for inspecting what its inputs actually contain.",
+        "storyboard_short": "Use passing activity and retained connections. Reuse weighted sums, composition and loss; build two-layer forward calculation from weight lists. Trace one changed weight into prediction; compare held-out result with training error. Teach activations versus weights and fitting versus generalisation. Supply samples, drawing and explained training-step interface. Carry forward model. Supply repeatable host; exhibit controls cannot restart training.",
+        "mode": "make",
+        "brings": [
+          "weighted sums",
+          "function composition",
+          "loss"
+        ],
+        "learns": [
+          "activation versus weight",
+          "fitting versus generalisation"
+        ],
+        "carries": "A small forward model with visible adjustable state.",
+        "supplied": [
+          "sample set",
+          "network drawing",
+          "training-step calculation"
+        ],
+        "artifact_refs": [
+          "neural_network_visualization"
+        ],
+        "review_note": "Provide a repeatable teaching host; the current exhibit's finite training run cannot be restarted from its hall controls."
+      },
+      {
+        "id": "ML_Perception",
+        "title": "Construct a local question for an image",
+        "storyboard": "The student follows the moving window from a uniform patch to the edge of a cross or disk. Bringing nested lists and weighted sums, they would apply a small supplied Sobel kernel to one pixel neighbourhood, then traverse the image to build an edge-strength map. The input image, boundary policy and paired image display are supplied. They learn exactly which local intensity differences the operation preserves, and identify an edge fragment compatible with several objects. That interpretable intermediate representation travels onward without being mistaken for an object recognition result.",
+        "storyboard_short": "Use moving window crossing uniform patch and shape edge. Reuse nested lists and weighted sums; apply supplied Sobel kernel locally, then traverse image for edge strengths. Teach intensity differences versus object interpretation; find an ambiguous fragment. Supply image, boundary policy and paired display. Carry interpretable feature operation. Keep fixed detection distinct from learned CNN recognition.",
+        "mode": "make",
+        "brings": [
+          "nested lists",
+          "weighted sums"
+        ],
+        "learns": [
+          "local convolution",
+          "feature versus interpretation"
+        ],
+        "carries": "An image operation with a stated local question.",
+        "supplied": [
+          "input image",
+          "boundary policy",
+          "paired image display"
+        ],
+        "artifact_refs": [
+          "computer_vision_vr"
+        ],
+        "review_note": "Keep fixed edge detection distinct from the neighbouring CNN display's claims about learned recognition."
+      },
+      {
+        "id": "ML_Sequence_Memory",
+        "title": "Choose what survives another input",
+        "storyboard": "The student carries pale and dark tokens through the cell, watching a slab retain part of its earlier height. Bringing state updates and weighted sums, they would write the simplified memory recurrence, separating the retained contribution from the admitted input and the exposed output. Token input, gate handles and slab display are supplied. Comparing two histories with the same last token makes the role of accumulated state visible. They learn a usable gated memory operation while keeping the hand-set linear teaching cell distinct from a trained LSTM.",
+        "storyboard_short": "Use tokens and slab retaining earlier height. Reuse state updates and weighted sums; write linear gated recurrence separating retained state, admitted input and exposed output. Compare histories sharing the last token. Supply token input, attainable gate handles and slab display. Carry inspectable memory. State hand-set simplification; trained LSTM requires further operations.",
+        "mode": "make",
+        "brings": [
+          "state updates",
+          "weighted sums"
+        ],
+        "learns": [
+          "gated recurrence",
+          "history-dependent output"
+        ],
+        "carries": "A memory state whose retention and admission can be inspected.",
+        "supplied": [
+          "token input",
+          "gate handles",
+          "slab display"
+        ],
+        "artifact_refs": [
+          "lstms_vr"
+        ],
+        "review_note": "Use attainable gate values and state the linear simplification; a trained LSTM needs additional operations."
+      },
+      {
+        "id": "ML_Generative",
+        "title": "Make a candidate and inspect its judge",
+        "storyboard": "The student traces the exchange between generator and discriminator, recognising that the displayed losses are scripted. Bringing random inputs, forward models and explicit losses, they would make a small candidate generator in a prepared study and compare its outputs with supplied reference samples using a fixed, inspectable critic. Sampling, the comparison display and critic are supplied. They learn to separate producing candidates from learning how to produce them, then specify which two states would need updating for an adversarial loop. The critic's reference set remains a choice carried into the final classification question.",
+        "storyboard_short": "Use generator/discriminator exchange with scripted losses. Reuse random inputs, forward models and losses; propose small candidate generator judged against reference samples by fixed critic. Teach generation versus training; name both states needing adversarial updates. Supply samples, comparison display and inspectable critic. Carry explicit evaluator and reference choice. Open: later real alternating training.",
+        "mode": "deepen",
+        "brings": [
+          "random inputs",
+          "forward models",
+          "explicit losses"
+        ],
+        "learns": [
+          "generation versus training",
+          "reference-dependent judgement"
+        ],
+        "carries": "A candidate stream and an explicit account of its evaluator.",
+        "supplied": [
+          "reference samples",
+          "comparison display",
+          "inspectable fixed critic"
+        ],
+        "artifact_refs": [
+          "generative_adversarial_networks_gans_vr"
+        ],
+        "review_note": "Decide whether a later second lesson supplies real alternating training; the museum animation alone cannot demonstrate it."
+      },
+      {
+        "id": "ML_Synthesis",
+        "title": "Keep an unusual point available",
+        "storyboard": "The student finds a raised point and asks why its neighbour remains low. Bringing data summaries and thresholds, they would calculate the hall's score from a supplied point sample, retaining each coordinate's contribution before comparing the total with a chosen threshold. The display and zero-spread convention are supplied. They learn how the reference population, scaling and decision rule together produce a flag, then keep one flagged case for further inquiry instead of discarding it. This synthesis carries a habit of naming a representation's omissions into graph relations.",
+        "storyboard_short": "Use raised point beside low neighbour. Reuse data summaries and thresholds; calculate score, retain coordinate contributions and compare total with threshold. Teach reference population, scaling and decision rule versus judgement. Supply sample, display and zero-spread convention. Carry flagged case for inquiry, preserving omissions. Open: change reference sample or only threshold first.",
+        "mode": "deepen",
+        "brings": [
+          "data summaries",
+          "threshold decisions"
+        ],
+        "learns": [
+          "reference-dependent anomaly",
+          "score versus judgement"
+        ],
+        "carries": "A flag with its contributing values and an open next question.",
+        "supplied": [
+          "point sample",
+          "anomaly display",
+          "zero-spread convention"
+        ],
+        "artifact_refs": [
+          "anomaly_detection"
+        ],
+        "review_note": "Confirm whether students change the reference sample or only the threshold in the first study."
+      }
+    ]
+  },
+  {
+    "sequence": "graphtheory",
+    "arc": "Lists become relations that survive changes of drawing. The student builds traversal, routes, counts, return groups, a spanning tree and revisable allocations, always stating the question each procedure answers. The final matching makes an accepted local choice available for reconsideration before the route turns to formal limits.",
+    "halls": [
+      {
+        "id": "GT_Foundations",
+        "title": "Keep the connections, change the visit order",
+        "storyboard": "The student follows the tide and the diver across the same lamps, keeping one waiting destination in view. Bringing lists and retained state, they would describe a small graph as named vertices and neighbour lists, then make a pending-work list choose either its oldest or newest entry. The lamp display and step control are supplied. They learn breadth-first and depth-first traversal through a deliberate change in ordering, while the graph remains fixed. Their connection record becomes the durable structure underneath drawings, routes and later assembly bodies.",
+        "storyboard_short": "Use tide and diver visiting the same lamps. Reuse lists and state; introduce vertex identifiers and neighbour lists. Select oldest or newest pending entry to teach breadth-first versus depth-first traversal on a fixed graph. Supply lamps and step control. Carry connection record independent of visiting order. Defer bridge problem to optional application.",
+        "mode": "make",
+        "brings": [
+          "lists",
+          "retained state"
+        ],
+        "learns": [
+          "graph adjacency",
+          "queue versus stack traversal"
+        ],
+        "carries": "A graph record independent of its visiting order.",
+        "supplied": [
+          "lamp display",
+          "step control"
+        ],
+        "artifact_refs": [
+          "two_travelers"
+        ],
+        "review_note": "Introduce vertex identifiers before traversal; keep the bridge problem as a separate optional application."
+      },
+      {
+        "id": "GT_Layout",
+        "title": "Move the drawing while keeping the graph",
+        "storyboard": "As the cube-like network settles, the student follows one edge by its endpoints instead of calling it left or above. Bringing graph records and spring forces, they would give each vertex a position and velocity, apply attraction only along its listed edges and use supplied repulsion for spacing. The edge renderer and integrator are supplied. They learn to separate a graph's connections from one arrangement that makes them visible, then compose another readable layout. That distinction protects later claims about routes and importance from changes in presentation.",
+        "storyboard_short": "Use settling network; identify edges by endpoints. Reuse adjacency and spring forces; retain vertex positions and velocities, attracting only along edges. Compose another readable layout. Teach topology versus drawing. Supply repulsion, edge renderer and integrator. Carry unchanged connections across layouts. Keep graph small enough to check every relation; defer efficient layout algorithms.",
+        "mode": "make",
+        "brings": [
+          "graph adjacency",
+          "spring forces"
+        ],
+        "learns": [
+          "topology versus layout"
+        ],
+        "carries": "A graph that can acquire another drawing without new edges.",
+        "supplied": [
+          "repulsion function",
+          "edge renderer",
+          "integrator"
+        ],
+        "artifact_refs": [
+          "force_directed_layout"
+        ],
+        "review_note": "Keep the graph small enough that every relation can be checked before discussing efficient layout algorithms."
+      },
+      {
+        "id": "GT_Pathfinding",
+        "title": "Rebuild a route after a stone goes",
+        "storyboard": "The student predicts the spark's next crossing, removes a stone and watches another route replace the first. Bringing graph traversal, they would retain each newly reached vertex's predecessor, then reconstruct a path by walking those references backwards. The stone graph, availability input and traveller display are supplied. They learn that a route is a result of search, not the search itself, and handle a case with no available connection. The reusable path record carries into network questions without requiring three search algorithms in one room.",
+        "storyboard_short": "Use spark's replacement route after a stone disappears. Reuse traversal and references; store predecessors during unweighted breadth-first search, then reconstruct backwards. Teach search versus resulting path; handle unreachable destination. Supply stone graph, availability input and traveller display. Carry route record and explicit no-route result. Defer weighted costs and A*.",
+        "mode": "make",
+        "brings": [
+          "graph traversal",
+          "retained references"
+        ],
+        "learns": [
+          "path reconstruction",
+          "unreachable destination"
+        ],
+        "carries": "A reconstructable route and an explicit no-route result.",
+        "supplied": [
+          "stone graph",
+          "availability input",
+          "traveller display"
+        ],
+        "artifact_refs": [
+          "impatient_river"
+        ],
+        "review_note": "Use unweighted breadth-first search first; weighted costs and A* can be a later extension."
+      },
+      {
+        "id": "GT_Network_Analysis",
+        "title": "Make a relation answer to a record",
+        "storyboard": "The student compares a conspicuous vertex with its actual connections, then turns to the fictional evidence network. Bringing edge lists and counting, they would record a small set of directed relations with source labels and compute incoming and outgoing counts from those records. The curved-line renderer and layout controls are supplied. Removing one relation changes the count; moving the drawing does not. They learn one precise measure of connection while keeping provenance available, carrying that discipline into directed reachability instead of treating a central-looking point as inherently important.",
+        "storyboard_short": "Use conspicuous vertex and fictional evidence network. Reuse edge lists and counting; record directed, source-labelled relations and count incoming/outgoing edges. Remove a relation, then move the drawing; distinguish changed counts from presentation. Supply curved-line renderer and layout controls. Carry traceable measures without equating prominence with importance. Open: filtering before or after first count.",
+        "mode": "make",
+        "brings": [
+          "edge lists",
+          "counting"
+        ],
+        "learns": [
+          "in-degree and out-degree",
+          "relation provenance"
+        ],
+        "carries": "A network whose lines and counts can be traced to records.",
+        "supplied": [
+          "curved-line renderer",
+          "layout controls"
+        ],
+        "artifact_refs": [
+          "network_analysis",
+          "evidence_network"
+        ],
+        "review_note": "Use invented records; choose whether relation filtering precedes or follows the first count calculation."
+      },
+      {
+        "id": "GT_Connectivity",
+        "title": "Ask for a way back",
+        "storyboard": "At the directed display, the student traces a route to another vertex and searches for a return before trusting the component colour. Bringing adjacency and traversal, they would compute the vertices reachable from a chosen start in both the original and reversed graph, keeping their intersection. The arrow display and small graph are supplied. They learn mutual reachability through a manageable construction, then compare their group with the supplied Tarjan traversal. The resulting component means that routes exist; it leaves their cost and bodily accessibility open for later choices.",
+        "storyboard_short": "Use directed routes and attempted returns before trusting colours. Reuse adjacency and traversal; intersect reachability from one start in original and reversed graphs. Teach mutual reachability; compare with supplied Tarjan traversal. Supply small graph and arrows. Carry checked component; leave route cost and bodily access open. Defer Tarjan's low-link invariant.",
+        "mode": "make",
+        "brings": [
+          "adjacency",
+          "graph traversal"
+        ],
+        "learns": [
+          "mutual reachability",
+          "strong component around a start"
+        ],
+        "carries": "A component defined by checked outward and return paths.",
+        "supplied": [
+          "arrow display",
+          "small directed graph",
+          "Tarjan traversal"
+        ],
+        "artifact_refs": [
+          "tarjan_algorithm",
+          "kosaraju_algorithm"
+        ],
+        "review_note": "Prefer the two-reachability construction first; teaching Tarjan's low-link invariant can be a separate deeper lesson."
+      },
+      {
+        "id": "GT_Spanning_Trees",
+        "title": "Choose which extra route to give up",
+        "storyboard": "The student predicts whether a yellow candidate edge joins separate groups or closes a cycle. Bringing weighted relations and reachability, they would sort a small edge list and accept a candidate only when its endpoints are not already connected. The graph display and step control are supplied; ordinary traversal can answer the first cycle checks. They learn how a minimum spanning tree follows a stated objective, then restore one rejected edge for an explicitly chosen alternative route. This carries the difference between economical connection and resilience into constrained flow.",
+        "storyboard_short": "Use yellow candidate joining groups or closing a cycle. Reuse weighted edges and reachability; sort edges, accepting only disconnected endpoints. Use traversal for cycle checks. Restore one rejected edge for a stated alternative route. Supply display and stepping. Carry objective-based tree and deliberate redundancy. Defer union-find until repeated reachability becomes useful.",
+        "mode": "make",
+        "brings": [
+          "weighted relations",
+          "reachability"
+        ],
+        "learns": [
+          "greedy spanning construction",
+          "objective versus redundancy"
+        ],
+        "carries": "A connected tree plus a reason to retain an extra route.",
+        "supplied": [
+          "graph display",
+          "step control"
+        ],
+        "artifact_refs": [
+          "mst_visualization"
+        ],
+        "review_note": "Introduce union-find only if repeated reachability becomes the next useful problem; the first construction can remain small."
+      },
+      {
+        "id": "GT_Flow",
+        "title": "Give a junction somewhere to send its excess",
+        "storyboard": "The student watches a junction accumulate excess and predicts whether its next action will push or relabel. Bringing directed graphs and state updates, they would implement one push between two vertices, limited by available excess and residual capacity, including the reverse adjustment that permits revision. The network, height-selection rule and stepped display are supplied. They learn to distinguish capacity, assigned flow, excess and algorithmic height through an operation they can calculate. A small rerouting example carries the power to undo an early allocation into matching.",
+        "storyboard_short": "Use junction excess and push/relabel choice. Reuse directed graphs and state; implement one push bounded by excess and residual capacity, including reverse adjustment. Teach capacity, flow, excess and algorithmic height separately. Supply network, height-selection rule and stepped display. Carry revisable allocation into matching. Open: example requiring rerouting; current animation may not expose it.",
+        "mode": "make",
+        "brings": [
+          "directed graphs",
+          "state updates"
+        ],
+        "learns": [
+          "residual capacity",
+          "revisable flow allocation"
+        ],
+        "carries": "A checked local push with a usable reverse adjustment.",
+        "supplied": [
+          "flow network",
+          "height-selection rule",
+          "stepped display"
+        ],
+        "artifact_refs": [
+          "push_relabel_algorithm"
+        ],
+        "review_note": "Select a supplied example that actually requires rerouting; the present animation alone may not expose it."
+      },
+      {
+        "id": "GT_Matching",
+        "title": "Undo one pair to make room for two",
+        "storyboard": "The student watches a valid pair leave two outer points waiting, then compares the same graph with spokes considered first. Bringing graph edges and occupied-state checks, they would write the greedy pairing loop and construct a short alternating path that replaces one selected edge with two. The ring-and-spokes graph and stepped display are supplied. They learn why local validity and a maximum number of pairs are different claims, without pretending the exhibit runs a complete blossom algorithm. This capacity to revise an acceptable answer prepares the foundations crisis.",
+        "storyboard_short": "Use valid pair leaving outer points waiting; compare spokes-first order. Reuse edges and occupancy checks; write greedy pairing and replace one edge with two along an explicit augmenting path. Teach validity versus maximum size. Supply ring-and-spokes graph and stepping. Carry revisable pairing. Defer weighted assignment, preferences and full blossom contraction; exhibit does not implement blossom.",
+        "mode": "make",
+        "brings": [
+          "graph edges",
+          "state checks"
+        ],
+        "learns": [
+          "matching validity versus size",
+          "augmenting path"
+        ],
+        "carries": "A valid pairing that can be revised for a stated objective.",
+        "supplied": [
+          "ring-and-spokes graph",
+          "stepped display"
+        ],
+        "artifact_refs": [
+          "edmonds_algorithm"
+        ],
+        "review_note": "Choose one explicit augmenting path; weighted assignment, preference and full blossom contraction are separate subjects."
+      }
+    ]
+  },
+  {
+    "sequence": "foundationscrisis",
+    "arc": "Construction becomes a way to examine the grounds of a claim. The student compares geometric assumptions, bounded collections, proof checking, visual closure, unfinished choices and conflicting reports. These encounters remain distinct; their limits do not prove the project's formula, but give the next laboratory better questions to answer.",
+    "halls": [
+      {
+        "id": "Euclid_Parallel",
+        "title": "Name the assumption beneath a construction",
+        "storyboard": "The student reads the fifth postulate beside the parallel lines and triangle, noticing that the room's flat coordinates already provide a setting. Bringing point, line and angle constructions, they would make one triangle and state which construction rules and distance convention it uses before checking its corners. The existing plaque, line display and angle readout are supplied. This reflective return separates an assumption, a generated example and a general proof. The triangle travels onward as a construction to revisit under a different geometric model, not as a machine for proving an axiom.",
+        "storyboard_short": "Use fifth postulate, parallel lines and triangle in flat coordinates. Reuse points, lines and angles; name construction rules and distance convention before checking corners. Distinguish assumption, example and proof. Supply plaque, lines and angle readout. Carry triangle for another model. Open: construct in prepared study or document existing triangle; neither proves an axiom.",
+        "mode": "reflect",
+        "brings": [
+          "point and line construction",
+          "angle measurement"
+        ],
+        "learns": [
+          "assumption versus checked example"
+        ],
+        "carries": "A triangle with its construction assumptions named.",
+        "supplied": [
+          "postulate plaque",
+          "line display",
+          "angle readout"
+        ],
+        "artifact_refs": [
+          "euclid_postulates_plaque",
+          "parallel_lines",
+          "angle_sum_triangle"
+        ],
+        "review_note": "Decide whether the learner constructs the triangle in a prepared study or documents the existing one's assumptions."
+      },
+      {
+        "id": "NonEuclidean_Spaces",
+        "title": "Let the model define a straight route",
+        "storyboard": "At the curvature workbench, the student compares the same triangle task on plane, sphere and disk, predicting each angle sum before reading it. Bringing coordinates and angles, they would supply endpoints to three provided geodesic samplers and display the returned paths, then measure corner directions using the supplied model-aware routine. The geometric samplers and angle routine are explicitly supplied. They learn that a straight route belongs to a distance model, not simply to its picture in the room. The comparison carries a habit of naming the rules that make a construction meaningful.",
+        "storyboard_short": "Use plane, sphere and disk triangles; predict angle sums. Reuse coordinates and angles; pass endpoints to geodesic samplers, display paths and measure corners with model-aware routine. Teach model-dependent straightness versus room projection. Supply samplers, angle routine and display. Carry explicitly different geometric rules. Do not substitute a warped Euclidean grid.",
+        "mode": "deepen",
+        "brings": [
+          "coordinates",
+          "angle measurement"
+        ],
+        "learns": [
+          "model-dependent geodesics",
+          "display versus intrinsic geometry"
+        ],
+        "carries": "A construction compared under explicitly different geometric rules.",
+        "supplied": [
+          "geodesic samplers",
+          "model-aware angle routine",
+          "triangle display"
+        ],
+        "artifact_refs": [
+          "triangle_curvature_workbench"
+        ],
+        "review_note": "Do not teach a warped Euclidean grid as a replacement for these geometry-specific constructions."
+      },
+      {
+        "id": "Russell_Paradox",
+        "title": "Try the rule on its own collection",
+        "storyboard": "The student chooses IN and OUT at the workbench and follows why each contradicts the proposed membership rule. Bringing Boolean conditions and list filtering, they would write the two-case check, then filter a supplied finite collection whose domain is stated before applying the condition. The membership examples and workbench display are supplied. They learn the difference between testing a condition over available objects and assuming that every description creates a set. The finite construction offers a useful alternative while the contradiction prepares a separate question about what proof systems can establish.",
+        "storyboard_short": "Use IN/OUT contradictions at membership workbench. Reuse Boolean conditions and filtering; write two-case check, then filter a supplied finite domain. Teach testing available objects versus assuming every description creates a set. Supply examples and display. Carry membership with explicit domain into proof questions. Restricted construction does not implement arbitrary set theory.",
+        "mode": "deepen",
+        "brings": [
+          "Boolean conditions",
+          "list filtering"
+        ],
+        "learns": [
+          "unrestricted comprehension",
+          "bounded collection filtering"
+        ],
+        "carries": "A membership rule with an explicit domain.",
+        "supplied": [
+          "finite membership examples",
+          "workbench display"
+        ],
+        "artifact_refs": [
+          "russell_paradox_workbench"
+        ],
+        "review_note": "The finite alternative illustrates restricted construction; it must not claim to implement arbitrary set theory."
+      },
+      {
+        "id": "Godel_Incompleteness",
+        "title": "Separate a stopped search from a limit",
+        "storyboard": "The student watches the sentence machine jam, then asks what its stopped arm has established. Bringing lists, functions and the previous contradiction, they would inspect a supplied finite proof candidate step by step and compare that check with a bounded search that finds none. The small rule system, candidate checker and machine remain supplied. This reflective lesson distinguishes a failed search from a reason no proof can exist, while a carefully scoped account introduces incompleteness. The student carries that distinction into impossible images without making the sculpture a demonstration of Gödel's theorem.",
+        "storyboard_short": "Use jammed sentence machine as a question about evidence. Reuse functions, lists and contradiction; inspect finite proof candidate, then compare bounded unsuccessful search. Teach checking versus searching and failure versus impossibility. Supply tiny rule system, checker and machine. Carry scoped proof claims. Open: formal example and careful incompleteness account; sculpture is no theorem demonstration.",
+        "mode": "reflect",
+        "brings": [
+          "functions and lists",
+          "membership contradiction"
+        ],
+        "learns": [
+          "checking versus searching",
+          "scope of an impossibility claim"
+        ],
+        "carries": "A claim about proof matched to the evidence actually available.",
+        "supplied": [
+          "small rule system",
+          "candidate checker",
+          "sentence machine"
+        ],
+        "artifact_refs": [
+          "godel_sentence_machine",
+          "godel_statement_plaque"
+        ],
+        "review_note": "Choose a tiny formal example that clarifies checking and search without pretending to construct Gödel's sentence in a few lines."
+      },
+      {
+        "id": "Escher_Impossible",
+        "title": "Measure the return that the image conceals",
+        "storyboard": "The student follows the staircase marker and predicts where its apparent ascent must be returned. Bringing coordinate differences and closed paths, they would record the height change between successive tread centres and sum a complete circuit, then inspect the same object from another viewpoint. Tread references, the marker and comparison sculptures are supplied. They learn to separate what a projection invites them to see from the geometry actually constructed, while retaining the pleasure of the impossible image. The closed-loop check travels into the question of what it means to construct an asserted object.",
+        "storyboard_short": "Use staircase marker's apparent ascent. Reuse coordinate differences and closed paths; sum height changes between tread centres around full circuit. Change viewpoint. Teach projection versus constructed geometry while preserving impossible image's pleasure. Supply treads, marker and comparison sculptures. Carry whole-circuit check. Open: another small construction; do not treat staircase as incompleteness proof.",
+        "mode": "deepen",
+        "brings": [
+          "coordinate differences",
+          "closed paths"
+        ],
+        "learns": [
+          "local appearance versus global closure"
+        ],
+        "carries": "A check that relates a whole circuit to its parts.",
+        "supplied": [
+          "tread references",
+          "travelling marker",
+          "comparison sculptures"
+        ],
+        "artifact_refs": [
+          "escher_staircase"
+        ],
+        "review_note": "Choose whether a second small impossible-looking construction is useful; do not present the staircase as an incompleteness proof."
+      },
+      {
+        "id": "Brouwer_Intuitionism",
+        "title": "Leave the next term unmade",
+        "storyboard": "The student waits at the empty next position, then chooses a zero or one and sees the row grow only through that decision. Bringing ordered lists and search, they would retain their own prefix and make a query that returns a position witnessing a one when one has been chosen. The choice controls and bead display are supplied. They learn to separate evidence about a finite construction from a claim about every possible continuation. The unfinished row carries a constructive question onward without declaring that a missing witness proves a negation.",
+        "storyboard_short": "Use empty next position and chosen binary beads. Reuse lists and search; retain own prefix and query for a position witnessing one. Teach finite evidence versus every possible continuation; missing witness does not establish negation. Supply choice controls and display. Carry unfinished construction. Keep introduction distinct from blanket rejection of proof by contradiction.",
+        "mode": "make",
+        "brings": [
+          "ordered lists",
+          "search"
+        ],
+        "learns": [
+          "finite witness",
+          "prefix versus unbounded continuation"
+        ],
+        "carries": "An unfinished sequence with evidence tied to what exists so far.",
+        "supplied": [
+          "choice controls",
+          "bead display"
+        ],
+        "artifact_refs": [
+          "brouwer_choice_sequence"
+        ],
+        "review_note": "Keep the mathematical introduction distinct from the old tutorial's incorrect blanket rejection of proof by contradiction."
+      },
+      {
+        "id": "Florensky_Paraconsistent",
+        "title": "Keep two reports and inspect what follows",
+        "storyboard": "The student adds OPEN and CLOSED at the same doorway while the unrelated alarm remains without support. Bringing state records and conditions, they would retain two source-tagged reports independently and query each without overwriting the other. The ghost-door display and a small declared consequence table are supplied. They learn that preserving contradictory information and choosing inference rules are different operations, testing whether an unrelated conclusion has any support. The reflective comparison with Florensky remains available without equating overlapping meshes, quantum superposition and a complete paraconsistent logic.",
+        "storyboard_short": "Use OPEN/CLOSED doorway reports and unsupported alarm. Reuse records and conditions; retain source-tagged reports independently and query both. Teach conflict storage versus inference and support versus truth. Supply ghost doors and declared consequence table; test unrelated conclusion. Carry sources and permitted consequences. Open: minimal table and scope; Florensky reflection supplies neither quantum superposition nor general logic.",
+        "mode": "deepen",
+        "brings": [
+          "state records",
+          "conditions"
+        ],
+        "learns": [
+          "conflict storage versus inference",
+          "support versus truth"
+        ],
+        "carries": "Conflicting reports whose sources and permitted consequences remain visible.",
+        "supplied": [
+          "ghost-door display",
+          "declared consequence table"
+        ],
+        "artifact_refs": [
+          "both_true_gate",
+          "florensky_sphere"
+        ],
+        "review_note": "Choose a minimal consequence table and state its scope; the existing storage demonstration does not supply a general logic."
+      },
+      {
+        "id": "Crisis_Synthesis",
+        "title": "Give one sentence another public form",
+        "storyboard": "The student meets the formula after the sequence's unsettled claims, then follows one sentence across label, moving strip and wall. Bringing strings, lists and timed display, they would write a short statement and give it three presentations through the supplied sentence apparatus, comparing what scale and rhythm invite them to accept. The typography, projection surfaces and controls are supplied. This reflective composition distinguishes an argument's force from its warrant. They carry a question for the QFEP laboratory: which quantities and relationships would make this project's proposed formula accountable?",
+        "storyboard_short": "Use formula and sentence across label, strip and wall. Reuse strings, lists and timed display; give one original statement three presentations. Compare scale and rhythm with evidential warrant. Supply sentence apparatus, typography, surfaces and controls. Carry accountability questions into QFEP. Open: sentence tied to learner's construction; formula remains a research proposal.",
+        "mode": "reflect",
+        "brings": [
+          "strings and lists",
+          "timed display"
+        ],
+        "learns": [
+          "presentation versus warrant"
+        ],
+        "carries": "A statement whose display and grounds can be considered separately.",
+        "supplied": [
+          "sentence apparatus",
+          "typography and surfaces",
+          "display controls"
+        ],
+        "artifact_refs": [
+          "sentence_authority",
+          "qfep_formula_3d"
+        ],
+        "review_note": "Choose an original sentence tied to something the learner has made; the formula remains a research proposal."
+      }
+    ]
+  },
+  {
+    "sequence": "qfeplaboratory",
+    "arc": "The project formula becomes material for calculable, revisable experiments. The learner preserves contributions hidden by totals, builds a predictor and a branching possibility structure, distinguishes a change from its weighting, and gives a supplied body an explicit response. QFEP's ethical inquiry stays open to these encounters without being reduced to their scores.",
+    "halls": [
+      {
+        "id": "QFEP_Introduction",
+        "title": "Keep what one total forgets",
+        "storyboard": "The student keeps one four-axis arrangement, then finds another with nearly the same total. Bringing functions and records, they would implement the workbench's short arithmetic and retain its separate inputs alongside the result, including the supplied constant change value. Controls, reference display and kept-outline renderer are supplied. They learn how weights create dependencies and how compensating contributions disappear into a scalar summary. This introduces Ada's QFEP as a revisable project proposal; their explicit calculation and preserved record travel onward to experiments that ask what is actually measured.",
+        "storyboard_short": "Use different four-axis arrangements with similar totals. Reuse functions and records; implement arithmetic while retaining inputs, including constant change, beside result. Teach weights, dependencies and scalar compression. Supply controls, reference display and kept outline. Carry revisable QFEP calculation and evidence questions. Open: formula's introductory scope; authored reference names confer no evidential support.",
+        "mode": "make",
+        "brings": [
+          "functions",
+          "retained records"
+        ],
+        "learns": [
+          "weighted dependencies",
+          "scalar compression"
+        ],
+        "carries": "A calculated total kept alongside its contributing values.",
+        "supplied": [
+          "workbench controls",
+          "reference display",
+          "kept-outline renderer"
+        ],
+        "artifact_refs": [
+          "qfep_balance_workbench"
+        ],
+        "review_note": "Keep authored reference names outside the calculation's evidential claims; decide how much of the formula to introduce before the experiment."
+      },
+      {
+        "id": "QFEP_F_Term",
+        "title": "Change the predictor before changing the world",
+        "storyboard": "At the bit workbench, the student compares equally uncertain sources with opposite dominant bits, then changes EXPECT 0 to EXPECT 1 without changing the displayed sample. Bringing loops and error scores, they would write a constant predictor and count its mistakes over a retained bit list. The seeded source, binary entropy calculation and bit display are supplied. They learn to distinguish source uncertainty, realised mistakes and expected error, improving the predictor rather than editing away inconvenient observations. That precise distinction travels onward without naming this elementary score a measurement of variational free energy.",
+        "storyboard_short": "Use opposite dominant bits with equal uncertainty; switch predictor on unchanged sample. Reuse loops and scores; count constant predictor's mistakes over retained bits. Teach uncertainty, realised mistakes and expected error separately. Supply seeded source, binary entropy and display. Carry revisable predictor with fixed evidence. Open: derive or supply expected error; no variational-free-energy measurement claim.",
+        "mode": "make",
+        "brings": [
+          "loops",
+          "error scores"
+        ],
+        "learns": [
+          "uncertainty versus prediction error"
+        ],
+        "carries": "A predictor that can change while its evidence stays fixed.",
+        "supplied": [
+          "seeded bit source",
+          "binary entropy calculation",
+          "bit display"
+        ],
+        "artifact_refs": [
+          "shannon_workbench"
+        ],
+        "review_note": "Decide whether expected error is derived here or supplied initially beside the counted mistakes."
+      },
+      {
+        "id": "QFEP_E_Term",
+        "title": "Construct the possibilities you will count",
+        "storyboard": "The student follows two leaves back to their shared branch, then watches an early closure remove several possible endings. Bringing trees and recursion, they would describe a small branching choice structure and write a leaf counter, retaining which branch was closed. The fan renderer and equal-weight logarithm calculation are supplied. They learn what outcome counting includes, what equal probabilities assume and why a reopened diagram does not recover an actual lost history. Their own tree can then add a previously undrawn alternative, carrying revision beyond the supplied menu of choices.",
+        "storyboard_short": "Use shared branch and closure removing endings. Reuse trees and recursion; author branching choices, count leaves and retain closed branch. Add an undrawn alternative. Supply fan renderer and equal-weight logarithm. Teach probability assumptions; reopening diagram cannot recover lost history. Carry revisable possibility structure. Open: useful example; more leaves imply no moral conclusion.",
+        "mode": "make",
+        "brings": [
+          "trees",
+          "recursion"
+        ],
+        "learns": [
+          "outcome counting",
+          "probability assumptions"
+        ],
+        "carries": "A counted possibility structure whose branches can be revised.",
+        "supplied": [
+          "fan renderer",
+          "equal-weight logarithm calculation"
+        ],
+        "artifact_refs": [
+          "entropy_fan"
+        ],
+        "review_note": "Choose a useful learner-authored branching example; avoid treating a larger leaf count as a moral conclusion."
+      },
+      {
+        "id": "QFEP_Lambda_Spectrum",
+        "title": "Move the recommendation and keep the room",
+        "storyboard": "The student finds a dependable interval on the ordered side and a surprising relation among the moving forms, before shifting the lit strip. Bringing spatial composition, they would author a different recommended route while leaving the surrounding geometry visible, then test where that invitation meets an obstruction or another useful possibility. The spectrum's forms, lighting control and player are supplied. This reflective composition teaches how a display can recommend a value without measuring a universal regime. The student carries the difference between a weighting, an invitation and a body's available route into change over time.",
+        "storyboard_short": "Use ordered interval, moving forms and shifted lit strip. Reuse spatial composition and weights; propose another recommendation, keeping geometry visible. Test obstruction and alternatives. Supply forms, lighting control and player. Teach weighting, invitation and available route versus universal measurement. Carry tested recommendation. Open: change strip only or also author second viable route.",
+        "mode": "reflect",
+        "brings": [
+          "spatial composition",
+          "weighted parameters"
+        ],
+        "learns": [
+          "authored recommendation versus measurement"
+        ],
+        "carries": "A recommendation tested against the space it points through.",
+        "supplied": [
+          "spectrum forms",
+          "lighting control",
+          "museum player"
+        ],
+        "artifact_refs": [
+          "lambda_hall"
+        ],
+        "review_note": "Decide whether the first proposal changes only the lit strip or also authors a second viable route."
+      },
+      {
+        "id": "QFEP_Phi_Term",
+        "title": "Name the change before weighting it",
+        "storyboard": "The student moves the signed rail across zero, then notices the nearby pattern continuing independently. Bringing retained samples and arithmetic, they would calculate a difference between two supplied entropy readings, keep the interval beside it and optionally divide to obtain a rate. The readings, time display and signed rail are supplied. Multiplying the same change by opposite weights reveals what the sign does to a stated calculation. They learn to distinguish change, rate, weight and receiver, carrying these distinctions onward without assigning a political attitude to a slider direction.",
+        "storyboard_short": "Use signed rail crossing zero beside independent pattern. Reuse samples and arithmetic; subtract entropy readings, retain interval and optionally calculate rate. Compare opposite weights. Teach change, rate, weight and receiver; avoid political meaning from direction. Supply readings, time display and rail. Carry weighted change with intended use. Open: reading source, never decorative pattern.",
+        "mode": "make",
+        "brings": [
+          "retained samples",
+          "arithmetic"
+        ],
+        "learns": [
+          "difference versus rate",
+          "signed weighting"
+        ],
+        "carries": "A weighted change with its interval and intended use named.",
+        "supplied": [
+          "entropy readings",
+          "time display",
+          "signed rail"
+        ],
+        "artifact_refs": [
+          "phi_slider"
+        ],
+        "review_note": "Choose the source of the paired entropy readings; they must not be inferred from the independent decorative pattern."
+      },
+      {
+        "id": "QFEP_Edge_Of_Chaos",
+        "title": "Ask whether the pattern survives another step size",
+        "storyboard": "At the paired screens, the student chooses a feature to follow while both fields start alike and run for the same simulated duration. Bringing grid updates and time stepping, they would arrange a comparison between one update interval and a smaller one, using the supplied Gray–Scott update and common initial state. The reaction-diffusion model and displays are supplied. They learn to separate changing model parameters from changing numerical execution, preserving a pattern only as far as the comparison supports it. The authored lambda route remains an experimental choice, carried into accountable control.",
+        "storyboard_short": "Use paired patterns over equal simulated duration. Reuse grid updates and time stepping; track chosen feature at two update intervals. Distinguish model parameters from numerical execution. Supply Gray-Scott update, common initial state and displays. Carry recorded comparison conditions. Open: intervals and stopping rule showing meaningful difference; lambda remains authored choice, not universal edge band.",
+        "mode": "deepen",
+        "brings": [
+          "grid updates",
+          "time stepping"
+        ],
+        "learns": [
+          "model parameter versus numerical step"
+        ],
+        "carries": "A pattern comparison with its calculation conditions recorded.",
+        "supplied": [
+          "Gray–Scott update",
+          "common initial state",
+          "paired displays"
+        ],
+        "artifact_refs": [
+          "edge_of_chaos_unlocked"
+        ],
+        "review_note": "Choose an interval pair and equal-time stopping rule that show a meaningful difference without implying a universal edge band."
+      },
+      {
+        "id": "QFEP_Sandbox",
+        "title": "Build another response to a control",
+        "storyboard": "The student moves a handle while its route is cut, then connects it and watches the reactor use the present value. Bringing function inputs and retained state, they would connect the same supplied control to a small receiver of their own, such as a light whose intensity follows an explicit mapping, then interrupt and restore that connection. Handle input, light body and connection indicator are supplied. They learn to design a parameter's consequence rather than merely repeat its display, carrying an understandable input-to-response relation into the final specimen.",
+        "storyboard_short": "Use cut connection, moving handle and reactor receiving restored present value. Reuse function inputs and state; map control to a small receiver, then interrupt and restore connection. Teach receiver mapping versus held input. Supply handle, light body and connection indicator. Carry rewritable consequence. Open: fully inspectable receiver; retain reactor comparison.",
+        "mode": "make",
+        "brings": [
+          "function inputs",
+          "retained state"
+        ],
+        "learns": [
+          "receiver mapping",
+          "connected versus held input"
+        ],
+        "carries": "A control whose consequence the learner can rewrite.",
+        "supplied": [
+          "handle input",
+          "light body",
+          "connection indicator"
+        ],
+        "artifact_refs": [
+          "lambda_slider",
+          "phi_slider",
+          "qfep_reactor"
+        ],
+        "review_note": "Choose a useful receiver the learner can inspect completely; retain the existing reactor as a comparison."
+      },
+      {
+        "id": "QFEP_Synthesis",
+        "title": "Give a body a response worth keeping",
+        "storyboard": "The student stops the specimen's imposed pressure pulse and watches which motion continues, then compares resisting deformation with losing motion. Bringing forces, constraints and explicit control mappings, they would choose a response for a supplied soft body and map their controls to stiffness and damping separately, keeping a short deformation trace. The body solver, pressure source and trace display are supplied. They learn to state which mechanical property changed and which response they observed. The resulting body is an authored experiment that carries a question about its remaining permissions into post-crisis making.",
+        "storyboard_short": "Use stopped pressure pulse and continuing motion. Reuse forces, constraints and mappings; propose separate stiffness and damping controls, retaining deformation trace. Teach resisting deformation versus losing motion; drive versus response. Supply soft-body solver, pressure source and trace display. Carry mechanical intention, observed response and questions about remaining permissions. Expose existing lambda/phi coupling across coefficients when proposing teaching mapping.",
+        "mode": "make",
+        "brings": [
+          "forces and constraints",
+          "control mappings"
+        ],
+        "learns": [
+          "stiffness versus damping",
+          "drive versus response"
+        ],
+        "carries": "A body with an explicit mechanical intention and observed response.",
+        "supplied": [
+          "soft-body solver",
+          "pressure source",
+          "trace display"
+        ],
+        "artifact_refs": [
+          "queer_morphology_specimen"
+        ],
+        "review_note": "The existing lambda and phi each affect several coefficients; the proposed teaching mapping should expose that choice rather than imply isolation."
+      }
+    ]
+  },
+  {
+    "sequence": "postfoundationscrisis",
+    "arc": "Earlier operations return as choices about distinguishability, participation, disagreement, provenance and shared construction. The route moves beyond interfaces into walking and altering relations: a passage becomes possible, a hand acquires another neighbour, and the final record keeps enough of that work to begin again. No simulation substitutes for the people and histories its questions concern.",
+    "halls": [
+      {
+        "id": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "title": "Give a distinction enough room",
+        "storyboard": "The student holds the compression handle still and changes viewpoint, then moves the handle and watches two labels become harder to distinguish. Bringing interpolation and indexed positions, they would compose two arrangements of a small chosen label collection and preserve one distinction that the compressed arrangement obscures. The label renderer, handle and comparison frame are supplied. They learn to separate changing represented geometry from changing a view, while naming this as an authored spatial analogy. Their readable arrangement carries into the distribution of places from which people might address one another.",
+        "storyboard_short": "Use fixed compression while viewpoint changes, then compress labels. Reuse interpolation and indexed positions; compose two arrangements preserving an obscured distinction. Teach representation versus view through authored spatial analogy. Supply labels, handle and comparison frame. Carry readable distinctions. Open: labels respecting internal differences; this is no measurement of trained embeddings.",
+        "mode": "deepen",
+        "brings": [
+          "interpolation",
+          "indexed positions"
+        ],
+        "learns": [
+          "representation versus viewpoint",
+          "distinguishability"
+        ],
+        "carries": "An arrangement whose retained distinctions can be inspected.",
+        "supplied": [
+          "label renderer",
+          "compression handle",
+          "comparison frame"
+        ],
+        "artifact_refs": [
+          "bias_from_inside"
+        ],
+        "review_note": "Choose labels without silently treating a broad social category as internally interchangeable; this is not a measurement of trained embeddings."
+      },
+      {
+        "id": "CriticalAlgorithms_Applied_Ethics",
+        "title": "Arrange a place to address someone",
+        "storyboard": "The student compares the head chair and circle, then removes their persuasive colours before choosing a place to speak from. Bringing generated positions and transforms, they would arrange the same supplied chairs at the same scale into two different plans, tracing approach routes and lines of sight from a chosen seat. The chair models, room boundary and view markers are supplied. They learn what the geometry guarantees and what participation would still require from people using it. Their composition carries a specific design question into the next hall's unresolved reports.",
+        "storyboard_short": "Use head chair and circle without persuasive colours. Reuse generated positions and transforms; arrange identical chairs at equal scale in two plans. Trace approach and sightlines. Teach geometric invitation versus participation. Supply chairs, room boundary and view markers. Carry explicit access question. Open: participant activity to test; equal count and scale do not establish equal authority.",
+        "mode": "make",
+        "brings": [
+          "generated positions",
+          "transforms"
+        ],
+        "learns": [
+          "geometric invitation versus participation"
+        ],
+        "carries": "Two comparable arrangements with an explicit access question.",
+        "supplied": [
+          "chair models",
+          "room boundary",
+          "view markers"
+        ],
+        "artifact_refs": [
+          "room_shape_demonstrator"
+        ],
+        "review_note": "Choose which participant activity to test first; equal count and scale improve comparison but do not establish equal authority."
+      },
+      {
+        "id": "SpeculativeComputation_Paraconsistent_Engineering",
+        "title": "Let a resolution keep its alternatives",
+        "storyboard": "The student watches RESOLVED leave one branch tall and reduce the other to a named stump. Bringing source-tagged reports and the earlier distinction between storage and inference, they would keep both reports plus a separate decision record naming the chosen action and its reason. The branch sculpture, report input and comparison display are supplied. They learn to change a decision without silently deleting what made it difficult, then identify what further evidence might revise it. This reflective construction carries provenance onward without treating unresolved disagreement as automatically desirable or overlapping meshes as a logic.",
+        "storyboard_short": "Use RESOLVED branch and named stump. Reuse sourced reports and storage/inference distinction; retain both reports beside decision, action and reason. Identify evidence for revision. Supply sculpture, report input and comparison. Carry revisable decision with alternatives. Open: conflict with known time, source and subject; neither overlapping meshes nor unresolved disagreement establishes a logic or virtue.",
+        "mode": "deepen",
+        "brings": [
+          "source-tagged reports",
+          "storage versus inference"
+        ],
+        "learns": [
+          "decision versus retained alternatives"
+        ],
+        "carries": "A decision whose alternatives and reasons remain available.",
+        "supplied": [
+          "branch sculpture",
+          "report input",
+          "comparison display"
+        ],
+        "artifact_refs": [
+          "merge_conflict_visualizer"
+        ],
+        "review_note": "Choose a concrete conflict whose time, source and subject are known before introducing contradictory propositions."
+      },
+      {
+        "id": "SpeculativeComputation_Situated_Computation",
+        "title": "Keep where and when an image was made",
+        "storyboard": "The student compares the four assigned verdicts, then moves a witness camera while its delayed and held images retain earlier views. Bringing records, coordinates and time, they would keep an image reference with its source, exposure time and camera transform, then compose two such accounts side by side. The cameras, pickup system and frame capture are supplied. They learn that moving a receiver or changing a present viewpoint does not rewrite an earlier record. Those located observations become material for shared work without turning an authored confidence percentage into earned evidence.",
+        "storyboard_short": "Use assigned verdicts and delayed/held witness images. Reuse records, transforms and time; retain image reference, source, exposure time and pose. Compare two accounts. Teach present view versus earlier record. Supply cameras, pickup and frame capture. Carry located observations; authored confidence is no earned evidence. Open: annotation now or collective hall.",
+        "mode": "make",
+        "brings": [
+          "records",
+          "coordinates and transforms",
+          "time"
+        ],
+        "learns": [
+          "located observation",
+          "current view versus retained account"
+        ],
+        "carries": "An observation that carries its source, time and pose.",
+        "supplied": [
+          "witness cameras",
+          "pickup system",
+          "frame capture"
+        ],
+        "artifact_refs": [
+          "situated_readout",
+          "museum_witnesses"
+        ],
+        "review_note": "Keep the first record small; decide whether the learner adds an annotation now or in the collective hall."
+      },
+      {
+        "id": "SpeculativeComputation_Collective_Knowledge",
+        "title": "Make an addition that keeps its source",
+        "storyboard": "The student follows a coloured facet back to its rim node, then visits the commons table whose open centre has not removed its authored categories. Bringing indexed records and source-tagged observations, they would assemble a small shared form from contributions that retain source and version, counting arrivals separately from distinct contributors. The facet builder, arrival stream and table remain supplied. They learn what accumulation can record and what it cannot settle about knowledge or authority. Their construction leaves one rule open for another contributor to revise, carrying that invitation into the network.",
+        "storyboard_short": "Use facet's source node and commons table's authored categories. Reuse indexed, sourced records; assemble contributions retaining source/version. Count arrivals separately from contributors. Supply facet builder, arrival stream and table. Teach accumulation's limits for knowledge and authority. Carry shared form with revisable rule. Open: rule participants can change; automatic stream alone proves no shared authority.",
+        "mode": "make",
+        "brings": [
+          "indexed records",
+          "source-tagged observations"
+        ],
+        "learns": [
+          "contributions versus contributors",
+          "revision of an assembly rule"
+        ],
+        "carries": "A shared form whose additions retain source and version.",
+        "supplied": [
+          "facet builder",
+          "arrival stream",
+          "commons table"
+        ],
+        "artifact_refs": [
+          "peer_production_tool",
+          "the_commons_table"
+        ],
+        "review_note": "Choose a rule participants can actually revise; an automatic stream alone cannot demonstrate shared authority."
+      },
+      {
+        "id": "SpeculativeComputation_Rhizome_Network",
+        "title": "Make another way through",
+        "storyboard": "The student enters the cave, finds a coloured junction and returns by another passage before using the small grower's controls. Bringing graphs, fields and clearance, they would choose two places they wish were neighbours and add one connection to a supplied chamber description, then inspect the extracted passage through a prepared study. The chamber fields, shell builder and player are supplied. They learn how an extra edge can become a different bodily route, while growth without a named root still has boundaries and uneven access. That desire to revise a relation travels into assembly.",
+        "storyboard_short": "Use cave walk and alternate return before grower controls. Reuse graphs, fields and clearance; propose one connection between chosen chambers, then inspect extracted passage in prepared study. Teach edge versus bodily route; rootless growth retains boundaries and uneven access. Supply chamber fields, shell builder and player. Carry tested relation. Open: feasible chamber pair.",
+        "mode": "make",
+        "brings": [
+          "graph connections",
+          "field composition",
+          "bodily clearance"
+        ],
+        "learns": [
+          "graph edge versus passage",
+          "revising a route"
+        ],
+        "carries": "A proposed connection tested through a bodily route.",
+        "supplied": [
+          "chamber fields",
+          "shell builder",
+          "museum player"
+        ],
+        "artifact_refs": [
+          "rhizome_cave_demo",
+          "rhizome_grower"
+        ],
+        "review_note": "Select two chambers with a feasible new passage; preserve walking as the first encounter rather than making the control desk the lesson."
+      },
+      {
+        "id": "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "title": "Give the body another neighbour",
+        "storyboard": "The student moves the amber body's hand, then reroutes a connection while leaving every joint where it stands. Bringing local coordinates, edge pairs and constraints, they would alter one position and one endpoint in the body's retained description, comparing each with the original. The handles, bond renderer and persistence are supplied. They learn that changing pose differs from changing belonging, then pull the neighbouring constrained doll or chair to feel a relation transmit consequences. Their own revised body, including its connections, is kept for the final hall rather than replaced with a demonstration.",
+        "storyboard_short": "Use amber hand movement, then rerouted bond with joints fixed. Reuse local coordinates, edges and constraints; edit one position and endpoint separately, comparing original. Pull neighbouring doll or chair. Teach pose versus connectivity, drawn versus constraining relation in separate beats. Supply handles, bond renderer and persistence. Carry same saved learner body and connections across exit.",
+        "mode": "make",
+        "brings": [
+          "local coordinates",
+          "edge pairs",
+          "constraints"
+        ],
+        "learns": [
+          "pose versus connectivity",
+          "drawn versus constraining relation"
+        ],
+        "carries": "The learner's saved body and revised connection.",
+        "supplied": [
+          "joint and endpoint handles",
+          "bond renderer",
+          "persistence"
+        ],
+        "artifact_refs": [
+          "MolecularDesigner"
+        ],
+        "review_note": "Give pose, connectivity and the dynamic-body comparison separate beats; keep the same learner record across the exit."
+      },
+      {
+        "id": "PostCrisis_Synthesis",
+        "title": "Keep another possible return",
+        "storyboard": "The student meets the amber body they changed beside its blue starting arrangement, then reads what the ledger remembered and what the gesture left out. Bringing positions, connections and retained records, they would extend a prepared version of that record to keep one earlier arrangement alongside the latest, with an optional note about the change. The reconstruction renderer and file persistence are supplied. They learn to choose what a future return can recover, then name another body or passage they want to make. The museum closes with usable material and an unfinished desire.",
+        "storyboard_short": "Use revised amber body, blue starting arrangement and ledger's omissions. Reuse positions, connections and records; extend prepared record to retain earlier and latest arrangements, optionally annotated. Supply reconstruction renderer and file persistence. Teach versioned recovery versus lived gesture. Carry two recoverable arrangements and desired next body or passage. Open: final construction or independent-work proposal.",
+        "mode": "make",
+        "brings": [
+          "positions and connections",
+          "retained records"
+        ],
+        "learns": [
+          "versioned reconstruction",
+          "record versus lived gesture"
+        ],
+        "carries": "Two recoverable arrangements and a chosen next construction.",
+        "supplied": [
+          "reconstruction renderer",
+          "file persistence"
+        ],
+        "artifact_refs": [
+          "assembly_return",
+          "accountability_ledger"
+        ],
+        "review_note": "Decide whether version history is the final short construction or a proposal the learner carries into independent work."
+      }
+    ]
+  }
+]

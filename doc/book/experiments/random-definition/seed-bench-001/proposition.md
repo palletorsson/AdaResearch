@@ -1,6 +1,6 @@
 # The same values can become heights
 
-**Proposed pilot; not executed.** This companion belongs to Random Definition and the existing Endless Museum. It extends the existing seed lesson through a selected interpretation. It does not replace its colour grids or the tutorial's +1 DRAW comparison.
+**Original floating-cube proposition, now tested in a scoped scripted cycle.** The current human-directed successor is [fixed-bottom bars](ANCHORED_BARS.md); the original recipe below remains as history. See [observations](observations.md) and [two text reviews](revision.md). Human encounter and independent reconstruction remain open. This companion belongs to Random Definition and the existing Endless Museum. It extends the existing seed lesson through a selected interpretation. It does not replace its colour grids or the tutorial's +1 DRAW comparison.
 
 The [source passage](../../../../../commons/maps/Random_Definition/final.md) says: “A picture needs one more agreement. Here, three successive draws supply the red, green and blue amounts of a cube.” Its exact source version is bound in [the record](experiment.json).
 
@@ -8,7 +8,7 @@ Our new proposition is conditional: **If the same retained values are also assig
 
 Two texts initiate this pilot. The [tutorial](../../../../../commons/maps/Random_Definition/tutorial.md) already asks the reader to exchange red and blue assignments while keeping the same requests: what can we reconstruct and explain when values change jobs? The final asks what else the apparatus could allow: does assigning height change how we encounter the same retained arrangement? Both exact passages are bound in the companion. Either text can originate a later experiment independently.
 
-Before testing, name what could change the work: a reconstruction failure may require a tutorial revision; correct geometry with no useful perceived difference may leave the final's question unresolved or suggest another interpretation. A technical fault and an uninteresting encounter are different findings. We will review both texts without demanding that both change. The user has selected this 48-value comparison as the first planned pilot; its execution is still future work.
+Before testing, name what could change the work: a reconstruction failure may require a tutorial revision; correct geometry with no useful perceived difference may leave the final's question unresolved or suggest another interpretation. A technical fault and an uninteresting encounter are different findings. We will review both texts without demanding that both change. The user has selected this 48-value comparison as the first planned pilot; its native execution is now recorded, while the human stages remain future work.
 
 ## Bounded comparison
 
@@ -29,7 +29,7 @@ The cubes remain independent display objects. This test introduces no force, con
 
 Predict which cells will share a height and which features the observer will notice. [The text simulation](text-simulation.md) is a hypothetical account. An observable geometry change, an unchanged judgment, a meaningful question and an implementation failure are all possible outcomes. There is no required preference for B.
 
-For an independent arithmetic reference, use an explicitly invented fixture containing sixteen triples: zeroes; ones; `(1, 0, 0)`; `(0, 1, 0)`; then twelve triples of `(0.5, 0.5, 0.5)`. The proposed formula yields heights `0.10`, `0.40`, `0.20`, `0.20`, then twelve times `0.25` metres. The red and green triples give different colours at equal height. These are calculated expectations, not Godot output or promised values of seed 42.
+For an independent arithmetic reference, use an explicitly invented fixture containing sixteen triples: zeroes; ones; `(1, 0, 0)`; `(0, 1, 0)`; then twelve triples of `(0.5, 0.5, 0.5)`. The proposed formula yields heights `0.10`, `0.40`, `0.20`, `0.20`, then twelve times `0.25` metres. The red and green triples give different colours at equal height. These were the pre-run calculated expectations, not promised values of seed 42; the native probe has now confirmed this explicitly invented fixture.
 
 ## Complete cycle and writing return
 

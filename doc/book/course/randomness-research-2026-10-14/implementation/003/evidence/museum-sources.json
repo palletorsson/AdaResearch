@@ -1,0 +1,30 @@
+{
+  "room": "Random_Definition",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_basin_plan.txt"
+  },
+  "no_bridges": true,
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "07670c8ac4e83a8284675347f6230a659736cf2bd290c2bdac3eef9288081512",
+    "commons/maps/Random_Definition/map_data.json": "58f52333f7b0ad026aa740df0f4dd4e15b59baaba15d4fa9a0486ec181288f07",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/museum_probe.gd": "ac07944554c9cee2fcf48aaaef234f49bd7646c0a858144ea566ff14307cd157",
+    "tools/run_encounter_probe.py": "b58102c164f84b5f01d8239bae7d02fe620e2c85fdbe07323c0c05d967e00202",
+    "commons/data/museum/em_plan.json": "e7376044793703ba9f8492f1747353a991f2251dfce3e562fcdc412ecea2871b",
+    "ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/control.json": "7f8b01db729843369ed518890b980923eaa641ac86693811454435d23257b574",
+    "ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Random_Definition/seed-bench-001-exact/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "commons/artifacts/registry/randomness.json": "70f4208b42bc6e1e670cdbb37bd34910d58bdcc0bf359c9bbc3d3724f90e3b7d",
+    "algorithms/randomness/seed_replay/seed_replay_demo.tscn": "10ea4bea4d4391659706c3ab0486db53340f249a78be81a730f87d1423e1e3e2",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": "2087b4f8871dc2a3294ff3e07ac418a805f4b0a36999671f79f37ea7050b2123"
+  }
+}

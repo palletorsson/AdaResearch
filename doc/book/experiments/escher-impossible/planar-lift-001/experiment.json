@@ -1,0 +1,308 @@
+{
+ "schema": "ada.book-experiment.v1",
+ "id": "escher-impossible.planar-lift-001",
+ "status": "proposed",
+ "disposition": "experimental",
+ "runtime_verified": false,
+ "sources": [
+  {
+   "passage_id": "escher-impossible.picture-vs-space.v1",
+   "source_path": "commons/maps/Escher_Impossible/tutorial.md",
+   "snapshot_path": "doc/book/experiments/escher-impossible/planar-lift-001/sources/Escher_Impossible.tutorial.md",
+   "sha256": "5b8e7e1a387f70bce820f615b5fd81aada03d1269e153eabcc60f0ac37af9c8b",
+   "excerpt": "Walk around the installation's separate perspective work. Apparent contact in an image and coincidence in three-dimensional coordinates require different evidence.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "tutorial"
+  },
+  {
+   "passage_id": "escher-impossible.coincident-images.v1",
+   "source_path": "commons/maps/Escher_Impossible/final.md",
+   "snapshot_path": "doc/book/experiments/escher-impossible/planar-lift-001/sources/Escher_Impossible.final.md",
+   "sha256": "bab9550510941fc09c8d57e85cd6e02e96cfe2312c80d19f0ce7ea86f3cb6318",
+   "excerpt": "Here, two points at different depths lie on the same ray from the marked eye position. Their images coincide. Their positions do not.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "final"
+  }
+ ],
+ "documents": {
+  "proposition": "doc/book/experiments/escher-impossible/planar-lift-001/proposition.md",
+  "text_simulation": "doc/book/experiments/escher-impossible/planar-lift-001/text-simulation.md",
+  "observations": "doc/book/experiments/escher-impossible/planar-lift-001/observations.md",
+  "revision": "doc/book/experiments/escher-impossible/planar-lift-001/revision.md"
+ },
+ "interpretations": [
+  {
+   "id": "planar-lift.interp.two-counters",
+   "passage_ids": [
+    "escher-impossible.picture-vs-space.v1",
+    "escher-impossible.coincident-images.v1"
+   ],
+   "mapping": "The two kinds of evidence are the artifact's two probe-readable counters on one configuration: crossings_in_plane() is contact-in-the-picture (straight-chord intersections in the table's XZ projection, computed lift-blind in _count_crossings()), collisions_in_space() is coincidence-in-3D (non-adjacent tube pairs closer than edge_radius * 2.0 + TOUCH, from _measure_space()). At graph = \"k5\", step the lift export from \"flat\" to \"lifted\" via apply_grid_config and read both counters plus min_clearance_m() in each arm. Prediction, labelled a prediction: crossings_in_plane() returns the identical value in both arms; collisions_in_space() falls to 0 in the lifted arm; min_clearance_m() moves from non-positive to positive.",
+   "assumptions": [
+    "The table's top-down XZ projection stands in for 'an image'; a hall visitor's eye is a different projection and is not what this counter measures.",
+    "Tube contact within edge_radius * 2.0 + TOUCH stands in for 'coincidence in three-dimensional coordinates'.",
+    "The capped resolve pass (_resolve_space, RESOLVE_ROUNDS = 10, RESOLVE_BUMP = 0.013) clears k5 at lift = \"lifted\" within its cap — predicted, never observed under this record."
+   ],
+   "exclusions": [
+    "No claim about any flat drawing other than the one _shape() draws; Kuratowski's generality is cited in the code comments, not measured by this instrument.",
+    "No claim about what a human perceives from the approach cell — only the two computed numbers.",
+    "graph values \"k33\", \"wheel\" and \"chain\" are out of scope for this interpretation."
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "planar-lift.interp.control-graph",
+   "passage_ids": [
+    "escher-impossible.picture-vs-space.v1"
+   ],
+   "mapping": "The 'different evidence' claim is genuine only if picture-contact is a fact about the pressed graph rather than about flatness itself. Hold lift = \"flat\" and compare graph = \"k5\" against graph = \"wheel\", reading crossings_in_plane() and collisions_in_space() on each. Prediction, labelled: the wheel reads 0 on both counters flat — its hub-and-rim drawing in _shape() (hub node 0, rim nodes 1..6, spoke edges [0, i+1] and rim edges [i+1, 1+((i+1) % 6)]) has no non-adjacent chord intersections — so any nonzero at k5 is evidence about k5.",
+   "assumptions": [
+    "The wheel drawing in _shape() is crossing-free as drawn — hand-checkable convex geometry, not yet run under this record.",
+    "Edge pairs sharing an endpoint are excluded symmetrically by both _count_crossings() and _measure_space(), so the two counters exclude the same pairs."
+   ],
+   "exclusions": [
+    "Does not exercise the lift axis at all.",
+    "Cannot distinguish 'some crossing is necessary for k5 in every flat drawing' (the theorem) from 'this drawing crosses' (what the instrument measures)."
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "planar-lift.interp.clearance-threshold",
+   "passage_ids": [
+    "escher-impossible.coincident-images.v1"
+   ],
+   "mapping": "The encounter question becomes a threshold question: where does coincidence stop being coincidence? Read min_clearance_m() across lift = \"flat\", \"slight\", \"lifted\" at graph = \"k5\". The collision boundary is edge_radius * 2.0 + TOUCH centre-to-centre, and min_clearance_m() reports closest approach minus edge_radius * 2.0, so a pair counts as colliding when its clearance is below TOUCH. Prediction, labelled: flat reads -0.0090 m for a truly intersecting chord pair; \"lifted\" reads a positive clearance whose magnitude this record does NOT predict, because _resolve_space() finds the working lift rather than asserting it.",
+   "assumptions": [
+    "Clearance is computed over sampled polylines (ARC_SAMPLES = 12) with exact segment-to-segment distance (_seg_seg), so the flat case — straight chords — is exact, not sampling-dependent.",
+    "The positive lifted clearance is apparatus-found; its magnitude is explicitly outside this record's predictions."
+   ],
+   "exclusions": [
+    "No numeric clearance is claimed for any non-flat lift value.",
+    "lift = \"spread\" is excluded: _shape() then moves node heights by (float((i * 7) % 3) - 1.0) * LIFTS[\"spread\"] * 0.35, so the nodes leave the table and the comparison would no longer change one thing."
+   ],
+   "status": "declared_alternative"
+  }
+ ],
+ "simulation": {
+  "text": {
+   "kind": "text_thought_experiment",
+   "status": "authored_hypothesis",
+   "path": "doc/book/experiments/escher-impossible/planar-lift-001/text-simulation.md"
+  },
+  "godot": {
+   "scene": null,
+   "build": null,
+   "execution_status": "not_run",
+   "runs": []
+  }
+ },
+ "record_contract": {
+  "raw_values": null,
+  "apparatus_scene_reference": "res://commons/artifacts/planar_lift/planar_lift.tscn (reference only; no run is bound to this record)",
+  "baseline": "graph = \"k5\", lift = \"flat\", span = 0.36, node_radius = 0.011, edge_radius = 0.0045, show_readout = true (every export at its planar_lift.gd default), standing in Escher_Impossible as the map token planar_lift:0:0.95",
+  "single_change": "lift: \"flat\" -> \"lifted\" (LIFTS[\"lifted\"] = 0.07), set through apply_grid_config({\"lift\": \"lifted\"}); nothing else is touched",
+  "held_fixed": [
+   "graph = \"k5\"",
+   "span = 0.36",
+   "node_radius = 0.011",
+   "edge_radius = 0.0045",
+   "show_readout = true",
+   "clear_color, collide_color, node_color, table_color at export defaults",
+   "the hall placement planar_lift:0:0.95 and its host transform in Escher_Impossible",
+   "the measured projection: the table's XZ plane — _count_crossings() is lift-blind by construction, which is the point of the comparison",
+   "no RNG exists anywhere in planar_lift.gd, so there is no seed to hold"
+  ],
+  "retained_fields": [
+   "export values set",
+   "verdict text",
+   "probe-readable measurements",
+   "tick rates gated (60 and 90 Hz)",
+   "scene and build identity"
+  ],
+  "replay": "Replaying a retained record means re-running the deterministic scene at the recorded exports and build; a changed build is a new run.",
+  "fresh_acquisition": "Any physics settle is a fresh acquisition at its tick rate; two rates are two observations."
+ },
+ "reference_fixture": {
+  "kind": "invented_arithmetic_fixture_not_rng_output",
+  "evidence_status": "calculated_expectation_not_executed",
+  "description": "Peak ladder, collision threshold and resolve ceiling at graph = \"k5\", lift = \"lifted\", computed by hand from planar_lift.gd constants alone. k5 joins 5 nodes pairwise, so there are 10 edges and the ladder denominator _edges.size() - 1 is 9; each edge has exactly 3 non-adjacent partners (10 minus itself minus the 6 edges sharing one of its endpoints). Inputs: edge indices 0 and 9, edge count 10, base height 0.07, edge radius 0.0045, touch margin 0.001, resolve cap 10 rounds of 0.013 where each round bumps the higher-indexed edge of every colliding pair once per pair (not once per edge), and 3 non-adjacent partners per k5 edge.",
+  "constants_cited": [
+   "LIFTS := {\"flat\": 0.0, \"slight\": 0.02, \"lifted\": 0.07, \"spread\": 0.12} — base_h for \"lifted\" is 0.07",
+   "edge_radius: float = 0.0045 (export default in the .gd)",
+   "TOUCH := 0.001",
+   "RESOLVE_ROUNDS := 10",
+   "RESOLVE_BUMP := 0.013",
+   "peak ladder from _rebuild(): base_h * (0.4 + 0.6 * float(e) / maxf(float(_edges.size() - 1), 1.0))",
+   "_resolve_space() bump rule: for pair in _collisions: _peaks[maxi(pair[0], pair[1])] += RESOLVE_BUMP — one bump per colliding pair per round, so one edge can take several bumps in a single round"
+  ],
+  "values": [
+   0,
+   9,
+   10,
+   0.07,
+   0.0045,
+   0.001,
+   10,
+   0.013,
+   3
+  ],
+  "expected": [
+   "peak(e=0) = 0.0280 m",
+   "peak(e=9) = 0.0700 m",
+   "collision threshold touch_at = 0.0100 m centre-to-centre",
+   "min_clearance_m() for a truly intersecting flat chord pair = -0.0090 m (conditional: IF a pair intersects)",
+   "ceiling on any resolved peak at lift = \"lifted\" for k5: 0.4600 m (edge 9: ladder start 0.0700 + 10 rounds x 3 pairs x 0.013 = 0.4600)"
+  ],
+  "arithmetic": "Edges of k5: 5*4/2 = 10; ladder denominator 10 - 1 = 9. peak(e) = 0.07 * (0.4 + 0.6*e/9): e=0 gives 0.07 * 0.4 = 0.0280; e=9 gives 0.07 * (0.4 + 0.6) = 0.0700. touch_at = edge_radius * 2.0 + TOUCH = 0.0090 + 0.0010 = 0.0100. If two flat chords truly intersect, their polyline distance is 0 and _measure_space() records 0 - edge_radius * 2.0 = -0.0090 as the clearance. Resolve ceiling: _resolve_space() bumps _peaks[maxi(pair[0], pair[1])] once per colliding pair per round, so an edge can be bumped once for each non-adjacent pair in which it is the higher index. In k5 an edge [a, b] is adjacent to 3 + 3 other edges sharing a or b, leaving exactly 10 - 7 = 3 non-adjacent partners; edge 9 ([3, 4]) is the higher index in all 3 of its pairs ([0,1], [0,2], [1,2] at edge indices 0, 1, 4), so its peak can rise at most RESOLVE_ROUNDS * 3 * RESOLVE_BUMP = 10 * 3 * 0.013 = 0.3900 above its ladder start: 0.0700 + 0.3900 = 0.4600. No other edge exceeds this, since every k5 edge has exactly 3 non-adjacent partners and edge 9 carries both the highest ladder start and the maximal higher-index count. Every value is a pen-and-paper consequence of the quoted constants; none is a measured output, and whether flat k5 chords do intersect is left to the run — the -0.0090 line is conditional on an intersection occurring."
+ },
+ "observations": [],
+ "revisions": [],
+ "learning_debt": [
+  {
+   "id": "planar-lift.debt.flat-agreement",
+   "kind": "unverified_claim",
+   "question": "Do crossings_in_plane() and collisions_in_space() in fact agree at graph = \"k5\", lift = \"flat\" in the current tree, as the script's doc comment claims?",
+   "next_test": "Headless SceneTree probe (watchdog-wrapped, --xr-mode off) that instantiates planar_lift.tscn, calls apply_grid_config({\"graph\": \"k5\", \"lift\": \"flat\"}), awaits one frame, and asserts the two methods return equal nonzero values — failing distinctly on zero (wrong graph reached the node) versus inequality (threshold or sampling fault).",
+   "status": "open"
+  },
+  {
+   "id": "planar-lift.debt.lift-dissolves",
+   "kind": "unverified_implementation",
+   "question": "Does the capped resolve pass actually reach 0 collisions with positive min_clearance_m() at lift = \"lifted\" for k5? The file is untracked and has never run under this record's identity.",
+   "next_test": "The same probe sweeps lift over \"flat\", \"slight\", \"lifted\" at graph = \"k5\", recording the triple (crossings_in_plane(), collisions_in_space(), min_clearance_m()) per value; pass requires crossings constant across the sweep, with collisions 0 and clearance > 0 at \"lifted\".",
+   "status": "open"
+  },
+  {
+   "id": "planar-lift.debt.whose-picture",
+   "kind": "unresolved_interpretation",
+   "question": "The final's passage is standpoint-relative — step aside and the images part — while crossings_in_plane() is one fixed projection, the table's shadow. Which coincidence does a visitor at the approach cell actually see, and does the plate's printed count name what their eye reports?",
+   "next_test": "An encounter observation scheduled after the native probes: walk Escher_Impossible in the museum lane (or vr_link.py --agent) to the placement's approach cell, compare visible edge overlaps from standing height against the plate's printed crossings count, and record any disagreement as a finding about which projection the hall teaches.",
+   "status": "open"
+  }
+ ],
+ "contributions": [
+  {
+   "role": "loop direction",
+   "contributor": "Palle Torsson (chat, 2026-10-14): start the research loop for some of the sequences",
+   "source": "doc/book/RECURSIVE_ARCHITECTURE.md"
+  },
+  {
+   "role": "apparatus construction",
+   "contributor": "Claude Fable 5 (claude-fable-5), separation-family build campaign of 2026-10-13, from the user's readings of the openai/math figures",
+   "source": "commons/artifacts/registry/planar_lift.json"
+  },
+  {
+   "role": "hall text authorship",
+   "contributor": "Not inferred; the hall texts predate this record",
+   "source": "commons/maps/Escher_Impossible/"
+  },
+  {
+   "role": "record drafting",
+   "contributor": "Claude Fable 5 workflow agents (read, adversarial verify, draft), 2026-10-14",
+   "source": "doc/book/experiments/escher-impossible/planar-lift-001/proposition.md"
+  }
+ ],
+ "related_tasks": [
+  "separation_research.001",
+  "separation_research.003"
+ ],
+ "task_sources": [
+  "doc/tasks/separation_research.json"
+ ],
+ "evidence_status": {
+  "artifact": "not_tested",
+  "experiment_cycle": "not_tested",
+  "specified_cross_hall": "not_applicable_local_pilot",
+  "scene_loading": "not_tested",
+  "runtime_stability": "not_tested",
+  "performance": "not_tested",
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested"
+ },
+ "edition": {
+  "id": null,
+  "status": "not_selected",
+  "publication_status": "not_published"
+ },
+ "initiation": {
+  "allowed_text_roles": [
+   "tutorial",
+   "final"
+  ],
+  "status": "proposed",
+  "questions": [
+   {
+    "text_role": "tutorial",
+    "passage_id": "escher-impossible.picture-vs-space.v1",
+    "question": "Can one constructed instrument hold both kinds of evidence at once — contact in a picture and coincidence in three-dimensional coordinates — and can we predict, before granting the figure its third dimension, which of the two readings must change and which cannot?"
+   },
+   {
+    "text_role": "final",
+    "passage_id": "escher-impossible.coincident-images.v1",
+    "question": "When images coincide without the things coinciding, what does the third dimension make possible in the encounter: can every coincidence of positions be dissolved while the coincidence of images stands exactly where it was — and what is the surviving coincidence then a fact about?"
+   }
+  ],
+  "reconsider_if": [
+   "The placement is uncommitted: if planar_lift:0:0.95 leaves Escher_Impossible/map_data.json, or the untracked commons/artifacts/planar_lift/ never lands, before anything runs under this record, the hall binding dissolves and both passages must be re-selected.",
+   "Both hall texts are dirty in the working tree; if a revision changes either bound excerpt's bytes, the record must re-bind to the new text before running — the excerpts were verified against today's working-tree bytes, not a commit.",
+   "If a flat k5 run reads crossings_in_plane() != collisions_in_space(), the script's own premise 'Flat, the two numbers agree' fails and the two-counters interpretation is measuring a different pair of things than the passages ask about — stop and re-interpret before any lift comparison.",
+   "If graph = \"wheel\" reads nonzero crossings_in_plane() at lift = \"flat\", the control fails and red marks can no longer be read as facts about k5 rather than about flatness itself.",
+   "If lift = \"lifted\" still reports collisions after the capped resolve pass (the plate printing FORCED FLAT at a non-flat lift), the 'possibility lives in the third dimension' reading fails for this apparatus, and the question moves from the hall texts to the RESOLVE_ROUNDS / RESOLVE_BUMP caps."
+  ]
+ },
+ "text_reviews": {
+  "tutorial": {
+   "source_path": "commons/maps/Escher_Impossible/tutorial.md",
+   "source_passage_ids": [
+    "escher-impossible.picture-vs-space.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  },
+  "final": {
+   "source_path": "commons/maps/Escher_Impossible/final.md",
+   "source_passage_ids": [
+    "escher-impossible.coincident-images.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  }
+ },
+ "review_contract": {
+  "targets": [
+   "tutorial",
+   "final"
+  ],
+  "allowed_decisions": [
+   "revise",
+   "retain_with_reason",
+   "open_question"
+  ],
+  "both_rewrites_required": false,
+  "each_review_requires": [
+   "source_version",
+   "observation_refs",
+   "reason"
+  ],
+  "pending_is_complete": false
+ },
+ "next_experiment": {
+  "selection_status": "awaiting_observations",
+  "allowed_decisions": [
+   "continue",
+   "redirect",
+   "defer",
+   "stop"
+  ],
+  "source_observation_ids": [],
+  "question": null,
+  "decision": null,
+  "proposition": null
+ }
+}

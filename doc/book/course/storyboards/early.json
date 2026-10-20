@@ -1,0 +1,2103 @@
+[
+  {
+    "sequence": "transformation",
+    "arc": "The forms assembled in Primitives acquire motion, then become surfaces and boundaries a visitor can use. A small timed study introduces interpolation and sine without requiring a theory of waves; later halls distinguish path, pivot, hierarchy and input. The student finishes with a deliberate transformation rule whose visible and physical consequences can be compared.",
+    "halls": [
+      {
+        "id": "Trans_Pre",
+        "title": "Give a familiar cube a rhythm",
+        "storyboard": "Before the four pickup demonstrations, the student recognises the cube assembled in Primitives and watches translation, rotation and scale arrive one at a time. In a small companion study, they retain the created cube reference, accumulate elapsed seconds and drive height and size between two limits, adding a timed turn. The room, display and collection behaviour are supplied. A short sine comparison keeps the endpoints and duration while changing arrival speed; its range is explained now, its circular meaning later. The student leaves with an animation they can reuse deliberately.",
+        "storyboard_short": "Use four pickup demonstrations. Reuse the created cube reference. Teach elapsed seconds, bounded height/size interpolation and a timed turn. Compare sine arrival speed at equal endpoints and duration; explain its range. Supply room, readout and collection. Carry reusable animation. Keep the museum encounter linear; place sine in the companion study. Defer circular meaning.",
+        "mode": "make",
+        "brings": [
+          "created geometry and references",
+          "frame callbacks"
+        ],
+        "learns": [
+          "elapsed time and interpolation",
+          "usable sine cycle"
+        ],
+        "carries": "A timed position, turn and size rule.",
+        "supplied": [
+          "study room and readout",
+          "museum pickup and collection"
+        ],
+        "artifact_refs": [
+          "pick_up_cube"
+        ],
+        "review_note": "Keep the linear museum encounter and place the sine comparison in the student study; the older intent still postpones all sine."
+      },
+      {
+        "id": "Trans_Introduction",
+        "title": "Make a surface reach",
+        "storyboard": "The student crosses the moving cube, growing support and turning plank, bringing the animation operations from the pickup study. At the adjustable landing they hold the plank's motion fixed and move the destination, then use their known endpoint calculation to propose a crossing that reaches both banks. A prepared physical deck supplies collision and rider carrying; the learner controls its route and records its displacement. They discover that animating a surface and transporting a supported body require an explicit connection. A crossing specification, including its fixed references, travels onward.",
+        "storyboard_short": "Use moving cube, growing support, turning plank and adjustable landing. Reuse animation and endpoint calculations; hold plank motion fixed while moving the destination. Teach surface motion versus carried displacement. Supply banks, controls and physical deck with rider adapter. Carry a crossing specification with fixed references. Open: choose the smallest supported deck interface before drafting code.",
+        "mode": "deepen",
+        "brings": [
+          "timed transforms",
+          "positions and displacement"
+        ],
+        "learns": [
+          "surface motion and carried displacement"
+        ],
+        "carries": "A crossing with explicit endpoints and support.",
+        "supplied": [
+          "physical deck and rider adapter",
+          "banks and controls"
+        ],
+        "artifact_refs": [
+          "tc",
+          "sc",
+          "rc",
+          "adjustable_landing"
+        ],
+        "review_note": "Choose the smallest supported deck interface before writing code; inspect source rather than teaching the whole transport script."
+      },
+      {
+        "id": "Trans_Translation",
+        "title": "Choose the journey between endpoints",
+        "storyboard": "Seven carrier journeys separate sideways, upward and forward travel before combining directions. Reusing positions, lists and interpolation, the student describes a short route as waypoints in one named frame, then compares visiting those waypoints with travelling straight to the final destination. The prepared carrier accepts consecutive target positions and supplies rider detection; a simple marker can preview the same route without carrying anyone. Subtraction gives each leg, and dividing a nonzero leg by its length separates direction from distance. The student carries a route generator whose endpoint does not conceal its intermediate journey.",
+        "storyboard_short": "Use seven carrier journeys. Reuse positions, lists and interpolation. Teach waypoints in one frame, leg subtraction and direction = leg/length for nonzero legs. Compare waypoint travel with the direct route. Supply carrier, rider connection and preview marker. Carry a route generator preserving intermediate travel. Open: choose marker preview or visitor carrying; carrying needs the preceding deck interface.",
+        "mode": "make",
+        "brings": [
+          "position lists",
+          "interpolation"
+        ],
+        "learns": [
+          "waypoint traversal",
+          "direction separated from distance"
+        ],
+        "carries": "A reusable waypoint route.",
+        "supplied": [
+          "carrier and rider connection",
+          "route preview marker"
+        ],
+        "artifact_refs": [
+          "tc",
+          "translation_cube_demo",
+          "pick_up_cube"
+        ],
+        "review_note": "Agree whether the first student route carries the visitor or only the preview marker; the former needs the deck interface from the preceding lesson."
+      },
+      {
+        "id": "Trans_Rotation",
+        "title": "Turn around a chosen centre",
+        "storyboard": "At the blades and the marked cubes, the student follows an end while its centre stays fixed. With positions, functions and a timed angle available, they make a small arm from a centre and an offset, then rotate the offset around a named axis before adding the centre back. A supplied angle display and physical ride let them compare their construction with the larger encounter. Reversing two turns at the composition workbench tests order; the hinge offers a quiet return. The reusable result is a pivoted construction, distinct from moving the whole object.",
+        "storyboard_short": "Use blades, marked cubes and composition workbench. Reuse positions, functions and timed angles. Teach pivoted construction: rotate an offset around a named axis, then add its centre. Reverse two turns to test order. Supply angle display and physical ride; retain the hinge as a quiet return. Carry pivoted construction distinct from whole-object motion. Defer full rotated arrays and ride physics.",
+        "mode": "make",
+        "brings": [
+          "offset vectors",
+          "timed angle and functions"
+        ],
+        "learns": [
+          "axis and pivot",
+          "order of rotations"
+        ],
+        "carries": "A function placing a point around a pivot.",
+        "supplied": [
+          "angle display",
+          "existing ride and composition workbench"
+        ],
+        "artifact_refs": [
+          "rotation_wall_crossings",
+          "transform_composition_workbench",
+          "hinge_release"
+        ],
+        "review_note": "Keep axis-angle construction small; do not make all rotated arrays and ride physics prerequisites."
+      },
+      {
+        "id": "Trans_Scale",
+        "title": "Choose what the scale reaches",
+        "storyboard": "Taking the bottle enlarges the room while the visitor retains their size. The student brings uniform scale and a pivoted arrangement, then groups a small set of their own forms under one created parent and scales that parent beside an unchanged reference doorway. The existing room, bottle and relocation mechanism are supplied for the encounter. They compare scaled dimensions with scaled distances between children, and identify the separate operation that moves the visitor onto the table. A grouped construction with a clearly bounded scale becomes useful for later arrays and assemblies.",
+        "storyboard_short": "Use the bottle enlarging the room around an unchanged visitor. Reuse uniform scale and pivoted forms. Teach parent-child transforms through one created group beside a fixed doorway; compare dimensions and child spacing. Supply room, bottle and relocation; distinguish relocation from scaling. Carry a bounded grouped construction. Open: choose the small composition.",
+        "mode": "deepen",
+        "brings": [
+          "uniform scale",
+          "relative positions"
+        ],
+        "learns": [
+          "parent-child transforms"
+        ],
+        "carries": "A group that scales against a fixed reference.",
+        "supplied": [
+          "bottle encounter and relocation",
+          "reference doorway"
+        ],
+        "artifact_refs": [
+          "scale_me",
+          "reference_passage"
+        ],
+        "review_note": "Decide the small grouped composition; do not require rebuilding the room, food or player relocation."
+      },
+      {
+        "id": "Trans_Body",
+        "title": "Let proximity become an input",
+        "storyboard": "The slats open, the low lattice loses cells, and nearby blocks shrink. Reusing distance and interpolation, the student makes one small block respond to the supplied visitor position: convert distance to a bounded fraction, then use it to choose a size while keeping the base on the floor. The prepared body query and matching collision update are explained as inputs and outputs. Walking away distinguishes a reversible response from the lattice's retained removal. The learner takes forward a proximity function and the habit of asking which state an interaction keeps.",
+        "storyboard_short": "Use opening slats, retained lattice removal and shrinking blocks. Reuse distance and interpolation. Teach clamped distance-to-size mapping on one adjacent block, keeping its base grounded. Supply visitor-position query and matching collision updater with explicit inputs/outputs. Compare walking away with retained removal. Carry a proximity function and state distinction; keep carving infrastructure supplied.",
+        "mode": "make",
+        "brings": [
+          "distance between positions",
+          "interpolation and scale"
+        ],
+        "learns": [
+          "clamped input mapping",
+          "current response versus retained change"
+        ],
+        "carries": "A bounded proximity-to-size function.",
+        "supplied": [
+          "visitor position query",
+          "physical block updater"
+        ],
+        "artifact_refs": [
+          "approach_wall",
+          "carve_grid",
+          "approach_scale"
+        ],
+        "review_note": "Student block should sit beside the encounter; carving and visitor-recognition infrastructure remain supplied."
+      },
+      {
+        "id": "Trans_Pit",
+        "title": "Compose an opening through time",
+        "storyboard": "Beside the timed pushers, turning slabs and growers, the student predicts when a space becomes available and compares that prediction with the final airlock. They already have timed and proximity-driven transforms, so they compose a small pair of leaves whose position, angle and size receive different parts of one opening fraction. The doorway frame, occupancy input and physical leaf wrapper are supplied. Holding an intermediate pose makes clearance inspectable. No new syntax is necessary: the outcome is an authored transformation sequence that makes a usable opening, ready to be repeated across an array.",
+        "storyboard_short": "Use the level-ground timed pushers, slabs, growers and airlock. Reuse timed/proximity transforms. Compose two leaves whose position, angle and size share one opening fraction; hold an intermediate pose to inspect clearance. Supply frame, occupancy input and physical leaf wrapper. Carry an authored opening sequence toward arrays. Require no new syntax; discard obsolete pit/death framing.",
+        "mode": "deepen",
+        "brings": [
+          "timed and proximity input",
+          "position, rotation and scale"
+        ],
+        "learns": [
+          "composed transforms from one control"
+        ],
+        "carries": "An opening sequence with inspectable intermediate poses.",
+        "supplied": [
+          "door frame",
+          "occupancy signal and physical leaf wrapper"
+        ],
+        "artifact_refs": [
+          "pusher_block",
+          "grower_block",
+          "transformation_airlock"
+        ],
+        "review_note": "The current hall is a level-ground timed study; obsolete pit/death prose must not determine the exercise."
+      }
+    ]
+  },
+  {
+    "sequence": "array_tutorial",
+    "arc": "PROPOSED. Keep an address while changing what its value asks a receiver to do. Return to Trace’s list and Transformation’s positioned body; extend a small occupancy record into a plane and a volume with explicit storage conventions. Then let an address choose a tile’s turn, give the same image another support, and let a clock read a score. Occupancy, orientation and musical events remain different kinds of data. Carry the read/write operation and declared readers into Colour and Tiling; automatic transport between museum exhibits is not assumed.",
+    "halls": [
+      {
+        "id": "Array",
+        "title": "Keep a place when its occupant leaves",
+        "storyboard": "The row loses a cube without closing its gap; the nearby grid lets the student locate another absence with two indices. Bringing Trace’s list and loop and Transformation’s positioned body, they begin with four slots, then extend the same read/write operation to a small grid. Follow the installed convention, grid_data[x][z], and keep occupancy values separate from visible-node references and spacing. A named display adapter and collection event are supplied. The student empties a chosen slot, changes the spacing and explains why the other addresses remain. They carry the occupancy record and its reader. Molnár’s retained departures offer an optional next experiment; the changing floor remains an encounter with the physical consequence of an empty place.",
+        "storyboard_short": "Use row and indexed grid. Reuse Trace list/loop and positioned bodies. Teach retained slots, then grid_data[x][z]; separate occupancy, node reference and spacing. Supply display adapter/collection event. Check: empty one slot, vary spacing, preserve addresses. Carry record + reader. Optional: stored Molnár departures. Floor writer stays an encounter. Open: reduced learner binding; Array tutorial absent.",
+        "mode": "make",
+        "brings": [
+          "Trace’s list and traversal",
+          "created bodies and position values"
+        ],
+        "learns": [
+          "read/write a retained slot",
+          "two-index addressing in the installed x/z convention",
+          "occupancy value versus visible object reference"
+        ],
+        "carries": "A small occupancy record and an explicit address-to-display reader",
+        "supplied": [
+          "named display adapter and collection event",
+          "existing floor writer and Molnár comparison"
+        ],
+        "artifact_refs": [
+          "row_3_x",
+          "grid_2d_4x4",
+          "molnar_cube_study"
+        ],
+        "review_note": "Array/tutorial.md is still absent. The reduced learner study and its display connection need choosing before a full lesson. The row uses array_data[0][i]; the grid uses grid_data[x][z]. Molnár’s current data is a different retained structure, not this occupancy table. Do not present Grid’s earlier lossy snapping as reversible.",
+        "prior_maps": [
+          "Point_Trace",
+          "Point_Line_Grid",
+          "Trans_Pre",
+          "Trans_Translation"
+        ],
+        "independent_check": "Empty a chosen slot, then change the spacing. Predict which stored value changes and explain why neither operation renumbers the neighbours.",
+        "critical_question": "The address survives an absence. What does the stored zero leave unexplained?",
+        "source_refs": [
+          "algorithms/arrays/row_3_x.gd",
+          "algorithms/arrays/grid_2d_4x4.gd",
+          "algorithms/arrays/binary_table/binary_table_display.gd",
+          "commons/artifacts/array_floor_writer/array_floor_writer.gd",
+          "commons/artifacts/molnar_cube_study/molnar_cube_study.gd"
+        ],
+        "change_reason": "Make row-to-grid addressing the main lesson. Move stored random departures from a second required concept into an optional return; retain the floor writer’s bodily consequences without teaching a floor-editing system."
+      },
+      {
+        "id": "Tutorial_3D",
+        "title": "Name the layer and keep the convention visible",
+        "storyboard": "In the flight enclosure, the student selects a cube above the ground and later reads zero where it stood. They bring the two-index occupancy record and extend the study to layers. The displayed address is [x, y, z], while the installed volume reads values[y][z][x]. Before changing a value, they show how the earlier [x][z] plane becomes one [z][x] layer: the conversion is part of the lesson. Flight, selection and collection are supplied. The student predicts an unequal-index address, changes its value and reads it back without shifting its neighbours. They carry an explicit storage-to-space mapping. Open structures and suspended fragments remain further uses of addressed places, not additional required data systems.",
+        "storyboard_short": "Use flight enclosure. Reuse occupancy record. Teach displayed [x,y,z] → values[y][z][x]; explicitly convert earlier [x][z] plane into a [z][x] layer. Supply flight/selection/collection. Check unequal indices; write/read one slot without shifts. Carry storage-to-space mapping. Open structures/suspension remain comparisons. Open: reduced study binding; an added dimension grants no flight.",
+        "mode": "make",
+        "brings": [
+          "two-index occupancy and its reader",
+          "index-to-position placement"
+        ],
+        "learns": [
+          "three-index addressing",
+          "explicit conversion between storage conventions"
+        ],
+        "carries": "An explainable mapping from displayed XYZ to stored layer/row/entry",
+        "supplied": [
+          "existing flight region",
+          "selection marker and collection event"
+        ],
+        "artifact_refs": [
+          "array_flight_lab",
+          "open_structures",
+          "reference_suspension"
+        ],
+        "review_note": "Wrapping the earlier grid directly would yield values[y][x][z], not the installed values[y][z][x]. Explain the conversion or a named reader explicitly. The installed enclosure is four by four by four; the learner study may be smaller. Current tutorial’s open-form edits do not yet teach this storage conversion.",
+        "prior_maps": [
+          "Array",
+          "Point_Coordinates",
+          "Trans_Translation"
+        ],
+        "independent_check": "Predict the place at [1, 2, 0], identify values[2][0][1], change that entry and retrieve it. Explain why spacing and flight permission are separate from the three indices.",
+        "critical_question": "Which places can the record name, and which can a body actually reach?",
+        "source_refs": [
+          "commons/artifacts/regularity/array_flight_lab.gd",
+          "algorithms/arrays/grid_2d_4x4.gd"
+        ],
+        "change_reason": "Replace the generic layer/row/column description with the actual XYZ-to-YZX relationship. Expose the change from the earlier grid instead of hiding a transpose inside supplied code."
+      },
+      {
+        "id": "Tutorial_Tiling_Floor",
+        "title": "Let an address choose a turn",
+        "storyboard": "At the paired four-by-four samples, one extra turn at each address makes a larger figure cross the joints. The student brings addressing and rotation, but now gives the value another declared meaning: zero quarter-turns is an orientation, not an empty slot. With the asymmetric tile and image renderer supplied, they write one address-to-turn function using remainder by four. They predict a selected tile’s result, then add one exceptional address. Enlarging the field repeats the same calculation without adding instructions. They carry the motif choice, turn rule and exception separately. The other fields provide comparisons; the floor’s apparent ridges do not become steps underfoot.",
+        "storyboard_short": "Use paired 4×4 samples. Reuse indices/rotation. Teach address → quarter-turn via remainder; zero means orientation, not vacancy. Supply motif/image renderer. Predict one result, add one exception, enlarge field with same rule. Carry motif + turn rule + exception. Other fields compare. Existing tiling rasterizes images; no per-tile body or stored occupancy implied. Open: learner-rule binding.",
+        "mode": "make",
+        "brings": [
+          "indexed lookup and traversal",
+          "rotation at a site"
+        ],
+        "learns": [
+          "address-to-orientation function",
+          "remainder and one exceptional address",
+          "new value meaning requires a declared reader"
+        ],
+        "carries": "A motif and an address-to-turn rule with one explicit exception",
+        "supplied": [
+          "asymmetric tile",
+          "image renderer and existing rule-comparison controls"
+        ],
+        "artifact_refs": [
+          "tiling_principles"
+        ],
+        "review_note": "The installed floor makes raster images from a rule; it is not a nested table of colliding triangle tiles. Do not require the learner to rebuild the renderer. The current tutorial redirects to final.md, so this remains a teaching selection rather than an implemented companion.",
+        "prior_maps": [
+          "Array",
+          "Tutorial_3D",
+          "Trans_Rotation"
+        ],
+        "independent_check": "Predict a turn at an address you have not inspected. Keep one exception, then enlarge the field and explain why the local rule needs no extra clauses.",
+        "critical_question": "When a larger figure appears across the joints, where does the work of the small rule end?",
+        "source_refs": [
+          "commons/artifacts/regularity/tiling_principles.gd",
+          "commons/artifacts/regularity/tiling_pattern.gd",
+          "commons/artifacts/regularity/tiling_rule_study.gd"
+        ],
+        "change_reason": "State the change from occupancy to orientation. Use the existing four-by-four study for a prediction, one exception and a larger field; make its image renderer an explicit supplied component."
+      },
+      {
+        "id": "Tutorial_Tiling_Walls",
+        "title": "Keep the pattern, change what carries it",
+        "storyboard": "The same pattern now stands in front of the student. They bring the motif and turn rule from the floor and reuse its generated image on a supplied upright receiver. The eye chart and a walk toward and away from it let them compare what remains legible as its apparent size changes. No new syntax is needed. At the exception wall, they predict the difference between turning a mark inside the image and turning the sheet with its collision. One alters the picture; the other can open a passage. The hinge and finite landing stay supplied. They carry a comparison separating source, appearance and access, including the brief chance to look back at the outside of the museum’s enclosure.",
+        "storyboard_short": "Use wall fields, eye chart and turning wall. Reuse floor motif/rule/image on supplied upright receiver. Compare distance and apparent scale; no new syntax. Predict image-turn versus carrier/collision-turn. Supply hinge/landing. Carry source–appearance–access distinction. Preserve the outside pause. Open: learner image assignment; no new tiling or wall-construction lesson.",
+        "mode": "reflect",
+        "brings": [
+          "motif and turn rule",
+          "generated image and a declared receiver",
+          "surface versus collision"
+        ],
+        "learns": [
+          "same image with a different receiver",
+          "image change versus physical passage"
+        ],
+        "carries": "A reusable image and a comparison of source, appearance and access",
+        "supplied": [
+          "upright image receiver and eye chart",
+          "hinged wall, collision handling and finite landing"
+        ],
+        "artifact_refs": [
+          "tiling_principles",
+          "wall_exception"
+        ],
+        "review_note": "Reuse of the learner’s own generated image needs an explicit assignment; the installed floor and walls already share a generator, not an automatically transported learner record. Preserve the mature main text and the wall’s collision/safety behavior.",
+        "prior_maps": [
+          "Tutorial_Tiling_Floor",
+          "Point_Triangle_Context",
+          "Trans_Pit"
+        ],
+        "independent_check": "Before using either control, predict which turn could open a route and explain why changing the image alone cannot do so. Keep the same image while comparing floor and wall.",
+        "critical_question": "What was the thin enclosure doing for our forward walk, before we saw its other side?",
+        "source_refs": [
+          "commons/artifacts/regularity/tiling_principles.gd",
+          "commons/artifacts/regularity/wall_exception.gd"
+        ],
+        "change_reason": "Give the floor’s image a concrete return on another receiver. Preserve the eye chart and exterior landing as a reflective pause instead of adding another construction exercise."
+      },
+      {
+        "id": "Tutorial_Disco",
+        "title": "Let a clock read the choices you kept",
+        "storyboard": "The monochrome floor changes while a separate sequencer offers empty cells to fill. The student brings indexed lookup, remainder and elapsed time. They make a short score with explicitly named track and step indices, following the instrument’s [track][step] convention; false means no new sound trigger, not a missing floor tile. A supplied sound receiver handles the note. The student advances a playhead through the kept score, moves an event without changing tempo, then changes tempo without rewriting the entries. They stop the score and watch the floor continue. They carry a reusable timed reader. The sixteen-step score’s connection to twelve floor columns is a comparison of addresses, not a lesson in recording footsteps.",
+        "storyboard_short": "Use separate sequencer and changing floor. Reuse lookup/remainder/time. Teach score[track][step] plus timed playhead; false = no new trigger. Supply sound receiver/display. Move event at fixed tempo; change tempo with score fixed; stop score and predict floor. Carry timed reader. 16 steps/12 columns can share a flash address. No footstep recording. Open: old tutorial contradicts current encounter.",
+        "mode": "make",
+        "brings": [
+          "indexed values and declared readers",
+          "elapsed time and cyclic counts"
+        ],
+        "learns": [
+          "stored events read by a separate clock",
+          "track/step addressing",
+          "inactive event versus absent geometry"
+        ],
+        "carries": "A kept score and an independently controlled timed reader",
+        "supplied": [
+          "sound trigger interface",
+          "existing sequencer display and independently animated floor"
+        ],
+        "artifact_refs": [
+          "disco_controls",
+          "standalone_disco",
+          "step_sequencer"
+        ],
+        "review_note": "The current instrument stores four tracks by sixteen boolean steps; the floor has twelve columns. The learner can start with one short track. The companion still describes a 17×17 footstep-recording floor, undefined supplied pieces and deferred Chamber_Arrays. This summary pass does not repair that full lesson: rewrite it from the present score before presenting it as reliable instructions.",
+        "prior_maps": [
+          "Point_Zero",
+          "Tutorial_Tiling_Floor",
+          "Trans_Pre"
+        ],
+        "independent_check": "Move an event while tempo stays fixed, then alter tempo without changing any entry. Stop the score and predict which floor behavior continues. As a further comparison, explain why step 0 and step 12 can flash the same floor column.",
+        "critical_question": "What changes when you move with a rhythm but the system does not record your steps?",
+        "source_refs": [
+          "commons/audio/sequencer/step_sequencer.gd",
+          "commons/audio/sequencer/sequencer_ui.gd",
+          "commons/context/discofloor/StandaloneDiscoFloor.gd",
+          "commons/artifacts/regularity/disco_controls.gd",
+          "commons/context/discofloor/DiscoSequencerBridge.gd"
+        ],
+        "change_reason": "Make the score’s value meaning and reader explicit, keep the independent clocks, and give the student an observable variation. Flag the old 17×17 footstep-recording tutorial as unresolved rather than silently treating its code as current."
+      }
+    ],
+    "status": "Revised teaching proposal; full companion repairs and learner adapters remain pending",
+    "tutorial_guidance": "doc/book/course/storyboards/ARRAYS.md"
+  },
+  {
+    "sequence": "color",
+    "arc": "PROPOSED. Colour returns to the forms, transforms and addressed assignments already available. Keep geometry while changing its palette; keep a surface while moving its light. Nails introduces one bounded position-to-colour function and an explained receiver. Pillar changes that function’s coordinate convention; Grid keeps a returned value at an address. Paint returns to an existing timed path on an evolving image. Walls carries palette and arrangement onward into Tiling. Rainbow remains a generous pause with optional palette-making. Equal values need not look alike; these proposed learner connections do not imply automatic transport between exhibits.",
+    "halls": [
+      {
+        "id": "Color_Context_Placed",
+        "title": "Let colour regroup an assembly",
+        "storyboard": "The first columns keep the same five forms while their colour assignments change. Bringing primitives, transforms and array lookup, the student selects colours for a small supplied part list while keeping its geometry fixed. Begin with list position; supplied numeric shape categories offer a second grouping once that assignment is clear. Each part has an explained material reference, so choosing a palette entry and assigning it are visible operations. The student regroups two separated parts by colour without moving either. They carry a palette and a selection rule independent of placement. The larger stacks, historical associations and cone landscape remain available for looking and composition without becoming additional required builds.",
+        "storyboard_short": "Use fixed-geometry columns. Reuse primitives/transforms/lookup. Teach palette selection separately from material assignment and placement. Supply part/material references; numeric categories optional after index selection. Check: regroup separated parts without moving them. Carry palette + selection rule. Rich stacks remain encounters. Open: reduced host binding; no dictionary lesson assumed.",
+        "mode": "make",
+        "brings": [
+          "primitive forms and transforms",
+          "array lookup and cyclic selection"
+        ],
+        "learns": [
+          "palette selection separate from placement",
+          "a colour value assigned to a named material"
+        ],
+        "carries": "A palette and a selection rule, with a declared material receiver.",
+        "supplied": [
+          "existing part geometry with direct material references",
+          "optional numeric category list"
+        ],
+        "artifact_refs": [
+          "chroma_stack",
+          "color_dna_stack",
+          "reference_landscape"
+        ],
+        "review_note": "Use a small explicit part/category list before requiring dictionaries. The museum’s richer stack records remain supplied; choose the reduced editing entry before writing a full lesson.",
+        "prior_maps": [
+          "Array",
+          "Tutorial_Tiling_Floor",
+          "Trans_Translation"
+        ],
+        "independent_check": "Give two separated parts the same colour without changing their positions; explain which selection changed.",
+        "source_refs": [
+          "commons/artifacts/chroma_stack/chroma_stack.gd"
+        ],
+        "change_reason": "Keep the opening focused on how colour regroups familiar parts."
+      },
+      {
+        "id": "Color_Flashlight",
+        "title": "Change what reaches a surface",
+        "storyboard": "The student moves a coloured lamp across the pale board and faceted sphere, then follows the source edit already offered by this hall. They bring material colour and transforms and keep a direct reference to one existing supplied light. Change its colour while leaving the receiving surface alone; then keep the colour and change the lamp’s direction. Predict which condition changed before comparing the result. The fixed lamp in the side room offers a later return to time-varying colour. Grabbing, room geometry and the renderer remain supplied. The student carries a controllable light and the distinction between a value assigned to a material and light reaching it; no new room or lamp assembly is required.",
+        "storyboard_short": "Use existing lamp/board/faceted sphere. Reuse colour assignment and transforms. Follow current bounded light-colour edit; retain named light reference. Vary colour with receiver fixed, then aim with colour fixed. Supply grabbing/room/renderer. Carry illumination versus albedo distinction. Timed lamp optional. No new room; no spectral-optics claim.",
+        "mode": "make",
+        "brings": [
+          "material colour",
+          "position and orientation"
+        ],
+        "learns": [
+          "light colour and aim as different inputs to appearance"
+        ],
+        "carries": "An explained existing light reference and a controlled comparison of receiving conditions.",
+        "supplied": [
+          "existing light, room and grabbing",
+          "renderer and timed side-room comparison"
+        ],
+        "artifact_refs": [
+          "flashlight_demo",
+          "colour_light_rooms",
+          "sphere_in_pink"
+        ],
+        "review_note": "The existing tutorial already provides a small light-colour edit. Retain that entry; do not replace it with a new host or require lighting equations.",
+        "prior_maps": [
+          "Color_Context_Placed",
+          "Trans_Rotation"
+        ],
+        "independent_check": "Choose another light colour, predict its effect on an unchanged surface, then vary aim alone.",
+        "source_refs": [
+          "algorithms/postprocessing/flashlight_demo/flashlight_color.gd",
+          "commons/artifacts/colour_light_rooms/colour_light_rooms.gd"
+        ],
+        "change_reason": "The existing encounter already provides the necessary experiment."
+      },
+      {
+        "id": "Color_Nails",
+        "title": "Use a position to choose a colour",
+        "storyboard": "The held point recolours nails on the giant and petite hands and, in the standard VR setup, the choosing hand. Reuse a position in a named local frame and bounded mapping. The student writes one function taking that local position and positive box dimensions, clamping each component to the box and dividing by its dimension: X becomes red, Y green, Z blue. It returns a Color; one named preview material receives it through albedo_color. The grab connection, hand meshes and application signals are supplied. Predict the colour at a different point and revisit it, then keep nail colour fixed while changing rendered skin. Carry the function and a recorded colour. Preserve the critical distinction between these equally easy assignments and their unequal lived meanings.",
+        "storyboard_short": "Use RGB point and salon hands. Reuse local position/bounded mapping. Teach positive box sizes; clamp/divide X→R, Y→G, Z→B; return Color → named preview albedo. Supply grabbing/hands/signals. Predict another point, revisit it; keep nails fixed while changing skin. Carry function + recorded colour. Preserve Lorde/embodied difference. Open: reduced preview binding; no automatic Rainbow transfer.",
+        "mode": "make",
+        "brings": [
+          "held position in a declared local frame",
+          "bounded mapping and function returns"
+        ],
+        "learns": [
+          "local box coordinates normalised to RGB",
+          "returned colour value versus receiving material"
+        ],
+        "carries": "A bounded RGB function and a recorded result that can be reused deliberately.",
+        "supplied": [
+          "grab connection and positive box dimensions",
+          "preview material, hand meshes and application signal route"
+        ],
+        "artifact_refs": [
+          "nail_color_controller",
+          "hand_color_controller"
+        ],
+        "review_note": "The current companion offers observation/source tracing, not this complete authored function. Bind the reduced function to one named preview before expanding the lesson. GameManager already retains hand/nail choices, but that does not feed Rainbow or Grid automatically. Preserve the main text’s Lorde passage.",
+        "prior_maps": [
+          "Point_Coordinates",
+          "Trans_Scale",
+          "Color_Flashlight"
+        ],
+        "independent_check": "Predict the RGB result at a new local point, revisit it, then apply that value to the declared preview without changing the hand geometry.",
+        "source_refs": [
+          "commons/interfaces/value_mapper_3d.gd",
+          "commons/interfaces/nail_color_controller.gd"
+        ],
+        "change_reason": "Give the student a reusable operation without making the salon a wiring lesson."
+      },
+      {
+        "id": "Color_Rainbow",
+        "title": "Divide one span into chosen colours",
+        "storyboard": "RE-DIVIDE changes the bands while the opening and celebration remain available. Bring the palette list and a colour recorded at Nails; there is no automatic transfer. An optional making step substitutes that value in a hand-picked palette, then compares different nonempty palette lengths with the same total band width. The curved-strip builder is supplied with radius, width and colour inputs and a returned strip reference; the learner can inspect the fixed-width division without rebuilding the arch. Predict which boundaries move while the opening stays. The forty-eight-band version introduces the difference between many samples and continuity. Carry palette choice and partitioning onward. Staying, looking and celebrating can complete this hall without another coding assignment.",
+        "storyboard_short": "Use RE-DIVIDE; celebration stays unconditional. Reuse palette; manually record/reuse Nails colour. Optional: replace palette entry, compare nonempty lengths at fixed total width. Supply curved-strip builder and route. Predict seams versus opening. Carry palette/partition distinction. Many bands remain discrete; HSV sampler optional before Pillar. No automatic transfer or optics claim.",
+        "mode": "deepen",
+        "brings": [
+          "palette list",
+          "a deliberately recorded colour"
+        ],
+        "learns": [
+          "optional fixed-span partition by nonempty palette length"
+        ],
+        "carries": "A chosen palette and an understanding of what its partition preserves.",
+        "supplied": [
+          "existing arch, celebration and accessible route",
+          "curved-strip builder; optional supplied HSV palette"
+        ],
+        "artifact_refs": [
+          "rainbow"
+        ],
+        "review_note": "Keep making optional. The installed options are six, seven, forty-eight and two bands. A hand-picked palette avoids making HSV a prerequisite here. Celebration does not require completing a task.",
+        "prior_maps": [
+          "Color_Nails",
+          "Color_Context_Placed"
+        ],
+        "independent_check": "If taking the making route, choose another nonempty palette and predict which band boundaries move while the total span stays fixed.",
+        "source_refs": [
+          "algorithms/primitives/rainbow/rainbow.gd"
+        ],
+        "change_reason": "Preserve the room’s generosity and avoid treating every artwork as homework."
+      },
+      {
+        "id": "Color_Pillar",
+        "title": "Ask a field for a colour",
+        "storyboard": "A moving card samples the field between the pillars; leaving it in place keeps its latest sample. Bring Nails’ position-to-colour function and change the rule explicitly: X now chooses hue, Z saturation and represented Y value, converted with Color.from_hsv. The supplied height adapter maps the card’s local 0.65–1.85 metre range into the field’s 0.46–4.60 metre height; it is not the same position passed unchanged. Predict a sample between columns, then vary height while keeping the other coordinates. At value zero, different addresses yield the same black. Carry the field function and one recorded result toward Grid. The matching ceiling and named swatches remain encounters with appearance, classification and the gaps between visible samples.",
+        "storyboard_short": "Use moving sampler and constant swatch. Reuse Nails function pattern, change convention: field X→H, Z→S, Y→V; convert HSV→Color. Supply explicit hand-height adapter (.65–1.85 → .46–4.60 m), card/readouts. Predict between columns; vary V alone. Movement resamples; stationary card keeps latest. Carry function + recorded result. Black has many source addresses; HSV is not perceptually uniform. No automatic Grid handoff.",
+        "mode": "make",
+        "brings": [
+          "position-to-colour function",
+          "declared reference frame and bounded ranges"
+        ],
+        "learns": [
+          "HSV mapping and conversion",
+          "input adaptation versus field evaluation",
+          "rule versus displayed samples"
+        ],
+        "carries": "A stated colour-field function and one recorded sample for an addressed write.",
+        "supplied": [
+          "sampler, readouts and material receiver",
+          "explicit hand-to-field height conversion"
+        ],
+        "artifact_refs": [
+          "pillarcolorcollection",
+          "color_sets_overview"
+        ],
+        "review_note": "The sampler checks position each frame, not whether it is held. A released stationary card keeps the last sample because its position stops changing. Use actual ranges from hsv_at; value is not perceived lightness. A recorded result or copied function can connect Grid, but the installed exhibits have no such transfer.",
+        "prior_maps": [
+          "Color_Nails",
+          "Color_Rainbow"
+        ],
+        "independent_check": "Predict a sample between columns; raise represented height alone, then explain why black cannot reveal its unique source address.",
+        "source_refs": [
+          "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+          "algorithms/color/pillarcolorcollection/field_sampler.gd"
+        ],
+        "change_reason": "Make the change of representation teachable without claiming one formula serves both rooms unchanged."
+      },
+      {
+        "id": "Color_Grid_Pallet",
+        "title": "Let one address keep a colour",
+        "storyboard": "The outline leaves an edited square and returns to find its colour. Bring array addressing and a recorded result from Nails or Pillar. In the proposed reduced study, write that colour to one chosen address through an explained address-to-instance receiver; selecting another address must not write to either. The installed console instead cycles four inks, so using the learner’s own value is a proposed binding. Revisit the address, then apply the whole-grid rule and predict the replacement. Carry stored assignment separately from live field evaluation. Preserving one exception is an optional later policy, not current behaviour. The wider reach of RULE, the twenty-five selectable sites and the unbroken floor retain their critical force.",
+        "storyboard_short": "Use edited floor square. Reuse address/lookup and recorded Nails/Pillar Color. Propose write through named address→instance receiver; selection only reads. Check leave/return, then predict RULE overwrite. Current COLOUR cycles four inks; custom input needs binding. Carry stored assignment versus live evaluation. Optional protected exception; no history/current protection. Keep 25-site control versus wider rule and unchanged support.",
+        "mode": "make",
+        "brings": [
+          "addressed read/write",
+          "colour returned by an earlier function"
+        ],
+        "learns": [
+          "selection versus assignment",
+          "stored sample versus live evaluation",
+          "explicit overwrite policy"
+        ],
+        "carries": "A colour value stored at an address and a known rule for replacing it.",
+        "supplied": [
+          "selection interface",
+          "explained address-to-MultiMesh-instance receiver"
+        ],
+        "artifact_refs": [
+          "gridcolorizer"
+        ],
+        "review_note": "Vector2i.y denotes room Z here. The actual colour is a MultiMesh instance value, not one separate material per cell. Current COLOUR cycles INKS; custom function input is proposed. RULE overwrites mapped floor colours; protected exceptions/history are not implemented.",
+        "prior_maps": [
+          "Array",
+          "Tutorial_Tiling_Floor",
+          "Color_Nails",
+          "Color_Pillar"
+        ],
+        "independent_check": "Write a recorded colour to one address, leave and return without modifying it, then predict what RULE will replace. The custom-colour binding remains to be supplied.",
+        "source_refs": [
+          "algorithms/color/gridcolorizer/address_lesson.gd",
+          "algorithms/color/gridcolorizer/gridcolorizer.gd"
+        ],
+        "change_reason": "Make the strongest sequence handoff concrete while distinguishing the proposed input from the installed four inks."
+      },
+      {
+        "id": "Color_Paint",
+        "title": "Give a mark somewhere to remain",
+        "storyboard": "The automatic can is painting before the student takes a manual one. Bring elapsed time, sine and the distinction between an address and the value kept there. Read the existing two-coordinate automatic path, then change one rate or amplitude while keeping the other coordinate unchanged. Predict whether the path becomes narrower or turns at another pace. The supplied host converts surface coordinates into a hit and sends deposits to the same draw_spray operation used by the manual cans. Compare a quick pass with staying in one place. Carry the path rule and the distinction between replacing a grid entry and contributing to an image that spreads and fades. The shader and spray apparatus remain supplied; no second brush is required.",
+        "storyboard_short": "Use existing automatic path/manual cans. Reuse time/sine/address distinctions. Edit one UV rate or amplitude; predict path width or pace with other coordinate fixed. Supply UV→hit mapping and shared draw_spray surface. Compare quick versus repeated deposits. Carry path rule and evolving-image distinction, not recoverable gesture history. No second brush; defer spray/feedback shader. Albers remains an encounter.",
+        "mode": "make",
+        "brings": [
+          "elapsed time and sine",
+          "coordinate mapping and retained traces"
+        ],
+        "learns": [
+          "bounded two-coordinate surface path",
+          "deposit versus replacement",
+          "evolving image versus stored gesture list"
+        ],
+        "carries": "An editable path and an explicit account of what the canvas keeps and changes.",
+        "supplied": [
+          "existing automatic caller and surface-coordinate conversion",
+          "shared spray operation, ray hits and evolving-image renderer"
+        ],
+        "artifact_refs": [
+          "ball_painting_demo",
+          "albers_wall_gallery"
+        ],
+        "review_note": "Both automatic and manual callers already reach draw_spray. Keep that shared operation rather than proposing another brush system. Its retained image spreads and fades; it is not permanent storage or a lossless list of strokes. UVs are introduced as two bounded surface coordinates; shader implementation comes later.",
+        "prior_maps": [
+          "Trans_Pre",
+          "Point_Trace",
+          "Color_Grid_Pallet"
+        ],
+        "independent_check": "Change one amplitude without changing either rate; predict the path’s extent, then compare a faster pass with repeated deposits at a place.",
+        "source_refs": [
+          "commons/context/drawingboard/ball_painting_automation.gd",
+          "commons/context/drawingboard/paper_draw_surface.gd",
+          "commons/context/drawingboard/spray_can.gd"
+        ],
+        "change_reason": "Use the implemented encounter to teach one meaningful change, with less machinery."
+      },
+      {
+        "id": "Color_Walls",
+        "title": "Compose a view through colour",
+        "storyboard": "Walk the same route between panes in FILTER and OPAQUE modes: a chair disappears while the gaps stay. Bring colour assignment, surface geometry and transformed arrangements. Use the companion’s existing pane or palette edit to change one condition, keeping the other fixed. Alpha controls the contribution of the view behind a supplied transparent surface; the transparency mode, backing light and collision remain explicit support. Predict what can change in the view without changing passage, then walk around it. The RGB/HSV models and interpolation bench offer optional returns to coordinate choices. Carry palette separately from arrangement into Pattern_Disco. The office and assembly’s questions of privacy and who may rearrange a room need no further coding exercise.",
+        "storyboard_short": "Use switchable panes and existing companion edit. Reuse materials/transforms/palette. Vary one pane angle or palette while other condition stays. Explain alpha; supply transparency/light/collision. Predict view versus passage. Carry palette separate from arrangement into Pattern_Disco. RGB/HSV models/interpolation optional; preserve privacy/authority questions. No new composition required. Open: companion spacing prose/code mismatch.",
+        "mode": "deepen",
+        "brings": [
+          "surface materials",
+          "spatial arrangement and colour assignment"
+        ],
+        "learns": [
+          "alpha as a contribution to appearance",
+          "appearance versus physical passage"
+        ],
+        "carries": "A palette and arrangement that can be varied independently in the returning disco floor.",
+        "supplied": [
+          "transparency mode, light and collision",
+          "existing pane construction and optional gradient models"
+        ],
+        "artifact_refs": [
+          "color_constellation_office",
+          "gradient_interpolator",
+          "colour_assembly",
+          "colour_wall_studies"
+        ],
+        "review_note": "Preserve existing bounded edits and keep interpolation optional. Companion prose says try 0.18 while its spacing example uses 0.21; reconcile at the full-lesson pass. This summary revision does not alter that companion or the mature main text.",
+        "prior_maps": [
+          "Color_Flashlight",
+          "Color_Pillar",
+          "Color_Paint",
+          "Tutorial_Tiling_Walls"
+        ],
+        "independent_check": "Predict what changing one pane’s angle or palette does to the view, and which collision boundaries remain.",
+        "source_refs": [
+          "algorithms/color/color_mixing/color_constellation_office.gd",
+          "commons/artifacts/colour_wall_studies/study.gd"
+        ],
+        "change_reason": "Preserve an accomplished ending without adding another required construction."
+      }
+    ],
+    "status": "Revised teaching proposals; review each map before full lessons",
+    "tutorial_guidance": "doc/book/course/storyboards/COLOUR.md"
+  },
+  {
+    "sequence": "tiling",
+    "arc": "PROPOSED. Return to Arrays’ addressed values and Colour’s palette/receiver distinction. Choose a small source, then separate editing it from changing how another address reads it. Give repetition a physical scale, test a symmetry with a revealing mark, and let height enter the lookup. A reflective comparison keeps source equality separate from viewed appearance. Close with a tiny UV repeat-and-offset shader using the existing studio host. Keep source, palette, sampling rule, receiver and saved version distinct. Reusing a known motif is not automatic cross-hall transfer; full lessons and learner bindings remain proposed.",
+    "halls": [
+      {
+        "id": "Pattern_Disco",
+        "title": "Keep the pattern, change its palette",
+        "storyboard": "The familiar floor returns after Colour with two replaceable colours. Bring the earlier address rule and palette lookup; use the existing value_at result rather than making another floor or clock. With the floor held and sequencer stopped, change the pair that displays zero and one, then keep the pair while advancing one phase. Predict what stays related in each comparison. The floor receiver, controls and independent score remain supplied. The student carries the separation between a computed value and its displayed colour. The optional triangle comparison uses a different shader drawing, not one whole-cell zero or one; it can retain the palette question without becoming the opening shader lesson.",
+        "storyboard_short": "Reuse existing value_at and Colour palette lookup. Hold floor/stop score; change colour pair, then phase alone. Predict unchanged relationships. Supply floor/controls/separate score clock. Carry value versus appearance. Triangle drawing optional and distinct from whole-cell values. No new floor/clock; reduced palette-edit entry still to be chosen.",
+        "mode": "deepen",
+        "brings": [
+          "timed array rule",
+          "palette lookup"
+        ],
+        "learns": [
+          "a computed pattern value and its display palette can change independently"
+        ],
+        "carries": "A known address rule with an independently chosen two-colour palette.",
+        "supplied": [
+          "floor receiver",
+          "existing independent sequencer"
+        ],
+        "artifact_refs": [
+          "disco_controls",
+          "standalone_disco",
+          "step_sequencer"
+        ],
+        "review_note": "Revisit the current two-colour lookup instead of requiring a new floor or timer. The production console chooses four prepared pairs; a learner-authored pair needs a named source-edit entry. Super Triangle is separately drawn by a shader.",
+        "independent_check": "Keep phase fixed and predict which cells change when one palette entry changes; then advance phase with that palette unchanged.",
+        "prior_maps": [
+          "Tutorial_Disco",
+          "Color_Context_Placed",
+          "Color_Walls"
+        ],
+        "source_refs": [
+          "commons/artifacts/regularity/disco_controls.gd",
+          "commons/context/discofloor/StandaloneDiscoFloor.gd"
+        ],
+        "change_reason": "Let Colour return through an operation the student already knows."
+      },
+      {
+        "id": "Pattern_Foundry",
+        "title": "Author the source others repeat",
+        "storyboard": "Begin with one off-centre pair in the small four-by-four tile and find its repeated appearances. Bring addressed writes and palette selection; let a source entry hold a palette index and let a wrapping lookup select that entry before its colour is assigned. The student predicts another copy from its address, then changes one source cell. Input controls and the image preview are supplied. Carry a small motif and its reader. On a return visit, copy the nested source explicitly and compare it with a live reference. The loom and architectural receivers remain further encounters: the loom has its own five-by-five card, HOLD retains a receiver image, and each SAVE acts on a stated source. These are not one shared learner record.",
+        "storyboard_short": "Use one 4×4 tile. Reuse addressed writes/palette lookup. Teach source[row][column] palette indices, wrap address then choose colour. Predict a repeated pair after one edit. Supply input/image preview. Carry motif + reader. Optional return: independent nested copy versus live reference. Loom has separate 5×5 source; HOLD image differs from SAVE. Later teaching stations use fixed seeds.",
+        "mode": "make",
+        "brings": [
+          "writable colour arrays",
+          "remainder lookup"
+        ],
+        "learns": [
+          "palette-index source with wrapping lookup",
+          "optional independent copy versus live reference"
+        ],
+        "carries": "A small indexed motif and its reader; an optional separately retained source copy.",
+        "supplied": [
+          "existing tile editor input and image preview",
+          "loom and architectural receiver controls for comparison"
+        ],
+        "artifact_refs": [
+          "pattern_tile_4x4",
+          "pattern_tile_mirror",
+          "pattern_machine_a",
+          "pattern_architecture"
+        ],
+        "review_note": "One core source-and-reader study first; copy/history on a return visit. Use explicit row/column storage in the reduced example and show how it connects to the selected station. The small tile, five-by-five loom and fabric studio are distinct sources. Do not present a copied source array as the implementation of a held texture.",
+        "independent_check": "Choose an unseen preview address, predict its source entry and colour, then explain why editing that entry changes more than one appearance.",
+        "prior_maps": [
+          "Array",
+          "Color_Grid_Pallet",
+          "Pattern_Disco"
+        ],
+        "source_refs": [
+          "commons/primitives/arrays/pattern_tile_puzzle.gd",
+          "commons/artifacts/pattern_machine_a/recipe_study.gd"
+        ],
+        "change_reason": "Reduce first-visit load without losing the richer questions of sharing and keeping."
+      },
+      {
+        "id": "Tutorial_Pattern",
+        "title": "Transform the lookup or the source",
+        "storyboard": "Follow the asymmetric bend through PM, then watch the source cells during FLIP X. Bring the motif and wrapping reader. First change only the read address: on alternate tile columns, reverse the source column while keeping the row. Then make a separate mirrored source by reversing entries inside each row; do not reverse the order of the rows. Displays, editor input and shader rendering are supplied. The student predicts where the coloured neighbour will appear and checks that only the second operation changes the stored source. A symmetric mark can conceal either reversal; altering one cell reveals it again. Carry two named operations, source editing and transformed reading, before considering any wider symmetry classification.",
+        "storyboard_short": "Use PM versus FLIP X. Reuse motif/wrapping. Teach alternate-column reflected read without source mutation; separately reverse entries within each source row, not row order. Predict asymmetric neighbour; inspect unchanged versus changed source. Supply editor/displays/shader. Carry read transform versus data transform. Symmetric motif may hide the operation; shader authorship waits.",
+        "mode": "make",
+        "brings": [
+          "motif storage and wrapping lookup",
+          "conditions"
+        ],
+        "learns": [
+          "horizontal reflected lookup versus horizontal source reversal"
+        ],
+        "carries": "Separate read-address and source-edit functions with a revealing test motif.",
+        "supplied": [
+          "comparison displays",
+          "source editor input"
+        ],
+        "artifact_refs": [
+          "pattern_maker_station"
+        ],
+        "review_note": "Keep the first reduced address operation in GDScript. “Reverse source rows” must mean reversing entries within every row, not swapping top and bottom rows. P1/PM displays are supplied; matching appearance alone cannot tell whether the source was mutated.",
+        "independent_check": "Predict the blue neighbour’s position after each operation, then use a symmetric source to hide the reversal and one changed cell to reveal it.",
+        "prior_maps": [
+          "Pattern_Foundry",
+          "Trans_Rotation"
+        ],
+        "source_refs": [
+          "commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd",
+          "commons/maps/Tutorial_Pattern/tutorial.md"
+        ],
+        "change_reason": "Keep a visually similar result from concealing two different operations."
+      },
+      {
+        "id": "Array_Patterns",
+        "title": "Give an address physical dimensions",
+        "storyboard": "Enter the tunnel with its stated fixed four-by-four source; earlier edits have not travelled here. Bring wrapped lookup and named frames. Follow one marked floor address to its source, then derive the address from a position using a declared origin, surface axes and cell width in metres. On the right wall, columns run along the passage and rows descend; they are not the floor’s directions. The tunnel, collision, shader and face selector remain supplied. Predict that changing a cell from forty to sixty centimetres changes a four-cell motif from 1.6 to 2.4 metres, without enlarging the passage. Inspect the corner where counts restart. Carry the conversion and its units; importing a learner motif remains optional future work.",
+        "storyboard_short": "Use fixed-source tunnel; no preceding-edit transfer. Reuse wrapped read/reference frames. Teach position→surface row/column with named origin/axes and metre cell width. Predict .4→.6 m cells means 1.6→2.4 m motif. Wall directions differ; corners restart. Supply tunnel/collision/shader/selector. Carry explicit surface conversion. Distinguish cell width from whole-repeat width; optional import remains unbuilt.",
+        "mode": "deepen",
+        "brings": [
+          "motif sampling",
+          "reference frames"
+        ],
+        "learns": [
+          "physical position to surface address",
+          "cell width versus whole motif width"
+        ],
+        "carries": "A position-to-address conversion with explicit origin, axes and metre units.",
+        "supplied": [
+          "tunnel and collision",
+          "face selector and marker"
+        ],
+        "artifact_refs": [
+          "pattern_tunnel_machine",
+          "pattern_tile_brick"
+        ],
+        "review_note": "The tunnel intentionally uses a fixed comparison source. Teach it as such rather than requiring an import to justify the hall. Other stations quote whole-repeat width; this control quotes one source cell. Check the selected face’s actual origin and axes before expanding code.",
+        "independent_check": "Predict the motif width for another cell width, then explain how one right-wall address maps to the source without using the floor axes.",
+        "prior_maps": [
+          "Point_Coordinates",
+          "Tutorial_Pattern",
+          "Tutorial_Tiling_Walls"
+        ],
+        "source_refs": [
+          "commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd",
+          "commons/artifacts/pattern_tunnel/pattern_tunnel.gdshader"
+        ],
+        "change_reason": "Give the same number an unambiguous unit and meaning."
+      },
+      {
+        "id": "Symmetry_Seventeen",
+        "title": "Make a reversal visible",
+        "storyboard": "Use the live and held panels to follow the same asymmetric mark through P1, PM and PG. Bring the reflected reader; on reflected alternate columns, add half the four-row source height and wrap to produce the installed glide comparison. The panels, source editor, image hold and wallpaper cage remain supplied. Predict two neighbouring source blocks before changing a mark. A generic reflected or glided arrangement needs two source blocks across its horizontal translation period, while a specially symmetric source can hide the operation or add further symmetries. Carry a motif that reveals a rule and a tested repeating unit. The seventeen-group classification and makers’ histories remain questions beyond what three buttons certify.",
+        "storyboard_short": "Use P1/PM/PG live-held comparison. Reuse reflected reader; on alternate reflected blocks shift source row by two and wrap four. Predict adjacent blocks and generic two-block X period. Supply editor/panels/image hold/cage. Alter asymmetric mark to hide/reveal operation. Carry diagnostic motif + tested period. Keep classification/cultural history distinct; no proof of seventeen renderers.",
+        "mode": "deepen",
+        "brings": [
+          "reflection lookup",
+          "wrapping indices"
+        ],
+        "learns": [
+          "glide lookup and its translation period",
+          "source symmetry can conceal a construction rule"
+        ],
+        "carries": "A diagnostic motif and a repeating unit checked against more than one source block.",
+        "supplied": [
+          "live and held displays",
+          "wallpaper cage"
+        ],
+        "artifact_refs": [
+          "vr_tile_editor",
+          "wallpaper_cage"
+        ],
+        "review_note": "For the current even-height four-row source the glide shifts by two rows; do not silently generalise that discrete recipe to odd heights. A source block is not necessarily the whole field’s translation unit. The selected renderer name is not a proof of the resulting pattern’s complete symmetry group.",
+        "independent_check": "Predict the mark in two adjacent blocks, locate a horizontal translation that repeats the result, then see what changes when the source becomes symmetric.",
+        "prior_maps": [
+          "Tutorial_Pattern",
+          "Array_Patterns"
+        ],
+        "source_refs": [
+          "commons/primitives/arrays/wallpaper_groups.gd",
+          "commons/primitives/arrays/symmetry_compare_lesson.gd"
+        ],
+        "change_reason": "Make the limit of the demonstrated rule as clear as its visible effect."
+      },
+      {
+        "id": "Ribbon_Patterns_01",
+        "title": "Let height enter the pattern",
+        "storyboard": "The marked source and selected volume cube let the student follow one lookup through height. Bring the earlier volume convention, values[y][z][x], and explicitly name the source plane SOURCE[z][x]. Repeat the source through four layers, then let the layer index shift its source column: SOURCE[z][(x+y)%4]. Predict a selected address before using its marker. Cube creation, selection and slicing are supplied. Turning SLICE on hides forty-eight of the sixty-four stored values; the comparison changes visibility without deleting entries. Zero now selects a pale colour, not vacancy. Carry the layer-dependent reader and these declared meanings. The familiar starting motif returns as installed data, not a claim that a previous edit was imported.",
+        "storyboard_short": "Reuse volume[y][z][x]; source plane is SOURCE[z][x]. Repeat then shift lookup SOURCE[z][(x+y)%4]. Predict unequal indices before marker check. Supply cubes/selection/slicing. SLICE:16 visible,64 stored; zero=pale colour, not absence. Carry layer reader and value meaning. Fixed familiar motif, no previous-edit import. Missing full companion remains to write.",
+        "mode": "make",
+        "brings": [
+          "three-index arrays",
+          "motif sampler"
+        ],
+        "learns": [
+          "layer-dependent source lookup in an explicit storage convention",
+          "visibility distinct from stored values"
+        ],
+        "carries": "A volume reader with declared palette-index values and nondestructive slice views.",
+        "supplied": [
+          "volume display",
+          "slice and address selectors"
+        ],
+        "artifact_refs": [
+          "grid_2d_4x4",
+          "grid_3d_4x4x4"
+        ],
+        "review_note": "Preserve the YZX storage convention from the flight volume while explicitly changing values from occupancy to palette indices. The source uses ZX. Supplied rendering and selectors are not new learning prerequisites. tutorial.md is absent; this remains a plan.",
+        "independent_check": "For x=3,y=2,z=1, predict source [1][1]; change only the displayed slice and explain why no stored entry should change.",
+        "prior_maps": [
+          "Tutorial_3D",
+          "Pattern_Foundry",
+          "Symmetry_Seventeen"
+        ],
+        "source_refs": [
+          "algorithms/arrays/layer_pattern_lesson.gd"
+        ],
+        "change_reason": "Reuse the earlier volume knowledge without silently changing what its values mean."
+      },
+      {
+        "id": "Ribbon_Patterns_02",
+        "title": "Compare what the carrier contributes",
+        "storyboard": "Keep the grey targets numerically equal while their surrounds change; there is no required perceptual answer. Bring colour values and surface addresses, then compare the same motif on a flat sheet and a curve of equal surface width. Hold the source and repeat size fixed while changing one surround, carrier or supplied shading condition. Record the equality the code guarantees separately from what appears equal from the current viewpoint. Arc length need not equal projected width. The dot-product lighting model and controls stay supplied, with the operation taught later in Forces. This hall carries a method of comparison into the studio, not a new shader assignment. Its artifact name does not establish a spectral metamerism experiment.",
+        "storyboard_short": "Keep reflective comparison. Equal target values, changed surrounds; same source and surface spacing, flat/curved carriers. Separate numerical equality, arc length and projected appearance. Supply controls and dot-product shading; teach operation later. No required perceptual result or new code. Carry controlled comparison to studio; no spectral-metamerism claim.",
+        "mode": "reflect",
+        "brings": [
+          "colour values",
+          "surface mapping"
+        ],
+        "learns": [
+          "state exactly which equality a controlled comparison preserves"
+        ],
+        "carries": "A comparison that separates stored equality, surface distance and viewed appearance.",
+        "supplied": [
+          "contrast controls",
+          "receiver meshes",
+          "directional shading model"
+        ],
+        "artifact_refs": [
+          "SimultaneousContrast",
+          "MetamerismLab"
+        ],
+        "review_note": "Retain the reflective mode. Equal physical repeat spacing here differs from equal UV repeat counts on differently sized studio receivers. No new code or dot-product prerequisite is added. Equal arc length is not equal projected width; the shader’s direction control is not a moved museum sun. tutorial.md is absent, but a short comparison companion is enough.",
+        "independent_check": "Optional reflection: name one condition held fixed and one changed, then distinguish the program’s equality from your observation.",
+        "prior_maps": [
+          "Color_Flashlight",
+          "Color_Pillar",
+          "Ribbon_Patterns_01"
+        ],
+        "source_refs": [
+          "algorithms/color/carrier_comparison.gd"
+        ],
+        "change_reason": "Allow the sequence to deepen attention without adding more programming."
+      },
+      {
+        "id": "Ribbon_Patterns_03",
+        "title": "Carry a small recipe onto fabric",
+        "storyboard": "Begin with the existing studio wall and preview skirt sharing a motif. Bring wrapping lookup and surface addresses into a small first shader: multiply mesh UV by repeat counts, add an offset, then sample the supplied texture into ALBEDO. The declared host turns four-by-four palette indices into a nearest-filtered, repeating texture and assigns materials; garment meshes and wardrobe remain supplied. Write and explain the reduced fragment calculation before comparing repeat and offset separately. UV repeats are counts per mesh, not metre spacing. Use the existing SAVE and WEAR SAVED flow to compare live edits with a stored recipe. That file saves bounded cells and settings, not arbitrary shader code. Carry this small sampling vocabulary to Shaders; cut-out, finish and deformation remain optional encounters.",
+        "storyboard_short": "Use existing studio wall/skirt host. Teach tiny fragment: UV×repeat+offset → repeating nearest texture → ALBEDO. Supply palette-index→texture conversion, material assignment, meshes/wardrobe. Predict repeat versus offset; UV counts are not metres. SAVE stores bounded cells/settings; WEAR explicitly applies snapshot to Skirt. No shader-code export or general garment transfer. Cut-out/finish/deformation optional; full companion absent.",
+        "mode": "make",
+        "brings": [
+          "motif texture",
+          "surface address mapping"
+        ],
+        "learns": [
+          "first shader sampling with an explained texture/material host",
+          "mesh UV repeat counts versus physical spacing",
+          "saved recipe data versus shader implementation"
+        ],
+        "carries": "A small repeat-and-offset sampling operation plus a clearly bounded saved appearance recipe.",
+        "supplied": [
+          "Recipe.material: palette indices to texture and shader uniforms",
+          "existing wall and preview skirt material assignment",
+          "wardrobe, saving and supported Skirt receiver"
+        ],
+        "artifact_refs": [
+          "fabric_shader_studio",
+          "super_drag_mirror",
+          "drag_catwalk"
+        ],
+        "review_note": "Use existing Recipe.material and studio.refresh as the explained host. Current SAVE accepts repeats 4/8 and offset 0/.125 plus supported cells/settings; it excludes palette, shader code, meshes and LOOK. The current preview silhouette is chosen separately on wear. Select the reduced fragment excerpt and exact learner edit location before the full lesson; no new host is needed. All three Ribbon tutorial.md files are absent. Do not require finish or vertex deformation before the later Shaders sequence.",
+        "independent_check": "Predict what doubling horizontal repeats does while offset stays fixed, then shift offset without changing the count. Save a supported recipe, edit the live source and predict which skirt changes.",
+        "prior_maps": [
+          "Pattern_Foundry",
+          "Array_Patterns",
+          "Ribbon_Patterns_02"
+        ],
+        "source_refs": [
+          "commons/artifacts/fabric_shader_studio/fabric.gdshader",
+          "commons/artifacts/fabric_shader_studio/fabric_recipe.gd",
+          "commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd"
+        ],
+        "change_reason": "Give the sequence a small, usable shader ending without implying the whole studio must be rebuilt."
+      }
+    ],
+    "status": "Revised teaching proposals; review each map before full lessons",
+    "tutorial_guidance": "doc/book/course/storyboards/TILING.md"
+  },
+  {
+    "sequence": "change",
+    "arc": "PROPOSED. Bring functions, position differences, loops and retained traces. After Tiling, supply a smooth callable curve rather than treating a sampled texture as one. In the first hall, separate writing a finite-rate function from writing a finite-sum function; return to the bridge as a signed-change comparison. In the second, let a supplied field choose each next displacement. Carry explicit inputs, units and update rules into Forces, where velocity will be retained and changed by acceleration. Keep field construction, analytic calculus and controlled step-size comparisons outside the first making task. Existing museum hosts remain; exact learner edit locations and full lessons are pending.",
+    "halls": [
+      {
+        "id": "Change_Intro",
+        "title": "Measure, then accumulate",
+        "storyboard": "The wide joining line falls while the curve rises at its first sample. Bring functions and position differences; use the supplied smooth curve to write a finite-rate function from two heights and a nonzero horizontal interval. Predict the sign on another interval, then compare it with the supplied tangent. On a second visit to the next bench, reuse that callable curve in a loop summing height-times-width contributions. Keep the interval fixed while changing either count or sample position, and predict one rectangle before checking the total. Plots and controls are supplied. The reference is another finite sum, not the exact integral. The bridge introduces a different arch: use its supplied signed-rate comparison to ask why a rise and fall can leave no net height change. Carry two small functions with named inputs and units; x is position here, not elapsed time.",
+        "storyboard_short": "Reuse functions/differences/loops. Supply smooth f(x), plots, tangent and controls. First: finite rate over nonzero h; predict sign elsewhere. Next: sum f(sample)*width over fixed interval; vary count or sample fraction alone; predict one contribution. Carry rate/sum functions with units. x=position, not time. Reference=finite 4096-midpoint sum. Bridge uses DIFFERENT arch: supplied signed-rate comparison, net change not total travel. Exact learner edit location pending.",
+        "mode": "make",
+        "brings": [
+          "callable functions and differences between positions",
+          "loop totals and explicitly named inputs"
+        ],
+        "learns": [
+          "finite rate over a nonzero interval",
+          "finite accumulation from height-times-width contributions"
+        ],
+        "carries": "Two reusable finite calculation functions with explicit interval, sampling rule and units; signed change distinct from total travel.",
+        "supplied": [
+          "the existing smooth curve and plotting hosts",
+          "analytic tangent and finite reference calculation",
+          "bridge arch and its signed-rate comparison"
+        ],
+        "artifact_refs": [
+          "tangent_slope_workbench",
+          "riemann_sum_workbench",
+          "ftc_bridge"
+        ],
+        "review_note": "Two small making lessons, not a calculus survey. Keep the smooth function shared by the first two benches separate from the bridge arch. A tangent formula and finite reference are supplied comparisons; the student need not derive either. Finer samples do not guarantee monotonically smaller error. Choose the exact learner edit/receiver connection before expanding code; no replacement workbench. The bridge is a reflective return, not a third compulsory coding task.",
+        "independent_check": "Predict the rate sign on another interval and explain its units. In the sum lesson, predict one contribution after moving the sample within its rectangle while keeping the count fixed.",
+        "prior_maps": [
+          "Point_Lines",
+          "Point_Trace",
+          "Ribbon_Patterns_03"
+        ],
+        "source_refs": [
+          "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+          "commons/artifacts/tangent_slope_workbench/rate_comparison.gd",
+          "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+          "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd",
+          "algorithms/change/ftc_bridge.gd"
+        ],
+        "change_reason": "Give each new operation room to become usable without turning the hall into a calculus survey."
+      },
+      {
+        "id": "Flow_Field",
+        "title": "Let the next address follow the last",
+        "storyboard": "Particles keep moving while FIELD HELD stops the field clock. Bring position updates, elapsed seconds and Trace’s retained list. Read the supplied direction function at one position in the two-dimensional canvas; multiply its unit direction by speed and elapsed seconds to get a displacement, then use the new position for the next lookup. Predict two updates from another starting address. Rendering, the field sampler and boundary handling remain supplied; state the canvas frame before relating it to the hall. Carry a follower and its position record, with no stored velocity or inertia. On a return, compare one step with two half-steps using the same start, held field, speed and total duration. This is a proposed calculation, not the SPEED button. Inspect the installed trail across a wrap: its joining stroke can invent a crossing. Separating trail segments remains an optional future extension.",
+        "storyboard_short": "Use FIELD HELD: field clock stops, particles continue. Reuse position/delta/retained list. Supply field_direction(Vector2 canvas_position), renderer/boundary policy; declare frame. Teach unit direction*speed*seconds→displacement; next address→next lookup. Predict two updates from another start. Carry follower/record, no inertia. Optional return: dt versus two dt/2, same start/field/speed/duration; SPEED is not time step and RESET rescatters. Current trails join wraps; segment break only proposed. Defer noise/angle construction and Forces velocity state.",
+        "mode": "make",
+        "brings": [
+          "position updates with elapsed seconds",
+          "Trace’s retained-position list and neighbouring entries"
+        ],
+        "learns": [
+          "sampling at an address produced by the previous update",
+          "direction, speed and time step have different roles"
+        ],
+        "carries": "A repeated field-sampling update and retained path; a clear distinction between prescribed velocity and carried velocity state.",
+        "supplied": [
+          "existing unit-direction sampler and two-dimensional canvas frame",
+          "particle/arrow rendering, input controls and boundary handling"
+        ],
+        "artifact_refs": [
+          "flow_field_painter"
+        ],
+        "review_note": "Select one reduced update in the existing shared_field host; state the Vector2 canvas coordinates and the conversion to museum display separately. The sampler and noise/angle construction remain supplied. SPEED changes prescribed speed; RESET chooses fresh positions. Neither is a controlled numerical-step comparison. Keep such a comparison for a return with identical conditions and equal total duration. Trail segmentation is an unimplemented proposal, not something this summary pass fixes.",
+        "independent_check": "Choose another starting canvas position, predict the first displacement and next sampling address, then repeat once. Explain what FIELD HELD freezes and why a wrap can create a misleading joining line.",
+        "prior_maps": [
+          "Point_Coordinates",
+          "Point_Trace",
+          "Trans_Translation",
+          "Change_Intro"
+        ],
+        "source_refs": [
+          "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+          "commons/artifacts/flow_field_painter/shared_field_lesson.gd"
+        ],
+        "change_reason": "Teach the feedback in the path before adding a numerical experiment or an unbuilt trail repair."
+      }
+    ],
+    "status": "Revised teaching proposals; review each map before full lessons",
+    "tutorial_guidance": "doc/book/course/storyboards/CHANGE.md"
+  },
+  {
+    "sequence": "forces",
+    "arc": "PROPOSED. Return to known positions, displacements and route records; re-explain any earlier operation that the learner has not yet owned. Separate an analytic launch from an engine-driven force pulse, then make velocity assignment versus retained velocity the central comparison. Reuse the small state update for restoration and damping. Treat work, support and targeting as selected comparisons rather than additional compulsory builds. The closing field names its cube and visitor receivers before Form Finding deliberately removes carried velocity. Keep all thirteen halls and their critical writing; reduced edit bindings and cross-hall learner-code transfer remain to be written.",
+    "halls": [
+      {
+        "id": "Vectors_Act1_WhatAVectorIs",
+        "title": "Move the relation without changing it",
+        "storyboard": "SHIFT moves both pins while the wall arrows keep their displacement. Reuse positions and translation by reading the existing sample_vector(): end minus start in world coordinates. Predict one tip movement in the XY view and the XZ view, then reveal PARTS to check what each picture omits. SHORT, LONG and ZERO separate magnitude from direction without another drawing exercise. At the normalization companion, briefly explain division by nonzero length and its chosen small-input threshold; do not assume an earlier mention established the skill. Carry a measured displacement whose frame, origin and display scale are stated. Keep the other instruments available as returns.",
+        "storyboard_short": "Use SHIFT and the existing sample_vector(); reuse positions and translation. Predict a tip movement in supplied XY/XZ views, then reveal PARTS. Use SHORT/LONG/ZERO to distinguish magnitude and direction. Briefly explain normalization and its threshold at the companion. Carry a world displacement with stated display scale; require no new projection display or force controller.",
+        "mode": "deepen",
+        "brings": [
+          "positions in a named frame",
+          "translation and displacement",
+          "Flow_Field's supplied unit direction"
+        ],
+        "learns": [
+          "common translation preserves displacement",
+          "a component view omits one direction",
+          "normalization needs a declared small-input policy"
+        ],
+        "carries": "A displacement measurement with its frame and display scale stated; direction and magnitude remain distinct.",
+        "supplied": [
+          "VectorBasics with lesson:room_reading, existing pins and sample_vector()",
+          "XY/XZ wall drawings and SHORT/LONG/SHIFT/ZERO/PARTS controls",
+          "vector_normalize_demo and its unit-length reference"
+        ],
+        "artifact_refs": [
+          "VectorBasics",
+          "vector_normalize_demo"
+        ],
+        "review_note": "Keep this opening a short return. sample_vector() measures world positions; wall drawings scale by 0.85 and clip to radius 1.05 without clipping the numeric vector. SHORT/LONG supply the diagonal below 0.0001, whereas the separate normalization companion returns zero at or below 0.001. Translation's final explains direction and distance, but its present tutorial does not establish normalization practice. No new display binding is implied.",
+        "prior_maps": [
+          "Point_Lines",
+          "Trans_Translation",
+          "Flow_Field"
+        ],
+        "independent_check": "Predict a tip movement visible in XZ but absent from XY; verify it, then shift both pins and explain why the measured vector stays unchanged.",
+        "source_refs": [
+          "algorithms/vectors/01_vector_basics/room_reading.gd",
+          "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+          "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+          "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+          "commons/maps/Trans_Translation/final.md",
+          "commons/maps/Trans_Translation/tutorial.md"
+        ],
+        "change_reason": "The learner already has positions and translation. A lighter return establishes what an arrow measures without delaying the later retained-state hinge."
+      },
+      {
+        "id": "VFM_02_Operations",
+        "title": "Keep the destination and compare routes",
+        "storyboard": "GO carries the cube along A and then B; SWAP changes the corner without changing the destination. Reuse displacement and accumulation in the existing room_sum study. Keep its controls, carriage and drawings supplied. In refresh(), calculate result from a+b, then compare a.length()+b.length() with result.length() before running PATH via A or direct. Read the existing travelled increment to see how the executed route is counted. CANCEL makes the distinction sharp: a nonzero out-and-back journey has zero displacement. Carry endpoint and distance as separate accounts. The local plan's forward component maps to negative Z, and GO's instant return home lies outside its reported trip.",
+        "storyboard_short": "Use GO/SWAP/PATH/CANCEL on room_sum. Reuse displacement and accumulation. Own result=a+b and compare summed leg lengths with direct length in the existing refresh path; keep movement and drawing supplied. Check against the actual travelled counter. Carry destination and distance separately, with local forward mapped to -Z and GO's reset excluded. No new carriage or transport binding.",
+        "mode": "make",
+        "brings": [
+          "displacements with compatible units and frame",
+          "length and finite accumulation",
+          "a distinction between input values and their receiver"
+        ],
+        "learns": [
+          "addition supplies a common endpoint across different routes",
+          "route length and net displacement retain different information"
+        ],
+        "carries": "Two explicit accounts of a route: net displacement and accumulated distance.",
+        "supplied": [
+          "adder_board with lesson:room_sum and A/B/component controls",
+          "existing guarded carriage and waypoint traversal at prescribed speed",
+          "wall/floor drawings, travelled counter and GO/PATH/SWAP/CANCEL/RULE controls",
+          "floor_point() conversion from local plan coordinates to the scene"
+        ],
+        "artifact_refs": [
+          "adder_board"
+        ],
+        "review_note": "The installed room uses buttons, not draggable pins. Vector2 stores local X/forward in metres, and floor_point maps forward to -Z. refresh() already supplies the common result to drawings and the route built by GO. The physics callback counts actual prescribed movement and consumes remaining movement budget across corners; leave it supplied. GO and input/path edits reset the counter, while RULE and selecting A/B do not. Do not claim a learner function is already bound to a separate host.",
+        "prior_maps": [
+          "Vectors_Act1_WhatAVectorIs",
+          "Point_Lines",
+          "Change_Intro",
+          "Trans_Translation"
+        ],
+        "independent_check": "For A=(1,0), B=(0,1), predict the common endpoint and the 2 m versus sqrt(2) m route lengths. Then CANCEL and explain the difference between via A and direct before pressing GO.",
+        "source_refs": [
+          "commons/artifacts/adder_board/room_sum.gd",
+          "commons/artifacts/adder_board/adder_board.gd",
+          "commons/maps/VFM_02_Operations/final.md",
+          "commons/maps/VFM_02_Operations/tutorial.md"
+        ],
+        "change_reason": "The current instrument already makes the distinction tangible. A bounded arithmetic edit avoids adding a second route system before Motion."
+      },
+      {
+        "id": "Vectors_Act2_VectorArithmetic",
+        "title": "Keep the component along a direction",
+        "storyboard": "Start with SWAP, SHIFT and SAME at the subtraction stage, reusing the measured gap rather than adding another construction. The projection station already reads this source within the same hall. RESET gives it a unit rail; SLIDE moves A across that rail while the gold part stays fixed and the pink remainder changes. In the supplied refresh path, compute gap.dot(axis), form kept=axis*gap.dot(axis), then remainder=gap-kept. Recombine the parts before trying TURN and FLIP. Carry a signed along-axis reading and the remainder it cannot describe. The FRIEND threshold and stationary torque wheel remain short comparisons about the uses of a calculation; neither adds a required controller or cross-product lesson.",
+        "storyboard_short": "Return to SWAP/SHIFT/SAME, then use the actual gap-to-projection connection. Teach signed dot reading, kept vector and subtracted remainder in the existing refresh path; recombine and predict SLIDE/TURN/FLIP. Supply unit rail, controls and diagrams. Carry a projection plus remainder. Keep FRIEND and torque as brief comparisons, not extra builds or evidence of mastered cross products.",
+        "mode": "make",
+        "brings": [
+          "displacement subtraction",
+          "compatible vector addition",
+          "magnitude and a nonzero unit direction"
+        ],
+        "learns": [
+          "dot product as signed distance along a unit axis",
+          "projection and perpendicular remainder",
+          "changing the receiving axis changes the retained component"
+        ],
+        "carries": "An along-axis scalar and projection/remainder pair that reconstruct the input.",
+        "supplied": [
+          "vector_sub with lesson:room_gap and projection_shadow with lesson:room_projection",
+          "same-hall source lookup and contributions_changed connection",
+          "nonzero unit rail and RESET/SLIDE/TURN/FLIP/RULE controls",
+          "scaled floor/wall diagrams; existing dot_aligner and torque_crank comparisons"
+        ],
+        "artifact_refs": [
+          "vector_sub",
+          "dot_aligner",
+          "projection_shadow",
+          "torque_crank"
+        ],
+        "review_note": "This is a real same-hall connection, not transport from the previous room: connect_source() finds the source under the same em_map owner and subscribes refresh(). Coordinates are model X/forward, displayed at half scale, not visitor positions. TURN changes the rail by 30 degrees; bounded SLIDE requests move source A perpendicular by 0.5. FRIEND's 0.985 threshold and torque's unit-direction cross product are independent demonstrations, not subscribers. Keep normalization and subtraction as returns; the substantial new lesson is projection with its remainder.",
+        "prior_maps": [
+          "Vectors_Act1_WhatAVectorIs",
+          "VFM_02_Operations",
+          "Trans_Translation"
+        ],
+        "independent_check": "After RESET, predict what SLIDE changes and check kept+remainder=gap. Then FLIP: explain why the signed coordinate reverses while the kept vector does not.",
+        "source_refs": [
+          "commons/artifacts/vector_op_console/gap_projection_room.gd",
+          "commons/artifacts/vector_op_console/vector_op_console.gd",
+          "commons/artifacts/projection_shadow/projection_shadow.gd",
+          "commons/artifacts/dot_aligner/dot_aligner.gd",
+          "commons/artifacts/torque_crank/torque_crank.gd",
+          "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+          "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md"
+        ],
+        "change_reason": "A single live relation supports reuse and an independent check. The critical questions survive without requiring mastery of every nearby instrument."
+      },
+      {
+        "id": "VFM_05_Launch",
+        "title": "Read a flight from its beginning",
+        "storyboard": "FIRE sends the marker through a curve; PAIR offers equal ranges with different flight times. Reuse elapsed time, vector components and the distinction between a position and its rate. Introduce acceleration's units, then supply the constant-acceleration position formula, angle conversion and landing-time calculation already used by launch_chamber. Trace flight_position() and change one initial condition, keeping gravity fixed. PATH shows its sampled prediction; PARTS lets the student compare zero vertical velocity at the apex with continuing downward acceleration. SLOW changes playback time without changing the path. Carry a usable position-at-time function and its assumptions into Motion, where retaining and updating velocity becomes the new task.",
+        "storyboard_short": "Use FIRE/PAIR, then trace existing flight_position(). Reuse time, vector components and rate. Supply the analytic position formula, angle conversion, duration and receiver; introduce acceleration's units without deriving a ballistic solver. Vary one beginning, inspect PATH/PARTS and distinguish SLOW from changed gravity. Carry a position-at-time function with assumptions. Launch stays before Motion; no integration or collision response is claimed.",
+        "mode": "deepen",
+        "brings": [
+          "position functions and elapsed seconds",
+          "vector components and addition",
+          "Flow_Field's velocity-as-displacement-per-second relation",
+          "Change's distinction between value and rate"
+        ],
+        "learns": [
+          "acceleration as velocity change per second",
+          "evaluating a supplied analytic position function",
+          "trajectory shape, duration and playback time are distinct"
+        ],
+        "carries": "A supplied analytic path the learner can evaluate and vary under stated gravity, drag and endpoint assumptions.",
+        "supplied": [
+          "launch_arc with lesson:launch_chamber and its flight markers",
+          "launch_velocity() angle conversion and duration() equal-height landing time",
+          "flight_position() constant-acceleration formula and flight_velocity()",
+          "64-segment PATH drawing and FIRE/PAIR/SLOW/PARTS/GRAVITY/SPEED controls"
+        ],
+        "artifact_refs": [
+          "launch_arc"
+        ],
+        "review_note": "Launch precedes Motion. Supply p(t)=origin+v0*t+0.5*g*t*t, angle-to-velocity conversion and duration rather than asking for their derivation. The existing host clamps each lane to its own equal-height landing time; the frozen velocity is pre-impact. PATH is 64 equal-time segments, while live markers are evaluated analytically. PAIR has separate lane origins, so equal range does not mean the same world endpoint. Parameter edits reset the flight; SLOW only rescales its local clock. No learner-path binding or ballistic solver is newly installed.",
+        "prior_maps": [
+          "Change_Intro",
+          "Flow_Field",
+          "Vectors_Act1_WhatAVectorIs",
+          "VFM_02_Operations"
+        ],
+        "independent_check": "At the opening 30/60-degree pair and fixed speed, predict equal horizontal range but unequal landing times. Explain why SLOW leaves the path unchanged, then use PARTS to distinguish velocity and acceleration at the apex.",
+        "source_refs": [
+          "commons/artifacts/launch_arc/launch_chamber.gd",
+          "commons/artifacts/launch_arc/launch_arc.gd",
+          "commons/maps/VFM_05_Launch/final.md",
+          "commons/maps/VFM_05_Launch/tutorial.md"
+        ],
+        "change_reason": "The strong spatial encounter can introduce acceleration without consuming the numerical-state lesson that belongs to Motion next."
+      },
+      {
+        "id": "VFM_03_Motion",
+        "title": "End the command and keep the motion",
+        "storyboard": "A one-second push ends while the cube continues. Bringing Launch’s initial velocity and Change’s rate and accumulation, the student writes a finite force schedule for a supplied rigid body. Before running, they predict the velocity change: force divided by mass, multiplied by pulse duration. They compare one- and two-kilogram beginnings with drag off, before either cube reaches the frame. The learner owns when the command starts and ends; the engine retains velocity and supplies integration and contact. A perpendicular pulse then meets motion already acquired. COAST cancels the command; it does not erase that history. The kept pulse rule and prediction prepare the next room to expose the state update itself. The friction ramp remains a separate comparison of a threshold and a simplified sliding model.",
+        "storyboard_short": "Reuse Launch’s initial velocity, timed callbacks and Change rates. Own a finite force schedule for a supplied rigid body; predict delta-v = (F/m)T, then compare masses from rest with drag off before contact. COAST ends the command while velocity remains. A perpendicular pulse meets existing motion. Supply engine integration, chamber and readouts. Carry the schedule and prediction into Fields. Keep the friction ramp a separate comparison; do not teach a second solver.",
+        "mode": "make",
+        "brings": [
+          "timed callbacks and Launch’s chosen initial velocity",
+          "finite rates and signed accumulation from Change",
+          "vector direction and chosen acceleration from the supplied launch model"
+        ],
+        "learns": [
+          "force in newtons divided by mass in kilograms gives acceleration in metres per second squared",
+          "a finite force command changes retained velocity",
+          "delta-v = (F/m)T before contact with damping absent",
+          "ending a command and stopping a body are separate operations"
+        ],
+        "carries": "A small force schedule, its declared units and a predicted change in velocity, kept in the learner’s own study or notes for the Fields comparison.",
+        "supplied": [
+          "rigid-body integration and bounded collision chamber",
+          "pulse timing adapter, including a partial final physics step",
+          "mass/reset controls, velocity readout and optional trail"
+        ],
+        "artifact_refs": [
+          "VectorMotion",
+          "friction_ramp"
+        ],
+        "review_note": "Summary proposal only. The installed motion_chamber sends force in newtons to apply_central_force; the engine supplies time integration. Do not multiply that force by dt again. Its active/delta factor only averages a partial final pulse step. COAST leaves optional engine damping active, so the controlled comparison explicitly turns DRAG off. Exact binding from a learner-authored pulse function to the supplied receiver remains to be chosen; the current operating/source companion is not evidence of that authoring interface. No new runtime check in this pass.",
+        "prior_maps": [
+          "Change_Intro",
+          "VFM_05_Launch"
+        ],
+        "independent_check": "Before the run, predict a 2 N pulse lasting 1 s from rest: approximately +2 m/s for 1 kg and +1 m/s for 2 kg. Use DRAG off and observe before frame contact. Predict what COAST changes and what remains; then test a perpendicular pulse without resetting. The two pulse buttons replace the active force command rather than adding concurrent commands.",
+        "source_refs": [
+          "commons/maps/VFM_03_Motion/final.md",
+          "commons/maps/VFM_03_Motion/tutorial.md",
+          "commons/maps/VFM_03_Motion/map_data.json",
+          "algorithms/vectors/08_vector_motion/VectorMotion.gd",
+          "algorithms/vectors/08_vector_motion/motion_chamber.gd"
+        ],
+        "change_reason": "A controlled beginning makes the new idea available for reuse without asking the learner to rebuild the engine’s integrator or turning the friction ramp into another required lesson."
+      },
+      {
+        "id": "Vectors_Act3_FieldsAndMotion",
+        "title": "Give the same field two meanings",
+        "storyboard": "Cyan approaches the centre while pink crosses and returns. The student brings Flow Field’s sampled direction and Motion’s retained velocity into one small study with position and velocity as named state. A supplied runner calls their update: one receiver assigns velocity from the field; the other adds acceleration times the step, then both advance position using the new velocity. The same dimensionless field receives different unit conversions. Before trying the sink, they predict two steps in a uniform field from equal beginnings. Reversing the field then asks whether changing an influence erases motion already acquired. Markers, sampling and trails stay supplied; these numerical receivers have neither mass nor collisions. The learner keeps the update convention for Oscillation, through their own notes or companion file, rather than an assumed transfer between halls.",
+        "storyboard_short": "Reuse Flow Field sampling and Motion’s retained velocity. In a proposed small position/velocity study, own assignment versus accumulation and the subsequent position update. Predict two uniform-field steps before the sink comparison; reverse influence without erasing state. Supply dimensionless field, unit adapters, fixed runner, markers and trails. Carry the update convention manually toward Oscillation. Installed markers have no mass or collisions, and no shared learner state travels between halls.",
+        "mode": "make",
+        "brings": [
+          "Flow_Field’s position-dependent sampling and follower step",
+          "Motion’s distinction between force ending and velocity persisting",
+          "Change’s rate-times-step accumulation"
+        ],
+        "learns": [
+          "assigning velocity versus accumulating acceleration",
+          "a field value receives units through its receiver",
+          "updating position with newly updated velocity in a fixed-step model"
+        ],
+        "carries": "One declared position/velocity update convention and a prediction table, manually retained in a companion study or notes and adapted to one dimension in Oscillation.",
+        "supplied": [
+          "dimensionless field sampler and stated velocity/acceleration conversions",
+          "fixed 1/120 s runner and reset interface",
+          "two numerical markers, trails and observation cutoff"
+        ],
+        "artifact_refs": [
+          "VectorFieldFlow"
+        ],
+        "review_note": "Summary proposal only. field_receivers already exposes independent positions and velocities and semi-implicit accumulation in source. Each marker samples the same function at its own current position, not necessarily the same value after divergence. FIELD, GAIN and REVERSE keep state; RESET clears state and pauses while retaining parameters. Frame exit freezes outgoing state rather than colliding. A reduced learner edit function and its connection to the supplied runner are still unresolved. The proposed carried study is not an installed persistent record or crosshall transport feature. No runtime or learner-execution claim.",
+        "prior_maps": [
+          "Change_Intro",
+          "Flow_Field",
+          "VFM_03_Motion"
+        ],
+        "independent_check": "For the supplied uniform field at gain 1, let h be the fixed step and start both at rest. Predict displacement after two steps: cyan 1.6h metres, pink 2.4h² metres, with pink velocity 1.6h m/s. Explain the different units of the 0.8 sample conversions. Then reverse a moving run: cyan changes its assigned velocity immediately; pink first changes its acceleration while retaining velocity. These are paper or companion-study predictions; no single-step museum control is claimed.",
+        "source_refs": [
+          "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+          "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+          "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json",
+          "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd",
+          "algorithms/vectors/10_vector_field_flow/field_receivers.gd"
+        ],
+        "change_reason": "Assignment versus accumulation becomes something the learner can change and predict, while the runner and display remain supplied and museum state stays honestly separate."
+      },
+      {
+        "id": "Vectors_Act4a_KineticForces",
+        "title": "Make resistance depend on motion",
+        "storyboard": "AIR, WATER and HONEY launch cubes at the same speed, then let them travel different distances. Bringing the pulse receiver and Fields’ distinction between a value and its operation, the student owns one linear drag function: force equals minus coefficient times current velocity. The coefficient has units of kilograms per second. A supplied rigid-body adapter passes that force to the engine; the learner does not integrate the same force again. They predict how doubling mass changes the initial acceleration at fixed speed and coefficient, then compare before either run leaves the frame. The kept resistance function supplies Oscillation’s damping term. Walking resistance, the mower’s signed work and the ring’s prescribed circle remain comparisons: different accounts can describe movement, and a return does not undo the cut lawn.",
+        "storyboard_short": "Own one drag function, F = -b v, with b in kg/s. Reuse Motion’s force receiver and Fields’ operation distinction. Predict initial acceleration for two masses at equal speed and fixed b; compare before frame exit. Supply engine integration, launcher and readouts. Carry resistance into spring damping. Keep walking, mower work and prescribed circular motion optional comparisons; the material names are not measured fluid properties.",
+        "mode": "make",
+        "brings": [
+          "force-to-acceleration relation and retained velocity",
+          "the distinction between a sampled value and its receiving operation",
+          "known dot product for the optional work comparison"
+        ],
+        "learns": [
+          "linear resistance as a force computed from current state",
+          "fixed drag coefficient and changed mass produce different acceleration",
+          "an engine force receiver is distinct from a controller speed mapping"
+        ],
+        "carries": "The small force function -b*v with b in kg/s, reused as damping in the proposed scalar spring study; the rigid-body adapter itself need not be carried.",
+        "supplied": [
+          "rigid bodies and engine integration, with gravity and inherited damping removed",
+          "equal-speed launcher and mass/reset controls",
+          "readouts and finite observation window",
+          "existing walking, mower and circular-path comparisons"
+        ],
+        "artifact_refs": [
+          "drag_corridor",
+          "force_mower",
+          "centrifuge_ring"
+        ],
+        "review_note": "Summary proposal only. Installed kinetic_drag applies -b*body.linear_velocity directly as force; no dt multiplication belongs in that argument. Its rigid bodies ignore contacts and are frozen at the observation cutoff; using a rigid-body engine does not imply this exhibit tests collisions. WALK is a separate chosen controller multiplier; mower work uses a nominal force, not measured hand effort; the ring prescribes a path. Exact learner drag-function binding remains open. Future focused text review: final.md’s categorical claim that air at any throwable cube speed follows a square law is broader than this source comparison establishes; this summary pass does not edit it or claim a replacement empirical result.",
+        "prior_maps": [
+          "VFM_03_Motion",
+          "Vectors_Act3_FieldsAndMotion",
+          "Vectors_Act2_VectorArithmetic"
+        ],
+        "independent_check": "Before FIRE, use v = +4 m/s and b = 1.3 kg/s to predict F = -5.2 N for both masses. Predict initial acceleration -5.2 m/s² at 1 kg and -2.6 m/s² at 2 kg. Then compare which retains more speed at the same early elapsed time, before frame exit; do not compare different stopping times or treat the cutoff as resistance doing work.",
+        "source_refs": [
+          "commons/maps/Vectors_Act4a_KineticForces/final.md",
+          "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+          "commons/maps/Vectors_Act4a_KineticForces/map_data.json",
+          "commons/artifacts/drag_corridor/drag_corridor.gd",
+          "commons/artifacts/drag_corridor/kinetic_drag.gd",
+          "commons/artifacts/force_mower/force_mower.gd",
+          "commons/artifacts/centrifuge_ring/centrifuge_ring.gd"
+        ],
+        "change_reason": "The state-update strand gains one reusable force term without turning every artifact into another assignment or conflating engine force, annotated work and prescribed motion."
+      },
+      {
+        "id": "Vectors_Act4b_Oscillation",
+        "title": "Returning does not mean stopping",
+        "storyboard": "The released cube crosses the zero line instead of stopping there. Returning to the position/velocity study from Fields, the student adapts it to one axis and reuses Kinetic Forces’ resistance term. They own the force sum, minus stiffness times displacement minus damping times velocity, and its update: velocity changes by force divided by mass times the step; displacement then uses the new velocity. The runner, rail and handle remain supplied. Before release, they predict the restoring direction and explain why zero spring force at the centre need not mean zero motion. Equal beginnings under two damping settings test the prediction. This computed return differs from Transformation’s prescribed sine. The learner keeps a small oscillator they can vary, without assuming the museum has transported a shared state or transferred a hand throw.",
+        "storyboard_short": "Return to Fields’ proposed position/velocity study in one dimension; add restoration and Kinetic Forces’ damping. Own F = -kx - cv, then v += (F/m)dt and x += vdt. Supply runner, rail and handle; release starts from rest. Predict force direction and crossing, compare damping from equal beginnings, and carry the oscillator toward later waves. Distinguish computed motion from prescribed sine; no shared museum-state or hand-throw transfer is implied.",
+        "mode": "make",
+        "brings": [
+          "Fields’ explicit position/velocity update convention",
+          "linear resistance with declared units",
+          "vector/force addition and Transformation’s prescribed sine comparison"
+        ],
+        "learns": [
+          "displacement-dependent restoring force combined with velocity-dependent damping",
+          "equilibrium position and rest are different conditions",
+          "the order of velocity and position updates matters in a numerical model"
+        ],
+        "carries": "A scalar spring-damper update with declared beginning and coefficients, reusable in later oscillator studies; future coupled waves will additionally need separate old/new states across receivers.",
+        "supplied": [
+          "fixed 1/120 s runner and finite observation cutoff",
+          "rail, constrained pickable handle and display",
+          "parameter controls and reset/release adapter; release sets velocity to zero"
+        ],
+        "artifact_refs": [
+          "spring_tower"
+        ],
+        "review_note": "Summary proposal only. The installed restoring_forces variant computes scalar motion; its frozen pickable is input/display, not another body solver. k is N/m, c is kg/s, and F/m is acceleration, not F/dt. DAMP selects a ratio and computes c = 2*ratio*sqrt(k*m); changing mass or stiffness therefore changes c at a fixed nonzero ratio. Hold m and k fixed for the damping comparison. Parameter changes preserve state, whereas release starts from rest. The common learner update and its edit binding remain proposed, with manual reuse rather than automatic transport. Keep legacy cosine towers distinct; do not add a full numerical-methods lesson.",
+        "prior_maps": [
+          "Vectors_Act3_FieldsAndMotion",
+          "Vectors_Act4a_KineticForces",
+          "Trans_Pre"
+        ],
+        "independent_check": "At x = +1.25 m and v = 0, with k = 8 N/m and m = 2 kg, predict restoring force -10 N and initial acceleration -5 m/s². Under FREE damping, predict negative velocity at the first crossing of x = 0 even though spring force is zero there. Repeat from the same displacement, mass and stiffness under LIGHT damping; predict smaller later excursions. Use reset/release between trials, and distinguish a predicted centre crossing from an exactly sampled zero.",
+        "source_refs": [
+          "commons/maps/Vectors_Act4b_Oscillation/final.md",
+          "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+          "commons/maps/Vectors_Act4b_Oscillation/map_data.json",
+          "commons/artifacts/spring_tower/spring_tower.gd",
+          "commons/artifacts/spring_tower/restoring_forces.gd",
+          "commons/artifacts/spring_tower/spring_handle.gd"
+        ],
+        "change_reason": "The sequence deepens a usable state model rather than restarting with another animation, while preserving the room’s question of return, rest and motion."
+      },
+      {
+        "id": "Change_Choreography",
+        "title": "Keep an offset, change a rate",
+        "storyboard": "Twenty rods turn together, form a wave, then drift apart; the conveyor gives a rate mismatch a different material consequence. Reuse indexed repetition and rate over elapsed time; introduce period and phase with the rods before returning to the supplied paired dials. Make the existing tutorial's one source edit: halve DRIFT_RATIO's excess above one, keeping the twelve-second period. Predict the gap after thirty seconds, then use SAME RATE to stop its growth without closing it. Carry a tested distinction between changing a stored angle and changing the rate added to it. Keep the conveyor as a comparison with contact, arrival and finite capacity. The paired-clock reference remains open to interpretation; this shared engine clock supplies neither independent ageing nor the bodily history of its reference.",
+        "storyboard_short": "Keep rods, conveyor and paired dials in their existing order. Reuse indexed repetition and elapsed time; introduce period and phase at the rods. Follow the existing DRIFT_RATIO edit from 1.04 to 1.02; predict thirty seconds of separation, then preserve the gap with SAME RATE. Supply display and controls. Carry offset versus accumulated rate difference. Conveyor contacts and the clocks' historical reference remain comparisons, not extra builds or claims of bodily simulation.",
+        "mode": "deepen",
+        "brings": [
+          "indexed repetition and timed transforms",
+          "rate multiplied by elapsed time",
+          "Oscillation's returning movement, without assuming period or phase has been taught"
+        ],
+        "learns": [
+          "period names a cycle's duration and phase names its angular offset",
+          "a rate change preserves the existing angle in the paired score",
+          "equal rates preserve a phase gap without closing it",
+          "prescribed rotation and a contact-driven queue need different accounts"
+        ],
+        "carries": "A small tested rate edit and an explanation of which difference stays fixed, grows or is erased by an assignment.",
+        "supplied": [
+          "phase_rod_array, conveyor_backlog and the paired_time museum study",
+          "paired_time_score.gd with its twelve-second base period and stored angles",
+          "dial geometry, controls, museum player and conveyor contact model"
+        ],
+        "artifact_refs": [
+          "phase_rod_array",
+          "conveyor_backlog",
+          "paired_time"
+        ],
+        "review_note": "This uses an actual authored source exercise already present in tutorial.md, replacing the proposed extra marker-row build. Oscillation does not establish period and phase; introduce those terms at the rods. The rods assign absolute angle from elapsed time, so configuration changes may jump; the paired score instead advances stored angles, and SAME RATE preserves them. The conveyor has finite rigid parcels, contact and admission limits. Both dials share engine delta and discard whole-turn counts; neither battery ageing nor the material and bodily conditions of the Gonzalez-Torres reference are simulated. No new runtime or tutorial work is applied by this summary.",
+        "prior_maps": [
+          "Array",
+          "Change_Intro",
+          "Vectors_Act4b_Oscillation"
+        ],
+        "independent_check": "Change DRIFT_RATIO from 1.04 to 1.02 in the supplied study. Before RESET and DRIFT RIGHT, predict an 18-degree gap after thirty seconds rather than 36 degrees; explain why SAME RATE then keeps that gap instead of aligning the hands.",
+        "source_refs": [
+          "commons/maps/Change_Choreography/final.md",
+          "commons/maps/Change_Choreography/tutorial.md",
+          "commons/artifacts/timing_machines/phase_rod_array.gd",
+          "commons/artifacts/timing_machines/conveyor_backlog.gd",
+          "commons/artifacts/spine_studies/paired_time_score.gd",
+          "commons/artifacts/spine_studies/paired_time.gd",
+          "commons/artifacts/spine_studies/station.gd"
+        ],
+        "change_reason": "A concrete exercise already exists. It makes the earlier rate and phase skills reusable while leaving rods, conveyor and the artistic reference room to offer different kinds of comparison."
+      },
+      {
+        "id": "VFM_07_Gravity",
+        "title": "Allow the reference to answer",
+        "storyboard": "The gold satellite turns around a held source; at the next station both bodies answer the attraction. Reuse separation, mass and acceleration by completing the two receiver contributions in the existing accelerations() pattern: one shared pair force, opposite signs, each divided by its receiving mass. Supply the softened law, pair loop, state and integrator. Test one pair with unequal masses before summing more pairs; equal forces need not produce equal accelerations. Read the guard that withholds body zero's response. The museum stations also change masses and beginnings, so their paths are not a controlled test of that guard alone. Third-body and NUDGE encounters remain available comparisons. Carry a paired contribution rule and the question of whose response a fixed reference leaves out.",
+        "storyboard_short": "Use the held source and mutual-body stations. Reuse separation and force-to-acceleration. Own the two receiver contributions in the existing pair pattern; supply softened attraction, loop and integrator. Check equal/opposite forces with unequal receiving masses. Read the omitted response for body zero. The stations change beginnings as well as recipients. Keep third-body and NUDGE as comparisons; require no new gravity solver.",
+        "mode": "make",
+        "brings": [
+          "separation vectors and shared coordinate frames",
+          "force divided by receiving mass",
+          "retained velocity and position updates"
+        ],
+        "learns": [
+          "one pair contributes equal and opposite forces to two receivers",
+          "unequal receiving masses give unequal accelerations",
+          "omitting a receiver's contribution is an explicit model choice"
+        ],
+        "carries": "A pair contribution pattern with declared receiving masses and any deliberately omitted response.",
+        "supplied": [
+          "gravity_relations.gd and its existing accelerations() pair loop",
+          "softened attraction with EPS=0.25 and velocity Verlet stepping",
+          "initial states, displays, bounded trails and existing museum controls"
+        ],
+        "artifact_refs": [
+          "orbital_mechanics_demo",
+          "three_body_problem"
+        ],
+        "review_note": "The two-line contribution exercise is a proposed teaching emphasis on existing source, not an already rewritten tutorial or a new solver. Supply the law and integrator intact; assess the contributions before integration. The first station uses 12 kg and 1 kg with a held source; the mutual station starts with equal 4 kg bodies and different positions/velocities. Do not present their paths as an otherwise identical fixed/mutual experiment. Softened markers have no mutual collisions or player coupling. NUDGE's paired beginning and finite observation window warrant a measured comparison, not a proof of chaos or escape.",
+        "prior_maps": [
+          "Vectors_Act2_VectorArithmetic",
+          "VFM_03_Motion",
+          "Vectors_Act4a_KineticForces",
+          "Vectors_Act4b_Oscillation"
+        ],
+        "independent_check": "For one computed force pair, use receiving masses of 12 kg and 1 kg and allow both contributions. Predict opposite accelerations with magnitudes in a 1:12 ratio, check the two divisions, then identify which contribution the first station's body-zero guard omits.",
+        "source_refs": [
+          "commons/maps/VFM_07_Gravity/final.md",
+          "commons/maps/VFM_07_Gravity/tutorial.md",
+          "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd"
+        ],
+        "change_reason": "The reusable skill is distributing a shared interaction. Naming the stations' different beginnings prevents a misleading comparison and keeps the task smaller than building an orbital solver."
+      },
+      {
+        "id": "VFM_09_Legs",
+        "title": "Ask what supports a still body",
+        "storyboard": "A plate rests on four posts; removing support or shifting its mass centre changes what happens after RELEASE. Bring the distinction between geometry, physical properties and a body's received forces. Use the existing FEET and SHIFT controls to state a support hypothesis before the plate moves. Compare adjacent and diagonal pairs at the same centred mass setting: the number of posts alone cannot explain the difference. The supplied outline encloses finite pad corners and describes the initial horizontal arrangement, not every later contact. Then watch the procedural walker and inspect how its body and feet are commanded. Carry a comparison of two accounts of standing, with their limits named. No new hull routine or gait controller is required, and limb count need not become a rule for viable bodies.",
+        "storyboard_short": "Use FEET, SHIFT and RELEASE on the existing plate. Reuse geometry, mass centre and physical response. Predict adjacent versus diagonal support with the same centred mass; check the initial finite-pad outline against release. Supply hull and solver. Compare the commanded walker without treating it as balance validation. Carry an explicit support hypothesis and its limits; add no hull or gait implementation obligation.",
+        "mode": "reflect",
+        "brings": [
+          "point arrangements and the distinction between shape and physical properties",
+          "a declared mass centre",
+          "forces and the conditions under which a body may respond"
+        ],
+        "learns": [
+          "support depends on arrangement and mass projection rather than post count alone",
+          "an initial support outline is not a live account of changing contacts",
+          "commanded walking and contact-supported balance provide different evidence"
+        ],
+        "carries": "A stated support hypothesis, one observed comparison and a boundary on what that comparison establishes.",
+        "supplied": [
+          "support_polygon_lab's finite pads, plate and FEET/SHIFT/RELEASE controls",
+          "initial support hull, mass-centre projection and rigid-body solver",
+          "the existing four-leg walker and its supplied gait and body movement"
+        ],
+        "artifact_refs": [
+          "support_polygon_lab",
+          "four_leg_critter"
+        ],
+        "review_note": "Preserve this hall as comparison and independent judgement. The actual plate is a rigid body; the pads have finite square tops, and the hull uses their corners. The outline is an initial horizontal support estimate, not a changing contact solver. SHIFT changes the custom mass centre while keeping the configured inertia; scope the claim accordingly. The walker advances its body and places feet through authored rules without a hull-based balance test. Do not infer a required anatomy, demand that learners build a controller, or use the walker as physical validation of the plate.",
+        "prior_maps": [
+          "Array",
+          "Vectors_Act4a_KineticForces",
+          "VFM_07_Gravity"
+        ],
+        "independent_check": "Keep the mass centre centred and compare the existing adjacent-pair and diagonal-pair FEET settings. Predict the initial support difference before releasing each plate, then state why the walker cannot confirm the same hypothesis merely by remaining upright.",
+        "source_refs": [
+          "commons/maps/VFM_09_Legs/final.md",
+          "commons/maps/VFM_09_Legs/tutorial.md",
+          "commons/maps/VFM_09_Legs/critical.md",
+          "commons/artifacts/support_polygon_lab/support_polygon_lab.gd",
+          "commons/hazards/octapod_crawler/four_leg_critter.gd",
+          "commons/hazards/octapod_crawler/leg_walker_base.gd"
+        ],
+        "change_reason": "The hall already offers a precise comparison. It can deepen judgement about bodies and models without turning reflection into another geometry or gait-building task."
+      },
+      {
+        "id": "VFM_08_Arena",
+        "title": "Ask what an encounter keeps",
+        "storyboard": "The crab turns toward a beacon or mushroom; a screen can remove a candidate from view. Bring distance comparisons, conditions and the previous hall's distinction between commanded movement and physical response. Before a meal starts, keep candidate positions fixed and insert the screen: predict what selection may change and what completed-meal history cannot. Read the supplied selector and feeding record to check that account. The learner need not rebuild steering, legs or an event system. The five-meal stop is authored, while the meaning of this apparent relationship remains open to discussion. Keep the collision carts as a separate, optional comparison with an explicit one-dimensional model. Carry a distinction between present eligibility, retained events and an interpretation of agency; none alone establishes the others.",
+        "storyboard_short": "Keep Arena a comparison. Reuse distances, conditions and commanded-body distinctions. Before feeding starts, hold positions fixed, insert the screen and predict selection versus completed-meal history. Read the supplied selector and event record; build no new controller. The five-meal stop is authored. Keep collision carts a separate model and interpretation open. Carry a distinction between eligibility, retained events and attributed agency.",
+        "mode": "reflect",
+        "brings": [
+          "lists, distance comparisons and conditions",
+          "the distinction between a current input and retained state",
+          "Legs' comparison of commanded and physically supported movement"
+        ],
+        "learns": [
+          "a candidate must remain eligible before distance can select it",
+          "a completed-event count differs from the current target",
+          "an authored threshold and an interpretation of agency answer different questions"
+        ],
+        "carries": "An inspectable account of a choice, the event history it retains and the interpretive claims that remain open.",
+        "supplied": [
+          "lesson_crab's existing eligible-candidate selector and line-of-sight query",
+          "museum beacon, mushroom, screen and controls",
+          "feeding events, steering and gait; the separate analytic collision-cart comparison"
+        ],
+        "artifact_refs": [
+          "arena_relation_lab",
+          "collision_carts"
+        ],
+        "review_note": "Change the former make obligation to reflect: the current final/tutorial support an encounter and source comparison, not a prerequisite to author a new selector, gait or event framework. Selection uses a strict six-metre candidate range and a supplied visibility test; active feeding and temporary ignoring affect when selection resumes. The five completed meals trigger an authored stop, not learned policy. The carts display a supplied analytic elastic-collision account rather than measuring the crab's collisions. Keep critical interpretation available without presenting friendship, intent or conservation as facts proved by target selection.",
+        "prior_maps": [
+          "Array",
+          "VFM_02_Operations",
+          "VFM_03_Motion",
+          "VFM_09_Legs"
+        ],
+        "independent_check": "Start before a meal is underway. With candidate positions unchanged, insert the screen and predict which candidate remains eligible. Explain why an occlusion may change the selected target but cannot itself increase the completed-meal count; use the existing rules to check both claims.",
+        "source_refs": [
+          "commons/maps/VFM_08_Arena/final.md",
+          "commons/maps/VFM_08_Arena/tutorial.md",
+          "commons/maps/VFM_08_Arena/critical.md",
+          "commons/artifacts/arena_relation_lab/lesson_crab.gd",
+          "commons/artifacts/arena_relation_lab/arena_relation_lab.gd",
+          "commons/artifacts/arena_relation_lab/lesson_food.gd",
+          "commons/hazards/head_crab/head_crab.gd",
+          "commons/artifacts/collision_carts/collision_carts.gd"
+        ],
+        "change_reason": "The encounter can develop a careful reading of agency and retained state. An additional implementation obligation would crowd that work and blur its distinction from the separate collision model."
+      },
+      {
+        "id": "Vectors_Act5_ForceAsPlace",
+        "title": "Declare what receives the field",
+        "storyboard": "Glass cubes show the bounded field before the visitor tries the gap. Reuse the sampled-field question from Flow Field and Forces' retained velocity: what receives this vector, in what units, and what changes? Compose an up-and-forward acceleration through the supplied controls, then read the cube's velocity increment. Set field strength to zero while a cube moves and predict why it does not stop immediately; damping and contacts still matter. Compare the visitor's separately supplied carrying rule without treating the two bodies as interchangeable. Carry a field with declared membership, units and retained state. Form Finding will reuse a direction through a different receiver: descent updates a point from a gradient without retaining velocity. Its trail records past positions, and its step size is not elapsed physical time.",
+        "storyboard_short": "Use cubes before the visitor crossing. Reuse sampled fields and retained velocity; compose acceleration with supplied controls and inspect the cube update. Predict zero field versus immediate stopping, keeping damping and contacts explicit. Compare the visitor's separate receiver. Carry membership, units and state. Prepare the change to Form Finding: its gradient descent stores no velocity, and its step size is not elapsed physical time.",
+        "mode": "deepen",
+        "brings": [
+          "Flow Field's distinction between a sampled vector and its receiver",
+          "retained velocity changed by acceleration over time",
+          "a comparison of explicit models, physical bodies and controller decisions"
+        ],
+        "learns": [
+          "bounded membership determines which receiver gets the field update",
+          "zero acceleration does not assign zero velocity",
+          "a field can feed different updates with different units and retained state"
+        ],
+        "carries": "A declared field receiver: its membership rule, vector units, state update and other influences, ready to compare with gradient descent's position-only update.",
+        "supplied": [
+          "vector_machine's angle and magnitude controls",
+          "force_field_zone's membership detection and cube receiver",
+          "force_cube's damping and collision behaviour; the separate visitor carry provider",
+          "the next hall's existing gradient descent as a source comparison, not an added Forces build"
+        ],
+        "artifact_refs": [
+          "vector_machine",
+          "force_cube",
+          "force_field_zone"
+        ],
+        "review_note": "The cube receiver adds field_vector * delta directly to linear_velocity; field_vector is acceleration, with no division by mass. Inside the zone ordinary gravity is suppressed, but damping and contacts remain; leaving restores saved gravity. The visitor has a separate locomotion/carry contract. Both can retain motion, so zero field does not mean stopped body. The next hall instead evaluates point - rate * gradient(point), with no velocity term or physics-delta factor; its display trail is history, not momentum. Preserve that change of model and do not promise a new receiver or descent implementation in this summary.",
+        "prior_maps": [
+          "Flow_Field",
+          "VFM_03_Motion",
+          "Vectors_Act3_FieldsAndMotion",
+          "Vectors_Act4a_KineticForces",
+          "VFM_08_Arena"
+        ],
+        "independent_check": "While a cube is still moving inside the field, set its magnitude to zero. Predict no immediate assignment to zero velocity and explain the remaining damping/contact influences; contrast that receiver with FormFinding_Descent, whose next point uses the current gradient and no retained velocity.",
+        "source_refs": [
+          "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+          "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+          "commons/artifacts/vector_machine/vector_machine.gd",
+          "commons/artifacts/force_field_zone/force_field_zone.gd",
+          "commons/artifacts/force_field_zone/field_carry_provider.gd",
+          "commons/artifacts/force_cube/force_cube.gd",
+          "commons/maps/FormFinding_Descent/final.md",
+          "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd"
+        ],
+        "change_reason": "The closing field should prepare a reusable question about receivers, rather than suggest that Form Finding is another force simulation with the same state."
+      }
+    ],
+    "status": "Revised teaching proposals; review each map before full lessons",
+    "tutorial_guidance": "doc/book/course/storyboards/FORCES.md"
+  },
+  {
+    "sequence": "formfinding",
+    "arc": "The route asks how a form arrives and what counts as a satisfactory result. A local search, an evaluated curve, repeated geometric corrections and a solved lever each offer different ways to construct an answer. Random proposals provide a first useful search beyond greedy descent. The student ends by keeping physical behaviour, computed criteria and authored appearance distinct.",
+    "halls": [
+      {
+        "id": "FormFinding_Descent",
+        "title": "Use a slope to choose the next address",
+        "storyboard": "STEP moves the gold point across the cost surface and leaves its history behind. The student brings Change's finite differences and a vector update, then estimates slope along two axes of a simple cost function they can edit. They subtract a chosen step times that gradient from the current address and compare two beginnings. The surface display, buttons and trail renderer are supplied. Large steps and a loose stopping threshold reveal what the update does not guarantee. The reusable result is a small optimiser with an explicit cost, step size and stopping reason.",
+        "storyboard_short": "Use STEP on the cost surface. Reuse finite differences and vector updates. Estimate two-axis gradient of an editable cost; subtract step times gradient. Compare beginnings, large steps and stopping thresholds. Supply surface, controls and trails. Carry an optimiser with declared cost, step and stopping reason. Keep iteration separate from physical time; small slope does not certify lowest cost.",
+        "mode": "make",
+        "brings": [
+          "finite differences",
+          "vector updates and trace"
+        ],
+        "learns": [
+          "gradient from two directional rates",
+          "local optimisation update"
+        ],
+        "carries": "An optimiser with a stated objective and stopping rule.",
+        "supplied": [
+          "cost-surface display",
+          "controls and trail renderer"
+        ],
+        "artifact_refs": [
+          "descent_landscape_lab"
+        ],
+        "review_note": "Keep optimiser steps separate from physical time. A small slope does not certify the lowest cost."
+      },
+      {
+        "id": "FormFinding_Catenary",
+        "title": "Distinguish a drawn curve from a settled one",
+        "storyboard": "The student moves the cable's cyan beads, then inspects the formula-built washing lines and the catenoid in hand. Bringing generated positions and constrained point placement, they describe which inputs each construction obeys and make a small comparison curve through supplied anchor positions. A supplied curve sampler turns the chosen spans and sag into points; the tube renderer and analytic surfaces remain supplied. They change one anchor and test the retained constraints rather than claiming the curve found equilibrium. The reusable outcome is a curve specification that states whether shape is drawn, evaluated or physically settled.",
+        "storyboard_short": "Use drafted cable, formula washing lines and fixed catenoid. Reuse generated/constrained positions. Compare construction inputs; vary an anchor in a small span/sag curve and test retained constraints. Supply anchors, sampler, tube renderer and analytic examples. Carry a specification distinguishing drawn, evaluated and settled shapes. Open: whether code is needed; neither spline nor catenoid is an interactive equilibrium solver.",
+        "mode": "reflect",
+        "brings": [
+          "position generators",
+          "anchor positions and constraints"
+        ],
+        "learns": [
+          "construction method versus equilibrium claim"
+        ],
+        "carries": "A curve comparison with named constraints.",
+        "supplied": [
+          "curve sampler",
+          "tube renderer",
+          "analytic surface examples"
+        ],
+        "artifact_refs": [
+          "cable_builder",
+          "laundry_line_cathedral",
+          "catenoid",
+          "helicoid"
+        ],
+        "review_note": "Decide whether this reflective comparison needs code at all. The cable is a drafted spline and the catenoid is fixed geometry, not an interactive film solver."
+      },
+      {
+        "id": "FormFinding_Relaxation",
+        "title": "Correct a relationship repeatedly",
+        "storyboard": "The cloth changes shape as the number of correction passes changes. Bringing position arrays and motion history, the student constructs a short chain with retained current and previous positions and a list of neighbour pairs with rest lengths. A supplied fixed-step runner and line renderer show it; the learner writes one distance correction while keeping selected anchors fixed. Repeating the pass lets many local requirements negotiate a shape. Comparing pass counts and turning the supplied wind off makes the budget visible. The result is a small constrained network, ready for later cloth without claiming an exact solution.",
+        "storyboard_short": "Use cloth responding to correction-pass count. Reuse position arrays/history. Build a short chain with current/previous positions and neighbour rest lengths; teach distance correction, zero-distance guard and pinned-endpoint effects. Supply fixed-step runner, line renderer and wind. Repeat passes, vary count and disable wind. Carry a constrained network and explicit computation budget; defer full cloth and exact-solution claims.",
+        "mode": "make",
+        "brings": [
+          "position history",
+          "indexed pairs and distances"
+        ],
+        "learns": [
+          "position-based motion state",
+          "iterated distance constraints"
+        ],
+        "carries": "A pinned chain corrected by repeated passes.",
+        "supplied": [
+          "fixed-step runner",
+          "line renderer",
+          "wind input"
+        ],
+        "artifact_refs": [
+          "verlet_workbench"
+        ],
+        "review_note": "Begin with a short chain rather than the whole cloth. Explain the zero-distance guard and how pinned endpoints affect each correction."
+      },
+      {
+        "id": "FormFinding_Equilibrium",
+        "title": "Place a pivot from the loads",
+        "storyboard": "At the mobile, a heavier disc hangs nearer its pivot, and nothing needs to move for that relationship to appear. The student brings distances, mass and functions, then calculates the two arm lengths for one pair of supplied modelled masses over a chosen total span. They build that small arm from known line and point operations and check the two mass-distance products. Disc geometry and the larger branching mobile are supplied. The reusable outcome is a balance function; a bottom-up hierarchy can reuse it later, without claiming the displayed sculpture is dynamically simulated.",
+        "storyboard_short": "Use the mobile's heavier disc nearer its pivot. Reuse distance, mass, functions and line/point construction. Calculate two arm lengths across a chosen span; check equal mass-distance products. Supply modelled disc masses, geometry and larger mobile. Carry a balance function for later hierarchy. Omit rod/wire mass explicitly; display is not dynamic simulation. Defer recursion; production use does not require teaching it.",
+        "mode": "make",
+        "brings": [
+          "mass and distance",
+          "geometry functions"
+        ],
+        "learns": [
+          "lever balance as a construction rule"
+        ],
+        "carries": "A two-load pivot-placement function.",
+        "supplied": [
+          "modelled disc masses",
+          "larger mobile comparison"
+        ],
+        "artifact_refs": [
+          "calder_mobile"
+        ],
+        "review_note": "Do not introduce recursion solely because the production mobile uses it. Rod and wire mass are omitted in this model."
+      },
+      {
+        "id": "FormFinding_Annealing",
+        "title": "Let a search sometimes climb",
+        "storyboard": "The wrinkled bench traps a local descent, while the annealing table sometimes accepts an uphill move. Bringing the cost function and stored bounded random choice, the student proposes a nearby candidate, compares its cost and always accepts improvements. For a worse candidate, a supplied temperature-to-probability function gives a threshold against a zero-to-one draw. The landscape and controls are supplied. They keep a best-so-far record separate from the current position and compare cooling schedules. The reusable result is a search that can leave one basin, without promising the best answer or treating temperature as physical heat.",
+        "storyboard_short": "Use wrinkled descent and annealing tables. Reuse cost and stored random choice. Propose candidates; accept improvements. For worse candidates, compare zero-to-one draws with supplied temperature-dependent probability thresholds. Keep current/best records separate; compare cooling. Supply landscape/controls. Carry probabilistic search without optimality or physical-heat claims. Open: best-so-far host display. Defer distribution quality and seeded replay to Randomness; explain probability here.",
+        "mode": "make",
+        "brings": [
+          "cost functions and local search",
+          "bounded random draws"
+        ],
+        "learns": [
+          "probabilistic acceptance",
+          "current state versus best-so-far"
+        ],
+        "carries": "A proposal-and-acceptance search with retained best result.",
+        "supplied": [
+          "probability function",
+          "landscape and controls"
+        ],
+        "artifact_refs": [
+          "energy_landscape_bench",
+          "simulated_annealing"
+        ],
+        "review_note": "Explain this minimal probability use here; distribution quality and seeded replay remain for Randomness. Verify the proposed best-so-far teaching display against its eventual host."
+      },
+      {
+        "id": "FormFinding_Forge",
+        "title": "Write what counts as success",
+        "storyboard": "The student stacks loose pieces and discovers that a quiet low heap can fail the puzzle's height requirement. Bringing timers, comparisons and physical versus prescribed motion, they write a small success predicate for a supplied stack observation: choose what height and duration of low movement should count, then test a construction the original criterion rejects. Contacts and measurements are supplied. The clock-driven forge and restarting optimiser provide contrasting arrivals to inspect. No new syntax is required; the learner carries a declared criterion and can distinguish meeting it from becoming alive or finding a universally best form.",
+        "storyboard_short": "Use the quiet low stack failing height requirements. Reuse timers, conditions and physical/prescribed distinctions. Write height-and-low-movement-duration success criteria; test a rejected construction. Supply contacts and measurements. Carry a declared criterion without new syntax or claims of life/universal optimality. Compare restarting optimiser and clock-driven forge. Open: measurement interface; MAX Q is a clock effect, not an optimisation measure.",
+        "mode": "reflect",
+        "brings": [
+          "timers and conditions",
+          "physical versus prescribed state"
+        ],
+        "learns": [
+          "authored success criteria"
+        ],
+        "carries": "A tested criterion stated separately from the physical result.",
+        "supplied": [
+          "stack contacts",
+          "height and movement measurements"
+        ],
+        "artifact_refs": [
+          "balance_puzzle",
+          "self_shaping_forge"
+        ],
+        "review_note": "Confirm the small measurement interface before expanding code. The forge's MAX Q is clock-driven and must not become an optimisation measurement."
+      }
+    ]
+  },
+  {
+    "sequence": "wavefunctions",
+    "arc": "Sine returns as something already usable, now examined through state, sampling, circular coordinates, spatial form and sound. The student contrasts a computed swing with a prescribed cycle, constructs a wave through neighbouring interactions, and separates a sound event from the signal it starts. The final harmonic sum recombines functions and arrays while making the limits of its chosen vocabulary available for the coming study of randomness.",
+    "halls": [
+      {
+        "id": "WaveFunctions_Intro",
+        "title": "The same angle can carry another motion",
+        "storyboard": "The released pendulum crosses the ring twice with opposite velocity signs. Bringing the spring's state update and vector projection, the student makes a small angular model using a supplied restoring-acceleration rule, then compares releases from the same angle with different initial angular velocities. The bob, constrained hold and hand-velocity samples are supplied; projecting the release along the swing gives one deliberate input. Nearby sine-driven cubes provide the contrast with prescribed motion. The learner leaves with an angular state model and can explain why position alone does not determine what happens next.",
+        "storyboard_short": "Use opposite-velocity pendulum crossings and prescribed sine cubes. Reuse spring integration and dot projection. Teach angle/angular-velocity state; project hand release along swing and compare equal angles with different velocities. Supply bob, constrained hold, hand samples and restoring-acceleration rule. Carry angular state beyond position alone. Open: timestep and damping; current texts identify frame-dependent damping.",
+        "mode": "deepen",
+        "brings": [
+          "spring integration",
+          "dot-product projection"
+        ],
+        "learns": [
+          "angular state and release velocity"
+        ],
+        "carries": "A pendulum state with angle and angular velocity.",
+        "supplied": [
+          "bob and constrained hold",
+          "hand-velocity samples",
+          "restoring-acceleration rule"
+        ],
+        "artifact_refs": [
+          "control_pendulum",
+          "oscillation_controlled_cube",
+          "y_oscillation_cube"
+        ],
+        "review_note": "Resolve the teaching model's timestep and damping before code expansion; current source texts identify a frame-dependent damping regime."
+      },
+      {
+        "id": "WaveFunctions_Pendulum",
+        "title": "Keep when as well as where",
+        "storyboard": "A teal mark recedes behind the pendulum while the bob returns. The student brings Trace's ordered positions and now records a named position and timestamp for each sample, then draws age along a separate axis. The pendulum and drawing receiver are supplied; the learner owns sampling interval, count limit and age limit. Comparing a fine record, a coarse one and sampling near one whole period shows that an unchanged motion can leave very different evidence. The reusable outcome is a bounded timestamped recorder, with its display direction distinguished from the body's actual path.",
+        "storyboard_short": "Use the pendulum's receding teal record. Reuse Trace and elapsed time. Teach named position/timestamp fields, sampling interval and count/age bounds; draw age on a separate axis. Compare fine, coarse and near-period sampling. Supply pendulum state and renderer. Carry a bounded timestamped recorder with temporal resolution/span. Keep display direction separate from body path; do not silently encode time in position components.",
+        "mode": "make",
+        "brings": [
+          "position traces",
+          "elapsed time"
+        ],
+        "learns": [
+          "timestamped records",
+          "sampling and memory limits"
+        ],
+        "carries": "A recorder that states its temporal resolution and retained span.",
+        "supplied": [
+          "pendulum state source",
+          "record renderer"
+        ],
+        "artifact_refs": [
+          "PendulumWave",
+          "seismograph"
+        ],
+        "review_note": "Introduce named fields for position and time explicitly. Do not reuse a Vector3 position component as time without explaining that changed data contract."
+      },
+      {
+        "id": "WaveFunctions_Sine_Space",
+        "title": "Make a wave into a surface",
+        "storyboard": "Spheres meet the tray's folds, while the corridor's moving walls offer a different relation to the visitor. Bringing indexed geometry and the early sine function, the student samples two spatial sines on a small grid, multiplies them into heights and joins neighbouring samples with known triangles. A supplied mesh-to-collision step gives the static tray a physical boundary; sphere release and counting remain supplied. They compare surface relief with body size before the observation window ends. The reusable result is a sampled height surface, with spatial frequency, visible geometry and physical contact kept distinct.",
+        "storyboard_short": "Use the tray and collision-disabled corridor walls. Reuse grid samples, triangles and sine. Multiply two spatial sines into grid heights; join neighbours. Supply static mesh-to-collision creation, sphere release and counts. Compare relief with body size within the observation window. Carry a sampled height field distinguishing spatial frequency, visible surface and contact. Defer moving construction until mesh/collision updates are explained.",
+        "mode": "make",
+        "brings": [
+          "grid sampling and triangles",
+          "usable sine"
+        ],
+        "learns": [
+          "spatial wave sampling",
+          "mesh versus physical boundary"
+        ],
+        "carries": "A sine height field with explicit collision provision.",
+        "supplied": [
+          "collision creation from mesh",
+          "sphere release and counts"
+        ],
+        "artifact_refs": [
+          "sine_flow_tray",
+          "sine_wall_corridor"
+        ],
+        "review_note": "The corridor walls have collision disabled. Keep the student construction static until a later lesson explains updating both mesh and collision."
+      },
+      {
+        "id": "WaveFunctions_Unit_Circle",
+        "title": "Build the circular sampler",
+        "storyboard": "The rotating point supplies two projections, and the graph keeps a history of one of them. Reusing the sine cycle and pivoted construction, the student writes the circular position function that earlier lessons supplied: cosine and sine give the two offsets, radius scales them, and the centre places them. The reference circle, angle control and graph receiver are supplied. Quarter-turn predictions establish radians, phase and the relation between both coordinates. The learner replaces a borrowed circle sampler with an understood generator, while recognising that one projection alone cannot recover the whole position.",
+        "storyboard_short": "Use rotating point, two projections and graph. Reuse sine and pivot/radius. Teach centre plus radius-scaled cosine/sine; predict quarter turns to establish radians/phase. Supply circle, angle control and graph receiver. Carry an understood sampler replacing those supplied in Primitives and curved strips. One projection cannot recover full position; do not generalise uniform rotation to all periodic motion.",
+        "mode": "make",
+        "brings": [
+          "sine cycle",
+          "pivot and radius"
+        ],
+        "learns": [
+          "sine and cosine as circular coordinates",
+          "radians and phase"
+        ],
+        "carries": "An understood circle sampler and its projections.",
+        "supplied": [
+          "reference circle and angle control",
+          "graph receiver"
+        ],
+        "artifact_refs": [
+          "unit_circle_advanced",
+          "OscillationCurve"
+        ],
+        "review_note": "Return explicitly to the sampler supplied in Primitives and curved-strip construction; do not claim all periodic motion is a projection of uniform rotation."
+      },
+      {
+        "id": "WaveFunctions_3D_Wave_Propagation",
+        "title": "Let neighbours transmit a disturbance",
+        "storyboard": "In the existing museum lattice, compare a local pulse with coupling on and off. Carry PointBody and LineSkin from Unit Circle into nine points with displacement and velocity arrays. Raise the centre, read all forces from the same old state, then commit the next state. Predict the first neighbours to respond, preserve symmetry and compare seven points and half the initial height. Carry local transmission into the next hall's contrast with prescribed phase modulation.",
+        "storyboard_short": "Museum lattice: PULSE; compare COUPLED/INDEPENDENT from reset. Carry PointBody/LineSkin. Build 9 vertical oscillators; raised centre; old/next arrays; adjacent displacement force. Predict first step; test symmetry and zero coupling. Transfer: 7 points, half height. Print all construction. Museum gives host only. Distinguish 1D release, 2D pulse and analytic tile field. Next: phase modulation.",
+        "mode": "make",
+        "brings": [
+          "PointBody and LineSkin from Unit Circle",
+          "restoring/damped state updates",
+          "indexed arrays and independent copies"
+        ],
+        "learns": [
+          "neighbour displacement differences contribute force",
+          "all points read old state before commit",
+          "finite ends have fewer neighbours"
+        ],
+        "carries": "A coupled oscillator row with explicit update order.",
+        "supplied": [
+          "museum player, camera, lighting and floor",
+          "installed XR Tools",
+          "Godot physics clock"
+        ],
+        "artifact_refs": [
+          "coupled_oscillator_lattice"
+        ],
+        "review_note": "Canonical tutorial/final revised; exact printed code passes 28 checks and rejects three faults. 54 native museum checks. Full code constructs its own marker display and readout; no hidden scene objects. See 2026-10-08-wave-propagation-between-points. Review draft; no headset or independent student validation."
+      },
+      {
+        "id": "WaveFunctions_Effect_Sound",
+        "title": "Put one oscillation inside another",
+        "storyboard": "At the two desks, the held note makes a change of the orange ball audible beside its baseline. The student brings sampled functions and sine, then fills a short list of sound samples with a carrier whose phase receives a second sine. A supplied buffer encoder and player turn the list into a note; the amplitude envelope and audition controls are supplied with their roles stated. They keep carrier frequency fixed while comparing modulation depth. The reusable outcome is a small signal function, with modulation inside phase distinguished from simply adding another audible tone.",
+        "storyboard_short": "Use two desks and held-note comparison. Reuse sampled functions and sine phase. Fill a finite sample list with a carrier receiving a second sine inside phase; hold frequency while varying depth. Supply encoding, playback, envelope and audition controls. Carry phase modulation distinct from tone addition. Open: responsive note length and desktop input; the scope does not prove listening experience.",
+        "mode": "make",
+        "brings": [
+          "sampled functions",
+          "sine and phase"
+        ],
+        "learns": [
+          "phase modulation",
+          "audio samples as a finite signal"
+        ],
+        "carries": "A carrier-plus-modulator sample function.",
+        "supplied": [
+          "buffer encoding and playback",
+          "amplitude envelope",
+          "audition controls"
+        ],
+        "artifact_refs": [
+          "DualBallFMController"
+        ],
+        "review_note": "Choose a responsive teaching note length and provide a real desktop input path. The existing scope is not proof of the listener's experience."
+      },
+      {
+        "id": "Wavefunctions_Bernini",
+        "title": "Read time through a static form",
+        "storyboard": "A ridge twists upward while its whole column slowly turns. Bringing the circle sampler and height-field construction, the student builds a short stack of rings whose angular offset depends on height, then connects corresponding corners using their known face construction. Lighting and a reference column are supplied. They pause their whole-object rotation to inspect the twist that remains, then restore it without rebuilding the profile. The learner carries a height-dependent geometry generator and a clear distinction between a form varying through space and that completed form changing through time.",
+        "storyboard_short": "Use the twisting, rotating column. Reuse circle sampling and connected faces. Build a reduced ring stack beside it with angular offset depending on height; connect corresponding corners. Pause/restart whole-object rotation without rebuilding geometry. Supply reference column and lighting. Carry spatial twist distinct from temporal animation. Open: source-check reduced geometry; avoid the old incomplete triangle-strip construction.",
+        "mode": "make",
+        "brings": [
+          "circle sampling",
+          "connected mesh faces"
+        ],
+        "learns": [
+          "height-dependent twist"
+        ],
+        "carries": "A ring-based twisted form independent of its animation.",
+        "supplied": [
+          "reference column",
+          "lighting"
+        ],
+        "artifact_refs": [
+          "bernini_columns"
+        ],
+        "review_note": "Use a reduced shaft beside the exhibit; its geometry should be source-checked instead of repeating the old tutorial's incomplete triangle-strip construction."
+      },
+      {
+        "id": "WaveFunctions_John_Cage",
+        "title": "Compose what chance may choose",
+        "storyboard": "The student listens for a continuous layer and intermittent events, then attends to their intervals instead of counting every entrance. Bringing the early bounded random choice and timed score, they make a short event score from a supplied sound collection, explicitly choosing the available entries and interval bounds. Sound generation and playback are supplied. Replaying a kept event list distinguishes the decisions that composed a vocabulary from the choices that arranged one performance. No new syntax is necessary. The reusable outcome is an inspectable chance score that prepares the deeper Randomness sequence without claiming to perform a Cage work.",
+        "storyboard_short": "Use continuous sound and intermittent events; attend to intervals. Reuse bounded choice and timed scores. Propose a retained event list with chosen vocabulary/interval bounds; replay to distinguish authored options from performance choices. Supply sounds and playback. Carry inspectable chance composition toward Randomness without new syntax. Open: replay extension; current soundscape records no visitor sound and implements no particular Cage score.",
+        "mode": "reflect",
+        "brings": [
+          "bounded random choice",
+          "timed score and stored events"
+        ],
+        "learns": [
+          "authored vocabulary versus selected performance"
+        ],
+        "carries": "A retained chance score with stated options and timing bounds.",
+        "supplied": [
+          "generated sound collection",
+          "playback receiver"
+        ],
+        "artifact_refs": [
+          "john_cage_tech_noir"
+        ],
+        "review_note": "A replayable teaching score is a proposed extension. The current soundscape neither records visitor sound nor implements a particular Cage score."
+      },
+      {
+        "id": "WaveFunctions_AirMusic",
+        "title": "Give each note its own beginning",
+        "storyboard": "A struck bar keeps ringing after the hand leaves; striking another adds a voice while restriking the first restarts it. The student brings the generated note and event-based state, then gives two supplied sound players separate start times and multiplies each sine by a decaying envelope. The striker detection, buffer encoder and bar bodies are supplied. They compare a retrigger with two overlapping notes and keep the chosen frequency independent of visible bar length. The reusable outcome is an event-driven voice whose age belongs to its own beginning, ready to combine with others.",
+        "storyboard_short": "Use ringing bars, retriggers and overlapping strikes. Reuse sine notes and event state. Give two supplied players separate start times; multiply each sine by a decaying envelope. Compare retrigger/overlap; keep chosen frequency independent of visible length. Supply strike events, bodies and encoding. Carry independently aged voices. Open: desktop strike input; the synthesised model does not derive frequency from material.",
+        "mode": "make",
+        "brings": [
+          "sampled sine notes",
+          "event-based state"
+        ],
+        "learns": [
+          "per-voice time and decay",
+          "retrigger versus overlapping voices"
+        ],
+        "carries": "Two independently started decaying voices.",
+        "supplied": [
+          "strike events and bar bodies",
+          "audio players and encoding"
+        ],
+        "artifact_refs": [
+          "resonating_metallophone"
+        ],
+        "review_note": "Use the current synthesised-bar model. A physical bar's frequency is not solved from its material, and desktop strike input must be made concrete."
+      },
+      {
+        "id": "Wavefunctions_Sky_Stairs",
+        "title": "Turn sampled positions into support",
+        "storyboard": "The spiral's radius breathes while its treads rise steadily, and connecting surfaces fill some spaces between them. Bringing circular sampling, spatial sine and repeated bodies, the student constructs a short three-to-six-tread segment beside the existing stair. They calculate tread centres, then give each a width, orientation and separate collision boundary through supplied tread components. Comparing inner and outer edges exposes what centre spacing leaves undecided. The large staircase and its surrounding floor are supplied for inspection. The reusable outcome is a small route segment whose support is tested independently of the smooth formula behind its outline.",
+        "storyboard_short": "Use uniform rise and sine-modulated stair radius. Reuse circle sampling, spatial sine and repeated bodies. Build three-to-six treads beside the stair; calculate centres, widths, orientations and separate collision boundaries. Supply tread components, staircase and viewing floor. Compare inner/outer edges. Carry a tested support segment beyond centre spacing; do not infer complete climbing or headset comfort.",
+        "mode": "deepen",
+        "brings": [
+          "circle and spatial sine",
+          "repeated physical bodies"
+        ],
+        "learns": [
+          "sample placement versus usable support"
+        ],
+        "carries": "A short stair segment with explicit tread provision.",
+        "supplied": [
+          "tread and collision components",
+          "existing staircase and viewing floor"
+        ],
+        "artifact_refs": [
+          "sine_cylinder_staircase"
+        ],
+        "review_note": "The active stair has uniform rise and sine-modulated radius. Do not claim a complete climb or headset comfort from the sampled segment."
+      },
+      {
+        "id": "WaveFunctions_TrigWalkingPath",
+        "title": "A slow envelope from two fast returns",
+        "storyboard": "At the three rows, A and B keep oscillating while their sum grows and shrinks more slowly. Bringing sine functions and independent rates, the student samples two close frequencies at the same times and adds their signed values into a third record. The row display and frequency controls are supplied; the learner states its drawing scale separately from the computed sum. They exchange which frequency is higher and predict the envelope's pace before running again. The reusable result is a two-signal comparison that reveals cancellation without inventing a third source or claiming the visual exhibit produces sound.",
+        "storyboard_short": "Use the three-row beat exhibit. Reuse sine, frequency and phase. Sample two close frequencies at shared times; add signed values into a third record with separate display scale. Supply rows and controls. Exchange higher frequency and predict envelope pace. Carry superposition/cancellation without a third source or audio claim. Keep walking paths secondary: finite and circulating, not endlessly generated.",
+        "mode": "make",
+        "brings": [
+          "sine signals",
+          "frequency and phase"
+        ],
+        "learns": [
+          "superposition and beats"
+        ],
+        "carries": "A two-signal sum with separate component records.",
+        "supplied": [
+          "row display",
+          "frequency controls"
+        ],
+        "artifact_refs": [
+          "beat_frequency_demo",
+          "TrigWalkingPath",
+          "lissajous_curves"
+        ],
+        "review_note": "Keep the beat exhibit primary. The existing walking paths are finite and circulating, not generated endlessly beneath the visitor."
+      },
+      {
+        "id": "WaveFunctions_Synthesis_Lab",
+        "title": "Choose the parts of a wave",
+        "storyboard": "The five coloured rows can be removed until only one sine remains beneath the pale sum. Bringing signal addition, lists and loops, the student writes a function that visits a coefficient list and adds each weighted harmonic at one shared phase. The sliders, sample plot and held comparison are supplied. They predict the contribution at a marked address, build a chosen finite shape and state which changes its nonnegative coefficients cannot express. The reusable outcome is a compact wave recipe; the room-memory detour offers a separate comparison between repeating stored state and processing it again.",
+        "storyboard_short": "Use five harmonic rows and their pale sum. Reuse addition, lists and functions. Sum weighted harmonics from coefficients at shared phase; predict a marked sample and build a finite shape, naming nonnegative-coefficient limits. Supply sliders, plot and held comparison. Carry a wave recipe. Keep room-memory repeat/reprocess comparison separate; this visual bench neither shares specimen state nor generates its waveform's audio.",
+        "mode": "make",
+        "brings": [
+          "signal superposition",
+          "lists and functions"
+        ],
+        "learns": [
+          "finite harmonic synthesis"
+        ],
+        "carries": "A coefficient-list wave generator with declared limits.",
+        "supplied": [
+          "sliders and plot",
+          "held comparison",
+          "separate room-memory listening apparatus"
+        ],
+        "artifact_refs": [
+          "additive_wave_demo"
+        ],
+        "review_note": "This bench is visual. Do not imply it shares state with the other lab specimens or already turns the composed waveform into audio."
+      }
+    ]
+  }
+]

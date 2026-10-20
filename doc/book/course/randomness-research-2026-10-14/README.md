@@ -10,8 +10,10 @@ Start with the [Text Simulation Loop](TEXT_SIMULATION.md): a passage can propose
 
 | Read | Purpose |
 | --- | --- |
+| [Writing specification](WRITING_SPEC.md) | Knowledge selection, critical composition and separate reader/editorial review |
+| [Writing pilot](WRITING_PILOT.md) | Random Definition pool, cards and routes; explicitly not yet reader-tested |
 | [Book architecture](../../RECURSIVE_ARCHITECTURE.md) | Six connected components; Read/Reconstruct/Investigate; recoverable source versions and frozen editions |
-| [First experiment companion](../../experiments/random-definition/seed-bench-001/proposition.md) | A precise proposed 48-value RGB/height comparison, hypothetical trace and empty observation log |
+| [First experiment companion](../../experiments/random-definition/seed-bench-001/proposition.md) | Executed scripted comparison, preserved failures, exact replay, text reviews and open human trial |
 | [Blog draft](../../RECURSIVE_BOOK_BLOG.md) | Readable account of the architecture, with existing and proposed work distinguished |
 | [Text Simulation Loop](TEXT_SIMULATION.md) | Reciprocal writing/world method, competing interpretations, two opening trials and a revisable task graph |
 | [Passage examples](text_experiments.json) | Sleeve and remembering-wall interpretations, explicitly unbuilt and unobserved |
@@ -22,7 +24,7 @@ Start with the [Text Simulation Loop](TEXT_SIMULATION.md): a passage can propose
 | [Research record and writing](RESEARCH_RECORD.md) | Minimal experiment record, learning debt, contributions and versioned literary encounters |
 | [Final-text draft](FINAL.md) | Sequence draft revised with the new method; its predecessor is preserved and live hall prose stays unchanged |
 | [Specification](SPEC.md) | Problem, stories, accepted/proposed decisions, testing and limits |
-| [Tasks](TASKS.md) | Twenty stable main tasks plus five linked writing tasks; all thirty-four imported tasks mapped |
+| [Tasks](TASKS.md) | Twenty stable main tasks plus ten linked writing tasks; all thirty-four imported tasks mapped |
 | [Source findings](FINDINGS.md) | Reuse, claims needing repair and untested behaviour |
 | [Inventory](INVENTORY.md) | Thirty-one selected spaces, including the museum-only interlude; 111 distinct placed artifacts |
 | [Original research text](SOURCE.md) | Exact copy of the author's original attachment |
@@ -39,3 +41,7 @@ The first build is one complete seed-bench cycle with a passage interpretation a
 Run `validate_plan.py` for static checks. `compare_package.py` intentionally refreshes comparison evidence; `audit_inventory.py` intentionally replaces the inventory snapshot. Read changed sources before relying on new hashes. `build_plan.py` regenerates route/task output while preserving execution fields; inspect scope changes before continuing implementation.
 
 The latest [supplied architecture](imports/2026-10-14-book-architecture/manifest.json) is preserved exactly. Its six-part structure now has a concrete seed-bench companion. The same sixteen ordered triples drive RGB and mean-based height, with RGB held fixed in both modes. Text simulation, execution and observation have separate records. Frozen editions are specified as future work; no runtime experiment or publication is certified by these documents. The hall sequence and five-lesson particle path retain their order and prerequisites.
+
+## Museum installation, 14 October 2026
+
+The five-view pilot is now registered as `seed_study` in Random_Definition at map cell (10,17), facing west. It loads through the normal museum map and appears in the web editor. The older preview remains a historical experiment harness. [Installation and synchronization evidence](../../iterations/2026-10-14-seed-study-install/README.md) records the normal-map checks and editor fixes; physical VR and independent reconstruction remain open.

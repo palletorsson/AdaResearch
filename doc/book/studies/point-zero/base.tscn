@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=5 format=3]
 
 [sub_resource type="StandardMaterial3D" id="FloorMaterial"]
 albedo_color = Color(0.24, 0.25, 0.27, 1)
@@ -14,23 +14,10 @@ size = Vector3(8, 0.1, 5)
 [sub_resource type="Environment" id="Environment"]
 background_mode = 1
 background_color = Color(0.12, 0.13, 0.16, 1)
-ambient_light_source = 3
-ambient_light_color = Color(0.85, 0.89, 1, 1)
-ambient_light_energy = 0.65
+ambient_light_source = 1
 tonemap_mode = 2
 
-[sub_resource type="GDScript" id="HelloScript"]
-script/source = "extends Label3D\n\nfunc _ready() -> void:\n    if visible:\n        print(text)\n"
-
 [node name="Base" type="Node3D"]
-
-[node name="Welcome" type="Label3D" parent="."]
-position = Vector3(0, 1.25, 0)
-pixel_size = 0.004
-font_size = 64
-text = "Hello, world."
-outline_size = 0
-script = SubResource("HelloScript")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("FloorMesh")

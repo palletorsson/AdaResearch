@@ -1,0 +1,160 @@
+{
+  "directory": "doc/book/studies/noneuclid-research/runs/20261011T195806Z",
+  "created_utc": "20261011T195806Z",
+  "scope": "author feasibility; not ghost-student, headset or finished museum encounter verification",
+  "passed": true,
+  "source_sha256": {
+    "curved.tscn": "2e8fa35d20ddd9cf4bf18e4d67727a5b148f94c2ae6fc6f7e3fe413f326cd405",
+    "curved_probe.gd": "adc02825e96ffdd754c38b22840646f803bb79dc2a482d23ef4f184b5daa3f33",
+    "geometry_kernel.gd": "747f33c6451c5d4d3a685973707e6c637d57628fb7387870e9c84162fca89c71",
+    "probe.tscn": "abe61914b7e92d8de2350f2f9f31a91fad2ecb9bf6c00e124c2dcafd3aed052f",
+    "project.godot": "14d8b132e49ccef9d660aa9c6cad9a253013c16ad8372969d0f4bd60e205047b",
+    "stencil_probe.gd": "c1f6415321793223baf6d0d6e4daa98c2d8373eadb384c3b5237836d612bba68",
+    "test_kernel.gd": "1d2d990f4afe7600f3902cdf795f1ead155eeb2218dfdb8068df35b5fe4ca397"
+  },
+  "runs": [
+    {
+      "name": "kernel",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "--headless",
+        "--script",
+        "res://test_kernel.gd"
+      ]
+    },
+    {
+      "name": "stencil-gl_compatibility",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-method",
+        "gl_compatibility",
+        "--",
+        "--capture"
+      ]
+    },
+    {
+      "name": "stencil-mobile",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-method",
+        "mobile",
+        "--",
+        "--capture"
+      ]
+    },
+    {
+      "name": "stencil-forward_plus",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "--rendering-method",
+        "forward_plus",
+        "--",
+        "--capture"
+      ]
+    },
+    {
+      "name": "geometry-disk",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "res://curved.tscn",
+        "--",
+        "--capture",
+        "--mode=disk"
+      ]
+    },
+    {
+      "name": "geometry-sphere",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "res://curved.tscn",
+        "--",
+        "--capture",
+        "--mode=sphere"
+      ]
+    },
+    {
+      "name": "geometry-ball",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "res://curved.tscn",
+        "--",
+        "--capture",
+        "--mode=ball"
+      ]
+    },
+    {
+      "name": "geometry-product",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "res://curved.tscn",
+        "--",
+        "--capture",
+        "--mode=product"
+      ]
+    },
+    {
+      "name": "geometry-inside",
+      "passed": true,
+      "exit_code": 0,
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--path",
+        "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\studies\\noneuclid-research",
+        "--audio-driver",
+        "Dummy",
+        "res://curved.tscn",
+        "--",
+        "--capture",
+        "--mode=inside"
+      ]
+    }
+  ]
+}

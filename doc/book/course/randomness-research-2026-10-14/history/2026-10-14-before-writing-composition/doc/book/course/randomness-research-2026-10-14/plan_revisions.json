@@ -1,0 +1,1265 @@
+{
+  "schema": "ada.research-plan-revisions.v1",
+  "revisions": [
+    {
+      "id": "2026-10-14-recursive-writing",
+      "status": "applied_to_spec_only",
+      "basis_kind": "user_supplied_method_clarification",
+      "trigger_sources": [
+        "imports/2026-10-14-recursive-writing/critique.md",
+        "imports/2026-10-14-recursive-writing/text_world_loop.md",
+        "imports/2026-10-14-recursive-writing/a_book_that_can_build_its_own_rooms.md"
+      ],
+      "reason": "Writing can initiate operational interpretations; observations can revise prose and the future task graph. Preserve competing worlds and different moments of understanding.",
+      "predecessor_manifest": "history/2026-10-14-before-recursive-writing/manifest.json",
+      "predecessor_scope": "Frozen local document and canonical task/route data; not a runtime capture. The preceding generator source was not snapshotted.",
+      "selection": "Incorporate the supplied clarification into the current local spec; keep live museum unchanged and all runtime tasks unperformed.",
+      "alternatives": [
+        "Keep writing as a late editorial step (superseded).",
+        "Start reciprocal writing beside the pilot and review the graph before expansion (selected).",
+        "Build the full sleeve or new halls now (not selected or authorized by this pass)."
+      ],
+      "task_changes": [
+        {
+          "task_id": "randomness_research.001",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [],
+          "depends_on_after": []
+        },
+        {
+          "task_id": "randomness_research.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.001"
+          ],
+          "depends_on_after": [
+            "randomness_research.001"
+          ]
+        },
+        {
+          "task_id": "randomness_research.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research.004",
+          "change": "revised",
+          "changed_fields": [
+            "spec",
+            "depends_on"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research.005",
+          "change": "revised",
+          "changed_fields": [
+            "spec",
+            "depends_on"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research.006",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.005"
+          ],
+          "depends_on_after": [
+            "randomness_research.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research.007",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.006"
+          ],
+          "depends_on_after": [
+            "randomness_research.006"
+          ]
+        },
+        {
+          "task_id": "randomness_research.008",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research.009",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.008"
+          ],
+          "depends_on_after": [
+            "randomness_research.008"
+          ]
+        },
+        {
+          "task_id": "randomness_research.010",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.011"
+          ],
+          "depends_on_after": [
+            "randomness_research.011"
+          ]
+        },
+        {
+          "task_id": "randomness_research.011",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.009"
+          ],
+          "depends_on_after": [
+            "randomness_research.009"
+          ]
+        },
+        {
+          "task_id": "randomness_research.012",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.013",
+            "randomness_research.007"
+          ],
+          "depends_on_after": [
+            "randomness_research.013",
+            "randomness_research.007"
+          ]
+        },
+        {
+          "task_id": "randomness_research.013",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.010"
+          ],
+          "depends_on_after": [
+            "randomness_research.010"
+          ]
+        },
+        {
+          "task_id": "randomness_research.014",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research.015",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.006",
+            "randomness_research.014"
+          ],
+          "depends_on_after": [
+            "randomness_research.006",
+            "randomness_research.014"
+          ]
+        },
+        {
+          "task_id": "randomness_research.016",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.014",
+            "randomness_research.015"
+          ],
+          "depends_on_after": [
+            "randomness_research.014",
+            "randomness_research.015"
+          ]
+        },
+        {
+          "task_id": "randomness_research.017",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.016"
+          ],
+          "depends_on_after": [
+            "randomness_research.016"
+          ]
+        },
+        {
+          "task_id": "randomness_research.018",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.013",
+            "randomness_research.017"
+          ],
+          "depends_on_after": [
+            "randomness_research.013",
+            "randomness_research.017"
+          ]
+        },
+        {
+          "task_id": "randomness_research.019",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.018"
+          ],
+          "depends_on_after": [
+            "randomness_research.018"
+          ]
+        },
+        {
+          "task_id": "randomness_research.020",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ],
+          "depends_on_after": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.001",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "depends_on",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.001",
+            "randomness_research.007"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.003",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.004",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "depends_on",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.003"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "added",
+          "title": "Let the pilot revise the future task graph",
+          "depends_on_after": [
+            "randomness_research_writing.002"
+          ]
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/FINAL.md": "da91f8a87b7dcfb7b8803dde38edb5d2a091fe66bf6cff220e6deccf497457b2",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "8bffafc3c7ab738dbd2bb1ee36126094b2117e8844ca11a6e79818e8e8793cfd",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "ad22ee72fc42fcb111d54e8fd30f0157a198f973970c842651a3b224893db609",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "948d71f0fd91fbb9a18af60e1a107511ddd1daebfc4a7248da0162b854fe084b",
+        "doc/tasks/randomness_research.json": "c022ad2c1bdf207580c63aa17d89658af4568712d353dc65ee5bf99d7fe0fee7",
+        "doc/tasks/randomness_research_writing.json": "55789b17811e56fb5d287dab771d397f1511ebf67efe515d7f5f81830555afa5",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "fdcb765dec56050d21eeb521e2be21738ca8a6065341a3878fc4a114a386c56a",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "8d753b2b88848abc70f0958bccb77a31f00c4914616d3d2605365e634b2c8fb8",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "0c89389707a24c1d87864f41d767044246a02e9118ec9d2ff10d9813644d4a72"
+      },
+      "observations": [],
+      "runtime_changes": false,
+      "followup_task": "randomness_research_writing.005",
+      "future_revision_contract": "Attach actual trigger evidence, preserve before/after versions, keep stable IDs/progress, update generator and JSON together, validate references and DAG, and distinguish proposed from selected/applied changes."
+    },
+    {
+      "id": "2026-10-14-book-architecture",
+      "status": "applied_to_spec_only",
+      "basis_kind": "user_supplied_method_clarification",
+      "trigger_sources": [
+        "imports/2026-10-14-book-architecture/concrete_book_architecture.md"
+      ],
+      "reason": "Connect the existing book to six distinct research components, a concrete seed companion, three reader modes and recoverable frozen editions.",
+      "predecessor_manifest": "history/2026-10-14-before-book-architecture/manifest.json",
+      "predecessor_scope": "Exact working-tree documents, canonical task/route files, source anchors, generator and validator; no runtime capture. Base commit 63b5d7ba34eb2a7206a387f8ce2f170ce3cf9c83.",
+      "selection": "Apply the architecture to documentation and task acceptance; author a proposed 48-value RGB/height companion with no invented run or observation.",
+      "alternatives": [
+        "Build the whole sleeve first (deferred).",
+        "Add a second museum/book system (not selected).",
+        "Connect existing hall sources through a small companion and begin with the seed comparison (selected design)."
+      ],
+      "design_resolution": "Sixteen ordered triples; preserve RGB in both views and change only centre height from fixed to scaled mean. Mapping/layout choices are explicit proposals by this revision, not attributed user formulas.",
+      "hall_order_changed": false,
+      "task_dependencies_changed": false,
+      "task_changes": [
+        {
+          "task_id": "randomness_research.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.001"
+          ],
+          "depends_on_after": [
+            "randomness_research.001"
+          ]
+        },
+        {
+          "task_id": "randomness_research.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research.020",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ],
+          "depends_on_after": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.001",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.004",
+          "change": "revised",
+          "changed_fields": [
+            "acceptance",
+            "output",
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002"
+          ]
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "cb28986f2a46b9ccb091180192e3ef811f4e1799f5aeaaa8ece2b3d099e7958e",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "6b9409c522d6e28fa9cc9c6912706f6bc18c8908d9276cd977b0f222e2447b50",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "eb3ee7fc54106470d940780fe6119f6c72b35a96576f294c6c8aba63889018f5",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "829083165d418d69471685260bfad69970ae629ea655d6682621f9b74ea0190a",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "15988eba5c18773f939f5f82978dd49ae0d8226ae7c7af35fca2899a29607fc4",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "a6afaac63908f83af21dbebdf25ba66ee05f0d01100c80a85dcf94813dd3a84c",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "81e046b7190904d09e54aca208e4927a0de7cb39424b34ae222b6d0f3a6c36ec",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "260a06212b41f0e75a9a33d8a5e8c18c51519fd24bccda0a6b2894636e1c7c9f",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e897dd78dbc6b4cc9be6e8bad1ef6d59fb46fdc992ff9a21eec4822b4bba98ea",
+        "doc/tasks/randomness_research.json": "d15e5c32612ed86a5f59078790711bedf863b0b3da8f45e31de26f22c93a799c",
+        "doc/tasks/randomness_research_writing.json": "e8e9e3a11bf80220a2c6f9d1e213e26963ae9522949104e0d1b41fa256c3c790",
+        "doc/book/BOOK_FRAME.md": "b603c200bd7fa835479f27d75845d2102d7298faac49d23dc4f6dbc9d88cf8c0",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "8d55c3a98f80f038b431e895ed8585ef9cd71adece92ee0af7995987a11dd8c1",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "39f2c81c1799fa29605a96fe52d3a3b742cb18ef4e310e22620983b5c486a475",
+        "doc/book/experiments/README.md": "00af65cef161d335d455171c79ccd0799a621c17220d5ea78fb16e618eb44e3e",
+        "doc/book/experiments/validate_experiments.py": "ac95e45ea09f1649ab43dbad843969616a576dae782601517d5f7821cba39d06",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "c77f5be967083841d2517b2b28a4d5f32c38ad44950717462244cfe10722b533",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "1f05d33c2c0d0b4f2704391489bac9f87334b2eafc81ad939b8a3f01313bd6fa",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "3a72f427a751c24054a31a3b3d28b45e136b4c1ab7247ffe6dac48a01195466f",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "92561468f1588de9ce3921961f17e387b0b54d75e8aa22b7dde971a8bd0bf88f",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "d88f76b29a4e11dc789330aced40032e75d32b6145ea16b8cd2c97934f468cdc"
+      },
+      "observations": [],
+      "runtime_changes": false,
+      "followup_task": "randomness_research_writing.005",
+      "future_revision_contract": "Retain the earlier plan and sources; attach actual evidence, preserve IDs/progress, update generator and canonical records together; frozen editions acquire successors rather than silent edits."
+    },
+    {
+      "id": "2026-10-14-two-texts",
+      "status": "applied_to_spec_only",
+      "basis_kind": "user_supplied_method_clarification",
+      "trigger_sources": [
+        "imports/2026-10-14-two-texts/two_texts_one_world.md"
+      ],
+      "reason": "Tutorial and final can both initiate experiments and be revised by their consequences; keep the 48-value seed bench first and choose later work from actual evidence.",
+      "predecessor_manifest": "history/2026-10-14-before-two-texts/manifest.json",
+      "predecessor_scope": "Exact local architecture, companions, generator, validator and task graph before the two-text clarification. Earlier revision history retained.",
+      "selection": "User explicitly requested the spec/task update, selected the 48-value seed bench first and requested a Git commit. No runtime execution or publication requested.",
+      "alternatives": [
+        "Treat the tutorial only as an output of the apparatus (superseded).",
+        "Require both texts to be rewritten after every trial (not selected).",
+        "Give both roles initiation and independent evidence-linked reviews; allow revision, reasoned retention or open questions (selected)."
+      ],
+      "hall_order_changed": false,
+      "task_dependencies_changed": false,
+      "task_changes": [
+        {
+          "task_id": "randomness_research.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec",
+            "title"
+          ],
+          "depends_on_before": [
+            "randomness_research.001"
+          ],
+          "depends_on_after": [
+            "randomness_research.001"
+          ]
+        },
+        {
+          "task_id": "randomness_research.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.001",
+          "change": "revised",
+          "changed_fields": [
+            "acceptance",
+            "initiating_text_roles",
+            "spec",
+            "text_review_decisions",
+            "text_review_targets",
+            "title"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "revised",
+          "changed_fields": [
+            "acceptance",
+            "initiating_text_roles",
+            "spec",
+            "text_review_decisions",
+            "text_review_targets"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.003",
+          "change": "revised",
+          "changed_fields": [
+            "initiating_text_roles",
+            "spec",
+            "text_review_decisions",
+            "text_review_targets"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.004",
+          "change": "revised",
+          "changed_fields": [
+            "initiating_text_roles",
+            "text_review_decisions",
+            "text_review_targets"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "revised",
+          "changed_fields": [
+            "acceptance",
+            "initiating_text_roles",
+            "spec",
+            "text_review_decisions",
+            "text_review_targets"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002"
+          ]
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "2c456f27f258abd31a5bf3eab80b46b9fac0d80672be427dd6074ad60449b7b3",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "2129ab51f157516ad635aab76591ab2475233c09ea7e132233d66c3b9ca3e0fb",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "99684c3f28b93afaab08e8330f98cb067d306807fc31a224df0ff2d6f4913033",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "5e94e4aea42f9cce12bb65bb0920a6c4d6d3578dd77943bee8c760a244e6876f",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "72ed064a5657d44e8361d60569f5c2e14034e624a813fc5cb9390f00c27a0c3a",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "d32f4f9ed3619dd8ce42ab4adb2c000cd4bbe65f39d1fe9841e85fff356298f4",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "b7280ff5d040a187e222f1bf3af052ea9a6504460a79c7d38575ad6b57b35822",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "b1c64dcaf33f0011255c1cb139cf90c1240e6ee2a2060e4a8f2f5df3407edbd3",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "155ce1d904aa42f65fc958c647ee091a838bbb2c4eec25d64f1a4940a99ad5f8",
+        "doc/tasks/randomness_research.json": "92b9c7b7f825665d1d3d4f51ea5a95e30acdec93cbb7164f0ca9763aad6d682b",
+        "doc/tasks/randomness_research_writing.json": "8746c74b93930ce7f4f484fdd978ebb66dbc423cccfaa6a3e1e52b7f423192d6",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "b9df7ddff7bb0e3d984ce0b9ae7972e11791a04478f7bd297d371642c05eef32",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "65dc2e71834683a767a2439d509076896764bba1339073e1a630bcd970a08e2e",
+        "doc/book/experiments/README.md": "d0db9fc1900d80cf3e27be52e21904e248912787fc88034457c6f43b144aa9ad",
+        "doc/book/experiments/validate_experiments.py": "72e2295b8d5d6ee2f85e337da0daaf651e78fd954e46c1a85c774ff026b73ab2",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "14867c9b93633f6516ab5ebe87367dc55980d58beeca8f9129f2e41b0417a61f",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "1f05d33c2c0d0b4f2704391489bac9f87334b2eafc81ad939b8a3f01313bd6fa",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "2d3364c3d23c5bf0e01e190fe74cb13fc5f9873a056d8fe63acd442fab68d214",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "7149cdcd000cb0316006b9536f162a5ee23cf4c89c710ecd908bb897ba9f6ef7",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355"
+      },
+      "observations": [],
+      "runtime_changes": false,
+      "followup_task": "randomness_research_writing.005",
+      "future_revision_contract": "Retain exact initiating sources and both text reviews; select future work from observations or reconstruction difficulties, including defer/stop, while preserving previous plans, source versions and task progress."
+    },
+    {
+      "id": "2026-10-14-first-scripted-loop",
+      "status": "applied_to_pilot_and_plan",
+      "basis_kind": "executed_scoped_pilot",
+      "trigger_sources": [
+        "User: lets do the first experiment loop"
+      ],
+      "reason": "Execute the selected bounded comparison, preserve actual failures, review both texts and defer expansion pending human evidence. A later input-routing audit replaced direct handler calls with actual Godot keyboard events and repaired F6/F7 conflicts.",
+      "predecessor_manifest": "history/2026-10-14-before-first-run/manifest.json",
+      "selection": "48-value pilot in isolated existing museum; no installed route rewrite.",
+      "alternatives": [
+        "Continue to Source Lab or sleeve immediately (deferred).",
+        "Human encounter and independent reconstruction first (selected).",
+        "First-channel height mapping if the encounter motivates it (candidate only)."
+      ],
+      "observations": [
+        "seed-bench.O1",
+        "seed-bench.O2",
+        "seed-bench.O3",
+        "seed-bench.O4"
+      ],
+      "evidence_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+      "runtime_changes": true,
+      "human_gates": "open",
+      "followup_task": "randomness_research_writing.005",
+      "task_changes": [
+        {
+          "task_id": "randomness_research.002",
+          "change": "progress_and_evidence",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research.003",
+          "change": "progress_and_evidence",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.001",
+          "change": "progress_and_evidence",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "progress_and_evidence",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "progress_and_evidence",
+          "dependency_change": false
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "49320bf3ff0184b5a651dc87a755762a75d44bdace374d820353e88493623418",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "65bcfce5dd418e4559c6ab9773ba3f7e67a1ce4d17fc37802462c2c85f80efab",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "b1a0c9431fca97e2412956a9baf1ae8b4220a4203d3607f537714a1a5d0998cc",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "24045dba96edac81872493eb8c8b11ce4491a1a3be6fdcf81769f98b7f36bfce",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "f5069caf407186b360cc354a03a7eafccd0ead33fb9676bbed3f8d787fd90bf9",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "5d4a9c2121628e177c7d6a344951fecc80b91dfcca438f09145af28e977d42d0",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "12615ea03130fbf2d03f14af08154b2ba3818c7f230290d167fcbd0af387fd54",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "19a1f1d8cddc968cea10baecc461cfabd0b8cf7dcde27bd550431f2b1fcbd38d",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e1f470ccf0f8d8ade8476be3fba6f1eabc89d6cfd836d92f82915c04491969a7",
+        "doc/tasks/randomness_research.json": "e077438454ef0f10a65a155582bead44c71a92ab1c0c371d0b036ec44b59fca6",
+        "doc/tasks/randomness_research_writing.json": "dabc1c03c2c087ef6d438865add6adc30960d3f72ee2315c07154c0fcd5cbc17",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "50fda4041c64bc6ec6faa54ab9ec20d79fe8a8a79354e2b66eb1464ec0e5e7b2",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "032c90b8837d05148c9ad0ca15d2c0c2ca9513b4abee1c2690b296d8eaf528a7",
+        "doc/book/experiments/README.md": "93f8df3bc1199b4aef06f22dbb7e24f56d4088d793a8f6073bb449568128b88c",
+        "doc/book/experiments/validate_experiments.py": "221fe1ed4fa2d89d7cac261ff8b18ff30c0df9752ef352353ad14eaba1ddf847",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "5433487be4e31f2e51616e4cafa77aa0a1e73e099c5c1db4065b876221a7ab56",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "f69bf3fe9cdbe8db5dbb399673b075b39ec811b71152ba230ee8b9e9c3c6e6c1",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "bae0c3830ed24d5fbc03f7bbd9fff2253ec9d81f26903bd8747367d7f2bac4c4",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "f6855eb9ed6dcd3528f2ddbed2033f9501c16d18e52f372248232d7a3fe8875c",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355",
+        "doc/book/course/randomness-research-2026-10-14/HALLS.md": "55968045c8060441b97c96f44d2b8a456bd09a3995810c3601fb895c9a1fa15e",
+        "doc/book/course/randomness-research-2026-10-14/PARTICLE_PATH.md": "c36c37b49bd154d89d34f9cab6dd5ffaa634fdfa60bcd3f68d43a2791e828c1d",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial.md": "42bb31f89eb598638aa0ea7e16225aa215e3af3acc08b88916d68691804f3cce",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial-introduction.md": "8b8c3be550cb2c9bccb9f8085c0b1d39144853e753c87216328fb6bbc33b859b",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md": "420ab943c0ff8ab284134c2a67feb54d149cc7fbebd2f4fa619281d0a386e962",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md": "21f74b71efac64fe72d882463867741d910454ce26ad6756069af78d1f819684",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json": "0bb1971c22817a470b78ade9b4e2574cb0f4a666183fdddab6bbb268d61e60ad",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md": "ad14ed10821ef0436cc1157be7498da3f27a266490d5a1de268298d816d1940a",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md": "af9280c286ac87270b5fc62d70b83781afa972f525c8cdc808aebff8f1a531fe",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md": "228e5a7654c99b0c20890e58350ed75f56de62d797e289dc9f79488102bd5918"
+      },
+      "future_revision_contract": "Keep actual human accounts separate; update both text reviews and the provisional decision when the encounter occurs. No fabricated reader or VR acceptance."
+    },
+    {
+      "id": "2026-10-14-vr-board",
+      "status": "applied_to_pilot_and_plan",
+      "basis_kind": "executed_scoped_pilot",
+      "trigger_sources": [
+        "User reply requesting compact VR controls; exact receipt in implementation/003/evidence/vr-board-feedback.json"
+      ],
+      "reason": "The first human return concerned access to the experiment. Reuse the demo hand/pointer mechanism, rectangular controls and one board with close/reopen; then assess usability before another mapping.",
+      "predecessor_manifest": "history/2026-10-14-before-vr-board/manifest.json",
+      "selection": "Apply the user-requested compact board to the isolated pilot; keep sampled values and mappings unchanged.",
+      "alternatives": [
+        "Keep floating labels and carried point (superseded).",
+        "One rectangular-button board with close/reopen (implemented).",
+        "Advance to a new mathematical mapping immediately (deferred)."
+      ],
+      "observations": [
+        "seed-bench.O5",
+        "seed-bench.O6"
+      ],
+      "evidence_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+      "runtime_changes": true,
+      "human_gates": "open",
+      "followup_task": "randomness_research_writing.005",
+      "task_changes": [
+        {
+          "task_id": "randomness_research.003",
+          "change": "human_feedback_and_interface_revision",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "human_feedback_and_interface_revision",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "human_feedback_and_interface_revision",
+          "dependency_change": false
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "49320bf3ff0184b5a651dc87a755762a75d44bdace374d820353e88493623418",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "ffae64147660f73ff3aadee8e7cbf8317c603bc0a86495d7689c7b5f29d1627c",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "7f35191b3555a0f556051bc7b6565acea51651da65556998ee43251bf19f1c4d",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "24045dba96edac81872493eb8c8b11ce4491a1a3be6fdcf81769f98b7f36bfce",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "f5069caf407186b360cc354a03a7eafccd0ead33fb9676bbed3f8d787fd90bf9",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "0f5abc829fb606eb83a669728a5c046ac8edb80c71cb78ae9f3dba536045e3bf",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "12615ea03130fbf2d03f14af08154b2ba3818c7f230290d167fcbd0af387fd54",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "5ec5ab0c005a510b2f449957fe4e8ca686f4e702fb1d0ab20bda1f757531c1c5",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e1f470ccf0f8d8ade8476be3fba6f1eabc89d6cfd836d92f82915c04491969a7",
+        "doc/tasks/randomness_research.json": "accd49d17092b0c6b5ad453e19d1aaa2599f018e78de13886af9e1ea92caa207",
+        "doc/tasks/randomness_research_writing.json": "9e35f7982d6d2b32acf67ab3a89075c065c11eab07f81d877e73a27b083348a3",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "50fda4041c64bc6ec6faa54ab9ec20d79fe8a8a79354e2b66eb1464ec0e5e7b2",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "032c90b8837d05148c9ad0ca15d2c0c2ca9513b4abee1c2690b296d8eaf528a7",
+        "doc/book/experiments/README.md": "93f8df3bc1199b4aef06f22dbb7e24f56d4088d793a8f6073bb449568128b88c",
+        "doc/book/experiments/validate_experiments.py": "3bdbf6f415fe4a34246505413df8d46dfe7cfe77a8c4817d37fb2ad185d15c72",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "0b870583ad6a14ea54657d4105f7a73643ff7df88bd10e6567032632e48c3f87",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "4520cafefb319f8254269e51fd8d783bac81582cd7ebe65b4215fc9d92603eee",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "bae0c3830ed24d5fbc03f7bbd9fff2253ec9d81f26903bd8747367d7f2bac4c4",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "ffcb5730d09ac5e89bfe748882e33aab6077fec1801f21b806261e8888554ea2",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355",
+        "doc/book/course/randomness-research-2026-10-14/HALLS.md": "55968045c8060441b97c96f44d2b8a456bd09a3995810c3601fb895c9a1fa15e",
+        "doc/book/course/randomness-research-2026-10-14/PARTICLE_PATH.md": "c36c37b49bd154d89d34f9cab6dd5ffaa634fdfa60bcd3f68d43a2791e828c1d",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial.md": "00287e1844340645fa7e9bfcd959909ce0e25745a69646981eaec5185488ff78",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial-introduction.md": "51cc4e1f9a984cd9aa5d1e92cf7e0935bc3e2f1c4d4cf2d9bb451a00d5ac51b8",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md": "90ad5ae38230334472fc2da4105c47a65d6233f3cde8cf8de9d84d21c7a9bac3",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md": "ebfb5f0d9496c5ab489465382fabea9eacacfabebbbf71efcc200a8851071f15",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json": "55bbcde708e9c5eab86b4036aa49c8121420871844ebc6092747f6fc20ad98fc",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md": "ad14ed10821ef0436cc1157be7498da3f27a266490d5a1de268298d816d1940a",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md": "425bd35f58c41c1e139400a95978a2e3d11dbe692acebad98509229ba1388d30",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md": "a104bf675cabcc704377632b188b80066f6a271ce01f59fd12f975f4bd0e95c5",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md": "38e38be7ab5f00ec5f78edcf4ccb81b0e39d1b13b4ea5bcbd53f3a9cc15b33f7",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_board.gd": "9d6e195c6aabf4901abb8e1f11387546d04df676ae75c4419dd62491a6c50243",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json": "5ad333cefef0e993d393a0045aaecc80fdc6865f2fd995f6acd145e30e122a53"
+      },
+      "future_revision_contract": "Record real headset and reconstruction results separately from programmatic hand/pointer checks; return both to tutorial and final."
+    },
+    {
+      "id": "2026-10-14-anchored-bars",
+      "status": "applied_to_pilot_and_plan",
+      "basis_kind": "executed_scoped_pilot",
+      "trigger_sources": [
+        "User request for smaller gutter, less amplified height and bars growing from fixed bottoms; clarification: between cubes/bars only. Exact receipt in implementation/003/evidence/anchored-bars-feedback.json"
+      ],
+      "reason": "An encounter prompts the next apparatus change. Keep the same values, narrow the cell gutter and grow gentler bars from fixed bottoms; retain the earlier recipe and replay evidence.",
+      "predecessor_manifest": "history/2026-10-14-before-anchored-bars/manifest.json",
+      "selection": "Implement schema v2 with 1.5 cm cube/bar gutters, fixed bottoms and 4-16 cm bars; keep button gaps unchanged.",
+      "alternatives": [
+        "Floating cubes with 30 cm height excursion retained as historical replay.",
+        "Gentler anchored bars with smaller cell gutters selected by the user.",
+        "Tighter button gaps excluded by the user clarification."
+      ],
+      "observations": [
+        "seed-bench.O7",
+        "seed-bench.O8"
+      ],
+      "evidence_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+      "runtime_changes": true,
+      "human_gates": "open",
+      "followup_task": "randomness_research_writing.005",
+      "task_changes": [
+        {
+          "task_id": "randomness_research.003",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        }
+      ],
+      "future_revision_contract": "Retain actual human accounts and earlier recipe outcomes; compare within a declared recipe, return the result to both texts, and keep headset and independent reconstruction evidence separate.",
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "49320bf3ff0184b5a651dc87a755762a75d44bdace374d820353e88493623418",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "8a1e3faaf407f9bde327300b88de17bcb8c38f584845ee1d38ef749654ad9a8a",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "b179a34d9100beeb078d70c8417b84aecd3ca9f02d26e3ca287851196f3d9a19",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "24045dba96edac81872493eb8c8b11ce4491a1a3be6fdcf81769f98b7f36bfce",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "f5069caf407186b360cc354a03a7eafccd0ead33fb9676bbed3f8d787fd90bf9",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "ac56bd8dbfa9c4f7a9a57f76ed2f0f081a7d4bbe6646a05e7399be9f7c094ccd",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "12615ea03130fbf2d03f14af08154b2ba3818c7f230290d167fcbd0af387fd54",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "6145e4d608942d308cf1bc6bd0f559c451c23b106766c52ff59543a28cd82f7c",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e1f470ccf0f8d8ade8476be3fba6f1eabc89d6cfd836d92f82915c04491969a7",
+        "doc/tasks/randomness_research.json": "3ebadf2cd42e9313dbfa8ff45acdc916e96bae6af1731292c8d778922fd5d652",
+        "doc/tasks/randomness_research_writing.json": "3fc873492650c3db9fabe70c836251ad567128216bd67564b00e674f8985515a",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "50fda4041c64bc6ec6faa54ab9ec20d79fe8a8a79354e2b66eb1464ec0e5e7b2",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "032c90b8837d05148c9ad0ca15d2c0c2ca9513b4abee1c2690b296d8eaf528a7",
+        "doc/book/experiments/README.md": "93f8df3bc1199b4aef06f22dbb7e24f56d4088d793a8f6073bb449568128b88c",
+        "doc/book/experiments/validate_experiments.py": "b3ed384a49a5376ebda547d66fbda012849a11e768199292e34a96025a172be9",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "a41e357f1141dec21b3744a9f3937268556b4f88b89b984bb7e107250eaace87",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "76b067e0da98f347d736423e0010b4c1f8d2d91b7a2054402d7673f602d17b77",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "964900d3ddb0a723c923bc8cb4eb8ba478d50c41bad70d1c41ffea2fc556375a",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "ae712c946a1f376453b36fab2fce3406b3bb0d428a6a5c9f46a2a135934dfc94",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355",
+        "doc/book/course/randomness-research-2026-10-14/HALLS.md": "55968045c8060441b97c96f44d2b8a456bd09a3995810c3601fb895c9a1fa15e",
+        "doc/book/course/randomness-research-2026-10-14/PARTICLE_PATH.md": "c36c37b49bd154d89d34f9cab6dd5ffaa634fdfa60bcd3f68d43a2791e828c1d",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial.md": "2d1021828d2d6010f5df16cfcd1aa1be0302cdf8dee63a9286602a6616d6cd1e",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial-introduction.md": "2f5701983b47206dcac9a40505a6b05aac50d8dc668c971df654828a1771ac75",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md": "4be16905923239e3dcb189f652b1c9586c88710769d7a09a3e497fb3a90228e2",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md": "ac7332f6451713ef2e98bc5fa12c11d1795e671b7f42b0667230ad32ae852caa",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json": "957951710f53bd4c26a7ac7aca055cfc4b026ab122ffa20d158575304a039bbc",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md": "ad14ed10821ef0436cc1157be7498da3f27a266490d5a1de268298d816d1940a",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md": "7531e0cc156d224b980abe327440d5ffec9ef53de841b1ba5ff9213509557784",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md": "1290a3d1f1d435d317be3071aef0603d959804a04a27c7e11913498447f9c133",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md": "38e38be7ab5f00ec5f78edcf4ccb81b0e39d1b13b4ea5bcbd53f3a9cc15b33f7",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_board.gd": "3a3b071dcf39f8154e0472a4385972e32d2f78eaec3cc4df749a06079a780945",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json": "5ad333cefef0e993d393a0045aaecc80fdc6865f2fd995f6acd145e30e122a53",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md": "c5cc3fd0cb2fd66f88325cbd36c4f96ad8d3a4e58957c8992f1c3cab29ecc6fb",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_record.gd": "4855a244232ee46ad40fe1ec85473bea70744ab1c536369145da2a618c23b05c",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_study.gd": "af12a699623352385e9026875628778a9b47497c83ccc53968eaba1430eec02e",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/probe.gd": "0caee9c46e8bf23ce2d1ffdd22a5b76d07b53cc192bbf0af6833c8043cb3752c",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/museum_probe.gd": "30ccfd272f480a0fc13ff7d24af33d22203ce953fbd3ed9ce544f506bb36a826",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/run_checks.py": "0cabf7dd2da16b783894a164f61e027f84ff019b9ecac5e41c4d6c72f91825f8",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json": "1971f1d08895f574317480f8843ee27569b5729f2f482d9e8d549e88ce08dca5",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json": "7e75f1ba96ca336fb12be3f0e8572668db043229be93344a549972dba7407104",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/ledger.json": "940bda4cc4118bd7611ac82f6632349b8a1cca1dc1e9626501510709d69b1353",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/ledger.json": "940bda4cc4118bd7611ac82f6632349b8a1cca1dc1e9626501510709d69b1353"
+      }
+    },
+    {
+      "id": "2026-10-14-filled-trays",
+      "status": "applied_to_pilot_and_plan",
+      "basis_kind": "executed_scoped_pilot",
+      "trigger_sources": [
+        "User: we should fill the board"
+      ],
+      "reason": "Widen cells to fill the display trays while preserving the small gutter and bar height range.",
+      "predecessor_manifest": "history/2026-10-14-before-filled-trays/manifest.json",
+      "selection": "9 cm cell width/depth, 10.5 cm pitch, 40.5 cm grid in a 45 cm tray; height and button gaps unchanged.",
+      "alternatives": [
+        "Compact grid retained for replay.",
+        "Wider cells selected to fill the existing trays."
+      ],
+      "observations": [
+        "seed-bench.O9",
+        "seed-bench.O10"
+      ],
+      "evidence_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+      "runtime_changes": true,
+      "human_gates": "open",
+      "followup_task": "randomness_research_writing.005",
+      "task_changes": [
+        {
+          "task_id": "randomness_research.003",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        }
+      ],
+      "future_revision_contract": "Retain actual human accounts and earlier recipe outcomes; compare within a declared recipe, return the result to both texts, and keep headset and independent reconstruction evidence separate.",
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "49320bf3ff0184b5a651dc87a755762a75d44bdace374d820353e88493623418",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "2cd048ebca0184f0e2adbac5cba92d03b49eeca2b39de7540349c58086c0e1c0",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "b179a34d9100beeb078d70c8417b84aecd3ca9f02d26e3ca287851196f3d9a19",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "24045dba96edac81872493eb8c8b11ce4491a1a3be6fdcf81769f98b7f36bfce",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "f5069caf407186b360cc354a03a7eafccd0ead33fb9676bbed3f8d787fd90bf9",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "134bd68d19911f05407d47e6552de67211b492ee9ee230d8159284ef5abd1c0c",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "12615ea03130fbf2d03f14af08154b2ba3818c7f230290d167fcbd0af387fd54",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "94e8995d9cb8d909cd0c452108172195e0a4efab3af66e7da88e73c24b3aec24",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e1f470ccf0f8d8ade8476be3fba6f1eabc89d6cfd836d92f82915c04491969a7",
+        "doc/tasks/randomness_research.json": "98274a9a7215cf6c404c909bb9c44d9b76fe6cb749a0c2f1a1761b098421df53",
+        "doc/tasks/randomness_research_writing.json": "0f7808a5a1fd6b0150282d3235bacd25852ba04b38e775662bf8e7de4a3d727e",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "50fda4041c64bc6ec6faa54ab9ec20d79fe8a8a79354e2b66eb1464ec0e5e7b2",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "032c90b8837d05148c9ad0ca15d2c0c2ca9513b4abee1c2690b296d8eaf528a7",
+        "doc/book/experiments/README.md": "93f8df3bc1199b4aef06f22dbb7e24f56d4088d793a8f6073bb449568128b88c",
+        "doc/book/experiments/validate_experiments.py": "b3ed384a49a5376ebda547d66fbda012849a11e768199292e34a96025a172be9",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "95f7d603c471e6ffcab46674a68e270c1f00ae1c242b72064f1050c1a18e685b",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "ae1710d6c9cf721cdef24ef1c657d4357cd89143d1c2033a601f74c11a70225b",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "964900d3ddb0a723c923bc8cb4eb8ba478d50c41bad70d1c41ffea2fc556375a",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "e39008bff09a085c1730f86d6155f52216dbffd25450d721e77e840e2b273fbe",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355",
+        "doc/book/course/randomness-research-2026-10-14/HALLS.md": "55968045c8060441b97c96f44d2b8a456bd09a3995810c3601fb895c9a1fa15e",
+        "doc/book/course/randomness-research-2026-10-14/PARTICLE_PATH.md": "c36c37b49bd154d89d34f9cab6dd5ffaa634fdfa60bcd3f68d43a2791e828c1d",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial.md": "33b1806dc47e3a59db157f8b4c06e374c24e4aa924544b314f756f53ddb26de9",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial-introduction.md": "d70b146da6e1150ca0d19b013645db118cffc19a0b8fd6b06591f93395f499de",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md": "4be16905923239e3dcb189f652b1c9586c88710769d7a09a3e497fb3a90228e2",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md": "33399fb44749e8694bb3b34e6b43e64544511e546ac50e81af9e6ec5a2f4cc10",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json": "1a62491d44ad2870fff9a21956ba8b0a76ebeff712eedbe4ef64d7e37526f072",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md": "ad14ed10821ef0436cc1157be7498da3f27a266490d5a1de268298d816d1940a",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md": "24c0559bc9fa0f233e127f0d35dd5d17e654e6cd3853939c8bed71f91cc40c6e",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md": "d259dcd3c9efbcb85c2398d86bfda3716ca8180f6a2aacb060b02ccacb2ea010",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md": "38e38be7ab5f00ec5f78edcf4ccb81b0e39d1b13b4ea5bcbd53f3a9cc15b33f7",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_board.gd": "0e07d146fe9aff88b8323b1f84c7d5b3c35f7e75c7eaf8f69331791bdc749339",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json": "5ad333cefef0e993d393a0045aaecc80fdc6865f2fd995f6acd145e30e122a53",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md": "43e25c46e3ae1c55e6b6d48f4950963485061f85b4e59cc50628d0851adfed28",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_record.gd": "0bd1a0f865b08bd3c1ed291dadbd6a8337229092a140d9d56bc8a2df694219b5",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_study.gd": "2141445337b9fdb3e737999ebc1af2779ed9a0eff2d78e31f8abaeb5429d1a6d",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/probe.gd": "caac677c3a312a24ce180adae73dabaff650730d208dc2aab2e5b2e664a9a8b7",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/museum_probe.gd": "24e0b431200ad0deafb02346cc13c81d572930b4a2321457dca4ea0d091f174d",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/run_checks.py": "0cabf7dd2da16b783894a164f61e027f84ff019b9ecac5e41c4d6c72f91825f8",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json": "1971f1d08895f574317480f8843ee27569b5729f2f482d9e8d549e88ce08dca5",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json": "7e75f1ba96ca336fb12be3f0e8572668db043229be93344a549972dba7407104",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/ledger.json": "a1a98710a7e9107dca066f197965bff1790f32175137be659cabbca53e3b44d6",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/ledger.json": "a1a98710a7e9107dca066f197965bff1790f32175137be659cabbca53e3b44d6",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-feedback.json": "e78f3bf1d5297ec232e75b7090e66051293108c8ffa0c8e9b55417830f72c79e",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json": "abefa06d9d173b2917feebfc879bec7e8e2afad5aabf69ed94cad6da7341daff"
+      }
+    },
+    {
+      "id": "2026-10-14-space-views",
+      "status": "applied_to_pilot_and_plan",
+      "basis_kind": "executed_scoped_pilot",
+      "trigger_sources": [
+        "User request for simultaneous flat/bars/combo, random-driven scale and rotation, and broader borders; exact request in evidence/space-views-feedback.json"
+      ],
+      "reason": "Compare different assignments of the same retained values simultaneously, then let a human observation select the next change.",
+      "predecessor_manifest": "history/2026-10-14-before-space-views/manifest.json",
+      "selection": "Five framed panels: RGB flat, neutral bars, combo, mean-driven uniform shrink and marked yaw; broader bronze borders.",
+      "alternatives": [
+        "Two-view flat/bar toggle retained for historical replay.",
+        "Five simultaneous views selected by the user.",
+        "Scale/rotate as whole-demo camera controls excluded by clarification."
+      ],
+      "observations": [
+        "seed-bench.O11",
+        "seed-bench.O12"
+      ],
+      "evidence_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+      "runtime_changes": true,
+      "human_gates": "open",
+      "followup_task": "randomness_research_writing.005",
+      "task_changes": [
+        {
+          "task_id": "randomness_research.003",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "human_geometry_revision_and_current_recipe",
+          "dependency_change": false
+        }
+      ],
+      "future_revision_contract": "Retain actual human accounts and earlier recipe outcomes; compare within a declared recipe, return the result to both texts, and keep headset and independent reconstruction evidence separate.",
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "49320bf3ff0184b5a651dc87a755762a75d44bdace374d820353e88493623418",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "26743b41b711adf6cba1099d807d60fcf8f894206574c34943d81c0f85345e7f",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "5f48aa5d77c8695695e518b9e08b14b150501c1a4f74534a6d2109b01f656c72",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "24045dba96edac81872493eb8c8b11ce4491a1a3be6fdcf81769f98b7f36bfce",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "f5069caf407186b360cc354a03a7eafccd0ead33fb9676bbed3f8d787fd90bf9",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "fb34b23ea143cbf7133ffa101a619b4ecdcadfc11c5d01ec56fce8078ae9f152",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "12615ea03130fbf2d03f14af08154b2ba3818c7f230290d167fcbd0af387fd54",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "3f396c834e958075bf88701d23160c6e3b343f73d41ad99f98cb0db0c7d10801",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e1f470ccf0f8d8ade8476be3fba6f1eabc89d6cfd836d92f82915c04491969a7",
+        "doc/tasks/randomness_research.json": "b07a66ac8599fe2bb3ad31923d94b5cfe3246da89eecabc17792f9147dc0aed8",
+        "doc/tasks/randomness_research_writing.json": "9eded998dcf95752c0913b4e894929e38219c75e51c865425be85deab0332259",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "50fda4041c64bc6ec6faa54ab9ec20d79fe8a8a79354e2b66eb1464ec0e5e7b2",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "032c90b8837d05148c9ad0ca15d2c0c2ca9513b4abee1c2690b296d8eaf528a7",
+        "doc/book/experiments/README.md": "93f8df3bc1199b4aef06f22dbb7e24f56d4088d793a8f6073bb449568128b88c",
+        "doc/book/experiments/validate_experiments.py": "b3ed384a49a5376ebda547d66fbda012849a11e768199292e34a96025a172be9",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "08579686df73db726c626e9b9ba22dbe800fa7a6c497c3c346a2c922b33ef1ab",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "6ddd1639bcc34957c955d1b25064983d951b2409e5ed466e900e9eba9fd1ad07",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "964900d3ddb0a723c923bc8cb4eb8ba478d50c41bad70d1c41ffea2fc556375a",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "f3f3946421c639dab0c1b79a53643aa128408c748f6637cfaaa68eaf206deae1",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355",
+        "doc/book/course/randomness-research-2026-10-14/HALLS.md": "55968045c8060441b97c96f44d2b8a456bd09a3995810c3601fb895c9a1fa15e",
+        "doc/book/course/randomness-research-2026-10-14/PARTICLE_PATH.md": "c36c37b49bd154d89d34f9cab6dd5ffaa634fdfa60bcd3f68d43a2791e828c1d",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial.md": "18a2079811e209b1659c44dc57386f80a8f20141477a8a57bd22d08a51b5b31e",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial-introduction.md": "3c47822b0e2324ed8f2e2ba8a4238da88a2700ebf90064dfa7c61b7359825342",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md": "f665a54f38d926a1f28e3b66d1caa0084a5365322709ea8f0143e728b2e86d6f",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md": "e36c4594c77b66f68b3ce73a2339c74956d350514af10b9dc99eab7dbf359dd8",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json": "c822a9c7b30a91958bf02308259986da02591547f8059c8294b72be9c940c223",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md": "ad14ed10821ef0436cc1157be7498da3f27a266490d5a1de268298d816d1940a",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md": "554919eacc9c959b6e42f95eb60daa465a3725b75ad841351038b5dda198b9e7",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md": "fb27cd834c77e7a266a5cc25b96a6afb942187af217fa420afc8ba726e263ee0",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md": "38e38be7ab5f00ec5f78edcf4ccb81b0e39d1b13b4ea5bcbd53f3a9cc15b33f7",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_board.gd": "6ca70beb15bdcdb2fd78c763c5ec77bdf5e0efb925dfb2008e8a50728eb817ba",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json": "5ad333cefef0e993d393a0045aaecc80fdc6865f2fd995f6acd145e30e122a53",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md": "028d8f08364fe9bf8afd344145bacc8653540847bbd7f341bc4301ece1199358",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_record.gd": "b61dcf5cf4ac4365dc73cb85fd93cc25e3f1d3b836bfa1758df479655ead6fdb",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_study.gd": "ab6d6055ec249239418e3ee553f13e13f5cfa701579c7f89d5a31c049dbb99d9",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/probe.gd": "e32a893d0549f604229ef126a13c22b013938c2c1998431d97361685fb3bc6ae",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/museum_probe.gd": "61a8f21b1f6d88d6c0f04c3b0c30ab14f2ddee3f6853235def11f6f4fb9fe0f8",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/run_checks.py": "686119a381af152d72fd455b2fdac82ba056823a69cd50ad104a7a3ba0da57f2",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json": "1971f1d08895f574317480f8843ee27569b5729f2f482d9e8d549e88ce08dca5",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json": "7e75f1ba96ca336fb12be3f0e8572668db043229be93344a549972dba7407104",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/ledger.json": "1c30bcdb30e8dc84c5769192701dea3eb3af6e2aa59eb699bdf47515eefffc29",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/ledger.json": "1c30bcdb30e8dc84c5769192701dea3eb3af6e2aa59eb699bdf47515eefffc29",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-feedback.json": "e78f3bf1d5297ec232e75b7090e66051293108c8ffa0c8e9b55417830f72c79e",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json": "abefa06d9d173b2917feebfc879bec7e8e2afad5aabf69ed94cad6da7341daff",
+        "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md": "dbb594181e2288aebc2606bf471f7362d625c7199251a08b6eab4a9c6ecfd139",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/visit.gd": "fe4386e2347f527087306908f923ae22b9f9b78e4b2a71ebfb5c97efc79d40b6",
+        "doc/book/experiments/random-definition/seed-bench-001/launch.py": "4207434b2f031611b04a08bdcb35bf81c2bd635d93c9a71f1e17d102ee02be4c",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-feedback.json": "df794364de99299598ab333c699e05910bc7603a2e87e27ae72b0d9b6c4b2c91",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json": "2b6b246f81759afade9b37be7c55ee910784f4686ac472cd20d095162dcff127"
+      }
+    },
+    {
+      "id": "2026-10-14-museum-install",
+      "status": "applied_to_pilot_and_plan",
+      "basis_kind": "executed_scoped_pilot",
+      "trigger_sources": [
+        "User reports seed_study absent from desktop museum and web editor; recent room artifacts missing from editor palette."
+      ],
+      "reason": "Promote the reviewed five-view experiment into the normal content chain and keep the web editor synchronized with authored map edits.",
+      "predecessor_manifest": "history/2026-10-14-before-museum-install/manifest.json",
+      "selection": "Registered seed_study at (10,17), rotation 270; retain every existing placement. Refresh web overview from map inputs and show the complete chapter palette.",
+      "alternatives": [
+        "Keeping the pilot only in its injection launcher would leave normal visitors unable to find it."
+      ],
+      "observations": [
+        "seed-study-install.O1",
+        "seed-study-install.O2"
+      ],
+      "evidence_record": "doc/book/iterations/2026-10-14-seed-study-install/verification.json",
+      "runtime_changes": true,
+      "human_gates": "open",
+      "followup_task": "randomness_research_writing.005",
+      "task_changes": [
+        {
+          "task_id": "randomness_research.003",
+          "change": "normal_museum_installation",
+          "dependency_change": false
+        }
+      ],
+      "future_revision_contract": "Retain actual human accounts and earlier recipe outcomes; compare within a declared recipe, return the result to both texts, and keep headset and independent reconstruction evidence separate.",
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "638b920bd4fbfe7e6b77aa736ff3586b94c22d7fb0888956c4ae7ec7c19738f3",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "26743b41b711adf6cba1099d807d60fcf8f894206574c34943d81c0f85345e7f",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "5f48aa5d77c8695695e518b9e08b14b150501c1a4f74534a6d2109b01f656c72",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "24045dba96edac81872493eb8c8b11ce4491a1a3be6fdcf81769f98b7f36bfce",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "f5069caf407186b360cc354a03a7eafccd0ead33fb9676bbed3f8d787fd90bf9",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "fb34b23ea143cbf7133ffa101a619b4ecdcadfc11c5d01ec56fce8078ae9f152",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "12615ea03130fbf2d03f14af08154b2ba3818c7f230290d167fcbd0af387fd54",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "3f396c834e958075bf88701d23160c6e3b343f73d41ad99f98cb0db0c7d10801",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e1f470ccf0f8d8ade8476be3fba6f1eabc89d6cfd836d92f82915c04491969a7",
+        "doc/tasks/randomness_research.json": "e560375d2990d5f243262111f2dc06b3b67bfe66d5c4b3f3ca3cb36cbb8d7465",
+        "doc/tasks/randomness_research_writing.json": "9eded998dcf95752c0913b4e894929e38219c75e51c865425be85deab0332259",
+        "doc/book/BOOK_FRAME.md": "c8d9e803807f2534fd39136a0800c7b6b2be66a1150885ffb5b99e254b434a7c",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "50fda4041c64bc6ec6faa54ab9ec20d79fe8a8a79354e2b66eb1464ec0e5e7b2",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "032c90b8837d05148c9ad0ca15d2c0c2ca9513b4abee1c2690b296d8eaf528a7",
+        "doc/book/experiments/README.md": "93f8df3bc1199b4aef06f22dbb7e24f56d4088d793a8f6073bb449568128b88c",
+        "doc/book/experiments/validate_experiments.py": "b3ed384a49a5376ebda547d66fbda012849a11e768199292e34a96025a172be9",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "9fdde3865ef57de3ec104e91258acd0a9b59dd14b6b0ce90030086d79951aaae",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "6ddd1639bcc34957c955d1b25064983d951b2409e5ed466e900e9eba9fd1ad07",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "964900d3ddb0a723c923bc8cb4eb8ba478d50c41bad70d1c41ffea2fc556375a",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "f3f3946421c639dab0c1b79a53643aa128408c748f6637cfaaa68eaf206deae1",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "9f311072cf139bea02d7b741f54cc28bf85ae825771de1702ae919df6109b355",
+        "doc/book/course/randomness-research-2026-10-14/HALLS.md": "55968045c8060441b97c96f44d2b8a456bd09a3995810c3601fb895c9a1fa15e",
+        "doc/book/course/randomness-research-2026-10-14/PARTICLE_PATH.md": "c36c37b49bd154d89d34f9cab6dd5ffaa634fdfa60bcd3f68d43a2791e828c1d",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial.md": "18a2079811e209b1659c44dc57386f80a8f20141477a8a57bd22d08a51b5b31e",
+        "doc/book/experiments/random-definition/seed-bench-001/tutorial-introduction.md": "3c47822b0e2324ed8f2e2ba8a4238da88a2700ebf90064dfa7c61b7359825342",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md": "f665a54f38d926a1f28e3b66d1caa0084a5365322709ea8f0143e728b2e86d6f",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/REPORT.md": "e36c4594c77b66f68b3ce73a2339c74956d350514af10b9dc99eab7dbf359dd8",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json": "c822a9c7b30a91958bf02308259986da02591547f8059c8294b72be9c940c223",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md": "ad14ed10821ef0436cc1157be7498da3f27a266490d5a1de268298d816d1940a",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md": "554919eacc9c959b6e42f95eb60daa465a3725b75ad841351038b5dda198b9e7",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md": "fb27cd834c77e7a266a5cc25b96a6afb942187af217fa420afc8ba726e263ee0",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md": "38e38be7ab5f00ec5f78edcf4ccb81b0e39d1b13b4ea5bcbd53f3a9cc15b33f7",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_board.gd": "6ca70beb15bdcdb2fd78c763c5ec77bdf5e0efb925dfb2008e8a50728eb817ba",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/vr-board-feedback.json": "5ad333cefef0e993d393a0045aaecc80fdc6865f2fd995f6acd145e30e122a53",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md": "028d8f08364fe9bf8afd344145bacc8653540847bbd7f341bc4301ece1199358",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_record.gd": "b61dcf5cf4ac4365dc73cb85fd93cc25e3f1d3b836bfa1758df479655ead6fdb",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_study.gd": "ab6d6055ec249239418e3ee553f13e13f5cfa701579c7f89d5a31c049dbb99d9",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/probe.gd": "e32a893d0549f604229ef126a13c22b013938c2c1998431d97361685fb3bc6ae",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/museum_probe.gd": "61a8f21b1f6d88d6c0f04c3b0c30ab14f2ddee3f6853235def11f6f4fb9fe0f8",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/run_checks.py": "686119a381af152d72fd455b2fdac82ba056823a69cd50ad104a7a3ba0da57f2",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-feedback.json": "1971f1d08895f574317480f8843ee27569b5729f2f482d9e8d549e88ce08dca5",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/anchored-bars-sources.json": "7e75f1ba96ca336fb12be3f0e8572668db043229be93344a549972dba7407104",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/002/ledger.json": "1c30bcdb30e8dc84c5769192701dea3eb3af6e2aa59eb699bdf47515eefffc29",
+        "doc/book/course/randomness-research-2026-10-14/implementation/writing/005/ledger.json": "1c30bcdb30e8dc84c5769192701dea3eb3af6e2aa59eb699bdf47515eefffc29",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-feedback.json": "e78f3bf1d5297ec232e75b7090e66051293108c8ffa0c8e9b55417830f72c79e",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/filled-trays-sources.json": "abefa06d9d173b2917feebfc879bec7e8e2afad5aabf69ed94cad6da7341daff",
+        "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md": "dbb594181e2288aebc2606bf471f7362d625c7199251a08b6eab4a9c6ecfd139",
+        "doc/book/experiments/random-definition/seed-bench-001/runtime/visit.gd": "fe4386e2347f527087306908f923ae22b9f9b78e4b2a71ebfb5c97efc79d40b6",
+        "doc/book/experiments/random-definition/seed-bench-001/launch.py": "4207434b2f031611b04a08bdcb35bf81c2bd635d93c9a71f1e17d102ee02be4c",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-feedback.json": "df794364de99299598ab333c699e05910bc7603a2e87e27ae72b0d9b6c4b2c91",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-sources.json": "2b6b246f81759afade9b37be7c55ee910784f4686ac472cd20d095162dcff127"
+      }
+    }
+  ]
+}

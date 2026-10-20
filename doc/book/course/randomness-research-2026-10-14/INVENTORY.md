@@ -4,7 +4,7 @@
 
 Static coverage of every artifact cell in the 14 randomness, 11 noise and 5 particle sequence halls, plus the museum-only Biome Cage interlude. A resolving scene is evidence of availability, not tested behaviour. Direct script markers are only search aids. Shared support artifacts are included; blank cells and `0` placeholders are excluded. Registry duplicates are retained rather than silently choosing a winner. The JSON stores exact placement/configuration cells, direct scripts and source hashes.
 
-**31 halls · 111 distinct placed artifacts · 135 hall/artifact pairs.**
+**31 halls · 113 distinct placed artifacts · 137 hall/artifact pairs.**
 
 Missing registry keys: none. Missing selected scene files: none.
 
@@ -12,7 +12,7 @@ Missing registry keys: none. Missing selected scene files: none.
 
 The current museum declaration/plan has 15 randomness spaces (including Biome_Cage), 10 noise spaces (Lab_Path is absent), and no particle chapter. Particle scenes/maps exist as a branch, but are not currently a live Endless Museum chapter. The proposal must explicitly integrate that route. This is a comparison of configuration files, not a walk through the running museum.
 
-- randomness: sequence-only []; museum-only ['Biome_Cage']; map/live artifact-key differences: none.
+- randomness: sequence-only []; museum-only ['Biome_Cage']; map/live artifact-key differences: [{'map': 'Random_Definition', 'only_in_map': ['geiger_counter', 'lava_entropy_wall', 'seed_study'], 'only_in_live_plan': ['catalyst_pickup']}].
 - noise: sequence-only ['Lab_Path']; museum-only []; map/live artifact-key differences: none.
 - particles: sequence-only ['Particles_SingleAndArrays', 'Particles_Emitters', 'Particles_Forces', 'Particles_LifetimeAndTypes', 'Particles_Collision']; museum-only []; map/live artifact-key differences: none.
 
@@ -26,12 +26,14 @@ Texts: final.md (735 words), tutorial.md (1818 words), intent.md (270 words), su
 
 | Artifact | Scene / evidence |
 | --- | --- |
-| `catalyst_pickup` | `res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn` (exists) |
 | `film_prng_register` | `res://commons/artifacts/spine_films/monitors/film_prng_register.tscn` (exists) |
+| `geiger_counter` | `res://commons/artifacts/geiger_counter/geiger_counter.tscn` (exists) |
+| `lava_entropy_wall` | `res://commons/artifacts/lava_entropy_wall/lava_entropy_wall.tscn` (exists) |
 | `prng_crank_machine` | `res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn` (exists) |
 | `random_number_book_page_1955` | `res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn` (exists) |
 | `random_return` | `res://commons/artifacts/random_return/random_return.tscn` (exists) |
 | `seed_replay_demo` | `res://algorithms/randomness/seed_replay/seed_replay_demo.tscn` (exists) |
+| `seed_study` | `res://commons/artifacts/seed_study/seed_study.tscn` (exists) |
 | `slot_machine` | `res://algorithms/randomness/slot_machine/slot_machine.tscn` (exists) |
 | `trng_vs_prng` | `res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn` (exists) |
 

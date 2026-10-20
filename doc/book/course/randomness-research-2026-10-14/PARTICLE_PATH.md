@@ -166,3 +166,7 @@ For each of the five lessons, retain a completion record with the exact incoming
 After a selected reconstructed lesson, preserve a paragraph and make its interpretation explicit. “The wall remembers” might become a contact counter that changes one response; “the points belong together” might become drawn links or force-bearing constraints. These are different implementations of an open proposition, not its definitive meaning. [The Text Simulation Loop](TEXT_SIMULATION.md) and [unbuilt examples](text_experiments.json) provide the companion record.
 
 An executed comparison can generate several accounts, or expose a mistaken assumption in the first passage. Keep the before/after program and wording, label the evidence level, and ask what should change next. E2 may host a remembering-wall variant after the five lessons; it is not a new prerequisite. An author's later return can discover something in material they did not personally compose. Record that learning and any remaining debt separately from passing the tutorial's technical checks.
+
+## First-pilot return
+
+The [seed-bench observations](../../experiments/random-definition/seed-bench-001/observations.md) now record a scoped execution and preservation repairs. The human reconstruction remains open. Retain the current hall/particle order; any later import should preserve exact values and distinguish stored replay from new draws. This local pilot does not certify a particle or cross-hall implementation.

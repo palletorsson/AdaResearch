@@ -96,9 +96,177 @@
     "reason": "Author requested relevant feedback in tutorial.md and final.md. Bounded prose clarification; executable learner code and museum runtime unchanged. Native tutorial checks refreshed."
   },
   "commons/maps/Trans_Pre/tutorial.md": {
-    "date": "2026-10-06",
+    "date": "2026-10-12",
     "before": "ce7219153c28dee4f76a50d85229f034fa973653d28e9c8b29dbaaf5606cb2b4",
-    "after": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71",
-    "reason": "Author correction: use one whole BoxMesh, then teach walking-over pickup through overlap detection. One complete script, native checks and deliberate faults. Reflection and museum map unchanged."
+    "after": "4b258f80b2620c3719b6143ed311f3609804411360ebd2b4e6bc34bb4d8c97dc",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Trans_Introduction/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "8e87c8655a41872721a2022a2fc7ae874d6c9614e444088799e041f08374abd1",
+    "after": "bf8f7b0fc351fc46c55bee66cd85548b928919c3b488680d6127a31adcace402",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Trans_Translation/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "500b4b667c0a365021dc125ad64557fefa4ed0ce5b5f7ffb2f371df88abf0794",
+    "after": "b0d4fcea0c4f25f2a65e39345fd23570d9c6bcc995eeb185f3456333ae96eed7",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Trans_Rotation/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "53a6f1e03ff047d8f01e437eb416e3b390f69935d6586b24c61f6de20ac7d288",
+    "after": "f742271e7d08d2d1590a310d5ab0cbeaaf0e503fa93ffad3b07fc623e0c4b0fd",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Trans_Scale/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "58fdbb1055f0dbc516b354c9342d1c60ca7ffe9d5c980323c82aba656280ed16",
+    "after": "fbca21c6d3a65dca29f7b652ff1046580e4d4373b0835e6d4527b773d7d6eb0d",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Trans_Body/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "398c46f142ff47ebfaaea518523a3913d8bdc395e6eecf1d0e4581274882d7f3",
+    "after": "b8fb2bfb084efa56e62b86e10e6cfe641b2f0b1e00a958d37001c6c6e48f9174",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Trans_Pit/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "4833b8e82b40eb447a0917b2f67dbbe5178acf02fb3e7a18c310b041be1b855e",
+    "after": "dc683b408b7d896b334b5d9f05f98223fb524e204f6a6ea3c676e10099f7d9d8",
+    "reason": "Author requested the existing Transformation drafts as the current tutorial sequence with lineage into Arrays. Seven complete printed programs; fresh 204 native assertions, 19 variants, 12 rejected faults. Current final texts, museum runtime and other sequences preserved."
+  },
+  "commons/maps/Array/tutorial.md": {
+    "date": "2026-10-12",
+    "before": null,
+    "after": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce",
+    "reason": "Author requested continuing one sequence at a time from Transformation. Complete Arrays lineage and printed programs, native tested; current final.md and museum runtime preserved."
+  },
+  "commons/maps/Tutorial_3D/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "a2e6dab8907fc8b3f43b4f2eb48041901e585634333fba7f605cb077d50590d9",
+    "after": "f3c89d5a0100d8fe716e1ac6221779d23f01839464beab994e9abfac5284aa41",
+    "reason": "Author requested continuing one sequence at a time from Transformation. Complete Arrays lineage and printed programs, native tested; current final.md and museum runtime preserved."
+  },
+  "commons/maps/Tutorial_Tiling_Floor/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "38c56f91c562848ecfdf8d2bc5db3a4d9a115e2bd4bd70861c9a391815658b04",
+    "after": "c9834959b295ac8cb6101a4ac520c4fb97307053c9a47714471c6be00ee5cd67",
+    "reason": "Author requested continuing one sequence at a time from Transformation. Complete Arrays lineage and printed programs, native tested; current final.md and museum runtime preserved."
+  },
+  "commons/maps/Tutorial_Tiling_Walls/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "8c91e1c2e14ab36e2cf006b586bac18c815c0d88c6721bca7759e3c2fdbaf0a7",
+    "after": "eee1f3658ca7cc8c84d459ce9f8b58f1e21c965490a3ad9f4fe825b5b9109fbf",
+    "reason": "Author requested continuing one sequence at a time from Transformation. Complete Arrays lineage and printed programs, native tested; current final.md and museum runtime preserved."
+  },
+  "commons/maps/Tutorial_Disco/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "fa1cd78b10c7f31cb8140e0d5118d4184332a82eb303c368b91f9e900188602e",
+    "after": "361778bf7dc23c58c63216194e9166ec7eae1802cbab15b61adf1dc69a462925",
+    "reason": "Author requested continuing one sequence at a time from Transformation. Complete Arrays lineage and printed programs, native tested; current final.md and museum runtime preserved."
+  },
+  "commons/maps/Color_Context_Placed/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "14165897ec836485a0b3e0361490c79069c82a0c70a5571c304b42148601bf2d",
+    "after": "fb57666e4c90dc85d4e21217ff932c03d2b678b1aff7de31b4f956ed191487b2",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Flashlight/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "a73f7685c2b9b182e59477ee1c8a7f3a8d932a9a8769097c99b99e0e3eda1371",
+    "after": "df875056a0289511e5fea53cdf4362fe1230d9abb97b01b65cbe421eb79b0bbe",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Nails/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "ac67684b0654e5e136bf3fa1536edf9c796e626a7a825fa78aa54dc043bbc325",
+    "after": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Rainbow/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "96507eb1e7360381c7ae792148115733bd138db266ff7dc8fee626bca5713e08",
+    "after": "607da8bc094a5679b90d849790d114f452a4a954cf3efb55d5d68063c370ce87",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Pillar/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "429592b24cba12d3e9e3f64add39509f1c5c00e7b261e9725d174d99ed589ad4",
+    "after": "4fc28b94df951e1b354a5787d62132cb56dc4d79a0a483671a5c638ae50183fd",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Grid_Pallet/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "d6585b30e7da688edea9c8713165e7bf128fe3ac43716f8dded51616945fda84",
+    "after": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Paint/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "2d7cef31ac7a1a442891b63cc5afffc21bac1d0b57263eb1b966d75a44eeb7cd",
+    "after": "014414125e8be53dfc5419263444de3212dbf6547b92c37e9120e0da6eb0bcfd",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Color_Walls/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "9aecf5086e09dc5edd8196d13f2b9e48e211469c9dfc65ea7cf4a864384baad7",
+    "after": "8136a7ee45f653678539ff1bca32d83f9403dc3049cbacd27e2e011c3cc910d4",
+    "reason": "Author requested continuing one sequence at a time. Reviewed Colour drafts incorporated with complete printed code and fresh native evidence; current final texts and museum runtime preserved."
+  },
+  "commons/maps/Pattern_Disco/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "1f1a7c11685809d5aca5c2fedf81f49a590485dba92ec59cbf5d462597356847",
+    "after": "5cf940a83bc935817ee9d08db598b3e1398a1782ec71a3ceb03b4b04b13a2b04",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Pattern_Foundry/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "dc88b8753f3884e05fcdd23fa258a468508cbf68ab0468b0e8dadead476f3fc6",
+    "after": "46c6f7f148bf27ab90daaafd82d2a8440c7ebddd8540d82287ffef8e795fc29c",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Tutorial_Pattern/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "fb5f89b6610498c8d7e75bdd6101ea38124c5e094e55adbdfdc1818a3e23812a",
+    "after": "104a0dd6a70b22ad90a1523637fd2cffe16dfc185384ecfed749f580cd45040a",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Array_Patterns/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "81957284e9601eb21c880104debb54bf1eb2a7fb966307b14637dc853a2c90b8",
+    "after": "04259520cb965587c974658a0e4f4e58a0368e45f862481e94d3eee14bc265b7",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Symmetry_Seventeen/tutorial.md": {
+    "date": "2026-10-12",
+    "before": "d26de88de16e170ee31474b78663b02b1b5990a86a052f055389b10c0a4eba88",
+    "after": "017f0e7758a3adac6d1193332000709849ff4ec376680762124f45be8704c304",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Pattern_Temple/tutorial.md": {
+    "date": "2026-10-12",
+    "before": null,
+    "after": "cb17733657ea6ebb8bce52eb58d11fb4d63d99553126556bd5353f6ff2125b0f",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Ribbon_Patterns_01/tutorial.md": {
+    "date": "2026-10-12",
+    "before": null,
+    "after": "9777749c2d86c8d37a152e78727e14086b0cac9219e4333461c88f6053247cb9",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Ribbon_Patterns_02/tutorial.md": {
+    "date": "2026-10-12",
+    "before": null,
+    "after": "a784745888204dd1ba7f86f6f5c72ba045b78d1a9030f35f4c8526566064622a",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
+  },
+  "commons/maps/Ribbon_Patterns_03/tutorial.md": {
+    "date": "2026-10-12",
+    "before": null,
+    "after": "0f9971dced523cb454d45e9de48c6629f639a7ab2b928debf461b51d4cd448e9",
+    "reason": "Author requested continuing Tiling from the existing drafts with Colour lineage. Bounded handoff/readout and exercise wording edits; complete current entry programs and reflections preserved; fresh native evidence."
   }
 }

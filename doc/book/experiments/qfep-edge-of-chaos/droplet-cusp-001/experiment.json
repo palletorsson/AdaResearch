@@ -1,0 +1,320 @@
+{
+ "schema": "ada.book-experiment.v1",
+ "id": "qfep-edge-of-chaos.droplet-cusp-001",
+ "status": "proposed",
+ "disposition": "experimental",
+ "runtime_verified": false,
+ "sources": [
+  {
+   "passage_id": "qfep-edge-of-chaos.bundled-control.v1",
+   "source_path": "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md",
+   "snapshot_path": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/sources/QFEP_Edge_Of_Chaos.tutorial.md",
+   "sha256": "1ba0c7662c649709488c1293288e989d0231a05e105af734d566ff4d028c3e40",
+   "excerpt": "Moving it changes four coefficients together. To isolate just feed would require a different control and comparison.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "tutorial"
+  },
+  {
+   "passage_id": "qfep-edge-of-chaos.model-vs-calculation.v1",
+   "source_path": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+   "snapshot_path": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/sources/QFEP_Edge_Of_Chaos.final.md",
+   "sha256": "b1ebbdf417965423156051adaeee485181e39334a7548e701cb3cb59ab533e62",
+   "excerpt": "Which changes belong to the model, and which belong to the way its calculation is run?",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "final"
+  }
+ ],
+ "documents": {
+  "proposition": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/proposition.md",
+  "text_simulation": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/text-simulation.md",
+  "observations": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/observations.md",
+  "revision": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/revision.md"
+ },
+ "interpretations": [
+  {
+   "id": "droplet-cusp.interp.bundle-response",
+   "passage_ids": [
+    "qfep-edge-of-chaos.bundled-control.v1",
+    "qfep-edge-of-chaos.model-vs-calculation.v1"
+   ],
+   "mapping": "Hold export waist=\"tight\"; compare export flesh=\"firm\" against flesh=\"jelly\" (ball_radius at its 0.075 export default, show_readout=true). After is_settled() returns true, read verdict_word() as the outcome and ball_top_m() / ball_bottom_m() / waist_radius_m() as the pose record. A difference in verdict words establishes a response to the flesh bundle — _flesh_recipe() moves [constraint iterations 12->2, pressure 10.0->2.0, damping 0.94->0.985, grip 0.68->0.22] together — and establishes nothing finer, exactly as the tutorial passage says of LAMBDA's four coefficients.",
+   "assumptions": [
+    "Both conditions settle before TIMEOUT_TICKS=1200, so no verdict carries the '(still moving at timeout)' suffix",
+    "The artifact's own verlet shell is deterministic at a fixed tick rate (no seed exists to vary), so one run per condition is meaningful",
+    "verdict_word() is a total function of the settled pose (_last_top, _last_bottom, _last_rho)",
+    "Prediction, labelled as prediction: the grip difference (0.68 vs 0.22) in _collide_point's _prev lerp is expected to let jelly slide where firm hangs — derived from reading the code and the @identity header, not from any run under this record's identity"
+   ],
+   "exclusions": [
+    "Does not isolate which of the four recipe coefficients carries any difference — the tutorial passage's own scruple applied to flesh",
+    "Does not claim the registry description's measured figures (hang depths, pass/fail table, 60-vs-90 Hz results) as evidence; those belong to the build campaign",
+    "Excludes waist=\"snug\" and waist=\"scant\", where the code comment predicts geometry outruns the material in both directions ('The interesting values are the middle two')",
+    "No claim about behaviour at 90 Hz"
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "droplet-cusp.interp.grip-isolated",
+   "passage_ids": [
+    "qfep-edge-of-chaos.bundled-control.v1"
+   ],
+   "mapping": "Reads the question as demanding isolation: attribute any verdict change to the grip coefficient alone by comparing grip 0.68 against grip 0.22 with constraint iterations, pressure and damping pinned at firm's values (12, 10.0, 0.94). These numbers are real — they live in _flesh_recipe() — but NO export reaches them individually: flesh is an enum over FLESHES = [\"firm\", \"pliant\", \"jelly\", \"balloon\"] and apply_grid_config() accepts only whole names from WAISTS/FLESHES. This interpretation is therefore named, excluded from the bounded comparison, and carried as learning debt.",
+   "assumptions": [
+    "Grip is the load-bearing coefficient — the code's own comment claims 'low grip is what lets it ooze through a waist that firm merely hangs in', which is here an unverified claim, not evidence",
+    "A single-coefficient bench variant would otherwise behave like the shipped artifact"
+   ],
+   "exclusions": [
+    "Not executable through the artifact's real exports or apply_grid_config(); requires a bench-only variant or a new export",
+    "Not part of this record's comparison; deferred as droplet-cusp.debt.grip-isolation"
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "droplet-cusp.interp.calculation-owned",
+   "passage_ids": [
+    "qfep-edge-of-chaos.model-vs-calculation.v1"
+   ],
+   "mapping": "Reads the question as: perhaps the verdict belongs to the calculation. The settle rule is tick-denominated — SETTLE_EPS=0.0001 m of bound movement, SETTLE_TICKS=45 consecutive quiet _physics_process calls, TIMEOUT_TICKS=1200 — so identical constants demand 0.75 s of stillness at 60 Hz but only 0.50 s at 90 Hz, and _step_shell() integrates delta/SUBSTEPS (SUBSTEPS=4), so trajectories are tick-rate-dependent in principle. Operationalized: run the SAME exports (waist=\"tight\", flesh=\"firm\") at 60 Hz and at 90 Hz and compare verdict_word(); a flip assigns the outcome to the way the calculation is run, not to the model.",
+   "assumptions": [
+    "The harness can set the physics tick rate; the artifact exposes no export for it",
+    "is_settled() and verdict_word() are sufficient readouts; used_physics_bounds() confirms bounds come from the shell's own particles, with no renderer or physics server in the loop to lie"
+   ],
+   "exclusions": [
+    "Not this record's single changed condition (which is flesh); carried as droplet-cusp.debt.tick-rate",
+    "Code comments say probe_droplet_fit gates both rates; that is a build-campaign claim this record does not inherit as evidence"
+   ],
+   "status": "declared_alternative"
+  }
+ ],
+ "simulation": {
+  "text": {
+   "kind": "text_thought_experiment",
+   "status": "authored_hypothesis",
+   "path": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/text-simulation.md"
+  },
+  "godot": {
+   "scene": null,
+   "build": null,
+   "execution_status": "not_run",
+   "runs": []
+  }
+ },
+ "record_contract": {
+  "raw_values": null,
+  "apparatus_scene_reference": "res://commons/artifacts/droplet_cusp/droplet_cusp.tscn (reference only; no run is bound to this record)",
+  "baseline": "waist=\"tight\", flesh=\"firm\", ball_radius=0.075 (export default), show_readout=true, physics at 60 Hz; verdict_word() consulted only after is_settled() == true",
+  "single_change": "flesh: \"firm\" -> \"jelly\" — one enum step on the flesh export (set via the inspector setter or apply_grid_config({\"flesh\": \"jelly\"}), which triggers _rebuild()); internally _flesh_recipe() moves [constraint iterations 12->2, pressure 10.0->2.0, damping 0.94->0.985, grip 0.68->0.22] together, and the comparison is honest only about the bundle",
+  "held_fixed": [
+   "waist=\"tight\" (throat radius _waist_r = ball_radius * _waist_factor() = 0.075 * 0.86 = 0.0645 m)",
+   "ball_radius = 0.075 (export default)",
+   "show_readout = true",
+   "block_color / ball_color / hang_color at export defaults",
+   "carve geometry constants: flare sphere radius 0.105, bore cylinder radius 0.080, washer at WAIST_Y = -0.045 with WASHER_HALF = 0.008, TRAY_FLOOR = -0.23, TRAY_Y = -0.225",
+   "settle discipline: SETTLE_EPS = 0.0001, SETTLE_TICKS = 45, TIMEOUT_TICKS = 1200, SUBSTEPS = 4",
+   "physics tick rate 60 Hz (an engine setting, held by the harness, not exported by the artifact)",
+   "reading protocol: is_settled() gates the read; verdict_word() is the outcome; ball_top_m(), ball_bottom_m(), waist_radius_m() are the pose record"
+  ],
+  "retained_fields": [
+   "export values set",
+   "verdict text",
+   "probe-readable measurements",
+   "tick rates gated (60 and 90 Hz)",
+   "scene and build identity"
+  ],
+  "replay": "Replaying a retained record means re-running the deterministic scene at the recorded exports and build; a changed build is a new run.",
+  "fresh_acquisition": "Any physics settle is a fresh acquisition at its tick rate; two rates are two observations."
+ },
+ "reference_fixture": {
+  "kind": "invented_arithmetic_fixture_not_rng_output",
+  "evidence_status": "calculated_expectation_not_executed",
+  "description": "Invented verdict-partition fixture, hand-calculable from droplet_cusp.gd constants alone. Part 1: the four throat radii at the default ball_radius. Part 2: five invented settled poses, each a triple (ball top m, ball bottom m, horizontal offset rho m), pushed through the verdict_word() decision tree on paper. The poses are invented round-number inputs to the decision tree, chosen for geometric plausibility (e.g. top-bottom = 0.150 = one rest diameter for the undeformed cases); they are NOT simulated results and no measured pose from the build campaign is reused. Part 3: the settle clock converted to seconds at two assumed tick rates. values layout: [ball_radius, then five (top, bottom, rho) triples].",
+  "constants_cited": [
+   "ball_radius (@export default) = 0.075",
+   "_waist_factor(): \"snug\" = 1.12, \"tight\" = 0.86, \"narrow\" = 0.74, \"scant\" = 0.56",
+   "WAIST_Y := -0.045",
+   "WASHER_HALF := 0.008",
+   "verdict_word() literals: PASSED needs _last_top < WAIST_Y - 0.01 and _last_rho < 0.09; PROUD needs _last_bottom > WAIST_Y - 0.006; ESCAPED if _last_bottom < -0.6, or if below the washer with _last_rho >= 0.09",
+   "SETTLE_EPS := 0.0001",
+   "SETTLE_TICKS := 45",
+   "TIMEOUT_TICKS := 1200",
+   "SUBSTEPS := 4"
+  ],
+  "values": [
+   0.075,
+   -0.08,
+   -0.23,
+   0,
+   0.113,
+   -0.037,
+   0,
+   0.03,
+   -0.13,
+   0,
+   -0.55,
+   -0.7,
+   0,
+   -0.08,
+   -0.23,
+   0.12
+  ],
+  "expected": [
+   "throat radii (m): snug 0.0840, tight 0.0645, narrow 0.0555, scant 0.0420; tight radial interference 0.0105 m",
+   "pose (top -0.080, bottom -0.230, rho 0.000) -> PASSED",
+   "pose (top +0.113, bottom -0.037, rho 0.000) -> PROUD",
+   "pose (top +0.030, bottom -0.130, rho 0.000) -> HANGS",
+   "pose (top -0.550, bottom -0.700, rho 0.000) -> ESCAPED",
+   "pose (top -0.080, bottom -0.230, rho 0.120) -> ESCAPED",
+   "settle clock: 0.75 s of stillness required at 60 Hz, 0.50 s at 90 Hz; timeout 20.0 s at 60 Hz, 13.33 s at 90 Hz"
+  ],
+  "arithmetic": "Throat radii: _waist_r = ball_radius * _waist_factor(): 0.075*1.12 = 0.0840; 0.075*0.86 = 0.0645; 0.075*0.74 = 0.0555; 0.075*0.56 = 0.0420. Tight interference = 0.075 - 0.0645 = 0.0105 m. Thresholds: PASSED boundary = WAIST_Y - 0.01 = -0.045 - 0.010 = -0.055; PROUD boundary = WAIST_Y - 0.006 = -0.045 - 0.006 = -0.051. Pose 1 (-0.080, -0.230, 0.000): -0.230 not < -0.6; -0.080 < -0.055 and 0.000 < 0.09 -> PASSED (bottom -0.230 = TRAY_FLOOR; top - bottom = 0.150 = 2*ball_radius). Pose 2 (+0.113, -0.037, 0.000): +0.113 not < -0.055; -0.037 > -0.051 -> PROUD (bottom = washer top = WAIST_Y + WASHER_HALF = -0.045 + 0.008 = -0.037; top = -0.037 + 0.150 = +0.113). Pose 3 (+0.030, -0.130, 0.000): +0.030 not < -0.055; -0.130 not > -0.051 -> HANGS (an elongated drop: length 0.160 > rest diameter 0.150). Pose 4 (-0.550, -0.700, 0.000): -0.700 < -0.6 -> ESCAPED. Pose 5 (-0.080, -0.230, 0.120): -0.080 < -0.055 but 0.120 >= 0.09 -> ESCAPED (below the washer yet off-axis: it fell beside the funnel). Settle clock: SETTLE_TICKS/rate = 45/60 = 0.75 s, 45/90 = 0.50 s; TIMEOUT_TICKS/rate = 1200/60 = 20.0 s, 1200/90 = 13.33 s. The 60 and 90 Hz rates are assumed harness tick rates, not .gd constants; the division shows the same constants name different durations under different tick rates, which is the final passage's question in arithmetic form."
+ },
+ "observations": [],
+ "revisions": [],
+ "learning_debt": [
+  {
+   "id": "droplet-cusp.debt.tick-rate",
+   "kind": "unverified_claim",
+   "question": "Do verdict_word() outcomes for the baseline and changed condition agree across 60 and 90 Hz physics tick rates, as the code comments claim probe_droplet_fit established — a claim this record does not inherit as evidence?",
+   "next_test": "Run both conditions (waist=\"tight\" with flesh=\"firm\" and with flesh=\"jelly\") twice each, with the engine physics tick rate at 60 then 90 Hz, reading is_settled(), verdict_word(), ball_top_m() and ball_bottom_m(); any verdict-word disagreement across rates marks the outcome as calculation-owned per droplet-cusp.interp.calculation-owned",
+   "status": "open"
+  },
+  {
+   "id": "droplet-cusp.debt.grip-isolation",
+   "kind": "unresolved_interpretation",
+   "question": "If flesh changes the verdict, which of the four bundled coefficients [constraint iterations, pressure, damping, grip] carries the change — flesh moves all four together and no export reaches one alone?",
+   "next_test": "Build a bench-only variant (not the registry scene) exposing a single recipe coefficient while pinning the other three at firm's values (12, 10.0, 0.94, 0.68); compare verdict_word() per isolated coefficient, starting with grip 0.68 vs 0.22",
+   "status": "open"
+  },
+  {
+   "id": "droplet-cusp.debt.placement-untested",
+   "kind": "unverified_implementation",
+   "question": "Does the artifact settle and print a readable verdict when instanced by the museum lane in QFEP_Edge_Of_Chaos from the uncommitted placement \"droplet_cusp:0:0.95\" (the lane configures before _ready and does not ground _ready-built bodies)?",
+   "next_test": "Load the hall through the museum lane, wait at least TIMEOUT_TICKS of physics, read is_settled() and verdict_word() on the placed instance, and confirm the plate (show_readout) is legible from the approach cell",
+   "status": "open"
+  }
+ ],
+ "contributions": [
+  {
+   "role": "loop direction",
+   "contributor": "Palle Torsson (chat, 2026-10-14): start the research loop for some of the sequences",
+   "source": "doc/book/RECURSIVE_ARCHITECTURE.md"
+  },
+  {
+   "role": "apparatus construction",
+   "contributor": "Claude Fable 5 (claude-fable-5), separation-family build campaign of 2026-10-13, from the user's readings of the openai/math figures",
+   "source": "commons/artifacts/registry/droplet_cusp.json"
+  },
+  {
+   "role": "hall text authorship",
+   "contributor": "Not inferred; the hall texts predate this record",
+   "source": "commons/maps/QFEP_Edge_Of_Chaos/"
+  },
+  {
+   "role": "record drafting",
+   "contributor": "Claude Fable 5 workflow agents (read, adversarial verify, draft), 2026-10-14",
+   "source": "doc/book/experiments/qfep-edge-of-chaos/droplet-cusp-001/proposition.md"
+  }
+ ],
+ "related_tasks": [
+  "separation_research.001",
+  "separation_research.003"
+ ],
+ "task_sources": [
+  "doc/tasks/separation_research.json"
+ ],
+ "evidence_status": {
+  "artifact": "not_tested",
+  "experiment_cycle": "not_tested",
+  "specified_cross_hall": "not_applicable_local_pilot",
+  "scene_loading": "not_tested",
+  "runtime_stability": "not_tested",
+  "performance": "not_tested",
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested"
+ },
+ "edition": {
+  "id": null,
+  "status": "not_selected",
+  "publication_status": "not_published"
+ },
+ "initiation": {
+  "allowed_text_roles": [
+   "tutorial",
+   "final"
+  ],
+  "status": "proposed",
+  "questions": [
+   {
+    "text_role": "tutorial",
+    "passage_id": "qfep-edge-of-chaos.bundled-control.v1",
+    "question": "Construct a bounded comparison in which one named control moves several solver coefficients at once — the artifact's flesh enum, whose _flesh_recipe() returns [constraint iterations, pressure, damping, grip] as one bundle — and state in advance what a verdict difference would establish (a response to the bundle) and what it cannot isolate (any single coefficient); predict the verdict pair on paper before anything runs. (Tutorial role: construction/prediction.)"
+   },
+   {
+    "text_role": "final",
+    "passage_id": "qfep-edge-of-chaos.model-vs-calculation.v1",
+    "question": "Meeting a drop that hangs in the waist, can a visitor sort what they see into model (the carved waist, the flesh bundle) and calculation (tick-denominated stillness, timeout, substeps) — and could the same experiment be renamed by running its calculation differently, without touching waist or flesh? (Final role: encounter/possibility.)"
+   }
+  ],
+  "reconsider_if": [
+   "Either condition reaches TIMEOUT_TICKS (the verdict carries '(still moving at timeout)'): a timed-out pose is not a settled verdict, and the comparison design must change — longer budget, or ooze named as its own outcome — before any reading counts",
+   "verdict_word() returns UNSTABLE or ESCAPED in either condition: the apparatus is answering instead of the question; repair the solver or collision before interpreting anything",
+   "firm and jelly produce the SAME verdict word at waist=\"tight\" AND at waist=\"narrow\": then flesh does not argue at either middle waist for this ball_radius, the @identity claim that 'softness is purchasing power' needs reexamination, and the passage binding may belong to the waist axis instead",
+   "Repeat runs at a fixed tick rate give different settled poses: the 'determinism without a seed' premise in the code is wrong, and every single-run verdict needs replication statistics before the bounded comparison means anything",
+   "The hall texts are revised before the pilot runs (both are dirty in the working tree): if either bound excerpt no longer exists as exact bytes, rebind the passages before executing"
+  ]
+ },
+ "text_reviews": {
+  "tutorial": {
+   "source_path": "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md",
+   "source_passage_ids": [
+    "qfep-edge-of-chaos.bundled-control.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  },
+  "final": {
+   "source_path": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+   "source_passage_ids": [
+    "qfep-edge-of-chaos.model-vs-calculation.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  }
+ },
+ "review_contract": {
+  "targets": [
+   "tutorial",
+   "final"
+  ],
+  "allowed_decisions": [
+   "revise",
+   "retain_with_reason",
+   "open_question"
+  ],
+  "both_rewrites_required": false,
+  "each_review_requires": [
+   "source_version",
+   "observation_refs",
+   "reason"
+  ],
+  "pending_is_complete": false
+ },
+ "next_experiment": {
+  "selection_status": "awaiting_observations",
+  "allowed_decisions": [
+   "continue",
+   "redirect",
+   "defer",
+   "stop"
+  ],
+  "source_observation_ids": [],
+  "question": null,
+  "decision": null,
+  "proposition": null
+ }
+}

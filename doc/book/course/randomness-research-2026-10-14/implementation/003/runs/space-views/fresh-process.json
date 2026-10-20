@@ -1,0 +1,120 @@
+{
+	"checks": [
+		{
+			"name": "fresh process imports kept result",
+			"passed": true
+		},
+		{
+			"name": "fresh process receives seed 42 and B",
+			"passed": true
+		},
+		{
+			"name": "fresh process retains full precision and provenance",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"observations": {
+		"kind": "fresh_process_replay",
+		"record": {
+			"build": "4.6-stable (official)",
+			"draw_count": 48,
+			"draw_order": "row-major triples; no discard",
+			"generator": "Godot.RandomNumberGenerator.randf",
+			"host_transform": {
+				"hall": "Random_Definition",
+				"position_m": [
+					10.5,
+					0,
+					18.5
+				],
+				"rotation_y_degrees": -90,
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"tray_y_m": 1.0
+			},
+			"id": "seed-42-3596163-1/keep-2",
+			"mapping_version": "space-assignments.v1",
+			"next_change": "Ask a reader to predict the equal-height red/green pair before changing the mapping.",
+			"observation": "Same RGB; height is a mean and cannot distinguish channel order.",
+			"ordered_interventions": [],
+			"parameters": {
+				"bottom_m": 0.08,
+				"cell_width_m": 0.09,
+				"cube_side_m": 0.04,
+				"frame_width_m": 0.54,
+				"grid": [
+					4,
+					4
+				],
+				"height_span_m": 0.12,
+				"panel_layout": "five-trays.v1",
+				"scale_min": 0.35,
+				"scale_span": 0.65,
+				"spacing_m": 0.105,
+				"turn_degrees": 360.0,
+				"turn_depth_m": 0.04
+			},
+			"parent_id": "seed-42-3596163-1",
+			"raw_values": [
+				0.1183701902627945,
+				0.65903240442276,
+				0.2981868088245392,
+				0.03759671002626419,
+				0.759906530380249,
+				0.16013947129249573,
+				0.9373283386230469,
+				0.10131284594535828,
+				0.17885610461235046,
+				0.9684456586837769,
+				0.05930794030427933,
+				0.05738687142729759,
+				0.01388463657349348,
+				0.7422953844070435,
+				0.8453764319419861,
+				0.45976462960243225,
+				0.6499897241592407,
+				0.2611721456050873,
+				0.7672507762908936,
+				0.49597492814064026,
+				0.9278168082237244,
+				0.7242656946182251,
+				0.6615357398986816,
+				0.22539377212524414,
+				0.5280382633209229,
+				0.9741662740707397,
+				0.6502115726470947,
+				0.4430903494358063,
+				0.47946983575820923,
+				0.3840782642364502,
+				0.2182009071111679,
+				0.8517859578132629,
+				0.5812699198722839,
+				0.6177322268486023,
+				0.7689849734306335,
+				0.8499084711074829,
+				0.8181202411651611,
+				0.16143664717674255,
+				0.29023292660713196,
+				0.7314043045043945,
+				0.07484719902276993,
+				0.4429556131362915,
+				0.8643065690994263,
+				0.7168533802032471,
+				0.7312961220741272,
+				0.1624125987291336,
+				0.566006064414978,
+				0.39721864461898804
+			],
+			"raw_values_f64_hex": "00000040824dbe3f00000020cb16e53f000000207e15d33f00000040e03fa33f000000802751e83f00000040737fc43f0000000098feed3f00000080a3efb93f000000c0c1e4c63f000000c081fdee3f000000409c5dae3f000000e0cf61ad3f000000608c6f8c3f00000040e2c0e73f000000e0520deb3f000000a0c86cdd3f00000040b7cce43f000000600bb7d03f00000080518de83f000000a00dbedf3f000000e0acb0ed3f000000402f2de73f000000004d2be53f00000000b4d9cc3f00000080b0e5e03f000000c05e2cef3f0000008088cee43f000000a0975bdc3f00000040a2afde3f00000000bd94d83f000000e001eecb3f000000a0d441eb3f00000060c399e23f0000006076c4e33f00000060869be83f000000407332eb3f000000800a2eea3f000000c0f4a9c43f000000202d93d23f00000000aa67e73f000000a02f29b33f000000806259dc3f0000004066a8eb3f0000008076f0e63f00000020c766e73f000000a0efc9c43f000000c0b81ce23f000000c0076cd93f",
+			"schema": "ada.seed-bench.v3",
+			"seed": "42",
+			"state_after": "1110206689195878612",
+			"state_before": "708718527385777908"
+		}
+	},
+	"passed": true
+}

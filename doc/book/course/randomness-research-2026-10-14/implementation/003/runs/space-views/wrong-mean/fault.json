@@ -1,0 +1,531 @@
+{
+	"checks": [
+		{
+			"name": "baseline contains 48 draws",
+			"passed": true
+		},
+		{
+			"name": "seed 42 regenerates ordered values on this build",
+			"passed": true
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 0",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 1",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 2",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 3",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 4",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 5",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 6",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 7",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 8",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 9",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 10",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 11",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 12",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 13",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 14",
+			"passed": false
+		},
+		{
+			"name": "anchored bar and row-major XZ cell 15",
+			"passed": false
+		},
+		{
+			"name": "switch preserves all values, state, XZ and RGB",
+			"passed": true
+		},
+		{
+			"name": "neutral bars isolate height from RGB",
+			"passed": true
+		},
+		{
+			"name": "same means uniformly shrink cubes with fixed bottoms",
+			"passed": false
+		},
+		{
+			"name": "same means turn bounded rectangular markers",
+			"passed": false
+		},
+		{
+			"name": "invented fixture matches hand arithmetic",
+			"passed": false
+		},
+		{
+			"name": "red and green differ in colour but share height",
+			"passed": false
+		},
+		{
+			"name": "flat restores original cube dimensions and positions",
+			"passed": true
+		},
+		{
+			"name": "invented scale and rotation endpoints",
+			"passed": true
+		},
+		{
+			"name": "keep isolates nested values and geometry parameters",
+			"passed": true
+		},
+		{
+			"name": "replay restores actual retained result",
+			"passed": true
+		},
+		{
+			"name": "new draws do not alter kept copy",
+			"passed": true
+		},
+		{
+			"name": "replay after fresh acquisition restores seed 42 B",
+			"passed": true
+		},
+		{
+			"name": "export succeeds",
+			"passed": true
+		},
+		{
+			"name": "clear removes memory copy",
+			"passed": true
+		},
+		{
+			"name": "import recovers exact result",
+			"passed": true
+		},
+		{
+			"name": "invalid import 0 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 1 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 2 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 3 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 4 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 5 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 6 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 7 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 8 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 9 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 10 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "invalid import 11 rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "malformed or oversized input rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "malformed or oversized input rejects atomically",
+			"passed": true
+		},
+		{
+			"name": "seed/state exact signed decimal strings",
+			"passed": true
+		},
+		{
+			"name": "imports preceding floating-cube record",
+			"passed": true
+		},
+		{
+			"name": "legacy record is not silently upgraded",
+			"passed": true
+		},
+		{
+			"name": "legacy floating positions dimensions and spacing replay",
+			"passed": false
+		},
+		{
+			"name": "explicit BARS forks legacy recipe without draws or lost keep",
+			"passed": true
+		},
+		{
+			"name": "replay returns from fork to original floating result",
+			"passed": true
+		},
+		{
+			"name": "imports preceding compact bar record",
+			"passed": true
+		},
+		{
+			"name": "compact bar receipt remains exact",
+			"passed": true
+		},
+		{
+			"name": "compact bars retain original widths and gutter",
+			"passed": true
+		},
+		{
+			"name": "explicit BARS forks compact layout without new draws",
+			"passed": true
+		},
+		{
+			"name": "compact layout replay survives current layout fork",
+			"passed": true
+		},
+		{
+			"name": "current grid fills tray with narrow gutters",
+			"passed": true
+		}
+	],
+	"failures": [
+		"anchored bar and row-major XZ cell 0",
+		"anchored bar and row-major XZ cell 1",
+		"anchored bar and row-major XZ cell 2",
+		"anchored bar and row-major XZ cell 3",
+		"anchored bar and row-major XZ cell 4",
+		"anchored bar and row-major XZ cell 5",
+		"anchored bar and row-major XZ cell 6",
+		"anchored bar and row-major XZ cell 7",
+		"anchored bar and row-major XZ cell 8",
+		"anchored bar and row-major XZ cell 9",
+		"anchored bar and row-major XZ cell 10",
+		"anchored bar and row-major XZ cell 11",
+		"anchored bar and row-major XZ cell 12",
+		"anchored bar and row-major XZ cell 13",
+		"anchored bar and row-major XZ cell 14",
+		"anchored bar and row-major XZ cell 15",
+		"same means uniformly shrink cubes with fixed bottoms",
+		"same means turn bounded rectangular markers",
+		"invented fixture matches hand arithmetic",
+		"red and green differ in colour but share height",
+		"legacy floating positions dimensions and spacing replay"
+	],
+	"observations": {
+		"bar_heights_m": [
+			0.05420442298054695,
+			0.04451160505414009,
+			0.1524793952703476,
+			0.15621347725391388,
+			0.04166615381836891,
+			0.09517175704240799,
+			0.13207009434700012,
+			0.12691187858581543,
+			0.10336459428071976,
+			0.09317084401845932,
+			0.06618411093950272,
+			0.11412786692380905,
+			0.13817442953586578,
+			0.12776851654052734,
+			0.14371678233146667,
+			0.05948951095342636
+		],
+		"baseline": {
+			"build": "4.6-stable (official)",
+			"draw_count": 48,
+			"draw_order": "row-major triples; no discard",
+			"generator": "Godot.RandomNumberGenerator.randf",
+			"host_transform": {
+				"hall": "Random_Definition",
+				"position_m": [
+					10.5,
+					0,
+					18.5
+				],
+				"rotation_y_degrees": -90,
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"tray_y_m": 1.0
+			},
+			"id": "seed-42-3422141-1",
+			"mapping_version": "space-assignments.v1",
+			"next_change": "",
+			"observation": "",
+			"ordered_interventions": [],
+			"parameters": {
+				"bottom_m": 0.08,
+				"cell_width_m": 0.09,
+				"cube_side_m": 0.04,
+				"frame_width_m": 0.54,
+				"grid": [
+					4,
+					4
+				],
+				"height_span_m": 0.12,
+				"panel_layout": "five-trays.v1",
+				"scale_min": 0.35,
+				"scale_span": 0.65,
+				"spacing_m": 0.105,
+				"turn_degrees": 360.0,
+				"turn_depth_m": 0.04
+			},
+			"parent_id": null,
+			"raw_values": [
+				0.1183701902627945,
+				0.65903240442276,
+				0.2981868088245392,
+				0.03759671002626419,
+				0.759906530380249,
+				0.16013947129249573,
+				0.9373283386230469,
+				0.10131284594535828,
+				0.17885610461235046,
+				0.9684456586837769,
+				0.05930794030427933,
+				0.05738687142729759,
+				0.01388463657349348,
+				0.7422953844070435,
+				0.8453764319419861,
+				0.45976462960243225,
+				0.6499897241592407,
+				0.2611721456050873,
+				0.7672507762908936,
+				0.49597492814064026,
+				0.9278168082237244,
+				0.7242656946182251,
+				0.6615357398986816,
+				0.22539377212524414,
+				0.5280382633209229,
+				0.9741662740707397,
+				0.6502115726470947,
+				0.4430903494358063,
+				0.47946983575820923,
+				0.3840782642364502,
+				0.2182009071111679,
+				0.8517859578132629,
+				0.5812699198722839,
+				0.6177322268486023,
+				0.7689849734306335,
+				0.8499084711074829,
+				0.8181202411651611,
+				0.16143664717674255,
+				0.29023292660713196,
+				0.7314043045043945,
+				0.07484719902276993,
+				0.4429556131362915,
+				0.8643065690994263,
+				0.7168533802032471,
+				0.7312961220741272,
+				0.1624125987291336,
+				0.566006064414978,
+				0.39721864461898804
+			],
+			"raw_values_f64_hex": "00000040824dbe3f00000020cb16e53f000000207e15d33f00000040e03fa33f000000802751e83f00000040737fc43f0000000098feed3f00000080a3efb93f000000c0c1e4c63f000000c081fdee3f000000409c5dae3f000000e0cf61ad3f000000608c6f8c3f00000040e2c0e73f000000e0520deb3f000000a0c86cdd3f00000040b7cce43f000000600bb7d03f00000080518de83f000000a00dbedf3f000000e0acb0ed3f000000402f2de73f000000004d2be53f00000000b4d9cc3f00000080b0e5e03f000000c05e2cef3f0000008088cee43f000000a0975bdc3f00000040a2afde3f00000000bd94d83f000000e001eecb3f000000a0d441eb3f00000060c399e23f0000006076c4e33f00000060869be83f000000407332eb3f000000800a2eea3f000000c0f4a9c43f000000202d93d23f00000000aa67e73f000000a02f29b33f000000806259dc3f0000004066a8eb3f0000008076f0e63f00000020c766e73f000000a0efc9c43f000000c0b81ce23f000000c0076cd93f",
+			"schema": "ada.seed-bench.v3",
+			"seed": "42",
+			"state_after": "1110206689195878612",
+			"state_before": "708718527385777908"
+		},
+		"build": {
+			"build": "official",
+			"hash": "89cea143987d564363e15d207438530651d943ac",
+			"hex": 263680,
+			"major": 4,
+			"minor": 6,
+			"patch": 0,
+			"status": "stable",
+			"string": "4.6-stable (official)",
+			"timestamp": 0
+		},
+		"centre_heights_m": [
+			0.10710220783948898,
+			0.10225579887628555,
+			0.15623970329761505,
+			0.1581067442893982,
+			0.10083307325839996,
+			0.12758587300777435,
+			0.14603504538536072,
+			0.14345593750476837,
+			0.13168229162693024,
+			0.12658542394638062,
+			0.11309205740690231,
+			0.13706393539905548,
+			0.14908722043037415,
+			0.14388425648212433,
+			0.151858389377594,
+			0.10974475741386414
+		],
+		"fixture_heights_m": [
+			0.04,
+			0.16,
+			0.08,
+			0.08,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1,
+			0.1
+		],
+		"kept": {
+			"build": "4.6-stable (official)",
+			"draw_count": 48,
+			"draw_order": "row-major triples; no discard",
+			"generator": "Godot.RandomNumberGenerator.randf",
+			"host_transform": {
+				"hall": "Random_Definition",
+				"position_m": [
+					10.5,
+					0,
+					18.5
+				],
+				"rotation_y_degrees": -90,
+				"scale": [
+					1,
+					1,
+					1
+				],
+				"tray_y_m": 1.0
+			},
+			"id": "seed-42-3422141-1/keep-2",
+			"mapping_version": "space-assignments.v1",
+			"next_change": "Ask a reader to predict the equal-height red/green pair before changing the mapping.",
+			"observation": "Same RGB; height is a mean and cannot distinguish channel order.",
+			"ordered_interventions": [],
+			"parameters": {
+				"bottom_m": 0.08,
+				"cell_width_m": 0.09,
+				"cube_side_m": 0.04,
+				"frame_width_m": 0.54,
+				"grid": [
+					4,
+					4
+				],
+				"height_span_m": 0.12,
+				"panel_layout": "five-trays.v1",
+				"scale_min": 0.35,
+				"scale_span": 0.65,
+				"spacing_m": 0.105,
+				"turn_degrees": 360.0,
+				"turn_depth_m": 0.04
+			},
+			"parent_id": "seed-42-3422141-1",
+			"raw_values": [
+				0.1183701902627945,
+				0.65903240442276,
+				0.2981868088245392,
+				0.03759671002626419,
+				0.759906530380249,
+				0.16013947129249573,
+				0.9373283386230469,
+				0.10131284594535828,
+				0.17885610461235046,
+				0.9684456586837769,
+				0.05930794030427933,
+				0.05738687142729759,
+				0.01388463657349348,
+				0.7422953844070435,
+				0.8453764319419861,
+				0.45976462960243225,
+				0.6499897241592407,
+				0.2611721456050873,
+				0.7672507762908936,
+				0.49597492814064026,
+				0.9278168082237244,
+				0.7242656946182251,
+				0.6615357398986816,
+				0.22539377212524414,
+				0.5280382633209229,
+				0.9741662740707397,
+				0.6502115726470947,
+				0.4430903494358063,
+				0.47946983575820923,
+				0.3840782642364502,
+				0.2182009071111679,
+				0.8517859578132629,
+				0.5812699198722839,
+				0.6177322268486023,
+				0.7689849734306335,
+				0.8499084711074829,
+				0.8181202411651611,
+				0.16143664717674255,
+				0.29023292660713196,
+				0.7314043045043945,
+				0.07484719902276993,
+				0.4429556131362915,
+				0.8643065690994263,
+				0.7168533802032471,
+				0.7312961220741272,
+				0.1624125987291336,
+				0.566006064414978,
+				0.39721864461898804
+			],
+			"raw_values_f64_hex": "00000040824dbe3f00000020cb16e53f000000207e15d33f00000040e03fa33f000000802751e83f00000040737fc43f0000000098feed3f00000080a3efb93f000000c0c1e4c63f000000c081fdee3f000000409c5dae3f000000e0cf61ad3f000000608c6f8c3f00000040e2c0e73f000000e0520deb3f000000a0c86cdd3f00000040b7cce43f000000600bb7d03f00000080518de83f000000a00dbedf3f000000e0acb0ed3f000000402f2de73f000000004d2be53f00000000b4d9cc3f00000080b0e5e03f000000c05e2cef3f0000008088cee43f000000a0975bdc3f00000040a2afde3f00000000bd94d83f000000e001eecb3f000000a0d441eb3f00000060c399e23f0000006076c4e33f00000060869be83f000000407332eb3f000000800a2eea3f000000c0f4a9c43f000000202d93d23f00000000aa67e73f000000a02f29b33f000000806259dc3f0000004066a8eb3f0000008076f0e63f00000020c766e73f000000a0efc9c43f000000c0b81ce23f000000c0076cd93f",
+			"schema": "ada.seed-bench.v3",
+			"seed": "42",
+			"state_after": "1110206689195878612",
+			"state_before": "708718527385777908"
+		},
+		"kind": "native_model_cycle",
+		"scope": "Scripted native checks. No human reconstruction or physical VR evidence."
+	},
+	"passed": false
+}

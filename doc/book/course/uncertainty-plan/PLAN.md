@@ -1,12 +1,22 @@
 # When the rule meets its conditions
 
-**Working proposal · 8 October 2026 · Endless Museum**
+**Working plan · 8 October 2026; updated 9 October · Endless Museum**
 
 Keep the existing 25-sequence order. Thread these questions through objects the student already knows: **the point, its trace, the cube, the array, the field and the saved state**. Each return changes one condition under which the object works. We do not need six new sequences, or a new failure lesson in every hall.
 
 The progression is: **construct → compare → measure a difference → follow a consequence → question the contract → compose with what remains**.
 
-This plan records proposed additions. It does not approve or install them, change the spine, or replace agreed tutorial subjects. The CA history work completed alongside this audit is a separate continuation of the existing lesson. Edit this file to change the plan; regenerate its reading page with `python -X utf8 tools/build_uncertainty_plan.py`. The [sequence checklist](SEQUENCES.md), [source audit](INVENTORY.md) and [machine-readable inventory](inventory.json) are companions.
+P1, P3 and P4 are now built; P2, P5 and P6 remain proposed additions. The later authorised geometry-noise, pendulum and observation experiments are recorded as built below; the spine and agreed primary tutorial subjects remain intact. The CA history work completed alongside the original audit is a separate continuation of the existing lesson. Edit this file to change the plan; regenerate its reading page with `python -X utf8 tools/build_uncertainty_plan.py`. The [sequence checklist](SEQUENCES.md), [source audit](INVENTORY.md) and [machine-readable inventory](inventory.json) are companions.
+
+## 9 October extension: noise testing
+
+The later geometry-noise brief authorises a first built experiment, **G0: The Uncertain Surface**, in the Noise opening. Its [noise-testing extension](NOISE_TESTS.md) records G0, G1 and G2 as built, with P1/P3/P4 built and P2/P5/P6 still proposed. P1 is the separate time-step comparison in Launch. The [museum report](../../iterations/2026-10-09-geometry-noise-test/index.html) records its own evidence.
+
+## 9 October extension: camera image becomes body
+
+**Built, optional Shader_05_Patterns study:** one real museum camera and ten declared image/receiver treatments. The original pattern lesson remains. This prepared P4, now built as the optional READ RECORD bank in the same apparatus. The four earlier studies pass 164 fresh checks. [Ten native views and validation](../../iterations/2026-10-09-camera-image-becomes-body/index.html).
+
+**Pixel extension:** the same apparatus now also offers ten operations on a flat screen: chopped bands, wrong row width, repeated scanlines, block permutation, channel offsets, tearing, saved/live blocks, quantisation, missing blocks and reversed rows. PIXELS / FORM selects the bank. [Pixel views and current validation](../../iterations/2026-10-09-cut-the-image-pixels/index.html). This remains one camera study. P4 now adds a saved RGB8 record, receivers and explicit decoding checks.
 
 ## What changes in the supplied proposal
 
@@ -35,7 +45,7 @@ Godot's default GDScript scalar float and vector components do not have the same
 
 ## What is already there
 
-The audit followed the current spine and sequence files into selected map placements, registry entries and source implementations. It is a targeted static audit, not a run of every artifact. The source inventory distinguishes “exists,” “placed in this spine” and “tested.” All 15 selected registry candidates resolve to scene files; several have no placement in the current spine.
+The audit followed the current spine and sequence files into selected map placements, registry entries and source implementations. It is a targeted static audit, not a run of every artifact. The source inventory distinguishes “exists,” “placed in this spine” and “tested.” All 18 selected registry entries, including the newly built G0, G1 and G2, resolve to scene files; several have no placement in the current spine.
 
 Strong material to reuse includes the held sphere's decreasing resolution, the Riemann comparison and held result, the seeded Monte Carlo dartboard, an actual audio delay with feedback, and the Rule 30 history with three receivers.
 
@@ -61,6 +71,8 @@ For every comparison, state what is held fixed, what changes, the unit of the re
 **Output:** one short lesson contract and baseline receipt per selected experiment. Existing exact-code lesson harnesses provide the format; no new universal framework is required.
 
 ### P1 — The same throw, different steps
+
+**Built 9 October in VFM_05_Launch.** The existing registered Euler artifact selects a new step-study child with `lesson:step_study`; one bay beside the launch chamber, all prior works retained. Complete code and explanations are printed in the hall tutorial; three reflective paragraphs extend final.md. 53 native core checks, 51 checks on fresh printed-code reconstruction, two rejected mutations and 22 museum checks pass. The museum checks include endpoint retention after rendered frames, five pointer buttons, the held XRTools step slider and a supported approach. Default small-board geometry remains; its unsupported tunnelling caption is corrected. Physical headset and independent learner tests remain open. [Images, full texts and receipts](../../iterations/2026-10-09-the-same-throw-different-steps/index.html). The contract below remains available for revision.
 
 **Primary host:** VFM_05_Launch. **Carrier:** the familiar point sphere and its saved trace. **Reuse:** `euler_drift`'s constant-gravity formula and geometry; inspect the current launch court before choosing its comparison position. **New work:** an interactive, bounded time-step comparison, not another full physics engine.
 
@@ -88,6 +100,8 @@ Move a target by hand. The body measures its distance from that target and appli
 
 ### P3 — Spend samples, keep the disagreement
 
+**Built 9 October in Randomness_Examples_of_Randomness.** The existing dartboard opts into `lesson:sample_budget`: four budget settings, replay, next seed and eight-seed comparison. Every count is retained; newest 300 marks shown. One local dial and six rectangular buttons replace its earlier controls. 24 core checks, 24 checks on the printed sampler, eight printed-example assertions, two rejected faults and 25 native museum checks pass. The main PointBody tutorial is separately authored and tested; this optional study has its own runnable companion. Physical headset and independent learner review remain open. [Native before/after views, code and receipts](../../iterations/2026-10-09-samples-and-disagreement/index.html).
+
 **Primary host:** Randomness_Examples_of_Randomness. **Carrier:** its existing `monte_carlo_dartboard`; do not add a competing dart estimator. **Earlier forms:** primitive sphere resolution and Change_Intro's Riemann comparison.
 
 Keep a seeded run, increase its sample budget, and compare counts with the estimate. Start from actual uniform samples; the student's hand can choose budget or inspect a sample, but hand-thrown locations must not be presented as independent uniform draws. Then compare several seeds at the same budget. The familiar finite construction has become an estimate with variability.
@@ -99,6 +113,8 @@ Keep a seeded run, increase its sample budget, and compare counts with the estim
 **Carry:** seed, draw count, classification, estimate and measured difference. **Defer:** confidence intervals and Monte Carlo variance reduction until the basic sampling contract is secure.
 
 ### P4 — One record, different readings
+
+**Built 9 October in Shader_05_Patterns.** READ RECORD extends the existing camera console with five interpretations of one saved 8 × 8 RGB8 record: RGB/BGR colour, unsigned/signed height and explicit invalid-layout refusal. A declared fixture exposes byte boundaries; source hash remains visible. 37 core checks, 37 printed-code checks, eight printed-example assertions, two rejected faults and 121 native museum checks pass (82 cover the earlier camera study). Optional complete data-core lesson and reflection added to canonical texts; the pattern lesson stays first. Physical headset and independent learner reconstruction remain open. [Native views, texts and receipts](../../iterations/2026-10-09-one-record-many-readings/index.html).
 
 **Primary host:** Shader_05_Patterns, after its repeating-pattern lesson. **Carrier:** one saved 8 × 8 sample array with RGB values. **Reuse:** the array address, colour work and surface comparison. **New work:** two explicit receivers and one controlled reinterpretation.
 
@@ -156,9 +172,9 @@ This queue does not dictate the student's reading order. It front-loads experime
 4. **Spatial evidence:** overhead and eye-height before/after images, reachable hand control, clear route and adjacent reset. Do not hide a wall to make the evidence persuasive. Sampling a capsule route is not a headset comfort test.
 5. **Review receipt:** precise source revisions, baseline/intervention settings, seed and simulated time where relevant, passed/failed checks, measured cost, known limits and the next lesson's dependency. Source existence, a passing solver test, native interaction and tracked VR are separate evidence levels.
 
-The first prototype is P1. Finish its comparison, tutorial and two views before promoting another primary experiment. Keep every other package editable as a proposal.
+P1, P3 and P4 are built with runnable code and native views. P2 (a measured response returns to affect an action) is next in the execution queue. Keep the remaining packages editable as proposals; inspect each current host before implementation.
 
-## File-level handoff for the first prototype
+## P1 implementation record and reusable procedure
 
 | Step | Work boundary | Completion evidence |
 |---|---|---|
@@ -169,7 +185,7 @@ The first prototype is P1. Finish its comparison, tutorial and two views before 
 | 5 | Change only the chosen artifact token/placement and the selected hall's tutorial/final additions. If the registry needs a new entry, follow its existing family schema; do not duplicate a registered artifact unnecessarily. | One target museum-plan row rederived; other rows unchanged; native hand action and placement checked. |
 | 6 | Publish a dated iteration folder containing full texts, code, settings, logs, before/after captures and a compact handoff. | Tutorial claim matches the evidence; tracked-headset and Quest status named separately. Promote the package status only after these receipts exist. |
 
-For P2–P6, repeat this bounded procedure with the source and host listed in each package. Their exact edits remain proposals until their own source/space check; the plan does not give an agent permission to fill missing mechanisms with theatrical substitutes.
+For the remaining P2/P5/P6 packages, repeat this bounded procedure with the source and host listed in each package. Their exact edits remain proposals until their own source/space check; the plan does not give an agent permission to fill missing mechanisms with theatrical substitutes.
 
 ## The Sieve for this plan
 
@@ -181,4 +197,4 @@ For P2–P6, repeat this bounded procedure with the source and host listed in ea
 
 ## Short instruction for the next AI
 
-Existing Endless Museum; preserve25spine. Point→trace→cube→array→field→state. Oneprimary reconstruction/principle; restmaymuseum/final. P0auditclaims→P1throw→P3estimate→P4receiver→P2feedback→P5fuzzy→P6faultreturn. Tutorial fullminimalcode+exactGodotasserts;finalreflection. Fixedreference/intervention/witness/reset/transfer. Noenginegroundtruth;nooscillation=feedback;nomembership=probability;noeffect=mechanism;nocatastrophe=bug. Nativeabove+eyeviews;handcontrols;loglimits. Allnewpackagesproposed,notinstalled.
+Existing Endless Museum; preserve25spine. Point→trace→cube→array→field→state. Oneprimary reconstruction/principle; restmaymuseum/final. P0auditclaims→P1throw→P3estimate→P4receiver→P2feedback→P5fuzzy→P6faultreturn. Tutorial fullminimalcode+exactGodotasserts;finalreflection. Fixedreference/intervention/witness/reset/transfer. Noenginegroundtruth;nooscillation=feedback;nomembership=probability;noeffect=mechanism;nocatastrophe=bug. Nativeabove+eyeviews;handcontrols;loglimits. P1BUILT:53core+51printed+2mutants+22museum;P3BUILT:24core+24printed+8exampleasserts+2mutants+25museum;P4BUILT:37core+37printed+8exampleasserts+2mutants+121museum(includes82prior);P2/P5/P6proposed. G0geometry_noise BUILT in Random_Noise_Types;28core+16museumchecks;headsetuntested. NOISE_TESTS.md:G0contract+12substrates;G1pendulum_noise BUILT Vectors_Act4b_Oscillation;43core+21museum;G2navigator_noise BUILT SwarmIntelligence_Agent_Based_Modeling_ABM;40core+40printed+2mutants+21museum. P2nextoriginalpackage;P1endpointprojectiontestedafterrender.

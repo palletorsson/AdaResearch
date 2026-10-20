@@ -1,0 +1,74 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Matching selection survives reload",
+      "passed": true
+    },
+    {
+      "name": "Next crosses into Foundations Crisis",
+      "passed": true
+    },
+    {
+      "name": "Previous returns to Matching",
+      "passed": true
+    },
+    {
+      "name": "Whole spine renders 25 sequence groups",
+      "passed": true
+    },
+    {
+      "name": "Whole spine renders 206 hall cards",
+      "passed": true
+    },
+    {
+      "name": "Hall dependencies retained",
+      "passed": true
+    },
+    {
+      "name": "Selected timeline retained",
+      "passed": true
+    },
+    {
+      "name": "Selected hall survives timeline and image switching",
+      "passed": true
+    },
+    {
+      "name": "Overhead source and view present",
+      "passed": true
+    },
+    {
+      "name": "All seven reference entries render",
+      "passed": true
+    },
+    {
+      "name": "Missing capture is explicit",
+      "passed": true
+    },
+    {
+      "name": "Missing tutorial does not create a broken link",
+      "passed": true
+    },
+    {
+      "name": "Sequence graph renders walk",
+      "passed": true
+    },
+    {
+      "name": "Sequence graph renders dependency",
+      "passed": true
+    },
+    {
+      "name": "Sequence graph renders concept",
+      "passed": true
+    },
+    {
+      "name": "Sequence graph renders shared",
+      "passed": true
+    },
+    {
+      "name": "Graph checks retained Matching image selection",
+      "passed": true
+    }
+  ],
+  "scope": "Browser controls and displayed state; no headset claim"
+}

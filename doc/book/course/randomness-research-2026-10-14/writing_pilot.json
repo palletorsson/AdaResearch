@@ -1,0 +1,302 @@
+{
+  "schema": "ada-writing-pilot.v1",
+  "status": "design_example_not_run",
+  "first_experiment": "random-definition.seed-bench-001",
+  "companion": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+  "sources": {
+    "views": {
+      "path": "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md",
+      "snapshot": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-writing-composition/doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md",
+      "sha256": "dbb594181e2288aebc2606bf471f7362d625c7199251a08b6eab4a9c6ecfd139"
+    },
+    "final": {
+      "path": "commons/maps/Random_Definition/final.md",
+      "snapshot": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-writing-composition/commons/maps/Random_Definition/final.md",
+      "sha256": "591234ea2ef7b688bb6af55c780e721c7a903752125eb12506b4b0f2bb8b47a7"
+    },
+    "feedback": {
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-feedback.json",
+      "snapshot": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-writing-composition/doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/space-views-feedback.json",
+      "sha256": "df794364de99299598ab333c699e05910bc7603a2e87e27ae72b0d9b6c4b2c91"
+    }
+  },
+  "pool": [
+    {
+      "id": "K1",
+      "claim_or_question": "One retained set, five assignments",
+      "source_ids": [
+        "views"
+      ],
+      "evidence_status": "documented_recipe",
+      "limits": "Inspect current implementation and linked scoped test evidence before asserting current runtime behaviour.",
+      "reader_question": "Why do these views differ if their numbers are the same?",
+      "relations": [
+        "K2",
+        "K6"
+      ],
+      "selection": "candidate",
+      "selection_reason": null
+    },
+    {
+      "id": "K2",
+      "claim_or_question": "Values and recipe can return",
+      "source_ids": [
+        "views"
+      ],
+      "evidence_status": "documented_replay_contract",
+      "limits": "Verify the saved recipe and receipt. A configuration is not an entire experience.",
+      "reader_question": "What has returned when the arrangement returns?",
+      "relations": [
+        "K3",
+        "K5"
+      ],
+      "selection": "candidate",
+      "selection_reason": null
+    },
+    {
+      "id": "K3",
+      "claim_or_question": "Reusable randomness has a history",
+      "source_ids": [
+        "final"
+      ],
+      "evidence_status": "historical_claim_requires_primary_recheck",
+      "limits": "Recheck the cited RAND primary source before reusing chronology or production claims.",
+      "reader_question": "Why did someone want chance available twice?",
+      "relations": [
+        "K4"
+      ],
+      "selection": "candidate",
+      "selection_reason": null
+    },
+    {
+      "id": "K4",
+      "claim_or_question": "The falling-number page changes access",
+      "source_ids": [
+        "final"
+      ],
+      "evidence_status": "runtime_claim_requires_recheck",
+      "limits": "Inspect and run the placed artifact before asserting present behaviour.",
+      "reader_question": "What does preservation leave unavailable?",
+      "relations": [
+        "K2",
+        "K5"
+      ],
+      "selection": "candidate",
+      "selection_reason": null
+    },
+    {
+      "id": "K5",
+      "claim_or_question": "The sphere has a return rule",
+      "source_ids": [
+        "final"
+      ],
+      "evidence_status": "runtime_claim_and_interpretation_require_separation",
+      "limits": "Verify the return rule separately from a passenger experience; no invented human response.",
+      "reader_question": "Is returning to a place repeating an encounter?",
+      "relations": [
+        "K6"
+      ],
+      "selection": "candidate",
+      "selection_reason": null
+    },
+    {
+      "id": "K6",
+      "claim_or_question": "A mean preserves some relations and loses others",
+      "source_ids": [
+        "views",
+        "feedback"
+      ],
+      "evidence_status": "mathematical_proposition_and_reported_author_preference",
+      "limits": "Equal-mean tuples are constructed fixtures. User layout feedback is not visitor learning evidence.",
+      "reader_question": "Which differences should this apparatus retain?",
+      "relations": [
+        "K1"
+      ],
+      "selection": "candidate",
+      "selection_reason": null
+    }
+  ],
+  "paragraph_cards": [
+    {
+      "id": "P1",
+      "information": {
+        "pool_ids": [
+          "K1"
+        ],
+        "status": "planning_card_not_final_prose"
+      },
+      "job": "Establish a discrepancy",
+      "attitude": "Exact and curious",
+      "reader_gain": "Distinguish numbers from their assignment",
+      "bridge": "The difference makes the recipe matter",
+      "size": "80–130 words",
+      "critical_pressure": null,
+      "experimental_potential": null
+    },
+    {
+      "id": "P2",
+      "information": {
+        "pool_ids": [
+          "K2"
+        ],
+        "status": "planning_card_not_final_prose"
+      },
+      "job": "Separate stored configuration from lived return",
+      "attitude": "Patient and questioning",
+      "reader_gain": "Recognize the scope of replay",
+      "bridge": "The wish to reuse chance gives history a reason to enter",
+      "size": "80–140 words",
+      "critical_pressure": {
+        "lens": "leak",
+        "anchor": "The declared values/recipe omit circumstances of an encounter."
+      },
+      "experimental_potential": null
+    },
+    {
+      "id": "P3",
+      "information": {
+        "pool_ids": [
+          "K3"
+        ],
+        "status": "planning_card_not_final_prose"
+      },
+      "job": "Revisit the bench through a historical problem",
+      "attitude": "Precise, allowing a detour",
+      "reader_gain": "See repeatability as an engineered practice",
+      "bridge": "A printed source leads to finding a number again",
+      "size": "120–180 words",
+      "critical_pressure": null,
+      "experimental_potential": null
+    },
+    {
+      "id": "P4",
+      "information": {
+        "pool_ids": [
+          "K4"
+        ],
+        "status": "planning_card_not_final_prose"
+      },
+      "job": "Put preservation under pressure",
+      "attitude": "Attentive to an interruption",
+      "reader_gain": "Distinguish data retention from access",
+      "bridge": "Another apparatus returns while a line remains unavailable",
+      "size": "70–120 words",
+      "critical_pressure": {
+        "lens": "edge",
+        "anchor": "Claimed falling-page access rule, pending runtime recheck."
+      },
+      "experimental_potential": null
+    },
+    {
+      "id": "P5",
+      "information": {
+        "pool_ids": [
+          "K5"
+        ],
+        "status": "planning_card_not_final_prose"
+      },
+      "job": "Change the scale to a bodily itinerary",
+      "attitude": "Situated, without supplying feelings",
+      "reader_gain": "Question equivalence of a rule and an experience",
+      "bridge": "Movement returns attention to the grid’s permitted changes",
+      "size": "90–150 words",
+      "critical_pressure": null,
+      "experimental_potential": null
+    },
+    {
+      "id": "P6",
+      "information": {
+        "pool_ids": [
+          "K6"
+        ],
+        "status": "planning_card_not_final_prose"
+      },
+      "job": "Let an omission propose a comparison",
+      "attitude": "Critical and open to a rival",
+      "reader_gain": "Understand the mean as a choice with uses and omissions",
+      "bridge": "Leave a bounded question for both texts",
+      "size": "100–170 words",
+      "critical_pressure": {
+        "lens": "technical_bias",
+        "anchor": "Spatial mappings use the mean of each RGB triple."
+      },
+      "experimental_potential": {
+        "question": "What changes if height uses the first channel?",
+        "alternative": "A common mean may help comparison.",
+        "intervention": "Hold triples, cells and draw order; change only height mapping.",
+        "revision_condition": "An unhelpful result or preference for the common measure can weaken the interpretation.",
+        "status": "proposed_not_run"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "A",
+      "title": "Consequence first",
+      "card_ids": [
+        "P1",
+        "P2",
+        "P6",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "rationale": "Follow the consequence into the recipe and omission before history."
+    },
+    {
+      "id": "B",
+      "title": "Braid encounter and history",
+      "card_ids": [
+        "P1",
+        "P3",
+        "P4",
+        "P2",
+        "P5",
+        "P6"
+      ],
+      "rationale": "Let historical storage alter the meaning of the present record."
+    },
+    {
+      "id": "H",
+      "title": "Candidate hybrid",
+      "card_ids": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "P6"
+      ],
+      "rationale": "Try A’s opening and B’s later movement; the supplied precedent does not choose this trial."
+    }
+  ],
+  "reported_prior_preference": {
+    "claim": "The supplied note reports A’s opening plus B’s structure.",
+    "source": "imports/2026-10-14-writing-composition/knowledge_desire_composition.md",
+    "status": "reported_in_supplied_note_not_independently_verified_here"
+  },
+  "selected_route": null,
+  "ghost_reader_runs": [],
+  "human_reviews": [],
+  "editorial_decision": null,
+  "runtime_changes": false,
+  "critical_fixture": {
+    "kind": "constructed_arithmetic_example_not_observation",
+    "triples": [
+      [
+        0.9,
+        0.2,
+        0.1
+      ],
+      [
+        0.1,
+        0.2,
+        0.9
+      ]
+    ],
+    "mean": 0.4,
+    "intervention": "height rule: mean → first channel",
+    "execution_status": "not_run",
+    "observations": []
+  }
+}

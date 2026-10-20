@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-10",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Reading method preserves the selected museum hall",
+      "passed": true
+    },
+    {
+      "name": "Four questions and seven illustrated hall returns render",
+      "passed": true
+    },
+    {
+      "name": "Method images load without horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Method hall link opens Grid with reciprocal Ghostcatching reference",
+      "passed": true
+    },
+    {
+      "name": "The hall expands its Ada interpretation",
+      "passed": true
+    },
+    {
+      "name": "All nine sourced reference entries include distinct Ada readings",
+      "passed": true
+    },
+    {
+      "name": "Targeted artwork remains highlighted after navigation",
+      "passed": true
+    },
+    {
+      "name": "Artwork deep link scrolls to its visible interpretation",
+      "passed": true
+    },
+    {
+      "name": "Salavon links into Colour with a reciprocal reading",
+      "passed": true
+    },
+    {
+      "name": "Existing relations still render after the new reading routes",
+      "passed": true
+    },
+    {
+      "name": "Reading method and hall survive reload",
+      "passed": true
+    },
+    {
+      "name": "No browser errors or warnings",
+      "passed": true
+    }
+  ],
+  "scope": "Browser navigation, linked hall readings, saved selection, image delivery and layout; no museum or tutorial runtime change.",
+  "note": "getByLabel exact did not resolve the nested select label; the visible combobox role resolved it."
+}

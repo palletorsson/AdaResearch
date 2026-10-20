@@ -1,5 +1,13 @@
 # Can the student make it?
 
+## Reading direction — 16 October 2026
+
+Palle asks for a continuing tutorial lineage with less repeated code: refer to unchanged complete files in one line, while explaining and evaluating the new operation. The [Reaction–Diffusion reading proof](../../iterations/2026-10-16-tutorial-lineage-and-editions/index.html) tries a focused book reading beside complete encyclopedia files. This is a presentation proposal; it has not shortened canonical lessons or changed their executable blocks.
+
+For this next trial, distinguish **complete runnable state** from **code reprinted on each page**. First constructions still show their full small program. A continuation can show complete new functions and precisely located edits, provided the exact preceding state and named support are recoverable and those edits reconstruct the supplied result. Unchanged files get filename, role, earlier lesson and edition reference. Changed support must be labelled changed. Keep necessary initialization explicit; do not replace a missing construction with an unexplained link.
+
+Retain the exact-code, behavioural and learning checks below. Keep existing extraction markers and full source intact while trying the reading view; a future change to canonical storage needs a corresponding verifier change. Print references must identify the book's code version, with later revisions separately available. Earlier full-program conventions below describe existing lessons and evidence, not a requirement to reprint every inherited helper in every future book chapter.
+
 **Reading economy:** show the complete working example once. A small experiment can name the exact edit without repeating an unchanged function or script. Test the edited result as well as the original; keep the complete variant available to download.
 
 5 October 2026. An addition to [functional text](FUNCTIONAL_TEXT.md), developed one selected lesson at a time. Current native evidence covers the built point, Coordinates, Lines and Trace. It does not certify the whole curriculum.
@@ -130,3 +138,33 @@ Continue one interaction at a time: name the incoming state; agree the compresse
 The author approved relevant feedback in both text tracks. Grid names representation change while retaining a sampled source; Triangle names indexed connectivity after Lines; Ignorance locates the decision in a generating rule and its input. Godot concentrates on resolution with supplied held-time mechanics. Profiles returns to Columns' section/route relation. Portals declares its sampler supplied so finite tolerance and budget remain the lesson. Melencolia adds an independent arrangement using already learned constructions; no new collision requirement or hidden worked answer.
 
 Seven tutorial texts and four reflective texts changed. All printed executable blocks and museum maps are unchanged. Native evidence was refreshed (Trace 134, Grid 53 including 10 shared producer checks; later Primitives 122; 14 deliberate faults rejected). These are behavioural checks, not evidence that a learner understands the text. Current facing pages, lesson summaries, labels and Ghost Student states are synchronized. The independent closing task has no new tested solution. [Review](../../iterations/2026-10-06-primitives-feedback/index.html).
+
+## Tested continuation format — 16 October
+
+Use **file + named function or unique statement + exact edit + expected effect**. Line numbers are convenient links to a pinned incoming edition; they are not the durable instruction. Print complete new functions or the complete replacement fragment. Cite an unchanged file once with its role, origin and edition. Keep a complete runnable result online.
+
+[Primitives → Pre → Introduction](../../iterations/2026-10-16-transformation-handoff/index.html) exercises this format: eleven printed edits produce a movement checkpoint, pickup and crossing comparison from the actual Melencolia script. BoxBody is introduced once and carried unchanged. The change from face-list cube to centred BoxMesh is explicit. The completed Pre pickup remains a separate branch for Arrays.
+
+Native result: 68 assertions, eight variants and four detected behaviour faults. Sixteen missing/ambiguous anchors are rejected. Complete student-code markers remain in collapsed online references for existing extraction tools; the compact book renderer omits those repeated full listings. Test the assembled output, not a separately repaired answer. Human learning remains a separate observation.
+
+Next: repair Introduction → Translation against this edition’s two files. Do not silently regenerate the whole sequence or change museum runtime to fit a tutorial.
+
+## Continuation reached Rotation — 16 October
+
+[Translation](../../iterations/2026-10-16-translation-carried-body/index.html) now continues the tested Introduction files; [Rotation](../../iterations/2026-10-16-rotation-carried-body/index.html) continues that exact Translation output. Rotation retains `box_body.gd`, `box()` and `_process()` unchanged. Four printed edits (19 code lines) introduce the pivot, local-preserving reparenting, axis-angle orientation and an attached face mark. The resulting files pass 253 native assertions, three exercise variants and an additional axis-length case; five behavioural faults and eight bad anchors are rejected. These results supersede the pending next step immediately above, not the historical receipts.
+
+The next repair is Rotation → Scale. Start from Rotation's `complete/` files. Keep the book's continuation focused on new code, with complete first constructions and useful full-code checkpoints. Every lesson also has a dated, downloadable complete state so the reader can recover their place and work offline in the prepared museum. Line numbers supplement named function/statement anchors. Code evidence does not establish that a human learner understands the explanation.
+
+## Continuation reached Scale — 16 October
+
+[Scale](../../iterations/2026-10-16-scale-carried-frame/index.html) now continues Rotation's exact output. Five printed instructions include two explicit removals and three replacement fragments (22 code lines). BoxBody, box() and the pivot declaration remain unchanged; the doorway children use the inherited local-preserving reparenting. The clock is removed, and apply_pose explicitly changes its argument from a float time fraction to Vector3 scale factors. The new sphere is constructed visibly because the incoming script does not contain one.
+
+Native evidence: 131 passing assertions; uniform, width-only and XY exercises plus a depth-only case; four behavioural faults and ten bad anchors rejected. Assertions measure transformed geometry and the fixed reference, while distinguishing nominal sphere dimensions from its tessellated bounds. The next repair is Scale → Trans_Body, starting from Scale's `complete/` files. This supersedes the pending next step above; it does not certify the still-unrevised Body lesson.
+
+## Continuation reached Body — 17 October
+
+[Trans_Body](../../iterations/2026-10-17-body-carried-opening/index.html) continues the exact Scale files with three insertions (16 nonblank new code lines). BoxBody, box(), apply_pose(), the doorway construction and fixed sphere remain. The active camera supplies world position each frame; its horizontal distance becomes a bounded fraction and then a uniform scale factor. The text explicitly distinguishes the viewpoint from the physical collision body and enlargement of a frame from shrinking blocks to open gaps.
+
+Native evidence: 123 assertions, three exact exercise variants, five detected behavioural faults and six rejected missing/ambiguous anchors. The engine executes the preceding Scale scene and the reconstructed Body scene; tests cover live callbacks, actual Camera3D/XRCamera3D nodes with deterministic test positions, different parent frames, horizontal projection and camera lifetime. This is not a physical-headset or human-learning result. Complete dated files, edit locations and a ZIP accompany the printed changes.
+
+Next: Body → Trans_Pit. Start from this edition's complete files; declare the additions needed for a timed, combined and solid opening. The previous Pit manuscript remains pending and is not certified by this receipt. Reflection and museum runtime were unchanged in this pass.

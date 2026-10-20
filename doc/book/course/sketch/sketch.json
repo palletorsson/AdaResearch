@@ -2,12 +2,15 @@
  "title": "The Godot Course, Sketched",
  "date": "2026-10-02",
  "rules": [
-  "The order is the Ada spine: its 25 sequences, one chapter each; you learn programming by building the Ada examples of that sequence's halls.",
-  "Part I (sequences 1 to 5) climbs the Learning Processing ladder (Shiffman) in Godot 4.6 and GDScript: shapes and coordinates, flow, interaction, variables, conditionals, loops, functions, objects, arrays. A concept is used only after it is taught; a part a hall needs earlier is supplied and named as borrowed.",
+  "Follow commons/maps/curriculum_spine.json for sequence order and commons/maps/sequences/<sequence>.json for the maps within each sequence. Read their tutorial.md files before drafting or reordering lessons.",
+  "Teach a programming concept when the current encounter gives the learner a reason to use it. Point introduces variables through a position; Trace introduces an ordered one-dimensional list of positions and a for loop over that list. Later arrays and tiling chapters develop those skills rather than introduce them from nothing. Use Learning Processing and The Nature of Code as teaching references, with the Ada spine as the route.",
   "From sequence 6 (change) on, the content is The Nature of Code (Shiffman) in the spine's order; shaders, isosurfaces, boolean surfaces, graph theory and the last three sequences are Ada's own.",
   "The voice is The Nature of Code's: second person, friendly, exact, as little text as possible. One idea per short numbered section, a picture for every idea, the code, a sentence or two of why; numbered examples, a few exercises, one running project.",
   "Build from the ground up: each chapter uses only what came before. Haeckel's radiolaria and other specific forms are case studies for later, noted as hooks.",
-  "Godot 4.6, GDScript, desktop first, the headset where a hall is about being held or walked. The course look: hot pink sky, violet ground, acid lime body, cyan, orange, off-white, lavender for what has no collider."
+  "Godot 4.6, GDScript, desktop first, the headset where a hall is about being held or walked. The course look: hot pink sky, violet ground, acid lime body, cyan, orange, off-white, lavender for what has no collider.",
+  "Create the teaching nodes and their primitive meshes in code. Do not require editor-made Point, Cube or other mesh nodes or access them with dollar-sign paths. The starter supplies the room, camera and light. Additional supplied parts must be named explicitly; they are not prerequisites silently hidden in a scene.",
+  "Use the current spine and each map’s tutorial.md as the scaffold. Programming prerequisites guide the size of each step, not a competing route. Record local exceptions: introduce one essential operation earlier, borrow an explicit component, or return to its implementation later. A reflective hall need not introduce a new coding feature.",
+  "tutorial.md teaches how to construct, change and inspect the encounter. final.md follows its critical, poetic and associative questions. They share artifacts and accurate claims, but need not carry the same explanations, pace or code. Adding a programming concept to a tutorial does not require adding it to final.md."
  ],
  "running_project": "One running project goes through the whole book: your room, and a figure you make yourself (after Learning Processing's Zoog). The figure is composed from Godot's shapes (1), moves and decides (2), stands on a floor of copies (3), becomes a class (4) and is kept in an array and dressed in a pattern (5). Then it is thrown (6), becomes a Mover that forces push (7), gets a net hung over it and a marble (8), and swings and rings (9). It wanders by seeded chance (10), climbs a noise hill (11), wears a computed skin (12), climbs a Rule 90 stair (13) and walks through a Menger sponge (14). It keeps a garden, a family of plants grown by one rule with different genes (15), and enters a world bred from one seed (16). It walks through a soft curtain (17), stands in a doorway cut from a field (18) and from solids (19), and is copied into a flock (20). It learns (21), finds its way through the room's graph (22), stands where an impossible body closes (23) and is wired to the laboratory's handles (24). In 25 the room is released with one body any visitor can change.",
  "media_plan": {
@@ -31,7 +34,7 @@
   {
    "part": "I",
    "title": "Coding with Bodies",
-   "summary": "Part I teaches programming from nothing, using the first five spine sequences. Each sequence takes the next rungs of the Learning Processing ladder, in order. Primitives (ch1) opens with how to make a script and press Play, then teaches shapes and coordinates, flow, interaction and variables. Transformation (ch2) teaches conditionals. array_tutorial (ch3) teaches loops. Color (ch4) teaches functions, then objects. Tiling (ch5) teaches arrays. Every chapter builds the main examples of its halls with only what came before. Where a hall needs something earlier, a small supplied part does the job and is named as borrowed. The running project is My Room: a figure you make yourself (Learning Processing's Zoog). It is composed from Godot's shapes, then moves and decides, then stands on a floor of copies, then becomes a class with colour functions, and is finally kept in an array and dressed in a pattern.",
+   "summary": "Part I follows the first five spine sequences. Primitives starts with Point Zero’s running clock. Point One gives variables a concrete use; Coordinates reads their components; Lines relates two positions; Trace saves positions in an ordered list and visits them with a for loop. Grid, triangle and body studies reuse this vocabulary. Transformation develops decisions and change. Array develops counted and nested generation in space. Colour develops functions and classes. Tiling returns to stored values, indexing, editing a shared source and patterns. Supplied parts are named; later returns unfold what the learner first borrowed. The critical final.md track keeps its own pace and questions.",
    "chapters": [
     {
      "n": 1,
@@ -39,12 +42,13 @@
      "title": "Points Build Bodies",
      "subtitle": "Three numbers place a body; a script makes it stay, move and follow you.",
      "code_new": [
-      "flow: a script on a node; _ready() runs once when you press Play",
-      "shapes and coordinates: Vector3(x, y, z), y up, counted from the origin; a node's position set from the script",
-      "shapes and coordinates: MeshInstance3D with Godot's primitive meshes; StaticBody3D + CollisionShape3D, a boundary apart from the surface",
-      "flow: _process() runs every frame",
-      "interaction: reading the mouse every frame; duplicate() and add_child() make a copy in code",
-      "variables: var, := and a starting value; += and arithmetic; a counter of your own"
+      "Point Zero: _ready() once and _process() repeatedly; inspect a supplied display before constructing bodies",
+      "Point One: var names a value; Vector3 holds a position; assignment changes it; create visible meshes in code and distinguish their contact shapes",
+      "Coordinates: x, y and z; read a position relative to a named frame; prepare two positions",
+      "Lines: subtract positions, measure length and connect the two endpoints with a supplied segment renderer",
+      "Trace: an ordered one-dimensional Array of Vector3 values; append one position; inspect its size and read one entry",
+      "Trace: for point in positions visits stored values in order; distinguish this traversal from Godot calling _process each frame",
+      "Grid, triangle and bodies: reuse positions, lists and iteration where they help; introduce only the small new operation each encounter requires"
      ],
      "noc": "Learning Processing ch. 1-4 (no Nature of Code chapter)",
      "halls": [
@@ -65,10 +69,248 @@
      "sections": [
       {
        "n": "1.1",
-       "title": "Press Play",
-       "idea": "A script is text on a node: the lines in func _ready() run once, when you press Play.",
-       "figure": "The empty room, pink sky over violet floor, and the same room after Play with one lime sphere that a one-line _ready placed.",
-       "builds": "origin (Point_Zero)"
+       "title": "Arrive in a running scene",
+       "idea": "One instruction in `_ready`; a counter changes in `_process`. Compare once with repeatedly.",
+       "caption": "Borrow the display and prepared room. Attend to once and repeatedly. Any counter variable is a small working preview; Point One gives variables their fuller explanation.",
+       "builds": "Point_Zero",
+       "map": "Point_Zero",
+       "source_tutorial": "commons/maps/Point_Zero/tutorial.md"
+      },
+      {
+       "n": "1.2",
+       "title": "Give the point a body",
+       "idea": "Use a variable to name a position and change its value. The position can remain unseen; create a visible marker, then distinguish its mesh from its contact shape.",
+       "caption": "A position value and a node displaying it are different kinds of thing. Create the teaching meshes in code. Borrow the feeler and light switch.",
+       "builds": "Point_One",
+       "map": "Point_One",
+       "source_tutorial": "commons/maps/Point_One/tutorial.md"
+      },
+      {
+       "n": "1.3",
+       "title": "Carry a position",
+       "idea": "Name x, y and z; change one component. Compare local and world positions. Keep a second point.",
+       "caption": "Borrow XR holding or desktop movement. Do not teach controller setup or a distance arrow here.",
+       "builds": "Point_Coordinates",
+       "map": "Point_Coordinates",
+       "source_tutorial": "commons/maps/Point_Coordinates/tutorial.md"
+      },
+      {
+       "n": "1.4",
+       "title": "Keep two ends in relation",
+       "idea": "Connect the two positions. Subtract them and measure the result. Moving an end changes the relation.",
+       "caption": "Borrow segment orientation/rendering. Introduce distance here, before the later pickup example uses it.",
+       "builds": "Point_Lines",
+       "map": "Point_Lines",
+       "source_tutorial": "commons/maps/Point_Lines/tutorial.md"
+      },
+      {
+       "n": "1.5",
+       "title": "Keep where the point has been",
+       "idea": "Keep sampled positions in an ordered one-dimensional list. Append a position, inspect the count and one entry, then visit the list with a for loop to show what was kept.",
+       "caption": "Teach the small list and its traversal here. Borrow XR movement and the segment renderer. Leave the installed recorder’s movement gate, duplicate suppression, memory cap and transfer machinery for later steps. Position order alone does not record elapsed time.",
+       "builds": "Point_Trace",
+       "map": "Point_Trace",
+       "source_tutorial": "commons/maps/Point_Trace/tutorial.md"
+      },
+      {
+       "n": "1.6",
+       "title": "Give a position an address",
+       "idea": "Snap a position to a chosen spacing. Compare its coordinates with a discrete grid address.",
+       "caption": "Reuse the stored positions and the for loop to compare chosen and snapped positions. Introduce a spatial address without implying that a list of Vector3 values is a three-dimensional array. Full nested grid generation can wait for Array.",
+       "builds": "Point_Line_Grid",
+       "map": "Point_Line_Grid",
+       "source_tutorial": "commons/maps/Point_Line_Grid/tutorial.md"
+      },
+      {
+       "n": "1.7",
+       "title": "Close three edges, then fill",
+       "idea": "Reuse three points and segments. A closed outline and a filled face are different constructions.",
+       "caption": "Reuse the positions and ordered-list vocabulary. Borrow mesh submission to Godot while teaching corners, edges and a face. Buffers, normals and general connectivity need not arrive at once.",
+       "builds": "Point_Triangle_Context",
+       "map": "Point_Triangle_Context",
+       "source_tutorial": "commons/maps/Point_Triangle_Context/tutorial.md"
+      },
+      {
+       "n": "1.8",
+       "title": "Enclose a region",
+       "idea": "Add a fourth triangular face. Compare an open corner, a visible enclosure and physical contact.",
+       "caption": "Reuse points and faces. Collision remains a separate construction; no new physics system is required.",
+       "builds": "Primitives_Polythedra",
+       "map": "Primitives_Polythedra",
+       "source_tutorial": "commons/maps/Primitives_Polythedra/tutorial.md"
+      },
+      {
+       "n": "1.9",
+       "title": "Follow a corner through the cube",
+       "idea": "Inspect which edges and faces share a corner. Distinguish editing that corner from transforming the whole body.",
+       "caption": "Reuse the list and loop from Trace to inspect corners and their connections. Borrow the connectivity editor; defer a general mesh-editing system.",
+       "builds": "Point_Animatedcube",
+       "map": "Point_Animatedcube",
+       "source_tutorial": "commons/maps/Point_Animatedcube/tutorial.md"
+      },
+      {
+       "n": "1.10",
+       "title": "Inspect a generated primitive",
+       "idea": "Return to SphereMesh and the other built-in primitives. Change their parameters and inspect finite resolution.",
+       "caption": "The first sphere was a working instance; this return examines what its convenient name concealed.",
+       "builds": "Primitives_Ignorance",
+       "map": "Primitives_Ignorance",
+       "source_tutorial": "commons/maps/Primitives_Ignorance/tutorial.md"
+      },
+      {
+       "n": "1.11",
+       "title": "Approach a limit",
+       "idea": "Compare increasingly fine approximations. More segments and mathematical exactness are different claims.",
+       "caption": "Reuse the loop where it makes the repeated construction clear. Borrow or defer the trigonometry and full perimeter calculation; distinguish geometric approximation from numerical precision.",
+       "builds": "Primitives_Portals",
+       "map": "Primitives_Portals",
+       "source_tutorial": "commons/maps/Primitives_Portals/tutorial.md"
+      },
+      {
+       "n": "1.12",
+       "title": "Compose with what you know",
+       "idea": "Arrange known forms; compare the construction with what the tableau asks of geometry.",
+       "caption": "A synthesis can deepen judgement without introducing another language feature. Preserve its historical and critical register.",
+       "builds": "Primitives_Melencolia",
+       "map": "Primitives_Melencolia",
+       "source_tutorial": "commons/maps/Primitives_Melencolia/tutorial.md"
+      }
+     ],
+     "examples": [
+      "Example 1.1: three stations (position, surface, boundary)",
+      "Example 1.2: a court of your own shapes",
+      "Example 1.3: the frame counter",
+      "Example 1.4: draw with the mouse"
+     ],
+     "exercises": [
+      "Make the collider bigger than the mesh and find the gap with the probe.",
+      "Set a SphereMesh to 4 radial segments: what body is it now?",
+      "Count by twos, then move the count into _ready and say what happens.",
+      "Halve the whole court by changing one variable."
+     ],
+     "project_step": "Start your room: a figure of your own made from Godot's shapes, placed by coordinates, with its sizes in variables, following the mouse.",
+     "image": {
+      "file": "/course/sketch/01-primitives.png",
+      "source": "Rendered new: Godot 4.6, course look (court of shapes, origin axes, mouse trail)",
+      "caption": "A court of Godot's own shapes at chosen coordinates: pyramids, cubes, a sphere and a torus, the origin with its three axes, and the dots a point leaves as it follows the mouse.",
+      "rendered_new": true
+     },
+     "case_study_hooks": [
+      "Dürer's truncated solid from Melencolia I, rebuilt from its corners once vertices sit in an array.",
+      "Archimedes' polygons closing on the circle (Primitives_Portals), once loops exist.",
+      "LeWitt's location drawings: an instruction as coordinates.",
+      "Kandinsky's point that becomes a plane as it grows."
+     ],
+     "borrowed": [
+      "base.tscn: room, camera and lighting; first_sphere.gd is already attached to its root (first-sphere project)",
+      "line(a, b) and triangle(a, b, c): supplied helpers that draw a segment or a filled face between points; they stay supplied until 11.7 opens the ArrayMesh they build",
+      "mouse_point(): the point on the floor under the cursor",
+      "contact_probe.gd: a moving cyan feeler that stops at colliders (Point One kit)",
+      "the frame-counter panel: a Label3D whose text you set"
+     ],
+     "notes_for_palle": "3 October: the source tutorials supply the scaffold. Teach variables through Point and an ordered list plus for loop through Trace. The current functional draft and its taxonomy still need the corresponding one-lesson-at-a-time rewrite; this plan is not a claim that those lessons have been changed. Keep critical final.md independent of the tutorial’s syntax progression.",
+     "media": {
+      "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/primitives.json",
+      "maps": [
+       {
+        "map": "Point_Zero",
+        "tutorial": "commons/maps/Point_Zero/tutorial.md",
+        "intent": "commons/maps/Point_Zero/intent.md",
+        "final": "commons/maps/Point_Zero/final.md",
+        "technical": "commons/maps/Point_Zero/technical.md"
+       },
+       {
+        "map": "Point_One",
+        "tutorial": "commons/maps/Point_One/tutorial.md",
+        "intent": "commons/maps/Point_One/intent.md",
+        "final": "commons/maps/Point_One/final.md",
+        "technical": "commons/maps/Point_One/technical.md"
+       },
+       {
+        "map": "Point_Coordinates",
+        "tutorial": "commons/maps/Point_Coordinates/tutorial.md",
+        "intent": "commons/maps/Point_Coordinates/intent.md",
+        "final": "commons/maps/Point_Coordinates/final.md",
+        "technical": "commons/maps/Point_Coordinates/technical.md"
+       },
+       {
+        "map": "Point_Lines",
+        "tutorial": "commons/maps/Point_Lines/tutorial.md",
+        "intent": "commons/maps/Point_Lines/intent.md",
+        "final": "commons/maps/Point_Lines/final.md",
+        "technical": "commons/maps/Point_Lines/technical.md"
+       },
+       {
+        "map": "Point_Trace",
+        "tutorial": "commons/maps/Point_Trace/tutorial.md",
+        "intent": "commons/maps/Point_Trace/intent.md",
+        "final": "commons/maps/Point_Trace/final.md",
+        "technical": "commons/maps/Point_Trace/technical.md"
+       },
+       {
+        "map": "Point_Line_Grid",
+        "tutorial": "commons/maps/Point_Line_Grid/tutorial.md",
+        "intent": "commons/maps/Point_Line_Grid/intent.md",
+        "final": "commons/maps/Point_Line_Grid/final.md",
+        "technical": "commons/maps/Point_Line_Grid/technical.md"
+       },
+       {
+        "map": "Point_Triangle_Context",
+        "tutorial": "commons/maps/Point_Triangle_Context/tutorial.md",
+        "intent": "commons/maps/Point_Triangle_Context/intent.md",
+        "final": "commons/maps/Point_Triangle_Context/final.md",
+        "technical": "commons/maps/Point_Triangle_Context/technical.md"
+       },
+       {
+        "map": "Primitives_Polythedra",
+        "tutorial": "commons/maps/Primitives_Polythedra/tutorial.md",
+        "intent": "commons/maps/Primitives_Polythedra/intent.md",
+        "final": "commons/maps/Primitives_Polythedra/final.md",
+        "technical": "commons/maps/Primitives_Polythedra/technical.md"
+       },
+       {
+        "map": "Point_Animatedcube",
+        "tutorial": "commons/maps/Point_Animatedcube/tutorial.md",
+        "intent": "commons/maps/Point_Animatedcube/intent.md",
+        "final": "commons/maps/Point_Animatedcube/final.md",
+        "technical": "commons/maps/Point_Animatedcube/technical.md"
+       },
+       {
+        "map": "Primitives_Ignorance",
+        "tutorial": "commons/maps/Primitives_Ignorance/tutorial.md",
+        "intent": "commons/maps/Primitives_Ignorance/intent.md",
+        "final": "commons/maps/Primitives_Ignorance/final.md",
+        "technical": "commons/maps/Primitives_Ignorance/technical.md"
+       },
+       {
+        "map": "Primitives_Portals",
+        "tutorial": "commons/maps/Primitives_Portals/tutorial.md",
+        "intent": "commons/maps/Primitives_Portals/intent.md",
+        "final": "commons/maps/Primitives_Portals/final.md",
+        "technical": "commons/maps/Primitives_Portals/technical.md"
+       },
+       {
+        "map": "Primitives_Melencolia",
+        "tutorial": "commons/maps/Primitives_Melencolia/tutorial.md",
+        "intent": "commons/maps/Primitives_Melencolia/intent.md",
+        "final": "commons/maps/Primitives_Melencolia/final.md",
+        "technical": "commons/maps/Primitives_Melencolia/technical.md"
+       }
+      ],
+      "status": "map_order_planned; existing_functional_draft_not_yet_reordered",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
+     },
+     "previous_draft_sections": [
+      {
+       "n": "1.1",
+       "title": "Make a sphere",
+       "idea": "Create one MeshInstance3D, give it a SphereMesh, place it and add it to the scene. The supplied project already has the room, camera and light.",
+       "figure": "One white sphere above the floor, beside the code that creates it.",
+       "builds": "point_visible (Point_One)"
       },
       {
        "n": "1.2",
@@ -119,43 +361,7 @@
        "figure": "The court from the front right in the course look: cyan corner pyramids, a lime spire on an off-white pedestal, orange cubes, an off-white sphere.",
        "builds": "coordinate_readout (Point_Coordinates); pyramid, cube_scene, durer_scene (Primitives_Melencolia)"
       }
-     ],
-     "examples": [
-      "Example 1.1: three stations (position, surface, boundary)",
-      "Example 1.2: a court of your own shapes",
-      "Example 1.3: the frame counter",
-      "Example 1.4: draw with the mouse"
-     ],
-     "exercises": [
-      "Make the collider bigger than the mesh and find the gap with the probe.",
-      "Set a SphereMesh to 4 radial segments: what body is it now?",
-      "Count by twos, then move the count into _ready and say what happens.",
-      "Halve the whole court by changing one variable."
-     ],
-     "project_step": "Start your room: a figure of your own made from Godot's shapes, placed by coordinates, with its sizes in variables, following the mouse.",
-     "image": {
-      "file": "/course/sketch/01-primitives.png",
-      "source": "Rendered new: Godot 4.6, course look (court of shapes, origin axes, mouse trail)",
-      "caption": "A court of Godot's own shapes at chosen coordinates: pyramids, cubes, a sphere and a torus, the origin with its three axes, and the dots a point leaves as it follows the mouse.",
-      "rendered_new": true
-     },
-     "case_study_hooks": [
-      "Dürer's truncated solid from Melencolia I, rebuilt from its corners once vertices sit in an array.",
-      "Archimedes' polygons closing on the circle (Primitives_Portals), once loops exist.",
-      "LeWitt's location drawings: an instruction as coordinates.",
-      "Kandinsky's point that becomes a plane as it grows."
-     ],
-     "borrowed": [
-      "base.tscn: floor, pink sky, sun, camera and a node named Point, in the course look (kit-base)",
-      "line(a, b) and triangle(a, b, c): supplied helpers that draw a segment or a filled face between points; they stay supplied until 11.7 opens the ArrayMesh they build",
-      "mouse_point(): the point on the floor under the cursor",
-      "contact_probe.gd: a moving cyan feeler that stops at colliders (Point One kit)",
-      "the frame-counter panel: a Label3D whose text you set"
-     ],
-     "notes_for_palle": "Primitives has 12 halls but only six ideas fit. The later halls need loops or arrays: Point_Trace's list, Point_Line_Grid's 5x5 plan_vitrine, Point_Animatedcube's vertex lists, Portals' polygon perimeter; they are built here at the depth the rung allows. 1.1 is a new opening section (make a script, attach it, press Play). length() moves to 2.5 and snapped() to a ch3 exercise. Durer's court stays the hall's subject, but the chapter calls it a court of your own shapes and Durer is a hook.",
-     "media": {
-      "kind": "still"
-     }
+     ]
     },
     {
      "n": 2,
@@ -228,7 +434,7 @@
       {
        "n": "2.7",
        "title": "Children follow",
-       "idea": "A child moves, turns and grows with its parent: scale the room and everything in it follows.",
+       "idea": "Build a room node, table and ball in code. Add the table and ball as its children; they follow its position, rotation and scale.",
        "figure": "The room at scale = 4, the orange door walkable, its scale-1 outline in lavender.",
        "builds": "scale_me (Trans_Scale)"
       },
@@ -273,6 +479,63 @@
      "notes_for_palle": "Trans_Rotation's rotation_array_compare needs a loop, so it is an exercise in ch3. Trans_Pit's grower moves by cosine; pingpong() stands in until wave functions (NOC 3). Mouse and key events, Learning Processing's ch3, arrive here because Godot asks about input through if. length() (from the old 1.7) opens in 2.5; translate() is added to 2.8 so the order of two steps can be taught here. Carroll's DRINK ME is a hook; the room is just a room scaled by four.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/transformation.json",
+      "maps": [
+       {
+        "map": "Trans_Pre",
+        "tutorial": "commons/maps/Trans_Pre/tutorial.md",
+        "intent": "commons/maps/Trans_Pre/intent.md",
+        "final": "commons/maps/Trans_Pre/final.md",
+        "technical": null
+       },
+       {
+        "map": "Trans_Introduction",
+        "tutorial": "commons/maps/Trans_Introduction/tutorial.md",
+        "intent": "commons/maps/Trans_Introduction/intent.md",
+        "final": "commons/maps/Trans_Introduction/final.md",
+        "technical": "commons/maps/Trans_Introduction/technical.md"
+       },
+       {
+        "map": "Trans_Translation",
+        "tutorial": "commons/maps/Trans_Translation/tutorial.md",
+        "intent": "commons/maps/Trans_Translation/intent.md",
+        "final": "commons/maps/Trans_Translation/final.md",
+        "technical": "commons/maps/Trans_Translation/technical.md"
+       },
+       {
+        "map": "Trans_Rotation",
+        "tutorial": "commons/maps/Trans_Rotation/tutorial.md",
+        "intent": "commons/maps/Trans_Rotation/intent.md",
+        "final": "commons/maps/Trans_Rotation/final.md",
+        "technical": "commons/maps/Trans_Rotation/technical.md"
+       },
+       {
+        "map": "Trans_Scale",
+        "tutorial": "commons/maps/Trans_Scale/tutorial.md",
+        "intent": "commons/maps/Trans_Scale/intent.md",
+        "final": "commons/maps/Trans_Scale/final.md",
+        "technical": "commons/maps/Trans_Scale/technical.md"
+       },
+       {
+        "map": "Trans_Body",
+        "tutorial": "commons/maps/Trans_Body/tutorial.md",
+        "intent": "commons/maps/Trans_Body/intent.md",
+        "final": "commons/maps/Trans_Body/final.md",
+        "technical": null
+       },
+       {
+        "map": "Trans_Pit",
+        "tutorial": "commons/maps/Trans_Pit/tutorial.md",
+        "intent": "commons/maps/Trans_Pit/intent.md",
+        "final": "commons/maps/Trans_Pit/final.md",
+        "technical": "commons/maps/Trans_Pit/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -282,7 +545,7 @@
      "subtitle": "A loop makes a row, a grid, a lattice and a floor with a rule.",
      "code_new": [
       "loops: while, repeat as long as a test is true",
-      "loops: for i in n, counting for you; the loop variable as an address, i * spacing",
+      "counted iteration: for i in n uses a count as an address, i * spacing; extend the for-each loop already learned in Trace",
       "preload() and PackedScene.instantiate(): many copies of one scene",
       "loops: nested loops, x then z, then y",
       "loops: % (remainder), a rule that repeats; rotation_degrees turns a tile by it",
@@ -343,7 +606,7 @@
       {
        "n": "3.7",
        "title": "Stand it up",
-       "idea": "Swap z for y and the same loops build a wall; one if keeps one tile different.",
+       "idea": "Create a wall node in code and add the tiles to it. Turn the wall upright; its tiles follow. Keep one tile different.",
        "figure": "The six fields as tall panels in lime frames, and the hinged exception panel turned open onto the landing.",
        "builds": "tiling_principles in wall mode, wall_exception (Tutorial_Tiling_Walls)"
       },
@@ -393,7 +656,53 @@
      "notes_for_palle": "array_tutorial is named for arrays, but the ladder puts arrays last. So it teaches loops and addresses; its stored values (Array's tables, Tutorial_3D's values[y][z][x]) are written in ch5. The step_sequencer waits for ch5, where Pattern_Disco has the same machine. array_floor_writer, pulsar_visualizer and molnar_cube_study are not built. Tutorial_3D is a hall about flying in a headset; on desktop you fly with keys.",
      "media": {
       "kind": "still"
-     }
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/array_tutorial.json",
+      "maps": [
+       {
+        "map": "Array",
+        "tutorial": null,
+        "intent": "commons/maps/Array/intent.md",
+        "final": "commons/maps/Array/final.md",
+        "technical": "commons/maps/Array/technical.md"
+       },
+       {
+        "map": "Tutorial_3D",
+        "tutorial": "commons/maps/Tutorial_3D/tutorial.md",
+        "intent": "commons/maps/Tutorial_3D/intent.md",
+        "final": "commons/maps/Tutorial_3D/final.md",
+        "technical": "commons/maps/Tutorial_3D/technical.md"
+       },
+       {
+        "map": "Tutorial_Tiling_Floor",
+        "tutorial": "commons/maps/Tutorial_Tiling_Floor/tutorial.md",
+        "intent": "commons/maps/Tutorial_Tiling_Floor/intent.md",
+        "final": "commons/maps/Tutorial_Tiling_Floor/final.md",
+        "technical": "commons/maps/Tutorial_Tiling_Floor/technical.md"
+       },
+       {
+        "map": "Tutorial_Tiling_Walls",
+        "tutorial": "commons/maps/Tutorial_Tiling_Walls/tutorial.md",
+        "intent": "commons/maps/Tutorial_Tiling_Walls/intent.md",
+        "final": "commons/maps/Tutorial_Tiling_Walls/final.md",
+        "technical": "commons/maps/Tutorial_Tiling_Walls/technical.md"
+       },
+       {
+        "map": "Tutorial_Disco",
+        "tutorial": "commons/maps/Tutorial_Disco/tutorial.md",
+        "intent": "commons/maps/Tutorial_Disco/intent.md",
+        "final": "commons/maps/Tutorial_Disco/final.md",
+        "technical": "commons/maps/Tutorial_Disco/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
+     },
+     "code_returns": [
+      "The ordered list and for-each traversal from Point Trace. Here iteration generates placements by a count, then by nested spatial indices."
+     ]
     },
     {
      "n": 4,
@@ -515,6 +824,70 @@
      "notes_for_palle": "Objects arrive with Color_Paint (hall 7), so Flashlight's four lamps (hall 2) are four nodes set by hand. Color_Paint's canvas is a shader in the hall; the course paints into an Image and leaves shaders for ch12. Color_Walls' PANES table is an array in the hall; here the panes are made in a loop from i.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/color.json",
+      "maps": [
+       {
+        "map": "Color_Context_Placed",
+        "tutorial": "commons/maps/Color_Context_Placed/tutorial.md",
+        "intent": "commons/maps/Color_Context_Placed/intent.md",
+        "final": "commons/maps/Color_Context_Placed/final.md",
+        "technical": "commons/maps/Color_Context_Placed/technical.md"
+       },
+       {
+        "map": "Color_Flashlight",
+        "tutorial": "commons/maps/Color_Flashlight/tutorial.md",
+        "intent": "commons/maps/Color_Flashlight/intent.md",
+        "final": "commons/maps/Color_Flashlight/final.md",
+        "technical": "commons/maps/Color_Flashlight/technical.md"
+       },
+       {
+        "map": "Color_Nails",
+        "tutorial": "commons/maps/Color_Nails/tutorial.md",
+        "intent": "commons/maps/Color_Nails/intent.md",
+        "final": "commons/maps/Color_Nails/final.md",
+        "technical": "commons/maps/Color_Nails/technical.md"
+       },
+       {
+        "map": "Color_Rainbow",
+        "tutorial": "commons/maps/Color_Rainbow/tutorial.md",
+        "intent": "commons/maps/Color_Rainbow/intent.md",
+        "final": "commons/maps/Color_Rainbow/final.md",
+        "technical": "commons/maps/Color_Rainbow/technical.md"
+       },
+       {
+        "map": "Color_Pillar",
+        "tutorial": "commons/maps/Color_Pillar/tutorial.md",
+        "intent": "commons/maps/Color_Pillar/intent.md",
+        "final": "commons/maps/Color_Pillar/final.md",
+        "technical": "commons/maps/Color_Pillar/technical.md"
+       },
+       {
+        "map": "Color_Grid_Pallet",
+        "tutorial": "commons/maps/Color_Grid_Pallet/tutorial.md",
+        "intent": "commons/maps/Color_Grid_Pallet/intent.md",
+        "final": "commons/maps/Color_Grid_Pallet/final.md",
+        "technical": "commons/maps/Color_Grid_Pallet/technical.md"
+       },
+       {
+        "map": "Color_Paint",
+        "tutorial": "commons/maps/Color_Paint/tutorial.md",
+        "intent": "commons/maps/Color_Paint/intent.md",
+        "final": "commons/maps/Color_Paint/final.md",
+        "technical": "commons/maps/Color_Paint/technical.md"
+       },
+       {
+        "map": "Color_Walls",
+        "tutorial": "commons/maps/Color_Walls/tutorial.md",
+        "intent": "commons/maps/Color_Walls/intent.md",
+        "final": "commons/maps/Color_Walls/final.md",
+        "technical": "commons/maps/Color_Walls/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -523,14 +896,13 @@
      "title": "A Source, Many Copies",
      "subtitle": "Keep a 4 x 4 source in an array and copy it by symmetry.",
      "code_new": [
-      "arrays: [ ] and an index, steps[i]",
-      "arrays: size() and append()",
-      "arrays: for item in array",
-      "arrays: writing into an array, steps[i] = true",
-      "arrays: arrays of arrays, source[y][x]",
-      "arrays: % wraps an address back into the source",
+      "stored rules: a list of steps revisits the ordered-list vocabulary from Trace",
+      "lookup: palette[value] maps a stored value to a colour",
+      "editing: steps[i] = true changes one stored entry",
+      "arrays of arrays: source[y][x] stores the rows of a source tile",
+      "wrapping: % returns a repeated address to the source",
       "Image.set_pixel() and ImageTexture: a picture from an array",
-      "arrays: an array of objects"
+      "an array of objects: keep and operate on the bodies made from a class"
      ],
      "noc": "Learning Processing ch. 9 (no Nature of Code chapter)",
      "halls": [
@@ -548,7 +920,7 @@
       {
        "n": "5.1",
        "title": "A list of steps",
-       "idea": "var steps := [true, false, false, true] keeps values in order; steps[i] reads one, and the playhead reads them in turn.",
+       "idea": "Return to Trace’s ordered list, now storing on/off steps. Read one entry with an index and let a playhead visit the entries in turn.",
        "figure": "The step sequencer grid with a cyan playhead on one column and three lit steps.",
        "builds": "step_sequencer (Pattern_Disco)"
       },
@@ -638,7 +1010,74 @@
      "notes_for_palle": "Ribbon_Patterns_02 is a colour annex (contrast, metamerism, prism) with no array argument. Its contrast study is exercise 5; the rest is a hook. The halls draw patterns with shaders; the course uses Image.set_pixel. P6M, the kaleidoscope and the full 17-group cage need 60-degree turns (trigonometry) and stay as hooks. Ribbon_Patterns_01's bar_array_bubble_sort is the place for sorting if you want it.",
      "media": {
       "kind": "still"
-     }
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/tiling.json",
+      "maps": [
+       {
+        "map": "Pattern_Disco",
+        "tutorial": "commons/maps/Pattern_Disco/tutorial.md",
+        "intent": "commons/maps/Pattern_Disco/intent.md",
+        "final": "commons/maps/Pattern_Disco/final.md",
+        "technical": "commons/maps/Pattern_Disco/technical.md"
+       },
+       {
+        "map": "Pattern_Foundry",
+        "tutorial": "commons/maps/Pattern_Foundry/tutorial.md",
+        "intent": "commons/maps/Pattern_Foundry/intent.md",
+        "final": "commons/maps/Pattern_Foundry/final.md",
+        "technical": "commons/maps/Pattern_Foundry/technical.md"
+       },
+       {
+        "map": "Tutorial_Pattern",
+        "tutorial": "commons/maps/Tutorial_Pattern/tutorial.md",
+        "intent": "commons/maps/Tutorial_Pattern/intent.md",
+        "final": "commons/maps/Tutorial_Pattern/final.md",
+        "technical": "commons/maps/Tutorial_Pattern/technical.md"
+       },
+       {
+        "map": "Array_Patterns",
+        "tutorial": "commons/maps/Array_Patterns/tutorial.md",
+        "intent": "commons/maps/Array_Patterns/intent.md",
+        "final": "commons/maps/Array_Patterns/final.md",
+        "technical": "commons/maps/Array_Patterns/technical.md"
+       },
+       {
+        "map": "Symmetry_Seventeen",
+        "tutorial": "commons/maps/Symmetry_Seventeen/tutorial.md",
+        "intent": "commons/maps/Symmetry_Seventeen/intent.md",
+        "final": "commons/maps/Symmetry_Seventeen/final.md",
+        "technical": null
+       },
+       {
+        "map": "Ribbon_Patterns_01",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Ribbon_Patterns_01/final.md",
+        "technical": "commons/maps/Ribbon_Patterns_01/technical.md"
+       },
+       {
+        "map": "Ribbon_Patterns_02",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Ribbon_Patterns_02/final.md",
+        "technical": "commons/maps/Ribbon_Patterns_02/technical.md"
+       },
+       {
+        "map": "Ribbon_Patterns_03",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Ribbon_Patterns_03/final.md",
+        "technical": "commons/maps/Ribbon_Patterns_03/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
+     },
+     "code_returns": [
+      "One-dimensional arrays, append, size, reading one entry and for-each traversal from Trace."
+     ]
     }
    ],
    "ladder_problems": [
@@ -765,6 +1204,28 @@
       "overlay": "velocity += gravity * delta; position += velocity * delta",
       "plan": "The throw stepped at 0.18 s and at 1/60 s, the two lines of code on screen.",
       "file": "/course/sketch/06-change.webp"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/change.json",
+      "maps": [
+       {
+        "map": "Change_Intro",
+        "tutorial": "commons/maps/Change_Intro/tutorial.md",
+        "intent": "commons/maps/Change_Intro/intent.md",
+        "final": "commons/maps/Change_Intro/final.md",
+        "technical": null
+       },
+       {
+        "map": "Flow_Field",
+        "tutorial": "commons/maps/Flow_Field/tutorial.md",
+        "intent": "commons/maps/Flow_Field/intent.md",
+        "final": "commons/maps/Flow_Field/final.md",
+        "technical": null
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -792,6 +1253,7 @@
       "Vectors_Act3_FieldsAndMotion",
       "Vectors_Act4a_KineticForces",
       "Vectors_Act4b_Oscillation",
+      "Change_Choreography",
       "VFM_07_Gravity",
       "VFM_09_Legs",
       "VFM_08_Arena",
@@ -896,6 +1358,105 @@
       "kind": "clip",
       "overlay": "apply_force(wind); apply_force(drag)",
       "plan": "Wind on three masses, then the same slide in air, water and honey, the force lines on screen."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/forces.json",
+      "maps": [
+       {
+        "map": "Vectors_Act1_WhatAVectorIs",
+        "tutorial": "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+        "intent": "commons/maps/Vectors_Act1_WhatAVectorIs/intent.md",
+        "final": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+        "technical": null
+       },
+       {
+        "map": "VFM_02_Operations",
+        "tutorial": "commons/maps/VFM_02_Operations/tutorial.md",
+        "intent": "commons/maps/VFM_02_Operations/intent.md",
+        "final": "commons/maps/VFM_02_Operations/final.md",
+        "technical": null
+       },
+       {
+        "map": "Vectors_Act2_VectorArithmetic",
+        "tutorial": "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md",
+        "intent": "commons/maps/Vectors_Act2_VectorArithmetic/intent.md",
+        "final": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+        "technical": null
+       },
+       {
+        "map": "VFM_05_Launch",
+        "tutorial": "commons/maps/VFM_05_Launch/tutorial.md",
+        "intent": "commons/maps/VFM_05_Launch/intent.md",
+        "final": "commons/maps/VFM_05_Launch/final.md",
+        "technical": null
+       },
+       {
+        "map": "VFM_03_Motion",
+        "tutorial": "commons/maps/VFM_03_Motion/tutorial.md",
+        "intent": "commons/maps/VFM_03_Motion/intent.md",
+        "final": "commons/maps/VFM_03_Motion/final.md",
+        "technical": null
+       },
+       {
+        "map": "Vectors_Act3_FieldsAndMotion",
+        "tutorial": "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+        "intent": "commons/maps/Vectors_Act3_FieldsAndMotion/intent.md",
+        "final": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+        "technical": null
+       },
+       {
+        "map": "Vectors_Act4a_KineticForces",
+        "tutorial": "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+        "intent": "commons/maps/Vectors_Act4a_KineticForces/intent.md",
+        "final": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+        "technical": null
+       },
+       {
+        "map": "Vectors_Act4b_Oscillation",
+        "tutorial": "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+        "intent": "commons/maps/Vectors_Act4b_Oscillation/intent.md",
+        "final": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+        "technical": null
+       },
+       {
+        "map": "Change_Choreography",
+        "tutorial": "commons/maps/Change_Choreography/tutorial.md",
+        "intent": "commons/maps/Change_Choreography/intent.md",
+        "final": "commons/maps/Change_Choreography/final.md",
+        "technical": "commons/maps/Change_Choreography/technical.md"
+       },
+       {
+        "map": "VFM_07_Gravity",
+        "tutorial": "commons/maps/VFM_07_Gravity/tutorial.md",
+        "intent": "commons/maps/VFM_07_Gravity/intent.md",
+        "final": "commons/maps/VFM_07_Gravity/final.md",
+        "technical": null
+       },
+       {
+        "map": "VFM_09_Legs",
+        "tutorial": "commons/maps/VFM_09_Legs/tutorial.md",
+        "intent": "commons/maps/VFM_09_Legs/intent.md",
+        "final": "commons/maps/VFM_09_Legs/final.md",
+        "technical": null
+       },
+       {
+        "map": "VFM_08_Arena",
+        "tutorial": "commons/maps/VFM_08_Arena/tutorial.md",
+        "intent": "commons/maps/VFM_08_Arena/intent.md",
+        "final": "commons/maps/VFM_08_Arena/final.md",
+        "technical": null
+       },
+       {
+        "map": "Vectors_Act5_ForceAsPlace",
+        "tutorial": "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+        "intent": "commons/maps/Vectors_Act5_ForceAsPlace/intent.md",
+        "final": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+        "technical": null
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1016,6 +1577,56 @@
       "kind": "clip",
       "overlay": "relax(links)",
       "plan": "The net settling pass after pass, then turned over into the vault; the constraint pass on screen."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/formfinding.json",
+      "maps": [
+       {
+        "map": "FormFinding_Descent",
+        "tutorial": "commons/maps/FormFinding_Descent/tutorial.md",
+        "intent": "commons/maps/FormFinding_Descent/intent.md",
+        "final": "commons/maps/FormFinding_Descent/final.md",
+        "technical": null
+       },
+       {
+        "map": "FormFinding_Catenary",
+        "tutorial": "commons/maps/FormFinding_Catenary/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/FormFinding_Catenary/final.md",
+        "technical": null
+       },
+       {
+        "map": "FormFinding_Relaxation",
+        "tutorial": "commons/maps/FormFinding_Relaxation/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/FormFinding_Relaxation/final.md",
+        "technical": null
+       },
+       {
+        "map": "FormFinding_Equilibrium",
+        "tutorial": "commons/maps/FormFinding_Equilibrium/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/FormFinding_Equilibrium/final.md",
+        "technical": null
+       },
+       {
+        "map": "FormFinding_Annealing",
+        "tutorial": "commons/maps/FormFinding_Annealing/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/FormFinding_Annealing/final.md",
+        "technical": null
+       },
+       {
+        "map": "FormFinding_Forge",
+        "tutorial": "commons/maps/FormFinding_Forge/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/FormFinding_Forge/final.md",
+        "technical": null
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1035,17 +1646,16 @@
      ],
      "noc": "NOC 3 Oscillation (angles, trigonometry, polar coordinates, oscillation, waves, the pendulum); computed sound is Ada's own",
      "halls": [
-      "WaveFunctions_Unit_Circle",
-      "Change_Choreography",
       "WaveFunctions_Intro",
       "WaveFunctions_Pendulum",
       "WaveFunctions_Sine_Space",
-      "Wavefunctions_Bernini",
-      "Wavefunctions_Sky_Stairs",
+      "WaveFunctions_Unit_Circle",
       "WaveFunctions_3D_Wave_Propagation",
-      "WaveFunctions_AirMusic",
       "WaveFunctions_Effect_Sound",
+      "Wavefunctions_Bernini",
       "WaveFunctions_John_Cage",
+      "WaveFunctions_AirMusic",
+      "Wavefunctions_Sky_Stairs",
       "WaveFunctions_TrigWalkingPath",
       "WaveFunctions_Synthesis_Lab"
      ],
@@ -1143,6 +1753,98 @@
       "kind": "clip",
       "overlay": "angle += speed * delta",
       "plan": "A point going round while its height is drawn out as a sine; the pendulum's swing laid on the floor."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/wavefunctions.json",
+      "maps": [
+       {
+        "map": "WaveFunctions_Intro",
+        "tutorial": "commons/maps/WaveFunctions_Intro/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_Intro/intent.md",
+        "final": "commons/maps/WaveFunctions_Intro/final.md",
+        "technical": "commons/maps/WaveFunctions_Intro/technical.md"
+       },
+       {
+        "map": "WaveFunctions_Pendulum",
+        "tutorial": "commons/maps/WaveFunctions_Pendulum/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_Pendulum/intent.md",
+        "final": "commons/maps/WaveFunctions_Pendulum/final.md",
+        "technical": "commons/maps/WaveFunctions_Pendulum/technical.md"
+       },
+       {
+        "map": "WaveFunctions_Sine_Space",
+        "tutorial": "commons/maps/WaveFunctions_Sine_Space/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_Sine_Space/intent.md",
+        "final": "commons/maps/WaveFunctions_Sine_Space/final.md",
+        "technical": "commons/maps/WaveFunctions_Sine_Space/technical.md"
+       },
+       {
+        "map": "WaveFunctions_Unit_Circle",
+        "tutorial": "commons/maps/WaveFunctions_Unit_Circle/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_Unit_Circle/intent.md",
+        "final": "commons/maps/WaveFunctions_Unit_Circle/final.md",
+        "technical": "commons/maps/WaveFunctions_Unit_Circle/technical.md"
+       },
+       {
+        "map": "WaveFunctions_3D_Wave_Propagation",
+        "tutorial": "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_3D_Wave_Propagation/intent.md",
+        "final": "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+        "technical": "commons/maps/WaveFunctions_3D_Wave_Propagation/technical.md"
+       },
+       {
+        "map": "WaveFunctions_Effect_Sound",
+        "tutorial": "commons/maps/WaveFunctions_Effect_Sound/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_Effect_Sound/intent.md",
+        "final": "commons/maps/WaveFunctions_Effect_Sound/final.md",
+        "technical": "commons/maps/WaveFunctions_Effect_Sound/technical.md"
+       },
+       {
+        "map": "Wavefunctions_Bernini",
+        "tutorial": "commons/maps/Wavefunctions_Bernini/tutorial.md",
+        "intent": "commons/maps/Wavefunctions_Bernini/intent.md",
+        "final": "commons/maps/Wavefunctions_Bernini/final.md",
+        "technical": "commons/maps/Wavefunctions_Bernini/technical.md"
+       },
+       {
+        "map": "WaveFunctions_John_Cage",
+        "tutorial": "commons/maps/WaveFunctions_John_Cage/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_John_Cage/intent.md",
+        "final": "commons/maps/WaveFunctions_John_Cage/final.md",
+        "technical": "commons/maps/WaveFunctions_John_Cage/technical.md"
+       },
+       {
+        "map": "WaveFunctions_AirMusic",
+        "tutorial": "commons/maps/WaveFunctions_AirMusic/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_AirMusic/intent.md",
+        "final": "commons/maps/WaveFunctions_AirMusic/final.md",
+        "technical": "commons/maps/WaveFunctions_AirMusic/technical.md"
+       },
+       {
+        "map": "Wavefunctions_Sky_Stairs",
+        "tutorial": "commons/maps/Wavefunctions_Sky_Stairs/tutorial.md",
+        "intent": "commons/maps/Wavefunctions_Sky_Stairs/intent.md",
+        "final": "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+        "technical": "commons/maps/Wavefunctions_Sky_Stairs/technical.md"
+       },
+       {
+        "map": "WaveFunctions_TrigWalkingPath",
+        "tutorial": "commons/maps/WaveFunctions_TrigWalkingPath/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_TrigWalkingPath/intent.md",
+        "final": "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+        "technical": "commons/maps/WaveFunctions_TrigWalkingPath/technical.md"
+       },
+       {
+        "map": "WaveFunctions_Synthesis_Lab",
+        "tutorial": "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md",
+        "intent": "commons/maps/WaveFunctions_Synthesis_Lab/intent.md",
+        "final": "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+        "technical": "commons/maps/WaveFunctions_Synthesis_Lab/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     }
    ],
@@ -1182,14 +1884,17 @@
      "halls": [
       "Random_Definition",
       "Random_Entropy",
-      "Random_Cubes",
       "Random_Remove",
       "Randomness_10_PRINT_Algorithm",
+      "Random_Cubes",
       "Random_Rotate_Random_XYZ",
       "Random_Walk",
       "Random_Gaussian",
       "Random_Mushrooms",
+      "Random_Space_Geometry",
       "Randomness_Examples_of_Randomness",
+      "Random_Pheromone",
+      "Random_Space",
       "Random_Game"
      ],
      "make": "You end with a seeded floor of disturbed cubes, a 10 PRINT maze you can walk into, a random wanderer in a glass box, and three stones that sink after random waits.",
@@ -1298,6 +2003,112 @@
       "kind": "clip",
       "overlay": "position += Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))",
       "plan": "The wanderer's trail growing step by step (10.6), then the same seed run twice."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/randomness.json",
+      "maps": [
+       {
+        "map": "Random_Definition",
+        "tutorial": "commons/maps/Random_Definition/tutorial.md",
+        "intent": "commons/maps/Random_Definition/intent.md",
+        "final": "commons/maps/Random_Definition/final.md",
+        "technical": "commons/maps/Random_Definition/technical.md"
+       },
+       {
+        "map": "Random_Entropy",
+        "tutorial": "commons/maps/Random_Entropy/tutorial.md",
+        "intent": "commons/maps/Random_Entropy/intent.md",
+        "final": "commons/maps/Random_Entropy/final.md",
+        "technical": "commons/maps/Random_Entropy/technical.md"
+       },
+       {
+        "map": "Random_Remove",
+        "tutorial": "commons/maps/Random_Remove/tutorial.md",
+        "intent": "commons/maps/Random_Remove/intent.md",
+        "final": "commons/maps/Random_Remove/final.md",
+        "technical": "commons/maps/Random_Remove/technical.md"
+       },
+       {
+        "map": "Randomness_10_PRINT_Algorithm",
+        "tutorial": "commons/maps/Randomness_10_PRINT_Algorithm/tutorial.md",
+        "intent": "commons/maps/Randomness_10_PRINT_Algorithm/intent.md",
+        "final": "commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+        "technical": "commons/maps/Randomness_10_PRINT_Algorithm/technical.md"
+       },
+       {
+        "map": "Random_Cubes",
+        "tutorial": "commons/maps/Random_Cubes/tutorial.md",
+        "intent": "commons/maps/Random_Cubes/intent.md",
+        "final": "commons/maps/Random_Cubes/final.md",
+        "technical": "commons/maps/Random_Cubes/technical.md"
+       },
+       {
+        "map": "Random_Rotate_Random_XYZ",
+        "tutorial": "commons/maps/Random_Rotate_Random_XYZ/tutorial.md",
+        "intent": "commons/maps/Random_Rotate_Random_XYZ/intent.md",
+        "final": "commons/maps/Random_Rotate_Random_XYZ/final.md",
+        "technical": "commons/maps/Random_Rotate_Random_XYZ/technical.md"
+       },
+       {
+        "map": "Random_Walk",
+        "tutorial": "commons/maps/Random_Walk/tutorial.md",
+        "intent": "commons/maps/Random_Walk/intent.md",
+        "final": "commons/maps/Random_Walk/final.md",
+        "technical": "commons/maps/Random_Walk/technical.md"
+       },
+       {
+        "map": "Random_Gaussian",
+        "tutorial": "commons/maps/Random_Gaussian/tutorial.md",
+        "intent": "commons/maps/Random_Gaussian/intent.md",
+        "final": "commons/maps/Random_Gaussian/final.md",
+        "technical": "commons/maps/Random_Gaussian/technical.md"
+       },
+       {
+        "map": "Random_Mushrooms",
+        "tutorial": "commons/maps/Random_Mushrooms/tutorial.md",
+        "intent": "commons/maps/Random_Mushrooms/intent.md",
+        "final": "commons/maps/Random_Mushrooms/final.md",
+        "technical": "commons/maps/Random_Mushrooms/technical.md"
+       },
+       {
+        "map": "Random_Space_Geometry",
+        "tutorial": "commons/maps/Random_Space_Geometry/tutorial.md",
+        "intent": "commons/maps/Random_Space_Geometry/intent.md",
+        "final": "commons/maps/Random_Space_Geometry/final.md",
+        "technical": "commons/maps/Random_Space_Geometry/technical.md"
+       },
+       {
+        "map": "Randomness_Examples_of_Randomness",
+        "tutorial": "commons/maps/Randomness_Examples_of_Randomness/tutorial.md",
+        "intent": "commons/maps/Randomness_Examples_of_Randomness/intent.md",
+        "final": "commons/maps/Randomness_Examples_of_Randomness/final.md",
+        "technical": "commons/maps/Randomness_Examples_of_Randomness/technical.md"
+       },
+       {
+        "map": "Random_Pheromone",
+        "tutorial": "commons/maps/Random_Pheromone/tutorial.md",
+        "intent": "commons/maps/Random_Pheromone/intent.md",
+        "final": "commons/maps/Random_Pheromone/final.md",
+        "technical": "commons/maps/Random_Pheromone/technical.md"
+       },
+       {
+        "map": "Random_Space",
+        "tutorial": "commons/maps/Random_Space/tutorial.md",
+        "intent": "commons/maps/Random_Space/intent.md",
+        "final": "commons/maps/Random_Space/final.md",
+        "technical": "commons/maps/Random_Space/technical.md"
+       },
+       {
+        "map": "Random_Game",
+        "tutorial": "commons/maps/Random_Game/tutorial.md",
+        "intent": "commons/maps/Random_Game/intent.md",
+        "final": "commons/maps/Random_Game/final.md",
+        "technical": "commons/maps/Random_Game/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1316,15 +2127,15 @@
      ],
      "noc": "NOC 0 Randomness (0.6 Perlin noise: noise in time, noise ranges, noise detail, 2D noise)",
      "halls": [
-      "Random_Space_Geometry",
       "Random_Noise_Types",
       "Noise_Columns",
       "Noise_One",
       "Noise_Voxel",
-      "Random_Space",
+      "Noise_6_Wall",
       "Noise_Inside_Noise",
       "Noise_Space_10",
-      "Noise_Perlin_Simplex"
+      "Noise_Perlin_Simplex",
+      "Lab_Path"
      ],
      "make": "You end with a walkable noise terrain, reached by way of a breathing column, a voxel body cut by a threshold and a warped sphere.",
      "sections": [
@@ -1413,6 +2224,77 @@
      "sequence_note": "",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/noise.json",
+      "maps": [
+       {
+        "map": "Random_Noise_Types",
+        "tutorial": "commons/maps/Random_Noise_Types/tutorial.md",
+        "intent": "commons/maps/Random_Noise_Types/intent.md",
+        "final": "commons/maps/Random_Noise_Types/final.md",
+        "technical": "commons/maps/Random_Noise_Types/technical.md"
+       },
+       {
+        "map": "Noise_Columns",
+        "tutorial": "commons/maps/Noise_Columns/tutorial.md",
+        "intent": "commons/maps/Noise_Columns/intent.md",
+        "final": "commons/maps/Noise_Columns/final.md",
+        "technical": "commons/maps/Noise_Columns/technical.md"
+       },
+       {
+        "map": "Noise_One",
+        "tutorial": "commons/maps/Noise_One/tutorial.md",
+        "intent": "commons/maps/Noise_One/intent.md",
+        "final": "commons/maps/Noise_One/final.md",
+        "technical": "commons/maps/Noise_One/technical.md"
+       },
+       {
+        "map": "Noise_Voxel",
+        "tutorial": "commons/maps/Noise_Voxel/tutorial.md",
+        "intent": "commons/maps/Noise_Voxel/intent.md",
+        "final": "commons/maps/Noise_Voxel/final.md",
+        "technical": "commons/maps/Noise_Voxel/technical.md"
+       },
+       {
+        "map": "Noise_6_Wall",
+        "tutorial": "commons/maps/Noise_6_Wall/tutorial.md",
+        "intent": "commons/maps/Noise_6_Wall/intent.md",
+        "final": "commons/maps/Noise_6_Wall/final.md",
+        "technical": "commons/maps/Noise_6_Wall/technical.md"
+       },
+       {
+        "map": "Noise_Inside_Noise",
+        "tutorial": "commons/maps/Noise_Inside_Noise/tutorial.md",
+        "intent": "commons/maps/Noise_Inside_Noise/intent.md",
+        "final": "commons/maps/Noise_Inside_Noise/final.md",
+        "technical": "commons/maps/Noise_Inside_Noise/technical.md"
+       },
+       {
+        "map": "Noise_Space_10",
+        "tutorial": "commons/maps/Noise_Space_10/tutorial.md",
+        "intent": "commons/maps/Noise_Space_10/intent.md",
+        "final": "commons/maps/Noise_Space_10/final.md",
+        "technical": "commons/maps/Noise_Space_10/technical.md"
+       },
+       {
+        "map": "Noise_Perlin_Simplex",
+        "tutorial": "commons/maps/Noise_Perlin_Simplex/tutorial.md",
+        "intent": "commons/maps/Noise_Perlin_Simplex/intent.md",
+        "final": "commons/maps/Noise_Perlin_Simplex/final.md",
+        "technical": "commons/maps/Noise_Perlin_Simplex/technical.md"
+       },
+       {
+        "map": "Lab_Path",
+        "tutorial": "commons/maps/Lab_Path/tutorial.md",
+        "intent": "commons/maps/Lab_Path/intent.md",
+        "final": "commons/maps/Lab_Path/final.md",
+        "technical": "commons/maps/Lab_Path/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1436,7 +2318,6 @@
       "Shader_05_Patterns",
       "Shader_11_QueerRubber",
       "Shader_09_FBM",
-      "Noise_6_Wall",
       "Shader_12_PinkExtravaganza",
       "Shader_10_ReactionDiffusion"
      ],
@@ -1539,6 +2420,56 @@
      "sequence_note": "",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/shaders.json",
+      "maps": [
+       {
+        "map": "Shader_01_Shaping",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Shader_01_Shaping/final.md",
+        "technical": null
+       },
+       {
+        "map": "Shader_05_Patterns",
+        "tutorial": "commons/maps/Shader_05_Patterns/tutorial.md",
+        "intent": "commons/maps/Shader_05_Patterns/intent.md",
+        "final": "commons/maps/Shader_05_Patterns/final.md",
+        "technical": "commons/maps/Shader_05_Patterns/technical.md"
+       },
+       {
+        "map": "Shader_11_QueerRubber",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Shader_11_QueerRubber/final.md",
+        "technical": null
+       },
+       {
+        "map": "Shader_09_FBM",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Shader_09_FBM/final.md",
+        "technical": null
+       },
+       {
+        "map": "Shader_12_PinkExtravaganza",
+        "tutorial": "commons/maps/Shader_12_PinkExtravaganza/tutorial.md",
+        "intent": "commons/maps/Shader_12_PinkExtravaganza/intent.md",
+        "final": "commons/maps/Shader_12_PinkExtravaganza/final.md",
+        "technical": "commons/maps/Shader_12_PinkExtravaganza/technical.md"
+       },
+       {
+        "map": "Shader_10_ReactionDiffusion",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/Shader_10_ReactionDiffusion/final.md",
+        "technical": null
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     }
    ],
@@ -1574,9 +2505,9 @@
      "noc": "NOC 7 Cellular Automata",
      "halls": [
       "CA_Introduction",
+      "CA_ElementaryRules",
       "CA_GameOfLife",
       "CA_BeyondBinary",
-      "CA_ElementaryRules",
       "CA_ExpandingSpace",
       "CA_SoftRules",
       "CA_AgentsCircuits",
@@ -1677,6 +2608,70 @@
       "kind": "clip",
       "overlay": "next[i] = (rule >> index) & 1",
       "plan": "Rule 90 laying its stair one row at a time, the walker climbing it."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/cellularautomata.json",
+      "maps": [
+       {
+        "map": "CA_Introduction",
+        "tutorial": "commons/maps/CA_Introduction/tutorial.md",
+        "intent": "commons/maps/CA_Introduction/intent.md",
+        "final": "commons/maps/CA_Introduction/final.md",
+        "technical": "commons/maps/CA_Introduction/technical.md"
+       },
+       {
+        "map": "CA_ElementaryRules",
+        "tutorial": "commons/maps/CA_ElementaryRules/tutorial.md",
+        "intent": "commons/maps/CA_ElementaryRules/intent.md",
+        "final": "commons/maps/CA_ElementaryRules/final.md",
+        "technical": "commons/maps/CA_ElementaryRules/technical.md"
+       },
+       {
+        "map": "CA_GameOfLife",
+        "tutorial": "commons/maps/CA_GameOfLife/tutorial.md",
+        "intent": "commons/maps/CA_GameOfLife/intent.md",
+        "final": "commons/maps/CA_GameOfLife/final.md",
+        "technical": "commons/maps/CA_GameOfLife/technical.md"
+       },
+       {
+        "map": "CA_BeyondBinary",
+        "tutorial": "commons/maps/CA_BeyondBinary/tutorial.md",
+        "intent": "commons/maps/CA_BeyondBinary/intent.md",
+        "final": "commons/maps/CA_BeyondBinary/final.md",
+        "technical": "commons/maps/CA_BeyondBinary/technical.md"
+       },
+       {
+        "map": "CA_ExpandingSpace",
+        "tutorial": "commons/maps/CA_ExpandingSpace/tutorial.md",
+        "intent": "commons/maps/CA_ExpandingSpace/intent.md",
+        "final": "commons/maps/CA_ExpandingSpace/final.md",
+        "technical": "commons/maps/CA_ExpandingSpace/technical.md"
+       },
+       {
+        "map": "CA_SoftRules",
+        "tutorial": "commons/maps/CA_SoftRules/tutorial.md",
+        "intent": "commons/maps/CA_SoftRules/intent.md",
+        "final": "commons/maps/CA_SoftRules/final.md",
+        "technical": "commons/maps/CA_SoftRules/technical.md"
+       },
+       {
+        "map": "CA_AgentsCircuits",
+        "tutorial": "commons/maps/CA_AgentsCircuits/tutorial.md",
+        "intent": "commons/maps/CA_AgentsCircuits/intent.md",
+        "final": "commons/maps/CA_AgentsCircuits/final.md",
+        "technical": "commons/maps/CA_AgentsCircuits/technical.md"
+       },
+       {
+        "map": "CA_EdgeOfChaos",
+        "tutorial": "commons/maps/CA_EdgeOfChaos/tutorial.md",
+        "intent": "commons/maps/CA_EdgeOfChaos/intent.md",
+        "final": "commons/maps/CA_EdgeOfChaos/final.md",
+        "technical": "commons/maps/CA_EdgeOfChaos/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1800,6 +2795,63 @@
      "notes_for_palle": "Fractal_Recursion's tutorial.md is a list of code (factorial, memo, tail calls) with no artifact, so the sections follow the hall's essay instead. Fractal_GoldenSpiral is a recurrence, not recursion; it closes the chapter as the contrast that leads into L-systems. Julia, Mandelbrot and CrossSequence are deferred, so complex numbers do not appear. The pagoda and the sponge need ramps or flight in VR; on desktop the student walks the ground floor.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/fractals.json",
+      "maps": [
+       {
+        "map": "Fractal_Recursion",
+        "tutorial": "commons/maps/Fractal_Recursion/tutorial.md",
+        "intent": "commons/maps/Fractal_Recursion/intent.md",
+        "final": "commons/maps/Fractal_Recursion/final.md",
+        "technical": "commons/maps/Fractal_Recursion/technical.md"
+       },
+       {
+        "map": "Fractal_RecursiveTrees",
+        "tutorial": "commons/maps/Fractal_RecursiveTrees/tutorial.md",
+        "intent": "commons/maps/Fractal_RecursiveTrees/intent.md",
+        "final": "commons/maps/Fractal_RecursiveTrees/final.md",
+        "technical": "commons/maps/Fractal_RecursiveTrees/technical.md"
+       },
+       {
+        "map": "Fractal_CantorSet",
+        "tutorial": "commons/maps/Fractal_CantorSet/tutorial.md",
+        "intent": "commons/maps/Fractal_CantorSet/intent.md",
+        "final": "commons/maps/Fractal_CantorSet/final.md",
+        "technical": "commons/maps/Fractal_CantorSet/technical.md"
+       },
+       {
+        "map": "Fractal_KochSierpinski",
+        "tutorial": "commons/maps/Fractal_KochSierpinski/tutorial.md",
+        "intent": "commons/maps/Fractal_KochSierpinski/intent.md",
+        "final": "commons/maps/Fractal_KochSierpinski/final.md",
+        "technical": "commons/maps/Fractal_KochSierpinski/technical.md"
+       },
+       {
+        "map": "Fractal_MengerSponge",
+        "tutorial": "commons/maps/Fractal_MengerSponge/tutorial.md",
+        "intent": "commons/maps/Fractal_MengerSponge/intent.md",
+        "final": "commons/maps/Fractal_MengerSponge/final.md",
+        "technical": "commons/maps/Fractal_MengerSponge/technical.md"
+       },
+       {
+        "map": "Fractal_GoldenSpiral",
+        "tutorial": "commons/maps/Fractal_GoldenSpiral/tutorial.md",
+        "intent": "commons/maps/Fractal_GoldenSpiral/intent.md",
+        "final": "commons/maps/Fractal_GoldenSpiral/final.md",
+        "technical": "commons/maps/Fractal_GoldenSpiral/technical.md"
+       },
+       {
+        "map": "Fractal_Synthesis",
+        "tutorial": "commons/maps/Fractal_Synthesis/tutorial.md",
+        "intent": "commons/maps/Fractal_Synthesis/intent.md",
+        "final": "commons/maps/Fractal_Synthesis/final.md",
+        "technical": "commons/maps/Fractal_Synthesis/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1920,6 +2972,70 @@
      "notes_for_palle": "Assemblage_Same_Desire is a 10 PRINT and weaving assemblage, not an L-system hall; it closes the chapter as the assemblage and the project step. LSystems_Shape_Grammars has no tutorial.md and relies on MeshGrammar, which the course has not taught, so it is borrowed here. Saving and loading a Resource moves here from the old genome chapter (ch36), because LSystems_Living stores genes and PG_Genetic_Evolution needs a genome next.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/lsystems.json",
+      "maps": [
+       {
+        "map": "LSystems_Grammar_Lab",
+        "tutorial": "commons/maps/LSystems_Grammar_Lab/tutorial.md",
+        "intent": "commons/maps/LSystems_Grammar_Lab/intent.md",
+        "final": "commons/maps/LSystems_Grammar_Lab/final.md",
+        "technical": "commons/maps/LSystems_Grammar_Lab/technical.md"
+       },
+       {
+        "map": "LSystems_Growth",
+        "tutorial": "commons/maps/LSystems_Growth/tutorial.md",
+        "intent": "commons/maps/LSystems_Growth/intent.md",
+        "final": "commons/maps/LSystems_Growth/final.md",
+        "technical": "commons/maps/LSystems_Growth/technical.md"
+       },
+       {
+        "map": "LSystems_Grammars_And_Curves",
+        "tutorial": "commons/maps/LSystems_Grammars_And_Curves/tutorial.md",
+        "intent": "commons/maps/LSystems_Grammars_And_Curves/intent.md",
+        "final": "commons/maps/LSystems_Grammars_And_Curves/final.md",
+        "technical": "commons/maps/LSystems_Grammars_And_Curves/technical.md"
+       },
+       {
+        "map": "LSystems_Architecture",
+        "tutorial": "commons/maps/LSystems_Architecture/tutorial.md",
+        "intent": "commons/maps/LSystems_Architecture/intent.md",
+        "final": "commons/maps/LSystems_Architecture/final.md",
+        "technical": "commons/maps/LSystems_Architecture/technical.md"
+       },
+       {
+        "map": "LSystems_Competition",
+        "tutorial": "commons/maps/LSystems_Competition/tutorial.md",
+        "intent": "commons/maps/LSystems_Competition/intent.md",
+        "final": "commons/maps/LSystems_Competition/final.md",
+        "technical": "commons/maps/LSystems_Competition/technical.md"
+       },
+       {
+        "map": "LSystems_Living",
+        "tutorial": "commons/maps/LSystems_Living/tutorial.md",
+        "intent": "commons/maps/LSystems_Living/intent.md",
+        "final": "commons/maps/LSystems_Living/final.md",
+        "technical": "commons/maps/LSystems_Living/technical.md"
+       },
+       {
+        "map": "LSystems_Shape_Grammars",
+        "tutorial": null,
+        "intent": "commons/maps/LSystems_Shape_Grammars/intent.md",
+        "final": "commons/maps/LSystems_Shape_Grammars/final.md",
+        "technical": "commons/maps/LSystems_Shape_Grammars/technical.md"
+       },
+       {
+        "map": "Assemblage_Same_Desire",
+        "tutorial": "commons/maps/Assemblage_Same_Desire/tutorial.md",
+        "intent": "commons/maps/Assemblage_Same_Desire/intent.md",
+        "final": "commons/maps/Assemblage_Same_Desire/final.md",
+        "technical": "commons/maps/Assemblage_Same_Desire/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -1943,6 +3059,7 @@
       "PG_Branching_Growth",
       "PG_Percolation_Network",
       "PG_Caves_Mazes",
+      "PG_Sculpted_Forms",
       "PG_Mirrored_Patterns"
      ],
      "make": "A small world from one seed: a body bred toward a target, a tree grown toward food, and a maze you can walk out of.",
@@ -2030,6 +3147,63 @@
      "notes_for_palle": "NOC 9 covers only 16.1 to 16.3; growing, percolation, carving and copying are Ada's own. The hall order puts Space Colonization before Branching Growth, so the chapter keeps that order and builds nearest-target as a variant. Percolation is a cellular flood, a return to chapter 13. PG_Sculpted_Forms (voxel skin, CSG dome) is now exercise 4 of ch18 (the skin) and ch19 (the dome, where the hall is listed) where those tools are taught; the rhizome network of PG_Mirrored_Patterns is an exercise in ch22. That leaves this chapter with no supplied parts.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/proceduralgeneration.json",
+      "maps": [
+       {
+        "map": "PG_Genetic_Evolution",
+        "tutorial": "commons/maps/PG_Genetic_Evolution/tutorial.md",
+        "intent": "commons/maps/PG_Genetic_Evolution/intent.md",
+        "final": "commons/maps/PG_Genetic_Evolution/final.md",
+        "technical": "commons/maps/PG_Genetic_Evolution/technical.md"
+       },
+       {
+        "map": "PG_Space_Colonization",
+        "tutorial": "commons/maps/PG_Space_Colonization/tutorial.md",
+        "intent": "commons/maps/PG_Space_Colonization/intent.md",
+        "final": "commons/maps/PG_Space_Colonization/final.md",
+        "technical": "commons/maps/PG_Space_Colonization/technical.md"
+       },
+       {
+        "map": "PG_Branching_Growth",
+        "tutorial": "commons/maps/PG_Branching_Growth/tutorial.md",
+        "intent": "commons/maps/PG_Branching_Growth/intent.md",
+        "final": "commons/maps/PG_Branching_Growth/final.md",
+        "technical": "commons/maps/PG_Branching_Growth/technical.md"
+       },
+       {
+        "map": "PG_Percolation_Network",
+        "tutorial": "commons/maps/PG_Percolation_Network/tutorial.md",
+        "intent": "commons/maps/PG_Percolation_Network/intent.md",
+        "final": "commons/maps/PG_Percolation_Network/final.md",
+        "technical": "commons/maps/PG_Percolation_Network/technical.md"
+       },
+       {
+        "map": "PG_Caves_Mazes",
+        "tutorial": "commons/maps/PG_Caves_Mazes/tutorial.md",
+        "intent": "commons/maps/PG_Caves_Mazes/intent.md",
+        "final": "commons/maps/PG_Caves_Mazes/final.md",
+        "technical": "commons/maps/PG_Caves_Mazes/technical.md"
+       },
+       {
+        "map": "PG_Sculpted_Forms",
+        "tutorial": "commons/maps/PG_Sculpted_Forms/tutorial.md",
+        "intent": "commons/maps/PG_Sculpted_Forms/intent.md",
+        "final": "commons/maps/PG_Sculpted_Forms/final.md",
+        "technical": "commons/maps/PG_Sculpted_Forms/technical.md"
+       },
+       {
+        "map": "PG_Mirrored_Patterns",
+        "tutorial": "commons/maps/PG_Mirrored_Patterns/tutorial.md",
+        "intent": "commons/maps/PG_Mirrored_Patterns/intent.md",
+        "final": "commons/maps/PG_Mirrored_Patterns/final.md",
+        "technical": "commons/maps/PG_Mirrored_Patterns/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     }
    ],
@@ -2071,7 +3245,9 @@
       "SoftBodies_Obsticals",
       "SoftBodies_Obsticals_Part2",
       "SoftBodies_Playground_of_Joy",
-      "ProceduralGeneration_Reaction_Diffusion_Systems"
+      "SoftBodies_Affect_Theory_Visualization",
+      "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "Topology_Entropy_Morphogenesis"
      ],
      "make": "A curtain of your own net and Godot's soft bodies, hung on pins you choose, carried by one corner, that a walker can push through.",
      "sections": [
@@ -2169,6 +3345,77 @@
       "kind": "clip",
       "overlay": "pin.position = hand.position",
       "plan": "The carried corner pulling the net along (17.4)."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/softbodies.json",
+      "maps": [
+       {
+        "map": "SoftBodies_Soft_Body_Deformation",
+        "tutorial": "commons/maps/SoftBodies_Soft_Body_Deformation/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Soft_Body_Deformation/intent.md",
+        "final": "commons/maps/SoftBodies_Soft_Body_Deformation/final.md",
+        "technical": "commons/maps/SoftBodies_Soft_Body_Deformation/technical.md"
+       },
+       {
+        "map": "SoftBodies_Cloth_Physics",
+        "tutorial": "commons/maps/SoftBodies_Cloth_Physics/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Cloth_Physics/intent.md",
+        "final": "commons/maps/SoftBodies_Cloth_Physics/final.md",
+        "technical": "commons/maps/SoftBodies_Cloth_Physics/technical.md"
+       },
+       {
+        "map": "SoftBodies_Carusell",
+        "tutorial": "commons/maps/SoftBodies_Carusell/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Carusell/intent.md",
+        "final": "commons/maps/SoftBodies_Carusell/final.md",
+        "technical": "commons/maps/SoftBodies_Carusell/technical.md"
+       },
+       {
+        "map": "SoftBodies_Obsticals",
+        "tutorial": "commons/maps/SoftBodies_Obsticals/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Obsticals/intent.md",
+        "final": "commons/maps/SoftBodies_Obsticals/final.md",
+        "technical": "commons/maps/SoftBodies_Obsticals/technical.md"
+       },
+       {
+        "map": "SoftBodies_Obsticals_Part2",
+        "tutorial": "commons/maps/SoftBodies_Obsticals_Part2/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Obsticals_Part2/intent.md",
+        "final": "commons/maps/SoftBodies_Obsticals_Part2/final.md",
+        "technical": "commons/maps/SoftBodies_Obsticals_Part2/technical.md"
+       },
+       {
+        "map": "SoftBodies_Playground_of_Joy",
+        "tutorial": "commons/maps/SoftBodies_Playground_of_Joy/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Playground_of_Joy/intent.md",
+        "final": "commons/maps/SoftBodies_Playground_of_Joy/final.md",
+        "technical": "commons/maps/SoftBodies_Playground_of_Joy/technical.md"
+       },
+       {
+        "map": "SoftBodies_Affect_Theory_Visualization",
+        "tutorial": "commons/maps/SoftBodies_Affect_Theory_Visualization/tutorial.md",
+        "intent": "commons/maps/SoftBodies_Affect_Theory_Visualization/intent.md",
+        "final": "commons/maps/SoftBodies_Affect_Theory_Visualization/final.md",
+        "technical": "commons/maps/SoftBodies_Affect_Theory_Visualization/technical.md"
+       },
+       {
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "tutorial": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/tutorial.md",
+        "intent": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/intent.md",
+        "final": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+        "technical": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/technical.md"
+       },
+       {
+        "map": "Topology_Entropy_Morphogenesis",
+        "tutorial": "commons/maps/Topology_Entropy_Morphogenesis/tutorial.md",
+        "intent": "commons/maps/Topology_Entropy_Morphogenesis/intent.md",
+        "final": "commons/maps/Topology_Entropy_Morphogenesis/final.md",
+        "technical": "commons/maps/Topology_Entropy_Morphogenesis/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -2189,16 +3436,17 @@
      "halls": [
       "ISO_Introduction",
       "ISO_LookupTable",
-      "ISO_Metaballs",
       "ISO_ShapesGallery",
       "ISO_TorusGyroid",
-      "Topology_Entropy_Morphogenesis",
+      "ISO_Sculpting",
       "ISO_FlatTerrain",
       "ISO_PortalLandscape",
       "ISO_Caves",
       "ISO_CaveGeneration",
-      "ISO_Sculpting",
-      "ISO_AnimatedNoise"
+      "ISO_AnimatedNoise",
+      "ISO_Metaballs",
+      "ISO_ImplicitModeling",
+      "ISO_RhizomeBody"
      ],
      "make": "A body made from three sources and noise, cut at a level you chose, meshed by your own marching cubes on a worker thread, with a hole a walker can stand in.",
      "sections": [
@@ -2294,6 +3542,105 @@
      },
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/isosurfaces.json",
+      "maps": [
+       {
+        "map": "ISO_Introduction",
+        "tutorial": "commons/maps/ISO_Introduction/tutorial.md",
+        "intent": "commons/maps/ISO_Introduction/intent.md",
+        "final": "commons/maps/ISO_Introduction/final.md",
+        "technical": "commons/maps/ISO_Introduction/technical.md"
+       },
+       {
+        "map": "ISO_LookupTable",
+        "tutorial": "commons/maps/ISO_LookupTable/tutorial.md",
+        "intent": "commons/maps/ISO_LookupTable/intent.md",
+        "final": "commons/maps/ISO_LookupTable/final.md",
+        "technical": "commons/maps/ISO_LookupTable/technical.md"
+       },
+       {
+        "map": "ISO_ShapesGallery",
+        "tutorial": "commons/maps/ISO_ShapesGallery/tutorial.md",
+        "intent": "commons/maps/ISO_ShapesGallery/intent.md",
+        "final": "commons/maps/ISO_ShapesGallery/final.md",
+        "technical": "commons/maps/ISO_ShapesGallery/technical.md"
+       },
+       {
+        "map": "ISO_TorusGyroid",
+        "tutorial": "commons/maps/ISO_TorusGyroid/tutorial.md",
+        "intent": "commons/maps/ISO_TorusGyroid/intent.md",
+        "final": "commons/maps/ISO_TorusGyroid/final.md",
+        "technical": "commons/maps/ISO_TorusGyroid/technical.md"
+       },
+       {
+        "map": "ISO_Sculpting",
+        "tutorial": "commons/maps/ISO_Sculpting/tutorial.md",
+        "intent": "commons/maps/ISO_Sculpting/intent.md",
+        "final": "commons/maps/ISO_Sculpting/final.md",
+        "technical": "commons/maps/ISO_Sculpting/technical.md"
+       },
+       {
+        "map": "ISO_FlatTerrain",
+        "tutorial": "commons/maps/ISO_FlatTerrain/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_FlatTerrain/final.md",
+        "technical": "commons/maps/ISO_FlatTerrain/technical.md"
+       },
+       {
+        "map": "ISO_PortalLandscape",
+        "tutorial": "commons/maps/ISO_PortalLandscape/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_PortalLandscape/final.md",
+        "technical": null
+       },
+       {
+        "map": "ISO_Caves",
+        "tutorial": "commons/maps/ISO_Caves/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_Caves/final.md",
+        "technical": "commons/maps/ISO_Caves/technical.md"
+       },
+       {
+        "map": "ISO_CaveGeneration",
+        "tutorial": "commons/maps/ISO_CaveGeneration/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_CaveGeneration/final.md",
+        "technical": null
+       },
+       {
+        "map": "ISO_AnimatedNoise",
+        "tutorial": "commons/maps/ISO_AnimatedNoise/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_AnimatedNoise/final.md",
+        "technical": null
+       },
+       {
+        "map": "ISO_Metaballs",
+        "tutorial": "commons/maps/ISO_Metaballs/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_Metaballs/final.md",
+        "technical": "commons/maps/ISO_Metaballs/technical.md"
+       },
+       {
+        "map": "ISO_ImplicitModeling",
+        "tutorial": "commons/maps/ISO_ImplicitModeling/tutorial.md",
+        "intent": null,
+        "final": "commons/maps/ISO_ImplicitModeling/final.md",
+        "technical": "commons/maps/ISO_ImplicitModeling/technical.md"
+       },
+       {
+        "map": "ISO_RhizomeBody",
+        "tutorial": null,
+        "intent": null,
+        "final": "commons/maps/ISO_RhizomeBody/final.md",
+        "technical": null
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -2314,8 +3661,7 @@
      "halls": [
       "Boolean_Verbs",
       "Boolean_Gallery",
-      "Boolean_Works",
-      "PG_Sculpted_Forms"
+      "Boolean_Works"
      ],
      "make": "A carved body in your room: two of your grown forms (chapters 15 and 16) united, a tunnel taken out, the order written on its plinth, baked so a walker can step inside.",
      "sections": [
@@ -2408,6 +3754,35 @@
      },
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/boolean_surfaces.json",
+      "maps": [
+       {
+        "map": "Boolean_Verbs",
+        "tutorial": "commons/maps/Boolean_Verbs/tutorial.md",
+        "intent": "commons/maps/Boolean_Verbs/intent.md",
+        "final": "commons/maps/Boolean_Verbs/final.md",
+        "technical": "commons/maps/Boolean_Verbs/technical.md"
+       },
+       {
+        "map": "Boolean_Gallery",
+        "tutorial": "commons/maps/Boolean_Gallery/tutorial.md",
+        "intent": "commons/maps/Boolean_Gallery/intent.md",
+        "final": "commons/maps/Boolean_Gallery/final.md",
+        "technical": "commons/maps/Boolean_Gallery/technical.md"
+       },
+       {
+        "map": "Boolean_Works",
+        "tutorial": "commons/maps/Boolean_Works/tutorial.md",
+        "intent": "commons/maps/Boolean_Works/intent.md",
+        "final": "commons/maps/Boolean_Works/final.md",
+        "technical": "commons/maps/Boolean_Works/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -2529,6 +3904,63 @@
       "kind": "clip",
       "overlay": "steer = desired - velocity",
       "plan": "The flock steering round the visitor, the three behaviours switched on one by one."
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/swarmintelligence.json",
+      "maps": [
+       {
+        "map": "SwarmIntelligence_PhysarumColony",
+        "tutorial": "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_PhysarumColony/intent.md",
+        "final": "commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+        "technical": "commons/maps/SwarmIntelligence_PhysarumColony/technical.md"
+       },
+       {
+        "map": "SwarmIntelligence_FlowFields",
+        "tutorial": "commons/maps/SwarmIntelligence_FlowFields/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_FlowFields/intent.md",
+        "final": "commons/maps/SwarmIntelligence_FlowFields/final.md",
+        "technical": "commons/maps/SwarmIntelligence_FlowFields/technical.md"
+       },
+       {
+        "map": "SwarmIntelligence_Boids_Algorithm",
+        "tutorial": "commons/maps/SwarmIntelligence_Boids_Algorithm/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_Boids_Algorithm/intent.md",
+        "final": "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+        "technical": "commons/maps/SwarmIntelligence_Boids_Algorithm/technical.md"
+       },
+       {
+        "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+        "tutorial": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/intent.md",
+        "final": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+        "technical": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/technical.md"
+       },
+       {
+        "map": "SwarmIntelligence_Ant_Colony_Optimization",
+        "tutorial": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/intent.md",
+        "final": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+        "technical": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/technical.md"
+       },
+       {
+        "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+        "tutorial": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/intent.md",
+        "final": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+        "technical": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/technical.md"
+       },
+       {
+        "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+        "tutorial": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/tutorial.md",
+        "intent": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/intent.md",
+        "final": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+        "technical": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     }
    ],
@@ -2570,6 +4002,7 @@
       "ML_Neural_Networks",
       "ML_Perception",
       "ML_Sequence_Memory",
+      "ML_Generative",
       "ML_Synthesis"
      ],
      "make": "A floor that colours itself from labelled points, a perceptron that finds its line by walking down its error, and a vehicle whose brain is evolved, not taught.",
@@ -2664,6 +4097,70 @@
      "notes_for_palle": "ML_Generative is left out: its losses are scripted curves and nothing trains. ML_Sequence_Memory is an exercise so the chapter keeps 8 sections. ML_Perception's labels are not learned from its edges, so the chapter builds the filter and stops there. The learning-body kit's who-labelled argument is strong but is a case study. The hidden layer is trained by the finite-difference nudge of 21.3, so no chain rule and no supplied train_step() are needed; backpropagation is a hook. No data file is loaded here (FileAccess and JSON arrive in ch25).",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/machinelearning.json",
+      "maps": [
+       {
+        "map": "ML_Evolution",
+        "tutorial": "commons/maps/ML_Evolution/tutorial.md",
+        "intent": "commons/maps/ML_Evolution/intent.md",
+        "final": "commons/maps/ML_Evolution/final.md",
+        "technical": "commons/maps/ML_Evolution/technical.md"
+       },
+       {
+        "map": "ML_Gradient_Landscape",
+        "tutorial": "commons/maps/ML_Gradient_Landscape/tutorial.md",
+        "intent": "commons/maps/ML_Gradient_Landscape/intent.md",
+        "final": "commons/maps/ML_Gradient_Landscape/final.md",
+        "technical": "commons/maps/ML_Gradient_Landscape/technical.md"
+       },
+       {
+        "map": "ML_Classification",
+        "tutorial": "commons/maps/ML_Classification/tutorial.md",
+        "intent": "commons/maps/ML_Classification/intent.md",
+        "final": "commons/maps/ML_Classification/final.md",
+        "technical": "commons/maps/ML_Classification/technical.md"
+       },
+       {
+        "map": "ML_Neural_Networks",
+        "tutorial": "commons/maps/ML_Neural_Networks/tutorial.md",
+        "intent": "commons/maps/ML_Neural_Networks/intent.md",
+        "final": "commons/maps/ML_Neural_Networks/final.md",
+        "technical": "commons/maps/ML_Neural_Networks/technical.md"
+       },
+       {
+        "map": "ML_Perception",
+        "tutorial": "commons/maps/ML_Perception/tutorial.md",
+        "intent": "commons/maps/ML_Perception/intent.md",
+        "final": "commons/maps/ML_Perception/final.md",
+        "technical": "commons/maps/ML_Perception/technical.md"
+       },
+       {
+        "map": "ML_Sequence_Memory",
+        "tutorial": "commons/maps/ML_Sequence_Memory/tutorial.md",
+        "intent": "commons/maps/ML_Sequence_Memory/intent.md",
+        "final": "commons/maps/ML_Sequence_Memory/final.md",
+        "technical": "commons/maps/ML_Sequence_Memory/technical.md"
+       },
+       {
+        "map": "ML_Generative",
+        "tutorial": "commons/maps/ML_Generative/tutorial.md",
+        "intent": "commons/maps/ML_Generative/intent.md",
+        "final": "commons/maps/ML_Generative/final.md",
+        "technical": "commons/maps/ML_Generative/technical.md"
+       },
+       {
+        "map": "ML_Synthesis",
+        "tutorial": "commons/maps/ML_Synthesis/tutorial.md",
+        "intent": "commons/maps/ML_Synthesis/intent.md",
+        "final": "commons/maps/ML_Synthesis/final.md",
+        "technical": "commons/maps/ML_Synthesis/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -2786,6 +4283,70 @@
      "notes_for_palle": "GT_Network_Analysis's centrality is authored, not computed from its edges, so it is an exercise where the student computes what the hall only shows. GT_Flow shows push-relabel; the chapter builds augmenting paths with the breadth-first search from 22.2 and uses the hall for comparison. The rhizome tree-then-loop of PG_Mirrored_Patterns is exercise 4. If Part IV carved mazes (PG_Caves_Mazes), 22.6 is a return.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/graphtheory.json",
+      "maps": [
+       {
+        "map": "GT_Foundations",
+        "tutorial": "commons/maps/GT_Foundations/tutorial.md",
+        "intent": "commons/maps/GT_Foundations/intent.md",
+        "final": "commons/maps/GT_Foundations/final.md",
+        "technical": "commons/maps/GT_Foundations/technical.md"
+       },
+       {
+        "map": "GT_Layout",
+        "tutorial": "commons/maps/GT_Layout/tutorial.md",
+        "intent": "commons/maps/GT_Layout/intent.md",
+        "final": "commons/maps/GT_Layout/final.md",
+        "technical": "commons/maps/GT_Layout/technical.md"
+       },
+       {
+        "map": "GT_Pathfinding",
+        "tutorial": "commons/maps/GT_Pathfinding/tutorial.md",
+        "intent": "commons/maps/GT_Pathfinding/intent.md",
+        "final": "commons/maps/GT_Pathfinding/final.md",
+        "technical": "commons/maps/GT_Pathfinding/technical.md"
+       },
+       {
+        "map": "GT_Network_Analysis",
+        "tutorial": "commons/maps/GT_Network_Analysis/tutorial.md",
+        "intent": "commons/maps/GT_Network_Analysis/intent.md",
+        "final": "commons/maps/GT_Network_Analysis/final.md",
+        "technical": "commons/maps/GT_Network_Analysis/technical.md"
+       },
+       {
+        "map": "GT_Connectivity",
+        "tutorial": "commons/maps/GT_Connectivity/tutorial.md",
+        "intent": "commons/maps/GT_Connectivity/intent.md",
+        "final": "commons/maps/GT_Connectivity/final.md",
+        "technical": "commons/maps/GT_Connectivity/technical.md"
+       },
+       {
+        "map": "GT_Spanning_Trees",
+        "tutorial": "commons/maps/GT_Spanning_Trees/tutorial.md",
+        "intent": "commons/maps/GT_Spanning_Trees/intent.md",
+        "final": "commons/maps/GT_Spanning_Trees/final.md",
+        "technical": "commons/maps/GT_Spanning_Trees/technical.md"
+       },
+       {
+        "map": "GT_Flow",
+        "tutorial": "commons/maps/GT_Flow/tutorial.md",
+        "intent": "commons/maps/GT_Flow/intent.md",
+        "final": "commons/maps/GT_Flow/final.md",
+        "technical": "commons/maps/GT_Flow/technical.md"
+       },
+       {
+        "map": "GT_Matching",
+        "tutorial": "commons/maps/GT_Matching/tutorial.md",
+        "intent": "commons/maps/GT_Matching/intent.md",
+        "final": "commons/maps/GT_Matching/final.md",
+        "technical": "commons/maps/GT_Matching/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -2904,6 +4465,70 @@
      "notes_for_palle": "No Nature of Code anchor: this chapter teaches thinking with code, using small tools (Booleans, enums, slerp, a sum around a loop). Godel_Incompleteness's machine is a timed sculpture; the chapter builds a real search over a toy system, so the student's version does more than the hall's. 23.8 is only a teaser; the formula is presented in 24.1.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/foundationscrisis.json",
+      "maps": [
+       {
+        "map": "Euclid_Parallel",
+        "tutorial": "commons/maps/Euclid_Parallel/tutorial.md",
+        "intent": "commons/maps/Euclid_Parallel/intent.md",
+        "final": "commons/maps/Euclid_Parallel/final.md",
+        "technical": "commons/maps/Euclid_Parallel/technical.md"
+       },
+       {
+        "map": "NonEuclidean_Spaces",
+        "tutorial": "commons/maps/NonEuclidean_Spaces/tutorial.md",
+        "intent": "commons/maps/NonEuclidean_Spaces/intent.md",
+        "final": "commons/maps/NonEuclidean_Spaces/final.md",
+        "technical": "commons/maps/NonEuclidean_Spaces/technical.md"
+       },
+       {
+        "map": "Russell_Paradox",
+        "tutorial": "commons/maps/Russell_Paradox/tutorial.md",
+        "intent": "commons/maps/Russell_Paradox/intent.md",
+        "final": "commons/maps/Russell_Paradox/final.md",
+        "technical": "commons/maps/Russell_Paradox/technical.md"
+       },
+       {
+        "map": "Godel_Incompleteness",
+        "tutorial": "commons/maps/Godel_Incompleteness/tutorial.md",
+        "intent": "commons/maps/Godel_Incompleteness/intent.md",
+        "final": "commons/maps/Godel_Incompleteness/final.md",
+        "technical": "commons/maps/Godel_Incompleteness/technical.md"
+       },
+       {
+        "map": "Escher_Impossible",
+        "tutorial": "commons/maps/Escher_Impossible/tutorial.md",
+        "intent": "commons/maps/Escher_Impossible/intent.md",
+        "final": "commons/maps/Escher_Impossible/final.md",
+        "technical": "commons/maps/Escher_Impossible/technical.md"
+       },
+       {
+        "map": "Brouwer_Intuitionism",
+        "tutorial": "commons/maps/Brouwer_Intuitionism/tutorial.md",
+        "intent": "commons/maps/Brouwer_Intuitionism/intent.md",
+        "final": "commons/maps/Brouwer_Intuitionism/final.md",
+        "technical": "commons/maps/Brouwer_Intuitionism/technical.md"
+       },
+       {
+        "map": "Florensky_Paraconsistent",
+        "tutorial": "commons/maps/Florensky_Paraconsistent/tutorial.md",
+        "intent": "commons/maps/Florensky_Paraconsistent/intent.md",
+        "final": "commons/maps/Florensky_Paraconsistent/final.md",
+        "technical": "commons/maps/Florensky_Paraconsistent/technical.md"
+       },
+       {
+        "map": "Crisis_Synthesis",
+        "tutorial": "commons/maps/Crisis_Synthesis/tutorial.md",
+        "intent": "commons/maps/Crisis_Synthesis/intent.md",
+        "final": "commons/maps/Crisis_Synthesis/final.md",
+        "technical": "commons/maps/Crisis_Synthesis/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -3022,6 +4647,70 @@
      "notes_for_palle": "The hall names do not fit their content: QFEP_F_Term teaches Shannon entropy and QFEP_E_Term counts branches. The chapter keeps each hall's content in order and its section titles avoid the F/E labels. The kit's F curve depends on a prediction log the new course does not keep, so it becomes a hook.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/qfeplaboratory.json",
+      "maps": [
+       {
+        "map": "QFEP_Introduction",
+        "tutorial": "commons/maps/QFEP_Introduction/tutorial.md",
+        "intent": "commons/maps/QFEP_Introduction/intent.md",
+        "final": "commons/maps/QFEP_Introduction/final.md",
+        "technical": "commons/maps/QFEP_Introduction/technical.md"
+       },
+       {
+        "map": "QFEP_F_Term",
+        "tutorial": "commons/maps/QFEP_F_Term/tutorial.md",
+        "intent": "commons/maps/QFEP_F_Term/intent.md",
+        "final": "commons/maps/QFEP_F_Term/final.md",
+        "technical": "commons/maps/QFEP_F_Term/technical.md"
+       },
+       {
+        "map": "QFEP_E_Term",
+        "tutorial": "commons/maps/QFEP_E_Term/tutorial.md",
+        "intent": "commons/maps/QFEP_E_Term/intent.md",
+        "final": "commons/maps/QFEP_E_Term/final.md",
+        "technical": "commons/maps/QFEP_E_Term/technical.md"
+       },
+       {
+        "map": "QFEP_Lambda_Spectrum",
+        "tutorial": "commons/maps/QFEP_Lambda_Spectrum/tutorial.md",
+        "intent": "commons/maps/QFEP_Lambda_Spectrum/intent.md",
+        "final": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+        "technical": "commons/maps/QFEP_Lambda_Spectrum/technical.md"
+       },
+       {
+        "map": "QFEP_Phi_Term",
+        "tutorial": "commons/maps/QFEP_Phi_Term/tutorial.md",
+        "intent": "commons/maps/QFEP_Phi_Term/intent.md",
+        "final": "commons/maps/QFEP_Phi_Term/final.md",
+        "technical": "commons/maps/QFEP_Phi_Term/technical.md"
+       },
+       {
+        "map": "QFEP_Edge_Of_Chaos",
+        "tutorial": "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md",
+        "intent": "commons/maps/QFEP_Edge_Of_Chaos/intent.md",
+        "final": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+        "technical": "commons/maps/QFEP_Edge_Of_Chaos/technical.md"
+       },
+       {
+        "map": "QFEP_Sandbox",
+        "tutorial": "commons/maps/QFEP_Sandbox/tutorial.md",
+        "intent": "commons/maps/QFEP_Sandbox/intent.md",
+        "final": "commons/maps/QFEP_Sandbox/final.md",
+        "technical": "commons/maps/QFEP_Sandbox/technical.md"
+       },
+       {
+        "map": "QFEP_Synthesis",
+        "tutorial": "commons/maps/QFEP_Synthesis/tutorial.md",
+        "intent": "commons/maps/QFEP_Synthesis/intent.md",
+        "final": "commons/maps/QFEP_Synthesis/final.md",
+        "technical": "commons/maps/QFEP_Synthesis/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     },
     {
@@ -3141,6 +4830,70 @@
      "notes_for_palle": "Six of the eight halls teach almost no new code: they reuse lerp, loops, dictionaries and the Chapter 22 search, so the new code gathers in 25.7 and 25.8 (persistence, provenance, export). Many of these halls' tutorials end with 'Next experiment, not yet a visitor control'. Those are exactly what the student can build, so the final project can finish the halls' open experiments. The name MolecularDesigner suggests chemistry, but the hall is a catalogue of assemblies.",
      "media": {
       "kind": "still"
+     },
+     "source_scaffold": {
+      "spine": "commons/maps/curriculum_spine.json",
+      "sequence_file": "commons/maps/sequences/postfoundationscrisis.json",
+      "maps": [
+       {
+        "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "tutorial": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md",
+        "intent": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/intent.md",
+        "final": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+        "technical": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/technical.md"
+       },
+       {
+        "map": "CriticalAlgorithms_Applied_Ethics",
+        "tutorial": "commons/maps/CriticalAlgorithms_Applied_Ethics/tutorial.md",
+        "intent": "commons/maps/CriticalAlgorithms_Applied_Ethics/intent.md",
+        "final": "commons/maps/CriticalAlgorithms_Applied_Ethics/final.md",
+        "technical": "commons/maps/CriticalAlgorithms_Applied_Ethics/technical.md"
+       },
+       {
+        "map": "SpeculativeComputation_Paraconsistent_Engineering",
+        "tutorial": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md",
+        "intent": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/intent.md",
+        "final": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/final.md",
+        "technical": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/technical.md"
+       },
+       {
+        "map": "SpeculativeComputation_Situated_Computation",
+        "tutorial": "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md",
+        "intent": "commons/maps/SpeculativeComputation_Situated_Computation/intent.md",
+        "final": "commons/maps/SpeculativeComputation_Situated_Computation/final.md",
+        "technical": "commons/maps/SpeculativeComputation_Situated_Computation/technical.md"
+       },
+       {
+        "map": "SpeculativeComputation_Collective_Knowledge",
+        "tutorial": "commons/maps/SpeculativeComputation_Collective_Knowledge/tutorial.md",
+        "intent": "commons/maps/SpeculativeComputation_Collective_Knowledge/intent.md",
+        "final": "commons/maps/SpeculativeComputation_Collective_Knowledge/final.md",
+        "technical": "commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md"
+       },
+       {
+        "map": "SpeculativeComputation_Rhizome_Network",
+        "tutorial": "commons/maps/SpeculativeComputation_Rhizome_Network/tutorial.md",
+        "intent": "commons/maps/SpeculativeComputation_Rhizome_Network/intent.md",
+        "final": "commons/maps/SpeculativeComputation_Rhizome_Network/final.md",
+        "technical": "commons/maps/SpeculativeComputation_Rhizome_Network/technical.md"
+       },
+       {
+        "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "tutorial": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md",
+        "intent": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/intent.md",
+        "final": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+        "technical": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md"
+       },
+       {
+        "map": "PostCrisis_Synthesis",
+        "tutorial": "commons/maps/PostCrisis_Synthesis/tutorial.md",
+        "intent": "commons/maps/PostCrisis_Synthesis/intent.md",
+        "final": "commons/maps/PostCrisis_Synthesis/final.md",
+        "technical": "commons/maps/PostCrisis_Synthesis/technical.md"
+       }
+      ],
+      "status": "source_indexed; lesson_alignment_pending",
+      "policy": "Read tutorial.md as the starting lesson, intent.md for its purpose, final.md for the encounter, and technical.md/source for verification. Keep the map order unless an explicit prerequisite makes a local exception necessary."
      }
     }
    ],
@@ -3163,12 +4916,9 @@
   "Chapter 7 has nine sections: add, subtract and dot no longer share one, and collisions became an exercise. Keep nine, or move the centre-of-mass section (7.8) to an exercise too?",
   "11.7 now teaches ArrayMesh and the trimesh collider, the first mesh built from vertices; line() and triangle() from chapter 1 stay supplied until then, and 17.7 reuses it. Fine, or should chapter 5 open them with a triangle built from an array?",
   "Names: the random walker of 10.6 is a class Wanderer, so it does not clash with the supplied cyan walker, which the book calls the walker; 16.6's digger is a digger. Fine?",
-  "Chapter 1 is built around a court of your own shapes; Durer's Melencolia court is the hall's subject and a hook, and the picture is unchanged. Fine?",
   "Backpropagation: 21.6 trains the hidden layer by the finite-difference nudge of 21.3 (nine weights, no chain rule); the chain rule is a hook. Or teach the chain rule in chapter 6?",
   "Inheritance is taught in 17.3 (PinnedParticle extends Particle) because the spine puts soft bodies before particle systems, and reused in 20.1; Nature of Code teaches it with particles. Keep?",
-  "Halls moved out of their sequence: Topology_Entropy_Morphogenesis from 17 to 18.6 (it needs the mesher), Noise_6_Wall from 11 to 12.6, PG_Sculpted_Forms into exercises of 18 and 19, the rhizome network into an exercise of 22, and three randomness halls into exercises of 10. Agreed?",
   "Chapter 6 now leads with velocity and acceleration; the fundamental theorem (ftc_bridge) is an extension, not a section. Agreed?",
-  "SHORT_SPEAK.md (2 October) names what is seen a mesh and what is touched a shape, one name per term; the sketch still says collider. Align when the lessons are written?",
-  "Chapter 1 now holds six ideas in eight sections (script and _ready, coordinates, mesh and collider, _process, mouse and a copy in code, variables); length() moved to 2.5 and snapped() to a chapter 3 exercise. Can a first-time programmer finish it?"
+  "SHORT_SPEAK.md (2 October) names what is seen a mesh and what is touched a shape, one name per term; the sketch still says collider. Align when the lessons are written?"
  ]
 }

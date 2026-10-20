@@ -1,0 +1,23 @@
+{
+  "title": "From an encounter to a claim.",
+  "intro": "Keep the room, its record and our interpretation within reach of one another. These questions return through the existing spine; they do not add a new tutorial subject to every hall.",
+  "steps": [
+    {"title": "What happened?", "text": "Begin with the body, object and action. A still capture shows one moment; movement and response need an account through time."},
+    {"title": "What did we keep?", "text": "Name the recorded values, their units and frame, the sampling rule and any capacity limit. A pause, a missed event and an empty entry are different things."},
+    {"title": "How did we arrange it?", "text": "Name the operation: reorder, transform, round, filter, average or count. Keep the earlier record available when the purpose is to compare representations."},
+    {"title": "What can we claim?", "text": "Follow the result back to its evidence. Separate an observed event, a declared dependency, a measured similarity and an artistic interpretation."}
+  ],
+  "returns": [
+    {"hall": "Point_Trace", "question": "What disappears between retained positions?", "text": "The movement gate can keep a pause out of the list. Read the rule beside the line it produces.", "basis": "commons/maps/Point_Trace/final.md"},
+    {"hall": "Point_Line_Grid", "question": "What changes when the same trace becomes a sculpture?", "text": "Compare the received positions with their recentered, scaled and rounded displays. The event and its later uses remain distinct.", "basis": "commons/maps/Point_Line_Grid/final.md"},
+    {"hall": "Array", "question": "What counts as one entry?", "text": "Follow the planned distinction between an address and what occupies it. Changing order changes the arrangement we encounter.", "basis": "doc/book/course/execution-plan/plan.json"},
+    {"hall": "Color_Grid_Pallet", "question": "What does one colour value describe?", "text": "A stored value and its appearance in a lit room differ. Replacing that value also differs from recording its history.", "basis": "commons/maps/Color_Grid_Pallet/final.md"},
+    {"hall": "GT_Layout", "question": "Did the relations change, or their arrangement?", "text": "Move a point while preserving adjacency. A different drawing can direct attention without adding a connection.", "basis": "commons/maps/GT_Layout/final.md"},
+    {"hall": "GT_Network_Analysis", "question": "What does this count establish?", "text": "Read the fictional record behind an arrow before interpreting its prominence. An omitted record and an unrecorded event are different absences.", "basis": "commons/maps/GT_Network_Analysis/final.md"},
+    {"hall": "GT_Matching", "question": "Who defined the permitted pairs?", "text": "The algorithm solves an allocation within declared relations. Return to those declarations when asking what its result permits or excludes.", "basis": "commons/maps/GT_Matching/final.md"}
+  ],
+  "categories": "Keep the selected hall while switching between Hall images and Relations. In Relations, compare spine order, declared prerequisites and shared artifacts. Each view selects another relation; a shared token does not establish shared live state. Grouping photographs by visual resemblance would be a further proposal, not a verified dependency.",
+  "process": "For a spring settling or an attachment failing, a useful future record would keep several moments from the same run, with their order and conditions. The current atlas contains saved still captures; it does not yet provide event replay. A photograph from another run cannot silently fill a missing moment.",
+  "precision": "Automatic capture still has tracking, sampling and coordinate choices. A beautiful diagram, a successful screenshot and a runnable tutorial are different kinds of evidence. None substitutes for the others.",
+  "source": {"title": "Lev Manovich — Big Data, Visualization, and Digital Humanities, CUNY syllabus (2013)", "url": "https://docs.google.com/document/d/1Mf6qlFNqwLLvVPlWAOy0eK3HfbgLlJgIJSyEImM4uSg/edit", "note": "Our adaptation draws on the syllabus's distinctions between artifacts and processes, data and metadata, feature selection and cultural categories. Its software list is historical; it is not our installation guide."}
+}

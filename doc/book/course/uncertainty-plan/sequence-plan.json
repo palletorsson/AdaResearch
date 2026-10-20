@@ -1,5 +1,5 @@
 {
-  "status": "proposal; no new package installed",
+  "status": "G0 geometry-noise, G1 pendulum, G2 observation, P1 stepping, P3 sampling and P4 receivers installed; P2/P5/P6 remain proposed",
   "rows": [
     {
       "order": 1,
@@ -83,9 +83,9 @@
         "Vectors_Act4b_Oscillation"
       ],
       "main_subject": "Force, impulse, mass and constrained motion",
-      "proposal": "**P1 primary.** One sphere throw, reference arc and stepped trace. Springs later prepare measured response. Keep stack overflow and catastrophic assemblages as valid consequences unless a contract actually fails.",
+      "proposal": "**P1 built, optional Launch comparison.** The carried point, a reference arc and explicit Euler trace; same one-second flight at 10/20/40 steps. 53core+51printed checks, two rejected faults, 22museum checks. The launch encounter remains primary. **G1 built:** a paired point pendulum compares recorded force off/on, then matched input with different damping. Springs remain the primary lesson. Keep stack overflow and catastrophic assemblages as valid consequences unless a contract actually fails.",
       "carry_and_check": "Same initial state/time; predicted endpoint error; replay. No full engine settings experiment.",
-      "status": "proposed"
+      "status": "G1 and P1 built; further returns proposed"
     },
     {
       "order": 8,
@@ -118,21 +118,22 @@
         "Randomness_Examples_of_Randomness"
       ],
       "main_subject": "Samples, distributions, seeds and chance",
-      "proposal": "**P3 primary.** Upgrade the placed Monte Carlo dartboard's budget/seed comparison. Do not introduce three competing estimators.",
-      "carry_and_check": "Counts, seed, error and variability retained; no promise of monotonic convergence.",
-      "status": "proposed"
+      "proposal": "**P3 built.** Existing dartboard: budgets 100/500/2000/8000, replay, next seed, eight-seed comparison. 24 core + 24 printed checks, eight printed assertions, two rejected faults, 25 museum checks. One optional study; main PointBody tutorial separately authored.",
+      "carry_and_check": "Every sample counted; newest 300 marks shown; local stream and replay tested. No promise of monotonic convergence.",
+      "status": "P3 built; main lesson preserved"
     },
     {
       "order": 11,
       "sequence": "noise",
       "hosts": [
+        "Random_Noise_Types",
         "Noise_One",
         "Noise_Voxel"
       ],
-      "main_subject": "Correlated variation and sampling a field",
-      "proposal": "**Return.** Freeze field/seed; change sample spacing. Use existing point/field. Hold frequency fixed before discussing aliasing.",
-      "carry_and_check": "Sampling and source changes distinguishable; a coarse mesh is not new noise.",
-      "status": "proposed"
+      "main_subject": "Variation, dependence and sampling a field",
+      "proposal": "**G0 built, optional opening study.** The Uncertain Surface scales one saved Gaussian xyz sample while preserving the mesh index list. Then return to correlated fields and sampling. See NOISE_TESTS.md for separate future studies.",
+      "carry_and_check": "Metres, measured deviation, seed replay, unchanged original/connectivity; a changed embedding is not automatically failure.",
+      "status": "G0 built; further returns proposed"
     },
     {
       "order": 12,
@@ -142,9 +143,9 @@
         "Shader_10_ReactionDiffusion"
       ],
       "main_subject": "A function at every surface sample",
-      "proposal": "**P4 primary after repeating patterns.** One saved array, colour receiver, height receiver. Separately audit the RD previous-texture chain before claiming feedback simulation.",
+      "proposal": "**P4 built after repeating patterns.** Existing camera study now keeps an 8 × 8 RGB8 record across RGB/BGR colour, unsigned/signed height and invalid-layout refusal. 37 core + 37 printed checks, eight printed assertions, two rejected faults, 121 museum checks including earlier modes. Full optional lesson and reflection added. Separately audit the RD previous-texture chain before claiming feedback simulation.",
       "carry_and_check": "Source remains unchanged when interpretation switches; initialized state for any feedback loop.",
-      "status": "proposed"
+      "status": "Camera study and P4 built; further returns proposed"
     },
     {
       "order": 13,
@@ -240,9 +241,9 @@
         "SwarmIntelligence_Agent_Based_Modeling_ABM"
       ],
       "main_subject": "Many local rules and collective behaviour",
-      "proposal": "**P2 return.** Observe one agent's sensed neighbours and response while varying one delay/gain. Preserve shared-state update discipline.",
+      "proposal": "**G2 built, optional ABM study:** known course, accurate/noisy range, separate dropout with STOP/HOLD; true observation and command logged. Existing collective encounters remain primary. **P2 return.** Observe one agent's sensed neighbours and response while varying one delay/gain. Preserve shared-state update discipline.",
       "carry_and_check": "Local state, sensed state and command visible; instability of one configuration is not a claim about all swarms.",
-      "status": "proposed"
+      "status": "G2 built; further returns proposed"
     },
     {
       "order": 21,

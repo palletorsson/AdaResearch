@@ -1,0 +1,309 @@
+{
+ "schema": "ada.book-experiment.v1",
+ "id": "advanced-laboratory.bridge-cut-001",
+ "status": "proposed",
+ "disposition": "experimental",
+ "runtime_verified": false,
+ "sources": [
+  {
+   "passage_id": "advanced-laboratory.reroute-cycle.v1",
+   "source_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md",
+   "snapshot_path": "doc/book/experiments/advanced-laboratory/bridge-cut-001/sources/AdvancedLaboratory_Lab_Equipment_Simulation.tutorial.md",
+   "sha256": "eb33253345a6fcfb428f74827b4d73ae750067be3699bd694bcde6fab095a50a",
+   "excerpt": "Reroute the second endpoint of edge 5 from hand to head: the hand is isolated and the rest contains a cycle. Move the other endpoint from elbow to that hand: every joint reconnects.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "tutorial"
+  },
+  {
+   "passage_id": "advanced-laboratory.connected-part.v1",
+   "source_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+   "snapshot_path": "doc/book/experiments/advanced-laboratory/bridge-cut-001/sources/AdvancedLaboratory_Lab_Equipment_Simulation.final.md",
+   "sha256": "245936a9d7c95ac545e6b6fb9a5159c927819e05bdfb3edda2fdfb575dddc5ce",
+   "excerpt": "The hand waits outside that circuit, with no line reaching it. It has not disappeared from the room. It has disappeared from the body's connected part.",
+   "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+   "text_role": "final"
+  }
+ ],
+ "documents": {
+  "proposition": "doc/book/experiments/advanced-laboratory/bridge-cut-001/proposition.md",
+  "text_simulation": "doc/book/experiments/advanced-laboratory/bridge-cut-001/text-simulation.md",
+  "observations": "doc/book/experiments/advanced-laboratory/bridge-cut-001/observations.md",
+  "revision": "doc/book/experiments/advanced-laboratory/bridge-cut-001/revision.md"
+ },
+ "interpretations": [
+  {
+   "id": "bridge-cut.interp.tree-cut",
+   "passage_ids": [
+    "advanced-laboratory.reroute-cycle.v1",
+    "advanced-laboratory.connected-part.v1"
+   ],
+   "mapping": "Read the hall body (13 joints, 12 connections, one component — a tree) through the artifact's graph=\"tree\" value. The passage's isolation event is operationalized as the single change cut=\"none\" -> cut=\"bridge\" at closure=\"open\": _find_special elects the first edge whose removal raises the component count (_bridge_edge), the removal is applied, and the outcome is read from component_count() (prediction: 1 -> 2) and has_bridge() (prediction: true). The exiled small piece stands for the hand outside the connected part.",
+   "assumptions": [
+    "Tree-ness is the operative property: in a connected graph with edges = nodes - 1, every edge is a bridge, so the artifact's 8-node, 7-edge tree is a fair reduced stand-in for the 13-joint, 12-edge body.",
+    "component_count() is the operative formalization of the final's phrase 'the body's connected part'.",
+    "Which bridge is elected does not matter for the question; _find_special's first-found convention (edge [0,1]) is acceptable."
+   ],
+   "exclusions": [
+    "Does not model the reroute itself: the hall gesture removes AND re-attaches an endpoint in one release; cut only removes.",
+    "No cycle appears in this interpretation; the loop half of both passages is excluded.",
+    "Node identities (hand, head, elbow) and all geometry/positions are excluded; only connectivity is read."
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "bridge-cut.interp.returned-loop",
+   "passage_ids": [
+    "advanced-laboratory.connected-part.v1"
+   ],
+   "mapping": "Operationalize 'that circuit' via the closure export: compare closure=\"open\" against closure=\"returned\" at graph=\"tree\", cut=\"none\", reading _bridge_edge/_chord_edge through has_bridge() and the cut=\"chord\" pathway. The appended edge [4,7] ('crown to crown, around the trunk') creates the circuit; edges on it stop being bridges (a chord now exists, so cut=\"chord\" removes something and component_count() stays 1), while the trunk edge [0,1] remains a bridge — the circuit protects the belonging of some parts and not others.",
+   "assumptions": [
+    "Adding the return edge is a fair stand-in, for bridge-status purposes, for the hall's reroute to the head that closes a loop.",
+    "Bridge-status (is this edge solely responsible?) is the operative sense of a line 'reaching' a part."
+   ],
+   "exclusions": [
+    "closure only ever adds an edge; nothing is exiled, so the passage's exile half (the hand outside the circuit) is not modeled here.",
+    "The demotion is read through _find_special and probe methods, not through what a visitor can see; legibility in the encounter is excluded.",
+    "graph=\"theta\" (born bridgeless) is excluded as outside both passages."
+   ],
+   "status": "declared_alternative"
+  },
+  {
+   "id": "bridge-cut.interp.chord-control",
+   "passage_ids": [
+    "advanced-laboratory.reroute-cycle.v1"
+   ],
+   "mapping": "Operationalize the tutorial's learning element 'Prediction before editing' as a discrimination task with the artifact's built-in negative control: at graph=\"barbell\", closure=\"open\", compare cut=\"bridge\" against cut=\"chord\" — same gesture, two edges that look equally important — and read component_count() (prediction: 2 vs 1). The learner's written prediction of which edge is solely responsible, made before the cut, is the measured object.",
+   "assumptions": [
+    "The bridge and a chord are visually on a par in the barbell rendering, so prediction cannot be read off the picture.",
+    "A failed prediction is an informative outcome, not a failed lesson."
+   ],
+   "exclusions": [
+    "barbell is not a body; nothing maps to joints, the hand or edge 5.",
+    "Does not touch the final's loop or exile; closure is held at \"open\".",
+    "The verdict plate text (STILL CONNECTED / BROKEN) is treated as readout only, not as the measured change."
+   ],
+   "status": "declared_alternative"
+  }
+ ],
+ "simulation": {
+  "text": {
+   "kind": "text_thought_experiment",
+   "status": "authored_hypothesis",
+   "path": "doc/book/experiments/advanced-laboratory/bridge-cut-001/text-simulation.md"
+  },
+  "godot": {
+   "scene": null,
+   "build": null,
+   "execution_status": "not_run",
+   "runs": []
+  }
+ },
+ "record_contract": {
+  "raw_values": null,
+  "apparatus_scene_reference": "res://commons/artifacts/bridge_cut/bridge_cut.tscn (reference only; no run is bound to this record)",
+  "baseline": "BridgeCut with graph=\"tree\", cut=\"none\", closure=\"open\", show_readout=true, and all other exports at code defaults (span=0.34, node_radius=0.022, edge_radius=0.006, default colors). Set via apply_grid_config keys \"graph\", \"cut\", \"closure\".",
+  "single_change": "cut: \"none\" -> \"bridge\" (the one edge _find_special elects, _bridge_edge, is removed; everything else untouched).",
+  "held_fixed": [
+   "graph=\"tree\" (the 8-node, 7-edge _pos/_edges literals in _shape())",
+   "closure=\"open\" (no [4,7] return edge)",
+   "show_readout=true",
+   "span=0.34",
+   "node_radius=0.022",
+   "edge_radius=0.006",
+   "whole_color, part_a_color, part_b_color, cut_color at code defaults",
+   "the other six tree edges (only _removed differs)",
+   "readout channel: component_count() and has_bridge() read in both conditions"
+  ],
+  "retained_fields": [
+   "export values set",
+   "verdict text",
+   "probe-readable measurements",
+   "tick rates gated (60 and 90 Hz)",
+   "scene and build identity"
+  ],
+  "replay": "Replaying a retained record means re-running the deterministic scene at the recorded exports and build; a changed build is a new run.",
+  "fresh_acquisition": "Any physics settle is a fresh acquisition at its tick rate; two rates are two observations."
+ },
+ "reference_fixture": {
+  "kind": "invented_arithmetic_fixture_not_rng_output",
+  "evidence_status": "calculated_expectation_not_executed",
+  "description": "Pen-and-paper component count for the tree shape under the bounded comparison, plus the closure demotion — pure graph arithmetic from the literals in bridge_cut.gd. These are labelled predictions: nothing has run under this record's identity.",
+  "constants_cited": [
+   "GRAPHS := [\"barbell\", \"chain\", \"theta\", \"tree\"]",
+   "CUTS := [\"none\", \"bridge\", \"chord\", \"both\"]",
+   "CLOSURES := [\"open\", \"returned\"]",
+   "tree node literal in _shape(): _pos has 8 Vector3 entries",
+   "tree edge literal in _shape(): _edges = [[0,1],[1,2],[1,3],[2,4],[2,5],[3,6],[3,7]]",
+   "tree return edge in _shape(): _edges.append([4, 7])",
+   "@export var span: float = 0.34"
+  ],
+  "values": [
+   8,
+   7,
+   1,
+   2,
+   1,
+   7,
+   8,
+   1
+  ],
+  "expected": [
+   "baseline (graph=\"tree\", cut=\"none\", closure=\"open\"): component_count() == 1",
+   "baseline: has_bridge() == true, with _bridge_edge == 0 (the edge [0,1])",
+   "baseline: _chord_edge == -1, so a request for cut=\"chord\" removes nothing and _verdict() returns \"NO CHORD TO CUT\\nevery edge is a bridge\\nstill 1 piece\"",
+   "after the single change cut=\"bridge\": component_count() == 2, piece sizes 1 ({node 0}) and 7 ({nodes 1..7})",
+   "at closure=\"returned\", cut=\"none\": still 1 component; cycle rank = 1; _chord_edge == 1 (edge [1,2], first edge on the cycle); has_bridge() still true because [0,1], [2,5], [3,6] lie off the cycle"
+  ],
+  "arithmetic": "Tree: 8 nodes, 7 edges. Connected with edges = nodes - 1 (7 = 8 - 1) => acyclic => one component and every edge a bridge. _find_special scans i = 0..6: removing i=0 ([0,1]) strands node 0, components 1 -> 2 > base, so _bridge_edge = 0; no removal keeps the count at base, so _chord_edge = -1. Single change cut=\"bridge\": _removed = [0]; union-find over the remaining 6 edges chains 1-2, 1-3, 2-4, 2-5, 3-6, 3-7 into one set of 7 and leaves {0}: _n_comp = 2, sizes 1 and 7. closure=\"returned\" appends [4,7]: 8 edges on 8 nodes gives cycle rank 8 - 8 + 1 = 1; the cycle is 4-2-1-3-7-4 (edges [2,4],[1,2],[1,3],[3,7],[4,7]), so removing any one of those five leaves 1 component (first at i=1 => _chord_edge = 1), while removing [0,1], [2,5] or [3,6] still disconnects => has_bridge() remains true."
+ },
+ "observations": [],
+ "revisions": [],
+ "learning_debt": [
+  {
+   "id": "bridge-cut.debt.reroute-vs-cut",
+   "kind": "unresolved_interpretation",
+   "question": "The hall gesture is a reroute — one release that removes an attachment AND makes a new one — while the artifact only removes (cut) or only adds (closure). Which composition of the two axes, if any, is a faithful operationalization of the passage, and does the answer differ between the tutorial and final readings?",
+   "next_test": "A headless assertion script that walks the {cut, closure} grid at graph=\"tree\" and graph=\"chain\", reading component_count() and has_bridge() per cell, and compares the transitions against the semantics of Body.join() in the tutorial's body.gd (which edits edge 5 in place); record which grid moves reproduce join's isolate-then-reconnect sequence and which cannot.",
+   "status": "open"
+  },
+  {
+   "id": "bridge-cut.debt.fixture-run",
+   "kind": "unverified_claim",
+   "question": "Do the hand-calculated predictions hold on the real node — component_count() 1 -> 2 under the bounded comparison, _chord_edge == -1 at closure=\"open\" with the NO CHORD TO CUT verdict, and _chord_edge == 1 with has_bridge() still true at closure=\"returned\"?",
+   "next_test": "One headless Godot boot (with the 16s watchdog) instantiating res://commons/artifacts/bridge_cut/bridge_cut.tscn, driving apply_grid_config through the four configurations and asserting component_count(), has_bridge() and the _verdict() strings against this record's expected list.",
+   "status": "open"
+  },
+  {
+   "id": "bridge-cut.debt.hall-walk",
+   "kind": "unverified_implementation",
+   "question": "The placement exists in the working tree, but is the plinth-scale piece (span 0.34) reachable and legible on the hall's walk path among the body exhibits — does a visitor actually pass it between the gold assembly and the exit?",
+   "next_test": "python tools/map_pathfinder.py check AdvancedLaboratory_Lab_Equipment_Simulation --verbose, then python tools/vr_agent.py AdvancedLaboratory_Lab_Equipment_Simulation --dry-run to confirm an approach cell for the bridge_cut placement on the tour.",
+   "status": "open"
+  }
+ ],
+ "contributions": [
+  {
+   "role": "loop direction",
+   "contributor": "Palle Torsson (chat, 2026-10-14): start the research loop for some of the sequences",
+   "source": "doc/book/RECURSIVE_ARCHITECTURE.md"
+  },
+  {
+   "role": "apparatus construction",
+   "contributor": "Claude Fable 5 (claude-fable-5), separation-family build campaign of 2026-10-13, from the user's readings of the openai/math figures",
+   "source": "commons/artifacts/registry/bridge_cut.json"
+  },
+  {
+   "role": "hall text authorship",
+   "contributor": "Not inferred; the hall texts predate this record",
+   "source": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/"
+  },
+  {
+   "role": "record drafting",
+   "contributor": "Claude Fable 5 workflow agents (read, adversarial verify, draft), 2026-10-14",
+   "source": "doc/book/experiments/advanced-laboratory/bridge-cut-001/proposition.md"
+  }
+ ],
+ "related_tasks": [
+  "separation_research.001",
+  "separation_research.003"
+ ],
+ "task_sources": [
+  "doc/tasks/separation_research.json"
+ ],
+ "evidence_status": {
+  "artifact": "not_tested",
+  "experiment_cycle": "not_tested",
+  "specified_cross_hall": "not_applicable_local_pilot",
+  "scene_loading": "not_tested",
+  "runtime_stability": "not_tested",
+  "performance": "not_tested",
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested"
+ },
+ "edition": {
+  "id": null,
+  "status": "not_selected",
+  "publication_status": "not_published"
+ },
+ "initiation": {
+  "allowed_text_roles": [
+   "tutorial",
+   "final"
+  ],
+  "status": "proposed",
+  "questions": [
+   {
+    "text_role": "tutorial",
+    "passage_id": "advanced-laboratory.reroute-cycle.v1",
+    "question": "Before releasing a rerouted endpoint, can the learner predict which of the body's twelve connections are solely responsible for it staying one piece — and reconstruct, by removal rather than by looking, how a single changed relation moves an edge into or out of that responsible set?"
+   },
+   {
+    "text_role": "final",
+    "passage_id": "advanced-laboratory.connected-part.v1",
+    "question": "In the encounter, can a visitor tell which single line carries a part's belonging to the body before that line is removed — or does a circuit make every line on it dispensable, so that belonging is only learnable by cutting and seeing?"
+   }
+  ],
+  "reconsider_if": [
+   "The uncommitted placement changes: bridge_cut leaves AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json (currently the dirty working-tree entry \"bridge_cut:0:0.95\"), or the untracked artifact folder/registry file never lands in a commit — the record's premise that the artifact stands in this hall fails.",
+   "tutorial.md is dirty in the working tree; if its pending edits are reverted or rewritten so the bound excerpt stops being a verbatim contiguous byte substring, the tutorial passage binding must be re-selected and re-versioned.",
+   "A probe contradicts the hand arithmetic (e.g. component_count() != 2 at graph=\"tree\", cut=\"bridge\", closure=\"open\", or _chord_edge != -1 at closure=\"open\") — then the code reading in this record, not the artifact, is in question, and the fixture must be redone before any interpretation is trusted.",
+   "An encounter shows the plate text (STILL CONNECTED / BROKEN / NO BRIDGE TO CUT), not the removal-and-recolour, carries the meaning for visitors — then component_count() as the operationalization of 'the body's connected part' needs revision toward the verdict vocabulary.",
+   "The tree-for-body reading proves too loose: the hall's reroute concerns a named connection (edge 5, the left forearm) while _find_special always elects the first bridge (edge [0,1]); if that mismatch matters in the encounter, the mapping needs a bespoke graph value or a different operational route."
+  ]
+ },
+ "text_reviews": {
+  "tutorial": {
+   "source_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md",
+   "source_passage_ids": [
+    "advanced-laboratory.reroute-cycle.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  },
+  "final": {
+   "source_path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md",
+   "source_passage_ids": [
+    "advanced-laboratory.connected-part.v1"
+   ],
+   "status": "pending_evidence",
+   "decision": null,
+   "reason": null,
+   "observation_ids": [],
+   "successor_source": null
+  }
+ },
+ "review_contract": {
+  "targets": [
+   "tutorial",
+   "final"
+  ],
+  "allowed_decisions": [
+   "revise",
+   "retain_with_reason",
+   "open_question"
+  ],
+  "both_rewrites_required": false,
+  "each_review_requires": [
+   "source_version",
+   "observation_refs",
+   "reason"
+  ],
+  "pending_is_complete": false
+ },
+ "next_experiment": {
+  "selection_status": "awaiting_observations",
+  "allowed_decisions": [
+   "continue",
+   "redirect",
+   "defer",
+   "stop"
+  ],
+  "source_observation_ids": [],
+  "question": null,
+  "decision": null,
+  "proposition": null
+ }
+}

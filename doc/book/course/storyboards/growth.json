@@ -1,0 +1,1918 @@
+[
+  {
+    "sequence": "randomness",
+    "arc": "PROPOSED. Deepen the bounded choices already used earlier into reproducible procedures, retained samples, distributions and feedback. The learner makes small, useful operations beside the existing museum encounters; the full artifact, its input and its presentation remain named supplied parts. These teaching connections need approval and implementation before any promise of transporting learner work between halls.",
+    "halls": [
+      {
+        "id": "Random_Definition",
+        "title": "Keep a generated arrangement",
+        "storyboard": "At the paired colour grids, the student chooses an arrangement worth recovering. Bringing RGB colours, lists, loops and bounded random choice, they make a colour recipe with a local seeded generator and explicit request order. A proposed adapter would send their colour list to one existing grid while the other holds a witness; this interface is not yet verified. The displays, replay controls and generator internals are supplied. One unused request reveals why a seed alone cannot identify a picture. They keep recipe and seed together, gaining a reproducible construction for later reuse.",
+        "storyboard_short": "Use paired colour grids. Reuse RGB lists, loops and bounded draws. Teach a local seeded recipe with explicit request order; insert an unused request to change the picture. Supply displays, replay controls and generator internals. Carry recipe plus seed. Open: verify the proposed colour-list adapter and witness grid; promise neither existing transfer nor cross-version replay.",
+        "mode": "make",
+        "brings": [
+          "RGB colours and lists",
+          "bounded random choice"
+        ],
+        "learns": [
+          "local seeded generator",
+          "request order"
+        ],
+        "carries": "A repeatable recipe and its seed",
+        "supplied": [
+          "grid display",
+          "replay controls",
+          "generator internals"
+        ],
+        "artifact_refs": [
+          "seed_replay_demo"
+        ],
+        "review_note": "Propose a colour-list adapter for one existing grid, retaining the other as witness. Its implementation and available interface still require verification; do not promise cross-version replay."
+      },
+      {
+        "id": "Random_Entropy",
+        "title": "Count what the arrangement loses",
+        "storyboard": "The ledger's tiles change neighbours when sorted, while their counts and entropy reading stay fixed. Bringing retained lists and seeded samples, the student makes a frequency table from a small symbol record, copies that list before sorting, and displays both arrangements beside the same counts. Copying preserves a snapshot instead of another reference to changing data. The ledger, tile renderer and entropy calculation are supplied. They learn what counting discards and carry both a sample-to-count operation and a way to keep earlier states, without making the statistical reading a measure of freedom.",
+        "storyboard_short": "Use the ledger's sorting tiles. Reuse retained seeded samples. Teach frequency counting and copying before sorting; compare changed neighbours against unchanged counts and entropy. Supply ledger, tiles and entropy calculation. Carry a snapshot and separate frequency account; entropy does not measure freedom. Open: Definition's colour-record transfer is proposed; the ledger owns its sample.",
+        "mode": "make",
+        "brings": [
+          "retained lists",
+          "seeded samples"
+        ],
+        "learns": [
+          "frequency counting",
+          "copying a retained snapshot"
+        ],
+        "carries": "A copied sample and its separate frequency account",
+        "supplied": [
+          "ledger",
+          "tile renderer",
+          "entropy calculation"
+        ],
+        "artifact_refs": [
+          "shannon_entropy_meter",
+          "signal_room"
+        ],
+        "review_note": "The current ledger owns its sample; transferring Definition's colour record would be a new connection."
+      },
+      {
+        "id": "Random_Remove",
+        "title": "Choose who can be chosen",
+        "storyboard": "At the amber removal board and paired sampling hoppers, the student predicts an impossible choice before drawing. With grid addresses, conditions and a seeded generator, they construct an eligible list, draw one member, and decide whether to return it or remove it before the next draw. The board, hopper animation and removal floor are supplied. This makes sampling with and without replacement usable rather than merely named. The remaining list travels forward as a way to control opportunity; the floor separately shows when removing a visual also withdraws collision.",
+        "storyboard_short": "Use the amber board, sampling hoppers and removal floor. Reuse addresses, conditions and seeded draws. Teach an eligible list; predict excluded choices, then draw with or without replacement. Supply displays, animation and floor. Carry candidate list and removal policy; distinguish visual removal from lost collision. Open: choose the board adapter or a compact supplied display.",
+        "mode": "make",
+        "brings": [
+          "grid addresses and conditions",
+          "seeded generator"
+        ],
+        "learns": [
+          "eligibility filtering",
+          "replacement"
+        ],
+        "carries": "An explicit candidate list and removal policy",
+        "supplied": [
+          "board display",
+          "hopper animation",
+          "removal floor"
+        ],
+        "artifact_refs": [
+          "remove_random",
+          "sampling_hoppers",
+          "random_removal_arena"
+        ],
+        "review_note": "Choose whether learner results drive the board or a compact supplied display beside it."
+      },
+      {
+        "id": "Randomness_10_PRINT_Algorithm",
+        "title": "Give each choice a mark",
+        "storyboard": "The student follows diagonals from the printing screen into the slab arrangement. They bring grid traversal, lines and bounded choices, then construct a small tile drawing in which each retained draw selects one of two diagonal endpoints. Changing the threshold changes the choices; changing the mark changes their reading. The existing screen, wall-scale display and separate navigation study are supplied. They leave with a reusable rule for assigning marks to addresses, knowing that a convincing maze image has not yet established a connected route or a passage wide enough for a body.",
+        "storyboard_short": "Use printing screen and slab arrangement. Reuse grid traversal, lines and retained draws. Teach mapping each draw to two diagonal endpoints; vary threshold or mark separately. Supply screen, large display and navigation study. Carry an address-to-mark rule. Distinguish the screen's sine-driven bias from fixed learner probability; maze appearance proves neither connected routes nor bodily clearance.",
+        "mode": "make",
+        "brings": [
+          "grid traversal and lines",
+          "retained random draws"
+        ],
+        "learns": [
+          "sample-to-mark mapping"
+        ],
+        "carries": "A two-mark generator with explicit threshold",
+        "supplied": [
+          "printing screen",
+          "wall-scale display",
+          "navigation study"
+        ],
+        "artifact_refs": [
+          "ten_print",
+          "ten_print_structure",
+          "ten_print_maze_3d"
+        ],
+        "review_note": "Keep the screen's sine-driven bias distinct from the fixed-probability learner construction."
+      },
+      {
+        "id": "Random_Cubes",
+        "title": "Let an outcome continue an instruction",
+        "storyboard": "After throwing the physical die, the student follows the continuing die's chain: six permits another throw, while another face ends the sum. Bringing state, retained outcomes and counting, they make a bounded accumulator called once by each supplied landing event. It records the face, adds its value and decides whether the chain remains open. The die physics, landing-event connection and column display are supplied. They gain a reusable event-driven accumulator without having to implement asynchronous input. A visible limit reports an unfinished chain; the retained sequence distinguishes the total from how it was reached.",
+        "storyboard_short": "Use physical and continuing dice: six continues, another face ends the sum. Reuse state, sums and retained outcomes. Teach a bounded accumulator invoked once per accepted landing; report unfinished chains at the limit. Supply physics, landing connection and columns. Carry sequence, total and stopping rule. Preserve physically read faces; no RNG substitution, waiting loop or fair-release claim.",
+        "mode": "make",
+        "brings": [
+          "state and sums",
+          "retained outcomes"
+        ],
+        "learns": [
+          "event-driven accumulation",
+          "result-controlled continuation"
+        ],
+        "carries": "A bounded outcome accumulator with a clear stopping rule",
+        "supplied": [
+          "die physics",
+          "landing-event connection",
+          "column display"
+        ],
+        "artifact_refs": [
+          "dice_throw",
+          "paired_dice_column",
+          "continuing_die"
+        ],
+        "review_note": "The supplied landing event invokes the learner's accumulator once per accepted throw. Do not replace the physically read face with an RNG, spin a loop waiting for it, or imply fair releases."
+      },
+      {
+        "id": "Random_Rotate_Random_XYZ",
+        "title": "Separate an increment from a position",
+        "storyboard": "The turning cube and prism stacks keep their places while their orientations accumulate small changes. Bringing transformations, time steps and random draws, the student makes a short orientation history for one supplied piece, comparing assigning a fresh angle with adding an increment to the existing angle. The stack renderer and its existing controls are supplied. They learn to identify the state that persists and what RESET actually restores, then carry that distinction into a walking position. The wear rig remains a useful counterexample: its changing appearance does not require random input.",
+        "storyboard_short": "Use turning stacks and wear rig. Reuse transforms, time steps and draws. Compare fresh-angle assignment with accumulated in-plane increments; record orientation and inspect RESET. Supply stack renderer and controls. Carry persistent state versus increment into Walk. Identify the production update's frame dependence; the historical XYZ title misleads, and the wear rig changes without randomness.",
+        "mode": "deepen",
+        "brings": [
+          "transformations",
+          "time steps and random draws"
+        ],
+        "learns": [
+          "assignment versus accumulation"
+        ],
+        "carries": "A named accumulated state and a separate increment",
+        "supplied": [
+          "stack renderer",
+          "existing controls",
+          "wear rig"
+        ],
+        "artifact_refs": [
+          "random_decay_multimesh",
+          "hardware_entropy_decay"
+        ],
+        "review_note": "Historical map title and old tutorial suggest independent XYZ rolls; current encounter is accumulated in-plane rotation. Its frame-dependent production update should be identified, not copied as a timing model."
+      },
+      {
+        "id": "Random_Walk",
+        "title": "Build a walk that remembers its position",
+        "storyboard": "At the terrarium and paired rails, the student predicts a destination before the animation moves there. They bring vector addition, accumulated state and Trace's retained list, then make a walker that adds a sampled displacement to its current position and records each accepted endpoint. The moving bead, timing controls and boundary comparison are supplied. They choose and explain a boundary rule rather than hiding it inside a helper. The resulting walk and record are reusable separately: smooth travel can be supplied, and the trail need not influence the next decision.",
+        "storyboard_short": "Use terrarium and paired rails. Reuse vector addition, accumulated state and Trace's list. Teach sampled displacements and recorded endpoints; predict a step and state its boundary rule. Supply bead, timing and boundary comparison. Carry walker and separate record; smooth travel need not affect decisions, nor trails guide them. Open: choose a reduced boundary example before full folding.",
+        "mode": "make",
+        "brings": [
+          "vector addition and state",
+          "Trace's retained list"
+        ],
+        "learns": [
+          "step rule and boundary policy"
+        ],
+        "carries": "A walker plus a separate endpoint record",
+        "supplied": [
+          "bead renderer",
+          "timing controls",
+          "boundary comparison"
+        ],
+        "artifact_refs": [
+          "random_walk_terrarium",
+          "random_position_rails",
+          "random_draw_dot"
+        ],
+        "review_note": "Choose a reduced boundary example before expanding to the terrarium's full folding implementation."
+      },
+      {
+        "id": "Random_Gaussian",
+        "title": "Keep the values before drawing the bars",
+        "storyboard": "The sampling cabinet gathers falling beads into bars, then redraws those bars without taking new samples. Bringing retained lists and frequency counts, the student constructs a histogram from a saved numerical sample and changes its interval boundaries while retaining every value. Uniform and Gaussian sampling functions, the cabinet and falling-bead animation are supplied, with their input and output ranges stated. The learner distinguishes sampling, clipping and binning, and leaves with a reusable distribution display. A familiar bell shape becomes something to investigate, rather than the expected destination of every random process.",
+        "storyboard_short": "Use the bead cabinet. Reuse retained samples and counts. Teach numerical bins; redraw boundaries without resampling. Supply uniform/Gaussian samplers with stated ranges, cabinet and animation. Carry a reusable histogram; separate sampling law, finite sample, clipping and binning. Treat the bell shape as a question. Defer sampler mathematics; decide whether an optional derivation follows.",
+        "mode": "make",
+        "brings": [
+          "retained samples",
+          "frequency counts"
+        ],
+        "learns": [
+          "numerical binning",
+          "law versus sample"
+        ],
+        "carries": "A histogram that can rebin retained values",
+        "supplied": [
+          "sampling functions",
+          "cabinet",
+          "bead animation"
+        ],
+        "artifact_refs": [
+          "distribution_sampler",
+          "galton_board"
+        ],
+        "review_note": "Decide whether a later optional lesson derives a sampler; transformation mathematics is supplied here."
+      },
+      {
+        "id": "Random_Mushrooms",
+        "title": "Make a population with a declared vocabulary",
+        "storyboard": "The specimen bed, arrival wardrobe and garment comparison show several ways a recipe can admit differences. Bringing generated forms, transformations and sampling, the student makes a small population description: template identity, position and scale are stored separately, then passed to supplied specimen builders. They can preserve a placement while changing the permitted repertoire, or keep the repertoire while changing its distribution. The bed display, specimen geometry and wardrobe interfaces are supplied. The reusable outcome is a population recipe whose discrete kinds and continuous variations remain visible, including changes it cannot express.",
+        "storyboard_short": "Use specimen bed, wardrobe and garment comparison. Reuse generated forms, transforms and sampling. Teach separate template, position and scale records; vary repertoire independently from distribution. Supply specimen builders, bed and wardrobe interfaces. Carry a population recipe with visible discrete kinds, continuous variation and limits. Open: select the smallest honest builder interface; follow the fourteen-map sequence.",
+        "mode": "make",
+        "brings": [
+          "generated forms and transforms",
+          "sampling laws"
+        ],
+        "learns": [
+          "template choice versus continuous variation"
+        ],
+        "carries": "A population description with explicit repertoire",
+        "supplied": [
+          "bed display",
+          "specimen builders",
+          "wardrobe interfaces"
+        ],
+        "artifact_refs": [
+          "mushrooms",
+          "silhouette_arrivals",
+          "couture_comparison"
+        ],
+        "review_note": "Current intent retains an obsolete shortened route; use the fourteen-map sequence order. Choose which specimen builder offers the smallest honest interface."
+      },
+      {
+        "id": "Random_Space_Geometry",
+        "title": "Read neighbouring samples",
+        "storyboard": "The WHITE NOISE and PERLIN NOISE grids let the student compare three neighbouring heights before naming a landscape. They bring grid addresses, seeded draws and value-to-height mapping, then build one short sampled profile using independent draws and another using a supplied coherent field function at the same coordinates. The comparison bench and Perlin sampler are supplied. They measure adjacent differences and change coordinate spacing deliberately, gaining a way to study spatial relationships. A field's correlation is not stored history, and matching displays does not establish matching numerical distributions.",
+        "storyboard_short": "Use WHITE NOISE and PERLIN NOISE grids. Reuse addresses, seeded draws and height mapping. Teach matched profiles from independent draws and a coherent field; measure adjacent differences and vary coordinate spacing. Supply bench and Perlin sampler. Carry spatial comparison; correlation is not memory, and matching displays do not establish matching distributions. Open: verify perlin_noise_bridge's reduced interface.",
+        "mode": "make",
+        "brings": [
+          "grid addresses",
+          "seeded samples and height mapping"
+        ],
+        "learns": [
+          "spatial correlation",
+          "coordinate sampling"
+        ],
+        "carries": "A matched profile sampler and neighbour comparison",
+        "supplied": [
+          "comparison bench",
+          "Perlin sampler"
+        ],
+        "artifact_refs": [
+          "perlin_noise_bridge"
+        ],
+        "review_note": "Current final centres perlin_noise_bridge, absent from the sequence's older artifact list; verify its reduced interface before writing the tutorial."
+      },
+      {
+        "id": "Randomness_Examples_of_Randomness",
+        "title": "Give chance a numerical job",
+        "storyboard": "Among the floor painting, pipes and particle study, the student stops at the dartboard to make an estimate. Bringing coordinates, random sampling, conditions and counts, they construct a bounded point experiment: sample inside a square, test distance from its centre, retain the hit count and compare successive estimates. The dartboard, plotting surface and controls are supplied. They learn why a random draw can support a numerical estimate and carry a reusable sample-test-count procedure. The surrounding works let them compare that purpose with choosing a mark or extending a path.",
+        "storyboard_short": "Use the dartboard among paintings, pipes and particles. Reuse coordinates, sampling, conditions and counts. Teach a bounded square-sampling experiment: test centre distance, count hits and compare successive estimates. Supply dartboard, plotting and controls. Carry sample-test-count estimation; contrast its numerical purpose with marks or paths. Keep finite-sample error visible: extra draws need not improve each estimate.",
+        "mode": "make",
+        "brings": [
+          "coordinates and sampling",
+          "conditions and counts"
+        ],
+        "learns": [
+          "Monte Carlo estimation"
+        ],
+        "carries": "A sample-test-count estimator",
+        "supplied": [
+          "dartboard",
+          "point plotting surface",
+          "controls"
+        ],
+        "artifact_refs": [
+          "monte_carlo_dartboard",
+          "pollock_painting_in_3d",
+          "pipe_dream"
+        ],
+        "review_note": "Keep finite-sample error visible; more draws need not improve every individual estimate."
+      },
+      {
+        "id": "Random_Pheromone",
+        "title": "Let the trace enter the next choice",
+        "storyboard": "At the terrain console, a visited patch rises while later walkers may return to its fading signal. The student brings a random walker, grid addresses and stored values, then gives their walker a separate signal field: deposit at an address, decay the field, and compare neighbouring values before selecting a step. The terrain renderer, stepped clock and walker display are supplied. They learn feedback by making a trace influence future action. The reusable field remains distinct from accumulated height, and reinforcement supplies no proof that the resulting route is shortest or best.",
+        "storyboard_short": "Use terrain console. Reuse walker, grid addresses and stored values. Teach a separate signal field: deposit, decay, read neighbours, choose a step. Supply terrain renderer, stepped clock and walker display. Carry feedback into future choices; distinguish fading signal from accumulated height, without optimal-route claims. Open: reusing the learner's walker is proposed; current artifacts own separate states.",
+        "mode": "make",
+        "brings": [
+          "random walker",
+          "grid addresses and stored values"
+        ],
+        "learns": [
+          "environmental feedback"
+        ],
+        "carries": "A deposit-decay-read field",
+        "supplied": [
+          "terrain renderer",
+          "stepped clock",
+          "walker display"
+        ],
+        "artifact_refs": [
+          "pheromone_terrain"
+        ],
+        "review_note": "Using the student's earlier walker here is a proposed teaching connection; current artifacts own separate states."
+      },
+      {
+        "id": "Random_Space",
+        "title": "Compose a finite field from contributions",
+        "storyboard": "At the noise mixer, broad features remain while finer ones arrive as layers are added. Bringing sine functions, loops and the previous field comparison, the student makes a short weighted sum that samples the same supplied base function at several coordinate scales. They retain each contribution before adding it, so removal and recombination have an inspectable meaning. The mixer display and base sampler are supplied. The outcome is a reusable finite field recipe with separate frequency and amplitude choices, preparing Noise without confusing the sine-based construction with geological processes or stored visits.",
+        "storyboard_short": "Use the noise mixer. Reuse sine, loops and field sampling. Teach a finite weighted sum across coordinate scales; retain contributions for removal and recombination. Supply base sampler and mixer display. Carry a field recipe separating frequency from amplitude into Noise. Disclose the mixer's display rescaling; distinguish this sine-based construction from geology or stored visits.",
+        "mode": "make",
+        "brings": [
+          "sine functions and loops",
+          "field sampling"
+        ],
+        "learns": [
+          "layered weighted fields"
+        ],
+        "carries": "A finite field recipe with inspectable terms",
+        "supplied": [
+          "mixer display",
+          "base sampler"
+        ],
+        "artifact_refs": [
+          "noise_mixer",
+          "random_space"
+        ],
+        "review_note": "The existing mixer rescales its picture; a teaching display must disclose that mapping while comparing amplitudes."
+      },
+      {
+        "id": "Random_Game",
+        "title": "Distinguish a decision from its disclosure",
+        "storyboard": "The three-stone crossing and door timing trials let the student compare a wait already drawn with one still to come. They bring state, elapsed time and seeded choices, then describe a small event schedule that draws a duration once, stores its deadline and reports its remaining time. The crossing, door trials and collision timing are supplied. This deepens their ability to explain a running process without rebuilding the obstacle course. They carry a reusable distinction between state order, decision time and disclosure, while deciding how much information their own future interaction should expose.",
+        "storyboard_short": "Use crossing and door timing trials. Reuse state, elapsed time and seeded choices. Teach drawing one duration, storing its deadline and reporting remaining time. Supply crossing, trials and collision timing. Carry a readable schedule separating state order, decision and disclosure; choose what a future interaction reveals. Open: existing-process trace or executable teaching adapter.",
+        "mode": "deepen",
+        "brings": [
+          "state and elapsed time",
+          "seeded choices"
+        ],
+        "learns": [
+          "stored deadlines",
+          "decision versus disclosure"
+        ],
+        "carries": "A readable schedule of states and decisions",
+        "supplied": [
+          "crossing",
+          "door timing trials",
+          "collision timing"
+        ],
+        "artifact_refs": [
+          "r_c",
+          "door_timing_trials",
+          "random_doors"
+        ],
+        "review_note": "Choose whether the small schedule is a readable trace of the existing crossing or an executable teaching adapter."
+      }
+    ]
+  },
+  {
+    "sequence": "noise",
+    "arc": "PROPOSED. Follow sampled values into constraints, colours, displacement, occupancy and borrowed coordinates. Reuse the learner's functions and arrays while supplying the field generator itself. Separate correlation from memory and the visible surface from collision. Any shared learner dataset or cross-hall transport below is a proposal; the existing instruments generally own independent samples.",
+    "halls": [
+      {
+        "id": "Random_Noise_Types",
+        "title": "Give a candidate permission to remain",
+        "storyboard": "The held point returns to its plane, while the neighbouring slab keeps only candidates far enough from earlier points. Bringing coordinates, conditions and bounded draws, the student constructs a small placement function that proposes a position, checks its distances from the accepted list, and either records or rejects it. The grabbable point, slab display and proposal counter are supplied. They learn the difference between admission during construction and a constraint enforced every update. Their reusable sampler reports its attempt budget honestly, because failing to place a point does not prove no placement exists.",
+        "storyboard_short": "Use the constrained point and placement slab. Reuse coordinates, distances, conditions and draws. Teach proposing, distance-checking and accepting/rejecting positions against a retained list. Supply point, slab and attempt counter. Carry a budgeted sampler; failed attempts do not prove impossibility. Distinguish admission from enforcement every update. Defer spectral/audio galleries to comparisons unless separately approved.",
+        "mode": "make",
+        "brings": [
+          "coordinates and distance",
+          "conditions and bounded draws"
+        ],
+        "learns": [
+          "rejection sampling",
+          "admission versus enforcement"
+        ],
+        "carries": "A finite placement sampler with accepted and rejected records",
+        "supplied": [
+          "grabbable point",
+          "slab display",
+          "proposal counter"
+        ],
+        "artifact_refs": [
+          "randompoint",
+          "randompoints",
+          "related_weather"
+        ],
+        "review_note": "Leave the spectral and audio galleries as comparisons unless a separate lesson is approved."
+      },
+      {
+        "id": "Noise_Columns",
+        "title": "Choose what receives a changing value",
+        "storyboard": "The three columns share a shaft recipe but receive held, periodic and field-derived values. Bringing sine, elapsed time and generated geometry, the student writes a driver function that returns one scalar and an explicit receiving function that turns that scalar into a column setting. They compare the same recipient under two drivers before changing the recipient. The column builder, local clock controls and marble material are supplied. The reusable outcome is a clean separation of source and use; the independently pulsing orb demonstrates why pausing this clock need not pause the museum.",
+        "storyboard_short": "Use three columns and independently pulsing orb. Reuse sine, elapsed time and generated geometry. Teach scalar driver and explicit shaft receiver; compare two drivers before changing the recipient. Supply column builder, local clock and marble. Carry source/use separation; stopping one clock need not stop the museum. Follow the actual shaft driver, without invented vertex erosion or loading.",
+        "mode": "make",
+        "brings": [
+          "sine and elapsed time",
+          "generated geometry"
+        ],
+        "learns": [
+          "driver and recipient interfaces"
+        ],
+        "carries": "A scalar driver connected to an explicit receiver",
+        "supplied": [
+          "column builder",
+          "local clock controls",
+          "marble material"
+        ],
+        "artifact_refs": [
+          "MeltingBerniniScene",
+          "dark_sphere",
+          "synthesis_stand"
+        ],
+        "review_note": "Use the actual scalar shaft driver; do not invent per-vertex Perlin erosion or structural loading."
+      },
+      {
+        "id": "Noise_One",
+        "title": "Give one value two visible consequences",
+        "storyboard": "The paired rings receive the same field as relief and colour. Bringing scalar drivers, mesh positions and colour mapping, the student makes two receiving functions for a retained signed sample: one offsets a position, the other remaps the value into a colour range. The ring mesh, paired probes and noise sampler are supplied. They discover why clipping all negative values to black conceals differences that relief still shows. Their reusable pair of mappings can dress other generated forms, while the layered basin extends the comparison without claiming its different resources are identical octaves.",
+        "storyboard_short": "Use paired relief/colour rings and layered basin. Reuse scalar drivers, positions and colour mapping. Teach two receivers for one retained signed sample; compare offset geometry with remapped colour and inspect negative-value clipping. Supply ring construction, probes and sampler. Carry reusable mappings. Open: select directly referenced vertices; the basin's different resources are not identical octaves.",
+        "mode": "make",
+        "brings": [
+          "scalar drivers",
+          "positions and colour mapping"
+        ],
+        "learns": [
+          "signed remapping",
+          "multiple receivers"
+        ],
+        "carries": "Two explicit mappings from one retained value",
+        "supplied": [
+          "ring mesh",
+          "paired probes",
+          "noise sampler"
+        ],
+        "artifact_refs": [
+          "noisetorus",
+          "noiselayers"
+        ],
+        "review_note": "Select a small set of directly referenced ring vertices; the full ring constructor stays supplied."
+      },
+      {
+        "id": "Noise_Voxel",
+        "title": "Turn a field into occupied cells",
+        "storyboard": "At the small voxel body and its enlarged counterpart, the student holds one sample steady while the threshold removes its block. They bring multidimensional arrays, field values and conditions, then construct an occupancy array from a supplied field using an explicit height bias and threshold. The cell renderer, section screen and large collision receiver are supplied. The resulting binary volume can be inspected independently of its display. They learn that a visual cut need not change stored occupancy, and that connected occupied cells do not by themselves establish a usable route for a particular body.",
+        "storyboard_short": "Use small voxel body and enlarged receiver. Reuse arrays, fields and conditions. Teach occupancy from explicit height bias and threshold; hold a sample while changing its classification. Supply cells, section screen and collision receiver. Carry binary volume separate from display. Display cuts need not alter occupancy; connected cells cannot certify access. Open: choose smaller array and receiver.",
+        "mode": "make",
+        "brings": [
+          "multidimensional arrays",
+          "field values and conditions"
+        ],
+        "learns": [
+          "thresholded occupancy"
+        ],
+        "carries": "A stored binary volume separate from its display",
+        "supplied": [
+          "cell renderer",
+          "section screen",
+          "collision receiver"
+        ],
+        "artifact_refs": [
+          "perlin_terrain_sculptor",
+          "science_screen",
+          "voxelnoise"
+        ],
+        "review_note": "The full 24-cubed volume is supplied; choose a smaller learner array and a disclosed receiver before implementation."
+      },
+      {
+        "id": "Noise_6_Wall",
+        "title": "Read a surface without mistaking it for support",
+        "storyboard": "Inside the pink enclosure, the student freezes the material and removes its finish while keeping the doors and floor in view. Bringing layered field sums, colour mappings and the garment's texture-sampling shader, they compose a signed-value-to-colour rule and compare it with the cloud material on the existing panel. The shader host, cloud sampler and room collision are supplied. This deepens the earlier surface lesson before the dedicated shader sequence. They carry a clear account of which operation changes appearance and which could change geometry; a visible fold need not become a place to stand.",
+        "storyboard_short": "Use the pink enclosure; freeze its finish. Reuse layered fields, colour mappings and Ribbon_Patterns_03's sampler. Teach signed-value colour mapping against the cloud material. Supply shader host, cloud sampler and room collision. Carry appearance/support distinctions; visible folds need not bear weight. Keep this 2D field distinct from Noise_Voxel's volume; dedicated Shaders deepens the supplied setup later.",
+        "mode": "deepen",
+        "brings": [
+          "layered field sums",
+          "colour mappings",
+          "garment texture-sampling shader"
+        ],
+        "learns": [
+          "surface mapping versus physical support"
+        ],
+        "carries": "A declared material mapping and its limits",
+        "supplied": [
+          "shader host",
+          "cloud sampler",
+          "room collision"
+        ],
+        "artifact_refs": [
+          "shader_noise_space",
+          "dark_sphere"
+        ],
+        "review_note": "Reuses Ribbon_Patterns_03's texture-sampling shader before the later shader sequence deepens it. This hall's 2D field is not Noise_Voxel's stored volume."
+      },
+      {
+        "id": "Noise_Inside_Noise",
+        "title": "Change the address before asking for a value",
+        "storyboard": "Inside the enclosing sphere, the student watches a marked direction remain fixed while its colour changes under WARP. Bringing coordinates, functions and field sampling, they construct two explicit steps: turn a position p into a borrowed address q, then ask the same supplied field for its value at q. The paired images, coordinate witnesses and sphere receivers are supplied. They can inspect the address change before applying colour or relief, gaining a reusable domain-warp function. The floor and pinned doorway edges clarify which parts of the environment receive the deformation.",
+        "storyboard_short": "Use enclosing sphere and fixed direction witness. Reuse coordinates, functions and sampling. Teach p-to-q address transformation before querying the same field; inspect addresses before colour or relief. Supply offset fields, paired images, witnesses, receivers and collision reconstruction. Carry domain warping separate from receiving. Preserve fixed floor and doorway edges; the study is static between actions.",
+        "mode": "make",
+        "brings": [
+          "coordinates and functions",
+          "field sampling"
+        ],
+        "learns": [
+          "domain warping"
+        ],
+        "carries": "An address-transform function separate from the field receiver",
+        "supplied": [
+          "paired images",
+          "coordinate witnesses",
+          "sphere receivers"
+        ],
+        "artifact_refs": [
+          "noisesphere"
+        ],
+        "review_note": "Keep the supplied offset fields and collision reconstruction visible as dependencies; this study is static between actions."
+      },
+      {
+        "id": "Noise_Space_10",
+        "title": "Test a proposed route against ground",
+        "storyboard": "The gold proposal and pink walking record cross the same terrain, but only one records a visitor's passage. Bringing Trace's position list, height sampling and surface construction, the student samples a chosen line across the supplied terrain and makes a small height profile to compare with an actual walk. The terrain collision, supported player tracking and recording interface are supplied. They learn to distinguish a geometric proposal from a tested route and carry a reusable terrain-section tool. A second body scale makes clear why a line's continuity cannot certify bodily access.",
+        "storyboard_short": "Use gold proposal and pink walking record. Reuse Trace positions, height sampling and surfaces. Teach sampling a chosen line through the actual triangle-height query; compare its profile with a walk at another body scale. Supply terrain collision, player tracking and recording. Carry profile and separate passage record; continuity cannot certify access. Open: cross-hall export remains proposed.",
+        "mode": "make",
+        "brings": [
+          "recorded positions",
+          "height sampling and surfaces"
+        ],
+        "learns": [
+          "terrain sections",
+          "proposal versus observed passage"
+        ],
+        "carries": "A sampled route profile with a separate walk record",
+        "supplied": [
+          "terrain collision",
+          "player tracking",
+          "recording interface"
+        ],
+        "artifact_refs": [
+          "noise_space"
+        ],
+        "review_note": "Expose the actual triangle-height query; exporting the student's profile or walk to another hall is proposed."
+      },
+      {
+        "id": "Noise_Perlin_Simplex",
+        "title": "Ask two fields the same question",
+        "storyboard": "Between the paired cube displays and walk-through arches, the student follows one shared sample address. They bring seeded field recipes and explicit receivers, then make a comparison function that asks two supplied generators for values at the same positions and records their difference. Seed, coordinate scale and output mapping become stated conditions. The Perlin and OpenSimplex2 implementations, arches and sample markers are supplied. The reusable result is a fairer comparison procedure, not a verdict that one field is more natural; removing relief also reveals how much of each arch was authored before sampling.",
+        "storyboard_short": "Use paired cubes and arches. Reuse seeded fields and explicit receivers. Teach matched addresses and recorded differences with declared seed, scale and output mapping. Supply Perlin/OpenSimplex2 generators, arches and markers. Remove relief to inspect authored arch geometry. Carry comparison conditions into Shaders; preserve correlation versus stored state, without ranking one field as more natural.",
+        "mode": "deepen",
+        "brings": [
+          "seeded field recipes",
+          "explicit receivers"
+        ],
+        "learns": [
+          "matched comparison conditions"
+        ],
+        "carries": "A paired field sampler with declared conditions",
+        "supplied": [
+          "Perlin and OpenSimplex2 generators",
+          "arches",
+          "sample markers"
+        ],
+        "artifact_refs": [
+          "perlin_noise",
+          "simplex_noise"
+        ],
+        "review_note": "Earlier prose sends this directly to CA; the current spine inserts Shaders. Preserve the distinction between spatial correlation and stored state."
+      },
+      {
+        "id": "Lab_Path",
+        "title": "Keep an unfinished question",
+        "storyboard": "The optional corridor's dark sphere continues pulsing while the student recalls one change from the Noise halls. They bring a concrete encounter and the operation they traced, then make two short accounts of it: what happened to their view or movement, and which values, addresses or receivers changed. The corridor and sphere are supplied; no new code is required. Choosing a small return experiment leaves them with a useful comparison question rather than a compulsory conclusion. This paragraph is a proposed optional reflection, because the current museum portal does not connect this room.",
+        "storyboard_short": "Use optional dark-sphere corridor as a proposed reflection; its museum portal is inactive. Reuse one Noise encounter and source/receiver distinctions. Describe both felt view or movement and changed values, addresses or receivers; choose a return experiment. Supply corridor and sphere. Carry a specific unfinished comparison question. Require no new code or compulsory conclusion.",
+        "mode": "reflect",
+        "brings": [
+          "a remembered field encounter",
+          "source and receiver distinction"
+        ],
+        "learns": [
+          "formulating a discriminating comparison"
+        ],
+        "carries": "One specific question to test on return",
+        "supplied": [
+          "optional corridor",
+          "dark sphere"
+        ],
+        "artifact_refs": [
+          "dark_sphere"
+        ],
+        "review_note": "Listed in noise.json, but intent says dropped from museum and portal is inactive. Do not present it as an implemented route."
+      }
+    ]
+  },
+  {
+    "sequence": "shaders",
+    "arc": "PROPOSED. Familiar forms acquire new ways of appearing. Deepen the garment studio’s first shader use: construct a form from a coordinate rule, transform and repeat it, compare its material on different primitive bodies, then alter it with a layered field. Compose these choices before asking what an image must retain to evolve. Keep the existing images → bodies → rooms route. The learner carries a small form function and its settings; museum bindings and transport remain proposed until implemented.",
+    "halls": [
+      {
+        "id": "Shader_01_Shaping",
+        "title": "Give a familiar form a surface rule",
+        "storyboard": "At the graph panels, the student returns to the point, distance and the boundary of a face. Bringing coordinates, functions, colour mapping and the garment studio’s first shader, they make one circular mark from distance to a chosen centre. A threshold turns that distance into an inside and an outside; a narrow transition softens the visible edge. The existing graphs explain the rule. The panel, material binding and coordinate display are supplied. The student changes centre and radius independently, then explains why the mark moved while the panel did not. They carry a small mask function and its parameters. A band or box is a later variation; the timed graph remains a comparison, not a second opening lesson.",
+        "storyboard_short": "Use graph panels to explain a circular mark. Reuse point distance, functions, colour mapping and garment UVs. Teach coordinate → distance → mask; expose centre/radius and compare sharp/soft edge. Supply panel/material binding. Check: move centre without changing radius; explain unchanged mesh. Carry mask + settings. Optional band/box; defer clock analysis. Open: learner binding; softened edge needs valid bounds.",
+        "mode": "make",
+        "brings": [
+          "point, distance and face boundary",
+          "functions and colour mapping",
+          "Ribbon_Patterns_03: supplied UVs and sampled material"
+        ],
+        "learns": [
+          "distance-to-mask rule",
+          "uniforms for centre and radius",
+          "visible boundary versus mesh geometry"
+        ],
+        "carries": "One small mask function, declared UV frame, centre, radius and edge width",
+        "supplied": [
+          "existing panel and graph display",
+          "named material binding and UV display"
+        ],
+        "artifact_refs": [
+          "shader_01_shaping"
+        ],
+        "review_note": "The existing hall displays graphs. The learner mask and its host connection are proposed; the deferred Shapes sources provide the operation, not an installed new station. Keep one main form. Use step for a hard edge and ordered, distinct smoothstep bounds for softness. Verify the actual phase-speed control before expanding the clock comparison.",
+        "prior_maps": [
+          "Point_One",
+          "Point_Coordinates",
+          "Point_Lines",
+          "Point_Triangle_Context",
+          "Primitives_Columns",
+          "Color_Grid_Pallet",
+          "Ribbon_Patterns_03"
+        ],
+        "independent_check": "Choose another centre without changing the radius. Predict the mark’s position and explain why neither the panel mesh nor its collision moved.",
+        "critical_question": "Which decision turns a difference in distance into an inside and an outside?",
+        "source_refs": [
+          "algorithms/shaders/book_of_shaders/shader_01_shaping.gd",
+          "algorithms/shaders/book_of_shaders/shaping_step.gdshader",
+          "algorithms/shaders/book_of_shaders/shapes_circle.gdshader",
+          "algorithms/shaders/book_of_shaders/shapes_rect.gdshader",
+          "commons/artifacts/fabric_shader_studio/fabric_recipe.gd"
+        ],
+        "tutorial_references": [
+          {
+            "title": "The Book of Shaders — Uniforms",
+            "url": "https://thebookofshaders.com/03/",
+            "purpose": "Name the input shared by fragment evaluations."
+          },
+          {
+            "title": "The Book of Shaders — Shaping functions",
+            "url": "https://thebookofshaders.com/05/",
+            "purpose": "Relate a threshold and transition to the boundary of a form."
+          },
+          {
+            "title": "The Book of Shaders — Shapes",
+            "url": "https://thebookofshaders.com/07/",
+            "purpose": "Use distance and masks to construct a mark."
+          }
+        ]
+      },
+      {
+        "id": "Shader_05_Patterns",
+        "title": "Transform the form inside its address",
+        "storyboard": "The tiled squares return to the earlier floor and garment, where a pattern already depended on how it was sampled. The student brings the retained mask, transforms and array addresses. They first offset and turn a band or asymmetric version of the mark around a named centre, then repeat it in a four-by-four study. The integer tile address chooses a variation; the fractional coordinate evaluates the form inside that tile. One chosen tile turns while the rest keep their orientation. They carry the mask, coordinate transform and address rule as separate parts. The garden offers a further comparison: its supplied world projection lets a pattern cross several bodies. Moving the learner’s function there needs an explicit adapter that preserves that projection.",
+        "storyboard_short": "Use tiled panels; return to floor/garment sampling. Reuse mask, transforms and array addresses. Offset/turn an asymmetric mark, then repeat 4×4. Teach floor = tile ID; fract = local coordinate. Check: turn one tile only. Carry mask + transform + address rule. Supply host; garden projection stays world-based. Open: binding/transfer adapter. Deferral: no new Shapes/Matrices halls.",
+        "mode": "make",
+        "brings": [
+          "retained mask function",
+          "translation, rotation and scale about a centre",
+          "array addresses and earlier floor/garment sampling"
+        ],
+        "learns": [
+          "coordinate transformation before evaluation",
+          "tile address versus local coordinate",
+          "variation selected by address"
+        ],
+        "carries": "The retained form plus a transform and a tile-address rule",
+        "supplied": [
+          "existing pattern display and parameter host",
+          "garden’s world projection and blending"
+        ],
+        "artifact_refs": [
+          "shader_05_patterns",
+          "reference_pattern_garden"
+        ],
+        "review_note": "A centred circle cannot reveal rotation: use a band or asymmetric mark for that comparison. Earlier tilings already use images and shaders. The current tile source draws a faint border; narrow the manuscript’s contrary claim in a later prose pass. The garden uses world triplanar mapping, not each object’s UVs. MODE/RESET rebuild materials; a future adapter must reconnect.",
+        "prior_maps": [
+          "Trans_Translation",
+          "Trans_Rotation",
+          "Trans_Scale",
+          "Array",
+          "Tutorial_Tiling_Floor",
+          "Tutorial_Tiling_Walls",
+          "Ribbon_Patterns_03",
+          "Shader_01_Shaping"
+        ],
+        "independent_check": "Choose one address in a four-by-four field and turn its asymmetric motif. Keep the other fifteen unchanged; explain which calculation selects the tile and which draws its mark.",
+        "critical_question": "What can remain particular when every appearance is evaluated from a shared rule?",
+        "source_refs": [
+          "algorithms/shaders/book_of_shaders/shader_05_patterns.gd",
+          "algorithms/shaders/book_of_shaders/matrices_translate.gdshader",
+          "algorithms/shaders/book_of_shaders/matrices_rotate.gdshader",
+          "algorithms/shaders/book_of_shaders/matrices_scale.gdshader",
+          "algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+          "algorithms/shaders/book_of_shaders/patterns_truchet.gdshader",
+          "commons/artifacts/reference_studies/pattern.gdshader"
+        ],
+        "tutorial_references": [
+          {
+            "title": "The Book of Shaders — Matrices",
+            "url": "https://thebookofshaders.com/08/",
+            "purpose": "Transform the sampling coordinate around an explicit centre."
+          },
+          {
+            "title": "The Book of Shaders — Patterns",
+            "url": "https://thebookofshaders.com/09/",
+            "purpose": "Separate cell selection from the local form rule."
+          }
+        ]
+      },
+      {
+        "id": "Shader_11_QueerRubber",
+        "title": "Let one material meet different bodies",
+        "storyboard": "The black ring catches a rainbow rim while the larger primitive bodies answer the lamps. The student returns to the faceted sphere, the garment’s curved receiver and the distinction between moving an object and moving around it. They compare one proposed teaching material on a sphere and a cube before adding a rim from supplied normal and view vectors in the same frame. Dot products now become an appearance. Keeping the material fixed, they change the body or viewpoint and account for the difference. They carry a material whose receiver matters. The existing leather, plastic and oil-like appearances remain available for looking and interpretation; the lesson does not require rebuilding all of them.",
+        "storyboard_short": "Use ring and staged primitives. Reuse faceted sphere, curved garment, transforms, dot product and retained material. Compare one material on sphere/cube; teach rim from unit normal/view vectors in one frame. Check: predict changed rim with body/viewpoint changed and material fixed. Carry receiver-aware material. Supply geometry/vectors/lamps. Open: shared-material and hold controls absent; emission is not a lamp.",
+        "mode": "make",
+        "brings": [
+          "primitive surfaces and garment receivers",
+          "object rotation versus viewer movement",
+          "dot products and a retained material"
+        ],
+        "learns": [
+          "surface normals and view vectors in a common frame",
+          "view-dependent rim response"
+        ],
+        "carries": "The retained material with a rim rule and a declared receiver",
+        "supplied": [
+          "existing primitive bodies and lamps",
+          "surface/view vectors and material connection"
+        ],
+        "artifact_refs": [
+          "shader_11_queerrubber"
+        ],
+        "review_note": "The hall already supports several primitive body types, but does not provide a shared learner material switch or rotation-hold controls. Those are proposed adapter work. Preserve material associations as interpretation; do not claim simulated fibres, physical optics or a light cast on other bodies by EMISSION alone.",
+        "prior_maps": [
+          "Primitives_Ignorance",
+          "Primitives_Godot",
+          "Trans_Rotation",
+          "Color_Flashlight",
+          "Ribbon_Patterns_03",
+          "VFM_02_Operations",
+          "Shader_05_Patterns"
+        ],
+        "independent_check": "Hold the material settings fixed. Predict which rim will change when the camera moves or the receiver changes from sphere to cube, and distinguish that change from the lamp highlight.",
+        "critical_question": "What makes a computed surface read as softness, leather, display or desire?",
+        "source_refs": [
+          "algorithms/shaders/book_of_shaders/shader_11_queerrubber.gd",
+          "algorithms/shaders/queer_materials/pop_plastic.gdshader",
+          "commons/artifacts/fabric_shader_studio/fabric.gdshader"
+        ],
+        "tutorial_references": [
+          {
+            "title": "Godot 4.6 — Spatial shaders",
+            "url": "https://docs.godotengine.org/en/4.6/tutorials/shaders/shader_reference/spatial_shader.html",
+            "purpose": "Check the actual normal/view frame and material outputs in the Godot host."
+          }
+        ]
+      },
+      {
+        "id": "Shader_09_FBM",
+        "title": "Let a field enter the form",
+        "storyboard": "The student crosses the glass above the moving basin, then returns to the noise panels with the form function they have kept. Noise and weighted sums are familiar; here a finite shader loop combines a few scales with separate frequency and amplitude updates. A bounded contribution disturbs the mask’s boundary while the panel mesh stays fixed. Compare no disturbance with the chosen amount before adding time. The student changes the finest contribution while retaining the broad form and explains the difference. They carry a field function and its range. The basin’s vertex displacement and normal construction are supplied comparisons: its surface moves, but the glass is what carries the visitor.",
+        "storyboard_short": "Use noise panels and glass-covered basin. Reuse mask, weighted sums and Noise. Teach bounded octave loop; keep frequency/amplitude separate. Perturb mask boundary; compare zero contribution before adding time. Check: change fine detail while retaining broad form. Carry field + range. Supply base noise/material host and basin displacement/normals. Glass supplies support. Defer vertex teaching; coordinate warp optional.",
+        "mode": "make",
+        "brings": [
+          "retained form and material",
+          "Noise fields and weighted sums",
+          "rendered surface versus physical support"
+        ],
+        "learns": [
+          "finite octave accumulation in the shader",
+          "bounded field contribution to a mask boundary"
+        ],
+        "carries": "A finite layered field that can alter the retained form’s appearance",
+        "supplied": [
+          "base noise function and material host",
+          "basin mesh, displacement, normals and independent support"
+        ],
+        "artifact_refs": [
+          "shader_09_fbm",
+          "basin_water"
+        ],
+        "review_note": "The retained mask-to-field connection is proposed. The mask changes fragment colour, not mesh geometry; coordinate warping is optional. Keep water’s vertex displacement supplied. More octaves do not guarantee visible improvement and do add work; choose a bounded count suitable for the material.",
+        "prior_maps": [
+          "WaveFunctions_Synthesis_Lab",
+          "Noise_Space_10",
+          "Noise_Perlin_Simplex",
+          "Shader_01_Shaping",
+          "Shader_11_QueerRubber"
+        ],
+        "independent_check": "Change the contribution of a fine noise scale while keeping the broad mark and its centre recognizable. Identify whether the edit changed colour, sampling coordinates or mesh vertices.",
+        "critical_question": "Which construction makes the moving surface visible, and which makes the crossing possible?",
+        "source_refs": [
+          "algorithms/shaders/book_of_shaders/shader_09_fbm.gd",
+          "algorithms/shaders/book_of_shaders/fbm_basic.gdshader",
+          "algorithms/shaders/book_of_shaders/fbm_domain_warp.gdshader",
+          "commons/artifacts/basin_water"
+        ],
+        "tutorial_references": [
+          {
+            "title": "The Book of Shaders — Noise",
+            "url": "https://thebookofshaders.com/11/",
+            "purpose": "Return to the field already studied; supply its generator."
+          },
+          {
+            "title": "The Book of Shaders — Fractal Brownian Motion",
+            "url": "https://thebookofshaders.com/13/",
+            "purpose": "Accumulate finite scales; treat coordinate warping as an extension."
+          }
+        ]
+      },
+      {
+        "id": "Shader_12_PinkExtravaganza",
+        "title": "Compose a body and its appearance",
+        "storyboard": "Among the pink water, sagging sphere and plural body, the student chooses an arrangement worth keeping. They bring the form, repetition, rim and layered field developed here, together with Melencolia’s earlier work of composition. Choosing a supplied body, they combine a limited set of those operations and record what each contributes. One alternate version keeps the geometry but changes its appearance. They distinguish whole-object transformation, supplied vertex deformation and fragment colour. The outcome is a material recipe with reasons for its choices, not a new compulsory technique. The room’s associations remain open: which setting is a default, and who gets to call its appearance excessive?",
+        "storyboard_short": "Use pink water, sagging sphere and plural body. Reuse Melencolia composition + retained form, repetition, rim and field. Compose limited known effects on supplied body; record choices. Check: make an alternate appearance with geometry fixed; distinguish transform/vertex/fragment. Carry material recipe. Supply lamps/geometry/deformation. Open: composition binding absent. No new compulsory syntax; pink alone is not a theory of queerness.",
+        "mode": "reflect",
+        "brings": [
+          "Melencolia’s composition with available forms",
+          "retained mask, pattern, rim and field",
+          "transforms and supplied deformation"
+        ],
+        "learns": [
+          "deliberate composition and comparison with known operations"
+        ],
+        "carries": "An editable material recipe, receiver choice and an alternate version",
+        "supplied": [
+          "existing bodies, assemblage and lamps",
+          "vertex deformation and material host"
+        ],
+        "artifact_refs": [
+          "shader_12_pinkextravaganza",
+          "reference_plural_body"
+        ],
+        "review_note": "A material-composition adapter remains proposed. The existing unfolding controls do not implement that task. This room can build judgment with known tools; do not impose another algorithm or treat pink as sufficient queer content.",
+        "prior_maps": [
+          "Primitives_Melencolia",
+          "Primitives_Profiles",
+          "Trans_Scale",
+          "Color_Context_Placed",
+          "Shader_05_Patterns",
+          "Shader_11_QueerRubber",
+          "Shader_09_FBM"
+        ],
+        "independent_check": "Make two appearances for the same geometry. State the few changed inputs and the effect each was meant to produce; account for what the existing lighting still contributes.",
+        "critical_question": "Who gets to call an appearance excessive, and how did the chosen defaults acquire that meaning?",
+        "source_refs": [
+          "algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.gd",
+          "commons/artifacts/reference_studies/plural_body.gd",
+          "commons/artifacts/reference_studies/skin.gdshader"
+        ],
+        "tutorial_references": [
+          {
+            "title": "The Book of Shaders — Shapes",
+            "url": "https://thebookofshaders.com/07/",
+            "purpose": "Return to a form already owned by the learner."
+          },
+          {
+            "title": "The Book of Shaders — Patterns",
+            "url": "https://thebookofshaders.com/09/",
+            "purpose": "Use variation as a compositional choice, not a fresh prerequisite."
+          }
+        ]
+      },
+      {
+        "id": "Shader_10_ReactionDiffusion",
+        "title": "Ask what the form must remember",
+        "storyboard": "The green panel asks for a previous texture it does not receive. Beside it, branching frost looks grown without retaining that growth. The student brings the form recomputed from coordinates, Paint’s retained image and earlier old-state/new-state updates. They trace which inputs produce each picture, then sketch what would have to be stored for a changed mark to affect the next update. Restarting a clock and restoring a saved state become different operations. They carry this explicit state contract into Cellular Automata. The existing panels and texture-reading excerpts are supplied; this reflective threshold does not require repairing the exhibit or claim that its missing feedback already works.",
+        "storyboard_short": "Use green panel and apparently grown frost. Reuse retained form, Paint history and old/new state. Trace inputs; name what a changed mark must leave for next update. Check: explain clock restart versus state restore. Carry old-state → rule → new-state contract into CA. Supply panels/texture-reading excerpts. Host lacks previous-frame feedback; no promise of evolving chemistry or implemented transport.",
+        "mode": "reflect",
+        "brings": [
+          "coordinate-driven form and time",
+          "Color_Paint retained image",
+          "separate previous and next state"
+        ],
+        "learns": [
+          "feedback requires a retained, connected input"
+        ],
+        "carries": "An explicit old-state → rule → new-state contract for Cellular Automata",
+        "supplied": [
+          "existing panels",
+          "shader excerpts and texture-reading function"
+        ],
+        "artifact_refs": [
+          "shader_10_reactiondiffusion"
+        ],
+        "review_note": "The host does not bind the previous-frame texture. Preserve this honest threshold. The Book of Shaders contents lists simulation topics, but the linked chapters used here do not supply a finished Godot reaction-diffusion lesson.",
+        "prior_maps": [
+          "Point_Trace",
+          "Color_Paint",
+          "WaveFunctions_3D_Wave_Propagation",
+          "Shader_09_FBM"
+        ],
+        "independent_check": "Explain why restarting TIME can reproduce a coordinate-driven image but does not restore the history of a stateful simulation. Name the missing input in the existing panel.",
+        "critical_question": "What history can this appearance justify claiming?",
+        "source_refs": [
+          "algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.gd",
+          "commons/resourses/shaders/reaction_diffusion.gdshader",
+          "algorithms/shaders/book_of_shaders/dla_visual.gdshader"
+        ],
+        "tutorial_references": []
+      }
+    ],
+    "tutorial_guidance": "doc/book/course/storyboards/SHADERS.md",
+    "status": "Revised teaching proposal; not expanded lessons or implemented learner adapters"
+  },
+  {
+    "sequence": "cellularautomata",
+    "arc": "PROPOSED. Give a local rule a stored present and a separate next state, then inspect history, neighbourhoods, graded values and bodily inputs. Follow the actual artifacts rather than the historical hall names: ElementaryRules contains a three-state volume, GameOfLife a one-dimensional history bridge, and BeyondBinary a binary Life dish. Recursion is previewed by comparison and taught in the following sequence.",
+    "halls": [
+      {
+        "id": "CA_Introduction",
+        "title": "Build the next row from the held row",
+        "storyboard": "At the held rule explorer, the student predicts the marked cell before pressing STEP and finds the same history overhead. Bringing lists, loops, conditions and Shaders' missing-memory question, they construct a row update that reads three old values, writes one next value, and swaps arrays only after every address is processed. The row display, controls and wrapped-ring receiver are supplied. They learn synchronous local updates and make the boundary rule explicit. The reusable result is a small cellular engine whose stored history can be displayed without confusing it with the current row.",
+        "storyboard_short": "Use held rule explorer and overhead history. Reuse lists, loops, conditions and Shaders' old/new-state contract. Teach reading three old values to write one next value; swap arrays after completing the row. Predict one cell; declare boundaries. Supply display, controls and wrapped-ring receiver. Carry synchronous engine with separate history. Open: choose readable rule table before bit encoding; rug symmetry is separate.",
+        "mode": "make",
+        "brings": [
+          "lists, loops and conditions",
+          "old and new state contract"
+        ],
+        "learns": [
+          "synchronous buffers",
+          "local neighbourhood rule"
+        ],
+        "carries": "A row update with explicit boundary handling",
+        "supplied": [
+          "row display",
+          "controls",
+          "wrapped-ring receiver"
+        ],
+        "artifact_refs": [
+          "ca_rule_explorer",
+          "persian_rug"
+        ],
+        "review_note": "Choose a readable rule table before using bit encoding; the rug's symmetry is a separate operation."
+      },
+      {
+        "id": "CA_ElementaryRules",
+        "title": "Give a cell a fading state",
+        "storyboard": "The small volume and enlarged twenty-seven-position neighbourhood reveal active, fading and empty cells. Bringing synchronous updates and multidimensional addresses, the student constructs a three-state transition function, then traces one actual neighbourhood through a supplied counter. An active cell can cease participating while its fading state remains visible. The volume renderer, enlarged witness and twenty-six-neighbour enumerator are supplied with their contracts. They leave able to separate a state's persistence from its displayed colour and to reuse a transition table, while recognizing that rendered, occupied and active counts can answer different questions.",
+        "storyboard_short": "Use active/fading/empty volume and enlarged neighbourhood. Reuse synchronous updates and multidimensional addresses. Teach three-state transition table; trace one count through the supplied twenty-six-neighbour enumerator. Supply renderer and witness. Carry state transitions separate from colour; inactive fading cells can remain visible, so rendered, occupied and active counts differ. Follow the installed 3D study despite its historical title.",
+        "mode": "make",
+        "brings": [
+          "synchronous updates",
+          "multidimensional addresses"
+        ],
+        "learns": [
+          "multistate transition rules"
+        ],
+        "carries": "A three-state rule separate from state presentation",
+        "supplied": [
+          "volume renderer",
+          "enlarged witness",
+          "neighbour enumerator"
+        ],
+        "artifact_refs": [
+          "structure_growth"
+        ],
+        "review_note": "The historical title is misleading; this hall currently owns a three-state 3D study, not another introductory elementary-row lesson."
+      },
+      {
+        "id": "CA_GameOfLife",
+        "title": "Turn recorded time into a structure",
+        "storyboard": "The desk, stepping tiles and ornamental screen receive one Rule 30 history. Bringing the row engine, copied snapshots and state-to-colour mapping, the student copies each completed row into a retained history, then constructs two receivers: one arranges generations across a flat drawing, the other passes occupied entries to a supplied piece placement interface. The desk, collision tiles and screen geometry are supplied. They gain a reusable history-to-space mapping and compare zero as no mark with zero as no support. Selecting an earlier row changes attention without rerunning the automaton or altering its stored past.",
+        "storyboard_short": "Use Rule 30 desk, stepping tiles and screen. Reuse row engine, copied snapshots and colour mapping. Teach retained history with flat-image and piece-placement receivers; select earlier rows without rerunning. Supply desk, collision tiles, screen and placement interface. Carry history-to-space mapping; zero may mean no mark or no support. Open: learner connection remains proposed; actual Life follows in CA_BeyondBinary.",
+        "mode": "make",
+        "brings": [
+          "row engine and copied snapshots",
+          "state-to-colour mapping"
+        ],
+        "learns": [
+          "history as spatial data"
+        ],
+        "carries": "A stored history with explicit spatial receivers",
+        "supplied": [
+          "desk display",
+          "collision tiles",
+          "screen geometry"
+        ],
+        "artifact_refs": [
+          "ca_bridge"
+        ],
+        "review_note": "The current primary is a one-dimensional Rule 30 history; actual Life follows in CA_BeyondBinary. The learner receiver connection is proposed."
+      },
+      {
+        "id": "CA_BeyondBinary",
+        "title": "Let a fixed address control another object",
+        "storyboard": "At the Life dish, a glider crosses fixed gold addresses while lamps answer their occupancy. Bringing arrays, neighbour rules and explicit receivers, the student implements the small birth-and-survival decision from a supplied eight-neighbour count, then connects one retained cell reference to a lamp through a declared output function. The dish, floor image and lamp objects are supplied. They learn to distinguish a moving pattern from moving cells and leave with a usable simulation-to-object connection. The floor remains solid when its colour is empty, and the lamp sends no feedback into Life.",
+        "storyboard_short": "Use binary Life dish, fixed gold addresses and lamps. Reuse arrays, neighbour rules and receivers. Teach birth/survival from a supplied count with eight addresses explained; connect one fixed cell reference to lamp output. Supply dish, floor image and lamps. Carry state-to-object connection; patterns move across fixed cells, empty colour leaves solid floor, and lamps provide no feedback.",
+        "mode": "make",
+        "brings": [
+          "arrays and neighbour rules",
+          "explicit receivers"
+        ],
+        "learns": [
+          "Life birth and survival",
+          "state-to-object output"
+        ],
+        "carries": "A local simulation state connected to a named object",
+        "supplied": [
+          "dish",
+          "floor image",
+          "lamp objects"
+        ],
+        "artifact_refs": [
+          "game_of_life_petri"
+        ],
+        "review_note": "This installed study remains binary despite the map ID; keep the count helper explicit and introduce its eight addresses."
+      },
+      {
+        "id": "CA_ExpandingSpace",
+        "title": "Make the observing body an input",
+        "storyboard": "The bridge loses health near a probe or visitor, and its wall frieze shows the same values. Bringing synchronous arrays, distance and explicit outputs, the student constructs a local input function that turns a supplied position into a bounded health change at nearby cells. A separate neighbour rule restores health before colour and support read it. The player-position interface, bridge renderer and collision thresholds are supplied. They gain an input-update-output pattern and compare shared-old-state updates with in-place changes, discovering why scan order can alter the result before declaring the system responsive.",
+        "storyboard_short": "Use decaying bridge and matching frieze; choose probe for repeatability. Reuse synchronous arrays, distances and outputs. Teach bounded health changes near supplied positions; separate neighbour recovery from colour/support receivers. Compare shared-old-state and in-place updates to expose scan order. Supply position interface, bridge renderer and collision thresholds. Carry body-to-field input; keep player tracking supplied.",
+        "mode": "make",
+        "brings": [
+          "synchronous arrays and distance",
+          "state-to-object outputs"
+        ],
+        "learns": [
+          "external spatial input",
+          "update-order consequences"
+        ],
+        "carries": "A bounded body-to-field input function",
+        "supplied": [
+          "player-position interface",
+          "bridge renderer",
+          "collision thresholds"
+        ],
+        "artifact_refs": [
+          "decaying_bridge"
+        ],
+        "review_note": "Use the probe for repeatable comparisons; no need to teach the entire player tracking system."
+      },
+      {
+        "id": "CA_SoftRules",
+        "title": "Exchange differences between neighbours",
+        "storyboard": "The matched concentration fields begin alike, but only one can pass its second substance across the seeded edge. Bringing graded state and synchronous buffers, the student constructs a small neighbour-difference sum and combines it with a supplied local reaction function. They track two concentration values at one witness before interpreting the resulting texture. The field displays, reaction function and one-time body-triggered seed are supplied. They learn how diffusion differs from counting occupied neighbours and carry a reusable two-field update, while the table and curved wall remain two receivers of the same state.",
+        "storyboard_short": "Use matched concentration fields. Reuse graded state and synchronous buffers. Teach neighbour-difference sums combined with supplied local reaction; track two concentrations at one witness before interpreting texture. Supply displays, Gray-Scott reaction and one-time body seed. Carry exchange separate from reaction; diffusion differs from occupied-neighbour counts. Table and curved wall share state. Defer reaction equations to Soft Bodies.",
+        "mode": "make",
+        "brings": [
+          "graded state",
+          "synchronous buffers"
+        ],
+        "learns": [
+          "diffusive exchange"
+        ],
+        "carries": "A two-field update with exchange separated from reaction",
+        "supplied": [
+          "field displays",
+          "reaction function",
+          "body-triggered seed"
+        ],
+        "artifact_refs": [
+          "rd_artifact",
+          "the_clockmaker_of_rules"
+        ],
+        "review_note": "Gray–Scott equations are supplied here and deepened in Soft Bodies; current artifacts supersede the sequence's older primary list."
+      },
+      {
+        "id": "CA_AgentsCircuits",
+        "title": "Compare resemblance with procedure",
+        "storyboard": "The Rule 90 history makes triangular gaps that resemble the nearby Sierpinski pyramid. Bringing the row engine and its stored history, the student creates two short procedural accounts: how one cell is calculated, and how the supplied pyramid copies smaller pieces. They vary the explorer's seed while keeping the pyramid fixed, recording which resemblances survive. The explorer, enlarged floor history and pyramid are supplied. No circuit or new syntax is required. They carry a precise question into Fractals: what is repeated, what information each step needs, and when a shared appearance conceals different work.",
+        "storyboard_short": "Use Rule 90 history and Sierpinski pyramid. Reuse row engine and retained history. Describe cell calculation versus copying smaller pieces; vary the row seed while holding the pyramid fixed. Supply explorer, enlarged floor history and pyramid. Carry procedural questions into Fractals without new syntax. Preserve resemblance as inquiry; Wireworld is an older proposal, not an installed circuit.",
+        "mode": "reflect",
+        "brings": [
+          "row engine",
+          "stored history"
+        ],
+        "learns": [
+          "procedure versus resemblance"
+        ],
+        "carries": "Two distinct accounts of a similar pattern",
+        "supplied": [
+          "explorer",
+          "floor history",
+          "pyramid"
+        ],
+        "artifact_refs": [
+          "ca_rule_explorer",
+          "sierpinski_pyramid"
+        ],
+        "review_note": "Wireworld exists only as an older proposal here; do not teach an installed circuit that the current hall does not contain."
+      },
+      {
+        "id": "CA_EdgeOfChaos",
+        "title": "Follow one deliberate difference",
+        "storyboard": "The two volumes begin with a single altered address, which a selected slice can reveal or hide. Bringing multidimensional arrays, synchronous updates and matched comparisons, the student makes a paired-state experiment: copy a beginning, change one value, run the same update, and record both the largest difference and how many sites differ. The volume solver, slice displays and body-selected depth interface are supplied. They leave with a reusable perturbation study that distinguishes spread from magnitude. Integer storage and display gain become inspectable choices, without promoting an attractive image into proof of a universal critical point.",
+        "storyboard_short": "Use paired volumes and selected slices. Reuse arrays, synchronous updates and matched comparisons. Teach copied beginnings with one altered value; run identical updates and forcing schedules, recording maximum difference and differing-site count. Supply solver, slices and body-selected depth. Carry magnitude versus spread; inspect integer storage and display gain. Claim no universal critical threshold from the image.",
+        "mode": "deepen",
+        "brings": [
+          "multidimensional arrays and updates",
+          "matched comparisons"
+        ],
+        "learns": [
+          "perturbation measurement"
+        ],
+        "carries": "A paired experiment with separate extent and magnitude records",
+        "supplied": [
+          "volume solver",
+          "slice displays",
+          "body-selected depth"
+        ],
+        "artifact_refs": [
+          "self_organization_ca"
+        ],
+        "review_note": "The teaching comparison must use the same forcing schedule on both copies; no universal edge-of-chaos threshold is claimed."
+      }
+    ]
+  },
+  {
+    "sequence": "fractals",
+    "arc": "PROPOSED. Functions and loops already belong to the learner; self-calls and their stopping conditions are new. Develop repeated construction through branches, retained intervals, replacement segments and subdivided volumes. Use finite budgets honestly, then distinguish numerical recurrence from the geometry used to display it. The closing comparison prepares symbolic rewriting without pretending every recursive-looking artifact uses recursion.",
+    "halls": [
+      {
+        "id": "Fractal_Recursion",
+        "title": "Let a function ask for a smaller task",
+        "storyboard": "At the nested-square desk and its floor-standing doorframes, the student asks for another term and encounters two different limits: depth and size. Bringing functions, scale and geometric construction, they write a small function that creates one square, then calls itself with reduced size and remaining depth. The line renderer, layout comparison and doorframe receiver are supplied. They can trace when each call stops and compare one descendant with several. The reusable outcome is bounded recursion, with its work budget distinguished from what an eye can resolve or a body can pass through.",
+        "storyboard_short": "Use nested-square desk and doorframes. Reuse functions, scale and geometry. Teach self-calls reducing size and remaining depth; trace base cases and compare one descendant with several. Supply lines, layout comparison and doorframe receiver. Carry bounded recursion; distinguish work budget, visual resolution and bodily clearance. Keep the actual square rule; branching rings may form a separate lesson.",
+        "mode": "make",
+        "brings": [
+          "functions and scale",
+          "geometric construction"
+        ],
+        "learns": [
+          "self-calls",
+          "base cases and budgets"
+        ],
+        "carries": "A bounded recursive constructor",
+        "supplied": [
+          "line renderer",
+          "layout comparison",
+          "doorframe receiver"
+        ],
+        "artifact_refs": [
+          "fractal_recursion_2",
+          "example_8_3_recursion_circles_vr"
+        ],
+        "review_note": "Use the actual nested-square rule rather than an unrelated factorial example; branching rings can be a second short lesson."
+      },
+      {
+        "id": "Fractal_RecursiveTrees",
+        "title": "Pass a branch its starting state",
+        "storyboard": "The unfinished trunk gains children at its endpoint, and the enlarged canopy gives those connections bodily scale. Bringing bounded recursion, vectors and rotations, the student constructs a branch record with position, direction and length, then uses it to generate two child segments. The segment renderer, generation controls and canopy collision are supplied. They can change inherited length without changing branch count, or change descendants without merely widening the silhouette. They carry a reusable branching constructor, while comparing its recursive description with the installed tree's generation queue and keeping biological growth claims outside the rule.",
+        "storyboard_short": "Use unfinished trunk and enlarged canopy. Reuse bounded recursion, vectors and rotations. Teach branch records with position, direction and length; generate two children and vary inherited length separately from count. Supply segments, generation controls and collision. Carry explicit parent/child construction. Mark the recursive teaching version as proposed comparison: the installed tree uses a generation queue, without biological growth claims.",
+        "mode": "make",
+        "brings": [
+          "bounded recursion",
+          "vectors and rotations"
+        ],
+        "learns": [
+          "inherited branch state"
+        ],
+        "carries": "A branching constructor with explicit parent and child records",
+        "supplied": [
+          "segment renderer",
+          "generation controls",
+          "canopy collision"
+        ],
+        "artifact_refs": [
+          "recursive_tree_2",
+          "recursive_tree"
+        ],
+        "review_note": "The installed growing tree evaluates a generation queue; label the recursive teaching version as a proposed comparison, not its exact implementation."
+      },
+      {
+        "id": "Fractal_CantorSet",
+        "title": "Keep intervals while removing their middles",
+        "storyboard": "At the stepped Cantor bars, the student sees more pieces but less retained length; the pagoda gives the gaps depth. Bringing lists, interval endpoints and bounded repetition, they construct the next interval list by keeping the first and last thirds of every current interval. They store the old rows separately so hiding history cannot remove more of the current set. The bar renderer, counters and collidable pagoda are supplied. The reusable outcome is a replacement operation with an explicit complement, and a finite construction that remains distinct from its mathematical limit.",
+        "storyboard_short": "Use stepped bars and pagoda. Reuse lists, endpoints and bounded repetition. Teach retaining first and last thirds into a new interval list; keep history separate. Compare increasing piece count with decreasing retained length. Supply bars, counters and collision. Carry finite replacement and complement; hiding old rows leaves the current set unchanged. Distinguish construction from limit. Open: endpoint pairs or centre/length records.",
+        "mode": "make",
+        "brings": [
+          "lists and endpoints",
+          "bounded repetition"
+        ],
+        "learns": [
+          "interval replacement",
+          "state versus history"
+        ],
+        "carries": "A finite interval generator and separate history",
+        "supplied": [
+          "bar renderer",
+          "counters",
+          "collidable pagoda"
+        ],
+        "artifact_refs": [
+          "cantor_set",
+          "example_8_4_cantor_pagoda_vr"
+        ],
+        "review_note": "Choose whether endpoint pairs or centre-and-length records give the clearest continuity with earlier geometry."
+      },
+      {
+        "id": "Fractal_KochSierpinski",
+        "title": "Replace a segment with a detour",
+        "storyboard": "At the Koch desk, fixed endpoints enclose an increasingly long route; the Sierpinski study removes centres from faces. Bringing vector geometry, triangle corners and separate next lists, the student constructs one Koch replacement from a segment's endpoints, then applies it to every retained segment. The line renderer, step controls and comparison triangle are supplied. They measure endpoint distance separately from path length and carry a reusable geometry-replacement function. Sierpinski provides a second reading of replacement through midpoint faces; box-counting remains an optional measurement study rather than a prerequisite for making the curve.",
+        "storyboard_short": "Use Koch desk and Sierpinski comparison. Reuse vectors, triangle corners and separate next lists. Teach equilateral segment replacement across retained segments; measure endpoint distance separately from route length. Supply lines, steps and comparison triangle. Carry segment-to-segments transformation; inspect midpoint-face replacement separately. Defer optional box counting. Keep this rule distinct from the later five-segment right-angle L-system preset.",
+        "mode": "make",
+        "brings": [
+          "vector and triangle geometry",
+          "separate next lists"
+        ],
+        "learns": [
+          "geometric replacement"
+        ],
+        "carries": "A segment-to-segments transformation",
+        "supplied": [
+          "line renderer",
+          "step controls",
+          "comparison triangle"
+        ],
+        "artifact_refs": [
+          "fractal_koch_curve",
+          "sierpinski_triangle",
+          "box_counting_dimension"
+        ],
+        "review_note": "Keep the equilateral Koch rule distinct from the later L-system editor's five-segment right-angle preset."
+      },
+      {
+        "id": "Fractal_MengerSponge",
+        "title": "Make removal create a passage",
+        "storyboard": "The nine-metre cube first offers no entrance, then reveals intersecting openings. Bringing three-dimensional addresses, scale and recursive replacement, the student writes a selection rule over a three-by-three-by-three block that retains twenty cells, then repeats it for a bounded number of levels. The block renderer, collision bodies and flight enclosure are supplied. They keep the original bounds while computing the changing retained volume and inspect the removed cells as another subject. The reusable outcome is a volume-subdivision rule whose connected holes still need testing against the size and abilities of a visitor.",
+        "storyboard_short": "Use the cube's opening passages. Reuse 3D addresses, scale and recursive replacement. Teach retaining twenty cells from a 3-by-3-by-3 block across bounded levels; compute retained volume within fixed bounds and inspect the complement. Supply blocks, collision and flight enclosure. Carry subdivision; test holes against visitor size/abilities. Preserve the existing restriction on rebuilding while occupied.",
+        "mode": "make",
+        "brings": [
+          "3D addresses and scale",
+          "recursive replacement"
+        ],
+        "learns": [
+          "volumetric selection"
+        ],
+        "carries": "A finite retained-cell recipe and its complement",
+        "supplied": [
+          "block renderer",
+          "collision bodies",
+          "flight enclosure"
+        ],
+        "artifact_refs": [
+          "menger_sponge"
+        ],
+        "review_note": "Keep geometry changes outside an occupied structure; the current desk already restricts rebuilding while visitors inhabit it."
+      },
+      {
+        "id": "Fractal_GoldenSpiral",
+        "title": "Separate a recurrence from its drawing",
+        "storyboard": "The numbered towers grow by adding the previous pair, yet their displayed heights do not initially preserve those sums. Bringing arrays, accumulation and value mappings, the student makes a finite Fibonacci record and renders it with two explicit height functions, then checks a fixed-unit addition witness. The tower display, logarithm function and rectangle-cutting study are supplied. They gain a reusable distinction between numerical recurrence and geometric representation. The neighbouring rectangle and circular arcs leave room to ask which further choices produce a spiral, without treating resemblance in natural forms as evidence of one universal recipe.",
+        "storyboard_short": "Use numbered towers, addition witness and rectangle study. Reuse arrays, accumulation and mappings. Teach finite Fibonacci recurrence with two height mappings; compare displayed heights against fixed-unit sums. Supply tower display, logarithm input/output and rectangle construction. Carry numbers separate from representation. Ask what further choices create spiral arcs; claim no universal natural recipe. Defer optional logarithm derivation.",
+        "mode": "make",
+        "brings": [
+          "arrays and accumulation",
+          "value mappings"
+        ],
+        "learns": [
+          "two-term recurrence",
+          "representation choice"
+        ],
+        "carries": "A numerical record with interchangeable mappings",
+        "supplied": [
+          "tower display",
+          "logarithm function",
+          "rectangle study"
+        ],
+        "artifact_refs": [
+          "fibonacci_sequences",
+          "golden_rectangle"
+        ],
+        "review_note": "Do not introduce logarithms silently: supply their input-output mapping here, with a deeper derivation optional."
+      },
+      {
+        "id": "Fractal_Synthesis",
+        "title": "Describe what repeats without naming the form",
+        "storyboard": "At the Cantor desk and fixed block tree, the student explains one construction without using its title. They bring replacement functions, parent records and explicit stopping rules, then make a compact recipe stating the input, descendants, placement and budget. Another student, or their own later reading, should be able to predict the next step from that account. The interval display, tree and history controls are supplied. No new syntax is needed. They carry a precise description of repeated work into L-systems, while separating a change to the construction from merely hiding its record.",
+        "storyboard_short": "Use Cantor desk and fixed block tree. Reuse replacement functions, parent records and stopping rules. Describe input, descendants, placement and budget without naming the form; predict the next step. Supply intervals, tree and history controls. Carry a precise recipe into L-systems; hiding records differs from changing construction. Require no new syntax. Defer editable cross-procedure comparison as future work.",
+        "mode": "reflect",
+        "brings": [
+          "replacement functions",
+          "parent records and stopping rules"
+        ],
+        "learns": [
+          "explicit procedural description"
+        ],
+        "carries": "A recipe precise enough to predict one next step",
+        "supplied": [
+          "interval display",
+          "fixed tree",
+          "history controls"
+        ],
+        "artifact_refs": [
+          "cantor_set",
+          "recursive_tree"
+        ],
+        "review_note": "An editable cross-procedure comparison is future work; the current hall supports describing and reading existing constructions."
+      }
+    ]
+  },
+  {
+    "sequence": "lsystems",
+    "arc": "PROPOSED. Move from replacing geometry to rewriting symbols, then separate the sentence from the interpreter that gives it a body. Introduce an explicit stack for branching, develop footprints and conditional growth, and inspect the limits of parameter and shape vocabularies. Preserve the existing specimens; editable learner recipes and their transfer between the editor, turtle and construction studies remain proposed connections.",
+    "halls": [
+      {
+        "id": "LSystems_Grammar_Lab",
+        "title": "Write a sentence before drawing it",
+        "storyboard": "The editor holds one drawing while the live version reads the same symbols with another turn angle. Bringing lists, traversal and geometric replacement, the student constructs one rewriting pass that reads an old string and appends each replacement to a new string. A supplied turtle interpreter draws the result, with its command meanings stated. The editor display and held witness are supplied. They can change a production separately from its interpretation and carry a usable symbolic generator, including the possibility that an undrawn symbol still participates in later rewriting.",
+        "storyboard_short": "Use held/live editor drawings. Reuse lists, traversal and geometric replacement. Teach one rewriting pass from old string to new; vary production separately from turn angle. Supply turtle with stated commands, display and witness. Carry symbolic generator and interpreter contract; undrawn symbols may rewrite later. Open: visitor-authored productions are not exposed; the learner-editable connection remains proposed.",
+        "mode": "make",
+        "brings": [
+          "lists and traversal",
+          "geometric replacement"
+        ],
+        "learns": [
+          "symbolic rewriting"
+        ],
+        "carries": "A production rule and a separate interpreter contract",
+        "supplied": [
+          "turtle interpreter",
+          "editor display",
+          "held witness"
+        ],
+        "artifact_refs": [
+          "lsystem_editor"
+        ],
+        "review_note": "Visitor-authored productions are not currently exposed; the learner-editable rule connection must be implemented after approval."
+      },
+      {
+        "id": "LSystems_Growth",
+        "title": "Save a state and return to it",
+        "storyboard": "The parametric tree steps through a bracket without drawing, then returns to an earlier position and length. Bringing rewriting, directions and copied snapshots, the student constructs a stack of turtle states: push saves a copy of position, orientation and length; pop restores it. Command dispatch for drawing and turning remains supplied, alongside the sentence and rendered stepping witness. They attach their save-and-restore functions to the bracket commands, gaining reusable branching state without rebuilding the whole interpreter. Branch nesting differs from rewriting generation, and returning restores only what the saved record contains.",
+        "storyboard_short": "Use parametric tree's bracket steps. Reuse rewriting, directions and copied snapshots. Teach a stack: push copies position, orientation and length; pop restores them. Supply sentence, stepping witness and ordinary draw/turn dispatch. Carry explicit branching state; nesting differs from rewriting generations, and restoration covers only saved fields. Open: learner bracket handlers' connection to the interpreter remains proposed.",
+        "mode": "make",
+        "brings": [
+          "rewriting and directions",
+          "copied snapshots"
+        ],
+        "learns": [
+          "stack push and pop",
+          "saved state"
+        ],
+        "carries": "A turtle stack with an explicit state record",
+        "supplied": [
+          "draw/turn command dispatch",
+          "sentence",
+          "rendered stepping witness"
+        ],
+        "artifact_refs": [
+          "parametric_lsystem"
+        ],
+        "review_note": "Keep ordinary command dispatch supplied. The learner owns bracket handlers and copied state records; their connection to the existing interpreter is proposed."
+      },
+      {
+        "id": "LSystems_Grammars_And_Curves",
+        "title": "Change what forward means",
+        "storyboard": "The believing turtle keeps its gold heading while a blue reader draws sideways. Bringing the saved-state interpreter and transformations, the student writes a small interpretation function that converts the stored heading into a displacement, then compares direct and reflected readings of one sentence. The synchronized readers, arrow witnesses and tube-painting receiver are supplied. They gain a reusable interpreter variation while measuring what remains unchanged in segment lengths and connections. Turning the resulting trace into a tube can remain a later application; the unusual silhouette alone does not create different branch connectivity.",
+        "storyboard_short": "Use gold-heading turtle and sideways blue reader. Reuse saved state and transforms. Teach replaceable heading-to-displacement interpretation; compare direct/reflected readings of one sentence and check segment lengths/connectivity. Supply synchronized readers, arrows and tube receiver. Carry interpreter variation; changed silhouette need not change branching. Open: transferring learner trace into tube_painting is proposed; current controls change ring sides on supplied geometry.",
+        "mode": "make",
+        "brings": [
+          "saved-state interpreter",
+          "transformations"
+        ],
+        "learns": [
+          "instruction versus interpreted displacement"
+        ],
+        "carries": "A replaceable heading-to-displacement function",
+        "supplied": [
+          "synchronized readers",
+          "arrow witnesses",
+          "tube-painting receiver"
+        ],
+        "artifact_refs": [
+          "the_believing_turtle",
+          "tube_painting"
+        ],
+        "review_note": "Carrying the learner's trace into tube_painting is proposed; its installed lesson currently changes the ring side count on supplied geometry."
+      },
+      {
+        "id": "LSystems_Architecture",
+        "title": "Give a centreline a usable width",
+        "storyboard": "The dungeon begins as four pale centrelines, then BUILD raises a boundary a visitor can enter. Bringing turtle segments, offsets and collision distinctions, the student constructs a small footprint from a short orthogonal path, explicitly choosing corridor width and open ends. The wall builder, junction handling and collision assembly are supplied with their inputs stated. They can test whether a connected line becomes a usable passage for the prepared body. The reusable result is a path-to-footprint operation, while duplicate room records remain distinguishable from new physical rooms or meaningful uses.",
+        "storyboard_short": "Use dungeon centrelines and BUILD. Reuse turtle segments, offsets and collision distinctions. Teach an orthogonal path-to-footprint rule with stated width and open ends; test bodily passage. Supply wall builder, junction handling and collision with explicit inputs. Carry usable corridor footprints; duplicate room records need not create distinct rooms or uses. Defer arbitrary-angle joins and editable grammars.",
+        "mode": "make",
+        "brings": [
+          "turtle segments and offsets",
+          "collision distinctions"
+        ],
+        "learns": [
+          "centreline-to-footprint mapping"
+        ],
+        "carries": "A small corridor footprint with explicit openings",
+        "supplied": [
+          "wall builder",
+          "junction handling",
+          "collision assembly"
+        ],
+        "artifact_refs": [
+          "lsystem_dungeon"
+        ],
+        "review_note": "Keep the first construction orthogonal; arbitrary-angle joining and new editable grammars are future work."
+      },
+      {
+        "id": "LSystems_Competition",
+        "title": "Let a shared resource condition a rule",
+        "storyboard": "The amber and blue stems share a grammar, but reversing their first turns reverses the initial advantage. Bringing state updates, rewriting and stored resources, the student makes a small scheduling experiment in which two growth requests consult and consume the same resource record. The forest kernel, soil display and specimen renderer are supplied. They record the state before each request rather than explaining unequal results through different branch instructions. The reusable outcome is an explicit rule for conditional execution and turn order, with a possible shared-snapshot comparison marked as a new experiment.",
+        "storyboard_short": "Use amber/blue stems sharing one grammar. Reuse rewriting, updates and resources. Teach two requests consulting/consuming one mutable record; record state before each and reverse turn order. Supply forest kernel, soil display and specimens. Carry conditional execution and explicit schedule; unequal outcomes need not mean unequal instructions. Open: shared-snapshot comparison is a new experiment; claim no ecological equilibrium.",
+        "mode": "make",
+        "brings": [
+          "rewriting and state updates",
+          "stored resource values"
+        ],
+        "learns": [
+          "shared mutable state",
+          "execution schedule"
+        ],
+        "carries": "A visible schedule of requests and resource changes",
+        "supplied": [
+          "forest kernel",
+          "soil display",
+          "specimen renderer"
+        ],
+        "artifact_refs": [
+          "ForestCompetition"
+        ],
+        "review_note": "Do not claim ecological equilibrium; simultaneous shared-snapshot consumption is proposed, not an existing control."
+      },
+      {
+        "id": "LSystems_Living",
+        "title": "Map a design record into a body",
+        "storyboard": "Beside the held tree, several small Depth changes leave the branch plan unchanged before one crosses a rounding threshold. Bringing parameter records, rewriting and numeric mappings, the student constructs an explicit conversion from a short design record into bounded generation, angle and fork values, then retains the record used by a planted specimen. The tree builder, held witness and local planting interface are supplied. They leave with a reproducible design description and can identify requested changes with no address in it. The data's name, DNA, does not make the construction a biological simulation.",
+        "storyboard_short": "Use held tree's Depth rounding steps. Reuse parameter records, rewriting and mappings. Teach bounded generation, angle and fork conversion; retain the design record for a planted specimen. Supply builder, witness and local planting interface. Carry reproducible design with visible vocabulary limits; DNA naming does not establish biology. Open: distinguish local specimens from DNA export; cross-hall transport remains proposed.",
+        "mode": "make",
+        "brings": [
+          "parameter records and rewriting",
+          "numeric mappings"
+        ],
+        "learns": [
+          "bounded parameter interpretation"
+        ],
+        "carries": "A saved design record and its generated specimen",
+        "supplied": [
+          "tree builder",
+          "held witness",
+          "planting interface"
+        ],
+        "artifact_refs": [
+          "genetic_tree_sculptor"
+        ],
+        "review_note": "Keep local planted specimens distinct from DNA export; cross-hall transport of either requires a new connection."
+      },
+      {
+        "id": "LSystems_Shape_Grammars",
+        "title": "Choose which part an operation can address",
+        "storyboard": "The six cube specimens reveal how an old diagonal makes two triangles available to inset and extrude; the later strip canopy gives one face another scale. Bringing face lists, transformations and saved configurations, the student specifies a small operation sequence on selected face indices and predicts its resulting connections. The inset, extrusion and curved-strip builders are supplied with named inputs and outputs; the fixed specimens provide comparisons. They gain a reusable shape recipe, and can tell when a desired form needs a new operation rather than another amount on an existing control.",
+        "storyboard_short": "Use fixed cubes and strip canopy. Reuse face lists, transforms and saved configurations. Specify selected face indices and an inset/extrusion sequence; predict resulting connections and inspect the inherited diagonal. Supply builders with explicit inputs/outputs, including curved strips. Carry a shape recipe; some desired forms require new operations. Open: editable learner recipe and preview remain proposed.",
+        "mode": "deepen",
+        "brings": [
+          "face lists and transformations",
+          "saved configurations"
+        ],
+        "learns": [
+          "selection and operation vocabulary"
+        ],
+        "carries": "A shape recipe with explicit face selection",
+        "supplied": [
+          "inset builder",
+          "extrusion builder",
+          "curved-strip builder"
+        ],
+        "artifact_refs": [
+          "form_grammar_family",
+          "form_grammar_canopy"
+        ],
+        "review_note": "The museum specimens are fixed. An editable learner recipe and preview are proposed, not existing controls."
+      },
+      {
+        "id": "Assemblage_Same_Desire",
+        "title": "Give a retained choice another alphabet",
+        "storyboard": "The textile keeps the same 144 samples while diagonals become bars and then blocks. Bringing retained draws, thresholds and the separation of sentence from interpreter, the student constructs two mark dictionaries for one binary decision list and compares the paths they see in each rendering. The textile display, held witness and full-size floor receiver are supplied. They leave with a reusable separation of sample, decision and mark. This closes the sequence without requiring new syntax: a route perceived in an image need not have been requested, checked or made collidable by its generator.",
+        "storyboard_short": "Use textile's retained 144 samples. Reuse draws, thresholds and interpreter separation. Teach two mark dictionaries for one binary decision list; compare apparent paths as diagonals become bars or blocks. Supply textile, witness and floor receiver. Carry sample/decision/mark separation without new syntax; perceived routes need not be checked or collidable. Open: sharing the earlier generator's record remains proposed.",
+        "mode": "deepen",
+        "brings": [
+          "retained draws and thresholds",
+          "interpreter separation"
+        ],
+        "learns": [
+          "interchangeable mark alphabets"
+        ],
+        "carries": "One retained decision list with several interpretations",
+        "supplied": [
+          "textile display",
+          "held witness",
+          "floor receiver"
+        ],
+        "artifact_refs": [
+          "ten_print_textile"
+        ],
+        "review_note": "A mark dictionary can use the learner's earlier two-mark generator; sharing its actual record across halls is proposed."
+      }
+    ]
+  },
+  {
+    "sequence": "proceduralgeneration",
+    "arc": "PROPOSED. Combine the already learned generators into scored selection, directed growth, connectivity, carving and sampling. Teach each new operation through a short construction with named supplied machinery. Do not assume the optional graph-theory branch was completed: any local search, adjacency list or traversal needed here must be introduced briefly or supplied explicitly, with full graph treatment reserved for the later spine sequence.",
+    "halls": [
+      {
+        "id": "PG_Genetic_Evolution",
+        "title": "Make a criterion explicit before selecting",
+        "storyboard": "The six boxes keep their descriptions while TARGET changes which one leads. Bringing design records, lists and measurement, the student writes a small evaluator that turns a candidate description into a declared score, then ranks a retained population without rebuilding it. The primitive builder, displayed candidates and reproduction kernel are supplied. They learn that generation, representation and evaluation are separate operations and can inspect which features their criterion ignores. The reusable outcome is an explicit selection procedure, while the held numerical leader need not be the body the student personally wanted to keep.",
+        "storyboard_short": "Use six boxes under changing TARGET. Reuse design records, lists and measurement. Teach explicit candidate scoring and ranking without rebuilding the population; inspect ignored features and compare the leader with personal preference. Supply primitive builder, display and reproduction kernel. Carry generation/evaluation separation. Use the approximate estimator honestly; exact union volume and learner-selected witness retention are not installed.",
+        "mode": "make",
+        "brings": [
+          "design records and lists",
+          "measurement"
+        ],
+        "learns": [
+          "explicit evaluation and selection"
+        ],
+        "carries": "A declared candidate evaluator and ranked record",
+        "supplied": [
+          "primitive builder",
+          "candidate display",
+          "reproduction kernel"
+        ],
+        "artifact_refs": [
+          "GeneticProgramming"
+        ],
+        "review_note": "Use the current approximate estimator honestly; exact union volume and learner-selected witness retention are not installed capabilities."
+      },
+      {
+        "id": "PG_Space_Colonization",
+        "title": "Combine requests into a growth direction",
+        "storyboard": "Three attraction points ask the root to grow, and their sideways contributions cancel in its first proposed step. Bringing vector subtraction, normalization and branch records, the student constructs a direction accumulator from a supplied list of assigned points, then adds a fixed-length child segment. The attraction display, nearest-site assignment and segment renderer are supplied. They gain a reusable way to combine unit directions, while comparing which sites remain eligible to respond in later generations. These points are consulted coordinates, so the resulting growth should not be described as simulated forces or light-seeking biology.",
+        "storyboard_short": "Use three attraction points and cancelling sideways requests. Reuse vector operations and branch records. Teach summing assigned unit directions into a fixed-length child step; compare later site eligibility. Supply attraction display, nearest-site assignment and segment renderer. Carry a request-driven branch rule; consulted coordinates are not simulated forces or light-seeking biology. Defer nearest-site search to a separate follow-up.",
+        "mode": "make",
+        "brings": [
+          "vector operations",
+          "branch records"
+        ],
+        "learns": [
+          "direction accumulation",
+          "site eligibility"
+        ],
+        "carries": "A fixed-step branch rule driven by assigned requests",
+        "supplied": [
+          "attraction display",
+          "nearest-site assignment",
+          "segment renderer"
+        ],
+        "artifact_refs": [
+          "space_colonization_algorithm"
+        ],
+        "review_note": "Nearest-site assignment is supplied initially; its search can be a separate short follow-up."
+      },
+      {
+        "id": "PG_Branching_Growth",
+        "title": "Choose one request and keep its provenance",
+        "storyboard": "The branch leans towards its nearest attraction point instead of combining every invitation. Bringing the previous direction accumulator and distance comparisons, the student constructs a nearest-eligible-point search, retains the chosen point's index, and makes one fixed-length child step. The attraction layout, branch renderer and stepped clock are supplied. Recording both parent and target lets them explain coincident children before adding jitter or a pulsing length. They carry a reusable selection-and-growth operation, distinguishing the number of records from the number of distinct positions visible in the resulting structure.",
+        "storyboard_short": "Use nearest-attraction branching. Reuse direction accumulation and distance comparisons. Teach nearest-eligible search; retain parent and target index before making a fixed-length step. Supply attraction layout, renderer and stepped clock. Carry growth provenance; explain coincident children before jitter or pulsing, distinguishing record count from distinct positions. Open: shared attraction concepts exist, but transferring the learner's record remains proposed.",
+        "mode": "make",
+        "brings": [
+          "direction accumulation",
+          "distance comparisons"
+        ],
+        "learns": [
+          "nearest eligible search",
+          "record provenance"
+        ],
+        "carries": "A branch record naming its parent and selected target",
+        "supplied": [
+          "attraction layout",
+          "branch renderer",
+          "stepped clock"
+        ],
+        "artifact_refs": [
+          "branching_growth_algorithm"
+        ],
+        "review_note": "Shared attraction data across the two halls is conceptually established; transferring the learner's own record remains proposed."
+      },
+      {
+        "id": "PG_Percolation_Network",
+        "title": "Declare which contacts transmit",
+        "storyboard": "Two cubes touch at a face, then at a corner; only one arrangement passes flow in the study's rule. Bringing grid neighbours, occupancy and synchronous updates, the student constructs a six-neighbour transmission step for a small retained volume. They keep random occupancy generation separate from flow state so the same lattice can be tested from another source. The cube display, source fixture and stepping controls are supplied. They carry a reusable local propagation operation and understand that a visible contact, a permitted adjacency and a globally reachable path are different claims.",
+        "storyboard_short": "Use face-touching versus corner-touching cubes. Reuse grid neighbours, occupancy and synchronous updates. Teach six-neighbour transmission with flow state separate from random occupancy; retest the retained lattice from another source. Supply cube display, source and stepping. Carry local propagation; distinguish visible contact, permitted adjacency and global reachability. Infer no universal threshold from one finite seeded lattice.",
+        "mode": "make",
+        "brings": [
+          "grid neighbourhoods",
+          "occupancy and synchronous updates"
+        ],
+        "learns": [
+          "adjacency-defined transmission"
+        ],
+        "carries": "A propagation rule separate from the occupancy field",
+        "supplied": [
+          "cube display",
+          "source fixture",
+          "stepping controls"
+        ],
+        "artifact_refs": [
+          "percolationnetwork_ca"
+        ],
+        "review_note": "Do not infer a universal percolation threshold from one finite seeded lattice."
+      },
+      {
+        "id": "PG_Caves_Mazes",
+        "title": "Carve enough room around a route",
+        "storyboard": "The cave's gold dots identify carving centres, while the neighbouring maze reveals a different route-making procedure. Bringing the random walk, grid addresses and occupancy, the student makes a carving function that clears a stated footprint and headroom around each retained centre. The cave renderer, collision builder and maze backtracking demonstration are supplied. They can keep the same centres while changing clearance and inspect what the record omitted. The reusable outcome is a path-to-empty-volume operation; separate walkers' dots must not be joined into a fictitious continuous trail, and an opening still needs a bodily test.",
+        "storyboard_short": "Use cave carving dots and maze comparison. Reuse walks, grid addresses and occupancy. Teach clearing footprint and headroom around retained centres; vary clearance, then test bodily access. Supply cave renderer, collision builder and backtracking demonstration. Carry path-to-empty-volume construction; never join separate walkers' dots into a fictitious trail. Defer optional maze implementation; introduce visited record and stack if chosen.",
+        "mode": "make",
+        "brings": [
+          "random walk and grid addresses",
+          "occupancy"
+        ],
+        "learns": [
+          "carving footprints and headroom"
+        ],
+        "carries": "A clearance-aware carving operation",
+        "supplied": [
+          "cave renderer",
+          "collision builder",
+          "maze demonstration"
+        ],
+        "artifact_refs": [
+          "caverandomwalk",
+          "maze_generation"
+        ],
+        "review_note": "A full backtracking maze implementation is optional; if selected later, introduce its visited record and stack explicitly."
+      },
+      {
+        "id": "PG_Sculpted_Forms",
+        "title": "Make a surface from a chosen sample",
+        "storyboard": "Twelve falling cubes become a frozen centre record and then a blocky surface. Bringing coordinate frames, voxel addresses and mesh faces, the student makes a small sampler that converts body centres into the artifact's local frame, marks a declared neighbourhood, and submits exposed faces to a supplied mesh assembler. The falling bodies, sampling control and collision builder are supplied. They carry an event-to-surface pipeline whose omissions are visible: rotation and exact contact shapes were not recorded. The dome's cutting cores remain a comparison that prepares later Boolean work, rather than an unexplained prerequisite.",
+        "storyboard_short": "Use falling cubes becoming a frozen blocky surface. Reuse frames, voxel addresses and faces. Teach local-frame centre sampling, declared neighbourhood marking and exposed-face submission. Supply bodies, sampling control, mesh assembler and collision. Carry event-to-surface reconstruction with actual enlarged dimensions; rotation and contact shapes are omitted. Keep dome cuts as comparison; defer Boolean machinery.",
+        "mode": "make",
+        "brings": [
+          "coordinate frames and voxel addresses",
+          "mesh faces"
+        ],
+        "learns": [
+          "sampling an event into geometry"
+        ],
+        "carries": "A local-position sample with a declared reconstruction rule",
+        "supplied": [
+          "falling bodies",
+          "mesh assembler",
+          "collision builder"
+        ],
+        "artifact_refs": [
+          "cube_mound_scene",
+          "dome"
+        ],
+        "review_note": "The existing neighbourhood enlarges each cube substantially; teach its actual dimensions, not an exact reconstruction claim."
+      },
+      {
+        "id": "PG_Mirrored_Patterns",
+        "title": "Copy an image and inspect a connection",
+        "storyboard": "The held cellular field acquires symmetry while the neighbouring network changes its connection policy. Bringing array addresses, transformations and retained inputs, the student constructs a reflection operator that reads one region and writes a separate result, then checks centre rows and columns explicitly. The field display, network comparison and tunnel surfaces are supplied. They leave with a reusable copying operation and two distinct accounts of repetition: repeated values in an image and repeated access between sites. The network remains an observation model, and formal graph measures can wait for their later sequence.",
+        "storyboard_short": "Use mirrored cellular field and network comparison. Reuse array addresses, transforms and retained inputs. Teach reading one region into a separate reflected result; check centre rows/columns. Supply field, network, tunnel surfaces and graph statistics. Carry explicit reflection boundaries; repeated image values differ from repeated access. Network collision is disabled. Defer formal graph measures; do not claim traversability.",
+        "mode": "deepen",
+        "brings": [
+          "array addresses and transformations",
+          "retained inputs"
+        ],
+        "learns": [
+          "symmetry as an array operation"
+        ],
+        "carries": "A reflection operator with explicit boundary treatment",
+        "supplied": [
+          "field display",
+          "network comparison",
+          "tunnel surfaces"
+        ],
+        "artifact_refs": [
+          "mirror_cellular_texture_for_3d",
+          "rhizomatic_maze_space"
+        ],
+        "review_note": "Do not treat the current rhizomatic specimen as traversable; its collision is disabled. Supply graph statistics without assuming earlier graph coursework."
+      }
+    ]
+  },
+  {
+    "sequence": "softbodies",
+    "arc": "PROPOSED. Reuse mesh connectivity, forces, state and constraints to distinguish a deformable body from an animated surface. Give the learner small constructions around supplied solvers: a mesh attachment, a pin selection, a driven boundary, a measured response and a frozen snapshot. Return to Gray–Scott with reaction and exchange separated. Isosurface extraction and Boolean operations come later in the spine, so their machinery stays supplied here.",
+    "halls": [
+      {
+        "id": "SoftBodies_Soft_Body_Deformation",
+        "title": "Give a connected mesh to a solver",
+        "storyboard": "The pinned jelly cube yields while retaining its face connections. Bringing meshes, forces and physical bodies, the student connects a supplied subdivided mesh to a soft-body solver, retains the body reference and pins one selected point. They compare resistance, damping and pressure by following the same deformation rather than treating all three as softness. The mesh generator, Godot solver and hand-contact rig are supplied. They leave with a reusable deformable-body setup and a precise account of its attachment, while recognizing that a tracked hand can displace the skin without being pushed back itself.",
+        "storyboard_short": "Use pinned jelly cube. Reuse mesh connectivity, forces and bodies. Teach attaching supplied subdivided mesh to solver, retaining its reference and pinning one point; compare resistance, damping and pressure on one deformation. Supply mesh generator, solver and hand-contact rig. Carry explicit deformable attachment; tracked hands need not receive reaction. Open: choose understandable vertex selection, not an unexplained index.",
+        "mode": "make",
+        "brings": [
+          "mesh connectivity",
+          "forces and physical bodies"
+        ],
+        "learns": [
+          "soft-body setup",
+          "pinned point"
+        ],
+        "carries": "A connected deformable mesh with an explicit attachment",
+        "supplied": [
+          "subdivided mesh generator",
+          "Godot solver",
+          "hand-contact rig"
+        ],
+        "artifact_refs": [
+          "jelly_cube",
+          "softmill"
+        ],
+        "review_note": "Choose a reliable point-selection interface; do not bury mesh vertex selection behind an unexplained index."
+      },
+      {
+        "id": "SoftBodies_Cloth_Physics",
+        "title": "Choose the boundary that must stay",
+        "storyboard": "The hanging strips remain suspended when their gantry disappears, exposing a pin rule independent of visible support. Bringing mesh coordinates, conditions and the soft-body setup, the student constructs a vertex-selection function for an upper edge, then another for its corners, and applies the selected pins to a supplied open sheet. The cloth mesh, solver and support display are supplied. They gain a reusable boundary-condition recipe and can explain why an open surface has no enclosed volume to inflate. The tension membrane extends the comparison to a load acting between retained anchors.",
+        "storyboard_short": "Use hanging strips and tension membrane. Reuse coordinates, conditions and soft-body setup. Teach vertex-selection functions for upper edge versus corners on a supplied open sheet. Supply cloth, solver and support display; use known generated coordinates. Carry boundary-condition recipe; disappearing gantry does not remove pins, and an open surface encloses no inflatable volume. Compare loads between retained anchors.",
+        "mode": "make",
+        "brings": [
+          "mesh coordinates and conditions",
+          "soft-body setup"
+        ],
+        "learns": [
+          "pin selection as boundary condition"
+        ],
+        "carries": "A named vertex-selection rule for attachments",
+        "supplied": [
+          "cloth mesh",
+          "solver",
+          "support display"
+        ],
+        "artifact_refs": [
+          "cloth_straps",
+          "tension_membrane"
+        ],
+        "review_note": "The learner's reduced sheet should use known generated coordinates; keep decorative gantry changes separate from actual attachment."
+      },
+      {
+        "id": "SoftBodies_Carusell",
+        "title": "Drive an attachment while matter responds",
+        "storyboard": "At the revolving ride, the support stops commanding new angles while the hanging bodies continue moving. Bringing rotations, time steps and pinned or jointed constraints, the student writes a small driven-anchor rule with a rate in radians per second, then supplies that anchor to an existing hanging-body assembly. The hub, hinge connections and soft-body solver are supplied. They can stop or reverse the driver while retaining the body's state, gaining a reusable distinction between prescribed motion and simulated response. The attachment's one-way authority remains explicit: the hanging body cannot change the commanded hub rotation.",
+        "storyboard_short": "Use revolving ride. Reuse rotations, time steps and constraints. Teach an anchor driver in radians per second; stop or reverse it while retaining hanging-body state. Supply hub, hinges and solver. Carry prescribed motion versus simulated response; bodies cannot alter commanded hub rotation. Open: the reduced anchor connection remains proposed, with one-way authority explicit.",
+        "mode": "make",
+        "brings": [
+          "rotation and time steps",
+          "constraints"
+        ],
+        "learns": [
+          "driven boundary versus response"
+        ],
+        "carries": "A time-based anchor driver with persistent downstream state",
+        "supplied": [
+          "hub",
+          "hinge connections",
+          "soft-body solver"
+        ],
+        "artifact_refs": [
+          "revolving_joy_ride"
+        ],
+        "review_note": "The reduced anchor connection is proposed; do not imply the driven hub receives reaction forces from the hanging bodies."
+      },
+      {
+        "id": "SoftBodies_Obsticals",
+        "title": "Use a wave as a force input",
+        "storyboard": "The breathing room's wall edges stay fixed while their centres respond to periodic pressure. Bringing sine, scalar receivers and pinned boundaries, the student constructs a pressure-driver function and connects its output to a supplied deformable panel. They hold the driver phase and observe that the solver can still settle under the retained pressure. The wall mesh, soft-body solver and museum support are supplied. They carry a reusable signal-to-force connection, distinguish it from directly displacing vertices, and test how a changing enclosure affects the clearance available to the prepared body.",
+        "storyboard_short": "Use breathing room's fixed wall edges. Reuse sine, scalar receivers and pinned boundaries. Teach a bounded panel's pressure driver; hold phase while the solver settles, then inspect bodily clearance. Supply wall mesh, solver and support. Carry signal-to-force input separate from solver state and direct vertex displacement. Open: connecting the learner's driver to both full walls needs an adapter.",
+        "mode": "make",
+        "brings": [
+          "sine and scalar receivers",
+          "pinned boundaries"
+        ],
+        "learns": [
+          "signal-driven physical input"
+        ],
+        "carries": "A pressure driver separate from solver state",
+        "supplied": [
+          "wall mesh",
+          "soft-body solver",
+          "museum support"
+        ],
+        "artifact_refs": [
+          "breathing_room"
+        ],
+        "review_note": "Keep the first teaching panel bounded and inspectable; extending the learner's driver to both full walls needs an explicit adapter."
+      },
+      {
+        "id": "SoftBodies_Obsticals_Part2",
+        "title": "Construct a comparison that earns its name",
+        "storyboard": "The twelve falling-body cells vary material, shape and contact in different combinations. Bringing solver settings, collision geometry and repeatable setup recipes, the student assembles a two-case comparison description that names every shared condition and one intended difference, using the High Drag case as an existing example. The gallery bodies, reset controls and physical solver are supplied. They record an observable consequence such as settling duration instead of relying on the case name. The reusable outcome is a controlled experiment recipe, with a seeded construction distinguished from a guarantee of identical physics across machines.",
+        "storyboard_short": "Use twelve falling-body cells and High Drag example. Reuse settings, collision geometry and repeatable setups. Teach a two-case comparison naming shared conditions and one changed factor; record a concrete consequence. Supply bodies, reset, solver and measurement support. Carry controlled experiment record; seeded construction does not guarantee identical cross-machine physics. Open: choose observable and supplied recorder.",
+        "mode": "deepen",
+        "brings": [
+          "solver settings",
+          "collision geometry and setup recipes"
+        ],
+        "learns": [
+          "controlled physical comparison"
+        ],
+        "carries": "A comparison record with shared and changed conditions",
+        "supplied": [
+          "gallery bodies",
+          "reset controls",
+          "physical solver"
+        ],
+        "artifact_refs": [
+          "softbody_gallery_part2"
+        ],
+        "review_note": "Choose a concrete observable and a supplied way to record it; avoid making measurement infrastructure the lesson."
+      },
+      {
+        "id": "SoftBodies_Playground_of_Joy",
+        "title": "Keep a result and name what was measured",
+        "storyboard": "The rounded body's volume display can feed back into pressure, while the glass vessel freezes a solver after a chosen step budget. Bringing retained positions, measurements and physical state, the student makes a snapshot operation that copies a supplied solver's current vertices into a static mesh while preserving face connections. The solver, vertex-reading interface and mesh assembler are supplied. They leave with a reusable process-to-sculpture operation and compare its loss of motion with the live instrument's bounding-box proxy. Freezing a closed surface does not cut the opening its vessel-like appearance may suggest.",
+        "storyboard_short": "Use volume-feedback body and frozen glass vessel. Reuse retained positions, faces and physical measurements. Teach copying current solver vertices into a static mesh with unchanged connectivity. Supply custom vessel solver's readable positions and mesh assembler; do not assume identical Godot access. Carry snapshot and conditions; compare lost motion with bounding-box volume proxy. Freezing closed geometry creates no opening.",
+        "mode": "make",
+        "brings": [
+          "retained positions and mesh faces",
+          "physical state and measurement"
+        ],
+        "learns": [
+          "simulation snapshot"
+        ],
+        "carries": "A frozen mesh with its simulation conditions recorded",
+        "supplied": [
+          "solver",
+          "vertex-reading interface",
+          "mesh assembler"
+        ],
+        "artifact_refs": [
+          "rounded_softbody_test",
+          "frozen_glass_vessel"
+        ],
+        "review_note": "Select the custom vessel solver's readable positions; do not assume Godot's soft-body vertices expose the identical interface."
+      },
+      {
+        "id": "SoftBodies_Affect_Theory_Visualization",
+        "title": "Keep recognition beside the recipe",
+        "storyboard": "The radiolaria row suggests shells, pollen and organisms before its six construction recipes are explained. Bringing primitives, seeded populations and shader effects, the student chooses two forms and makes an account of which cues produce that recognition, then tests one cue while retaining the construction seed. The geometric families, rotation controls and particle effects are supplied. No new syntax is required. They carry a more deliberate vocabulary for composing apparent life, while keeping a body's resemblance, its available interaction and the mechanism generating it as separate questions that may remain artistically unresolved.",
+        "storyboard_short": "Use radiolaria row. Reuse primitives, seeded populations and effects. Compare two forms' recognition cues; vary one while retaining the construction seed. Supply geometric families, rotation and particles. Carry deliberate apparent-life composition without new syntax; resemblance, interaction and mechanism remain separate, potentially unresolved questions. COLOUR rebuilds geometry, so pin a seed before treating it as palette-only.",
+        "mode": "reflect",
+        "brings": [
+          "primitive construction",
+          "seeded populations and effects"
+        ],
+        "learns": [
+          "appearance versus mechanism"
+        ],
+        "carries": "A deliberate account of the cues used in a form",
+        "supplied": [
+          "geometric families",
+          "rotation controls",
+          "particle effects"
+        ],
+        "artifact_refs": [
+          "radiolaria"
+        ],
+        "review_note": "COLOUR rebuilds geometry in this artifact; pin a seed before using it as a palette-only comparison."
+      },
+      {
+        "id": "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "title": "Separate reaction from exchange",
+        "storyboard": "A seeded patch changes across the held concentration grid, returning to the exchange study from Cellular Automata. Bringing two-field buffers, neighbour differences and small time steps, the student now constructs the local Gray–Scott reaction, feed and removal terms, then combines them with the known diffusion operation. The grid display, bounded stepping controls and initial field are supplied. They can hold one beginning while comparing update rules, or hold a rule while changing its seed pattern. The reusable outcome is a complete small field simulation, without claiming these are Turing's original equations or a biological organism.",
+        "storyboard_short": "Use held concentration grid. Reuse CA_SoftRules' two-field buffers, neighbour differences and time steps. Teach Gray-Scott reaction, feed and removal terms; combine with known diffusion. Supply display, stable stepping and initial field. Compare one beginning across rules or one rule across seeds. Carry complete update with separate contributions. Defer numerical limits; claim neither Turing's original equations nor an organism.",
+        "mode": "make",
+        "brings": [
+          "two-field buffers",
+          "neighbour differences and time steps"
+        ],
+        "learns": [
+          "local reaction, feed and removal"
+        ],
+        "carries": "A complete two-concentration update with separated contributions",
+        "supplied": [
+          "grid display",
+          "stepping controls",
+          "initial field"
+        ],
+        "artifact_refs": [
+          "turing_pattern_generator",
+          "reaction_diffusion"
+        ],
+        "review_note": "CA_SoftRules supplies the reaction function first; this hall opens it. Use supplied stable step settings before exploring numerical limits."
+      },
+      {
+        "id": "Topology_Entropy_Morphogenesis",
+        "title": "Expose the choices behind one gesture",
+        "storyboard": "The folded field surface changes several ways when S moves, while NOISE, LEVEL and RESOLUTION reveal separate interventions. Bringing sine fields, thresholds and composed mappings, the student makes an explicit control function that returns named frequency, noise and cut-level values instead of an unexplained master amount. The sampled-field generator, surface extractor and collision builder are supplied. They can compare one bundled gesture with independent choices and carry a reusable, inspectable control recipe. The source name entropy is not a measured distribution, and a visible opening remains a question of geometry and bodily clearance.",
+        "storyboard_short": "Use folded field with S, NOISE, LEVEL and RESOLUTION. Reuse sine fields, thresholds and mappings. Teach explicit control returning named frequency, noise and cut-level values; compare bundled gesture with independent choices. Supply field generator, surface extractor and collision. Carry inspectable controls; entropy is a source name, not a measurement, and openings need clearance tests. Defer extraction to Isosurfaces.",
+        "mode": "deepen",
+        "brings": [
+          "sine fields and thresholds",
+          "composed mappings"
+        ],
+        "learns": [
+          "explicit compound controls"
+        ],
+        "carries": "A control recipe whose component choices remain visible",
+        "supplied": [
+          "field generator",
+          "surface extractor",
+          "collision builder"
+        ],
+        "artifact_refs": [
+          "entropy_morphogenesis"
+        ],
+        "review_note": "Surface extraction is supplied here because Isosurfaces follows at order 18; do not assume marching cubes was already taught."
+      }
+    ]
+  }
+]

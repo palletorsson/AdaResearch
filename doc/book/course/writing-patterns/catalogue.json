@@ -1,0 +1,1293 @@
+{
+  "schema": 1,
+  "patterns": [
+    {
+      "id": "build-vary",
+      "title": "Build, understand, vary",
+      "role": "tutorial",
+      "origin": "Ada proposal · Pattern A",
+      "description": "Carry a familiar object into one new capacity. Give the student a reason, an explanation, a construction and a variation.",
+      "caution": "Keep the exact inherited files available. A passing program does not prove that the student understands it.",
+      "sources": [
+        {
+          "title": "Ada writing patterns and prose samples",
+          "url": "/book-review/doc/book/course/writing-patterns/PATTERNS.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Notice a difference",
+          "attitude": "Inviting",
+          "information": "One observable change in the carried object.",
+          "job": "Give the construction a purpose.",
+          "instruction": "Describe a difference the student can see in the current hall.",
+          "gain": "A reason to investigate this operation.",
+          "bridge": "What would have to change in our existing object?",
+          "words": 55,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "Recall the inheritance",
+          "attitude": "Patient",
+          "information": "The previous lesson, its object and usable code.",
+          "job": "Establish the starting state.",
+          "instruction": "Name the exact inherited file and what the student already knows; link rather than reprint.",
+          "gain": "A clear boundary between inherited and new work.",
+          "bridge": "Which part of that inheritance cannot yet do this?",
+          "words": 65,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Define the new part",
+          "attitude": "Exact",
+          "information": "The new concept and the conditions it needs.",
+          "job": "Supply an explanation before use.",
+          "instruction": "Define the operation, then name what it does to the carried data.",
+          "gain": "A usable account of the mechanism.",
+          "bridge": "What happens to a small concrete input?",
+          "words": 120,
+          "dependsOn": [
+            "n2"
+          ],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Trace a case",
+          "attitude": "Patient",
+          "information": "A small input, intermediate state and result.",
+          "job": "Make the operation followable.",
+          "instruction": "Follow the data step by step; let the student predict the last step.",
+          "gain": "A mental model for reading the code.",
+          "bridge": "Where will these steps appear in the program?",
+          "words": 120,
+          "dependsOn": [
+            "n3"
+          ],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Build and run",
+          "attitude": "Practical",
+          "information": "Complete new code, setup and execution.",
+          "job": "Turn the explanation into a working object.",
+          "instruction": "Introduce the code event, supply complete new code, then point out the important lines.",
+          "gain": "A reconstructable example with named dependencies.",
+          "bridge": "Does its behaviour match the trace?",
+          "words": 150,
+          "dependsOn": [
+            "n2",
+            "n3",
+            "n4"
+          ],
+          "event": "code"
+        },
+        {
+          "id": "n6",
+          "label": "Predict and vary",
+          "attitude": "Experimental",
+          "information": "One meaningful change and its expected consequence.",
+          "job": "Test understanding through a variation.",
+          "instruction": "Ask for a prediction before changing one relation. Run behavioural assertions and explain the result.",
+          "gain": "A capacity to modify the example deliberately.",
+          "bridge": "What can the next hall take as already available?",
+          "words": 150,
+          "dependsOn": [
+            "n5"
+          ],
+          "event": "action"
+        },
+        {
+          "id": "n7",
+          "label": "Carry onward",
+          "attitude": "Open",
+          "information": "The object, code and capacity retained.",
+          "job": "Hand over a useful state.",
+          "instruction": "Name what is kept and the next problem it makes possible.",
+          "gain": "A reason for the next lesson.",
+          "bridge": "The next hall puts the retained capacity to work.",
+          "words": 60,
+          "dependsOn": [
+            "n6"
+          ],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "leave-return",
+      "title": "Leave the object, return changed",
+      "role": "final",
+      "origin": "Ada proposal · Pattern B",
+      "description": "Follow one historical relation away from an object, then return to a detail whose meaning has changed.",
+      "caution": "An excursion must change the encounter. History, critique and strangeness are choices, not required sections.",
+      "sources": [
+        {
+          "title": "Ada writing patterns and prose samples",
+          "url": "/book-review/doc/book/course/writing-patterns/PATTERNS.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Stay with a detail",
+          "attitude": "Attentive",
+          "information": "A particular object, feature or resistance.",
+          "job": "Anchor attention.",
+          "instruction": "Let a visible detail hold the reader before it illustrates a thesis.",
+          "gain": "Something specific to remember.",
+          "bridge": "What about this detail makes leaving the room worthwhile?",
+          "words": 80,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "Follow a history",
+          "attitude": "Curious",
+          "information": "One relevant person, practice or dispute.",
+          "job": "Enlarge the encounter.",
+          "instruction": "Follow one sourced relation that answers the opening question.",
+          "gain": "A context that matters to this object.",
+          "bridge": "What distinction does this history make necessary?",
+          "words": 130,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Make a distinction",
+          "attitude": "Exact",
+          "information": "The formal relation needed for the stakes.",
+          "job": "Sharpen understanding.",
+          "instruction": "Explain only the formal distinction the passage now needs, with its conditions.",
+          "gain": "A way to see the opening detail differently.",
+          "bridge": "What happens when we apply this distinction here?",
+          "words": 95,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Return to the detail",
+          "attitude": "Questioning",
+          "information": "The same object after the excursion.",
+          "job": "Make the return consequential.",
+          "instruction": "Revisit the detail without recapping the whole journey.",
+          "gain": "A changed relation to a familiar object.",
+          "bridge": "Which possibility or constraint is newly visible?",
+          "words": 90,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Another possible use",
+          "attitude": "Playful",
+          "information": "A specific consequence or imagined extension.",
+          "job": "Open a different relation.",
+          "instruction": "Follow an alternative use far enough to have consequences. Identify invention as invention.",
+          "gain": "A desire or question beyond the intended use.",
+          "bridge": "What remains unresolved in that possibility?",
+          "words": 110,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n6",
+          "label": "Carry the question",
+          "attitude": "Open",
+          "information": "The next encounter's pressure.",
+          "job": "Continue the story.",
+          "instruction": "Let one unresolved relation move into the next hall.",
+          "gain": "An invitation to keep reading.",
+          "bridge": "The next object changes what this question can mean.",
+          "words": 55,
+          "dependsOn": [],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "claim-resistance",
+      "title": "A claim meets resistance",
+      "role": "either",
+      "origin": "Ada proposal · Pattern C",
+      "description": "Let a reasonable expectation meet a small discrepancy. Keep what the encounter actually establishes.",
+      "caution": "The object need not be defective. Give the revised account something useful to do.",
+      "sources": [
+        {
+          "title": "Ada writing patterns and prose samples",
+          "url": "/book-review/doc/book/course/writing-patterns/PATTERNS.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Offer a claim",
+          "attitude": "Inviting",
+          "information": "A plausible expectation about the artifact.",
+          "job": "Establish a sympathetic starting point.",
+          "instruction": "Name what a visitor could reasonably expect.",
+          "gain": "A claim that can be investigated.",
+          "bridge": "How could we encounter that expectation?",
+          "words": 70,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "Try it",
+          "attitude": "Experimental",
+          "information": "An action and its observable result.",
+          "job": "Make the claim answerable.",
+          "instruction": "Describe or perform one concrete trial.",
+          "gain": "Evidence to compare with the expectation.",
+          "bridge": "Which detail refuses to fit?",
+          "words": 90,
+          "dependsOn": [],
+          "event": "action"
+        },
+        {
+          "id": "n3",
+          "label": "Stay with resistance",
+          "attitude": "Questioning",
+          "information": "The discrepancy.",
+          "job": "Hold the question open.",
+          "instruction": "Allow the difference to be noticed before explaining it away.",
+          "gain": "A more precise problem.",
+          "bridge": "What condition could explain this result?",
+          "words": 80,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Name the boundary",
+          "attitude": "Exact",
+          "information": "The relevant definition or implementation limit.",
+          "job": "Revise the claim.",
+          "instruction": "Give the condition that accounts for the difference; avoid extending it to every algorithm.",
+          "gain": "A defensible explanation.",
+          "bridge": "What does the trial still establish?",
+          "words": 120,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Keep the finding",
+          "attitude": "Patient",
+          "information": "What remains true.",
+          "job": "Preserve the value of the investigation.",
+          "instruction": "State what we learned without abandoning the object.",
+          "gain": "A smaller, stronger claim.",
+          "bridge": "What new use benefits from that condition?",
+          "words": 75,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n6",
+          "label": "Try another relation",
+          "attitude": "Playful",
+          "information": "A variation or better question.",
+          "job": "Make the boundary productive.",
+          "instruction": "Develop a use that the revised account makes possible.",
+          "gain": "A new direction for investigation.",
+          "bridge": "Carry the finding into another encounter.",
+          "words": 85,
+          "dependsOn": [],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "background-forward",
+      "title": "Bring the background forward",
+      "role": "final",
+      "origin": "Ada adaptation from an Ahmed reading",
+      "description": "Stay with an ordinary object until the support it takes for granted becomes part of the encounter.",
+      "caution": "This is our reusable route, not Ahmed's prose or a claim that her phenomenology is OOO.",
+      "sources": [
+        {
+          "title": "Ahmed, Queer Phenomenology · printed pp. 3–4",
+          "url": "https://www.thequeermathematicsteacher.com/wp-content/uploads/2021/10/Ahmed-Queer-Phenomonology.pdf#page=9"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "An ordinary object",
+          "attitude": "Attentive",
+          "information": "Something already present in the room.",
+          "job": "Establish familiarity.",
+          "instruction": "Describe one thing without immediately giving it a symbolic job.",
+          "gain": "A concrete point of attention.",
+          "bridge": "What makes its apparent ordinariness possible?",
+          "words": 75,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "Its usual work",
+          "attitude": "Patient",
+          "information": "How the object is normally used.",
+          "job": "Let familiarity become specific.",
+          "instruction": "Describe a use and the relations it depends on.",
+          "gain": "A view of the arrangement around it.",
+          "bridge": "Which supporting relation has stayed unnoticed?",
+          "words": 85,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Notice the support",
+          "attitude": "Questioning",
+          "information": "A surface, rule or placement previously backgrounded.",
+          "job": "Shift attention.",
+          "instruction": "Bring one enabling condition into focus.",
+          "gain": "A condition of the encounter.",
+          "bridge": "What changes if that condition changes?",
+          "words": 115,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Turn the arrangement",
+          "attitude": "Experimental",
+          "information": "A different approach, use or position.",
+          "job": "Test the changed attention.",
+          "instruction": "Return to the object through the newly visible relation; mark imagined alterations.",
+          "gain": "Another way of meeting the same object.",
+          "bridge": "What can we now notice that the first description missed?",
+          "words": 110,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Stay with the change",
+          "attitude": "Open",
+          "information": "A remaining difficulty or possibility.",
+          "job": "Resist an automatic moral.",
+          "instruction": "Give the altered encounter time; it may be awkward, pleasurable or unresolved.",
+          "gain": "A live relation rather than a closed verdict.",
+          "bridge": "Let the next object develop this new attention.",
+          "words": 100,
+          "dependsOn": [],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "test-explanation",
+      "title": "Test an explanation in a situation",
+      "role": "final",
+      "origin": "Ada adaptation from an Ahmed reading",
+      "description": "Introduce an explanation because a concrete difficulty needs it; return it to a situation that reveals its reach.",
+      "caution": "A thinker is an interlocutor here. Verify the source and let the test remain fair.",
+      "sources": [
+        {
+          "title": "Ahmed, Queer Phenomenology · printed pp. 5–8",
+          "url": "https://www.thequeermathematicsteacher.com/wp-content/uploads/2021/10/Ahmed-Queer-Phenomonology.pdf#page=11"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "A difficulty arises",
+          "attitude": "Attentive",
+          "information": "Something that interrupts an ordinary encounter.",
+          "job": "Give the concept a reason to enter.",
+          "instruction": "Begin with the precise difficulty, not a general thesis.",
+          "gain": "A question that needs an explanation.",
+          "bridge": "Who or what offers an account of this?",
+          "words": 75,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "An account enters",
+          "attitude": "Curious",
+          "information": "A sourced explanation or inherited concept.",
+          "job": "Offer intellectual help.",
+          "instruction": "Present the strongest relevant version with enough context to understand it.",
+          "gain": "A possible way through the difficulty.",
+          "bridge": "What does this account let us predict?",
+          "words": 110,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Its reach is tested",
+          "attitude": "Questioning",
+          "information": "A detail the account may not settle.",
+          "job": "Locate the limit.",
+          "instruction": "Distinguish what the account establishes from what it leaves open.",
+          "gain": "A narrower unresolved question.",
+          "bridge": "What comparison could clarify the remaining issue?",
+          "words": 85,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Make it bodily",
+          "attitude": "Experimental",
+          "information": "A concrete comparison in the museum.",
+          "job": "Test the explanation.",
+          "instruction": "Follow an action or change of position, attending to the result.",
+          "gain": "An encounter the abstraction must answer to.",
+          "bridge": "How must our account change after this?",
+          "words": 100,
+          "dependsOn": [],
+          "event": "action"
+        },
+        {
+          "id": "n5",
+          "label": "Rework the concept",
+          "attitude": "Exact",
+          "information": "A revised distinction.",
+          "job": "Reconstruct understanding.",
+          "instruction": "Use the comparison to refine the concept; keep its conditions visible.",
+          "gain": "A more useful explanation.",
+          "bridge": "What does the initial situation look like now?",
+          "words": 100,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n6",
+          "label": "Return to the difficulty",
+          "attitude": "Open",
+          "information": "The opening scene seen again.",
+          "job": "Make the change legible.",
+          "instruction": "Return without merely repeating the opening question.",
+          "gain": "A changed capacity to notice or act.",
+          "bridge": "Carry the remaining problem onward.",
+          "words": 75,
+          "dependsOn": [],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "word-turns",
+      "title": "Let a word change its force",
+      "role": "final",
+      "origin": "Ada adaptation from an Ahmed reading",
+      "description": "Follow a word through material situations until it acquires another consequence.",
+      "caution": "A word's resemblance is not evidence that two mechanisms are the same. Keep their differences visible.",
+      "sources": [
+        {
+          "title": "Ahmed, Queer Phenomenology · printed pp. 16–18",
+          "url": "https://www.thequeermathematicsteacher.com/wp-content/uploads/2021/10/Ahmed-Queer-Phenomonology.pdf#page=22"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "A word in use",
+          "attitude": "Curious",
+          "information": "A word attached to a current object or action.",
+          "job": "Start with a concrete use.",
+          "instruction": "Choose a word whose meaning matters to this encounter.",
+          "gain": "A term with material consequences.",
+          "bridge": "What does this word ask someone or something to do?",
+          "words": 70,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "Give it a situation",
+          "attitude": "Attentive",
+          "information": "The action or arrangement the word names.",
+          "job": "Make the term felt.",
+          "instruction": "Describe a particular interaction without stretching the technical definition.",
+          "gain": "A connection between word and action.",
+          "bridge": "What happens when this action is repeated?",
+          "words": 90,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Follow repetition",
+          "attitude": "Patient",
+          "information": "A relation sustained over time.",
+          "job": "Show accumulated consequences.",
+          "instruction": "Trace what repeated actions make easier, harder or expected.",
+          "gain": "An understanding of how the situation persists.",
+          "bridge": "Who or what is committed to continuing it?",
+          "words": 100,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Meet its pressure",
+          "attitude": "Critical",
+          "information": "The cost, demand or limit in this case.",
+          "job": "Complicate the apparent benefit.",
+          "instruction": "Locate the pressure in the specific arrangement, avoiding a universal moral.",
+          "gain": "A consequential choice to examine.",
+          "bridge": "Can this same word serve another relation?",
+          "words": 105,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Let it turn",
+          "attitude": "Tender",
+          "information": "A different use of the word and object.",
+          "job": "Open ambivalence.",
+          "instruction": "Find a concrete use that changes the term's force; name differences between mechanisms.",
+          "gain": "An alternative that cannot be reduced to the first reading.",
+          "bridge": "Leave this possibility available for a later encounter.",
+          "words": 115,
+          "dependsOn": [],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "history-to-build",
+      "title": "From an odd beginning to a build",
+      "role": "tutorial",
+      "origin": "Ada adaptation from The Nature of Code reading",
+      "description": "Use a surprising historical object to invite a student into one well-bounded construction.",
+      "caution": "Keep the opening short. The student still needs prerequisites, definitions and executable new code.",
+      "sources": [
+        {
+          "title": "The Nature of Code · Randomness, opening paragraphs",
+          "url": "https://natureofcode.com/random/"
+        },
+        {
+          "title": "Our source reading notes",
+          "url": "/book-review/doc/book/course/writing-patterns/REFERENCE_READINGS.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "An unusual beginning",
+          "attitude": "Curious",
+          "information": "One sourced historical object or practice.",
+          "job": "Awaken interest.",
+          "instruction": "Introduce a small historical puzzle relevant to the operation.",
+          "gain": "A reason to care about the topic.",
+          "bridge": "What can we do with this problem now?",
+          "words": 65,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "A present possibility",
+          "attitude": "Inviting",
+          "information": "The capacity available in the museum.",
+          "job": "Make a learning invitation.",
+          "instruction": "Connect the opening to one object we can build on.",
+          "gain": "A clear destination for this lesson.",
+          "bridge": "What do we already have that can support it?",
+          "words": 65,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Name the starting point",
+          "attitude": "Patient",
+          "information": "Inherited objects, code and knowledge.",
+          "job": "Set the learning contract.",
+          "instruction": "Link the exact previous lesson and name any new prerequisite.",
+          "gain": "A reliable starting state.",
+          "bridge": "How can the new problem be represented simply?",
+          "words": 75,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Experience becomes a rule",
+          "attitude": "Exact",
+          "information": "A small model and its representation.",
+          "job": "Make abstraction followable.",
+          "instruction": "Work through one example before presenting its implementation.",
+          "gain": "A rule the student can explain.",
+          "bridge": "Which operations will execute that rule?",
+          "words": 160,
+          "dependsOn": [
+            "n3"
+          ],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Construct the example",
+          "attitude": "Practical",
+          "information": "New code, setup and a check.",
+          "job": "Produce the capacity.",
+          "instruction": "Supply complete new code and necessary setup, then run it.",
+          "gain": "A working example tied to the rule.",
+          "bridge": "What change would demonstrate understanding?",
+          "words": 160,
+          "dependsOn": [
+            "n3",
+            "n4"
+          ],
+          "event": "code"
+        },
+        {
+          "id": "n6",
+          "label": "Vary and carry",
+          "attitude": "Experimental",
+          "information": "A prediction, a variation and retained state.",
+          "job": "Make learning transferable.",
+          "instruction": "Change one relation, test it, then name what travels onward.",
+          "gain": "A reusable capacity.",
+          "bridge": "The next lesson uses this state.",
+          "words": 140,
+          "dependsOn": [
+            "n5"
+          ],
+          "event": "action"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "code-culture",
+      "title": "Follow code into culture",
+      "role": "final",
+      "origin": "Ada adaptation from the 10 PRINT reading",
+      "description": "Let a small technical detail open a cultural relation, then bring that relation back to the specific mechanism.",
+      "caution": "Choose one excursion per passage. A chapter-length source is not a one-hall word budget.",
+      "sources": [
+        {
+          "title": "10 PRINT · Randomness, pp. 119–146",
+          "url": "https://direct.mit.edu/books/oa-monograph/5343/chapter/3818242/Randomness"
+        },
+        {
+          "title": "Our source reading notes",
+          "url": "/book-review/doc/book/course/writing-patterns/REFERENCE_READINGS.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "A small operation",
+          "attitude": "Attentive",
+          "information": "One specific operation in an artifact.",
+          "job": "Anchor a larger inquiry.",
+          "instruction": "Start with a detail small enough to retain through an excursion.",
+          "gain": "A concrete technical object.",
+          "bridge": "Where else has this operation or word mattered?",
+          "words": 75,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n2",
+          "label": "An unexpected relation",
+          "attitude": "Curious",
+          "information": "One relevant historical or cultural practice.",
+          "job": "Enlarge its significance.",
+          "instruction": "Follow a verified relation without treating resemblance as identity.",
+          "gain": "Another context for the object.",
+          "bridge": "Which distinction is needed to connect these contexts?",
+          "words": 100,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n3",
+          "label": "Name the difference",
+          "attitude": "Exact",
+          "information": "The categories or formal relation at stake.",
+          "job": "Make the connection precise.",
+          "instruction": "Define the distinction that prevents an easy analogy.",
+          "gain": "A way to compare without collapsing the cases.",
+          "bridge": "Where are the consequences of that distinction felt?",
+          "words": 95,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n4",
+          "label": "Give the stakes a scene",
+          "attitude": "Uneasy",
+          "information": "A particular event, use or conflict.",
+          "job": "Make consequences concrete.",
+          "instruction": "Describe the stakes through a sourced case or clearly marked invention.",
+          "gain": "A felt reason for the comparison.",
+          "bridge": "How does this change the opening operation?",
+          "words": 105,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n5",
+          "label": "Return to the mechanism",
+          "attitude": "Questioning",
+          "information": "The initial operation in its new context.",
+          "job": "Make the excursion matter.",
+          "instruction": "Revisit the detail, showing what the other context made visible.",
+          "gain": "A changed relation to the algorithm.",
+          "bridge": "What tension should remain unresolved?",
+          "words": 100,
+          "dependsOn": [],
+          "event": "paragraph"
+        },
+        {
+          "id": "n6",
+          "label": "Hold two consequences",
+          "attitude": "Open",
+          "information": "A pleasure and a difficulty that coexist.",
+          "job": "Keep the ending alive.",
+          "instruction": "Let both consequences remain specific; avoid a universal verdict.",
+          "gain": "A reason to continue thinking or making.",
+          "bridge": "Carry that tension into the next encounter.",
+          "words": 85,
+          "dependsOn": [],
+          "event": "paragraph"
+        }
+      ],
+      "reserve": [],
+      "basedOn": "",
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      }
+    },
+    {
+      "id": "spiral-outward",
+      "title": "Spiral outward from one object",
+      "description": "Widen the scale of attention while keeping a specific object in view.",
+      "caution": "Each widening needs evidence and a bridge. Scale alone does not make a passage profound.",
+      "role": "final",
+      "origin": "Ada adaptation of an Ada Writer preset; no source passage recorded for the preset",
+      "sources": [
+        {
+          "title": "Ada Writer: presets, harvesting and provenance",
+          "url": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Attend to a detail",
+          "attitude": "Attentive",
+          "information": "One observed property",
+          "job": "Give attention a place to begin",
+          "instruction": "Describe a small detail of the actual artifact that matters to the subject.",
+          "gain": "An object to follow",
+          "bridge": "What makes this detail possible?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n2",
+          "label": "Find its conditions",
+          "attitude": "Curious",
+          "information": "Mechanism and setting",
+          "job": "Open the first relation",
+          "instruction": "Follow the detail into its immediate conditions, naming what the map actually does.",
+          "gain": "A mechanism behind the appearance",
+          "bridge": "Where did that arrangement come from?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n3",
+          "label": "Widen into history",
+          "attitude": "Investigative",
+          "information": "A sourced historical decision",
+          "job": "Make the arrangement contingent",
+          "instruction": "Choose one historical episode that changes how the detail reads; explain the connection.",
+          "gain": "A reason this could have been otherwise",
+          "bridge": "What did that choice enable or exclude?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n4",
+          "label": "Press a consequence",
+          "attitude": "Critical",
+          "information": "A limit or overlooked use",
+          "job": "Test the wider claim",
+          "instruction": "Trace one concrete consequence without treating the artifact as proof of a whole social theory.",
+          "gain": "A consequential distinction",
+          "bridge": "What can we now notice or try?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n5",
+          "label": "Return at another scale",
+          "attitude": "Open",
+          "information": "The original detail reconsidered",
+          "job": "Change the encounter",
+          "instruction": "Return to the same detail with a new question or possible use.",
+          "gain": "A changed way of attending",
+          "bridge": "Carry this question to the next encounter.",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        }
+      ],
+      "reserve": [],
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      },
+      "basedOn": ""
+    },
+    {
+      "id": "braid-threads",
+      "title": "Braid the room with another thread",
+      "description": "Alternate two strands so each return changes the other.",
+      "caution": "Track each strand clearly. A historical name or theory must do work when it returns.",
+      "role": "final",
+      "origin": "Ada adaptation of an Ada Writer preset; no source passage recorded for the preset",
+      "sources": [
+        {
+          "title": "Ada Writer: presets, harvesting and provenance",
+          "url": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Room A: an unfinished encounter",
+          "attitude": "Attentive",
+          "information": "A present event",
+          "job": "Create a question worth carrying",
+          "instruction": "Begin an encounter in the hall and leave a precise question unresolved.",
+          "gain": "A reason to follow a second thread",
+          "bridge": "Which other encounter speaks to this question?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n2",
+          "label": "History B: another situation",
+          "attitude": "Curious",
+          "information": "One sourced episode",
+          "job": "Introduce a second inquiry",
+          "instruction": "Enter a historical situation with its own stakes; identify its relation to the hall.",
+          "gain": "Another way to understand the problem",
+          "bridge": "What does this make visible in our room?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n3",
+          "label": "Room A: test the relation",
+          "attitude": "Exact",
+          "information": "A return to the artifact",
+          "job": "Check the analogy",
+          "instruction": "Describe what the artifact supports and where it differs from the historical case.",
+          "gain": "A bounded comparison",
+          "bridge": "Does this also change our reading of the history?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n4",
+          "label": "History B: revise the reading",
+          "attitude": "Questioning",
+          "information": "A complication in that episode",
+          "job": "Let history resist the analogy",
+          "instruction": "Revisit the historical case with the distinction the artifact has sharpened.",
+          "gain": "A history that resists a simple moral",
+          "bridge": "What can travel back without flattening that difference?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n5",
+          "label": "Crossing: a changed encounter",
+          "attitude": "Open",
+          "information": "Both strands held together",
+          "job": "Give the crossing a consequence",
+          "instruction": "Return to the room with a new action or unresolved tension.",
+          "gain": "A relation neither strand supplied alone",
+          "bridge": "Let the next hall put this relation under pressure.",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        }
+      ],
+      "reserve": [],
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      },
+      "basedOn": ""
+    },
+    {
+      "id": "start-in-middle",
+      "title": "Begin with the consequence",
+      "description": "Start inside an event, then reconstruct what made it possible.",
+      "caution": "Use an observed or explicitly proposed event. Reconstruction must not invent a cause.",
+      "role": "final",
+      "origin": "Ada adaptation of an Ada Writer preset; no source passage recorded for the preset",
+      "sources": [
+        {
+          "title": "Ada Writer: presets, harvesting and provenance",
+          "url": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "The event is already happening",
+          "attitude": "Immediate",
+          "information": "A specific consequence",
+          "job": "Create involvement",
+          "instruction": "Place the reader inside one visible event before explaining its machinery.",
+          "gain": "Something worth understanding",
+          "bridge": "How did this become possible?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n2",
+          "label": "Reconstruct the conditions",
+          "attitude": "Investigative",
+          "information": "Earlier state and actions",
+          "job": "Restore causal footing",
+          "instruction": "Work backward through known conditions; distinguish observation from inference.",
+          "gain": "A traceable history",
+          "bridge": "Which operation links these conditions to this result?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n3",
+          "label": "Name the mechanism",
+          "attitude": "Exact",
+          "information": "The operative relation",
+          "job": "Make the event intelligible",
+          "instruction": "Define the mechanism and explain the relevant interaction.",
+          "gain": "An explanation that fits the event",
+          "bridge": "What if one condition changed?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n4",
+          "label": "Try a counterfactual",
+          "attitude": "Experimental",
+          "information": "One changed condition",
+          "job": "Test the explanation",
+          "instruction": "Choose a variation the artifact permits; say whether it was observed or remains to test.",
+          "gain": "A limit on the causal claim",
+          "bridge": "What can we do when the event happens again?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n5",
+          "label": "Return to the event",
+          "attitude": "Open",
+          "information": "Consequence with understanding",
+          "job": "Keep uncertainty productive",
+          "instruction": "Re-enter the event, allowing intention and outcome to remain different.",
+          "gain": "A capacity to notice and respond",
+          "bridge": "Carry a testable question onward.",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        }
+      ],
+      "reserve": [],
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      },
+      "basedOn": ""
+    },
+    {
+      "id": "delayed-discovery",
+      "title": "Let a mechanism become necessary",
+      "description": "Let observations accumulate before naming the mechanism they require.",
+      "caution": "Use in reflective passages. Never delay setup or prerequisites needed to complete a tutorial.",
+      "role": "final",
+      "origin": "Ada adaptation of an Ada Writer preset; no source passage recorded for the preset",
+      "sources": [
+        {
+          "title": "Ada Writer: presets, harvesting and provenance",
+          "url": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Encounter without its label",
+          "attitude": "Curious",
+          "information": "An observable event",
+          "job": "Give perception a head start",
+          "instruction": "Let the reader notice a relation before supplying its technical name.",
+          "gain": "A concrete puzzle",
+          "bridge": "What happens when the condition changes?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n2",
+          "label": "Gather a second clue",
+          "attitude": "Attentive",
+          "information": "A contrasting observation",
+          "job": "Make a pattern discernible",
+          "instruction": "Add one observation that changes the first rather than repeating it.",
+          "gain": "Evidence for a possible explanation",
+          "bridge": "Which explanation fits both encounters?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n3",
+          "label": "Try an interpretation",
+          "attitude": "Questioning",
+          "information": "A plausible account and its limit",
+          "job": "Invite inference",
+          "instruction": "Offer a provisional explanation; test it against a detail it cannot explain.",
+          "gain": "A reason for greater precision",
+          "bridge": "What distinction is missing?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n4",
+          "label": "Name what the clues require",
+          "attitude": "Exact",
+          "information": "A definition and its conditions",
+          "job": "Reward the investigation",
+          "instruction": "Introduce the concept where it becomes useful, then connect it to each clue.",
+          "gain": "A concept attached to experience",
+          "bridge": "How does this name alter the first encounter?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n5",
+          "label": "Return and vary",
+          "attitude": "Playful",
+          "information": "A new use of the explanation",
+          "job": "Turn recognition into possibility",
+          "instruction": "Revisit the initial event and propose a meaningful variation.",
+          "gain": "A way to explore beyond recognition",
+          "bridge": "Carry the variation to the next lesson.",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        }
+      ],
+      "reserve": [],
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      },
+      "basedOn": ""
+    },
+    {
+      "id": "recurrence-variation",
+      "title": "Return to the object with a difference",
+      "description": "Let a familiar object or gesture recur under changed conditions.",
+      "caution": "Every recurrence needs a change. A repeated motif is not proof of continuity in the code.",
+      "role": "final",
+      "origin": "Ada adaptation of an Ada Writer preset; no source passage recorded for the preset",
+      "sources": [
+        {
+          "title": "Ada Writer: presets, harvesting and provenance",
+          "url": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Recognise the carried object",
+          "attitude": "Tender",
+          "information": "An object and its actual lineage",
+          "job": "Recall without reteaching",
+          "instruction": "Name what persists from earlier halls: appearance, code, data or a gesture.",
+          "gain": "A precise continuity",
+          "bridge": "Which condition has changed here?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n2",
+          "label": "First variation",
+          "attitude": "Curious",
+          "information": "One new relation",
+          "job": "Disturb familiarity",
+          "instruction": "Describe the object's changed behaviour and what produces it.",
+          "gain": "A difference within the familiar",
+          "bridge": "What stays constant if something else changes?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n3",
+          "label": "Return to a stable feature",
+          "attitude": "Exact",
+          "information": "What really remained invariant",
+          "job": "Make comparison possible",
+          "instruction": "Check the claim of sameness against the original feature.",
+          "gain": "A baseline for comparison",
+          "bridge": "Where does this continuity reach its limit?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n4",
+          "label": "Second variation, new stakes",
+          "attitude": "Uneasy",
+          "information": "A further transformation",
+          "job": "Expose an unexpected capacity",
+          "instruction": "Change one relation that alters what the object allows; explain a consequence.",
+          "gain": "A new question about its use",
+          "bridge": "Does the old name still help us understand it?",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        },
+        {
+          "id": "n5",
+          "label": "Recognise it differently",
+          "attitude": "Open",
+          "information": "The motif after both variations",
+          "job": "Leave a changed recognition",
+          "instruction": "Return to the object without forcing a final identity or moral.",
+          "gain": "A way to follow continuity through change",
+          "bridge": "Name what the next hall inherits.",
+          "words": 110,
+          "event": "paragraph",
+          "dependsOn": []
+        }
+      ],
+      "reserve": [],
+      "trial": {
+        "hall": "",
+        "textVersion": "",
+        "status": "Untested",
+        "observations": "",
+        "next": ""
+      },
+      "basedOn": ""
+    }
+  ]
+}

@@ -1,0 +1,455 @@
+{
+  "schema": 1,
+  "paragraphMoves": [
+    {
+      "patternId": "scene-pattern-idea",
+      "title": "Scene → pattern → idea",
+      "description": "Let a concept become useful through an encounter.",
+      "caution": "Do not mistake one example for a universal pattern.",
+      "source": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md",
+      "steps": [
+        {
+          "id": "p1",
+          "label": "Scene",
+          "attitude": "Attentive",
+          "instruction": "Show one specific moment in the current hall.",
+          "bridge": "Which relation can we notice?"
+        },
+        {
+          "id": "p2",
+          "label": "Pattern",
+          "attitude": "Curious",
+          "instruction": "Identify a recurrence or relation, stating its limits.",
+          "bridge": "What concept makes this relation precise?"
+        },
+        {
+          "id": "p3",
+          "label": "Idea",
+          "attitude": "Exact",
+          "instruction": "Name the concept and reconnect it to the scene.",
+          "bridge": "What can the reader now notice or test?"
+        }
+      ]
+    },
+    {
+      "patternId": "claim-evidence-reading",
+      "title": "Claim → evidence → interpretation",
+      "description": "Make a claim answer to something the reader can inspect.",
+      "caution": "Evidence must support the actual claim; interpretation is not another observation.",
+      "source": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md",
+      "steps": [
+        {
+          "id": "p1",
+          "label": "Claim",
+          "attitude": "Exact",
+          "instruction": "State one bounded claim.",
+          "bridge": "What supports it?"
+        },
+        {
+          "id": "p2",
+          "label": "Evidence",
+          "attitude": "Attentive",
+          "instruction": "Point to a source, observation or reproducible result.",
+          "bridge": "What does this establish, and what remains uncertain?"
+        },
+        {
+          "id": "p3",
+          "label": "Interpretation",
+          "attitude": "Questioning",
+          "instruction": "Explain what the evidence changes about the claim.",
+          "bridge": "Why does that matter to the next passage?"
+        }
+      ]
+    },
+    {
+      "patternId": "question-attempt-revision",
+      "title": "Question → attempt → revision",
+      "description": "Let understanding change inside the passage.",
+      "caution": "Do not invent a foolish first answer merely to defeat it.",
+      "source": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md",
+      "steps": [
+        {
+          "id": "p1",
+          "label": "Question",
+          "attitude": "Curious",
+          "instruction": "Ask a question whose answer matters here.",
+          "bridge": "What is a plausible first answer?"
+        },
+        {
+          "id": "p2",
+          "label": "Attempt",
+          "attitude": "Experimental",
+          "instruction": "Try that answer against a concrete case.",
+          "bridge": "Which detail does it miss?"
+        },
+        {
+          "id": "p3",
+          "label": "Revision",
+          "attitude": "Exact",
+          "instruction": "Revise only what the evidence requires.",
+          "bridge": "What can we now investigate more precisely?"
+        }
+      ]
+    },
+    {
+      "patternId": "observation-implication",
+      "title": "Observation → implication",
+      "description": "Follow a small fact into its consequence.",
+      "caution": "Mark interpretation and uncertainty; avoid generalising beyond the observation.",
+      "source": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md",
+      "steps": [
+        {
+          "id": "p1",
+          "label": "Observation",
+          "attitude": "Attentive",
+          "instruction": "Describe what happened and under which conditions.",
+          "bridge": "What follows from that observation?"
+        },
+        {
+          "id": "p2",
+          "label": "Implication",
+          "attitude": "Open",
+          "instruction": "Explain one consequence, with its limits.",
+          "bridge": "What action or question follows?"
+        }
+      ]
+    },
+    {
+      "patternId": "topic-specification-implication",
+      "title": "Topic → specification → implication",
+      "description": "Narrow a subject before saying what follows.",
+      "caution": "A broad topic sentence is optional; avoid introductory padding.",
+      "source": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md",
+      "steps": [
+        {
+          "id": "p1",
+          "label": "Topic",
+          "attitude": "Inviting",
+          "instruction": "Name the relation this paragraph will clarify.",
+          "bridge": "Which exact case matters?"
+        },
+        {
+          "id": "p2",
+          "label": "Specification",
+          "attitude": "Exact",
+          "instruction": "Supply a precise case or condition.",
+          "bridge": "What changes because of this detail?"
+        },
+        {
+          "id": "p3",
+          "label": "Implication",
+          "attitude": "Questioning",
+          "instruction": "Draw a bounded consequence for the reader.",
+          "bridge": "Where does this lead in the text?"
+        }
+      ]
+    },
+    {
+      "patternId": "assertion-qualification",
+      "title": "Assertion → qualification",
+      "description": "Keep a useful claim while making its scope honest.",
+      "caution": "Qualification should clarify conditions, not drain every sentence of commitment.",
+      "source": "/book-review/doc/book/course/writing-patterns/PROVENANCE.md",
+      "steps": [
+        {
+          "id": "p1",
+          "label": "Assertion",
+          "attitude": "Exact",
+          "instruction": "Say what holds.",
+          "bridge": "Under which conditions does it hold?"
+        },
+        {
+          "id": "p2",
+          "label": "Qualification",
+          "attitude": "Careful",
+          "instruction": "Name a material limit, exception or dependency.",
+          "bridge": "What can be done within that boundary?"
+        }
+      ]
+    }
+  ],
+  "studies": [
+    {
+      "id": "haraway-vision",
+      "author": "Donna Haraway",
+      "title": "Situated Knowledges",
+      "edition": "Feminist Studies 14(3), 1988, pp. 575–599.",
+      "locator": "pp. 580–581: final paragraph before The Persistence of Vision and its first two paragraphs.",
+      "source": "https://terra-world.github.io/pdfs/haraway_situated_knowledges.pdf#page=7",
+      "note": "Local paragraph reading; attitudes and divisions are our interpretation.",
+      "takeaway": "A metaphor changes when the old one cannot carry the problem.",
+      "caution": "Keep the political stakes specific. A change of metaphor is not evidence by itself.",
+      "steps": [
+        {
+          "locator": "p. 580, final paragraph",
+          "observation": "Competing commitments become an awkward bodily image.",
+          "job": "Expose the impasse",
+          "attitude": "Uneasy",
+          "bridge": "What must change in the framing?"
+        },
+        {
+          "locator": "p. 581, first paragraph",
+          "observation": "Vision is reclaimed through embodiment; situated knowledge is named.",
+          "job": "Reframe and define",
+          "attitude": "Exact",
+          "bridge": "What makes this account necessary?"
+        },
+        {
+          "locator": "p. 581, second paragraph",
+          "observation": "An accumulating catalogue of instruments intensifies the critique of unrestricted sight.",
+          "job": "Pressure the definition",
+          "attitude": "Critical",
+          "bridge": "Which specific viewpoint can we account for?"
+        }
+      ],
+      "adaptation": {
+        "title": "Change the frame when it stops helping",
+        "description": "An Ada proposal for a passage whose familiar metaphor conceals a condition.",
+        "instructions": [
+          "Name a genuine tension in the hall and show why the familiar description cannot resolve it.",
+          "Offer a more precise frame, define it, and identify what it makes visible.",
+          "Test that frame against concrete mechanisms and their stakes; end with an accountable viewpoint."
+        ]
+      }
+    },
+    {
+      "id": "deleuze-guattari-book",
+      "author": "Gilles Deleuze and Félix Guattari",
+      "title": "A Thousand Plateaus — Introduction: Rhizome",
+      "edition": "Brian Massumi translation, University of Minnesota Press, 1987.",
+      "locator": "Opening three prose paragraphs, printed pp. 3–5.",
+      "source": "https://manoftheword.com/wp-content/uploads/2013/05/deleuze-guattari-rhizome.pdf#page=1",
+      "note": "Paragraphs span pages. This is a local argumentative route, not the structure of the entire book.",
+      "takeaway": "The opening performs a disturbance before turning it into a way of reading.",
+      "caution": "Do not treat connection alone as explanation or present their philosophy as OOO.",
+      "steps": [
+        {
+          "locator": "p. 3, paragraph 1",
+          "observation": "The two named writers present authorship as already multiple.",
+          "job": "Unsettle the unit",
+          "attitude": "Playful",
+          "bridge": "What else seemed singular?"
+        },
+        {
+          "locator": "pp. 3–4, paragraph 2",
+          "observation": "The book becomes an assemblage; questions turn toward its connections and effects.",
+          "job": "Change the question",
+          "attitude": "Investigative",
+          "bridge": "How can writing follow those relations?"
+        },
+        {
+          "locator": "pp. 4–5, paragraph 3",
+          "observation": "A conceptual inventory leads into writing understood as mapping.",
+          "job": "State a method",
+          "attitude": "Exact",
+          "bridge": "What would this method attend to next?"
+        }
+      ],
+      "adaptation": {
+        "title": "From one object to its relations",
+        "description": "An Ada proposal that shifts attention from a named object to what it does with others.",
+        "instructions": [
+          "Begin with an actual object whose apparent unity is complicated by its operation.",
+          "Follow two consequential connections; explain each mechanism and what the connection changes.",
+          "Name the resulting method of inquiry and set a concrete next investigation."
+        ]
+      }
+    },
+    {
+      "id": "ahmed-table",
+      "author": "Sara Ahmed",
+      "title": "Queer Phenomenology — Introduction: Find Your Way",
+      "edition": "Duke University Press, 2006.",
+      "locator": "Printed pp. 3–4: orientation, the writing table, and bringing its support forward.",
+      "source": "https://www.thequeermathematicsteacher.com/wp-content/uploads/2021/10/Ahmed-Queer-Phenomonology.pdf#page=9",
+      "note": "Checked against the previously downloaded PDF. The public URL returned 403 during this pass.",
+      "takeaway": "A condition of thinking becomes the subject of thought.",
+      "caution": "Keep Ahmed's queer phenomenology distinct from OOO; examine whose orientation is being treated as ordinary.",
+      "steps": [
+        {
+          "locator": "p. 3, paragraph continuing from p. 2",
+          "observation": "Orientation leads to the table nearest the philosopher.",
+          "job": "Locate attention",
+          "attitude": "Curious",
+          "bridge": "Why is this object nearby?"
+        },
+        {
+          "locator": "p. 3, next paragraph",
+          "observation": "Furniture supports the place and practice of philosophy.",
+          "job": "Follow the support",
+          "attitude": "Attentive",
+          "bridge": "Why does support disappear from attention?"
+        },
+        {
+          "locator": "pp. 3–4, next paragraph",
+          "observation": "The background table is deliberately brought into the argument's foreground.",
+          "job": "Reorient the inquiry",
+          "attitude": "Questioning",
+          "bridge": "What becomes visible from this changed angle?"
+        }
+      ],
+      "adaptation": {
+        "title": "Bring the support into view",
+        "description": "An Ada proposal for examining what quietly makes an encounter possible.",
+        "instructions": [
+          "Locate the reader and a nearby object; say what directs attention toward it.",
+          "Follow one actual supporting arrangement: surface, code, access or labour.",
+          "Bring that support into the foreground and show what changes in the original encounter."
+        ]
+      }
+    },
+    {
+      "id": "kittler-fibre",
+      "author": "Friedrich Kittler",
+      "title": "Gramophone, Film, Typewriter — Introduction",
+      "edition": "Geoffrey Winthrop-Young and Michael Wutz translation; Stanford course transcription (header dated 1997).",
+      "locator": "First seven paragraphs, from optical-fibre networks to the return to still-distinct media.",
+      "source": "https://web.stanford.edu/class/history34q/readings/Kittler/GramFilmTypwriter/Kittler_Intro.html",
+      "note": "Some adjacent paragraphs are grouped into movements. Predictions belong to the source's historical moment.",
+      "takeaway": "A technical forecast opens into military infrastructure, everyday pleasure and a temporal correction.",
+      "caution": "Check present-day technical claims independently. Polemical scale can outrun the evidence.",
+      "steps": [
+        {
+          "locator": "Paragraph 1",
+          "observation": "A communications technology introduces a converging future.",
+          "job": "Begin with infrastructure",
+          "attitude": "Exact",
+          "bridge": "What condition underpins the promise?"
+        },
+        {
+          "locator": "Paragraphs 2–3",
+          "observation": "Resistance to interference leads into military planning.",
+          "job": "Reveal the condition",
+          "attitude": "Uneasy",
+          "bridge": "Where does ordinary experience enter?"
+        },
+        {
+          "locator": "Paragraph 4",
+          "observation": "Domestic entertainment appears as a secondary benefit.",
+          "job": "Shift to everyday use",
+          "attitude": "Ironic",
+          "bridge": "What larger conclusion is being drawn?"
+        },
+        {
+          "locator": "Paragraphs 5–7",
+          "observation": "A sweeping digital forecast is interrupted by existing media.",
+          "job": "Project, then limit",
+          "attitude": "Questioning",
+          "bridge": "What history explains the present arrangement?"
+        }
+      ],
+      "adaptation": {
+        "title": "Follow an interface to its conditions",
+        "description": "An Ada proposal that traces a visible experience into technical and institutional conditions.",
+        "instructions": [
+          "Start with one concrete operation the student encounters.",
+          "Trace a verified dependency behind it and identify a relevant historical condition.",
+          "Return to what that arrangement permits the player to experience.",
+          "Separate the observed present from a projected future; carry the distinction forward."
+        ]
+      }
+    },
+    {
+      "id": "bachelard-house",
+      "author": "Gaston Bachelard",
+      "title": "The Poetics of Space — The House",
+      "edition": "Maria Jolas translation; Beacon edition with 1994 foreword.",
+      "locator": "Chapter I, printed pp. 3–5, first six prose paragraphs after the epigraph.",
+      "source": "https://whslearningcommons.com/wp-content/uploads/2014/05/gaston-bachelard-the-poetics-of-space.pdf#page=39",
+      "note": "Adjacent paragraphs are grouped; the epigraph is a separate reading event.",
+      "takeaway": "A familiar place changes scale through an inquiry into inhabiting it.",
+      "caution": "Do not assume that home is safe or universal. Keep memory and imagination distinct from measured mechanism.",
+      "steps": [
+        {
+          "locator": "p. 3, paragraph 1",
+          "observation": "The house becomes a problem of intimacy and images.",
+          "job": "Pose a situated problem",
+          "attitude": "Curious",
+          "bridge": "What would an adequate account require?"
+        },
+        {
+          "locator": "pp. 3–4, paragraphs 2–3",
+          "observation": "Description gives way to a question about inhabiting.",
+          "job": "Change the mode of attention",
+          "attitude": "Attentive",
+          "bridge": "How far can this small place extend?"
+        },
+        {
+          "locator": "pp. 4–5, paragraphs 4–5",
+          "observation": "The house becomes a first world against distant abstraction.",
+          "job": "Change the scale",
+          "attitude": "Expansive",
+          "bridge": "What enters a new place with its inhabitant?"
+        },
+        {
+          "locator": "p. 5, paragraph 6",
+          "observation": "Shelter opens into remembered houses and imagination.",
+          "job": "Let times coexist",
+          "attitude": "Tender",
+          "bridge": "How does the present place now feel different?"
+        }
+      ],
+      "adaptation": {
+        "title": "An inhabited detail widens",
+        "description": "An Ada proposal for a spatial passage that opens into memory without losing its present setting.",
+        "instructions": [
+          "Begin with a specific place and a question about how it is inhabited.",
+          "Move from visible description to a concrete bodily relation.",
+          "Change the scale of attention while naming the limits of the analogy.",
+          "Bring a sourced or clearly imagined memory into relation with the present room; allow different experiences."
+        ]
+      }
+    },
+    {
+      "id": "carroll-path",
+      "author": "Lewis Carroll",
+      "title": "Through the Looking-Glass — The Garden of Live Flowers",
+      "edition": "1871; Wikisource transcription.",
+      "locator": "Chapter II opening path episode, then the later approach to the Red Queen.",
+      "source": "https://en.wikisource.org/wiki/Through_the_Looking-Glass,_and_What_Alice_Found_There/Chapter_II",
+      "note": "Two selected episodes; the intervening flower conversation is omitted from this analysis, not claimed absent.",
+      "takeaway": "Repeated attempts prepare a reversal that becomes legible through action.",
+      "caution": "A fictional rule is not a physics explanation. An Ada version needs a consistent, inspectable mechanism.",
+      "steps": [
+        {
+          "locator": "Opening two paragraphs",
+          "observation": "An ordinary destination meets a path that returns Alice home.",
+          "job": "Establish a frustrated expectation",
+          "attitude": "Curious",
+          "bridge": "Will a more deliberate attempt succeed?"
+        },
+        {
+          "locator": "Opening paragraphs 3–5",
+          "observation": "Determination produces another return and an accusation against the house.",
+          "job": "Repeat with escalation",
+          "attitude": "Playful",
+          "bridge": "What alternative action could work?"
+        },
+        {
+          "locator": "Later: advice from the Rose and Alice's first attempt",
+          "observation": "Counterintuitive advice is dismissed; approaching the Queen fails.",
+          "job": "Test the familiar rule",
+          "attitude": "Questioning",
+          "bridge": "What happens if the advice is tried?"
+        },
+        {
+          "locator": "Next two paragraphs",
+          "observation": "Walking away succeeds where approaching failed.",
+          "job": "Reveal through action",
+          "attitude": "Surprised",
+          "bridge": "What rule can now be investigated?"
+        }
+      ],
+      "adaptation": {
+        "title": "A rule discovered through failed attempts",
+        "description": "An Ada proposal for a bounded puzzle whose operation is learned through consequences.",
+        "instructions": [
+          "Give the student a simple goal and show one understandable failed attempt.",
+          "Repeat with one meaningful variation; keep the mechanism consistent.",
+          "Offer a counterintuitive possibility and test the ordinary expectation.",
+          "Try the alternative, then explain precisely why this artifact permits the result."
+        ]
+      }
+    }
+  ]
+}

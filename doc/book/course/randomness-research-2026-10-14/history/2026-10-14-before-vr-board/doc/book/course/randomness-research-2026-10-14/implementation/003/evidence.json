@@ -1,0 +1,79 @@
+{
+  "scope": "First scripted cycle and provisional writing return; human cycle incomplete",
+  "runs": [
+    {
+      "id": "seed-bench.native.001",
+      "kind": "scripted_native",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/native.json",
+      "sha256": "5105387cd35612ba96c7cbaf4077b8917be98714a52b7e0958c00ab614ff4db6",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json"
+    },
+    {
+      "id": "seed-bench.replay.001",
+      "kind": "fresh_process_replay",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/fresh-process.json",
+      "sha256": "c3a961f9006f1ca1db19a2f3926ec6b20e916d03459181c9e7063ca346fd122a",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json"
+    },
+    {
+      "id": "seed-bench.printed.001",
+      "kind": "automated_printed_reconstruction",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/printed-reconstruction.json",
+      "sha256": "ce368a3f019707736786068e467a181c1cf5365af3537e42828708635d5d05fe",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json"
+    },
+    {
+      "id": "seed-bench.museum.001",
+      "kind": "rendered_scripted_museum",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-input-fixed.json",
+      "sha256": "0efbddb936b1b61579d8c079cd5c14e417165bbcc9b150687ee62a2ab8f235a7",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json"
+    },
+    {
+      "id": "seed-bench.launcher.001",
+      "kind": "launcher_smoke",
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/visit-smoke.json",
+      "sha256": "f55a35a4d28e3096c8ac534cfc588f62bed2d43e5fd17c83897995d105ca7e81",
+      "passed": true,
+      "source_manifest": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/input-fixed-sources.json"
+    }
+  ],
+  "record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+  "observations": [
+    "seed-bench.O1",
+    "seed-bench.O2",
+    "seed-bench.O3",
+    "seed-bench.O4"
+  ],
+  "fault_reports": [
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/alias/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/bad-import-mutation/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/draw-on-switch/fault.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/input-fixed/wrong-mean/fault.json"
+  ],
+  "retained_failed_runs": [
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/native.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/import-diagnostic.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/import-fixed/native.json",
+    "doc/book/course/randomness-research-2026-10-14/implementation/003/runs/import-fixed/fresh-process.json"
+  ],
+  "captures": [
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-input-fixed/A-flat.png",
+      "sha256": "a5eb3d8a8e7061b61bfad5bdafb44b3c46a3cbcdd5eb9d8c1c8651ce6fcfdf34",
+      "storage": "local image; ignored by repository policy"
+    },
+    {
+      "path": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-input-fixed/B-mean-height.png",
+      "sha256": "50bd0488f84bd76dcf9dc498d796c53d8f458cd3ee737d7856b6647ff5ce80f1",
+      "storage": "local image; ignored by repository policy"
+    }
+  ],
+  "physical_VR": "not_tested",
+  "independent_learner": "not_tested",
+  "performance": "not_tested"
+}
