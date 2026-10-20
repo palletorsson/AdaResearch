@@ -21,6 +21,7 @@ class_name PinkTriangle
 
 @export_group("Form")
 @export var field_size: float = 1.5
+@export var round_field: bool = false
 @export var triangle_scale: float = 0.62
 ## false = reclaimed (point-up, ACT UP). true = camp badge (point-down).
 @export var inverted: bool = false
@@ -79,9 +80,18 @@ func _build() -> void:
 	# Black field.
 	var field := MeshInstance3D.new()
 	field.name = "Field"
-	var fm := BoxMesh.new()
-	fm.size = Vector3(field_size, field_size, 0.04)
-	field.mesh = fm
+	if round_field:
+		var disc := CylinderMesh.new()
+		disc.top_radius = field_size * 0.5
+		disc.bottom_radius = field_size * 0.5
+		disc.height = 0.04
+		disc.radial_segments = 64
+		field.mesh = disc
+		field.rotation.x = PI / 2
+	else:
+		var fm := BoxMesh.new()
+		fm.size = Vector3(field_size, field_size, 0.04)
+		field.mesh = fm
 	var fmat := StandardMaterial3D.new()
 	fmat.albedo_color = field_color
 	fmat.roughness = 0.95

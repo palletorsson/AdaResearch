@@ -21,6 +21,8 @@ var vertex_color: Color = Color(0.2, 0.8, 0.3, 1.0)
 @export var strip_length: float = 4.0
 @export var base_y: float = 0.0
 @export var height: float = 0.5
+## Enlarge the ribbon around its resting centre without scaling XR bodies or UI.
+@export_range(0.1,4.0,0.05) var geometry_scale: float = 1.0
 
 ## Freeze behavior options
 @export var alter_freeze : bool = false
@@ -63,6 +65,7 @@ var fold_study: Node
 var _study_requested := false
 
 func _ready():
+	geometry_scale=clampf(float(get_meta("config_geometry_scale",geometry_scale)),0.1,4.0)
 	strip_mesh = MeshInstance3D.new()
 	strip_mesh.name = "StripMesh"
 	add_child(strip_mesh)
@@ -134,7 +137,8 @@ func _initialize_straight_strip():
 			z_offset = -0.15
 			y_val = base_y + height + strip_y_offset
 
-		vertex_positions.append(Vector3(x, y_val, z_offset))
+		var centre_y := base_y + strip_y_offset + height * 0.65
+		vertex_positions.append(Vector3(x * geometry_scale, centre_y + (y_val - centre_y) * geometry_scale, z_offset * geometry_scale))
 
 func _setup_drag_points():
 	drag_points = DragPointSet.new()

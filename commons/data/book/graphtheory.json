@@ -156,8 +156,8 @@
       "map": "GT_Flow",
       "lines": [
         {
-          "token": "karger_algorithm",
-          "text": "Karger's algorithm is a bet that randomness repeated enough times becomes certainty",
+          "token": "graph_worlds",
+          "text": "Crates use slots. A message can be copied. What does this connection carry?",
           "by": "draft"
         },
         {
@@ -171,24 +171,29 @@
           }
         }
       ],
-      "hero": "push_relabel_algorithm"
+      "hero": "graph_worlds"
     },
     {
       "pearl": "gt matching",
       "map": "GT_Matching",
       "lines": [
         {
+          "token": "matching_workshop",
+          "text": "The drill is taken. The saw is free. Can an earlier choice make room for another?",
+          "by": "draft"
+        },
+        {
+          "token": "ada_relations",
+          "text": "Going next, depending on, returning to, sharing: which relation does this line record?",
+          "by": "draft"
+        },
+        {
           "token": "edmonds_algorithm",
           "text": "The same graph, two greedy scan orders: which pairs does an early choice prevent?",
-          "by": "draft",
-          "note": "an odd cycle cannot pair itself — match any two and a third is stranded, so the blossom's completion must come from outside it; the greedy pass shipped here never looks outside, and calls its leftovers structural.",
-          "note_src": {
-            "file": "commons/maps/GT_Matching/critical.md",
-            "quote": "The blossom is the structure that says: this group cannot pair itself. It needs something from outside."
-          }
+          "by": "draft"
         }
       ],
-      "hero": "edmonds_algorithm"
+      "hero": "matching_workshop"
     }
   ]
 }

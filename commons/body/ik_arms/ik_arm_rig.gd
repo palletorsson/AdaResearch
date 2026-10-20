@@ -162,19 +162,9 @@ func _physics_process(delta: float) -> void:
 	_drive_girdle(wrist_now, delta)
 	_aim_elbow(wrist_now)
 
-	## 3. After TwoBoneIK3D solves, override Hand bone rotation to match controller
-	##    This is a workaround for the known TwoBoneIK3D bug where the tip bone
-	##    rotation is not constrained to the target's orientation.
-	if is_instance_valid(_controller) and _idx_hand >= 0:
-		var hand_global_xform: Transform3D = _skeleton.global_transform * _skeleton.get_bone_global_pose(_idx_hand)
-		var parent_global: Transform3D = _skeleton.global_transform * _skeleton.get_bone_global_pose(_idx_lower)
-		## the cuff takes the WRIST's roll, not the controller's — they differ by
-		## whatever the hand model's rest applies, and using the controller twists
-		## the sleeve against the hand it is supposed to meet.
-		var desired_local_basis: Basis = parent_global.basis.inverse() * _wrist_xform().basis.orthonormalized()
-		var current_pose: Transform3D = _skeleton.get_bone_pose(_idx_hand)
-		current_pose.basis = desired_local_basis
-		_skeleton.set_bone_pose(_idx_hand, current_pose)
+	# Position solves the arm. The separately tracked hand owns wrist rotation.
+	# Feeding that rotation into the last mesh ring twisted the entire forearm
+	# between only two rings, producing the stretched/twisted sleeve.
 
 
 ## ————————————————————————————————————————————————————————————————————
@@ -425,15 +415,12 @@ func _build_procedural_mesh() -> void:
 		-(upper_arm_length + lower_arm_length),        # wrist (Hand origin) — the end
 	]
 
-	## Which bone owns each ring (100% weight to nearest bone)
-	## The cuff still rides the HAND bone, not the forearm: where the sleeve meets
-	## the real hand it should turn with the wrist, or the two part company on a
-	## roll. The Hand bone stays in the skeleton — the IK chain needs an end bone
-	## and it carries the wrist orientation — it is simply no longer drawn.
+	## The sleeve's cuff belongs to the forearm. The Hand bone is only the IK
+	## endpoint; the existing XR hand rotates freely beyond the circular cuff.
 	var ring_bone_index: Array[int] = [
 		_idx_upper,  # shoulder ring → UpperArm
 		_idx_lower,  # elbow ring → LowerArm
-		_idx_hand,   # wrist ring → Hand — the sleeve's cuff
+		_idx_lower,  # wrist ring → forearm, independent of tracked hand rotation
 	]
 
 	## Generate ring vertices

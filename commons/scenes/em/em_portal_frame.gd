@@ -2,7 +2,7 @@ extends RefCounted
 ## Museum plaster and a pink curtain. The curtain is one inexpensive surface,
 ## not a second camera rendering a hall that has not loaded yet.
 
-static func build(frame: Node3D, title: String, direction: int, wall_material: Material = null, floor_material: Material = null) -> void:
+static func build(frame: Node3D, title: String, direction: int, wall_material: Material = null, floor_material: Material = null, exit_sign := false) -> void:
 	# Local +Z is the approach side. Navigation may turn this frame towards
 	# the clear approach to an authored t marker after it is built.
 	frame.rotation.y = PI if direction > 0 else 0.0
@@ -32,8 +32,17 @@ static func build(frame: Node3D, title: String, direction: int, wall_material: M
 	_mesh(frame,st,veil,"PortalVeil")
 	var destination := title.replace("_"," ").strip_edges()
 	var pixel := minf(0.0019,1.65/maxf(1.0,destination.length()*32.0))
-	_text(frame,destination,Vector3(0,2.48,0.157),64,pixel,Color(0.13,0.12,0.14))
-	_text(frame,"NEXT HALL" if direction > 0 else "PREVIOUS HALL",Vector3(0,2.61,0.157),32,0.0017,Color(0.36,0.32,0.35))
+	if exit_sign:
+		# Mount the existing illuminated sign on the actual exit lintel.
+		# The destination stays below it, clear of both the sign and curtain.
+		var sign: Node3D = load("res://commons/artifacts/exit_sign/exit_sign.tscn").instantiate()
+		sign.name = "ExitSign"
+		sign.position = Vector3(0,2.60,0.15)
+		frame.add_child(sign)
+		_text(frame,destination,Vector3(0,2.425,0.157),64,minf(pixel,0.0015),Color(0.13,0.12,0.14))
+	else:
+		_text(frame,destination,Vector3(0,2.48,0.157),64,pixel,Color(0.13,0.12,0.14))
+		_text(frame,"NEXT HALL" if direction > 0 else "PREVIOUS HALL",Vector3(0,2.61,0.157),32,0.0017,Color(0.36,0.32,0.35))
 	build_landing(frame, accent, floor_material)
 
 static func build_landing(frame: Node3D, _accent: Color, floor_material: Material = null) -> void:

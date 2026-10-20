@@ -110,6 +110,7 @@ func adopt_current() -> void:
 	_restore_movement()
 	busy = false
 	_set_phase("idle", "")
+	_capture_book_walls()
 
 
 func _process(delta: float) -> void:
@@ -353,6 +354,12 @@ func _build_destination(record: Dictionary, returning := false) -> void:
 	busy = false
 	_set_phase("idle", "")
 	print("[em-portals] arrived in ", _current.node.get_meta("em_map", ""))
+	_capture_book_walls()
+
+func _capture_book_walls() -> void:
+	if _current.is_empty() or not is_instance_valid(_current.get("node")): return
+	var map_origin := Vector3(0,0,float(_current.z0) + float(museum.get("VESTIBULE_H")))
+	preload("res://commons/book/arrival_wall.gd").install(_current.node,map_origin)
 
 func return_to_source() -> void:
 	if phase != "error" or _source.is_empty():
@@ -619,7 +626,7 @@ func _authored_exit() -> Dictionary:
 					clear = false
 					break
 			if clear:
-				return {"source":"t","cell":cell,"marker":anchor,"door":p,"inward":inward,"yaw":yaw,"outset":outset}
+				return {"source":"t","cell":cell,"marker":anchor,"door":p,"inward":inward,"yaw":yaw,"outset":outset,"exit_sign":bool(config.get("exit_sign",false))}
 	return {"invalid":true,"source":"t","cells":candidates,"rejected":rejected}
 
 
@@ -749,7 +756,7 @@ func install_portals() -> void:
 			frame.name = "EntranceLanding"
 			builder.build_landing(frame, Color(0.54,0.20,1.0), museum.call("_sm","deck"))
 		else:
-			builder.build(frame,title,direction,seg.get_meta("em_wall_mat",museum.call("_sm","wall_white")),museum.call("_sm","deck"))
+			builder.build(frame,title,direction,seg.get_meta("em_wall_mat",museum.call("_sm","wall_white")),museum.call("_sm","deck"),direction > 0 and bool(_exit.get("exit_sign",false)))
 			frame.rotation.y = atan2(inward.x,inward.z)
 			_portals.append({"direction":direction, "position":p, "inward":inward})
 			if direction > 0: frame.set_meta("authored_exit",_exit)

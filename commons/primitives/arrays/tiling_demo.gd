@@ -18,8 +18,13 @@ extends Node3D
 @export var panel_spacing: float = 3.0
 
 func _ready() -> void:
-	_create_environment()
-	_create_floor()
+	# Museum placements share the hall lighting and floor. Leave the standalone
+	# demo unchanged; space its eleven samples apart when used as a small study.
+	if str(get_meta("config_embedded", false)).to_lower() == "true":
+		panel_spacing = 6.0
+	else:
+		_create_environment()
+		_create_floor()
 	_create_motif_gallery()
 	_create_composed_floors()
 
@@ -172,7 +177,7 @@ func _create_composed_floors() -> void:
 	label.text = "COMPOSED FLOORS"
 	label.font_size = 64
 	label.pixel_size = 0.003
-	label.position = Vector3(0, 0.05, 5.0)
+	label.position = Vector3(0, 0.05, panel_spacing * 2.0 if str(get_meta("config_embedded", false)).to_lower() == "true" else 5.0)
 	label.rotation_degrees.x = -90
 	label.modulate = Color(0.7, 0.7, 0.8)
 	add_child(label)
@@ -180,7 +185,7 @@ func _create_composed_floors() -> void:
 	for i in range(compositions.size()):
 		var spec: Dictionary = compositions[i]
 		var x: float = i * panel_spacing
-		var z: float = 6.0
+		var z: float = panel_spacing * 2.0 + 1.0 if str(get_meta("config_embedded", false)).to_lower() == "true" else 6.0
 
 		_spawn_composed_floor(spec, Vector3(x, 0, z))
 

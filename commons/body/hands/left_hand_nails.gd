@@ -7,6 +7,7 @@ extends Node3D
 var hand_mesh: MeshInstance3D
 var nail_material: StandardMaterial3D
 var skin_material: StandardMaterial3D
+@onready var game_manager: Node = get_node_or_null("/root/GameManager")
 @export var debug = false 
 
 var surface_skin_idx: int = -1
@@ -21,11 +22,11 @@ func _ready() -> void:
 	_apply_saved_colors()
 
 	# Listen for color changes
-	if GameManager:
-		if GameManager.has_signal("nail_color_changed"):
-			GameManager.nail_color_changed.connect(_on_nail_color_changed)
-		if GameManager.has_signal("hand_color_changed"):
-			GameManager.hand_color_changed.connect(_on_skin_color_changed)
+	if game_manager:
+		if game_manager.has_signal("nail_color_changed"):
+			game_manager.nail_color_changed.connect(_on_nail_color_changed)
+		if game_manager.has_signal("hand_color_changed"):
+			game_manager.hand_color_changed.connect(_on_skin_color_changed)
 
 func _find_surface_indices() -> void:
 	if not hand_mesh or not hand_mesh.mesh:
@@ -66,11 +67,11 @@ func _find_hand_mesh() -> void:
 		push_warning("LeftHandNails: Could not find hand mesh")
 
 func _apply_saved_colors() -> void:
-	if not hand_mesh or not GameManager:
+	if not hand_mesh or not game_manager:
 		return
 
 	# --- Nails ---
-	var saved_nail_color = GameManager.get_nail_color()
+	var saved_nail_color = game_manager.get_nail_color()
 	
 	if surface_nails_idx != -1:
 		# Get or create material for nails
@@ -94,7 +95,7 @@ func _apply_saved_colors() -> void:
 		hand_mesh.set_surface_override_material(surface_nails_idx, nail_material)
 	
 	# --- Skin ---
-	var saved_skin_color = GameManager.get_hand_color()
+	var saved_skin_color = game_manager.get_hand_color()
 	
 	if surface_skin_idx != -1:
 		# Get or create material for skin

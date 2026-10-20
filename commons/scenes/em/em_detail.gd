@@ -20,6 +20,8 @@ extends RefCounted
 #                            face count, so an un-wired caller still gets walls.
 #   fill_walls         bool  false = this building hangs nothing (Teshima, whose
 #                            whole argument is one work in an empty room).
+#   wall_frames        str   all (legacy), content (only frames with a line or
+#                            caption), off. Never affects doors or wall trim.
 #   hang_min_stretch   int   the shortest wall a showing may hang on, in metres.
 #                            Defaults to HANG_PITCH_FACES, which is the floor
 #                            _stretch_candidates has always enforced ("a
@@ -450,10 +452,14 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 
 	_add_wall_faces(faces, skirt_x, trim_x)
 	_add_arris_beads(walls, floors, trim_x)
-	_add_labels(faces, trim_x, maxi(int(opts.get("label_every", LABEL_EVERY)), 1))
+	var frame_mode := wall_frame_mode(opts.get("wall_frames", "all"))
+	seg.set_meta("em_wall_frames_mode", frame_mode)
+	# The old modulo labels are empty plates, not labels for actual works.
+	if frame_mode == "all":
+		_add_labels(faces, trim_x, maxi(int(opts.get("label_every", LABEL_EVERY)), 1))
 	# THE HUNG SHOWINGS, before the chamfer budget is spent — this family is not
 	# an arris and must never be the thing that a pathological template drops.
-	var hang_on: bool = bool(opts.get("fill_walls", true))
+	var hang_on: bool = bool(opts.get("fill_walls", true)) and frame_mode != "off"
 	var hang_cap: int = int(opts.get("wall_features_max", -1))
 	if hang_cap < 0:
 		# un-wired caller. One showing per ~6 dressed faces is the corpus median
@@ -625,6 +631,9 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	# WITHOUT a second cull that could take a survivor's bars. Which showings
 	# survive is unchanged; that a survivor is whole is the change.
 	_cull_showings_whole(hang_frame_x, hang_mount_x, hang_field_x)
+	# Resolve the text before emitting geometry. Empty places retain their indices
+	# (saved edits/adoptions address them), but content mode draws no empty frame.
+	_add_showing_cards(seg, hang_mount_x, opts, hang_frame_x, hang_field_x)
 	_emit(seg, "WallFrames", hang_frame_x, _hang_frame_mat(), true, false)
 	_emit(seg, "WallMounts", hang_mount_x, _hang_mount_mat(), false, false)
 	_emit(seg, "WallFields", hang_field_x, _hang_field_mat(), false, false)
@@ -657,12 +666,13 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	# `text`). The number is the showing's index in this segment, so
 	# "primitives · lines · 07" names one wall place across builds of the same
 	# plan; later a rule may swap the field for another wall-hanging body.
-	_add_showing_cards(seg, hang_mount_x, opts)
 	# one SELECTABLE proxy per showing: an empty Node3D at the mount's centre
 	# carrying its index, so the editor can pick a picture the way it picks an
 	# artifact. Invisible, no mesh, no collider — a handle, not a body.
 	if bool(opts.get("showing_proxies", false)):
 		for si in range(hang_mount_x.size()):
+			if (hang_mount_x[si] as Transform3D).basis.get_scale().length_squared() < 1e-9:
+				continue
 			var px := Node3D.new()
 			px.name = "Showing%d" % si
 			px.position = (hang_mount_x[si] as Transform3D).origin
@@ -1303,12 +1313,21 @@ static func _hang_format_name(wm: float, hm: float) -> String:
 	return ""
 
 
-static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> void:
+static func wall_frame_mode(value: Variant, fallback: String = "all") -> String:
+	var mode := str(value).strip_edges().to_lower()
+	return mode if mode in ["off", "content", "all"] else fallback
+
+
+static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary,
+		frames: Array = [], fields: Array = []) -> void:
 	var chapter := String(opts.get("chapter", ""))
 	var pearl := String(opts.get("pearl", ""))
+	var frame_mode := wall_frame_mode(opts.get("wall_frames", "all"))
 	var texts: Dictionary = {}
 	for rule_v in opts.get("showing_rules", []):
 		var rule: Dictionary = rule_v
+		if String(rule.get("pearl", "")) != "" and String(rule["pearl"]) != pearl:
+			continue
 		if rule.has("text") and String(rule.get("text", "")) != "":
 			texts[int(rule.get("index", -1))] = String(rule["text"])
 	var card_mat: StandardMaterial3D = _fallback(Color(0.97, 0.965, 0.95), 0.6, 0.0)
@@ -1341,7 +1360,8 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		speak_tokens.append("")
 	var free: Array = []
 	for _i in range(mounts.size()):
-		free.append(true)
+		# An architectural keep-out may already have removed this place.
+		free.append((mounts[_i] as Transform3D).basis.get_scale().length_squared() >= 1e-9)
 	# ── THE ADOPTION (2026-08-26, Palle: "maybe we should use some kind of
 	# closeness principle, so if there is wall work that can consume the text
 	# from the artifacts ... what is a good connection between the pearl text
@@ -1422,8 +1442,18 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 	var roboto: Font = null
 	if not speak_lines.is_empty() and ResourceLoader.exists("res://commons/font/Roboto-VariableFont_wdth,wght.ttf"):
 		roboto = load("res://commons/font/Roboto-VariableFont_wdth,wght.ttf")
+	var visible_count := 0
 	for si in range(mounts.size()):
 		var t: Transform3D = mounts[si]
+		if frame_mode == "off" or (frame_mode == "content"
+				and String(speak_lines[si]).strip_edges() == ""
+				and String(texts.get(si, "")).strip_edges() == ""):
+			var gone := Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO)
+			mounts[si] = gone
+			if si < fields.size(): fields[si] = gone
+			for k in range(4):
+				if si * 4 + k < frames.size(): frames[si * 4 + k] = gone
+			continue
 		# A CULLED PAGE KEEPS ITS INDEX BUT MUST NOT KEEP ITS CARD. _cull_showings_whole
 		# replaces a culled showing's mount with a zero-scale transform at the origin —
 		# "drawn as nothing and holds its place in the array", in its own words — so that
@@ -1436,6 +1466,7 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 		# air from old walls". No mount, no card.
 		if t.basis.get_scale().length_squared() < 1e-9:
 			continue
+		visible_count += 1
 		var wm: float = t.basis.get_scale().x if absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z) else t.basis.get_scale().z
 		var hm: float = t.basis.get_scale().y
 		var along_x: bool = absf(t.basis.get_scale().x) > absf(t.basis.get_scale().z)
@@ -1607,6 +1638,7 @@ static func _add_showing_cards(seg: Node3D, mounts: Array, opts: Dictionary) -> 
 			if si < speak_tokens.size():
 				sl.set_meta("em_speak_token", String(speak_tokens[si]))
 			seg.add_child(sl)
+	seg.set_meta("em_wall_frames_visible", visible_count)
 
 
 static func _hang_mount_mat() -> Material:

@@ -64,7 +64,7 @@ func _dodecahedron_geometry() -> Dictionary:
 		[0, 12, 13, 3, 8],
 		[0, 8, 9, 2, 16],
 		[0, 16, 18, 1, 12],
-		[1, 18, 6, 14, 12],
+		[6, 14, 15, 7, 11], # Lower pentagon; 14 -> 12 crosses the interior.
 		[2, 9, 4, 15, 14],
 		[2, 14, 6, 18, 16],
 		[3, 13, 5, 19, 17],

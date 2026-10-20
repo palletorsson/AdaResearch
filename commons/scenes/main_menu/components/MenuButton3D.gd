@@ -106,8 +106,8 @@ func pointer_event(event: XRToolsPointerEvent) -> void:
 			# We handle click via hover, but we can keep this for direct click if needed
 			pass
 
-func pointer_entered() -> void:
-	_is_hovering = true
+func pointer_entered(activate_by_dwell := true) -> void:
+	_is_hovering = activate_by_dwell
 	_hover_timer = 0.0
 	
 	# Trigger hover haptic

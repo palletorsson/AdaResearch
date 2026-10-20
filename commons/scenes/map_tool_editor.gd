@@ -38,6 +38,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Load map") var _b_load: Callable = _load
 @export_tool_button("Save map") var _b_save: Callable = _save
 @export_tool_button("Clear view") var _b_clear: Callable = _clear
+@export_tool_button("The Void / floor editor") var _b_void: Callable = func(): OS.shell_open("http://localhost:3003/editor/void")
 @export_tool_button("🖥 Show in desktop") var _b_desktop: Callable = _show_in_desktop
 @export_tool_button("🧱 Show in wall editor") var _b_walled: Callable = _show_in_wall_editor
 @export_tool_button("📲 Push to Quest") var _b_push: Callable = _push_to_quest

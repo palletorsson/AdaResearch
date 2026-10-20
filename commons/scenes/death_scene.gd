@@ -320,6 +320,16 @@ func _on_continue() -> void:
 	if _continue_pressed:
 		return
 	_continue_pressed = true
+	# An explicitly entered encounter returns to its own scene after death.
+	var game := get_node_or_null("/root/GameManager")
+	if game != null and game.has_meta("encounter_return_scene"):
+		var destination: String = str(game.get_meta("encounter_return_scene"))
+		game.remove_meta("encounter_return_scene")
+		if ResourceLoader.exists(destination):
+			var staging := _find_staging()
+			if staging != null: staging.load_scene(destination)
+			else: get_tree().change_scene_to_file(destination)
+			return
 
 	# BACK TO THE HALL YOU DIED IN (2026-09-07, Palle: "click to reload back to
 	# the same map"). The museum set these statics on its way out; open_at is the

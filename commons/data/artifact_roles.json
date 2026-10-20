@@ -99,12 +99,12 @@
       "floating_sphere_field": "secondary",
       "draw_stick": "primary",
       "automatic_writing_desk": "secondary",
-      "draw_dot": {
-        "role": "primary",
-        "group": "recording-contract"
-      },
+      "draw_dot": "primary",
       "hand_telemetry_diptych": "secondary",
-      "trace_ball_ramp": "primary"
+      "trace_ball_ramp": "primary",
+      "glass_paint_wall": "primary",
+      "trace_sampling_monitor": "secondary",
+      "film_foundation_trace": "secondary"
     },
     "Point_Line_Grid": {
       "grab_sphere_point_snap": {
@@ -159,51 +159,26 @@
       }
     },
     "Point_Animatedcube": {
-      "hangar_supply_pile": {
-        "role": "secondary",
-        "group": "boxes-example"
-      },
+      "hangar_supply_pile": "secondary",
       "floating_sphere_field": "decoration",
       "first_shadow": "secondary",
-      "wooden_pallet": {
-        "role": "secondary",
-        "group": "boxes-example"
-      },
-      "crate": {
-        "role": "secondary",
-        "group": "boxes-example"
-      },
-      "station_crates": {
-        "role": "secondary",
-        "group": "boxes-example"
-      },
-      "glove_box": {
-        "role": "secondary",
-        "group": "boxes-example"
-      },
-      "first_phosphor": {
-        "role": "secondary",
-        "group": "boxes-example"
-      },
-      "cube_lines": {
-        "role": "primary",
-        "group": "cube-construction"
-      },
+      "wooden_pallet": "secondary",
+      "crate": "secondary",
+      "station_crates": "secondary",
+      "glove_box": "secondary",
+      "first_phosphor": "secondary",
+      "cube_lines": "secondary",
       "animatedcubebuilder": {
         "role": "primary",
         "group": "cube-construction"
       },
-      "polyhedron_nets_cube": {
-        "role": "primary",
-        "group": "cube-construction"
-      },
+      "polyhedron_nets_cube": "primary",
       "pyramid": "secondary",
-      "cube_diagonal_plate": {
-        "role": "primary",
-        "group": "cube-construction"
-      },
+      "cube_diagonal_plate": "secondary",
       "prefab_box_library": "primary",
-      "cube_sorting_line": "primary"
+      "cube_sorting_line": "primary",
+      "paired_cube_diagonals": "primary",
+      "film_cube_corner": "secondary"
     },
     "Primitives_Polythedra": {
       "becoming_catalyst": "secondary",
@@ -220,7 +195,7 @@
         "group": "stop-and-flow"
       },
       "pyramid_edit": {
-        "role": "secondary",
+        "role": "primary",
         "group": "count-and-change"
       },
       "grab_tetrahedron": {
@@ -248,15 +223,36 @@
         "role": "primary",
         "group": "stop-and-flow"
       },
-      "street_sign": {
-        "role": "primary",
-        "group": "stop-and-flow"
-      },
+      "street_sign": "decoration",
       "trafficcone": "decoration",
       "if_not_exist_create": "secondary",
       "polyhedra_boundary_plate": {
         "role": "primary",
         "group": "enclosure-and-collision"
+      },
+      "align_tetrahedron": {
+        "role": "primary",
+        "group": "enclosure-and-collision"
+      },
+      "align_wedge": {
+        "role": "primary",
+        "group": "enclosure-and-collision"
+      },
+      "corner_tetrahedron": {
+        "role": "primary",
+        "group": "enclosure-and-collision"
+      },
+      "wedge_palace": {
+        "role": "primary",
+        "group": "stop-and-flow"
+      },
+      "wedge_column": {
+        "role": "primary",
+        "group": "stop-and-flow"
+      },
+      "wedge_mouse_model": {
+        "role": "primary",
+        "group": "stop-and-flow"
       }
     },
     "Primitives_Ignorance": {
@@ -2012,11 +2008,11 @@
       {
         "id": "count-and-change",
         "title": "Count a solid, change a corner",
-        "role": "secondary"
+        "role": "primary"
       },
       {
         "id": "stop-and-flow",
-        "title": "Prism, barrier, slope and direction",
+        "title": "Blocking, climbing, sculpture and a small route",
         "role": "primary"
       },
       {
@@ -2144,7 +2140,8 @@
     },
     "Point_Animatedcube": {
       "primary": [
-        "@cube-construction",
+        "paired_cube_diagonals",
+        "polyhedron_nets_cube",
         "prefab_box_library",
         "cube_sorting_line"
       ],
@@ -2155,8 +2152,16 @@
         "polyhedron_nets_cube"
       ],
       "secondary": [
-        "@boxes-example",
+        "cube_lines",
+        "cube_diagonal_plate",
+        "film_cube_corner",
         "first_shadow",
+        "first_phosphor",
+        "wooden_pallet",
+        "hangar_supply_pile",
+        "crate",
+        "station_crates",
+        "glove_box",
         "pyramid"
       ],
       "secondary|boxes-example": [
@@ -2321,16 +2326,18 @@
       "primary": [
         "#note-1",
         "@enclosure-and-collision",
+        "@count-and-change",
         "#note-2",
         "@stop-and-flow"
       ],
       "primary|enclosure-and-collision": [
+        "align_tetrahedron",
+        "align_wedge",
+        "corner_tetrahedron",
         "grab_trihedron",
-        "grab_tetrahedron",
         "polyhedra_boundary_plate"
       ],
       "secondary": [
-        "@count-and-change",
         "@solids-gather",
         "path_watchdog",
         "path_game_controller",
@@ -2344,8 +2351,10 @@
       ],
       "primary|stop-and-flow": [
         "prism_block",
-        "concrete_barrier",
-        "street_sign"
+        "wedge_palace",
+        "wedge_column",
+        "wedge_mouse_model",
+        "concrete_barrier"
       ],
       "secondary|count-and-change": [
         "pyramid_edit",
@@ -2355,6 +2364,9 @@
         "diamonds",
         "rock_spawner",
         "rock_scanner"
+      ],
+      "primary|count-and-change": [
+        "pyramid_edit"
       ]
     },
     "Vectors_Act1_WhatAVectorIs": {
@@ -2663,18 +2675,18 @@
     },
     "Point_Trace": {
       "primary": [
-        "@recording-contract",
-        "draw_stick",
-        "trace_ball_ramp",
-        "whiteboard"
+        "glass_paint_wall",
+        "draw_dot",
+        "trace_ball_ramp"
       ],
       "primary|recording-contract": [
         "draw_dot"
       ],
       "secondary": [
-        "science_screen",
+        "trace_sampling_monitor",
         "hand_telemetry_diptych",
-        "automatic_writing_desk"
+        "science_screen",
+        "film_foundation_trace"
       ],
       "decoration": []
     },

@@ -19,11 +19,14 @@ func _ready() -> void:
 	label.no_depth_test = false
 	label.position = Vector3(0, 0.68, 0.17)
 	add_child(label)
-	if condition in ["absent", "visible", "solid"]:
-		# Equal supports make the three conditions comparable. The first stays
-		# empty; a plinth's box collider is not a hidden point collider.
+	if condition == "absent":
+		# The empty first marker keeps its support. The visible/solid comparison
+		# has no support: only the sphere's added collider may stop the body.
 		_make_pedestal(Vector3(0.82, CENTRE.y - RADIUS, 0.82), "PointPlinth")
 		label.position = Vector3(0, 0.68, 0.421)
+	elif condition in ["visible", "solid"]:
+		label.position = Vector3(0, 0.012, 0.48)
+		label.rotation.x = -PI / 2.0
 	if condition == "absent":
 		return
 	if condition == "held":
@@ -71,6 +74,20 @@ func _ready() -> void:
 	if condition == "pedestal":
 		_make_pedestal(Vector3(0.94, 0.75, 0.94), "Pedestal")
 		label.position = Vector3(0, 0.49, 0.481)
+
+func apply_grid_config(config: Dictionary) -> void:
+	# The Void requests supports for its three-point display. The source
+	# corridor keeps its unsupported visible/solid comparison by default.
+	if condition not in ["absent", "visible", "solid"]: return
+	var supported := bool(config.get("study_plinth", condition == "absent"))
+	var pedestal := get_node_or_null("PointPlinth")
+	if supported and pedestal == null:
+		_make_pedestal(Vector3(0.82, CENTRE.y - RADIUS, 0.82), "PointPlinth")
+	elif not supported and pedestal != null:
+		pedestal.free()
+	var label := get_node("PointOneLabel") as Label3D
+	label.position = Vector3(0, 0.68, 0.421) if supported else Vector3(0, 0.012, 0.48)
+	label.rotation.x = 0.0 if supported else -PI / 2.0
 
 func _make_pedestal(size: Vector3, node_name: String) -> void:
 	var pedestal := MeshInstance3D.new()

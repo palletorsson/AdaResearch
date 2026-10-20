@@ -161,12 +161,15 @@ func _process(delta: float) -> void:
 	if _is_weapon:
 		pass
 	elif _held and is_instance_valid(_held) and _camera:
-		var cam_xf := _camera.global_transform
-		var target_pos := cam_xf.origin + (-cam_xf.basis.z) * _hold_distance
-		var xf := _held.global_transform
-		xf.origin = xf.origin.lerp(target_pos, 0.4)
-		xf.basis = xf.basis.orthonormalized().slerp(cam_xf.basis.orthonormalized(), 0.4)
-		_held.global_transform = xf
+		# A ride grip owns its path in the world; holding it carries the player.
+		# Ordinary carried props keep their existing camera-relative behaviour.
+		if not _held.get_meta("hold_preserves_world_transform", false):
+			var cam_xf := _camera.global_transform
+			var target_pos := cam_xf.origin + (-cam_xf.basis.z) * _hold_distance
+			var xf := _held.global_transform
+			xf.origin = xf.origin.lerp(target_pos, 0.4)
+			xf.basis = xf.basis.orthonormalized().slerp(cam_xf.basis.orthonormalized(), 0.4)
+			_held.global_transform = xf
 	elif _held and not is_instance_valid(_held):
 		_held = null
 

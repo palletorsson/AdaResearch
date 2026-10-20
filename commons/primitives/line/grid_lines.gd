@@ -69,6 +69,10 @@ var _data_table_page: int = 0  # Current page of points to display
 var _archive_auto := false
 var _page_buttons: Array[Node3D] = []
 var _data_table_timer: float = 0.0  # Timer for page cycling
+var _last_trace_visual: Node3D
+var _last_shadow_visual: Node3D
+var _trace_serial := 0
+var point_selection: Node3D
 
 func _process(delta: float) -> void:
 	for i in range(_rotating_instances.size() - 1, -1, -1):
@@ -102,6 +106,10 @@ func _ready():
 			_create_trace_mesh(trace)
 			_add_trace_to_data(trace)
 		_update_data_table()
+	if str(get_meta("config_selection", "0")) in ["1", "true"]:
+		point_selection = load("res://commons/artifacts/primitive_encounters/trace_selection.gd").new()
+		point_selection.name = "PointSelection"
+		add_child(point_selection)
 
 func _on_trace_added(points: Array) -> void:
 	_create_trace_mesh(points)
@@ -134,7 +142,7 @@ func _create_trace_mesh(points: Array) -> void:
 	
 	print("GridLines: Creating trace mesh with %d points. Centered at: %s. Size: %s. Final Scale: %.2f" % [points.size(), center, size, final_scale])
 	
-	_create_shadow_trace(points, center, final_scale)
+	_last_shadow_visual = _create_shadow_trace(points, center, final_scale)
 	
 	var mesh = ImmediateMesh.new()
 	var instance = MeshInstance3D.new()
@@ -143,6 +151,7 @@ func _create_trace_mesh(points: Array) -> void:
 	instance.position.y = trace_height
 	add_child(instance)
 	_rotating_instances.append(instance)
+	_last_trace_visual = instance
 	
 	var mat = StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -162,7 +171,7 @@ func _create_trace_mesh(points: Array) -> void:
 	var tween = create_tween()
 	tween.tween_property(instance, "scale", Vector3.ONE, 1.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
-func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -> void:
+func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -> Node3D:
 	var shadow_points = []
 	var last_snapped = Vector3.INF
 	
@@ -178,7 +187,7 @@ func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -
 			last_snapped = snapped
 			
 	if shadow_points.size() < 2:
-		return
+		return null
 
 	var mesh = ImmediateMesh.new()
 	var instance = MeshInstance3D.new()
@@ -208,6 +217,7 @@ func _create_shadow_trace(points: Array, center: Vector3, scale_factor: float) -
 	instance.scale = Vector3.ZERO
 	var tween = create_tween()
 	tween.tween_property(instance, "scale", Vector3.ONE, 1.0).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	return instance
 
 func setup_grid():
 	var half_size = (grid_size * cell_spacing) / 2.0
@@ -320,6 +330,9 @@ func set_archive_auto(enabled: bool) -> void:
 		_data_panel.refresh()
 
 func step_archive_page(direction: int) -> void:
+	if is_instance_valid(point_selection):
+		point_selection.step_page(direction)
+		return
 	set_archive_auto(false)
 	if _trace_data_list.is_empty(): return
 	var pages := maxi(1, ceili(float(_trace_data_list[-1].raw_points.size()) / 10.0))
@@ -344,12 +357,16 @@ func _add_trace_to_data(points: Array) -> void:
 	var size = max_p - min_p
 
 	var trace_info = {
+		"id": _trace_serial,
+		"visual": _last_trace_visual,
+		"shadow": _last_shadow_visual,
 		"points": points.size(),
 		"length": total_length,
 		"size": size,
 		"raw_points": points.duplicate()
 	}
 	_trace_data_list.append(trace_info)
+	_trace_serial += 1
 
 	# Keep only last 10 traces in data list
 	while _trace_data_list.size() > 10:

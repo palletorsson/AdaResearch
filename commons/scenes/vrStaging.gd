@@ -570,6 +570,41 @@ func get_scene_loaded() -> bool:
 func switch_to_scene(scene_path: String, user_data = null):
 	load_scene(scene_path, user_data)
 
+## Return from a practice scene without rebuilding the XR session or menu rig.
+var _returning_to_menu := false
+
+func return_to_main_menu() -> void:
+	if _returning_to_menu: return
+	_returning_to_menu = true
+	if current_scene:
+		current_scene.scene_pre_exiting(null)
+		_safe_remove_signals(current_scene)
+	if _tween: _tween.kill()
+	_tween = get_tree().create_tween()
+	_tween.tween_method(set_fade, 0.0, 1.0, quick_transition_duration)
+	await _tween.finished
+	if current_scene:
+		scene_exiting.emit(current_scene, null)
+		current_scene.scene_exiting(null)
+		$Scene.remove_child(current_scene)
+		current_scene.queue_free()
+		current_scene = null
+	current_scene_path = ""
+	xr_origin.set_process_internal(true)
+	xr_origin.current = true
+	xr_camera.current = true
+	$LoadingScreen.visible = false
+	var menu := get_node_or_null("MainMenu3D")
+	if menu != null:
+		menu._entering_head_arena = false
+		for button in menu.get_node("Buttons").get_children():
+			if button.has_method("pointer_exited"): button.pointer_exited()
+		menu.visible = true
+	_tween = get_tree().create_tween()
+	_tween.tween_method(set_fade, 1.0, 0.0, quick_transition_duration)
+	await _tween.finished
+	_returning_to_menu = false
+
 ## Override load_scene to support quick transitions for in-sequence map changes
 func load_scene(p_scene_path: String, user_data = null) -> void:
 	# Check if this is an in-sequence transition (same scene type, just different map)

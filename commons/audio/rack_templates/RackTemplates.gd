@@ -219,6 +219,8 @@ static func _instantiate_element(type: String, elem: Dictionary, counters: Dicti
 			var base_mesh: Node = btn.find_child("BaseMesh", true, false)
 			if base_mesh:
 				base_mesh.visible = false
+			if elem.get("shape", "round") == "rect":
+				make_button_rectangular(btn)
 			return btn
 
 		"monitor":
@@ -1727,3 +1729,19 @@ static func _add_label(parent: Node3D, text: String, pos: Vector3, size: int = 1
 	lbl.horizontal_alignment = align
 	lbl.transform.origin = pos
 	parent.add_child(lbl)
+
+static func make_button_rectangular(button: Node3D) -> void:
+	# The existing button's local Y points out of the panel. Keep its press
+	# motion and feedback, with a wider cap and matching rectangular hit area.
+	var cap := BoxMesh.new()
+	cap.size = Vector3(0.080, 0.020, 0.044)
+	button.get_node("Button/ButtonMesh").mesh = cap
+	var bezel := BoxMesh.new()
+	bezel.size = Vector3(0.090, 0.010, 0.054)
+	button.get_node("AccentRing").mesh = bezel
+	var solid := BoxShape3D.new()
+	solid.size = Vector3(0.080, 0.024, 0.044)
+	button.get_node("Button/CollisionShape3D").shape = solid
+	var touch := BoxShape3D.new()
+	touch.size = Vector3(0.088, 0.056, 0.052)
+	button.get_node("InteractableAreaButton/CollisionShape3D").shape = touch

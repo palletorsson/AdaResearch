@@ -4,6 +4,8 @@ extends Node3D
 class_name PickupCube
 
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+## Optional host score keeps isolated trials out of the museum's progress.
+var score_provider: Node
 
 # @identity
 # essence: the project's generic manipulable — a half-metre cube that exists to be taken and has no
@@ -328,7 +330,8 @@ func collect() -> void:
 	print("PickupCube: Collected! Adding %d points" % points_value)
 
 	# Send signal to GameManager singleton with pickup position
-	GameManager.add_points(points_value, global_position)
+	if is_instance_valid(score_provider): score_provider.add_points(points_value, global_position)
+	else: GameManager.add_points(points_value, global_position)
 
 	# Regenerate sound with latest parameters (from MarioSoundController if available)
 	var fresh_sound = _generate_mario_pickup_sound()

@@ -111,6 +111,13 @@ func set_skin_color(color: Color) -> void:
 	if is_instance_valid(_right_arm):
 		_right_arm.set_arm_color(color)
 
+func set_plain_arms(color: Color) -> void:
+	for arm in [_left_arm,_right_arm]:
+		var material := StandardMaterial3D.new()
+		material.albedo_color = color
+		material.roughness = 0.85
+		arm._mesh_instance.material_override = material
+
 
 ## Toggle arm visibility.
 func set_visible_arms(v: bool) -> void:

@@ -115,7 +115,10 @@ func _build_engraving() -> void:
 	_built = true
 	ivory = _mat("d8d3c5"); stone = _mat("aaa79b"); dark = _mat("4b4941")
 	wood = _mat("777164"); iron = _mat("555752",0.43,0.55); paper = _mat("e5e0d2")
-	_architecture(); _polyhedron(); _main_figure(); _putto(); _dog(); _instruments(); _tools(); _sky()
+	_architecture(); _polyhedron()
+	if str(get_meta("config_figure", "")) == "skull": _skull_study()
+	else: _main_figure()
+	_putto(); _dog(); _instruments(); _tools(); _sky()
 	var sphere := _group("Sphere",Vector3(-2.25,0.43,2.05))
 	var ball := _ellipsoid(sphere,"StoneSphere",Vector3.ZERO,Vector3.ONE*0.43,ivory)
 	ball.create_convex_collision()
@@ -323,3 +326,22 @@ func _sky() -> void:
 	_feather(g,Vector3(-.65,.55,.13),Vector3(-.1,.88,.13),.15,wood)
 	_box(g,"Banner",Vector3(-.66,.59,.15),Vector3(1.04,.22,.025),paper)
 	_label(g,"MelencoliaTitle","MELENCOLIA I",Vector3(-.66,.59,.17),48,.0022)
+
+func _skull_study() -> void:
+	var g := _group("SkullStudy", Vector3(1.35,0,0.25))
+	_box(g,"StoneSupport",Vector3(0,.74,.1),Vector3(.58,.52,.52),stone,true)
+	var skull:Node3D = load("res://commons/artifacts/primitive_encounters/skull.gd").new()
+	skull.name="Skull";skull.position=Vector3(0,1.55,.1);skull.scale=Vector3.ONE*.48
+	skull.rotation_degrees.y=-22;g.add_child(skull)
+	# This is Ada's variation, not a reconstruction of Dürer's seated figure.
+	# Retain feather geometry from the figure so the replacement has real depth.
+	for side in [-1,1]:
+		var wing := Node3D.new()
+		wing.name="LeftWing" if side<0 else "RightWing"
+		g.add_child(wing)
+		for i in range(16):
+			var t := float(i)/15
+			var root := Vector3(side*(.16+.18*t),1.45,-.22)
+			var tip := Vector3(side*(.50+1.03*t),3.15-.94*t,-.35-.22*sin(t*PI))
+			_feather(wing,root,tip,.105,ivory if side>0 else stone)
+	_label(g,"Variation","ADA VARIATION · winged skull",Vector3(0,.86,.37),26,.0015)

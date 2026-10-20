@@ -22,6 +22,8 @@
 		"pixel_size": 0.001
 	},
 	"hall": {
+		"wall_frames": "content",
+		"_wall_frames": "content = only frames with text or captions; off = no wall frames or empty label plates; all = legacy wall dressing, including empty frames. Door frames, entrance and exit remain. Each map can override this with map_info.museum.wall_frames. Reload the hall after changing this setting.",
 		"depth_m": 4.5,
 		"ramp_len_m": 14,
 		"gallery_w_m": 4,

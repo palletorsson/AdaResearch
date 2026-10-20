@@ -143,10 +143,12 @@ func _build_triangle() -> void:
 	# Material — vertex colors enabled for front/back distinction
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
-	mat.emission_enabled = true
-	mat.emission = Color(0.8, 0.3, 0.5)
-	mat.emission_energy_multiplier = 0.5
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides
+	# Orientation is the comparison: keep the two painted colours legible
+	# even when the back receives no work light. Pink emission obscured blue.
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	# Each side has its own colour and reversed winding. Drawing both sides
+	# of both coplanar faces lets one colour win the depth test from either side.
+	mat.cull_mode = BaseMaterial3D.CULL_BACK
 	mat.metallic = 0.1
 	mat.roughness = 0.4
 	_tri_mesh.material_override = mat
@@ -158,13 +160,13 @@ func _build_triangle() -> void:
 
 
 ## One flat-shaded triangle, colour and normal set once for the three vertices —
-## the exact call order the shipped build used.
+## Godot treats clockwise vertices as the front; the supplied normal points out.
 func _face(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, col: Color, n: Vector3) -> void:
 	st.set_color(col)
 	st.set_normal(n)
 	st.add_vertex(a)
-	st.add_vertex(b)
 	st.add_vertex(c)
+	st.add_vertex(b)
 
 
 func _front_color() -> Color:
@@ -280,13 +282,17 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	var changed: bool = false
 
 	if config_data.has("height"):
+		changed = changed or not is_equal_approx(stick_height,float(config_data["height"]))
 		stick_height = float(config_data["height"])
 	if config_data.has("size"):
+		changed = changed or not is_equal_approx(triangle_size,float(config_data["size"]))
 		triangle_size = float(config_data["size"])
 	if config_data.has("tilt"):
+		changed = changed or not is_equal_approx(triangle_tilt,float(config_data["tilt"]))
 		triangle_tilt = float(config_data["tilt"])
 	if config_data.has("color"):
 		var c := Color(config_data["color"])
+		changed = changed or triangle_color_front != c
 		triangle_color_front = c
 
 	if config_data.has("sidedness"):

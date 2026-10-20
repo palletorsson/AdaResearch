@@ -1,5 +1,6 @@
 extends Node3D
 ## One pointer owner for legacy scalar controls. Native grabs take precedence.
+signal input_requested(pointer: Node3D)
 const LAYERS: int = (1 << 20) | (1 << 22)
 var control: Node3D
 var driver: Node3D
@@ -48,6 +49,7 @@ func move(value: float) -> void:
 	else: driver.move_slider(value)
 func pointer_event(event: XRToolsPointerEvent) -> void:
 	if not event or not is_instance_valid(event.pointer) or not driver.grabbed_handles.is_empty(): return
+	if event.event_type==XRToolsPointerEvent.Type.PRESSED: input_requested.emit(event.pointer)
 	match event.event_type:
 		XRToolsPointerEvent.Type.PRESSED:
 			if is_instance_valid(_pointer): return

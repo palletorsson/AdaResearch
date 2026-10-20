@@ -3,6 +3,7 @@ extends Node3D
 const DataInstrumentSurface = preload("res://commons/ui/data_instrument_surface.gd")
 const DrawingPen = preload("res://commons/primitives/point/drawing_pen.gd")
 @export var simple_pen: bool = false
+var spatial_bead := false
 
 # @identity
 # essence: sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space
@@ -394,10 +395,32 @@ func _ready() -> void:
 	# INK / GRAIN before _setup_trail — the trail material bakes trail_color in,
 	# so the colour must be settled before the material exists.
 	_ink_read_config()
+	spatial_bead = str(get_meta("config_tool", "")) == "bead"
 	if has_meta("config_pen_style"):
 		simple_pen = str(get_meta("config_pen_style")) == "simple"
 	if simple_pen:
 		_setup_simple_pen()
+	if spatial_bead:
+		var old_point := _grab_point
+		var bead = load("res://commons/artifacts/primitive_encounters/spatial_bead.gd").new()
+		bead.position = old_point.position
+		remove_child(old_point); old_point.queue_free()
+		bead.name = "GrabPoint"
+		var bead_mesh := MeshInstance3D.new(); var sphere := SphereMesh.new()
+		sphere.radius = 0.042; sphere.height = 0.084; bead_mesh.mesh = sphere
+		var bead_material := StandardMaterial3D.new()
+		bead_material.albedo_color = trail_color
+		bead_material.roughness = 0.3
+		bead_mesh.material_override = bead_material; bead.add_child(bead_mesh)
+		var collider := CollisionShape3D.new(); var shape := SphereShape3D.new()
+		shape.radius = .055; collider.shape = shape; bead.add_child(collider)
+		add_child(bead); _grab_point = bead; _draw_sphere = bead
+		var caption := Label3D.new()
+		caption.text = "HOLD · MOVE · RELEASE TO KEEP\n%d mm grid" % resolution_mm
+		caption.position = Vector3(0,-0.20,0.10)
+		caption.font_size = 30; caption.pixel_size = 0.0018
+		caption.modulate = Color("332b39"); caption.outline_size = 0
+		add_child(caption)
 
 	# Setup progress indicator as world-space (not child of grab point)
 	_setup_progress_indicator()
@@ -730,6 +753,7 @@ const BOARD_GROUP := "ada_writable_board"
 
 
 func _nearest_board_face(p: Vector3) -> Dictionary:
+	if spatial_bead: return {}
 	var best: Dictionary = {}
 	var bd: float = board_write_distance
 	if not is_inside_tree():

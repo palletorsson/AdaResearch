@@ -12,6 +12,9 @@ var _signature := 0
 var _face_material := Style.face()
 
 func _ready() -> void:
+	# The source mesh already emits a front and a back triangle. Cull their
+	# hidden sides so translucent coplanar faces cannot fight over depth.
+	_face_material.cull_mode=BaseMaterial3D.CULL_BACK
 	subject=get_parent();puzzle=subject.has_method("toggle_discovery_face")
 	var board := MeshInstance3D.new();board.name="ActionBoard"
 	var box:=BoxMesh.new();box.size=Vector3(1.18,0.64,0.045)
@@ -79,8 +82,9 @@ func update_view() -> void:
 		var pairs:Dictionary={}
 		for face in subject.completed_triangles:
 			face.mesh.material_override=_face_material
-			# This instrument edits the boundary; the large twin supplies the face.
-			face.mesh.visible=false
+			# The Void comparison shows the same face at both scales. Older
+			# boundary-only instruments retain their original presentation.
+			face.mesh.visible=subject.fills_visible and bool(subject.get_meta("config_show_local_fill",false))
 			for i in range(1,face.points.size()-1):
 				var tri:Array=[face.points[0],face.points[i],face.points[i+1]]
 				for j in 3:_pair(pairs,tri[j],tri[(j+1)%3])

@@ -498,10 +498,13 @@ func _showing_normal(n: Node) -> Vector2:
 	return Vector2.ZERO
 
 
-func _save_showing_cards() -> void:
+func _save_showing_cards(chapter: String = "", pearl: String = "") -> void:
 	_load_showing_cards()
 	# this run REPLACES the halls it built, and leaves every other hall standing
 	var fresh: Dictionary = {}
+	# A deliberately empty hall must replace its old ledger rows too.
+	if chapter != "":
+		fresh["%s|%s" % [chapter, pearl]] = []
 	for c_v in _showing_cards:
 		var c: Dictionary = c_v
 		var k := "%s|%s" % [String(c.get("chapter", "")), String(c.get("pearl", ""))]
@@ -8097,6 +8100,7 @@ func _build_segment() -> void:
 			# or sink its void
 			var mm: Dictionary = derived.get("museum", {}) if derived.get("museum") is Dictionary else {}
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
+			peek["wall_frames"] = mm.get("wall_frames", "")
 			peek["weathering_wall"] = mm.get("weathering_wall", {})
 			peek["turning_wall"] = mm.get("turning_wall", {})
 			peek["simplex_corners"] = mm.get("simplex_corners", [])
@@ -8371,6 +8375,8 @@ func _build_segment() -> void:
 		seg.set_meta("em_simulation_stage", peek["simulation_stage"])
 	seg.set_meta("em_passage_start", passage_start)
 	seg.set_meta("em_passage_decl", passage_decl)
+	# A playable biome after the first four sequences. Keep the existing passage.
+	preload("res://commons/hazards/biome_ladder/museum_entry.gd").mount(self, seg, tile)
 	_install_weathering_wall(seg, peek.get("weathering_wall", {}), tile)
 	_prepare_turning_wall(seg, peek, tile)
 	# one static body per segment carries every collision box — walls, podiums,
@@ -9358,6 +9364,8 @@ func _build_segment() -> void:
 						"extra_floors": seg.get_meta("em_aisle_cells", []),
 						"wall_features_max": int(deal.get("wall_features_max", -1)),
 						"fill_walls": bool(deal.get("fill_walls", true)),
+						"wall_frames": _DetailLib.wall_frame_mode(peek.get("wall_frames", ""),
+							_DetailLib.wall_frame_mode((_layout.get("hall", {}) as Dictionary).get("wall_frames", "content"), "content")),
 						"hang_min_stretch": int(deal.get("hang_min_stretch", 2)),
 						"label_every": int(deal.get("label_every", 11)),
 						# the hand's rulings on this chapter's showings, and the
@@ -9401,6 +9409,9 @@ func _build_segment() -> void:
 						"pearl": String(deal.get("pearl", "")) if deal is Dictionary else ""})
 				# the card ledger: every showing's place id and world position, so a
 				# hand can refer to "primitives · lines · 07" and rule on it later
+				var cards_pearl := String(deal.get("pearl", ""))
+				_showing_cards = _showing_cards.filter(func(c):
+					return String(c.get("chapter", "")) != next_seq or String(c.get("pearl", "")) != cards_pearl)
 				for ch_node in seg.get_children():
 					if ch_node.has_meta("em_showing_card"):
 						var card_row: Dictionary = {"segment": dress_seg_no, "chapter": next_seq,   # captured at queue time — the dress may drain segments later
@@ -9443,7 +9454,7 @@ func _build_segment() -> void:
 							if ch_node.has_meta(meta_key[0]):
 								card_row[meta_key[1]] = ch_node.get_meta(meta_key[0])
 						_showing_cards.append(card_row)
-				_save_showing_cards()
+				_save_showing_cards(next_seq, cards_pearl)
 				# every showing proxy becomes an editor record of kind "showing"
 				if true:   # ALWAYS: showing records in both modes (the editor KEYS stay desktop-only)
 					for ch_node in seg.get_children():
@@ -11442,7 +11453,7 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 		"chapter": chapter, "pearl": String(entry.get("pearl", "")), "map": map_name,
 		"w": w, "h": h, "vestibule": VESTIBULE_H, "offx": offx, "offz": offz,
 		"bodies": ledger}
-	var pf := FileAccess.open("res://ada_run/em_pack_report.json", FileAccess.WRITE)
+	var pf := FileAccess.open(_report_path("res://ada_run/em_pack_report.json"), FileAccess.WRITE)
 	if pf != null:
 		pf.store_string(JSON.stringify({"_readme": "the transplant's ledger, one entry per packed hall: grid -> target -> final per body. Written by _transplant_from_map; read by /transplant.",
 			"halls": _pack_report}, " ") + "\n")
@@ -11520,9 +11531,9 @@ func _sim_grid_carry(gs: Node3D, zbase: int) -> void:
 func _pack_report_load() -> void:
 	if not _pack_report.is_empty():
 		return
-	if not FileAccess.file_exists("res://ada_run/em_pack_report.json"):
+	if not FileAccess.file_exists(_report_path("res://ada_run/em_pack_report.json")):
 		return
-	var prev_v: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://ada_run/em_pack_report.json"))
+	var prev_v: Variant = JSON.parse_string(FileAccess.get_file_as_string(_report_path("res://ada_run/em_pack_report.json")))
 	if prev_v is Dictionary and (prev_v as Dictionary).get("halls") is Dictionary:
 		_pack_report = (prev_v as Dictionary)["halls"]
 
@@ -11744,7 +11755,7 @@ func _stamp_necklace(seg: Node3D, zbase: int, chapter: String, entry: Dictionary
 		"chapter": chapter, "pearl": String(entry.get("pearl", "")),
 		"map": String(entry.get("map", "")), "w": w, "h": h, "vestibule": VESTIBULE_H,
 		"offx": 0, "offz": 0, "stamped": true, "bodies": ledger}
-	var pf := FileAccess.open("res://ada_run/em_pack_report.json", FileAccess.WRITE)
+	var pf := FileAccess.open(_report_path("res://ada_run/em_pack_report.json"), FileAccess.WRITE)
 	if pf != null:
 		pf.store_string(JSON.stringify({"_readme": "the transplant's ledger, one entry per packed hall: grid -> target -> final per body. Written by _transplant_from_map; read by /transplant.",
 			"halls": _pack_report}, " ") + "\n")
@@ -13160,6 +13171,8 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 		_stamp_refusal = "instantiate returned non-Node3D"
 		return false
 	node.set_meta("artifact_lookup_name", lookup)
+	# Authored cell edges, before the museum vestibule offset.
+	node.set_meta("artifact_map_frame", Transform3D(Basis.IDENTITY, Vector3(0, 0, VESTIBULE_H)))
 	node.set_meta("em_vr_content", true)
 	# THE MUSEUM'S LASERS KILL (2026-08-24, Palle: "the laser in laser measure
 	# should also kill you"). The artifact ships lethal = false because it is a
@@ -16859,7 +16872,9 @@ func _physics_process(_delta: float) -> void:
 		_player.velocity = flight_zone.desktop_velocity(_cam.global_basis)
 		_vy = 0.0
 		_jump_pressed = false
+		var flight_incoming := _player.velocity
 		_player.move_and_slide()
+		preload("res://commons/movement/pushable_walk.gd").after_move(_player, flight_incoming, _delta)
 		if _player.is_on_floor(): _last_ground = _player.position
 		return
 	# walk — as a body: move_and_slide lets the walls and podiums push back
@@ -16918,7 +16933,9 @@ func _physics_process(_delta: float) -> void:
 	if carry_zone != null:
 		_player.velocity = carry_zone.carry_velocity(_player, _delta, carry_incoming)
 		_vy = _player.velocity.y
+	var walk_incoming := _player.velocity
 	_player.move_and_slide()
+	preload("res://commons/movement/pushable_walk.gd").after_move(_player, walk_incoming, _delta)
 	if carry_zone != null:
 		carry_zone.record_carry(_player)
 		_vy = _player.velocity.y
@@ -16977,7 +16994,9 @@ func _doll_frame(delta: float) -> void:
 	else:
 		_player.velocity = Vector3.ZERO
 	_player.velocity.y = 0.0
+	var doll_incoming := _player.velocity
 	_player.move_and_slide()
+	preload("res://commons/movement/pushable_walk.gd").after_move(_player, doll_incoming, delta)
 	_player.position.y = 0.0
 	_last_ground = _player.position
 	# butter: the yaw and the perch ease toward their targets, so a turn or a
@@ -24048,6 +24067,8 @@ func _derive_map_row(map_name: String) -> Dictionary:
 ##   width  path cells (default 2 — "2 blocks wide as default")
 ##   offset how far the second door slides across (default 3; 0 = straight)
 ##   side   "left" | "right" (default: whichever fits the tile)
+##   carve_exit false preserves the map's back row in teleporter mode;
+##               the teleporter supplies the crossing instead of a wall opening.
 ## A hall that says nothing builds exactly as before.
 ## THE SEAM RULE (2026-08-28, Palle: "the passage should copy the last row of the
 ## last map to its first row and then the passage for like now or 7 m in z and
@@ -24078,6 +24099,9 @@ func _derive_map_row(map_name: String) -> Dictionary:
 ## there. The first walk after a change has no memory and falls back to the old
 ## chicane; the walk after it is seamed. That is the same shape as the bake.
 func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array = []) -> Array:
+	# Teleporter halls can keep an authored back wall. Continuous corridors
+	# still need their crossing; maps without this option keep the old opening.
+	var carve_exit: bool = not _portal_mode or bool(decl.get("carve_exit", true))
 	if _portal_mode:
 		next_first = []  # no neighbouring architecture or service corridor
 		decl = {"kind": "none", "width": decl.get("width", 3)}
@@ -24114,7 +24138,7 @@ func _authored_passages(tile_in: Array, decl: Dictionary = {}, next_first: Array
 	var pw: int = clampi(int(decl.get("width", 2)), 1, maxi(1, w - 2))
 	if not _edge_has_open(tile, 0):
 		_carve(tile, 0, _door_col(tile, 0), pw)
-	if not _edge_has_open(tile, tile.size() - 1):
+	if carve_exit and not _edge_has_open(tile, tile.size() - 1):
 		_carve(tile, tile.size() - 1, _door_col(tile, tile.size() - 1), pw)
 	if kind == "none":
 		return tile        # the halls meet at their own doors; no added rows

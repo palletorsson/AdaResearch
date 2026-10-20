@@ -1315,6 +1315,9 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 		if "trigger_action" in artifact_object:
 			artifact_object.trigger_action = trigger_action
 
+	# Match the web map's cell-edge coordinates; this grid places cell centres at integers.
+	artifact_object.set_meta("artifact_map_frame", Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * total_size),
+		Vector3(-0.5 * total_size, GridCommon.surface_world_y(0, total_size), -0.5 * total_size)))
 	parent_node.add_child(artifact_object)
 
 	# Demo-artifact hygiene: many older algorithms/ scenes were authored as standalone

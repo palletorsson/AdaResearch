@@ -7,6 +7,7 @@ signal quit_requested
 @onready var new_game_button = $Buttons/NewGameButton
 @onready var load_game_button = $Buttons/LoadGameButton
 @onready var browse_button = $Buttons/BrowseButton
+@onready var head_arena_button = $Buttons/HeadArenaButton
 @onready var settings_button = $Buttons/SettingsButton
 @onready var quit_button = $Buttons/QuitButton
 @onready var about_display = $AboutDisplay
@@ -52,6 +53,13 @@ func _ready():
 
 	new_game_button.clicked.connect(_on_new_game_clicked)
 	load_game_button.clicked.connect(_on_load_game_clicked)
+	head_arena_button.clicked.connect(_on_head_arena_clicked)
+	$Buttons/BiomeLadderButton.clicked.connect(_on_biome_ladder_clicked)
+	$Buttons/ShadowGameButton.clicked.connect(_on_shadow_game_clicked)
+	$Buttons/MuseumRunnerButton.clicked.connect(_on_museum_runner_clicked)
+	$Buttons/VoidButton.clicked.connect(_on_void_clicked)
+	$Buttons/VoidMovementButton.clicked.connect(_on_void_movement_clicked)
+	$Buttons/VoidTrialsButton.clicked.connect(_on_void_trials_clicked)
 	if browse_button:
 		browse_button.clicked.connect(_on_browse_clicked)
 	settings_button.clicked.connect(_on_settings_clicked)
@@ -62,6 +70,11 @@ func _ready():
 	
 	# Update Load Game button visibility based on save existence
 	_update_load_button()
+	var xr := XRServer.primary_interface
+	if xr == null or not xr.is_initialized():
+		var mouse_pointer := preload("res://commons/scenes/main_menu/desktop_menu_pointer.gd").new()
+		mouse_pointer.name = "DesktopMenuPointer"
+		add_child(mouse_pointer)
 
 func _configure_menu_rendering() -> void:
 	var root_viewport := get_viewport()
@@ -131,6 +144,85 @@ const MUSEUM_FALLBACK_SCENE := "res://commons/scenes/endless_museum.tscn"
 ## a display name — endless_museum matches _first_chapter against exactly that.
 const FIRST_CHAPTER := "primitives"
 const FIRST_MAP := "Point_Zero"
+const HEAD_ARENA_SCENE := "res://commons/hazards/catalyst_counterpart/biome_arena.tscn"
+var _entering_head_arena := false
+
+func _on_shadow_game_clicked() -> void:
+	if _entering_head_arena: return
+	_entering_head_arena = true
+	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/shadow_game/shadow_game.tscn")
+
+func _on_museum_runner_clicked() -> void:
+	if _entering_head_arena: return
+	_entering_head_arena = true
+	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/museum_runner/museum_runner.tscn")
+
+func _on_void_clicked() -> void:
+	if _entering_head_arena: return
+	_entering_head_arena = true
+	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/void/void.tscn")
+
+func _on_void_movement_clicked() -> void:
+	if _entering_head_arena: return
+	_entering_head_arena = true
+	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/void/motion_room.tscn")
+
+func _on_void_trials_clicked() -> void:
+	if has_node("VoidTrialPicker"): return
+	var picker := Node3D.new()
+	picker.name = "VoidTrialPicker"
+	picker.position = $Buttons.position
+	add_child(picker)
+	$Buttons.hide()
+	for existing in $Buttons.get_children():
+		if existing is CollisionObject3D:
+			existing.set_meta("trial_menu_layer", existing.collision_layer)
+			existing.collision_layer = 0
+	var entries: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/trials/playable.json")).trials
+	var button_scene := preload("res://commons/scenes/main_menu/components/MenuButton3D.tscn")
+	var index := 0
+	for id in entries:
+		var button := button_scene.instantiate()
+		button.text = str(id).capitalize()
+		button.position.y = .65 - index*.25
+		picker.add_child(button)
+		var scene_path: String = entries[id].scene
+		button.clicked.connect(func():
+			if _entering_head_arena: return
+			_entering_head_arena = true
+			_close_void_trials()
+			preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, scene_path))
+		index += 1
+	var back := button_scene.instantiate()
+	back.text = "Back"
+	back.position.y = .65-index*.25
+	picker.add_child(back)
+	back.clicked.connect(_close_void_trials)
+
+func _close_void_trials() -> void:
+	var picker := get_node_or_null("VoidTrialPicker")
+	if picker != null: picker.queue_free()
+	for button in $Buttons.get_children():
+		if button is CollisionObject3D and button.has_meta("trial_menu_layer"):
+			button.collision_layer = int(button.get_meta("trial_menu_layer"))
+	$Buttons.show()
+
+func _on_biome_ladder_clicked() -> void:
+	if _entering_head_arena: return
+	_entering_head_arena = true
+	preload("res://commons/hazards/biome_ladder/route.gd").enter(self, 0)
+
+func _on_head_arena_clicked() -> void:
+	if _entering_head_arena: return
+	_entering_head_arena = true
+	var staging := _find_staging()
+	if staging != null:
+		staging.load_scene(HEAD_ARENA_SCENE)
+	else:
+		var error := get_tree().change_scene_to_file(HEAD_ARENA_SCENE)
+		if error != OK:
+			_entering_head_arena = false
+			push_error("Could not open Head Arena: ", error)
 
 
 ## Open the museum at a chapter. `map` empty means that chapter's first pearl.

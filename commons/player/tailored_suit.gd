@@ -33,15 +33,8 @@ func set_style(value: String) -> bool:
 	return true
 
 func _build_trim() -> void:
-	for side in [-1.0,1.0]:
-		G.box(trim,Vector3(side*.135,-1.45,-.055),Vector3(.18,.08,.29),G.material("26242b"))
 	if style!="suit":
-		# Supplied stockings below a short skirt; the woven panels remain unchanged.
-		for side in [-1.0,1.0]:
-			var leg:=MeshInstance3D.new();var shape:=CylinderMesh.new()
-			shape.top_radius=.069;shape.bottom_radius=.051;shape.height=1.42+Panels.hem(style)
-			leg.mesh=shape;leg.position=Vector3(side*.135,(Panels.hem(style)-1.42)*.5,0)
-			leg.material_override=G.material("e3d4c0");trim.add_child(leg)
+		# Floor-length dresses need no exposed stocking or shoe geometry below the hem.
 		var belt:=PackedVector3Array()
 		for i in range(65):
 			var angle:=float(i)*TAU/64
@@ -49,6 +42,8 @@ func _build_trim() -> void:
 		G.yarn(trim,belt,G.material("29242c"),.018)
 		G.box(trim,Vector3(0,-.633,-.171),Vector3(.054,.045,.012),G.material("bf9d65",.65))
 		return
+	for side in [-1.0,1.0]:
+		G.box(trim,Vector3(side*.135,-1.45,-.055),Vector3(.18,.08,.29),G.material("26242b"))
 	var shirt := G.box(trim,Vector3(0,-.23,-.18),Vector3(.115,.24,.015),G.material("eee3c9"))
 	shirt.name="Shirt"
 	# Supplied collar/lapels make the simplified panel construction read as a jacket.

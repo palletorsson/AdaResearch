@@ -167,18 +167,21 @@ func _on_point_dropped(index: int, _pickable, _meta: Dictionary) -> void:
 		"total_area": "%.2f" % (get_triangle_area(triangle_a_indices) + get_triangle_area(triangle_b_indices))
 	}
 
+	# Narration is optional in standalone artifact previews and the tower.
+	var text_manager := get_node_or_null("/root/TextManager")
+	var game_manager := get_node_or_null("/root/GameManager")
 	var handled := false
-	if typeof(TextManager) != TYPE_NIL and TextManager.has_method("trigger_event"):
-		handled = TextManager.trigger_event("quad_drop", quad_context)
+	if text_manager != null and text_manager.has_method("trigger_event"):
+		handled = text_manager.trigger_event("quad_drop", quad_context)
 
-	if handled and typeof(GameManager) != TYPE_NIL and GameManager.has_method("add_console_message"):
+	if handled and game_manager != null and game_manager.has_method("add_console_message"):
 		var status := "Quad vertex %d dropped. Pink area %s, black area %s, total area %s" % [
 			quad_context["vertex"],
 			quad_context["pink_area"],
 			quad_context["black_area"],
 			quad_context["total_area"]
 		]
-		GameManager.add_console_message(status, "info", "interactive_quad")
+		game_manager.add_console_message(status, "info", "interactive_quad")
 	elif not handled:
 		push_warning("Quad: Missing quad_drop text entry for current map")
 

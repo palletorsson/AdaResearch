@@ -86,7 +86,8 @@ var _gallery_root: Node3D = null
 func _ready() -> void:
 	_read_grid_config_meta()
 	_normalise_dna()
-	_create_environment()
+	if str(get_meta("config_embedded", false)).to_lower() != "true":
+		_create_environment()
 	_create_floor()
 	_create_gallery()
 

@@ -698,8 +698,12 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 	
 	staging.load_scene(scene_path, scene_data)
 
-func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
+func _on_staging_scene_loaded(scene: Node, user_data = null):
 	"""Handle when staging has loaded a scene"""
+	# Staging also hosts stand-alone games. They do not carry a map transition
+	# dictionary, even after Maps has connected this listener to staging.
+	if not user_data is Dictionary:
+		return
 	
 	# Emit our own signal
 	scene_transition_completed.emit(current_scene_type, user_data)
@@ -725,7 +729,7 @@ func _on_staging_scene_loaded(scene: Node, user_data: Dictionary):
 			var completed_sequence = completion_data["sequence_completed"]
 			lab_manager_ref._on_sequence_completed(completed_sequence)
 
-func _on_staging_scene_visible(scene: Node, user_data: Dictionary):
+func _on_staging_scene_visible(scene: Node, user_data = null):
 	"""Handle when staging scene becomes visible"""
 
 func _get_vr_staging() -> Node:

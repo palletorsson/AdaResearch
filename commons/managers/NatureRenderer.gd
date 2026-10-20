@@ -122,7 +122,9 @@ func _poll_and_update() -> void:
 # ---------------------------------------------------------------------------
 
 func _update_fog(density: float) -> void:
-	if _env == null:
+	# Authored scenes (e.g. the Void) own their atmosphere. Do not start
+	# competing weather tweens on the Environment shared with their camera.
+	if _env == null or _env.get_meta("scene_owned_atmosphere", false):
 		return
 
 	var enable := density > 0.0
@@ -148,7 +150,7 @@ func _update_fog(density: float) -> void:
 # ---------------------------------------------------------------------------
 
 func _update_sky(density: float) -> void:
-	if _env == null:
+	if _env == null or _env.get_meta("scene_owned_atmosphere", false):
 		return
 
 	# Grey → warm green → rich blue-green

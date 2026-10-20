@@ -188,8 +188,9 @@ func _on_dropped(_pickable) -> void:
 		"object_name": str(name)
 	}
 	var handled := false
-	if typeof(TextManager) != TYPE_NIL and TextManager.has_method("trigger_event"):
-		handled = TextManager.trigger_event("point_drop", context)
+	var text_manager := get_node_or_null("/root/TextManager")
+	if text_manager != null and text_manager.has_method("trigger_event"):
+		handled = text_manager.trigger_event("point_drop", context)
 	if not handled:
 		pass
 

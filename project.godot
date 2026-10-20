@@ -21,7 +21,7 @@ config/icon="res://icon.png"
 
 [audio]
 
-buses/default_bus_layout="uid://rwex60pqapc"
+buses/default_bus_layout="uid://xebfboh7qcpk"
 driver/enable_input=true
 
 [autoload]
@@ -66,7 +66,7 @@ window/size/viewport_height=1200
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_tool_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_tool_3d/plugin.cfg", "res://addons/void_floor_editor/plugin.cfg")
 
 [filesystem]
 

@@ -9,6 +9,11 @@ const STAGES_FILE = "res://commons/maps/soft_stages.json"
 const SAVE_FILE = "user://capability_progression.json"
 
 const FRIEND_POWER_GUARD := preload("res://commons/managers/FriendPowerGuard.gd")
+const FIRST_CATALYST := preload("res://commons/hazards/becoming_catalyst/first_catalyst_ability.gd")
+var _first_catalyst_unlocked := false
+var first_catalyst: Node3D
+# Can be redirected by isolated engine tests without touching the player's save.
+var progression_file: String = SAVE_FILE
 
 # Launcher friend power (forces lineage) — periodic underfoot-cluster check.
 const LAUNCHER_CHECK_INTERVAL_S := 0.5
@@ -74,6 +79,9 @@ signal lease_ended()
 func _ready():
 	_load_stages()
 	_load_saved_progress()
+	first_catalyst = FIRST_CATALYST.new()
+	add_child(first_catalyst)
+	first_catalyst.set_unlocked(_first_catalyst_unlocked)
 	_rebuild_state()
 	call_deferred("_connect_progression_signals")
 	call_deferred("_connect_catalyst_signals")
@@ -466,7 +474,22 @@ func unlock_all_capabilities() -> void:
 	_rebuild_state()
 	save_state()
 
+func has_first_catalyst() -> bool:
+	return _first_catalyst_unlocked
+
+func unlock_first_catalyst() -> void:
+	if _first_catalyst_unlocked:
+		return
+	_first_catalyst_unlocked = true
+	if is_instance_valid(first_catalyst):
+		first_catalyst.set_unlocked(true)
+	save_state()
+	capability_unlocked.emit("first_catalyst")
+
 func reset_progression() -> void:
+	_first_catalyst_unlocked = false
+	if is_instance_valid(first_catalyst):
+		first_catalyst.set_unlocked(false)
 	_completed_sequences.clear()
 	_catalyst_modes.clear()
 	_friend_powers.clear()
@@ -757,25 +780,26 @@ func save_state() -> void:
 		"friend_powers": _friend_powers,
 		"bracelet_activated": _bracelet_activated,
 		"bracelet_tracker": _bracelet_tracker,
+		"first_catalyst_unlocked": _first_catalyst_unlocked,
 	}
-	var f: FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+	var f: FileAccess = FileAccess.open(progression_file, FileAccess.WRITE)
 	if f == null:
-		push_warning("CatalystCapabilityManager: Could not write %s" % SAVE_FILE)
+		push_warning("CatalystCapabilityManager: Could not write %s" % progression_file)
 		return
 	f.store_string(JSON.stringify(payload, "\t"))
 	f.close()
 
 func _load_saved_progress() -> void:
-	if not FileAccess.file_exists(SAVE_FILE):
+	if not FileAccess.file_exists(progression_file):
 		return
-	var f: FileAccess = FileAccess.open(SAVE_FILE, FileAccess.READ)
+	var f: FileAccess = FileAccess.open(progression_file, FileAccess.READ)
 	if f == null:
 		return
 	var json: JSON = JSON.new()
 	var text: String = f.get_as_text()
 	f.close()
 	if json.parse(text) != OK:
-		push_warning("CatalystCapabilityManager: Corrupt save %s — starting fresh" % SAVE_FILE)
+		push_warning("CatalystCapabilityManager: Corrupt save %s — starting fresh" % progression_file)
 		return
 	if not (json.data is Dictionary):
 		return
@@ -793,3 +817,6 @@ func _load_saved_progress() -> void:
 			_friend_powers[str(k)] = str(fp[k])
 	_bracelet_activated = bool(data.get("bracelet_activated", false))
 	_bracelet_tracker = str(data.get("bracelet_tracker", ""))
+	_first_catalyst_unlocked = bool(data.get("first_catalyst_unlocked", false))
+	if is_instance_valid(first_catalyst):
+		first_catalyst.set_unlocked(_first_catalyst_unlocked)

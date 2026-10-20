@@ -44,6 +44,8 @@ const BODY_IK_SCENE = preload("res://commons/body/ik_arms/player_body_ik.tscn")
 ## rebuilt from MapProgressionManager — so it costs nothing until a sequence
 ## has actually been finished.
 @export var costume_on_progress: bool = true
+## Void's initial body: ordinary arms, unchanged hands, no earned costume.
+@export var care_body_mode: bool = false
 
 @export_group("Debug")
 @export var debug_mode: bool = false
@@ -84,7 +86,11 @@ func _initialize():
 	# since it was written, and across the whole repository nothing ever called
 	# unlock_feature except one hand-placed walk-into trigger. The wardrobe is
 	# the door — it ties the costume to the walk instead of to a doorway.
-	if costume_on_progress:
+	if care_body_mode:
+		unlock_and_activate("body_arms")
+		var arms: Node3D = _active_features["body_arms"]
+		arms.set_plain_arms(skin_color)
+	elif costume_on_progress:
 		# THE TWO ARMS YOU DRIVE, AND THE FOUR THAT FOLLOW. body_arms is the IK arm
 		# rig that has been sitting in commons/body/ik_arms/ unreached; the costume
 		# is the garment, the trophies and the extra limbs.

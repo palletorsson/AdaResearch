@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bnqnnnet4dw12" path="res://addons/godot-xr-tools/staging/staging.tscn" id="1"]
 [ext_resource type="Script" uid="uid://cdf6cw3o6x3rn" path="res://commons/scenes/vrStaging.gd" id="2"]
+[ext_resource type="Script" path="res://commons/scenes/start_xr.gd" id="start_xr_desktop"]
 [ext_resource type="Texture2D" uid="uid://c28afsadt6416" path="res://splash.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://c8x7y605w4v3v" path="res://commons/scenes/main_menu/MainMenu3D.tscn" id="4_menu"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="5_pointer"]
@@ -86,6 +87,9 @@ normal_transition_duration = 1.0
 force_fast_transition_fade = true
 force_loading_screen_for_all_transitions = true
 main_scene = "uid://cgrljkfrmkgda"
+
+[node name="StartXR" parent="." index="5"]
+script = ExtResource("start_xr_desktop")
 
 [node name="FunctionPointerLeft" parent="XROrigin3D/LeftHandController" index="0" unique_id=378771753 instance=ExtResource("5_pointer")]
 distance = 5.0
