@@ -25,3 +25,16 @@ All recorded native artifact root placements match the before view. The final ow
 first-native/ retains the initial missing receiver caused by dynamic helper return type inference; explicit mesh types fixed it. seed-diagnostic/ retains the failed persistence expectation and its images. These failures precede the final passing run and are not hidden. Source hashes, exact text/source diffs and the final report accompany the review.
 
 No live museum plan, bake or save edits, frozen export refresh or commit. Shared core metadata changes only this hall, using a fresh read. Next: CA_AgentsCircuits, following the active sequence.
+
+
+---
+
+# What a neighbour offers — 8 October 2026
+
+The carried point now chooses where to plant, rather than supplying a continuously sampled proximity. Trigger replaces one patch in both fields without advancing time. A's and B's histories remain independent. The complete three-file lesson reconstructs this comparison with the supplied reaction explicitly named. It teaches differences from four neighbours, two fields and a periodic edge. The corner-seed exercise tests transfer. The final reflection keeps the encounter and replaces three implementation blocks with prose; the sphere's changed role is added.
+
+Retain the front tables, curved walls and clockmaker. Clear rear partitions and floor holes, fit four secondary works and keep the path through to the threshold portal. All six authored works remain. Native before/after overhead, raised, entry and rear views, selected seed, body seed and exact learner model are in the report. The learner model is mounted temporarily for its photograph.
+
+39 printed-code + 40 installed museum checks pass, four routes/294 samples. 4800 updates match the installed solver exactly. Both deliberate faults are detected. No physical headset, independent student, complete portal transfer or secondary-interaction acceptance. The secondary lattice labels can show through the field walls; existing blank frames and deeper secondary curation remain visible limitations.
+
+Next: CA_AgentsCircuits. Inspect its actual procedure-comparison encounter; do not infer Wireworld or an ant lesson from the historical name or old tutorial fragment. Current final compares Rule90 history with the recursively copied pyramid.

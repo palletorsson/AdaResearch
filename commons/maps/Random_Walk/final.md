@@ -4,113 +4,72 @@ What does a trail remember that its next step does not use?
 
 <!-- @random_walk_terrarium -->
 
-Five beads move inside a glass tank on a dark cabinet. One is bright red. The other four are dimmed, still moving. Follow the red one for a moment. A turn begins to look like hesitation; a curve seems to be taking it somewhere. Choose a place you think it will reach. Keep that expectation beside what happens.
+Five beads move inside a glass tank. One is bright red; the other four are dimmed, still moving. Follow the red one. A turn begins to look like hesitation; a curve seems to be taking it somewhere. Choose a place you think it will reach. Keep that expectation beside what happens.
 
-The keypad offers 2D, 3D, LONG STEP and RESET. Begin with 2D. The trail can turn in any heading, yet it never leaves its level. Move from the front to either side of the tank (a dark board closes the back): the thin arrangement holds. Press 3D. Now the bead can rise and fall. A route that looked crowded from one side may open when you look through another. Find an apparent crossing and change your viewpoint. Do the two stretches meet, or did you put them together by looking?
+Begin with 2D. The trail can take any heading, yet it never leaves its level. Move from the front to either side of the tank. The thin arrangement holds. Press 3D. Now the bead can rise and fall. Find an apparent crossing and change your viewpoint. Do the two stretches meet, or did you put them together by looking?
 
-Earlier, a draw chose a cube from an eligible set. The last room let perturbations accumulate in a stack. Here the draw proposes a movement from the position already reached. The earlier rooms have supplied the parts: a point, coordinates, a line made from samples, an array to keep them, an increment to add. In 2D, one number becomes a heading:
+The last room let turns accumulate in a stack. Here a draw proposes movement from the position already reached. We have met the parts: a point, coordinates, an increment, a line made from samples, an array to keep them. In 2D, one number becomes a heading around a circle. The code has three coordinates and declines to change one. Flatness is a decision made at every step.
 
-```gdscript
-		WalkMode.WALK_2D:
-			var angle = _rand() * TAU
-			return Vector3(cos(angle), 0, sin(angle)) * step_size
-```
+In 3D the proposed length stays the same. LONG STEP draws a length too. Try it, then return to 3D. Does a longer movement carry the bead out of a patch it has repeatedly crossed? The code calls this a Lévy flight, but even its longest proposal has a limit. The comparison does not establish a better search strategy.[^levy]
 
-The proposed step is 0.015 metres long. Its y component is zero. The code has room for three coordinates and has declined to change one. That flatness is a decision made each time the function returns.
+Near the glass, a bead approaches, turns and stays inside. The enclosure folds its proposed endpoint back. For a wall at x = 0.25, an attempted endpoint at 0.27 becomes 0.23. The drawn segment joins retained positions without visiting the contact point. A short stroke can stand for a longer proposal. The line has left something out again.
 
-In 3D two draws choose a direction on a sphere; the proposed length stays the same. LONG STEP draws a length too; the code calls the mode a Lévy flight.[^levy] Try it, then return to 3D. Look for what the longer movements do to the tangle, and for how much less often a bead returns to a patch it has already worn. The cabinet is using this particular rule:
+It also arrives late. The record stores the position before the bead moves, then gives up its oldest entries. At step 300 the trail holds positions 100 through 299; the bead has reached 300. Its beginning has gone, and its latest place has not entered the line. Neither absence means that movement did not happen.
 
-```gdscript
-			var u = _rand()
-			var levy_step = step_size * pow(u + LEVY_OFFSET, LEVY_EXPONENT)
-			levy_step = minf(levy_step, step_size * LEVY_STEP_CAP)
-			return direction * levy_step
-```
-
-The offset is 0.01, the exponent −0.5, the cap ten. Every length is drawn along this curve; there is no separate switch for a spectacular leap. The largest permitted proposal is 0.15 metres. Even this mode's long reach has an edge. A rare long step is what a walker takes to leave a well-trodden patch: the rule a forager might use, and the remedy for what the field beyond the basin will show you.
-
-Look near the glass. A bead approaches, turns, stays inside. There is no test for whether it wants to return. First the code proposes a position; then the enclosure changes it:
-
-```gdscript
-		var step = _generate_step()
-		var new_pos = _walker_positions[i] + step
-
-		# Boundary reflection
-		new_pos = _reflect_boundaries(new_pos)
-```
-
-For a wall at x = 0.25, an attempted endpoint at 0.27 returns as 0.23. The overshoot folds back. The displayed segment joins the retained positions on either side of this operation. It does not draw the contact with the wall. A short stroke can therefore stand for a longer proposed movement. The line we learned to trust as a record has left something out again.
-
-The next few lines keep another difference:
-
-```gdscript
-		# Record trail
-		_walker_trails[i].append(_walker_positions[i])
-		if _walker_trails[i].size() > trail_length:
-			_walker_trails[i] = _walker_trails[i].slice(1)
-
-		_walker_positions[i] = new_pos
-```
-
-Read the order aloud. Keep where we were. Shorten the record. Put the bead where we are now. At step 300 the trail holds positions 100 through 299; the bead has reached position 300. The drawing is already behind the body, and the beginning has gone. Its absence from the glass does not mean those steps were never taken.
-
-Nothing in the step generator reads this trail. Erasing its stored points in a controlled source test leaves the subsequent positions unchanged. The program still has memory: a current position, a generator state, a counter, a rule. What it lacks here is a way to consult the drawn history when choosing a heading. To make a walker avoid its own trail, that relation would have to be built.
+The step proposes a change, the position retains its result, and the trail stores selected earlier positions for us. Nothing in the heading rule reads the trail. Erasing its stored points in a controlled test leaves subsequent positions unchanged. There is still memory: current position, generator state, counter. To make the walker avoid its own drawing, another relation would have to be built.
 
 <!-- @pixel_cloud -->
 
-On your right, between this cabinet and the basin, a sculpture of small cubes shows one way to build it. Before each step, that walk sets aside every neighbouring cell it already occupies and chooses among the rest, stopping early if none is left; it lays at most twenty-three cubes. The walk is finished when the hall is built, and what stands is the path alone: nothing marks the moves it turned down.
+On your right, a sculpture of small cubes shows one way. Before each step, that walk sets aside the neighbouring cells it already occupies and chooses among the rest. It stops if none is available. The walk has finished by the time you arrive. What stands is its path; nothing marks the moves it refused.
 
 <!-- @random_walk_terrarium -->
 
-The wing beside the tank carries the logbook; its buttons now share the front console with the mode controls. ONE and ALL change which beads and trails are bright. All five continue stepping under either view. Following one has changed your access to the population, without sending the other four away.
+Back at the tank, ONE and ALL change which beads and trails are bright. All five keep stepping. Following one changed your access to the population without sending the others away.
 
-Read the seed, then press RESET. The named walk returns from the centre. Compare it at the same step count, with the same mode. NEW SEED chooses a five-digit number different from the current one; an older number can return later. Changing modes retains the seed but spends its draws differently. A number alone is not the whole recipe for a path.
+Read the seed, then RESET. Compare the returning path at the same step count and in the same mode. Changing modes spends the draws differently; a number alone is not the whole recipe. The plate also carries two clocks, which can disagree when a frame stalls.[^walk-clock] Even the time offered as evidence has a procedure.
 
-Two times sit together on the plate. Simulation time counts the accepted steps at thirty per second. The frame clock adds the time supplied to the running process since reset. A stalled frame can separate them: this implementation accepts at most five steps in one frame and discards the excess. In a controlled two-second frame, the clock gains two seconds while the walk gains only a sixth of a simulated second. There is no pause control on this cabinet. RESET starts its account over while the museum continues.
-
-Below, MSD measures the five beads' average squared distance from their release point. Watch it increase or decrease. The glass bounds it; the number does not report how much trail has accumulated or how far the beads have travelled. A return toward the centre can lower it while adding more line.
+Below them, MSD measures the beads' average squared distance from their release point. A return toward the centre can lower it while adding more line. The gauge does not measure how far they travelled. Look back at the trail: which account answers the question you wanted to ask?
 
 <!-- @random_position_rails -->
 
 ## Somewhere to start
 
-Two rails stretch beside the tank. Each carries a block. Slide the white marker to a place you think one will reach, then pull NEXT. Two empty frames appear before either body moves. The machine has made its choices. For a moment, you can see where it intends to put them.
+Two rails each carry a block. Slide the white prediction marker to a place you think one will reach, then pull NEXT. Empty frames appear before either body moves. The machine has made its choices; for a moment you can see its destinations.
 
-The blue block can cross almost the whole rail. The pink one stays near where it was. Follow a few turns. Try another guess. What does knowing the last position give you?
+Blue can cross almost the whole rail. Pink stays near where it was. Both received the same number. Blue used it as a new position; pink used it as an increment. The small addition carries a past into the next move. What does knowing the last position give you now?
 
-Both receive the same new number, drawn between minus one and one. Blue uses it to choose a place along the rail. Pink uses it to propose a step of at most forty centimetres from its current place. The small addition carries a past into the next move. A walk needs somewhere to start. The pink block is the coin you tossed two rooms ago, given a beam to walk on.
+At the ends, an outward step folds back. The latest twelve landing pairs collect below; older marks disappear while pink keeps the position they helped it reach. The past can survive in a present state after its record is gone.
 
-At the rail ends, an outward step folds back, as it did at the terrarium glass. These bodies have not been offered an endless line. Their twelve most recent landing pairs collect below, newest at the top. Older marks disappear while the pink block keeps the position those movements helped it reach. Erase the record and that next step can still be taken.
+Watch the journeys between the empty frames. Both take one second with the same easing. Even blue's fresh destination arrives smoothly. Looking continuous is not enough to tell us what a process remembers.
 
-Watch the journeys between the empty frames. Both motors take one second, with the same easing. Even blue's fresh destinations arrive by a smooth movement. Looking continuous is not enough to tell us what a process remembers.
-
-RUN repeats the experiment; HOLD lets the revealed move finish and stops the next draw. REPLAY brings both bodies to the centre and repeats their choices. Your marker can move elsewhere. It changes neither rule. A prediction has entered the room, but the machine has no obligation to meet it.
+HOLD lets the revealed move finish and stops the next draw. REPLAY returns the bodies and repeats their choices. Your marker can move elsewhere. A prediction has entered the room, but the machine has no obligation to meet it.
 
 <!-- @random_draw_dot -->
 
-Pick up the drawing dot. Move your hand slowly across the space, then hold it still. The small green tip keeps wandering. What part of this line belongs to your movement?
+Pick up the drawing dot. Move your hand slowly, then hold it still. The green tip keeps wandering. What part of this line belongs to you?
 
-This is the drawing dot from the Point Trace room, with one addition. Thirty times per second, while you hold it, a random direction adds a small step to an offset. The next step starts from the offset already reached:
+The Point Trace tool has acquired an offset that takes random steps. Your hand carries its origin. The tip walks around it, confined to a radius of twenty-five centimetres. At the boundary an outward proposal is shortened. Its freedom has a radius.
 
-```gdscript
-walk_offset = (walk_offset + direction * STEP_SIZE).limit_length(RADIUS)
-tip.global_position = _grab_point.global_position + walk_offset
-```
+Press HAND / RANDOM to clear the line and draw with the hand alone. Switch back and repeat the gesture. The trail keeps samples of the movement, not every intermediate position.[^drawing-clock]
 
-Your hand carries the origin; the tip walks around it. Each proposed step is 1.2 centimetres, and the offset cannot exceed 25 centimetres. At that boundary, the program shortens an outward proposal. Its freedom has a radius.
-
-Press HAND / RANDOM to clear the line and draw with the hand alone. Switch back and try the same gesture. The point-count display still counts retained samples, as it did there. The random clock proposes thirty steps a second, but the visible trail is sampled by the drawing process; a stalled frame can miss intermediate positions.
-
-CLEAR / REPLAY restores the random seed and clears the trail. The random steps can repeat. Your hand need not. Let go and the wandering stops: this encounter gives chance movement only while someone holds it.
+CLEAR / REPLAY restores the random seed. Those steps can repeat; your hand need not. Let go and the wandering stops. This encounter gives chance movement only while someone holds it.
 
 <!-- @random_walk_128 -->
 
-Cross the bridge over the narrow basin and enter the larger glass frame. The gallery and the experiment remain at the same level; the gap distinguishes their floors. Its ten-metre field keeps another account of a walk: a visited cell rises. Four possible directions are enough to change the ground. The working lattice has thirty-two cells on each side, despite the older name `random_walk_128`.
+Cross the bridge over the narrow basin and enter the larger glass frame. The floors remain at the same level, but the gap separates gallery from experiment. Here a visited cell rises. Four directions are enough to change the ground.
 
-Look at a high place. It records repeated visits; it was not selected as a destination. A walker that keeps returning is oversampling, and this ground is a count of it; the terrarium's long steps are one way out. A small rule has become a spatial obstacle through what the surface retained. Compare this ground with the trails in the instrument. Both keep something of movement, and neither keeps everything. The surrounding glass names a boundary of the experiment; the openings let you pass through or watch from outside.
+A high place records returns; it was not chosen as a destination. Whether returning too often is a problem depends on what we wanted the walker to do. The count cannot supply that purpose. Movement has become a spatial obstacle through what the surface retained. Compare this ground with the cabinet's lines. Each gives part of a history a different body.[^walk-field]
 
 <!-- @ -->
 
-Stay with a shape you had begun to read as a creature. What would its next step need to know for that reading to become a capability? The missing relation is an invitation to make another rule. For now, we leave with a path whose history exceeds both its current position and the drawing we can still see. In Random Gaussian, we gather draws in another way and ask what shape appears when we count where they land.
+In the tutorial, the point leaves your hand and begins choosing steps. You have supplied its starting place. Its trail makes those choices available to you without making them available to the next heading.
 
-[^levy]: After Paul Lévy, whose distributions have the heavy tail this rule draws from; the phrase “Lévy flight” is Benoît Mandelbrot's (*The Fractal Geometry of Nature*, 1982). Proposed as a foraging strategy for animals that must leave a depleted patch (Viswanathan and others, 1996), and argued about since. This cabinet makes no claim for the beads, only the rule.
+Stay with a shape you had begun to read as a creature. What would its next step need to know for that reading to become a capability? For now, its history exceeds both its current position and the drawing we can still see. In Random Gaussian we gather draws another way and ask what shape appears when we count where they land.
+
+[^levy]: The ordinary proposal is 0.015 metres. LONG STEP multiplies it by an inverse-square-root sample with offset 0.01, exponent −0.5 and cap ten, giving a maximum of 0.15 metres before boundary folding. This bounded implementation is not an unbounded Lévy process or evidence about animal foraging. The nearby self-avoiding pixel sculpture lays at most twenty-three cubes.
+
+[^walk-clock]: The cabinet accepts thirty simulation steps per second, at most five per frame, discarding excess time. A two-second frame can therefore add two seconds to its frame clock but only a sixth of a second to its simulated walk. RESET restarts both accounts; the cabinet has no pause control. NEW SEED selects a five-digit number different from the current one, although an older one may recur.
+
+[^drawing-clock]: While held, the random offset proposes 1.2-centimetre steps thirty times per second. The drawing process samples the visible trail separately, so a stalled frame can omit intermediate positions. Replay resets the random procedure, not a visitor's gesture.
+
+[^walk-field]: The larger field is ten metres across with thirty-two cells per side, despite its older source name, `random_walk_128`. Its height records visits; that height does not guide the next step.

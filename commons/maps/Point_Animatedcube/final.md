@@ -1,59 +1,44 @@
 # Cube Assembly from Primitives
 
-You have been inside boxes since the first room. Now one of them lets you take hold of a corner. What must stay in place for it to remain a cube?
+We have been inside boxes since the first room. Now two wait together on a low table. Their corners occupy the same positions within each form. Across one front face, the amber diagonals run in opposite directions.
+
+<!-- @paired_cube_diagonals -->
+
+At first both faces are flat. Nothing needs to fold along either line. Holding the pink corner on A, we move it a little out of the face's plane. The corresponding corner on B follows by the same amount. The remaining corners stay fixed.
+
+The surfaces no longer agree.
+
+On A, one triangular patch can stay flat while its neighbour tilts. On B, the two patches meet along a diagonal that reaches the moving corner. The same changed positions have produced different surfaces. A choice that seemed incidental when the square was flat has become visible as a crease.[^animatedcube-triangulation]
+
+The difference lives in two short lists. A uses:
+
+```text
+[4, 5, 7]   [5, 6, 7]
+```
+
+B uses:
+
+```text
+[4, 5, 6]   [4, 6, 7]
+```
+
+The numbers name corners. Each triple tells the renderer which three positions make a triangle. A's patches share the edge from five to seven; B's share four to six. The diagonal is a relation between entries, not another point hidden inside the square.
+
+We can move around the table and look along each face. The colour difference between its patches helps locate the fold, but the surface itself has changed. Both forms retain eight corners and the same outer edge connections. Equal lengths, right angles and flat faces need not survive the movement.[^animatedcube-boundary]
+
+RESTORE returns both sets of corners to their beginning. The disagreement disappears into two flat squares. Moving the same corner again brings it back. This is a small experiment: one displacement, two choices of triangulation, a consequence we can inspect from more than one side.
+
+REPLAY reveals the corners, edges and patches in sequence around the current positions. It keeps a deformation we have made. Restoration and repetition therefore begin again in different senses. The source geometry already exists before the reveal; the animation stages when its pieces become visible.
+
+FREE / ONE opens the remaining handles on A. B continues to follow its positions. This admits other forms, including crossings and collapsed triangles. The connections can stay valid as lists while the resulting object becomes difficult to call a solid. A retained recipe does not guarantee a good geometric embedding.
 
 <!-- @cube_lines -->
 
-Begin with the outline. Follow the three edges leaving one corner. Look through to the far side. You can recognise a cube before any faces have appeared, although nothing has yet closed the gaps between these lines.
-
-The previous room gave us forms that could support a foot or interrupt a route. Here we return to their construction. What happens when the parts remain connected but their positions change?
-
-<!-- @animatedcubebuilder -->
-
-The builder may have finished before you arrive. Press **REPLAY** on its front instrument. Corners appear, then edges, then triangular patches. Press **PAUSE** at the moment you recognise the shape. How much did you need to see?
-
-Count what you saw. Eight corners, twelve edges, six faces, and eight minus twelve plus six is two, the way it was for the tetrahedron. Every one of the six faces is a quad, and you know from two rooms ago what a quad is: two triangles agreeing to lie flat. So the cube is twelve triangles and six seams, and the seams are hidden only while the faces stay flat. The box you push in every game is twelve of the unit, wearing a skin.
-
-Only this assembly pauses. The folding net and the rest of the room continue. We have borrowed a little attention from a world already running.
-
-The source has prepared the geometry before this presentation begins. The animation reveals pieces that were hidden. What looks like construction is also an arrangement of when we are allowed to see. This is the whole of an animation: two positions and a duration, and the machine fills the between. Keyframes define the targets. Interpolation invents everything else, at whatever easing you asked for.
-
-You met this in the trace room from the other side. There, the machine invented the path between two samples of a hand and called it a line. Here it invents the path between two states of a solid and calls it motion. Nothing about the cube changes while it moves: still eight corners, still twelve triangles, still 720 degrees of corner. What changes is where it is, and the next chapter is about that and nothing else.
-
-Resume. Once the assembly finishes, the numbered corner handles become available. Keep the second builder unchanged as a reference. On the one you will alter, find `v6`. Follow the square face containing `v4`, `v5`, `v6` and `v7`. Predict what will happen if you pull `v6` out of that face's plane, leaving its other corners where they are.
-
-Move it a little. Look along the face. Where did the crease appear?
-
-Try to locate the seam before pressing **DIAGONALS**. The yellow lines show the six diagonals that divide the cube's square faces into triangle pairs. Your hand has made one of those divisions matter.[^animatedcube-triangulation]
-
-That face is stored as two triples:
-
-```gdscript
-[4, 5, 7]
-[5, 6, 7]
-```
-
-Each number names a vertex. Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.
+The outline cube and the diagonal plate remain nearby as optional comparisons. With no filled faces, a few edges are enough for us to recognise the box. With the plate, we can inspect one triangle pair without the other sides obscuring it. These are different amounts of evidence for something familiar.
 
 <!-- @cube_diagonal_plate -->
 
-![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-images/figures/Point_Animatedcube/cube-hidden-diagonal.png)
-
-*The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.*
-
-<!-- @animatedcubebuilder -->
-
-The builder reads a moved handle back into its position list:
-
-```gdscript
-vertices[i] = handle_nodes[i].position / cube_size
-```
-
-The edge and triangle lists still refer to the same vertex numbers. The neighbours remain; equal lengths, right angles and flat square faces need not.[^animatedcube-boundary] The display measures the largest corner shift in local metres. It cannot tell us what the changed form is worth.
-
-Release the handle and press **REPLAY**. The layers return around your altered shape. Then try **RESTORE CUBE**. This time the initial corner positions return too. Repeating a presentation and undoing a change are different ways of beginning again.
-
-Compare the two builders. Name one property your alteration preserved and one it lost. You can keep a crease you like without claiming the result is still a cube.
+The paired experiment has made a corner movement consequential. Beyond the opening, the folding net offers another way for a flat arrangement to become a box. This time the square faces keep their shapes.
 
 <!-- @polyhedron_nets_cube -->
 
@@ -61,7 +46,7 @@ Further on, six squares wait in the air. Follow the pink one as the net folds. P
 
 It stays there for a moment, as though it needs to think. Above it, another net opens. The first cube remains. Each return leaves something behind; the floor begins to hold a collection.
 
-Here each square stays rigid. The hinges turn. In the builder, you moved a corner and bent a square into two differently tilted triangles. Similar-looking movement can come from different operations. Knowing which data changes helps you predict what a form can do.
+Here each square stays rigid. The hinges turn. At the paired cubes, the same corner movement bent the front faces along different diagonals. Similar-looking movement can come from different operations. Knowing which data changes helps you predict what a form can do.
 
 There are exactly eleven ways to unfold a cube into a single connected sheet of six squares. Not ten, not twelve. A cube is one solid and eleven flat things, and which flat thing it was depends on where you chose to cut. Cutting is a decision. The solid does not remember which one you made.
 

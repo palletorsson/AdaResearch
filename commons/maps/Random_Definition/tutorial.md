@@ -1,194 +1,78 @@
-# A seed needs a procedure
+# Give a number somewhere to go
 
-**Learning elements**
+We build a small tutorial shelf: a point on a line, a growing point, a turning cube and a sphere that changes colour. Each press of NEXT sends **the same number** to all four. We can see what we have directed randomness towards.
 
-- Local random generator
-- Seed and generator state
-- Draw order
-- Assigning sampled values to colour
-- Reconstructing a result versus retaining its data
+The abacus in the room makes a path felt through a hand. Here we isolate its first operation: assigning a value to a property. Position, scale, rotation and materials come from the earlier Primitives, Transformation and Colour lessons. The new part is the source of the value and the decision about where it goes.
 
-At the paired colour grids, choose a patch you would keep. Press REPLAY. Then press +1 DRAW: only the right grid changes. The seed stays. Find out what else a repeated picture needs.
+## Build the shelf
 
-## What you bring
+The [editable shelf scene](../../../doc/book/studies/randomness-shelf/shelf.tscn) supplies geometry and the inherited rectangular buttons. The [desktop preview](../../../doc/book/studies/randomness-shelf/preview.tscn) includes a camera and clickable controls; open it in Godot and press F6. The installed version is now in **Random Definition, beside the colour-grid window**, at source-grid cell (8, 13), facing the approach from the entrance. It uses the same four assignments through a separate museum adapter: the hall begins at 435 and explicit seed changes reach the shelf too. The hall has one NEXT button on a protruding tabletop extension. Eight presses cycle back to the same starting sample. The standalone preview retains REPLAY, KEEP and LOAD for recording and reconstruction. The standalone learner scene below stays small and begins at 435.
 
-Use the cube from Transformation, the grid and list from Arrays, and a separate material for each cube from Colour. Keep the held `PointBody` from the earlier studies. Its role here is a control: the trigger requests an action; the ball's position chooses which action.
+To assemble the study ourselves, start with a Node3D and the following children. Each group has its own origin; the script changes properties relative to that origin.
 
-In Cage we sampled a score once and replayed the stored events. Here we reconstruct a picture by resetting a generator and repeating its requests. Synthesis kept the amounts in a recipe; this recipe also needs the order in which values are requested and used.
+| Group | Object we build | What remains fixed |
+| --- | --- | --- |
+| `Move` | `Point`: sphere of radius 0.1 m; `Line`: box 0.8 m long on X | Y, Z and the line |
+| `Scale` | `Point`: sphere of radius 0.1 m | Centre and shape |
+| `Rotate` | `Cube`: box 0.22 m across, with a coloured face marker | Centre and size |
+| `Colour` | `Point`: sphere with a StandardMaterial3D in Material Override | Geometry |
 
-**Build:** two four-by-four grids coloured by one local generator, reset before each grid.
+Place the groups beside one another, add a Label3D named `Readout`, and attach the following file to their parent. The supplied scene shows the complete arrangement. NEXT calls `next_sample()`; REPLAY calls `replay()`. The marked face makes the cube's turn visible.
 
-**Investigate:** keep the seed and discard one draw before colouring the right grid. Predict where its first red, green and blue values will come from.
+## The small program — direct_randomness.gd
 
-## Work inside the museum
+Read `show_sample()` first. `u` is one stored value between zero and one. **Mapping** means assigning that value a consequence. `lerpf(a, b, u)` places it proportionally between two limits. `TAU` is one full turn in radians. Hue travels around a colour circle while saturation and brightness stay fixed.
 
-Use an upright `PointStudy` Node3D at unit scale in Random Definition. A tested working bay is hall-local `(10.5, 0, 18.5)` metres, beyond the textile panels, with Y rotation −90 degrees. The museum supplies floor, camera, lighting, player and XR Tools. The study's front is its local +Z side; this placement faces it into the room with the east wall behind it. This is a small reconstruction beside existing work; it does not replace the installed table or the room.
-
-Save `01_seed_picture.gd` beside the unchanged `point_body.gd` carried from Wavefunctions. Attach the first file to the study. Both files are printed below. No named mesh child, `$Display`, prefab grid or separate scene is required.
-
-In VR, hold the black point above REPLAY, +1 DRAW or NEXT SEED and press its action trigger. The existing desktop pickup/action controls can operate the same point. The choice uses the point's X coordinate relative to the study, as in Cage. Merely moving the point does not draw a number. NEXT SEED adds one to the integer; it is deliberately simpler than the installed table's RANDOM button.
-
-## Complete code — 01_seed_picture.gd
-
-Read `colour_grid` and `replay` first. The construction in `_ready` reuses the cube/material/grid pattern. The final function reuses the held-point action.
-
-<!-- student-code:01_seed_picture.gd -->
+<!-- student-code:direct_randomness.gd -->
 
 ```gdscript
 extends Node3D
 
-const PointBody = preload("point_body.gd")
-@export var side := 4
-@export var seed_value := 42
-var discard_first := false
-var rng := RandomNumberGenerator.new()
-var grids: Array = []
-var samples: Array = []
-var point: RigidBody3D
-var label := Label3D.new()
-
-func text_at(words: String, at: Vector3) -> Label3D:
-    var text := Label3D.new()
-    text.text = words
-    text.position = at
-    text.font_size = 28
-    text.pixel_size = 0.0025
-    add_child(text)
-    return text
+const SEED := 435
+const COUNT := 8
+@export_range(0.05, 0.4) var x_extent := 0.4
+var values: Array[float] = []
+var cursor := 0
+@onready var colour: StandardMaterial3D = $Colour/Point.material_override.duplicate()
 
 func _ready() -> void:
-    assert(side > 0 and side <= 8)
-    for panel in range(2):
-        var cubes: Array[MeshInstance3D] = []
-        for row in range(side):
-            for column in range(side):
-                var cube := MeshInstance3D.new()
-                var box := BoxMesh.new()
-                box.size = Vector3.ONE * (0.9 / side)
-                cube.mesh = box
-                cube.material_override = StandardMaterial3D.new()
-                cube.position = Vector3(
-                    (panel - 0.5) * 1.35 + (column + 0.5) / side - 0.5,
-                    1.1 + (row + 0.5) / side, 0)
-                add_child(cube)
-                cubes.append(cube)
-        grids.append(cubes)
-    point = PointBody.new()
-    point.position = Vector3(-0.8, 0.95, 0.7)
-    add_child(point)
-    var ink := StandardMaterial3D.new()
-    ink.albedo_color = Color(0.04, 0.04, 0.045)
-    ink.roughness = 0.2
-    point.get_child(0).material_override = ink
-    point.action_pressed.connect(activate)
-    text_at("REPLAY", Vector3(-0.8, 0.65, 0.7))
-    text_at("+1 DRAW", Vector3(0, 0.65, 0.7))
-    text_at("NEXT SEED", Vector3(0.8, 0.65, 0.7))
-    text_at("Hold the point above a label; press trigger", Vector3(0, 0.4, 0.7))
-    label.position = Vector3(0, 2.35, 0)
-    label.font_size = 30
-    label.pixel_size = 0.0025
-    add_child(label)
-    replay()
+	$Colour/Point.material_override = colour
+	var rng := RandomNumberGenerator.new()
+	rng.seed = SEED
+	for i in COUNT: values.append(rng.randf())
+	replay()
 
-func colour_grid(cubes: Array, skip: bool) -> Array[Color]:
-    rng.seed = seed_value
-    if skip:
-        rng.randf()
-    var colours: Array[Color] = []
-    for cube in cubes:
-        var a := rng.randf()
-        var b := rng.randf()
-        var c := rng.randf()
-        var colour := Color(a, b, c)
-        cube.material_override.albedo_color = colour
-        colours.append(colour)
-    return colours
+func next_sample() -> void:
+	cursor = (cursor + 1) % values.size()
+	show_sample()
 
 func replay() -> void:
-    samples = [colour_grid(grids[0], false), colour_grid(grids[1], discard_first)]
-    var draws := side * side * 3
-    label.text = "Seed %d | LEFT %d draws | RIGHT %d draws\n%s" % [
-        seed_value, draws, draws + int(discard_first),
-        "right discards its first draw" if discard_first else "same procedure twice"]
+	cursor = 0
+	show_sample()
 
-func activate(_body: Variant = null) -> void:
-    if point.position.x > 0.4:
-        seed_value += 1
-    elif point.position.x >= -0.4:
-        discard_first = not discard_first
-    replay()
+func show_sample() -> void:
+	var u := values[cursor]
+	$Move/Point.position.x = lerpf(-x_extent, x_extent, u)
+	$Scale/Point.scale = Vector3.ONE * lerpf(0.5, 1.5, u)
+	$Rotate/Cube.rotation.y = u * TAU
+	colour.albedo_color = Color.from_hsv(u, 0.8, 0.9)
+	$Readout.text = "%d / %d   u = %.6f   seed %d" % [cursor + 1, values.size(), u, SEED]
 ```
 
-## Follow the requests
+Run it. One value is already displayed. Press NEXT: the point jumps along its line while size, angle and colour change together. There is no smoothing or physics pushing it. The time of the press determines when the next value matters. After eight values, the retained sequence repeats.
 
-`RandomNumberGenerator.new()` gives this study its own generator. Asking it for a value advances its state. The museum's other artifacts can keep running without spending this generator's next draw.
+`rng.seed = 435` starts a **pseudorandom generator**, a deterministic calculation whose internal state advances with each draw. We request eight values once. Reading them changes no generator state. REPLAY returns to the first stored value. Each object receives `u`; calling `randf()` separately for each object would answer a different question.
 
-`rng.seed = seed_value` puts it back at the beginning associated with that seed. We do this once before each grid, not once before each cube. Then `randf()` requests values from zero to one. Three successive requests become the red, green and blue channels of one material. Each cube owns its material, so changing one does not repaint them all.
+## Change one consequence
 
-There are sixteen cubes per grid. Each needs three draws: forty-eight in all. The loops store row zero first, left to right, then the next row. Row zero is the bottom row in this vertical display. The seed can only reproduce the assignment while that order and the use of the values remain the same.
+The falling page offers another assignment of the colour window's baseline sequence. For each full `randf()` value, `str(clampi(int(floor(u * 100000.0)), 0, 99999)).pad_zeros(5)` keeps the first five fractional digits: `0.4981114268…` becomes `49811`. Truncate before rounding for display; keep leading zeros. The window consumes three values per RGB cell; the page consumes one per group. Its page number is a separate address and consumes no draw. Reset both to 435 to compare their beginnings; changing an address or holding a group does not create a new random source. In this hall, `initial_rows:10` places the first hundred groups on the page before motion begins, with the oldest row lowest. Falling continues from draw 101. Reset restores those ten rows; the page number still consumes no draw. The wall/book camera waits until all 28 rows are filled and the incoming row has settled.
 
-`skip` requests one value without using it. It happens before the colour loop. The shifted grid still displays forty-eight channel values, but consumes forty-nine draws. Think of the first six values as `a, b, c, d, e, f`: the unshifted first two cubes use `(a, b, c)` and `(d, e, f)`. Predict the shifted first cube before you press the trigger.
+At `u = 0.25`, predict X = −0.2 m, scale = 0.75 and rotation = a quarter-turn. Colour gets that same fraction of its hue circle. These outputs are related by our assignments; they are not four independent random events. A full turn and no turn look alike, and hue also wraps: different values can have the same visible consequence.
 
-The two calls to `colour_grid` return colour lists. `samples[0]` and `samples[1]` keep the values assigned to the left and right grids. The record and the picture can now be inspected separately. These lists live in this study's memory; this lesson does not save them to disk or automatically carry them through a portal.
+Keep a baseline, then change only `x_extent` from 0.4 to 0.2 in the running shelf's Remote Inspector. Press REPLAY and compare the same sample numbers. The point's travel contracts; the other three assignments stay. Restore 0.4 afterward. Does the shortened range change what feels restless, constrained or barely moving? An uninteresting difference is evidence too.
 
-## Three short investigations
+The optional [notebook](../../../doc/book/studies/randomness-shelf/shelf_notebook.gd) supplies KEEP and LOAD. KEEP writes a new file and prints its location in Godot Output. It retains the actual eight values, current sample and X range. Add `observation` and `next_change` in that JSON; leave its record fields intact. Set Notebook's `load_path` to reopen it after restarting. LOAD restores that saved moment; REPLAY starts its stored sequence again. Preserve the scene and script with each experiment.
 
-First leave +1 DRAW off. Find corresponding cubes in the two panels. Press REPLAY twice and wait between presses. The lists and colours repeat: this study has no frame callback that requests random values while you wait.
+Have another person build from the small program, load the record and compare the four properties. Then let the observation propose one further change: another range, another destination, or a clock that advances NEXT. Keep the earlier record for comparison. Reproducibility of these stored values does not establish unpredictability or reproduce a feeling.
 
-Next switch +1 DRAW on. Compare the first right-hand cube with the first two left-hand cubes. The right red comes from the left green, its green from the left blue, and its blue from the next left red: `(b, c, d)`. Press REPLAY. The mismatch repeats. Switch +1 DRAW off and the match returns. The control toggles one discarded value, rather than accumulating a longer skip on every press.
-
-Finally choose NEXT SEED. Predict what stays fixed before looking at the colours: cube count, positions, sizes and the RGB assignment rule. Replaying this new seed repeats its result. A different seed does not guarantee a different visible result, nor does a neighbouring seed promise a similar palette. Keep the Godot version with a saved seed recipe; do not assume the generator's implementation will remain identical across versions.
-
-## Make another use of the same values
-
-Change the one colour assignment to `Color(a, a, a)`. Keep all three `randf()` calls. Predict the difference, then run it: every cube is grey, but later cubes still begin at the same positions in the random stream. You have changed the use of the draws, not their number.
-
-Now swap red and blue with `Color(c, b, a)`. Check one cube against its previous stored colour. Its green stays the same. Can you produce a different palette without changing the seed or the number of requests?
-
-These are actual code edits, not another control to memorize. Keep one changed version and explain which part of the procedure it alters.
-
-## The inherited point — point_body.gd
-
-This is the same frozen pickable sphere used in Wavefunctions. Its parent class comes from the XR Tools already installed on Day Zero. `_init` creates its mesh and collision; the parent supplies pickup and `action_pressed`. We are using that behaviour here, not teaching it again. Keep this file unchanged beside the new script.
-
-<!-- student-code:point_body.gd -->
-
-```gdscript
-extends XRToolsPickable
-
-const RADIUS := 0.14
-
-func _init() -> void:
-    freeze = true
-    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-    release_mode = XRToolsPickable.ReleaseMode.FROZEN
-    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
-    collision_layer = 4
-    collision_mask = 196615
-
-    var surface := MeshInstance3D.new()
-    var sphere := SphereMesh.new()
-    sphere.radius = RADIUS
-    sphere.height = RADIUS * 2.0
-    surface.mesh = sphere
-    add_child(surface)
-
-    var boundary := CollisionShape3D.new()
-    var shape := SphereShape3D.new()
-    shape.radius = RADIUS
-    boundary.shape = shape
-    add_child(boundary)
-```
-
-## Compare with the installed work
-
-The hall's `seed_replay_demo` has two eight-by-eight grids, a seed slider, RANDOM and draw strips. It uses the same three-requests-per-colour operation: 192 draws per grid, or 193 when the extra request is enabled. Our four-by-four study keeps the operation and reduces the amount to inspect. The black point is our familiar input; the installed instrument uses its own panel.
-
-In the small study, generator state and the picture's recipe are different things. `seed_value` says where to begin. After colouring, `rng.state` is already further along. REPLAY resets the generator before making each list. Cage instead replayed an already retained list without asking the generator again. Both can repeat a result, by different procedures.
-
-The reflection stays with what the seed's apparent name leaves out, and with the other instruments in the room. Not every artifact needs to become another construction exercise.
-
-## What travels onward
-
-Keep the local generator, the repeated procedure and the practice of retaining sampled values. In Random Entropy we will give draws explicit symbol IDs and a small palette so we can count them. Sorting a copy will change neighbours while leaving the counts intact. We will declare that new categorical representation; this RGB record does not silently become a list of ten symbols.
+The **48-value seed bench remains the first research pilot**. This eight-value shelf introduces its question at a smaller scale. The [full abacus reconstruction and experiment loop](abacus-reconstruction.md) and [colour-window study](seed-picture-extension.md) remain extensions. Keep the local generator, stored array and distinction between value and assignment: [Random Entropy](../Random_Entropy/tutorial.md) next asks what a measurement retains from a record.

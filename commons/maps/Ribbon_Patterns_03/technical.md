@@ -1,6 +1,6 @@
 # From source to skirt
 
-Three primary placements: `fabric_shader_studio` (22,26), `super_drag_mirror` (31,27), `drag_catwalk` (58,24). The ordinary museum hall retains the fourteen earlier exhibits as secondary material. RotatingLaser moves from (58,39) to (58,50), with six-metre beams and a four-metre rig. Three older demos opt into `embedded:true`: no scene-wide environment or screen overlay; coloured-line paths are fitted together inside a three-unit source radius before animated sway and shader expansion.
+Three primary placements: `fabric_shader_studio` (6,5), `super_drag_mirror` (12,7), `drag_catwalk` (23,3), in the current compact map. The ordinary museum hall retains the fourteen earlier exhibits as secondary material. RotatingLaser is at (23,24), with six-metre beams and a four-metre rig. Three older demos opt into `embedded:true`: no scene-wide environment or screen overlay; coloured-line paths are fitted together inside a three-unit source radius before animated sway and shader expansion.
 
 ## One recipe, explicit receivers
 

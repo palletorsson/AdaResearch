@@ -8,6 +8,10 @@
 - Keep a reading while changing its angle.
 - Distinguish construction, interpretation and display fitting.
 
+## The route through this sequence
+
+Fractals made the seed, repeated operation and stopping condition explicit. Here a rule first constructs a description: a sentence we can keep before another function reads it as movement. That separation lets us change an instruction or its interpretation independently. Later halls give the resulting path boundaries, let growth meet shared resources, and turn design values into rules. Shape Grammars transfers replacement to mesh faces; Assemblage uses random samples and asks which connections a viewer finds. Those last studies extend the inquiry beyond L-systems. The familiar point stays in the hand while the records and operations gain new uses.
+
 ## In the museum
 
 At the editor desk, two upright lines begin with the same letter, `F`. Press NEXT once. Count the live segments before reading its counter. HOLD keeps that reading on the right. Now take the small black point and move it along the four angle positions. What changes when the sentence stays the same?
@@ -21,6 +25,26 @@ The desk's preset called **Koch** uses `F → F+F-F-F+F`. It is a different repl
 ## Continue from the recipe
 
 In Fractal Synthesis, a recipe named the seed, operation and stopping depth. Here a **string** records the intermediate result. A **dictionary** says which string replaces each symbol. We reuse loops, functions, independent old/next data, PointBody and the cylinder that gives a line its thickness.
+
+## What an L-system is
+
+An **L-system**, short for Lindenmayer system, repeatedly rewrites a string according to rules. Aristid Lindenmayer introduced these systems in 1968 to model biological development.[^1] We will use one to describe a familiar construction before drawing it. These are its building blocks, using the Cantor preset we will try below:
+
+| Part | Meaning | Our Cantor example |
+| --- | --- | --- |
+| Alphabet | The symbols the description uses | `F` and `f` |
+| Axiom | The starting string, generation zero | `F` |
+| Productions | Rules replacing old symbols with new strings | `F → FfF`; `f → fff` |
+| Generation | One complete rewrite of the previous string | `F` becomes `FfF` |
+| Drawing interpretation | The actions we give the symbols afterwards | `F` moves and draws; `f` moves without drawing |
+
+The drawing interpretation is an extra agreement: the rewriting rules alone do not say what a line looks like. A **turtle** is our name for the reader that keeps a position and heading as it follows the string; no animal model is required.
+
+Work through two generations on paper. Start with `F`. The first rewrite gives `FfF`. For the second, replace its three old symbols separately: `FfF`, then `fff`, then `FfF`. Join those results to get `FfFfffFfF`. Read it as movement: four drawn intervals separated by gaps, across nine equal steps. Divide the step length by nine to compare this row with the original unit interval. The old gap expands to three symbols so it keeps its share of that interval.
+
+This carries the branching construction forward through stored descriptions. Our `rewrite()` uses loops, not a function calling itself. It lets us keep, inspect and reinterpret each generation. The desk opens with the turning curve instead: its alphabet is `F`, `+` and `-`; its starting axiom is still `F`. Follow the same rewriting process with the production printed above.
+
+## Set up the study
 
 Use the prepared Endless Museum workspace. Place the four complete files below together. Attach `sentence.gd` to an empty, unit-scale Node3D on its floor, facing local +Z. The museum supplies the player, camera, lighting and installed XRTools. The script creates its own point, drawings and labels; there are no named scene children to prepare. This is a compact reconstruction of the existing desk's opening interaction, beside which you can compare your result.
 
@@ -314,3 +338,5 @@ Press C for Cantor. The rules are `F → FfF` and `f → fff`. All symbols advan
 Find the same preset at the museum desk: RESET, then PRESET seven times. The first seven named presets still occupy their previous positions; Cantor is now reachable as the eighth. This connects two implementations of one construction. The table's quarters and two-fifths recipes require different rules or step lengths; they are not produced by these F/f rules.
 
 Carry the sentence and reader into **Growth**. At present the turtle has one position and one heading. A branch needs somewhere to keep those values while another line continues.
+
+[^1]: Daniel Shiffman, [*The Nature of Code*, “L-systems”](https://natureofcode.com/fractals/#l-systems). For the original modelling tradition, see Przemyslaw Prusinkiewicz and Aristid Lindenmayer, [*The Algorithmic Beauty of Plants*](https://algorithmicbotany.org/papers/#abop), chapter 1.

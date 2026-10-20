@@ -1,101 +1,100 @@
 # What the gauge forgets
 
-In the last room, one discarded draw changed which values became neighbours. Here, choose a pair of neighbouring colours before touching a button.
-
-A gauge hangs on a post just inside the entrance, its number glowing over a desk. On the desk, two hundred small coloured tiles stand in a row, and a pale bar lies before the first forty of them.
-
 <!-- @shannon_entropy_meter -->
 
-Look at the tiles and the ten bars before the large number. Each tile is one draw, in the order it was drawn, coloured by its symbol; the strip along the panel's foot spells out the first forty, the ones behind the bar. Find a colour that comes often in the row and one that comes seldom, and compare their bars. The bars collect every occurrence wherever it fell; the row keeps where each one fell. Choose two neighbouring tiles and ask whether their closeness tells you anything about the height of their bars. Then find another tile of the same colour further along.
+A row of coloured tiles waits on a desk. In the last pyramid, every chair was pink; changing their supports gave the colour question nothing new to answer. Here ten colours interrupt one another across a much longer row. A button says SORT.
 
-The first forty also appear enlarged across the desk's front, labelled “as drawn.” Keep one pair in that row in view.
+We watch the neighbours as we press it. The tiles gather into blocks of colour. Some neighbours part company. Above them, ten bars retain their heights and the Shannon reading stays still. Across the desk's front, an enlarged strip keeps the first forty tiles as they were drawn. We can still find their old neighbours there.
 
-Now press SORT, on the console on its post in front of the desk. Watch the row and the bars together. The tiles glide into ten blocks, one per symbol; the bars hold their places. Look up at the number. It has stayed too. The pale bar before the first forty disappears: those particular draws no longer occupy the beginning of the sorted row. The plate on the desk's front prints the sorted copy's H beside the reading, the word *equal*, and how many of the two hundred tiles changed place. The enlarged excerpt stays as drawn while the two hundred tiles regroup above it. One part of the desk keeps the old neighbours available beside the new ones. Press SORT again and the upper row comes back as it was drawn.
+The desk holds two hundred tiles. Its calculation reads how often each colour occurs. Sorting changes none of those shares. It changes what is easy to find: a colour can now be followed along a block, while its earlier interruptions survive in the strip. Pressing SORT again restores the original order.
 
-What the gauge counts is this:
+CONTRAST brings a different sample, with one colour occupying much of the row. Now the reading falls. A change of places and a change of shares have different consequences for this gauge. The retained strip keeps the first change from disappearing behind an unchanged number.[^ledger]
 
-```gdscript
-	for s in sequence:
-		counts[s] += 1
-```
+The number has not made a mistake. We have asked it a question that leaves neighbours out. To let position enter the calculation, we will need to say what about position is known.
 
-one tally per symbol, and nothing about where in the sequence the symbol stood. The number is made from the tallies alone:
+<!-- @entropy_jar_states -->
 
-```gdscript
-	for c in counts:
-		if c > 0:
-			var p: float = float(c) / float(sequence_length)
-			entropy -= p * (log(p) / log(2.0))
-```
+Beyond the desk, four glass jars rise above a shared pale plinth. Their glass bodies are 2.3 metres tall. Each holds forty lavender beads and forty coral beads. The beginnings differ: layers, an overlapping boundary, a mixture, a lavender core inside a coral rim.
 
-Each symbol's share of the two hundred, times the logarithm of that share, summed and negated. A symbol that never occurred is skipped rather than given a zero times an infinity, and the largest the sum can be is log₂ of the alphabet:
+On approach they hold for eight seconds. We have time to look through the coral of the last jar towards the lavender inside. Naming a height does little to settle which colour lies there: both extend through the jar. Naming core or rim makes the colour predictable. Two readings concern the same beads at the same moment.
 
-```gdscript
-	var max_h: float = log(num_symbols) / log(2.0)
-```
+Each is a conditional colour entropy: the colour uncertainty remaining when a region is known. One account divides the jar into horizontal bands; another distinguishes core from rim. A bead has an address in both. Which address is retained changes what the measurement can say about its colour.
 
-About 3.32 bits per symbol for ten equally frequent symbols, the ceiling marked at the end of the bar. The reading sits just under it, because this sample from an even source did not divide evenly; the bars record this particular sample rather than the ideal distribution as if it had already happened.
+Then the beads begin to move. All four beginnings continue under the same motion rule, along separately seeded paths. Lavender crosses the first jar's middle. Coral enters the last jar's core. The labels on the plinth gradually become descriptions of a past that is harder to locate in the moving beads.
 
-Sorting changed the row without changing any tally, so the gauge had nothing to recount. The plate runs the sorted copy's counts through a copy of the same loop, and gets the same H. Yet the row looks like another object. Keep it sorted for a moment: finding every occurrence of a colour has become easier. Return to the order drawn and a colour has its former neighbours again. Which arrangement would you want to work with? The gauge cannot choose between these uses for you.
+PAUSE holds their positions. RESTART brings back the beginnings and their paths. While motion continues, clusters can gather again and the readings fluctuate. The motion does not aim at a prescribed entropy value. Two jars may come to look alike without arriving at identical positions.
 
-Press CONTRAST. A second sample takes the wall: the same ten symbols, the same two hundred draws, from a source that makes the first symbol about twice as likely as the second, the second twice as likely as the third, and so on. The probabilities are normalised across ten symbols; they do not promise fixed counts. In this sample the first symbol occurs 109 times. Its bar towers, and the number falls to about 1.82 bits. Nothing in the alphabet or the count changed; the shares did. The plate names the source and its seed, so you can tell the two samples apart by their provenance and not only by their look. Look closely at the smallest bars and compare them with the counts on the desk. Four symbols did not occur in this sample. They still have tiny marks. The display gives every bar at least two millimetres:
-
-```gdscript
-height = max(0.002, height)
-```
-
-A visible mark can stand for zero. The tallest bar also reaches the same height in both samples: the display divides by that sample's largest count. Read the counts to compare how many occurrences there were. The ruler has changed with the thing it measures.
-
-Press CONTRAST again and the first sample returns, draw for draw.
-
-The first sample comes from a seeded local generator, giving each symbol the same chance on each call:
-
-```gdscript
-		sequence.append(_rng.randi_range(0, num_symbols - 1))
-```
-
-The seed lets the gauge recover this sample when it rebuilds. The contrast uses a second seed and a weighted draw; it too can be recovered.
-
-Press DISCLOSE and the formula appears under the title; press it again and the source is named on the panel with a pale bar behind each live one showing the count that source expects on average: one flat line for the even source, a descending staircase for the concentrated one, and the plate prints those expected counts beside its name. Keep pressing and the upper panel withholds its bars and strip, then brings them back. The reading stays. Look down: the desk still carries the tiles and its own account of the counts. Information absent from one display can remain within reach on another. How much would you know if you approached only the glowing number?
-
-Now ask what the unchanged number failed to notice. It did not notice the order, which the sorted view rearranged. It cannot notice a pattern between neighbours, a repeated pair, a rhythm, a message, because it never looked at two tiles at once. It does not know whether the row was worth reading. A high reading is not a certificate of meaninglessness and a low one is not a certificate of value; here it averages surprise using the shares counted in this sample, without consulting the neighbours of a draw.
+We can hold a late arrangement and look for a remnant of its beginning. The search takes place through glass. To make a different movement ourselves, the next jar must come within reach.
 
 <!-- @entropy_jar -->
 
-In the desk's row, a few steps to the side, a glass jar holds red beads below and blue ones above, and its label reads S = 0.00. It runs the same sum inside six layers of the jar, cut by height: red against blue in each layer, each layer weighted by the beads it holds. Lift it and shake it: as red and blue come to share its layers, S climbs toward one bit, while the forty red and forty blue, counted the gauge's way, make one bit throughout. Its layers run by height only; beads sorted from the centre outward would read to it as mixed.
+Beside the plinth stands a jar small enough to lift. Red beads sit below blue ones. We pick it up and shake it. Beads enter new height bands; the reading changes with their distribution. The motion now follows an intervention whose force and timing we can vary.
+
+There are still forty of each colour. A colour drawn without its location would remain uncertain by one bit. The height reading asks a narrower question: what can a band tell us about the bead found there? It does not measure the heat of shaking.
+
+We put the jar down. Describing what happened could mean keeping the gesture, the final positions, or only the number on the display. Those records would preserve different things. The positions alone already need a long list. How much might a shorter account leave open?
+
+<!-- @entropy_sorting_table -->
+
+A narrow tube delivers four cubes onto a pale table: pink, black, pink, black. Then it stops. Six little pictures show the possible colour arrangements of four places containing two cubes of each colour. We can compare every picture with the objects, without trusting a count too large to inspect.
+
+We add a divider through the middle. No cube moves. Four pictures remain. Each fits the new account: one pink and one black in each box. Two arrangements have become incompatible with the description, although nothing has been taken from the tabletop.
+
+Now we exchange the middle cubes. Pink sits with pink, black with black. Only one picture fits the counts in these two boxes. The divider first changed what the description retained. Our hands then changed what that description could report.
+
+The smallness of this experiment matters. We can point to each surviving possibility and each one excluded. Keeping the same kind of account for more places will soon exceed what those pictures can comfortably show.
+
+<!-- @entropy_compartments -->
+
+The next cabinet enlarges the problem. Sixteen places lie in two glass-sided trays, with orange A spheres on the left and blue B spheres on the right. Two round dials face the arrangement. One reads one bit; the other reads zero.
+
+The colour shares are still equal. The second dial counts arrangements compatible with k, the number of A spheres on the left. At k = 8, only one colour assignment fits. What would change if an orange sphere crossed the divider? The control A LEFT − exchanges one with a blue sphere. The left-hand share falls; the whole population stays half orange. Four exchanges bring four of each colour into each tray. Now 4,900 assignments fit that description.
+
+The dial shows S_B/kB = ln Ω, the Boltzmann expression from the chairs, divided by Boltzmann's constant. For 4,900 possibilities it reads about 8.497. The fixed places and retained population define this counting model. Temperature and heat exchange are absent from it.
+
+At four and four, an orange sphere could occupy another place without altering either count. The control marked SAME k moves colours within their trays. Neither dial responds. We can follow a particular orange sphere to a new place while both accounts remain satisfied.
+
+To return to this particular arrangement, the dials would not be enough. KEEP can preserve the site lists and generator states; REPLAY reconstructs a kept arrangement after another change. That record retains distinctions the dials omit. During a seeded run, some swaps exchange equal colours; others move the configuration reading up or down. Continued motion makes no promise that the number will rise.
+
+The arrangement can now return exactly under this implementation. But an exact return does not decide how to look at it. We have been standing outside the cabinet, viewing the places through one face. A record of positions says where the objects are; what lines those positions make available to us still depends on where we stand.
 
 <!-- @entropy_axiom -->
 
-Beyond the ledger, enter the square glass enclosure. Start at the blue end. The points sit in rows; toward the other end their positions stray further from those rows. Walk sideways as well as forward. The same field can look lined up from one direction and tangled from another.
+Beyond the cabinet, points occupy a square glass enclosure large enough to enter. At the blue end, rows line up. Farther along, offsets draw the points away from their lattice positions. We move sideways. A line that was easy to follow loosens; another alignment comes into view.
 
-Here the random offset grows with a point's position along z. The plan stays square; the rule still has a direction. This is a field of displaced points, not a spatial picture of the ledger's number. The meter counted symbol shares. This work sets points off their lattice addresses, once, when it is built. Putting them in one hall gives us something to compare, and a reason to resist calling every visible irregularity the same entropy.
+The points have not moved in response to our step. This difference belongs to the encounter between a fixed arrangement and a changing viewpoint. We can return to the earlier place and look for the line again.
+
+Displacement grows in a chosen direction through the enclosure. What looks increasingly disordered has a spatial rule. There is no entropy gauge here to convert the impression into a number. The missing dial leaves us with the work of distinguishing a change in the objects from a change in our access to them.
+
+A relation can disappear from view while every point keeps its place. At the stone bed beyond, some relations will have consequences even when we are looking elsewhere.
 
 <!-- @entropy_ruin -->
 
-Beyond the glass, four pale columns carry a lintel. A brick wall about half their height runs behind them. The ruin waits intact. Choose a joint, then press RUN / PAUSE on the console in front of it. For a moment the joint still holds. A piece drops out of the construction and comes to rest below. A capital loses its place; a shaft becomes a stump. The fallen stone is still here.
+Four columns and a lintel stand on the bed, with a low brick wall behind them. The stacked drums meet at narrow surfaces. Here a neighbour may be carrying something.
 
-![The four columns and their lintel wait intact, with the brick wall behind them and the controls in front.](/book-images/figures/randomness/ruin-waiting-museum.png)
+ONE STONE draws a supporting drum towards us and releases it. A drum above the gap descends; other stones can tip or strike the bed. We selected one removal. Contact and gravity carry its consequences beyond the selected stone.
 
-Press RUN / PAUSE to hold the scene, or ONE STONE to place the next selected piece among the rubble. The counter keeps two accounts: 116 stones, and how many have moved. The first number stays. Does the building stay with it? Look through the gaps and move around the surviving columns. What was a boundary now lets you see across it.
+The display keeps two counts: PULLED and MOVED. They can part company. All 116 stones remain in the apparatus, though they no longer do the same work. A loose drum can also be taken in hand. Its old place becomes a gap while its new place waits to be decided.
 
-The program chooses among the exposed tops of the wall and columns. The bottom two courses remain. RESTORE puts the pieces back, resets the seed and waits for you to start it again. The same dismantling order can return; it was never centuries of weather compressed into a minute. The fall and the landing places were arranged too.
+We can pause the automatic selection and still see stones fall. Pausing the choice has left gravity active. The bottom two courses remain fixed; that support is a condition the experiment keeps while the loose structure changes.
 
-Turn toward the museum wall beside the columns. This time the pale courses belong to the hall itself. Its small console offers the same three actions. Let the top stones come down. Through the thinning edge, the view continues beyond the room. The floor stays beneath your feet; a low course keeps the edge. The structure that contained the demonstration has become another arrangement under the rule.
+RESTORE rebuilds the beginning and restarts the selection seed. It makes another trial possible. Repeating the seed alone cannot preserve the exact landing of every rigid body; that would require a fuller account of the physical simulation and its timing.
 
-RESTORE closes those openings with the same stones and their collision. A wall is more than an image here: its written arrangement decides where a body can go. What else did we accept as background because it had not yet moved?
+Beside the columns, the museum wall follows another procedure. Its upper pieces leave for arranged landing places. A low course remains while the view opens above it. The wall's fall has been composed; the columns' contacts have consequences to resolve. Neither supplies a thermodynamic entropy reading.
 
-The ledger at the entrance counted symbols without keeping their neighbours. These stones make that omission bodily: the same inventory can hold different views, gaps and forms. Nothing has calculated the thermodynamic entropy of this ruin. Before calling its broken outline a higher number, we would have to say what we are measuring. What does a count of stones tell us about what they can still hold?
-
-<!-- @ -->
+We look through an opening that was occupied by stone. The inventory still includes what stood there. Its position mattered to more than the picture.
 
 <!-- study-spine:signal_room -->
-
 <!-- @signal_room -->
 
-The count returns as a room. Black and white continue from the floor onto the far wall and overhead. Choose ROWS, then CELLS. The broad bands loosen into another distribution. Both counts stay at 2,048.
+Through the doorway, black and white extend over the floor, up the wall and overhead. The colour question has become large enough to surround us. We stand on the pattern whose arrangement we are about to change.
 
-The small four-by-four witness lets you inspect the same record at another scale. The entropy reading stays at one bit per symbol while the number of unlike neighbours changes. In this response to Ikeda, the immensity is made from a finite stored array. Its authority can be felt before its omissions are understood. You can leave along either side of the display; the dark pixels never remove the floor.
+ROWS becomes CELLS. There are still 2,048 of each symbol; H stays at one bit. A four-by-four witness brings part of the arrangement within reach of counting. The number of unlike neighbours changes. The same retained population can answer a second question once its relations enter the record.
+
+We walk across the pattern. A black patch supports the next step as firmly as a white one. After the stone bed, that continued support matters. This change rearranges an image while leaving the floor intact. The stones made another dependency available to the same broad action of changing places.
+
+The side passage leads towards the next hall, where the eligible objects for a removal will be laid out. We have seen one chosen stone move others. Before the next selection, there is a prior decision to inspect: which things are allowed to leave, and what depends on their staying?
 
 <!-- @ -->
 
-The last room asked how an arrangement could return. This room asks what survives when we describe one. The histogram retains the counts; the entropy reading condenses those counts further. From that number alone you cannot recover even the bars, let alone the neighbours you chose. The ruin never drew among all 116 stones, only among the exposed tops. In the next room the eligible set is laid out where you can count it: before anything is removed at random, a rule has already decided what can be chosen.
+[^ledger]: The bars rescale to each sample's largest count and retain a two-millimetre minimum, so numeric counts matter when comparing samples. CONTRAST selects a cached, separately seeded sample; SORT rearranges a display copy. The [counts-and-neighbours lesson](counts-and-neighbours.md) reconstructs the distinction between a retained list and its frequency account. A replay claim here concerns the current generator and implementation, not arbitrary engine versions.

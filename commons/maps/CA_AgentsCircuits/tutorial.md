@@ -8,6 +8,10 @@
 - Change one input, then identify which construction responds.
 - A finite boundary limits a pattern that appears to keep growing.
 
+## Reading route
+
+Read `next_row`, then inspect the inputs to supplied `copy_positions`. Change the cellular seed before changing either display; deriving the recursive recipe belongs to Fractals. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Return to the row
 
 The previous hall separated what happens at an address from what it receives from neighbours. Here we return to the Boolean row from the CA opening and the saved history from the third hall. We change its rule, then compare its way of making with the pyramid already in the room.
@@ -47,6 +51,7 @@ At depth 3 the procedure returns 6 × 6 × 6 = 216 entries. The large museum pyr
 
 ## Complete procedures — procedures.gd
 
+<!-- student-code:procedures.gd -->
 ```gdscript
 extends RefCounted
 const N := 32
@@ -89,6 +94,7 @@ The same PointBody from the previous room supplies its held world position. Conv
 
 Read `reset`, `step` and `readout` first. `draw_instances` and `make_display` include the staging so the example can run without prepared child nodes. There is one `_ready`.
 
+<!-- student-code:comparison.gd -->
 ```gdscript
 extends Node3D
 const Procedures = preload("procedures.gd")
@@ -232,6 +238,7 @@ func make_display() -> void:
 
 Keep your existing copy from the previous hall. It is repeated here only to make the three-file example complete.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -284,8 +291,13 @@ Advance to generation 15 and compare a gap with the fixed sculpture. Then predic
 
 Press C to try two adjacent cells. It restarts the cellular history while keeping the same copying construction. Step and compare. Which resemblance survives? You can test the changed row; a visual match with the sculpture remains a judgment about selected features, not a proof that the procedures agree.
 
-Make one independent edit: set `seed_sites` to **[14, 16, 18]**, then restart the script. Predict the first row before pressing Enter. Only addresses **13 and 19** should be occupied. Addresses 15 and 17 each receive two true neighbours and cancel. Check the readout at either cancelled address, and confirm that the 216 cube transforms stayed the same. R replays your edited seed; C returns to the built-in single/pair choices.
+Make this guided edit: set `seed_sites` to **[14, 16, 18]**, then restart the script. Predict the first row before pressing Enter. Only addresses **13 and 19** should be occupied. Addresses 15 and 17 each receive two true neighbours and cancel. Check the readout at either cancelled address, and confirm that the 216 cube transforms stayed the same. R replays your edited seed; C returns to the built-in single/pair choices.
 
 The compact table stops after 24 stored rows, generations 0–23, so the comparison stays inspectable. The installed explorer can continue and scrolls its last 24 rows; it labels that retained range. These are different display budgets for the same row update.
 
 You can now distinguish repeating an update from repeating a placement. The next hall keeps the procedure fixed and changes one starting value, asking how far that difference travels.
+
+## Your own test
+
+Choose another seed and nominate a feature to compare with the fixed sculpture. Verify that the cube transforms stay fixed, even if the visual resemblance no longer persuades you. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

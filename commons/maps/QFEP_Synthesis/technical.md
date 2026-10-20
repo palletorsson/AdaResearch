@@ -2,7 +2,7 @@
 
 Sandbox separated a moving handle from the values another object receives. Synthesis uses a specimen with its own two local sliders. Neither control is broadcast to the surrounding formula, spheres, ceiling or meter.
 
-Lambda maps to two SoftBody3D coefficients:
+Lambda requests two SoftBody3D coefficients:
 
 ```gdscript
 stiffness = lerpf(0.9, 0.1, lambda)
@@ -16,7 +16,9 @@ When pulsing is enabled and 0.3 < lambda < 0.7, the pressure used by the body is
 
 PULSE / STEADY disables or enables this imposed modulation and restarts its phase. It leaves the body's mesh, existing motion, gravity, stiffness, damping and drag intact. It does not pause or reset the physics engine. PAIR A, B and C select (lambda, phi) = (0.1, -0.8), (0.5, 0), (0.8, 0.6). They are sample combinations, not classified biological states.
 
-Phi ranges from -1 to +1. Its normalized coordinate u=(phi+1)/2 maps damping from 0.2 to 0.001 and drag from 0.3 to 0. The controls also change material colour and shader parameters, so a changing image is not by itself evidence of mechanical deformation. The plate reads the actual body coefficients, while the framed viewport updates text without rebuilding baked meshes every tick.
+Phi ranges from -1 to +1. Its normalized coordinate u=(phi+1)/2 requests damping from 0.2 to 0.001 and drag from 0.3 to 0. The current Godot 4.6-stable Jolt backend ignores drag and returns zero. Runtime stiffness assignments change the property but do not rebuild active constraints. Stiffness set before construction does affect the body; pressure and damping update live. Matching-body tests confirmed this distinction, consistent with the [engine implementation](https://github.com/godotengine/godot/blob/4.6-stable/modules/jolt_physics/objects/jolt_soft_body_3d.cpp).
+
+The controls also change material colour and shader parameters, so a changing image is not by itself evidence of mechanical deformation. The installed plate reads properties; it does not verify their physical effects. The tutorial bench distinguishes requested stiffness from its construction-time value and requested drag from unused engine drag. The framed viewport updates text without rebuilding baked meshes every tick.
 
 The jar previously had only a floor collider. A sixteen-part side shell and lid now match the closed jar. The cracked variant has a shorter open shell; escaped retains only the base; clouded retains its fixed 160-grain MultiMesh and has no deformable body. The live plate identifies that distinction. A glass shader is not a fluid solver: there is no buoyancy calculation here.
 

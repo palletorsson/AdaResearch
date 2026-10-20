@@ -8,6 +8,8 @@ Advance the live drawing once and hold a copy. Then take the small black point a
 
 We brought a construction out of the fractal halls. Here a rule leaves a description we can keep before giving it a body. Making the sentence and reading it as movement become separate acts. The held drawing gives us somewhere to look back while the live one changes. The point has acquired another task in the hand.
 
+The L belongs to Aristid Lindenmayer, a biologist who introduced these systems in 1968 to study development.[^1] A description could change through successive generations as its parts followed replacement rules. That origin gives our desk a question beyond resemblance: how might a form come into being? Here we can hold one description and give it different bodies by changing how it is read. Ada makes those choices available to the hand. The resulting plant-like outline does not, by itself, tell us how a living plant grows.
+
 Advance again. More letters appear; the held drawing stays. Each F has become a short sequence of movements and turns. The turning signs also occupy places in the sentence without leaving segments. A symbol without a replacement passes through unchanged. The new letters wait for the next generation before they too can be replaced. A small loop has a rhythm, and a place where its repetition must stop.
 
 The turtle carries a position and an orientation through those instructions. Looking at a line does not reveal everything it had to keep in order to draw the next one.
@@ -18,8 +20,10 @@ Look again at the two outlines. Each is fitted to its display. More instructions
 
 The desk also has a limit. When another complete generation would exceed its symbol budget, the previous one remains. The readout tells us where construction stopped. A long sentence may be abbreviated on the label too. One limit changes what was made; the other changes how much of its record we can see.
 
-Eight presets give us places to begin. Cantor carries the thirds from the previous hall into letters: one leaves a line, another crosses a gap without leaving one. These presets are a selection from what we could write. The desire for another body may lead us to change the rule; the desire to inhabit it asks for more than these thin, non-colliding drawings provide.
+Eight presets give us places to begin. Cantor carries the thirds from the previous hall into letters: one leaves a line, another crosses a gap without leaving one. The name recalls Georg Cantor and the distinction we met between the number of points and the length they occupy. Here his construction returns as a sentence we can change before drawing it. These presets are a selection from what we could write. The desire for another body may lead us to change the rule; the desire to inhabit it asks for more than these thin, non-colliding drawings provide.
 
 <!-- @ -->
 
 The earlier trees, string study and city grammar remain beyond the desk. Three trees grown from three traditions’ axioms ask whose grammar a rule is. Resemblance invites comparison without establishing a shared procedure. Carry the bracket into Growth: what must a branch remember so that another branch can begin?
+
+[^1]: Przemyslaw Prusinkiewicz and Aristid Lindenmayer, [*The Algorithmic Beauty of Plants*](https://algorithmicbotany.org/papers/#abop), chapter 1, on the biological origins of L-systems and their graphical interpretation. Daniel Shiffman's [*The Nature of Code*](https://natureofcode.com/fractals/#l-systems) introduces the same separation through a turtle reader.

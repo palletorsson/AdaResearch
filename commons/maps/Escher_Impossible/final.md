@@ -16,17 +16,11 @@ Follow it around the corners. Before completing the circuit, predict where the h
 
 The descent was there to be found. One side returns toward the floor, and the closing move reaches the first tread. From the front, the stair's insistence on continuing can be more persuasive than its heights. Move around it. What looked like another promise to ascend becomes a return.
 
-The measurement needs very little code. Each move contributes the difference between two heights:
-
-```gdscript
-last_delta = _height(index) - _height(_last_index)
-ascent += maxf(last_delta, 0.0)
-descent += maxf(-last_delta, 0.0)
-```
-
-`_height` reads the displayed tread's centre in world space. A positive difference adds to ascent; a negative difference adds to descent. Around a closed circuit, every height is subtracted once and added once. We cannot end higher while also ending at the very same position, measured against the same up.
+Each move contributes the difference between two heights, measured at the displayed tread centres in world space. A positive difference adds to ascent; a negative difference adds to descent. Around a closed circuit, every height is subtracted once and added once. We cannot end higher while also ending at the very same position, measured against the same up.
 
 That does not exhaust what a game could do. It names the agreement this model keeps. A portal, a changed gravity or a moved room would require another agreement—and another question about what the body experienced on the way.
+
+The student working copy reduces the journey to four centres. Three gains, then the closing loss. Tilt the arrangement and the individual height differences change; complete the circuit and their sum still returns to zero. Cut the closing link and the point stops at the open end. These small operations give you something to compare with the five more elaborate arrangements in the installed exhibit.
 
 ## Put the return somewhere else
 
@@ -68,4 +62,8 @@ The pipe has been waiting beside the first experiment: *Ceci n'est pas une pipe.
 
 Recognition is generous. It supplies stairs we want to climb and connections we expect to continue. This hall asks us to keep that generosity while also approaching, counting, changing position. The pleasure of the impossible image survives finding how a particular model was made.
 
+Think back to the six-event score you kept in Wavefunctions. The same list could play again while your attention changed. Hofstadter gives Bach a place in his book's construction: its dialogues use musical structures to enact the ideas they discuss.[^geb] Here, too, following a form can change how we understand it. The closing tread has another significance once we have counted the whole route. Our score and staircase offer ways to investigate a return; neither repetition alone nor a closed path establishes the self-reference involved in a strange loop.
+
 We leave with a more demanding question for the next room. When we say that something exists, what would count as making it—and what must we be able to show?
+
+[^geb]: Douglas R. Hofstadter, *Gödel, Escher, Bach: An Eternal Golden Braid* (1979). The [publisher's account](https://shop.hachettebookgroup.com/products/godel-escher-bach) describes the contrapuntal dialogues and how their structures exemplify their subjects. The earlier museum score is our pedagogical connection; it is not presented as a Bach composition or a strange loop.

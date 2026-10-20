@@ -1,81 +1,25 @@
-# GT Flow — Technical
+# Flow — implementation and verification
 
-A flow network is a directed graph with a source vertex s, a sink vertex t, and a capacity c(u,v) on every edge. The max-flow problem finds the maximum amount of flow that can be pushed from s to t without exceeding any edge's capacity.
+The learner carries point_body.gd and traversal.gd byte-identically from Spanning Trees, and route.gd from Pathfinding. Seven IDs remain. New flow_model.gd declares a directed, integer-capacity planning network; new study.gd prints the complete harbour host. Earlier records and build-cost examples remain intact. No hidden scene references or new player setup.
 
-Ford-Fulkerson repeatedly finds an augmenting path (a source-to-sink path with positive residual capacity) and pushes flow along it. With BFS-based augmentation (Edmonds-Karp), the running time is O(V·E²). Push-relabel algorithms are asymptotically faster — O(V²·E) or O(V³) in the standard variants — and often faster in practice because they operate locally.
+Original directed links are 0→1,0→2,1→3,1→4,2→3,3→5,4→5 with capacity1, and5→6 with capacity2. Every capacity denotes crate slots during the same planning interval. Source0, sink6. Independent matrix rows hold capacity and antisymmetric net flow. Positive capacity-minus-flow entries become the reused BFS route finder's neighbours. A successful step adds the path's minimum residual and subtracts its reverse entries. Original antiparallel edges are outside this lesson's dataset.
 
-```gdscript
-# Edmonds-Karp — BFS augmentation
-func max_flow(source, sink) -> float:
-    var flow: Dictionary = {}  # edge -> amount
-    var residual := build_residual()
-    var total := 0.0
-    while true:
-        var path := bfs_augmenting_path(residual, source, sink)
-        if path.is_empty(): break
-        var bottleneck := INF
-        for e in path:
-            bottleneck = min(bottleneck, residual[e])
-        for e in path:
-            residual[e] -= bottleneck
-            residual[reverse(e)] = residual.get(reverse(e), 0) + bottleneck
-            flow[e] = flow.get(e, 0) + bottleneck
-        total += bottleneck
-    return total
-```
+First route [0,1,3,5,6] allocates1. Second [0,2,3,1,4,5,6] cancels1→3 and allocates another1. Final actual routes are0→1→4→5→6 and0→2→3→5→6. A third search finds no path. Source cut and sink capacity both equal2. Reverse residual means a revisable commitment before dispatch, not physical backwards shipment. Conservation holds at intermediate vertices after each complete augmentation; the older preflow comparison has a different intermediate-state contract.
 
-The key data structure is the residual graph. For every edge (u,v) with capacity c and current flow f, the residual graph contains (u,v) with capacity c − f and (v,u) with capacity f. The reverse edges allow the algorithm to undo previously routed flow when a better routing becomes available.
+Transfer changes5→6 capacity2 to1: final maximum1. The prose also asks what happens when1→4 is closed: maximum1 because3→5 then limits every delivery. Changes are made to the declared data, not patched into the algorithm.
 
-The max-flow min-cut theorem says that the maximum flow equals the minimum s-t cut — the smallest total edge capacity whose removal disconnects s from t. The map displays the cut visibly as a line across the network, and the cut's capacity matches the flow on every frame.
+The complete host draws seven stations, eight cylinder/cone roads, eight binary allocation markers and amount/capacity labels. A raised pink link marks a cancelled commitment. The same black point moves yard4 in localXZ while its drawn height stays1. Trigger/1 or PLAN NEXT advances; RESET/R waits for release. Existing XRTools is given. Temporary installation map-local(9,0,3.8), yaw180, scale1; isolated hall-root(9,0,7.8). The learner is not a registered permanent extra exhibit.
 
-The funnel geometry in the map makes the bottleneck physical. The narrowing exit means the flow is capped by the exit's capacity regardless of the internal network, and the learner can feel the constraint as a physical architecture rather than as a numerical bound.
+38 exact-source code checks pass. Five tutorial scripts are extracted and hashed. An independent literal-endpoint min-cut oracle checks768 capacity configurations (256 subsets ×3 capacity cases). Capacity bounds, antisymmetry and intermediate conservation are checked during augmentation. Tests cover full host, real pointer/keyboard entry points, transformed-host synthetic XRTools pickup/trigger/release, retained point identity, independent transfer and three executed faulty variants: missing reverse update, maximum instead of minimum bottleneck, and ignoring assigned flow in residual capacity. No final script/parse errors.
 
-Within the sequence, Flow is the throughput chapter. The next and final map, GT_Matching, closes the sequence by turning the flow machinery toward a different kind of optimisation.
+58 native museum checks pass. The original forward-only display terminates BLOCKED with sink receipt7 and unresolved positive excess. No maximum is claimed. The first native assertion incorrectly read current_operation rather than operation_label.text; that rejected receipt/log is retained. An early student camera was outside the front wall; the corrected camera is inside the hall. An overwritten Label3D and MeshInstance3D allocation caused leaks in an early host; redundant initial allocations were removed and code checks rerun.
 
-## Dinic's Algorithm
+Permanent graph_worlds.tscn supplies eleven concrete comparisons for the eight halls and three extensions. The source Flow, Route and Traversal are identical to learner files; TreeModel is carried from Spanning. Other small case operations remain separate and explicit. Previous/Next selects a case; Try It changes the represented condition; Reset restores it. Captures show before and after for every case. Disease uses seeded synchronous toy SI with probability0.35 per infectious-susceptible edge per round, no recovery or biological calibration. Historical bridges preserve the multigraph topology, not geographic appearance. Future relays are an invented scenario. See WORLD-EXAMPLES.md for what every node, edge and action denotes.
 
-Dinic's algorithm is a faster alternative to Ford-Fulkerson for max-flow. It runs in O(V²·E) for general graphs and O(E·√V) for unit-capacity graphs, which is a substantial improvement over Edmonds-Karp's O(V·E²).
+The13×12 hall has continuous floor and3m perimeter with central doorway openings. The gallery occupies left cell(3,6), height0, yaw180, scale1. The old forward-only comparison is right rear at(9,9), height1.2, yaw180, scale0.32. Grid DFS, Prim and Karger are removed only from this hall's placement; their sources/catalog entries remain.19 supported clear capsule samples plus both approaches pass. Authored book and both shipped/source wall rows are aligned only for Flow. Selected layout, long-museum and execution-plan rows follow the actual placement; other rows and review decision/baseline are preserved.
 
-The algorithm operates in phases. Each phase builds a layered graph (BFS levels from the source) and finds a blocking flow in it — a flow that saturates at least one edge on every source-to-sink path. The blocking flow is found by repeated DFS. After the phase, the distance from source to sink in the residual graph increases, and the algorithm terminates when no path remains.
+This is author-operated ghost reconstruction and rendered native museum evidence. No physical headset, independent-reader, Quest performance or continuous portal-traversal claim. The gallery is permanently installed in Flow; earlier halls have companion examples in this gallery, not additional installations in their rooms. Matching has a preview here; its full lesson remains next.
 
-```gdscript
-func dinic(source, sink) -> float:
-    var total := 0.0
-    while true:
-        var levels := bfs_levels(source)
-        if not levels.has(sink): break
-        var blocking := find_blocking_flow(levels, source, sink)
-        if blocking == 0: break
-        total += blocking
-    return total
-```
+Replay code: python tools/test_graph_flow.py
 
-## Min-Cost Max-Flow
-
-A natural extension is to minimise cost subject to achieving maximum flow. This combines the max-flow problem with a shortest-path computation on a cost-weighted residual graph. The successive-shortest-path algorithm solves min-cost max-flow in O(F·V·E) where F is the flow value; cycle-cancelling algorithms achieve better worst-case bounds at the cost of more complex implementations.
-
-## Applications Beyond Flow
-
-Max-flow and min-cut have surprising applications. Bipartite matching reduces to max-flow. Graph partitioning uses min-cut to decompose large graphs. Image segmentation can be cast as a min-cut problem where pixels are vertices and colour similarities determine edge weights.
-
-```gdscript
-# Bipartite matching via max-flow
-func bipartite_matching_via_flow(left, right, edges_lr) -> Dictionary:
-    var s := "source"
-    var t := "sink"
-    var capacity := {}
-    for u in left:
-        capacity[[s, u]] = 1
-    for v in right:
-        capacity[[v, t]] = 1
-    for e in edges_lr:
-        capacity[[e.left, e.right]] = 1
-    var _flow = max_flow_edmonds_karp(s, t, capacity)
-    var matching := {}
-    for e in edges_lr:
-        if flow_on_edge[[e.left, e.right]] > 0:
-            matching[e.right] = e.left
-    return matching
-```
-
-Within the sequence, Flow's max-flow min-cut duality is the sequence's most elegant result. GT_Matching will next close the sequence by turning flow toward allocation.
+Replay museum: python tools/run_encounter_probe.py GT_Flow --sequence graphtheory --render --no-bridges --output-tag flow-final --probe tools/probes/graph_flow_room.gd

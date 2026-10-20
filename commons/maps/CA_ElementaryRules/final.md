@@ -22,7 +22,7 @@ REPLAY, then STEP once. The cell inside the golden frame is green. Walk around i
 
 *The golden frame keeps the address while the rule changes what can occupy it. The two views follow successive generations from the same position.*
 
-Every answer is written into a second array. The old volume supplies all the questions before the arrays exchange places. There is no privileged first cell whose new answer reaches its neighbours early. STEP gives this local agreement one generation; the rest of the museum keeps running.
+STEP lets all the cells answer the same previous world. A changed cell cannot rush its new answer to a neighbour within that step. The rest of the museum keeps running.
 
 Press VIEW. The structure and its enlarged neighbourhood take on a gradient from dark to light with height. Nothing has advanced. The same cells can look like one continuous material now that their different states share a colour scale. Press VIEW again and recover the distinction. The finish has changed what we can readily recognise. Which reading did we take for the object itself?
 

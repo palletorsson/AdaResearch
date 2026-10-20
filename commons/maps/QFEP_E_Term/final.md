@@ -18,6 +18,8 @@ Compare this with the bit workbench. There, the probability changed while the po
 
 Press PRUNE. Amber caps appear where branches stop. The fan has twenty-seven leaves now, where OPEN offered eighty-one. Eighteen closures remove fifty-four endings: a cut made earlier takes several later possibilities with it. Follow one of the amber stops. You can see where continuation was refused, even though the missing subtree is no longer drawn.
 
+Twenty-seven tells us how many endings remain, not which ones. Another selection could keep twenty-seven different endings and report the same entropy. To compare those closures, we need to retain the paths as well as their count. The total cannot stand in for the history of what was removed.
+
 Press OPEN again. Here the same endings return at a touch. Outside this little machine, reopening a route may not restore the lives or histories lost when it closed. The ease of the button is part of the experiment’s limit.
 
 Distinguish an option that was available and then prohibited from an option never drawn at all. A picture of the permitted future can hide the history of how the permissions were chosen. Counting its leaves cannot recover those omitted alternatives.

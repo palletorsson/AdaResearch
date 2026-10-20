@@ -1,6 +1,6 @@
 # Point Line Grid — positions, frames and replay
 
-Point_Trace distinguished the dot's position list from the whiteboard's painted image. Here, several artifacts apply rounding in different coordinate frames. Point_Triangle_Context follows by asking what a closed boundary needs before it can become a face.
+Point_Trace distinguished the dot's position list from the glass wall's painted image. Here, several artifacts apply rounding in different coordinate frames. Point_Triangle_Context follows by asking what a closed boundary needs before it can become a face.
 
 The first passage follows `grab_sphere_point_snap`, `player_trace`, `grid_lines` and the placed `plan_vitrine`. The room's other three artifact types remain secondary. This reference expands the shorter program in [tutorial.md](tutorial.md).
 
@@ -121,3 +121,12 @@ Other placements retain the default `space_time` pair. This chapter's configurat
 The snapping sphere's table displays the latest ten retained positions while the count can be larger. Both table columns describe retained positions, one in metres and one in lattice indices.
 
 The walking recorder takes X/Z from the headset and height from the rig's origin; its desktop fallback follows the walking body. The book follows the headset visit. The plan's controller-mounted pen pair requires active tracked controllers; on desktop the numbered plan remains available to walk across, without those pens.
+
+
+## Selecting a source entry — 17 October 2026
+
+The map's `grid_lines` opts into `#selection:1`. Each incoming trace receives an identity and retains a reference to its pink rendering. Selection stores that identity and a source-list index, not a rounded position. The marker uses the same bounding-box centre, scale, display transform and snap spacing as the two rendered traces. Snapped duplicates retain separate source identities even when the green polyline omits a consecutive duplicate.
+
+Visible coordinate rows and small points on the displayed source page accept the common desktop/XR pointer PRESSED event. POINT − / POINT + changes the index and brings its page into view. PREVIOUS / NEXT changes only the visible page; NEXT TRACE replaces the old AUTO function for this opt-in placement. Selection does not edit the archive. New arrivals select their first entry; up to ten trace records remain selectable in the existing readout buffer.
+
+The numbered pink point, smaller green point and connecting segment expose the selected correspondence. The readout distinguishes source coordinates from recentered/scaled display coordinates. Museum transfer remains in-memory; tutorial scene-file persistence is a separate implementation.

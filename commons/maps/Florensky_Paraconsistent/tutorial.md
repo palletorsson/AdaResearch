@@ -1,98 +1,115 @@
-# Florensky Paraconsistent
+# Two reports, stated consequences
 
-**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed gate stores OPEN and CLOSED as independent reports and leaves an unrelated alarm claim unsupported. Reconstruct that limited record. The confidence model below is an earlier comparison, not the gate, a paraconsistent inference engine or a quantum simulation.
+**Learning elements**
 
-**Learning elements — proposed focus**
+- Independent support
+- four information states
+- explicit consequence rules
+- a countermodel to explosion
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+At the installed gate, OPEN and CLOSED are independent reports. Both leaves can remain visible; neither supplies evidence for the alarm Q. First reconstruct that store. Then make a small additional step in the student copy: define precisely how negation, conjunction and disjunction combine the reports. This extension is a tiny propositional semantics, not a claim that the installed gate already implements a proof engine or that Florensky proposed this particular logic.
 
-- Independent reports
-- Contradictory information
-- Consequence rules
+Each Vector2i has two binary components: support for and support against. (0,0) means neither, (1,0) for only, (0,1) against only, and (1,1) both. These are independent flags, not probabilities summing to one. Negation swaps them. For conjunction, positive support requires both positives; negative support needs either negative. Disjunction reverses those AND/OR requirements. A result is designated when its positive component is 1. The code implements the negation/conjunction/disjunction fragment of Dunn–Belnap four-valued semantics; it has no implication connective, quantifiers or proof-search procedure.
 
-Distinguish storing conflicting reports from deriving consequences. The current gate demonstrates a limited record; Florensky’s religious antinomies do not supply a single established formal logic.
+Test the consequence claim “P and not P license any Q.” At P=(1,1), both premises are designated. At Q=(0,0), Q is not designated. `explosion_counterexample` enumerates all sixteen assignments of P and Q until it finds that countermodel. This establishes failure of that consequence for these defined tables. It does not establish the truth of both reports about an actual door.
 
-Declare the dual state.
+P FOR and P AGAINST toggle the independent components. Q FOR adds a separate report about Q; holding both P reports never performs that action. CLEAR empties both records. The sphere remains the familiar held object; releasing it returns it to the bench rather than resolving a report.
 
+## Continue inside the museum
+
+Use the existing AdaResearch project with Godot 4.6 and its installed XR Tools. Save these files together under `res://doc/book/studies/foundations-lineage/`. Carry `point_body.gd` and `line_skin.gd` unchanged from Euclid / Non-Euclidean Spaces. Their class construction and pickup were already printed there. Carry `bench.gd` unchanged from Russell. It supplies only geometry, labels, the visible sphere and button wiring; the rule below remains new.
+
+Run the supplied `florensky.tscn` in that folder with F6. Its `florensky_museum.gd` launcher opens **Florensky_Paraconsistent** with the existing museum player, room and lighting, then adds your working copy beside the original exhibits. The launcher, `commons/interactables/push_button.tscn` and XR setup are declared infrastructure. No autoload, label, camera or other node is assumed inside your new script: the printed bench creates its own nodes and connects the buttons. This is a session study; it does not replace an installed artifact or carry a live node across hall loads.
+
+The bench synchronizes an unheld frozen sphere on physics ticks. All model positions are local to the unit-scale bench unless a world transform is explicitly passed. Its slab and thin-cylinder lines are visual guides, not a new walkable floor. Use the museum's existing locomotion and pointer/grab controls.
+
+## Complete new files
+
+Read the rule first, then its museum display. There is one `_ready` per script; inherited `start` constructs the bench once. Save each block as the filename above it.
+
+### `reports.gd`
+
+<!-- student-code:reports.gd -->
 ```gdscript
-class_name DualState
-extends Resource
+extends RefCounted
+# Pair (support-for, support-against); each component is independently 0 or 1.
+var p := Vector2i.ZERO
+var q := Vector2i.ZERO
 
-@export var value: String = ""
-@export var anti_value: String = ""
-@export var confidence: Vector2 = Vector2(0.5, 0.5)
+func neg(a: Vector2i) -> Vector2i:
+    return Vector2i(a.y,a.x)
+
+func both(a: Vector2i,b: Vector2i) -> Vector2i:
+    return Vector2i(mini(a.x,b.x),maxi(a.y,b.y))
+
+func either(a: Vector2i,b: Vector2i) -> Vector2i:
+    return Vector2i(maxi(a.x,b.x),mini(a.y,b.y))
+
+func supported(a: Vector2i) -> bool:
+    return a.x==1
+
+func describe(a: Vector2i) -> String:
+    if a==Vector2i(1,1): return "BOTH REPORTS"
+    if a==Vector2i(1,0): return "FOR ONLY"
+    if a==Vector2i(0,1): return "AGAINST ONLY"
+    return "NO SUPPORT"
+
+func explosion_counterexample() -> Dictionary:
+    for positive in [0,1]:
+        for negative in [0,1]:
+            var premise := Vector2i(positive,negative)
+            for q_positive in [0,1]:
+                for q_negative in [0,1]:
+                    var conclusion := Vector2i(q_positive,q_negative)
+                    if supported(premise) and supported(neg(premise)) and not supported(conclusion):
+                        return {"found":true,"p":premise,"q":conclusion}
+    return {"found":false}
 ```
 
-Two values, two confidences. The resource holds both without preferring one. The observer decides what the reading means, later.
+### `florensky_study.gd`
 
-Initialise the Schrödinger box.
-
+<!-- student-code:florensky_study.gd -->
 ```gdscript
-func initialise_box() -> void:
-    dual.value = "alive"
-    dual.anti_value = "dead"
-    dual.confidence = Vector2(0.5, 0.5)
+extends "bench.gd"
+const Reports = preload("reports.gd")
+var model := Reports.new()
+
+func _ready() -> void:
+    start("FLORENSKY / KEEP THE REPORTS DISTINCT", ["P FOR", "P AGAINST", "Q FOR", "CLEAR"],
+        [toggle.bind(0),toggle.bind(1),toggle.bind(2),reset])
+    refresh()
+
+func toggle(which: int) -> void:
+    if point.held(): return
+    if which==0: model.p.x=1-model.p.x
+    elif which==1: model.p.y=1-model.p.y
+    elif which==2: model.q.x=1-model.q.x
+    refresh()
+
+func reset() -> void:
+    if point.held(): return
+    model.p=Vector2i.ZERO
+    model.q=Vector2i.ZERO
+    refresh()
+
+func refresh() -> void:
+    clear_drawing()
+    for i in 3:
+        var at := Vector3(-0.8+i*0.8,1.1,0)
+        var present: bool = [model.p.x,model.p.y,model.q.x][i]==1
+        block(drawing,at,Vector3(0.45,0.16 if present else 0.025,0.45),Color("bd9fd0") if present else Color("445464"))
+        label(drawing,["P","not P","Q"][i],at+Vector3.UP*0.2)
+    point_home=Vector3(0,1.2,0.48)
+    readout.text="P: %s | Q: %s\nP and not P: %s\nTwo reports do not add support for Q."%[
+        model.describe(model.p),model.describe(model.q),model.describe(model.both(model.p,model.neg(model.p)))]
 ```
 
-Two equal confidence values do not constitute quantum superposition or a logical contradiction. Uncertainty between alternatives is compatible with classical logic.
+## Predict, build, check
 
-Render the box as a translucent sphere.
+Predict all four states of P before pressing the buttons. Hold both reports while Q has no support. Then add Q's own positive report: explain what changed and who supplied it. Negating a pair twice must return the original pair. Check the two De Morgan laws over all sixteen input pairs and conjunction elimination: whenever a conjunction is designated, each conjunct is designated.
 
-```gdscript
-func render_box(mesh: MeshInstance3D) -> void:
-    var mat := StandardMaterial3D.new()
-    mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-    mat.albedo_color = Color(0.7, 0.5, 0.9, 0.4)
-    mesh.material_override = mat
-```
+Compare this with Brouwer's status “no witness yet.” Our four-valued semantics is an explicit choice for combining reports. It does not turn constructive uncertainty into a third or fourth truth value, and it has no connection to quantum amplitudes. The synthesis will keep these scopes attached to their results.
 
-This assigns one constant translucent colour. No connection from confidence to colour is supplied.
+Reference: [Sutcliffe, Pelletier and Hazen, Making Belnap's Useful Four-Valued Logic Useful](https://cdn.aaai.org/ocs/17599/17599-77711-1-PB.pdf), Table 1. Our pair representation implements the basic tables, not the paper's additional conditional connectives.
 
-Update confidence with a nudge.
-
-```gdscript
-func nudge(toward: String, amount: float) -> void:
-    if toward == dual.value:
-        dual.confidence.x = clamp(dual.confidence.x + amount, 0.0, 1.0)
-        dual.confidence.y = 1.0 - dual.confidence.x
-    else:
-        dual.confidence.y = clamp(dual.confidence.y + amount, 0.0, 1.0)
-        dual.confidence.x = 1.0 - dual.confidence.y
-```
-
-The clamp permits either value to reach zero or one. The two values are linked to sum to one; they are not the independent report flags used by the installed gate.
-
-Filter by a confidence threshold.
-
-```gdscript
-func safe_infer() -> Array[String]:
-    var safe: Array[String] = []
-    if dual.confidence.x > 0.9: safe.append(dual.value)
-    if dual.confidence.y > 0.9: safe.append(dual.anti_value)
-    return safe
-```
-
-This returns a label when its confidence exceeds 0.9. No classical inference engine is called.
-
-Check membership in the filtered labels.
-
-```gdscript
-func prevent_ex_falso(claim: String) -> bool:
-    return claim in safe_infer()
-```
-
-This Boolean tests list membership. It defines no derivation rules and cannot establish that a logic is paraconsistent.
-
-Render the two confidences on dials.
-
-```gdscript
-func update_dials(dual: DualState) -> void:
-    alive_dial.value = dual.confidence.x
-    dead_dial.value = dual.confidence.y
-    sum_label.text = "Σ = %.2f" % (dual.confidence.x + dual.confidence.y)
-```
-
-After initialization and these nudges, the two values sum to one, within floating-point precision. That arithmetic invariant is different from a rule about contradictory premises.
-
-Reconstruct the independent report store before claiming to have reproduced the gate. Crisis Synthesis returns to several encounters and recalls Brouwer’s choice bench from the preceding hall.
-<<</MAP>>>
+The automated reconstruction tests extract the printed files, add only these declared carried dependencies and run native Godot assertions. They use synthetic interaction. They do not establish human learning or headset reach.

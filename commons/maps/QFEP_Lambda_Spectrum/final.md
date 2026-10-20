@@ -24,6 +24,8 @@ Watch for disagreement. The bright strip may now point beneath a form instead of
 
 There are two kinds of preference visible now: the one you can move, and the one already built into the rows. Moving the light does not erase the arrangement that made the first invitation convincing. Would another visitor choose differently after seeing your version first?
 
+An account of this experiment needs more than two settings. It needs to say that the layout stayed fixed and the animation was not restarted when the recommendation moved. Otherwise a changed response could belong to a changed arrangement. Even with that comparison, the slider records no reason for a visitor’s choice.
+
 QFEP asks who may revise a model’s terms. Here you can change one of the room’s terms of persuasion. Its forms, its colours and the possibilities on the rail remain authored. What else would you need to change before this felt like your decision?
 
 Phi introduces time. A system’s present arrangement and its response to change will no longer be the same question.

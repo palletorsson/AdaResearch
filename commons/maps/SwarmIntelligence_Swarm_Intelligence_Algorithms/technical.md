@@ -1,213 +1,33 @@
-# Nature solved optimization before we did — a gallery of swarm algorithms side by side, each a different answer to the same question
+# Swarm — reconstruction and evidence
 
-Six maps. Six mechanisms. Physarum's stigmergic trail networks. Flow fields' pre-built vector navigation.
+## Scope
 
-Boids' three-rule flocking. ABM's general agent framework. Ant colony's pheromone-guided graph optimization. Particle swarm's socially-informed landscape search. Each map demonstrated one approach to the same problem: how do simple agents produce intelligent collective behavior without centralized control?
+The closing lesson teaches an event account. It does not reimplement the ecosystem or add a generic algorithm-interface survey. The supplied source is algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd, Creature.gd and food.gd. Their movement, mating, health, food and balancing rules remain unchanged. The source hash equals the saved before copy. A subclass calls the original operations and emits observations; birth context comes from check_for_mate, later other spawns are supplied, and losses compare membership after each species pass. New arrivals within a pass are included in the removal comparison. Existing queue_free defers destruction until after these receipts. Supplied-creature care callbacks are not counted again. Outside-food and pressure callbacks remain separate.
 
-This gallery places them side by side. The `SwarmShowcase` artifact implements multiple swarm algorithms within a unified visualization framework, allowing direct comparison. Each algorithm runs in its own alcove, but the spatial proximity makes the family resemblance visible: all are populations of simple agents, all rely on local interactions, all produce emergent global behavior. The differences lie in the coordination mechanism.
+Loss receipts are emitted at update-pass boundaries; receipt serials are not a proof of exact internal chronology. Compare counts at completed-step boundaries. The record describes population membership, not the cause of every death. It also does not register a player's relocation as a birth or loss. Holding is nevertheless an intervention.
 
-## Unified Agent Architecture
+## Runtime
 
-The gallery's technical achievement is a common agent interface that different swarm algorithms instantiate differently.
+Permanent population_account_walk replaces the old plinth placement in this hall only. The original ecosystem remains on disk for other users and is the live source of this lesson. Map and corresponding em_plan row become 17 × 21, flat and open; artifact cell (8, 10), yaw 180, scale 1. The 12 m model field has control banks at local z±6.9,x∓3.1,y.95. The central walk remains open. Other em_plan rows compare equal to their before snapshot. Sequence metadata changes only this hall's artifact/size description in both lists.
 
-```gdscript
-class SwarmAlgorithm:
-    var agents: Array[Dictionary] = []
-    var environment: Dictionary = {}
-    var parameters: Dictionary = {}
+The carried PointBody is unchanged from PSO. Visual sphere and grab shape both enlarge by 3 to 0.51 m diameter, root unscaled. Model display scales x/z by 15 and y by 3 with 0.8 m offset: view size is not contact size. Bodies overlap and wrap at model boundaries. Food is a batched non-grabbable marker; hidden original rendering remains in the supplied model.55 initial creature proxies are created, added or removed to match the actual lists. Gold rings follow supplied organisms; white marks the selected body.
 
-    func initialize(num_agents: int, params: Dictionary) -> void:
-        parameters = params
-        for i in num_agents:
-            agents.append(_create_agent(i))
+Starts paused. RUN uses 60 fixed updates/second; stalls beyond 0.1 seconds per rendered frame slow the display. The original source has per-update force, pressure and random-food operations, so update rate is part of this demonstrator's declared conditions. The observer does not normalize those existing rules. Holding pauses the whole model, maps the hand through the host transform, and zeros that body's velocity. Release resumes if Run was active. A held trigger selects the readout. Restart waits for release, resets source seed/model and account together. SUPPLY ROW changes only the calculation shown, not care or stored events.
 
-    func step(delta: float) -> void:
-        for i in agents.size():
-            var perception: Dictionary = _perceive(i)
-            var action: Dictionary = _decide(i, perception)
-            _act(i, action, delta)
-        _update_environment(delta)
+## Executed checks
 
-    func _create_agent(i: int) -> Dictionary:
-        return {}  # Override per algorithm
-    func _perceive(i: int) -> Dictionary:
-        return {}  # Override per algorithm
-    func _decide(i: int, perception: Dictionary) -> Dictionary:
-        return {}  # Override per algorithm
-    func _act(i: int, action: Dictionary, delta: float) -> void:
-        pass  # Override per algorithm
-    func _update_environment(delta: float) -> void:
-        pass  # Override per algorithm
-```
+34 exact printed-code checks pass in a fresh Godot 4.6 process. Every fenced script is extracted from tutorial.md and compared with study and exportable runtime copies. Tests reconstruct 10 + 2 - 3 + 5 = 14; distinguish species and food/pressure; require immutable event copies; exercise actual mating, health loss, predation and both replacement rules. A 40-second / 2,400-update comparison against the unmodified source matches organism positions, velocities, health, DNA, support counts and RNG state while both population equations reconcile after every step. An independent filtered-default edit predicts gap 5. Three executed faulty copies reverse loss sign, double supply and alias mutable history; tests reject each. Synthetic XRTools pickup/release uses a translated and rotated host, verifies pause/local coordinates/selection, then requires stable body identity and count reconciliation after release.
 
-The base class defines the perceive-decide-act loop. Each algorithm overrides the four methods with its specific logic. The interface is consistent: `initialize` sets up agents and environment, `step` runs one frame. The gallery can run all algorithms simultaneously, call `step` on each, and render their states side by side.
+30 saved-museum checks/captures pass. Nineteen centre-route samples and eight control approaches have actual floor and capsule clearance. Both button banks operate the same model. After 1,800 source updates the pictured run has prey 50 + 0 born - 49 lost + 10 supplied = 11, predators 5 + 0 born - 5 lost + 0 supplied = 0. There were no births in that captured interval; the code test exercises valid mating separately. The image does not claim all named processes happened in that run. Filtering changes expected prey to 1 while actual remains 11; restoring the row reconciles them. Gold markers match surviving supplied organisms.
 
-## Physarum Implementation
+The images are native Godot captures of the permanent placement, including eye-level and overhead before/after. No physical headset, Quest-performance, independent learner or actual player portal-crossing certification. Existing project UID and Jolt solver-bias warnings remain; final logs contain no GDScript errors. No APK built.
 
-```gdscript
-class PhysarumSwarm extends SwarmAlgorithm:
-    var trail_map: PackedFloat32Array
+## Replay
 
-    func _create_agent(i: int) -> Dictionary:
-        return {
-            "x": randf() * trail_width,
-            "y": randf() * trail_height,
-            "angle": randf() * TAU
-        }
+python tools/write_swarm_account.py
+python tools/place_swarm_account.py
+python tools/test_swarm_account.py
+python tools/run_encounter_probe.py SwarmIntelligence_Swarm_Intelligence_Algorithms --sequence swarmintelligence --render --no-bridges --output-tag account-room --probe tools/probes/swarm_account_room.gd
+python tools/publish_swarm_account.py
 
-    func _perceive(i: int) -> Dictionary:
-        var a: Dictionary = agents[i]
-        return {
-            "left": sample_trail(a, -sensor_angle),
-            "center": sample_trail(a, 0.0),
-            "right": sample_trail(a, sensor_angle)
-        }
-
-    func _decide(i: int, perception: Dictionary) -> Dictionary:
-        var turn: float = 0.0
-        if perception["center"] > perception["left"] and perception["center"] > perception["right"]:
-            turn = 0.0
-        elif perception["left"] > perception["right"]:
-            turn = -turn_angle
-        else:
-            turn = turn_angle
-        return {"turn": turn}
-
-    func _act(i: int, action: Dictionary, delta: float) -> void:
-        agents[i]["angle"] += action["turn"]
-        agents[i]["x"] += cos(agents[i]["angle"]) * move_speed
-        agents[i]["y"] += sin(agents[i]["angle"]) * move_speed
-        deposit_trail(agents[i]["x"], agents[i]["y"])
-
-    func _update_environment(delta: float) -> void:
-        diffuse_trail()
-        decay_trail()
-```
-
-The Physarum implementation maps directly to the PhysarumColony artifact's logic: sense three directions, turn toward strongest trail, deposit at current position, diffuse and decay the trail map.
-
-## Boids Implementation
-
-```gdscript
-class BoidsSwarm extends SwarmAlgorithm:
-    func _create_agent(i: int) -> Dictionary:
-        return {
-            "position": Vector3(randf_range(-10, 10), randf_range(2, 8), randf_range(-10, 10)),
-            "velocity": Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)).normalized()
-        }
-
-    func _perceive(i: int) -> Dictionary:
-        var neighbors: Array = []
-        for j in agents.size():
-            if j == i: continue
-            var dist: float = agents[i]["position"].distance_to(agents[j]["position"])
-            if dist < perception_radius:
-                neighbors.append(j)
-        return {"neighbors": neighbors}
-
-    func _decide(i: int, perception: Dictionary) -> Dictionary:
-        var sep := compute_separation(i, perception["neighbors"])
-        var ali := compute_alignment(i, perception["neighbors"])
-        var coh := compute_cohesion(i, perception["neighbors"])
-        return {"force": sep * w_sep + ali * w_ali + coh * w_coh}
-
-    func _act(i: int, action: Dictionary, delta: float) -> void:
-        agents[i]["velocity"] += action["force"] * delta
-        agents[i]["velocity"] = agents[i]["velocity"].limit_length(max_speed)
-        agents[i]["position"] += agents[i]["velocity"] * delta
-```
-
-Three steering forces, no environment modification. The contrast with Physarum is stark: boids leave no trace, coordinate instantaneously, and forget every frame.
-
-## ACO Implementation
-
-```gdscript
-class ACOSwarm extends SwarmAlgorithm:
-    var pheromone: Dictionary = {}
-    var graph: Dictionary = {}
-
-    func _decide(i: int, perception: Dictionary) -> Dictionary:
-        var current_node: int = agents[i]["current_node"]
-        var visited: Dictionary = agents[i]["visited"]
-        var options: Array = get_unvisited_neighbors(current_node, visited)
-
-        if options.is_empty():
-            return {"action": "backtrack"}
-
-        var probabilities: Array = []
-        var total: float = 0.0
-        for node in options:
-            var key: String = edge_key(current_node, node)
-            var tau: float = pow(pheromone[key], alpha)
-            var eta: float = pow(1.0 / distances[key], beta)
-            var weight: float = tau * eta
-            probabilities.append(weight)
-            total += weight
-
-        var chosen: int = _roulette_select(options, probabilities, total)
-        return {"action": "move", "target": chosen}
-```
-
-Graph-based navigation with probabilistic edge selection. The pheromone dictionary is the shared environment. Alpha controls pheromone influence. Beta controls distance-heuristic influence.
-
-## PSO Implementation
-
-```gdscript
-class PSOSwarm extends SwarmAlgorithm:
-    var global_best_pos: Vector3
-    var global_best_fitness: float = INF
-
-    func _decide(i: int, perception: Dictionary) -> Dictionary:
-        var r1: float = randf()
-        var r2: float = randf()
-        var cognitive: Vector3 = c1 * r1 * (agents[i]["personal_best"] - agents[i]["position"])
-        var social: Vector3 = c2 * r2 * (global_best_pos - agents[i]["position"])
-        var inertia: Vector3 = w * agents[i]["velocity"]
-        return {"velocity": inertia + cognitive + social}
-
-    func _act(i: int, action: Dictionary, delta: float) -> void:
-        agents[i]["velocity"] = action["velocity"]
-        agents[i]["position"] += agents[i]["velocity"] * delta
-        var fitness: float = evaluate(agents[i]["position"])
-        if fitness < agents[i]["personal_best_fitness"]:
-            agents[i]["personal_best"] = agents[i]["position"]
-            agents[i]["personal_best_fitness"] = fitness
-        if fitness < global_best_fitness:
-            global_best_fitness = fitness
-            global_best_pos = agents[i]["position"]
-```
-
-Agent memory replaces environmental memory. No trail, no pheromone. The environment is read-only.
-
-## The Comparison Matrix
-
-The gallery enables direct comparison along several axes:
-
-**Coordination mechanism:**
-- Stigmergic (Physarum, ACO): environment carries messages between agents
-- Social (Boids, PSO): agents read each other directly
-- Field-based (Flow fields): pre-built environment guides agents
-- General (ABM): any combination
-
-**Memory location:**
-- Environmental (Physarum trail, ACO pheromone): shared, decaying, spatial
-- Agent-internal (PSO personal best, ABM state): private, persistent, non-spatial
-- None (Boids, flow field particles): stateless, instantaneous
-
-**Problem type:**
-- Network formation (Physarum): connect points with efficient paths
-- Navigation (Flow fields): traverse a vector field
-- Coordination (Boids): maintain group coherence
-- General simulation (ABM): any agent interaction
-- Combinatorial optimization (ACO): find shortest route on a graph
-- Continuous optimization (PSO): find function minimum in real-valued space
-
-## The Multi-Level Ecosystem Layout
-
-The 10x10 map uses three platform heights (2, 3, 4) representing canopy, understory, and ground layers — an ecological stratification that metaphorically mirrors the layered nature of swarm intelligence. Different algorithms occupy different ecological niches. Ground-level alcoves host algorithms that operate on 2D surfaces (Physarum, flow fields). Mid-level platforms host algorithms with 3D spatial extent (boids). Upper platforms host algorithms that operate on abstract graphs or fitness landscapes (ACO, PSO).
-
-The ground floor connects everything. Walking between alcoves is walking between paradigms of collective intelligence — from biological stigmergy to mathematical optimization, from specific organisms to general frameworks. The gallery is both a museum and a laboratory, displaying finished algorithms and inviting the learner to see them as variations on a theme.
-
-## The Swarm Intelligence Thesis
-
-The sequence's thesis, demonstrated across seven maps and crystallized in this gallery: intelligence does not require centralized control. It requires a population of simple agents, a coordination mechanism (environmental, social, or field-based), and time. The specific mechanism determines what kind of intelligence emerges — network formation, flocking, optimization, navigation — but the structural pattern is invariant. Local rules. Global behavior. No leader. No plan. The gallery makes this invariance visible by showing that six radically different algorithms share the same architecture: agents that perceive, decide, and act in a shared world, producing collective behavior that no individual computed.
+The review ZIP is a lesson in the prepared museum, not an empty standalone project. It includes the three supplied ecosystem sources for inspection and all four printed scripts. Runtime copies are local because export presets exclude doc/**. Approval decision remains draft. Only this execution-plan row changes; all other rows and baseline/decision fields are preserved.

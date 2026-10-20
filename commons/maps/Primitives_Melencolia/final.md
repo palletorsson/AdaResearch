@@ -47,25 +47,19 @@ Its detector recognises those connections. It does not measure whether the base 
 
 <!-- @durer_scene -->
 
-Follow the raised connection to the next platform. The large stone stands to the left; the winged figure sits to the right, her head resting on a fist. A sphere lies near the sleeping dog. Above them, the ladder, scales, hourglass and bell give the wall its own order. Beneath them, a saw and a carpenter's plane lie among the small tools. Here the forms have company.[^durer]
+Follow the raised connection to the next platform. The large stone stands to the left. On the right, a small skull rests on a block. The sleeping dog, sphere, ladder, scales, hourglass and scattered tools remain around it. A smaller winged figure still bends over its tablet.[^durer]
 
-She has every tool in the chapter and she is not using any of them.
+This is an Ada variation on the engraving. The skull takes the place of the main seated figure; it is our substitution, not a claim about what Dürer drew. The short label marks that change.
 
-The compass is in her hand. She has not lost the instrument. A book lies on her lap, and the skirt falls in heavy folds over her knees. Beside her, a smaller winged figure bends over a tablet. One is drawing. The other looks away.
+The skull has openings where a face would have looked back. Beside the smooth sphere and cut stone, its hollows give us another kind of form to follow. The geometric objects have kept their definitions. Their company has changed.
 
-Earlier, a sphere could introduce a primitive. Here it occupies ground beside a tired animal. Nothing has happened to the sphere's definition. Much has happened to what we can see in it.
+We might call the wish carried from the court *geometric desire*: that a form could let us see further, or give us somewhere else to stand. Here the tools remain while the body that held them has been replaced by an object. A correct construction can outlast a particular use. It does not choose the next one.
 
-We have carried something from the court of ideal forms into this clutter of work and waiting. We might call it *geometric desire*: the wish that a form might let us see further, or give us somewhere else to stand. Here that wish meets a body that cannot be reduced to its instruments. Knowing how to construct another solid does not tell her what to do next.
+Walk sideways. The stone conceals the smaller figure, then allows it to appear again. Our arrangement gives depth to an engraving; its hidden surfaces were not supplied by the printed image. They are decisions in this model. The skull makes one of those decisions explicit enough to contest.
 
-This is not a picture of melancholy. It is a picture of mastery, and mastery is what she is melancholy *about*.
+![The current Ada variation: a skull on the right, the stone, smaller figure and tools retained.](/book-review/doc/book/iterations/2026-10-17-primitive-tools/native/Primitives_Melencolia/tableau.png)
 
-Perhaps we had hoped that getting the form right would put something else right with it. The compass can give a circle a radius. What should we make with the circle? That question stays with the hand holding the instrument.
-
-Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.
-
-![The reconstructed Melencolia tableau inside the museum.](/book-images/figures/Primitives_Melencolia/melencolia-tableau.png)
-
-*After Dürer's engraving: an arrangement of sculpted figures, tools and solids. Their placement follows the image; their depth is an interpretation. Walking changes which objects conceal one another.*
+*The installed variation. The main seated figure has been replaced; the smaller figure and surrounding instruments remain. The depth and substitution belong to Ada's interpretation.*
 
 The stone has six pentagonal faces and two triangular ends. Its mesh begins with a rhombohedron and cuts off two opposite corners. The proportions are one possible reading of the printed form. We can make a closed solid without claiming to have recovered the only solid the image permits.
 
@@ -94,7 +88,7 @@ We have learned to recognise a construction and change its rule. The reasons for
 
 Abstraction need not carry us away from the body. Lygia Clark's hinged metal *Bichos* ask for hands: a flat arrangement opens into a changing object.[^clark] To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?
 
-Keep that question beside the seated figure. The tools are here. Their next use is not settled.
+Keep that question beside the skull and the tools. The tools are here. Their next use is not settled.
 
 ## The number that was already running
 
@@ -112,9 +106,9 @@ Dürer's engraving is itself a made thing. An accomplished image gives us an enc
 
 A few tools, and more possible constructions than we have time to pursue.[^sublime]
 
-Two things are true at once here, and the room will not choose between them, because she did not.
+Two questions remain together: what our constructions can do, and why we want to stay with them after their construction is understood.
 
-You are inside a mathematical universe that closes over everything you can do, and every exit you try returns three floats. And the abstract things in it, the square that sums for no reason, the solid that counts to two, are wanted for themselves, by a mind that has nothing to use them for. Whether that wanting is the way out or the thing itself, escape or truth, is the question the engraving has kept open for five hundred years, and this chapter ends inside it, sitting down, tools in hand.
+You are inside a mathematical universe that closes over everything you can do, and every exit you try returns three floats. And the abstract things in it, the square that sums for no reason, the solid that counts to two, are wanted for themselves, by a mind that has nothing to use them for. Whether that wanting is the way out or the thing itself, escape or truth, is the question the engraving has kept open for five hundred years, and this chapter ends among its tools, with their next use still unsettled.
 
 Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.
 
@@ -126,7 +120,7 @@ The door behind you works. The next chapter is transformation, which is the one 
 
 [^solids]: Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See [*Solid Objects*](https://publicdomainreview.org/collection/solid-objects/) and the [image selected for this room](https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/). The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.
 
-[^durer]: Albrecht Dürer, *Melencolia I* (1514), [Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/360018). The museum describes several interpretations rather than a settled key. The [National Gallery of Art](https://www.nga.gov/artworks/6641-melencolia-i) provides a detailed visual description. AdaResearch follows the principal objects and their image relationships in a stylised sculptural arrangement. Depth, rear surfaces, dimensions and the solid's proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book's reading, not a settled account of Dürer's intention.
+[^durer]: Albrecht Dürer, *Melencolia I* (1514), [Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/360018). The museum describes several interpretations rather than a settled key. The [National Gallery of Art](https://www.nga.gov/artworks/6641-melencolia-i) provides a detailed visual description. AdaResearch adapts the principal objects and their image relationships in a stylised sculptural arrangement. The current variation replaces the main seated figure with a skull; this substitution is not in the source engraving. Depth, rear surfaces, dimensions and the solid's proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book's reading, not a settled account of Dürer's intention.
 
 [^sublime]: Kant's [*Critique of Judgement*](https://www.gutenberg.org/files/48433/48433-h/48433-h.htm), §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.
 

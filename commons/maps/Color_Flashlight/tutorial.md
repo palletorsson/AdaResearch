@@ -1,57 +1,94 @@
-# Move a condition of appearance
+# Flashlight — keep the surface
 
 **Learning elements**
 
-- Light colour
-- Material colour
-- Receiving surfaces
-- Controlled comparison
+- Light colour and material colour
+- A spotlight's position, direction and cone
+- A local target used by `look_at`
+- Comparing separate and overlapping contributions
 
-Primary encounters: `flashlight_demo`, then `colour_light_rooms`. Read `final.md` for the book voice and `technical.md` for the implementation.
+Take one of the coloured lamps in the museum. Aim it across the pale board, then turn it aside. The patch leaves. The board has kept its material.
 
-1. Find the boundary of one coloured pool on the board. Identify the lamp responsible by aiming it aside, then back.
-2. Leave that lamp aimed at the board. Move another so the pools separate and overlap. Describe the change before naming additive colour.
-3. Bring the white lamp into the comparison. If the overlap becomes hard to distinguish, separate the beams again.
-4. Aim onto the floor or side cube. Carry the same light across the faceted sphere; compare neighbouring faces before naming their normals. No face has been repainted.
-5. After following the light between these receivers, inspect `spot.light_color = light_color` in `flashlight_color.gd`. The assignment stays fixed while position and direction change.
-6. Enter the side white room. Keep one corner in view while the central light changes. Compare this fixed lamp/changing value with the handheld lamps' fixed values/changing positions. Approach the pink recess, then move sideways to find its return walls. Its two sources keep their pink value while the surrounding room changes.
-7. Enter the taller room and look through the stepped light well. Wait for its light to change, then walk up the ramp and compare the lips from the raised landing. Separate these observations: first change time while holding the viewpoint, then change viewpoint. The room's script does not recolour the museum sky.
-8. Carry light-versus-material into Color_Nails, where a colour choice addresses a surface resembling part of a body.
+In the previous hall, we assigned colours to independent surfaces. Here we keep one surface colour and change a light. The room's handles already let you do this by hand. Our small program reconstructs the light-to-surface relation; we use source edits to hold and compare particular states.
 
-The lamp's grab and orientation are the interaction. Do not instruct the visitor to switch it off, choose a hue, spawn a prism or select a receiving-ground variant: this placement provides none of those controls. Ask what the RGB model can show and what it leaves unrepresented, without treating this renderer as a spectral optics laboratory.
+## A familiar box receives light
 
-## Making score: a room receives a value
+Work in the existing `Color_Flashlight` hall. Attach this complete `lesson.gd` to an empty `Node3D` named `LightStudy` on clear floor, with unit scale and local Y upright. Allow about five metres across X and three metres along positive Z. Stand on the positive-Z side of the board. The museum supplies your camera, movement, room and existing illumination.
 
-After reading the encounter, return to the supplied `colour_light_rooms` scene. Its `set_phase()` method includes the same kind of assignment used by the handheld lamp:
+The board is the `BoxMesh` we already know, made wide and shallow. Its material construction returns from the first Colour lesson. The new objects are two `SpotLight3D` nodes, each aimed at a point on the board. They have no visible handles or pickup bodies in this reduced study; the installed lamps provide that wider interaction. No child nodes, scene paths or helper files are required by this script.
 
+<!-- student-code:lesson.gd -->
 ```gdscript
-central_light.light_color = c
+# Keep the board's material; change one light's colour or aim.
+extends Node3D
+
+var beam_colour := Color(1, 0, 0)
+var first_target := Vector3(-1, 1.5, 0)
+var board: MeshInstance3D
+var surface: StandardMaterial3D
+var first_light: SpotLight3D
+var second_light: SpotLight3D
+
+func _ready() -> void:
+    board = MeshInstance3D.new()
+    var shape := BoxMesh.new()
+    shape.size = Vector3(4.4, 2.4, 0.12)
+    board.mesh = shape
+    board.position = Vector3(0, 1.5, 0)
+    surface = StandardMaterial3D.new()
+    surface.albedo_color = Color(0.9, 0.9, 0.9)
+    surface.roughness = 1.0
+    board.material_override = surface
+    add_child(board)
+
+    first_light = make_light(beam_colour, Vector3(-1, 1.5, 2.5), first_target)
+    second_light = make_light(Color(0, 1, 0), Vector3(1, 1.5, 2.5), Vector3(1, 1.5, 0))
+
+func make_light(colour: Color, at: Vector3, target: Vector3) -> SpotLight3D:
+    var lamp := SpotLight3D.new()
+    lamp.light_color = colour
+    lamp.light_energy = 2.5
+    lamp.spot_range = 6.0
+    lamp.spot_angle = 18.0
+    lamp.shadow_enabled = true
+    lamp.position = at
+    add_child(lamp)
+    lamp.look_at(to_global(target))
+    return lamp
 ```
 
-First give `c` one fixed RGB value, run the scene, then substitute another. Keep the white receiving material and camera position. This reuses the light assignment already introduced in this hall; building all the room geometry is a separate exercise. The luminous reveal has its own material and is not the source that lights the walls.
+## Which object receives the value?
 
-Then inspect `_process(delta)`: Point Zero's repeating callback advances the phase of a 110-second cycle. Pause the cycle with `running = false` and call `set_phase(0.16)` or `set_phase(0.38)` to compare two moments. Those are authoring changes in the script, not controls installed in the hall. The transferable operations are assigning a light colour, changing it over time, and holding conditions fixed to read a difference.
+Run the study. The first lamp makes a red pool on the left; the second makes a green pool on the right. Their positions, ranges and angles are fixed. The board receives both lights wherever their cones reach it.
 
+Last time, `material.albedo_color` changed a surface's base colour. Here, `lamp.light_color` changes a light's RGB contribution. Both accept a `Color`, but they belong to different objects and affect the scene differently. Our surface keeps `Color(0.9, 0.9, 0.9)` throughout this lesson.
 
-<!-- study-spine:sphere_in_pink -->
+Change `beam_colour` to `Color(0, 0, 1)` and run again. The left pool becomes blue. The right lamp stays green, and the board's stored material is unchanged. Keep your viewpoint while comparing the two runs.
 
-## Return: A sphere in pink
+Other museum lights still contribute. The pool's edge may make the change easier to see than its brightest centre. The assigned RGB value is not a promise that every receiving pixel will display those same three numbers.
 
-Change one lamp state; compare pink light with a pink surface. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+## Aim is a transformation
 
-This application reuses point, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`pink`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+Restore `beam_colour` to `Color(1, 0, 0)`. Change `first_target` to `Vector3(1, 1.5, 0)` and run again. The first lamp now points towards the second lamp's target. Look where red and green meet. Their contributions can produce a yellow region on this pale surface. Neither lamp has been assigned yellow, and no yellow has been written into the board's material.
 
-[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-sphere-in-pink/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+`make_light` creates a light, adds it to the study and returns its reference. The two variables keep different lights. Their `light_energy`, `spot_range` and `spot_angle` are held fixed so that colour and aim are the choices we compare. Range limits how far the light reaches; angle sets the cone's spread.
 
+A spotlight shines along its local negative-Z direction. `look_at` turns that direction towards a world-space target. Our target is written in the study's local coordinates, so `to_global(target)` converts it before the call. This is the local/world distinction from Point Coordinates doing another job. Placing the study elsewhere in the museum should not make its light aim at an unrelated world origin.
 
-<!-- study-edit:sphere_in_pink -->
+The lamp must already be in the scene tree for this global aiming operation. That is why `add_child(lamp)` comes before `look_at`. This call turns the lamp; it does not move the lamp to the target. In the installed exhibit, turning the grabbable handle turns its child light instead.
 
-### One source change: A sphere in pink
+## Withdraw one contribution
 
-Replace the final set_lights(1) call in _ready(). Mask 3 enables the first two lamps. Bit-mask construction is supplied here; the first task is to compare illumination while the sphere stays fixed.
+Keep the first lamp red. Change `first_target` to `Vector3(-1, 1.5, 5)` and run again. This target is behind the lamp, on the positive-Z side. The red cone points away from the board. The green pool remains. The board may still be visible under the room's other lights.
 
-```gdscript
-set_lights(3)
-```
+We have not switched off the first lamp: its colour, energy and position remain the same. We have changed where it points. Separating colour from aim lets us name which condition changed.
 
-Source: `commons/artifacts/spine_studies/pink_sphere.gd`. Use the prepared scene to run and compare.
+## Make another comparison
+
+Choose another target on the board: keep X between -2 and 2, Y between 0.4 and 2.6, and Z at zero. Predict which way the first light must turn. Keep its colour and the second lamp fixed, then run your choice. Find what changed without attributing it to a new surface colour.
+
+Keep the references `first_light` and `surface`, and the distinction between their colour properties. Our edits are applied in `_ready`; later controls could write to those same objects while the scene runs. This lesson does not add a colour picker to the museum's handles.
+
+Back at the installed exhibit, carry a beam across the coarse sphere. Its faces meet the light in different directions. The side rooms then hold their lamps still while colour changes with time. Those encounters develop the comparison further. We have reconstructed its smallest working relation: a known surface, a light, and an aim.
+
+In Nails, a hand position will choose a colour for a surface again. Keep asking where the value is written, and what else participates in its appearance.

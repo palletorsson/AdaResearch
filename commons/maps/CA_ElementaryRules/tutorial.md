@@ -9,6 +9,10 @@
 - A synchronous update and an empty outer boundary.
 - State, visible surface and colour as separate decisions.
 
+## Reading route
+
+Read `next_state` before `active_neighbours` and `evolve`. The new idea is a state that remains visible but no longer contributes to the active count. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Follow the cell
 
 We are still in Endless Museum. The small volume and the enlarged neighbourhood show the same running calculation. Gold marks one address. Pick up the black point beside the console; its trigger advances one generation. You can carry the control while walking around a cube that hides another. The console's STEP does the same job.
@@ -23,7 +27,7 @@ The point now carries the step action. Moving it does not edit the cells or sele
 
 Continue on the existing `PointStudy` node in the museum, saving the row script as a previous working version. Put the two files below together and attach `volume.gd`. Keep the node at unit scale on level floor, with clear space around it; face its positive Z side. The museum already supplies camera, light, player and XR Tools. This construction supplies its own geometry, label and pickable point. No authored scene children are assumed.
 
-Our study is a **7 × 7 × 7 volume with twelve deliberately placed active cells**. The installed work is a 50 × 50 × 50 seeded volume. They share the three-state rule and empty outer shell, but their beginnings and resulting shapes differ. We reconstruct the operation, then return to the larger encounter.
+Our study is a **7 × 7 × 7 volume with twelve deliberately placed active cells**. The installed work is a 50 × 50 × 50 seeded volume. They share the three-state rule and empty outer shell, but their beginnings and resulting shapes differ. In the printed twelve-cell seed, the central active-neighbour counts are **11 → 14 → 5**. At the installed gold address they are **11 → 7 → 5**. Both follow active → fading → empty. Compare the transition rule, not the two specimens as identical fields. We reconstruct the operation, then return to the larger encounter.
 
 ## Give a volume addresses
 
@@ -49,6 +53,7 @@ The three nested loops in `active_neighbours` visit offsets −1, 0 and 1 on eac
 
 The update functions are the lesson. `make_display` builds its viewing apparatus; `redraw` reads the state without changing it. A gold frame holds the central address. Empty cells are hidden; pink and green cells remain visible. This small version draws all occupied cells, without the installed work's hidden-interior optimisation.
 
+<!-- student-code:volume.gd -->
 ```gdscript
 extends Node3D
 const PointBody = preload("point_body.gd")
@@ -191,6 +196,7 @@ func redraw() -> void:
 
 This is the same small PointBody from the previous hall, unchanged. It contains the sphere and its pickup boundary. The new volume connects its existing action signal to `step`. Release returns the point to its resting place. With a keyboard, Enter steps and R replays the twelve-cell beginning.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -239,7 +245,7 @@ func on_desktop_drop(_pointer: Node) -> void:
 
 Before running the script, predict the central cell's first two states. The twelve-cell beginning gives it eleven active neighbours at generation zero. Record your prediction, the observed states and the line that explains any difference. The readout always reports the current generation's neighbours, not the count used to produce that generation.
 
-Then replace the twelve-cell beginning with just two adjacent active cells: the centre and one face neighbour. Predict two generations for the whole volume before running it. Keep the rule unchanged. Explain why a visible fading cell does not keep the other one active. This is your own seed, not a change to the museum installation.
+Then replace the twelve-cell beginning with just two adjacent active cells: the centre and one face neighbour. Predict two generations for the whole volume before running it. Keep the rule unchanged. Explain why a visible fading cell does not keep the other one active. This is a prescribed seed comparison in your copy, not a change to the museum installation.
 
 Finally, ask the transition function for the next state of an empty cell with seven active neighbours and a fading cell with seven. Their counts match. Explain why their answers differ. A good test checks both cases; a successful screenshot alone does not establish that distinction.
 
@@ -252,3 +258,8 @@ VIEW changes the colours without advancing a generation. DRAWN can be smaller th
 RUN, the twenty-step budget and the height-colour view belong to the installed observation apparatus. Our reconstruction needs only a step and a replay. Keep them distinct from the rule you have just written.
 
 Carry onward a transition function that distinguishes presence from participation, and an update that gives every cell the same old world. In **CA_GameOfLife**, a retained generation will become a layer of a structure. Here we replace the array; there we will also keep a history we can approach.
+
+## Your own test
+
+Choose a different small seed wholly inside the outer shell. Follow one nominated address for two steps. Record its state and active-neighbour count separately. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

@@ -1,21 +1,31 @@
 # What makes this look alive? — implementation
 
-Primary source scenes:
+## Installed encounter
 
-- `res://algorithms/computationalbiology/radiolaria2/radiolaria.tscn`
+`algorithms/computationalbiology/radiolaria2/radiolaria.tscn` constructs nine forms by drawing from six families. Repeated families are possible. Its source geometry recipes are unchanged. The forms are CSG assemblies, not simulated growing organisms or deformable SoftBody3D objects. Visible CSG skins have `use_collision=false`.
 
-The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers ROTATION, COLOUR, EFFECTS, SEED, SPIKES, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+The hall-specific adapter in `commons/artifacts/timing_machines/soft_workshop.gd` now raises the generator by2.2m, selects seed1337 and spacing4m, and adds nine solid low plinths plus a flat display runner. ROTATION originally turned the demo camera, whose view is inactive in the museum. The adapter now also turns each specimen about its own Y axis while that control is enabled. Other chapters do not enter this branch. The original demo camera behaviour and geometric construction algorithms remain unchanged.
 
-The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin. Let that recognition arrive, then keep it beside the question of how these objects were made.
+The six existing pointer controls remain: ROTATION, COLOUR, EFFECTS, SEED, SPIKES, RULE. COLOUR rebuilds the forms with another palette. At the fixed seed, the tested hierarchy, transforms below each specimen root and CSG construction properties remain equal across this palette change. SEED selects1338/1339/1337. SPIKES changes the polyhedral branch probability and can alter subsequent random choices; it is not a uniform switch for every spine on every family. EFFECTS toggles the existing particles, which may take their lifetime to clear.
 
-Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+Map placements: desk(15,3)→(15,11), radiolaria(9,11)→(15,21). Existing hall dimensions and floor architecture remain. The desk approach and outer route have support and capsule clearance; the route turns toward the centre at z41 before entering the exit frame at z43.5. It does not cross the portal's solid side post. These are checked paths, not exhaustive navigation or inter-hall transition tests.
 
-The program constructs several families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. These names describe decisions available to the generator. They are not measured properties of a living radiolarian.
+## Executable learner
 
-We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+Canonical source: `doc/book/studies/soft-bodies-through-the-hands/SoftBodies_Affect_Theory_Visualization/`.
 
-The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+Four complete files are printed in tutorial.md. study.gd is new. vessel_surface.gd, solver.gd and point_body.gd are byte-identical to the preceding Sampling lesson. The host reconstructs the same step40 surface using the same recipe and creates a shared ArrayMesh:330 stored positions and616 triangles. This is repeatable reconstruction, not a disk transfer or continuation of a previous running session. The solver runs only during initialization.
 
-Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+Two MeshInstance3D nodes share this mesh but receive separate materials. Left remains neutral/still. Right has three conditions: neutral/still; turn about local Z at0.7rad/s; accent colour with orientation reset. PointBody trigger or key1 cycles. Key2 restores baseline. The independent edit uses0.35rad/s. Both conditions retain all saved positions and face indices. Shared geometry is safe here because it remains unmodified; it is not a general permission to edit a resource used by multiple bodies.
 
-Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+The test mounts this exact learner temporarily at map-local(18,0,33), yaw180, unit scale. It is a student construction beside the existing encounter, not another permanently registered artifact. Its surface adds neither collision nor biological behaviour.
+
+## Evidence
+
+25 executable code checks pass: exact visible blocks, carried-file parity, previous snapshot equivalence, isolated materials, fixed geometry, condition reset, actual keyboard dispatch, synthetic XRTools pickup/action/release and the independent speed edit. Three executing fault programs are caught: shared materials, an accumulated orientation cue, and a solver that keeps advancing.
+
+36 native museum checks pass, including six pointer controls, specimen rotation, fixed-seed construction comparison, temporary printed host and variation, floor/capsule queries, and retained capture camera. Native eye-level and overhead images are included. Existing UID, compatibility renderer and legacy material warnings remain; final runs contain no script/parse errors. Neither automated assertions nor screenshots establish a visitor's felt response. Physical headset comfort, Quest performance and independent student understanding remain untested.
+
+Reproduce: `python tools/test_affect_lesson.py`, then `python tools/run_encounter_probe.py SoftBodies_Affect_Theory_Visualization --sequence softbodies --render --no-bridges --output-tag affect-final --probe tools/probes/affect_room.gd`.
+
+Report, before/after texts, exact code, independent edit, deliberate faults and receipts: `doc/book/iterations/2026-10-09-affect-one-cue/`.

@@ -1,6 +1,10 @@
 # Random Entropy — a sequence, its counts, one number
 
-This chapter builds on Random_Definition's seeded procedure and prepares for Random_Remove's eligible set. The primary is `shannon_entropy_meter:90#stand:ledger#disclosure:ledger` at (5,6), facing east into the corridor. Nine artifact placements remain declared in the 18 × 12 map. The runtime pack and any refusals are recorded separately in the review evidence.
+This chapter follows Random_Entropies' named comparisons, builds on Random_Definition's seeded procedure and prepares for Random_Remove's eligible set. The ledger is at (8,5), facing the entrance at 180°. The authored grid is 25 × 66 cells with ten artifact placements and a separate architectural weathering wall. The two-compartment bench is at (11,14), beside the four-cube sorting table and before the displacement enclosure. See artifacts.md for every position and the shared room/final route.
+
+## Two-compartment comparison · 15 October 2026
+
+`entropy_compartments` keeps sixteen labelled sites with eight A and eight B. The 25-line model in tutorial.md computes whole-board marginal colour H and Ω(k)=C(8,k)C(8,8−k), with k A on the left. The second display is S_B/k_B=ln Ω, dimensionless; no thermal dynamics are simulated. Supplied controls support deliberate/seeded exchanges, permutations within a macrostate, exact saved histories and replay. The jar now identifies its existing H(colour | six height bands) calculation and 0–1 bit range. [Runtime, reconstruction and measurement evidence](../../../doc/book/iterations/2026-10-15-entropy-compartments/README.md).
 
 ## Data and computation
 

@@ -2,38 +2,34 @@
 
 <!-- @jelly_cube -->
 
-The cube gives way. A small arm holds one point at its top; the rest of its surface can move. Yet it does not become a collection of loose triangles. Something continues to hold its parts in relation. Before looking at the settings, choose what you expect a softer cube to do: change further, return more slowly, or fail to return at all?
+The cube gives way. A small arm holds one point at its top; the rest of its green surface can move. Follow the indentation as it spreads beyond the place you touched. You have not told each point where to go.
 
-Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion. A body that moves less is not necessarily a body that resists deformation more. RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.
+In the last sequence, a body followed from a description, a field or a sample. Here the description also includes conditions under which a body may keep changing. Its surface retains its connections. The positions those connections join are no longer still. The form is something those relations keep producing.
 
-Reach toward it. The cube can deform against your hand, but it cannot push the tracked hand out of position. In this room's VR rig, the virtual hand follows the controller directly.[^hand] One body must accommodate the meeting; the other has already been placed.
+Before changing a setting, decide what you mean by softer. A body that yields farther? One that settles slowly? One that no longer recovers the shape you expected? The room offers separate controls for stiffness, damping and pressure. Your word has gathered several possible observations into one.
 
-```gdscript
-_soft_body.linear_stiffness = stiffness
-_soft_body.damping_coefficient = damping
-_soft_body.pressure_coefficient = pressure
-```
+Reach toward it. The cube can deform against your hand, but it cannot push your tracked hand out of position. This museum rig places the collision hand at the controller's position.[^hand] One body must accommodate the meeting; the other has already been placed.
 
-These are parameters of Godot's soft-body solver. The program supplies a subdivided cube and lets its vertices respond under those rules. PRESSURE introduces another contribution. Watch what inflation can conceal: the same outer silhouette can be maintained by different balances of resistance and internal pressure.
+The gold attachment remains. The visible arm makes that condition legible, but its appearance alone could not hold a simulated point. A particular vertex has been pinned. We have made a freedom to yield and a place where yielding stops.
 
-There is no modeled flesh behind the green skin. The body is built from a closed surface whose points are linked to keep distances; pressure helps that surface hold a volume. Turn PRESSURE down to zero and wait. What can the linked surface keep when inflation no longer helps it?
+The closed surface responds through the engine’s soft-body rules. Turn pressure down to zero and wait. What can the surface keep when inflation no longer helps it?
 
-The engine has a limited number of attempts to keep those distances at each step. The bench in Form Finding let us change that count; here the cube gets five passes.[^stiffness] What looks like a quality of the material also depends on how much work the simulation is allowed to do.
+The mesh has a resolution; the simulation also has a work budget. We can change either. What feels like a quality of matter depends partly on these choices.[^solver] A convincing wobble does not tell us which calculation produced it, or how that calculation would change under another demand.
 
-The last sequence made bodies by selecting, branching, carving, sampling and copying; before that we changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another. The surface connectivity remains prescribed. Yielding is a new capability; tearing, growing a hole or exchanging a neighbour would require more code. A soft appearance does not announce every freedom a body possesses.
+Restore the settings while the cube is moving. It continues from where it has arrived. The numbers return sooner than the body. If you want the beginning again, more must be restored than the control panel admits.
 
 <!-- @ -->
 
 <!-- @softmill -->
 
-Turn toward the mill. The moving apparatus brings a repeated encounter to a soft sphere. Use MILL to hold the drive. The sphere's physics continues; stopping a mechanism is different from stopping everything it has set in motion.
+Turn toward the mill. An arm revolves beside a soft sphere. Stop the drive and keep watching the sphere. Their closeness suggests an encounter the collision rules have not supplied.
 
-The cube made its coefficients available on a desk. The mill makes the source of an encounter visible in the room. Follow the motion from the machinery to the surface, then consider the room around both: the collider, support and pinned points belong to this body's conditions as much as its stiffness does.
+The cube exposes its coefficients. The mill makes contact itself a question. Support, gravity and the points required to stay still act on a body even when the encounter we imagined does not. Which of these belongs to the object when we call the object soft?
 
-The nearby jelly variants remain useful comparisons, and radiolaria offers a different warning: intricate biological resemblance can be constructed without soft-body dynamics. Keep that distinction for later. Here we changed the response of a body while one point remained held. In the next room we change which points must stay.
+Its changing outline can tempt us to call it free. Yet this surface cannot tear, grow an opening or choose new neighbours through these controls. The freedom is specific. In the next room, we move one of its edges: which points must stay?
 
 <!-- @ -->
 
-[^stiffness]: This cube sets Godot's `simulation_precision` to 5 and exposes `linear_stiffness` from 0 to 1. The count is local to this artifact. Godot Physics links triangle edges and also adds bending constraints between points two edges apart. See the [SoftBody3D reference](https://docs.godotengine.org/en/4.6/classes/class_softbody3d.html) and [Godot 4.6 solver source](https://github.com/godotengine/godot/blob/4.6-stable/modules/godot_physics_3d/godot_soft_body_3d.cpp).
+[^solver]: The placed cube requests simulation precision 5 and four BoxMesh subdivisions per axis. These are different controls. The project currently selects Jolt Physics; earlier notes describing GodotPhysics3D are historical. See the [Godot 4.6 SoftBody3D reference](https://docs.godotengine.org/en/4.6/classes/class_softbody3d.html).
 
-[^hand]: The museum's base rig selects TELEPORT mode for both collision hands: their transforms follow the tracked controllers. The same hand component also supports a collision-following mode. This asymmetry is a choice made in this rig, not a necessary property of every virtual hand.
+[^hand]: Both collision hands in `commons/scenes/base.tscn` select TELEPORT mode. The component copies the tracked transform directly in that mode; COLLIDE is another supported choice. This is a property of the prepared rig, not a necessary asymmetry in every VR system. It is source evidence, not a completed physical-headset contact test.

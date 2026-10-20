@@ -33,6 +33,10 @@ The count rises as the retained length falls. Neither number tells us how much w
 
 The screen stops at five. Its smallest pieces still have width, height and depth. The mathematical construction asks us to continue without a last cut.[^1] Its limiting set has zero total length and uncountably many points. We have not displayed that limit. We have made a finite instrument for approaching its rule.
 
+Georg Cantor (1845–1918) was a mathematician whose work helped establish set theory: the study of collections and their members. He showed that infinite collections need not have the same size. To call a set countable is to say that its members can be listed in an order that eventually reaches each one; the points in this limiting set cannot all be listed that way.[^2] Zero length has not made it empty. Counting its points and measuring its length answer different questions.
+
+That difference matters here in Ada. We began with a point we could hold, then gave many points a rule. Now the rule asks us to distinguish what exists mathematically, what our finite drawing shows, and what a body can enter. No single count settles all three. Later, the foundations-crisis halls will ask what our systems can establish about their objects. Here that question begins with a bar, a gap and our wish to pass through.
+
 From here the gaps can look generous. Carry that impression up the ramp.
 
 <!-- @example_8_4_cantor_pagoda_vr -->
@@ -60,3 +64,5 @@ At the far end of the hall, three trees stand in a row. They are one rule, three
 The smaller Cantor drawing, the cloud and the dark sphere remain around the experiment as well. Their kinds of repetition do not have to resolve into one shape. Further on, Koch will put a detour into a line; Sierpinski will carry removal into a triangle. We have learned to lose length while multiplying pieces. What happens when the next rule makes the boundary grow instead?
 
 [^1]: Georg Cantor published the set in 1883, in the fifth of his papers “Über unendliche, lineare Punktmannichfaltigkeiten” (*Mathematische Annalen* 21); Henry J. S. Smith had described the same construction nine years earlier. The pagoda is built on Daniel Shiffman's Example 8.4 in *The Nature of Code*.
+
+[^2]: J. J. O'Connor and E. F. Robertson, [“Georg Cantor,” MacTutor History of Mathematics](https://mathshistory.st-andrews.ac.uk/Biographies/Cantor/), on Cantor's work on sets, countability and different infinite cardinalities. The museum's five cuts remain finite approximations.

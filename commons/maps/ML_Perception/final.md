@@ -1,23 +1,29 @@
-# An edge is not yet an object
+# What did the sphere recognise?
 
-At which point does a difference between pixels become a claim about what is there?
+The sphere waits in its own bay. Across the wall, a dance phrase invites both hands to follow lines through the air. Here there is no required pose until you supply one.
+
+<!-- @vogue_timeline -->
+
+Choose three arrangements of your hands and give them the names A, B and C. Repeat them. Train the small model, then make a fresh attempt. The sphere may rise, turn or stretch. Something has changed through your examples: the numbers that connect the measured positions to those three labels. The movements of the sphere were written beforehand.
+
+This is a real, limited capacity. The model receives six coordinates: each hand's position relative to the head, expressed in a chosen horizontal frame. It receives no fingers, facial expression, personal history or reason for the gesture. A pose that matters to you may disappear into the same six numbers as another. Two poses you regard as equivalent may remain far apart within this representation.
+
+The arrangement also makes some differences disappear deliberately. Carry the head and hands together across the floor: subtracting the head position removes that translation. The work of deciding what counts as the same begins before any weight is trained. We have built that decision into what the learner can receive.
+
+Give a familiar pose a different name in a new session. The sphere can learn the new association. Its answer has not uncovered an essential property of the pose; neither is the answer arbitrary once the examples, representation and fitting procedure are fixed. Those relations make some outcomes more likely than others. Revising them is part of working with the system.
+
+Test without teaching again. A correct answer on an example used during training tells us less than a correct answer on a fresh attempt. A mistake may come from few examples, overlapping labels, tracking, an omitted distinction or the model itself. Before deciding that the body performed badly, ask which conditions could change. The refusal to act is also designed: a score and a proximity threshold govern when the sphere stays still. They do not make its accepted answers infallible.
+
+The dance nearby gives this distinction particular weight. Following a drawn phrase, fitting hand measurements and judging a performance are different activities. Recognition of a coordinate pattern does not establish what makes a movement expressive, or grant the program authority over the practice from which an encounter draws inspiration.
 
 <!-- @computer_vision_vr -->
 
-Find an edge of the cross or disk in the input image. Compare that location with the neighbouring edge image. A small outline crawls over the input image one cell at a time; find the same cell in the edge image beside it and compare the two when the outline sits on a boundary rather than a uniform patch.
+Return to the image exhibit and compare the inside of a disk with its edge. The Sobel filter measures local intensity change. A fragment of that edge might belong to several objects. The supplied object names and percentages in this exhibit are not learned predictions from those edges. A computed difference and an interpretation can stand beside each other without the calculation establishing the interpretation.
 
-The edge image emphasises abrupt changes in intensity. The exhibit applies horizontal and vertical Sobel filters to a small pixel grid, combines their responses into a gradient magnitude, and displays that result. A bright response says that nearby pixel values change sharply; it does not by itself say “circle” or “cross”.
+The new sphere lets us construct one such connection explicitly: examples, labels, fitted parameters, then tests. It also exposes the distance still left between a working connection and the larger meaning we might give it.
 
-Compare the interior of the disk with its boundary. Both belong to what you recognise as the same object, yet the filter treats them differently because its question is about local change. Then compare a short fragment of the disk’s edge with a fragment of the cross. The image-wide identity that seems obvious to you is not present as a complete object inside either tiny neighbourhood. The outline makes that difference of scale inspectable.
-
-The outline marks the neighbourhood whose calculation you can read off the edge image. The whole boundary is assembled from many such responses. At the outer border, this implementation leaves the result at zero, which is another reminder that an image-processing rule includes a decision about what happens where neighbours are missing.
-
-Now read the object names and confidence percentages. In this exhibit those names and percentages are supplied in advance. They are not predictions learned from the computed edges. The room currently places a real filtering operation beside an illustrated classification claim; the link between the two remains to be built.
-
-That separation gives us a precise question for developing the encounter. What evidence would a recogniser need before it could justify the name, and how would its confidence be checked? Two signs in the hall already promise a way in: INPUT IMAGE, paint pixels with hand; FILTER TOOLKIT, grab to apply. Neither works. The pixels take no touch and the four filter blocks cannot be picked up; the signs describe a room that has not been built. A future interaction could alter the input while exposing which stages actually change, allowing an unsupported label to become visible as a broken dependency.
-
-For now, use your own observation: identify one edge fragment that could belong to more than one object. Local contrast can be real while its interpretation remains ambiguous. Adding a confident word does not remove that ambiguity.
+Ada itself is being made with AI assistance. The distinction returns to our own work. An impressive result is reason to investigate a capacity; an error is evidence about a particular operation and its conditions. Neither observation settles every future use. What matters here is whether we can inspect the connection, retain the evidence and revise what the system is permitted to do.
 
 <!-- @ -->
 
-The sequence-memory room adds another source of evidence: what happened before the current input arrived.
+This pose lesson keeps an average and loses the order of movement. In Sequence Memory, that loss becomes the next question: what must survive from one moment for the next moment to mean something different?

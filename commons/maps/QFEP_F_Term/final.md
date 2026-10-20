@@ -18,6 +18,8 @@ Press EXPECT 0. Each amber underline marks a bit that refuses that guess. Compar
 
 Leave p near 0.9 and press EXPECT 1. Keep your eye on the bits, not only the number. Their colours stay; the amber marks change sides. You have improved this predictor’s performance without making the world easier.
 
+Nothing here has learned the change for you. You chose another expectation and tested it against the same displayed evidence. The improvement is real within that comparison; whether the new expectation will serve elsewhere requires another encounter. A better fit to what we have already seen does not settle what comes next.
+
 The screen distinguishes expected errors under the chosen probability from mistakes counted in this particular grid. They need not agree exactly. The smaller experiment is enough to ask something consequential: when we call a world difficult, whose expectation is meeting it?
 
 Here you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you.

@@ -93,6 +93,10 @@ func park_point(index: int) -> void:
 
 The two loop values give opposite turns. Each loop iteration calls `branch()` again with a shorter length and one fewer generation. The returned child is placed at the parent's tip, turned, then attached to that parent. Its children have already been made by the same rule. This is a depth-first construction: finish one subtree, then make its sibling.
 
+Follow the smallest fork with `generations = 1`. The first call, `branch(0.7, 1)`, makes the trunk. It calls `branch(0.49, 0)` for its first child. That child draws one segment and returns its joint. The parent attaches it, then makes a second, separate `branch(0.49, 0)` call for the other child. Finally the parent returns a joint carrying all three segments. Equal arguments give the two children equal lengths; each call still creates its own node.
+
+With more generations, either child can return a whole subtree. We never need separate recipes for a trunk, a branch and a twig: each builds one part and delegates the smaller versions to the same function. The count doubles at each new level, so this economy in writing can produce expensive work. Before restoring three generations, explain why one generation makes three segments rather than two, and why a leaf is drawn here although the zero-step frame in the previous lesson drew nothing. Look at where each function places its stopping test.
+
 Earlier, local and world coordinates described a point relative to a room. Here every child has a local position relative to its parent branch. `child.position = Vector3.UP * length` puts its origin at that parent's end. Moving or turning the parent carries the children through their existing attachments. The scene tree performs that inheritance; we do not recalculate every descendant in `_process()`.
 
 The two grips control only the first fork. While one is held, we convert its world position into its branch parent's coordinates, subtract the attachment position and obtain a direction. `turn_fork()` aligns the branch's local Y axis to that direction. The quaternion line is a supplied alignment operation: it turns one axis towards another. Length is unchanged. The 12–65-degree limit keeps this particular hand study within a manageable arc; it is an interface choice, not a law of recursion. Pulling farther does not lengthen a branch.
@@ -200,4 +204,4 @@ The museum source evaluates its branching rule through a queue of unfinished tip
 
 The small museum model and large canopy, however, really do share the source's branch records. Their scale differs; their branching decisions do not. ANGLE and LENGTH on the original desk change the whole rule and rebuild the specimen. The point grips make a local edit. Release both before using those controls or RESET.
 
-Carry the bounded self-call onward. In Cantor Set, the next decision will be which part of an interval is retained, removed and passed to another call.
+Carry the branching rule onward. In Cantor Set, the next decision will be which part of an interval is retained, removed and passed to the next generation. We will keep that generation in an array so the hand can advance it one step at a time.

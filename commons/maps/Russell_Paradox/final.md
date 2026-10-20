@@ -14,18 +14,11 @@ Choose IN. Follow what the readout requires. Now choose OUT.
 
 Neither button is broken. Each answer contradicts the rule that was supposed to make the collection. If R belongs to itself, it fails its own entrance condition. If it does not, it satisfies that condition and must belong. The arrows turn around the same disc. Your hand has somewhere to go; the proposed set does not.
 
-The small computation behind this test is almost bare:
-
-```gdscript
-var required: bool = not assumed_in
-var agrees: bool = assumed_in == required
-```
-
-Try the two possible values. More processing time will not produce a third Boolean. This is the contradiction in unrestricted comprehension: assuming that every condition, applied without a restricted domain, defines a set.
+The test compares your answer with its opposite. Carry the familiar point between OUT and IN in the student working copy. Its movement changes the assumption, not the rule. Try the two possible values. More processing time will not produce a third Boolean. This is the contradiction in unrestricted comprehension: assuming that every condition, applied without a restricted domain, defines a set.
 
 Move the slider one step further, to cell 6. The new rule begins with a collection that already exists: U. Filter its members rather than collecting from everything whatsoever. Try OUT again.
 
-This time it holds. The workbench uses four small sets, named 0, 1, 2 and 3. Each contains the earlier numbers: 0 contains nothing, 1 contains 0, 2 contains 0 and 1, and so on. None contains itself, so all four survive the filter. The result is U again. But U is not one of those four members. The collection and a member of the collection are different things.
+This time it holds. The workbench uses four small sets, named 0, 1, 2 and 3. Each contains the earlier numbers: 0 contains nothing, 1 contains 0, 2 contains 0 and 1, and so on. None contains itself, so all four survive the filter. The result is U again. But U is not one of those four members. The collection and a member of the collection are different things. In your working copy, change the number of finite sets. The labels and the resulting collection change together; the result still lies outside the domain being filtered. That is a construction you can inspect, not a third answer smuggled between IN and OUT.
 
 One phrase has changed what can be built: *within U*. The rule still uses “not”. A condition can still be applied to the result. What has gone is the permission to take everything as one set. This is the move made by separation in ZF set theory.[^1]
 

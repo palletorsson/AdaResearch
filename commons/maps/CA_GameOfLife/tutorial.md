@@ -9,6 +9,10 @@
 - Reading an earlier state without reversing the calculation.
 - A fixed record budget and an explicit restart.
 
+## Reading route
+
+Read `step`, `select_row`, `deck_position` and `screen_position`. The update is carried; the new work is keeping a record and giving it two receivers. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Walk beside the record
 
 We are in Endless Museum. The desk, the tiles in the basin and the upright lattice show the same Rule 30 history. Twelve rows greet you. Walk along the margin: gold follows your position through the record. Turn back. The later rows remain.
@@ -47,6 +51,7 @@ An unoccupied recorded cell and an unrecorded future slot both show no cube. The
 
 The two mapping functions are the part to change in your own arrangement. `make_display` builds the repeated geometry and collision pool once. `redraw` updates those existing receivers. There are no required scene children hidden behind references.
 
+<!-- student-code:history.gd -->
 ```gdscript
 extends Node3D
 const PointBody = preload("point_body.gd")
@@ -205,6 +210,7 @@ func redraw() -> void:
 
 This is the same point as in the previous two halls. Its construction is printed here so the pair of files is complete; you do not need to rebuild or redesign it. The inherited pickable action supplies the trigger signal.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -262,3 +268,8 @@ Change `seeds` from `[7]` to `[5, 9]`, then run the study. Predict the first new
 ## What travels onward
 
 We can keep a state without confusing it with the current calculation, and change its display without changing the record. Next, a two-dimensional grid holds one present. A glider will seem to move through it while the addressed cells remain in place. A pattern's apparent movement and our stored history are different constructions.
+
+## Your own test
+
+Choose another screen mapping while keeping the deck and saved rows unchanged. Check both an occupied and an empty recorded site, then append a row to confirm the calculation still agrees. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

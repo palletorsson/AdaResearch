@@ -1,52 +1,24 @@
-# A cube assembled, replayed and changed
+# A cube compared, replayed and changed
 
-Primitives_Polythedra distinguished a visible boundary from a collision boundary and tested how forms support or interrupt movement. Here, the primary order is an outline (`cube_lines`), a timed reveal with editable corners (`animatedcubebuilder`), the shared-diagonal reference (`cube_diagonal_plate`), a hinged surface (`polyhedron_nets_cube`), reusable copies (`prefab_box_library`), then a sorting rule (`cube_sorting_line`). The room has two builder placements; one can remain an unchanged reference.
+The current primary route is a linked cube pair, the folding net, the prefab library, then the sorting conveyor. The outline, diagonal plate and other works remain side encounters. The two former independent builder placements have been replaced by one `paired_cube_diagonals` instrument.
 
-## Read a position and a connection separately
+## One displacement, two triangulations
 
-Before moving a handle, predict which parts will follow. The builder starts with eight local positions at the combinations of ±0.5 on X, Y and Z. It also stores twelve cube edges and twelve triangle patches in separate lists. The positions alone do not specify which vertices should connect.
+`paired_cubes.gd` composes two existing builders with independent vertex and triangle arrays. Their default automatic reveal is disabled. Both begin complete at identical local vertex coordinates, with centres 1.9 m apart. A's positive-Z face uses [4,5,7] / [5,6,7]; B uses [4,5,6] / [4,6,7]. The remaining connections match.
 
-For example, the front surface uses these source triples:
+Initially only A's corner 6 admits pickup. Moving it updates A's geometry and copies the corresponding positions into B. The seven other A positions remain fixed. Moving corner 6 outward by 0.25 m changes the front surface at its projected centre by 0.125 m on B while A's 5–7 midpoint stays at the original depth. This compares geometric surfaces, not just the drawn diagonal lines.
 
-```gdscript
-[4, 5, 7]
-[5, 6, 7]
-```
+Amber diagonal cylinders and differently tinted front patches make the relation visible. The wrapper replaces the builder's reverse-copy meshes with one outward-normal triangle per patch. A worktable supports the encounter, but the displayed cube surfaces are not collision enclosures. Pickup handles are the interactive bodies.
 
-Their common edge is `[5, 7]`. Move vertex 6 out of the original face plane. The second triangle can tilt while the first remains unchanged. This pair no longer forms a planar square.
+## Three controls
 
-The initial cube's geometric face count gives `8 - 12 + 6 = 2`. Counting the triangulated boundary gives `8 - 18 + 12 = 2`, because triangulating the six squares adds six diagonals as well as six faces. The visible edge cylinders initially show only the twelve cube edges. The DIAGONALS control exposes the other six, derived from the triangle list rather than a separate hand-authored diagram.
+- RESTORE returns both arrays and their handles to the initial positions.
+- REPLAY reveals 8 vertices, 12 edges and 12 patches at 0.13-second intervals around the current positions. It preserves deformation and temporarily disables pickup.
+- FREE / ONE permits all A handles to move, then returns to the controlled single-corner constraint. B remains linked. Returning to ONE fixes the seven control corners at their initial positions.
 
-Each triangle patch is submitted with a reversed copy for visibility from both sides. The panel counts twelve patches, not the twenty-four submitted triangles in this particular implementation. Counts must identify their representation.
+Restore and replay decline while an A handle is held. Controls use the existing physical/pointer push buttons on a compact upward-facing rail. There is no PAUSE or DIAGONALS control on this instrument; the old standalone builder still provides its existing controls elsewhere.
 
-## What the builder animates
-
-At setup, the builder prepares hidden handle, edge and surface nodes. Its default timed presentation reveals eight vertices at 0.5-second steps, twelve edges at 0.2-second steps, then twelve patches at 0.15-second steps. Frame timing can extend those intervals: the state machine reveals at most one item per process call and resets its step timer after each item.
-
-The default `closure:strata` leaves all layers visible. It does not automatically replace them with a final solid mesh. Existing configuration alternatives remain: `closure:scaffold` retains corners and edges; `closure:solid` shows a combined surface with corner handles. `order:descend` reveals triangles, edges and vertices in that order; `order:together` reveals all layers at once. These are configuration choices, not new controls on the front panel.
-
-The `#discovery:1` option adds the room's instrument and source-index labels `v0` through `v7`. During assembly, handles are disabled for pickup; completion enables them. This lets a visitor pause a readable layer without accidentally editing a hidden corner.
-
-## Four controls, four operations
-
-- **REPLAY** hides and reveals the layers again using the current positions. It resumes a paused assembly and preserves deformation.
-- **PAUSE / RESUME** stops or resumes only the builder's timed reveal. It does not pause the game clock, the folding net or the room. At completion, it asks the visitor to replay before pausing steps.
-- **RESTORE CUBE** returns all eight handles to their initial local positions and displays the completed result, without replaying the animation.
-- **DIAGONALS** shows or hides the six additional triangulation edges after assembly completes. It does not change the faces.
-
-Replay and restore ask for a held corner to be released first. The panel reports visible points, visible cube edges, surface patches and the largest corner displacement from its initial local position. Local metres do not include additional scale applied to the artifact by a parent.
-
-## Deformation reads handles back into geometry
-
-After a completed build, changed handles update the stored positions:
-
-```gdscript
-vertices[i] = handle_nodes[i].position / cube_size
-```
-
-The existing edge and triangle lists are then used to rebuild geometry. Hidden surface patches update too, so replaying or changing the configured closure cannot bring back stale geometry. The yellow diagonal cylinders follow their corresponding vertex pairs.
-
-This preserves connectivity, not cube validity. It does not enforce equal lengths, right angles, planarity or a non-intersecting enclosure. The mesh surfaces have no enclosing collision body; the corner handles have their own pickup colliders. A deformed shape is therefore a visual construction, not a newly tested walkable shelter.
+The workshop is 27 × 36 cells. The paired table is at (13,6); a five-cell opening at row 11 leads to the net (13,16), library (5,24) and conveyor (20,25). Source-cell placement and primary order are recorded with the map.
 
 ## Folding changes another set of data
 

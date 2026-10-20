@@ -9,9 +9,9 @@
 
 ## In the museum
 
-The cube appears simple enough to arrive ready-made. The diagonal study in this hall exposes a decision hidden by that familiar outline: a square surface is represented here by two triangles. Build one cube, then a second with the other diagonal on its front side.
+The cube appears simple enough to arrive ready-made. The diagonal study in this hall exposes a decision hidden by that familiar outline: a square surface is represented here by two triangles. The installed pair moves corresponding corners together while retaining opposite front diagonals. Build one cube, then a second with the other diagonal on its front side.
 
-We keep FaceBody from the preceding halls. CubeBody adds a particular set of eight positions and twelve index triples. It is the cube we can carry into Transformation and Arrays.
+We keep FaceBody from the preceding halls. CubeBody adds a particular set of eight positions and twelve index triples. Keep this class for constructions where the faces matter. Transformation returns to the cube shape through a small BoxBody class using Godot's centred BoxMesh; the change of representation is explained in Trans_Pre. Arrays can later reuse that whole-body version.
 
 ## Make this study
 
@@ -84,3 +84,9 @@ Keep CubeBody. The next hall asks whether a short rule can generate a position l
 Godot documents clockwise front faces and ordered vertex submission in [SurfaceTool](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html).
 
 [Current lesson.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Animatedcube/lesson.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
+
+## Reconstruct the controlled comparison
+
+Begin with the two unchanged cubes above. Move local entry `points[6]` forward by the same 0.25 metres on **both** instances, then call `show_faces(points, faces)` on each. Keep the other seven entries unchanged. The cube with diagonal 5–7 leaves that diagonal at its original depth; diagonal 4–6 has one displaced end. At the projected centre of the original front square, the two surfaces now differ in depth by 0.125 metres.
+
+Return both arrays to their original positions and redraw. The front faces should become flat again. This reproduces the museum's first comparison without its pickup and presentation systems. Its REPLAY control only reveals the current construction; RESTORE resets the positions. FREE / ONE permits additional corner changes, after the one-corner comparison has a baseline.

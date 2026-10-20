@@ -4,11 +4,11 @@ How much of a landscape can be made by repeating a rule at different scales?
 
 <!-- @noise_mixer -->
 
-Reduce OCT to one and look at the broad changes across the picture. Add layers while keeping LAC and PER fixed. Follow one large feature and see how finer variations appear around it rather than assuming each new layer replaces the previous one. Step OCT back down and the earlier picture returns exactly: unlike the terrain in the last room, this field keeps no history of the settings you passed through.
+Reduce OCT to one and follow the boundary between a light region and a dark one. Add layers while keeping LAC and PER fixed. Finer variations enter the sum. Step OCT back down and the earlier picture returns: this field keeps no history of the settings you passed through.
 
-Next adjust PER. Compare how strongly the smaller-scale contributions stand out. LAC changes the frequency ratio between successive layers; PER changes their relative amplitudes. SEED selects another set of offsets, providing a different arrangement under the same kind of construction.
+PER changes the layers' relative amplitudes; LAC changes their frequency ratio. Try each at one layer, then at two. Only with a later contribution can either ratio make a difference. SEED chooses another set of offsets.
 
-Begin with OCT at one and inspect a broad light region beside a broad dark region. Increase the layer count while tracking their boundary. Then reduce PER and ask which finer variations become less prominent. Return to one layer before changing LAC: with no later layers to separate in frequency, that comparison gives you a baseline for what the spacing control concerns. Add layers again and watch its influence become available across them. Describe a change in feature size separately from a change in colour contrast. The picture remaps its range, so those two visual changes need not report the same numerical difference.
+Describe a change in feature size separately from a change in contrast. The picture stretches its own numerical range; its confidence of colour can survive a shrinking difference.
 
 The field adds scaled versions of a base function. Each layer samples at another frequency and contributes another weighted value. In this display the base is made from several sine expressions, so the noise-like surface connects back to the synthesis lab's lesson: a complex appearance can come from adding simpler contributions.
 
@@ -32,4 +32,4 @@ Describe the picture once using landscape names and once using only high values,
 
 <!-- @ -->
 
-This display offers neither a neutral palette nor a fixed shared scale; either would expose another part of this construction and make a useful comparison for a future display. The heights under your feet were drawn once and hold still while you stand on them. The cycling stones in the next room put uncertainty into timing instead of texture. You will know the order of their states. The pauses between them are drawn, and how much you can know about one depends on where you look.
+The small reconstruction gives that comparison a place. Two screens show the same sum: one keeps a shared grey scale; the other stretches its own range. Make the values smaller and the second picture can remain just as emphatic. The landscape has not grown back. The display has spread a narrower difference across the same distance from black to white. The heights under your feet were drawn once and hold still while you stand on them. The cycling stones in the next room put uncertainty into timing instead of texture. You will know the order of their states. The pauses between them are drawn, and how much you can know about one depends on where you look.

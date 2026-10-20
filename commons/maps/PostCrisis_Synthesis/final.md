@@ -22,6 +22,8 @@ The hand has arrived. Your hand is missing.
 
 Come close enough to read the ledger. It names the Assembly Laboratory, gives the time of the last kept change, counts the joints displaced from their starting places, and says whether any of the twelve connections has been rerouted. Its account comes from the same record as the amber body. Waiting in front of it does not add another achievement.
 
+An accountable record would connect a decision with evidence about its effects and someone able to revisit it. This one gives us a changed arrangement to inspect. It does not tell us whom that change helped, or who can answer for it.
+
 After a changed joint is released, the program writes its record:
 
 ```gdscript

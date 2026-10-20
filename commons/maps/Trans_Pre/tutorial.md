@@ -1,40 +1,145 @@
-# Move, turn, change size
+# A cube that moves, turns and grows
 
-**Learning elements**
+## Learning elements
 
-- Translation: position
-- Rotation: orientation
-- Scale: size
-- Animation: changing a transform over time
-- Pickup: overlap detection and a signal
+- Reusing a class; construction versus transform
+- Translation, rotation and uniform scale
+- Elapsed seconds and a returning fraction
+- Overlap detection, signals and a player filter
 
-The cubes in Trans_Pre introduce one change at a time: rising, turning, then growing and shrinking. Here we use a single cube mesh. Its `MeshInstance3D` gives it a position, rotation and scale. Change those properties to transform the whole object.
+In Trans_Pre, one cube rises. Another rises and turns. A third also changes size. Follow one corner: each example adds an operation to the same kind of body.
 
-## One cube
+## Bring your arrangement
 
-The Endless Museum supplies the room, player, camera and light. Attach this script to an empty `Node3D` named `TransformStudy` beside the installed examples. Its origin sits at floor level, with zero rotation and unit scale. Coordinates below are local to that study.
+Save your Melencolia arrangement. Work on a copy of its `lesson.gd` in this hall; leave the original intact. The museum already supplies the room, light, camera and player. Use an empty, floor-level `Node3D` named `TransformStudy`, with zero rotation and unit scale, as the host for this copy. We replace its arrangement with one animated pickup.
 
-This is the complete `lesson.gd`. It needs no companion scripts.
+There is a deliberate change of representation. `CubeBody` exposed vertices and faces. Here `BoxBody` will use Godot's `BoxMesh` to study the whole body's transform. Both describe a one-metre cube, but `CubeBody` starts at its bottom; `BoxMesh` is centred on its origin. Keep the old files with your arrangement. Their face-list construction and pickable point are not dependencies of this branch.
+
+The coordinate frame, instance, parent-child relation and `_ready()` carry forward. Point Zero's `_process(delta)` returns as the clock. This is a new construction of a familiar shape; the museum does not transfer the same running instance between halls.
+
+## 1. Give the visual a small class
+
+Create `box_body.gd` beside `lesson.gd`. This is its whole file.
+
+<!-- student-edit:box-body -->
+<!-- student-code:box_body.gd -->
+```gdscript
+extends MeshInstance3D
+
+func _init(size: Vector3 = Vector3.ONE) -> void:
+    var shape := BoxMesh.new()
+    shape.size = size
+    mesh = shape
+```
+
+`BoxBody.new()` gives one visible, centred cube. The optional `size` argument gives its dimensions in metres. Each call creates its own mesh. This class adds no collider, player or movement. The next hall will carry this file unchanged.
+
+## 2. Replace the arrangement, keep the host
+
+In `lesson.gd`, keep `extends Node3D`. Replace the declarations between it and `func _ready()` with:
+
+<!-- student-edit:pre-values -->
+```gdscript
+const BoxBody = preload("box_body.gd")
+
+var cube := BoxBody.new()
+var start := Vector3(0, 1.3, 0)
+var rise := 0.35
+var turn_speed := 45.0
+var pulse := 0.2
+var period := 4.0
+var elapsed := 0.0
+```
+
+Replace the complete `_ready()` function with this one. There is still only one `_ready()`:
+
+<!-- student-edit:pre-ready -->
+```gdscript
+func _ready() -> void:
+    assert(period > 0.0 and pulse >= 0.0 and pulse < 1.0)
+    add_child(cube)
+    cube.position = start
+```
+
+Append `_process()` after `_ready()`:
+
+<!-- student-edit:pre-clock -->
+```gdscript
+func _process(delta: float) -> void:
+    elapsed += delta
+    var t := pingpong(2.0 * elapsed / period + 0.5, 1.0)
+    cube.position = start + Vector3.UP * lerpf(-rise, rise, t)
+    cube.rotation_degrees.y = turn_speed * elapsed
+    cube.scale = Vector3.ONE * lerpf(1.0 - pulse, 1.0 + pulse, t)
+```
+
+The cube now rises, turns and pulses. `elapsed += delta` keeps seconds between updates. `pingpong` makes a fraction travel from zero to one and back. `period` is **one complete return cycle**, in seconds. The `0.5` offset starts the cube halfway up, moving upward.
+
+`lerpf(-rise, rise, t)` chooses a height offset. At `t = 0.5`, that offset is zero. Multiplying `Vector3.ONE` by the second interpolation scales all axes equally. The turn uses elapsed seconds directly: 45 degrees per second, independent of `period`.
+
+Each update assigns the pose from the starting values. Repeatedly adding the whole pose would make it drift. The assertion prevents a zero period and a pulse that collapses or inverts the cube.
+
+Set `turn_speed` and `pulse` to `0.0`: only the rise remains. Restore `turn_speed = 45.0`, then `pulse = 0.2`. The same mesh acquires another behaviour at each step. With `period = 4.0`, the height is 1.3 m initially, 1.65 m after one second, 0.95 m after three, and 1.3 m after four. The change reverses immediately at each end; easing would be another timing choice.
+
+## 3. Let an overlap collect it
+
+Inside `_ready()`, immediately after `cube.position = start`, insert these lines at the same indentation:
+
+<!-- student-edit:pre-sensor -->
+```gdscript
+    var sensor := Area3D.new()
+    sensor.collision_layer = 0
+    sensor.collision_mask = 1
+    sensor.set_collision_mask_value(20, true)
+    cube.add_child(sensor)
+    var hitbox := CollisionShape3D.new()
+    hitbox.shape = BoxShape3D.new()
+    sensor.add_child(hitbox)
+    sensor.body_entered.connect(_on_body_entered)
+```
+
+Append this function after `_process()`. It is the receiver connected above:
+
+<!-- student-edit:pre-collect -->
+```gdscript
+func _on_body_entered(body: Node3D) -> void:
+    if body.is_in_group("em_walker") or body.is_in_group("player_body"):
+        print("Collected")
+        queue_free()
+```
+
+An `Area3D` reports overlap; it does not block a body. Its one-metre `BoxShape3D` matches the unscaled visual. As a child of the cube, the area follows its movement, rotation and uniform scale. `body_entered.connect(...)` connects the event to our receiver.
+
+The museum supplies `player_body` on collision layer 20. The prepared desktop preview uses `em_walker` on layer 1. The mask admits those layers; the group condition identifies the player. A prop is ignored. A qualifying overlap prints `Collected`, then `queue_free()` removes this study at the end of the frame. Score and celebration effects remain with the installed exhibit.
+
+## Predict, change, carry
+
+Change only `period` to `8.0`. Rise and pulse should take twice as long; turning should retain its speed. Explain why, then choose another rise without changing the cube's proportions.
+
+Keep a saved copy of this collectible version for Arrays. Introduction branches from it: the visual class and clock continue, while the collection code is removed so the comparison stays visible.
+
+[Complete files, edition 2026-10-16](../../../doc/book/iterations/2026-10-16-transformation-handoff/files.html#Trans_Pre) · [lesson.gd](../../../doc/book/iterations/2026-10-16-transformation-handoff/Trans_Pre/lesson.gd) · [box_body.gd](../../../doc/book/iterations/2026-10-16-transformation-handoff/Trans_Pre/box_body.gd) · [Download the studies](../../../doc/book/iterations/2026-10-16-transformation-handoff/transformation-handoff.zip)
+
+<details class="full-program">
+<summary>Complete lesson.gd — online reference</summary>
 
 <!-- student-code:lesson.gd -->
 ```gdscript
 extends Node3D
+const BoxBody = preload("box_body.gd")
 
-var cube := MeshInstance3D.new()
-var start := Vector3(0, 1, 0)
-var turn_degrees := 0.0
-var size_factor := 1.0
-var rise := 0.0
-var duration := 2.0
+var cube := BoxBody.new()
+var start := Vector3(0, 1.3, 0)
+var rise := 0.35
+var turn_speed := 45.0
+var pulse := 0.2
+var period := 4.0
 var elapsed := 0.0
 
 func _ready() -> void:
-    assert(duration > 0.0 and size_factor > 0.0)
-    cube.mesh = BoxMesh.new()
+    assert(period > 0.0 and pulse >= 0.0 and pulse < 1.0)
     add_child(cube)
     cube.position = start
-    cube.rotation_degrees.y = turn_degrees
-    cube.scale = Vector3.ONE * size_factor
 
     var sensor := Area3D.new()
     sensor.collision_layer = 0
@@ -48,8 +153,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     elapsed += delta
-    var t: float = minf(elapsed / duration, 1.0)
-    cube.position = start + Vector3.UP * rise * t
+    var t := pingpong(2.0 * elapsed / period + 0.5, 1.0)
+    cube.position = start + Vector3.UP * lerpf(-rise, rise, t)
+    cube.rotation_degrees.y = turn_speed * elapsed
+    cube.scale = Vector3.ONE * lerpf(1.0 - pulse, 1.0 + pulse, t)
 
 func _on_body_entered(body: Node3D) -> void:
     if body.is_in_group("em_walker") or body.is_in_group("player_body"):
@@ -57,48 +164,4 @@ func _on_body_entered(body: Node3D) -> void:
         queue_free()
 ```
 
-`MeshInstance3D` displays the shape; `BoxMesh.new()` supplies a one-metre cube centred on its origin. `add_child(cube)` places it in the scene. We transform that one node. There are no separate faces to manage.
-
-The cube starts one metre above the study origin. With `rise` at zero, it remains still.
-
-## Translate, rotate, scale
-
-Edit one value on its existing `var` line, then run. Restore it before trying the next change.
-
-| Value | Result |
-| --- | --- |
-| `start = Vector3(1, 1, 0)` | Translate one metre along X. Facing and size stay fixed. |
-| `turn_degrees = 45.0` | Rotate 45 degrees around Y, through the cube's centre. Its size stays fixed. |
-| `size_factor = 1.5` | Scale all three dimensions to 1.5 times their size. The centre stays fixed. |
-
-`position`, `rotation_degrees` and `scale` belong to the instance. The `BoxMesh` still describes the same cube. `Vector3.ONE * size_factor` applies one factor equally along X, Y and Z, preserving its proportions.
-
-## Make the translation move
-
-Restore the starting values, then set `rise` to `1.0`. The cube travels one metre upward in two seconds and stops.
-
-`elapsed += delta` counts seconds. Dividing by `duration` gives the fraction of the journey completed; `minf(..., 1.0)` stops that fraction at one. The final line assigns **start + upward displacement × fraction**. At one second, the cube has risen half a metre.
-
-Set `duration` to `4.0`. The destination stays the same; reaching it takes twice as long. The assertion at the start requires a positive duration and size.
-
-Now combine what you know: keep the rise, set the angle to 45 degrees and the scale factor to 1.5. The larger, turned cube moves upward. Its facing and size remain fixed during that journey. Continuous turning and pulsing develop the same three properties further.
-
-## Try another change
-
-Choose a new angle, size or destination. Predict the result before running it. Change only one property first; then combine two.
-
-## Walk into it: collect the cube
-
-Restore `rise` to zero so the cube stays within reach. Walk into it. It disappears, and `Collected` appears in Output.
-
-The script gives the cube an `Area3D` containing a `CollisionShape3D`. `BoxShape3D` supplies the one-metre detection box. It follows the cube's position, rotation and scale because the sensor is a child of the cube. This area detects overlap; it does not block your movement.
-
-When a physics body enters, `body_entered` emits a **signal**. The `connect` line sends that event to `_on_body_entered(body)`. This function checks that the entering body belongs to the player, then `queue_free()` removes this study and its cube at the end of the frame. An ordinary object entering the area does not collect it.
-
-The museum supplies two player arrangements: the desktop walker uses layer 1 and group `em_walker`; the XR body uses layer 20 and group `player_body`. The sensor's mask listens to those layers. The group check distinguishes the player from other bodies on layer 1. Those names connect this example to the existing museum; we do not rebuild the player here.
-
-Try moving the cube sideways and walking through its former position. Only its new position should collect it. Translation, rotation and scale now affect where an interaction can happen.
-
-This small pickup prints a confirmation and disappears. The installed pickup's score, sound and collection flourish can be added later. Carry **translate → rotate → scale → detect an overlap → collect** into the next hall.
-
-[Working code and native checks](../../../doc/book/iterations/2026-10-06-trans-pre-three-operations/index.html)
+</details>

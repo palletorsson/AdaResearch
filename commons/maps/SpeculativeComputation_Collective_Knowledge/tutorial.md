@@ -1,71 +1,148 @@
-# Does more activity mean more voices?
+# Count contributions and revisions
 
 **Learning elements**
 
-- Event counts
-- Distinct contributors
-- Revision provenance
-- Shared authority
+- Events versus distinct sources
+- Version boundaries
+- Revision without addition
 
-When many marks accumulate, what makes the result knowledge rather than a pile?
+Watch the installed peer tool, then keep the same distinction between a displayed choice and its retained source. In this working copy an arrival is a cube record: source, original position, current position, dispute flag and revision count. The carried sphere edits the first piece only after DISPUTE. Earlier position work now changes a contribution without counting it as a new arrival.
 
-<!-- @peer_production_tool -->
+ADD follows a declared A, A, B sequence. Repeating A increases additions but not distinct sources in the current version. VERSION saves one deep copy of the preceding pieces and empties the current list and source set. `ever` and the lifetime totals remain. When A returns in another version it contributes another participation, but no new lifetime source.
 
-Follow a packet from one of the rim nodes into the central structure. Watch the new facet appear. During one growth cycle, compare a contribution from a node you have already seen with one from a new source. The number of contributions and the number of contributing sources need not increase together. Press FLOW to hold the arrivals. The work can wait while you look.
+REVISE changes a disputed piece's pose and retains its source and original position. The dispute stays open. Attribution to VISITOR reports who used this local control; it does not authenticate an identity or settle an argument. The first piece can also be moved with the sphere. This simulation cannot decide whether the revision is warranted. Another person contesting its reason would require a collaborative process beyond these counters. Capacity is six displayed pieces so the whole example remains inspectable; the installed exhibit supports more. Neither is a networked collaborative editor or a permanent archive.
 
-The exhibit turns contribution into an arrival event. A packet comes from one of twelve positions and adds a piece to a shared form. At sixty pieces this workbench holds its form until you choose VERSION; FLOW starts the arrivals again. Its visible coherence comes from an assembly rule that knows where to place each arriving facet.
+## Continue the student folder
 
-Press COLOUR. The smooth progression from purple to teal gives way to the colours of the sources. Nothing has moved. Some pieces that looked like neighbours now belong to different contributors; distant pieces may share one. Press PIECE to follow a piece back to its numbered rim node. The common form has kept an address for each arrival.
+Keep the files from **A claim has an address** in the same student folder. Add the complete files below; their relative preloads use that carried folder. The sphere, cylinder renderer, bench and pickup adapter are reused without being explained or rebuilt again.
 
-The source makes the counting operation inspectable:
+The supplied [`collective.tscn`](../../../doc/book/studies/postcrisis-lineage/collective.tscn) opens this actual hall and mounts your working copy beside its existing exhibits. It supplies the museum player, lighting and room. In [`collective_museum.gd`](../../../doc/book/studies/postcrisis-lineage/collective_museum.gd), set the `LESSON` preload to your `collective_study.gd` if you used another folder, then run the scene with F6. Grip the point in VR; on desktop use the existing right-click carry/release interaction. Buttons are the museum's supplied `push_button.tscn`.
 
+## Complete new code
+
+### `contributions.gd`
+
+<!-- student-code:contributions.gd -->
 ```gdscript
-_placed += 1
-_edits += 1
-# count distinct contributors this version
-if peer_idx >= 0 and peer_idx < _seen_peers.size() and not bool(_seen_peers[peer_idx]):
-    _seen_peers[peer_idx] = true
-    _contributors += 1
+extends RefCounted
+var pieces: Array[Dictionary] = []
+var previous: Array[Dictionary] = []
+var sources: Dictionary = {}
+var ever: Dictionary = {}
+var additions := 0
+var participations := 0
+var revisions := 0
+var version := 1
+
+func add(source: String, at: Vector3) -> void:
+    pieces.append({"source":source,"original":at,"pose":at,"disputed":false,"revision":0})
+    additions += 1
+    if not sources.has(source): participations += 1
+    sources[source] = true
+    ever[source] = true
+
+func dispute(index: int) -> bool:
+    if index < 0 or index >= pieces.size(): return false
+    pieces[index].disputed = true
+    return true
+
+func revise(index: int, at: Vector3) -> bool:
+    if index < 0 or index >= pieces.size() or not pieces[index].disputed: return false
+    pieces[index].pose = at
+    pieces[index].revision += 1
+    pieces[index]["revised_by"] = "VISITOR"
+    revisions += 1
+    return true
+
+func next_version() -> void:
+    previous = pieces.duplicate(true)
+    pieces.clear()
+    sources.clear()
+    version += 1
 ```
 
-Every accepted facet increments the addition count. The Boolean array _seen_peers lets the same source count only once within a version. On the next version those flags clear while the totals persist. In the earlier display, a number labelled CONTRIBUTORS could therefore outgrow the twelve source positions. That number is now called PARTICIPATIONS. SOURCES counts distinct nodes in this version; EVER counts distinct nodes across versions. The old discrepancy was useful: it showed how a label could quietly turn repeated attendance into an expanding community.
+### `collective_study.gd`
 
-That is a simulation of accretion, not a live collaborative editor. The peers are generated positions rather than people logged into the museum, and the incoming material is accepted without a dispute over its content. The animation demonstrates one way many sources can feed one object while leaving the harder question of validation open.
-
-Collective knowledge needs more than participation counts. A contribution may repeat an error, correct an earlier claim, supply a missing case or disagree with an accepted account. Those actions can add little to a simple count while changing the usefulness of the shared result dramatically.
-
-The previous room kept four viewpoints separate. Here the common centre can make their differences disappear into a continuous object. Switch COLOUR back to ORDER, then recover a piece with PIECE. Its source remains in the record even when the surface no longer shows it. Does the shape preserve a reason for accepting that contribution, or only the fact that something arrived?
-
-Choose a piece and press DISPUTE. Its frame turns red. Press REVISE and watch that same piece turn and change height. The pile has not gained a piece; the revision count has increased. The source is still named, and the change is attributed to VISITOR. The red frame stays. A change has happened, but who agreed that the dispute was settled?
-
-Here revision is a geometric operation we have supplied. It has no evidence to weigh and no argument to answer. The original and previous poses remain in the record, but there is no complete history you can browse. Keeping a name and a trace makes reconsideration possible; it does not perform the reconsideration for us.
-
-Before pressing VERSION, look once more at the disputed piece. The next form starts empty. Its current source count begins again while additions and participations carry on; EVER does not count an old source as a new one. The device keeps only the previous version in memory. What would have to survive for someone else to understand why you changed that piece?
-
-<!-- @the_commons_table -->
-
-Leave the growing helix for the round table. There is no object at its centre to receive another contribution. A small ring of light surrounds an opening. Through it, the floor is still there.
-
-Take a place at the rim, then walk to another. Each little instrument has its card turned towards a different approach. From where you first stood, some of those cards faced away. There is no position from which every account addresses you at once.
-
-One station holds three labelled trays and another marked OTHER. The small spheres have been assigned by a rule. The counts belong to this batch; OTHER holds the specimens that did not meet the three tests. Its name says almost nothing about what they share with one another.
-
-Beside it, five bars stand in order of height. We know how to make that order:
-
+<!-- student-code:collective_study.gd -->
 ```gdscript
-heights.sort()
+extends "study_base.gd"
+const Model = preload("contributions.gd")
+var model := Model.new()
+var arrivals := 0
+
+func _ready() -> void:
+    start("COUNT WHAT ARRIVED",["ADD","DISPUTE","REVISE","VERSION"],[arrive,dispute,revise,version])
+    refresh()
+
+func arrive() -> void:
+    if point.held() or model.pieces.size()>=6: return
+    var source: String = ["A","A","B"][arrivals%3]
+    var i := model.pieces.size()
+    model.add(source,Vector3(-.9+i*.35,1.13,0))
+    arrivals += 1
+    refresh()
+
+func dispute() -> void:
+    if point.held(): return
+    model.dispute(0)
+    refresh()
+
+func revise() -> void:
+    if point.held() or model.pieces.is_empty(): return
+    model.revise(0,model.pieces[0].pose+Vector3.UP*.1)
+    refresh()
+
+func release(at: Vector3) -> void:
+    model.revise(0,(at-Vector3(0,0,.3)).clamp(Vector3(-1.1,1.05,-.5),Vector3(1.1,1.6,.5)))
+    refresh()
+
+func version() -> void:
+    if point.held(): return
+    model.next_version()
+    refresh()
+
+func refresh() -> void:
+    clear_drawing()
+    for piece in model.pieces:
+        block(drawing,piece.pose,Vector3.ONE*.17,Color("d9a592") if piece.disputed else Color("a8c3bd"))
+        label(drawing,piece.source,piece.pose+Vector3.UP*.2,16)
+    point_home = model.pieces[0].pose+Vector3(0,0,.3) if not model.pieces.is_empty() else Vector3(0,1.15,.55)
+    readout.text = "Version %d / pieces %d / sources %d / ever %d
+Additions %d / participations %d / revisions %d" % [model.version,model.pieces.size(),model.sources.size(),model.ever.size(),model.additions,model.participations,model.revisions]
 ```
 
-The instruction acts on a list. The bars give its result a place on the table. From the entrance, the arrangement may have looked settled before you knew what had settled it. The card says which comparison was used. It does not ask whether height was the comparison you needed.
+### `assert_collective.gd`
 
-Continue around. Two pointers face different ways inside one bracket. A model camera aims towards the middle. Cords join small points by several routes. Four little blocks recall defaults the engine supplied. These are familiar operations and incomplete instruments, gathered into a common piece of furniture. Sharing the table has not made them agree.
+<!-- student-code:assert_collective.gd -->
+```gdscript
+extends "assertions.gd"
+const Model = preload("contributions.gd")
+func run() -> void:
+    var model := Model.new()
+    for source in ["A","A","B"]: model.add(source,Vector3.ZERO)
+    expect("arrivals are not sources",model.additions==3 and model.sources.size()==2 and model.participations==2)
+    expect("undisputed revision refused",not model.revise(0,Vector3.ONE))
+    expect("dispute accepted",model.dispute(0))
+    expect("revision accepted",model.revise(0,Vector3.ONE))
+    expect("revision keeps source and original",model.pieces[0].source=="A" and model.pieces[0].original==Vector3.ZERO)
+    expect("revision not addition or settlement",model.pieces.size()==3 and model.additions==3 and model.revisions==1 and model.pieces[0].disputed)
+    model.next_version()
+    model.add("A",Vector3.UP)
+    expect("new version resets only local source set",model.sources.size()==1 and model.ever.size()==2 and model.participations==3 and model.additions==4)
+    expect("previous version kept independently",model.previous.size()==3 and model.previous[0].pose==Vector3.ONE)
+    expect("invalid index refused",not model.dispute(-1) and not model.revise(99,Vector3.ZERO))
+```
 
-The table has no head. The classification still has an author.
+## Predict, run, change one thing
 
-Look back at the helix, where every arrival found a place through one central rule. Here the middle has been left open, but the rules have moved to the rim. Which of them could somebody joining you change? Which would they first have to notice?
+Add A, A, B: expect three additions, two current sources and two participations. Begin another version and add A: expect four additions, one current source, two lifetime sources and three participations. Dispute and move a piece: its source and original pose remain, piece count stays fixed, revision rises.
 
-Perhaps a commons begins with making room for that question. An empty centre gives us somewhere to look through. It does not, by itself, distribute the power to revise.
+The assertion file above runs against your model files. From the project directory, use your Godot executable with:
 
-<!-- @ -->
+```text
+Godot --headless --path . --xr-mode off --audio-driver Dummy --script res://doc/book/studies/postcrisis-lineage/check.gd -- res://doc/book/studies/postcrisis-lineage/assert_collective.gd --no-bridges
+```
 
-The rhizome will make the pattern of connection itself grow. A shared result can have many contributors while its network still develops uneven centres.
+Adjust the two script paths if your student folder differs. A failed assertion is a failed lesson check; `PASS` must be printed and the process must exit successfully. This headless check does not establish headset readability. Also exercise the visible controls in the supplied museum launcher.
+
+Carry onward: **Connections before passages** will reuse these operations.

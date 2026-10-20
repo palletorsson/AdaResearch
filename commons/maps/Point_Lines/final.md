@@ -1,6 +1,14 @@
 # Lines, Networks, Measure
 
-The point gave us somewhere to begin. Now put two positions into relation. The point you could carry becomes an end: moving it changes a span. Soon that span will ask you to walk, forbid you to cross, or gather with another line into a sign.
+<!-- @pairing_point_field -->
+
+Twelve small points wait at hand height. Bring one near another and release it. A line appears between them. Move either end away: the line follows. Other points remain available. A pair can become a chain, a branching arrangement, a shape whose next connection has not yet been chosen.
+
+Two distinct positions determine a straight line; the visible segment keeps only the part between them. Here proximity initiates the connection. It does not require the endpoints to remain close. The hand has made a relation that outlasts the gesture.
+
+No barrier falls when the points join. Making a segment and opening a passage would require two different instructions. For now we can attend to what this one instruction makes available: a connection whose length and direction can change.
+
+The corridor opens. A black enclosure stands ahead, with space to walk around it and doorways through which to enter. Inside, one relation acquires a number.
 
 <!-- @line_black_box -->
 
@@ -14,31 +22,21 @@ Give the segment an order — from here to there — and something new appears. 
 
 Your hand may also keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
 
-Through the side passage: **CAN YOU CONNECT THE DOTS?**
-
-<!-- @line_demo -->
-
-Two black points wait beside a barrier: **DO NOT CROSS.** Bring one close to the other, then let go. Watch for the segment that joins them. What else moved?
-
-The barrier flies apart.
-
-Keep hold of this small beginning: **two distinct points determine a straight line.**[^point-lines-euclid] Here we draw only the part between them: a segment. To keep only what lies between them is already a decision. Move an endpoint. The segment changes length and direction while the connection remains.
-
-*Two points, a distance, a segment, a direction.* They are not four names for the same thing, and the room is the demonstration. A distance is a single number. An infinite line has no length at all. A segment has one because somebody chose two ends. A direction is what is left when you throw the length away. Each is the one before it with something added — and the something is always a body.
-
-Already something else has attached itself to the lesson. Joining two points has opened a passage.
-
 <!-- @do_not_cross_barrier -->
 
-Try crossing where the barrier stood. Before it broke, an invisible collision shape filled the space from the floor to the bar. The space looked open beneath the plank, but you could not pass through it. When it breaks, that boundary stops holding too. Disconnecting the points does not close the passage. After a short interval, the barrier returns, waiting if your body is still in its place.
+Beyond the black room, ten tape barriers form five alternating rows. **DO NOT CROSS** repeats while the path changes sides. The endpoints have become posts; the connecting line has a collision boundary underneath it. The nearest destination remains visible, but ordinary walking must take the longer route.
 
-Connecting the points sends another instruction to the barrier. Someone joined those events in code. Geometry supplies a relation; another instruction gives that relation a consequence for your body. We could have made the connection ring a bell, or left the barrier standing.
+This arrangement resembles a check-in queue. Its turns do not measure our journey. They prescribe it. A line we could lengthen by moving one point has become a fixture that lengthens our own movement.
 
-The words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line's prohibition.
+<!-- @anamorphic_cross -->
 
-You do not have to. It is a police line and a prohibition and somebody put it there, and walking round it costs nothing. But the room has now made the choice available, and *available* is a different thing from *forbidden*, which is what the barrier was pretending to be.
+The queue delivers us to a narrow passage: **× + × + × +**. Crossing an X reduces health. There is no parallel walking route around this passage.
 
-In Coordinates, leaving the target made another arrival possible. Here, joining the points gives us a few seconds of passage. The clock has acquired another task: it puts a prohibition back.
+<!-- @health_cross -->
+
+The following plus restores some health, breaking into a scatter of light. Hurt, recovery, hurt, recovery. Two crossed lines now address a variable in the moving body. The difference is not contained in their resemblance to familiar signs: the room has assigned each a different operation.
+
+On the far side the space widens. The remaining line studies can be approached in several ways. After being directed, we have room to compare a painted instruction with a physical obstruction, a measure with a trace, a relation with the position from which it is seen.
 
 <!-- @redline -->
 
@@ -50,7 +48,7 @@ Ahead, the instruction moves from a barrier to the floor.
 
 <!-- @walk_this_line_marking -->
 
-Across the glass cover of a shallow basin, a black stripe: **WALK THIS LINE.** The glass supports your crossing.
+Across the floor beyond the passage, a black stripe: **WALK THIS LINE.** There is room to follow it or step aside.
 
 Try following it. Then walk alongside it. Cross it at an angle. The stripe stays straight through all three journeys.
 
@@ -116,17 +114,9 @@ The hammer is not a metaphor and not a reward — the same object, still two poi
 
 On the floor: **FOLLOW THIS LINE.**
 
-The mark reaches the wall. It turns upwards and continues across the plaster. You can follow it with your eyes. Your next step meets the wall's collision boundary.
+The mark climbs a solid column, crosses its top and comes down again. We can follow it with our eyes. Continuing along the floor means departing from the instruction and going around the column.
 
-The earlier connection opened a barrier. This line opens nothing. An instruction has reached the limit of the body to which it was addressed. Do you stop, turn, look up? The mark remains available to another kind of following.
-
-<!-- @anamorphic_cross -->
-
-At the exit the passage narrows: **× + × + × +**. Cross the first X and your health falls.
-
-<!-- @health_cross -->
-
-The plus gives some back, opening into a brief scatter of light and a rising sound. Hurt, recovery, hurt, recovery. Two crossed lines can read as a refusal or an offer of care; here those associations have been given access to your body.
+The earlier queue redirected our walking. This painted line changes no collision boundary. An instruction has reached the limit of the body to which it was addressed. Do you stop, turn, look up? The mark remains available to another kind of following.
 
 <!-- @ -->
 

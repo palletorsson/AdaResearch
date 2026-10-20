@@ -2,7 +2,7 @@
 
 The rug is already changing. On the other side of the dividing wall, a board holds one green cell and waits. Two ways of making a pattern occupy the same hall. Begin with the one that has left you time to answer.
 
-Keep the pleasure of the blob. Bring an unfinished question with it.
+The Shader wall kept a changing field behind its surface. This board offers fewer states and a clock you can stop after each answer. Bring the question of what is kept; here we can follow it one neighbourhood at a time.
 
 <!-- @ca_rule_explorer -->
 

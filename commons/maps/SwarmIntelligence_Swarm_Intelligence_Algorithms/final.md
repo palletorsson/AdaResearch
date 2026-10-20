@@ -1,25 +1,21 @@
 # Who keeps the ecosystem going?
 
-When a population survives, how can we tell what kept it alive?
+<!-- @population_account_walk -->
 
-<!-- @ecosystem_simulation -->
+A blue sphere passes your shoulder. Another disappears. Farther across the room, five arrive wearing gold rings. The population is recovering. That sentence is true, but it has not yet said how.
 
-Choose either prey or predators and watch its count alongside its visible behaviour. Follow an encounter with food or another organism, then return to the population readout. A crowded scene can hide a falling population; a count can reveal a change that is difficult to follow one body at a time.
+Hold one of the points. The room pauses around your hand. This body was supplied; the one beside it was present at the beginning. You can carry either to another place. Their histories do not change with their positions.
 
-The organisms move, forage, encounter predators and reproduce. Traits can pass to offspring through a simplified combination and mutation process. The traits are five numbers: a top speed, a turning limit, how far a body can see, and how much it wants to flee and to seek. Predator and prey steer by one rule, push on the difference between the velocity you want and the one you have, with the sign of the wanting reversed. Nothing selects the prey's numbers on purpose; the predators do it by eating. These local events give you one explanation for changes in the population. Births, feeding and losses are happening at particular places, even when the readout reports only a total.
+There are encounters inside the model: feeding, fleeing, pursuit, reproduction. There is also an operation that counts the population and adds bodies when too few remain. It works at another scale. No individual has to request it.
 
-Try alternating your scale of attention. Spend a short interval following an encounter, then a similar interval watching the count. The encounter offers a candidate cause; the count reports an aggregate consequence without identifying its cause. If you cannot connect the two confidently, preserve that uncertainty. A useful observation might be “the prey count recovered while I watched this region”, rather than “this particular birth saved the population”. The smaller statement keeps the evidence available for comparison.
+Take the small black grip and carry its account beside a sphere. Read the columns. Born. Lost. Supplied. Each word puts a different account behind an apparently similar increase. Press SUPPLY ROW. The gold-ringed bodies remain, but their contribution disappears from the calculation. The count no longer reaches the population in front of you. You have changed the account, not removed the support.
 
-There is another explanation to keep alongside it. The model also contains balancing interventions. When prey become scarce, it can add more. It can weaken predators when they become too numerous relative to prey, and it can restore predators under specified conditions. The continuing ecosystem is therefore produced by local behaviour together with rules that watch population totals.
+The record also notes food supplied from outside and pressure applied to predators. These do not immediately add another creature. Their consequences travel through later encounters. A count can be exact while the account remains partial.
 
-This distinction matters across the sequence. A flock followed neighbours; ants read traces; particles pursued remembered scores. Here the model includes a caretaker that operates at a different scale from its organisms. An overall pattern does not tell us which scale supplied the decisive action.
+In the flock, each point responded to nearby movement. In the colony, one body could follow a trace left by another. In the last room, a shared score gathered individual discoveries into a destination. Here the conditions of persistence become another relation: someone has decided when a population is too small, and what will be done about it.
 
-Watch for a population recovery. Beside the living box, the POPULATION SUPPORT record counts prey and predators supplied from outside. Food has its own count; predator pressure reports when a population-level rule is reducing predator health. These marks come from the interventions themselves. A rise in prey accompanied by five supplied bodies tells a different story from a rise with no addition recorded. Neither view alone gives the whole history.
+Care is not a flaw to erase so that autonomy can appear. But autonomy changes its meaning when the support that sustains it is left outside the description. The gold ring asks us to keep that provision in view.
 
-Look back at the organisms after reading the record. Does the same recovery look different now? The intervention has not become more visible in their movements; you have gained another way to account for them. A future comparison could let you turn population care off while keeping the starting conditions fixed. For now the record exposes support without withdrawing it.
+Let the sphere go. If the model was running before you held it, movement resumes. Your hand has also changed this world; the body is elsewhere now. The record cannot make you an observer without consequences.
 
-That comparison need not make intervention shameful. Care, repair and replenishment can be necessary. The question is whether they remain visible when someone describes the result as autonomous. A claim about self-organisation should name the support that makes continued organisation possible.
-
-<!-- @ -->
-
-Machine learning begins by asking what changes across generations. Carry this distinction with you: inherited traits, environmental rewards and the rules that keep an experiment running all shape what can survive.
+Next, we will draw connections. Some can name an encounter between bodies. Others might name an operation that keeps an encounter possible. Which relations will our lines include?

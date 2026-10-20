@@ -1,23 +1,27 @@
 # The route after a stone disappears
 
-What should a traveller do when the route it planned is no longer available?
+Watch the spark reach the other bank. Choose one stone it seems to depend on.
 
 <!-- @impatient_river -->
 
-Follow the spark’s route across the stones. Before pressing the button, choose the next connection you expect it to use. The button sinks a stone belonging to the current route. Watch where the spark goes on its next crossing, and whether it still reaches the opposite bank. The readout’s stone count is the one number that changes.
+Press the button. A stone on the route sinks. The spark may begin another journey from a bank, or stop where it is. For an instant you may still be following the crossing that is no longer there.
 
-A route is a sequence through available connections. Removing a stone changes the graph the search can use; it does not merely make the old drawing look different. The exhibit marks that stone unavailable and asks for another path through the remaining graph.
+Something of that crossing can remain useful. The new route may keep its first steps and change only the middle, or approach the far bank by a connection you had overlooked. Losing one option does not make every earlier step a mistake.
 
-After a removal, compare the crossing you remember with the one the spark now makes. Look for a stretch that remains useful to both. Replanning does not imply that every previous choice was wrong; some connections can survive a local change while another segment must be replaced. If the readout says NO ROUTE, trace the missing connection in your own proposed crossing. This keeps the observation tied to the available stones instead of treating a failed search as a mysterious refusal.
+In the last room the drawing moved while its connections stayed available. Here the record of availability changes. An edge that still seems possible to your eye may lead to a stone the traveller can no longer use.
 
-The connections here come from a spatial rule. Nearby stones are linked, and the banks receive links to nearby stones. The search therefore works with the routes that this constructed graph permits. A gap that your eyes imagine jumping is not automatically an edge, and the spark’s hops are its calculated route, not a promise that your own body can walk it.
+The river was constructed before the spark was asked to cross it. Distances between stones decided most of its links; the banks were given connections into the field. The spark cannot improvise a leap the graph does not contain. Its small hop is an animation of a permitted connection, not evidence that your body could make the crossing.
 
-The exhibit keeps a limited number of stones disabled. As more disappear, older ones can return. A route can consequently change because an option was removed or because an earlier option became available again. Keep both kinds of change in mind when you explain a rerouting.
+Watch a stone return. After the fourth sinking, the oldest of the three previously disabled stones rises again. What looks like the traveller finding a better way may also be the world giving an option back. Its apparent resourcefulness belongs partly to these conditions.
 
-Sometimes there may be no route. That outcome says something precise about the available graph. It does not prove that no crossing could exist with another bridge, another connection distance or another kind of traveller. Search cannot use an option the representation never supplies.
+Sometimes the answer is no route. Stay with the empty crossing. The search has finished its work; the request remains unsatisfied. Asking again cannot supply a missing connection. We might have to build another bridge, restore a stone, or change what kind of passage we are willing to count.
 
-Try a second removal after the new route is established. Predict whether the remaining network has an alternative before asking the algorithm. The search is over before the spark sets off; what you watch is the route it found, not the finding. Which stones do you think it had to consider and pass over before it settled on these?
+Before the spark moves, its route has already been found. We see the chosen crossing more easily than the alternatives considered and left behind. A smooth journey can conceal the search that made it possible.
+
+Leave the stones where they are and change SEARCH RULE. Fewest crossings and least distance ask different things of the same river. A* adds an estimate of what remains. Sometimes the route stays the same while the search changes. Watch the readout: what have we decided a good crossing should cost?
+
+Which part of this crossing belongs to the traveller, and which part have we arranged for it?
 
 <!-- @ -->
 
-Network analysis asks what the arrangement as a whole makes possible: which vertices connect many others, and which only look important in the drawing?
+The next hall looks beyond one journey: what can a vertex's connections tell us about its place in the network?

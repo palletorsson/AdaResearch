@@ -1,121 +1,132 @@
-# Brouwer Intuitionism
+# A witness, then another choice
 
-**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed choice bench appends a 0 or 1 only when you press a button; the diagonal workbench constructs a string differing from every displayed row. These are the reconstruction targets. The checklist and physical proof-block bench below are an earlier proposal, not the current room or a proof checker.
+**Learning elements**
 
-**Learning elements — proposed focus**
+- Chosen finite prefixes
+- Existential witnesses
+- Validation
+- A finite diagonal construction
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+**Short brief:** Carry PointBody and bench. Append chosen bits; waiting appends nothing. A stored 1 supplies a witness index. All stored zeros settle only the finite prefix. Validate before mutation; refuse overflow. Construct diagonal bits and test each disagreement. Preserve the prefix across view changes.
 
-- Finite prefixes
-- Witnesses
-- Open continuations
+Escher checked a completed route. Here the record remains open to another choice. Gödel’s bounded miss also taught us to name the limit of a check: inspecting the stored prefix cannot decide every possible continuation.
 
-Inspect this older checklist proposal alongside the installed finite-prefix and diagonal studies. A recorded action and a mathematical proof require different validation.
+The existing choice bench waits for a press; its row does not grow on the clock. Rebuild that behaviour with an eight-term working copy. The arrays and loops are familiar from Trace. A stored 1 at a named index witnesses “this prefix contains a 1.” No 1 in the entire stored prefix settles that finite question negatively. It does not settle whether an indefinitely continued sequence will ever contain a 1. NO WITNESS YET is an evidence status, not a third truth value.
 
-Declare an intuitionistic proposition.
+Begin with 0, 0, 0. Wait. Nothing is appended. Press 1 and identify the zero-based index 3. `append_bit` validates both value and capacity before mutating the record. The ninth press is refused. Eight is a storage bound; it is not a completed infinity. The PointBody marks the next available slot, or the last slot when full. Its pickup is inherited; the bit buttons remain the only authors of this record.
 
+Then visit the installed diagonal workbench. In the second exercise, DIAGONAL displays four binary rows and constructs d[i] = 1 − rows[i][i]. Every displayed row disagrees with d at a known index. The model validates a square nonempty array of integer bits before constructing the witness. The gold tiles mark those indices. This implements a finite diagonal stage. An infinite argument quantifies over every row of an arbitrary proposed list; rendering four rows is not rendering that infinity.
+
+DIAGONAL changes the view without clearing the chosen prefix. A new 0 or 1 returns to the prefix. RESET clears the prefix and keeps the chosen view. The earlier arrays therefore survive a change of representation rather than being silently recreated.
+
+## Continue inside the museum
+
+Use the existing AdaResearch project with Godot 4.6 and its installed XR Tools. Save these files together under `res://doc/book/studies/foundations-lineage/`. Carry `point_body.gd` and `line_skin.gd` unchanged from Euclid / Non-Euclidean Spaces. Their class construction and pickup were already printed there. Carry `bench.gd` unchanged from Russell. It supplies only geometry, labels, the visible sphere and button wiring; the rule below remains new.
+
+Run the supplied `brouwer.tscn` in that folder with F6. Its `brouwer_museum.gd` launcher opens **Brouwer_Intuitionism** with the existing museum player, room and lighting, then adds your working copy beside the original exhibits. The launcher, `commons/interactables/push_button.tscn` and XR setup are declared infrastructure. No autoload, label, camera or other node is assumed inside your new script: the printed bench creates its own nodes and connects the buttons. This is a session study; it does not replace an installed artifact or carry a live node across hall loads.
+
+The bench synchronizes an unheld frozen sphere on physics ticks. All model positions are local to the unit-scale bench unless a world transform is explicitly passed. Its slab and thin-cylinder lines are visual guides, not a new walkable floor. Use the museum's existing locomotion and pointer/grab controls.
+
+## Complete new files
+
+Read the rule first, then its museum display. There is one `_ready` per script; inherited `start` constructs the bench once. Save each block as the filename above it.
+
+### `witness.gd`
+
+<!-- student-code:witness.gd -->
 ```gdscript
-class_name Proposition
-extends Resource
+extends RefCounted
+const CAPACITY := 8
+var terms: Array[int] = []
 
-@export var name: String = ""
-@export var constructed: bool = false
-@export var steps: Array[String] = []
-```
-
-This resource records a name, a Boolean and strings. Flipping constructed records a program state; it does not make a proposition true or prove it.
-
-Instantiate a construction bench.
-
-```gdscript
-func begin_construction(prop: Proposition) -> void:
-    prop.constructed = false
-    prop.steps.clear()
-    bench.display(prop)
-```
-
-The bench resets every time a proposition begins. No carryover from a previous proof. Each construction starts cold.
-
-Append a step.
-
-```gdscript
-func add_step(prop: Proposition, step: String) -> void:
-    prop.steps.append(step)
-    bench.display(prop)
-```
-
-This appends a string to a checklist. No inference rule is checked.
-
-Validate the construction.
-
-```gdscript
-func validate(prop: Proposition) -> bool:
-    for required in required_steps_for(prop.name):
-        if not prop.steps.has(required):
-            return false
-    prop.constructed = true
+func append_bit(bit: int) -> bool:
+    if bit not in [0,1] or terms.size()>=CAPACITY: return false
+    terms.append(bit)
     return true
+
+func first_one() -> int:
+    return terms.find(1)
+
+func inspect_prefix() -> Dictionary:
+    var index := first_one()
+    return {"finite_contains_one":index>=0, "witness_index":index,
+        "future_claim":"WITNESSED" if index>=0 else "NO WITNESS YET"}
+
+func diagonal(rows: Array) -> Dictionary:
+    if rows.is_empty(): return {"valid":false, "bits":[]}
+    for row in rows:
+        if not row is Array or row.size()!=rows.size(): return {"valid":false, "bits":[]}
+        for bit in row:
+            if not bit is int or bit not in [0,1]: return {"valid":false, "bits":[]}
+    var bits: Array[int] = []
+    for i in rows.size(): bits.append(1-int(rows[i][i]))
+    return {"valid":true, "bits":bits}
 ```
 
-The missing required_steps_for helper would supply a checklist. Testing string membership does not check order, dependencies or logical validity.
+### `brouwer_study.gd`
 
-Report the stored construction status.
-
+<!-- student-code:brouwer_study.gd -->
 ```gdscript
-func attempt_lem(prop: Proposition) -> String:
-    if prop.constructed:
-        return "true"
-    return "not yet constructed"
-```
+extends "bench.gd"
+const Witness = preload("witness.gd")
+var model := Witness.new()
+var rows: Array = [[0,0,1,1],[1,0,1,0],[0,1,1,0],[1,1,0,1]]
+var show_diagonal := false
 
-Not yet constructed is a status message, not a third truth value. Classical logic does not provide an algorithm deciding every proposition. This function implements neither classical nor intuitionistic logic.
+func _ready() -> void:
+    start("BROUWER / PRODUCE THE WITNESS", ["0", "1", "DIAGONAL", "RESET"],
+        [choose.bind(0),choose.bind(1),diagonal,reset])
+    refresh()
 
-Light the proposition when constructed.
+func choose(bit: int) -> void:
+    if point.held(): return
+    show_diagonal = false
+    model.append_bit(bit)
+    refresh()
 
-```gdscript
-func _on_prop_constructed(prop: Proposition) -> void:
-    var light: OmniLight3D = lights[prop.name]
-    light.light_energy = 2.5
-    construction_chime.play()
-```
+func diagonal() -> void:
+    if point.held(): return
+    show_diagonal = not show_diagonal
+    refresh()
 
-Constructed propositions glow. Unbuilt ones stay dim. The room is a topology of what the learner has actually made.
+func reset() -> void:
+    if point.held(): return
+    model.terms.clear()
+    refresh()
 
-Offer a palette of building blocks.
+func bit_at(bit: int, at: Vector3, marked: bool = false) -> void:
+    block(drawing,at,Vector3(0.18,0.045,0.13),Color("d29d55") if bit else Color("618da9"))
+    label(drawing,str(bit),at+Vector3.UP*0.09,19)
+    if marked: block(drawing,at+Vector3(0,-0.015,0),Vector3(0.23,0.01,0.18),Color("ffda88"))
 
-```gdscript
-func present_blocks(panel: Node3D) -> void:
-    for block_name in block_library:
-        var block := preload("res://commons/artifacts/foundations/proof_block.tscn").instantiate()
-        block.set_name(block_name)
-        panel.add_child(block)
-```
-
-This proposes instancing block scenes; it supplies no pickup, assembly or proof-validation behaviour. The installed hall instead lets the visitor choose bits and inspect a diagonal witness.
-
-Refuse to finalize without all steps.
-
-```gdscript
-func _on_finalize_pressed(prop: Proposition) -> void:
-    if validate(prop):
-        lock_proof(prop)
+func refresh() -> void:
+    clear_drawing()
+    if show_diagonal:
+        var d: Array = model.diagonal(rows).bits
+        for y in rows.size():
+            for x in rows[y].size():
+                bit_at(rows[y][x],Vector3(-0.75+x*0.3,1.04,-0.48+y*0.21),x==y)
+        for i in d.size(): bit_at(d[i],Vector3(-0.75+i*0.3,1.04,0.45))
+        point_home=Vector3(0.95,1.18,0.45)
+        readout.text="A finite diagonal witness\nNew row: %s\nRow i differs at position i."%str(d)
     else:
-        show_missing(prop)
+        for i in model.terms.size(): bit_at(model.terms[i],Vector3(-1.05+i*0.3,1.05,0))
+        point_home=Vector3(-1.05+mini(model.terms.size(),7)*0.3,1.27,0)
+        var report := model.inspect_prefix()
+        readout.text="%d / %d stored; no automatic next bit\nFinite prefix has 1: %s; index %d\nContinuation: %s"%[
+            model.terms.size(),model.CAPACITY,str(report.finite_contains_one),report.witness_index,report.future_claim]
 ```
 
-Finalization either locks the proof or lists the missing steps. Errors are named, not silent. The rule is that claims require construction.
+## Predict, build, check
 
-Intuitionistic logic still uses contradiction to establish negations; double-negation elimination is unavailable in general. Florensky Paraconsistent next distinguishes conflicting reports from the consequences they license.
-<<</MAP>>>
+The array is the record of choices already made. The inspection loop searches that record for a 1 and returns its index as evidence. Validation runs before `append`, so rejected input cannot partly change the record. The diagonal loop has a different purpose: it constructs a new bit that differs from each row at its own indexed position.
 
-Count constructed propositions on a tally.
+Make eight zeros. Predict the finite answer and the continuation status separately. Clear, append three zeros and a 1, and return the witness index. Invalid values and a ninth append must leave the record unchanged.
 
-```gdscript
-func update_tally(label: Label3D) -> void:
-    var built := 0
-    for p in propositions:
-        if p.constructed: built += 1
-    label.text = "%d / %d constructed" % [built, propositions.size()]
-```
+For the diagonal variation, flip every diagonal entry of the supplied rows. Predict that every output bit flips too; assert disagreement with row i at position i for both versions. Supply a ragged array and refuse it. A displayed “constructed” flag without these checks would not establish the property.
 
-The tally counts true constructed flags. Its reliability depends on validation that this sketch has not supplied.
+The next hall retains incompatible reports. An absent witness and two opposed reports will be different data states, with different consequences.
+
+Reference: [Joan Rand Moschovakis, Brouwer's Notion of Choice Sequence and Its Descendants](https://www.math.ucla.edu/~joan/Oslonewzoom2022handout.pdf). The finite binary bench is our teaching model.
+
+The automated reconstruction tests extract the printed files, add only these declared carried dependencies and run native Godot assertions. They use synthetic interaction. They do not establish human learning or headset reach.

@@ -1,23 +1,21 @@
 # Directions left for someone else
 
-How can an ant leave useful directions without knowing the whole journey?
+<!-- @ant_colony_walk -->
 
-<!-- @AntColonyV2 -->
+A blue mark passes beneath your feet. A rose mark runs beside it. The spheres move at the height of your hand. You can stand inside the field that they read.
 
-Watch an ant move out from home towards one of the food anchors. Then follow returning traffic along the same general connection. Look for a place where a fresh trail meets a fading one. The trace can stay present after the ant that deposited it has passed.
+Follow one without a green cube. It is looking for food. It reads the food trail while leaving a home trail behind. At the food ring the cube appears and the direction reverses. Now the same body reads home and leaves food. What it gives another traveller depends on where it has just been.
 
-The two journeys use different information. A foraging ant seeks the food trail while leaving a home trail. A returning ant seeks the home trail while leaving a food trail. What one traveller deposits can therefore help another traveller going the other way.
+In the previous room, the returning point knew where home was. Here no steering instruction names that destination. Three nearby samples ask which way has the stronger trace. The point can miss a route. Its limited view has consequences even when its rule executes correctly.
 
-Attend to a traveller near a destination, where the outward and returning journeys meet. A destination is more than a bright place to reach: arriving there changes what information that ant will seek and leave on the next stretch. If you lose the individual in the traffic, follow the two directions of travel instead. The relation still makes sense at the route level, while the state change belongs to individual arrivals.
+Pick it up. The room pauses while your hand holds it. Release it elsewhere. You have moved one body without moving the marks that led it there. Its next decision joins a history made by other movements.
 
-Each ant samples three nearby directions and turns according to the signals it encounters. Reaching a destination changes its state and reverses the relationship between what it seeks and what it leaves. Its trail energy diminishes along the journey and is renewed at home or food. The ground holds local numerical traces rather than an explicit itinerary.
+Replace the points. The floor keeps its traces. A new population starts among directions it did not make. Clear the field as well and that inheritance disappears. These two buttons make different beginnings.
 
-This coordination through a changed environment is called stigmergy. It lets individual acts affect later acts without requiring a central announcer. The previous room separated individual rules from the population picture; here the trail makes the connection between them visible.
+The marks fade. Fresh passages strengthen them; a traveller's strength declines until it reaches a destination again. A route persists through repeated use and replenishment. A bright route is therefore evidence of this process. Brightness alone does not tell us that the route is shortest, fair or worth following.
 
-This is a foraging simulation. Its title invites a connection to ant colony optimisation, but an attractive trail is not a proof that a shortest route or an optimal travelling-salesman tour has been found. Such a claim would require a specified problem, an objective and a comparison with alternatives.
+We call this indirect coordination stigmergy. The word names the way an action changes a shared environment that can affect a later action. It does not give the spheres a common intention. Nor does their coordination explain a human society merely because we also inherit paths.
 
-Compare the two food directions instead of assuming the most prominent path tells the whole story. Which connection currently receives more reinforcement? Which parts of the field preserve possibilities that are receiving less traffic? A route’s visibility depends partly on its history of use.
+You may walk across the brightest trace without affecting it. This version gives your steps no weight in the field. Your hand can move a point; your foot cannot erase a mark. The room admits you through particular operations. Standing inside the model helps you notice which of your actions it has not learned to answer.
 
-<!-- @ -->
-
-Particle swarms next move memory into each agent’s best position and a best position shared by the population.
+In the next room, a point keeps a remembered position. The question changes from what a place retains to what a body carries as its best encounter.

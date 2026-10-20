@@ -1,25 +1,27 @@
 # The price of one more route
 
-Which connection can you remove without separating anyone from the network?
+A line turns yellow. A green connection appears over it. The next choice waits.
 
 <!-- @mst_visualization -->
 
-Watch the next edge considered by the display: it turns yellow. Before anything else happens to it, trace whether its two endpoints are already connected through accepted edges. If they are not, a green line is laid along it. If they are, nothing more happens: the yellow stays, and the display moves on. A rejection is never marked here, so the tracing is yours to do.[^red] An edge can look short and useful while adding no new connection between the groups that remain separate.
+Before the display decides, follow the connections already kept. Can they carry you between the candidate's two ends? If they can, the new line would close a cycle. For the task we gave this procedure, that is a reason to leave it out.
 
-The default procedure is Kruskal’s algorithm. It considers edges in increasing order of weight and accepts an edge when that edge joins two different components. If the endpoints are already joined, the candidate would complete a cycle and is rejected. A small structure called union-find tracks which vertices already belong to the same component.
+The task is exact: connect every vertex at minimum total weight. Here those weights were calculated from distances in the generated drawing. They do not include the effort of a particular journey or the cost of losing a connection tomorrow.
 
-When an edge is left yellow, trace the accepted route between its endpoints and notice how that route completes the would-be cycle. The rejection has a structural reason even if the edge’s weight is small. When an edge is accepted, identify the two previously separate groups it joins. Alternating these two checks helps you follow the algorithm’s decisions without needing to remember every edge considered earlier or interpret the final green network all at once.
+Nine chosen edges keep ten vertices connected. The picture still contains other lines. Some were considered and refused; others were never reached before the tree was complete. The final picture does not give all these absences the same history.
 
-Continue until the selected edges span the connected graph. A tree connects its vertices without cycles; between each pair there is one selected route. With the given edge weights, Kruskal’s rule produces a spanning tree of minimum total weight. “Minimum” refers to that sum, not to every traveller’s individual journey.
+In the smaller study, the point has kept its body. The question around it has changed. We have set aside the directed records and declared two-way links with build costs. Follow the cheap tree until it has nothing spare.
 
-Compare a yellow edge with the green route now needed between its endpoints. Removing a direct connection can lower the cost of maintaining the whole network while lengthening a particular trip. The criterion that made the tree economical does not make each path shortest.
+Now break one connection.
 
-Now imagine one selected edge failing. In a tree, removing an edge separates the structure into two components. A cycle that looked redundant under the construction budget could have supplied a second route. Redundancy changes meaning when the question changes from cheap connection to surviving a failure.
+The arrangement was economical. Three vertices become unreachable from the start. Nothing in the earlier answer promised otherwise. A tree has one route between each pair, and each selected edge is a place where that route can be lost.
 
-Suppose you had the cost of one extra edge to spend once the tree is complete. Which of the yellow edges would you restore, and whose journey or reliability would improve? The minimum tree is the baseline in front of you; the objective that would spend on it is yours to name.
+Add the refused connection between 4 and 5. The separated group becomes reachable again. An edge that contributed nothing to the minimum-cost objective now does something we need. The word “redundant” had been waiting for us to say what had to survive.
+
+There is a pleasure in the spare: room to return another way, to keep going when a preferred connection fails. There is also a limit to its promise. A different break can still strand the last vertex on a branch. We have improved a particular arrangement under a particular failure. We have not made it invulnerable.
+
+Keep the spare visible beside the cost. Neither number can decide for us whose interruption matters, how long someone can wait, or what kind of loss we are prepared to accept. Those choices preceded the clean result and remain after it.
 
 <!-- @ -->
 
-Flow adds another constraint. A route may exist and still be unable to carry everything trying to pass through it.
-
-[^red]: The artifact’s registry entry promises that rejected cycle-forming edges glow red (`commons/artifacts/registry/algorithms_misc.json`, line 5357). The scene never does it: the call that would colour them is commented out and the export for that colour is unused. What you see is what the code does, not what its description says.
+The next hall lets something travel through the network. Even when every destination can be reached, a narrow connection may not carry everything trying to pass.

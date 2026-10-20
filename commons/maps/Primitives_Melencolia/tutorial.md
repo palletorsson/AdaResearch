@@ -9,7 +9,7 @@
 
 ## In the museum
 
-Dürer's objects gather in the museum's Melencolia hall. Our tutorial closes this sequence with a smaller task: make an arrangement from two instances of your cube and the familiar sphere point. The reflective text can ask what geometry promises; the tutorial gives you enough control to make an arrangement of your own.
+The museum's Melencolia hall adapts Dürer's objects and now substitutes a skull for the main seated figure. The smaller winged figure, tools and solids remain. This is a labelled Ada variation, rather than an exact reconstruction of the engraving. Our tutorial closes this sequence with a smaller task: make an arrangement from two instances of your cube and the familiar sphere point. The reflective text can ask what geometry promises; the tutorial gives you enough control to make an arrangement of your own.
 
 There is no new mesh recipe here. Keep CubeBody from Cube and PointBody from the earlier point lessons.
 
@@ -65,7 +65,7 @@ Show the arrangement to someone who has not seen your script. Locate the stored 
 
 Run your script and check that changing the copy leaves the source intact, that the selected face has area, and that each sphere keeps its own mesh. Then change one choice and predict the result before running again. Successful execution is evidence about the program; explaining and transferring the choices gives evidence about what you learned.
 
-Carry CubeBody and PointBody into Transformation. A body that you can place is ready to become a body whose position, rotation or scale changes over time.
+Save this arrangement and its CubeBody and PointBody files. In [Trans_Pre](../Trans_Pre/tutorial.md), work on a copy of lesson.gd: the arrangement gives way to one whole-body cube. A small BoxBody class uses Godot's centred BoxMesh instead of the face-list CubeBody. The tutorial names that change, including the different origin, and shows each edit. Placement, construction and the running clock meet as position, orientation and size begin to change.
 
 
 [Current lesson.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Melencolia/lesson.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

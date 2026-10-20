@@ -1,65 +1,64 @@
-# Polyhedra: source and further calculations
+# Polyhedra: construction, support and passage
 
-This reference supports the encounter in final.md and the tutorial's return visits. It builds on Triangle's indexed faces and prepares the mesh assembly in Point_Animatedcube. Source excerpts below describe the installed implementation; the mathematical functions are separate reference calculations, not live room readouts.
+This reference follows the current tetrahedron/wedge hall. The mathematical calculations below are reference calculations, not live readouts.
 
-## Four positions, two constructions
+## Alignment creates a physical solid
 
-[grab_trihedron.gd](../../primitives/trihedron/grab_trihedron.gd) constructs four positions and three faces, all sharing vertex 0. Its default wedge shape leaves the rim triangle undrawn. All figure configurations retain that three-face connectivity. The name `regular` changes proportions; it does not add a fourth rendered face.
+[`align_solid.gd`](../../artifacts/primitive_encounters/align_solid.gd) provides both opening constructions. Releasing the displaced vertex within 0.12 m of the target completes the authored form, creates its pickable rigid body and enables gravity. A farther release leaves the construction unfinished. The tetrahedron already has tetrahedral connectivity; the target accepts the particular regular proportions. The wedge target restores a triangular prism. A target test is not a general proof that a mesh is a valid solid.
 
-```gdscript
-[0, 1, 2]
-[0, 2, 3]
-[0, 3, 1]
-```
+[`geometry.gd`](../../artifacts/primitive_encounters/geometry.gd) supplies the visible surfaces and convex collision geometry. These have separate jobs: a face list draws the boundary; the physics representation controls contact.
 
-The separate collision shape is a ConvexPolygonShape3D through the four positions. It closes their convex hull. The leading identity comment's older description of a quad base does not match the face-building function; a three-point rim would require a triangular base.
+## A corner, an opening, a movable apex
 
-[grab_tetrahedron.gd](../../primitives/tetrahedron/grab_tetrahedron.gd) uses scaled sign combinations `(1,1,1)`, `(1,-1,-1)`, `(-1,1,-1)`, `(-1,-1,1)` and four faces:
+The placed [`corner_tetrahedron.gd`](../../artifacts/primitive_encounters/corner_tetrahedron.gd) occupies cell (2, 17), offset towards the meeting walls. It adds a solid to the corner; it does not subtract the room. This replaces the earlier map-wide simplex-corner configuration.
 
-```gdscript
-[0, 2, 1]
-[0, 1, 3]
-[0, 3, 2]
-[1, 2, 3]
-```
+[`grab_trihedron.gd`](../../primitives/trihedron/grab_trihedron.gd) renders three triangular faces sharing a vertex. Its convex-hull collider closes the undrawn rim. The boundary plate exposes that difference; the editable pyramid keeps a vertex available for continuing alteration. A visible opening does not guarantee physical passage.
 
-Its edges have equal length. A general tetrahedron need not be regular. Both scenes are pickable and may snap to nearby shelf points. Neither placed scene supplies an alternate material, so its inherited material-button handler is not a usable surface toggle here.
+## A central bank follows the grid
 
-Godot distinguishes [solid convex collision shapes](https://docs.godotengine.org/en/4.6/classes/class_convexpolygonshape3d.html) from [triangle-based concave shapes](https://docs.godotengine.org/en/4.6/classes/class_concavepolygonshape3d.html). The latter are chiefly appropriate for static geometry. Choosing a collision representation requires considering the moving body's physics, not only matching a visible hole.
+Five existing `prism_block` objects, with `grain:solid` and uniform scale 2, form the stopper collection. Anchors are (5, 24), (7, 24), (9, 24), (11, 24), (13, 24); each has `offset:0.5,0,0.5`. Their two-metre footprints therefore occupy pairs of whole grid cells. The bank covers columns 5–14, rows 24–25, and is two metres tall. The original static concave collider scales with each visible prism.
 
-## A simplex fitted to the room
+The main floor runs from columns 2 to 17. Columns 2–4 and 15–17 remain clear beside the bank: three metres each. This is the current interpretation of the requested spacing, following the clarification that the blockers should be central and the climbing wedges should come afterwards at the sides. It replaces the earlier interpretation of a three-metre landing between opposing ramps.
 
-The museum's [corner builder](../../scenes/em/em_simplex_corners.gd) reads nine `map_info.museum.simplex_corners` entries in this map. Each supplies a floor-corner coordinate, two inward signs, a reach and a pink finish (`#ee5599`). All use the museum wall height, currently 4.5 m. Main-hall reaches are 1.5 m; side-room reaches are 1.1 m, with 0.9 m beside a doorway. These fixed architectural pieces have no grab or resize control.
+## Forward side ramps onto a shared platform
 
-The four local vertices are the floor corner, the two floor intercepts and the upper wall junction:
+The platform spans columns 2–17 and rows 30–32: 48 structure-`2` cells form a 16 × 3 m landing. `map_info.museum.wall_height: 3` makes its walking surface one metre above structure `1`. Walls use explicit `w`; the rock enclosure remains walled.
 
-```gdscript
-var points := PackedVector3Array([Vector3.ZERO, Vector3(sx * reach, 0, 0),
-    Vector3(0, 0, sz * reach), Vector3(0, height, 0)])
-```
+Ten stock [`walkableprism.tscn`](../../scenes/mapobjects/walkableprism.tscn) units make the approaches and descent. Each is one metre wide, one metre high and two metres long after its baked rotation, with a static concave collider. The museum's `_stamp_wedge` reads the neighbouring floor height.
 
-Four triangular faces close the mesh; the same points define a `ConvexPolygonShape3D`. The three edges from the floor corner are mutually perpendicular. This is a right tetrahedron, not the regular equal-edge tetrahedron on the plinth. Its volume is `reach * reach * height / 6.0`. Rendering describes the boundary; the convex collision shape treats the enclosed volume as solid for colliding simulated bodies.
+| Purpose | Cells (x, z) | Utility | Direction |
+| --- | --- | --- | --- |
+| Left side approach | (2, 29), (3, 29), (4, 29) | `wp:0` | Climb +Z |
+| Right side approach | (15, 29), (16, 29), (17, 29) | `wp:0` | Climb +Z |
+| Far descent | (8, 33), (9, 33), (10, 33), (11, 33) | `wp:180` | Climb −Z; walking +Z descends |
 
-The corner builder checks that both backing walls are continuous and the bordering cells are floor. It rejects cuts across a doorway. Navigation reserves the corner footprint, while trim and automatic service props avoid the fill. The pink material belongs to each piece and does not mutate the shared wall material. The map's underlying grid cells and existing artifacts are unchanged.
+Three adjacent units form each three-metre-wide side approach. The centred descent uses four. The `wedge_palace#layout:map` anchor moves to (9, 31); it builds no duplicate meshes. The separate standalone artifact remains available elsewhere.
 
-## A prism's grain and its retained collision
+Short inner walls at columns 5 and 14, rows 27–29, hold the ramps beside the existing outer walls. The central baffle and the old transverse ramp arrangement are removed. The broad platform reaches both outer walls, so an ordinary grounded walk cannot bypass it on flat floor. The central bank and side ramps remain successive encounters. Jumping, teleporting and flying are outside this route claim.
 
-[prism_block.gd](../../primitives/prismes/prism_block.gd) changes visible geometry for `grain:solid`, `quartered` and `shell`, the three values already placed in this room. [The scene](../../primitives/prismes/prism_block.tscn) retains one StaticBody3D with its original ConcavePolygonShape3D. That surface is closed like the original prism; it has no cutouts corresponding to gaps in the shell drawing. This is a retained surface collider, not the trihedron's convex-hull implementation.
+## Sculpture and plinth model on the landing
 
-The museum's four `wp` utilities instantiate the walkable prism through `endless_museum.gd::_stamp_wedge`. Rise and run are scaled, with lower bounds preventing collapsed dimensions. Width is one metre; the source scene's baked orientation must be included when reading the dimensions. Neighboring floor heights, join continuity and the player's movement settings still determine a usable ascent.
+`wedge_column:0:0#offset:0.5,0,0#plinth:0#pin:1` at (6,32) places the sculpture centre at (6.5,32). Six instances of `prism_block.tscn` retain their source mesh, material and static concave collider. Each is uniformly scaled to 0.65. Pairs rotate ±90° about Z and meet at their bases; three paired modules produce a 1.30 m wide × 0.65 m deep × 1.95 m high column. Point-contact stacking is authored and fixed, not a rigid-body equilibrium test.
 
-## Extrusion and instruction
+`wedge_mouse_model:0:0#plinth:0#pin:1` at (13,32) builds a 2.8 × 1.0 × 0.82 m plinth. Its front edge at z=31.5 leaves the existing platform crossing clear.
 
-[concrete_barrier.gd](../../artifacts/concrete_barrier/concrete_barrier.gd) sweeps a Jersey-style profile along local X:
+A 5 × 3 cell maze has an origin of (-0.80,-0.45) in model X/Z and cells of 0.36 × 0.30 m. Fourteen undirected passages connect all fifteen cells, with branches, dead ends and cheese at cell (4,1). The western boundary is open at row 1. The remaining closed edges create 23 independently grabbable right-triangular walls. The authored cheese position is (0.82, TOP + 0.003, 0).
 
-```gdscript
-var outline := MF.jersey_outline(base_width, top_width, barrier_height)
-body.mesh = MF.extrude_profile(outline, barrier_length, barrier_height)
-```
+Wall base thickness is 0.08 m, height 0.24 m and length 0.30 or 0.36 m. Reversing the former quarter-turn about Z puts four of the six vertices on the plinth and the other two at the upper ridge. The broad base, visible mesh and convex collider agree. Shape margins remain 1 mm. Construction pieces freeze where released; their standing arrangement is authored, not a physics balance test.
 
-The twelve placed sections request lengths of 1 m, height 0.85 m, base width 0.60 m and `blocking:1`. The hull generated by `body.mesh.create_convex_shape()` can span details of that profile. The default elsewhere remains non-blocking unless configured.
+The mouse is one brown PrismMesh, 0.16 × 0.10 × 0.09 m, with a capsule movement proxy (radius 0.032 m, height 0.09 m). The cheese is one gravity-enabled symmetric wedge: 0.18 m base width, 0.14 m depth and 0.17 m height, with its ridge centred at local x=0.
 
-[street_sign.gd](../../artifacts/street_sign/street_sign.gd) supplies STOP plus the placed `ahead`, `left`, `right` and `both` arrow configurations. The sign's front is local +Z; the five placements rotate it 180 degrees. No collision object is added. The arrows are geometric marks, not pathfinding results or visitor controls.
+The only control is `joystick_zero.tscn`, at (-1.24, TOP + 0.02, 0), standing on the plinth behind the mouse. Its basis columns are (+Z,+X,+Y), converting the scene's default forward-pointing stick into an upright stick. For degree readings `(x,y)`, movement is `joystick.basis * Vector3(x,-y,0) / 45`, limited to unit length. Both the physical grab proxy and pointer events therefore steer forward/right consistently. Avatar controls are unchanged.
+
+Walking speed is 0.24 m/s; gravity is 3 m/s²; the floor angle is 50° and snap length 0.025 m. `move_and_slide()` resolves the current geometry. There are no jump, HOME or RESTORE buttons and no large panel. An off-table mouse returns after 0.7 seconds, preserving moved walls. Holding a wall or the cheese pauses steering. Re-entering the hall restores the original layout; no layout is saved to disk. Arrival is a proximity result for the test harness; it does not steer or finish the visit automatically.
+
+The maze is spatially inspired by Theseus; this implementation contains no search policy, stored route or learning mechanism.
+
+## Signs and retaining profiles
+
+Four existing [`street_sign.gd`](../../artifacts/street_sign/street_sign.gd) instances mark the route. STOP at (9, 23) and a blue double arrow at (10, 23) precede the central bank. Blue ahead arrows at (3, 26) and (16, 26) indicate the later ramps. All face the entering body through a 180-degree rotation. They have no collision: the forms constrain or support movement; the signs supply instructions.
+
+Eighteen [`concrete_barrier.gd`](../../artifacts/concrete_barrier/concrete_barrier.gd) sections surround the basin. Each requests a 1 m length, 0.85 m height, 0.60 m base width and `blocking:1`; the basin retains a floor and its small diamond chain. The rock box remains at (22, 31), with the scanner at (22, 35). The scanner's moving cyan plane does not currently produce the separate cross-section display.
 
 ## Count a closed surface
 
@@ -102,8 +101,4 @@ The first assumes a regular tetrahedron and a nonnegative edge length. The secon
 
 ## Scope of verification
 
-The existing `commons/testing/probe_polyhedra_flow.gd` loads the room's barrier/sign placements through the museum stamper. It tests an isolated ascent with the museum wedge builder and supplied capsule motion. It does not establish full-room accessibility, live tracked-hand collision, scanner measurements or visitor comprehension. The dated iteration record holds the current run and remaining checks.
-
-## Museum corner construction — review clarification, 24 September 2026
-
-The chapter follows the endless museum build. Its pink architectural corners are created by `endless_museum.gd` through `em_simplex_corners.gd`, reading the map's `museum.simplex_corners` configuration. They are part of the room, not independently placed artifact tokens. A grid-only load does not construct those corners. The chapter's small held polyhedra and the architectural corner therefore need separate source lookup paths.
+The [wedge-grid-route trial](../../../doc/book/iterations/2026-10-17-wedge-grid-route/index.html) uses the real museum, floor rays and the native CharacterBody walker to measure the three-metre side passages and check both detours around the bank, side-ramp ascents, the landing, descent, blocked flat bypasses and continued access to the rock room and exit. Rendered captures record the signs and corridors. Earlier alignment and desktop/XRTools pickup checks remain in the primitive-encounters trial. Headset comfort, Quest performance and unprompted recognition of the route remain wearer checks.

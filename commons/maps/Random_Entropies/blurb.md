@@ -1,0 +1,1 @@
+Pink and black chairs wait beside a low divider. A door closes, a cup cools, a chair becomes difficult to distinguish through glass. The word entropy follows us, but the question changes with every object.

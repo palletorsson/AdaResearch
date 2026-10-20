@@ -8,17 +8,9 @@ A point waits inside a metal square. Carry it sideways. Release it. Try carrying
 
 It has a place in this room, yet keeps returning to a surface with no depth. The frame marks a limit you can see. The returning coordinate exposes another one.
 
-At its first appearance, two draws chose x and y. After that, there is no new lottery on release. The point's script repeatedly takes its current position and clips it:
+At its first appearance, two draws chose x and y. After that, there is no new lottery on release. Its current coordinates are repeatedly clipped to the frame. Local Z is set to zero.
 
-```gdscript
-var clamped := Vector3(
-	clamp(pos.x, -area_half_extent, area_half_extent),
-	clamp(pos.y, -area_half_extent, area_half_extent),
-	0.0
-)
-```
-
-Read the last line again. There is room in the vector for a third number. The code keeps writing zero there.
+Stay with that zero. There is room in the vector for a third number. The code keeps writing zero there.
 
 That zero belongs to the point's local frame. Turn the whole artifact in the museum and its plane turns with it. We have met local and world coordinates before; now their difference determines which movement survives your hand. Within the square, x and y can keep your alteration. Beyond its edges, the excess is clipped. Depth is discarded each process frame.
 
@@ -34,14 +26,7 @@ The shells help. Each has a radius of half the stated spacing. Two centres at th
 
 Press REDRAW. The pair of clouds returns. Press NEW SEED and look again. The arrangement changes, but the right-hand spacing survives the new draw.
 
-The left frame keeps each uniformly proposed position. On the right, a candidate is compared with the centres already admitted. Only this condition lets it join them:
-
-```gdscript
-if min_dist >= blue_noise_min_dist:
-	pts.append(candidate)
-	placed = true
-	break
-```
+The left frame keeps each uniformly proposed position. On the right, a candidate is compared with the centres already admitted. It joins them only if its nearest accepted neighbour is at least the stated distance away.
 
 The candidate's own coordinates are insufficient to decide its place. Its possibility now depends on who arrived before it. Earlier centres stay where they are; the algorithm neither negotiates with them nor rearranges the group.
 
@@ -59,14 +44,7 @@ Return to the spaced rule. Carry a point into another's shell.
 
 The red arrives. A count changes. Nothing in the sampling script pushes the pair apart. The distance was a condition of admission; it has not become a force that keeps the neighbours separated.
 
-```gdscript
-if a.position.distance_to(b.position) < blue_noise_min_dist - 0.001:
-	touching += 1
-	bad[i] = true
-	bad[j] = true
-```
-
-This passage watches. It counts pairs closer than the spacing minus a one-millimetre tolerance. It writes no replacement position. Compare it with the zero that kept reclaiming the first point's depth.
+The observer watches. It counts pairs closer than the spacing minus a one-millimetre tolerance. It writes no replacement position. Compare it with the zero that kept reclaiming the first point's depth.
 
 Release the point, then RESTORE. The cloud returns to the positions recorded when it was generated. That return is available as an action; it does not make the original arrangement inevitable.
 
@@ -79,11 +57,6 @@ The red shells could register your alteration without undoing it. That is a diff
 Walk around the little field of needles. Let your eye follow a row, then cut across it. There are ten thousand bars here. The grid has already given each one an address. Chance decides how far it rises.
 
 The same drawn value gives a bar its height and its place along a colour gradient. Tall and pale can arrive together because one number has been dressed twice. This is something we brought from the colour halls: an arrangement becomes readable through the choices that make its values visible.
-
-```gdscript
-var random_val = _rng.randf() # 0.0 to 1.0
-var height = random_val * max_height
-```
 
 The spacing bench let a neighbour influence whether a new centre could appear. These bars do not consult adjacent heights. Every address receives a draw. A ragged-looking surface has been made from a perfectly regular allocation of places.
 
@@ -103,23 +76,13 @@ We are not obliged to hear these as damaged signals. A hiss can be a material to
 
 In the sculpture, a row's height comes from a prescribed curve, disturbed by a random multiplier and clipped to the display's range. A tall plateau can therefore be the place where different large values meet the same ceiling. The apparent agreement of their tops deserves a second look.
 
-The sound is built elsewhere. At the BROWN setting, a stored value receives a small part of the next draw:
-
-```gdscript
-_brown_state = clampf(_brown_state + white * 0.02, -1.0, 1.0)
-value = _brown_state * 3.5
-```
+The sound is built elsewhere. At the BROWN setting, a stored value receives a small part of the next draw. The result is bounded before it is made louder.
 
 The previous state participates in what comes next. A neighbour has become a previous moment. Notice the bounds here too: accumulation can meet a limit even though new draws continue arriving.
 
-Try VIOLET. Its short passage keeps the previous draw in order to subtract it:
+Try VIOLET. It keeps the previous draw in order to subtract it from the current one.
 
-```gdscript
-value = (white - _previous_white) * 0.9
-_previous_white = white
-```
-
-Keeping something from the past does not always make the next moment more similar. Here, what survives into the output is a difference. The two lines give us another way to hear the relation between memory and change.
+Keeping something from the past does not always make the next moment more similar. Here, what survives into the output is a difference. That subtraction gives us another way to hear the relation between memory and change.
 
 These are the shipped filters behind the names. The curves above them are illustrations, not measurements of the sound coming from the speakers. Even BLUE's sound uses subtraction from a running low-pass value rather than the exact rising curve that its row illustrates. A name brings several implementations into company; inspecting them keeps that company from becoming an identity claim.
 
@@ -129,11 +92,7 @@ Three walls wait beyond the listening benches. Their faces are closed. A narrow 
 
 Each wall keeps eight moments. The newest arrives at the near end; earlier values move back through the display until the oldest leaves it. Your walk can take the opposite direction from the clock. Beyond eight, an earlier value has already left the wall.
 
-The pale wall takes a fresh draw. The brown wall adds a little of that same draw to its previous value:
-
-```gdscript
-sum += 0.10 * white
-```
+The pale wall takes a fresh draw. The brown wall adds a little of that same draw to its previous value.
 
 Here the last place helps make the next one. Follow a run of openings along the brown wall, then return to the pale one. What does each let you anticipate? An independent sequence can also make a run. A few agreeable neighbours do not prove a rule.
 
@@ -147,10 +106,18 @@ Lean toward the gold line again. The slits admit a view; fixed glass keeps them 
 
 REPLAY empties the record and restores the local seed. It repeats the targets and the filter's preparation, but you are now standing somewhere else. Stay there for another run. Which relation belongs to the numbers, which to the machine that presents them, and which only becomes possible from here?
 
+<!-- @geometry_noise -->
+
+Two pale surfaces keep the same connections. Move the slider. One remains level while the other puckers around its points. Give it less strength and the same folds recede. You have not asked for another arrangement yet.
+
+The largest movement and the average departure have different numbers. A small average can leave one point far from where it began. The display tells us how much the positions changed; it cannot decide how much of the surface you still recognise. Its connections have survived. What else did you expect to stay?
+
+Press ZERO. The difference disappears. Press NEXT SEED, then raise the strength again. Another surface answers the same instruction. A procedure can keep its promise while giving you something you had not pictured.
+
 We can leave this hall with more than one discovery. A plane maintained by clipping. A spacing rule that finishes its work. A field that ties colour to height. A sound that holds a previous value, or answers it with a difference. Each gives a different place for a relation to land.
 
 In the next hall, a column is already waiting. What will happen when variation is given an existing form to act on?
 
 [^cloud-replay]: The seed repeats this local construction when its settings and calls repeat; it does not replay the museum. The left cloud consumes the first part of one generator's stream and the right continues it. These are not identical candidates subjected to different rules.
 
-[^weather-filter]: This is a finite filter approximating pink noise, following [Julius O. Smith’s synthesis example](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). The signal is checked separately from the moving, bounded display; the measured frequency range and preparation are recorded in the tutorial companion. A pink colour does not establish a pink spectrum.
+[^weather-filter]: This is a finite filter approximating pink noise, following [Julius O. Smith’s synthesis example](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). The signal is checked separately from the moving, bounded display; the measured frequency range and preparation are recorded in the [artifact notes](../../artifacts/related_weather/README.md). A pink colour does not establish a pink spectrum.

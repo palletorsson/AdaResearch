@@ -25,7 +25,7 @@ Their timers disable processing and raise damping and stiffness at scheduled mom
 
 This prepares two questions we will return to: what makes the body deform, and what makes us stop looking? Carry the fixed edge into the next hall. There, the support itself moves.
 
-The lesson token builds eight strips with 112 vertices each, at stiffness 0.34, damping 0.05 and simulation precision 5. The initial top row has eight pins per strip; PINS keeps the two corners, and RELEASE removes all pins. SUPPORT cycles gantry → none → hoop → mast → wall without changing those indices. The wall and other solid frame pieces can still collide; independence from the pin rule is not independence from the physics world. Godot Physics adds bending links as well as triangle-edge links.
+The lesson token builds eight strips with 112 vertices each, at stiffness 0.34, damping 0.05 and simulation precision 5. The initial top row has eight pins per strip; PINS keeps the two corners, and RELEASE removes all pins. SUPPORT cycles gantry → none → hoop → mast → wall without changing those indices. The wall and other solid frame pieces can still collide; independence from the pin rule is not independence from the physics world. The current project uses Jolt Physics. Earlier GodotPhysics3D constraint descriptions are historical and are not a description of this solver.
 
 The map begins with the rail landing, whose bar is 0.14 m wide. The first LANDING press selects the pan. Rebuilding starts new bodies and timers; the stop raises damping and stiffness rather than preserving a vertex snapshot.
 
@@ -54,3 +54,7 @@ The model has units but no calibration against nylon. It has no self-collision, 
 Whitney identifies nylon hosiery and places the work in the RSVP series. Nengudi discusses bodily and psychological elasticity and the energy associated with previously worn material. Ada makes an original four-anchor membrane encounter, not a reconstruction or a measurement of her sculpture. Its knit-like opaque surface is procedural. It models reversible distance constraints, damping and a distributed downward load, with a floor limit; it does not simulate nylon, damage, self-collision, skin or a human body.
 
 [Senga Nengudi: Internal I (1977, refabricated 2014)](https://whitney.org/collection/works/46609).
+
+## Runnable boundary reconstruction · 9 October 2026
+
+The tutorial prints a complete 1.2 × 1.4 m PlaneMesh study, with the installed subdivision counts (6/12), stiffness .34, damping .05 and precision 5. Reference coordinates choose a top row, upper corners or no pins. Mesh construction precedes world entry. The black PointBody is copied unchanged from the preceding lesson; the contact mask includes its layer. The visual bar has no collision, unlike some installed support variants. The learner releases the row to two corners; returning to the full row explicitly rebuilds the body. A native test found that changing pin flags on already moving vertices did not guarantee stationary positions. REBUILD avoids promising a rewind through pin selection. The optional tension membrane application and its supplied solver remain separate. See the dated review for executable tests, actual museum images and remaining limits.

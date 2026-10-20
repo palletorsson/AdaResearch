@@ -25,3 +25,16 @@ No map layout, placement, artifact role, solver, original scene, sequence order,
 Next: CA_SoftRules. Inspect the existing live neighbourhood mechanism and let its spatial consequences lead the next passage.
 
 Concurrent-source note: during this pass another edit updated the display titles of CA_ElementaryRules, CA_GameOfLife and CA_BeyondBinary in the sequence file. These edits are preserved and recorded separately in concurrent-sequence.diff. Active map order and all other sequence fields remain unchanged. The initial byte-for-byte preservation check correctly reported this difference; diagnostic-preservation.json retains that result.
+
+
+---
+
+# The surface includes you — 8 October 2026
+
+The carried point moves from controlling the clock to supplying a location. HAND + STEP is an additional installed input; release withdraws it, while recovery still requires further updates. The complete two-file learner model reconstructs that same rule at table scale. The reflection keeps its encounter and distinction between appearance, support and recovery; three implementation blocks become prose. Its point passage records the new connection without turning the final text into a tutorial.
+
+Rear gallery levelled and six secondary works spaced; all seven authored works retained. Chair/crossway/tree fit at .12/.25/.35, crossway lifted .8 m. Threshold portals and no duplicate gate. Existing basin/ramps and bridge transition law preserved. Optional host lighting on the embedded chair avoids a second sun.
+
+32 learner + 37 native museum checks pass; four routes / 255 samples. Native XRTools supplied poses, physical-body basin/ramp test, comparison faults and threshold transfer are covered. Initial failed diagnostics retained. No headset or independent student claim. Final photos reviewed from above, raised oblique and eye height. The printed model is temporarily mounted only for its picture. Blank wall frames and secondary encounters still need their own review.
+
+Full review: `doc/book/iterations/2026-10-08-ca-the-surface-includes-you/index.html`. Next: CA_SoftRules.

@@ -8,6 +8,10 @@
 - Separate thresholds for recovery and physical support.
 - Snapshot updates compared with a directional scan.
 
+## Reading route
+
+First read `input_position` and the proximity branch of `evolve`. Make one patch lose and regain support. Then return to the same function for the SYNC/SCAN comparison. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Bring the same point
 
 In the previous hall, carrying the point changed nothing in the cells. It carried STEP. Here **where you hold it matters**. The bridge and its wall frieze show the same field. Take the black point beside the desk, bring it near a tile and press its trigger. Each press selects HAND and advances one tenth of a simulated second. A nearby tile loses health. Release the point and STEP again: recovery now depends on what remains around the tile.
@@ -42,6 +46,7 @@ For each address, `evolve` makes one choice. If the point is held and its centre
 
 Read `input_position`, `neighbours`, `evolve` and `step` first. They contain the new operation. `make_display` builds the two views and their support; it is included so the reconstruction is complete. There is one `_ready`, and every reference is created or declared here.
 
+<!-- student-code:presence.gd -->
 ```gdscript
 extends Node3D
 const PointBody = preload("point_body.gd")
@@ -202,6 +207,7 @@ func redraw() -> void:
 
 This is the same PointBody file used in the previous hall. It keeps its small dark sphere, pickup behaviour and action signal. Copy it only if it is not already beside the new script.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -258,7 +264,7 @@ This comparison returns to the old-to-next agreement; it does not add another in
 
 Press O to select SCAN and reset that same beginning. Now counts read `next`, including answers already written. STEP: (3,6) becomes 0.01. W's newly healthy value was available before the loop reached its neighbour. Press V to reverse the scan and reset; STEP again. That neighbour now stays at zero. SYNC gives the same answer in either order.
 
-Make one independent edit: change W's CHAIN beginning from 0.495 to **0.49**. Predict whether the third cell gains anything in forward SCAN, then run it. W reaches exactly 0.5. The condition is strictly greater than 0.5, so the third cell still gains nothing. The threshold, not the rounded appearance of the colour, decides.
+Make this guided edit: change W's CHAIN beginning from 0.495 to **0.49**. Predict whether the third cell gains anything in forward SCAN, then run it. W reaches exactly 0.5. The condition is strictly greater than 0.5, so the third cell still gains nothing. The threshold, not the rounded appearance of the colour, decides.
 
 R restores the full field and permits hand input again. O and V preserve the chosen beginning while resetting time. At 300 steps—30 simulated seconds—the study holds its state until reset. Releasing the point does not advance time by itself.
 
@@ -269,3 +275,8 @@ Return to the installed bridge. RESTORE, choose VISITOR, keep SYNC, and start RU
 Keep a brief account of one attempt: your intended route, where it changed, and what you did next. A second attempt need not improve the crossing; it might pursue something you noticed on the first. Afterwards, choose one event to examine with the step controls. Continuous play and a controlled comparison can ask different questions of the same work. The compact table remains a hand experiment; it is not the walkable bridge.
 
 You leave with an input connection you can name, and two consequences you can distinguish: a value can cease to help its neighbours before it ceases to hold you. The next room asks what happens when the neighbourhood offers more than a count above a threshold.
+
+## Your own test
+
+Choose a different held-point path with at least one pause and one withdrawal. Predict one address that will lose health and another that will remain supported; compare their values after equal numbers of steps. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

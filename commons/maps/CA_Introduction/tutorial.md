@@ -9,6 +9,10 @@
 - A wrapped boundary.
 - Current state and retained history.
 
+## Reading route
+
+Read `answer`, `evolve` and `remember`: one local answer, one simultaneous update, one copied record. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## At the board
 
 We are in Endless Museum. The explorer already works. Hold its small black point and move your hand sideways: three marks follow the selected address. The point reads the row; it does not turn a cell on. Press the trigger to advance one generation. The overhead ring receives the same stored rows.
@@ -17,9 +21,13 @@ Choose Rule 90 and a single seed. Pause before stepping. Pick a cell, read its l
 
 ## What we carry
 
+The Shader sequence ended with a field that kept its previous state. We keep that old-to-next agreement and open a smaller rule: three Boolean inputs choose one answer. No shader machinery is needed for this row.
+
 Trace gave us an array of positions; Grid gave those positions addresses. Arrays let us read and replace stored entries. Here each address holds a Boolean: `false` or `true`. The address stays; its state changes. We reuse the pickable sphere from the point lessons as a reader. Its hand position selects an address in the study's local frame.
 
-Continue on your existing `PointStudy` node inside the museum, keeping its earlier script as a previous working version. Save both files below in one folder and attach `row.gd` to that node. Use unit scale. This builds a separate small experiment inside the museum. The camera, lighting, player and XR Tools are already present from Day Zero. No authored mesh, label or scene-child reference is required. Face the node's positive Z side; the board is 0.95 metres above its origin. Keep this experiment separate from the installed explorer while comparing them.
+Continue on your existing `PointStudy` node inside the museum, keeping its earlier script as a previous working version. Save both files below in one folder and attach `row.gd` to that node. Use unit scale. This builds a separate small experiment inside the museum. The camera, lighting, player and XR Tools are already present from Day Zero. If the node is not present in your working scene, add an empty Node3D named `PointStudy` under the hall you are editing. Attach only the current lesson host to it. Save each lesson in its own folder before replacing the host; all relative helper paths resolve inside that folder. No authored mesh, label or scene-child reference is required. Face the node's positive Z side; the board is 0.95 metres above its origin. Keep this experiment separate from the installed explorer while comparing them.
+
+The existing project's XRTools setup includes the `XRToolsUserSettings` and `XRToolsRumbleManager` autoloads, from `addons/godot-xr-tools/user_settings/user_settings.gd` and `addons/godot-xr-tools/rumble/rumble_manager.gd`. They are supplied dependencies, not objects to rebuild in this lesson.
 
 ## Three inputs, eight answers
 
@@ -50,6 +58,7 @@ The installed explorer packs these eight answers into the number 90. We keep the
 
 The first half defines the state and its update. `make_display` supplies the repeated boxes, marks and label; `redraw` gives those boxes the stored states. Both are included so the experiment can be reconstructed. MultiMesh is display plumbing here, not another lesson to master before understanding the rule.
 
+<!-- student-code:row.gd -->
 ```gdscript
 extends Node3D
 
@@ -187,6 +196,7 @@ func show_reading() -> void:
 
 This is the earlier pickable sphere construction, reduced to an 8.5 cm radius for this desk. The finish and desktop hooks are supplied adapters. `held()` accepts an XR pickup or the museum's desktop grab; release leaves the reader parked at its selected cell. The point does not collide with or edit the automaton. The complete helper is here so no prior file is silently missing.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -239,4 +249,11 @@ func on_desktop_drop(_pointer: Node) -> void:
 
 Hold the point to inspect. Trigger or Enter advances the reconstruction once. Re-running or calling `reset()` restores the selected seed and clears its history. Unlike the installed explorer, this small study has no automatic RUN, rule slider or overhead receiver. The same eight-answer list can later receive a different interface.
 
+Build and compare on desktop, then return to the installed exhibit for its full VR controls. Later compact studies name keyboard-only comparison controls explicitly. Reusing PointBody means retaining its construction and behaviour in your code; these listings do not transfer a live object or saved field automatically between halls.
+
 Carry the row engine, its explicit boundary and its independent history. In the next hall we will change what a cell can hold and who counts as its neighbour. The rug and growing network remain encounters in the wider museum; we do not need to rebuild them to understand this step.
+
+## Your own test
+
+Choose another pair of seed addresses, away from the pair already tried. Predict their first combined row and test it. Keep the boundary and rule fixed. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

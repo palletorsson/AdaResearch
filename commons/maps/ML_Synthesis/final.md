@@ -1,23 +1,35 @@
-# The point outside the rule
+# What I meant, what it answered
 
-When a point is flagged as unusual, what exactly has been discovered?
+Before moving, choose what you intend: A, B, or neither. Then give the sphere a fresh phrase with both hands. It returns an answer. Your declaration stays beside it.
+
+A disagreement has not yet told us who or what failed. You might have performed differently from what you meant, selected the wrong intention, or moved in a way the six recorded coordinates describe poorly. The teaching examples might have made A and B hard to separate. Keeping the two accounts gives us somewhere to begin looking. Replacing your declaration with the model's answer would close that inquiry too soon.
+
+The sphere is familiar now. It has been a point we could hold, a recorder of our hands and a companion to generated movement. Familiarity can make its answer feel more intimate than the comparison it performs. Here the code holds that comparison still: two timed prototypes, their tolerances, a rule for uncertainty. The person who encounters it brings much more than those measurements.
+
+Read the table without asking it for a single score. UNKNOWN means neither taught phrase was accepted. AMBIGUOUS means both were plausible under this rule and too close to choose. If you meant neither, acceptance as A is another kind of disagreement. These situations call for different investigations. Turning them all into failure would lose the distinctions the instrument can actually offer.
+
+The checks belong to particular models. Revise the teaching, then return: the earlier answers remain beside the examples and fitted paths that produced them. This does not prevent change. It gives a change a history. A later agreement need not make an earlier difficulty disappear, and a present limit need not become a claim about what no future model could do.
+
+In Generative, a new path could emerge from differences among your performances. It might prompt a movement you wanted to try. Here we can record the attempt and its intention separately. A path's plausibility, its recognisability and its value to the person performing it remain different questions. The study does not let a generated example quietly become evidence that the recogniser works.
 
 <!-- @anomaly_detection -->
 
-Find one raised, enlarged point and compare its position with a nearby unflagged point. Read the active detection mode. Before interpreting the raised point as an error, ask which numerical comparison could have put it above the threshold.
+Now find a raised, enlarged point in the anomaly exhibit. Before interpreting it as an error, compare it with an unflagged neighbour and read the active mode. Which numerical comparison put it above the threshold?
 
-In this room, the exhibit measures displacement from the sample’s mean along each coordinate, scaled by the spread on that coordinate. It adds the two absolute standardised displacements and compares the result with a threshold. Points meeting the threshold are lifted and enlarged, making a numerical decision into a spatial distinction.
+In the default mode, the exhibit measures displacement from the sample mean along each coordinate, scales each displacement by the spread on that coordinate, then adds their absolute values. Points meeting the threshold are lifted and enlarged. A numerical decision becomes a spatial distinction.
 
-Compare a point displaced mainly along one coordinate with a point displaced along both. The default score adds coordinate contributions, so the shape of its decision boundary comes from that addition as well as from the sample’s spread. The pale disc on the floor is a rough marker at the average spread, not the boundary; the real boundary is a diamond in standardised units, which is why some raised points sit inside the disc and some unraised ones outside it. Do not rely only on the impression of being far from the centre. The exhibit gives you a chance to connect the position of a raised point with the particular arithmetic that made its distance count.
+The pale disc is a rough marker at the average spread, not the boundary. The actual boundary is a diamond in standardised coordinates. A point displaced along both coordinates can cross it differently from one displaced mainly along one. Follow the arithmetic before relying on the appearance of being far from a centre.
 
-The score depends on the sample used to compute the mean and spread. Here the generated outer points are included in those statistics along with the central cloud. The population helping define normality therefore includes the very observations that may later be called abnormal.
+The generated outer points are included in the statistics with the central cloud. The population defining the reference therefore includes observations it may subsequently flag. A flag tells us about a point's relation to this population and rule. It does not decide whether the point is an error, a rare valid case or something worth investigating. The alternative mode labelled autoencoder error also uses a hand-written geometric formula here; the label alone is not evidence that an autoencoder was trained.
 
-This is a specific coordinate-based rule. It is not a complete judgement about an observation’s origin or importance. A point might be an error, a rare valid case, an emerging pattern or a case the representation describes poorly. The raised position tells you what the score did; it does not choose among those explanations.
-
-The machine-learning sequence has repeatedly separated the operation from the interpretation: a cluster from a named class, an edge from an object, and a training curve from demonstrated generalisation. It has also met four different measures. The network changed by a teacher's answers; the centres by geometry alone; the bodies in the first hall by whether they went on; and the creature in this hall, teaching itself to walk from a reward every tenth of a second, by feedback on each decision rather than on a life. One word, learning, and four accounts of what did the measuring. The same care applies here. A detector’s name cannot supply evidence that its flags are useful.
-
-Choose one flagged point you would investigate rather than discard. State what additional observation would help you decide. For a future version, exposing the threshold and allowing the reference population to change would make the cost of a decision visible: which rare cases become ordinary, and which ordinary cases become suspect?
+Choose one flagged point you would keep. State what further observation would help you understand it. Your declared intention was additional information in the hand study. Something equally relevant here may lie outside the coordinates on display.
 
 <!-- @ -->
 
-Graph theory will give us another representation of relations. Instead of asking how far points lie from a centre, we will ask which points are connected and what those connections permit.
+The moving creature elsewhere in this hall supplies another comparison. Its joint controller updates from a distance-based reward, with a bonus for movement along one direction. That measure differs from your labels, the cluster centres' geometry and the conditions under which the bodies in the first hall persisted. Calling all of these learning does not make their measures interchangeable. The reward's direction, like the phrase's clock, is something someone supplied.
+
+The project making these rooms also uses AI. The reconstruction tests can show that the printed programs run and meet specified assertions. They cannot establish that we chose the right lesson, represented the encounter well or explained everything worth learning. Those decisions remain open to a reader who points to something our test did not ask.
+
+The small learners here expose every parameter and the examples used to fit them. They do not give us the same view into the language model that helped write this book. We can retain its proposed edit, inspect the changed source and run a test; that record still does not expose all the conditions that produced its answer. During this sequence, a printed Gradient example passed a headless test while a rendered test caught its sphere returning to an old position. The later observation changed what we could claim. It did not make the earlier test fraudulent or the whole system understood.
+
+Foundations Crisis follows. Bring that difference between a working answer and the evidence available for it, along with the rule, the observations and the unresolved disagreement. There is more to investigate when they remain distinguishable.

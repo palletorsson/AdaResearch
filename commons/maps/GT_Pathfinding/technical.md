@@ -1,70 +1,19 @@
-# GT Pathfinding — Technical
+# Pathfinding — three searches, one river
 
-The map is a maze whose corridors are graph edges and whose junctions are graph vertices. The learner walks the maze to find the exit, and their walk implicitly executes a pathfinding algorithm. Three explicit algorithm modes — DFS, BFS, and A* — can be toggled at stations along the way, and each mode highlights the maze in a different characteristic pattern.
+The permanent Impatient River now uses the same search class printed in tutorial.md. Its two banks, eleven seeded stones, connections, sinking/restoration and traveller remain. AStar3D stores that graph; the exhibit chooses a route with inherited BFS or the new weighted method. SEARCH RULE cycles BFS → Dijkstra → A*. SINK STONE changes availability and replans immediately. A missing route leaves the spark stopped. After more than three stones are disabled, the oldest returns.
 
-The `pathfinding3d` artifact exposes A* directly. A* searches the graph with a priority queue ordered by f(n) = g(n) + h(n), where g is the known cost from start to n and h is a heuristic estimate of the cost from n to goal.
+PointBody, traversal.gd and BFS route.gd carry forward unchanged. The learner host adds weighted_route.gd and a nearby supplied museum button. One declared coordinate edit raises vertex 0 from y=2.3 to y=2.7 before comparison. IDs and adjacency remain. The four-edge BFS answer spans 3.330 m; the five-edge weighted answer spans 2.932 m. Dijkstra prioritises accumulated Euclidean length. A* adds straight-line distance to the goal, a consistent lower bound for these edge costs. Neither method trains parameters. Local metre coordinates assume unit scale. Route playback is distinct from search expansion and player navigation.
 
-```gdscript
-func astar(start: Vector3i, goal: Vector3i) -> Array[Vector3i]:
-    var open := PriorityQueue.new()
-    open.push(start, 0.0)
-    var came_from := {}
-    var g_score := {start: 0.0}
+The complete five scripts are printed and extracted into a fresh Godot 4.6 run. 48 code checks pass. The suite compares 12,544 weighted cases against an independent exhaustive simple-path oracle, retains the earlier BFS checks and synthetic XRTools pickup/trigger/release, runs an independent coordinate edit, and rejects five deliberate algorithm faults. These tests caught an initially incorrect distance example; vertex 0 was explicitly raised and the teaching comparison retested.
 
-    while not open.is_empty():
-        var current: Vector3i = open.pop()
-        if current == goal:
-            return reconstruct(came_from, current)
-        for nbr in neighbors(current):
-            var tentative := g_score[current] + cost(current, nbr)
-            if tentative < g_score.get(nbr, INF):
-                g_score[nbr] = tentative
-                came_from[nbr] = current
-                var f := tentative + heuristic_weight * heuristic(nbr, goal)
-                open.push(nbr, f)
-    return []
-```
+45 native checks pass: the museum's actual pool and portal destination resolver read Graph Theory before Machine Learning; real search/sink button signals work; the same spark, stones and availability survive mode changes. Sixty blocked-set/direction/mode cases agree with Godot's independent AStar3D distance result. Existing floor, aisle, approach and learner interaction checks pass. The learner study is temporarily installed in the reserved bay for these checks and captures; the permanent river is updated in place.
 
-The heuristic_weight parameter is the map's central control. At 0.0, A* degenerates to Dijkstra — it explores everything uniformly, guaranteed to find the optimal path. At 1.0, A* is standard: it uses the heuristic to focus the search without sacrificing optimality (provided the heuristic is admissible). Above 1.0, A* becomes greedy — it trusts the heuristic completely, potentially missing shorter paths but running faster.
+Spine order is Swarm Intelligence → Graph Theory → Machine Learning → Foundations Crisis. The runtime artifact manifest is stably reordered, retaining all within-chapter entries. The long-museum strip snapshot retains geometry and receives new chapter offsets; it is not a fresh whole-museum capture. Historical Lab layouts are not regenerated. Fresh Endless Museum starts use the new order; saved in-progress stream cursors and exported Quest builds are not migrated by this change.
 
-DFS and BFS are simpler. DFS uses a stack and goes deep before wide; its backtrack is visible when the algorithm hits a dead end. BFS uses a queue and explores in concentric waves; its wavefront is visible as the distance-from-start increments. The three modes produce visibly different search patterns on the same maze, and the map lets the learner compare them side by side.
+Native screenshots and receipts accompany this review. Author-operated reconstruction and synthetic XR interaction do not establish physical headset usability or independent learner comprehension. Those remain untested.
 
-Movement models extend the problem. Ground-walking treats walls as impassable. Flying ignores walls entirely. Climbing treats vertical surfaces as passable. Each mode changes the neighbour function, and the change rewrites what counts as reachable.
+Reproduce learner checks: `python tools/test_graph_pathfinding.py`
 
-Within the sequence, Pathfinding makes the learner's body the search algorithm and uses the body's experience as the ground truth against which the formal algorithms are compared. GT_Network_Analysis will next shift from traversal to measurement.
+Reproduce museum checks: `python tools/run_encounter_probe.py GT_Pathfinding --sequence graphtheory --render --no-bridges --output-tag search-progression --probe tools/probes/graph_search_room.gd`
 
-## Heuristic Design
-
-A* requires an admissible heuristic — one that never overestimates the true cost to the goal. For grid-based pathfinding, the Euclidean distance is always admissible (it is the optimum unconstrained path). The Manhattan distance is admissible when movement is restricted to orthogonal directions. Chebyshev distance is admissible when diagonal movement costs the same as orthogonal.
-
-Choosing the tightest admissible heuristic matters for performance. A* with a perfectly tight heuristic explores only the optimal path — it wastes no work. A* with a loose heuristic degenerates toward Dijkstra. The map's configurable heuristic_weight lets the learner experiment with inadmissible heuristics (weight above 1.0) that are faster but lose the optimality guarantee.
-
-## Data Structures
-
-The open set is a priority queue. A binary heap supports push and pop in O(log n), which is adequate for typical maze sizes. A Fibonacci heap achieves amortised O(1) push and O(log n) pop, theoretically faster, but the constant factors make binary heaps competitive in practice.
-
-The closed set records already-explored vertices. A hash set gives O(1) membership checks. Without the closed set, A* can loop indefinitely on graphs with cycles; with it, A* terminates after at most V vertex expansions.
-
-```gdscript
-class PriorityQueue:
-    var heap: Array = []
-
-    func push(item, priority: float) -> void:
-        heap.append({"item": item, "pri": priority})
-        _sift_up(heap.size() - 1)
-
-    func pop():
-        var top = heap[0]
-        heap[0] = heap.pop_back()
-        if heap.size() > 0:
-            _sift_down(0)
-        return top["item"]
-```
-
-Path reconstruction walks the came_from dictionary backward from goal to start, then reverses. The operation is O(path length).
-
-Within the sequence, Pathfinding's algorithms operate on the same graph data structure GT_Foundations introduced. The maze itself is a grid graph where each cell is a vertex and each unblocked wall is an edge.
-
-## One More Note on the Heuristic
-
-Manhattan distance is the default heuristic in grid mazes. It sums the absolute differences along each axis, which is exactly the minimum step count on a grid without diagonals. The map's maze uses four-neighbour connectivity, so Manhattan is admissible and tight.
+Publish after checks: `python tools/publish_graph_search.py`

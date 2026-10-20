@@ -1,117 +1,179 @@
-# Keep the counts, change the neighbours
+# Two accounts of one arrangement
 
-**Learning elements**
+Entropy Types has established that each reading needs a named question. Here we keep an entire population fixed and change its arrangement, then investigate differences the readings omit. We will build a small model that two measurements can read differently.
 
-- Frequency tables
-- Copied records
-- Marginal entropy
+The room's route is ledger → four mixing jars → shakeable jar → four-cube sorting table → two compartments → displaced points → ruin → signal room. Start by counting small pictures, then reconstruct the two-compartment mechanism. The earlier [counts and neighbours build](counts-and-neighbours.md) remains a complete preparatory extension.
 
-Random_Definition made repeatability depend on a seed and a procedure. Random_Entropy takes another seeded sequence and asks what its measurement retains. The primary is `shannon_entropy_meter:90#stand:ledger#disclosure:ledger` at (5,6). All excerpts below come from `commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd`.
+For a rectangular button in VR, touch its cap with the virtual hand and withdraw, or aim the controller ray at the cap and pull and release the trigger. One contact gives one action; holding it does not repeat. Both rows on the two-compartment cabinet face upward, at about one metre. A LEFT − exchanges one A on the left with a B on the right. SAME k rotates the occupants within each tray; it does not let us drag an individual sphere. KEEP writes a record and REPLAY reads it. These operations are available to an investigation; the chapter's narrated use of them is not evidence that a visitor will discover or choose them unaided.
 
-## Read two records of the same sample
+## Four cubes before the gauges
 
-Find a pair among the 200 tiles on the desk. The first forty are marked there, spelled out on the upper panel, and shown enlarged on the front face. The enlarged excerpt stays in draw order even when SORT regroups the upper ribbon. It is an excerpt of the active sample, not another sample.
+At **Four cubes / How many ways?**, press DROP FOUR. A tube delivers two pink and two black cubes to four spots, then stops. This is a deliberately kept balanced batch, not four independent random colour draws. Lift a cube and release it over another spot to swap them. An outside drop returns it to its spot.
 
-The opening sequence is drawn once from a local seeded generator:
+WAYS counts the colour patterns that keep **the same number of each colour in every box**. Each little picture is one such pattern; HERE marks the current one. Two pink cubes exchanging identities do not create another colour pattern.
 
-```gdscript
-for i in range(sequence_length):
-    sequence.append(_rng.randi_range(0, num_symbols - 1))
-```
+Keep the starting pink–black–pink–black row. Press ADD DIVIDER once, then pause and inspect the pictures. Continue one divider at a time: one, two, three, then four boxes give WAYS **6, 4, 2, 1**. The middle divider arrives first; the right pair splits next, then the left pair. Nothing auto-sorts, and the tube does not replace the batch.
 
-The map uses ten symbols and 200 draws. The default seed is `hash("shannon_entropy")`, exposed in the source readout. These draws are independent of the previous hall's RGB generator. The continuity between rooms is the question of procedure, not a transfer of that room's colours into this meter.
+Now return to ONE BOX, add the middle divider and exchange the middle two cubes. Pink–pink | black–black gives **one** compatible picture, while pink–black | pink–black gives **four**. More boxes do not prescribe a universal number: the counts inside them matter. Adding a divider narrows the description even without moving a cube.
 
-## Sort before explaining the invariant
+For reconstruction, start with [sorting_model.gd](../../artifacts/entropy_sorting_table/sorting_model.gd). It enumerates all sixteen binary four-site patterns, keeps the six with two pink sites, then filters by the current compartment counts. Reproduce the pictures on paper first. Record the colour row and divider positions to reconstruct an exact comparison; this first table does not persist a saved session. The larger bench below supplies KEEP and REPLAY.
 
-Press SORT and watch both the ribbon and the bars. The tiles move into symbol groups over 1.2 seconds. Their counts and entropy remain. SORT does not resample or overwrite the original sequence. It changes where the existing tile instances are drawn, using a stable order within each symbol group. Press again to restore their positions.
+The whole batch remains half pink, half black. Choosing a site uniformly without its address still gives one bit of colour uncertainty. That is a question about this retained batch, not a claim that sorting changes the tube's generating process or produces heat.
 
-The sorted copy used by the readout is constructed as follows:
+## The sixteen-site bench
 
-```gdscript
-func sorted_copy() -> Array[int]:
-    var out: Array[int] = []
-    for sym in range(num_symbols):
-        for i in range(_sequence.size()):
-            if _sequence[i] == sym:
-                out.append(sym)
-    return out
-```
+The instrument has two glass-sided trays beneath round Shannon and Boltzmann dials. Sixteen labelled sites hold one orange A or blue B each, eight sites in each compartment; eight of each colour exist throughout. RESET places all A on the left. The Shannon colour reading is one bit; the Boltzmann reading is zero. The scales have different units: the left measures bits per colour observation; the right shows S_B/k_B. Its pointer and bar follow the same computed value.
 
-The measurement visits one symbol at a time:
+Press **A LEFT −** four times, watching one exchange at a time. Each tray now holds four A and four B. The colour shares have not changed, but the right-hand reading has. Press **SAME k**. The arrangement changes again while both readings stay.
 
-```gdscript
-for s in sequence:
-    counts[s] += 1
-```
+A reading that stays still is evidence. It invites a precise question: what differences was this instrument built to retain?
 
-Every permutation of this sample gives the same counts. The entropy loop receives those counts, without the positions:
+## The two questions
 
-```gdscript
-for c in counts:
-    if c > 0:
-        var p: float = float(c) / float(sequence_length)
-        entropy -= p * (log(p) / log(2.0))
-```
+**Shannon colour entropy** counts A and B over the whole board. Their shares are both 1/2, so H = −Σ p log₂p = 1 bit per colour observation. Think of selecting a site uniformly without being told its address. Knowing an address would change the question. This is a statistic of a retained board, not proof of an unpredictable source.
 
-Each observed share p weights its own information value, −log₂(p). The result is an average in bits per symbol under these empirical shares, not the total information in a 200-symbol message. Zero-count terms contribute zero and are skipped before the logarithm. An all-one-symbol sample gives zero. Twenty copies of each of ten symbols give log₂(10), about 3.321928. The arrival sample gives approximately 3.255647 because its counts differ from twenty each.
+**Boltzmann configurational entropy** starts with a macrostate: k, the number of A on the left. A microstate here is a complete sixteen-site A/B list; same-colour occupants are not separately identified. How many such lists agree with k?
 
-SORT can make groups easier to find without changing this number. A repeating cycle of ten symbols can also have maximum marginal entropy. The loop does not condition a prediction on the previous symbol. It therefore cannot measure every kind of predictability, dependency, meaning or compressibility in the ordered sequence.
+There are C(8,k) ways to choose the left A sites and C(8,8−k) for the right. Multiplying gives Ω. The function C(n,k), “n choose k,” counts subsets of k sites without counting their order. At k = 4, Ω = 70 × 70 = 4,900.
 
-## Change the source, keeping the alphabet and N
+The physical expression is S_B = k_B ln Ω. Our screen displays **S_B/k_B**, the dimensionless natural logarithm of that count. It does not display joules per kelvin, temperature or heat. This fixed-occupancy configuration model has no thermal dynamics.
 
-CONTRAST selects a cached second sample with its own seed, the first seed plus one. Its source weights decrease by a factor of two:
+| A on left, k | Whole-board H, bits | Ω | S_B/k_B |
+|---:|---:|---:|---:|
+| 8 | 1 | 1 | 0 |
+| 7 | 1 | 64 | 4.159 |
+| 4 | 1 | 4,900 | 8.497 |
+| 3 | 1 | 3,136 | 8.051 |
+| 0 | 1 | 1 | 0 |
+
+The readings concern different variables and state spaces. Shannon entropy over a *uniform distribution of those Ω compatible microstates*, converted from bits to natural-log units and multiplied by k_B, would agree with the Boltzmann value. The comparison does not establish competing definitions of the same measured variable.
+
+## Build the small mechanism
+
+This lesson uses Ada's existing Godot project. Copy the four files in `commons/artifacts/entropy_compartments/` into a fresh folder, for example `student_work/two_accounts/`. Copy only `compartment_model.gd`, `entropy_compartments.gd`, `entropy_compartments.tscn` and `preview.tscn`; ignore generated UID files.
+
+Replace the copied `compartment_model.gd` with the complete listing below. The copied scene and host use relative references, so they load this new file. Open the copied `preview.tscn` and run that scene with F6. Its desktop buttons and the room's rectangular controls call the same methods.
+
+**Supplied scaffolding:** the host draws the cabinet, specimen trays, spheres, labels, dial pointers and bars, connects controls, and saves/reopens records. It uses `commons/audio/rack_templates/RackTemplates.gd` and `commons/interactables/push_button.tscn` with their existing project dependencies. The preview supplies camera, light, floor and desktop buttons. These are declared dependencies, not additional student algorithms. The short file below owns the site state, exchange and both measurements.
+
+<!-- student-code:compartment_model.gd -->
 
 ```gdscript
-for k in range(num_symbols):
-    weights.append(pow(2.0, -float(k)))
+extends RefCounted
+## Sixteen labelled sites, eight A (1) and eight B (0). No thermal dynamics.
+var sites: Array[int] = [1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0]
+
+func exchange(i: int, j: int) -> void:
+	var held := sites[i]
+	sites[i] = sites[j]
+	sites[j] = held
+
+func a_left() -> int:
+	return sites.slice(0, 8).count(1)
+
+func shannon_colour() -> float:
+	var p := sites.count(1) / 16.0
+	var h := 0.0
+	for share in [p, 1.0 - p]:
+		if share > 0.0: h -= share * log(share) / log(2.0)
+	return h
+
+func choose(n: int, k: int) -> int:
+	var ways := 1
+	for i in range(1, k + 1):
+		ways = ways * (n - i + 1) / i
+	return ways
+
+func multiplicity() -> int:
+	var k := a_left()
+	return choose(8, k) * choose(8, 8 - k)
+
+func boltzmann_over_kb() -> float:
+	return log(float(multiplicity()))
 ```
 
-A local generator draws against their cumulative sum. The normalized source probabilities are approximately 0.50049, 0.25024, 0.12512, and so on. They imply expected counts; they do not impose those counts on a finite sample. The captured sample has counts [109,46,20,17,6,2,0,0,0,0] and H ≈ 1.817600. CONTRAST again restores the original 200 draws. The current sorting choice is retained.
+Read `exchange` first. It holds one value temporarily so neither occupant disappears. Its indices must be valid site addresses, 0–15. The host's controls supply them. The first eight addresses are the left compartment; the rest are the right.
 
-## Ask the display what its heights mean
+`shannon_colour` measures relative frequency. The zero check avoids taking log(0). `choose` builds the binomial count using integer arithmetic; for this small board its intermediate values are exact. Every exchange preserves eight A and eight B. Changing that inventory would require revising `multiplicity`, the labels and the saved-model version together.
 
-The upper bars use a height relative to the largest count in the active sample:
+## Run, preserve, replay, reconstruct
 
-```gdscript
-var height: float = (float(counts[i]) / float(max_count)) * FREQ_BAR_HEIGHT if max_count > 0 else 0.0
-height = max(0.002, height)
-```
+1. **Baseline:** RESET. Record seed 435, sixteen sites, eight A, eight B, k = 8, H = 1 and Ω = 1. The seed controls requested swap pairs; it is not used to decide the deliberately separated baseline.
+2. **One change:** press A LEFT − four times. Keep the inventory, partition and measurement definitions fixed. Expect k = 4 and Ω = 4,900. Manual exchanges consume no random draws.
+3. **Observe:** compare that state with SAME k. Note both the visible difference and the unchanged readings. At complete separation SAME k has no visible effect; that is a useful null result.
+4. **Preserve:** KEEP stops motion and writes a uniquely named JSON file in Godot's user-data folder. The Output panel prints its full path. It contains all retained site lists, actions, seed, generator states, cursor, engine/model versions and event interval. In the Inspector, set the host's `observation` and `next_change` fields before KEEP; on a running preview use the Remote Inspector. There is no in-world notes keyboard.
+5. **Replay:** RESET, then REPLAY. It opens the latest saved record and restores its states in order without drawing again. KEEP also updates a small latest-record pointer. Older files remain available; the current button opens only the latest. Replay preserves the event order at the recorded interval, not the wall-clock timing of manual presses.
+6. **Reconstruct:** repeat in the fresh copied folder using only the declared files and printed model. Compare all sixteen final site values with the kept record, not just the gauges. A fresh apparatus can load an older record through its `restore(record)` method; REPLAY uses the latest pointer shared by these scenes.
+7. **Revise:** propose one next change and its reason. For example, count unlike neighbouring pairs beside these two readings. Define which sites are neighbours before coding. A new number earns its place only if it answers the observed omission.
 
-The largest bar is 0.10 m tall whether its count is 31 or 109. Four zero counts in the concentrated sample still get 0.002 m marks. These choices make the marks visible and fit each histogram into the panel. They prevent direct comparison of absolute counts by height across samples. The desk prints the counts so the reader can check the scaling.
+**ONE SWAP** chooses two distinct sites with a local seeded generator; swapping equal colours records an event without a visible change. **RUN / PAUSE** repeats these requests. A LEFT + moves back towards the separated baseline. Editing during replay makes a new continuation from its current state. Records stop at 1,024 events; KEEP and RESET begin another trial. RESET does not delete a kept file.
 
-## Disclose a model after observing its sample
+Replaying saved outcomes differs from generating new unpredictability. Resetting seed 435 and repeating the same requests reproduces this implementation's swaps. Saving actual states also avoids relying on a future engine version to reproduce its generator algorithm.
 
-DISCLOSE moves through ledger → works → origin → oracle → tally → ledger. Works reveals the formula. Origin names the generator and seed and adds pale expected-count bars from the active source: 20 each for the uniform law; approximately [100.1,50.0,25.0,12.5,6.3,3.1,1.6,0.8,0.4,0.2] for the concentrated law. The ghosts share the sample's vertical scale, are capped at its maximum display height, and have the same 2 mm minimum. Small positive expectations and zero observed counts may therefore have the same drawn height.
+## What happened in the implementation trial
 
-Oracle withholds the upper panel's supporting displays. It does not remove the desk's tiles, excerpt or readout. The source is still available elsewhere in the installation. Repeated disclosure changes rebuild the upper panel once while keeping the desk, sorting state and the selected built-in sample consistent.
+Native scripted tests swept k from 8 to 0, compared arrangements within k = 4, saved/reopened a trial and repeated 64 swaps from seed 435. H stayed one bit; Ω reached 4,900 and fell again. SAME k changed the arrangement without changing either measurement. Exhaustive enumeration independently recovered all 12,870 configurations and their nine multiplicities.
 
-The next hall, Random_Remove, makes selection spatial. Before a random choice removes a cell, another rule has already decided which cells are eligible.
+These are apparatus observations. They do not tell us whether a learner finds the comparison useful. Keep confusion, assistance, a null result or a reason to abandon a proposed measure in the research record. The 48-value seed bench remains the **first research pilot**; this is the next entropy apparatus.
 
+The jar asks a related question using colour *given one of six height bands*: H(C|Y). Its corrected labels now state that partition and a 0–1 bit range. Changing the bands, adding radial shells, conditional prediction and a thermal model are further work, not hidden capabilities of this bench.
 
-## Spatial staging — 16 September 2026
+## Optional encounter: what comes apart, and what can join?
 
-The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+The prefab comparison near the entrance has one STAGE slider and two copies of the same inventory: a cardboard box, CRT monitor, lab stool and microscope. At **0**, both tables hold the original objects. At **0.5**, the left objects have scattered intact while the right table's fifty mesh parts have separated. At **1**, the left objects are home again; the right parts form four hybrids. The seed now determines which parts join, their joining order and their orientation. SEED +1 produces another set of forms on the same four pads. Each hybrid combines at least three source objects; its label names the donors. Mesh boundaries are modelling decisions, not atoms or physically simulated joints.
 
+Start with seed 435 and move slowly from 0 through 0.5 to 1, then back. At 1, hold the viewpoint and stage fixed and use SEED +1 to compare new hybrids. At what point does an old object become difficult to recognise, and when does another form begin to hold together? KEEP several interesting arrangements, then open GALLERY. Four saved sets appear side by side, each labelled with its seed and slider stage; PREVIOUS/NEXT reveal more entries. Each set contains all four forms. Select its REPLAY number to restore it at full size, or BACK to return without changing the live experiment. The collection persists after reopening. Also keep an intermediate setting and compare it with a completed hybrid. The record retains the slider, raw draws, source signature, each part's hybrid membership and target transform. Earlier separation-only records still open: their old full displacement is now the midpoint. The Output path identifies each JSON to preserve; the gallery index links the collection.
 
-<!-- study-spine:signal_room -->
+For reconstruction, `disorder_sample.gd` supplies retained separation transforms; `seeded_grafts.gd` supplies seeded assemblies from fifteen small bundles, retaining details such as the screen and bezel. It shuffles memberships, joining order, attachment faces and quarter turns using a separate local random generator. `hybrid_recipe.gd` retains the transform codec and earlier fixed recipes for compatibility. Up to the midpoint, separation strength is twice the slider value. After the midpoint, each right-hand part interpolates from its separated pose to its saved hybrid pose. The left returns intact. Both branches calculate from stored endpoints, so reversing the slider retraces them. Completed hybrids are uniformly fitted to their pads; materials remain the originals. The [source guide and native receipt](../../../doc/book/iterations/2026-10-16-seeded-hybrids/README.md) list the host and dependencies; this optional reconstruction uses those supplied modules.
 
-## Return: Different neighbours
+The joining rules and bundle boundaries are authored; the seed now varies which hybrids those rules produce. Compare two saved seeds at stage 1 in GALLERY and follow a part that changes roles. Does its new relation suggest a different use? Replay each at full size to check that impression; the gallery miniatures use a uniform display fit. A later revision can change one joining rule while preserving the separation record. Earlier fixed-hybrid saves still restore their original targets and labels. This slider is a reversible geometric path, not an entropy quantity or a demonstration of spontaneous self-assembly. An entropy claim would require a declared random variable or macrostate and a measure. Human recognition and independent reconstruction still need a trial. The [gallery guide and native receipt](../../../doc/book/iterations/2026-10-16-hybrid-gallery/README.md) add persistence, selection and exact replay to this loop.
 
-Shuffle the retained values; compare unchanged counts with changed neighbours. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+### Follow one part before judging the whole
 
-This application reuses array, random. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`signal`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+Use **FOLLOW PART** to mark the CRT screen on both tables. The gold frame and name are removable annotations; the screen retains its original material. This cue identifies a mesh across transformations. It does not establish that a new hybrid functions as a monitor.
 
-[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-signal-room/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+1. **Baseline:** ORIGINAL, seed 435. Find the screen in each copy. Record the stage and seed before moving anything.
+2. **Compare:** PARTS, stage 0.5. Leave the slider still and look left, then right. On the left, the screen remains in its assembled monitor. On the right, the parts have separated. Changing the gaze is not another experimental condition. If a screen is hidden behind another part, record that obstruction before moving the viewpoint.
+3. **Follow:** move slowly from 0.5 to 1 while following the right-hand screen. Stop wherever its relationship becomes hard to recognise. The marker's hybrid letter identifies its target group; during the transition it does not mean the joining is complete. Reverse the slider to test whether the same path returns.
+4. **Keep and replay:** KEEP an intermediate arrangement, record why it is worth returning to, then use ORIGINAL and SEED +1 before REPLAY. Check the screen, neighbouring parts, stage and seed. The saved arrangement should return. **SAVE BOTH VIEWS** in the desktop preview separately preserves the current head and outside-camera images, poses and full artifact state. A screenshot alone does not restore the apparatus.
+5. **Reconstruct and revise:** rebuild with the declared modules above and load the saved JSON through `restore(record)`. Compare its part transforms with the record. Then change one bundle or joining rule in a versioned copy. Does the screen retain a role, acquire another one, or become unhelpfully obscured? Preserve that observation, including a null result, beside the parent record.
 
+WATCH rehearses this procedure with two hands. It looks between the tables at the same midpoint, follows the screen through a slower six-second joining movement, tries another seed, keeps an intermediate form and replays it. Its [eye/outside review](../../../doc/book/iterations/2026-10-16-ghost-prefab-playtest/index.html) retains the captured states and questions. Looking at the apparatus from its head revealed that successful input alone did not show whether the comparison was visible; the pauses, identity cue and standing position were revised accordingly.
 
-<!-- study-edit:signal_room -->
+Short tutorial and final excerpts, with an authored rehearsal question, float above the ghost's head. These cues expose the proposed reading of the encounter; they are not reports of a learner's thoughts or understanding. The outside view shows them; the eye camera omits the annotation layer so they do not cover the work. Each captured pair retains their source and checksum. The final's question—what an account makes available and leaves aside—can motivate a change to the apparatus without adding this optional stop to the chapter's main route.
 
-### One source change: Different neighbours
+Watching from the front for six seconds starts WATCH once, until a visitor uses a control. Touching a control takes over immediately. WATCH during rehearsal stops and restores the starting arrangement; the ghost's collection is separate. On successful completion in Random_Entropy, it restores the prefab baseline and walks on clear floor to the **Shannon ledger**, the main route's first artifact. A missing or obstructed route stops visibly. This pilot arrives with the next question; a ledger-specific control rehearsal remains to build. In the standalone preview there is no next artifact. This rehearses supplied apparatus and checks visibility; it does not replace independent tutorial reconstruction or a human trial. The 48-value bench remains the first research pilot.
 
-Call this on the supplied signal_room component. Mode 2 permutes cells with a repeatable seed. Compare values.count(1) and the neighbour-change readout before and after; then try another seed.
+[Trial, reconstruction and room evidence](../../../doc/book/iterations/2026-10-15-entropy-compartments/README.md) · [Research brief and next tasks](../../../doc/book/course/text-plans/Random_Entropy/research-brief.md)
 
-```gdscript
-set_pattern(2, 2026)
-```
+## Four beginnings that keep mixing
 
-Source: `commons/artifacts/signal_room/signal_room.gd`. Use the prepared scene to run and compare.
+At (5,8), `entropy_jar_states` places four broad jars on a shared 0.4 m plinth: layers, overlapping interface, mixed, core/shell. Each glass body is 2.3 m tall and 1.04 m across. They reuse the shakeable jar's placement generator at seed 435 and preserve forty beads of each group, displayed in lavender and warm coral. The interactive jar stands beside it at (12,8).
+
+Approaching the bank starts an eight-second observation pause. Then the four starting arrangements mix continuously. Their labels name their beginnings. Each bead makes bounded, colour-blind steps; there is no shared destination and no operation that forces the colours into identical arrangements. The side panel has only PAUSE/RESUME and RESTART. Restart restores all four starting records and their motion streams, including the observation pause.
+
+Read each current position twice: once in six height bands and once in two radial regions, split at 60% of the usable radius. Within each region, calculate colour entropy and weight it by its share of all eighty beads. At the start, core/shell leaves uncertainty under height but none under core/rim. PAUSE keeps the same positions for comparing these accounts. The partitions differ in both shape and number of regions; this compares two specific observations, not the effect of orientation alone. Whole-column colour entropy stays at one bit throughout.
+
+Reconstruct the starts from `jar_snapshot.gd` and the original `entropy_jar.gd`. `column_mixing.gd` takes those records and proposes a displacement every 0.48 seconds (one-quarter of the earlier speed). It retains the earlier 0.34 m radius / 2.0 m display as its motion ruler: each axis draws uniformly from −0.11 to +0.11 m in that ruler, then maps into source coordinates. The enlarged view scales those same paths; it does not consume different draws. It rejects a proposal outside the usable cylinder; it never clamps a bead onto the wall. Linear interpolation makes accepted steps continuous. The model is independent of frame rate. Four local streams derive from 435 using `435 + 104729 * column_index`; the index is 0–3. This is a reproducible random-walk illustration, without gravity, bead collisions, fluid flow or temperature.
+
+The small experiment loop is: **restart → inspect the starts → watch → pause → compare both readings → restart and revisit the same time**. Keep the source revision, starting state, stream index, mixing time and `positions()` in a research record; those are available to a reconstruction script, not an added visitor save console. The review retains exact coordinates at 0, 15, 45, 90 and 180 mixing seconds. In the native run, height readings at 180 seconds lie between 0.946 and 0.961 bits; they fluctuate afterwards. Similar readings do not establish perceptual identity. Record when the beginnings become difficult to recognise, at a fixed viewpoint, including a failure to find such a moment. Then change only a partition or the step size in a versioned reconstruction and repeat. The original live jar remains a separate shake/reset experiment; the prefab bench retains its own KEEP, gallery and replay.
+
+The [two-hall curation](relationship.md) keeps definitions here brief and treats the compartments as an active extension of the chair comparison. The first 48-value bench remains the first research pilot.
+
+### Reading the columns at body scale
+
+`jar_column.gd` maps the original 0.13 m radius / 0.34 m height coordinates into a 0.52 m radius / 2.30 m tall glass volume, starting 0.46 m above the floor. Bead centres scale by axis; each displayed bead remains round, radius 0.043 m. The eighty source coordinates and readings match the previous slow columns exactly, including the retained three-minute sample. During mixing, the visible beads and both measurements use the same interpolated positions. The original frozen source bodies supply coordinates only; they do not supply this motion's physics.
+
+All four jars share materials, dimensions and a fixed palette, without emitted light. Rounded shoulders meet pale lids and metal collars. Five faint circumferential marks show the six height bands. A separate side panel carries the readings; the beginnings are named on the plinth. The 5.8 m shared support and viewing approaches sit left of the entrance. Front inspection points are checked in the native hall; the gaps between jars are not passages. Source bodies are hidden with collisions disabled, and full-size column boundaries and the plinth provide collision. The original hand-sized shakeable jar remains a separate encounter.
+
+Current views and verification: [larger jars and a physical ruin](../../../doc/book/iterations/2026-10-16-plinth-and-physical-ruin/index.html). The [slow mixing record](../../../doc/book/iterations/2026-10-16-slow-lavender-columns/index.html) retains the same source paths. Human legibility, the perceptual comparison and headset comfort remain to be tested.
+
+## Optional reconstruction: remove a support
+
+`entropy_ruin` now separates the chosen action from its consequences. ONE STONE selects a supporting drum, draws it out over 0.9 seconds, then releases it. Gravity and contact move the other stones. RUN / PAUSE controls repeated selection only; it does not freeze a fall. VR grip or desktop carry can remove a loose stone directly. The bottom two courses remain fixed, and RESTORE waits until held stones have been released.
+
+The small mechanism is a stack of colliding `RigidBody3D` objects over a fixed base. Rebuild it with three box stones first: give each a `BoxShape3D`, leave the base frozen, and use the existing `XRToolsPickable` protocol for the two loose stones. Pull the lower loose stone sideways and release it with zero imposed velocity. Do not animate the upper stone or specify its landing position. The installed version uses convex collision hulls for its fluted drums and boxes for masonry, with friction 0.72 and zero bounce. It has no mortar, fracture or structural stress calculation.
+
+**Baseline → intervene → observe → reconstruct:** let the stack settle, record its transforms, masses and physics settings, then remove only the lower loose stone. Compare the upper stone's height before and after. Restore, repeat, then change just the support width in a separate copy. Does the upper stone descend, tip, bridge a gap or stay? An unchanged result is useful evidence too. Keep native captures and actual transforms if a landing matters. Seed 79 restarts the installed selection procedure; it does not guarantee identical physics trajectories or restore a saved rubble arrangement. This ruin has RESTORE, not a persistent KEEP/REPLAY gallery. The separate museum weathering wall retains its authored top-course dismantling rule.
+
+In the native three-second baseline trial, removing one drum lowered the next drum from about 1.38 m to 0.34 m without selecting it. The installed-room check also exercises the real button, supplied XRTools hand and desktop carry. This establishes a working consequence, not thermodynamic entropy or learner understanding. The 48-value seed bench remains the first research pilot.

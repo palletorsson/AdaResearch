@@ -9,6 +9,10 @@
 - Select a spatial section without advancing time.
 - Read display gain separately from the values it makes visible.
 
+## Reading route
+
+Read `reset`, `step` and `report` in the paired model. Follow one changed value through storage and measurement before interpreting its displayed brightness. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Bring the comparison forward
 
 In the previous room, a changed seed altered the row history while the copied pyramid stayed fixed. Here both volumes use the same procedure. We change one starting value in B and follow what happens to that difference.
@@ -37,6 +41,7 @@ The supplied `sample` function returns a reproducible forcing value for an addre
 
 ## Complete paired model — paired.gd
 
+<!-- student-code:paired.gd -->
 ```gdscript
 extends RefCounted
 const N := 11
@@ -133,6 +138,7 @@ The A and B palettes use the same fixed 0–9 scale. The third image magnifies a
 
 Read `step`, `select_slice` and `paint` first. `make_display` supplies the staging. As before, the model and its display have separate jobs.
 
+<!-- student-code:difference.gd -->
 ```gdscript
 extends Node3D
 const Pair = preload("paired.gd")
@@ -303,6 +309,7 @@ func make_display() -> void:
 
 Keep your existing PointBody. Its unchanged code is included so the three-file reconstruction is complete.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -347,7 +354,9 @@ func on_desktop_drop(_pointer: Node) -> void:
 	desktop_pointer = null
 ```
 
-## Make three predictions
+## Predict, then check
+
+Before reading the worked outcomes below, write what you expect integer storage, fractional storage and zero pull to retain after one update. These are guided comparisons; your independent choice follows them.
 
 **First, keep INTEGER, UNIFORM, PULL 0.25 and DRIVE 0.** At the changed centre, the calculated answer is 4.75. Integer storage keeps four. Its neighbours' small increases also lose their fractions. After one update the count and maximum difference are zero. Both complete arrays agree.
 
@@ -357,7 +366,7 @@ func on_desktop_drop(_pointer: Node) -> void:
 
 Press C to remove the one-cell intervention. A and B should agree. Press N to enable the shared drive; they should still agree. This is a control for the comparison. Press B to switch to the supplied scattered beginning. C, N, B, I and P all replay both arrays after changing their setting. R replays while preserving settings. None changes the selected slice. The model stops at 100 updates.
 
-## Make an independent change
+## A guided boundary change
 
 In `paired.gd`, change `site` to `Vector3i(0, 0, 0)`. Run in UNIFORM, FRACTIONAL mode with PULL 0.25 and DRIVE zero. Select Z=0 to see the beginning. Before STEP, predict which addresses can receive it.
 
@@ -366,6 +375,10 @@ After one step, **eight** addresses differ: the corner itself and its seven vali
 Explain three different disappearances: moving to a slice that misses the changed address, integer storage discarding the difference, and a stored difference falling below the count's threshold. They require different evidence.
 
 This completes the required cellular-automata passage with a testable comparison. In the unforced fractional case, averaging spreads and reduces the peak; brightness alone does not establish chaos.
+
+## Your own test
+
+Choose a different valid intervention address or pull value. Keep the two update procedures and their drive matched. Predict the first difference count and peak, then test those values rather than judging the image alone. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
 
 ## Optional composition — follow a question of your own
 

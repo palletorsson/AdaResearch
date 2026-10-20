@@ -57,7 +57,14 @@ mesh.surface_add_vertex((p - center) * final_scale)
 
 Pink gives the drawing another centre and size. Green rounds those displayed positions onto a new grid. The panel still lists the original positions: the program can give a record another appearance without rewriting what it received.[^point-grid-replay]
 
+Select a row on the panel. Its number appears beside the corresponding pink point, with a green marker at the address to which it snaps. The short connection between them gives the displacement a visible length. POINT − and POINT + let us follow neighbouring entries; selecting a visible point brings its row into view.
+
+Two rows may lead to the same green address. Their numbers remain different. The record knows which visit we selected even where the grid gives both visits one place. Turning a page leaves that selection intact; NEXT TRACE moves to another retained drawing.
+
+
 Both versions came from your hand; neither contains the whole movement. One bend has become several things we can return to. Keeping them beside one another lets us see what the new rule changed, and leaves the earlier record available for a use we have not chosen yet.
+
+In *Ghostcatching*, Bill T. Jones's captured movements become drawn bodies through his collaboration with Paul Kaiser and Shelley Eshkar.[^point-grid-ghostcatching] Your bend has also become material for another composition. Look between pink and green: how far can we alter its appearance while still finding the gesture?
 
 A turn made by your wrist might now suggest a route for your whole body. Is there a part you would want to follow? A record can become a score, but it needs another decision about what following means.
 
@@ -99,6 +106,8 @@ We can bring endpoints back to places where they meet. Next, join three points t
 
 [^point-grid-lefebvre]: Henri Lefebvre, [*The Production of Space*](https://www.wiley-vch.de/de?isbn=9780631181774&option=com_eshop&title=The+Production+of+Space&view=product), translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants.
 
-[^point-grid-carry]: If the field is empty, return to Trace, draw with one of the three coloured pens until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records.
+[^point-grid-carry]: If the field is empty, return to Trace, draw with one of the three coloured beads until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records.
 
 [^point-grid-replay]: Small drawings grow fivefold; larger ones receive a smaller multiplier to fit within five metres. Green rounds the displayed positions with six intervals per metre along each axis. The [technical companion](/book?map=Point_Line_Grid&section=technical) gives the transforms and the panel's page controls.
+
+[^point-grid-ghostcatching]: Bill T. Jones, Paul Kaiser and Shelley Eshkar, [*Ghostcatching*](https://openendedgroup.com/artworks/gc.html) (1999). Their artist statement describes captured movement recomposed as three-dimensional drawing. Ada carries a hand's position list, not a full-body motion capture performance.

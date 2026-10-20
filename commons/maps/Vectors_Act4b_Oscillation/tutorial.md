@@ -79,3 +79,13 @@ The zero-length check avoids dividing by zero; the force is capped at 150 N. The
 Here a repeating movement comes from forces changing velocity. Next, make a similar repetition by assigning positions.
 
 [Reflective text](final.md).
+
+
+<!-- @pendulum_noise -->
+## Optional comparison — a recorded push
+
+**Learning elements:** common initial state; saved force input; tangential projection; matched damping comparison; replay; finite settling criterion.
+
+Between the spring row and the swings, pull either black point and release. Both begin from the same angle. First compare external force off/on with matching damping. Then use MODE to send the same saved four-second push to both and change only B's damping. The motion continues for twenty seconds; the trace distinguishes the end of a push from the end of its consequence. These are angular models, not engine hinges. The primary spring lesson above remains the hall's first reconstruction.
+
+The [complete companion tutorial](../../artifacts/pendulum_noise/tutorial.md) prints the model, unchanged point class, constrained hand extension, full apparatus and scene. It declares the existing museum controls and includes independent zero-input and equal-parameter cases. Randomness/Noise later returns to how the saved input is produced.

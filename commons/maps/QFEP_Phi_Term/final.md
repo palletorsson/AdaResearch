@@ -4,9 +4,11 @@ Can change have a direction without that direction already meaning improvement?
 
 <!-- @phi_slider -->
 
-Move PHI through zero and watch the particles belonging to the slider. Compare a negative setting with a positive setting of similar magnitude. The local feedback changes direction and colour: one side sends particles down, the other sends them up. The handle starts at zero, and nothing is released. Once you have moved it, bringing it back near zero only slows the release to a crawl; watch the speed rather than waiting for silence. The pattern behind the rail keeps moving.
+Move PHI through zero and watch the particles belonging to the slider. Compare a negative setting with a positive setting of similar magnitude. The local feedback changes direction and colour: one side sends particles down, the other sends them up. The handle starts at zero, and nothing is released. Returning it to zero stops new particles; those already released can remain for their two-second lifetime. Near zero, their speed is small. The pattern behind the rail keeps moving.
 
 The handle gives you a signed parameter. Its sign distinguishes two directions of weighting, while its distance from zero gives the magnitude. In the project expression, phi multiplies a term associated with change in entropy. A weight, a measured change and the resulting response are three separate quantities, even when a display uses one colour to connect them.
+
+A positive weight does not make every change a positive contribution. A falling reading reverses the product's sign. Nor does the same difference tell us how quickly it occurred: that requires the interval between observations. On the small learner bench, we can retain those quantities separately and ask which one changed. The arithmetic gives us a comparison; it has not yet told us what to value.
 
 Compare the midpoint with two settings on opposite sides. Crossing zero changes the sign; moving further along the same side changes magnitude without another sign change. These are distinct comparisons you can repeat on the rail. If you describe both simply as “more change”, you lose what the signed control makes available. Name the direction first and then how strongly it is weighted, before asking what a receiving system would do with that value.
 

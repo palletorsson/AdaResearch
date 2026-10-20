@@ -20,6 +20,8 @@ Press CONNECT / CUT. The paths light up and the receiver takes the current handl
 
 Cut the route again. Move the handle back. The receiver keeps its last inputs, including the one you were trying to undo. Disconnection has left a memory of your action. It has not restored an innocent beginning.
 
+A useful record keeps both sides of that difference: what the hand offers and what the body still uses. An image of the handle alone could make the experiment appear to have returned to its start. At the receiver, an earlier decision is still taking effect. Keeping those two readings together makes the interrupted relation available for another inspection.
+
 Connect again and leave LAMBDA steady. Move PHI across zero. On this reactor it lightens or darkens the colour; it does not measure a changing entropy. The same signed weight that directed particles on the earlier rail has arrived in another body and acquired another consequence. The name of the parameter did not decide that consequence. Someone wrote this mapping.
 
 REPEAT restarts the reactor's pulse and jitter from the same animation start while keeping the values it received. Choose a setting, repeat it, then alter one handle and repeat again. Follow something specific: the pulse, the colour, or the maximum particle speed printed at the receiver. Changing both handles together is also available. First give yourself something to compare it with.

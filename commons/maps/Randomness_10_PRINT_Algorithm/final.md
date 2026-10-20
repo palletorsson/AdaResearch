@@ -1,6 +1,6 @@
 # A maze made of marks
 
-When do independent marks begin to look like a maze?
+In the previous hall, a draw removed a member from a set. Here each place receives a mark. When do independent marks begin to look like a maze?
 
 Diagonals rise above the walls on three sides of the hall. Below them, a cluster of solid slabs leaves narrow openings between its edges. The same two marks recur on a screen at the far end. Something that fits inside one character has acquired room for a body.
 
@@ -14,11 +14,11 @@ The screen prints left to right, row under row. Beside it, the console carries o
 
 One line, famous enough to have a book named after it.[^10print] Read it from the middle outward. `RND(1)` gives a number from zero up to, but not including, one. Added to 205.5, it lands between 205.5 and 206.5. `CHR$` keeps the whole part: character 205 or 206, one diagonal or the other. `GOTO 10` returns to the beginning.
 
-The constant 205.5 puts the two choices in balance. Each new mark can lean either way. Nothing in that choice asks whether a passage is needed beside it.
+The constant 205.5 puts the two choices in balance. Each new mark can lean either way. Equal odds do not promise equal numbers in the field, or symmetry in their arrangement. Nothing in that choice asks whether a passage is needed beside it.
 
 Yet the field on this screen seems to breathe. Bands favour one diagonal, then the other. The small print admits why: “bias breathing.” A sine wave changes the odds while the line above still displays 205.5. What looks like a texture of chance also carries a rhythm someone chose. The familiar line does not account for everything this installation does.
 
-Press **BIAS +**. The breathing stops and the constant begins to change: 205.4, then 205.3. The next marks increasingly favour one direction. At 205, every mark is the same diagonal. The maze has become stripes. Use **BIAS −** to bring the constant back to 205.5; the odds are now fixed and even.
+Press **BIAS +**. The breathing stops and the constant begins to change: 205.4, then 205.3. The next marks increasingly favour one direction. At 205, the new field fills with the same diagonal. What suggested a maze has become stripes. Use **BIAS −** to bring the constant back to 205.5; the odds are now fixed and even.
 
 There is another small decision in the line. Press **SEMICOLON** and the trailing `;` disappears. Every mark now begins a row of its own. The field becomes a single column.
 
@@ -40,7 +40,7 @@ Step along them. Where does a field of parallel lines become something else? The
 
 **RESEED** changes the arrangement while keeping every count. The four grids come from one shuffled deal: the single turned cell in the first is turned in the other three too. Chance decides which cells turn. Their number was settled beforehand.
 
-The printer leaves that number open. Giving a diagonal a thirty-percent chance does not reserve exactly thirty of a hundred cells for it. A probability and a count are different instruments. Here they stand close enough to compare.
+The printer leaves that number open. Giving a diagonal a thirty-percent chance does not reserve exactly thirty of a hundred cells for it. A probability and a count are different instruments. The small tutorial board keeps both in view: the odds we set and the count that actually arrived. Here they stand close enough to compare.
 
 <!-- @ -->
 
@@ -70,11 +70,21 @@ Each cell was decided alone. Whether you can cross depends on their arrangement 
 
 <!-- @ten_print_maze_3d -->
 
-Look up again at the three fields towering above the hall. Their lines can be crossed by your body, but they provide no surface to carry you upwards. Height in the image has not become a climb.
+Look up again at the three fields towering above the hall. Each diagonal now has a visible thickness and its own square cell frame. A mark can be followed separately before it joins a longer contour. These mesh bars can still be crossed by a body; they provide no surface to carry us upwards. Height in the image has not become a climb.
 
 A red ball stands for an ant in each field. It receives a different map: even parallel diagonals are treated as touching, so a channel you could walk between the slabs is closed to it. The ant stays around a corner until a cell turns and another move becomes possible. Every turn clears its record of where it has been.
 
 Watch a diagonal change near it. One replacement can join a long contour or break it apart. The slabs held still long enough for you to learn a passage. Here the ground of the ant's small knowledge keeps changing.
+
+<!-- @ -->
+
+<!-- @textile_comparison -->
+
+Three lengths of cloth hang from a brass rail. Pink and pale green marks cross a dark ground. On one, paired diagonal ribbons join into wandering lines; on the next, short stitches turn between horizontal and vertical; on the third, large and small squares break the surface into patches. All three read the same 252 stored draws. A contour that seemed inevitable in one fabric disappears in another. Chance has not chosen what a mark means. The program supplied that vocabulary before drawing.
+
+We can keep those draws and change the colours or the number of repeats. Beside the hanging cloth, a fitting wears the selected print. The marks cross a waist, widen over a skirt and meet at seams. The patterned surface has acquired a cut. This is printed cloth on shaped panels; the yarns of the earlier loom are not being woven again here.
+
+The changing room opens beside it. **WEAR** carries that fabric onto our moving body; the full-length mirror returns the dress we are wearing. A sleeve follows a hand. Looking down gives another view of the same marks. The selected record stays with the dress while the studio remains free to try another version. **KEEP** retains a fabric to return to; **REPLAY** brings it back to the fitting. The pattern can leave its frame without losing the choices from which it was made.
 
 <!-- @ -->
 

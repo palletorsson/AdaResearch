@@ -2,11 +2,11 @@
 
 <!-- @revolving_joy_ride -->
 
-Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed. The joints are hinges: pins of no length that let each link swing about a point on the one above it. The hub is different in kind. It is a body the solver may not push: its angle is written each step, and nothing the hanging bodies do reaches it. So the teardrops report the ride, and the ride never reports them.
+Stand where you can see the hub and the hanging bodies together. The ring turns because its angle is advanced by the program. The joints and deforming bodies respond to a support whose motion has already been prescribed. The links meet at pin joints. They hold two attachment positions together while allowing the links to turn; they do not impose a hinge's single axis. The hub is different in kind. Its angle is written each step; the hanging bodies cannot push back on that command. Their response can reach your attention without changing the rate that produced it.
 
-Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue.
+Lower the SPEED. Then REVERSE it. Do the bodies immediately take up the new arrangement? STOP sets the angular rate to zero, but it does not erase velocity, gravity or contact. The support can stop commanding a new angle while its consequences continue. Stopping the instruction is not the same as ending the event.
 
-The rate is measured in radians per second. A complete turn is `TAU` radians. The driven rotation connects this hall to Transformation and Oscillation, but the hanging bodies add a different problem: their current state matters to what happens next.
+You have turned a body before. Here the turn reaches other bodies through an attachment. They meet the next movement with whatever the last one has left in them. Their changing outlines make the pull of the moving support visible.
 
 Change STIFFNESS or PRESSURE while watching a particular body. We should not attribute every difference to speed when we have also changed material coefficients. The apparatus makes a limited experiment possible, provided we remember what we touched.
 

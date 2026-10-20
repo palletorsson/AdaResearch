@@ -26,7 +26,7 @@ This separation makes the application reusable: one can keep the rule and choose
 
 ## Placement and retained work
 
-The 15 × 27 map adds a front study and an eastern aisle around the retained rear configuration. All six artifacts remain. The sole primary and book hero are the Life dish; the other works remain available for subsequent comparisons. The active sequence order is unchanged. The former technical draft is archived under `doc/space/ca-life-review-2026-09-13/before/`; its advertised live rule tables and multistate controls are not the installed dish.
+The 15 × 27 map has a front study and, since 8 October, a level open rear gallery. Raised strips, pits and its short internal partition have been removed. The secondary works are spaced around the onward route. All six artifacts remain. The sole primary and book hero are the Life dish; the other works remain available for subsequent comparisons. The active sequence order is unchanged. The former technical draft is archived under `doc/space/ca-life-review-2026-09-13/before/`; its advertised live rule tables and multistate controls are not the installed dish.
 
 Runtime evidence and actual images: `doc/space/ca-life-review-2026-09-13/`. Desktop tests cover rule cases, wrapping, travelling and repeating patterns, event coupling, controls, support and a margin walk. Headset reach, comfort, performance and the secondary works require later review.
 
@@ -38,3 +38,18 @@ The rear hexagonal terrain's radius-20, 0.5 m hexagons originally spread roughly
 TRACE-off now restores the base dish display before refreshing the floor. Neither buffer nor generation advances. The earlier code restored the floor but left the dish's red/blue wake until a later update.
 
 41 native checks pass, including fourteen real desktop pointer events, four-step glider translation, TRACE colours/restoration, lamp onsets/LINK, the six-generation meeting, body approach to A, occupied/empty support, and retained default floor and hex state dimensions. See encounter-notes.md for evidence and limits.
+
+
+## Complete learner reconstruction — 8 October 2026
+
+`tutorial.md` prints `life.gd` and the unchanged `point_body.gd`, maintained in `doc/book/studies/cellular-automata-through-the-hands/CA_BeyondBinary`. The 24 × 24 Boolean present uses a flat array and the same seed, periodic neighbourhood and B3/S23 rule as the installed primary. It supplies a complete small table, fixed tile instances, one address frame, one lamp and PointBody STEP. It omits the installed RUN, TRACE and preset UI. The student changes seeds to a blinker, then moves the output binding while keeping cell evolution unchanged.
+
+29 native checks of the exact printed blocks pass: eighteen rule cases; all offsets/wrapping; separate buffer and order independence; solver parity through 48 glider generations and eight random beginnings; two meaningful fault variants; both transfer tasks; rendered colours and fixed transforms; collision support for empty/occupied sites; actual XRTools pickup/action/release with supplied controller poses. The first probe used an incorrect production property name (`initial_culture`); corrected to `culture` before the successful run. This was a test-harness defect, not a learner-code failure.
+
+Walk-floor address-study placements now add `life_hand.gd`: the established pickable point carries the existing `step_once` action and parks beside the console on release. Moving the point never edits a cell. The Life solver and `life_address_receiver.gd` are byte-identical to this turn's baseline. Other address-study placements do not add the hand control.
+
+Rear staging: mould at source (2,20), scale 0.4; growth network at (3,24), height 1.3 and scale 0.35; dark sphere at (6,21); screen at (1,19), facing inward. The hex table keeps (9,23). All six authored artifacts remain; no secondary algorithm was changed. Incidental sculpture is reserved out of circulation. Entry/exit use (6,0)/(6,26), with no extra gate. Only this generated museum-plan row is rederived.
+
+38 museum checks pass, including eight capture checks: installed point action, LINK and onset preservation, TRACE restoration, blinker/meeting, support at A through generations 0/8/12, RUN/limit, stable floor transforms, portal approaches, and five routes with 306 samples of 0.56 m wide/1.7 m high capsule clearance and level floor on collision layer 1. Initial route samples touched the console and readout stem: the final route stops at a reachable console approach and goes around its furniture. This does not establish all-layer walking, full portal transfer, physical headset comfort or secondary-work interaction acceptance.
+
+Current full texts, before/after overhead and visitor captures, native receipts and ZIP: `doc/book/iterations/2026-10-08-ca-a-pattern-visits/index.html`.

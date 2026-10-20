@@ -1,107 +1,23 @@
-# GT Connectivity — Technical
+# Connectivity — implementation and verification
 
-The map introduces directed graphs. An edge from A to B does not imply an edge from B to A, and reachability becomes asymmetric. Three rooms in the map correspond to three strongly connected components: maximal subgraphs in which every vertex can reach every other via directed edges.
+The learner carries five files unchanged from Network Analysis, renaming its study.gd to network_study.gd. The new reachability.gd extends the ledger; a new study.gd extends the existing host. The seven IDs and earlier seven records remain. One explicitly authored fictional report, R04: 5 reports to 1, is added but starts omitted. No reverse events are inferred from the drawing. The old undirected scaffold remains available but is not used for directed queries.
 
-Tarjan's algorithm finds strongly connected components in O(V + E) time using a single DFS pass with a stack. Kosaraju's algorithm achieves the same bound with two DFS passes on the graph and its transpose.
+directed() builds fresh adjacency arrays from active records. Reversal swaps endpoints only in this derived structure. reachable() reuses the first hall's Traversal queue, assigns directed neighbours and the chosen start, and runs to exhaustion. component() intersects forward and backward reachability, returning the maximal strongly connected group containing the start. Self-reachability includes zero edges; isolated vertices are singleton components. Duplicate events are deduplicated only in adjacency; record counts remain event counts. This is not Tarjan or full Kosaraju and does not partition all components in one pass.
 
-```gdscript
-# Tarjan's SCC — simplified
-func tarjan_scc() -> Array:
-    var index := 0
-    var stack := []
-    var on_stack := {}
-    var indices := {}
-    var lowlink := {}
-    var sccs := []
+The host inherits the full point/mesh/controls construction. Start is initially 4. RETURN or the held point trigger toggles R04; START/1 cycles IDs after release; LAYOUT/3 changes the drawing; RESET/R restores original drawing, start 4 and omitted return. Movement updates local XY only. Colours have matching OUT/BACK/BOTH/neither text. The previous filter method name is overridden by START; this host has no kind-filter control, while the model still respects filters. Trigger is explicitly reconnected. No new player, camera, lights or hidden scene-node references are required.
 
-    var dfs := func(v):
-        indices[v] = index
-        lowlink[v] = index
-        index += 1
-        stack.push_back(v)
-        on_stack[v] = true
-        for w in adj_out[v]:
-            if not indices.has(w):
-                dfs.call(w)
-                lowlink[v] = min(lowlink[v], lowlink[w])
-            elif on_stack.get(w, false):
-                lowlink[v] = min(lowlink[v], indices[w])
-        if lowlink[v] == indices[v]:
-            var comp := []
-            while true:
-                var w = stack.pop_back()
-                on_stack[w] = false
-                comp.append(w)
-                if w == v: break
-            sccs.append(comp)
+Without R04, outward membership from 4 is [4,5], backward [0,1,4], component [4]. With R04 included: outward [1,3,4,5], backward [0,1,2,4,5], component [1,4,5]. The independent exercise changes R04 to 5→2 and its source sentence: component(4) stays [4], while component(2) and component(5) become [2,5]. This illustrates a cycle that cannot return to the original start.
 
-    for v in vertices:
-        if not indices.has(v):
-            dfs.call(v)
-    return sccs
-```
+31 fresh code checks pass. Seven exact printed scripts are extracted and run. An independent Floyd-Warshall closure oracle checks all 256 omission subsets × 3 filters × 7 starting vertices. It uses literal endpoints rather than the implementation's adjacency builder. Checks also cover direction, immutable sources, invalid starts, singleton/parallel/self-loop cases, arrow geometry, actual keyboard and pointer input, transformed-host XRTools pickup/trigger/release, retained point identity, the independently edited study and three deliberately faulty variants (outward search twice, union instead of intersection, ignoring omissions).
 
-The key insight is the lowlink value: it tracks the earliest reachable index from v through the DFS subtree plus at most one back-edge. When a vertex's lowlink equals its own index, the vertex is the root of an SCC, and the elements of the stack above it (up to and including the vertex itself) form the component.
+The first run checked the selected point before the frame/physics synchronization had settled after a START press. The checker now awaits five frame/physics pairs, as the held/drop checks already did; no learner logic was changed. The initial failed log is retained as first-start-check.log. The native room independently checks the same START behaviour after release. Current receipts require an explicit completed marker and matching tutorial/source hashes; no final script/parse errors. Existing UID/Jolt warnings remain.
 
-The map's three rooms correspond to the three SCCs of a constructed example graph. Within each room the learner can move freely; between rooms the doors are one-way, reflecting the directed inter-component edges. Walking between rooms traces the structure of the directed graph at body scale.
+The museum's existing Tarjan implementation and registry are unchanged. The map selects its existing mutuality=split preset: 12 vertices in two internally strongly connected rings, one crossing v0→v6. The actual traversal completes with components v0–v5 and v6–v11 and an empty unresolved stack. Its graph differs from the seven-vertex learner dataset. The reflection describes this comparison, not a room architecture that literally enforces one-way travel. Other visible algorithm procedures are not silently made tutorial prerequisites. Source comments describing a DAG as having no SCCs are imprecise: every vertex is its own SCC; the tutorial states the correct distinction.
 
-Once components are identified, they collapse to a directed acyclic graph (DAG) in which each component is a single node. The DAG can be topologically sorted with a second pass — Kahn's algorithm or a reverse-DFS — in O(V + E) time.
+The previous 14x10 hall had internal walls, a raised middle room, overlapping diagrams and a blocked t-exit fallback. The revised hall retains the footprint and doorway positions, has a continuous floor and clear central passage, and places Tarjan in the right bay at cell(10,6), yaw180, elevation1.15m, scale0.5. Kosaraju and topological-sort scenes remain in the catalogue but are removed from this hall placement. The temporary learner is in the left bay at map-local(3.5,-0.25,5.5), yaw180, scale1; isolated hall-root(3.5,-0.25,9.5). The tutorial explicitly instructs this student installation; it is not a permanent extra exhibit.
 
-Within the sequence, Connectivity is where direction becomes load-bearing. The edge-list data structure that worked for undirected graphs is replaced by a pair of adjacency lists (out-neighbours and in-neighbours), and the algorithms are rewritten to respect the asymmetry. GT_Spanning_Trees will next ask how to cover a graph most cheaply.
+25 native checks pass, including completion/capture assertions: installed Tarjan preset and result, directed crossing, supported central aisle and approaches, exact printed learner, actual pointer selection, synthetic XRTools hold/trigger/release and unchanged reachability under drawing movement. Eye-level and above captures accompany the before/after report. This is author-operated reconstruction, not a blind student or physical headset test. Quest comfort/performance and continuous portal traversal remain unverified.
 
-## Weakly vs Strongly Connected
+Replay code: python tools/test_graph_connectivity.py
 
-A directed graph is strongly connected if every vertex can reach every other vertex. It is weakly connected if the underlying undirected graph (ignoring directions) is connected but the directed version is not. Most real directed graphs are weakly connected but not strongly connected.
-
-The map's three-room architecture corresponds to a graph that is weakly connected globally (you can reach any room from any other if you ignore directions) but contains three strongly connected components internally (within each room, you can reach any vertex from any other).
-
-## Condensation
-
-Collapsing each SCC to a single vertex produces the condensation graph. The condensation is always a DAG — acyclic — because any cycle in the condensation would contradict the maximality of the components it spans.
-
-```gdscript
-func condense(sccs: Array) -> Dictionary:
-    var scc_id := {}
-    for i in range(sccs.size()):
-        for v in sccs[i]:
-            scc_id[v] = i
-    var condensation := {}
-    for e in edges:
-        var a := scc_id[e.u]
-        var b := scc_id[e.v]
-        if a != b:
-            condensation.get_or_add(a, {})[b] = null
-    return condensation
-```
-
-Topological sort on the condensation gives a linear ordering of the components such that every directed edge runs from an earlier component to a later one.
-
-## Articulation Points and Bridges
-
-Tarjan's algorithm also finds articulation points (vertices whose removal disconnects the graph) and bridges (edges whose removal disconnects the graph). These are related to SCCs but live in undirected graphs and use the same DFS-with-lowlink machinery.
-
-```gdscript
-func find_bridges(graph) -> Array:
-    var bridges := []
-    var index := 0
-    var indices := {}
-    var lowlink := {}
-    var dfs := func(u, parent):
-        indices[u] = index
-        lowlink[u] = index
-        index += 1
-        for v in graph[u]:
-            if not indices.has(v):
-                dfs.call(v, u)
-                lowlink[u] = min(lowlink[u], lowlink[v])
-                if lowlink[v] > indices[u]:
-                    bridges.append([u, v])
-            elif v != parent:
-                lowlink[u] = min(lowlink[u], indices[v])
-    for u in graph:
-        if not indices.has(u):
-            dfs.call(u, null)
-    return bridges
-```
-
-Within the sequence, Connectivity is where direction becomes load-bearing. GT_Spanning_Trees will next ask how to cover a graph most cheaply.
+Replay museum: python tools/run_encounter_probe.py GT_Connectivity --sequence graphtheory --render --no-bridges --output-tag connectivity-final --probe tools/probes/graph_connectivity_room.gd

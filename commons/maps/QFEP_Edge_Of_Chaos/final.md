@@ -20,6 +20,8 @@ DT .3 / .15 starts the comparison again with a different step size. The smaller 
 
 The small difference reading compares the two B concentration fields cell by cell. A low value means these calculations are close in that particular respect. It does not tell you whether the pattern is alive, beautiful or worth keeping. Look back at your boundary. Does the number register what you were watching?
 
+To keep this comparison, keep more than its final number. The beginning, parameter setting and duration belong with the two step sizes. A screenshot can hold a feature you want to revisit; it cannot by itself reconstruct the conditions that produced it. Our learner bench keeps the compared fields alongside those conditions, so a later attempt can answer to something more specific than a remembered resemblance. If we alter the parameters along the way, their final values no longer tell that whole history.
+
 A previous version of this screen made its pattern partly by overshooting and clipping its values; that too was something code had made, answering a different question from the one the display claimed to ask. Repairing the calculation gives us another way to investigate the image; it does not make the image explain itself.
 
 The hall’s recommended middle was an architectural choice. Here a measured transition would require a stable numerical experiment and a defined observable, such as persistence or spatial correlation, examined across controlled settings. An evocative label cannot perform that work.

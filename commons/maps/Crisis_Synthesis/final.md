@@ -90,6 +90,8 @@ The sphere keeps both readings while its colours change. Recall the constructive
 
 We have more ways to carry on than the rail has labels.
 
+Changing a geometry, finding a contradiction and failing to find a proof require different responses. A missing witness is different again from opposed reports; an image that joins two beams does not establish their contact. These distinctions have been the work of the walk. The failure of one justification asks us to examine that justification. It does not abolish the possibility of giving reasons.
+
 ## A model that can be answered
 
 There is a desire running through this museum: give the world another opening. Make a passage, another kind of body, a rule that does not already know what the body must become.
@@ -107,6 +109,16 @@ YOU MAY REMAIN HERE. On a small label, the sentence is easy to overlook. Above i
 Hold the strip on MAY. The other two displays continue to offer the sentence in full. Who is speaking from that height? The words have acquired a place from which to address you, without acquiring a reason you should obey.
 
 These are our sentences, placed in relation to Holzer's public uses of language. Slow the strip. The permission takes longer to arrive. An assertion on a wall remains something to question, even here, among the limits of proof.
+
+In your working copy, six cards keep a sentence beside its scope and evidence. The first five return to the small computations you have made. The sixth carries an AI proposal with no checking procedure attached. Make its letters as large as the checked sentences. Slow them down. Let them occupy the same time and surface. Nothing in those operations supplies the missing evidence.
+
+Those six cards use supplied examples. Another card now arrives from your own bench in Gödel. It keeps the target you chose, the search budget, the candidate you tested, your expectation and the answer the checker gave. A failed prediction stays failed even when you understand it now. Like the trace brought into Grid, this is a record of something you did, read again in another room. The displayed source identifier lets you notice when the model has since changed. Neither its identifier nor its preserved file proves every claim you might attach to it.
+
+Nor do the first five cards share one certificate called truth. A failed membership case, a search stopped at a budget, a measured return, an exhibited witness and a countermodel warrant different statements. Their records must travel with them. If our own sentence says more than its record supports, that is where revision begins.
+
+Hofstadter's question about systems and their descriptions returns here at the scale of your own work. The museum now contains something you thought about it: a prediction you can recognise and reconsider. That record captures one answer, leaving out the reasons, hesitation and bodily experience that accompanied it. You supply the act of reconsidering; the saved file does not do that for you. Turn the same attention toward this text and the AI that helped write it. Which claims can you check, and whose experience would make us revise what the record keeps?
+
+Choose an earlier work to return to: your trace, a woven pattern, the sphere taught to recognise a phrase. Name what it retained, what rule acted, and what you observed. What can you now say more precisely about that encounter? The record need not become a reason to stop making. It can help the next experiment begin.
 
 <!-- @ -->
 

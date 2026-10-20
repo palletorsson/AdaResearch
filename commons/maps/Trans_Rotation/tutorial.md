@@ -1,62 +1,144 @@
-# One centre, many centres, an enclosure
+# Give the carried body a centre
 
-**Learning elements — proposed focus**
+## Learning elements
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+- Axis, angle and pivot
+- Degrees converted to radians
+- A fixed local offset under a rotating parent
+- A face mark that makes orientation visible
 
-- Pivots
-- Axes and angles
-- Rotated offsets
-- Operation order
+Follow the end of a blade in the Rotation hall. Its middle stays put while its end crosses the gap. Then follow the mark on the small turning cube: an outline can return before the mark does.
 
-1. Find the fixed middle of each 8.4 m blade. Y offers a level crossing; X and Z retain held climbing slopes. Then board their small level end-platforms: X travels forward along z and up3m, Z travels sideways along x and up3m. Each platform follows a180-degree upper arc while remaining upright, with12-second docking pauses and a12-second turn. It reverses along the upper arc for the return. Compare the blade's changing orientation with the platform's fixed upright basis; remaining on a bare blade through vertical cannot be a standing ride. Grid wedges and still aisles provide returns.
-2. Walk forward through each two-column, six-row array. The angles are 0, 18, 36, 54, 72 and 90 degrees. Compare X, Y, Z and fixed X-then-Y-then-Z order without changing cube size or centre spacing. Then compare the narrow 0.44 m and wider 1.20 m test bodies: the same 1.6 m height, 2 m/s forward input, gravity, 45-degree slope limit and 0.15 m floor snap. Rings retain endpoints; readouts include sideways displacement. REPLAY starts both passes again. A wider body need not stop sooner: Z can carry it sideways into a continuing route. These are collision trials, not a proof that another body or movement cannot pass. Inspect a stopped route from an aisle. Ninety degrees can restore a flat-looking endpoint without making the intervening passage easy.
-3. Walk through five hollow tunnel segments with the same eighteen-degree spatial increment. Then observe the five carousel profiles: their layers use angular speeds of `0.5 * pow(1.2, i)` radians per second. Separate an angle assigned by position from an angle accumulating with time.
+## Bring the body and its clock
 
+Start with a copy of Translation's completed `lesson.gd` and `box_body.gd`, edition 2026-10-16. Keep `BoxBody`, `var travel`, `var elapsed`, the whole `box(size, at)` function and the whole `_process(delta)` function. The box keeps its dimensions: 1.2 metres by 0.2 by 0.8. The new relation is a rotating parent.
+
+Carried unchanged from [Translation](../Trans_Translation/tutorial.md): `box_body.gd`, the class that constructs the visual.
+
+Use the same empty, floor-level `TransformStudy` in the prepared museum, with zero rotation and unit scale. The museum supplies the light and viewer. These are visual bodies; the installed rides supply collision and rider support. Keep your Translation folder so its journeys remain available.
+
+## 1. Give the body a pivot
+
+In `lesson.gd`, replace the declarations from `var start` through `var via_corner` with:
+
+<!-- student-edit:pivot-values -->
 ```gdscript
-station.pivot.basis = Basis(station.axis, deg_to_rad(degrees * float(station.sign)))
-var degrees := float(cube.get_meta("row")) * row_angle_step
-cube.basis = rotation_for_band(band, degrees)
+var pivot := Node3D.new()
+var axis := Vector3.UP
+var offset := Vector3.ZERO
+var duration := 8.0
 ```
 
-A rigid rotation preserves a solid's internal distances and topology. Passage also depends on its neighbours, pivot, collision and the moving body. The tunnel's subtraction supplies its hole; rotation arranges the holes. Compare the room left around the five carousel profiles. Carry the relation between an object's dimensions and your body into Scale, where the surroundings grow while the visitor keeps the same size.
+`pivot` is a new coordinate frame. Its Y axis will be the axis of the turn. `offset` will place the body relative to that frame. `duration` now means seconds per full turn, replacing Translation's time to reach one destination.
 
-The compact arrangement retains full-size crossing blades and array cubes. It reduces repetition counts and removes one duplicate cake; the five distinct cake profiles remain available together. Headset traversal and comfort still require a human review.
+Replace `_ready()` with this complete function. Keep `box()` unchanged:
 
-## Standing through the turn
-
-`wall_crossings.gd` now advances on physics ticks at priority−110. `rotation_rider_deck.gd` detects actual supported feet and applies each platform displacement to the rider. For XR it uses the same incremental body/origin movement as the transport cube and rebases only its own moving-ground contact, preventing double carry. A jump or step off releases the rider. The player's pitch, roll and room-scale camera offset are preserved.
-
-The deck's top follows `(0,1.5,0) + R(axis, angle) * radial + side_offset`. X uses radial `(0,-1.5,-3.5)` and side offset `(-2.2,0,0)`; Z uses radial `(-3.5,-1.5,0)` and side offset `(0,0,-2.2)`, turning in the opposite sense so both trips use the upper arc. The platform's basis stays upright. Its fixed bracket height compensates for the original blade's thickness-adjusted axle. Both endpoint tops meet grid heights0m and3m.
-
-Tests must cover the moving ride, natural boarding, departure and the full body volume around the arc. A static ramp crossing test alone did not cover the failure reported in VR.
-
-## Following a marked orientation — 23 September
-
-Compare the first and last top marks in the Y array: at ninety degrees the occupied cube shape repeats while the L points another way. Beyond the combined array, the restored composition workbench starts on pair four, X30° and Y45°. Follow the intermediate forms to compare `Y * X` with `X * Y`. Pair two is the counterexample: rotation and uniform scale about the same origin commute, although their intermediate states differ. The stage separates the drawings for visibility; both calculations use the same origin.
-
-The array has two batched mark surfaces per band; the sweep’s mark is attached to its rotating cube. Neither changes collision. The grid parser now recognises `initial_pair` as a numeric parameter rather than a tutorial rotation shorthand.
-
-
-<!-- study-spine:hinge_release -->
-
-## Return: A pose left
-
-Change the return speed while keeping the reference pose. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
-
-This application reuses loop, transform, trace. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`hinge`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
-
-[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-clark-a-pose-left/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
-
-
-<!-- study-edit:hinge_release -->
-
-### One source change: A pose left
-
-Change the existing degrees_per_second value from 45 to 20. Return takes longer; the destination angle stays the same.
-
+<!-- student-edit:parent-the-body -->
 ```gdscript
-degrees_per_second = 20.0
+func _ready() -> void:
+    assert(duration > 0.0 and axis.length() > 0.0)
+    add_child(pivot)
+    pivot.position = Vector3(0, 1.2, 0)
+    travel = box(Vector3(1.2, 0.2, 0.8), offset)
+    travel.reparent(pivot, false)
+    apply_pose(0.0)
 ```
 
-Source: `commons/artifacts/spine_studies/hinge_score.gd`. Use the prepared scene to run and compare.
+`box()` still creates a visual as a child of the study. `reparent(pivot, false)` moves that child beneath the pivot while retaining its **local** transform. The `false` matters: the default keeps the world transform instead. Here we want the supplied `offset` to be interpreted in the new parent's frame. With zero offset, the body's centre is at the pivot, 1.2 metres above the study's origin.
+
+The hierarchy is now `TransformStudy → pivot → travel`. Both nodes exist before `apply_pose()` uses them.
+
+## 2. Turn the frame
+
+Keep `_process(delta)` exactly as Translation left it. It already adds `delta` to `elapsed` and passes `elapsed / duration` to `apply_pose()`.
+
+Replace the complete `apply_pose(value)` function, including its clamp and route branches, with:
+
+<!-- student-edit:turn-the-frame -->
+```gdscript
+func apply_pose(value: float) -> void:
+    var angle := deg_to_rad(360.0 * value)
+    pivot.basis = Basis(axis.normalized(), angle)
+```
+
+Run this checkpoint. At two seconds, `value` is 0.25: a quarter of the eight-second turn, or 90 degrees. Godot's `Basis(axis, angle)` expects radians. `deg_to_rad()` converts 90 degrees to π/2; `axis.normalized()` gives the axis a length of one. Assigning the basis sets the pivot's orientation from that angle.
+
+We removed the clamp because this turn continues. At eight seconds the body returns to its initial pose. At ten it has completed another quarter-turn. The clock supplies an absolute angle; we set that orientation rather than add the whole accumulated angle on every frame.
+
+The centre stays still. The corners move. A rotation changes their direction from the centre while preserving their distances from it and from each other.
+
+## 3. Keep sight of one face
+
+In `_ready()`, insert these lines immediately before `apply_pose(0.0)`. Keep that existing call:
+
+<!-- student-edit:attach-the-mark -->
+```gdscript
+    var mark := box(Vector3(0.3, 0.02, 0.18), Vector3(0.35, 0.11, 0.2))
+    mark.reparent(travel, false)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    mark.material_override = ink
+```
+
+The mark is another small `BoxBody`, placed just above the top face. It becomes a child of `travel`, so its coordinates belong to that body. The material makes it dark enough to follow; material design is a later lesson. Only the pivot needs an orientation update. The body and mark inherit it.
+
+Run again. Our rectangular body has the same outline after a half-turn, at four seconds. The off-centre mark is on the other side. At eight seconds both return. The hall's cube has more rotational symmetry: its outline can return after a quarter-turn. What counts as a return depends on what you follow.
+
+## Move the centre through space
+
+Change the existing `offset` declaration to `var offset := Vector3(2, 0, 0)`. Predict the body's position after two seconds, then run. Its local position stays `(2, 0, 0)` throughout. Its parent turns that direction in the study, so its centre now travels in a circle of radius two.
+
+After the quarter-turn about positive Y, the body's centre is at `(0, 1.2, -2)` in the study's frame. Its top still faces up, but its long edge has turned. The face mark stays attached. Moving the study elsewhere in the museum changes world coordinates without changing this local relation.
+
+Keep the two-metre offset and change `axis` to `Vector3.FORWARD`, Godot's negative Z direction. Predict the quarter-turn. The centre now reaches `(0, -0.8, 0)`: below the study's origin. Raise the study two metres to see the entire vertical circle above the floor. The installed platforms use an additional rule to keep riders upright; this body turns with its parent.
+
+Finally change `duration` to `16.0`. Where will the body be after four seconds? Explain which values change the orbit's size, its plane and its timing. The complete versions of these three experiments are linked below.
+
+Carry the pivot, body and mark onward. Scale will reuse the fact that changing a parent reaches its children, and that the origin determines what stays in place. Combining rotations around different axes remains another encounter in the hall; this lesson gives one turn a clear centre first.
+
+[Complete files, edition 2026-10-16](../../../doc/book/iterations/2026-10-16-rotation-carried-body/files.html#complete) · [lesson.gd](../../../doc/book/iterations/2026-10-16-rotation-carried-body/complete/lesson.gd) · [unchanged box_body.gd](../../../doc/book/iterations/2026-10-16-rotation-carried-body/complete/box_body.gd) · [Download files and variants](../../../doc/book/iterations/2026-10-16-rotation-carried-body/rotation-studies.zip)
+
+<details class="full-program">
+<summary>Complete lesson.gd — online reference</summary>
+
+<!-- student-code:lesson.gd -->
+```gdscript
+extends Node3D
+const BoxBody = preload("box_body.gd")
+
+var travel: MeshInstance3D
+var pivot := Node3D.new()
+var axis := Vector3.UP
+var offset := Vector3.ZERO
+var duration := 8.0
+var elapsed := 0.0
+
+func _ready() -> void:
+    assert(duration > 0.0 and axis.length() > 0.0)
+    add_child(pivot)
+    pivot.position = Vector3(0, 1.2, 0)
+    travel = box(Vector3(1.2, 0.2, 0.8), offset)
+    travel.reparent(pivot, false)
+    var mark := box(Vector3(0.3, 0.02, 0.18), Vector3(0.35, 0.11, 0.2))
+    mark.reparent(travel, false)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    mark.material_override = ink
+    apply_pose(0.0)
+
+func box(size: Vector3, at: Vector3) -> MeshInstance3D:
+    var body := BoxBody.new(size)
+    body.position = at
+    add_child(body)
+    return body
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    apply_pose(elapsed / duration)
+
+func apply_pose(value: float) -> void:
+    var angle := deg_to_rad(360.0 * value)
+    pivot.basis = Basis(axis.normalized(), angle)
+```
+
+</details>

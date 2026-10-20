@@ -1,6 +1,6 @@
 # What chance may change
 
-Four works share the gallery. Walk toward the painting on the floor, then take either side around its frame. The dartboard waits to the right, the pipes farther along to the left, and a changing particle study near the rear. Each gives chance a different job. The estimation the last room promised is the dartboard's job.
+Four works share the gallery. Walk toward the painting on the floor, then take either side around its frame. The dartboard and pipes wait farther along, and a changing particle study near the rear. Each gives chance a different job. The estimation the last room promised is the dartboard's job.
 
 <!-- @pollock_painting_in_3d -->
 
@@ -14,23 +14,25 @@ Choose a passage you like. Which part could have arrived differently? Which part
 
 <!-- @monte_carlo_dartboard -->
 
-Move to the dartboard's console on the right. Press RESET. If new marks appear, press AUTO to pause them and RESET again. Press THROW and find the new point. Compare its location with the circle, then check which counter changed. Add a few more points individually before using AUTO to build a larger sample.
+Move to the dartboard's console. Press REPLAY. Press THROW and find the new point. Compare its location with the circle, then check which counter changed. Add a few more points individually before using +100 or FILL to build a larger sample.
 
 An inside point increases both the inside count and the total. An outside point increases the outside count and the total; the inside count stays where it was. Before requesting another point, predict what each possibility would do to the estimate. Check with THROW, and explain the change from the counters before looking at the distance from pi.
 
-The circle is inscribed in a square. When points are sampled uniformly across that square, the fraction landing inside estimates the fraction of area occupied by the circle. Estimating by sampling is what the name on this bench, Monte Carlo, has meant since 1949.[^monte-carlo] Multiplying that fraction by four gives the displayed estimate of pi:
+The circle is inscribed in a square. When points are sampled uniformly across that square, the fraction landing inside estimates the fraction of area occupied by the circle. This is a Monte Carlo estimate: a quantity approached through sampled trials. Multiplying that fraction by four gives the displayed estimate of pi:
 
 `estimate = 4 × inside / total`
 
 A growing sample does not require every new estimate to improve. Repeat the prediction when many points are already present: one addition usually changes the ratio less. A steadier number still depends on how the points were sampled.
 
-THROW requests a generated sample. You are not aiming a physical dart with your hand. A sampler that favoured the centre would tend to count too many points inside; adding more of those points would not repair the bias. Pause AUTO and RESET to compare another run. The counters stop at 500 darts, so RESET also begins a new sample once the count has filled. The board itself shows only the newest 300 marks: past that, the picture forgets points the numbers still include.
+THROW requests a generated sample. You are not aiming a physical dart with your hand. A sampler that favoured the centre would tend to count too many points inside; adding more of those points would not repair the bias. REPLAY clears the record and returns to the same seed. NEXT SEED begins a different run. Turn BUDGET to choose 100, 500, 2000 or 8000 samples, then FILL; changing the budget starts that seed again, so larger budgets extend the same opening sequence. The board itself shows only the newest 300 marks: past that, the picture forgets points the numbers still include. Press 8 SEEDS to compare several estimates without replacing your current run. A comparison gives you more evidence, not a promise that every increase in budget improves every result.
+
+The small reconstruction lets you narrow the sample to a strip without moving the circle. The number can become steady while answering a different question. The failure is in the agreement between the places sampled and the area the number claims to describe.
 
 Here chance chooses the evidence. The circle's boundary and the counting rule remain fixed. Who gets to decide that the sampling procedure covers the space fairly enough for the answer we want?
 
 <!-- @pipe_dream -->
 
-Cross to the pipe study on the left. Follow a length to its next corner, then look for a place where the path doubles back near an earlier passage. If growth has finished by the time you arrive, the whole retained path is still available to inspect. The colour shifts gradually from one length to the next, swinging between cyan and magenta twice over the run, so two neighbouring passages in clearly different colours were not laid one after the other: the pipe came back to that place later in the run.
+Cross to the pipe study. Follow a length to its next corner, then look for a place where the path doubles back near an earlier passage. If growth has finished by the time you arrive, the whole retained path is still available to inspect. The colour shifts gradually from one length to the next, swinging between cyan and magenta twice over the run, so two neighbouring passages in clearly different colours were not laid one after the other: the pipe came back to that place later in the run.
 
 The pipe advances in one of six axis directions. A preference sometimes keeps it moving straight; otherwise the program shuffles possible turns and takes a direction that stays inside its bounds. It rejects an immediate reversal. It does not keep a list of occupied cells, so crossing an earlier route is allowed.
 
@@ -40,7 +42,7 @@ Look across the empty spaces between pipes. The same local rules could have left
 
 <!-- @extreme_randomness -->
 
-The particle study occupies the last bay on the right. Stay through a full cycle. Its five chapters change about every ten seconds. Watch for a change in the particles' arrangement as well as their movement; the chapter transition restages them.
+The particle study occupies the last bay. Stay through a full cycle. Its five chapters change about every ten seconds. Watch for a change in the particles' arrangement as well as their movement; the chapter transition restages them.
 
 For this gallery, every chapter stays inside the same spherical boundary. A particle that would escape is brought back to the edge and its outward velocity reflected. This added limit keeps the changing study above the floor and within its bay.
 
@@ -55,5 +57,3 @@ These are five sketches of different procedures, not five strengths of the same 
 Look back toward the painting. In one work, chance chose marks; in another, samples to count. It chose permitted directions for the pipe and different kinds of variation within the particle study. In every case something decided what a random choice was permitted to change.
 
 Carry that question into the pheromone terrain. The pipe did not remember which places it had passed; the next walkers will leave a signal that can enter a later decision. What changes when a visit helps recruit another visit? Random Game still waits ahead, where such distinctions will become questions of support and timing.
-
-[^monte-carlo]: Nicholas Metropolis and Stanisław Ulam, “The Monte Carlo method”, *Journal of the American Statistical Association* 44 (1949): use random samples to estimate a quantity, here an area. The name is the casino's; Metropolis said it was chosen for an uncle of Ulam's who borrowed money from relatives to gamble there. The mushrooms' rejected candidates are its other classic form, accept–reject.

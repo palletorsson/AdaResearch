@@ -1,3 +1,11 @@
+# Current tableau variation — 17 October 2026
+
+The placed `durer_scene` opts into `#figure:skull`. Its scene builder replaces only the main seated figure with a small procedural skull on a block. The stone, smaller winged figure, dog, sphere, tools, architecture and instruments remain. Unconfigured copies of the scene keep their original figure.
+
+The skull is an original stylised study, not a scan or anatomical specimen. CSG unions form the cranium, face and jaw; subtracted volumes make the eye sockets, nose opening and mouth gap. Small separate meshes form the teeth. A local label marks the substitution as an Ada variation on Dürer's engraving. The changed final describes this installed variation.
+
+Native captures and the implementation receipt are in [the review](../../../doc/book/iterations/2026-10-17-primitive-tools/index.html). The following older research draft retains historical context; its placements and instructions are not a description of the current tableau.
+
 > Earlier technical research draft. For the current court, connection puzzle, illustrated viewpoints and counter return, use [the implementation companion](tutorial.md). Some sequence counts, placements and code examples below predate the restored hall.
 
 # 09 Melencolia

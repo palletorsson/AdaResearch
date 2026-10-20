@@ -24,6 +24,8 @@ The display says “nearest project reference.” Its name and colour come from 
 
 Return to your two nearly equal totals. What distinction did the total lose? One number can summarise several contributions while concealing how they compensated for one another. Keeping the separate values visible prevents a convenient summary from becoming the whole account.
 
+Equality here has a particular scope. Two arrangements can be equal under this calculation without being interchangeable for another purpose. The pale outline lets that difference remain visible. Before treating an equal score as permission to substitute one arrangement for another, we would need to ask what the substitution preserves, and what the score never recorded.
+
 The documents call the return of this question to the maker **Self-Q**. A structure teaches its maker what to notice next. After enough time with these four rails, we may begin looking only for things that fit them. What have they made thinkable? What have they made harder to think? What continues beyond their reach? The museum must be able to ask this of its own rooms, including this one.[^self-q]
 
 For a more demanding version, the room could receive measured quantities from one clearly specified simulation. It would then need to show how those measurements were defined and how changing the weights affected a particular decision. That is the route from a manipulable formula to an accountable model.

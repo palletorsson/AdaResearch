@@ -1,105 +1,130 @@
-# Escher Impossible
+# Where the height returns
 
-**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed STEP control measures changes between tread centres. FORM compares RETURN SIDE, CLOSING DROP, OPEN RUN, SCAFFOLD and TILTED TREADS. Reconstruct that measurement and its closed-route check. The fragments below omit the corners array and scene setup and do not build an impossible staircase.
+**Learning elements**
 
-**Learning elements — proposed focus**
+- Ordered positions
+- World-frame measurement
+- Open and closed paths
+- Accumulated differences
+- Invariants
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+**Short brief:** Carry PointBody, LineSkin and Russell’s bench. Four cube centres → ordered route. Measure world-height differences. Closed circuit: ascent equals descent. Open circuit: stop at end. Tilt whole model; restart measurement. Picture contact ≠ spatial contact. Test the measured claim, not the appearance.
 
-- Closed path differences
-- Projection
-- Local and global claims
+Gödel separated checking a supplied derivation from searching for one. Here the supplied object is a route: inspect each connection, then check what the complete circuit permits. This is a spatial invariant, not an illustration that proves incompleteness.
 
-Inspect a finite list of heights. Predict the return difference before adding the closing edge.
+At the existing staircase, STEP follows measured tread centres; FORM offers five arrangements. Our smaller construction isolates one question using four familiar cube treads, the carried LineSkin cylinders and one PointBody marker. No faces of the cube are transformed individually. The player stays on the museum floor; the marker travels the model.
 
-Declare the staircase graph.
+The four centres rise by 0.2 metres three times. Closing the route requires a −0.6-metre move. `step` measures actual centre heights after applying the chosen transform, accumulating positive changes in up and negative magnitudes in down. On return, up minus down is zero within numerical tolerance. `closure` calculates every edge difference independently of the visitor's partial journey. Each height appears once with each sign. This algebraic cancellation explains the general closed-route invariant; the program checks finite instances.
 
+OPEN removes the closing connection and refuses movement past the last centre. It does not wrap through an invisible drop. TILT rotates the entire arrangement by 0.35 radians and starts a new measurement, so no journey mixes coordinate frames. The displayed treads and measured centres use the same transform. Individual signs may change when up changes relative to the model, but a closed route still cancels. RESET keeps the selected arrangement and tilt.
+
+Walk around the installation's separate perspective work. Apparent contact in an image and coincidence in three-dimensional coordinates require different evidence. Our working copy does not fabricate an impossible staircase or prove a result about formal arithmetic.
+
+## Continue inside the museum
+
+Use the existing AdaResearch project with Godot 4.6 and its installed XR Tools. Save these files together under `res://doc/book/studies/foundations-lineage/`. Carry `point_body.gd` and `line_skin.gd` unchanged from Euclid / Non-Euclidean Spaces. Their class construction and pickup were already printed there. Carry `bench.gd` unchanged from Russell. It supplies only geometry, labels, the visible sphere and button wiring; the rule below remains new.
+
+Run the supplied `escher.tscn` in that folder with F6. Its `escher_museum.gd` launcher opens **Escher_Impossible** with the existing museum player, room and lighting, then adds your working copy beside the original exhibits. The launcher, `commons/interactables/push_button.tscn` and XR setup are declared infrastructure. No autoload, label, camera or other node is assumed inside your new script: the printed bench creates its own nodes and connects the buttons. This is a session study; it does not replace an installed artifact or carry a live node across hall loads.
+
+The bench synchronizes an unheld frozen sphere on physics ticks. All model positions are local to the unit-scale bench unless a world transform is explicitly passed. Its slab and thin-cylinder lines are visual guides, not a new walkable floor. Use the museum's existing locomotion and pointer/grab controls.
+
+## Complete new files
+
+Read the rule first, then its museum display. There is one `_ready` per script; inherited `start` constructs the bench once. Save each block as the filename above it.
+
+### `height_route.gd`
+
+<!-- student-code:height_route.gd -->
 ```gdscript
-class_name StairGraph
-extends Node3D
+extends RefCounted
+var points: Array[Vector3] = [Vector3(-0.7,0,-0.5), Vector3(0.7,0.2,-0.5),
+    Vector3(0.7,0.4,0.5), Vector3(-0.7,0.6,0.5)]
+var closed := true
+var index := 0
+var up := 0.0
+var down := 0.0
+var last := 0.0
 
-const SIDES := [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT]
+func reset() -> void:
+    index=0
+    up=0
+    down=0
+    last=0
 
-@export var rise_per_side: float = 1.0
-```
+func step(frame: Transform3D = Transform3D.IDENTITY) -> bool:
+    if points.is_empty() or (not closed and index==points.size()-1): return false
+    var next := (index+1)%points.size()
+    last = (frame*points[next]).y - (frame*points[index]).y
+    up += maxf(last,0)
+    down += maxf(-last,0)
+    index=next
+    return true
 
-SIDES declares four directions, but build_corners below uses only their count. It does not use those directions to make a perimeter.
-
-Place the corners.
-
-```gdscript
-func build_corners() -> void:
-    var height := 0.0
-    for i in SIDES.size():
-        var corner := MeshInstance3D.new()
-        corner.mesh = BoxMesh.new()
-        corner.position = Vector3(i * 2, height, 0.0)
-        height += rise_per_side
-        add_child(corner)
-```
-
-The function places four boxes in a row with three rises between their centres. It does not populate the corners array required by the later fragments.
-
-Connect the last corner back to the first.
-
-```gdscript
-func close_loop() -> void:
-    var first := corners[0].position
-    var last := corners[-1].position
-    var line := ImmediateMesh.new()
-    line.surface_begin(Mesh.PRIMITIVE_LINES)
-    line.surface_add_vertex(last)
-    line.surface_add_vertex(first)
-    line.surface_end()
-    loop_mesh.mesh = line
-```
-
-If those four centres are stored, the closing edge descends three rises. That is a possible segment, and exactly the height needed to close the route.
-
-Hide the return seam.
-
-```gdscript
-func camouflage_seam(segment: MeshInstance3D, cam: Camera3D) -> void:
-    var to_cam := (cam.global_position - segment.global_position).normalized()
-    segment.visible = abs(to_cam.dot(Vector3.UP)) < 0.2
-```
-
-The dot-product threshold hides a segment over a range of viewing directions. This is an explicit visibility switch, not the installed perspective study.
-
-Simulate a creature walking the loop.
-
-```gdscript
-func step_creature(creature: Node3D, t: float) -> void:
-    var idx := int(t) % corners.size()
-    var next_idx := (idx + 1) % corners.size()
-    creature.position = corners[idx].position.lerp(corners[next_idx].position, fmod(t, 1.0))
-```
-
-With a populated corners array and advancing t, interpolation traverses each edge and wraps to the first point. The closing leg descends.
-
-Label each edge as locally valid.
-
-```gdscript
-func label_edge(label: Label3D, from: Vector3, to: Vector3) -> void:
-    label.text = "Δh = %+0.2f" % (to.y - from.y)
-    label.position = (from + to) * 0.5 + Vector3.UP * 0.5
-```
-
-For the four centres above and a positive rise, three differences are positive and the closing difference is negative. Their signs expose the return directly.
-
-Show the global sum.
-
-```gdscript
-func show_global_sum(label: Label3D) -> void:
+func closure(frame: Transform3D = Transform3D.IDENTITY) -> float:
     var total := 0.0
-    for i in corners.size():
-        var a := corners[i].position
-        var b := corners[(i + 1) % corners.size()].position
-        total += b.y - a.y
-    label.text = "loop Δh = %+0.2f" % total
+    for i in points.size():
+        total += (frame*points[(i+1)%points.size()]).y - (frame*points[i]).y
+    return total
 ```
 
-The cyclic differences telescope to zero, up to floating-point rounding: each height is added once and subtracted once. This is the check to assert in the replacement lesson. It is not an incompleteness result.
+### `escher_study.gd`
 
-The current exhibit moves a marker while the player stays on the museum floor. Brouwer Intuitionism next asks what a construction can witness.
-<<</MAP>>>
+<!-- student-code:escher_study.gd -->
+```gdscript
+extends "bench.gd"
+const HeightRoute = preload("height_route.gd")
+var model := HeightRoute.new()
+var tilted := false
+
+func _ready() -> void:
+    start("ESCHER / WHERE THE RISE RETURNS", ["STEP", "OPEN", "TILT", "RESET"],
+        [advance, open_route, tilt, reset])
+    refresh()
+
+func frame() -> Transform3D:
+    return global_transform*Transform3D(Basis(Vector3.FORWARD, 0.35 if tilted else 0), Vector3.UP*1.05)
+
+func advance() -> void:
+    if point.held(): return
+    model.step(frame())
+    refresh()
+
+func open_route() -> void:
+    if point.held(): return
+    model.closed = not model.closed
+    reset()
+
+func tilt() -> void:
+    if point.held(): return
+    tilted = not tilted
+    reset()
+
+func reset() -> void:
+    if point.held(): return
+    model.reset()
+    refresh()
+
+func refresh() -> void:
+    clear_drawing()
+    var t := global_transform.affine_inverse()*frame()
+    for i in model.points.size():
+        var at: Vector3 = t*model.points[i]
+        block(drawing, at, Vector3(0.25,0.07,0.25), Color("9eadb9"))
+        label(drawing,str(i),at+Vector3(0,0.12,0),18)
+        if i<model.points.size()-1 or model.closed:
+            segment(at,t*model.points[(i+1)%model.points.size()])
+    point_home = t*model.points[model.index]+Vector3.UP*0.16
+    readout.text = "%s | step %d\nLast %+.3f m; up %.3f / down %.3f\n%s" % [
+        "CLOSED" if model.closed else "OPEN", model.index, model.last, model.up, model.down,
+        "Closing differences sum to %.5f"%model.closure(frame()) if model.closed else "The open end does not wrap."]
+```
+
+## Predict, build, check
+
+The array preserves the order of the tread centres. Each step subtracts the previous world height from the next. On closure, the last centre connects back to the first; every height occurs once positively and once negatively. The loop checks finite coordinates, while that cancellation explains why the sum must vanish for any closed route measured in one fixed frame.
+
+Predict the fourth change before pressing it: −0.6 metres in the unrotated study. Assert four steps return the marker to index 0 and equal ascent/descent. Open the route: after three moves, the next attempt must fail and retain index 3. Tilt the whole study around another axis in code; calculate each world height and predict the return difference. Keep that frame fixed during a run.
+
+Try changing only one tread's drawn angle while leaving its centre fixed. The centre measure will miss that surface slope; name the limitation rather than calling the reading wrong. The next hall asks what a produced object can witness.
+
+The automated reconstruction tests extract the printed files, add only these declared carried dependencies and run native Godot assertions. They use synthetic interaction. They do not establish human learning or headset reach.

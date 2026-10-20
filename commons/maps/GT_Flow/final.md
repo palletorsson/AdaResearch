@@ -1,25 +1,27 @@
-# What a junction cannot pass on
+# Room for another
 
-Where does the excess go when a junction receives more than it can send onwards?
+Two depots have something to send. The first route is open, so you use it. Then the second delivery waits.
+
+<!-- @graph_worlds -->
+
+The little harbour makes the problem look familiar: buildings, roads, boxes, a dock. Each connection has a number. It counts available crate slots during the interval we chose. It says nothing about what is inside a crate, who needs it, or how long they have already waited.
+
+Follow the first allocation through yard 3. There is room at the destination, but the route you chose has taken a connection the other depot needs. An acceptable decision has made another decision harder.
+
+Press again. A pink connection appears above the plan. It takes back one part of the earlier allocation. The first delivery can use yard 4; the second can use yard 3. Both now fit.
+
+Nothing has travelled backwards through time. These are commitments being revised before departure. Once a ship has sailed, a model's reverse arrow is not enough to recall it. The ability to revise has conditions: time, information, permission, and something not yet made irreversible.
 
 <!-- @push_relabel_algorithm -->
 
-Follow the initial flow leaving the source. Choose a junction that accumulates excess and compare its readout with the available outgoing edges. Watch for a PUSH or RELABEL step. Predict whether the next action can send material towards a neighbour or must first change the junction’s label.
+Across the room, the older display begins by sending as much as it can out of its source. Excess gathers at junctions. Local labels change; another push becomes possible. Its forward-only procedure can also reach a point where it cannot pass the remainder onward. The excess stays visible. This is where that procedure stopped, not proof that no other arrangement could work.
 
-Capacity limits how much an edge can carry. Flow is the amount currently assigned to it. Excess records a temporary imbalance at a vertex: more has arrived than has yet left. The source shows a negative excess: it is the total it has sent out and will not receive back. The height label gives the local procedure a direction in which to attempt a push; it is an algorithmic value, not the physical altitude of the drawn vertex.
+Keep those two experiences beside one another: the accumulation that cannot proceed, and the allocation that becomes possible when a previous choice can change.
 
-Separate an edge that is full from a vertex that has excess. The first describes a limit on one connection; the second describes a temporary balance at a junction. A vertex can have more than one outgoing option, and those options can have different amounts of room left. Following that distinction makes a local PUSH easier to interpret: it transfers an available amount through a particular edge, rather than declaring that the entire junction is solved.
+It is tempting to call every obstruction a bottleneck and every revision an improvement. But a harbour, a conversation, a flock and an infection do not carry the same thing. Crates are conserved in this plan. A message can be copied. Infection requires more than a connection. A person's need does not become a capacity because we have put a number beside it.
 
-The exhibit begins by filling outgoing source edges. It then tries to move excess through remaining outgoing capacity towards lower labelled neighbours, changing labels when a push is unavailable. Those local changes help make congestion and temporary storage visible.
-
-A junction can run out of forward capacity while still holding excess. If the display stops at BLOCKED, find that junction. Its neighbours have not vanished; the remaining space on its outgoing edges has run out. The readout keeps the excess visible and reports how much reached the sink. It leaves us with a question: could some of what was sent earlier be taken back?
-
-A complete maximum-flow method also needs a way to revise earlier allocations. Residual reverse capacity represents that possibility: some previously sent flow can be undone so that a better arrangement becomes available. The display is labelled a forward-only study because it has no such reverse adjustments. What reached the sink records this run; it does not settle how much could reach it under another allocation.
-
-Keep the observation smaller and exact: which vertex held excess, which original edge still had room, and what local operation followed? Those are relationships you can inspect without treating every accepted push as an irrevocable good decision.
-
-The next useful experiment would expose a case that requires rerouting and make the reverse adjustment visible. The comparison would show why revision is part of the algorithm’s power. It would also prevent a blocked intermediate allocation being mistaken for a physical impossibility.
+The models let us ask precise questions. Their precision also makes their omissions available to us. Who chose the interval? Which route was never recorded? Who is being asked to wait while we celebrate a larger total?
 
 <!-- @ -->
 
-Matching will impose a different limit: each vertex may have only one selected partner. Once again, an early acceptable choice may need to be undone.
+At the next table, each person can take one tool. The first reasonable pairing may have to change so that another person can make something too.

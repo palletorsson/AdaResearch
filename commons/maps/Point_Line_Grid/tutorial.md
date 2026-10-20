@@ -107,3 +107,11 @@ One drawing can now be a record, a sculpture and material for another calculatio
 [Current grid.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
 
 [Complete experiment: grid_flat_y.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid_flat_y.gd)
+
+## Follow one source entry through the two representations
+
+In the installed hall, select a coordinate row or a visible point on the pink trace. Its numbered pink marker and green snapped marker identify the same source entry. POINT − / POINT + advances that entry; the page controls only change which rows are shown. NEXT TRACE changes the retained drawing. These controls use the museum's session archive; the small program above uses the student's saved scene file.
+
+To reconstruct this correspondence, store a selected integer index into the original position list. Read that entry for the pink marker and apply the same rounding function used by the green copy for its second marker. Apply each display's placement after calculating its coordinates. Keep the index even if two different entries round to the same address; looking up an entry by its rounded position would lose that distinction.
+
+Check with two nearby source positions that round to one cell, and with a path that revisits an earlier position. Selecting either entry must keep its own row identity. A page turn must not silently select a different point. This is an extension to build after the saved drawing and its green copy work.

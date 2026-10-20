@@ -24,3 +24,14 @@ The chapter gains a bodily encounter and one original native figure. Existing co
 
 
 Runtime staging note: the museum automatically relocates the same generated dream_bodies sculpture from (11.5, 0.42, 23.5) to (2.5, 0.42, 23.5), clearing the new table footprint. Its rotation and scale are unchanged. All other native roots except the deliberately restaged hex retain their positions. The initial overly broad publication assertion and this explicit comparison are retained as diagnostic-verification.json and runtime-restaging.json.
+
+
+---
+
+# A pattern visits an address — 8 October 2026
+
+Full runnable two-file tutorial now owns implementation; the reflection's two code blocks become prose. Clarify eight surrounding neighbours and distinguish Conway's reported design ambition from a theorem excluding unbounded growth. Preserve the argument about pattern recognition, withdrawal, support and one-way coupling. The carryable point lets the visitor step while beside an address. The next hall introduces proximity as input.
+
+29 learner checks and 38 museum checks pass. Five capsule/floor routes total 306 samples. The six authored works remain in a levelled rear gallery; mould and growth studies are scaled to fit, the dark sphere and screen repositioned, incidental sculpture reserved out, portals put on thresholds. The Life solver and lamp receiver are unchanged. Before snapshots, an initial test-harness property error, initial route collisions and the corrected evidence are retained in the review directory.
+
+The native screenshots show the installed room from above, obliquely and at eye height. The complete learner study is mounted only temporarily for its own photograph. Existing bright overhead lighting and some blank wall frames remain; this pass does not claim a full art-loading repair, secondary-interaction audit, headset test or independent student review.

@@ -1,84 +1,121 @@
-# Which part of a judgement tells you where it came from?
+# A claim has an address
 
 **Learning elements**
 
-- Observation provenance
-- Exposure time
-- Camera transforms
-- Retained views
+- Subject and predicate
+- Provenance
+- Presentation versus stored data
 
-The conflict room asked for sources. Here the source travels visibly with the verdict.
+Continue from the retained claims to the four installed situated readouts. Their verdicts and percentages are supplied by their configuration. They do not measure the approaching player. Our working copy reuses `Claims`, with the same subject identifier and four different predicates and sources. The sphere chooses which record is displayed; it does not alter that record's judgement. The selected pad turns amber and a short cylinder links it to the raised sphere, making the selection legible from different viewpoints.
 
-<!-- @situated_readout -->
+`read` makes a deep copy for presentation. COVER replaces the source only in that returned copy. REVEAL can therefore recover it, and another view still has its original provenance. The source, predicate and confidence remain separate fields. A 92% label is not a calibrated probability simply because it is numeric.
 
-Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
+The four verdicts answer different questions; they are not automatically logical negations. The existing camera witnesses extend the inquiry into viewpoint and time. They remain another encounter in this hall. This small lesson concentrates on retaining the address of a claim when its presentation changes.
 
-Then keep one panel in view. COVER puts a strip over its address; FOOTNOTE restores the footer; WITNESS adds a symbolic eye and station frame. The verdict and percentage remain unchanged. What has become easier to question, and what evidence is still missing?
+## Continue the student folder
 
-Four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
+Keep the files from **Keep the two accounts** in the same student folder. Add the complete files below; their relative preloads use that carried folder. The sphere, cylinder renderer, bench and pickup adapter are reused without being explained or rebuilt again.
 
-The source makes the operation inspectable:
+The supplied [`situated.tscn`](../../../doc/book/studies/postcrisis-lineage/situated.tscn) opens this actual hall and mounts your working copy beside its existing exhibits. It supplies the museum player, lighting and room. In [`situated_museum.gd`](../../../doc/book/studies/postcrisis-lineage/situated_museum.gd), set the `LESSON` preload to your `situated_study.gd` if you used another folder, then run the scene with F6. Grip the point in VR; on desktop use the existing right-click carry/release interaction. Buttons are the museum's supplied `push_button.tscn`.
 
+## Complete new code
+
+### `viewpoints.gd`
+
+<!-- student-code:viewpoints.gd -->
 ```gdscript
-var pos := global_position
-var key := _resolve_quadrant_key(pos)
-var verdict: Dictionary = QUADRANT_VERDICTS.get(key, QUADRANT_VERDICTS["NW"])
+extends RefCounted
+const Claims = preload("claims.gd")
+const WORDS = ["ORDERLY", "CREATIVE", "DANGEROUS", "IRRELEVANT"]
+const SOURCES = ["NW", "NE", "SW", "SE"]
+const CONFIDENCE = [0.88, 0.76, 0.92, 0.61]
+var claims := Claims.new()
 
-_verdict_label.text = verdict.label
-_verdict_label.modulate = verdict.color
-_confidence_label.text = "confidence %d%%" % int(verdict.confidence * 100.0)
-_footer_label.text = "view from %s (%.1f, %.1f)" % [key, pos.x, pos.z]
+func _init() -> void:
+    for i in 4:
+        claims.add("4729",WORDS[i],true,SOURCES[i],"AUTHORED EXAMPLE; NO MEASUREMENT")
+
+func read(index: int, cover: bool) -> Dictionary:
+    if index < 0 or index >= 4: return {}
+    var result: Dictionary = claims.records[index].duplicate(true)
+    result["confidence"] = CONFIDENCE[index]
+    if cover: result.source = "COVERED"
+    return result
 ```
 
-The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
+### `situated_study.gd`
 
-[Implementation](../../../commons/artifacts/situated_readout/situated_readout.gd). This is an excerpt from the artifact, not a standalone program.
-
-A visible address makes a claim easier to question, but cannot make it correct. ORDERLY and CREATIVE are not logical negations; they could both describe someone under different criteria. DANGEROUS demands an account of danger to whom and in what circumstances. Even an agreeable label needs evidence. The room's productive limit is the gap between displaying a standpoint and exposing the method that produced its judgement.
-
-<!-- @ -->
-
-Keeping viewpoints visible is different from combining their contributions into a common object.
-
-## Next experiment — not yet a visitor control
-
-Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
-
-
-<!-- study-spine:museum_witnesses -->
-
-## Return: The room arrives late
-
-Change the delay from three seconds to one; retain the camera and compare the recorded times. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
-
-This application reuses loop, trace, array, situation. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`witness`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
-
-[Study and making notes](/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html). The display stays fixed while its data, words or images change. RESET returns the original comparison.
-
-<!-- study-edit:museum_witnesses -->
-
-### One source change: The room arrives late
-
-Change the initial delay from 3.0 to 1.0 and reload. D stays blank until enough frames exist. Compare A and D using their exposure times; then HOLD E and change VIEWPOINT. The first edit uses the clock and retained state. The supplied SubViewport cameras share the current museum World3D; the bounded image buffer is a close-reading extension, not a prerequisite for the edit.
-
+<!-- student-code:situated_study.gd -->
 ```gdscript
-var delay_seconds := 1.0
+extends "study_base.gd"
+const Model = preload("viewpoints.gd")
+var model := Model.new()
+var selected := 0
+var covered := false
+
+func _ready() -> void:
+    start("LOCATE THE CLAIM",["VIEW","COVER","REVEAL"],[next_view,set_cover.bind(true),set_cover.bind(false)])
+    refresh()
+
+func next_view() -> void:
+    if point.held(): return
+    selected = (selected+1)%4
+    refresh()
+
+func set_cover(value: bool) -> void:
+    if point.held(): return
+    covered = value
+    refresh()
+
+func release(at: Vector3) -> void:
+    selected = (0 if at.x<0 else 1)+(2 if at.z>0 else 0)
+    refresh()
+
+func refresh() -> void:
+    clear_drawing()
+    for i in 4:
+        var at := Vector3(-.65 if i%2==0 else .65,1.15,-.3 if i<2 else .3)
+        block(drawing,at,Vector3(.65,.05,.3),Color("e8c18c") if i==selected else Color("a7b7c4"))
+        label(drawing,Model.SOURCES[i],at+Vector3.UP*.1)
+        if i==selected:
+            point_home = at+Vector3.UP*.3
+            segment(at,point_home)
+    var claim := model.read(selected,covered)
+    readout.text = "%s: %s / %.0f%% authored
+Source: %s / no measured probability" % [claim.subject,claim.predicate,claim.confidence*100,claim.source]
 ```
 
-Source: `commons/artifacts/spine_studies/museum_witnesses.gd`. Use the prepared scene to run and compare.
+### `assert_situated.gd`
 
-<!-- study-reference:museum_witnesses -->
+<!-- student-code:assert_situated.gd -->
+```gdscript
+extends "assertions.gd"
+const Model = preload("viewpoints.gd")
+func run() -> void:
+    var model := Model.new()
+    var original := model.claims.records.duplicate(true)
+    var hidden := model.read(2,true)
+    expect("source covered in view",hidden.source=="COVERED")
+    expect("same subject",hidden.subject=="4729")
+    expect("coverage preserves underlying data",model.claims.records==original)
+    hidden.predicate = "ALTERED"
+    expect("returned copy independent",model.read(2,false).predicate=="DANGEROUS")
+    expect("source recoverable",model.read(2,false).source=="SW")
+    expect("authored confidence .92",is_equal_approx(model.read(2,false).confidence,.92))
+    expect("invalid view refused",model.read(4,false).is_empty())
+    expect("different predicates are not negations",model.claims.support("4729","DANGEROUS")==Vector2i(1,0))
+```
 
-### Reference and scope
+## Predict, run, change one thing
 
-The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
+Cover the source, then reveal it. Predict that the underlying dictionary remains unchanged. Modify the returned copy in a test; a fresh read must still return the original. Explain what evidence would be needed before treating an authored confidence as a measured probability.
 
-[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).
+The assertion file above runs against your model files. From the project directory, use your Godot executable with:
 
-<!-- witness-portable-cameras -->
+```text
+Godot --headless --path . --xr-mode off --audio-driver Dummy --script res://doc/book/studies/postcrisis-lineage/check.gd -- res://doc/book/studies/postcrisis-lineage/assert_situated.gd --no-bridges
+```
 
-### Take a view
+Adjust the two script paths if your student folder differs. A failed assertion is a failed lesson check; `PASS` must be printed and the process must exit successfully. This headless check does not establish headset readability. Also exercise the visible controls in the supplied museum launcher.
 
-Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
-
-The camera follows the physical body's transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.
+Carry onward: **Count contributions and revisions** will reuse these operations.

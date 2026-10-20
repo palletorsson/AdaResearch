@@ -1,77 +1,155 @@
-# Transformation Introduction
+# Three ways to make a crossing
 
-**Learning elements**
+## Learning elements
 
-- Signals and event handlers
-- One function for shared behaviour
-- Target and current state
-- Gradual reset
-- Readout feedback
+- Reusing the same visual class for independent instances
+- A function returning the object it places
+- A bounded pose fraction and interpolation
+- Separating a pose from the clock that selects it
 
-Trans_Pre used elapsed time to change a cube's pose. Here, an action chooses where a surface should go. Work with the existing MOVE THE BANK panel beside the rotation crossing. Its BANK slider and RESET button control the far landing.
+Try the three installed crossings. One carries you, one grows, one turns into alignment. The far bank gives each change a purpose. An object can reach its programmed pose and still fail to reach the bank.
 
-First watch the three supplied crossings: a transport cube moves, a growing cube reaches floor height, and a plank turns to meet the banks. Their automatic motion supplies the encounter. This lesson follows the landing's controls, from an event to a visible change.
+## Bring the completed Pre study
 
-Move BANK toward its maximum, then release it. Watch the landing continue toward the requested position. Press RESET before it arrives. The slider returns immediately; the landing changes direction and travels home. Use the fixed side aisle to compare the bank edge and readout while the plank keeps turning.
+Copy Pre's `lesson.gd` and `box_body.gd` into your working folder here. Keep the pickup version saved. All edits below apply to that completed copy, not the earlier movement-only checkpoint. Keep the same empty `TransformStudy` host, at floor level, with zero rotation and unit scale, in a clear space about ten metres wide.
 
-The excerpts below come from `commons/artifacts/adjustable_landing/adjustable_landing.gd`. They explain the installed artifact; its geometry, controls and object references are already supplied.
+Carried unchanged from [Pre](../Trans_Pre/tutorial.md): `box_body.gd`.
 
-## The panel announces an event
+These are small visual comparisons beside the existing exhibits. They have no blocking collision. Use the installed crossings for standing and riding; their transport system is supplied by the museum.
 
-In `_ready()`, `RackTemplates.gd` creates the panel. The script finds its slider as `Param_0` and the RESET button's `InteractableAreaButton` as `reset`, then connects their signals:
+## 1. Give the bodies separate names
 
+Keep `extends Node3D`, the `BoxBody` preload and `var elapsed := 0.0`. Replace the variables from `var cube` through `var period` with:
+
+<!-- student-edit:intro-values -->
 ```gdscript
-slider.slider_moved.connect(_on_slider)
-reset.button_pressed.connect(func(_button): reset_landing())
+var travel: MeshInstance3D
+var grow: MeshInstance3D
+var turn: MeshInstance3D
+var far_banks: Array[MeshInstance3D] = []
+var far_gap := 0.0
+var animate := true
+var pose := 0.0
+var period := 8.0
 ```
 
-A signal announces that something happened. Connecting it names the code to run when that event occurs. Moving the slider calls `_on_slider`; pressing the panel button calls `reset_landing` through the short anonymous function. The button signal includes a button argument, which this function accepts but does not use.
+`period` still means a full return cycle. Eight seconds gives four seconds outward and four back. `far_banks` keeps references to the three far banks; `travel`, `grow` and `turn` refer to the three moving models.
 
-## Both paths reach one function
+## 2. Place what the class can make
 
+In `lesson.gd`, insert this complete `box()` function immediately before `_process()`:
+
+<!-- student-edit:intro-box -->
 ```gdscript
-func _on_slider(_value: Variant) -> void:
-    if not _syncing:
-        set_bank_fraction(float(slider.get_normalized_value()))
-
-func reset_landing() -> void:
-    set_bank_fraction(0.0)
+func box(size: Vector3, at: Vector3) -> MeshInstance3D:
+    var body := BoxBody.new(size)
+    body.position = at
+    add_child(body)
+    return body
 ```
 
-The slider wrapper converts its physical position to a fraction from zero to one. `_on_slider` reads that fraction rather than using the signal's raw value. RESET requests the same operation with zero as its argument. Both events therefore share the named function `set_bank_fraction`:
+Construction is still in `box_body.gd`. This small function chooses dimensions and a position, attaches the instance to the study, then returns it. Returning the reference lets us change that particular body later.
 
+Replace the complete `_ready()` function, including its collection area and signal connection, with:
+
+<!-- student-edit:intro-ready -->
 ```gdscript
-func set_bank_fraction(fraction: float) -> void:
-    target_displacement = clampf(fraction,0.0,1.0) * TRAVEL
-    if is_instance_valid(slider) and not _syncing:
-        _syncing = true
-        slider.set_normalized_value(target_displacement/TRAVEL)
-        _syncing = false
+func _ready() -> void:
+    assert(period > 0.0 and far_gap >= 0.0)
+    for x in [-4.0, 0.0, 4.0]:
+        box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, -1.5))
+        far_banks.append(box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, 1.5 + far_gap)))
+    travel = box(Vector3(1.2, 0.2, 0.8), Vector3(-4, 0.9, -1.4))
+    grow = box(Vector3(1.2, 2, 2), Vector3.ZERO)
+    turn = box(Vector3(2, 0.2, 0.6), Vector3(4, 0.9, 0))
+    apply_pose(pose)
 ```
 
-`TRAVEL` is one metre. Clamping bounds the request, so a fraction of `0.5` requests half a metre. The function also puts the slider at the requested fraction, which matters when RESET calls it. `_syncing` prevents a slider event during that update from repeating the request.
+The loop makes a pair of banks in each lane: X = −4, 0 and 4. Their tops are one metre above the study's origin. The remaining calls make the three moving models. The growing cube is centred at origin height, so its lower half extends beneath the floor; this is a model of a changing span.
 
-## Separate the request from the motion
+## 3. Make the pose inspectable
 
-`target_displacement` stores the requested offset. `displacement` stores the current offset. The physics callback brings the current value toward the target:
+Replace `_on_body_entered()` with this complete function. No collection callback remains:
 
+<!-- student-edit:intro-pose -->
 ```gdscript
-func _physics_process(delta: float) -> void:
-    displacement = move_toward(displacement,target_displacement,SPEED * delta)
-    landing.position = HOME + Vector3.BACK * displacement
-    _update_readout()
+func apply_pose(value: float) -> void:
+    var t := clampf(value, 0.0, 1.0)
+    travel.position.z = lerpf(-1.4, 1.4, t)
+    grow.scale = Vector3.ONE * lerpf(0.25, 1.0, t)
+    turn.rotation_degrees.y = 90.0 * t
 ```
 
-`SPEED` is `0.25` metres per second; `delta` is the time since the previous physics tick. Multiplying them gives this tick's maximum movement. `Vector3.BACK` means local positive Z. Adding that offset to `HOME` moves the landing along its existing route.
+`apply_pose(value)` can be called without advancing time. Zero selects the starting pose; one selects the ending pose. `clampf` keeps the fraction within those bounds. `lerpf(a, b, t)` selects a value between two numbers; at 0.5 it gives their average.
 
-RESET changes the target to zero. It never assigns zero directly to the current displacement, so returning home remains gradual. Once the target is reached, `move_toward` leaves the bank there.
+In `_process(delta)`, keep the function header and `elapsed += delta`. Replace all the lines below that statement with:
 
-## Read what has happened
+<!-- student-edit:intro-clock -->
+```gdscript
+    if animate:
+        pose = pingpong(2.0 * elapsed / period, 1.0)
+    apply_pose(pose)
+```
 
-`_update_readout()` formats the current `displacement` as `BANK +… m`. It reports “edges meet” at zero and otherwise gives the gap for the plank's aligned pose. Immediately after RESET, the slider can show zero while this readout still shows a positive distance. Those displays describe the request and the moving bank respectively. The gap label describes the surfaces; crossing also depends on the player's body and movement.
+The same clock now selects a shared pose. The earlier phase offset is gone, so the comparison begins at zero. When `animate` is false, time can pass while the chosen pose remains still.
 
-## Try one source parameter
+## Hold, predict, move the bank
 
-For a local experiment, change only `const SPEED := 0.25` to `const SPEED := 0.50` in the landing script, then rerun the existing scene. Predict the result before moving BANK fully from home: one metre should take about two seconds instead of four. RESET from the far endpoint should take the same reduced time. The endpoints and final gap stay the same. Compare the readout during travel, then restore `0.25`.
+Set `animate = false` and try `pose = 0.0`, then `0.5`, then `1.0`. Before each run, predict the travelling surface's Z position, the cube's scale factor and the plank's angle. Halfway gives Z = 0, scale = 0.625 and 45 degrees.
 
-Trans_Translation extends this distinction between a destination and the journey to it through carrier routes. Carry forward the question established here: which function changes the request, and which callback performs the movement?
+At one, the first surface reaches the far bank unchanged in size. The cube reaches bank height and spans the gap by growing around its centre. The plank turns its long dimension along Z; its centre and dimensions stay fixed.
+
+Keep that final pose and set `far_gap = 0.5`. The far banks move half a metre away. The growing cube and turned plank retain their old poses and leave a gap. Reaching a pose and reaching another object are separate conditions.
+
+Restore `far_gap = 0.0` and `animate = true`. The three models take four seconds out and four back. Carry the unchanged visual class, the returning placement function and the distinction between input and pose toward Translation. That next lesson will need its own continuation edit; this edition repairs the handoff through Introduction.
+
+[Complete files, edition 2026-10-16](../../../doc/book/iterations/2026-10-16-transformation-handoff/files.html#Trans_Introduction) · [lesson.gd](../../../doc/book/iterations/2026-10-16-transformation-handoff/Trans_Introduction/lesson.gd) · [unchanged box_body.gd](../../../doc/book/iterations/2026-10-16-transformation-handoff/Trans_Introduction/box_body.gd) · [Download the studies](../../../doc/book/iterations/2026-10-16-transformation-handoff/transformation-handoff.zip)
+
+<details class="full-program">
+<summary>Complete lesson.gd — online reference</summary>
+
+<!-- student-code:lesson.gd -->
+```gdscript
+extends Node3D
+const BoxBody = preload("box_body.gd")
+
+var travel: MeshInstance3D
+var grow: MeshInstance3D
+var turn: MeshInstance3D
+var far_banks: Array[MeshInstance3D] = []
+var far_gap := 0.0
+var animate := true
+var pose := 0.0
+var period := 8.0
+var elapsed := 0.0
+
+func _ready() -> void:
+    assert(period > 0.0 and far_gap >= 0.0)
+    for x in [-4.0, 0.0, 4.0]:
+        box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, -1.5))
+        far_banks.append(box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, 1.5 + far_gap)))
+    travel = box(Vector3(1.2, 0.2, 0.8), Vector3(-4, 0.9, -1.4))
+    grow = box(Vector3(1.2, 2, 2), Vector3.ZERO)
+    turn = box(Vector3(2, 0.2, 0.6), Vector3(4, 0.9, 0))
+    apply_pose(pose)
+
+func box(size: Vector3, at: Vector3) -> MeshInstance3D:
+    var body := BoxBody.new(size)
+    body.position = at
+    add_child(body)
+    return body
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    if animate:
+        pose = pingpong(2.0 * elapsed / period, 1.0)
+    apply_pose(pose)
+
+func apply_pose(value: float) -> void:
+    var t := clampf(value, 0.0, 1.0)
+    travel.position.z = lerpf(-1.4, 1.4, t)
+    grow.scale = Vector3.ONE * lerpf(0.25, 1.0, t)
+    turn.rotation_degrees.y = 90.0 * t
+```
+
+</details>

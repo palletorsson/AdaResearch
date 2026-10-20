@@ -20,7 +20,7 @@ Each cell keeps part of its present value and moves the remainder toward its nei
 
 Bring DRIVE to zero. Choose the uniform beginning with SEED, leave PULL at 0.25 and ONE CELL enabled. In INTEGER storage, press STEP. The difference is gone. Replay, switch STORE to FRACTIONAL and take the same step. Now twenty-seven addresses differ, but the largest difference is smaller than before: 0.75 instead of one.
 
-More places carry it. Less of it remains at any one place.
+More places carry it. The largest local difference is smaller. A widening patch and a growing disturbance would be different findings.
 
 The two versions part at the moment of storage.
 

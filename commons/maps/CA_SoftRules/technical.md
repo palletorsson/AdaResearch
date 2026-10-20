@@ -18,7 +18,7 @@ Two 1.6 m table fields share their respective textures with two curved 3 m tall 
 
 ## Preservation and limits
 
-The old 13×10 map's retained gallery is carried into a 17×26 hall, with an added front bay and eastern aisle. All six authored works remain. rd_artifact and the_clockmaker_of_rules are primary and each has a book passage. Four other works remain secondary for later interaction review. The clockmaker lacked map_ready in the museum registry; its scene is restored and its labels now distinguish calculated histories from static illustrations. Current sequence order is unchanged. Desktop evidence accompanies the review page; headset reach, readability and performance remain unverified.
+The old 13×10 map's retained gallery is carried into a 17×26 hall, with a front comparison bay and a level rear gallery. The primary tables, curved displays and clockmaker retain their positions. All six authored works remain. rd_artifact and the_clockmaker_of_rules are primary and each has a book passage. Four other works remain secondary for later interaction review. The clockmaker lacked map_ready in the museum registry; its scene is restored and its labels now distinguish calculated histories from static illustrations. Current sequence order is unchanged. Desktop evidence accompanies the review page; headset reach, readability and performance remain unverified.
 
 ## 25 September: a body leaves a seed
 
@@ -27,3 +27,18 @@ The map adds `#seed:walk` to its existing exchange-study token. `walk_seed.gd` a
 The first accepted arrival calls the existing `inject()` once. Both fields receive U=.5,V=.25 at the existing nine addresses x=3..5,y=14..16. No numerical time advances. Remaining in the mark does not replenish the patch; after all visitors leave, another arrival can inject again. REPLAY while occupied restores and holds the clean beginning until a fresh entrance. VIEW and COAT retain the body input and stored values. The original eight controls and solver are unchanged; the unconfigured exchange study has no floor receiver.
 
 After the first hundred updates, the controlled body enters and leaves this second patch. One further update transports V outside its original edge in A relative to a matched no-entry control; B's unseeded neighbour stays zero. After a hundred further updates, the patch centre is weaker in A than B. This is dispersal as well as propagation, not evidence that exchange guarantees a seed's persistence. Current native checks and limits are recorded in `encounter-notes.md`.
+
+
+## Complete learner reconstruction — 8 October 2026
+
+`tutorial.md` prints three complete files maintained in `doc/book/studies/cellular-automata-through-the-hands/CA_SoftRules`: `field.gd`, `exchange.gd`, and the unchanged previous `point_body.gd`. The RefCounted field keeps two 32² fractional arrays, fixed Gray–Scott terms, a four-axial difference sum, periodic boundary and synchronous next buffers. The compact model has two 1.28 m table images and upright panels, with one texture shared per pair. These are fixed display surfaces, not growing geometry. Clock/view/exchange controls are keyboard-based in this reconstruction; the installed desk remains VR-operable.
+
+The installed `exchange_hand.gd` mounts the same small PointBody beside the existing desk. World position converts to study local space; a held centre within .35 m vertically and .8 m of either tabletop centre selects an address at .05 m pitch. Trigger replaces U=.5,V=.25 in a wrapped 3×3 patch in both fields. No clock advances. Outside, above, or released inputs do nothing; release parks the sphere. The compact example uses the same mapping with .04 m pitch and .64 m half-width. Its point centre is not a pressure measure.
+
+The fixed `walk_seed.gd` receiver and `live_field.gd` solver remain byte-identical to this pass's baseline. Only selected injection and its hand adapter are added to the installed study. REPLAY restores original values and clears injection count without changing exchange, view or coating choices. The installed +100 advances in bounded batches; the compact Space action executes 100 steps directly.
+
+Spatial changes preserve six authored works. Rows16–24 are levelled, with incidental sculpture reserved out of circulation. Rear staging: lattice_gas_pump source(12,18); ca_sphere(3,22),height1.1; crack_propagation_ca(3,18),height1.2,scale.35; rule_30_110_gravity(12,22),height2.6,scale.3. The latter uses optional host_lighting to disable its standalone sun/camera; its transition and falling-body logic are unchanged. The generic gate is disabled and portals sit at source(8,0)/(8,25). Only this hall's generated plan row is rederived.
+
+Validation: 39 learner and 40 museum checks pass in native Godot 4.6. Both exchange settings match installed U,V arrays exactly for 2400 updates each. Corner transfer and two deliberate defects are tested. Native supplied XRTools poses and CharacterBody overlap test pickup, planting, release, arrival, occupancy and reentry. Four routes contain 294 layer-1 capsule and level-floor samples. Portal approaches pass; no full transition, physical headset, Quest benchmark or independent student assessment is claimed.
+
+Review: `doc/book/iterations/2026-10-08-ca-what-a-neighbour-offers/index.html`, full texts, before/after above and inside captures, printed files, receipts and ZIP. Secondary interactions remain unaudited, some secondary labels draw through the primary wall surfaces, and existing blank wall frames remain.

@@ -1,5 +1,9 @@
 # Point One — give the point a body
 
+## Current room comparison — 17 October 2026
+
+The second and third points have no small podiums. Their centres and visible radii agree. Walk through the visible-only point, then approach the solid point along the same line. Only the third sphere has a collision shape. The empty first marker and the large final pedestal remain. Do not infer point collision from a supporting plinth.
+
 **Learning elements**
 
 - Position values

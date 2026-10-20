@@ -18,46 +18,21 @@ CLEAR empties the display and restarts its named seed. While paused, it stays em
 
 Those pale bars carry the model's expected counts at the current number of landed values. Blue and pale share a count scale. Their disagreement is available to examine; the pale shape does not instruct a blue bar to grow toward it. The disagreement is easiest to read where blue falls short, because the pale then shows above it; a blue bar that exceeds its expected count hides the pale top.
 
-Now press UNIFORM. The bins clear, the seed stays, and three batches again give three hundred values. Keep the same thirty bins. Each pale bar now expects ten. Compare the two arrangements at equal count before deciding which looks more irregular. UNIFORM has used each number directly:
+Now press UNIFORM. The bins clear, the seed stays, and three batches again give three hundred values. Keep the same thirty bins. Each pale bar now expects ten. Compare the two arrangements at equal count before deciding which looks more irregular. UNIFORM has used each number directly.
 
-```gdscript
-		DistType.UNIFORM:
-			return _rand()
-```
+GAUSS has given two numbers another job.
 
-GAUSS has given two numbers another job:
+A logarithm, a square root and the turning cosine give those draws their new relation. The mean is 0.5; the standard deviation is 0.15: under the ideal model, roughly two draws in three lie within 0.15 of the middle and nineteen in twenty within 0.30. A finite sample can differ; the model does not appoint which beads must arrive. Press WIDTH and the deviation cycles through 0.08, 0.15 and 0.25 with a cleared display, so the model's central band becomes narrower or wider; the actual proportion remains something to count. The code directly transforms draws into an approximation to a normal distribution. It does not wait for an arbitrary collection of values to become Gaussian. UNIFORM will keep its own law as more draws arrive.
 
-```gdscript
-		DistType.GAUSSIAN:
-			var u1 := maxf(_rand(), 0.0001)
-			var u2 := _rand()
-			var z := sqrt(-2.0 * log(u1)) * cos(TAU * u2)
-			return _fit(gaussian_mean + z * gaussian_std)
-```
+The sampling recipe guards its first input. Zero cannot enter the logarithm. Values below 0.0001 share that lower bound, limiting the computed reach to about 4.29 standard deviations. Even before a value reaches the screen, the numerical procedure has made a boundary. The ideal orange model and this finite computation are close enough to compare, and still worth distinguishing.
 
-There is the logarithm, the square root, the turning cosine again. The mean is 0.5; the standard deviation is 0.15: two draws in three land within 0.15 of the middle, nineteen in twenty within 0.30, and the rare ones make the tails. Press WIDTH and the deviation cycles through 0.08, 0.15 and 0.25 with a cleared display, so the same two-in-three can be watched staying inside a narrower or a wider band. The code directly transforms draws into an approximation to a normal distribution. It does not wait for an arbitrary collection of values to become Gaussian. UNIFORM will keep its own law as more draws arrive.
-
-Read the small guard on `u1`. Zero cannot enter the logarithm. Values below 0.0001 share that lower bound, limiting the computed reach to about 4.29 standard deviations. Even before a value reaches the screen, the numerical procedure has made a boundary. The ideal orange model and this finite computation are close enough to compare, and still worth distinguishing.
-
-There is another boundary at the screen itself:
-
-```gdscript
-func _fit(raw: float) -> float:
-	if raw < 0.0 or raw > 1.0:
-		_clipped += 1
-	return clampf(raw, 0.0, 1.0)
-```
+There is another boundary at the screen itself.
 
 The previous room's glass reflected an overshoot. Here a value past one is kept at one; a value below zero is kept at zero. Its distance beyond the edge is lost from the retained value. Look at the plate's clipped count and its two edge-bin counts. They need not agree: an edge bin also contains values that were inside the display all along.
 
 Try EXPON, then press BATCH three times. More values gather near the left. Occasionally a draw from its long right tail is clamped at one. A finite run need not contain such a draw; the model's tail is a probability, not an appointment. NEW SEED lets another run take place. Its number differs from the current one, though an older number can return later.
 
-Return to GAUSS or UNIFORM, stay paused (the plate's last line should read “paused”; press PAUSE only if it reads “running”), clear, and collect three batches. Now press BINS. Thirty become sixty, then ten, then thirty again. The landed count stays at three hundred. Nothing has been sampled again. The stored values are assigned to new intervals:
-
-```gdscript
-	for v in _values:
-		_bins[clampi(int(v * num_bins), 0, num_bins - 1)] += 1
-```
+Return to GAUSS or UNIFORM, stay paused (the plate's last line should read “paused”; press PAUSE only if it reads “running”), clear, and collect three batches. Now press BINS. Thirty become sixty, then ten, then thirty again. The landed count stays at three hundred. Nothing has been sampled again. The stored values are assigned to new intervals.
 
 Watch the mean and the σ marked “binned.” They can change too. The plate estimates each value by the centre of its bin, so changing the intervals changes that estimate. The values have stayed; the account of them has moved. Return to thirty bins and the earlier account returns.
 
@@ -67,8 +42,10 @@ CLEAR and repeat the batches if you want to point at the same sample twice. That
 
 <!-- @GaussianPaintSplatter -->
 
-A few steps from the cabinet, a white plate collects coloured dots. Their positions come from the same guarded transform you read above, yet no dot lands near the middle: a draw within one standard deviation of the centre is discarded, leaving no mark, and nothing on the plate counts it. That is about two draws in five, taken from the densest part of the model: on a line the same hole would swallow two draws in three, but on a plane it is a disc, and a disc one deviation across holds fewer. Its label calls the hole a “Safe Zone.” From the painting alone, could you tell a centre that was never reached from one that was refused?
+A few steps from the cabinet, a white plate collects coloured dots. Their positions come from the same guarded sampling recipe, yet no dot lands near the middle: a draw within one standard deviation of the centre is discarded, leaving no mark, and nothing on the plate counts it. That is about two draws in five, taken from the densest part of the model: on a line the same hole would swallow two draws in three, but on a plane it is a disc, and a disc with a radius of one deviation holds fewer. Its label calls the hole a “Safe Zone.” From the painting alone, could you tell a centre that was never reached from one that was refused?
 
 <!-- @ -->
+
+In the tutorial, your point calls for another batch or another partition. One action adds evidence; the other changes its account. You can make the bars look different without asking chance for anything new.
 
 We have met a centre, but have not discovered a command to belong to it. Frequent under a chosen model does not mean preferable, healthy or correct. Before carrying this shape onto a body, ask what was measured, what the bins kept, and what the edges absorbed. In Random Mushrooms, sampled numbers become differences among forms. Which features of those bodies will be allowed to vary?

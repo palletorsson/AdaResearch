@@ -10,11 +10,7 @@ The game keeps running. The row does not grow. For once, the clock is not the au
 
 Choose **0**. A blue bead appears, with its value above it. Choose **1**. An amber bead follows. Try a few more, then stop.
 
-The question mark stays ahead of what you have made. There is no next value concealed behind it, waiting for the animation to reveal it. The program has not stored one. Your next press will append it:
-
-```gdscript
-terms.append(value)
-```
+The question mark stays ahead of what you have made. There is no next value concealed behind it, waiting for the animation to reveal it. The program has not stored one. Your next press will add it to the record.
 
 We met the array much earlier. Here it holds a record of decisions. The order matters: `0, 1` is not `1, 0`. Waiting changes neither. **RESET** clears this record and lets another beginning happen.
 
@@ -24,7 +20,7 @@ Now imagine continuing without a final term. Will a 1 ever appear? A single chos
 
 The difference is already in your hand: evidence about what has been made, and a claim about every continuation.
 
-Brouwer's choice sequences make room for construction that proceeds through time. Some sequences follow a rule; others admit choices as they develop.[^choice] This bench offers a modest encounter with that distinction. It records a finite binary prefix, shows its latest ten terms and stores at most 256. Filling that storage completes neither infinity nor the philosophical argument. It fills this instrument.
+Brouwer's choice sequences make room for construction that proceeds through time. Some sequences follow a rule; others admit choices as they develop.[^choice] This bench offers a modest encounter with that distinction. It records a finite binary prefix, shows its latest ten terms and stores at most 256. Filling that storage completes neither infinity nor the philosophical argument. It fills this instrument. Your student copy uses only eight slots, enough to inspect every retained choice at once. Its witness is an address you can check: this position contains 1. After eight zeros, the finite question has an answer and the question about an imagined continuation still asks for more.
 
 And who chose the things you are allowed to choose? There are two buttons. You may make a rhythm, break it, repeat yourself, refuse to continue. The freedom has a shape before your hand arrives.
 
@@ -58,11 +54,7 @@ At the workbench, set the list size to four. Four rows, four bits in each. Follo
 
 Compare the red row with the first row: they disagree at the first position. Compare it with the second: at the second. Keep going. You can point to why the new string differs from every displayed row.
 
-Increase the size. More rows arrive; the earlier bits stay. The construction extends with them:
-
-```gdscript
-_d[i] = 1 - _list[i][i]
-```
+Increase the size. More rows arrive; the earlier bits stay. At each new diagonal position, the construction takes the opposite bit.
 
 This is a finite stage of diagonalisation. The mathematical argument for infinite binary sequences applies the same rule to every row of a proposed countable list. The headset displays finite strings, up to 32 bits here. Their disagreement is real and inspectable; displaying it does not display the completed infinite object. Here the red string is the witness: you watched it being made and can check its difference from each displayed row.
 

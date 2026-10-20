@@ -8,7 +8,11 @@ Near the way in, a small grower is already at work. A new point appears and reac
 
 Hold the growth and compare one link with three. The positions stay. Some of the ways between them disappear. You have changed no point's address, yet moving through the network would be a different undertaking.
 
+With every point present, one link per arrival leaves two separate trees. The grower began with two unlinked points, and each newcomer attaches to only one earlier point. Under the three-link rule, the first newcomer joins both starting points; later arrivals make circuits. The number of links changes whether another way through is available.
+
 Here we can inspect the rule more closely. Each arrival chooses nearby earlier points. There is no declared root, but proximity and time still make some points more available than others. Removing a busy point asks a further question: which relations survive without it? The model can restore the point and its former links. Inventing a new connection would be another act.
+
+A degree is something we can count: the links meeting a point. Influence would need another question. Being well connected here does not tell us who could change the rule that makes these connections.
 
 The ring does not spread with the shoots. The machine keeps finding new places inside a boundary it chose before the network began. Something is growing, but its territory has already been given.
 

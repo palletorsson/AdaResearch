@@ -1,35 +1,33 @@
-# A pair that blocks two pairs
+# Room for two
 
-Can every chosen pair be valid while the collection still leaves avoidable gaps?
+One person takes the drill. The other waits. There is still a saw on the table.
+
+<!-- @matching_workshop -->
+
+The first choice was allowed. That is what the pale connection told us. It did not promise that accepting this choice would leave a useful choice for someone else.
+
+Follow the waiting person's line to the drill, then back to the person holding it. From there another line reaches the saw. No new tool arrives. Someone changes their arrangement, and both can work.
+
+The model makes that change easy. A pair is an entry that can be cleared. A person can release a tool without losing time, face, trust or the work already begun. We have supplied a willingness to reconsider by leaving all those costs outside the table.
+
+There is something worth keeping in the movement nevertheless: what looked like a shortage was partly the consequence of an earlier allocation. Looking again changed what the room could offer.
 
 <!-- @edmonds_algorithm -->
 
-Five points make a ring; each has another point waiting outside it, joined by a single spoke. Choose one of those outer points. In CYCLE FIRST, press STEP and watch the edges considered by the matching display. Predict whether the next edge can be selected: has either endpoint already been paired? RUN / PAUSE lets the scan continue. Keep your chosen point in view as its neighbour finds company.
+Across the room, five points form a ring, each with another point waiting outside it. Let the ring's edges go first: three pairs form. Let the spokes go first: five. The connections have not changed. The rule against pairing an endpoint twice has been obeyed both times.
 
-A matching is a set of edges with no shared endpoints. Each vertex participates in at most one selected pair. This condition tells us whether a collection is allowed, but it does not tell us that the collection contains as many pairs as possible.
+A rule can be followed while its promise remains unmet. Here we can count the gap and demonstrate another arrangement. Elsewhere the thing we hope an arrangement will provide may not have an agreed measure.
 
-Follow an occupied endpoint into the next few decisions. Several rejected edges can share that same endpoint, so one accepted pair can shape the fate of many later candidates. The rule prevents double booking correctly, but that correctness is only one part of the task. Keeping an unmatched vertex in view makes the consequence visible from the waiting vertex’s side, instead of assessing the procedure solely by how confidently it marks each new pair.
+The people at the little table have declared tasks. Their lines record which tools those tasks permit. They do not tell us whom to trust, what someone wants to become, or whether a more efficient allocation is welcome. Two selected edges cannot settle those questions.
 
-The present exhibit scans edges and accepts a pair whenever both endpoints are free. It keeps those choices. That greedy procedure can reach a maximal matching: no extra edge can simply be added without breaking the rule. A maximum matching answers a stronger question by containing the greatest possible number of pairs.
+<!-- @ada_relations -->
 
-Try a small example in your head or with four people standing in a line, A, B, C, D. If B pairs with C first, neither outer edge can be added. The matching is maximal with one pair. Choosing A with B and C with D instead gives two pairs. Improving the first result requires undoing an accepted edge, not just looking harder for another unused edge.
+Now look at Ada itself. The rooms become small buildings; the walk becomes a line. Change the view. Connections reach back across the route: a concept returns, a lesson names an earlier dependency, an artifact appears again.
 
-When the cycle-first scan ends, count the pairs and the points left waiting. There are three pairs, with four outer points unpaired. Follow each unused spoke inwards. The connection is still there. Its inner endpoint was taken by an earlier choice.
+The chronology beside them keeps dates from selected saved reviews. A date tells us where an account was kept. It cannot tell us when an idea first began to trouble us. Nor does the tidy line erase the returns, revisions and arguments that made the work possible.
 
-Press ORDER for SPOKES FIRST. The points stay where they were; every connection remains. The earlier pairings clear. Before running again, predict what will happen to the point you chose. This time five pairs form, one along each spoke. Nobody has gained a new connection. We changed which possibility was considered first.
-
-![Cycle first: the ring’s edges scanned before the spokes; three pairs, four outer points waiting.](/book-images/figures/graphtheory/matching-cycle-first.png)
-
-![Spokes first: the same ten points and ten connections; five pairs, one along each spoke.](/book-images/figures/graphtheory/matching-spokes-first.png)
-
-*Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs. Two end states of one graph, from the same museum camera.*
-
-RESET repeats the selected order. Switching back to CYCLE FIRST brings the gaps back too. Both scans obey the same rule about free endpoints. Their different results give us a reason to ask for a procedure that can reconsider its own choices. The display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction.[^name] Our order switch starts another scan. It does not teach the first scan how to undo a pair.
-
-Matching also leaves the meaning of a good partnership outside its endpoint rule. Maximising a count cannot establish consent, suitability or fairness. Those questions require further conditions and a way for participants’ preferences to matter.
+These are different relations. We have drawn them separately so that one cannot quietly stand for another. Going next is not depending on. Sharing a name is not carrying the same object. Being connected is not being paired.
 
 <!-- @ -->
 
-The next hall keeps five sentences on a plaque and colours one of them gold before you have read it. Ask there, as here, whether a rule that is followed has been proved: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion.
-
-[^name]: The caption on the display reads GREEDY MATCHING. The artifact keeps the name of the procedure it was built to become, edmonds_algorithm, in its files, and nowhere a visitor can see.
+The drawing is useful because we can return to the files that support it. It remains open because those files can change. Keep the saw in view as we enter Machine Learning: the unused possibility was there all along, but the first arrangement did not make it available. When a system changes its own arrangement, what will it count as improvement?

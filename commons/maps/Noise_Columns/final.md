@@ -1,6 +1,6 @@
 # What keeps a body changing?
 
-Behind us, a number found a height in a wall. An opening moved, and the view changed. Here the number meets a body that already has folds, a foot, a capital. Can you tell how it changes just by looking at its strange shape?
+Behind us, a proposed position had to find room among the points already admitted. Elsewhere in that hall, a number found a height in a wall: an opening moved, and the view changed. Here the number meets a body that already has folds, a foot, a capital. Can you tell how it changes just by looking at its strange shape?
 
 <!-- @MeltingBerniniScene -->
 
@@ -20,31 +20,15 @@ Put the veining back if you prefer it. The pleasure of the surface need not end 
 
 Now REVEAL names the three drivers. BASELINE holds a fixed value. PERIODIC follows a sine. FIELD follows a path through a seeded coherent field. Release FREEZE and compare the names with the movement you watched.
 
-```gdscript
-func driver_phase(kind: String, t: float) -> float:
-	match kind:
-		"periodic":
-			return sin(t * melt_speed) * 0.5 + 0.5          # the shipped driver
-		"field":
-			return clampf(_noise.get_noise_2d(t * 0.55, 0.0) * 0.5 + 0.5, 0.0, 1.0)
-		_:
-			return TRIO_BASE_PHASE
-```
-
 The sine repeats after a fixed interval. At the room's speed of 0.9, that interval is about seven seconds. The field has a different history. Nearby sample coordinates give related values; the path does not carry the sine's promise of a seven-second return. That does not make it unknowable. With the same seed, settings and coordinate, this implementation gives the same value again.
 
 One held shape cannot tell us which driver supplied it. Watching how it returns gives us evidence to compare with the revealed rule. A short, convincing repetition is still less than a guarantee of what every later moment will do.
 
 Both drivers hand the shaft one number between zero and one. The code calls it a phase. For the sine, it is a remapped output rather than the angle inside `sin`. For the field, it is a sample remapped and bounded to the same range. The shared name makes the numbers interchangeable at the next operation, while their histories remain different.
 
-The walls behind us gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
+The wall in the previous hall gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
 
-```gdscript
-var melt_factor = pow(v, 0.5) * melt_strength * melt_phase
-var height = v * column_height - melt_factor * 2.0
-```
-
-`v` marks progress up the shaft, from zero to one. The square root gives different heights different shares of the same phase. At the top, the mapped drop can reach 0.70 metres. The phase also enters a bulge further down the function. Ribs, twists and offsets were already there before the field arrived.
+Progress up the shaft is measured from zero to one. The square root gives different heights different shares of the same phase. At the top, the mapped drop can reach 0.70 metres. The phase also enters a bulge further down the function. Ribs, twists and offsets were already there before the field arrived.
 
 Look again at BASELINE. It is held at 0.10, and it is already strange. The fixed reference is itself a made body. We have chosen something to keep still so that another change can become legible.
 
@@ -58,13 +42,7 @@ There is a smaller interruption inside the smooth movement. Each moving shaft is
 
 Leave the columns frozen for a moment and turn to the dark orb. Its sheen shifts. Stay long enough to notice the pulse, and the pool of shadow beneath it slowly deepening and fading. The room has not stopped breathing just because one instrument has stopped counting.
 
-This body uses another local clock. Its script also contains a sine:
-
-```gdscript
-var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
-```
-
-This time the value enters brightness and emission. It does not rebuild the sphere's mesh. The body also turns slowly, and the pool beneath it pulses in opacity on a slower sine. A single appearance gathers several operations that our earlier halls let us separate.
+This body uses another local clock and another sine. This time the value enters brightness and emission. It does not rebuild the sphere's mesh. The body also turns slowly, and the pool beneath it pulses in opacity on a slower sine. A single appearance gathers several operations that our earlier halls let us separate.
 
 The dark sphere was described as a neutral anchor. Looking for longer complicates that description. It is active, but its activity is easy to pass over beside the tall columns. The distinction between foreground and background is also a distribution of our attention.
 
@@ -74,13 +52,7 @@ You need not make it illustrate the columns perfectly. It can keep its quieter p
 
 Nearby, the darkness has become six small orbs. They turn together in a ring, at alternating heights. There is an empty middle. Walk far enough around them for the gaps to change.
 
-This work belongs to the same dark-sphere family. The stand chooses `presence = hush` and `body = swarm` before the scene builds. The first setting makes the presence smaller and quieter. The second chooses a construction with six members. Their common motion is the rotation of their parent; they are not steering themselves around one another.
-
-```gdscript
-var count: int = 6
-var ring: float = _radius * 0.95
-var small: float = _radius * 0.40
-```
+This work belongs to the same dark-sphere family. The stand chooses a quieter presence and a construction with six members before the scene builds. Their common motion is the rotation of their parent; they are not steering themselves around one another.
 
 The array has come back inside a body. So have the circle and the alternating value. Earlier, a field varied a shaft while its mesh connections remained. Here, selecting a construction changes how many parts the body begins with. These are different kinds of change, and our toolbox contains both.
 

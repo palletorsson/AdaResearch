@@ -2,58 +2,28 @@
 
 What can change when you keep the painted cells exactly as they are?
 
-In the foundry, a surface could keep an earlier version of a pattern. Here two fields stay with the same source. Pass the patterned plates in the main room and take the opening in the east wall into the side bay. Two framed fields flank an editor. Both contain the same red bend, the blue corner and the small ochre interruption. Follow the red bend across each field. Does it always face the same way?
+Pass the patterned plates and enter the side bay. Two framed fields flank an editor. Both contain a red bend, a blue corner and a small ochre interruption. Follow the bend across each field. Does it always face the same way?
 
 <!-- @pattern_maker_station -->
 
-The sixteen buttons on the console show the source. Read them from the top row down. Find the red bend there, then find it again on the left panel. Follow it one tile to the right. The bend returns with the same facing.
+Find the bend among the sixteen source buttons, then on the left panel. One tile to the right, it returns with the same facing. On the other panel, the next bend faces back. Nothing in the little source has turned over. Where did the other facing come from?
 
-On the other panel, the next bend faces back. The painted source still has only sixteen cells. Nothing in that little grid has turned over. Where did the other facing come from?
-
-Press PM. Look at the floor, then back at the source buttons. Press P1 and return. The floor changes its arrangement; the two wall panels keep their respective rules. They let you compare what the floor has just left with what it has become.
-
-Now press FLIP X. Watch the source this time. Its blue corner crosses to the other side. Both wall fields respond, although their rules remain P1 and PM. One reversal left the painted cells alone; the other has rearranged them. The little grid is where you can tell them apart.
+Change the floor from P1 to PM. Watch the source buttons: they stay where they were. Now press FLIP X. The blue corner crosses to the other side of the source, and both wall fields respond. One reversal changed a reading; the other rearranged what was read. The small grid lets you distinguish them.
 
 ![The same pair of museum panels before and after flipping their shared source.](/book-images/iterations/2026-09-28-pattern-a-facing-return/source-pair.png)
 
-*FLIP X changes the little source and both fields. The left field continues to translate; the right continues to reverse alternate columns.*
+*The source has changed. Each field keeps its own way of reading it.*
 
-P1 repeats by translation. In this station's PM rule, alternate columns sample the source in reverse across x. The shader begins by separating a position into the tile it belongs to and its position within that tile:
+P1 repeats by translation. Here, PM reads alternate columns of copies from the opposite side. The alternating facing belongs to the relation between copies. It needs no second painted mark.
 
-```glsl
-vec2 st = uv * tile_scale;
-int tile_x = int(floor(st.x));
-vec2 local = fract(st);
-```
+Reverse the source again and recover its beginning. Then add a solitary colour where the motif was quiet. Step back. Your interruption has become regular too.
 
-The whole part counts tiles. The fractional part returns to a place inside one tile. For translation, that local address is enough. For the reflected field, one additional condition changes where the lookup goes:
-
-```glsl
-if (imod(tile_x, 2) == 1) {
-    local.x = 1.0 - local.x;
-}
-```
-
-These lines run in the wallpaper shader used by the station. They change an address before it reads the source texture. They do not repaint the stored cells. The alternating facing belongs to the relation between copies.
-
-FLIP X instead rebuilds the stored rows from the opposite end:
-
-```gdscript
-row.append(_grid_data[y][tile_size - 1 - x])
-```
-
-The line takes a cell from the opposite end of its row. You saw its result in the source buttons. Press FLIP X again. The second reversal brings every cell back. Try ROTATE, then follow the corner through four presses. UNDO takes you back one editing operation; RESET restores the starting mark and the translating floor. Reset can itself be undone.
-
-Choose a paint colour and press a source cell. Put a solitary mark where the motif was quiet. Both fields receive it. Step back. Your interruption has become regular too.
-
-A repeating system can make room for an unexpected mark while giving that mark a schedule. What would it take to let one copy depart without sending the departure everywhere? In the foundry you could hold a receiving surface apart from its source. Here the source is shared deliberately, so an edit travels through every copy. Neither arrangement answers every desire.
-
-The panels and floor give each tile forty centimetres. The floor has more copies because it extends further. On the reflected panel, facing alternates across tile columns: the two-column cycle is wider than the individual tile. A boundary around one copy does not necessarily enclose the whole repeating relation.
+A repeating system can admit an unexpected mark while giving it a schedule. In Foundry, we asked how to keep one occurrence different. Here we have another possibility: keep the source, but change the relation that makes it return. Painting the mark and changing that relation give us different places to act.
 
 <!-- @ -->
 
-The mark is made of cells, but the apparent continuity between copies is another decision. This lesson uses nearest-cell sampling, so a colour holds its square until another cell begins. A softer-looking edge would need a different account of how those stored values become visible. Sixteen cells have never been the whole surface, however completely they seem to occupy it.
+Follow the reflected panel until the original facing returns. Its cycle extends beyond one tile. A boundary around a copy does not necessarily contain the whole repeating relation.
 
-A square can turn and seem not to have moved. Here a symmetrical source can conceal a reversal. Add a difference and try again. The useful mark may be the one that refuses to look the same from every direction.
+Now make the source more symmetrical. Remove the blue corner, or make its sides alike. The reversal can become difficult to see even while the rule continues to execute. Add a difference and look again. The useful mark may be the one that refuses to look the same from every direction.
 
-In Array_Patterns, the repeated field extends along an environment. Keep these two questions available as you enter: what rule relates the copies, and what surface gives those relations a place to appear?
+We have kept a source and changed how it returns. In Array Patterns, that reading meets a corridor: a floor, a wall, a corner and an edge. What will those surfaces ask of it?

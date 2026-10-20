@@ -1,23 +1,27 @@
 # A connection is not a coordinate
 
-If the drawing moves, has the graph changed?
+Choose an edge. Keep its two ends in view while the drawing moves.
 
 <!-- @force_directed_layout -->
 
-Choose one vertex and identify two of its connected neighbours. Keep those relationships in view while the drawing settles. Notice which distances change and which connections remain. Try to describe the difference without calling every movement a new network.
+The edge lengthens. One end slips past another point. The arrangement becomes unfamiliar, but the connection you chose remains. Left and right were temporary ways of finding it.
 
-The default graph has eight vertices joined in a cube’s connection pattern. Its positions are not fixed: connected vertices pull together as if on springs, every pair of vertices pushes apart, and damping wears the motion down. The final arrangement reflects the balance of these forces rather than an instruction to draw a particular cube in a particular orientation.
+The blue graph has eight vertices joined in a cube's pattern. Each has three neighbours. Springs along its edges and repulsion between every pair give that pattern a changing shape. Damping wears down the motion. Someone chose those forces, their strengths, the starting positions and the bounds within which the drawing may move.
 
-Choose an edge whose length changes noticeably as the drawing settles. Describe its endpoints without using left, right or above, since those descriptions may stop helping as positions move. You might identify one endpoint through its neighbours and then follow the same relation through the motion. This is a small exercise in recognising structure independently of its current projection. The drawing remains useful, but it is no longer the only way you know which connection you are seeing.
+It can look as though the graph has found its natural form. Stay with that impression for a moment. Then find the point that seems most important. Is it larger in your view, nearer the middle, or easier to see? Count its connections: three, like every other point here. The drawing has offered a hierarchy that this count does not support.
 
-A force-directed layout is a method for choosing a graph’s visible coordinates. The graph supplies adjacency; the layout supplies positions that may make that adjacency easier to inspect. An edge can stretch without ceasing to connect the same pair. Conversely, two unconnected vertices can pass close together in the drawing without acquiring an edge.
+Move around it. One edge hides behind another; a gap opens. The relationship remains, yet your access to it changes. Making a network visible is already a choice about what another body will be able to notice.
 
-The two travellers in the previous room followed connections. They would still need the adjacency structure even if this layout placed two unrelated vertices almost on top of one another. Visual proximity can suggest a relationship that the visiting rule does not possess.
+The travellers in the last room could follow only the neighbours their record supplied. Two unrelated points might pass close enough here to look intimate. No new connection follows from that appearance. Nor does a stretched edge tell us that a relationship has weakened: this drawing has no such measure.
 
-Now find a vertex that looks central. Is it central in the arrangement, unusually well connected, or simply easy to see from where you stand? Those questions can have different answers. Count: every vertex in this graph has exactly three neighbours, so whatever looked central was the drawing’s doing. A useful drawing can also invite an unsupported story about influence or importance.
+In the small study, your hand can pull the black point out of place. Its neighbours follow; the shape answers. Release it and watch the arrangement continue without you. You have altered the position from which the point is seen, while keeping the record of whom it can reach.
 
-The drawing in front of you is one layout of many the same graph could be given, and walking gives you another: go round to the far side and look again. Is the vertex you called central still central from there? If a claim about the network disappears when the drawing rearranges, or when you move, ask whether the claim belonged to the graph or to its presentation.
+In Tomás Saraceno's *Webs of At-tent(s)ion*, spider silk carries vibrations that microphones make audible.[^layout-saraceno] Follow the response to your pull here. Which other points move? A connection gives us something to follow through its effects as well as along its length.
+
+Some relationships persist through a change of place. Others need a change in the record before they can appear at all. Which kind of change are you asking this picture to show?
 
 <!-- @ -->
 
-Pathfinding will change a connection’s availability while a traveller is already moving. This time the route really may need to change.
+In the next hall a stone can become unavailable. The traveller will need more than a different drawing to find a way across.
+
+[^layout-saraceno]: Tomás Saraceno, [*Webs of At-tent(s)ion*](https://studiotomassaraceno.org/webs-of-at-tentsion/) (2018). Different spider species made the webs; some were amplified. Ada's springs and repulsion arrange a graph. They do not model silk or the lives that produced it.

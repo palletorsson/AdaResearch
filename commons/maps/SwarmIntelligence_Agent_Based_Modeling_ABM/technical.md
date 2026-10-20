@@ -1,162 +1,40 @@
-# Give agents rules, let them interact, watch what emerges — the ABM framework generalizes every swarm before it
+# ABM — reconstruction and evidence
 
-Physarum was specific: sense trail, deposit trail, turn toward concentration. Boids were specific: separate, align, cohere. Each algorithm solved a particular coordination problem with a particular mechanism. Agent-based modeling abstracts the pattern. An ABM is not a specific algorithm. It is a framework: any number of agents, each carrying its own state and rules, interacting through a shared environment, producing system-level behavior that is whatever emerges.
+## What is now taught
 
-The prior swarm maps were all ABMs without naming themselves as such. Physarum agents with position, heading, and a sense-turn-deposit loop — that is an ABM. Boids with position, velocity, and three steering forces — that is an ABM. The flow field particles, stripped to position alone, following a pre-built field — even that is a minimal ABM. This map names the pattern and generalizes it.
+The previous tutorial introduced unrelated FORAGING/FOLLOWING/RESTING states with undeclared dominant_state and initialise_swarm helpers. The replacement teaches a state change visible in the existing foraging exhibit: collect, return, deliver. Boids was already an agent-based model; adding a Boolean is a new behaviour, not the definition of ABM.
 
-## The Agent Architecture
+All three student scripts are printed in tutorial.md. PointBody is byte-identical to Boids. The host constructs the display and uses the explicitly supplied museum/XRTools/button environment. No hidden sphere scene or dollar reference. The study is saved at doc/book/studies/swarm-through-the-hands/SwarmIntelligence_Agent_Based_Modeling_ABM/study.tscn. Add it to a working Node3D in the prepared Ada museum. The report's native placement is map position(8.8,0,6.5), yaw−90°; it is temporary, not registered as another production artifact.
 
-An ABM agent has four components: state, perception, decision, and action.
+## Actual code execution
 
-```gdscript
-var agents: Array[Dictionary] = []
+42 checks pass in a fresh Godot4.6 process. The runner extracts the three marked blocks from canonical tutorial.md, compares them with source files, writes printed copies, then runs those copies. It checks contact timing, pickup without instantaneous reversal, single delivery, search-only sensing, return-only deposition, saturation, wrapping, finite bounded movement, reversed traversal, full reset replay, and both reset scopes. A self-running arrangement completes a delivery cycle.
 
-func _ready() -> void:
-    for i in num_agents:
-        agents.append({
-            "position": Vector3(randf_range(-10, 10), 0, randf_range(-10, 10)),
-            "velocity": Vector3.ZERO,
-            "state": "exploring",     # finite state machine
-            "energy": 100.0,
-            "carrying": false,
-            "memory": []              # recent observations
-        })
-```
+The independent return-speed edit produces the stated first velocity and position. Three faulty variants are executed: never acquiring food, erasing the field during replacement, and counting delivery repeatedly. Each violates its relevant condition. Actual button signals and synthetic XRTools pickup/trigger/release are exercised under a translated, rotated host. The sphere instance is retained through resets and interactions. This is author-operated reconstruction evidence, not an independent student or a physical headset assessment.
 
-State goes beyond position and velocity. An ABM agent can carry internal variables — energy, mood, inventory, memory. The `state` field is a finite state machine label: "exploring," "gathering," "fleeing," "resting." Different states activate different decision rules. The agent's behavior is not a fixed formula applied every frame. It is a conditional program that branches on internal state and sensory input.
+The first harness run called max() directly on a PackedFloat32Array, which Godot does not provide. The harness now converts that value to Array for the maximum check. The student model needed no correction for this error. Final logs retain the project's existing unresolved resource UID and Jolt solver-bias warning; no GDScript errors remain.
 
-## Perception
+## Exact model boundaries
 
-Each agent perceives its environment within a limited radius. The perception model defines what the agent can sense.
+Six points;16×16 periodic plane;0.16m/cell;0.05s tick;3cells/s maximum speed;0.5s response;6cells/s² acceleration cap. Home(3,8), food(12,8), strictly less than1cell for contact, checked before movement. Sampling positions and movement wrap; destination distance is direct, not shortest distance across the seam. The default contact radius exceeds the maximum0.15cell step; independently changing those parameters could allow a point to skip the ring.
 
-```gdscript
-func perceive(agent: Dictionary, all_agents: Array, environment: Dictionary) -> Dictionary:
-    var nearby_agents: Array = []
-    var nearby_resources: Array = []
-    var pos: Vector3 = agent["position"]
+Searching reuses the three samples. Returners ignore them and know the home coordinate. Returning points deposit after all movement commits and after92% retention. A new pickup deposits this tick; a delivery does not. Delivery requests east for one tick, then search sampling resumes. A stationary searcher also uses east as its fallback. Food is inexhaustible and therefore needs no shared stock allocation. The points can overlap; frozen XR bodies represent a planar model, not a collision-based ant simulation. There is no shortest-path guarantee.
 
-    for other in all_agents:
-        if other == agent:
-            continue
-        var dist: float = pos.distance_to(other["position"])
-        if dist < perception_radius:
-            nearby_agents.append({"agent": other, "distance": dist})
+Replace restores the six position/velocity/carry records but retains field, deliveries and tick count. Clear All clears those shared records as well. Both preserve retention and return_speed. While held, all ticks pause and the held velocity is zeroed; cargo persists. Reset and replacement ignore input while any point is held. The held trigger chooses the witness, not a new state. Model food is acquired by contact on a tick.
 
-    for resource in environment["resources"]:
-        var dist: float = pos.distance_to(resource["position"])
-        if dist < perception_radius:
-            nearby_resources.append({"resource": resource, "distance": dist})
+## Native museum checks
 
-    return {
-        "neighbors": nearby_agents,
-        "resources": nearby_resources,
-        "local_density": nearby_agents.size()
-    }
-```
+23 checks pass. The actual colony still has40 agents and its original simulation. Population replacement retains a seeded mark and full reset clears it. The learner controls trigger pickup, draw cargo, preserve the exact field on replacement and clear it on full reset. The rendered rigid sphere is checked across physics frames; the normal host update stays active during capture. An earlier paused-host capture showed stale rigid-body rendering despite a correct model position; that investigation is preserved, not presented as final evidence.
 
-The agent senses neighbors and resources within its radius. Perception is the bottleneck — what the agent cannot sense, it cannot respond to. The perception radius is the first constraint on intelligence. A large radius approximates omniscience. A small radius forces local decision-making. The interesting behavior emerges from intermediate radii, where agents know enough to coordinate but not enough to optimize globally.
+The initial room had five isolated authored wall cells that generated obstructing cross-room runs. Removing those five seeds opens the floor between displays. The existing colony faces180° so its projection is no longer backed by the optional navigator. The next marker moves from7,7 to the existing south perimeter opening6,9. Map data and this hall's em_plan row agree; every other runtime hall row is unchanged. The final log does not report a blocked exit. Capsule probes test floor and body clearance along ten centre-route samples, plus the working approach; two rays test the label and far grid. This does not test a physical player crossing the portal.
 
-## Decision Rules
+An initial study position put its Run button in the centre route. Moving the temporary study0.8m east cleared it. Native images were visually inspected after these repairs. The pre-existing lower-case physarum_colony token has no living scene in this hall; the log records5 of6 requested placements. This is not a regression from the spatial edits and is not counted as a working exhibit here. The original colony and navigator remain present; the optional navigator text is preserved and its prior companion is linked, not re-certified by these tests.
 
-The decision function maps perception to action. In a finite state machine model, the current state and the sensory input determine the next state and the next action.
+## Replay
 
-```gdscript
-func decide(agent: Dictionary, perception: Dictionary) -> Dictionary:
-    var action := {"type": "move", "direction": Vector3.ZERO, "speed": 1.0}
+- python tools/write_swarm_abm.py
+- python tools/test_swarm_abm.py
+- python tools/run_encounter_probe.py SwarmIntelligence_Agent_Based_Modeling_ABM --sequence swarmintelligence --render --no-bridges --output-tag abm-lesson --probe tools/probes/swarm_abm_room.gd
+- python tools/publish_swarm_abm.py
 
-    match agent["state"]:
-        "exploring":
-            action["direction"] = _random_walk_direction()
-            if perception["resources"].size() > 0:
-                agent["state"] = "gathering"
-                action["direction"] = _toward_nearest(
-                    agent, perception["resources"])
-
-        "gathering":
-            if agent["carrying"]:
-                agent["state"] = "returning"
-                action["direction"] = _toward_base(agent)
-            elif perception["resources"].size() > 0:
-                action["direction"] = _toward_nearest(
-                    agent, perception["resources"])
-            else:
-                agent["state"] = "exploring"
-
-        "fleeing":
-            if perception["local_density"] < crowd_threshold:
-                agent["state"] = "exploring"
-            else:
-                action["direction"] = _away_from_crowd(agent, perception)
-                action["speed"] = 2.0
-
-        "returning":
-            action["direction"] = _toward_base(agent)
-            if _at_base(agent):
-                agent["carrying"] = false
-                agent["state"] = "exploring"
-
-    return action
-```
-
-Four states, four behavioral modes. The transitions are condition-gated: finding a resource triggers "gathering," picking it up triggers "returning," crowding triggers "fleeing." The agent's behavior over time traces a path through state space — exploring, finding, gathering, returning, exploring again. The macro pattern (agents distributing resources, avoiding crowds, covering territory) emerges from these micro-level state transitions.
-
-## Environment Interaction
-
-The shared environment is the coordination medium. Agents modify it — consuming resources, depositing markers, altering terrain — and sense the modifications made by others.
-
-```gdscript
-func act(agent: Dictionary, action: Dictionary, environment: Dictionary) -> void:
-    agent["velocity"] = action["direction"].normalized() * action["speed"]
-    agent["position"] += agent["velocity"] * delta_time
-
-    # Clamp to map bounds
-    agent["position"].x = clampf(agent["position"].x, -bounds, bounds)
-    agent["position"].z = clampf(agent["position"].z, -bounds, bounds)
-
-    # Energy cost of movement
-    agent["energy"] -= action["speed"] * energy_cost_per_meter * delta_time
-
-    # Resource pickup
-    if agent["state"] == "gathering":
-        for resource in environment["resources"]:
-            if agent["position"].distance_to(resource["position"]) < pickup_radius:
-                agent["carrying"] = true
-                resource["amount"] -= 1
-                if resource["amount"] <= 0:
-                    environment["resources"].erase(resource)
-                break
-```
-
-Movement costs energy. Resources are finite and depletable. An agent that moves fast burns energy quickly. An agent that gathers resources restores its capacity. The energy budget creates a constraint that shapes macro behavior: agents cannot explore forever. They must find resources or die. The population stabilizes when the rate of resource consumption matches the rate of resource regeneration.
-
-## The Simulation Loop
-
-The full loop runs perceive-decide-act for every agent, then updates the environment.
-
-```gdscript
-func _process(delta: float) -> void:
-    for agent in agents:
-        var perception: Dictionary = perceive(agent, agents, environment)
-        var action: Dictionary = decide(agent, perception)
-        act(agent, action, environment)
-
-    # Environment updates: resource respawn, pheromone decay
-    _update_environment(delta)
-
-    # Remove dead agents, spawn new ones at base
-    _population_dynamics()
-
-    update_display()
-```
-
-The order of operations matters. All agents perceive the same environment state (no double-buffering of agent positions in the naive loop). Each agent acts on its perception of the world before the next agent perceives. This is sequential update — different from Physarum's effectively parallel agent loop. The ordering creates subtle asymmetries: early agents in the loop array see the pre-action state; late agents see modifications from earlier agents. For small populations this matters little. For large ones, it can create spatial biases.
-
-## The Map as Petri Dish
-
-The 8x8 grid of corridors and pillars creates a structured environment that constrains agent movement. Pillars block sight lines. Corridors channel flow. Intersections force decisions. The regularity mirrors the grid-based ABM tradition — NetLogo, Sugarscape, Schelling — where agents move on discrete lattices.
-
-The `ABMSimulation` artifact uses this corridor structure as the interaction arena. Agents navigate intersections, choose corridors, encounter each other at junctions. The architectural constraint transforms abstract agent dynamics into spatial navigation. The learner watches agents make corridor choices, cluster at resource-rich junctions, flee from overcrowded intersections, and trace out territorial patterns that reflect the grid's topology.
-
-## From Specific to General
-
-Boids had three rules. Physarum had one loop. ABM has arbitrary rules — any finite state machine, any perception model, any action set. This generality is the point. Every swarm intelligence algorithm is a special case of ABM. The sequence moves from specific to general: Physarum (stigmergy), flow fields (field following), boids (peer interaction), and now ABM (any combination). The next maps — ant colony optimization and particle swarm optimization — are specific ABMs applied to optimization problems, re-specializing the general framework for particular tasks.
+Hashes and engine logs accompany this report. Changes to the code or tutorial require fresh tests before republishing. Next: Ant Colony Optimization, two channels carried by the same point.

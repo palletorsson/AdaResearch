@@ -10,30 +10,13 @@ A bed fills the middle of the hall. Before it, six mushrooms stand on numbered d
 
 Press SHOW. A magenta ring moves to the next disc, and magenta rings on the ground mark its copies in the bed, each with a small bead floating high above it. Keep pressing until the plate names the template you were following. There may be many copies, or none in this particular population. The table still gives the absent form a place.
 
-The discs run from 0 to 5: tan cap, red cap, flat brown cap, tall white mushroom, puffball, glowing cap. These are construction recipes rather than six biological species. Within this build, each recipe has become a template. A copy carries its template's details with it:
-
-```gdscript
-		var mushroom = mushroom_types[type_index].duplicate()
-		mushroom.name = "Mushroom_" + str(i)
-```
+The discs run from 0 to 5: tan cap, red cap, flat brown cap, tall white mushroom, puffball, glowing cap. These are construction recipes rather than six biological species. Within this build, each recipe has become a template. A copy carries its template's details with it.
 
 Look at two marked copies again. Their positions, turning and scale can differ. Their material situation can differ too: a cap lit by a neighbour need not look like the same cap in shadow. SHOW names a construction relationship; it cannot make every appearance identical.
 
 Now press SIZE. The bed is rebuilt. Find your pair. Their places and orientations remain, but the extra scaling has gone. They have not all become the same physical size: a tall template remains tall beside a low one. The plate says “scale 1 · template sizes kept.” What did you think the button would remove?
 
-For a scattered mushroom, the scale had been chosen here:
-
-```gdscript
-		var scale_factor = _size(0.7 + _rf() * 0.6)  # 0.7 to 1.3
-		mushroom.scale = Vector3(scale_factor, scale_factor, scale_factor)
-```
-
-And the switch decides what to do with that value:
-
-```gdscript
-func _size(v: float) -> float:
-	return v if size_variation else 1.0
-```
+A scattered mushroom receives an extra scale between 0.7 and 1.3. SIZE decides whether to use it.
 
 The draw still happens when the scale rule is off. Only its use changes. If the program skipped the draw, the following decisions would receive different numbers and our comparison would slip away. Press SIZE again. The earlier scales return.
 
@@ -41,29 +24,13 @@ The seed on the plate makes this return possible under the same recipe. REGROW r
 
 Press KIND until the plate says “scattered.” Count what it calls accepted and rejected. Together they account for eighty candidate positions. The total mushroom count can be larger: two other routines add bodies later. First look at the spaces between the scattered ones. Which gaps seem intentional?
 
-Continue to “rejected.” Grey markers appear at candidate positions that the placement rule refused. They were never mushrooms that died. At each proposed position, a noise field was consulted:
+Continue to “rejected.” Grey markers appear at candidate positions that the placement rule refused. They were never mushrooms that died. At each proposed position, a noise field was consulted.
 
-```gdscript
-		var noise_val = noise.get_noise_2d(pos_x * 2, pos_z * 2)
+The scale at which positions are read in the field helps determine how nearby decisions resemble each other. A threshold then decides which candidates remain. Random Space Geometry will let you compare that relation with independently chosen values.
 
-		# Skip if noise value is too low (creates natural clearings)
-		if noise_val < -0.3:
-			_rejected.append(Vector3(pos_x, get_ground_height(pos_x, pos_z), pos_z))
-			continue
-```
+Even the source calls them “natural clearings.” The marks let us read what that phrase stands for here. A number crossed a threshold. The placement procedure proposes a position, tests it and keeps it only if the field passes the threshold. That is a rejection rule; it does not by itself establish a particular target probability distribution. The beads in the last hall took the other road, a formula that needs no rejection. In Gaussian, a value beyond the display was kept at its boundary. Here an unsuccessful candidate leaves a recorded position and no body.
 
-The 2 in that line, with the field's own frequency of one half, decides how far apart two candidates are in the field's coordinates, and so how wide a clearing can be: about a metre here. In Random Space Geometry, that number is a slider.
-
-Even the source calls them “natural clearings.” The marks let us read what that phrase stands for here. A number crossed a threshold. This is the accept–reject method: propose a position, test it, keep it or throw it away.[^accept-reject] The beads in the last hall took the other road, a formula that needs no rejection. In Gaussian, a value beyond the display was kept at its boundary. Here an unsuccessful candidate leaves a recorded position and no body.
-
-Keep pressing KIND until it says “rings.” Green marks pick out the members added by the circle routine. One circle is requested at this bed's six-metre size. Find it. Usually only an arc fits; imagine the rest continuing beyond the boards. Its members were given equal angular intervals:
-
-```gdscript
-	for i in range(count):
-		var angle = (2.0 * PI / count) * i
-		var pos_x = center_x + cos(angle) * radius
-		var pos_z = center_z + sin(angle) * radius
-```
+Keep pressing KIND until it says “rings.” Green marks pick out the members added by the circle routine. One circle is requested at this bed's six-metre size. Find it. Usually only an arc fits; imagine the rest continuing beyond the boards. Its members were given equal angular intervals.
 
 The radius helps set the requested count. Positions outside the bed are skipped. The plate's bracket counts the members actually placed; it does not show the missing ones. A partial circle can carry the trace of two decisions: draw the ring, then admit only what fits.
 
@@ -73,7 +40,7 @@ Walk round the west and south margins. Three spotted red-capped mushrooms, on ta
 
 <!-- @bubbles_random -->
 
-Near the entrance, off to one side of the glass, a small bubble dish grows another population, with no plate and no seed of its own. Each bubble's place, size and rise are drawn as it appears, about ten a second, and each is gone after four seconds. Nothing there can be grown again.
+Near the entrance, off to one side of the glass, a small bubble dish grows another population, with no plate and no seed of its own. Each bubble's place, size and rise are drawn as it appears, about ten a second, and each is gone after four seconds. This exhibit offers no control for returning to the same bubble population.
 
 <!-- @silhouette_arrivals -->
 
@@ -93,8 +60,8 @@ Keep this trio and press GARMENT. The seeds stay while the sheath gives way to a
 
 <!-- @ -->
 
+On the tutorial table, you keep each body’s record and switch off only its scale. Nothing has asked chance to decide again. One difference has been withheld from view; it remains available to return.
+
 The sampled sizes never grow a seventh template between two others. That would need another rule. Yet these rules could carry other forms, other ranges, other permissions. Which difference would you add first, and what would have to change to let it exist? Carry that question through the cage interlude. Then, in Random Space Geometry, compare values chosen independently with values related across neighbouring positions. The bed has already shown you both: each height of its jagged ground was drawn on its own, and its clearings came from a noise field in which nearby positions receive related values. What changes when difference acquires a neighbourhood?
 
 [^chance-repertoire]: The “Randomness” chapter of *10 PRINT CHR$(205.5+RND(1)); : GOTO 10*, pp. 125–127, discusses chance operations in Cage, Kelly and Morellet: variation takes place within constructed parameters and arrangements. The distinction between sampling a wardrobe and changing its repertoire is this hall’s experiment, rather than a claim that chance abolishes authorship.
-
-[^accept-reject]: The accept–reject method — draw, then test the draw against a rule or a second draw, and keep only what qualifies — is the oldest of the Monte Carlo methods; the dartboard in the gallery ahead carries that name for a reason its chapter gives.

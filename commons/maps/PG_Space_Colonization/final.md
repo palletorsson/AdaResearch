@@ -2,51 +2,31 @@
 
 <!-- @space_colonization_algorithm -->
 
-Three pink points wait above a small root. Two sit apart at the same height; the third is higher, between them. Before pressing anything, follow a line from the root towards each point. Which way would you go if all three asked at once?
+Three pink points wait above a small root. Two sit apart at the same height; the third is higher, between them. Follow a line from the root towards each point. Which way would you go if all three asked at once?
 
-Thin threads run from the root to each point: those are the requests. The short gold stubs at the root are their unit directions, one metre each; the white segment proposes the half-metre step. Press STEP and watch a pale branch take its place. The root has moved nowhere. It has acquired a child, half a metre above it. Neither side point has been reached. Something useful happened between their demands.
+Thin threads show the requests. Gold stubs give each direction the same length; the white segment proposes a step. Let it happen. The root has moved nowhere. It has acquired a child above it. Neither side point has been reached. Something useful happened between their demands.
 
-In the last room, an evaluator compared whole bodies with a target number. Here the target has become a distribution of positions. We call them attraction points. They do not exert a simulated force, and they are not light sensors. They are coordinates that a rule consults while adding segments.
+In the last room, an evaluator compared whole bodies with a target number. Here the target is a distribution of positions. These attraction points exert no simulated force. They are coordinates consulted while adding segments. Their name must not do the explanatory work of the operation.
 
-Start with one request. Subtract the site's position from the point's position. This gives a vector pointing from here to there. We have met that subtraction before. Now normalize it: keep its direction, give it length one. A distant point will not get a longer vote merely because it is farther away.
-
-These are the lines in the running program:
-
-```gdscript
-var direction = (attr_point - closest_node.position).normalized()
-closest_node.growth_direction += direction
-```
-
-The opening root receives three unit directions. The leftward and rightward components cancel; the upward components add. The program normalizes their sum and takes a fixed step:
-
-```gdscript
-var growth_dir = node.growth_direction.normalized()
-var new_position = node.position + growth_dir * segment_length
-```
-
-Here `segment_length` is 0.5. The two side requests are at (-2, 3, 0) and (2, 3, 0); the upper request is at (0, 5, 0), measured from the model's root. The first new position is therefore (0, 0.5, 0). The geometry you predicted is the geometry the code builds. The gold construction now shows a decision for the next generation, not a replay of the previous one.
+A distant request gets no greater weight merely because it is farther away. Each assigned request contributes a unit direction. Here the sideways demands cancel, and the remaining direction is upwards. The next child takes a short step along it. The construction rods then show the next decision, so the drawing is already looking ahead.
 
 ![The root, three pink points, three gold unit directions and the white half-metre step of the opening decision](/book-images/figures/proceduralgeneration/first-step-three-requests.png)
 
-*The opening decision, drawn from the study’s own numbers. Unit directions (−0.55, 0.83), (0.55, 0.83) and (0, 1) sum to (0, 2.66); normalised and scaled by half a metre, the first child sits at (0, 0.5).*
+*The opening decision, drawn from the study's own coordinates. The tutorial follows the two normalizations and the resulting half-metre step.*
 
-Press FIELD once. Eight known points replace the three, and growth starts again. Their arrangement is uneven. Press STEP several times and follow the strand. Some points pull it sideways; others remain behind. You can keep advancing, one generation at a time. A reached point becomes small and dark. It leaves the active calculation but stays visible, so the encounter does not erase every trace of what mattered.
+Change to the uneven field of eight points and follow the strand. A reached point becomes small and dark. It leaves the active calculation but stays visible: the encounter keeps a trace of what mattered.
 
-There is a restriction easy to miss under the name Space Colonization, the tree model of Runions, Lane and Prusinkiewicz, from which this study takes its attraction points and its kill distance.[^runions] Under TIPS, a growing end can produce one successor. That successor replaces it in the eligible set. From this single root, the rule makes a strand. A sufficiently crooked strand may suggest a tree in silhouette, but it has not made a fork.
+Under TIPS, an end can produce one successor, which replaces it among the eligible sites. From this single root it makes a strand. A crooked silhouette may suggest a tree without having made a fork. This is a restriction of our study, not the whole space-colonization model from which it takes attraction points and a kill distance.[^runions]
 
-Press HOLD when you have a specimen worth comparing. It appears on the side plinth at 0.45 times the display scale; its proportions and parent relations are kept. This is a small witness, not evidence that the algorithm shrank its body. Now press POLICY. The same eight points and the same root return at generation zero, with NETWORK on the readout. Press STEP again.
+Keep a specimen, then change the policy to NETWORK. The same field and root return. Watch for an earlier site that produces another child. Each request chooses its nearest eligible site; the requests assigned there combine their directions. Older sites can now answer again. Each eligible site adds at most one child per generation; a fork appears when a site adds another child in a later generation. Changing that permission makes a fork possible.
 
-Watch for a site that has already produced a child and later produces another. The new policy lets earlier sites remain eligible to receive requests. Each active point chooses its nearest eligible site within eight metres. Requests assigned to one site are still summed; each site can add at most one child per generation. A fork becomes possible across generations because an earlier site can act again. Changing who may respond changes what this construction can become.
+The smaller held strand stays beside the growing construction. Compare one fork before their overall outlines. The witness preserves geometry, not a complete simulation ready to resume. NETWORK is also a name with limits: each new node has one parent. The result is still a rooted tree, without loops joining its existing branches.
 
-The held strand remains beside the growing tree. Compare a local fork before comparing their overall outlines. NETWORK is the control's name; this implementation still attaches each new node to one parent. It builds a rooted tree, without joining existing branches into loops. Another topology will require another operation.
+The larger canopy has its own authored arrangement. Sine offsets give that field its unevenness, using a tool we have met before. It is not newly randomized at each step. Calling the result organic does not remove that authorship. More requests do not promise more branches, and some may remain when the program reaches its budget. A computational limit is not a tree's natural maturity.
 
-FIELD once more opens a canopy of 96 fixed points. Its asymmetry is authored through sine offsets, using a tool we already know. It is not fresh randomness at each step. The field helps make the form; calling the result organic does not remove that authorship. A perfectly balanced field can cancel sideways directions and leave a stem. More points alone do not promise more branches.
+Walk around the specimen and onto the rear deck. The museum supports you. The drawn branches do not. A parent relation, a visible connection and a surface that carries a body must each be built; their resemblance cannot supply the missing work.
 
-Some requests may remain when growth stops. RULE names the operations and the budgets: this study permits at most 192 nodes and 60 generations. A limit reached by the computer is not a tree's natural maturity. RESET restores the three-point opening and TIPS, while keeping the held witness. You can return without pretending that nothing has happened.
-
-Walk around the specimen and onto the rear deck by its side ramp. The museum supports your body. The drawn branches do not have collision surfaces. A connected parent record, a visible shape and a place you can inhabit are three relations we must learn to build together.
-
-We have changed eligibility while keeping the points. In Branching Growth, next, we will change what a site listens to: one nearest invitation, rather than the sum of several. Before admiring another tree, find that smaller difference.
+Keep the distinction as you enter Branching Growth. There a site will choose one nearest invitation instead of combining several assigned requests. Before admiring another tree, find that smaller change.
 
 <!-- @ -->
 

@@ -1,5 +1,13 @@
 # Three positions become a face
 
+## Assembly extension — 17 October 2026
+
+The final table supplies twelve thin triangular prisms with 46 cm edges. Their thickness and convex pickup volumes make them manipulable; the mathematical triangle still has no thickness. Grip and turn them in VR. On desktop, right-click carries/releases, Q/E rolls and R/F tilts the held piece in 15-degree steps.
+
+Pieces remain frozen where released. Compare four faces arranged as a tetrahedral pyramid with an open arrangement using the same stock. This is a construction model, not evidence that unsupported faces would remain stable under gravity. No target shape is enforced.
+
+Build one triangular piece from the existing three positions, add a second parallel face 24 mm away, join the edges, then add a convex pickup volume. Duplicate only after one piece can be lifted, rotated and released. The installed example is `commons/artifacts/primitive_encounters/triangle_table.gd`.
+
 ## Learning elements
 
 - Three selected array entries

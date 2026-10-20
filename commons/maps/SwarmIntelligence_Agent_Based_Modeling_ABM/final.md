@@ -1,27 +1,28 @@
-# Change a rule, watch a population
-
-How much of a collective pattern changes when one local rule changes?
+# What returns with the point
 
 <!-- @ant_colony_optimization -->
 
-Watch the colony long enough to recognise a trail. Use RESET and watch the beginning again. The food returns to the same places, with the same qualities; the ants begin with the same headings. Now raise EVAPORATE, reset, and compare. Keep ANTS steady at first. You are changing how quickly the ground forgets, while giving the next colony the same beginning.
+A point reaches food and turns back. Follow it instead of following the whole colony. The same small body is now doing something else. What it carries changes which information matters: the trail that helped it search gives way to the known direction home.
 
-The trail image is a record of deposits that are also disappearing. With faster evaporation, continued traffic matters more to keeping a route visible. A line that looks like a stable piece of the environment is actually being maintained by repeated events.
+The turn does not explain itself. From above, a changed path can look like a decision, an intention, even relief. Here we can inspect the rule that changes the path. A stored condition switches the response. That account is precise enough for this point; calling the point a person would require much more.
 
-A useful comparison separates a trail’s width from its persistence. A busy route can spread across several cells while individual marks still disappear quickly. A narrower route can remain visible between relatively infrequent visits. Try describing both qualities before judging which colony is more organised. The heatmap lets many overlapping events become one visible pattern, so two similar-looking patches need not have been maintained by the same number of agents or the same timing of visits.
+Wait until a route becomes visible. Raise EVAPORATE, use RESET and watch the beginning again. The food returns to the same places and qualities; the ants begin from the same seeded conditions. Keep ANTS steady. This time the ground forgets faster. The route needs repeated visits to remain visible. Its apparent stability is work continuing.
 
-This is an agent-based model: individuals carry state and follow rules, while their interactions produce a population-level picture. Here those rules include movement, sensing, depositing traces and responding to food. The field is shared state. Changing evaporation changes what every agent can encounter without directly changing every agent’s position.
+Now change ANTS. The control replaces the population but leaves its field. New travellers encounter marks made by bodies that are gone. RESET does something larger: the marks disappear too. A fresh population and a fresh world are different beginnings.
 
-Next vary ANTS. The control replaces the population but leaves its field behind. The new ants arrive in a world marked by ants that are no longer there. Watch whether they pick up an old route. Then RESET: this time the marks disappear too. Replacing the travellers and erasing their history are two different acts. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks; similar pictures can have different histories.
+Look at a broad trail and a narrow one. Width and persistence are different qualities. A crowded passage can keep renewing marks that individually last very little time. A quieter passage can retain a few visits for longer. The picture gathers these histories into brightness; it does not tell you which history made it without another comparison.
 
-The MODE control offers three behaviours within this model family. Colony is the foraging you have been watching. Communication lets an ant returning with good food send a ring out from the nest and lead one idle ant to the source in tandem. Multi-Source nudges foragers towards richer food and draws each source’s quality as a ring around it. It does not turn the room into a language for inventing arbitrary agents. A useful comparison still begins by naming exactly which rule or condition has changed.
-
-An agent can be a convenient unit without being an adequate model of a person.[^braitenberg] These agents inherit the same limited sensory world, and the shared grid decides which traces can count. A simulation of people would need an argument for those omissions, not simply a change of labels from ants to citizens.
-
-As a proposed extension, give two groups different sensing capacities while keeping the environment shared. Would a path that looks equally available from above remain equally available from within each agent’s world?
+MODE makes further arrangements available. Communication adds recruitment at the nest and tandem pairs; Multi-Source adds a bias towards richer food. These are specific additions. The word “agent” does not give the model an unlimited account of acting together. Its food, senses and possible responses have been chosen.
 
 <!-- @ -->
 
-The next colony makes one relation particularly clear: information about home and food travels in different channels.
+<!-- @navigator_noise -->
+The obstacle stays still. The two points leave together. One turns before the other. Look at the number beside the turn: the point acts on a distance it has received. From here you can see the obstacle and the reading at once. The moving point is given only one of them.
 
-[^braitenberg]: Valentino Braitenberg built the classic version of this warning in 1984: vehicles with two sensors and two motors, wired straight or crosswise, that any observer describes as fearful, aggressive or loving. He called it synthetic psychology, and noted that it is downhill to invent such a creature and uphill to analyse one; the attribution comes free with the watching. Reynolds's vehicles, and these ants, descend from his.
+Replay the path, then let a reading disappear. The point stops. Choose HOLD and replay the same missing record: now an earlier command continues into a changed situation. The absence has not told it to stop or to continue. We supplied that response. A previous instruction can keep its authority after the conditions that made it useful have gone.
+
+The trace makes these choices remain in the room. A late turn, an early turn and a missed turn leave different lines. Some still reach the same ring. The score asks for an arrival within twenty seconds; it says nothing about whether that was the journey worth making. Even this small claim of success needs a destination, a boundary and someone willing to call time.
+
+<!-- @ -->
+
+In the next hall, the returning point keeps its state. The ground gains a distinction: a trace towards food is no longer the same channel as a trace towards home.

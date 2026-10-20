@@ -1,5 +1,7 @@
 # A three-dimensional Generations study
 
+**8 October update:** the tutorial now prints a complete 7-cubed reconstruction, carrying PointBody as a held STEP control. `room:neighbours` also mounts `state_hand.gd` on the installed work and displays a live central-state/count caption. The far gallery is level; the central opening and both authored works remain. Current evidence: 27 construction checks and 30 native museum checks, including four sampled walking routes. Physical headset and full-volume performance remain open. See [encounter-notes.md](encounter-notes.md).
+
 **25 September encounter update:** `room:neighbours` adds an enlarged reading of 27 existing positions, sharing the original solver and console. Current implementation, native results and limitations are in [encounter-notes.md](encounter-notes.md). The dated implementation record below is retained.
 
 Primary source: `algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd`, with `StructureGrowth.tscn`. This historical map ID does not mean that this room enumerates the 256 elementary binary one-dimensional rules. That elementary mechanism is introduced on CA_Introduction's rule explorer. This specimen extends the comparison to a volume.

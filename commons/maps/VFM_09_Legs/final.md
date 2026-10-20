@@ -54,6 +54,10 @@ The body itself is a mesh whose position is advanced by the patrol code. Its gai
 
 Look along the row. One leg, two, three, four, five, six, eight. These are related constructions with different rigs and stepping rules, not a proof that a count dictates a way of living. The row is now a set of questions we can bring back to the table. Which feet are planted? How broad is a foot? Where is the load? Is the body trying to remain still, or carrying momentum into another step?
 
+Jun Seo Hahm's *Walking Follows Form* gives differently shaped creatures different walks.[^legs-hahm] Watch ours again: which part of this walk depends on the body, and which part has the stepping rule decided? A convincing movement invites us to look closer at its construction.
+
 The gap between a persuasive walk and a supported body is material for another experiment. We could give a creature wider feet, a shifting load, a tail that can touch the ground, or a controller that catches a fall. Each addition would change what bodies this little world can sustain. It would also ask for new code and a new test.
 
 The Arena is ahead. There, a moving body will share space with yours. We carry a more exact question into that encounter: which of its actions come from forces, which from a controller, and which relations to you has the world actually implemented?
+
+[^legs-hahm]: Jun Seo Hahm, [*Walking Follows Form*](https://junseohahm.com/) (screened in 2014). The artist describes the relation between body structure and gait. This is a comparison of movement; it makes no claim about the film's simulation or physical balance.

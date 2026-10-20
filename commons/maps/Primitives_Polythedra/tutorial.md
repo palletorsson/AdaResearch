@@ -1,5 +1,46 @@
 # Four positions enclose a body
 
+## From alignment to a physical body — 17 October 2026
+
+The room now begins with `align_tetrahedron`, followed by `align_wedge`. Release the pink vertex within 12 cm of the ring. A distant release leaves the construction editable; a near release creates the completed rigid body and enables gravity. It can then be picked up and released again. Re-enter the hall for a fresh construction trial.
+
+The tetrahedron already has tetrahedral connectivity before completion. The target restores the particular regular form authored here. For the wedge it restores the triangular prism. Acceptance tests a position, not every possible valid solid.
+
+First reconstruct just the tetrahedron's four positions and faces, as below. Keep that surface separate from the interaction that accepts a target and the physics body created afterwards. The production implementation is `commons/artifacts/primitive_encounters/align_solid.gd`; `geometry.gd` supplies outward normals and matching convex geometry.
+
+The later corner and platform change the scale of the question. First, a central bank of five standing prisms blocks a straight walk. Three clear grid columns on either side let the body go around. Farther ahead, `wp` ramps run forward along both sides and rise onto a broad platform. The sequence is obstruction, detour, support and ascent, then sculpture and a small rearrangeable model. The basin and rock side room follow the descent.
+
+For the central collection, place `prism_block:0:0:2#grain:solid#offset:0.5,0,0.5#plinth:0#pin:1` at (5, 24), (7, 24), (9, 24), (11, 24) and (13, 24). The uniform scale makes each original one-metre prism two metres tall, wide and deep. The half-cell offsets centre each solid over its exact 2 × 2-cell footprint. Together they occupy columns 5–14 and rows 24–25. This leaves three full floor columns on either side: 2–4 and 15–17. The existing static collider scales with the visible geometry.
+
+For the ascent, place `wp:0` at row 29, columns 2–4 and 15–17. All six wedges climb in +Z, along the walk. Each side is three metres wide, with a one-metre rise over a two-metre run. Short inner walls at columns 5 and 14, rows 27–29, hold the two approaches beside the hall's outer walls.
+
+Use structure `2` at columns 2–17 and rows 30–32 for the shared 16 × 3 m platform. Keep `map_info.museum.wall_height: 3`: structure `1` is the normal floor and `2` raises the walking surface one metre. Walls remain explicit `w`. Four `wp:180` units at row 33, columns 8–11, give a centred four-metre-wide descent. The `wedge_palace#layout:map` anchor at (9, 31) preserves the encounter's identity without adding duplicate geometry.
+
+Test a straight approach into the central bank. Then go around its left end and follow the side ramp onto the platform; repeat on the right. Check the low edges and the joins, and continue down to the basin. The signs have no collision. The prisms stop the straight route; the ramps support the ascending route. These checks concern ordinary walking, not an exclusion of jumping, teleporting or flying.
+
+## The wedge becomes sculpture, then a small experiment
+
+`wedge_column` at (6.5, 32) stands on the platform. It instantiates six copies of the existing `prism_block.tscn`, scales each uniformly to 0.65, and turns paired copies by ±90 degrees about Z. Their original bases meet; three pairs form a 1.95 m column. The mesh and collision come from the same scene as the standing blockers. The joints are static. This is a configured sculpture, not a simulated balancing result.
+
+`wedge_mouse_model` at (13, 32) places a 2.8 × 1.0 m plinth on the platform, with a top 0.82 m above it. A 5 × 3 maze lies in front of a plain brown wedge mouse. The cheese is a symmetric triangular prism at the far end. Twenty-three separate wedge walls form its boundary, branches and dead ends. Every wall rests on its broad edge, with its ridge above.
+
+Build a small maze first. Keep a list of cell-to-cell passages. For each edge that is absent from the list, place a solid wedge wall; leave each listed passage empty. The two wall lengths match the rectangular cells, 0.36 × 0.30 m. Walls have a 0.08 m base and a 0.24 m rise. Their colliders use the same six vertices as their visible surfaces.
+
+Place a returning joystick upright behind the waiting mouse. The existing joystick scene points along its local +Z axis, so orient that axis upwards. Map its local +Y to the forward direction along the plinth (+X), and its local +X to the player's right (+Z). Both hand tilting and pointer dragging then use the same spatial directions. Release centres the stick and stops the mouse.
+
+Give the mouse a small capsule collider and use `CharacterBody3D.move_and_slide()` for contact. The brown wedge is its visible body; the capsule is its movement proxy. Steering is the only control. The whole authored route lies on the plinth floor. There is no jump button, reset panel, automatic pathfinding or machine memory of a successful route.
+
+**Experiment loop:**
+
+1. Grip or pointer-drag the standing joystick. Enter the maze and try going directly towards the visible cheese. The first wedge blocks that route.
+2. Try the short branch, reach its dead end, and backtrack. Find a route to the cheese at the far end by steering around the walls.
+3. Move one wall that blocked a passage. Construction pieces stay where released. In VR, grab and turn; on desktop, Q/E roll and R/F tilt while holding one. Steering pauses while a piece is held.
+4. Try the former obstruction again. Does the new opening shorten the route, or does the moved piece create another obstruction? Compare the actual contact before and after the move.
+5. Reconstruct the earlier arrangement by hand. Re-enter the hall for the original layout. A mouse that falls off returns automatically without resetting the walls. There is no layout save to disk.
+6. Rebuild the study from its cell list and wall geometry. Change one connection and predict which physical wall must change before testing it.
+
+The reference is [Shannon's Theseus mouse and maze](https://computerhistory.org/blog/the-remarkable-ivan-sutherland/). Theseus could retain a route; the present study leaves navigation and memory with the player. It tests how movable boundaries change access, rather than implementing Shannon's learning mechanism.
+
 ## Learning elements
 
 - Shared vertices

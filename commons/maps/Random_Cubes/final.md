@@ -1,6 +1,6 @@
 # One throw and many throws
 
-How much can one throw tell you about a die?
+Two diagonal marks filled the previous room. Here six faces wait on a body you can lift. How much can one throw tell you about a die?
 
 <!-- @dice_throw -->
 
@@ -44,12 +44,9 @@ A single die waits beside another column base. Throw it into the felt tray. Its 
 
 This time the first section remains. Another six gives you twelve and another turn. A three after that makes fifteen and closes the chain. The small sculpture beside your tray keeps this example visible: six, six, three. Its label says WORKED EXAMPLE. It is there to show a possibility, not to tell you what you threw.
 
-The first die in this hall made a six into a larger rain of rewards. Here the same face does something else. It keeps an instruction open. Nothing inside the cube knows that six means again:
+The first die in this hall made a six into a larger rain of rewards. Here the same face does something else. It keeps an instruction open. Nothing inside the cube knows that six means again. We add its value to the height, then use that same value to decide whether another throw is allowed.
 
-```gdscript
-total += face
-closed = face != 6
-```
+The tutorial beside this encounter lets us change that permission while keeping a coded stream of outcomes. It cannot replay the movement of your hand.
 
 The number enters twice: once as an amount, once as a condition. From the same six faces, the rule can build a body taller than any single throw. Look at the joins in the column. Its height has a history, and the sections still let you read it.
 

@@ -1,142 +1,140 @@
-# Trans Translation
+# A level body on a sloping journey
 
-**Learning elements — proposed focus**
+## Learning elements
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+- Displacement in a named coordinate frame
+- Vector interpolation between positions
+- A one-way journey that stops at its destination
+- A condition choosing between two route segments
 
-- Waypoint lists
-- Direction and length
-- Guard conditions
-- Route state
+Watch the installed carrier whose route slopes while its top stays level. Translation changes where a body is without making it turn. At the exit, the guided handle's bend and the freer handle's diagonal give the same destination different journeys.
 
-Moving. Displacement. Position as coefficients.
+## Bring the travelling body
 
-Translate a single object.
+Start with a copy of Introduction's completed `lesson.gd` and `box_body.gd`, edition 2026-10-16. Keep `box_body.gd` and the entire `box(size, at)` function unchanged. They already construct and place the visual. Keep the name `travel` for the body we continue.
 
+Carried unchanged from [Introduction](../Trans_Introduction/tutorial.md): `box_body.gd`.
+
+Use the same empty `TransformStudy` host in the prepared museum: floor-level origin, zero rotation and unit scale. The positions below are metres in that host's local frame. This visual study has no rider physics; the museum's installed carriers supply the ride. Work on the copy so your three-way comparison remains available.
+
+## 1. Give it a destination
+
+In `lesson.gd`, keep the `BoxBody` preload, `var travel` and `var elapsed`. Replace the declarations from `var grow` through `var period` with:
+
+<!-- student-edit:route-values -->
 ```gdscript
-func move_to(node: Node3D, target: Vector3) -> void:
-    node.global_position = target
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
 ```
 
-Direct assignment. One frame, the object is there.
+Introduction's `period` described a complete out-and-back cycle. Here `duration` is the time to reach the destination once. Four seconds will take the body from `start` to `finish`; it will then stay there.
 
-Translate smoothly over time.
+Replace `_ready()` with this complete function. Keep `box()` exactly as it is:
 
+<!-- student-edit:one-body -->
 ```gdscript
-func tween_to(node: Node3D, target: Vector3, duration: float) -> void:
-    var tween := create_tween()
-    tween.tween_property(node, "global_position", target, duration)
+func _ready() -> void:
+    assert(duration > 0.0)
+    travel = box(Vector3(1.2, 0.2, 0.8), start)
+    apply_pose(0.0)
 ```
 
-The tween interpolates linearly. Duration in seconds.
+Only the travelling body is constructed now. Its dimensions are unchanged from Introduction. The banks, growing cube and turning plank are no longer created. `_ready()` still creates the visual before asking `apply_pose()` to position it.
 
-Translate along a local axis.
+## 2. Use the clock once
 
+In `_process(delta)`, keep the header and `elapsed += delta`. Replace the remaining lines of that function with:
+
+<!-- student-edit:one-way-clock -->
 ```gdscript
-func move_forward(node: Node3D, distance: float) -> void:
-    var forward: Vector3 = -node.global_transform.basis.z
-    node.global_position += forward * distance
+    apply_pose(elapsed / duration)
 ```
 
-Local translation respects the node's current orientation. Forward is -Z in Godot.
+Dividing elapsed seconds by the journey's duration gives its fraction: after two of four seconds, 0.5. We keep the clamp already inside `apply_pose()`. Once the fraction exceeds one, the pose stays at one instead of returning.
 
-Apply a translation impulse to a rigid body.
+In `apply_pose(value)`, keep the header and `var t := clampf(value, 0.0, 1.0)`. Replace the three transform assignments below it with:
 
+<!-- student-edit:direct-route -->
 ```gdscript
-func nudge(body: RigidBody3D, impulse: Vector3) -> void:
-    body.apply_central_impulse(impulse)
+    travel.position = start.lerp(finish, t)
 ```
 
-Impulse is velocity times mass. Physics integrates the impulse into velocity on the next step.
+Run this direct version. `start.lerp(finish, t)` interpolates the three coordinates together. This extends the single-number interpolation in Introduction to a `Vector3`. At `t = 0.5`, the body is at `(0, 2, 0)`, halfway along the diagonal. At four seconds it reaches `(2, 3, 0)` and stops.
 
-Translate relative to another node.
+`finish - start` is the displacement `(4, 2, 0)`: four metres along X and two upward. Its components describe a combined change, not an instruction to finish X before beginning Y. Neither rotation nor scale changes during the journey, so the sloping route leaves the surface level.
 
+## 3. Give the same displacement another route
+
+In `apply_pose(value)`, replace only `travel.position = start.lerp(finish, t)` with this conditional. Keep the clamp above it:
+
+<!-- student-edit:corner-route -->
 ```gdscript
-func move_relative_to(node: Node3D, reference: Node3D, offset_local: Vector3) -> void:
-    var offset_world: Vector3 = reference.global_transform.basis * offset_local
-    node.global_position = reference.global_position + offset_world
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t < 0.5:
+            travel.position = start.lerp(corner, t * 2.0)
+        else:
+            travel.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        travel.position = start.lerp(finish, t)
 ```
 
-Local offset is transformed through the reference's basis. The result is a world-space position.
+Set `via_corner` to `true`. The corner is directly above the start, at the destination's height. The first half of the time takes the body upward; the second takes it across. The condition chooses a segment. Each segment needs its own zero-to-one fraction: `t * 2.0` gives it to the first half, and `(t - 0.5) * 2.0` gives it to the second.
 
-Chain multiple translations.
+At two seconds, the direct version reaches `(0, 2, 0)`; the corner version reaches `(-2, 3, 0)`. At four seconds they meet at the same destination. Each leg gets two seconds, but their lengths differ: two metres up, four across. The second leg therefore moves twice as fast. A constant-speed route would require another timing rule.
 
+## Predict another journey
+
+Keep `via_corner = true` and change `finish` to `Vector3(2, 3, 2)`. Predict the halfway and final positions before running. The corner stays above the start; the second leg now changes X and Z together. Explain why the body still does not turn to face its travel.
+
+Then change `duration` to `8.0`. Both legs should take twice as long, with the same endpoints. The unchanged `BoxBody` creates the shape; the route and time now determine where it goes.
+
+Trace kept positions after a movement. Here positions prescribe a movement. A longer route could store them in an array; these two branches are enough to understand the choice first. Carry the body, placement function, clock and separate pose function onward. Rotation next gives turning its own axis and centre.
+
+[Complete files, edition 2026-10-16](../../../doc/book/iterations/2026-10-16-translation-carried-body/files.html#complete) · [lesson.gd](../../../doc/book/iterations/2026-10-16-translation-carried-body/complete/lesson.gd) · [unchanged box_body.gd](../../../doc/book/iterations/2026-10-16-translation-carried-body/complete/box_body.gd) · [Download files and variants](../../../doc/book/iterations/2026-10-16-translation-carried-body/translation-studies.zip)
+
+<details class="full-program">
+<summary>Complete lesson.gd — online reference</summary>
+
+<!-- student-code:lesson.gd -->
 ```gdscript
-func move_sequence(node: Node3D, steps: Array, duration_per_step: float) -> void:
-    var tween := create_tween().set_parallel(false)
-    for target in steps:
-        tween.tween_property(node, "global_position", target, duration_per_step)
+extends Node3D
+const BoxBody = preload("box_body.gd")
+
+var travel: MeshInstance3D
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
+var elapsed := 0.0
+
+func _ready() -> void:
+    assert(duration > 0.0)
+    travel = box(Vector3(1.2, 0.2, 0.8), start)
+    apply_pose(0.0)
+
+func box(size: Vector3, at: Vector3) -> MeshInstance3D:
+    var body := BoxBody.new(size)
+    body.position = at
+    add_child(body)
+    return body
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    apply_pose(elapsed / duration)
+
+func apply_pose(value: float) -> void:
+    var t := clampf(value, 0.0, 1.0)
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t < 0.5:
+            travel.position = start.lerp(corner, t * 2.0)
+        else:
+            travel.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        travel.position = start.lerp(finish, t)
 ```
 
-Sequential tweens move the node through a sequence of positions. Useful for scripted paths.
-
-Interpolate along a curved path.
-
-```gdscript
-func move_along_bezier(node: Node3D, curve: Curve3D, duration: float) -> void:
-    var tween := create_tween()
-    tween.tween_method(
-        func(t): node.global_position = curve.sample_baked(t * curve.get_baked_length()),
-        0.0, 1.0, duration
-    )
-```
-
-Sample the Bezier curve at interpolated positions. The node follows the curve's shape over the duration.
-
-You can now translate a node instantly or over time, locally or relative to another node, along straight lines or curves. The seven rides in this hall already separate and combine those components. Trans_Rotation follows in the active sequence.
-
-Check identity.
-
-```gdscript
-func is_identity(t: Transform3D) -> bool:
-    return t.is_equal_approx(Transform3D.IDENTITY)
-```
-
-Identity preserves the input. Useful as a test for whether a chain of transforms cancels out.
-
-Invert a transform.
-
-```gdscript
-func invert(t: Transform3D) -> Transform3D:
-    return t.affine_inverse()
-```
-
-Undo the transform. Composing t with t.affine_inverse() produces identity.
-
-Compose with multiplication.
-
-```gdscript
-func combine(a: Transform3D, b: Transform3D) -> Transform3D:
-    return a * b
-```
-
-Right-to-left application order. a * b applies b first, then a.
-
-Extract the origin.
-
-```gdscript
-func get_origin(t: Transform3D) -> Vector3:
-    return t.origin
-```
-
-The origin is the translation part of the transform. Ignore the basis to get just the position.
-
-
-## Same destination, different permission
-
-On the final terrace, `translation_cube_demo` is instantiated twice: `course:lift_lateral` with a rail guide, and `course:free` with ghost endpoints. Their knobs begin 0.5 m above each artifact root; the 0.8 m plinth brings that to 1.3 m above the deck.
-
-The guided mechanism projects hand displacement onto a permitted axis, clamps the distance and admits the next axis only after the lift threshold. The free mechanism admits both components at once within the same bounds. In `constrained_door.gd`:
-
-```gdscript
-var t = _clamp_run((knob_pos - start).dot(phase1_dir), target_y, 0.0, 0.05)
-knob_pos = start + phase1_dir * t
-```
-
-Pure translations commute: adding the same two displacement vectors in reverse order gives the same endpoint. This puzzle imposes an order through its constraints; that is a property of the mechanism, not a limitation of vector addition.
-
-## Watch the accepted movement
-
-The exit mechanisms now leave a pale trace when a handle is held. Try the same small upward-and-outward gesture on each. The guided door records the lift after discarding the sideways component; the free door keeps both components within its bounds. Then follow the rail to its corner and outwards. Compare that bend with a direct diagonal in the other mechanism.
-
-The free handle can be brought back towards its starting corner to try a curved route. The short recent history remains visible, with older samples eventually rolling off. This returns to Point_Trace with a changed receiver: the record belongs to the constrained knob, not to the whole hand gesture. Release does not reset the mechanism or erase its trail; the artifact’s existing reset method clears it when called, and reloading the hall starts a fresh record.
+</details>

@@ -26,7 +26,7 @@ rooms.append(pos)
 
 `commons/artifacts/architecture_lesson/architecture_lesson.gd` maps a raw point to `(p.z,-p.x)*4` in its local horizontal plane. All four segments are four metres long. There is no display fitting in this study.
 
-Each segment receives an axis-aligned rectangle with square end caps. Clear widths are 0.4, 1.4 and 2.2 m. Optional rooms receive a 2.8 m square at each unique room address. On a fixed 0.2 m construction grid, footprints become occupied cells; dictionary union keeps shared cells once. The room is exactly 14×14 cells. Greedy rectangles merge floor cells to reduce geometry/collider count. This discretization is another policy, not a property of L-systems.
+Each segment receives an axis-aligned rectangle with square end caps. Clear widths are 0.4, 1.4 and 2.2 m. Optional rooms receive a 2.8 m square at each unique room address. On a fixed 0.1 m construction grid, footprints become occupied cells; dictionary union keeps shared cells once. The room is exactly 28×28 cells. Greedy rectangles merge floor cells to reduce geometry/collider count. This discretization is another policy, not a property of L-systems.
 
 For every occupied cell, inspect its four adjacent cells:
 
@@ -47,3 +47,20 @@ The original miniature remains on a rear plinth. It independently fits its recor
 CityGenerator uses `X → F[+X]F[-X][^X][&X]` and `F → FF`, with 90-degree turns and pitch/yaw through Turtle3D. It creates a rotating 3D branch structure; the source does not extract city blocks or zone building plots. Dragon Room retains its fitted finite folded floor curve. The remaining seed, mesh grammar and catalyst works retain their original algorithms.
 
 All nine artifact tokens remain. The original 13×12 structure is embedded at (3,23) in a 19×39 hall; raised cells and the other placements retain their relative arrangement, and the obsolete teleporter hole is filled. All roles and sequence order remain. More elaborate grammars, arbitrary corridor angles, moving walls with consent and deeper secondary encounters remain for a later pass. Headset reach, comfort and Quest timing remain pending.
+
+
+## Tested reconstruction — 9 October 2026
+
+Canonical tutorial.md prints grammar.gd, footprint.gd, architecture.gd and the unchanged carried point_body.gd. The replacement function is byte-unchanged from Grammars and Curves. The reader retains copied state/last-in-first-out return, now storing local X/Z in Vector2, stepping four metres and recording R positions without movement. Its mapped records agree with the existing dungeon. The full footprint, rectangle grouping, boundary runs, meshes, colliders, controls and occupancy refusal are printed. The learner does not need named scene children or hidden mesh references.
+
+The baseline native measurement found that a 0.2 m grid rounded the 1.4m and 2.2 m labels to 1.6 m and 2.4 m. Production PITCH is now 0.1 m; all three widths measure correctly. The room square is 28×28 cells. Six combinations of width and room option match the printed builder’s occupied cells, room cells and wall count. Rectangle coverage is tested for omissions and overlaps. A deliberately coarse grid and a builder that walls internal edges are detected as faults.
+
+The actual student-edited program moves R after each branch’s F. Four segments are unchanged; two addresses at (4,-4) and (-4,-4) produce two separate room squares. A 0.6 m CharacterBody capsule crosses the 1.4m main stem and its junction, stops at a closed side end, and cannot enter the 0.4m version. PLAN removes these construction colliders. These tests prescribe horizontal movement and body dimensions; they do not establish headset comfort, stair stepping or universal accessibility.
+
+ArchitectureHand places the existing PointBody class on a front rail. Local X selects width; held trigger requests BUILD/PLAN through the existing action. The fixed-frame occupation guard also covers hand changes. A refused slot is remembered, so leaving does not silently apply it. A new slot change or trigger is required. Existing six buttons remain. The core lsystem_dungeon.gd is byte-unchanged.
+
+The baseline exit record was empty. Restored the missing onward utility t at source cell (9,37), inside the existing rear opening. All structure, authored placements and sequence order are unchanged. Nine authored works remain, including the original miniature. 387 floor/capsule samples certify the tested outer routes; they do not certify every path through the raised rear collection. The overhead views show that older tall geometry and museum fixtures still overlap some sightlines. No general spatial cleanup is claimed.
+
+27 printed-program checks and 32 actual-museum checks pass, including real pointer controls, XRTools with supplied poses, refusal/no-queue behavior, width measurement, actual capsule collisions and eight native capture-camera checks. Five baseline captures are retained. No SCRIPT ERROR/Parse Error in final logs; existing UID diagnostic remains. The printed study is photographed temporarily at the same host after placing the original in PLAN and hiding it, then removed; it is not installed as a duplicate.
+
+Tests are author-led, not an independent ghost student, physical headset or full portal journey. Report and paired texts: doc/book/iterations/2026-10-09-architecture-a-place-to-pass/index.html. Competition remains next; four of eight L-systems halls have received this reconstruction pass.

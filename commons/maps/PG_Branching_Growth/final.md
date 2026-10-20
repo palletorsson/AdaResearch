@@ -6,11 +6,7 @@ Eight points wait. You have met their arrangement in Space Colonization. There, 
 
 The first segment leans left. In local coordinates the nearest target is (-2, 1.5, 0), two and a half metres away. Normalizing its direction and taking a half-metre step gives (-0.4, 0.3, 0). We can predict this small displacement before we have a tree to admire.
 
-The running program searches unreached attractors inside `attraction_distance`. Each active branch site chooses the nearest one. Its construction begins with:
-
-```gdscript
-var direction = (attractor.position - branch.position).normalized()
-```
+Each active site answers one nearest unreached point. Other invitations remain in view without entering this particular direction. In the previous room, requests met in a sum. Here selection lets one of them lead.
 
 That direction receives optional jitter. A pulsing multiplier can change the segment length. The opening suppresses both so that we can distinguish the choice of target from these additional variations. Press TEN STEPS. It performs ten calls to the same growth operation, without making you hold a button for every generation.
 

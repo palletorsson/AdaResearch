@@ -2,41 +2,32 @@
 
 When does repetition become an environment rather than a picture?
 
-The red bend returns, with its blue corner and ochre interruption. It is the same starting arrangement you met in Tutorial_Pattern, entered here as a fixed source. Your edits from the previous room have not secretly travelled with you. This time the question is what gives the mark a place to appear.
+The red bend returns, with its blue corner and ochre interruption. It is the familiar starting arrangement, supplied again here. Your edits from the previous room have not travelled automatically. This time the question is what gives the mark a place to appear.
 
 <!-- @pattern_tunnel_machine -->
 
-Take the opening into the side bay. A six-metre passage stands on a raised platform; its console is beside the ramp on the lower floor. Three wedges make a broad ascent. Side walls close the routes around the tunnel, so crossing this bay takes you through it and down the ramp at the far end. The source has sixteen cells. There are considerably more squares inside the tunnel. Find the pale yellow indicator on the floor and compare its position with the console's two addresses.
+Take the ramp into the patterned passage. Find the pale indicator on the floor. At the console, move it along a row and watch the two addresses: its position on the surface keeps advancing while its position in the small source returns to the beginning. Another place can consult the same memory.
 
-Press COL +. The surface address advances. Press it again, watching the smaller source address. After four steps, one number has returned while the other has moved on.
+Move the indicator onto the right wall. Rows and columns now occupy another plane. On the floor, one direction crosses the passage and the other follows it. On the wall, one runs along the passage and the other descends from the ceiling. An address needs a surface to acquire a direction in the room.
 
-```gdscript
-column % 4
-row % 4
-```
+Walk inside. Follow a line to the corner. Each face begins its own grid; a shared motif does not guarantee a join. Where should counting begin, and which way should it proceed?
 
-These are the wrapping expressions used by the inspector. It displays addresses as `[row, column]`, then the palette index stored there. Surface `[10,1]` returns to source `[2,1]`. Another place can consult the same memory.
+Enlarge the cells. The passage stays the same size, so fewer copies fit. Some divisions meet an edge exactly; others are cut short. The room does not owe the pattern an integer number of repeats.
 
-The tunnel's renderer first computes a small swatch from the source and its translation rule. The shader samples that swatch across each face. The inspector follows the same cell coordinates back to the four-by-four source. You can move the indicator without changing a single stored colour.
+In *Mamma Mönster*, enlarging a textile pattern for a tennis court required trials with paper and wood stencils, paint and tools suited to the harder surface. Mimmi Torsson made drawings; a local firm made metal templates. Even the proposed windbreak changed material because of its weight. Keeping a recognisable pattern required changes to the way it was made.
 
-Now press FACE. The indicator moves to the right wall. The panel still speaks in rows and columns, but those directions occupy another plane. On the floor, one direction runs across the passage and the other along it. On the right wall, columns run along the passage and rows descend from the ceiling. The address needs a surface to acquire a direction in the room.
+Here a number can enlarge the image immediately. Those other negotiations have not been reproduced by the control. Keep them in mind when the result appears effortless.
 
-Walk inside. Follow a line to the corner between floor and wall. Each face begins its own grid. A shared motif does not promise that its edges will join there. The corner exposes a decision that was harder to notice on a single flat panel: where should counting begin, and which way should it proceed?
-
-Return to CELL SIZE. A cell now occupies sixty centimetres instead of forty. The source still has four cells across. Its whole motif therefore spans 2.4 metres instead of 1.6. In the previous room, forty centimetres described an entire motif; here the mark has been enlarged so you can inspect its individual addresses. The same number needs its unit and its referent.
-
-The passage has not grown. Its width remains 3.6 metres and its height 3.2. Some divisions fit exactly; others leave a cut cell at an edge. A room does not owe the pattern an integer number of repeats. The inspector selects complete cells; the remaining strip is still there to look at.
-
-Press GRID. The dark joints disappear. Keep walking. No wall has opened and no floor tile has fallen away. Those divisions were drawn in a shader on four large surfaces. The supports that stop your body are separate. UNDO restores the last inspector setting, including cell size and grid visibility.
+Turn off the drawn grid and keep walking. No wall opens; no floor tile falls away. The visible divisions and the structures supporting your body have different jobs. A surface can look newly continuous while its construction stays as it was.
 
 <!-- @pattern_tile_brick -->
 
-Back among the earlier stations, look at the brick preview. Follow a seam through two neighbouring rows. The boundary steps sideways. Compare that stagger with the tunnel's straight cell divisions and the corner where two faces restart their counting.
-
-A stagger changes how rows relate within a field. A corner changes how a field is carried into space. They can resemble one another as disruptions, but they ask for different changes to the implementation. Keep the motif, the lookup and the carrier available as separate things to question.
+Back among the earlier stations, follow a seam through the brick preview. It steps sideways between rows. Compare that stagger with the corridor's corner. One changes how rows meet within a field; the other changes how the field enters space. Similar-looking interruptions can have different causes.
 
 <!-- @ -->
 
-An orderly image can conceal a complicated support. A conspicuous seam can reveal the rule more clearly than a perfect join. Neither smoothness nor interruption is automatically the more interesting result. What becomes available to a body that can read the difference?
+A conspicuous seam may reveal more than a perfect join. Neither is automatically the more interesting result. What becomes available when you can locate where the difference enters?
 
-This passage holds its pattern fully visible. The earlier automatic reveal remains another performance to revisit when we study change over time. Here there is time to compare addresses, then move on. Symmetry_Seventeen will ask what can be classified about an ideal repeating field. Bring the finite edge of this room with you.
+Symmetry Seventeen will ask what can be classified about an ideal repeating field. Bring the finite edge of this room with you.
+
+[The textile account behind the tennis-court comparison](../Symmetry_Seventeen/textile-note.md).

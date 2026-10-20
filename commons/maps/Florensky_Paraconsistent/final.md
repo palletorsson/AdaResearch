@@ -18,18 +18,13 @@ These are reports about the same door at the same moment. This little study allo
 
 Look at the last line of the display: **Q: alarm triggered = NO SUPPORT**. Add a report, remove it, hold both. Their disagreement supplies no evidence about an alarm. “No support” does not mean the alarm has been proved silent. We have simply learned nothing about it from these buttons.
 
-The small piece of code that keeps the reports is almost disappointingly hospitable:
-
-```gdscript
-var report_open: bool = true
-var report_closed: bool = true
-```
-
-Two places in memory. Neither overwrites the other. The apparatus stores conflicting information; it does not decide which report is true or implement a whole logic. But it lets us hold a problem still long enough to ask what a logic would permit us to conclude.
+The small record that keeps the reports is almost disappointingly hospitable: two places in memory. Neither overwrites the other. The apparatus stores conflicting information; it does not decide which report is true or implement a whole logic. But it lets us hold a problem still long enough to ask what a logic would permit us to conclude.
 
 In classical logic, if both P and not-P are available as premises, any proposition Q follows. This is called *explosion*: the premises cease to constrain the conclusion. Paraconsistent logics prevent that general consequence. They are a family of approaches, with different rules and commitments, rather than one small patch that leaves everything else untouched.[^1]
 
 The room continues to stand. That is the image. The limited fact store on the console is the working model. Neither makes a proof out of a door.
+
+Your working copy goes one step further than the installed gate. It states how two independent supports combine under negation, conjunction and disjunction, using a fragment of Dunn–Belnap four-valued semantics. Now the claim about consequence can be tested: P has both supports, while Q has neither. The opposed premises are designated under these tables; Q is not. We have a countermodel to explosion for the defined rules, rather than just a door that continues to stand. This is one chosen semantics, not a general verdict on every paraconsistent logic.[^tables]
 
 And your passage? The engine gives collision to the frame, but not to the ghost leaves. The visible assertion “closed” has no authority to stop you. Someone had to make that decision. A system can preserve conflicting descriptions and still have to decide who gets through.
 
@@ -72,6 +67,8 @@ Brouwer's hall asked what you could construct and what counted as a witness. Thi
 At the exit, the reports may still disagree. Your movement has not resolved them. It has exposed another rule: the decision that lets you pass while the disagreement remains.
 
 The next room brings these different responses together. We will need their differences. A foundation that cannot answer every question is not permission to say anything whatsoever.
+
+[^tables]: Geoff Sutcliffe, Francis Jeffry Pelletier and Allen P. Hazen, [“Making Belnap’s Useful Four-Valued Logic Useful”](https://cdn.aaai.org/ocs/17599/17599-77711-1-PB.pdf) (2018), Table 1. The student study uses the basic negation, conjunction and disjunction tables, without the paper’s additional conditional connectives.
 
 [^1]: See the [Stanford Encyclopedia of Philosophy, “Paraconsistent Logic”](https://plato.stanford.edu/entries/logic-paraconsistent/), especially its distinctions between non-explosion, inconsistency and dialetheism.
 

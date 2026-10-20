@@ -2,6 +2,8 @@
 
 <!-- @rd_artifact -->
 
+The Shader wall has a relative here. Its colours also came from a field with a past. These tables offer a different comparison: let one field receive from its neighbours while withholding that relation from the other.
+
 Two small squares wait on the tables. Behind them, the same squares wait on curved walls. The room has already enlarged their answer, although neither field has taken a step.
 
 Find the small gold frame on either table, just outside the seeded square. This is W; the side desk reads its values. V is zero there in both fields. Press STEP once. On the left, a little arrives. On the right, nothing. Look back at the pictures: can you find that difference without the numbers?

@@ -1,1 +1,1 @@
-Three faces meet and leave an opening. A fourth can enclose a region, but the body may already meet a boundary the eye cannot see. Follow a prism into a slope, concrete into a detour, and a triangle into an arrow asking you to move.
+One displaced vertex waits to be aligned. Complete the tetrahedron, then the wedge; each becomes a body that falls and can be held. Follow these solids into the room: a tetrahedron fills a corner, equal wedges carry us onto a platform, and striped profiles enclose a basin with a floor. The geometry changes what another body can do.

@@ -1,27 +1,13 @@
-# Same fall, another encounter — implementation
+# Contact — source and learner implementation
 
-Primary source scenes:
+The placed `algorithms/softbodies/softbody_gallery_part2.tscn` runs `softbody_test_gallery.gd` with gallery_part=2, selecting cases 13–24 of the shared list. `#lesson:true` selects 3 columns at 4 m spacing, seed1337, no respawn and no coefficient jitter. The contact desk disables the root frame callback, so ongoing deflation and label following are also disabled. Physics continues.
 
-- `res://algorithms/softbodies/softbody_gallery_part2.tscn`
+Current defaults are mass1, stiffness.5, damping.01, precision7, pressure0. Named cell overrides follow; optional lesson_variation adds seeded stiffness/pressure jitter, then a random hue. High Drag overrides damping to.8. Vacuum's pressure0 repeats the default. Caving Sphere requests stiffness.2 and pressure−.5, but the native engine reports pressure0. Its precision7 is the same as the default. The old final.md claim that only that cell used seven passes was stale. No calibrated fluid or material behaviour follows from these names alone.
 
-The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers REPLAY, VARIATION, GROUP, HOLD, RELEASE, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+The shared desk supplies REPLAY, VARIATION, GROUP, HOLD, RELEASE and RULE. HOLD now pins only triangle-referenced entries to a fixed spatial attachment; RELEASE restores original pin indices, attachment paths and offsets. Rebuild controls clear the held state first. The earlier blanket pin loop caused invalid-index errors and retained movement in native Jolt. The corrected control is checked against measured vertex motion and original-attachment restoration. These gallery controls are separate from the learner replay mechanism.
 
-The array contains several kinds of encounter. Start with the names: a slippery collider, a corner strike, high drag, a torus. They do not vary just one property. Choose one cell and compare it with a cell whose difference you can describe.
+Learner files: `doc/book/studies/soft-bodies-through-the-hands/SoftBodies_Obsticals_Part2/`. pressure_panel.gd and point_body.gd are unchanged from the pressure lesson. The new host releases every panel pin before entering the tree, rotates each panel90deg aboutZ and drops both fromy2.1 onto matching PointBody spheres aty1.1. Sphere offsetsx=.6/7,z=.1 align with the inherited grid. Cases differ only in damping .1/.6. A timed sample keeps local vertical extent, using all world vertex positions transformed into host coordinates. This is an axis-aligned extent, not volume. Body samples continue simulating after measurement.
 
-REPLAY restarts the group from its declared seed. The opening study removes the gallery's additional random changes to stiffness and pressure. VARIATION restores those changes. A fixed seed repeats a recipe for initial conditions; it does not promise bit-for-bit identical physics on every computer.
+Key1 or grip/trigger/release queues replay. Held points interrupt and clear the comparison; replay waits for both hands to release. Rebuild detaches old panels before adding new ones, retaining point instances and restarting time. Independent edit sets B damping to.1. Complete code is printed in tutorial.md; no hidden scene mesh references. The learner study is temporarily mounted for review, not registered as an extra museum artifact.
 
-```gdscript
-sb.linear_stiffness = 0.5
-sb.damping_coefficient = 0.01
-sb.pressure_coefficient = 0.0
-```
-
-The gallery applies each named cell's settings on top of these defaults. Optional variation then adds another layer. The final coefficients, the starting mesh and the obstruction all matter. A name like “Jelly” cannot substitute for that construction.
-
-HOLD pins the current vertices. RELEASE restores the pins recorded before that hold. Neither action retrieves an untouched original body. GROUP opens another set of encounters; the study disables automatic respawning and ongoing deflation so that bodies do not multiply while you are trying to inspect one.
-
-The most interesting result may be an awkward fold that a smooth rendering would conceal. Hold it and move around it. Ask which part is an effect of contact, which part comes from the triangulation, and which part depends on the solver's finite effort. Those are invitations to further experiments, not conclusions available from a single silhouette.
-
-The array is useful because it holds differences near each other. It becomes misleading if proximity is mistaken for a controlled comparison. The next hall turns that problem toward time: when we keep a shape, what have we selected from the event?
-
-Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+Use unit-scale upright hosts and keep other bodies clear during comparison. A declared setup is reproducible; cross-machine bitwise solver replay and physical headset/Quest performance are not claimed.

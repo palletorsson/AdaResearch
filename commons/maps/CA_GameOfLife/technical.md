@@ -29,7 +29,7 @@ Current native results and limitations: [encounter-notes.md](encounter-notes.md)
 
 ## State and controls
 
-The specimen arrives held with generations 0–11. REPLAY resets to generation 0. STEP appends one generation and holds; RUN appends at most one row per 0.5-second timer interval, stopping at generation 23. ROW selects an earlier recorded row without changing history. SEED cycles SINGLE, PAIR and a local RNG seeded with 23090 at density 0.45. FLIP X9 toggles only site nine of that beginning; both seed controls replay. The museum clock is unaffected.
+The specimen arrives held with generations 0–11. REPLAY resets to generation 0. STEP appends one generation and holds; RUN appends at most one row per 0.5-second timer interval, stopping at generation 23. ROW pauses RUN and selects an earlier recorded row without changing history. SEED cycles SINGLE, PAIR and a local RNG seeded with 23090 at density 0.45. FLIP X9 toggles only site nine of that beginning; both seed controls replay. The museum clock is unaffected.
 
 The current model does not accept a continuous stream of visitor proximity or object contact. Its input is the initial row selected at the desk. A contact-driven extension would be a new intervention rule and must declare when it writes state.
 
@@ -44,3 +44,16 @@ Three MultiMeshes and 360 pooled support shapes bound the study's work. Reset do
 ## Verification scope
 
 See `doc/space/ca-history-review-2026-09-13` for exact runtime receipts, source hashes and screenshots. Tests exercise the inherited rule, wrap, replay, one-bit intervention, history limit, all three mappings, collision rays and six controls through the project's real desktop pointer. The pointer rig is placed in the actual museum; it is distinct from the museum's ordinary desktop walker. A walked stretch of margin is not a headset traversal acceptance or proof of a continuous route over generated cells. Retained secondary artifacts need further individual review.
+
+
+## Complete learner reconstruction — 8 October 2026
+
+`tutorial.md` now prints the entire `history.gd` and unchanged `point_body.gd`, maintained under `doc/book/studies/cellular-automata-through-the-hands/CA_GameOfLife`. The smaller study reserves 360 slots in each of two views, copies Boolean rows, uses a held point's local Z to read history and its action to append. Its 24-row limit includes the seed. It does not reproduce the basin, desk controls or RUN timer. The installed Rule30 solver and history study are unchanged.
+
+Native test tools: `tools/test_ca_history_lesson.py`, `tools/probes/ca_history_lesson.gd`. The exact printed files pass 30 checks, including eight deterministic seeds through all 24 rows versus the installed solver, rejected aliasing mutation, independent seed/mapping exercises, renderer/collision agreement and actual XRTools with supplied poses.
+
+The rear gallery is levelled; the east passage opens around the lab. The orb moves to source cell (4,28), columns to (8,28). All six authored works remain. Incidental generated sculptures are reserved out of this narrow circulation. Entry (6,0) and exit (6,36) use the thresholds; no extra gate. Only this generated museum plan row is rederived. The front basin and its ramps stay intact.
+
+35 native museum checks include cameras, walking selection, preserved state/support, replay/seed/capacity, surface and lower-floor rays, portal approaches and five routes with 451 samples. The capsule is 0.56 m wide and 1.7 m tall, tested on layer 1; this is not dynamic all-layer walking, a portal transfer, physical headset or Quest acceptance. The rear lab apparatus remains a secondary encounter rather than a tested lesson.
+
+Current report, before/after native views and receipts: `doc/book/iterations/2026-10-08-ca-history-three-bodies/index.html`.

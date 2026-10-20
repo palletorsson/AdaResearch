@@ -1,67 +1,19 @@
-# GT Layout — Technical
+# Layout — implementation and verification
 
-The map lays out a graph by running a force-directed simulation. Every vertex repels every other vertex according to an inverse-square Coulomb-like force; every edge pulls its two endpoints together with a Hookean spring force. The graph settles when the two contributions balance.
+The permanent exhibit remains algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd and its existing scene, byte-for-byte unchanged. It uses eight vertices, twelve cube edges, pair repulsion, rest-length springs, velocity damping and bounds. Native checks confirm all degrees are three. Its source comments suggesting a uniquely best or natural arrangement are not adopted by either text.
 
-```gdscript
-# Simplified force step from GraphLayoutRig.gd
-func _physics_process(dt: float) -> void:
-    # Repulsion: O(V^2)
-    for u in vertices:
-        for v in vertices:
-            if u == v: continue
-            var d := v.position - u.position
-            var r := d.length() + 0.01  # avoid divide-by-zero
-            var f := repulsion_k / (r * r)
-            u.velocity -= d.normalized() * f * dt
+The learner carries traversal.gd and point_body.gd byte-for-byte from GT_Foundations. Its seven IDs, six reciprocal undirected edges and initial coordinates are unchanged. New layout.gd keeps positions and velocities separate from adjacency, accumulates pair forces before advancing any vertex, and uses fixed physics callbacks with exponential damping. Near-contact repulsion is limited, speed is capped at two local units per second, and an exact coincident pair has no chosen separation direction. These safeguards do not prove convergence. It uses unit mass and is a diagram layout rather than a rigid-body simulation. The learner's exponential damping and parameters are intentionally simpler and more explicit than the installed exhibit's per-frame factor. They do not claim numerical equivalence.
 
-    # Attraction: O(E)
-    for e in edges:
-        var d := e.b.position - e.a.position
-        var f := spring_k * (d.length() - e.rest_length)
-        e.a.velocity += d.normalized() * f * dt
-        e.b.velocity -= d.normalized() * f * dt
+The carried point now controls vertex0. Held world position is converted to local coordinates and projected onto XY; the blue marker displays that projection. On release the black point returns to the plane and moves with the layout. The host redraws cylinder lengths, midpoints and orientations. Trigger/1 pauses or resumes; R resets the drawing. Reset during holding is immediately superseded by the hand position on the next physics callback. Traversal readouts invoke the unchanged traversal and remain independent from geometry. No hidden scene reference, camera, lighting or replacement player is introduced.
 
-    # Integrate and dampen
-    for v in vertices:
-        v.position += v.velocity * dt
-        v.velocity *= damping
-```
+The exact printed four-file source is extracted afresh by tools/test_graph_layout.py and run in Godot4.6. 28 checks pass: independent two-body force arithmetic, pair balance, read-before-write, repulsion without edges, compression, finite overlap, pin/release, ten seconds of default integration, unchanged adjacency and visit orders, cylinder endpoint geometry, keyboard dispatch and synthetic XRTools in a rotated host. The independent rest-length edit changes 0.65 to0.9; at600 steps of1/60s mean edge length changes from 0.707571 to 0.932757. Executed faults are caught for adjacency mutation, fixed-length rods and per-vertex force recalculation after earlier movement.
 
-The repulsion pass is O(V²) and dominates the cost. For graphs with more than a few hundred vertices, a Barnes-Hut approximation reduces this to O(V log V) by clustering distant repulsion contributions. The map's graphs are small enough that the naive O(V²) path is adequate, and the naive path is what the code above shows.
+The native baseline rendered an irregular wall-filled interior and a full-scale graph cutting through it, although its map token requested scale0.6. This hall now declares artifact_placement=map and bypasses its old hand stamp without deleting the stamp. The15x13 footprint and entrance/exit columns remain. Tall interior cells become a continuous floor. The graph is at map cell(10,7), yaw180, elevation2.4m, scale0.3, graph=cube and layout_seed=41. Other catalogued graph artifacts remain in the registry. This is a focused hall arrangement, not an algorithm replacement.
 
-The equilibrium is not unique. Different initial positions produce different settled configurations, all of which satisfy the force balance. A re-seed button randomises positions and re-runs, so the learner can run the same graph repeatedly and see that the final layout is a function of the initial conditions.
+The learner is temporarily instanced in native checks/captures at map-local(4.5,-0.45,4.5),yaw180; it is not silently installed as a permanent museum artifact. The tutorial describes exactly how to add it. The equivalent isolated hall-root position is(4.5,-0.45,8.5). 22 native checks pass, including66 floor/capsule samples along the middle passage, both exhibit approaches, initial point reach height, the installed cube graph and synthetic-hand pickup/trigger/release. Initial close-up cameras hit the front wall; the final captures move the camera inside, with no geometry hidden for the photograph.
 
-The repulsion_k and spring_k parameters have a product that determines the graph's characteristic spacing. Raising repulsion_k spreads the graph wider; raising spring_k pulls connected vertices tighter. A small damping factor (0.8–0.95) is needed to avoid oscillation, and the map exposes all three parameters as sliders.
+This is an author-operated ghost-student reconstruction. It has not been independently read or tested in a physical headset. Continuous portal crossing, Quest performance and comfort are not verified. Existing UID, Jolt and renderer warnings remain in the logs; the final runs have no script/parse errors. Screenshots are native Godot captures.
 
-Within the sequence, Layout converts the abstract graph from GT_Foundations into a spatial display. The force vocabulary is borrowed from the Forces sequence, and the borrowing is deliberate — the map argues that graph layout is an applied physics problem, not a pure geometry problem. The next map, GT_Pathfinding, will treat the laid-out graph as a searchable space and put the learner's body into the search.
+Reproduce code: python tools/test_graph_layout.py
 
-## Convergence and Parameter Tuning
-
-The force-directed simulation does not always converge. If repulsion is too strong relative to attraction, the graph expands without bound; if attraction dominates, vertices collapse to a single point. The damping factor controls the rate at which kinetic energy leaves the system, and without damping the simulation oscillates indefinitely.
-
-A practical stability condition is that the product of spring_k and damping exceeds a threshold that depends on the graph's topology. The map chooses default parameters that work for graphs up to a few hundred vertices. Beyond that, repulsion dominates and the layout drifts — the Barnes-Hut approximation is the standard remedy.
-
-## Stress and Embedding Quality
-
-Layout quality is usually measured by stress: the sum over pairs (u, v) of the squared difference between the graph-theoretic distance (edge count) and the spatial distance (Euclidean). A good layout has low stress, meaning the spatial distances approximate the graph distances.
-
-```gdscript
-func compute_stress() -> float:
-    var stress := 0.0
-    for u in vertices:
-        var dists := bfs_distances(u)
-        for v in vertices:
-            if u == v: continue
-            var gd: float = dists[v]
-            var sd: float = (v.position - u.position).length()
-            stress += (gd - sd) * (gd - sd)
-    return stress
-```
-
-Stress-minimising layouts can be computed directly via majorisation, but force-directed algorithms are simpler and produce similar results for most graphs. The map uses force-directed because the algorithm's per-frame iterative nature is visually legible — the layout is seen to settle rather than appearing fully formed.
-
-Within the sequence, Layout's physics borrowing prefigures the stress metric: springs pulled to rest length implicitly minimise graph-distance error. GT_Pathfinding will next treat the laid-out graph as a navigable space the learner can walk through.
-
-## One More Note on Initial Positions
-
-Initial positions matter for convergence. Randomly distributed positions avoid the degenerate case where all vertices start at the origin and repulsion has no direction to work with. The map seeds initial positions in a unit sphere around the centre of the arena.
+Reproduce museum: python tools/run_encounter_probe.py GT_Layout --sequence graphtheory --render --no-bridges --output-tag layout-final --probe tools/probes/graph_layout_room.gd

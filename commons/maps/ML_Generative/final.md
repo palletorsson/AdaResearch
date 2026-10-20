@@ -1,23 +1,27 @@
-# Learning from an opponent’s response
+# A movement nobody quite made
 
-What changes when a learner’s critic is also learning?
+The sphere traces two paths. They resemble your hands, but the movement is not one you recorded. One arc lifts a little higher; the other follows a difference that accompanied it in your examples. Watch the whole phrase before deciding what has changed.
+
+In the previous room, repetition taught an average route through time. This study keeps the differences too. Each performance departs from the mean in a particular way, and both hands belong to that departure. The generator gives those departures new amounts. Its possibilities come partly from what you offered and partly from a distribution chosen for the program.
+
+Compare the first recording, the mean and a generated sample. The recording has an occasion: you moved. The mean has a calculation. The sample has a seed and a fitted set of variations. Their paths may look similar, while their histories differ. Even the average may be a movement nobody performed exactly.
+
+The same sphere carries all three. That continuity helps us notice the change of operation, but it can also lend a new result the familiarity of an old object. Nothing in its shine tells us whether we are watching a kept trace or a generated one. The controls name the difference because appearance cannot reliably do that work.
+
+Try a seed you do not like. A surprising crossing may be awkward, useful or simply uninteresting. The model has no measure for that judgement. Its preview checks coordinate bounds and asks that both hands move; a body might still find the path difficult. Nor does withholding a path make it worthless. What the display permits and what you might want to try remain different decisions.
+
+Change the examples, then hold the seed still. The result changes because its field of possible differences has changed. If every example repeats the same coordinates, another seed brings no variation. With three takes, this construction has at most two independent directions in which to depart from its average; three very similar takes may offer only one. Many seeds can produce many paths without opening a new direction. That limit belongs to this construction. It does not settle what every generative system could learn, or what a person might discover while responding to one.
+
+Your demonstrations contain deliberate choices alongside fatigue, hesitation and tracking noise. The generator does not know which differences you meant to teach. Watching its variation may help you notice a habit, or suggest a movement you then make your own. That return from generated path to performed movement changes the conditions of the next recording. The study keeps generated output out of its teaching set unless a person makes and records a new performance.
 
 <!-- @generative_adversarial_networks_gans_vr -->
 
-Move between the generator and discriminator regions and follow the indicated exchange. First identify where a candidate is supposed to originate. Then trace where a judgement would return. Before watching the scores, say which part would need to change if the critic became better at distinguishing generated examples. Nothing here trains: the two losses on the panel are scripted curves, and the motion is a diagram of an exchange, not evidence of it.
+Across the room, the generator and discriminator diagram proposes another relation: a learner whose critic is also learning. Follow where a candidate would originate and where a judgement would return. Its moving scores are scripted; this exhibit does not train those two networks. Our working hand-path generator does fit data, but it has no learned opponent. The two displays offer different kinds of evidence.
 
-The two roles depend on one another. A generator attempts to produce candidates that a discriminator will accept as resembling the reference data. The discriminator attempts to distinguish the sources of the examples it receives. Improving one role can change the problem faced by the other, so the learning environment is partly made by another learner.
+In the proposed adversarial exchange, the discriminator learns to distinguish reference examples from generated ones while the generator learns to make that distinction harder. Improving either participant changes the problem faced by the other. They do not share a single meaning of improvement. A falling score needs the examples and the opponent beside it before it can tell us much.
 
-Read the exchange once from the generator’s side and once from the discriminator’s side. The same candidate can be useful to one participant as an attempted success and to the other as a training example to distinguish. The two roles therefore do not share a single meaning of improvement. Keeping their questions separate will matter when the room gains actual examples: a number moving in a favourable direction for one role may signal a changing difficulty for the other.
-
-That relationship differs from descending a fixed surface. In the loss-landscape room, the scoring rule stayed in place while a point moved. Here the intended training process changes the evaluator as well as the evaluated model. A low score needs interpretation in relation to both participants and the examples they have seen.
-
-The panel said so on arrival, and it bears repeating here, where the diagram is most persuasive: no generator and no discriminator are trained by the exhibit. The motion can help you remember the proposed exchange. It cannot provide evidence that the generated candidates have improved.
-
-Use that boundary to specify the experiment the room still needs: show a changing candidate, the discriminator’s response and the reference example involved in an actual update. Repeating one convincing candidate would then become distinguishable from producing a varied set. A beautiful average or a falling score alone would not settle the difference.
-
-Ask also what the reference set treats as recognisable. Producing more of what an evaluator already accepts can leave unusual forms outside its reward, even when those forms matter to someone encountering the result.
+That relation also raises a question our small study leaves open. Who supplies the reference, and what happens to a useful movement that the reference makes difficult to recognise? Repeating one convincing candidate and producing a varied set are different accomplishments. Neither alone says whose possibilities have expanded.
 
 <!-- @ -->
 
-The synthesis room looks directly at that outside: how does a model decide that an observation is an anomaly?
+Keep one comparison: what you supplied, what the program produced, and what you wanted from it. In the next room we return to the two phrases taught in Sequence Memory. The generated movement may prompt a new performance, but it is not silently added to those teaching examples. An intention will meet an answer. Their agreement can be investigated; so can their distance.

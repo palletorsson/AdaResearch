@@ -1,6 +1,12 @@
 # Why does the wave jump?
 
-Your question can wait at the door. Five dark squares hang in a row along the wall, pictures two metres on a side, each with a desk in front of it, and one of the five is already moving with nobody at its desk. Begin with one that holds still.
+A pale circle holds its place on the dark wall. A smaller one sits on the cube in front of it. Move RADIUS and both expand. Press EDGE and both soften. They share a rule, but they do not occupy the same amount of the room.
+
+<!-- @shader_shaping_wall -->
+
+The soft edge offers an interval where the hard edge offered a cut. That difference matters to what you see. It grants no passage through either backing. A boundary can become gentle in its appearance while remaining just as firm to the body.
+
+Across the room, five dark squares hang in a row, each with a desk in front of it. One is already moving with nobody at its desk. Begin with one that holds still.
 
 <!-- @shader_01_shaping -->
 
@@ -10,24 +16,9 @@ Drag the slider to the right. The white line runs along the bottom of the square
 
 Try to catch it in between. Drag fast, then slowly. There is no in-between. At each position of the slider the whole square is one picture; at the next position it is another whole picture. Nothing travelled from the old stroke to the new one, because there was no old stroke for anything to travel from.
 
-That is the hall's first fact, and the sequence's. The square is not a thing that gets changed. It is a rule, and the rule is asked, for every pixel of the square, on every frame the museum draws: given this pixel's position and this number, what colour? The pixel just left of the stroke has never heard of the pixel just right of it. They were computed in the same instant, by the same rule, from different positions.
+That is the hall's first fact, and the sequence's. The square is not a thing that gets changed. It is a rule, and the rule is asked, for every pixel of the square, on every frame the museum draws: given this pixel's position and this number, what colour? The pixel just left of the stroke has never heard of the pixel just right of it. They are evaluated by the same rule at different positions; neither waits for a message from its neighbour.
 
-The desk's line names the rule:
-
-```glsl
-float y = step(threshold, x);
-```
-
-A step takes a threshold and a position and answers zero on one side, one on the other. Everything you saw, the lighter band and the white stroke, is that answer drawn twice.
-
-Now read how the stroke itself is drawn. This is the panel's own code, for the part of the line to the right of the threshold:
-
-```glsl
-if (uv.x > threshold + 0.005) {
-	float dist_to_line = abs(uv.y - 0.0);
-	curve = max(curve, 1.0 - smoothstep(0.0, line_width, dist_to_line));
-}
-```
+The desk names it STEP. Below the threshold its answer is zero; at or above the threshold it is one. The lighter band and the white stroke show that answer in different ways. Yet the stroke has a width, and its own edges fade.
 
 The picture of a discontinuity is made with a continuous function. Each pixel measures its distance to where the line should be and fades over a line's width; without that, a line one pixel wide would flicker as you moved your head. The step is the subject and smoothstep is the pen. You meet the pen on its own at the next desk.
 
@@ -37,13 +28,7 @@ Now push EDGE 0 past EDGE 1. The function is defined as a division by the distan
 
 The third square is the one that moves. FREQUENCY, AMPLITUDE, PHASE SPEED. A wave runs across it, and it ran before you arrived. Move AMPLITUDE: the wave grows or shrinks in place. Move FREQUENCY: the wave jumps. Not faster, not slower; it is suddenly somewhere else, and then runs on as before.
 
-Now the slider the chapter is named for. Move PHASE SPEED by one notch. The wave leaps sideways, by an amount you could not have predicted, and continues. Move it back a notch: another leap, and not the reverse of the first. Then take your hands off the desk and watch for half a minute. The wave leaps on its own.
-
-Here is the line:
-
-```glsl
-float func_val = 0.5 + amplitude * sin(frequency * uv.x * 6.28318 + TIME * phase_speed);
-```
+Now the slider the chapter is named for. Move PHASE SPEED by one notch. The wave leaps sideways and continues. The amount depends on when you moved the slider. Move it back a notch: another leap, and not the reverse of the first. Then take your hands off the desk and watch for half a minute. The wave leaps on its own.
 
 The wave's position is TIME multiplied by the speed. TIME is the museum's clock. The panel keeps no position of its own from one frame to the next; it asks the clock and multiplies. When you change the speed, every frame after that multiplies the whole clock by the new number, so the phase moves by the change in speed times however long the clock has been running. One notch of the slider is a tenth, and fifteen seconds into the clock's run that is a quarter of a wavelength, at once.[^leap] A wave that kept its own position could accelerate. This one cannot. It can only be asked again.
 
@@ -57,9 +42,9 @@ The fifth square draws all four on one graph, a red step, a cyan S, a green wave
 
 The dark sphere pulses beside the desks. Its pulse is driven from the other side of the museum's machinery, by a script that runs once a frame on the processor and remembers where it was.[^sphere] Stand between it and the wave. One of them has a past.
 
-You came from halls where noise was made and then kept: a column of values, a voxel field, a wall. Nothing in this hall is kept. The graphs are asked, every frame, from nothing, and all they are asked with is a position, a few numbers from the desks, and the clock.
+You came from halls where noise was made and then kept: a column of values, a voxel field, a wall. These materials retain their parameters, but neither the new circle nor the graphs receives its previous image. Each is asked again from coordinates and current inputs. The moving graph also asks the clock.
 
-Everything in this hall is also flat, and hangs on a wall. The sequence begins with pictures. Two halls on it moves to bodies, and after that to rooms.
+The circle on the cube already crosses from picture to body. For now it occupies a flat receiver on one face; it does not reshape the cube. In the rooms ahead the surface will repeat, take light differently, and move. Each change asks us to locate what changed.
 
 <!-- @ -->
 
@@ -71,6 +56,6 @@ The way out is a long one. The museum builds a crossing after every hall, a door
 
 [^rollover]: `project.godot` sets `rendering/limits/time/time_rollover_secs` to 30, so the shader clock TIME runs from 0 to 30 and wraps; Godot's own default is 3600. At phase speed 1.0 the wrap moves the phase by 30 radians, 4.77 cycles, a leap of 0.23 of a wavelength; at 2.0 it is 0.45, at 0.5 it is 0.39. Only a speed whose product with 30 is a whole number of cycles would hide it, and the slider's steps do not land on one.
 
-[^sphere]: `dark_sphere.gd` drives its wobble and its emission pulse from `_process`, on the CPU, frame after frame, from values it keeps. The graphs keep nothing; they are functions of TIME.
+[^sphere]: `dark_sphere.gd` drives its wobble and its emission pulse from `_process`, on the CPU, frame after frame, from values it keeps. The graphs retain their control values but no previous image; the animated graph also reads TIME.
 
 [^passage]: `map_info.museum.passage` on this map is `{"kind": "chicane", "depth": 14}`. The museum's crossing rule (`endless_museum.gd`, `_authored_passages`): a door in this hall's last row, `depth` rows of crossing, a door where the next hall's own door is, then the next hall's first row copied, so that walking the last metre of the crossing you are already looking into the room you are entering. The default depth with a known next hall is 7. A chicane's middle rows open the whole span between the two doors, so when the doors sit at opposite corners the crossing is a room rather than a corridor. Palle, on first seeing one: "like a service corridor that can lead to other places."

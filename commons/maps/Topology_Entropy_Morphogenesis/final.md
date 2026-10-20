@@ -2,30 +2,24 @@
 
 <!-- @entropy_morphogenesis -->
 
-The surface opens and folds around passages. It recalls the sine and noise spaces we walked earlier, now combined into a sampled field. Before touching S, choose one opening you can follow with your eyes. Keep track of it as the surface is reconstructed.
+Choose an opening in the pale surface. You can see the room through it. Touch S and the opening changes: an edge advances, a neck draws in, another passage comes into view. The single control makes the transformation feel like one decision.
 
-S changes several parameters together. The desk reports their values so that an impressive transformation does not hide its recipe.
+Read the numbers beside your hand. Several things moved together. Someone connected them before you arrived.
 
-```gdscript
-current_frequency = lerpf(base_frequency, high_frequency, S)
-current_noise_amp = lerpf(base_noise_amp, high_noise_amp, S)
-current_threshold = threshold_center + threshold_wobble * (S - 0.5) * 2.0
-```
+The vessel kept a moment as a record. The previous room asked what continuing exchange could sustain. Here the surface waits until a changed description asks it to be built again. Its appearance may suggest growth, but each reconstruction begins from the spatial rule. What we preserve is a way of making the form; that description is also where we can intervene.
 
-The parameter is called entropy in the source. Here it is an authored control between settings, not an entropy value calculated from a distribution. Its name cannot establish a law connecting disorder and form. The mapping can nevertheless become a useful instrument if we expose what it does.
+Keep the field and move the cut. A different surface appears without the values underneath becoming different. Change the frequency instead and those values change across space. The two actions can produce equally striking images. They ask different things of the system.
 
-NOISE removes or restores the noise contribution. LEVEL moves the cut: minimal, thickened, pinched, broken, and back to minimal. RESOLUTION rebuilds the same surface from 24, 16 or 32 samples along each edge. Try them separately, then compare that experience with moving S. Which differences had been bundled into its single gesture?
+This is where the small paired specimens help. One keeps its recipe while the other receives your intervention. A hand can make a complicated change quickly. A comparison can slow that change enough to see what the gesture contained. Neither speed nor hesitation has to belong permanently to the interface.
 
-Here is what the cut does, computed from the field without its noise. At the opening setting the surface divides the box almost in half, 52 per cent solid and 48 air, and each half is one connected labyrinth; the widest ball that fits in the air is about three and a half metres across. Thickened moves the cut down: the solid takes 72 per cent and the air is left in two separate pockets. Pinched leaves the solid a third, still one piece, drawn out into necks. Broken cuts it to a fifth, and the solid comes apart into islands. Now move S to one. The pattern’s period shrinks from five and a half metres to under four, the same four cuts apply, and the thickened pocket that admitted a three-metre ball now admits one of a metre and a half.[^gyroid]
+The source calls its master value entropy. Here the word names a chosen path through settings. No distribution is measured to produce it. We can be drawn to the suggestion of disorder becoming form while still asking what the control actually joins. A name can open an association. It can also make an arrangement seem inevitable.
 
-![One slice through the field at the opening setting, cut at the four levels the desk offers](/book-images/figures/softbodies/gyroid-four-levels.png)
+There is pleasure in leaving that arrangement. Keep the disturbance and change the cut. Keep the cut and change the spacing. Retain a result the default path passed by. An interface that lets you separate its connections makes room for intentions its author did not anticipate.
 
-*One slice through the same field, cut at the four levels. Dark is the solid side. Nothing in the field changed between the four panels; only the number the cut was made at.*
+Now return to the large surface. An opening in an image is not yet a passage for your body. The mesh, its collision surface and your scale have to meet. A finer sampling may describe the boundary differently; it does not promise that the opening will admit you. You must try the relation at the scale where it matters.
 
-The generated collision belongs to the reconstructed surface. An opening that appears in a rendering may still be too narrow for your body. A change in geometric frequency is not automatically a change in connectivity, and neither alone certifies a traversable route. We can learn to ask each question at the scale where it has consequences.
+Across these rooms, the point has joined a yielding body, held a boundary, moved with a support and helped keep a moment as a sculpture. A surface could seem alive because it turned. A pattern could persist because exchanges continued. Here a control gathered several choices into one movement of your hand.
 
-Across these halls, a body has become a set of relations that can yield, remain attached, be driven, meet an obstruction, or be held as a sculpture. We have also seen appearances that imply mechanisms they do not contain. The point is not to exhaust desire by naming every rule. It is to gain enough purchase on a rule to change what it permits—and notice what the next construction still leaves out.
+We leave with those differences still available. The next body need not begin from nothing. We can carry a point, a relation, a saved shape or a rule—and ask which part we are willing to let change.
 
 <!-- @ -->
-
-[^gyroid]: Computed on the artifact’s own grid of forty samples across an eight-unit box from f = sin(kx)cos(ky) + sin(ky)cos(kz) + sin(kz)cos(kx), with k = 1.11 at S = 0.3 (the desk’s opening value) and 1.6 at S = 1, the thresholds the desk sets (0, −0.6, 0.6, 0.95, shifted by 0.15 × (2S − 1)), and the solid taken as the side above the threshold. The noise term, at most a fifth of the field’s range, is left out. Pieces are counted on the sample grid; the ball is the largest that fits in the air phase.

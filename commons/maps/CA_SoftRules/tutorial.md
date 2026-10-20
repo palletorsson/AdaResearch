@@ -8,6 +8,10 @@
 - Matched beginnings isolate one changed operation.
 - The carried point chooses an address for a shared intervention.
 
+## Reading route
+
+Read `Field.laplacian` and `next_pair`, then `plant` in the host. The new question is what exchange contributes when the local reaction is held fixed. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Bring the point to the tables
 
 In the previous room a healthy neighbour contributed to recovery. Here **how much it differs matters**. Two tables begin with the same square. Each table's field also covers a curved wall. A exchanges with its neighbours; B starts with exchange off. Both still perform the same local reaction.
@@ -21,6 +25,10 @@ Take the black point beside the desk. Hold its centre just above either table an
 Save the previous study. Put `field.gd`, `exchange.gd` and the unchanged `point_body.gd` together. Attach `exchange.gd` to the existing `PointStudy` Node3D in your Day Zero museum. Keep unit scale and about 3.3 × 2.4 metres clear, facing its positive Z side. The museum supplies the player, camera, lighting and XR Tools. These files create every child used by this study.
 
 The compact reconstruction has two tables and two flat upright displays. The installed walls are larger and curved; they use the same operation. Use Enter for one step, Space for 100, E to change B's exchange and restart both fields, R to replay, and V to view U or V. In VR the point's trigger plants a seed. The compact model's clock and comparison controls use the keyboard; the installed exhibit has nearby VR desk controls. Desktop learners use the museum's pickup and I while holding the point.
+
+## Return to the Shader field
+
+Shaders already introduced a retained U/V field. Here we expose neighbour exchange by switching it off in one matched copy. This CPU model uses four axial neighbours, a 32 × 32 grid, Du = 0.16, Dv = 0.08, F = 0.037 and K = 0.060. The Shader study used a weighted eight-neighbour stencil, a 96 × 96 grid and different rates. We carry the distinction between state and image, not its texture or exact trajectory. Compare A and B within this lesson; do not expect their pictures to reproduce the Shader wall.
 
 ## A field stores two values
 
@@ -47,6 +55,7 @@ That first difference is small enough to predict before watching it spread.
 
 ## Complete model — field.gd
 
+<!-- student-code:field.gd -->
 ```gdscript
 extends RefCounted
 const N := 32
@@ -120,6 +129,7 @@ The point keeps its pickup behaviour. `target_site` converts its world position 
 
 Read `target_site`, `plant`, `advance` and `paint` first. `box` and `make_display` provide the complete staging. There is one `_ready`, and no required child is hidden in a scene reference.
 
+<!-- student-code:exchange.gd -->
 ```gdscript
 extends Node3D
 const Field = preload("field.gd")
@@ -279,6 +289,7 @@ func make_display() -> void:
 
 This file is unchanged from the previous hall. Keep your existing copy. It appears here so the three-file example is complete.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -329,6 +340,11 @@ Replay with B's exchange off and step once. Check W's two answers against the ta
 
 Now restore B's exchange-off comparison. Carry the point to a different address, outside the starting square, and plant. Step 100 times. Find a site just beyond that second patch. Can anything make its first V arrive without exchange? At an untouched site, V = 0 makes the local reaction product zero. An address can receive its first V from its neighbours.
 
-Make one independent edit: in `reset`, after `right.reset()`, add `left.seed_at(Vector2i(0, 0))` and `right.seed_at(Vector2i(0, 0))`. Predict all nine addresses before replaying. The patch appears at x = 31, 0, 1 and y = 31, 0, 1. Its split appearance is one neighbourhood crossing the periodic boundary, not four unrelated seeds. After replay, find which side can send V into an adjacent unseeded address. Remove those two added lines to return to the original beginning.
+Make this guided edit: in `reset`, after `right.reset()`, add `left.seed_at(Vector2i(0, 0))` and `right.seed_at(Vector2i(0, 0))`. Predict all nine addresses before replaying. The patch appears at x = 31, 0, 1 and y = 31, 0, 1. Its split appearance is one neighbourhood crossing the periodic boundary, not four unrelated seeds. After replay, find which side can send V into an adjacent unseeded address. Remove those two added lines to return to the original beginning.
 
 Both clocks stop at 2,400 steps. Reset to make another comparison. You leave with a field class that can be shown on more than one surface, a point that can intervene without replacing the rule, and a distinction between what happens at an address and what can arrive from elsewhere. The next hall compares a cellular history with recursive construction: similar forms can have different ways of becoming.
+
+## Your own test
+
+Choose an untouched address beside a seed of your own. Calculate its first U/V pair with exchange on and off before stepping. Keep both beginnings identical. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

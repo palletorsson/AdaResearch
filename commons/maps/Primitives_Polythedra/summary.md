@@ -1,30 +1,17 @@
-# Primitives_Polythedra — enclosure and passage
+# First solids — alignment, support and passage
 
-This is room 6 of the current ten-room primitives sequence, between Point_Triangle_Context and Point_Animatedcube. It connects an open corner and a closed surface with the uses of those forms around a moving body.
+Eighth map in the current fifteen-map Primitives sequence, between Point_Triangle_Context and Point_Animatedcube. The 27 × 46-cell map enters at (7, 0) and exits at (8, 45).
 
-The map is 13 by 28 cells. Entry is `sp` at (7, 0); the exit `t` is at (4, 27). Coordinates below are (column, row), not world positions. The existing floor heights and museum placement rules still determine actual height.
+1. **Align a tetrahedron (7, 4).** Release the displaced pink vertex at its target. Completion creates a physical, grabbable solid which falls. The target restores the authored regular form, not the only possible tetrahedron.
+2. **Align a wedge (7, 12).** The same interaction restores a triangular prism. The two constructions occupy separate chambers.
+3. **A corner changes (2, 17).** A large tetrahedron fills the floor/wall corner. Nearby, the open trihedron, boundary plate and editable pyramid extend the comparison between visible surface, collision and a vertex that remains editable.
+4. **Central stopper collection.** Five two-metre standing prisms form one 10 × 2-cell bank at columns 5–14, rows 24–25. STOP and a double arrow mark it. Three clear grid columns on either side provide the detours.
+5. **Side ramps, then platform.** Three `wp:0` units at each side (columns 2–4 and 15–17, row 29) rise in the direction of travel onto a 16 × 3 m structure-2 platform. Each approach is three metres wide and rises one metre over two metres. A centred four-metre descent follows at row 33. Short inner walls hold the side approaches; the former central baffle is removed.
+6. **Sculpture on the platform (6.5,32).** Six copies of the same standing prism turn into three diamond modules. Walk around the fixed column and compare silhouette, depth and obstruction.
+7. **Wedge mouse maze (13,32).** Twenty-three upright wedge walls make a small branching labyrinth. A standing joystick behind the bare brown mouse is the only control. Steer to the symmetric cheese wedge at the far end, then move walls to change the route. The plinth stays on the platform beside the sculpture.
+8. **A floored basin (columns 6–12, rows 36–41).** Striped concrete profiles enclose a floor and a small diamond chain.
+9. **Rock side room.** Its doorway at (18, 34–36) opens beyond the platform crossing. The rock box remains at (22, 31), the scanner at (22, 35). Thirty rocks fall into the retaining enclosure. The scanner animates a cyan plane; its separate cross-section display is not activated by the current ready/process path.
 
-## The first passage
+No cube exhibit, legacy catalyst/path-game nodes or proposed gallery marker remains here. Cube work follows in Point_Animatedcube.
 
-| Encounter | Grid positions | Question |
-| --- | --- | --- |
-| Open corner: `grab_trihedron` | (9, 5) | Which face is missing, and does its collision model also leave it out? |
-| Closed surface: `grab_tetrahedron` | (6, 7) | What does another face enclose? |
-| Prism variants: `prism_block` | (5, 1), (2, 5), (3, 5) | What changes visually while the collision surface stays the same? |
-| Utility wedges: `wp` | (1, 3), (1, 12), (2, 12), (3, 12) | Where can forward movement become ascent? |
-| Twelve concrete sections | ring along columns 4–8, rows 10–14 | Where does the physical boundary redirect movement? |
-| STOP and four arrows | (3, 9), (6, 9), (2, 11), (3, 15), (7, 15) | What is requested, and what is mechanically enforced? |
-
-The book visits the corner and tetrahedron before returning to the prism examples near the entrance. This is an authored comparison route, not a claim that the current floor automatically presents everything in that order.
-
-## Work to return to
-
-The five-handle pyramid and cube remain near the held solids. The diamond stack, thirty-rock spawner and scanner extend the lesson into repeated forms, gaps and sections. The scanner currently animates a cyan plane with a collider; its separate cross-section display is not activated by its own ready/process path. The legacy path-game nodes and catalyst objects remain available for a later gameplay review. The gallery request marker is a proposal, not a built gallery.
-
-[The tutorial](tutorial.md) includes return-visit questions for these works. [The technical reference](technical.md) retains face counts, angular defect, regular solids and volume calculations. [The inventory](artifacts.md) records all 34 current placements, including repeated objects.
-
-The former 7×9 layout and snap-tetrahedron puzzle described in earlier drafts are historical. The puzzle is absent from this room. Earlier drafts are preserved in the dated iteration archive.
-
-## Review still needed
-
-Inspect plinth reach, sign legibility, the backtrack to the prisms, the preserved central opening and the joins at each utility wedge in the actual museum. Component physics checks do not establish these full-room conditions. No layout or runtime behavior is changed by this editorial pass.
+The construction scenes live in commons/artifacts/primitive_encounters/. The dated primitive-encounters trial retains the alignment and pickup evidence. The wedge-mouse-maze trial checks the route, dead ends, backtracking, changed walls, upright joystick and platform access. Headset reach and comfort still require a wearer trial.

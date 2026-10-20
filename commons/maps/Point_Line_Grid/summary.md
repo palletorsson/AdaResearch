@@ -32,3 +32,8 @@ The roles express teaching order, not a newly enforced walking route. The vitrin
 ## Reading and implementation
 
 [final.md](final.md) is the first passage. [tutorial.md](tutorial.md) follows its actual program; [technical.md](technical.md) distinguishes the grids, frames, buffers and colliders. [critical.md](critical.md) asks what decisions are made from a shared address. The earlier texts and historical layout descriptions are preserved in the [editorial archive](../../../doc/space/point-grid-focus-2026-09-16/README.md).
+
+
+## Selection update — 17 October 2026
+
+Selecting a coordinate row or displayed point highlights the same source entry on pink and its rounded counterpart on green. The index survives coincident snapped addresses and page changes. POINT − / POINT + moves between entries; NEXT TRACE selects another drawing. Geometry, data and their correspondence can now be inspected together. The layout and other encounters are unchanged.

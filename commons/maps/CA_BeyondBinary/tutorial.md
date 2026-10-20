@@ -8,6 +8,10 @@
 - Fixed address, changing occupancy, apparent movement.
 - A separate output: one cell controls one lamp.
 
+## Reading route
+
+Read `neighbours`, `next_state` and `receive`. First understand the two-dimensional rule; then follow the separate connection from one address to the lamp. The complete files also include the display and controls; keep those working while investigating the named functions.
+
 ## Enter with the point
 
 The last hall kept each new row as history. Here both grid directions belong to the **same present**. Five cells wait in a dish, repeated on the floor. Press STEP four times. The arrangement returns one address farther along both directions. No mesh has moved. Different fixed cells have become occupied.
@@ -44,6 +48,7 @@ We separate a rule from a use of its answer. The same false value that removed s
 
 The rule is in `neighbours`, `next_state` and `evolve`. The remaining code creates its visible receivers and connects the controls. The full file is included so the example runs; the new lesson does not require memorising the furniture construction.
 
+<!-- student-code:life.gd -->
 ```gdscript
 extends Node3D
 const PointBody = preload("point_body.gd")
@@ -214,6 +219,7 @@ func redraw() -> void:
 
 This file is unchanged from the previous hall. Keep it, rather than rebuilding the point. Its inherited pickable action supplies the trigger signal. Release returns this study's point to its local parking position.
 
+<!-- student-code:point_body.gd -->
 ```gdscript
 extends XRToolsPickable
 ## Point Lines' frozen point construction, made smaller for the hand model.
@@ -271,3 +277,8 @@ Now connect a different address by changing `SITE` to (9,10). The frame, wire an
 ## What travels onward
 
 A pattern can travel while its addressed receivers stay put. A Boolean rule can answer a separate object without accepting any influence back from it. In the next hall, proximity becomes an input: the observer's body will enter the conditions of the update.
+
+## Your own test
+
+Choose a different seed and a different lamp address. Predict a short sequence of lamp states, then compare it with the stored cells while LINK is on and off. Keep your prediction, the observed values and a runnable assertion in a separate test script. If they disagree, identify whether the prediction, test or study needs changing.
+

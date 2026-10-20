@@ -1,6 +1,6 @@
 # Noise Space 10 — sampled ground and a moving body
 
-This chapter follows the enclosing Noise_Inside_Noise sphere and prepares Noise_Perlin_Simplex. The existing NoiseSpace extends TopologySpace, creates a height mesh and supplies a trimesh collider. Its previous hall placement intersected the museum floor, hiding negative heights. The optional stand:walk configuration stages a complete patch above that floor and makes one controlled alteration available.
+This chapter follows the enclosing Noise_Inside_Noise sphere and the Cellular Noise / Box Noise comparisons, and prepares Noise_Perlin_Simplex. The existing NoiseSpace extends TopologySpace, creates a height mesh and supplies a trimesh collider. Its previous hall placement intersected the museum floor, hiding negative heights. The optional stand:walk configuration stages a complete patch above that floor and makes one controlled alteration available.
 
 ## Fixed field and height mapping
 

@@ -2,42 +2,46 @@
 
 <!-- @boid_manager -->
 
-Something is already through the room when you arrive. A hundred grey prisms, each about the length of an arm, moving at anything between a run and a sprint — through the walls, through the floor, through you. They came in through the wall: they were dealt into a box twenty metres wide inside a hall thirteen across, half the school began under the floor, and some of it is outside the hall now. Hold out your hand. Nothing turns. Not one prism changes its heading for a body, and none of them has ever met a wall. The only edge they answer to is a box fifty metres on a side, and they feel it only in its last five.[^containment]
+A flock passes through the wall before you enter. From the balcony you can follow bodies outside the museum. Their numerical boundary reaches beyond the architecture. Hold out your hand: the open flock has no rule that makes it turn towards you.[^containment]
 
-That is the encounter, and it is a refusal. Whatever holds this flock together, it is not the room and it is not you.
+Whatever holds it together, it is not the room and it is not your presence.
 
 <!-- @flocking_controls -->
 
-Go to the panel with the sliders. A smaller flock lives there, thirty of them in a box you can lean over, eighty centimetres wide and sixty high. Here something does happen at the edge, and it is not a wall either: a boid that leaves the right side is at once on the left. Watch one cross. The neighbours it was flying with are now on the far side of the box, and it can no longer see them — its sight reaches twenty centimetres and the box is eighty wide. Its arrows swing. The rule did not change; who is inside the rule did.
+At the smaller table, take the black point on the left. Pause with its trigger. Move your hand left or right and watch the gold circle narrow or widen. Links disappear and return while the bodies remain still. The steering rules have not changed. Who can enter their calculation has.
 
-Find the boid with the yellow ring. Its three arrows are the three things it is being asked to do. Red is separation, the push away from anyone too close. Blue is alignment, the turn towards the headings nearby. Green is cohesion, the pull towards the middle of the local group. They need not agree. Choose an instant when two of them disagree and say the disagreement in ordinary words: too close here, group centre there, neighbours heading elsewhere.
+Find the ringed boid. Red asks it to move away from bodies too close. Blue asks it to align with nearby movement. Green asks it to approach the local centre. Choose an instant when two disagree and say it plainly: too close here, group centre there, neighbours heading elsewhere.
 
-Now move one slider and leave the other two alone. SEP first. Watch the arrow at your ringed boid before you look for a change in the whole flock; a small local change is real even when the population stays recognisably flock-like throughout. Return the slider to where it was, then try ALIGN, then COH. One change at a time is what lets a local response be connected to the population's movement. Then keep the three weights where they are and move RADIUS. The same three requests, the same weights, and a different flock — because a different set of neighbours is now inside each boid's calculation. Before asking what the flock wants, ask who each agent is able to see.
+Resume. Change one weight and follow its arrow before judging the whole flock. A local response can change while the population remains recognisably flock-like. The white arrow combines those requests; it does not promise that the body will immediately travel in that direction. Its movement already has a history.
 
-Here is the rule you have been watching. Each boid, on its own, looks at the neighbours inside its radius and adds up three requests, each multiplied by a weight.[^cost] It moves along the sum. A slider changes the weight of one request for everyone; it does not tell the flock anything. The large moving shape is what those many small calculations look like when they meet.
+Craig Reynolds named these three behaviours separation, alignment and cohesion.[^1] No boid receives a plan for the whole flock. Each responds to the neighbours its calculation includes.[^cost] A larger shape becomes visible where those local responses meet.
 
-Craig Reynolds set the three down in 1987 and called the agents boids: separation, alignment, cohesion.[^1] The name arrives late here on purpose. You have already watched all three disagree, and you have already seen that the same three words make a different animal when the radius changes.
+Move RADIUS again with the weights unchanged. Before asking what the flock wants, ask who each body can notice.
 
 <!-- @boids_aquarium -->
 
-Now ask where the rule ends, because in this hall it ends three different ways. The tank in the middle is a metre of glass, five panes and no lid. Nothing leaves through the open top. The fish turn back at a ceiling five centimetres below the rim that is not there: the boundary is in the numbers, and the glass agrees with it on five sides only. At the panel, the edge is a seam, and the seam is where a boid loses its neighbours without either of them moving. In the open flock the boundary is nearly four times wider than the hall, so the rule's edge is never where the architecture's is, and there is no term in the rule for you at all. Three flocks, one rule, three edges, and not one of the edges belongs to the rule.
+The aquarium offers another edge. Its fish turn below the open rim: an invisible ceiling is written into their coordinates. At the small table, a body leaving one side reappears at the other, suddenly far from its former neighbours. Outside, the open flock passes through the museum walls. Separation, alignment and cohesion do not decide where a world should end. Someone supplied that boundary.
 
-Alignment is not consent, and cohesion is not a complete account of belonging. These agents have no way to refuse a relation, remember harm or ask another agent for space. The model makes a few geometrical relationships legible because it omits many other kinds.
+The black point gives your hand a particular authority at the table: change the radius for everyone. The hand has no equivalent place in the open flock. Being able to enter a room is different from being represented in its model.
 
-Try letting separation win for a while. Instead of judging every dispersed flock as failed, ask what the extra distance lets you see. Then take the other two out instead, ALIGN and COH to nothing: the thirty avoid one another until no one is within sight, and each flies straight, a gas. Put them back and take SEP to nothing: they close on their middle and stay there, a clot. Cooperation alone and competition alone are both simple; the flock needs the disagreement. When you want to compare, return the slider rather than pressing RESET: the panel's RESET deals a fresh scatter, not the same one, while the tank's RESET deals the same scatter every time. Two buttons with one name, and only one of them gives you back your starting point. It gives you back the start and nothing after it. Run the tank twice from that scatter and time the schools: no two frames are the same length, a flock magnifies any difference it is given, and within five seconds the two runs have nothing in common. Lorenz found this in 1961 by retyping a number to three decimals instead of six.[^lorenz]
+Alignment is not consent, and cohesion is not a complete account of belonging. These bodies cannot refuse a relation, remember harm or ask for space. Their few geometrical relationships become legible through those omissions.
 
-![Two runs of the tank from one scatter: identical steps stay identical, frames of uneven length part within seconds](/book-images/figures/swarmintelligence/tank-two-runs-part.png)
+Let separation win for a while. What does the extra distance let you see? Compare a run without alignment and cohesion with one without separation. How much of the apparent agreement depended on keeping apart?
 
-*The measurement behind the sentence. From one seeded scatter, thirty fish were run twice: once with identical fixed steps, once with frames that differ in length by up to a fifth. The widest separation of the same fish after one step, a sixth of a second, one second, five seconds and twenty: two millimetres, seven, sixteen centimetres, over a metre, the width of the tank.*
+When you reset, notice what returns. The small table deals a fresh scatter; the tank repeats its seeded start. Even with the same start, timing matters. In a recorded comparison, identical steps kept two schools together; uneven steps sent corresponding fish apart.[^steps] A similar-looking beginning is not yet the same experiment.
+
+![Two tank runs: identical steps agree; uneven steps diverge](/book-images/figures/swarmintelligence/tank-two-runs-part.png)
+
+*Recorded comparison, 25 September. The probe and timing conditions are given in the notes.*
 
 <!-- @ -->
 
-The next room broadens the model: an agent can have an internal state, and the environment can remember what it did.
+In the next room, the familiar point carries food. The lesson sets flocking aside and asks how a stored state changes what the body attends to. Nearness has given us one relation; it does not have to explain them all.
 
-[^lorenz]: Measured with `commons/testing/probe_boids_tank_divergence.gd`: from one seeded scatter, two runs with identical fixed steps stay identical to the byte for twenty seconds, and two runs whose frames differ in length by up to a fifth part by two millimetres after one step, sixteen centimetres after one second and more than a metre, the width of the tank, after five. Edward Lorenz, "Deterministic Nonperiodic Flow" (1963), and the 1961 rerun typed to three decimals that led to it.
+[^steps]: `commons/testing/probe_boids_tank_divergence.gd`; recorded result in `doc/book/iterations/claude-swarmintelligence-noc-reading-2026-09-25/probe_boids_tank_divergence.json`. The fixed-step run uses 1/60 s per step; the jittered run is compared by step count, not precisely equal elapsed times. The tutorial separately tests reproducibility and simultaneous neighbour reads in its small carried-point model.
 
-[^1]: Craig W. Reynolds, "Flocks, Herds, and Schools: A Distributed Behavioral Model", *Computer Graphics* 21(4), SIGGRAPH 1987. The three rules and the word "boids" are his.
+[^1]: Craig W. Reynolds, ["Flocks, Herds, and Schools: A Distributed Behavioral Model"](https://www.red3d.com/cwr/boids/), SIGGRAPH 1987. His account identifies separation, alignment and cohesion as local steering behaviours.
 
-[^containment]: The push begins at zero on the margin and reaches its full strength at the wall, so a boid meets the box gradually; Reynolds called this containment. *Nature of Code* builds it as a desire to move away from the wall that is switched off everywhere else, because a desire for zero speed would be a brake, not an absence.
+[^containment]: `algorithms/emergentsystems/boidflocking/Boid.gd`: the boundary influence begins five metres inside each numerical limit and grows with distance into that margin. It does not test the museum's walls. The placed manager has no player/controller paths assigned.
 
-[^cost]: To know who is inside its radius, each boid measures its distance to every other, so a hundred boids make nearly ten thousand measurements a tick. The tank cheats honestly: it sorts its fish into cells and asks only the neighbouring cells. Flocks of thousands exist only that way.
+[^cost]: A full pairwise scan of a hundred bodies makes 9,900 directed comparisons. The tank instead sorts its fish into spatial cells and checks nearby cells. This reduces the search when bodies are spread out; it does not remove the dense case in which everyone is near everyone else.

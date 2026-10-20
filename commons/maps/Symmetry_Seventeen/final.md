@@ -2,53 +2,62 @@
 
 What would have to stay the same for this to be the same pattern?
 
-You have followed an address around a corridor. The floor and the wall gave it different directions. Here the surface stays flat, and a small mark returns in ways that do not quite agree.
+You have followed an address around a corridor. Here the surface stays flat. Keep the source still and follow what happens when a reflection is also shifted.
 
 <!-- @vr_tile_editor -->
 
-Begin at the tilted console in the side bay. Its sixteen buttons hold an asymmetric mark: a bent line, a second colour near a corner, a third near the bend. The left panel holds a sample. The right panel and the carpet follow the current source and rule.
+At the tilted console, find the corner colour in the held P1 sample. Choose PM on the live field and follow the corner into its next appearance. Now choose PG. The reversal remains, but its neighbour has slipped along the other direction. The reflected reading shifts by half the source height.
 
-Choose **PM**. Keep your eyes on the corner colour. Find it in the next block. Has the mark travelled, or has it also reversed? Compare it with the held **P1** sample. You have changed no source address.
-
-Now choose **PG**. The reversal remains, but the colour no longer arrives opposite its neighbour. Follow it along the other direction. The rule has slipped the reflected copy by half the source height. With four source rows, that is two rows.
-
-Try to describe the difference before pressing **HOLD**. This saves the current image on the left. It gives your next change somewhere to return to.
+The mark has not been repainted. An operation we know has become one part of another. Hold the result beside the earlier image and find a return you can explain.
 
 ![Held P1 and live PG in the museum side bay](/book-images/figures/tiling/symmetry-p1-pg-museum.png)
 
-*One source, two returns. The left panel keeps P1; on the right, PG reflects alternate blocks and slips the source lookup by two rows.*
+*One source, two ways of returning.*
 
-The three buttons select translation, reflection and glide reflection. In the editor's integer lookup, the last two differ by one line. This is the PG branch of `WallpaperGroups.get_symmetric_color`, with its local source coordinates:
-
-```gdscript
-var tile_x = px / tile_size
-tx = px % tile_size
-ty = py % tile_size
-if tile_x % 2 == 1:
-    tx = tile_size - 1 - tx
-    ty = (ty + tile_size / 2) % tile_size
-```
-
-An odd block reverses the source column. Then the row shifts halfway round the source and wraps. The array stays where it was; the lookup changes which of its addresses is read. The panel shows eight source blocks across and eight down. A source block is not necessarily a full translation period: reversal makes you wait for another block before its orientation returns.
-
-Select a colour, then press one of the sixteen source cells. The live panel and floor change together; the held image keeps its pixels. **UNDO** can recover a paint edit, a rule choice or the previous held sample. **RESET** restores the initial mark and P1 while leaving the held comparison available.
-
-Now make the source less distinctive. Remove the corner colour, or make both sides alike. Does the difference between rules remain easy to see? A rule can still execute while your chosen mark conceals what it does. The selected button names a construction; it does not prove that the finished image has exactly that symmetry group. An unusually symmetric source can introduce more symmetry.
+Make the source less distinctive. Does the difference remain visible? A chosen mark can conceal an operation or introduce extra symmetry. The selected button names a construction; it does not prove that the resulting image has exactly that symmetry group.
 
 <!-- @wallpaper_cage -->
 
-Return to the cage. It marks rotational orders one, two, three, four and six, and crosses five and seven. Its subject is rotation compatible with a periodic planar lattice. The cage depicts the restriction; it does not test arrangements to establish it.
+The cage marks rotational orders one, two, three, four and six, and crosses five and seven. Its restriction concerns rotations compatible with a periodic planar lattice. The cage depicts the restriction; it does not test arrangements to establish it. A fivefold-looking flower may sit inside a repeating cell without making the whole field fivefold symmetric. Look for the boundary of what is being counted.
 
-The larger classification concerns ideal patterns repeating in two independent directions on the Euclidean plane. Under those conditions there are seventeen plane-group types; the [IUCr tables](https://it.iucr.org/Ab/) list their operations and generators. The three comparisons at the console are an entrance into that subject, not a demonstration of the completeness of the list.
+For ideal patterns repeating in two independent directions on the Euclidean plane, there are seventeen plane-group types. The [IUCr tables](https://it.iucr.org/Ab/) describe their operations. The catalogue closes under particular assumptions. This finite carpet still ends, meets the light, and appears differently from where you stand.
 
-The other machines give these names somewhere else to work. Compare a loom or mill with the framed samples: can you find a repeated turn or reversal before reading its group label? The patterned wall gallery carries selected rules across the architecture. Its changing colours and motifs can make the operation harder to recognise than our small, deliberately awkward mark.
+<!-- @thread_loom -->
 
-At the atlas plates, read the makers’ names as well as the patterns. A symmetry group can describe a relation between marks without describing the work, place or history that brought them together. Carry both kinds of attention through the gallery.
+At FOLLOW THE THREAD, cream threads rise and fall. Take the brass shuttle through their opening. Beat the pink thread into place. Follow it back at the edge, then make the returning pass.
 
-A fivefold-looking flower can sit inside a repeating cell. That does not give the entire field fivefold rotational symmetry. The flower and the field ask the question at different scales. Look for the boundary of what is being counted.
+Here an instruction says which thread passes over another. The crossings help construct the surface you are examining.
+
+<!-- @jacquard_studio -->
+
+Beside it, punched cards hang in a laced chain. One moves into the reader and stops. Threads rise; the shuttle crosses. The next card waits until this pass has joined the cloth.
+
+Watch the first card return. Its instruction can begin again. The cloth has grown.
+
+Patch one hole and wait for that card's next turn. A small difference enters the weave, then returns across its width. The earlier crossings stay as they were. Find where the change began. The cloth holds choices that the card no longer shows.
+
+In the tartan, bands of colour cross bands of colour. Keep the twill and change the colour sequence: a houndstooth appears. The chevron and herringbone keep their yarn colours while their crossings turn differently. What looked like one pattern allows more than one place to act.
+
+Choose the optical checks. Broad bands narrow to fine lines, then widen again. The surface may seem to swell. Lower your head towards its edge. Does the fold you saw have a rise you can follow?
+
+![Optical checks woven in the museum loom](/book-images/figures/tiling/optical-woven-checks-flat.png)
+
+*Changing band widths on a flat woven surface.*
+
+Open the sample into layers. The gaps grow large enough to follow a thread beneath another. This is space made for inspection. The loom did not weave those gaps into the cloth.
+
+Close it again. Knowing how the threads cross need not make the apparent fold disappear. The widths can be counted exactly; what they seem to form meets you at a particular distance and angle.
+
+The machine can carry a choice through repeated passes. What part of knowing how to weave have we put into the card, and what still has to be learned with thread? These paths are geometry. Yarn tension, friction and the work of keeping a loom running remain outside this construction. Knitting would ask another question again: how does one loop hold through another?
+
+Read this beside Sadie Plant's *Zeros + Ones* and the textile practice described in *Mamma Mönster*. Whose work becomes visible when we call a pattern a program? Which skills have we kept close enough to follow with our hands?
+
+At the atlas plates, read the makers' names. A symmetry group can describe relations between marks without describing the labour, place or desire that brought them together.
 
 <!-- @ -->
 
-The catalogue closes under its assumptions. This finite carpet still ends. Its colours have been sampled into pixels, its material meets the light, and your body stands at an angle to it. Those differences have not disappeared because the symmetry has a name.
+Save a sample before leaving. In the garment hall, a cutting table can read its crossings and colours. The next choice will be where to cut: what belongs to a front, a back, a sleeve? The loom has not decided the body its work will meet.
 
-What could this classification tell you about a garment? What would it leave unasked about its cut, its wearer, or the way a seam interrupts the repeat? Carry the small mark forward. In the next hall, the question is what happens when the source gains another index and supplies a volume.
+In Temple, a decision can spread across an entire court. Bring the distinction between a choice and the record it leaves. Which parts of a place should keep agreeing when you change your mind?
+
+[The thread and the work: Plant, Mamma Mönster, weaving and knitting](textile-note.md).

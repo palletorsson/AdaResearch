@@ -10,7 +10,7 @@ The room greets you with twelve rows already made. Stay on the museum floor and 
 
 Before STEP, look at the three positions around that square. Which squares will appear in the next row? Press once. A short line arrives on the desk, another row of support appears ahead, and the screen receives a vertical strip. Make one more prediction before asking it to continue.
 
-The rule reads left, centre and right, as the board in the first hall did. Their ordered states select one of Rule 30's eight answers. Each answer enters a new row while the old row remains available to its other neighbours. The study keeps the new row and adds it to the record.
+The opening board's row has returned, using Rule 30. Its next answer becomes another part of the record. We have changed what can remain available to us after the calculation moves on.
 
 There are fifteen sites across and room for twenty-four rows. At the edges, left and right wrap. At the end of the record, this instrument stops adding rows. The first boundary belongs to the neighbourhood; the second belongs to our viewing budget.
 

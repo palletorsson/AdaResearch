@@ -1,64 +1,169 @@
-# Trans Body — approach, change, memory
+# Let your approach choose the size
 
-**Learning elements — proposed focus**
+## Learning elements
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+- The existing viewpoint as an input
+- World positions and horizontal separation
+- Mapping metres to a bounded fraction
+- Using that fraction to choose a scale
+- A reversible response without a stored path
 
-- Proximity mapping
-- Boolean conditions
-- Retained flags
-- Reversible response
+Approach the slat wall, then step back. It opens and returns. Farther on, blocks shrink around you and recover when you leave. Your position supplies the changing value.
 
-Watch each threshold before entering. Cross it, then look back. The sequence is rotation, deletion and scaling; the comparison is what the room restores and what it keeps.
+Keep the doorway and black sphere you made in Scale. This time the opening grows as you approach. Shrinking a block can make space between blocks; enlarging our frame makes space inside it. We carry the distance-to-size relation into the object we already have.
 
-## Slats turn
+## Bring the completed Scale files
 
-`approach_wall.gd` reads visitor coordinates in the wall's local space. Within its reach, the distance calculation includes:
+Copy `lesson.gd`, `box_body.gd` and `study.tscn` from Scale, edition 2026-10-16. Keep that folder as a checkpoint. [BoxBody and the complete incoming files](../../../doc/book/iterations/2026-10-16-scale-carried-frame/files.html#complete) remain available online.
 
+Keep `BoxBody`, `box()`, `apply_pose()`, the three doorway parts, their parent and the sphere. Leave `var factors := Vector3.ONE` in place: it supplies the starting size. We add an input and two functions; we do not rebuild the objects.
+
+Place this study on clear floor in the existing Endless Museum, under a host with unit scale and no tilt. Its origin is the threshold. Translation and a turn around Y are allowed. The museum supplies the room, light and active walking or XR camera, in the same viewport as the study. Start about five metres from the threshold. These lesson meshes remain visual: they have no collision, pickup or automatic passage test.
+
+Apply all three edits before running.
+
+## 1. Choose the reach
+
+In `lesson.gd`, insert these declarations immediately before `var factors := Vector3.ONE`. Keep that existing declaration:
+
+<!-- student-edit:approach-values -->
 ```gdscript
-var t: float = absf(cx - _vx[v]) / ap
-var d: float = absf(_vz[v]) / rc
-var o: float = (1.0 - t) * (1.0 - d)
-o = o * o * (3.0 - 2.0 * o)
+var near_distance := 1.0
+var far_distance := 4.0
+var largest := 4.0
 ```
 
-The complete function skips visitors outside the aperture or reach. The final line eases the response. A separate clearance rule opens enough neighbouring slats for the body. The default swing mode rotates the slats around their hinges. Move outside its reach and wait for the response to settle. Merely crossing the wall can leave you close enough to hold it open.
+The distances are metres from the threshold, measured across the floor. At the far limit the frame has its original size. At the near limit it reaches `largest` times that size. `largest` is a scale factor, not a distance.
 
-## Cells are removed
+Inside the existing `_ready()`, insert these two indented lines immediately before `add_child(pivot)`. Keep the rest of `_ready()`:
 
-`carve_grid.gd` tests the visitor's collision volume with a small added reach:
-
+<!-- student-edit:check-range -->
 ```gdscript
-cut += _bite_at(c, _v_r[i] + bite_m, _v_hs[i])
+    assert(far_distance > near_distance and near_distance >= 0.0)
+    assert(largest >= 1.0)
 ```
 
-Here `c` is the collision shape's centre in lattice coordinates, `_v_r[i]` its radius and `_v_hs[i]` its vertical half-segment. `bite_m = 0.16` extends the cut beyond the surface where collision stops the visitor. Removed cells leave both the visible lattice and the collision representation. `regrow_s = 0` keeps the cut while this room remains loaded. The current map also places `carve_grid#leak:keep`. On unload, `_leak_spill()` sends removed local cell centres to the `LeakData` autoload; on rebuilding, `_leak_restore()` reapplies the recorded cells that still match the lattice. The store is in memory, limited to 64 events and 2,048 points per event, and can be cleared. It does not save to disk. Returning during the same session can therefore meet an earlier cut, but this is not an unlimited or permanent record.
+The first assertion prevents a zero or reversed range; the second keeps this study an enlargement. Assertions expose a mistaken setting during development. They do not replace checking input in a released application.
 
-The default lattice has four vertical layers at 0.34 m spacing, with 0.29 m cubes. Its top is about 1.335 m above the base. A standing visitor can see above it: the cut is open-topped. The record is a discretised intersection with the visitor collider plus its bite margin, rather than a full cast of a person.
+## 2. Read the viewpoint, choose the factor
 
-Moving the visitor is translation; deleting lattice cells is a separate operation. Count the cells before and after a cut to see the difference.
+Insert these two complete functions immediately before `func box(...)`. Keep `box()` and `apply_pose()` unchanged:
 
-## Blocks shrink and return
-
-`approach_scale.gd` converts the nearest body's distance into a size factor:
-
+<!-- student-edit:read-and-respond -->
 ```gdscript
-var t: float = clampf(sqrt(_dist2[i]) / reach_m, 0.0, 1.0)
-t = t * t * (3.0 - 2.0 * t)
-return lerpf(min_scale, 1.0, t)
+func _process(_delta: float) -> void:
+    var visitor := get_viewport().get_camera_3d()
+    if visitor == null:
+        return
+    var separation := visitor.global_position - pivot.global_position
+    separation.y = 0.0
+    respond(separation.length())
+
+func respond(distance: float) -> void:
+    var fraction := clampf((distance - near_distance) / (far_distance - near_distance), 0.0, 1.0)
+    var factor := lerpf(largest, 1.0, fraction)
+    apply_pose(Vector3.ONE * factor)
+
 ```
 
-Near the body, the factor approaches `min_scale`; far away it approaches one. The artifact applies the same size to mesh and collision box. It also sets the block centre to half the new height, keeping the base on the floor. Horizontal grid locations remain fixed.
+`get_camera_3d()` returns the active camera for this viewport. The camera already exists; this line refers to it. We read it again each frame, so a replacement camera can take over. If there is none yet, `return` leaves the last pose alone. A camera arriving later starts the response.
 
-At the caption beyond the last row the last row can still be within the 2.2 m sensing reach. Continue into the exit area and wait: these blocks then return. The lattice's missing cells do not. This difference in memory is the room's final comparison. The next hall's growers also resize, but their input is elapsed time, not distance to a visitor.
+This choice measures your **viewpoint**, not your collision body. In XR it follows the tracked head; in desktop walking it follows the walking camera. A spectator camera would become the input instead. The installed exhibits identify bodies and handle collision; that wider machinery is not required to learn this relation.
 
-The encounter recognises supported player collision bodies. A 52 cm-wide test capsule is one model, not a universal body. Player size, controller motion, collision proxies and response time all affect what passage is possible.
+Both positions are world positions. Their difference works even when the study and camera have different parents. Setting Y to zero projects the separation onto the horizontal plane. Moving the head straight up or down therefore leaves the factor unchanged. Leaning sideways can change it. `length()` then gives the distance in metres.
+
+Subtract the near distance, divide by the range, then clamp to zero through one. The table makes that conversion visible:
+
+| Horizontal distance | Bounded fraction | Scale factor | Clear opening: width × height |
+|---|---|---|---|
+| 4 m or farther | 1 | 1 | 0.45 × 0.60 m |
+| 2.5 m | 0.5 | 2.5 | 1.125 × 1.50 m |
+| 1 m or nearer | 0 | 4 | 1.80 × 2.40 m |
+
+`lerpf(largest, 1.0, fraction)` chooses between the two factors. It is the same interpolation operation used for a route, now applied to size. Clamping matters: walking inside the near limit must not keep enlarging the frame, and walking beyond the far limit must not make it disappear or invert.
+
+The existing `apply_pose(Vector3)` scales the parent. Its children keep their local data, the posts stay on the floor and the sphere stays outside the change. No new mesh is created during `_process()`.
+
+## Approach, pause, return
+
+Walk closer, stop, then walk away. At the same distance the frame has the same size. `_delta` is unused because we calculate a pose from the current position; we are not adding motion over time. Waiting does not accumulate more scale.
+
+The response uses a distance around the threshold, so it also works from the sides and behind. It does not know which way you face. Compare that choice with the slat wall's directional response. Compare its return with the retained cut in the lattice: leaving our study restores a size; leaving the lattice does not restore its missing cells.
+
+## Change one decision
+
+Set `var far_distance := 6.0`. Predict where the change starts and where it reaches half its range. The answers are six metres and 3.5 metres; the midpoint factor is still 2.5. The near limit stays at one metre.
+
+Return to four metres. In `respond()`, replace `apply_pose(Vector3.ONE * factor)` with `apply_pose(Vector3(factor, 1.0, 1.0))`. The near opening becomes 1.80 metres wide but remains 0.60 metres high. Explain why getting closer still cannot make it tall enough for the fixed sphere.
+
+Restore the uniform call. Replace `var factor := lerpf(largest, 1.0, fraction)` with `var factor := lerpf(1.0, largest, fraction)`. Now approaching makes the opening smaller. The distance measurement is unchanged; reversing the output endpoints reverses its invitation. All three exercise versions have complete files online.
+
+Choose another far limit and predict its midpoint before running. Can you explain separately what sets the reach, what sets the largest size, and which objects receive the change?
+
+Carry the frame, constructor and distance-to-factor relation into the next hall. There we will combine operations and add a controlled transition over time. Our immediate visual response is one selected principle of this hall, not a reconstruction of all three installed thresholds.
+
+[Complete files, edition 2026-10-17](../../../doc/book/iterations/2026-10-17-body-carried-opening/files.html#complete) · [Download files and variants](../../../doc/book/iterations/2026-10-17-body-carried-opening/body-studies.zip)
+
+[Godot 4.6: active viewport camera](https://docs.godotengine.org/en/4.6/classes/class_viewport.html#class-viewport-method-get-camera-3d) · [Scalar interpolation](https://docs.godotengine.org/en/4.6/classes/class_@globalscope.html#class-globalscope-method-lerpf)
+
+<details class="full-program">
+<summary>Complete lesson.gd — online reference</summary>
+
+<!-- student-code:lesson.gd -->
+```gdscript
+extends Node3D
+const BoxBody = preload("box_body.gd")
+
+var pivot := Node3D.new()
+var point := MeshInstance3D.new()
+var near_distance := 1.0
+var far_distance := 4.0
+var largest := 4.0
+var factors := Vector3.ONE
+
+func _ready() -> void:
+    assert(far_distance > near_distance and near_distance >= 0.0)
+    assert(largest >= 1.0)
+    add_child(pivot)
+    for at in [Vector3(-0.285, 0.3, 0), Vector3(0.285, 0.3, 0)]:
+        var post := box(Vector3(0.12, 0.6, 0.2), at)
+        post.reparent(pivot, false)
+    var lintel := box(Vector3(0.69, 0.12, 0.2), Vector3(0, 0.66, 0))
+    lintel.reparent(pivot, false)
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.325
+    sphere.height = 0.65
+    point.mesh = sphere
+    add_child(point)
+    point.position = Vector3(1.8, 0.325, 0)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    point.material_override = ink
+    apply_pose(factors)
+
+func _process(_delta: float) -> void:
+    var visitor := get_viewport().get_camera_3d()
+    if visitor == null:
+        return
+    var separation := visitor.global_position - pivot.global_position
+    separation.y = 0.0
+    respond(separation.length())
+
+func respond(distance: float) -> void:
+    var fraction := clampf((distance - near_distance) / (far_distance - near_distance), 0.0, 1.0)
+    var factor := lerpf(largest, 1.0, fraction)
+    apply_pose(Vector3.ONE * factor)
+
+func box(size: Vector3, at: Vector3) -> MeshInstance3D:
+    var body := BoxBody.new(size)
+    body.position = at
+    add_child(body)
+    return body
 
 
-## Current museum illustration and seating repair — 23 September
+func apply_pose(value: Vector3) -> void:
+    assert(value.x > 0.0 and value.y > 0.0 and value.z > 0.0)
+    pivot.scale = value
+```
 
-The book's before/after lattice figure uses a fixed elevated camera in the actual isolated museum. Its normal Walker, with a 0.64 m wide and 1.5 m high capsule, was driven through the lattice by physics-tick movement; no cells were removed directly by the capture script. This selected straight walk removed 132 of 484 cells. The cut remains after the body is moved away. These are supplied inputs, not a human or headset observation.
-
-That pass exposed a construction defect in `approach_scale`: the initial AnimatableBody3D pose was centred at y=0 before the node entered the scene tree. Physics synchronization restored that pose after the initial size assignment, and automatic grounding compensated by raising the artifact root 0.575 m. Blocks then rose above the floor on their first size response. Each block is now given its standing centre height before it enters the tree. Mesh and collider bases stay on the deck at full, reduced and restored sizes. No map token, dimensions, sensing reach or size law changed.
-
-`tools/probes/body_book_illustrations.gd` records selected continuous walks through each of the three thresholds, with the body placed at each separate approach. The slats and blocks return after leaving reach; the lattice keeps its removed cells. `tools/probes/body_block_seating.gd` is the small diagnostic used to isolate the old height drift. [Images, exact changes and full evidence](../../../doc/book/iterations/2026-09-23-body-what-remains/index.html).
+</details>

@@ -10,7 +10,7 @@ At the next row, the hand follows the same path twice as quickly. The third doub
 
 Small transparent circles gather behind the moving bead. Where they overlap, the wall darkens. We withdraw our hand. Its visible position follows our own movement again; the bead returns alone to its centre. The marks stay. Movement has left something we can examine without continuing to move.
 
-The wall records twelve positions within each step. A faster bead draws sooner; after the same number of steps, the first four rows hold the same pattern. The fifth spreads its marks above and below the rod. The targets were selected uniformly, giving equal chances to equal intervals. The marks also include the journey between targets. Their darkness records those choices together; a dense centre alone would not tell us how the targets were selected.
+The wall records twelve positions within each step. A faster bead draws sooner; after the same number of steps, the first four rows hold the same pattern. The fifth spreads its marks above and below the rod. The targets were selected uniformly, giving equal chances to equal intervals. The marks also include the journey between targets. A crowded middle can suggest a Gaussian distribution: a bell-shaped spread with most values near the average. Here, a central mark may record a crossing rather than a destination. The resemblance does not establish a Gaussian source.
 
 The positions are kept in the program. We press REPLAY: the paper clears. We touch the first bead again. The turns return in the same order, and the marks gather again. The next movement can still be unfamiliar, even though the whole sequence has been kept.
 
@@ -22,7 +22,7 @@ Our touch has acquired another consequence. At the bead, we began a movement tha
 
 RAND's *A Million Random Digits*, published in 1955, made a supply of numbers available for calculations using random selections. Producing that supply required testing and correction: its electronic source introduced biases, systematic departures from the intended even distribution. The published table preserved the results after further processing. Random numbers could be returned to at a numbered page. [RAND's production account](https://www.rand.org/pubs/monograph_reports/MR1418.html).
 
-This falling page uses its own generated digits. We have selected a group that was already there. What we have changed is how long those digits stay in view. The rows move on around them. We read the five digits again.
+This falling page uses generated digits. The same sequence takes different forms: colour in the window, five digits on the page. We have selected a group that was already there. What we have changed is how long those digits stay in view. The rows move on around them. We read the five digits again.
 
 <!-- @geiger_counter -->
 
@@ -40,26 +40,28 @@ The visible hand's curve may appear random while following stored positions. The
 
 <!-- @seed_replay_demo/movement_sampler -->
 
-At MOVE / KEEP, a small dark sphere waits beneath six coloured traces. We pick it up, carry it and turn it. The traces show changes in position and rotation. After a sufficient recording, we release it and a seed appears, a whole number between zero and 999.
+A small dark sphere waits beneath six coloured traces. We pick it up, carry it and turn it. The traces show changes in position and rotation. After a sufficient recording, we release it and a seed appears, a whole number between zero and 999.
 
-The instrument records where and how the point was held, with times. It rounds those measurements, hashes them—a fixed calculation producing a compact code—and reduces the code to one of a thousand possible seeds. This recording was made during our visit. Its derived seed becomes the hall’s new beginning. The window changes; the Geiger starts another sequence of gaps. Their subsequent values are still pseudorandom. Keeping the recording allows its seed to be derived again. The gesture supplies an input, without establishing a source of true randomness.
+The recording keeps positions, turns and times. A fixed calculation condenses those measurements into the displayed number.[^gesture] The window changes; the Geiger begins another sequence of gaps. Keeping the recording lets us derive that seed again. The movement supplies a new input; the numbers that follow are still pseudorandom.
 
-Two different gestures can therefore arrive at the same seed. We have not yet found and kept such a pair in this experiment. We could retain both recordings, compare their paths, then send their matching seeds to the colour window. With the same generator, request order and colour assignment, its pictures should agree. The gestures can remain different to us while that procedure treats them alike.
+There are only a thousand possible seeds here. Two different gestures can become the same number. We have not yet kept such a pair. Their traces could remain different while the window, given the same seed and settings, repeats its colours.
 
 The first spheres gave numbers a movement. Here movement gives a number back. What could that number be allowed to do next?
 
 <!-- @random_return -->
 
-The larger dark sphere offers a journey. We hold it and travel with it; on release, it finishes alone. Direction and distance vary, but the sphere returns. The destination of this return was decided before the excursion began.
+The larger dark sphere is already travelling out from the centre and back. We hold it and travel with it. At the entrance, the bead moved the visible hand; here the floor passes beneath us.
 
-Chance has room to move someone, within a journey whose ending was decided for it. A different seed can offer another excursion. It cannot abolish the obligation to come back.
+Direction and distance can change between excursions. The centre stays where it was.
 
-At the entrance, touch set the visible hand moving along selected axes. Here the whole body travels, and encounters another boundary, written into the journey rather than drawn around it. Changing that relation would require a new rule. What part of this experience would we keep—and what would we rebuild so that it could have another consequence?
+We release it. The sphere continues without us.
 
-Here, randomness is domesticated.
+It returns to the centre.
 
 <!-- @ -->
 
 [^arrival]: The saved [opening receipt](../../../algorithms/randomness/seed_replay/opening_seed.json) records the value, provider, range and acquisition time. Each random-generating instrument in Random Definition starts a private stream from the shared hall seed. A manual choice, restored record or completed gesture recording can change it. The [435 revision](../../../doc/book/iterations/2026-10-15-seed-435-middle/README.md) records implementation and verification. The frame trace measures timing without reseeding the hall.
 
 [^entropy]: Offline does not mean isolated from physical inputs: local hardware can supply entropy, as described in the [Linux hardware-RNG documentation](https://docs.kernel.org/admin-guide/hw_random.html). [NIST's entropy-source guidance](https://csrc.nist.gov/pubs/sp/800/90/b/final) distinguishes entropy sources from deterministic generators. The claim here concerns fixed-state computation, not the impossibility of physical randomness in a computer.
+
+[^gesture]: The sampler stores timed positions and orientations at finite precision. It hashes the stored measurements, using a fixed calculation to produce a compact code, then reduces that code to an integer from 0 to 999. The record retains the measurements as well as the derived seed; the seed alone does not reconstruct the gesture. Desktop mode samples the carried point; VR mode samples the tracked controller. The six traces show changes between accepted samples, not the complete motion. See the [tutorial](tutorial.md) for recording, replay and reconstruction.

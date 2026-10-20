@@ -2,18 +2,24 @@
 
 <!-- @radiolaria -->
 
-The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin.[^haeckel] Let that recognition arrive, then keep it beside the question of how these objects were made. There are six of them, and the program builds each from a different recipe: a plain body, a spiked one, a polyhedron, a lattice sphere, a ringed form and a pollen grain. Walk the row and say which you would call alive first, before you know how any of them was made.
+Something bristles. A pale body seems delicate; another looks as though it might catch on your skin. The forms invite recognition before explanation. Their rings and spines recall the visual repertoire of Haeckel's plates, although this program builds its own specimens from geometric recipes.[^haeckel]
 
-Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
+Walk between them before touching the controls. There are nine specimens drawn from six families. Repetition can make them look related. It does not mean that one descended from another, or that any of them developed by growing.
 
-The program constructs those families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. A spike is a cone between twenty centimetres and a metre and a half long, placed wherever a draw beats a probability of seven in ten; the lattice is an icosahedron half a metre across, subdivided as often as the detail number allows. Press SPIKES and the probability moves; press SEED and the same draws come back in the same order. These names describe decisions available to the generator. They are not measured properties of a living radiolarian, and that is the whole of the biology here: a list of numbers and a random number generator you can pin.
+Stop ROTATION. The bodies hold their orientations. Turn EFFECTS off and let the particles clear. What remains of the impression that something was happening here? A body need not move to draw a response from you. A static spike may be enough to change how closely you want to approach.
 
-We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
+Bring your hand to one. The form does not yield or resist; its visible skin has no contact surface. Earlier, the jelly moved away from your hand. Here your hand passes through. What you expected to feel and what the program supplies come apart.
 
-The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
+Place the surface you kept in the previous hall beside this encounter. Give it a second copy with the same saved positions. Let one turn, then change its colour with the turn removed. We have given it a different presence without changing the record from which it was made. Does knowing this settle what it feels like to stand beside it?
 
-Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. Put a hand to a spike. Nothing yields and nothing stops you, because nothing here is simulated: the spike is a drawing, and a drawing and a physics can disagree without anyone being told. The jelly cube pushed back; this does not even notice. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.
+The fixed seed makes a construction available again. It lets us ask which difference belongs to a palette and which to another draw. But a repeatable recipe cannot repeat the visitor's response. You bring other encounters with shells, ornaments, infections, toys, bodies you wanted to touch and bodies you were warned against.
+
+A feeling can be real without confirming the explanation that arrived with it. The form has affected you; that does not tell us that it feels. Nor does learning its construction require you to stop caring about it. We can remain attached while becoming more exact about what we have encountered.
+
+This matters when resemblance begins to decide which bodies deserve attention. Familiar signs can make recognition easy; they can also make an unfamiliar body harder to meet. The generator offers a repertoire. We can change that repertoire, and we can notice where our willingness to attend has already narrowed it.
+
+The copied surface can remain after its source has stopped. In the next room, a pattern may need continuing exchanges to persist. What must keep happening for a form to stay recognisable? Carry that question beside the one this room leaves us: what have we learned to see in it?
 
 <!-- @ -->
 
-[^haeckel]: Ernst Haeckel, *Kunstformen der Natur* (1899–1904), the Radiolaria plates. This generator’s families echo the geometric vocabulary of those drawings: a drawn vocabulary, not a measured organism. No parameter here is a property of a living radiolarian.
+[^haeckel]: Ernst Haeckel, *Kunstformen der Natur*, [plate 1, Radiolaria](https://www-archiv.fdm.uni-hamburg.de/b-online/haeckel/Tafel_001.html), reproduced by the University of Hamburg. The project's generator identifies Haeckel's illustrations as an inspiration. The resemblance discussed here concerns a visual vocabulary; these specimens are not biological reconstructions.

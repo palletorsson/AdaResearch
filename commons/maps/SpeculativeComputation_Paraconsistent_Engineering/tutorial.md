@@ -1,41 +1,119 @@
-# What disappears when a disagreement is declared resolved?
+# Keep the two accounts
 
-**Learning elements — proposed focus**
+**Learning elements**
 
-*The labels below set the revision focus; the existing lesson still needs alignment.*
+- Source-tagged records
+- Selection versus deletion
+- Four-valued support reused
 
-- Source tagged reports
-- Decision records
-- Revisable resolutions
+At the existing conflict sculpture, try OVERLAP and RESOLVED. Its shorter branch makes a selection visible. Our working copy keeps both source records even when one column is shortened. The carried sphere can choose A or B; BOTH restores the two visible heights. The displayed selection never deletes the rejected account.
 
-Different positions can produce different requirements. Preserving the requirements is the first step towards inspecting their conflict.
+Bring `reports.gd` from Florensky. Its pair records support for and against a proposition separately. `claims.gd` now gives each report a subject, predicate, value, source and evidence description. The toy reports refer to the same door at the same time. Only matching subjects and predicates contribute to a support pair. Different predicates or different times must not accidentally become a contradiction.
 
-<!-- @merge_conflict_visualizer -->
+Choosing A or B is a presentation decision stored in `selected`. `support` reads the retained records, so the pair remains BOTH after either selection. Q still has no support. This reuses the earlier formal distinction without pretending the museum sculpture executes a proof system. A source label is provenance; an evidence string is not automatically good evidence.
 
-Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
+## Continue the student folder
 
-JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
+Keep the files from **Arrange the same seats** in the same student folder. Add the complete files below; their relative preloads use that carried folder. The sphere, cylinder renderer, bench and pickup adapter are reused without being explained or rebuilt again.
 
-The source makes the operation inspectable:
+The supplied [`conflict.tscn`](../../../doc/book/studies/postcrisis-lineage/conflict.tscn) opens this actual hall and mounts your working copy beside its existing exhibits. It supplies the museum player, lighting and room. In [`conflict_museum.gd`](../../../doc/book/studies/postcrisis-lineage/conflict_museum.gd), set the `LESSON` preload to your `conflict_study.gd` if you used another folder, then run the scene with F6. Grip the point in VR; on desktop use the existing right-click carry/release interaction. Buttons are the museum's supplied `push_button.tscn`.
 
+## Complete new code
+
+### `claims.gd`
+
+<!-- student-code:claims.gd -->
 ```gdscript
-func _build_resolved() -> void:
-    _build_pillar(branch_a_color, Vector3(0, 0, 0),
-        Vector3(0.2, pillar_height, 0.2), "branch A", 0.0, false)
-    _build_pillar(branch_b_color, Vector3(BASE_X, 0, 0),
-        Vector3(0.2, RESOLVED_STUMP_H, 0.2), "branch B", 0.0, true)
+extends RefCounted
+const Reports = preload("reports.gd")
+var records: Array[Dictionary] = []
+var selected := -1
+
+func add(subject: String, predicate: String, value: bool, source: String, evidence: String) -> void:
+    records.append({"subject":subject,"predicate":predicate,"value":value,
+        "source":source,"evidence":evidence})
+
+func resolve(index: int) -> bool:
+    if index < -1 or index >= records.size(): return false
+    selected = index
+    return true
+
+func support(subject: String, predicate: String) -> Vector2i:
+    var pair := Vector2i.ZERO
+    for record in records:
+        if record.subject == subject and record.predicate == predicate:
+            if record.value: pair.x = 1
+            else: pair.y = 1
+    return pair
+
+func description(subject: String, predicate: String) -> String:
+    return Reports.new().describe(support(subject,predicate))
 ```
 
-The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
+### `conflict_study.gd`
 
-[Implementation](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.gd). This is an excerpt from the artifact, not a standalone program.
+<!-- student-code:conflict_study.gd -->
+```gdscript
+extends "study_base.gd"
+const Claims = preload("claims.gd")
+var model := Claims.new()
 
-Two stored reports need not be a contradiction: they might concern different doors or different times. Preserving sources helps investigate that difference. It does not by itself change the rules of inference. The paraconsistent question is narrower: when both P and not-P are admitted, can unrelated conclusions still be refused? The sculpture makes room for that question but cannot answer it through overlapping meshes. Its unresolved glow should invite investigation rather than make conflict desirable in every case.
+func _ready() -> void:
+    model.add("door-1@12:00","open",true,"A","report A")
+    model.add("door-1@12:00","open",false,"B","report B")
+    start("KEEP THE DISAGREEMENT",["BOTH","CHOOSE A","CHOOSE B"],[choose.bind(-1),choose.bind(0),choose.bind(1)])
+    refresh()
 
-<!-- @ -->
+func choose(index: int) -> void:
+    if point.held(): return
+    model.resolve(index)
+    refresh()
 
-To investigate disagreement we need to know where each claim came from.
+func release(at: Vector3) -> void: choose(0 if at.x<0 else 1)
 
-## Next experiment — not yet a visitor control
+func refresh() -> void:
+    clear_drawing()
+    for i in 2:
+        var height := .52 if model.selected in [-1,i] else .1
+        block(drawing,Vector3(-.55+i*1.1,1+height*.5,0),Vector3(.18,height,.18),Color("a8bec7"))
+        label(drawing,model.records[i].source,Vector3(-.55+i*1.1,1.65,0))
+    point_home = Vector3(0 if model.selected<0 else (-.55+model.selected*1.1),1.14,.55)
+    readout.text = "%s / selected %s
+Two sourced records remain; Q has %s" % [model.description("door-1@12:00","open"),str(model.selected),model.description("door-1@12:00","Q")]
+```
 
-Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.
+### `assert_conflict.gd`
+
+<!-- student-code:assert_conflict.gd -->
+```gdscript
+extends "assertions.gd"
+const Claims = preload("claims.gd")
+func run() -> void:
+    var model := Claims.new()
+    model.add("door@12","open",true,"A","observation A")
+    model.add("door@12","open",false,"B","observation B")
+    var before := model.records.duplicate(true)
+    expect("opposed reports both supported",model.support("door@12","open")==Vector2i(1,1))
+    expect("selection succeeds",model.resolve(0))
+    expect("selection does not erase evidence",model.records==before)
+    expect("selection does not resolve support",model.support("door@12","open")==Vector2i(1,1))
+    expect("unrelated Q gains no support",model.support("door@12","Q")==Vector2i.ZERO)
+    model.add("door@13","open",true,"C","later time")
+    expect("different time stays separate",model.support("door@13","open")==Vector2i(1,0))
+    expect("bad selection refused",not model.resolve(9) and model.selected==0)
+    expect("reopen retains records",model.resolve(-1) and model.records.size()==3)
+```
+
+## Predict, run, change one thing
+
+Choose A: both original records must remain, the support pair must remain (1,1), and Q must remain (0,0). Add a report about another time: it must not affect this subject. Then reopen the comparison without constructing replacement reports.
+
+The assertion file above runs against your model files. From the project directory, use your Godot executable with:
+
+```text
+Godot --headless --path . --xr-mode off --audio-driver Dummy --script res://doc/book/studies/postcrisis-lineage/check.gd -- res://doc/book/studies/postcrisis-lineage/assert_conflict.gd --no-bridges
+```
+
+Adjust the two script paths if your student folder differs. A failed assertion is a failed lesson check; `PASS` must be printed and the process must exit successfully. This headless check does not establish headset readability. Also exercise the visible controls in the supplied museum launcher.
+
+Carry onward: **A claim has an address** will reuse these operations.

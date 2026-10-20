@@ -11,7 +11,7 @@
 
 In Lines, you could carry an endpoint around a detour and return it. The segment returned too; nothing kept the journey. Now let the point leave a trace.
 
-The Trace hall offers pens and a ball whose movement leaves a line. Our small program follows the centre of the same pickable point we have already built. We will keep its positions in an array and reuse the line between each neighbouring pair.
+The Trace hall begins with pens meeting a transparent glass surface. Farther on, held beads leave spatial traces, followed by a ball released down a ramp. Our small program follows the centre of the same pickable point we have already built. We will keep its positions in an array and reuse the line between each neighbouring pair.
 
 ## Continue the point
 
@@ -214,3 +214,11 @@ Carry that saved drawing into Grid. Its position data can be read again; its exi
 
 
 [Current trace.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Trace/trace.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
+
+## Compare with the installed encounter
+
+The glass pen records contact on a plane. The spatial bead records its centre while held; it does not snap to the nearby glass. Make a loop, pause, move out of its plane, and release. Inspect which positions were kept and which segments were inferred between them. Repeat at a coarser spacing, then use the sampling monitor to compare several spacings applied to the same retained gesture.
+
+The museum's beads publish to the in-memory `TraceData` archive when released. Grid reads that copy during the same running session. This lesson's `TraceArchive` is a separate, deliberately small implementation: it saves `user://ada_student_trace.scn` and can reload it after a restart. Do not assume that the museum's glass image or ball path is included in either transfer.
+
+For independent reconstruction, build the lesson's point, position list and adjacent segments first. Verify that a stationary pause adds no segment and that a saved trace reloads with the same positions. Only then add a grid spacing or a surface-contact condition. Each should change one recording rule that can be observed.

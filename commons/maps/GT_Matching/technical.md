@@ -1,92 +1,31 @@
-# GT Matching — Technical
+# Matching — implementation and verification
 
-A matching is a subset of edges in which every vertex is incident to at most one edge. A perfect matching covers every vertex. A maximum matching is one with the most possible edges.
+Graph Theory hall8/8. Existing Endless Museum and XRTools are supplied. One reconstruction: two makers and two tools. A new four-role model is explicitly declared; the harbour's seven IDs are not silently repurposed. PointBody, Route and Traversal are carried byte-identically from Flow. The full model, full procedural host and all three dependencies are printed in tutorial.md. final.md carries reflection on revision, omitted costs and kinds of relation.
 
-Bipartite matching is the easier case. The Hungarian algorithm solves the weighted bipartite matching problem in O(V³) using augmenting paths in a residual graph derived from the bipartite structure. The unweighted case — maximum bipartite matching — reduces to max-flow by adding a source connected to one side and a sink connected to the other, and can be solved in O(V·E) with Hopcroft-Karp.
+People[0,1], tools[2,3], links[[0,2],[0,3],[1,2]]. Each selected pair is stored symmetrically in mate; -1 means free. Listed greedy takes0–2, a valid maximal matching of1. Search directs unused edges left-to-right and selected edges right-to-left. Reused BFS finds[1,2,0,3]; augmentation removes2–0 then adds1–2 and0–3. Count2 reaches the upper bound of two available people/tools. Another search finds no path. Reversed greedy finds2 directly. The operation is unweighted bipartite maximum cardinality, not preference or fairness, and not general odd-cycle blossom.
 
-```gdscript
-# Hopcroft-Karp bipartite matching
-func bipartite_matching(left, right, edges_lr) -> Dictionary:
-    var matching := {}  # right_vertex -> left_vertex
-    var improved := true
-    while improved:
-        improved = false
-        var layers := bfs_layers(matching, left, right, edges_lr)
-        if layers.is_empty(): break
-        for u in left:
-            if not matching.values().has(u):
-                if dfs_augment(u, layers, matching, edges_lr):
-                    improved = true
-    return matching
-```
+Input contract: consecutive disjoint IDs, all people first, then tools; permitted links always person-to-tool. The model assumes valid input; it does not validate arbitrary datasets. Search tries free start/end pairs in declared order; no claim of globally shortest augmenting path. Independent transfer replaces0–3 with1–3: listed greedy2; reversed greedy1 then augmentation[0,2,1,3] gives2. Fixed four-role host does not grow automatically with larger data.
 
-General matching (matching in arbitrary graphs) is harder because of odd cycles. Edmonds' blossom algorithm handles this by contracting odd-length augmenting cycles into single pseudo-nodes (blossoms), finding augmenting paths through the contracted graph, and expanding the contractions back out once the matching is extended. The algorithm runs in O(V³) in the classical formulation; Micali-Vazirani improves this to O(V·√E).
+Permanent matching_workshop.tscn references the actual learner study.gd. It builds figures, recognisable drill/saw, table, thin cylinder relations, labels and nearby controls. NEXT/1: greedy then augmentation; ORDER/O: reverse scan and reset; RESET/R: clear after release. Same black PointBody is a handle above makerA. Transformed-host hand position becomes localXZ; drawn height stays1. Release retains point identity and figure attachment. Trigger calls NEXT. Pair-count history[0,1,2] is not a complete state recording. Pink elevated rod shows cancelled pairing; gold rods are chosen links. A backing board separates the caption from the atlas behind it.
 
-The blossom contraction is the algorithm's distinctive move. When a BFS for augmenting paths discovers an odd cycle, the cycle is contracted into a super-vertex, the search continues from the super-vertex, and any augmenting path found through the super-vertex is expanded by lifting it back through the contraction when the matching is updated.
+31 exact-source Godot checks pass. Five scripts extracted from Markdown, hashed and executed, with rendered parity checked during publication. All1056 two-by-two and three-by-three graph/order combinations agree with independent exhaustive enumeration of disjoint edge subsets; validity and +1 growth checked at each augmentation. Actual keyboard/pointer and synthetic XRTools; transfer; three executed faulty variants: missing reverse search edge, allowing occupied endpoints, flipping wrong parity. The occupied-endpoint fault uses the two-link prefix because later overwrites in the three-link example accidentally repair its final state. An initial atlas parse failed on the built-in wrap name and inferred Color type; fixed before passing run.
 
-The map's two symmetric halves stage the bipartite case visually. Each side holds a set of vertices; edges run between the sides; the Hungarian algorithm finds the maximum matching and draws it as a set of thick edges. A toggle switches to general-graph mode, where odd cycles become possible and the blossom algorithm takes over.
+39 native museum checks pass. Existing greedy artifact uses ten vertices, five-cycle plus five spokes. Actual named STEP/ORDER controls yield3 versus5 pairs. No production algorithm changes. The first native probe addressed children by index and reached a label/backing instead of the button; rejected receipt/log preserved, then changed to named actual controls. Workshop controls, atlas five views/hall detail, exact printed reconstruction, synthetic pickup/trigger/release and39 completed checks verified. Images include baseline/after eye-level and above, both pairing states, greedy3/5 and all atlas views.
 
-Within the sequence, Matching is the capstone. It closes Graph Theory and the whole spine. The map argues that fair, exclusive, complete allocation is a graph problem, and the algorithms the sequence has built are enough to solve it.
+Map15x17 floor/walls/doorways/utilities retained. Permanent workshop cell(3,5),yaw180,height0,scale1; atlas(3,12),yaw180,height0,scale1. Existing greedy display(11,11),yaw0,height1.2,scale.42. All plinth0,pin1. Central29 supported clear capsule samples and exhibit/learner approaches pass. Temporary printed learner map-local(10,0,5),yaw180 (isolated hall-root(10,0,9)); it is not a second permanent installation. Selected layout rows, long_museum, execution-plan row and three wall-text rows aligned; other rows, draft decision and baseline preserved. Actual atlas sources are hashed after lesson-plan update.
 
-## König's Theorem
+Atlas snapshot:25 sequences,206 halls. 413 aggregate typed relation groups:24 walk,138 dependency,54 concept return,197 shared placement. The native table distinguishes global sequence and selected hall scale. Dependency/concept within-sequence groups are expanded at hall scale; shared placements are cross-sequence groups and direct visitors to ALL. Global self-groups are counted, not drawn as misleading tiny loops. Dates are eight selected review folders3–10October, not first-invention/completion claims. Eleven references outside current spine are explicitly listed, not invented as current halls. No inferred semantic similarity or live-object sharing. See ATLAS.md and atlas.html.
 
-For bipartite graphs, the maximum matching size equals the minimum vertex cover size — a set of vertices that covers every edge. This is König's theorem, and it has a constructive proof: given a maximum matching, a minimum vertex cover can be computed in linear time by following alternating paths from unmatched vertices.
+Read-only source generator: python tools/build_ada_relations.py. It reads current ordered spine,25 sequence files,206 map placements and execution-plan declarations; data.json is a saved snapshot, not an automatically live model. Test verifies source hashes and every relation's declared provenance. Edit authoritative sources then regenerate/retest/republish. The data contain more than one relation between some sequence pairs; each type stays separate.
 
-## Weighted Matching
+During publication, a concurrent Symmetry_Seventeen edit changed its plan summary, notes and baseline. Those changes were preserved. The source ledger was regenerated; nodes, edges, omissions, dates and all other snapshot fields were asserted identical, with only source_hashes changed. Code/source checks were rerun. Native images still represent the same relationship data. The saved atlas-before-source-refresh.json makes that distinction inspectable.
 
-The Hungarian algorithm solves the weighted bipartite matching problem: find the matching that maximises total edge weight (or minimises total cost). It runs in O(V³) and is the standard algorithm for job-assignment problems where workers have different costs for different tasks.
+The book-review route blocks scripts by design. atlas.html is a static reading/capture page; explorer.html is the portable interactive file, also published to the existing encyclopedia public/research/ada-relations/index.html. Server security headers are unchanged. Browser controls were exercised for all five relation types and graph-hall detail; the dependency view shows8 halls and13 declared relations. Source evidence expands in the ledger. The new public file is generated by this publisher.
 
-```gdscript
-# Hungarian algorithm — simplified kernel
-func hungarian(cost: Array) -> Array:
-    var n := cost.size()
-    var u := []; var v := []
-    u.resize(n + 1); v.resize(n + 1)
-    var p := []; var way := []
-    p.resize(n + 1); way.resize(n + 1)
-    for i in range(1, n + 1):
-        p[0] = i
-        var j0 := 0
-        var minv := []; var used := []
-        minv.resize(n + 1); used.resize(n + 1)
-        for k in range(n + 1):
-            minv[k] = INF; used[k] = false
-        while p[j0] != 0:
-            used[j0] = true
-            var i0: int = p[j0]
-            var delta := INF
-            var j1 := 0
-            for j in range(1, n + 1):
-                if not used[j]:
-                    var cur = cost[i0 - 1][j - 1] - u[i0] - v[j]
-                    if cur < minv[j]:
-                        minv[j] = cur
-                        way[j] = j0
-                    if minv[j] < delta:
-                        delta = minv[j]
-                        j1 = j
-            for j in range(n + 1):
-                if used[j]:
-                    u[p[j]] += delta
-                    v[j] -= delta
-                else:
-                    minv[j] -= delta
-            j0 = j1
-        while j0 != 0:
-            var j1 = way[j0]
-            p[j0] = p[j1]
-            j0 = j1
-    var ans := []
-    ans.resize(n)
-    for j in range(1, n + 1):
-        ans[p[j] - 1] = j - 1
-    return ans
-```
+Replay code: python tools/test_graph_matching.py
 
-## Applications
+Replay native: python tools/run_encounter_probe.py GT_Matching --sequence graphtheory --render --no-bridges --output-tag matching-final --probe tools/probes/graph_matching_room.gd
 
-Kidney donation matching uses general-graph matching because donor-recipient compatibility forms arbitrary graphs. Organ exchange programmes solve maximum matching subject to compatibility constraints, sometimes with additional constraints on cycle length.
+Publish: python tools/publish_graph_matching.py
 
-Stable marriage (the Gale-Shapley algorithm) is a different kind of matching problem — one where preferences are two-sided rather than weights being symmetric. It runs in O(V²) and always produces a stable matching, though the stability comes at the cost of not being the maximum-weight matching.
-
-Within the sequence, Matching closes Graph Theory and the entire spine. The curriculum's closing argument is that allocation problems are graph problems, and the algorithms the sequence has built are enough to solve them.
+Author-operated ghost reconstruction and native render evidence. No physical-headset, Quest performance, independent blind-reader or continuous portal-traversal claim. Existing engine Jolt/UID warnings remain; no final script/parse errors. Next sequence: Foundations Crisis.

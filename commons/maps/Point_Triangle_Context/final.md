@@ -68,7 +68,13 @@ Nearby, the quad adds two triangular faces along a diagonal. Lift a corner away 
 
 Twenty-four faces in a strip, pleated like paper, and every fold is where two triangles meet at an angle. Fold it further. Nothing tears, because nothing here was ever one surface. It was always this many, and the folds were only hidden while they were flat.
 
-Next, faces meet at a corner. What must we add to enclose a volume?
+<!-- @triangle_assembly_table -->
+
+At the last table, twelve small triangular pieces lie flat in two rows. We can lift a face, turn it, and leave it beside another. These pieces stay where released. A pyramid can be assembled without pretending that its loose faces would stand there under gravity.
+
+An edge can be shared by two faces without both remaining flat. Leaving one side open gives a view into what the assembly is beginning to enclose. Another arrangement may remain a canopy or a broken surface. There is no required final shape on this table.
+
+Next, a completed solid will fall. What changes when this arrangement acquires a physical body?
 
 [^point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.
 [^point-triangle-triangulation]: One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.

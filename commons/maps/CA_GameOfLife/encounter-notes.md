@@ -21,3 +21,14 @@ All five authored artifacts and their placements remain. The actual native museu
 ## Writing decision
 
 Keep the mature chapter. Add the walk and its reversal as an encounter with a retained past, followed by the distinction between a marker crossing a gap and a foot needing support. Preserve both code excerpts, all original arguments and the secondary collection. The historical map ID stays; its title remains “A history you can inhabit.” The actual Conway Life encounter is next, in CA_BeyondBinary. The rear Turing lab remains a secondary encounter requiring separate review.
+
+
+---
+
+# Keep a generation — 8 October 2026
+
+This pass supersedes the earlier decision to keep code excerpts in the reflection: full runnable code now belongs in tutorial.md; final.md keeps the encounter and argument. It also corrects the transition from the previous three-state volume: we return to the opening Rule30 row to study retained history, rather than imply the 3D rule continued unchanged.
+
+One small learner construction carries PointBody as a reader and STEP. Two complete files, 30 native checks. Native installed walking reader and space: 35 checks, including 451 floor/capsule samples. All six current authored works retained; rear circulation levelled, side divider opened, orb and columns moved clear of laboratory, threshold portals. The installed solver and history-study sources are byte-identical to the turn's baseline. Room snapshots, earlier diagnostic failures, full texts, diff and review ZIP are in `doc/book/iterations/2026-10-08-ca-history-three-bodies`.
+
+The first route endpoint intersected the inclined desk; it now stops at its reachable approach. The first lower-floor ray hit an end ramp; the corrected ray tests the basin's interior. The first learner capture visually merged its pattern with the large basin. The final temporary mounting uses a plain wall in the rear gallery. No permanent duplicate study is added. Existing bright museum lighting and the interior-facing lab sign are retained. No headset, independent student, complete lab interaction or portal-transfer claim.

@@ -1,30 +1,11 @@
-# The room has a body — implementation
+# Pressure — source and learner implementation
 
-Primary source scenes:
+Registry scene `algorithms/softbodies/advanced_concepts/breathing_room.tscn` runs `breathing_room_scene.gd`. With `#lesson:true`, `_process` advances `_time` by `breath_speed * delta` and sets both walls' pressure to `(sin(_time)+1)*.5*breath_amplitude`. The separate `breathing_room.gd` generator is not the script on the placed scene.
 
-- `res://algorithms/softbodies/advanced_concepts/breathing_room.tscn`
-- `res://algorithms/softbodies/softbody_gallery_part2.tscn`
+The authored BoxMesh is 1 × 4 × 7 m, subdivided 2/6/6. Centres are x −2.3185759 and 3.5541987; y 1.9500841 and 1.9902142. There are 19 and 16 explicitly listed pinned indices, rather than every perimeter vertex. Default/second stiffness .5/.02; shrinking factors −.2/.02. The lesson pressure driver overwrites their initial .08/.105 coefficients. The map selects flesh material. These unequal starting settings prevent treating the pair as an identical-material comparison.
 
-The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers AMPLITUDE, RATE, HOLD DRIVE, STIFFNESS, RESET PHASE, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+Desk: AMPLITUDE .5/.15/.9, RATE 1/.4/1.8; HOLD DRIVE disables only the root frame callback; STIFFNESS writes .5/.2/.8 to both walls; RESET PHASE writes zero then applies the command at that phase. Neither operation rebuilds the walls. The first click advances each preset index.
 
-The walls swell. Find a position from which both their edges and their centres remain visible. Selected vertices stay pinned while the surfaces respond between them. Before entering, watch a complete pressure cycle.
+Learner files: `doc/book/studies/soft-bodies-through-the-hands/SoftBodies_Obsticals/`. The closed panel is a BoxMesh .16 × 1.2 × 1.8 with perimeter pins prepared in `_init`. Two matching instances receive one pressure command at physics cadence. Same PointBody as Carusell; trigger holds/resumes phase. No scene-path mesh dependencies. Full code is printed in tutorial.md. Independent amplitude edit .5→.25 changes input range, not rate or geometry. The model is temporarily mounted for captures, not a new permanent exhibit.
 
-AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received.
-
-```gdscript
-var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
-for sb in _walls:
-    sb.pressure_coefficient = p
-```
-
-The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
-
-Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor?
-
-The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
-
-The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.
-
-Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.
-
-Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+API: https://docs.godotengine.org/en/4.6/classes/class_softbody3d.html . Test receipts and actual museum captures are in the matching pressure review. Physical headset/Quest and independent student understanding remain untested.

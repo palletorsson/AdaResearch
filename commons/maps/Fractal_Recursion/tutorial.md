@@ -12,6 +12,8 @@ In the museum, press MORE at the frame study. Another frame appears, smaller tha
 
 You bring positions, lists, loops and functions from earlier halls. Keep the `LineSkin` supplied in Point Lines. Four segments make one square. The new operation is to call the square-making function again with a smaller size and one fewer step available.
 
+Recursion lets us describe a construction in terms of smaller constructions of the same kind. We write what one frame does and how it asks for the next; we do not write a separate function for every size. This row of nested frames could also be made with a loop. It is our first, simple self-call. In the next hall, one call will ask for two whole subtrees: the same short recipe will organise a branching family. That is the power we are learning to use.
+
 Keep your previous study as a working version. Save `frames.gd` and `line_skin.gd` together and attach `frames.gd` to your existing, empty `PointStudy` Node3D in the prepared museum workspace. Use unit scale; position and rotate the station to face you. The museum supplies the camera, lights and player. This script creates only the study. Do not attach it to the museum's generator or remove the room's existing artifact.
 
 ## frames.gd
@@ -68,6 +70,17 @@ func draw_frame(centre: Vector3, size: float) -> void:
 `repeat_frame()` receives the centre, the current size and the steps remaining. Its first `if` is the base case: when no step remains, or the square is smaller than our chosen limit, return without drawing.
 
 Otherwise it draws one frame. The last line calls the same function with the same centre, a smaller size and `remaining - 1`. With the default values, the sizes are 1.8, 1.17 and 0.7605 metres. The next call receives zero remaining steps and returns. Each earlier call then finishes.
+
+Trace those calls before changing the code. Each call has its own parameter values; making a child call does not overwrite its parent's `size` or `remaining`.
+
+| Call | Size in metres | Steps remaining | What it does |
+| --- | --- | --- | --- |
+| First | 1.8 | 3 | Draw; call again with smaller arguments |
+| Second | 1.17 | 2 | Draw; call again |
+| Third | 0.7605 | 1 | Draw; call again |
+| Fourth | 0.494325 | 0 | Return without drawing |
+
+While a child runs, its caller waits at the call. When the fourth returns, the third resumes just after its self-call and finishes; then the second and first finish. The engine keeps these unfinished calls on a **call stack**. A short recipe can therefore require many calls and much geometry. The stopping condition makes the job finite; it does not make that work free.
 
 Either test can stop this example. If one remains reachable, the calls can still finish. If both tests are removed, each call proceeds into another with no programmed end to the chain. The depth clamp only limits the starting value; counting down does not stop a self-call unless the function checks that count.
 

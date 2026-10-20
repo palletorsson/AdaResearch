@@ -1,5 +1,15 @@
 # Point Lines — what can two lines do?
 
+## Current room extension — 17 October 2026
+
+The opening is now `pairing_point_field`: twelve 4.5 cm-radius points sharing one local SnapConnectionManager. Release a point within 28 cm of another to create a segment. Moving either endpoint updates the segment; other points remain available for further connections. The field has no connection to barrier destruction.
+
+Reconstruct the relation before adding consequences: two positions, one rendered segment, a proximity test on release. Then add a third point and compare a chain with a closed triangle. The production manager can recognise closed shapes; that is an extension beyond drawing the first segment.
+
+The black measurement enclosure follows in a larger room. Ten tape barriers then direct walking through the ×/+ passage. Other examples follow it. Distinguish a drawn segment, a collision boundary and a health-changing area: none follows automatically from the others.
+
+Implementation: `commons/artifacts/primitive_encounters/pairing_field.gd` and `corridor_point.gd`. Desktop right-click picks up/releases; VR uses the existing XR pickup driver. The underlying graph and rendering remain in `commons/primitives/snappoint/`.
+
 **Learning elements**
 
 - Endpoints and a segment

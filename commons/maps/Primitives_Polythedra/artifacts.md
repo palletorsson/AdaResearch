@@ -1,39 +1,72 @@
-# Primitives_Polythedra — current inventory
+# Primitives_Polythedra — current placements
 
-23 September 2026. All 34 earlier placements remain, with a native reference plate added as placement 35. Five hands-on/architectural artifact types and the shared illustration carry the book's first passage; repeated instances keep their configurations. Role order is the authored route, while the grid coordinates below record actual placement. Coordinates are (column, row).
+17 October 2026: central grid-aligned stopper bank, then forward side ramps and a broad platform. Coordinates are source map cells (x, z).
 
-| Artifact | Role | Positions | Scene |
-| --- | --- | --- | --- |
-| `grab_trihedron` | primary | (9, 5) | [source](../../../commons/primitives/trihedron/grab_trihedron.tscn) |
-| `grab_tetrahedron` | primary | (6, 7) | [source](../../../commons/primitives/tetrahedron/grab_tetrahedron.tscn) |
-| `polyhedra_boundary_plate` | primary reference | (1, 5) | [source](../../artifacts/polyhedra_boundary_plate/polyhedra_boundary_plate.tscn) |
-| `prism_block` | primary | (5, 1), (2, 5), (3, 5) | [source](../../../commons/primitives/prismes/prism_block.tscn) |
-| `concrete_barrier` | primary | (5, 10), (6, 10), (7, 10), (4, 11), (8, 11), (4, 12), (8, 12), (4, 13), (8, 13), (5, 14), (6, 14), (7, 14) | [source](../../../commons/artifacts/concrete_barrier/concrete_barrier.tscn) |
-| `street_sign` | primary | (3, 9), (6, 9), (2, 11), (3, 15), (7, 15) | [source](../../../commons/artifacts/street_sign/street_sign.tscn) |
-| `path_watchdog` | secondary | (4, 1) | [source](../../../commons/hazards/path_watchdog/path_watchdog.tscn) |
-| `path_game_controller` | secondary | (6, 2) | [source](../../../commons/hazards/path_game/path_game_controller.tscn) |
-| `interactive_point_origin_force` | secondary | (4, 4) | [source](../../../commons/primitives/point/interactive_point_origin_force.tscn) |
-| `becoming_catalyst` | secondary | (6, 4) | [source](../../../commons/hazards/becoming_catalyst/becoming_catalyst.tscn) |
-| `pyramid_edit` | secondary | (4, 7) | [source](../../../commons/primitives/pyramid/pyramid_edit.tscn) |
-| `cube_scene` | secondary | (8, 7) | [source](../../../commons/primitives/cubes/cube_scene.tscn) |
-| `diamonds` | secondary | (6, 12) | [source](../../../commons/primitives/combines/diamonds.tscn) |
-| `trafficcone` | decoration | (3, 16), (7, 16) | [source](../../../commons/primitives/trafficcone/trafficcone.tscn) |
-| `if_not_exist_create` | secondary | (10, 18) | [source](../../../commons/artifacts/if_not_exist_create/if_not_exist_create.tscn) |
-| `rock_spawner` | secondary | (4, 20) | [source](../../../commons/primitives/rockfactory/RockSpawner.tscn) |
-| `rock_scanner` | secondary | (4, 22) | [source](../../../commons/primitives/rockfactory/RockScanner.tscn) |
+## Artifacts
 
-## Configuration and purpose
+| Cell | Placement |
+| --- | --- |
+| (7, 4) | `align_tetrahedron:180:0#plinth:0#pin:1` |
+| (7, 12) | `align_wedge:180:0#plinth:0#pin:1` |
+| (2, 17) | `corner_tetrahedron:0:0#plinth:0#pin:1#offset:-0.49,0,-0.49` |
+| (14, 19) | `polyhedra_boundary_plate:180:0:0.8#offset:0,0.34,0` |
+| (4, 20) | `grab_trihedron:180:0#plinth:0.90` |
+| (7, 20) | `pyramid_edit:180:0#plinth:0.65,micropod#workbench:1` |
+| (14, 22) | `polyhedra_reveal_monitor:180:0#plinth:0#pin:1` |
+| (9, 23) | `street_sign:180:0#pole_height:1.65#sign_radius:0.32#subtext:#plinth:0#pin:1` |
+| (10, 23) | `street_sign:180:0#pole_height:1.65#sign_radius:0.32#subtext:#plinth:0#pin:1#direction:both#sign_sides:32#sign_color:0.08,0.28,0.50` |
+| (5, 24) | `prism_block:0:0:2#grain:solid#offset:0.5,0,0.5#plinth:0#pin:1` |
+| (7, 24) | `prism_block:0:0:2#grain:solid#offset:0.5,0,0.5#plinth:0#pin:1` |
+| (9, 24) | `prism_block:0:0:2#grain:solid#offset:0.5,0,0.5#plinth:0#pin:1` |
+| (11, 24) | `prism_block:0:0:2#grain:solid#offset:0.5,0,0.5#plinth:0#pin:1` |
+| (13, 24) | `prism_block:0:0:2#grain:solid#offset:0.5,0,0.5#plinth:0#pin:1` |
+| (3, 26) | `street_sign:180:0#pole_height:1.65#sign_radius:0.32#subtext:#plinth:0#pin:1#direction:ahead#sign_sides:32#sign_color:0.08,0.28,0.50` |
+| (16, 26) | `street_sign:180:0#pole_height:1.65#sign_radius:0.32#subtext:#plinth:0#pin:1#direction:ahead#sign_sides:32#sign_color:0.08,0.28,0.50` |
+| (9, 31) | `wedge_palace:0:0#layout:map#plinth:0#pin:1` |
+| (22, 31) | `rock_spawner#rock_count:30#spawn_height:3.5#spawn_area_x:2.6#spawn_area_y:1#spawn_area_z:2.6#plinth:0` |
+| (22, 35) | `rock_scanner:180:0#plinth:0` |
+| (7, 36) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (8, 36) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (9, 36) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (10, 36) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (11, 36) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (6, 37) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (12, 37) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (6, 38) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (9, 38) | `diamonds:0:0:0.15#plinth:0` |
+| (12, 38) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (6, 39) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (12, 39) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (6, 40) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (12, 40) | `concrete_barrier:90:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (7, 41) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (8, 41) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (9, 41) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (10, 41) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
+| (11, 41) | `concrete_barrier:0:0#barrier_length:1.0#barrier_height:0.85#base_width:0.60#blocking:1#plinth:0` |
 
-- `prism_block`: the example at (5, 1) is solid; (2, 5) is quartered; (3, 5) is a shell. Their visible grain differs while the original collision surface remains.
-- `grab_trihedron`: rotated 180 degrees with a 0.90 m plinth request; `grab_tetrahedron` requests a 0.90 m plinth. These are token parameters, not a measured reach result.
-- Twelve `concrete_barrier` sections: 1 m long, 0.85 m high, 0.60 m wide at the base, with blocking enabled. They surround the preserved central opening.
-- Five `street_sign` placements: STOP/WAIT at (6, 9); both ways at (3, 9); ahead at (2, 11); left at (3, 15); right at (7, 15). All face toward earlier rows by a 180-degree rotation and request 1.70 m poles.
-- `pyramid_edit`, `cube_scene`, `diamonds`, `rock_spawner` and `rock_scanner` are now secondary return visits. Their placements and settings have not changed. See [tutorial.md](tutorial.md#return-visits) for what to try and which claims remain unverified.
-- `rock_spawner` requests thirty rocks. `rock_scanner` animates a plane with a collider; its own process path does not activate the cross-section display.
-- `if_not_exist_create` requests a future primitive gallery. Its presence does not mean that gallery has been constructed.
+## Utilities
 
-Four `wp` utility wedges remain at (1, 3), (1, 12), (2, 12), (3, 12). They are floor infrastructure supporting the prism encounter, not extra artifact cards. Entry is (7, 0), exit (4, 27). The three text utilities and their wording remain unchanged.
+| Cell | Placement |
+| --- | --- |
+| (7, 0) | `sp` |
+| (2, 29) | `wp:0` |
+| (3, 29) | `wp:0` |
+| (4, 29) | `wp:0` |
+| (15, 29) | `wp:0` |
+| (16, 29) | `wp:0` |
+| (17, 29) | `wp:0` |
+| (8, 33) | `wp:180` |
+| (9, 33) | `wp:180` |
+| (10, 33) | `wp:180` |
+| (11, 33) | `wp:180` |
+| (8, 45) | `t:Point_Animatedcube` |
 
-The old inventory listed `lab_room`, `snap_tetrahedron_puzzle`, `floating_sphere_field` and `tentacle_placer`; none is a current interactable placement here. The stored role file also retains some dormant historical entries. They are not counted as present objects. All original text is retained in the iteration archive.
+## Platform additions — 17 October 2026
 
-The reference plate faces into the hall from the west wall, at 0.8 scale, offset (-0.30, 0.34, 0) from source cell (1,5). A local sculpture-clear rectangle keeps generated decoration out of its reading area. Its same native meshes supply the book figure; existing corner fills and floor geometry remain.
+| Artifact | Anchor (x,z) | Placement |
+| --- | --- | --- |
+| wedge_column | (6,32), offset (+0.5,0,0) | Six original prism scenes; 1.95 m column on structure 2 |
+| wedge_mouse_model | (13,32) | Own 0.82 m plinth; 23 upright movable wedge walls, brown mouse, symmetric cheese at far end; one standing joystick |
+
+These follow wedge_palace and precede the basin in the room and final.

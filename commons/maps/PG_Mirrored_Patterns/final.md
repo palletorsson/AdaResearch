@@ -6,14 +6,9 @@ An uneven cellular field lies before you. The opening is an authored arithmetic 
 
 HOLD stores the current array. STENCIL always returns to that held array before applying the next arrangement: quadrant reflection, eight-way reflection, rotation, or no copying. It does not obtain a different random field and ask you to attribute all the differences to symmetry.
 
-For the quadrant arrangement, the operation reads a cell from one quarter and writes its value to corresponding positions elsewhere:
+For the quadrant arrangement, one quarter supplies the corresponding positions in the other three. The source of the repetition occupies only part of what we see.
 
-```gdscript
-new_grid[y][grid_size - 1 - x] = value
-new_grid[grid_size - 1 - y][x] = value
-```
-
-There are consequences at the edges of this promise. This study uses an odd-sized grid; its centre row and column do not belong to every copying loop. The rotational operation also converts floating-point positions into integer addresses. A symmetrical intention still passes through a particular implementation.
+There are consequences at the edges of this promise. This study uses an odd-sized grid; its centre row and column do not belong to every copying loop. The rotational operation also converts floating-point positions into integer addresses. A symmetrical intention still passes through a particular implementation. Look along the centre cross: what the loop leaves alone may interrupt the unity the rest of the image promises. Keeping the input beside the result gives that interruption somewhere to be seen.
 
 STEP performs one cellular update and then its selected symmetry operation. In this desk study, eligible births and deaths have probability one, so the comparison isolates the update and copying rules. HOLD can keep that new result as the input for the next comparison. Cycling STENCIL to none restores the held field with copying disabled; it does not erase what you chose to hold.
 

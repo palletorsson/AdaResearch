@@ -1,89 +1,25 @@
-# GT Spanning Trees — Technical
+# Spanning Trees — implementation and verification
 
-A minimum spanning tree (MST) is a subset of edges that connects every vertex and minimises total edge weight. The map implements both Kruskal's and Prim's algorithms and shows their step-by-step progress.
+The learner carries point_body.gd and traversal.gd byte-identically from Connectivity, retaining the same seven IDs and initial positions. New tree_model.gd declares eight undirected links and assigned build costs. The earlier directed event ledger is preserved in its earlier lesson and is not silently reinterpreted. New study.gd supplies complete visible construction and input code. No scene-node dollar references, new player or undisclosed geometry dependencies.
 
-Kruskal's algorithm sorts all edges by weight, then adds them greedily, skipping any edge that would form a cycle with the edges already chosen. Cycle detection uses a disjoint-set (union-find) data structure:
+The model sorts stable link indices by cost, using the index to break ties. For each candidate it builds undirected adjacency from the chosen links and reuses the queue search. Reachable endpoints would form a cycle, so the candidate is refused. This is Kruskal with repeated reachability rather than union-find, suitable for seven vertices. Disconnected input produces a minimum spanning forest. spans() checks coverage and edge count under the acyclic selection invariant; it does not independently prove minimum cost.
 
-```gdscript
-class UnionFind:
-    var parent: Dictionary = {}
-    var rank: Dictionary = {}
+Cost order: [2,1,3,0,5,4,6,7]. Chosen: [2,1,3,0,5,4], cost21. Refused: [6,7]. Break0–1 leaves reachable membership{0,2,5,6}. Add4–5 at cost7 and all seven become reachable. Restoring0–1 while retaining the spare creates a cycle. The spare cannot protect leaf3 against losing1–3. Failure toggles operate on a derived active list; the original build-cost total and selected tree remain intact.
 
-    func find(x):
-        if parent[x] != x:
-            parent[x] = find(parent[x])  # path compression
-        return parent[x]
+The transfer exercise changes4–5 from7 to0.5. The tree becomes [6,2,1,3,0,5], cost15.5;2–5 is refused. The existing spare switch neither duplicates a selected edge nor charges twice. Because4–5 is already selected, it cannot then reconnect the graph when0–1 breaks. This changed consequence is explained rather than hidden by a special case.
 
-    func union(x, y) -> bool:
-        var rx = find(x)
-        var ry = find(y)
-        if rx == ry: return false  # would form cycle
-        if rank[rx] < rank[ry]:
-            parent[rx] = ry
-        elif rank[rx] > rank[ry]:
-            parent[ry] = rx
-        else:
-            parent[ry] = rx
-            rank[rx] += 1
-        return true
+The same black PointBody moves vertex4 in the drawing’s local XY plane. Dragging does not change assigned costs or connectivity. The held trigger/1 and STEP consider one edge. BREAK/2 and SPARE/3 become meaningful after the scan. R/RESET requires release. On release the same point parks in the drawing plane. Nearby controls use the existing pointer event contract. Cylinder rods have no arrowheads. Costs and state labels accompany colours; bottom vertex labels are below the vertices to separate them from edge costs.
 
-func kruskal() -> Array:
-    var tree := []
-    var uf := UnionFind.new()
-    for v in vertices: uf.parent[v] = v
-    edges.sort_custom(func(a, b): return a.weight < b.weight)
-    for e in edges:
-        if uf.union(e.a, e.b):
-            tree.append(e)
-            if tree.size() == vertices.size() - 1: break
-    return tree
-```
+32 fresh exact-source code checks pass. The four scripts printed in tutorial.md are extracted, hashed and run in Godot4.6. An independent exhaustive forest enumerator uses literal endpoints and a separate component-merging calculation:256 available-link subsets ×4 cost scenarios =1024 cases, including disconnected, equal and negative cost inputs. It compares maximum achievable forest rank and minimum cost. Other checks cover complete host construction, reset, unchanged records, duplicate/self-loop cases, actual keyboard/pointer, transformed-host XRTools pickup/trigger/release, retained object identity, the independently edited study and three deliberately wrong variants: expensive-first selection, accepting cycles and missing reverse adjacency.
 
-Union-find with path compression and union-by-rank supports find and union in effectively O(α(V)) amortised time, where α is the inverse Ackermann function (practically constant). The sort dominates: O(E log E) total.
+30 native museum checks pass, including captures and completion. Production MST code remains unchanged: ten vertices, Kruskal/union-find, Euclidean weights from generated source positions. It selects nine edges with cost42.5414566993713, agreeing with an independent Prim cut search. This run considered24 links, refused15 and finalized on call25. Considered underlying lines stay yellow; accepted edges receive green overlays; unconsidered lines can stay grey. The tutorial distinguishes that display from the learner’s full eight-edge scan. The existing wall film remains.
 
-Prim's algorithm grows the tree from a root vertex by repeatedly adding the lightest edge that connects a new vertex to the existing tree. A priority queue maintains the candidate edges, giving O((V + E) log V) with a binary heap or O(E + V log V) with a Fibonacci heap.
+The first native run correctly broke the link but the checker compared queue visitation order instead of reachable membership. The assertion now sorts the reached set; the failed receipt/log remain as first-room-check.json/log. Native inspection also revealed crowded labels; label placement and line breaks were improved, followed by fresh code and native runs. No algorithm logic changed to satisfy that assertion. Current receipts require explicit completion, current hashes and no script/parse errors. Existing Jolt/UID warnings remain.
 
-The two algorithms produce the same tree when edge weights are distinct. The map animates them side by side so the learner can see the different orders in which the same edges are selected.
+The15×17 hall retains its walls, floor, entry, exit and wall film. The existing MST is moved from cell(7,9), height3.6, scale0.4 to the right rear cell(11,11), height2.8, scale0.28, yaw180. This opens a left learner bay and keeps the central route clear.29 supported capsule samples plus both approaches pass. Temporary student installation: map-local(4,-0.25,6), yaw180, scale1; isolated hall-root(4,-0.25,10). The learner is not a permanently registered additional exhibit. Native eye-level and above images show the printed study inside the real museum.
 
-The scattered platforms in the map at varying heights make edge weights physical — longer connections cost more, shorter ones cost less. Building the MST by hand produces the same tree the algorithms find automatically, which confirms that the problem has a structural optimum rather than an algorithmic one.
+This is author-operated ghost reconstruction, not a blind reader or physical headset test. Quest comfort/performance and continuous portal traversal remain unverified. Production artifact code, film, registry and sequence order are unchanged; only this hall’s placement and selected documentation/view rows change. Review decision and baseline are preserved.
 
-Within the sequence, Spanning_Trees is the optimisation-on-structure chapter. GT_Flow will next optimise throughput rather than structure.
+Replay code: python tools/test_graph_spanning.py
 
-## Correctness of the Greedy Approach
-
-Kruskal's and Prim's algorithms are greedy, and greedy algorithms are not always correct. For the MST problem, the cut property guarantees correctness: for any cut of the graph, the minimum-weight edge crossing the cut is in some MST. Both algorithms can be shown to always respect the cut property, and therefore always produce an MST.
-
-Kruskal's correctness: the sorted-and-added edge is the minimum-weight edge crossing the cut between the two components it connects. Prim's correctness: the lightest edge leaving the current tree is the minimum-weight edge crossing the cut between the tree and the rest of the graph.
-
-## When Weights Are Not Distinct
-
-If two edges have the same weight, the MST is not unique. Kruskal's and Prim's algorithms may produce different trees depending on tie-breaking order. Every MST has the same total weight, though, so the choice of tie-breaking is cosmetic for the optimisation objective.
-
-## Borůvka's Algorithm
-
-A third MST algorithm, Borůvka's, is parallelisable. It finds, for each component simultaneously, the minimum-weight outgoing edge, adds all such edges, and merges the resulting components. Repeating halves the component count each iteration, so the algorithm terminates in O(log V) rounds, each round costing O(E).
-
-```gdscript
-func boruvka() -> Array:
-    var tree := []
-    var uf := UnionFind.new()
-    for v in vertices: uf.parent[v] = v
-    while uf.components() > 1:
-        var min_edge_per_component := {}
-        for e in edges:
-            var ca := uf.find(e.a)
-            var cb := uf.find(e.b)
-            if ca == cb: continue
-            if not min_edge_per_component.has(ca) or min_edge_per_component[ca].weight > e.weight:
-                min_edge_per_component[ca] = e
-            if not min_edge_per_component.has(cb) or min_edge_per_component[cb].weight > e.weight:
-                min_edge_per_component[cb] = e
-        for me in min_edge_per_component.values():
-            if uf.union(me.a, me.b):
-                tree.append(me)
-    return tree
-```
-
-The parallelism matters for very large graphs. The map's graphs are small enough that Kruskal and Prim are adequate, but Borůvka becomes competitive at the scale of continental road networks.
-
-Within the sequence, Spanning_Trees optimises structure. GT_Flow will next optimise throughput.
+Replay museum: python tools/run_encounter_probe.py GT_Spanning_Trees --sequence graphtheory --render --no-bridges --output-tag spanning-final --probe tools/probes/graph_spanning_room.gd
