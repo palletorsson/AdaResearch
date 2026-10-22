@@ -135,6 +135,7 @@ Auto-research findings: hybrid wins constraint score (deterministic, +0.04 mean 
 | **Agent (play)** | `python tools/vr_link.py --agent=<Map>` | Drives the ghost in the live game: walk, `look`, `interact`; report in `ada_run/vr_agent_<Map>.md`. `--exit` takes the teleporter (moves the person) |
 | **Bridge probe** | `godot --headless --path . --xr-mode off --script res://commons/testing/probe_vr_link_agent.gd` | The game side of scan/look/interact on a bench |
 | **Narrator** | `python tools/vr_link.py --narrate` | Reads each hall's `final.md` aloud on the PC as the headset enters it (essay, then notes). `vr_narrator.py --text <Map>` shows the words, `--render --seq <id>` pre-renders audio |
+| **Live update** | `python tools/vr_link.py` + a game with `--vr-link` (or the armed headset); save in `/editor` | The save route diffs `map_data.json` and the bridge broadcasts the revision; every game answers `applied / rejected / conflict / requires_reload`, ledger in `ada_run/live_updates.jsonl`. Grid maps in place; a museum hall is REPORTED (it stamps from the plan). `doc/LIVE_UPDATE_BRIDGE.md`; test `python tools/live_update_test.py` |
 See `doc/VR_AGENT.md` and `doc/VR_NARRATOR.md`. Tests: `python tools/test_vr_agent.py`, `python tools/test_vr_narrator.py` (no Godot, no voice).
 
 ### Content & Identity

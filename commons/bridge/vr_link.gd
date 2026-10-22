@@ -111,8 +111,29 @@ const SCAN_NODE_CAP := 60000
 ## AABB has the same shape and the same caveat: MeshInstance3D only.
 const AABB_MESH_CAP := 300
 const EYE_HEIGHT := 1.55
+## The application half of a live JSON update (`update` command, 2026-10-22):
+## this file carries the envelope, live_update.gd decides what it means for the
+## loaded scene and answers with one `update_ack`. Built on first use.
+const LiveUpdate := preload("res://commons/bridge/live_update.gd")
+## The spawn menu (2026-10-22): Garry's Mod's spawnmenu on the left wrist, created
+## here the first time the Void is seen, because spawning IS a live update — the
+## hand asks the bridge, the bridge saves through the editor's route, the revision
+## comes back as an in-place add. commons/bridge/spawn_menu.gd.
+const SpawnMenu := preload("res://commons/bridge/spawn_menu.gd")
+## The hand message: every revision this game applies (or refuses), printed on the
+## left wrist for a few seconds — and as a toast on desktop. commons/bridge/hand_message.gd.
+const HandMessage := preload("res://commons/bridge/hand_message.gd")
+
+## Every ack this game produced (live_update.gd), after it was sent — the spawn
+## menu prints it on the hand.
+signal update_acked(ack: Dictionary)
+## The bridge's answer to a spawn / spawn_remove request from this game.
+signal spawn_result(result: Dictionary)
 
 var _peer: StreamPeerTCP = null
+var _live: RefCounted = null
+## sent once per connection, so the PC's ledger can name two desktops apart
+var _hello_sent := false
 var _armed := false
 var _accum := 0.0
 var _retry := 0.0
@@ -160,7 +181,7 @@ var _scan: Array = []
 
 ## Grid systems whose `interactable_activated` this node already forwards.
 var _hooked_grids: Dictionary = {}
-var _hook_accum := 0.0
+var _hook_accum := 1.0   # 1.0: the first frame hooks, so a grid is hashed before any update can reach it
 
 
 func _ready() -> void:
@@ -217,10 +238,15 @@ func _process(delta: float) -> void:
 	if st != StreamPeerTCP.STATUS_CONNECTED:
 		# server gone or never there — drop it and retry on the slow clock
 		_peer = null
+		_hello_sent = false
 		_retry = 0.0
 		return
+	if not _hello_sent:
+		_hello_sent = true
+		_send({"k": "hello", "role": "game", "name": game_name(), "device": OS.get_name()})
 
 	_pump_in()
+	_drain_live_pending()
 
 	_accum += delta
 	if _accum >= 1.0 / SEND_HZ:
@@ -237,6 +263,16 @@ func _process(delta: float) -> void:
 ## NDJSON rather than a length-prefixed frame: it is debuggable with netcat, a
 ## partial read can never desynchronise the stream permanently, and a malformed
 ## line costs one line rather than the connection.
+
+## "Windows/PALLE-PC" or "Android/Quest 3": what the ledger prints beside an ack.
+func game_name() -> String:
+	var host: String = OS.get_environment("COMPUTERNAME")
+	if host == "":
+		host = OS.get_environment("HOSTNAME")
+	if OS.has_feature("android") or host == "":
+		host = OS.get_model_name()
+	return "%s/%s" % [OS.get_name(), host]
+
 
 func _send(d: Dictionary) -> void:
 	if _peer == null:
@@ -295,6 +331,13 @@ func _pose() -> Dictionary:
 		d["hands"] = hands
 
 	d["map"] = _map_name()
+	var vd: Node = _void()
+	if vd != null:
+		# the Void is not a map: the PC's replay-on-entry keys on this instead
+		d["proj"] = "void"
+		var trial: String = String(vd.get("trial_id"))
+		if trial != "":
+			d["trial"] = trial
 	var hall: Dictionary = _hall()
 	if not hall.is_empty():
 		d["hall"] = hall
@@ -363,6 +406,46 @@ func _museum() -> Node:
 
 ## Breadth-first: the node carrying the museum's `_segments`, at most `max_depth`
 ## levels below `root` and after at most `budget` nodes.
+## The Void's placement layer (commons/void/floor_content.gd), when we are in
+## it — cached like the museum; when first seen, the live-update adapter hashes
+## the rooms file it loaded.
+var _void_node: Node = null
+var _void_noted: int = 0
+var _spawn_menu: Node = null
+var _hand_message: Node = null
+
+func _void() -> Node:
+	if _void_node != null and is_instance_valid(_void_node) and _void_node.is_inside_tree():
+		return _void_node
+	_void_node = null
+	for n in get_tree().get_nodes_in_group("biome_grid"):
+		if is_instance_valid(n) and n.has_method("load_floor") and n.has_method("reset_floor"):
+			_void_node = n
+			if n.get_instance_id() != _void_noted:
+				_void_noted = n.get_instance_id()
+				_live_for().note_loaded_void(String(n.get("trial_id")))
+				_ensure_spawn_menu()
+			break
+	return _void_node
+
+
+func _ensure_spawn_menu() -> void:
+	if _spawn_menu != null and is_instance_valid(_spawn_menu):
+		return
+	_spawn_menu = SpawnMenu.new()
+	_spawn_menu.name = "SpawnMenu"
+	add_child(_spawn_menu)
+	if _hand_message == null or not is_instance_valid(_hand_message):
+		_hand_message = HandMessage.new()
+		_hand_message.name = "HandMessage"
+		add_child(_hand_message)
+
+
+## A line to the PC from anything that rides this link (the spawn menu).
+func send_uplink(d: Dictionary) -> void:
+	_send(d)
+
+
 func _find_museum(root: Node, max_depth: int, budget: int) -> Node:
 	var frontier: Array = [root]
 	var depth: int = 0
@@ -529,6 +612,10 @@ func _command(c: Dictionary) -> Dictionary:
 			reply = _interact(c)
 		"where":
 			reply = _where()
+		"update":
+			reply = _update(c)
+		"spawn_result":
+			spawn_result.emit(c)
 		_:
 			reply = {"k": "log", "msg": "unknown cmd %s" % String(c.get("cmd", ""))}
 	# a `tag` on the command rides back on its reply, so the PC can match an
@@ -1515,8 +1602,68 @@ func _hook_grids(delta: float) -> void:
 			continue
 		g.connect("interactable_activated", _on_grid_activated)
 		_hooked_grids[id] = true
+		# the live-update adapter remembers which FILE this grid stands on, so a
+		# revision the scene already holds is answered already_current, not applied twice
+		_live_for().note_loaded(String(g.get("map_name")))
+		if g.has_signal("map_loaded"):
+			g.connect("map_loaded", _on_grid_map_loaded)
 
 
 func _on_grid_activated(object_id: String, position: Vector3, data: Dictionary) -> void:
 	_send({"k": "activated", "token": object_id, "pos": _v3(position),
 		"name": String(data.get("name", ""))})
+
+
+## ————————————————————————————————————————————————————————————————————
+## Live JSON updates (2026-10-22) — `update` in, `update_ack` out
+## ————————————————————————————————————————————————————————————————————
+##
+## The envelope is applied HERE, in _process, on the main thread, between two
+## frames: that is the safe boundary the brief asks for, and it is the boundary
+## every other command already uses. A grid that is still generating defers the
+## envelope to `pending` and it is asked again next frame; after BUSY_PATIENCE_MS
+## it is rejected as busy, never dropped silently. The reply is one ack per
+## envelope, and the PC's ledger (tools/vr_link.py, ada_run/live_updates.jsonl)
+## records requested, transmitted and applied beside each other.
+
+func _live_for() -> RefCounted:
+	if _live == null:
+		_live = LiveUpdate.new(get_tree())
+	return _live
+
+
+func _on_grid_map_loaded(map_name: String, _format: String) -> void:
+	_live_for().note_loaded(map_name)
+
+
+func _update(c: Dictionary) -> Dictionary:
+	_hook_grids(1.0)   # a grid that appeared since the last tick is hooked (and its file hashed) first
+	var r: Dictionary = _live_for().apply(c)
+	if bool(r.get("defer", false)):
+		_live_for().pending.append({"env": c, "since_ms": Time.get_ticks_msec()})
+		return {}
+	r["name"] = game_name()
+	update_acked.emit(r)
+	return r
+
+
+func _drain_live_pending() -> void:
+	if _live == null or _live.pending.is_empty():
+		return
+	var still: Array = []
+	for item_v in _live.pending:
+		var item: Dictionary = item_v
+		var env: Dictionary = item.get("env", {})
+		var r: Dictionary = _live.apply(env)
+		if bool(r.get("defer", false)):
+			if Time.get_ticks_msec() - int(item.get("since_ms", 0)) > _live.BUSY_PATIENCE_MS:
+				r = _live._ack(env, "rejected", "busy", "the grid was still generating after %d ms" % _live.BUSY_PATIENCE_MS, "grid")
+			else:
+				still.append(item)
+				continue
+		if env.has("tag"):
+			r["tag"] = env.get("tag")
+		r["name"] = game_name()
+		_send(r)
+		update_acked.emit(r)
+	_live.pending = still

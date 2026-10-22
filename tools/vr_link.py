@@ -89,6 +89,18 @@ ADB = os.environ.get(
     "ADA_ADB",
     r"C:\Users\palle\AppData\Local\Android\Sdk\platform-tools\adb.exe",
 )
+## Live JSON updates (2026-10-22): every revision the editor publishes and every
+## ack a game returns, one JSON row per line, requested · transmitted · applied
+## side by side. ada_run/ is ignored by git; the ledger is the run's record.
+LEDGER = ROOT / "ada_run" / "live_updates.jsonl"
+# The spawn lane (2026-10-22): a game asks {"k":"spawn", floor, token, position, facing}
+# and THIS process saves the record through the encyclopedia's own route, so the
+# file stays the truth and the revision comes back to every game as an in-place add.
+ENC_URL = os.environ.get("ADA_ENC_URL", "http://localhost:3003")
+SPAWNLISTS = ROOT / "commons" / "data" / "void_spawnlists.json"
+PUBLIC_DIR = ROOT.parent / "ada_encyclopedia" / "public"
+## --museum-apply: a `requires_reload (museum_plan)` ack runs em_map_halls.py --apply (see Link.museum_plan)
+MUSEUM_APPLY = False
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -106,6 +118,8 @@ class Client:
         self.addr = f"{addr[0]}:{addr[1]}"
         self.role = "unknown"
         self.q: queue.Queue = queue.Queue(maxsize=400)
+        self.map = ""   # the map the game's last pose named; a change replays that map's latest revision
+        self.name = ""  # "Windows/PALLE-PC", "Android/Quest 3": from the game's hello
 
 
 class Link:
@@ -123,6 +137,269 @@ class Link:
         self.rate = 0.0
         self.last_pose_at = 0.0
         self._stamps: deque = deque(maxlen=40)
+        # live JSON updates: per-map sequence, the latest envelope per map (for a
+        # game that attaches later), and the recent ledger rows (requests + acks)
+        self.seq: dict[str, int] = {}
+        self.latest: dict[str, dict] = {}
+        self.ledger: deque = deque(maxlen=400)
+        self._museum_apply_at = 0.0
+        self._load_ledger()
+
+    # ── live JSON updates ────────────────────────────────────────────────────
+    def _load_ledger(self) -> None:
+        """Resume the per-map sequence and the latest envelope from the ledger, so a
+        restarted bridge never hands out a seq a game has already seen."""
+        if not LEDGER.exists():
+            return
+        try:
+            for line in LEDGER.read_text(encoding="utf-8").splitlines():
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if row.get("k") == "request":
+                    env = row.get("env") or {}
+                    m = str(env.get("map_id", ""))
+                    s = int(env.get("seq", 0))
+                    if m and s > self.seq.get(m, 0):
+                        self.seq[m] = s
+                        self.latest[m] = env
+        except OSError:
+            pass
+
+    def record(self, row: dict) -> None:
+        row = dict(row)
+        row.setdefault("t", time.time())
+        with self.lock:
+            self.ledger.append(row)
+        try:
+            LEDGER.parent.mkdir(parents=True, exist_ok=True)
+            with LEDGER.open("a", encoding="utf-8") as f:
+                f.write(json.dumps(row) + "\n")
+        except OSError as e:
+            print(f"[vr-link] ledger: {e}")
+
+    def games(self) -> list["Client"]:
+        with self.lock:
+            return [c for c in self.clients if c.role == "game"]
+
+    ## EVERY attached game, not whichever polls first. `out` is a single queue
+    ## shared by all game clients, which is right for a walker (one ghost) and
+    ## wrong for an update: desktop and Quest both have to apply it.
+    def broadcast(self, cmd: dict) -> int:
+        n = 0
+        for c in self.games():
+            try:
+                c.q.put_nowait(cmd)
+                n += 1
+            except queue.Full:
+                self.note(f"update not queued for {c.addr}: its queue is full")
+        return n
+
+    # ── the spawn lane ──────────────────────────────────────────────────
+    def spawn(self, d: dict, client=None) -> None:
+        """A game (the VR hand panel) or a POST /spawn asks for a record. Done in a
+        thread: GET the layout, append the record to the floor, POST it back with
+        the revision the GET returned (the route validates, saves and publishes the
+        revision; the game then receives it as an in-place `add`). The asking game
+        gets a `spawn_result` command with the outcome; the ack follows as usual."""
+        def run() -> None:
+            res = self._spawn_blocking(d)
+            res["cmd"] = "spawn_result"
+            if d.get("tag") is not None:
+                res["tag"] = d.get("tag")
+            self.note(f"spawn {d.get('token') or d.get('kind') or d.get('remove') or ('move ' + str(d.get('move')))} floor {d.get('floor')}: "
+                      f"{'ok ' + str(res.get('id')) if res.get('ok') else 'failed: ' + str(res.get('error'))}")
+            if client is not None:
+                try:
+                    client.q.put_nowait(res)
+                except queue.Full:
+                    pass
+            else:
+                self.broadcast(res)
+            self.publish({"k": "spawn", **{k: v for k, v in res.items() if k != "cmd"}})
+        threading.Thread(target=run, daemon=True).start()
+
+    def _spawn_blocking(self, d: dict) -> dict:
+        import urllib.request
+        import urllib.error
+        trial = str(d.get("trial") or "")
+        url = f"{ENC_URL}/api/void-layout" + (f"?trial={trial}" if trial else "")
+        try:
+            with urllib.request.urlopen(url, timeout=90) as r:
+                layout = json.loads(r.read().decode("utf-8"))
+        except Exception as e:  # noqa: BLE001
+            return {"ok": False, "error": f"encyclopedia unreachable ({e!r})"}
+        rooms, revision = layout.get("rooms") or {}, str(layout.get("revision") or "")
+        floors = rooms.get("floors") or []
+        try:
+            floor = int(d.get("floor", -1))
+        except (TypeError, ValueError):
+            floor = -1
+        if floor < 0 or floor >= len(floors):
+            return {"ok": False, "error": f"floor {floor} is not one of {len(floors)}"}
+        rec_floor = floors[floor]
+        remove_id = str(d.get("remove") or "")
+        move_id = str(d.get("move") or "")
+        stamp = time.strftime("%H%M%S")
+        rid = ""
+        if move_id:
+            # grab-and-move from VR: the record's position/facing change, nothing else,
+            # so the game applies it in place as a `transform`
+            found = None
+            for c in ("artifacts", "copies", "props"):
+                for it in rec_floor.get(c) or []:
+                    if str(it.get("id")) == move_id:
+                        found = it
+                        break
+                if found is not None:
+                    break
+            if found is None:
+                return {"ok": False, "error": f"no record {move_id} on floor {floor}"}
+            pos = d.get("position")
+            try:
+                if pos is not None:
+                    found["position"] = [round(float(pos[0]), 3), round(float(pos[1]), 3)]
+                if d.get("facing") is not None:
+                    found["facing"] = round(float(d.get("facing")) % 360.0, 1)
+                if d.get("height") is not None and "height" in found:
+                    found["height"] = round(float(d.get("height")), 3)
+            except (TypeError, ValueError, IndexError):
+                return {"ok": False, "error": "position must be [x, z]"}
+            rid = move_id
+        elif remove_id:
+            n_before = sum(len(rec_floor.get(c) or []) for c in ("artifacts", "props"))
+            for c in ("artifacts", "props"):
+                rec_floor[c] = [it for it in (rec_floor.get(c) or []) if str(it.get("id")) != remove_id]
+            if n_before == sum(len(rec_floor.get(c) or []) for c in ("artifacts", "props")):
+                return {"ok": False, "error": f"no record {remove_id} on floor {floor}"}
+            rid = remove_id
+        else:
+            pos = d.get("position") or [0, 0]
+            try:
+                pos = [round(float(pos[0]), 3), round(float(pos[1]), 3)]
+                facing = round(float(d.get("facing", 0)) % 360.0, 1)
+            except (TypeError, ValueError, IndexError):
+                return {"ok": False, "error": "position must be [x, z]"}
+            kind = str(d.get("kind") or "")
+            token = str(d.get("token") or "")
+            if kind:
+                rid = f"spawn-{kind}-{stamp}"
+                rec_floor.setdefault("props", []).append({"id": rid, "kind": kind, "position": pos, "facing": facing, "scale": 1})
+            elif token:
+                rid = f"spawn-{token}-{stamp}"[:80]
+                rec_floor.setdefault("artifacts", []).append({
+                    "id": rid, "artifact": token, "station": str(d.get("station") or "NW"), "position": pos,
+                    "height": round(float(d.get("height", 0) or 0), 3), "facing": facing, "scale": 1,
+                    "config": {"editor_label": f"{token} / spawned {time.strftime('%Y-%m-%d %H:%M')} by {d.get('by') or 'the hand'}"}})
+            else:
+                return {"ok": False, "error": "spawn needs token (artifact) or kind (prop)"}
+        body = json.dumps({"rooms": rooms, "revision": revision}).encode("utf-8")
+        req = urllib.request.Request(url, data=body, method="POST", headers={"content-type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                resp = json.loads(r.read().decode("utf-8") or "{}")
+        except urllib.error.HTTPError as e:
+            try:
+                err = json.loads(e.read().decode("utf-8")).get("error", e.reason)
+            except Exception:  # noqa: BLE001
+                err = e.reason
+            return {"ok": False, "error": f"save refused ({e.code}): {str(err)[:300]}", "id": rid}
+        except Exception as e:  # noqa: BLE001
+            return {"ok": False, "error": f"save failed ({e!r})", "id": rid}
+        live = [l for l in (resp.get("live") or []) if int(l.get("floor", -1)) == floor]
+        return {"ok": True, "id": rid, "floor": floor, "removed": bool(remove_id), "moved": bool(move_id),
+                "revision_id": live[0].get("revision_id") if live else "", "revision": resp.get("revision", ""),
+                "warnings": [w for w in (resp.get("warnings") or []) if f"Floor {floor}:" in str(w)][:6]}
+
+    def publish_update(self, env: dict) -> dict:
+        """Validate, number, record and broadcast one revision envelope."""
+        for key in ("revision_id", "map_id", "operations"):
+            if key not in env:
+                return {"error": f"envelope needs {key}"}
+        if not isinstance(env["operations"], list):
+            return {"error": "operations must be a list"}
+        env = dict(env)
+        env["cmd"] = "update"
+        m = str(env["map_id"])
+        with self.lock:
+            self.seq[m] = self.seq.get(m, 0) + 1
+            env["seq"] = self.seq[m]
+            self.latest[m] = env
+        n = self.broadcast(env)
+        slim = {k: v for k, v in env.items() if k not in ("map_data", "map_text")}
+        slim["has_map"] = isinstance(env.get("map_text"), str) or isinstance(env.get("map_data"), dict)
+        self.record({"k": "request", "env": slim, "transmitted": n})
+        self.note(f"update {env['revision_id']} {m} seq {env['seq']}: "
+                  f"{len(env['operations'])} op(s) -> {n} game(s)")
+        self.publish({"k": "update_sent", "revision_id": env["revision_id"], "map_id": m,
+                      "seq": env["seq"], "transmitted": n})
+        return {"ok": True, "revision_id": env["revision_id"], "seq": env["seq"],
+                "transmitted": n, "games": len(self.games())}
+
+    def on_ack(self, d: dict, addr: str, name: str = "") -> None:
+        row = dict(d)
+        row["from"] = addr
+        row["name"] = name or str(d.get("name", "") or "")
+        row["game_t"] = row.pop("t", None)   # the game's clock; `t` below is the PC's
+        self.record(row)
+        self.note(f"ack {d.get('revision_id')} {d.get('map_id')} from {row['name'] or d.get('device', '?')}: "
+                  f"{d.get('status')}{(' (' + str(d.get('reason')) + ')') if d.get('reason') else ''}"
+                  f" — {str(d.get('detail', ''))[:100]}")
+        self.publish(d)
+        if d.get("status") == "requires_reload" and d.get("reason") == "museum_plan":
+            self.museum_plan(str(d.get("map_id", "")))
+
+    ## A MUSEUM HALL FOLLOWS THE PLAN, NOT THE MAP (memory: museum-stamps-from-plan-
+    ## not-map). The game reports that; with --museum-apply this bridge runs the
+    ## ONE writer of map cells into the live plan, tools/em_map_halls.py --apply,
+    ## and the desktop museum's own follow rebuilds the hall. Opt-in, once per
+    ## 60 s, never on the Quest's behalf alone (the plan is in its pck). The bake
+    ## (tools/em_bake.py, a Godot run) is not started here — the hall shows
+    ## "UNBAKED … (re-bake)" until someone runs it.
+    def museum_plan(self, map_id: str) -> None:
+        if not MUSEUM_APPLY:
+            self.note(f"museum hall {map_id}: the plan lane is off (start with --museum-apply to run em_map_halls.py --apply)")
+            return
+        now = time.time()
+        with self.lock:
+            if now - self._museum_apply_at < 60.0:
+                return
+            self._museum_apply_at = now
+
+        def run() -> None:
+            self.record({"k": "museum_apply", "map_id": map_id, "phase": "start"})
+            self.note(f"museum hall {map_id} changed on the map — running em_map_halls.py --apply")
+            p = subprocess.run([sys.executable, str(ROOT / "tools" / "em_map_halls.py"), "--apply"],
+                               cwd=str(ROOT), capture_output=True, text=True, timeout=600)
+            self.record({"k": "museum_apply", "map_id": map_id, "phase": "done", "rc": p.returncode,
+                         "tail": (p.stdout + p.stderr)[-600:]})
+            self.note(f"em_map_halls.py --apply finished rc={p.returncode}; the desktop museum follows the plan (bake still needed: tools/em_bake.py)")
+        threading.Thread(target=run, daemon=True).start()
+
+    def replay_map(self, c: "Client", map_id: str) -> bool:
+        """A game entering `map_id` gets that map's latest envelope again, marked
+        replay. The adapter answers already_current when its file is that
+        revision, duplicate when it applied it, applied otherwise."""
+        with self.lock:
+            env = self.latest.get(map_id)
+            env = dict(env) if env else None
+        if not env:
+            return False
+        env["replay"] = True
+        try:
+            c.q.put_nowait(env)
+        except queue.Full:
+            return False
+        self.note(f"replayed {env.get('revision_id')} ({map_id}) to {c.addr} on entering the map")
+        return True
+
+    def rows_for(self, rid: str | None, limit: int = 60) -> list[dict]:
+        with self.lock:
+            rows = list(self.ledger)
+        if rid:
+            rows = [r for r in rows if (r.get("revision_id") or (r.get("env") or {}).get("revision_id")) == rid]
+        return rows[-limit:]
 
     def viewers(self) -> int:
         with self.lock:
@@ -268,7 +545,8 @@ def serve_client(link: Link, conn, addr) -> None:
 
                 if kind == "hello":
                     c.role = str(d.get("role", "viewer"))
-                    link.note(f"{c.role} connected from {c.addr}")
+                    c.name = str(d.get("name", "") or "")
+                    link.note(f"{c.role} connected from {c.addr}{(' — ' + c.name) if c.name else ''}")
                     # PRIME A VIEWER ONLY FROM A LIVE GAME. This used to hand
                     # every new viewer `link.pose` unconditionally so it "draws
                     # immediately" — which meant a viewer opened with no game
@@ -308,7 +586,28 @@ def serve_client(link: Link, conn, addr) -> None:
                                       "before this game connected")
                         link.note(f"game is {c.addr}")
                         link.publish({"k": "status", "connected": True})
+                    # A game ENTERING a map gets that map's latest revision again.
+                    # Not a stale queue: it is re-sent from the ledger on purpose,
+                    # so a game that missed it (relaunched, or under the menu when
+                    # it was published) converges; live_update.gd answers
+                    # already_current when its file is that revision.
+                    m = str(d.get("map") or "")
+                    if d.get("proj") == "void":
+                        m = str(d.get("trial") or "void")
+                    if m and m != c.map:
+                        c.map = m
+                        link.replay_map(c, m)
                     link.on_pose(d)
+                elif kind == "update_ack":
+                    link.on_ack(d, c.addr, c.name)
+                elif kind in ("spawn", "spawn_remove", "spawn_move"):
+                    # the VR hand panel / grab-and-move: this process saves the record (see Link.spawn)
+                    if kind == "spawn_remove":
+                        d = {**d, "remove": d.get("id")}
+                    elif kind == "spawn_move":
+                        d = {**d, "move": d.get("id")}
+                    d.setdefault("by", c.name or c.addr)
+                    link.spawn(d, c)
                 elif kind == "log":
                     link.note(f"game: {d.get('msg','')}")
                 elif kind == "cmd" or d.get("cmd"):
@@ -365,7 +664,9 @@ def setup_reverse() -> bool:
         return False
     rc, _ = adb("reverse", f"tcp:{GAME_PORT}", f"tcp:{GAME_PORT}")
     if rc == 0:
-        print(f"[vr-link] adb reverse tcp:{GAME_PORT} — the headset's localhost is now ours")
+        # the web port too: the headset's spawn menu reads /spawnlists and /thumb from it
+        adb("reverse", f"tcp:{WEB_PORT}", f"tcp:{WEB_PORT}", quiet=True)
+        print(f"[vr-link] adb reverse tcp:{GAME_PORT} (+ tcp:{WEB_PORT}) — the headset's localhost is now ours")
         return True
     print("[vr-link] adb reverse failed; is the headset authorised for debugging?")
     return False
@@ -398,6 +699,7 @@ def reverse_tick(link: "Link") -> str:
     if rc == 0 and f"tcp:{GAME_PORT}" in out:
         return "present"
     if adb("reverse", f"tcp:{GAME_PORT}", f"tcp:{GAME_PORT}", quiet=True)[0] == 0:
+        adb("reverse", f"tcp:{WEB_PORT}", f"tcp:{WEB_PORT}", quiet=True)
         link.note(f"adb reverse tcp:{GAME_PORT} set again — the headset's USB session had reset")
         return "reset"
     return "failed"
@@ -470,10 +772,11 @@ def headset_doctor() -> int:
     # the link's birth (the pose stream — all the narrator needs) and the
     # latest change to vr_link.gd (scan/look/interact — what the agent needs).
     src = ROOT / "commons" / "bridge" / "vr_link.gd"
+    src2 = ROOT / "commons" / "bridge" / "live_update.gd"   # the `update` command (2026-10-22)
     code_when = ""
     born_when = ""
     try:
-        p = subprocess.run(["git", "log", "-1", "--format=%ai", "--", str(src)],
+        p = subprocess.run(["git", "log", "-1", "--format=%ai", "--", str(src), str(src2)],
                            cwd=str(ROOT), capture_output=True, text=True, timeout=10)
         code_when = p.stdout.strip()
         p = subprocess.run(["git", "log", "--diff-filter=A", "--format=%ai", "--", str(src)],
@@ -481,13 +784,16 @@ def headset_doctor() -> int:
         born_when = p.stdout.strip().splitlines()[-1] if p.stdout.strip() else ""
     except Exception:
         pass
-    if not code_when and src.exists():
-        code_when = time.strftime("%Y-%m-%d %H:%M:%S",
-                                  time.localtime(src.stat().st_mtime))
+    if src.exists() or src2.exists():
+        # a dirty tree: the newer of the two files' mtimes outranks the last commit
+        newest = max([f.stat().st_mtime for f in (src, src2) if f.exists()])
+        disk_when = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(newest))
+        if not code_when or disk_when > code_when[:19]:
+            code_when = disk_when
     if installed and code_when:
         stale = installed[:19] < code_when[:19]
         has_link = (installed[:19] >= born_when[:19]) if born_when else not stale
-        print("  vr_link.gd     latest %s%s" % (code_when[:19],
+        print("  bridge code    latest %s%s  (vr_link.gd + live_update.gd)" % (code_when[:19],
               ("  (link since %s)" % born_when[:10]) if born_when else ""))
         if not has_link:
             ok = False
@@ -500,7 +806,7 @@ def headset_doctor() -> int:
             print("                 latest vr_link.gd: no scan/look/interact, so --agent")
             print("                 cannot see or touch. Export + install for that.")
         else:
-            print("  BUILD          newer than vr_link.gd — poses, scan, look, interact all present")
+            print("  BUILD          newer than the bridge code — poses, scan, look, interact, live update all present")
 
     rc, out = adb("shell", f"run-as {PKG} ls files/vr_link.on", quiet=True)
     armed = rc == 0 and "vr_link.on" in out and "No such file" not in out
@@ -686,6 +992,8 @@ class Handler(BaseHTTPRequestHandler):
             with LINK.lock:
                 age = (time.time() - LINK.last_pose_at) if LINK.last_pose_at else None
                 self._json({"connected": LINK.connected, "peer": LINK.peer,
+                            "games": sum(1 for c in LINK.clients if c.role == "game"),
+                            "game_names": [c.name or c.addr for c in LINK.clients if c.role == "game"],
                             "hz": round(LINK.rate, 1), "pose": LINK.pose,
                             # HOW OLD IS THAT POSE. Without this every consumer
                             # has to guess, and they all guessed "current".
@@ -718,6 +1026,32 @@ class Handler(BaseHTTPRequestHandler):
             self.sse()
             return
 
+        if u.path == "/revisions":
+            # the ledger: ?id=<revision_id> for one revision's request + acks
+            rid = (q.get("id") or [None])[0]
+            self._json({"games": len(LINK.games()), "rows": LINK.rows_for(rid)})
+            return
+
+        if u.path == "/spawnlists":
+            # the spawn menu's data (tools/build_void_spawnlists.py), for a headset
+            # that cannot read the PC's files: adb reverse tcp:8772 makes this its localhost
+            if not SPAWNLISTS.exists():
+                self._json({"error": "commons/data/void_spawnlists.json is missing - run python tools/build_void_spawnlists.py"}, 404)
+                return
+            self._send(200, SPAWNLISTS.read_bytes(), "application/json")
+            return
+
+        if u.path.startswith("/thumb/"):
+            # /thumb/<token>/<angle>.png -> the artifact-gallery capture, read-only
+            parts = [p for p in u.path.split("/")[2:] if p and p not in (".", "..")]
+            if len(parts) == 2 and parts[1].endswith(".png"):
+                f = PUBLIC_DIR / "artifact-gallery" / "captures" / parts[0] / parts[1]
+                if f.exists():
+                    self._send(200, f.read_bytes(), "image/png")
+                    return
+            self._send(404, b"no such thumbnail", "text/plain")
+            return
+
         self._send(404, b"not found", "text/plain")
 
     def do_POST(self) -> None:
@@ -734,6 +1068,21 @@ class Handler(BaseHTTPRequestHandler):
             LINK.send(body)
             LINK.note(f"-> game: {json.dumps(body)[:120]}")
             self._json({"ok": True})
+            return
+
+        if u.path == "/spawn":
+            # the spawn lane over HTTP (tests, the AI loop): same as a game's {"k":"spawn"}
+            d = body if isinstance(body, dict) else {}
+            res = LINK._spawn_blocking(d)
+            LINK.note(f"spawn (http) {d.get('token') or d.get('kind') or d.get('remove')} floor {d.get('floor')}: "
+                      f"{'ok ' + str(res.get('id')) if res.get('ok') else 'failed: ' + str(res.get('error'))}")
+            self._json(res, 200 if res.get("ok") else 400)
+            return
+
+        if u.path == "/update":
+            # a revision envelope from the encyclopedia's save (src/lib/live-update.ts)
+            r = LINK.publish_update(body)
+            self._json(r, 400 if "error" in r else 200)
             return
 
         if u.path == "/agent":
@@ -941,7 +1290,12 @@ def main() -> int:
     ap.add_argument("--calibrate", action="store_true",
                     help="check the cell-to-world rule against the live player")
     ap.add_argument("--no-adb", action="store_true", help="skip adb entirely")
+    ap.add_argument("--museum-apply", action="store_true",
+                    help="when a game answers a live update with requires_reload (museum_plan), run "
+                         "tools/em_map_halls.py --apply so the desktop museum follows the map (bake not included)")
     args = ap.parse_args()
+    global MUSEUM_APPLY
+    MUSEUM_APPLY = bool(args.museum_apply)
 
     if args.headset:
         return headset_doctor()
