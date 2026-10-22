@@ -74,8 +74,8 @@ Godot 4 VR/desktop project. Algorithms taught through maps and interactable arti
 - `utilities`: spawn, teleporter, ramps, transport cubes, labels
 - `interactables`: artifacts by lookup name
 
-**Scale (measured 2026-09-08):** 94 sequence files, 2803 maps, 3427 registry entries across
-232 registry files, **24 spine sequences**. The spine moved twice on 2026-09-07: array_tutorial
+**Scale (measured 2026-10-19):** 96 sequence files, 2822 maps with map_data.json, 303 registry
+files, **25 spine sequences, 206 halls** (registry entries not re-counted; 3427 on 2026-09-08). The spine moved twice on 2026-09-07: array_tutorial
 was revived (22 -> 23, bb566b92d) and colour was unbraided, pattern becoming a sequence of its own
 and then renamed tiling (23 -> 24, 0e15e9e14 + 5c8111c55). Symmetry stays dissolved into color's
 census room (2026-08-24).
@@ -93,10 +93,11 @@ Run from repo root:
 ### Steering & Status
 | Tool | Command | Purpose |
 |------|---------|---------|
-| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 24 spine sequences through 7 completion stages |
+| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 25 spine sequences through 7 completion stages |
 | **Pipeline (single)** | `python tools/sequence_pipeline_scorer.py <seq_id>` | Score one sequence |
 | **Dashboard** | `powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1 -Mode status` | Project status, recommendations |
 | **Heat Map** | `python tools/heat_map_generator.py` | Temperature-based priority scoring |
+| **Capacity progress** | `python tools/capacity_progress.py [--markdown] [--seq=<id>] [--check]` | One evidence rung per hall (none/written/focused/contracted/runs/learner) read from the lineage, plan, memory and ghost-state files against the live spine; drift and absent authoritative files. Feeds `/capacity-tree`; see `doc/book/course/CAPACITY_TREE_REVIEW.md` |
 
 ### Navigation & Context
 | Tool | Command | Purpose |
@@ -419,7 +420,7 @@ See `doc/MAP_BUILDING_GUIDE.md` for full details. Key points:
 
 **Map Studio:** `/map-studio` in the encyclopedia — 3-layer visual editor built from scratch.
 
-**Spine sequences are the priority** — 24 sequences forming the core curriculum (symmetry dissolved 2026-08-24: its wallpaper heroes live in color's closing census room, Symmetry_Seventeen; array_tutorial revived and tiling unbraided from colour, both 2026-09-07).
+**Spine sequences are the priority** — 25 sequences forming the core curriculum (symmetry dissolved 2026-08-24: its wallpaper heroes live in color's closing census room, Symmetry_Seventeen; array_tutorial revived and tiling unbraided from colour, both 2026-09-07).
 
 ## Heat Map
 
