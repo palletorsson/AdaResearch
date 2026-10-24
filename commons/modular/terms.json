@@ -1,0 +1,2133 @@
+{
+  "_doc": "The modular class system's terms: every thing is an expression over primitives (p) and other terms (t). One file for the Godot kernel (commons/modular/composite.gd builds it), the web tree (/knowledge-tree) and the tutorial path (tools/modular_path.py: derivation order = lesson order). Palle, 2026-10-23: 'point + mesh(color) + collider = sphere_collider \u2026 everything in this 3d world is triangles'. Primitives: point, mesh{shape,size,color}, collider{shape,size}, body{kind}, grabbable, label{text}, light. Operators: compose{parts}, associate{of,surface,story}, times{of,n,layout}, array{of,n,step,dims}, assemblage{parts[{of,at,rot,scale}]}, engine{of,kind}, transform{of,at,rot,scale}. A part with \"scaffold\": true is shown while the thing is being built and removed when it is done (Palle: the tape ends alone, line and points gone). A mesh may name a \"shader\" (ink: the drawn stroke, tapered ends, darker silhouette). {\"op\":\"sort\",\"of\":\u2026,\"by\":size|height|width|name} lays a thing's parts in a row by a reading of each (measure's first operator); {\"p\":\"prefab\",\"token\":name} stands a registry artifact in the grammar as itself. {\"op\":\"connect\",\"of\":\u2026,\"a\":i,\"b\":j,\"kind\":rope|rod|spring} (or \"ties\":[[i,j,kind]\u2026]) ties two parts of a thing by index \u2014 the strings.",
+  "version": 1,
+  "chapters": [
+    "point",
+    "line",
+    "association",
+    "triangle",
+    "solid",
+    "assemblage",
+    "transformation",
+    "array",
+    "logic",
+    "motion"
+  ],
+  "terms": {
+    "point": {
+      "chapter": "point",
+      "label": "point",
+      "expr": "point \u2014 white on its own, black once it belongs to a line",
+      "from": [],
+      "build": {
+        "p": "point",
+        "color": "ffffff",
+        "radius": 0.035
+      }
+    },
+    "mesh_color": {
+      "chapter": "point",
+      "label": "mesh(color)",
+      "expr": "mesh(color)",
+      "from": [],
+      "build": {
+        "p": "mesh",
+        "shape": "sphere",
+        "size": [
+          0.2
+        ],
+        "color": "d86e32",
+        "alpha": 0.6
+      }
+    },
+    "collider": {
+      "chapter": "point",
+      "label": "collider",
+      "expr": "collider",
+      "from": [],
+      "build": {
+        "p": "collider",
+        "shape": "sphere",
+        "size": [
+          0.24
+        ],
+        "show": true
+      }
+    },
+    "grabbable": {
+      "chapter": "point",
+      "label": "grabbable",
+      "expr": "grabbable",
+      "from": [],
+      "build": {
+        "p": "grabbable"
+      }
+    },
+    "sphere_collider": {
+      "chapter": "point",
+      "label": "sphere_collider",
+      "expr": "point + mesh(color) + collider",
+      "from": [
+        "point",
+        "mesh_color",
+        "collider"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "point",
+            "scaffold": true
+          },
+          {
+            "t": "mesh_color"
+          },
+          {
+            "t": "collider"
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "grab_sphere": {
+      "chapter": "point",
+      "label": "grab_sphere",
+      "expr": "sphere_collider + grabbable",
+      "from": [
+        "sphere_collider",
+        "grabbable"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "point",
+            "scaffold": true
+          },
+          {
+            "t": "mesh_color"
+          },
+          {
+            "t": "collider"
+          },
+          {
+            "t": "grabbable"
+          }
+        ]
+      }
+    },
+    "line": {
+      "chapter": "line",
+      "label": "line",
+      "expr": "dist(point, point) = length = line \u2014 an ink stroke, 4 mm wide",
+      "from": [
+        "point",
+        "point"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -0.5,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.5,
+              0,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "cylinder",
+            "size": [
+              0.004,
+              1.0
+            ],
+            "color": "2b1d14",
+            "rot": [
+              0,
+              0,
+              90
+            ],
+            "shader": "ink"
+          }
+        ]
+      }
+    },
+    "tape": {
+      "chapter": "line",
+      "label": "tape",
+      "expr": "line + association(surface: marking tape) \u2014 the line is scaffold; the tape stays",
+      "from": [
+        "line"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "line",
+              "scaffold": true
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.0,
+                0.012,
+                0.1
+              ],
+              "color": "f2eee6",
+              "at": [
+                0,
+                -0.015,
+                0
+              ]
+            }
+          ]
+        },
+        "surface": "tape"
+      }
+    },
+    "plank": {
+      "chapter": "line",
+      "label": "plank",
+      "expr": "line + association(mesh_skin_collider)",
+      "from": [
+        "line",
+        "collider"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "line",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.0,
+              0.06,
+              0.22
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              -0.04,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.0,
+              0.06,
+              0.22
+            ],
+            "at": [
+              0,
+              -0.04,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "plank_sizes": {
+      "chapter": "line",
+      "label": "plank sizes",
+      "expr": "plank * x",
+      "from": [
+        "plank"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "plank"
+            },
+            "at": [
+              0,
+              0,
+              -0.3
+            ],
+            "scale": [
+              0.5,
+              1,
+              1
+            ]
+          },
+          {
+            "of": {
+              "t": "plank"
+            },
+            "at": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "of": {
+              "t": "plank"
+            },
+            "at": [
+              0,
+              0,
+              0.3
+            ],
+            "scale": [
+              1.5,
+              1,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "stick": {
+      "chapter": "line",
+      "label": "stick",
+      "expr": "line + association(mesh_skin_collider) + grabbable",
+      "from": [
+        "plank",
+        "grabbable"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "line",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "cylinder",
+            "size": [
+              0.025,
+              1.0
+            ],
+            "color": "9a7b52",
+            "rot": [
+              0,
+              0,
+              90
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.0,
+              0.05,
+              0.05
+            ]
+          },
+          {
+            "t": "grabbable"
+          }
+        ]
+      }
+    },
+    "trace": {
+      "chapter": "line",
+      "label": "trace",
+      "expr": "physics_engine(sphere_collider) = trace",
+      "from": [
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "sphere_collider"
+          },
+          "at": [
+            -0.5,
+            0.6,
+            0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "kind": "trace"
+      }
+    },
+    "hand_trace": {
+      "chapter": "line",
+      "label": "hand trace",
+      "expr": "hand_movement(sphere_path) = trace",
+      "from": [
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "sphere_collider"
+          },
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "kind": "hand"
+      }
+    },
+    "walk_line": {
+      "chapter": "association",
+      "label": "walk this line",
+      "expr": "association(tape)",
+      "from": [
+        "tape"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "tape"
+        },
+        "story": "walk this line"
+      }
+    },
+    "red_line": {
+      "chapter": "association",
+      "label": "red line \u00b7 do not cross",
+      "expr": "association(tape)",
+      "from": [
+        "tape"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "tape"
+        },
+        "surface": "red",
+        "story": "do not cross"
+      }
+    },
+    "parallel_lines": {
+      "chapter": "association",
+      "label": "parallel_lines",
+      "expr": "association(tape * 2)",
+      "from": [
+        "tape",
+        "tape"
+      ],
+      "build": {
+        "op": "times",
+        "of": {
+          "t": "tape"
+        },
+        "n": 2,
+        "layout": "row",
+        "gap": 0.3,
+        "axis": "z"
+      }
+    },
+    "line_plus": {
+      "chapter": "association",
+      "label": "line_plus",
+      "expr": "association(tape * 2)",
+      "from": [
+        "tape",
+        "tape"
+      ],
+      "build": {
+        "op": "times",
+        "of": {
+          "t": "tape"
+        },
+        "n": 2,
+        "layout": "ring"
+      }
+    },
+    "cross_lines": {
+      "chapter": "association",
+      "label": "cross_lines",
+      "expr": "association(tape * 2)",
+      "from": [
+        "tape",
+        "tape"
+      ],
+      "build": {
+        "op": "times",
+        "of": {
+          "t": "tape"
+        },
+        "n": 2,
+        "layout": "ring",
+        "phase": 45
+      }
+    },
+    "heath_mesh": {
+      "chapter": "association",
+      "label": "heath mesh",
+      "expr": "association(line_plus)",
+      "from": [
+        "line_plus"
+      ],
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "line_plus"
+          },
+          "scale": [
+            0.5,
+            1,
+            0.5
+          ]
+        },
+        "n": 3,
+        "step": 0.33,
+        "dims": 2
+      }
+    },
+    "danger_x": {
+      "chapter": "association",
+      "label": "danger_x",
+      "expr": "association(cross_lines)",
+      "from": [
+        "cross_lines"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "cross_lines"
+        },
+        "surface": "hazard",
+        "story": "danger"
+      }
+    },
+    "triangle": {
+      "chapter": "triangle",
+      "label": "triangle",
+      "expr": "line * 3 = connected edges",
+      "from": [
+        "line",
+        "line",
+        "line"
+      ],
+      "build": {
+        "op": "times",
+        "of": {
+          "t": "line"
+        },
+        "n": 3,
+        "layout": "polygon"
+      }
+    },
+    "triangle_face": {
+      "chapter": "triangle",
+      "label": "triangle_base_face",
+      "expr": "face(3 * edges) \u2014 everything in this 3d world is triangles",
+      "from": [
+        "triangle"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "triangle",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "triangle",
+            "size": [
+              1.0
+            ],
+            "color": "d9cfbc",
+            "alpha": 0.9
+          }
+        ]
+      }
+    },
+    "quad": {
+      "chapter": "triangle",
+      "label": "quad",
+      "expr": "triangle * 2 = quad = plane",
+      "from": [
+        "triangle_face",
+        "triangle_face"
+      ],
+      "build": {
+        "op": "times",
+        "of": {
+          "t": "triangle_face"
+        },
+        "n": 2,
+        "layout": "mirror"
+      }
+    },
+    "wooden_plane": {
+      "chapter": "triangle",
+      "label": "wooden_plane",
+      "expr": "association(quad)",
+      "from": [
+        "quad"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "quad",
+              "scaffold": true
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.1,
+                0.03,
+                1.1
+              ],
+              "color": "c9a978",
+              "at": [
+                0,
+                0.02,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                1.1,
+                0.03,
+                1.1
+              ],
+              "at": [
+                0,
+                0.02,
+                0
+              ]
+            },
+            {
+              "p": "body",
+              "kind": "static"
+            }
+          ]
+        },
+        "surface": "wood"
+      }
+    },
+    "walls": {
+      "chapter": "triangle",
+      "label": "walls",
+      "expr": "association(quad)",
+      "from": [
+        "quad",
+        "quad"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "wooden_plane"
+            },
+            "at": [
+              -0.4,
+              0.55,
+              0
+            ],
+            "rot": [
+              90,
+              0,
+              0
+            ]
+          },
+          {
+            "of": {
+              "t": "wooden_plane"
+            },
+            "at": [
+              0.4,
+              0.55,
+              0
+            ],
+            "rot": [
+              90,
+              90,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "tetrahedron": {
+      "chapter": "solid",
+      "label": "tetrahedron",
+      "expr": "triangle_base_face * 3",
+      "from": [
+        "triangle_face",
+        "triangle_face",
+        "triangle_face"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "triangle_face",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "tetra",
+            "size": [
+              0.7
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.7
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.6,
+              0.7
+            ],
+            "at": [
+              0,
+              0.3,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "plastic_cone": {
+      "chapter": "solid",
+      "label": "plastic_cone",
+      "expr": "association(tetrahedron)",
+      "from": [
+        "tetrahedron"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.25,
+                0.7
+              ],
+              "color": "e0742a",
+              "at": [
+                0,
+                0.35,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.55,
+                0.03,
+                0.55
+              ],
+              "color": "e0742a"
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.5,
+                0.7,
+                0.5
+              ],
+              "at": [
+                0,
+                0.35,
+                0
+              ]
+            },
+            {
+              "p": "body",
+              "kind": "static"
+            }
+          ]
+        },
+        "surface": "plastic"
+      }
+    },
+    "pyramid": {
+      "chapter": "solid",
+      "label": "pyramid",
+      "expr": "triangle_base_face * 5",
+      "from": [
+        "triangle_face",
+        "quad"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "pyramid",
+            "size": [
+              0.8,
+              0.6
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.8
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.6,
+              0.8
+            ],
+            "at": [
+              0,
+              0.3,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "wedge": {
+      "chapter": "solid",
+      "label": "wedge",
+      "expr": "triangle_base_face * 6",
+      "from": [
+        "triangle_face",
+        "quad"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "wedge",
+            "size": [
+              1.0,
+              0.45,
+              0.6
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.85
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.0,
+              0.45,
+              0.6
+            ],
+            "at": [
+              0,
+              0.225,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "walk_ramp": {
+      "chapter": "solid",
+      "label": "walk_ramp",
+      "expr": "association(wedge)",
+      "from": [
+        "wedge",
+        "tape"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "wedge"
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "tape"
+            },
+            "at": [
+              0,
+              0.24,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              24.2
+            ]
+          }
+        ]
+      }
+    },
+    "cube": {
+      "chapter": "solid",
+      "label": "cube",
+      "expr": "quad * 6",
+      "from": [
+        "quad",
+        "quad",
+        "quad",
+        "quad",
+        "quad",
+        "quad"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.85,
+            "at": [
+              0,
+              0.25,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.5,
+              0.5
+            ],
+            "at": [
+              0,
+              0.25,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "wooden_box": {
+      "chapter": "solid",
+      "label": "wooden_box",
+      "expr": "association(cube)",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "cube"
+        },
+        "surface": "wood"
+      }
+    },
+    "concrete_block": {
+      "chapter": "solid",
+      "label": "concrete_block",
+      "expr": "association(cube)",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "cube"
+        },
+        "surface": "concrete"
+      }
+    },
+    "cardboard_box": {
+      "chapter": "solid",
+      "label": "cardboard_box",
+      "expr": "association(cube)",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "cube"
+        },
+        "surface": "cardboard"
+      }
+    },
+    "warhol_box": {
+      "chapter": "solid",
+      "label": "warhol_box",
+      "expr": "association(cube)",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "cube"
+        },
+        "surface": "warhol",
+        "story": "Brillo"
+      }
+    },
+    "elevated_plank": {
+      "chapter": "assemblage",
+      "label": "elevated_plank",
+      "expr": "assemblage(sphere_collider, plank)",
+      "from": [
+        "sphere_collider",
+        "sphere_collider",
+        "plank"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              -0.4,
+              0.2,
+              0
+            ]
+          },
+          {
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              0.4,
+              0.2,
+              0
+            ]
+          },
+          {
+            "of": {
+              "t": "plank"
+            },
+            "at": [
+              0,
+              0.46,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "physics_test": {
+      "chapter": "assemblage",
+      "label": "physics_test",
+      "expr": "physics_engine(assemblage(box, plain sphere_collider))",
+      "from": [
+        "wooden_box",
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "assemblage",
+          "parts": [
+            {
+              "of": {
+                "t": "wooden_box"
+              },
+              "at": [
+                -0.3,
+                0,
+                0
+              ]
+            },
+            {
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.35,
+                1.0,
+                0
+              ]
+            }
+          ]
+        },
+        "kind": "physics"
+      }
+    },
+    "stuff": {
+      "chapter": "assemblage",
+      "label": "stuff \u00b7 walkways \u00b7 staging",
+      "expr": "assemblage(other things)",
+      "from": [
+        "plank",
+        "wooden_box",
+        "cardboard_box",
+        "walk_ramp"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "walk_ramp"
+            },
+            "at": [
+              -0.5,
+              0,
+              0.3
+            ],
+            "scale": [
+              0.6,
+              0.6,
+              0.6
+            ]
+          },
+          {
+            "of": {
+              "t": "wooden_box"
+            },
+            "at": [
+              0.35,
+              0,
+              -0.25
+            ]
+          },
+          {
+            "of": {
+              "t": "cardboard_box"
+            },
+            "at": [
+              0.35,
+              0.5,
+              -0.25
+            ],
+            "scale": [
+              0.8,
+              0.8,
+              0.8
+            ]
+          },
+          {
+            "of": {
+              "t": "plank"
+            },
+            "at": [
+              0,
+              0.55,
+              0.1
+            ],
+            "rot": [
+              0,
+              0,
+              20
+            ]
+          }
+        ]
+      }
+    },
+    "melancolia": {
+      "chapter": "assemblage",
+      "label": "Melencolia",
+      "expr": "math(): sphere vs triangle shapes",
+      "from": [
+        "sphere_collider",
+        "tetrahedron"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              -0.45,
+              0.22,
+              0
+            ]
+          },
+          {
+            "of": {
+              "t": "tetrahedron"
+            },
+            "at": [
+              0.15,
+              0,
+              0
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ]
+          },
+          {
+            "of": {
+              "p": "mesh",
+              "shape": "dodeca",
+              "size": [
+                0.3
+              ],
+              "color": "d9cfbc"
+            },
+            "at": [
+              0.5,
+              0.3,
+              -0.15
+            ]
+          }
+        ]
+      }
+    },
+    "pick_up_cube": {
+      "chapter": "transformation",
+      "label": "pick_up_cube",
+      "expr": "transformation \u00b7 movement \u00b7 space",
+      "from": [
+        "cube",
+        "grabbable"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.35,
+              0.35,
+              0.35
+            ],
+            "color": "7a4b8a",
+            "at": [
+              0,
+              0.175,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.35,
+              0.35,
+              0.35
+            ],
+            "at": [
+              0,
+              0.175,
+              0
+            ]
+          },
+          {
+            "t": "grabbable"
+          }
+        ]
+      }
+    },
+    "game_spaces": {
+      "chapter": "transformation",
+      "label": "game spaces",
+      "expr": "transformation of space",
+      "from": [
+        "pick_up_cube",
+        "walls"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "walls"
+            },
+            "at": [
+              0,
+              0,
+              -0.3
+            ]
+          },
+          {
+            "of": {
+              "t": "pick_up_cube"
+            },
+            "at": [
+              -0.35,
+              0,
+              0.3
+            ]
+          },
+          {
+            "of": {
+              "t": "pick_up_cube"
+            },
+            "at": [
+              0,
+              0,
+              0.3
+            ]
+          },
+          {
+            "of": {
+              "t": "pick_up_cube"
+            },
+            "at": [
+              0.35,
+              0,
+              0.3
+            ]
+          }
+        ]
+      }
+    },
+    "grid": {
+      "chapter": "array",
+      "label": "grids",
+      "expr": "array(point)",
+      "from": [
+        "point"
+      ],
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "point"
+        },
+        "n": 4,
+        "step": 0.3,
+        "dims": 2
+      }
+    },
+    "grid_prefabs": {
+      "chapter": "array",
+      "label": "grid(prefabs)",
+      "expr": "grid(prefabs)",
+      "from": [
+        "grid",
+        "cube"
+      ],
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "cube"
+          },
+          "scale": [
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        "n": 3,
+        "step": 0.4,
+        "dims": 2
+      }
+    },
+    "balls_test_grid": {
+      "chapter": "array",
+      "label": "balls_test_grid",
+      "expr": "physics_engine(array(sphere_colliders))",
+      "from": [
+        "grid",
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          "n": 3,
+          "step": 0.4,
+          "dims": 2,
+          "y": 0.8
+        },
+        "kind": "physics"
+      }
+    },
+    "logic": {
+      "chapter": "logic",
+      "label": "not \u00b7 or \u00b7 xor \u00b7 true \u00b7 false",
+      "expr": "logic(physics_test)",
+      "from": [
+        "physics_test"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "t": "physics_test"
+        },
+        "kind": "logic",
+        "gates": [
+          "not",
+          "or",
+          "xor",
+          "true",
+          "false"
+        ]
+      }
+    },
+    "sine_movement": {
+      "chapter": "motion",
+      "label": "sine movement",
+      "expr": "continue with sine movement",
+      "from": [
+        "point"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "sphere_collider"
+          },
+          "scale": [
+            0.4,
+            0.4,
+            0.4
+          ]
+        },
+        "kind": "sine",
+        "amplitude": 0.25,
+        "period": 2.0
+      }
+    },
+    "sine_surface": {
+      "chapter": "motion",
+      "label": "sine_surface",
+      "expr": "sine array = sine surface",
+      "from": [
+        "grid",
+        "sine_movement"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "n": 5,
+          "step": 0.25,
+          "dims": 2
+        },
+        "kind": "sine_field",
+        "amplitude": 0.15,
+        "period": 2.0
+      }
+    },
+    "trace_test": {
+      "chapter": "motion",
+      "label": "trace_test (forces)",
+      "expr": "in forces: cube stack = trace_test",
+      "from": [
+        "cube",
+        "trace"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "assemblage",
+          "parts": [
+            {
+              "of": {
+                "t": "cube"
+              },
+              "at": [
+                -0.3,
+                0,
+                0
+              ],
+              "scale": [
+                0.6,
+                0.6,
+                0.6
+              ]
+            },
+            {
+              "of": {
+                "t": "cube"
+              },
+              "at": [
+                -0.25,
+                0.3,
+                0.05
+              ],
+              "scale": [
+                0.6,
+                0.6,
+                0.6
+              ]
+            },
+            {
+              "of": {
+                "t": "cube"
+              },
+              "at": [
+                -0.2,
+                0.6,
+                0
+              ],
+              "scale": [
+                0.6,
+                0.6,
+                0.6
+              ]
+            },
+            {
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.4,
+                1.2,
+                0
+              ],
+              "scale": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            }
+          ]
+        },
+        "kind": "trace"
+      }
+    },
+    "topology_test": {
+      "chapter": "motion",
+      "label": "topology_test",
+      "expr": "balls_test_grid + sine_surface",
+      "from": [
+        "balls_test_grid",
+        "sine_surface"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "of": {
+              "t": "sine_surface"
+            },
+            "at": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "of": {
+              "t": "balls_test_grid"
+            },
+            "at": [
+              0,
+              0.3,
+              0
+            ],
+            "scale": [
+              0.7,
+              0.7,
+              0.7
+            ]
+          }
+        ]
+      }
+    },
+    "random_cubes": {
+      "chapter": "motion",
+      "label": "random_cubes",
+      "expr": "randomness(grid(cube))",
+      "from": [
+        "grid_prefabs"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "t": "grid_prefabs"
+        },
+        "kind": "random",
+        "seed": 7,
+        "jitter": 0.25
+      }
+    },
+    "noise_space": {
+      "chapter": "motion",
+      "label": "noise_space",
+      "expr": "noise(sine_surface)",
+      "from": [
+        "sine_surface"
+      ],
+      "build": {
+        "op": "engine",
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.25,
+              0.25,
+              0.25
+            ]
+          },
+          "n": 5,
+          "step": 0.25,
+          "dims": 2
+        },
+        "kind": "noise",
+        "amplitude": 0.2,
+        "seed": 3
+      }
+    },
+    "skateboard": {
+      "chapter": "assemblage",
+      "label": "skateboard",
+      "expr": "plank + sphere_collider * 4 = skateboard",
+      "from": [
+        "plank",
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "plank"
+            },
+            "at": [
+              0,
+              0.11,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              -0.32,
+              0.05,
+              -0.09
+            ],
+            "scale": 0.45
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              0.32,
+              0.05,
+              -0.09
+            ],
+            "scale": 0.45
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              -0.32,
+              0.05,
+              0.09
+            ],
+            "scale": 0.45
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "at": [
+              0.32,
+              0.05,
+              0.09
+            ],
+            "scale": 0.45
+          }
+        ]
+      }
+    },
+    "eu_pallet": {
+      "chapter": "assemblage",
+      "label": "EU pallet",
+      "expr": "cube * 9 + plank * 3 + plank * 5 + plank * 3 = EU pallet \u2014 the same blocks as the skateboard",
+      "from": [
+        "cube",
+        "plank"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "array",
+              "of": {
+                "t": "plank"
+              },
+              "n": 3,
+              "step": 0.4,
+              "dims": 1
+            },
+            "at": [
+              0,
+              0.0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "array",
+              "of": {
+                "t": "cube"
+              },
+              "n": 3,
+              "step": 0.4,
+              "dims": 2
+            },
+            "scale": 0.5,
+            "at": [
+              0,
+              0.04,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "array",
+              "of": {
+                "t": "plank"
+              },
+              "n": 3,
+              "step": 0.4,
+              "dims": 1
+            },
+            "rot": [
+              0,
+              90,
+              0
+            ],
+            "at": [
+              0,
+              0.16,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "array",
+              "of": {
+                "t": "plank"
+              },
+              "n": 5,
+              "step": 0.2,
+              "dims": 1
+            },
+            "at": [
+              0,
+              0.2,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "tilt_gate": {
+      "chapter": "assemblage",
+      "label": "tilt gate",
+      "expr": "step(plank tilted + sphere_collider, physics) = the ball rolls one way \u2014 the beginning of logic",
+      "from": [
+        "plank",
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "at": [
+                0,
+                0.3,
+                0
+              ],
+              "rot": [
+                0,
+                0,
+                -8
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.38,
+                0.48,
+                0
+              ],
+              "scale": 0.6
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "at": [
+                0,
+                0.1,
+                0
+              ],
+              "scale": 0.5
+            }
+          ]
+        }
+      }
+    },
+    "pallet_sorted": {
+      "chapter": "assemblage",
+      "label": "deconstructed pallet, sorted",
+      "expr": "sort(the pallet taken apart, by size) \u2014 measure's first operator",
+      "from": [
+        "eu_pallet",
+        "cube",
+        "plank"
+      ],
+      "build": {
+        "op": "sort",
+        "by": "size",
+        "gap": 0.06,
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "scale": 0.5
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "scale": 0.8
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "scale": 0.8
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "scale": 0.8
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              }
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              }
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              }
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              }
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              }
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "scale": 0.6
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "scale": 0.6
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "scale": 0.6
+            }
+          ]
+        }
+      }
+    },
+    "tied_pallet": {
+      "chapter": "assemblage",
+      "label": "tied pallet",
+      "expr": "connect(eu_pallet's top board, bottom board, rope) \u2014 the strings",
+      "from": [
+        "eu_pallet",
+        "plank"
+      ],
+      "build": {
+        "op": "connect",
+        "ties": [
+          [
+            0,
+            3,
+            "rope"
+          ],
+          [
+            1,
+            2,
+            "rod"
+          ]
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "op": "array",
+                "of": {
+                  "t": "plank"
+                },
+                "n": 3,
+                "step": 0.4,
+                "dims": 1
+              },
+              "at": [
+                0,
+                0.0,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "op": "array",
+                "of": {
+                  "t": "cube"
+                },
+                "n": 3,
+                "step": 0.4,
+                "dims": 2
+              },
+              "scale": 0.5,
+              "at": [
+                0,
+                0.04,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "op": "array",
+                "of": {
+                  "t": "plank"
+                },
+                "n": 3,
+                "step": 0.4,
+                "dims": 1
+              },
+              "rot": [
+                0,
+                90,
+                0
+              ],
+              "at": [
+                0,
+                0.16,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "op": "array",
+                "of": {
+                  "t": "plank"
+                },
+                "n": 5,
+                "step": 0.2,
+                "dims": 1
+              },
+              "at": [
+                0,
+                0.2,
+                0
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

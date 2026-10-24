@@ -1,0 +1,220 @@
+#!/usr/bin/env python3
+"""The visual memory atlas (handover 2026-10-24, § 6 and slice D).
+
+One image, 8–20 symbols: each a thumbnail (the game's own capture of the mod_ token), its
+name, its definition in the grammar's notation, and arrows to the symbols it is built from.
+Mode B — a self-contained capsule: everything a reader needs is drawn into the pixels (names,
+definitions, the legend of operators); no sidecar is assumed. The canonical AST is written
+beside it as JSON so a BLIND decode (a model given the image only) can be scored against it.
+
+    python tools/visual_memory_atlas.py                       # ada_run/visual_memory/atlas.png + canonical.json
+    python tools/visual_memory_atlas.py --symbols a,b,c       # choose the symbols
+    python tools/visual_memory_atlas.py --score decoded.json  # compare a blind decode with the canonical
+
+Score: per symbol, the name recovered; the set of parents (what it is built from); the
+operator at the root of its definition; the counts in it (n of times / array). Reported as
+hits over expected, never as a single number without its parts.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+ENC = ROOT.parent / "ada_encyclopedia"
+TERMS = ROOT / "commons/modular/terms.json"
+CAPTURES = ENC / "public/artifact-gallery/captures"
+SYMBOL_ICONS = ENC / "public/book-images/live-update"
+OUT_DIR = ROOT / "ada_run/visual_memory"
+
+DEFAULT = ["point", "sphere_collider", "grab_sphere", "line", "tape", "plank", "triangle", "quad", "cube",
+           "wooden_box", "skateboard", "eu_pallet", "tied_pallet", "tilt_gate", "pallet_sorted", "grid"]
+
+BY_KINDS = {"sine", "sine_field", "noise", "random"}
+
+
+def to_text(e: dict) -> str:
+    """the notation of MODULAR_SPINE_TEXT.md, from a build expression"""
+    if not e:
+        return "·"
+    if "t" in e:
+        return str(e["t"])
+    if e.get("p") == "prefab":
+        return f"[{e.get('token', '?')}]"
+    if "p" in e:
+        return str(e["p"]) + (f"({e['shape']})" if e.get("shape") else "")
+    op = e.get("op", "")
+    of = lambda: to_text(e.get("of", {}))  # noqa: E731
+    if op == "compose":
+        parts = [to_text(p) for p in e.get("parts", [])]
+        return " + ".join(f"({p})" if " + " in p else p for p in parts) or "·"
+    if op == "assemblage":
+        return "assemblage(" + ", ".join(to_text(p.get("of", p)) for p in e.get("parts", [])) + ")"
+    if op == "times":
+        return f"({of()}) * {e.get('n', 1)}"
+    if op == "array":
+        return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''})"
+    if op == "associate":
+        return f"association({of()}{', ' + e['surface'] if e.get('surface') else ''})"
+    if op == "transform":
+        bits = []
+        if any(e.get("at", [])):
+            bits.append("at " + ",".join(str(v) for v in e["at"]))
+        if any(e.get("rot", [])):
+            bits.append("rot " + ",".join(str(v) for v in e["rot"]))
+        if e.get("scale") not in (None, 1):
+            bits.append(f"scale {e['scale']}")
+        return f"transform({of()}{', ' + ' '.join(bits) if bits else ''})"
+    if op == "engine":
+        return f"{'by' if e.get('kind') in BY_KINDS else 'step'}({of()}, {e.get('kind')})"
+    if op == "sort":
+        return f"sort({of()}, by {e.get('by', 'size')})"
+    if op == "connect":
+        ties = e.get("ties") or [[e.get("a", 0), e.get("b", 1), e.get("kind", "rope")]]
+        return f"connect({of()}, " + ", ".join(f"{t[0]}–{t[1]} {t[2] if len(t) > 2 else 'rope'}" for t in ties) + ")"
+    return "?"
+
+
+def canonical(symbols: list[str]) -> dict:
+    doc = json.loads(TERMS.read_text(encoding="utf-8"))["terms"]
+    out = {}
+    for s in symbols:
+        t = doc.get(s)
+        if not t:
+            continue
+        b = t["build"]
+        parents = sorted(set(x for x in t.get("from", []) if x in doc))
+        root_op = b.get("op") or ("term" if "t" in b else b.get("p", "?"))
+        counts = sorted(set(re.findall(r"\* (\d+)|array\([^,]+, (\d+)", to_text(b))))
+        counts = sorted({int(v) for pair in counts for v in pair if v})
+        out[s] = {"text": to_text(b), "parents": parents, "root_op": root_op, "counts": counts, "chapter": t.get("chapter", "")}
+    return out
+
+
+def render(symbols: list[str], out_dir: Path) -> Path:
+    from PIL import Image, ImageDraw, ImageFont
+    canon = canonical(symbols)
+    names = [s for s in symbols if s in canon]
+    cols, cell_w, cell_h = 4, 420, 300
+    rows = (len(names) + cols - 1) // cols
+    W, H = cols * cell_w + 40, rows * cell_h + 220
+    paper, ink, violet = (243, 236, 221), (43, 29, 20), (122, 75, 138)
+    img = Image.new("RGB", (W, H), paper)
+    d = ImageDraw.Draw(img)
+    try:
+        font = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 18)
+        bold = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 22)
+        small = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", 15)
+        title = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 30)
+    except OSError:
+        font = bold = small = title = ImageFont.load_default()
+    d.text((20, 16), "Ada Research · the grammar · a visual memory capsule", fill=ink, font=title)
+    d.text((20, 58), "Each tile: a symbol's picture, its NAME, and its DEFINITION in the grammar. A name in a definition is another tile. "
+           "Arrows run from a symbol to what it is built from.", fill=ink, font=small)
+    d.text((20, 80), "Notation: a + b compose · (a) * n times · array(a, n) addresses · association(a, surface) a surface laid on · "
+           "transform(a, …) moved/turned/scaled · step(a, rule) a rule from the neighbours · sort(a, by …) parts in a row by a reading · "
+           "connect(a, i–j kind) a tie", fill=ink, font=small)
+    pos = {}
+    for i, s in enumerate(names):
+        r, c = divmod(i, cols)
+        x, y = 20 + c * cell_w, 130 + r * cell_h
+        pos[s] = (x, y)
+    for s in names:
+        x, y = pos[s]
+        d.rectangle([x, y, x + cell_w - 16, y + cell_h - 16], outline=(185, 176, 160), width=2, fill=(247, 242, 230))
+        icon = None
+        for cand in (CAPTURES / f"mod_{s}" / "front.png", SYMBOL_ICONS / f"symbol-{s}.png"):
+            if cand.exists():
+                icon = Image.open(cand).convert("RGB")
+                break
+        if icon is not None:
+            side = min(icon.size)
+            icon = icon.crop(((icon.width - side) // 2, (icon.height - side) // 2, (icon.width + side) // 2, (icon.height + side) // 2)).resize((150, 150))
+            img.paste(icon, (x + 12, y + 12))
+        else:
+            d.rectangle([x + 12, y + 12, x + 162, y + 162], outline=(185, 176, 160), width=1)
+            d.text((x + 40, y + 78), "no picture", fill=(140, 130, 115), font=small)
+        d.text((x + 176, y + 14), s, fill=ink, font=bold)
+        d.text((x + 176, y + 44), canon[s]["chapter"], fill=(140, 130, 115), font=small)
+        # the definition, wrapped
+        text = canon[s]["text"]
+        words, lines, cur = text.split(" "), [], ""
+        for w in words:
+            if len(cur) + len(w) + 1 > 26:
+                lines.append(cur); cur = w
+            else:
+                cur = (cur + " " + w).strip()
+        if cur:
+            lines.append(cur)
+        for k, ln in enumerate(lines[:6]):
+            d.text((x + 176, y + 72 + k * 20), ln, fill=ink, font=font)
+        if len(lines) > 6:
+            d.text((x + 176, y + 72 + 6 * 20), "…", fill=ink, font=font)
+        d.text((x + 12, y + 172), "= " + s, fill=violet, font=bold)
+        d.text((x + 12, y + 202), "from: " + (", ".join(canon[s]["parents"]) or "—"), fill=(90, 61, 44), font=small)
+    # arrows: symbol → parents (drawn after the tiles so they lie on top)
+    for s in names:
+        x, y = pos[s]
+        for pnt in canon[s]["parents"]:
+            if pnt in pos:
+                px, py = pos[pnt]
+                d.line([(x + 60, y + 240), (px + 60, py + cell_h - 24)], fill=violet, width=2)
+                d.ellipse([px + 54, py + cell_h - 30, px + 66, py + cell_h - 18], fill=violet)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out = out_dir / "atlas.png"
+    img.save(out)
+    (out_dir / "canonical.json").write_text(json.dumps({"symbols": names, "canonical": canon}, indent=1), encoding="utf-8")
+    return out
+
+
+def score(decoded: dict, canon: dict) -> dict:
+    """decoded: {symbol: {text?, parents?, root_op?, counts?}} — as a blind reader wrote it"""
+    rows, hits = [], {"name": 0, "parents": 0, "root_op": 0, "counts": 0}
+    for s, c in canon.items():
+        dcd = decoded.get(s)
+        row = {"symbol": s, "name": bool(dcd)}
+        if dcd:
+            hits["name"] += 1
+            dp = set(dcd.get("parents", [])); cp = set(c["parents"])
+            row["parents"] = f"{len(dp & cp)}/{len(cp)}" + (f" +{len(dp - cp)} extra" if dp - cp else "")
+            hits["parents"] += 1 if dp == cp else 0
+            ro = str(dcd.get("root_op", "")).lower()
+            row["root_op"] = ro == c["root_op"] or (ro in ("by", "step") and c["root_op"] == "engine")
+            hits["root_op"] += 1 if row["root_op"] else 0
+            dc = sorted({int(v) for v in dcd.get("counts", []) if str(v).isdigit()})
+            row["counts"] = dc == c["counts"]
+            hits["counts"] += 1 if row["counts"] else 0
+        rows.append(row)
+    n = len(canon)
+    return {"expected": n, "hits": hits, "rows": rows, "extra_symbols": sorted(set(decoded) - set(canon))}
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--symbols", default=",".join(DEFAULT))
+    ap.add_argument("--out", default=str(OUT_DIR))
+    ap.add_argument("--score", help="a blind decode (JSON) to compare with the canonical")
+    a = ap.parse_args()
+    symbols = [s.strip() for s in a.symbols.split(",") if s.strip()]
+    out_dir = Path(a.out)
+    if a.score:
+        canon = json.loads((out_dir / "canonical.json").read_text(encoding="utf-8"))["canonical"]
+        decoded = json.loads(Path(a.score).read_text(encoding="utf-8"))
+        res = score(decoded, canon)
+        (out_dir / "score.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
+        h = res["hits"]
+        print(f"blind decode vs canonical — {res['expected']} symbols: names {h['name']}, parents exact {h['parents']}, "
+              f"root operator {h['root_op']}, counts {h['counts']}; extra symbols {len(res['extra_symbols'])}")
+        for r in res["rows"]:
+            print("  ", r)
+        return 0
+    out = render(symbols, out_dir)
+    print(f"wrote {out} + canonical.json — {len(symbols)} symbols")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

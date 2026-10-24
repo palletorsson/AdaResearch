@@ -527,3 +527,326 @@ on the move code):**
 The game log also shows `desktop layer ready (toggle: B; drag in the view to move, Q/E turn)`
 and `desktop toast ready`. The wrist label and the trigger grab run only with a headset: APK
 `ada_run/apk/ada_hand_grab.apk`.
+
+## 13. The proposal lane — propose, review, accept (2026-10-22, the deferred AI loop's first half)
+
+The brief of section 2 deferred the AI workflow. What was built instead is the lane an AI
+(or anyone who cannot be trusted with the save button) would use: a **proposal** is a
+revision somebody would like to see, filed as one small JSON document, reviewed by a
+person in the editor that owns the file, and applied — on Accept — **through that
+editor's own save path**, so the revision check, the validator and the publish of sections
+2 and 7 run unchanged. Nothing is applied by itself; nothing in `commons/void/` or the
+bridge's apply code changed.
+
+| piece | where | what |
+|---|---|---|
+| **the store** | `ada_run/live_proposals/<id>.json` (git-ignored, derived) | one file per proposal: `{id, target: "void"\|"map", map_id, floor_id, trial, operations, source, note, created_at, status, decision}`; never the canonical file |
+| **the API** | `ada_encyclopedia/src/app/api/live-update/proposals/route.ts` | `POST` files one (shape-checked: known ops only, a Void op cannot target a map and vice versa), `GET ?target=void&floor=N` / `?target=map&map=X` lists the pending ones **in words**, `?all=1` everything, `?id=` one; `PATCH {id, decision, by, revision_id}` records a decision |
+| **the words** | `src/lib/live-proposals.ts` (node-free) | the op vocabulary live-update.ts already labels a diff with — move / add / remove / change / replace / structure / utility, transform / floor — as `describeOperation`; `live-update.ts` re-exports it so there is one list. `applyVoidOps` is the pure apply onto a floor record |
+| **the strip** | `src/components/live-update/ProposalsStrip.tsx`, mounted under the header of `/lab-editor?mode=void` (`VoidEditor.tsx`) and above the toolbar of `/editor` (`editor/page.tsx`) | polls the pending proposals for the open floor / map every 4 s, shows each as `source: note · n op` + the first operation in words (click to unfold all), **Accept** and **Reject** |
+| **Accept** | `VoidEditor.applyProposal`, `editor/page.tsx::applyMapProposal` | Void: `mutate(f => applyVoidOps(f, ops))` and `LayoutSaveQueue.flush()` — the autosave a hand edit takes (`POST /api/void-layout`: 409 on a stale revision, `validate_void_rooms.py`, `publishVoidRevisions`); the revision id the save produced is read back for the ledger. Grid map: the ops land on the artifact list and the layer refs, `saveMap(next)` (the same `POST /api/voxel-editor`, diff, publish), then the map is re-read from disk. Refused with a reason when it cannot land (missing id, occupied cell, a cell inside a folded collection, nothing changes) — the proposal then stays pending |
+| **Reject** | the strip | records the decision; the file is untouched |
+| **the ledger row** | `tools/vr_link.py` `POST /proposal` → `{"k":"proposal", id, decision, by, revision_id, target, map_id, floor_id, source, note, ops}` in `ada_run/live_updates.jsonl` | written by the encyclopedia on every decision; `GET /revisions?id=<rev>` returns it beside that revision's request and acks. The bridge writes nothing else for it — the apply arrived as an ordinary `/update`. The decision is written into the proposal file whether or not the bridge is up (`decision.ledger` says) |
+| **the CLI** | `tools/live_update_propose.py` | `--void --floor 10 --move <id> --dx 1.5 [--dz] [--facing]`, `--set <id> key=value …`, `--remove <id>`; `--map <Map> --move-cell 8,0 7,0`, `--set-cell x,z "<token>" --layer …`; `--json file`; `--list [--all]`, `--read <id>`. Reads the current file to fill `before` (so the strip says "from … to …"), posts to the encyclopedia, writes the store directly when it is down |
+| **the test** | `tools/live_update_proposal_test.py` | starts the bridge and the game if asked, files the proposals from the CLI, prints the editor URL, waits for the person's clicks, checks the ledger after each; report in `ada_run/live_update_proposal_test_<stamp>.md` |
+
+An agent's whole interface is therefore `POST /api/live-update/proposals` (or the CLI): it
+never touches a canonical file, never talks to the bridge, and never sees a save button.
+What it sees afterwards is `GET ?id=` — accepted with the revision id, or rejected.
+
+**Test — 2026-10-22 16:09, desktop, `ada_run/live_update_proposal_test_20261022-160908.md`**
+(bridge restarted on the `/proposal` code; `void.tscn --void-start-floor=10 --vr-link`
+launched by the test; the clicks made in `/lab-editor?mode=void&floor=10` through the browser):
+
+| step | proposal | decision (strip) | ledger |
+|---|---|---|---|
+| A. CLI: move `museum-primitives_profiles-15-1` +1.5 m in x | `prop-20261022T140949Z-672d5e` | **Accept** → `rev-20261022T141100Z-28bd7b7d-f10` · ledger row written | `request` → `update_ack` **Windows/SIRENS applied in_place** (1 of 1 on floor 10) → `proposal accept by lab-editor`, the three rows side by side under one revision id; rooms.json places it at [-8.5, -6.5] |
+| B. CLI: a second move, +3.0 m | `prop-20261022T140949Z-301e8d` | **Reject** · ledger row written | `proposal reject by lab-editor`, no request, file unchanged |
+| C. CLI: move back −1.5 m | `prop-20261022T141120Z-7f90af` | **Accept** → `rev-20261022T141141Z-b4c45362-f10` | `update_ack` applied in_place; rooms.json **byte-identical** to the start |
+
+14 checks PASS. The same morning on `/editor`: a bench copy of Point_One, the CLI's
+`--map Live_Update_Bench --move-cell 8,0 7,0`, the strip showing `move point_corridor_door
+from (8, 0) to (7, 0)` once the map was loaded, Accept → `rev-20261022T141316Z-a4a946b0`,
+the door at (7, 0) in the file, the proposal row in the ledger (no grid game attached, so no
+ack — the save was still live-published, `transmitted 0`). Note the editor's own save wrote
+the tokens back with an explicit `:0` y-offset, as a hand save in `/editor` does.
+
+**Before / after, in the editor (Palle, same afternoon: "or even better before and after view in
+the web editor?").** Each pending proposal has a **Preview** button. In `/lab-editor?mode=void` it
+puts a clone of the open floor with the operations applied (`applyVoidOps`, the same pure apply
+Accept uses) in front of the scene: `entries` and `VoidScene.document()` draw from `previewFloor ??
+rooms.floors[i]`, so the AFTER state renders through exactly the path a saved floor takes, from a
+record the editor never saves (`rooms`, which autosave watches, is untouched). **Before / After**
+flip the view with the camera where it stands — a fixed camera is what makes the two comparable;
+*Focus object* first if the work is out of frame — the changed records are selected (highlighted)
+as a hand selection would be, the legend reads `PREVIEW: with proposal · <source>`, and **Close**
+(or Accept / Reject, or changing floor) puts the saved floor back. While a preview stands `mutate`
+refuses with a message, so a drag cannot write a preview into the file. In `/editor` the artifact
+list is swapped for the proposal's after-list the same way (interactables only; a structure or
+utilities cell is reported as "shown on accept only") and restored on Before / Close; Accept
+restores first and applies from the saved list. Verified 2026-10-22 16:4x on floor 10 with
+`prop-20261022T144238Z-0cd58a` (move the film work 4 m east, 3 m north, turn 90°): After shows it
+at [-6, -9.5] facing 90, Before at [-10, -6.5] facing 0, Close leaves the floor "Saved" with nothing
+selected; the proposal is left pending for the hand to try.
+
+**Boundaries.** A proposal is a WISH about a file: the editor's document at accept time is
+what the ops land on, so a proposal filed against a floor that has moved on may land
+differently from its `before` (the strip shows both) or be refused. The strip shows
+proposals for the **open** floor / map only. A folded collection in `/editor` (count > 1)
+refuses a move of its master and cannot see its members — move those by hand. Nothing
+expires: a pending proposal waits until a person decides; `--list` shows the backlog.
+
+| file | change |
+|---|---|
+| `tools/vr_link.py` | `POST /proposal` — one ledger row per decision, nothing else |
+| `tools/live_update_propose.py`, `tools/live_update_proposal_test.py` | NEW |
+| `ada_encyclopedia/src/lib/live-proposals.ts`, `src/lib/live-proposal-store.ts`, `src/app/api/live-update/proposals/route.ts`, `src/components/live-update/ProposalsStrip.tsx` | NEW |
+| `src/lib/live-update.ts` | re-exports the op words |
+| `src/components/lab-editor/VoidEditor.tsx` | the strip; `applyProposal`; `previewProposal` + `previewFloor` (the scene draws from the clone); `mutate` refuses during a preview; the save callback keeps the last `live` result |
+| `src/app/editor/page.tsx` | the strip; `applyOpsToArtifacts`, `applyMapProposal`, `previewMapProposal` (list swap + restore); `saveMap(override?)` returns the response |
+| `src/app/live-update/page.tsx` | a paragraph |
+
+Not touched: `commons/void/`, `commons/bridge/`, `/api/void-layout`, `/api/voxel-editor`,
+the differ, the apply boundary. Forum: 261022-f86oo.
+
+## 14. The pipeline, drawn and live (2026-10-23, Palle: "can we work on a visualization of the pipeline?")
+
+`/live-update/pipeline` (`ada_encyclopedia/src/app/live-update/pipeline/page.tsx`; `/pipeline`
+was already the book-production pipeline) draws every lane of §§ 1–13 as one sepia-on-paper
+figure — three rows, *where a change is made* (web editor, Blender, VR hand, agent proposal,
+voice memo dashed as not yet in the loop), *the truth and its route* (save route, rooms.json,
+bridge, ledger), *where it is seen* (desktop, Quest, hand message), and a faint *derived*
+column (spine → spawnlists, glTF export, Blender renders) — and reads the bridge's ledger
+every two seconds: a request pulses save route → file → bridge → each transmitted game, an ack
+pulses back game → bridge → ledger → editors coloured by its answer (green in place, amber a
+floor rebuilt, red refused) and on to the hand message, a proposal pulses agent → editor.
+"Replay" runs the last 24 ledger events through the picture; "Export SVG" saves the still.
+The still is also at `public/book-images/live-update/pipeline.svg`.
+
+Two things it needed: a clock without `requestAnimationFrame` (the desktop app's pane does not
+fire it; a 40 ms interval drives the pulses), and **history across a bridge restart** —
+`vr_link.py::_load_ledger` now puts the file's last 400 rows back into the in-memory ledger, so
+`/revisions`, the editors' status lines and this page show the day rather than an empty one
+(before: a restarted bridge answered `rows: []`).
+
+## 15. The five layers in three.js (2026-10-23, Palle's "Full System Architecture" map)
+
+`/live-update/architecture` (`src/app/live-update/architecture/page.tsx`, data in
+`src/lib/system-architecture.ts`) stacks the map's five layers as slabs — 01 research at the
+bottom, 02 authoring, 03 truth and transport, 04 world and evidence, 05 writing on top — with
+each layer's nodes standing on its slab (36 nodes) and 50 edges as tubes coloured by kind: ink
+data, green acknowledgement, violet the two research loops, amber proposed, faint derived.
+Node fill says status: working, derived, proposed, not yet connected. The bridge's ledger
+pulses through the tubes live (the same `rowToEdges` reading as the flat figure); "Replay"
+runs the last 24 events; a slider spreads the layers; checkboxes hide derived, proposed, loops,
+labels; click a node for its text, files, connections and — in amber — where the 23 October
+map and the measured system differ. Render loop on a 33 ms interval (no rAF in the app's pane).
+
+Where the map was corrected in the data: the spawnlists are consumed by the VR hand today (the
+API exists; the web and Blender menus are not built); an applied update does not always rebuild
+a floor (transform / add / remove apply in place, config / parts / walls / route rebuild one floor,
+a floor you are not on gets its record); Blender reads the glTF export, Godot makes it; the
+endless museum (lane C, reported not applied) and the grid-map lane are absent from the map and
+present here. Agreed with the map, and now drawn: authority is scoped (§ 5), the agent is one
+more proposal producer on the same route (§ 6), and the voice memo is the one authoring
+position not yet in a loop.
+
+**Made clearer the same morning (Palle: "how can we make this clearer" → "yes"):** the page opens on
+the live loop alone (data + acknowledgements; research loops, proposed and derived come in by their
+boxes); every node has a lane column kept across the five layers so cross-layer tubes are near-vertical
+plumbing; labels are constant-screen-size sprites (title only, the detail in the panel; back-row labels
+sit higher); a tube's label appears on hover; clicking a node dims everything but it and its
+neighbours and flies the camera to it, clicking a layer title tilts to that layer, the paper lets go;
+and **Trace a revision** walks the newest *answered* revision from the ledger through the stack in six
+captioned steps — the editor saves, the route checks and writes, the diff goes to the bridge and the
+ledger, the broadcast to N games, each game's actual answer, the ack on the wrist and back in the
+editor — camera following each tube.
+
+**Real things, not boxes (Palle: "make real items like the book, the wiki, a ledger, VR set, a
+data table … to make it concrete" → "yes build it"):** `src/lib/architecture-models.ts` builds each
+node as a low-poly thing in the page's paper-and-ink style — three bound books on the top slab
+(final.md violet, tutorial.md amber, technical.md blue and OPEN on the pipeline figure), a stack of
+pages for the encyclopedia, an open register for the ledger whose lines fill from the live rows, a
+single folded-corner sheet for rooms.json and map_data.json, a 25-cell data table for the spine
+and the sequences (names from /api/void-spawnlists), a headset for the Quest, a monitor for the
+desktop showing the evening render and one for Blender showing the book render, a hand with its
+wrist panel (the hand message's panel reads "floor 10 · moved · in place"), the real floor-10
+structure from the glTF export stacked three storeys for the tower, a colonnade for the museum,
+two framed prints of the actual renders, a bridge whose piers are stamped 8771 and 8772, a gate
+for the save route, a microphone in dashed outline for the memo, an envelope for the agent's
+proposal, trays, a camera, a wire cube for glTF, a branch graph for Git, a card index for the
+registry, trees for the lineage and the capacity tree, nested wire boxes for the LOD tree, a crate
+stamped "release". Every model fits 2.6 × 1.3 and reports its height; a glass box over it takes
+the click; front-row labels name the overview, back-row labels appear when their layer or node is
+in focus. Each node names its shape in `system-architecture.ts` (`shape`).
+
+**Stills for the book:** the architecture page has **Export PNG** (3200 × 2000 of a fixed print pose —
+the whole stack from the front-right, labels a step smaller — then back to the live view) and
+`window.__adaArchitectureStill(w, h)` for a scripted grab; `POST /api/live-update/still {name, dataUrl}`
+saves one into `public/book-images/live-update/`. First still: `architecture.png` (23 Oct). The flat
+figure's still is `pipeline.svg` beside it.
+
+## 16. The knowledge tree, built from itself (2026-10-23, Palle's construction grammar)
+
+`/knowledge-tree` (`ada_encyclopedia/src/app/knowledge-tree/page.tsx`; grammar + builders in
+`src/lib/knowledge-tree.ts`): Palle's grammar — point + mesh(color) + collider = sphere_collider,
+dist(point, point) = line, line + association(surface) = tape, line + skin + collider = plank,
+line × 3 = triangle, face(3 edges), triangle × 2 = quad, quad × 6 = cube, association(cube) =
+wooden_box · concrete_block · cardboard_box · warhol_box, assemblages, Melencolia (sphere vs
+triangle shapes), pick_up_cube, grids, balls_test_grid, logic, sine, sine_surface, trace_test,
+topology_test, random_cubes, noise_space — as 51 things on ten shelves (point, line, association,
+triangle, solid, assemblage, transformation, array, logic, motion), ordered by depth along each
+shelf (9 generations from point to noise_space). **Each thing's three.js model is built by calling
+its parents' builders and adding only what the expression adds**, with every part tagged by the
+parent it came from; the "construction" slider slides each part back toward that parent's cell, so
+the construction shows on the table itself. Edges are the `from` relations; a darker plinth means
+the registry has an artifact of that name (`artifact`, 24 of 51 — grab_sphere_point, timber_plank,
+parallel_lines, cross_lines, quad, tetrahedron, pyramid_blocker, wedge_blocker, cardboard_box,
+pick_up_cube, grid_2d_4x4, random_cubes, noise_space …), and the panel shows its gallery capture.
+Export PNG writes `public/book-images/live-update/knowledge-tree.png` (top-down print pose).
+
+## 17. The modular class system — kernel (2026-10-23, Palle: "build a modular class system for everything … to sculpt out the tutorial path")
+
+`commons/modular/` is the kernel; nothing in it is a scene per thing.
+
+| file | holds |
+|---|---|
+| `terms.json` | the 51 terms, each `{chapter, label, expr, from, build}` — `build` is an expression over primitives (`p`: point, mesh, collider, body, grabbable, label, light) and other terms (`t`), joined by operators (compose, associate, times, array, assemblage, engine, transform). One source for the game, the web tree and the tutorial path |
+| `composite.gd` / `.tscn` | the one artifact: reads a term (export, `config_term` meta from the registry's default_params, or its lookup name `mod_<term>`), builds it at ready, rebuilds on `apply_grid_config`; `describe()` counts meshes, colliders, bodies, labels and the terms used |
+| `builder.gd` | the operators; every sub-term node carries meta `term`, every primitive meta `primitive`, so the built tree stays legible (the scanner, the probe and the explode view read it); a `body` / `grabbable` part makes the composed thing a StaticBody3D / RigidBody3D / Area3D / XR Tools pickable so its colliders are direct children and work |
+| `mod_mesh.gd` | sphere, box, plane, cylinder, cone, torus, wedge (PrismMesh), tetra, pyramid, triangle, dodeca (hand-wound, Godot winds clockwise) |
+| `mod_surface.gd` | the associations as materials: stripes, red, hazard, wood, concrete, cardboard, warhol, plastic, paper — applied to every mesh but the construction marks (points, strokes, colliders' shells) |
+| `mod_body.gd`, `mod_grabbable.gd`, `mod_label.gd`, `mod_point.gd` | bodies and colliders (+ `make_rigid`), the XR Tools pickable (plain RigidBody3D without the addon), Label3D captions, the ink point |
+| `mod_behaviour.gd` | the engines: physics (static sphere_colliders become rigid and fall), trace (dots where the falling body went), hand (a sphere along a drawn path), sine, sine_field, noise (seeded value noise), random (seeded jitter), logic (the gate names) |
+
+**Registry:** `commons/artifacts/registry/modular.json` is GENERATED by `tools/build_modular_registry.py` — 51 tokens `mod_<term>`, all on `composite.tscn`, `default_params {term}`, `configure_before_ready`, `map_ready`, footprint by chapter. The validator's catalog reads it, so the tokens are placeable in rooms.json and in a map at once, and the wrist menu lists them as a second tree ("Built from the grammar", `tools/build_void_spawnlists.py`).
+
+**Verified:** `commons/testing/probe_modular.gd` builds every term headless — 51 of 51, no body without a collider (`ada_run/modular_probe.json`); the depth guard counts term references only (a term containing itself trips it, operator depth does not). `tools/live_update_spawn_test.py --via-bridge --token mod_tape`: the term spawned on floor 10 of the live desktop Void through the bridge, **applied in_place** both ways, rooms.json byte-identical, the hand message printing it. `capture_multi_angle.gd --mode=artifact --target=mod_tape` photographs it (two ink points, the stroke, the striped surface); all 51 tokens are being captured for the wrist menu's thumbnails.
+
+**The scanner:** `tools/modular_scan.py` reads each registry artifact's scene AND script (node types, `.new()` classes, preloads; ~770 of the spine's scenes are one scripted root) into `commons/data/modular_signatures.json` — primitives, parts, behaviour, interaction — and matches the primitive set to a term. On the spine: 1081 artifacts, 952 with a mesh, 442 a collider, 100 grabbable, 639 a behaviour; 961 matched *some* term, but the match is containment of primitive sets and so lands on the small terms (point 292, trace 290, walk_line 244): a hypothesis layer, honest about being coarse. Structure (which part is made of which) needs the terms authored, not scanned.
+
+**The tutorial path:** `tools/modular_path.py` → `doc/book/course/MODULAR_PATH.md`: the 51 terms in derivation order inside their chapters — each lesson with its expression, what it is made of, what it becomes, the registry artifacts the scanner reads as it and the spine maps they stand in (8 of 51 lessons already have rooms to stand in). Every lesson is a spawnable token, so a lesson can be stood in before it is read.
+
+Two traps for whoever extends it: a new `class_name` is not in the headless class cache on a fresh checkout, so the kernel refers to its own scripts by `preload` path and never by name (the first probe failed on `ModularBehaviour.new()` and on the probe's `ModularComposite`); and a cycle guard that counts operator depth fires on honest deep terms (topology_test nests six levels) — count term references only.
+
+**The studio (Palle: "each object like the line should be a bit of a visual gate … it has to look sexy good; build in
+three.js first so we can sort out the relations"):** `/modular-studio?term=<id>` — one term at a time, large, on paper with
+a shadow and a turntable; the construction PLAYED (parents first, then what the expression adds, then a violet gate ring);
+"apart" slides the sub-terms away from the centre; the expression is edited on the right (label, words, chapter, parents,
+the build JSON) with Preview, Revert and **Save to terms.json** (`POST /api/modular-terms`, atomic, refuses a term that
+contains itself) — the same file the Godot kernel builds from. `src/lib/modular-terms.ts` is the three.js twin of
+`commons/modular/builder.gd` (same expression language, same layouts and surfaces; engines drawn as resting poses and
+marks). Arrow keys walk the derivation path; space replays; "Still" writes `public/book-images/live-update/modular-<id>.png`.
+The 51 modular tokens have gallery captures now (all 51 with a thumbnail in the wrist menu), and the tree page shows
+each term's own capture beside the sequences' artifact.
+
+**The scaffold (Palle, 23 Oct: "the point should be a white point, until we change to line then black. In the
+animation just keep the intended object — when animating tape remove the line and sphere in the end"):** a part of a
+build may carry `"scaffold": true` in `terms.json` — the line inside a tape, plank or stick; the triangle inside a
+triangle_face; the point inside a sphere_collider. It is shown while the construction plays and fades out as the gate
+closes, so the tape ends alone; "keep the scaffold" in the studio brings it back. The Godot kernel frees the scaffold
+nodes after the build unless `show_construction` is set (an export on `composite.gd`, also a config key), so a spawned
+`mod_tape` is the tape and nothing else — `capture_multi_angle` confirms it, as does `probe_modular` (51 of 51 still
+build; the freed line leaves the tape its mesh). The point is white (`ffffff`) on its own and both builders tint it ink
+once it is built inside another term (`depth > 0`): the line's two points are black, the lone point is white. Both
+rules live in `builder.gd` and `modular-terms.ts` alike, so the studio and the game agree.
+
+**The ink stroke (Palle, 23 Oct: "make a shader for the line and make the line less wide"):** the line's stroke is
+4 mm wide now (radius 0.004, was 0.01) and a mesh part may name a shader: "shader": "ink" wears
+commons/modular/shaders/ink_stroke.gdshader in the game and the inkMaterial ShaderMaterial in the studio, the same
+three ideas in both: the ends taper like a pen lifting (width 0.55 at the tips, full in the middle), the silhouette
+darkens as wet ink does (a fresnel term), and a faint grain along the length breaks the flat shade. The stroke counts
+as a construction mark, so a surface (tape, wood) never paints over it. Only the line term carries it; every term
+built from line inherits it. Verified with capture_multi_angle on mod_line (windowed) and the studio at ?term=line.
+
+**The plan for the whole spine (Palle, 23 Oct: "make a plan to integrate all the spine in a list"):**
+`python tools/modular_spine_plan.py` writes `doc/book/course/MODULAR_SPINE_PLAN.md` — one row per spine sequence
+(maps, artifacts, what the scanner reads them as, the chapter, the terms to author, the kernel piece it waits
+for), the eight-step loop a sequence goes through, six build waves ordered by what the kernel needs (vary,
+recurse/rewrite, connect/boolean/shader axis, the heavy engines, synthesis) and the 18-piece kernel work list.
+82 proposed terms over 18 new chapters; proposals live in the script, terms are saved from the studio.
+
+**The plan drawn (`/modular-plan`):** the 25 sequences in spine order, each with its Void floors as columns and
+every artifact as a cell coloured by what it becomes — twin (189, one reconstruction per floor beside the primary),
+swap candidate (53, already a small term; Palle's call per floor), document (213: films, plaques, screens, sliders;
+never a construction), kept (993). Data from `commons/data/modular_spine_plan.json` (the generator writes it beside
+the markdown), served by `/api/modular-plan`; "Still" writes `public/book-images/live-update/modular-spine-plan.png`.
+The synthesis sequences carry meta-terms: compare (crisis_table, self_member — the kernel's refusal of a
+self-containing term is the Russell exhibit), parametrize (axis_sweep, lambda_dial, phi_dial), rewrite (open_term,
+after_table, commons_table). The change sequence has no floor in the Void.
+
+**The plan, compressed (Palle, 23 Oct: "fold the compressed version into the plan. how would it look in three.js"):**
+`tools/modular_spine_plan.py` now writes the compressed plan: five kernel pieces (connect, by, replicate, step, field)
+instead of eighteen, 44 families with dna axes (89 variants) instead of 82 terms, the seven spine phases as chapters
+instead of seventeen new ones, four waves instead of six, connect in wave 1, the done gate = every floor's primary has
+a twin (189). `/modular-plan/3d` stands it up in three.js: a kernel bench with the five pieces drawn as constructions
+in the grammar, then 25 stations in spine order — existing terms built by the Builder, proposed families as dashed
+translucent blocks (width = variants, ticks = axis values), plinth height = wave, floor tint = phase. Still:
+`public/book-images/live-update/modular-spine-plan-3d.png`.
+
+**Edges and leaks in the kernel (Palle, 23 Oct: "where does leaks, edges go?"):** a kernel piece is a rule, so its
+parameters are its edges, of the thirteen material kinds in `doc/EDGE_INVENTORY.md` — connect is Coupling, replicate's
+depth a Ceiling and its minimum size a Deadband, by's index a Quantiser, step's tick a Clock and radius a Ball, field's
+threshold a Deadband and its subtraction a Mask. The plan declares eleven of them with what escapes and what spills
+to `LeakData`; six families inherit a named material edge from the artifact they twin (fractal: the Cantor set's
+MIN_SEGMENT_WIDTH). The scaffold is the kernel's first leak in code: `composite.gd` spills the line inside the tape
+to the bus (kind "scaffold", rule "composite.scaffold:<term>") before freeing it — `probe_modular_leak.gd` proves one
+entry for tape, none for point. Named, never counted, as the bus insists.
+
+**The knowledge tree's three new layers (Palle, 23 Oct: "wire the first three layers into the knowledge tree"):**
+`/knowledge-tree` now reads `/api/modular-plan`. Joints: every arc is coloured by the kernel piece that made its
+child (compose, associate, transform, replicate, by, step, connect, field — `PIECE_OF` in `src/lib/knowledge-tree.ts`),
+so a thing assembled, repeated or behaving reads differently; the panel says "made by". Families: the plan's 44
+proposed families stand as dashed translucent blocks on seven extra shelves named after the phase chapters, the width
+of their variants with a tick per axis value, a dashed arc to the tree node their expression leans on; click one for
+expression, axis, what it needs first, the edge it inherits — "a proposal until saved in the studio". Shadows: a ring
+under each thing, one band per edge its piece declares, and the panel lists what the piece refuses and what it spills.
+Still: `public/book-images/live-update/knowledge-tree-layers.png`.
+
+**Coverage of the spine's principles (Palle, 23 Oct: "not only the heroes are relevant, I mean all principles. Are they
+covered?"):** no. `tools/modular_coverage.py` reads every `truth`, `learning_objectives` line and `content` line of the
+25 spine sequence files (420 principles) and matches them lexically against the 51 terms, the 44 proposed families and
+the five kernel pieces: 122 covered, 39 reached only by the kernel, 259 uncovered (`doc/book/course/MODULAR_COVERAGE.md`,
+numbers also in `modular_spine_plan.json` per sequence). The uncovered are not missing things; they are verbs —
+compare (104), measure (67), procedure (47), retain (45) — so the proposal is a sixth kernel piece, `measure`
+(read a value, retain it, compare it under a rule), the instrument half of the grammar. Proposed, not added.
+
+**`measure` is the sixth kernel piece (Palle, 23 Oct: "add measure as the sixth piece").** In the plan generator: the
+piece (read a value off a thing, retain it across steps, compare it under a rule), its three edges (quantiser on
+resolution, window on the record, coupling on the comparison rule), wave 1, and eight families that stand on it —
+length (primitives), velocity_readout (forces), entropy_meter (randomness; shannon_entropy_meter stands there),
+spectrum_reading (wavefunctions), rule_census (cellularautomata), field_probe (isosurfaces), loss_meter
+(machinelearning), dial_reading (qfeplaboratory). Coverage moved from 122 to 150 of 420 principles covered. The
+knowledge tree colours measure arcs plum; the 3D bench has six pieces, measure drawn as a line with its length read
+beside it. Not in `builder.gd` / `modular-terms.ts` yet: the families are proposals until authored in the studio.
+
+**The spine as grammar text (Palle, 24 Oct: "can we do this for all the spine but with a symbol in the text for
+prefabs"):** `tools/modular_spine_text.py` writes `doc/book/course/MODULAR_SPINE_TEXT.md` — one paragraph per spine
+sequence in Palle's notation (a + b, a * n, association(), transform(), replicate(), by(), step(), connect(), field(),
+measure(), = names what it makes), the primitives paragraph in his own words, the other 24 continued from each
+sequence's truth and its maps' content lines. A name in [square brackets] is a PREFAB that exists in the registry or
+the spawn lists (kit: and prop: prefixes stripped; nested registry files read); 568 named, 0 unknown — an unknown one
+would print as [?name]. The text is authored in the script; regenerate after editing it.
+
+**Drag a program (Palle, 24 Oct: "I want to be able to drag program in pseudo code. A net of prefabs. Plank + ball =
+skateboard. Cube * 6 + plank = EU pallet … the beginning of logic if you add a ball. Add some strings. Sort
+deconstructed EU pallet"):** `/modular-program` — palette of operators (+, *, array, association, transform, by, step,
+sort, assemblage), the grammar's terms by chapter and the registry's prefabs with their captures (drag onto a block, or
+select a block and click); the program as nested blocks; the pseudo code the blocks spell in the spine-text notation;
+the JSON the kernel builds (editable); the thing built live by the studio's Builder; Save writes a term to terms.json
+(`POST /api/modular-terms`), so it spawns from the wrist menu as `mod_<name>`. Two kernel pieces grew for it, in both
+builders in the same change: `{"p":"prefab","token":…}` — a registry artifact standing in the grammar as itself (the
+game instantiates the scene the spawn lists name; the page shows a box of its footprint wearing its capture) — and
+`{"op":"sort","of":…,"by":size|height|width|name}`, measure's first operator (each part read, laid in a row by the
+reading; `_aabb_of` measures before the node is in the tree). Palle's four examples are terms in chapter assemblage:
+skateboard, eu_pallet, tilt_gate (step(plank tilted + ball, physics): the ball rolls one way), pallet_sorted.
+Probe: 55 of 55 build.
+
+**The handover of 24 Oct, built as a slice (`doc/book/course/MODULAR_HANDOVER_AUDIT.md`):** `/modular-program` renders
+the sentence with symbol chips (a term's chip is the game's capture of mod_<id>; Save snaps `symbol-<id>.png` so `=`
+makes an icon at once); expand / deconstruct (every instance of every leaf, sorted by type, `_lineage` kept) /
+reassemble on the selected block; `connect` (rope|rod|spring between two parts by index) in both builders —
+`tied_pallet` uses it; `sort` by type. `probe_tilt_gate.gd` runs the physical if for 180 ticks, authored and
+mirrored: ok, right / left. `tools/visual_memory_atlas.py` draws 16 symbols into one self-contained PNG with the
+canonical AST beside it; a blind reader (image only) recovered 16/16 names, parents and root operators and 14/16
+counts — the two misses were definitions the tile cut with "…". Probe 56/56.
