@@ -858,3 +858,10 @@ the program page has a sentence box. The notation folds a run of identical parts
 the atlas. The visual-memory experiment ran three times: 14/16 counts with cut tiles, 16/16 with room, and a
 pictures-only run that named simple things well, could not tell the tied pallet from the pallet, and exposed the
 blank grab_sphere capture. Results in MODULAR_HANDOVER_AUDIT.md § 4.
+
+**/modular-program, improved (24 Oct, "can we improve it"):** the sentence is the program and sits on top — symbol
+chips with the game's captures, clickable (a chip is a block), the `=`, the name, save/update; a typed sentence
+parses in the line under it. Below, three columns: the palette (start from an example with its picture, the
+operators, the terms with their pictures, the registry's prefabs), the blocks (icons in the heads; at / rot / scale
+editable on a transform; expand, deconstruct, reassemble; undo, redo, clear; Delete removes, ⌘Z / ⌘Y), and a taller
+viewport with "play the construction" (space) and an "apart" slider. The page starts from the skateboard.
