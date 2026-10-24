@@ -50,7 +50,14 @@ def to_text(e: dict) -> str:
     of = lambda: to_text(e.get("of", {}))  # noqa: E731
     if op == "compose":
         parts = [to_text(p) for p in e.get("parts", [])]
-        return " + ".join(f"({p})" if " + " in p else p for p in parts) or "·"
+        folded, i = [], 0
+        while i < len(parts):   # a run of identical parts reads as (part) * n
+            j = i
+            while j < len(parts) and parts[j] == parts[i]:
+                j += 1
+            folded.append(f"({parts[i]}) * {j - i}" if j - i > 1 else parts[i])
+            i = j
+        return " + ".join(f"({p})" if " + " in p and not p.startswith("(") else p for p in folded) or "·"
     if op == "assemblage":
         return "assemblage(" + ", ".join(to_text(p.get("of", p)) for p in e.get("parts", [])) + ")"
     if op == "times":
@@ -94,11 +101,11 @@ def canonical(symbols: list[str]) -> dict:
     return out
 
 
-def render(symbols: list[str], out_dir: Path) -> Path:
+def render(symbols: list[str], out_dir: Path, pictures_only: bool = False) -> Path:
     from PIL import Image, ImageDraw, ImageFont
     canon = canonical(symbols)
     names = [s for s in symbols if s in canon]
-    cols, cell_w, cell_h = 4, 420, 300
+    cols, cell_w, cell_h = 4, 420, 360
     rows = (len(names) + cols - 1) // cols
     W, H = cols * cell_w + 40, rows * cell_h + 220
     paper, ink, violet = (243, 236, 221), (43, 29, 20), (122, 75, 138)
@@ -122,6 +129,15 @@ def render(symbols: list[str], out_dir: Path) -> Path:
         r, c = divmod(i, cols)
         x, y = 20 + c * cell_w, 130 + r * cell_h
         pos[s] = (x, y)
+    # arrows first, from each tile's "= name" corner to its parents' bottom edge, so the
+    # tiles' words are drawn over them and stay legible
+    for s in (names if not pictures_only else []):
+        x, y = pos[s]
+        for pnt in canon[s]["parents"]:
+            if pnt in pos:
+                px, py = pos[pnt]
+                d.line([(x + 60, y + 240), (px + 60, py + cell_h - 24)], fill=(205, 190, 215), width=3)
+                d.ellipse([px + 54, py + cell_h - 30, px + 66, py + cell_h - 18], fill=violet)
     for s in names:
         x, y = pos[s]
         d.rectangle([x, y, x + cell_w - 16, y + cell_h - 16], outline=(185, 176, 160), width=2, fill=(247, 242, 230))
@@ -137,36 +153,33 @@ def render(symbols: list[str], out_dir: Path) -> Path:
         else:
             d.rectangle([x + 12, y + 12, x + 162, y + 162], outline=(185, 176, 160), width=1)
             d.text((x + 40, y + 78), "no picture", fill=(140, 130, 115), font=small)
+        if pictures_only:
+            d.text((x + 176, y + 14), f"tile {names.index(s) + 1}", fill=ink, font=bold)
+            continue
         d.text((x + 176, y + 14), s, fill=ink, font=bold)
         d.text((x + 176, y + 44), canon[s]["chapter"], fill=(140, 130, 115), font=small)
         # the definition, wrapped
         text = canon[s]["text"]
         words, lines, cur = text.split(" "), [], ""
         for w in words:
-            if len(cur) + len(w) + 1 > 26:
+            if len(cur) + len(w) + 1 > 28:
                 lines.append(cur); cur = w
             else:
                 cur = (cur + " " + w).strip()
         if cur:
             lines.append(cur)
-        for k, ln in enumerate(lines[:6]):
-            d.text((x + 176, y + 72 + k * 20), ln, fill=ink, font=font)
-        if len(lines) > 6:
-            d.text((x + 176, y + 72 + 6 * 20), "…", fill=ink, font=font)
-        d.text((x + 12, y + 172), "= " + s, fill=violet, font=bold)
-        d.text((x + 12, y + 202), "from: " + (", ".join(canon[s]["parents"]) or "—"), fill=(90, 61, 44), font=small)
-    # arrows: symbol → parents (drawn after the tiles so they lie on top)
-    for s in names:
-        x, y = pos[s]
-        for pnt in canon[s]["parents"]:
-            if pnt in pos:
-                px, py = pos[pnt]
-                d.line([(x + 60, y + 240), (px + 60, py + cell_h - 24)], fill=violet, width=2)
-                d.ellipse([px + 54, py + cell_h - 30, px + 66, py + cell_h - 18], fill=violet)
+        for k, ln in enumerate(lines[:11]):
+            d.text((x + 176, y + 72 + k * 19), ln, fill=ink, font=small)
+        if len(lines) > 11:
+            d.text((x + 176, y + 72 + 11 * 19), "…", fill=ink, font=small)
+        d.text((x + 12, y + 172), "= " + s if not pictures_only else "= ?", fill=violet, font=bold)
+        if not pictures_only:
+            d.text((x + 12, y + 202), "from: " + (", ".join(canon[s]["parents"]) or "—"), fill=(90, 61, 44), font=small)
     out_dir.mkdir(parents=True, exist_ok=True)
-    out = out_dir / "atlas.png"
+    out = out_dir / ("atlas_pictures.png" if pictures_only else "atlas.png")
     img.save(out)
-    (out_dir / "canonical.json").write_text(json.dumps({"symbols": names, "canonical": canon}, indent=1), encoding="utf-8")
+    if not pictures_only:
+        (out_dir / "canonical.json").write_text(json.dumps({"symbols": names, "canonical": canon}, indent=1), encoding="utf-8")
     return out
 
 
@@ -197,6 +210,7 @@ def main() -> int:
     ap.add_argument("--symbols", default=",".join(DEFAULT))
     ap.add_argument("--out", default=str(OUT_DIR))
     ap.add_argument("--score", help="a blind decode (JSON) to compare with the canonical")
+    ap.add_argument("--pictures", action="store_true", help="names and definitions hidden: what do the thumbnails alone carry?")
     a = ap.parse_args()
     symbols = [s.strip() for s in a.symbols.split(",") if s.strip()]
     out_dir = Path(a.out)
@@ -211,7 +225,7 @@ def main() -> int:
         for r in res["rows"]:
             print("  ", r)
         return 0
-    out = render(symbols, out_dir)
+    out = render(symbols, out_dir, pictures_only=a.pictures)
     print(f"wrote {out} + canonical.json — {len(symbols)} symbols")
     return 0
 

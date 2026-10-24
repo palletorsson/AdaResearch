@@ -77,24 +77,40 @@ the notation, "from:" line, arrows to parents, and the legend of operators — i
 given the image path only, forbidden every other file, and asked for a JSON of name, definition,
 parents, root operator and counts per tile. `--score decoded.json` compares.
 
-**Result (2026-10-24, one blind run, image only):** 16 of 16 names recovered; 16 of 16 parent
-sets exact; 16 of 16 root operators; **14 of 16 counts**. The two misses are `eu_pallet` and
-`tied_pallet`, whose definitions did not fit the tile and were cut with "…" — the reader marked
-both *uncertain* and reported the visible counts ([3, 3, 3]) against the canonical [3, 5]. That
-is the handover's own warning measured: an icon does not contain what was not drawn. The atlas
-has an edge of the window kind (six lines per tile) and the leak is the fifth array. Fix for the
-next run: wrap definitions to the tile, or draw a second tile for the overflow; then re-score.
-What the picture carried that text would not have: nothing measurable yet — the names and
-parents were read from the printed words, not from the thumbnails. A test of the thumbnails
-alone (names hidden) is the next experiment, and the honest comparison with a JSON of the same
-byte size has not been run.
+**Results (2026-10-24, three blind runs, image only, a fresh model session each time):**
+
+| run | atlas | names | parents exact | root operator | counts |
+|---|---|---|---|---|---|
+| 1 | tiles of six lines, definitions cut with "…" | 16/16 | 16/16 | 16/16 | **14/16** |
+| 2 | taller tiles, eleven lines | 16/16 | 16/16 | 16/16 | 16/16 |
+| 3 | pictures only, names and definitions hidden | see below | | | |
+
+Run 1's two misses were `eu_pallet` and `tied_pallet`, whose definitions did not fit the tile:
+the reader marked both *uncertain* and reported the visible counts ([3, 3, 3]) against the
+canonical [3, 5]. That is the handover's own warning measured — an icon does not contain what
+was not drawn; the atlas had an edge of the window kind (six lines) and the leak was the fifth
+array. Giving the tile room (run 2) closed it. The reader of run 2 still flagged arrows crossing
+text, so arrows are now drawn under the tiles, and the notation folds a run of identical parts
+into `(part) * n`, which is also what the deconstructed pallet *is*.
+
+Run 3 asked what the thumbnails carry without words. From the pictures alone the reader named
+the plain things (sphere, cube, wooden cube, triangle, striped rod, two points joined, scattered
+points) at confidence 0.8–0.95 and read their parts correctly; it could not tell the pallet from
+the tied pallet (the rope is a hair at thumbnail size), read the sorted pallet as "a thin ruler
+with tick marks" (0.45), saw the skateboard's wheels as three balls (there are four; one is
+hidden), and found tile 3 (grab_sphere) empty — its capture is blank, a capture fault the atlas
+had been hiding behind the printed name. So: the thumbnails carry identity for simple things and
+the names carry it for assemblies; a capture that shows nothing is caught only when the name is
+hidden. The comparison with a JSON of the same byte size has not been run.
 
 ## 5. Prioritised next increments
 
-1. **Parse typed sentences** — a small parser for the executable subset of the notation (`+`,
-   `* n`, `array(a, n)`, `association(a, s)`, `transform(a, …)`, `step/by(a, k)`, `sort`,
-   `connect`, `[prefab]`, names) into the same JSON; the page then takes typed text as well as
-   drags. Ambiguity (prose `=`) stays unparsed, marked.
+1. ~~**Parse typed sentences**~~ — done the same day: `parseSentence` in `modular-terms.ts` reads the
+   executable subset (`+`, `* n`, `array(a, n[, 3d])`, `association(a, s)`, `transform(a, at … rot … scale …)`,
+   `step/by(a, k)`, `sort(a, by k)`, `connect(a, i-j kind, …)`, `assemblage(a, b, …)`, `[prefab]`, names,
+   `= name`) into the same JSON the blocks make, with the error's position marked in the sentence; the
+   program page has a sentence box ("parse ⏎"). Prose is never parsed. Round trip checked on seven
+   sentences, including the tilt gate and a tied compose; `plonk` and `**` are refused at the character.
 2. **The joint behind the tie** — `connect` with a physics kind instantiates a Jolt joint when
    the step engine runs (PinJoint for rope, Generic6DOF locked for rod, spring via the verlet
    that `measure`'s plan already wants in both renderers).

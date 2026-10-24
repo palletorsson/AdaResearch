@@ -850,3 +850,11 @@ reassemble on the selected block; `connect` (rope|rod|spring between two parts b
 mirrored: ok, right / left. `tools/visual_memory_atlas.py` draws 16 symbols into one self-contained PNG with the
 canonical AST beside it; a blind reader (image only) recovered 16/16 names, parents and root operators and 14/16
 counts — the two misses were definitions the tile cut with "…". Probe 56/56.
+
+**Typed sentences parse (24 Oct, "continue to build"):** `parseSentence` in `modular-terms.ts` turns a sentence in
+the notation into the same JSON the blocks make — `+`, `* n`, `array`, `association`, `transform(at/rot/scale)`,
+`step`/`by`, `sort`, `connect(i-j kind)`, `assemblage`, `[prefab]`, `= name` — with the error marked at its character;
+the program page has a sentence box. The notation folds a run of identical parts into `(part) * n`, on the page and in
+the atlas. The visual-memory experiment ran three times: 14/16 counts with cut tiles, 16/16 with room, and a
+pictures-only run that named simple things well, could not tell the tied pallet from the pallet, and exposed the
+blank grab_sphere capture. Results in MODULAR_HANDOVER_AUDIT.md § 4.
