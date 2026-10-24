@@ -879,3 +879,14 @@ slack is not modelled, Godot has no distance joint), rod = a 6-DOF joint with li
 a 6-DOF linear spring on each axis at rest where the parts stood; a part without a body gets a static anchor. The
 `pendulum` term hangs a ball beside a cube on a rope. `probe_tied_rope.gd`: with the rope the ball keeps 0.50 m while it
 swings down; without the tie it falls 28 m away; a rod keeps 0.50. 59 terms build.
+
+## 18. Headset — 2026-10-24, the modular kernel on the Quest (installed, not yet walked)
+
+`ada_run/apk/ada_modular_kernel.apk` (885 MB, preset `adaresearchonexy`, `--export-debug`, 16 min) installed on the
+attached Quest at 13:25:55 (`adb install -r`, versionName 2026.10.23). Inside the APK: the 22 files of
+`commons/modular/` (the kernel scripts as .gdc, `composite.tscn`, `terms.json` with 59 terms, the ink shader),
+`commons/artifacts/registry/modular.json` and `commons/data/void_spawnlists.json`, so every `mod_<term>` is spawnable on
+the headset through the bridge. The bridge is up (`tools/vr_link.py`, `adb reverse` 8771/8772 set). The app was
+launched with `adb shell monkey`; the OS runs it only while the headset is worn, so the live spawn to the headset —
+`python tools/live_update_spawn_test.py --via-bridge --token mod_pendulum` — waits for a person in the headset standing
+in The Void. Until that ack is in `ada_run/live_updates.jsonl`, VR is installed, not evidenced.
