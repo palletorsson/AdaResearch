@@ -865,3 +865,10 @@ parses in the line under it. Below, three columns: the palette (start from an ex
 operators, the terms with their pictures, the registry's prefabs), the blocks (icons in the heads; at / rot / scale
 editable on a transform; expand, deconstruct, reassemble; undo, redo, clear; Delete removes, ⌘Z / ⌘Y), and a taller
 viewport with "play the construction" (space) and an "apart" slider. The page starts from the skateboard.
+
+**Block ↔ thing (24 Oct, "keep going"):** the three.js Builder tags every node with `userData.path`, the address of
+the block that made it (parts by index, `of` as −1), so on `/modular-program` the selected block's objects glow
+violet and a click on an object selects its block; a chip dragged onto another chip moves the block; a prefab leaf
+loads the registry's glTF export (`/api/artifact-gltf`, 650 of them) fitted to its footprint — `[pick_up_cube]`
+stands as the real cube with its ring. Chip-to-chip drag could not be exercised with synthetic events in the
+browser pane; the three other features were.
