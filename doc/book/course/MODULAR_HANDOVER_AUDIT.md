@@ -111,9 +111,12 @@ hidden. The comparison with a JSON of the same byte size has not been run.
    `= name`) into the same JSON the blocks make, with the error's position marked in the sentence; the
    program page has a sentence box ("parse ⏎"). Prose is never parsed. Round trip checked on seven
    sentences, including the tilt gate and a tied compose; `plonk` and `**` are refused at the character.
-2. **The joint behind the tie** — `connect` with a physics kind instantiates a Jolt joint when
-   the step engine runs (PinJoint for rope, Generic6DOF locked for rod, spring via the verlet
-   that `measure`'s plan already wants in both renderers).
+2. ~~**The joint behind the tie**~~ — done the same day: under the physics engine every tie becomes a
+   Joint3D (`mod_behaviour.gd::_tie_joints`): rope a pin at the near end (taut — the far end swings
+   at the rope's length; slack is not modelled, Godot has no distance joint), rod a locked 6-DOF
+   link, spring a 6-DOF linear spring at rest where the parts stood. `pendulum` hangs a ball on a
+   rope; `probe_tied_rope.gd` measures 0.50 m kept while it swings, 28 m for the untied control,
+   0.50 for the rod. The studio's three.js still draws the tie only; its verlet is the next twin.
 3. **Instance identity across the bridge** — give each built part a stable id (term id + path)
    so a deconstructed pallet's pieces can be moved in VR and reassembled from the live scene,
    not only from the recipe.
