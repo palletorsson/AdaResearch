@@ -37,6 +37,11 @@ static func collider(spec: Dictionary) -> CollisionShape3D:
 			c.radius = s0
 			c.height = float(size[1]) if size.size() > 1 else s0 * 3.0
 			cs.shape = c
+		"cylinder":
+			var cy := CylinderShape3D.new()
+			cy.radius = s0
+			cy.height = float(size[1]) if size.size() > 1 else s0 * 2.0
+			cs.shape = cy
 		_:
 			var sp := SphereShape3D.new()
 			sp.radius = s0

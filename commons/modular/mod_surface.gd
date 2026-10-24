@@ -4,7 +4,7 @@ extends RefCounted
 ## into a wooden box. apply(node, name) overrides the material of every mesh
 ## under the node except the points and strokes that draw the construction.
 
-const NAMES := ["tape", "stripes", "red", "hazard", "wood", "concrete", "cardboard", "warhol", "plastic", "paper"]
+const NAMES := ["tape", "stripes", "red", "rubber", "hazard", "wood", "concrete", "cardboard", "warhol", "plastic", "paper"]
 const TAPE_PHOTO := "res://commons/modular/textures/marking_tape.png"
 
 
@@ -23,6 +23,9 @@ static func material(name: String) -> StandardMaterial3D:
 			m.uv1_scale = Vector3(4, 1, 1)
 		"red":
 			m.albedo_color = Color("c83a2f")
+		"rubber":
+			m.albedo_color = Color("2a2a2e")
+			m.roughness = 0.95
 		"hazard":
 			m.albedo_texture = _diagonal(Color("fef100"), Color("221f20"))
 			m.uv1_scale = Vector3(4, 1, 1)
