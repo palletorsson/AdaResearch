@@ -136,6 +136,104 @@ func _free_the_bodies(root: Node) -> void:
 			var r: RigidBody3D = ModBody.make_rigid(body)
 			if _trace_from == null:
 				_trace_from = r
+	_tie_joints(root)
+
+
+## The joint behind the tie (handover 24 Oct: "connect … instantiate an actual relation").
+## Every node the builder marked "connect" carries its ties [a, b, kind] by index among its
+## parts; under the physics engine each tie becomes a joint between the two parts' bodies:
+##   rope   — a taut rope: a pin at the near end, the far end swings at the rope's length
+##            (a pendulum, a hanging thing; slack is not modelled — Godot has no distance joint)
+##   rod    — a rigid link: a 6-DOF joint with linear and angular play locked
+##   spring — a 6-DOF joint with a linear spring on each axis, at rest where the parts stood
+## A part without a body gets a static anchor at its place, so a rope can hang from a plank.
+func _tie_joints(root: Node) -> void:
+	for node in _connects(root):
+		var kids: Array = []
+		for c in node.get_children():
+			if c is Node3D and not (c is Label3D) and not c.has_meta("tie") and not (c is Joint3D):
+				kids.append(c)
+		for t in node.get_meta("connect", []):
+			if not (t is Array) or (t as Array).size() < 2:
+				continue
+			var ia: int = int(t[0])
+			var ib: int = int(t[1])
+			var kind: String = str(t[2]) if (t as Array).size() > 2 else "rope"
+			if ia < 0 or ib < 0 or ia >= kids.size() or ib >= kids.size():
+				continue
+			var a: PhysicsBody3D = _body_for(kids[ia])
+			var b: PhysicsBody3D = _body_for(kids[ib])
+			if a == null or b == null or a == b:
+				continue
+			var pa: Vector3 = a.global_position
+			var pb: Vector3 = b.global_position
+			var length: float = pa.distance_to(pb)
+			var joint: Joint3D
+			match kind:
+				"rod":
+					# a rigid link: the far end keeps its place in the near end's frame
+					var g := Generic6DOFJoint3D.new()
+					g.global_position = pa
+					for ax in ["x", "y", "z"]:
+						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, true)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_LOWER_LIMIT, 0.0)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_UPPER_LIMIT, 0.0)
+						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_ANGULAR_LIMIT, true)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_ANGULAR_LOWER_LIMIT, -0.1)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_ANGULAR_UPPER_LIMIT, 0.1)
+					joint = g
+				"spring":
+					# a linear spring on each axis, at rest where the parts stand now
+					var g := Generic6DOFJoint3D.new()
+					g.global_position = pa
+					var rest: Vector3 = pb - pa
+					var comps := {"x": rest.x, "y": rest.y, "z": rest.z}
+					for ax in ["x", "y", "z"]:
+						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, false)
+						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_SPRING, true)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_STIFFNESS, 40.0)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_DAMPING, 2.0)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT, float(comps[ax]))
+					joint = g
+				_:
+					# rope: a taut rope — the far end swings about the near end at the rope's length
+					# (slack is not modelled: Godot has no distance joint; the pin sits at the near end)
+					var pin := PinJoint3D.new()
+					pin.global_position = pa
+					joint = pin
+			joint.name = "joint_%s_%d_%d" % [kind, ia, ib]
+			node.add_child(joint)
+			joint.node_a = joint.get_path_to(a)
+			joint.node_b = joint.get_path_to(b)
+			joint.set_meta("tie_joint", {"a": ia, "b": ib, "kind": kind, "length": length})
+
+
+func _connects(n: Node) -> Array:
+	var out: Array = []
+	if n.has_meta("connect"):
+		out.append(n)
+	for c in n.get_children():
+		out.append_array(_connects(c))
+	return out
+
+
+## The body a tie attaches to: the part itself, its first body inside, or a static anchor
+## made at its place when it has none (a plain mesh can still hold a rope).
+func _body_for(part: Node3D) -> PhysicsBody3D:
+	if part is PhysicsBody3D:
+		return part
+	var stack: Array = [part]
+	while not stack.is_empty():
+		var c: Node = stack.pop_front()
+		if c is PhysicsBody3D:
+			return c
+		for k in c.get_children():
+			stack.append(k)
+	var anchor := StaticBody3D.new()
+	anchor.name = "anchor"
+	part.add_child(anchor)
+	anchor.set_meta("tie_anchor", true)
+	return anchor
 
 
 func _hand_path() -> PackedVector3Array:

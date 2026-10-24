@@ -872,3 +872,10 @@ violet and a click on an object selects its block; a chip dragged onto another c
 loads the registry's glTF export (`/api/artifact-gltf`, 650 of them) fitted to its footprint — `[pick_up_cube]`
 stands as the real cube with its ring. Chip-to-chip drag could not be exercised with synthetic events in the
 browser pane; the three other features were.
+
+**The joint behind the tie (24 Oct, "go"):** under the physics engine every `connect` tie becomes a joint
+(`mod_behaviour.gd::_tie_joints`): rope = a pin at the near end (a taut rope: the far end swings at the rope's length;
+slack is not modelled, Godot has no distance joint), rod = a 6-DOF joint with linear and angular play locked, spring =
+a 6-DOF linear spring on each axis at rest where the parts stood; a part without a body gets a static anchor. The
+`pendulum` term hangs a ball beside a cube on a rope. `probe_tied_rope.gd`: with the rope the ball keeps 0.50 m while it
+swings down; without the tie it falls 28 m away; a rod keeps 0.50. 59 terms build.

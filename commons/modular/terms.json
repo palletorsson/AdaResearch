@@ -157,7 +157,7 @@
             "shape": "cylinder",
             "size": [
               0.004,
-              1.0
+              1
             ],
             "color": "2b1d14",
             "rot": [
@@ -190,7 +190,7 @@
               "p": "mesh",
               "shape": "box",
               "size": [
-                1.0,
+                1,
                 0.012,
                 0.1
               ],
@@ -225,7 +225,7 @@
             "p": "mesh",
             "shape": "box",
             "size": [
-              1.0,
+              1,
               0.06,
               0.22
             ],
@@ -240,7 +240,7 @@
             "p": "collider",
             "shape": "box",
             "size": [
-              1.0,
+              1,
               0.06,
               0.22
             ],
@@ -330,7 +330,7 @@
             "shape": "cylinder",
             "size": [
               0.025,
-              1.0
+              1
             ],
             "color": "9a7b52",
             "rot": [
@@ -343,7 +343,7 @@
             "p": "collider",
             "shape": "box",
             "size": [
-              1.0,
+              1,
               0.05,
               0.05
             ]
@@ -567,7 +567,7 @@
             "p": "mesh",
             "shape": "triangle",
             "size": [
-              1.0
+              1
             ],
             "color": "d9cfbc",
             "alpha": 0.9
@@ -852,7 +852,7 @@
             "p": "mesh",
             "shape": "wedge",
             "size": [
-              1.0,
+              1,
               0.45,
               0.6
             ],
@@ -863,7 +863,7 @@
             "p": "collider",
             "shape": "box",
             "size": [
-              1.0,
+              1,
               0.45,
               0.6
             ],
@@ -1100,7 +1100,7 @@
               },
               "at": [
                 0.35,
-                1.0,
+                1,
                 0
               ]
             }
@@ -1452,7 +1452,7 @@
         },
         "kind": "sine",
         "amplitude": 0.25,
-        "period": 2.0
+        "period": 2
       }
     },
     "sine_surface": {
@@ -1484,7 +1484,7 @@
         },
         "kind": "sine_field",
         "amplitude": 0.15,
-        "period": 2.0
+        "period": 2
       }
     },
     "trace_test": {
@@ -1749,7 +1749,7 @@
             },
             "at": [
               0,
-              0.0,
+              0,
               0
             ]
           },
@@ -2064,7 +2064,7 @@
               },
               "at": [
                 0,
-                0.0,
+                0,
                 0
               ]
             },
@@ -2126,6 +2126,3184 @@
               ]
             }
           ]
+        }
+      }
+    },
+    "pallet_hand_kit": {
+      "chapter": "assemblage",
+      "label": "Euro pallet / hand assembly",
+      "expr": "11 planks + 9 blocks \u2192 take apart \u2192 assemble by hand",
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "id": "bottom_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.011,
+              -0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bottom_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.011,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bottom_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.011,
+              0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -0.5,
+              0.061,
+              -0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -0.5,
+              0.061,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -0.5,
+              0.061,
+              0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.061,
+              -0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.061,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.061,
+              0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0.5,
+              0.061,
+              -0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0.5,
+              0.061,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0.5,
+              0.061,
+              0.32
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -0.5,
+              0.111,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.111,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0.5,
+              0.111,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.133,
+              -0.3275
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.133,
+              -0.16375
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.133,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_4",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.133,
+              0.16375
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_5",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              0,
+              0.133,
+              0.3275
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "handmade": {
+        "version": 1,
+        "kind": "kit",
+        "source": "eu_pallet",
+        "parts": [
+          {
+            "id": "bottom_1",
+            "role": "bottom board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.1
+            ],
+            "position": [
+              0,
+              0.011,
+              -0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bottom_2",
+            "role": "bottom board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.1
+            ],
+            "position": [
+              0,
+              0.011,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bottom_3",
+            "role": "bottom board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.1
+            ],
+            "position": [
+              0,
+              0.011,
+              0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_1",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -0.5,
+              0.061,
+              -0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_2",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -0.5,
+              0.061,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_3",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -0.5,
+              0.061,
+              0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_1",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              0,
+              0.061,
+              -0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_2",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              0,
+              0.061,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_3",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              0,
+              0.061,
+              0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_1",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              0.5,
+              0.061,
+              -0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_2",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              0.5,
+              0.061,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_3",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              0.5,
+              0.061,
+              0.32
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_1",
+            "role": "cross bearer",
+            "source": "plank",
+            "size": [
+              0.1,
+              0.022,
+              0.8
+            ],
+            "position": [
+              -0.5,
+              0.111,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_2",
+            "role": "cross bearer",
+            "source": "plank",
+            "size": [
+              0.1,
+              0.022,
+              0.8
+            ],
+            "position": [
+              0,
+              0.111,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_3",
+            "role": "cross bearer",
+            "source": "plank",
+            "size": [
+              0.1,
+              0.022,
+              0.8
+            ],
+            "position": [
+              0.5,
+              0.111,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_1",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              0,
+              0.133,
+              -0.3275
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_2",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              0,
+              0.133,
+              -0.16375
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_3",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              0,
+              0.133,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_4",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              0,
+              0.133,
+              0.16375
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_5",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              0,
+              0.133,
+              0.3275
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "joined": false,
+        "mode": "place"
+      },
+      "from": [
+        "eu_pallet",
+        "plank",
+        "cube"
+      ]
+    },
+    "handmade_pallet_5d236d1265a1ffe9": {
+      "chapter": "assemblage",
+      "label": "Pallet / hand-built open frame",
+      "expr": "Twenty pallet pieces \u2192 hand arrangement \u2192 reusable loose assemblage",
+      "from": [
+        "pallet_hand_kit"
+      ],
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "id": "bottom_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.0110015869140625,
+              -0.319999992847443
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "bottom_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.0110015869140625,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "bottom_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.0110015869140625,
+              0.319999992847443
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_1_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2.40000009536743,
+              0.0609970092773438,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_1_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2.40000009536743,
+              0.138999938964844,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_1_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2.40000009536743,
+              0.217002868652344,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_2_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.0609970092773438,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_2_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.138999938964844,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_2_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.217002868652344,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_3_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -1.60000002384186,
+              0.0609970092773438,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_3_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -1.60000002384186,
+              0.138999938964844,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "block_3_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.145,
+                    0.078,
+                    0.1
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -1.60000002384186,
+              0.217002868652344,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "bearer_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2.40000009536743,
+              0.266998291015625,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "bearer_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.266998291015625,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "bearer_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    0.1,
+                    0.022,
+                    0.8
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -1.60000002384186,
+              0.266998291015625,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "deck_1",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2.40000009536743,
+              0.877998352050781,
+              0
+            ],
+            "rot": [
+              0,
+              2.414836444586399e-06,
+              90
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "deck_2",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              0.877998352050781,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              89.99998474121094
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "deck_3",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -1.60000002384186,
+              0.877998352050781,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              89.99998474121094
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "deck_4",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              1.48899841308594,
+              -0.0799999982118607
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          },
+          {
+            "id": "deck_5",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ],
+                  "color": "c9a978"
+                },
+                {
+                  "p": "collider",
+                  "shape": "box",
+                  "size": [
+                    1.2,
+                    0.022,
+                    0.145
+                  ]
+                },
+                {
+                  "p": "grabbable"
+                }
+              ]
+            },
+            "at": [
+              -2,
+              1.48899841308594,
+              0.0799999982118607
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ],
+            "rotation_order": "YXZ"
+          }
+        ]
+      },
+      "handmade": {
+        "version": 1,
+        "kind": "sculpture",
+        "source": "pallet_hand_kit",
+        "receipt": "5d236d1265a1ffe93a86f7704db323f63af2a252a33351c27e57be146413f6c5",
+        "created": "2026-10-24T10:57:39.148Z",
+        "parts": [
+          {
+            "id": "bottom_1",
+            "role": "bottom board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.1
+            ],
+            "position": [
+              -2,
+              0.0110015869140625,
+              -0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bottom_2",
+            "role": "bottom board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.1
+            ],
+            "position": [
+              -2,
+              0.0110015869140625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bottom_3",
+            "role": "bottom board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.1
+            ],
+            "position": [
+              -2,
+              0.0110015869140625,
+              0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_1",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -2.40000009536743,
+              0.0609970092773438,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_2",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -2.40000009536743,
+              0.138999938964844,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_1_3",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -2.40000009536743,
+              0.217002868652344,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_1",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -2,
+              0.0609970092773438,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_2",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -2,
+              0.138999938964844,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_2_3",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -2,
+              0.217002868652344,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_1",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -1.60000002384186,
+              0.0609970092773438,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_2",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -1.60000002384186,
+              0.138999938964844,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "block_3_3",
+            "role": "block",
+            "source": "cube",
+            "size": [
+              0.145,
+              0.078,
+              0.1
+            ],
+            "position": [
+              -1.60000002384186,
+              0.217002868652344,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_1",
+            "role": "cross bearer",
+            "source": "plank",
+            "size": [
+              0.1,
+              0.022,
+              0.8
+            ],
+            "position": [
+              -2.40000009536743,
+              0.266998291015625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_2",
+            "role": "cross bearer",
+            "source": "plank",
+            "size": [
+              0.1,
+              0.022,
+              0.8
+            ],
+            "position": [
+              -2,
+              0.266998291015625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "bearer_3",
+            "role": "cross bearer",
+            "source": "plank",
+            "size": [
+              0.1,
+              0.022,
+              0.8
+            ],
+            "position": [
+              -1.60000002384186,
+              0.266998291015625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_1",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              -2.40000009536743,
+              0.877998352050781,
+              0
+            ],
+            "rotation": [
+              0,
+              2.414836444586399e-06,
+              90
+            ]
+          },
+          {
+            "id": "deck_2",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              -2,
+              0.877998352050781,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              89.99998474121094
+            ]
+          },
+          {
+            "id": "deck_3",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              -1.60000002384186,
+              0.877998352050781,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              89.99998474121094
+            ]
+          },
+          {
+            "id": "deck_4",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              -2,
+              1.48899841308594,
+              -0.0799999982118607
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "id": "deck_5",
+            "role": "deck board",
+            "source": "plank",
+            "size": [
+              1.2,
+              0.022,
+              0.145
+            ],
+            "position": [
+              -2,
+              1.48899841308594,
+              0.0799999982118607
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "joined": false,
+        "mode": "place",
+        "events": [
+          {
+            "action": "pick_up",
+            "part": "deck_1",
+            "time_ms": 6729,
+            "position": [
+              0,
+              0.733001708984375,
+              -0.327499985694885
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "deck_1",
+            "time_ms": 6793,
+            "position": [
+              0,
+              0.733001708984375,
+              -0.327499955892563
+            ],
+            "rotation": [
+              14.9999837875366,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_1_1",
+            "time_ms": 6845,
+            "position": [
+              -0.5,
+              0.661003112792969,
+              -0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_1_1",
+            "time_ms": 6993,
+            "position": [
+              -0.5,
+              0.911003112792969,
+              -0.11999998986721
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "bottom_1",
+            "time_ms": 7048,
+            "position": [
+              0,
+              0.611000061035156,
+              -0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "bottom_1",
+            "time_ms": 7220,
+            "position": [
+              -2,
+              0.0110015869140625,
+              -0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "bottom_2",
+            "time_ms": 7248,
+            "position": [
+              0,
+              0.611000061035156,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "bottom_2",
+            "time_ms": 7410,
+            "position": [
+              -2,
+              0.0110015869140625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "bottom_3",
+            "time_ms": 7445,
+            "position": [
+              0,
+              0.611000061035156,
+              0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "bottom_3",
+            "time_ms": 7610,
+            "position": [
+              -2,
+              0.0110015869140625,
+              0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_1_1",
+            "time_ms": 7645,
+            "position": [
+              -0.5,
+              0.911003112792969,
+              -0.11999998986721
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_1_1",
+            "time_ms": 7817,
+            "position": [
+              -2.40000009536743,
+              0.0609970092773438,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_1_2",
+            "time_ms": 7852,
+            "position": [
+              -0.5,
+              0.661003112792969,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_1_2",
+            "time_ms": 8017,
+            "position": [
+              -2.40000009536743,
+              0.138999938964844,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_1_3",
+            "time_ms": 8052,
+            "position": [
+              -0.5,
+              0.661003112792969,
+              0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_1_3",
+            "time_ms": 8217,
+            "position": [
+              -2.40000009536743,
+              0.217002868652344,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_2_1",
+            "time_ms": 8252,
+            "position": [
+              0,
+              0.661003112792969,
+              -0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_2_1",
+            "time_ms": 8418,
+            "position": [
+              -2,
+              0.0609970092773438,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_2_2",
+            "time_ms": 8452,
+            "position": [
+              0,
+              0.661003112792969,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_2_2",
+            "time_ms": 8618,
+            "position": [
+              -2,
+              0.138999938964844,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_2_3",
+            "time_ms": 8652,
+            "position": [
+              0,
+              0.661003112792969,
+              0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_2_3",
+            "time_ms": 8818,
+            "position": [
+              -2,
+              0.217002868652344,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_3_1",
+            "time_ms": 8852,
+            "position": [
+              0.5,
+              0.661003112792969,
+              -0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_3_1",
+            "time_ms": 9018,
+            "position": [
+              -1.60000002384186,
+              0.0609970092773438,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_3_2",
+            "time_ms": 9052,
+            "position": [
+              0.5,
+              0.661003112792969,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_3_2",
+            "time_ms": 9218,
+            "position": [
+              -1.60000002384186,
+              0.138999938964844,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "block_3_3",
+            "time_ms": 9253,
+            "position": [
+              0.5,
+              0.661003112792969,
+              0.319999992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "block_3_3",
+            "time_ms": 9418,
+            "position": [
+              -1.60000002384186,
+              0.217002868652344,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "bearer_1",
+            "time_ms": 9453,
+            "position": [
+              -0.5,
+              0.71099853515625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "bearer_1",
+            "time_ms": 9618,
+            "position": [
+              -2.40000009536743,
+              0.266998291015625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "bearer_2",
+            "time_ms": 9653,
+            "position": [
+              0,
+              0.71099853515625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "bearer_2",
+            "time_ms": 9818,
+            "position": [
+              -2,
+              0.266998291015625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "bearer_3",
+            "time_ms": 9853,
+            "position": [
+              0.5,
+              0.71099853515625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "bearer_3",
+            "time_ms": 10018,
+            "position": [
+              -1.60000002384186,
+              0.266998291015625,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "deck_1",
+            "time_ms": 10053,
+            "position": [
+              0,
+              0.733001708984375,
+              -0.327499955892563
+            ],
+            "rotation": [
+              14.9999837875366,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "deck_1",
+            "time_ms": 10218,
+            "position": [
+              -2.40000009536743,
+              0.877998352050781,
+              0
+            ],
+            "rotation": [
+              0,
+              2.4148364445864e-06,
+              90
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "deck_2",
+            "time_ms": 10253,
+            "position": [
+              0,
+              0.733001708984375,
+              -0.163749992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "deck_2",
+            "time_ms": 10419,
+            "position": [
+              -2,
+              0.877998352050781,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              89.9999847412109
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "deck_3",
+            "time_ms": 10453,
+            "position": [
+              0,
+              0.733001708984375,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "deck_3",
+            "time_ms": 10619,
+            "position": [
+              -1.60000002384186,
+              0.877998352050781,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              89.9999847412109
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "deck_4",
+            "time_ms": 10653,
+            "position": [
+              0,
+              0.733001708984375,
+              0.163749992847443
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "deck_4",
+            "time_ms": 10819,
+            "position": [
+              -2,
+              1.48899841308594,
+              -0.0799999982118607
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "pick_up",
+            "part": "deck_5",
+            "time_ms": 10853,
+            "position": [
+              0,
+              0.733001708984375,
+              0.327499985694885
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "action": "place",
+            "part": "deck_5",
+            "time_ms": 11019,
+            "position": [
+              -2,
+              1.48899841308594,
+              0.0799999982118607
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "pendulum": {
+      "chapter": "assemblage",
+      "label": "pendulum",
+      "expr": "step(connect(cube held high + sphere_collider beside it, rope), physics) \u2014 the ball falls until the rope is taut, then swings",
+      "from": [
+        "cube",
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "of": {
+          "op": "connect",
+          "a": 0,
+          "b": 1,
+          "kind": "rope",
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "transform",
+                "of": {
+                  "t": "cube"
+                },
+                "at": [
+                  0,
+                  1.2,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.5,
+                  1.2,
+                  0
+                ],
+                "scale": 0.6
+              }
+            ]
+          }
         }
       }
     }

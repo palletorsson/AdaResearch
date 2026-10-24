@@ -2110,6 +2110,120 @@
     ],
     "expr": "connect(eu_pallet's top board, bottom board, rope) — the strings"
    }
+  },
+  "mod_pallet_hand_kit": {
+   "lookup_name": "mod_pallet_hand_kit",
+   "name": "modular · Euro pallet / hand assembly",
+   "description": "Euro pallet / hand assembly = 11 planks + 9 blocks → take apart → assemble by hand. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "pallet_hand_kit"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "pallet_hand_kit",
+    "chapter": "assemblage",
+    "from": [
+     "eu_pallet",
+     "plank",
+     "cube"
+    ],
+    "expr": "11 planks + 9 blocks → take apart → assemble by hand"
+   }
+  },
+  "mod_handmade_pallet_5d236d1265a1ffe9": {
+   "lookup_name": "mod_handmade_pallet_5d236d1265a1ffe9",
+   "name": "modular · Pallet / hand-built open frame",
+   "description": "Pallet / hand-built open frame = Twenty pallet pieces → hand arrangement → reusable loose assemblage. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_5d236d1265a1ffe9"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_5d236d1265a1ffe9",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Twenty pallet pieces → hand arrangement → reusable loose assemblage"
+   }
+  },
+  "mod_pendulum": {
+   "lookup_name": "mod_pendulum",
+   "name": "modular · pendulum",
+   "description": "pendulum = step(connect(cube held high + sphere_collider beside it, rope), physics) — the ball falls until the rope is taut, then swings. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "pendulum"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "pendulum",
+    "chapter": "assemblage",
+    "from": [
+     "cube",
+     "sphere_collider"
+    ],
+    "expr": "step(connect(cube held high + sphere_collider beside it, rope), physics) — the ball falls until the rope is taut, then swings"
+   }
   }
  }
 }
