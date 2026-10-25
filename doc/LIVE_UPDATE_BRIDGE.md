@@ -934,3 +934,33 @@ derivation order (a term never before its parents — 0 violations), then its ar
 object and how it is built: a term's notation, "made from" (earlier) and "becomes" (later); an artifact's elements read
 off its tree. The order is Palle's to decide: drag the list, ↑ / ↓, "move to #", Save (a complete permutation only;
 `/api/construction-path`); the tool keeps an authored order and slots new steps after their default predecessor.
+
+**The main track and its branches (Palle, 25 Oct: "not every term has to be on the main track … what is the main
+principle that we need to flow … a good progress of relevant difference"):** the principle is ONE STEP, ONE NEW
+CAPACITY — one new kind of relation to space, the body, time, other things or a reader. Eight principle axes with
+ordered notches: form (point · line · surface · solid · field), body (seen · collides · falls · graspable), many (one ·
+repeated · at scale), parts (one kind · a few · many kinds), joint, drive (a function of time), react (physics ·
+decides), measure. Colour, scale, surface, place and the count of identical parts are not axes: they vary a thing, and
+make a branch. Staging (a label, a lamp, a sensor) is not an axis either — the new `exhibit` operator (both builders)
+wraps any thing in all three, and `exhibit_cube` shows it. `terms.json` now carries a `track` list, 15 terms and one
+hole: point → line → quad → box (a solid you see) → cube (collides) → falling_cube → pick_up_cube → cube_row →
+elevated_plank → pendulum → sine_movement → lattice (216 boxes) → skateboard_3 → pallet_sorted → and_gate → *a field*
+(the hole: the grammar has no field operator). New terms `box`, `falling_cube`, `cube_row`, `lattice`, `exhibit_cube`
+fill the gaps the gate found. `tools/capacity_track.py` reads every signature off the SAME instantiated trees for terms
+and artifacts (the disassembler now reads the mod_ tokens too, `--seq=modular`, and counts triangles of generated
+meshes) and gates the track: each step must exceed the envelope of the steps before it on exactly one axis by exactly
+one notch (falling brings obeying physics with it). **Gate OK on the full re-disassembly (1435 rows); a mutant track
+(lattice before cube_row, falling_cube removed) fails four steps and exits 1.** Every other term and every artifact
+hangs off its nearest step by notches; a tie goes to the step it lacks least of (a variation, not a precursor), then to
+the later one. 1015 artifacts read: 575 within one capacity of their step; 167 go beyond the whole track on form and wait
+on the field hole (isosurfaces, CSG booleans, generated surfaces) — the clearest measure yet of what the field operator
+would unlock; 33 built nothing in two frames and are unread, not points. Reader faults the gate's first runs exposed:
+the line "added composition" by counting its end points (parts now count only kinds of comparable size); 53 artifacts
+read as points because MultiMesh instances and CSG shapes have no mesh bounds (form now read off the replicated shape;
+CSG is the boolean hole); a 10 cm grab sphere read as a point (a point has nothing to touch); and 105 physics things tied
+between falling_cube and and_gate went to the gate by the later-step rule. Blind spot, kept visible: a tree cannot show
+a decision, so no spine artifact reads as react 2 and and_gate has no artifact branches. `/construction-path` now walks
+the track by default (each step followed by its branches, closest first; the parts a track term is made of come just
+before it; 0 parent-after-child), with a "the track only" filter, ⇐ / ⇒ step buttons, tall ticks on the strip, a red
+hole, and a panel that says which step a branch hangs off, on which axes it differs, and that its staging is covered by
+`exhibit`. "by sequence" keeps the older order as a reading (not editable).

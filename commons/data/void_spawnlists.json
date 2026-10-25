@@ -4806,7 +4806,9 @@
       "mod_concrete_block",
       "mod_cardboard_box",
       "mod_warhol_box",
-      "mod_cylinder"
+      "mod_cylinder",
+      "mod_box",
+      "mod_falling_cube"
      ]
     },
     {
@@ -4841,7 +4843,8 @@
       "mod_net",
       "mod_net_over_cube",
       "mod_curtain",
-      "mod_bead_chain"
+      "mod_bead_chain",
+      "mod_exhibit_cube"
      ]
     },
     {
@@ -4864,7 +4867,9 @@
      "items": [
       "mod_grid",
       "mod_grid_prefabs",
-      "mod_balls_test_grid"
+      "mod_balls_test_grid",
+      "mod_cube_row",
+      "mod_lattice"
      ]
     },
     {
@@ -61864,13 +61869,154 @@
     "propKind": "live_junction"
    },
    "color": "#80c9b4"
+  },
+  "mod_box": {
+   "label": "box (seen, not touched)",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "box (seen, not touched) = mesh(box) = box — a visible solid with no boundary: the eye stops at it, the hand passes through",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "box",
+    "from": [
+     "quad"
+    ],
+    "expr": "mesh(box) = box — a visible solid with no boundary: the eye stops at it, the hand passes through"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_box",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_box"
+  },
+  "mod_falling_cube": {
+   "label": "falling cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "falling cube = step(cube, physics) = falling_cube — the boundary acquires mass: it falls",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "falling_cube",
+    "from": [
+     "cube"
+    ],
+    "expr": "step(cube, physics) = falling_cube — the boundary acquires mass: it falls"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_falling_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_falling_cube"
+  },
+  "mod_cube_row": {
+   "label": "a row of cubes",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a row of cubes = array(cube, 4, 1d) = cube_row — the same cube, counted",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "cube_row",
+    "from": [
+     "cube"
+    ],
+    "expr": "array(cube, 4, 1d) = cube_row — the same cube, counted"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_cube_row",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_cube_row"
+  },
+  "mod_lattice": {
+   "label": "lattice",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "lattice = array(box, 6, 3d) = lattice — 216 boxes: repetition at the scale of a material",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "lattice",
+    "from": [
+     "box",
+     "cube_row"
+    ],
+    "expr": "array(box, 6, 3d) = lattice — 216 boxes: repetition at the scale of a material"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_lattice",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_lattice"
+  },
+  "mod_exhibit_cube": {
+   "label": "cube, exhibited",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "cube, exhibited = exhibit(cube) — the same cube with a label, a lamp and an area that senses you: staging, not a new principle",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "exhibit_cube",
+    "from": [
+     "cube"
+    ],
+    "expr": "exhibit(cube) — the same cube with a label, a lamp and an area that senses you: staging, not a new principle"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_exhibit_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_exhibit_cube"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1637,
+  "items": 1635,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

@@ -3398,6 +3398,192 @@
     ],
     "expr": "step(ramp + domino * 8 + ball? at push, physics) — one push and a wave runs to the end: a delay line"
    }
+  },
+  "mod_box": {
+   "lookup_name": "mod_box",
+   "name": "modular · box (seen, not touched)",
+   "description": "box (seen, not touched) = mesh(box) = box — a visible solid with no boundary: the eye stops at it, the hand passes through. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "box"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "box",
+    "chapter": "solid",
+    "from": [
+     "quad"
+    ],
+    "expr": "mesh(box) = box — a visible solid with no boundary: the eye stops at it, the hand passes through"
+   }
+  },
+  "mod_falling_cube": {
+   "lookup_name": "mod_falling_cube",
+   "name": "modular · falling cube",
+   "description": "falling cube = step(cube, physics) = falling_cube — the boundary acquires mass: it falls. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "falling_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "falling_cube",
+    "chapter": "solid",
+    "from": [
+     "cube"
+    ],
+    "expr": "step(cube, physics) = falling_cube — the boundary acquires mass: it falls"
+   }
+  },
+  "mod_cube_row": {
+   "lookup_name": "mod_cube_row",
+   "name": "modular · a row of cubes",
+   "description": "a row of cubes = array(cube, 4, 1d) = cube_row — the same cube, counted. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "cube_row"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "array"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "cube_row",
+    "chapter": "array",
+    "from": [
+     "cube"
+    ],
+    "expr": "array(cube, 4, 1d) = cube_row — the same cube, counted"
+   }
+  },
+  "mod_lattice": {
+   "lookup_name": "mod_lattice",
+   "name": "modular · lattice",
+   "description": "lattice = array(box, 6, 3d) = lattice — 216 boxes: repetition at the scale of a material. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "lattice"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "array"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lattice",
+    "chapter": "array",
+    "from": [
+     "box",
+     "cube_row"
+    ],
+    "expr": "array(box, 6, 3d) = lattice — 216 boxes: repetition at the scale of a material"
+   }
+  },
+  "mod_exhibit_cube": {
+   "lookup_name": "mod_exhibit_cube",
+   "name": "modular · cube, exhibited",
+   "description": "cube, exhibited = exhibit(cube) — the same cube with a label, a lamp and an area that senses you: staging, not a new principle. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "exhibit_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "exhibit_cube",
+    "chapter": "assemblage",
+    "from": [
+     "cube"
+    ],
+    "expr": "exhibit(cube) — the same cube with a label, a lamp and an area that senses you: staging, not a new principle"
+   }
   }
  }
 }

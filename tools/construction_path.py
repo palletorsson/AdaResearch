@@ -12,10 +12,17 @@ Three kinds of step, each honest about how much of it the grammar knows:
             off the tree it built (commons/data/spine_disassembly.json), not yet a term
   void      a token with no registry scene: a work The Void builds itself from rooms.json
 
-The DEFAULT order: for each spine sequence in spine order, first the terms that belong there,
-then the sequence's artifacts in map order (each where it is first placed). A term belongs to
-the sequence its chapter maps to, or to a later one if one of its parents lives later — so a
-term never comes before what it is made of. Within a sequence, terms in derivation order.
+The DEFAULT order is the MAIN TRACK (commons/data/capacity_track.json, tools/capacity_track.py):
+each track step gives the thing one new capacity, and is followed by its BRANCHES — the terms
+and artifacts nearest to it in capacity, closest first. A step with no term yet is a HOLE item
+(h:<index>), kept visible with what waits on it. Within a step a term still never comes before
+what it is made of: a branch term moves later to follow its parents, and the parts a track
+term is built from move earlier to come before it. Artifacts the disassembly could not read
+(Void works, scenes that hung) close the path, in sequence order.
+
+`order_by_sequence` keeps the older order: for each spine sequence in spine order, the terms
+that belong there (by chapter, or later if a parent lives later) in derivation order, then the
+sequence's artifacts in map order; holes at the end. Without a capacity track it is the default.
 
 An AUTHORED order (saved from /construction-path) wins: this tool keeps it, drops ids that no
 longer exist and inserts new ones right after their default predecessor.
@@ -38,6 +45,7 @@ TERMS = ROOT / "commons/modular/terms.json"
 SPINE = ROOT / "commons/maps/curriculum_spine.json"
 SPAWNLISTS = ROOT / "commons/data/void_spawnlists.json"
 DISASSEMBLY = ROOT / "commons/data/spine_disassembly.json"
+TRACK = ROOT / "commons/data/capacity_track.json"
 OUT = ROOT / "commons/data/construction_path.json"
 
 CHAPTER_SEQ = {"point": "primitives", "line": "primitives", "association": "primitives", "triangle": "primitives",
@@ -95,6 +103,106 @@ def derivation_order(ids: list[str], terms: dict, chapters: list[str], index: di
     return out
 
 
+def track_order(items: dict, seq_default: list[str], terms: dict, index: dict, ct: dict) -> tuple[list[str], list[str]]:
+    """the main track, each step followed by its branches; returns (order, parent-after-child violations)"""
+    steps = ct.get("track", [])
+    step_of_node = {}                                   # capacity_track's branch_of → step index
+    for i, st in enumerate(steps):
+        step_of_node[st["term"] if st.get("term") else f"hole:{i}"] = i
+    step_iid = {i: ("t:" + st["term"] if st.get("term") else f"h:{i}") for i, st in enumerate(steps)}
+    ct_terms, ct_art = ct.get("terms", {}), ct.get("artifacts", {})
+    for i, st in enumerate(steps):                      # the holes become items of their own
+        if not st.get("term"):
+            items[f"h:{i}"] = {"kind": "hole", "id": f"h:{i}", "label": st.get("adds", "a hole"), "seq": "", "seq_order": 0,
+                               "lane": "hole", "step": i, "adds": st.get("adds"), "axis": st.get("axis"), "hole": st.get("hole")}
+    track_set = {st["term"] for st in steps if st.get("term")}
+    slot: dict[str, int] = {}
+    last = len(steps) - 1
+    for tid in terms:
+        info = ct_terms.get(tid)
+        it = items.get("t:" + tid)
+        if it is None:
+            continue
+        if tid in track_set:
+            slot[tid] = step_of_node[tid]
+            it.update(lane="track", step=slot[tid], adds=steps[slot[tid]].get("adds"), axis=steps[slot[tid]].get("axis"), sig=(info or {}).get("sig"))
+        elif info:
+            slot[tid] = step_of_node.get(info["branch_of"], last)
+            it.update(lane="branch", branch_of=step_iid.get(slot[tid]), distance=info.get("distance"), beyond=info.get("beyond", []), sig=info.get("sig"))
+        else:
+            it.update(lane="unread")                    # the disassembly has no tree for it (a term that did not build)
+    # a branch term follows its parents (max over the parents' steps) …
+    parents = {t: [p for p in terms[t].get("from", []) if p in slot and p != t] for t in slot}
+    for _ in range(len(slot)):
+        changed = False
+        for t in slot:
+            if t in track_set:
+                continue
+            m = max([slot[t]] + [slot[p] for p in parents[t]])
+            if m != slot[t]:
+                slot[t], changed = m, True
+        if not changed:
+            break
+    # … and the parts a track term is built from come before it (min over its track descendants)
+    def ancestors(t: str, acc: set) -> set:
+        for p in parents.get(t, []):
+            if p not in acc:
+                acc.add(p); ancestors(p, acc)
+        return acc
+    for t in track_set:
+        if t not in slot:
+            continue
+        for a in ancestors(t, set()):
+            if a not in track_set and slot[a] > slot[t]:
+                slot[a] = slot[t]
+    violations = [f"{t} (step {slot[t]}) is made of {p} (step {slot[p]})" for t in track_set if t in slot
+                  for p in parents[t] if p in track_set and slot[p] > slot[t]]
+    for t, k in slot.items():
+        items["t:" + t]["step"] = k
+        if items["t:" + t].get("lane") == "branch":
+            items["t:" + t]["branch_of"] = step_iid.get(k)
+    for iid in seq_default:
+        it = items[iid]
+        if it["kind"] == "term":
+            continue
+        info = ct_art.get(it["id"])
+        if info and info.get("lane") == "branch":
+            k = step_of_node.get(info["branch_of"], last)
+            it.update(lane="branch", step=k, branch_of=step_iid.get(k), distance=info.get("distance"), beyond=info.get("beyond", []),
+                      staged=info.get("staged", []), sig=info.get("sig"))
+        else:
+            it.update(lane="unread", why=(info or {}).get("why") or ("built by The Void itself" if it["kind"] == "void" else "no tree read"))
+    order: list[str] = []
+    seq_pos = {iid: i for i, iid in enumerate(seq_default)}
+    for k in range(len(steps)):
+        if step_iid[k].startswith("h:"):
+            order.append(step_iid[k])
+        block = [t for t, s in slot.items() if s == k]
+        ids = set(block)
+        deps = {t: {p for p in parents[t] if p in ids} for t in block}
+        users: dict[str, set] = {t: set() for t in block}
+        for t, ps in deps.items():
+            for p in ps:
+                users[p].add(t)
+        # the step leads its block: its track term, and just ahead of it the parts it is made of
+        lead = set().union(*[ancestors(t, set()) for t in block if t in track_set]) & ids
+        key = lambda t: (0 if t in track_set or t in lead else 1, items["t:" + t].get("distance") or 0, index[t])
+        ready = [(key(t), t) for t in block if not deps[t]]
+        heapq.heapify(ready)
+        while ready:
+            _, t = heapq.heappop(ready)
+            order.append("t:" + t)
+            for u in users[t]:
+                deps[u].discard(t)
+                if not deps[u]:
+                    heapq.heappush(ready, (key(u), u))
+        arts = [iid for iid in seq_default if items[iid]["kind"] != "term" and items[iid].get("lane") == "branch" and items[iid]["step"] == k]
+        order += sorted(arts, key=lambda iid: (items[iid].get("distance") or 0, seq_pos[iid]))
+    have = set(order)
+    order += [iid for iid in seq_default if iid not in have]   # what the disassembly could not read closes the path
+    return order, violations
+
+
 def build() -> dict:
     terms_doc, spine, sl, dis = load()
     terms = terms_doc["terms"]
@@ -135,6 +243,12 @@ def build() -> dict:
                               "expr": d.get("expr") if d.get("expr") not in (None, "?") else "",
                               "category": d.get("category", ""), "bounds": d.get("bounds")}
                 default.append(iid)
+    seq_default, violations, gate_ok = default, [], None
+    if TRACK.exists():
+        ct = json.loads(TRACK.read_text(encoding="utf-8"))
+        default, violations = track_order(items, seq_default, terms, index, ct)
+        gate_ok = ct.get("gate_ok")
+    order_by_sequence = seq_default + [i for i in default if i not in set(seq_default)]   # holes at the end
     for i, iid in enumerate(default):
         items[iid]["default_index"] = i
     # an authored order wins; new ids go in after their default predecessor
@@ -155,20 +269,26 @@ def build() -> dict:
             have.add(iid)
     else:
         order = default
-    kinds = {k: sum(1 for i in items.values() if i["kind"] == k) for k in ("term", "artifact", "void")}
+    kinds = {k: sum(1 for i in items.values() if i["kind"] == k) for k in ("term", "artifact", "void", "hole")}
+    lanes = {k: sum(1 for i in items.values() if i.get("lane") == k) for k in ("track", "branch", "hole", "unread")}
     return {"_doc": "The construction path: from the point to the last Ada object. GENERATED by tools/construction_path.py "
-                    "(items); the ORDER is authored when `authored` is true (saved from /construction-path) and kept by the tool.",
+                    "(items); the ORDER is authored when `authored` is true (saved from /construction-path) and kept by the tool. "
+                    "The default order is the main track (commons/data/capacity_track.json), each step followed by its branches.",
             "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "authored": bool(authored), "edited_at": edited,
-            "counts": kinds, "order": order, "items": items}
+            "counts": kinds, "lanes": lanes, "gate_ok": gate_ok, "violations": violations,
+            "order": order, "order_by_sequence": order_by_sequence, "items": items}
 
 
 def main() -> int:
     doc = build()
     OUT.write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    c = doc["counts"]
-    print(f"wrote {OUT.relative_to(ROOT)} — {len(doc['order'])} steps: {c['term']} terms, {c['artifact']} artifacts, {c['void']} Void works"
+    c, ln = doc["counts"], doc["lanes"]
+    print(f"wrote {OUT.relative_to(ROOT)} — {len(doc['order'])} steps: {c['term']} terms, {c['artifact']} artifacts, {c['void']} Void works, {c['hole']} holes"
           f"{' (authored order kept)' if doc['authored'] else ' (default order)'}; first: {doc['order'][:4]} … last: {doc['order'][-1]}")
-    return 0
+    print(f"lanes: {ln['track']} on the track, {ln['branch']} branches, {ln['hole']} holes, {ln['unread']} unread; gate {'OK' if doc['gate_ok'] else doc['gate_ok']}")
+    for v in doc["violations"]:
+        print("  VIOLATION", v)
+    return 1 if doc["violations"] else 0
 
 
 if __name__ == "__main__":

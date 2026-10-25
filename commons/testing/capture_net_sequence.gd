@@ -5,14 +5,19 @@ extends SceneTree
 ##
 ##   godot --path . --xr-mode off --script res://commons/testing/capture_net_sequence.gd -- --term=net_over_cube
 ## Frames: user://term_sequence/<term>/t<tick>.png
+## --ground makes the floor a body too, so a term that falls comes to rest in frame
+## (falling_cube: the bench gives the ground; a floor inside the term would add a part)
 
 var _term := "net_over_cube"
+var _ground := false
 const TICKS := [0, 12, 24, 40, 70, 120, 200, 320]
 
 func _init() -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--term="):
 			_term = a.trim_prefix("--term=")
+		elif a == "--ground":
+			_ground = true
 	call_deferred("_run")
 
 
@@ -43,6 +48,15 @@ func _run() -> void:
 	floor.material_override = fm
 	floor.position.y = -0.001
 	world.add_child(floor)
+	if _ground:
+		var ground := StaticBody3D.new()
+		var gs := CollisionShape3D.new()
+		var gb := BoxShape3D.new()
+		gb.size = Vector3(6, 0.2, 6)
+		gs.shape = gb
+		gs.position.y = -0.1
+		ground.add_child(gs)
+		world.add_child(ground)
 	var cam := Camera3D.new()
 	cam.fov = 38
 	world.add_child(cam)

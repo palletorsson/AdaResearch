@@ -8,6 +8,7 @@ extends SceneTree
 ## a token already in the ledger is skipped, so the run resumes.
 ##
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/disassemble_spine.gd -- --seq=<name> [--out=res://ada_run/disassembly]
+##   --seq=modular reads the mod_ tokens (the grammar's terms) the same way
 ##
 ## Driven by tools/disassemble_spine.py, which runs the 25 sequences under the 16-second
 ## watchdog, marks the artifact a kill interrupted as "hang", and categorises the result.
@@ -36,6 +37,12 @@ func _run() -> void:
 	var sl: Dictionary = JSON.parse_string(f.get_as_text())
 	var items: Dictionary = sl.get("items", {})
 	var tokens: Array = []
+	if _seq == "modular":
+		# the grammar's own terms, read by the SAME reader as the artifacts (one measure for both)
+		for k in items:
+			var key := str(k)
+			if key.begins_with("mod_") and key.find("handmade_pallet") < 0:
+				tokens.append(key)
 	for seq in sl["trees"][0]["children"]:
 		if _seq != "" and str(seq["id"]) != _seq:
 			continue
@@ -100,6 +107,8 @@ func _disassemble(tok: String, scene_path: String) -> Dictionary:
 		row["error"] = "not a PackedScene"
 		return row
 	var inst: Node = (ps as PackedScene).instantiate()
+	if tok.begins_with("mod_"):
+		inst.set("term", tok.substr(4))   # a modular token's registry config, as a map would apply it
 	root.add_child(inst)
 	await process_frame
 	await process_frame
@@ -156,8 +165,13 @@ func _walk(n: Node, e: Dictionary, xform: Transform3D) -> void:
 			col = (mat as BaseMaterial3D).albedo_color.to_html(false)
 		elif mat is ShaderMaterial:
 			col = "shader"
+		# a hand-made or generated mesh records its triangle count: a surface from a function
+		# (terrain, isosurface, procedural skin) has hundreds; a hand-wound tetrahedron has four
+		var tris := 0
+		if not (mi.mesh is PrimitiveMesh):
+			tris = mi.mesh.get_faces().size() / 3
 		e["meshes"].append({"shape": shape, "size": [snapped(aabb.size.x, 0.001), snapped(aabb.size.y, 0.001), snapped(aabb.size.z, 0.001)],
-			"centre": [snapped(aabb.get_center().x, 0.001), snapped(aabb.get_center().y, 0.001), snapped(aabb.get_center().z, 0.001)], "color": col})
+			"centre": [snapped(aabb.get_center().x, 0.001), snapped(aabb.get_center().y, 0.001), snapped(aabb.get_center().z, 0.001)], "color": col, "tris": tris})
 	elif n is MultiMeshInstance3D and (n as MultiMeshInstance3D).multimesh != null:
 		var mm := (n as MultiMeshInstance3D).multimesh
 		e["multimesh"].append({"count": mm.instance_count, "shape": (mm.mesh.get_class().replace("Mesh", "").to_lower() if mm.mesh != null else "none")})

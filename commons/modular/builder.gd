@@ -14,6 +14,9 @@ extends RefCounted
 ##   {"op": "transform",  "of": expr, "at", "rot", "scale"}
 ##   {"op": "connect",    "of": expr, "a": i, "b": j, "kind": rope|rod|spring}  or "ties": [[i,j,kind]…]
 ##                        the strings: a relation between two parts (by index), drawn as a tie
+##   {"op": "exhibit",    "of": expr, "text": caption, "light": energy}   the museum's staging as ONE
+##                        wrapper: the thing, a label over it, a lamp above it, an area around it that
+##                        senses the visitor. Staging is not the principle: it is a branch, not a track step
 ##   {"op": "sort",       "of": expr, "by": size|height|width|name|type, "gap": m}   measure's first
 ##                        operator: the parts of a thing in a row by a reading of each
 ##   {"p": "prefab", "token": name}   an artifact of the registry standing in the grammar as
@@ -98,6 +101,8 @@ static func build(expr: Dictionary, terms: Dictionary, depth: int = 0) -> Node3D
 			return _sort(expr, terms, depth)
 		"connect":
 			return _connect(expr, terms, depth)
+		"exhibit":
+			return _exhibit(expr, terms, depth)
 		"transform":
 			var n: Node3D = build(expr.get("of", {}), terms, depth)
 			_place(n, expr)
@@ -225,11 +230,14 @@ static func _array(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 	var dims: int = int(expr.get("dims", 2))
 	var lift: float = float(expr.get("y", 0.0))
 	var ny: int = n if dims == 3 else 1
-	for i in range(n):
+	# a 1d array is a ROW along z, so planks (long in x) lie side by side. Until 25 Oct dims 1 built
+	# a square: eu_pallet's "plank * 3" was nine boards and its "plank * 5" twenty-five
+	var nx: int = 1 if dims == 1 else n
+	for i in range(nx):
 		for j in range(ny):
 			for k in range(n):
 				var c: Node3D = build(expr.get("of", {}), terms, depth)
-				c.position = Vector3((i - (n - 1) / 2.0) * step, lift + j * step, (k - (n - 1) / 2.0) * step)
+				c.position = Vector3((i - (nx - 1) / 2.0) * step, lift + j * step, (k - (n - 1) / 2.0) * step)
 				c.set_meta("cell", Vector3i(i, j, k))
 				root.add_child(c)
 	return root
@@ -388,6 +396,45 @@ static func _connect(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 		inner.add_child(tie)
 	inner.set_meta("connect", ties)
 	return inner
+
+
+## exhibit: the staging most spine artifacts carry around their object — a label, a lamp, a
+## trigger area — written once. Measured 25 Oct: of 1015 artifacts, 387 lack only a label, 316 a
+## sensor and 315 a lamp to be one step from a term; this wrapper is that step.
+static func _exhibit(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
+	var root := Node3D.new()
+	root.name = "exhibit"
+	var thing: Node3D = build(expr.get("of", {}), terms, depth)
+	root.add_child(thing)
+	var box: AABB = _aabb_of(thing)
+	var top: float = box.position.y + box.size.y
+	var centre: Vector3 = box.get_center()
+	var text: String = str(expr.get("text", thing.get_meta("term", "")))
+	if text != "":
+		var l := ModLabel.make(text, 0.004)
+		l.position = Vector3(centre.x, top + 0.18, centre.z)
+		l.set_meta("construction_mark", true)
+		root.add_child(l)
+	var lamp := OmniLight3D.new()
+	lamp.name = "lamp"
+	lamp.light_energy = float(expr.get("light", 1.2))
+	lamp.light_color = Color(str(expr.get("light_color", "fff1d8")))
+	lamp.omni_range = max(2.0, box.size.length() * 2.0)
+	lamp.position = Vector3(centre.x, top + 0.9, centre.z)
+	root.add_child(lamp)
+	var area := Area3D.new()
+	area.name = "sense"
+	area.set_meta("modular_body", "area")
+	area.set_meta("exhibit_sense", true)
+	var cs := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = box.size + Vector3(1.2, 0.6, 1.2)   # the visitor is sensed within 60 cm of the thing
+	cs.shape = shape
+	cs.position = centre
+	area.add_child(cs)
+	root.add_child(area)
+	root.set_meta("exhibit", {"text": text})
+	return root
 
 
 ## The local bounds of a node and its meshes, before it is in the tree.

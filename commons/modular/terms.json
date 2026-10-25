@@ -1,5 +1,5 @@
 {
-  "_doc": "The modular class system's terms: every thing is an expression over primitives (p) and other terms (t). One file for the Godot kernel (commons/modular/composite.gd builds it), the web tree (/knowledge-tree) and the tutorial path (tools/modular_path.py: derivation order = lesson order). Palle, 2026-10-23: 'point + mesh(color) + collider = sphere_collider \u2026 everything in this 3d world is triangles'. Primitives: point, mesh{shape,size,color}, collider{shape,size}, body{kind}, grabbable, label{text}, light. Operators: compose{parts}, associate{of,surface,story}, times{of,n,layout}, array{of,n,step,dims}, assemblage{parts[{of,at,rot,scale}]}, engine{of,kind}, transform{of,at,rot,scale}. A part with \"scaffold\": true is shown while the thing is being built and removed when it is done (Palle: the tape ends alone, line and points gone). A mesh may name a \"shader\" (ink: the drawn stroke, tapered ends, darker silhouette). {\"op\":\"sort\",\"of\":\u2026,\"by\":size|height|width|name} lays a thing's parts in a row by a reading of each (measure's first operator); {\"p\":\"prefab\",\"token\":name} stands a registry artifact in the grammar as itself. {\"op\":\"connect\",\"of\":\u2026,\"a\":i,\"b\":j,\"kind\":rope|rod|spring} (or \"ties\":[[i,j,kind]\u2026]) ties two parts of a thing by index \u2014 the strings.",
+  "_doc": "The modular class system's terms: every thing is an expression over primitives (p) and other terms (t). One file for the Godot kernel (commons/modular/composite.gd builds it), the web tree (/knowledge-tree) and the tutorial path (tools/modular_path.py: derivation order = lesson order). Palle, 2026-10-23: 'point + mesh(color) + collider = sphere_collider \u2026 everything in this 3d world is triangles'. Primitives: point, mesh{shape,size,color}, collider{shape,size}, body{kind}, grabbable, label{text}, light. Operators: compose{parts}, associate{of,surface,story}, times{of,n,layout}, array{of,n,step,dims}, assemblage{parts[{of,at,rot,scale}]}, engine{of,kind}, transform{of,at,rot,scale}. A part with \"scaffold\": true is shown while the thing is being built and removed when it is done (Palle: the tape ends alone, line and points gone). A mesh may name a \"shader\" (ink: the drawn stroke, tapered ends, darker silhouette). {\"op\":\"sort\",\"of\":\u2026,\"by\":size|height|width|name} lays a thing's parts in a row by a reading of each (measure's first operator); {\"p\":\"prefab\",\"token\":name} stands a registry artifact in the grammar as itself. {\"op\":\"connect\",\"of\":\u2026,\"a\":i,\"b\":j,\"kind\":rope|rod|spring} (or \"ties\":[[i,j,kind]\u2026]) ties two parts of a thing by index \u2014 the strings. `track` lists the main track: each step gives one new capacity (checked by tools/capacity_track.py); every other term and every spine artifact hangs off its nearest step as a branch.",
   "version": 1,
   "chapters": [
     "point",
@@ -10245,6 +10245,193 @@
         ],
         "ticks": 360
       }
+    },
+    "box": {
+      "chapter": "solid",
+      "label": "box (seen, not touched)",
+      "expr": "mesh(box) = box \u2014 a visible solid with no boundary: the eye stops at it, the hand passes through",
+      "from": [
+        "quad"
+      ],
+      "build": {
+        "p": "mesh",
+        "shape": "box",
+        "size": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "color": "f3ecdd",
+        "alpha": 0.85,
+        "at": [
+          0,
+          0.25,
+          0
+        ]
+      }
+    },
+    "falling_cube": {
+      "chapter": "solid",
+      "label": "falling cube",
+      "expr": "step(cube, physics) = falling_cube \u2014 the boundary acquires mass: it falls",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "cube"
+        ],
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "cube"
+          },
+          "at": [
+            0,
+            0.6,
+            0
+          ]
+        }
+      }
+    },
+    "cube_row": {
+      "chapter": "array",
+      "label": "a row of cubes",
+      "expr": "array(cube, 4, 1d) = cube_row \u2014 the same cube, counted",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "cube"
+        },
+        "n": 4,
+        "step": 0.6,
+        "dims": 1
+      }
+    },
+    "lattice": {
+      "chapter": "array",
+      "label": "lattice",
+      "expr": "array(box, 6, 3d) = lattice \u2014 216 boxes: repetition at the scale of a material",
+      "from": [
+        "box",
+        "cube_row"
+      ],
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "box"
+          },
+          "scale": 0.3
+        },
+        "n": 6,
+        "step": 0.2,
+        "dims": 3
+      }
+    },
+    "exhibit_cube": {
+      "chapter": "assemblage",
+      "label": "cube, exhibited",
+      "expr": "exhibit(cube) \u2014 the same cube with a label, a lamp and an area that senses you: staging, not a new principle",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "exhibit",
+        "text": "cube",
+        "of": {
+          "t": "cube"
+        }
+      }
     }
-  }
+  },
+  "track": [
+    {
+      "term": "point",
+      "adds": "a position",
+      "axis": "start"
+    },
+    {
+      "term": "line",
+      "adds": "extension: a length",
+      "axis": "form:1"
+    },
+    {
+      "term": "quad",
+      "adds": "a surface",
+      "axis": "form:2"
+    },
+    {
+      "term": "box",
+      "adds": "a solid you see",
+      "axis": "form:3"
+    },
+    {
+      "term": "cube",
+      "adds": "a boundary: it collides",
+      "axis": "body:1"
+    },
+    {
+      "term": "falling_cube",
+      "adds": "mass: it falls",
+      "axis": "body:2"
+    },
+    {
+      "term": "pick_up_cube",
+      "adds": "a hand: it can be taken",
+      "axis": "body:3"
+    },
+    {
+      "term": "cube_row",
+      "adds": "repetition: counted",
+      "axis": "many:1"
+    },
+    {
+      "term": "elevated_plank",
+      "adds": "composition: several kinds of part",
+      "axis": "parts:1"
+    },
+    {
+      "term": "pendulum",
+      "adds": "a tie: one part holds another",
+      "axis": "joint:1"
+    },
+    {
+      "term": "sine_movement",
+      "adds": "driven motion: a function of time",
+      "axis": "drive:1"
+    },
+    {
+      "term": "lattice",
+      "adds": "repetition at scale: a material",
+      "axis": "many:2"
+    },
+    {
+      "term": "skateboard_3",
+      "adds": "an assemblage: many kinds of part",
+      "axis": "parts:2"
+    },
+    {
+      "term": "pallet_sorted",
+      "adds": "a reading: parts in a row by a measure",
+      "axis": "measure:1"
+    },
+    {
+      "term": "and_gate",
+      "adds": "a decision: inputs become an output",
+      "axis": "react:2"
+    },
+    {
+      "term": null,
+      "adds": "a field: a surface from a function of space",
+      "axis": "form:4",
+      "hole": "needs the field operator (isosurfaces, boolean)"
+    }
+  ]
 }
