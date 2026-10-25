@@ -33,18 +33,28 @@ A thing that exceeds the whole track on some axis hangs off the first HOLE that 
 axis (e.g. field form, waiting for the field operator).
 
     python tools/capacity_track.py      # writes commons/data/capacity_track.json
+    python tools/capacity_track.py --terms=<file>     # gate another terms file; write nothing
+    python tools/capacity_track.py --propose=<file> [--note=text]
+        # a proposed track (a JSON list of steps, from /tree-of-life): gate it first; only if it
+        # passes, write it into terms.json, append it to commons/data/capacity_track_history.jsonl
+        # (the track's own lineage: every version it has had) and regenerate the path
 """
 from __future__ import annotations
 
 import collections
 import json
+import os
+import subprocess
 import sys
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TERMS = ROOT / "commons/modular/terms.json"
 LEDGERS = ROOT / "ada_run/disassembly"
 OUT = ROOT / "commons/data/capacity_track.json"
+HISTORY = ROOT / "commons/data/capacity_track_history.jsonl"
 
 PRINCIPLE = ["form", "body", "many", "parts", "joint", "drive", "react", "measure"]
 STAGING = ["read", "light", "sense"]
@@ -162,12 +172,7 @@ def load_rows() -> tuple[dict, dict]:
     return terms_rows, art_rows
 
 
-def main() -> int:
-    terms_path, write = TERMS, True
-    for a in sys.argv[1:]:
-        if a.startswith("--terms="):
-            terms_path, write = Path(a.split("=", 1)[1]), False   # a mutant track: gate only, write nothing
-    doc = json.loads(terms_path.read_text(encoding="utf-8"))
+def run(doc: dict, write: bool) -> int:
     terms, track = doc["terms"], doc.get("track", [])
     trows, arows = load_rows()
     if not trows:
@@ -252,6 +257,60 @@ def main() -> int:
     print(f"artifacts: {len(out_art)}; distance from their step: {dict(sorted(hist.items()))}; within one: {report['summary']['within_one']}; carry staging: {report['summary']['staged']}; unread (empty tree): {len(unread)}")
     print("artifacts per step:", dict(by_node.most_common()))
     return 0 if gate_ok else 1
+
+
+def names(track: list) -> list:
+    return [st.get("term") or f"({st.get('axis', 'hole')})" for st in track]
+
+
+def propose(proposal: list, note: str) -> int:
+    """gate a proposed track; only a passing one is written, recorded and propagated"""
+    if not isinstance(proposal, list) or not all(isinstance(st, dict) for st in proposal):
+        print("refused: a track is a list of steps"); return 2
+    doc = json.loads(TERMS.read_text(encoding="utf-8"))
+    unknown = [st["term"] for st in proposal if st.get("term") and st["term"] not in doc["terms"]]
+    if unknown:
+        print("refused: not terms:", unknown); return 2
+    before = doc.get("track", [])
+    doc["track"] = proposal
+    print("-- the gate, on the proposal (nothing written yet)")
+    if run(doc, write=False) != 0:
+        print("refused: the gate fails, terms.json untouched"); return 1
+    if not HISTORY.exists():                           # the lineage starts with the track as it was
+        HISTORY.write_text(json.dumps({"at": None, "note": "the track before the first mutation", "track": before}, ensure_ascii=False) + "\n", encoding="utf-8")
+    fresh = json.loads(TERMS.read_text(encoding="utf-8"))   # re-read: terms.json has other writers
+    fresh["track"] = proposal
+    tmp = TERMS.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(fresh, indent=2) + "\n", encoding="utf-8")
+    for attempt in range(8):
+        try:
+            os.replace(tmp, TERMS); break
+        except OSError:
+            time.sleep(1.0)
+    else:
+        print("refused: terms.json is held by another process"); return 3
+    with HISTORY.open("a", encoding="utf-8") as h:
+        h.write(json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "note": note,
+                            "from": names(before), "track": proposal}, ensure_ascii=False) + "\n")
+    print("-- written; the branches re-hung")
+    run(fresh, write=True)
+    subprocess.run([sys.executable, str(ROOT / "tools/construction_path.py")], cwd=ROOT)
+    return 0
+
+
+def main() -> int:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")   # read through a pipe (the /tree-of-life route), not only a console
+    terms_path, write, proposal, note = TERMS, True, None, ""
+    for a in sys.argv[1:]:
+        if a.startswith("--terms="):
+            terms_path, write = Path(a.split("=", 1)[1]), False   # a mutant track: gate only, write nothing
+        elif a.startswith("--propose="):
+            proposal = json.loads(Path(a.split("=", 1)[1]).read_text(encoding="utf-8"))
+        elif a.startswith("--note="):
+            note = a.split("=", 1)[1]
+    if proposal is not None:
+        return propose(proposal, note)
+    return run(json.loads(terms_path.read_text(encoding="utf-8")), write)
 
 
 if __name__ == "__main__":

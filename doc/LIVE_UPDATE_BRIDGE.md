@@ -964,3 +964,19 @@ the track by default (each step followed by its branches, closest first; the par
 before it; 0 parent-after-child), with a "the track only" filter, ⇐ / ⇒ step buttons, tall ticks on the strip, a red
 hole, and a panel that says which step a branch hangs off, on which axes it differs, and that its staging is covered by
 `exhibit`. "by sequence" keeps the older order as a reading (not editable).
+
+**The tree of life (Palle, 25 Oct: "the shape is it a tree or is some other git structure … if you would visualize it
+as the tree of life how would it look?"):** `/tree-of-life` draws the spine as Haeckel's Stammbaum. It is three
+structures and a walk: the TRUNK is the main track (a line — git's first-parent history); the LIMBS make a tree (every
+term and artifact hangs off exactly one step, the closest at the heart of its crown); the violet threads are MERGES
+(terms made of parents on other limbs — composition makes the whole a web, as symbiogenesis makes the tree of life and
+merge commits make git); a SEQUENCE is a walk across the crowns. The fallen leaves on the ground have no tree to
+measure. The trunk is mutable on the page: move, remove or insert steps (the panel lists the terms that would add exactly
+one notch at a step, the collection's artifacts that would if written as terms, the exact examples, and whether a swap
+keeps the gate green); the gate and the re-hanging run live in the browser (a port of `tools/capacity_track.py`) and
+the leaves fly to their new limbs. Save posts to `/api/capacity-track`, which runs `capacity_track.py --propose`: it
+gates the proposal again and writes `terms.json` only if it passes, appends the version to
+`commons/data/capacity_track_history.jsonl` (the trunk's own lineage, loadable from the page) and regenerates the
+path. Tested: a failing proposal exits 1 with terms.json byte-identical; an accepted one (in a sandbox copy) keeps the
+file's format and writes two history rows (origin + mutation). Finding on the first look: every spine sequence
+"climbs" (next artifact on the same step or higher) only 52–75 % of the time — no sequence follows the trunk yet.
