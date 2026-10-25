@@ -997,3 +997,17 @@ next step is the field (+167, no term). The page: grow it from the point (play),
 front-loaded, breathing, slow start) or draw one, and the trunk closest to that pace is found by DP; or step it by hand
 through the adjacent possible (from the point only form and parts have a term). "make it the trunk" goes through the
 same gated `--propose` as /tree-of-life.
+
+**Grow it from the point — `/spine-film` (Palle, 25 Oct: "can we animate the objects of the spine and I can drag a
+timeline through the capabilities and associations … and can we see the code develop in a side panel?"):** the timeline
+is the trunk, one segment per step. Inside a step the trunk's object is constructed part by part (the Builder's own play
+order, ticks on the timeline), then its associations — the terms with the same capacities and another surface or
+colour (quad has eight: tape, walk_line, red_line, parallel_lines, cross_lines, danger_x, triangle_face, ply) — bloom in a
+ring around it (green dots). Drag anywhere, ← → jump steps, space plays. The side panel is the code: "the program so far"
+grows a line per step with the tokens this step added in green, and "how <term> is built" lights the block that made the
+part now appearing (every built node carries its block's address, `userData.path`: parts by index, `of` as −1), built
+blocks solid, pending ones faint. Below the viewport, the works of the spine that materialize at the step (their last
+capacity arrives there; 268 at skateboard_3). Renders with WebGL where there is one, else with three's SVGRenderer
+(no labels, textures or shader strokes) — the in-app browser pane has no WebGL, and that is how it was checked. Trap
+found on the way: an SVG renderer sized in pixels widens its grid column, the ResizeObserver reads the wider host and
+the SVG grows again (6530 px) — the element is now absolute and the column `minmax(0,1fr)`.
