@@ -91,6 +91,8 @@ func _process(delta: float) -> void:
 	_t += delta
 	if kind == "physics" or kind == "trace":
 		_follow_ties()
+	if kind == "physics":
+		return   # nothing else per frame; the default branch below would switch processing off
 	match kind:
 		"sine":
 			var amp: float = float(params.get("amplitude", 0.25))

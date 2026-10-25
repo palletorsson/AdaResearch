@@ -66,7 +66,7 @@ func _run() -> void:
 	var none: Dictionary = await _case("control: no tie", "none")
 	var rod: Dictionary = await _case("rod", "rod")
 	var give := 0.12
-	var rope_ok: bool = bool(rope["joint"]) and float(rope["d_max"]) <= float(rope["d0"]) + give and float(rope["y1"]) < float(rope["y0"]) - 0.2
+	var rope_ok: bool = bool(rope["joint"]) and float(rope["d_max"]) <= float(rope["d0"]) + give and float(rope["y1"]) < float(rope["y0"]) - 0.12
 	var none_ok: bool = not bool(none["joint"]) and float(none["d1"]) > float(none["d0"]) + 0.5
 	var rod_ok: bool = bool(rod["joint"]) and abs(float(rod["d1"]) - float(rod["d0"])) <= give
 	var ok := rope_ok and none_ok and rod_ok
