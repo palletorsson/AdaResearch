@@ -3584,6 +3584,310 @@
     ],
     "expr": "exhibit(cube) — the same cube with a label, a lamp and an area that senses you: staging, not a new principle"
    }
+  },
+  "mod_pentagon": {
+   "lookup_name": "mod_pentagon",
+   "name": "modular · pentagon",
+   "description": "pentagon = line * 5 (polygon) = pentagon — five edges close a face. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "pentagon"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "triangle"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "pentagon",
+    "chapter": "triangle",
+    "from": [
+     "line",
+     "line",
+     "line",
+     "line",
+     "line"
+    ],
+    "expr": "line * 5 (polygon) = pentagon — five edges close a face"
+   }
+  },
+  "mod_octahedron": {
+   "lookup_name": "mod_octahedron",
+   "name": "modular · octahedron",
+   "description": "octahedron = triangle_face * 8 = octahedron — four triangles meet at every corner. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "octahedron"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "octahedron",
+    "chapter": "solid",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "triangle_face * 8 = octahedron — four triangles meet at every corner"
+   }
+  },
+  "mod_icosahedron": {
+   "lookup_name": "mod_icosahedron",
+   "name": "modular · icosahedron",
+   "description": "icosahedron = triangle_face * 20 = icosahedron — five triangles meet at every corner. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "icosahedron"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "icosahedron",
+    "chapter": "solid",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "triangle_face * 20 = icosahedron — five triangles meet at every corner"
+   }
+  },
+  "mod_dodecahedron": {
+   "lookup_name": "mod_dodecahedron",
+   "name": "modular · dodecahedron",
+   "description": "dodecahedron = pentagon * 12 = dodecahedron — three pentagons meet at every corner. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "dodecahedron"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "dodecahedron",
+    "chapter": "solid",
+    "from": [
+     "pentagon"
+    ],
+    "expr": "pentagon * 12 = dodecahedron — three pentagons meet at every corner"
+   }
+  },
+  "mod_platonic_solids": {
+   "lookup_name": "mod_platonic_solids",
+   "name": "modular · the five Platonic solids",
+   "description": "the five Platonic solids = tetrahedron + cube + octahedron + dodecahedron + icosahedron = the Platonic solids — every face the same regular polygon, every corner the same. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "platonic_solids"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "platonic_solids",
+    "chapter": "solid",
+    "from": [
+     "tetrahedron",
+     "box",
+     "octahedron",
+     "dodecahedron",
+     "icosahedron"
+    ],
+    "expr": "tetrahedron + cube + octahedron + dodecahedron + icosahedron = the Platonic solids — every face the same regular polygon, every corner the same"
+   }
+  },
+  "mod_moved_cube": {
+   "lookup_name": "mod_moved_cube",
+   "name": "modular · moved cube",
+   "description": "moved cube = transform(cube, at 0.7) = moved_cube — translation: where it is. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "moved_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "moved_cube",
+    "chapter": "transformation",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, at 0.7) = moved_cube — translation: where it is"
+   }
+  },
+  "mod_turned_cube": {
+   "lookup_name": "mod_turned_cube",
+   "name": "modular · turned cube",
+   "description": "turned cube = transform(cube, rot 45) = turned_cube — rotation: which way it faces. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "turned_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "turned_cube",
+    "chapter": "transformation",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, rot 45) = turned_cube — rotation: which way it faces"
+   }
+  },
+  "mod_scaled_cube": {
+   "lookup_name": "mod_scaled_cube",
+   "name": "modular · scaled cube",
+   "description": "scaled cube = transform(cube, scale 1.6) = scaled_cube — scale: how big it is. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "scaled_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "scaled_cube",
+    "chapter": "transformation",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, scale 1.6) = scaled_cube — scale: how big it is"
+   }
   }
  }
 }

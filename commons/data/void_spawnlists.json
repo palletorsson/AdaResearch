@@ -4786,7 +4786,8 @@
       "mod_triangle_face",
       "mod_quad",
       "mod_wooden_plane",
-      "mod_walls"
+      "mod_walls",
+      "mod_pentagon"
      ]
     },
     {
@@ -4808,7 +4809,11 @@
       "mod_warhol_box",
       "mod_cylinder",
       "mod_box",
-      "mod_falling_cube"
+      "mod_falling_cube",
+      "mod_octahedron",
+      "mod_icosahedron",
+      "mod_dodecahedron",
+      "mod_platonic_solids"
      ]
     },
     {
@@ -4855,7 +4860,10 @@
      "children": [],
      "items": [
       "mod_pick_up_cube",
-      "mod_game_spaces"
+      "mod_game_spaces",
+      "mod_moved_cube",
+      "mod_turned_cube",
+      "mod_scaled_cube"
      ]
     },
     {
@@ -62010,13 +62018,245 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_exhibit_cube"
+  },
+  "mod_pentagon": {
+   "label": "pentagon",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "pentagon = line * 5 (polygon) = pentagon — five edges close a face",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "pentagon",
+    "from": [
+     "line",
+     "line",
+     "line",
+     "line",
+     "line"
+    ],
+    "expr": "line * 5 (polygon) = pentagon — five edges close a face"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_pentagon",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_pentagon"
+  },
+  "mod_octahedron": {
+   "label": "octahedron",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "octahedron = triangle_face * 8 = octahedron — four triangles meet at every corner",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "octahedron",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "triangle_face * 8 = octahedron — four triangles meet at every corner"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_octahedron",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_octahedron"
+  },
+  "mod_icosahedron": {
+   "label": "icosahedron",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "icosahedron = triangle_face * 20 = icosahedron — five triangles meet at every corner",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "icosahedron",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "triangle_face * 20 = icosahedron — five triangles meet at every corner"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_icosahedron",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_icosahedron"
+  },
+  "mod_dodecahedron": {
+   "label": "dodecahedron",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "dodecahedron = pentagon * 12 = dodecahedron — three pentagons meet at every corner",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "dodecahedron",
+    "from": [
+     "pentagon"
+    ],
+    "expr": "pentagon * 12 = dodecahedron — three pentagons meet at every corner"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_dodecahedron",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_dodecahedron"
+  },
+  "mod_platonic_solids": {
+   "label": "the five Platonic solids",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the five Platonic solids = tetrahedron + cube + octahedron + dodecahedron + icosahedron = the Platonic solids — every face the same regular polygon, every corner the same",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "platonic_solids",
+    "from": [
+     "tetrahedron",
+     "box",
+     "octahedron",
+     "dodecahedron",
+     "icosahedron"
+    ],
+    "expr": "tetrahedron + cube + octahedron + dodecahedron + icosahedron = the Platonic solids — every face the same regular polygon, every corner the same"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_platonic_solids",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_platonic_solids"
+  },
+  "mod_moved_cube": {
+   "label": "moved cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "moved cube = transform(cube, at 0.7) = moved_cube — translation: where it is",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "moved_cube",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, at 0.7) = moved_cube — translation: where it is"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_moved_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_moved_cube"
+  },
+  "mod_turned_cube": {
+   "label": "turned cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "turned cube = transform(cube, rot 45) = turned_cube — rotation: which way it faces",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "turned_cube",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, rot 45) = turned_cube — rotation: which way it faces"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_turned_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_turned_cube"
+  },
+  "mod_scaled_cube": {
+   "label": "scaled cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "scaled cube = transform(cube, scale 1.6) = scaled_cube — scale: how big it is",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "scaled_cube",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, scale 1.6) = scaled_cube — scale: how big it is"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_scaled_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_scaled_cube"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1635,
+  "items": 1643,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

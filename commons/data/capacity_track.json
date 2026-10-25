@@ -2275,6 +2275,158 @@
     "sense": 0
    },
    "lane": "track"
+  },
+  "pentagon": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "octahedron": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube",
+   "distance": 0,
+   "beyond": []
+  },
+  "icosahedron": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube",
+   "distance": 0,
+   "beyond": []
+  },
+  "dodecahedron": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube",
+   "distance": 0,
+   "beyond": []
+  },
+  "platonic_solids": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "elevated_plank",
+   "distance": 0,
+   "beyond": []
+  },
+  "moved_cube": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube",
+   "distance": 0,
+   "beyond": []
+  },
+  "turned_cube": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube",
+   "distance": 0,
+   "beyond": []
+  },
+  "scaled_cube": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube",
+   "distance": 0,
+   "beyond": []
   }
  },
  "artifacts": {

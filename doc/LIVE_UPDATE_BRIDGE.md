@@ -1011,3 +1011,24 @@ capacity arrives there; 268 at skateboard_3). Renders with WebGL where there is 
 (no labels, textures or shader strokes) — the in-app browser pane has no WebGL, and that is how it was checked. Trap
 found on the way: an SVG renderer sized in pixels widens its grid column, the ResizeObserver reads the wider host and
 the SVG grows again (6530 px) — the element is now absolute and the column `minmax(0,1fr)`.
+
+**The lineage film (Palle, 25 Oct: "after line triangle must be a new node leading to its different form, then
+tetrahedron, pyramid, wedge, then platonic solids … what happens when we add the time domain of transform … then arrays,
+color … load the glbs from godot instead of three? … how to reconstruct the whole sequence and how I can sort the
+order"):** the film now plays the LINEAGE, not the capacity track — two orders had been conflated: the track is a coarse
+gate (one new capacity per step, 16 steps); the lineage is every new form, each built from earlier ones. Every term is a
+node (95), except a term written `associate(N)` — the same thing with another surface or story, nothing else around N —
+which blooms around N (walk_line and red_line around tape, danger_x around cross_lines, the wood/concrete/cardboard/
+Warhol boxes around cube). New terms: `pentagon`, `octahedron`, `icosahedron`, `dodecahedron`, `platonic_solids` (true
+solids: new mesh shapes `octa`, `icosa`, `dodecahedron` in builder.gd's mod_mesh.gd and in modular-terms.ts; the old
+`dodeca` icosphere stand-in is untouched), and the transformation chapter `moved_cube`, `turned_cube`, `scaled_cube`.
+Each node: construction → TIME when it is a transform or an engine (the static transform unfolds: a place becomes a move,
+a turn a turning, a size a growing; physics falls or swings on its tie, a sine oscillates, noise wanders) → its
+associations. Godot builds all 8 (probe 103 ok, the 7 failures foreign). The order is Palle's: the film's list is
+sortable (drag, ↑ ↓; red = before what it is made of) and saves into the one authored order,
+`commons/data/construction_path.json` (term places refilled, artifacts untouched, a complete permutation). Palle's
+sentence is saved as the authored order: line → triangle → triangle_face → tetrahedron → quad → pyramid → wedge → box →
+octahedron → icosahedron → pentagon → dodecahedron → platonic_solids → (the rest in the spine's order); "default order" on
+/construction-path undoes it. Godot's own geometry: `commons/testing/export_terms_gltf.gd` exports every term as Godot
+builds it to `ada_encyclopedia/public/artifact-gltf/mod_<term>.glb` (102 of 102; meshes renamed `o<NNN>_` in build order,
+scaffolds already freed), and the film's "Godot's build" switch plays those instead of the three.js rebuild.

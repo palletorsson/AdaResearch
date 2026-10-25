@@ -64,6 +64,8 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 			mi.mesh = _triangle(s0)
 		"dodeca":
 			mi.mesh = _dodeca(s0)
+		"octa", "icosa", "dodecahedron":
+			mi.mesh = _platonic(shape, s0)
 		_:
 			var m := BoxMesh.new()
 			m.size = Vector3(s0, s1, s2)
@@ -136,3 +138,76 @@ static func _dodeca(r: float) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.create_from(m, 0)
 	return st.commit()
+
+
+## True Platonic solids — "octa", "icosa", "dodecahedron" — of circumradius r, standing on y = 0.
+## The icosahedron's faces are the triples of its 12 vertices at edge length; the dodecahedron is
+## its dual: a vertex at the centre of each icosahedron face, a pentagon around each icosahedron
+## vertex. ("dodeca" stays the icosphere stand-in the older terms were drawn with.)
+static func _platonic(kind: String, r: float) -> ArrayMesh:
+	var verts := PackedVector3Array()
+	var tris := PackedInt32Array()
+	if kind == "octa":
+		verts = PackedVector3Array([Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 1, 0), Vector3(0, -1, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)])
+		for x in [0, 1]:
+			for y in [2, 3]:
+				for z in [4, 5]:
+					tris.append(x)
+					tris.append(y)
+					tris.append(z)
+	else:
+		var p: float = (1.0 + sqrt(5.0)) / 2.0
+		var ico := PackedVector3Array()
+		for s1 in [-1.0, 1.0]:
+			for s2 in [-1.0, 1.0]:
+				ico.append(Vector3(0, s1, s2 * p))
+				ico.append(Vector3(s1, s2 * p, 0))
+				ico.append(Vector3(s2 * p, 0, s1))
+		var faces: Array = []
+		for i in ico.size():
+			for j in range(i + 1, ico.size()):
+				for k in range(j + 1, ico.size()):
+					if absf(ico[i].distance_to(ico[j]) - 2.0) < 0.01 and absf(ico[j].distance_to(ico[k]) - 2.0) < 0.01 and absf(ico[i].distance_to(ico[k]) - 2.0) < 0.01:
+						faces.append([i, j, k])
+		if kind == "icosa":
+			verts = ico
+			for f in faces:
+				for vi in f:
+					tris.append(vi)
+		else:
+			for f in faces:
+				verts.append((ico[f[0]] + ico[f[1]] + ico[f[2]]) / 3.0)
+			for vi in ico.size():
+				var axis: Vector3 = ico[vi].normalized()
+				var u: Vector3 = axis.cross(Vector3.UP if absf(axis.y) < 0.9 else Vector3.RIGHT).normalized()
+				var w: Vector3 = axis.cross(u)
+				var around: Array = []
+				for fi in faces.size():
+					if vi in faces[fi]:
+						around.append(fi)
+				var ring := verts
+				around.sort_custom(func(a: int, b: int) -> bool:
+					return atan2(ring[a].dot(w), ring[a].dot(u)) < atan2(ring[b].dot(w), ring[b].dot(u))
+				)
+				for t in range(1, around.size() - 1):
+					tris.append(around[0])
+					tris.append(around[t])
+					tris.append(around[t + 1])
+	var scale_f: float = r / verts[0].length()
+	var lo: float = INF
+	for i in verts.size():
+		verts[i] *= scale_f
+		lo = minf(lo, verts[i].y)
+	for i in verts.size():
+		verts[i].y -= lo
+	# wound as _tetra is: (b - a) x (c - a) points away from the solid's centre
+	var centre := Vector3(0, -lo, 0)
+	for i in range(0, tris.size(), 3):
+		var a: Vector3 = verts[tris[i]]
+		var b: Vector3 = verts[tris[i + 1]]
+		var c: Vector3 = verts[tris[i + 2]]
+		if (b - a).cross(c - a).dot((a + b + c) / 3.0 - centre) < 0.0:
+			var t2: int = tris[i + 1]
+			tris[i + 1] = tris[i + 2]
+			tris[i + 2] = t2
+	return _faces(verts, tris)

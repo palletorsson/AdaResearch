@@ -10349,6 +10349,283 @@
           "t": "cube"
         }
       }
+    },
+    "pentagon": {
+      "chapter": "triangle",
+      "label": "pentagon",
+      "expr": "line * 5 (polygon) = pentagon \u2014 five edges close a face",
+      "from": [
+        "line",
+        "line",
+        "line",
+        "line",
+        "line"
+      ],
+      "build": {
+        "op": "times",
+        "of": {
+          "t": "line"
+        },
+        "n": 5,
+        "layout": "polygon"
+      }
+    },
+    "octahedron": {
+      "chapter": "solid",
+      "label": "octahedron",
+      "expr": "triangle_face * 8 = octahedron \u2014 four triangles meet at every corner",
+      "from": [
+        "triangle_face"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "triangle_face",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "octa",
+            "size": [
+              0.42
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.8
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.84,
+              0.84,
+              0.84
+            ],
+            "at": [
+              0,
+              0.42,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "icosahedron": {
+      "chapter": "solid",
+      "label": "icosahedron",
+      "expr": "triangle_face * 20 = icosahedron \u2014 five triangles meet at every corner",
+      "from": [
+        "triangle_face"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "triangle_face",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "icosa",
+            "size": [
+              0.4
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.8
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "at": [
+              0,
+              0.35,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "dodecahedron": {
+      "chapter": "solid",
+      "label": "dodecahedron",
+      "expr": "pentagon * 12 = dodecahedron \u2014 three pentagons meet at every corner",
+      "from": [
+        "pentagon"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "pentagon",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "dodecahedron",
+            "size": [
+              0.4
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.8
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.7,
+              0.7
+            ],
+            "at": [
+              0,
+              0.35,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "platonic_solids": {
+      "chapter": "solid",
+      "label": "the five Platonic solids",
+      "expr": "tetrahedron + cube + octahedron + dodecahedron + icosahedron = the Platonic solids \u2014 every face the same regular polygon, every corner the same",
+      "from": [
+        "tetrahedron",
+        "box",
+        "octahedron",
+        "dodecahedron",
+        "icosahedron"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "tetrahedron"
+            },
+            "at": [
+              -1.7,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "box"
+            },
+            "at": [
+              -0.85,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "octahedron"
+            },
+            "at": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "dodecahedron"
+            },
+            "at": [
+              0.85,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "icosahedron"
+            },
+            "at": [
+              1.7,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "moved_cube": {
+      "chapter": "transformation",
+      "label": "moved cube",
+      "expr": "transform(cube, at 0.7) = moved_cube \u2014 translation: where it is",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "transform",
+        "of": {
+          "t": "cube"
+        },
+        "at": [
+          0.7,
+          0,
+          0
+        ]
+      }
+    },
+    "turned_cube": {
+      "chapter": "transformation",
+      "label": "turned cube",
+      "expr": "transform(cube, rot 45) = turned_cube \u2014 rotation: which way it faces",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "transform",
+        "of": {
+          "t": "cube"
+        },
+        "rot": [
+          0,
+          45,
+          0
+        ]
+      }
+    },
+    "scaled_cube": {
+      "chapter": "transformation",
+      "label": "scaled cube",
+      "expr": "transform(cube, scale 1.6) = scaled_cube \u2014 scale: how big it is",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "transform",
+        "of": {
+          "t": "cube"
+        },
+        "scale": 1.6
+      }
     }
   },
   "track": [
