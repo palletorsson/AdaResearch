@@ -1923,7 +1923,7 @@
   "mod_skateboard": {
    "lookup_name": "mod_skateboard",
    "name": "modular · skateboard",
-   "description": "skateboard = plank + sphere_collider * 4 = skateboard. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "skateboard = plank + wheel * 4 + connect(two axles, rod) = skateboard — the first of three (skateboard_2, skateboard_3 look more and more like one). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -1953,9 +1953,9 @@
     "chapter": "assemblage",
     "from": [
      "plank",
-     "sphere_collider"
+     "wheel"
     ],
-    "expr": "plank + sphere_collider * 4 = skateboard"
+    "expr": "plank + wheel * 4 + connect(two axles, rod) = skateboard — the first of three (skateboard_2, skateboard_3 look more and more like one)"
    }
   },
   "mod_eu_pallet": {
@@ -2223,6 +2223,1180 @@
      "sphere_collider"
     ],
     "expr": "step(connect(cube held high + sphere_collider beside it, rope), physics) — the ball falls until the rope is taut, then swings"
+   }
+  },
+  "mod_cylinder": {
+   "lookup_name": "mod_cylinder",
+   "name": "modular · cylinder",
+   "description": "cylinder = mesh(cylinder) + collider(cylinder) + body — a circle extruded; the engine gives it to us. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "cylinder"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "cylinder",
+    "chapter": "solid",
+    "from": [
+     "quad"
+    ],
+    "expr": "mesh(cylinder) + collider(cylinder) + body — a circle extruded; the engine gives it to us"
+   }
+  },
+  "mod_wheel": {
+   "lookup_name": "mod_wheel",
+   "name": "modular · wheel",
+   "description": "wheel = association(cylinder, rubber) = wheel — a cylinder on its side, dressed to roll. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "wheel"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    1
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "association"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "wheel",
+    "chapter": "association",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "association(cylinder, rubber) = wheel — a cylinder on its side, dressed to roll"
+   }
+  },
+  "mod_deck": {
+   "lookup_name": "mod_deck",
+   "name": "modular · deck",
+   "description": "deck = plank widened + nose + tail + association(grip) = deck — the board a foot can trust. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "deck"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "deck",
+    "chapter": "assemblage",
+    "from": [
+     "plank"
+    ],
+    "expr": "plank widened + nose + tail + association(grip) = deck — the board a foot can trust"
+   }
+  },
+  "mod_truck": {
+   "lookup_name": "mod_truck",
+   "name": "modular · truck",
+   "description": "truck = association(baseplate + hanger, metal) = truck — the axle and what bolts it to the deck. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "truck"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "truck",
+    "chapter": "assemblage",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "association(baseplate + hanger, metal) = truck — the axle and what bolts it to the deck"
+   }
+  },
+  "mod_wheel_54": {
+   "lookup_name": "mod_wheel_54",
+   "name": "modular · wheel 54 mm",
+   "description": "wheel 54 mm = association(cylinder, urethane), 54 mm across, 34 mm wide — the wheel a skateboard really has. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "wheel_54"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    1
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "association"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "wheel_54",
+    "chapter": "association",
+    "from": [
+     "cylinder",
+     "wheel"
+    ],
+    "expr": "association(cylinder, urethane), 54 mm across, 34 mm wide — the wheel a skateboard really has"
+   }
+  },
+  "mod_skateboard_2": {
+   "lookup_name": "mod_skateboard_2",
+   "name": "modular · skateboard, second",
+   "description": "skateboard, second = deck + truck * 2 + wheel_54 * 4 + connect(axles, rod) = skateboard_2 — nose, tail, grip, trucks, urethane. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "skateboard_2"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "skateboard_2",
+    "chapter": "assemblage",
+    "from": [
+     "deck",
+     "truck",
+     "wheel_54"
+    ],
+    "expr": "deck + truck * 2 + wheel_54 * 4 + connect(axles, rod) = skateboard_2 — nose, tail, grip, trucks, urethane"
+   }
+  },
+  "mod_ply": {
+   "lookup_name": "mod_ply",
+   "name": "modular · ply",
+   "description": "ply = one maple veneer, 1.7 mm — a deck is seven of these glued. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "ply"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "ply",
+    "chapter": "assemblage",
+    "from": [
+     "quad"
+    ],
+    "expr": "one maple veneer, 1.7 mm — a deck is seven of these glued"
+   }
+  },
+  "mod_deck_7": {
+   "lookup_name": "mod_deck_7",
+   "name": "modular · seven-ply deck",
+   "description": "seven-ply deck = (ply) * 7 stacked + nose + tail + rails + association(grip) = deck_7. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "deck_7"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "deck_7",
+    "chapter": "assemblage",
+    "from": [
+     "ply",
+     "deck"
+    ],
+    "expr": "(ply) * 7 stacked + nose + tail + rails + association(grip) = deck_7"
+   }
+  },
+  "mod_bolt": {
+   "lookup_name": "mod_bolt",
+   "name": "modular · bolt",
+   "description": "bolt = a 10-32 bolt through deck and baseplate. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bolt"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bolt",
+    "chapter": "assemblage",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "a 10-32 bolt through deck and baseplate"
+   }
+  },
+  "mod_truck_3": {
+   "lookup_name": "mod_truck_3",
+   "name": "modular · truck with kingpin",
+   "description": "truck with kingpin = baseplate + kingpin + bushing * 2 + hanger, metal; bolt * 4 through the plate = truck_3. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "truck_3"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "truck_3",
+    "chapter": "assemblage",
+    "from": [
+     "truck",
+     "bolt"
+    ],
+    "expr": "baseplate + kingpin + bushing * 2 + hanger, metal; bolt * 4 through the plate = truck_3"
+   }
+  },
+  "mod_bearing": {
+   "lookup_name": "mod_bearing",
+   "name": "modular · bearing",
+   "description": "bearing = association(cylinder, metal), 22 mm — the ring a wheel turns on. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bearing"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bearing",
+    "chapter": "assemblage",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "association(cylinder, metal), 22 mm — the ring a wheel turns on"
+   }
+  },
+  "mod_wheel_3": {
+   "lookup_name": "mod_wheel_3",
+   "name": "modular · wheel with bearings",
+   "description": "wheel with bearings = wheel_54 + bearing * 2 = a wheel that turns on something. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "wheel_3"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    1
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "association"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "wheel_3",
+    "chapter": "association",
+    "from": [
+     "wheel_54",
+     "bearing"
+    ],
+    "expr": "wheel_54 + bearing * 2 = a wheel that turns on something"
+   }
+  },
+  "mod_skateboard_3": {
+   "lookup_name": "mod_skateboard_3",
+   "name": "modular · skateboard, third",
+   "description": "skateboard, third = deck_7 + truck_3 * 2 + wheel_3 * 4 + connect(axles, rod) = skateboard_3 — seven plies, kingpins, bushings, bearings, eight bolts. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "skateboard_3"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "skateboard_3",
+    "chapter": "assemblage",
+    "from": [
+     "deck_7",
+     "truck_3",
+     "wheel_3",
+     "skateboard_2"
+    ],
+    "expr": "deck_7 + truck_3 * 2 + wheel_3 * 4 + connect(axles, rod) = skateboard_3 — seven plies, kingpins, bushings, bearings, eight bolts"
+   }
+  },
+  "mod_cone_field": {
+   "lookup_name": "mod_cone_field",
+   "name": "modular · field of cones",
+   "description": "field of cones = by(array(plastic_cone, 4 × 4), random: jitter, turn) = cone_field — a prefab field; walk between them. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "cone_field"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "cone_field",
+    "chapter": "assemblage",
+    "from": [
+     "plastic_cone",
+     "grid"
+    ],
+    "expr": "by(array(plastic_cone, 4 × 4), random: jitter, turn) = cone_field — a prefab field; walk between them"
+   }
+  },
+  "mod_net": {
+   "lookup_name": "mod_net",
+   "name": "modular · net",
+   "description": "net = connect(array(sphere_collider, 6 × 6), every neighbour, rope) = net — 36 knots, 60 strings; under physics it drapes over what is below. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "net"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "net",
+    "chapter": "assemblage",
+    "from": [
+     "sphere_collider",
+     "grid",
+     "pendulum"
+    ],
+    "expr": "connect(array(sphere_collider, 6 × 6), every neighbour, rope) = net — 36 knots, 60 strings; under physics it drapes over what is below"
+   }
+  },
+  "mod_net_over_cube": {
+   "lookup_name": "mod_net_over_cube",
+   "name": "modular · net over a cube",
+   "description": "net over a cube = step(block 0.8 m + net above it, physics) — the net falls, rests on the block and its margins hang: it follows the outline. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "net_over_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "net_over_cube",
+    "chapter": "assemblage",
+    "from": [
+     "net",
+     "cube"
+    ],
+    "expr": "step(block 0.8 m + net above it, physics) — the net falls, rests on the block and its margins hang: it follows the outline"
+   }
+  },
+  "mod_curtain": {
+   "lookup_name": "mod_curtain",
+   "name": "modular · curtain",
+   "description": "curtain = step(net hung from a row of points, physics) = curtain — the top row is pinned, the rest hangs and swings. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "curtain"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "curtain",
+    "chapter": "assemblage",
+    "from": [
+     "net",
+     "point"
+    ],
+    "expr": "step(net hung from a row of points, physics) = curtain — the top row is pinned, the rest hangs and swings"
+   }
+  },
+  "mod_bead_chain": {
+   "lookup_name": "mod_bead_chain",
+   "name": "modular · bead chain",
+   "description": "bead chain = step(connect(point + sphere_collider * 7, each to the next, rope), physics) = bead_chain — hangs from the point, swings as one. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bead_chain"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bead_chain",
+    "chapter": "assemblage",
+    "from": [
+     "pendulum",
+     "point",
+     "sphere_collider"
+    ],
+    "expr": "step(connect(point + sphere_collider * 7, each to the next, rope), physics) = bead_chain — hangs from the point, swings as one"
+   }
+  },
+  "mod_ball": {
+   "lookup_name": "mod_ball",
+   "name": "modular · ball",
+   "description": "ball = a red ball, 10 cm — the signal of a marble machine. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "ball"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "ball",
+    "chapter": "logic",
+    "from": [
+     "sphere_collider"
+    ],
+    "expr": "a red ball, 10 cm — the signal of a marble machine"
+   }
+  },
+  "mod_brick": {
+   "lookup_name": "mod_brick",
+   "name": "modular · brick",
+   "description": "brick = a 12 cm block — a thing in the way. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "brick"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "brick",
+    "chapter": "logic",
+    "from": [
+     "cube"
+    ],
+    "expr": "a 12 cm block — a thing in the way"
+   }
+  },
+  "mod_domino": {
+   "lookup_name": "mod_domino",
+   "name": "modular · domino",
+   "description": "domino = a plank on edge, 30 cm — it stands until something tips it. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "domino"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "domino",
+    "chapter": "logic",
+    "from": [
+     "plank"
+    ],
+    "expr": "a plank on edge, 30 cm — it stands until something tips it"
+   }
+  },
+  "mod_or_frame": {
+   "lookup_name": "mod_or_frame",
+   "name": "modular · OR gate (frame)",
+   "description": "OR gate (frame) = the static parts of OR gate. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "or_frame"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "or_frame",
+    "chapter": "logic",
+    "from": [
+     "plank",
+     "cube"
+    ],
+    "expr": "the static parts of OR gate"
+   }
+  },
+  "mod_or_gate": {
+   "lookup_name": "mod_or_gate",
+   "name": "modular · OR gate",
+   "description": "OR gate = step(funnel with end walls + ball? at A + ball? at B, physics) — a ball from either side reaches the bin: out = A or B. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "or_gate"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "or_gate",
+    "chapter": "logic",
+    "from": [
+     "or_frame",
+     "ball"
+    ],
+    "expr": "step(funnel with end walls + ball? at A + ball? at B, physics) — a ball from either side reaches the bin: out = A or B"
+   }
+  },
+  "mod_and_frame": {
+   "lookup_name": "mod_and_frame",
+   "name": "modular · AND gate (frame)",
+   "description": "AND gate (frame) = the static parts of AND gate. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "and_frame"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "and_frame",
+    "chapter": "logic",
+    "from": [
+     "plank",
+     "cube"
+    ],
+    "expr": "the static parts of AND gate"
+   }
+  },
+  "mod_and_gate": {
+   "lookup_name": "mod_and_gate",
+   "name": "modular · AND gate",
+   "description": "AND gate = step(cup + ball? at A + ball? at B, physics) — the cup holds one; the second spills: out = A and B. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "and_gate"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "and_gate",
+    "chapter": "logic",
+    "from": [
+     "and_frame",
+     "ball"
+    ],
+    "expr": "step(cup + ball? at A + ball? at B, physics) — the cup holds one; the second spills: out = A and B"
+   }
+  },
+  "mod_not_frame": {
+   "lookup_name": "mod_not_frame",
+   "name": "modular · NOT gate (frame)",
+   "description": "NOT gate (frame) = the static parts of NOT gate. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "not_frame"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "not_frame",
+    "chapter": "logic",
+    "from": [
+     "plank",
+     "cube"
+    ],
+    "expr": "the static parts of NOT gate"
+   }
+  },
+  "mod_not_gate": {
+   "lookup_name": "mod_not_gate",
+   "name": "modular · NOT gate",
+   "description": "NOT gate = step(ramp + run + ball + brick? at A, physics) — the ball always runs, unless something is in the way: out = not A. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "not_gate"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "not_gate",
+    "chapter": "logic",
+    "from": [
+     "not_frame",
+     "ball",
+     "brick"
+    ],
+    "expr": "step(ramp + run + ball + brick? at A, physics) — the ball always runs, unless something is in the way: out = not A"
+   }
+  },
+  "mod_branch_frame": {
+   "lookup_name": "mod_branch_frame",
+   "name": "modular · IF / ELSE (frame)",
+   "description": "IF / ELSE (frame) = the static parts of IF / ELSE. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "branch_frame"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "branch_frame",
+    "chapter": "logic",
+    "from": [
+     "plank",
+     "cube"
+    ],
+    "expr": "the static parts of IF / ELSE"
+   }
+  },
+  "mod_branch_gate": {
+   "lookup_name": "mod_branch_gate",
+   "name": "modular · IF / ELSE",
+   "description": "IF / ELSE = step(roof + ball at left? or right?, physics) — if the ball lands left of the ridge it ends left, else right. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "branch_gate"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "branch_gate",
+    "chapter": "logic",
+    "from": [
+     "branch_frame",
+     "ball"
+    ],
+    "expr": "step(roof + ball at left? or right?, physics) — if the ball lands left of the ridge it ends left, else right"
+   }
+  },
+  "mod_domino_frame": {
+   "lookup_name": "mod_domino_frame",
+   "name": "modular · domino line (frame)",
+   "description": "domino line (frame) = the base and the push ramp of the domino line. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "domino_frame"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "domino_frame",
+    "chapter": "logic",
+    "from": [
+     "plank"
+    ],
+    "expr": "the base and the push ramp of the domino line"
+   }
+  },
+  "mod_domino_line": {
+   "lookup_name": "mod_domino_line",
+   "name": "modular · domino line",
+   "description": "domino line = step(ramp + domino * 8 + ball? at push, physics) — one push and a wave runs to the end: a delay line. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "domino_line"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "logic"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "domino_line",
+    "chapter": "logic",
+    "from": [
+     "domino_frame",
+     "domino",
+     "ball"
+    ],
+    "expr": "step(ramp + domino * 8 + ball? at push, physics) — one push and a wave runs to the end: a delay line"
    }
   }
  }

@@ -912,3 +912,16 @@ offset moved it (the net as a term fell through its block; the direct net did no
 sixty 6-DOF springs between free bodies blew a net to ten metres, so nets are tied with ropes (pins) and springs are
 for pairs; freed bodies now use continuous collision. The drawn ties follow their bodies under physics
 (`_follow_ties`), so a net under physics looks like a net.
+
+**The logic machines (25 Oct, "let go"):** five machines built from the grammar, each term carrying its own `logic`
+block — frame, movers, named inputs (what drops where), named outputs (regions), and the truth table as cases:
+`or_gate` (a funnel with end walls over a bin), `and_gate` (a cup holds one ball; the second rolls over the low lip into
+the tray), `not_gate` (a ball always runs down the ramp and along the run, unless a brick is in its way),
+`branch_gate` (IF/ELSE: a roof; where the ball lands decides the bin), `domino_line` (one push, eight dominoes, a delay
+line). New movers `ball`, `brick`, `domino`; the physics engine frees the terms a machine names (`"free": [...]`).
+`commons/testing/probe_logic.gd` builds every case and reads every output: **15 of 15 at 60 Hz and at 90 Hz** (the
+headset's rate). A mutant copy (`--terms=`) with the AND cup walled and the IF/ELSE inputs swapped fails 3 cases, so the
+check bites. Found on the way: the probe first resolved frames by name from the real terms.json, so a mutant frame never
+reached the physics (`probe_and_trace.gd` showed the real lip being rolled over); it now builds the frame from the file
+it loaded, and only a full run on the real terms writes `ada_run/logic_truth_<hz>hz.json`, which `/modular-program`
+shows beside each machine (declared, then measured). The program page also runs without WebGL now.

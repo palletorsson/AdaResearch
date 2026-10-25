@@ -40,17 +40,19 @@ the grammar's notation and says which hole it fills and what it needs:*
 
 ## B. Physical logic — the beginning of logic with a ball (Palle's own hole)
 
+*Five built on 25 Oct and checked against their own truth tables in the physics at 60 and 90 Hz (`commons/testing/probe_logic.gd`, 15 of 15 cases at both rates): IF/ELSE, AND, OR, NOT and the domino line. A mutant copy (a walled AND cup, swapped IF/ELSE inputs) fails three cases, so the check bites.*
+
 | # | artifact | expression | hole it fills | needs |
 |---|---|---|---|---|
-| 21 | `branch_gate` | ramp + a wedge at the fork: the ball goes left or right by where it entered | if / else in matter | now |
-| 22 | `and_gate` | two balls must both press a plank before the latch lifts | AND | now |
-| 23 | `or_gate` | either ramp feeds the same channel | OR | now |
-| 24 | `not_gate` | a seesaw: a ball on one side lifts the other side's ball out | NOT | now |
+| 21 | `branch_gate` **built 25 Oct** | ramp + a wedge at the fork: the ball goes left or right by where it entered | if / else in matter | now |
+| 22 | `and_gate` **built 25 Oct** | two balls must both press a plank before the latch lifts | AND | now |
+| 23 | `or_gate` **built 25 Oct** | either ramp feeds the same channel | OR | now |
+| 24 | `not_gate` **built 25 Oct** | a seesaw: a ball on one side lifts the other side's ball out | NOT | now |
 | 25 | `latch` | a plank held by a peg; a ball knocks the peg; the plank drops once | a state that lingers | now |
 | 26 | `reservoir` | a bucket that tips when the third ball lands — counts to three | a counter without a number | now |
 | 27 | `marble_run_loop` | ramps that return the ball to the top by a lift (hand engine) | while | now |
 | 28 | `flip_flop` | a seesaw channel that alternates the exit each time | state, memory of one bit | now |
-| 29 | `domino_line` | array(plank on edge) + step(physics): one push, a wave of falls | sequence, propagation, delay | now |
+| 29 | `domino_line` **built 25 Oct** | array(plank on edge) + step(physics): one push, a wave of falls | sequence, propagation, delay | now |
 | 30 | `cam_follower` | a cylinder with a bump + by(rotate) + a plank resting on it: the plank lifts once a turn | a periodic signal from a shape | by |
 | 31 | `pulley_pair` | two sphere_colliders on one rope over a cylinder: one down, one up | transfer, conservation | now |
 | 32 | `pendulum_row` | array(pendulum, 5) with ropes of growing length | a wave of phases (Newton's cradle's cousin) | now |

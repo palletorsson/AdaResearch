@@ -1655,74 +1655,85 @@
     "skateboard": {
       "chapter": "assemblage",
       "label": "skateboard",
-      "expr": "plank + sphere_collider * 4 = skateboard",
+      "expr": "plank + wheel * 4 + connect(two axles, rod) = skateboard \u2014 the first of three (skateboard_2, skateboard_3 look more and more like one)",
       "from": [
         "plank",
-        "sphere_collider"
+        "wheel"
       ],
       "build": {
-        "op": "compose",
-        "parts": [
-          {
-            "op": "transform",
-            "of": {
-              "t": "plank"
+        "op": "connect",
+        "ties": [
+          [
+            1,
+            2,
+            "rod"
+          ],
+          [
+            3,
+            4,
+            "rod"
+          ]
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "plank"
+              },
+              "at": [
+                0,
+                0.11,
+                0
+              ]
             },
-            "at": [
-              0,
-              0.11,
-              0
-            ]
-          },
-          {
-            "op": "transform",
-            "of": {
-              "t": "sphere_collider"
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel"
+              },
+              "at": [
+                -0.32,
+                0,
+                -0.1
+              ]
             },
-            "at": [
-              -0.32,
-              0.05,
-              -0.09
-            ],
-            "scale": 0.45
-          },
-          {
-            "op": "transform",
-            "of": {
-              "t": "sphere_collider"
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel"
+              },
+              "at": [
+                -0.32,
+                0,
+                0.1
+              ]
             },
-            "at": [
-              0.32,
-              0.05,
-              -0.09
-            ],
-            "scale": 0.45
-          },
-          {
-            "op": "transform",
-            "of": {
-              "t": "sphere_collider"
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel"
+              },
+              "at": [
+                0.32,
+                0,
+                -0.1
+              ]
             },
-            "at": [
-              -0.32,
-              0.05,
-              0.09
-            ],
-            "scale": 0.45
-          },
-          {
-            "op": "transform",
-            "of": {
-              "t": "sphere_collider"
-            },
-            "at": [
-              0.32,
-              0.05,
-              0.09
-            ],
-            "scale": 0.45
-          }
-        ]
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel"
+              },
+              "at": [
+                0.32,
+                0,
+                0.1
+              ]
+            }
+          ]
+        }
       }
     },
     "eu_pallet": {
@@ -5305,6 +5316,4934 @@
             ]
           }
         }
+      }
+    },
+    "cylinder": {
+      "chapter": "solid",
+      "label": "cylinder",
+      "expr": "mesh(cylinder) + collider(cylinder) + body \u2014 a circle extruded; the engine gives it to us",
+      "from": [
+        "quad"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "cylinder",
+            "size": [
+              0.12,
+              0.3
+            ],
+            "color": "f3ecdd",
+            "alpha": 0.85,
+            "at": [
+              0,
+              0.15,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "cylinder",
+            "size": [
+              0.12,
+              0.3
+            ],
+            "at": [
+              0,
+              0.15,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "wheel": {
+      "chapter": "association",
+      "label": "wheel",
+      "expr": "association(cylinder, rubber) = wheel \u2014 a cylinder on its side, dressed to roll",
+      "from": [
+        "cylinder"
+      ],
+      "build": {
+        "op": "associate",
+        "surface": "rubber",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "cylinder"
+          },
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "scale": 0.42,
+          "at": [
+            0,
+            0.05,
+            0
+          ]
+        }
+      }
+    },
+    "deck": {
+      "chapter": "assemblage",
+      "label": "deck",
+      "expr": "plank widened + nose + tail + association(grip) = deck \u2014 the board a foot can trust",
+      "from": [
+        "plank"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.56,
+              0.012,
+              0.2
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.012,
+              0.2
+            ],
+            "color": "c9a978",
+            "at": [
+              0.345,
+              0.025,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              18
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.012,
+              0.2
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.345,
+              0.025,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -18
+            ]
+          },
+          {
+            "op": "associate",
+            "surface": "grip",
+            "of": {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.56,
+                0.003,
+                0.19
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.0075,
+                0
+              ]
+            }
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.02,
+              0.2
+            ],
+            "at": [
+              0,
+              0.01,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "truck": {
+      "chapter": "assemblage",
+      "label": "truck",
+      "expr": "association(baseplate + hanger, metal) = truck \u2014 the axle and what bolts it to the deck",
+      "from": [
+        "cylinder"
+      ],
+      "build": {
+        "op": "associate",
+        "surface": "metal",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.09,
+                0.01,
+                0.06
+              ],
+              "color": "b8bcc2",
+              "at": [
+                0,
+                -0.005,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.012,
+                0.035
+              ],
+              "color": "b8bcc2",
+              "at": [
+                0,
+                -0.03,
+                0
+              ],
+              "rot": [
+                0,
+                0,
+                20
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.007,
+                0.17
+              ],
+              "color": "b8bcc2",
+              "at": [
+                0,
+                -0.045,
+                0
+              ],
+              "rot": [
+                90,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "wheel_54": {
+      "chapter": "association",
+      "label": "wheel 54 mm",
+      "expr": "association(cylinder, urethane), 54 mm across, 34 mm wide \u2014 the wheel a skateboard really has",
+      "from": [
+        "cylinder",
+        "wheel"
+      ],
+      "build": {
+        "op": "associate",
+        "surface": "urethane",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "cylinder"
+          },
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            0.225,
+            0.113,
+            0.225
+          ],
+          "at": [
+            0,
+            0,
+            0.017
+          ]
+        }
+      }
+    },
+    "skateboard_2": {
+      "chapter": "assemblage",
+      "label": "skateboard, second",
+      "expr": "deck + truck * 2 + wheel_54 * 4 + connect(axles, rod) = skateboard_2 \u2014 nose, tail, grip, trucks, urethane",
+      "from": [
+        "deck",
+        "truck",
+        "wheel_54"
+      ],
+      "build": {
+        "op": "connect",
+        "ties": [
+          [
+            3,
+            4,
+            "rod"
+          ],
+          [
+            5,
+            6,
+            "rod"
+          ]
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "deck"
+              },
+              "at": [
+                0,
+                0.085,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "truck"
+              },
+              "at": [
+                -0.22,
+                0.08,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "truck"
+              },
+              "at": [
+                0.22,
+                0.08,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_54"
+              },
+              "at": [
+                -0.22,
+                0.027,
+                -0.1
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_54"
+              },
+              "at": [
+                -0.22,
+                0.027,
+                0.07
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_54"
+              },
+              "at": [
+                0.22,
+                0.027,
+                -0.1
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_54"
+              },
+              "at": [
+                0.22,
+                0.027,
+                0.07
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ply": {
+      "chapter": "assemblage",
+      "label": "ply",
+      "expr": "one maple veneer, 1.7 mm \u2014 a deck is seven of these glued",
+      "from": [
+        "quad"
+      ],
+      "build": {
+        "p": "mesh",
+        "shape": "box",
+        "size": [
+          0.56,
+          0.0017,
+          0.2
+        ],
+        "color": "c9a978",
+        "at": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "deck_7": {
+      "chapter": "assemblage",
+      "label": "seven-ply deck",
+      "expr": "(ply) * 7 stacked + nose + tail + rails + association(grip) = deck_7",
+      "from": [
+        "ply",
+        "deck"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "times",
+            "of": {
+              "t": "ply"
+            },
+            "n": 7,
+            "layout": "stack",
+            "gap": 0.0017
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.17,
+              0.012,
+              0.2
+            ],
+            "color": "c9a978",
+            "at": [
+              0.355,
+              0.03,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              20
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.17,
+              0.012,
+              0.2
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.355,
+              0.03,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -18
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.56,
+              0.006,
+              0.03
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0.014,
+              0.095
+            ],
+            "rot": [
+              8,
+              0,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.56,
+              0.006,
+              0.03
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0.014,
+              -0.095
+            ],
+            "rot": [
+              -8,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "associate",
+            "surface": "grip",
+            "of": {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.56,
+                0.002,
+                0.19
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.0135,
+                0
+              ]
+            }
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.82,
+              0.03,
+              0.2
+            ],
+            "at": [
+              0,
+              0.012,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "bolt": {
+      "chapter": "assemblage",
+      "label": "bolt",
+      "expr": "a 10-32 bolt through deck and baseplate",
+      "from": [
+        "cylinder"
+      ],
+      "build": {
+        "op": "associate",
+        "surface": "metal",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.0025,
+                0.04
+              ],
+              "color": "b8bcc2",
+              "at": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.005,
+                0.003
+              ],
+              "color": "b8bcc2",
+              "at": [
+                0,
+                0.02,
+                0
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "truck_3": {
+      "chapter": "assemblage",
+      "label": "truck with kingpin",
+      "expr": "baseplate + kingpin + bushing * 2 + hanger, metal; bolt * 4 through the plate = truck_3",
+      "from": [
+        "truck",
+        "bolt"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "associate",
+            "surface": "metal",
+            "of": {
+              "op": "compose",
+              "parts": [
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.09,
+                    0.008,
+                    0.06
+                  ],
+                  "color": "b8bcc2",
+                  "at": [
+                    0,
+                    -0.004,
+                    0
+                  ]
+                },
+                {
+                  "p": "mesh",
+                  "shape": "cylinder",
+                  "size": [
+                    0.004,
+                    0.05
+                  ],
+                  "color": "b8bcc2",
+                  "at": [
+                    0.01,
+                    -0.03,
+                    0
+                  ],
+                  "rot": [
+                    0,
+                    0,
+                    22
+                  ]
+                },
+                {
+                  "p": "mesh",
+                  "shape": "cylinder",
+                  "size": [
+                    0.011,
+                    0.012
+                  ],
+                  "color": "c83a2f",
+                  "at": [
+                    0.014,
+                    -0.022,
+                    0
+                  ],
+                  "rot": [
+                    0,
+                    0,
+                    22
+                  ]
+                },
+                {
+                  "p": "mesh",
+                  "shape": "cylinder",
+                  "size": [
+                    0.011,
+                    0.012
+                  ],
+                  "color": "c83a2f",
+                  "at": [
+                    0.022,
+                    -0.042,
+                    0
+                  ],
+                  "rot": [
+                    0,
+                    0,
+                    22
+                  ]
+                },
+                {
+                  "p": "mesh",
+                  "shape": "cylinder",
+                  "size": [
+                    0.0065,
+                    0.175
+                  ],
+                  "color": "b8bcc2",
+                  "at": [
+                    0,
+                    -0.045,
+                    0
+                  ],
+                  "rot": [
+                    90,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "p": "mesh",
+                  "shape": "box",
+                  "size": [
+                    0.03,
+                    0.02,
+                    0.05
+                  ],
+                  "color": "b8bcc2",
+                  "at": [
+                    0,
+                    -0.04,
+                    0
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "array",
+              "of": {
+                "t": "bolt"
+              },
+              "n": 2,
+              "step": 0.04,
+              "dims": 2
+            },
+            "at": [
+              -0.02,
+              0,
+              -0.02
+            ]
+          }
+        ]
+      }
+    },
+    "bearing": {
+      "chapter": "assemblage",
+      "label": "bearing",
+      "expr": "association(cylinder, metal), 22 mm \u2014 the ring a wheel turns on",
+      "from": [
+        "cylinder"
+      ],
+      "build": {
+        "op": "associate",
+        "surface": "metal",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "cylinder"
+          },
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "scale": [
+            0.092,
+            0.04,
+            0.092
+          ]
+        }
+      }
+    },
+    "wheel_3": {
+      "chapter": "association",
+      "label": "wheel with bearings",
+      "expr": "wheel_54 + bearing * 2 = a wheel that turns on something",
+      "from": [
+        "wheel_54",
+        "bearing"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "wheel_54"
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "bearing"
+            },
+            "at": [
+              0,
+              0,
+              0.004
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "bearing"
+            },
+            "at": [
+              0,
+              0,
+              0.03
+            ]
+          }
+        ]
+      }
+    },
+    "skateboard_3": {
+      "chapter": "assemblage",
+      "label": "skateboard, third",
+      "expr": "deck_7 + truck_3 * 2 + wheel_3 * 4 + connect(axles, rod) = skateboard_3 \u2014 seven plies, kingpins, bushings, bearings, eight bolts",
+      "from": [
+        "deck_7",
+        "truck_3",
+        "wheel_3",
+        "skateboard_2"
+      ],
+      "build": {
+        "op": "connect",
+        "ties": [
+          [
+            3,
+            4,
+            "rod"
+          ],
+          [
+            5,
+            6,
+            "rod"
+          ]
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "deck_7"
+              },
+              "at": [
+                0,
+                0.085,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "truck_3"
+              },
+              "at": [
+                -0.22,
+                0.082,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "truck_3"
+              },
+              "at": [
+                0.22,
+                0.082,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_3"
+              },
+              "at": [
+                -0.22,
+                0.027,
+                -0.1
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_3"
+              },
+              "at": [
+                -0.22,
+                0.027,
+                0.07
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_3"
+              },
+              "at": [
+                0.22,
+                0.027,
+                -0.1
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "wheel_3"
+              },
+              "at": [
+                0.22,
+                0.027,
+                0.07
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "cone_field": {
+      "chapter": "assemblage",
+      "label": "field of cones",
+      "expr": "by(array(plastic_cone, 4 \u00d7 4), random: jitter, turn) = cone_field \u2014 a prefab field; walk between them",
+      "from": [
+        "plastic_cone",
+        "grid"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "random",
+        "term": "plastic_cone",
+        "jitter": 0.3,
+        "lift": 0.0,
+        "vary_scale": false,
+        "seed": 7,
+        "of": {
+          "op": "array",
+          "of": {
+            "t": "plastic_cone"
+          },
+          "n": 4,
+          "step": 1.0,
+          "dims": 2
+        }
+      }
+    },
+    "net": {
+      "chapter": "assemblage",
+      "label": "net",
+      "expr": "connect(array(sphere_collider, 6 \u00d7 6), every neighbour, rope) = net \u2014 36 knots, 60 strings; under physics it drapes over what is below",
+      "from": [
+        "sphere_collider",
+        "grid",
+        "pendulum"
+      ],
+      "build": {
+        "op": "connect",
+        "ties": [
+          [
+            0,
+            6,
+            "rope"
+          ],
+          [
+            0,
+            1,
+            "rope"
+          ],
+          [
+            1,
+            7,
+            "rope"
+          ],
+          [
+            1,
+            2,
+            "rope"
+          ],
+          [
+            2,
+            8,
+            "rope"
+          ],
+          [
+            2,
+            3,
+            "rope"
+          ],
+          [
+            3,
+            9,
+            "rope"
+          ],
+          [
+            3,
+            4,
+            "rope"
+          ],
+          [
+            4,
+            10,
+            "rope"
+          ],
+          [
+            4,
+            5,
+            "rope"
+          ],
+          [
+            5,
+            11,
+            "rope"
+          ],
+          [
+            6,
+            12,
+            "rope"
+          ],
+          [
+            6,
+            7,
+            "rope"
+          ],
+          [
+            7,
+            13,
+            "rope"
+          ],
+          [
+            7,
+            8,
+            "rope"
+          ],
+          [
+            8,
+            14,
+            "rope"
+          ],
+          [
+            8,
+            9,
+            "rope"
+          ],
+          [
+            9,
+            15,
+            "rope"
+          ],
+          [
+            9,
+            10,
+            "rope"
+          ],
+          [
+            10,
+            16,
+            "rope"
+          ],
+          [
+            10,
+            11,
+            "rope"
+          ],
+          [
+            11,
+            17,
+            "rope"
+          ],
+          [
+            12,
+            18,
+            "rope"
+          ],
+          [
+            12,
+            13,
+            "rope"
+          ],
+          [
+            13,
+            19,
+            "rope"
+          ],
+          [
+            13,
+            14,
+            "rope"
+          ],
+          [
+            14,
+            20,
+            "rope"
+          ],
+          [
+            14,
+            15,
+            "rope"
+          ],
+          [
+            15,
+            21,
+            "rope"
+          ],
+          [
+            15,
+            16,
+            "rope"
+          ],
+          [
+            16,
+            22,
+            "rope"
+          ],
+          [
+            16,
+            17,
+            "rope"
+          ],
+          [
+            17,
+            23,
+            "rope"
+          ],
+          [
+            18,
+            24,
+            "rope"
+          ],
+          [
+            18,
+            19,
+            "rope"
+          ],
+          [
+            19,
+            25,
+            "rope"
+          ],
+          [
+            19,
+            20,
+            "rope"
+          ],
+          [
+            20,
+            26,
+            "rope"
+          ],
+          [
+            20,
+            21,
+            "rope"
+          ],
+          [
+            21,
+            27,
+            "rope"
+          ],
+          [
+            21,
+            22,
+            "rope"
+          ],
+          [
+            22,
+            28,
+            "rope"
+          ],
+          [
+            22,
+            23,
+            "rope"
+          ],
+          [
+            23,
+            29,
+            "rope"
+          ],
+          [
+            24,
+            30,
+            "rope"
+          ],
+          [
+            24,
+            25,
+            "rope"
+          ],
+          [
+            25,
+            31,
+            "rope"
+          ],
+          [
+            25,
+            26,
+            "rope"
+          ],
+          [
+            26,
+            32,
+            "rope"
+          ],
+          [
+            26,
+            27,
+            "rope"
+          ],
+          [
+            27,
+            33,
+            "rope"
+          ],
+          [
+            27,
+            28,
+            "rope"
+          ],
+          [
+            28,
+            34,
+            "rope"
+          ],
+          [
+            28,
+            29,
+            "rope"
+          ],
+          [
+            29,
+            35,
+            "rope"
+          ],
+          [
+            30,
+            31,
+            "rope"
+          ],
+          [
+            31,
+            32,
+            "rope"
+          ],
+          [
+            32,
+            33,
+            "rope"
+          ],
+          [
+            33,
+            34,
+            "rope"
+          ],
+          [
+            34,
+            35,
+            "rope"
+          ]
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.625,
+                0.0,
+                -0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.625,
+                0.0,
+                -0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.625,
+                0.0,
+                -0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.625,
+                0.0,
+                0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.625,
+                0.0,
+                0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.625,
+                0.0,
+                0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.375,
+                0.0,
+                -0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.375,
+                0.0,
+                -0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.375,
+                0.0,
+                -0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.375,
+                0.0,
+                0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.375,
+                0.0,
+                0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.375,
+                0.0,
+                0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.125,
+                0.0,
+                -0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.125,
+                0.0,
+                -0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.125,
+                0.0,
+                -0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.125,
+                0.0,
+                0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.125,
+                0.0,
+                0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                -0.125,
+                0.0,
+                0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.125,
+                0.0,
+                -0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.125,
+                0.0,
+                -0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.125,
+                0.0,
+                -0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.125,
+                0.0,
+                0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.125,
+                0.0,
+                0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.125,
+                0.0,
+                0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.375,
+                0.0,
+                -0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.375,
+                0.0,
+                -0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.375,
+                0.0,
+                -0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.375,
+                0.0,
+                0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.375,
+                0.0,
+                0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.375,
+                0.0,
+                0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.625,
+                0.0,
+                -0.625
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.625,
+                0.0,
+                -0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.625,
+                0.0,
+                -0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.625,
+                0.0,
+                0.125
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.625,
+                0.0,
+                0.375
+              ],
+              "scale": 0.3
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "at": [
+                0.625,
+                0.0,
+                0.625
+              ],
+              "scale": 0.3
+            }
+          ]
+        }
+      }
+    },
+    "net_over_cube": {
+      "chapter": "assemblage",
+      "label": "net over a cube",
+      "expr": "step(block 0.8 m + net above it, physics) \u2014 the net falls, rests on the block and its margins hang: it follows the outline",
+      "from": [
+        "net",
+        "cube"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "t": "cube"
+              },
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "scale": 1.6
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "net"
+              },
+              "at": [
+                0,
+                1.25,
+                0
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "curtain": {
+      "chapter": "assemblage",
+      "label": "curtain",
+      "expr": "step(net hung from a row of points, physics) = curtain \u2014 the top row is pinned, the rest hangs and swings",
+      "from": [
+        "net",
+        "point"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "of": {
+          "op": "connect",
+          "ties": [
+            [
+              0,
+              5,
+              "rope"
+            ],
+            [
+              0,
+              1,
+              "rope"
+            ],
+            [
+              1,
+              6,
+              "rope"
+            ],
+            [
+              1,
+              2,
+              "rope"
+            ],
+            [
+              2,
+              7,
+              "rope"
+            ],
+            [
+              2,
+              3,
+              "rope"
+            ],
+            [
+              3,
+              8,
+              "rope"
+            ],
+            [
+              3,
+              4,
+              "rope"
+            ],
+            [
+              4,
+              9,
+              "rope"
+            ],
+            [
+              5,
+              10,
+              "rope"
+            ],
+            [
+              5,
+              6,
+              "rope"
+            ],
+            [
+              6,
+              11,
+              "rope"
+            ],
+            [
+              6,
+              7,
+              "rope"
+            ],
+            [
+              7,
+              12,
+              "rope"
+            ],
+            [
+              7,
+              8,
+              "rope"
+            ],
+            [
+              8,
+              13,
+              "rope"
+            ],
+            [
+              8,
+              9,
+              "rope"
+            ],
+            [
+              9,
+              14,
+              "rope"
+            ],
+            [
+              10,
+              15,
+              "rope"
+            ],
+            [
+              10,
+              11,
+              "rope"
+            ],
+            [
+              11,
+              16,
+              "rope"
+            ],
+            [
+              11,
+              12,
+              "rope"
+            ],
+            [
+              12,
+              17,
+              "rope"
+            ],
+            [
+              12,
+              13,
+              "rope"
+            ],
+            [
+              13,
+              18,
+              "rope"
+            ],
+            [
+              13,
+              14,
+              "rope"
+            ],
+            [
+              14,
+              19,
+              "rope"
+            ],
+            [
+              15,
+              20,
+              "rope"
+            ],
+            [
+              15,
+              16,
+              "rope"
+            ],
+            [
+              16,
+              21,
+              "rope"
+            ],
+            [
+              16,
+              17,
+              "rope"
+            ],
+            [
+              17,
+              22,
+              "rope"
+            ],
+            [
+              17,
+              18,
+              "rope"
+            ],
+            [
+              18,
+              23,
+              "rope"
+            ],
+            [
+              18,
+              19,
+              "rope"
+            ],
+            [
+              19,
+              24,
+              "rope"
+            ],
+            [
+              20,
+              25,
+              "rope"
+            ],
+            [
+              20,
+              21,
+              "rope"
+            ],
+            [
+              21,
+              26,
+              "rope"
+            ],
+            [
+              21,
+              22,
+              "rope"
+            ],
+            [
+              22,
+              27,
+              "rope"
+            ],
+            [
+              22,
+              23,
+              "rope"
+            ],
+            [
+              23,
+              28,
+              "rope"
+            ],
+            [
+              23,
+              24,
+              "rope"
+            ],
+            [
+              24,
+              29,
+              "rope"
+            ],
+            [
+              25,
+              30,
+              "rope"
+            ],
+            [
+              25,
+              26,
+              "rope"
+            ],
+            [
+              26,
+              31,
+              "rope"
+            ],
+            [
+              26,
+              27,
+              "rope"
+            ],
+            [
+              27,
+              32,
+              "rope"
+            ],
+            [
+              27,
+              28,
+              "rope"
+            ],
+            [
+              28,
+              33,
+              "rope"
+            ],
+            [
+              28,
+              29,
+              "rope"
+            ],
+            [
+              29,
+              34,
+              "rope"
+            ],
+            [
+              30,
+              31,
+              "rope"
+            ],
+            [
+              31,
+              32,
+              "rope"
+            ],
+            [
+              32,
+              33,
+              "rope"
+            ],
+            [
+              33,
+              34,
+              "rope"
+            ]
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  -0.66,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.66,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.66,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.66,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.66,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  -0.44,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.44,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.44,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.44,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.44,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  -0.22,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.22,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.22,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.22,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  -0.22,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0.0,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.0,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.0,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.0,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.0,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0.22,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.22,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.22,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.22,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.22,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0.44,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.44,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.44,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.44,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.44,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0.66,
+                  1.18,
+                  0.0
+                ],
+                "scale": 1.0
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.66,
+                  0.96,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.66,
+                  0.74,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.66,
+                  0.52,
+                  0.0
+                ],
+                "scale": 0.28
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.66,
+                  0.3,
+                  0.0
+                ],
+                "scale": 0.28
+              }
+            ]
+          }
+        }
+      }
+    },
+    "bead_chain": {
+      "chapter": "assemblage",
+      "label": "bead chain",
+      "expr": "step(connect(point + sphere_collider * 7, each to the next, rope), physics) = bead_chain \u2014 hangs from the point, swings as one",
+      "from": [
+        "pendulum",
+        "point",
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "of": {
+          "op": "connect",
+          "ties": [
+            [
+              0,
+              1,
+              "rope"
+            ],
+            [
+              1,
+              2,
+              "rope"
+            ],
+            [
+              2,
+              3,
+              "rope"
+            ],
+            [
+              3,
+              4,
+              "rope"
+            ],
+            [
+              4,
+              5,
+              "rope"
+            ],
+            [
+              5,
+              6,
+              "rope"
+            ],
+            [
+              6,
+              7,
+              "rope"
+            ]
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0,
+                  1.6,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.02,
+                  1.42,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.04,
+                  1.24,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.06,
+                  1.06,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.08,
+                  0.88,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.1,
+                  0.7,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.12,
+                  0.52,
+                  0
+                ],
+                "scale": 0.4
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "at": [
+                  0.14,
+                  0.34,
+                  0
+                ],
+                "scale": 0.4
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ball": {
+      "chapter": "logic",
+      "label": "ball",
+      "expr": "a red ball, 10 cm \u2014 the signal of a marble machine",
+      "from": [
+        "sphere_collider"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "sphere",
+            "size": [
+              0.05
+            ],
+            "color": "c83a2f"
+          },
+          {
+            "p": "collider",
+            "shape": "sphere",
+            "size": [
+              0.05
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "brick": {
+      "chapter": "logic",
+      "label": "brick",
+      "expr": "a 12 cm block \u2014 a thing in the way",
+      "from": [
+        "cube"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.12,
+              0.12,
+              0.12
+            ],
+            "color": "8a6a2a"
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.12,
+              0.12,
+              0.12
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "domino": {
+      "chapter": "logic",
+      "label": "domino",
+      "expr": "a plank on edge, 30 cm \u2014 it stands until something tips it",
+      "from": [
+        "plank"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.03,
+              0.3,
+              0.12
+            ],
+            "color": "f3ecdd"
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.03,
+              0.3,
+              0.12
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "or_frame": {
+      "chapter": "logic",
+      "label": "OR gate (frame)",
+      "expr": "the static parts of OR gate",
+      "from": [
+        "plank",
+        "cube"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "color": "bdb7ad",
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.3266,
+              0.5557,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -25
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "at": [
+              -0.3266,
+              0.5557,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -25
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "color": "c9a978",
+            "at": [
+              0.3266,
+              0.5557,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              25
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "at": [
+              0.3266,
+              0.5557,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              25
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.1,
+              0.26,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.55,
+              -0.16
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.1,
+              0.26,
+              0.02
+            ],
+            "at": [
+              0,
+              0.55,
+              -0.16
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.1,
+              0.26,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.55,
+              0.16
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.1,
+              0.26,
+              0.02
+            ],
+            "at": [
+              0,
+              0.55,
+              0.16
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.46,
+              0.42
+            ],
+            "color": "e6ddcc",
+            "at": [
+              -0.19,
+              0.23,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.46,
+              0.42
+            ],
+            "at": [
+              -0.19,
+              0.23,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.46,
+              0.42
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.19,
+              0.23,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.46,
+              0.42
+            ],
+            "at": [
+              0.19,
+              0.23,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.36,
+              0.46,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.23,
+              -0.2
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.36,
+              0.46,
+              0.02
+            ],
+            "at": [
+              0,
+              0.23,
+              -0.2
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.36,
+              0.46,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.23,
+              0.2
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.36,
+              0.46,
+              0.02
+            ],
+            "at": [
+              0,
+              0.23,
+              0.2
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.4,
+              0.3
+            ],
+            "at": [
+              -0.58,
+              0.7,
+              0
+            ],
+            "color": "e6ddcc"
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.4,
+              0.3
+            ],
+            "at": [
+              -0.58,
+              0.7,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.4,
+              0.3
+            ],
+            "at": [
+              0.58,
+              0.7,
+              0
+            ],
+            "color": "e6ddcc"
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.4,
+              0.3
+            ],
+            "at": [
+              0.58,
+              0.7,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.12,
+              0.5
+            ],
+            "at": [
+              -1.0,
+              0.06,
+              0
+            ],
+            "color": "e6ddcc"
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.12,
+              0.5
+            ],
+            "at": [
+              -1.0,
+              0.06,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.12,
+              0.5
+            ],
+            "at": [
+              1.0,
+              0.06,
+              0
+            ],
+            "color": "e6ddcc"
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.12,
+              0.5
+            ],
+            "at": [
+              1.0,
+              0.06,
+              0
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "or_gate": {
+      "chapter": "logic",
+      "label": "OR gate",
+      "expr": "step(funnel with end walls + ball? at A + ball? at B, physics) \u2014 a ball from either side reaches the bin: out = A or B",
+      "from": [
+        "or_frame",
+        "ball"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "or_frame"
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                -0.35,
+                0.8,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                0.35,
+                0.95,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "logic": {
+        "frame": "or_frame",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "inputs": {
+          "A": {
+            "t": "ball",
+            "at": [
+              -0.35,
+              0.8,
+              0
+            ]
+          },
+          "B": {
+            "t": "ball",
+            "at": [
+              0.35,
+              0.95,
+              0
+            ]
+          }
+        },
+        "outputs": {
+          "out": {
+            "min": [
+              -0.18,
+              -0.05,
+              -0.2
+            ],
+            "max": [
+              0.18,
+              0.25,
+              0.2
+            ]
+          }
+        },
+        "cases": [
+          {
+            "in": [],
+            "expect": {
+              "out": false
+            }
+          },
+          {
+            "in": [
+              "A"
+            ],
+            "expect": {
+              "out": true
+            }
+          },
+          {
+            "in": [
+              "B"
+            ],
+            "expect": {
+              "out": true
+            }
+          },
+          {
+            "in": [
+              "A",
+              "B"
+            ],
+            "expect": {
+              "out": true
+            }
+          }
+        ],
+        "ticks": 300
+      }
+    },
+    "and_frame": {
+      "chapter": "logic",
+      "label": "AND gate (frame)",
+      "expr": "the static parts of AND gate",
+      "from": [
+        "plank",
+        "cube"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "color": "bdb7ad",
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.06,
+              0.38,
+              0.06
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.19,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.06,
+              0.38,
+              0.06
+            ],
+            "at": [
+              0,
+              0.19,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.02,
+              0.16
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0.39,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.02,
+              0.16
+            ],
+            "at": [
+              0,
+              0.39,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.18,
+              0.16
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.09,
+              0.49,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.18,
+              0.16
+            ],
+            "at": [
+              -0.09,
+              0.49,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.18,
+              0.02
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0.49,
+              -0.09
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.18,
+              0.02
+            ],
+            "at": [
+              0,
+              0.49,
+              -0.09
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.18,
+              0.02
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0.49,
+              0.09
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.16,
+              0.18,
+              0.02
+            ],
+            "at": [
+              0,
+              0.49,
+              0.09
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.035,
+              0.16
+            ],
+            "color": "c9a978",
+            "at": [
+              0.09,
+              0.4175,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.035,
+              0.16
+            ],
+            "at": [
+              0.09,
+              0.4175,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.8,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "at": [
+              0.8,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.2,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.45,
+              0.1,
+              -0.24
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.2,
+              0.02
+            ],
+            "at": [
+              0.45,
+              0.1,
+              -0.24
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.2,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.45,
+              0.1,
+              0.24
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.7,
+              0.2,
+              0.02
+            ],
+            "at": [
+              0.45,
+              0.1,
+              0.24
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "and_gate": {
+      "chapter": "logic",
+      "label": "AND gate",
+      "expr": "step(cup + ball? at A + ball? at B, physics) \u2014 the cup holds one; the second spills: out = A and B",
+      "from": [
+        "and_frame",
+        "ball"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "and_frame"
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                0.0,
+                0.62,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                0.03,
+                1.0,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "logic": {
+        "frame": "and_frame",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "inputs": {
+          "A": {
+            "t": "ball",
+            "at": [
+              0.0,
+              0.62,
+              0
+            ]
+          },
+          "B": {
+            "t": "ball",
+            "at": [
+              0.03,
+              1.0,
+              0
+            ]
+          }
+        },
+        "outputs": {
+          "out": {
+            "min": [
+              0.12,
+              -0.05,
+              -0.24
+            ],
+            "max": [
+              0.8,
+              0.2,
+              0.24
+            ]
+          }
+        },
+        "cases": [
+          {
+            "in": [],
+            "expect": {
+              "out": false
+            }
+          },
+          {
+            "in": [
+              "A"
+            ],
+            "expect": {
+              "out": false
+            }
+          },
+          {
+            "in": [
+              "B"
+            ],
+            "expect": {
+              "out": false
+            }
+          },
+          {
+            "in": [
+              "A",
+              "B"
+            ],
+            "expect": {
+              "out": true
+            }
+          }
+        ],
+        "ticks": 300
+      }
+    },
+    "not_frame": {
+      "chapter": "logic",
+      "label": "NOT gate (frame)",
+      "expr": "the static parts of NOT gate",
+      "from": [
+        "plank",
+        "cube"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "color": "bdb7ad",
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.43,
+              0.02,
+              0.16
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.6013,
+              0.2756,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -20.6
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.43,
+              0.02,
+              0.16
+            ],
+            "at": [
+              -0.6013,
+              0.2756,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -20.6
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.02,
+              0.16
+            ],
+            "color": "c9a978",
+            "at": [
+              0,
+              0.19,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.02,
+              0.16
+            ],
+            "at": [
+              0,
+              0.19,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.06,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.23,
+              -0.09
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.06,
+              0.02
+            ],
+            "at": [
+              0,
+              0.23,
+              -0.09
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.06,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.23,
+              0.09
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.8,
+              0.06,
+              0.02
+            ],
+            "at": [
+              0,
+              0.23,
+              0.09
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.95,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "at": [
+              0.95,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.55,
+              0.2,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.7,
+              0.1,
+              -0.24
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.55,
+              0.2,
+              0.02
+            ],
+            "at": [
+              0.7,
+              0.1,
+              -0.24
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.55,
+              0.2,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.7,
+              0.1,
+              0.24
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.55,
+              0.2,
+              0.02
+            ],
+            "at": [
+              0.7,
+              0.1,
+              0.24
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "not_gate": {
+      "chapter": "logic",
+      "label": "NOT gate",
+      "expr": "step(ramp + run + ball + brick? at A, physics) \u2014 the ball always runs, unless something is in the way: out = not A",
+      "from": [
+        "not_frame",
+        "ball",
+        "brick"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "not_frame"
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                -0.78,
+                0.43,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "logic": {
+        "frame": "not_frame",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "inputs": {
+          "source": {
+            "t": "ball",
+            "at": [
+              -0.78,
+              0.43,
+              0
+            ]
+          },
+          "A": {
+            "t": "brick",
+            "at": [
+              0.05,
+              0.5,
+              0
+            ]
+          }
+        },
+        "outputs": {
+          "out": {
+            "min": [
+              0.45,
+              -0.05,
+              -0.24
+            ],
+            "max": [
+              0.95,
+              0.2,
+              0.24
+            ]
+          }
+        },
+        "cases": [
+          {
+            "in": [
+              "source"
+            ],
+            "expect": {
+              "out": true
+            }
+          },
+          {
+            "in": [
+              "source",
+              "A"
+            ],
+            "expect": {
+              "out": false
+            }
+          }
+        ],
+        "ticks": 300
+      }
+    },
+    "branch_frame": {
+      "chapter": "logic",
+      "label": "IF / ELSE (frame)",
+      "expr": "the static parts of IF / ELSE",
+      "from": [
+        "plank",
+        "cube"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "color": "bdb7ad",
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              2.0,
+              0.04,
+              0.5
+            ],
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.2264,
+              0.3957,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              25
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "at": [
+              -0.2264,
+              0.3957,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              25
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "color": "c9a978",
+            "at": [
+              0.2264,
+              0.3957,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -25
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.5,
+              0.02,
+              0.3
+            ],
+            "at": [
+              0.2264,
+              0.3957,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -25
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.2,
+              0.3,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.45,
+              -0.16
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.2,
+              0.3,
+              0.02
+            ],
+            "at": [
+              0,
+              0.45,
+              -0.16
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.2,
+              0.3,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.45,
+              0.16
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.2,
+              0.3,
+              0.02
+            ],
+            "at": [
+              0,
+              0.45,
+              0.16
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.25,
+              0.3
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.125,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.25,
+              0.3
+            ],
+            "at": [
+              0,
+              0.125,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "color": "e6ddcc",
+            "at": [
+              -0.8,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "at": [
+              -0.8,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0.8,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.02,
+              0.2,
+              0.5
+            ],
+            "at": [
+              0.8,
+              0.1,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.6,
+              0.2,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.1,
+              -0.24
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.6,
+              0.2,
+              0.02
+            ],
+            "at": [
+              0,
+              0.1,
+              -0.24
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              1.6,
+              0.2,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              0,
+              0.1,
+              0.24
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              1.6,
+              0.2,
+              0.02
+            ],
+            "at": [
+              0,
+              0.1,
+              0.24
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "branch_gate": {
+      "chapter": "logic",
+      "label": "IF / ELSE",
+      "expr": "step(roof + ball at left? or right?, physics) \u2014 if the ball lands left of the ridge it ends left, else right",
+      "from": [
+        "branch_frame",
+        "ball"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "branch_frame"
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                -0.06,
+                0.75,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "logic": {
+        "frame": "branch_frame",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "inputs": {
+          "left": {
+            "t": "ball",
+            "at": [
+              -0.06,
+              0.75,
+              0
+            ]
+          },
+          "right": {
+            "t": "ball",
+            "at": [
+              0.06,
+              0.75,
+              0
+            ]
+          }
+        },
+        "outputs": {
+          "L": {
+            "min": [
+              -0.8,
+              -0.05,
+              -0.24
+            ],
+            "max": [
+              -0.02,
+              0.2,
+              0.24
+            ]
+          },
+          "R": {
+            "min": [
+              0.02,
+              -0.05,
+              -0.24
+            ],
+            "max": [
+              0.8,
+              0.2,
+              0.24
+            ]
+          }
+        },
+        "cases": [
+          {
+            "in": [],
+            "expect": {
+              "L": false,
+              "R": false
+            }
+          },
+          {
+            "in": [
+              "left"
+            ],
+            "expect": {
+              "L": true,
+              "R": false
+            }
+          },
+          {
+            "in": [
+              "right"
+            ],
+            "expect": {
+              "L": false,
+              "R": true
+            }
+          }
+        ],
+        "ticks": 300
+      }
+    },
+    "domino_frame": {
+      "chapter": "logic",
+      "label": "domino line (frame)",
+      "expr": "the base and the push ramp of the domino line",
+      "from": [
+        "plank"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              2.2,
+              0.04,
+              0.5
+            ],
+            "color": "bdb7ad",
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              2.2,
+              0.04,
+              0.5
+            ],
+            "at": [
+              0,
+              -0.02,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.394,
+              0.02,
+              0.14
+            ],
+            "color": "c9a978",
+            "at": [
+              -0.7752,
+              0.31,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -27.2
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.394,
+              0.02,
+              0.14
+            ],
+            "at": [
+              -0.7752,
+              0.31,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -27.2
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.394,
+              0.06,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              -0.775,
+              0.34,
+              -0.08
+            ],
+            "rot": [
+              0,
+              0,
+              -27.2
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.394,
+              0.06,
+              0.02
+            ],
+            "at": [
+              -0.775,
+              0.34,
+              -0.08
+            ],
+            "rot": [
+              0,
+              0,
+              -27.2
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.394,
+              0.06,
+              0.02
+            ],
+            "color": "e6ddcc",
+            "at": [
+              -0.775,
+              0.34,
+              0.08
+            ],
+            "rot": [
+              0,
+              0,
+              -27.2
+            ]
+          },
+          {
+            "p": "collider",
+            "shape": "box",
+            "size": [
+              0.394,
+              0.06,
+              0.02
+            ],
+            "at": [
+              -0.775,
+              0.34,
+              0.08
+            ],
+            "rot": [
+              0,
+              0,
+              -27.2
+            ]
+          },
+          {
+            "p": "body",
+            "kind": "static"
+          }
+        ]
+      }
+    },
+    "domino_line": {
+      "chapter": "logic",
+      "label": "domino line",
+      "expr": "step(ramp + domino * 8 + ball? at push, physics) \u2014 one push and a wave runs to the end: a delay line",
+      "from": [
+        "domino_frame",
+        "domino",
+        "ball"
+      ],
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "t": "domino_frame"
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                -0.5,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                -0.35,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                -0.2,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                -0.05,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                0.1,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                0.25,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                0.4,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "domino"
+              },
+              "at": [
+                0.55,
+                0.15,
+                0
+              ]
+            },
+            {
+              "op": "transform",
+              "of": {
+                "t": "ball"
+              },
+              "at": [
+                -0.92,
+                0.5,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "logic": {
+        "frame": "domino_frame",
+        "free": [
+          "ball",
+          "brick",
+          "domino"
+        ],
+        "always": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              -0.5,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              -0.35,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              -0.2,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              -0.05,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              0.1,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              0.25,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              0.4,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "domino"
+            },
+            "at": [
+              0.55,
+              0.15,
+              0
+            ]
+          }
+        ],
+        "inputs": {
+          "push": {
+            "t": "ball",
+            "at": [
+              -0.92,
+              0.5,
+              0
+            ]
+          }
+        },
+        "outputs": {
+          "last_down": {
+            "min": [
+              0.6,
+              -0.05,
+              -0.2
+            ],
+            "max": [
+              1.05,
+              0.06,
+              0.2
+            ]
+          }
+        },
+        "cases": [
+          {
+            "in": [],
+            "expect": {
+              "last_down": false
+            }
+          },
+          {
+            "in": [
+              "push"
+            ],
+            "expect": {
+              "last_down": true
+            }
+          }
+        ],
+        "ticks": 360
       }
     }
   }

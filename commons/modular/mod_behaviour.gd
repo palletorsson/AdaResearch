@@ -141,8 +141,11 @@ func _process(delta: float) -> void:
 
 
 func _free_the_bodies(root: Node) -> void:
+	# which terms fall: sphere_collider by default; a machine names its own movers
+	# ("free": ["ball", "brick", "domino"]) so a domino or a brick can fall too
+	var free: Array = params.get("free", ["sphere_collider"])
 	for body in _bodies(root):
-		if body is StaticBody3D and str(body.get_meta("term", "")) == "sphere_collider":
+		if body is StaticBody3D and free.has(str(body.get_meta("term", ""))):
 			var r: RigidBody3D = ModBody.make_rigid(body)
 			if _trace_from == null:
 				_trace_from = r
