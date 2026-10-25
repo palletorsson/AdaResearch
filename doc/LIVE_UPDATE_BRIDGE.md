@@ -890,3 +890,13 @@ the headset through the bridge. The bridge is up (`tools/vr_link.py`, `adb rever
 launched with `adb shell monkey`; the OS runs it only while the headset is worn, so the live spawn to the headset —
 `python tools/live_update_spawn_test.py --via-bridge --token mod_pendulum` — waits for a person in the headset standing
 in The Void. Until that ack is in `ada_run/live_updates.jsonl`, VR is installed, not evidenced.
+
+**The spine, disassembled (Palle, 25 Oct: "can we disassemble to extract the element and categorize every artifact
+in the spine?"):** `tools/disassemble_spine.py` runs `commons/testing/disassemble_spine.gd` once per sequence under the
+watchdog: every placed artifact is instantiated, builds for two frames, and its ELEMENTS are read off the tree it made
+(meshes by shape, size and colour; colliders; bodies; joints; lights; labels; particles; multimesh counts; whether a
+script ticks). Ledgers in `ada_run/disassembly/<seq>.jsonl` (resumable; a killed run charges the artifact in progress
+as "hang"); census in `commons/data/spine_disassembly.json` and `doc/book/course/SPINE_DISASSEMBLY.md`, with a category
+per artifact read from its elements (point, line, solid, array, field, assemblage, document, empty, void-built, hang;
+·engine when it ticks) and its elements written in the grammar's notation, identical meshes folded to (shape) * n.
+First run: 1331 artifacts, 1 hang (rhizome_inside), 239 void-built, 31 empty; 752 tick.
