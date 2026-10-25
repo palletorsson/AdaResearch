@@ -925,3 +925,12 @@ check bites. Found on the way: the probe first resolved frames by name from the 
 reached the physics (`probe_and_trace.gd` showed the real lip being rolled over); it now builds the frame from the file
 it loaded, and only a full run on the real terms writes `ada_run/logic_truth_<hz>hz.json`, which `/modular-program`
 shows beside each machine (declared, then measured). The program page also runs without WebGL now.
+
+**The construction path (Palle, 25 Oct: "a next and previous gallery … starting in point. So the object and how it is
+being constructed"):** `/construction-path` walks every thing Ada has in one order — 1358 steps on the working tree:
+97 grammar terms, 1016 registry artifacts the spine places, 245 works The Void builds itself. Data from
+`tools/construction_path.py` → `commons/data/construction_path.json`. Default order: per spine sequence, its terms in
+derivation order (a term never before its parents — 0 violations), then its artifacts in map order. Each step shows the
+object and how it is built: a term's notation, "made from" (earlier) and "becomes" (later); an artifact's elements read
+off its tree. The order is Palle's to decide: drag the list, ↑ / ↓, "move to #", Save (a complete permutation only;
+`/api/construction-path`); the tool keeps an authored order and slots new steps after their default predecessor.
