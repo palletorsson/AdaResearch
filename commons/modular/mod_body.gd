@@ -13,6 +13,7 @@ static func make(kind: String) -> Node3D:
 		"rigid":
 			var r := RigidBody3D.new()
 			r.mass = 1.0
+			r.continuous_cd = true   # a small knot falling fast tunnels through a thin block otherwise (net probe, 2026-10-25)
 			n = r
 		"area":
 			n = Area3D.new()
@@ -91,6 +92,7 @@ static func make_rigid(body: StaticBody3D) -> RigidBody3D:
 	r.name = body.name
 	r.transform = body.transform
 	r.mass = 1.0
+	r.continuous_cd = true   # a small knot falling fast tunnels through a thin block otherwise (net probe, 2026-10-25)
 	for key in ["term", "modular_body", "primitive", "cell"]:
 		if body.has_meta(key):
 			r.set_meta(key, body.get_meta(key))

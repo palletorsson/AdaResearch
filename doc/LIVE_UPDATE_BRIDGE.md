@@ -900,3 +900,15 @@ as "hang"); census in `commons/data/spine_disassembly.json` and `doc/book/course
 per artifact read from its elements (point, line, solid, array, field, assemblage, document, empty, void-built, hang;
 ·engine when it ticks) and its elements written in the grammar's notation, identical meshes folded to (shape) * n.
 First run: 1331 artifacts, 1 hang (rhizome_inside), 239 void-built, 31 empty; 752 tick.
+
+**New assemblies for the game (Palle, 25 Oct: "a prefab field of cones, a spring connected net that can be placed over
+another object to follow its outline"):** `cone_field` = by(array(plastic_cone, 4 × 4), random) — the random engine
+now takes `term` (which term it jitters), `lift`, `turn`, `vary_scale`; `net` = connect(6 × 6 sphere colliders, every
+neighbour, rope) — 36 knots, 60 strings; `net_over_cube` = step(block 0.8 m + net above, physics): the net falls,
+rests on the block and its margins hang (`probe_net.gd`: inside 0.83 m, outside 0.65 m, nothing flies off);
+`curtain` = a vertical net whose top row is points (static anchors) — it hangs; `bead_chain` = point + 7 beads on
+ropes. Three faults found and fixed on the way: a tie's joint was positioned BEFORE it joined the tree, so a parent's
+offset moved it (the net as a term fell through its block; the direct net did not — `probe_drop.gd` told them apart);
+sixty 6-DOF springs between free bodies blew a net to ten metres, so nets are tied with ropes (pins) and springs are
+for pairs; freed bodies now use continuous collision. The drawn ties follow their bodies under physics
+(`_follow_ties`), so a net under physics looks like a net.

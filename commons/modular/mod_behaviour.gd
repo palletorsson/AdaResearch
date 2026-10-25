@@ -39,8 +39,8 @@ func _ready() -> void:
 			# deferred, because _ready runs while the composite is still adding children
 			# and a swap of a child then fails ("parent node is busy setting up children")
 			call_deferred("_free_the_bodies", root)
-			if kind == "trace":
-				set_process(true)
+			if kind == "trace" or not _connects(root).is_empty():
+				set_process(true)   # a trace draws; ties must follow the bodies they join
 		"hand":
 			for n in _terms(root, "sphere_collider"):
 				_targets.append(n)
@@ -67,10 +67,16 @@ func _ready() -> void:
 			var rng := RandomNumberGenerator.new()
 			rng.seed = int(params.get("seed", 1))
 			var jitter: float = float(params.get("jitter", 0.2))
-			for n in _terms(root, "cube"):
-				n.position += Vector3(rng.randf_range(-jitter, jitter), rng.randf_range(0, jitter), rng.randf_range(-jitter, jitter))
-				n.rotation.y = rng.randf_range(0, TAU)
-				n.scale *= rng.randf_range(0.6, 1.2)
+			var lift: float = float(params.get("lift", jitter))
+			var turn: bool = bool(params.get("turn", true))
+			var vary: bool = bool(params.get("vary_scale", true))
+			# which term is jittered: cube by default (random_cubes), any term by name (a field of cones)
+			for n in _terms(root, str(params.get("term", "cube"))):
+				n.position += Vector3(rng.randf_range(-jitter, jitter), rng.randf_range(0, lift), rng.randf_range(-jitter, jitter))
+				if turn:
+					n.rotation.y = rng.randf_range(0, TAU)
+				if vary:
+					n.scale *= rng.randf_range(0.6, 1.2)
 		"logic":
 			var gates: Array = params.get("gates", ["not", "or", "xor", "true", "false"])
 			for i in range(gates.size()):
@@ -83,6 +89,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_t += delta
+	if kind == "physics" or kind == "trace":
+		_follow_ties()
 	match kind:
 		"sine":
 			var amp: float = float(params.get("amplitude", 0.25))
@@ -145,7 +153,9 @@ func _free_the_bodies(root: Node) -> void:
 ##   rope   — a taut rope: a pin at the near end, the far end swings at the rope's length
 ##            (a pendulum, a hanging thing; slack is not modelled — Godot has no distance joint)
 ##   rod    — a rigid link: a 6-DOF joint with linear and angular play locked
-##   spring — a 6-DOF joint with a linear spring on each axis, at rest where the parts stood
+##   spring — a 6-DOF joint with a linear spring on each axis, at rest where the parts stood;
+##            for a PAIR — a mesh of sixty springs between free bodies blew a net to ten metres
+##            (2026-10-25), so a net is tied with ropes, which cannot stretch and cannot explode
 ## A part without a body gets a static anchor at its place, so a rope can hang from a plank.
 func _tie_joints(root: Node) -> void:
 	for node in _connects(root):
@@ -173,6 +183,7 @@ func _tie_joints(root: Node) -> void:
 				"rod":
 					# a rigid link: the far end keeps its place in the near end's frame
 					var g := Generic6DOFJoint3D.new()
+					node.add_child(g)
 					g.global_position = pa
 					for ax in ["x", "y", "z"]:
 						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, true)
@@ -185,27 +196,79 @@ func _tie_joints(root: Node) -> void:
 				"spring":
 					# a linear spring on each axis, at rest where the parts stand now
 					var g := Generic6DOFJoint3D.new()
+					node.add_child(g)
 					g.global_position = pa
 					var rest: Vector3 = pb - pa
 					var comps := {"x": rest.x, "y": rest.y, "z": rest.z}
 					for ax in ["x", "y", "z"]:
 						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, false)
 						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_SPRING, true)
-						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_STIFFNESS, 40.0)
-						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_DAMPING, 2.0)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_STIFFNESS, float(t[3]) if (t as Array).size() > 3 else 40.0)
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_DAMPING, float(t[4]) if (t as Array).size() > 4 else 4.0)
 						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT, float(comps[ax]))
 					joint = g
 				_:
 					# rope: a taut rope — the far end swings about the near end at the rope's length
 					# (slack is not modelled: Godot has no distance joint; the pin sits at the near end)
 					var pin := PinJoint3D.new()
-					pin.global_position = pa
+					node.add_child(pin)
+					pin.global_position = pa   # set AFTER add_child: a parent's offset would move it otherwise (the net fell through its block, 2026-10-25)
 					joint = pin
 			joint.name = "joint_%s_%d_%d" % [kind, ia, ib]
-			node.add_child(joint)
 			joint.node_a = joint.get_path_to(a)
 			joint.node_b = joint.get_path_to(b)
 			joint.set_meta("tie_joint", {"a": ia, "b": ib, "kind": kind, "length": length})
+
+
+## The drawn ties follow the bodies they join, so a net under physics looks like a net.
+func _follow_ties() -> void:
+	for node in _connects(get_parent()):
+		var kids: Array = []
+		var ties: Array = []
+		for c in node.get_children():
+			if c.has_meta("tie"):
+				ties.append(c)
+			elif c is Node3D and not (c is Label3D) and not (c is Joint3D):
+				kids.append(c)
+		for tie in ties:
+			var t: Dictionary = tie.get_meta("tie")
+			var ia: int = int(t.get("a", 0))
+			var ib: int = int(t.get("b", 1))
+			if ia >= kids.size() or ib >= kids.size():
+				continue
+			var a: Node3D = _body_in(kids[ia])
+			var b: Node3D = _body_in(kids[ib])
+			var pa: Vector3 = a.global_position
+			var pb: Vector3 = b.global_position
+			var d: Vector3 = pb - pa
+			var length: float = d.length()
+			if length < 0.0001:
+				continue
+			var m: MeshInstance3D = tie as MeshInstance3D
+			if m != null and m.mesh is CylinderMesh:
+				(m.mesh as CylinderMesh).height = length
+			m.global_position = (pa + pb) * 0.5
+			var up: Vector3 = Vector3.UP
+			var dir: Vector3 = d / length
+			if abs(up.dot(dir)) < 0.999:
+				var axis: Vector3 = up.cross(dir).normalized()
+				m.global_rotation = Quaternion(axis, acos(clamp(up.dot(dir), -1.0, 1.0))).get_euler()
+			else:
+				m.global_rotation = Vector3(PI if up.dot(dir) < 0 else 0.0, 0, 0)
+
+
+## The body inside a part, without making one (for following): the part, or its first body.
+func _body_in(part: Node3D) -> Node3D:
+	if part is PhysicsBody3D:
+		return part
+	var stack: Array = [part]
+	while not stack.is_empty():
+		var c: Node = stack.pop_front()
+		if c is PhysicsBody3D:
+			return c
+		for k in c.get_children():
+			stack.append(k)
+	return part
 
 
 func _connects(n: Node) -> Array:
@@ -231,6 +294,12 @@ func _body_for(part: Node3D) -> PhysicsBody3D:
 			stack.append(k)
 	var anchor := StaticBody3D.new()
 	anchor.name = "anchor"
+	var cs := CollisionShape3D.new()
+	var sp := SphereShape3D.new()
+	sp.radius = 0.01
+	cs.shape = sp
+	cs.disabled = true   # a pin, not an obstacle
+	anchor.add_child(cs)
 	part.add_child(anchor)
 	anchor.set_meta("tie_anchor", true)
 	return anchor
