@@ -980,3 +980,20 @@ gates the proposal again and writes `terms.json` only if it passes, appends the 
 path. Tested: a failing proposal exits 1 with terms.json byte-identical; an accepted one (in a sandbox copy) keeps the
 file's format and writes two history rows (origin + mutation). Finding on the first look: every spine sequence
 "climbs" (next artifact on the same step or higher) only 52–75 % of the time — no sequence follows the trunk yet.
+
+**The timeline from the point — morphospace (Palle, 25 Oct: "if we see it as a time line starting with the point
+that can help to get the right shape … whatever the shape is I can flow it … the shape does not even exist or have
+materialized until now"):** `/morphospace` lets the collection draw its own shape. Every term and artifact is a point in
+capacity space; things sharing a signature are one species. Height is time: a thing with n notches can exist no earlier
+than step n of any trunk, so the rows rise from the point one notch at a time. Measured: 1076 things in 149 species of
+4320 possible signatures (3.4 % of the space made); things per row 1, 6, 20, 43, 118, 170, 175, 162, 183, 134, 51, 12, 1
+— a spindle standing on the point. A trunk is a path up through it, one notch per step (the fall brings physics with it),
+and the shape materializes along it (each thing appears at the step its last capacity arrives). **644,000 trunks** reach
+the same end through the terms Ada has (counted by DP over envelopes, in Python and in the page — the same number). The
+current trunk materializes things in bursts — 3 at grasp, 157 at the first composition, 272 at many kinds of parts,
+1 at measure, 5 at decide; the most even possible trunk still bursts (~226), because the collection is dense in
+composition. Its end lies in unmade space: no thing has more than 12 notches, the trunk's envelope has 15, and its only
+next step is the field (+167, no term). The page: grow it from the point (play), pick a pace (even, crescendo,
+front-loaded, breathing, slow start) or draw one, and the trunk closest to that pace is found by DP; or step it by hand
+through the adjacent possible (from the point only form and parts have a term). "make it the trunk" goes through the
+same gated `--propose` as /tree-of-life.
