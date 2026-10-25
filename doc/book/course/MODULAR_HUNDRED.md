@@ -160,8 +160,9 @@ the grammar's notation and says which hole it fills and what it needs:*
 
 ## Where the empty space is, in one paragraph
 
-Of the hundred, 54 build today, 23 wait for `by`, 8 for `measure`, 7 for `replicate`, 6 for `field`,
-and 10 belong to the walk model. The empty space is not in things — the spine has 1331 of them — but in
+Of the hundred, counted from the needs column: 50 build today, 16 wait for `by`, 14 for `measure`,
+6 for `field`, 5 for `replicate`, 4 for a `step` rule, and 9 belong to the walk model (four of those
+also need a piece). The empty space is not in things — the spine has 1331 of them — but in
 **instruments** (A: nothing in the grammar reads a value), **decisions** (B: nothing makes a verdict
 out of matter), **fields** (D: 130 artifacts of the spine are fields and no term is), and the
 **body** (F: no term knows what a visitor can reach, squeeze through, or carry). Section B needs no new
