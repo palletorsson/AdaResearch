@@ -86,6 +86,21 @@ def git(args):
             if line.strip()}
 
 
+def ignored_listing_args(scope=SCOPE):
+    """The ignored listing is SCOPED BY PATHSPEC, and that is load-bearing.
+
+    On 2026-10-21 this gate ran 25 minutes inside one git child and was killed:
+    ada_run/void-trial-runtime/ held 285 test stages (763 by 10-23), each a
+    folder of ~40 'mklink /J' junctions into the repo, and Git for Windows
+    descends a junction, so an unscoped `ls-files --ignored` walked the whole
+    repository once per stage (350,175 paths in 27 s for ONE stage). The set
+    in_scope() keeps is identical either way; the pathspec only stops git from
+    looking where the gate never reads. Measured: 0.14 s, 708 rows.
+    """
+    return ["ls-files", "--others", "--ignored", "--exclude-standard",
+            "--", scope]
+
+
 def in_scope(rel):
     return rel.startswith(SCOPE + "/") and rel.endswith(CODE_SUFFIXES)
 
@@ -124,8 +139,7 @@ def scan():
     # no commit had it (em_shots.py, 2026-10-01). Gates L and M already ask HEAD.
     tracked = {r for r in git(["ls-tree", "-r", "HEAD", "--name-only"])
                if in_scope(r)}
-    ignored = {r for r in git(["ls-files", "--others", "--ignored",
-                               "--exclude-standard"]) if in_scope(r)}
+    ignored = {r for r in git(ignored_listing_args()) if in_scope(r)}
     mtimes = {rel: (ROOT / rel).stat().st_mtime for rel in disk}
     return disk, tracked, ignored, mtimes
 
@@ -196,6 +210,14 @@ def selftest():
     st2, live2, skip2 = census(set(), set(), set(), {}, now)
     cases.append(("has an empty-population guard (see main)",
                   st2 == [] and live2 == [] and skip2 == []))
+
+    # 8. The ignored listing names its scope as a git pathspec. Without it the
+    #    gate walks every junction under ada_run/void-trial-runtime (2 h on
+    #    2026-10-21, killed) and a scheduled run never finishes.
+    args = ignored_listing_args()
+    cases.append(("scopes the ignored listing by pathspec, not by filter",
+                  "--" in args and args[-1] == SCOPE
+                  and args.index("--") == len(args) - 2))
 
     bad = [name for name, ok in cases if not ok]
     for name, ok in cases:
