@@ -4863,7 +4863,12 @@
       "mod_game_spaces",
       "mod_moved_cube",
       "mod_turned_cube",
-      "mod_scaled_cube"
+      "mod_scaled_cube",
+      "mod_combined_move",
+      "mod_trs_cube",
+      "mod_travelling_cube",
+      "mod_turning_cube",
+      "mod_growing_cube"
      ]
     },
     {
@@ -4877,14 +4882,53 @@
       "mod_grid_prefabs",
       "mod_balls_test_grid",
       "mod_cube_row",
-      "mod_lattice"
+      "mod_lattice",
+      "mod_disco_grid"
+     ]
+    },
+    {
+     "id": "modular/color",
+     "title": "color",
+     "label": "color",
+     "order": 9,
+     "children": [],
+     "items": [
+      "mod_rainbow_row",
+      "mod_color_grid",
+      "mod_color_nails",
+      "mod_alpha_steps"
+     ]
+    },
+    {
+     "id": "modular/tiling",
+     "title": "tiling",
+     "label": "tiling",
+     "order": 10,
+     "children": [],
+     "items": [
+      "mod_checker_tiling",
+      "mod_stripe_tiling",
+      "mod_reflection_tiling",
+      "mod_star_tiling"
+     ]
+    },
+    {
+     "id": "modular/change",
+     "title": "change",
+     "label": "change",
+     "order": 11,
+     "children": [],
+     "items": [
+      "mod_rate_steps",
+      "mod_accumulation",
+      "mod_parabola_arch"
      ]
     },
     {
      "id": "modular/logic",
      "title": "logic",
      "label": "logic",
-     "order": 9,
+     "order": 12,
      "children": [],
      "items": [
       "mod_logic",
@@ -4907,7 +4951,7 @@
      "id": "modular/motion",
      "title": "motion",
      "label": "motion",
-     "order": 10,
+     "order": 13,
      "children": [],
      "items": [
       "mod_sine_movement",
@@ -62250,13 +62294,494 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_scaled_cube"
+  },
+  "mod_combined_move": {
+   "label": "combined move",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "combined move = transform(cube, at 0.5,0.35,0.4) = combined_move — translation along x, y and z at once, orientation kept",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "combined_move",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, at 0.5,0.35,0.4) = combined_move — translation along x, y and z at once, orientation kept"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_combined_move",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_combined_move"
+  },
+  "mod_trs_cube": {
+   "label": "translate, rotate, scale",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "translate, rotate, scale = transform(cube, at, rot, scale) = trs_cube — the three in one: where, which way, how big",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "trs_cube",
+    "from": [
+     "moved_cube",
+     "turned_cube",
+     "scaled_cube"
+    ],
+    "expr": "transform(cube, at, rot, scale) = trs_cube — the three in one: where, which way, how big"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_trs_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_trs_cube"
+  },
+  "mod_travelling_cube": {
+   "label": "travelling cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "travelling cube = tween(cube, at 1.2) = travelling_cube — a place becomes a journey: the destination, played over time",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "travelling_cube",
+    "from": [
+     "moved_cube"
+    ],
+    "expr": "tween(cube, at 1.2) = travelling_cube — a place becomes a journey: the destination, played over time"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_travelling_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_travelling_cube"
+  },
+  "mod_turning_cube": {
+   "label": "turning cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "turning cube = tween(cube, rot 180) = turning_cube — a turn becomes a turning",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "turning_cube",
+    "from": [
+     "turned_cube"
+    ],
+    "expr": "tween(cube, rot 180) = turning_cube — a turn becomes a turning"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_turning_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_turning_cube"
+  },
+  "mod_growing_cube": {
+   "label": "growing cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "growing cube = tween(cube, scale 1.8) = growing_cube — a size becomes a growing, and a shrinking",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "growing_cube",
+    "from": [
+     "scaled_cube"
+    ],
+    "expr": "tween(cube, scale 1.8) = growing_cube — a size becomes a growing, and a shrinking"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_growing_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_growing_cube"
+  },
+  "mod_disco_grid": {
+   "label": "a grid with a clock",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a grid with a clock = by(array(sphere, 5, palette by checker), sine_field) = disco_grid — the counted grid, coloured by address, set going by a clock",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "disco_grid",
+    "from": [
+     "grid",
+     "sphere_collider"
+    ],
+    "expr": "by(array(sphere, 5, palette by checker), sine_field) = disco_grid — the counted grid, coloured by address, set going by a clock"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_disco_grid",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_disco_grid"
+  },
+  "mod_rainbow_row": {
+   "label": "rainbow row",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "rainbow row = array(cube, 7, 1d, palette rainbow) = rainbow_row — the counted row, a colour for each count",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "rainbow_row",
+    "from": [
+     "cube_row"
+    ],
+    "expr": "array(cube, 7, 1d, palette rainbow) = rainbow_row — the counted row, a colour for each count"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_rainbow_row",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_rainbow_row"
+  },
+  "mod_color_grid": {
+   "label": "colour grid pallet",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "colour grid pallet = array(box, 4, palette 4) = color_grid — a fixed span repartitioned by a chosen palette",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "color_grid",
+    "from": [
+     "box",
+     "grid"
+    ],
+    "expr": "array(box, 4, palette 4) = color_grid — a fixed span repartitioned by a chosen palette"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_color_grid",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_color_grid"
+  },
+  "mod_color_nails": {
+   "label": "colour nails",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "colour nails = array(nail, 7, 1d, palette 3) = color_nails — familiar forms given a palette regardless of where they stand",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "color_nails",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "array(nail, 7, 1d, palette 3) = color_nails — familiar forms given a palette regardless of where they stand"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_color_nails",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_color_nails"
+  },
+  "mod_alpha_steps": {
+   "label": "alpha steps",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "alpha steps = array(pane, 5, 1d, palette alpha) = alpha_steps — visibility thins while the pane still blocks the way",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "alpha_steps",
+    "from": [
+     "box"
+    ],
+    "expr": "array(pane, 5, 1d, palette alpha) = alpha_steps — visibility thins while the pane still blocks the way"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_alpha_steps",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_alpha_steps"
+  },
+  "mod_checker_tiling": {
+   "label": "checker tiling",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "checker tiling = array(slab, 6, palette 2 by checker) = checker_tiling — a two-value pattern read by address",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "checker_tiling",
+    "from": [
+     "color_grid"
+    ],
+    "expr": "array(slab, 6, palette 2 by checker) = checker_tiling — a two-value pattern read by address"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_checker_tiling",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_checker_tiling"
+  },
+  "mod_stripe_tiling": {
+   "label": "stripe tiling",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "stripe tiling = array(slab, 6, palette 3 by row) = stripe_tiling — the same slabs, another address rule",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "stripe_tiling",
+    "from": [
+     "checker_tiling"
+    ],
+    "expr": "array(slab, 6, palette 3 by row) = stripe_tiling — the same slabs, another address rule"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_stripe_tiling",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_stripe_tiling"
+  },
+  "mod_reflection_tiling": {
+   "label": "reflection tiling",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "reflection tiling = array(quad, 3) = reflection_tiling — a mirrored unit repeated: the reflection travels with the tile",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "reflection_tiling",
+    "from": [
+     "quad"
+    ],
+    "expr": "array(quad, 3) = reflection_tiling — a mirrored unit repeated: the reflection travels with the tile"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_reflection_tiling",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_reflection_tiling"
+  },
+  "mod_star_tiling": {
+   "label": "rotation tiling",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "rotation tiling = array((triangle_face) * 4 ring, 3) = star_tiling — a unit turned four ways, then repeated",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "star_tiling",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "array((triangle_face) * 4 ring, 3) = star_tiling — a unit turned four ways, then repeated"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_star_tiling",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_star_tiling"
+  },
+  "mod_rate_steps": {
+   "label": "a finite rate",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a finite rate = array(box, 8, 1d, profile ramp) = rate_steps — a constant rate: each step rises the same amount",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "rate_steps",
+    "from": [
+     "box",
+     "cube_row"
+    ],
+    "expr": "array(box, 8, 1d, profile ramp) = rate_steps — a constant rate: each step rises the same amount"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_rate_steps",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_rate_steps"
+  },
+  "mod_accumulation": {
+   "label": "accumulation",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "accumulation = array(box, 9, 1d, profile sin) = accumulation — height-times-width samples of one smooth function",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "accumulation",
+    "from": [
+     "rate_steps"
+    ],
+    "expr": "array(box, 9, 1d, profile sin) = accumulation — height-times-width samples of one smooth function"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_accumulation",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_accumulation"
+  },
+  "mod_parabola_arch": {
+   "label": "the arch",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the arch = array(box, 9, 1d, profile parabola) = parabola_arch — up then down: net change zero, total travel not",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "parabola_arch",
+    "from": [
+     "rate_steps"
+    ],
+    "expr": "array(box, 9, 1d, profile parabola) = parabola_arch — up then down: net change zero, total travel not"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_parabola_arch",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_parabola_arch"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1643,
+  "items": 1660,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

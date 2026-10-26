@@ -3888,6 +3888,640 @@
     ],
     "expr": "transform(cube, scale 1.6) = scaled_cube — scale: how big it is"
    }
+  },
+  "mod_combined_move": {
+   "lookup_name": "mod_combined_move",
+   "name": "modular · combined move",
+   "description": "combined move = transform(cube, at 0.5,0.35,0.4) = combined_move — translation along x, y and z at once, orientation kept. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "combined_move"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "combined_move",
+    "chapter": "transformation",
+    "from": [
+     "cube"
+    ],
+    "expr": "transform(cube, at 0.5,0.35,0.4) = combined_move — translation along x, y and z at once, orientation kept"
+   }
+  },
+  "mod_trs_cube": {
+   "lookup_name": "mod_trs_cube",
+   "name": "modular · translate, rotate, scale",
+   "description": "translate, rotate, scale = transform(cube, at, rot, scale) = trs_cube — the three in one: where, which way, how big. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "trs_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "trs_cube",
+    "chapter": "transformation",
+    "from": [
+     "moved_cube",
+     "turned_cube",
+     "scaled_cube"
+    ],
+    "expr": "transform(cube, at, rot, scale) = trs_cube — the three in one: where, which way, how big"
+   }
+  },
+  "mod_travelling_cube": {
+   "lookup_name": "mod_travelling_cube",
+   "name": "modular · travelling cube",
+   "description": "travelling cube = tween(cube, at 1.2) = travelling_cube — a place becomes a journey: the destination, played over time. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "travelling_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "travelling_cube",
+    "chapter": "transformation",
+    "from": [
+     "moved_cube"
+    ],
+    "expr": "tween(cube, at 1.2) = travelling_cube — a place becomes a journey: the destination, played over time"
+   }
+  },
+  "mod_turning_cube": {
+   "lookup_name": "mod_turning_cube",
+   "name": "modular · turning cube",
+   "description": "turning cube = tween(cube, rot 180) = turning_cube — a turn becomes a turning. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "turning_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "turning_cube",
+    "chapter": "transformation",
+    "from": [
+     "turned_cube"
+    ],
+    "expr": "tween(cube, rot 180) = turning_cube — a turn becomes a turning"
+   }
+  },
+  "mod_growing_cube": {
+   "lookup_name": "mod_growing_cube",
+   "name": "modular · growing cube",
+   "description": "growing cube = tween(cube, scale 1.8) = growing_cube — a size becomes a growing, and a shrinking. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "growing_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "growing_cube",
+    "chapter": "transformation",
+    "from": [
+     "scaled_cube"
+    ],
+    "expr": "tween(cube, scale 1.8) = growing_cube — a size becomes a growing, and a shrinking"
+   }
+  },
+  "mod_disco_grid": {
+   "lookup_name": "mod_disco_grid",
+   "name": "modular · a grid with a clock",
+   "description": "a grid with a clock = by(array(sphere, 5, palette by checker), sine_field) = disco_grid — the counted grid, coloured by address, set going by a clock. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "disco_grid"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "array"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "disco_grid",
+    "chapter": "array",
+    "from": [
+     "grid",
+     "sphere_collider"
+    ],
+    "expr": "by(array(sphere, 5, palette by checker), sine_field) = disco_grid — the counted grid, coloured by address, set going by a clock"
+   }
+  },
+  "mod_rainbow_row": {
+   "lookup_name": "mod_rainbow_row",
+   "name": "modular · rainbow row",
+   "description": "rainbow row = array(cube, 7, 1d, palette rainbow) = rainbow_row — the counted row, a colour for each count. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "rainbow_row"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "color"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "rainbow_row",
+    "chapter": "color",
+    "from": [
+     "cube_row"
+    ],
+    "expr": "array(cube, 7, 1d, palette rainbow) = rainbow_row — the counted row, a colour for each count"
+   }
+  },
+  "mod_color_grid": {
+   "lookup_name": "mod_color_grid",
+   "name": "modular · colour grid pallet",
+   "description": "colour grid pallet = array(box, 4, palette 4) = color_grid — a fixed span repartitioned by a chosen palette. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "color_grid"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "color"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "color_grid",
+    "chapter": "color",
+    "from": [
+     "box",
+     "grid"
+    ],
+    "expr": "array(box, 4, palette 4) = color_grid — a fixed span repartitioned by a chosen palette"
+   }
+  },
+  "mod_color_nails": {
+   "lookup_name": "mod_color_nails",
+   "name": "modular · colour nails",
+   "description": "colour nails = array(nail, 7, 1d, palette 3) = color_nails — familiar forms given a palette regardless of where they stand. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "color_nails"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "color"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "color_nails",
+    "chapter": "color",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "array(nail, 7, 1d, palette 3) = color_nails — familiar forms given a palette regardless of where they stand"
+   }
+  },
+  "mod_alpha_steps": {
+   "lookup_name": "mod_alpha_steps",
+   "name": "modular · alpha steps",
+   "description": "alpha steps = array(pane, 5, 1d, palette alpha) = alpha_steps — visibility thins while the pane still blocks the way. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "alpha_steps"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "color"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "alpha_steps",
+    "chapter": "color",
+    "from": [
+     "box"
+    ],
+    "expr": "array(pane, 5, 1d, palette alpha) = alpha_steps — visibility thins while the pane still blocks the way"
+   }
+  },
+  "mod_checker_tiling": {
+   "lookup_name": "mod_checker_tiling",
+   "name": "modular · checker tiling",
+   "description": "checker tiling = array(slab, 6, palette 2 by checker) = checker_tiling — a two-value pattern read by address. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "checker_tiling"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "tiling"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "checker_tiling",
+    "chapter": "tiling",
+    "from": [
+     "color_grid"
+    ],
+    "expr": "array(slab, 6, palette 2 by checker) = checker_tiling — a two-value pattern read by address"
+   }
+  },
+  "mod_stripe_tiling": {
+   "lookup_name": "mod_stripe_tiling",
+   "name": "modular · stripe tiling",
+   "description": "stripe tiling = array(slab, 6, palette 3 by row) = stripe_tiling — the same slabs, another address rule. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "stripe_tiling"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "tiling"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "stripe_tiling",
+    "chapter": "tiling",
+    "from": [
+     "checker_tiling"
+    ],
+    "expr": "array(slab, 6, palette 3 by row) = stripe_tiling — the same slabs, another address rule"
+   }
+  },
+  "mod_reflection_tiling": {
+   "lookup_name": "mod_reflection_tiling",
+   "name": "modular · reflection tiling",
+   "description": "reflection tiling = array(quad, 3) = reflection_tiling — a mirrored unit repeated: the reflection travels with the tile. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "reflection_tiling"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "tiling"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "reflection_tiling",
+    "chapter": "tiling",
+    "from": [
+     "quad"
+    ],
+    "expr": "array(quad, 3) = reflection_tiling — a mirrored unit repeated: the reflection travels with the tile"
+   }
+  },
+  "mod_star_tiling": {
+   "lookup_name": "mod_star_tiling",
+   "name": "modular · rotation tiling",
+   "description": "rotation tiling = array((triangle_face) * 4 ring, 3) = star_tiling — a unit turned four ways, then repeated. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "star_tiling"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "tiling"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "star_tiling",
+    "chapter": "tiling",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "array((triangle_face) * 4 ring, 3) = star_tiling — a unit turned four ways, then repeated"
+   }
+  },
+  "mod_rate_steps": {
+   "lookup_name": "mod_rate_steps",
+   "name": "modular · a finite rate",
+   "description": "a finite rate = array(box, 8, 1d, profile ramp) = rate_steps — a constant rate: each step rises the same amount. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "rate_steps"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "change"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "rate_steps",
+    "chapter": "change",
+    "from": [
+     "box",
+     "cube_row"
+    ],
+    "expr": "array(box, 8, 1d, profile ramp) = rate_steps — a constant rate: each step rises the same amount"
+   }
+  },
+  "mod_accumulation": {
+   "lookup_name": "mod_accumulation",
+   "name": "modular · accumulation",
+   "description": "accumulation = array(box, 9, 1d, profile sin) = accumulation — height-times-width samples of one smooth function. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "accumulation"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "change"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "accumulation",
+    "chapter": "change",
+    "from": [
+     "rate_steps"
+    ],
+    "expr": "array(box, 9, 1d, profile sin) = accumulation — height-times-width samples of one smooth function"
+   }
+  },
+  "mod_parabola_arch": {
+   "lookup_name": "mod_parabola_arch",
+   "name": "modular · the arch",
+   "description": "the arch = array(box, 9, 1d, profile parabola) = parabola_arch — up then down: net change zero, total travel not. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "parabola_arch"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "change"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "parabola_arch",
+    "chapter": "change",
+    "from": [
+     "rate_steps"
+    ],
+    "expr": "array(box, 9, 1d, profile parabola) = parabola_arch — up then down: net change zero, total travel not"
+   }
   }
  }
 }

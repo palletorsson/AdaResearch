@@ -50,7 +50,8 @@ OUT = ROOT / "commons/data/construction_path.json"
 
 CHAPTER_SEQ = {"point": "primitives", "line": "primitives", "association": "primitives", "triangle": "primitives",
                "solid": "primitives", "assemblage": "primitives", "transformation": "transformation",
-               "array": "array_tutorial", "motion": "change", "logic": "cellularautomata"}
+               "array": "array_tutorial", "color": "color", "tiling": "tiling", "change": "change",
+               "motion": "change", "logic": "cellularautomata"}
 
 
 def load():

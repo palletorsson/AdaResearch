@@ -9,6 +9,9 @@ extends RefCounted
 ##   {"op": "associate",  "of": expr, "surface": name, "story": text}
 ##   {"op": "times",      "of": expr, "n": k, "layout": row|stack|ring|polygon|mirror, …}
 ##   {"op": "array",      "of": expr, "n": k, "step": m, "dims": 2|3, "y": lift}
+##                        times and array also take "palette": [hex…] with "palette_by": index|checker|row|
+##                        column|layer (a copy's colour follows its address, not its place) and "profile":
+##                        ramp|sin|parabola (a copy's height follows a function of its index)
 ##   {"op": "assemblage", "parts": [{"of": expr, "at": [x,y,z], "rot": [°,°,°], "scale": [..]}]}
 ##   {"op": "engine",     "of": expr, "kind": physics|trace|hand|sine|sine_field|noise|random|logic}
 ##   {"op": "transform",  "of": expr, "at", "rot", "scale"}
@@ -218,6 +221,7 @@ static func _times(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 				c.rotation.y = PI * i
 			_:
 				c.position = Vector3(i * gap, 0, 0)
+		_dress(c, expr, i, Vector3i(0, 0, i), float(i) / maxf(1.0, n - 1.0))
 		root.add_child(c)
 	return root
 
@@ -233,14 +237,47 @@ static func _array(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 	# a 1d array is a ROW along z, so planks (long in x) lie side by side. Until 25 Oct dims 1 built
 	# a square: eu_pallet's "plank * 3" was nine boards and its "plank * 5" twenty-five
 	var nx: int = 1 if dims == 1 else n
+	var lin := 0
 	for i in range(nx):
 		for j in range(ny):
 			for k in range(n):
 				var c: Node3D = build(expr.get("of", {}), terms, depth)
 				c.position = Vector3((i - (nx - 1) / 2.0) * step, lift + j * step, (k - (n - 1) / 2.0) * step)
 				c.set_meta("cell", Vector3i(i, j, k))
+				_dress(c, expr, lin, Vector3i(i, j, k), float(k) / maxf(1.0, n - 1.0))
+				lin += 1
 				root.add_child(c)
 	return root
+
+
+## A repeat's copy dressed by its address (Palle, 26 Oct: "then arrays, color, and all things that
+## happen there"): "palette" gives it the colour at its index — by linear index, checker parity, row,
+## column or layer — so colour is assigned independently of placement; "profile" scales its height by a
+## function of its index (ramp, sin, parabola: the samples of change and accumulation). Additive: a
+## repeat without these keys is built exactly as before.
+static func _dress(c: Node3D, expr: Dictionary, lin: int, cell: Vector3i, u: float) -> void:
+	var pal: Array = expr.get("palette", [])
+	if not pal.is_empty():
+		var idx: int = lin
+		match str(expr.get("palette_by", "index")):
+			"checker":
+				idx = cell.x + cell.y + cell.z
+			"row":
+				idx = cell.z
+			"column":
+				idx = cell.x
+			"layer":
+				idx = cell.y
+		_tint(c, Color(str(pal[idx % pal.size()])))
+	var prof: String = str(expr.get("profile", ""))
+	if prof != "":
+		var h: float = u
+		match prof:
+			"sin":
+				h = 0.5 + 0.5 * sin(TAU * u)
+			"parabola":
+				h = 1.0 - pow(2.0 * u - 1.0, 2.0)
+		c.scale.y *= maxf(0.08, h)
 
 
 static func _place(n: Node3D, spec: Dictionary) -> void:
@@ -260,6 +297,8 @@ static func _place(n: Node3D, spec: Dictionary) -> void:
 static func _tint(n: Node, color: Color) -> void:
 	if n is MeshInstance3D and (n as MeshInstance3D).material_override is StandardMaterial3D:
 		((n as MeshInstance3D).material_override as StandardMaterial3D).albedo_color = color
+		if color.a < 1.0:   # a palette entry with alpha (#rrggbbaa) must be seen through
+			((n as MeshInstance3D).material_override as StandardMaterial3D).transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	for c in n.get_children():
 		_tint(c, color)
 

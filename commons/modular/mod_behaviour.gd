@@ -5,7 +5,9 @@ extends Node
 ## the parts it needs (bodies tagged `modular_body`, sub-terms tagged `term`) and
 ## either changes them once (physics: statics become rigids; random / noise:
 ## seeded displacement; logic: the gate names) or animates them every frame
-## (sine, sine_field, hand) or records what physics did (trace: a dotted path).
+## (sine, sine_field, hand, tween) or records what physics did (trace: a dotted path).
+## tween is the transform's time domain: what a transform states once (at, rot, scale) it plays
+## over a period, from where the thing was made to where it is put, and back.
 
 var kind: String = ""
 var params: Dictionary = {}
@@ -18,6 +20,12 @@ var _trace_count := 0
 
 const ModBody := preload("res://commons/modular/mod_body.gd")
 const ModLabel := preload("res://commons/modular/mod_label.gd")
+
+
+static func _vec3(v: Variant, fill: float) -> Vector3:
+	if v is Array and (v as Array).size() >= 3:
+		return Vector3(float(v[0]), float(v[1]), float(v[2]))
+	return Vector3(fill, fill, fill)
 
 
 static func attach(root: Node3D, expr: Dictionary) -> Node:
@@ -51,6 +59,12 @@ func _ready() -> void:
 			for n in _terms(root, "sphere_collider"):
 				_targets.append(n)
 				_homes.append(n.position)
+			set_process(true)
+		"tween":
+			for c in root.get_children():
+				if c != self and c is Node3D:
+					_targets.append(c)
+					_homes.append((c as Node3D).transform)
 			set_process(true)
 		"sine_field":
 			for n in _terms(root, "sphere_collider"):
@@ -94,6 +108,17 @@ func _process(delta: float) -> void:
 	if kind == "physics":
 		return   # nothing else per frame; the default branch below would switch processing off
 	match kind:
+		"tween":
+			var ph: float = 0.5 - 0.5 * cos(TAU * _t / float(params.get("period", 4.0)))
+			var at_v: Vector3 = _vec3(params.get("at", null), 0.0)
+			var rot_v: Vector3 = _vec3(params.get("rot", null), 0.0) * (PI / 180.0)
+			var sc: Variant = params.get("scale", 1.0)
+			var s_v: Vector3 = _vec3(sc, 1.0) if sc is Array else Vector3.ONE * float(sc)
+			var b := Basis.from_euler(rot_v * ph).scaled(Vector3.ONE.lerp(s_v, ph))
+			for i in range(_targets.size()):
+				var n: Node3D = _targets[i]
+				if is_instance_valid(n):
+					n.transform = Transform3D(b, at_v * ph) * (_homes[i] as Transform3D)
 		"sine":
 			var amp: float = float(params.get("amplitude", 0.25))
 			var period: float = float(params.get("period", 2.0))

@@ -1032,3 +1032,21 @@ octahedron → icosahedron → pentagon → dodecahedron → platonic_solids →
 /construction-path undoes it. Godot's own geometry: `commons/testing/export_terms_gltf.gd` exports every term as Godot
 builds it to `ada_encyclopedia/public/artifact-gltf/mod_<term>.glb` (102 of 102; meshes renamed `o<NNN>_` in build order,
 scaffolds already freed), and the film's "Godot's build" switch plays those instead of the three.js rebuild.
+
+**Filling the gaps after the solids (Palle, 26 Oct: "can you continue to fill in the gaps"):** the lineage now runs on
+through transformation, arrays, colour, tiling and change — 17 terms, each a construction from earlier ones and each
+answering a principle MODULAR_COVERAGE.md listed as uncovered. Three additive words in both builders (a repeat or an
+engine without them is built exactly as before): `palette` + `palette_by` (index | checker | row | column | layer) on
+`array` and `times` — a copy's colour follows its ADDRESS, not its place, and `#rrggbbaa` carries alpha; `profile`
+(ramp | sin | parabola) — a copy's height follows a function of its index; and the engine kind `tween` — the transform's
+time domain as a real behaviour (mod_behaviour.gd plays at / rot / scale over a period, out and back; the film plays it
+in its time phase). Terms: transformation `combined_move`, `trs_cube`, `travelling_cube`, `turning_cube`,
+`growing_cube`; array `disco_grid` (a grid with a clock: spheres coloured by checker, set going by sine_field); colour
+`rainbow_row`, `color_grid`, `color_nails`, `alpha_steps`; tiling `checker_tiling`, `stripe_tiling`,
+`reflection_tiling`, `star_tiling`; change `rate_steps`, `accumulation`, `parabola_arch`. New chapters color, tiling,
+change (mapped to their spine sequences in tools/construction_path.py). Godot builds all 17 (probe 120 ok, the 7
+failures foreign); captures confirm the palette, the checker by address, the sine profile and the alpha steps; a film of
+travelling_cube shows it travel out and back. Placed in the authored order: the transformation additions after
+scaled_cube, then after lattice the grid with a clock, colour, tiling and change, before the motion terms — 112 nodes, 0
+before what they are made of. glbs for all 17 (119 terms exported). The notation prints palettes, profiles and tweens
+(`tween(cube, at 1.2,0,0, every 4 s)`).

@@ -60,10 +60,14 @@ def to_text(e: dict) -> str:
         return " + ".join(f"({p})" if " + " in p and not p.startswith("(") else p for p in folded) or "·"
     if op == "assemblage":
         return "assemblage(" + ", ".join(to_text(p.get("of", p)) for p in e.get("parts", [])) + ")"
+    dress = (f", palette {'/'.join(str(c)[:6] for c in e['palette'])}{' by ' + e['palette_by'] if e.get('palette_by') else ''}" if e.get("palette") else "") \
+        + (f", profile {e['profile']}" if e.get("profile") else "")
     if op == "times":
-        return f"({of()}) * {e.get('n', 1)}"
+        return f"({of()}) * {e.get('n', 1)}{dress}"
     if op == "array":
-        return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''})"
+        return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''}{dress})"
+    if op == "exhibit":
+        return f"exhibit({of()})"
     if op == "associate":
         return f"association({of()}{', ' + e['surface'] if e.get('surface') else ''})"
     if op == "transform":
@@ -75,6 +79,9 @@ def to_text(e: dict) -> str:
         if e.get("scale") not in (None, 1):
             bits.append(f"scale {e['scale']}")
         return f"transform({of()}{', ' + ' '.join(bits) if bits else ''})"
+    if op == "engine" and e.get("kind") == "tween":   # the transform's time domain
+        bits = [f"{k} {','.join(str(v) for v in e[k]) if isinstance(e[k], list) else e[k]}" for k in ("at", "rot", "scale") if e.get(k) not in (None, 1)]
+        return f"tween({of()}, {' '.join(bits)}, every {e.get('period', 4)} s)"
     if op == "engine":
         return f"{'by' if e.get('kind') in BY_KINDS else 'step'}({of()}, {e.get('kind')})"
     if op == "sort":

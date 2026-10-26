@@ -10,6 +10,9 @@
     "assemblage",
     "transformation",
     "array",
+    "color",
+    "tiling",
+    "change",
     "logic",
     "motion"
   ],
@@ -10625,6 +10628,425 @@
           "t": "cube"
         },
         "scale": 1.6
+      }
+    },
+    "combined_move": {
+      "chapter": "transformation",
+      "label": "combined move",
+      "from": [
+        "cube"
+      ],
+      "expr": "transform(cube, at 0.5,0.35,0.4) = combined_move \u2014 translation along x, y and z at once, orientation kept",
+      "build": {
+        "op": "transform",
+        "of": {
+          "t": "cube"
+        },
+        "at": [
+          0.5,
+          0.35,
+          0.4
+        ]
+      }
+    },
+    "trs_cube": {
+      "chapter": "transformation",
+      "label": "translate, rotate, scale",
+      "from": [
+        "moved_cube",
+        "turned_cube",
+        "scaled_cube"
+      ],
+      "expr": "transform(cube, at, rot, scale) = trs_cube \u2014 the three in one: where, which way, how big",
+      "build": {
+        "op": "transform",
+        "of": {
+          "t": "cube"
+        },
+        "at": [
+          0.6,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          45,
+          0
+        ],
+        "scale": 1.3
+      }
+    },
+    "travelling_cube": {
+      "chapter": "transformation",
+      "label": "travelling cube",
+      "from": [
+        "moved_cube"
+      ],
+      "expr": "tween(cube, at 1.2) = travelling_cube \u2014 a place becomes a journey: the destination, played over time",
+      "build": {
+        "op": "engine",
+        "kind": "tween",
+        "of": {
+          "t": "cube"
+        },
+        "at": [
+          1.2,
+          0,
+          0
+        ],
+        "period": 4
+      }
+    },
+    "turning_cube": {
+      "chapter": "transformation",
+      "label": "turning cube",
+      "from": [
+        "turned_cube"
+      ],
+      "expr": "tween(cube, rot 180) = turning_cube \u2014 a turn becomes a turning",
+      "build": {
+        "op": "engine",
+        "kind": "tween",
+        "of": {
+          "t": "cube"
+        },
+        "rot": [
+          0,
+          180,
+          0
+        ],
+        "period": 4
+      }
+    },
+    "growing_cube": {
+      "chapter": "transformation",
+      "label": "growing cube",
+      "from": [
+        "scaled_cube"
+      ],
+      "expr": "tween(cube, scale 1.8) = growing_cube \u2014 a size becomes a growing, and a shrinking",
+      "build": {
+        "op": "engine",
+        "kind": "tween",
+        "of": {
+          "t": "cube"
+        },
+        "scale": 1.8,
+        "period": 4
+      }
+    },
+    "disco_grid": {
+      "chapter": "array",
+      "label": "a grid with a clock",
+      "from": [
+        "grid",
+        "sphere_collider"
+      ],
+      "expr": "by(array(sphere, 5, palette by checker), sine_field) = disco_grid \u2014 the counted grid, coloured by address, set going by a clock",
+      "build": {
+        "op": "engine",
+        "kind": "sine_field",
+        "amplitude": 0.12,
+        "period": 2,
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ]
+          },
+          "n": 5,
+          "step": 0.32,
+          "dims": 2,
+          "palette": [
+            "e63946",
+            "f9c74f",
+            "277da1"
+          ],
+          "palette_by": "checker"
+        }
+      }
+    },
+    "rainbow_row": {
+      "chapter": "color",
+      "label": "rainbow row",
+      "from": [
+        "cube_row"
+      ],
+      "expr": "array(cube, 7, 1d, palette rainbow) = rainbow_row \u2014 the counted row, a colour for each count",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "cube"
+        },
+        "n": 7,
+        "step": 0.6,
+        "dims": 1,
+        "palette": [
+          "e63946",
+          "f3722c",
+          "f9c74f",
+          "90be6d",
+          "43aa8b",
+          "277da1",
+          "7a4b8a"
+        ]
+      }
+    },
+    "color_grid": {
+      "chapter": "color",
+      "label": "colour grid pallet",
+      "from": [
+        "box",
+        "grid"
+      ],
+      "expr": "array(box, 4, palette 4) = color_grid \u2014 a fixed span repartitioned by a chosen palette",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "box"
+        },
+        "n": 4,
+        "step": 0.55,
+        "dims": 2,
+        "palette": [
+          "e63946",
+          "f9c74f",
+          "277da1",
+          "f3ecdd"
+        ]
+      }
+    },
+    "color_nails": {
+      "chapter": "color",
+      "label": "colour nails",
+      "from": [
+        "cylinder"
+      ],
+      "expr": "array(nail, 7, 1d, palette 3) = color_nails \u2014 familiar forms given a palette regardless of where they stand",
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "cylinder"
+          },
+          "scale": [
+            0.35,
+            2.4,
+            0.35
+          ]
+        },
+        "n": 7,
+        "step": 0.22,
+        "dims": 1,
+        "palette": [
+          "e63946",
+          "f9c74f",
+          "277da1"
+        ]
+      }
+    },
+    "alpha_steps": {
+      "chapter": "color",
+      "label": "alpha steps",
+      "from": [
+        "box"
+      ],
+      "expr": "array(pane, 5, 1d, palette alpha) = alpha_steps \u2014 visibility thins while the pane still blocks the way",
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "box"
+          },
+          "scale": [
+            1,
+            1.4,
+            0.2
+          ]
+        },
+        "n": 5,
+        "step": 0.6,
+        "dims": 1,
+        "palette": [
+          "277da1ff",
+          "277da1c0",
+          "277da180",
+          "277da148",
+          "277da11c"
+        ]
+      }
+    },
+    "checker_tiling": {
+      "chapter": "tiling",
+      "label": "checker tiling",
+      "from": [
+        "color_grid"
+      ],
+      "expr": "array(slab, 6, palette 2 by checker) = checker_tiling \u2014 a two-value pattern read by address",
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "box"
+          },
+          "scale": [
+            1,
+            0.08,
+            1
+          ]
+        },
+        "n": 6,
+        "step": 0.5,
+        "dims": 2,
+        "palette": [
+          "2b1d14",
+          "f3ecdd"
+        ],
+        "palette_by": "checker"
+      }
+    },
+    "stripe_tiling": {
+      "chapter": "tiling",
+      "label": "stripe tiling",
+      "from": [
+        "checker_tiling"
+      ],
+      "expr": "array(slab, 6, palette 3 by row) = stripe_tiling \u2014 the same slabs, another address rule",
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "box"
+          },
+          "scale": [
+            1,
+            0.08,
+            1
+          ]
+        },
+        "n": 6,
+        "step": 0.5,
+        "dims": 2,
+        "palette": [
+          "7a4b8a",
+          "f3ecdd",
+          "b8862b"
+        ],
+        "palette_by": "row"
+      }
+    },
+    "reflection_tiling": {
+      "chapter": "tiling",
+      "label": "reflection tiling",
+      "from": [
+        "quad"
+      ],
+      "expr": "array(quad, 3) = reflection_tiling \u2014 a mirrored unit repeated: the reflection travels with the tile",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "quad"
+        },
+        "n": 3,
+        "step": 1.0,
+        "dims": 2
+      }
+    },
+    "star_tiling": {
+      "chapter": "tiling",
+      "label": "rotation tiling",
+      "from": [
+        "triangle_face"
+      ],
+      "expr": "array((triangle_face) * 4 ring, 3) = star_tiling \u2014 a unit turned four ways, then repeated",
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "times",
+          "of": {
+            "t": "triangle_face"
+          },
+          "n": 4,
+          "layout": "ring"
+        },
+        "n": 3,
+        "step": 1.1,
+        "dims": 2
+      }
+    },
+    "rate_steps": {
+      "chapter": "change",
+      "label": "a finite rate",
+      "from": [
+        "box",
+        "cube_row"
+      ],
+      "expr": "array(box, 8, 1d, profile ramp) = rate_steps \u2014 a constant rate: each step rises the same amount",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "box"
+        },
+        "n": 8,
+        "step": 0.52,
+        "dims": 1,
+        "profile": "ramp",
+        "palette": [
+          "90be6d"
+        ]
+      }
+    },
+    "accumulation": {
+      "chapter": "change",
+      "label": "accumulation",
+      "from": [
+        "rate_steps"
+      ],
+      "expr": "array(box, 9, 1d, profile sin) = accumulation \u2014 height-times-width samples of one smooth function",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "box"
+        },
+        "n": 9,
+        "step": 0.52,
+        "dims": 1,
+        "profile": "sin",
+        "palette": [
+          "43aa8b"
+        ]
+      }
+    },
+    "parabola_arch": {
+      "chapter": "change",
+      "label": "the arch",
+      "from": [
+        "rate_steps"
+      ],
+      "expr": "array(box, 9, 1d, profile parabola) = parabola_arch \u2014 up then down: net change zero, total travel not",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "box"
+        },
+        "n": 9,
+        "step": 0.52,
+        "dims": 1,
+        "profile": "parabola",
+        "palette": [
+          "f9c74f"
+        ]
       }
     }
   },
