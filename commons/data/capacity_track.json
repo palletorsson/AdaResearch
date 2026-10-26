@@ -527,11 +527,37 @@
   },
   {
    "index": 15,
-   "term": null,
+   "term": "metaballs",
    "adds": "a field: a surface from a function of space",
    "axis": "form:4",
-   "hole": "needs the field operator (isosurfaces, boolean)",
-   "status": "hole"
+   "hole": null,
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "envelope": {
+    "form": 3,
+    "body": 3,
+    "many": 2,
+    "parts": 2,
+    "joint": 1,
+    "drive": 1,
+    "react": 2,
+    "measure": 1
+   },
+   "new": {
+    "form": 1
+   },
+   "status": "ok"
   }
  ],
  "terms": {
@@ -3225,6 +3251,193 @@
    "branch_of": "lattice",
    "distance": 1,
    "beyond": []
+  },
+  "metaballs": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "track"
+  },
+  "gyroid": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "torus_field": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "noise_blobs": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "field_terrain": {
+   "sig": {
+    "form": 4,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 1,
+   "beyond": []
+  },
+  "bool_union": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "bool_subtract": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "bool_intersect": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "smooth_union": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "smooth_subtract": {
+   "sig": {
+    "form": 4,
+    "body": 1,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {
@@ -3614,11 +3827,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3638,11 +3849,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3662,11 +3871,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3686,11 +3893,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": []
   },
   "subtraction_suite": {
@@ -3708,11 +3913,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3776,11 +3979,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -3802,11 +4003,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3826,11 +4025,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -3875,11 +4072,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3899,11 +4094,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": []
   },
   "sdf_cavern_room": {
@@ -3943,11 +4136,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "elevated_plank",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -3968,11 +4159,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -3992,11 +4181,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "sine_movement",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -4018,11 +4205,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "sine_movement",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -4043,11 +4228,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "sine_movement",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -4690,11 +4873,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -5057,11 +5238,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": []
   },
   "riemann_pi": {
@@ -5315,11 +5494,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -5340,11 +5517,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "pick_up_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -5500,11 +5675,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "skateboard_3",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -5547,11 +5720,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -5618,11 +5789,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -5847,11 +6016,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -6306,11 +6473,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -6353,11 +6518,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -6719,11 +6882,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -7195,11 +7356,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -7286,11 +7445,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "elevated_plank",
+   "distance": 3,
+   "beyond": [],
    "staged": []
   },
   "force_punching_bag": {
@@ -7444,11 +7601,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "elevated_plank",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -7627,11 +7782,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -7652,11 +7805,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -7676,11 +7827,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -7723,11 +7872,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -7772,11 +7919,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -7796,11 +7941,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": []
   },
   "helicoid": {
@@ -7818,11 +7961,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": []
   },
   "laundry_line_cathedral": {
@@ -7904,11 +8045,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -8038,11 +8177,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -8063,11 +8200,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -8283,11 +8418,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -8376,11 +8509,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -9087,11 +9218,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -9111,11 +9240,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -9404,11 +9531,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": [],
    "staged": []
   },
   "fractal_lsystem_tree": {
@@ -9515,11 +9640,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": []
   },
   "film_cantor_thirds": {
@@ -9805,11 +9928,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -9853,11 +9974,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10071,11 +10190,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10096,11 +10213,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10373,11 +10488,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10465,11 +10578,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10490,11 +10601,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -10652,11 +10761,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10677,11 +10784,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10725,11 +10830,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10750,11 +10853,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10775,11 +10876,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10800,11 +10899,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10848,11 +10945,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10873,11 +10968,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10898,11 +10991,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10923,11 +11014,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -10948,11 +11037,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -10974,11 +11061,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -11067,11 +11152,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": []
   },
   "grammar_provenance": {
@@ -11400,11 +11483,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -11448,11 +11529,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": []
   },
   "dragon_room": {
@@ -11537,11 +11616,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": []
   },
   "ForestCompetition": {
@@ -11889,11 +11966,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -11982,11 +12057,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -12008,11 +12081,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -12321,11 +12392,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "pendulum",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -12457,11 +12526,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -12506,11 +12573,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -12530,11 +12595,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -12578,11 +12641,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "sine_movement",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -12626,11 +12687,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -12650,11 +12709,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -12695,11 +12752,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -12721,11 +12776,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "elevated_plank",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -12745,11 +12798,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "elevated_plank",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -12789,11 +12840,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "elevated_plank",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -12813,11 +12862,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "elevated_plank",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -12837,11 +12884,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -12861,11 +12906,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -12886,11 +12929,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -12911,11 +12952,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -13227,11 +13266,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": []
   },
   "museum_witnesses": {
@@ -13473,11 +13510,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -13827,11 +13862,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": []
   },
   "code_evolution_screen": {
@@ -13981,11 +14014,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": []
   },
   "SoundscapeRadioRack": {
@@ -14306,11 +14337,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -14370,11 +14399,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -14874,11 +14901,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -15076,11 +15101,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -15621,11 +15644,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "pick_up_cube",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -16115,11 +16136,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -16250,11 +16269,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "skateboard_3",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -16274,11 +16291,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -16300,11 +16315,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "skateboard_3",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -16414,11 +16427,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -16504,11 +16515,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -16667,11 +16676,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -16803,11 +16810,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -16827,11 +16832,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -16874,11 +16877,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -16899,11 +16900,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -17056,11 +17055,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -17188,11 +17185,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": []
   },
   "qfep_chalkboard": {
@@ -17294,11 +17289,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": []
   },
   "lambda_hall": {
@@ -17338,11 +17331,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -17505,11 +17496,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -17569,11 +17558,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": []
   },
   "droplet_cusp": {
@@ -17591,11 +17578,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -17638,11 +17623,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -18158,11 +18141,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "sine_movement",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -18247,11 +18228,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 5,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -18545,11 +18524,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -18617,11 +18594,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -19126,11 +19101,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -19244,11 +19217,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -19291,11 +19262,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -19407,11 +19376,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -19496,11 +19463,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -19587,11 +19552,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -19774,11 +19737,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -19799,11 +19760,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -19825,11 +19784,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -19850,11 +19807,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -19899,11 +19854,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -20014,11 +19967,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -20040,11 +19991,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -20135,11 +20084,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "sine_movement",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -20160,11 +20107,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -20209,11 +20154,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -20257,11 +20200,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -20484,11 +20425,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -20510,11 +20449,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -20535,11 +20472,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -20559,11 +20494,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -20584,11 +20517,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -20697,11 +20628,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -21402,11 +21331,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -21543,11 +21470,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -21638,11 +21563,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -21824,11 +21747,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -22066,11 +21987,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 4,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -22158,11 +22077,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "pick_up_cube",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -22273,11 +22190,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -22298,11 +22213,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -22650,11 +22563,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -22696,11 +22607,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -22721,11 +22630,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -22746,11 +22653,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -22770,11 +22675,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -22899,11 +22802,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "metaballs",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "light"
    ]
@@ -23999,11 +23900,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -24068,11 +23967,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "skateboard_3",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "sense"
@@ -24115,11 +24012,9 @@
     "sense": 1
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "falling_cube",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light",
@@ -24141,11 +24036,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -24212,11 +24105,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -24328,11 +24219,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -24664,11 +24553,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -24688,11 +24575,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "sine_movement",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -24915,11 +24800,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "pick_up_cube",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read"
    ]
@@ -25003,11 +24886,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
-   "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "branch_of": "cube_row",
+   "distance": 2,
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -25028,11 +24909,9 @@
     "sense": 0
    },
    "lane": "branch",
-   "branch_of": "hole:15",
+   "branch_of": "metaballs",
    "distance": 1,
-   "beyond": [
-    "form"
-   ],
+   "beyond": [],
    "staged": [
     "read",
     "light"
@@ -25591,33 +25470,34 @@
  },
  "summary": {
   "track_steps": 16,
-  "holes": 1,
+  "holes": 0,
   "artifacts": 1015,
   "artifact_distance": {
-   "0": 102,
-   "1": 473,
-   "2": 327,
-   "3": 77,
-   "4": 3
+   "0": 114,
+   "1": 362,
+   "2": 382,
+   "3": 109,
+   "4": 14,
+   "5": 1
   },
   "artifacts_per_step": {
-   "skateboard_3": 205,
-   "hole:15": 167,
-   "sine_movement": 135,
-   "falling_cube": 133,
-   "lattice": 102,
+   "skateboard_3": 243,
+   "falling_cube": 158,
+   "sine_movement": 142,
+   "lattice": 109,
    "box": 101,
+   "metaballs": 77,
    "quad": 43,
+   "elevated_plank": 29,
    "cube": 27,
-   "cube_row": 25,
-   "elevated_plank": 22,
-   "pendulum": 11,
+   "cube_row": 26,
+   "pendulum": 12,
+   "pick_up_cube": 6,
    "line": 6,
-   "pick_up_cube": 2,
    "point": 2,
    "pallet_sorted": 1
   },
-  "within_one": 575,
+  "within_one": 476,
   "staged": 830,
   "unread": 33
  }

@@ -21,7 +21,9 @@
     "noise",
     "logic",
     "fractals",
-    "lsystems"
+    "lsystems",
+    "isosurfaces",
+    "booleans"
   ],
   "terms": {
     "point": {
@@ -12435,6 +12437,437 @@
         "step": 0.022,
         "heading": 0
       }
+    },
+    "metaballs": {
+      "chapter": "isosurfaces",
+      "label": "metaballs",
+      "from": [
+        "point"
+      ],
+      "expr": "field(1 \u2212 \u03a3 r\u00b2/d\u00b2, three centres) = metaballs \u2014 three charges, one surface: where the sum crosses one, they merge",
+      "build": {
+        "op": "field",
+        "fn": {
+          "metaballs": [
+            [
+              -0.25,
+              0.5,
+              0,
+              0.27
+            ],
+            [
+              0.25,
+              0.55,
+              0.05,
+              0.25
+            ],
+            [
+              0.02,
+              0.82,
+              -0.08,
+              0.2
+            ]
+          ]
+        },
+        "box": [
+          1.4,
+          1.2,
+          1.0
+        ],
+        "center": [
+          0,
+          0.6,
+          0
+        ],
+        "res": 36,
+        "color": "c0568a"
+      }
+    },
+    "gyroid": {
+      "chapter": "isosurfaces",
+      "label": "gyroid",
+      "from": [
+        "metaballs"
+      ],
+      "expr": "field(|gyroid| \u2212 t \u2229 sphere) = gyroid \u2014 a minimal surface: one wall dividing space into two linked labyrinths",
+      "build": {
+        "op": "field",
+        "fn": {
+          "intersect": [
+            {
+              "gyroid": 12,
+              "thickness": 0.05,
+              "at": [
+                0,
+                0.55,
+                0
+              ]
+            },
+            {
+              "sphere": 0.5,
+              "at": [
+                0,
+                0.55,
+                0
+              ]
+            }
+          ]
+        },
+        "box": [
+          1.1,
+          1.1,
+          1.1
+        ],
+        "center": [
+          0,
+          0.55,
+          0
+        ],
+        "res": 44,
+        "color": "277da1"
+      }
+    },
+    "torus_field": {
+      "chapter": "isosurfaces",
+      "label": "torus field",
+      "from": [
+        "metaballs"
+      ],
+      "expr": "field(torus(0.35, 0.12)) = torus_field \u2014 the same ring as the mesh, now as distance: every point knows how far it is",
+      "build": {
+        "op": "field",
+        "fn": {
+          "torus": [
+            0.35,
+            0.12
+          ],
+          "at": [
+            0,
+            0.3,
+            0
+          ]
+        },
+        "box": [
+          1.0,
+          0.5,
+          1.0
+        ],
+        "center": [
+          0,
+          0.3,
+          0
+        ],
+        "res": 32,
+        "color": "b8862b"
+      }
+    },
+    "noise_blobs": {
+      "chapter": "isosurfaces",
+      "label": "noise blobs",
+      "from": [
+        "metaballs",
+        "noise_heights"
+      ],
+      "expr": "field(noise \u2212 t \u2229 sphere) = noise_blobs \u2014 where the noise rises over a threshold, matter; a porous stone",
+      "build": {
+        "op": "field",
+        "fn": {
+          "intersect": [
+            {
+              "blobs": 2.8,
+              "threshold": 0.55
+            },
+            {
+              "sphere": 0.55,
+              "at": [
+                0,
+                0.6,
+                0
+              ]
+            }
+          ]
+        },
+        "box": [
+          1.2,
+          1.2,
+          1.2
+        ],
+        "center": [
+          0,
+          0.6,
+          0
+        ],
+        "res": 44,
+        "color": "8a7a68"
+      }
+    },
+    "field_terrain": {
+      "chapter": "isosurfaces",
+      "label": "field terrain",
+      "from": [
+        "noise_heights",
+        "metaballs"
+      ],
+      "expr": "field(y \u2212 noise) + ground = field_terrain \u2014 the surface is also what you stand on",
+      "build": {
+        "op": "field",
+        "fn": {
+          "terrain": 2.2,
+          "amp": 0.18,
+          "base": 0.25
+        },
+        "box": [
+          2.4,
+          0.6,
+          2.4
+        ],
+        "center": [
+          0,
+          0.3,
+          0
+        ],
+        "res": 40,
+        "color": "6b8e23",
+        "collide": true
+      }
+    },
+    "bool_union": {
+      "chapter": "booleans",
+      "label": "union",
+      "from": [
+        "box",
+        "metaballs"
+      ],
+      "expr": "field(box \u222a sphere) = bool_union \u2014 min of two distances: either is enough",
+      "build": {
+        "op": "field",
+        "fn": {
+          "union": [
+            {
+              "box": [
+                0.25,
+                0.25,
+                0.25
+              ],
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "sphere": 0.3,
+              "at": [
+                0.22,
+                0.48,
+                0.15
+              ]
+            }
+          ]
+        },
+        "box": [
+          1.1,
+          1.0,
+          1.0
+        ],
+        "center": [
+          0.05,
+          0.42,
+          0.05
+        ],
+        "res": 40,
+        "color": "f3ecdd"
+      }
+    },
+    "bool_subtract": {
+      "chapter": "booleans",
+      "label": "subtract",
+      "from": [
+        "bool_union"
+      ],
+      "expr": "field(box \u2212 sphere) = bool_subtract \u2014 max(box, \u2212sphere): the sphere bores; the far corner stays",
+      "build": {
+        "op": "field",
+        "fn": {
+          "subtract": [
+            {
+              "box": [
+                0.3,
+                0.3,
+                0.3
+              ],
+              "at": [
+                0,
+                0.32,
+                0
+              ]
+            },
+            {
+              "sphere": 0.33,
+              "at": [
+                0.3,
+                0.62,
+                0.3
+              ]
+            }
+          ]
+        },
+        "box": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "center": [
+          0,
+          0.35,
+          0
+        ],
+        "res": 40,
+        "color": "f3ecdd"
+      }
+    },
+    "bool_intersect": {
+      "chapter": "booleans",
+      "label": "intersect",
+      "from": [
+        "bool_union"
+      ],
+      "expr": "field(box \u2229 sphere) = bool_intersect \u2014 max of two distances: only where both are",
+      "build": {
+        "op": "field",
+        "fn": {
+          "intersect": [
+            {
+              "box": [
+                0.3,
+                0.3,
+                0.3
+              ],
+              "at": [
+                0,
+                0.32,
+                0
+              ]
+            },
+            {
+              "sphere": 0.4,
+              "at": [
+                0,
+                0.32,
+                0
+              ]
+            }
+          ]
+        },
+        "box": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "center": [
+          0,
+          0.35,
+          0
+        ],
+        "res": 40,
+        "color": "f3ecdd"
+      }
+    },
+    "smooth_union": {
+      "chapter": "booleans",
+      "label": "smooth union",
+      "from": [
+        "bool_union"
+      ],
+      "expr": "field(smin(sphere, sphere, k)) = smooth_union \u2014 the min rounded: two become one without a seam",
+      "build": {
+        "op": "field",
+        "fn": {
+          "smooth_union": [
+            {
+              "sphere": 0.22,
+              "at": [
+                -0.18,
+                0.32,
+                0
+              ]
+            },
+            {
+              "sphere": 0.22,
+              "at": [
+                0.18,
+                0.32,
+                0
+              ]
+            }
+          ],
+          "k": 0.15
+        },
+        "box": [
+          1.0,
+          0.7,
+          0.6
+        ],
+        "center": [
+          0,
+          0.32,
+          0
+        ],
+        "res": 40,
+        "color": "e9cdb8"
+      }
+    },
+    "smooth_subtract": {
+      "chapter": "booleans",
+      "label": "smooth bore",
+      "from": [
+        "bool_subtract"
+      ],
+      "expr": "field(\u2212smin(\u2212box, cylinder, k)) + ground = smooth_subtract \u2014 a passage bored smoothly: an opening, a support, and a way through",
+      "build": {
+        "op": "field",
+        "fn": {
+          "subtract": [
+            {
+              "box": [
+                0.4,
+                0.2,
+                0.3
+              ],
+              "at": [
+                0,
+                0.22,
+                0
+              ]
+            },
+            {
+              "cylinder": [
+                0.14,
+                0.5
+              ],
+              "at": [
+                0,
+                0.22,
+                0
+              ]
+            }
+          ],
+          "k": 0.06
+        },
+        "box": [
+          1.0,
+          0.6,
+          0.8
+        ],
+        "center": [
+          0,
+          0.25,
+          0
+        ],
+        "res": 44,
+        "color": "f3ecdd",
+        "collide": true
+      }
     }
   },
   "track": [
@@ -12514,10 +12947,9 @@
       "axis": "react:2"
     },
     {
-      "term": null,
+      "term": "metaballs",
       "adds": "a field: a surface from a function of space",
-      "axis": "form:4",
-      "hole": "needs the field operator (isosurfaces, boolean)"
+      "axis": "form:4"
     }
   ]
 }

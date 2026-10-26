@@ -5049,6 +5049,34 @@
       "mod_sierpinski_arrowhead",
       "mod_koch_curve"
      ]
+    },
+    {
+     "id": "modular/isosurfaces",
+     "title": "isosurfaces",
+     "label": "isosurfaces",
+     "order": 21,
+     "children": [],
+     "items": [
+      "mod_metaballs",
+      "mod_gyroid",
+      "mod_torus_field",
+      "mod_noise_blobs",
+      "mod_field_terrain"
+     ]
+    },
+    {
+     "id": "modular/booleans",
+     "title": "booleans",
+     "label": "booleans",
+     "order": 22,
+     "children": [],
+     "items": [
+      "mod_bool_union",
+      "mod_bool_subtract",
+      "mod_bool_intersect",
+      "mod_smooth_union",
+      "mod_smooth_subtract"
+     ]
     }
    ]
   }
@@ -63575,13 +63603,296 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_koch_curve"
+  },
+  "mod_metaballs": {
+   "label": "metaballs",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "metaballs = field(1 − Σ r²/d², three centres) = metaballs — three charges, one surface: where the sum crosses one, they merge",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "metaballs",
+    "from": [
+     "point"
+    ],
+    "expr": "field(1 − Σ r²/d², three centres) = metaballs — three charges, one surface: where the sum crosses one, they merge"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_metaballs",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_metaballs"
+  },
+  "mod_gyroid": {
+   "label": "gyroid",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "gyroid = field(|gyroid| − t ∩ sphere) = gyroid — a minimal surface: one wall dividing space into two linked labyrinths",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "gyroid",
+    "from": [
+     "metaballs"
+    ],
+    "expr": "field(|gyroid| − t ∩ sphere) = gyroid — a minimal surface: one wall dividing space into two linked labyrinths"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_gyroid",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_gyroid"
+  },
+  "mod_torus_field": {
+   "label": "torus field",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "torus field = field(torus(0.35, 0.12)) = torus_field — the same ring as the mesh, now as distance: every point knows how far it is",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "torus_field",
+    "from": [
+     "metaballs"
+    ],
+    "expr": "field(torus(0.35, 0.12)) = torus_field — the same ring as the mesh, now as distance: every point knows how far it is"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_torus_field",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_torus_field"
+  },
+  "mod_noise_blobs": {
+   "label": "noise blobs",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "noise blobs = field(noise − t ∩ sphere) = noise_blobs — where the noise rises over a threshold, matter; a porous stone",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "noise_blobs",
+    "from": [
+     "metaballs",
+     "noise_heights"
+    ],
+    "expr": "field(noise − t ∩ sphere) = noise_blobs — where the noise rises over a threshold, matter; a porous stone"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_noise_blobs",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_noise_blobs"
+  },
+  "mod_field_terrain": {
+   "label": "field terrain",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "field terrain = field(y − noise) + ground = field_terrain — the surface is also what you stand on",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "field_terrain",
+    "from": [
+     "noise_heights",
+     "metaballs"
+    ],
+    "expr": "field(y − noise) + ground = field_terrain — the surface is also what you stand on"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_field_terrain",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_field_terrain"
+  },
+  "mod_bool_union": {
+   "label": "union",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "union = field(box ∪ sphere) = bool_union — min of two distances: either is enough",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "bool_union",
+    "from": [
+     "box",
+     "metaballs"
+    ],
+    "expr": "field(box ∪ sphere) = bool_union — min of two distances: either is enough"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_bool_union",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_bool_union"
+  },
+  "mod_bool_subtract": {
+   "label": "subtract",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "subtract = field(box − sphere) = bool_subtract — max(box, −sphere): the sphere bores; the far corner stays",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "bool_subtract",
+    "from": [
+     "bool_union"
+    ],
+    "expr": "field(box − sphere) = bool_subtract — max(box, −sphere): the sphere bores; the far corner stays"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_bool_subtract",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_bool_subtract"
+  },
+  "mod_bool_intersect": {
+   "label": "intersect",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "intersect = field(box ∩ sphere) = bool_intersect — max of two distances: only where both are",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "bool_intersect",
+    "from": [
+     "bool_union"
+    ],
+    "expr": "field(box ∩ sphere) = bool_intersect — max of two distances: only where both are"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_bool_intersect",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_bool_intersect"
+  },
+  "mod_smooth_union": {
+   "label": "smooth union",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "smooth union = field(smin(sphere, sphere, k)) = smooth_union — the min rounded: two become one without a seam",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "smooth_union",
+    "from": [
+     "bool_union"
+    ],
+    "expr": "field(smin(sphere, sphere, k)) = smooth_union — the min rounded: two become one without a seam"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_smooth_union",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_smooth_union"
+  },
+  "mod_smooth_subtract": {
+   "label": "smooth bore",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "smooth bore = field(−smin(−box, cylinder, k)) + ground = smooth_subtract — a passage bored smoothly: an opening, a support, and a way through",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "smooth_subtract",
+    "from": [
+     "bool_subtract"
+    ],
+    "expr": "field(−smin(−box, cylinder, k)) + ground = smooth_subtract — a passage bored smoothly: an opening, a support, and a way through"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_smooth_subtract",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_smooth_subtract"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1685,
+  "items": 1695,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

@@ -75,6 +75,16 @@ def to_text(e: dict) -> str:
         return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''}{dress})"
     if op == "exhibit":
         return f"exhibit({of()})"
+    if op == "field":   # a surface where a function of space crosses zero
+        def fn(f):
+            for k in ("union", "intersect", "smooth_union"):
+                if k in f:
+                    return f"{k.replace('smooth_union', 'smooth union')}({', '.join(fn(g) for g in f[k])})"
+            if "subtract" in f:
+                body, cutter = f["subtract"]
+                return f"{fn(body)} − {fn(cutter)}{' smooth' if f.get('k') else ''}"
+            return next((k for k in ("sphere", "box", "torus", "cylinder", "gyroid", "metaballs", "terrain", "blobs", "plane") if k in f), "?")
+        return f"field({fn(e.get('fn', {}))}){' + ground' if e.get('collide') else ''}"
     if op == "associate":
         return f"association({of()}{', ' + e['surface'] if e.get('surface') else ''})"
     if op == "transform":

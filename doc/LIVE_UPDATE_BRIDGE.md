@@ -1076,3 +1076,24 @@ Fault found by filming: a spring tie set its equilibrium to the parts' starting 
 equilibrium from where the joint starts, so the offset counted twice and spring_oscillator's ball swung through the
 floor at any stiffness; the equilibrium is 0 now ("at rest as they stand"), and the film shows a damped oscillation
 (stiffness 40, damping 1). No other term used a spring.
+
+**The field operator — the track's last step (Palle, 26 Oct: "continue"):** `{"op": "field", "fn": f, ...}` in both
+builders (commons/modular/mod_field.gd; ada_encyclopedia src/lib/modular-field.ts): a surface where a function of space
+crosses zero, so isosurfaces (18) and booleans (19) are one operator. `f` is a tree of signed distances (sphere, box,
+torus, cylinder, plane), gyroids, metaballs, noise terrain and noise blobs, combined by union, intersect, subtract
+(the cutter's OWN distance: max(a, −c), smooth −smin(−a, c, k)) and smooth union; the field is intersected with its
+sampling box so a cut surface is capped; `collide` adds a trimesh body you can stand on. Meshing went through three
+versions, each one caught by commons/testing/probe_field.gd, which asserts every mesh against the field that made it:
+surface nets (one vertex per cell) folded where two sheets met in a cell — the gyroid came out with 24 non-manifold
+edges; marching tetrahedra (six per cube about its diagonal, the same cut everywhere, welded per grid edge) closed
+every mesh, but orienting a triangle by its own geometry failed where box faces sat ON grid planes and crossings
+collapsed onto grid points — 6481 inconsistent edges in bool_subtract; orienting by the MIDPOINTS of the crossed edges
+(a proxy that never collapses) made every mesh consistent. Final probe, all ten: closed (0 open, 0 non-manifold
+edges), consistently wound, outward by signed volume, vertices within one cell of the surface, and FOLDS (facets
+tipped where a wall is a few cells thin) at most 0.62 % (noise_blobs), gated at 1 %, drawn double-sided; the carve test
+passes on bool_subtract (the far corner survives, nothing inside the cutter, 2820 vertices on it) and FAILS on the
+intersection of the same two, as it must. Terms: isosurfaces `metaballs`, `gyroid`, `torus_field`, `noise_blobs`,
+`field_terrain` (+ ground); booleans `bool_union`, `bool_subtract`, `bool_intersect`, `smooth_union`,
+`smooth_subtract` (+ ground: a bored passage). `metaballs` fills the main track's last step through the gated
+`--propose` (the trunk's lineage file now has its origin and this first mutation): 16 steps, 0 holes, gate OK; the
+167 works that waited on the hole now hang off their nearest step (77 off metaballs).

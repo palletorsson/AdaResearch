@@ -5459,6 +5459,379 @@
     ],
     "expr": "rewrite(F: F → F+F--F+F, 4, 60°) = koch_curve — every segment replaced by four: longer without end, never wider"
    }
+  },
+  "mod_metaballs": {
+   "lookup_name": "mod_metaballs",
+   "name": "modular · metaballs",
+   "description": "metaballs = field(1 − Σ r²/d², three centres) = metaballs — three charges, one surface: where the sum crosses one, they merge. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "metaballs"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "metaballs",
+    "chapter": "isosurfaces",
+    "from": [
+     "point"
+    ],
+    "expr": "field(1 − Σ r²/d², three centres) = metaballs — three charges, one surface: where the sum crosses one, they merge"
+   }
+  },
+  "mod_gyroid": {
+   "lookup_name": "mod_gyroid",
+   "name": "modular · gyroid",
+   "description": "gyroid = field(|gyroid| − t ∩ sphere) = gyroid — a minimal surface: one wall dividing space into two linked labyrinths. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "gyroid"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "gyroid",
+    "chapter": "isosurfaces",
+    "from": [
+     "metaballs"
+    ],
+    "expr": "field(|gyroid| − t ∩ sphere) = gyroid — a minimal surface: one wall dividing space into two linked labyrinths"
+   }
+  },
+  "mod_torus_field": {
+   "lookup_name": "mod_torus_field",
+   "name": "modular · torus field",
+   "description": "torus field = field(torus(0.35, 0.12)) = torus_field — the same ring as the mesh, now as distance: every point knows how far it is. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "torus_field"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "torus_field",
+    "chapter": "isosurfaces",
+    "from": [
+     "metaballs"
+    ],
+    "expr": "field(torus(0.35, 0.12)) = torus_field — the same ring as the mesh, now as distance: every point knows how far it is"
+   }
+  },
+  "mod_noise_blobs": {
+   "lookup_name": "mod_noise_blobs",
+   "name": "modular · noise blobs",
+   "description": "noise blobs = field(noise − t ∩ sphere) = noise_blobs — where the noise rises over a threshold, matter; a porous stone. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "noise_blobs"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "noise_blobs",
+    "chapter": "isosurfaces",
+    "from": [
+     "metaballs",
+     "noise_heights"
+    ],
+    "expr": "field(noise − t ∩ sphere) = noise_blobs — where the noise rises over a threshold, matter; a porous stone"
+   }
+  },
+  "mod_field_terrain": {
+   "lookup_name": "mod_field_terrain",
+   "name": "modular · field terrain",
+   "description": "field terrain = field(y − noise) + ground = field_terrain — the surface is also what you stand on. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "field_terrain"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "field_terrain",
+    "chapter": "isosurfaces",
+    "from": [
+     "noise_heights",
+     "metaballs"
+    ],
+    "expr": "field(y − noise) + ground = field_terrain — the surface is also what you stand on"
+   }
+  },
+  "mod_bool_union": {
+   "lookup_name": "mod_bool_union",
+   "name": "modular · union",
+   "description": "union = field(box ∪ sphere) = bool_union — min of two distances: either is enough. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bool_union"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bool_union",
+    "chapter": "booleans",
+    "from": [
+     "box",
+     "metaballs"
+    ],
+    "expr": "field(box ∪ sphere) = bool_union — min of two distances: either is enough"
+   }
+  },
+  "mod_bool_subtract": {
+   "lookup_name": "mod_bool_subtract",
+   "name": "modular · subtract",
+   "description": "subtract = field(box − sphere) = bool_subtract — max(box, −sphere): the sphere bores; the far corner stays. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bool_subtract"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bool_subtract",
+    "chapter": "booleans",
+    "from": [
+     "bool_union"
+    ],
+    "expr": "field(box − sphere) = bool_subtract — max(box, −sphere): the sphere bores; the far corner stays"
+   }
+  },
+  "mod_bool_intersect": {
+   "lookup_name": "mod_bool_intersect",
+   "name": "modular · intersect",
+   "description": "intersect = field(box ∩ sphere) = bool_intersect — max of two distances: only where both are. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bool_intersect"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bool_intersect",
+    "chapter": "booleans",
+    "from": [
+     "bool_union"
+    ],
+    "expr": "field(box ∩ sphere) = bool_intersect — max of two distances: only where both are"
+   }
+  },
+  "mod_smooth_union": {
+   "lookup_name": "mod_smooth_union",
+   "name": "modular · smooth union",
+   "description": "smooth union = field(smin(sphere, sphere, k)) = smooth_union — the min rounded: two become one without a seam. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "smooth_union"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "smooth_union",
+    "chapter": "booleans",
+    "from": [
+     "bool_union"
+    ],
+    "expr": "field(smin(sphere, sphere, k)) = smooth_union — the min rounded: two become one without a seam"
+   }
+  },
+  "mod_smooth_subtract": {
+   "lookup_name": "mod_smooth_subtract",
+   "name": "modular · smooth bore",
+   "description": "smooth bore = field(−smin(−box, cylinder, k)) + ground = smooth_subtract — a passage bored smoothly: an opening, a support, and a way through. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "smooth_subtract"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "smooth_subtract",
+    "chapter": "booleans",
+    "from": [
+     "bool_subtract"
+    ],
+    "expr": "field(−smin(−box, cylinder, k)) + ground = smooth_subtract — a passage bored smoothly: an opening, a support, and a way through"
+   }
   }
  }
 }

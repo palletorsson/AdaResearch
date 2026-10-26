@@ -17,6 +17,9 @@ extends RefCounted
 ##                        a thing made of smaller copies of itself (an iterated function system)
 ##   {"op": "rewrite",    "axiom": s, "rules": {sym: s}, "depth": d, "angle": deg, "step": m, "of": segment}
 ##                        an L-system: the sentence rewritten d times, then read by a turtle
+##   {"op": "field",      "fn": f, "box": [x,y,z], "res": cells, "collide": true}
+##                        a surface where a function of space crosses zero — isosurfaces and booleans
+##                        (mod_field.gd: signed distances, unions, cuts, gyroids, metaballs, noise)
 ##   {"op": "assemblage", "parts": [{"of": expr, "at": [x,y,z], "rot": [°,°,°], "scale": [..]}]}
 ##   {"op": "engine",     "of": expr, "kind": physics|trace|hand|sine|sine_field|noise|random|logic}
 ##   {"op": "transform",  "of": expr, "at", "rot", "scale"}
@@ -41,6 +44,7 @@ const ModGrabbable := preload("res://commons/modular/mod_grabbable.gd")
 const ModLabel := preload("res://commons/modular/mod_label.gd")
 const ModPoint := preload("res://commons/modular/mod_point.gd")
 const ModBehaviour := preload("res://commons/modular/mod_behaviour.gd")
+const ModField := preload("res://commons/modular/mod_field.gd")
 
 const MAX_DEPTH := 24   # term references only: a term that contains itself trips it, depth of operators does not
 
@@ -91,6 +95,8 @@ static func build(expr: Dictionary, terms: Dictionary, depth: int = 0) -> Node3D
 			return _recurse(expr, terms, depth)
 		"rewrite":
 			return _rewrite(expr, terms, depth)
+		"field":
+			return ModField.build(expr)
 		"assemblage":
 			var root := Node3D.new()
 			root.name = "assemblage"
