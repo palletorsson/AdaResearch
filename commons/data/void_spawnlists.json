@@ -4787,7 +4787,8 @@
       "mod_quad",
       "mod_wooden_plane",
       "mod_walls",
-      "mod_pentagon"
+      "mod_pentagon",
+      "mod_circle_limit"
      ]
     },
     {
@@ -4813,7 +4814,10 @@
       "mod_octahedron",
       "mod_icosahedron",
       "mod_dodecahedron",
-      "mod_platonic_solids"
+      "mod_platonic_solids",
+      "mod_cube_assembly",
+      "mod_column",
+      "mod_column_family"
      ]
     },
     {
@@ -5096,7 +5100,9 @@
       "mod_gyroid",
       "mod_torus_field",
       "mod_noise_blobs",
-      "mod_field_terrain"
+      "mod_field_terrain",
+      "mod_terrain_overhang",
+      "mod_rhizome_body"
      ]
     },
     {
@@ -64591,13 +64597,185 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_rhizome"
+  },
+  "mod_circle_limit": {
+   "label": "the circle's limit",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the circle's limit = polygon(3, 4, 6, 8, 12, 24) → circle = circle_limit — finite refinement approaches the circle within a tolerance; no finite n arrives at the limit",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "circle_limit",
+    "from": [
+     "triangle",
+     "pentagon"
+    ],
+    "expr": "polygon(3, 4, 6, 8, 12, 24) → circle = circle_limit — finite refinement approaches the circle within a tolerance; no finite n arrives at the limit"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_circle_limit",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_circle_limit"
+  },
+  "mod_cube_assembly": {
+   "label": "cube assembly",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "cube assembly = plane × 6 = cube_assembly — a cube assembled from primitives: six faces, each turned to its side",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "cube_assembly",
+    "from": [
+     "quad",
+     "box"
+    ],
+    "expr": "plane × 6 = cube_assembly — a cube assembled from primitives: six faces, each turned to its side"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_cube_assembly",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_cube_assembly"
+  },
+  "mod_column": {
+   "label": "column",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "column = cylinder(base) + cylinder(shaft) + cylinder(capital) = column — one profile: a wide foot, a long shaft, a wide head",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "column",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "cylinder(base) + cylinder(shaft) + cylinder(capital) = column — one profile: a wide foot, a long shaft, a wide head"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_column",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_column"
+  },
+  "mod_column_family": {
+   "label": "a family of columns",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a family of columns = transform(column, 0.8) + column + transform(column, 1.25) = column_family — one profile, a family of columns: the proportion is kept, the size is not",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "column_family",
+    "from": [
+     "column"
+    ],
+    "expr": "transform(column, 0.8) + column + transform(column, 1.25) = column_family — one profile, a family of columns: the proportion is kept, the size is not"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_column_family",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_column_family"
+  },
+  "mod_terrain_overhang": {
+   "label": "terrain and overhangs",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "terrain and overhangs = field(terrain ∪ (blobs ∩ slab)) + ground = terrain_overhang — terrain and overhangs: a heightfield cannot overhang, a field can",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "terrain_overhang",
+    "from": [
+     "field_terrain",
+     "noise_blobs"
+    ],
+    "expr": "field(terrain ∪ (blobs ∩ slab)) + ground = terrain_overhang — terrain and overhangs: a heightfield cannot overhang, a field can"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_terrain_overhang",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_terrain_overhang"
+  },
+  "mod_rhizome_body": {
+   "label": "rhizome body",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "rhizome body = field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body — the network given a body: every tie a tube, every joint melted",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "rhizome_body",
+    "from": [
+     "rhizome",
+     "metaballs"
+    ],
+    "expr": "field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body — the network given a body: every tie a tube, every joint melted"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_rhizome_body",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_rhizome_body"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1716,
+  "items": 1722,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

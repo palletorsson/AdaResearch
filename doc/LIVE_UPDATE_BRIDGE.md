@@ -1127,3 +1127,19 @@ cubes in a row and four in a square: the same scalar, two arrangements). After t
 nearest neighbours, each tied to its nearest earlier point and a third of the time to its second: 29 ties, degrees 1 to
 6, no centre planned — computed and recorded). Every sequence now has nodes; the lineage has 167, the README says so.
 Godot builds all 176 terms (the 7 failures foreign).
+
+**Re-measuring the principles (Palle, 26 Oct: "push it and continue"):** `tools/modular_coverage.py` re-run with every
+term so far: 150 → 246 covered of 425. Then a fault in the MEASURE: a principle counted as covered only when it shared
+two stems with a term, so a one-word content title ("Metaballs", "Caves") could never count, whatever the grammar held
+— the field terms were reported "uncovered" this way. The threshold is now min(2, the principle's own stems), and the
+header counts terms and families instead of printing the 51 of 23 Oct. Then six terms for what remained genuinely
+uncovered: `circle_limit` (polygons of 3, 4, 6, 8, 12, 24 sides at one circumradius beside the circle: finite
+refinement, tolerance, the limit no n reaches), `cube_assembly` (a cube from six faces), `column` and `column_family`
+(one profile, three sizes), `terrain_overhang` (terrain ∪ blobs ∩ slab: a heightfield cannot overhang, a field can;
+first probe failed it — folds 1.18 %, three bodies — coarser blobs made one body, folds 0.20 %), `rhizome_body` (the
+rhizome's own 29 ties and 24 knots as capsules in one smooth union: one body). The field gained `capsule` and a
+smooth union over any number of parts. Three terms got the accurate name for what they are — `metaballs` an implicit
+surface, `bool_union` implicit modelling, `cave_chamber` cave generation — wording only, nothing claimed they are
+not. Result: 264 covered, 13 kernel only, 148 uncovered. Left uncovered on purpose: Animated Noise (re-meshing every
+frame is too slow in GDScript), VR Sculpting (interactive), and The 256 Cases — the grammar meshes with marching
+tetrahedra precisely to avoid that table. All 13 fields pass probe_field.gd; Godot builds all 182 terms.

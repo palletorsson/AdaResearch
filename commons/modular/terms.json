@@ -12453,7 +12453,7 @@
       "from": [
         "point"
       ],
-      "expr": "field(1 \u2212 \u03a3 r\u00b2/d\u00b2, three centres) = metaballs \u2014 three charges, one surface: where the sum crosses one, they merge",
+      "expr": "field(1 \u2212 \u03a3 r\u00b2/d\u00b2, three centres) = metaballs \u2014 an implicit surface: inside where the sum passes one, outside where it does not; three charges merge",
       "build": {
         "op": "field",
         "fn": {
@@ -12647,7 +12647,7 @@
         "box",
         "metaballs"
       ],
-      "expr": "field(box \u222a sphere) = bool_union \u2014 min of two distances: either is enough",
+      "expr": "field(box \u222a sphere) = bool_union \u2014 implicit modelling: shapes combined as functions; min of two distances, either is enough",
       "build": {
         "op": "field",
         "fn": {
@@ -13086,7 +13086,7 @@
         "bool_subtract",
         "field_terrain"
       ],
-      "expr": "field(rock \u2212 smooth carving centres) + ground = cave_chamber \u2014 biased carving leaves a chamber with headroom and a way in",
+      "expr": "field(rock \u2212 smooth carving centres) + ground = cave_chamber \u2014 cave generation by biased carving: a chamber with headroom and a way in",
       "build": {
         "op": "field",
         "fn": {
@@ -16019,6 +16019,1114 @@
             }
           ]
         }
+      }
+    },
+    "circle_limit": {
+      "chapter": "triangle",
+      "label": "the circle's limit",
+      "from": [
+        "triangle",
+        "pentagon"
+      ],
+      "expr": "polygon(3, 4, 6, 8, 12, 24) \u2192 circle = circle_limit \u2014 finite refinement approaches the circle within a tolerance; no finite n arrives at the limit",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 3,
+              "layout": "polygon"
+            },
+            "scale": [
+              0.51962,
+              0.51962,
+              0.51962
+            ],
+            "at": [
+              -1.9,
+              0.02,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 4,
+              "layout": "polygon"
+            },
+            "scale": [
+              0.42426,
+              0.42426,
+              0.42426
+            ],
+            "at": [
+              -1.22,
+              0.02,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 6,
+              "layout": "polygon"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              -0.54,
+              0.02,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 8,
+              "layout": "polygon"
+            },
+            "scale": [
+              0.22961,
+              0.22961,
+              0.22961
+            ],
+            "at": [
+              0.14,
+              0.02,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 12,
+              "layout": "polygon"
+            },
+            "scale": [
+              0.15529,
+              0.15529,
+              0.15529
+            ],
+            "at": [
+              0.82,
+              0.02,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 24,
+              "layout": "polygon"
+            },
+            "scale": [
+              0.07832,
+              0.07832,
+              0.07832
+            ],
+            "at": [
+              1.5,
+              0.02,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "torus",
+              "size": [
+                0.305,
+                0.01
+              ],
+              "color": "e63946"
+            },
+            "at": [
+              2.18,
+              0.02,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "cube_assembly": {
+      "chapter": "solid",
+      "label": "cube assembly",
+      "from": [
+        "quad",
+        "box"
+      ],
+      "expr": "plane \u00d7 6 = cube_assembly \u2014 a cube assembled from primitives: six faces, each turned to its side",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "plane",
+              "size": [
+                0.5,
+                0.5
+              ],
+              "color": "f3ecdd"
+            },
+            "at": [
+              0,
+              0.53,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "plane",
+              "size": [
+                0.5,
+                0.5
+              ],
+              "color": "f3ecdd"
+            },
+            "at": [
+              0,
+              -0.03,
+              0
+            ],
+            "rot": [
+              180,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "plane",
+              "size": [
+                0.5,
+                0.5
+              ],
+              "color": "f3ecdd"
+            },
+            "at": [
+              0,
+              0.25,
+              0.28
+            ],
+            "rot": [
+              90,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "plane",
+              "size": [
+                0.5,
+                0.5
+              ],
+              "color": "f3ecdd"
+            },
+            "at": [
+              0,
+              0.25,
+              -0.28
+            ],
+            "rot": [
+              -90,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "plane",
+              "size": [
+                0.5,
+                0.5
+              ],
+              "color": "f3ecdd"
+            },
+            "at": [
+              0.28,
+              0.25,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -90
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "plane",
+              "size": [
+                0.5,
+                0.5
+              ],
+              "color": "f3ecdd"
+            },
+            "at": [
+              -0.28,
+              0.25,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              90
+            ]
+          }
+        ]
+      }
+    },
+    "column": {
+      "chapter": "solid",
+      "label": "column",
+      "from": [
+        "cylinder"
+      ],
+      "expr": "cylinder(base) + cylinder(shaft) + cylinder(capital) = column \u2014 one profile: a wide foot, a long shaft, a wide head",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "p": "mesh",
+            "shape": "cylinder",
+            "size": [
+              0.16,
+              0.06
+            ],
+            "color": "f3ecdd",
+            "at": [
+              0,
+              0.03,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "cylinder",
+            "size": [
+              0.1,
+              1.0
+            ],
+            "color": "f3ecdd",
+            "at": [
+              0,
+              0.56,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "cylinder",
+            "size": [
+              0.15,
+              0.06
+            ],
+            "color": "f3ecdd",
+            "at": [
+              0,
+              1.09,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "column_family": {
+      "chapter": "solid",
+      "label": "a family of columns",
+      "from": [
+        "column"
+      ],
+      "expr": "transform(column, 0.8) + column + transform(column, 1.25) = column_family \u2014 one profile, a family of columns: the proportion is kept, the size is not",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "column"
+            },
+            "at": [
+              -0.6,
+              0,
+              0
+            ],
+            "scale": 0.8
+          },
+          {
+            "t": "column"
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "column"
+            },
+            "at": [
+              0.7,
+              0,
+              0
+            ],
+            "scale": 1.25
+          }
+        ]
+      }
+    },
+    "terrain_overhang": {
+      "chapter": "isosurfaces",
+      "label": "terrain and overhangs",
+      "from": [
+        "field_terrain",
+        "noise_blobs"
+      ],
+      "expr": "field(terrain \u222a (blobs \u2229 slab)) + ground = terrain_overhang \u2014 terrain and overhangs: a heightfield cannot overhang, a field can",
+      "build": {
+        "op": "field",
+        "fn": {
+          "union": [
+            {
+              "terrain": 2.0,
+              "amp": 0.15,
+              "base": 0.2
+            },
+            {
+              "intersect": [
+                {
+                  "blobs": 1.7,
+                  "threshold": 0.55
+                },
+                {
+                  "box": [
+                    1.1,
+                    0.3,
+                    1.1
+                  ],
+                  "at": [
+                    0,
+                    0.45,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "box": [
+          2.4,
+          1.0,
+          2.4
+        ],
+        "center": [
+          0,
+          0.5,
+          0
+        ],
+        "res": 48,
+        "color": "6b8e23",
+        "collide": true
+      }
+    },
+    "rhizome_body": {
+      "chapter": "isosurfaces",
+      "label": "rhizome body",
+      "from": [
+        "rhizome",
+        "metaballs"
+      ],
+      "expr": "field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body \u2014 the network given a body: every tie a tube, every joint melted",
+      "build": {
+        "op": "field",
+        "fn": {
+          "smooth_union": [
+            {
+              "capsule": [
+                [
+                  -0.5168,
+                  0.2609,
+                  0.5042
+                ],
+                [
+                  0.1568,
+                  0.2091,
+                  0.6824
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.1568,
+                  0.2091,
+                  0.6824
+                ],
+                [
+                  0.7063,
+                  0.1139,
+                  0.1927
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.5168,
+                  0.2609,
+                  0.5042
+                ],
+                [
+                  -0.168,
+                  0.1971,
+                  0.4586
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.1568,
+                  0.2091,
+                  0.6824
+                ],
+                [
+                  0.4411,
+                  0.2581,
+                  0.4378
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.7063,
+                  0.1139,
+                  0.1927
+                ],
+                [
+                  0.4411,
+                  0.2581,
+                  0.4378
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.5168,
+                  0.2609,
+                  0.5042
+                ],
+                [
+                  -0.6665,
+                  0.2062,
+                  -0.0517
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.7063,
+                  0.1139,
+                  0.1927
+                ],
+                [
+                  0.1445,
+                  0.1397,
+                  -0.2844
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.168,
+                  0.1971,
+                  0.4586
+                ],
+                [
+                  -0.2374,
+                  0.2933,
+                  0.0462
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2374,
+                  0.2933,
+                  0.0462
+                ],
+                [
+                  -0.1543,
+                  0.1957,
+                  -0.1773
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2374,
+                  0.2933,
+                  0.0462
+                ],
+                [
+                  -0.2803,
+                  0.0902,
+                  0.1672
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2374,
+                  0.2933,
+                  0.0462
+                ],
+                [
+                  -0.1929,
+                  0.1908,
+                  0.0486
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2374,
+                  0.2933,
+                  0.0462
+                ],
+                [
+                  -0.2662,
+                  0.2688,
+                  -0.025
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.1929,
+                  0.1908,
+                  0.0486
+                ],
+                [
+                  -0.2662,
+                  0.2688,
+                  -0.025
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.4411,
+                  0.2581,
+                  0.4378
+                ],
+                [
+                  0.3011,
+                  0.2543,
+                  0.0784
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.1568,
+                  0.2091,
+                  0.6824
+                ],
+                [
+                  0.0891,
+                  0.1899,
+                  0.4803
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2803,
+                  0.0902,
+                  0.1672
+                ],
+                [
+                  -0.4846,
+                  0.1762,
+                  0.2077
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.1929,
+                  0.1908,
+                  0.0486
+                ],
+                [
+                  -0.179,
+                  0.2541,
+                  0.0195
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.1929,
+                  0.1908,
+                  0.0486
+                ],
+                [
+                  -0.0336,
+                  0.1521,
+                  0.1604
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.1445,
+                  0.1397,
+                  -0.2844
+                ],
+                [
+                  0.2343,
+                  0.1643,
+                  -0.5466
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2662,
+                  0.2688,
+                  -0.025
+                ],
+                [
+                  -0.3481,
+                  0.2045,
+                  0.0484
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2374,
+                  0.2933,
+                  0.0462
+                ],
+                [
+                  -0.3481,
+                  0.2045,
+                  0.0484
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.0336,
+                  0.1521,
+                  0.1604
+                ],
+                [
+                  -0.1121,
+                  0.0825,
+                  0.1534
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.2803,
+                  0.0902,
+                  0.1672
+                ],
+                [
+                  -0.1121,
+                  0.0825,
+                  0.1534
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.4411,
+                  0.2581,
+                  0.4378
+                ],
+                [
+                  0.5184,
+                  0.2705,
+                  0.3411
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.1445,
+                  0.1397,
+                  -0.2844
+                ],
+                [
+                  0.0121,
+                  0.0868,
+                  -0.3512
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.1543,
+                  0.1957,
+                  -0.1773
+                ],
+                [
+                  0.0121,
+                  0.0868,
+                  -0.3512
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.3011,
+                  0.2543,
+                  0.0784
+                ],
+                [
+                  0.4367,
+                  0.0918,
+                  -0.1403
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  0.1445,
+                  0.1397,
+                  -0.2844
+                ],
+                [
+                  0.4367,
+                  0.0918,
+                  -0.1403
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "capsule": [
+                [
+                  -0.6665,
+                  0.2062,
+                  -0.0517
+                ],
+                [
+                  -0.5315,
+                  0.1852,
+                  -0.256
+                ]
+              ],
+              "r": 0.045
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.5168,
+                0.2609,
+                0.5042
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.1568,
+                0.2091,
+                0.6824
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.7063,
+                0.1139,
+                0.1927
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.168,
+                0.1971,
+                0.4586
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.4411,
+                0.2581,
+                0.4378
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.6665,
+                0.2062,
+                -0.0517
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.1445,
+                0.1397,
+                -0.2844
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.2374,
+                0.2933,
+                0.0462
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.1543,
+                0.1957,
+                -0.1773
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.2803,
+                0.0902,
+                0.1672
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.1929,
+                0.1908,
+                0.0486
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.2662,
+                0.2688,
+                -0.025
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.3011,
+                0.2543,
+                0.0784
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.0891,
+                0.1899,
+                0.4803
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.4846,
+                0.1762,
+                0.2077
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.179,
+                0.2541,
+                0.0195
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.0336,
+                0.1521,
+                0.1604
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.2343,
+                0.1643,
+                -0.5466
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.3481,
+                0.2045,
+                0.0484
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.1121,
+                0.0825,
+                0.1534
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.5184,
+                0.2705,
+                0.3411
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.0121,
+                0.0868,
+                -0.3512
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                0.4367,
+                0.0918,
+                -0.1403
+              ]
+            },
+            {
+              "sphere": 0.06,
+              "at": [
+                -0.5315,
+                0.1852,
+                -0.256
+              ]
+            }
+          ],
+          "k": 0.04
+        },
+        "box": [
+          1.7,
+          0.55,
+          1.6
+        ],
+        "center": [
+          0,
+          0.2,
+          0
+        ],
+        "res": 60,
+        "color": "8b3a62"
       }
     }
   },

@@ -5463,7 +5463,7 @@
   "mod_metaballs": {
    "lookup_name": "mod_metaballs",
    "name": "modular · metaballs",
-   "description": "metaballs = field(1 − Σ r²/d², three centres) = metaballs — three charges, one surface: where the sum crosses one, they merge. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "metaballs = field(1 − Σ r²/d², three centres) = metaballs — an implicit surface: inside where the sum passes one, outside where it does not; three charges merge. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -5494,7 +5494,7 @@
     "from": [
      "point"
     ],
-    "expr": "field(1 − Σ r²/d², three centres) = metaballs — three charges, one surface: where the sum crosses one, they merge"
+    "expr": "field(1 − Σ r²/d², three centres) = metaballs — an implicit surface: inside where the sum passes one, outside where it does not; three charges merge"
    }
   },
   "mod_gyroid": {
@@ -5650,7 +5650,7 @@
   "mod_bool_union": {
    "lookup_name": "mod_bool_union",
    "name": "modular · union",
-   "description": "union = field(box ∪ sphere) = bool_union — min of two distances: either is enough. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "union = field(box ∪ sphere) = bool_union — implicit modelling: shapes combined as functions; min of two distances, either is enough. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -5682,7 +5682,7 @@
      "box",
      "metaballs"
     ],
-    "expr": "field(box ∪ sphere) = bool_union — min of two distances: either is enough"
+    "expr": "field(box ∪ sphere) = bool_union — implicit modelling: shapes combined as functions; min of two distances, either is enough"
    }
   },
   "mod_bool_subtract": {
@@ -5985,7 +5985,7 @@
   "mod_cave_chamber": {
    "lookup_name": "mod_cave_chamber",
    "name": "modular · cave chamber",
-   "description": "cave chamber = field(rock − smooth carving centres) + ground = cave_chamber — biased carving leaves a chamber with headroom and a way in. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "cave chamber = field(rock − smooth carving centres) + ground = cave_chamber — cave generation by biased carving: a chamber with headroom and a way in. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -6017,7 +6017,7 @@
      "bool_subtract",
      "field_terrain"
     ],
-    "expr": "field(rock − smooth carving centres) + ground = cave_chamber — biased carving leaves a chamber with headroom and a way in"
+    "expr": "field(rock − smooth carving centres) + ground = cave_chamber — cave generation by biased carving: a chamber with headroom and a way in"
    }
   },
   "mod_voxel_sphere": {
@@ -6623,6 +6623,232 @@
      "spanning_tree"
     ],
     "expr": "connect(point × 24, nearest earlier + sometimes second) = rhizome — grown by nearest neighbours: 29 ties, degrees 1 to 6; no centre was planned"
+   }
+  },
+  "mod_circle_limit": {
+   "lookup_name": "mod_circle_limit",
+   "name": "modular · the circle's limit",
+   "description": "the circle's limit = polygon(3, 4, 6, 8, 12, 24) → circle = circle_limit — finite refinement approaches the circle within a tolerance; no finite n arrives at the limit. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "circle_limit"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "triangle"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "circle_limit",
+    "chapter": "triangle",
+    "from": [
+     "triangle",
+     "pentagon"
+    ],
+    "expr": "polygon(3, 4, 6, 8, 12, 24) → circle = circle_limit — finite refinement approaches the circle within a tolerance; no finite n arrives at the limit"
+   }
+  },
+  "mod_cube_assembly": {
+   "lookup_name": "mod_cube_assembly",
+   "name": "modular · cube assembly",
+   "description": "cube assembly = plane × 6 = cube_assembly — a cube assembled from primitives: six faces, each turned to its side. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "cube_assembly"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "cube_assembly",
+    "chapter": "solid",
+    "from": [
+     "quad",
+     "box"
+    ],
+    "expr": "plane × 6 = cube_assembly — a cube assembled from primitives: six faces, each turned to its side"
+   }
+  },
+  "mod_column": {
+   "lookup_name": "mod_column",
+   "name": "modular · column",
+   "description": "column = cylinder(base) + cylinder(shaft) + cylinder(capital) = column — one profile: a wide foot, a long shaft, a wide head. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "column"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "column",
+    "chapter": "solid",
+    "from": [
+     "cylinder"
+    ],
+    "expr": "cylinder(base) + cylinder(shaft) + cylinder(capital) = column — one profile: a wide foot, a long shaft, a wide head"
+   }
+  },
+  "mod_column_family": {
+   "lookup_name": "mod_column_family",
+   "name": "modular · a family of columns",
+   "description": "a family of columns = transform(column, 0.8) + column + transform(column, 1.25) = column_family — one profile, a family of columns: the proportion is kept, the size is not. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "column_family"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "solid"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "column_family",
+    "chapter": "solid",
+    "from": [
+     "column"
+    ],
+    "expr": "transform(column, 0.8) + column + transform(column, 1.25) = column_family — one profile, a family of columns: the proportion is kept, the size is not"
+   }
+  },
+  "mod_terrain_overhang": {
+   "lookup_name": "mod_terrain_overhang",
+   "name": "modular · terrain and overhangs",
+   "description": "terrain and overhangs = field(terrain ∪ (blobs ∩ slab)) + ground = terrain_overhang — terrain and overhangs: a heightfield cannot overhang, a field can. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "terrain_overhang"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "terrain_overhang",
+    "chapter": "isosurfaces",
+    "from": [
+     "field_terrain",
+     "noise_blobs"
+    ],
+    "expr": "field(terrain ∪ (blobs ∩ slab)) + ground = terrain_overhang — terrain and overhangs: a heightfield cannot overhang, a field can"
+   }
+  },
+  "mod_rhizome_body": {
+   "lookup_name": "mod_rhizome_body",
+   "name": "modular · rhizome body",
+   "description": "rhizome body = field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body — the network given a body: every tie a tube, every joint melted. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "rhizome_body"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "rhizome_body",
+    "chapter": "isosurfaces",
+    "from": [
+     "rhizome",
+     "metaballs"
+    ],
+    "expr": "field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body — the network given a body: every tie a tube, every joint melted"
    }
   }
  }

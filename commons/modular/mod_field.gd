@@ -16,8 +16,9 @@ extends RefCounted
 ##     | {"cylinder": [r, half_height], "at"} | {"gyroid": scale, "thickness": t, "at"}
 ##     | {"metaballs": [[x, y, z, r], ...]} | {"terrain": freq, "amp": a, "base": y}
 ##     | {"blobs": freq, "threshold": t} | {"plane": [nx, ny, nz], "d": d}
+##     | {"capsule": [[x, y, z], [x, y, z]], "r": r}
 ##     | {"union": [f, ...]} | {"intersect": [f, ...]} | {"subtract": [body, cutter], "k": smooth}
-##     | {"smooth_union": [f, g], "k": k}
+##     | {"smooth_union": [f, g, ...], "k": k}
 ## The field is intersected with its sampling box (half a cell inside), so a surface the box cuts is
 ## capped: one closed body, and the same function decides the samples and the normals.
 
@@ -45,8 +46,20 @@ static func value(f: Dictionary, p: Vector3) -> float:
 		var k: float = float(f.get("k", 0.0))
 		return maxf(a, -c) if k <= 0.0 else -_smin(-a, c, k)
 	if f.has("smooth_union"):
+		# folded over any number of parts: a body grown along a network melts at every joint
 		var pp: Array = f["smooth_union"]
-		return _smin(value(pp[0], p), value(pp[1], p), float(f.get("k", 0.1)))
+		var k2: float = float(f.get("k", 0.1))
+		var acc: float = value(pp[0], p)
+		for gi in range(1, pp.size()):
+			acc = _smin(acc, value(pp[gi], p), k2)
+		return acc
+	if f.has("capsule"):
+		# a segment with a radius: the distance to the segment, less r
+		var seg: Array = f["capsule"]
+		var a2: Vector3 = _v3(seg[0])
+		var ab: Vector3 = _v3(seg[1]) - a2
+		var t: float = clampf((p - a2).dot(ab) / maxf(ab.length_squared(), 1e-12), 0.0, 1.0)
+		return p.distance_to(a2 + ab * t) - float(f.get("r", 0.05))
 	var q: Vector3 = p - _v3(f.get("at", null))
 	if f.has("sphere"):
 		return q.length() - float(f["sphere"])
