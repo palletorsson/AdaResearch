@@ -51,7 +51,9 @@ OUT = ROOT / "commons/data/construction_path.json"
 CHAPTER_SEQ = {"point": "primitives", "line": "primitives", "association": "primitives", "triangle": "primitives",
                "solid": "primitives", "assemblage": "primitives", "transformation": "transformation",
                "array": "array_tutorial", "color": "color", "tiling": "tiling", "change": "change",
-               "motion": "change", "logic": "cellularautomata"}
+               "motion": "change", "forces": "forces", "formfinding": "formfinding", "waves": "wavefunctions",
+               "randomness": "randomness", "noise": "noise", "logic": "cellularautomata", "fractals": "fractals",
+               "lsystems": "lsystems"}
 
 
 def load():

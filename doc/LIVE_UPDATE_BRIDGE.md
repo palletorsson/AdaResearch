@@ -1050,3 +1050,29 @@ travelling_cube shows it travel out and back. Placed in the authored order: the 
 scaled_cube, then after lattice the grid with a clock, colour, tiling and change, before the motion terms — 112 nodes, 0
 before what they are made of. glbs for all 17 (119 terms exported). The notation prints palettes, profiles and tweens
 (`tween(cube, at 1.2,0,0, every 4 s)`).
+
+**Sequences 7–11 and the recursion (Palle, 26 Oct: "yes go on with 7-11 and the recursion"):** 25 terms. Two new
+operators in both builders. `recurse` — a thing made of smaller copies of itself: generation n+1 is the rules'
+transforms applied to generation n (an iterated function system); `keep: seed` keeps a fresh seed in every generation
+(a tree carries its trunk), `stack` shows every generation offset (predict one before seeing the next); depth capped
+at 3000 copies; the film plays the seeds in the order the recursion reaches them. `rewrite` — an L-system: the axiom
+rewritten by its rules, then read by a turtle in the vertical plane (F/G draw, f moves, + − turn, [ ] keep and return);
+the film plays it stroke by stroke. Smaller additive words: `rise` (a profile MOVES the copy — a sampled path),
+profiles `gauss` and `beat`, times layouts `circle` (vertical: each height is the sine of its angle) and
+`phyllotaxis` (the golden angle), `angles` on the random engine (a choice among a few turns), `frequency` on the
+noise engine (an octave). Terms — forces: `arrow`, `vector_sum` (head to tail, the resultant in red, √3 at 30°),
+`launch_arc` (equal time steps of a flight), `spring_oscillator`; form finding: `catenary` (drafted as a parabola,
+settled by physics), `gradient_descent`; waves: `unit_circle`, `sine_graph`, `circle_to_graph` (the coordinate that
+draws the graph), `standing_wave`, `beat_graph`; randomness: `ten_print`, `random_sizes`, `gaussian_bins`; noise:
+`noise_heights`, `layered_noise` (two octaves summed); fractals: `sierpinski` (3⁵ = 243), `cantor_set` (every
+generation, 63 bars), `fractal_tree` (2⁸−1 = 255), `sierpinski_carpet` (8³ = 512), `phyllotaxis` (160 at 137.5°);
+L-systems: `lsystem_plant` (1488 strokes), `dragon_curve` (1024), `sierpinski_arrowhead` (729 — the same triangle
+as the recursion, drawn as one line: what exactly is repeated?), `koch_curve` (256 — by rewriting, because a Koch
+curve by uniform-scale recursion thins its own stroke to nothing). Godot builds all 25 with exactly those counts
+(probe 145 ok, 7 foreign failures). Chapters forces, formfinding, waves, randomness, noise, fractals, lsystems, mapped
+to their sequences. Placed in the authored order: 7–11 after the motion terms, fractals and L-systems after the logic
+block (cellular automata, 13); 0 before their parts.
+Fault found by filming: a spring tie set its equilibrium to the parts' starting offset, but Godot measures the
+equilibrium from where the joint starts, so the offset counted twice and spring_oscillator's ball swung through the
+floor at any stiffness; the equilibrium is 0 now ("at rest as they stand"), and the film shows a damped oscillation
+(stiffness 40, damping 1). No other term used a spring.

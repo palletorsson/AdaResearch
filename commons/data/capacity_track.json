@@ -2750,6 +2750,481 @@
    "branch_of": "cube_row",
    "distance": 1,
    "beyond": []
+  },
+  "arrow": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 0,
+   "beyond": []
+  },
+  "vector_sum": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 0,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "launch_arc": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube_row",
+   "distance": 0,
+   "beyond": []
+  },
+  "spring_oscillator": {
+   "sig": {
+    "form": 3,
+    "body": 2,
+    "many": 0,
+    "parts": 1,
+    "joint": 1,
+    "drive": 0,
+    "react": 1,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "pendulum",
+   "distance": 0,
+   "beyond": []
+  },
+  "catenary": {
+   "sig": {
+    "form": 3,
+    "body": 2,
+    "many": 1,
+    "parts": 0,
+    "joint": 1,
+    "drive": 0,
+    "react": 1,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "falling_cube",
+   "distance": 2,
+   "beyond": []
+  },
+  "gradient_descent": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube_row",
+   "distance": 0,
+   "beyond": []
+  },
+  "unit_circle": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "sine_graph": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "circle_to_graph": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "quad",
+   "distance": 1,
+   "beyond": []
+  },
+  "standing_wave": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube_row",
+   "distance": 1,
+   "beyond": []
+  },
+  "beat_graph": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "quad",
+   "distance": 1,
+   "beyond": []
+  },
+  "ten_print": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 2,
+   "beyond": []
+  },
+  "random_sizes": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 0,
+    "parts": 1,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "sine_movement",
+   "distance": 1,
+   "beyond": []
+  },
+  "gaussian_bins": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "noise_heights": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 2,
+   "beyond": []
+  },
+  "layered_noise": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 2,
+   "beyond": []
+  },
+  "sierpinski": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "cantor_set": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "fractal_tree": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 2,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "sierpinski_carpet": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "phyllotaxis": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 0,
+   "beyond": []
+  },
+  "lsystem_plant": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "dragon_curve": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "sierpinski_arrowhead": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "koch_curve": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

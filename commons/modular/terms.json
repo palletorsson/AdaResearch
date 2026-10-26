@@ -13,8 +13,15 @@
     "color",
     "tiling",
     "change",
+    "motion",
+    "forces",
+    "formfinding",
+    "waves",
+    "randomness",
+    "noise",
     "logic",
-    "motion"
+    "fractals",
+    "lsystems"
   ],
   "terms": {
     "point": {
@@ -11047,6 +11054,1386 @@
         "palette": [
           "f9c74f"
         ]
+      }
+    },
+    "arrow": {
+      "chapter": "forces",
+      "label": "arrow",
+      "from": [
+        "line"
+      ],
+      "expr": "line + cone = arrow \u2014 a displacement: a length and a direction",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "line"
+            },
+            "at": [
+              0.5,
+              0.4,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.06,
+                0.16
+              ],
+              "color": "2b1d14"
+            },
+            "at": [
+              1.06,
+              0.4,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -90
+            ]
+          }
+        ]
+      }
+    },
+    "vector_sum": {
+      "chapter": "forces",
+      "label": "vector sum",
+      "from": [
+        "arrow"
+      ],
+      "expr": "arrow + transform(arrow, at 1, rot 60) + red(arrow, rot 30, scale \u221a3) = vector_sum \u2014 head to tail, and the one arrow that does both",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "arrow"
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "arrow"
+            },
+            "at": [
+              1,
+              0,
+              0
+            ],
+            "rot": [
+              0,
+              -60,
+              0
+            ]
+          },
+          {
+            "op": "associate",
+            "surface": "red",
+            "of": {
+              "op": "transform",
+              "of": {
+                "t": "arrow"
+              },
+              "rot": [
+                0,
+                -30,
+                0
+              ],
+              "scale": [
+                1.732,
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "launch_arc": {
+      "chapter": "forces",
+      "label": "launch",
+      "from": [
+        "sphere_collider",
+        "parabola_arch"
+      ],
+      "expr": "array(ball, 11, profile parabola, rise 0.9) = launch_arc \u2014 equal time steps of a flight under constant acceleration",
+      "build": {
+        "op": "array",
+        "of": {
+          "op": "transform",
+          "of": {
+            "t": "sphere_collider"
+          },
+          "scale": [
+            0.35,
+            0.35,
+            0.35
+          ]
+        },
+        "n": 11,
+        "step": 0.18,
+        "dims": 1,
+        "profile": "parabola",
+        "rise": 0.9,
+        "palette": [
+          "b8862b"
+        ]
+      }
+    },
+    "spring_oscillator": {
+      "chapter": "forces",
+      "label": "spring oscillator",
+      "from": [
+        "point",
+        "sphere_collider",
+        "pendulum"
+      ],
+      "expr": "step(connect(point + ball, spring), physics) = spring_oscillator \u2014 a restoring force: it overshoots, and damping takes the overshoot away",
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "sphere_collider"
+        ],
+        "of": {
+          "op": "connect",
+          "ties": [
+            [
+              0,
+              1,
+              "spring",
+              40,
+              1
+            ]
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0,
+                  1.2,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.6,
+                  0.6,
+                  0.6
+                ],
+                "at": [
+                  0,
+                  0.6,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "catenary": {
+      "chapter": "formfinding",
+      "label": "catenary",
+      "from": [
+        "bead_chain"
+      ],
+      "expr": "step(connect(point + ball \u00d7 7 + point, ropes), physics) = catenary \u2014 drafted as a parabola, settled by physics into the hanging curve",
+      "build": {
+        "op": "engine",
+        "kind": "physics",
+        "free": [
+          "sphere_collider"
+        ],
+        "of": {
+          "op": "connect",
+          "ties": [
+            [
+              0,
+              1,
+              "rope"
+            ],
+            [
+              1,
+              2,
+              "rope"
+            ],
+            [
+              2,
+              3,
+              "rope"
+            ],
+            [
+              3,
+              4,
+              "rope"
+            ],
+            [
+              4,
+              5,
+              "rope"
+            ],
+            [
+              5,
+              6,
+              "rope"
+            ],
+            [
+              6,
+              7,
+              "rope"
+            ],
+            [
+              7,
+              8,
+              "rope"
+            ]
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  -0.9,
+                  1.2,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  -0.675,
+                  1.0031,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  -0.45,
+                  0.8625,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  -0.225,
+                  0.7781,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  0.0,
+                  0.75,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  0.225,
+                  0.7781,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  0.45,
+                  0.8625,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "sphere_collider"
+                },
+                "scale": [
+                  0.4,
+                  0.4,
+                  0.4
+                ],
+                "at": [
+                  0.675,
+                  1.0031,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "t": "point"
+                },
+                "at": [
+                  0.9,
+                  1.2,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "gradient_descent": {
+      "chapter": "formfinding",
+      "label": "gradient descent",
+      "from": [
+        "point",
+        "sphere_collider",
+        "parabola_arch"
+      ],
+      "expr": "point \u00d7 13 on a bowl + ball \u00d7 6 = gradient_descent \u2014 each step goes downhill by a part of the slope; the steps shrink as the slope does",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -1.0,
+              0.85,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -0.833,
+              0.6361,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -0.667,
+              0.4611,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -0.5,
+              0.325,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -0.333,
+              0.2278,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              -0.167,
+              0.1694,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.0,
+              0.15,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.167,
+              0.1694,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.333,
+              0.2278,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.5,
+              0.325,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.667,
+              0.4611,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              0.833,
+              0.6361,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "point"
+            },
+            "at": [
+              1.0,
+              0.85,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              0.95,
+              0.8317,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              0.57,
+              0.4274,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              0.342,
+              0.2819,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              0.2052,
+              0.2295,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              0.1231,
+              0.2106,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ],
+            "at": [
+              0.0739,
+              0.2038,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "unit_circle": {
+      "chapter": "waves",
+      "label": "unit circle",
+      "from": [
+        "point"
+      ],
+      "expr": "(point) * 16 circle = unit_circle \u2014 round a circle, the height of each point is the sine of its angle",
+      "build": {
+        "op": "transform",
+        "of": {
+          "op": "times",
+          "of": {
+            "t": "point"
+          },
+          "n": 16,
+          "layout": "circle",
+          "radius": 0.5
+        },
+        "at": [
+          0,
+          0.6,
+          0
+        ]
+      }
+    },
+    "sine_graph": {
+      "chapter": "waves",
+      "label": "sine graph",
+      "from": [
+        "point",
+        "accumulation"
+      ],
+      "expr": "array(point, 25, profile sin, rise 1) = sine_graph \u2014 the heights laid out along time",
+      "build": {
+        "op": "transform",
+        "of": {
+          "op": "array",
+          "of": {
+            "t": "point"
+          },
+          "n": 25,
+          "step": 0.08,
+          "dims": 1,
+          "profile": "sin",
+          "rise": 1.0
+        },
+        "rot": [
+          0,
+          90,
+          0
+        ],
+        "at": [
+          0.96,
+          0.1,
+          0
+        ]
+      }
+    },
+    "circle_to_graph": {
+      "chapter": "waves",
+      "label": "the coordinate that draws the graph",
+      "from": [
+        "unit_circle",
+        "sine_graph"
+      ],
+      "expr": "unit_circle + sine_graph = circle_to_graph \u2014 the height of a point going round, drawn out along time",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "t": "unit_circle"
+            },
+            "at": [
+              -0.6,
+              0,
+              0
+            ]
+          },
+          {
+            "t": "sine_graph"
+          }
+        ]
+      }
+    },
+    "standing_wave": {
+      "chapter": "waves",
+      "label": "standing wave",
+      "from": [
+        "sphere_collider",
+        "sine_surface"
+      ],
+      "expr": "by(array(ball, 15, 1d), sine_field) = standing_wave \u2014 every ball returns; the shape between them stands still",
+      "build": {
+        "op": "engine",
+        "kind": "sine_field",
+        "amplitude": 0.12,
+        "period": 1.6,
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.35,
+              0.35,
+              0.35
+            ]
+          },
+          "n": 15,
+          "step": 0.12,
+          "dims": 1,
+          "y": 0.4
+        }
+      }
+    },
+    "beat_graph": {
+      "chapter": "waves",
+      "label": "beat",
+      "from": [
+        "sine_graph"
+      ],
+      "expr": "array(point, 61, profile beat) = beat_graph \u2014 two fast sines summed: a slow envelope neither of them has",
+      "build": {
+        "op": "transform",
+        "of": {
+          "op": "array",
+          "of": {
+            "t": "point"
+          },
+          "n": 61,
+          "step": 0.035,
+          "dims": 1,
+          "profile": "beat",
+          "rise": 0.8
+        },
+        "rot": [
+          0,
+          90,
+          0
+        ],
+        "at": [
+          1.05,
+          0.1,
+          0
+        ]
+      }
+    },
+    "ten_print": {
+      "chapter": "randomness",
+      "label": "10 PRINT",
+      "from": [
+        "line",
+        "grid"
+      ],
+      "expr": "random(array(line, 8), angles 45/135) = ten_print \u2014 one of two diagonals per cell: local choices become a maze",
+      "build": {
+        "op": "engine",
+        "kind": "random",
+        "term": "line",
+        "seed": 10,
+        "jitter": 0,
+        "lift": 0,
+        "vary_scale": false,
+        "angles": [
+          45,
+          135
+        ],
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "line"
+            },
+            "scale": [
+              0.42,
+              1,
+              1
+            ]
+          },
+          "n": 8,
+          "step": 0.3,
+          "dims": 2
+        }
+      }
+    },
+    "random_sizes": {
+      "chapter": "randomness",
+      "label": "random sizes",
+      "from": [
+        "box",
+        "random_cubes"
+      ],
+      "expr": "random(array(box, 6), sizes) = random_sizes \u2014 each size thrown on its own: neighbours know nothing of each other",
+      "build": {
+        "op": "engine",
+        "kind": "random",
+        "term": "box",
+        "seed": 3,
+        "jitter": 0,
+        "lift": 0,
+        "turn": false,
+        "of": {
+          "op": "array",
+          "of": {
+            "t": "box"
+          },
+          "n": 6,
+          "step": 0.55,
+          "dims": 2
+        }
+      }
+    },
+    "gaussian_bins": {
+      "chapter": "randomness",
+      "label": "gaussian bins",
+      "from": [
+        "accumulation"
+      ],
+      "expr": "array(box, 11, profile gauss) = gaussian_bins \u2014 sampling, clipping and binning give a record its shape",
+      "build": {
+        "op": "array",
+        "of": {
+          "t": "box"
+        },
+        "n": 11,
+        "step": 0.52,
+        "dims": 1,
+        "profile": "gauss",
+        "palette": [
+          "277da1"
+        ]
+      }
+    },
+    "noise_heights": {
+      "chapter": "noise",
+      "label": "noise heights",
+      "from": [
+        "sphere_collider",
+        "noise_space"
+      ],
+      "expr": "by(array(ball, 8), noise) = noise_heights \u2014 neighbours share their heights: a field, not a throw of dice",
+      "build": {
+        "op": "engine",
+        "kind": "noise",
+        "amplitude": 0.35,
+        "seed": 2,
+        "of": {
+          "op": "array",
+          "of": {
+            "op": "transform",
+            "of": {
+              "t": "sphere_collider"
+            },
+            "scale": [
+              0.3,
+              0.3,
+              0.3
+            ]
+          },
+          "n": 8,
+          "step": 0.2,
+          "dims": 2,
+          "y": 0.3
+        }
+      }
+    },
+    "layered_noise": {
+      "chapter": "noise",
+      "label": "layered noise",
+      "from": [
+        "noise_heights"
+      ],
+      "expr": "noise(noise(array(ball, 10), fine), coarse) = layered_noise \u2014 two octaves summed: the room wears the sum",
+      "build": {
+        "op": "engine",
+        "kind": "noise",
+        "amplitude": 0.3,
+        "seed": 2,
+        "frequency": 0.6,
+        "of": {
+          "op": "engine",
+          "kind": "noise",
+          "amplitude": 0.07,
+          "seed": 11,
+          "frequency": 3.0,
+          "of": {
+            "op": "array",
+            "of": {
+              "op": "transform",
+              "of": {
+                "t": "sphere_collider"
+              },
+              "scale": [
+                0.25,
+                0.25,
+                0.25
+              ]
+            },
+            "n": 10,
+            "step": 0.16,
+            "dims": 2,
+            "y": 0.3
+          }
+        }
+      }
+    },
+    "sierpinski": {
+      "chapter": "fractals",
+      "label": "Sierpi\u0144ski triangle",
+      "from": [
+        "triangle_face"
+      ],
+      "expr": "recurse(triangle, 3 copies at half size, depth 5) = sierpinski \u2014 each generation keeps three corners and removes the middle",
+      "build": {
+        "op": "recurse",
+        "of": {
+          "p": "mesh",
+          "shape": "triangle",
+          "size": [
+            1.6
+          ],
+          "color": "7a4b8a"
+        },
+        "depth": 5,
+        "rules": [
+          {
+            "at": [
+              0.46188,
+              0,
+              0.0
+            ],
+            "scale": 0.5
+          },
+          {
+            "at": [
+              -0.23094,
+              0,
+              0.4
+            ],
+            "scale": 0.5
+          },
+          {
+            "at": [
+              -0.23094,
+              0,
+              -0.4
+            ],
+            "scale": 0.5
+          }
+        ]
+      }
+    },
+    "cantor_set": {
+      "chapter": "fractals",
+      "label": "Cantor set",
+      "from": [
+        "box"
+      ],
+      "expr": "recurse(bar, two outer thirds, depth 5, every generation) = cantor_set \u2014 divided without end: no length left, infinitely many points",
+      "build": {
+        "op": "recurse",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  1.6,
+                  0.05,
+                  0.1
+                ],
+                "color": "2b1d14"
+              },
+              "at": [
+                0,
+                0.95,
+                0
+              ]
+            }
+          ]
+        },
+        "depth": 5,
+        "stack": [
+          0,
+          -0.15,
+          0
+        ],
+        "rules": [
+          {
+            "at": [
+              -0.53333,
+              0,
+              0
+            ],
+            "scale": [
+              0.33333,
+              1,
+              1
+            ]
+          },
+          {
+            "at": [
+              0.53333,
+              0,
+              0
+            ],
+            "scale": [
+              0.33333,
+              1,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "fractal_tree": {
+      "chapter": "fractals",
+      "label": "fractal tree",
+      "from": [
+        "box"
+      ],
+      "expr": "recurse(trunk, keep the trunk, 2 turned copies at 0.68, depth 7) = fractal_tree \u2014 a trunk carrying two smaller trees",
+      "build": {
+        "op": "recurse",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "op": "transform",
+              "of": {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.06,
+                  0.5,
+                  0.06
+                ],
+                "color": "5a4a3a"
+              },
+              "at": [
+                0,
+                0.25,
+                0
+              ]
+            }
+          ]
+        },
+        "keep": "seed",
+        "depth": 7,
+        "rules": [
+          {
+            "at": [
+              0,
+              0.5,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              28
+            ],
+            "scale": 0.68
+          },
+          {
+            "at": [
+              0,
+              0.5,
+              0
+            ],
+            "rot": [
+              0,
+              0,
+              -28
+            ],
+            "scale": 0.68
+          }
+        ]
+      }
+    },
+    "sierpinski_carpet": {
+      "chapter": "fractals",
+      "label": "Sierpi\u0144ski carpet",
+      "from": [
+        "box"
+      ],
+      "expr": "recurse(slab, 8 of 9 cells, depth 3) = sierpinski_carpet \u2014 removal at a fixed outer size",
+      "build": {
+        "op": "recurse",
+        "of": {
+          "p": "mesh",
+          "shape": "box",
+          "size": [
+            1.8,
+            0.05,
+            1.8
+          ],
+          "color": "277da1",
+          "at": [
+            0,
+            0.03,
+            0
+          ]
+        },
+        "depth": 3,
+        "rules": [
+          {
+            "at": [
+              -0.6,
+              0,
+              -0.6
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              -0.6,
+              0,
+              0
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              -0.6,
+              0,
+              0.6
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              0,
+              0,
+              -0.6
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              0,
+              0,
+              0.6
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              0.6,
+              0,
+              -0.6
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              0.6,
+              0,
+              0
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          },
+          {
+            "at": [
+              0.6,
+              0,
+              0.6
+            ],
+            "scale": [
+              0.33333,
+              1,
+              0.33333
+            ]
+          }
+        ]
+      }
+    },
+    "phyllotaxis": {
+      "chapter": "fractals",
+      "label": "phyllotaxis",
+      "from": [
+        "point"
+      ],
+      "expr": "(point) * 160 phyllotaxis = phyllotaxis \u2014 each turned 137.5\u00b0 from the last: no two in line, the spirals count Fibonacci",
+      "build": {
+        "op": "times",
+        "of": {
+          "p": "mesh",
+          "shape": "sphere",
+          "size": [
+            0.035
+          ],
+          "color": "b8862b",
+          "at": [
+            0,
+            0.04,
+            0
+          ]
+        },
+        "n": 160,
+        "layout": "phyllotaxis",
+        "gap": 0.065
+      }
+    },
+    "lsystem_plant": {
+      "chapter": "lsystems",
+      "label": "L-system plant",
+      "from": [
+        "line"
+      ],
+      "expr": "rewrite(X: X \u2192 F+[[X]-X]-F[-FX]+X; F \u2192 FF, 5, 25\u00b0) = lsystem_plant \u2014 a sentence becomes a plant",
+      "build": {
+        "op": "rewrite",
+        "axiom": "X",
+        "rules": {
+          "X": "F+[[X]-X]-F[-FX]+X",
+          "F": "FF"
+        },
+        "depth": 5,
+        "angle": 25,
+        "step": 0.012,
+        "heading": 80,
+        "of": {
+          "p": "mesh",
+          "shape": "box",
+          "size": [
+            1,
+            0.01,
+            0.01
+          ],
+          "color": "3d7a3f"
+        }
+      }
+    },
+    "dragon_curve": {
+      "chapter": "lsystems",
+      "label": "dragon curve",
+      "from": [
+        "line"
+      ],
+      "expr": "rewrite(FX: X \u2192 X+YF+; Y \u2192 -FX-Y, 10, 90\u00b0) = dragon_curve \u2014 a folded strip: the same two rules, never crossing",
+      "build": {
+        "op": "transform",
+        "of": {
+          "op": "rewrite",
+          "axiom": "FX",
+          "rules": {
+            "X": "X+YF+",
+            "Y": "-FX-Y"
+          },
+          "depth": 10,
+          "angle": 90,
+          "step": 0.04,
+          "heading": 0
+        },
+        "at": [
+          0,
+          0.45,
+          0
+        ]
+      }
+    },
+    "sierpinski_arrowhead": {
+      "chapter": "lsystems",
+      "label": "Sierpi\u0144ski arrowhead",
+      "from": [
+        "line",
+        "sierpinski"
+      ],
+      "expr": "rewrite(F: F \u2192 G-F-G; G \u2192 F+G+F, 6, 60\u00b0) = sierpinski_arrowhead \u2014 the same triangle as the recursion, drawn as one line",
+      "build": {
+        "op": "rewrite",
+        "axiom": "F",
+        "rules": {
+          "F": "G-F-G",
+          "G": "F+G+F"
+        },
+        "depth": 6,
+        "angle": 60,
+        "step": 0.025,
+        "heading": 0
+      }
+    },
+    "koch_curve": {
+      "chapter": "lsystems",
+      "label": "Koch curve",
+      "from": [
+        "line"
+      ],
+      "expr": "rewrite(F: F \u2192 F+F--F+F, 4, 60\u00b0) = koch_curve \u2014 every segment replaced by four: longer without end, never wider",
+      "build": {
+        "op": "rewrite",
+        "axiom": "F",
+        "rules": {
+          "F": "F+F--F+F"
+        },
+        "depth": 4,
+        "angle": 60,
+        "step": 0.022,
+        "heading": 0
       }
     }
   },

@@ -61,9 +61,16 @@ def to_text(e: dict) -> str:
     if op == "assemblage":
         return "assemblage(" + ", ".join(to_text(p.get("of", p)) for p in e.get("parts", [])) + ")"
     dress = (f", palette {'/'.join(str(c)[:6] for c in e['palette'])}{' by ' + e['palette_by'] if e.get('palette_by') else ''}" if e.get("palette") else "") \
-        + (f", profile {e['profile']}" if e.get("profile") else "")
+        + (f", profile {e['profile']}" if e.get("profile") else "") + (f" rise {e['rise']}" if e.get("rise") is not None else "")
     if op == "times":
-        return f"({of()}) * {e.get('n', 1)}{dress}"
+        lay = f" {e['layout']}" if e.get("layout") in ("circle", "phyllotaxis") else ""
+        return f"({of()}) * {e.get('n', 1)}{lay}{dress}"
+    if op == "recurse":
+        return (f"recurse({of()}, {len(e.get('rules', []))} copies, depth {e.get('depth', 3)}"
+                f"{', keep seed' if e.get('keep') == 'seed' else ''}{', every generation' if e.get('stack') else ''})")
+    if op == "rewrite":
+        rules = "; ".join(f"{k} → {v}" for k, v in (e.get("rules") or {}).items())
+        return f"rewrite({e.get('axiom', 'F')}: {rules}, {e.get('depth', 3)}, {e.get('angle', 25)}°)"
     if op == "array":
         return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''}{dress})"
     if op == "exhibit":
@@ -82,6 +89,8 @@ def to_text(e: dict) -> str:
     if op == "engine" and e.get("kind") == "tween":   # the transform's time domain
         bits = [f"{k} {','.join(str(v) for v in e[k]) if isinstance(e[k], list) else e[k]}" for k in ("at", "rot", "scale") if e.get(k) not in (None, 1)]
         return f"tween({of()}, {' '.join(bits)}, every {e.get('period', 4)} s)"
+    if op == "engine" and e.get("kind") == "random" and e.get("angles"):   # a choice among a few turns
+        return f"by({of()}, random among {'/'.join(str(a) for a in e['angles'])}°)"
     if op == "engine":
         return f"{'by' if e.get('kind') in BY_KINDS else 'step'}({of()}, {e.get('kind')})"
     if op == "sort":

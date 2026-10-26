@@ -4522,6 +4522,943 @@
     ],
     "expr": "array(box, 9, 1d, profile parabola) = parabola_arch — up then down: net change zero, total travel not"
    }
+  },
+  "mod_arrow": {
+   "lookup_name": "mod_arrow",
+   "name": "modular · arrow",
+   "description": "arrow = line + cone = arrow — a displacement: a length and a direction. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "arrow"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "forces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "arrow",
+    "chapter": "forces",
+    "from": [
+     "line"
+    ],
+    "expr": "line + cone = arrow — a displacement: a length and a direction"
+   }
+  },
+  "mod_vector_sum": {
+   "lookup_name": "mod_vector_sum",
+   "name": "modular · vector sum",
+   "description": "vector sum = arrow + transform(arrow, at 1, rot 60) + red(arrow, rot 30, scale √3) = vector_sum — head to tail, and the one arrow that does both. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "vector_sum"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "forces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "vector_sum",
+    "chapter": "forces",
+    "from": [
+     "arrow"
+    ],
+    "expr": "arrow + transform(arrow, at 1, rot 60) + red(arrow, rot 30, scale √3) = vector_sum — head to tail, and the one arrow that does both"
+   }
+  },
+  "mod_launch_arc": {
+   "lookup_name": "mod_launch_arc",
+   "name": "modular · launch",
+   "description": "launch = array(ball, 11, profile parabola, rise 0.9) = launch_arc — equal time steps of a flight under constant acceleration. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "launch_arc"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "forces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "launch_arc",
+    "chapter": "forces",
+    "from": [
+     "sphere_collider",
+     "parabola_arch"
+    ],
+    "expr": "array(ball, 11, profile parabola, rise 0.9) = launch_arc — equal time steps of a flight under constant acceleration"
+   }
+  },
+  "mod_spring_oscillator": {
+   "lookup_name": "mod_spring_oscillator",
+   "name": "modular · spring oscillator",
+   "description": "spring oscillator = step(connect(point + ball, spring), physics) = spring_oscillator — a restoring force: it overshoots, and damping takes the overshoot away. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "spring_oscillator"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "forces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "spring_oscillator",
+    "chapter": "forces",
+    "from": [
+     "point",
+     "sphere_collider",
+     "pendulum"
+    ],
+    "expr": "step(connect(point + ball, spring), physics) = spring_oscillator — a restoring force: it overshoots, and damping takes the overshoot away"
+   }
+  },
+  "mod_catenary": {
+   "lookup_name": "mod_catenary",
+   "name": "modular · catenary",
+   "description": "catenary = step(connect(point + ball × 7 + point, ropes), physics) = catenary — drafted as a parabola, settled by physics into the hanging curve. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "catenary"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "formfinding"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "catenary",
+    "chapter": "formfinding",
+    "from": [
+     "bead_chain"
+    ],
+    "expr": "step(connect(point + ball × 7 + point, ropes), physics) = catenary — drafted as a parabola, settled by physics into the hanging curve"
+   }
+  },
+  "mod_gradient_descent": {
+   "lookup_name": "mod_gradient_descent",
+   "name": "modular · gradient descent",
+   "description": "gradient descent = point × 13 on a bowl + ball × 6 = gradient_descent — each step goes downhill by a part of the slope; the steps shrink as the slope does. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "gradient_descent"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "formfinding"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "gradient_descent",
+    "chapter": "formfinding",
+    "from": [
+     "point",
+     "sphere_collider",
+     "parabola_arch"
+    ],
+    "expr": "point × 13 on a bowl + ball × 6 = gradient_descent — each step goes downhill by a part of the slope; the steps shrink as the slope does"
+   }
+  },
+  "mod_unit_circle": {
+   "lookup_name": "mod_unit_circle",
+   "name": "modular · unit circle",
+   "description": "unit circle = (point) * 16 circle = unit_circle — round a circle, the height of each point is the sine of its angle. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "unit_circle"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "waves"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "unit_circle",
+    "chapter": "waves",
+    "from": [
+     "point"
+    ],
+    "expr": "(point) * 16 circle = unit_circle — round a circle, the height of each point is the sine of its angle"
+   }
+  },
+  "mod_sine_graph": {
+   "lookup_name": "mod_sine_graph",
+   "name": "modular · sine graph",
+   "description": "sine graph = array(point, 25, profile sin, rise 1) = sine_graph — the heights laid out along time. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "sine_graph"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "waves"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "sine_graph",
+    "chapter": "waves",
+    "from": [
+     "point",
+     "accumulation"
+    ],
+    "expr": "array(point, 25, profile sin, rise 1) = sine_graph — the heights laid out along time"
+   }
+  },
+  "mod_circle_to_graph": {
+   "lookup_name": "mod_circle_to_graph",
+   "name": "modular · the coordinate that draws the graph",
+   "description": "the coordinate that draws the graph = unit_circle + sine_graph = circle_to_graph — the height of a point going round, drawn out along time. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "circle_to_graph"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "waves"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "circle_to_graph",
+    "chapter": "waves",
+    "from": [
+     "unit_circle",
+     "sine_graph"
+    ],
+    "expr": "unit_circle + sine_graph = circle_to_graph — the height of a point going round, drawn out along time"
+   }
+  },
+  "mod_standing_wave": {
+   "lookup_name": "mod_standing_wave",
+   "name": "modular · standing wave",
+   "description": "standing wave = by(array(ball, 15, 1d), sine_field) = standing_wave — every ball returns; the shape between them stands still. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "standing_wave"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "waves"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "standing_wave",
+    "chapter": "waves",
+    "from": [
+     "sphere_collider",
+     "sine_surface"
+    ],
+    "expr": "by(array(ball, 15, 1d), sine_field) = standing_wave — every ball returns; the shape between them stands still"
+   }
+  },
+  "mod_beat_graph": {
+   "lookup_name": "mod_beat_graph",
+   "name": "modular · beat",
+   "description": "beat = array(point, 61, profile beat) = beat_graph — two fast sines summed: a slow envelope neither of them has. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "beat_graph"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "waves"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "beat_graph",
+    "chapter": "waves",
+    "from": [
+     "sine_graph"
+    ],
+    "expr": "array(point, 61, profile beat) = beat_graph — two fast sines summed: a slow envelope neither of them has"
+   }
+  },
+  "mod_ten_print": {
+   "lookup_name": "mod_ten_print",
+   "name": "modular · 10 PRINT",
+   "description": "10 PRINT = random(array(line, 8), angles 45/135) = ten_print — one of two diagonals per cell: local choices become a maze. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "ten_print"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "randomness"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "ten_print",
+    "chapter": "randomness",
+    "from": [
+     "line",
+     "grid"
+    ],
+    "expr": "random(array(line, 8), angles 45/135) = ten_print — one of two diagonals per cell: local choices become a maze"
+   }
+  },
+  "mod_random_sizes": {
+   "lookup_name": "mod_random_sizes",
+   "name": "modular · random sizes",
+   "description": "random sizes = random(array(box, 6), sizes) = random_sizes — each size thrown on its own: neighbours know nothing of each other. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "random_sizes"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "randomness"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "random_sizes",
+    "chapter": "randomness",
+    "from": [
+     "box",
+     "random_cubes"
+    ],
+    "expr": "random(array(box, 6), sizes) = random_sizes — each size thrown on its own: neighbours know nothing of each other"
+   }
+  },
+  "mod_gaussian_bins": {
+   "lookup_name": "mod_gaussian_bins",
+   "name": "modular · gaussian bins",
+   "description": "gaussian bins = array(box, 11, profile gauss) = gaussian_bins — sampling, clipping and binning give a record its shape. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "gaussian_bins"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "randomness"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "gaussian_bins",
+    "chapter": "randomness",
+    "from": [
+     "accumulation"
+    ],
+    "expr": "array(box, 11, profile gauss) = gaussian_bins — sampling, clipping and binning give a record its shape"
+   }
+  },
+  "mod_noise_heights": {
+   "lookup_name": "mod_noise_heights",
+   "name": "modular · noise heights",
+   "description": "noise heights = by(array(ball, 8), noise) = noise_heights — neighbours share their heights: a field, not a throw of dice. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "noise_heights"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "noise"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "noise_heights",
+    "chapter": "noise",
+    "from": [
+     "sphere_collider",
+     "noise_space"
+    ],
+    "expr": "by(array(ball, 8), noise) = noise_heights — neighbours share their heights: a field, not a throw of dice"
+   }
+  },
+  "mod_layered_noise": {
+   "lookup_name": "mod_layered_noise",
+   "name": "modular · layered noise",
+   "description": "layered noise = noise(noise(array(ball, 10), fine), coarse) = layered_noise — two octaves summed: the room wears the sum. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "layered_noise"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "noise"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "layered_noise",
+    "chapter": "noise",
+    "from": [
+     "noise_heights"
+    ],
+    "expr": "noise(noise(array(ball, 10), fine), coarse) = layered_noise — two octaves summed: the room wears the sum"
+   }
+  },
+  "mod_sierpinski": {
+   "lookup_name": "mod_sierpinski",
+   "name": "modular · Sierpiński triangle",
+   "description": "Sierpiński triangle = recurse(triangle, 3 copies at half size, depth 5) = sierpinski — each generation keeps three corners and removes the middle. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "sierpinski"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "sierpinski",
+    "chapter": "fractals",
+    "from": [
+     "triangle_face"
+    ],
+    "expr": "recurse(triangle, 3 copies at half size, depth 5) = sierpinski — each generation keeps three corners and removes the middle"
+   }
+  },
+  "mod_cantor_set": {
+   "lookup_name": "mod_cantor_set",
+   "name": "modular · Cantor set",
+   "description": "Cantor set = recurse(bar, two outer thirds, depth 5, every generation) = cantor_set — divided without end: no length left, infinitely many points. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "cantor_set"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "cantor_set",
+    "chapter": "fractals",
+    "from": [
+     "box"
+    ],
+    "expr": "recurse(bar, two outer thirds, depth 5, every generation) = cantor_set — divided without end: no length left, infinitely many points"
+   }
+  },
+  "mod_fractal_tree": {
+   "lookup_name": "mod_fractal_tree",
+   "name": "modular · fractal tree",
+   "description": "fractal tree = recurse(trunk, keep the trunk, 2 turned copies at 0.68, depth 7) = fractal_tree — a trunk carrying two smaller trees. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "fractal_tree"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "fractal_tree",
+    "chapter": "fractals",
+    "from": [
+     "box"
+    ],
+    "expr": "recurse(trunk, keep the trunk, 2 turned copies at 0.68, depth 7) = fractal_tree — a trunk carrying two smaller trees"
+   }
+  },
+  "mod_sierpinski_carpet": {
+   "lookup_name": "mod_sierpinski_carpet",
+   "name": "modular · Sierpiński carpet",
+   "description": "Sierpiński carpet = recurse(slab, 8 of 9 cells, depth 3) = sierpinski_carpet — removal at a fixed outer size. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "sierpinski_carpet"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "sierpinski_carpet",
+    "chapter": "fractals",
+    "from": [
+     "box"
+    ],
+    "expr": "recurse(slab, 8 of 9 cells, depth 3) = sierpinski_carpet — removal at a fixed outer size"
+   }
+  },
+  "mod_phyllotaxis": {
+   "lookup_name": "mod_phyllotaxis",
+   "name": "modular · phyllotaxis",
+   "description": "phyllotaxis = (point) * 160 phyllotaxis = phyllotaxis — each turned 137.5° from the last: no two in line, the spirals count Fibonacci. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "phyllotaxis"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "phyllotaxis",
+    "chapter": "fractals",
+    "from": [
+     "point"
+    ],
+    "expr": "(point) * 160 phyllotaxis = phyllotaxis — each turned 137.5° from the last: no two in line, the spirals count Fibonacci"
+   }
+  },
+  "mod_lsystem_plant": {
+   "lookup_name": "mod_lsystem_plant",
+   "name": "modular · L-system plant",
+   "description": "L-system plant = rewrite(X: X → F+[[X]-X]-F[-FX]+X; F → FF, 5, 25°) = lsystem_plant — a sentence becomes a plant. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "lsystem_plant"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "lsystems"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lsystem_plant",
+    "chapter": "lsystems",
+    "from": [
+     "line"
+    ],
+    "expr": "rewrite(X: X → F+[[X]-X]-F[-FX]+X; F → FF, 5, 25°) = lsystem_plant — a sentence becomes a plant"
+   }
+  },
+  "mod_dragon_curve": {
+   "lookup_name": "mod_dragon_curve",
+   "name": "modular · dragon curve",
+   "description": "dragon curve = rewrite(FX: X → X+YF+; Y → -FX-Y, 10, 90°) = dragon_curve — a folded strip: the same two rules, never crossing. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "dragon_curve"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "lsystems"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "dragon_curve",
+    "chapter": "lsystems",
+    "from": [
+     "line"
+    ],
+    "expr": "rewrite(FX: X → X+YF+; Y → -FX-Y, 10, 90°) = dragon_curve — a folded strip: the same two rules, never crossing"
+   }
+  },
+  "mod_sierpinski_arrowhead": {
+   "lookup_name": "mod_sierpinski_arrowhead",
+   "name": "modular · Sierpiński arrowhead",
+   "description": "Sierpiński arrowhead = rewrite(F: F → G-F-G; G → F+G+F, 6, 60°) = sierpinski_arrowhead — the same triangle as the recursion, drawn as one line. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "sierpinski_arrowhead"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "lsystems"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "sierpinski_arrowhead",
+    "chapter": "lsystems",
+    "from": [
+     "line",
+     "sierpinski"
+    ],
+    "expr": "rewrite(F: F → G-F-G; G → F+G+F, 6, 60°) = sierpinski_arrowhead — the same triangle as the recursion, drawn as one line"
+   }
+  },
+  "mod_koch_curve": {
+   "lookup_name": "mod_koch_curve",
+   "name": "modular · Koch curve",
+   "description": "Koch curve = rewrite(F: F → F+F--F+F, 4, 60°) = koch_curve — every segment replaced by four: longer without end, never wider. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "koch_curve"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "lsystems"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "koch_curve",
+    "chapter": "lsystems",
+    "from": [
+     "line"
+    ],
+    "expr": "rewrite(F: F → F+F--F+F, 4, 60°) = koch_curve — every segment replaced by four: longer without end, never wider"
+   }
   }
  }
 }

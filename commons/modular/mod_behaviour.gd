@@ -74,9 +74,10 @@ func _ready() -> void:
 		"noise":
 			var amp: float = float(params.get("amplitude", 0.2))
 			var seed_v: int = int(params.get("seed", 1))
+			var fr: float = float(params.get("frequency", 1.0))   # an octave: the same noise, read finer or coarser
 			for n in _terms(root, "sphere_collider"):
 				var p: Vector3 = n.position
-				n.position.y += amp * _noise2(p.x * 3.1 + seed_v, p.z * 2.7 - seed_v)
+				n.position.y += amp * _noise2(p.x * 3.1 * fr + seed_v, p.z * 2.7 * fr - seed_v)
 		"random":
 			var rng := RandomNumberGenerator.new()
 			rng.seed = int(params.get("seed", 1))
@@ -87,7 +88,10 @@ func _ready() -> void:
 			# which term is jittered: cube by default (random_cubes), any term by name (a field of cones)
 			for n in _terms(root, str(params.get("term", "cube"))):
 				n.position += Vector3(rng.randf_range(-jitter, jitter), rng.randf_range(0, lift), rng.randf_range(-jitter, jitter))
-				if turn:
+				var angles: Array = params.get("angles", [])
+				if not angles.is_empty():
+					n.rotation.y = deg_to_rad(float(angles[rng.randi() % angles.size()]))   # one of a few turns, not any turn
+				elif turn:
 					n.rotation.y = rng.randf_range(0, TAU)
 				if vary:
 					n.scale *= rng.randf_range(0.6, 1.2)
@@ -228,14 +232,14 @@ func _tie_joints(root: Node) -> void:
 					var g := Generic6DOFJoint3D.new()
 					node.add_child(g)
 					g.global_position = pa
-					var rest: Vector3 = pb - pa
-					var comps := {"x": rest.x, "y": rest.y, "z": rest.z}
+					# the equilibrium is measured from where the joint starts, so 0 is "as they stand now"; giving it
+					# pb - pa counted the offset twice and swung the ball through the floor (spring_oscillator, 26 Oct)
 					for ax in ["x", "y", "z"]:
 						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_LIMIT, false)
 						g.call("set_flag_" + ax, Generic6DOFJoint3D.FLAG_ENABLE_LINEAR_SPRING, true)
 						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_STIFFNESS, float(t[3]) if (t as Array).size() > 3 else 40.0)
 						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_DAMPING, float(t[4]) if (t as Array).size() > 4 else 4.0)
-						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT, float(comps[ax]))
+						g.call("set_param_" + ax, Generic6DOFJoint3D.PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT, 0.0)
 					joint = g
 				_:
 					# rope: a taut rope — the far end swings about the near end at the rope's length

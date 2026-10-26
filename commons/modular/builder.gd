@@ -11,7 +11,12 @@ extends RefCounted
 ##   {"op": "array",      "of": expr, "n": k, "step": m, "dims": 2|3, "y": lift}
 ##                        times and array also take "palette": [hex…] with "palette_by": index|checker|row|
 ##                        column|layer (a copy's colour follows its address, not its place) and "profile":
-##                        ramp|sin|parabola (a copy's height follows a function of its index)
+##                        ramp|sin|parabola|gauss|beat (a copy's height follows a function of its index; with
+##                        "rise": m the function MOVES the copy up instead — a sampled path)
+##   {"op": "recurse",    "of": seed, "rules": [{at, rot, scale}…], "depth": d, "keep": "seed", "stack": [x,y,z]}
+##                        a thing made of smaller copies of itself (an iterated function system)
+##   {"op": "rewrite",    "axiom": s, "rules": {sym: s}, "depth": d, "angle": deg, "step": m, "of": segment}
+##                        an L-system: the sentence rewritten d times, then read by a turtle
 ##   {"op": "assemblage", "parts": [{"of": expr, "at": [x,y,z], "rot": [°,°,°], "scale": [..]}]}
 ##   {"op": "engine",     "of": expr, "kind": physics|trace|hand|sine|sine_field|noise|random|logic}
 ##   {"op": "transform",  "of": expr, "at", "rot", "scale"}
@@ -82,6 +87,10 @@ static func build(expr: Dictionary, terms: Dictionary, depth: int = 0) -> Node3D
 			return _times(expr, terms, depth)
 		"array":
 			return _array(expr, terms, depth)
+		"recurse":
+			return _recurse(expr, terms, depth)
+		"rewrite":
+			return _rewrite(expr, terms, depth)
 		"assemblage":
 			var root := Node3D.new()
 			root.name = "assemblage"
@@ -219,6 +228,15 @@ static func _times(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 				c.scale.x = d.length()
 			"mirror":
 				c.rotation.y = PI * i
+			"circle":
+				# round a circle in the vertical plane: the height of each is the sine of its angle
+				var rad: float = float(expr.get("radius", 0.5))
+				c.position = Vector3(rad * cos(TAU * i / n), rad * sin(TAU * i / n), 0)
+			"phyllotaxis":
+				# the golden angle: each turned 137.5 degrees from the last, pushed out by the root of its count
+				var a: float = deg_to_rad(137.508) * i
+				var rr: float = gap * sqrt(float(i))
+				c.position = Vector3(rr * cos(a), 0, rr * sin(a))
 			_:
 				c.position = Vector3(i * gap, 0, 0)
 		_dress(c, expr, i, Vector3i(0, 0, i), float(i) / maxf(1.0, n - 1.0))
@@ -277,7 +295,106 @@ static func _dress(c: Node3D, expr: Dictionary, lin: int, cell: Vector3i, u: flo
 				h = 0.5 + 0.5 * sin(TAU * u)
 			"parabola":
 				h = 1.0 - pow(2.0 * u - 1.0, 2.0)
-		c.scale.y *= maxf(0.08, h)
+			"gauss":
+				h = exp(-0.5 * pow((u - 0.5) / 0.17, 2.0))
+			"beat":
+				h = 0.5 + 0.25 * (sin(TAU * 7.0 * u) + sin(TAU * 8.0 * u))
+		if expr.has("rise"):
+			c.position.y += float(expr.get("rise", 0.0)) * h   # the function moves the copy: a sampled path
+		else:
+			c.scale.y *= maxf(0.08, h)
+
+
+## recurse — a thing made of smaller copies of itself (Palle, 26 Oct: "and the recursion"). Generation
+## n+1 is the rules' transforms applied to generation n: an iterated function system. "keep": "seed"
+## puts a fresh seed in every generation (a tree carries its trunk); "stack": [x, y, z] shows every
+## generation, each offset (predict one before seeing the next). Depth is capped so the copies of the
+## seed stay under 3000.
+static func _recurse(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
+	var rules: Array = expr.get("rules", [])
+	var keep_seed: bool = str(expr.get("keep", "")) == "seed"
+	var levels: int = int(expr.get("depth", 3))
+	var per: int = maxi(1, rules.size())
+	while levels > 0 and pow(per, levels) > 3000:
+		levels -= 1
+	var gen: Node3D = build(expr.get("of", {}), terms, depth)
+	gen.set_meta("seed", true)
+	var shown: Array = [gen]
+	for d in range(levels):
+		var g := Node3D.new()
+		g.name = "generation_%d" % (d + 1)
+		if keep_seed:
+			var s: Node3D = build(expr.get("of", {}), terms, depth)
+			s.set_meta("seed", true)
+			g.add_child(s)
+		for r in rules:
+			var c: Node3D = gen.duplicate()
+			_place(c, r)
+			g.add_child(c)
+		gen = g
+		shown.append(gen)
+	var root := Node3D.new()
+	root.name = "recurse"
+	var stack: Variant = expr.get("stack", null)
+	if stack is Array and (stack as Array).size() >= 3:
+		var off := Vector3(float(stack[0]), float(stack[1]), float(stack[2]))
+		for i in shown.size():
+			(shown[i] as Node3D).position += off * i
+			root.add_child(shown[i])
+	else:
+		root.add_child(gen)
+		for i in shown.size() - 1:
+			(shown[i] as Node3D).free()   # the earlier generations live on only as copies inside the last
+	return root
+
+
+## rewrite — an L-system: the axiom rewritten by its rules "depth" times, then read by a turtle in the
+## vertical plane: F and G draw a segment and move, f moves, + and - turn by "angle", [ and ] keep a
+## place and return to it. Each segment is a copy of "of" (a unit stroke along x by default) scaled to
+## "step". Capped at 4000 segments.
+static func _rewrite(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
+	var s: String = str(expr.get("axiom", "F"))
+	var rules: Dictionary = expr.get("rules", {})
+	for i in range(int(expr.get("depth", 3))):
+		var out := ""
+		for ch in s:
+			out += str(rules.get(ch, ch))
+		if out.count("F") + out.count("G") > 4000:
+			break
+		s = out
+	var angle: float = deg_to_rad(float(expr.get("angle", 25.0)))
+	var step: float = float(expr.get("step", 0.1))
+	var head: float = deg_to_rad(float(expr.get("heading", 90.0)))
+	var seg: Dictionary = expr.get("of", {"p": "mesh", "shape": "box", "size": [1.0, 0.012, 0.012], "color": "2b1d14"})
+	var root := Node3D.new()
+	root.name = "rewrite"
+	root.set_meta("sentence", s.length())
+	var pos := Vector3.ZERO
+	var saved: Array = []
+	for ch in s:
+		match ch:
+			"F", "G":
+				var nxt: Vector3 = pos + Vector3(cos(head), sin(head), 0) * step
+				var c: Node3D = build(seg, terms, depth)
+				c.position = (pos + nxt) * 0.5
+				c.rotation.z = head
+				c.scale.x = step
+				root.add_child(c)
+				pos = nxt
+			"f":
+				pos += Vector3(cos(head), sin(head), 0) * step
+			"+":
+				head += angle
+			"-":
+				head -= angle
+			"[":
+				saved.append([pos, head])
+			"]":
+				if not saved.is_empty():
+					var st: Array = saved.pop_back()
+					pos = st[0]
+					head = st[1]
+	return root
 
 
 static func _place(n: Node3D, spec: Dictionary) -> void:
