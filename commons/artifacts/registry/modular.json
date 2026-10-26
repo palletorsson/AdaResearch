@@ -6854,7 +6854,7 @@
   "mod_csg_order": {
    "lookup_name": "mod_csg_order",
    "name": "modular · the order of a CSG expression",
-   "description": "the order of a CSG expression = field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball; moving the brackets countersinks the left bore and seals the right one at the top, because A − (B − C) gives back A ∩ C. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "the order of a CSG expression = field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball, bracketed two ways; the left bore is countersunk, the right one sealed at the top, because A − (B − C) gives back A ∩ C. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -6885,7 +6885,7 @@
     "from": [
      "bool_subtract"
     ],
-    "expr": "field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball; moving the brackets countersinks the left bore and seals the right one at the top, because A − (B − C) gives back A ∩ C"
+    "expr": "field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball, bracketed two ways; the left bore is countersunk, the right one sealed at the top, because A − (B − C) gives back A ∩ C"
    }
   },
   "mod_csg_tree": {
@@ -7115,7 +7115,7 @@
   "mod_flow_field": {
    "lookup_name": "mod_flow_field",
    "name": "modular · flow and trajectories",
-   "description": "flow and trajectories = array(arrow, 9×9, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains its position, so a trajectory is those samples added up. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "flow and trajectories = array(9×9 headed lines, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains where that took it, so a trajectory is those samples added up. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7147,7 +7147,7 @@
      "line",
      "accumulation"
     ],
-    "expr": "array(arrow, 9×9, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains its position, so a trajectory is those samples added up"
+    "expr": "array(9×9 headed lines, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains where that took it, so a trajectory is those samples added up"
    }
   },
   "mod_euclid_vs_sphere": {
@@ -7266,7 +7266,7 @@
   "mod_two_basins": {
    "lookup_name": "mod_two_basins",
    "name": "modular · two basins",
-   "description": "two basins = point × 41 on two basins + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope is zero: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "two basins = a curve with two basins (41 marks) + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope vanishes: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7297,7 +7297,194 @@
     "from": [
      "gradient_descent"
     ],
-    "expr": "point × 41 on two basins + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope is zero: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest"
+    "expr": "a curve with two basins (41 marks) + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope vanishes: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest"
+   }
+  },
+  "mod_pheromone_mark": {
+   "lookup_name": "mod_pheromone_mark",
+   "name": "modular · a mark enters the next decision",
+   "description": "a mark enters the next decision = trail(walker × 60, sense 3 cells ahead, turn toward the strongest mark, deposit 1) = pheromone_mark — a mark enters the next decision: each walker reads the marks ahead before it turns, its own and the others', and leaves one; paths thicken where many have passed. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "pheromone_mark"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "randomness"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "pheromone_mark",
+    "chapter": "randomness",
+    "from": [
+     "ten_print",
+     "trace"
+    ],
+    "expr": "trail(walker × 60, sense 3 cells ahead, turn toward the strongest mark, deposit 1) = pheromone_mark — a mark enters the next decision: each walker reads the marks ahead before it turns, its own and the others', and leaves one; paths thicken where many have passed"
+   }
+  },
+  "mod_record_vs_signal": {
+   "lookup_name": "mod_record_vs_signal",
+   "name": "modular · a record and a signal",
+   "description": "a record and a signal = trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk becomes paths. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "record_vs_signal"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "randomness"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "record_vs_signal",
+    "chapter": "randomness",
+    "from": [
+     "pheromone_mark"
+    ],
+    "expr": "trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk becomes paths"
+   }
+  },
+  "mod_evaporation_pair": {
+   "lookup_name": "mod_evaporation_pair",
+   "name": "modular · evaporation from one start",
+   "description": "evaporation from one start = trail(evaporate 0.3 %) beside trail(evaporate 8 %), the same walkers from the same seed = evaporation_pair — change evaporation from a repeatable starting state: with little evaporation the old paths stay and the field keeps a network; with much, only the path walked now remains. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "evaporation_pair"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "swarms"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "evaporation_pair",
+    "chapter": "swarms",
+    "from": [
+     "pheromone_mark"
+    ],
+    "expr": "trail(evaporate 0.3 %) beside trail(evaporate 8 %), the same walkers from the same seed = evaporation_pair — change evaporation from a repeatable starting state: with little evaporation the old paths stay and the field keeps a network; with much, only the path walked now remains"
+   }
+  },
+  "mod_physarum": {
+   "lookup_name": "mod_physarum",
+   "name": "modular · physarum",
+   "description": "physarum = trail(agent × 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum — environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "physarum"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "swarms"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "physarum",
+    "chapter": "swarms",
+    "from": [
+     "pheromone_mark",
+     "boids"
+    ],
+    "expr": "trail(agent × 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum — environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew"
+   }
+  },
+  "mod_ant_colony": {
+   "lookup_name": "mod_ant_colony",
+   "name": "modular · two channels",
+   "description": "two channels = trail(ant × 120, two channels: searchers lay home and follow food, carriers lay food and follow home; the deposit fades with the journey) = ant_colony — outward and returning travellers seek and leave different traces; routes form between the nest (dark) and the food (gold), and nothing proves any of them shortest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "ant_colony"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "swarms"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "ant_colony",
+    "chapter": "swarms",
+    "from": [
+     "pheromone_mark"
+    ],
+    "expr": "trail(ant × 120, two channels: searchers lay home and follow food, carriers lay food and follow home; the deposit fades with the journey) = ant_colony — outward and returning travellers seek and leave different traces; routes form between the nest (dark) and the food (gold), and nothing proves any of them shortest"
    }
   }
  }

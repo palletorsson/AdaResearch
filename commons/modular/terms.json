@@ -28048,6 +28048,405 @@
           }
         ]
       }
+    },
+    "pheromone_mark": {
+      "chapter": "randomness",
+      "label": "a mark enters the next decision",
+      "from": [
+        "ten_print",
+        "trace"
+      ],
+      "expr": "trail(walker \u00d7 60, sense 3 cells ahead, turn toward the strongest mark, deposit 1) = pheromone_mark \u2014 a mark enters the next decision: each walker reads the marks ahead before it turns, its own and the others', and leaves one; paths thicken where many have passed",
+      "build": {
+        "op": "engine",
+        "kind": "trail",
+        "size": [
+          1.2,
+          1.2
+        ],
+        "cells": 40,
+        "agents": 60,
+        "seed": 3,
+        "follow": 1,
+        "wander": 30,
+        "evaporate": 0.01,
+        "diffuse": 0,
+        "sense": 3,
+        "angle": 35,
+        "turn": 30,
+        "deposit": 1,
+        "warm": 300,
+        "saturate": 3,
+        "of": {
+          "op": "compose",
+          "parts": []
+        }
+      }
+    },
+    "record_vs_signal": {
+      "chapter": "randomness",
+      "label": "a record and a signal",
+      "from": [
+        "pheromone_mark"
+      ],
+      "expr": "trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal \u2014 a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk thickens into paths",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "trail",
+              "size": [
+                1.2,
+                1.2
+              ],
+              "cells": 40,
+              "agents": 60,
+              "seed": 3,
+              "follow": 0,
+              "wander": 30,
+              "evaporate": 0.01,
+              "diffuse": 0,
+              "sense": 3,
+              "angle": 35,
+              "turn": 30,
+              "deposit": 1,
+              "warm": 300,
+              "saturate": 3,
+              "of": {
+                "op": "compose",
+                "parts": []
+              }
+            },
+            "at": [
+              -0.65,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "trail",
+              "size": [
+                1.2,
+                1.2
+              ],
+              "cells": 40,
+              "agents": 60,
+              "seed": 3,
+              "follow": 1,
+              "wander": 30,
+              "evaporate": 0.01,
+              "diffuse": 0,
+              "sense": 3,
+              "angle": 35,
+              "turn": 30,
+              "deposit": 1,
+              "warm": 300,
+              "saturate": 3,
+              "of": {
+                "op": "compose",
+                "parts": []
+              }
+            },
+            "at": [
+              0.65,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "evaporation_pair": {
+      "chapter": "swarms",
+      "label": "evaporation from one start",
+      "from": [
+        "pheromone_mark"
+      ],
+      "expr": "trail(evaporate 0.3 %) beside trail(evaporate 8 %), the same walkers from the same seed = evaporation_pair \u2014 change evaporation from a repeatable starting state: with little evaporation the old paths stay and the field keeps a network; with much, only the path walked now remains",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "trail",
+              "size": [
+                1.2,
+                1.2
+              ],
+              "cells": 40,
+              "agents": 60,
+              "seed": 3,
+              "follow": 1,
+              "wander": 30,
+              "evaporate": 0.003,
+              "diffuse": 0,
+              "sense": 3,
+              "angle": 35,
+              "turn": 30,
+              "deposit": 1,
+              "warm": 300,
+              "saturate": 3,
+              "of": {
+                "op": "compose",
+                "parts": []
+              }
+            },
+            "at": [
+              -0.65,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "trail",
+              "size": [
+                1.2,
+                1.2
+              ],
+              "cells": 40,
+              "agents": 60,
+              "seed": 3,
+              "follow": 1,
+              "wander": 30,
+              "evaporate": 0.08,
+              "diffuse": 0,
+              "sense": 3,
+              "angle": 35,
+              "turn": 30,
+              "deposit": 1,
+              "warm": 300,
+              "saturate": 3,
+              "of": {
+                "op": "compose",
+                "parts": []
+              }
+            },
+            "at": [
+              0.65,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "physarum": {
+      "chapter": "swarms",
+      "label": "physarum",
+      "from": [
+        "pheromone_mark",
+        "boids"
+      ],
+      "expr": "trail(agent \u00d7 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum \u2014 environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew",
+      "build": {
+        "op": "engine",
+        "kind": "trail",
+        "size": [
+          1.2,
+          1.2
+        ],
+        "cells": 48,
+        "agents": 500,
+        "seed": 5,
+        "follow": 1,
+        "wander": 10,
+        "evaporate": 0.08,
+        "diffuse": 0.4,
+        "sense": 4,
+        "angle": 30,
+        "turn": 30,
+        "speed": 1.0,
+        "deposit": 0.5,
+        "warm": 300,
+        "saturate": 1.5,
+        "anchors": [
+          [
+            -0.4,
+            -0.35
+          ],
+          [
+            0.4,
+            -0.3
+          ],
+          [
+            0.0,
+            0.05
+          ],
+          [
+            -0.35,
+            0.4
+          ],
+          [
+            0.42,
+            0.38
+          ]
+        ],
+        "anchor_deposit": 15,
+        "edge": "wrap",
+        "exclusive": true,
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.03,
+                0.012
+              ],
+              "color": "b8862b",
+              "at": [
+                -0.4,
+                0.018000000000000002,
+                -0.35
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.03,
+                0.012
+              ],
+              "color": "b8862b",
+              "at": [
+                0.4,
+                0.018000000000000002,
+                -0.3
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.03,
+                0.012
+              ],
+              "color": "b8862b",
+              "at": [
+                0.0,
+                0.018000000000000002,
+                0.05
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.03,
+                0.012
+              ],
+              "color": "b8862b",
+              "at": [
+                -0.35,
+                0.018000000000000002,
+                0.4
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.03,
+                0.012
+              ],
+              "color": "b8862b",
+              "at": [
+                0.42,
+                0.018000000000000002,
+                0.38
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ant_colony": {
+      "chapter": "swarms",
+      "label": "two channels",
+      "from": [
+        "pheromone_mark"
+      ],
+      "expr": "trail(ant \u00d7 160, two channels: searchers lay home and steer by food, carriers lay food and steer by home; the deposit fades with the journey) = ant_colony \u2014 outward and homeward travellers seek and leave different traces; a route appears between the nest (dark) and the food (gold), bent where it could be straight: nothing proves it shortest",
+      "build": {
+        "op": "engine",
+        "kind": "trail",
+        "size": [
+          1.2,
+          1.2
+        ],
+        "cells": 40,
+        "channels": 2,
+        "agents": 160,
+        "seed": 7,
+        "follow": 1,
+        "wander": 50,
+        "evaporate": 0.02,
+        "diffuse": 0,
+        "sense": 3,
+        "angle": 40,
+        "turn": 35,
+        "speed": 1.0,
+        "deposit": 1,
+        "fade": 80,
+        "reach": 3,
+        "nest": [
+          -0.35,
+          0.35
+        ],
+        "food": [
+          [
+            0.35,
+            -0.3
+          ]
+        ],
+        "warm": 800,
+        "saturate": 2,
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.05,
+                0.03
+              ],
+              "color": "2b1d14",
+              "at": [
+                -0.35,
+                0.027,
+                0.35
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.05,
+                0.03
+              ],
+              "color": "b8862b",
+              "at": [
+                0.35,
+                0.027,
+                -0.3
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   "track": [

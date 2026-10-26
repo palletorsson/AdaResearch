@@ -4992,7 +4992,9 @@
      "items": [
       "mod_ten_print",
       "mod_random_sizes",
-      "mod_gaussian_bins"
+      "mod_gaussian_bins",
+      "mod_pheromone_mark",
+      "mod_record_vs_signal"
      ]
     },
     {
@@ -5132,7 +5134,10 @@
      "order": 26,
      "children": [],
      "items": [
-      "mod_boids"
+      "mod_boids",
+      "mod_evaporation_pair",
+      "mod_physarum",
+      "mod_ant_colony"
      ]
     },
     {
@@ -65122,13 +65127,155 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_two_basins"
+  },
+  "mod_pheromone_mark": {
+   "label": "a mark enters the next decision",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a mark enters the next decision = trail(walker × 60, sense 3 cells ahead, turn toward the strongest mark, deposit 1) = pheromone_mark — a mark enters the next decision: each walker reads the marks ahead before it turns, its own and the others', and leaves one; paths thicken where many have passed",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "pheromone_mark",
+    "from": [
+     "ten_print",
+     "trace"
+    ],
+    "expr": "trail(walker × 60, sense 3 cells ahead, turn toward the strongest mark, deposit 1) = pheromone_mark — a mark enters the next decision: each walker reads the marks ahead before it turns, its own and the others', and leaves one; paths thicken where many have passed"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_pheromone_mark",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_pheromone_mark"
+  },
+  "mod_record_vs_signal": {
+   "label": "a record and a signal",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a record and a signal = trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk becomes paths",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "record_vs_signal",
+    "from": [
+     "pheromone_mark"
+    ],
+    "expr": "trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk becomes paths"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_record_vs_signal",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_record_vs_signal"
+  },
+  "mod_evaporation_pair": {
+   "label": "evaporation from one start",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "evaporation from one start = trail(evaporate 0.3 %) beside trail(evaporate 8 %), the same walkers from the same seed = evaporation_pair — change evaporation from a repeatable starting state: with little evaporation the old paths stay and the field keeps a network; with much, only the path walked now remains",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "evaporation_pair",
+    "from": [
+     "pheromone_mark"
+    ],
+    "expr": "trail(evaporate 0.3 %) beside trail(evaporate 8 %), the same walkers from the same seed = evaporation_pair — change evaporation from a repeatable starting state: with little evaporation the old paths stay and the field keeps a network; with much, only the path walked now remains"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_evaporation_pair",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_evaporation_pair"
+  },
+  "mod_physarum": {
+   "label": "physarum",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "physarum = trail(agent × 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum — environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "physarum",
+    "from": [
+     "pheromone_mark",
+     "boids"
+    ],
+    "expr": "trail(agent × 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum — environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_physarum",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_physarum"
+  },
+  "mod_ant_colony": {
+   "label": "two channels",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "two channels = trail(ant × 160, two channels: searchers lay home and follow food, carriers lay food and follow home; the deposit fades with the journey) = ant_colony — outward and returning travellers seek and leave different traces; a route forms between the nest (dark) and the food (gold), curved where it could be straight: nothing proves it shortest",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "ant_colony",
+    "from": [
+     "pheromone_mark"
+    ],
+    "expr": "trail(ant × 160, two channels: searchers lay home and follow food, carriers lay food and follow home; the deposit fades with the journey) = ant_colony — outward and returning travellers seek and leave different traces; a route forms between the nest (dark) and the food (gold), curved where it could be straight: nothing proves it shortest"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_ant_colony",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_ant_colony"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1734,
+  "items": 1739,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

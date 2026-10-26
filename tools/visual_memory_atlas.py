@@ -106,6 +106,10 @@ def to_text(e: dict) -> str:
         return f"by({of()}, random keep {e['keep']})"
     if op == "engine" and e.get("kind") == "random" and e.get("angles"):   # a choice among a few turns
         return f"by({of()}, random among {'/'.join(str(a) for a in e['angles'])}°)"
+    if op == "engine" and e.get("kind") == "trail":   # stigmergy: agents that write the field they read
+        bits = [f"agents {e.get('agents', 80)}", f"evaporate {e.get('evaporate', 0.05)}"] + (["two channels"] if e.get("channels") == 2 else [])
+        bits += ([f"{len(e['anchors'])} anchors"] if e.get("anchors") else []) + (["follow 0"] if e.get("follow") == 0 else [])
+        return f"trail({of()}, {', '.join(bits)})"
     if op == "engine":
         return f"{'by' if e.get('kind') in BY_KINDS else 'step'}({of()}, {e.get('kind')})"
     if op == "sort":

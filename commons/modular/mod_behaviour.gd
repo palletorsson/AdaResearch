@@ -10,6 +10,7 @@ extends Node
 ## over a period, from where the thing was made to where it is put, and back. flock moves its parts by
 ## separation, alignment and cohesion within a radius, steered back into a box (Reynolds' boids).
 ## random with "keep": p lets each part survive a draw with probability p (removal: what support goes).
+## trail is stigmergy: agents that write the field they read (mod_trail.gd builds and steps it).
 
 var kind: String = ""
 var params: Dictionary = {}
@@ -80,6 +81,9 @@ static func attach(root: Node3D, expr: Dictionary) -> Node:
 	b.params = expr
 	root.add_child(b)
 	root.set_meta("engine", b.kind)
+	if b.kind == "trail":
+		# the field and its agents are built now, warm steps and all: a still or a glb sees the trail
+		root.add_child((load("res://commons/modular/mod_trail.gd") as GDScript).call("make", expr))
 	return b
 
 

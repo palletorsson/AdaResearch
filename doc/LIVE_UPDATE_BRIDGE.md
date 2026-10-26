@@ -1163,3 +1163,23 @@ Not rebuilt (no new instrument); the stop list gained function words ("you", "ta
 as content, and three exprs were reworded so they no longer catch halls they do not show. Result: 282 covered, 12
 kernel only, 131 uncovered — of the 21 rows this round added, 19 are what the terms show, one is partial (the Flow
 Field hall's wrap-around trails) and one is false ("Change evaporation…" — "change" is the chapter's own name).
+
+**Behaviour over time, first engine: trail (26 Oct, Palle: "yes").** What stayed uncovered was mostly what a still
+cannot show, so the grammar gained an engine rather than more objects: `trail` — stigmergy, agents that write the
+field they read. Each agent senses the field ahead (left, centre, right), turns toward the strongest, wanders, moves,
+deposits; the field diffuses and evaporates; fixed anchors feed it; `exclusive` allows one agent per cell (Jones's
+physarum — without it every agent collapsed onto one band); two channels make an ant colony (searchers lay home and
+steer by food, carriers the reverse, the deposit fading with the journey to nothing — at a 5 % floor the first Godot
+run formed an ant mill, a closed loop away from nest and food). Tuned first in a Python prototype, then written twice:
+`commons/modular/mod_trail.gd` (the field one texture, the agents one multimesh, `warm` steps at build time so a still,
+a glb and a probe see a formed trail, then 15 steps a second in the game) and `ada_encyclopedia/src/lib/modular-trail.ts`
+(the studio's still; the film replays the rule from the seed as the timeline is dragged). The two random streams
+differ, so they are the same rule, not the same run. Five terms: `pheromone_mark` (a mark enters the next decision),
+`record_vs_signal` (the same walkers and seed, marks only recorded beside marks read: a wash against paths),
+`evaporation_pair` (0.3 % against 8 %: a kept network against the one path walked now), `physarum` (five supplied
+anchors, agents' own traces: a network on the anchors that nobody drew), `ant_colony` (a bent route between nest and
+food; nothing proves it shortest). `commons/testing/probe_trail.gd` checks that the game keeps stepping after warm:
+about 32 steps in two seconds, the field changing, the ants delivering (704 → 782). Coverage 282 → 288; the six rows
+gained are the pheromone, physarum and ant-colony halls and their objectives, and "Change evaporation…" — false last
+round — is now covered by the term that shows it. Three wordings were changed again so the ant and record terms do
+not catch the Lab_Path, Random_Cubes and "formal grammars" rows they do not show.
