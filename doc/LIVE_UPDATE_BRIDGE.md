@@ -1211,3 +1211,13 @@ studio shows the rest pose. Coverage 290 → 292, both carousel rows; "they" joi
 "physics" + "turns" matched a forces row about an along-rail component. Still open: the PSO landscape's height
 colours do not reach the albedo in Godot (it reads by shading alone), "the enclosing architecture deforms"
 (SoftBodies_Obsticals), reaction-diffusion (GPU), directed graphs and flow, and sequences 23–25.
+
+**Directed graphs and flow (26 Oct, continued).** Arcs as a shaft and a head turned toward the target, composed in the
+build (no new operator), every number computed from the arcs drawn. `a_way_back` — two one-way rings and two red arcs
+from the green ring to the blue one, none back: Tarjan finds 2 strongly connected components. `preflow_excess` — s→a 5,
+s→b 3, a→b 2, a→t 2, b→t 4: the source fills its arcs, each junction passes on what its out-arcs hold, and a and b each
+keep an excess of 1 (red) — a preflow, not yet a flow, with nowhere for the excess to go without reverse arcs.
+`max_flow` — Edmonds-Karp with reverse arcs on the same network: 6 reach t, every junction balanced, the cut a→t + b→t
+full (red). Capacity is a pale tube, the flow a dark rod in front of it, labelled flow/capacity (the first capture
+hid the flow inside translucent tubes). Coverage 292 → 295: GT_Connectivity, GT_Flow and "capacity, preflow and
+excess". Godot builds 206 terms.

@@ -29333,6 +29333,1752 @@
           }
         ]
       }
+    },
+    "a_way_back": {
+      "chapter": "graphs",
+      "label": "a way back",
+      "from": [
+        "graph",
+        "arrow"
+      ],
+      "expr": "connect(7 nodes, 9 one-way arcs) = a_way_back \u2014 strong connectivity: inside each ring every node reaches every other and returns; the two red arcs lead from the green ring to the blue one and nothing leads back \u2014 2 strongly connected components",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "at": [
+              -0.5573,
+              0.7427,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -225.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.2036
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.647,
+              0.653,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -225.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.5927,
+              0.4927,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -135.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.2036
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.503,
+              0.403,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -135.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.3427,
+              0.4573,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -45.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.2036
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.253,
+              0.547,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -45.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.3073,
+              0.7073,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              45.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.2036
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.397,
+              0.797,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              45.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.408,
+              0.6466,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -192.81
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.1964
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3807,
+              0.5264,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -192.81
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.5057,
+              0.4971,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -72.81
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.1964
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.6234,
+              0.5335,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -72.81
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.5863,
+              0.6564,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              47.19
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.1964
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.4959,
+              0.7401,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              47.19
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.05
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0578,
+              0.5329,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -104.58
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.007,
+                0.4329
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.2915,
+              0.4722,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -104.58
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0182,
+                0.05
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0295,
+              0.8222,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -93.78
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.007,
+                0.7428
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3661,
+              0.796,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -93.78
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0182,
+                0.05
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "3d7a3f",
+              "radius": 0.035
+            },
+            "at": [
+              -0.45,
+              0.85,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "3d7a3f",
+              "radius": 0.035
+            },
+            "at": [
+              -0.7,
+              0.6,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "3d7a3f",
+              "radius": 0.035
+            },
+            "at": [
+              -0.45,
+              0.35,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "3d7a3f",
+              "radius": 0.035
+            },
+            "at": [
+              -0.2,
+              0.6,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "277da1",
+              "radius": 0.035
+            },
+            "at": [
+              0.4409,
+              0.7911,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "277da1",
+              "radius": 0.035
+            },
+            "at": [
+              0.3641,
+              0.4533,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "277da1",
+              "radius": 0.035
+            },
+            "at": [
+              0.695,
+              0.5557,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "preflow_excess": {
+      "chapter": "graphs",
+      "label": "what a junction cannot pass on",
+      "from": [
+        "graph",
+        "arrow"
+      ],
+      "expr": "preflow(s fills its arcs, 5 + 3; each junction passes on what its out-arcs hold) = preflow_excess \u2014 capacity, preflow and excess: a receives 5 and can send 4, b receives 5 and can send 4; each keeps an excess of 1 (red), and 6 reach t. A preflow is not yet a flow: without the reverse arcs the excess has nowhere to go",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "at": [
+              -0.2512,
+              0.7104,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.0175,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0699,
+              0.8111,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0455,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.2447,
+              0.7141,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.012,
+                0.3698
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0634,
+              0.8148,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0312,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "5/5",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.18,
+              0.765,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.2512,
+              0.4896,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.0125,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0699,
+              0.3889,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0325,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.2447,
+              0.4859,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.008,
+                0.3698
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0634,
+              0.3852,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0208,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "3/3",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.18,
+              0.515,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.63,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.01,
+                0.34
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.43,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.026,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.6225,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.355
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.4225,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "2/2",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.045,
+              0.64,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.1988,
+              0.7396,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.01,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3801,
+              0.6389,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.026,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.2053,
+              0.7359,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.3698
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3866,
+              0.6352,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "2/2",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.27,
+              0.765,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.1988,
+              0.4604,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.015,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3801,
+              0.5611,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.039,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.2053,
+              0.4641,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.01,
+                0.3698
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3866,
+              0.5648,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.026,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "4/4",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.27,
+              0.515,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "b8862b",
+              "radius": 0.035
+            },
+            "at": [
+              -0.45,
+              0.6,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "s",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.47,
+              0.52,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "e63946",
+              "radius": 0.05500000000000001
+            },
+            "at": [
+              0.0,
+              0.85,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "a  +1",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.02,
+              0.77,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "e63946",
+              "radius": 0.05500000000000001
+            },
+            "at": [
+              0.0,
+              0.35,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "b  +1",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.02,
+              0.27,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "2b1d14",
+              "radius": 0.035
+            },
+            "at": [
+              0.45,
+              0.6,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "t",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.43,
+              0.52,
+              0.02
+            ]
+          }
+        ]
+      }
+    },
+    "max_flow": {
+      "chapter": "graphs",
+      "label": "the maximum flow",
+      "from": [
+        "preflow_excess"
+      ],
+      "expr": "maxflow(the same network, shortest augmenting paths with reverse arcs) = max_flow \u2014 the excess returned: 6 reach t and every junction passes on exactly what it receives; the cut at + bt is full (red), so no more can pass",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "at": [
+              -0.2512,
+              0.7104,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.0175,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0699,
+              0.8111,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0455,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.2447,
+              0.7141,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.008,
+                0.3698
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0634,
+              0.8148,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0208,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "3/5",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.18,
+              0.765,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.2512,
+              0.4896,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.0125,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0699,
+              0.3889,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0325,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.2447,
+              0.4859,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.008,
+                0.3698
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              -0.0634,
+              0.3852,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.0208,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "3/3",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.18,
+              0.515,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.63,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.01,
+                0.34
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.43,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.026,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.6225,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.004,
+                0.355
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.0,
+              0.4225,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -180.0
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.045
+              ],
+              "color": "2b1d14"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "1/2",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.045,
+              0.64,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.1988,
+              0.7396,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.01,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3801,
+              0.6389,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.026,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.2053,
+              0.7359,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.006,
+                0.3698
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3866,
+              0.6352,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -119.05
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.016,
+                0.045
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "2/2",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.27,
+              0.765,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.1988,
+              0.4604,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.015,
+                0.3548
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3801,
+              0.5611,
+              0.0
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.039,
+                0.06
+              ],
+              "color": "d9cfbc"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.2053,
+              0.4641,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.01,
+                0.3698
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "at": [
+              0.3866,
+              0.5648,
+              0.03
+            ],
+            "rot": [
+              0,
+              0,
+              -60.95
+            ],
+            "of": {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.026,
+                0.045
+              ],
+              "color": "e63946"
+            }
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "4/4",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.27,
+              0.515,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "b8862b",
+              "radius": 0.035
+            },
+            "at": [
+              -0.45,
+              0.6,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "s",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.47,
+              0.52,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "2b1d14",
+              "radius": 0.035
+            },
+            "at": [
+              0.0,
+              0.85,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "a",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.02,
+              0.77,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "2b1d14",
+              "radius": 0.035
+            },
+            "at": [
+              0.0,
+              0.35,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "b",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              -0.02,
+              0.27,
+              0.02
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "point",
+              "color": "2b1d14",
+              "radius": 0.035
+            },
+            "at": [
+              0.45,
+              0.6,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "t",
+              "pixel_size": 0.0012
+            },
+            "at": [
+              0.43,
+              0.52,
+              0.02
+            ]
+          }
+        ]
+      }
     }
   },
   "track": [

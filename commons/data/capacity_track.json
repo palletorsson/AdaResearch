@@ -4350,6 +4350,63 @@
    "branch_of": "pendulum",
    "distance": 1,
    "beyond": []
+  },
+  "a_way_back": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "preflow_excess": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 0,
+    "parts": 2,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 1,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "max_flow": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 2,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 1,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "skateboard_3",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

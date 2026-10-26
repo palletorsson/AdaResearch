@@ -5159,7 +5159,10 @@
       "mod_route_after_stone",
       "mod_one_more_route",
       "mod_matching_block",
-      "mod_centrality_pair"
+      "mod_centrality_pair",
+      "mod_a_way_back",
+      "mod_preflow_excess",
+      "mod_max_flow"
      ]
     },
     {
@@ -65387,13 +65390,99 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_carousel_pair"
+  },
+  "mod_a_way_back": {
+   "label": "a way back",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a way back = connect(7 nodes, 9 one-way arcs) = a_way_back — strong connectivity: inside each ring every node reaches every other and returns; the two red arcs lead from the green ring to the blue one and nothing leads back — 2 strongly connected components",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "a_way_back",
+    "from": [
+     "graph",
+     "arrow"
+    ],
+    "expr": "connect(7 nodes, 9 one-way arcs) = a_way_back — strong connectivity: inside each ring every node reaches every other and returns; the two red arcs lead from the green ring to the blue one and nothing leads back — 2 strongly connected components"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_a_way_back",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_a_way_back"
+  },
+  "mod_preflow_excess": {
+   "label": "what a junction cannot pass on",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "what a junction cannot pass on = preflow(s fills its arcs, 5 + 3; each junction passes on what its out-arcs hold) = preflow_excess — capacity, preflow and excess: a receives 5 and can send 4, b receives 5 and can send 4; each keeps an excess of 1 (red), and 6 reach t. A preflow is not yet a flow: without the reverse arcs the excess has nowhere to go",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "preflow_excess",
+    "from": [
+     "graph",
+     "arrow"
+    ],
+    "expr": "preflow(s fills its arcs, 5 + 3; each junction passes on what its out-arcs hold) = preflow_excess — capacity, preflow and excess: a receives 5 and can send 4, b receives 5 and can send 4; each keeps an excess of 1 (red), and 6 reach t. A preflow is not yet a flow: without the reverse arcs the excess has nowhere to go"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_preflow_excess",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_preflow_excess"
+  },
+  "mod_max_flow": {
+   "label": "the maximum flow",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the maximum flow = maxflow(the same network, shortest augmenting paths with reverse arcs) = max_flow — the excess returned: 6 reach t and every junction passes on exactly what it receives; the cut at + bt is full (red), so no more can pass",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "max_flow",
+    "from": [
+     "preflow_excess"
+    ],
+    "expr": "maxflow(the same network, shortest augmenting paths with reverse arcs) = max_flow — the excess returned: 6 reach t and every junction passes on exactly what it receives; the cut at + bt is full (red), so no more can pass"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_max_flow",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_max_flow"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1743,
+  "items": 1746,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,
