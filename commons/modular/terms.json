@@ -12787,7 +12787,7 @@
       "chapter": "booleans",
       "label": "smooth union",
       "from": [
-        "bool_union"
+        "metaballs"
       ],
       "expr": "field(smin(sphere, sphere, k)) = smooth_union \u2014 the min rounded: two become one without a seam",
       "build": {
@@ -16478,7 +16478,6 @@
       "chapter": "isosurfaces",
       "label": "rhizome body",
       "from": [
-        "rhizome",
         "metaballs"
       ],
       "expr": "field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body \u2014 the network given a body: every tie a tube, every joint melted",
@@ -27036,8 +27035,7 @@
       "chapter": "isosurfaces",
       "label": "shapes gallery",
       "from": [
-        "torus_field",
-        "gyroid"
+        "metaballs"
       ],
       "expr": "field(sphere \u222a box \u222a torus \u222a cylinder \u222a capsule \u222a (gyroid \u2229 sphere)) = field_gallery \u2014 a shapes gallery: six functions, one mesher; the torus and the gyroid are formulas like the rest",
       "build": {
@@ -28246,8 +28244,7 @@
       "chapter": "swarms",
       "label": "physarum",
       "from": [
-        "pheromone_mark",
-        "boids"
+        "pheromone_mark"
       ],
       "expr": "trail(agent \u00d7 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum \u2014 environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew",
       "build": {

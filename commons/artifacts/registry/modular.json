@@ -5791,7 +5791,7 @@
     "term": "smooth_union",
     "chapter": "booleans",
     "from": [
-     "bool_union"
+     "metaballs"
     ],
     "expr": "field(smin(sphere, sphere, k)) = smooth_union — the min rounded: two become one without a seam"
    }
@@ -6845,7 +6845,6 @@
     "term": "rhizome_body",
     "chapter": "isosurfaces",
     "from": [
-     "rhizome",
      "metaballs"
     ],
     "expr": "field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body — the network given a body: every tie a tube, every joint melted"
@@ -7257,8 +7256,7 @@
     "term": "field_gallery",
     "chapter": "isosurfaces",
     "from": [
-     "torus_field",
-     "gyroid"
+     "metaballs"
     ],
     "expr": "field(sphere ∪ box ∪ torus ∪ cylinder ∪ capsule ∪ (gyroid ∩ sphere)) = field_gallery — a shapes gallery: six functions, one mesher; the torus and the gyroid are formulas like the rest"
    }
@@ -7444,8 +7442,7 @@
     "term": "physarum",
     "chapter": "swarms",
     "from": [
-     "pheromone_mark",
-     "boids"
+     "pheromone_mark"
     ],
     "expr": "trail(agent × 500, one per cell, five fixed anchors, diffuse, evaporate 8 %, wrap) = physarum — environmental memory: fixed anchors (supplied, gold) and agents (whose traces are their own) write one changing trail field, and the agents' traffic links the anchors into a network that nobody drew"
    }
@@ -7905,7 +7902,7 @@
   "mod_choice_sequence": {
    "lookup_name": "mod_choice_sequence",
    "name": "modular · only what you can construct",
-   "description": "only what you can construct = array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (position 3 holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not a claim about every continuation. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "only what you can construct = array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (the third bead holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not an assertion about every continuation. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7937,13 +7934,13 @@
      "cube_row",
      "self_containing_box"
     ],
-    "expr": "array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (position 3 holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not a claim about every continuation"
+    "expr": "array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (the third bead holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not an assertion about every continuation"
    }
   },
   "mod_diagonal_witness": {
    "lookup_name": "mod_diagonal_witness",
    "name": "modular · a witness you can check",
-   "description": "a witness you can check = array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at position k — you can point to why it is none of the four rows. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "a witness you can check = array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at its k-th bead — you can point to why it is none of the four rows. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7975,13 +7972,13 @@
      "choice_sequence",
      "grid"
     ],
-    "expr": "array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at position k — you can point to why it is none of the four rows"
+    "expr": "array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at its k-th bead — you can point to why it is none of the four rows"
    }
   },
   "mod_two_reports": {
    "lookup_name": "mod_two_reports",
    "name": "modular · holding contradiction without collapse",
-   "description": "holding contradiction without collapse = frame + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P has both supports (amber, at both) and Q, the alarm, has neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the frame decides who passes. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "holding contradiction without collapse = posts + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P is told true and told false (amber, at both) and Q, the alarm, is told neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the posts decide who gets through. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -8013,7 +8010,7 @@
      "walls",
      "logic"
     ],
-    "expr": "frame + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P has both supports (amber, at both) and Q, the alarm, has neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the frame decides who passes"
+    "expr": "posts + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P is told true and told false (amber, at both) and Q, the alarm, is told neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the posts decide who gets through"
    }
   }
  }

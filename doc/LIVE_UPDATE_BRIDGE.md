@@ -1250,3 +1250,21 @@ as a diamond, P at both and Q, the alarm, at neither: the contradiction does not
 semantics. Coverage 303 → 306 (both halls and "constructive evidence, unresolved claims and non-explosion"); the
 first draft caught nine rows it does not show through "position", "frame", "supports", "choices about" and "claim" —
 reworded, and "about" joined the stop list. Gödel, the QFEP F and Φ terms, reaction-diffusion and most of 25 remain.
+
+**The tutorials (26 Oct, Palle: "we need to get the right order so name each and make it possible to edit the order
+by map and within maps. think of each map as one tutorial. try to make a conventional order within the maps").**
+`construction_path.json` gained `maps` (every hall of the spine in spine order, named by the first heading of its
+final.md) and an authored `tutorials` list: each map with its terms in teaching order and a one-line `why`. When it
+exists it is the order — a map's terms, then the artifacts that stand in it — and `tools/construction_path.py` keeps
+it (a new term goes to the end of the first map of its sequence, a new map after the last of its sequence) and writes
+`doc/book/course/MODULAR_TUTORIALS.md`, the whole order to read. The filing and the order inside each map came from a
+reading of the halls (a workflow: six readers, each batch then corrected by an independent editor who opened the
+halls): 212 terms in 95 tutorials, 28 moved across sequences to the hall that teaches them — the pallet and skateboard
+family to Logic_Assemblage, the pendulum to the oscillation hall, the net and curtain to cloth, the sine terms to the
+wave halls. Four lineage claims were wrong for that order and were corrected rather than the order bent:
+`field_gallery` and `smooth_union` are field primitives taught before the halls of their claimed parents (now from
+`metaballs`); `rhizome_body` carries its knots and ties as data and its hall comes before graph theory (from
+`metaballs`); `physarum`'s agents never flock (from `pheromone_mark` only). 0 terms before their parents. /spine-film's
+order panel groups by tutorial — the hall's title, its sequence, its why — with ↑ ↓ on a map, ↑ ↓ and → map on a term,
+drag between and within; saving sends `{tutorials}` to /api/construction-path, which refuses a list that drops a map
+or a term and derives the same order as the tool (checked: an unchanged save reproduces the order exactly).
