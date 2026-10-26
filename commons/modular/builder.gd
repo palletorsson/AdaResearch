@@ -236,9 +236,12 @@ static func _times(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 			"mirror":
 				c.rotation.y = PI * i
 			"circle":
-				# round a circle in the vertical plane: the height of each is the sine of its angle
+				# round a circle in the vertical plane: the height of each is the sine of its angle;
+				# "arc" (degrees) lays the copies on a part of it, both ends included
 				var rad: float = float(expr.get("radius", 0.5))
-				c.position = Vector3(rad * cos(TAU * i / n), rad * sin(TAU * i / n), 0)
+				var arc: float = deg_to_rad(float(expr.get("arc", 360.0)))
+				var ang: float = TAU * i / n if arc >= TAU - 1e-6 else arc * i / maxf(1.0, n - 1.0)
+				c.position = Vector3(rad * cos(ang), rad * sin(ang), 0)
 			"phyllotaxis":
 				# the golden angle: each turned 137.5 degrees from the last, pushed out by the root of its count
 				var a: float = deg_to_rad(137.508) * i

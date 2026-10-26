@@ -3742,6 +3742,101 @@
    "branch_of": "pendulum",
    "distance": 2,
    "beyond": []
+  },
+  "spherical_triangle": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "impossible_triangle": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 0,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "self_containing_box": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 0,
+    "parts": 2,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "same_total": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "cube_row",
+   "distance": 0,
+   "beyond": []
+  },
+  "rhizome": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 2,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "skateboard_3",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

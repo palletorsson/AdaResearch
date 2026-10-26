@@ -64,6 +64,8 @@ def to_text(e: dict) -> str:
         + (f", profile {e['profile']}" if e.get("profile") else "") + (f" rise {e['rise']}" if e.get("rise") is not None else "")
     if op == "times":
         lay = f" {e['layout']}" if e.get("layout") in ("circle", "phyllotaxis") else ""
+        if e.get("layout") == "circle" and e.get("arc") not in (None, 360):
+            lay += f" {e['arc']}°"
         return f"({of()}) * {e.get('n', 1)}{lay}{dress}"
     if op == "recurse":
         return (f"recurse({of()}, {len(e.get('rules', []))} copies, depth {e.get('depth', 3)}"

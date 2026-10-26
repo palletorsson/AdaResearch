@@ -6099,7 +6099,7 @@
   "mod_soft_cube": {
    "lookup_name": "mod_soft_cube",
    "name": "modular · soft cube",
-   "description": "soft cube = step(connect(array(ball, 3, 3d), springs), physics) = soft_cube — 27 balls, 54 springs: it yields and keeps its relations. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "soft cube = step(connect(array(ball, 3, 3d), 86 springs), physics) = soft_cube — 27 balls, edges and diagonals: it yields and keeps its relations. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -6131,7 +6131,7 @@
      "spring_oscillator",
      "lattice"
     ],
-    "expr": "step(connect(array(ball, 3, 3d), springs), physics) = soft_cube — 27 balls, 54 springs: it yields and keeps its relations"
+    "expr": "step(connect(array(ball, 3, 3d), 86 springs), physics) = soft_cube — 27 balls, edges and diagonals: it yields and keeps its relations"
    }
   },
   "mod_boids": {
@@ -6434,6 +6434,195 @@
      "graph"
     ],
     "expr": "connect(point 2 + 3 + 1, 9 weights) = neural_net — inputs, a hidden layer, an output: what a weight keeps"
+   }
+  },
+  "mod_spherical_triangle": {
+   "lookup_name": "mod_spherical_triangle",
+   "name": "modular · spherical triangle",
+   "description": "spherical triangle = sphere + three quarter great circles = spherical_triangle — three right angles: on a sphere a triangle's angles sum to 270°, not 180°. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "spherical_triangle"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "spherical_triangle",
+    "chapter": "foundations",
+    "from": [
+     "unit_circle",
+     "parallel_lines"
+    ],
+    "expr": "sphere + three quarter great circles = spherical_triangle — three right angles: on a sphere a triangle's angles sum to 270°, not 180°"
+   }
+  },
+  "mod_impossible_triangle": {
+   "lookup_name": "mod_impossible_triangle",
+   "name": "modular · impossible triangle",
+   "description": "impossible triangle = bar x + bar y + bar z = impossible_triangle — three straight bars that close into a triangle from one view only: the convincing view conceals a gap. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "impossible_triangle"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "impossible_triangle",
+    "chapter": "foundations",
+    "from": [
+     "box"
+    ],
+    "expr": "bar x + bar y + bar z = impossible_triangle — three straight bars that close into a triangle from one view only: the convincing view conceals a gap"
+   }
+  },
+  "mod_self_containing_box": {
+   "lookup_name": "mod_self_containing_box",
+   "name": "modular · a box that contains itself",
+   "description": "a box that contains itself = recurse(box, one copy of itself inside, depth 8) = self_containing_box — self-reference regresses without end; Russell's contradiction needs more: unrestricted membership. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "self_containing_box"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "self_containing_box",
+    "chapter": "foundations",
+    "from": [
+     "box",
+     "sierpinski"
+    ],
+    "expr": "recurse(box, one copy of itself inside, depth 8) = self_containing_box — self-reference regresses without end; Russell's contradiction needs more: unrestricted membership"
+   }
+  },
+  "mod_same_total": {
+   "lookup_name": "mod_same_total",
+   "name": "modular · the same total",
+   "description": "the same total = array(cube, 4, 1d) + array(cube, 2) = same_total — four and four: the same scalar total, two arrangements; the number does not say how. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "same_total"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "qfep"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "same_total",
+    "chapter": "qfep",
+    "from": [
+     "cube_row",
+     "grid_prefabs"
+    ],
+    "expr": "array(cube, 4, 1d) + array(cube, 2) = same_total — four and four: the same scalar total, two arrangements; the number does not say how"
+   }
+  },
+  "mod_rhizome": {
+   "lookup_name": "mod_rhizome",
+   "name": "modular · rhizome",
+   "description": "rhizome = connect(point × 24, nearest earlier + sometimes second) = rhizome — grown by nearest neighbours: 29 ties, degrees 1 to 6; no centre was planned. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "rhizome"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "postcrisis"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "rhizome",
+    "chapter": "postcrisis",
+    "from": [
+     "graph",
+     "spanning_tree"
+    ],
+    "expr": "connect(point × 24, nearest earlier + sometimes second) = rhizome — grown by nearest neighbours: 29 ties, degrees 1 to 6; no centre was planned"
    }
   }
  }

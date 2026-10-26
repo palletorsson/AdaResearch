@@ -67,7 +67,8 @@ Example — the Sierpiński triangle:
   in the order Palle authored: point → line → triangle → tetrahedron → … → the Platonic solids →
   transformation (in time) → arrays → colour → tiling → change → forces → form finding → waves →
   randomness → noise → shaders → logic (cellular automata) → fractals → L-systems → procedural generation →
-  soft bodies → isosurfaces → booleans → swarms → graphs → machine learning.
+  soft bodies → isosurfaces → booleans → swarms → graphs → machine learning → the foundations crisis →
+  the QFEP laboratory → after the crisis.
   A term written as `associate(N)` is not a node; it is a variation shown around N.
 
 ## Checking that a recipe builds
@@ -86,7 +87,7 @@ the meshes are regenerated from the recipes).
 
 ## What is still missing
 
-Sequences 23–25 (the foundations crisis, the QFEP laboratory, after the crisis) have no terms yet:
-they are arguments more than objects. Every other sequence has nodes, but not every principle in it
-is covered. `doc/book/course/MODULAR_COVERAGE.md` lists every spine principle the grammar
+Every sequence has nodes now; 23–25 (the foundations crisis, the QFEP laboratory, after the crisis)
+have only a few, because they are arguments more than objects. Not every principle in any sequence is
+covered yet. `doc/book/course/MODULAR_COVERAGE.md` lists every spine principle the grammar
 does not yet cover.

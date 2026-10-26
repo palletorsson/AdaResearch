@@ -5147,6 +5147,38 @@
       "mod_kmeans",
       "mod_neural_net"
      ]
+    },
+    {
+     "id": "modular/foundations",
+     "title": "foundations",
+     "label": "foundations",
+     "order": 29,
+     "children": [],
+     "items": [
+      "mod_spherical_triangle",
+      "mod_impossible_triangle",
+      "mod_self_containing_box"
+     ]
+    },
+    {
+     "id": "modular/qfep",
+     "title": "qfep",
+     "label": "qfep",
+     "order": 30,
+     "children": [],
+     "items": [
+      "mod_same_total"
+     ]
+    },
+    {
+     "id": "modular/postcrisis",
+     "title": "postcrisis",
+     "label": "postcrisis",
+     "order": 31,
+     "children": [],
+     "items": [
+      "mod_rhizome"
+     ]
     }
    ]
   }
@@ -64415,13 +64447,157 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_neural_net"
+  },
+  "mod_spherical_triangle": {
+   "label": "spherical triangle",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "spherical triangle = sphere + three quarter great circles = spherical_triangle — three right angles: on a sphere a triangle's angles sum to 270°, not 180°",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "spherical_triangle",
+    "from": [
+     "unit_circle",
+     "parallel_lines"
+    ],
+    "expr": "sphere + three quarter great circles = spherical_triangle — three right angles: on a sphere a triangle's angles sum to 270°, not 180°"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_spherical_triangle",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_spherical_triangle"
+  },
+  "mod_impossible_triangle": {
+   "label": "impossible triangle",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "impossible triangle = bar x + bar y + bar z = impossible_triangle — three straight bars that close into a triangle from one view only: the convincing view conceals a gap",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "impossible_triangle",
+    "from": [
+     "box"
+    ],
+    "expr": "bar x + bar y + bar z = impossible_triangle — three straight bars that close into a triangle from one view only: the convincing view conceals a gap"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_impossible_triangle",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_impossible_triangle"
+  },
+  "mod_self_containing_box": {
+   "label": "a box that contains itself",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a box that contains itself = recurse(box, one copy of itself inside, depth 8) = self_containing_box — self-reference regresses without end; Russell's contradiction needs more: unrestricted membership",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "self_containing_box",
+    "from": [
+     "box",
+     "sierpinski"
+    ],
+    "expr": "recurse(box, one copy of itself inside, depth 8) = self_containing_box — self-reference regresses without end; Russell's contradiction needs more: unrestricted membership"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_self_containing_box",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_self_containing_box"
+  },
+  "mod_same_total": {
+   "label": "the same total",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the same total = array(cube, 4, 1d) + array(cube, 2) = same_total — four and four: the same scalar total, two arrangements; the number does not say how",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "same_total",
+    "from": [
+     "cube_row",
+     "grid_prefabs"
+    ],
+    "expr": "array(cube, 4, 1d) + array(cube, 2) = same_total — four and four: the same scalar total, two arrangements; the number does not say how"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_same_total",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_same_total"
+  },
+  "mod_rhizome": {
+   "label": "rhizome",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "rhizome = connect(point × 24, nearest earlier + sometimes second) = rhizome — grown by nearest neighbours: 29 ties, degrees 1 to 6; no centre was planned",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "rhizome",
+    "from": [
+     "graph",
+     "spanning_tree"
+    ],
+    "expr": "connect(point × 24, nearest earlier + sometimes second) = rhizome — grown by nearest neighbours: 29 ties, degrees 1 to 6; no centre was planned"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_rhizome",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_rhizome"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1711,
+  "items": 1716,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

@@ -55,7 +55,8 @@ CHAPTER_SEQ = {"point": "primitives", "line": "primitives", "association": "prim
                "randomness": "randomness", "noise": "noise", "logic": "cellularautomata", "fractals": "fractals",
                "lsystems": "lsystems", "isosurfaces": "isosurfaces", "booleans": "boolean_surfaces",
                "shaders": "shaders", "procedural": "proceduralgeneration", "softbodies": "softbodies",
-               "swarms": "swarmintelligence", "graphs": "graphtheory", "ml": "machinelearning"}
+               "swarms": "swarmintelligence", "graphs": "graphtheory", "ml": "machinelearning",
+               "foundations": "foundationscrisis", "qfep": "qfeplaboratory", "postcrisis": "postfoundationscrisis"}
 
 
 def load():

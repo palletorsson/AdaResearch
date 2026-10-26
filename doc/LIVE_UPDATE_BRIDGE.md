@@ -1115,3 +1115,15 @@ converged in 2 rounds, 10/10/10), `neural_net` (2-3-1, nine weights). Films: the
 groups; the soft cube first COLLAPSED (60 N/m cannot carry two layers of balls, and a lattice without diagonals shears
 flat) — at 400 N/m with each sub-cube's four body diagonals (86 springs) it lands, yields and keeps its shape, which the
 spring-equilibrium fix of the previous round made possible at all. Godot builds all 171 terms (the 7 failures foreign).
+
+**Sequences 23–25 — objects for arguments (Palle, 26 Oct: "continue"):** five terms; one additive word, `arc` on the
+times circle layout (a part of a circle, both ends included). The foundations crisis: `spherical_triangle` (three
+quarter great circles on a sphere meet at three right angles — 270°, not 180°: what changes with the geometry),
+`impossible_triangle` (three straight bars along x, y and z that close into a triangle only from the direction
+(1, 1, 1); every standard capture angle shows the staircase — the convincing view is one place), `self_containing_box`
+(a box holding a copy of itself, eight times: self-reference regresses; Russell's contradiction needs more, unrestricted
+membership — the label says so, because the hall asks exactly that distinction). The QFEP laboratory: `same_total` (four
+cubes in a row and four in a square: the same scalar, two arrangements). After the crisis: `rhizome` (24 points grown by
+nearest neighbours, each tied to its nearest earlier point and a third of the time to its second: 29 ties, degrees 1 to
+6, no centre planned — computed and recorded). Every sequence now has nodes; the lineage has 167, the README says so.
+Godot builds all 176 terms (the 7 failures foreign).
