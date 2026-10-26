@@ -1278,3 +1278,17 @@ that replaces only that term's block where it stands in terms.json, written as t
 non-ASCII escaped): checked by re-saving `point` unchanged, its block byte-identical to the committed file. (The
 existing POST re-serialises the whole file through JSON.stringify, which rewrites every term's floats and escapes.)
 One limit: a saved term's own whole-number floats are written as integers (2.0 becomes 2) — the same value to Godot.
+
+**The quad, and the help lines (26 Oct, Palle: "the quad is not a quad. remove the help line on like associative
+planks and tape etc").** The quad was `times(triangle_face, 2, mirror)`, and the mirror layout turns the copy half a
+turn about the SAME centre: two equilateral triangles on one centre, a six-pointed star. It is now what its notation
+says — two right triangles on one diagonal of a unit square (a new mesh shape `poly`, corners in the floor plane, in
+both builders), the four edges and the diagonal as scaffold, the two faces in two paper tones. Looking at it showed a
+second, older fault: the triangle mesh rendered dark green, because `_faces` derives the normal from the winding and
+flips it with the winding, so a flat face wound either way was lit from below; flat meshes now face UP explicitly
+(`mod_mesh.gd _flat`, used by triangle and poly), and triangle_face, quad and wooden_plane photograph as paper and wood.
+The help lines: a scaffold is "shown while a thing is built, gone when it is done", and Godot already freed it, but the
+film never did — tape, plank and every association kept its line. The film now frees the scaffold when a node's build
+completes (and the associations around a node never show theirs). Checked with the builder: tape and plank free the
+line's endpoints and stroke and keep the tape and the board; cube frees nothing. Godot builds 213 terms; 14 glbs
+re-exported (every term that uses the flat meshes).

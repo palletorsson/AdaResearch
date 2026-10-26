@@ -58,7 +58,7 @@
         "size": [
           0.2
         ],
-        "color": "d86e32",
+        "color": "d831d2",
         "alpha": 0.6
       }
     },
@@ -600,18 +600,89 @@
     "quad": {
       "chapter": "triangle",
       "label": "quad",
-      "expr": "triangle * 2 = quad = plane",
+      "expr": "triangle \u00d7 2 on one diagonal = quad \u2014 two right triangles share an edge and close a square: four sides, and the diagonal no longer seen",
       "from": [
         "triangle_face",
         "triangle_face"
       ],
       "build": {
-        "op": "times",
-        "of": {
-          "t": "triangle_face"
-        },
-        "n": 2,
-        "layout": "mirror"
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "times",
+              "of": {
+                "t": "line"
+              },
+              "n": 4,
+              "layout": "polygon"
+            },
+            "rot": [
+              0,
+              45,
+              0
+            ],
+            "scaffold": true
+          },
+          {
+            "op": "transform",
+            "of": {
+              "t": "line"
+            },
+            "scale": [
+              1.4142,
+              1,
+              1
+            ],
+            "rot": [
+              0,
+              45,
+              0
+            ],
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "poly",
+            "points": [
+              [
+                0.5,
+                -0.5
+              ],
+              [
+                0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                0.5
+              ]
+            ],
+            "color": "d9cfbc",
+            "alpha": 0.9
+          },
+          {
+            "p": "mesh",
+            "shape": "poly",
+            "points": [
+              [
+                -0.5,
+                0.5
+              ],
+              [
+                -0.5,
+                -0.5
+              ],
+              [
+                0.5,
+                -0.5
+              ]
+            ],
+            "color": "cfc4ae",
+            "alpha": 0.9
+          }
+        ]
       }
     },
     "wooden_plane": {

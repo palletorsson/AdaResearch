@@ -823,7 +823,7 @@
   "mod_quad": {
    "lookup_name": "mod_quad",
    "name": "modular · quad",
-   "description": "quad = triangle * 2 = quad = plane. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "quad = triangle × 2 on one diagonal = quad — two right triangles share an edge and close a square: four sides, and the diagonal no longer seen. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -855,7 +855,7 @@
      "triangle_face",
      "triangle_face"
     ],
-    "expr": "triangle * 2 = quad = plane"
+    "expr": "triangle × 2 on one diagonal = quad — two right triangles share an edge and close a square: four sides, and the diagonal no longer seen"
    }
   },
   "mod_wooden_plane": {

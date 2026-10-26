@@ -62,6 +62,8 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 			mi.mesh = _pyramid(s0, s1)
 		"triangle":
 			mi.mesh = _triangle(s0)
+		"poly":
+			mi.mesh = _poly(spec.get("points", []))
 		"dodeca":
 			mi.mesh = _dodeca(s0)
 		"octa", "icosa", "dodecahedron":
@@ -86,7 +88,7 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 		mat.roughness = 0.9
 		if alpha < 0.999:
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		if shape == "triangle" or shape == "plane":
+		if shape == "triangle" or shape == "plane" or shape == "poly":
 			mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 		mi.material_override = mat
 	mi.name = "mesh_" + shape
@@ -124,8 +126,31 @@ static func _pyramid(base: float, h: float) -> ArrayMesh:
 
 static func _triangle(edge: float) -> ArrayMesh:
 	var r: float = edge / sqrt(3.0)
-	var v := PackedVector3Array([Vector3(r, 0, 0), Vector3(r * cos(TAU / 3), 0, r * sin(TAU / 3)), Vector3(r * cos(2 * TAU / 3), 0, r * sin(2 * TAU / 3))])
-	return _faces(v, PackedInt32Array([0, 2, 1]))
+	return _flat(PackedVector3Array([Vector3(r, 0, 0), Vector3(r * cos(TAU / 3), 0, r * sin(TAU / 3)), Vector3(r * cos(2 * TAU / 3), 0, r * sin(2 * TAU / 3))]))
+
+
+## a flat polygon from its corners in the floor plane ([x, z] each, in order of increasing angle), as a fan of
+## triangles, the upper side the front: two right triangles on one diagonal are the quad
+static func _poly(pts: Array) -> Mesh:
+	var v := PackedVector3Array()
+	for p in pts:
+		v.append(Vector3(float(p[0]), 0, float(p[1])))
+	if v.size() < 3:
+		return BoxMesh.new()
+	return _flat(v)
+
+
+## a flat piece in its own floor plane faces up: the normal is UP, not derived from the winding (which flips
+## with it, so a face wound either way rendered unlit — the triangle and the quad did, 26 Oct), and the upper
+## side is wound as the front face; corners in order of increasing angle, filled as a fan
+static func _flat(v: PackedVector3Array) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(1, v.size() - 1):
+		for k in [0, i, i + 1]:
+			st.set_normal(Vector3.UP)
+			st.add_vertex(v[k])
+	return st.commit()
 
 
 static func _dodeca(r: float) -> ArrayMesh:
