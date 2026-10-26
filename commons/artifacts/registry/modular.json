@@ -7753,7 +7753,7 @@
   "mod_entropy_fan": {
    "lookup_name": "mod_entropy_fan",
    "name": "modular · counting what could happen",
-   "description": "counting what could happen = connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level leave 27 (ln 27 = 3.30) — the count says how many remain, not which were refused (amber). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "counting what could happen = connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level, and 27 remain (ln 27 = 3.30) — the count says how many remain, not which were refused (amber). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7785,7 +7785,7 @@
      "fractal_tree",
      "same_total"
     ],
-    "expr": "connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level leave 27 (ln 27 = 3.30) — the count says how many remain, not which were refused (amber)"
+    "expr": "connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level, and 27 remain (ln 27 = 3.30) — the count says how many remain, not which were refused (amber)"
    }
   },
   "mod_lambda_route": {
@@ -7829,7 +7829,7 @@
   "mod_lingering_cells": {
    "lookup_name": "mod_lingering_cells",
    "name": "modular · a cell with a past",
-   "description": "a cell with a past = cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in a volume of 26 neighbours; this is the same distinction in a plane. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "a cell with a past = cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in three dimensions, 26 neighbours to a cell; this is the same distinction in a plane. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7861,7 +7861,7 @@
      "grid",
      "logic"
     ],
-    "expr": "cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in a volume of 26 neighbours; this is the same distinction in a plane"
+    "expr": "cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in three dimensions, 26 neighbours to a cell; this is the same distinction in a plane"
    }
   },
   "mod_difference_spread": {
@@ -7900,6 +7900,120 @@
      "noise_heights"
     ],
     "expr": "cells(two logistic lattices, one cell apart, r 2.8) beside the same at r 3.9 = difference_spread — what a difference keeps: two runs that agree but for one address, and the red is how far they now differ; where the lattice settles (r 2.8) the difference dies, where it does not (r 3.9) it spreads from neighbour to neighbour"
+   }
+  },
+  "mod_choice_sequence": {
+   "lookup_name": "mod_choice_sequence",
+   "name": "modular · only what you can construct",
+   "description": "only what you can construct = array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (position 3 holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not a claim about every continuation. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "choice_sequence"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "choice_sequence",
+    "chapter": "foundations",
+    "from": [
+     "cube_row",
+     "self_containing_box"
+    ],
+    "expr": "array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (position 3 holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not a claim about every continuation"
+   }
+  },
+  "mod_diagonal_witness": {
+   "lookup_name": "mod_diagonal_witness",
+   "name": "modular · a witness you can check",
+   "description": "a witness you can check = array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at position k — you can point to why it is none of the four rows. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "diagonal_witness"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "diagonal_witness",
+    "chapter": "foundations",
+    "from": [
+     "choice_sequence",
+     "grid"
+    ],
+    "expr": "array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at position k — you can point to why it is none of the four rows"
+   }
+  },
+  "mod_two_reports": {
+   "lookup_name": "mod_two_reports",
+   "name": "modular · holding contradiction without collapse",
+   "description": "holding contradiction without collapse = frame + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P has both supports (amber, at both) and Q, the alarm, has neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the frame decides who passes. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "two_reports"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "two_reports",
+    "chapter": "foundations",
+    "from": [
+     "walls",
+     "logic"
+    ],
+    "expr": "frame + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P has both supports (amber, at both) and Q, the alarm, has neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the frame decides who passes"
    }
   }
  }

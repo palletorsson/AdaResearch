@@ -4483,6 +4483,63 @@
    "branch_of": "quad",
    "distance": 1,
    "beyond": []
+  },
+  "choice_sequence": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 1,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
+  },
+  "diagonal_witness": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 1,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "two_reports": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 1,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "elevated_plank",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

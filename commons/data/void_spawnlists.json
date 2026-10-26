@@ -5198,7 +5198,10 @@
       "mod_spherical_triangle",
       "mod_impossible_triangle",
       "mod_self_containing_box",
-      "mod_euclid_vs_sphere"
+      "mod_euclid_vs_sphere",
+      "mod_choice_sequence",
+      "mod_diagonal_witness",
+      "mod_two_reports"
      ]
     },
     {
@@ -65605,13 +65608,100 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_difference_spread"
+  },
+  "mod_choice_sequence": {
+   "label": "only what you can construct",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "only what you can construct = array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (position 3 holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not a claim about every continuation",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "choice_sequence",
+    "from": [
+     "cube_row",
+     "self_containing_box"
+    ],
+    "expr": "array(bead, 8: 0 0 1 0 1 1 0 0) + ? = choice_sequence — what has been constructed: 8 choices in order, blue 0 and amber 1; the gold ring is a witness you can point to (position 3 holds a 1). The question mark is a place not yet filled, with no next term stored behind it: constructive evidence about this prefix, not a claim about every continuation"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_choice_sequence",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_choice_sequence"
+  },
+  "mod_diagonal_witness": {
+   "label": "a witness you can check",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a witness you can check = array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at position k — you can point to why it is none of the four rows",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "diagonal_witness",
+    "from": [
+     "choice_sequence",
+     "grid"
+    ],
+    "expr": "array(bead, 4 × 4) + the flipped diagonal = diagonal_witness — a witness you can check: the red row 1010 takes the opposite of each gold diagonal bit, so it differs from row k at position k — you can point to why it is none of the four rows"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_diagonal_witness",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_diagonal_witness"
+  },
+  "mod_two_reports": {
+   "label": "holding contradiction without collapse",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "holding contradiction without collapse = frame + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P has both supports (amber, at both) and Q, the alarm, has neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the frame decides who passes",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "two_reports",
+    "from": [
+     "walls",
+     "logic"
+    ],
+    "expr": "frame + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P has both supports (amber, at both) and Q, the alarm, has neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the frame decides who passes"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_two_reports",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_two_reports"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1750,
+  "items": 1753,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

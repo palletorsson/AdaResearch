@@ -1237,3 +1237,16 @@ shared disturbance, so this is the question, not the hall's machine. `euclid_vs_
 "what changes with the geometry". probe_trail.gd covers cells (572 cells changed in two seconds). Coverage 295 → 303:
 six rows shown, two partly ("local state updates" without the recursion beside it; "authored vs measured" through the
 λ route). Left: Gödel, Brouwer, Florensky, the QFEP F and Φ terms, the reaction-diffusion halls, and most of 25.
+
+**Brouwer and Florensky (26 Oct, Palle: "yes go").** Both halls read first; the terms are their own encounters.
+`choice_sequence` (Brouwer_Intuitionism, "Only What You Can Construct"): eight beads on a bench, blue 0 and amber 1,
+chosen in order; a gold ring at the third bead is a witness you can point to (it holds a 1); the empty "?" slot after
+them is a place not yet filled, with no next term stored behind it — evidence about a finite prefix, not an assertion
+about every continuation. `diagonal_witness` (the hall's last section): four rows of four bits, gold rings down the
+diagonal, and the red row 1010 that flips each diagonal bit, so it differs from row k at its k-th bead. `two_reports`
+(Florensky_Paraconsistent, "Holding Contradiction Without Collapse"): a doorway whose posts collide and two ghost
+leaves that do not — P open (amber, swung) and not-P closed (blue) held together — beside Dunn–Belnap's four values
+as a diamond, P at both and Q, the alarm, at neither: the contradiction does not make Q follow, in one chosen
+semantics. Coverage 303 → 306 (both halls and "constructive evidence, unresolved claims and non-explosion"); the
+first draft caught nine rows it does not show through "position", "frame", "supports", "choices about" and "claim" —
+reworded, and "about" joined the stop list. Gödel, the QFEP F and Φ terms, reaction-diffusion and most of 25 remain.
