@@ -2,14 +2,15 @@ extends SceneTree
 ## Do the time engines keep working in the game? Builds each term through the composite and runs it for about
 ## two seconds of frames. trail and pso: steps must grow beyond warm; a trail field must change and the ant colony
 ## keep delivering; a pso global best may only rise. A still shows only the warm state. A driven constraint
-## (carousel): the hub must have turned and the free balls swung out beyond their resting radius.
+## (carousel): the hub must have turned and the free balls swung out beyond their resting radius. cells: steps grow
+## beyond warm and the lattice changes.
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_trail.gd
 ## Writes ada_run/trail_probe.json; exit code = failures.
 
 const COMPOSITE := "res://commons/modular/composite.tscn"
 const Composite := preload("res://commons/modular/composite.gd")
 const OUT := "res://ada_run/trail_probe.json"
-const TERMS := ["pheromone_mark", "physarum", "ant_colony", "particle_swarm", "carousel"]
+const TERMS := ["pheromone_mark", "physarum", "ant_colony", "particle_swarm", "carousel", "lingering_cells"]
 
 
 func _init() -> void:
@@ -17,7 +18,7 @@ func _init() -> void:
 
 
 func _fields(n: Node, out: Array) -> Array:
-	if (n.name == "trail_field" or n.name == "pso_field") and n.get("steps") != null:
+	if (n.name == "trail_field" or n.name == "pso_field" or n.name == "cells_field") and n.get("steps") != null:
 		out.append(n)
 	for c in n.get_children():
 		_fields(c, out)
@@ -91,6 +92,31 @@ func _run() -> void:
 		else:
 			var f: Node = fs[0]
 			var warm: int = int((terms[tid]["build"] as Dictionary).get("warm", 300))
+			if f.name == "cells_field":
+				var c0: int = f.steps
+				var a0: PackedFloat32Array = f.a.duplicate()
+				var t2 := Time.get_ticks_msec()
+				while Time.get_ticks_msec() - t2 < 2000:
+					await process_frame
+				var changed := 0
+				for k in a0.size():
+					if a0[k] != f.a[k]:
+						changed += 1
+				r.merge({"warm": warm, "steps_before": c0, "steps_after": f.steps, "cells_changed": changed})
+				var cbad: Array = []
+				if c0 < warm:
+					cbad.append("warm steps not run")
+				if f.steps <= c0:
+					cbad.append("no steps in the game")
+				if changed == 0:
+					cbad.append("the lattice did not change")
+				r["problems"] = cbad
+				report["fails"] += int(not cbad.is_empty())
+				report["terms"][tid] = r
+				print("TRAIL %s %s" % [tid, JSON.stringify(r)])
+				c.queue_free()
+				await process_frame
+				continue
 			if f.name == "pso_field":
 				var g0: float = f.gs
 				var k0: int = f.steps

@@ -4407,6 +4407,82 @@
    "branch_of": "skateboard_3",
    "distance": 1,
    "beyond": []
+  },
+  "entropy_fan": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "lambda_route": {
+   "sig": {
+    "form": 3,
+    "body": 1,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 1,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 2,
+   "beyond": []
+  },
+  "lingering_cells": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "quad",
+   "distance": 1,
+   "beyond": []
+  },
+  "difference_spread": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "quad",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

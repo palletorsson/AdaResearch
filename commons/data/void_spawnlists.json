@@ -5044,10 +5044,21 @@
      ]
     },
     {
+     "id": "modular/automata",
+     "title": "automata",
+     "label": "automata",
+     "order": 20,
+     "children": [],
+     "items": [
+      "mod_lingering_cells",
+      "mod_difference_spread"
+     ]
+    },
+    {
      "id": "modular/fractals",
      "title": "fractals",
      "label": "fractals",
-     "order": 20,
+     "order": 21,
      "children": [],
      "items": [
       "mod_sierpinski",
@@ -5062,7 +5073,7 @@
      "id": "modular/lsystems",
      "title": "lsystems",
      "label": "lsystems",
-     "order": 21,
+     "order": 22,
      "children": [],
      "items": [
       "mod_lsystem_plant",
@@ -5075,7 +5086,7 @@
      "id": "modular/procedural",
      "title": "procedural",
      "label": "procedural",
-     "order": 22,
+     "order": 23,
      "children": [],
      "items": [
       "mod_bush",
@@ -5088,7 +5099,7 @@
      "id": "modular/softbodies",
      "title": "softbodies",
      "label": "softbodies",
-     "order": 23,
+     "order": 24,
      "children": [],
      "items": [
       "mod_soft_cube",
@@ -5100,7 +5111,7 @@
      "id": "modular/isosurfaces",
      "title": "isosurfaces",
      "label": "isosurfaces",
-     "order": 24,
+     "order": 25,
      "children": [],
      "items": [
       "mod_metaballs",
@@ -5117,7 +5128,7 @@
      "id": "modular/booleans",
      "title": "booleans",
      "label": "booleans",
-     "order": 25,
+     "order": 26,
      "children": [],
      "items": [
       "mod_bool_union",
@@ -5133,7 +5144,7 @@
      "id": "modular/swarms",
      "title": "swarms",
      "label": "swarms",
-     "order": 26,
+     "order": 27,
      "children": [],
      "items": [
       "mod_boids",
@@ -5148,7 +5159,7 @@
      "id": "modular/graphs",
      "title": "graphs",
      "label": "graphs",
-     "order": 27,
+     "order": 28,
      "children": [],
      "items": [
       "mod_graph",
@@ -5169,7 +5180,7 @@
      "id": "modular/ml",
      "title": "ml",
      "label": "ml",
-     "order": 28,
+     "order": 29,
      "children": [],
      "items": [
       "mod_line_fit",
@@ -5181,7 +5192,7 @@
      "id": "modular/foundations",
      "title": "foundations",
      "label": "foundations",
-     "order": 29,
+     "order": 30,
      "children": [],
      "items": [
       "mod_spherical_triangle",
@@ -5194,17 +5205,19 @@
      "id": "modular/qfep",
      "title": "qfep",
      "label": "qfep",
-     "order": 30,
+     "order": 31,
      "children": [],
      "items": [
-      "mod_same_total"
+      "mod_same_total",
+      "mod_entropy_fan",
+      "mod_lambda_route"
      ]
     },
     {
      "id": "modular/postcrisis",
      "title": "postcrisis",
      "label": "postcrisis",
-     "order": 31,
+     "order": 32,
      "children": [],
      "items": [
       "mod_rhizome"
@@ -65476,13 +65489,129 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_max_flow"
+  },
+  "mod_entropy_fan": {
+   "label": "counting what could happen",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "counting what could happen = connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level leave 27 (ln 27 = 3.30) — the count says how many remain, not which were refused (amber)",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "entropy_fan",
+    "from": [
+     "fractal_tree",
+     "same_total"
+    ],
+    "expr": "connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level leave 27 (ln 27 = 3.30) — the count says how many remain, not which were refused (amber)"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_entropy_fan",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_entropy_fan"
+  },
+  "mod_lambda_route": {
+   "label": "the path the hall recommends",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the path the hall recommends = array(cube, 9) × 11 rows, jitter and turn ∝ λ, a gold route at λ 0.4 = lambda_route — the path the hall recommends: the rows are placed by their assigned λ, from lattice to scatter; nothing was measured to put them there, and the lit row is an authored choice — what the preferred interval includes, someone chose",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "lambda_route",
+    "from": [
+     "cube_row",
+     "random_cubes"
+    ],
+    "expr": "array(cube, 9) × 11 rows, jitter and turn ∝ λ, a gold route at λ 0.4 = lambda_route — the path the hall recommends: the rows are placed by their assigned λ, from lattice to scatter; nothing was measured to put them there, and the lit row is an authored choice — what the preferred interval includes, someone chose"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_lambda_route",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_lambda_route"
+  },
+  "mod_lingering_cells": {
+   "label": "a cell with a past",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a cell with a past = cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in a volume of 26 neighbours; this is the same distinction in a plane",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "lingering_cells",
+    "from": [
+     "grid",
+     "logic"
+    ],
+    "expr": "cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in a volume of 26 neighbours; this is the same distinction in a plane"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_lingering_cells",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_lingering_cells"
+  },
+  "mod_difference_spread": {
+   "label": "how far one difference goes",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "how far one difference goes = cells(two logistic lattices, one cell apart, r 2.8) beside the same at r 3.9 = difference_spread — what a difference keeps: two runs that agree but for one address, and the red is how far they now differ; where the lattice settles (r 2.8) the difference dies, where it does not (r 3.9) it spreads from neighbour to neighbour",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "difference_spread",
+    "from": [
+     "lingering_cells",
+     "noise_heights"
+    ],
+    "expr": "cells(two logistic lattices, one cell apart, r 2.8) beside the same at r 3.9 = difference_spread — what a difference keeps: two runs that agree but for one address, and the red is how far they now differ; where the lattice settles (r 2.8) the difference dies, where it does not (r 3.9) it spreads from neighbour to neighbour"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_difference_spread",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_difference_spread"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1746,
+  "items": 1750,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

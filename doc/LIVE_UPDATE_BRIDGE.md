@@ -1221,3 +1221,19 @@ keep an excess of 1 (red) — a preflow, not yet a flow, with nowhere for the ex
 full (red). Capacity is a pale tube, the flow a dark rod in front of it, labelled flow/capacity (the first capture
 hid the flow inside translucent tubes). Coverage 292 → 295: GT_Connectivity, GT_Flow and "capacity, preflow and
 excess". Godot builds 206 terms.
+
+**The argument halls, read first (26 Oct, continued).** Before writing terms for sequences 23–25 and the automata
+halls, their final.md was read, and the terms say what those halls do — not what the titles suggest. `entropy_fan`
+(QFEP_E_Term, "Counting what could happen"): a fan of 3 continuations over 4 levels, 81 endings, ln 81 = 4.39 nats
+with equal weights; beside it 18 closures at the third level (amber), 27 remain — the count says how many, not which.
+`lambda_route` (QFEP_Lambda_Spectrum): 11 rows of cubes from lattice to scatter by their assigned λ, a gold route at
+0.4 — as the hall says, a curatorial argument: nothing was measured to place them (first laid wrong: a 1d array is a
+row along z). A third engine, `cells` (`mod_cells.gd`, `modular-cells.ts`), a lattice of local updates drawn as one
+texture: `lingering_cells` (CA_ElementaryRules, "A cell with a past") — rule 345/2/4, active cells counted, fading ones
+present and not counted; the hall's own rule is 6-8/6-8/3 in three dimensions, the term says so. `difference_spread`
+(CA_EdgeOfChaos) — two coupled logistic lattices one cell apart: at r 2.8 the difference dies (0 cells differ after
+60 steps), at r 3.9 it spreads (274 in the prototype, 203 in three.js); the hall's rule is a clipped averaging with a
+shared disturbance, so this is the question, not the hall's machine. `euclid_vs_sphere` now says what it shows,
+"what changes with the geometry". probe_trail.gd covers cells (572 cells changed in two seconds). Coverage 295 → 303:
+six rows shown, two partly ("local state updates" without the recursion beside it; "authored vs measured" through the
+λ route). Left: Gödel, Brouwer, Florensky, the QFEP F and Φ terms, the reaction-diffusion halls, and most of 25.

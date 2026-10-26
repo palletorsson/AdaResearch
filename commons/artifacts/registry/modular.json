@@ -7153,7 +7153,7 @@
   "mod_euclid_vs_sphere": {
    "lookup_name": "mod_euclid_vs_sphere",
    "name": "modular · two choices of geometry",
-   "description": "two choices of geometry = triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "two choices of geometry = triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — what changes with the geometry: Euclidean and non-Euclidean, the same three sides, on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7185,7 +7185,7 @@
      "triangle",
      "spherical_triangle"
     ],
-    "expr": "triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms"
+    "expr": "triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — what changes with the geometry: Euclidean and non-Euclidean, the same three sides, on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms"
    }
   },
   "mod_generations": {
@@ -7748,6 +7748,158 @@
      "preflow_excess"
     ],
     "expr": "maxflow(the same network, shortest augmenting paths with reverse arcs) = max_flow — the excess returned: 6 reach t and every junction passes on exactly what it receives; the cut at + bt is full (red), so no more can pass"
+   }
+  },
+  "mod_entropy_fan": {
+   "lookup_name": "mod_entropy_fan",
+   "name": "modular · counting what could happen",
+   "description": "counting what could happen = connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level leave 27 (ln 27 = 3.30) — the count says how many remain, not which were refused (amber). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "entropy_fan"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "qfep"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "entropy_fan",
+    "chapter": "qfep",
+    "from": [
+     "fractal_tree",
+     "same_total"
+    ],
+    "expr": "connect(fan: 3 continuations × 4 levels) beside the same fan pruned = entropy_fan — counting what could happen: 3⁴ = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level leave 27 (ln 27 = 3.30) — the count says how many remain, not which were refused (amber)"
+   }
+  },
+  "mod_lambda_route": {
+   "lookup_name": "mod_lambda_route",
+   "name": "modular · the path the hall recommends",
+   "description": "the path the hall recommends = array(cube, 9) × 11 rows, jitter and turn ∝ λ, a gold route at λ 0.4 = lambda_route — the path the hall recommends: the rows are placed by their assigned λ, from lattice to scatter; nothing was measured to put them there, and the lit row is an authored choice — what the preferred interval includes, someone chose. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "lambda_route"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "qfep"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lambda_route",
+    "chapter": "qfep",
+    "from": [
+     "cube_row",
+     "random_cubes"
+    ],
+    "expr": "array(cube, 9) × 11 rows, jitter and turn ∝ λ, a gold route at λ 0.4 = lambda_route — the path the hall recommends: the rows are placed by their assigned λ, from lattice to scatter; nothing was measured to put them there, and the lit row is an authored choice — what the preferred interval includes, someone chose"
+   }
+  },
+  "mod_lingering_cells": {
+   "lookup_name": "mod_lingering_cells",
+   "name": "modular · a cell with a past",
+   "description": "a cell with a past = cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in a volume of 26 neighbours; this is the same distinction in a plane. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "lingering_cells"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "automata"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lingering_cells",
+    "chapter": "automata",
+    "from": [
+     "grid",
+     "logic"
+    ],
+    "expr": "cells(48 × 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells — a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in a volume of 26 neighbours; this is the same distinction in a plane"
+   }
+  },
+  "mod_difference_spread": {
+   "lookup_name": "mod_difference_spread",
+   "name": "modular · how far one difference goes",
+   "description": "how far one difference goes = cells(two logistic lattices, one cell apart, r 2.8) beside the same at r 3.9 = difference_spread — what a difference keeps: two runs that agree but for one address, and the red is how far they now differ; where the lattice settles (r 2.8) the difference dies, where it does not (r 3.9) it spreads from neighbour to neighbour. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "difference_spread"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "automata"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "difference_spread",
+    "chapter": "automata",
+    "from": [
+     "lingering_cells",
+     "noise_heights"
+    ],
+    "expr": "cells(two logistic lattices, one cell apart, r 2.8) beside the same at r 3.9 = difference_spread — what a difference keeps: two runs that agree but for one address, and the red is how far they now differ; where the lattice settles (r 2.8) the difference dies, where it does not (r 3.9) it spreads from neighbour to neighbour"
    }
   }
  }

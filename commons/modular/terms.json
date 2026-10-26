@@ -21,6 +21,7 @@
     "noise",
     "shaders",
     "logic",
+    "automata",
     "fractals",
     "lsystems",
     "procedural",
@@ -26933,7 +26934,7 @@
         "triangle",
         "spherical_triangle"
       ],
-      "expr": "triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere \u2014 Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180\u00b0, on the sphere to 270\u00b0; the geometry is a choice of axioms",
+      "expr": "triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere \u2014 what changes with the geometry: Euclidean and non-Euclidean, the same three sides, on the plane the angles sum to 180\u00b0, on the sphere to 270\u00b0; the geometry is a choice of axioms",
       "build": {
         "op": "compose",
         "parts": [
@@ -31075,6 +31076,4193 @@
               0.43,
               0.52,
               0.02
+            ]
+          }
+        ]
+      }
+    },
+    "entropy_fan": {
+      "chapter": "qfep",
+      "label": "counting what could happen",
+      "from": [
+        "fractal_tree",
+        "same_total"
+      ],
+      "expr": "connect(fan: 3 continuations \u00d7 4 levels) beside the same fan pruned = entropy_fan \u2014 counting what could happen: 3\u2074 = 81 endings, entropy ln 81 = 4.39 nats if every ending weighs the same; 18 closures at the third level, and 27 remain (ln 27 = 3.30) \u2014 the count says how many remain, not which were refused (amber)",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "connect",
+                "ties": [
+                  [
+                    0,
+                    1,
+                    "rope"
+                  ],
+                  [
+                    0,
+                    2,
+                    "rope"
+                  ],
+                  [
+                    0,
+                    3,
+                    "rope"
+                  ],
+                  [
+                    1,
+                    4,
+                    "rope"
+                  ],
+                  [
+                    1,
+                    5,
+                    "rope"
+                  ],
+                  [
+                    1,
+                    6,
+                    "rope"
+                  ],
+                  [
+                    2,
+                    7,
+                    "rope"
+                  ],
+                  [
+                    2,
+                    8,
+                    "rope"
+                  ],
+                  [
+                    2,
+                    9,
+                    "rope"
+                  ],
+                  [
+                    3,
+                    10,
+                    "rope"
+                  ],
+                  [
+                    3,
+                    11,
+                    "rope"
+                  ],
+                  [
+                    3,
+                    12,
+                    "rope"
+                  ],
+                  [
+                    4,
+                    13,
+                    "rope"
+                  ],
+                  [
+                    4,
+                    14,
+                    "rope"
+                  ],
+                  [
+                    4,
+                    15,
+                    "rope"
+                  ],
+                  [
+                    5,
+                    16,
+                    "rope"
+                  ],
+                  [
+                    5,
+                    17,
+                    "rope"
+                  ],
+                  [
+                    5,
+                    18,
+                    "rope"
+                  ],
+                  [
+                    6,
+                    19,
+                    "rope"
+                  ],
+                  [
+                    6,
+                    20,
+                    "rope"
+                  ],
+                  [
+                    6,
+                    21,
+                    "rope"
+                  ],
+                  [
+                    7,
+                    22,
+                    "rope"
+                  ],
+                  [
+                    7,
+                    23,
+                    "rope"
+                  ],
+                  [
+                    7,
+                    24,
+                    "rope"
+                  ],
+                  [
+                    8,
+                    25,
+                    "rope"
+                  ],
+                  [
+                    8,
+                    26,
+                    "rope"
+                  ],
+                  [
+                    8,
+                    27,
+                    "rope"
+                  ],
+                  [
+                    9,
+                    28,
+                    "rope"
+                  ],
+                  [
+                    9,
+                    29,
+                    "rope"
+                  ],
+                  [
+                    9,
+                    30,
+                    "rope"
+                  ],
+                  [
+                    10,
+                    31,
+                    "rope"
+                  ],
+                  [
+                    10,
+                    32,
+                    "rope"
+                  ],
+                  [
+                    10,
+                    33,
+                    "rope"
+                  ],
+                  [
+                    11,
+                    34,
+                    "rope"
+                  ],
+                  [
+                    11,
+                    35,
+                    "rope"
+                  ],
+                  [
+                    11,
+                    36,
+                    "rope"
+                  ],
+                  [
+                    12,
+                    37,
+                    "rope"
+                  ],
+                  [
+                    12,
+                    38,
+                    "rope"
+                  ],
+                  [
+                    12,
+                    39,
+                    "rope"
+                  ],
+                  [
+                    13,
+                    40,
+                    "rope"
+                  ],
+                  [
+                    13,
+                    41,
+                    "rope"
+                  ],
+                  [
+                    13,
+                    42,
+                    "rope"
+                  ],
+                  [
+                    14,
+                    43,
+                    "rope"
+                  ],
+                  [
+                    14,
+                    44,
+                    "rope"
+                  ],
+                  [
+                    14,
+                    45,
+                    "rope"
+                  ],
+                  [
+                    15,
+                    46,
+                    "rope"
+                  ],
+                  [
+                    15,
+                    47,
+                    "rope"
+                  ],
+                  [
+                    15,
+                    48,
+                    "rope"
+                  ],
+                  [
+                    16,
+                    49,
+                    "rope"
+                  ],
+                  [
+                    16,
+                    50,
+                    "rope"
+                  ],
+                  [
+                    16,
+                    51,
+                    "rope"
+                  ],
+                  [
+                    17,
+                    52,
+                    "rope"
+                  ],
+                  [
+                    17,
+                    53,
+                    "rope"
+                  ],
+                  [
+                    17,
+                    54,
+                    "rope"
+                  ],
+                  [
+                    18,
+                    55,
+                    "rope"
+                  ],
+                  [
+                    18,
+                    56,
+                    "rope"
+                  ],
+                  [
+                    18,
+                    57,
+                    "rope"
+                  ],
+                  [
+                    19,
+                    58,
+                    "rope"
+                  ],
+                  [
+                    19,
+                    59,
+                    "rope"
+                  ],
+                  [
+                    19,
+                    60,
+                    "rope"
+                  ],
+                  [
+                    20,
+                    61,
+                    "rope"
+                  ],
+                  [
+                    20,
+                    62,
+                    "rope"
+                  ],
+                  [
+                    20,
+                    63,
+                    "rope"
+                  ],
+                  [
+                    21,
+                    64,
+                    "rope"
+                  ],
+                  [
+                    21,
+                    65,
+                    "rope"
+                  ],
+                  [
+                    21,
+                    66,
+                    "rope"
+                  ],
+                  [
+                    22,
+                    67,
+                    "rope"
+                  ],
+                  [
+                    22,
+                    68,
+                    "rope"
+                  ],
+                  [
+                    22,
+                    69,
+                    "rope"
+                  ],
+                  [
+                    23,
+                    70,
+                    "rope"
+                  ],
+                  [
+                    23,
+                    71,
+                    "rope"
+                  ],
+                  [
+                    23,
+                    72,
+                    "rope"
+                  ],
+                  [
+                    24,
+                    73,
+                    "rope"
+                  ],
+                  [
+                    24,
+                    74,
+                    "rope"
+                  ],
+                  [
+                    24,
+                    75,
+                    "rope"
+                  ],
+                  [
+                    25,
+                    76,
+                    "rope"
+                  ],
+                  [
+                    25,
+                    77,
+                    "rope"
+                  ],
+                  [
+                    25,
+                    78,
+                    "rope"
+                  ],
+                  [
+                    26,
+                    79,
+                    "rope"
+                  ],
+                  [
+                    26,
+                    80,
+                    "rope"
+                  ],
+                  [
+                    26,
+                    81,
+                    "rope"
+                  ],
+                  [
+                    27,
+                    82,
+                    "rope"
+                  ],
+                  [
+                    27,
+                    83,
+                    "rope"
+                  ],
+                  [
+                    27,
+                    84,
+                    "rope"
+                  ],
+                  [
+                    28,
+                    85,
+                    "rope"
+                  ],
+                  [
+                    28,
+                    86,
+                    "rope"
+                  ],
+                  [
+                    28,
+                    87,
+                    "rope"
+                  ],
+                  [
+                    29,
+                    88,
+                    "rope"
+                  ],
+                  [
+                    29,
+                    89,
+                    "rope"
+                  ],
+                  [
+                    29,
+                    90,
+                    "rope"
+                  ],
+                  [
+                    30,
+                    91,
+                    "rope"
+                  ],
+                  [
+                    30,
+                    92,
+                    "rope"
+                  ],
+                  [
+                    30,
+                    93,
+                    "rope"
+                  ],
+                  [
+                    31,
+                    94,
+                    "rope"
+                  ],
+                  [
+                    31,
+                    95,
+                    "rope"
+                  ],
+                  [
+                    31,
+                    96,
+                    "rope"
+                  ],
+                  [
+                    32,
+                    97,
+                    "rope"
+                  ],
+                  [
+                    32,
+                    98,
+                    "rope"
+                  ],
+                  [
+                    32,
+                    99,
+                    "rope"
+                  ],
+                  [
+                    33,
+                    100,
+                    "rope"
+                  ],
+                  [
+                    33,
+                    101,
+                    "rope"
+                  ],
+                  [
+                    33,
+                    102,
+                    "rope"
+                  ],
+                  [
+                    34,
+                    103,
+                    "rope"
+                  ],
+                  [
+                    34,
+                    104,
+                    "rope"
+                  ],
+                  [
+                    34,
+                    105,
+                    "rope"
+                  ],
+                  [
+                    35,
+                    106,
+                    "rope"
+                  ],
+                  [
+                    35,
+                    107,
+                    "rope"
+                  ],
+                  [
+                    35,
+                    108,
+                    "rope"
+                  ],
+                  [
+                    36,
+                    109,
+                    "rope"
+                  ],
+                  [
+                    36,
+                    110,
+                    "rope"
+                  ],
+                  [
+                    36,
+                    111,
+                    "rope"
+                  ],
+                  [
+                    37,
+                    112,
+                    "rope"
+                  ],
+                  [
+                    37,
+                    113,
+                    "rope"
+                  ],
+                  [
+                    37,
+                    114,
+                    "rope"
+                  ],
+                  [
+                    38,
+                    115,
+                    "rope"
+                  ],
+                  [
+                    38,
+                    116,
+                    "rope"
+                  ],
+                  [
+                    38,
+                    117,
+                    "rope"
+                  ],
+                  [
+                    39,
+                    118,
+                    "rope"
+                  ],
+                  [
+                    39,
+                    119,
+                    "rope"
+                  ],
+                  [
+                    39,
+                    120,
+                    "rope"
+                  ]
+                ],
+                "of": {
+                  "op": "compose",
+                  "parts": [
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.6,
+                        0.08,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.9333,
+                        0.3175,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.6,
+                        0.3175,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.2667,
+                        0.3175,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -1.0444,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.9333,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.8222,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.7111,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.6,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.4889,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.3778,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.2667,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.1556,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -1.0815,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -1.0444,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -1.0074,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.9704,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.9333,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.8963,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.8593,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.8222,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.7852,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.7481,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.7111,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.6741,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.637,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.6,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.563,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.5259,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.4889,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.4519,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.4148,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.3778,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.3407,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.3037,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.2667,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.2296,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.1926,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.1556,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        -0.1185,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0938,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0815,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0691,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0568,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0444,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0321,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0198,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -1.0074,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.9951,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.9827,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.9704,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.958,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.9457,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.9333,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.921,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.9086,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8963,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.884,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8716,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8593,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8469,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8346,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8222,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.8099,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7975,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7852,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7728,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7605,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7481,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7358,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7235,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.7111,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6988,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6864,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6741,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6617,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6494,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.637,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6247,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6123,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.6,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5877,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5753,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.563,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5506,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5383,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5259,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5136,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.5012,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4889,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4765,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4642,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4519,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4395,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4272,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4148,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.4025,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3901,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3778,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3654,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3531,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3407,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3284,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.316,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.3037,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.2914,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.279,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.2667,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.2543,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.242,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.2296,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.2173,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.2049,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1926,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1802,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1679,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1556,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1432,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1309,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1185,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        -0.1062,
+                        1.03,
+                        0
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "op": "compose",
+            "parts": [
+              {
+                "op": "connect",
+                "ties": [
+                  [
+                    0,
+                    1,
+                    "rope"
+                  ],
+                  [
+                    0,
+                    2,
+                    "rope"
+                  ],
+                  [
+                    0,
+                    3,
+                    "rope"
+                  ],
+                  [
+                    1,
+                    4,
+                    "rope"
+                  ],
+                  [
+                    1,
+                    5,
+                    "rope"
+                  ],
+                  [
+                    1,
+                    6,
+                    "rope"
+                  ],
+                  [
+                    2,
+                    7,
+                    "rope"
+                  ],
+                  [
+                    2,
+                    8,
+                    "rope"
+                  ],
+                  [
+                    2,
+                    9,
+                    "rope"
+                  ],
+                  [
+                    3,
+                    10,
+                    "rope"
+                  ],
+                  [
+                    3,
+                    11,
+                    "rope"
+                  ],
+                  [
+                    3,
+                    12,
+                    "rope"
+                  ],
+                  [
+                    4,
+                    13,
+                    "rope"
+                  ],
+                  [
+                    4,
+                    14,
+                    "rope"
+                  ],
+                  [
+                    4,
+                    15,
+                    "rope"
+                  ],
+                  [
+                    5,
+                    16,
+                    "rope"
+                  ],
+                  [
+                    5,
+                    17,
+                    "rope"
+                  ],
+                  [
+                    5,
+                    18,
+                    "rope"
+                  ],
+                  [
+                    6,
+                    19,
+                    "rope"
+                  ],
+                  [
+                    6,
+                    20,
+                    "rope"
+                  ],
+                  [
+                    6,
+                    21,
+                    "rope"
+                  ],
+                  [
+                    7,
+                    22,
+                    "rope"
+                  ],
+                  [
+                    7,
+                    23,
+                    "rope"
+                  ],
+                  [
+                    7,
+                    24,
+                    "rope"
+                  ],
+                  [
+                    8,
+                    25,
+                    "rope"
+                  ],
+                  [
+                    8,
+                    26,
+                    "rope"
+                  ],
+                  [
+                    8,
+                    27,
+                    "rope"
+                  ],
+                  [
+                    9,
+                    28,
+                    "rope"
+                  ],
+                  [
+                    9,
+                    29,
+                    "rope"
+                  ],
+                  [
+                    9,
+                    30,
+                    "rope"
+                  ],
+                  [
+                    10,
+                    31,
+                    "rope"
+                  ],
+                  [
+                    10,
+                    32,
+                    "rope"
+                  ],
+                  [
+                    10,
+                    33,
+                    "rope"
+                  ],
+                  [
+                    11,
+                    34,
+                    "rope"
+                  ],
+                  [
+                    11,
+                    35,
+                    "rope"
+                  ],
+                  [
+                    11,
+                    36,
+                    "rope"
+                  ],
+                  [
+                    12,
+                    37,
+                    "rope"
+                  ],
+                  [
+                    12,
+                    38,
+                    "rope"
+                  ],
+                  [
+                    12,
+                    39,
+                    "rope"
+                  ],
+                  [
+                    13,
+                    40,
+                    "rope"
+                  ],
+                  [
+                    13,
+                    41,
+                    "rope"
+                  ],
+                  [
+                    13,
+                    42,
+                    "rope"
+                  ],
+                  [
+                    16,
+                    43,
+                    "rope"
+                  ],
+                  [
+                    16,
+                    44,
+                    "rope"
+                  ],
+                  [
+                    16,
+                    45,
+                    "rope"
+                  ],
+                  [
+                    19,
+                    46,
+                    "rope"
+                  ],
+                  [
+                    19,
+                    47,
+                    "rope"
+                  ],
+                  [
+                    19,
+                    48,
+                    "rope"
+                  ],
+                  [
+                    22,
+                    49,
+                    "rope"
+                  ],
+                  [
+                    22,
+                    50,
+                    "rope"
+                  ],
+                  [
+                    22,
+                    51,
+                    "rope"
+                  ],
+                  [
+                    25,
+                    52,
+                    "rope"
+                  ],
+                  [
+                    25,
+                    53,
+                    "rope"
+                  ],
+                  [
+                    25,
+                    54,
+                    "rope"
+                  ],
+                  [
+                    28,
+                    55,
+                    "rope"
+                  ],
+                  [
+                    28,
+                    56,
+                    "rope"
+                  ],
+                  [
+                    28,
+                    57,
+                    "rope"
+                  ],
+                  [
+                    31,
+                    58,
+                    "rope"
+                  ],
+                  [
+                    31,
+                    59,
+                    "rope"
+                  ],
+                  [
+                    31,
+                    60,
+                    "rope"
+                  ],
+                  [
+                    34,
+                    61,
+                    "rope"
+                  ],
+                  [
+                    34,
+                    62,
+                    "rope"
+                  ],
+                  [
+                    34,
+                    63,
+                    "rope"
+                  ],
+                  [
+                    37,
+                    64,
+                    "rope"
+                  ],
+                  [
+                    37,
+                    65,
+                    "rope"
+                  ],
+                  [
+                    37,
+                    66,
+                    "rope"
+                  ]
+                ],
+                "of": {
+                  "op": "compose",
+                  "parts": [
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.6,
+                        0.08,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.2667,
+                        0.3175,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.6,
+                        0.3175,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.9333,
+                        0.3175,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.1556,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.2667,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.3778,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.4889,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.6,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.7111,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.8222,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.9333,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        1.0444,
+                        0.555,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.1185,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.1556,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.1926,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.2296,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.2667,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.3037,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.3407,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.3778,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.4148,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.4519,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.4889,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.5259,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.563,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.6,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.637,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.6741,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.7111,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.7481,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.7852,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.8222,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.8593,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.8963,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.9333,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        0.9704,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        1.0074,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        1.0444,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.009
+                      },
+                      "at": [
+                        1.0815,
+                        0.7925,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.1062,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.1185,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.1309,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.2173,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.2296,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.242,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.3284,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.3407,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.3531,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.4395,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.4519,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.4642,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.5506,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.563,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.5753,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.6617,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.6741,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.6864,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.7728,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.7852,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.7975,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.884,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.8963,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.9086,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        0.9951,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        1.0074,
+                        1.03,
+                        0
+                      ]
+                    },
+                    {
+                      "op": "transform",
+                      "of": {
+                        "p": "point",
+                        "color": "2b1d14",
+                        "radius": 0.006
+                      },
+                      "at": [
+                        1.0198,
+                        1.03,
+                        0
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.1556,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.1926,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.2667,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.3037,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.3778,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.4148,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.4889,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.5259,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.6,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.637,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.7111,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.7481,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.8222,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.8593,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.9333,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  0.9704,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  1.0444,
+                  0.8045,
+                  0
+                ]
+              },
+              {
+                "op": "transform",
+                "of": {
+                  "p": "point",
+                  "color": "e0a020",
+                  "radius": 0.016
+                },
+                "at": [
+                  1.0815,
+                  0.8045,
+                  0
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "lambda_route": {
+      "chapter": "qfep",
+      "label": "the path the hall recommends",
+      "from": [
+        "cube_row",
+        "random_cubes"
+      ],
+      "expr": "array(cube, 9) \u00d7 11 rows, jitter and turn \u221d \u03bb, a gold route at \u03bb 0.4 = lambda_route \u2014 the path the hall recommends: the rows are placed by their assigned \u03bb, from lattice to scatter; nothing was measured to put them there, and the lit row is an authored choice \u2014 what the preferred interval includes, someone chose",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "array",
+              "of": {
+                "op": "transform",
+                "of": {
+                  "t": "cube"
+                },
+                "scale": 0.12
+              },
+              "n": 9,
+              "step": 0.13,
+              "dims": 1
+            },
+            "at": [
+              -0.7,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 12,
+              "jitter": 0.009,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -6.0,
+                0,
+                6.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              -0.56,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 13,
+              "jitter": 0.018,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -12.0,
+                0,
+                12.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              -0.42,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 14,
+              "jitter": 0.027,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -18.0,
+                0,
+                18.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              -0.28,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 15,
+              "jitter": 0.036,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -24.0,
+                0,
+                24.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              -0.14,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 16,
+              "jitter": 0.045,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -30.0,
+                0,
+                30.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              0.0,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 17,
+              "jitter": 0.054,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -36.0,
+                0,
+                36.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              0.14,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 18,
+              "jitter": 0.063,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -42.0,
+                0,
+                42.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              0.28,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 19,
+              "jitter": 0.072,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -48.0,
+                0,
+                48.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              0.42,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 20,
+              "jitter": 0.081,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -54.0,
+                0,
+                54.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              0.56,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "random",
+              "seed": 21,
+              "jitter": 0.09,
+              "lift": 0,
+              "vary_scale": false,
+              "angles": [
+                -60.0,
+                0,
+                60.0
+              ],
+              "of": {
+                "op": "array",
+                "of": {
+                  "op": "transform",
+                  "of": {
+                    "t": "cube"
+                  },
+                  "scale": 0.12
+                },
+                "n": 9,
+                "step": 0.13,
+                "dims": 1
+              }
+            },
+            "at": [
+              0.7,
+              0,
+              0
+            ]
+          },
+          {
+            "p": "mesh",
+            "shape": "box",
+            "size": [
+              0.1,
+              0.008,
+              1.3
+            ],
+            "color": "b8862b",
+            "at": [
+              -0.14,
+              0.004,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "\u03bb 0",
+              "pixel_size": 0.0016
+            },
+            "at": [
+              -0.7,
+              0.06,
+              0.74
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "\u03bb \u2248 0.4",
+              "pixel_size": 0.0016
+            },
+            "at": [
+              -0.14,
+              0.06,
+              0.74
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "p": "label",
+              "text": "\u03bb 1",
+              "pixel_size": 0.0016
+            },
+            "at": [
+              0.7,
+              0.06,
+              0.74
+            ]
+          }
+        ]
+      }
+    },
+    "lingering_cells": {
+      "chapter": "automata",
+      "label": "a cell with a past",
+      "from": [
+        "grid",
+        "logic"
+      ],
+      "expr": "cells(48 \u00d7 48, rule 345/2/4: born with 2 active neighbours, surviving with 3, 4 or 5, then fading through two states) = lingering_cells \u2014 a state that lingers: active cells (pink) are counted by their neighbours, fading ones (green) are still there and no longer counted; local state updates, every cell reading the previous lattice. The hall's rule is 6-8/6-8/3 in three dimensions, 26 neighbours to a cell; this is the same distinction in a plane",
+      "build": {
+        "op": "engine",
+        "kind": "cells",
+        "cells": 48,
+        "size": [
+          1.2,
+          1.2
+        ],
+        "mode": "generations",
+        "birth": [
+          2
+        ],
+        "survive": [
+          3,
+          4,
+          5
+        ],
+        "states": 4,
+        "density": 0.3,
+        "seed": 2,
+        "warm": 60,
+        "rate": 8,
+        "of": {
+          "op": "compose",
+          "parts": []
+        }
+      }
+    },
+    "difference_spread": {
+      "chapter": "automata",
+      "label": "how far one difference goes",
+      "from": [
+        "lingering_cells",
+        "noise_heights"
+      ],
+      "expr": "cells(two logistic lattices, one cell apart, r 2.8) beside the same at r 3.9 = difference_spread \u2014 what a difference keeps: two runs that agree but for one address, and the red is how far they now differ; where the lattice settles (r 2.8) the difference dies, where it does not (r 3.9) it spreads from neighbour to neighbour",
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "cells",
+              "cells": 48,
+              "size": [
+                1.2,
+                1.2
+              ],
+              "mode": "difference",
+              "r": 2.8,
+              "eps": 0.3,
+              "delta": 0.1,
+              "seed": 4,
+              "warm": 60,
+              "rate": 6,
+              "of": {
+                "op": "compose",
+                "parts": []
+              }
+            },
+            "at": [
+              -0.7,
+              0,
+              0
+            ]
+          },
+          {
+            "op": "transform",
+            "of": {
+              "op": "engine",
+              "kind": "cells",
+              "cells": 48,
+              "size": [
+                1.2,
+                1.2
+              ],
+              "mode": "difference",
+              "r": 3.9,
+              "eps": 0.3,
+              "delta": 0.1,
+              "seed": 4,
+              "warm": 60,
+              "rate": 6,
+              "of": {
+                "op": "compose",
+                "parts": []
+              }
+            },
+            "at": [
+              0.7,
+              0,
+              0
             ]
           }
         ]

@@ -12,6 +12,7 @@ extends Node
 ## random with "keep": p lets each part survive a draw with probability p (removal: what support goes).
 ## trail is stigmergy: agents that write the field they read (mod_trail.gd builds and steps it).
 ## pso is particle swarm optimisation: personal and global bests over a landscape (mod_pso.gd).
+## cells is a lattice of local state updates: generations with a fading state, or a difference between two runs (mod_cells.gd).
 
 var kind: String = ""
 var params: Dictionary = {}
@@ -90,6 +91,8 @@ static func attach(root: Node3D, expr: Dictionary) -> Node:
 		root.add_child((load("res://commons/modular/mod_trail.gd") as GDScript).call("make", expr))
 	elif b.kind == "pso":
 		root.add_child((load("res://commons/modular/mod_pso.gd") as GDScript).call("make", expr))
+	elif b.kind == "cells":
+		root.add_child((load("res://commons/modular/mod_cells.gd") as GDScript).call("make", expr))
 	return b
 
 
