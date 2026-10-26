@@ -4274,6 +4274,82 @@
    "branch_of": "lattice",
    "distance": 3,
    "beyond": []
+  },
+  "particle_swarm": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 3,
+   "beyond": []
+  },
+  "swarm_memory_pair": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 2,
+    "parts": 1,
+    "joint": 0,
+    "drive": 1,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 3,
+   "beyond": []
+  },
+  "carousel": {
+   "sig": {
+    "form": 3,
+    "body": 2,
+    "many": 1,
+    "parts": 2,
+    "joint": 1,
+    "drive": 0,
+    "react": 1,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "pendulum",
+   "distance": 2,
+   "beyond": []
+  },
+  "carousel_pair": {
+   "sig": {
+    "form": 3,
+    "body": 2,
+    "many": 1,
+    "parts": 1,
+    "joint": 1,
+    "drive": 0,
+    "react": 1,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "pendulum",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

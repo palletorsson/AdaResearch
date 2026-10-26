@@ -110,6 +110,30 @@ static func make_rigid(body: StaticBody3D) -> RigidBody3D:
 	return r
 
 
+## Turn a static body into an animatable one in place: still immovable by collisions, but moved by its
+## engine every physics step, so what is tied to it is driven (a carousel's hub, a swaying pivot).
+static func make_animatable(body: StaticBody3D) -> AnimatableBody3D:
+	var a := AnimatableBody3D.new()
+	a.name = body.name
+	a.transform = body.transform
+	a.sync_to_physics = true
+	for key in ["term", "modular_body", "primitive", "cell"]:
+		if body.has_meta(key):
+			a.set_meta(key, body.get_meta(key))
+	a.set_meta("modular_body", "driven")
+	var parent: Node = body.get_parent()
+	for c in body.get_children():
+		body.remove_child(c)
+		a.add_child(c)
+	if parent != null:
+		var idx: int = body.get_index()
+		parent.remove_child(body)
+		parent.add_child(a)
+		parent.move_child(a, idx)
+	body.queue_free()
+	return a
+
+
 static func _meshes(n: Node) -> Array:
 	var out: Array = []
 	if n is MeshInstance3D:

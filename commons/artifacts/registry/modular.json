@@ -7341,7 +7341,7 @@
   "mod_record_vs_signal": {
    "lookup_name": "mod_record_vs_signal",
    "name": "modular · a record and a signal",
-   "description": "a record and a signal = trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk becomes paths. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "a record and a signal = trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk thickens into paths. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7372,7 +7372,7 @@
     "from": [
      "pheromone_mark"
     ],
-    "expr": "trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk becomes paths"
+    "expr": "trail(follow 0) beside trail(follow 1), the same 60 walkers from the same seed = record_vs_signal — a recorded trail against a signal that influences later choices: on the left the marks only record where the walkers went; on the right each walker reads them before it turns, and the walk thickens into paths"
    }
   },
   "mod_evaporation_pair": {
@@ -7453,7 +7453,7 @@
   "mod_ant_colony": {
    "lookup_name": "mod_ant_colony",
    "name": "modular · two channels",
-   "description": "two channels = trail(ant × 120, two channels: searchers lay home and follow food, carriers lay food and follow home; the deposit fades with the journey) = ant_colony — outward and returning travellers seek and leave different traces; routes form between the nest (dark) and the food (gold), and nothing proves any of them shortest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "two channels = trail(ant × 160, two channels: searchers lay home and steer by food, carriers lay food and steer by home; the deposit fades with the journey) = ant_colony — outward and homeward travellers seek and leave different traces; a route appears between the nest (dark) and the food (gold), bent where it could be straight: nothing proves it shortest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -7484,7 +7484,157 @@
     "from": [
      "pheromone_mark"
     ],
-    "expr": "trail(ant × 120, two channels: searchers lay home and follow food, carriers lay food and follow home; the deposit fades with the journey) = ant_colony — outward and returning travellers seek and leave different traces; routes form between the nest (dark) and the food (gold), and nothing proves any of them shortest"
+    "expr": "trail(ant × 160, two channels: searchers lay home and steer by food, carriers lay food and steer by home; the deposit fades with the journey) = ant_colony — outward and homeward travellers seek and leave different traces; a route appears between the nest (dark) and the food (gold), bent where it could be straight: nothing proves it shortest"
+   }
+  },
+  "mod_particle_swarm": {
+   "lookup_name": "mod_particle_swarm",
+   "name": "modular · collective memory",
+   "description": "collective memory = pso(particle × 16 over five hills, inertia 0.7, personal 1.4, social 1.4) = particle_swarm — collective memory: each particle remembers its personal best (a gold disc where it was found, as high as its score) and all share the global best (the red pin); each update pulls every particle toward both by random amounts. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "particle_swarm"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "swarms"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "particle_swarm",
+    "chapter": "swarms",
+    "from": [
+     "boids",
+     "two_basins"
+    ],
+    "expr": "pso(particle × 16 over five hills, inertia 0.7, personal 1.4, social 1.4) = particle_swarm — collective memory: each particle remembers its personal best (a gold disc where it was found, as high as its score) and all share the global best (the red pin); each update pulls every particle toward both by random amounts"
+   }
+  },
+  "mod_swarm_memory_pair": {
+   "lookup_name": "mod_swarm_memory_pair",
+   "name": "modular · personal and shared memory",
+   "description": "personal and shared memory = pso(personal only) beside pso(personal + global), the same particles, seed and hills = swarm_memory_pair — the remembered places against what they scored: steered by its own memory alone each particle circles the hill it found; with the global best shared the swarm gathers on one hill, usually but not always the highest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "swarm_memory_pair"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "swarms"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "swarm_memory_pair",
+    "chapter": "swarms",
+    "from": [
+     "particle_swarm"
+    ],
+    "expr": "pso(personal only) beside pso(personal + global), the same particles, seed and hills = swarm_memory_pair — the remembered places against what they scored: steered by its own memory alone each particle circles the hill it found; with the global best shared the swarm gathers on one hill, usually but not always the highest"
+   }
+  },
+  "mod_carousel": {
+   "lookup_name": "mod_carousel",
+   "name": "modular · a driven constraint",
+   "description": "a driven constraint = physics(four balls on ropes from a hub, the hub driven at 200°/s) = carousel — what changes when the constraint itself is driven? nothing pushes the balls: the ropes' upper ends are carried round, and the balls swing out until the rope's pull turns them with it. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "carousel"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "softbodies"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "carousel",
+    "chapter": "softbodies",
+    "from": [
+     "pendulum",
+     "turning_cube"
+    ],
+    "expr": "physics(four balls on ropes from a hub, the hub driven at 200°/s) = carousel — what changes when the constraint itself is driven? nothing pushes the balls: the ropes' upper ends are carried round, and the balls swing out until the rope's pull turns them with it"
+   }
+  },
+  "mod_carousel_pair": {
+   "lookup_name": "mod_carousel_pair",
+   "name": "modular · held and driven",
+   "description": "held and driven = carousel(at rest) beside carousel(driven), the same balls on the same ropes = carousel_pair — the same constraint held still and driven: at rest the ropes hang plumb; turned, they lean out. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "carousel_pair"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "softbodies"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "carousel_pair",
+    "chapter": "softbodies",
+    "from": [
+     "carousel"
+    ],
+    "expr": "carousel(at rest) beside carousel(driven), the same balls on the same ropes = carousel_pair — the same constraint held still and driven: at rest the ropes hang plumb; turned, they lean out"
    }
   }
  }

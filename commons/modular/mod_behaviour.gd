@@ -11,6 +11,7 @@ extends Node
 ## separation, alignment and cohesion within a radius, steered back into a box (Reynolds' boids).
 ## random with "keep": p lets each part survive a draw with probability p (removal: what support goes).
 ## trail is stigmergy: agents that write the field they read (mod_trail.gd builds and steps it).
+## pso is particle swarm optimisation: personal and global bests over a landscape (mod_pso.gd).
 
 var kind: String = ""
 var params: Dictionary = {}
@@ -20,6 +21,9 @@ var _t := 0.0
 var _trace_from: Node3D = null
 var _trace_last := Vector3.INF
 var _trace_count := 0
+var _driven: Array = []       # bodies a physics engine's "drive" moves: [body, home global transform]
+var _drive_t := 0.0
+var _drive_angle := 0.0
 
 const ModBody := preload("res://commons/modular/mod_body.gd")
 const ModLabel := preload("res://commons/modular/mod_label.gd")
@@ -84,6 +88,8 @@ static func attach(root: Node3D, expr: Dictionary) -> Node:
 	if b.kind == "trail":
 		# the field and its agents are built now, warm steps and all: a still or a glb sees the trail
 		root.add_child((load("res://commons/modular/mod_trail.gd") as GDScript).call("make", expr))
+	elif b.kind == "pso":
+		root.add_child((load("res://commons/modular/mod_pso.gd") as GDScript).call("make", expr))
 	return b
 
 
@@ -163,6 +169,27 @@ func _ready() -> void:
 			pass
 
 
+func _physics_process(delta: float) -> void:
+	if _driven.is_empty():
+		set_physics_process(false)
+		return
+	var d: Dictionary = params["drive"]
+	_drive_t += delta
+	var spin_up: float = clampf(_drive_t / maxf(0.01, float(d.get("ramp", 1.0))), 0.0, 1.0)   # spun up, not jerked
+	_drive_angle += deg_to_rad(float(d.get("spin", 0.0))) * spin_up * delta
+	var sway: Array = d.get("sway", [0.0, 2.0])
+	var off := Vector3(float(sway[0]) * spin_up * sin(TAU * _drive_t / maxf(0.01, float(sway[1]))), 0, 0)
+	var root: Node3D = get_parent()
+	var pivot: Vector3 = root.global_transform * _vec3(d.get("pivot", null), 0.0)
+	var turn := Transform3D(Basis(Vector3.UP, _drive_angle), Vector3.ZERO)
+	for pair in _driven:
+		var a: AnimatableBody3D = pair[0]
+		if not is_instance_valid(a):
+			continue
+		var home: Transform3D = pair[1]
+		a.global_transform = Transform3D(Basis(), pivot + off) * turn * Transform3D(Basis(), -pivot) * home
+
+
 func _process(delta: float) -> void:
 	_t += delta
 	if kind == "physics" or kind == "trace":
@@ -238,6 +265,16 @@ func _free_the_bodies(root: Node) -> void:
 			var r: RigidBody3D = ModBody.make_rigid(body)
 			if _trace_from == null:
 				_trace_from = r
+	# "drive": {"term": "cube", "spin": deg/s about y through "pivot", "sway": [metres, seconds] along x, "ramp": s}
+	# the constraint itself is driven: the named static bodies become animatable before the joints are tied,
+	# so the joints hold them and this engine moves them every physics step
+	var drive: Variant = params.get("drive", null)
+	if drive is Dictionary:
+		for body in _bodies(root):
+			if body is StaticBody3D and not (body is AnimatableBody3D) and str(body.get_meta("term", "")) == str((drive as Dictionary).get("term", "cube")):
+				var a: AnimatableBody3D = ModBody.make_animatable(body)
+				_driven.append([a, a.global_transform])
+		set_physics_process(not _driven.is_empty())
 	_tie_joints(root)
 
 

@@ -1183,3 +1183,31 @@ about 32 steps in two seconds, the field changing, the ants delivering (704 → 
 gained are the pheromone, physarum and ant-colony halls and their objectives, and "Change evaporation…" — false last
 round — is now covered by the term that shows it. Three wordings were changed again so the ant and record terms do
 not catch the Lab_Path, Random_Cubes and "formal grammars" rows they do not show.
+
+**Second engine: pso (26 Oct, Palle: "yes").** Particle swarm optimisation, `commons/modular/mod_pso.gd` and
+`ada_encyclopedia/src/lib/modular-pso.ts`: particles fly over a landscape of five gaussian hills (the objective drawn
+as height); each remembers its personal best (a gold disc where it was found, as high as its score), all share the
+global best (a red pin); each update v = w v + c1 r1 (pb − x) + c2 r2 (gb − x). Prototyped first: over 20 seeds the
+shared memory found the highest hill 15 times, personal memory alone 6. Two terms: `particle_swarm` (16 particles,
+20 steps in: a search under way) and `swarm_memory_pair` (personal only beside personal + global, same seed, 80 steps:
+spread over the hills against gathered on one). Godot's run (seed 3) gathers on the second-highest hill, the three.js
+run on the highest — "usually but not always the highest", as the expr says. Two faults found by looking: the
+landscape rendered unlit, because its top faces were back faces and with culling off Godot flips a back face's normal
+away from the light (normals are now the height function's gradient and the top is the front face); and the pair
+first photographed as a fresh scatter, because the game had stepped past the 90-step cycle and restarted the search
+before the camera fired (the cycle is 240 steps now). probe_trail.gd covers pso too: 20 → 32 steps in two seconds,
+the global best never falling. Coverage 288 → 290 (the PSO hall and, partly, "remembered positions from their
+scores" — no novelty archive yet); one wording changed so "score" + "step" stop catching a music row.
+
+**A driven constraint (26 Oct, continued).** "What changes when the constraint itself is driven?" (SoftBodies_Carusell)
+needed the physics engine to move an anchor while what hangs from it stays free — no engine could. Additive and gated:
+a physics engine with `"drive": {"term", "spin" °/s about y through "pivot", "sway" [m, s], "ramp" s}` turns the named
+static bodies into AnimatableBody3D (`mod_body.gd make_animatable`) BEFORE the joints are tied, so the joints hold them,
+and moves them every physics step; a term without `drive` is untouched (pendulum and spring_oscillator build as before).
+Two terms: `carousel` (four balls on ropes from a hub driven at 200°/s: nothing pushes the balls, the ropes' upper ends
+are carried round) and `carousel_pair` (the same at rest beside driven: plumb against leaning out). probe_trail.gd
+checks it live: six hub bodies driven, the balls' mean radius 0.55 → 0.81 m in 2.5 s. The film turns the hub; the
+studio shows the rest pose. Coverage 290 → 292, both carousel rows; "they" joined the stop list after it and
+"physics" + "turns" matched a forces row about an along-rail component. Still open: the PSO landscape's height
+colours do not reach the albedo in Godot (it reads by shading alone), "the enclosing architecture deforms"
+(SoftBodies_Obsticals), reaction-diffusion (GPU), directed graphs and flow, and sequences 23–25.

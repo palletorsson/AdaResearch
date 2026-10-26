@@ -39,7 +39,7 @@ first second third next last same other another such can could may might will wo
 did done make makes made use uses used using see sees show shows seen observe observed relate relates
 compare compares distinguish distinguishes predict identify locate describe explain name names stage stages
 particular familiar own very just only also both either neither still yet already again
-you your we our us give gives take takes read reads""".split())   # 26 Oct: "take you", "gives", "reads" matched as content
+you your we our us they them give gives take takes read reads""".split())   # 26 Oct: "take you", "gives", "reads" matched as content
 
 
 def words(text: str) -> set[str]:
