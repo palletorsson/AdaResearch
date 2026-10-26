@@ -3932,6 +3932,253 @@
    "branch_of": "metaballs",
    "distance": 1,
    "beyond": []
+  },
+  "rhizome_body": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "csg_order": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "csg_tree": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "traversal_pair": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 0,
+   "beyond": []
+  },
+  "route_after_stone": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 0,
+   "beyond": []
+  },
+  "one_more_route": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 2,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "skateboard_3",
+   "distance": 1,
+   "beyond": []
+  },
+  "matching_block": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "centrality_pair": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "flow_field": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 2,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "lattice",
+   "distance": 1,
+   "beyond": []
+  },
+  "euclid_vs_sphere": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 1,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 2,
+   "beyond": []
+  },
+  "generations": {
+   "sig": {
+    "form": 2,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "quad",
+   "distance": 1,
+   "beyond": []
+  },
+  "field_gallery": {
+   "sig": {
+    "form": 4,
+    "body": 0,
+    "many": 0,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "metaballs",
+   "distance": 0,
+   "beyond": []
+  },
+  "two_basins": {
+   "sig": {
+    "form": 3,
+    "body": 0,
+    "many": 1,
+    "parts": 0,
+    "joint": 0,
+    "drive": 0,
+    "react": 0,
+    "measure": 0,
+    "read": 0,
+    "light": 0,
+    "sense": 0
+   },
+   "lane": "branch",
+   "branch_of": "box",
+   "distance": 1,
+   "beyond": []
   }
  },
  "artifacts": {

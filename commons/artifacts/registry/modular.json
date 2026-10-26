@@ -5650,7 +5650,7 @@
   "mod_bool_union": {
    "lookup_name": "mod_bool_union",
    "name": "modular · union",
-   "description": "union = field(box ∪ sphere) = bool_union — implicit modelling: shapes combined as functions; min of two distances, either is enough. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "union = field(box ∪ sphere) = bool_union — union, the filled volume: min of two distances, either is enough; implicit modelling, shapes combined as functions. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -5682,13 +5682,13 @@
      "box",
      "metaballs"
     ],
-    "expr": "field(box ∪ sphere) = bool_union — implicit modelling: shapes combined as functions; min of two distances, either is enough"
+    "expr": "field(box ∪ sphere) = bool_union — union, the filled volume: min of two distances, either is enough; implicit modelling, shapes combined as functions"
    }
   },
   "mod_bool_subtract": {
    "lookup_name": "mod_bool_subtract",
    "name": "modular · subtract",
-   "description": "subtract = field(box − sphere) = bool_subtract — max(box, −sphere): the sphere bores; the far corner stays. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "subtract = field(box − sphere) = bool_subtract — difference, the carved volume: max(box, −sphere); the sphere bores, the far corner stays. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -5719,13 +5719,13 @@
     "from": [
      "bool_union"
     ],
-    "expr": "field(box − sphere) = bool_subtract — max(box, −sphere): the sphere bores; the far corner stays"
+    "expr": "field(box − sphere) = bool_subtract — difference, the carved volume: max(box, −sphere); the sphere bores, the far corner stays"
    }
   },
   "mod_bool_intersect": {
    "lookup_name": "mod_bool_intersect",
    "name": "modular · intersect",
-   "description": "intersect = field(box ∩ sphere) = bool_intersect — max of two distances: only where both are. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "description": "intersect = field(box ∩ sphere) = bool_intersect — intersection, the shared volume: max of two distances, only where both are. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
    "category": "modular",
    "complexity": "beginner",
    "scene": "res://commons/modular/composite.tscn",
@@ -5756,7 +5756,7 @@
     "from": [
      "bool_union"
     ],
-    "expr": "field(box ∩ sphere) = bool_intersect — max of two distances: only where both are"
+    "expr": "field(box ∩ sphere) = bool_intersect — intersection, the shared volume: max of two distances, only where both are"
    }
   },
   "mod_smooth_union": {
@@ -6849,6 +6849,455 @@
      "metaballs"
     ],
     "expr": "field(smooth union of 53 capsules and knots along the rhizome) = rhizome_body — the network given a body: every tie a tube, every joint melted"
+   }
+  },
+  "mod_csg_order": {
+   "lookup_name": "mod_csg_order",
+   "name": "modular · the order of a CSG expression",
+   "description": "the order of a CSG expression = field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball; moving the brackets countersinks the left bore and seals the right one at the top, because A − (B − C) gives back A ∩ C. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "csg_order"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "csg_order",
+    "chapter": "booleans",
+    "from": [
+     "bool_subtract"
+    ],
+    "expr": "field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball; moving the brackets countersinks the left bore and seals the right one at the top, because A − (B − C) gives back A ∩ C"
+   }
+  },
+  "mod_csg_tree": {
+   "lookup_name": "mod_csg_tree",
+   "name": "modular · a CSG tree",
+   "description": "a CSG tree = field((box ∩ sphere) − (bar x ∪ bar y ∪ bar z)) = csg_tree — a CSG tree as an expression: solids at the leaves, operations at the nodes, the brackets are the tree. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "csg_tree"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "booleans"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "csg_tree",
+    "chapter": "booleans",
+    "from": [
+     "bool_intersect",
+     "bool_subtract",
+     "bool_union"
+    ],
+    "expr": "field((box ∩ sphere) − (bar x ∪ bar y ∪ bar z)) = csg_tree — a CSG tree as an expression: solids at the leaves, operations at the nodes, the brackets are the tree"
+   }
+  },
+  "mod_traversal_pair": {
+   "lookup_name": "mod_traversal_pair",
+   "name": "modular · two travellers, one graph",
+   "description": "two travellers, one graph = connect(grid 5×5, queue order) + connect(grid 5×5, stack order) = traversal_pair — two travellers, one graph: the queue's tree (thick) reaches every node within 8 steps, the stack's runs 24 deep before it backs up. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "traversal_pair"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "traversal_pair",
+    "chapter": "graphs",
+    "from": [
+     "grid_graph"
+    ],
+    "expr": "connect(grid 5×5, queue order) + connect(grid 5×5, stack order) = traversal_pair — two travellers, one graph: the queue's tree (thick) reaches every node within 8 steps, the stack's runs 24 deep before it backs up"
+   }
+  },
+  "mod_route_after_stone": {
+   "lookup_name": "mod_route_after_stone",
+   "name": "modular · the route after a stone disappears",
+   "description": "the route after a stone disappears = connect(grid, shortest route) + the same with one stone gone = route_after_stone — the route after a stone disappears: 6 steps through the near gap; take its stone away and the route is recomputed through the far gap, 12 steps. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "route_after_stone"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "route_after_stone",
+    "chapter": "graphs",
+    "from": [
+     "grid_graph"
+    ],
+    "expr": "connect(grid, shortest route) + the same with one stone gone = route_after_stone — the route after a stone disappears: 6 steps through the near gap; take its stone away and the route is recomputed through the far gap, 12 steps"
+   }
+  },
+  "mod_one_more_route": {
+   "lookup_name": "mod_one_more_route",
+   "name": "modular · the price of one more route",
+   "description": "the price of one more route = spanning_tree + one edge = one_more_route — the price of one more route: a tree holds exactly one path between two nodes; one more edge closes exactly one cycle, here through 5 nodes (red). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "one_more_route"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "one_more_route",
+    "chapter": "graphs",
+    "from": [
+     "spanning_tree"
+    ],
+    "expr": "spanning_tree + one edge = one_more_route — the price of one more route: a tree holds exactly one path between two nodes; one more edge closes exactly one cycle, here through 5 nodes (red)"
+   }
+  },
+  "mod_matching_block": {
+   "lookup_name": "mod_matching_block",
+   "name": "modular · a pair that blocks two pairs",
+   "description": "a pair that blocks two pairs = connect(path of 4, the middle pair) + connect(path of 4, the outer pairs) = matching_block — a pair that blocks two pairs: the middle match is maximal, no edge can be added, and it leaves two nodes (red) that the outer matching pairs. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "matching_block"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "matching_block",
+    "chapter": "graphs",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(path of 4, the middle pair) + connect(path of 4, the outer pairs) = matching_block — a pair that blocks two pairs: the middle match is maximal, no edge can be added, and it leaves two nodes (red) that the outer matching pairs"
+   }
+  },
+  "mod_centrality_pair": {
+   "lookup_name": "mod_centrality_pair",
+   "name": "modular · important by which measure",
+   "description": "important by which measure = connect(two cliques and a joint) sized by degree + the same sized by betweenness = centrality_pair — important by which measure? the joint (red) has the fewest edges (2) and lies on the most shortest paths (16 of 36 pairs). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "centrality_pair"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "centrality_pair",
+    "chapter": "graphs",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(two cliques and a joint) sized by degree + the same sized by betweenness = centrality_pair — important by which measure? the joint (red) has the fewest edges (2) and lies on the most shortest paths (16 of 36 pairs)"
+   }
+  },
+  "mod_flow_field": {
+   "lookup_name": "mod_flow_field",
+   "name": "modular · flow and trajectories",
+   "description": "flow and trajectories = array(arrow, 9×9, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains its position, so a trajectory is those samples added up. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "flow_field"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "change"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "flow_field",
+    "chapter": "change",
+    "from": [
+     "line",
+     "accumulation"
+    ],
+    "expr": "array(arrow, 9×9, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains its position, so a trajectory is those samples added up"
+   }
+  },
+  "mod_euclid_vs_sphere": {
+   "lookup_name": "mod_euclid_vs_sphere",
+   "name": "modular · two choices of geometry",
+   "description": "two choices of geometry = triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "euclid_vs_sphere"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "foundations"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "euclid_vs_sphere",
+    "chapter": "foundations",
+    "from": [
+     "triangle",
+     "spherical_triangle"
+    ],
+    "expr": "triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms"
+   }
+  },
+  "mod_generations": {
+   "lookup_name": "mod_generations",
+   "name": "modular · generations",
+   "description": "generations = recurse(triangle → 3 halves, depth 0…3, every generation kept) = generations — predict the next generation before you look: each replaces every triangle by three at half size; the depth is the stopping condition, the shape never stops itself. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "generations"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "generations",
+    "chapter": "fractals",
+    "from": [
+     "sierpinski"
+    ],
+    "expr": "recurse(triangle → 3 halves, depth 0…3, every generation kept) = generations — predict the next generation before you look: each replaces every triangle by three at half size; the depth is the stopping condition, the shape never stops itself"
+   }
+  },
+  "mod_field_gallery": {
+   "lookup_name": "mod_field_gallery",
+   "name": "modular · shapes gallery",
+   "description": "shapes gallery = field(sphere ∪ box ∪ torus ∪ cylinder ∪ capsule ∪ (gyroid ∩ sphere)) = field_gallery — a shapes gallery: six functions, one mesher; the torus and the gyroid are formulas like the rest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "field_gallery"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "isosurfaces"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "field_gallery",
+    "chapter": "isosurfaces",
+    "from": [
+     "torus_field",
+     "gyroid"
+    ],
+    "expr": "field(sphere ∪ box ∪ torus ∪ cylinder ∪ capsule ∪ (gyroid ∩ sphere)) = field_gallery — a shapes gallery: six functions, one mesher; the torus and the gyroid are formulas like the rest"
+   }
+  },
+  "mod_two_basins": {
+   "lookup_name": "mod_two_basins",
+   "name": "modular · two basins",
+   "description": "two basins = point × 41 on two basins + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope is zero: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "two_basins"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "formfinding"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "two_basins",
+    "chapter": "formfinding",
+    "from": [
+     "gradient_descent"
+    ],
+    "expr": "point × 41 on two basins + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope is zero: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest"
    }
   }
  }

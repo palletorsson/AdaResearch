@@ -4925,7 +4925,8 @@
      "items": [
       "mod_rate_steps",
       "mod_accumulation",
-      "mod_parabola_arch"
+      "mod_parabola_arch",
+      "mod_flow_field"
      ]
     },
     {
@@ -4964,7 +4965,8 @@
      "children": [],
      "items": [
       "mod_catenary",
-      "mod_gradient_descent"
+      "mod_gradient_descent",
+      "mod_two_basins"
      ]
     },
     {
@@ -5050,7 +5052,8 @@
       "mod_cantor_set",
       "mod_fractal_tree",
       "mod_sierpinski_carpet",
-      "mod_phyllotaxis"
+      "mod_phyllotaxis",
+      "mod_generations"
      ]
     },
     {
@@ -5102,7 +5105,8 @@
       "mod_noise_blobs",
       "mod_field_terrain",
       "mod_terrain_overhang",
-      "mod_rhizome_body"
+      "mod_rhizome_body",
+      "mod_field_gallery"
      ]
     },
     {
@@ -5116,7 +5120,9 @@
       "mod_bool_subtract",
       "mod_bool_intersect",
       "mod_smooth_union",
-      "mod_smooth_subtract"
+      "mod_smooth_subtract",
+      "mod_csg_order",
+      "mod_csg_tree"
      ]
     },
     {
@@ -5139,7 +5145,12 @@
       "mod_graph",
       "mod_graph_circle",
       "mod_spanning_tree",
-      "mod_grid_graph"
+      "mod_grid_graph",
+      "mod_traversal_pair",
+      "mod_route_after_stone",
+      "mod_one_more_route",
+      "mod_matching_block",
+      "mod_centrality_pair"
      ]
     },
     {
@@ -5163,7 +5174,8 @@
      "items": [
       "mod_spherical_triangle",
       "mod_impossible_triangle",
-      "mod_self_containing_box"
+      "mod_self_containing_box",
+      "mod_euclid_vs_sphere"
      ]
     },
     {
@@ -64769,13 +64781,354 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_rhizome_body"
+  },
+  "mod_csg_order": {
+   "label": "the order of a CSG expression",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the order of a CSG expression = field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball; moving the brackets countersinks the left bore and seals the right one at the top, because A − (B − C) gives back A ∩ C",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "csg_order",
+    "from": [
+     "bool_subtract"
+    ],
+    "expr": "field((A − B) − C) beside field(A − (B − C)) = csg_order — order matters: the same box, bore and ball; moving the brackets countersinks the left bore and seals the right one at the top, because A − (B − C) gives back A ∩ C"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_csg_order",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_csg_order"
+  },
+  "mod_csg_tree": {
+   "label": "a CSG tree",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a CSG tree = field((box ∩ sphere) − (bar x ∪ bar y ∪ bar z)) = csg_tree — a CSG tree as an expression: solids at the leaves, operations at the nodes, the brackets are the tree",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "csg_tree",
+    "from": [
+     "bool_intersect",
+     "bool_subtract",
+     "bool_union"
+    ],
+    "expr": "field((box ∩ sphere) − (bar x ∪ bar y ∪ bar z)) = csg_tree — a CSG tree as an expression: solids at the leaves, operations at the nodes, the brackets are the tree"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_csg_tree",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_csg_tree"
+  },
+  "mod_traversal_pair": {
+   "label": "two travellers, one graph",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "two travellers, one graph = connect(grid 5×5, queue order) + connect(grid 5×5, stack order) = traversal_pair — two travellers, one graph: the queue's tree (thick) reaches every node within 8 steps, the stack's runs 24 deep before it backs up",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "traversal_pair",
+    "from": [
+     "grid_graph"
+    ],
+    "expr": "connect(grid 5×5, queue order) + connect(grid 5×5, stack order) = traversal_pair — two travellers, one graph: the queue's tree (thick) reaches every node within 8 steps, the stack's runs 24 deep before it backs up"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_traversal_pair",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_traversal_pair"
+  },
+  "mod_route_after_stone": {
+   "label": "the route after a stone disappears",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the route after a stone disappears = connect(grid, shortest route) + the same with one stone gone = route_after_stone — the route after a stone disappears: 6 steps through the near gap; take its stone away and the route is recomputed through the far gap, 12 steps",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "route_after_stone",
+    "from": [
+     "grid_graph"
+    ],
+    "expr": "connect(grid, shortest route) + the same with one stone gone = route_after_stone — the route after a stone disappears: 6 steps through the near gap; take its stone away and the route is recomputed through the far gap, 12 steps"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_route_after_stone",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_route_after_stone"
+  },
+  "mod_one_more_route": {
+   "label": "the price of one more route",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the price of one more route = spanning_tree + one edge = one_more_route — the price of one more route: a tree holds exactly one path between two nodes; one more edge closes exactly one cycle, here through 5 nodes (red)",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "one_more_route",
+    "from": [
+     "spanning_tree"
+    ],
+    "expr": "spanning_tree + one edge = one_more_route — the price of one more route: a tree holds exactly one path between two nodes; one more edge closes exactly one cycle, here through 5 nodes (red)"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_one_more_route",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_one_more_route"
+  },
+  "mod_matching_block": {
+   "label": "a pair that blocks two pairs",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a pair that blocks two pairs = connect(path of 4, the middle pair) + connect(path of 4, the outer pairs) = matching_block — a pair that blocks two pairs: the middle match is maximal, no edge can be added, and it leaves two nodes (red) that the outer matching pairs",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "matching_block",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(path of 4, the middle pair) + connect(path of 4, the outer pairs) = matching_block — a pair that blocks two pairs: the middle match is maximal, no edge can be added, and it leaves two nodes (red) that the outer matching pairs"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_matching_block",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_matching_block"
+  },
+  "mod_centrality_pair": {
+   "label": "important by which measure",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "important by which measure = connect(two cliques and a joint) sized by degree + the same sized by betweenness = centrality_pair — important by which measure? the joint (red) has the fewest edges (2) and lies on the most shortest paths (16 of 36 pairs)",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "centrality_pair",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(two cliques and a joint) sized by degree + the same sized by betweenness = centrality_pair — important by which measure? the joint (red) has the fewest edges (2) and lies on the most shortest paths (16 of 36 pairs)"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_centrality_pair",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_centrality_pair"
+  },
+  "mod_flow_field": {
+   "label": "flow and trajectories",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "flow and trajectories = array(arrow, 9×9, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains its position, so a trajectory is those samples added up",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "flow_field",
+    "from": [
+     "line",
+     "accumulation"
+    ],
+    "expr": "array(arrow, 9×9, direction = field(x, z)) + three particles = flow_field — flow and trajectories: a vector field gives every place a direction; each particle samples the field where it stands and retains its position, so a trajectory is those samples added up"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_flow_field",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_flow_field"
+  },
+  "mod_euclid_vs_sphere": {
+   "label": "two choices of geometry",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "two choices of geometry = triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "euclid_vs_sphere",
+    "from": [
+     "triangle",
+     "spherical_triangle"
+    ],
+    "expr": "triangle(side 0.785) + spherical_triangle(side 0.785) = euclid_vs_sphere — Euclidean and non-Euclidean, the same three sides: on the plane the angles sum to 180°, on the sphere to 270°; the geometry is a choice of axioms"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_euclid_vs_sphere",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_euclid_vs_sphere"
+  },
+  "mod_generations": {
+   "label": "generations",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "generations = recurse(triangle → 3 halves, depth 0…3, every generation kept) = generations — predict the next generation before you look: each replaces every triangle by three at half size; the depth is the stopping condition, the shape never stops itself",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "generations",
+    "from": [
+     "sierpinski"
+    ],
+    "expr": "recurse(triangle → 3 halves, depth 0…3, every generation kept) = generations — predict the next generation before you look: each replaces every triangle by three at half size; the depth is the stopping condition, the shape never stops itself"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_generations",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_generations"
+  },
+  "mod_field_gallery": {
+   "label": "shapes gallery",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "shapes gallery = field(sphere ∪ box ∪ torus ∪ cylinder ∪ capsule ∪ (gyroid ∩ sphere)) = field_gallery — a shapes gallery: six functions, one mesher; the torus and the gyroid are formulas like the rest",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "field_gallery",
+    "from": [
+     "torus_field",
+     "gyroid"
+    ],
+    "expr": "field(sphere ∪ box ∪ torus ∪ cylinder ∪ capsule ∪ (gyroid ∩ sphere)) = field_gallery — a shapes gallery: six functions, one mesher; the torus and the gyroid are formulas like the rest"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_field_gallery",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_field_gallery"
+  },
+  "mod_two_basins": {
+   "label": "two basins",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "two basins = point × 41 on two basins + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope is zero: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "two_basins",
+    "from": [
+     "gradient_descent"
+    ],
+    "expr": "point × 41 on two basins + ball × 28 from two starts 0.16 apart = two_basins — where does downhill take you, and why does it stop? each run goes to the bottom nearest its start and stops where the slope is zero: one at height 0.077, the other at 0.221; descent finds a bottom, not the lowest"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_two_basins",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_two_basins"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1722,
+  "items": 1734,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

@@ -90,4 +90,5 @@ the meshes are regenerated from the recipes).
 Every sequence has nodes now; 23–25 (the foundations crisis, the QFEP laboratory, after the crisis)
 have only a few, because they are arguments more than objects. Not every principle in any sequence is
 covered yet. `doc/book/course/MODULAR_COVERAGE.md` lists every spine principle the grammar
-does not yet cover.
+does not yet cover. Its match is lexical (two shared word stems), so it over-counts: two generic words
+can coincide. Read the term a "covered" row names before believing it.

@@ -1143,3 +1143,23 @@ surface, `bool_union` implicit modelling, `cave_chamber` cave generation — wor
 not. Result: 264 covered, 13 kernel only, 148 uncovered. Left uncovered on purpose: Animated Noise (re-meshing every
 frame is too slow in GDScript), VR Sculpting (interactive), and The 256 Cases — the grammar meshes with marching
 tetrahedra precisely to avoid that table. All 13 fields pass probe_field.gd; Godot builds all 182 terms.
+
+**Comparisons (26 Oct, continued):** the uncovered list is mostly verbs (compare, measure, retain), so the next
+terms are comparisons, two things under one rule, with every number in the expr computed from the build's own data.
+`csg_order` — (A − B) − C beside A − (B − C), one field: the same box, bore and ball; the left bore is countersunk,
+the right one sealed at the top, because A − (B − C) gives back A ∩ C. `csg_tree` — (box ∩ sphere) − (three bars).
+`traversal_pair` — one 5×5 grid, the queue's tree (depth 8) beside the stack's (depth 24). `route_after_stone` — a
+wall with two gaps: 6 steps, take the near stone away, 12. `one_more_route` — the spanning tree plus one edge closes
+exactly one cycle (5 nodes, red). `matching_block` — on a path of four the middle pair is maximal and blocks the two
+outer pairs. `centrality_pair` — two cliques and a joint: fewest edges (2), most shortest paths (16 of 36 pairs).
+`flow_field` — 9×9 directions, three particles sampling where they stand. `two_basins` — two starts 0.16 apart,
+two stops (heights 0.077 and 0.221): descent finds a bottom, not the lowest. `euclid_vs_sphere` — the same three
+sides, 180° and 270°. `generations` — Sierpinski at depth 0–3, every generation kept. `field_gallery` — six
+functions, one mesher. All 16 fields pass probe_field.gd (csg_order: 2 bodies, as built); Godot builds 194 terms.
+**What the measure got wrong:** reading why each principle was matched showed the lexical match over-counts — a
+principle "covered" when it shares two generic stems with any term (`star_tiling` covered a wave principle through
+"repeat" + "replicate"). About 80 of the 282 covered rows rest on exactly two shared stems, many of them coincidences.
+Not rebuilt (no new instrument); the stop list gained function words ("you", "take", "give", "read") that had matched
+as content, and three exprs were reworded so they no longer catch halls they do not show. Result: 282 covered, 12
+kernel only, 131 uncovered — of the 21 rows this round added, 19 are what the terms show, one is partial (the Flow
+Field hall's wrap-around trails) and one is false ("Change evaporation…" — "change" is the chapter's own name).
