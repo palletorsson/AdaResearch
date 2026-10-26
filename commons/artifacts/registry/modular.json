@@ -5832,6 +5832,609 @@
     ],
     "expr": "field(−smin(−box, cylinder, k)) + ground = smooth_subtract — a passage bored smoothly: an opening, a support, and a way through"
    }
+  },
+  "mod_glow_cube": {
+   "lookup_name": "mod_glow_cube",
+   "name": "modular · glowing cube",
+   "description": "glowing cube = association(cube, glow) = glow_cube — bright without being lit: visible brightness is not illumination. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "glow_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "shaders"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "glow_cube",
+    "chapter": "shaders",
+    "from": [
+     "cube"
+    ],
+    "expr": "association(cube, glow) = glow_cube — bright without being lit: visible brightness is not illumination"
+   }
+  },
+  "mod_rim_sphere": {
+   "lookup_name": "mod_rim_sphere",
+   "name": "modular · rim sphere",
+   "description": "rim sphere = association(sphere, rim) = rim_sphere — the edge brightens toward grazing angles, whatever the light: the view is in the surface. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "rim_sphere"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "shaders"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "rim_sphere",
+    "chapter": "shaders",
+    "from": [
+     "sphere_collider"
+    ],
+    "expr": "association(sphere, rim) = rim_sphere — the edge brightens toward grazing angles, whatever the light: the view is in the surface"
+   }
+  },
+  "mod_pink_extravaganza": {
+   "lookup_name": "mod_pink_extravaganza",
+   "name": "modular · pink extravaganza",
+   "description": "pink extravaganza = pink rim cube + glowing sphere + dots = pink_extravaganza — repeated pigment, a view-dependent rim and emission composed on fixed bodies. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "pink_extravaganza"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "shaders"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "pink_extravaganza",
+    "chapter": "shaders",
+    "from": [
+     "rim_sphere",
+     "glow_cube"
+    ],
+    "expr": "pink rim cube + glowing sphere + dots = pink_extravaganza — repeated pigment, a view-dependent rim and emission composed on fixed bodies"
+   }
+  },
+  "mod_bush": {
+   "lookup_name": "mod_bush",
+   "name": "modular · bush",
+   "description": "bush = recurse(trunk, keep the trunk, 3 turned copies at 0.62, depth 5) = bush — branching chosen by rule: a tree in three directions. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "bush"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "procedural"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "bush",
+    "chapter": "procedural",
+    "from": [
+     "fractal_tree"
+    ],
+    "expr": "recurse(trunk, keep the trunk, 3 turned copies at 0.62, depth 5) = bush — branching chosen by rule: a tree in three directions"
+   }
+  },
+  "mod_cave_chamber": {
+   "lookup_name": "mod_cave_chamber",
+   "name": "modular · cave chamber",
+   "description": "cave chamber = field(rock − smooth carving centres) + ground = cave_chamber — biased carving leaves a chamber with headroom and a way in. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "cave_chamber"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "procedural"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "cave_chamber",
+    "chapter": "procedural",
+    "from": [
+     "bool_subtract",
+     "field_terrain"
+    ],
+    "expr": "field(rock − smooth carving centres) + ground = cave_chamber — biased carving leaves a chamber with headroom and a way in"
+   }
+  },
+  "mod_voxel_sphere": {
+   "lookup_name": "mod_voxel_sphere",
+   "name": "modular · voxel sphere",
+   "description": "voxel sphere = array(box, 9, 3d, inside sphere) = voxel_sphere — centre-based voxel sampling: a cube stands where its centre is inside. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "voxel_sphere"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "procedural"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "voxel_sphere",
+    "chapter": "procedural",
+    "from": [
+     "box",
+     "metaballs"
+    ],
+    "expr": "array(box, 9, 3d, inside sphere) = voxel_sphere — centre-based voxel sampling: a cube stands where its centre is inside"
+   }
+  },
+  "mod_percolation": {
+   "lookup_name": "mod_percolation",
+   "name": "modular · percolation",
+   "description": "percolation = random(array(tile, 8), keep 0.6) = percolation — each tile survives a draw; what touches what is left to the lattice. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "percolation"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "procedural"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "percolation",
+    "chapter": "procedural",
+    "from": [
+     "box",
+     "random_sizes"
+    ],
+    "expr": "random(array(tile, 8), keep 0.6) = percolation — each tile survives a draw; what touches what is left to the lattice"
+   }
+  },
+  "mod_soft_cube": {
+   "lookup_name": "mod_soft_cube",
+   "name": "modular · soft cube",
+   "description": "soft cube = step(connect(array(ball, 3, 3d), springs), physics) = soft_cube — 27 balls, 54 springs: it yields and keeps its relations. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "soft_cube"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "softbodies"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "soft_cube",
+    "chapter": "softbodies",
+    "from": [
+     "spring_oscillator",
+     "lattice"
+    ],
+    "expr": "step(connect(array(ball, 3, 3d), springs), physics) = soft_cube — 27 balls, 54 springs: it yields and keeps its relations"
+   }
+  },
+  "mod_boids": {
+   "lookup_name": "mod_boids",
+   "name": "modular · boids",
+   "description": "boids = flock(array(ball, 27), separation + alignment + cohesion) = boids — a flock from three local rules; the movement does not name its cause. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "boids"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "swarms"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "boids",
+    "chapter": "swarms",
+    "from": [
+     "sphere_collider",
+     "noise_heights"
+    ],
+    "expr": "flock(array(ball, 27), separation + alignment + cohesion) = boids — a flock from three local rules; the movement does not name its cause"
+   }
+  },
+  "mod_graph": {
+   "lookup_name": "mod_graph",
+   "name": "modular · graph",
+   "description": "graph = connect(point × 7, 10 edges) = graph — nodes and edges: which connects to which, nothing more. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "graph"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "graph",
+    "chapter": "graphs",
+    "from": [
+     "point",
+     "line"
+    ],
+    "expr": "connect(point × 7, 10 edges) = graph — nodes and edges: which connects to which, nothing more"
+   }
+  },
+  "mod_graph_circle": {
+   "lookup_name": "mod_graph_circle",
+   "name": "modular · the same graph, another layout",
+   "description": "the same graph, another layout = connect((point) * 7 circle, the same edges) = graph_circle — a connection is not a coordinate. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "graph_circle"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "graph_circle",
+    "chapter": "graphs",
+    "from": [
+     "graph",
+     "unit_circle"
+    ],
+    "expr": "connect((point) * 7 circle, the same edges) = graph_circle — a connection is not a coordinate"
+   }
+  },
+  "mod_spanning_tree": {
+   "lookup_name": "mod_spanning_tree",
+   "name": "modular · minimum spanning tree",
+   "description": "minimum spanning tree = connect(point × 7, 6 of the 10 edges) = spanning_tree — every node reached at least total length (2.96 of 5.12). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "spanning_tree"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "spanning_tree",
+    "chapter": "graphs",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(point × 7, 6 of the 10 edges) = spanning_tree — every node reached at least total length (2.96 of 5.12)"
+   }
+  },
+  "mod_grid_graph": {
+   "lookup_name": "mod_grid_graph",
+   "name": "modular · grid graph",
+   "description": "grid graph = connect(array(point, 4), neighbours) = grid_graph — a lattice read as a graph: reachability through faces. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "grid_graph"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "graphs"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "grid_graph",
+    "chapter": "graphs",
+    "from": [
+     "graph",
+     "grid"
+    ],
+    "expr": "connect(array(point, 4), neighbours) = grid_graph — a lattice read as a graph: reachability through faces"
+   }
+  },
+  "mod_line_fit": {
+   "lookup_name": "mod_line_fit",
+   "name": "modular · a line and a loss",
+   "description": "a line and a loss = point × 12 + least-squares line + residuals = line_fit — slope 0.298, intercept 0.523, mean squared error 0.0037. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "line_fit"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "ml"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "line_fit",
+    "chapter": "ml",
+    "from": [
+     "point",
+     "line"
+    ],
+    "expr": "point × 12 + least-squares line + residuals = line_fit — slope 0.298, intercept 0.523, mean squared error 0.0037"
+   }
+  },
+  "mod_kmeans": {
+   "lookup_name": "mod_kmeans",
+   "name": "modular · k-means",
+   "description": "k-means = point × 30, coloured by nearest of 3 centres = kmeans — assignment and means alternated to convergence (2 rounds). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "kmeans"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "ml"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "kmeans",
+    "chapter": "ml",
+    "from": [
+     "point",
+     "color_grid"
+    ],
+    "expr": "point × 30, coloured by nearest of 3 centres = kmeans — assignment and means alternated to convergence (2 rounds)"
+   }
+  },
+  "mod_neural_net": {
+   "lookup_name": "mod_neural_net",
+   "name": "modular · neural network",
+   "description": "neural network = connect(point 2 + 3 + 1, 9 weights) = neural_net — inputs, a hidden layer, an output: what a weight keeps. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "neural_net"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "ml"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "neural_net",
+    "chapter": "ml",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(point 2 + 3 + 1, 9 weights) = neural_net — inputs, a hidden layer, an output: what a weight keeps"
+   }
   }
  }
 }

@@ -4,7 +4,7 @@ extends RefCounted
 ## into a wooden box. apply(node, name) overrides the material of every mesh
 ## under the node except the points and strokes that draw the construction.
 
-const NAMES := ["tape", "stripes", "red", "rubber", "metal", "urethane", "grip", "hazard", "wood", "concrete", "cardboard", "warhol", "plastic", "paper"]
+const NAMES := ["tape", "stripes", "red", "rubber", "metal", "urethane", "grip", "hazard", "wood", "concrete", "cardboard", "warhol", "plastic", "paper", "glow", "rim", "pink_rim"]
 const TAPE_PHOTO := "res://commons/modular/textures/marking_tape.png"
 
 
@@ -33,6 +33,28 @@ static func material(name: String) -> StandardMaterial3D:
 		"urethane":
 			m.albedo_color = Color("f1e3c2")
 			m.roughness = 0.55
+		"glow":
+			# emission: it is bright without being lit — visible brightness is not illumination
+			m.albedo_color = Color("e0568a")
+			m.emission_enabled = true
+			m.emission = Color("e0568a")
+			m.emission_energy_multiplier = 1.4
+		"rim":
+			# a view-dependent rim: the edge brightens toward grazing angles, whatever the light
+			m.albedo_color = Color("3d5a9a")
+			m.rim_enabled = true
+			m.rim = 1.0
+			m.rim_tint = 0.4
+			m.roughness = 0.6
+		"pink_rim":
+			m.albedo_color = Color("f4a6c8")
+			m.rim_enabled = true
+			m.rim = 1.0
+			m.rim_tint = 0.0
+			m.emission_enabled = true
+			m.emission = Color("f4a6c8")
+			m.emission_energy_multiplier = 0.25
+			m.roughness = 0.5
 		"grip":
 			m.albedo_color = Color("1c1c1e")
 			m.roughness = 1.0

@@ -72,7 +72,8 @@ def to_text(e: dict) -> str:
         rules = "; ".join(f"{k} → {v}" for k, v in (e.get("rules") or {}).items())
         return f"rewrite({e.get('axiom', 'F')}: {rules}, {e.get('depth', 3)}, {e.get('angle', 25)}°)"
     if op == "array":
-        return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''}{dress})"
+        inside = ", inside a field" if e.get("inside") else ""   # centre-based voxel sampling
+        return f"array({of()}, {e.get('n', 3)}{', ' + str(e['dims']) + 'd' if e.get('dims', 2) != 2 else ''}{dress}{inside})"
     if op == "exhibit":
         return f"exhibit({of()})"
     if op == "field":   # a surface where a function of space crosses zero
@@ -99,6 +100,8 @@ def to_text(e: dict) -> str:
     if op == "engine" and e.get("kind") == "tween":   # the transform's time domain
         bits = [f"{k} {','.join(str(v) for v in e[k]) if isinstance(e[k], list) else e[k]}" for k in ("at", "rot", "scale") if e.get(k) not in (None, 1)]
         return f"tween({of()}, {' '.join(bits)}, every {e.get('period', 4)} s)"
+    if op == "engine" and e.get("kind") == "random" and e.get("keep") is not None:   # a draw that removes
+        return f"by({of()}, random keep {e['keep']})"
     if op == "engine" and e.get("kind") == "random" and e.get("angles"):   # a choice among a few turns
         return f"by({of()}, random among {'/'.join(str(a) for a in e['angles'])}°)"
     if op == "engine":

@@ -1097,3 +1097,21 @@ intersection of the same two, as it must. Terms: isosurfaces `metaballs`, `gyroi
 `smooth_subtract` (+ ground: a bored passage). `metaballs` fills the main track's last step through the gated
 `--propose` (the trunk's lineage file now has its origin and this first mutation): 16 steps, 0 holes, gate OK; the
 167 works that waited on the hole now hang off their nearest step (77 off metaballs).
+
+**The open sequences — shaders, procedural generation, soft bodies, swarms, graphs, machine learning (Palle, 26 Oct:
+"continue"):** 16 terms and four additive words in both builders. Surfaces `glow` (emission: bright without being lit),
+`rim` (a view-dependent edge; three.js draws it as sheen) and `pink_rim`; `inside` on arrays — a copy stands only where
+its centre is inside a field (centre-based voxel sampling, the field functions of mod_field.gd); `keep` on the random
+engine — each part survives a draw with probability p, else it and the support it gave are gone; the engine `flock`
+(Reynolds: separation, alignment, cohesion within a radius, steered back into a box; the film replays the same rules
+from the seeded scatter). Terms — shaders: `glow_cube` (an association of cube), `rim_sphere`, `pink_extravaganza`
+(repeated pigment, rim and emission composed on fixed bodies); procedural: `bush`, `percolation` (39 of 64 tiles
+kept), and after the booleans because they stand on the field operator, `cave_chamber` (rock minus smooth carving
+centres, with ground and a way in) and `voxel_sphere` (305 cubes); soft bodies: `soft_cube`; swarms: `boids`; graphs:
+`graph`, `graph_circle` (the same ten edges on a circle: a connection is not a coordinate), `spanning_tree` (Kruskal
+over the same edges: 6 = n−1, total length 2.96 of 5.12), `grid_graph`; machine learning, computed at authoring time and
+recorded: `line_fit` (least squares, slope 0.298, intercept 0.523, MSE 0.0037, residuals drawn), `kmeans` (3 centres,
+converged in 2 rounds, 10/10/10), `neural_net` (2-3-1, nine weights). Films: the boids leave their grid and fly in
+groups; the soft cube first COLLAPSED (60 N/m cannot carry two layers of balls, and a lattice without diagonals shears
+flat) — at 400 N/m with each sub-cube's four body diagonals (86 springs) it lands, yields and keeps its shape, which the
+spring-equilibrium fix of the previous round made possible at all. Godot builds all 171 terms (the 7 failures foreign).

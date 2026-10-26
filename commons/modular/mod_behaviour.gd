@@ -7,7 +7,9 @@ extends Node
 ## seeded displacement; logic: the gate names) or animates them every frame
 ## (sine, sine_field, hand, tween) or records what physics did (trace: a dotted path).
 ## tween is the transform's time domain: what a transform states once (at, rot, scale) it plays
-## over a period, from where the thing was made to where it is put, and back.
+## over a period, from where the thing was made to where it is put, and back. flock moves its parts by
+## separation, alignment and cohesion within a radius, steered back into a box (Reynolds' boids).
+## random with "keep": p lets each part survive a draw with probability p (removal: what support goes).
 
 var kind: String = ""
 var params: Dictionary = {}
@@ -20,6 +22,48 @@ var _trace_count := 0
 
 const ModBody := preload("res://commons/modular/mod_body.gd")
 const ModLabel := preload("res://commons/modular/mod_label.gd")
+
+
+## boids: each part steers away from neighbours that are too close (separation), toward their mean
+## heading (alignment) and their centre (cohesion), all within a perception radius; a box brings strays
+## back. _homes holds the velocities here.
+func _flock(delta: float) -> void:
+	var r: float = float(params.get("radius", 0.35))
+	var bounds: Vector3 = _vec3(params.get("bounds", null), 0.8)
+	var centre := Vector3(0, float(params.get("height", 0.5)), 0)
+	var n: int = _targets.size()
+	var pos: Array = []
+	for t in _targets:
+		pos.append((t as Node3D).position if is_instance_valid(t) else Vector3.ZERO)
+	for i in n:
+		if not is_instance_valid(_targets[i]):
+			continue
+		var p: Vector3 = pos[i]
+		var v: Vector3 = _homes[i]
+		var sep := Vector3.ZERO
+		var ali := Vector3.ZERO
+		var coh := Vector3.ZERO
+		var seen := 0
+		for j in n:
+			if j == i:
+				continue
+			var d: Vector3 = p - pos[j]
+			var dl: float = d.length()
+			if dl < r and dl > 1e-5:
+				sep += d / (dl * dl)
+				ali += _homes[j]
+				coh += pos[j]
+				seen += 1
+		if seen > 0:
+			v += (sep * 0.012 + (ali / seen - v) * 0.6 + (coh / seen - p) * 0.9) * delta * 3.0
+		var off: Vector3 = p - centre
+		for a in 3:
+			if absf(off[a]) > bounds[a]:
+				v[a] -= signf(off[a]) * delta * 2.0
+		var sp: float = v.length()
+		v = v / maxf(sp, 1e-5) * clampf(sp, 0.25, 0.8)
+		_homes[i] = v
+		(_targets[i] as Node3D).position = p + v * delta
 
 
 static func _vec3(v: Variant, fill: float) -> Vector3:
@@ -60,6 +104,13 @@ func _ready() -> void:
 				_targets.append(n)
 				_homes.append(n.position)
 			set_process(true)
+		"flock":
+			var rf := RandomNumberGenerator.new()
+			rf.seed = int(params.get("seed", 1))
+			for n in _terms(root, str(params.get("term", "sphere_collider"))):
+				_targets.append(n)
+				_homes.append(Vector3(rf.randf_range(-1, 1), rf.randf_range(-0.3, 0.3), rf.randf_range(-1, 1)).normalized() * 0.5)   # a velocity
+			set_process(true)
 		"tween":
 			for c in root.get_children():
 				if c != self and c is Node3D:
@@ -87,6 +138,9 @@ func _ready() -> void:
 			var vary: bool = bool(params.get("vary_scale", true))
 			# which term is jittered: cube by default (random_cubes), any term by name (a field of cones)
 			for n in _terms(root, str(params.get("term", "cube"))):
+				if params.has("keep") and rng.randf() > float(params["keep"]):
+					n.queue_free()   # drawn out: this part and the support it gave are gone
+					continue
 				n.position += Vector3(rng.randf_range(-jitter, jitter), rng.randf_range(0, lift), rng.randf_range(-jitter, jitter))
 				var angles: Array = params.get("angles", [])
 				if not angles.is_empty():
@@ -112,6 +166,8 @@ func _process(delta: float) -> void:
 	if kind == "physics":
 		return   # nothing else per frame; the default branch below would switch processing off
 	match kind:
+		"flock":
+			_flock(delta)
 		"tween":
 			var ph: float = 0.5 - 0.5 * cos(TAU * _t / float(params.get("period", 4.0)))
 			var at_v: Vector3 = _vec3(params.get("at", null), 0.0)

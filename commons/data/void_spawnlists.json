@@ -5001,10 +5001,22 @@
      ]
     },
     {
+     "id": "modular/shaders",
+     "title": "shaders",
+     "label": "shaders",
+     "order": 18,
+     "children": [],
+     "items": [
+      "mod_glow_cube",
+      "mod_rim_sphere",
+      "mod_pink_extravaganza"
+     ]
+    },
+    {
      "id": "modular/logic",
      "title": "logic",
      "label": "logic",
-     "order": 18,
+     "order": 19,
      "children": [],
      "items": [
       "mod_logic",
@@ -5027,7 +5039,7 @@
      "id": "modular/fractals",
      "title": "fractals",
      "label": "fractals",
-     "order": 19,
+     "order": 20,
      "children": [],
      "items": [
       "mod_sierpinski",
@@ -5041,7 +5053,7 @@
      "id": "modular/lsystems",
      "title": "lsystems",
      "label": "lsystems",
-     "order": 20,
+     "order": 21,
      "children": [],
      "items": [
       "mod_lsystem_plant",
@@ -5051,10 +5063,33 @@
      ]
     },
     {
+     "id": "modular/procedural",
+     "title": "procedural",
+     "label": "procedural",
+     "order": 22,
+     "children": [],
+     "items": [
+      "mod_bush",
+      "mod_cave_chamber",
+      "mod_voxel_sphere",
+      "mod_percolation"
+     ]
+    },
+    {
+     "id": "modular/softbodies",
+     "title": "softbodies",
+     "label": "softbodies",
+     "order": 23,
+     "children": [],
+     "items": [
+      "mod_soft_cube"
+     ]
+    },
+    {
      "id": "modular/isosurfaces",
      "title": "isosurfaces",
      "label": "isosurfaces",
-     "order": 21,
+     "order": 24,
      "children": [],
      "items": [
       "mod_metaballs",
@@ -5068,7 +5103,7 @@
      "id": "modular/booleans",
      "title": "booleans",
      "label": "booleans",
-     "order": 22,
+     "order": 25,
      "children": [],
      "items": [
       "mod_bool_union",
@@ -5076,6 +5111,41 @@
       "mod_bool_intersect",
       "mod_smooth_union",
       "mod_smooth_subtract"
+     ]
+    },
+    {
+     "id": "modular/swarms",
+     "title": "swarms",
+     "label": "swarms",
+     "order": 26,
+     "children": [],
+     "items": [
+      "mod_boids"
+     ]
+    },
+    {
+     "id": "modular/graphs",
+     "title": "graphs",
+     "label": "graphs",
+     "order": 27,
+     "children": [],
+     "items": [
+      "mod_graph",
+      "mod_graph_circle",
+      "mod_spanning_tree",
+      "mod_grid_graph"
+     ]
+    },
+    {
+     "id": "modular/ml",
+     "title": "ml",
+     "label": "ml",
+     "order": 28,
+     "children": [],
+     "items": [
+      "mod_line_fit",
+      "mod_kmeans",
+      "mod_neural_net"
      ]
     }
    ]
@@ -63886,13 +63956,472 @@
    "family": "modular",
    "color": "#e7bd7b",
    "short_label": "mod_smooth_subtract"
+  },
+  "mod_glow_cube": {
+   "label": "glowing cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "glowing cube = association(cube, glow) = glow_cube — bright without being lit: visible brightness is not illumination",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "glow_cube",
+    "from": [
+     "cube"
+    ],
+    "expr": "association(cube, glow) = glow_cube — bright without being lit: visible brightness is not illumination"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_glow_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_glow_cube"
+  },
+  "mod_rim_sphere": {
+   "label": "rim sphere",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "rim sphere = association(sphere, rim) = rim_sphere — the edge brightens toward grazing angles, whatever the light: the view is in the surface",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "rim_sphere",
+    "from": [
+     "sphere_collider"
+    ],
+    "expr": "association(sphere, rim) = rim_sphere — the edge brightens toward grazing angles, whatever the light: the view is in the surface"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_rim_sphere",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_rim_sphere"
+  },
+  "mod_pink_extravaganza": {
+   "label": "pink extravaganza",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "pink extravaganza = pink rim cube + glowing sphere + dots = pink_extravaganza — repeated pigment, a view-dependent rim and emission composed on fixed bodies",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "pink_extravaganza",
+    "from": [
+     "rim_sphere",
+     "glow_cube"
+    ],
+    "expr": "pink rim cube + glowing sphere + dots = pink_extravaganza — repeated pigment, a view-dependent rim and emission composed on fixed bodies"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_pink_extravaganza",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_pink_extravaganza"
+  },
+  "mod_bush": {
+   "label": "bush",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "bush = recurse(trunk, keep the trunk, 3 turned copies at 0.62, depth 5) = bush — branching chosen by rule: a tree in three directions",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "bush",
+    "from": [
+     "fractal_tree"
+    ],
+    "expr": "recurse(trunk, keep the trunk, 3 turned copies at 0.62, depth 5) = bush — branching chosen by rule: a tree in three directions"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_bush",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_bush"
+  },
+  "mod_cave_chamber": {
+   "label": "cave chamber",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "cave chamber = field(rock − smooth carving centres) + ground = cave_chamber — biased carving leaves a chamber with headroom and a way in",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "cave_chamber",
+    "from": [
+     "bool_subtract",
+     "field_terrain"
+    ],
+    "expr": "field(rock − smooth carving centres) + ground = cave_chamber — biased carving leaves a chamber with headroom and a way in"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_cave_chamber",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_cave_chamber"
+  },
+  "mod_voxel_sphere": {
+   "label": "voxel sphere",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "voxel sphere = array(box, 9, 3d, inside sphere) = voxel_sphere — centre-based voxel sampling: a cube stands where its centre is inside",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "voxel_sphere",
+    "from": [
+     "box",
+     "metaballs"
+    ],
+    "expr": "array(box, 9, 3d, inside sphere) = voxel_sphere — centre-based voxel sampling: a cube stands where its centre is inside"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_voxel_sphere",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_voxel_sphere"
+  },
+  "mod_percolation": {
+   "label": "percolation",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "percolation = random(array(tile, 8), keep 0.6) = percolation — each tile survives a draw; what touches what is left to the lattice",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "percolation",
+    "from": [
+     "box",
+     "random_sizes"
+    ],
+    "expr": "random(array(tile, 8), keep 0.6) = percolation — each tile survives a draw; what touches what is left to the lattice"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_percolation",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_percolation"
+  },
+  "mod_soft_cube": {
+   "label": "soft cube",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "soft cube = step(connect(array(ball, 3, 3d), springs), physics) = soft_cube — 27 balls, 54 springs: it yields and keeps its relations",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "soft_cube",
+    "from": [
+     "spring_oscillator",
+     "lattice"
+    ],
+    "expr": "step(connect(array(ball, 3, 3d), springs), physics) = soft_cube — 27 balls, 54 springs: it yields and keeps its relations"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_soft_cube",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_soft_cube"
+  },
+  "mod_boids": {
+   "label": "boids",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "boids = flock(array(ball, 27), separation + alignment + cohesion) = boids — a flock from three local rules; the movement does not name its cause",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "boids",
+    "from": [
+     "sphere_collider",
+     "noise_heights"
+    ],
+    "expr": "flock(array(ball, 27), separation + alignment + cohesion) = boids — a flock from three local rules; the movement does not name its cause"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_boids",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_boids"
+  },
+  "mod_graph": {
+   "label": "graph",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "graph = connect(point × 7, 10 edges) = graph — nodes and edges: which connects to which, nothing more",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "graph",
+    "from": [
+     "point",
+     "line"
+    ],
+    "expr": "connect(point × 7, 10 edges) = graph — nodes and edges: which connects to which, nothing more"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_graph",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_graph"
+  },
+  "mod_graph_circle": {
+   "label": "the same graph, another layout",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "the same graph, another layout = connect((point) * 7 circle, the same edges) = graph_circle — a connection is not a coordinate",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "graph_circle",
+    "from": [
+     "graph",
+     "unit_circle"
+    ],
+    "expr": "connect((point) * 7 circle, the same edges) = graph_circle — a connection is not a coordinate"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_graph_circle",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_graph_circle"
+  },
+  "mod_spanning_tree": {
+   "label": "minimum spanning tree",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "minimum spanning tree = connect(point × 7, 6 of the 10 edges) = spanning_tree — every node reached at least total length (2.96 of 5.12)",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "spanning_tree",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(point × 7, 6 of the 10 edges) = spanning_tree — every node reached at least total length (2.96 of 5.12)"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_spanning_tree",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_spanning_tree"
+  },
+  "mod_grid_graph": {
+   "label": "grid graph",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "grid graph = connect(array(point, 4), neighbours) = grid_graph — a lattice read as a graph: reachability through faces",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "grid_graph",
+    "from": [
+     "graph",
+     "grid"
+    ],
+    "expr": "connect(array(point, 4), neighbours) = grid_graph — a lattice read as a graph: reachability through faces"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_grid_graph",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_grid_graph"
+  },
+  "mod_line_fit": {
+   "label": "a line and a loss",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "a line and a loss = point × 12 + least-squares line + residuals = line_fit — slope 0.298, intercept 0.523, mean squared error 0.0037",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "line_fit",
+    "from": [
+     "point",
+     "line"
+    ],
+    "expr": "point × 12 + least-squares line + residuals = line_fit — slope 0.298, intercept 0.523, mean squared error 0.0037"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_line_fit",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_line_fit"
+  },
+  "mod_kmeans": {
+   "label": "k-means",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "k-means = point × 30, coloured by nearest of 3 centres = kmeans — assignment and means alternated to convergence (2 rounds)",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "kmeans",
+    "from": [
+     "point",
+     "color_grid"
+    ],
+    "expr": "point × 30, coloured by nearest of 3 centres = kmeans — assignment and means alternated to convergence (2 rounds)"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_kmeans",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_kmeans"
+  },
+  "mod_neural_net": {
+   "label": "neural network",
+   "scene": "res://commons/modular/composite.tscn",
+   "category": "modular",
+   "description": "neural network = connect(point 2 + 3 + 1, 9 weights) = neural_net — inputs, a hidden layer, an output: what a weight keeps",
+   "footprint": null,
+   "map_ready": true,
+   "thumbnail": null,
+   "sequences": [],
+   "maps": [],
+   "modular": {
+    "term": "neural_net",
+    "from": [
+     "graph"
+    ],
+    "expr": "connect(point 2 + 3 + 1, 9 weights) = neural_net — inputs, a hidden layer, an output: what a weight keeps"
+   },
+   "placement": {
+    "kind": "artifact",
+    "artifact": "mod_neural_net",
+    "config": {},
+    "height": 0,
+    "scale": 1
+   },
+   "family": "modular",
+   "color": "#e7bd7b",
+   "short_label": "mod_neural_net"
   }
  },
  "unknown_tokens": {},
  "summary": {
   "sequences": 25,
   "maps": 209,
-  "items": 1695,
+  "items": 1711,
   "with_thumbnail": 1037,
   "map_ready": 955,
   "unknown_tokens": 0,

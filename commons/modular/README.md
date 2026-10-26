@@ -25,7 +25,9 @@ A recipe is one of:
 
 - `{"t": name}` — another term.
 - a primitive `{"p": "point" | "mesh" | "collider" | "body" | "grabbable" | "label" | "light" | "prefab", ...}`
-  (`mesh` shapes: box, sphere, cylinder, cone, torus, plane, wedge, tetra, pyramid, triangle, octa, icosa, dodecahedron).
+  (`mesh` shapes: box, sphere, cylinder, cone, torus, plane, wedge, tetra, pyramid, triangle, octa, icosa, dodecahedron;
+  surfaces for `associate`: tape, stripes, red, rubber, metal, urethane, grip, hazard, wood, concrete, cardboard, warhol,
+  plastic, paper, glow, rim, pink_rim).
 - an operator `{"op": ..., "of": recipe, ...}`:
 
 | op | what it makes |
@@ -34,10 +36,10 @@ A recipe is one of:
 | `associate` | the same thing with another surface or story (a variation, not a new form) |
 | `transform` | placed: `at`, `rot` (degrees), `scale` |
 | `times` | n copies laid out: row, stack, ring, polygon, mirror, circle, phyllotaxis |
-| `array` | a grid of copies (1d row, 2d, 3d); `palette` + `palette_by` colour a copy by its address; `profile` (+ `rise`) shape it by a function of its index |
+| `array` | a grid of copies (1d row, 2d, 3d); `palette` + `palette_by` colour a copy by its address; `profile` (+ `rise`) shape it by a function of its index; `inside` keeps only copies whose centre is inside a field (voxels) |
 | `assemblage` | placed parts with ids |
 | `connect` | ties between parts (rope, rod, spring); joints under physics |
-| `engine` | time: physics, trace, hand, sine, sine_field, noise, random, logic, tween (a transform played over time) |
+| `engine` | time: physics, trace, hand, sine, sine_field, noise, random (`keep` removes by a draw), logic, tween (a transform played over time), flock (boids) |
 | `recurse` | an iterated function system: a thing made of smaller copies of itself |
 | `rewrite` | an L-system: a sentence rewritten, then drawn by a turtle |
 | `field` | a surface where a function of space crosses zero: signed distances, gyroids, metaballs, noise; union, intersect, subtract, smooth union |
@@ -64,7 +66,8 @@ Example — the Sierpiński triangle:
 - **The lineage** (`construction_path.json` → `order`) is every new form, each built from earlier ones,
   in the order Palle authored: point → line → triangle → tetrahedron → … → the Platonic solids →
   transformation (in time) → arrays → colour → tiling → change → forces → form finding → waves →
-  randomness → noise → logic (cellular automata) → fractals → L-systems → isosurfaces → booleans.
+  randomness → noise → shaders → logic (cellular automata) → fractals → L-systems → procedural generation →
+  soft bodies → isosurfaces → booleans → swarms → graphs → machine learning.
   A term written as `associate(N)` is not a node; it is a variation shown around N.
 
 ## Checking that a recipe builds
@@ -83,7 +86,7 @@ the meshes are regenerated from the recipes).
 
 ## What is still missing
 
-Sequences 12 (shaders), 16 (procedural generation), 17 (soft bodies), 20 (swarms), 21 (graphs),
-22 (machine learning) and 23–25 (the foundations crisis, the QFEP laboratory, after the crisis) have
-few or no terms yet. `doc/book/course/MODULAR_COVERAGE.md` lists every spine principle the grammar
+Sequences 23–25 (the foundations crisis, the QFEP laboratory, after the crisis) have no terms yet:
+they are arguments more than objects. Every other sequence has nodes, but not every principle in it
+is covered. `doc/book/course/MODULAR_COVERAGE.md` lists every spine principle the grammar
 does not yet cover.

@@ -12,7 +12,8 @@ extends RefCounted
 ##                        times and array also take "palette": [hex…] with "palette_by": index|checker|row|
 ##                        column|layer (a copy's colour follows its address, not its place) and "profile":
 ##                        ramp|sin|parabola|gauss|beat (a copy's height follows a function of its index; with
-##                        "rise": m the function MOVES the copy up instead — a sampled path)
+##                        "rise": m the function MOVES the copy up instead — a sampled path); array takes "inside":
+##                        a field fn (mod_field.gd) and keeps only the copies whose centre is inside it — voxels
 ##   {"op": "recurse",    "of": seed, "rules": [{at, rot, scale}…], "depth": d, "keep": "seed", "stack": [x,y,z]}
 ##                        a thing made of smaller copies of itself (an iterated function system)
 ##   {"op": "rewrite",    "axiom": s, "rules": {sym: s}, "depth": d, "angle": deg, "step": m, "of": segment}
@@ -265,8 +266,12 @@ static func _array(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 	for i in range(nx):
 		for j in range(ny):
 			for k in range(n):
+				var at_c := Vector3((i - (nx - 1) / 2.0) * step, lift + j * step, (k - (n - 1) / 2.0) * step)
+				if expr.has("inside") and ModField.value(expr["inside"], at_c) >= 0.0:
+					lin += 1   # the address still counts, so a palette by index agrees with three.js
+					continue   # centre-based voxel sampling: a copy stands only where the field is inside
 				var c: Node3D = build(expr.get("of", {}), terms, depth)
-				c.position = Vector3((i - (nx - 1) / 2.0) * step, lift + j * step, (k - (n - 1) / 2.0) * step)
+				c.position = at_c
 				c.set_meta("cell", Vector3i(i, j, k))
 				_dress(c, expr, lin, Vector3i(i, j, k), float(k) / maxf(1.0, n - 1.0))
 				lin += 1

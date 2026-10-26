@@ -53,7 +53,9 @@ CHAPTER_SEQ = {"point": "primitives", "line": "primitives", "association": "prim
                "array": "array_tutorial", "color": "color", "tiling": "tiling", "change": "change",
                "motion": "change", "forces": "forces", "formfinding": "formfinding", "waves": "wavefunctions",
                "randomness": "randomness", "noise": "noise", "logic": "cellularautomata", "fractals": "fractals",
-               "lsystems": "lsystems", "isosurfaces": "isosurfaces", "booleans": "boolean_surfaces"}
+               "lsystems": "lsystems", "isosurfaces": "isosurfaces", "booleans": "boolean_surfaces",
+               "shaders": "shaders", "procedural": "proceduralgeneration", "softbodies": "softbodies",
+               "swarms": "swarmintelligence", "graphs": "graphtheory", "ml": "machinelearning"}
 
 
 def load():
