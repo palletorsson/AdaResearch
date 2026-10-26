@@ -1268,3 +1268,13 @@ wave halls. Four lineage claims were wrong for that order and were corrected rat
 order panel groups by tutorial — the hall's title, its sequence, its why — with ↑ ↓ on a map, ↑ ↓ and → map on a term,
 drag between and within; saving sends `{tutorials}` to /api/construction-path, which refuses a list that drops a map
 or a term and derives the same order as the tool (checked: an unchanged save reproduces the order exactly).
+
+**An inspector (26 Oct, Palle: "can I edit the color here — an inspector for changeable values like color, mesh
+shape=sphere size=[0.2] color=d86e32 alpha=0.6").** In /spine-film every line of "how … is built" is selectable; the
+selected node's values become controls — a colour picker for hex colours, a slider for alpha, a menu for mesh shapes,
+number fields for sizes, at / rot / scale and other numbers, a JSON box for anything nested — and the 3D view rebuilds
+as they change ("edited, not saved"; revert restores). Saving goes through a new `PATCH /api/modular-terms {id, build}`
+that replaces only that term's block where it stands in terms.json, written as the Python tools write (indent 2,
+non-ASCII escaped): checked by re-saving `point` unchanged, its block byte-identical to the committed file. (The
+existing POST re-serialises the whole file through JSON.stringify, which rewrites every term's floats and escapes.)
+One limit: a saved term's own whole-number floats are written as integers (2.0 becomes 2) — the same value to Godot.

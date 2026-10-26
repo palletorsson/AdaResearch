@@ -77,6 +77,11 @@ Example — the Sierpiński triangle:
   When `tutorials` exists it IS the order (a map's terms, then the artifacts standing in it). Edit it at /spine-film
   (↑ ↓ on a map, ↑ ↓ and → map on a term); read it whole in `doc/book/course/MODULAR_TUTORIALS.md`.
 
+A term's values can be edited where it plays: in /spine-film, click a line of "how … is built" — colour, alpha,
+shape, sizes, positions and numbers become controls, previewed live; "save to terms.json" replaces that one term's
+block in the file (`PATCH /api/modular-terms`) and leaves every other byte as it was. Godot builds the saved recipe
+from its next load; the glbs, captures and the construction path's notation refresh when the tools run.
+
 ## Checking that a recipe builds
 
 Godot 4.6, run from the repository root:
