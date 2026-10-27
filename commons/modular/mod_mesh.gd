@@ -1,6 +1,6 @@
 class_name ModularMesh
 extends RefCounted
-## Module: a mesh. {"p":"mesh","shape":sphere|box|plane|cylinder|cone|tetra|pyramid|wedge|torus|triangle|dodeca|dome|capsule,
+## Module: a mesh. {"p":"mesh","shape":sphere|box|plane|cylinder|cone|tetra|pyramid|wedge|torus|triangle|dodeca|dome|capsule|cube_edges,
 ## "size":[…],"color":"hex","alpha":1,"at":[…],"rot":[…],"shader":"ink"} — sizes in metres.
 ## "shader":"ink" wears shaders/ink_stroke.gdshader: a drawn line (tapered ends, darker
 ## silhouette, a faint grain) instead of a lit tube — the modular line's stroke.
@@ -138,6 +138,8 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 			m.radius = s0
 			m.height = maxf(s1, 2.0 * s0)
 			mi.mesh = m
+		"cube_edges":   # a cube frame of edge s0 and bar s1 (default s0 * 0.08); "mask" picks the edges
+			mi.mesh = _cube_edges(s0, float(size[1]) if size.size() > 1 else s0 * 0.08, int(spec.get("mask", 4095)))
 		"wedge":
 			var m := PrismMesh.new()
 			m.size = Vector3(s0, s1, s2)
@@ -189,6 +191,36 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 		mi.material_override = mat
 	mi.name = "mesh_" + shape
 	return mi
+
+
+const CUBE_CORNERS := [Vector3(-1, -1, -1), Vector3(1, -1, -1), Vector3(1, -1, 1), Vector3(-1, -1, 1),
+	Vector3(-1, 1, -1), Vector3(1, 1, -1), Vector3(1, 1, 1), Vector3(-1, 1, 1)]
+## open_structure.gd's edge order: bottom 0-1 1-2 2-3 3-0, top 4-5 5-6 6-7 7-4, uprights 0-4 1-5 2-6 3-7.
+## modular-terms.ts CUBE_EDGES is the same list; mask bit i keeps edge i.
+const CUBE_EDGES := [[0, 1], [1, 2], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]]
+
+
+static func _cube_edges(edge: float, bar: float, mask: int) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var any := false
+	for i in CUBE_EDGES.size():
+		if not (mask & (1 << i)):
+			continue
+		var a: Vector3 = CUBE_CORNERS[CUBE_EDGES[i][0]]
+		var b: Vector3 = CUBE_CORNERS[CUBE_EDGES[i][1]]
+		var axis: int = 0 if a.x != b.x else (1 if a.y != b.y else 2)
+		var box := BoxMesh.new()
+		var size := Vector3(bar, bar, bar)
+		size[axis] = edge + bar   # a bar overlaps its corners, so a frame closes
+		box.size = size
+		var at := a * edge * 0.5
+		at[axis] = 0.0
+		st.append_from(box, 0, Transform3D(Basis.IDENTITY, at))
+		any = true
+	if not any:
+		return ArrayMesh.new()
+	return st.commit()
 
 
 static func _faces(verts: PackedVector3Array, idx: PackedInt32Array) -> ArrayMesh:

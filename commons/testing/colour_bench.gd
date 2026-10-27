@@ -414,7 +414,8 @@ func _aim(cam: Camera3D, box: AABB, view: String) -> void:
 		# a floor or a field read from above: 60 degrees down, fitted on the footprint
 		cam.fov = 45.0
 		var foot: float = maxf(w, maxf(box.size.z, 0.5))
-		var reach: float = foot / (2.0 * tan(deg_to_rad(cam.fov * 0.5))) * 1.2
+		# a tall field (a lattice) would run into the lens: its height widens the fit and backs off
+		var reach: float = maxf(foot, box.size.y) / (2.0 * tan(deg_to_rad(cam.fov * 0.5))) * 1.2 + box.size.y * 0.5
 		_look(cam, c + Vector3(0.0, sin(deg_to_rad(60.0)), cos(deg_to_rad(60.0))) * reach, c)
 		return
 	if not wide and view in ["oblique", "eye"]:
