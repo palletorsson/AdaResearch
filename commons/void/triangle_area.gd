@@ -7,6 +7,7 @@ const Drawing = preload("res://commons/primitives/point/draw_triangle_faces.tscn
 const Twin = preload("res://commons/artifacts/triangle_live_twin/triangle_live_twin.tscn")
 const Reveal = preload("res://commons/artifacts/concept_monitor/triangle_reveal_monitor.tscn")
 const Quad = preload("res://commons/primitives/quad/quad.tscn")
+const ShaftQuad = preload("res://commons/void/shaft_quad.tscn")
 const QuadBoundary = preload("res://commons/primitives/line/puzzles/quad_line_puzzle.tscn")
 const Fold = preload("res://commons/primitives/folded_strip/folded_strip.tscn")
 const Pink = preload("res://commons/artifacts/triangle_direction_sign/triangle_direction_sign.tscn")
@@ -44,6 +45,7 @@ func _ready() -> void:
 			place(WallProof,"PythagorasFloor",Vector3(-3.5,0,-6.8))
 			words("02 / ONE DRAWING, TWO SCALES",Vector3(0,0.025,4.0),true,0.0016)
 		"surfaces":
+			place(ShaftQuad,"ShaftQuad",Vector3(6,-1.65,0))
 			place(QuadBoundary,"FourEdges",Vector3(-2.5,1.35,2.4),270)
 			wall(Vector3(-2.5,0.35,2.4),Vector3(1.0,0.7,0.7),Color("e8e4da"),"BoundaryPlinth")
 			place(Quad,"SharedDiagonal",Vector3(0.5,1.45,-0.7))
@@ -70,6 +72,9 @@ func _ready() -> void:
 			words("ONE FACE / TWO SIDES",Vector3(0,0.025,5.6),true,0.0014)
 		"assembly":
 			place(Assembly,"TriangleTable",Vector3.ZERO,0,{"already_started":true})
+			place(load("res://commons/artifacts/primitive_encounters/timber_panel_1x1.tscn"),"SheetOneMetre",Vector3(-3,0,-.5))
+			place(load("res://commons/artifacts/primitive_encounters/timber_panel_2x1.tscn"),"SheetTwoByOne",Vector3(-1,0,-2.5))
+			place(load("res://commons/artifacts/primitive_encounters/timber_panel_2x2.tscn"),"SheetWallInfill",Vector3(3,1,-.5)).rotation.x=PI/2
 			words("04 / WHAT CAN THESE FACES BECOME?",Vector3(0,0.025,1.8),true,0.0015)
 	for child in get_children():
 		if child is Node3D:

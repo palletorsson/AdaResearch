@@ -1,5 +1,5 @@
 extends "res://addons/godot-xr-tools/functions/movement_provider.gd"
-## One press, one attempt. Holding A must not jump again on the next landing.
+## One press, one attempt. Holding A or B must not repeat on the next landing.
 @export var order := 20
 var queued := false
 

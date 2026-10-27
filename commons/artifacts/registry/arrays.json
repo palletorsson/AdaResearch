@@ -1,5 +1,29 @@
 {
 	"artifacts": {
+		"array_index_bridge": {
+			"name": "Array / hand selects the shaft",
+			"lookup_name": "array_index_bridge",
+			"description": "Grip a point on a small 7 by 7 grid. The same index selects a real support tile in the shaft. Write zero or one and see the occupancy change at both scales.",
+			"scene": "res://commons/artifacts/array_index_bridge/array_index_bridge.tscn",
+			"category": "arrays",
+			"sequence": "array_tutorial",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"tags": [
+				"arrays",
+				"index",
+				"grip",
+				"support"
+			],
+			"interactions": [
+				"grip selector",
+				"trigger toggles selected value",
+				"add",
+				"remove",
+				"restore"
+			],
+			"qfep": "An address persists when its material support is absent. The same relation survives a change of scale."
+		},
 		"pattern_tile_puzzle": {
 			"name": "Pattern Tile Puzzle",
 			"lookup_name": "pattern_tile_puzzle",

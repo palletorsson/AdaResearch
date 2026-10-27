@@ -22,6 +22,9 @@ const FloorStream := preload("floor_stream.gd")
 const Soundscape := preload("soundscape.gd")
 const MotionMeter := preload("motion_meter.gd")
 static var motion_test_requested := false
+## Menu selection is consumed by the next main-tower instance, never persisted
+## into a separate trial or into the player's museum progress.
+static var requested_floor := -1
 var soundscape: Node3D
 var floor_stream: Node
 ## Full architecture/editor captures can opt out; gameplay streams by default.
@@ -34,7 +37,7 @@ const Jump := preload("jump.gd")
 const Ground := preload("res://addons/godot-xr-tools/overrides/ground_physics_settings.gd")
 const Route := preload("res://commons/hazards/biome_ladder/route.gd")
 const HARD_LANDING_SPEED := 9.8
-const FALL_DAMAGE := 5.0 # Legacy probe name; the resource calls this LANDING_COST.
+const FALL_DAMAGE := 0.0 # Falls and jumps are free; legacy callers read this value.
 const FLOOR_TOLERANCE := 0.35
 const DEATH_RED := Color(0.12, 0.003, 0.009)
 const FADE_IN_SECONDS := 0.3
@@ -84,10 +87,21 @@ var coordinate_point: RigidBody3D
 var point_home: Transform3D
 var catalyst: Node3D
 var catalyst_was_processing := true
+var catalyst_was_unlocked := false
+var laser_unlocked := true # Catalyst and supplied canisters coexist in this trial.
+var throwable_tools := false # Physical tools no longer replace the catalyst.
+signal laser_acquired()
 var previous_desktop_source: WeakRef
+var prefab_inventory: Node
+var inventory_board: Node3D
 
 func _ready() -> void:
 	add_to_group("void_game")
+	prefab_inventory = preload("prefab_inventory.gd").new()
+	prefab_inventory.name = "PrefabInventory"
+	add_child(prefab_inventory)
+	prefab_inventory.earned.connect(func(id):
+		_notice("PREFAB UNLOCKED / " + str(prefab_inventory.definitions[id].title) + "\nI / left stick click: inventory. Available in the live editor."))
 	charge = Health.new()
 	health = charge
 	health.name = "BodyCharge"
@@ -108,9 +122,12 @@ func _ready() -> void:
 	catalyst = get_tree().get_first_node_in_group("first_catalyst_ability") as Node3D
 	if catalyst != null:
 		catalyst_was_processing = catalyst.is_physics_processing()
+		catalyst_was_unlocked = catalyst.unlocked
 		if is_instance_valid(catalyst.desktop_source): previous_desktop_source = weakref(catalyst.desktop_source)
 		catalyst.desktop_source = null
 		catalyst._hide_all()
+		catalyst.set_physics_process(false)
+		catalyst.set_unlocked(true)
 	building = Architecture.new()
 	trial_id = Architecture.Content.Source.selected(trial_id)
 	if not trial_id.is_empty():
@@ -133,6 +150,10 @@ func _ready() -> void:
 	body.add_to_group("player_body")
 	_build_signs()
 	_build_feedback()
+	inventory_board = preload("inventory_board.gd").new()
+	inventory_board.name = "PlayerInventory"
+	inventory_board.game = self; inventory_board.inventory = prefab_inventory
+	add_child(inventory_board)
 	if stream_floors:
 		floor_stream=FloorStream.new()
 		floor_stream.name="FloorStream"
@@ -146,22 +167,33 @@ func _ready() -> void:
 	var start_floor := int(Architecture.Content.Source.definition(trial_id).get("start_floor", 0))
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--void-start-floor="): start_floor=clampi(int(arg.trim_prefix("--void-start-floor=")),0,building.spec.levels.size()-1)
+	if trial_id.is_empty() and requested_floor >= 0:
+		start_floor = clampi(requested_floor, 0, building.spec.levels.size()-1)
+		requested_floor = -1
 	checkpoint=start_floor
 	place_player(spawn_for(start_floor))
 	ready_for_play = true
+	_set_enabled(true)
+	# Visual study is explicit and scene-scoped; normal launches retain their look.
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--void-look="):
+			var look := preload("res://commons/void/visual_profile.gd").new()
+			look.name = "VisualProfileStudy"
+			add_child(look)
+			look.configure(self,arg.trim_prefix("--void-look="))
 	if motion_test_requested or "--void-motion-test" in OS.get_cmdline_user_args():
 		motion_test_requested = false
 		var meter := MotionMeter.new()
 		meter.name = "MotionMeter"
 		add_child(meter)
 		meter.configure(self, "tower")
-	_notice("THE VOID\nFind a landing below.\n" + ("A: jump   Grip: grab   B: retry" if vr else "Space: jump   R: retry"))
+	_notice("THE VOID\nFind a landing below.\n" + ("A / B: jump   Grip: grab" if vr else "Space: jump   R: retry"))
 	if trial_session != null:
 		# A trial names its own notice in playable.json; the first trial keeps its text.
 		var trial := Architecture.Content.Source.definition(trial_id)
 		if trial.has("notice"): _notice(str(trial.get("label", trial_id)).to_upper() + "\n" + str(trial.notice))
-		else: _notice("TRANSFORMATION TRIAL\nStill / rise / turn / scale. Then collect.\nR or B: reset the encounter. M or left X: menu.")
-	print("[void] Museum rig. Left stick: move/strafe; right stick: forward/back and turn; right A: jump; grip: grab; trigger: point at switches / held tool / two-hand catalyst; B: checkpoint; left Y: roof; left X: menu.")
+		else: _notice("TRANSFORMATION TRIAL\nStill / rise / turn / scale. Then collect.\nA / B: jump. R (desktop): reset the encounter. M or left X: menu.")
+	print("[void] Museum rig. Left stick: move/strafe; right stick: forward/back and turn; right A / B: jump; grip: grab; trigger: point at switches / held tool; smoke: opposite-hand pin, release to throw; empty hands together + trigger: catalyst; left Y: prefab board; left X: menu.")
 
 func _build_player() -> void:
 	var origin := get_node("XROrigin3D") as XROrigin3D
@@ -177,8 +209,10 @@ func _build_player() -> void:
 		var right := origin.get_node("RightHand") as XRController3D
 		var left_hand := left.get_node("XRToolsCollisionHand")
 		var right_hand := right.get_node("XRToolsCollisionHand")
+		for hand in [left_hand,right_hand]:
+			hand.get_node("FunctionPickup").set_script(preload("force_pickup.gd"))
 		jump = right_hand.get_node("MovementJump")
-		jump.set_script(Jump) # One A press per jump; no repeat on landing.
+		jump.set_script(Jump) # One A/B press per jump; no repeat on landing.
 		body = origin.get_node("PlayerBody")
 		# Keep the capsule aligned with the head. Hand-direction blending in
 		# this XRTools version has a zero-axis rotation when hands line up.
@@ -229,8 +263,23 @@ func _build_player() -> void:
 	care_body.name = "CareBody"
 	add_child(care_body)
 	care_body.configure(camera,body)
+	if building.content.data.floors.any(func(f):return f.map=="Ribbon_Patterns_03"):
+		# Reuse the museum wardrobe for the original WEAR and mirror controls.
+		var wardrobe := preload("res://commons/player/costume_wardrobe.gd").new()
+		wardrobe.name = "StudioWardrobe"
+		wardrobe.mount_path = NodePath("..")
+		wardrobe.head_path = camera.get_path()
+		wardrobe.appearance_save_path = "user://void_studio_appearance.cfg"
+		add_child(wardrobe)
+	_content_changed(-1)
 
 func _content_changed(_index: int) -> void:
+	if is_instance_valid(prefab_inventory): prefab_inventory.bind_lesson(building.content,trial_id)
+	for mount in building.content.exhibits.values():
+		if not is_instance_valid(mount): continue
+		var source: Node = mount.get_node_or_null("Artifact")
+		if is_instance_valid(source) and source.get_meta("void_source","")=="res://commons/artifacts/drag_catwalk/drag_catwalk.tscn" and is_instance_valid(camera):
+			source.viewer = camera
 	if is_instance_valid(coordinate_point): return
 	for mount in building.content.exhibits.values():
 		if not is_instance_valid(mount): continue
@@ -260,6 +309,12 @@ func _build_signs() -> void:
 			# Keep the boundary plate and its unfolding monitor unobstructed.
 			sign_at = Vector3(9.0, y + 1.35, 8.3)
 			sign_turn = PI
+		# Transfer trials can clear an original installation without moving its
+		# geometry. Unconfigured floors retain their existing sign positions.
+		var sign_position: Array = building.spec.get("floor_sign_positions", {}).get(str(index), [])
+		if sign_position.size() == 2:
+			sign_at.x = float(sign_position[0])
+			sign_at.z = float(sign_position[1])
 		var sign_board: Node3D = building.box(building.detail_root(index), "FloorSign", sign_at, Vector3(3.7, 1.65, 0.12), building.steel)
 		sign_board.rotation.y = sign_turn
 		var label := Label3D.new()
@@ -269,20 +324,20 @@ func _build_signs() -> void:
 		label.pixel_size = 0.003
 		label.outline_size = 0
 		label.modulate = Color("f0e9dd")
-		var directions := "Last structural floor.\nB: retry here / Left Y: roof"
+		var directions := "Last structural floor.\nA / B: jump / Left X: menu"
 		if index+1 < building.spec.levels.size():
 			if building.spec.descent.get("mode") == "corner_pads":
 				var corner := "south" if (index+1)%2==1 else "north"
 				corner += "-west" if float(building.spec.descent.get("pad_x_sides",{}).get(str(index+1),1))<0 else "-east"
 				var shaft: String = building.spec.descent.get("pad_shafts",{}).get(str(index+1),building.spec.descent.get("pad_shaft","B"))
-				directions="Shaft %s / %s corner below\nMarked planks: soft landing.\nOne floor at a time. A: jump / B: retry" % [shaft,corner]
+				directions="Shaft %s / %s corner below\nMarked planks: soft landing.\nFalls are safe. A / B: jump" % [shaft,corner]
 			elif float(index+1) in building.spec.descent.get("shaft_corner_floors",[]):
 				var next_title := str(building.content.data.floors[index+1].title).get_slice(" / ",1)
 				directions="Next: %s / shaft B, east edge\nTwo timber landings, three metres apart.\nLand on the first, then jump south to the second." % next_title
 			elif index < building.spec.descent.get("balcony_sides",[]).size():
-				directions="Next balcony: %s edge\nLand on the pink cushion.\nA: jump / B: retry" % building.spec.descent.balcony_sides[index]
+				directions="Next balcony: %s edge\nLand on the pink cushion.\nA / B: jump" % building.spec.descent.balcony_sides[index]
 			else:
-				directions="Open structure below / route not built yet.\nHard landings still kill.\nB: retry here / Left Y: roof"
+				directions="Open structure below / route not built yet.\nFalls are safe.\nA / B: jump / Left X: menu"
 		label.text = str(building.content.data.floors[index].title) + "\n" + directions
 		building.detail_root(index).add_child(label)
 		# A pale pink arrival strip sits on real concrete, outside both holes.
@@ -330,7 +385,7 @@ func _build_feedback() -> void:
 		add_child(desktop_help)
 		var help := Label.new()
 		help.position = Vector2(20, 18)
-		help.text = "THE VOID\nWASD: move   Mouse: look   Space: jump   Right click: grab / release\nLeft click: use / drag   Hold C + left click: earned two-hand catalyst\nR: last floor   T: roof   M: menu   Esc: release mouse\nCHARGE: movement drains the battery. Jump / hard landing: -5. Pads cushion drops. Beyond one floor: fatal."
+		help.text = "THE VOID\nWASD: move   Mouse: look   Space: jump   Right click: grab / release\nLeft click: use / drag   Smoke: left click pull pin, then throw   C + click: catalyst\nI: prefab inventory   R: last floor   T: roof   M: menu   Esc: release mouse\nCHARGE: movement drains the battery. Falls and landings are safe. Outside the tower: return to the last floor."
 		if trial_session != null:
 			var label := str(Architecture.Content.Source.definition(trial_id).get("label", trial_id)).to_upper()
 			help.text = help.text.replace("THE VOID", "VOID TRIAL / " + label).replace("R: last floor   T: roof", "R / T: reset the encounter")
@@ -346,6 +401,10 @@ func _build_feedback() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not ready_for_play or returning: return
+	# Retiring a standalone artifact camera can make Godot auto-select the
+	# dormant XR camera in desktop mode. Keep the active visitor rig in charge.
+	if not vr and get_viewport().get_camera_3d()==get_node("XROrigin3D/XRCamera3D"):
+		camera.make_current()
 	if recovering:
 		recovery_time += delta
 		_set_fade(minf(recovery_time / FADE_IN_SECONDS, 1.0))
@@ -389,38 +448,41 @@ func _physics_process(delta: float) -> void:
 	var feet := body.global_position
 	_drain_movement(feet,delta)
 	if recovering: return
+	# Bounded flight borrows the noise exhibit's locomotion. It is controlled
+	# travel, so restart fall accounting here rather than measuring from entry.
+	var controlled_carry := false
+	for field in get_tree().get_nodes_in_group("void_controlled_carry"):
+		if field.can_process() and field._point_inside(feet): controlled_carry = true; break
+	if controlled_carry or preload("res://commons/movement/museum_flight_box.gd").at_point(get_tree(),feet) != null:
+		airborne_speed = 0.0
+		fall_start_y = feet.y
+		_airborne_peak = 0.0
+		_landing_cost_armed = false
+		stable_floor = -1
+		stable_time = 0.0
+		return
 	var balcony_depth := float(building.spec.get("descent", {}).get("balcony_depth", 0.0))
 	balcony_depth = maxf(balcony_depth, Architecture.CliffLandings.extent(building.spec))
 	var outside := absf(feet.x) > float(building.spec.width) / 2.0 + 3.0 or absf(feet.z) > float(building.spec.depth) / 2.0 + balcony_depth + 3.0
 	if feet.y < float(building.spec.levels.back()) - 5.0 or (outside and not _exterior_walk_support(feet)):
-		die("Fell beyond the building")
+		# A missed route returns the visitor without injury, death or pain audio.
+		place_player(spawn_for(checkpoint))
+		_notice("Back on %s" % floor_name(checkpoint))
 		return
 	if not body.is_on_floor():
 		airborne_speed = maxf(airborne_speed, -body.velocity.y)
 		if _landing_cost_armed: _airborne_peak = maxf(_airborne_peak,feet.y-fall_start_y)
 		stable_floor = -1
 		stable_time = 0.0
-		if fall_start_y - feet.y > float(building.spec.storey_height) + FLOOR_TOLERANCE:
-			die("Fell more than one floor")
 		return
 	last_impact = airborne_speed if airborne_speed > 0 else last_impact
-	# Upward jump travel does not consume the one-floor allowance. Check the
-	# support-to-support drop before a lower floor can become a checkpoint.
-	var limit := float(building.spec.get("descent", {}).get("landing_max_speed", 13.0))
-	if fall_start_y - feet.y > float(building.spec.storey_height) + FLOOR_TOLERANCE or airborne_speed > limit:
-		die("Hard landing")
-		return
-	var jumped := _airborne_peak > 0.25
-	if airborne_speed >= HARD_LANDING_SPEED or jumped:
+	# Preserve real gravity/contact and the pad's visual response. Neither drop
+	# height nor impact speed injures the electrical unit or spends its charge.
+	if airborne_speed >= HARD_LANDING_SPEED:
 		var pad := _landing_pad_contact()
-		if pad != null and airborne_speed >= HARD_LANDING_SPEED:
+		if pad != null:
 			cushioned_landings += 1
 			building.absorb_landing(pad)
-		# A passive drop onto a marked pad remains cushioned. A deliberate
-		# jump pays once, at contact, including jumps on the same floor.
-		if jumped or pad == null:
-			charge.discharge(Health.LANDING_COST,"landing")
-			if recovering: return
 	_airborne_peak = 0.0
 	_landing_cost_armed = true
 	airborne_speed = 0.0
@@ -437,7 +499,7 @@ func _physics_process(delta: float) -> void:
 
 func _exterior_walk_support(feet: Vector3) -> bool:
 	# An edited/copy-rotated walkway can extend into the sky. Only real support
-	# underneath it extends the playable boundary; the surrounding void still kills.
+	# underneath it extends the playable boundary; a missed route returns quietly.
 	# Sample the foot area too: F33 bridge cells have visible 2 cm joints that
 	# the player's capsule spans, while a single centre ray can pass through.
 	for offset in [Vector3.ZERO,Vector3(.15,0,.15),Vector3(-.15,0,.15),Vector3(.15,0,-.15),Vector3(-.15,0,-.15)]:
@@ -482,7 +544,11 @@ func _floor_for(collider: Node3D) -> int:
 		if ancestor.has_meta("void_content_floor"):
 			var index := int(ancestor.get_meta("void_content_floor"))
 			var height := body.global_position.y - float(building.spec.levels[index])
-			if str(building.content.data.floors[index].map).begins_with("Trans_") and height >= -.16 and height < float(building.spec.storey_height)-.4:
+			# Museum instruments often include a 5 cm floor plate. It is the
+			# same arrival floor, not an airborne visitor with no checkpoint.
+			var flush_floor := height >= -.16 and height < .16
+			var raised_transform := str(building.content.data.floors[index].map).begins_with("Trans_") and height >= -.16 and height < float(building.spec.storey_height)-.4
+			if flush_floor or raised_transform:
 				return index
 			break
 		ancestor = ancestor.get_parent()
@@ -490,7 +556,7 @@ func _floor_for(collider: Node3D) -> int:
 
 func _landing_pad_contact() -> StaticBody3D:
 	# A horizontal top contact is required: brushing a pad's side cannot
-	# cancel a lethal impact on concrete, or save an airborne checkpoint.
+	# claim a cushioned contact on concrete, or save an airborne checkpoint.
 	for i in range(body.get_slide_collision_count()):
 		var hit := body.get_slide_collision(i)
 		var pad := hit.get_collider() as StaticBody3D
@@ -584,7 +650,7 @@ func _set_enabled(value: bool) -> void:
 	body.enabled = value
 	if desktop_help != null: desktop_help.visible = value
 	if is_instance_valid(catalyst):
-		catalyst.set_physics_process(value and catalyst_was_processing)
+		catalyst.set_physics_process(value and not throwable_tools)
 		if not value:
 			catalyst._hide_all()
 			catalyst.clear_shots()
@@ -614,8 +680,14 @@ func _notice(message: String) -> void:
 
 func _right_button(button: String) -> void:
 	if recovering or returning: return
-	if button == "ax_button": jump.queued = true
-	elif button == "by_button": die("Retry")
+	if button in ["ax_button", "by_button"]: jump.queued = true
+
+func acquire_laser() -> void:
+	if laser_unlocked: return
+	laser_unlocked = true
+	if is_instance_valid(catalyst): catalyst.set_unlocked(true)
+	laser_acquired.emit()
+	_notice("LASER BURST INSTALLED\nVR: empty hands together + trigger\nDesktop: hold C + left click")
 
 func fire_catalyst() -> void:
 	# Compatibility for callers: no alternate projectile or unlock bypass.
@@ -623,18 +695,57 @@ func fire_catalyst() -> void:
 
 func _left_button(button: String) -> void:
 	if returning: return
-	if button == "ax_button": return_to_menu()
-	elif button == "by_button" and not recovering:
-		checkpoint = 0
-		die("Restart from roof")
+	if button == "primary_click": inventory_board.toggle()
+	elif button == "ax_button": return_to_menu()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.pressed or event.echo: return
 	if event.keycode == KEY_M: return_to_menu()
+	elif event.keycode == KEY_I: inventory_board.toggle()
 	elif event.keycode == KEY_R: die("Retry")
 	elif event.keycode == KEY_T and not recovering:
 		checkpoint = 0
 		die("Restart from roof")
+
+func place_inventory_prefab(id: String) -> void:
+	if not prefab_inventory.unlocked(id): return
+	inventory_board.hide()
+	var definition: Dictionary = prefab_inventory.definitions[id]
+	var from: Vector3 = inventory_board.placement_from
+	var direction: Vector3 = inventory_board.placement_direction
+	# Place on a slab in view; never add a hidden support over a shaft.
+	var query := PhysicsRayQueryParameters3D.create(from,from+direction*18,1)
+	var hit := camera.get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty() or hit.normal.y < .95:
+		_notice("Aim down at a clear floor slab, then open inventory to place."); return
+	var index := -1
+	for i in building.spec.levels.size():
+		if absf(float(building.spec.levels[i])-hit.position.y)<.06: index=i; break
+	if index<0: _notice("Place on a floor slab."); return
+	var at: Vector3 = hit.position
+	var centre: Array = definition.placement.get("bounds_center",[0,2.8,0])
+	at -= Vector3(float(centre[0]),0,float(centre[2]))
+	var dimensions: Array = definition.dimensions
+	var half_x: float = float(dimensions[0])/2
+	var half_z: float = float(dimensions[2])/2
+	if absf(hit.position.x)+half_x>building.spec.width/2 or absf(hit.position.z)+half_z>building.spec.depth/2:
+		_notice("AND needs a clear 14 × 7.2 metre bay. Place it in the lab editor."); return
+	for shaft in building.spec.shafts:
+		if absf(hit.position.x-float(shaft.x))<half_x+building.spec.shaft_width/2 and absf(hit.position.z)<half_z+building.spec.shaft_depth/2:
+			_notice("Keep the shafts open. Choose a clear slab bay."); return
+	var bounds := BoxShape3D.new(); bounds.size=Vector3(dimensions[0],dimensions[1]-.15,dimensions[2])
+	var overlap := PhysicsShapeQueryParameters3D.new(); overlap.shape=bounds; overlap.collision_mask=1
+	overlap.transform=Transform3D(Basis.IDENTITY,hit.position+Vector3(0,float(dimensions[1])/2+.05,0))
+	if not camera.get_world_3d().direct_space_state.intersect_shape(overlap,1).is_empty():
+		_notice("That bay is occupied. Use a clear floor or arrange the parts in the lab editor."); return
+	var config: Dictionary = definition.placement.get("config",{}).duplicate(true)
+	config.editor_source={"floor":definition.placement.source_floor,"id":definition.placement.source_id}
+	var record := {"id":"inventory-"+id+"-"+str(Time.get_ticks_usec()),"artifact":definition.placement.artifact,"station":"NW","position":[at.x,at.z],"height":0,"facing":0,"scale":1,"config":config}
+	building.content.load_floor(index)
+	building.content.data.floors[index].get_or_add("copies",[]).append(record)
+	building.content._build_artifact(building.content.roots[index],index,record)
+	building.content.floor_changed.emit(index)
+	_notice("AND placed / session copy. Use the lab editor to save a permanent arrangement.")
 
 func scene_loaded(_user_data = null) -> void:
 	if ready_for_play:
@@ -688,6 +799,7 @@ func _exit_tree() -> void:
 		catalyst.clear_shots()
 		catalyst.desktop_source = previous_desktop_source.get_ref() if previous_desktop_source != null else null
 		catalyst.set_physics_process(catalyst_was_processing)
+		catalyst.set_unlocked(catalyst_was_unlocked)
 	if is_instance_valid(stuck): stuck.enabled = old_stuck
 	if is_instance_valid(mushroom):
 		mushroom.process_mode = old_mushroom_mode
@@ -701,7 +813,7 @@ func _drain_movement(feet: Vector3, delta: float) -> void:
 	_movement_settle = maxf(0,_movement_settle-delta)
 	if _charge_position_valid and _movement_settle<=0:
 		var step := feet-_last_charge_position
-		step.y = 0.0 # Falling is charged on impact, not for gravity's travel.
+		step.y = 0.0 # Gravity's travel never drains the charge.
 		if body.is_on_floor():
 			var platform := body.get_platform_velocity()*delta
 			step -= Vector3(platform.x,0,platform.z)
@@ -721,7 +833,7 @@ func _on_health_changed(value: float, difference: float) -> void:
 	_update_charge_display()
 	if charge.last_cause == "movement": return
 	if difference < 0 and not recovering:
-		hurt_time = 0.25
+		hurt_time = 0.65 if charge.last_cause=="ceiling laser" else 0.25
 		if soundscape != null: soundscape.play_hurt()
 		_notice("%s / charge %d%%" % [str(charge.last_cause).to_upper(),ceili(value)])
 	elif difference > 0:

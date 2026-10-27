@@ -1,0 +1,33 @@
+{
+  "sequences": {
+    "logic": {
+      "name": "Logic: Conditions Become Events",
+      "truth": "A condition is encountered through what a construction lets happen.",
+      "description": "Four short rooms reuse the event chain, supported gravity gates and hand-built pallet workshop.",
+      "qfep_term": "F",
+      "qfep_connection": "Separate intended truth tables from observed material outcomes.",
+      "layer": "F_order",
+      "prerequisites": [
+        "transformation"
+      ],
+      "unlocks": [
+        "array_tutorial"
+      ],
+      "maps": [
+        "Logic_Event",
+        "Logic_AND",
+        "Logic_Alternatives",
+        "Logic_Assemblage"
+      ],
+      "difficulty": "beginner",
+      "estimated_time": "12-20 minutes",
+      "return_to": "lab",
+      "learning_objectives": [
+        "Trace an event through physical contacts",
+        "Compare serial supports and alternative paths",
+        "Read interruption without mistaking every accident for a Boolean rule",
+        "Arrange parts by hand and save a reusable loose collection"
+      ]
+    }
+  }
+}

@@ -1,8 +1,9 @@
 """Actual source/imported assets, isolated user:// saves for native trial tools."""
 from pathlib import Path
-import re, shutil, subprocess, tempfile
+import os, re, shutil, subprocess, tempfile
 ROOT=Path(__file__).resolve().parents[1]
 def stage_runtime():
+    os.environ["ADA_SOURCE_PROJECT"]=str(ROOT)
     work=ROOT/'ada_run/void-trial-runtime';work.mkdir(parents=True,exist_ok=True)
     (work/'.gdignore').touch()
     stage=Path(tempfile.mkdtemp(prefix='run-',dir=work))

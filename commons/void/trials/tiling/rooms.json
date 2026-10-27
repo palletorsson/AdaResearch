@@ -1,0 +1,103 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Pattern_Disco",
+      "title": "Tiling / same floor, another palette",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "dance-floor",
+          "artifact": "void_pattern_floor",
+          "position": [
+            0,
+            0
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "controls",
+          "artifact": "disco_controls",
+          "position": [
+            -1.6,
+            5.9
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "mode": "colour"
+          }
+        },
+        {
+          "id": "sequencer",
+          "artifact": "void_pattern_sequencer",
+          "position": [
+            1.8,
+            5.9
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / HOLD THE FLOOR",
+          "position": [
+            -1.6,
+            7.6
+          ]
+        },
+        {
+          "label": "02 / COLOUR OR ONE STEP",
+          "position": [
+            0,
+            5.1
+          ]
+        },
+        {
+          "label": "03 / A SEPARATE CLOCK",
+          "position": [
+            1.8,
+            7.6
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

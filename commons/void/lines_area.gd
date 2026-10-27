@@ -43,6 +43,7 @@ func _ready() -> void:
 func _setting_out() -> void:
 	var field := Pairing.new()
 	field.name = "PairingPoints"
+	field.initial_pairs = [Vector2i(0,1),Vector2i(4,8),Vector2i(6,11)]
 	field.position = Vector3(0,0,3.0)
 	add_child(field)
 	var room := EntryGate.new()
@@ -127,7 +128,7 @@ func _assembly() -> void:
 	for x in [-2.3,2.3]: wall(Vector3(x,0.4,-3.8),Vector3(0.16,0.8,1.1),Color("343a3c"),"BenchLeg")
 	var finishes := ["plank","stick","light","measure"]
 	for i in range(4):
-		rod("Hand_"+finishes[i],Vector3(-2.1+i*1.4,1.05,-3.8),Vector3.BACK,1.05,finishes[i],true)
+		rod("Hand_"+finishes[i],Vector3(-2.1+i*1.4,1.05,-3.8),Vector3.BACK,1.0 if finishes[i]=="plank" else 1.05,finishes[i],true)
 		words(finishes[i].to_upper(),Vector3(-2.1+i*1.4,0.025,-2.7),true,0.0013)
 	# + and X are grabbable line studies. Neither has a health effect.
 	for entry in [[-1.7,0.0],[1.7,PI/4]]:
@@ -206,6 +207,9 @@ func _consequences() -> void:
 	words("X / CHARGE DRAINS WHILE INSIDE",Vector3(-1.5,0.025,-1.0),true,0.0012)
 	words("+ / RECOVER",Vector3(1.8,0.025,-1.0),true,0.0014)
 	health_label = words("CHARGE 100 / 100",Vector3(0,2.0,0),false,0.0021)
+	# This is an instrument, so expose it in the editor's normal object list
+	# (generic Caption parts are hidden there unless explicitly searched).
+	health_label.name = "ChargeReadout"
 	health_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	if safety != null: safety.changed.connect(_health_changed)
 	wall(Vector3(0,1.0,2.1),Vector3(5.8,2.0,0.12),Color("dad3c5"),"ServiceWall")
@@ -216,7 +220,10 @@ func _health_changed(value: float, _difference: float) -> void:
 	if is_instance_valid(health_label): health_label.text = "CHARGE %d / 100" % roundi(value)
 
 func rod(title: String, at: Vector3, direction: Vector3, span: float, skin: String, movable: bool) -> Node3D:
-	var line := LineBody.new()
+	var line: Node3D
+	if skin=="plank" and (is_equal_approx(span,1) or is_equal_approx(span,2) or is_equal_approx(span,4)):
+		line=load("res://commons/artifacts/primitive_encounters/timber_plank_%dm.tscn"%roundi(span)).instantiate()
+	else:line=LineBody.new()
 	line.name = _unique(title)
 	line.collision_layer = 6
 	line.collision_mask = 1
@@ -320,6 +327,14 @@ func apply_grid_config(config: Dictionary) -> void:
 		# after an editor move so physics cannot restore the previous world pose.
 		_sync_bodies(node)
 	for i in range(reusable.size()): initial_poses[i]=reusable[i].transform
+	if config.get("interface_style","") == "architectural":
+		var hardware := preload("res://commons/void/lines_interface_hardware.gd")
+		for key in ["MeasurementRoom","FloorPlanTable","FullSizeRuler"]:
+			var part := get_node_or_null(NodePath(key))
+			if part != null:
+				hardware.attach(part,"gate" if key=="MeasurementRoom" else "survey")
+		if is_instance_valid(health_label):
+			hardware.attach(health_label,"charge")
 
 func _sync_bodies(node: Node) -> void:
 	if node is RigidBody3D:

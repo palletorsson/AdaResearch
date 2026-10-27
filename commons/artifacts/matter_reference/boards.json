@@ -1,0 +1,5220 @@
+{
+  "source": "matter-and-logic.zip / physics/gates.js",
+  "sha256": "f5b892c2bc242aed16e5c6495a33f763ea34bf491a607b21e3cec19e1d183b59",
+  "graphs": {
+    "and": {
+      "kind": "and",
+      "BW": 1.2,
+      "BH": 3.05,
+      "R": 0.1,
+      "SLOT": 0.15,
+      "inlets": {
+        "X": {
+          "x": -0.5961555097177853,
+          "y": 2.5337426581515796
+        },
+        "Y": {
+          "x": -0.0961555097177853,
+          "y": 2.5337426581515796
+        }
+      },
+      "zones": {
+        "hole": {
+          "x0": -0.22,
+          "x1": 0.039999999999999994,
+          "y0": 1.0999999999999999,
+          "y1": 1.38
+        },
+        "Z": {
+          "x0": 0.28,
+          "x1": 1.02,
+          "y0": 0.5999999999999999,
+          "y1": 1.2
+        }
+      },
+      "rockers": [],
+      "bodies": [
+        {
+          "id": "body_0",
+          "look": "track",
+          "position": [
+            -0.3730777548588926,
+            1.4149581481883462,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.11320321376790676,
+            0.9935718556765875
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3552608215586783,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "look": "wall",
+          "position": [
+            -0.5861555097177853,
+            1.5337426581515796,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.40000000000000013,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "look": "funnel",
+          "position": [
+            -0.7111555097177853,
+            2.0937426581515797,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.3875404542701234,
+            0.9218526977256759
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.6717886572427375,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "look": "funnel",
+          "position": [
+            -0.10115550971778531,
+            2.0937426581515797,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.8462033385748821,
+            0.5328601221565783
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.5322593352868508,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "look": "hole",
+          "position": [
+            -0.09,
+            1.19,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.05740672490601111,
+            0.9983508741597643
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.26172504656604806,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "look": "hole",
+          "position": [
+            -0.22,
+            1.2625,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.2250000000000001,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "look": "hole",
+          "position": [
+            0.039999999999999994,
+            1.265,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.22999999999999998,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "look": "track",
+          "position": [
+            0.38999999999999996,
+            1.2174999999999998,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.1961161351381841,
+            0.9805806756909201
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.715,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "look": "tray",
+          "position": [
+            0.66,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.72,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "look": "tray",
+          "position": [
+            1.02,
+            0.8749999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.44999999999999996,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_10",
+          "look": "tray",
+          "position": [
+            0.30000000000000004,
+            0.7899999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.28,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "look": "back",
+          "position": [
+            0,
+            1.525,
+            -0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.05,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_12",
+          "look": "glass",
+          "position": [
+            0,
+            1.525,
+            0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.05,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_13",
+          "look": "floor",
+          "position": [
+            0,
+            -0.05,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                0.1,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": []
+    },
+    "or": {
+      "kind": "or",
+      "BW": 1.2,
+      "BH": 3.05,
+      "R": 0.1,
+      "SLOT": 0.15,
+      "inlets": {
+        "X": {
+          "x": -0.5961555097177853,
+          "y": 2.5337426581515796
+        },
+        "Y": {
+          "x": -0.0961555097177853,
+          "y": 2.5337426581515796
+        }
+      },
+      "zones": {
+        "Z": {
+          "x0": 0.28,
+          "x1": 1.02,
+          "y0": 0.5999999999999999,
+          "y1": 1.2
+        }
+      },
+      "rockers": [],
+      "bodies": [
+        {
+          "id": "body_0",
+          "look": "track",
+          "position": [
+            -0.3730777548588926,
+            1.4149581481883462,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.11320321376790676,
+            0.9935718556765875
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3552608215586783,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "look": "wall",
+          "position": [
+            -0.5861555097177853,
+            1.5337426581515796,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.40000000000000013,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "look": "funnel",
+          "position": [
+            -0.7111555097177853,
+            2.0937426581515797,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.3875404542701234,
+            0.9218526977256759
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.6717886572427375,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "look": "funnel",
+          "position": [
+            -0.10115550971778531,
+            2.0937426581515797,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.8462033385748821,
+            0.5328601221565783
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.5322593352868508,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "look": "track",
+          "position": [
+            -0.08,
+            1.375,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.27999999999999997,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "look": "track",
+          "position": [
+            0.38999999999999996,
+            1.2174999999999998,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.1961161351381841,
+            0.9805806756909201
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.715,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "look": "tray",
+          "position": [
+            0.66,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.72,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "look": "tray",
+          "position": [
+            1.02,
+            0.8749999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.44999999999999996,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "look": "tray",
+          "position": [
+            0.30000000000000004,
+            0.7899999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.28,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "look": "back",
+          "position": [
+            0,
+            1.525,
+            -0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.05,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_10",
+          "look": "glass",
+          "position": [
+            0,
+            1.525,
+            0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.05,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "look": "floor",
+          "position": [
+            0,
+            -0.05,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                0.1,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": []
+    },
+    "xor": {
+      "kind": "xor",
+      "BW": 1.2,
+      "BH": 3.85,
+      "R": 0.1,
+      "SLOT": 0.15,
+      "inlets": {
+        "X": {
+          "x": -0.25,
+          "y": 3.3240000000000003
+        },
+        "Y": {
+          "x": 0.25,
+          "y": 3.3240000000000003
+        }
+      },
+      "zones": {
+        "binL": {
+          "x0": -0.95,
+          "x1": 0,
+          "y0": 0.35,
+          "y1": 0.9
+        },
+        "binR": {
+          "x0": 0,
+          "x1": 0.95,
+          "y0": 0.35,
+          "y1": 0.9
+        }
+      },
+      "rockers": [
+        {
+          "body": "body_0",
+          "name": "S",
+          "px": 0,
+          "py": 1.75,
+          "hc": 0.02,
+          "startOne": false
+        }
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "look": "rocker",
+          "position": [
+            -0.008767422935781548,
+            1.7679758809259833,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.224951054343865,
+            0.9743700647852352
+          ],
+          "mass": 0.03,
+          "inertia": [
+            0.0006295443125984709,
+            0.0008857763462621394,
+            0.0012273206588606104
+          ],
+          "linear_damping": 0.1,
+          "angular_damping": 0.3,
+          "material": "rock",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                -0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.14,
+                0.24
+              ],
+              "at": [
+                0,
+                0.19000000000000003,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "look": "anchor",
+          "position": [
+            0,
+            1.75,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_2",
+          "look": "stop",
+          "position": [
+            -0.1723197861250915,
+            1.6027036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "look": "stop",
+          "position": [
+            0.1723197861250915,
+            1.6027036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "look": "funnel",
+          "position": [
+            -0.16,
+            2.479,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.4500000000000002,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "look": "funnel",
+          "position": [
+            0.16,
+            2.479,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.4500000000000002,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "look": "funnel",
+          "position": [
+            -0.28,
+            2.854,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.4331887304891342,
+            0.9013032363068559
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "look": "funnel",
+          "position": [
+            0.28,
+            2.854,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.901303236306856,
+            0.4331887304891341
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "look": "divider",
+          "position": [
+            0,
+            0.9,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.9000000000000001,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "look": "tray",
+          "position": [
+            -0.485,
+            0.51,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.06411760041507658,
+            0.9979423496961197
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.9377099764852669,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_10",
+          "look": "tray",
+          "position": [
+            0.485,
+            0.51,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.06411760041507658,
+            0.9979423496961197
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.9377099764852669,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "look": "tray",
+          "position": [
+            -0.95,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.49999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_12",
+          "look": "tray",
+          "position": [
+            0.95,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.49999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_13",
+          "look": "back",
+          "position": [
+            0,
+            1.925,
+            -0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.85,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_14",
+          "look": "glass",
+          "position": [
+            0,
+            1.925,
+            0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.85,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_15",
+          "look": "floor",
+          "position": [
+            0,
+            -0.05,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                0.1,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": [
+        {
+          "a": "body_1",
+          "b": "body_0",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            -0.02,
+            0
+          ]
+        }
+      ]
+    },
+    "not": {
+      "kind": "not",
+      "BW": 1.2,
+      "BH": 3.85,
+      "R": 0.1,
+      "SLOT": 0.15,
+      "inlets": {
+        "X": {
+          "x": -0.2,
+          "y": 3.3240000000000003
+        }
+      },
+      "zones": {
+        "binL": {
+          "x0": -0.95,
+          "x1": 0,
+          "y0": 0.35,
+          "y1": 0.9
+        },
+        "binR": {
+          "x0": 0,
+          "x1": 0.95,
+          "y0": 0.35,
+          "y1": 0.9
+        }
+      },
+      "rockers": [
+        {
+          "body": "body_0",
+          "name": "Z",
+          "px": 0,
+          "py": 1.75,
+          "hc": 0.02,
+          "startOne": true
+        }
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "look": "rocker",
+          "position": [
+            0.008767422935781548,
+            1.7679758809259833,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.224951054343865,
+            0.9743700647852352
+          ],
+          "mass": 0.03,
+          "inertia": [
+            0.0006295443125984709,
+            0.0008857763462621394,
+            0.0012273206588606104
+          ],
+          "linear_damping": 0.1,
+          "angular_damping": 0.3,
+          "material": "rock",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                -0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.14,
+                0.24
+              ],
+              "at": [
+                0,
+                0.19000000000000003,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "look": "anchor",
+          "position": [
+            0,
+            1.75,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_2",
+          "look": "stop",
+          "position": [
+            -0.1723197861250915,
+            1.6027036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "look": "stop",
+          "position": [
+            0.1723197861250915,
+            1.6027036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "look": "funnel",
+          "position": [
+            -0.16,
+            2.479,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.4500000000000002,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "look": "funnel",
+          "position": [
+            0.16,
+            2.479,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.4500000000000002,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "look": "funnel",
+          "position": [
+            -0.28,
+            2.854,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.4331887304891342,
+            0.9013032363068559
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "look": "funnel",
+          "position": [
+            0.28,
+            2.854,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.901303236306856,
+            0.4331887304891341
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "look": "divider",
+          "position": [
+            0,
+            0.9,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.9000000000000001,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "look": "tray",
+          "position": [
+            -0.485,
+            0.51,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.06411760041507658,
+            0.9979423496961197
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.9377099764852669,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_10",
+          "look": "tray",
+          "position": [
+            0.485,
+            0.51,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.06411760041507658,
+            0.9979423496961197
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.9377099764852669,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "look": "tray",
+          "position": [
+            -0.95,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.49999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_12",
+          "look": "tray",
+          "position": [
+            0.95,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.49999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_13",
+          "look": "back",
+          "position": [
+            0,
+            1.925,
+            -0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.85,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_14",
+          "look": "glass",
+          "position": [
+            0,
+            1.925,
+            0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.85,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_15",
+          "look": "floor",
+          "position": [
+            0,
+            -0.05,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                0.1,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": [
+        {
+          "a": "body_1",
+          "b": "body_0",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            -0.02,
+            0
+          ]
+        }
+      ]
+    },
+    "half": {
+      "kind": "half",
+      "BW": 1.2,
+      "BH": 3.85,
+      "R": 0.1,
+      "SLOT": 0.15,
+      "inlets": {
+        "X": {
+          "x": -0.25,
+          "y": 3.3240000000000003
+        },
+        "Y": {
+          "x": 0.25,
+          "y": 3.3240000000000003
+        }
+      },
+      "zones": {
+        "C": {
+          "x0": -0.95,
+          "x1": 0,
+          "y0": 0.35,
+          "y1": 0.9
+        },
+        "binR": {
+          "x0": 0,
+          "x1": 0.95,
+          "y0": 0.35,
+          "y1": 0.9
+        }
+      },
+      "rockers": [
+        {
+          "body": "body_0",
+          "name": "S",
+          "px": 0,
+          "py": 1.75,
+          "hc": 0.02,
+          "startOne": false
+        }
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "look": "rocker",
+          "position": [
+            -0.008767422935781548,
+            1.7679758809259833,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.224951054343865,
+            0.9743700647852352
+          ],
+          "mass": 0.03,
+          "inertia": [
+            0.0006295443125984709,
+            0.0008857763462621394,
+            0.0012273206588606104
+          ],
+          "linear_damping": 0.1,
+          "angular_damping": 0.3,
+          "material": "rock",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                -0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.14,
+                0.24
+              ],
+              "at": [
+                0,
+                0.19000000000000003,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "look": "anchor",
+          "position": [
+            0,
+            1.75,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_2",
+          "look": "stop",
+          "position": [
+            -0.1723197861250915,
+            1.6027036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "look": "stop",
+          "position": [
+            0.1723197861250915,
+            1.6027036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "look": "funnel",
+          "position": [
+            -0.16,
+            2.479,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.4500000000000002,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "look": "funnel",
+          "position": [
+            0.16,
+            2.479,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.4500000000000002,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "look": "funnel",
+          "position": [
+            -0.28,
+            2.854,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.4331887304891342,
+            0.9013032363068559
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "look": "funnel",
+          "position": [
+            0.28,
+            2.854,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.901303236306856,
+            0.4331887304891341
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "look": "divider",
+          "position": [
+            0,
+            0.9,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.9000000000000001,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "look": "tray",
+          "position": [
+            -0.485,
+            0.51,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.06411760041507658,
+            0.9979423496961197
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.9377099764852669,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_10",
+          "look": "tray",
+          "position": [
+            0.485,
+            0.51,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.06411760041507658,
+            0.9979423496961197
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.9377099764852669,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "look": "tray",
+          "position": [
+            -0.95,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.49999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_12",
+          "look": "tray",
+          "position": [
+            0.95,
+            0.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.49999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_13",
+          "look": "back",
+          "position": [
+            0,
+            1.925,
+            -0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.85,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_14",
+          "look": "glass",
+          "position": [
+            0,
+            1.925,
+            0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                3.85,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_15",
+          "look": "floor",
+          "position": [
+            0,
+            -0.05,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                0.1,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": [
+        {
+          "a": "body_1",
+          "b": "body_0",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            -0.02,
+            0
+          ]
+        }
+      ]
+    },
+    "count": {
+      "kind": "count",
+      "BW": 1.2,
+      "BH": 4.75,
+      "R": 0.1,
+      "SLOT": 0.15,
+      "inlets": {
+        "in": {
+          "x": 0.25,
+          "y": 4.2540000000000004
+        }
+      },
+      "zones": {
+        "over": {
+          "x0": -1.1,
+          "x1": -0.25,
+          "y0": -0.05,
+          "y1": 0.35
+        },
+        "used": {
+          "x0": -0.25,
+          "x1": 1.1,
+          "y0": -0.05,
+          "y1": 0.35
+        }
+      },
+      "rockers": [
+        {
+          "body": "body_0",
+          "name": "b0",
+          "px": 0.45,
+          "py": 2.95,
+          "hc": 0.02,
+          "startOne": false
+        },
+        {
+          "body": "body_8",
+          "name": "b1",
+          "px": 0.1,
+          "py": 1.78,
+          "hc": 0.02,
+          "startOne": false
+        },
+        {
+          "body": "body_16",
+          "name": "b2",
+          "px": -0.25,
+          "py": 0.61,
+          "hc": 0.02,
+          "startOne": false
+        }
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "look": "rocker",
+          "position": [
+            0.4412325770642185,
+            2.9679758809259833,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.224951054343865,
+            0.9743700647852352
+          ],
+          "mass": 0.03,
+          "inertia": [
+            0.0006295443125984709,
+            0.0008857763462621394,
+            0.0012273206588606104
+          ],
+          "linear_damping": 0.1,
+          "angular_damping": 0.3,
+          "material": "rock",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                -0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.14,
+                0.24
+              ],
+              "at": [
+                0,
+                0.19000000000000003,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "look": "anchor",
+          "position": [
+            0.45,
+            2.95,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_2",
+          "look": "stop",
+          "position": [
+            0.2776802138749085,
+            2.802703649376874,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "look": "stop",
+          "position": [
+            0.6223197861250915,
+            2.802703649376874,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "look": "funnel",
+          "position": [
+            0.29,
+            3.5440000000000005,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.18000000000000016,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "look": "funnel",
+          "position": [
+            0.6100000000000001,
+            3.5440000000000005,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.18000000000000016,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "look": "funnel",
+          "position": [
+            0.16999999999999998,
+            3.7840000000000003,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.4331887304891342,
+            0.9013032363068559
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "look": "funnel",
+          "position": [
+            0.7300000000000001,
+            3.7840000000000003,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.9013032363068559,
+            0.4331887304891343
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "look": "rocker",
+          "position": [
+            0.09123257706421846,
+            1.7979758809259834,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.224951054343865,
+            0.9743700647852352
+          ],
+          "mass": 0.03,
+          "inertia": [
+            0.0006295443125984709,
+            0.0008857763462621394,
+            0.0012273206588606104
+          ],
+          "linear_damping": 0.1,
+          "angular_damping": 0.3,
+          "material": "rock",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                -0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.14,
+                0.24
+              ],
+              "at": [
+                0,
+                0.19000000000000003,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "look": "anchor",
+          "position": [
+            0.1,
+            1.78,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_10",
+          "look": "stop",
+          "position": [
+            -0.07231978612509149,
+            1.6327036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "look": "stop",
+          "position": [
+            0.2723197861250915,
+            1.6327036493768736,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_12",
+          "look": "funnel",
+          "position": [
+            -0.06000000000000001,
+            2.3739999999999997,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.18000000000000016,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_13",
+          "look": "funnel",
+          "position": [
+            0.26,
+            2.3739999999999997,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.18000000000000016,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_14",
+          "look": "funnel",
+          "position": [
+            -0.18000000000000002,
+            2.614,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.4331887304891342,
+            0.9013032363068559
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.38418745424597084,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_15",
+          "look": "funnel",
+          "position": [
+            0.38,
+            2.614,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.9013032363068559,
+            0.4331887304891343
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.3841874542459708,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_16",
+          "look": "rocker",
+          "position": [
+            -0.25876742293578153,
+            0.6279758809259833,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.224951054343865,
+            0.9743700647852352
+          ],
+          "mass": 0.03,
+          "inertia": [
+            0.0006295443125984709,
+            0.0008857763462621394,
+            0.0012273206588606104
+          ],
+          "linear_damping": 0.1,
+          "angular_damping": 0.3,
+          "material": "rock",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                -0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.04,
+                0.24
+              ],
+              "at": [
+                0.13753288904374109,
+                0.020076507110279574,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.3090169943749474,
+                0.9510565162951535
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.14,
+                0.24
+              ],
+              "at": [
+                0,
+                0.19000000000000003,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_17",
+          "look": "anchor",
+          "position": [
+            -0.25,
+            0.61,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_18",
+          "look": "stop",
+          "position": [
+            -0.42231978612509147,
+            0.4627036493768737,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_19",
+          "look": "stop",
+          "position": [
+            -0.0776802138749085,
+            0.4627036493768737,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.06,
+                0.06,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_20",
+          "look": "funnel",
+          "position": [
+            -0.41000000000000003,
+            1.2039999999999997,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.17999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_21",
+          "look": "funnel",
+          "position": [
+            -0.08999999999999998,
+            1.2039999999999997,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.17999999999999994,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_22",
+          "look": "funnel",
+          "position": [
+            -0.53,
+            1.444,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.43318873048913437,
+            0.9013032363068559
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.38418745424597095,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_23",
+          "look": "funnel",
+          "position": [
+            0.03000000000000002,
+            1.444,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.9013032363068558,
+            0.4331887304891345
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.38418745424597095,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_24",
+          "look": "wall",
+          "position": [
+            0.62,
+            1.62,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                2,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_25",
+          "look": "tray",
+          "position": [
+            0,
+            0.06999999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.02270968724686043,
+            0.9997421017968333
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.202271554554524,
+                0.05,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_26",
+          "look": "divider",
+          "position": [
+            -0.25,
+            0.15,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.3,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_27",
+          "look": "tray",
+          "position": [
+            -1.1,
+            0.3,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.6,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_28",
+          "look": "tray",
+          "position": [
+            1.1,
+            0.3,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.04,
+                0.6,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_29",
+          "look": "back",
+          "position": [
+            0,
+            2.375,
+            -0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                4.75,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_30",
+          "look": "glass",
+          "position": [
+            0,
+            2.375,
+            0.16999999999999998
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                4.75,
+                0.04
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_31",
+          "look": "floor",
+          "position": [
+            0,
+            -0.05,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "wall",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.4,
+                0.1,
+                0.3
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": [
+        {
+          "a": "body_1",
+          "b": "body_0",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            -0.02,
+            0
+          ]
+        },
+        {
+          "a": "body_9",
+          "b": "body_8",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            -0.02,
+            0
+          ]
+        },
+        {
+          "a": "body_17",
+          "b": "body_16",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            -0.02,
+            0
+          ]
+        }
+      ]
+    }
+  }
+}

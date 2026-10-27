@@ -1,0 +1,585 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Grammar_Lab",
+      "title": "LSystems_Grammar_Lab / transfer, 8 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_lsystem_editor_9_7",
+          "artifact": "lsystem_editor",
+          "position": [
+            0,
+            5.5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true",
+            "grammar": "koch",
+            "depth": "1"
+          }
+        },
+        {
+          "id": "f1_mesh_grammar_lsystem_tree_5_17",
+          "artifact": "mesh_grammar_lsystem_tree",
+          "position": [
+            4,
+            -4.5
+          ],
+          "station": "NE",
+          "height": 0.45,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_science_screen_11_17",
+          "artifact": "science_screen",
+          "position": [
+            -2,
+            -4.5
+          ],
+          "station": "NW",
+          "height": 1.5,
+          "facing": 0,
+          "scale": 0.4,
+          "config": {
+            "mode": "trace"
+          }
+        },
+        {
+          "id": "f1_grammar_provenance_6_19",
+          "artifact": "grammar_provenance",
+          "position": [
+            3,
+            -6.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_lsystem_tree_9_19",
+          "artifact": "lsystem_tree",
+          "position": [
+            0,
+            -6.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_fractal_lsystem_string_10_20",
+          "artifact": "fractal_lsystem_string",
+          "position": [
+            -1,
+            -7.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_city_bench_12_20",
+          "artifact": "city_bench",
+          "position": [
+            -3,
+            -7.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_8_22",
+          "artifact": "dark_sphere",
+          "position": [
+            1,
+            -9.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "construction": [
+        {
+          "id": "f1_platform_r15_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r15_c5",
+          "kind": "cube",
+          "position": [
+            4,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r15_c6",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r15_c7",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r15_c8",
+          "kind": "cube",
+          "position": [
+            1,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c5",
+          "kind": "cube",
+          "position": [
+            4,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c6",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c7",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c8",
+          "kind": "cube",
+          "position": [
+            1,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r15_c10",
+          "kind": "cube",
+          "position": [
+            -1,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r15_c11",
+          "kind": "cube",
+          "position": [
+            -2,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c10",
+          "kind": "cube",
+          "position": [
+            -1,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_platform_r16_c11",
+          "kind": "cube",
+          "position": [
+            -2,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        }
+      ],
+      "route": [
+        {
+          "label": "LSYSTEMS_GRAMMAR_LAB / 8 OF 8 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            10.5
+          ]
+        },
+        {
+          "label": "(9,7) LSYSTEM_EDITOR / LESSON DESK",
+          "position": [
+            0,
+            9
+          ]
+        },
+        {
+          "label": "(5,17) MESH_GRAMMAR_LSYSTEM_TREE",
+          "position": [
+            4,
+            -5.6
+          ]
+        },
+        {
+          "label": "(11,17) SCIENCE_SCREEN / TRACE",
+          "position": [
+            -2,
+            -5.6
+          ]
+        },
+        {
+          "label": "(6,19) GRAMMAR_PROVENANCE",
+          "position": [
+            3,
+            -9
+          ]
+        },
+        {
+          "label": "(9,19) LSYSTEM_TREE",
+          "position": [
+            0.4,
+            -7.4
+          ]
+        },
+        {
+          "label": "(10,20) FRACTAL_LSYSTEM_STRING",
+          "position": [
+            -1,
+            -8.4
+          ]
+        },
+        {
+          "label": "(12,20) CITY_BENCH",
+          "position": [
+            -3.6,
+            -8.6
+          ]
+        },
+        {
+          "label": "(8,22) DARK_SPHERE",
+          "position": [
+            1,
+            -10.4
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Growth",
+      "title": "LSystems_Growth / transfer, 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_parametric_lsystem_9_7",
+          "artifact": "parametric_lsystem",
+          "position": [
+            0,
+            6.5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true",
+            "iterations": "1",
+            "base_length": "0.8",
+            "base_angle": "40",
+            "angle_variation": "0",
+            "length_decay": "0.72"
+          }
+        },
+        {
+          "id": "f2_ContextSensitiveTree_5_18",
+          "artifact": "ContextSensitiveTree",
+          "position": [
+            4,
+            -4.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_AnimatedTree_9_18",
+          "artifact": "AnimatedTree",
+          "position": [
+            0,
+            -4.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_lsystem_tree_10_18",
+          "artifact": "lsystem_tree",
+          "position": [
+            -1,
+            -4.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_modulor_cypress_12_18",
+          "artifact": "modulor_cypress",
+          "position": [
+            -3,
+            -4.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "construction": [
+        {
+          "id": "f2_corridor_r17_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r18_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r19_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r20_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r21_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r22_c4",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -8.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r17_c7",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r18_c7",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r19_c7",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_corridor_r22_c7",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -8.5
+          ],
+          "facing": 0
+        }
+      ],
+      "route": [
+        {
+          "label": "LSYSTEMS_GROWTH / 5 OF 5 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            11.5
+          ]
+        },
+        {
+          "label": "(9,7) PARAMETRIC_LSYSTEM / LESSON DESK",
+          "position": [
+            0,
+            10
+          ]
+        },
+        {
+          "label": "(5,18) CONTEXTSENSITIVETREE / IN THE ORIGINAL 1 M CORRIDOR",
+          "position": [
+            3.5,
+            -2.3
+          ]
+        },
+        {
+          "label": "(9,18) ANIMATEDTREE",
+          "position": [
+            0,
+            -3.4
+          ]
+        },
+        {
+          "label": "(10,18) LSYSTEM_TREE",
+          "position": [
+            -1.2,
+            -5.6
+          ]
+        },
+        {
+          "label": "(12,18) MODULOR_CYPRESS",
+          "position": [
+            -3,
+            -3.4
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_01_Shaping",
+      "title": "Shaping / the original instruments",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_shader_01_shaping_1_10",
+          "artifact": "shader_01_shaping",
+          "position": [
+            -3,
+            -12
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "setting": "wall"
+          }
+        },
+        {
+          "id": "f1_shader_shaping_wall_20_11",
+          "artifact": "shader_shaping_wall",
+          "position": [
+            11,
+            6
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_16_16",
+          "artifact": "dark_sphere",
+          "position": [
+            -3,
+            5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {}
+        },
+        {
+          "id": "f1_science_screen_6_17",
+          "artifact": "science_screen",
+          "position": [
+            -13,
+            6
+          ],
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {
+            "mode": "grid"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_05_Patterns",
+      "title": "Patterns / the original collection",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_shader_05_patterns_6_1",
+          "artifact": "shader_05_patterns",
+          "position": [
+            0,
+            -13.4
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NE",
+          "config": {
+            "setting": "wall"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_6_4",
+          "artifact": "dark_sphere",
+          "position": [
+            -6,
+            1.8
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {}
+        },
+        {
+          "id": "f2_shader_pattern_passage_27_7",
+          "artifact": "shader_pattern_passage",
+          "position": [
+            -13,
+            -9.6
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_film_shader_repeat_1_12",
+          "artifact": "film_shader_repeat",
+          "position": [
+            0,
+            14.5
+          ],
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_camera_glitch_study_17_13",
+          "artifact": "camera_glitch_study",
+          "position": [
+            -10,
+            12
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {
+            "plinth": "0",
+            "pin": "1",
+            "lesson": "record_reading"
+          }
+        },
+        {
+          "id": "f2_reference_pattern_garden_10_20",
+          "artifact": "reference_pattern_garden",
+          "position": [
+            13,
+            -10.5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NE",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_fuzzy_body_8_40",
+          "artifact": "void_shader_fuzzy_body",
+          "position": [
+            -15,
+            6.5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_model_disagreement_28_45",
+          "artifact": "void_shader_disagreement",
+          "position": [
+            10,
+            7
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "plinth": "0",
+            "pin": "1",
+            "exhibit_scale": "0.35",
+            "museum_installation": "1"
+          }
+        },
+        {
+          "id": "f2_fuzzy_doorway_8_53",
+          "artifact": "fuzzy_doorway",
+          "position": [
+            -3,
+            7
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

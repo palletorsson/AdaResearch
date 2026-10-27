@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "construction": [],
+      "copies": []
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "Square portal / saved item",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "portal-item",
+          "artifact": "spatial_recipe",
+          "position": [
+            10,
+            0
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "portal_lab_item",
+            "recipe_document": "res://commons/void/trials/portal_item_a9748530f6/recipe.json",
+            "connects_next_floor": true,
+            "connects_down_floors": 2
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "construction": [],
+      "copies": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "construction": [],
+      "copies": []
+    }
+  ]
+}

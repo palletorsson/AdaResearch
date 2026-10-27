@@ -1,5 +1,6 @@
 extends "res://commons/artifacts/line_black_box/line_black_box.gd"
-## The museum's two endpoints become a threshold. The landing stays open above.
+## One pair joins the entrance puzzle and the museum's black measuring room.
+## Joining opens the threshold; separating the same points measures the line.
 signal opened
 const Fence = preload("res://commons/void/entry_fence.gd")
 const START_A := Vector3(-.3,1.25,.8)
@@ -9,14 +10,18 @@ var armed := false
 var close_time := 0.0
 var gate: Node3D
 var glow: OmniLight3D
+var measure_readout: Label3D
 
 func _ready() -> void:
 	super()
 	for label in get_children():
-		if label is Label3D and label != readout: label.queue_free()
+		if label is Label3D and label != readout and label.text != "RESET": label.queue_free()
 	readout.position = Vector3(0, 2.0, -1.0)
 	readout.rotation = Vector3.ZERO
 	readout.font_size = 32
+	measure_readout = _label("JOIN THE TWO POINTS", Vector3(0,1.83,6.61), 52, Color("f2ece4"))
+	_label("TWO POINTS / ONE LINE", Vector3(0,2.20,6.61), 28, Color("c1b8bc"))
+	_label("Join to open. Pull apart to measure.", Vector3(0,1.06,6.61), 25, Color("c1b8bc"))
 	var instruction := _label("01 / TWO POINTS OPEN A WAY\nHold grip. Bring the points together.", Vector3(0,2.95,-3.25), 34, Color("292830"))
 	instruction.rotation = Vector3.ZERO
 	glow = OmniLight3D.new()
@@ -30,8 +35,26 @@ func _ready() -> void:
 	reset_line()
 
 func _build_reset() -> void:
-	# Retry uses reset_line. There is no reset button behind the enclosure.
-	pass
+	# The original black-box reset now belongs to the shared room, facing in.
+	super()
+	get_node("ResetCap").position.z = 6.61
+	reset_button.position.z = 6.57
+	for label in get_children():
+		if label is Label3D and label.text == "RESET": label.position.z = 6.60
+
+func _endpoint(title: String, at: Vector3) -> XRToolsPickable:
+	var point := super(title, at)
+	var handle: MeshInstance3D = point.get_node("Handle")
+	var sphere: SphereMesh = handle.mesh
+	sphere.radius = .035
+	sphere.height = .07
+	var finish := _material(Color("08090b"), .16)
+	finish.metallic = .35
+	handle.material_override = finish
+	for child in point.get_children():
+		if child is MeshInstance3D and child.mesh is TorusMesh: child.free()
+	# Keep the original pickup volume: small visible points remain easy to grab.
+	return point
 
 func _build_room() -> void:
 	var concrete := _material(Color("f0efeb"),1.0)
@@ -58,6 +81,21 @@ func _build_room() -> void:
 	body.add_child(collision);gate.add_child(body)
 	for x in [-2.85,2.85]:
 		_box("LandingEdge",Vector3(.025,.02,9.8),Vector3(x,.03,1.6),_material(Color("c297ac"),.5,.3))
+	# Black-box lining inside the existing white shell. No second room, pair of
+	# handles or ceiling across the drop-in landing; the fence remains the exit.
+	var black := _material(Color("101015"), .88)
+	for x in [-2.866,2.866]:
+		_box("MeasuringLining",Vector3(.018,3.05,7.4),Vector3(x,1.525,2.9),black)
+	_box("MeasuringBack",Vector3(5.72,3.05,.018),Vector3(0,1.525,6.665),black)
+	_box("ReadoutPlate",Vector3(3.9,1.55,.025),Vector3(0,1.75,6.64),_material(Color("181a21"),.7))
+	var study_light := OmniLight3D.new()
+	study_light.name = "StudyLight"
+	study_light.position = Vector3(0,2.75,2.3)
+	study_light.light_color = Color("eee0e1")
+	study_light.light_energy = .9
+	study_light.omni_range = 6.0
+	study_light.shadow_enabled = true
+	add_child(study_light)
 
 func _process(delta: float) -> void:
 	if not is_instance_valid(point_a) or glow == null: return
@@ -74,7 +112,9 @@ func _process(delta: float) -> void:
 	glow.global_position = (point_a.global_position+point_b.global_position)*.5
 	glow.visible = held or unlocked
 	glow.light_energy = 2.0 if held else 0.65
-	readout.text = "A LINE / A WAY THROUGH" if unlocked else "BRING THE TWO POINTS CLOSE"
+	readout.text = "LINE / %.2f m" % span if unlocked else "BRING THE TWO POINTS CLOSE"
+	if measure_readout != null:
+		measure_readout.text = "%.2f m" % span if unlocked else "JOIN THE TWO POINTS"
 
 func reset_line() -> void:
 	if point_a.is_picked_up() or point_b.is_picked_up(): return

@@ -1,0 +1,179 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "title": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_soft_workshop_console_8_6",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            -7,
+            11
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "reaction"
+          }
+        },
+        {
+          "id": "f1_turing_pattern_generator_8_9",
+          "artifact": "turing_pattern_generator",
+          "station": "SW",
+          "position": [
+            -14,
+            7
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "pattern_seed": "1337",
+            "seeding": "centre",
+            "resolution": "32"
+          }
+        },
+        {
+          "id": "f1_reaction_diffusion_20_12",
+          "artifact": "reaction_diffusion",
+          "station": "SE",
+          "position": [
+            13,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.5,
+          "config": {}
+        },
+        {
+          "id": "f1_mesh_grammar_detailed_bulge_8_22",
+          "artifact": "mesh_grammar_detailed_bulge",
+          "station": "NE",
+          "position": [
+            17,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_softstopscene_21_23",
+          "artifact": "softstopscene",
+          "station": "NW",
+          "position": [
+            -16,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_rd_museum_gallery_22_29",
+          "artifact": "rd_museum_gallery",
+          "station": "NE",
+          "position": [
+            0,
+            14
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_the_confessing_body_16_34",
+          "artifact": "the_confessing_body",
+          "station": "NE",
+          "position": [
+            15,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.5,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Topology_Entropy_Morphogenesis",
+      "title": "Topology_Entropy_Morphogenesis",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_soft_workshop_console_15_9",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            11
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "morphogenesis"
+          }
+        },
+        {
+          "id": "f2_entropy_morphogenesis_15_14",
+          "artifact": "entropy_morphogenesis",
+          "station": "NE",
+          "position": [
+            0,
+            -4
+          ],
+          "facing": 180,
+          "height": 4,
+          "scale": 1,
+          "config": {
+            "field_seed": "1337"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

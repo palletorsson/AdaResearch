@@ -1,0 +1,274 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_Box",
+      "title": "Noise_Box",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_box_shell_space_17_19",
+          "artifact": "box_shell_space",
+          "station": "NE",
+          "position": [
+            35,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "floor": "false",
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_box_atrium_space_51_19",
+          "artifact": "box_atrium_space",
+          "station": "NW",
+          "position": [
+            -35,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "floor": "false",
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_Space_10",
+      "title": "Noise_Space_10",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_dark_sphere_11_3",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -11.5,
+            11.2
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_noise_space_6_6",
+          "artifact": "noise_space",
+          "station": "SW",
+          "position": [
+            -6.5,
+            8.2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "walk"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "construction": [
+        {
+          "id": "f2_raised_cell_11_3",
+          "kind": "cube",
+          "position": [
+            -11.5,
+            0,
+            11.2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_access_wp_entry",
+          "kind": "wedge",
+          "position": [
+            -6.5,
+            0,
+            14
+          ],
+          "facing": 180
+        },
+        {
+          "id": "f2_access_wp_exit",
+          "kind": "wedge",
+          "position": [
+            -6.5,
+            0,
+            2.4
+          ],
+          "facing": 0
+        }
+      ]
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "title": "Noise_Perlin_Simplex",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_perlin_noise_terrain_2_17",
+          "artifact": "perlin_noise_terrain",
+          "station": "NE",
+          "position": [
+            3,
+            -4
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_dark_sphere_6_17",
+          "artifact": "dark_sphere",
+          "station": "NW",
+          "position": [
+            -1,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_perlin_noise_8_13",
+          "artifact": "perlin_noise",
+          "station": "SW",
+          "position": [
+            -3,
+            0
+          ],
+          "facing": 180,
+          "height": 1.1,
+          "scale": 1,
+          "config": {
+            "generator": "perlin",
+            "seed": "20260910",
+            "size": "8",
+            "ramp": "shared",
+            "panel": "front",
+            "frequency": "10",
+            "amplitude": "0.8",
+            "persistence": "0.5",
+            "octaves": "4"
+          }
+        },
+        {
+          "id": "f3_simplex_noise_3_13",
+          "artifact": "simplex_noise",
+          "station": "SE",
+          "position": [
+            2,
+            0
+          ],
+          "facing": 180,
+          "height": 1.1,
+          "scale": 1,
+          "config": {
+            "seed": "20260910",
+            "size": "8",
+            "ramp": "shared",
+            "panel": "front",
+            "frequency": "10",
+            "amplitude": "0.8",
+            "persistence": "0.5",
+            "octaves": "4",
+            "witness": "show",
+            "study": "compare",
+            "enclosure": "arches"
+          }
+        },
+        {
+          "id": "f3_configurable_portal_9_19",
+          "artifact": "configurable_portal",
+          "station": "NW",
+          "position": [
+            -4,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "dest_map": "Lab_Path",
+            "label": "Lab Path - not connected",
+            "active": "false"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Lab_Path",
+      "title": "Lab_Path",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_dark_sphere_2_2",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -2,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

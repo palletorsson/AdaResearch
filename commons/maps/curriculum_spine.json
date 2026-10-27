@@ -2,8 +2,8 @@
   "_meta": {
 	"description": "Explicit curriculum spine - recommended progression through QFEP",
 	"version": "1.5",
-	"last_updated": "2026-10-10",
-	"note": "v1.3: array_tutorial moved before color; color absorbs composition (sourced from primitive-stack, pattern, and facade galleries). v1.4: reactivated isosurfaces + boolean_surfaces as spine sequences (orders 12.5 and 12.7) on the lambda_edge phase between proceduralgeneration and softbodies. v1.5: shaders inserted at order 12 (2026-09-25); 25 spine sequences."
+	"last_updated": "2026-10-26",
+	"note": "v1.3: array_tutorial moved before color; color absorbs composition (sourced from primitive-stack, pattern, and facade galleries). v1.4: reactivated isosurfaces + boolean_surfaces as spine sequences (orders 12.5 and 12.7) on the lambda_edge phase between proceduralgeneration and softbodies. v1.5: shaders inserted at order 12 (2026-09-25); 25 spine sequences. Logic inserted after Transformation, using existing physical examples; earlier sketches retained."
   },
   "navigation": {
 	"description": "How the player moves through the game",
@@ -36,6 +36,13 @@
 		"qfep_role": "Invariants - dot/cross products enable rotation",
 		"lab_post": "Lab/map_data_post_transformation",
 		"order": 2
+	  },
+	  {
+		"name": "logic",
+		"phase": "F_order",
+		"order": 2.5,
+		"lab_post": null,
+		"qfep_role": "Make conditions, alternative routes and physical consequences explicit; assemble with familiar parts."
 	  },
 	  {
 		"name": "array_tutorial",

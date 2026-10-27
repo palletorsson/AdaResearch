@@ -188,7 +188,7 @@ func _build_columns() -> void:
 	for index in range(spec.levels.size()):
 		var frame := detail_root(index)
 		var y := float(spec.levels[index])
-		var high := 2.0 if index==0 else float(spec.levels[index-1])-0.55
+		var high := y+2.0 if index==0 else float(spec.levels[index-1])-0.55
 		var low := y-3.0 if index==spec.levels.size()-1 else y-0.55
 		for x in spec.column_x:
 			for z in spec.column_z:
@@ -219,6 +219,8 @@ func _build_services() -> void:
 				pipe(services, "TrayHanger", Vector3(x + 0.42, ceiling + 0.18, z), Vector3(x + 0.42, ceiling + 0.6, z), 0.018, steel)
 
 func _build_corner_pad(index: int) -> void:
+	if float(index) in spec.get("descent",{}).get("pad_disabled_floors",[]):
+		return # A bounded flight encounter needs the entire shaft opening.
 	# Two flush boards occupy one corner. Existing floors default to shaft B;
 	# a trial can route arrival and departure through different named shafts.
 	var side := 1.0 if index % 2 == 1 else -1.0

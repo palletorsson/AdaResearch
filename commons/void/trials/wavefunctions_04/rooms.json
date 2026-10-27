@@ -1,0 +1,242 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_AirMusic",
+      "title": "WaveFunctions_AirMusic",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_resonating_metallophone_5_6",
+          "artifact": "resonating_metallophone",
+          "station": "SE",
+          "position": [
+            4,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "table"
+          }
+        },
+        {
+          "id": "f1_air_music_display_case_13_6",
+          "artifact": "air_music_display_case",
+          "station": "SW",
+          "position": [
+            -4,
+            8
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_GlassRack_3_12",
+          "artifact": "GlassRack",
+          "station": "SE",
+          "position": [
+            6,
+            2
+          ],
+          "facing": 180,
+          "height": 0.7,
+          "scale": 1,
+          "config": {
+            "config": "spiral_tube"
+          }
+        },
+        {
+          "id": "f1_GlassRack_14_12",
+          "artifact": "GlassRack",
+          "station": "SW",
+          "position": [
+            -5,
+            2
+          ],
+          "facing": 90,
+          "height": 0.7,
+          "scale": 1,
+          "config": {
+            "config": "fractional_distillation"
+          }
+        },
+        {
+          "id": "f1_lab_table_3_13",
+          "artifact": "lab_table",
+          "station": "SE",
+          "position": [
+            6,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_lab_table_14_13",
+          "artifact": "lab_table",
+          "station": "SW",
+          "position": [
+            -5,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_RackAmbientDrone_14_15",
+          "artifact": "RackAmbientDrone",
+          "station": "NW",
+          "position": [
+            -5,
+            -1
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_SystemsMusicTest_5_16",
+          "artifact": "SystemsMusicTest",
+          "station": "NE",
+          "position": [
+            4,
+            -2
+          ],
+          "facing": 0,
+          "height": 0.5,
+          "scale": 0.9,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_14_18",
+          "artifact": "dark_sphere",
+          "station": "NW",
+          "position": [
+            -5,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_BigPipeSystem_3_19",
+          "artifact": "BigPipeSystem",
+          "station": "NE",
+          "position": [
+            6,
+            -5
+          ],
+          "facing": 270,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "path": "straight,straight,up,straight,down,straight,straight"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "title": "Wavefunctions_Sky_Stairs",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_cube_scene_5_6",
+          "artifact": "cube_scene",
+          "station": "SE",
+          "position": [
+            7,
+            8
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_sine_cylinder_staircase_7_16",
+          "artifact": "sine_cylinder_staircase",
+          "station": "NE",
+          "position": [
+            1.5,
+            -9.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_math_objects_19_17",
+          "artifact": "math_objects",
+          "station": "NW",
+          "position": [
+            -5,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dark_sphere_6_21",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            6,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

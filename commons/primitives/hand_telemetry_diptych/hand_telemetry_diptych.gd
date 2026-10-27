@@ -40,6 +40,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	_read_overrides()
 	if _built:
 		for c in get_children():
+			# Release stable panel names before constructing their replacements.
+			# queue_free alone keeps the old children until the end of frame.
+			remove_child(c)
 			c.queue_free()
 		_built = false
 		_build()

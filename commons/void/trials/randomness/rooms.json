@@ -1,0 +1,442 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Definition",
+      "title": "Random Definition / what chance is allowed to do",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "seed",
+          "artifact": "void_random_seed",
+          "position": [
+            1,
+            1
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "display": "wall",
+            "surface": "glass",
+            "comparison": "seed_witness",
+            "mapping_study": "true",
+            "stand": "table",
+            "controls": "compact",
+            "control_front": "1.0",
+            "side": "4",
+            "atmosphere": "true",
+            "seed": "435",
+            "recorded_atmosphere": "true",
+            "movement_seed": "true",
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "touch",
+          "artifact": "random_touch",
+          "position": [
+            -2,
+            7
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "crank",
+          "artifact": "prng_crank_machine",
+          "position": [
+            3,
+            7
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 2,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "page",
+          "artifact": "random_number_book_page_1955",
+          "position": [
+            -17,
+            0
+          ],
+          "station": "SW",
+          "height": 2.5,
+          "facing": 180,
+          "scale": 0.83,
+          "config": {
+            "row_stream": "true",
+            "cascade_speed": "0.4",
+            "initial_rows": "10",
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "shelf",
+          "artifact": "randomness_tutorial_shelf",
+          "position": [
+            -17,
+            -8
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "geiger",
+          "artifact": "geiger_counter",
+          "position": [
+            -17,
+            8
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "slots-1",
+          "artifact": "slot_machine",
+          "position": [
+            17,
+            6
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "slots-2",
+          "artifact": "slot_machine",
+          "position": [
+            17,
+            1
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "slots-3",
+          "artifact": "slot_machine",
+          "position": [
+            17,
+            -4
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "lava",
+          "artifact": "lava_entropy_wall",
+          "position": [
+            17,
+            -11
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "seed": "435",
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "film",
+          "artifact": "film_prng_register",
+          "position": [
+            -5,
+            -12
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "ride",
+          "artifact": "void_random_return",
+          "position": [
+            0,
+            -8
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        },
+        {
+          "id": "frames",
+          "artifact": "void_random_frames",
+          "position": [
+            4,
+            -7
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "hall_seed": "435"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / TOUCH A POINT\nKeep the path. Change the speed.",
+          "position": [
+            -2,
+            9.3
+          ]
+        },
+        {
+          "label": "02 / SAME SEED, SAME PROCEDURE?\nReplay. Discard one draw. Change the mapping.",
+          "position": [
+            1,
+            4.2
+          ]
+        },
+        {
+          "label": "03 / KEEP A MOVEMENT\nA number can name a recorded gesture.",
+          "position": [
+            -3,
+            -3.5
+          ]
+        },
+        {
+          "label": "04 / RETURN\nHold the black point to travel. Release to stay.",
+          "position": [
+            0,
+            -4.8
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Entropies",
+      "title": "Entropy Types / what remains uncertain",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "reference",
+          "artifact": "entropy_chair_reference",
+          "position": [
+            0,
+            12
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "shannon",
+          "artifact": "entropy_chairs_shannon",
+          "position": [
+            0,
+            6
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "boltzmann",
+          "artifact": "entropy_chairs_boltzmann",
+          "position": [
+            -16,
+            5
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "recipes",
+          "artifact": "entropy_chairs_description",
+          "position": [
+            -3,
+            -9
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "doors",
+          "artifact": "entropy_door_dynamics",
+          "position": [
+            0,
+            -4.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "cups",
+          "artifact": "entropy_cooling_cup",
+          "position": [
+            -17,
+            -3.8
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "frost",
+          "artifact": "entropy_frosted_chair",
+          "position": [
+            2,
+            -13
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "guesses",
+          "artifact": "entropy_ball_pit",
+          "position": [
+            15.7,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "research",
+          "artifact": "research_info_wall",
+          "position": [
+            -17,
+            -12
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "storage_key": "Void-Random-Entropies-work-wall",
+            "illustration_caption": "SOURCE MUSEUM / CHAIR EXPERIMENTS",
+            "style": "gallery"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / SAME CHAIRS, DIFFERENT QUESTIONS",
+          "position": [
+            0,
+            14
+          ]
+        },
+        {
+          "label": "02 / COLOURS AND ARRANGEMENTS",
+          "position": [
+            -6,
+            10
+          ]
+        },
+        {
+          "label": "03 / RECIPES, HEAT AND RECORDS",
+          "position": [
+            -17,
+            -8.5
+          ]
+        },
+        {
+          "label": "04 / GUESS A CATEGORY\nMoving a chair does not change its category.",
+          "position": [
+            17,
+            11
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

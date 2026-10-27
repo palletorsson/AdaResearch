@@ -1,4 +1,4 @@
-extends "res://doc/book/studies/forces-point-lineage/point_body.gd"
+extends "res://commons/artifacts/pendulum_noise/point_body.gd"
 ## The existing point becomes a constrained release handle, not a thrown rigid body.
 var apparatus: Node3D
 var lane := 0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn" id="1"]
+[node name="Orbits" instance=ExtResource("1")]
+
+[node name="Controls" parent="." index="2"]
+visible = false

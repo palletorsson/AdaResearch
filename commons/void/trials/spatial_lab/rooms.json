@@ -1,0 +1,160 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Translation",
+      "title": "Three barrier recipes",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "lab_packed",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_packed",
+            "bindings": {
+              "source": "do_not_cross_barrier"
+            }
+          }
+        },
+        {
+          "id": "lab_radial",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_radial",
+            "bindings": {
+              "source": "do_not_cross_barrier"
+            }
+          }
+        },
+        {
+          "id": "lab_growing",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_growing",
+            "bindings": {
+              "source": "do_not_cross_barrier"
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Translation",
+      "title": "Same recipes / warehouse boxes",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "lab_packed",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_packed",
+            "bindings": {
+              "source": "crate"
+            }
+          }
+        },
+        {
+          "id": "lab_radial",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_radial",
+            "bindings": {
+              "source": "crate"
+            }
+          }
+        },
+        {
+          "id": "lab_growing",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_growing",
+            "bindings": {
+              "source": "crate"
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

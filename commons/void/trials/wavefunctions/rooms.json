@@ -1,0 +1,419 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_Intro",
+      "title": "Wave Functions / the cube comes back",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "clock",
+          "artifact": "y_oscillation_cube",
+          "position": [
+            -3,
+            3
+          ],
+          "station": "SW",
+          "height": 1.3,
+          "facing": 0,
+          "scale": 2,
+          "config": {}
+        },
+        {
+          "id": "turn",
+          "artifact": "rotating_cube_demo",
+          "position": [
+            0,
+            3
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 2,
+          "config": {}
+        },
+        {
+          "id": "pendulum",
+          "artifact": "control_pendulum",
+          "position": [
+            0,
+            -2
+          ],
+          "station": "NE",
+          "height": 1.65,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "reference": "plumb",
+            "evidence": "trace"
+          }
+        },
+        {
+          "id": "driven",
+          "artifact": "void_wave_driven",
+          "position": [
+            3,
+            -1.75
+          ],
+          "station": "NE",
+          "height": 1.1,
+          "facing": 0,
+          "scale": 1.5,
+          "config": {}
+        },
+        {
+          "id": "monitor",
+          "artifact": "void_wave_monitor",
+          "position": [
+            -3,
+            -2
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "mode": "wave",
+            "label": "LIVE / PENDULUM ANGLE"
+          }
+        },
+        {
+          "id": "still-small",
+          "artifact": "cube_scene",
+          "position": [
+            -18,
+            0
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 0.2,
+          "config": {}
+        },
+        {
+          "id": "turn-small",
+          "artifact": "rotating_cube",
+          "position": [
+            -16.5,
+            0
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 0.2,
+          "config": {}
+        },
+        {
+          "id": "transform-small",
+          "artifact": "transformation_cube",
+          "position": [
+            -15,
+            0
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 0.2,
+          "config": {}
+        },
+        {
+          "id": "pickup-still",
+          "artifact": "pickup_cube_static",
+          "position": [
+            -18,
+            4.5
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "pickup-turn",
+          "artifact": "pickup_cube_rotating",
+          "position": [
+            -16,
+            4.5
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "pickup-transform",
+          "artifact": "pickup_cube_transforming",
+          "position": [
+            -14,
+            4.5
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "time-record",
+          "artifact": "void_wave_time_record",
+          "position": [
+            16,
+            -4
+          ],
+          "station": "NE",
+          "height": 1,
+          "facing": 0,
+          "scale": 0.5,
+          "config": {}
+        },
+        {
+          "id": "sphere-a",
+          "artifact": "void_wave_orbits",
+          "position": [
+            15.5,
+            1
+          ],
+          "station": "SE",
+          "height": 1.8,
+          "facing": 0,
+          "scale": 0.65,
+          "config": {}
+        },
+        {
+          "id": "sphere-b",
+          "artifact": "void_wave_orbits",
+          "position": [
+            18.5,
+            1
+          ],
+          "station": "SE",
+          "height": 1.8,
+          "facing": 0,
+          "scale": 0.65,
+          "config": {}
+        },
+        {
+          "id": "dark",
+          "artifact": "dark_sphere",
+          "position": [
+            -3,
+            -4
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "cloud",
+          "artifact": "void_wave_cloud",
+          "position": [
+            -16.5,
+            -4.2
+          ],
+          "station": "NW",
+          "height": 2.5,
+          "facing": 0,
+          "scale": 0.18,
+          "config": {}
+        },
+        {
+          "id": "size-1",
+          "artifact": "pick_up_cube",
+          "position": [
+            13.5,
+            5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "size-2",
+          "artifact": "pick_up_cube",
+          "position": [
+            14.8,
+            5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 0.7,
+          "config": {}
+        },
+        {
+          "id": "size-3",
+          "artifact": "pick_up_cube",
+          "position": [
+            16.1,
+            5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 0.8,
+          "config": {}
+        },
+        {
+          "id": "size-4",
+          "artifact": "pick_up_cube",
+          "position": [
+            17.4,
+            5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 0.9,
+          "config": {}
+        },
+        {
+          "id": "size-5",
+          "artifact": "pick_up_cube",
+          "position": [
+            18.7,
+            5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [
+        {
+          "id": "clock-bench",
+          "kind": "workbench",
+          "position": [
+            -3,
+            3
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "turn-bench",
+          "kind": "workbench",
+          "position": [
+            0,
+            3
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "driven-bench",
+          "kind": "workbench",
+          "position": [
+            3,
+            -2
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "still-bench",
+          "kind": "workbench",
+          "position": [
+            -18,
+            0
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "rotate-bench",
+          "kind": "workbench",
+          "position": [
+            -16.5,
+            0
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "transform-bench",
+          "kind": "workbench",
+          "position": [
+            -15,
+            0
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "record-bench",
+          "kind": "workbench",
+          "position": [
+            16,
+            -4
+          ],
+          "facing": 0,
+          "scale": 1
+        }
+      ],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / SAME HEIGHT. ANOTHER DIRECTION.",
+          "position": [
+            -3,
+            5.4
+          ]
+        },
+        {
+          "label": "02 / HOLD. RELEASE. WATCH THE RETURN.",
+          "position": [
+            0,
+            0
+          ]
+        },
+        {
+          "label": "03 / ONE BODY DRIVES ANOTHER",
+          "position": [
+            3,
+            0
+          ]
+        },
+        {
+          "label": "04 / KEEP A RECORD",
+          "position": [
+            16,
+            -1.5
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

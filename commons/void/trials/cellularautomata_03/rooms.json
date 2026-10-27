@@ -1,0 +1,505 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "title": "CA_BeyondBinary",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_game_of_life_petri_6_4",
+          "artifact": "game_of_life_petri",
+          "station": "SE",
+          "position": [
+            0,
+            8.2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "addresses",
+            "plinth": "0",
+            "floor": "walk"
+          }
+        },
+        {
+          "id": "f1_science_screen_1_19",
+          "artifact": "science_screen",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 270,
+          "height": 1.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_mold_network_2_20",
+          "artifact": "mold_network",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.4,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_6_21",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_hexagon_ca_vr_9_23",
+          "artifact": "hexagon_ca_vr",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "display": "table"
+          }
+        },
+        {
+          "id": "f1_ca_growth_network_3_24",
+          "artifact": "ca_growth_network",
+          "station": "NE",
+          "position": [
+            16,
+            -8
+          ],
+          "facing": 180,
+          "height": 1.3,
+          "scale": 0.35,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "title": "CA_ExpandingSpace",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_decaying_bridge_7_4",
+          "artifact": "decaying_bridge",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "proximity",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_crossway_ca_9_18",
+          "artifact": "crossway_ca",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 0.25,
+          "config": {}
+        },
+        {
+          "id": "f2_ca_chair_test_1_19",
+          "artifact": "ca_chair_test",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.12,
+          "config": {
+            "host_lighting": "1"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_3_24",
+          "artifact": "dark_sphere",
+          "station": "NW",
+          "position": [
+            -4,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_catalyst_vent_9_24",
+          "artifact": "catalyst_vent",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emit_interval_s": "2.5",
+            "wave_size": "3",
+            "start_delay_s": "5.0",
+            "sequence": "auto"
+          }
+        },
+        {
+          "id": "f2_catalyst_prompter_box_1_25",
+          "artifact": "catalyst_prompter_box",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emergence": "doors",
+            "sequence": "auto",
+            "lease_s": "45"
+          }
+        },
+        {
+          "id": "f2_cellular_automata_3d_tree_12_25",
+          "artifact": "cellular_automata_3d_tree",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.35,
+          "config": {
+            "host_lighting": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "basin": {
+        "depth": 0.74,
+        "glass": false,
+        "rects": [
+          [
+            -2.62,
+            -2.62,
+            5.24,
+            10.24
+          ]
+        ]
+      }
+    },
+    {
+      "map": "CA_SoftRules",
+      "title": "CA_SoftRules",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_rd_artifact_8_5",
+          "artifact": "rd_artifact",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "exchange",
+            "plinth": "0",
+            "seed": "walk"
+          }
+        },
+        {
+          "id": "f3_the_clockmaker_of_rules_8_13",
+          "artifact": "the_clockmaker_of_rules",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_crack_propagation_ca_3_18",
+          "artifact": "crack_propagation_ca",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 180,
+          "height": 1.2,
+          "scale": 0.35,
+          "config": {}
+        },
+        {
+          "id": "f3_lattice_gas_pump_12_18",
+          "artifact": "lattice_gas_pump",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_ca_sphere_3_22",
+          "artifact": "ca_sphere",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 270,
+          "height": 1.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_rule_30_110_gravity_12_22",
+          "artifact": "rule_30_110_gravity",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 2.6,
+          "scale": 0.3,
+          "config": {
+            "host_lighting": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "title": "CA_AgentsCircuits",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_ca_rule_explorer_3_5",
+          "artifact": "ca_rule_explorer",
+          "station": "SE",
+          "position": [
+            0,
+            6
+          ],
+          "facing": 0,
+          "height": 1.04,
+          "scale": 1,
+          "config": {
+            "study": "neighbours",
+            "rule": "90",
+            "plinth": "0",
+            "room": "comparison"
+          }
+        },
+        {
+          "id": "f4_film_ca_triplet_11_6",
+          "artifact": "film_ca_triplet",
+          "station": "SE",
+          "position": [
+            6,
+            8
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f4_sierpinski_pyramid_9_12",
+          "artifact": "sierpinski_pyramid",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.42,
+          "config": {
+            "plinth": "0.25"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "title": "CA_EdgeOfChaos",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_self_organization_ca_9_5",
+          "artifact": "self_organization_ca",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "difference",
+            "plinth": "0",
+            "slice": "walk"
+          }
+        },
+        {
+          "id": "f5_ca_screen_4_18",
+          "artifact": "ca_screen",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 0,
+          "height": 1.5,
+          "scale": 10,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_disease_spread_ca_12_19",
+          "artifact": "disease_spread_ca",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 3.4,
+          "scale": 0.25,
+          "config": {
+            "museum_budget": "true",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_volumetric_fog_ca_4_25",
+          "artifact": "volumetric_fog_ca",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 0.4,
+          "config": {
+            "preview_grid": "12",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_crackpropagation_ca_12_25",
+          "artifact": "crackpropagation_ca",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.9,
+          "scale": 0.8,
+          "config": {
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

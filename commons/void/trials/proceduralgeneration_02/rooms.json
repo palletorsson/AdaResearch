@@ -1,0 +1,360 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Branching_Growth",
+      "title": "PG_Branching_Growth",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_pg_workshop_console_8_5",
+          "artifact": "pg_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "branching"
+          }
+        },
+        {
+          "id": "f1_branching_growth_algorithm_8_10",
+          "artifact": "branching_growth_algorithm",
+          "station": "NW",
+          "position": [
+            -12,
+            -6
+          ],
+          "facing": 180,
+          "height": 0.1,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f1_organic_space_18_15",
+          "artifact": "organic_space",
+          "station": "NE",
+          "position": [
+            12,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.5,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Percolation_Network",
+      "title": "PG_Percolation_Network",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_pg_workshop_console_8_5",
+          "artifact": "pg_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "percolation"
+          }
+        },
+        {
+          "id": "f2_percolationnetwork_ca_10_11",
+          "artifact": "percolationnetwork_ca",
+          "station": "NE",
+          "position": [
+            0,
+            -3
+          ],
+          "facing": 180,
+          "height": 4.5,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_synthesis_stand_19_18",
+          "artifact": "synthesis_stand",
+          "station": "SW",
+          "position": [
+            -17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "subject": "dark_sphere",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_19_19",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Caves_Mazes",
+      "title": "PG_Caves_Mazes",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_pg_workshop_console_14_5",
+          "artifact": "pg_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            11
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "caves"
+          }
+        },
+        {
+          "id": "f3_caverandomwalk_19_11",
+          "artifact": "caverandomwalk",
+          "station": "NW",
+          "position": [
+            -13,
+            -5
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f3_maze_generation_22_19",
+          "artifact": "maze_generation",
+          "station": "NE",
+          "position": [
+            3,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f3_binary_space_partitioning_11_23",
+          "artifact": "binary_space_partitioning",
+          "station": "SE",
+          "position": [
+            17,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.3,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Sculpted_Forms",
+      "title": "PG_Sculpted_Forms",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_pg_workshop_console_11_5",
+          "artifact": "pg_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "sculpted"
+          }
+        },
+        {
+          "id": "f4_cube_mound_scene_8_11",
+          "artifact": "cube_mound_scene",
+          "station": "NE",
+          "position": [
+            0,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f4_dome_23_13",
+          "artifact": "dome",
+          "station": "NW",
+          "position": [
+            -15,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.55,
+          "config": {}
+        },
+        {
+          "id": "f4_layered_membrane_16_23",
+          "artifact": "layered_membrane",
+          "station": "NE",
+          "position": [
+            15,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.5,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Mirrored_Patterns",
+      "title": "PG_Mirrored_Patterns",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_pg_workshop_console_11_5",
+          "artifact": "pg_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "mirrored"
+          }
+        },
+        {
+          "id": "f5_mirror_cellular_texture_for_3d_8_10",
+          "artifact": "mirror_cellular_texture_for_3d",
+          "station": "SW",
+          "position": [
+            -16,
+            7
+          ],
+          "facing": 180,
+          "height": 0.12,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_rhizomatic_maze_space_22_14",
+          "artifact": "rhizomatic_maze_space",
+          "station": "NE",
+          "position": [
+            2,
+            -4
+          ],
+          "facing": 180,
+          "height": 4,
+          "scale": 0.7,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f5_pattern_tunnel_machine_14_22",
+          "artifact": "pattern_tunnel_machine",
+          "station": "SE",
+          "position": [
+            17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

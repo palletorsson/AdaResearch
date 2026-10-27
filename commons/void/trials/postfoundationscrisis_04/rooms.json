@@ -1,0 +1,218 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "title": "Lab Equipment / 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_flex_connector_7_3",
+          "artifact": "flex_connector",
+          "station": "SW",
+          "position": [
+            -4,
+            7
+          ],
+          "height": 0.95,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_MolecularDesigner_3_5",
+          "artifact": "MolecularDesigner",
+          "station": "NW",
+          "position": [
+            -5,
+            -6
+          ],
+          "height": 0.025,
+          "facing": 0,
+          "scale": 2,
+          "config": {
+            "body_study": "true",
+            "body_workshop": "true",
+            "body_ragdoll": "true",
+            "body_furniture": "true",
+            "float_duration": "8",
+            "assemble_duration": "18"
+          }
+        },
+        {
+          "id": "f1_markov_blanket_room_6_6",
+          "artifact": "markov_blanket_room",
+          "station": "NE",
+          "position": [
+            10,
+            -8
+          ],
+          "height": 2.8,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_boolean_neck_3_8",
+          "artifact": "boolean_neck",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "height": 0.95,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_bridge_cut_6_8",
+          "artifact": "bridge_cut",
+          "station": "SE",
+          "position": [
+            4,
+            7
+          ],
+          "height": 0.95,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PostCrisis_Synthesis",
+      "title": "PostCrisis_Synthesis / transfer, 7 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_tt_2_1",
+          "artifact": "tt",
+          "position": [
+            5,
+            11
+          ],
+          "station": "SE",
+          "height": 1.4,
+          "facing": 270,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_edge_ground_synthesis_5_2",
+          "artifact": "edge_ground_synthesis",
+          "position": [
+            2,
+            10
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_bias_from_inside_8_2",
+          "artifact": "bias_from_inside",
+          "position": [
+            -1,
+            10
+          ],
+          "station": "SW",
+          "height": 1.085,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_qfep_formula_3d_11_2",
+          "artifact": "qfep_formula_3d",
+          "position": [
+            -4,
+            10
+          ],
+          "station": "SW",
+          "height": 2,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_florensky_sphere_2_5",
+          "artifact": "florensky_sphere",
+          "position": [
+            5,
+            7
+          ],
+          "station": "SE",
+          "height": 1.1,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_accountability_ledger_11_10",
+          "artifact": "accountability_ledger",
+          "position": [
+            -4,
+            2
+          ],
+          "station": "SW",
+          "height": 0.65,
+          "facing": 0,
+          "scale": 1.8,
+          "config": {
+            "log_interval": "6",
+            "visitor_record": "true"
+          }
+        },
+        {
+          "id": "f2_assembly_return_7_12",
+          "artifact": "assembly_return",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

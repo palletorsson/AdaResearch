@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://commons/artifacts/line_relations_gallery/line_body.gd" id="1"]
+[node name="timber_plank_1m" type="RigidBody3D"]
+collision_layer = 5
+collision_mask = 3
+script = ExtResource("1")
+skin = "plank"
+span = 1.0

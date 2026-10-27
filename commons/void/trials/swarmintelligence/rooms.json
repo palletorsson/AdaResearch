@@ -1,0 +1,173 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_PhysarumColony",
+      "title": "SwarmIntelligence_PhysarumColony",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_science_screen_1_1",
+          "artifact": "science_screen",
+          "position": [
+            15,
+            9
+          ],
+          "height": 1.5,
+          "facing": 180,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "mode": "scatter"
+          }
+        },
+        {
+          "id": "f1_ant_agent_11_3",
+          "artifact": "ant_agent",
+          "position": [
+            0,
+            7
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {}
+        },
+        {
+          "id": "f1_particle_swarm_optimization_legacy_1_4",
+          "artifact": "void_swarm_legacy_pso",
+          "position": [
+            -33,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {}
+        },
+        {
+          "id": "f1_physarum_trace_gallery_20_5",
+          "artifact": "physarum_trace_gallery",
+          "position": [
+            4,
+            -6
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NE",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_FlowFields",
+      "title": "SwarmIntelligence_FlowFields",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_flow_direction_table_4_2",
+          "artifact": "flow_direction_table",
+          "position": [
+            -4,
+            6
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_ant_colony_table_9_2",
+          "artifact": "ant_colony_table",
+          "position": [
+            3,
+            6
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_flow_ecosystem_stand_2_7",
+          "artifact": "flow_ecosystem_stand",
+          "position": [
+            -15,
+            8
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_flow_crowd_22_7",
+          "artifact": "flow_crowd",
+          "position": [
+            3,
+            -9.5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NE",
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

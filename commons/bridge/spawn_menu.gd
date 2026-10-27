@@ -1,33 +1,18 @@
 extends Node
-## The spawn menu of The Void — Garry's Mod's spawnmenu, on the left wrist.
-##
-## 2026-10-22, Palle: "a prefab add menu like in Garry's Mod … only the prefabs we
-## have built in the sequences". The list is `commons/data/void_spawnlists.json`
-## (tools/build_void_spawnlists.py: sequence → map → the artifacts standing in that
-## map, with the artifact-gallery captures as thumbnails). Nothing here is hand-written.
-##
-## Picking a thumbnail does NOT instantiate anything in this game. It asks the bridge
-## ({"k":"spawn", floor, token, position, facing} over the VR link); tools/vr_link.py
-## saves the record through the editor's own POST /api/void-layout; the revision comes
-## back to every attached game — this one included — as an in-place `add`
-## (commons/bridge/live_update.gd). The file stays the truth, the other editors see
-## it arrive, and the ack is printed on the hand. "Remove last" is the same lane.
-##
-## Created by the VRLink autoload the first time it sees the Void (the link is what
-## carries the request, so the menu exists exactly where the link does). In VR the
-## panel is an XR Tools Viewport2Din3D on the left controller, toggled by its menu
-## button (Y / menu); the right hand's own FunctionPointer clicks it. On desktop the
-## same UI is a CanvasLayer, toggled with B, and a spawn lands 2.5 m ahead of the camera.
+## Shared prefab browser. B opens the desktop library; Y places one world board.
+## Reopening relocates that same board. Artifact instances remain in the shared layout.
+## Choose a prefab, aim its footprint, confirm with click/trigger. Esc/Y cancels.
 
+const BoardStand := preload("res://commons/bridge/prefab_board.gd")
 const UI_SCENE := preload("res://commons/bridge/spawn_menu_ui.tscn")
 ## Grab-and-move while the menu is open (edit mode): commons/bridge/void_grab.gd.
 const VoidGrab := preload("res://commons/bridge/void_grab.gd")
 const VIEWPORT_2D_3D := "res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn"
-const PANEL_W := 0.30
-const PANEL_H := 0.20
-const VIEWPORT_PX := Vector2(960, 640)
+const PANEL_W := 4.0
+const PANEL_H := 4.0
+const VIEWPORT_PX := Vector2(1920, 1920)
 const TOGGLE_KEY := KEY_B
-const TOGGLE_BUTTONS := ["menu_button", "by_button"]
+const TOGGLE_BUTTONS := ["by_button", "menu_button"] # Left Y places the board; Menu remains an alias.
 const AHEAD_VR := 2.0
 const AHEAD_DESKTOP := 2.5
 
@@ -35,6 +20,7 @@ var _link: Node = null          # the VRLink autoload (our parent)
 var _ui: Control = null
 var _layer: CanvasLayer = null  # desktop
 var _vp3d: Node3D = null        # VR
+var _stand: RigidBody3D
 var _mounted := false
 var _mount_tries := 0
 var _open := false
@@ -42,6 +28,12 @@ var _last_spawned := ""
 var _last_floor := -1
 var _mouse_before := Input.MOUSE_MODE_CAPTURED
 var _grab: Node = null
+var _pending_prefab := ""
+var _pending_where: Dictionary = {}
+var _placement_turn := 0.0
+var _armed_at := 0
+var _ghost: MeshInstance3D = null
+
 
 
 func _ready() -> void:
@@ -54,6 +46,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not _pending_prefab.is_empty():
+		_update_placement()
 	if not _mounted:
 		_mount_tries += 1
 		if _mount_tries % 30 == 1:   # every half second until the rig is there
@@ -61,7 +55,7 @@ func _process(_delta: float) -> void:
 
 
 ## ————————————————————————————————————————————————————————————————————
-## Mounting — the wrist in VR, a layer on desktop
+## Mounting — a world board in VR, a layer on desktop
 ## ————————————————————————————————————————————————————————————————————
 
 func _xr_active() -> bool:
@@ -110,23 +104,21 @@ func _try_mount() -> void:
 		_vp3d.set("viewport_size", VIEWPORT_PX)
 		_vp3d.set("scene", UI_SCENE)
 		_vp3d.set("unshaded", true)
-		# the right hand's own laser must see the panel: take its mask as our layer
-		if right != null and right.has_node("FunctionPointer"):
-			var pointer: Node = right.get_node("FunctionPointer")
-			var mask: Variant = pointer.get("collision_mask")
-			if mask is int and int(mask) != 0:
-				_vp3d.set("collision_layer", int(mask))
-		# above the back of the wrist, tilted towards the face; fine-tune in-headset
-		_vp3d.position = Vector3(0.0, 0.07, -0.09)
-		_vp3d.rotation_degrees = Vector3(-55.0, 0.0, 0.0)
-		left.add_child(_vp3d)
+		# UI-only layer: the stand supplies physical collision, not the pointer plane.
+		_vp3d.set("collision_layer", 1 << 22)
+		_stand = BoardStand.new()
+		add_child(_stand)
+		_stand.add_child(_vp3d)
+		_vp3d.position = BoardStand.SCREEN_CENTRE
+		if right != null:
+			right.button_pressed.connect(_on_right_button)
 		left.button_pressed.connect(_on_left_button)
 		_vp3d.visible = false
 		_vp3d.set("enabled", false)
 		_mounted = true
 		call_deferred("_bind_ui_from_viewport")
 		_make_grab(right, false)
-		print("[spawn-menu] mounted on %s (toggle: %s)" % [left.name, ", ".join(TOGGLE_BUTTONS)])
+		print("[spawn-menu] 4 x 4 m world board ready (Y relocates it)")
 	else:
 		_mount_desktop()
 
@@ -137,9 +129,10 @@ func _mount_desktop() -> void:
 	_layer.layer = 60
 	add_child(_layer)
 	_ui = UI_SCENE.instantiate()
-	# the left 55 % of the screen: the right part stays free to grab-and-move in
+	# Large desktop library; placement closes it so the whole view is available.
 	_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_ui.anchor_right = 0.55
+	_ui.anchor_right = 0.94
+	_ui.anchor_left = 0.06
 	_ui.offset_left = 24
 	_ui.offset_top = 24
 	_ui.offset_right = 0
@@ -176,6 +169,8 @@ func _bind_ui_from_viewport() -> void:
 		call_deferred("_bind_ui_from_viewport")
 		return
 	_ui = inst
+	_ui.call("set_board_style")
+	_ui.call("set_label_mode", true)
 	_bind_ui()
 
 
@@ -195,34 +190,66 @@ func _bind_ui() -> void:
 ## ————————————————————————————————————————————————————————————————————
 
 func _input(event: InputEvent) -> void:
-	if _layer == null:
+	if not _pending_prefab.is_empty():
+		if event is InputEventKey and event.pressed and not event.echo:
+			if event.keycode == KEY_ESCAPE:
+				_cancel_placement()
+			elif event.keycode in [KEY_Q, KEY_E]:
+				_placement_turn += -15.0 if event.keycode == KEY_Q else 15.0
+			get_viewport().set_input_as_handled()
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			_confirm_placement()
+			get_viewport().set_input_as_handled()
 		return
-	if event is InputEventKey and event.pressed and not event.echo and (event as InputEventKey).keycode == TOGGLE_KEY:
+	if _layer != null and event is InputEventKey and event.pressed and not event.echo and event.keycode == TOGGLE_KEY:
 		_set_open(not _open)
 		get_viewport().set_input_as_handled()
 
-
 func _on_left_button(button_name: String) -> void:
 	if button_name in TOGGLE_BUTTONS:
-		_set_open(not _open)
+		if not _pending_prefab.is_empty():
+			_cancel_placement()
+			_set_open(true, false)
+		else: _set_open(true, true)
 
+func _on_right_button(button_name: String) -> void:
+	if _pending_prefab.is_empty(): return
+	if button_name == "trigger_click": _confirm_placement()
+	elif button_name == "ax_button": _placement_turn += 15.0
 
-func _set_open(open: bool) -> void:
-	_open = open
+func _position_board() -> bool:
+	var eye := _eye()
+	if eye == null or _stand == null: return false
+	var base_y := eye.global_position.y - 1.65
+	var content := _content()
+	if content != null:
+		var roots: Dictionary = content.get("roots")
+		var floor_i := _player_floor()
+		if roots.has(floor_i): base_y = roots[floor_i].global_position.y
+	var pose: Variant = _stand.supported_pose(eye, base_y)
+	if pose == null:
+		_status("No clear floor for both feet. Face a larger clear patch and press Y.")
+		return false
+	_stand.relocate(pose)
+	return true
+
+func _set_open(open: bool, relocate := true) -> void:
 	if _vp3d != null:
+		if open and (relocate or not _stand.placed):
+			if not _position_board(): return
+		_stand.set_deployed(open)
 		_vp3d.visible = open
 		_vp3d.set("enabled", open)
+	_open = open
 	if _layer != null:
 		_layer.visible = open
 		if open:
 			_mouse_before = Input.mouse_mode
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = _mouse_before
-	if _grab != null and is_instance_valid(_grab):
-		_grab.set("enabled", open)
-	if open and _ui != null and _ui.has_method("set_status"):
-		_ui.call("set_status", "floor %d — pick a work (it stands %.1f m ahead), or %s a work in the room to move it" % [_player_floor(), AHEAD_VR if _vp3d != null else AHEAD_DESKTOP, "trigger-hold" if _vp3d != null else "left-drag"])
+		else: Input.mouse_mode = _mouse_before
+	if _grab != null and is_instance_valid(_grab): _grab.set("enabled", open)
+	if open and _ui != null:
+		_ui.call("set_status", "Floor %d · Y relocates board · choose → aim → confirm · artifacts stay" % _player_floor())
 
 
 ## ————————————————————————————————————————————————————————————————————
@@ -304,26 +331,75 @@ func _landing() -> Dictionary:
 ## The lane
 ## ————————————————————————————————————————————————————————————————————
 
-func _on_spawn_requested(token: String, is_prop: bool) -> void:
-	var where: Dictionary = _landing()
-	if where.is_empty():
-		_status("no floor under you to spawn on")
+func _on_spawn_requested(token: String, _is_prop: bool) -> void:
+	_pending_prefab = token
+	_placement_turn = 0
+	_armed_at = Time.get_ticks_msec() + 400
+	if _vp3d != null:
+		# Keep the furniture in place while aiming; only suspend its UI input.
+		_open = false
+		_vp3d.set("enabled", false)
+		if _grab != null: _grab.set("enabled", false)
+	else: _set_open(false)
+	_ghost = MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(1, 0.05, 1)
+	_ghost.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.4, 0.9, 0.75, 0.5)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_ghost.material_override = mat
+	add_child(_ghost)
+	var hint := Label3D.new()
+	hint.text = "PLACE: " + token + "\nAim at floor · click / trigger confirms\nQ/E or A turns · Esc / Y cancels"
+	hint.font_size = 28
+	hint.pixel_size = 0.003
+	hint.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	hint.position.y = 0.5
+	_ghost.add_child(hint)
+	_update_placement()
+
+func _update_placement() -> void:
+	_pending_where = _landing()
+	if _pending_where.is_empty():
+		if _ghost != null: _ghost.visible = false
 		return
-	var req: Dictionary = {"k": "spawn", "floor": int(where["floor"]), "position": where["position"], "facing": where["facing"]}
-	if is_prop:
-		req["kind"] = token
-	else:
-		req["token"] = token
-	var content: Node = _content()
-	if content != null and String(content.get("trial_id")) != "":
-		req["trial"] = String(content.get("trial_id"))
+	var roots: Dictionary = _content().get("roots")
+	var root: Node3D = roots[_pending_where.floor]
+	var from: Node3D = _hand("right") if _vp3d != null else _eye()
+	if from != null:
+		var direction := -from.global_basis.z
+		if direction.y < -0.04:
+			var distance: float = (root.global_position.y - from.global_position.y) / direction.y
+			if distance > 0 and distance <= 25:
+				var local := root.to_local(from.global_position + direction * distance)
+				_pending_where.position = [snappedf(local.x, 0.25), snappedf(local.z, 0.25)]
+	_pending_where.facing += _placement_turn
+	if _ghost != null:
+		_ghost.visible = true
+		_ghost.global_position = root.to_global(Vector3(_pending_where.position[0], 0.04, _pending_where.position[1]))
+		_ghost.global_rotation.y = deg_to_rad(_pending_where.facing)
+
+func _cancel_placement() -> void:
+	_pending_prefab = ""
+	_pending_where = {}
+	if _ghost != null:
+		_ghost.queue_free()
+		_ghost = null
+
+func _confirm_placement() -> void:
+	if Time.get_ticks_msec() < _armed_at or _pending_where.is_empty(): return
+	var req: Dictionary = {"k": "spawn", "prefab": _pending_prefab, "floor": int(_pending_where.floor),
+		"position": _pending_where.position, "facing": _pending_where.facing}
+	var content := _content()
+	if content != null and content.get("trial_id") != null and str(content.get("trial_id")) != "": req.trial = str(content.get("trial_id"))
 	if _link != null and _link.has_method("send_uplink"):
 		_link.call("send_uplink", req)
-		_last_floor = int(where["floor"])
-		_status("asked the bridge: %s on floor %d at %s…" % [token, where["floor"], str(where["position"])])
-	else:
-		_status("no link to the PC — the spawn menu needs vr_link.py")
-
+		_last_floor = int(_pending_where.floor)
+		_status("Placing %s…" % _pending_prefab)
+	_cancel_placement()
+	_set_open(true, false)
 
 func _on_remove_last() -> void:
 	if _last_spawned == "":

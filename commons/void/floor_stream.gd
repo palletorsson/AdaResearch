@@ -80,11 +80,13 @@ func _refresh() -> void:
 	pinned.clear()
 	for index in records:
 		var record: RefCounted=records[index]
-		# A descent belongs to its departure lesson until the next storey.
-		# Keep its rotating support and tunnel collision live for both ends,
-		# including a visitor waiting below for the returning wheel.
-		if index == focus-1 and content.data.floors[index].get("artifacts",[]).any(
-			func(item): return bool(item.get("config",{}).get("connects_next_floor",false))):
+		# A route can span several storeys. Keep its departure colliders live
+		# until the visitor has passed the explicit destination floor.
+		if index < focus and content.data.floors[index].get("artifacts",[]).any(
+			func(item):
+				var config: Dictionary=item.get("config",{})
+				var span:=clampi(int(config.get("connects_down_floors",1 if config.get("connects_next_floor",false) else 0)),0,8)
+				return focus<=index+span):
 			pinned.append(int(index))
 		# Keep a carried object and its owning lesson alive. A released object
 		# that travelled with the player stays alive while it is still nearby.

@@ -99,7 +99,7 @@ func _begin_pass(index: int) -> void:
 		if not other.is_queued_for_deletion() and (other.collision_layer & 1) != 0:
 			ignored_bodies.append(other)
 	for band: Dictionary in subject.bands:
-		var target_distance: float = subject.rows * subject.SPACING * band.node.global_basis.z.length() + 2.0
+		var target_distance: float = subject.rows * subject.cube_pitch * band.node.global_basis.z.length() + 2.0
 		var body := CharacterBody3D.new()
 		body.name = WIDTH_IDS[index] + "_" + str(band.id)
 		# Layer zero makes the visible witnesses ghosts to every other mover.
@@ -131,7 +131,8 @@ func _begin_pass(index: int) -> void:
 		visible_body.material_override = material
 		body.add_child(visible_body)
 		add_child(body)
-		body.global_position = band.node.to_global(START)
+		var start := Vector3(0, 0.02, -1.4) if subject.tower_walkways else START
+		body.global_position = band.node.to_global(start)
 		# Desktop walkers may share layer one with the static world. Ignore them,
 		# as well as XR bodies, without excluding the actual cube collisions.
 		for other in ignored_bodies: body.add_collision_exception_with(other)

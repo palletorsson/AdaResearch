@@ -1,0 +1,63 @@
+{
+  "status": "Colour Flashlight / all three original museum encounters",
+  "width": 42,
+  "depth": 18,
+  "storey_height": 6,
+  "slab_thickness": 0.36,
+  "levels": [
+    3,
+    -6,
+    -12
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -20,
+    -14,
+    -5,
+    5,
+    14,
+    20
+  ],
+  "column_z": [
+    -7,
+    7
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Open canopy / sky through shaft B",
+    "Colour Flashlight / light changes colour",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 13,
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "A",
+      "2": "A"
+    }
+  },
+  "route_note": "Four movable lamps in the west wing; white room centred over shaft A; lightwell centred over shaft B; five-switch sphere in the south bay; sixteen-cell comparison wall in the east wing. Both 5 by 6 metre shaft holes remain open inside the rooms, with continuous walkways around their sides. The white room is deeper for a route past the pink recess; the lightwell is wider for a ground-level lane beside its original ramp. Doorways connect across the central tower slab. Both rooms remain independently editable.",
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract"
+  }
+}

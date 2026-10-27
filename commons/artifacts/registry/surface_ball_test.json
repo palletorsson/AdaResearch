@@ -1,0 +1,14 @@
+{
+  "artifacts": {
+    "surface_ball_test": {
+      "lookup_name": "surface_ball_test",
+      "scene": "res://commons/artifacts/surface_ball_test/surface_ball_test.tscn",
+      "name": "Surface test / white gravity points",
+      "description": "Equal white physics spheres released from rest. Flat surfaces hold them; slopes roll them; pockets collect them; open edges let them fall. Reusable jump-triggered component for walkable surfaces.",
+      "qfep_connection": "A surface is tested by the trajectories it permits. The same initial conditions expose geometry, discretization and collision as observable constraints.",
+      "parameters": {"auto_trigger": "Release on leaving this walkable surface", "drop_height": "Equal world-vertical release height", "radius": "Shared sphere radius", "lifetime": "Bounded observation time"},
+      "category": "primitives",
+      "tags": ["surface", "gravity", "point", "collision", "smoothness", "walkable"]
+    }
+  }
+}

@@ -1,0 +1,467 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Raised canopy / nine-metre Colour hall",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Context_Placed",
+      "title": "Colour / a celebration of 23 columns",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "one",
+          "artifact": "void_colour_station",
+          "position": [
+            -5.4,
+            -4.7
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "rule": "one",
+            "stack": "bauhaus",
+            "pose": "aligned",
+            "editor_label": "01 / one"
+          }
+        },
+        {
+          "id": "by-shape",
+          "artifact": "void_colour_station",
+          "position": [
+            -1.8,
+            -4.7
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "rule": "by_shape",
+            "stack": "bauhaus",
+            "pose": "aligned",
+            "editor_label": "02 / by shape"
+          }
+        },
+        {
+          "id": "by-height",
+          "artifact": "void_colour_station",
+          "position": [
+            1.8,
+            -4.7
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "rule": "by_height",
+            "stack": "bauhaus",
+            "pose": "aligned",
+            "editor_label": "03 / by height"
+          }
+        },
+        {
+          "id": "by-neighbour",
+          "artifact": "void_colour_station",
+          "position": [
+            5.4,
+            -4.7
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "rule": "by_neighbour",
+            "stack": "bauhaus",
+            "pose": "aligned",
+            "editor_label": "04 / by neighbour"
+          }
+        },
+        {
+          "id": "alphabet-bauhaus",
+          "artifact": "chroma_stack",
+          "position": [
+            -19,
+            -4.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "02 / alphabet / bauhaus",
+            "rule": "by_shape",
+            "stack": "bauhaus",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "alphabet-turned",
+          "artifact": "chroma_stack",
+          "position": [
+            -19,
+            0
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "02 / alphabet / turned",
+            "rule": "by_shape",
+            "stack": "turned",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "alphabet-cut",
+          "artifact": "chroma_stack",
+          "position": [
+            -19,
+            4.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "02 / alphabet / cut",
+            "rule": "by_shape",
+            "stack": "cut",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "pose-aligned",
+          "artifact": "chroma_stack",
+          "position": [
+            -5.4,
+            5.8
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / cut shapes / aligned",
+            "rule": "by_shape",
+            "stack": "cut",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "pose-twist",
+          "artifact": "chroma_stack",
+          "position": [
+            -1.25,
+            5.25
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / cut shapes / twist",
+            "rule": "by_shape",
+            "stack": "cut",
+            "pose": "twist"
+          }
+        },
+        {
+          "id": "pose-taper",
+          "artifact": "chroma_stack",
+          "position": [
+            2,
+            5.75
+          ],
+          "station": "NW",
+          "height": 7.105427357601002e-15,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / cut shapes / taper",
+            "rule": "by_shape",
+            "stack": "cut",
+            "pose": "taper"
+          }
+        },
+        {
+          "id": "pose-combined",
+          "artifact": "chroma_stack",
+          "position": [
+            5.4,
+            5.8
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / cut shapes / combined",
+            "rule": "by_shape",
+            "stack": "cut",
+            "pose": "combined"
+          }
+        },
+        {
+          "id": "composition-beads",
+          "artifact": "chroma_stack",
+          "position": [
+            -14.4,
+            -5.2
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / compose / beads",
+            "rule": "composed",
+            "stack": "beads",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "composition-discs",
+          "artifact": "chroma_stack",
+          "position": [
+            -14.4,
+            -1.8000000000000003
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / compose / discs",
+            "rule": "composed",
+            "stack": "discs",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "composition-offset",
+          "artifact": "chroma_stack",
+          "position": [
+            -4.25,
+            0
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / compose / offset",
+            "rule": "composed",
+            "stack": "offset",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "composition-festival",
+          "artifact": "chroma_stack",
+          "position": [
+            -14.4,
+            4.999999999999999
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / compose / festival",
+            "rule": "composed",
+            "stack": "festival",
+            "pose": "aligned"
+          }
+        },
+        {
+          "id": "gallery-mondrian",
+          "artifact": "color_dna_stack",
+          "position": [
+            14.5,
+            -5.1
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / mondrian",
+            "study": "mondrian"
+          }
+        },
+        {
+          "id": "gallery-albers",
+          "artifact": "color_dna_stack",
+          "position": [
+            14.5,
+            -1.6999999999999997
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / albers",
+            "study": "albers"
+          }
+        },
+        {
+          "id": "gallery-memphis",
+          "artifact": "color_dna_stack",
+          "position": [
+            17,
+            1.25
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / memphis",
+            "study": "memphis"
+          }
+        },
+        {
+          "id": "gallery-bauhaus_tall",
+          "artifact": "color_dna_stack",
+          "position": [
+            14,
+            5.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / bauhaus tall",
+            "study": "bauhaus_tall"
+          }
+        },
+        {
+          "id": "gallery-blue",
+          "artifact": "color_dna_stack",
+          "position": [
+            18.5,
+            -4
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / blue",
+            "study": "blue"
+          }
+        },
+        {
+          "id": "gallery-kras_rainbow",
+          "artifact": "color_dna_stack",
+          "position": [
+            0,
+            0.25
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / kras rainbow",
+            "study": "kras_rainbow"
+          }
+        },
+        {
+          "id": "gallery-rainbow_crown",
+          "artifact": "color_dna_stack",
+          "position": [
+            3.75,
+            0.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / rainbow crown",
+            "study": "rainbow_crown"
+          }
+        },
+        {
+          "id": "gallery-memphis_beacon",
+          "artifact": "color_dna_stack",
+          "position": [
+            18.5,
+            5.1
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / gallery / memphis beacon",
+            "study": "memphis_beacon"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / SAME FIVE PARTS. FOUR COLOUR RULES.",
+          "position": [
+            0,
+            -2
+          ]
+        },
+        {
+          "label": "02 / SHAPE ALPHABETS     04 / COMPOSE THE STACK",
+          "position": [
+            -16.5,
+            6.5
+          ]
+        },
+        {
+          "label": "03 / ALIGNED. TURNED. TAPERED. COMBINED.",
+          "position": [
+            0,
+            2.3
+          ]
+        },
+        {
+          "label": "05 / COLOUR TAKES LIBERTIES",
+          "position": [
+            16.5,
+            6.5
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

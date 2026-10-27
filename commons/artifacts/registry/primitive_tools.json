@@ -20,13 +20,13 @@
     },
     "paired_cube_diagonals": {
       "lookup_name": "paired_cube_diagonals",
-      "name": "Same corners / different surfaces",
+      "name": "One cube / eight movable corners",
       "scene": "res://commons/artifacts/primitive_encounters/paired_cube_diagonals.tscn",
       "map_ready": true,
       "include_in_map_data": true,
       "category": "primitives",
       "complexity": "beginner",
-      "description": "Same corners / different surfaces",
+      "description": "One cube built from the original grid builder: eight freely grabbable corners, twelve edges and twelve translucent pink, red and black triangle fragments. Move any vertex and its connected faces follow. Restore, replay the current form, or switch the front diagonal without changing the corner positions.",
       "map_sequences": [
         "primitives"
       ],
@@ -34,6 +34,11 @@
         "gesture",
         "surface",
         "comparison"
+      ],
+      "interactions": [
+        "Desktop: RMB pick up any corner, move it, RMB release.",
+        "XR: grip any of the eight corner spheres.",
+        "RESTORE returns the eight original corners. REPLAY reveals the current form. DIAGONAL swaps the front triangulation."
       ]
     }
   }

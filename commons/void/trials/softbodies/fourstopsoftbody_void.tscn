@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn" id="1"]
+
+[node name="Fourstopsoftbody" instance=ExtResource("1")]
+soft_body_scene_path = "res://commons/void/trials/softbodies/softbodybody_void.tscn"

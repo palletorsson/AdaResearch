@@ -1,0 +1,425 @@
+{
+  "settings": {
+    "source": "plank",
+    "arrangement": "radial",
+    "count": 10,
+    "spacing": 0.35,
+    "radius": 1.1,
+    "angle": 24,
+    "axis": "y",
+    "ratio": 0.95,
+    "size": 0.5,
+    "rise": 0,
+    "staging": "table",
+    "opening": 2.4,
+    "wall": 0.18,
+    "depth": 0.6
+  },
+  "term": {
+    "chapter": "transformation",
+    "label": "Timber plank / radial",
+    "expr": "ingredient × translation × rotation × scale",
+    "from": [
+      "plank"
+    ],
+    "build": {
+      "op": "assemblage",
+      "parts": [
+        {
+          "id": "Board",
+          "at": [
+            0,
+            0.61,
+            0
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  3.6,
+                  0.08,
+                  2.4
+                ],
+                "color": "bd9967"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  3.6,
+                  0.08,
+                  2.4
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support1",
+          "at": [
+            -1.35,
+            0.285,
+            -0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support2",
+          "at": [
+            1.35,
+            0.285,
+            -0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support3",
+          "at": [
+            -1.35,
+            0.285,
+            0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support4",
+          "at": [
+            1.35,
+            0.285,
+            0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Copy01",
+          "at": [
+            0,
+            0.65,
+            1.1
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.5,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy02",
+          "at": [
+            0.4474103073833802,
+            0.65,
+            1.0049000034068611
+          ],
+          "rot": [
+            0,
+            24,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.475,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy03",
+          "at": [
+            0.8174593080251338,
+            0.65,
+            0.7360436669947441
+          ],
+          "rot": [
+            0,
+            48,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45125,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy04",
+          "at": [
+            1.0461621679246689,
+            0.65,
+            0.3399186938124422
+          ],
+          "rot": [
+            0,
+            72,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.42868749999999994,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy05",
+          "at": [
+            1.0939740849051007,
+            0.65,
+            -0.11498130959441867
+          ],
+          "rot": [
+            0,
+            96,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.40725312499999994,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy06",
+          "at": [
+            0.9526279441628827,
+            0.65,
+            -0.5499999999999998
+          ],
+          "rot": [
+            0,
+            120,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.3868904687499999,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy07",
+          "at": [
+            0.6465637775217207,
+            0.65,
+            -0.8899186938124422
+          ],
+          "rot": [
+            0,
+            144,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.3675459453124999,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy08",
+          "at": [
+            0.22870285989953526,
+            0.65,
+            -1.0759623608071864
+          ],
+          "rot": [
+            0,
+            168,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.34916864804687486,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy09",
+          "at": [
+            -0.22870285989953498,
+            0.65,
+            -1.0759623608071864
+          ],
+          "rot": [
+            0,
+            192,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.3317102156445311,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy10",
+          "at": [
+            -0.6465637775217203,
+            0.65,
+            -0.8899186938124423
+          ],
+          "rot": [
+            0,
+            216,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.31512470486230454,
+          "of": {
+            "p": "prefab",
+            "token": "timber_plank_2m",
+            "lab_input": true
+          }
+        }
+      ]
+    }
+  },
+  "lineage": {
+    "family": "transformation_arrangement",
+    "ingredient": "plank",
+    "source": "timber_plank_2m",
+    "operations": [
+      "translation",
+      "rotation",
+      "scale"
+    ]
+  },
+  "scope": "Static construction and arrangement. Native exports include collision where authored. This prototype does not claim dynamic joints, hand interactions or traversable routes.",
+  "source_hash": "b944d3b817cf26e5edfd4bd78af71d37790f37af6fa934cae8237866d8c8e12f",
+  "name": "Planks / a measured turn",
+  "parent": null
+}

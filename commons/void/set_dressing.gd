@@ -2,6 +2,9 @@ extends RefCounted
 ## Solid construction-site scenery. Independent of the four teaching artifacts.
 
 const PREFABS := {
+	"smoke_supply": preload("res://commons/void/smoke_supply.tscn"),
+	"ceiling_laser": preload("res://commons/void/ceiling_turret.tscn"),
+	"laser_pickup": preload("res://commons/void/laser_pickup.tscn"),
 	"live_junction": preload("res://commons/void/live_junction.tscn"),
 	"wall_charger": preload("res://commons/void/model_b_charger.tscn"),
 	"arrival_crate": preload("res://commons/void/arrival_crate.tscn"),
@@ -54,9 +57,14 @@ static func build(building: Node3D, host: Node3D, item: Dictionary, definition: 
 		collider.free()
 	else:
 		body.add_child(collider)
-	if PREFABS.has(str(item.kind)):
-		var prefab: Node3D = PREFABS[str(item.kind)].instantiate()
+	var prefab_scene: PackedScene = PREFABS.get(str(item.kind))
+	if prefab_scene==null and definition.get("group","")=="Primitives kit":
+		prefab_scene=load(str(definition.scene)) as PackedScene
+	if prefab_scene!=null:
+		var prefab: Node3D = prefab_scene.instantiate()
 		prefab.name = "Prefab"
+		var offset: Array = definition.get("offset",[0,0,0])
+		prefab.position=Vector3(float(offset[0]),float(offset[1]),float(offset[2]))
 		if "target_id" in prefab: prefab.target_id = str(item.get("target", ""))
 		for key in definition.get("settings",{}): prefab.set(key,definition.settings[key])
 		body.add_child(prefab)

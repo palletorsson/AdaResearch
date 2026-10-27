@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/void/trials/postfoundationscrisis_03/cave_void.gd" id="2"]
+[node name="RhizomeCaveVoid" instance=ExtResource("1")]
+script = ExtResource("2")

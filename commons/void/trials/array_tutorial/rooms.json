@@ -1,0 +1,839 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure above",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Array",
+      "title": "Array / an address survives an absence",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "row",
+          "artifact": "row_3_x",
+          "position": [
+            -15.5,
+            -5
+          ],
+          "station": "NW",
+          "height": 1,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "count": 32,
+            "spacing": 1,
+            "editor_label": "01 / 32 addresses along one axis",
+            "table_mount": "ceiling"
+          }
+        },
+        {
+          "id": "grid",
+          "artifact": "grid_2d_4x4",
+          "position": [
+            -2.75,
+            0
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "notation": "plate",
+            "editor_label": "02 / seven by seven; the address remains",
+            "cols": 7,
+            "rows": 7,
+            "spacing": 1,
+            "table_position": [
+              3,
+              1.8,
+              7.3
+            ],
+            "table_yaw": 180,
+            "table_mount": "ceiling"
+          }
+        },
+        {
+          "id": "worksite",
+          "artifact": "array_index_bridge",
+          "position": [
+            10,
+            4.4
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / your hand selects an index in the shaft",
+            "interface_style": "architectural"
+          }
+        },
+        {
+          "id": "shaft-volume",
+          "artifact": "grid_3d_4x4x4",
+          "position": [
+            -10,
+            4.4
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / fly inside a 6 x 6 x 6 array",
+            "layout": "flight_array",
+            "size_x": 6,
+            "size_y": 6,
+            "size_z": 6,
+            "spacing": 0.8,
+            "cube_size": 0.34,
+            "shaft_offset": [
+              0,
+              -4.7,
+              -4.4
+            ],
+            "connects_next_floor": true,
+            "box_size": 5
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / 32 ADDRESSES. COLLECT ONE CUBE.",
+          "position": [
+            -17,
+            -3.2
+          ]
+        },
+        {
+          "label": "02 / SEVEN BY SEVEN. THE ADDRESS STAYS.",
+          "position": [
+            17,
+            6
+          ]
+        },
+        {
+          "label": "03 / SMALL HAND MOVEMENT. SAME LARGE ADDRESS.",
+          "position": [
+            10,
+            6.5
+          ]
+        },
+        {
+          "label": "04 / 3D ARRAY",
+          "position": [
+            -13.5,
+            1
+          ]
+        }
+      ],
+      "supply_leads": false,
+      "construction": [
+        {
+          "id": "row-support-box-0-0",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-0-1",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-1-0",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-1-1",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-2-0",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-2-1",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-3-0",
+          "kind": "cube",
+          "position": [
+            -12.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-3-1",
+          "kind": "cube",
+          "position": [
+            -12.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-4-0",
+          "kind": "cube",
+          "position": [
+            -11.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-4-1",
+          "kind": "cube",
+          "position": [
+            -11.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-5-0",
+          "kind": "cube",
+          "position": [
+            -10.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-5-1",
+          "kind": "cube",
+          "position": [
+            -10.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-6-0",
+          "kind": "cube",
+          "position": [
+            -9.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-6-1",
+          "kind": "cube",
+          "position": [
+            -9.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-7-0",
+          "kind": "cube",
+          "position": [
+            -8.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-7-1",
+          "kind": "cube",
+          "position": [
+            -8.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-8-0",
+          "kind": "cube",
+          "position": [
+            -7.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-8-1",
+          "kind": "cube",
+          "position": [
+            -7.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-9-0",
+          "kind": "cube",
+          "position": [
+            -6.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-9-1",
+          "kind": "cube",
+          "position": [
+            -6.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-10-0",
+          "kind": "cube",
+          "position": [
+            -5.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-10-1",
+          "kind": "cube",
+          "position": [
+            -5.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-11-0",
+          "kind": "cube",
+          "position": [
+            -4.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-11-1",
+          "kind": "cube",
+          "position": [
+            -4.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-12-0",
+          "kind": "cube",
+          "position": [
+            -3.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-12-1",
+          "kind": "cube",
+          "position": [
+            -3.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-13-0",
+          "kind": "cube",
+          "position": [
+            -2.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-13-1",
+          "kind": "cube",
+          "position": [
+            -2.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-14-0",
+          "kind": "cube",
+          "position": [
+            -1.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-14-1",
+          "kind": "cube",
+          "position": [
+            -1.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-15-0",
+          "kind": "cube",
+          "position": [
+            -0.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-15-1",
+          "kind": "cube",
+          "position": [
+            -0.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-16-0",
+          "kind": "cube",
+          "position": [
+            0.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-16-1",
+          "kind": "cube",
+          "position": [
+            0.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-17-0",
+          "kind": "cube",
+          "position": [
+            1.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-17-1",
+          "kind": "cube",
+          "position": [
+            1.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-18-0",
+          "kind": "cube",
+          "position": [
+            2.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-18-1",
+          "kind": "cube",
+          "position": [
+            2.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-19-0",
+          "kind": "cube",
+          "position": [
+            3.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-19-1",
+          "kind": "cube",
+          "position": [
+            3.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-20-0",
+          "kind": "cube",
+          "position": [
+            4.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-20-1",
+          "kind": "cube",
+          "position": [
+            4.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-21-0",
+          "kind": "cube",
+          "position": [
+            5.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-21-1",
+          "kind": "cube",
+          "position": [
+            5.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-22-0",
+          "kind": "cube",
+          "position": [
+            6.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-22-1",
+          "kind": "cube",
+          "position": [
+            6.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-23-0",
+          "kind": "cube",
+          "position": [
+            7.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-23-1",
+          "kind": "cube",
+          "position": [
+            7.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-24-0",
+          "kind": "cube",
+          "position": [
+            8.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-24-1",
+          "kind": "cube",
+          "position": [
+            8.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-25-0",
+          "kind": "cube",
+          "position": [
+            9.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-25-1",
+          "kind": "cube",
+          "position": [
+            9.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-26-0",
+          "kind": "cube",
+          "position": [
+            10.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-26-1",
+          "kind": "cube",
+          "position": [
+            10.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-27-0",
+          "kind": "cube",
+          "position": [
+            11.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-27-1",
+          "kind": "cube",
+          "position": [
+            11.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-28-0",
+          "kind": "cube",
+          "position": [
+            12.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-28-1",
+          "kind": "cube",
+          "position": [
+            12.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-29-0",
+          "kind": "cube",
+          "position": [
+            13.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-29-1",
+          "kind": "cube",
+          "position": [
+            13.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-30-0",
+          "kind": "cube",
+          "position": [
+            14.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-30-1",
+          "kind": "cube",
+          "position": [
+            14.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-31-0",
+          "kind": "cube",
+          "position": [
+            15.5,
+            0,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-box-31-1",
+          "kind": "cube",
+          "position": [
+            15.5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "row-support-ramp-west-0",
+          "kind": "wedge",
+          "position": [
+            -17,
+            0,
+            -5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "row-support-ramp-west-1",
+          "kind": "wedge",
+          "position": [
+            -17,
+            0,
+            -4
+          ],
+          "facing": 90
+        },
+        {
+          "id": "row-support-ramp-east-0",
+          "kind": "wedge",
+          "position": [
+            17,
+            0,
+            -5
+          ],
+          "facing": 270
+        },
+        {
+          "id": "row-support-ramp-east-1",
+          "kind": "wedge",
+          "position": [
+            17,
+            0,
+            -4
+          ],
+          "facing": 270
+        }
+      ]
+    },
+    {
+      "map": "",
+      "title": "Array / catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

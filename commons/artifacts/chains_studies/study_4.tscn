@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://commons/artifacts/chains_studies/chains_study.tscn" id="1"]
+[node name="ChainsStudy4" instance=ExtResource("1")]
+study = 3

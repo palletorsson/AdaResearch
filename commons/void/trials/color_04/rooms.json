@@ -1,0 +1,230 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Paint",
+      "title": "Color Paint / original museum artifacts",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_dark_sphere_5_5",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            -4,
+            -2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_albers_wall_gallery_5_15",
+          "artifact": "albers_wall_gallery",
+          "station": "NE",
+          "position": [
+            -4,
+            8
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_ball_painting_demo_12_15",
+          "artifact": "ball_painting_demo",
+          "station": "NE",
+          "position": [
+            3,
+            8
+          ],
+          "facing": 0,
+          "height": 0.5,
+          "scale": 1,
+          "config": {
+            "automated": "true",
+            "tools": "spray"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Walls",
+      "title": "Color_Walls / 9 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_dark_sphere_6_8",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -15.3,
+            15
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_rainbow_hallway_8_9",
+          "artifact": "rainbow_hallway",
+          "station": "SW",
+          "position": [
+            -16.7,
+            13.4
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_color_constellation_office_23_20",
+          "artifact": "color_constellation_office",
+          "station": "SE",
+          "position": [
+            0,
+            3.4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "layout": "planes",
+            "compare": "visibility",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_subpixel_display_12_26",
+          "artifact": "subpixel_display",
+          "station": "NW",
+          "position": [
+            -19,
+            -2.8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_color_space_navigator_18_31",
+          "artifact": "color_space_navigator",
+          "station": "NE",
+          "position": [
+            5,
+            -7.6
+          ],
+          "facing": 0,
+          "height": 1.2,
+          "scale": 1,
+          "config": {
+            "mount": "comparison",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_gradient_interpolator_28_31",
+          "artifact": "gradient_interpolator",
+          "station": "NW",
+          "position": [
+            -5,
+            -7.6
+          ],
+          "facing": 0,
+          "height": 0.95,
+          "scale": 1,
+          "config": {
+            "mount": "comparison",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_film_gradient_paths_1_32",
+          "artifact": "film_gradient_paths",
+          "station": "NE",
+          "position": [
+            8.2,
+            -7.6
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_colour_assembly_18_50",
+          "artifact": "colour_assembly",
+          "station": "NE",
+          "position": [
+            14.6,
+            -9.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_colour_wall_studies_18_70",
+          "artifact": "colour_wall_studies",
+          "station": "NW",
+          "position": [
+            -11.5,
+            -9.27
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

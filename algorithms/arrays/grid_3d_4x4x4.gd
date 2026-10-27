@@ -78,6 +78,19 @@ func apply_grid_config(config: Dictionary) -> void:
 		if not child.owner:
 			remove_child(child)
 			child.queue_free()
+	# Explicit Void arrangement; other museum placements keep the pickup lattice.
+	if str(config.get("layout", "")) == "flight_array":
+		var volume := preload("res://commons/void/array_flight_box.gd").new()
+		volume.name = "FlightArray"
+		volume.config = config.duplicate(true)
+		add_child(volume)
+		return
+	if str(config.get("layout", "")) == "shaft_descent":
+		var descent := preload("res://commons/void/array_shaft_descent.gd").new()
+		descent.name = "ShaftDescent"
+		descent.config = config.duplicate(true)
+		add_child(descent)
+		return
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 	for x in range(size_x):
 		for y in range(size_y):

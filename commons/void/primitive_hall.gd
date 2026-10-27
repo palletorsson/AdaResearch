@@ -7,7 +7,6 @@ const Columns = preload("res://commons/artifacts/resolution_colonnade/resolution
 const Profiles = preload("res://commons/artifacts/glyph_profile_gallery/glyph_profile_gallery.gd")
 const Court = preload("res://commons/artifacts/ignorance_gallery/geometry_courtyard.gd")
 const ResolutionPoint = preload("res://commons/artifacts/ignorance_gallery/resolution_catalyst.gd")
-const CubeEdgeStudy = preload("res://commons/void/cube_edge_study.gd")
 const PlatonicStudy = preload("res://commons/void/platonic_study.gd")
 const ColumnsStudy = preload("res://commons/void/columns_study.gd")
 const ProfilesStudy = preload("res://commons/void/profiles_study.gd")
@@ -70,15 +69,13 @@ func bench(title: String, at: Vector3, width: float, depth: float, height := .78
 
 func _cube() -> void:
 	var pair := specimen("res://commons/artifacts/primitive_encounters/paired_cube_diagonals.tscn","PairedCubeDiagonals",Vector3(-16,0,0))
-	var study := CubeEdgeStudy.new()
-	study.name = "EdgeStudy"
-	pair.add_child(study)
+	pair.set_meta("editor_label","Cube / eight movable vertices")
 	specimen("res://commons/artifacts/cube_diagonal_plate/cube_diagonal_plate.tscn","CubeConnections",Vector3(-16,.8,-4))
 	bench("ConnectionTable",Vector3(-16,0,-4),2.2,1.4,.8)
 	specimen("res://commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn","FoldingCubeNet",Vector3(0,1.15,-3.2),0,{"edge_length":.7,"fall_cycle":true,"loop_fold":true,"fold_duration":2.6,"think_hold":2.2,"max_dropped_cubes":12})
 	bench("NetTable",Vector3(0,0,-3.2),3.8,3.4,.75)
 	specimen("res://commons/artifacts/prefab_box_library/prefab_box_library.tscn","BoxLibrary",Vector3(16.5,0,-.6),90,{"worktable_x":0.0,"worktable_z":2.3,"column_pitch":1.2})
-	words("ONE CORNER / TWO SURFACES\nMove it. Compare. Restore. Try again.",Vector3(-16,.025,2.8),true,.0014)
+	words("ONE CUBE / EIGHT MOVABLE CORNERS\nMove a point. The connected faces follow.",Vector3(-16,.025,2.8),true,.0014)
 	words("A NET CLOSES. A BOX CAN BE CARRIED.",Vector3(0,.025,.2),true,.0014)
 
 func _primitives() -> void:
@@ -161,8 +158,7 @@ func _melencolia() -> void:
 	specimen("res://commons/scenes/demos/durer/EngravingScene.tscn","MelencoliaEngraving",Vector3(-16,0,-1),0,{"figure":"skull"})
 	# The nine original court solids remain separately editable layout records.
 	# Carry the grid's raised support and original wp joins into the tower.
-	var deck := Kit.block(self,Vector3(5,1,5),Vector3(0,.5,-2),Color("b8b5ab"))
-	deck.name="CourtDeck"
+	specimen("res://commons/artifacts/primitive_encounters/melencolia_platform.tscn","CourtDeck",Vector3(0,.5,-2))
 	for i in 2:
 		specimen("res://commons/artifacts/primitive_encounters/wedge_blocker.tscn","CourtRampLeft" if i==0 else "CourtRampRight",Vector3(-.5+i,0,1.5),180)
 	var table := bench("CompositionTable",Vector3(4,0,4.5),5,3,.8)

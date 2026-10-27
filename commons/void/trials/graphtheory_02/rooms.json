@@ -1,0 +1,279 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Pathfinding",
+      "title": "GT_Pathfinding",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_impatient_river_9_8",
+          "artifact": "impatient_river",
+          "station": "NW",
+          "position": [
+            -9,
+            -3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_pathfinding3d_3_10",
+          "artifact": "pathfinding3d",
+          "station": "NE",
+          "position": [
+            8,
+            -3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 0.16,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "title": "GT_Network_Analysis",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_evidence_network_17_20",
+          "artifact": "evidence_network",
+          "station": "NE",
+          "position": [
+            0,
+            -4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Connectivity",
+      "title": "GT_Connectivity",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_tarjan_algorithm_10_6",
+          "artifact": "tarjan_algorithm",
+          "station": "NE",
+          "position": [
+            0,
+            -4
+          ],
+          "facing": 0,
+          "height": 1.15,
+          "scale": 0.5,
+          "config": {
+            "mutuality": "split",
+            "graph_size": "12",
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "title": "GT_Spanning_Trees",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_film_spanning_choice_1_7",
+          "artifact": "film_spanning_choice",
+          "station": "SW",
+          "position": [
+            -13,
+            3
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f4_mst_visualization_11_11",
+          "artifact": "mst_visualization",
+          "station": "NE",
+          "position": [
+            6,
+            -5
+          ],
+          "facing": 0,
+          "height": 2.8,
+          "scale": 0.28,
+          "config": {
+            "desktop_ui": "off"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Flow",
+      "title": "GT_Flow",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_graph_worlds_3_6",
+          "artifact": "graph_worlds",
+          "station": "NW",
+          "position": [
+            -9,
+            -3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f5_push_relabel_algorithm_9_9",
+          "artifact": "push_relabel_algorithm",
+          "station": "NE",
+          "position": [
+            9,
+            -3
+          ],
+          "facing": 0,
+          "height": 1.2,
+          "scale": 0.32,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Matching",
+      "title": "GT_Matching",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f6_matching_workshop_3_5",
+          "artifact": "matching_workshop",
+          "station": "NW",
+          "position": [
+            -12,
+            -4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f6_edmonds_algorithm_11_11",
+          "artifact": "edmonds_algorithm",
+          "station": "NE",
+          "position": [
+            0,
+            -5
+          ],
+          "facing": 180,
+          "height": 1.2,
+          "scale": 0.42,
+          "config": {
+            "coupling": "blossom",
+            "lesson_controls": "on",
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f6_ada_relations_3_12",
+          "artifact": "ada_relations",
+          "station": "NE",
+          "position": [
+            12,
+            -4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

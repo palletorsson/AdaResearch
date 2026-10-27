@@ -4,7 +4,7 @@
  "authored": true,
  "edited_at": "2026-10-26T16:17:12.865Z",
  "counts": {
-  "term": 213,
+  "term": 220,
   "artifact": 1017,
   "void": 257,
   "hole": 0
@@ -1530,6 +1530,13 @@
     "eu_pallet",
     "pallet_hand_kit",
     "handmade_pallet_5d236d1265a1ffe9",
+    "handmade_pallet_9655afc4589e93d0",
+    "handmade_pallet_a877e9c8746ffbbf",
+    "handmade_pallet_af08aa9ab896c3c8",
+    "handmade_pallet_7d9c97a2adc3ed2d",
+    "handmade_pallet_db7252106477db66",
+    "handmade_pallet_64e72e25950ef277",
+    "handmade_pallet_396e98dd840e21a0",
     "pallet_sorted",
     "tied_pallet"
    ]
@@ -3027,6 +3034,13 @@
   "t:eu_pallet",
   "t:pallet_hand_kit",
   "t:handmade_pallet_5d236d1265a1ffe9",
+  "t:handmade_pallet_9655afc4589e93d0",
+  "t:handmade_pallet_a877e9c8746ffbbf",
+  "t:handmade_pallet_af08aa9ab896c3c8",
+  "t:handmade_pallet_7d9c97a2adc3ed2d",
+  "t:handmade_pallet_db7252106477db66",
+  "t:handmade_pallet_64e72e25950ef277",
+  "t:handmade_pallet_396e98dd840e21a0",
   "t:pallet_sorted",
   "t:tied_pallet",
   "a:kit:logic_assemblage_workshop",
@@ -4100,6 +4114,12 @@
   "t:pallet_hand_kit",
   "t:handmade_pallet_5d236d1265a1ffe9",
   "t:pendulum",
+  "t:handmade_pallet_9655afc4589e93d0",
+  "t:handmade_pallet_a877e9c8746ffbbf",
+  "t:handmade_pallet_af08aa9ab896c3c8",
+  "t:handmade_pallet_7d9c97a2adc3ed2d",
+  "t:handmade_pallet_db7252106477db66",
+  "t:handmade_pallet_64e72e25950ef277",
   "t:deck",
   "t:truck",
   "t:skateboard_2",
@@ -4110,6 +4130,7 @@
   "t:bearing",
   "t:wheel_3",
   "t:skateboard_3",
+  "t:handmade_pallet_396e98dd840e21a0",
   "t:bead_chain",
   "t:exhibit_cube",
   "a:origin",
@@ -7679,6 +7700,114 @@
    "default_index": 522,
    "map": "Vectors_Act4b_Oscillation"
   },
+  "t:handmade_pallet_9655afc4589e93d0": {
+   "kind": "term",
+   "id": "handmade_pallet_9655afc4589e93d0",
+   "label": "Euro pallet / temporary AND + TRUE cone",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_9655afc4589e93d0/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body)",
+   "words": "Pallet parts + board + cinder blocks + gravity ball → a hand-operated AND",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1195,
+   "map": "Logic_Assemblage"
+  },
+  "t:handmade_pallet_a877e9c8746ffbbf": {
+   "kind": "term",
+   "id": "handmade_pallet_a877e9c8746ffbbf",
+   "label": "Euro pallet / temporary AND / reachable track",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_a877e9c8746ffbbf/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body)",
+   "words": "Pallet parts + board + cinder blocks + gravity ball → a hand-operated AND",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1196,
+   "map": "Logic_Assemblage"
+  },
+  "t:handmade_pallet_af08aa9ab896c3c8": {
+   "kind": "term",
+   "id": "handmade_pallet_af08aa9ab896c3c8",
+   "label": "Euro pallet / temporary AND / two-board track",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_af08aa9ab896c3c8/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body)",
+   "words": "Pallet parts + boards + cinder blocks + gravity ball → a hand-operated AND",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1197,
+   "map": "Logic_Assemblage"
+  },
+  "t:handmade_pallet_7d9c97a2adc3ed2d": {
+   "kind": "term",
+   "id": "handmade_pallet_7d9c97a2adc3ed2d",
+   "label": "Euro pallet / temporary AND / two-board open track",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_7d9c97a2adc3ed2d/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body)",
+   "words": "Pallet parts + boards + cinder blocks + gravity ball → a hand-operated AND",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1198,
+   "map": "Logic_Assemblage"
+  },
+  "t:handmade_pallet_db7252106477db66": {
+   "kind": "term",
+   "id": "handmade_pallet_db7252106477db66",
+   "label": "Euro pallet / temporary AND / support AND / two visible gaps",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_db7252106477db66/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body)",
+   "words": "Pallet parts + boards + cinder blocks + gravity ball â†’ a hand-operated AND",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1199,
+   "map": "Logic_Assemblage"
+  },
+  "t:handmade_pallet_64e72e25950ef277": {
+   "kind": "term",
+   "id": "handmade_pallet_64e72e25950ef277",
+   "label": "Euro pallet / temporary AND / support AND / two visible gaps",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_64e72e25950ef277/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body)",
+   "words": "Pallet parts + boards + cinder blocks + gravity ball â†’ a hand-operated AND",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1200,
+   "map": "Logic_Assemblage"
+  },
   "t:deck": {
    "kind": "term",
    "id": "deck",
@@ -8034,6 +8163,24 @@
     "sense": 0
    },
    "default_index": 832,
+   "map": "Logic_Assemblage"
+  },
+  "t:handmade_pallet_396e98dd840e21a0": {
+   "kind": "term",
+   "id": "handmade_pallet_396e98dd840e21a0",
+   "label": "Euro pallet / temporary OR / two supported paths",
+   "seq": "primitives",
+   "seq_order": 1,
+   "chapter": "assemblage",
+   "thumb": "/artifact-gallery/captures/mod_handmade_pallet_396e98dd840e21a0/front.png",
+   "expr": "assemblage(mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(cone) + body, mesh(sphere) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + grabbable, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body, mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + mesh(box) + collider(box) + body)",
+   "words": "Two gravity paths + two removable supports + one cone → a hand-operated OR",
+   "parents": [
+    "t:pallet_hand_kit"
+   ],
+   "logic": false,
+   "lane": "unread",
+   "default_index": 1201,
    "map": "Logic_Assemblage"
   },
   "t:bead_chain": {

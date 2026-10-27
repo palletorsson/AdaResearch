@@ -1,0 +1,102 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Foundations",
+      "title": "GT_Foundations / transfer, 2 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_two_travelers_9_7",
+          "artifact": "two_travelers",
+          "position": [
+            -3,
+            5
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_KonigsbergBridge_3_8",
+          "artifact": "void_gt_bridge",
+          "position": [
+            3,
+            4
+          ],
+          "station": "SE",
+          "height": 0.12,
+          "facing": 0,
+          "scale": 0.1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "GT_Layout",
+      "title": "GT_Layout / transfer, 1 original placement",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_force_directed_layout_10_7",
+          "artifact": "force_directed_layout",
+          "position": [
+            -3,
+            5
+          ],
+          "station": "SW",
+          "height": 2.4,
+          "facing": 0,
+          "scale": 0.3,
+          "config": {
+            "plinth": "0",
+            "pin": "1",
+            "graph": "cube",
+            "layout_seed": "41"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

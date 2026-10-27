@@ -1,0 +1,160 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_GameOfLife",
+      "title": "CA_GameOfLife",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_ca_bridge_6_5",
+          "artifact": "ca_bridge",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "history",
+            "plinth": "0",
+            "follow": "walk"
+          }
+        },
+        {
+          "id": "f1_film_cellular_history_1_15",
+          "artifact": "film_cellular_history",
+          "station": "NE",
+          "position": [
+            5,
+            -3
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_lab_room_6_22",
+          "artifact": "lab_room",
+          "station": "NW",
+          "position": [
+            -7.5,
+            -9.6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "room_width": "8.0",
+            "room_depth": "7.0",
+            "room_height": "3.8",
+            "south_wall_is_glass": "false",
+            "show_back_window": "true",
+            "back_window_size": "6.5,2.4",
+            "show_front_window": "true",
+            "front_window_size": "1.4,0.7",
+            "front_window_offset_x": "-2.4",
+            "front_window_y": "2.55",
+            "show_sliding_door": "true",
+            "door_wall": "east",
+            "door_width": "1.5",
+            "door_height": "2.2",
+            "door_sensor_radius": "2.6",
+            "accent_color": "0.227,0.482,1.0",
+            "signage_top": "WHAT COUNTS AS COMPUTATION?",
+            "signage_sub": "A tape, a head, a set of states",
+            "signage_wall": "back",
+            "signage_height_offset": "-0.55",
+            "show_wall_annotations": "false",
+            "mounted_artifact_scene": "res://commons/artifacts/turing_apparatus/turing_apparatus.tscn"
+          }
+        },
+        {
+          "id": "f1_dark_sphere_4_28",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            2,
+            -13
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_ca_columns_8_28",
+          "artifact": "ca_columns",
+          "station": "NW",
+          "position": [
+            -2,
+            -13
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.2,
+          "config": {}
+        },
+        {
+          "id": "f1_mirrored_cellular_automata_6_32",
+          "artifact": "mirrored_cellular_automata",
+          "station": "NE",
+          "position": [
+            0,
+            -15
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "basin": {
+        "depth": 0.72,
+        "glass": false,
+        "rects": [
+          [
+            -3.6,
+            -2.6,
+            7.2,
+            10.2
+          ]
+        ]
+      }
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

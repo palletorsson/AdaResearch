@@ -1,0 +1,280 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Remove",
+      "title": "Random_Remove",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_remove_random_8_5",
+          "artifact": "remove_random",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "local_grid": "true",
+            "controls": "compact",
+            "control_front": "1.15"
+          }
+        },
+        {
+          "id": "f1_sampling_hoppers_3_6",
+          "artifact": "sampling_hoppers",
+          "station": "SE",
+          "position": [
+            5,
+            6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_removal_arena_8_17",
+          "artifact": "random_removal_arena",
+          "station": "NE",
+          "position": [
+            0,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "columns": "15",
+            "rows": "11",
+            "full_crossing": "true",
+            "tesla_coils": "true",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "basin": {
+        "depth": 3,
+        "glass": false,
+        "rects": [
+          [
+            -7.5,
+            -10.5,
+            15,
+            11
+          ]
+        ]
+      }
+    },
+    {
+      "map": "Randomness_10_PRINT_Algorithm",
+      "title": "Randomness_10_PRINT_Algorithm",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_remove_random_1_2",
+          "artifact": "remove_random",
+          "station": "SE",
+          "position": [
+            3,
+            11
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_pickup_cube_placer_1_3",
+          "artifact": "pickup_cube_placer",
+          "station": "SE",
+          "position": [
+            3,
+            10
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_ten_print_structure_11_3",
+          "artifact": "ten_print_structure",
+          "station": "SW",
+          "position": [
+            -7,
+            10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "wall",
+            "size": "1.1",
+            "cols": "4",
+            "rows": "3",
+            "solid": "on",
+            "seed": "1982",
+            "count": "12",
+            "plate": "none"
+          }
+        },
+        {
+          "id": "f2_ten_print_maze_3d_2_5",
+          "artifact": "ten_print_maze_3d",
+          "station": "SE",
+          "position": [
+            2.2,
+            13.2
+          ],
+          "facing": 180,
+          "height": 3,
+          "scale": 1,
+          "config": {
+            "impression": "character"
+          }
+        },
+        {
+          "id": "f2_clipboard_7_5",
+          "artifact": "clipboard",
+          "station": "SW",
+          "position": [
+            -3,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "ten_print_axioms": "194:1.0"
+          }
+        },
+        {
+          "id": "f2_ten_print_maze_3d_12_5",
+          "artifact": "ten_print_maze_3d",
+          "station": "SW",
+          "position": [
+            -7.3,
+            13.4
+          ],
+          "facing": 180,
+          "height": 3,
+          "scale": 1,
+          "config": {
+            "impression": "character"
+          }
+        },
+        {
+          "id": "f2_film_chance_passage_13_7",
+          "artifact": "film_chance_passage",
+          "station": "SW",
+          "position": [
+            -9,
+            6
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_composition_stochastique_1_8",
+          "artifact": "composition_stochastique",
+          "station": "SE",
+          "position": [
+            3,
+            5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_ten_print_maze_3d_2_15",
+          "artifact": "ten_print_maze_3d",
+          "station": "SE",
+          "position": [
+            2.8,
+            2.3
+          ],
+          "facing": 270,
+          "height": 3,
+          "scale": 1,
+          "config": {
+            "impression": "character"
+          }
+        },
+        {
+          "id": "f2_textile_comparison_7_15",
+          "artifact": "textile_comparison",
+          "station": "NW",
+          "position": [
+            -3,
+            -11.68
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "controls": "compact",
+            "control_front": "-1.7",
+            "control_facing": "-z"
+          }
+        },
+        {
+          "id": "f2_nature_system_demo_13_19",
+          "artifact": "nature_system_demo",
+          "station": "NW",
+          "position": [
+            -21.5,
+            -6
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

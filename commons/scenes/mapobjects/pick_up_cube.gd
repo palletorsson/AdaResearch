@@ -156,6 +156,10 @@ static var shared_sound_duration: float = 0.5
 static var use_shared_parameters: bool = false
 
 func _ready() -> void:
+	# Array builders create their own children, below the placement layer.
+	# Keep those pickups inside the same isolated trial score as direct instances.
+	if not is_instance_valid(score_provider):
+		score_provider = get_tree().get_first_node_in_group("void_trial_score")
 	# Store original position for bobbing motion
 	original_y = global_position.y
 

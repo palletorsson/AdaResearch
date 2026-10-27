@@ -1,0 +1,144 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Sequence_Memory",
+      "title": "ML_Sequence_Memory",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_lstms_vr_9_7",
+          "artifact": "lstms_vr",
+          "station": "NW",
+          "position": [
+            -10,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recurrent": "on"
+          }
+        },
+        {
+          "id": "f1_transformers_vr_9_17",
+          "artifact": "transformers_vr",
+          "station": "SE",
+          "position": [
+            10,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.4,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Generative",
+      "title": "ML_Generative",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_generative_adversarial_networks_gans_vr_9_11",
+          "artifact": "generative_adversarial_networks_gans_vr",
+          "station": "NE",
+          "position": [
+            0,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.65,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Synthesis",
+      "title": "ML_Synthesis",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_anomaly_detection_2_2",
+          "artifact": "anomaly_detection",
+          "station": "NW",
+          "position": [
+            -13,
+            -8
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f3_joint_learn_walk_6_2",
+          "artifact": "joint_learn_walk",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f3_explainable_ai_xai_vr_2_7",
+          "artifact": "explainable_ai_xai_vr",
+          "station": "NE",
+          "position": [
+            13,
+            -8
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 0.6,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

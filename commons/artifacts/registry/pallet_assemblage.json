@@ -1,0 +1,23 @@
+{
+  "artifacts": {
+    "pallet_assemblage": {
+      "lookup_name": "pallet_assemblage",
+      "name": "Euro pallet / take apart and save",
+      "scene": "res://commons/artifacts/pallet_assemblage/pallet_assemblage.tscn",
+      "map_ready": true,
+      "configure_before_ready": true,
+      "default_params": {
+        "term": "pallet_hand_kit",
+        "workshop": true
+      },
+      "description": "Twenty separately grabbable timber parts. Place, test gravity, save a reusable loose assemblage. Saving creates no joints.",
+      "category": "primitives",
+      "tags": [
+        "pallet",
+        "assemblage",
+        "handmade",
+        "prefab"
+      ]
+    }
+  }
+}

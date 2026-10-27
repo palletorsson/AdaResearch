@@ -100,7 +100,13 @@ func _queue_artifact(index: int, item: Dictionary) -> void:
 	pending.append({"index":index,"item":item})
 
 func _build_content(index: int, record: Dictionary, defer_artifacts := false) -> void:
+	var content_trial := Source.floor_trial(building.spec, index, trial_id)
+	var contexts: Array = [content_trial]
+	for item in record.get("copies", []):
+		contexts.append(Source.artifact_trial(building.spec, index, item, trial_id))
 	var floor_root := Node3D.new()
+	if contexts.any(func(context):return context in ["proceduralgeneration_02", "isosurfaces_02", "isosurfaces_03"]):
+		floor_root.set_script(preload("res://commons/void/trials/proceduralgeneration_02/museum_context.gd"))
 	floor_root.name = "Content%d" % index
 	floor_root.position.y = float(building.spec.levels[index])
 	floor_root.set_meta("map", record.map)
@@ -108,11 +114,11 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 	floor_root.set_meta("void_content_floor", index)
 	add_child(floor_root)
 	roots[index] = floor_root
-	if trial_id.is_empty() and str(record.map).begins_with("Trans_"):
+	if trial_id.is_empty() and (contexts.any(func(context):return not str(context).is_empty()) or str(record.map).begins_with("Trans_")):
 		var score := LessonScore.new()
 		score.name = "LessonScore"
 		floor_root.add_child(score)
-	if not trial_id.is_empty() or str(record.map).begins_with("Trans_"):
+	if not content_trial.is_empty() or str(record.map).begins_with("Trans_"):
 		for waypoint in record.get("route", []):
 			var caption := _text(floor_root, waypoint.label, Vector3(waypoint.position[0], float(waypoint.get("height",0))+.025, waypoint.position[1]), .002)
 			caption.rotation_degrees.x = -90
@@ -130,6 +136,9 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 			_unfinished_wall(built_wall, size)
 	for item in record.get("props", []):
 		props["%d/%s" % [index, item.id]] = SetDressing.build(building, floor_root, item, catalog.props[item.kind])
+		if str(record.map).begins_with("CA_") and item.kind=="work_light" and str(item.id).begins_with("ca-stage-light-"):
+			var ca_lamp: Node3D = props["%d/%s"%[index,item.id]].get_node("Prefab")
+			ca_lamp.beam_energy = 3.0;ca_lamp.get_node("WorkBeam").shadow_enabled = false
 		if record.map in ["Point_One", "Point_Coordinates", "Point_Lines", "Point_Trace", "Point_Triangle_Context"] and item.kind == "work_light":
 			# Work lamps provide orientation; interactive objects and retained
 			# traces supply close light. Editor copies retain this floor profile.
@@ -221,6 +230,8 @@ func _unfinished_wall(body: Node3D, size: Vector3) -> void:
 		building.box(body,"ExposedStud",at,Vector3(0.045,size.y,0.045),building.steel)
 
 func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
+	var artifact_trial := Source.artifact_trial(building.spec, index, item, trial_id)
+	if OS.get_environment("VOID_TRACE_ARTIFACTS") == "1": print("VOID_LOAD_BEGIN ", artifact_trial, " / ", item.id)
 	var definition := _definition(str(item.artifact))
 	if definition.is_empty():
 		push_error("Void artifact is not registered: " + str(item.artifact))
@@ -238,10 +249,209 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	mount.rotation_degrees.y = float(item.facing)
 	mount.set_meta("supply", "ceiling_bus")
 	mount.set_meta("station", item.station)
+	# A preview floor is disabled, but Jolt soft bodies need a live space while
+	# their initial transforms are submitted. Residency pauses them afterwards.
+	mount.process_mode = Node.PROCESS_MODE_ALWAYS
 	host.add_child(mount)
-	var artifact := packed.instantiate() as Node3D
+	var artifact: Node3D
+	if item.artifact == "gridcolorizer" and item.get("config", {}).get("lesson", "") == "addresses":
+		artifact = preload("res://commons/void/colour_address_floor.gd").new()
+	else:
+		artifact = packed.instantiate() as Node3D
 	artifact.name = "Artifact"
+	if item.artifact == "entropy_door_dynamics" and bool(item.get("config",{}).get("void_door_frames",false)):
+		artifact.set_script(preload("res://commons/void/entropy_door_walkthrough.gd"))
+	if artifact_trial == "color_flashlight" and item.artifact == "flashlight_demo":
+		artifact.set_script(preload("res://commons/void/trials/color_flashlight/close_station.gd"))
+	if artifact_trial == "wavefunctions_04" and item.artifact == "math_objects":
+		artifact.set_script(preload("res://commons/void/math_gallery_local.gd"))
+	if artifact_trial == "wavefunctions_04" and item.artifact == "resonating_metallophone":
+		artifact.set_script(preload("res://commons/void/metallophone_local.gd"))
+	if artifact_trial in ["wavefunctions_03", "wavefunctions_04", "wavefunctions_05"] and item.artifact == "GlassRack" and item.get("config", {}).has("config"):
+		# Old map tokens call this key "config"; the source loader expects
+		# config_file. Select the authored apparatus before the original _ready.
+		artifact.config_file = str(item.config.config)
+	if artifact_trial in ["wavefunctions_04", "wavefunctions_05"] and item.artifact == "air_music_display_case":
+		artifact.set_script(preload("res://commons/void/air_music_case_local.gd"))
+	if artifact_trial in ["randomness_03", "randomness_05"] and item.artifact == "random_removal_arena":
+		artifact.set_script(preload("res://commons/void/removal_arena_local.gd"))
+	if artifact_trial == "randomness_04" and item.artifact in ["random_object_spawner", "Random_Rotate_Random_XYZ", "galton_board", "dice_throw", "random_walk_leash"]:
+		var random_settings: Dictionary = {}
+		for property in artifact.get_property_list():
+			if int(property.usage)&PROPERTY_USAGE_SCRIPT_VARIABLE and int(property.usage)&PROPERTY_USAGE_EDITOR:
+				random_settings[property.name] = artifact.get(property.name)
+		var random_adapters: Dictionary = {
+			"random_object_spawner": "random_object_spawner_local",
+			"Random_Rotate_Random_XYZ": "rotate_no_grid_preview",
+			"galton_board": "galton_board_local",
+			"dice_throw": "dice_throw_local",
+			"random_walk_leash": "random_walk_leash_local",
+		}
+		artifact.set_script(load("res://commons/void/trials/randomness_04/" + str(random_adapters[item.artifact]) + ".gd"))
+		for key in random_settings: artifact.set(key, random_settings[key])
+	if artifact_trial == "randomness_05" and item.artifact in ["cube_projectile_spawner", "env_one", "sculpt_one"]:
+		# Keep scene-authored settings while adapting only the Void host seams:
+		# falling-field headroom and standalone suns recreated by seed changes.
+		var transfer_settings: Dictionary = {}
+		for property in artifact.get_property_list():
+			if int(property.usage)&PROPERTY_USAGE_SCRIPT_VARIABLE and int(property.usage)&PROPERTY_USAGE_EDITOR:
+				transfer_settings[property.name] = artifact.get(property.name)
+		var transfer_adapters: Dictionary = {
+			"cube_projectile_spawner": "cube_field_local",
+			"env_one": "env_one_local",
+			"sculpt_one": "sculpt_one_local",
+		}
+		artifact.set_script(load("res://commons/void/trials/randomness_05/" + str(transfer_adapters[item.artifact]) + ".gd"))
+		for key in transfer_settings: artifact.set(key, transfer_settings[key])
+	if artifact_trial == "randomness_03" and item.artifact == "nature_system_demo":
+		# Retain scene-authored grid/LOD settings across the script swap. The
+		# adapter maps source local spawn positions into this editable mount.
+		var nature_settings: Dictionary = {}
+		for property in artifact.get_property_list():
+			if int(property.usage)&PROPERTY_USAGE_SCRIPT_VARIABLE and int(property.usage)&PROPERTY_USAGE_EDITOR:
+				nature_settings[property.name] = artifact.get(property.name)
+		artifact.set_script(preload("res://commons/void/trials/randomness_03/nature_demo_local.gd"))
+		for key in nature_settings: artifact.set(key, nature_settings[key])
+	if artifact_trial == "randomness_03" and item.artifact == "remove_random" and not item.get("config", {}).has("local_grid"):
+		artifact.set_script(preload("res://commons/void/trials/randomness_03/remover_unbound_preview.gd"))
+	if artifact_trial == "randomness_03" and item.artifact == "pickup_cube_placer":
+		artifact.set_script(preload("res://commons/void/trials/randomness_03/placer_no_grid_preview.gd"))
+	if artifact_trial == "wavefunctions_05" and item.artifact == "TrigWalkingPath":
+		# The standalone demonstration's camera and 100 m reference floor are
+		# hosting scenery; retain both original moving step lanes and platforms.
+		for host_name in ["Camera3D", "FloorReference"]:
+			var host_node := artifact.get_node_or_null(host_name)
+			if host_node != null:
+				artifact.remove_child(host_node); host_node.free()
+	if artifact_trial == "wavefunctions_03" and item.artifact == "DualBallFMController":
+		artifact.set_script(preload("res://commons/void/fm_controller_local.gd"))
+		for mapper_name in ["Ball1_Carrier", "Ball2_Modulator"]:
+			var mapper: Node = artifact.get_node(mapper_name)
+			var mapper_settings: Dictionary = {}
+			for property in mapper.get_property_list():
+				if int(property.usage)&PROPERTY_USAGE_SCRIPT_VARIABLE and int(property.usage)&PROPERTY_USAGE_EDITOR:
+					mapper_settings[property.name] = mapper.get(property.name)
+			mapper.set_script(preload("res://commons/void/mapper_3d_physics.gd"))
+			for key in mapper_settings: mapper.set(key, mapper_settings[key])
+	if (artifact_trial == "wavefunctions_02" and item.artifact in ["PendulumWave","OscillationCurve","WavePaintings","BigPipeSystem"]) or (artifact_trial in ["wavefunctions_03","wavefunctions_04"] and item.artifact == "BigPipeSystem"):
+		var settings:Dictionary={}
+		for property in artifact.get_property_list():
+			if int(property.usage)&PROPERTY_USAGE_SCRIPT_VARIABLE and int(property.usage)&PROPERTY_USAGE_EDITOR:
+				settings[property.name]=artifact.get(property.name)
+		var adapters:Dictionary={"PendulumWave":"pendulum_wave_local","OscillationCurve":"oscillation_curve_local","WavePaintings":"wave_paintings_local","BigPipeSystem":"pipe_empty_preview"}
+		artifact.set_script(load("res://commons/void/"+adapters[item.artifact]+".gd"))
+		for key in settings:artifact.set(key,settings[key])
+	if item.artifact in ["shelf", "shelf_with_stickers", "grabcolorcollection"]:
+		# These original standalone cameras have no script consumers. Remove
+		# them before tree entry so Godot cannot auto-select one on residency.
+		for view in artifact.find_children("*", "Camera3D", true, false):
+			view.get_parent().remove_child(view);view.free()
+	if artifact is PatternTilePuzzle:
+		# These source aliases share a scene; their museum registry selects
+		# simple, mirror, brick or herringbone before the preview is built.
+		for key in definition.get("config", {}):
+			if key in artifact: artifact.set(key, definition.config[key])
+	if item.artifact == "pattern_architecture":
+		artifact.set_script(preload("res://commons/void/pattern_architecture_receiver.gd"))
+	if item.artifact == "grid_model":
+		artifact.set_script(load("res://commons/void/floor_grid_model.gd"))
+	if item.artifact == "panel_bridge_loom":
+		artifact.set_script(load("res://commons/void/pattern_loom_panels.gd"))
+	if item.artifact == "wall_pattern_gallery":
+		artifact.set_script(load("res://commons/void/pattern_gallery_local.gd"))
+	if item.artifact == "pattern_temple":
+		artifact.set_script(load("res://commons/void/pattern_temple_lifecycle.gd"))
+	if item.artifact == "pattern_artifact":
+		artifact.set_script(load("res://commons/void/pattern_empty_preview.gd"))
+	if item.artifact == "SpringSuspension" and str(item.get("config",{}).get("lesson","")) == "museum_spring":
+		artifact.set_script(load("res://commons/void/spring_suspension_local.gd"))
+	if str(item.artifact).begins_with("force_hall_"):
+		var original_hall: int = artifact.hall_number
+		var original_map: String = artifact.map_id
+		artifact.set_script(load("res://commons/void/force_hall_local.gd"))
+		artifact.hall_number = original_hall
+		artifact.map_id = original_map
+	if item.artifact == "force_capability_lab":
+		artifact.set_script(load("res://commons/void/force_court_local.gd"))
+	if item.artifact == "force_field_zone":
+		artifact.set_script(load("res://commons/void/force_zone_local.gd"))
+	if item.artifact == "force_field":
+		artifact.set_script(load("res://commons/void/force_hazard_local.gd"))
+	if item.artifact == "endless_racer":
+		artifact.set_script(load("res://commons/void/endless_racer_local.gd"))
+	if item.artifact == "science_screen" and str(data.floors[index].map).begins_with("FormFinding_") and artifact_trial == "formfinding_02":
+		artifact.set_script(load("res://commons/void/formfinding_screen_local.gd"))
+	if item.artifact in ["force_play_vortex","force_play_liquids","force_play_friction","force_play_springs","force_play_swings","force_play_constraints","force_play_mutual","force_play_magnet","force_play_tower","force_play_gravity","force_play_support","force_play_bowling","force_play_recoil","force_play_flight"]:
+		var original_kind: String = artifact.kind
+		artifact.set_script(load("res://commons/void/force_play_local.gd"))
+		artifact.kind = original_kind
+	if item.artifact == "gravity_oval":
+		artifact.set_script(load("res://commons/void/gravity_oval_local.gd"))
+	if item.artifact == "colortrails":
+		artifact.set_script(load("res://commons/void/color_trails_local.gd"))
+	if item.artifact == "strobe_lasers":
+		var settings: Dictionary = {}
+		for property in ["beam_count","beam_length","beam_thickness","spread_angle_deg","rotation_speed","strobe_frequency","pulse_speed","laser_color","rainbow_mode","rainbow_speed"]:
+			settings[property] = artifact.get(property)
+		artifact.set_script(load("res://commons/void/strobe_laser_local.gd"))
+		for property in settings: artifact.set(property,settings[property])
+	if item.artifact == "colorballs" and (item.get("config", {}).get("case", "") == "salon" or (artifact_trial == "wavefunctions_02" and not item.get("config", {}).has("case"))):
+		var ball_count: int = artifact.ball_count
+		var spawn_area: Vector3 = artifact.spawn_area_size
+		artifact.set_script(preload("res://commons/void/salon_colorballs.gd"))
+		artifact.ball_count = ball_count
+		artifact.spawn_area_size = spawn_area
+	if item.artifact in ["hand_color_controller", "nail_color_controller"] and item.get("config", {}).get("mount", "") == "salon":
+		var surface: int = artifact.target_surface
+		artifact.set_script(preload("res://commons/void/salon_color_controller.gd"))
+		artifact.target_surface = surface
 	var lines_floor: bool = data.floors[index].map == "Point_Lines"
+	if artifact_trial == "isosurfaces_03" and item.artifact == "iso_specimen_stage":
+		artifact.set_script(preload("res://commons/void/trials/isosurfaces_03/setup_marker.gd"))
+	if artifact_trial == "shaders_02" and item.artifact == "shader_state_chamber":
+		artifact.set_script(preload("res://commons/void/trials/shaders_02/chamber_mobile.gd"))
+	if artifact_trial == "qfeplaboratory_03" and item.artifact == "chaos_particles":
+		artifact.set_script(preload("res://commons/void/trials/qfeplaboratory_03/chaos_image_preview.gd"))
+	if artifact_trial == "qfeplaboratory_02" and item.artifact == "particle_chaos":
+		artifact.set_script(preload("res://commons/void/trials/qfeplaboratory_02/particle_image_preview.gd"))
+	if artifact_trial == "machinelearning_02" and item.artifact == "computer_vision_vr":
+		var authored: Dictionary = {}
+		for property in artifact.get_property_list():
+			if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE and property.usage & PROPERTY_USAGE_STORAGE:
+				authored[property.name] = artifact.get(property.name)
+		artifact.set_script(preload("res://commons/void/trials/machinelearning_02/vision_rails_local.gd"))
+		for property in authored: artifact.set(property, authored[property])
+	if artifact_trial == "softbodies_03" and item.artifact == "reaction_diffusion":
+		artifact.set_script(preload("res://commons/void/trials/softbodies_03/reaction_sprite_preview.gd"))
+	if artifact_trial == "softbodies_02" and item.artifact == "rounded_softbody_test":
+		var specimen := artifact.get_node("RoundedSoftBody")
+		var authored: Dictionary = {}
+		for property in specimen.get_property_list():
+			if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE and property.usage & PROPERTY_USAGE_STORAGE:
+				authored[property.name] = specimen.get(property.name)
+		specimen.set_script(preload("res://commons/void/trials/softbodies_02/rounded_rest_local.gd"))
+		for property in authored: specimen.set(property, authored[property])
+	if artifact_trial == "lsystems_02" and item.artifact == "grid_substrate_runner":
+		artifact.set_script(preload("res://commons/void/trials/lsystems_02/grid_runner_local.gd"))
+	if artifact_trial == "fractals_02" and item.artifact == "box_counting_dimension":
+		artifact.set_script(preload("res://commons/void/trials/fractals_02/box_counting_local.gd"))
+	if artifact_trial == "cellularautomata_03" and item.artifact == "crossway_ca":
+		artifact.set_script(preload("res://commons/void/trials/cellularautomata_03/crossway_preview.gd"))
+	if artifact_trial == "cellularautomata_03" and item.artifact == "ca_chair_test":
+		artifact.get_node("CAGrid").set_script(preload("res://commons/void/trials/cellularautomata_03/chair_grid.gd"))
+	if artifact_trial == "cellularautomata_03" and item.artifact == "disease_spread_ca":
+		artifact.set_script(preload("res://commons/void/trials/cellularautomata_03/disease_preview.gd"))
+	if artifact_trial == "cellularautomata_03" and item.artifact == "volumetric_fog_ca":
+		var fog_grid: Vector3i = artifact.grid_size
+		var fog_interval: float = artifact.update_interval
+		artifact.set_script(preload("res://commons/void/trials/cellularautomata_03/fog_preview.gd"))
+		artifact.grid_size = fog_grid
+		artifact.update_interval = fog_interval
+	if bool(item.get("config",{}).get("ca_live",false)):
+		if item.artifact=="disease_spread_ca":artifact.set_script(preload("res://commons/void/ca_sir_live.gd"))
+		elif item.artifact=="crack_propagation_ca":artifact.set_script(preload("res://commons/void/ca_crack_live.gd"))
+	if item.artifact=="lattice_gas_pump" and bool(item.get("config",{}).get("wind_tunnel_study",false)):
+		artifact.set_script(preload("res://commons/artifacts/lattice_gas_pump/wind_tunnel_study.gd"))
 	var transformation: bool = str(data.floors[index].map).begins_with("Trans_")
 	if data.floors[index].map in ["Point_Lines", "Point_Trace"] and item.artifact == "player_trace":
 		# Keep the original recorder, with the same floor-aware adapter as the
@@ -251,32 +461,172 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		# Grid's walking comparison keeps its original grid, unrounded ghost
 		# and colour settings, while tracking the actual body on this floor.
 		artifact.preserve_museum_style = not lines_floor
-	if (not trial_id.is_empty() or lines_floor or transformation) and "health_provider" in artifact:
+	if (not artifact_trial.is_empty() or lines_floor or transformation) and "health_provider" in artifact:
 		artifact.health_provider = get_tree().get_first_node_in_group("void_health")
-	if not trial_id.is_empty() and "score_provider" in artifact:
-		artifact.score_provider = get_tree().get_first_node_in_group("void_trial_score")
+	if not artifact_trial.is_empty() and "score_provider" in artifact:
+		artifact.score_provider = host.get_node_or_null("LessonScore") if trial_id.is_empty() else get_tree().get_first_node_in_group("void_trial_score")
 	elif transformation and "score_provider" in artifact:
 		artifact.score_provider = host.get_node("LessonScore")
 	artifact.scale = Vector3.ONE * float(item.scale)
-	var museum_import := bool(definition.get("museum_import", false)) or not trial_id.is_empty() or transformation
+	var source_config: Dictionary = item.get("config", {}).duplicate(true)
+	if definition.has("delegate_to"):
+		# Named museum variants are scenes plus their declared presets. Token
+		# overrides still win; do not collapse all looms/mills to the host default.
+		source_config = definition.get("default_params", {}).duplicate(true)
+		source_config.merge(definition.get("delegate_params", {}), true)
+		source_config.merge(item.get("config", {}), true)
+	var museum_import := bool(definition.get("museum_import", false)) or not artifact_trial.is_empty() or transformation
 	if museum_import:
 		Identity.stamp(artifact, str(item.artifact), definition)
 		artifact.set_meta("void_source", definition.scene)
 		artifact.rotation_degrees.y = float(item.get("config", {}).get("museum_yaw", 0))
-		for key in item.get("config", {}):
-			artifact.set_meta("config_" + str(key), item.config[key])
+		for key in source_config:
+			artifact.set_meta("config_" + str(key), source_config[key])
 	var before_ready := bool(definition.get("configure_before_ready", false))
+	if not item.get("interface", {}).is_empty() and "finish" in artifact:
+		# Use the existing kit palette before the original builds its controls.
+		artifact.finish = "rams"
+		if "wear" in artifact: artifact.wear = 0.035
+	var runtime_config: Dictionary = source_config
+	if artifact_trial in ["cellularautomata_03", "fractals_02", "lsystems_02", "swarmintelligence_02"] and item.artifact in ["catalyst_vent", "catalyst_prompter_box"] and str(source_config.get("sequence", "")) == "auto":
+		# The museum scene manager supplies this context. Separate Void trials
+		# resolve it locally, without changing global progression or source tokens.
+		runtime_config = source_config.duplicate(true)
+		runtime_config.sequence = {"fractals_02":"fractals", "lsystems_02":"lsystems", "cellularautomata_03":"cellularautomata", "swarmintelligence_02":"swarmintelligence"}[artifact_trial]
+	if artifact_trial in ["randomness_03", "randomness_05"] and item.artifact == "random_removal_arena":
+		before_ready = true
+	if artifact_trial == "noise_02" and item.artifact in ["perlin_terrain_sculptor", "shader_noise_space", "cellular_womb_space", "cellular_atrium_space"]:
+		before_ready = true
+	if artifact_trial == "noise_03" and item.artifact in ["simplex_noise", "perlin_noise", "box_shell_space", "box_atrium_space"]:
+		before_ready = true
+	if artifact_trial == "cellularautomata_03" and item.artifact in ["self_organization_ca", "rd_artifact", "volumetric_fog_ca", "disease_spread_ca"]:
+		# Source studies must replace standalone builds before the first frame;
+		# the authored fog preview_grid must cap allocation before _ready.
+		before_ready = true
+	if artifact_trial == "softbodies_02" and item.artifact in ["cloth_straps", "softbody_gallery_part2"]:
+		# Match the museum's pre-ready token config. Avoid building/discarding
+		# live Jolt cloth or an unwanted gallery part during initial loading.
+		before_ready = true
 	if before_ready and artifact.has_method("apply_grid_config"):
 		artifact.scale = Vector3.ONE
-		artifact.call("apply_grid_config", item.get("config", {}))
+		artifact.call("apply_grid_config", runtime_config)
+	if item.artifact == "standalone_disco" and artifact.has_node("DiscoFloor"):
+		# The original wrapper is unscripted. Configure its grid before _ready
+		# so it builds source spacing/collision once, without a deferred rebuild.
+		artifact.get_node("DiscoFloor").call("apply_grid_config", item.get("config", {}))
+	if item.artifact == "force_cube" and source_config.get("lesson","") == "force_as_place":
+		# The museum grounds centred pickables. Keep the source token height,
+		# with the 40 cm probe resting above the slab instead of intersecting it.
+		artifact.position.y = 0.22 * float(item.scale)
+	if artifact_trial == "noise_03" and item.artifact == "perlin_noise_terrain":
+		# The original pair study finds its terrain support by scene-root name.
+		# Keep the required Artifact root name and supply an equivalent local anchor.
+		var terrain_anchor := Node3D.new()
+		terrain_anchor.name = "PerlinNoiseTerrain"
+		artifact.add_child(terrain_anchor)
 	mount.add_child(artifact)
+	if artifact_trial == "cellularautomata_03" and item.artifact == "ca_chair_test":
+		var chair_controls := Node3D.new()
+		chair_controls.set_script(preload("res://commons/void/trials/cellularautomata_03/chair_controls.gd"))
+		chair_controls.name = "VoidChairControls"
+		artifact.add_child(chair_controls)
+	if artifact_trial == "randomness_04" and item.artifact in ["hardware_entropy_decay", "random_decay_multimesh", "distribution_sampler", "galton_board", "pixel_cloud"]:
+		# Locomotion keys must not trigger source-demo keyboard fallbacks.
+		# Original pointer panels remain active.
+		artifact.set_process_input(false)
+	if (item.artifact == "viscosity_layers" or (data.floors[index].map == "VFM_08_Arena" and item.artifact in ["sentry_turret","queer_cylinder_target","newton_cradle"])) and float(item.get("height",0)) > 0:
+		# Reattach the original hall's pedestal to this independently editable exhibit.
+		preload("res://commons/artifacts/rotation_studies/parts.gd").box(artifact,"OriginalHallPedestal",Vector3(1.9,0.82,1.4),Vector3(0,0.41-float(item.height),0),Color("e9e4d8"))
+	if artifact is PatternTilePuzzle:
+		preload("res://commons/void/pattern_tile_desktop_hook.gd").attach(artifact)
+	if artifact is VRTileEditor and artifact._puzzle is PatternTilePuzzle:
+		preload("res://commons/void/pattern_tile_desktop_hook.gd").attach(artifact._puzzle)
+	if item.artifact == "ball_painting_demo" and str(item.get("config", {}).get("tools", "")) == "spray":
+		# The source cans use bitmask 3 (world layers 1/2). Both Void hands
+		# select pickables on layer 3 (bit 4). Keep the original tool and dock;
+		# add that layer and retain it when XRTools restores a dropped can.
+		for can in artifact.get_node("PaintBalls").get_children():
+			if can is RigidBody3D and can.has_method("on_desktop_grab"):
+				can.set_collision_layer_value(3, true)
+				can.original_collision_layer = can.collision_layer
+	if item.artifact == "standalone_disco":
+		# Same readable receiver finish as the existing Void tiling trial:
+		# constant white emission would wash the black/white values to pale grey.
+		var receiver: Node3D = artifact.get_node("DiscoFloor")
+		var finish: StandardMaterial3D = receiver.multimesh_instance.material_override
+		finish.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		finish.emission_enabled = false
+	for soft in artifact.find_children("*", "SoftBody3D", true, false):
+		soft.force_update_transform()
+	if artifact is SoftBody3D: artifact.force_update_transform()
+	mount.process_mode = Node.PROCESS_MODE_INHERIT
 	# A scene may rename its own root in _ready (geometry_noise does); the mount's
 	# child keeps the name every reader of this layer looks up.
 	if artifact.name != "Artifact": artifact.name = "Artifact"
 	if before_ready:
 		artifact.scale *= float(item.scale)
-	if not before_ready and artifact.has_method("apply_grid_config") and not item.get("config", {}).is_empty():
-		artifact.call("apply_grid_config", item.config)
+	if not before_ready and artifact.has_method("apply_grid_config") and not source_config.is_empty():
+		artifact.call("apply_grid_config", runtime_config)
+	if artifact_trial in ["randomness_02", "randomness_04", "randomness_05"]:
+		# These source tokens include their museum glass enclosure/compact
+		# console. Reuse the original furnishing adapter, not just its metadata.
+		preload("res://commons/artifacts/randomness_space/museum_exhibit_stage.gd").install(artifact, source_config)
+	if artifact_trial == "cellularautomata_03" and item.artifact == "sierpinski_pyramid":
+		# Endless Museum seats the built mesh on its authored plinth (+3 cm).
+		# Preserve that support for this centred recursive construction rather
+		# than burying its lower calls in the slab. Layout height/scale stay intact.
+		var lower_y: float = INF
+		for mesh in artifact.find_children("*", "MeshInstance3D", true, false):
+			if mesh.mesh != null: lower_y = minf(lower_y, (mesh.global_transform * mesh.get_aabb()).position.y)
+		var ground_y: float = mount.global_position.y
+		if lower_y < INF: artifact.position.y += ground_y + .28 - lower_y
+		var plinth: Node3D = preload("res://commons/artifacts/station/station_plinth.tscn").instantiate()
+		plinth.name = "OriginalMuseumPlinth"
+		plinth.top_height = .25
+		plinth.width_cells = 4
+		plinth.depth_cells = 4
+		plinth.scale = Vector3.ONE / float(item.scale)
+		artifact.add_child(plinth)
+		plinth.global_position = Vector3(mount.global_position.x, ground_y, mount.global_position.z)
+	if item.artifact == "panel_bridge_loom":
+		# Keep its original 3D panels; the standalone demo HUD and R reload
+		# shortcut must not cover other floors or intercept Void's retry.
+		artifact.set_process_unhandled_input(false)
+		if artifact.has_node("InfoOverlay"): artifact.get_node("InfoOverlay").hide()
+	if item.get("config", {}).get("interface_style", "") == "architectural":
+		preload("res://commons/void/opening_interface_hardware.gd").attach(artifact, str(item.artifact))
+		# Imported monitors can rebuild once on deferred configuration. Fit the
+		# original final screen, not the just-retired viewport from _ready.
+		if str(item.artifact) in ["line_black_box","two_point_ruler","sketch_monitor","science_screen","line_space_workshop"]:
+			artifact.set_meta("mounted_interface",true)
+			preload("res://commons/void/lines_interface_hardware.gd").attach.call_deferred(artifact,str(item.artifact))
+		if str(item.artifact) in ["hand_telemetry_diptych","trace_paint_box"]:
+			artifact.set_meta("mounted_interface",true)
+			preload("res://commons/void/trace_interface_hardware.gd").attach_later(artifact,str(item.artifact))
+	if bool(item.get("config", {}).get("entropies_staging", false)):
+		preload("res://commons/void/entropies_staging.gd").attach(artifact,str(item.artifact))
+	if bool(item.get("config", {}).get("entropy_workshop_hardware", false)):
+		artifact.set_meta("mounted_interface",true)
+		preload("res://commons/void/entropy_workshop_hardware.gd").attach_later(artifact,str(item.artifact))
+	if item.artifact=="lab_room" and bool(source_config.get("void_auto_door",false)):
+		var ca_door := Node.new();ca_door.name = "CuratedDoorConnection"
+		ca_door.set_script(preload("res://commons/void/ca_curated_door.gd"));artifact.add_child(ca_door)
+	if item.artifact=="game_of_life_petri" and source_config.has("curated_console"):
+		var ca_console := Node.new();ca_console.name = "CuratedOperatingRim"
+		ca_console.set_script(preload("res://commons/void/ca_life_controls.gd"));artifact.add_child(ca_console)
+	if item.artifact=="structure_growth" and source_config.has("curated_console"):
+		var state_console := Node.new();state_console.name = "CuratedOperatingRim"
+		state_console.set_script(preload("res://commons/void/ca_state_controls.gd"));artifact.add_child(state_console)
+	if item.artifact=="ca_bridge" and source_config.has("curated_console"):
+		var history_console := Node.new();history_console.name = "CuratedHistoryDesk"
+		history_console.set_script(preload("res://commons/void/ca_history_controls.gd"));artifact.add_child(history_console)
+	var interface_specification: Dictionary = item.get("interface", {})
+	if str(interface_specification.get("style", "")) in ["ceiling_instrument", "pillar_instrument"]:
+		# The adapter fits the completed museum apparatus and never replaces its
+		# controls. Mark it now so the generic floor lead is not built while the
+		# measured ceiling carrier waits for its two settling frames.
+		artifact.set_meta("mounted_interface", true)
+		preload("res://commons/void/randomness_interface_hardware.gd").attach_later(artifact, interface_specification)
 	if museum_import:
 		# Original standalone viewpoints/suns must not replace the visitor or sky.
 		for camera in artifact.find_children("*", "Camera3D", true, false):
@@ -297,7 +647,13 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		var point: Node3D = artifact._find_point()
 		if point != null: point.origin_point = artifact.global_position
 	exhibits["%d/%s" % [index, item.id]] = mount
+	if OS.get_environment("VOID_TRACE_ARTIFACTS") == "1": print("VOID_LOAD_END ", artifact_trial, " / ", item.id)
+	# Retrofitted instruments carry their own rigid supply and structural mount.
+	if artifact.has_node("ArchitecturalHardware/HardwareSupply") or artifact.get_meta("mounted_interface",false): return
 	# These cables and support rods are decorative, not interaction dependencies.
+	# Passive construction solids (including copied Polyhedra shaft barriers)
+	# need no electrical feed or instrument support rods.
+	if artifact.has_meta("construction_definition"): return
 	if index == 0 or building.abstract_floor(index): return
 	if bool(data.floors[index].get("supply_leads",true)):
 		var lead := Node3D.new()

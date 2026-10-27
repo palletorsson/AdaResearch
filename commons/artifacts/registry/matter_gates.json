@@ -1,0 +1,37 @@
+{
+  "registry_info": {
+    "name": "Matter Gates",
+    "description": "Physical logic assembled from the existing construction kit."
+  },
+  "artifacts": {
+    "matter_and": {
+      "lookup_name": "matter_and",
+      "name": "Matter / AND",
+      "scene": "res://commons/artifacts/matter_gates/matter_and.tscn",
+      "description": "Tabletop physical AND, 1.8 by 0.85 metres: two 12 cm cubes fill real gaps. A white marble reaches the receiver only when both gaps support it. Hand-sized front controls and lift grip; individually editable construction parts.",
+      "qfep_connection": "The clean conjunction is a prediction. Contact, friction, dimensions and timing determine whether the physical construction fulfils it; an observed mismatch stays visible.",
+      "signals": [
+        "result_observed",
+        "interaction_completed"
+      ],
+      "interactions": [
+        "Drop X",
+        "Drop Y",
+        "Release ball",
+        "Reset supports and ball"
+      ],
+      "parameters": {
+        "parts": "Named lab-editor part positions and rotations"
+      },
+      "category": "logic",
+      "complexity": "beginner",
+      "tags": [
+        "logic",
+        "and",
+        "construction",
+        "gravity",
+        "matter"
+      ]
+    }
+  }
+}

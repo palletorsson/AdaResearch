@@ -14,6 +14,8 @@ signal clicked
 var _original_scale: Vector3
 var _is_hovering: bool = false
 var _hover_timer: float = 0.0
+var _pointer_inside := false
+var _dwell_needs_rearm := false
 
 var _audio_player: AudioStreamPlayer3D
 var _hover_sound: AudioStream
@@ -68,6 +70,9 @@ func _setup_audio() -> void:
 func _process(delta: float) -> void:
 	if not is_visible_in_tree():
 		return
+	if _dwell_needs_rearm:
+		_dwell_needs_rearm = false
+		_is_hovering = _pointer_inside
 
 	if _is_hovering:
 		_hover_timer += delta
@@ -103,10 +108,10 @@ func pointer_event(event: XRToolsPointerEvent) -> void:
 			pointer_exited()
 			_current_controller = null # Clear controller on exit
 		XRToolsPointerEvent.Type.PRESSED:
-			# We handle click via hover, but we can keep this for direct click if needed
-			pass
+			_trigger_click()
 
 func pointer_entered(activate_by_dwell := true) -> void:
+	_pointer_inside = activate_by_dwell
 	_is_hovering = activate_by_dwell
 	_hover_timer = 0.0
 	
@@ -126,6 +131,8 @@ func pointer_entered(activate_by_dwell := true) -> void:
 			interaction_cube.material_override.set_shader_parameter("emission_strength", 3.0)
 
 func pointer_exited() -> void:
+	_pointer_inside = false
+	_dwell_needs_rearm = false
 	_is_hovering = false
 	_hover_timer = 0.0
 	
@@ -144,7 +151,18 @@ func pointer_exited() -> void:
 			interaction_cube.material_override.set_shader_parameter("emissionColor", color)
 			interaction_cube.material_override.set_shader_parameter("emission_strength", 1.0)
 
+## A pooled row can change from a sequence to a map under the same XR ray.
+## XRTools sees the same collider, so it does not send a fresh ENTERED event.
+func prepare_new_action() -> void:
+	var still_pointing := _pointer_inside
+	pointer_exited()
+	_pointer_inside = still_pointing
+	_dwell_needs_rearm = still_pointing
+
 func _trigger_click() -> void:
+	_is_hovering = false
+	_hover_timer = 0.0
+	_dwell_needs_rearm = false
 	clicked.emit()
 	
 	# Trigger click haptic

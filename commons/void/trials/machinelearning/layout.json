@@ -1,0 +1,69 @@
+{
+  "status": "Machine Learning / transfer before curation",
+  "width": 116,
+  "depth": 48,
+  "storey_height": 8,
+  "slab_thickness": 0.36,
+  "levels": [
+    0,
+    -8,
+    -16,
+    -24
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -56,
+    -28,
+    -14,
+    -5,
+    5,
+    14,
+    28,
+    56
+  ],
+  "column_z": [
+    -22,
+    22
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Canopy",
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 13,
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "A",
+      "2": "A",
+      "3": "A"
+    }
+  },
+  "route_note": "Transfer first. Preserve original artifacts; curate after inspection.",
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract",
+    "3": "abstract"
+  }
+}

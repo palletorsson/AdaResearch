@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "scale_zoetrope": {
+      "lookup_name": "scale_zoetrope",
+      "name": "Hand wheel / scale zoetrope",
+      "label": "Hand wheel / scale zoetrope",
+      "scene": "res://commons/artifacts/scale_zoetrope/scale_zoetrope.tscn",
+      "description": "A five-metre black-steel disk carries 24 fixed off-white cubes with dark outlines at two metres above the floor. Pink crank grips and fader caps mark the touch surfaces. The motor yields to your hand. Starts at 60 RPM and 12 Hz.",
+      "qfep_connection": "Discrete fixed objects and the sampling clock produce apparent change. The open disk exposes this construction from every side.",
+      "category": "wavefunctions",
+      "dev_category": "wavefunctions",
+      "complexity": "beginner",
+      "tags": [
+        "zoetrope",
+        "scale",
+        "sequence",
+        "manual",
+        "shutter"
+      ],
+      "interactions": [
+        "Drag the crank to override the motor; release to resume.",
+        "RPM and CLOCK faders set rotation and local sampling.",
+        "RUN, SHUTTER, MATCH and REVERSE buttons.",
+        "MATCH advances one cube per selected clock sample; display matching uses measured FPS."
+      ],
+      "parameters": {
+        "initial_angle": "Starting wheel and disk phase in degrees.",
+        "service_open": "Open the side panel on loading.",
+        "auto_run": "Resume automatic motion .65s after releasing the hand wheel.",
+        "motor_rpm": "0..3600 revolutions per minute; match high display rates.",
+        "sample_hz": "0: display frames. Local clock presets:6,12,24,30,60,90,120Hz. This does not change game FPS.",
+        "shutter_enabled": "Optional physical shutter; initially off."
+      },
+      "footprint": [
+        5.04,
+        2.6,
+        5.85
+      ],
+      "museum_import": true
+    }
+  }
+}

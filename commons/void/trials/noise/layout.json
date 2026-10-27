@@ -1,13 +1,14 @@
 {
-  "status": "Noise trial: Random_Noise_Types on one floor between a canopy and a catch floor.",
+  "status": "Noise / first two maps",
   "width": 42,
-  "depth": 18,
+  "depth": 32,
   "storey_height": 6,
   "slab_thickness": 0.36,
   "levels": [
     0,
     -6,
-    -12
+    -12,
+    -18
   ],
   "shafts": [
     {
@@ -30,8 +31,8 @@
     20
   ],
   "column_z": [
-    -7,
-    7
+    -14,
+    14
   ],
   "column_width": 0.9,
   "service_x": [
@@ -41,7 +42,8 @@
   "service_z": -4.2,
   "floor_roles": [
     "Trial canopy",
-    "Random_Noise_Types / which rules keep acting",
+    "Noise Types / which rules keep acting?",
+    "Noise Columns / what keeps a body changing?",
     "Catch floor"
   ],
   "descent": {
@@ -50,12 +52,16 @@
     "pad_shaft": "B",
     "boards_per_pad": 2,
     "pad_shafts": {
-      "1": "B",
-      "2": "A"
+      "1": "A",
+      "2": "A",
+      "3": "A"
     }
   },
-  "route_note": "Arrive through B into the east wing (point, bench, surface, galleries); return along the south strip; the weather's three glazed walls partition the central bay; leave through A.",
+  "route_note": "Six original instruments then three changing-body studies. Wide walk-around viewing walls; both shafts and corner pads remain open.",
   "floor_styles": {
-    "2": "abstract"
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract",
+    "3": "abstract"
   }
 }

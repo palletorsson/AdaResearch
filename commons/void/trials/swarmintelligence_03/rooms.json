@@ -1,0 +1,117 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "title": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_particle_swarm_walk_8_9",
+          "artifact": "particle_swarm_walk",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_tick_flock_1_13",
+          "artifact": "tick_flock",
+          "station": "SW",
+          "position": [
+            -18,
+            6
+          ],
+          "facing": 270,
+          "height": 1.4,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_fitness_landscape_politics_4_19",
+          "artifact": "fitness_landscape_politics",
+          "station": "NW",
+          "position": [
+            -14,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_self_organizing_patterns_12_19",
+          "artifact": "self_organizing_patterns",
+          "station": "NE",
+          "position": [
+            14,
+            -8
+          ],
+          "facing": 0,
+          "height": 0.65,
+          "scale": 0.35,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "title": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_population_account_walk_8_10",
+          "artifact": "population_account_walk",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

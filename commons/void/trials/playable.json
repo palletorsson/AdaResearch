@@ -30,11 +30,11 @@
       }
     },
     "noise": {
-      "title": "Noise / Random Noise Types",
-      "label": "RANDOM NOISE TYPES",
-      "notice": "Point, bench, galleries in the east wing. Then walk alongside three glazed walls.\nR or B: reset the encounter. M or left X: menu.",
+      "title": "Noise / rules and changing bodies",
+      "label": "NOISE / TWO FLOORS",
       "map": "Random_Noise_Types",
       "start_floor": 1,
+      "notice": "Carry the framed point; compare admitted neighbours. Listen to the two noise sculptures.\nWalk around the three viewing walls. Shaft A leads to the column comparison.\nFloor 2: FREEZE, REVEAL, SPIN and MARBLE. R / B retries your current floor.",
       "rooms": "res://commons/void/trials/noise/rooms.json",
       "layout": "res://commons/void/trials/noise/layout.json",
       "scene": "res://commons/void/trials/noise/trial.tscn",
@@ -42,13 +42,3070 @@
       "retry_floors": {
         "0": 1,
         "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          -13,
+          0.06,
+          10
+        ],
+        "2": [
+          0,
+          0.06,
+          6
+        ]
+      }
+    },
+    "array_tutorial": {
+      "title": "Arrays / an address survives an absence",
+      "label": "ARRAY / ADDRESSED SUPPORT",
+      "notice": "32 addresses; a 7 x 7 grid; shaft B: hand-controlled indices.\nShaft A: 6 x 6 x 6 pickups. Fly inside the box; gravity outside.\nDesktop: look + WASD, Space up, Ctrl down. VR: aim left hand + left stick.",
+      "map": "Array",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/array_tutorial/rooms.json",
+      "layout": "res://commons/void/trials/array_tutorial/layout.json",
+      "scene": "res://commons/void/trials/array_tutorial/trial.tscn",
+      "models": "/void-trials/array_tutorial/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
         "2": 1
       },
       "spawn_points": {
         "1": [
-          13.4,
+          -18,
           0.06,
-          1.9
+          3
+        ]
+      }
+    },
+    "color": {
+      "title": "Colour / a celebration of 23 columns",
+      "label": "COLOUR / A CELEBRATION",
+      "lighting_adapter": "res://commons/void/trials/color/lighting.gd",
+      "notice": "23 original columns: colour rules, shape families, twists, tapers and gallery compositions.\nOn the first four: RULE changes the assignment; PART + selects; PAINT recolours one part.\nDesktop: aim and click. VR: point and trigger. RESET restores; R / B retries.",
+      "map": "Color_Context_Placed",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/color/rooms.json",
+      "layout": "res://commons/void/trials/color/layout.json",
+      "scene": "res://commons/void/trials/color/trial.tscn",
+      "models": "/void-trials/color/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          2.5
+        ]
+      }
+    },
+    "color_flashlight": {
+      "title": "Colour / Flashlight",
+      "label": "COLOUR / LIGHT CHANGES COLOUR",
+      "map": "Color_Flashlight",
+      "start_floor": 1,
+      "notice": "Four coloured lamps: carry, aim, release. Walk into the changing white room and sky opening.\nFive switches: combine pink lights; compare LIGHT / MATERIAL.\nDesktop: right-click carry/drop, left-click switches. VR: grip carry, trigger switches.",
+      "lighting_adapter": "res://commons/void/trials/color_flashlight/lighting.gd",
+      "rooms": "res://commons/void/trials/color_flashlight/rooms.json",
+      "layout": "res://commons/void/trials/color_flashlight/layout.json",
+      "scene": "res://commons/void/trials/color_flashlight/trial.tscn",
+      "models": "/void-trials/color_flashlight/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          -16,
+          0.06,
+          2.7
+        ]
+      }
+    },
+    "tiling": {
+      "title": "Tiling / same floor, another palette",
+      "label": "TILING / PATTERN DISCO",
+      "map": "Pattern_Disco",
+      "start_floor": 1,
+      "notice": "HOLD the floor, then change COLOUR. ONE STEP changes values instead.\nWalk across the moving pattern: the support stays still.\nThe sequencer has its own PLAY and STOP. Click on desktop; point and trigger in VR.",
+      "rooms": "res://commons/void/trials/tiling/rooms.json",
+      "layout": "res://commons/void/trials/tiling/layout.json",
+      "scene": "res://commons/void/trials/tiling/trial.tscn",
+      "models": "/void-trials/tiling/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          7.5
+        ]
+      }
+    },
+    "forces": {
+      "title": "Vectors & Forces / vectors in your hands",
+      "label": "VECTORS / TWO POINTS MAKE A RELATION",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "start_floor": 1,
+      "notice": "Move the black points: length and direction, then addition, then signed projection.\nRight-click to carry/drop on desktop; grip in VR. RESET restores each station.\nThese arrows describe a relation. They do not yet apply a force.",
+      "rooms": "res://commons/void/trials/forces/rooms.json",
+      "layout": "res://commons/void/trials/forces/layout.json",
+      "scene": "res://commons/void/trials/forces/trial.tscn",
+      "models": "/void-trials/forces/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          -3,
+          0.06,
+          5.6
+        ]
+      }
+    },
+    "formfinding": {
+      "title": "Form Finding / Where Does Downhill Take You?",
+      "label": "FORM FINDING / ONE LOCAL STEP",
+      "map": "FormFinding_Descent",
+      "start_floor": 1,
+      "notice": "Predict the gold point's next position, then press STEP. Compare START and SURFACE.\nRATE changes the step; STOP changes the tolerance. PARTS and RULE reveal the calculation.\nClick on desktop; point and trigger in VR. R / B retries the floor.",
+      "rooms": "res://commons/void/trials/formfinding/rooms.json",
+      "layout": "res://commons/void/trials/formfinding/layout.json",
+      "scene": "res://commons/void/trials/formfinding/trial.tscn",
+      "models": "/void-trials/formfinding/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          6.4
+        ]
+      }
+    },
+    "wavefunctions": {
+      "title": "Wave Functions / The cube comes back",
+      "label": "WAVE FUNCTIONS / WHAT RETURNS",
+      "map": "WaveFunctions_Intro",
+      "start_floor": 1,
+      "notice": "Watch the clock cube, then take the pendulum bob aside and release.\nSame angle, opposite velocity: watch the ring count each crossing.\nThe blue cube and screen follow that pendulum. Right-click / VR grip to hold and release.",
+      "rooms": "res://commons/void/trials/wavefunctions/rooms.json",
+      "layout": "res://commons/void/trials/wavefunctions/layout.json",
+      "scene": "res://commons/void/trials/wavefunctions/trial.tscn",
+      "models": "/void-trials/wavefunctions/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          -3,
+          0.06,
+          5.8
+        ]
+      }
+    },
+    "randomness": {
+      "title": "Randomness / seeds and different entropies",
+      "label": "RANDOMNESS / TWO FLOORS",
+      "map": "Random_Definition",
+      "start_floor": 1,
+      "notice": "Touch a point. REPLAY repeats its kept path. The cabinet compares the same seed with another draw or colour mapping.\nGrip / right-click carries the black return point. Descend through shaft A to the chair studies.\nFloor 2: compare colour draws, arrangements, recipes, door histories, heat and guesses. R / B retries your current floor.",
+      "rooms": "res://commons/void/trials/randomness/rooms.json",
+      "layout": "res://commons/void/trials/randomness/layout.json",
+      "scene": "res://commons/void/trials/randomness/trial.tscn",
+      "models": "/void-trials/randomness/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          -2,
+          0.06,
+          10
+        ],
+        "2": [
+          0,
+          0.06,
+          14.8
+        ]
+      }
+    },
+    "shaders": {
+      "title": "Shaders / transfer study",
+      "label": "SHADERS / TRANSFER",
+      "map": "Shader_01_Shaping",
+      "start_floor": 1,
+      "notice": "Two original museum collections. Floor 1: shaping desks and shared wall/cube mask. Floor 2: pattern rooms, camera and fuzzy studies.\nUse the original knobs and buttons. Shaft A connects the floors; R / B retries the current floor. Arrangement is editable; curation follows.",
+      "rooms": "res://commons/void/trials/shaders/rooms.json",
+      "layout": "res://commons/void/trials/shaders/layout.json",
+      "scene": "res://commons/void/trials/shaders/trial.tscn",
+      "models": "/void-trials/shaders/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "cellularautomata": {
+      "title": "Cellular Automata / transfer study",
+      "label": "CELLULAR AUTOMATA / TRANSFER",
+      "map": "CA_Introduction",
+      "start_floor": 1,
+      "notice": "Two original museum collections. Floor 1: neighbours, weaving, swarms and rule histories. Floor 2: active, fading and empty cells.\nMove the black point to inspect a cell; STEP advances its rule. Shaft A connects the floors; R / B retries. Arrange first, curate next.",
+      "rooms": "res://commons/void/trials/cellularautomata/rooms.json",
+      "layout": "res://commons/void/trials/cellularautomata/layout.json",
+      "scene": "res://commons/void/trials/cellularautomata/trial.tscn",
+      "models": "/void-trials/cellularautomata/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "fractals": {
+      "title": "Fractals / transfer study",
+      "label": "FRACTALS / TRANSFER",
+      "map": "Fractal_Recursion",
+      "start_floor": 1,
+      "notice": "Two original museum collections. Floor 1: recursion, subdivision and nested furniture. Floor 2: branching trees and L-systems.\nUse the original desks and controls. Shaft A connects the floors; R / B retries. Arrange first, curate next.",
+      "rooms": "res://commons/void/trials/fractals/rooms.json",
+      "layout": "res://commons/void/trials/fractals/layout.json",
+      "scene": "res://commons/void/trials/fractals/trial.tscn",
+      "models": "/void-trials/fractals/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "lsystems": {
+      "title": "L-Systems / grammar and growth",
+      "label": "L-SYSTEMS / TRANSFER",
+      "map": "LSystems_Grammar_Lab",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/lsystems/rooms.json",
+      "layout": "res://commons/void/trials/lsystems/layout.json",
+      "scene": "res://commons/void/trials/lsystems/trial.tscn",
+      "models": "/void-trials/lsystems/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "proceduralgeneration": {
+      "title": "Procedural Generation / selection and growth",
+      "label": "PROCEDURAL GENERATION / TRANSFER",
+      "map": "PG_Genetic_Evolution",
+      "start_floor": 1,
+      "notice": "Two original museum studies, transferred for inspection.\nFloor 1: TARGET / RING / HOLD / STEP. Floor 2: FIELD / POLICY / HOLD / STEP.\nSeven-metre trial envelope preserves the full-size point field. Curation follows.",
+      "rooms": "res://commons/void/trials/proceduralgeneration/rooms.json",
+      "layout": "res://commons/void/trials/proceduralgeneration/layout.json",
+      "scene": "res://commons/void/trials/proceduralgeneration/trial.tscn",
+      "models": "/void-trials/proceduralgeneration/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "softbodies": {
+      "title": "Soft Bodies / deformation and cloth",
+      "label": "SOFT BODIES / TRANSFER",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "start_floor": 1,
+      "notice": "Original deformation and cloth studies.\nUse the workshop consoles; shaft A leads to the next study.\nTransferred for inspection. Curation follows.",
+      "rooms": "res://commons/void/trials/softbodies/rooms.json",
+      "layout": "res://commons/void/trials/softbodies/layout.json",
+      "scene": "res://commons/void/trials/softbodies/trial.tscn",
+      "models": "/void-trials/softbodies/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "isosurfaces": {
+      "title": "Isosurfaces / field and lookup",
+      "label": "ISOSURFACES / TRANSFER",
+      "map": "ISO_Introduction",
+      "start_floor": 1,
+      "notice": "Original isosurface field and lookup studies.\nLEVEL / SAMPLES / HOLD, then MARGIN / TRACE / OPERANDS.\nThe full-size cave is beside the west edge, display only. Curation follows.",
+      "rooms": "res://commons/void/trials/isosurfaces/rooms.json",
+      "layout": "res://commons/void/trials/isosurfaces/layout.json",
+      "scene": "res://commons/void/trials/isosurfaces/trial.tscn",
+      "models": "/void-trials/isosurfaces/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "boolean_surfaces": {
+      "title": "Boolean_surfaces / transfer study",
+      "label": "BOOLEAN_SURFACES / TRANSFER",
+      "map": "Boolean_Verbs",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/boolean_surfaces/rooms.json",
+      "layout": "res://commons/void/trials/boolean_surfaces/layout.json",
+      "scene": "res://commons/void/trials/boolean_surfaces/trial.tscn",
+      "models": "/void-trials/boolean_surfaces/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "swarmintelligence": {
+      "title": "Swarmintelligence / transfer study",
+      "label": "SWARMINTELLIGENCE / TRANSFER",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/swarmintelligence/rooms.json",
+      "layout": "res://commons/void/trials/swarmintelligence/layout.json",
+      "scene": "res://commons/void/trials/swarmintelligence/trial.tscn",
+      "models": "/void-trials/swarmintelligence/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "graphtheory": {
+      "title": "Graph Theory / transfer study",
+      "label": "GRAPH THEORY / TRANSFER",
+      "map": "GT_Foundations",
+      "start_floor": 1,
+      "notice": "Original museum artifacts transferred. Arrange them in the lab editor; native desktop and synthetic XR checks passed. Curation and headset review remain pending.",
+      "rooms": "res://commons/void/trials/graphtheory/rooms.json",
+      "layout": "res://commons/void/trials/graphtheory/layout.json",
+      "scene": "res://commons/void/trials/graphtheory/trial.tscn",
+      "models": "/void-trials/graphtheory/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "machinelearning": {
+      "title": "Machine Learning / transfer study",
+      "label": "MACHINE LEARNING / TRANSFER",
+      "map": "ML_Evolution",
+      "start_floor": 1,
+      "notice": "Original museum artifacts transferred. Arrange them in the lab editor; native desktop and synthetic XR checks passed. Curation and headset review remain pending.",
+      "rooms": "res://commons/void/trials/machinelearning/rooms.json",
+      "layout": "res://commons/void/trials/machinelearning/layout.json",
+      "scene": "res://commons/void/trials/machinelearning/trial.tscn",
+      "models": "/void-trials/machinelearning/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "foundationscrisis": {
+      "title": "Foundations Crisis / original collection",
+      "label": "FOUNDATIONS CRISIS / TRANSFER",
+      "map": "Euclid_Parallel",
+      "start_floor": 1,
+      "notice": "Original museum collection. Arrange each artifact in the lab editor. Curation and physical headset review remain pending.",
+      "rooms": "res://commons/void/trials/foundationscrisis/rooms.json",
+      "layout": "res://commons/void/trials/foundationscrisis/layout.json",
+      "scene": "res://commons/void/trials/foundationscrisis/trial.tscn",
+      "models": "/void-trials/foundationscrisis/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "qfeplaboratory": {
+      "title": "QFEP Laboratory / original collection",
+      "label": "QFEP LABORATORY / TRANSFER",
+      "map": "QFEP_Introduction",
+      "start_floor": 1,
+      "notice": "Original museum collection. Arrange each artifact in the lab editor. Curation and physical headset review remain pending.",
+      "rooms": "res://commons/void/trials/qfeplaboratory/rooms.json",
+      "layout": "res://commons/void/trials/qfeplaboratory/layout.json",
+      "scene": "res://commons/void/trials/qfeplaboratory/trial.tscn",
+      "models": "/void-trials/qfeplaboratory/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "postfoundationscrisis": {
+      "title": "Post-Crisis: Applied Limits / original collection",
+      "label": "POSTFOUNDATIONSCRISIS / TRANSFER",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "start_floor": 1,
+      "notice": "Original museum collection. Arrange each artifact in the lab editor. Desktop and synthetic XR checks passed; physical headset review and curation remain pending.",
+      "rooms": "res://commons/void/trials/postfoundationscrisis/rooms.json",
+      "layout": "res://commons/void/trials/postfoundationscrisis/layout.json",
+      "scene": "res://commons/void/trials/postfoundationscrisis/trial.tscn",
+      "models": "/void-trials/postfoundationscrisis/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "postfoundationscrisis_02": {
+      "title": "Post-Crisis / Conflict and situated claims",
+      "label": "POST-CRISIS / MAPS 3-4",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "start_floor": 1,
+      "notice": "Maps 3-4 / 15 original artifacts. Transfer accepted; arrangement and curation pending. A / B: jump. R (desktop): retry the current floor.",
+      "rooms": "res://commons/void/trials/postfoundationscrisis_02/rooms.json",
+      "layout": "res://commons/void/trials/postfoundationscrisis_02/layout.json",
+      "scene": "res://commons/void/trials/postfoundationscrisis_02/trial.tscn",
+      "models": "/void-trials/postfoundationscrisis_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-08/index.html#postfoundationscrisis_02"
+    },
+    "postfoundationscrisis_03": {
+      "title": "Post-Crisis / Collective knowledge and networks",
+      "label": "POST-CRISIS / MAPS 5-6",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "start_floor": 1,
+      "notice": "Seven original artifacts. Collective Knowledge and Rhizome Network; cave entrance at the far slab edge. Transfer checked; curation follows.",
+      "rooms": "res://commons/void/trials/postfoundationscrisis_03/rooms.json",
+      "layout": "res://commons/void/trials/postfoundationscrisis_03/layout.json",
+      "scene": "res://commons/void/trials/postfoundationscrisis_03/trial.tscn",
+      "models": "/void-trials/postfoundationscrisis_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-09/index.html#postfoundationscrisis_03"
+    },
+    "postfoundationscrisis_04": {
+      "title": "Post-Crisis / Laboratory and synthesis",
+      "label": "POST-CRISIS / MAPS 7-8",
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "start_floor": 1,
+      "notice": "Twelve original artifacts. Laboratory body edits carry into Synthesis. Transfer checked; floating-carrier fit and curation pending. A / B: jump. R (desktop): retry the current floor.",
+      "rooms": "res://commons/void/trials/postfoundationscrisis_04/rooms.json",
+      "layout": "res://commons/void/trials/postfoundationscrisis_04/layout.json",
+      "scene": "res://commons/void/trials/postfoundationscrisis_04/trial.tscn",
+      "models": "/void-trials/postfoundationscrisis_04/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-10/index.html#postfoundationscrisis_04"
+    },
+    "transformation_02": {
+      "title": "Transformation / Body and moving boundaries",
+      "label": "TRANSFORMATION / BODY + BOUNDARY",
+      "map": "Trans_Body",
+      "start_floor": 1,
+      "notice": "Two museum collections: body-operated transformations, then timed boundaries. Nineteen editable original objects. Curation pending.",
+      "rooms": "res://commons/void/trials/transformation_02/rooms.json",
+      "layout": "res://commons/void/trials/transformation_02/layout.json",
+      "scene": "res://commons/void/trials/transformation_02/trial.tscn",
+      "models": "/void-trials/transformation_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-11/index.html#transformation_02"
+    },
+    "array_tutorial_02": {
+      "title": "Arrays / Third Index and A Rule Underfoot",
+      "label": "ARRAYS / DIMENSION AND RULE",
+      "map": "Tutorial_3D",
+      "start_floor": 1,
+      "notice": "Original museum installations. Enter the glass enclosure to fly; use the floor controls to change one tiling rule.",
+      "rooms": "res://commons/void/trials/array_tutorial_02/rooms.json",
+      "layout": "res://commons/void/trials/array_tutorial_02/layout.json",
+      "scene": "res://commons/void/trials/array_tutorial_02/trial.tscn",
+      "models": "/void-trials/array_tutorial_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          29
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-12/index.html#array_tutorial_02"
+    },
+    "array_tutorial_03": {
+      "title": "Arrays / walls and a clock",
+      "label": "ARRAYS / WALLS + DISCO",
+      "map": "Tutorial_Tiling_Walls",
+      "start_floor": 1,
+      "notice": "Original museum installations. Transfer study; curation follows.",
+      "rooms": "res://commons/void/trials/array_tutorial_03/rooms.json",
+      "layout": "res://commons/void/trials/array_tutorial_03/layout.json",
+      "scene": "res://commons/void/trials/array_tutorial_03/trial.tscn",
+      "models": "/void-trials/array_tutorial_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          13
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "color_02": {
+      "title": "Colour / Nails and Rainbow",
+      "label": "COLOUR / NAILS AND RAINBOW",
+      "map": "Color_Nails",
+      "start_floor": 1,
+      "notice": "Original museum artifacts on standard Void floors. Arrange in the lab editor. Curation, ceiling fit and the optional catalyst connection remain pending.",
+      "rooms": "res://commons/void/trials/color_02/rooms.json",
+      "layout": "res://commons/void/trials/color_02/layout.json",
+      "scene": "res://commons/void/trials/color_02/trial.tscn",
+      "models": "/void-trials/color_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "color_03": {
+      "title": "Colour / Pillar and Grid Pallet",
+      "label": "COLOUR / FIELD AND ADDRESSES",
+      "map": "Color_Pillar",
+      "start_floor": 1,
+      "notice": "Original museum artifacts on standard Void floors. Arrange in the lab editor; curation pending.",
+      "rooms": "res://commons/void/trials/color_03/rooms.json",
+      "layout": "res://commons/void/trials/color_03/layout.json",
+      "scene": "res://commons/void/trials/color_03/trial.tscn",
+      "models": "/void-trials/color_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "color_04": {
+      "title": "Colour / Paint and Walls",
+      "label": "COLOUR / PAINT + WALLS",
+      "map": "Color_Paint",
+      "start_floor": 1,
+      "notice": "Original museum artifacts. Paint on floor 1; Walls on floor 2. Curation pending.",
+      "rooms": "res://commons/void/trials/color_04/rooms.json",
+      "layout": "res://commons/void/trials/color_04/layout.json",
+      "scene": "res://commons/void/trials/color_04/trial.tscn",
+      "models": "/void-trials/color_04/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "tiling_02": {
+      "title": "Patterns / Foundry and Tutorial",
+      "label": "Patterns: Foundry and Tutorial",
+      "map": "Pattern_Foundry",
+      "start_floor": 1,
+      "notice": "Original museum collections / transfer trials / curation pending",
+      "rooms": "res://commons/void/trials/tiling_02/rooms.json",
+      "layout": "res://commons/void/trials/tiling_02/layout.json",
+      "scene": "res://commons/void/trials/tiling_02/trial.tscn",
+      "models": "/void-trials/tiling_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "tiling_03": {
+      "title": "Patterns / addresses to carriers",
+      "label": "PATTERNS / FIVE MUSEUM COLLECTIONS",
+      "map": "Array_Patterns",
+      "start_floor": 1,
+      "notice": "Five original museum collections. Desktop and simulated XR checks pass; curation and physical-headset review pending. Temple dome retains its original height and crosses the upper slab.",
+      "rooms": "res://commons/void/trials/tiling_03/rooms.json",
+      "layout": "res://commons/void/trials/tiling_03/layout.json",
+      "scene": "res://commons/void/trials/tiling_03/trial.tscn",
+      "models": "/void-trials/tiling_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "tiling_04": {
+      "title": "Patterns / fabric and performers",
+      "label": "PATTERNS / FABRIC AND PERFORMERS",
+      "map": "Ribbon_Patterns_03",
+      "start_floor": 1,
+      "notice": "Original fabric studio, wardrobe, runway and hand trails. Transfer study; curation follows.",
+      "rooms": "res://commons/void/trials/tiling_04/rooms.json",
+      "layout": "res://commons/void/trials/tiling_04/layout.json",
+      "scene": "res://commons/void/trials/tiling_04/trial.tscn",
+      "models": "/void-trials/tiling_04/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "forces_02": {
+      "title": "Forces / launch, motion, fields and resistance",
+      "label": "FORCES / FOUR ORIGINAL COLLECTIONS",
+      "map": "VFM_05_Launch",
+      "start_floor": 1,
+      "notice": "Original instruments at source scale. The gravity loop and friction lanes use exterior platforms. Curation follows.",
+      "rooms": "res://commons/void/trials/forces_02/rooms.json",
+      "layout": "res://commons/void/trials/forces_02/layout.json",
+      "scene": "res://commons/void/trials/forces_02/trial.tscn",
+      "models": "/void-trials/forces_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "forces_03": {
+      "title": "Forces / Oscillation, Choreography, Gravity, Legs and Arena",
+      "label": "FORCES / OSCILLATION TO ARENA",
+      "map": "Vectors_Act4b_Oscillation",
+      "start_floor": 1,
+      "notice": "Thirty original museum placements. Editable transfer floors; curation and headset review pending.",
+      "rooms": "res://commons/void/trials/forces_03/rooms.json",
+      "layout": "res://commons/void/trials/forces_03/layout.json",
+      "scene": "res://commons/void/trials/forces_03/trial.tscn",
+      "models": "/void-trials/forces_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "forces_04": {
+      "title": "Forces / Force as Place",
+      "label": "FORCE AS PLACE",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "start_floor": 1,
+      "notice": "Original museum artifacts, editable on standard Void floors. Transfer study; curation and physical-headset validation pending.",
+      "rooms": "res://commons/void/trials/forces_04/rooms.json",
+      "layout": "res://commons/void/trials/forces_04/layout.json",
+      "scene": "res://commons/void/trials/forces_04/trial.tscn",
+      "models": "/void-trials/forces_04/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "formfinding_02": {
+      "title": "Form Finding / Catenary to Annealing",
+      "label": "FORM FINDING / FOUR FLOORS",
+      "map": "FormFinding_Catenary",
+      "start_floor": 1,
+      "notice": "Original museum artifacts, editable on standard Void floors. Transfer study; curation and physical-headset validation pending.",
+      "rooms": "res://commons/void/trials/formfinding_02/rooms.json",
+      "layout": "res://commons/void/trials/formfinding_02/layout.json",
+      "scene": "res://commons/void/trials/formfinding_02/trial.tscn",
+      "models": "/void-trials/formfinding_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "formfinding_03": {
+      "title": "Form Finding / Forge",
+      "label": "FORM FINDING / FORGE",
+      "map": "FormFinding_Forge",
+      "start_floor": 1,
+      "notice": "Original museum placements on standard Void floors. Editable transfer study; fit notes, curation and physical-headset review pending.",
+      "rooms": "res://commons/void/trials/formfinding_03/rooms.json",
+      "layout": "res://commons/void/trials/formfinding_03/layout.json",
+      "scene": "res://commons/void/trials/formfinding_03/trial.tscn",
+      "models": "/void-trials/formfinding_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "wavefunctions_02": {
+      "title": "Waves / Pendulum, Sine Space, Unit Circle and Propagation",
+      "label": "WAVES / FOUR FLOORS",
+      "map": "WaveFunctions_Pendulum",
+      "start_floor": 1,
+      "notice": "Original museum placements on standard Void floors. Editable transfer study; fit notes, curation and physical-headset review pending.",
+      "rooms": "res://commons/void/trials/wavefunctions_02/rooms.json",
+      "layout": "res://commons/void/trials/wavefunctions_02/layout.json",
+      "scene": "res://commons/void/trials/wavefunctions_02/trial.tscn",
+      "models": "/void-trials/wavefunctions_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "wavefunctions_03": {
+      "title": "Sound, Bernini and John Cage / transfer study",
+      "label": "SOUND / BERNINI / CAGE",
+      "map": "WaveFunctions_Effect_Sound",
+      "start_floor": 1,
+      "notice": "Original museum collection; arrange in the lab editor. Architectural fit and curation remain pending.",
+      "rooms": "res://commons/void/trials/wavefunctions_03/rooms.json",
+      "layout": "res://commons/void/trials/wavefunctions_03/layout.json",
+      "scene": "res://commons/void/trials/wavefunctions_03/trial.tscn",
+      "models": "/void-trials/wavefunctions_03/manifest.json",
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-23/index.html#wavefunctions_03",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "wavefunctions_04": {
+      "title": "Air Music and Sky Stairs / transfer study",
+      "label": "AIR MUSIC / SKY STAIRS",
+      "map": "WaveFunctions_AirMusic",
+      "start_floor": 1,
+      "notice": "Original museum collection; arrange in the lab editor. Architectural fit and curation remain pending.",
+      "rooms": "res://commons/void/trials/wavefunctions_04/rooms.json",
+      "layout": "res://commons/void/trials/wavefunctions_04/layout.json",
+      "scene": "res://commons/void/trials/wavefunctions_04/trial.tscn",
+      "models": "/void-trials/wavefunctions_04/manifest.json",
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-23/index.html#wavefunctions_04",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "wavefunctions_05": {
+      "title": "Walking Waves and Synthesis Lab",
+      "label": "WALKING WAVES / SYNTHESIS",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "start_floor": 1,
+      "notice": "Original museum collection on standard Void floors. Editable transfer; oversized exhibits and source dependencies are recorded for curation. Physical-headset review pending.",
+      "rooms": "res://commons/void/trials/wavefunctions_05/rooms.json",
+      "layout": "res://commons/void/trials/wavefunctions_05/layout.json",
+      "scene": "res://commons/void/trials/wavefunctions_05/trial.tscn",
+      "models": "/void-trials/wavefunctions_05/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-24/index.html#wavefunctions_05"
+    },
+    "randomness_02": {
+      "title": "Entropy / arrangement and support",
+      "label": "ENTROPY / TRANSFER",
+      "map": "Random_Entropy",
+      "start_floor": 1,
+      "notice": "Original museum collection on standard Void floors. Editable transfer; oversized exhibits and source dependencies are recorded for curation. Physical-headset review pending.",
+      "rooms": "res://commons/void/trials/randomness_02/rooms.json",
+      "layout": "res://commons/void/trials/randomness_02/layout.json",
+      "scene": "res://commons/void/trials/randomness_02/trial.tscn",
+      "models": "/void-trials/randomness_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-24/index.html#randomness_02"
+    },
+    "randomness_03": {
+      "title": "Withdrawal and 10 PRINT",
+      "label": "WITHDRAWAL / 10 PRINT",
+      "map": "Random_Remove",
+      "start_floor": 1,
+      "notice": "Original museum collection on standard Void floors. Editable transfer; oversized exhibits and source dependencies are recorded for curation. Physical-headset review pending.",
+      "rooms": "res://commons/void/trials/randomness_03/rooms.json",
+      "layout": "res://commons/void/trials/randomness_03/layout.json",
+      "scene": "res://commons/void/trials/randomness_03/trial.tscn",
+      "models": "/void-trials/randomness_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      },
+      "review": "/book-review/doc/book/iterations/2026-10-21-void-transfer-batch-24/index.html#randomness_03"
+    },
+    "randomness_04": {
+      "title": "Randomness_04 / transfer study",
+      "label": "RANDOMNESS_04 / TRANSFER",
+      "map": "Random_Cubes",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/randomness_04/rooms.json",
+      "layout": "res://commons/void/trials/randomness_04/layout.json",
+      "scene": "res://commons/void/trials/randomness_04/trial.tscn",
+      "models": "/void-trials/randomness_04/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "randomness_05": {
+      "title": "Randomness_05 / transfer study",
+      "label": "RANDOMNESS_05 / TRANSFER",
+      "map": "Random_Space_Geometry",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/randomness_05/rooms.json",
+      "layout": "res://commons/void/trials/randomness_05/layout.json",
+      "scene": "res://commons/void/trials/randomness_05/trial.tscn",
+      "models": "/void-trials/randomness_05/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "noise_02": {
+      "title": "Noise_02 / transfer study",
+      "label": "NOISE_02 / TRANSFER",
+      "map": "Noise_One",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/noise_02/rooms.json",
+      "layout": "res://commons/void/trials/noise_02/layout.json",
+      "scene": "res://commons/void/trials/noise_02/trial.tscn",
+      "models": "/void-trials/noise_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "noise_03": {
+      "title": "Noise_03 / transfer study",
+      "label": "NOISE_03 / TRANSFER",
+      "map": "Noise_Box",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/noise_03/rooms.json",
+      "layout": "res://commons/void/trials/noise_03/layout.json",
+      "scene": "res://commons/void/trials/noise_03/trial.tscn",
+      "models": "/void-trials/noise_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "cellularautomata_02": {
+      "title": "Cellularautomata_02 / transfer study",
+      "label": "CELLULARAUTOMATA_02 / TRANSFER",
+      "map": "CA_GameOfLife",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/cellularautomata_02/rooms.json",
+      "layout": "res://commons/void/trials/cellularautomata_02/layout.json",
+      "scene": "res://commons/void/trials/cellularautomata_02/trial.tscn",
+      "models": "/void-trials/cellularautomata_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "cellularautomata_03": {
+      "title": "Cellular Automata / Beyond Binary to Edge of Chaos",
+      "label": "CELLULAR AUTOMATA / TRANSFER 03",
+      "map": "CA_BeyondBinary",
+      "start_floor": 1,
+      "notice": "Five original museum maps. Transfer tested on desktop and synthetic XR; arrangement editable. Curation and headset play pending.",
+      "rooms": "res://commons/void/trials/cellularautomata_03/rooms.json",
+      "layout": "res://commons/void/trials/cellularautomata_03/layout.json",
+      "scene": "res://commons/void/trials/cellularautomata_03/trial.tscn",
+      "models": "/void-trials/cellularautomata_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "fractals_02": {
+      "title": "Fractals / remaining museum works",
+      "label": "FRACTALS_02 / TRANSFER",
+      "map": "Fractal_CantorSet",
+      "start_floor": 1,
+      "notice": "Original museum artifacts placed for arrangement. Basic loading and editor saves checked; artifact buttons and mechanics untested. Curation follows.",
+      "rooms": "res://commons/void/trials/fractals_02/rooms.json",
+      "layout": "res://commons/void/trials/fractals_02/layout.json",
+      "scene": "res://commons/void/trials/fractals_02/trial.tscn",
+      "models": "/void-trials/fractals_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "lsystems_02": {
+      "title": "L-systems / remaining museum works",
+      "label": "LSYSTEMS_02 / TRANSFER",
+      "map": "LSystems_Grammars_And_Curves",
+      "start_floor": 1,
+      "notice": "Original museum artifacts placed for arrangement. Basic loading and editor saves checked; artifact buttons and mechanics untested. Curation follows.",
+      "rooms": "res://commons/void/trials/lsystems_02/rooms.json",
+      "layout": "res://commons/void/trials/lsystems_02/layout.json",
+      "scene": "res://commons/void/trials/lsystems_02/trial.tscn",
+      "models": "/void-trials/lsystems_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 6
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ],
+        "6": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "proceduralgeneration_02": {
+      "title": "Procedural Generation / remaining museum works",
+      "label": "PROCEDURALGENERATION_02 / TRANSFER",
+      "map": "PG_Branching_Growth",
+      "start_floor": 1,
+      "notice": "Original museum artifacts placed for arrangement. Basic loading and editor saves checked; artifact controls and gameplay untested. Curation follows.",
+      "rooms": "res://commons/void/trials/proceduralgeneration_02/rooms.json",
+      "layout": "res://commons/void/trials/proceduralgeneration_02/layout.json",
+      "scene": "res://commons/void/trials/proceduralgeneration_02/trial.tscn",
+      "models": "/void-trials/proceduralgeneration_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "softbodies_02": {
+      "title": "Soft Bodies / remaining museum works",
+      "label": "SOFTBODIES_02 / TRANSFER",
+      "map": "SoftBodies_Carusell",
+      "start_floor": 1,
+      "notice": "Original artifacts placed for arrangement. Controls/gameplay untested. Some live soft-body pinning remains an import limitation; see transfer review.",
+      "rooms": "res://commons/void/trials/softbodies_02/rooms.json",
+      "layout": "res://commons/void/trials/softbodies_02/layout.json",
+      "scene": "res://commons/void/trials/softbodies_02/trial.tscn",
+      "models": "/void-trials/softbodies_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "softbodies_03": {
+      "title": "Soft Bodies / reaction and morphogenesis",
+      "label": "SOFTBODIES_03 / TRANSFER",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "start_floor": 1,
+      "notice": "Original museum artifacts placed for arrangement. Basic loading, exported models and saves checked; controls and gameplay untested. Curation follows.",
+      "rooms": "res://commons/void/trials/softbodies_03/rooms.json",
+      "layout": "res://commons/void/trials/softbodies_03/layout.json",
+      "scene": "res://commons/void/trials/softbodies_03/trial.tscn",
+      "models": "/void-trials/softbodies_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "swarmintelligence_02": {
+      "title": "Swarm Intelligence / boids, agents and ants",
+      "label": "SWARMINTELLIGENCE_02 / TRANSFER",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "start_floor": 1,
+      "notice": "Original museum artifacts placed for arrangement. Basic loading, exported models and saves checked; controls and gameplay untested. Curation follows.",
+      "rooms": "res://commons/void/trials/swarmintelligence_02/rooms.json",
+      "layout": "res://commons/void/trials/swarmintelligence_02/layout.json",
+      "scene": "res://commons/void/trials/swarmintelligence_02/trial.tscn",
+      "models": "/void-trials/swarmintelligence_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "swarmintelligence_03": {
+      "title": "Swarmintelligence_03 / transfer study",
+      "label": "SWARMINTELLIGENCE_03 / TRANSFER",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/swarmintelligence_03/rooms.json",
+      "layout": "res://commons/void/trials/swarmintelligence_03/layout.json",
+      "scene": "res://commons/void/trials/swarmintelligence_03/trial.tscn",
+      "models": "/void-trials/swarmintelligence_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "machinelearning_02": {
+      "title": "Machinelearning_02 / transfer study",
+      "label": "MACHINELEARNING_02 / TRANSFER",
+      "map": "ML_Classification",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/machinelearning_02/rooms.json",
+      "layout": "res://commons/void/trials/machinelearning_02/layout.json",
+      "scene": "res://commons/void/trials/machinelearning_02/trial.tscn",
+      "models": "/void-trials/machinelearning_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "machinelearning_03": {
+      "title": "Machinelearning_03 / transfer study",
+      "label": "MACHINELEARNING_03 / TRANSFER",
+      "map": "ML_Sequence_Memory",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/machinelearning_03/rooms.json",
+      "layout": "res://commons/void/trials/machinelearning_03/layout.json",
+      "scene": "res://commons/void/trials/machinelearning_03/trial.tscn",
+      "models": "/void-trials/machinelearning_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "foundationscrisis_02": {
+      "title": "Foundationscrisis_02 / transfer study",
+      "label": "FOUNDATIONSCRISIS_02 / TRANSFER",
+      "map": "Russell_Paradox",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/foundationscrisis_02/rooms.json",
+      "layout": "res://commons/void/trials/foundationscrisis_02/layout.json",
+      "scene": "res://commons/void/trials/foundationscrisis_02/trial.tscn",
+      "models": "/void-trials/foundationscrisis_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "foundationscrisis_03": {
+      "title": "Foundationscrisis_03 / transfer study",
+      "label": "FOUNDATIONSCRISIS_03 / TRANSFER",
+      "map": "Escher_Impossible",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/foundationscrisis_03/rooms.json",
+      "layout": "res://commons/void/trials/foundationscrisis_03/layout.json",
+      "scene": "res://commons/void/trials/foundationscrisis_03/trial.tscn",
+      "models": "/void-trials/foundationscrisis_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "qfeplaboratory_02": {
+      "title": "Qfeplaboratory_02 / transfer study",
+      "label": "QFEPLABORATORY_02 / TRANSFER",
+      "map": "QFEP_E_Term",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/qfeplaboratory_02/rooms.json",
+      "layout": "res://commons/void/trials/qfeplaboratory_02/layout.json",
+      "scene": "res://commons/void/trials/qfeplaboratory_02/trial.tscn",
+      "models": "/void-trials/qfeplaboratory_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "qfeplaboratory_03": {
+      "title": "Qfeplaboratory_03 / transfer study",
+      "label": "QFEPLABORATORY_03 / TRANSFER",
+      "map": "QFEP_Lambda_Spectrum",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/qfeplaboratory_03/rooms.json",
+      "layout": "res://commons/void/trials/qfeplaboratory_03/layout.json",
+      "scene": "res://commons/void/trials/qfeplaboratory_03/trial.tscn",
+      "models": "/void-trials/qfeplaboratory_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "shaders_02": {
+      "title": "Shaders_02 / transfer study",
+      "label": "SHADERS_02 / TRANSFER",
+      "map": "Shader_11_QueerRubber",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/shaders_02/rooms.json",
+      "layout": "res://commons/void/trials/shaders_02/layout.json",
+      "scene": "res://commons/void/trials/shaders_02/trial.tscn",
+      "models": "/void-trials/shaders_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 4
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "boolean_surfaces_02": {
+      "title": "Boolean_surfaces_02 / transfer study",
+      "label": "BOOLEAN_SURFACES_02 / TRANSFER",
+      "map": "Boolean_Works",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/boolean_surfaces_02/rooms.json",
+      "layout": "res://commons/void/trials/boolean_surfaces_02/layout.json",
+      "scene": "res://commons/void/trials/boolean_surfaces_02/trial.tscn",
+      "models": "/void-trials/boolean_surfaces_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "isosurfaces_02": {
+      "title": "Isosurfaces_02 / transfer study",
+      "label": "ISOSURFACES_02 / TRANSFER",
+      "map": "ISO_ShapesGallery",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/isosurfaces_02/rooms.json",
+      "layout": "res://commons/void/trials/isosurfaces_02/layout.json",
+      "scene": "res://commons/void/trials/isosurfaces_02/trial.tscn",
+      "models": "/void-trials/isosurfaces_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 5
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "isosurfaces_03": {
+      "title": "Isosurfaces_03 / transfer study",
+      "label": "ISOSURFACES_03 / TRANSFER",
+      "map": "ISO_Caves",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/isosurfaces_03/rooms.json",
+      "layout": "res://commons/void/trials/isosurfaces_03/layout.json",
+      "scene": "res://commons/void/trials/isosurfaces_03/trial.tscn",
+      "models": "/void-trials/isosurfaces_03/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 6
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ],
+        "6": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "graphtheory_02": {
+      "title": "Graphtheory_02 / transfer study",
+      "label": "GRAPHTHEORY_02 / TRANSFER",
+      "map": "GT_Pathfinding",
+      "start_floor": 1,
+      "notice": "Museum transfer study. Placement and testing are being prepared; curation follows.",
+      "rooms": "res://commons/void/trials/graphtheory_02/rooms.json",
+      "layout": "res://commons/void/trials/graphtheory_02/layout.json",
+      "scene": "res://commons/void/trials/graphtheory_02/trial.tscn",
+      "models": "/void-trials/graphtheory_02/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 6
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          12
+        ],
+        "2": [
+          0,
+          0.06,
+          12
+        ],
+        "3": [
+          0,
+          0.06,
+          12
+        ],
+        "4": [
+          0,
+          0.06,
+          12
+        ],
+        "5": [
+          0,
+          0.06,
+          12
+        ],
+        "6": [
+          0,
+          0.06,
+          12
+        ]
+      }
+    },
+    "matter_gates": {
+      "title": "Matter Gates / AND",
+      "label": "MATTER / AND",
+      "map": "Point_Animatedcube",
+      "start_floor": 1,
+      "notice": "X and Y drop cubes into the two gaps. Take the white ball from its small timber box and drop it onto the wedge, or lift the black handle to raise its gate. Desktop: right-click to grab/drop, look up to lift; left-click buttons. VR: grip and lift/release. Lift Gate is a remote alternative. Only actual ball arrival records 1. Reset returns the pieces.",
+      "rooms": "res://commons/void/trials/matter_gates/rooms.json",
+      "layout": "res://commons/void/trials/matter_gates/layout.json",
+      "scene": "res://commons/void/trials/matter_gates/trial.tscn",
+      "models": "/void-trials/matter_gates/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5.4
+        ]
+      }
+    },
+    "matter_logic_reference": {
+      "title": "Matter and Logic / 15 original studies",
+      "label": "MATTER / LOGIC STUDIES",
+      "map": "Point_Animatedcube",
+      "start_floor": 1,
+      "notice": "36 study floors from the downloaded Matter and Logic collection. Use the pink controls; RESET or CLEAR starts a fresh take. Physical tracks use Jolt; Collatz and Rule Knitter retain explicit source animation.",
+      "rooms": "res://commons/void/trials/matter_logic_reference/rooms.json",
+      "layout": "res://commons/void/trials/matter_logic_reference/layout.json",
+      "scene": "res://commons/void/trials/matter_logic_reference/trial.tscn",
+      "models": "/void-trials/matter_logic_reference/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 7,
+        "8": 8,
+        "9": 9,
+        "10": 10,
+        "11": 11,
+        "12": 12,
+        "13": 13,
+        "14": 14,
+        "15": 15,
+        "16": 16,
+        "17": 17,
+        "18": 18,
+        "19": 19,
+        "20": 20,
+        "21": 21,
+        "22": 22,
+        "23": 23,
+        "24": 24,
+        "25": 25,
+        "26": 26,
+        "27": 27,
+        "28": 28,
+        "29": 29,
+        "30": 30,
+        "31": 31,
+        "32": 32,
+        "33": 33,
+        "34": 34,
+        "35": 35,
+        "36": 36,
+        "37": 36
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          4.5
+        ],
+        "2": [
+          0,
+          0.06,
+          4.5
+        ],
+        "3": [
+          0,
+          0.06,
+          4.5
+        ],
+        "4": [
+          0,
+          0.06,
+          4.5
+        ],
+        "5": [
+          0,
+          0.06,
+          4.5
+        ],
+        "6": [
+          0,
+          0.06,
+          4.5
+        ],
+        "7": [
+          0,
+          0.06,
+          4.5
+        ],
+        "8": [
+          0,
+          0.06,
+          4.5
+        ],
+        "9": [
+          0,
+          0.06,
+          4.5
+        ],
+        "10": [
+          0,
+          0.06,
+          4.5
+        ],
+        "11": [
+          0,
+          0.06,
+          4.5
+        ],
+        "12": [
+          0,
+          0.06,
+          4.5
+        ],
+        "13": [
+          0,
+          0.06,
+          4.5
+        ],
+        "14": [
+          0,
+          0.06,
+          4.5
+        ],
+        "15": [
+          0,
+          0.06,
+          4.5
+        ],
+        "16": [
+          0,
+          0.06,
+          4.5
+        ],
+        "17": [
+          0,
+          0.06,
+          4.5
+        ],
+        "18": [
+          0,
+          0.06,
+          4.5
+        ],
+        "19": [
+          0,
+          0.06,
+          4.5
+        ],
+        "20": [
+          0,
+          0.06,
+          4.5
+        ],
+        "21": [
+          0,
+          0.06,
+          4.5
+        ],
+        "22": [
+          0,
+          0.06,
+          4.5
+        ],
+        "23": [
+          0,
+          0.06,
+          4.5
+        ],
+        "24": [
+          0,
+          0.06,
+          4.5
+        ],
+        "25": [
+          0,
+          0.06,
+          4.5
+        ],
+        "26": [
+          0,
+          0.06,
+          4.5
+        ],
+        "27": [
+          0,
+          0.06,
+          4.5
+        ],
+        "28": [
+          0,
+          0.06,
+          4.5
+        ],
+        "29": [
+          0,
+          0.06,
+          4.5
+        ],
+        "30": [
+          0,
+          0.06,
+          4.5
+        ],
+        "31": [
+          0,
+          0.06,
+          4.5
+        ],
+        "32": [
+          0,
+          0.06,
+          4.5
+        ],
+        "33": [
+          -6.5,
+          0.06,
+          5.75
+        ],
+        "34": [
+          0,
+          0.06,
+          -2
+        ],
+        "35": [
+          -7.2,
+          0.06,
+          5.6
+        ],
+        "36": [
+          0,
+          0.06,
+          4.5
+        ]
+      }
+    },
+    "chains_studies": {
+      "title": "Nothing to Lose but Our Chains / six studies",
+      "label": "CHAINS / SIX STUDIES",
+      "map": "Point_Animatedcube",
+      "start_floor": 1,
+      "notice": "Six fictional studies of adult cyborg workers, care and collective infrastructure.\nRequests can be declined. Use the dock and read the reply.\nShaft A leads down; R / B retries. No main-spine layout is changed.",
+      "rooms": "res://commons/void/trials/chains_studies/rooms.json",
+      "layout": "res://commons/void/trials/chains_studies/layout.json",
+      "scene": "res://commons/void/trials/chains_studies/trial.tscn",
+      "models": "/void-trials/chains_studies/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 4,
+        "5": 5,
+        "6": 6,
+        "7": 6
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          6.5
+        ],
+        "2": [
+          0,
+          0.06,
+          6.5
+        ],
+        "3": [
+          0,
+          0.06,
+          6.5
+        ],
+        "4": [
+          0,
+          0.06,
+          6.5
+        ],
+        "5": [
+          0,
+          0.06,
+          6.5
+        ],
+        "6": [
+          0,
+          0.06,
+          6.5
+        ]
+      }
+    },
+    "spatial_lab": {
+      "title": "Spatial lab / reusable recipes",
+      "map": "Trans_Translation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab/trial.tscn",
+      "models": "/void-trials/spatial_lab/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 2
+      },
+      "spawn_points": {
+        "1": [
+          14,
+          0.06,
+          4
+        ],
+        "2": [
+          14,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_1fdf476caf": {
+      "title": "Lab variation / lab_packed",
+      "map": "Trans_Translation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_1fdf476caf/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_1fdf476caf/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_1fdf476caf/trial.tscn",
+      "models": "/void-trials/spatial_lab_1fdf476caf/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_46de8c8984": {
+      "title": "Lab variation / lab_radial",
+      "map": "Trans_Translation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_46de8c8984/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_46de8c8984/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_46de8c8984/trial.tscn",
+      "models": "/void-trials/spatial_lab_46de8c8984/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_6a925e325e": {
+      "title": "Lab variation / lab_growing",
+      "map": "Trans_Translation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_6a925e325e/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_6a925e325e/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_6a925e325e/trial.tscn",
+      "models": "/void-trials/spatial_lab_6a925e325e/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          -14,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_d2eacf90a6": {
+      "title": "Lab variation / lab_warehouse",
+      "map": "Trans_Translation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_d2eacf90a6/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_d2eacf90a6/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_d2eacf90a6/trial.tscn",
+      "models": "/void-trials/spatial_lab_d2eacf90a6/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          1.08,
+          4.3999999999999995
+        ]
+      }
+    },
+    "spatial_lab_764639c78c": {
+      "title": "Lab variation / lab_warehouse",
+      "map": "Trans_Translation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_764639c78c/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_764639c78c/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_764639c78c/trial.tscn",
+      "models": "/void-trials/spatial_lab_764639c78c/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.8600000000000001,
+          3
+        ]
+      }
+    },
+    "s_descent_model": {
+      "title": "S descent / tabletop cutaway model",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/s_descent_model/rooms.json",
+      "layout": "res://commons/void/trials/s_descent_model/layout.json",
+      "scene": "res://commons/void/trials/s_descent_model/trial.tscn",
+      "models": "/void-trials/s_descent_model/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          2.5
+        ]
+      }
+    },
+    "s_descent_boolean": {
+      "title": "Boolean Tunnel / continuous S model",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/s_descent_boolean/rooms.json",
+      "layout": "res://commons/void/trials/s_descent_boolean/layout.json",
+      "scene": "res://commons/void/trials/s_descent_boolean/trial.tscn",
+      "models": "/void-trials/s_descent_boolean/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          2.5
+        ]
+      }
+    },
+    "s_portal_copies": {
+      "title": "One portal / repeated S descent model",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/s_portal_copies/rooms.json",
+      "layout": "res://commons/void/trials/s_portal_copies/layout.json",
+      "scene": "res://commons/void/trials/s_portal_copies/trial.tscn",
+      "models": "/void-trials/s_portal_copies/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          2.5
+        ]
+      }
+    },
+    "portal_item_023d2c1a4f": {
+      "title": "Square portal / saved item",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/portal_item_023d2c1a4f/rooms.json",
+      "layout": "res://commons/void/trials/portal_item_023d2c1a4f/layout.json",
+      "scene": "res://commons/void/trials/portal_item_023d2c1a4f/trial.tscn",
+      "models": "/void-trials/portal_item_023d2c1a4f/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          2.5
+        ]
+      }
+    },
+    "portal_item_a9748530f6": {
+      "title": "Square portal / saved item",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/portal_item_a9748530f6/rooms.json",
+      "layout": "res://commons/void/trials/portal_item_a9748530f6/layout.json",
+      "scene": "res://commons/void/trials/portal_item_a9748530f6/trial.tscn",
+      "models": "/void-trials/portal_item_a9748530f6/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          2.5
+        ]
+      }
+    },
+    "transformation_55259ca058": {
+      "title": "Planks / a measured turn",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_55259ca058/rooms.json",
+      "layout": "res://commons/void/trials/transformation_55259ca058/layout.json",
+      "scene": "res://commons/void/trials/transformation_55259ca058/trial.tscn",
+      "models": "/void-trials/transformation_55259ca058/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_fc075df1cf": {
+      "title": "Barriers / blue sun feather",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_fc075df1cf/rooms.json",
+      "layout": "res://commons/void/trials/transformation_fc075df1cf/layout.json",
+      "scene": "res://commons/void/trials/transformation_fc075df1cf/trial.tscn",
+      "models": "/void-trials/transformation_fc075df1cf/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_f87aaab612": {
+      "title": "Portals / a falling turn",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_f87aaab612/rooms.json",
+      "layout": "res://commons/void/trials/transformation_f87aaab612/layout.json",
+      "scene": "res://commons/void/trials/transformation_f87aaab612/trial.tscn",
+      "models": "/void-trials/transformation_f87aaab612/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_8f04e9b24f": {
+      "title": "Portals / a falling turn",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_8f04e9b24f/rooms.json",
+      "layout": "res://commons/void/trials/transformation_8f04e9b24f/layout.json",
+      "scene": "res://commons/void/trials/transformation_8f04e9b24f/trial.tscn",
+      "models": "/void-trials/transformation_8f04e9b24f/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_341412706e": {
+      "title": "Portals / a falling turn",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_341412706e/rooms.json",
+      "layout": "res://commons/void/trials/transformation_341412706e/layout.json",
+      "scene": "res://commons/void/trials/transformation_341412706e/trial.tscn",
+      "models": "/void-trials/transformation_341412706e/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_884bcf0a09": {
+      "title": "Planks / a measured turn",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_884bcf0a09/rooms.json",
+      "layout": "res://commons/void/trials/transformation_884bcf0a09/layout.json",
+      "scene": "res://commons/void/trials/transformation_884bcf0a09/trial.tscn",
+      "models": "/void-trials/transformation_884bcf0a09/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_52c0071653": {
+      "title": "Barriers / blue sun feather",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_52c0071653/rooms.json",
+      "layout": "res://commons/void/trials/transformation_52c0071653/layout.json",
+      "scene": "res://commons/void/trials/transformation_52c0071653/trial.tscn",
+      "models": "/void-trials/transformation_52c0071653/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_placement": {
+      "title": "Transformation / placement check",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_placement/rooms.json",
+      "layout": "res://commons/void/trials/transformation_placement/layout.json",
+      "scene": "res://commons/void/trials/transformation_placement/trial.tscn",
+      "models": "/void-trials/transformation_341412706e/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_3ae239270f": {
+      "title": "Portals / descending fan",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_3ae239270f/rooms.json",
+      "layout": "res://commons/void/trials/transformation_3ae239270f/layout.json",
+      "scene": "res://commons/void/trials/transformation_3ae239270f/trial.tscn",
+      "models": "/void-trials/transformation_3ae239270f/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
+        ]
+      }
+    },
+    "transformation_adef1d2ca3": {
+      "title": "Portals / full-floor size",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation_adef1d2ca3/rooms.json",
+      "layout": "res://commons/void/trials/transformation_adef1d2ca3/layout.json",
+      "scene": "res://commons/void/trials/transformation_adef1d2ca3/trial.tscn",
+      "models": "/void-trials/transformation_adef1d2ca3/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          0,
+          0.06,
+          5
         ]
       }
     }

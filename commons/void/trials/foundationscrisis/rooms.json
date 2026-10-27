@@ -1,0 +1,244 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Euclid_Parallel",
+      "title": "Euclid_Parallel / transfer, 4 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_science_screen_3_5",
+          "artifact": "science_screen",
+          "position": [
+            2,
+            7
+          ],
+          "station": "SE",
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "mode": "grid"
+          }
+        },
+        {
+          "id": "f1_euclid_postulates_plaque_5_7",
+          "artifact": "euclid_postulates_plaque",
+          "position": [
+            0,
+            5
+          ],
+          "station": "SE",
+          "height": 1.7,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "lesson_controls": "on"
+          }
+        },
+        {
+          "id": "f1_parallel_lines_3_9",
+          "artifact": "parallel_lines",
+          "position": [
+            2,
+            3
+          ],
+          "station": "SE",
+          "height": 1.2,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_angle_sum_triangle_7_9",
+          "artifact": "angle_sum_triangle",
+          "position": [
+            -2,
+            3
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "NonEuclidean_Spaces",
+      "title": "NonEuclidean_Spaces / transfer, 8 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_film_curvature_triangle_4_1",
+          "artifact": "film_curvature_triangle",
+          "position": [
+            4,
+            11
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_triangle_curvature_workbench_11_2",
+          "artifact": "triangle_curvature_workbench",
+          "position": [
+            -3,
+            10
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "model": "plane"
+          }
+        },
+        {
+          "id": "f2_noneuclidean_wing_13_4",
+          "artifact": "noneuclidean_wing",
+          "position": [
+            -5,
+            8
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "pin": "true",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_curvature_slider_2_9",
+          "artifact": "curvature_slider",
+          "position": [
+            6,
+            3
+          ],
+          "station": "SE",
+          "height": 0.5,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "witness": "surface"
+          }
+        },
+        {
+          "id": "f2_elliptic_surface_4_11",
+          "artifact": "elliptic_surface",
+          "position": [
+            4,
+            1
+          ],
+          "station": "SE",
+          "height": 0.5,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_poincare_disk_5_11",
+          "artifact": "poincare_disk",
+          "position": [
+            3,
+            1
+          ],
+          "station": "SE",
+          "height": 1.8,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_hyperbolic_surface_2_12",
+          "artifact": "hyperbolic_surface",
+          "position": [
+            6,
+            0
+          ],
+          "station": "SE",
+          "height": 0.5,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_riemann_sphere_7_13",
+          "artifact": "riemann_sphere",
+          "position": [
+            1,
+            -1
+          ],
+          "station": "NE",
+          "height": 1.8,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "construction": [
+        {
+          "id": "f2_raised_cell_5_11",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f2_raised_cell_7_13",
+          "kind": "cube",
+          "position": [
+            1,
+            0,
+            -1
+          ],
+          "facing": 0
+        }
+      ],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -108,6 +108,11 @@ func release_next() -> RigidBody3D:
 	_visuals(body,emitted%3,true)
 	body.position=Vector3(.12,1.45,0)
 	add_child(body)
+	# XR's body mask includes pickup props, unlike the desktop walker. An arrival
+	# can spawn above that body and eject it from the walkway unless excluded.
+	var tower := get_tree().get_first_node_in_group("void_game")
+	if tower!=null and tower.body is PhysicsBody3D:
+		body.add_collision_exception_with(tower.body)
 	body.linear_velocity=global_basis*Vector3(-.65,.1,.12 if emitted%2==0 else -.12)
 	body.angular_velocity=global_basis*Vector3(.15,.25,.12)
 	arrivals.append(body);emitted+=1;cooldown=INTERVAL

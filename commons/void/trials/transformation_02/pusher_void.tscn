@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://commons/hazards/transformation_blocks/pusher_block.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/void/trials/transformation_02/pusher_void.gd" id="2"]
+[node name="PusherBlock" instance=ExtResource("1")]
+script = ExtResource("2")

@@ -1,0 +1,191 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Evolution",
+      "title": "ML_Evolution / original collection",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_evolved_creatures_2_2",
+          "artifact": "void_ml_evolved_creatures",
+          "position": [
+            -36,
+            0
+          ],
+          "station": "SW",
+          "height": 0.025,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_gradient_descent_visualization_6_2",
+          "artifact": "gradient_descent_visualization",
+          "position": [
+            0,
+            -9
+          ],
+          "station": "NE",
+          "height": 0.552,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_non_teleological_evolution_6_3",
+          "artifact": "non_teleological_evolution",
+          "position": [
+            0,
+            5
+          ],
+          "station": "SE",
+          "height": 1.05,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_evolvingflowers_2_7",
+          "artifact": "evolvingflowers",
+          "position": [
+            26,
+            -5
+          ],
+          "station": "NE",
+          "height": 0.02,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_science_screen_8_9",
+          "artifact": "science_screen",
+          "position": [
+            3,
+            10
+          ],
+          "station": "SE",
+          "height": 0.04,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "mode": "scatter"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "title": "ML_Gradient_Landscape / original collection",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_gradient_descent_visualization_3_3",
+          "artifact": "gradient_descent_visualization",
+          "position": [
+            21,
+            -10
+          ],
+          "station": "NE",
+          "height": 0.552,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f2_pca_visualization_5_5",
+          "artifact": "void_ml_pca",
+          "position": [
+            35,
+            7
+          ],
+          "station": "SE",
+          "height": 2.4,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {
+            "desktop_ui": "off"
+          }
+        },
+        {
+          "id": "f2_film_learning_step_9_7",
+          "artifact": "film_learning_step",
+          "position": [
+            5,
+            8
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_loss_function_comparator_6_8",
+          "artifact": "loss_function_comparator",
+          "position": [
+            0,
+            -5
+          ],
+          "station": "NE",
+          "height": 1,
+          "facing": 0,
+          "scale": 1.2,
+          "config": {
+            "plinth": "1.0"
+          }
+        },
+        {
+          "id": "f2_evolved_creatures_9_8",
+          "artifact": "void_ml_evolved_creatures",
+          "position": [
+            -36,
+            0
+          ],
+          "station": "SW",
+          "height": 0.025,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

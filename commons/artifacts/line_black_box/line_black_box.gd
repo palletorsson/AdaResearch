@@ -150,7 +150,9 @@ func _build_reset() -> void:
 	collision.shape = shape
 	reset_button.add_child(collision)
 	add_child(reset_button)
-	reset_button.connect("button_pressed", func(_button): reset_line())
+	# Mouse events can arrive while a frozen pickup still has a pending physics
+	# transform. Apply the reset after that synchronization, as with XR input.
+	reset_button.connect("button_pressed", func(_button): reset_line.call_deferred())
 
 func _label(words: String, at: Vector3, size: int, colour: Color) -> Label3D:
 	var label := Label3D.new()

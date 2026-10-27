@@ -1,0 +1,919 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Boolean_Verbs",
+      "title": "Boolean_Verbs / transfer, 4 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_csg_union_demo_6_4",
+          "artifact": "csg_union_demo",
+          "position": [
+            0,
+            8
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_csg_intersection_demo_6_12",
+          "artifact": "csg_intersection_demo",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "height": 0.5,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "forfeit": "numeral"
+          }
+        },
+        {
+          "id": "f1_csg_difference_demo_6_19",
+          "artifact": "csg_difference_demo",
+          "position": [
+            0,
+            -7
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_the_argument_of_solids_4_22",
+          "artifact": "the_argument_of_solids",
+          "position": [
+            2,
+            -10
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "construction": [
+        {
+          "id": "f1_raised_r9_c1",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c2",
+          "kind": "cube",
+          "position": [
+            4,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c3",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c4",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c8",
+          "kind": "cube",
+          "position": [
+            -2,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c9",
+          "kind": "cube",
+          "position": [
+            -3,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c10",
+          "kind": "cube",
+          "position": [
+            -4,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r9_c11",
+          "kind": "cube",
+          "position": [
+            -5,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c1",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c2",
+          "kind": "cube",
+          "position": [
+            4,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c3",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c4",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c8",
+          "kind": "cube",
+          "position": [
+            -2,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c9",
+          "kind": "cube",
+          "position": [
+            -3,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c10",
+          "kind": "cube",
+          "position": [
+            -4,
+            0,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "f1_raised_r16_c11",
+          "kind": "cube",
+          "position": [
+            -5,
+            0,
+            -4
+          ],
+          "facing": 0
+        }
+      ],
+      "route": [
+        {
+          "label": "BOOLEAN_VERBS / 4 OF 4 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            10.6
+          ]
+        },
+        {
+          "label": "(6,4) CSG_UNION_DEMO",
+          "position": [
+            0,
+            9.4
+          ]
+        },
+        {
+          "label": "(6,12) CSG_INTERSECTION_DEMO / FORFEIT NUMERAL / +0.5 M",
+          "position": [
+            0,
+            1.6
+          ]
+        },
+        {
+          "label": "(6,19) CSG_DIFFERENCE_DEMO",
+          "position": [
+            0,
+            -5.6
+          ]
+        },
+        {
+          "label": "(4,22) THE_ARGUMENT_OF_SOLIDS",
+          "position": [
+            2,
+            -7.7
+          ]
+        },
+        {
+          "label": "ROW 9 / RAISED BAYS (STRUCTURE 2)",
+          "position": [
+            0,
+            4.2
+          ]
+        },
+        {
+          "label": "ROW 16 / RAISED BAYS (STRUCTURE 2)",
+          "position": [
+            0,
+            -2.8
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "Boolean_Gallery",
+      "title": "Boolean_Gallery / transfer, 25 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_csg_difference_demo_2_3",
+          "artifact": "csg_difference_demo",
+          "position": [
+            6,
+            8
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "workings": "outcome"
+          }
+        },
+        {
+          "id": "f2_csg_difference_demo_5_3",
+          "artifact": "csg_difference_demo",
+          "position": [
+            3,
+            8
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "workings": "trace"
+          }
+        },
+        {
+          "id": "f2_csg_difference_demo_11_3",
+          "artifact": "csg_difference_demo",
+          "position": [
+            -3,
+            8
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "workings": "operands"
+          }
+        },
+        {
+          "id": "f2_csg_difference_demo_14_3",
+          "artifact": "csg_difference_demo",
+          "position": [
+            -6,
+            8
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "workings": "expression"
+          }
+        },
+        {
+          "id": "f2_csg_union_demo_2_7",
+          "artifact": "csg_union_demo",
+          "position": [
+            6,
+            4
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "fusion": "lobed"
+          }
+        },
+        {
+          "id": "f2_csg_union_demo_5_7",
+          "artifact": "csg_union_demo",
+          "position": [
+            3,
+            4
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "fusion": "distinct"
+          }
+        },
+        {
+          "id": "f2_csg_union_demo_11_7",
+          "artifact": "csg_union_demo",
+          "position": [
+            -3,
+            4
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "fusion": "necked"
+          }
+        },
+        {
+          "id": "f2_csg_union_demo_14_7",
+          "artifact": "csg_union_demo",
+          "position": [
+            -6,
+            4
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "fusion": "single"
+          }
+        },
+        {
+          "id": "f2_csg_intersection_demo_2_11",
+          "artifact": "csg_intersection_demo",
+          "position": [
+            6,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "consensus": "broad"
+          }
+        },
+        {
+          "id": "f2_csg_intersection_demo_5_11",
+          "artifact": "csg_intersection_demo",
+          "position": [
+            3,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "consensus": "unanimous"
+          }
+        },
+        {
+          "id": "f2_csg_intersection_demo_11_11",
+          "artifact": "csg_intersection_demo",
+          "position": [
+            -3,
+            0
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "consensus": "narrow"
+          }
+        },
+        {
+          "id": "f2_csg_intersection_demo_14_11",
+          "artifact": "csg_intersection_demo",
+          "position": [
+            -6,
+            0
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "consensus": "token"
+          }
+        },
+        {
+          "id": "f2_subtraction_suite_2_15",
+          "artifact": "subtraction_suite",
+          "position": [
+            6,
+            -4
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "breach": "pierced"
+          }
+        },
+        {
+          "id": "f2_subtraction_suite_7_15",
+          "artifact": "subtraction_suite",
+          "position": [
+            2.1,
+            -4
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "breach": "opened"
+          }
+        },
+        {
+          "id": "f2_subtraction_suite_9_15",
+          "artifact": "subtraction_suite",
+          "position": [
+            -2.1,
+            -4
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "breach": "severed"
+          }
+        },
+        {
+          "id": "f2_subtraction_suite_14_15",
+          "artifact": "subtraction_suite",
+          "position": [
+            -6,
+            -4
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "breach": "husk"
+          }
+        },
+        {
+          "id": "f2_coincident_face_2_19",
+          "artifact": "coincident_face",
+          "position": [
+            6,
+            -8
+          ],
+          "station": "NE",
+          "height": 0.35,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "separation": "coincident"
+          }
+        },
+        {
+          "id": "f2_coincident_face_5_19",
+          "artifact": "coincident_face",
+          "position": [
+            3,
+            -8
+          ],
+          "station": "NE",
+          "height": 0.35,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "separation": "clear"
+          }
+        },
+        {
+          "id": "f2_coincident_face_11_19",
+          "artifact": "coincident_face",
+          "position": [
+            -3,
+            -8
+          ],
+          "station": "NW",
+          "height": 0.35,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "separation": "hairline"
+          }
+        },
+        {
+          "id": "f2_coincident_face_14_19",
+          "artifact": "coincident_face",
+          "position": [
+            -6,
+            -8
+          ],
+          "station": "NW",
+          "height": 0.35,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "separation": "inverted"
+          }
+        },
+        {
+          "id": "f2_removal_room_4_23",
+          "artifact": "removal_room",
+          "position": [
+            9.3,
+            -12
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "subtraction": "cross"
+          }
+        },
+        {
+          "id": "f2_removal_room_6_23",
+          "artifact": "removal_room",
+          "position": [
+            3.3,
+            -12
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "subtraction": "gasket"
+          }
+        },
+        {
+          "id": "f2_removal_room_10_23",
+          "artifact": "removal_room",
+          "position": [
+            -3.3,
+            -12
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "subtraction": "third"
+          }
+        },
+        {
+          "id": "f2_removal_room_12_23",
+          "artifact": "removal_room",
+          "position": [
+            -9.3,
+            -12
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "subtraction": "figure"
+          }
+        },
+        {
+          "id": "f2_film_boolean_overlap_1_29",
+          "artifact": "film_boolean_overlap",
+          "position": [
+            15,
+            -8
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "BOOLEAN_GALLERY / 25 OF 25 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            10.6
+          ]
+        },
+        {
+          "label": "ROW 3 / CSG_DIFFERENCE_DEMO / WORKINGS",
+          "position": [
+            0,
+            9.7
+          ]
+        },
+        {
+          "label": "ROW 7 / CSG_UNION_DEMO / FUSION",
+          "position": [
+            0,
+            5.7
+          ]
+        },
+        {
+          "label": "ROW 11 / CSG_INTERSECTION_DEMO / CONSENSUS",
+          "position": [
+            0,
+            1.7
+          ]
+        },
+        {
+          "label": "ROW 15 / SUBTRACTION_SUITE / BREACH / SPREAD",
+          "position": [
+            0,
+            -2.3
+          ]
+        },
+        {
+          "label": "ROW 19 / COINCIDENT_FACE / SEPARATION",
+          "position": [
+            0,
+            -6.3
+          ]
+        },
+        {
+          "label": "ROW 23 / REMOVAL_ROOM / SUBTRACTION / SPREAD",
+          "position": [
+            0,
+            -10.3
+          ]
+        },
+        {
+          "label": "(2,3) OUTCOME",
+          "position": [
+            6,
+            8.95
+          ]
+        },
+        {
+          "label": "(5,3) TRACE",
+          "position": [
+            3,
+            8.95
+          ]
+        },
+        {
+          "label": "(11,3) OPERANDS",
+          "position": [
+            -3,
+            8.95
+          ]
+        },
+        {
+          "label": "(14,3) EXPRESSION",
+          "position": [
+            -6,
+            8.95
+          ]
+        },
+        {
+          "label": "(2,7) LOBED",
+          "position": [
+            6,
+            4.95
+          ]
+        },
+        {
+          "label": "(5,7) DISTINCT",
+          "position": [
+            3,
+            4.95
+          ]
+        },
+        {
+          "label": "(11,7) NECKED",
+          "position": [
+            -3,
+            4.95
+          ]
+        },
+        {
+          "label": "(14,7) SINGLE",
+          "position": [
+            -6,
+            4.95
+          ]
+        },
+        {
+          "label": "(2,11) BROAD",
+          "position": [
+            6,
+            0.95
+          ]
+        },
+        {
+          "label": "(5,11) UNANIMOUS",
+          "position": [
+            3,
+            0.95
+          ]
+        },
+        {
+          "label": "(11,11) NARROW",
+          "position": [
+            -3,
+            0.95
+          ]
+        },
+        {
+          "label": "(14,11) TOKEN",
+          "position": [
+            -6,
+            0.95
+          ]
+        },
+        {
+          "label": "(2,15) PIERCED",
+          "position": [
+            6,
+            -3.05
+          ]
+        },
+        {
+          "label": "(7,15) OPENED",
+          "position": [
+            2.1,
+            -3.05
+          ]
+        },
+        {
+          "label": "(9,15) SEVERED",
+          "position": [
+            -2.1,
+            -3.05
+          ]
+        },
+        {
+          "label": "(14,15) HUSK",
+          "position": [
+            -6,
+            -3.05
+          ]
+        },
+        {
+          "label": "(2,19) COINCIDENT",
+          "position": [
+            6,
+            -7.05
+          ]
+        },
+        {
+          "label": "(5,19) CLEAR",
+          "position": [
+            3,
+            -7.05
+          ]
+        },
+        {
+          "label": "(11,19) HAIRLINE",
+          "position": [
+            -3,
+            -7.05
+          ]
+        },
+        {
+          "label": "(14,19) INVERTED",
+          "position": [
+            -6,
+            -7.05
+          ]
+        },
+        {
+          "label": "(4,23) CROSS",
+          "position": [
+            9.3,
+            -11.05
+          ]
+        },
+        {
+          "label": "(6,23) GASKET",
+          "position": [
+            3.3,
+            -11.05
+          ]
+        },
+        {
+          "label": "(10,23) THIRD",
+          "position": [
+            -3.3,
+            -11.05
+          ]
+        },
+        {
+          "label": "(12,23) FIGURE",
+          "position": [
+            -9.3,
+            -11.05
+          ]
+        },
+        {
+          "label": "(1,29) FILM_BOOLEAN_OVERLAP / MOVED FROM THE EXIT WALL",
+          "position": [
+            13.7,
+            -8
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

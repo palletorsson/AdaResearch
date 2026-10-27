@@ -4,6 +4,7 @@ const Kit=preload("geometry.gd")
 const Point=preload("res://commons/primitives/snappoint/snap_point.tscn")
 const Driver=preload("corridor_point.gd")
 const Manager=preload("res://commons/primitives/snappoint/snap_connection_manager.gd")
+@export var initial_pairs: Array[Vector2i] = []
 var points: Array[Node3D]=[]
 var manager: Node
 func _ready() -> void:
@@ -18,3 +19,17 @@ func _ready() -> void:
 		p.get_node("MeshInstance3D/Sphere").set("color",Color("25212b"))
 		add_child(p);points.append(p)
 	Kit.label(self,"Bring two points close. Release.\nMove them apart: the line follows.",Vector3(0,0.015,2.0),28).rotation.x=-PI/2
+	call_deferred("_seed_connections")
+
+func _seed_connections() -> void:
+	# Only explicitly authored pairs begin joined. The point graph and each
+	# endpoint keep the same reciprocal state as a player-created connection.
+	for pair in initial_pairs:
+		if pair.x<0 or pair.y<0 or pair.x>=points.size() or pair.y>=points.size() or pair.x==pair.y:continue
+		var a := points[pair.x];var b := points[pair.y]
+		var line: Node3D = manager.create_connection(a,b)
+		if line==null:continue
+		a.add_connection(b);b.add_connection(a)
+		# Snap lines normally live at the scene root. Keep the authored examples
+		# inside this editable part so native editor exports include their meshes.
+		if line.get_parent()!=self:line.reparent(self,true)

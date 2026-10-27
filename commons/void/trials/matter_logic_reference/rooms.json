@@ -1,0 +1,1021 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / ROOF",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / AND",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "and",
+          "artifact": "matter_reference_and",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "and",
+            "editor_label": "Original AND / physical mechanism"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / OR",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "or",
+          "artifact": "matter_reference_or",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "or",
+            "editor_label": "Original OR / physical mechanism"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / XOR",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "xor",
+          "artifact": "matter_reference_xor",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "xor",
+            "editor_label": "Original XOR / physical mechanism"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / NOT",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "not",
+          "artifact": "matter_reference_not",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "not",
+            "editor_label": "Original NOT / physical mechanism"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / NOR",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "nor",
+          "artifact": "matter_reference_nor",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "nor",
+            "editor_label": "Original NOR / physical mechanism"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / NAND",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "nand",
+          "artifact": "matter_reference_nand",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "nand",
+            "editor_label": "Original NAND / physical mechanism"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Marble Boards / AND",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "marble-and",
+          "artifact": "marble_reference_and",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.6,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "and"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Marble Boards / OR",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "marble-or",
+          "artifact": "marble_reference_or",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.6,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "or"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Marble Boards / XOR",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "marble-xor",
+          "artifact": "marble_reference_xor",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.6,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "xor"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Marble Boards / NOT",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "marble-not",
+          "artifact": "marble_reference_not",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.6,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "not"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Marble Boards / HALF",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "marble-half",
+          "artifact": "marble_reference_half",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.6,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "half"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Marble Boards / COUNT",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "marble-count",
+          "artifact": "marble_reference_count",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.6,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "count"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Tyre / plank / wedge",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "reference_tyre_chain",
+          "artifact": "reference_tyre_chain",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "chain"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Stack / queue",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "reference_stack_queue",
+          "artifact": "reference_stack_queue",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "kind": "stackqueue"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Source / call-stack",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "call_stack",
+          "artifact": "call_stack",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 2.35,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "call-stack",
+            "kind": "functions"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Source / if-else-loop",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "if_else_loop",
+          "artifact": "if_else_loop",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 2.35,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "if-else-loop",
+            "kind": "loops"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Source / list-loop",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "list_loop",
+          "artifact": "list_loop",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 2.35,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "list-loop",
+            "kind": "loops"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Source / prefab-loop",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "prefab_loop",
+          "artifact": "prefab_loop",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 2.35,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "prefab-loop",
+            "kind": "loops"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Material program / if",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_if",
+          "artifact": "material_if",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "if"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Material program / ifelse",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_ifelse",
+          "artifact": "material_ifelse",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "ifelse"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Material program / array",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_array",
+          "artifact": "material_array",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "array"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Material program / loop",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_loop",
+          "artifact": "material_loop",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "loop"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Pipeline / map",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_pipeline_map",
+          "artifact": "material_pipeline_map",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "pipeline_map"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Pipeline / filter",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_pipeline_filter",
+          "artifact": "material_pipeline_filter",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "pipeline_filter"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Pipeline / reduce",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_pipeline_reduce",
+          "artifact": "material_pipeline_reduce",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "pipeline_reduce"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Pipeline / chain",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "material_pipeline_chain",
+          "artifact": "material_pipeline_chain",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "pipeline_chain"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Threshold / again",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "threshold_again",
+          "artifact": "threshold_again",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "threshold": "again"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Threshold / almost",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "threshold_almost",
+          "artifact": "threshold_almost",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "threshold": "almost"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Threshold / just",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "threshold_just",
+          "artifact": "threshold_just",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "threshold": "just"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Threshold / barely",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "threshold_barely",
+          "artifact": "threshold_barely",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "threshold": "barely"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Threshold / still",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "threshold_still",
+          "artifact": "threshold_still",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "threshold": "still"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Threshold / descent",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "threshold_descent",
+          "artifact": "threshold_descent",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "threshold": "descent"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Gravity Knitter",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "source_gravity_knitter",
+          "artifact": "source_gravity_knitter",
+          "station": "NW",
+          "position": [
+            -8.25,
+            0
+          ],
+          "height": 2.77058068856,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "gravity-knitter",
+            "control_offset": [
+              1.75,
+              0,
+              3.2
+            ]
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Rule Knitter",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "source_rule_knitter",
+          "artifact": "source_rule_knitter",
+          "station": "NW",
+          "position": [
+            0,
+            -4.5
+          ],
+          "height": 3.7,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "rule-knitter"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Collatz marble machine",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "source_collatz_machine",
+          "artifact": "source_collatz_machine",
+          "station": "NW",
+          "position": [
+            -10,
+            0
+          ],
+          "height": 0.34,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "collatz-marble-machine",
+            "start": "27",
+            "control_offset": [
+              2.8,
+              0,
+              3.2
+            ]
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Collatz knitting / three representations",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "source_collatz_knitting",
+          "artifact": "source_collatz_knitting",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "study": "collatz-knitting",
+            "start": "7"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / CATCH",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

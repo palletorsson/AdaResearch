@@ -26,6 +26,7 @@ var steam: ShaderMaterial
 var frost: ShaderMaterial
 var coffee: ShaderMaterial
 var cup_table_enabled:=true
+var door_width:=2.17 # Installation width; museum default remains unchanged.
 var mixing:=0.0
 var milk_fraction:=0.25
 var coffee_clock:=0.0
@@ -202,14 +203,15 @@ func build_descriptions() -> void:
 	readout.text=("1 grid  ·  2 one edit  ·  3 repeat a motif\n4 jitter(seed=%d) / shared generator" % experiment_seed) if setting==1 else "Four groups / six chairs each\nNEXT reveals their recipes"
 
 func build_door() -> void:
-	for x in [-1.17,1.17]: Objects.box(visuals,Vector3(x,1.12,0),Vector3(0.12,2.24,0.18),Objects.DARK,true)
-	Objects.box(visuals,Vector3(0,2.27,0),Vector3(2.46,0.12,0.18),Objects.DARK,true)
+	var half:=door_width/2
+	for x in [-half-.085,half+.085]: Objects.box(visuals,Vector3(x,1.12,0),Vector3(0.12,2.24,0.18),Objects.DARK,true)
+	Objects.box(visuals,Vector3(0,2.27,0),Vector3(door_width+.29,0.12,0.18),Objects.DARK,true)
 	for i in 2:
-		var hinge:=Node3D.new();visuals.add_child(hinge);hinge.position=Vector3(-1.1,0,0)
-		var leaf:=Objects.box(hinge,Vector3(1.1,1.1,0),Vector3(2.17,2.18,0.055),Color("c39465") if i==0 else Objects.TEAL,i==0)
+		var hinge:=Node3D.new();visuals.add_child(hinge);hinge.position=Vector3(-half-.015,0,0)
+		var leaf:=Objects.box(hinge,Vector3(half+.015,1.1,0),Vector3(door_width,2.18,0.055),Color("c39465") if i==0 else Objects.TEAL,i==0)
 		if i==1:
 			var mat=Objects.material(Objects.TEAL);mat.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;mat.albedo_color.a=0.23;leaf.material_override=mat
-		Objects.sphere(hinge,Vector3(1.93,1.0,0.07),0.04,Objects.DARK)
+		Objects.sphere(hinge,Vector3(door_width-.24,1.0,0.07),0.04,Objects.DARK)
 		hinges.append(hinge)
 
 func build_cup() -> void:

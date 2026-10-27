@@ -29,12 +29,17 @@ func refresh_pickables() -> void:
 		if node.has_method("is_picked_up"): pickables.append(node)
 
 func _capture_and_pause(node: Node) -> void:
+	if node == root:
+		# Flush queued placement transforms before DISABLED removes their Jolt space.
+		for soft in root.find_children("*", "SoftBody3D", true, false):
+			if soft.can_process(): soft.force_update_transform()
 	# Procedural artifacts may rebuild/free children while a floor is loading.
 	# Object keys change identity when freed, which can break Dictionary iteration.
 	# Stable IDs + weak references let restoration safely skip deleted children.
 	var id := node.get_instance_id()
 	if not saved.has(id):
 		var state := {"node":weakref(node),"mode":node.process_mode}
+		state.flight_group=node.is_in_group("ada_museum_flight")
 		if node is Node3D: state.visible=node.visible
 		if node is CollisionObject3D: state.disable=node.disable_mode
 		if node is RigidBody3D:
@@ -44,6 +49,9 @@ func _capture_and_pause(node: Node) -> void:
 		if node is GPUParticles3D or node is CPUParticles3D: state.speed=node.speed_scale
 		if node is AudioStreamPlayer or node is AudioStreamPlayer3D: state.paused=node.stream_paused
 		saved[id]=state
+	# Desktop and XR look up flight by group even when this floor is paused.
+	# Withdraw inactive volumes and restore membership when their floor is live.
+	if node.is_in_group("ada_museum_flight"): node.remove_from_group("ada_museum_flight")
 	# Explicit modes also stop artifacts that opt into PROCESS_MODE_ALWAYS.
 	if node is CollisionObject3D:
 		node.disable_mode=CollisionObject3D.DISABLE_MODE_KEEP_ACTIVE if mode=="preview" and node is PhysicsBody3D else CollisionObject3D.DISABLE_MODE_REMOVE
@@ -71,6 +79,7 @@ func _restore() -> void:
 		if node is GPUParticles3D or node is CPUParticles3D: node.speed_scale=state.speed
 		if node is AudioStreamPlayer or node is AudioStreamPlayer3D: node.stream_paused=state.paused
 		node.process_mode=state.mode
+		if state.get("flight_group",false): node.add_to_group("ada_museum_flight")
 	saved.clear()
 
 func _preview() -> void:

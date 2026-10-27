@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "Boolean Tunnel / continuous S model",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "s-boolean",
+          "artifact": "mod_boolean_s_descent_model",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "boolean_s_descent_model",
+            "bindings": {
+              "model_scale": 0.1,
+              "yaw": 18,
+              "passage_width": 1.6,
+              "headroom": 2.8,
+              "wall": 0.35,
+              "xray": true
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

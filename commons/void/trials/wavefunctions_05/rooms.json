@@ -1,0 +1,479 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "title": "WaveFunctions_TrigWalkingPath",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_beat_frequency_demo_7_7",
+          "artifact": "beat_frequency_demo",
+          "position": [
+            -3,
+            7
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0.05,
+          "scale": 2,
+          "config": {}
+        },
+        {
+          "id": "f1_sine_oscillation_24_19",
+          "artifact": "sine_oscillation",
+          "position": [
+            4,
+            6
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 1.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_lissajous_curves_28_19",
+          "artifact": "lissajous_curves",
+          "position": [
+            15,
+            7
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 1.6,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_TrigWalkingPath_7_28",
+          "artifact": "TrigWalkingPath",
+          "position": [
+            -17,
+            0
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 2.7,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_wave_interference_25_33",
+          "artifact": "wave_interference",
+          "position": [
+            6,
+            -9
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 1.4,
+          "scale": 0.45,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_28_42",
+          "artifact": "dark_sphere",
+          "position": [
+            4,
+            12
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "title": "WaveFunctions_Synthesis_Lab",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_additive_wave_demo_6_6",
+          "artifact": "additive_wave_demo",
+          "position": [
+            0,
+            7
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "bench",
+            "waveform": "sawtooth",
+            "name_after_compare": "true"
+          }
+        },
+        {
+          "id": "f2_air_music_display_case_5_11",
+          "artifact": "air_music_display_case",
+          "position": [
+            -16,
+            8
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0.4,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_samplevialrack_20_14",
+          "artifact": "samplevialrack",
+          "position": [
+            16,
+            -10
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dna_specimen_3_15",
+          "artifact": "dna_specimen",
+          "position": [
+            -18,
+            -10
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_GlassRack_5_15",
+          "artifact": "GlassRack",
+          "position": [
+            -14,
+            -10
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.01,
+          "scale": 1,
+          "config": {
+            "config": "spiral_tube"
+          }
+        },
+        {
+          "id": "f2_lissajous_curves_7_15",
+          "artifact": "lissajous_curves",
+          "position": [
+            -10,
+            -10
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0.105,
+          "scale": 0.1,
+          "config": {}
+        },
+        {
+          "id": "f2_hallway_scene_16_15",
+          "artifact": "hallway_scene",
+          "position": [
+            8,
+            -10
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.03,
+          "config": {}
+        },
+        {
+          "id": "f2_oscilloscope_20_16",
+          "artifact": "oscilloscope",
+          "position": [
+            12,
+            -10
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_holographicdisplay_3_18",
+          "artifact": "holographicdisplay",
+          "position": [
+            -18,
+            -5
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.07,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_electronicscales_5_18",
+          "artifact": "electronicscales",
+          "position": [
+            -15,
+            -5
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_biomagneticresonator_7_18",
+          "artifact": "biomagneticresonator",
+          "position": [
+            -5,
+            -10
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.08,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_ambient_patch_16_20",
+          "artifact": "ambient_patch",
+          "position": [
+            2,
+            -10
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_record_room_20_20",
+          "artifact": "record_room",
+          "position": [
+            17,
+            -5
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_seismograph_3_21",
+          "artifact": "seismograph",
+          "position": [
+            -18,
+            0
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0.08,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_spring_demo_5_21",
+          "artifact": "spring_demo",
+          "position": [
+            -15,
+            0
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0.01,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_UnitCircleTrig_7_21",
+          "artifact": "UnitCircleTrig",
+          "position": [
+            -2,
+            -10
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.42,
+          "scale": 0.1,
+          "config": {}
+        },
+        {
+          "id": "f2_SoundscapeRadioRack_16_23",
+          "artifact": "SoundscapeRadioRack",
+          "position": [
+            6,
+            -5
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0.325,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_petri_dish_worms_20_23",
+          "artifact": "petri_dish_worms",
+          "position": [
+            16,
+            0
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_chladni_plate_3_24",
+          "artifact": "chladni_plate",
+          "position": [
+            -6,
+            5
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0.01,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_microscope_9_24",
+          "artifact": "microscope",
+          "position": [
+            5,
+            5
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_atmosphericmonitoring_20_25",
+          "artifact": "atmosphericmonitoring",
+          "position": [
+            16,
+            5
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_double_helix_scene_6_27",
+          "artifact": "double_helix_scene",
+          "position": [
+            -8,
+            10
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0.25,
+          "scale": 0.5,
+          "config": {
+            "trail_drop": "4.8"
+          }
+        },
+        {
+          "id": "f2_synthesis_stand_16_27",
+          "artifact": "synthesis_stand",
+          "position": [
+            7,
+            10
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.04,
+          "config": {
+            "subject": "hallway_scene",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f2_chemicalapparatus_20_27",
+          "artifact": "chemicalapparatus",
+          "position": [
+            12,
+            10
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dark_sphere_9_28",
+          "artifact": "dark_sphere",
+          "position": [
+            4,
+            12
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_multimeter_20_29",
+          "artifact": "multimeter",
+          "position": [
+            16,
+            10
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

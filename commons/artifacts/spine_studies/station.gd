@@ -35,6 +35,8 @@ func _ready() -> void:
 		"open":"spine_studies/open_rules", "pink":"spine_studies/pink_sphere", "void":"spine_studies/void_museum"}
 	specimen = load("res://commons/artifacts/"+sources[study]+".gd").new()
 	specimen.name = "Study"
+	if study == "signal" and has_meta("config_void_room_height"):
+		specimen.room_height=clampf(float(get_meta("config_void_room_height")),3.0,7.15)
 	if study == "hinge":
 		specimen.set("plate_w",0.50)
 		specimen.set("show_caption",false)

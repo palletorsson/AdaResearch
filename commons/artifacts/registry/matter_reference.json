@@ -1,0 +1,582 @@
+{
+  "artifacts": {
+    "matter_reference": {
+      "lookup_name": "matter_reference",
+      "name": "Matter Gates / original mechanisms",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "and"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "matter_reference_and": {
+      "lookup_name": "matter_reference_and",
+      "name": "Matter Gates / original AND",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "and"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "matter_reference_or": {
+      "lookup_name": "matter_reference_or",
+      "name": "Matter Gates / original OR",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "or"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "matter_reference_xor": {
+      "lookup_name": "matter_reference_xor",
+      "name": "Matter Gates / original XOR",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "xor"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "matter_reference_not": {
+      "lookup_name": "matter_reference_not",
+      "name": "Matter Gates / original NOT",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "not"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "matter_reference_nor": {
+      "lookup_name": "matter_reference_nor",
+      "name": "Matter Gates / original NOR",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "nor"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "matter_reference_nand": {
+      "lookup_name": "matter_reference_nand",
+      "name": "Matter Gates / original NAND",
+      "scene": "res://commons/artifacts/matter_reference/matter_reference.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "description": "Original source geometry and masses: falling crates, tyre, sandbag balance and counterweight. Inputs release bodies; Jolt contacts determine the result.",
+      "default_params": {
+        "kind": "nand"
+      },
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "marble_reference_and": {
+      "lookup_name": "marble_reference_and",
+      "name": "Marble Board / AND",
+      "scene": "res://commons/artifacts/matter_reference/marble_boards.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "default_params": {
+        "kind": "and"
+      },
+      "description": "Original marble hole and hinged flip-flops. Real spheres occupy gaps/trays; physical rocker angle gives the bit."
+    },
+    "marble_reference_or": {
+      "lookup_name": "marble_reference_or",
+      "name": "Marble Board / OR",
+      "scene": "res://commons/artifacts/matter_reference/marble_boards.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "default_params": {
+        "kind": "or"
+      },
+      "description": "Original marble hole and hinged flip-flops. Real spheres occupy gaps/trays; physical rocker angle gives the bit."
+    },
+    "marble_reference_xor": {
+      "lookup_name": "marble_reference_xor",
+      "name": "Marble Board / XOR",
+      "scene": "res://commons/artifacts/matter_reference/marble_boards.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "default_params": {
+        "kind": "xor"
+      },
+      "description": "Original marble hole and hinged flip-flops. Real spheres occupy gaps/trays; physical rocker angle gives the bit."
+    },
+    "marble_reference_not": {
+      "lookup_name": "marble_reference_not",
+      "name": "Marble Board / NOT",
+      "scene": "res://commons/artifacts/matter_reference/marble_boards.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "default_params": {
+        "kind": "not"
+      },
+      "description": "Original marble hole and hinged flip-flops. Real spheres occupy gaps/trays; physical rocker angle gives the bit."
+    },
+    "marble_reference_half": {
+      "lookup_name": "marble_reference_half",
+      "name": "Marble Board / HALF",
+      "scene": "res://commons/artifacts/matter_reference/marble_boards.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "default_params": {
+        "kind": "half"
+      },
+      "description": "Original marble hole and hinged flip-flops. Real spheres occupy gaps/trays; physical rocker angle gives the bit."
+    },
+    "marble_reference_count": {
+      "lookup_name": "marble_reference_count",
+      "name": "Marble Board / COUNT",
+      "scene": "res://commons/artifacts/matter_reference/marble_boards.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "primitives",
+      "default_params": {
+        "kind": "count"
+      },
+      "description": "Original marble hole and hinged flip-flops. Real spheres occupy gaps/trays; physical rocker angle gives the bit."
+    },
+    "reference_tyre_chain": {
+      "lookup_name": "reference_tyre_chain",
+      "name": "Tyre / plank / wedge",
+      "scene": "res://commons/artifacts/matter_reference/tyre_chain.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "kind": "chain"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "Carry loose parts with right-click or XR grip; attached beams stay pinned.",
+        "Drop the mover or press RELEASE to start a physical take.",
+        "RESET releases held parts and restores the authored arrangement."
+      ]
+    },
+    "reference_stack_queue": {
+      "lookup_name": "reference_stack_queue",
+      "name": "Stack / queue",
+      "scene": "res://commons/artifacts/matter_reference/stack_queue.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "kind": "stackqueue"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    },
+    "call_stack": {
+      "lookup_name": "call_stack",
+      "name": "Source / call-stack",
+      "scene": "res://commons/artifacts/matter_reference/program_flow.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "call-stack",
+        "kind": "functions"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "PRESET chooses the source program; LESS/MORE changes the displayed parameter.",
+        "RUN pauses/resumes both moving bodies and the program cursor.",
+        "CLEAR removes the current run."
+      ]
+    },
+    "if_else_loop": {
+      "lookup_name": "if_else_loop",
+      "name": "Source / if-else-loop",
+      "scene": "res://commons/artifacts/matter_reference/program_flow.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "if-else-loop",
+        "kind": "loops"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "PRESET chooses the source program; LESS/MORE changes the displayed parameter.",
+        "RUN pauses/resumes both moving bodies and the program cursor.",
+        "CLEAR removes the current run."
+      ]
+    },
+    "list_loop": {
+      "lookup_name": "list_loop",
+      "name": "Source / list-loop",
+      "scene": "res://commons/artifacts/matter_reference/program_flow.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "list-loop",
+        "kind": "loops"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "PRESET chooses the source program; LESS/MORE changes the displayed parameter.",
+        "RUN pauses/resumes both moving bodies and the program cursor.",
+        "CLEAR removes the current run."
+      ]
+    },
+    "prefab_loop": {
+      "lookup_name": "prefab_loop",
+      "name": "Source / prefab-loop",
+      "scene": "res://commons/artifacts/matter_reference/program_flow.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "prefab-loop",
+        "kind": "loops"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "PRESET chooses the source program; LESS/MORE changes the displayed parameter.",
+        "RUN pauses/resumes both moving bodies and the program cursor.",
+        "CLEAR removes the current run."
+      ]
+    },
+    "material_if": {
+      "lookup_name": "material_if",
+      "name": "Material program / if",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "if"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    },
+    "material_ifelse": {
+      "lookup_name": "material_ifelse",
+      "name": "Material program / ifelse",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "ifelse"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    },
+    "material_array": {
+      "lookup_name": "material_array",
+      "name": "Material program / array",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "array"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    },
+    "material_loop": {
+      "lookup_name": "material_loop",
+      "name": "Material program / loop",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "loop"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    },
+    "material_pipeline_map": {
+      "lookup_name": "material_pipeline_map",
+      "name": "Pipeline / map",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "pipeline_map"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "RELEASE loads the machine; PULL PINS starts its physical decision.",
+        "RESET replaces the pins and restores the authored arrangement."
+      ]
+    },
+    "material_pipeline_filter": {
+      "lookup_name": "material_pipeline_filter",
+      "name": "Pipeline / filter",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "pipeline_filter"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "RELEASE loads the machine; PULL PINS starts its physical decision.",
+        "RESET replaces the pins and restores the authored arrangement."
+      ]
+    },
+    "material_pipeline_reduce": {
+      "lookup_name": "material_pipeline_reduce",
+      "name": "Pipeline / reduce",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "pipeline_reduce"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "RELEASE loads the machine; PULL PINS starts its physical decision.",
+        "RESET replaces the pins and restores the authored arrangement."
+      ]
+    },
+    "material_pipeline_chain": {
+      "lookup_name": "material_pipeline_chain",
+      "name": "Pipeline / chain",
+      "scene": "res://commons/artifacts/matter_reference/material_program.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "pipeline_chain"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "RELEASE loads the machine; PULL PINS starts its physical decision.",
+        "RESET replaces the pins and restores the authored arrangement."
+      ]
+    },
+    "threshold_again": {
+      "lookup_name": "threshold_again",
+      "name": "Threshold / again",
+      "scene": "res://commons/artifacts/matter_reference/thresholds.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "threshold": "again"
+      },
+      "description": "One curvature changes return into drift or escape. Repeat the same small release and compare the measured time.",
+      "interactions": [
+        "X cycles the three original source settings.",
+        "RELEASE starts a native physical take.",
+        "REPEAT starts the same setting again; the last three observations remain.",
+        "RESET clears the current take and keeps the comparison."
+      ],
+      "qfep_connection": "The same Boolean result can hide different physical margins, delays and failures; the witness records what the body actually did."
+    },
+    "threshold_almost": {
+      "lookup_name": "threshold_almost",
+      "name": "Threshold / almost",
+      "scene": "res://commons/artifacts/matter_reference/thresholds.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "threshold": "almost"
+      },
+      "description": "Change release height by one millimetre, release the ball and watch its actual maximum rise against the lip.",
+      "interactions": [
+        "X cycles the three original source settings.",
+        "RELEASE starts a native physical take.",
+        "REPEAT starts the same setting again; the last three observations remain.",
+        "Minus/plus one millimetre changes the real release centre."
+      ],
+      "qfep_connection": "The same Boolean result can hide different physical margins, delays and failures; the witness records what the body actually did."
+    },
+    "threshold_just": {
+      "lookup_name": "threshold_just",
+      "name": "Threshold / just",
+      "scene": "res://commons/artifacts/matter_reference/thresholds.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "threshold": "just"
+      },
+      "description": "Add one physical grain, wait for the needle, then add another. The balance decides which grain tips it.",
+      "interactions": [
+        "X cycles the three original source settings.",
+        "RELEASE starts a native physical take.",
+        "+1 GRAIN adds one settled grain; AUTO selects source feeding.",
+        "RESET clears the current take and keeps the comparison."
+      ],
+      "qfep_connection": "The same Boolean result can hide different physical margins, delays and failures; the witness records what the body actually did."
+    },
+    "threshold_barely": {
+      "lookup_name": "threshold_barely",
+      "name": "Threshold / barely",
+      "scene": "res://commons/artifacts/matter_reference/thresholds.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "threshold": "barely"
+      },
+      "description": "A rolling ball strikes a block at its edge. Compare the measured tilt with its authored critical angle.",
+      "interactions": [
+        "X cycles the three original source settings.",
+        "RELEASE starts a native physical take.",
+        "REPEAT starts the same setting again; the last three observations remain.",
+        "RESET clears the current take and keeps the comparison."
+      ],
+      "qfep_connection": "The same Boolean result can hide different physical margins, delays and failures; the witness records what the body actually did."
+    },
+    "threshold_still": {
+      "lookup_name": "threshold_still",
+      "name": "Threshold / still",
+      "scene": "res://commons/artifacts/matter_reference/thresholds.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "threshold": "still"
+      },
+      "description": "A ball hesitates on a dome. Compare the tiny initial offset with its observed decision time.",
+      "interactions": [
+        "X cycles the three original source settings.",
+        "RELEASE starts a native physical take.",
+        "REPEAT starts the same setting again; the last three observations remain.",
+        "RESET clears the current take and keeps the comparison."
+      ],
+      "qfep_connection": "The same Boolean result can hide different physical margins, delays and failures; the witness records what the body actually did."
+    },
+    "threshold_descent": {
+      "lookup_name": "threshold_descent",
+      "name": "Threshold / descent",
+      "scene": "res://commons/artifacts/matter_reference/thresholds.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "threshold": "descent"
+      },
+      "description": "A ball meets local valleys while the shaking cools. Repeat to compare where it actually settles.",
+      "interactions": [
+        "X cycles the three original source settings.",
+        "RELEASE starts a native physical take.",
+        "REPEAT starts the same setting again; the last three observations remain.",
+        "RESET clears the current take and keeps the comparison."
+      ],
+      "qfep_connection": "The same Boolean result can hide different physical margins, delays and failures; the witness records what the body actually did."
+    },
+    "source_gravity_knitter": {
+      "lookup_name": "source_gravity_knitter",
+      "name": "Gravity Knitter",
+      "scene": "res://commons/artifacts/matter_reference/knitter.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "gravity-knitter"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "Eight rule-bit switches address patterns 111 through 000.",
+        "RULE selects presets; SEED selects single/random/blank; EDGE selects blank/wrap boundaries.",
+        "RUN pauses/resumes; STEP makes one stitch; COMPUTE is explicit mathematical completion; CLEAR resets."
+      ]
+    },
+    "source_rule_knitter": {
+      "lookup_name": "source_rule_knitter",
+      "name": "Rule Knitter",
+      "scene": "res://commons/artifacts/matter_reference/knitter.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "rule-knitter"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review.",
+      "interactions": [
+        "Eight rule-bit switches address patterns 111 through 000.",
+        "RULE selects presets; SEED selects single/random/blank; EDGE selects blank/wrap boundaries.",
+        "RUN pauses/resumes; STEP makes one stitch; COMPUTE is explicit mathematical completion; CLEAR resets."
+      ]
+    },
+    "source_collatz_machine": {
+      "lookup_name": "source_collatz_machine",
+      "name": "Collatz marble machine",
+      "scene": "res://commons/artifacts/matter_reference/collatz.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "collatz-marble-machine",
+        "start": "27"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    },
+    "source_collatz_knitting": {
+      "lookup_name": "source_collatz_knitting",
+      "name": "Collatz knitting / three representations",
+      "scene": "res://commons/artifacts/matter_reference/collatz.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "reference_studies",
+      "default_params": {
+        "study": "collatz-knitting",
+        "start": "7"
+      },
+      "description": "Source-faithful Matter and Logic port. Original geometry and configurations; native controls and physical evidence are recorded in the port review."
+    }
+  }
+}

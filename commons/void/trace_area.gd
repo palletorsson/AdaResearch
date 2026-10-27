@@ -12,6 +12,19 @@ const TraceLight = preload("res://commons/void/trace_light.gd")
 @export var destination_title := "TRACE"
 var bead_homes: Dictionary = {}
 
+func apply_grid_config(config: Dictionary) -> void:
+	super(config)
+	if config.get("interface_style","") != "architectural": return
+	var hardware := preload("res://commons/void/trace_interface_hardware.gd")
+	for key in ["Bead10mm","Bead40mm","Bead80mm","SamplingMonitor","GridReplay"]:
+		var part := get_node_or_null(NodePath(key)) as Node3D
+		if part == null: continue
+		var kind := "sampling" if key=="SamplingMonitor" else ("grid" if key=="GridReplay" else "bead")
+		# An editor move must reseat the data surface against its moved plinth.
+		if kind=="bead" and config.get("parts",{}).has(key):
+			part._data_mount_ready=false
+		hardware.attach_later(part,kind)
+
 func _ready() -> void:
 	add_to_group("void_lines_area") # The tower's existing recovery hook.
 	match encounter:

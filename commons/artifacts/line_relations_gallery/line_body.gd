@@ -4,6 +4,7 @@ extends XRToolsPickable
 @export_enum("stick", "plank", "light", "measure", "beam", "point_line") var skin: String = "stick"
 @export var span: float = 2.0
 const ENDPOINT_RADIUS := 0.085
+const Timber = preload("res://commons/artifacts/primitive_encounters/timber_finish.gd")
 var body_size: Vector3
 
 func _ready() -> void:
@@ -49,6 +50,8 @@ func _ready() -> void:
 	else:
 		var box := BoxMesh.new();box.size=body_size;mesh.mesh=box
 	mesh.material_override=mat;add_child(mesh)
+	if skin=="plank":
+		mesh.mesh=Timber.mesh(body_size);mesh.material_override=Timber.material()
 	var col := CollisionShape3D.new();col.name="PickupBody"
 	var shape := BoxShape3D.new()
 	shape.size=body_size if skin=="plank" else Vector3(span,maxf(body_size.y,0.07),maxf(body_size.z,0.07))

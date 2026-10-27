@@ -88,6 +88,9 @@ func _is_weapon_node(p: Node) -> bool:
 func _fires(p: Node) -> bool:
 	if p == null or not is_instance_valid(p) or not p.has_signal("action_pressed"):
 		return false
+	# Loose assembly parts have feedback observers, but no trigger action.
+	# Their carried state must not consume a click meant for a nearby control.
+	if p.get_meta("desktop_passive_carry",false):return false
 	return not p.get_signal_connection_list("action_pressed").is_empty()
 
 
@@ -168,7 +171,10 @@ func _process(delta: float) -> void:
 			var target_pos := cam_xf.origin + (-cam_xf.basis.z) * _hold_distance
 			var xf := _held.global_transform
 			xf.origin = xf.origin.lerp(target_pos, 0.4)
-			xf.basis = xf.basis.orthonormalized().slerp(cam_xf.basis.orthonormalized(), 0.4)
+			# Assembly faces have explicit Q/E roll and R/F tilt controls. Their
+			# chosen orientation must survive the next carry frame.
+			if not _held.get_meta("desktop_preserve_orientation",false):
+				xf.basis = xf.basis.orthonormalized().slerp(cam_xf.basis.orthonormalized(), 0.4)
 			_held.global_transform = xf
 	elif _held and not is_instance_valid(_held):
 		_held = null

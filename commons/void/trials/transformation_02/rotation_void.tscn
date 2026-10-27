@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://commons/scenes/mapobjects/rotation_cube.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/void/trials/transformation_02/rotation_void.gd" id="2"]
+[node name="RotationCube" instance=ExtResource("1")]
+script = ExtResource("2")

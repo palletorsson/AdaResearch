@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://commons/artifacts/primitive_encounters/timber_panel.gd" id="1"]
+[node name="timber_panel_1x1" type="RigidBody3D"]
+collision_layer = 5
+collision_mask = 3
+script = ExtResource("1")
+panel_size = Vector2(1, 1)

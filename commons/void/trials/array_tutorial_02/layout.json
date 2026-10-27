@@ -1,0 +1,73 @@
+{
+  "status": "Arrays / original-size transfer envelope",
+  "width": 42,
+  "depth": 72,
+  "storey_height": 14,
+  "slab_thickness": 0.36,
+  "levels": [
+    0,
+    -14,
+    -28,
+    -42
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -20,
+    -14,
+    -5,
+    5,
+    14,
+    20
+  ],
+  "column_z": [
+    -34,
+    34
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Canopy",
+    "Tutorial_3D",
+    "Tutorial_Tiling_Floor",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 20,
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "A",
+      "2": "A",
+      "3": "A"
+    }
+  },
+  "route_note": "Original 12 m flight enclosure and three longitudinal installations preserved in a taller, longer isolated trial. Compact tower fit awaits curation.",
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract",
+    "3": "abstract"
+  },
+  "floor_sign_positions": {
+    "2": [
+      16,
+      -8
+    ]
+  }
+}

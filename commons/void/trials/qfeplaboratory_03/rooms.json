@@ -1,0 +1,642 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "title": "QFEP_Lambda_Spectrum",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_qfep_chalkboard_3_2",
+          "artifact": "qfep_chalkboard",
+          "station": "NW",
+          "position": [
+            -18,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_crystal_formation_2_4",
+          "artifact": "crystal_formation",
+          "station": "NW",
+          "position": [
+            -10,
+            -10
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_edge_particles_14_5",
+          "artifact": "edge_particles",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 0.4,
+          "config": {}
+        },
+        {
+          "id": "f1_ordered_grid_2_6",
+          "artifact": "ordered_grid",
+          "station": "NE",
+          "position": [
+            10,
+            -10
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_chaos_particles_14_10",
+          "artifact": "chaos_particles",
+          "station": "NE",
+          "position": [
+            18,
+            -10
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 0.4,
+          "config": {}
+        },
+        {
+          "id": "f1_lambda_hall_8_12",
+          "artifact": "lambda_hall",
+          "station": "SW",
+          "position": [
+            -15,
+            5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recommendation_control": "on",
+            "recommendation_position": "0.35"
+          }
+        },
+        {
+          "id": "f1_phase_cube_14_15",
+          "artifact": "phase_cube",
+          "station": "SW",
+          "position": [
+            -5,
+            6
+          ],
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_bifurcation_walkway_2_18",
+          "artifact": "bifurcation_walkway",
+          "station": "SE",
+          "position": [
+            6,
+            7
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 0.8,
+          "config": {}
+        },
+        {
+          "id": "f1_dissolving_form_14_19",
+          "artifact": "dissolving_form",
+          "station": "SE",
+          "position": [
+            15,
+            7
+          ],
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_complexity_pattern_5_21",
+          "artifact": "complexity_pattern",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_Phi_Term",
+      "title": "QFEP_Phi_Term",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_rigid_sculpture_3_3",
+          "artifact": "rigid_sculpture",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.05,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_fluid_form_9_3",
+          "artifact": "fluid_form",
+          "station": "NW",
+          "position": [
+            -5,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.05,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_phi_slider_6_4",
+          "artifact": "phi_slider",
+          "station": "NE",
+          "position": [
+            5,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.1,
+          "scale": 1,
+          "config": {
+            "sign_study": "on",
+            "phi": "0"
+          }
+        },
+        {
+          "id": "f2_preserved_pattern_3_7",
+          "artifact": "preserved_pattern",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.05,
+          "scale": 2.5,
+          "config": {}
+        },
+        {
+          "id": "f2_transforming_pattern_8_7",
+          "artifact": "transforming_pattern",
+          "station": "SW",
+          "position": [
+            -15,
+            7
+          ],
+          "facing": 180,
+          "height": 0.05,
+          "scale": 1,
+          "config": {
+            "cell_size": "0.15"
+          }
+        },
+        {
+          "id": "f2_tt_3_9",
+          "artifact": "tt",
+          "station": "SW",
+          "position": [
+            -18,
+            12
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 180,
+          "config": {}
+        },
+        {
+          "id": "f2_lambda_promenade_6_9",
+          "artifact": "lambda_promenade",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_tt_9_9",
+          "artifact": "tt",
+          "station": "SE",
+          "position": [
+            18,
+            12
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 180,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "title": "QFEP_Edge_Of_Chaos",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_tt_2_1",
+          "artifact": "tt",
+          "station": "SW",
+          "position": [
+            -18,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 180,
+          "config": {}
+        },
+        {
+          "id": "f3_emergence_zone_2_2",
+          "artifact": "emergence_zone",
+          "station": "NW",
+          "position": [
+            -14,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_turing_pattern_6_2",
+          "artifact": "turing_pattern",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_edge_core_7_2",
+          "artifact": "edge_core",
+          "station": "NE",
+          "position": [
+            14,
+            -8
+          ],
+          "facing": 180,
+          "height": 1.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_lambda_slider_10_2",
+          "artifact": "lambda_slider",
+          "station": "SW",
+          "position": [
+            -14,
+            8
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {
+            "locked": "0.4"
+          }
+        },
+        {
+          "id": "f3_droplet_cusp_5_5",
+          "artifact": "droplet_cusp",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0.95,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_edge_of_chaos_unlocked_13_6",
+          "artifact": "edge_of_chaos_unlocked",
+          "station": "SE",
+          "position": [
+            14,
+            8
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "comparison_study": "on"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "title": "QFEP_Sandbox",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_tt_2_2",
+          "artifact": "tt",
+          "station": "SW",
+          "position": [
+            -18,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 180,
+          "config": {}
+        },
+        {
+          "id": "f4_lambda_slider_5_5",
+          "artifact": "lambda_slider",
+          "station": "NW",
+          "position": [
+            -14,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "calibration": "none"
+          }
+        },
+        {
+          "id": "f4_phi_slider_8_5",
+          "artifact": "phi_slider",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0.1,
+          "scale": 1,
+          "config": {
+            "sign_study": "on",
+            "phi": "0"
+          }
+        },
+        {
+          "id": "f4_qfep_reactor_7_9",
+          "artifact": "qfep_reactor",
+          "station": "NE",
+          "position": [
+            14,
+            -8
+          ],
+          "facing": 0,
+          "height": 0.3,
+          "scale": 1,
+          "config": {
+            "wiring_study": "on"
+          }
+        },
+        {
+          "id": "f4_reactive_particles_3_11",
+          "artifact": "reactive_particles",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "field_seed": "401"
+          }
+        },
+        {
+          "id": "f4_qfep_formula_3d_11_12",
+          "artifact": "qfep_formula_3d",
+          "station": "SE",
+          "position": [
+            14,
+            8
+          ],
+          "facing": 0,
+          "height": 0.05,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_Synthesis",
+      "title": "QFEP_Synthesis",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_tt_2_1",
+          "artifact": "tt",
+          "station": "SW",
+          "position": [
+            -18,
+            12
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 180,
+          "config": {}
+        },
+        {
+          "id": "f5_grab_sphere_F_5_2",
+          "artifact": "grab_sphere_F",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.4,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_qfep_formula_3d_6_2",
+          "artifact": "qfep_formula_3d",
+          "station": "NW",
+          "position": [
+            -5,
+            -8
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_queer_morphology_specimen_3_3",
+          "artifact": "queer_morphology_specimen",
+          "station": "NE",
+          "position": [
+            5,
+            -8
+          ],
+          "facing": 0,
+          "height": 0.105,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_entropy_ceiling_3_6",
+          "artifact": "entropy_ceiling",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_entropy_meter_10_7",
+          "artifact": "entropy_meter",
+          "station": "SW",
+          "position": [
+            -15,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_grasp_cabinet_3_8",
+          "artifact": "grasp_cabinet",
+          "station": "SW",
+          "position": [
+            -5,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_grab_sphere_E_2_10",
+          "artifact": "grab_sphere_E",
+          "station": "SE",
+          "position": [
+            5,
+            7
+          ],
+          "facing": 180,
+          "height": 0.4,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_grab_sphere_lambda_3_10",
+          "artifact": "grab_sphere_lambda",
+          "station": "SE",
+          "position": [
+            15,
+            7
+          ],
+          "facing": 180,
+          "height": 0.4,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_grab_sphere_phi_4_10",
+          "artifact": "grab_sphere_phi",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 180,
+          "height": 0.4,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

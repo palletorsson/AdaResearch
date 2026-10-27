@@ -70,6 +70,15 @@ func _update_size() -> void:
 		mat.emission_energy_multiplier = 0.5 + hot * 1.5
 
 
+func prepare_editor_preview() -> void:
+	# Opt-in capture of the SAME source at maximum occupancy. Gameplay never
+	# calls this hook: its normal cycle still starts small. The editor must show
+	# the clearance it needs, rather than an almost invisible 30 cm first frame.
+	if str(get_meta("config_editor_preview_pose", "")) != "maximum": return
+	_time = PI if anchor == "floor" else PI * .5
+	_update_size()
+
+
 func _build_body() -> void:
 	_body = AnimatableBody3D.new()
 	_body.name = "GrowerBody"

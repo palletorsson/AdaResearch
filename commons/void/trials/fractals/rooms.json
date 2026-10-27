@@ -1,0 +1,579 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_Recursion",
+      "title": "Fractal_Recursion",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_fractal_recursion_2_4_5",
+          "artifact": "fractal_recursion_2",
+          "station": "NW",
+          "facing": 180,
+          "height": 2.2,
+          "scale": 1,
+          "config": {
+            "editor_label": "01 / One Call inside Itself (ThresholdWalk)",
+            "initial_size": 2.2,
+            "depth": 1,
+            "lesson": true,
+            "room": "thresholds",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              4,
+              5
+            ],
+            "source_token": "fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true#room:thresholds"
+          },
+          "position": [
+            -8.5,
+            -9.5
+          ]
+        },
+        {
+          "id": "f1_example_8_3_recursion_circles_vr_12_5",
+          "artifact": "example_8_3_recursion_circles_vr",
+          "station": "NE",
+          "facing": 180,
+          "height": 2.4,
+          "scale": 1,
+          "config": {
+            "editor_label": "02 / A Call that Branches (Circles)",
+            "depth": 1,
+            "rotation_speed": 0,
+            "lesson": true,
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              12,
+              5
+            ],
+            "source_token": "example_8_3_recursion_circles_vr:180:2.4#depth:1#rotation_speed:0#lesson:true"
+          },
+          "position": [
+            8.5,
+            -9.5
+          ]
+        },
+        {
+          "id": "f1_cube_subdivision_4_11",
+          "artifact": "cube_subdivision",
+          "station": "NW",
+          "facing": 180,
+          "height": 1.5,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / One Volume Spent into Many (Cube Subdivision)",
+            "seed_value": 31415,
+            "lesson": true,
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              4,
+              11
+            ],
+            "source_token": "cube_subdivision:180:1.5#seed_value:31415#lesson:true"
+          },
+          "position": [
+            -16,
+            -5.5
+          ]
+        },
+        {
+          "id": "f1_recursive_chair_12_11",
+          "artifact": "recursive_chair",
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / Cut and Keep (Recursive Chair)",
+            "lesson": true,
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              12,
+              11
+            ],
+            "source_token": "recursive_chair:180:0#lesson:true"
+          },
+          "position": [
+            16.5,
+            -5.5
+          ]
+        },
+        {
+          "id": "f1_science_screen_2_14",
+          "artifact": "science_screen",
+          "station": "SW",
+          "facing": 90,
+          "height": 0.04,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / Foil: Independent Sample Screen",
+            "mode": "bars",
+            "label": "Independent sample",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              2,
+              14
+            ],
+            "source_token": "science_screen:90:0.04#mode:bars#label:Independent sample"
+          },
+          "position": [
+            -16.5,
+            4.5
+          ]
+        },
+        {
+          "id": "f1_dark_sphere_14_15",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "06 / Foil: Dark Sphere (Zero Depth)",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              14,
+              15
+            ],
+            "source_token": "dark_sphere"
+          },
+          "position": [
+            16.5,
+            4.5
+          ]
+        },
+        {
+          "id": "f1_recursive_table_4_17",
+          "artifact": "recursive_table",
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.8,
+          "config": {
+            "editor_label": "07 / Recursive Table",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              4,
+              17
+            ],
+            "source_token": "recursive_table:180:0:0.8"
+          },
+          "position": [
+            -8.5,
+            6.5
+          ]
+        },
+        {
+          "id": "f1_cube_staircase_12_17",
+          "artifact": "cube_staircase",
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {
+            "editor_label": "08 / Cube Staircase",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              12,
+              17
+            ],
+            "source_token": "cube_staircase:180:0:0.6"
+          },
+          "position": [
+            8.5,
+            6.5
+          ]
+        },
+        {
+          "id": "f1_fibonacci_pagoda_4_22",
+          "artifact": "fibonacci_pagoda",
+          "station": "SW",
+          "facing": 180,
+          "height": 0.7,
+          "scale": 0.55,
+          "config": {
+            "editor_label": "09 / Fibonacci Pagoda",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              4,
+              22
+            ],
+            "source_token": "fibonacci_pagoda:180:0.7:0.55"
+          },
+          "position": [
+            -8.5,
+            11.5
+          ]
+        },
+        {
+          "id": "f1_synthesis_stand_12_22",
+          "artifact": "synthesis_stand",
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "10 / Synthesis Stand (Dark Sphere Hero)",
+            "subject": "dark_sphere",
+            "mode": "hero",
+            "source_map": "Fractal_Recursion",
+            "source_cell": [
+              12,
+              22
+            ],
+            "source_token": "synthesis_stand#subject:dark_sphere#mode:hero"
+          },
+          "position": [
+            8.5,
+            11.5
+          ]
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "One Call inside Itself -> Base Case (NW) and Branch Factor (NE)",
+          "position": [
+            0,
+            -12.5
+          ]
+        },
+        {
+          "label": "Spend vs Cut -> Cube Subdivision (W) and Menger Chair (E)",
+          "position": [
+            0,
+            -5.5
+          ]
+        },
+        {
+          "label": "Self-Similar Forms & Foils -> Table, Staircase, Pagoda, Synthesis Stand",
+          "position": [
+            0,
+            8.5
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "title": "Fractal_RecursiveTrees",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_recursive_tree_2_4_5",
+          "artifact": "recursive_tree_2",
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "01 / Two Angles at Every Fork (Canopy Lesson)",
+            "lesson": true,
+            "room": "canopy",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              4,
+              5
+            ],
+            "source_token": "recursive_tree_2:180#lesson:true#room:canopy"
+          },
+          "position": [
+            -8.5,
+            -9.5
+          ]
+        },
+        {
+          "id": "f2_recursive_tree_12_5",
+          "artifact": "recursive_tree",
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.42,
+          "config": {
+            "editor_label": "02 / Three Controls on a Complex Tree",
+            "lesson": true,
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              12,
+              5
+            ],
+            "source_token": "recursive_tree:180:0:0.42#lesson:true"
+          },
+          "position": [
+            8.5,
+            -9.5
+          ]
+        },
+        {
+          "id": "f2_living_paper_7_11",
+          "artifact": "living_paper",
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / Living Paper (Mandelbrot Tag)",
+            "algorithm": "mandelbrot",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              7,
+              11
+            ],
+            "source_token": "living_paper:180#algorithm:mandelbrot"
+          },
+          "position": [
+            -3.5,
+            -4.5
+          ]
+        },
+        {
+          "id": "f2_fractal_lsystem_tree_11_11",
+          "artifact": "fractal_lsystem_tree",
+          "station": "NE",
+          "facing": 0,
+          "height": 1.35,
+          "scale": 0.4,
+          "config": {
+            "editor_label": "04 / L-System Turtle Tree",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              11,
+              11
+            ],
+            "source_token": "fractal_lsystem_tree:0:0:0.4"
+          },
+          "position": [
+            3.5,
+            -4.5
+          ]
+        },
+        {
+          "id": "f2_small_subdivision_cube_2_14",
+          "artifact": "small_subdivision_cube",
+          "station": "SW",
+          "facing": 0,
+          "height": 0.12,
+          "scale": 1,
+          "config": {
+            "editor_label": "05 / Small Subdivision Cube A",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              2,
+              14
+            ],
+            "source_token": "small_subdivision_cube"
+          },
+          "position": [
+            -16.5,
+            3.5
+          ]
+        },
+        {
+          "id": "f2_small_subdivision_cube_3_14",
+          "artifact": "small_subdivision_cube",
+          "station": "SW",
+          "facing": 0,
+          "height": 0.12,
+          "scale": 1,
+          "config": {
+            "editor_label": "06 / Small Subdivision Cube B",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              3,
+              14
+            ],
+            "source_token": "small_subdivision_cube"
+          },
+          "position": [
+            -15,
+            3.5
+          ]
+        },
+        {
+          "id": "f2_inverted_tree_cloud_3_15",
+          "artifact": "inverted_tree_cloud",
+          "station": "SW",
+          "facing": 0,
+          "height": 2.5,
+          "scale": 0.32,
+          "config": {
+            "editor_label": "07 / Inverted Tree Cloud (Form)",
+            "freeze_cloud": true,
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              3,
+              15
+            ],
+            "source_token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true"
+          },
+          "position": [
+            -15.5,
+            7
+          ]
+        },
+        {
+          "id": "f2_dark_sphere_8_16",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "08 / Foil: Dark Sphere (Zero Branches)",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              8,
+              16
+            ],
+            "source_token": "dark_sphere"
+          },
+          "position": [
+            3.5,
+            5.5
+          ]
+        },
+        {
+          "id": "f2_cube_desk_2_17",
+          "artifact": "cube_desk",
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "09 / Recursive Cube Desk",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              2,
+              17
+            ],
+            "source_token": "cube_desk"
+          },
+          "position": [
+            -16.5,
+            11.5
+          ]
+        },
+        {
+          "id": "f2_inverted_tree_cloud_13_17",
+          "artifact": "inverted_tree_cloud",
+          "station": "SE",
+          "facing": 0,
+          "height": 2.5,
+          "scale": 0.32,
+          "config": {
+            "editor_label": "10 / Inverted Tree Cloud (Strata Aftermath)",
+            "freeze_cloud": true,
+            "aftermath": "strata",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              13,
+              17
+            ],
+            "source_token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true#aftermath:strata"
+          },
+          "position": [
+            15.5,
+            7.5
+          ]
+        },
+        {
+          "id": "f2_fractal_scene_5_20",
+          "artifact": "void_fractal_scene",
+          "station": "SW",
+          "facing": 0,
+          "height": 1,
+          "scale": 0.65,
+          "config": {
+            "editor_label": "11 / 3D Sphere MultiMesh Fractal",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              5,
+              20
+            ],
+            "source_token": "fractal_scene:0:1:0.65"
+          },
+          "position": [
+            -5.5,
+            7.5
+          ]
+        },
+        {
+          "id": "f2_mobius_world_3_22",
+          "artifact": "mobius_world",
+          "station": "SW",
+          "facing": 0,
+          "height": 1.25,
+          "scale": 0.06,
+          "config": {
+            "editor_label": "12 / Foil: Mobius World (Continuous Twist)",
+            "source_map": "Fractal_RecursiveTrees",
+            "source_cell": [
+              3,
+              22
+            ],
+            "source_token": "mobius_world:0:1.25:0.06"
+          },
+          "position": [
+            -9.5,
+            11.5
+          ]
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "Branching Rules -> Simple Canopy Tree (NW) and 3D Voxel Tree (NE)",
+          "position": [
+            0,
+            -12.5
+          ]
+        },
+        {
+          "label": "Rewriting & Tactile Division -> Living Paper, L-System Turtle, Subdivision Cubes",
+          "position": [
+            0,
+            -4.5
+          ]
+        },
+        {
+          "label": "Inverted Canopies & Foils -> Inverted Tree Clouds, MultiMesh Fractal, Mobius Foil",
+          "position": [
+            0,
+            8.5
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

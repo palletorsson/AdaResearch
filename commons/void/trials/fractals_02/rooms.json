@@ -1,0 +1,703 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_CantorSet",
+      "title": "Fractal_CantorSet",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_film_cantor_thirds_2_1",
+          "artifact": "film_cantor_thirds",
+          "station": "SW",
+          "position": [
+            -17,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_cantor_set_5_4",
+          "artifact": "cantor_set",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f1_example_8_4_cantor_set_vr_14_4",
+          "artifact": "example_8_4_cantor_set_vr",
+          "station": "SE",
+          "position": [
+            15,
+            9
+          ],
+          "facing": 0,
+          "height": 1.2,
+          "scale": 1,
+          "config": {
+            "tick": "limit",
+            "max_depth": "5",
+            "initial_width": "3.6",
+            "vertical_spacing": "0.25"
+          }
+        },
+        {
+          "id": "f1_dark_sphere_16_8",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            18,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_example_8_4_cantor_pagoda_vr_9_12",
+          "artifact": "example_8_4_cantor_pagoda_vr",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f1_fractal_clouds_15_17",
+          "artifact": "fractal_clouds",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 5,
+          "scale": 0.25,
+          "config": {}
+        },
+        {
+          "id": "f1_stochastic_tree_separated_4_18",
+          "artifact": "stochastic_tree_separated",
+          "station": "SW",
+          "position": [
+            -17,
+            3.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_stochastic_tree_separated_9_18",
+          "artifact": "stochastic_tree_separated",
+          "station": "NW",
+          "position": [
+            -17,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_stochastic_tree_separated_13_18",
+          "artifact": "stochastic_tree_separated",
+          "station": "NW",
+          "position": [
+            -17,
+            -10.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_KochSierpinski",
+      "title": "Fractal_KochSierpinski",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_fractal_koch_curve_5_6",
+          "artifact": "fractal_koch_curve",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_sierpinski_triangle_13_6",
+          "artifact": "sierpinski_triangle",
+          "station": "NE",
+          "position": [
+            0,
+            -7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_recursion_observatory_13_13",
+          "artifact": "recursion_observatory",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "tick": "coarse"
+          }
+        },
+        {
+          "id": "f2_box_counting_dimension_6_14",
+          "artifact": "box_counting_dimension",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_science_screen_13_16",
+          "artifact": "science_screen",
+          "station": "SE",
+          "position": [
+            18,
+            4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 0.6,
+          "config": {
+            "mode": "trace"
+          }
+        },
+        {
+          "id": "f2_cube_cabin_5_21",
+          "artifact": "cube_cabin",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 0.65,
+          "config": {}
+        },
+        {
+          "id": "f2_cube_bookshelf_13_21",
+          "artifact": "cube_bookshelf",
+          "station": "NE",
+          "position": [
+            16,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 0.75,
+          "config": {}
+        },
+        {
+          "id": "f2_dark_sphere_9_22",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            0,
+            -13
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_sierpinski_pyramid_6_25",
+          "artifact": "sierpinski_pyramid",
+          "station": "NW",
+          "position": [
+            -7,
+            -10
+          ],
+          "facing": 0,
+          "height": 1.0125,
+          "scale": 0.45,
+          "config": {
+            "tick": "fine",
+            "lesson": "true",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_koch_curve_3d_13_25",
+          "artifact": "koch_curve_3d",
+          "station": "NE",
+          "position": [
+            7,
+            -10
+          ],
+          "facing": 0,
+          "height": 0.05,
+          "scale": 1,
+          "config": {
+            "tick": "coarse"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_MengerSponge",
+      "title": "Fractal_MengerSponge",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_film_menger_twenty_3_1",
+          "artifact": "film_menger_twenty",
+          "station": "SW",
+          "position": [
+            -17,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f3_diffusion_limited_aggregation_4_4",
+          "artifact": "diffusion_limited_aggregation",
+          "station": "SE",
+          "position": [
+            15,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_catalyst_prompter_box_1_6",
+          "artifact": "catalyst_prompter_box",
+          "station": "SW",
+          "position": [
+            -17,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emergence": "slide",
+            "sequence": "auto",
+            "lease_s": "45"
+          }
+        },
+        {
+          "id": "f3_menger_sponge_7_9",
+          "artifact": "menger_sponge",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 1,
+          "config": {
+            "flight_box": "true",
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f3_dark_sphere_7_10",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            16,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_catalyst_vent_1_13",
+          "artifact": "catalyst_vent",
+          "station": "NW",
+          "position": [
+            -17,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emit_interval_s": "2.5",
+            "wave_size": "3",
+            "start_delay_s": "5.0",
+            "sequence": "auto"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_GoldenSpiral",
+      "title": "Fractal_GoldenSpiral",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_fibonacci_sequences_11_8",
+          "artifact": "fibonacci_sequences",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f4_golden_rectangle_15_21",
+          "artifact": "golden_rectangle",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "preset": "rainbow",
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f4_the_recursion_cabinet_7_29",
+          "artifact": "the_recursion_cabinet",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_diffusion_limited_aggregation_16_29",
+          "artifact": "diffusion_limited_aggregation",
+          "station": "NE",
+          "position": [
+            16,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_dark_sphere_11_30",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            0,
+            -13
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_fibonacci_terrain_6_34",
+          "artifact": "fibonacci_terrain",
+          "station": "NE",
+          "position": [
+            0,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "preset": "deep"
+          }
+        },
+        {
+          "id": "f4_romanesco_15_34",
+          "artifact": "romanesco",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_Synthesis",
+      "title": "Fractal_Synthesis",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_fractal_procedure_gallery_2_1",
+          "artifact": "fractal_procedure_gallery",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_cantor_set_5_6",
+          "artifact": "cantor_set",
+          "station": "SW",
+          "position": [
+            -14,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f5_recursive_tree_13_6",
+          "artifact": "recursive_tree",
+          "station": "SE",
+          "position": [
+            14,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 0.42,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f5_fractal_recursion_1_16_14",
+          "artifact": "fractal_recursion_1",
+          "station": "SW",
+          "position": [
+            -17,
+            1
+          ],
+          "facing": 0,
+          "height": 1.4,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_koch_curve_16_16",
+          "artifact": "koch_curve",
+          "station": "SE",
+          "position": [
+            17,
+            1
+          ],
+          "facing": 0,
+          "height": 1.6,
+          "scale": 0.09,
+          "config": {
+            "evidence": "trace"
+          }
+        },
+        {
+          "id": "f5_sierpinski_triangle_4_17",
+          "artifact": "sierpinski_triangle",
+          "station": "NW",
+          "position": [
+            -17,
+            -4
+          ],
+          "facing": 180,
+          "height": 1.2,
+          "scale": 0.3,
+          "config": {}
+        },
+        {
+          "id": "f5_fractal_clouds_8_22",
+          "artifact": "fractal_clouds",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 180,
+          "height": 3.4,
+          "scale": 0.24,
+          "config": {}
+        },
+        {
+          "id": "f5_dark_sphere_12_22",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_strange_attractors_14_22",
+          "artifact": "strange_attractors",
+          "station": "NE",
+          "position": [
+            17,
+            -6
+          ],
+          "facing": 0,
+          "height": 1.2,
+          "scale": 0.18,
+          "config": {}
+        },
+        {
+          "id": "f5_romanesco_4_27",
+          "artifact": "romanesco",
+          "station": "NW",
+          "position": [
+            -15,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.65,
+          "config": {}
+        },
+        {
+          "id": "f5_fibonacci_sequences_10_27",
+          "artifact": "fibonacci_sequences",
+          "station": "NE",
+          "position": [
+            13,
+            -11
+          ],
+          "facing": 180,
+          "height": 1.1,
+          "scale": 0.4,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

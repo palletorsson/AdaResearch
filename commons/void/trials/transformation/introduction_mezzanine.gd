@@ -1,8 +1,9 @@
 extends "res://commons/void/lines_area.gd"
 ## The three original transformation laws. Architecture lives in editable cells.
-const Growth = preload("res://commons/void/growing_crossing.gd")
+const Growth = preload("res://commons/void/scale_descent.gd")
 const Turn = preload("res://commons/void/turning_crossing.gd")
 const Finish = preload("res://commons/void/trials/transformation/structural_finish.gd")
+const ShaftField = preload("res://commons/void/shaft_electric_field.gd")
 
 func _ready() -> void:
 	set_meta("source_maps", ["Point_Animatedcube", "Trans_Introduction"])
@@ -42,10 +43,46 @@ func _ready() -> void:
 func prepare_editor_preview() -> void:
 	var growth := get_node_or_null("GrowingCube")
 	if growth != null:
-		growth.current_scale = growth.max_scale
-		growth.apply_scale()
+		growth.prepare_editor_preview()
 	var turn := get_node_or_null("TurningPlank")
 	if turn != null:
 		turn.current_angle = 0
 		turn.mesh_instance.rotation_degrees.y = 0
 		turn.static_body.transform = turn.mesh_instance.transform
+	for key in ["ShaftFieldA","ShaftFieldB"]:
+		var field: Node3D=get_node_or_null(NodePath(key))
+		if field!=null:field.prepare_editor_preview()
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("scale_descent"):
+		_configure_descent(config.scale_descent)
+	super.apply_grid_config(config)
+	# The main tower can stage a pyramid rim while the original trial keeps
+	# its open ramp descent. The instruction follows that saved arrangement.
+	var caption := get_node_or_null("ExitCaption") as Label3D
+	if caption != null and config.get("exit_route", "") == "pyramid_rim":
+		caption.text = "OVER THE PYRAMIDS · LAND ON THE INNER RIM\nTHEN DROP / A SOUTH-WEST CORNER"
+	elif caption != null and config.get("exit_route", "") == "enclosed_scale_drop":
+		part_defaults["ExitCaption"]["position"] = [-12.95, .04, 1.9]
+		if not config.get("parts", {}).has("ExitCaption"):
+			caption.position = Vector3(-12.95, .04, 1.9)
+		caption.text = "LAND ON THE INNER RIM · LET THE CUBE SHRINK\nTHEN STEP OFF TO THE NEXT FLOOR"
+	elif caption != null and config.get("exit_route", "") == "scale_elevator":
+		caption.text = "B / BOARD THE FULL CUBE\nFIELD OFF · DOWN · GROW INTO THE NEXT FLOOR"
+		if not config.get("parts", {}).has("ExitCaption"):
+			caption.position = Vector3(-5,3.04,.7)
+		part_defaults["ExitCaption"]["position"] = [-5,3.04,.7]
+
+func _configure_descent(settings: Dictionary) -> void:
+	var field_a: Node3D=get_node_or_null("ShaftFieldA")
+	for entry in [["ShaftFieldA",-10],["ShaftFieldB",10]]:
+		var existing: Node3D=get_node_or_null(NodePath(entry[0]))
+		if existing==null:
+			existing=ShaftField.new();existing.name=entry[0]
+			existing.position=Vector3(float(entry[1]),.04,0);add_child(existing)
+			part_defaults[entry[0]]={"position":[float(entry[1]),.04,0],"rotation":[0,0,0],"bounds":[-2.5,-.05,-3,5,.1,6]}
+		if entry[0]=="ShaftFieldA":field_a=existing
+	var growth: Node3D=get_node_or_null("GrowingCube")
+	var owner_game: Node3D=get_tree().get_first_node_in_group("void_game")
+	if growth!=null and not growth.descent_enabled:
+		growth.enable_descent(owner_game,field_a,settings)

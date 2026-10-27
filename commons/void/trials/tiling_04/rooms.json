@@ -1,0 +1,334 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Ribbon_Patterns_03",
+      "title": "Ribbon_Patterns_03",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_drag_catwalk_23_3",
+          "artifact": "drag_catwalk",
+          "position": [
+            0,
+            -3
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_fabric_shader_studio_6_5",
+          "artifact": "fabric_shader_studio",
+          "position": [
+            -9,
+            10
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_super_drag_mirror_12_7",
+          "artifact": "super_drag_mirror",
+          "position": [
+            0,
+            11
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_garment_cutting_table_6_12",
+          "artifact": "garment_cutting_table",
+          "position": [
+            12,
+            10
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_pulsar_visualizer_6_18",
+          "artifact": "pulsar_visualizer",
+          "position": [
+            18,
+            7
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0.36,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_standalone_disco_23_18",
+          "artifact": "standalone_disco",
+          "position": [
+            -16,
+            6
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.7,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_coloredlines_6_24",
+          "artifact": "coloredlines",
+          "position": [
+            11,
+            -8
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0.4,
+          "scale": 0.2,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "embedded": "true"
+          }
+        },
+        {
+          "id": "f1_RotatingLaser_23_24",
+          "artifact": "RotatingLaser",
+          "position": [
+            14,
+            -7
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "beam_length": "6",
+            "rig_height": "4"
+          }
+        },
+        {
+          "id": "f1_minimalglitch_6_28",
+          "artifact": "minimalglitch",
+          "position": [
+            -9,
+            -12
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 1.85,
+          "scale": 0.6,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "embedded": "true"
+          }
+        },
+        {
+          "id": "f1_textureglitch_23_28",
+          "artifact": "textureglitch",
+          "position": [
+            -12,
+            -4
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 2.1,
+          "scale": 0.45,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_glitchcolor_6_32",
+          "artifact": "glitchcolor",
+          "position": [
+            9,
+            -12
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 1.6,
+          "scale": 0.65,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_advancedglitch_23_32",
+          "artifact": "advancedglitch",
+          "position": [
+            11,
+            -4
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 1.85,
+          "scale": 0.65,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "embedded": "true"
+          }
+        },
+        {
+          "id": "f1_colortrails_6_36",
+          "artifact": "colortrails",
+          "position": [
+            -17,
+            -4
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.5,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_neon_garden_23_36",
+          "artifact": "neon_garden",
+          "position": [
+            17,
+            1
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.65,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_strobe_lasers_6_41",
+          "artifact": "strobe_lasers",
+          "position": [
+            -14,
+            -8
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 3.5,
+          "scale": 0.4,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_disco_lights_23_41",
+          "artifact": "disco_lights",
+          "position": [
+            6,
+            4
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 3,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_one_bulb_room_6_45",
+          "artifact": "one_bulb_room",
+          "position": [
+            -6,
+            4
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_laser_turret_23_45",
+          "artifact": "laser_turret",
+          "position": [
+            17,
+            -14
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "target_player": "false",
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

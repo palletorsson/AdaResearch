@@ -49,6 +49,9 @@ func _ready() -> void:
 			place(PyramidBlocker,"PyramidBlocker",Vector3.ZERO)
 			# The upright face meets the approach; walking round reveals the slope.
 			place(WedgeBlocker,"WedgeBlocker",Vector3(3.2,0,0),180)
+			place(load("res://commons/artifacts/primitive_encounters/traffic_pyramid_5.tscn"),"TrafficPyramidFive",Vector3(0,0,-1.3))
+			place(load("res://commons/artifacts/primitive_encounters/pentagonal_bipyramid_7.tscn"),"SevenVertexCrystal",Vector3(5.2,0,0))
+			words("7 VERTICES / TWO TIPS + FIVE AROUND",Vector3(5.2,.025,1.15),true,.00085)
 			words("03 / COMPLETED SOLIDS BECOME BUILDING PIECES",Vector3(0,.025,-1.7),true,.0015)
 			for entry in [[-3.2,"TETRAHEDRON / 4 FACES"],[0,"PYRAMID / 5 FACES"],[3.2,"WEDGE / BLOCK OR CLIMB"]]:
 				words(entry[1],Vector3(entry[0],.025,1.5),true,.0011)

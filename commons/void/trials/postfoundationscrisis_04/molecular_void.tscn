@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/void/trials/postfoundationscrisis_04/molecular_void.gd" id="2"]
+
+[node name="MolecularDesigner" instance=ExtResource("1")]
+script = ExtResource("2")

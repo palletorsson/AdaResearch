@@ -1,0 +1,206 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Nails",
+      "title": "Color Nails / original museum artifacts",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_hand_color_controller_5_4",
+          "artifact": "hand_color_controller",
+          "station": "NE",
+          "position": [
+            -2,
+            -2
+          ],
+          "facing": 180,
+          "height": 1.2,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "mount": "salon"
+          }
+        },
+        {
+          "id": "f1_nail_color_controller_9_4",
+          "artifact": "nail_color_controller",
+          "station": "NE",
+          "position": [
+            2,
+            -2
+          ],
+          "facing": 180,
+          "height": 1.2,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "mount": "salon"
+          }
+        },
+        {
+          "id": "f1_science_screen_2_5",
+          "artifact": "science_screen",
+          "station": "NE",
+          "position": [
+            -5,
+            -1
+          ],
+          "facing": 180,
+          "height": 1.5,
+          "scale": 1,
+          "config": {
+            "mode": "field"
+          }
+        },
+        {
+          "id": "f1_colorballs_12_5",
+          "artifact": "colorballs",
+          "station": "NE",
+          "position": [
+            5,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "case": "salon",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_brick_wall_factory_12_7",
+          "artifact": "brick_wall_factory",
+          "station": "NE",
+          "position": [
+            5,
+            1
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 0.4,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_nail_salon_7_9",
+          "artifact": "nail_salon",
+          "station": "NE",
+          "position": [
+            0,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Rainbow",
+      "title": "Every Body / More Colour / 4 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_pick_up_cube_2_3",
+          "artifact": "pick_up_cube",
+          "station": "NW",
+          "position": [
+            -5,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_catalyst_pedestal_12_3",
+          "artifact": "catalyst_pedestal",
+          "station": "NE",
+          "position": [
+            5,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "sequence": "auto",
+            "lease_s": "45"
+          }
+        },
+        {
+          "id": "f2_rainbow_7_13",
+          "artifact": "rainbow",
+          "station": "SE",
+          "position": [
+            0,
+            2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stage": "celebration",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_film_rainbow_partitions_13_16",
+          "artifact": "film_rainbow_partitions",
+          "station": "SE",
+          "position": [
+            6,
+            5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

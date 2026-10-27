@@ -6,6 +6,6 @@ func _ready() -> void:
 func add_points(amount: int, _where := Vector3.ZERO) -> void:
 	score += amount
 	var game := get_parent()
-	game._notice("TRIAL / %d cubes collected\nR or B: reset the encounter" % score)
+	game._notice("TRIAL / %d cubes collected\nA / B: jump. R (desktop): reset the encounter" % score)
 func reset() -> void:
 	score = 0

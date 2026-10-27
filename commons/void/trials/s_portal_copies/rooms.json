@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "One falling portal / upright to upside down",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "portal-copies",
+          "artifact": "mod_s_portal_copies_model",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "s_portal_copies_model",
+            "bindings": {
+              "model_scale": 0.1,
+              "yaw": 18,
+              "side_turn": 30,
+              "cross_turn": 20
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -6,5 +6,6 @@ const TRACTION := 30.0
 const DRAG := 5.0
 const STOP_SPEED := 0.15
 const POINTER_DISTANCE := 10.0
-const GRAB_DISTANCE := 5.0
+const GRAB_DISTANCE := 2.0
+const PULL_SPEED := 2.4 # Metres per second; visible travel rather than an instant snap.
 const POINTER_MASK := (1 << 18) | (1 << 20) | (1 << 22) # handles, pointables, UI

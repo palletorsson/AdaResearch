@@ -1,0 +1,195 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Classification",
+      "title": "ML_Classification",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_enhanced_kmeans_7_4",
+          "artifact": "enhanced_kmeans",
+          "station": "NW",
+          "position": [
+            -10,
+            -9
+          ],
+          "facing": 180,
+          "height": 0.15,
+          "scale": 0.2,
+          "config": {
+            "natural_cluster_count": "3",
+            "lesson_controls": "on"
+          }
+        },
+        {
+          "id": "f1_svm_visualization_6_11",
+          "artifact": "svm_visualization",
+          "station": "NE",
+          "position": [
+            10,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {
+            "desktop_ui": "off"
+          }
+        },
+        {
+          "id": "f1_random_forest_visualization_10_12",
+          "artifact": "random_forest_visualization",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {
+            "desktop_ui": "off"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Neural_Networks",
+      "title": "ML_Neural_Networks",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_neural_network_visualization_2_3",
+          "artifact": "neural_network_visualization",
+          "station": "NW",
+          "position": [
+            -14,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f2_neural_networks_vr_2_8",
+          "artifact": "neural_networks_vr",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f2_fine_tuning_vr_9_8",
+          "artifact": "fine_tuning_vr",
+          "station": "NE",
+          "position": [
+            14,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ML_Perception",
+      "title": "ML_Perception",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_computer_vision_vr_3_3",
+          "artifact": "computer_vision_vr",
+          "station": "SW",
+          "position": [
+            -13,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.28,
+          "config": {}
+        },
+        {
+          "id": "f3_convolutional_neural_networks_cnns_vr_1_6",
+          "artifact": "convolutional_neural_networks_cnns_vr",
+          "station": "SE",
+          "position": [
+            -17,
+            -9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f3_vogue_timeline_14_6",
+          "artifact": "vogue_timeline",
+          "station": "NE",
+          "position": [
+            3,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1",
+            "learning_x": "11",
+            "learning_z": "-1",
+            "learning_yaw": "0",
+            "learning_bay": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

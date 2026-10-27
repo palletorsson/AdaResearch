@@ -1,0 +1,302 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_11_QueerRubber",
+      "title": "Shader_11_QueerRubber",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_dark_sphere_6_6",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -18,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_shader_11_queerrubber_8_7",
+          "artifact": "shader_11_queerrubber",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "layout": "line",
+            "gap": "2.2",
+            "bodies": "1.35",
+            "shapes": "sphere,torus,sphere,capsule,cube",
+            "stage": "0.4"
+          }
+        },
+        {
+          "id": "f1_shader_material_parlour_24_8",
+          "artifact": "shader_material_parlour",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_film_shader_view_1_9",
+          "artifact": "film_shader_view",
+          "station": "SE",
+          "position": [
+            18,
+            7
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_09_FBM",
+      "title": "Shader_09_FBM",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_basin_water_12_4",
+          "artifact": "basin_water",
+          "station": "NW",
+          "position": [
+            -12,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "width": "11",
+            "depth": "11",
+            "study": "on",
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_4_20",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            0,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_shader_09_fbm_12_24",
+          "artifact": "shader_09_fbm",
+          "station": "NE",
+          "position": [
+            12,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "setting": "wall",
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_12_PinkExtravaganza",
+      "title": "Shader_12_PinkExtravaganza",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_dark_sphere_7_7",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -18,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_shader_12_pinkextravaganza_7_8",
+          "artifact": "shader_12_pinkextravaganza",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "bodies": "1.5",
+            "shapes": "sphere,torus,cube,plane,sphere_big",
+            "stage": "0.35",
+            "water": "12"
+          }
+        },
+        {
+          "id": "f3_shader_composition_stage_27_8",
+          "artifact": "shader_composition_stage",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_reference_plural_body_10_26",
+          "artifact": "reference_plural_body",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_10_ReactionDiffusion",
+      "title": "Shader_10_ReactionDiffusion",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_shader_state_chamber_12_12",
+          "artifact": "shader_state_chamber",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f4_dark_sphere_18_22",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f4_shader_10_reactiondiffusion_8_23",
+          "artifact": "shader_10_reactiondiffusion",
+          "station": "SE",
+          "position": [
+            12,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1",
+            "setting": "wall"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

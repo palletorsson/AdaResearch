@@ -1,0 +1,175 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "FormFinding_Descent",
+      "title": "Form Finding / where does downhill take you?",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "landscape",
+          "artifact": "descent_landscape_lab",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "marble",
+          "artifact": "descent_marble_toy",
+          "position": [
+            -16.5,
+            3
+          ],
+          "station": "SW",
+          "height": 1.19,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "tremble",
+          "artifact": "settling_tremble",
+          "position": [
+            -16.5,
+            -3
+          ],
+          "station": "NW",
+          "height": 1.65,
+          "facing": 0,
+          "scale": 1.5,
+          "config": {}
+        },
+        {
+          "id": "perlin",
+          "artifact": "void_descent_perlin",
+          "position": [
+            16.5,
+            -3
+          ],
+          "station": "NE",
+          "height": 0.8,
+          "facing": 0,
+          "scale": 0.14,
+          "config": {}
+        },
+        {
+          "id": "well",
+          "artifact": "gradient_descent_well",
+          "position": [
+            16.5,
+            3
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "receiver",
+          "artifact": "science_screen",
+          "position": [
+            -16.5,
+            -6
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "scan_radius": 1,
+            "mode": "point",
+            "label": "RECEIVER / NO DESCENT INPUT"
+          }
+        }
+      ],
+      "props": [
+        {
+          "id": "marble-bench",
+          "kind": "workbench",
+          "position": [
+            -16.5,
+            3
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "tremble-bench",
+          "kind": "workbench",
+          "position": [
+            -16.5,
+            -3
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "well-support",
+          "kind": "platform_block",
+          "position": [
+            16.5,
+            3
+          ],
+          "facing": 0,
+          "scale": 1
+        }
+      ],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / PREDICT. STEP. COMPARE.",
+          "position": [
+            0,
+            6
+          ]
+        },
+        {
+          "label": "02 / A MOVING MARBLE IS ANOTHER MODEL",
+          "position": [
+            -16.5,
+            5
+          ]
+        },
+        {
+          "label": "03 / LOCAL RULES, DIFFERENT SURFACES",
+          "position": [
+            16.5,
+            5
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

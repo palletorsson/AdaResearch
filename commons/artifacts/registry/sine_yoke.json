@@ -1,0 +1,35 @@
+{
+  "artifacts": {
+    "sine_yoke": {
+      "lookup_name": "sine_yoke",
+      "name": "Hand wheel / visible sine yoke",
+      "scene": "res://commons/artifacts/sine_yoke/sine_yoke.tscn",
+      "description": "Turn the exposed crank by hand. The pin slides horizontally inside the yoke, whose height carries a timber cube on vertical guides. Stop or reverse at any position.",
+      "qfep_connection": "Makes the ideal constraint visible: a circle becomes a line by allowing one direction and constraining the other. Kinematic linkage, not force-based mechanics.",
+      "category": "wavefunctions",
+      "dev_category": "wavefunctions",
+      "complexity": "beginner",
+      "tags": [
+        "sine",
+        "rotation",
+        "translation",
+        "Scotch yoke",
+        "hand wheel"
+      ],
+      "interactions": [
+        "Desktop: drag around the wheel rim or crank.",
+        "XR: grip the wooden crank and move the hand around the wheel."
+      ],
+      "parameters": {
+        "initial_angle": "Initial wheel position in degrees. No automatic drive."
+      },
+      "footprint": [
+        1.9,
+        2,
+        0.85
+      ],
+      "museum_import": true,
+      "label": "Hand wheel / visible sine yoke"
+    }
+  }
+}

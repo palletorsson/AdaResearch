@@ -1,0 +1,527 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "title": "Random_Space_Geometry",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_seeded_room_5_7",
+          "artifact": "seeded_room",
+          "station": "SW",
+          "position": [
+            -1.5,
+            4.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "seed": "42",
+            "pin": "true",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_perlin_noise_bridge_6_16",
+          "artifact": "perlin_noise_bridge",
+          "station": "NW",
+          "position": [
+            -6,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_env_one_5_17",
+          "artifact": "env_one",
+          "station": "NW",
+          "position": [
+            -5,
+            -5
+          ],
+          "facing": 180,
+          "height": 4,
+          "scale": 0.5,
+          "config": {
+            "seed_controls": "true"
+          }
+        },
+        {
+          "id": "f1_curl_noise_particles_9_17",
+          "artifact": "curl_noise_particles",
+          "station": "NW",
+          "position": [
+            -9,
+            -5
+          ],
+          "facing": 180,
+          "height": 0.25,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_transformations_geometric_3_18",
+          "artifact": "random_transformations_geometric",
+          "station": "NW",
+          "position": [
+            -3,
+            -6
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 0.2,
+          "config": {}
+        },
+        {
+          "id": "f1_sculpt_one_2_19",
+          "artifact": "sculpt_one",
+          "station": "NW",
+          "position": [
+            -2,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "seed_controls": "true"
+          }
+        },
+        {
+          "id": "f1_dark_sphere_6_20",
+          "artifact": "dark_sphere",
+          "station": "NW",
+          "position": [
+            -6,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "title": "Randomness_Examples_of_Randomness",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_pollock_painting_in_3d_7_6",
+          "artifact": "pollock_painting_in_3d",
+          "station": "SE",
+          "position": [
+            0,
+            6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "support": "floor"
+          }
+        },
+        {
+          "id": "f2_monte_carlo_dartboard_4_12",
+          "artifact": "monte_carlo_dartboard",
+          "station": "SE",
+          "position": [
+            3,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "disclosure": "works",
+            "controls": "compact",
+            "control_front": "1.0",
+            "keyboard": "off",
+            "button_shape": "rect",
+            "lesson": "sample_budget"
+          }
+        },
+        {
+          "id": "f2_pipe_dream_10_15",
+          "artifact": "pipe_dream",
+          "station": "NW",
+          "position": [
+            -3,
+            -3
+          ],
+          "facing": 0,
+          "height": 1.15,
+          "scale": 0.25,
+          "config": {
+            "residue": "path"
+          }
+        },
+        {
+          "id": "f2_extreme_randomness_5_20",
+          "artifact": "extreme_randomness",
+          "station": "NE",
+          "position": [
+            2,
+            -10
+          ],
+          "facing": 0,
+          "height": 1.5,
+          "scale": 0.2,
+          "config": {
+            "chapter": "all",
+            "gallery_radius": "7"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Pheromone",
+      "title": "Random_Pheromone",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_pheromone_terrain_6_3",
+          "artifact": "pheromone_terrain",
+          "station": "SW",
+          "position": [
+            -6,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "comparison": "true",
+            "walk_seed": "190919"
+          }
+        },
+        {
+          "id": "f3_dark_sphere_2_5",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -2,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_clipboard_2_6",
+          "artifact": "clipboard",
+          "station": "SW",
+          "position": [
+            -2,
+            6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pheromone_axioms": "194:1.0"
+          }
+        },
+        {
+          "id": "f3_clipboard_3_7",
+          "artifact": "clipboard",
+          "station": "SW",
+          "position": [
+            -3,
+            5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "queer_energy": "194:1.0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Space",
+      "title": "Random_Space",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_noise_mixer_4_3",
+          "artifact": "noise_mixer",
+          "station": "SE",
+          "position": [
+            2.25,
+            0
+          ],
+          "facing": 180,
+          "height": 0.9,
+          "scale": 1,
+          "config": {
+            "plinth": "0.9"
+          }
+        },
+        {
+          "id": "f4_worley_noise_8_4",
+          "artifact": "worley_noise",
+          "station": "NW",
+          "position": [
+            -1.75,
+            -1
+          ],
+          "facing": 180,
+          "height": 0.4,
+          "scale": 1,
+          "config": {
+            "plinth": "0.4"
+          }
+        },
+        {
+          "id": "f4_random_space_6_6",
+          "artifact": "random_space",
+          "station": "NE",
+          "position": [
+            0.25,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1.4,
+          "config": {
+            "offset": "0,0.2,0",
+            "surface_color": "6b427d",
+            "emission_strength": "0.02"
+          }
+        },
+        {
+          "id": "f4_dark_sphere_5_7",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            1.25,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_shannon_entropy_meter_4_9",
+          "artifact": "shannon_entropy_meter",
+          "station": "NE",
+          "position": [
+            2.25,
+            -6
+          ],
+          "facing": 180,
+          "height": 1.05,
+          "scale": 1,
+          "config": {
+            "plinth": "1.05"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Game",
+      "title": "Random_Game",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_r_c_9_6",
+          "artifact": "r_c",
+          "station": "SE",
+          "position": [
+            0,
+            6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "chasm",
+            "cue": "advance",
+            "controls": "compact",
+            "control_front": "-2.6",
+            "control_facing": "-z",
+            "control_height": "1.38",
+            "control_floor": "0.28",
+            "control_fixed": "true"
+          }
+        },
+        {
+          "id": "f5_random_removal_arena_9_17",
+          "artifact": "random_removal_arena",
+          "station": "NE",
+          "position": [
+            0,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "columns": "9",
+            "rows": "9",
+            "glass_width": "11",
+            "glass_depth": "11",
+            "glass_height": "4.5",
+            "glass_title": "THE SET UNDERFOOT",
+            "glass_grid": "false",
+            "controls": "compact",
+            "control_front": "-6.0",
+            "control_facing": "-z"
+          }
+        },
+        {
+          "id": "f5_random_doors_9_29",
+          "artifact": "random_doors",
+          "station": "NW",
+          "position": [
+            -16.5,
+            -6.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "controls": "compact",
+            "control_front": "-4.0",
+            "control_facing": "-z"
+          }
+        },
+        {
+          "id": "f5_door_timing_trials_9_38",
+          "artifact": "door_timing_trials",
+          "station": "SW",
+          "position": [
+            -13.4,
+            9.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_cube_projectile_spawner_9_51",
+          "artifact": "cube_projectile_spawner",
+          "station": "SE",
+          "position": [
+            14.5,
+            7.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "mode": "field",
+            "field_size": "8x8",
+            "field_height": "8",
+            "fall_min": "1.6",
+            "fall_max": "2.6",
+            "drift": "0.25",
+            "jitter": "0.25",
+            "jitter_interval": "0.45",
+            "vertical_variation": "0.2",
+            "spawn_interval": "0.5",
+            "max_projectiles": "24",
+            "stand": "field",
+            "controls": "compact",
+            "control_front": "-5.0",
+            "control_facing": "-z"
+          }
+        },
+        {
+          "id": "f5_waiting_profile_9_61",
+          "artifact": "waiting_profile",
+          "station": "NE",
+          "position": [
+            16,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "controls": "compact",
+            "control_front": "-1.7",
+            "control_facing": "-z"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "basin": {
+        "depth": 3,
+        "glass": false,
+        "rects": [
+          [
+            -2.5,
+            4.5,
+            5,
+            3
+          ],
+          [
+            -4.5,
+            -9.5,
+            9,
+            9
+          ]
+        ]
+      }
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -2979,6 +2979,100 @@
       "spatial_needs": {
         "size": "environment"
       }
+    },
+    "movable_pivot_walkway": {
+      "lookup_name": "movable_pivot_walkway",
+      "name": "Plank / move the pivot",
+      "label": "Plank / move the pivot",
+      "scene": "res://commons/artifacts/movable_pivot/movable_pivot.tscn",
+      "description": "Slide the pink bearing along the exposed rail, then turn the pink end grip. The six-metre timber walkway turns around the chosen centre. Real walkable collision, ideal constrained linkage.",
+      "qfep_connection": "The centre of rotation is a construction choice. The same movement gives different reach and support when that relationship changes.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "complexity": "beginner",
+      "tags": [
+        "pivot",
+        "rotation",
+        "translation",
+        "walkway",
+        "hand",
+        "timber"
+      ],
+      "interactions": [
+        "Desktop: hold left mouse on a pink grip and drag.",
+        "XR: grip the pink bearing or end handle, move by hand, release to retain."
+      ],
+      "parameters": {
+        "pivot_x": "Bearing offset in metres, -1.5 to +1.5.",
+        "angle_degrees": "Deck yaw, -22 to +22 degrees."
+      },
+      "footprint": [
+        10.8,
+        1.2,
+        4.8
+      ],
+      "museum_import": true
+    },
+    "sun_feather": {
+      "lookup_name": "sun_feather",
+      "name": "Sun feather / ten transformed prefabs",
+      "label": "Sun feather / ten transformed prefabs",
+      "scene": "res://commons/artifacts/sun_feather/sun_feather.tscn",
+      "description": "Ten existing timber planks arranged around one insertion point. Retained sliders change rotation and uniform scale between copies; a third slider compares the blue DO NOT CROSS barrier using the same rule.",
+      "qfep_connection": "One local relationship produces a family. Replacing the source object changes the reading of the pattern while retaining its geometric rule.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "complexity": "beginner",
+      "tags": [
+        "rotation",
+        "scale",
+        "composition",
+        "prefab",
+        "sun feather",
+        "iteration"
+      ],
+      "parameters": {
+        "turn_per_copy": "0 to 42 degrees per copy.",
+        "scale_ratio": "0.80 to 1.04 times the preceding copy.",
+        "source_family": "timber or barrier.",
+        "layout_mode": "radial, circumference or packed.",
+        "show_controls": "Retained sliders can be omitted for a staged arrangement."
+      },
+      "interactions": [
+        "Desktop: hold left mouse and drag a pink slider.",
+        "XR: grip a pink slider and move it vertically; release retains the value."
+      ],
+      "footprint": [
+        2.44,
+        1.5,
+        2.75
+      ],
+      "museum_import": true
+    },
+    "barrier_scale_line": {
+      "lookup_name": "barrier_scale_line",
+      "name": "DO NOT CROSS / from toy to architecture",
+      "label": "DO NOT CROSS / tabletop to oversized",
+      "scene": "res://commons/artifacts/barrier_scale_line/barrier_scale_line.tscn",
+      "description": "Nine original blue barriers grow along a line. Three begin on a wooden table, two on lower packing blocks, and the last four stand on the floor. Three exceed normal size; the largest is 5.5 metres wide.",
+      "qfep_connection": "A familiar prohibition changes its address as its scale moves from hand to body to architecture.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "complexity": "beginner",
+      "tags": [
+        "scale",
+        "barrier",
+        "staging",
+        "surreal",
+        "blue"
+      ],
+      "parameters": {},
+      "footprint": [
+        5.5,
+        3.1,
+        8.6
+      ],
+      "museum_import": true
     }
   }
 }

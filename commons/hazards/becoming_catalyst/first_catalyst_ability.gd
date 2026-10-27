@@ -176,10 +176,18 @@ func send_form(direction: Vector3) -> RigidBody3D:
 	if not unlocked or not formed or not sphere.visible or _cooldown > 0.0 or direction.length_squared() < 0.01: return null
 	var game := get_node_or_null("/root/GameManager")
 	if game != null and game._death_sequence_running: return null
-	_cooldown = 0.35
+	var void_world := get_tree().get_first_node_in_group("void_game")
+	if is_instance_valid(void_world) and void_world.throwable_tools: return null
+	var laser: bool = is_instance_valid(void_world) and void_world.laser_unlocked
+	if is_instance_valid(void_world) and (not void_world.ready_for_play or void_world.recovering or void_world.returning): return null
+	_cooldown = 0.55 if laser else 0.35
 	# Runtime load: the autoload starts before XRTools' dependency registration.
-	var shot: RigidBody3D = load("res://commons/artifacts/ignorance_gallery/form_projectile.gd").new()
-	shot.form = sphere.mesh.duplicate()
+	var shot: RigidBody3D
+	if laser:
+		shot = load("res://commons/void/laser_burst.gd").new()
+	else:
+		shot = load("res://commons/artifacts/ignorance_gallery/form_projectile.gd").new()
+		shot.form = sphere.mesh.duplicate()
 	shot.direction = direction.normalized()
 	shot.speed = 6.0; shot.lifetime = 4.0; shot.projectile_scale = 0.45
 	for body in get_tree().get_nodes_in_group("player_body"):

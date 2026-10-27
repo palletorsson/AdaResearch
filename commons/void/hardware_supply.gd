@@ -9,6 +9,9 @@ static func connect_unit(unit: Node3D, local_port: Vector3) -> Node3D:
 	var route := Node3D.new()
 	route.name = "HardwareSupply"
 	unit.add_child(route)
+	# A curator can rotate a unit freely. Trunking follows the building axes,
+	# rather than becoming a broad diagonal box in the rotated artifact frame.
+	route.global_basis = Basis.IDENTITY
 	var end := unit.to_global(local_port)
 	var ceiling := end + Vector3.UP*(4.8-local_port.y)
 	var points: Array[Vector3] = [end,ceiling]
@@ -28,8 +31,8 @@ static func connect_unit(unit: Node3D, local_port: Vector3) -> Node3D:
 	clamp.albedo_color = Color("d2d0bd")
 	clamp.roughness = 0.8
 	for i in range(points.size()-1):
-		var a := unit.to_local(points[i])
-		var b := unit.to_local(points[i+1])
+		var a := route.to_local(points[i])
+		var b := route.to_local(points[i+1])
 		if a.distance_to(b)<0.01: continue
 		var mesh := MeshInstance3D.new()
 		mesh.name = "Trunk%d"%i

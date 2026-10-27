@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "S descent / 1:10 model",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "s-study",
+          "artifact": "mod_s_descent_model",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "s_descent_model",
+            "bindings": {
+              "model_scale": 0.1,
+              "cutaway_alpha": 0.12,
+              "yaw": 18
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

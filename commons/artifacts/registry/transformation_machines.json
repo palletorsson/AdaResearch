@@ -1,0 +1,88 @@
+{
+  "artifacts": {
+    "trans_machine_crank": {
+      "lookup_name": "trans_machine_crank",
+      "name": "Wood crank / metal rod / piston",
+      "scene": "res://commons/artifacts/transformation_machines/crank.tscn",
+      "description": "Rotation constrains a metal connecting rod; the rod translates a wooden piston. Contact can deliver a ball. Unpin the rod: turning alone no longer guarantees delivery.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "dev_themes": [
+        "transformation",
+        "mechanism",
+        "physical consequence"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": [
+        "transformation"
+      ],
+      "complexity": "intermediate",
+      "qfep_connection": "A constraint is a rule with material consequences. Visible motion does not guarantee an outcome; coupling, contact and clearance make success conditional."
+    },
+    "trans_machine_lever": {
+      "lookup_name": "trans_machine_lever",
+      "name": "Working lever / two effort arms",
+      "scene": "res://commons/artifacts/transformation_machines/lever.tscn",
+      "description": "Pull the same loaded beam at two distances from its pivot. A real hinge and attached rigid load determine what lifts.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "dev_themes": [
+        "transformation",
+        "mechanism",
+        "physical consequence"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": [
+        "transformation"
+      ],
+      "complexity": "intermediate",
+      "qfep_connection": "A constraint is a rule with material consequences. Visible motion does not guarantee an outcome; coupling, contact and clearance make success conditional."
+    },
+    "trans_machine_suspended": {
+      "lookup_name": "trans_machine_suspended",
+      "name": "Rope / suspended construction cube",
+      "scene": "res://commons/artifacts/transformation_machines/suspended.tscn",
+      "description": "Pull and release the cube with a bounded force grip. Four pinned links keep it attached; gravity, contact and the slot determine its passage.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "dev_themes": [
+        "transformation",
+        "mechanism",
+        "physical consequence"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": [
+        "transformation"
+      ],
+      "complexity": "intermediate",
+      "qfep_connection": "A constraint is a rule with material consequences. Visible motion does not guarantee an outcome; coupling, contact and clearance make success conditional."
+    },
+    "trans_machine_sorter": {
+      "lookup_name": "trans_machine_sorter",
+      "name": "Gravity / sort by physical size",
+      "scene": "res://commons/artifacts/transformation_machines/sorter.tscn",
+      "description": "Release three differently sized white spheres of equal mass onto identical diverging rails. Gravity and contact decide where each exits; the readout observes those exits.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "dev_themes": [
+        "transformation",
+        "mechanism",
+        "physical consequence"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": [
+        "transformation"
+      ],
+      "complexity": "intermediate",
+      "qfep_connection": "A constraint is a rule with material consequences. Visible motion does not guarantee an outcome; coupling, contact and clearance make success conditional."
+    }
+  }
+}

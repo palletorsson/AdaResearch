@@ -69,6 +69,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	_read_metadata_overrides()
 	if _built:
 		for c in get_children():
+			# The new Bezel/Screen must retain their public node paths this frame.
+			remove_child(c)
 			c.queue_free()
 		_built = false
 		_screen_mesh = null

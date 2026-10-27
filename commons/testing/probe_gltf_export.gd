@@ -1,9 +1,10 @@
 extends SceneTree
+const ModelStorage = preload("res://tools/generated_storage.gd")
 ## Can the corpus export to glTF? Four danger classes, one boot:
-##   roughrock          — plain procedural mesh (the safe case)
-##   matrix_4x4_viewer  — the heavyweight (205k verts, 1000 meshes)
-##   science_screen     — SubViewport texture + shaders (the visual risk)
-##   laser_measure      — MultiMesh ruler (the structural risk)
+##   roughrock          â€” plain procedural mesh (the safe case)
+##   matrix_4x4_viewer  â€” the heavyweight (205k verts, 1000 meshes)
+##   science_screen     â€” SubViewport texture + shaders (the visual risk)
+##   laser_measure      â€” MultiMesh ruler (the structural risk)
 ## Writes .glb files + a verdict JSON with sizes and node/mesh survival.
 ##   godot --headless --path . --xr-mode off --script res://commons/testing/probe_gltf_export.gd
 
@@ -13,7 +14,7 @@ const TOKENS := {
 	"science_screen": "",
 	"laser_measure": "",
 }
-const OUT_DIR := "res://ada_run/gltf_probe"
+var OUT_DIR := ModelStorage.output_directory("res://ada_run/gltf_probe")
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -54,7 +55,7 @@ func _run() -> void:
 		var err := gdoc.append_from_scene(inst, gstate)
 		var out_path: String = OUT_DIR + "/" + tok + ".glb"
 		if err == OK:
-			err = gdoc.write_to_filesystem(gstate, out_path)
+			err = ModelStorage.write_gltf(gdoc,gstate,out_path)
 		var ms := Time.get_ticks_msec() - t0
 		var size: int = 0
 		if FileAccess.file_exists(out_path):

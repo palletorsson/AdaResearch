@@ -1,0 +1,874 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Array_Patterns",
+      "title": "Array Patterns / original museum transfer",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_science_screen_16_3",
+          "artifact": "science_screen",
+          "station": "SW",
+          "position": [
+            -3,
+            11
+          ],
+          "facing": 0,
+          "height": 1.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pattern_tile_4x4_4_4",
+          "artifact": "pattern_tile_4x4",
+          "station": "SE",
+          "position": [
+            10,
+            9
+          ],
+          "facing": 180,
+          "height": 1.35,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_vr_tile_editor_mirror_9_5",
+          "artifact": "vr_tile_editor_mirror",
+          "station": "SE",
+          "position": [
+            3,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_facade_grammar_demo_13_5",
+          "artifact": "facade_grammar_demo",
+          "station": "SW",
+          "position": [
+            -4,
+            6
+          ],
+          "facing": 180,
+          "height": 0.02,
+          "scale": 0.28,
+          "config": {
+            "embedded": "true"
+          }
+        },
+        {
+          "id": "f1_pattern_tile_mirror_4_7",
+          "artifact": "pattern_tile_mirror",
+          "station": "SE",
+          "position": [
+            10,
+            5
+          ],
+          "facing": 180,
+          "height": 1.35,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_tiling_demo_3_8",
+          "artifact": "tiling_demo",
+          "station": "SE",
+          "position": [
+            16,
+            8
+          ],
+          "facing": 180,
+          "height": 0.75,
+          "scale": 0.25,
+          "config": {
+            "embedded": "true"
+          }
+        },
+        {
+          "id": "f1_pattern_tile_plate_13_10",
+          "artifact": "pattern_tile_plate",
+          "station": "SE",
+          "position": [
+            2,
+            1
+          ],
+          "facing": 180,
+          "height": 0.51,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pattern_tunnel_machine_24_11",
+          "artifact": "pattern_tunnel_machine",
+          "station": "NW",
+          "position": [
+            -14,
+            -8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "lesson": "addresses",
+            "tunnel_length": "6",
+            "group_index": "0",
+            "platform_route": "true"
+          }
+        },
+        {
+          "id": "f1_pattern_tile_brick_4_14",
+          "artifact": "pattern_tile_brick",
+          "station": "NE",
+          "position": [
+            8,
+            -7
+          ],
+          "facing": 180,
+          "height": 1.35,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pattern_tile_herringbone_7_14",
+          "artifact": "pattern_tile_herringbone",
+          "station": "NE",
+          "position": [
+            4,
+            -7
+          ],
+          "facing": 180,
+          "height": 1.35,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_grid_model_13_14",
+          "artifact": "grid_model",
+          "station": "NW",
+          "position": [
+            -3,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_panel_bridge_loom_6_16",
+          "artifact": "panel_bridge_loom",
+          "station": "NE",
+          "position": [
+            10,
+            -12
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_8_16",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            4,
+            -12
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "title": "Symmetry Seventeen / original museum transfer",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_wallpaper_cage_21_4",
+          "artifact": "wallpaper_cage",
+          "station": "SW",
+          "position": [
+            -15,
+            9
+          ],
+          "facing": 180,
+          "height": 1.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_loom_escher_mirror_4_5",
+          "artifact": "loom_escher_mirror",
+          "station": "SE",
+          "position": [
+            12,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_pattern_loom_10_5",
+          "artifact": "pattern_loom",
+          "station": "SE",
+          "position": [
+            5,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_loom_alhambra_p6m_16_5",
+          "artifact": "loom_alhambra_p6m",
+          "station": "SW",
+          "position": [
+            -2,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_wall_pattern_gallery_8_6",
+          "artifact": "wall_pattern_gallery",
+          "station": "NE",
+          "position": [
+            9,
+            -8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "surfaces": "walls",
+            "emission_strength": "0.25"
+          }
+        },
+        {
+          "id": "f2_vr_tile_editor_20_10",
+          "artifact": "vr_tile_editor",
+          "station": "NW",
+          "position": [
+            -16,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "symmetry_compare"
+          }
+        },
+        {
+          "id": "f2_mill_persian_p4_4_12",
+          "artifact": "mill_persian_p4",
+          "station": "SE",
+          "position": [
+            16,
+            6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_mill_alhambra_p6m_10_12",
+          "artifact": "mill_alhambra_p6m",
+          "station": "SE",
+          "position": [
+            5,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_jacquard_studio_16_14",
+          "artifact": "jacquard_studio",
+          "station": "SW",
+          "position": [
+            -4,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_pattern_tile_puzzle_10_17",
+          "artifact": "pattern_tile_puzzle",
+          "station": "NE",
+          "position": [
+            3,
+            -3
+          ],
+          "facing": 180,
+          "height": 1.35,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_mill_escher_p4g_4_18",
+          "artifact": "mill_escher_p4g",
+          "station": "NE",
+          "position": [
+            16,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_kaleidoscope_21_18",
+          "artifact": "kaleidoscope",
+          "station": "NW",
+          "position": [
+            -16,
+            -11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0.90"
+          }
+        },
+        {
+          "id": "f2_thread_loom_16_21",
+          "artifact": "thread_loom",
+          "station": "NW",
+          "position": [
+            -5,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_pattern_artifact_4_24",
+          "artifact": "pattern_artifact",
+          "station": "NE",
+          "position": [
+            16,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0.90"
+          }
+        },
+        {
+          "id": "f2_tile_meander_floor_21_24",
+          "artifact": "tile_meander_floor",
+          "station": "NE",
+          "position": [
+            0,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_pattern_atlas_gallery_13_26",
+          "artifact": "pattern_atlas_gallery",
+          "station": "NE",
+          "position": [
+            0,
+            -13
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Pattern_Temple",
+      "title": "Pattern Temple / original museum transfer",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_pattern_temple_12_12",
+          "artifact": "pattern_temple",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Ribbon_Patterns_01",
+      "title": "Ribbon_Patterns_01 / 11 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_grid_2d_4x4_2_4",
+          "artifact": "grid_2d_4x4",
+          "station": "SE",
+          "position": [
+            10,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "notation": "none",
+            "show_binary_table": "false"
+          }
+        },
+        {
+          "id": "f4_grid_3d_4x4x4_7_4",
+          "artifact": "grid_3d_4x4x4",
+          "station": "SE",
+          "position": [
+            5,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "layer_pattern"
+          }
+        },
+        {
+          "id": "f4_column_3_z_18_4",
+          "artifact": "column_3_z",
+          "station": "SW",
+          "position": [
+            -6,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_row_3_x_18_11",
+          "artifact": "row_3_x",
+          "station": "SW",
+          "position": [
+            -5.5,
+            6.4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_xyz_coordinates_5_12",
+          "artifact": "xyz_coordinates",
+          "station": "SE",
+          "position": [
+            7,
+            4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_grid3d_6_17",
+          "artifact": "grid3d",
+          "station": "NE",
+          "position": [
+            4,
+            -2
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_bar_array_18_17",
+          "artifact": "bar_array",
+          "station": "NW",
+          "position": [
+            -4,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_bar_array_bubble_sort_6_20",
+          "artifact": "bar_array_bubble_sort",
+          "station": "NE",
+          "position": [
+            6,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_sorting_algorithm_race_18_20",
+          "artifact": "sorting_algorithm_race",
+          "station": "NW",
+          "position": [
+            -6,
+            -5
+          ],
+          "facing": 180,
+          "height": 0.66,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_shelf_5_22",
+          "artifact": "shelf",
+          "station": "NE",
+          "position": [
+            7,
+            -7
+          ],
+          "facing": 180,
+          "height": 0.55,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_shelf_with_stickers_19_22",
+          "artifact": "shelf_with_stickers",
+          "station": "NW",
+          "position": [
+            -7,
+            -7
+          ],
+          "facing": 180,
+          "height": 0.55,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Ribbon_Patterns_02",
+      "title": "Ribbon_Patterns_02 / 12 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_SimultaneousContrast_6_5",
+          "artifact": "SimultaneousContrast",
+          "station": "SE",
+          "position": [
+            7,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "context"
+          }
+        },
+        {
+          "id": "f5_MetamerismLab_20_5",
+          "artifact": "MetamerismLab",
+          "station": "SW",
+          "position": [
+            -7,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "carrier"
+          }
+        },
+        {
+          "id": "f5_spherecolors_6_11",
+          "artifact": "spherecolors",
+          "station": "SE",
+          "position": [
+            3.5,
+            3
+          ],
+          "facing": 180,
+          "height": 2.4,
+          "scale": 0.8,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "label_in_space": "true"
+          }
+        },
+        {
+          "id": "f5_hue_carousel_20_11",
+          "artifact": "hue_carousel",
+          "station": "SW",
+          "position": [
+            -4,
+            3.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.8,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_grabcolorcollection_5_15",
+          "artifact": "grabcolorcollection",
+          "station": "NE",
+          "position": [
+            5.5,
+            -1
+          ],
+          "facing": 180,
+          "height": 0.15,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_color_mixing_20_16",
+          "artifact": "color_mixing",
+          "station": "NW",
+          "position": [
+            -3,
+            -2
+          ],
+          "facing": 180,
+          "height": 0.85,
+          "scale": 0.55,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_dark_side_prism_6_19",
+          "artifact": "dark_side_prism",
+          "station": "NE",
+          "position": [
+            7,
+            -5
+          ],
+          "facing": 180,
+          "height": 1.25,
+          "scale": 0.6,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_prism_20_20",
+          "artifact": "prism",
+          "station": "NW",
+          "position": [
+            -7,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_grab_stick_scanner_2_23",
+          "artifact": "grab_stick_scanner",
+          "station": "NE",
+          "position": [
+            11,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.4,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_two_roads_6_25",
+          "artifact": "two_roads",
+          "station": "NE",
+          "position": [
+            7,
+            -11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.45,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_color_scanner_20_25",
+          "artifact": "color_scanner",
+          "station": "NW",
+          "position": [
+            -7,
+            -11
+          ],
+          "facing": 180,
+          "height": 1.85,
+          "scale": 0.45,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_grab_stick_24_28",
+          "artifact": "grab_stick",
+          "station": "NW",
+          "position": [
+            -11,
+            -13
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 0.4,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

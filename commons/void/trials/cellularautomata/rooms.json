@@ -1,0 +1,318 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_Introduction",
+      "title": "CA_Introduction / transfer, 8 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_synthesis_stand_2_3",
+          "artifact": "synthesis_stand",
+          "position": [
+            4,
+            6
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "subject": "dark_sphere",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f1_dark_sphere_5_3",
+          "artifact": "dark_sphere",
+          "position": [
+            1,
+            6
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_persian_rug_4_4",
+          "artifact": "persian_rug",
+          "position": [
+            2,
+            5
+          ],
+          "station": "SE",
+          "height": 0.025,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_ca_rule_explorer_10_5",
+          "artifact": "ca_rule_explorer",
+          "position": [
+            -4,
+            4
+          ],
+          "station": "SW",
+          "height": 1.04,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "study": "neighbours",
+            "rule": "90",
+            "speed": "4",
+            "plinth": "0",
+            "room": "ring"
+          }
+        },
+        {
+          "id": "f1_langton_swarm_10_9",
+          "artifact": "langton_swarm",
+          "position": [
+            -4,
+            0
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_line_network_ca_10_12",
+          "artifact": "line_network_ca",
+          "position": [
+            -4,
+            -3
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "size": "2.0",
+            "study": "arrival"
+          }
+        },
+        {
+          "id": "f1_ca_showcase_3_14",
+          "artifact": "ca_showcase",
+          "position": [
+            3,
+            -5
+          ],
+          "station": "NE",
+          "height": 0.62,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_rule110_computer_10_16",
+          "artifact": "rule110_computer",
+          "position": [
+            -4,
+            -7
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "CA_INTRODUCTION / 8 OF 8 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            9.5
+          ]
+        },
+        {
+          "label": "(2,3) SYNTHESIS_STAND",
+          "position": [
+            4.3,
+            7.4
+          ]
+        },
+        {
+          "label": "(5,3) DARK_SPHERE",
+          "position": [
+            0.6,
+            7.4
+          ]
+        },
+        {
+          "label": "(4,4) PERSIAN_RUG",
+          "position": [
+            2.3,
+            8.1
+          ]
+        },
+        {
+          "label": "(10,5) CA_RULE_EXPLORER",
+          "position": [
+            -4,
+            5.8
+          ]
+        },
+        {
+          "label": "(10,9) LANGTON_SWARM",
+          "position": [
+            -4,
+            1
+          ]
+        },
+        {
+          "label": "(10,12) LINE_NETWORK_CA",
+          "position": [
+            -4,
+            -1
+          ]
+        },
+        {
+          "label": "(3,14) CA_SHOWCASE",
+          "position": [
+            3,
+            -3
+          ]
+        },
+        {
+          "label": "(10,16) RULE110_COMPUTER",
+          "position": [
+            -4,
+            -8
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "title": "CA_ElementaryRules / transfer, 2 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_structure_growth_6_6",
+          "artifact": "structure_growth",
+          "position": [
+            0,
+            0.5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "study": "states",
+            "plinth": "0",
+            "room": "neighbours"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_10_9",
+          "artifact": "dark_sphere",
+          "position": [
+            -4,
+            -2.5
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "CA_ELEMENTARYRULES / 2 OF 2 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            8
+          ]
+        },
+        {
+          "label": "(6,6) STRUCTURE_GROWTH / ORIGINAL FLOOR OPENING BELOW",
+          "position": [
+            -1,
+            4.3
+          ]
+        },
+        {
+          "label": "(10,9) DARK_SPHERE",
+          "position": [
+            -4,
+            -1.3
+          ]
+        }
+      ],
+      "basin": {
+        "depth": 1,
+        "glass": true,
+        "rects": [
+          [
+            -1.5,
+            2,
+            3,
+            1
+          ],
+          [
+            -1.5,
+            1,
+            3,
+            1
+          ],
+          [
+            -1.5,
+            0,
+            2,
+            1
+          ],
+          [
+            -1.5,
+            -1,
+            3,
+            1
+          ]
+        ]
+      },
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

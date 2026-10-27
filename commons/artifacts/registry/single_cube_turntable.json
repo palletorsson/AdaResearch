@@ -1,0 +1,36 @@
+{
+  "artifacts": {
+    "single_cube_turntable": {
+      "lookup_name": "single_cube_turntable",
+      "name": "Hand wheel / one cube turntable",
+      "label": "Hand wheel / one cube turntable",
+      "scene": "res://commons/artifacts/single_cube_turntable/single_cube_turntable.tscn",
+      "description": "Turn a compact 1.10-metre platform carrying one centered off-white cube. Hand input, speed and direction rotate the cube in place with its plate. Black steel, pink grips and the shared machine finish.",
+      "qfep_connection": "A centered body changes orientation without changing its position. The visible platform and cube share one transformation.",
+      "category": "wavefunctions",
+      "dev_category": "wavefunctions",
+      "complexity": "beginner",
+      "tags": [
+        "rotation",
+        "platform",
+        "one cube",
+        "manual"
+      ],
+      "interactions": [
+        "Drag the pink wheel or grip it in XR.",
+        "RPM sets 0..30; ANGLE pauses and places a phase.",
+        "RUN and REVERSE control automatic rotation."
+      ],
+      "parameters": {
+        "motor_rpm": "0..30 revolutions per minute.",
+        "auto_run": "The motor yields to a held wheel and resumes after release."
+      },
+      "footprint": [
+        2.12,
+        2.5,
+        2.59
+      ],
+      "museum_import": true
+    }
+  }
+}

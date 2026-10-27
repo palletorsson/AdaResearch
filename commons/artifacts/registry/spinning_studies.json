@@ -1,0 +1,36 @@
+{
+  "artifacts": {
+    "torus_piston": {
+      "lookup_name": "torus_piston",
+      "name": "Wheel / cylinder / torus",
+      "label": "Wheel / cylinder / torus",
+      "scene": "res://commons/artifacts/torus_piston/torus_piston.tscn",
+      "description": "An exposed finite connecting rod converts wheel rotation into a 1.60 m horizontal stroke. A white cylinder with red bands enters a stationary pink torus. Ideal kinematics, not simulated force or pumping.",
+      "qfep_connection": "An observable constraint distinguishes actual movement from apparent movement. A shared input does not imply an independent animation.",
+      "category": "wavefunctions",
+      "dev_category": "wavefunctions",
+      "footprint": [
+        6.7,
+        3.25,
+        2.65
+      ],
+      "museum_import": true
+    },
+    "pillar_barber_roll": {
+      "lookup_name": "pillar_barber_roll",
+      "name": "Pillar / pink red white barber roll",
+      "label": "Pillar / pink red white barber roll",
+      "scene": "res://commons/artifacts/pillar_barber_roll/pillar_barber_roll.tscn",
+      "description": "A pink/red/white helical sleeve physically rotates around a stationary structural pillar. No band moves vertically: a fixed witness makes the apparent climb and real rotation visible.",
+      "qfep_connection": "An observable constraint distinguishes actual movement from apparent movement. A shared input does not imply an independent animation.",
+      "category": "wavefunctions",
+      "dev_category": "wavefunctions",
+      "footprint": [
+        1.6,
+        5.41,
+        1.6
+      ],
+      "museum_import": true
+    }
+  }
+}

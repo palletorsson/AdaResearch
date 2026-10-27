@@ -1,0 +1,491 @@
+{
+  "settings": {
+    "source": "portal",
+    "arrangement": "line",
+    "count": 7,
+    "spacing": 0.24,
+    "radius": 1.7,
+    "angle": -7,
+    "axis": "z",
+    "ratio": 0.88,
+    "size": 0.6,
+    "rise": 0.16,
+    "staging": "table",
+    "opening": 2.4,
+    "wall": 0.34,
+    "depth": 0.8
+  },
+  "term": {
+    "chapter": "transformation",
+    "label": "Square portal / line",
+    "expr": "ingredient × translation × rotation × scale",
+    "from": [
+      "boolean_tunnel_section"
+    ],
+    "build": {
+      "op": "assemblage",
+      "parts": [
+        {
+          "id": "Board",
+          "at": [
+            0,
+            0.61,
+            0
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  3.6,
+                  0.08,
+                  2.4
+                ],
+                "color": "bd9967"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  3.6,
+                  0.08,
+                  2.4
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support1",
+          "at": [
+            -1.35,
+            0.285,
+            -0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support2",
+          "at": [
+            1.35,
+            0.285,
+            -0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support3",
+          "at": [
+            -1.35,
+            0.285,
+            0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support4",
+          "at": [
+            1.35,
+            0.285,
+            0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Copy01",
+          "at": [
+            0,
+            1.5739999999999998,
+            -0.72
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.6,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy02",
+          "at": [
+            0,
+            1.6231200000000001,
+            -0.48
+          ],
+          "rot": [
+            0,
+            0,
+            -7
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.528,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy03",
+          "at": [
+            0,
+            1.6855455999999998,
+            -0.24
+          ],
+          "rot": [
+            0,
+            0,
+            -14
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.46463999999999994,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy04",
+          "at": [
+            0,
+            1.7596801279999998,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            -21
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.40888320000000006,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy05",
+          "at": [
+            0,
+            1.8441185126400002,
+            0.24
+          ],
+          "rot": [
+            0,
+            0,
+            -28
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.359817216,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy06",
+          "at": [
+            0,
+            1.9376242911232002,
+            0.48
+          ],
+          "rot": [
+            0,
+            0,
+            -35
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.31663915008,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy07",
+          "at": [
+            0,
+            2.039109376188416,
+            0.72
+          ],
+          "rot": [
+            0,
+            0,
+            -42
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.2786424520704,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        }
+      ]
+    }
+  },
+  "lineage": {
+    "family": "transformation_arrangement",
+    "ingredient": "boolean_tunnel_section",
+    "source": "portal_piece",
+    "operations": [
+      "translation",
+      "rotation",
+      "scale"
+    ]
+  },
+  "scope": "Static construction and arrangement. Native exports include collision where authored. This prototype does not claim dynamic joints, hand interactions or traversable routes.",
+  "source_hash": "b944d3b817cf26e5edfd4bd78af71d37790f37af6fa934cae8237866d8c8e12f",
+  "name": "Portals / a falling turn",
+  "parent": null
+}

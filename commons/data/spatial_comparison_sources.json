@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "historic_grid": {
+    "commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+    "date": "2026-07-31T00:59:50+02:00",
+    "label": "Before Endless Museum",
+    "boundary_commit": "62e08730f1e4d1db2dd599f1238cf9fb74a26218",
+    "boundary_date": "2026-07-31T09:16:47+02:00",
+    "reason": "Parent of the first commit adding commons/scenes/endless_museum.gd. Later Museum-era edits changed the source Grid layouts, so current map_data.json is a separate edition.",
+    "scope": "Versioned Grid maps, code, artifact scenes and assets from this exact commit; exported in an isolated snapshot using Godot 4.6 and a current geometry-extraction adapter. Unversioned support dependencies and any required material substitutes are recorded separately. Not a claim of pixel-identical historical rendering or that every current spine map existed at this date."
+  }
+}

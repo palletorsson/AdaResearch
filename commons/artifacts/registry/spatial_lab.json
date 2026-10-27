@@ -1,0 +1,25 @@
+{
+  "artifacts": {
+    "spatial_recipe": {
+      "lookup_name": "spatial_recipe",
+      "name": "Spatial lab recipe",
+      "scene": "res://commons/modular/recipe_area.tscn",
+      "description": "A bound modular recipe with independently editable instances.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "complexity": "beginner",
+      "tags": [
+        "recipe",
+        "lab",
+        "reuse"
+      ],
+      "parameters": {},
+      "configure_before_ready": true,
+      "footprint": [
+        6,
+        4,
+        10
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/void/trials/formfinding/perlin.gd" id="2"]
+[node name="LocalDescent" instance=ExtResource("1")]
+script = ExtResource("2")

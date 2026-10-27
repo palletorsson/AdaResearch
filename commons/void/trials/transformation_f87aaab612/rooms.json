@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "Portals / a falling turn",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "variation",
+          "artifact": "spatial_recipe",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "transformation_variant",
+            "recipe_document": "res://commons/void/trials/transformation_f87aaab612/recipe.json",
+            "editor_label": "Portals / a falling turn"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    }
+  ]
+}

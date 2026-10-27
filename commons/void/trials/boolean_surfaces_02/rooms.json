@@ -1,0 +1,223 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Boolean_Works",
+      "title": "Boolean_Works",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_csg_compose_workbench_4_3",
+          "artifact": "csg_compose_workbench",
+          "station": "SE",
+          "position": [
+            0,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "algebra": "complete"
+          }
+        },
+        {
+          "id": "f1_subtraction_suite_12_3",
+          "artifact": "subtraction_suite",
+          "station": "SW",
+          "position": [
+            -16,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_sphere_splitting_showcase_4_8",
+          "artifact": "sphere_splitting_showcase",
+          "station": "SW",
+          "position": [
+            -8,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_recursive_boolean_cube_12_8",
+          "artifact": "recursive_boolean_cube",
+          "station": "SE",
+          "position": [
+            8,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_csg_architecture_cavity_8_14",
+          "artifact": "csg_architecture_cavity",
+          "station": "SE",
+          "position": [
+            16,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_boolean_burrow_8_22",
+          "artifact": "boolean_burrow",
+          "station": "NW",
+          "position": [
+            -14,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "carver_profile": "level",
+            "section": "off"
+          }
+        },
+        {
+          "id": "f1_sdf_cavern_room_8_33",
+          "artifact": "sdf_cavern_room",
+          "station": "NW",
+          "position": [
+            -1,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_boolean_eggs_7_43",
+          "artifact": "boolean_eggs",
+          "station": "NE",
+          "position": [
+            14,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_booleanvariations_5_51",
+          "artifact": "booleanvariations",
+          "station": "SW",
+          "position": [
+            -16,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_coincident_face_13_51",
+          "artifact": "coincident_face",
+          "station": "SW",
+          "position": [
+            -5,
+            6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_film_boolean_room_17_56",
+          "artifact": "film_boolean_room",
+          "station": "SE",
+          "position": [
+            18,
+            5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_conical_sightline_23_67",
+          "artifact": "conical_sightline",
+          "station": "NE",
+          "position": [
+            6,
+            -3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_kapoor_void_studies_18_89",
+          "artifact": "kapoor_void_studies",
+          "station": "SE",
+          "position": [
+            12,
+            4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

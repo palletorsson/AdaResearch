@@ -62,7 +62,9 @@ static func build(expr: Dictionary, terms: Dictionary, depth: int = 0) -> Node3D
 			var missing := Node3D.new()
 			missing.name = "missing_" + name
 			return missing
-		var n: Node3D = build((t as Dictionary)["build"], terms, depth + 1)   # the one place depth grows
+		var bindings: Dictionary = (t as Dictionary).get("parameters", {}).duplicate(true)
+		bindings.merge(expr.get("with", {}), true)
+		var n: Node3D = build(bind_arguments((t as Dictionary)["build"], bindings), terms, depth + 1)
 		n.name = name
 		n.set_meta("term", name)
 		# a point is white on its own and black once it belongs to something
@@ -105,6 +107,9 @@ static func build(expr: Dictionary, terms: Dictionary, depth: int = 0) -> Node3D
 				var part: Dictionary = part_v
 				var n: Node3D = build(part.get("of", {}), terms, depth)
 				_place(n, part)
+				if part.has("id"):
+					n.name = str(part.id)
+					n.set_meta("part_id",str(part.id))
 				if bool(part.get("scaffold", false)):
 					n.set_meta("scaffold", true)
 				root.add_child(n)
@@ -139,6 +144,12 @@ static func _primitive(expr: Dictionary) -> Node3D:
 			n = ModPoint.make(expr)
 		"mesh":
 			n = ModMesh.make(expr)
+		"portal_piece":
+			n = load("res://commons/modular/portal_piece.gd").make(expr)
+		"boolean_passage":
+			n = load("res://commons/modular/boolean_passage.gd").make(expr)
+		"sweep":
+			n = load("res://commons/modular/mod_sweep.gd").make(expr)
 		"collider":
 			n = ModBody.collider(expr)
 		"body":
@@ -152,6 +163,11 @@ static func _primitive(expr: Dictionary) -> Node3D:
 			n = ModLabel.make(str(expr.get("text", "")), float(expr.get("pixel_size", 0.005)))
 		"prefab":
 			n = _prefab(expr)
+		"electric_floor":
+			n = load("res://commons/void/rotation_electric_bed.gd").new()
+			n.set_meta("config_width",float(expr.get("columns",5))*float(expr.get("step",1.2)))
+			n.set_meta("config_depth",float(expr.get("rows",7))*float(expr.get("step",1.2)))
+			n.contact_cause = "Electrical contact in the warehouse field"
 		"light":
 			var l := OmniLight3D.new()
 			l.light_energy = float(expr.get("energy", 1.0))
@@ -220,6 +236,11 @@ static func _times(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 				c.position = Vector3(off, 0, 0) if axis == "x" else Vector3(0, 0, off)
 			"stack":
 				c.position = Vector3(0, i * gap, 0)
+			"radial":
+				var a: float = phase + deg_to_rad(float(expr.get("angle_step", 36))) * i
+				var r: float = float(expr.get("radius", 0.65))
+				c.position = Vector3(r * cos(a), 0, r * sin(a))
+				c.rotation.y = a
 			"ring":
 				c.rotation.y = phase + PI * i / n
 			"polygon":
@@ -249,9 +270,46 @@ static func _times(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 				c.position = Vector3(rr * cos(a), 0, rr * sin(a))
 			_:
 				c.position = Vector3(i * gap, 0, 0)
+		c.scale *= pow(float(expr.get("scale_ratio", 1.0)), i)
+		if expr.has("id_prefix"):
+			c.name = str(expr.id_prefix) + "%02d" % (i + 1)
+			c.set_meta("part_id", str(c.name))
 		_dress(c, expr, i, Vector3i(0, 0, i), float(i) / maxf(1.0, n - 1.0))
 		root.add_child(c)
 	return root
+
+
+## Recipe arguments are values, never executable code. Old terms remain unchanged.
+static func bind_arguments(value: Variant, bindings: Dictionary) -> Variant:
+	if value is Dictionary:
+		if value.size() == 1 and value.has("arg"):
+			if not bindings.has(str(value.arg)):
+				push_error("modular: missing recipe argument " + str(value.arg))
+			return bindings.get(str(value.arg))
+		var result: Dictionary = {}
+		for key in value:
+			result[key] = bind_arguments(value[key], bindings)
+		if result.has("calc") and result.get("values") is Array:
+			var values: Array = result["values"]
+			if values.is_empty() or str(result.calc) not in ["add","sub","mul","div"]:
+				push_error("modular: invalid arithmetic expression");return 0.0
+			var number: float = float(values[0])
+			for i in range(1,values.size()):
+				match str(result.calc):
+					"add": number += float(values[i])
+					"sub": number -= float(values[i])
+					"mul": number *= float(values[i])
+					"div":
+						if float(values[i])==0.0:push_error("modular: division by zero");return 0.0
+						number /= float(values[i])
+			return number
+		return result
+	if value is Array:
+		var result: Array = []
+		for entry in value:
+			result.append(bind_arguments(entry, bindings))
+		return result
+	return value
 
 
 static func _array(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
@@ -265,16 +323,26 @@ static func _array(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 	# a 1d array is a ROW along z, so planks (long in x) lie side by side. Until 25 Oct dims 1 built
 	# a square: eu_pallet's "plank * 3" was nine boards and its "plank * 5" twenty-five
 	var nx: int = 1 if dims == 1 else n
+	nx = int(expr.get("columns",nx))
+	var nz: int = int(expr.get("rows",n))
+	var omitted: Array = expr.get("omit",[])
 	var lin := 0
 	for i in range(nx):
 		for j in range(ny):
-			for k in range(n):
-				var at_c := Vector3((i - (nx - 1) / 2.0) * step, lift + j * step, (k - (n - 1) / 2.0) * step)
+			for k in range(nz):
+				var skip := false
+				for cell in omitted:
+					if int(cell[0])==i and int(cell[1])==k:skip=true;break
+				if skip: continue
+				var at_c := Vector3((i - (nx - 1) / 2.0) * step, lift + j * step, (k - (nz - 1) / 2.0) * step)
 				if expr.has("inside") and ModField.value(expr["inside"], at_c) >= 0.0:
 					lin += 1   # the address still counts, so a palette by index agrees with three.js
 					continue   # centre-based voxel sampling: a copy stands only where the field is inside
 				var c: Node3D = build(expr.get("of", {}), terms, depth)
 				c.position = at_c
+				if expr.has("id_prefix"):
+					c.name = str(expr.id_prefix)+"%02d_%02d"%[i+1,k+1]
+					c.set_meta("part_id",str(c.name))
 				c.set_meta("cell", Vector3i(i, j, k))
 				_dress(c, expr, lin, Vector3i(i, j, k), float(k) / maxf(1.0, n - 1.0))
 				lin += 1
@@ -458,6 +526,11 @@ static var _prefab_catalog: Dictionary = {}
 
 static func _prefab(expr: Dictionary) -> Node3D:
 	var token: String = str(expr.get("token", ""))
+	if bool(expr.get("lab_input", false)):
+		var input: Node3D = load("res://commons/modular/lab_input.gd").new()
+		input.token = token
+		input.set_meta("prefab", token)
+		return input
 	if _prefab_catalog.is_empty():
 		var f := FileAccess.open("res://commons/data/void_spawnlists.json", FileAccess.READ)
 		if f != null:
@@ -484,6 +557,11 @@ static func _prefab(expr: Dictionary) -> Node3D:
 		n.add_child(l)
 	n.name = "prefab_" + token
 	n.set_meta("prefab", token)
+	if expr.get("config", {}) is Dictionary and not expr.get("config", {}).is_empty():
+		if n.has_method("apply_grid_config"):
+			n.apply_grid_config(expr.config)
+		else:
+			push_error("modular: prefab does not accept config: " + token)
 	return n
 
 

@@ -1,0 +1,503 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "VFM_05_Launch",
+      "title": "VFM_05_Launch",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_force_hall_04_0_0",
+          "artifact": "force_hall_04",
+          "position": [
+            -4,
+            14
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_euler_drift_29_6",
+          "artifact": "euler_drift",
+          "position": [
+            0,
+            5
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "step_study"
+          }
+        },
+        {
+          "id": "f1_launch_arc_14_8",
+          "artifact": "launch_arc",
+          "position": [
+            3,
+            10
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "launch_chamber"
+          }
+        },
+        {
+          "id": "f1_bubble_blaster_32_12",
+          "artifact": "bubble_blaster",
+          "position": [
+            -5,
+            4
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0.95,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_trial_catapult_7_26",
+          "artifact": "force_trial_catapult",
+          "position": [
+            -15,
+            9
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_trial_pipe_20_26",
+          "artifact": "force_trial_pipe",
+          "position": [
+            15,
+            9
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_catapult_33_32",
+          "artifact": "catapult",
+          "position": [
+            -16,
+            -5
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0.35,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "default_force": "9"
+          }
+        },
+        {
+          "id": "f1_force_play_torque_15_41",
+          "artifact": "force_play_torque",
+          "position": [
+            0,
+            -9
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_human_catapult_10_62",
+          "artifact": "human_catapult",
+          "position": [
+            15,
+            -8
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_firework_burst_31_66",
+          "artifact": "firework_burst",
+          "position": [
+            0,
+            -2
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "live_fountain"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "VFM_03_Motion",
+      "title": "VFM_03_Motion",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_force_hall_05_0_0",
+          "artifact": "force_hall_05",
+          "position": [
+            -4,
+            14
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_force_play_mass_14_10",
+          "artifact": "force_play_mass",
+          "position": [
+            -14,
+            9
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_force_play_trolley_8_28",
+          "artifact": "force_play_trolley",
+          "position": [
+            0,
+            9
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_force_play_puzzle_20_28",
+          "artifact": "force_play_puzzle",
+          "position": [
+            14,
+            9
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_force_mower_14_46",
+          "artifact": "force_mower",
+          "position": [
+            0.8,
+            12
+          ],
+          "station": "SE",
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "flower_garden",
+            "lawn_width": "20",
+            "lawn_length": "28"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "title": "Vectors_Act3_FieldsAndMotion / 6 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_force_hall_06_0_0",
+          "artifact": "force_hall_06",
+          "station": "SE",
+          "position": [
+            -4,
+            14
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_force_play_vortex_14_13",
+          "artifact": "force_play_vortex",
+          "station": "SE",
+          "position": [
+            0,
+            2.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_VectorFieldFlow_14_35",
+          "artifact": "VectorFieldFlow",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "field_receivers"
+          }
+        },
+        {
+          "id": "f3_wind_room_14_52",
+          "artifact": "wind_room",
+          "station": "SW",
+          "position": [
+            -16.5,
+            8.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "hands_on_wind"
+          }
+        },
+        {
+          "id": "f3_force_vortex_14_72",
+          "artifact": "force_vortex",
+          "station": "NE",
+          "position": [
+            10,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "warning": "beacon"
+          }
+        },
+        {
+          "id": "f3_gravity_oval_14_92",
+          "artifact": "gravity_oval",
+          "station": "SE",
+          "position": [
+            28,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "title": "Vectors_Act4a_KineticForces / 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_force_hall_07_0_0",
+          "artifact": "force_hall_07",
+          "station": "SE",
+          "position": [
+            -4,
+            14
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_force_play_liquids_15_13",
+          "artifact": "force_play_liquids",
+          "station": "NE",
+          "position": [
+            0,
+            -10.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_force_play_friction_15_35",
+          "artifact": "force_play_friction",
+          "station": "NE",
+          "position": [
+            0,
+            -24
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_viscosity_layers_15_52",
+          "artifact": "viscosity_layers",
+          "station": "SE",
+          "position": [
+            8,
+            9
+          ],
+          "facing": 0,
+          "height": 0.82,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_centrifuge_ring_15_69",
+          "artifact": "centrifuge_ring",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "hand_ring"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

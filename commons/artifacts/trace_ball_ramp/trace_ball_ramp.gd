@@ -44,26 +44,9 @@ func _ready() -> void:
 
 func _supply_ball() -> void:
 	var trace := BallTrace.new()
-	ball=XRToolsPickable.new()
+	ball=preload("res://commons/artifacts/primitive_encounters/trace_point_ball.tscn").instantiate()
 	ball.name="BlackPoint%d" % (traces.size() + 1)
-	ball.collision_layer=6
-	ball.collision_mask=3 # Room on layer 1; retained balls on layer 2.
-	ball.mass=0.3
-	ball.freeze=true
-	ball.release_mode=XRToolsPickable.ReleaseMode.UNFROZEN
-	ball.continuous_cd=true
-	ball.linear_damp=0.06
-	ball.angular_damp=0.08
-	ball.physics_material_override=PhysicsMaterial.new()
-	ball.physics_material_override.friction=0.6
-	ball.physics_material_override.bounce=0.02
-	var visual := MeshInstance3D.new()
-	var sphere := SphereMesh.new()
-	sphere.radius=RADIUS;sphere.height=RADIUS*2;sphere.radial_segments=32;sphere.rings=16
-	visual.mesh=sphere;visual.material_override=_black;ball.add_child(visual)
-	var collider := CollisionShape3D.new()
-	var shape := SphereShape3D.new();shape.radius=RADIUS;collider.shape=shape
-	ball.add_child(collider);add_child(ball);ball.position=HOME
+	add_child(ball);ball.position=HOME
 	trace.body = ball
 	ball.picked_up.connect(_picked_up.bind(trace))
 	ball.dropped.connect(_dropped.bind(trace))

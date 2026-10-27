@@ -36,6 +36,7 @@ static func build(hall: Node3D) -> void:
 	# These two low sections let the eye look down into the B channels while
 	# the original five-metre twisting body keeps its full scale beside them.
 	_well_sections(hall)
+	preload("res://commons/void/profile_suspensions.gd").build(hall)
 
 static func _card(station: Node3D, index: int) -> void:
 	var card:=Node3D.new();card.name="ReadingCard";card.position=CARDS[index];station.add_child(card)

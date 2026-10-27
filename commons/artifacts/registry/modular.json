@@ -2299,6 +2299,228 @@
     "expr": "association(cylinder, rubber) = wheel — a cylinder on its side, dressed to roll"
    }
   },
+  "mod_handmade_pallet_9655afc4589e93d0": {
+   "lookup_name": "mod_handmade_pallet_9655afc4589e93d0",
+   "name": "modular · Euro pallet / temporary AND + TRUE cone",
+   "description": "Euro pallet / temporary AND + TRUE cone = Pallet parts + board + cinder blocks + gravity ball → a hand-operated AND. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_9655afc4589e93d0"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_9655afc4589e93d0",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Pallet parts + board + cinder blocks + gravity ball → a hand-operated AND"
+   }
+  },
+  "mod_handmade_pallet_a877e9c8746ffbbf": {
+   "lookup_name": "mod_handmade_pallet_a877e9c8746ffbbf",
+   "name": "modular · Euro pallet / temporary AND / reachable track",
+   "description": "Euro pallet / temporary AND / reachable track = Pallet parts + board + cinder blocks + gravity ball → a hand-operated AND. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_a877e9c8746ffbbf"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_a877e9c8746ffbbf",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Pallet parts + board + cinder blocks + gravity ball → a hand-operated AND"
+   }
+  },
+  "mod_handmade_pallet_af08aa9ab896c3c8": {
+   "lookup_name": "mod_handmade_pallet_af08aa9ab896c3c8",
+   "name": "modular · Euro pallet / temporary AND / two-board track",
+   "description": "Euro pallet / temporary AND / two-board track = Pallet parts + boards + cinder blocks + gravity ball → a hand-operated AND. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_af08aa9ab896c3c8"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_af08aa9ab896c3c8",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Pallet parts + boards + cinder blocks + gravity ball → a hand-operated AND"
+   }
+  },
+  "mod_handmade_pallet_7d9c97a2adc3ed2d": {
+   "lookup_name": "mod_handmade_pallet_7d9c97a2adc3ed2d",
+   "name": "modular · Euro pallet / temporary AND / two-board open track",
+   "description": "Euro pallet / temporary AND / two-board open track = Pallet parts + boards + cinder blocks + gravity ball → a hand-operated AND. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_7d9c97a2adc3ed2d"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_7d9c97a2adc3ed2d",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Pallet parts + boards + cinder blocks + gravity ball → a hand-operated AND"
+   }
+  },
+  "mod_handmade_pallet_db7252106477db66": {
+   "lookup_name": "mod_handmade_pallet_db7252106477db66",
+   "name": "modular · Euro pallet / temporary AND / support AND / two visible gaps",
+   "description": "Euro pallet / temporary AND / support AND / two visible gaps = Pallet parts + boards + cinder blocks + gravity ball â†’ a hand-operated AND. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_db7252106477db66"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_db7252106477db66",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Pallet parts + boards + cinder blocks + gravity ball â†’ a hand-operated AND"
+   }
+  },
+  "mod_handmade_pallet_64e72e25950ef277": {
+   "lookup_name": "mod_handmade_pallet_64e72e25950ef277",
+   "name": "modular · Euro pallet / temporary AND / support AND / two visible gaps",
+   "description": "Euro pallet / temporary AND / support AND / two visible gaps = Pallet parts + boards + cinder blocks + gravity ball â†’ a hand-operated AND. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_64e72e25950ef277"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_64e72e25950ef277",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Pallet parts + boards + cinder blocks + gravity ball â†’ a hand-operated AND"
+   }
+  },
   "mod_deck": {
    "lookup_name": "mod_deck",
    "name": "modular · deck",
@@ -2713,6 +2935,43 @@
      "skateboard_2"
     ],
     "expr": "deck_7 + truck_3 * 2 + wheel_3 * 4 + connect(axles, rod) = skateboard_3 — seven plies, kingpins, bushings, bearings, eight bolts"
+   }
+  },
+  "mod_handmade_pallet_396e98dd840e21a0": {
+   "lookup_name": "mod_handmade_pallet_396e98dd840e21a0",
+   "name": "modular · Euro pallet / temporary OR / two supported paths",
+   "description": "Euro pallet / temporary OR / two supported paths = Two gravity paths + two removable supports + one cone → a hand-operated OR. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "handmade_pallet_396e98dd840e21a0"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "assemblage"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "handmade_pallet_396e98dd840e21a0",
+    "chapter": "assemblage",
+    "from": [
+     "pallet_hand_kit"
+    ],
+    "expr": "Two gravity paths + two removable supports + one cone → a hand-operated OR"
    }
   },
   "mod_cone_field": {
@@ -8011,6 +8270,381 @@
      "logic"
     ],
     "expr": "posts + ghost leaf (P: open) + ghost leaf (not-P: closed) + four values = two_reports — what follows from conflicting reports: both are held and neither overwrites the other; under Dunn–Belnap's four values P is told true and told false (amber, at both) and Q, the alarm, is told neither (at neither), so the contradiction does not make Q follow — non-explosion, in one chosen semantics. The leaves have no collider: the posts decide who gets through"
+   }
+  },
+  "mod_lab_packed": {
+   "lookup_name": "mod_lab_packed",
+   "name": "modular · Packed / repeated edge",
+   "description": "Packed / repeated edge = prefab × copies → row. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_packed"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_packed",
+    "chapter": "transformation",
+    "from": [
+     "moved_cube"
+    ],
+    "expr": "prefab × copies → row"
+   }
+  },
+  "mod_lab_radial": {
+   "lookup_name": "mod_lab_radial",
+   "name": "modular · Sun feather / circumference",
+   "description": "Sun feather / circumference = prefab × copies → radial. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_radial"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_radial",
+    "chapter": "transformation",
+    "from": [
+     "turned_cube"
+    ],
+    "expr": "prefab × copies → radial"
+   }
+  },
+  "mod_lab_growing": {
+   "lookup_name": "mod_lab_growing",
+   "name": "modular · Table → ground → oversized",
+   "description": "Table → ground → oversized = prefab × staged scales → architecture. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_growing"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_growing",
+    "chapter": "transformation",
+    "from": [
+     "scaled_cube"
+    ],
+    "expr": "prefab × staged scales → architecture"
+   }
+  },
+  "mod_lab_warehouse": {
+   "lookup_name": "mod_lab_warehouse",
+   "name": "modular · Warehouse field / charged gaps",
+   "description": "Warehouse field / charged gaps = prefab grid − selected cells + electrical bed. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_warehouse"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_warehouse",
+    "chapter": "transformation",
+    "from": [
+     "lab_packed",
+     "lab_radial"
+    ],
+    "expr": "prefab grid − selected cells + electrical bed"
+   }
+  },
+  "mod_lab_model_stand": {
+   "lookup_name": "mod_lab_model_stand",
+   "name": "modular · Reusable model stand / standard timber board",
+   "description": "Reusable model stand / standard timber board = standard board + temporary block plinths. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "lab_model_stand"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_model_stand",
+    "chapter": "transformation",
+    "from": [
+     "lab_growing"
+    ],
+    "expr": "standard board + temporary block plinths"
+   }
+  },
+  "mod_s_descent_model": {
+   "lookup_name": "mod_s_descent_model",
+   "name": "modular · S descent / two-storey cutaway model",
+   "description": "S descent / two-storey cutaway model = hollow section × curved path → slide, landing, slide. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "s_descent_model"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "s_descent_model",
+    "chapter": "transformation",
+    "from": [
+     "lab_model_stand",
+     "turned_cube"
+    ],
+    "expr": "hollow section × curved path → slide, landing, slide"
+   }
+  },
+  "mod_boolean_tunnel_section": {
+   "lookup_name": "mod_boolean_tunnel_section",
+   "name": "modular · Boolean Tunnel / hollow-cube section",
+   "description": "Boolean Tunnel / hollow-cube section = original hollow cube → outer solid minus through opening. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "boolean_tunnel_section"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "boolean_tunnel_section",
+    "chapter": "transformation",
+    "from": [
+     "cube"
+    ],
+    "expr": "original hollow cube → outer solid minus through opening"
+   }
+  },
+  "mod_boolean_s_descent_model": {
+   "lookup_name": "mod_boolean_s_descent_model",
+   "name": "modular · Boolean Tunnel / one continuous S passage",
+   "description": "Boolean Tunnel / one continuous S passage = swept solid − one connected bore → two slides and a turning landing. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "boolean_s_descent_model"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "boolean_s_descent_model",
+    "chapter": "transformation",
+    "from": [
+     "lab_model_stand",
+     "boolean_tunnel_section"
+    ],
+    "expr": "swept solid − one connected bore → two slides and a turning landing"
+   }
+  },
+  "mod_s_portal_copies_model": {
+   "lookup_name": "mod_s_portal_copies_model",
+   "name": "modular · One portal / falling from standing to its head",
+   "description": "One portal / falling from standing to its head = one portal × a half-turn, translation and a sideways curl. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "s_portal_copies_model"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "s_portal_copies_model",
+    "chapter": "transformation",
+    "from": [
+     "boolean_tunnel_section",
+     "lab_model_stand"
+    ],
+    "expr": "one portal × a half-turn, translation and a sideways curl"
+   }
+  },
+  "mod_portal_lab_item": {
+   "lookup_name": "mod_portal_lab_item",
+   "name": "modular · Square portal / an editable falling assembly",
+   "description": "Square portal / an editable falling assembly = one square portal × translation and rotation. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "portal_lab_item"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    2
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "portal_lab_item",
+    "chapter": "transformation",
+    "from": [
+     "boolean_tunnel_section",
+     "lab_model_stand"
+    ],
+    "expr": "one square portal × translation and rotation"
    }
   }
  }

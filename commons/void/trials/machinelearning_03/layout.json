@@ -1,0 +1,85 @@
+{
+  "status": "machinelearning_03 / placement-first transfer",
+  "width": 42,
+  "depth": 32,
+  "storey_height": 6,
+  "slab_thickness": 0.36,
+  "levels": [
+    0,
+    -6,
+    -12,
+    -18,
+    -24
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -20,
+    -14,
+    -5,
+    5,
+    14,
+    20
+  ],
+  "column_z": [
+    -14,
+    14
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Canopy",
+    "ML_Sequence_Memory",
+    "ML_Generative",
+    "ML_Synthesis",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 13,
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "A",
+      "2": "A",
+      "3": "A",
+      "4": "A"
+    }
+  },
+  "route_note": "Transfer first. Preserve original artifacts; curate after inspection.",
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract",
+    "3": "abstract",
+    "4": "abstract"
+  },
+  "floor_sign_positions": {
+    "1": [
+      18,
+      12
+    ],
+    "2": [
+      18,
+      12
+    ],
+    "3": [
+      18,
+      12
+    ]
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "FormFinding_Catenary",
+      "title": "FormFinding_Catenary",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_film_catenoid_sections_3_1",
+          "artifact": "film_catenoid_sections",
+          "position": [
+            -6,
+            8
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_cable_builder_5_3",
+          "artifact": "cable_builder",
+          "position": [
+            0,
+            7
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_catenoid_9_5",
+          "artifact": "catenoid",
+          "position": [
+            -5,
+            -2
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_helicoid_4_7",
+          "artifact": "helicoid",
+          "position": [
+            5,
+            -2
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_science_screen_10_7",
+          "artifact": "science_screen",
+          "position": [
+            6,
+            8
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_laundry_line_cathedral_2_9",
+          "artifact": "laundry_line_cathedral",
+          "position": [
+            0,
+            -9
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "FormFinding_Relaxation",
+      "title": "FormFinding_Relaxation",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_mass_spring_bench_2_2",
+          "artifact": "mass_spring_bench",
+          "position": [
+            -5,
+            6
+          ],
+          "station": "SW",
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_verlet_workbench_6_2",
+          "artifact": "verlet_workbench",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "comparison": "true"
+          }
+        },
+        {
+          "id": "f2_frozen_glass_vessel_9_2",
+          "artifact": "frozen_glass_vessel",
+          "position": [
+            5,
+            -5
+          ],
+          "station": "NE",
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_film_form_relaxation_1_9",
+          "artifact": "film_form_relaxation",
+          "position": [
+            -5,
+            -5
+          ],
+          "station": "NW",
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_science_screen_8_9",
+          "artifact": "science_screen",
+          "position": [
+            2,
+            6
+          ],
+          "station": "SE",
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "FormFinding_Equilibrium",
+      "title": "FormFinding_Equilibrium / 4 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_calder_mobile_5_3",
+          "artifact": "calder_mobile",
+          "station": "SW",
+          "position": [
+            -3,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_fractal_truss_tower_9_4",
+          "artifact": "fractal_truss_tower",
+          "station": "SW",
+          "position": [
+            -7,
+            9
+          ],
+          "facing": 180,
+          "height": 0.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_tensegrity_triangle_4_6",
+          "artifact": "tensegrity_triangle",
+          "station": "SW",
+          "position": [
+            -2,
+            7
+          ],
+          "facing": 180,
+          "height": 0.52,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_science_screen_8_7",
+          "artifact": "science_screen",
+          "station": "SW",
+          "position": [
+            -6,
+            6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "FormFinding_Annealing",
+      "title": "FormFinding_Annealing / 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_energy_landscape_bench_3_2",
+          "artifact": "energy_landscape_bench",
+          "station": "SW",
+          "position": [
+            -1,
+            11
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_simulated_annealing_10_2",
+          "artifact": "simulated_annealing",
+          "station": "SW",
+          "position": [
+            -8,
+            11
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_max_q_basin_room_6_3",
+          "artifact": "max_q_basin_room",
+          "station": "SW",
+          "position": [
+            -4,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "reveal_on_request": "true",
+            "floor_size": "4.9"
+          }
+        },
+        {
+          "id": "f4_impossible_end_table_9_5",
+          "artifact": "impossible_end_table",
+          "station": "SW",
+          "position": [
+            -7,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_science_screen_8_9",
+          "artifact": "science_screen",
+          "station": "SW",
+          "position": [
+            -6,
+            5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

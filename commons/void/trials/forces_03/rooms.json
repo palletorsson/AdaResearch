@@ -1,0 +1,589 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "title": "Vectors_Act4b_Oscillation",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_force_hall_08_0_0",
+          "artifact": "force_hall_08",
+          "position": [
+            -4,
+            14
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_play_springs_15_11",
+          "artifact": "force_play_springs",
+          "position": [
+            -4,
+            9
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_pendulum_noise_8_20",
+          "artifact": "pendulum_noise",
+          "position": [
+            -17,
+            0
+          ],
+          "station": "SW",
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_play_swings_15_28",
+          "artifact": "force_play_swings",
+          "position": [
+            0,
+            -10.5
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_play_constraints_15_43",
+          "artifact": "force_play_constraints",
+          "position": [
+            33,
+            4
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_SpringSuspension_8_61",
+          "artifact": "SpringSuspension",
+          "position": [
+            15,
+            10
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "lesson": "museum_spring"
+          }
+        },
+        {
+          "id": "f1_spring_tower_22_61",
+          "artifact": "spring_tower",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Change_Choreography",
+      "title": "Change_Choreography",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_force_hall_09_0_0",
+          "artifact": "force_hall_09",
+          "position": [
+            -4,
+            14
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_phase_rod_array_12_8",
+          "artifact": "phase_rod_array",
+          "position": [
+            -8,
+            -9
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_force_trial_conveyor_12_24",
+          "artifact": "force_trial_conveyor",
+          "position": [
+            7,
+            -9
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "title": "VFM_07_Gravity",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_force_hall_10_0_0",
+          "artifact": "force_hall_10",
+          "position": [
+            -4,
+            14
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_force_play_mutual_17_14",
+          "artifact": "force_play_mutual",
+          "position": [
+            -31,
+            0
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_force_play_magnet_10_36",
+          "artifact": "force_play_magnet",
+          "position": [
+            0,
+            2
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_force_play_tower_26_36",
+          "artifact": "force_play_tower",
+          "position": [
+            16,
+            9
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_force_play_gravity_17_54",
+          "artifact": "force_play_gravity",
+          "position": [
+            0,
+            -11
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f3_orbit_walk_17_70",
+          "artifact": "orbit_walk",
+          "position": [
+            -14,
+            10
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "VFM_09_Legs",
+      "title": "VFM_09_Legs / 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_force_hall_11_0_0",
+          "artifact": "force_hall_11",
+          "station": "SE",
+          "position": [
+            -4,
+            14
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_force_play_support_14_13",
+          "artifact": "force_play_support",
+          "station": "SE",
+          "position": [
+            0,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f4_one_leg_5_31",
+          "artifact": "one_leg",
+          "station": "NE",
+          "position": [
+            9,
+            -9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "driven_by_player": "false",
+            "show_foot_markers": "false",
+            "pace_reach": "1.1",
+            "patrol_speed": "0.25"
+          }
+        },
+        {
+          "id": "f4_four_leg_critter_14_31",
+          "artifact": "four_leg_critter",
+          "station": "NE",
+          "position": [
+            0,
+            -9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "driven_by_player": "false",
+            "show_foot_markers": "false",
+            "pace_reach": "1.1",
+            "patrol_speed": "0.25"
+          }
+        },
+        {
+          "id": "f4_six_leg_critter_23_31",
+          "artifact": "six_leg_critter",
+          "station": "NW",
+          "position": [
+            -9,
+            -9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "driven_by_player": "false",
+            "show_foot_markers": "false",
+            "pace_reach": "1.1",
+            "patrol_speed": "0.25"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "VFM_08_Arena",
+      "title": "VFM_08_Arena / 9 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_force_hall_12_0_0",
+          "artifact": "force_hall_12",
+          "station": "SE",
+          "position": [
+            -4,
+            14
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_force_play_bowling_8_17",
+          "artifact": "force_play_bowling",
+          "station": "NE",
+          "position": [
+            2.5,
+            -1.8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_sentry_turret_19_11",
+          "artifact": "sentry_turret",
+          "station": "SW",
+          "position": [
+            -16,
+            4
+          ],
+          "facing": 0,
+          "height": 0.82,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "target": "balls",
+            "detection_range": "6",
+            "use_laser_damage": "true",
+            "laser_damage_per_hit": "80"
+          }
+        },
+        {
+          "id": "f5_ball_dropper_19_16",
+          "artifact": "ball_dropper",
+          "station": "NW",
+          "position": [
+            -16,
+            -1
+          ],
+          "facing": 180,
+          "height": 2.8,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0",
+            "total_balls": "8",
+            "spawn_spread": "0.4",
+            "drop_interval_min": "2",
+            "drop_interval_max": "3"
+          }
+        },
+        {
+          "id": "f5_queer_cylinder_target_19_23",
+          "artifact": "queer_cylinder_target",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.35,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_force_punching_bag_20_39",
+          "artifact": "force_punching_bag",
+          "station": "NE",
+          "position": [
+            16,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_force_play_recoil_9_41",
+          "artifact": "force_play_recoil",
+          "station": "SE",
+          "position": [
+            15,
+            8.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_momentum_cradle_8_55",
+          "artifact": "momentum_cradle",
+          "station": "NW",
+          "position": [
+            -8,
+            -11
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f5_newton_cradle_18_55",
+          "artifact": "newton_cradle",
+          "station": "NW",
+          "position": [
+            -18,
+            -11
+          ],
+          "facing": 0,
+          "height": 0.82,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

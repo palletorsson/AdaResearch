@@ -1,0 +1,144 @@
+{
+  "artifacts": {
+    "timber_plank_1m": {
+      "lookup_name": "timber_plank_1m",
+      "name": "Timber plank / 1 m",
+      "scene": "res://commons/artifacts/primitive_encounters/timber_plank_1m.tscn",
+      "description": "A measured segment gains width, thickness, grain and a matching box collider. Carry and place; frozen when released. Fixed copies support a path.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Line / timber"
+      ]
+    },
+    "timber_plank_2m": {
+      "lookup_name": "timber_plank_2m",
+      "name": "Timber plank / 2 m",
+      "scene": "res://commons/artifacts/primitive_encounters/timber_plank_2m.tscn",
+      "description": "A measured segment gains width, thickness, grain and a matching box collider. Carry and place; frozen when released. Fixed copies support a path.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Line / timber"
+      ]
+    },
+    "timber_plank_4m": {
+      "lookup_name": "timber_plank_4m",
+      "name": "Timber plank / 4 m",
+      "scene": "res://commons/artifacts/primitive_encounters/timber_plank_4m.tscn",
+      "description": "A measured segment gains width, thickness, grain and a matching box collider. Carry and place; frozen when released. Fixed copies support a path.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Line / timber"
+      ]
+    },
+    "timber_panel_1x1": {
+      "lookup_name": "timber_panel_1x1",
+      "name": "Timber panel / 1 × 1 m",
+      "scene": "res://commons/artifacts/primitive_encounters/timber_panel_1x1.tscn",
+      "description": "Two triangles share a diagonal; a thin sheet makes the face useful as construction. Place flat as deck, tilt as ramp, or turn upright as a wall infill.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Face / timber"
+      ]
+    },
+    "timber_panel_2x1": {
+      "lookup_name": "timber_panel_2x1",
+      "name": "Timber panel / 2 × 1 m",
+      "scene": "res://commons/artifacts/primitive_encounters/timber_panel_2x1.tscn",
+      "description": "Two triangles share a diagonal; a thin sheet makes the face useful as construction. Place flat as deck, tilt as ramp, or turn upright as a wall infill.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Face / timber"
+      ]
+    },
+    "timber_panel_2x2": {
+      "lookup_name": "timber_panel_2x2",
+      "name": "Timber panel / 2 × 2 m",
+      "scene": "res://commons/artifacts/primitive_encounters/timber_panel_2x2.tscn",
+      "description": "Two triangles share a diagonal; a thin sheet makes the face useful as construction. Place flat as deck, tilt as ramp, or turn upright as a wall infill.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Face / timber"
+      ]
+    },
+    "trace_point_ball": {
+      "lookup_name": "trace_point_ball",
+      "name": "Trace ball / 28 cm",
+      "scene": "res://commons/artifacts/primitive_encounters/trace_point_ball.tscn",
+      "description": "Distinguish the moving body from the stored trace of its motion. Black hand-sized ball, mass 0.3 kg. Drops to gravity; the Trace ramp records its actual path.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Point / moving body"
+      ]
+    },
+    "traffic_pyramid_5": {
+      "lookup_name": "traffic_pyramid_5",
+      "name": "Traffic pyramid / 5 vertices",
+      "scene": "res://commons/artifacts/primitive_encounters/traffic_pyramid_5.tscn",
+      "description": "Four base corners and one apex. A square pyramid can borrow the warning role of a traffic cone. Retained pickable comparison solid; the pyramid marks a boundary, the bipyramid is an optional crystal study.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Solid / topology"
+      ]
+    },
+    "pentagonal_bipyramid_7": {
+      "lookup_name": "pentagonal_bipyramid_7",
+      "name": "Pentagonal bipyramid / 7 vertices",
+      "scene": "res://commons/artifacts/primitive_encounters/pentagonal_bipyramid_7.tscn",
+      "description": "Five corners around a waist plus two tips; ten triangular faces. Seven vertices does not determine a unique solid. Retained pickable comparison solid; the pyramid marks a boundary, the bipyramid is an optional crystal study.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Solid / topology"
+      ]
+    },
+    "melencolia_platform": {
+      "lookup_name": "melencolia_platform",
+      "name": "Melencolia / construction court",
+      "scene": "res://commons/artifacts/primitive_encounters/melencolia_platform.tscn",
+      "description": "Recompose the known kit into a usable place. The court does not introduce a new primitive. Walkable 5 × 5 m court; 25 original one-metre concrete blocks, 25 timber sheets, fitted rim and warm work lights. The existing two wedges provide access.",
+      "qfep_connection": "Keep geometric construction, material choice and behavioural consequence distinguishable; a sign does not automatically perform what it signifies.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "tags": [
+        "construction",
+        "prefab",
+        "Assembly / reuse"
+      ]
+    }
+  }
+}

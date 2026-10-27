@@ -1,0 +1,629 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "title": "WaveFunctions_Effect_Sound",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_BigPipeSystem_2_3",
+          "artifact": "BigPipeSystem",
+          "position": [
+            -17,
+            -11
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_8_3",
+          "artifact": "pick_up_cube",
+          "position": [
+            -3,
+            8
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_9_3",
+          "artifact": "pick_up_cube",
+          "position": [
+            -2,
+            8
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_16_3",
+          "artifact": "pick_up_cube",
+          "position": [
+            2,
+            8
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_17_3",
+          "artifact": "pick_up_cube",
+          "position": [
+            3,
+            8
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_18_3",
+          "artifact": "pick_up_cube",
+          "position": [
+            4,
+            8
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_RackSineBasic_4_5",
+          "artifact": "RackSineBasic",
+          "position": [
+            -17,
+            9
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_harmonic_distance_table_18_5",
+          "artifact": "harmonic_distance_table",
+          "position": [
+            6,
+            -8
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0.65,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_chord_tension_spring_21_5",
+          "artifact": "chord_tension_spring",
+          "position": [
+            11,
+            -8
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_3_8",
+          "artifact": "pick_up_cube",
+          "position": [
+            -17,
+            1
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_timbre_sculptor_19_8",
+          "artifact": "timbre_sculptor",
+          "position": [
+            16,
+            -8
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 1.3,
+          "scale": 1,
+          "config": {
+            "waveform": "square",
+            "sound": "near"
+          }
+        },
+        {
+          "id": "f1_pick_up_cube_21_8",
+          "artifact": "pick_up_cube",
+          "position": [
+            17,
+            1
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_DualBallFMController_12_9",
+          "artifact": "DualBallFMController",
+          "position": [
+            0,
+            3
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "desks",
+            "evidence": "longhand"
+          }
+        },
+        {
+          "id": "f1_MarioSoundController_3_12",
+          "artifact": "MarioSoundController",
+          "position": [
+            -16,
+            -5
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {
+            "mode": "techno_kick"
+          }
+        },
+        {
+          "id": "f1_MarioSoundController_6_12",
+          "artifact": "MarioSoundController",
+          "position": [
+            -11,
+            -7
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {
+            "mode": "laser_zap"
+          }
+        },
+        {
+          "id": "f1_MarioSoundController_9_12",
+          "artifact": "MarioSoundController",
+          "position": [
+            -6,
+            -8
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {
+            "mode": "sine_bell"
+          }
+        },
+        {
+          "id": "f1_wave_interference_3d_19_12",
+          "artifact": "wave_interference_3d",
+          "position": [
+            3,
+            -11
+          ],
+          "station": "NE",
+          "facing": 180,
+          "height": 0.3,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_AudioContr_3_17",
+          "artifact": "AudioContr",
+          "position": [
+            -17,
+            5
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "preset": "basic_mono"
+          }
+        },
+        {
+          "id": "f1_AudioContr_7_17",
+          "artifact": "AudioContr",
+          "position": [
+            -12,
+            5
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "config": "mario_rack"
+          }
+        },
+        {
+          "id": "f1_MelodyChaser3D_11_17",
+          "artifact": "MelodyChaser3D",
+          "position": [
+            0,
+            -7
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0.4,
+          "scale": 1,
+          "config": {
+            "scale": "fifths_circle",
+            "tempo": "60"
+          }
+        },
+        {
+          "id": "f1_AudioContr_15_17",
+          "artifact": "AudioContr",
+          "position": [
+            11,
+            5
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "config": "heartbeat_rack"
+          }
+        },
+        {
+          "id": "f1_GlassRack_20_17",
+          "artifact": "GlassRack",
+          "position": [
+            16,
+            5
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "config": "simple_tube"
+          }
+        },
+        {
+          "id": "f1_VRAudioMonitor_20_21",
+          "artifact": "VRAudioMonitor",
+          "position": [
+            16,
+            10
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 1.25,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_Rack303Acid_3_22",
+          "artifact": "Rack303Acid",
+          "position": [
+            -12,
+            9
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_RackMoogBass_7_22",
+          "artifact": "RackMoogBass",
+          "position": [
+            -7,
+            9
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_RackDX7Piano_11_22",
+          "artifact": "RackDX7Piano",
+          "position": [
+            7,
+            9
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_AudioContr_15_22",
+          "artifact": "AudioContr",
+          "position": [
+            11,
+            10
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "config": "slider_rack"
+          }
+        },
+        {
+          "id": "f1_GlassRack_21_24",
+          "artifact": "GlassRack",
+          "position": [
+            18,
+            -3
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0.7,
+          "scale": 1,
+          "config": {
+            "config": "distillation_rack"
+          }
+        },
+        {
+          "id": "f1_audio_catalog_tablet_3_26",
+          "artifact": "audio_catalog_tablet",
+          "position": [
+            -3,
+            -3
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_rack_room_7_26",
+          "artifact": "rack_room",
+          "position": [
+            3,
+            -3
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_cable_builder_18_26",
+          "artifact": "cable_builder",
+          "position": [
+            12,
+            -12
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_lab_table_3_28",
+          "artifact": "lab_table",
+          "position": [
+            -17,
+            -1
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_20_28",
+          "artifact": "dark_sphere",
+          "position": [
+            4,
+            12
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "title": "Wavefunctions_Bernini",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_ElphabaDress_17_7",
+          "artifact": "ElphabaDress",
+          "position": [
+            14,
+            7
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0.914,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_bernini_columns_11_16",
+          "artifact": "bernini_columns",
+          "position": [
+            0,
+            -6
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0.65,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dark_sphere_4_24",
+          "artifact": "dark_sphere",
+          "position": [
+            -3,
+            10
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_vowel_sound_board_17_26",
+          "artifact": "vowel_sound_board",
+          "position": [
+            10,
+            8
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 1.3,
+          "scale": 1,
+          "config": {
+            "say": "right here, right now",
+            "repeat": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "title": "WaveFunctions_John_Cage",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_dual_display_test_6_3",
+          "artifact": "dual_display_test",
+          "position": [
+            -14,
+            8
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0.7,
+          "scale": 1,
+          "config": {
+            "museum_panels": "true"
+          }
+        },
+        {
+          "id": "f3_dark_sphere_5_10",
+          "artifact": "dark_sphere",
+          "position": [
+            -3,
+            11
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_john_cage_tech_noir_16_18",
+          "artifact": "john_cage_tech_noir",
+          "position": [
+            4,
+            -1
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0.85,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_ruth_asawa_sculpture_5_19",
+          "artifact": "ruth_asawa_sculpture",
+          "position": [
+            -17,
+            -7
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 5.25,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

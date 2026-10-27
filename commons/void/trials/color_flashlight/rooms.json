@@ -1,0 +1,129 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open canopy / sky through shaft B",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Flashlight",
+      "title": "Colour Flashlight / light changes colour",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "lamps",
+          "artifact": "flashlight_demo",
+          "position": [
+            -18.5,
+            0
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "mount": "standing",
+            "receiver_sides": 7,
+            "plinth": 0,
+            "editor_label": "01 / RGB + white lamps, board, cube and seven-sided receiver"
+          }
+        },
+        {
+          "id": "rooms",
+          "artifact": "void_colour_light_rooms",
+          "position": [
+            0,
+            0
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "02 / white room, pink threshold and sky opening",
+            "parts": {
+              "WhiteRoom": {
+                "position": [
+                  -10,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "LightWell": {
+                "position": [
+                  10,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "pink",
+          "artifact": "void_pink_light_station",
+          "position": [
+            0,
+            4.6
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "editor_label": "03 / five switches: pink light or pink material"
+          }
+        },
+        {
+          "id": "cube-wall",
+          "artifact": "void_colour_cube_wall",
+          "position": [
+            19,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "editor_label": "04 / sixteen cubicles, pale spheres and red lighting comparisons"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

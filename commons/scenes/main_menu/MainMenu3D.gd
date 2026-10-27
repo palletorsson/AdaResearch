@@ -42,6 +42,12 @@ var map_browser_instance: Node3D = null
 ## flag; it does not change a single frame of the shipped menu.
 const AUTOSTART_DELAY := 2.5
 
+func _exit_tree() -> void:
+	# As in the picker, release render geometry before scene-owned shaders.
+	# Otherwise shutdown can leave renderer dependency queries with freed RIDs.
+	for mesh in find_children("*", "MeshInstance3D", true, false):
+		mesh.mesh = null
+
 
 func _ready():
 	_configure_menu_rendering()
@@ -59,7 +65,7 @@ func _ready():
 	$Buttons/MuseumRunnerButton.clicked.connect(_on_museum_runner_clicked)
 	$Buttons/VoidButton.clicked.connect(_on_void_clicked)
 	$Buttons/VoidMovementButton.clicked.connect(_on_void_movement_clicked)
-	$Buttons/VoidTrialsButton.clicked.connect(_on_void_trials_clicked)
+	$Buttons/VoidTrialsButton.clicked.connect(func(): _open_void_floor(0))
 	if browse_button:
 		browse_button.clicked.connect(_on_browse_clicked)
 	settings_button.clicked.connect(_on_settings_clicked)
@@ -159,17 +165,33 @@ func _on_museum_runner_clicked() -> void:
 
 func _on_void_clicked() -> void:
 	if _entering_head_arena: return
-	_entering_head_arena = true
-	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/void/void.tscn")
+	_on_void_trials_clicked()
 
 func _on_void_movement_clicked() -> void:
 	if _entering_head_arena: return
 	_entering_head_arena = true
 	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/void/motion_room.tscn")
 
+func _open_void_floor(index: int) -> void:
+	if _entering_head_arena: return
+	preload("res://commons/void/room_source.gd").use_main_tower = true
+	preload("res://commons/void/game.gd").requested_floor = index
+	_entering_head_arena = true
+	_close_void_trials()
+	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, "res://commons/void/void.tscn")
+
+func _open_void_trial(id: String) -> void:
+	if not preload("res://commons/void/room_source.gd").trials_available(): return
+	if _entering_head_arena: return
+	var record: Dictionary = preload("res://commons/void/room_source.gd").definition(id)
+	_entering_head_arena = true
+	_close_void_trials()
+	preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, str(record.scene))
+
 func _on_void_trials_clicked() -> void:
+	if _entering_head_arena: return
 	if has_node("VoidTrialPicker"): return
-	var picker := Node3D.new()
+	var picker := preload("res://commons/void/spine_picker.gd").new()
 	picker.name = "VoidTrialPicker"
 	picker.position = $Buttons.position
 	add_child(picker)
@@ -178,26 +200,7 @@ func _on_void_trials_clicked() -> void:
 		if existing is CollisionObject3D:
 			existing.set_meta("trial_menu_layer", existing.collision_layer)
 			existing.collision_layer = 0
-	var entries: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/trials/playable.json")).trials
-	var button_scene := preload("res://commons/scenes/main_menu/components/MenuButton3D.tscn")
-	var index := 0
-	for id in entries:
-		var button := button_scene.instantiate()
-		button.text = str(id).capitalize()
-		button.position.y = .65 - index*.25
-		picker.add_child(button)
-		var scene_path: String = entries[id].scene
-		button.clicked.connect(func():
-			if _entering_head_arena: return
-			_entering_head_arena = true
-			_close_void_trials()
-			preload("res://commons/hazards/biome_ladder/route.gd").load_scene(self, scene_path))
-		index += 1
-	var back := button_scene.instantiate()
-	back.text = "Back"
-	back.position.y = .65-index*.25
-	picker.add_child(back)
-	back.clicked.connect(_close_void_trials)
+	picker.configure(self)
 
 func _close_void_trials() -> void:
 	var picker := get_node_or_null("VoidTrialPicker")

@@ -5,6 +5,7 @@ const Blueprint := preload("survey_blueprint.gd")
 @export var plan := true
 var scale_factor := 10.0
 var measured_length := 0.0
+var mounted_readout := false
 var glow: OmniLight3D
 var ruler: Node3D
 var local_positions: Array[Vector3] = [Vector3(-1,1.06,0),Vector3(1,1.06,0)]
@@ -18,8 +19,10 @@ func _ready() -> void:
 	readout.font_size = 30
 	readout.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	var title := _label("02 / THIS FLOOR AT 1:10" if plan else "SPACE RULER / 1:1", Vector3(0,1.9,1.25 if plan else 0),28,Color("f6e9dc"))
+	title.name = "SurveyTitle"
 	title.rotation = Vector3.ZERO
 	var caption := _label("Take either end. Measure across, up or through." if plan else "Move either end in any direction. Metres at full size.",Vector3(0,.65,1.3 if plan else .15),24,Color("f6e9dc"))
+	caption.name = "SurveyInstructions"
 	caption.rotation = Vector3.ZERO
 	ruler = Ruler.new()
 	ruler.name = "LiveRuler"
@@ -58,7 +61,8 @@ func _process(_delta: float) -> void:
 	var span := point_a.global_position.distance_to(point_b.global_position)
 	measured_length = span*scale_factor
 	readout.text = ("1:10   %.2f m = %.2f m" % [span,measured_length]) if plan else "1:1   %.2f m" % measured_length
-	readout.position = (local_positions[0]+local_positions[1])*.5+Vector3(0,.30,0)
+	if not mounted_readout:
+		readout.position = (local_positions[0]+local_positions[1])*.5+Vector3(0,.30,0)
 	line.call("update_line_transform",local_positions[0],local_positions[1])
 	line.get("current_line").visible = span > .001
 	ruler.update_measure(local_positions[0],local_positions[1],measured_length)

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "The Void \u2014 floor content",
+  "title": "The Void — floor content",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -146,12 +146,13 @@
               "height": {
                 "type": "number",
                 "minimum": 0,
-                "maximum": 2.5
+                "maximum": 20
               },
               "scale": {
                 "type": "number",
-                "minimum": 0.05,
-                "maximum": 4
+                "minimum": 0.01,
+                "maximum": 256,
+                "description": "Uniform artifact scale; full-floor fields and imported museum apparatus can use authored scales up to 180."
               },
               "config": {
                 "type": "object",
@@ -165,6 +166,10 @@
                       "id"
                     ],
                     "properties": {
+                      "shared": {
+                        "type": "boolean",
+                        "description": "Preview geometry comes from the shared main-spine export, including when placed in a trial."
+                      },
                       "floor": {
                         "type": "integer",
                         "minimum": 0
@@ -172,6 +177,11 @@
                       "id": {
                         "type": "string",
                         "pattern": "^[A-Za-z0-9_-]+$"
+                      },
+                      "trial": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9_-]+$",
+                        "description": "Registered trial containing the original immutable exported recipe geometry."
                       }
                     }
                   },
@@ -182,7 +192,7 @@
                   "only_parts": {
                     "type": "array",
                     "minItems": 1,
-                    "maxItems": 1,
+                    "maxItems": 64,
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
@@ -214,6 +224,43 @@
                         }
                       }
                     }
+                  }
+                }
+              },
+              "interface": {
+                "description": "Optional Void-only architectural carrier. It does not alter the artifact's own configuration or interaction contract.",
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "style",
+                  "title",
+                  "action"
+                ],
+                "properties": {
+                  "style": {
+                    "enum": [
+                      "ceiling_instrument",
+                      "pillar_instrument"
+                    ]
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 48
+                  },
+                  "action": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64
+                  },
+                  "clearance": {
+                    "type": "number",
+                    "minimum": 0.15,
+                    "maximum": 1.2
+                  },
+                  "accent": {
+                    "type": "string",
+                    "pattern": "^#[0-9a-fA-F]{6}$"
                   }
                 }
               },
@@ -283,12 +330,25 @@
                   "portal_span",
                   "arrival_crate",
                   "wall_charger",
-                    "live_junction",
+                  "ceiling_laser",
+                  "laser_pickup",
+                  "smoke_supply",
+                  "live_junction",
                   "interface_floor",
                   "interface_wall",
                   "interface_pillar",
                   "interface_ceiling_l",
-                  "interface_ceiling_j"
+                  "interface_ceiling_j",
+                  "timber_plank_1m",
+                  "timber_plank_2m",
+                  "timber_plank_4m",
+                  "timber_panel_1x1",
+                  "timber_panel_2x1",
+                  "timber_panel_2x2",
+                  "trace_point_ball",
+                  "traffic_pyramid_5",
+                  "pentagonal_bipyramid_7",
+                  "melencolia_platform"
                 ]
               },
               "position": {

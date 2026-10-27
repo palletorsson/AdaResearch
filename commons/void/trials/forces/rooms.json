@@ -1,0 +1,101 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "title": "Vectors / two points make a relation",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "direction",
+          "artifact": "force_point_direction",
+          "position": [
+            -3,
+            2.4
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "addition",
+          "artifact": "force_point_addition",
+          "position": [
+            3,
+            2.4
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "projection",
+          "artifact": "force_point_projection",
+          "position": [
+            0,
+            -3.2
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "01 / DIRECTION + LENGTH",
+          "position": [
+            -3,
+            5.1
+          ]
+        },
+        {
+          "label": "02 / TWO MOVES, ONE ARRIVAL",
+          "position": [
+            3,
+            5.1
+          ]
+        },
+        {
+          "label": "03 / WHAT THE RAIL KEEPS",
+          "position": [
+            0,
+            -0.5
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

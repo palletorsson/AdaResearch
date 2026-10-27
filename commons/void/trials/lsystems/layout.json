@@ -1,0 +1,67 @@
+{
+  "status": "lsystems / collection transferred and controls verified; curation pending",
+  "width": 42,
+  "depth": 32,
+  "storey_height": 9,
+  "slab_thickness": 0.36,
+  "levels": [
+    0,
+    -9,
+    -18,
+    -27
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -20,
+    -14,
+    -5,
+    5,
+    14,
+    20
+  ],
+  "column_z": [
+    -14,
+    14
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Canopy",
+    "LSystems_Grammar_Lab / 8 original placements",
+    "LSystems_Growth / 5 original placements",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 14,
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "A",
+      "2": "A",
+      "3": "A"
+    }
+  },
+  "route_note": "Transfer envelope: nine-metre storeys so the Growth lesson's 8 m metre rulers and its unfitted 7.5 m second-generation tree stand at actual unit scale (Colour uses the same nine-metre hall). A nine-metre drop lands at about 13.3 m/s, so landing_max_speed is 14 instead of 13; storey_height 9 keeps the one-floor fall rule. Both source grids are turned 180 degrees so the shared spawn at (0, 12) enters where the original visitor entered. Main tower unchanged; final fit is a curation decision.",
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract",
+    "3": "abstract"
+  }
+}

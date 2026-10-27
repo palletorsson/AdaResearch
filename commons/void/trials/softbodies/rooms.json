@@ -1,0 +1,329 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "title": "SoftBodies_Soft_Body_Deformation / transfer, 7 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_science_screen_4_5",
+          "artifact": "science_screen",
+          "position": [
+            11,
+            7
+          ],
+          "station": "SE",
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "mode": "field"
+          }
+        },
+        {
+          "id": "f1_soft_workshop_console_11_5",
+          "artifact": "soft_workshop_console",
+          "position": [
+            4,
+            7
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "deformation"
+          }
+        },
+        {
+          "id": "f1_jelly_cube_8_8",
+          "artifact": "jelly_cube",
+          "position": [
+            7,
+            4
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "anchor": "crown"
+          }
+        },
+        {
+          "id": "f1_softmill_19_12",
+          "artifact": "softmill",
+          "position": [
+            -4,
+            0
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_jelly_variants_8_16",
+          "artifact": "jelly_variants",
+          "position": [
+            7,
+            -4
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_film_jelly_skin_1_19",
+          "artifact": "film_jelly_skin",
+          "position": [
+            14,
+            -7
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_radiolaria_18_22",
+          "artifact": "radiolaria",
+          "position": [
+            -3,
+            -10
+          ],
+          "station": "NW",
+          "height": 0.45,
+          "facing": 180,
+          "scale": 0.5,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "SOFTBODIES_SOFT_BODY_DEFORMATION / 7 OF 7 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            10.6
+          ]
+        },
+        {
+          "label": "(4,5) SCIENCE_SCREEN / MODE FIELD",
+          "position": [
+            11,
+            8.4
+          ]
+        },
+        {
+          "label": "(11,5) SOFT_WORKSHOP_CONSOLE / CHAPTER DEFORMATION",
+          "position": [
+            4,
+            10
+          ]
+        },
+        {
+          "label": "(8,8) JELLY_CUBE / ANCHOR CROWN",
+          "position": [
+            7,
+            5.3
+          ]
+        },
+        {
+          "label": "(19,12) SOFTMILL",
+          "position": [
+            -4,
+            3.2
+          ]
+        },
+        {
+          "label": "(8,16) JELLY_VARIANTS",
+          "position": [
+            7,
+            -5.2
+          ]
+        },
+        {
+          "label": "(1,19) FILM_JELLY_SKIN",
+          "position": [
+            12.4,
+            -7
+          ]
+        },
+        {
+          "label": "(18,22) RADIOLARIA / SCALE 0.5",
+          "position": [
+            -3,
+            -12.4
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Cloth_Physics",
+      "title": "SoftBodies_Cloth_Physics / transfer, 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_soft_workshop_console_11_5",
+          "artifact": "soft_workshop_console",
+          "position": [
+            5,
+            10
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "cloth"
+          }
+        },
+        {
+          "id": "f2_cloth_straps_8_10",
+          "artifact": "cloth_straps",
+          "position": [
+            8,
+            5
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_softstopscene_18_12",
+          "artifact": "softstopscene",
+          "position": [
+            -2,
+            3
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "landing": "rail"
+          }
+        },
+        {
+          "id": "f2_film_cloth_relations_1_27",
+          "artifact": "film_cloth_relations",
+          "position": [
+            15,
+            -12
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_tension_membrane_15_57",
+          "artifact": "tension_membrane",
+          "position": [
+            1,
+            -9.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "SOFTBODIES_CLOTH_PHYSICS / 5 OF 5 ORIGINAL PLACEMENTS / SOURCE GRID TURNED 180",
+          "position": [
+            0,
+            13.8
+          ]
+        },
+        {
+          "label": "(11,5) SOFT_WORKSHOP_CONSOLE / CHAPTER CLOTH",
+          "position": [
+            5,
+            13
+          ]
+        },
+        {
+          "label": "(8,10) CLOTH_STRAPS / LESSON",
+          "position": [
+            8,
+            6.4
+          ]
+        },
+        {
+          "label": "(18,12) SOFTSTOPSCENE / LANDING RAIL",
+          "position": [
+            -3.5,
+            4.8
+          ]
+        },
+        {
+          "label": "(1,27) FILM_CLOTH_RELATIONS",
+          "position": [
+            13.4,
+            -12
+          ]
+        },
+        {
+          "label": "(15,57) TENSION_MEMBRANE / REFERENCE BAY, MOVED 32.5 M NORTH",
+          "position": [
+            1,
+            -3.6
+          ]
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -1,17 +1,19 @@
 extends SceneTree
+const ModelStorage = preload("res://tools/generated_storage.gd")
 ## Bake the runtime-built ControlConsole (CSG cabinet + plate) into meshes and
 ## write a .glb so it can be edited in Blender etc. The CSG combiner is baked to
 ## a static ArrayMesh in place; live SubViewport screens export as blank quads
-## (geometry only — that's what's editable here).
+## (geometry only â€” that's what's editable here).
 ##   godot --path . --xr-mode off --no-window --script res://commons/testing/export_console_gltf.gd -- --out=C:/Users/palle/Desktop/control_console.glb
 
-var _out := "C:/Users/palle/Desktop/control_console.glb"
+var _out := ModelStorage.export_directory("control_console.glb")
 
 
 func _initialize() -> void:
 	for a in OS.get_cmdline_user_args():
 		if str(a).begins_with("--out="):
 			_out = str(a).split("=", true, 1)[1]
+	_out=ModelStorage.output_directory(_out)
 	_run()
 
 
@@ -23,7 +25,7 @@ func _run() -> void:
 	var console: Node3D = packed.instantiate()
 	get_root().add_child(console)
 
-	# Let _ready → _build_body (deferred, awaits frames) finish + plate settle.
+	# Let _ready â†’ _build_body (deferred, awaits frames) finish + plate settle.
 	await process_frame
 	await create_timer(1.0).timeout
 	await process_frame
@@ -37,7 +39,7 @@ func _run() -> void:
 	if err != OK:
 		push_error("[export] append_from_scene failed: %d" % err)
 		quit(1); return
-	err = doc.write_to_filesystem(state, _out)
+	err = ModelStorage.write_gltf(doc,state,_out)
 	if err != OK:
 		push_error("[export] write_to_filesystem failed: %d" % err)
 		quit(1); return
@@ -54,7 +56,7 @@ func _bake_csg(root: Node) -> void:
 		var n: Node = stack.pop_back()
 		if n is CSGCombiner3D:
 			combiners.append(n)
-			continue   # its children are part of the combine — don't descend
+			continue   # its children are part of the combine â€” don't descend
 		for c in n.get_children():
 			stack.append(c)
 
@@ -71,7 +73,7 @@ func _bake_csg(root: Node) -> void:
 			continue
 		var mi := MeshInstance3D.new()
 		mi.mesh = mesh
-		# "Body" → "ConsoleBody" so the editor can tell structure from board parts.
+		# "Body" â†’ "ConsoleBody" so the editor can tell structure from board parts.
 		mi.name = "Console" + str(csg.name)
 		var parent: Node = csg.get_parent()
 		var xf: Transform3D = csg.transform

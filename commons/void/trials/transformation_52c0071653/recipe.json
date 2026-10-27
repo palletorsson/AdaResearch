@@ -1,0 +1,425 @@
+{
+  "settings": {
+    "source": "barrier",
+    "arrangement": "radial",
+    "count": 10,
+    "spacing": 0.35,
+    "radius": 0.85,
+    "angle": 30,
+    "axis": "y",
+    "ratio": 1,
+    "size": 0.45,
+    "rise": 0,
+    "staging": "table",
+    "opening": 2.4,
+    "wall": 0.18,
+    "depth": 0.6
+  },
+  "term": {
+    "chapter": "transformation",
+    "label": "Blue DO NOT CROSS barrier / radial",
+    "expr": "ingredient × translation × rotation × scale",
+    "from": [
+      "elevated_plank"
+    ],
+    "build": {
+      "op": "assemblage",
+      "parts": [
+        {
+          "id": "Board",
+          "at": [
+            0,
+            0.61,
+            0
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  3.6,
+                  0.08,
+                  2.4
+                ],
+                "color": "bd9967"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  3.6,
+                  0.08,
+                  2.4
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support1",
+          "at": [
+            -1.35,
+            0.285,
+            -0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support2",
+          "at": [
+            1.35,
+            0.285,
+            -0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support3",
+          "at": [
+            -1.35,
+            0.285,
+            0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Support4",
+          "at": [
+            1.35,
+            0.285,
+            0.85
+          ],
+          "of": {
+            "op": "compose",
+            "parts": [
+              {
+                "p": "mesh",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ],
+                "color": "c5c0b6"
+              },
+              {
+                "p": "collider",
+                "shape": "box",
+                "size": [
+                  0.32,
+                  0.57,
+                  0.32
+                ]
+              },
+              {
+                "p": "body",
+                "kind": "static"
+              }
+            ]
+          }
+        },
+        {
+          "id": "Copy01",
+          "at": [
+            0,
+            0.65,
+            0.85
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy02",
+          "at": [
+            0.42499999999999993,
+            0.65,
+            0.7361215932167728
+          ],
+          "rot": [
+            0,
+            30,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy03",
+          "at": [
+            0.7361215932167728,
+            0.65,
+            0.4250000000000001
+          ],
+          "rot": [
+            0,
+            60,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy04",
+          "at": [
+            0.85,
+            0.65,
+            5.204748896376251e-17
+          ],
+          "rot": [
+            0,
+            90,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy05",
+          "at": [
+            0.7361215932167728,
+            0.65,
+            -0.4249999999999998
+          ],
+          "rot": [
+            0,
+            120,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy06",
+          "at": [
+            0.42499999999999993,
+            0.65,
+            -0.7361215932167728
+          ],
+          "rot": [
+            0,
+            150,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy07",
+          "at": [
+            1.0409497792752501e-16,
+            0.65,
+            -0.85
+          ],
+          "rot": [
+            0,
+            180,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy08",
+          "at": [
+            -0.4250000000000001,
+            0.65,
+            -0.7361215932167728
+          ],
+          "rot": [
+            0,
+            210,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy09",
+          "at": [
+            -0.7361215932167727,
+            0.65,
+            -0.4250000000000004
+          ],
+          "rot": [
+            0,
+            240,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        },
+        {
+          "id": "Copy10",
+          "at": [
+            -0.85,
+            0.65,
+            -1.5614246689128752e-16
+          ],
+          "rot": [
+            0,
+            270,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.45,
+          "of": {
+            "p": "prefab",
+            "token": "do_not_cross_barrier",
+            "lab_input": true
+          }
+        }
+      ]
+    }
+  },
+  "lineage": {
+    "family": "transformation_arrangement",
+    "ingredient": "elevated_plank",
+    "source": "do_not_cross_barrier",
+    "operations": [
+      "translation",
+      "rotation",
+      "scale"
+    ]
+  },
+  "scope": "Static construction and arrangement. Native exports include collision where authored. This prototype does not claim dynamic joints, hand interactions or traversable routes.",
+  "source_hash": "22dd1ba31ab6486c4f926e24e6b8ff7c0a6658cfc90b0cbe0b7ba543276adddd",
+  "name": "Barriers / blue sun feather",
+  "parent": null
+}

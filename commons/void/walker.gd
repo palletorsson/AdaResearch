@@ -2,6 +2,7 @@ extends CharacterBody3D
 ## Desktop companion for the same descent. The VR mode uses XRToolsPlayerBody.
 const Rules := preload("player_rules.gd")
 const Hand := preload("desktop_hand.gd")
+const FlightBox := preload("res://commons/movement/museum_flight_box.gd")
 const SPEED := Rules.SPEED
 const JUMP := Rules.JUMP
 var camera: Camera3D
@@ -10,6 +11,8 @@ var enabled := true
 var jump_queued := false
 var drive := Vector2.ZERO # Also used by the deterministic physics probe.
 var scripted_input := false
+var flight_vertical := 0.0 # Deterministic counterpart of Space / Ctrl.
+var was_flying := false
 
 func _ready() -> void:
 	collision_layer = 524288
@@ -38,6 +41,19 @@ func _physics_process(delta: float) -> void:
 	var axes := drive
 	if not scripted_input:
 		axes = Vector2(float(Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT)) - float(Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT)), float(Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN)) - float(Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP)))
+	var zone: Node3D = FlightBox.at_point(get_tree(),global_position)
+	if zone != null:
+		var vertical := flight_vertical if scripted_input else float(Input.is_physical_key_pressed(KEY_SPACE))-float(Input.is_physical_key_pressed(KEY_CTRL))
+		velocity = zone.flight_velocity(camera.global_basis,Vector2(axes.x,-axes.y),vertical)
+		jump_queued = false
+		was_flying = true
+		move_and_slide()
+		return
+	if was_flying:
+		velocity = Vector3.ZERO
+		was_flying = false
+	var slippery := _slippery_support()
+	floor_stop_on_slope = not slippery
 	var direction := basis * Vector3(axes.x, 0, axes.y).limit_length()
 	var horizontal := Vector3(velocity.x, 0, velocity.z)
 	if direction.length() >= 0.1:
@@ -45,16 +61,37 @@ func _physics_process(delta: float) -> void:
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
 	if is_on_floor():
-		velocity.y = JUMP if jump_queued else 0.0
+		if jump_queued: velocity.y = JUMP
+		elif not slippery: velocity.y = 0.0
 	# XRTools applies the world's gravity on the jump frame too.
 	velocity += PhysicsServer3D.body_get_direct_state(get_rid()).total_gravity * delta
 	jump_queued = false
+	# Same opted-in carry contract as the museum and XR movement provider.
+	# Sleeping floors must never drive the active desktop body.
+	var carry_zone: Node3D = null
+	for medium in get_tree().get_nodes_in_group("ada_museum_carry"):
+		if carry_zone == null and medium.can_process() and medium._point_inside(global_position):
+			carry_zone = medium
+		else:
+			medium.release_carry(self)
+	if carry_zone != null:
+		velocity = carry_zone.carry_velocity(self, delta, velocity)
 	move_and_slide()
-	if direction.length() < 0.1:
+	if carry_zone != null:
+		carry_zone.record_carry(self)
+		return
+	if direction.length() < 0.1 and not slippery:
 		horizontal = Vector3(velocity.x, 0, velocity.z).lerp(Vector3.ZERO, clampf(Rules.DRAG * delta, 0, 1))
 		if horizontal.length() < Rules.STOP_SPEED: horizontal = Vector3.ZERO
 		velocity.x = horizontal.x
 		velocity.z = horizontal.z
+
+func _slippery_support() -> bool:
+	if not is_on_floor(): return false
+	var query := PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.12,global_position-Vector3.UP*.20,1)
+	query.exclude = [get_rid()]
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	return not hit.is_empty() and bool(hit.collider.get_meta("void_slippery_surface",false))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not enabled: return

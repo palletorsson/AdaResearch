@@ -1,0 +1,4290 @@
+{
+  "source": "matter-and-logic.zip / physics/mgates.js",
+  "sha256": "24dbe51aad9dbb8ed47fc3a8ba5d8bce3c3fd622fac306d5d54b2ee8b8ba700b",
+  "graphs": {
+    "and": {
+      "kind": "and",
+      "frame": {
+        "x": -0.8,
+        "y": 0.75,
+        "dist": 11
+      },
+      "output": "body_9",
+      "inputs": {
+        "X": {
+          "body": "body_7",
+          "how": "rope",
+          "label": "crate over the first ditch"
+        },
+        "Y": {
+          "body": "body_8",
+          "how": "rope",
+          "label": "crate over the second ditch"
+        }
+      },
+      "held": [
+        {
+          "body": "body_7",
+          "input": "X"
+        },
+        {
+          "body": "body_8",
+          "input": "Y"
+        }
+      ],
+      "clock": "body_6",
+      "beam": null,
+      "planar": [],
+      "bodies": [
+        {
+          "id": "body_0",
+          "position": [
+            0,
+            -0.1,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "floor",
+          "look": "none",
+          "role": "floor",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                60,
+                0.2,
+                20
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "position": [
+            -4.002333517717326,
+            0.6251091443485178,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.0467213759467328,
+            0.9989079602394026
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "board",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                3.214031735997639,
+                0.05,
+                0.6
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "position": [
+            -5.75,
+            0.4,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.44,
+                0.8,
+                0.8
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "position": [
+            -1.66,
+            0.25,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "platform",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                1.52,
+                0.5,
+                0.72
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "position": [
+            0.6,
+            0.25,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "platform",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                1.2,
+                0.5,
+                0.72
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "position": [
+            3.1500000000000004,
+            0.25,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "platform",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.1,
+                0.5,
+                0.72
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "position": [
+            -5.235998893696041,
+            0.9165326339088933,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 6,
+          "inertia": [
+            0.09,
+            0.09,
+            0.09
+          ],
+          "linear_damping": 0.02,
+          "angular_damping": 0.05,
+          "material": "iron",
+          "look": "iron",
+          "role": "mover",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.15,
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "position": [
+            -0.45,
+            1.27,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 5,
+          "inertia": [
+            0.26433333333333336,
+            0.46833333333333327,
+            0.4123333333333333
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "card",
+          "look": "crate2",
+          "role": "filler",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.86,
+                0.5,
+                0.62
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "position": [
+            1.65,
+            1.27,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 5,
+          "inertia": [
+            0.26433333333333336,
+            0.46833333333333327,
+            0.4123333333333333
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "card",
+          "look": "crate2",
+          "role": "filler",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.86,
+                0.5,
+                0.62
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "position": [
+            3.7,
+            0.8200000000000001,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0.8,
+          "inertia": [
+            0.02826666666666667,
+            0.0019199999999999998,
+            0.02826666666666667
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "skittle",
+          "role": "target",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.12,
+                0.64,
+                0.12
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": []
+    },
+    "or": {
+      "kind": "or",
+      "frame": {
+        "x": -1.4,
+        "y": 0.7,
+        "dist": 9.2
+      },
+      "output": "body_6",
+      "inputs": {
+        "X": {
+          "body": "body_4",
+          "how": "chock",
+          "label": "tyre"
+        },
+        "Y": {
+          "body": "body_5",
+          "how": "chock",
+          "label": "rubber ball"
+        }
+      },
+      "held": [],
+      "clock": null,
+      "beam": null,
+      "planar": [
+        "body_4"
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "position": [
+            0,
+            -0.1,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "floor",
+          "look": "none",
+          "role": "floor",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                60,
+                0.2,
+                20
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "position": [
+            -3.208032408618744,
+            0.4513255324921229,
+            0.45
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.16282091340629018,
+            0.9866556390947864
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "board",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.9567718883945036,
+                0.05,
+                0.48
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "position": [
+            -3.208032408618744,
+            0.4513255324921229,
+            -0.45
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.16282091340629018,
+            0.9866556390947864
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "board",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.9567718883945036,
+                0.05,
+                0.48
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "position": [
+            -4.75,
+            0.47,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.5,
+                0.94,
+                1.5
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "position": [
+            -4.071481462100096,
+            1.1930771944117475,
+            0.45
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 9,
+          "inertia": [
+            0.5100000000000001,
+            0.5100000000000001,
+            0.9600000000000002
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.05,
+          "material": "rubber",
+          "look": "tyre",
+          "role": "mover",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.3,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2954423259036624,
+                0.0520944533000791,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2819077862357725,
+                0.10260604299770061,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2598076211353316,
+                0.14999999999999997,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2298133329356934,
+                0.19283628290596178,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.1928362829059618,
+                0.2298133329356934,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.15000000000000002,
+                0.25980762113533157,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.10260604299770064,
+                0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.05209445330007912,
+                0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                1.8369701987210297e-17,
+                0.3,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.05209445330007909,
+                0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.10260604299770061,
+                0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.14999999999999994,
+                0.2598076211353316,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.1928362829059618,
+                0.2298133329356934,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.22981333293569337,
+                0.19283628290596183,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2598076211353316,
+                0.14999999999999997,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2819077862357725,
+                0.10260604299770067,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2954423259036624,
+                0.05209445330007922,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.3,
+                3.6739403974420595e-17,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2954423259036624,
+                -0.05209445330007914,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2819077862357725,
+                -0.1026060429977006,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.25980762113533157,
+                -0.15000000000000002,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.22981333293569342,
+                -0.19283628290596178,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.19283628290596183,
+                -0.22981333293569337,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.15000000000000013,
+                -0.2598076211353315,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.1026060429977008,
+                -0.28190778623577245,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.0520944533000791,
+                -0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -5.510910596163089e-17,
+                -0.3,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.05209445330007899,
+                -0.29544232590366243,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.1026060429977007,
+                -0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.15000000000000002,
+                -0.25980762113533157,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.19283628290596178,
+                -0.22981333293569342,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.22981333293569334,
+                -0.19283628290596186,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2598076211353315,
+                -0.15000000000000013,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2819077862357724,
+                -0.10260604299770083,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2954423259036624,
+                -0.05209445330007911,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "position": [
+            -4.195379621392541,
+            0.9922363790535641,
+            -0.45
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 3,
+          "inertia": [
+            0.05780000000000001,
+            0.05780000000000001,
+            0.05780000000000001
+          ],
+          "linear_damping": 0.02,
+          "angular_damping": 0.05,
+          "material": "rubber",
+          "look": "ball",
+          "role": "mover",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.17,
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "position": [
+            1.3,
+            0.8,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 4,
+          "inertia": [
+            1.8166666666666667,
+            0.9649666666666665,
+            0.8549666666666669
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "card",
+          "look": "plywood",
+          "role": "target",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.07,
+                1.6,
+                1.7
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": []
+    },
+    "xor": {
+      "kind": "xor",
+      "frame": {
+        "x": 0,
+        "y": 0.95,
+        "dist": 7.6
+      },
+      "output": "body_8",
+      "inputs": {
+        "X": {
+          "body": "body_6",
+          "how": "rope",
+          "label": "sandbag on the left"
+        },
+        "Y": {
+          "body": "body_7",
+          "how": "rope",
+          "label": "sandbag on the right"
+        }
+      },
+      "held": [
+        {
+          "body": "body_6",
+          "input": "X"
+        },
+        {
+          "body": "body_7",
+          "input": "Y"
+        }
+      ],
+      "clock": null,
+      "beam": "body_1",
+      "planar": [],
+      "bodies": [
+        {
+          "id": "body_0",
+          "position": [
+            0,
+            -0.1,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "floor",
+          "look": "none",
+          "role": "floor",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                60,
+                0.2,
+                20
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "position": [
+            0,
+            0.7899999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 12,
+          "inertia": [
+            0.47118400000000005,
+            10.061584000000002,
+            9.629600000000002
+          ],
+          "linear_damping": 0.05,
+          "angular_damping": 0.6,
+          "material": "wood",
+          "look": "beam",
+          "role": "beam",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                3.1,
+                0.06,
+                0.28
+              ],
+              "at": [
+                0,
+                0.16,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                3,
+                0.04,
+                0.024
+              ],
+              "at": [
+                0,
+                0.21000000000000002,
+                -0.115
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.006,
+                0.2
+              ],
+              "at": [
+                -0.105,
+                0.193,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.52,
+                0.05,
+                0.4
+              ],
+              "at": [
+                -1.25,
+                0.16,
+                0.33
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.52,
+                0.12,
+                0.024
+              ],
+              "at": [
+                -1.25,
+                0.21000000000000002,
+                0.52
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                3,
+                0.04,
+                0.024
+              ],
+              "at": [
+                0,
+                0.21000000000000002,
+                0.115
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.024,
+                0.006,
+                0.2
+              ],
+              "at": [
+                0.105,
+                0.193,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.52,
+                0.05,
+                0.4
+              ],
+              "at": [
+                1.25,
+                0.16,
+                0.33
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.52,
+                0.12,
+                0.024
+              ],
+              "at": [
+                1.25,
+                0.21000000000000002,
+                0.52
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "position": [
+            0,
+            0.95,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "look": "anchor",
+          "role": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_3",
+          "position": [
+            0,
+            0.435,
+            -0.32
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "post",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.16,
+                0.87,
+                0.6
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "position": [
+            -1.05,
+            0.27,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "card",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.44,
+                0.54,
+                0.44
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "position": [
+            1.05,
+            0.27,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "card",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.44,
+                0.54,
+                0.44
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "position": [
+            -1.25,
+            1.5699999999999998,
+            0.33
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 8,
+          "inertia": [
+            0.07173333333333334,
+            0.12213333333333334,
+            0.10373333333333334
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "sand",
+          "look": "sandbag",
+          "role": "weight",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.2,
+                0.26
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "position": [
+            1.25,
+            1.5699999999999998,
+            0.33
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 8,
+          "inertia": [
+            0.07173333333333334,
+            0.12213333333333334,
+            0.10373333333333334
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "sand",
+          "look": "sandbag",
+          "role": "weight",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.34,
+                0.2,
+                0.26
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "position": [
+            0,
+            1.065,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0.6,
+          "inertia": [
+            0.00289,
+            0.00289,
+            0.00289
+          ],
+          "linear_damping": 0.02,
+          "angular_damping": 0.05,
+          "material": "rubber",
+          "look": "ballZ",
+          "role": "target",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.085,
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": [
+        {
+          "a": "body_2",
+          "b": "body_1",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0,
+            0.16,
+            0
+          ],
+          "axis_a": [
+            0,
+            0,
+            1
+          ],
+          "axis_b": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    "not": {
+      "kind": "not",
+      "frame": {
+        "x": -1.1,
+        "y": 0.6,
+        "dist": 9.4
+      },
+      "output": "body_5",
+      "inputs": {
+        "X": {
+          "body": "body_4",
+          "how": "rope",
+          "label": "breeze block"
+        }
+      },
+      "held": [
+        {
+          "body": "body_4",
+          "input": "X"
+        }
+      ],
+      "clock": "body_3",
+      "beam": null,
+      "planar": [
+        "body_3"
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "position": [
+            0,
+            -0.1,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "floor",
+          "look": "none",
+          "role": "floor",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                60,
+                0.2,
+                20
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "position": [
+            -3.406708839118935,
+            0.36591698777818177,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.13542435365780905,
+            0.9907876888800974
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "board",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.9066131493544165,
+                0.05,
+                0.48
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "position": [
+            -4.95,
+            0.38,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.44,
+                0.76,
+                0.8
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "position": [
+            -4.292658574097039,
+            1.0538996241205205,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 9,
+          "inertia": [
+            0.5100000000000001,
+            0.5100000000000001,
+            0.9600000000000002
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.05,
+          "material": "rubber",
+          "look": "tyre",
+          "role": "mover",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.3,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2954423259036624,
+                0.0520944533000791,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2819077862357725,
+                0.10260604299770061,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2598076211353316,
+                0.14999999999999997,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2298133329356934,
+                0.19283628290596178,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.1928362829059618,
+                0.2298133329356934,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.15000000000000002,
+                0.25980762113533157,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.10260604299770064,
+                0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.05209445330007912,
+                0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                1.8369701987210297e-17,
+                0.3,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.05209445330007909,
+                0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.10260604299770061,
+                0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.14999999999999994,
+                0.2598076211353316,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.1928362829059618,
+                0.2298133329356934,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.22981333293569337,
+                0.19283628290596183,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2598076211353316,
+                0.14999999999999997,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2819077862357725,
+                0.10260604299770067,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2954423259036624,
+                0.05209445330007922,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.3,
+                3.6739403974420595e-17,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2954423259036624,
+                -0.05209445330007914,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2819077862357725,
+                -0.1026060429977006,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.25980762113533157,
+                -0.15000000000000002,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.22981333293569342,
+                -0.19283628290596178,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.19283628290596183,
+                -0.22981333293569337,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.15000000000000013,
+                -0.2598076211353315,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.1026060429977008,
+                -0.28190778623577245,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.0520944533000791,
+                -0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -5.510910596163089e-17,
+                -0.3,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.05209445330007899,
+                -0.29544232590366243,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.1026060429977007,
+                -0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.15000000000000002,
+                -0.25980762113533157,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.19283628290596178,
+                -0.22981333293569342,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.22981333293569334,
+                -0.19283628290596186,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2598076211353315,
+                -0.15000000000000013,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2819077862357724,
+                -0.10260604299770083,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2954423259036624,
+                -0.05209445330007911,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "position": [
+            0.5,
+            1.25,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 25,
+          "inertia": [
+            0.8541666666666666,
+            0.8541666666666666,
+            0.6666666666666667
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "stone",
+          "look": "breeze",
+          "role": "filler",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.4,
+                0.4,
+                0.5
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "position": [
+            2.6,
+            0.32,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0.8,
+          "inertia": [
+            0.02826666666666667,
+            0.0019199999999999998,
+            0.02826666666666667
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "skittle",
+          "role": "target",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.12,
+                0.64,
+                0.12
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": []
+    },
+    "nor": {
+      "kind": "nor",
+      "frame": {
+        "x": -1,
+        "y": 0.6,
+        "dist": 9.4
+      },
+      "output": "body_6",
+      "inputs": {
+        "X": {
+          "body": "body_4",
+          "how": "rope",
+          "label": "breeze block"
+        },
+        "Y": {
+          "body": "body_5",
+          "how": "rope",
+          "label": "sack of cement"
+        }
+      },
+      "held": [
+        {
+          "body": "body_4",
+          "input": "X"
+        },
+        {
+          "body": "body_5",
+          "input": "Y"
+        }
+      ],
+      "clock": "body_3",
+      "beam": null,
+      "planar": [],
+      "bodies": [
+        {
+          "id": "body_0",
+          "position": [
+            0,
+            -0.1,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "floor",
+          "look": "none",
+          "role": "floor",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                60,
+                0.2,
+                20
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "position": [
+            -3.4062260259952652,
+            0.33578767668507875,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.12551308179458898,
+            0.9920919646375657
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "board",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.8910897599348235,
+                0.05,
+                0.48
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "position": [
+            -4.95,
+            0.35,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.44,
+                0.7,
+                0.8
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "position": [
+            -4.405172612834089,
+            0.804328727867433,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 4,
+          "inertia": [
+            0.08639999999999999,
+            0.08639999999999999,
+            0.08639999999999999
+          ],
+          "linear_damping": 0.02,
+          "angular_damping": 0.05,
+          "material": "rubber",
+          "look": "medball",
+          "role": "mover",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.18,
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "position": [
+            -0.4,
+            1.25,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 25,
+          "inertia": [
+            0.8541666666666666,
+            0.8541666666666666,
+            0.6666666666666667
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "stone",
+          "look": "breeze",
+          "role": "filler",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.4,
+                0.4,
+                0.5
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "position": [
+            1.2,
+            1.18,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 25,
+          "inertia": [
+            0.6208333333333332,
+            1.23,
+            0.8908333333333331
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "sand",
+          "look": "sack",
+          "role": "filler",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.6,
+                0.26,
+                0.48
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_6",
+          "position": [
+            2.9,
+            0.32,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0.8,
+          "inertia": [
+            0.02826666666666667,
+            0.0019199999999999998,
+            0.02826666666666667
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "skittle",
+          "role": "target",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.12,
+                0.64,
+                0.12
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": []
+    },
+    "nand": {
+      "kind": "nand",
+      "frame": {
+        "x": -0.3,
+        "y": 0.8,
+        "dist": 10.6
+      },
+      "output": "body_11",
+      "inputs": {
+        "X": {
+          "body": "body_9",
+          "how": "rope",
+          "label": "sandbag"
+        },
+        "Y": {
+          "body": "body_10",
+          "how": "rope",
+          "label": "second sandbag"
+        }
+      },
+      "held": [
+        {
+          "body": "body_9",
+          "input": "X"
+        },
+        {
+          "body": "body_10",
+          "input": "Y"
+        }
+      ],
+      "clock": "body_3",
+      "beam": null,
+      "planar": [
+        "body_3"
+      ],
+      "bodies": [
+        {
+          "id": "body_0",
+          "position": [
+            0,
+            -0.1,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "floor",
+          "look": "none",
+          "role": "floor",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                60,
+                0.2,
+                20
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_1",
+          "position": [
+            -3.406708839118935,
+            0.36591698777818177,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.13542435365780905,
+            0.9907876888800974
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "board",
+          "role": "ramp",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                2.9066131493544165,
+                0.05,
+                0.48
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_2",
+          "position": [
+            -4.95,
+            0.38,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "crate",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.44,
+                0.76,
+                0.8
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_3",
+          "position": [
+            -4.292658574097039,
+            1.0538996241205205,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 9,
+          "inertia": [
+            0.5100000000000001,
+            0.5100000000000001,
+            0.9600000000000002
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.05,
+          "material": "rubber",
+          "look": "tyre",
+          "role": "mover",
+          "shapes": [
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.3,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2954423259036624,
+                0.0520944533000791,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2819077862357725,
+                0.10260604299770061,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2598076211353316,
+                0.14999999999999997,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2298133329356934,
+                0.19283628290596178,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.1928362829059618,
+                0.2298133329356934,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.15000000000000002,
+                0.25980762113533157,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.10260604299770064,
+                0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.05209445330007912,
+                0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                1.8369701987210297e-17,
+                0.3,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.05209445330007909,
+                0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.10260604299770061,
+                0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.14999999999999994,
+                0.2598076211353316,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.1928362829059618,
+                0.2298133329356934,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.22981333293569337,
+                0.19283628290596183,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2598076211353316,
+                0.14999999999999997,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2819077862357725,
+                0.10260604299770067,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2954423259036624,
+                0.05209445330007922,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.3,
+                3.6739403974420595e-17,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2954423259036624,
+                -0.05209445330007914,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.2819077862357725,
+                -0.1026060429977006,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.25980762113533157,
+                -0.15000000000000002,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.22981333293569342,
+                -0.19283628290596178,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.19283628290596183,
+                -0.22981333293569337,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.15000000000000013,
+                -0.2598076211353315,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.1026060429977008,
+                -0.28190778623577245,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -0.0520944533000791,
+                -0.2954423259036624,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                -5.510910596163089e-17,
+                -0.3,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.05209445330007899,
+                -0.29544232590366243,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.1026060429977007,
+                -0.2819077862357725,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.15000000000000002,
+                -0.25980762113533157,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.19283628290596178,
+                -0.22981333293569342,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.22981333293569334,
+                -0.19283628290596186,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2598076211353315,
+                -0.15000000000000013,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2819077862357724,
+                -0.10260604299770083,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "sphere",
+              "radius": 0.1,
+              "at": [
+                0.2954423259036624,
+                -0.05209445330007911,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_4",
+          "position": [
+            0.5353571428571429,
+            1.5478571428571428,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 56,
+          "inertia": [
+            2.2847999999999997,
+            13.626666666666667,
+            12.551466666666666
+          ],
+          "linear_damping": 0.05,
+          "angular_damping": 0.4,
+          "material": "wood",
+          "look": "seesaw",
+          "role": "beam",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                1.6,
+                0.06,
+                0.6
+              ],
+              "at": [
+                0.5646428571428571,
+                0.18214285714285713,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            },
+            {
+              "type": "box",
+              "size": [
+                0.26,
+                0.26,
+                0.26
+              ],
+              "at": [
+                -0.05535714285714288,
+                -0.017857142857142877,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_5",
+          "position": [
+            0.9,
+            1.7,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.01,
+          "angular_damping": 0.01,
+          "material": "anchor",
+          "look": "anchor",
+          "role": "anchor",
+          "shapes": []
+        },
+        {
+          "id": "body_6",
+          "position": [
+            0.48000000000000004,
+            1.3599999999999999,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "stop",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.28,
+                0.08,
+                0.4
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_7",
+          "position": [
+            1.52,
+            1.22,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0,
+          "inertia": [
+            0,
+            0,
+            0
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "stop",
+          "role": "prop",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.12,
+                0.08,
+                0.64
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_8",
+          "position": [
+            1.6,
+            1.96,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 20,
+          "inertia": [
+            0.5893333333333334,
+            0.5893333333333334,
+            0.5333333333333334
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "stone",
+          "look": "breeze",
+          "role": "filler",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.4,
+                0.4,
+                0.44
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_9",
+          "position": [
+            1.2,
+            2.1,
+            -0.15
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 14,
+          "inertia": [
+            0.11666666666666665,
+            0.14606666666666665,
+            0.10499999999999998
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "sand",
+          "look": "sandbag",
+          "role": "weight",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.24,
+                0.18,
+                0.26
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_10",
+          "position": [
+            1.2,
+            2.1,
+            0.15
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 14,
+          "inertia": [
+            0.11666666666666665,
+            0.14606666666666665,
+            0.10499999999999998
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "sand",
+          "look": "sandbag",
+          "role": "weight",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.24,
+                0.18,
+                0.26
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body_11",
+          "position": [
+            4.4,
+            0.32,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "mass": 0.8,
+          "inertia": [
+            0.02826666666666667,
+            0.0019199999999999998,
+            0.02826666666666667
+          ],
+          "linear_damping": 0.03,
+          "angular_damping": 0.08,
+          "material": "wood",
+          "look": "skittle",
+          "role": "target",
+          "shapes": [
+            {
+              "type": "box",
+              "size": [
+                0.12,
+                0.64,
+                0.12
+              ],
+              "at": [
+                0,
+                0,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "hinges": [
+        {
+          "a": "body_5",
+          "b": "body_4",
+          "pivot_a": [
+            0,
+            0,
+            0
+          ],
+          "pivot_b": [
+            0.3646428571428571,
+            0.15214285714285714,
+            0
+          ],
+          "axis_a": [
+            0,
+            0,
+            1
+          ],
+          "axis_b": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}

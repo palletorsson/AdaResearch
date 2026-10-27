@@ -24,7 +24,7 @@ func _ready() -> void:
 	meter.name = "MotionMeter"
 	add_child(meter)
 	meter.configure(self, "room")
-	print("[void-motion] Same Void rig. Left stick walk/strafe, right stick forward/back and turn, grip grab, A jump, B reset, Y compare tower, X menu.")
+	print("[void-motion] Same Void rig. Left stick walk/strafe, right stick forward/back and turn, grip grab, A / B jump, Y compare tower, X menu.")
 
 func _build_room() -> void:
 	_box("Floor", Vector3(0,-0.15,0), Vector3(20,0.3,22), Color("c4bfc5"))
@@ -47,7 +47,7 @@ func _build_room() -> void:
 	line_study.position = Vector3(5,0,-3)
 	add_child(line_study)
 	_words("THE VOID / MOVEMENT ROOM", Vector3(0,2.7,-10.82), 0.004)
-	_words("Left stick: walk/strafe. Right stick: forward/back and turn.\nWalk the centre lane, then try carrying a point.\nA: jump   B: reset   Y: compare tower   X: menu\nDesktop: WASD / Space / R / T / M", Vector3(0,1.7,-10.82), 0.0017)
+	_words("Left stick: walk/strafe. Right stick: forward/back and turn.\nWalk the centre lane, then try carrying a point.\nA / B: jump   Y: compare tower   X: menu\nDesktop: WASD / Space / R / T / M", Vector3(0,1.7,-10.82), 0.0017)
 	_words("SAME POINT / SAME GRIP", Vector3(-4,2.4,-0.4), 0.0017)
 
 func _box(title: String, at: Vector3, size: Vector3, colour: Color, solid := true) -> void:

@@ -1,0 +1,64 @@
+{
+  "status": "Array trial: 32 indices, seven by seven, hand support in shaft B and 6 x 6 x 6 flight in shaft A.",
+  "width": 42,
+  "depth": 18,
+  "storey_height": 6,
+  "slab_thickness": 0.36,
+  "levels": [
+    0,
+    -6,
+    -12
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -20,
+    -14,
+    -5,
+    5,
+    14,
+    20
+  ],
+  "column_z": [
+    -7,
+    7
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Trial canopy",
+    "Array / an address survives an absence",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 13,
+    "pad_shaft": "B",
+    "pad_disabled_floors": [1],
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "A",
+      "2": "A"
+    }
+  },
+  "route_note": "Long row behind the shafts; walking 7 by 7 grid east; small hand grid controls the matching support address in shaft B.",
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract"
+  }
+}

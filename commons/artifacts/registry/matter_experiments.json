@@ -1,0 +1,90 @@
+{
+  "artifacts": {
+    "matter_friction_ramp": {
+      "lookup_name": "matter_friction_ramp",
+      "name": "Matter / Let Go",
+      "scene": "res://commons/artifacts/matter_experiments/friction_studies.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "physics",
+      "description": "A tilted plank and a cube: change the angle/contact, then let native gravity and friction decide.",
+      "default_params": {
+        "study": "ramp"
+      },
+      "interactions": [
+        "Adjust with the pink controls before release.",
+        "Release for a physical take; repeat after it settles.",
+        "Right-click or grip carries a cube; reset restores authored positions."
+      ],
+      "qfep_connection": "The threshold is a physical relation between contact, force and history rather than an instantaneous Boolean promise."
+    },
+    "matter_friction_coast": {
+      "lookup_name": "matter_friction_coast",
+      "name": "Matter / Keep Going",
+      "scene": "res://commons/artifacts/matter_experiments/friction_studies.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "physics",
+      "description": "Two equal cubes receive the same impulse. Different contact surfaces yield different actual stopping distances.",
+      "default_params": {
+        "study": "coast"
+      },
+      "interactions": [
+        "Press SAME PUSH to give both cubes one identical impulse.",
+        "Release for a physical take; repeat after it settles.",
+        "Right-click or grip carries a cube; reset restores authored positions."
+      ],
+      "qfep_connection": "The threshold is a physical relation between contact, force and history rather than an instantaneous Boolean promise."
+    },
+    "matter_friction_pull": {
+      "lookup_name": "matter_friction_pull",
+      "name": "Matter / Almost Enough",
+      "scene": "res://commons/artifacts/matter_experiments/friction_studies.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "physics",
+      "description": "A hanging mass pulls a cube over a plank with an explicit elastic cable and ideal roller. Observe whether the contact yields.",
+      "default_params": {
+        "study": "pull"
+      },
+      "interactions": [
+        "Adjust with the pink controls before release.",
+        "Release for a physical take; repeat after it settles.",
+        "Right-click or grip carries a cube; reset restores authored positions."
+      ],
+      "qfep_connection": "The threshold is a physical relation between contact, force and history rather than an instantaneous Boolean promise."
+    },
+    "matter_leaning_together": {
+      "lookup_name": "matter_leaning_together",
+      "name": "Matter / Leaning Together",
+      "scene": "res://commons/artifacts/matter_experiments/leaning_together.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "category": "physics",
+      "description": "A precarious gravity balance: the planks stand on narrow edges, chocks barely support their feet and the cube balances above. A light physical tap can dismantle the arrangement. The ball is a loose probe weight in the tray.",
+      "interactions": [
+        "Left-click or use a VR pointer trigger for one finite contact nudge. An ungripped VR hand can physically touch and disturb the parts.",
+        "Right-click or grip to hold and move any of the six loose parts. Desktop: wheel for reach, Q/E roll, Z/X tilt, Shift+Q/E yaw.",
+        "Reset restores the authored precarious pose and immediately returns all six parts to gravity. The editor preview is static; physics runs in Godot."
+      ],
+      "qfep_connection": "Support belongs to an arrangement of bodies and hands. Several postures can persist; collapse is recorded as movement rather than declared failure.",
+      "tags": [
+        "balance",
+        "contact",
+        "leaning",
+        "assemblage",
+        "hand-placement",
+        "gravity",
+        "precarious",
+        "touch"
+      ],
+      "default_params": {
+        "brittle": true
+      },
+      "parameters": {
+        "brittle": "True selects the narrow-edge precarious arrangement. False selects the earlier braced posture.",
+        "balance_offset": "Small authored cube offset across the narrow bearing (metres); edited member poses take precedence."
+      }
+    }
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "artifacts": {
+    "tape_roll_station": {
+      "lookup_name": "tape_roll_station",
+      "name": "Tape / give a line a surface",
+      "scene": "res://commons/artifacts/tape_roll/station.tscn",
+      "category": "primitives",
+      "map_sequences": [
+        "primitives"
+      ],
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "Three tape rolls on a temporary timber crate. Click once to set the start, then click again to place one continuous strip. Freehand drawing is optional. Marks follow their touched objects. Tape between separate physics bodies binds them with reversible native joints. Undo removes one span or stroke; Tidy refills and resets.",
+      "qfep_connection": "A line changes from a measured relation into an authored mark, claim or boundary. The same two endpoints carry different implications when the roll changes.",
+      "interactions": [
+        "RMB / grip: hold a roll",
+        "Tap LMB / trigger at A then B: straight span",
+        "Optional freehand_draw=true: hold and drag for a surface stripe",
+        "Separate bodies bind; pull apart by hand to peel",
+        "UNDO removes a whole strip/stroke and its joints; TIDY clears and refills"
+      ],
+      "parameters": {
+        "parts": "Independent poses for crate, board, plank, rolls, spindles, samples and controls"
+      },
+      "tags": [
+        "line",
+        "tape",
+        "surface",
+        "boundary",
+        "tool",
+        "editable"
+      ]
+    },
+    "tape_roll_masking": {
+      "lookup_name": "tape_roll_masking",
+      "name": "Tape roll / masking",
+      "scene": "res://commons/artifacts/tape_roll/masking.tscn",
+      "category": "primitives",
+      "map_sequences": [
+        "primitives"
+      ],
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "kind": "masking"
+      },
+      "description": "Five-centimetre pale masking tape. Click start, then click end for one strip. Freehand surface stripes are opt-in. Separate physics bodies bind with native joints.",
+      "parameters": {
+        "kind": "masking, pink or barrier",
+        "roll_length": "1–100 metres",
+        "reach": "0.5–12 metres",
+        "max_span": "0.1–12 metres",
+        "bind_objects": "Default true: separate physics bodies bind; false: marks and spans only",
+        "freehand_draw": "Default false: click start then end. True: hold and drag to sample surface stripes."
+      },
+      "qfep_connection": "The measured segment becomes a temporary mark on a material surface.",
+      "tags": [
+        "line",
+        "tape",
+        "tool"
+      ]
+    },
+    "tape_roll_pink": {
+      "lookup_name": "tape_roll_pink",
+      "name": "Tape roll / pink marking",
+      "scene": "res://commons/artifacts/tape_roll/pink.tscn",
+      "category": "primitives",
+      "map_sequences": [
+        "primitives"
+      ],
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "kind": "pink"
+      },
+      "description": "Seven-and-a-half-centimetre pink marking tape. Click start, then click end for one strip. Freehand surface stripes are opt-in. Separate physics bodies bind with native joints.",
+      "parameters": {
+        "kind": "masking, pink or barrier",
+        "roll_length": "1–100 metres",
+        "reach": "0.5–12 metres",
+        "max_span": "0.1–12 metres",
+        "bind_objects": "Default true: separate physics bodies bind; false: marks and spans only",
+        "freehand_draw": "Default false: click start then end. True: hold and drag to sample surface stripes."
+      },
+      "qfep_connection": "The visitor chooses which line deserves attention.",
+      "tags": [
+        "line",
+        "tape",
+        "tool"
+      ]
+    },
+    "tape_roll_barrier": {
+      "lookup_name": "tape_roll_barrier",
+      "name": "Tape roll / striped barrier",
+      "scene": "res://commons/artifacts/tape_roll/barrier.tscn",
+      "category": "primitives",
+      "map_sequences": [
+        "primitives"
+      ],
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "kind": "barrier"
+      },
+      "description": "Twelve-centimetre pink/black striped barrier tape. A visible boundary; spans can bind objects, without creating an invisible collision wall.",
+      "parameters": {
+        "kind": "masking, pink or barrier",
+        "roll_length": "1–100 metres",
+        "reach": "0.5–12 metres",
+        "max_span": "0.1–12 metres",
+        "bind_objects": "Default true: separate physics bodies bind; false: marks and spans only",
+        "freehand_draw": "Default false: click start then end. True: hold and drag to sample surface stripes."
+      },
+      "qfep_connection": "A boundary is placed by someone; the strip makes its author visible.",
+      "tags": [
+        "line",
+        "tape",
+        "tool",
+        "boundary"
+      ]
+    }
+  }
+}

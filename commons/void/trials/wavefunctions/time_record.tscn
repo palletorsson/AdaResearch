@@ -1,0 +1,5 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="PackedScene" path="res://commons/scenes/mapobjects/mario_cube_time_trace.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/void/trials/wavefunctions/time_record.gd" id="2"]
+[node name="WaveComparison" instance=ExtResource("1")]
+script = ExtResource("2")

@@ -158,6 +158,11 @@ func _create_binary_table() -> void:
 	# Position table to the side of the grid (left side, facing the grid)
 	table.position = Vector3(-2.0, 1.8, 1.5)
 	table.rotation_degrees = Vector3(0, 90, 0)  # Face toward the grid
+	# The enlarged Void grid puts its table on the approach, away from the shaft.
+	if has_meta("config_table_position"):
+		var at: Array = get_meta("config_table_position")
+		table.position = Vector3(at[0], at[1], at[2])
+		table.rotation_degrees.y = float(get_meta("config_table_yaw", 0))
 
 	# Configure table - BIGGER for visibility
 	# grid_data[x][z]: the table's first index is X, its second is Z.
@@ -173,6 +178,10 @@ func _create_binary_table() -> void:
 
 	# Store reference for updates when cubes are removed
 	_binary_table = table
+	# Optional Void dressing: keep the original live table inside its housing.
+	# Museum placements without this config retain their original display.
+	if str(get_meta("config_table_mount", "")) == "ceiling":
+		preload("res://commons/void/ceiling_display_mount.gd").attach(table)
 
 func _on_cube_removed(x: int, z: int) -> void:
 	# Called when a cube is picked up or removed from the grid
@@ -183,7 +192,7 @@ func _on_cube_removed(x: int, z: int) -> void:
 			grid_data[x][z] = 0
 
 	# Update binary table display
-	if _binary_table and _binary_table.has_method("set_cell"):
+	if is_instance_valid(_binary_table) and _binary_table.has_method("set_cell"):
 		_binary_table.set_cell(x, z, 0)
 
 	# Remove from tracking

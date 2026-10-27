@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "belt_drive": {
+      "lookup_name": "belt_drive",
+      "name": "Two wheels / one belt / 2:1",
+      "label": "Two wheels / one belt / 2:1",
+      "scene": "res://commons/artifacts/belt_drive/belt_drive.tscn",
+      "description": "Turn either of two unequal wheels linked by a visible open belt. One large-wheel turn produces two small-wheel turns in the same direction. Pink spokes and travelling belt witnesses expose the ratio. Ideal no-slip kinematics, not a force or tension simulation.",
+      "qfep_connection": "A shared belt displacement constrains unequal circles to different angular speeds. One cause produces two visibly different rotations; appearance is tied to a declared geometric assumption.",
+      "category": "wavefunctions",
+      "dev_category": "wavefunctions",
+      "footprint": [
+        5.12,
+        3.05,
+        2.53
+      ],
+      "museum_import": true
+    }
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "title": "SwarmIntelligence_Boids_Algorithm",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_film_boid_neighbour_3_1",
+          "artifact": "film_boid_neighbour",
+          "station": "SW",
+          "position": [
+            -18,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_science_screen_10_2",
+          "artifact": "science_screen",
+          "station": "SE",
+          "position": [
+            17,
+            10
+          ],
+          "facing": 0,
+          "height": 1.5,
+          "scale": 1,
+          "config": {
+            "mode": "scatter"
+          }
+        },
+        {
+          "id": "f1_boids_neighbour_lens_9_3",
+          "artifact": "boids_neighbour_lens",
+          "station": "SW",
+          "position": [
+            -14,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_boids_aquarium_4_6",
+          "artifact": "boids_aquarium",
+          "station": "SE",
+          "position": [
+            14,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0.5"
+          }
+        },
+        {
+          "id": "f1_drone_comparison_20_6",
+          "artifact": "drone_comparison",
+          "station": "NW",
+          "position": [
+            -15,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_boids_2d_in_3d_2_8",
+          "artifact": "boids_2d_in_3d",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_boid_manager_5_8",
+          "artifact": "boid_manager",
+          "station": "NE",
+          "position": [
+            15,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_fish_school_1_10",
+          "artifact": "fish_school",
+          "station": "SE",
+          "position": [
+            0,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true",
+            "offset": "-7,0,0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "title": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_catalyst_prompter_box_3_1",
+          "artifact": "catalyst_prompter_box",
+          "station": "SW",
+          "position": [
+            -18,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emergence": "vent",
+            "sequence": "auto",
+            "lease_s": "45"
+          }
+        },
+        {
+          "id": "f2_abm_state_table_9_3",
+          "artifact": "abm_state_table",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f2_ant_colony_optimization_4_4",
+          "artifact": "ant_colony_optimization",
+          "station": "NE",
+          "position": [
+            14,
+            -6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson_display": "on"
+          }
+        },
+        {
+          "id": "f2_listening_horde_18_4",
+          "artifact": "listening_horde",
+          "station": "NW",
+          "position": [
+            -14,
+            -6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_catalyst_foe_1_5",
+          "artifact": "catalyst_foe",
+          "station": "SE",
+          "position": [
+            18,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "initial_state": "curious"
+          }
+        },
+        {
+          "id": "f2_catalyst_vent_1_7",
+          "artifact": "catalyst_vent",
+          "station": "SW",
+          "position": [
+            -18,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emit_interval_s": "2.5",
+            "wave_size": "3",
+            "start_delay_s": "5.0",
+            "sequence": "auto"
+          }
+        },
+        {
+          "id": "f2_navigator_noise_3_8",
+          "artifact": "navigator_noise",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "title": "SwarmIntelligence_Ant_Colony_Optimization",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_ant_colony_walk_8_8",
+          "artifact": "ant_colony_walk",
+          "station": "NW",
+          "position": [
+            -10,
+            -7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_ant_scale_atlas_26_8",
+          "artifact": "ant_scale_atlas",
+          "station": "SE",
+          "position": [
+            10,
+            6
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

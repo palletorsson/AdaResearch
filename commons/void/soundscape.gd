@@ -207,9 +207,9 @@ func play_cue(kind: String, at: Vector3) -> bool:
 	return false # Bounded polyphony; do not interrupt an already sounding cue.
 
 func play_hurt() -> void:
-	if hurt_voice == null or hurt_voice.stream == null or hurt_voice.playing or game.returning: return
-	hurt_count += 1
-	hurt_voice.play()
+	# Palle: remove the body pain sound. Keep the existing hook for callers,
+	# while interactions, music and environmental ambience retain their audio.
+	pass
 
 func _scan_floor(_index: int) -> void:
 	_bind_tree(game.building.content)

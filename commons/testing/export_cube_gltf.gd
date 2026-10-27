@@ -1,14 +1,15 @@
-# export_cube_gltf.gd — export the five sim-cube families (CubeWrapperLibrary)
+# export_cube_gltf.gd â€” export the five sim-cube families (CubeWrapperLibrary)
 # as .glb for the Three.js map-viewer + galleries. Run headless:
 #   godot --path . --xr-mode off --no-window --script res://commons/testing/export_cube_gltf.gd
-# Output: ../ada_encyclopedia/public/cube-gltf/<family>.glb + manifest.json
+# Output: external public/cube-gltf/<family>.glb + manifest.json; web junction serves it.
 extends SceneTree
+const ModelStorage = preload("res://tools/generated_storage.gd")
 
 const CubeLib := preload("res://commons/grid/CubeWrapperLibrary.gd")
 
 func _init() -> void:
 	var lib := CubeLib.new()
-	var out_dir := ProjectSettings.globalize_path("res://").path_join("../ada_encyclopedia/public/cube-gltf")
+	var out_dir := ModelStorage.public_directory("cube-gltf")
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	var manifest := []
 	for fam in CubeLib.FAMILIES:
@@ -20,7 +21,7 @@ func _init() -> void:
 			print("EXPORT FAIL append ", fam)
 			continue
 		var path := out_dir.path_join(fam + ".glb")
-		if doc.write_to_filesystem(state, path) != OK:
+		if ModelStorage.write_gltf(doc,state,path) != OK:
 			print("EXPORT FAIL write ", fam)
 			continue
 		manifest.append({"name": fam, "file": fam + ".glb"})

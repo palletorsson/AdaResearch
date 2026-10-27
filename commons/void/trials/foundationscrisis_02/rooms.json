@@ -1,0 +1,279 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Russell_Paradox",
+      "title": "Russell_Paradox",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_euclid_postulates_plaque_11_2",
+          "artifact": "euclid_postulates_plaque",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_russell_paradox_workbench_6_3",
+          "artifact": "russell_paradox_workbench",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "membership_controls": "on",
+            "initial_cell": "5"
+          }
+        },
+        {
+          "id": "f1_self_membership_set_8_3",
+          "artifact": "self_membership_set",
+          "station": "NW",
+          "position": [
+            -14,
+            -7
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_barber_paradox_3_6",
+          "artifact": "barber_paradox",
+          "station": "NE",
+          "position": [
+            14,
+            -7
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_russell_set_box_6_6",
+          "artifact": "russell_set_box",
+          "station": "SW",
+          "position": [
+            -14,
+            8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_liar_loop_9_6",
+          "artifact": "liar_loop",
+          "station": "SE",
+          "position": [
+            14,
+            8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_hilbert_hotel_9_8",
+          "artifact": "hilbert_hotel",
+          "station": "NE",
+          "position": [
+            0,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Godel_Incompleteness",
+      "title": "Godel_Incompleteness",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_negative_control_fixture_4_3",
+          "artifact": "negative_control_fixture",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_critic_regress_stack_10_3",
+          "artifact": "critic_regress_stack",
+          "station": "NW",
+          "position": [
+            -5,
+            -8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_godel_sentence_machine_7_4",
+          "artifact": "godel_sentence_machine",
+          "station": "NE",
+          "position": [
+            5,
+            -8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_rice_verifier_booth_3_5",
+          "artifact": "rice_verifier_booth",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_print_gallery_recursion_10_5",
+          "artifact": "print_gallery_recursion",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_synthesis_stand_2_8",
+          "artifact": "synthesis_stand",
+          "station": "SW",
+          "position": [
+            -5,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "subject": "godel_statement_plaque",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f2_fluency_seam_11_9",
+          "artifact": "fluency_seam",
+          "station": "SE",
+          "position": [
+            5,
+            8
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_godel_statement_plaque_4_10",
+          "artifact": "godel_statement_plaque",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 1.2,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_provability_sorter_5_11",
+          "artifact": "provability_sorter",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_incompleteness_tower_9_11",
+          "artifact": "incompleteness_tower",
+          "station": "SE",
+          "position": [
+            0,
+            12
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Entropy",
+      "title": "Random_Entropy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_shannon_entropy_meter_8_5",
+          "artifact": "shannon_entropy_meter",
+          "position": [
+            -15,
+            5
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "ledger",
+            "disclosure": "ledger",
+            "controls": "compact",
+            "control_front": "1.7"
+          }
+        },
+        {
+          "id": "f1_entropy_jar_states_5_8",
+          "artifact": "entropy_jar_states",
+          "position": [
+            -15,
+            10
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_entropy_jar_12_8",
+          "artifact": "entropy_jar",
+          "position": [
+            -18,
+            2
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_prefab_disorder_19_10",
+          "artifact": "prefab_disorder",
+          "position": [
+            15,
+            -10
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "butterflies": "16"
+          }
+        },
+        {
+          "id": "f1_entropy_sorting_table_5_14",
+          "artifact": "entropy_sorting_table",
+          "position": [
+            16,
+            0
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        },
+        {
+          "id": "f1_entropy_compartments_11_14",
+          "artifact": "entropy_compartments",
+          "position": [
+            16,
+            -5
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_hardware_entropy_decay_3_19",
+          "artifact": "hardware_entropy_decay",
+          "position": [
+            -17,
+            -2
+          ],
+          "station": "NW",
+          "facing": 0,
+          "height": 0.45,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_entropy_axiom_17_21",
+          "artifact": "entropy_axiom",
+          "position": [
+            14,
+            8.5
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "square": "true",
+            "glass_width": "10",
+            "glass_depth": "10",
+            "glass_height": "4.5",
+            "glass_title": "ORDER / DISPLACEMENT"
+          }
+        },
+        {
+          "id": "f1_entropy_ruin_8_29",
+          "artifact": "entropy_ruin",
+          "position": [
+            -15,
+            -9
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "controls": "compact",
+            "control_front": "-2.0",
+            "control_facing": "-z",
+            "autostart": "false"
+          }
+        },
+        {
+          "id": "f1_signal_room_12_48",
+          "artifact": "signal_room",
+          "position": [
+            0,
+            -2.5
+          ],
+          "station": "NE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

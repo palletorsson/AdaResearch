@@ -1,0 +1,226 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Pillar",
+      "title": "Color Pillar / original museum artifacts",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_visual_color_mixing_9_7",
+          "artifact": "visual_color_mixing",
+          "station": "NE",
+          "position": [
+            -16,
+            -9
+          ],
+          "facing": 0,
+          "height": 0.9,
+          "scale": 0.9,
+          "config": {}
+        },
+        {
+          "id": "f1_pillarcolorcollection_20_8",
+          "artifact": "pillarcolorcollection",
+          "station": "NE",
+          "position": [
+            -5.65,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "layout": "spatial_gradient",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_grab_rainbow_stick_7_10",
+          "artifact": "grab_rainbow_stick",
+          "station": "NE",
+          "position": [
+            -16,
+            -3
+          ],
+          "facing": 270,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_film_colour_edge_1_15",
+          "artifact": "film_colour_edge",
+          "station": "NE",
+          "position": [
+            -18,
+            3
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_dark_sphere_13_21",
+          "artifact": "dark_sphere",
+          "station": "NE",
+          "position": [
+            -16,
+            6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_SpectrumVisualizer_10_23",
+          "artifact": "SpectrumVisualizer",
+          "station": "NE",
+          "position": [
+            -14,
+            10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_color_sets_overview_26_32",
+          "artifact": "color_sets_overview",
+          "station": "NE",
+          "position": [
+            15,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "mount": "wall",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "title": "Grid as Color Canvas / 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_dark_sphere_5_5",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -4,
+            2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_film_foundation_class_17_8",
+          "artifact": "film_foundation_class",
+          "station": "SE",
+          "position": [
+            8,
+            5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_spectrum_forest_5_12",
+          "artifact": "spectrum_forest",
+          "station": "SW",
+          "position": [
+            -4,
+            9
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 0.22,
+          "config": {
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f2_science_screen_15_15",
+          "artifact": "science_screen",
+          "station": "SE",
+          "position": [
+            6,
+            12
+          ],
+          "facing": 180,
+          "height": 1.5,
+          "scale": 1,
+          "config": {
+            "mode": "grid"
+          }
+        },
+        {
+          "id": "f2_gridcolorizer_6_5",
+          "artifact": "gridcolorizer",
+          "station": "SW",
+          "position": [
+            -3,
+            2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "addresses"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

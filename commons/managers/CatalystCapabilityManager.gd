@@ -558,7 +558,8 @@ func _on_node_added(node: Node) -> void:
 
 	# Re-spawn catalyst + bracelet on scene transitions (in-memory only, no disk save)
 	if _bracelet_activated and node is XRController3D:
-		call_deferred("_try_respawn_bracelet_on_controller", node)
+		# Placeholder/old rigs can disappear before this deferred call runs.
+		call_deferred("_try_respawn_bracelet_id", node.get_instance_id())
 
 func _on_sequence_completed(sequence_name: String) -> void:
 	_advance_stage(sequence_name)
@@ -648,6 +649,10 @@ func _advance_stage(sequence_name: String) -> void:
 # ---------------------------------------------------------------------------
 # Bracelet re-spawn after scene transitions
 # ---------------------------------------------------------------------------
+
+func _try_respawn_bracelet_id(id: int) -> void:
+	var controller := instance_from_id(id)
+	if controller is Node:_try_respawn_bracelet_on_controller(controller)
 
 func _try_respawn_bracelet_on_controller(controller: Node) -> void:
 	if not is_instance_valid(controller) or not controller is XRController3D:

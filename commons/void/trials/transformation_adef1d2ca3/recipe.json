@@ -1,0 +1,315 @@
+{
+  "settings": {
+    "source": "portal",
+    "arrangement": "line",
+    "count": 7,
+    "spacing": 0.24,
+    "radius": 1.7,
+    "angle": -7,
+    "axis": "z",
+    "ratio": 0.88,
+    "size": 0.6,
+    "rise": 0.16,
+    "staging": "ground",
+    "opening": 2.4,
+    "wall": 0.34,
+    "depth": 0.8,
+    "sizePreset": "floor",
+    "worldScale": 2.75671258722
+  },
+  "term": {
+    "chapter": "transformation",
+    "label": "Square portal / line",
+    "expr": "ingredient × translation × rotation × scale",
+    "from": [
+      "boolean_tunnel_section"
+    ],
+    "build": {
+      "op": "assemblage",
+      "parts": [
+        {
+          "id": "Copy01",
+          "at": [
+            0,
+            2.54720243059128,
+            -1.9848330627983999
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "rotation_order": "YXZ",
+          "scale": 1.654027552332,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy02",
+          "at": [
+            0,
+            2.6826121528755267,
+            -1.3232220418656
+          ],
+          "rot": [
+            0,
+            0,
+            -7
+          ],
+          "rotation_order": "YXZ",
+          "scale": 1.4555442460521602,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy03",
+          "at": [
+            0,
+            2.854701590160287,
+            -0.6616110209328
+          ],
+          "rot": [
+            0,
+            0,
+            -14
+          ],
+          "rotation_order": "YXZ",
+          "scale": 1.2808789365259006,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy04",
+          "at": [
+            0,
+            3.059069176645501,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            -21
+          ],
+          "rotation_order": "YXZ",
+          "scale": 1.1271734641427928,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy05",
+          "at": [
+            0,
+            3.2918415344271126,
+            0.6616110209328
+          ],
+          "rot": [
+            0,
+            0,
+            -28
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.9919126484456575,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy06",
+          "at": [
+            0,
+            3.549610090949555,
+            1.3232220418656
+          ],
+          "rot": [
+            0,
+            0,
+            -35
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.8728831306321786,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        },
+        {
+          "id": "Copy07",
+          "at": [
+            0,
+            3.8293753023639288,
+            1.9848330627983999
+          ],
+          "rot": [
+            0,
+            0,
+            -42
+          ],
+          "rotation_order": "YXZ",
+          "scale": 0.7681371549563173,
+          "of": {
+            "p": "portal_piece",
+            "index": 0,
+            "poses": [
+              {
+                "at": [
+                  0,
+                  0,
+                  0
+                ],
+                "rot": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            ],
+            "width": 2.4,
+            "headroom": 2.4,
+            "wall": 0.34,
+            "depth": 0.8,
+            "mark": true
+          }
+        }
+      ]
+    }
+  },
+  "lineage": {
+    "family": "transformation_arrangement",
+    "ingredient": "boolean_tunnel_section",
+    "source": "portal_piece",
+    "operations": [
+      "translation",
+      "rotation",
+      "scale"
+    ],
+    "size_context": "floor",
+    "context_scale": 2.75671258722
+  },
+  "scope": "Static construction and arrangement. Native exports include collision where authored. This prototype does not claim dynamic joints, hand interactions or traversable routes.",
+  "source_hash": "8e7fca882cf1bafa4b0cf626171df4c098748b3a3bdd57900dfd08ae1ef6db1d",
+  "name": "Portals / full-floor size",
+  "parent": null
+}

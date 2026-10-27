@@ -1,0 +1,183 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ISO_Introduction",
+      "title": "ISO_Introduction",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_iso_workshop_console_11_3",
+          "artifact": "void_iso_workshop_console",
+          "position": [
+            -4,
+            -2
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "museum_yaw": 180
+          }
+        },
+        {
+          "id": "f1_voxel_noise_demo_7_12",
+          "artifact": "voxel_noise_demo",
+          "position": [
+            -4,
+            -8
+          ],
+          "height": 4,
+          "facing": 0,
+          "scale": 0.18,
+          "station": "NW",
+          "config": {}
+        },
+        {
+          "id": "f1_science_screen_4_20",
+          "artifact": "science_screen",
+          "position": [
+            15,
+            6
+          ],
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "mode": "field",
+            "museum_yaw": 180
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "ISO_LookupTable",
+      "title": "ISO_LookupTable",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_iso_lookup_console_12_3",
+          "artifact": "void_iso_lookup_console",
+          "position": [
+            -3,
+            -2
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "museum_yaw": 180
+          }
+        },
+        {
+          "id": "f2_fifteen_cases_demo_12_11",
+          "artifact": "fifteen_cases_demo",
+          "position": [
+            -3,
+            -8
+          ],
+          "height": 2.7,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "case_spacing": "2.5",
+            "case_scale": "1.2"
+          }
+        },
+        {
+          "id": "f2_film_iso_cell_1_17",
+          "artifact": "film_iso_cell",
+          "position": [
+            14,
+            8
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "plinth": "0",
+            "pin": "true",
+            "museum_yaw": 90
+          }
+        },
+        {
+          "id": "f2_the_threshold_opinion_12_20",
+          "artifact": "the_threshold_opinion",
+          "position": [
+            -3,
+            8
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SW",
+          "config": {}
+        },
+        {
+          "id": "f2_mc_cave_7_29",
+          "artifact": "mc_cave",
+          "position": [
+            -46,
+            0
+          ],
+          "height": 2,
+          "facing": 0,
+          "scale": 0.15,
+          "station": "SW",
+          "config": {}
+        },
+        {
+          "id": "f2_metaball_world_15_30",
+          "artifact": "metaball_world",
+          "position": [
+            15,
+            -8
+          ],
+          "height": 2,
+          "facing": 0,
+          "scale": 0.3,
+          "station": "NE",
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

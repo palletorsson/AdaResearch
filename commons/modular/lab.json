@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "title": "Spatial research lab",
+  "trial": "spatial_lab",
+  "recipes": [
+    {
+      "id": "lab_packed",
+      "label": "Packed / repeated edge",
+      "defaults": {
+        "source": "do_not_cross_barrier",
+        "count": 10,
+        "gap": 0.16,
+        "angle": 36,
+        "radius": 0.65,
+        "ratio": 1,
+        "size": 0.3
+      }
+    },
+    {
+      "id": "lab_radial",
+      "label": "Sun feather / circumference",
+      "defaults": {
+        "source": "do_not_cross_barrier",
+        "count": 10,
+        "gap": 0.16,
+        "angle": 36,
+        "radius": 0.65,
+        "ratio": 1,
+        "size": 0.3
+      }
+    },
+    {
+      "id": "lab_growing",
+      "label": "Table \u2192 ground \u2192 oversized",
+      "defaults": {
+        "source": "do_not_cross_barrier"
+      }
+    },
+    {
+      "id": "lab_warehouse",
+      "label": "Warehouse field / charged gaps",
+      "defaults": {
+        "source": "crate",
+        "columns": 5,
+        "rows": 7,
+        "spacing": 1.2,
+        "size": 1.5,
+        "deck": 1.02,
+        "holes": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            4,
+            2
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "controls": [
+        "columns",
+        "rows",
+        "spacing",
+        "size",
+        "deck"
+      ],
+      "limits": {
+        "columns": [
+          2,
+          9
+        ],
+        "rows": [
+          2,
+          9
+        ],
+        "spacing": [
+          0.85,
+          1.8
+        ],
+        "size": [
+          0.5,
+          2.5
+        ],
+        "deck": [
+          0.3,
+          2
+        ]
+      },
+      "gap_editor": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "do_not_cross_barrier",
+      "label": "Blue DO NOT CROSS barrier",
+      "scene": "res://commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.tscn"
+    },
+    {
+      "id": "crate",
+      "label": "Warehouse shipping crate",
+      "scene": "res://commons/artifacts/crate/crate.tscn"
+    },
+    {
+      "id": "timber_plank_1m"
+    },
+    {
+      "id": "timber_plank_2m"
+    },
+    {
+      "id": "timber_plank_4m"
+    },
+    {
+      "id": "timber_panel_1x1"
+    },
+    {
+      "id": "timber_panel_2x1"
+    },
+    {
+      "id": "timber_panel_2x2"
+    },
+    {
+      "id": "trace_point_ball"
+    },
+    {
+      "id": "traffic_pyramid_5"
+    },
+    {
+      "id": "pentagonal_bipyramid_7"
+    },
+    {
+      "id": "construction_cube"
+    },
+    {
+      "id": "wp"
+    },
+    {
+      "id": "tetrahedron_blocker"
+    },
+    {
+      "id": "barrier"
+    }
+  ],
+  "limits": {
+    "count": [
+      2,
+      20
+    ],
+    "gap": [
+      0.08,
+      0.6
+    ],
+    "angle": [
+      0,
+      90
+    ],
+    "radius": [
+      0.2,
+      1.5
+    ],
+    "ratio": [
+      0.8,
+      1.08
+    ],
+    "size": [
+      0.1,
+      0.6
+    ]
+  },
+  "notes": [
+    "Recipes use actual source meshes. The crate gains an explicit fitted static lab collider; it has no original physics body.",
+    "Tabletop copies below half size are non-blocking studies. Larger copies retain barrier collision or the declared crate box collider.",
+    "Overlap and overhang are measured and reported, never silently packed away.",
+    "Three.js previews static geometry. Native checks cover source identity, layout measurements and editable-part transforms; they do not accept hand interaction or physical-headset behaviour.",
+    "Inputs retain authored dimensions and are aligned to a common bottom insertion point. Gravity and autonomous animation are held still in the lab; original game scenes remain unchanged."
+  ]
+}

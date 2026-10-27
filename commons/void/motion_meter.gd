@@ -129,7 +129,7 @@ func _process(delta: float) -> void:
 		latest["largest_artifact_build_ms"] = game.building.content.max_build_ms
 	samples.append(latest.duplicate(true))
 	if samples.size() > 300: samples.pop_front()
-	label.text = "%s / STICKS: RAW -> ADJUSTED\nL %+.2f %+.2f -> %+.2f %+.2f\nR %+.2f %+.2f -> %+.2f %+.2f\nDeadzone X %.2f / Y %.2f  |  %.2f m/s\nphysics %d Hz  headset %.0f Hz  p95 %.1f ms\nContact: %s\nX: menu   B: reset   Y: %s" % [location.to_upper(),raw.x,raw.y,adjusted.x,adjusted.y,raw_right.x,raw_right.y,adjusted_right.x,adjusted_right.y,latest.deadzone[0],latest.deadzone[1],latest.speed_m_s,Engine.physics_ticks_per_second,hz,latest.frame_p95_ms,latest.last_obstacle,"compare tower" if location=="room" else "roof"]
+	label.text = "%s / STICKS: RAW -> ADJUSTED\nL %+.2f %+.2f -> %+.2f %+.2f\nR %+.2f %+.2f -> %+.2f %+.2f\nDeadzone X %.2f / Y %.2f  |  %.2f m/s\nphysics %d Hz  headset %.0f Hz  p95 %.1f ms\nContact: %s\nX: menu   A / B: jump   Y: %s" % [location.to_upper(),raw.x,raw.y,adjusted.x,adjusted.y,raw_right.x,raw_right.y,adjusted_right.x,adjusted_right.y,latest.deadzone[0],latest.deadzone[1],latest.speed_m_s,Engine.physics_ticks_per_second,hz,latest.frame_p95_ms,latest.last_obstacle,"compare tower" if location=="room" else "prefab board"]
 	elapsed = 0
 	physics_count = 0
 	moving = 0

@@ -1,0 +1,72 @@
+{
+  "status": "209 saved floors: Logic inserted after Transformation; existing local arrangements preserved.",
+  "width": 42,
+  "depth": 18,
+  "storey_height": 6,
+  "slab_thickness": 0.36,
+  "levels": [
+    0,
+    -6,
+    -12
+  ],
+  "shafts": [
+    {
+      "name": "A",
+      "x": -10
+    },
+    {
+      "name": "B",
+      "x": 10
+    }
+  ],
+  "shaft_width": 5,
+  "shaft_depth": 6,
+  "column_x": [
+    -20,
+    -14,
+    -5,
+    5,
+    14,
+    20
+  ],
+  "column_z": [
+    -7,
+    7
+  ],
+  "column_width": 0.9,
+  "service_x": [
+    -6.5,
+    6.5
+  ],
+  "service_z": -4.2,
+  "floor_roles": [
+    "Roof",
+    "Portals / descending fan",
+    "Catch floor"
+  ],
+  "descent": {
+    "mode": "corner_pads",
+    "landing_max_speed": 13,
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_disabled_floors": [
+      1,
+      2
+    ]
+  },
+  "cliff_landings": {
+    "enabled": false
+  },
+  "route_note": "Irregular concrete ledges stagger left/right along the south facade at every floor. The next landing remains exposed beside the balcony above it. Jump down one level; landing costs five charge. Two plank pads in shaft B remain the cushioned route; shaft A and the Trace Grid stay clear. Transformation begins below Melencolia: A south-east pad to Pre, B north-east pad to Introduction, A south-west pad to Translation.",
+  "floor_styles": {},
+  "spawn_points": {
+    "1": [
+      0,
+      0.06,
+      5
+    ]
+  },
+  "floor_sign_positions": {},
+  "floor_sources": {},
+  "spine": []
+}

@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "Barriers / blue sun feather",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "variation",
+          "artifact": "spatial_recipe",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "transformation_variant",
+            "recipe_document": "res://commons/void/trials/transformation_fc075df1cf/recipe.json",
+            "editor_label": "Barriers / blue sun feather"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    }
+  ]
+}

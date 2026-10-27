@@ -2,7 +2,7 @@ extends Node
 ## Freeze an installation's visible geometry, then photograph it in a private
 ## world. No scripts, physics, RNG calls or viewer camera are copied or changed.
 ## The resulting PNG is used unchanged by both the wall and the book.
-const FILTER = preload("res://tools/book_image_filter.gdshader")
+const FILTER = preload("res://commons/book/book_image_filter.gdshader")
 var viewport: SubViewport
 var receipt: Dictionary = {}
 var dimensions := Vector2i(1600, 1200)

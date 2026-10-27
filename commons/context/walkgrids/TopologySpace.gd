@@ -6,6 +6,7 @@ class_name TopologySpace
 @export var resolution: int = 100
 @export var height_scale: float = 2.0
 @export var position_offset: Vector3 = Vector3.ZERO
+@export var gravity_point_test := true
 
 var static_body: StaticBody3D
 var mesh_instance: MeshInstance3D
@@ -14,6 +15,11 @@ var collision_shape: CollisionShape3D
 func _ready():
 	setup_topology_space()
 	generate_space()
+	if gravity_point_test:
+		var probe := preload("res://commons/artifacts/surface_ball_test/surface_ball_test.tscn").instantiate()
+		probe.name = "SurfaceBallTest"
+		probe.auto_trigger = true
+		add_child(probe)
 
 func setup_topology_space():
 	# Create or find StaticBody3D

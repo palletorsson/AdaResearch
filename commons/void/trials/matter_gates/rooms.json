@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "Point_Zero",
+      "title": "Roof / counter",
+      "origin": true,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "clock",
+          "artifact": "frame_counter_display",
+          "station": "NW",
+          "position": [
+            0,
+            -3
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Matter Gates / AND",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "and",
+          "artifact": "matter_and",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Matter / AND — two gaps, two falling cubes, one white ball",
+            "parts": {
+              "LowWedgeSupport": {
+                "position": [
+                  -0.48,
+                  0.84,
+                  -0.06
+                ]
+              },
+              "EntryPlanks": {
+                "position": [
+                  -0.343800001,
+                  0.96,
+                  -0.06
+                ]
+              },
+              "MiddlePlanks": {
+                "position": [
+                  0.0,
+                  0.96,
+                  -0.06
+                ]
+              },
+              "ExitPlanks": {
+                "position": [
+                  0.51,
+                  0.956400003,
+                  -0.06
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [
+        {
+          "id": "and-copy-1",
+          "artifact": "matter_and",
+          "station": "NW",
+          "position": [
+            0.5,
+            -0.5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "LowWedgeSupport (copy 1)",
+            "parts": {
+              "LowWedgeSupport": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "editor_source": {
+              "floor": 1,
+              "id": "and"
+            },
+            "only_parts": [
+              "LowWedgeSupport"
+            ]
+          }
+        },
+        {
+          "id": "and-copy-2",
+          "artifact": "matter_and",
+          "station": "NW",
+          "position": [
+            -0.5,
+            -0.5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "LowWedgeSupport (copy 2)",
+            "parts": {
+              "LowWedgeSupport": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "editor_source": {
+              "floor": 1,
+              "id": "and"
+            },
+            "only_parts": [
+              "LowWedgeSupport"
+            ]
+          }
+        },
+        {
+          "id": "and-copy-3",
+          "artifact": "matter_and",
+          "station": "NW",
+          "position": [
+            -2.75,
+            -0.5
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "LowWedgeSupport (copy 3)",
+            "parts": {
+              "LowWedgeSupport": {
+                "position": [
+                  0,
+                  0,
+                  0
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "editor_source": {
+              "floor": 1,
+              "id": "and"
+            },
+            "only_parts": [
+              "LowWedgeSupport"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "map": "Point_Animatedcube",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

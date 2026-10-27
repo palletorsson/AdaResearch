@@ -1,0 +1,1173 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Cubes",
+      "title": "Random_Cubes",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_dice_throw_3_2",
+          "artifact": "dice_throw",
+          "station": "SW",
+          "position": [
+            -3,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_coin_toss_8_2",
+          "artifact": "coin_toss",
+          "station": "SW",
+          "position": [
+            -8,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "disclosure": "origin"
+          }
+        },
+        {
+          "id": "f1_paired_dice_column_5_4",
+          "artifact": "paired_dice_column",
+          "station": "SW",
+          "position": [
+            -5,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_continuing_die_2_5",
+          "artifact": "continuing_die",
+          "station": "SW",
+          "position": [
+            -2,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_dark_sphere_9_5",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -9,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_object_spawner_5_6",
+          "artifact": "random_object_spawner",
+          "station": "SW",
+          "position": [
+            -5,
+            6
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_object_spawner_6_6",
+          "artifact": "random_object_spawner",
+          "station": "SW",
+          "position": [
+            -6,
+            6
+          ],
+          "facing": 180,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_8",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -1,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_8",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -2,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_8",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -3,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_8",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -4,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_8",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -5,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_8",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -6,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_9",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -1,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_9",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -2,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_9",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -3,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_9",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -4,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_9",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -5,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_9",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -6,
+            3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_10",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -1,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_10",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -2,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_10",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -3,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_10",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -4,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_10",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -5,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_10",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -6,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_11",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -1,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_11",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -2,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_11",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -3,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_11",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -4,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_11",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -5,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_11",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -6,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_12",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -1,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_12",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -2,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_12",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -3,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_12",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -4,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_12",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -5,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_12",
+          "artifact": "random_edge_profile",
+          "station": "SW",
+          "position": [
+            -6,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_13",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -1,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_13",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -2,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_13",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -3,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_13",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -4,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_13",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -5,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_13",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -6,
+            -1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_14",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -1,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_14",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -2,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_14",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -3,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_14",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -4,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_14",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -5,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_14",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -6,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_3_15",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -1,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_4_15",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -2,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_5_15",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -3,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_6_15",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -4,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_7_15",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -5,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_random_edge_profile_8_15",
+          "artifact": "random_edge_profile",
+          "station": "NW",
+          "position": [
+            -6,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [
+        {
+          "id": "f1_structure2_5_6",
+          "kind": "platform_block",
+          "position": [
+            -5,
+            6
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "f1_structure2_6_6",
+          "kind": "platform_block",
+          "position": [
+            -6,
+            6
+          ],
+          "facing": 0,
+          "scale": 1
+        }
+      ],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "title": "Random_Rotate_Random_XYZ",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_hardware_entropy_decay_1_6",
+          "artifact": "hardware_entropy_decay",
+          "station": "SE",
+          "position": [
+            4,
+            6
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dark_sphere_9_7",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -4,
+            5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_Random_Rotate_Random_XYZ_3_10",
+          "artifact": "Random_Rotate_Random_XYZ",
+          "station": "SE",
+          "position": [
+            2,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_random_decay_multimesh_6_10",
+          "artifact": "random_decay_multimesh",
+          "station": "SW",
+          "position": [
+            -1,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "rotation"
+          }
+        },
+        {
+          "id": "f2_RotateGridCubes_6_11",
+          "artifact": "RotateGridCubes",
+          "station": "SW",
+          "position": [
+            -1,
+            1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "study": "compact"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Walk",
+      "title": "Random_Walk",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_random_walk_collection_3_5",
+          "artifact": "random_walk_collection",
+          "station": "SE",
+          "position": [
+            6,
+            7
+          ],
+          "facing": 0,
+          "height": 0.75,
+          "scale": 1,
+          "config": {
+            "plinth": "0.75",
+            "bench_bare_rack": "1"
+          }
+        },
+        {
+          "id": "f3_random_walk_terrarium_9_5",
+          "artifact": "random_walk_terrarium",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "logbook",
+            "controls": "compact",
+            "control_front": "1.25"
+          }
+        },
+        {
+          "id": "f3_random_walk_leash_15_5",
+          "artifact": "random_walk_leash",
+          "station": "SW",
+          "position": [
+            -6,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_random_draw_dot_6_8",
+          "artifact": "random_draw_dot",
+          "station": "SE",
+          "position": [
+            3,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_random_position_rails_13_8",
+          "artifact": "random_position_rails",
+          "station": "SW",
+          "position": [
+            -4,
+            4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_pixel_cloud_3_9",
+          "artifact": "pixel_cloud",
+          "station": "SE",
+          "position": [
+            6,
+            3
+          ],
+          "facing": 0,
+          "height": 0.1,
+          "scale": 0.18,
+          "config": {
+            "walk_seed": "101"
+          }
+        },
+        {
+          "id": "f3_random_walk_128_9_17",
+          "artifact": "random_walk_128",
+          "station": "NE",
+          "position": [
+            0,
+            -5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "glass_width": "12",
+            "glass_depth": "12",
+            "glass_height": "5",
+            "glass_title": "WALK / RETAIN",
+            "glass_moat": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "basin": {
+        "depth": 2.5,
+        "glass": false,
+        "rects": [
+          [
+            6.5,
+            -12.5,
+            1,
+            15
+          ],
+          [
+            -7.5,
+            -12.5,
+            1,
+            15
+          ],
+          [
+            1.5,
+            1.5,
+            5,
+            1
+          ],
+          [
+            -6.5,
+            1.5,
+            5,
+            1
+          ],
+          [
+            1.5,
+            -12.5,
+            5,
+            1
+          ],
+          [
+            -6.5,
+            -12.5,
+            5,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "map": "Random_Gaussian",
+      "title": "Random_Gaussian",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_distribution_sampler_5_6",
+          "artifact": "distribution_sampler",
+          "station": "SE",
+          "position": [
+            0,
+            6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "cabinet",
+            "controls": "compact",
+            "control_front": "1.05",
+            "readout": "wing"
+          }
+        },
+        {
+          "id": "f4_GaussianPaintSplatter_2_7",
+          "artifact": "GaussianPaintSplatter",
+          "station": "SE",
+          "position": [
+            3,
+            5
+          ],
+          "facing": 0,
+          "height": 1.5,
+          "scale": 0.65,
+          "config": {}
+        },
+        {
+          "id": "f4_galton_board_2_10",
+          "artifact": "galton_board",
+          "station": "SE",
+          "position": [
+            3,
+            2
+          ],
+          "facing": 0,
+          "height": 0.9,
+          "scale": 1.5,
+          "config": {}
+        },
+        {
+          "id": "f4_distribution_comparator_8_10",
+          "artifact": "distribution_comparator",
+          "station": "SW",
+          "position": [
+            -3,
+            2
+          ],
+          "facing": 0,
+          "height": 0.83,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Random_Mushrooms",
+      "title": "Random_Mushrooms",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_bubbles_random_3_5",
+          "artifact": "bubbles_random",
+          "station": "SE",
+          "position": [
+            5,
+            7
+          ],
+          "facing": 0,
+          "height": 0.85,
+          "scale": 0.25,
+          "config": {
+            "plinth": "0.85"
+          }
+        },
+        {
+          "id": "f5_mushrooms_8_11",
+          "artifact": "mushrooms",
+          "station": "SE",
+          "position": [
+            0,
+            1
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "specimen",
+            "size": "6",
+            "edible": "some",
+            "glass_width": "8",
+            "glass_depth": "8",
+            "glass_height": "4.5",
+            "glass_title": "POPULATION / DIFFERENCE",
+            "glass_entry": "4",
+            "controls": "compact",
+            "control_front": "5.1"
+          }
+        },
+        {
+          "id": "f5_silhouette_arrivals_13_17",
+          "artifact": "silhouette_arrivals",
+          "station": "NW",
+          "position": [
+            -5,
+            -5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "controls": "compact",
+            "control_front": "-1.65",
+            "control_facing": "-z"
+          }
+        },
+        {
+          "id": "f5_couture_comparison_8_20",
+          "artifact": "couture_comparison",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "controls": "compact",
+            "control_front": "-1.7",
+            "control_facing": "-z"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

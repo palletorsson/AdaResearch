@@ -1,0 +1,349 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_One",
+      "title": "Noise_One",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_film_noise_layers_1_2",
+          "artifact": "film_noise_layers",
+          "station": "SW",
+          "position": [
+            -1.5,
+            10
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_noisetorus_5_4",
+          "artifact": "noisetorus",
+          "station": "SW",
+          "position": [
+            -5,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "pair"
+          }
+        },
+        {
+          "id": "f1_noiselayers_5_7",
+          "artifact": "noiselayers",
+          "station": "SW",
+          "position": [
+            -5,
+            5
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 1,
+          "config": {
+            "stand": "basin"
+          }
+        },
+        {
+          "id": "f1_dark_sphere_8_10",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -8,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_Voxel",
+      "title": "Noise_Voxel",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_voxelnoise_16_24",
+          "artifact": "voxelnoise",
+          "station": "NW",
+          "position": [
+            -6,
+            -30.1
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "volume",
+            "cell_size": "1",
+            "flight_box": "true"
+          }
+        },
+        {
+          "id": "f2_science_screen_18_4",
+          "artifact": "science_screen",
+          "station": "SW",
+          "position": [
+            -8,
+            9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "mode": "voxel_slice",
+            "support": "stand",
+            "screen_width": "2.8",
+            "screen_height": "1.8"
+          }
+        },
+        {
+          "id": "f2_perlin_terrain_sculptor_13_7",
+          "artifact": "perlin_terrain_sculptor",
+          "station": "SW",
+          "position": [
+            -3,
+            6
+          ],
+          "facing": 0,
+          "height": 1.35,
+          "scale": 1,
+          "config": {
+            "stand": "lattice",
+            "seed": "31415",
+            "keyboard": "off"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_5_8",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            5,
+            5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_6_Wall",
+      "title": "Noise_6_Wall",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_shader_noise_space_6_4",
+          "artifact": "shader_noise_space",
+          "station": "SW",
+          "position": [
+            -5,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "panel"
+          }
+        },
+        {
+          "id": "f3_shader_noise_space_6_6",
+          "artifact": "shader_noise_space",
+          "station": "SW",
+          "position": [
+            -5,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "room"
+          }
+        },
+        {
+          "id": "f3_dark_sphere_10_10",
+          "artifact": "dark_sphere",
+          "station": "SW",
+          "position": [
+            -10.2,
+            4.4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "title": "Noise_Inside_Noise",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_dark_sphere_3_3",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            4,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_noisesphere_6_5",
+          "artifact": "noisesphere",
+          "station": "SE",
+          "position": [
+            1,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "warp"
+          }
+        },
+        {
+          "id": "f4_film_noise_relief_11_9",
+          "artifact": "film_noise_relief",
+          "station": "NW",
+          "position": [
+            -4,
+            -4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Noise_Cellular",
+      "title": "Noise_Cellular",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_cellular_womb_space_17_19",
+          "artifact": "cellular_womb_space",
+          "station": "SE",
+          "position": [
+            14.5,
+            17.2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "floor": "false",
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f5_cellular_atrium_space_51_19",
+          "artifact": "cellular_atrium_space",
+          "station": "SW",
+          "position": [
+            -14,
+            16
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "floor": "false",
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f5_voronoi_strands_34_40",
+          "artifact": "voronoi_strands",
+          "station": "NE",
+          "position": [
+            17,
+            -10.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

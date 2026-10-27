@@ -1,0 +1,158 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "title": "Collective Knowledge / 4 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_the_fourth_limit_9_4",
+          "artifact": "the_fourth_limit",
+          "position": [
+            -3,
+            -6
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_peer_production_tool_6_5",
+          "artifact": "peer_production_tool",
+          "position": [
+            -1,
+            6
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "interactive": "true",
+            "add_period": "0.7"
+          }
+        },
+        {
+          "id": "f1_wiki_fragment_4_8",
+          "artifact": "wiki_fragment",
+          "position": [
+            -4,
+            3
+          ],
+          "station": "SW",
+          "height": 0.3,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "fragment": "NORTH"
+          }
+        },
+        {
+          "id": "f1_the_commons_table_9_10",
+          "artifact": "the_commons_table",
+          "position": [
+            5,
+            4
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "title": "SpeculativeComputation_Rhizome_Network / transfer, 3 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_rhizome_grower_4_2",
+          "artifact": "rhizome_grower",
+          "position": [
+            11,
+            10
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "interactive": "true",
+            "spread": "0.85",
+            "grow_period": "0.8",
+            "sample_seed": "47"
+          }
+        },
+        {
+          "id": "f2_film_rhizome_routes_1_15",
+          "artifact": "film_rhizome_routes",
+          "position": [
+            14,
+            -5.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_rhizome_cave_demo_15_18",
+          "artifact": "rhizome_cave_demo",
+          "position": [
+            0,
+            -29.85
+          ],
+          "station": "NE",
+          "height": 0.025,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "passage_study": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

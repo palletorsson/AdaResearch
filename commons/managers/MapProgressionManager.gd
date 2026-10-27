@@ -244,7 +244,7 @@ func _load_external_sequences(path: String):
 		var file_name = dir.get_next()
 		while file_name != "":
 			if not dir.current_is_dir() and file_name.ends_with(".json"):
-				var file = FileAccess.open(path + "/" + file_name, FileAccess.READ)
+				var file = FileAccess.open(path.path_join(file_name), FileAccess.READ)
 				if file:
 					var json = JSON.new()
 					var err = json.parse(file.get_as_text())

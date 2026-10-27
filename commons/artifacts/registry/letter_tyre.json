@@ -1,0 +1,21 @@
+{
+  "id": "letter_tyre",
+  "name": "O letter tire",
+  "category": "primitives",
+  "artifacts": {
+    "letter_tyre": {
+      "lookup_name": "letter_tyre",
+      "name": "O / Roll the closed sweep",
+      "scene": "res://commons/artifacts/glyph_profile_gallery/letter_tyre.tscn",
+      "category": "primitives",
+      "description": "The real O font outline follows a closed circular path to make a hollow rubber tire. Push it, grip it and let it roll. Compound convex rim pieces preserve the central opening.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["glyph", "profile", "sweep", "revolve", "tire", "physics", "pickup"],
+      "provenance": {
+        "profile": "JetBrains Mono Medium O; existing glyph-profile-gallery sweep builder",
+        "license": "SIL Open Font License 1.1; included JetBrainsMono-OFL.txt"
+      }
+    }
+  }
+}

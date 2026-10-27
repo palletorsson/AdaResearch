@@ -1,12 +1,28 @@
 extends "res://commons/primitives/point/point_sun_switch.gd"
 ## Reuse the museum switch's real pointer/hand button, scoped to this floor's lamps.
+const Hardware := preload("res://commons/void/array_control_hardware.gd")
+const Supply := preload("res://commons/void/hardware_supply.gd")
 
 func _ready() -> void:
 	super._ready()
 	sun.free(); sun = null
 	fill.free(); fill = null
-	box(Vector3(.055,1.25,.07),Vector3(0,.625,-.05),Color("34313c"))
-	box(Vector3(.35,.025,.28),Vector3(0,.012,0),Color("34313c"))
+	# Same rectangular rocker and touch target; an installed mains cabinet.
+	var cream := Color("e5e0cf")
+	var steel := Color("384249")
+	box(Vector3(.40,.60,.18),Vector3(0,1.30,-.105),cream).name="SwitchCabinet"
+	box(Vector3(.45,.67,.05),Vector3(0,1.30,-.22),steel).name="RearPlate"
+	box(Vector3(.09,1.30,.10),Vector3(0,.65,-.20),steel).name="FloorUpright"
+	box(Vector3(.40,.06,.42),Vector3(0,.03,-.20),steel).name="FloorShoe"
+	caption.position = Vector3(0,1.50,.003)
+	caption.font_size = 32
+	caption.pixel_size = .00065
+	Hardware.mark(self,"LIGHT CIRCUIT / 01",Vector3(0,1.57,-.008),Vector2(.33,.035))
+	Hardware.mark(self,"PRESS / ON · OFF",Vector3(0,1.08,-.008),Vector2(.30,.033))
+	for x in [-.16,.16]:
+		for y in [1.05,1.55]:
+			box(Vector3(.018,.018,.01),Vector3(x,y,-.008),steel)
+	Supply.connect_unit(self,Vector3(0,1.62,-.20))
 
 func _bind_hall() -> void:
 	# Palette previews have no floor; the search may reach SceneTree's Window.

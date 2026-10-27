@@ -1,0 +1,470 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Escher_Impossible",
+      "title": "Escher_Impossible",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_magritte_pipe_5_2",
+          "artifact": "magritte_pipe",
+          "station": "SW",
+          "position": [
+            -14,
+            8
+          ],
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_escher_staircase_6_3",
+          "artifact": "escher_staircase",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson_controls": "on"
+          }
+        },
+        {
+          "id": "f1_penrose_triangle_3_7",
+          "artifact": "penrose_triangle",
+          "station": "NE",
+          "position": [
+            14,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.6,
+          "scale": 1,
+          "config": {
+            "track_viewer": "on"
+          }
+        },
+        {
+          "id": "f1_planar_lift_9_7",
+          "artifact": "planar_lift",
+          "station": "NW",
+          "position": [
+            -14,
+            -8
+          ],
+          "facing": 180,
+          "height": 0.95,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_impossible_trident_9_10",
+          "artifact": "impossible_trident",
+          "station": "SE",
+          "position": [
+            14,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Brouwer_Intuitionism",
+      "title": "Brouwer_Intuitionism",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_brouwer_choice_sequence_6_3",
+          "artifact": "brouwer_choice_sequence",
+          "station": "NW",
+          "position": [
+            -15,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "visitor_choices": "on"
+          }
+        },
+        {
+          "id": "f2_intractable_evidence_9_4",
+          "artifact": "intractable_evidence",
+          "station": "NW",
+          "position": [
+            -5,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_constructive_proof_3_6",
+          "artifact": "constructive_proof",
+          "station": "NE",
+          "position": [
+            5,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_cantor_diagonal_workbench_9_7",
+          "artifact": "cantor_diagonal_workbench",
+          "station": "NE",
+          "position": [
+            15,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "display_offset_x": "1.1"
+          }
+        },
+        {
+          "id": "f2_excluded_middle_demo_3_9",
+          "artifact": "excluded_middle_demo",
+          "station": "SW",
+          "position": [
+            -15,
+            8
+          ],
+          "facing": 0,
+          "height": 0.65,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_angle_sum_triangle_9_11",
+          "artifact": "angle_sum_triangle",
+          "station": "SW",
+          "position": [
+            -5,
+            8
+          ],
+          "facing": 0,
+          "height": 1.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_constructive_staircase_3_12",
+          "artifact": "constructive_staircase",
+          "station": "SE",
+          "position": [
+            5,
+            8
+          ],
+          "facing": 0,
+          "height": 0.45,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_parallel_lines_9_13",
+          "artifact": "parallel_lines",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Florensky_Paraconsistent",
+      "title": "Florensky_Paraconsistent",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_both_true_gate_6_4",
+          "artifact": "both_true_gate",
+          "station": "NW",
+          "position": [
+            -12,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "report_controls": "on"
+          }
+        },
+        {
+          "id": "f3_florensky_sphere_6_8",
+          "artifact": "florensky_sphere",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.3,
+          "scale": 1,
+          "config": {
+            "hold_both": "on"
+          }
+        },
+        {
+          "id": "f3_superposition_display_3_12",
+          "artifact": "superposition_display",
+          "station": "NE",
+          "position": [
+            12,
+            -8
+          ],
+          "facing": 0,
+          "height": 0.9,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_schrodinger_box_9_12",
+          "artifact": "schrodinger_box",
+          "station": "SE",
+          "position": [
+            0,
+            8
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Crisis_Synthesis",
+      "title": "Crisis_Synthesis",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_lambda_slider_8_3",
+          "artifact": "lambda_slider",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "calibration": "dispute"
+          }
+        },
+        {
+          "id": "f4_phi_slider_10_3",
+          "artifact": "phi_slider",
+          "station": "NW",
+          "position": [
+            -8,
+            -8
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {
+            "calibration": "dispute"
+          }
+        },
+        {
+          "id": "f4_qfep_formula_3d_9_5",
+          "artifact": "qfep_formula_3d",
+          "station": "NE",
+          "position": [
+            0,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.7,
+          "scale": 1,
+          "config": {
+            "reading_study": "on"
+          }
+        },
+        {
+          "id": "f4_godel_statement_plaque_14_8",
+          "artifact": "godel_statement_plaque",
+          "station": "NE",
+          "position": [
+            8,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_bifurcation_diagram_5_10",
+          "artifact": "bifurcation_diagram",
+          "station": "NE",
+          "position": [
+            16,
+            -8
+          ],
+          "facing": 0,
+          "height": 1.6,
+          "scale": 1,
+          "config": {
+            "visitor_control": "on",
+            "current_r": "3.2"
+          }
+        },
+        {
+          "id": "f4_goedel_atrium_13_14",
+          "artifact": "goedel_atrium",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "room_size": "6"
+          }
+        },
+        {
+          "id": "f4_russell_paradox_workbench_4_17",
+          "artifact": "russell_paradox_workbench",
+          "station": "SW",
+          "position": [
+            -16,
+            7
+          ],
+          "facing": 0,
+          "height": 0.9,
+          "scale": 1,
+          "config": {
+            "membership_controls": "on"
+          }
+        },
+        {
+          "id": "f4_russell_set_box_3_21",
+          "artifact": "russell_set_box",
+          "station": "SW",
+          "position": [
+            -8,
+            7
+          ],
+          "facing": 0,
+          "height": 1.1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_escher_staircase_8_21",
+          "artifact": "escher_staircase",
+          "station": "SE",
+          "position": [
+            8,
+            7
+          ],
+          "facing": 0,
+          "height": 0.8,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_florensky_sphere_14_21",
+          "artifact": "florensky_sphere",
+          "station": "SE",
+          "position": [
+            16,
+            7
+          ],
+          "facing": 0,
+          "height": 1.3,
+          "scale": 1,
+          "config": {
+            "hold_both": "on"
+          }
+        },
+        {
+          "id": "f4_sentence_authority_11_34",
+          "artifact": "sentence_authority",
+          "station": "NE",
+          "position": [
+            0,
+            -1
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

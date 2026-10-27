@@ -1,0 +1,333 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_Introduction",
+      "title": "QFEP_Introduction / original collection",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_tt_2_1",
+          "artifact": "tt",
+          "position": [
+            -16,
+            9
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 0.5,
+          "config": {
+            "tutorial": "qfep_introduction"
+          }
+        },
+        {
+          "id": "f1_grab_sphere_F_4_2",
+          "artifact": "grab_sphere_F",
+          "position": [
+            -4,
+            5
+          ],
+          "station": "SW",
+          "height": 1.15,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_lambda_slider_5_2",
+          "artifact": "lambda_slider",
+          "position": [
+            -2,
+            5
+          ],
+          "station": "SW",
+          "height": 0.95,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_science_screen_8_2",
+          "artifact": "science_screen",
+          "position": [
+            15,
+            9
+          ],
+          "station": "SE",
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "mode": "wave"
+          }
+        },
+        {
+          "id": "f1_phi_slider_2_3",
+          "artifact": "phi_slider",
+          "position": [
+            2,
+            5
+          ],
+          "station": "SE",
+          "height": 0.95,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_synthesis_stand_1_4",
+          "artifact": "synthesis_stand",
+          "position": [
+            -16,
+            -5
+          ],
+          "station": "NW",
+          "height": 1.7,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "subject": "tt",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f1_qfep_balance_workbench_6_4",
+          "artifact": "qfep_balance_workbench",
+          "position": [
+            0,
+            -6
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "comparison": "on"
+          }
+        },
+        {
+          "id": "f1_orange_and_apples_8_7",
+          "artifact": "orange_and_apples",
+          "position": [
+            16,
+            -6
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_qfep_formula_3d_6_8",
+          "artifact": "qfep_formula_3d",
+          "position": [
+            0,
+            9
+          ],
+          "station": "SE",
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_grab_sphere_E_2_9",
+          "artifact": "grab_sphere_E",
+          "position": [
+            -4,
+            6
+          ],
+          "station": "SW",
+          "height": 1.15,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_grab_sphere_lambda_3_9",
+          "artifact": "grab_sphere_lambda",
+          "position": [
+            -4,
+            7
+          ],
+          "station": "SW",
+          "height": 1.15,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "QFEP_F_Term",
+      "title": "QFEP_F_Term / original collection",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_tt_1_1",
+          "artifact": "tt",
+          "position": [
+            -16,
+            9
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 0.5,
+          "config": {
+            "tutorial": "free_energy"
+          }
+        },
+        {
+          "id": "f2_lambda_slider_2_2",
+          "artifact": "lambda_slider",
+          "position": [
+            4,
+            6
+          ],
+          "station": "SE",
+          "height": 0.95,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "calibration": "none"
+          }
+        },
+        {
+          "id": "f2_science_screen_8_2",
+          "artifact": "science_screen",
+          "position": [
+            16,
+            9
+          ],
+          "station": "SE",
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "mode": "scatter"
+          }
+        },
+        {
+          "id": "f2_shannon_workbench_4_4",
+          "artifact": "shannon_workbench",
+          "position": [
+            0,
+            -6
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "prediction_study": "on",
+            "initial_p": "0.1"
+          }
+        },
+        {
+          "id": "f2_film_shannon_threshold_8_5",
+          "artifact": "film_shannon_threshold",
+          "position": [
+            0,
+            7
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_1_6",
+          "artifact": "dark_sphere",
+          "position": [
+            -16,
+            -6
+          ],
+          "station": "NW",
+          "height": 1,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_snap_octahedron_puzzle_2_8",
+          "artifact": "snap_octahedron_puzzle",
+          "position": [
+            16,
+            -6
+          ],
+          "station": "NE",
+          "height": 1.1,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_snap_tetrahedron_puzzle_7_8",
+          "artifact": "snap_tetrahedron_puzzle",
+          "position": [
+            16,
+            0
+          ],
+          "station": "SE",
+          "height": 1.1,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_crystal_cluster_1_9",
+          "artifact": "crystal_cluster",
+          "position": [
+            -16,
+            2
+          ],
+          "station": "SW",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -1,0 +1,596 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Grammars_And_Curves",
+      "title": "LSystems_Grammars_And_Curves",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_the_believing_turtle_9_7",
+          "artifact": "the_believing_turtle",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f1_ContextFreeGrammars_5_18",
+          "artifact": "ContextFreeGrammars",
+          "station": "SW",
+          "position": [
+            -16,
+            7
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_space_filling_curve_gallery_9_18",
+          "artifact": "space_filling_curve_gallery",
+          "station": "NE",
+          "position": [
+            0,
+            -7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_Hilbert3D_7_19",
+          "artifact": "Hilbert3D",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_lindenmayer_tube_tree_12_24",
+          "artifact": "lindenmayer_tube_tree",
+          "station": "NW",
+          "position": [
+            -16,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_film_grammar_forward_4_25",
+          "artifact": "film_grammar_forward",
+          "station": "NE",
+          "position": [
+            17,
+            -5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f1_tube_painting_11_39",
+          "artifact": "tube_painting",
+          "station": "NE",
+          "position": [
+            17,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "1"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Architecture",
+      "title": "LSystems_Architecture",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_lsystem_dungeon_9_7",
+          "artifact": "lsystem_dungeon",
+          "station": "SE",
+          "position": [
+            0,
+            6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_catalyst_vent_4_24",
+          "artifact": "catalyst_vent",
+          "station": "NW",
+          "position": [
+            -18,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emit_interval_s": "2.5",
+            "wave_size": "3",
+            "start_delay_s": "5.0",
+            "sequence": "auto"
+          }
+        },
+        {
+          "id": "f2_mesh_grammar_petal_flower_13_24",
+          "artifact": "mesh_grammar_petal_flower",
+          "station": "SE",
+          "position": [
+            15,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dark_sphere_8_25",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            18,
+            2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_dragon_room_12_26",
+          "artifact": "dragon_room",
+          "station": "NW",
+          "position": [
+            -14,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_CityGenerator_6_27",
+          "artifact": "CityGenerator",
+          "station": "NE",
+          "position": [
+            14,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_grammar_seed_6_29",
+          "artifact": "grammar_seed",
+          "station": "SW",
+          "position": [
+            -17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_catalyst_prompter_box_7_31",
+          "artifact": "catalyst_prompter_box",
+          "station": "NW",
+          "position": [
+            -18,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "emergence": "vent",
+            "sequence": "auto",
+            "lease_s": "45"
+          }
+        },
+        {
+          "id": "f2_mesh_grammar_coral_fingers_14_31",
+          "artifact": "mesh_grammar_coral_fingers",
+          "station": "NE",
+          "position": [
+            0,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Competition",
+      "title": "LSystems_Competition",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_ForestCompetition_9_8",
+          "artifact": "ForestCompetition",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f3_branching_coral_12_25",
+          "artifact": "branching_coral",
+          "station": "SW",
+          "position": [
+            -16,
+            8
+          ],
+          "facing": 0,
+          "height": 0.85,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_dark_sphere_10_28",
+          "artifact": "dark_sphere",
+          "station": "SE",
+          "position": [
+            17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Living",
+      "title": "LSystems_Living",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_genetic_tree_sculptor_9_8",
+          "artifact": "genetic_tree_sculptor",
+          "station": "SE",
+          "position": [
+            0,
+            6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f4_lsystem_tree_9_22",
+          "artifact": "lsystem_tree",
+          "station": "NW",
+          "position": [
+            -16,
+            -7
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_branching_coral_12_22",
+          "artifact": "branching_coral",
+          "station": "NE",
+          "position": [
+            16,
+            -7
+          ],
+          "facing": 270,
+          "height": 0.85,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_living_paper_fern_14_22",
+          "artifact": "living_paper_fern",
+          "station": "SW",
+          "position": [
+            -17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_living_paper_tree_5_27",
+          "artifact": "living_paper_tree",
+          "station": "SE",
+          "position": [
+            16,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_living_paper_dragon_12_30",
+          "artifact": "living_paper_dragon",
+          "station": "NE",
+          "position": [
+            0,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "LSystems_Shape_Grammars",
+      "title": "LSystems_Shape_Grammars",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_form_grammar_family_10_11",
+          "artifact": "form_grammar_family",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f5_form_grammar_canopy_10_31",
+          "artifact": "form_grammar_canopy",
+          "station": "NE",
+          "position": [
+            10,
+            -2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Assemblage_Same_Desire",
+      "title": "Assemblage_Same_Desire",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f6_ten_print_textile_9_8",
+          "artifact": "ten_print_textile",
+          "station": "SE",
+          "position": [
+            0,
+            7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f6_grid_substrate_runner_5_21",
+          "artifact": "grid_substrate_runner",
+          "station": "SW",
+          "position": [
+            -16,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f6_synthesis_stand_11_21",
+          "artifact": "synthesis_stand",
+          "station": "SE",
+          "position": [
+            16,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "subject": "godel_statement_plaque",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f6_panel_bridge_loom_15_23",
+          "artifact": "panel_bridge_loom",
+          "station": "SW",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f6_pattern_atlas_gallery_8_24",
+          "artifact": "pattern_atlas_gallery",
+          "station": "NE",
+          "position": [
+            0,
+            -7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f6_dragon_bench_15_28",
+          "artifact": "dragon_bench",
+          "station": "SE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f6_mamma_monster_gallery_8_31",
+          "artifact": "mamma_monster_gallery",
+          "station": "NW",
+          "position": [
+            -15,
+            -9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f6_godel_statement_plaque_5_35",
+          "artifact": "godel_statement_plaque",
+          "station": "NE",
+          "position": [
+            16,
+            -7
+          ],
+          "facing": 0,
+          "height": 1.15,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f6_incompleteness_scale_12_35",
+          "artifact": "incompleteness_scale",
+          "station": "NE",
+          "position": [
+            16,
+            -12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

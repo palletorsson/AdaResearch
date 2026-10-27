@@ -1,0 +1,187 @@
+{
+  "call-stack": {
+    "defaults": {
+      "prog": "mirror",
+      "n0": 3,
+      "items": [
+        "donut",
+        "monitor",
+        "extinguisher",
+        "cone",
+        "monitor",
+        "extinguisher"
+      ]
+    },
+    "presets": {
+      "mirror": {
+        "hasIf": true,
+        "before": true,
+        "after": true,
+        "hint": "Items placed before the call come out on the way down; items placed after it wait in their crates and come out on the way back up."
+      },
+      "down": {
+        "hasIf": true,
+        "before": true,
+        "after": false,
+        "hint": "Everything happens on the way down, before each call. Nothing is left to do on the way back."
+      },
+      "up": {
+        "hasIf": true,
+        "before": false,
+        "after": true,
+        "hint": "Nothing happens on the way down. The work waits in the crates and comes out on the way back, so the order flips."
+      },
+      "nobase": {
+        "hasIf": false,
+        "before": false,
+        "after": true,
+        "hint": "There is no if, so no call ever stops calling. Watch the tube."
+      }
+    }
+  },
+  "if-else-loop": {
+    "defaults": {
+      "cond": "x",
+      "thenKnit": "1",
+      "thenX": "0",
+      "elseKnit": "0",
+      "elseX": "1",
+      "xStart": 1,
+      "limit": 12
+    },
+    "presets": {
+      "alt": {
+        "cond": "x",
+        "thenKnit": "1",
+        "thenX": "0",
+        "elseKnit": "0",
+        "elseX": "1",
+        "xStart": 1
+      },
+      "even": {
+        "cond": "even",
+        "thenKnit": "1",
+        "thenX": "keep",
+        "elseKnit": "0",
+        "elseX": "keep",
+        "xStart": 1
+      },
+      "pairs": {
+        "cond": "pairs",
+        "thenKnit": "1",
+        "thenX": "keep",
+        "elseKnit": "0",
+        "elseX": "keep",
+        "xStart": 1
+      },
+      "once": {
+        "cond": "x",
+        "thenKnit": "1",
+        "thenX": "keep",
+        "elseKnit": "0",
+        "elseX": "1",
+        "xStart": 0
+      },
+      "always": {
+        "cond": "x",
+        "thenKnit": "1",
+        "thenX": "keep",
+        "elseKnit": "0",
+        "elseX": "keep",
+        "xStart": 1
+      }
+    }
+  },
+  "list-loop": {
+    "defaults": {
+      "list": [
+        "monitor",
+        "cone",
+        "donut",
+        "extinguisher",
+        "cone",
+        "donut"
+      ],
+      "dir": "fwd",
+      "step": 1,
+      "filt": "all",
+      "filtKind": "donut"
+    },
+    "presets": {
+      "all": {
+        "dir": "fwd",
+        "step": 1,
+        "filt": "all"
+      },
+      "back": {
+        "dir": "back",
+        "step": 1,
+        "filt": "all"
+      },
+      "skip": {
+        "dir": "fwd",
+        "step": 2,
+        "filt": "all"
+      },
+      "nodonut": {
+        "dir": "fwd",
+        "step": 1,
+        "filt": "not",
+        "filtKind": "donut"
+      },
+      "cones": {
+        "dir": "fwd",
+        "step": 1,
+        "filt": "is",
+        "filtKind": "cone"
+      }
+    }
+  },
+  "prefab-loop": {
+    "defaults": {
+      "a": "monitor",
+      "b": "cone",
+      "cond": "x",
+      "thenOut": "a",
+      "thenX": "0",
+      "elseOut": "b",
+      "elseX": "1",
+      "xStart": 1,
+      "limit": 8
+    },
+    "presets": {
+      "alt": {
+        "cond": "x",
+        "thenOut": "a",
+        "thenX": "0",
+        "elseOut": "b",
+        "elseX": "1",
+        "xStart": 1
+      },
+      "pairs": {
+        "cond": "pairs",
+        "thenOut": "a",
+        "thenX": "keep",
+        "elseOut": "b",
+        "elseX": "keep",
+        "xStart": 1
+      },
+      "once": {
+        "cond": "x",
+        "thenOut": "a",
+        "thenX": "keep",
+        "elseOut": "b",
+        "elseX": "1",
+        "xStart": 0
+      },
+      "always": {
+        "cond": "x",
+        "thenOut": "a",
+        "thenX": "keep",
+        "elseOut": "b",
+        "elseX": "keep",
+        "xStart": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Genetic_Evolution",
+      "title": "Genetic Evolution / original selection study",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_GeneticProgramming_9_5",
+          "artifact": "GeneticProgramming",
+          "position": [
+            -5,
+            -4
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f1_science_screen_13_22",
+          "artifact": "science_screen",
+          "position": [
+            14,
+            6
+          ],
+          "height": 1.5,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "mode": "grid"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "PG_Space_Colonization",
+      "title": "Space Colonization / original growth study",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_space_colonization_algorithm_9_5",
+          "artifact": "space_colonization_algorithm",
+          "position": [
+            -5,
+            -4
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f2_film_branch_decision_1_14",
+          "artifact": "film_branch_decision",
+          "position": [
+            14,
+            6
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "SE",
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

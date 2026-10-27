@@ -9,6 +9,204 @@
       "evidence": "doc/book/iterations/2026-10-19-introduction-hazard-pit/index.html; tests/checks.json (121); images/checks.json; editor-checks.json (11). Before hashes preserve chapter texts, museum data and curated tower. Previous reports retain the shaft crossing and Pre regression evidence.",
       "fingerprint": "cd4b9e000e297972575d57ff1112180c6862584e698c13d8515655f70791caa4",
       "updated": "2026-10-19T19:42:58.348732+00:00"
+    },
+    "array_tutorial": {
+      "stage": "ready-for-vr",
+      "observation": "The 32-address row and 7 by 7 walking grid lead to the miniature hand index over shaft B. Shaft A now holds a full 6 x 6 x 6 array: falling inside starts bounded flight; all 216 cubes can be collected; exiting restores gravity. User confirmed desktop play works.",
+      "capacity": "The noise glass-cube flight provider reused by both input adapters; persistent indexed values and labels; collection, controlled streaming and gravity boundaries. Original collection scoring stays isolated from museum progress. The obstructing Array landing pad is removed.",
+      "next": "Physical headset review: reach all addresses, assess labels and transition back to gravity. Colour is the next selectable trial. Keep the flight volume aligned with shaft A while curating.",
+      "evidence": "doc/book/iterations/2026-10-20-array-flight/index.html; checks.json: 44 passed including actual desktop/synthetic XR flight through all 216 addresses; evidence.json. Earlier array-hand-index report retains 59 native and 9 editor checks.",
+      "fingerprint": "585a6a8de690fbe123287ca10298a376594d862175a1fb7782d9d11f169b2ae8",
+      "updated": "2026-10-20T17:25:01.281Z"
+    },
+    "color": {
+      "stage": "ready-for-vr",
+      "observation": "All 23 original column configurations now fill the Colour trial: four interactive rules, three alphabets, four poses, four composed stacks and eight gallery studies. Desktop and synthetic XR bodies walk a complete loop around the two shafts.",
+      "capacity": "Individually editable full-size columns; independent indexed materials on the opening four. Nine-metre trial headroom preserves compositions up to 7.4 m. Shared native/VR layout, real exported meshes, Desktop backup and neutral shared illumination.",
+      "next": "Physical headset playtest for readability, reach, comfort and performance. The source reference landscape and subsequent flashlight lesson remain separate. Chapter texts await play review.",
+      "evidence": "doc/book/iterations/2026-10-20-colour-celebration/index.html; checks.json: 52 passed; editor-checks.json: 9 passed; evidence.json and pillar-bounds.json. Native Mobile screenshots and editor capture.",
+      "fingerprint": "df786c138f6792885631bab6ad8bb4280ae5109ed338a14076c98b54f8a23857",
+      "updated": "2026-10-20T17:39:27.255Z"
+    },
+    "tiling": {
+      "stage": "ready-for-vr",
+      "observation": "Pattern Disco follows Colour with the full original 12 x 12, 9.6-metre dance floor between the shafts. HOLD separates a palette change from one pattern step; the original musical score keeps its own clock. The floor and both consoles are independently editable.",
+      "capacity": "Original MultiMesh, controls, sequencer UI and sound engine reused. This floor uses a flat finish for legible palette comparison. GLB export now preserves per-instance colours. Clocks and audio pause outside the active floor, resume on return, and retry starts fresh.",
+      "next": "Physical-headset review for console reach, palette legibility, rhythm and comfort. Pattern Foundry is next within Tiling; Change is the next sequence trial. Leave chapter texts until after play review.",
+      "evidence": "doc/book/iterations/2026-10-20-void-pattern-disco/index.html; checks.json: 40 passed using desktop and synthetic XR input; editor-checks.json: 8 passed including shared native/Desktop saves and stale-edit protection. Native Mobile screenshots; original source and text hashes preserved.",
+      "fingerprint": "5894049e1124535691f6e60055bafe5da88f4711f37a135e90734105ef328a69",
+      "updated": "2026-10-20T19:43:38.621568+00:00"
+    },
+    "forces": {
+      "stage": "ready-for-vr",
+      "observation": "After skipping Change for this trial session, Vectors in Your Hands brings the three original direction, addition and signed-projection stations into a separate Void floor. The four familiar black points remain grabbable and retain their released positions. Both shafts and the walking route are clear.",
+      "capacity": "Original museum scenes and scripts run without adapters. Local coordinate frames survive editor translation and rotation. Per-station reset protects held points; sleep retains released inputs; full retry restores all three instruments. Native geometry is exported for independent move, turn and copy in the lab editor, saved to the desktop/VR layout and Desktop backup.",
+      "next": "Physical headset review for label readability, reach and comfort. Launch is next within Forces; Formfinding is the next sequence trial. These arrows express geometric relations, not applied forces. Keep chapter texts pending play review.",
+      "evidence": "doc/book/iterations/2026-10-20-void-vectors/index.html; checks.json: 65 passed, including real desktop and synthetic XR pickup/trigger input, zero and small vectors, addition cancellation, signed projection, editor transforms, route and residency. editor-checks.json: 7 passed. Native Mobile screenshots; before.json preserves museum scripts, scenes and chapter texts.",
+      "fingerprint": "562c98185b11acdb057b3bb73a4c70511f1d3fa0edd3224c36c4baee59124b17",
+      "updated": "2026-10-20T19:56:21.595958+00:00"
+    },
+    "formfinding": {
+      "stage": "ready-for-vr",
+      "observation": "The original Descent lab and five source-map comparisons occupy a separate Void trial. Predict and step, compare starts and objectives, then contrast numerical descent with the marble, seeded tremble, noise landscape and luminous well. Both shafts remain open.",
+      "capacity": "Original STEP/RUN/RESET/START/SURFACE/RATE/STOP/PARTS/RULE controls work through desktop and synthetic XR pointers. Editor transforms preserve local numerical coordinates. A Void adapter fixes the older Perlin walker/trail placement and budget-stop label without changing its source algorithm. Six independent artifact placements, three supports, shared desktop/VR saves and Desktop backup.",
+      "next": "Physical headset reach, readability and comfort. User asks how form finding extends to bodies and topology: proposed next experiment reuses a cube frame with anchors, elastic edges and a removable brace; distinguish configuration changes from connectivity changes. Not implemented here. Reuse descent in Machine Learning with model parameters and data-derived error. Catenary is next within this sequence; Wave Functions is next first-map trial. Keep chapter texts pending play review.",
+      "evidence": "doc/book/iterations/2026-10-20-void-formfinding/index.html; checks.json: 65 passed including desktop and synthetic XR input, numerical boundaries, local transforms, walking route, sleep and retry; editor-checks.json: 10 passed. Native Mobile screenshots. Original scripts, scenes, final.md and tutorial.md hashes preserved. Existing material deprecation and shutdown resource warnings remain.",
+      "fingerprint": "8332f9fc1171d9bc8de8e802272ac634bc079a1e142a78d3dfb6aad12894ce92",
+      "updated": "2026-10-20T20:12:36.010590+00:00"
+    },
+    "wavefunctions": {
+      "stage": "ready-for-vr",
+      "observation": "The cube comes back: all 21 original map placements are represented on a separate Void trial. Clock-driven motion, a hand-released pendulum and its driven cube share the centre. Original cube, orbit and sound comparisons occupy the wings. Both shafts and the walking route are clear.",
+      "capacity": "Original desktop/VR pendulum pickup, signed crossings and signal mapping. Explicit connections between editor mounts; live eight-second angle recording on the original screen; bounded local animated-cube history that survives collection; bounded 500-instance cloud under the shared environment. 21 editable exhibits and seven separate workbenches, with shared native layout and Desktop backup.",
+      "next": "Physical-headset reach, readability, audio balance and comfort. The fixed curve behind the pendulum is a prediction, while the large monitor records the actual swing. Orbit comparisons are observational, with unused controls hidden. Movement history follows within the sequence. Keep chapter texts pending play review.",
+      "evidence": "doc/book/iterations/2026-10-20-void-wavefunctions/index.html; checks.json: 61 passed through desktop and synthetic XR, including real bob pickup/release, signed crossings, local transforms, collection, route, residency and retry; editor-checks.json: 25 passed. Native Mobile screenshots and editor capture. before.json preserves original scripts, scenes, final.md, tutorial.md and map_data.json.",
+      "fingerprint": "d963d94ae357507f4b133991b9c742e5b27e4e24b00c0a39064182959c6f9af3",
+      "updated": "2026-10-20T20:25:39.402692+00:00"
+    },
+    "randomness": {
+      "stage": "ready-for-vr",
+      "observation": "Random Definition and Random Entropies occupy two separately editable Void trial floors. Twelve original seed-map placements plus its separate frame-interval monitor lead to nine full-size chair-study assemblies. Both shafts stay open; shaft A corner boards connect the floors.",
+      "capacity": "Floor-local shared seed with independent instrument streams; recorded movement from the actual desktop hand or tracked XR controller; original out-and-back ride; explicit finite entropy models, physical chairs, manual door histories and separate workshop-note persistence. Cabinet parts follow their editor mount. Desktop now consumes the same opted-in carry provider as XR.",
+      "next": "Physical headset reach, legibility, frame rate and comfort. The trial is deeper to preserve human-scale chair groups. Editor meshes are placement snapshots. Random_Entropy is next within Randomness; Noise is the next sequence. Leave lesson texts pending play review.",
+      "evidence": "doc/book/iterations/2026-10-21-void-randomness/index.html; checks.json: 103 passed desktop and synthetic-XR assertions; editor-checks.json: 26 passed including exported geometry, copy/move/turn, actual shared native save, Desktop backup and conflict protection; native Mobile screenshots. before.json preserves 135 museum/source and main-tower files. Existing Forces regression: 65 desktop/synthetic-XR checks passed after the shared walker change.",
+      "fingerprint": "386c123624fc9f2cb7ddf96ee85cc02e916736a83b4c6db864555acdb6381d93",
+      "updated": "2026-10-21T04:57:58.593216+00:00"
+    },
+    "noise": {
+      "stage": "ready-for-vr",
+      "observation": "Random Noise Types and Noise Columns occupy two separate Void trial floors. All six opening assemblies and three body-study assemblies are retained. Compare continuing constraints with admission rules, independent images and audio, displaced surfaces and viewing records; then compare one column recipe under constant, periodic and coherent-field drivers. Shaft A corner boards connect the floors.",
+      "capacity": "Nine independently editable native assemblies. A small spacing adapter restores the actual frozen physics bodies after pickup; original museum sources remain intact. Local clocks, seeded replay, floor sleep and retry work in both input rigs. Exported geometry supports copy, move and turn with shared desktop/VR layout and Desktop backup.",
+      "next": "Physical headset reach, audio balance, stereo legibility, comfort and sustained performance. Web models are static placement snapshots. Noise One and Noise Voxel follow within the sequence. Keep chapter texts pending play review.",
+      "evidence": "doc/book/iterations/2026-10-21-void-noise/index.html; checks.json: 93 passed using desktop mouse input and synthetic XR controllers; editor-checks.json: 13 passed including native exported geometry, copy/move/turn, actual shared save, Desktop backup and stale-save protection. Six native Mobile screenshots and editor capture. before.json preserves 54 source, text and main-tower files.",
+      "fingerprint": "77563df7a5affa3588cc62d89ae9442080765940eb3428a5da095724e2706a8d",
+      "updated": "2026-10-21T05:22:41.728483+00:00"
+    },
+    "shaders": {
+      "stage": "needs-work",
+      "observation": "All 13 placements from Shader 01 Shaping and Shader 05 Patterns transferred to two separate editable trial floors. Collection transfer, curation pending.",
+      "capacity": "Original shader controls and walkthrough rooms retained. Two local furniture adapters fit the slab height and put remote controls beside their models. Real geometry exports and shared editor/native saves verified.",
+      "next": "Curate the route, fixed-pillar relationship and grouping of large rooms. ScienceScreen has no grid-producing instrument here and retains its source generic readout. Physical headset review remains.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch/index.html; 45 native desktop/synthetic XR checks and 16 editor checks passed. No physical headset test. Original map and chapter hashes unchanged.",
+      "fingerprint": "092632cae4fcdf61d26e19cfd2ed8b4515efe293e54c477b02c898c00e9cb03c",
+      "updated": "2026-10-21T06:08:52.668Z"
+    },
+    "fractals": {
+      "stage": "needs-work",
+      "observation": "22 of 22 original placements from Fractal Recursion and Recursive Trees transferred onto two separate editable Void trial floors. Curation pending.",
+      "capacity": "Original recursion and tree controls retained. A local adapter relocates the world-space mesh fractal; L-system controls and pickups raised above the slab. Native input, descent, sleep, restart and editor save verified.",
+      "next": "Curate the route and legacy hall lighting. Resolve Living Paper algorithm configuration and ScienceScreen data partner. Physical headset and performance review remain.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch/index.html; 116 source, 43 native desktop/synthetic XR and 25 editor checks passed. Export retained two known texture-leak diagnostics after completion at Compatibility shutdown.",
+      "fingerprint": "55a8a4648061ffe41bf781499e008d8a126011001b4f19d0845e15b6e75a70f3",
+      "updated": "2026-10-21T06:31:21.666Z"
+    },
+    "cellularautomata": {
+      "stage": "needs-work",
+      "observation": "10 of 10 original placements from CA Introduction and CA Elementary Rules transferred onto two separate editable Void floors. Original rules, hand points and glass-covered basin retained. Curation pending.",
+      "capacity": "Desktop mouse STEP controls and synthetic XR grip, address selection and held-point trigger verified. Walking routes, basin, shaft landings, streaming/retry and editor save tested. Showcase raised 12 cm after native measurement.",
+      "next": "Curate partitions and encounter order against the existing chapter. Resolve showcase keyboard conflicts with jump/retry and measure headset performance. Rug/orb footprint overlap is intentional and traversable.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch/index.html; 71 source, 181 native desktop/synthetic XR and 13 editor checks passed. 45 GLBs exported without failures. Physical headset not tested.",
+      "fingerprint": "c3c68e3a9ea820546b8863b117f748149ed4c7e4aee8d4621cae69f6b2236114",
+      "updated": "2026-10-21T06:31:21.685Z"
+    },
+    "proceduralgeneration": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 4 original placements across PG_Genetic_Evolution, PG_Space_Colonization. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. This isolated trial uses seven-metre storeys so the original six-metre request field stays full-size and below the slab. The main tower is unchanged.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-02/index.html#proceduralgeneration; {\"source-checks\": 43, \"checks\": 57, \"editor-checks\": 7}",
+      "fingerprint": "bdef7dda25c901eaef576b2f7cb151b1b37d66d0a483a66fbe166a099e7e81d8",
+      "updated": "2026-10-21T06:44:33.723Z"
+    },
+    "lsystems": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 13 original placements across LSystems_Grammar_Lab, LSystems_Growth. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Both source grids turned 180 degrees about their centre (void_x = 9 - cell_x, void_z = cz - cell_z, facing + 180); relational only Nine-metre storeys (levels 0/-9/-18/-27, storey_height 9, landing_max_speed 14) for the GrowthLesson's 8 m rulers and unfitted metre drawings; main tower unchanged mesh_grammar_lsystem_tree raised 0.45 m (seed centred on its origin); grown extent to be measured Structure-2 cells reproduced as 24 one-metre construction cubes (Grammar Lab threshold platforms, Growth corridor); removable Fifteen provenance floor captions; removable Void catalog applies lsystem_editor configuration before _ready so GrammarLesson and its original hand companion are installed; original museum source unchanged.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-02/index.html#lsystems; {\"source-checks\": 79, \"checks\": 73, \"editor-checks\": 16}",
+      "fingerprint": "23a65d52c7a9cae3fecc9be2a90d1f4d9e97c443c64a7dc03437392bc237befb",
+      "updated": "2026-10-21T06:56:50.125Z"
+    },
+    "softbodies": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 12 original placements across SoftBodies_Soft_Body_Deformation, SoftBodies_Cloth_Physics. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Per-floor rigid 180-degree turn of each source grid (floor 1 cx 15 cz 12, floor 2 cx 16 cz 15; facing + 180); relational only soft_workshop_void.gd: binds the console's partners from the Void floor's mounts by identity stamp, then runs the original desk code; original path inside the museum void_soft_body.gd + three inherited scenes: softbody3d.gd's world-height guards (y<1 -> 2 at setup, y<-0.5 -> 1 per frame) applied relative to the Void content floor for the mill sphere and the four stop bodies tension_membrane reference bay moved 32.5 m north to (1, -9.5); its own 14 x 12.5 m plate occupies the south half of floor 2 radiolaria raised 0.45 m at its token scale 0.5 (forms centred on the origin) Fourteen provenance floor captions; removable Shared floor loader flushes initial SoftBody3D transforms in a live physics space before preview residency pauses the floor.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-03/index.html#softbodies; {\"source-checks\": 76, \"checks\": 63, \"editor-checks\": 15}",
+      "fingerprint": "68d08d3b9b1a58c497a54e5bd3d9f8785dbfb37351fca7b9e7df0b55dc0b90e2",
+      "updated": "2026-10-21T07:55:02.888Z"
+    },
+    "isosurfaces": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 9 original placements across ISO_Introduction, ISO_LookupTable. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Original consoles bind partners by identity on their streamed floor; original actions are inherited. Eight-metre storeys retain the full field at its original scale. GPU-based native geometry exported with the Mobile renderer; no cave fallback.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-03/index.html#isosurfaces; {\"source-checks\": 60, \"checks\": 63, \"editor-checks\": 12}",
+      "fingerprint": "2b57c3af1bfc5c700045a73cbdd5411c0c7ca831f15e2f50619befd707395324",
+      "updated": "2026-10-21T07:55:03.577Z"
+    },
+    "boolean_surfaces": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 29 original placements across Boolean_Verbs, Boolean_Gallery. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Per-floor rigid 180-degree turn (Verbs cx 6 cz 12, Gallery cx 8 cz 11; facing + 180); the source aisle stays the walking aisle Verbs raised bays (structure 2, rows 9 and 16) as sixteen 1 m construction cubes Gallery subtraction_suite row: opened/severed spread from x +-1 to +-2.1 (source copies interpenetrated by 0.88 m) Gallery removal_room row: spread to x +-3.3 and +-9.3 (source placed four 5.41 m rooms 2 m apart); row, side and order kept film_boolean_overlap relocated from rigid (7, -18), off the slab, to (15, -8), facing kept coincident_face copies raised 0.35 m (diagram centred on its origin, lowest point -0.31) Provenance captions: 7 on Verbs, 32 on Gallery (schema maximum); removable Codex measured removal_room at 5.41 × 1.64 × 1.145 m and the_argument_of_solids at 5.073 × 1.77 × 2.599 m; accepted the matching editor footprint corrections.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-04/index.html#boolean_surfaces; {\"source-checks\": 132, \"checks\": 355, \"editor-checks\": 32}",
+      "fingerprint": "bf0548bfc04269a904ae7c83eaab2ca81a23159764e960efd7c8ad11cb389a17",
+      "updated": "2026-10-21T08:17:42.110Z"
+    },
+    "swarmintelligence": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 8 original placements across SwarmIntelligence_PhysarumColony, SwarmIntelligence_FlowFields. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Eight-metre storeys preserve the original seven-metre trace wall without shrinking its hand controls. Legacy PSO remains full scale beside the west edge; simulation parameters unchanged. Local inherited PSO adapter places the original live overlay readings in a Label3D for both rigs; the solver and parameters are unchanged.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-04/index.html#swarmintelligence; {\"source-checks\": 58, \"checks\": 79, \"editor-checks\": 11}",
+      "fingerprint": "4ea2a37a485f2ad6227dad487ec8df47961969f854aaeb34f8cbdf1a6ea8ed64",
+      "updated": "2026-10-21T08:17:42.514Z"
+    },
+    "graphtheory": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 3 original placements across GT_Foundations, GT_Layout. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Original per-floor rigid 180-degree turn retained, including graph:cube and layout_seed:41. Bridge raised 0.12 m so its river is above the deck; original 0.1 scale retained. Trial-local bridge adapter exposes the original working THEOREM/DEGREES actions on spatial buttons for desktop and VR and removes the D-strafe conflict. Original 2D analysis is reproduced on a spatial readout. Existing museum source scenes and texts are unchanged. Removed technical provenance floor captions; provenance stays in the inventory and handoff.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-05/index.html#graphtheory; {\"source-checks\": 39, \"checks\": 51, \"editor-checks\": 6}",
+      "fingerprint": "2e366d4f3c33123e542fc6e5dae61f6002453b62d9ca216d2898a7ed01730f0b",
+      "updated": "2026-10-21T08:46:29.306Z"
+    },
+    "machinelearning": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 10 original placements across ML_Evolution, ML_Gradient_Landscape. Existing artifact controls and configuration preserved. Native desktop and synthetic XR checks pass; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. The trial uses 116 x 48 m slabs and eight-metre storeys so the original 40 x 40 m creature arena fits beside the shafts at its source scale. Main tower untouched. Trial-local creature adapter measures original fitness in arena coordinates; translating/turning the exhibit no longer changes its score. Trial-local PCA adapter aligns the long axis of each rod to its computed eigenvector without calling world look_at before parenting. PCA editor snapshot completes the original automatic calculation; runtime still performs its original staged demonstration. Raised imported consoles/clouds to rest above the slab, including 0.025 m creature-ground offset to avoid z-fighting. Original modes, populations, parameters, loss calculations and learning-film controls retained.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-05/index.html#machinelearning; {\"source-checks\": 68, \"checks\": 73, \"editor-checks\": 13}",
+      "fingerprint": "eee51d9abf79c164eb4b3871177e368aa95a772f43bc8069435f34a8ec52db28",
+      "updated": "2026-10-21T08:46:29.714Z"
+    },
+    "foundationscrisis": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 12 original placements across Euclid_Parallel, NonEuclidean_Spaces. Native desktop and synthetic XR acceptance plus named focused checks pass. Consult the handoff for untested controls and fit exceptions; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Per-floor rigid 180-degree turn (Euclid cx 5 cz 12, NonEuclidean cx 8 cz 12; facing + 180); height = museum support + token offset Two 1 m construction cubes for the structure-2 cells under poincare_disk and riemann_sphere (museum support 1.0) noneuclidean_wing_void.gd: shift_player moves the Void player and rebases fall accounting; wing registered as void_floor_extension (local y > 20) and void_exterior_walk Editor preview exports the real doorway without the stencil-masked remote-room copy: GLB cannot represent that mask. Native portal remains unchanged.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-06/index.html#foundationscrisis; {\"source-checks\": 74, \"checks\": 87, \"editor-checks\": 15}",
+      "fingerprint": "3ccffd3250ad86c7962fa59ba5fa51eb32190d061ad24f06309a3cb37be73baa",
+      "updated": "2026-10-21T09:18:48.875Z"
+    },
+    "qfeplaboratory": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 20 original placements across QFEP_Introduction, QFEP_F_Term. Native desktop and synthetic XR acceptance plus named focused checks pass. Consult the handoff for untested controls and fit exceptions; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. The two malformed tt tokens explicitly select qfep_introduction/free_energy through the original apply_grid_config tutorial option; source tokens remain in inventory. Small QFEP term spheres and standalone controls are raised to hand height; source scales are retained. Raised synthesis stand 1.7 m to clear its below-origin source geometry. Configure the original comparison workbench before _ready through the existing loader option. Post-ready comparison rebuild reproduces a native exit-time access violation; pre-configuration avoids that rebuild.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-06/index.html#qfeplaboratory; {\"source-checks\": 110, \"checks\": 125, \"editor-checks\": 23}",
+      "fingerprint": "e491be7c224d7149bc2b19743f4eda32556454933317711984b5976bad57865c",
+      "updated": "2026-10-21T09:18:49.258Z"
+    },
+    "postfoundationscrisis": {
+      "stage": "needs-work",
+      "observation": "Transfer accepted: 11 original placements across CriticalAlgorithms_Algorithmic_Bias_Visualization, CriticalAlgorithms_Applied_Ethics. Native desktop and synthetic XR acceptance plus named focused checks pass. Consult the handoff for untested controls and fit exceptions; physical headset and curation remain pending.",
+      "capacity": "Individually editable original scene snapshots, shared native/VR layout, copy/move/turn, revision-safe autosave and Desktop backup. Claude delivered floor 2 separately; Codex verified IDs/config and merged it. Raised below-origin stands and small controls to hand height. Local plaque adapter calls the original advance_statement from a shared desktop/VR NEXT button. Original source scene/script unchanged. Room shape demonstrator receives source configuration before ready, avoiding a redundant initial rebuild. Raised synthesis stand 1.7 m after native bounds found its support below the slab.",
+      "next": "Curate the encounter order, circulation, light and fit before integration with the main tower. Resolve dependencies recorded in HANDOFF.md, then physical headset review. Wait with chapter texts.",
+      "evidence": "doc/book/iterations/2026-10-21-void-transfer-batch-07/index.html#postfoundationscrisis; {\"source-checks\": 68, \"checks\": 97, \"editor-checks\": 14}",
+      "fingerprint": "77b186363da7b5e2d6ea6b80eaf29af46b4145efcbf2b10d798b9757a0c00d2c",
+      "updated": "2026-10-21T09:40:34.952Z"
     }
   }
 }

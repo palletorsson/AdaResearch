@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    },
+    {
+      "map": "Trans_Rotation",
+      "title": "Portals / a falling turn",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [
+        {
+          "id": "transformation-d2efbcd4-fc84-45df-965a-9697392abd43",
+          "artifact": "spatial_recipe",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "transformation_variant",
+            "recipe_document": "res://commons/void/trials/transformation_341412706e/recipe.json",
+            "editor_label": "Portals / a falling turn",
+            "editor_source": {
+              "floor": 1,
+              "id": "variation",
+              "trial": "transformation_341412706e"
+            },
+            "parts": {
+              "Copy02": {
+                "position": [
+                  0.25,
+                  1.62311983108521,
+                  -0.47999998927116394
+                ],
+                "rotation": [
+                  0,
+                  90,
+                  -7
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "construction": []
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false,
+      "copies": [],
+      "construction": []
+    }
+  ]
+}

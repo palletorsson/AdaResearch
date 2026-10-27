@@ -328,7 +328,7 @@ func _build_hinge() -> void:
 		_hinge.hinge_moved.connect(_on_hinge_moved)
 
 	# Create grab handles around the ring
-	var handle_script = load("res://addons/godot-xr-tools/interactables/interactable_handle.gd")
+	var handle_script = load("res://commons/hazards/becoming_catalyst/capacity_bracelet/bracelet_handle.gd")
 	if not handle_script:
 		push_warning("[CapacityBracelet] Could not load InteractableHandle script")
 		return
@@ -353,6 +353,7 @@ func _build_hinge() -> void:
 		handle.collision_mask = 0
 		handle.freeze = true
 		handle.set_script(handle_script)
+		handle.set("bracelet", self)
 		handle_parent.add_child(handle)
 		# Set script-specific exports after entering tree
 		handle.set("picked_up_layer", 0)

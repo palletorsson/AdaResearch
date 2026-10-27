@@ -1,0 +1,483 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "title": "WaveFunctions_Pendulum",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_dark_sphere_2_5",
+          "artifact": "dark_sphere",
+          "position": [
+            -3,
+            10
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_PendulumWave_6_6",
+          "artifact": "PendulumWave",
+          "position": [
+            -6,
+            4
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "gallery": "open",
+            "projection": "floor"
+          }
+        },
+        {
+          "id": "f1_foucault_pendulum_15_6",
+          "artifact": "foucault_pendulum",
+          "position": [
+            14,
+            -7
+          ],
+          "station": "NE",
+          "height": 0.72,
+          "facing": 180,
+          "scale": 0.65,
+          "config": {}
+        },
+        {
+          "id": "f1_seismograph_17_13",
+          "artifact": "seismograph",
+          "position": [
+            4,
+            7
+          ],
+          "station": "SE",
+          "height": 0.1,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_draw_dot_time_domain_3_14",
+          "artifact": "draw_dot_time_domain",
+          "position": [
+            -15,
+            6
+          ],
+          "station": "SW",
+          "height": 1.1,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "gallery": "open",
+            "plinth": "1.05,1.4",
+            "data_table_mount": "plinth",
+            "data_table_yaw": "180",
+            "data_table_tilt": "15"
+          }
+        },
+        {
+          "id": "f1_lab_table_17_17",
+          "artifact": "lab_table",
+          "position": [
+            7,
+            7
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_GlassRack_17_18",
+          "artifact": "GlassRack",
+          "position": [
+            7,
+            7
+          ],
+          "station": "SE",
+          "height": 0.8,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "config": "reflux_apparatus"
+          }
+        },
+        {
+          "id": "f1_VRAudioMonitor_18_20",
+          "artifact": "VRAudioMonitor",
+          "position": [
+            10,
+            8
+          ],
+          "station": "SE",
+          "height": 1.2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "1.0,0.7"
+          }
+        },
+        {
+          "id": "f1_WavePaintings_10_23",
+          "artifact": "WavePaintings",
+          "position": [
+            0,
+            -9
+          ],
+          "station": "NE",
+          "height": 0.9,
+          "facing": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_BigPipeSystem_18_25",
+          "artifact": "BigPipeSystem",
+          "position": [
+            15,
+            8
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "path": "straight,corner_right,straight"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "title": "WaveFunctions_Sine_Space",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_sine_flow_tray_6_4",
+          "artifact": "sine_flow_tray",
+          "position": [
+            -4,
+            7
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_sine_wall_explanation_6_9",
+          "artifact": "sine_wall_explanation",
+          "position": [
+            4,
+            7
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_sine_wall_corridor_9_12",
+          "artifact": "sine_wall_corridor",
+          "position": [
+            16,
+            6
+          ],
+          "station": "SE",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_colorballs_9_29",
+          "artifact": "colorballs",
+          "position": [
+            0,
+            -9.5
+          ],
+          "station": "NE",
+          "height": 1.2,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "case": "sine_rain"
+          }
+        },
+        {
+          "id": "f2_sine_space_9_30",
+          "artifact": "sine_space",
+          "position": [
+            -0.5,
+            -9.5
+          ],
+          "station": "NW",
+          "height": 1.2,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "floor": "walk",
+            "width": "14",
+            "depth": "18",
+            "pos_x": "-0.5",
+            "pos_z": "-0.5",
+            "fit": "exact"
+          }
+        },
+        {
+          "id": "f2_dark_sphere_14_44",
+          "artifact": "dark_sphere",
+          "position": [
+            -3,
+            10
+          ],
+          "station": "SW",
+          "height": 0,
+          "facing": 180,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "title": "WaveFunctions_Unit_Circle / 7 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_unit_circle_advanced_18_10",
+          "artifact": "unit_circle_advanced",
+          "station": "SW",
+          "position": [
+            -4,
+            4
+          ],
+          "facing": 0,
+          "height": 1.6,
+          "scale": 1,
+          "config": {
+            "gallery": "projection",
+            "continue_after_build": "true"
+          }
+        },
+        {
+          "id": "f3_SimpleOscillatingBridge_6_18",
+          "artifact": "SimpleOscillatingBridge",
+          "station": "NE",
+          "position": [
+            5,
+            -4
+          ],
+          "facing": 270,
+          "height": 1,
+          "scale": 0.25,
+          "config": {
+            "museum": "true"
+          }
+        },
+        {
+          "id": "f3_OscillationCurve_19_18",
+          "artifact": "OscillationCurve",
+          "station": "NW",
+          "position": [
+            -8,
+            -6
+          ],
+          "facing": 0,
+          "height": 1.2,
+          "scale": 0.8,
+          "config": {
+            "history_width": "8"
+          }
+        },
+        {
+          "id": "f3_film_circle_projection_22_20",
+          "artifact": "film_circle_projection",
+          "station": "NW",
+          "position": [
+            -11,
+            -6
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f3_cube_scene_4_24",
+          "artifact": "cube_scene",
+          "station": "NE",
+          "position": [
+            7,
+            -10
+          ],
+          "facing": 180,
+          "height": 0.5,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_colorballs_8_24",
+          "artifact": "colorballs",
+          "station": "NE",
+          "position": [
+            3,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_dark_sphere_19_24",
+          "artifact": "dark_sphere",
+          "station": "NW",
+          "position": [
+            -8,
+            -10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "title": "WaveFunctions_3D_Wave_Propagation / 5 original placements",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_film_wave_neighbours_5_4",
+          "artifact": "film_wave_neighbours",
+          "station": "SE",
+          "position": [
+            6,
+            11
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "plinth": "0",
+            "pin": "true"
+          }
+        },
+        {
+          "id": "f4_coupled_oscillator_lattice_6_10",
+          "artifact": "coupled_oscillator_lattice",
+          "station": "SE",
+          "position": [
+            10.5,
+            9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "comparison": "true",
+            "fabric": "bonds"
+          }
+        },
+        {
+          "id": "f4_kusama_sine_18_11",
+          "artifact": "kusama_sine",
+          "station": "NE",
+          "position": [
+            0,
+            -8.8
+          ],
+          "facing": 180,
+          "height": 2,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_wave_propagation_3d_12_25",
+          "artifact": "wave_propagation_3d",
+          "station": "SE",
+          "position": [
+            0,
+            3.5
+          ],
+          "facing": 180,
+          "height": 1.1,
+          "scale": 1,
+          "config": {
+            "museum": "true",
+            "pool": "true"
+          }
+        },
+        {
+          "id": "f4_dark_sphere_21_32",
+          "artifact": "dark_sphere",
+          "station": "NW",
+          "position": [
+            -16,
+            -8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

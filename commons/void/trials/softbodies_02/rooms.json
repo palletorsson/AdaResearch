@@ -1,0 +1,688 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Carusell",
+      "title": "SoftBodies_Carusell",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_soft_workshop_console_11_5",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "carousel"
+          }
+        },
+        {
+          "id": "f1_flex_cloth_pad_24_6",
+          "artifact": "flex_cloth_pad",
+          "station": "SW",
+          "position": [
+            -17,
+            10
+          ],
+          "facing": 0,
+          "height": 1,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_synthesis_stand_5_7",
+          "artifact": "synthesis_stand",
+          "station": "SE",
+          "position": [
+            17,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "subject": "pick_up_cube",
+            "mode": "hero"
+          }
+        },
+        {
+          "id": "f1_pick_up_cube_5_9",
+          "artifact": "pick_up_cube",
+          "station": "SE",
+          "position": [
+            16,
+            11
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_grab_long_stick_25_9",
+          "artifact": "grab_long_stick",
+          "station": "SW",
+          "position": [
+            -18,
+            4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_grab_long_stick_6_11",
+          "artifact": "grab_long_stick",
+          "station": "SE",
+          "position": [
+            18,
+            4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_cloth_straps_7_13",
+          "artifact": "cloth_straps",
+          "station": "NW",
+          "position": [
+            -14,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hanging": "row",
+            "palette": "coral",
+            "walkway": "true",
+            "strap_count": "10",
+            "strap_width": "0.32",
+            "strap_height": "3.0",
+            "strap_overlap": "0.04"
+          }
+        },
+        {
+          "id": "f1_revolving_joy_ride_15_14",
+          "artifact": "revolving_joy_ride",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_cloth_straps_7_16",
+          "artifact": "cloth_straps",
+          "station": "NW",
+          "position": [
+            -5,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hanging": "corners",
+            "palette": "rose",
+            "walkway": "true",
+            "strap_count": "10",
+            "strap_width": "0.32",
+            "strap_height": "3.0",
+            "strap_overlap": "0.04"
+          }
+        },
+        {
+          "id": "f1_cloth_straps_7_19",
+          "artifact": "cloth_straps",
+          "station": "NE",
+          "position": [
+            5,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hanging": "single",
+            "palette": "violet",
+            "walkway": "true",
+            "strap_count": "10",
+            "strap_width": "0.32",
+            "strap_height": "3.0",
+            "strap_overlap": "0.04"
+          }
+        },
+        {
+          "id": "f1_cloth_straps_7_22",
+          "artifact": "cloth_straps",
+          "station": "NE",
+          "position": [
+            14,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hanging": "staggered",
+            "palette": "blue",
+            "walkway": "true",
+            "strap_count": "10",
+            "strap_width": "0.32",
+            "strap_height": "3.0",
+            "strap_overlap": "0.04"
+          }
+        },
+        {
+          "id": "f1_soft_mushroom_23_24",
+          "artifact": "soft_mushroom",
+          "station": "NW",
+          "position": [
+            -17,
+            -2
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.6,
+          "config": {}
+        },
+        {
+          "id": "f1_cloth_straps_7_25",
+          "artifact": "cloth_straps",
+          "station": "SW",
+          "position": [
+            -14,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hanging": "arch",
+            "palette": "mint",
+            "walkway": "true",
+            "strap_count": "10",
+            "strap_width": "0.32",
+            "strap_height": "3.0",
+            "strap_overlap": "0.04"
+          }
+        },
+        {
+          "id": "f1_pick_up_cube_2_33",
+          "artifact": "pick_up_cube",
+          "station": "SW",
+          "position": [
+            -17,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_pick_up_cube_2_35",
+          "artifact": "pick_up_cube",
+          "station": "SE",
+          "position": [
+            17,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_cloth_straps_7_39",
+          "artifact": "cloth_straps",
+          "station": "SE",
+          "position": [
+            14,
+            7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "strap_height": "3.0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Obsticals",
+      "title": "SoftBodies_Obsticals",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f2_soft_workshop_console_11_5",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "breathing"
+          }
+        },
+        {
+          "id": "f2_pick_up_cube_5_6",
+          "artifact": "pick_up_cube",
+          "station": "SW",
+          "position": [
+            -17,
+            10
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_grab_long_stick_11_6",
+          "artifact": "grab_long_stick",
+          "station": "SE",
+          "position": [
+            17,
+            10
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f2_softbody_gallery_part2_17_8",
+          "artifact": "softbody_gallery_part2",
+          "station": "NE",
+          "position": [
+            0,
+            -7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true",
+            "gallery_part": "1",
+            "respawn": "false"
+          }
+        },
+        {
+          "id": "f2_breathing_room_8_12",
+          "artifact": "breathing_room",
+          "station": "SW",
+          "position": [
+            -14,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true",
+            "substance": "flesh"
+          }
+        },
+        {
+          "id": "f2_flagdancer_8_25",
+          "artifact": "flagdancer",
+          "station": "SE",
+          "position": [
+            15,
+            5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Obsticals_Part2",
+      "title": "SoftBodies_Obsticals_Part2",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f3_soft_workshop_console_11_5",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "contact"
+          }
+        },
+        {
+          "id": "f3_pick_up_cube_5_6",
+          "artifact": "pick_up_cube",
+          "station": "SW",
+          "position": [
+            -17,
+            10
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_grab_long_stick_7_6",
+          "artifact": "grab_long_stick",
+          "station": "SW",
+          "position": [
+            -17,
+            5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_grab_long_stick_20_6",
+          "artifact": "grab_long_stick",
+          "station": "SE",
+          "position": [
+            17,
+            5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_softbody_gallery_part2_9_10",
+          "artifact": "softbody_gallery_part2",
+          "station": "NE",
+          "position": [
+            0,
+            -4
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true",
+            "respawn": "false"
+          }
+        },
+        {
+          "id": "f3_pick_up_cube_6_31",
+          "artifact": "pick_up_cube",
+          "station": "NW",
+          "position": [
+            -17,
+            -8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f3_pick_up_cube_8_31",
+          "artifact": "pick_up_cube",
+          "station": "NE",
+          "position": [
+            17,
+            -8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Playground_of_Joy",
+      "title": "SoftBodies_Playground_of_Joy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f4_soft_workshop_console_11_5",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "sampling"
+          }
+        },
+        {
+          "id": "f4_rounded_softbody_test_8_10",
+          "artifact": "rounded_softbody_test",
+          "station": "SE",
+          "position": [
+            0,
+            3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "true"
+          }
+        },
+        {
+          "id": "f4_frozen_glass_vessel_20_13",
+          "artifact": "frozen_glass_vessel",
+          "station": "SW",
+          "position": [
+            -17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_soft_capture_times_15_18",
+          "artifact": "soft_capture_times",
+          "station": "NW",
+          "position": [
+            -15,
+            -7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_branching_growth_algorithm_8_23",
+          "artifact": "branching_growth_algorithm",
+          "station": "SE",
+          "position": [
+            17,
+            8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 0.5,
+          "config": {}
+        },
+        {
+          "id": "f4_entropy_morphogenesis_21_23",
+          "artifact": "entropy_morphogenesis",
+          "station": "NE",
+          "position": [
+            14,
+            -5
+          ],
+          "facing": 180,
+          "height": 3,
+          "scale": 0.5,
+          "config": {}
+        },
+        {
+          "id": "f4_gridagent_4_26",
+          "artifact": "gridagent",
+          "station": "SW",
+          "position": [
+            -18,
+            0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_soft_capture_gravity_7_27",
+          "artifact": "soft_capture_gravity",
+          "station": "NW",
+          "position": [
+            -6,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_soft_capture_skin_22_32",
+          "artifact": "soft_capture_skin",
+          "station": "NE",
+          "position": [
+            4,
+            -10
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f4_soft_sampled_gallery_21_41",
+          "artifact": "soft_sampled_gallery",
+          "station": "NE",
+          "position": [
+            15,
+            -11
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "title": "SoftBodies_Affect_Theory_Visualization",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f5_soft_workshop_console_15_11",
+          "artifact": "soft_workshop_console",
+          "station": "SE",
+          "position": [
+            0,
+            12
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "chapter": "affect"
+          }
+        },
+        {
+          "id": "f5_radiolaria_15_21",
+          "artifact": "radiolaria",
+          "station": "NE",
+          "position": [
+            0,
+            -3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

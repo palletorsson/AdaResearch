@@ -33,6 +33,21 @@
       }
     },
     {
+      "id": "logic",
+      "label": "Logic",
+      "cue": "Contact · condition · consequence",
+      "parent": "transformation",
+      "relation": "Read conditions in the movement of familiar bodies.",
+      "x": 600,
+      "y": -200,
+      "build": "Reuse a physical gate, then arrange and keep a hand-built construction.",
+      "association": {
+        "title": "A material rule",
+        "description": "Use supported paths and blockers without confusing expected logic with observed motion.",
+        "state": "implemented"
+      }
+    },
+    {
       "id": "array_tutorial",
       "label": "Arrays",
       "cue": "Address · copy · ownership",

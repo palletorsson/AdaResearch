@@ -78,12 +78,14 @@ func _create_binary_table() -> void:
 	table.name = "BinaryTableDisplay"
 
 	# Position table above the row
-	table.position = Vector3(1.5, 2.0, -1.0)
+	var count: int = array_data[0].size()
+	var last: Node3D = _cube_refs[count - 1]
+	table.position = Vector3(last.position.x * 0.5, 2.0, -1.0)
 	table.rotation_degrees = Vector3(0, 0, 0)
 
 	# Configure table (1 row, 4 columns) - BIGGER for visibility
 	table.rows = 1
-	table.cols = 4
+	table.cols = count
 	table.title = "array[i]"
 	table.cell_size = 0.22  # Increased from 0.12
 	table.font_size = 56    # Increased from 32
@@ -102,7 +104,7 @@ func _on_cube_removed(index: int) -> void:
 		array_data[0][index] = 0
 
 	# Update binary table display
-	if _binary_table and _binary_table.has_method("set_cell"):
+	if is_instance_valid(_binary_table) and _binary_table.has_method("set_cell"):
 		_binary_table.set_cell(0, index, 0)
 
 	# Remove from tracking
@@ -167,3 +169,5 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	if show_binary_table:
 		_create_binary_table()
+		if str(config.get("table_mount", "")) == "ceiling":
+			preload("res://commons/void/ceiling_display_mount.gd").attach(_binary_table)

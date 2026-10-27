@@ -1,0 +1,218 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "title": "Vectors_Act5_ForceAsPlace",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "f1_force_hall_13_0_0",
+          "artifact": "force_hall_13",
+          "position": [
+            -4,
+            14
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_free_vector_2_2",
+          "artifact": "free_vector",
+          "position": [
+            -16,
+            11
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.7,
+          "config": {}
+        },
+        {
+          "id": "f1_force_field_11_4",
+          "artifact": "force_field",
+          "position": [
+            -17,
+            -1
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "f1_force_cube_9_5",
+          "artifact": "force_cube",
+          "position": [
+            -14,
+            5.5
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "force_as_place"
+          }
+        },
+        {
+          "id": "f1_vector_machine_4_6",
+          "artifact": "vector_machine",
+          "position": [
+            -16,
+            8
+          ],
+          "station": "SW",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "force_as_place"
+          }
+        },
+        {
+          "id": "f1_force_cube_8_6",
+          "artifact": "force_cube",
+          "position": [
+            -16,
+            5.5
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "force_as_place"
+          }
+        },
+        {
+          "id": "f1_force_cube_10_6",
+          "artifact": "force_cube",
+          "position": [
+            -18,
+            5.5
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "force_as_place"
+          }
+        },
+        {
+          "id": "f1_force_field_zone_8_12",
+          "artifact": "force_field_zone",
+          "position": [
+            -10,
+            0
+          ],
+          "station": "SW",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lesson": "force_as_place"
+          }
+        },
+        {
+          "id": "f1_invisible_hill_12_18",
+          "artifact": "invisible_hill",
+          "position": [
+            -16,
+            -9
+          ],
+          "station": "NW",
+          "facing": 180,
+          "height": 0,
+          "scale": 0.68,
+          "config": {}
+        },
+        {
+          "id": "f1_endless_racer_11_20",
+          "artifact": "endless_racer",
+          "position": [
+            16,
+            9
+          ],
+          "station": "SE",
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_capability_lab_8_37",
+          "artifact": "force_capability_lab",
+          "position": [
+            0,
+            0
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        },
+        {
+          "id": "f1_force_play_flight_8_68",
+          "artifact": "force_play_flight",
+          "position": [
+            28,
+            0
+          ],
+          "station": "SE",
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pin": "1",
+            "plinth": "0"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Open structure",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 ## encyclopedia's lab editor to use as real 3D meshes (instead of
 ## hashed colour boxes + flat sprite billboards).
 ##
-## Output lands in user://artifact_gltf/ — Godot's sandbox. A shell
+## Output lands in the external generated-model store. A shell
 ## post-step copies the .glb files + manifest.json into
 ## ada_encyclopedia/public/artifact-gltf/. The AdaResearch repo gains
 ## nothing but this script.
@@ -14,7 +14,7 @@
 ## Run:
 ##   godot --path . --xr-mode off --no-window \
 ##     --script res://commons/testing/export_artifacts_gltf.gd -- \
-##     --registry=lab [--max=N] [--out=user://artifact_gltf]
+##     --registry=lab [--max=N] [--out=D:/AdaGenerated/AdaResearch_46/exports/artifact-gltf]
 ##
 ## Output:
 ##   <out>/<lookup_name>.glb       per successful export
@@ -22,12 +22,13 @@
 ##   <out>/_export_log.txt         per-artifact log (success/failure)
 
 extends SceneTree
+const ModelStorage = preload("res://tools/generated_storage.gd")
 
 const SETTLE_FRAMES: int = 60       # ~1 second at 60 fps
 const REGISTRY_DIR: String = "res://commons/artifacts/registry/"
 
 var _registry_name: String = "lab"
-var _output_dir: String = "user://artifact_gltf"
+var _output_dir: String = ModelStorage.export_directory("artifact-gltf")
 var _max_count: int = -1            # -1 = export every artifact in registry
 var _skip_set: Dictionary = {}      # lookup_names to bypass entirely
 var _only_set: Dictionary = {}      # if non-empty, export ONLY these lookup_names
@@ -47,7 +48,7 @@ func _initialize() -> void:
 			for name in list.split(","):
 				_skip_set[str(name).strip_edges()] = true
 		elif arg.begins_with("--only="):
-			# Export ONLY these lookup_names — fast, targeted re-exports
+			# Export ONLY these lookup_names â€” fast, targeted re-exports
 			# of just the new/changed artifact(s) instead of the whole
 			# registry. Comma-separated.
 			var only_list := arg.split("=", true, 1)[1]
@@ -55,6 +56,7 @@ func _initialize() -> void:
 				var trimmed := str(name).strip_edges()
 				if trimmed != "":
 					_only_set[trimmed] = true
+	_output_dir=ModelStorage.output_directory(_output_dir)
 	_run.call_deferred()
 
 
@@ -112,14 +114,14 @@ func _run() -> void:
 		var prefix := "[%3d/%3d]" % [i + 1, lookup_names.size()]
 
 		if _skip_set.has(lookup):
-			var line_s := "%s SKIP %s — in --skip= list" % [prefix, lookup]
+			var line_s := "%s SKIP %s â€” in --skip= list" % [prefix, lookup]
 			print(line_s)
 			log_lines.append(line_s)
 			continue
 
 		if scene_path.is_empty() or not ResourceLoader.exists(scene_path):
 			failed += 1
-			var line := "%s SKIP %s — no scene at '%s'" % [prefix, lookup, scene_path]
+			var line := "%s SKIP %s â€” no scene at '%s'" % [prefix, lookup, scene_path]
 			print(line)
 			log_lines.append(line)
 			continue
@@ -127,7 +129,7 @@ func _run() -> void:
 		var packed: PackedScene = load(scene_path)
 		if packed == null:
 			failed += 1
-			var line2 := "%s FAIL %s — load failed for '%s'" % [prefix, lookup, scene_path]
+			var line2 := "%s FAIL %s â€” load failed for '%s'" % [prefix, lookup, scene_path]
 			print(line2)
 			log_lines.append(line2)
 			continue
@@ -135,14 +137,14 @@ func _run() -> void:
 		var instance: Node = packed.instantiate()
 		if instance == null:
 			failed += 1
-			var line3 := "%s FAIL %s — instantiate returned null" % [prefix, lookup]
+			var line3 := "%s FAIL %s â€” instantiate returned null" % [prefix, lookup]
 			print(line3)
 			log_lines.append(line3)
 			continue
 		if not (instance is Node3D):
 			instance.queue_free()
 			failed += 1
-			var line4 := "%s SKIP %s — not Node3D (%s)" % [prefix, lookup, instance.get_class()]
+			var line4 := "%s SKIP %s â€” not Node3D (%s)" % [prefix, lookup, instance.get_class()]
 			print(line4)
 			log_lines.append(line4)
 			continue
@@ -153,7 +155,7 @@ func _run() -> void:
 		get_root().add_child(temp_root)
 		temp_root.add_child(instance)
 
-		# Settle — let _ready and procedural mesh generation finish
+		# Settle â€” let _ready and procedural mesh generation finish
 		for j in range(SETTLE_FRAMES):
 			await get_root().get_tree().process_frame
 
@@ -165,7 +167,7 @@ func _run() -> void:
 		var size := 0
 		if err == OK:
 			var output_path := "%s/%s.glb" % [_output_dir, lookup]
-			err = doc.write_to_filesystem(state, output_path)
+			err = ModelStorage.write_gltf(doc,state,output_path)
 			if err == OK:
 				var f := FileAccess.open(output_path, FileAccess.READ)
 				if f:
@@ -186,7 +188,7 @@ func _run() -> void:
 			log_lines.append(line5)
 		else:
 			failed += 1
-			var line6 := "%s FAIL %s — gltf export err=%d" % [prefix, lookup, err]
+			var line6 := "%s FAIL %s â€” gltf export err=%d" % [prefix, lookup, err]
 			print(line6)
 			log_lines.append(line6)
 
@@ -217,7 +219,7 @@ func _run() -> void:
 ## Merge current-run entries with any existing manifest.json in the
 ## output directory, then write. Called incrementally during the run
 ## (every 10 artifacts) so a crash mid-batch still leaves the prior
-## successes' entries in the index. Dedupe is by lookup_name — the
+## successes' entries in the index. Dedupe is by lookup_name â€” the
 ## current run's entry wins.
 func _flush_manifest(manifest_entries: Array) -> void:
 	if manifest_entries.is_empty():
