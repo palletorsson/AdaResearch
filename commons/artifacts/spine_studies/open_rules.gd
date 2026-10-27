@@ -43,12 +43,100 @@ func translated_edges(points: Array[Vector3],at: Vector3,unit: float=1.0) -> Arr
 	for p in points:moved.append(at+p*unit)
 	return Structure.segments(moved)
 
+## Mode 4, the console's 122: LeWitt's Incomplete Open Cubes (1974) as a rule run to exhaustion.
+## Every subset of the 12 edges that stays connected and three-dimensional, once per rotation of
+## the cube (24), enumerated here, not listed: the count is the check. ada_encyclopedia's
+## colour-study.ts finds the same list; tools/address_rules_crosscheck.py --lewitt compares them.
+const CUBE := [Vector3i(-1,-1,-1),Vector3i(1,-1,-1),Vector3i(1,-1,1),Vector3i(-1,-1,1),Vector3i(-1,1,-1),Vector3i(1,1,-1),Vector3i(1,1,1),Vector3i(-1,1,1)]
+
+static func incomplete_open_cubes() -> Array:
+	var perms: Array = []   # the 24 rotations, each as a permutation of the 12 edges
+	for ax in [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]]:
+		var even: bool = ax in [[0,1,2],[1,2,0],[2,0,1]]
+		for sg in 8:
+			var sgn := [(-1 if sg & 1 else 1), (-1 if sg & 2 else 1), (-1 if sg & 4 else 1)]
+			if (1 if even else -1) * sgn[0] * sgn[1] * sgn[2] < 0: continue
+			var corner_map: Array = []
+			for c in CUBE:
+				var q := Vector3i(c[ax[0]] * sgn[0], c[ax[1]] * sgn[1], c[ax[2]] * sgn[2])
+				corner_map.append(CUBE.find(q))
+			var perm: Array = []
+			for e in Structure.EDGES:
+				var a: int = corner_map[e[0]]
+				var b: int = corner_map[e[1]]
+				for j in Structure.EDGES.size():
+					var f: Array = Structure.EDGES[j]
+					if (f[0] == a and f[1] == b) or (f[0] == b and f[1] == a):
+						perm.append(j)
+			perms.append(perm)
+	var seen := {}
+	var out: Array = []
+	for mask in range(1, 4095):
+		var axes := {}
+		var used: Array = []
+		for i in 12:
+			if mask & (1 << i):
+				var e: Array = Structure.EDGES[i]
+				used.append(e)
+				var d: Vector3i = CUBE[e[1]] - CUBE[e[0]]
+				axes[0 if d.x != 0 else (1 if d.y != 0 else 2)] = true
+		if axes.size() < 3: continue   # flat: a connected set on two axes lies in one face
+		var reach := {used[0][0]: true}
+		var nodes := {}
+		for e in used:
+			nodes[e[0]] = true
+			nodes[e[1]] = true
+		var grew := true
+		while grew:
+			grew = false
+			for e in used:
+				if reach.has(e[0]) != reach.has(e[1]):
+					reach[e[0]] = true
+					reach[e[1]] = true
+					grew = true
+		if reach.size() != nodes.size(): continue   # not connected
+		var canon := 4096
+		for perm in perms:
+			var m := 0
+			for i in 12:
+				if mask & (1 << i): m |= 1 << int(perm[i])
+			canon = mini(canon, m)
+		if not seen.has(canon):
+			seen[canon] = true
+			out.append(canon)
+	return out
+
 func rebuild() -> void:
 	for child in get_children():
 		remove_child(child);child.queue_free()
 	records.clear()
 	var lines: Array=[]
-	if mode==0 or mode==3:
+	if mode==4:
+		var by_edges := {}
+		for m in incomplete_open_cubes():
+			var k := 0
+			for i in 12: k += (m >> i) & 1
+			if not by_edges.has(k): by_edges[k] = []
+			by_edges[k].append(m)
+		var line := 0.0
+		var keys: Array = by_edges.keys()
+		keys.sort()
+		for k in keys:
+			var list: Array = by_edges[k]
+			list.sort()
+			for i in list.size():
+				var at := Vector3((i % 16 - 7.5) * .55, .18, (line + floor(i / 16.0)) * .55 - 3.0)
+				var p := Structure.corners()
+				for j in Structure.EDGES.size():
+					if list[i] & (1 << j):
+						var e: Array = Structure.EDGES[j]
+						lines.append([at + p[e[0]] * .42, at + p[e[1]] * .42])
+				records.append({"mask": list[i], "edges": k, "origin": at})
+			plaque(Vector3(-4.75, .18, line * .55 - 3.0), "%d" % k)
+			line += ceil(list.size() / 16.0) + .3
+		plinth(Vector3(0, .08, (line - .3) * .55 * .5 - 3.2), Vector3(9.4, .16, (line - .3) * .55 + .5))
+		plaque(Vector3(0, .18, -3.6), "%d INCOMPLETE OPEN CUBES" % records.size())
+	elif mode==0 or mode==3:
 		var count := 5 if mode==0 else 7
 		for i in count:
 			var at:=Vector3((i-(count-1)*.5)*1.65,.18,0)
@@ -83,7 +171,7 @@ func rebuild() -> void:
 							unique[a+"|"+b if a<b else b+"|"+a]=segment
 			plaque(sites[version]+Vector3(0,0,1.17),["x + 1","5 - x","z + 1","5 - z","5 everywhere"][version])
 		lines=unique.values()
-	bars=Structure.display(lines,.028 if mode==2 else .065)
+	bars=Structure.display(lines,.028 if mode==2 or mode==4 else .065)
 	add_child(bars)
 	total_edges=lines.size()
 	set_reveal(visible_fraction)

@@ -139,7 +139,7 @@ func _build_controls() -> void:
 		"wall": names = ["SPACING","DEPTH","OMIT / RESTORE","COLOUR"]
 		"signal": names = ["ORDERED","ROWS","CELLS","NEXT SEED","SHIFT ROW","4 × 4 PATCH"]
 		"cut": names = ["BEFORE / CUT","SHIFT CUT"]
-		"open": names = ["FIVE FORMS","ARRAY","STACKS","RULE"]
+		"open": names = ["FIVE FORMS","ARRAY","STACKS","RULE","122"]   # 122: LeWitt's incomplete open cubes, enumerated
 		"hinge": names = ["JOINT","TURN −","TURN +","KEEP / RETURN","RELEASE","TRACE"]
 		"pink": names = ["TOP","LEFT","RIGHT","FRONT","BACK","LIGHT / MATERIAL"]
 		"void": names = ["BLACK / CHALK"]
@@ -214,7 +214,8 @@ func activate(index: int) -> void:
 		"open":
 			if reset: specimen.mode = 1; specimen.alternative = false
 			elif index < 3: specimen.mode = index
-			else: specimen.alternative = not specimen.alternative
+			elif index == 3: specimen.alternative = not specimen.alternative
+			else: specimen.mode = 4
 			specimen.call("rebuild")
 		"hinge":
 			if reset:

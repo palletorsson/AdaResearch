@@ -9,9 +9,16 @@ const STEP := 0.56
 const EDGE := 0.44
 const CENTRE := Vector3(0,1.85,0)
 const NEST := [1.0,0.76,0.52,0.28]
+const Rules := preload("res://commons/artifacts/regularity/address_rules.gd")
 var amount := Vector3(0.22,0.32,0.18)
 var target_amount := amount
 var depth_layers := 4
+## Who decides how far each site departs: "chance" (every site the full amount, the study as it
+## always was) or an address rule's name (address_rules.gd): the site's weight is
+## ((rule(x, z) at 4 states) + y) mod 4 / 3, so disorder can grow in rings, diagonals, a spiral.
+## The direction still comes from each site's own draws. A map option, `#decide:<word>`; the
+## spatial lab's Molnar study is the same formula (ada_encyclopedia colour-study.ts).
+var decide := "chance"
 var cells: Array[Dictionary] = []
 var sliders: Array[Node3D] = []
 var buttons: Array[Node3D] = []
@@ -23,6 +30,8 @@ var count_label: Label3D
 var _built := false
 
 func _ready() -> void:
+	var word := str(get_meta("config_decide", "chance")).strip_edges().to_lower()
+	decide = word if word == "chance" or Rules.NAMES.has(word) else "chance"
 	_build_data()
 	_build_display()
 	_build_controls()
@@ -45,9 +54,22 @@ func _build_data() -> void:
 func frame_pose(index: int, shell: int) -> Transform3D:
 	var cell:Dictionary=cells[index]
 	var decision:Dictionary=cell.departures[shell]
-	var size:float=EDGE*NEST[shell]*(1.0+amount.z*decision.scale_delta)
-	var turn:=Basis.from_euler(decision.angles*amount.y)
-	return Transform3D(turn.scaled(Vector3.ONE*size),cell.home+decision.offset*amount.x)
+	var a:=amount*_weight(cell.address)
+	var size:float=EDGE*NEST[shell]*(1.0+a.z*decision.scale_delta)
+	var turn:=Basis.from_euler(decision.angles*a.y)
+	return Transform3D(turn.scaled(Vector3.ONE*size),cell.home+decision.offset*a.x)
+
+## How much of the departure a site takes: 1 under chance (exactly, so the poses are as they were).
+func _weight(address: Vector3i) -> float:
+	if decide == "chance":
+		return 1.0
+	return float((Rules.state(decide, address.x, address.z, 4, COUNT) + address.y) % 4) / 3.0
+
+func apply_grid_config(config: Dictionary) -> void:
+	if not config.has("decide"): return
+	var word := str(config["decide"]).strip_edges().to_lower()
+	decide = word if word == "chance" or Rules.NAMES.has(word) else "chance"
+	if _built: _refresh()
 
 func set_operation(axis: int, value: float) -> void:
 	if axis<0 or axis>2:return
