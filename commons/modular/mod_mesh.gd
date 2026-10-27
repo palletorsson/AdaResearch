@@ -1,11 +1,50 @@
 class_name ModularMesh
 extends RefCounted
-## Module: a mesh. {"p":"mesh","shape":sphere|box|plane|cylinder|cone|tetra|pyramid|wedge|torus|triangle|dodeca,
+## Module: a mesh. {"p":"mesh","shape":sphere|box|plane|cylinder|cone|tetra|pyramid|wedge|torus|triangle|dodeca|dome|capsule,
 ## "size":[…],"color":"hex","alpha":1,"at":[…],"rot":[…],"shader":"ink"} — sizes in metres.
 ## "shader":"ink" wears shaders/ink_stroke.gdshader: a drawn line (tapered ends, darker
 ## silhouette, a faint grain) instead of a lit tube — the modular line's stroke.
+## "lit":false is a colour field (unshaded: the colour as written). "blend":"mul" is filter
+## glass: it multiplies what is behind it, unshaded, both faces, so a closed shell is crossed
+## twice (colour-study.ts writes sqrt(T) on a box). modular-terms.ts reads the same keys.
 
 const INK_SHADER := "res://commons/modular/shaders/ink_stroke.gdshader"
+
+## The glass of "blend":"mul". Godot's Mobile renderer keeps its 3D buffer at half luminance
+## and halves a multiply operand with it (measured on the Albers glass, 0.498 per layer), so
+## the operand is multiplied back up by a gain: the rule and the override setting of
+## albers_wall_gallery.gd _glass_gain_source (one setting for both, set it once per headset).
+## Without a viewport here, use_hdr_2d cannot be read; the Void and the colour bench run without it.
+const MUL_SHADER := """shader_type spatial;
+render_mode unshaded, blend_mul, cull_disabled, depth_draw_opaque, shadows_disabled, fog_disabled;
+uniform vec3 tint : source_color = vec3(1.0);
+uniform float gain = 1.0;
+void fragment() {
+	ALBEDO = tint * gain;
+	ALPHA = 1.0;
+}
+"""
+const MUL_GAIN_SETTING := "ada/albers_glass/mul_gain"
+static var _mul_shader: Shader = null
+
+
+static func mul_gain() -> float:
+	var forced: Variant = ProjectSettings.get_setting(MUL_GAIN_SETTING, 0.0)
+	if (forced is float or forced is int) and float(forced) > 0.0:
+		return float(forced)
+	return 2.0 if RenderingServer.get_current_rendering_method() == "mobile" else 1.0
+
+
+static func _mul_material(col: Color) -> ShaderMaterial:
+	if _mul_shader == null:
+		_mul_shader = Shader.new()
+		_mul_shader.code = MUL_SHADER
+	var m := ShaderMaterial.new()
+	m.shader = _mul_shader
+	m.render_priority = -1
+	m.set_shader_parameter("tint", Color(col.r, col.g, col.b))
+	m.set_shader_parameter("gain", mul_gain())
+	return m
 
 
 static func make(spec: Dictionary) -> MeshInstance3D:
@@ -50,6 +89,19 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 			m.inner_radius = s0 - s1
 			m.outer_radius = s0
 			mi.mesh = m
+		"dome":   # a hemisphere of radius s0 and height s1, its flat face at y = 0
+			var m := SphereMesh.new()
+			m.radius = s0
+			m.height = s1
+			m.is_hemisphere = true
+			m.radial_segments = 20
+			m.rings = 6
+			mi.mesh = m
+		"capsule":   # radius s0, s1 tall overall, centred
+			var m := CapsuleMesh.new()
+			m.radius = s0
+			m.height = maxf(s1, 2.0 * s0)
+			mi.mesh = m
 		"wedge":
 			var m := PrismMesh.new()
 			m.size = Vector3(s0, s1, s2)
@@ -82,10 +134,15 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 		ink.set_shader_parameter("length_m", s1)
 		mi.material_override = ink
 		mi.set_meta("construction_mark", true)   # a surface never paints over the stroke
+	elif str(spec.get("blend", "")) == "mul":
+		mi.material_override = _mul_material(col)
+		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	else:
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = col
 		mat.roughness = 0.9
+		if not bool(spec.get("lit", true)):
+			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		if alpha < 0.999:
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		if shape == "triangle" or shape == "plane" or shape == "poly":

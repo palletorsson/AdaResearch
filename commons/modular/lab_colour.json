@@ -1,0 +1,361 @@
+{
+  "version": 1,
+  "title": "Spatial lab / colour family",
+  "_doc": "Colour recipes for /spatial-lab (Palle 2026-10-27: 'we should use a system like this for fast color test', 'one lab'). A recipe is an existing artifact scene plus parameters. Each parameter is either an exported property (`export`) or a config word stamped as a config_<key> meta before the artifact enters the tree (`config`), exactly as a map token or a Void record would carry it. The truth is a native Godot picture on the Mobile renderer (the Quest's), rendered by tools/colour_bench.py + commons/testing/colour_bench.gd; the browser shows that picture, not a three.js imitation. An `oracle` names how the receipt checks pixels against expected colours; a recipe without one is pictures only, and the receipt says so. Recipes are listed in the order of the Void's colour floors (29-36); every enum parameter is derived from the artifact's own @export_enum (values and default), never transcribed.",
+  "renderer": "mobile",
+  "recipes": [
+    {
+      "id": "chroma_stack",
+      "label": "F29 · Chroma stack / rule × alphabet × pose",
+      "scene": "res://commons/artifacts/chroma_stack/chroma_stack.tscn",
+      "watch": [
+        "commons/artifacts/chroma_stack/chroma_stack.gd"
+      ],
+      "parameters": {
+        "rule": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "one",
+            "by_shape",
+            "by_height",
+            "by_neighbour",
+            "composed"
+          ],
+          "default": "one",
+          "label": "Rule (what colours an element)"
+        },
+        "stack": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "bauhaus",
+            "turned",
+            "cut",
+            "beads",
+            "discs",
+            "offset",
+            "festival"
+          ],
+          "default": "bauhaus",
+          "label": "Alphabet (which primitives)"
+        },
+        "pose": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "aligned",
+            "twist",
+            "taper",
+            "combined"
+          ],
+          "default": "aligned",
+          "label": "Pose"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": null,
+      "note": "First colour hall, Color_Context_Placed (Void floor 29). The shapes stay; the RULE that colours them changes. Pictures only."
+    },
+    {
+      "id": "chroma_translation",
+      "label": "F29 · Chroma translation / move × what the move does to colour",
+      "scene": "res://commons/artifacts/chroma_translation/chroma_translation.tscn",
+      "watch": [
+        "commons/artifacts/chroma_translation/chroma_translation.gd"
+      ],
+      "parameters": {
+        "along": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "x",
+            "y",
+            "z",
+            "diagonal"
+          ],
+          "default": "x",
+          "label": "Along"
+        },
+        "colour_by": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "kept",
+            "distance",
+            "step"
+          ],
+          "default": "kept",
+          "label": "Colour by"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": null,
+      "note": "First colour hall's second family: the same stack moved three times. colour_by=kept is the control (translation does nothing to colour). Pictures only."
+    },
+    {
+      "id": "color_dna_stack",
+      "label": "F29 · Colour DNA stack / study",
+      "scene": "res://commons/artifacts/color_dna_stack/color_dna_stack.tscn",
+      "watch": [
+        "commons/artifacts/color_dna_stack/color_dna_stack.gd"
+      ],
+      "parameters": {
+        "study": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "mondrian",
+            "albers",
+            "memphis",
+            "bauhaus_tall",
+            "blue",
+            "kras_rainbow",
+            "rainbow_crown",
+            "memphis_beacon"
+          ],
+          "default": "mondrian",
+          "label": "Study"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": null,
+      "note": "The eight gallery studies standing on Void floor 29. Pictures only."
+    },
+    {
+      "id": "chroma_drum",
+      "label": "F31 (proposed) · Chroma drum / face × grain",
+      "scene": "res://commons/artifacts/chroma_drum/chroma_drum.tscn",
+      "watch": [
+        "commons/artifacts/chroma_drum/chroma_drum.gd"
+      ],
+      "parameters": {
+        "face": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "shingle",
+            "fin"
+          ],
+          "default": "shingle",
+          "label": "Face"
+        },
+        "grain": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "coarse",
+            "medium",
+            "fine"
+          ],
+          "default": "coarse",
+          "label": "Grain"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": null,
+      "note": "Colour as a property of standpoint: proposed for Color_Nails (floor 31), not placed yet. Walk the oblique and eye views. Pictures only."
+    },
+    {
+      "id": "chroma_life",
+      "label": "F34 (proposed) · Chroma life / run × paint",
+      "scene": "res://commons/artifacts/chroma_life/chroma_life.tscn",
+      "watch": [
+        "commons/artifacts/chroma_life/chroma_life.gd"
+      ],
+      "parameters": {
+        "run": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "seed",
+            "crowd",
+            "field"
+          ],
+          "default": "seed",
+          "label": "Run (generations)"
+        },
+        "paint": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "one",
+            "age",
+            "birth"
+          ],
+          "default": "one",
+          "label": "Paint (what colour records)"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": null,
+      "note": "B3/S23 with colour as age or birth: proposed for Color_Grid_Pallet (floor 34), not placed yet. Pictures only."
+    },
+    {
+      "id": "albers_glass",
+      "label": "F35 · Albers / paint, relief or nested glass cubes",
+      "scene": "res://algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn",
+      "watch": [
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd"
+      ],
+      "parameters": {
+        "medium": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "paint",
+            "relief",
+            "cubes"
+          ],
+          "default": "cubes",
+          "label": "Medium"
+        },
+        "palette_seed": {
+          "kind": "export",
+          "type": "int",
+          "min": 0,
+          "max": 9999,
+          "default": 1337,
+          "label": "Palette seed"
+        },
+        "squares_per_canvas": {
+          "kind": "export",
+          "type": "int",
+          "min": 2,
+          "max": 7,
+          "default": 5,
+          "label": "Squares per homage"
+        },
+        "inset_ratio": {
+          "kind": "export",
+          "type": "float",
+          "min": 0.55,
+          "max": 0.92,
+          "step": 0.01,
+          "default": 0.78,
+          "label": "Inset ratio"
+        },
+        "vertical_bias": {
+          "kind": "export",
+          "type": "float",
+          "min": -0.15,
+          "max": 0.05,
+          "step": 0.005,
+          "default": -0.06,
+          "label": "Vertical bias (gravity)"
+        },
+        "palette_saturation_max": {
+          "kind": "export",
+          "type": "float",
+          "min": 0.2,
+          "max": 1.0,
+          "step": 0.01,
+          "default": 0.9,
+          "label": "Max saturation"
+        },
+        "palette_value_min": {
+          "kind": "export",
+          "type": "float",
+          "min": 0.3,
+          "max": 0.98,
+          "step": 0.01,
+          "default": 0.6,
+          "label": "Min value"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": "albers_layers"
+    },
+    {
+      "id": "chroma_filter",
+      "label": "F36 (proposed) · Chroma filter / multiply panes",
+      "scene": "res://commons/artifacts/chroma_filter/chroma_filter.tscn",
+      "watch": [
+        "commons/artifacts/chroma_filter/chroma_filter.gd"
+      ],
+      "parameters": {
+        "mix": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "filter",
+            "veil",
+            "solid"
+          ],
+          "default": "filter",
+          "label": "Mix"
+        },
+        "triad": {
+          "kind": "config",
+          "type": "enum",
+          "values": [
+            "paint",
+            "light",
+            "bauhaus"
+          ],
+          "default": "paint",
+          "label": "Triad"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye"
+      ],
+      "oracle": null,
+      "note": "Pictures only. Known on the Quest: this artifact uses StandardMaterial3D BLEND_MODE_MUL, which the Mobile renderer applies at about half strength per layer (measured on the Albers glass). The picture here is what the headset shows."
+    },
+    {
+      "id": "term",
+      "label": "A colour study's expression (the live sketch's native check)",
+      "scene": "res://commons/modular/composite.tscn",
+      "watch": [
+        "commons/modular/composite.gd",
+        "commons/modular/builder.gd",
+        "commons/modular/mod_mesh.gd"
+      ],
+      "parameters": {
+        "expression": {
+          "kind": "export",
+          "type": "json",
+          "default": "{}",
+          "label": "Modular expression"
+        }
+      },
+      "views": [
+        "front",
+        "oblique",
+        "eye",
+        "plan"
+      ],
+      "oracle": null,
+      "hidden": true,
+      "note": "Built by ada_encyclopedia/src/lib/colour-study.ts; three.js shows the same expression live. Pictures only."
+    }
+  ],
+  "tolerance_255": 3.0
+}
