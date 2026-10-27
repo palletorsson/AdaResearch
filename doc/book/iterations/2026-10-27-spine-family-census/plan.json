@@ -1,0 +1,40 @@
+{
+  "status": "proposed",
+  "purpose": "A shared spatial workshop in which players, Palle, the assistant and Model B conduct ongoing studies while understanding and improving the maps.",
+  "comparison_entry": "/lab-editor?mode=void&floor=16&compare=1&grid=historic",
+  "census_snapshot": {
+    "date": "2026-10-27",
+    "scope": "Current saved main-spine artifact and copy placements, not proof of original-artifact import completeness",
+    "floor_records": 209,
+    "occurrences": 1526,
+    "artifact_types": 998,
+    "work_families": 37,
+    "proposed_reuse": 718,
+    "proposed_custom_adapter": 237,
+    "preserve_authored_content": 43,
+    "additional_source_only_types": 88,
+    "verification": "Static source inspection; runtime parameter response remains to be verified"
+  },
+  "catalogue": {
+    "sources": ["native artifact registry", "Void catalogue", "modular terms", "handmade prefab records"],
+    "identity": "Stable definitions with legacy runtime tokens as aliases and explicit lineage",
+    "layers": ["definition", "immutable parameter variant", "editable map placement", "ongoing study"],
+    "consumers": ["knowledge tree", "Spine Film and spatial timeline", "DNA galleries", "modular-program", "live editor", "Model B"],
+    "control_contract": ["type", "units", "default", "legal range or enum", "native binding", "application lifecycle", "coupled constraints", "preview fidelity", "source provenance", "validation evidence"]
+  },
+  "study_record": ["question", "source map and revision", "variant", "arrangement", "participants", "interventions", "observations and uncertainty", "evidence", "proposed map improvement", "review and recoverable prior arrangement"],
+  "study_loop": ["pose a question", "save a variant", "place in context", "players or Model B intervene", "observe and compare", "continue the study or propose a map improvement"],
+  "pilot_definitions": ["Transformation arrangement", "science_screen", "matter_spring_and", "film_transformation_order"],
+  "delivery": [
+    "Join existing identities and provenance without replacing the native source registries",
+    "Use the four pilots to prove one shared inspector, saving and editable placement",
+    "Expand by actual shared drivers and verified parameter semantics",
+    "Add contextual simulations with explicit seed, collision and reset rules",
+    "Retain authored sources and document unresolved exceptions"
+  ],
+  "preserve": ["user layouts", "stable member identities", "intentional removals", "historic map sources", "authored images and meshes", "recorded failures and unexpected outcomes"],
+  "acceptance": "Default reproduces the source; controls change the intended property; native collision and lifecycle remain coherent; variants and member edits save, place and reload; preview claims match the evidence.",
+  "estimate": "Time the four pilots before replacing the provisional estimate with a delivery schedule.",
+  "reproduce_local_report": "python tools/spine_family_census.py",
+  "storage_policy": "Version the authored plan and report generators. Generated HTML, JSON census snapshots and screenshots remain local under the existing review archive policy."
+}
