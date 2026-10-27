@@ -611,6 +611,21 @@
       "qfep_connection": "Deleuze as lookup table: joy transmits at 0.8, sadness at 0.3, and every body carries a boundary_permeability float. The earnest quantification is the exhibit — precisely what affect theory says escapes measure is here assigned a number and simulated anyway."
     },
     "albers_wall_gallery": {
+      "dna": {
+       "axes": {
+       "medium": [
+       "paint",
+       "relief",
+       "cubes"
+       ]
+       },
+       "default": "paint",
+       "predicted_degeneracy": {
+        "pair": "medium=relief vs medium=cubes (head-on)",
+        "predicted_focus_pct": 26.7,
+        "arithmetic": "HEAD-ON, orthographic, flat (tools/predict_albers_glass_degeneracy.py over the read-back boxes in ada_run/albers_glass_layers.json, run through artifact_dna_critic's own subject box, crop, grey, 160x160 and hottest-5% mean): relief vs cubes focus 26.73% (frame 3.61%), paint vs relief 54.57%, paint vs cubes 54.54%, so relief vs cubes is the closest pair. WHY IT IS THAT NUMBER. Relief and cubes share the palette, the light table B = 250,250,247 and the filter solve, so inside every nest the squares carry the same achieved colours to within the quantisation (677 vs 673 clamped channels). What differs head-on: (1) the cubes stand at CUBE_SCALE 0.85 of the painted square, outer 0.291 m against 0.342 m, so a 25.5 mm ring per canvas (0.342^2 - 0.291^2 = 0.0323 m2, x98 = 3.17 m2 = 9.0% of the 35.2 m2 plate) shows the table (L ~249) in cubes where relief shows the outer colour A_0 (L ~120-200), and every inner ring moves 15% inward with it; (2) the outer cube's 6 mm edge bars draw a T0^3 outline; (3) seven shelf fronts, 12 mm x 6.36 m at byte 180. One critic pixel over the 7.76 x 4.54 m plate is 48.5 x 28.4 mm, so the ring is 0.53 px wide on the sides and 0.90 px on top and bottom: the hottest 5% (1280 of 25600 px) sits on the horizontal bands, about 0.6-0.9 covered, at 60-130 grey levels. A LOWER BOUND: the canonical camera (yaw 0.62, pitch -0.26, perspective) sees the cubes' side faces, the edge bars from two sides, shelf tops and parallax between neighbours, none of which the flat head-on raster has, while relief there shows only its 3 cm steps; every one of those adds difference. If a sweep measures relief vs cubes BELOW 26.7%, stop and investigate before believing it: a cubes tile built without its config (paint fallback would read ~54% against relief, not less), a nest rendered with one crossing per shell (CULL_BACK), or a Mobile gain of 1 would each change it."
+       }
+      },
       "category": "unknown",
       "complexity": "beginner",
       "description": "White gallery wall with 98 Josef Albers-inspired canvases and spotlights.",
