@@ -26,6 +26,8 @@ After SNAKE comes SUPER TRIANGLE. The diagonal tile from the earlier halls retur
 
 Press HOLD during a turn. The floor keeps that unfinished arrangement. ONE STEP takes it to the next pose. The square joints still mark the old addresses, though your eye can join the triangles into another figure. How large is the thing you are following: one tile, four, the floor? The array supplies places to change; it does not tell us where a figure must end.
 
+RULES offers three more. RINGS / CYCLE and SPIRAL / CYCLE add the beat to a rule that already gives every address a value, so each tile walks through four shades; the rings seem to travel outward though no tile moves. PASCAL / TRAVEL slides Pascal's odd numbers one tile a beat. PATTERN brings back the four you have walked.
+
 ![Six black and white triangle combinations on the same museum floor.](/book-images/figures/Tutorial_Disco/triangle-combinations.png)
 
 *Six moments in the same movement. The triangles turn and gather into larger figures; the floor beneath the foot stays level.*

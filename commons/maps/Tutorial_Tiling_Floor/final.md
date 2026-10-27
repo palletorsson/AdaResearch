@@ -34,6 +34,8 @@ The `%` sign gives the remainder after division. As these non-negative counts in
 
 Now look at ONE EXCEPTION. Initially it repeats the translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. From a distance it might look like a direction, an error, an opening. Come closer. The same square is still here, turned once more than its neighbours. The code supplies a difference without deciding what it should mean to you.
 
+Press RULES. The six fields take other instructions, and their names change with them. In the first, each tile's turn comes from a scramble of its address, so the floor reads as chance: Truchet's floor of 1704. In PASCAL / INVERT, a tile changes colour where Pascal's triangle holds an odd number. Press RULES again and the six relations return.
+
 ![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-images/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
 
 *The six images used by the floor artifact, shown face-on for comparison. The source orientation is the same in all six; EXCEPTION is switched on in the last field. The little square at the top is their source motif.*

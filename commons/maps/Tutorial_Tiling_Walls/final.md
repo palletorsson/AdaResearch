@@ -18,6 +18,8 @@ Now find TRANSLATE and QUARTER TURN. Approach until one square becomes easy to d
 
 The six panels use the same image generator as the previous floor. Each is five metres across and five metres high, with a solid backing. TURN MOTIF rotates the source in all six. EXCEPTION changes one cell in the field that carries that name. Return to the pair you followed on the floor. You can now stand before the figures you walked across.
 
+RULES is on this console too. The six panels take the same other instructions as the floor, chance turns and Pascal's odd numbers among them, and their names change with them. Press it again and the six relations return.
+
 Behind both versions, the program assigns each pixel one of two values:
 
 ```gdscript

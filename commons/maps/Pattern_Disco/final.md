@@ -14,6 +14,8 @@ Nothing has moved. The square keeps its calculated zero or one and receives anot
 
 One palette choice reaches every square carrying the same value. We cannot use this control to leave just one of them pink. The reach of a choice belongs to the way the instrument has been made.
 
+RULES is here as well. Under RINGS / CYCLE the palette's two colours are not enough for four values, so the floor mixes between them: navy, two shades between, pink.
+
 <!-- @standalone_disco -->
 
 Start the floor and walk towards an approaching band. Let it pass underneath you. Its passage does not push your body. Walk with it, then across it. Can an invitation to move be felt without a force being applied?

@@ -52,6 +52,8 @@ The solid cube has lost its faces. Five open forms stand together, made from con
 
 Change RULE. The places remain; the diagonal succession settles into repeated columns. These are our proposed rules after LeWitt's images. Reading a rule from an image means choosing among constructions that might have made it. The ease of producing another arrangement does not settle which one is worth keeping.
 
+Press 122. Every way of taking edges from a cube that leaves it joined and three-dimensional stands on one plinth, each counted once however it is turned, in rows by the number of edges kept. The console counts them rather than reading a list: one hundred and twenty-two, LeWitt's number for his Incomplete Open Cubes (1974).
+
 <!-- study-spine:reference_suspension -->
 
 <!-- @reference_suspension -->
