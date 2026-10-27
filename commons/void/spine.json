@@ -1,0 +1,2463 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "floor": 0,
+      "map": "Point_Zero",
+      "sequence": "primitives",
+      "title": "Point Zero / Already running",
+      "source": {
+        "trial": "",
+        "floor": 0
+      }
+    },
+    {
+      "floor": 1,
+      "map": "Point_One",
+      "sequence": "primitives",
+      "title": "Point One / A body in the light",
+      "source": {
+        "trial": "",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 2,
+      "map": "Point_Coordinates",
+      "sequence": "primitives",
+      "title": "Point Coordinates / Carry the point",
+      "source": {
+        "trial": "",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 3,
+      "map": "Point_Lines",
+      "sequence": "primitives",
+      "title": "Point Lines / What gives a line its force?",
+      "source": {
+        "trial": "",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 4,
+      "map": "Point_Trace",
+      "sequence": "primitives",
+      "title": "Floor 04 / Point Trace",
+      "source": {
+        "trial": "",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 5,
+      "map": "Point_Triangle_Context",
+      "sequence": "primitives",
+      "title": "Floor 05 / Triangle",
+      "source": {
+        "trial": "",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 6,
+      "map": "Primitives_Polythedra",
+      "sequence": "primitives",
+      "title": "Floor 06 / Polyhedra",
+      "source": {
+        "trial": "",
+        "floor": 6
+      }
+    },
+    {
+      "floor": 7,
+      "map": "Point_Animatedcube",
+      "sequence": "primitives",
+      "title": "Floor 07 / Cube",
+      "source": {
+        "trial": "",
+        "floor": 7
+      }
+    },
+    {
+      "floor": 8,
+      "map": "Primitives_Ignorance",
+      "sequence": "primitives",
+      "title": "Floor 08 / Primitives",
+      "source": {
+        "trial": "",
+        "floor": 8
+      }
+    },
+    {
+      "floor": 9,
+      "map": "Primitives_Columns",
+      "sequence": "primitives",
+      "title": "Floor 09 / Columns",
+      "source": {
+        "trial": "",
+        "floor": 9
+      }
+    },
+    {
+      "floor": 10,
+      "map": "Primitives_Profiles",
+      "sequence": "primitives",
+      "title": "Floor 10 / Profiles",
+      "source": {
+        "trial": "",
+        "floor": 10
+      }
+    },
+    {
+      "floor": 11,
+      "map": "Primitives_Portals",
+      "sequence": "primitives",
+      "title": "Floor 11 / Portals",
+      "source": {
+        "trial": "",
+        "floor": 11
+      }
+    },
+    {
+      "floor": 12,
+      "map": "Primitives_Melencolia",
+      "sequence": "primitives",
+      "title": "Floor 12 / Melencolia",
+      "source": {
+        "trial": "",
+        "floor": 12
+      }
+    },
+    {
+      "floor": 13,
+      "map": "Trans_Pre",
+      "sequence": "transformation",
+      "title": "Transformation / A body gains movement",
+      "source": {
+        "trial": "",
+        "floor": 13
+      }
+    },
+    {
+      "floor": 14,
+      "map": "Trans_Introduction",
+      "sequence": "transformation",
+      "title": "Introduction / translate, rotate, scale",
+      "source": {
+        "trial": "",
+        "floor": 14
+      }
+    },
+    {
+      "floor": 15,
+      "map": "Trans_Translation",
+      "sequence": "transformation",
+      "title": "Translation / pillar-mounted mezzanine",
+      "source": {
+        "trial": "",
+        "floor": 15
+      }
+    },
+    {
+      "floor": 16,
+      "map": "Trans_Rotation",
+      "sequence": "transformation",
+      "title": "Rotation / build, compare, descend",
+      "source": {
+        "trial": "",
+        "floor": 16
+      }
+    },
+    {
+      "floor": 17,
+      "map": "Trans_Scale",
+      "sequence": "transformation",
+      "title": "Seven carousels / Drink Me",
+      "source": {
+        "trial": "",
+        "floor": 17
+      }
+    },
+    {
+      "floor": 18,
+      "map": "Trans_Body",
+      "sequence": "transformation",
+      "title": "The Body / 6 original placements",
+      "source": {
+        "trial": "transformation_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 19,
+      "map": "Trans_Pit",
+      "sequence": "transformation",
+      "title": "The Moving Boundary / 13 original placements",
+      "source": {
+        "trial": "transformation_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 20,
+      "map": "Logic_Event",
+      "sequence": "logic",
+      "title": "Logic / event and consequence",
+      "source": {
+        "trial": "",
+        "floor": 20
+      }
+    },
+    {
+      "floor": 21,
+      "map": "Logic_AND",
+      "sequence": "logic",
+      "title": "Logic / both supports",
+      "source": {
+        "trial": "",
+        "floor": 21
+      }
+    },
+    {
+      "floor": 22,
+      "map": "Logic_Alternatives",
+      "sequence": "logic",
+      "title": "Logic / either path and interruption",
+      "source": {
+        "trial": "",
+        "floor": 22
+      }
+    },
+    {
+      "floor": 23,
+      "map": "Logic_Assemblage",
+      "sequence": "logic",
+      "title": "Logic / assemble and keep",
+      "source": {
+        "trial": "",
+        "floor": 23
+      }
+    },
+    {
+      "floor": 24,
+      "map": "Array",
+      "sequence": "array_tutorial",
+      "title": "Array / an address survives an absence",
+      "source": {
+        "trial": "array_tutorial",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 25,
+      "map": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "title": "Fly into the Third Index / 3 original installations",
+      "source": {
+        "trial": "array_tutorial_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 26,
+      "map": "Tutorial_Tiling_Floor",
+      "sequence": "array_tutorial",
+      "title": "A rule underfoot / 2 original placements",
+      "source": {
+        "trial": "array_tutorial_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 27,
+      "map": "Tutorial_Tiling_Walls",
+      "sequence": "array_tutorial",
+      "title": "The same rule stands up / 2 original installations",
+      "source": {
+        "trial": "array_tutorial_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 28,
+      "map": "Tutorial_Disco",
+      "sequence": "array_tutorial",
+      "title": "A grid with a clock / 4 original placements",
+      "source": {
+        "trial": "array_tutorial_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 29,
+      "map": "Color_Context_Placed",
+      "sequence": "color",
+      "title": "Colour / a celebration of 23 columns",
+      "source": {
+        "trial": "color",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 30,
+      "map": "Color_Flashlight",
+      "sequence": "color",
+      "title": "Colour Flashlight / light changes colour",
+      "source": {
+        "trial": "color_flashlight",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 31,
+      "map": "Color_Nails",
+      "sequence": "color",
+      "title": "Color Nails / original museum artifacts",
+      "source": {
+        "trial": "color_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 32,
+      "map": "Color_Rainbow",
+      "sequence": "color",
+      "title": "Every Body / More Colour / 4 original placements",
+      "source": {
+        "trial": "color_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 33,
+      "map": "Color_Pillar",
+      "sequence": "color",
+      "title": "Color Pillar / original museum artifacts",
+      "source": {
+        "trial": "color_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 34,
+      "map": "Color_Grid_Pallet",
+      "sequence": "color",
+      "title": "Grid as Color Canvas / 5 original placements",
+      "source": {
+        "trial": "color_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 35,
+      "map": "Color_Paint",
+      "sequence": "color",
+      "title": "Color Paint / original museum artifacts",
+      "source": {
+        "trial": "color_04",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 36,
+      "map": "Color_Walls",
+      "sequence": "color",
+      "title": "Color_Walls / 9 original placements",
+      "source": {
+        "trial": "color_04",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 37,
+      "map": "Pattern_Disco",
+      "sequence": "tiling",
+      "title": "Tiling / same floor, another palette",
+      "source": {
+        "trial": "tiling",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 38,
+      "map": "Pattern_Foundry",
+      "sequence": "tiling",
+      "title": "Pattern Foundry / original museum artifacts",
+      "source": {
+        "trial": "tiling_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 39,
+      "map": "Tutorial_Pattern",
+      "sequence": "tiling",
+      "title": "The mark stays; the rule changes / 12 original placements",
+      "source": {
+        "trial": "tiling_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 40,
+      "map": "Array_Patterns",
+      "sequence": "tiling",
+      "title": "Array Patterns / original museum transfer",
+      "source": {
+        "trial": "tiling_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 41,
+      "map": "Symmetry_Seventeen",
+      "sequence": "tiling",
+      "title": "Symmetry Seventeen / original museum transfer",
+      "source": {
+        "trial": "tiling_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 42,
+      "map": "Pattern_Temple",
+      "sequence": "tiling",
+      "title": "Pattern Temple / original museum transfer",
+      "source": {
+        "trial": "tiling_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 43,
+      "map": "Ribbon_Patterns_01",
+      "sequence": "tiling",
+      "title": "Ribbon_Patterns_01 / 11 original placements",
+      "source": {
+        "trial": "tiling_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 44,
+      "map": "Ribbon_Patterns_02",
+      "sequence": "tiling",
+      "title": "Ribbon_Patterns_02 / 12 original placements",
+      "source": {
+        "trial": "tiling_03",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 45,
+      "map": "Ribbon_Patterns_03",
+      "sequence": "tiling",
+      "title": "Ribbon_Patterns_03",
+      "source": {
+        "trial": "tiling_04",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 46,
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "sequence": "forces",
+      "title": "Vectors / two points make a relation",
+      "source": {
+        "trial": "forces",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 47,
+      "map": "VFM_05_Launch",
+      "sequence": "forces",
+      "title": "VFM_05_Launch",
+      "source": {
+        "trial": "forces_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 48,
+      "map": "VFM_03_Motion",
+      "sequence": "forces",
+      "title": "VFM_03_Motion",
+      "source": {
+        "trial": "forces_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 49,
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "sequence": "forces",
+      "title": "Vectors_Act3_FieldsAndMotion / 6 original placements",
+      "source": {
+        "trial": "forces_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 50,
+      "map": "Vectors_Act4a_KineticForces",
+      "sequence": "forces",
+      "title": "Vectors_Act4a_KineticForces / 5 original placements",
+      "source": {
+        "trial": "forces_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 51,
+      "map": "Vectors_Act4b_Oscillation",
+      "sequence": "forces",
+      "title": "Vectors_Act4b_Oscillation",
+      "source": {
+        "trial": "forces_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 52,
+      "map": "Change_Choreography",
+      "sequence": "forces",
+      "title": "Change_Choreography",
+      "source": {
+        "trial": "forces_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 53,
+      "map": "VFM_07_Gravity",
+      "sequence": "forces",
+      "title": "VFM_07_Gravity",
+      "source": {
+        "trial": "forces_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 54,
+      "map": "VFM_09_Legs",
+      "sequence": "forces",
+      "title": "VFM_09_Legs / 5 original placements",
+      "source": {
+        "trial": "forces_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 55,
+      "map": "VFM_08_Arena",
+      "sequence": "forces",
+      "title": "VFM_08_Arena / 9 original placements",
+      "source": {
+        "trial": "forces_03",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 56,
+      "map": "Vectors_Act5_ForceAsPlace",
+      "sequence": "forces",
+      "title": "Vectors_Act5_ForceAsPlace",
+      "source": {
+        "trial": "forces_04",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 57,
+      "map": "FormFinding_Descent",
+      "sequence": "formfinding",
+      "title": "Form Finding / where does downhill take you?",
+      "source": {
+        "trial": "formfinding",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 58,
+      "map": "FormFinding_Catenary",
+      "sequence": "formfinding",
+      "title": "FormFinding_Catenary",
+      "source": {
+        "trial": "formfinding_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 59,
+      "map": "FormFinding_Relaxation",
+      "sequence": "formfinding",
+      "title": "FormFinding_Relaxation",
+      "source": {
+        "trial": "formfinding_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 60,
+      "map": "FormFinding_Equilibrium",
+      "sequence": "formfinding",
+      "title": "FormFinding_Equilibrium / 4 original placements",
+      "source": {
+        "trial": "formfinding_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 61,
+      "map": "FormFinding_Annealing",
+      "sequence": "formfinding",
+      "title": "FormFinding_Annealing / 5 original placements",
+      "source": {
+        "trial": "formfinding_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 62,
+      "map": "FormFinding_Forge",
+      "sequence": "formfinding",
+      "title": "FormFinding_Forge",
+      "source": {
+        "trial": "formfinding_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 63,
+      "map": "WaveFunctions_Intro",
+      "sequence": "wavefunctions",
+      "title": "Wave Functions / the cube comes back",
+      "source": {
+        "trial": "wavefunctions",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 64,
+      "map": "WaveFunctions_Pendulum",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_Pendulum",
+      "source": {
+        "trial": "wavefunctions_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 65,
+      "map": "WaveFunctions_Sine_Space",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_Sine_Space",
+      "source": {
+        "trial": "wavefunctions_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 66,
+      "map": "WaveFunctions_Unit_Circle",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_Unit_Circle / 7 original placements",
+      "source": {
+        "trial": "wavefunctions_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 67,
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_3D_Wave_Propagation / 5 original placements",
+      "source": {
+        "trial": "wavefunctions_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 68,
+      "map": "WaveFunctions_Effect_Sound",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_Effect_Sound",
+      "source": {
+        "trial": "wavefunctions_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 69,
+      "map": "Wavefunctions_Bernini",
+      "sequence": "wavefunctions",
+      "title": "Wavefunctions_Bernini",
+      "source": {
+        "trial": "wavefunctions_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 70,
+      "map": "WaveFunctions_John_Cage",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_John_Cage",
+      "source": {
+        "trial": "wavefunctions_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 71,
+      "map": "WaveFunctions_AirMusic",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_AirMusic",
+      "source": {
+        "trial": "wavefunctions_04",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 72,
+      "map": "Wavefunctions_Sky_Stairs",
+      "sequence": "wavefunctions",
+      "title": "Wavefunctions_Sky_Stairs",
+      "source": {
+        "trial": "wavefunctions_04",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 73,
+      "map": "WaveFunctions_TrigWalkingPath",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_TrigWalkingPath",
+      "source": {
+        "trial": "wavefunctions_05",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 74,
+      "map": "WaveFunctions_Synthesis_Lab",
+      "sequence": "wavefunctions",
+      "title": "WaveFunctions_Synthesis_Lab",
+      "source": {
+        "trial": "wavefunctions_05",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 75,
+      "map": "Random_Definition",
+      "sequence": "randomness",
+      "title": "Random Definition / what chance is allowed to do",
+      "source": {
+        "trial": "randomness",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 76,
+      "map": "Random_Entropies",
+      "sequence": "randomness",
+      "title": "Entropy Types / what remains uncertain",
+      "source": {
+        "trial": "randomness",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 77,
+      "map": "Random_Entropy",
+      "sequence": "randomness",
+      "title": "Random_Entropy",
+      "source": {
+        "trial": "randomness_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 78,
+      "map": "Random_Remove",
+      "sequence": "randomness",
+      "title": "Random_Remove",
+      "source": {
+        "trial": "randomness_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 79,
+      "map": "Randomness_10_PRINT_Algorithm",
+      "sequence": "randomness",
+      "title": "Randomness_10_PRINT_Algorithm",
+      "source": {
+        "trial": "randomness_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 80,
+      "map": "Random_Cubes",
+      "sequence": "randomness",
+      "title": "Random_Cubes",
+      "source": {
+        "trial": "randomness_04",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 81,
+      "map": "Random_Rotate_Random_XYZ",
+      "sequence": "randomness",
+      "title": "Random_Rotate_Random_XYZ",
+      "source": {
+        "trial": "randomness_04",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 82,
+      "map": "Random_Walk",
+      "sequence": "randomness",
+      "title": "Random_Walk",
+      "source": {
+        "trial": "randomness_04",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 83,
+      "map": "Random_Gaussian",
+      "sequence": "randomness",
+      "title": "Random_Gaussian",
+      "source": {
+        "trial": "randomness_04",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 84,
+      "map": "Random_Mushrooms",
+      "sequence": "randomness",
+      "title": "Random_Mushrooms",
+      "source": {
+        "trial": "randomness_04",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 85,
+      "map": "Random_Space_Geometry",
+      "sequence": "randomness",
+      "title": "Random_Space_Geometry",
+      "source": {
+        "trial": "randomness_05",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 86,
+      "map": "Randomness_Examples_of_Randomness",
+      "sequence": "randomness",
+      "title": "Randomness_Examples_of_Randomness",
+      "source": {
+        "trial": "randomness_05",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 87,
+      "map": "Random_Pheromone",
+      "sequence": "randomness",
+      "title": "Random_Pheromone",
+      "source": {
+        "trial": "randomness_05",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 88,
+      "map": "Random_Space",
+      "sequence": "randomness",
+      "title": "Random_Space",
+      "source": {
+        "trial": "randomness_05",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 89,
+      "map": "Random_Game",
+      "sequence": "randomness",
+      "title": "Random_Game",
+      "source": {
+        "trial": "randomness_05",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 90,
+      "map": "Random_Noise_Types",
+      "sequence": "noise",
+      "title": "Noise Types / which rules keep acting?",
+      "source": {
+        "trial": "noise",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 91,
+      "map": "Noise_Columns",
+      "sequence": "noise",
+      "title": "Noise Columns / what keeps a body changing?",
+      "source": {
+        "trial": "noise",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 92,
+      "map": "Noise_One",
+      "sequence": "noise",
+      "title": "Noise_One",
+      "source": {
+        "trial": "noise_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 93,
+      "map": "Noise_Voxel",
+      "sequence": "noise",
+      "title": "Noise_Voxel",
+      "source": {
+        "trial": "noise_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 94,
+      "map": "Noise_6_Wall",
+      "sequence": "noise",
+      "title": "Noise_6_Wall",
+      "source": {
+        "trial": "noise_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 95,
+      "map": "Noise_Inside_Noise",
+      "sequence": "noise",
+      "title": "Noise_Inside_Noise",
+      "source": {
+        "trial": "noise_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 96,
+      "map": "Noise_Cellular",
+      "sequence": "noise",
+      "title": "Noise_Cellular",
+      "source": {
+        "trial": "noise_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 97,
+      "map": "Noise_Box",
+      "sequence": "noise",
+      "title": "Noise_Box",
+      "source": {
+        "trial": "noise_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 98,
+      "map": "Noise_Space_10",
+      "sequence": "noise",
+      "title": "Noise_Space_10",
+      "source": {
+        "trial": "noise_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 99,
+      "map": "Noise_Perlin_Simplex",
+      "sequence": "noise",
+      "title": "Noise_Perlin_Simplex",
+      "source": {
+        "trial": "noise_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 100,
+      "map": "Lab_Path",
+      "sequence": "noise",
+      "title": "Lab_Path",
+      "source": {
+        "trial": "noise_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 101,
+      "map": "Shader_01_Shaping",
+      "sequence": "shaders",
+      "title": "Shaping / the original instruments",
+      "source": {
+        "trial": "shaders",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 102,
+      "map": "Shader_05_Patterns",
+      "sequence": "shaders",
+      "title": "Patterns / the original collection",
+      "source": {
+        "trial": "shaders",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 103,
+      "map": "Shader_11_QueerRubber",
+      "sequence": "shaders",
+      "title": "Shader_11_QueerRubber",
+      "source": {
+        "trial": "shaders_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 104,
+      "map": "Shader_09_FBM",
+      "sequence": "shaders",
+      "title": "Shader_09_FBM",
+      "source": {
+        "trial": "shaders_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 105,
+      "map": "Shader_12_PinkExtravaganza",
+      "sequence": "shaders",
+      "title": "Shader_12_PinkExtravaganza",
+      "source": {
+        "trial": "shaders_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 106,
+      "map": "Shader_10_ReactionDiffusion",
+      "sequence": "shaders",
+      "title": "Shader_10_ReactionDiffusion",
+      "source": {
+        "trial": "shaders_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 107,
+      "map": "CA_Introduction",
+      "sequence": "cellularautomata",
+      "title": "CA_Introduction / transfer, 8 original placements",
+      "source": {
+        "trial": "cellularautomata",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 108,
+      "map": "CA_ElementaryRules",
+      "sequence": "cellularautomata",
+      "title": "CA_ElementaryRules / transfer, 2 original placements",
+      "source": {
+        "trial": "cellularautomata",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 109,
+      "map": "CA_GameOfLife",
+      "sequence": "cellularautomata",
+      "title": "CA_GameOfLife",
+      "source": {
+        "trial": "cellularautomata_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 110,
+      "map": "CA_BeyondBinary",
+      "sequence": "cellularautomata",
+      "title": "CA_BeyondBinary",
+      "source": {
+        "trial": "cellularautomata_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 111,
+      "map": "CA_ExpandingSpace",
+      "sequence": "cellularautomata",
+      "title": "CA_ExpandingSpace",
+      "source": {
+        "trial": "cellularautomata_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 112,
+      "map": "CA_SoftRules",
+      "sequence": "cellularautomata",
+      "title": "CA_SoftRules",
+      "source": {
+        "trial": "cellularautomata_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 113,
+      "map": "CA_AgentsCircuits",
+      "sequence": "cellularautomata",
+      "title": "CA_AgentsCircuits",
+      "source": {
+        "trial": "cellularautomata_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 114,
+      "map": "CA_EdgeOfChaos",
+      "sequence": "cellularautomata",
+      "title": "CA_EdgeOfChaos",
+      "source": {
+        "trial": "cellularautomata_03",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 115,
+      "map": "Fractal_Recursion",
+      "sequence": "fractals",
+      "title": "Fractal_Recursion",
+      "source": {
+        "trial": "fractals",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 116,
+      "map": "Fractal_RecursiveTrees",
+      "sequence": "fractals",
+      "title": "Fractal_RecursiveTrees",
+      "source": {
+        "trial": "fractals",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 117,
+      "map": "Fractal_CantorSet",
+      "sequence": "fractals",
+      "title": "Fractal_CantorSet",
+      "source": {
+        "trial": "fractals_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 118,
+      "map": "Fractal_KochSierpinski",
+      "sequence": "fractals",
+      "title": "Fractal_KochSierpinski",
+      "source": {
+        "trial": "fractals_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 119,
+      "map": "Fractal_MengerSponge",
+      "sequence": "fractals",
+      "title": "Fractal_MengerSponge",
+      "source": {
+        "trial": "fractals_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 120,
+      "map": "Fractal_GoldenSpiral",
+      "sequence": "fractals",
+      "title": "Fractal_GoldenSpiral",
+      "source": {
+        "trial": "fractals_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 121,
+      "map": "Fractal_Synthesis",
+      "sequence": "fractals",
+      "title": "Fractal_Synthesis",
+      "source": {
+        "trial": "fractals_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 122,
+      "map": "LSystems_Grammar_Lab",
+      "sequence": "lsystems",
+      "title": "LSystems_Grammar_Lab / transfer, 8 original placements",
+      "source": {
+        "trial": "lsystems",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 123,
+      "map": "LSystems_Growth",
+      "sequence": "lsystems",
+      "title": "LSystems_Growth / transfer, 5 original placements",
+      "source": {
+        "trial": "lsystems",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 124,
+      "map": "LSystems_Grammars_And_Curves",
+      "sequence": "lsystems",
+      "title": "LSystems_Grammars_And_Curves",
+      "source": {
+        "trial": "lsystems_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 125,
+      "map": "LSystems_Architecture",
+      "sequence": "lsystems",
+      "title": "LSystems_Architecture",
+      "source": {
+        "trial": "lsystems_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 126,
+      "map": "LSystems_Competition",
+      "sequence": "lsystems",
+      "title": "LSystems_Competition",
+      "source": {
+        "trial": "lsystems_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 127,
+      "map": "LSystems_Living",
+      "sequence": "lsystems",
+      "title": "LSystems_Living",
+      "source": {
+        "trial": "lsystems_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 128,
+      "map": "LSystems_Shape_Grammars",
+      "sequence": "lsystems",
+      "title": "LSystems_Shape_Grammars",
+      "source": {
+        "trial": "lsystems_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 129,
+      "map": "Assemblage_Same_Desire",
+      "sequence": "lsystems",
+      "title": "Assemblage_Same_Desire",
+      "source": {
+        "trial": "lsystems_02",
+        "floor": 6
+      }
+    },
+    {
+      "floor": 130,
+      "map": "PG_Genetic_Evolution",
+      "sequence": "proceduralgeneration",
+      "title": "Genetic Evolution / original selection study",
+      "source": {
+        "trial": "proceduralgeneration",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 131,
+      "map": "PG_Space_Colonization",
+      "sequence": "proceduralgeneration",
+      "title": "Space Colonization / original growth study",
+      "source": {
+        "trial": "proceduralgeneration",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 132,
+      "map": "PG_Branching_Growth",
+      "sequence": "proceduralgeneration",
+      "title": "PG_Branching_Growth",
+      "source": {
+        "trial": "proceduralgeneration_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 133,
+      "map": "PG_Percolation_Network",
+      "sequence": "proceduralgeneration",
+      "title": "PG_Percolation_Network",
+      "source": {
+        "trial": "proceduralgeneration_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 134,
+      "map": "PG_Caves_Mazes",
+      "sequence": "proceduralgeneration",
+      "title": "PG_Caves_Mazes",
+      "source": {
+        "trial": "proceduralgeneration_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 135,
+      "map": "PG_Sculpted_Forms",
+      "sequence": "proceduralgeneration",
+      "title": "PG_Sculpted_Forms",
+      "source": {
+        "trial": "proceduralgeneration_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 136,
+      "map": "PG_Mirrored_Patterns",
+      "sequence": "proceduralgeneration",
+      "title": "PG_Mirrored_Patterns",
+      "source": {
+        "trial": "proceduralgeneration_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 137,
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Soft_Body_Deformation / transfer, 7 original placements",
+      "source": {
+        "trial": "softbodies",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 138,
+      "map": "SoftBodies_Cloth_Physics",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Cloth_Physics / transfer, 5 original placements",
+      "source": {
+        "trial": "softbodies",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 139,
+      "map": "SoftBodies_Carusell",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Carusell",
+      "source": {
+        "trial": "softbodies_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 140,
+      "map": "SoftBodies_Obsticals",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Obsticals",
+      "source": {
+        "trial": "softbodies_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 141,
+      "map": "SoftBodies_Obsticals_Part2",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Obsticals_Part2",
+      "source": {
+        "trial": "softbodies_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 142,
+      "map": "SoftBodies_Playground_of_Joy",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Playground_of_Joy",
+      "source": {
+        "trial": "softbodies_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 143,
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "sequence": "softbodies",
+      "title": "SoftBodies_Affect_Theory_Visualization",
+      "source": {
+        "trial": "softbodies_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 144,
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "sequence": "softbodies",
+      "title": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "source": {
+        "trial": "softbodies_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 145,
+      "map": "Topology_Entropy_Morphogenesis",
+      "sequence": "softbodies",
+      "title": "Topology_Entropy_Morphogenesis",
+      "source": {
+        "trial": "softbodies_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 146,
+      "map": "ISO_Introduction",
+      "sequence": "isosurfaces",
+      "title": "ISO_Introduction",
+      "source": {
+        "trial": "isosurfaces",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 147,
+      "map": "ISO_LookupTable",
+      "sequence": "isosurfaces",
+      "title": "ISO_LookupTable",
+      "source": {
+        "trial": "isosurfaces",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 148,
+      "map": "ISO_ShapesGallery",
+      "sequence": "isosurfaces",
+      "title": "ISO_ShapesGallery",
+      "source": {
+        "trial": "isosurfaces_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 149,
+      "map": "ISO_TorusGyroid",
+      "sequence": "isosurfaces",
+      "title": "ISO_TorusGyroid",
+      "source": {
+        "trial": "isosurfaces_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 150,
+      "map": "ISO_Sculpting",
+      "sequence": "isosurfaces",
+      "title": "ISO_Sculpting",
+      "source": {
+        "trial": "isosurfaces_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 151,
+      "map": "ISO_FlatTerrain",
+      "sequence": "isosurfaces",
+      "title": "ISO_FlatTerrain",
+      "source": {
+        "trial": "isosurfaces_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 152,
+      "map": "ISO_PortalLandscape",
+      "sequence": "isosurfaces",
+      "title": "ISO_PortalLandscape",
+      "source": {
+        "trial": "isosurfaces_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 153,
+      "map": "ISO_Caves",
+      "sequence": "isosurfaces",
+      "title": "ISO_Caves",
+      "source": {
+        "trial": "isosurfaces_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 154,
+      "map": "ISO_CaveGeneration",
+      "sequence": "isosurfaces",
+      "title": "ISO_CaveGeneration",
+      "source": {
+        "trial": "isosurfaces_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 155,
+      "map": "ISO_AnimatedNoise",
+      "sequence": "isosurfaces",
+      "title": "ISO_AnimatedNoise",
+      "source": {
+        "trial": "isosurfaces_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 156,
+      "map": "ISO_Metaballs",
+      "sequence": "isosurfaces",
+      "title": "ISO_Metaballs",
+      "source": {
+        "trial": "isosurfaces_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 157,
+      "map": "ISO_ImplicitModeling",
+      "sequence": "isosurfaces",
+      "title": "ISO_ImplicitModeling",
+      "source": {
+        "trial": "isosurfaces_03",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 158,
+      "map": "ISO_RhizomeBody",
+      "sequence": "isosurfaces",
+      "title": "ISO_RhizomeBody",
+      "source": {
+        "trial": "isosurfaces_03",
+        "floor": 6
+      }
+    },
+    {
+      "floor": 159,
+      "map": "Boolean_Verbs",
+      "sequence": "boolean_surfaces",
+      "title": "Boolean_Verbs / transfer, 4 original placements",
+      "source": {
+        "trial": "boolean_surfaces",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 160,
+      "map": "Boolean_Gallery",
+      "sequence": "boolean_surfaces",
+      "title": "Boolean_Gallery / transfer, 25 original placements",
+      "source": {
+        "trial": "boolean_surfaces",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 161,
+      "map": "Boolean_Works",
+      "sequence": "boolean_surfaces",
+      "title": "Boolean_Works",
+      "source": {
+        "trial": "boolean_surfaces_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 162,
+      "map": "SwarmIntelligence_PhysarumColony",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_PhysarumColony",
+      "source": {
+        "trial": "swarmintelligence",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 163,
+      "map": "SwarmIntelligence_FlowFields",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_FlowFields",
+      "source": {
+        "trial": "swarmintelligence",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 164,
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_Boids_Algorithm",
+      "source": {
+        "trial": "swarmintelligence_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 165,
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "source": {
+        "trial": "swarmintelligence_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 166,
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_Ant_Colony_Optimization",
+      "source": {
+        "trial": "swarmintelligence_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 167,
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "source": {
+        "trial": "swarmintelligence_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 168,
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "sequence": "swarmintelligence",
+      "title": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "source": {
+        "trial": "swarmintelligence_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 169,
+      "map": "GT_Foundations",
+      "sequence": "graphtheory",
+      "title": "GT_Foundations / transfer, 2 original placements",
+      "source": {
+        "trial": "graphtheory",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 170,
+      "map": "GT_Layout",
+      "sequence": "graphtheory",
+      "title": "GT_Layout / transfer, 1 original placement",
+      "source": {
+        "trial": "graphtheory",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 171,
+      "map": "GT_Pathfinding",
+      "sequence": "graphtheory",
+      "title": "GT_Pathfinding",
+      "source": {
+        "trial": "graphtheory_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 172,
+      "map": "GT_Network_Analysis",
+      "sequence": "graphtheory",
+      "title": "GT_Network_Analysis",
+      "source": {
+        "trial": "graphtheory_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 173,
+      "map": "GT_Connectivity",
+      "sequence": "graphtheory",
+      "title": "GT_Connectivity",
+      "source": {
+        "trial": "graphtheory_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 174,
+      "map": "GT_Spanning_Trees",
+      "sequence": "graphtheory",
+      "title": "GT_Spanning_Trees",
+      "source": {
+        "trial": "graphtheory_02",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 175,
+      "map": "GT_Flow",
+      "sequence": "graphtheory",
+      "title": "GT_Flow",
+      "source": {
+        "trial": "graphtheory_02",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 176,
+      "map": "GT_Matching",
+      "sequence": "graphtheory",
+      "title": "GT_Matching",
+      "source": {
+        "trial": "graphtheory_02",
+        "floor": 6
+      }
+    },
+    {
+      "floor": 177,
+      "map": "ML_Evolution",
+      "sequence": "machinelearning",
+      "title": "ML_Evolution / original collection",
+      "source": {
+        "trial": "machinelearning",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 178,
+      "map": "ML_Gradient_Landscape",
+      "sequence": "machinelearning",
+      "title": "ML_Gradient_Landscape / original collection",
+      "source": {
+        "trial": "machinelearning",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 179,
+      "map": "ML_Classification",
+      "sequence": "machinelearning",
+      "title": "ML_Classification",
+      "source": {
+        "trial": "machinelearning_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 180,
+      "map": "ML_Neural_Networks",
+      "sequence": "machinelearning",
+      "title": "ML_Neural_Networks",
+      "source": {
+        "trial": "machinelearning_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 181,
+      "map": "ML_Perception",
+      "sequence": "machinelearning",
+      "title": "ML_Perception",
+      "source": {
+        "trial": "machinelearning_02",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 182,
+      "map": "ML_Sequence_Memory",
+      "sequence": "machinelearning",
+      "title": "ML_Sequence_Memory",
+      "source": {
+        "trial": "machinelearning_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 183,
+      "map": "ML_Generative",
+      "sequence": "machinelearning",
+      "title": "ML_Generative",
+      "source": {
+        "trial": "machinelearning_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 184,
+      "map": "ML_Synthesis",
+      "sequence": "machinelearning",
+      "title": "ML_Synthesis",
+      "source": {
+        "trial": "machinelearning_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 185,
+      "map": "Euclid_Parallel",
+      "sequence": "foundationscrisis",
+      "title": "Euclid_Parallel / transfer, 4 original placements",
+      "source": {
+        "trial": "foundationscrisis",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 186,
+      "map": "NonEuclidean_Spaces",
+      "sequence": "foundationscrisis",
+      "title": "NonEuclidean_Spaces / transfer, 8 original placements",
+      "source": {
+        "trial": "foundationscrisis",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 187,
+      "map": "Russell_Paradox",
+      "sequence": "foundationscrisis",
+      "title": "Russell_Paradox",
+      "source": {
+        "trial": "foundationscrisis_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 188,
+      "map": "Godel_Incompleteness",
+      "sequence": "foundationscrisis",
+      "title": "Godel_Incompleteness",
+      "source": {
+        "trial": "foundationscrisis_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 189,
+      "map": "Escher_Impossible",
+      "sequence": "foundationscrisis",
+      "title": "Escher_Impossible",
+      "source": {
+        "trial": "foundationscrisis_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 190,
+      "map": "Brouwer_Intuitionism",
+      "sequence": "foundationscrisis",
+      "title": "Brouwer_Intuitionism",
+      "source": {
+        "trial": "foundationscrisis_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 191,
+      "map": "Florensky_Paraconsistent",
+      "sequence": "foundationscrisis",
+      "title": "Florensky_Paraconsistent",
+      "source": {
+        "trial": "foundationscrisis_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 192,
+      "map": "Crisis_Synthesis",
+      "sequence": "foundationscrisis",
+      "title": "Crisis_Synthesis",
+      "source": {
+        "trial": "foundationscrisis_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 193,
+      "map": "QFEP_Introduction",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_Introduction / original collection",
+      "source": {
+        "trial": "qfeplaboratory",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 194,
+      "map": "QFEP_F_Term",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_F_Term / original collection",
+      "source": {
+        "trial": "qfeplaboratory",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 195,
+      "map": "QFEP_E_Term",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_E_Term",
+      "source": {
+        "trial": "qfeplaboratory_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 196,
+      "map": "QFEP_Lambda_Spectrum",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_Lambda_Spectrum",
+      "source": {
+        "trial": "qfeplaboratory_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 197,
+      "map": "QFEP_Phi_Term",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_Phi_Term",
+      "source": {
+        "trial": "qfeplaboratory_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 198,
+      "map": "QFEP_Edge_Of_Chaos",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_Edge_Of_Chaos",
+      "source": {
+        "trial": "qfeplaboratory_03",
+        "floor": 3
+      }
+    },
+    {
+      "floor": 199,
+      "map": "QFEP_Sandbox",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_Sandbox",
+      "source": {
+        "trial": "qfeplaboratory_03",
+        "floor": 4
+      }
+    },
+    {
+      "floor": 200,
+      "map": "QFEP_Synthesis",
+      "sequence": "qfeplaboratory",
+      "title": "QFEP_Synthesis",
+      "source": {
+        "trial": "qfeplaboratory_03",
+        "floor": 5
+      }
+    },
+    {
+      "floor": 201,
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "sequence": "postfoundationscrisis",
+      "title": "Algorithmic Bias / 5 original placements",
+      "source": {
+        "trial": "postfoundationscrisis",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 202,
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "sequence": "postfoundationscrisis",
+      "title": "CriticalAlgorithms_Applied_Ethics / transfer, 6 original placements",
+      "source": {
+        "trial": "postfoundationscrisis",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 203,
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "sequence": "postfoundationscrisis",
+      "title": "Paraconsistent Engineering / 8 original placements",
+      "source": {
+        "trial": "postfoundationscrisis_02",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 204,
+      "map": "SpeculativeComputation_Situated_Computation",
+      "sequence": "postfoundationscrisis",
+      "title": "SpeculativeComputation_Situated_Computation / transfer, 7 original placements",
+      "source": {
+        "trial": "postfoundationscrisis_02",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 205,
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "sequence": "postfoundationscrisis",
+      "title": "Collective Knowledge / 4 original placements",
+      "source": {
+        "trial": "postfoundationscrisis_03",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 206,
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "sequence": "postfoundationscrisis",
+      "title": "SpeculativeComputation_Rhizome_Network / transfer, 3 original placements",
+      "source": {
+        "trial": "postfoundationscrisis_03",
+        "floor": 2
+      }
+    },
+    {
+      "floor": 207,
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "sequence": "postfoundationscrisis",
+      "title": "Lab Equipment / 5 original placements",
+      "source": {
+        "trial": "postfoundationscrisis_04",
+        "floor": 1
+      }
+    },
+    {
+      "floor": 208,
+      "map": "PostCrisis_Synthesis",
+      "sequence": "postfoundationscrisis",
+      "title": "PostCrisis_Synthesis / transfer, 7 original placements",
+      "source": {
+        "trial": "postfoundationscrisis_04",
+        "floor": 2
+      }
+    }
+  ],
+  "sequences": [
+    {
+      "id": "primitives",
+      "title": "Primitives: Points Build Worlds",
+      "floors": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "transformation",
+      "title": "Transformation: What Stays the Same When Everything Changes",
+      "floors": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "id": "logic",
+      "title": "Logic: Conditions Become Events",
+      "floors": [
+        20,
+        21,
+        22,
+        23
+      ]
+    },
+    {
+      "id": "array_tutorial",
+      "title": "Arrays and Regularity",
+      "floors": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "id": "color",
+      "title": "Color and Composition",
+      "floors": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "id": "tiling",
+      "title": "Patterns: Dress the Architecture",
+      "floors": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "id": "forces",
+      "title": "Vectors & Forces: From Direction to Dynamics",
+      "floors": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ]
+    },
+    {
+      "id": "formfinding",
+      "title": "Form Finding: Rules, Constraints and Possible Shapes",
+      "floors": [
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    {
+      "id": "wavefunctions",
+      "title": "Wavefunctions: What Returns",
+      "floors": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "id": "randomness",
+      "title": "Randomness: What Can Chance Change?",
+      "floors": [
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89
+      ]
+    },
+    {
+      "id": "noise",
+      "title": "Noise: Fields and Possible Bodies",
+      "floors": [
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "id": "shaders",
+      "title": "Shaders: What a Surface Answers To",
+      "floors": [
+        101,
+        102,
+        103,
+        104,
+        105,
+        106
+      ]
+    },
+    {
+      "id": "cellularautomata",
+      "title": "Cellular Automata: What a Neighbour Can Change",
+      "floors": [
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114
+      ]
+    },
+    {
+      "id": "fractals",
+      "title": "Fractals: Rules, Scale and Room to Move",
+      "floors": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121
+      ]
+    },
+    {
+      "id": "lsystems",
+      "title": "L-Systems: Rules Grow Structure",
+      "floors": [
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129
+      ]
+    },
+    {
+      "id": "proceduralgeneration",
+      "title": "Procedural Generation: Rules Build Worlds",
+      "floors": [
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136
+      ]
+    },
+    {
+      "id": "softbodies",
+      "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+      "floors": [
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145
+      ]
+    },
+    {
+      "id": "isosurfaces",
+      "title": "Isosurfaces: Implicit to Explicit",
+      "floors": [
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
+      ]
+    },
+    {
+      "id": "boolean_surfaces",
+      "title": "Boolean Surfaces: CSG as Composition",
+      "floors": [
+        159,
+        160,
+        161
+      ]
+    },
+    {
+      "id": "swarmintelligence",
+      "title": "Swarm Intelligence: Where Coordination Lives",
+      "floors": [
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168
+      ]
+    },
+    {
+      "id": "graphtheory",
+      "title": "Graph Theory: What Connections Permit",
+      "floors": [
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176
+      ]
+    },
+    {
+      "id": "machinelearning",
+      "title": "Machine Learning: What Changes, and Why?",
+      "floors": [
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184
+      ]
+    },
+    {
+      "id": "foundationscrisis",
+      "title": "Foundations Crisis: The Limits of Formalization",
+      "floors": [
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192
+      ]
+    },
+    {
+      "id": "qfeplaboratory",
+      "title": "QFEP Laboratory: The Formula Made Interactive",
+      "floors": [
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200
+      ]
+    },
+    {
+      "id": "postfoundationscrisis",
+      "title": "Post-Crisis: Applied Limits",
+      "floors": [
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208
+      ]
+    }
+  ],
+  "exceptions": {
+    "Point_Line_Grid": "Integrated in the existing Point Trace shaft",
+    "Primitives_Godot": "Explicitly removed by the user",
+    "Change_Intro": "Change sequence skipped by the user",
+    "Flow_Field": "Change sequence skipped by the user"
+  },
+  "scope": "Map access and editable placement. Not a claim that every original occurrence, live physics import or oversized exhibit is fully integrated."
+}

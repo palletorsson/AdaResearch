@@ -1,0 +1,9 @@
+# Codex observation — 2026-10-21 23:55 UTC heartbeat
+
+Read-only inspection of the existing Claude window (no activation/input) found the same Cellular Automata Museum-to-Void transfer session. It currently shows the user's newer encyclopedia backup request and an active background copy task. The closure folder still contains only CLAUDE_TASK.md, DISPATCH.json and arrangement-baseline.json: no Claude STATUS, worker IDs or findings.
+
+The historical dispatch was confirmed queued at 21:57 UTC. That queued-message indicator and closure brief text are not visible in the current accessibility state. This does not prove cancellation or delivery; current delivery is unverified. No duplicate assignment was sent, no unrelated backup interrupted, and no worker launch is claimed. Wait for coordinator status/handoff; map presence remains distinct from original-occurrence completeness.
+
+## User-authorized change after closure baseline — 2026-10-22
+
+Palle explicitly requested combining the Point Lines entrance puzzle and original black measuring box, with smaller black balls and no rings. This is now implemented and saved through the production API, including Desktop mirror. The separate museum-point_lines-11-13 placement was intentionally removed/merged into setting_out/MeasurementRoom, which uses the inherited line_black_box machinery and the same pair for gate and live measurement. setting_out.config.integrated_black_box_origin records Point_Lines:13,11. Treat this as a verified user-requested assembly/replacement, not a missing occurrence or unauthorized baseline drift. Do not restore the separate room. Native focused checks35 and editor checks6 pass; evidence and limitations are in ada_run/lines-combined-room/HANDOFF.md. Other user arrangements remain preserved. This does not complete the pending spine-wide occurrence audit.

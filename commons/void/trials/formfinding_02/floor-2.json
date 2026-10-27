@@ -1,0 +1,82 @@
+{
+  "map": "FormFinding_Relaxation",
+  "title": "FormFinding_Relaxation",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_mass_spring_bench_2_2",
+      "artifact": "mass_spring_bench",
+      "position": [
+        -5,
+        6
+      ],
+      "station": "SW",
+      "facing": 90.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_verlet_workbench_6_2",
+      "artifact": "verlet_workbench",
+      "position": [
+        0,
+        0
+      ],
+      "station": "SE",
+      "facing": 270.0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "comparison": "true"
+      }
+    },
+    {
+      "id": "f2_frozen_glass_vessel_9_2",
+      "artifact": "frozen_glass_vessel",
+      "position": [
+        5,
+        -5
+      ],
+      "station": "NE",
+      "facing": 270.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_film_form_relaxation_1_9",
+      "artifact": "film_form_relaxation",
+      "position": [
+        -5,
+        -5
+      ],
+      "station": "NW",
+      "facing": 270.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "true"
+      }
+    },
+    {
+      "id": "f2_science_screen_8_9",
+      "artifact": "science_screen",
+      "position": [
+        2,
+        6
+      ],
+      "station": "SE",
+      "facing": 270.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

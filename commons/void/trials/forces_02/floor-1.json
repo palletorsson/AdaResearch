@@ -1,0 +1,176 @@
+{
+  "map": "VFM_05_Launch",
+  "title": "VFM_05_Launch",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_force_hall_04_0_0",
+      "artifact": "force_hall_04",
+      "position": [
+        -4,
+        14
+      ],
+      "station": "SW",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_euler_drift_29_6",
+      "artifact": "euler_drift",
+      "position": [
+        0,
+        5
+      ],
+      "station": "SE",
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "lesson": "step_study"
+      }
+    },
+    {
+      "id": "f1_launch_arc_14_8",
+      "artifact": "launch_arc",
+      "position": [
+        3,
+        10
+      ],
+      "station": "SE",
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "lesson": "launch_chamber"
+      }
+    },
+    {
+      "id": "f1_bubble_blaster_32_12",
+      "artifact": "bubble_blaster",
+      "position": [
+        -5,
+        4
+      ],
+      "station": "SW",
+      "facing": 180,
+      "height": 0.95,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_force_trial_catapult_7_26",
+      "artifact": "force_trial_catapult",
+      "position": [
+        -15,
+        9
+      ],
+      "station": "SW",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_force_trial_pipe_20_26",
+      "artifact": "force_trial_pipe",
+      "position": [
+        15,
+        9
+      ],
+      "station": "SE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_catapult_33_32",
+      "artifact": "catapult",
+      "position": [
+        -16,
+        -5
+      ],
+      "station": "NW",
+      "facing": 180,
+      "height": 0.35,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "default_force": "9"
+      }
+    },
+    {
+      "id": "f1_force_play_torque_15_41",
+      "artifact": "force_play_torque",
+      "position": [
+        0,
+        -9
+      ],
+      "station": "NE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_human_catapult_10_62",
+      "artifact": "human_catapult",
+      "position": [
+        15,
+        -8
+      ],
+      "station": "NE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_firework_burst_31_66",
+      "artifact": "firework_burst",
+      "position": [
+        0,
+        -2
+      ],
+      "station": "NE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "lesson": "live_fountain"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

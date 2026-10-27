@@ -1,73 +1,57 @@
-# Point Coordinates — Where is the point?
+# Point Coordinates — One of them
 
-<!-- @point_held -->
-
-The first label says “Point one”. This time the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.
-
-It fits within your hand. While you hold it, its movement answers to yours. Put it down and look back at the label. “Point one” stays at the station; the point has gone elsewhere.
-
-Which part did the name belong to? The position, the sphere, the possibility of taking hold?
-
-We have already separated seeing a body from being stopped by it. Holding adds another relation. Someone has made this point available to a hand. A position could not have supplied that permission on its own.
-
-Keep the black point. The corridor opens towards a coloured frame standing in an L-shaped basin. Its glass is level with the floor; the depth belongs below your feet. The point can travel over a hollow without falling into it.
-
-<!-- @coordinate_readout -->
-
-## Two addresses
-
-Keep the point in your hand and watch the white card as you move.
-
-The guides and the card follow the point you are already holding.
-
-The card marked `WORLD` puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.
-
-The card rounds each component to two decimal places: `1.231` and `1.234` both appear as `1.23`. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.
-
-Now compare it with the card marked `LOCAL`. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?
-
-<!-- @CoordinateSystem3M -->
-
-Follow the coloured frame's guides as you move the point in your hand. Pink follows X, grey follows Y, black follows Z. These colours were chosen for this room; the letters name the directions. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
-
-The two cards give the same point different addresses. `WORLD` measures from the scene's origin; `LOCAL` uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.
-
-A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^coordinates-haraway]
-
-There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. What drew your hand towards the point may be among the things its coordinates cannot report.
-
-Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.
-
-<!-- @the_invisible_point -->
-
-In the glass case, four brass arrows address an empty centre. Two thin red lines meet there. Follow either line towards the crossing. There is no dot to take over the work of locating it.
-
-What have you found, if there is no body there?
-
-The source names the meeting place:
-
-```gdscript
-const FOCUS := Vector3(0.0, 1.25, 0.0)
-```
-
-`Vector3` holds three components. Here we use them as a position: zero along the case's local X direction, 1.25 metres along its Y direction, zero along Z. These are coordinates relative to the case. They specify a location without making anything visible.
-
-The arrows and lines are built in relation to `FOCUS`. They make its location available through things beside it and passing through it. The point itself is never drawn. It has no hidden mesh and no later appearance to wait for.
-
-That is a strange thing to exhibit: a position you can locate, with no body of its own. The source offers another access to it. You can read the address and follow how the surrounding construction was arranged. The position has become available through those relations, without acquiring a surface.
+<!-- Model B literary trial, 20 October 2026. Apparatus checks, earlier text and editorial decisions: doc/book/iterations/2026-10-20-coordinates-one-of-them/. The route, attachment and perceptions are proposed fiction; the ball lifetime and re-entry behaviour have a focused native test. -->
 
 <!-- @drag_point_target -->
 
-## Room to arrive
+I have brought down seven white balls. I am watching one.
 
-The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.
+It lands a little apart from the others. A short address travels above it. The numbers change through the fall, then slow enough for me to read. I lower the light towards it.
 
-“Here” has become a request, and the request has a tolerance. The target accepts the point when it comes within 45 centimetres of its centre. It measures the gap between the two positions. A hand has room to arrive. “Here” has become a small region.
+<!-- @point_held -->
 
-The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
+The light comes with the black sphere in my hand. Its label said *Point one*. I took hold, and the concrete brightened; the sphere stayed black. When I let go, the added light went out and the sphere remained where I had left it. I kept my hand underneath for a moment. Then I took it again.
 
-Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm. We could give the target a memory of the journey; we would then have to decide what it remembers, and what someone else could read from it.
+<!-- @coordinate_readout -->
 
-In the next hall, we keep two positions at once. The space between them will become a line, and a distance we can change.
+On the way here, two cards gave it different addresses. WORLD kept the roof's zero: the height was negative although I was standing on a floor. LOCAL counted from the coloured frame. I could move my hand a little without changing the printed numbers, then lose the last digit with a movement I had hardly noticed.[^coordinates-reference]
 
-[^coordinates-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits?
+I had meant to spend longer there. Across the floor, a red arrow asked me to bring the point.
+
+The balls began falling before I had quite reached the place I was aiming for. I stopped. Nothing more arrived.
+
+Now this one is still. Its address is still too. I move the light to the other side and crouch to look along the concrete. I want to find something by which I could recognise it again.
+
+The address turns towards me as I go around. I try to get behind the writing. I make a wider circuit. The numbers are still facing me.
+
+I have been looking for a mark the ball could keep while I went elsewhere.
+
+It is gone.
+
+For a moment I continue to hold the light over the place. The little address has gone too. I look towards the others. Those are disappearing; before I can settle on one to watch, the floor is clear.
+
+I turn the black sphere in my hand. The light moves over the concrete. I try it higher, then almost against the floor.
+
+I remember the last address. I had read it several times without having any use for it. Now I would like it to help.
+
+I put the black point approximately where the white one was. When I release it, the light goes out. It makes a rather poor marker in this light, but I know where to look.
+
+I go back to the arrow.
+
+Nothing falls.
+
+I stand a little nearer, then look behind me. The point is still marking the place where I left it.
+
+I have to go and fetch it.
+
+There is a moment before I take hold when I would prefer to leave it doing that job. I look at the bare floor beside it, trying to keep the distance from the arrow in view. Then I lift it. Light returns to a place that now has nothing left on it.
+
+I carry the point back. Another seven balls fall.
+
+They have addresses too. I look for the one I remember, although I had watched that address change while its ball was moving. One of these comes down near the place I marked. I follow it with the light.
+
+It is easy to begin watching this one. I resent that a little.
+
+I move away from the arrow before settling beside it. There is room for the black sphere between us. I could leave it there again, but I keep hold.
+
+[^coordinates-reference]: The tower's WORLD and LOCAL cards describe the held black point from different references and print two decimal places. The falling balls carry their own world addresses, printed to one decimal place. Donna Haraway's [“Situated Knowledges”](https://doi.org/10.2307/3178066) is a neighbouring reading on what a position must bring with it to become available to someone else.

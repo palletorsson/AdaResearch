@@ -857,6 +857,12 @@
         "tools/capacity_progress.py",
         "doc/reports/capacity_progress.json"
       ]
+    },
+    {
+      "timestamp": "2026-10-23T07:20:11.639781+00:00",
+      "topic": "gates",
+      "insight": "Gate N (check_tools_reachable.py) scopes its ignored listing by git pathspec ('-- tools') since 2026-10-23: ada_run/void-trial-runtime stages are 40 junctions each into the repo and Git for Windows descends junctions, so an unscoped 'ls-files --ignored' walked the repo once per stage (763 stages = 2h+, killed). Scoped: 2.8s, same verdict. tools/void_trial_prune.py tears stages down junction-aware (os.rmdir a junction, never descend; chmod the read-only openxr_action_map.tres copy; stale by CREATION time, since a half teardown rewrites mtime). 692 stale stages removed, repo folder counts unchanged.",
+      "lod": 3
     }
   ]
 }

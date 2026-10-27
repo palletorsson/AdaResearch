@@ -6,7 +6,8 @@ extends RefCounted
 ## silhouette, a faint grain) instead of a lit tube — the modular line's stroke.
 ## "lit":false is a colour field (unshaded: the colour as written). "blend":"mul" is filter
 ## glass: it multiplies what is behind it, unshaded, both faces, so a closed shell is crossed
-## twice (colour-study.ts writes sqrt(T) on a box). modular-terms.ts reads the same keys.
+## twice (colour-study.ts writes sqrt(T) on a box). "blend":"add" is light: it sums with what is
+## behind it. modular-terms.ts reads the same keys.
 
 const INK_SHADER := "res://commons/modular/shaders/ink_stroke.gdshader"
 
@@ -26,6 +27,41 @@ void fragment() {
 """
 const MUL_GAIN_SETTING := "ada/albers_glass/mul_gain"
 static var _mul_shader: Shader = null
+
+## "blend":"add": light that sums with what is behind it (a lamp, a gel lit from behind, the
+## additive Venn). Unshaded, both faces, no depth write. A sum needs no gain where the operand and
+## the buffer are scaled alike; measured on the colour bench before it was trusted (see
+## doc/colour/COLOUR_LAB_DESIGN.md), and overridable per headset like the multiply's.
+const ADD_SHADER := """shader_type spatial;
+render_mode unshaded, blend_add, cull_disabled, depth_draw_opaque, shadows_disabled, fog_disabled;
+uniform vec3 tint : source_color = vec3(1.0);
+uniform float gain = 1.0;
+void fragment() {
+	ALBEDO = tint * gain;
+	ALPHA = 1.0;
+}
+"""
+const ADD_GAIN_SETTING := "ada/glass/add_gain"
+static var _add_shader: Shader = null
+
+
+static func add_gain() -> float:
+	var forced: Variant = ProjectSettings.get_setting(ADD_GAIN_SETTING, 0.0)
+	if (forced is float or forced is int) and float(forced) > 0.0:
+		return float(forced)
+	return 1.0
+
+
+static func _add_material(col: Color) -> ShaderMaterial:
+	if _add_shader == null:
+		_add_shader = Shader.new()
+		_add_shader.code = ADD_SHADER
+	var m := ShaderMaterial.new()
+	m.shader = _add_shader
+	m.render_priority = -1
+	m.set_shader_parameter("tint", Color(col.r, col.g, col.b))
+	m.set_shader_parameter("gain", add_gain())
+	return m
 
 
 static func mul_gain() -> float:
@@ -136,6 +172,9 @@ static func make(spec: Dictionary) -> MeshInstance3D:
 		mi.set_meta("construction_mark", true)   # a surface never paints over the stroke
 	elif str(spec.get("blend", "")) == "mul":
 		mi.material_override = _mul_material(col)
+		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	elif str(spec.get("blend", "")) == "add":
+		mi.material_override = _add_material(col)
 		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	else:
 		var mat := StandardMaterial3D.new()

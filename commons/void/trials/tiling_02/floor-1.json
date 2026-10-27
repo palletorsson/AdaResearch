@@ -1,0 +1,244 @@
+{
+  "map": "Pattern_Foundry",
+  "title": "Pattern Foundry / original museum artifacts",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_pattern_tile_4x4_4_4",
+      "artifact": "pattern_tile_4x4",
+      "station": "NE",
+      "position": [
+        19,
+        4
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tile_mirror_7_4",
+      "artifact": "pattern_tile_mirror",
+      "station": "NE",
+      "position": [
+        19,
+        7
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_architecture_10_5",
+      "artifact": "pattern_architecture",
+      "station": "NE",
+      "position": [
+        6,
+        12
+      ],
+      "facing": 180,
+      "height": 0.3,
+      "scale": 1,
+      "config": {
+        "target": "walls"
+      }
+    },
+    {
+      "id": "f1_pattern_machine_c_17_6",
+      "artifact": "pattern_machine_c",
+      "station": "NE",
+      "position": [
+        0,
+        10
+      ],
+      "facing": 180.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tile_brick_4_9",
+      "artifact": "pattern_tile_brick",
+      "station": "NE",
+      "position": [
+        19,
+        10
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tile_herringbone_7_9",
+      "artifact": "pattern_tile_herringbone",
+      "station": "NE",
+      "position": [
+        19,
+        13
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_studio_plate_30_11",
+      "artifact": "pattern_studio_plate",
+      "station": "NE",
+      "position": [
+        -17,
+        10
+      ],
+      "facing": 180.0,
+      "height": 0.85,
+      "scale": 1,
+      "config": {
+        "room": "curved"
+      }
+    },
+    {
+      "id": "f1_pattern_maker_station_8_13",
+      "artifact": "pattern_maker_station",
+      "station": "NE",
+      "position": [
+        -10,
+        9
+      ],
+      "facing": 180.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_film_pattern_symmetry_23_15",
+      "artifact": "film_pattern_symmetry",
+      "station": "NE",
+      "position": [
+        -6,
+        5
+      ],
+      "facing": 90.0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "true"
+      }
+    },
+    {
+      "id": "f1_pattern_machine_a_5_18",
+      "artifact": "pattern_machine_a",
+      "station": "NE",
+      "position": [
+        16,
+        9
+      ],
+      "facing": 270.0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "lesson": "shared_recipe"
+      }
+    },
+    {
+      "id": "f1_pattern_mill_19_18",
+      "artifact": "pattern_mill",
+      "station": "NE",
+      "position": [
+        -3,
+        -4.5
+      ],
+      "facing": 180.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_drag_catwalk_30_21",
+      "artifact": "drag_catwalk",
+      "station": "NE",
+      "position": [
+        -16,
+        -1
+      ],
+      "facing": 180.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_tiling_demo_3_26",
+      "artifact": "tiling_demo",
+      "station": "NE",
+      "position": [
+        16,
+        -6
+      ],
+      "facing": 180.0,
+      "height": 0.9,
+      "scale": 0.3,
+      "config": {
+        "embedded": "true"
+      }
+    },
+    {
+      "id": "f1_pattern_machine_d_18_31",
+      "artifact": "pattern_machine_d",
+      "station": "NE",
+      "position": [
+        4,
+        -12
+      ],
+      "facing": 0.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tile_plate_6_34",
+      "artifact": "pattern_tile_plate",
+      "station": "NE",
+      "position": [
+        12,
+        -12
+      ],
+      "facing": 0.0,
+      "height": 0.51,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_super_drag_mirror_30_35",
+      "artifact": "super_drag_mirror",
+      "station": "NE",
+      "position": [
+        -18,
+        2.5
+      ],
+      "facing": 0.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_wall_drawing_291_21_36",
+      "artifact": "wall_drawing_291",
+      "station": "NE",
+      "position": [
+        -1,
+        -14
+      ],
+      "facing": 0.0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

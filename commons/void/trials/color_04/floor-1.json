@@ -1,0 +1,54 @@
+{
+  "map": "Color_Paint",
+  "title": "Color Paint / original museum artifacts",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_dark_sphere_5_5",
+      "artifact": "dark_sphere",
+      "station": "NE",
+      "position": [
+        -4,
+        -2
+      ],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_albers_wall_gallery_5_15",
+      "artifact": "albers_wall_gallery",
+      "station": "NE",
+      "position": [
+        -4,
+        8
+      ],
+      "facing": 180.0,
+      "height": 0.5,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_ball_painting_demo_12_15",
+      "artifact": "ball_painting_demo",
+      "station": "NE",
+      "position": [
+        3,
+        8
+      ],
+      "facing": 0.0,
+      "height": 0.5,
+      "scale": 1,
+      "config": {
+        "automated": "true",
+        "tools": "spray"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

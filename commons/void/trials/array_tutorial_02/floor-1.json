@@ -1,0 +1,57 @@
+{
+  "map": "Tutorial_3D",
+  "title": "Fly into the Third Index / 3 original installations",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_array_flight_lab_10_13",
+      "artifact": "array_flight_lab",
+      "station": "NE",
+      "position": [
+        0,
+        20
+      ],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_open_structures_10_35",
+      "artifact": "open_structures",
+      "station": "NE",
+      "position": [
+        0,
+        -2
+      ],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "1"
+      }
+    },
+    {
+      "id": "f1_reference_suspension_10_56",
+      "artifact": "reference_suspension",
+      "station": "NE",
+      "position": [
+        0,
+        -23
+      ],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "1"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

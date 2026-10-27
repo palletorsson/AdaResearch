@@ -1,0 +1,64 @@
+{
+  "map": "FormFinding_Forge",
+  "title": "FormFinding_Forge",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_self_shaping_forge_5_3",
+      "artifact": "self_shaping_forge",
+      "position": [
+        -4,
+        7
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_balance_puzzle_9_5",
+      "artifact": "balance_puzzle",
+      "position": [
+        3,
+        6
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_gradient_descent_optimizer_4_7",
+      "artifact": "gradient_descent_optimizer",
+      "position": [
+        -4,
+        1
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_science_screen_10_7",
+      "artifact": "science_screen",
+      "position": [
+        3,
+        1
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

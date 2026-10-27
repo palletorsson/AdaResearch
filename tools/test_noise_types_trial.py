@@ -4,6 +4,11 @@ Isolated user:// saves, real desktop and synthetic XR rigs. `--capture` renders 
 screenshots into the report folder; `--measure` dumps floor-local bounds for layout work.
 """
 from pathlib import Path
+import runpy
+# The trial now contains two content floors. Keep --measure for the old bounds tool.
+if "--measure" not in __import__("sys").argv:
+    runpy.run_path(str(Path(__file__).with_name("test_noise_trial.py")), run_name="__main__")
+    raise SystemExit(0)
 import hashlib,json,os,subprocess,sys
 from void_trial_runtime import stage_runtime
 sys.stdout.reconfigure(encoding='utf8')

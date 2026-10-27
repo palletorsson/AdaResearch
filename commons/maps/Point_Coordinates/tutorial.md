@@ -2,17 +2,91 @@
 
 **Learning elements**
 
-- Pickable
-- 3D coordinate system
+- Pickup behaviour
 - Local and world position
+- A position read each frame
 
-Take the black point in the museum's coordinate hall. Its surface and boundary follow your hand. Now give the point you made in Point One that same capacity.
+On the floor below Point One, the small black point can travel with your hand. Its light comes on while held and goes out on release. The WORLD and LOCAL cards keep reporting its position. Carrying, lighting and reporting are separate connections.
 
-Continue with your existing `PointStudy` and `point.gd`. Keep the radius, centre, mesh and collision shape. Change the body's class and pickup settings, then add a position readout. Day Zero supplies the configured XR hands and Godot XR Tools library. Our script supplies the point they can hold.
+Continue with the `PointStudy` and `point.gd` you made in [Point One](../Point_One/tutorial.md). Keep its radius, centre, surface and collision shape. We will change who can move that same body, then report where it is. The tower's smaller black finish and carried light remain reference features; this study adds pickup and coordinates to your existing sphere.
 
-## The same point, now pickable
+Use the prepared Day Zero XR scene and its configured hands. Keep `PointStudy` at scale `(1, 1, 1)`.
 
-Here is the complete resulting script. The shape construction is unchanged; the new parts are the body's type and settings, the readout, and `_process()`.
+## Change the body; keep its construction
+
+In `point.gd`, replace the declaration `var point: StaticBody3D` with:
+
+```gdscript
+var point: XRToolsPickable
+var readout: Label3D
+```
+
+In `_ready()`, replace only `point = StaticBody3D.new()` with:
+
+```gdscript
+    point = XRToolsPickable.new()
+```
+
+Immediately after the existing `point.position = CENTRE`, add:
+
+```gdscript
+    point.freeze = true
+    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    point.collision_layer = 4
+    point.collision_mask = 196615
+```
+
+Keep the mesh, collider and `add_child(point)` below these settings unchanged. `XRToolsPickable` supplies pickup behaviour; the configured hands select and move it. We reuse that connection rather than build hand tracking here.
+
+`freeze` holds the point initially. Kinematic freeze mode permits collision checking when it moves. `FROZEN` keeps it where you release it; `NONE` limits grabbing to a nearby hand. Layer `4` is grab layer 3; mask `196615` includes layers 1, 2, 3, 17 and 18. These are the prepared project's settings. They precede `add_child(point)` because the library records initial settings on entering the scene.
+
+Run it. Grip, carry and release the point. Its shape remains the one you made in Point One.
+
+To test pickup permission, add `point.enabled = false` just before `add_child(point)`. Predict the result, then run. The surface and collider remain, but the hand cannot select the point. Remove that line.
+
+## Read the same point from two references
+
+At the end of `_ready()`, after `add_child(point)`, add:
+
+```gdscript
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+```
+
+Then add this function outside `_ready()`:
+
+```gdscript
+func _process(_delta: float) -> void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+```
+
+This reuses Point Zero's label and per-frame reading pattern. The label belongs to `PointStudy`, so it stays behind when the point moves. `+` joins text; `\n` starts another line.
+
+`global_position` reads the world address. `to_local()` converts it into **PointStudy's** reference frame, including its position, rotation and scale. It does not move the point.
+
+With `PointStudy` at world origin, no rotation and unit scale, the readings agree. Move it two metres along world X and run again. LOCAL still begins at `(0, 1.12, 0)`; WORLD includes the displacement. Restore the study's position.
+
+Carry the point sideways, up and forward. Release it, then move your empty hand. The readings follow the point, not the hand.
+
+## Return to the tower
+
+The tower's LOCAL card measures from its coloured frame, not our `PointStudy`. WORLD still measures from the roof's origin. Its cards format two decimal places; our `str()` readout does not impose that format. Rounding a report does not round the stored position.
+
+Carry the tower point beyond an arrow's end. The drawing stops; positions continue.
+
+Keep this `point.gd`, with pickup enabled. [Point Lines](../Point_Lines/tutorial.md) will reuse its body construction for two endpoints and measure their relation.
+
+[Complete point.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Coordinates/point.gd) · [Working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Course verification](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
+
+<details class="complete-script">
+<summary>Complete script for comparison</summary>
 
 <!-- student-code:point.gd -->
 ```gdscript
@@ -61,37 +135,4 @@ func _process(_delta: float) -> void:
     readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
 ```
 
-Run it in the prepared XR scene. Bring your hand to the point, grip, carry it, then release. Its shape is unchanged. Its relation to the hand has changed.
-
-## What the pickup connection adds
-
-`XRToolsPickable` is a physics body with pickup behaviour from the supplied library. It replaces `StaticBody3D`; the same mesh and collider remain its children. The configured hand selects this body and moves it. Our script does not rebuild hand tracking or the grab driver.
-
-`freeze = true` holds the point in place initially. The kinematic freeze mode allows collision checking as a frozen body moves. `ReleaseMode.FROZEN` makes it stay where you release it. `RangedMethod.NONE` limits this example to a nearby hand.
-
-The two collision settings match the prepared museum: `4` puts the point on layer 3, the grab layer; `196615` enables contact with layers 1, 2, 3, 17 and 18. These numbers are supplied configuration. Set them before `add_child(point)`, because the pickup library records its starting settings when the body enters the scene.
-
-To test permission separately, add `point.enabled = false` just before `add_child(point)`. Run again. The visible point and collider remain, but the hand cannot select it. Remove that line to restore pickup.
-
-## One point, two addresses
-
-The readout uses the `Label3D` construction from Point Zero. It belongs to `PointStudy`, so it stays behind when the point moves. `_process()` reads the point again each frame.
-
-`point.global_position` gives the point's position in the world's coordinate system. `to_local(world_position)` converts that position into the coordinate system of the node running this script: **PointStudy**. The two readings describe the same point from different frames.
-
-The last line converts each vector to text. `+` joins the pieces; `\n` starts a new line. It reports the positions without calculating a distance.
-
-If `PointStudy` has the world's origin and orientation, the readings initially agree. Move `PointStudy` two metres along world X and run again. The point still begins at LOCAL `(0, 1.12, 0)`, but WORLD now includes the study's displacement. Changing the parent changes where the point is without changing its local starting value.
-
-Carry the point sideways, up, then forward. Watch which components change. Release it and move your empty hand: the point and its two readings stay where you left them.
-
-## The drawn frame
-
-The museum's pink, grey and black frame helps you see three directions. Its LOCAL card measures from that coloured frame. Our small study measures from `PointStudy`; the choice is explicit in each case. `point.position` would instead mean position relative to the point's parent.
-
-Carry the museum point beyond an arrow's end. The drawing stops; positions continue. A coordinate system can describe more space than its diagram occupies.
-
-Keep this `point.gd`. Lines will continue with the held point and introduce a second endpoint. Distance belongs there.
-
-
-[Current point.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Coordinates/point.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
+</details>

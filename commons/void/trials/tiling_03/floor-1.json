@@ -1,0 +1,190 @@
+{
+  "map": "Array_Patterns",
+  "title": "Array Patterns / original museum transfer",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_science_screen_16_3",
+      "artifact": "science_screen",
+      "station": "SW",
+      "position": [
+        -3,
+        11
+      ],
+      "facing": 0.0,
+      "height": 1.5,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tile_4x4_4_4",
+      "artifact": "pattern_tile_4x4",
+      "station": "SE",
+      "position": [
+        10,
+        9
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_vr_tile_editor_mirror_9_5",
+      "artifact": "vr_tile_editor_mirror",
+      "station": "SE",
+      "position": [
+        3,
+        7
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_facade_grammar_demo_13_5",
+      "artifact": "facade_grammar_demo",
+      "station": "SW",
+      "position": [
+        -4,
+        6
+      ],
+      "facing": 180.0,
+      "height": 0.02,
+      "scale": 0.28,
+      "config": {
+        "embedded": "true"
+      }
+    },
+    {
+      "id": "f1_pattern_tile_mirror_4_7",
+      "artifact": "pattern_tile_mirror",
+      "station": "SE",
+      "position": [
+        10,
+        5
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_tiling_demo_3_8",
+      "artifact": "tiling_demo",
+      "station": "SE",
+      "position": [
+        16,
+        8
+      ],
+      "facing": 180.0,
+      "height": 0.75,
+      "scale": 0.25,
+      "config": {
+        "embedded": "true"
+      }
+    },
+    {
+      "id": "f1_pattern_tile_plate_13_10",
+      "artifact": "pattern_tile_plate",
+      "station": "SE",
+      "position": [
+        2,
+        1
+      ],
+      "facing": 180.0,
+      "height": 0.51,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tunnel_machine_24_11",
+      "artifact": "pattern_tunnel_machine",
+      "station": "NW",
+      "position": [
+        -14,
+        -8
+      ],
+      "facing": 180.0,
+      "height": 1,
+      "scale": 1,
+      "config": {
+        "lesson": "addresses",
+        "tunnel_length": "6",
+        "group_index": "0",
+        "platform_route": "true"
+      }
+    },
+    {
+      "id": "f1_pattern_tile_brick_4_14",
+      "artifact": "pattern_tile_brick",
+      "station": "NE",
+      "position": [
+        8,
+        -7
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_pattern_tile_herringbone_7_14",
+      "artifact": "pattern_tile_herringbone",
+      "station": "NE",
+      "position": [
+        4,
+        -7
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_grid_model_13_14",
+      "artifact": "grid_model",
+      "station": "NW",
+      "position": [
+        -3,
+        -5
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_panel_bridge_loom_6_16",
+      "artifact": "panel_bridge_loom",
+      "station": "NE",
+      "position": [
+        10,
+        -12
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_dark_sphere_8_16",
+      "artifact": "dark_sphere",
+      "station": "NE",
+      "position": [
+        4,
+        -12
+      ],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

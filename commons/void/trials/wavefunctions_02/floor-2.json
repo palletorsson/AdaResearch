@@ -1,0 +1,99 @@
+{
+  "map": "WaveFunctions_Sine_Space",
+  "title": "WaveFunctions_Sine_Space",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_sine_flow_tray_6_4",
+      "artifact": "sine_flow_tray",
+      "position": [
+        -4,
+        7
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_sine_wall_explanation_6_9",
+      "artifact": "sine_wall_explanation",
+      "position": [
+        4,
+        7
+      ],
+      "station": "SE",
+      "height": 1.0,
+      "facing": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_sine_wall_corridor_9_12",
+      "artifact": "sine_wall_corridor",
+      "position": [
+        16,
+        6
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_colorballs_9_29",
+      "artifact": "colorballs",
+      "position": [
+        0,
+        -9.5
+      ],
+      "station": "NE",
+      "height": 1.2,
+      "facing": 180.0,
+      "scale": 1,
+      "config": {
+        "case": "sine_rain"
+      }
+    },
+    {
+      "id": "f2_sine_space_9_30",
+      "artifact": "sine_space",
+      "position": [
+        -0.5,
+        -9.5
+      ],
+      "station": "NW",
+      "height": 1.2,
+      "facing": 270,
+      "scale": 1,
+      "config": {
+        "floor": "walk",
+        "width": "14",
+        "depth": "18",
+        "pos_x": "-0.5",
+        "pos_z": "-0.5",
+        "fit": "exact"
+      }
+    },
+    {
+      "id": "f2_dark_sphere_14_44",
+      "artifact": "dark_sphere",
+      "position": [
+        -3,
+        10
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

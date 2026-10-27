@@ -1,4 +1,5 @@
 extends SceneTree
+const ModelStorage = preload("res://tools/generated_storage.gd")
 const OUT := "res://ada_run/architecture_variations/"
 var checks: Array = []
 var camera: Camera3D
@@ -20,7 +21,7 @@ func shot(id:String,eye:Vector3,target:Vector3) -> void:
 		for child in work.body.get_children():
 			if child is MeshInstance3D and child.visible:export_root.add_child(child.duplicate())
 		var appended:=doc.append_from_scene(export_root,state)
-		var written:=doc.write_to_filesystem(state,OUT+id+".glb") if appended==OK else FAILED
+		var written:=ModelStorage.write_gltf(doc,state,OUT+id+".glb") if appended==OK else FAILED
 		check("exported native geometry: "+id,appended==OK and written==OK)
 		export_root.free()
 func positions() -> PackedVector3Array:

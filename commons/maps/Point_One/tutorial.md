@@ -1,9 +1,5 @@
 # Point One — give the point a body
 
-## Current room comparison — 17 October 2026
-
-The second and third points have no small podiums. Their centres and visible radii agree. Walk through the visible-only point, then approach the solid point along the same line. Only the third sphere has a collision shape. The empty first marker and the large final pedestal remain. Do not infer point collision from a supporting plinth.
-
 **Learning elements**
 
 - Position values
@@ -11,9 +7,9 @@ The second and third points have no small podiums. Their centres and visible rad
 - Object references
 - Visible and physical boundaries
 
-In the corridor, one point is absent, one is visible, and one stops your movement. A position, a surface and a physical boundary do different work. We will build a small point with all three.
+On the roof, the crate panel both hid the view and blocked passage. On the floor below, those conditions separate. Three labels mark an absent point, a visible-only white sphere and a matching solid sphere. None of these three has a plinth. Walk through the visible sphere, then approach the solid one: only the latter stops you.
 
-Point Zero introduced `_ready()`. Here it creates the point. Start a new script, `point.gd`, on an empty `Node3D` named `PointStudy` in your working project. Put this study's origin on the floor where the supplied camera or player can see it. Day Zero supplies the room and view; this script creates every part of the point.
+We will reconstruct the solid point, then separate its surface from its boundary. From [Point Zero](../Point_Zero/tutorial.md), we carry `_ready()`, `.new()` and `add_child()`. Start `point.gd` on an empty `Node3D` named `PointStudy` in your Day Zero project, with its origin on the floor in view. The supplied camera, light and player remain; this script creates the point.
 
 ## The complete point
 
@@ -74,7 +70,9 @@ After `boundary.shape = shape`, add `boundary.disabled = true`. Run again. The s
 
 After `surface.mesh = sphere`, add `surface.visible = false`. The surface disappears; the boundary remains. Remove that line too. Visibility and collision can be changed separately.
 
-Keep this working `point.gd`. In Coordinates, we will give **this same point** pickup behaviour. Its surface and boundary will travel together.
+Back in the tower, the switch controls the lamps on the supply rods. Turning them off changes illumination without removing the solid sphere's boundary. The large shiny black sphere retains its pedestal; that support has a boundary of its own. Our reconstruction isolates the small point so its collision can be tested independently.
+
+Keep this working `point.gd`, with visibility and collision restored. In [Point Coordinates](../Point_Coordinates/tutorial.md), we will give **this same point** pickup behaviour. Its surface and boundary will travel together.
 
 
 [Current point.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_One/point.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

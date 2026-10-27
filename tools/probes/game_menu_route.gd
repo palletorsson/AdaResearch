@@ -7,7 +7,7 @@ var checks: Array[Dictionary] = []
 var finished := false
 var reveals := 0
 const ROUTES := {
-	"trial": ["VoidTrialsButton", "res://commons/void/trials/transformation/trial.tscn"],
+	"trial": ["VoidButton", "res://commons/void/trials/transformation/trial.tscn"],
 	"void": ["VoidButton", "res://commons/void/void.tscn"],
 	"runner": ["MuseumRunnerButton", "res://commons/museum_runner/museum_runner.tscn"],
 	"shadow": ["ShadowGameButton", "res://commons/shadow_game/shadow_game.tscn"],
@@ -55,11 +55,20 @@ func run() -> void:
 		await finish()
 		return
 	await click_node(menu.get_node("Buttons/" + ROUTES[route][0]))
+	if route == "void":
+		await create_timer(.3).timeout
+		check("The Void opens its saved spine picker before loading", menu.has_node("VoidTrialPicker") and stage.current_scene == null)
+		if not menu.has_node("VoidTrialPicker"): await finish(); return
+		await click_picker("Transformation")
+		await capture("selector")
+		await click_picker("014 /")
 	if route == "trial":
+		# Separate drafts are available inside the Void picker on desktop.
 		await create_timer(.3).timeout
 		check("Trial picker is separate from the tower",menu.has_node("VoidTrialPicker") and not menu.get_node("Buttons").visible)
 		if not menu.has_node("VoidTrialPicker"): await finish(); return
-		await click_node(menu.get_node("VoidTrialPicker").get_child(0))
+		await click_picker("Separate trials")
+		await click_picker("Transformation", true)
 	if route == "sequences":
 		await create_timer(0.6).timeout
 		check("Sequences opens its panel", is_instance_valid(menu.sequence_picker_instance))
@@ -98,6 +107,8 @@ func run() -> void:
 	# Allow the museum's opening fall and automatic exposure to settle.
 	await create_timer(5.0 if route in ["museum", "sequences", "maps"] else 1.5).timeout
 	var scene: Node3D = stage.current_scene
+	if route == "void":
+		check("Selected main-spine map opens at floor 14", scene.trial_id.is_empty() and scene.checkpoint == 14)
 	if route == "trial":
 		check("Transformation opens at its isolated floor",scene.trial_id=="transformation" and scene.checkpoint==1 and scene.building.spec.levels.size()>=3)
 	if route in ["museum", "sequences"]:
@@ -113,17 +124,52 @@ func run() -> void:
 	await create_timer(1.2).timeout
 	check("Return restores visible menu and clears scene", stage.current_scene == null and menu.visible and not stage._returning_to_menu)
 	check("Mouse restored after returning", Input.mouse_mode == Input.MOUSE_MODE_VISIBLE)
+	await capture("returned-menu")
+	print("[menu-route] Return state: guard=", menu._entering_head_arena, " transform=", menu.global_transform, " camera=", root.get_camera_3d().global_transform)
 	# A second click detects stale entry guards and stuck pointers after return.
 	var before := reveals
 	await click_node(menu.get_node("Buttons/VoidButton"))
+	if route == "void":
+		check("Returned menu reopens the map picker", menu.has_node("VoidTrialPicker"))
+		if not menu.has_node("VoidTrialPicker"): await finish(); return
+		await click_picker("Transformation")
+		await click_picker("Next", true)
+		await capture("second-selector")
+		await click_picker("019 /")
+	else:
+		if menu.has_node("VoidTrialPicker"): await click_picker("Start from the beginning")
 	began = Time.get_ticks_msec()
-	while reveals == before and Time.get_ticks_msec() - began < 20000: await process_frame
+	while reveals == before and Time.get_ticks_msec() - began < 65000: await process_frame
 	check("Returned menu can start another game", reveals == before + 1 and stage.current_scene_path == "res://commons/void/void.tscn")
+	if route == "void" and is_instance_valid(stage.current_scene):
+		check("Second-page selection opens floor 19 after returning", stage.current_scene.checkpoint == 19)
+		await capture("second-game")
+		stage.current_scene.return_to_menu()
+		while stage._returning_to_menu: await process_frame
 	await finish()
+
+func click_picker(caption: String, exact := false) -> void:
+	var picker: Node3D = menu.get_node("VoidTrialPicker")
+	for attempt in range(50):
+		var next: Node3D = null
+		for button in picker.buttons:
+			if not button.visible: continue
+			if (button.text == caption if exact else button.text.begins_with(caption)):
+				await click_node(button)
+				await create_timer(.25).timeout
+				return
+			if button.text == "Next": next = button
+		if next == null: break
+		await click_node(next)
+		await create_timer(.25).timeout
+	check("Picker contains " + caption, false)
 
 func click_node(button: Node3D) -> void:
 	var position_3d: Vector3 = button.get_node("CollisionShape3D").global_position
+	print("[menu-route] Click ", button.text, " at ", root.get_camera_3d().unproject_position(position_3d), " layer=", button.collision_layer)
 	await click_at(root.get_camera_3d().unproject_position(position_3d))
+	var pointer := menu.get_node_or_null("DesktopMenuPointer")
+	if pointer != null: print("[menu-route] Mouse target=", pointer.target, " entry guard=", menu._entering_head_arena)
 
 func click_at(at: Vector2) -> void:
 	var motion := InputEventMouseMotion.new()
@@ -174,6 +220,7 @@ func finish() -> void:
 		while ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_IN_PROGRESS: await process_frame
 		if ResourceLoader.load_threaded_get_status(path) == ResourceLoader.THREAD_LOAD_LOADED: ResourceLoader.load_threaded_get(path)
 	# Give rendering and scene-owned jobs time to release before engine shutdown.
+	await create_timer(.5).timeout
 	if is_instance_valid(stage):
 		stage.queue_free()
 		stage = null

@@ -1,4 +1,5 @@
 extends SceneTree
+const ModelStorage = preload("res://tools/generated_storage.gd")
 const OUT:="res://ada_run/model_disagreement/"
 var work:Node3D
 var camera:Camera3D
@@ -22,7 +23,7 @@ func capture(id:String,eye:Vector3=Vector3.ZERO,target:Vector3=Vector3.ZERO) -> 
 		var node:=Node3D.new();node.name="ModelDisagreement";node.transform=work.body.transform
 		for item in work.rendered:node.add_child(item.duplicate())
 		var doc:=GLTFDocument.new();var state:=GLTFState.new()
-		var a:=doc.append_from_scene(node,state);var b:=doc.write_to_filesystem(state,OUT+id+".glb") if a==OK else FAILED
+		var a:=doc.append_from_scene(node,state);var b:=ModelStorage.write_gltf(doc,state,OUT+id+".glb") if a==OK else FAILED
 		check("native GLB "+id,a==OK and b==OK);node.free()
 func finite_model() -> bool:
 	for group in work.output:

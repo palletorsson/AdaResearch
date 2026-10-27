@@ -6,13 +6,13 @@
 - Per-frame updates
 - Function calls
 
-This tutorial follows a path through **Endless Museum**. We learn selected operations from the works we encounter. Alongside it, `final.md` follows their critical and poetic questions. Some artifacts belong to both tracks; others remain part of the wider field we explore.
+This tutorial begins on the roof of the **Void Tower**. We learn selected operations from the works we encounter, then carry those operations into the next lesson. Alongside it, `final.md` follows Model B's particular encounter with the same place.
 
 ## A number that keeps changing
 
-In Point Zero, the counter is already running. Its number changes as the engine processes frames. We will make the smallest working version of that operation: create a label, then keep updating its text.
+You begin inside a wooden delivery crate. Breaking its panel opens a view onto the roof, where a counter is already running. Its number changes as the engine processes frames. We will reconstruct the operation behind that display: create a label, then keep updating its text.
 
-Use the working project from Day Zero. Its camera, light and player remain supplied. For this study, attach `counter.gd` to an empty `Node3D` named `CounterStudy`. Place that node where you can see it in your working scene, with its front facing your view. The script creates its own label; there is no child to prepare or fetch through a scene path. The existing museum console is the reference for this study.
+Use the working project from Day Zero. Its camera, light and player remain supplied. For this study, attach `counter.gd` to an empty `Node3D` named `CounterStudy`. Place that node where you can see it in your working scene, with its front facing your view. The script creates its own label; there is no child to prepare or fetch through a scene path. The rooftop counter is our reference; this study builds only the changing label.
 
 Here is the **whole script**.
 
@@ -49,9 +49,15 @@ What would happen if we read the same total only in `_ready()`?
 Move `label.text = str(Engine.get_process_frames())` into `_ready()`, immediately after `add_child(label)`. Delete the now-empty `_process()` function. Keep everything else.
 <!-- /student-edit:read-once -->
 
-Run again. The number stays where it began, while the room keeps running. The label now holds one reading. Undo the move and the number follows the engine again.
+Run again. Look away and return. The number stays where it began, while the scene keeps running. The label now holds one reading. Your edit stopped updating the display; it did not stop the engine's count. Undo the move and the number follows the engine again.
 
-The instruction is the same. Its place determines when it runs. In Point One, `_ready()` will construct a point's visible body.
+The instruction is the same. Its place determines when it runs.
+
+## From a reading to a position
+
+On the roof, a coordinate grid crosses beneath the small black sphere at world origin. That `(0, 0, 0)` names a position. The label's initial `"0"` is text, soon replaced by a frame count. A starting display value and a spatial origin do different work.
+
+Keep `counter.gd` with its per-frame update restored. In [Point One](../Point_One/tutorial.md), we carry forward `_ready()`, `.new()` and `add_child()`: create an object once, keep a reference to it, and attach it to the scene. There we will give a point a position, a visible surface and a collision shape. Its position will be measured relative to the new `PointStudy` node, just as the rooftop grid measures positions from the world's origin.
 
 
 [Current counter.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Zero/counter.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)

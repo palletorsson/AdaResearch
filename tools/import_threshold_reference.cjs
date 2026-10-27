@@ -1,0 +1,6 @@
+const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'..'),src=path.resolve(root,'../ada_encyclopedia/public/studies/matter-and-logic/physics'),C=require(path.join(src,'package/build/cannon.min.js')),{buildAlmost}=require(path.join(src,'malmost.js')),{serialize,record}=require('./import_material_programs.cjs');const file=path.join(root,'commons/artifacts/matter_reference/material-programs.json'),data=JSON.parse(fs.readFileSync(file,'utf8'));
+const specs={again:[{k:-.6},{k:0},{k:.6}],almost:[{h:1.046},{h:1.02},{h:1.12}],just:[{c:5.6},{c:4.5},{c:7.5}],barely:[{h:1.64},{h:1.55},{h:1.75}],still:[{d:.0005},{d:-.0005},{d:0}],descent:[{T:2},{T:0},{T:4}]};
+for(const [kind,cases] of Object.entries(specs))for(let i=0;i<cases.length;i++){
+ const g=buildAlmost(C,kind,cases[i],{jitter:false}),d=serialize(g);d.extra={};for(const k of ['need','h','bottom','crit','RD','k','span','Y0','COOL','T0','pts','valleys','c','pre','G','ARM'])if(g[k]!==undefined)d.extra[k]=g[k];if(kind==='just')d.templates={grain:record(g.drop().body,'new',{look:'grain',role:'grain'})};data.graphs['almost_'+kind+'_'+i]=d;
+}
+fs.writeFileSync(file,JSON.stringify(data));console.log('18 threshold configurations extracted');

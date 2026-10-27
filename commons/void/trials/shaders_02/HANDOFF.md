@@ -1,0 +1,12 @@
+# shaders_02 — placed for curation
+
+Original scenes, token config, scale and height preserved. Standard floors; each occurrence independently editable. Desktop and VR share rooms.json. Artifact buttons and gameplay intentionally untested.
+
+- All14 original occurrences from the four remaining Shader maps are independently editable on four standard floors. Original source scene identities, token configurations, scale and height retained. Source maps, chapter texts and original shader/script files are unchanged.
+- Basic desktop and synthetic XR startup and artifact-load/config checks pass73 assertions without runtime engine errors. A source Memory Skin material failed Mobile shader linkage because its SSS/transmittance outputs require Forward+. A trial-only inherited chamber assembly substitutes a shader copy omitting only those three unsupported assignments; original noise, uniforms, colour, roughness, emission, solver and controls remain unchanged.
+- Final native chamber screenshot and broad bounds inspected. Actual GLBs independently parsed; all occurrences pass copy/move/rotate validation, real native/Desktop mirror save/reload, stale-save rejection and restored-layout checks. Shader interactions, retained-field drawing and buttons were not exercised.
+- Memory Skin has no subsurface/transmittance rendering in this Mobile-compatible variant. It is not visually identical to Forward+ skin scattering. Source shader mathematical effects and dynamics are not simulated in the web editor; material conversion is an arrangement preview.
+- The original basin assembly extends beyond the standard slab (measured z roughly-29..-6.5, x-21.5..-2.5). Composition Stage reaches just above the next slab; the reaction chamber reaches7.2m above its floor. The plural-body work extends to x22. Original source rooms and supporting floors may overlap shafts or neighbouring exhibits. These are disclosed uncurated specimens, not accepted finished clearances.
+- Original non-error OpVectorExtractDynamic compiler diagnostics remain in the native log, while final engine error list is empty. Full animated shader fidelity, mouse/hand controls, physical-headset behavior, Quest performance and educational outcomes remain untested. Batch30 live soft-body world-origin issue remains open separately.
+
+Evidence: {"source_checks": 83, "native_load_checks": 73, "editor_checks": 17, "valid_nonempty_glbs": 51, "mesh_count": 1495}

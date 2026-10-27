@@ -1,68 +1,89 @@
 # Point One — A body in the light
 
+<!-- Model B literary trial, 20 October 2026. Previous edition and source checks: doc/book/iterations/2026-10-20-point-one-after-the-crate/. One possible situated account, not a transcript of every player's actions. -->
+
+I land.
+
+For a moment I keep still. Then I move far enough from the edge to look up.
+
+From here, the roof has an underside. The crate is somewhere above it. I cannot see whether its broken boards are still where I left them.
+
+There are places to stand on this floor that were hidden from above. A shipping container closes off one side. A wall stops before its framing does. Behind the objects, a scaffold holds a sheet of tarp. Someone has made an interior without finishing the building.
+
 <!-- @point_absent -->
 
-The corridor begins with a label: “Point one”. Above it, nothing.
+On the concrete, a label says *Point one*.
 
-There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, and pass your hand through the empty space.
+Above it, nothing.
 
-Here is the point, but you cannot see it. We can keep its position in three numbers:[^point-one-code]
+The name arrives before its object. I give it some space, looking first where a body might be, then at the floor around the lettering. There is no support with something missing from its top. Only the words and the place they have made me inspect.
 
-```gdscript
-var point_position := Vector3(0.0, 1.12, 0.0)
-```
+I move to one side. This does not improve the view.
 
-We have given that position a name, `point_position`. The numbers locate a place. They draw nothing. In the next hall, we will take them apart.
-
-A mathematical point has no extent.[^point-one-euclid] To let it appear in the room, we will have to give it something a point does not have: a surface.
+A position would be enough to keep an account of a point. It would not be enough to show me one.[^point-one-euclid] I could choose a height above the label, but I have no reason yet to prefer it.
 
 <!-- @point_visible -->
 
-Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.
+The next label has a small white sphere above it.
 
-The first point has already broken the promise of taking things one step at a time. There is shine here, a surface, a changing body. We are already Alice. We can follow that interest into the construction, where the things meeting us at once were made separately.
+I begin to go around. There is room, and I have just come through a crate by breaking the part that prevented me. Then I turn back towards the sphere.
 
-Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.
+My body passes through its place.
 
-We have given the position a surface for the light to meet. Make the sphere larger and more of the room disappears behind it. Its centre can stay exactly where it was. Drawing this body has still given it no power to stop you.
+I stop beyond it and look back. It is still there. No broken surface, no piece to recover from the floor.
+
+I cross again, more slowly. The white body keeps its shape. I had allowed it more room than it required of me.
+
+Above it, a pink rod ends in a small lamp. Light reaches the sphere and the concrete beneath it. I look along the supply towards the ceiling. The installation has made several connections here; stopping my movement is not among them.
 
 <!-- @point_solid -->
 
-The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.
+The third label has another white sphere, the same apparent size.
 
-This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.
+This one interrupts my approach. I try from the side. I can move around it, but the direct route will not take me through its centre.
 
-Its visible surface and its physical boundary are made separately. We have given them the same size and position. They could have been arranged otherwise. Make only the boundary larger, and your approach would stop before you reached the sphere. The empty space would resist you.
+A separately made collision boundary could account for this. I approach again, trying to find where it begins. I have met a limit, but I have not seen how it was made. I do not know whether the person who installed the lamps also placed the boundaries.
+
+For a while I go between them. I begin to turn too early at the one I can cross.
 
 <!-- @point_sun_switch -->
 
-## First there was light
+The switch stands nearby on a narrow support. Its caption says *POINT LIGHTS / ON*.
 
-First there was light, right? Look at the crooked shadows under the white spheres. Round bodies leave stretched marks on the floor. Something outside the shape has helped to draw them.
+I turn it off.
 
-There is a switch on the wall. Turn it.
+The lamps at the ends of the rods go out. Light still reaches the floor from elsewhere. The building has not disappeared, and neither have the spheres.
 
-You have removed their sun.
+I approach the solid one again. It stops me in the reduced light.
 
-The long shadows disappear. The spheres remain, faintly lit. Try approaching the solid one again. Its boundary has not gone with its shadow. What helped you see the body was never what stopped your body.
+I had thought of the bright patch beneath it as somewhere to put my feet while looking. Without that patch, I place them a little differently. The boundary has remained where it was.
 
-Here the sun is a direction from which light arrives. We did not have to build a burning star. A few instructions gave the room a familiar consequence, and familiarity let the source go unquestioned. The switch puts that borrowed certainty within reach.
+I turn the lights on and return to the empty label. It has been provided with a lamp too. The concrete is quite adequately lit. I spend some time looking at this provision, without finding anything else to do with it.
 
-Turn it back. A shadow returns to the same place. It makes the sphere easier to locate, but it is not another point beneath the first one. It belongs to a relation between a surface, a light and somewhere for the light to be interrupted.
+I reach towards the switch, then leave it. I do not know whether someone is keeping this place for something.
 
 <!-- @point_pedestal -->
 
-## The size of a point
+Farther into the floor, a black sphere stands on a pedestal. It is large enough to conceal part of the work behind it. Its finish catches a narrow brightness that changes as I move.
 
-Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.
+*Point one*, again.
 
-The small sphere let you approach its centre. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.
+Here I have to go around the support as well as the sphere. The pedestal has its own claim on the floor. Calling what it carries a point has not made either of them smaller.
 
-Look from the small white spheres to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.
+Its centre could still be written with three numbers. The same short address leaves a great deal unsaid.
 
-In the next room, the point can leave its place with your hand. Now we can ask where it has gone.
+I move until the brightness slips towards the sphere's edge. I would like to hold it there. Moving back recovers it, briefly, but then I move again.
 
-[^point-one-code]: The position is drawn from the station's construction in `point_condition.gd`. The absent station creates no hidden sphere. The separate tutorial keeps a position, adds a visible surface and compares it with a collision boundary. Reading the three components and using pickup belong to the next hall, Point Coordinates.
+The crate's knot admitted a piece of sky. This body gives me something bright on a surface I cannot see through. I do not yet know what I want from the resemblance.
 
-[^point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+I return to the switch. I have been remembering a click.
 
+I turn the lamps off, then on. The rocker moves. I lean closer and try again.
+
+I can see where it comes to rest. That is where I expect the sound. Watching so closely seems to make it harder to hear. I turn my head away for the next press.
+
+I cannot find the click I remember. I have lost track of whether the lamps are on. I look up and leave them on.
+
+At the opening I press my thumb against the side of my finger, once, to see if that was it.
+
+[^point-one-euclid]: Euclid's point, “that which has no part,” gives this encounter a useful difficulty: making a position visible requires something with extent. See [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html).

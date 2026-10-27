@@ -1,6 +1,7 @@
 """Export real Void meshes into the encyclopedia, using the isolated game test project."""
 from pathlib import Path
 import hashlib, json, os, shutil, subprocess
+from void_native_slot import acquire_native_slot
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT.parent / 'ada_encyclopedia'
@@ -8,6 +9,8 @@ OUT = WEB / 'public/void-models'
 STAGE = Path((ROOT/'ada_run/void-game-test/latest.txt').read_text().strip())/'source'
 GODOT = os.environ.get('GODOT_EXE', 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe')
 OUT.mkdir(parents=True, exist_ok=True)
+slot = acquire_native_slot('Legacy main editor model export')
+os.environ['ADA_SOURCE_PROJECT'] = str(ROOT)
 # Refresh the already resolved dependency closure, without importing the enormous museum.
 for target in STAGE.rglob('*'):
     rel=target.relative_to(STAGE)
@@ -32,6 +35,7 @@ renderer/rendering_method="gl_compatibility"
 probe=STAGE/'tools/probes/export_void_editor.gd'
 probe.parent.mkdir(parents=True,exist_ok=True)
 shutil.copy2(ROOT/'tools/probes/export_void_editor.gd',probe)
+shutil.copy2(ROOT/'tools/generated_storage.gd',STAGE/'tools/generated_storage.gd')
 log=ROOT/'ada_run/void-editor-export.log'
 with log.open('w',encoding='utf-8') as stream:
     subprocess.run([GODOT,'--headless','--path',str(STAGE),'--editor','--import'],stdout=stream,stderr=subprocess.STDOUT,timeout=120,

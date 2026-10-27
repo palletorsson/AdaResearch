@@ -1,4 +1,6 @@
 extends "res://tools/probes/void_game_probe.gd"
+## Historical lethal-fall contract, retained for its original evidence.
+## Current acceptance: tools/probes/void_safe_fall_probe.gd (27 October 2026).
 var flight_metres := 0.0
 
 func run() -> void:

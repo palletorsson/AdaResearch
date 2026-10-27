@@ -157,6 +157,10 @@ class Link:
                     row = json.loads(line)
                 except json.JSONDecodeError:
                     continue
+                # the recent rows come back too (deque maxlen keeps the last 400), so
+                # /revisions, the editors' status lines and /live-update/pipeline show
+                # history across a restart rather than an empty day
+                self.ledger.append(row)
                 if row.get("k") == "request":
                     env = row.get("env") or {}
                     m = str(env.get("map_id", ""))
@@ -241,7 +245,7 @@ class Link:
         rec_floor = floors[floor]
         remove_id = str(d.get("remove") or "")
         move_id = str(d.get("move") or "")
-        stamp = time.strftime("%H%M%S")
+        stamp = str(time.time_ns())
         rid = ""
         if move_id:
             # grab-and-move from VR: the record's position/facing change, nothing else,
@@ -281,9 +285,18 @@ class Link:
                 facing = round(float(d.get("facing", 0)) % 360.0, 1)
             except (TypeError, ValueError, IndexError):
                 return {"ok": False, "error": "position must be [x, z]"}
+            prefab = str(d.get("prefab") or "")
             kind = str(d.get("kind") or "")
             token = str(d.get("token") or "")
-            if kind:
+            if prefab:
+                from void_prefab_library import append_placement
+                try:
+                    item = json.loads(SPAWNLISTS.read_text(encoding="utf-8"))["items"][prefab]
+                    rid = f"spawn-{stamp}"
+                    append_placement(rec_floor, item, pos, facing, rid)
+                except (KeyError, ValueError, OSError) as e:
+                    return {"ok": False, "error": f"prefab unavailable: {e}"}
+            elif kind:
                 rid = f"spawn-{kind}-{stamp}"
                 rec_floor.setdefault("props", []).append({"id": rid, "kind": kind, "position": pos, "facing": facing, "scale": 1})
             elif token:
@@ -1041,6 +1054,21 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, SPAWNLISTS.read_bytes(), "application/json")
             return
 
+        if u.path == "/prefab-thumb":
+            # Only images explicitly published by the shared prefab catalogue.
+            image_url = (q.get("url") or [""])[0]
+            try:
+                items = json.loads(SPAWNLISTS.read_text(encoding="utf-8"))["items"]
+                allowed = {item.get("thumbnail") for item in items.values()}
+                image = (PUBLIC_DIR / image_url.lstrip("/")).resolve()
+                if image_url in allowed and image.is_relative_to(PUBLIC_DIR.resolve()) and image.suffix.lower() == ".png" and image.is_file():
+                    self._send(200, image.read_bytes(), "image/png")
+                    return
+            except (OSError, ValueError, KeyError):
+                pass
+            self._send(404, b"no such prefab thumbnail", "text/plain")
+            return
+
         if u.path.startswith("/thumb/"):
             # /thumb/<token>/<angle>.png -> the artifact-gallery capture, read-only
             parts = [p for p in u.path.split("/")[2:] if p and p not in (".", "..")]
@@ -1083,6 +1111,26 @@ class Handler(BaseHTTPRequestHandler):
             # a revision envelope from the encyclopedia's save (src/lib/live-update.ts)
             r = LINK.publish_update(body)
             self._json(r, 400 if "error" in r else 200)
+            return
+
+        if u.path == "/proposal":
+            # the proposal lane (2026-10-22): a person accepted or rejected a proposed
+            # revision in an editor; the encyclopedia records the decision here as ONE
+            # ledger row beside the acks of the revision the accept produced. The
+            # bridge writes nothing else for it -- the apply went through the editor's
+            # own save route and arrived as an ordinary /update.
+            if not isinstance(body, dict) or not body.get("id") or body.get("decision") not in ("accept", "reject"):
+                self._json({"error": "need id and decision accept|reject"}, 400)
+                return
+            row = {"k": "proposal"}
+            for key in ("id", "decision", "by", "revision_id", "revision", "target", "map_id",
+                        "floor_id", "source", "note", "reason", "ops"):
+                if key in body:
+                    row[key] = body[key]
+            LINK.record(row)
+            LINK.note(f"proposal {body.get('id')} {body.get('decision')}ed by {body.get('by', '?')}"
+                      f"{' -> ' + str(body.get('revision_id')) if body.get('revision_id') else ''}")
+            self._json({"ok": True})
             return
 
         if u.path == "/agent":

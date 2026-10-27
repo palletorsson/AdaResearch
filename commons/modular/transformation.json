@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "id": "transformation_arrangement",
+  "title": "Transformation / one relation, different bodies",
+  "sources": [
+    {
+      "id": "plank",
+      "label": "Timber plank",
+      "catalogue": "timber_plank_2m",
+      "term": "plank"
+    },
+    {
+      "id": "barrier",
+      "label": "Blue DO NOT CROSS barrier",
+      "catalogue": "do_not_cross_barrier",
+      "term": "elevated_plank"
+    },
+    {
+      "id": "portal",
+      "label": "Square portal",
+      "primitive": "portal_piece",
+      "term": "boolean_tunnel_section"
+    }
+  ],
+  "defaults": {
+    "source": "barrier",
+    "arrangement": "radial",
+    "count": 10,
+    "spacing": 0.35,
+    "radius": 1.1,
+    "angle": 28,
+    "axis": "y",
+    "ratio": 1,
+    "size": 0.5,
+    "rise": 0,
+    "staging": "table",
+    "opening": 2.4,
+    "wall": 0.18,
+    "depth": 0.6,
+    "sizePreset": "custom",
+    "worldScale": 1
+  },
+  "size_presets": [
+    {"id":"hand","label":"Hand","description":"35 cm model","envelope":[0.35,0.35,0.35],"staging":"ground"},
+    {"id":"table","label":"Table","description":"2.4 × 1.6 m study","envelope":[2.4,1.5,1.6],"staging":"table"},
+    {"id":"ground","label":"Ground","description":"8 × 6 m installation","envelope":[8,2.4,6],"staging":"ground"},
+    {"id":"floor","label":"Full-floor","description":"32 × 12 m · one storey","envelope":[32,5.5,12],"staging":"ground"}
+  ],
+  "controls": [
+    {
+      "key": "arrangement",
+      "label": "Arrangement",
+      "type": "enum",
+      "options": [
+        "line",
+        "radial"
+      ]
+    },
+    {
+      "key": "count",
+      "label": "Copies",
+      "type": "number",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "integer": true
+    },
+    {
+      "key": "spacing",
+      "label": "Spacing",
+      "unit": "m",
+      "type": "number",
+      "min": 0.12,
+      "max": 3,
+      "step": 0.02,
+      "when": {
+        "arrangement": "line"
+      }
+    },
+    {
+      "key": "radius",
+      "label": "Radius",
+      "unit": "m",
+      "type": "number",
+      "min": 0,
+      "max": 3,
+      "step": 0.05,
+      "when": {
+        "arrangement": "radial"
+      }
+    },
+    {
+      "key": "angle",
+      "label": "Rotation per copy",
+      "unit": "°",
+      "type": "number",
+      "min": -90,
+      "max": 90,
+      "step": 1
+    },
+    {
+      "key": "axis",
+      "label": "Rotation axis",
+      "type": "enum",
+      "options": [
+        "x",
+        "y",
+        "z"
+      ]
+    },
+    {
+      "key": "ratio",
+      "label": "Scale ratio per copy",
+      "unit": "×",
+      "type": "number",
+      "min": 0.8,
+      "max": 1.15,
+      "step": 0.01
+    },
+    {
+      "key": "size",
+      "label": "Initial scale",
+      "unit": "×",
+      "type": "number",
+      "min": 0.15,
+      "max": 1.5,
+      "step": 0.05
+    },
+    {
+      "key": "rise",
+      "label": "Rise per copy",
+      "unit": "m",
+      "type": "number",
+      "min": -0.2,
+      "max": 0.5,
+      "step": 0.02
+    },
+    {
+      "key": "staging",
+      "label": "Support",
+      "type": "enum",
+      "options": [
+        "table",
+        "ground"
+      ]
+    },
+    {
+      "key": "opening",
+      "label": "Square opening",
+      "unit": "m",
+      "type": "number",
+      "min": 1,
+      "max": 3,
+      "step": 0.05,
+      "when": {
+        "source": "portal"
+      }
+    },
+    {
+      "key": "wall",
+      "label": "Frame thickness",
+      "unit": "m",
+      "type": "number",
+      "min": 0.12,
+      "max": 0.4,
+      "step": 0.01,
+      "when": {
+        "source": "portal"
+      }
+    },
+    {
+      "key": "depth",
+      "label": "Portal depth",
+      "unit": "m",
+      "type": "number",
+      "min": 0.25,
+      "max": 1.2,
+      "step": 0.05,
+      "when": {
+        "source": "portal"
+      }
+    }
+  ],
+  "question": "What changes when the same arrangement is made from a different body?",
+  "invariants": [
+    "Source geometry remains authored; scale is explicit.",
+    "Every copy retains a stable ID and its own editable insertion point.",
+    "Rotation order is YXZ in both builders."
+  ],
+  "scope": "Static construction and arrangement. Native exports include collision where authored. This prototype does not claim dynamic joints, hand interactions or traversable routes."
+}

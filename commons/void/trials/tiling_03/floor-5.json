@@ -1,0 +1,132 @@
+{
+  "map": "Ribbon_Patterns_02",
+  "title": "Ribbon_Patterns_02 / 12 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f5_SimultaneousContrast_6_5",
+      "artifact": "SimultaneousContrast",
+      "station": "SE",
+      "position": [7, 9],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "lesson": "context"}
+    },
+    {
+      "id": "f5_MetamerismLab_20_5",
+      "artifact": "MetamerismLab",
+      "station": "SW",
+      "position": [-7, 9],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "lesson": "carrier"}
+    },
+    {
+      "id": "f5_spherecolors_6_11",
+      "artifact": "spherecolors",
+      "station": "SE",
+      "position": [3.5, 3],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.8,
+      "config": {"pin": "1", "plinth": "0", "label_in_space": "true"}
+    },
+    {
+      "id": "f5_hue_carousel_20_11",
+      "artifact": "hue_carousel",
+      "station": "SW",
+      "position": [-4, 3.5],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.8,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_grabcolorcollection_5_15",
+      "artifact": "grabcolorcollection",
+      "station": "NE",
+      "position": [5.5, -1],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_color_mixing_20_16",
+      "artifact": "color_mixing",
+      "station": "NW",
+      "position": [-3, -2],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.55,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_dark_side_prism_6_19",
+      "artifact": "dark_side_prism",
+      "station": "NE",
+      "position": [7, -5],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.6,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_prism_20_20",
+      "artifact": "prism",
+      "station": "NW",
+      "position": [-7, -6],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_grab_stick_scanner_2_23",
+      "artifact": "grab_stick_scanner",
+      "station": "NE",
+      "position": [11, -9],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.4,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_two_roads_6_25",
+      "artifact": "two_roads",
+      "station": "NE",
+      "position": [7, -11],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.45,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_color_scanner_20_25",
+      "artifact": "color_scanner",
+      "station": "NW",
+      "position": [-7, -11],
+      "facing": 180,
+      "height": 0,
+      "scale": 0.45,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_grab_stick_24_28",
+      "artifact": "grab_stick",
+      "station": "NW",
+      "position": [-11, -13],
+      "facing": 270,
+      "height": 0,
+      "scale": 0.4,
+      "config": {"pin": "1", "plinth": "0"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

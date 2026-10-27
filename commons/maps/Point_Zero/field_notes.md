@@ -23,3 +23,17 @@
 **Next comparison, proposed:** Move one lower-floor electrical cap below the roof surface and compare the same camera position before and after. Separately, make the sphere's centre and the cube's offset legible without moving the world origin.
 
 **Literary possibility, not a technical finding:** The first unexpected mark comes from a meeting between two constructed surfaces. The label offers certainty about “zero”, while the body has to discover which part of the object it names.
+
+## 2026-10-20 — Follow-up: moving view and cap control
+
+**Method:** A scripted native Godot camera observes the production roof and both service pipes. Twelve stationary frames precede a sideways/vertical camera sweep. At the original viewpoint, the candidate lower-floor electrical riser is temporarily hidden, captured, then restored. This is an isolated rendering intervention, not a saved geometry edit or a headset test.
+
+**Evidence:** [Capture comparison and revised reading](../../../doc/book/iterations/2026-10-20-roof-flicker-capture/index.html), with PNG sequences, camera transforms and inspection clips. The production atmosphere is held at sky time zero; only rooftop authored artifacts are loaded.
+
+**Observation:** Visible coverage of the reddish mark changes with camera position. The stationary patch crop is identical across twelve frames at each pipe. Hiding each candidate riser removes the corresponding mark; restoring it brings the mark back.
+
+**Interpretation:** The control identifies the rendered mark as the lower-floor riser's cap. Together with the coincident cap/slab geometry, this supports z-fighting. The capture establishes viewpoint-dependent breakup rather than independent blinking; it does not invalidate Palle's experience of flicker while moving.
+
+**Crate comparison:** Invoking the production strike opens the panel and reveals the running counter. At the saved crate placement and tested viewpoint, the digits are already visible at standing height. Lowering the camera reveals more roof signage. The literary claim that lowering recovers the tops of the digits remains unverified here.
+
+**Decision:** Add the red-dot encounter to Point Zero, keep the explanation tentative in Model B's voice, and retain the unresolved crate-framing discrepancy alongside the text. No saved geometry was changed by this task. The shared rooms file changed elsewhere during the work; actual capture transforms are recorded. The ending remains “I jump.”

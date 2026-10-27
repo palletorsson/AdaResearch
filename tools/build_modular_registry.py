@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -35,14 +36,15 @@ def build() -> dict:
     for tid, t in terms.items():
         token = f"mod_{tid}"
         chapter = t.get("chapter", "")
+        editable_recipe = t.get("editor_adapter") == "recipe_area"
         artifacts[token] = {
             "lookup_name": token,
             "name": f"modular · {t.get('label', tid)}",
             "description": f"{t.get('label', tid)} = {t.get('expr', '')}. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
             "category": "modular",
             "complexity": "beginner",
-            "scene": SCENE,
-            "default_params": {"term": tid},
+            "scene": "res://commons/modular/recipe_area.tscn" if editable_recipe else SCENE,
+            "default_params": {"recipe": tid} if editable_recipe else {"term": tid},
             "configure_before_ready": True,
             "map_ready": True,
             "include_in_map_data": True,
@@ -71,8 +73,10 @@ def main() -> int:
             return 1
         print("up to date", OUT)
         return 0
-    OUT.write_text(text, encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)}: {len(doc['artifacts'])} tokens on {SCENE}")
+    temporary=OUT.with_suffix('.modular.tmp')
+    temporary.write_text(text, encoding="utf-8")
+    os.replace(temporary,OUT)
+    print(f"wrote {OUT.relative_to(ROOT)}: {len(doc['artifacts'])} tokens using shared composite / recipe adapters")
     return 0
 
 

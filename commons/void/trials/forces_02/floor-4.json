@@ -1,0 +1,62 @@
+{
+  "map": "Vectors_Act4a_KineticForces",
+  "title": "Vectors_Act4a_KineticForces / 5 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f4_force_hall_07_0_0",
+      "artifact": "force_hall_07",
+      "station": "SE",
+      "position": [5, 15],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_force_play_liquids_15_13",
+      "artifact": "force_play_liquids",
+      "station": "NE",
+      "position": [0, -10.5],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_force_play_friction_15_35",
+      "artifact": "force_play_friction",
+      "station": "NE",
+      "position": [0, -24],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_viscosity_layers_15_52",
+      "artifact": "viscosity_layers",
+      "station": "SE",
+      "position": [8, 9],
+      "facing": 0,
+      "height": 0.82,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_centrifuge_ring_15_69",
+      "artifact": "centrifuge_ring",
+      "station": "SE",
+      "position": [0, 7],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "lesson": "hand_ring"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

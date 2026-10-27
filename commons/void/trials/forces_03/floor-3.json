@@ -1,0 +1,108 @@
+{
+  "map": "VFM_07_Gravity",
+  "title": "VFM_07_Gravity",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f3_force_hall_10_0_0",
+      "artifact": "force_hall_10",
+      "position": [
+        -4,
+        14
+      ],
+      "station": "SW",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f3_force_play_mutual_17_14",
+      "artifact": "force_play_mutual",
+      "position": [
+        -31,
+        0
+      ],
+      "station": "SW",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f3_force_play_magnet_10_36",
+      "artifact": "force_play_magnet",
+      "position": [
+        0,
+        2
+      ],
+      "station": "SE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f3_force_play_tower_26_36",
+      "artifact": "force_play_tower",
+      "position": [
+        16,
+        9
+      ],
+      "station": "SE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f3_force_play_gravity_17_54",
+      "artifact": "force_play_gravity",
+      "position": [
+        0,
+        -11
+      ],
+      "station": "NE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f3_orbit_walk_17_70",
+      "artifact": "orbit_walk",
+      "position": [
+        -14,
+        10
+      ],
+      "station": "SW",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

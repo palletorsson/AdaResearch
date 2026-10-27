@@ -1,0 +1,14 @@
+# qfeplaboratory_02 — placed for curation
+
+Original scenes, token config, scale and height preserved. Standard floors; each occurrence independently editable. Desktop and VR share rooms.json. Artifact buttons and gameplay intentionally untested.
+
+- All seven original occurrences from QFEP E Term are independently editable on a standard floor. Original scene identities/config/scales/heights retained. The malformed raw tt token is retained in the inventory and its actual numeric-parser result (height0, scale180, no tutorial key) matches the original museum em_plan.
+- Basic desktop and synthetic XR loading passes33 checks without engine errors. Entropy fan, microstate counter, possibility cloud, cubes, particles and lambda instrument remain original; buttons, calibration, grabs and simulation outcomes are not tested.
+- The GPU-only particle cloud has no CPU mesh. A trial-only export hook renders the actual original emitter into a transparent texture using the Mobile renderer; the browser receives an explicitly labelled static billboard. No particle positions or replacement simulation were invented. Its texture was extracted from the real GLB and visually inspected. The exporter now awaits synchronous or asynchronous preview hooks.
+- Native screenshot and broad mesh bounds inspected. All real exported GLBs independently parsed, editor move/copy/rotation and save/reload parity checked. Native GPU simulation stays original; the image hook only runs during export.
+- Editor validation retains an above-limit scale only when that exact artifact/scale is present in this trial original inventory. The normal maximum remains16. Four focused boundary checks reject edited181, another object180, and inheritance into another trial; real editor copy/save checks pass for the preserved source180.
+- Known unresolved import issue: the original malformed entropy text token creates a180 by216 metre blank panel, spanning many floors and obscuring much of the tower/sky. This source defect is deliberately visible in the as-is transfer; its text selection, scale and integration are not accepted as a finished installation. Fixing it is deferred with curation/texts.
+- The editor particle preview is a static two-dimensional rendered image, not exported GPU trajectories or a browser simulation. The ordinary mesh-bounds helper omits GPU particles; its no-drawn-mesh note does not mean the native emitter is empty. Full live particle bounds and shaft/pillar clearance are untested.
+- Original UID fallback and missing tutorial-widget warnings are recorded. Source fallback content, authored small displays and physics remain unchanged. Physical-headset behavior/performance and all input mechanisms remain untested; separate batch30 live soft-body placement remains open.
+
+Evidence: {"source_checks": 43, "native_load_checks": 33, "editor_checks": 10, "valid_nonempty_glbs": 41, "mesh_count": 1269}

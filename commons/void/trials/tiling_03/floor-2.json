@@ -1,0 +1,233 @@
+{
+  "map": "Symmetry_Seventeen",
+  "title": "Symmetry Seventeen / original museum transfer",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_wallpaper_cage_21_4",
+      "artifact": "wallpaper_cage",
+      "station": "SW",
+      "position": [
+        -15,
+        9
+      ],
+      "facing": 180.0,
+      "height": 1.1,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_loom_escher_mirror_4_5",
+      "artifact": "loom_escher_mirror",
+      "station": "SE",
+      "position": [
+        12,
+        9
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_pattern_loom_10_5",
+      "artifact": "pattern_loom",
+      "station": "SE",
+      "position": [
+        5,
+        9
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_loom_alhambra_p6m_16_5",
+      "artifact": "loom_alhambra_p6m",
+      "station": "SW",
+      "position": [
+        -2,
+        9
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_wall_pattern_gallery_8_6",
+      "artifact": "wall_pattern_gallery",
+      "station": "NE",
+      "position": [
+        9,
+        -8
+      ],
+      "facing": 270.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "surfaces": "walls",
+        "emission_strength": "0.25"
+      }
+    },
+    {
+      "id": "f2_vr_tile_editor_20_10",
+      "artifact": "vr_tile_editor",
+      "station": "NW",
+      "position": [
+        -16,
+        -4
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "lesson": "symmetry_compare"
+      }
+    },
+    {
+      "id": "f2_mill_persian_p4_4_12",
+      "artifact": "mill_persian_p4",
+      "station": "SE",
+      "position": [
+        16,
+        6
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_mill_alhambra_p6m_10_12",
+      "artifact": "mill_alhambra_p6m",
+      "station": "SE",
+      "position": [
+        5,
+        3
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_jacquard_studio_16_14",
+      "artifact": "jacquard_studio",
+      "station": "SW",
+      "position": [
+        -4,
+        3
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f2_pattern_tile_puzzle_10_17",
+      "artifact": "pattern_tile_puzzle",
+      "station": "NE",
+      "position": [
+        3,
+        -3
+      ],
+      "facing": 180.0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_mill_escher_p4g_4_18",
+      "artifact": "mill_escher_p4g",
+      "station": "NE",
+      "position": [
+        16,
+        -4
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_kaleidoscope_21_18",
+      "artifact": "kaleidoscope",
+      "station": "NW",
+      "position": [
+        -16,
+        -11
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "plinth": "0.90"
+      }
+    },
+    {
+      "id": "f2_thread_loom_16_21",
+      "artifact": "thread_loom",
+      "station": "NW",
+      "position": [
+        -5,
+        -2
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f2_pattern_artifact_4_24",
+      "artifact": "pattern_artifact",
+      "station": "NE",
+      "position": [
+        16,
+        -10
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "plinth": "0.90"
+      }
+    },
+    {
+      "id": "f2_tile_meander_floor_21_24",
+      "artifact": "tile_meander_floor",
+      "station": "NE",
+      "position": [
+        0,
+        -9
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_pattern_atlas_gallery_13_26",
+      "artifact": "pattern_atlas_gallery",
+      "station": "NE",
+      "position": [
+        0,
+        -13
+      ],
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

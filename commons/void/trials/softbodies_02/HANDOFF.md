@@ -1,0 +1,17 @@
+# softbodies_02 — placed for curation
+
+Original scenes, token config, scale and height preserved. Standard floors; each occurrence independently editable. Desktop and VR share rooms.json. Artifact buttons and gameplay intentionally untested.
+
+- All 41 inventoried source occurrences from five original maps are placed independently on standard floors. Source scene identity, token configuration, scale and height retained. Original maps and texts unchanged. Existing original-derived Void workshop adapter reused.
+- Basic desktop and synthetic XR loads instantiate all objects and retain source token config, with no final script/engine errors. Artifact buttons, grabs, combat and mechanics were deliberately not exercised.
+- Initial Jolt loading errors resolved by applying cloth/gallery source configuration before ready and waiting for a live physics space before the rounded specimen captures its rest state. This changes loading timing rather than the source solver, parameters or control logic.
+- Exporter caches real referenced soft-body solver vertices before pausing the building. It skips source vertices omitted by Jolt because no faces use them and recomputes snapshot normals. Original skinned primitive geometry uses a disclosed rest-mesh preview when ArrayMesh pose baking is unavailable.
+- Inside-tower gallery screenshot inspected; physical bounds recorded. Exported GLBs are independently parsed, and editor model references, copy/move/rotation validation and native/Desktop mirror save/reload are checked. These save checks validate authored data, not physical pinning correctness.
+- Known unresolved import issue: some live soft bodies, including the breathing-room walls and rounded specimen, have physical bounds near world origin instead of their authored negative floor. This is present before the observed preview pause. Their proper floor alignment and moved/rotated physical behavior are NOT accepted here. A trial-scoped streaming restoration experiment did not fix it and was fully removed; source simulation behavior remains unchanged for later focused integration.
+- This is an uncurated source transfer with explicit integration limits, not a claim that the five maps are finished or every body is correctly seated. The shared desktop/VR layout and editor saves do not establish identical physical behavior in all conditions.
+- Original gallery and curtain dimensions/heights are retained; some geometry extends beyond the floor footprint or neighbouring storeys. No complete shaft/pillar clearance is claimed. Large racks, intersecting exhibits, original supports and body placement remain for integration/curation.
+- Flagdancer includes a skinned primitive which Godot cannot bake through the ArrayMesh-only skeleton pose path. Its original rest geometry is shown in the editor, explicitly recorded in manifest notes. Native animation remains original.
+- Models are static snapshots of live deformed bodies and processes. Shader appearances and later physical states differ in play. Artifact buttons/gameplay and physical-headset performance are untested.
+- Source renderer warnings include unsupported Mobile/Compatibility subsurface scattering and old material parameters. Two known GL viewport-texture cleanup errors occur only after successful export; no failed models or runtime export errors remain. No Quest frame-rate or learning-outcome acceptance is claimed.
+
+Evidence: {"source_checks": 229, "native_load_checks": 185, "editor_checks": 44, "valid_nonempty_glbs": 79, "mesh_count": 4918}

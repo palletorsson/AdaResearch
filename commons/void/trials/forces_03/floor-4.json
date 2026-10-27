@@ -1,0 +1,62 @@
+{
+  "map": "VFM_09_Legs",
+  "title": "VFM_09_Legs / 5 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f4_force_hall_11_0_0",
+      "artifact": "force_hall_11",
+      "station": "SE",
+      "position": [-4, 14],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_force_play_support_14_13",
+      "artifact": "force_play_support",
+      "station": "SE",
+      "position": [0, 2],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_one_leg_5_31",
+      "artifact": "one_leg",
+      "station": "NE",
+      "position": [9, -9],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "driven_by_player": "false", "show_foot_markers": "false", "pace_reach": "1.1", "patrol_speed": "0.25"}
+    },
+    {
+      "id": "f4_four_leg_critter_14_31",
+      "artifact": "four_leg_critter",
+      "station": "NE",
+      "position": [0, -9],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "driven_by_player": "false", "show_foot_markers": "false", "pace_reach": "1.1", "patrol_speed": "0.25"}
+    },
+    {
+      "id": "f4_six_leg_critter_23_31",
+      "artifact": "six_leg_critter",
+      "station": "NW",
+      "position": [-9, -9],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "driven_by_player": "false", "show_foot_markers": "false", "pace_reach": "1.1", "patrol_speed": "0.25"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

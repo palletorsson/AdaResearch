@@ -1,0 +1,128 @@
+{
+  "map": "SpeculativeComputation_Situated_Computation",
+  "title": "SpeculativeComputation_Situated_Computation / transfer, 7 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_situated_readout_2_2",
+      "artifact": "situated_readout",
+      "position": [
+        3,
+        10
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 180,
+      "scale": 1,
+      "config": {
+        "verdict": "NW",
+        "interactive": "true",
+        "address": "footnote",
+        "museum_yaw": 45
+      }
+    },
+    {
+      "id": "f2_situated_readout_7_2",
+      "artifact": "situated_readout",
+      "position": [
+        -2,
+        10
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 90,
+      "scale": 1,
+      "config": {
+        "verdict": "NE",
+        "interactive": "true",
+        "address": "footnote",
+        "museum_yaw": 45
+      }
+    },
+    {
+      "id": "f2_forbidden_bands_4_4",
+      "artifact": "forbidden_bands",
+      "position": [
+        1,
+        8
+      ],
+      "station": "SE",
+      "height": 0.95,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_head_crab_7_5",
+      "artifact": "head_crab",
+      "position": [
+        -2,
+        7
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 0,
+      "scale": 1,
+      "config": {
+        "detection": "14"
+      }
+    },
+    {
+      "id": "f2_situated_readout_2_7",
+      "artifact": "situated_readout",
+      "position": [
+        3,
+        5
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 270,
+      "scale": 1,
+      "config": {
+        "verdict": "SW",
+        "interactive": "true",
+        "address": "footnote",
+        "museum_yaw": 45
+      }
+    },
+    {
+      "id": "f2_situated_readout_7_7",
+      "artifact": "situated_readout",
+      "position": [
+        -2,
+        5
+      ],
+      "station": "SW",
+      "height": 0,
+      "facing": 0,
+      "scale": 1,
+      "config": {
+        "verdict": "SE",
+        "interactive": "true",
+        "address": "footnote",
+        "museum_yaw": 45
+      }
+    },
+    {
+      "id": "f2_museum_witnesses_11_20",
+      "artifact": "museum_witnesses",
+      "position": [
+        0,
+        -7.25
+      ],
+      "station": "NE",
+      "height": 0,
+      "facing": 0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "1"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

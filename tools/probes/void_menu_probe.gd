@@ -29,6 +29,12 @@ func run() -> void:
 	var motion_room := "--void-motion-room" in OS.get_cmdline_user_args()
 	var button := menu.get_node("Buttons/VoidMovementButton" if motion_room else "Buttons/VoidButton")
 	button.clicked.emit()
+	if not motion_room:
+		var picker := menu.get_node("VoidTrialPicker")
+		# The main Void entry now offers destinations before loading the tower.
+		assert(fixture.destination.is_empty())
+		assert(not menu.get_node("Buttons").visible)
+		picker.buttons[0].clicked.emit() # Start from the beginning.
 	var expected := "res://commons/void/motion_room.tscn" if motion_room else "res://commons/void/void.tscn"
 	var checks := [{"name": "Actual main-menu button requests the playable scene through staging", "passed": fixture.destination == expected}]
 	var game: Node3D = load(fixture.destination).instantiate()

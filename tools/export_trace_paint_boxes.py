@@ -5,23 +5,31 @@ import json
 import os
 import shutil
 import subprocess
+from generated_storage import model_directory
+from void_native_slot import acquire_native_slot
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT.parent / "ada_encyclopedia/public/void-models"
 OUT = ROOT / "doc/book/iterations/2026-10-20-trace-paint-boxes/editor"
 STAGE = Path((ROOT / "ada_run/void-game-test/latest.txt").read_text().strip()) / "source"
 OUT.mkdir(parents=True, exist_ok=True)
+MODELS = model_directory(OUT / 'native-models')
+MODELS.mkdir(parents=True, exist_ok=True)
+slot = acquire_native_slot('Point Trace paint-box model export')
+os.environ['ADA_SOURCE_PROJECT'] = str(ROOT)
+shutil.copy2(ROOT / 'tools/generated_storage.gd', STAGE / 'tools/generated_storage.gd')
 for name in ("export_void_editor.gd", "export_trace_paint_boxes.gd"):
     shutil.copy2(ROOT / "tools/probes" / name, STAGE / "tools/probes" / name)
 with (OUT / "export.log").open("w", encoding="utf-8") as stream:
     result = subprocess.run([
         os.environ.get("GODOT_EXE", "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe"),
         "--headless", "--path", str(STAGE), "--script",
-        "res://tools/probes/export_trace_paint_boxes.gd", "--", "--out=" + str(OUT)],
+        "res://tools/probes/export_trace_paint_boxes.gd", "--", "--out=" + str(MODELS)],
         stdout=stream, stderr=subprocess.STDOUT, timeout=90,
         creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
 log = (OUT / "export.log").read_text(encoding="utf-8", errors="replace")
 assert result.returncode == 0 and "SCRIPT ERROR" not in log and "\nERROR:" not in log, log[-5000:]
+shutil.copy2(MODELS / "trace-paint-boxes.json", OUT / "trace-paint-boxes.json")
 patch = json.loads((OUT / "trace-paint-boxes.json").read_text())
 assert not patch["failures"] and len(patch["artifacts"]) == 4
 manifest_path = WEB / "manifest.json"
@@ -34,7 +42,7 @@ records.update(patch["artifacts"])
 for key, record in patch["artifacts"].items():
     assert record["model"]["meshes"] > 0 and record["model"]["labels"]
     filename = Path(record["model"]["url"]).name
-    shutil.copy2(OUT / filename, WEB / filename)
+    shutil.copy2(MODELS / filename, WEB / filename)
 for relative in ("commons/void/rooms.json", "commons/void/catalog.json",
                  "commons/artifacts/trace_paint_box/trace_paint_box.gd",
                  "commons/artifacts/trace_paint_box/trace_paint_box.tscn"):
@@ -44,6 +52,6 @@ manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 (OUT / "checks.json").write_text(json.dumps({
     "passed": True, "models": list(patch["artifacts"]),
     "scope": "Only the four native paint-box models replace the original vitrine entry in the web editor manifest.",
-    "revision": manifest["revision"]
+    "revision": manifest["revision"], "models_directory": str(MODELS)
 }, indent=2), encoding="utf-8")
 print("Four native paint-box models and their labels exported to the layout editor.")

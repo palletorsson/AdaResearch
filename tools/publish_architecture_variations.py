@@ -1,5 +1,6 @@
 """Publish native captures plus an orbit viewer of exact Godot GLB exports."""
 from pathlib import Path
+from generated_storage import model_directory
 import hashlib, json, shutil, struct
 import markdown
 R=Path(__file__).resolve().parents[1]
@@ -12,7 +13,7 @@ receipt=json.loads((RUN/'report.json').read_text());assert len(receipt['checks']
 for p in [O/'museum',O/'validation',O/'source',WEB/'models',WEB/'vendor/controls',WEB/'vendor/loaders',WEB/'vendor/utils']:p.mkdir(parents=True,exist_ok=True)
 for p in RUN.glob('*.png'):shutil.copy2(p,O/'museum'/p.name)
 models={}
-for p in RUN.glob('*.glb'):
+for p in model_directory(RUN).glob('*.glb'):
     raw=p.read_bytes();assert struct.unpack('<4sII',raw[:12])==(b'glTF',2,len(raw))
     length,kind=struct.unpack('<II',raw[12:20]);assert kind==0x4e4f534a
     doc=json.loads(raw[20:20+length]);assert doc['meshes'] and doc['nodes']
@@ -29,13 +30,13 @@ report='''# One arcade, four operations
 
 The previous corridor becomes a curved court, a hinged curl, a repeated field and a stretched canopy. All four studies reuse its actual bay constructor. A fixed miniature keeps the original visible.
 
-**[Open the interactive 3D viewer](/research/architecture-variations/index.html#stretch)** — orbit, zoom, compare viewpoints and inspect the wireframe. The browser displays actual geometry exported from Godot; use the Godot scene for live parameters and grabbing.
+**[Open the interactive 3D viewer](/research/architecture-variations/index.html#stretch)** â€” orbit, zoom, compare viewpoints and inspect the wireframe. The browser displays actual geometry exported from Godot; use the Godot scene for live parameters and grabbing.
 
 ![The roof becomes a canopy in the Godot courtyard.](museum/stretch-ground.png)
 
 ## 00 / The familiar assembly
 
-Twelve upright bays repeat the original floor, columns, roof, rails and pink guide. The miniature beside the console retains eight bays at one quarter scale. The active object has a 4–24 bay control.
+Twelve upright bays repeat the original floor, columns, roof, rails and pink guide. The miniature beside the console retains eight bays at one quarter scale. The active object has a 4â€“24 bay control.
 
 ![The source and fixed reference.](museum/source.png)
 
@@ -87,7 +88,7 @@ This is the strongest connection to the supplied game screenshots: a surface tha
 
 ![Native dials, rectangular buttons and the shared pink grab point.](museum/console.png)
 
-Run `res://commons/artifacts/architecture_variations/preview.tscn` with F6 in the Ada project. The standalone courtyard uses the existing desktop player. Aim/click presets, drag CHANGE or BAYS, and drag the pink point for Hinge or Stretch. Keys 1–5 select studies; left/right change strength; up/down change count; R restores Source. The same handle supports XRTools grip when used with an XR rig; this standalone preview spawns the desktop player.
+Run `res://commons/artifacts/architecture_variations/preview.tscn` with F6 in the Ada project. The standalone courtyard uses the existing desktop player. Aim/click presets, drag CHANGE or BAYS, and drag the pink point for Hinge or Stretch. Keys 1â€“5 select studies; left/right change strength; up/down change count; R restores Source. The same handle supports XRTools grip when used with an XR rig; this standalone preview spawns the desktop player.
 
 ## What this suggests for the research
 
@@ -106,13 +107,13 @@ These are our experiments in relation to the references, not reconstructions of 
 
 ![The research courtyard from above.](museum/above.png)
 
-**35 native checks pass.** These cover curve radius and height, hinge coincidence, rigid lengths, repetition, bounded deformation, unchanged ground points, triangle count, preserved source/reference, exact reset, native dials, real desktop button rays, supplied XRTools controller poses and six native GLB exports. [Receipt](validation/report.json) · [Engine log](validation/native.log) · [Run instructions](source/README.md).
+**35 native checks pass.** These cover curve radius and height, hinge coincidence, rigid lengths, repetition, bounded deformation, unchanged ground points, triangle count, preserved source/reference, exact reset, native dials, real desktop button rays, supplied XRTools controller poses and six native GLB exports. [Receipt](validation/report.json) Â· [Engine log](validation/native.log) Â· [Run instructions](source/README.md).
 
 The changing architecture has no colliders: the fixed courtyard floor supplies walking support. These are visual research models, not structurally validated or climbable buildings. No physical headset or Quest performance run was performed. The log retains existing project UID and Jolt warnings. This is a separate museum-style research courtyard; no spine placement, canonical tutorial or final text has been changed.
 '''
 (O/'REPORT.md').write_text(report,encoding='utf-8')
 style='''*{box-sizing:border-box}body{margin:0;background:#efeee5;color:#26343a;font:18px/1.65 Georgia,serif}header,main,footer{max-width:1300px;margin:auto;padding:32px 50px}header{font:13px Arial;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid #bdc5bd}h1{font-size:clamp(42px,6vw,76px);font-weight:400;line-height:1.05}h2{font:22px Arial;margin-top:65px}p,li{max-width:850px}img{display:block;width:100%;border:1px solid #bdc5bd;margin:25px 0}a{color:#a14472}summary{cursor:pointer;font-family:Arial;font-size:15px}details{margin:25px 0}code{font:.82em Consolas,monospace;overflow-wrap:anywhere}footer{font:14px Arial;border-top:1px solid #bdc5bd}@media(max-width:750px){header,main,footer{padding:22px}}'''
-(O/'index.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One arcade, four operations</title><style>{style}</style></head><body><header>Endless Museum / spatial studies / 9 October 2026</header><main>{markdown.markdown(report,extensions=["extra"])}</main><footer>Endless Museum · always another room</footer></body></html>',encoding='utf-8')
+(O/'index.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One arcade, four operations</title><style>{style}</style></head><body><header>Endless Museum / spatial studies / 9 October 2026</header><main>{markdown.markdown(report,extensions=["extra"])}</main><footer>Endless Museum Â· always another room</footer></body></html>',encoding='utf-8')
 hashes={str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [*B.glob('*.gd'),*B.glob('*.tscn'),R/'tools/probes/architecture_variations.gd',R/'commons/artifacts/architecture_spine/architecture_spine.gd',R/'commons/artifacts/camera_glitch_study/glitch_console.gd',R/'algorithms/randomness/proceduralrandomness/geometrybased/omoss/pivot_handle.gd']}
 (O/'validation/source-hashes.json').write_text(json.dumps(hashes,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'report':str(O/'index.html'),'viewer':str(WEB/'index.html'),'models':len(models),'checks':35}))

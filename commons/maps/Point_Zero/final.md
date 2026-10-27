@@ -16,6 +16,8 @@ I watch until its last digits have changed too often to retain. Then I look down
 
 I step out.
 
+Someone made a place here that can carry my weight. I have already depended on their work, including the parts I cannot see. The floor holds while I decide what to look at first.
+
 The roof extends well beyond the crate. Columns stand in two rows, with short lengths of reinforcement projecting from their tops. Service rails run between supports. Farther along, the concrete stops around an opening and the columns continue below it. There is another floor down there. The building is further advanced beneath my feet than above my head.
 
 ADA RESEARCH stands on a steel frame against the sky.
@@ -42,6 +44,14 @@ There is no reason to make a permanent viewing station here. I would have to dec
 
 Near the centre of the slab, a black sphere sits within a wireframe cube. Its label gives this place three zeroes. The number behind me continues to increase.
 
+Beside a pipe, a small reddish patch flickers against the concrete. I move my head and its edge changes. I try the movement again.
+
+Perhaps something comes through the slab here. Perhaps two surfaces have been given almost the same place. I cannot tell from this side.
+
+I had taken the floor for one continuous thing. It has held me while I looked elsewhere. I crouch beside the pipe, keeping my hand clear of the mark.
+
+I could stay here and try to account for it. There are also the openings in the floor and somewhere to land below. I will have to trust parts of this construction before I understand them. I look once more at the patch beside the pipe, so I can find it again.
+
 On the floor, YOU ARE HERE has been printed with the first word crossed out. I read it from one side, then the other. The lettering does not turn to meet me.
 
 I leave it where it is.
@@ -49,3 +59,7 @@ I leave it where it is.
 From beside the shaft, I can see the outside of the crate and a narrow portion of its interior. The knot that held the sky is too small to find. Below me, light reaches the next floor.
 
 I move along the edge, looking for somewhere to land.
+
+There is a place below I think I can reach. I move back a little, then towards it.
+
+I jump.

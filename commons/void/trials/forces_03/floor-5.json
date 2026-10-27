@@ -1,0 +1,102 @@
+{
+  "map": "VFM_08_Arena",
+  "title": "VFM_08_Arena / 9 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f5_force_hall_12_0_0",
+      "artifact": "force_hall_12",
+      "station": "SE",
+      "position": [-4, 14],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_force_play_bowling_8_17",
+      "artifact": "force_play_bowling",
+      "station": "NE",
+      "position": [2.5, -1.8],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_sentry_turret_19_11",
+      "artifact": "sentry_turret",
+      "station": "SW",
+      "position": [-16, 4],
+      "facing": 0,
+      "height": 0.82,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "target": "balls", "detection_range": "6", "use_laser_damage": "true", "laser_damage_per_hit": "80"}
+    },
+    {
+      "id": "f5_ball_dropper_19_16",
+      "artifact": "ball_dropper",
+      "station": "NW",
+      "position": [-16, -1],
+      "facing": 180,
+      "height": 2.8,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "total_balls": "8", "spawn_spread": "0.4", "drop_interval_min": "2", "drop_interval_max": "3"}
+    },
+    {
+      "id": "f5_queer_cylinder_target_19_23",
+      "artifact": "queer_cylinder_target",
+      "station": "NW",
+      "position": [-16, -8],
+      "facing": 0,
+      "height": 1.35,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_force_punching_bag_20_39",
+      "artifact": "force_punching_bag",
+      "station": "NE",
+      "position": [16, -9],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_force_play_recoil_9_41",
+      "artifact": "force_play_recoil",
+      "station": "SE",
+      "position": [15, 8.5],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_momentum_cradle_8_55",
+      "artifact": "momentum_cradle",
+      "station": "NW",
+      "position": [-8, -11],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f5_newton_cradle_18_55",
+      "artifact": "newton_cradle",
+      "station": "NW",
+      "position": [-18, -11],
+      "facing": 0,
+      "height": 0.82,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

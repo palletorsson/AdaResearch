@@ -1,0 +1,13 @@
+# Batch 24: Random Remove and 10 PRINT
+
+Palle asks for the next five museum maps, Codex three and Claude two, using the new testing helpers. Preserve all original artifacts, standard floor size and independent lab-editor placement. Curation and chapter texts wait.
+
+You own `commons/void/trials/randomness_03/`: floor 1 `Random_Remove`; floor 2 `Randomness_10_PRINT_Algorithm`. Skeleton, inventory and shared registration already exist. Do not rerun preparation. Read every source placement/config, the source scene/script and inventory. Preserve identities, scales and configurations. Use the standard 42 x 32 m floor, 6 m storeys, unchanged pillars and shafts; report unavoidable fit/support issues instead of shrinking or redesigning artifacts.
+
+Read `doc/void-transfer/GODOT_TESTING_FOR_AGENTS.md` and the new helpers in `tools/probes/void_transfer_probe.gd`. Use `input_aim_camera`, `input_grab_preflight`, `input_grab`, `input_tip_to` where applicable. Add named `debug_cases()` and `run_debug_case()` hooks to your probe. Diagnose a specific interaction with --focus/--mode before repeating full acceptance. Geometry/API checks must be labelled; assert real desktop and synthetic-XR input when controls exist. Unknown or missing functionality must remain explicit.
+
+You have the exclusive Godot slot now: see adjacent GPU_SLOT.json. Serial commands: source audit, focused diagnostics as needed, full native acceptance, GLB export, editor test. Use `python tools/test_transfer_native.py randomness_03`, `python tools/export_void_trial.py randomness_03`, `node tools/test_void_transfer_editor.cjs randomness_03`. GODOT_EXE is C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe. Do not claim headset testing. No other native UI automation during input tests. Do not recursively scan/delete ada_run junction stages.
+
+Write only your trial folder, exported public/void-trials/randomness_03 assets and GPU_SLOT.json (release at completion). Exporter's existing line_parts.json output is permitted. Shared runtime/catalog/playable/source fixes belong to Codex: put narrow requests in REQUESTS.md and STATUS.json so they can be handled while you continue independent work. Trial-only adapters are allowed. Preserve exported properties when swapping scripts. No global audio/device changes.
+
+Deliver HANDOFF.md and STATUS.json with placement/action/evidence/fit/remaining table, actual bounds, input checks, screenshots, logs, exact files and limitations. Run your tests; Codex will independently inspect them. Set GPU_SLOT.json owner to Codex and state released when your Godot/export jobs are finished. No further floors without assignment.

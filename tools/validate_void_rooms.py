@@ -26,9 +26,46 @@ def rect(x, z, width, depth):
     return (x-width/2, z-depth/2, x+width/2, z+depth/2)
 
 
+def original_scale_allowances(frame_path):
+    """Only an inventoried museum scale may exceed the ordinary editor ceiling.
+
+    This preserves as-is source transfers (including malformed original tokens)
+    without raising the schema limit for arbitrary new or edited object sizes.
+    """
+    frame_path = frame_path or VOID/'layout.json'
+    path = frame_path.parent/'source-inventory.json'
+    paths = [path]
+    # The main spine retains each imported floor's original transfer provenance.
+    # Original outsize scales remain inventoried exceptions, never a new default.
+    if frame_path == VOID/'layout.json':
+        layout = json.loads(frame_path.read_text(encoding='utf-8-sig'))
+        for trial in {s['trial'] for s in layout.get('floor_sources', {}).values()}:
+            if trial and all(c.isalnum() or c in '_-' for c in trial):
+                paths.append(VOID/'trials'/trial/'source-inventory.json')
+    allowed = set()
+    for path in paths:
+        if path.is_file():
+            for item in json.loads(path.read_text(encoding='utf-8-sig')).get('placements', []):
+                parts = item['token'].split('#')[0].split(':')
+                try: scale = float(parts[3]) if len(parts)>3 else 1.0
+                except ValueError: continue
+                if math.isfinite(scale) and scale>16: allowed.add((item['artifact'],scale))
+    return allowed
+
+
+def retained_original_scale(error, data, allowed):
+    path = list(error.path)
+    if error.validator != 'maximum' or len(path)!=5 or path[0]!='floors' or path[2] not in ('artifacts','copies') or path[4]!='scale':
+        return False
+    item = data['floors'][path[1]][path[2]][path[3]]
+    return (item.get('artifact'),error.instance) in allowed
+
+
 def validate(data, frame_path=None):
     schema = json.loads((VOID / 'rooms.schema.json').read_text(encoding='utf-8'))
-    errors = [f'{"/".join(map(str, e.path))}: {e.message}' for e in Draft7Validator(schema).iter_errors(data)]
+    allowed = original_scale_allowances(frame_path)
+    errors = [f'{"/".join(map(str, e.path))}: {e.message}' for e in Draft7Validator(schema).iter_errors(data)
+              if not retained_original_scale(e,data,allowed)]
     if errors:
         return errors
     catalog = json.loads((VOID / 'catalog.json').read_text(encoding='utf-8'))
@@ -81,6 +118,8 @@ def validate(data, frame_path=None):
             is_copy = item in floor.get('copies', [])
             if item['artifact'] not in artifacts: errors.append(f'{prefix}: artifact is not in the registry or its scene is missing')
             config = item.get('config', {})
+            if item['height'] > frame['storey_height']-.4:
+                errors.append(f'{prefix}: artifact anchor exceeds storey clearance')
             overrides = config.get('parts', {})
             if overrides or config.get('only_parts'):
                 manifests = json.loads((VOID / 'line_parts.json').read_text(encoding='utf-8'))
@@ -95,7 +134,17 @@ def validate(data, frame_path=None):
             if is_copy and 'editor_source' not in config: errors.append(f'{prefix}: copied artifact needs its preview source')
             if 'editor_source' in config:
                 source = config['editor_source']
-                if source['floor'] >= len(data['floors']): errors.append(f'{prefix}: invalid preview source floor')
+                source_count = len(json.loads((VOID / 'rooms.json').read_text(encoding='utf-8'))['floors']) if source.get('shared') else len(data['floors'])
+                if source.get('trial'):
+                    trials = json.loads((VOID/'trials/playable.json').read_text(encoding='utf-8'))['trials']
+                    definition = trials.get(source['trial'])
+                    if definition:
+                        resource = definition.get('rooms', '')
+                        if resource.startswith('res://commons/void/trials/') and '..' not in resource:
+                            source_count = len(json.loads((ROOT/resource[6:]).read_text(encoding='utf-8'))['floors'])
+                        else: errors.append(f'{prefix}: invalid preview trial resource')
+                    else: errors.append(f'{prefix}: unregistered preview trial')
+                if source['floor'] >= source_count: errors.append(f'{prefix}: invalid preview source floor')
                 # The source points to a geometry export, not a live dependency.
                 # Copies remain valid if their source instance is later removed.
             # Four electrical stations can supply multiple curated objects.
@@ -165,6 +214,11 @@ def editor_validation(data, frame_path=None):
                'catalyst cells overlap the origin')
     warnings = [issue for issue in issues if any(issue.endswith(s) for s in spatial)]
     errors = [issue for issue in issues if issue not in warnings]
+    allowed = original_scale_allowances(frame_path)
+    for index,floor in enumerate(data.get('floors', [])):
+        for item in floor.get('artifacts', [])+floor.get('copies', []):
+            if (item.get('artifact'),item.get('scale')) in allowed:
+                warnings.append(f"Floor {index}: {item['id']} retains original museum scale {item['scale']}, above the ordinary editor limit; spatial integration is pending")
     return {'valid': not errors, 'errors': errors, 'warnings': warnings}
 
 

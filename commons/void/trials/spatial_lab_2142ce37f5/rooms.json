@@ -1,0 +1,73 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Translation",
+      "title": "Lab variation / lab_warehouse",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "variation",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_warehouse",
+            "bindings": {
+              "source": "construction_cube",
+              "columns": 4,
+              "rows": 5,
+              "spacing": 1.1,
+              "size": 0.8,
+              "deck": 0.8,
+              "holes": [
+                [
+                  1,
+                  2
+                ],
+                [
+                  3,
+                  1
+                ]
+              ]
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

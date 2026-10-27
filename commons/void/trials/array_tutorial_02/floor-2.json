@@ -1,0 +1,32 @@
+{
+  "map": "Tutorial_Tiling_Floor",
+  "title": "A rule underfoot / 2 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_film_tiling_rule_1_12",
+      "artifact": "film_tiling_rule",
+      "station": "SE",
+      "position": [9, 5.5],
+      "facing": 270,
+      "height": 0,
+      "scale": 1,
+      "config": {"plinth": "0", "pin": "true"}
+    },
+    {
+      "id": "f2_tiling_principles_10_15",
+      "artifact": "tiling_principles",
+      "station": "NE",
+      "position": [0, -2],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"mode": "floor"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

@@ -1,0 +1,132 @@
+{
+  "map": "Tutorial_Pattern",
+  "title": "The mark stays; the rule changes / 12 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_pattern_studio_plate_5_3",
+      "artifact": "pattern_studio_plate",
+      "station": "SE",
+      "position": [4, 10],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_pattern_tile_plate_4_7",
+      "artifact": "pattern_tile_plate",
+      "station": "SE",
+      "position": [5, 6],
+      "facing": 0,
+      "height": 0.51,
+      "scale": 1,
+      "config": {"p4m": "true"}
+    },
+    {
+      "id": "f2_pattern_tile_plate_8_7",
+      "artifact": "pattern_tile_plate",
+      "station": "SE",
+      "position": [1, 6],
+      "facing": 0,
+      "height": 0.51,
+      "scale": 1,
+      "config": {"p4m": "true"}
+    },
+    {
+      "id": "f2_pattern_tile_plate_12_7",
+      "artifact": "pattern_tile_plate",
+      "station": "SW",
+      "position": [-3, 6],
+      "facing": 0,
+      "height": 0.51,
+      "scale": 1,
+      "config": {"p4m": "true"}
+    },
+    {
+      "id": "f2_pattern_maker_station_22_9",
+      "artifact": "pattern_maker_station",
+      "station": "SW",
+      "position": [-16, 9],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"lesson": "fixed_motif"}
+    },
+    {
+      "id": "f2_pattern_tile_mirror_4_12",
+      "artifact": "pattern_tile_mirror",
+      "station": "SE",
+      "position": [5, 1],
+      "facing": 180,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_pattern_tile_puzzle_7_12",
+      "artifact": "pattern_tile_puzzle",
+      "station": "SE",
+      "position": [2, 1],
+      "facing": 180,
+      "height": 1.35,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_grid_model_13_12",
+      "artifact": "grid_model",
+      "station": "SW",
+      "position": [-4, 1],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_panel_bridge_loom_12_16",
+      "artifact": "panel_bridge_loom",
+      "station": "NW",
+      "position": [-3, -3],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"shafts": "8"}
+    },
+    {
+      "id": "f2_script_runner_4_17",
+      "artifact": "script_runner",
+      "station": "NE",
+      "position": [5, -4],
+      "facing": 180,
+      "height": 1.1,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_dark_sphere_8_17",
+      "artifact": "dark_sphere",
+      "station": "NE",
+      "position": [1, -4],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_pulsar_compact_13_17",
+      "artifact": "pulsar_compact",
+      "station": "NW",
+      "position": [-4, -4],
+      "facing": 180,
+      "height": 1.1,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

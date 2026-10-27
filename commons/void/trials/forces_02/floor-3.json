@@ -1,0 +1,72 @@
+{
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "title": "Vectors_Act3_FieldsAndMotion / 6 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f3_force_hall_06_0_0",
+      "artifact": "force_hall_06",
+      "station": "SE",
+      "position": [5, 15],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f3_force_play_vortex_14_13",
+      "artifact": "force_play_vortex",
+      "station": "SE",
+      "position": [0, 2.5],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f3_VectorFieldFlow_14_35",
+      "artifact": "VectorFieldFlow",
+      "station": "NE",
+      "position": [0, -10],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "lesson": "field_receivers"}
+    },
+    {
+      "id": "f3_wind_room_14_52",
+      "artifact": "wind_room",
+      "station": "SW",
+      "position": [-16.5, 8.5],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "lesson": "hands_on_wind"}
+    },
+    {
+      "id": "f3_force_vortex_14_72",
+      "artifact": "force_vortex",
+      "station": "NE",
+      "position": [10, -9],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "warning": "beacon"}
+    },
+    {
+      "id": "f3_gravity_oval_14_92",
+      "artifact": "gravity_oval",
+      "station": "SE",
+      "position": [28, 4],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

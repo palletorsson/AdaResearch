@@ -1,0 +1,93 @@
+{
+  "map": "FormFinding_Catenary",
+  "title": "FormFinding_Catenary",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_film_catenoid_sections_3_1",
+      "artifact": "film_catenoid_sections",
+      "position": [
+        -6,
+        8
+      ],
+      "station": "SW",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "true"
+      }
+    },
+    {
+      "id": "f1_cable_builder_5_3",
+      "artifact": "cable_builder",
+      "position": [
+        0,
+        7
+      ],
+      "station": "SE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_catenoid_9_5",
+      "artifact": "catenoid",
+      "position": [
+        -5,
+        -2
+      ],
+      "station": "NW",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_helicoid_4_7",
+      "artifact": "helicoid",
+      "position": [
+        5,
+        -2
+      ],
+      "station": "NE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_science_screen_10_7",
+      "artifact": "science_screen",
+      "position": [
+        6,
+        8
+      ],
+      "station": "SE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f1_laundry_line_cathedral_2_9",
+      "artifact": "laundry_line_cathedral",
+      "position": [
+        0,
+        -9
+      ],
+      "station": "NE",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

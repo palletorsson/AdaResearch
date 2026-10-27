@@ -1,0 +1,60 @@
+{
+  "map": "Change_Choreography",
+  "title": "Change_Choreography",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_force_hall_09_0_0",
+      "artifact": "force_hall_09",
+      "position": [
+        -4,
+        14
+      ],
+      "station": "SW",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f2_phase_rod_array_12_8",
+      "artifact": "phase_rod_array",
+      "position": [
+        -8,
+        -9
+      ],
+      "station": "NW",
+      "facing": 0.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f2_force_trial_conveyor_12_24",
+      "artifact": "force_trial_conveyor",
+      "position": [
+        7,
+        -9
+      ],
+      "station": "NE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

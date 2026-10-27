@@ -1,0 +1,52 @@
+{
+  "map": "Tutorial_Disco",
+  "title": "A grid with a clock / 4 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_disco_controls_9_4",
+      "artifact": "disco_controls",
+      "station": "SE",
+      "position": [0, 9],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"mode": "mono"}
+    },
+    {
+      "id": "f2_step_sequencer_3_5",
+      "artifact": "step_sequencer",
+      "station": "SE",
+      "position": [6, 8],
+      "facing": 0,
+      "height": 1.2,
+      "scale": 1.2,
+      "config": {"sound_preset": "90s_house"}
+    },
+    {
+      "id": "f2_film_disco_phase_17_9",
+      "artifact": "film_disco_phase",
+      "station": "SW",
+      "position": [-8, 5],
+      "facing": 90,
+      "height": 0,
+      "scale": 1,
+      "config": {"plinth": "0", "pin": "true"}
+    },
+    {
+      "id": "f2_standalone_disco_9_13",
+      "artifact": "standalone_disco",
+      "station": "SE",
+      "position": [0, 0],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"width": "12", "depth": "12", "tile_size": "0.8", "floor_y_offset": "0", "walkable": "true"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

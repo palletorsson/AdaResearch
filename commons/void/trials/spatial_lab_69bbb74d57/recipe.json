@@ -1,0 +1,50 @@
+{
+  "recipe": "lab_warehouse",
+  "bindings": {
+    "source": "crate",
+    "columns": 5,
+    "rows": 7,
+    "spacing": 1.2,
+    "size": 1.5,
+    "deck": 1.02,
+    "holes": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        4
+      ]
+    ]
+  },
+  "recipe_hash": "e3c118d2db3971777f6cb6ffe03850568529c70ebd0abbb3b0802acf58e696de",
+  "sources": {
+    "crate": {
+      "scene": "res://commons/artifacts/crate/crate.tscn",
+      "fingerprint": "fca3d8f2f345aebcd4ec01260b1afdcd61f1dd09fe68cd1e648c6d4469a71449"
+    }
+  },
+  "created_at": "2026-10-27T08:23:11+0100",
+  "job": "69bbb74d570945318eea886fdb9fd406"
+}

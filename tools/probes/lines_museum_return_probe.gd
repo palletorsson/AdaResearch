@@ -56,11 +56,12 @@ func restored_encounters(use_xr: bool) -> void:
 	var health: Node=get_first_node_in_group("void_health")
 	check(mode_name+"twelve original pairing points remain",field.points.size()==12)
 	game.place_player(field.global_position+Vector3(0,.06,2));await frames(15)
-	var a:Node3D=field.points[0];var b:Node3D=field.points[1]
+	check(mode_name+"three authored pairings begin connected",field.manager._connections.size()==3)
+	var a:Node3D=field.points[2];var b:Node3D=field.points[3]
 	await grab(b);await carry(a.global_position+Vector3(.18,0,0));await release()
-	check(mode_name+"release near a point creates a connection",field.manager._connections.size()==1)
+	check(mode_name+"release near a point creates a connection",field.manager._connections.size()==4)
 	await grab(b);await carry(a.global_position+Vector3(1.5,.6,.4));await release()
-	check(mode_name+"connection survives separating the endpoints",field.manager._connections.size()==1 and b.global_position.distance_to(a.global_position)>1.5)
+	check(mode_name+"connection survives separating the endpoints",field.manager._connections.size()==4 and b.global_position.distance_to(a.global_position)>1.5)
 	check(mode_name+"free joining does not solve the separate gate",not gate.unlocked)
 	await picture("joining-points.png",field.global_position+Vector3(0,1.65,2.1),field.global_position+Vector3(0,1.1,0),88)
 	game.place_player(Vector3(0,-17.94,5.6));await frames(12)
@@ -69,14 +70,14 @@ func restored_encounters(use_xr: bool) -> void:
 	await carry(gate.point_a.global_position+Vector3(1.2,0,0));await release();await frames(75)
 	check(mode_name+"door rises and leaves the opening",gate.gate.position.y>2.75 and gate.line.current_line.visible)
 	await picture("gate-and-line.png",Vector3(2,-16.35,7.5),Vector3(0,-16.7,3.7))
-	var box:Node3D=content.exhibits["3/museum-point_lines-11-13"].get_node("Artifact")
+	var box:Node3D=gate # The entrance and black-box study now share one pair.
 	game.place_player(box.global_position+Vector3(0,.06,-1));await frames(12)
 	await grab(box.point_b)
 	var p:Vector3=box.point_a.global_position
 	await carry(p+Vector3(1,0,0));await create_timer(0.0).timeout
-	check(mode_name+"black room measures one metre",box.readout.text=="1.00 m")
+	check(mode_name+"black room measures one metre",box.measure_readout.text=="1.00 m")
 	await carry(p+Vector3(0,1,0));await release();await create_timer(0.0).timeout
-	check(mode_name+"changing direction can preserve length",box.readout.text=="1.00 m")
+	check(mode_name+"changing direction can preserve length",box.measure_readout.text=="1.00 m")
 	await picture("measuring-segment.png",box.global_position+Vector3(-.8,1.65,-1.3),box.global_position+Vector3(0,1.6,1.4),86)
 	var plan:Node3D=setting.get_node("FloorPlanTable")
 	var ruler:Node3D=setting.get_node("FullSizeRuler")

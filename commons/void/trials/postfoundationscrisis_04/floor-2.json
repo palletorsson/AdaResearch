@@ -1,0 +1,106 @@
+{
+  "map": "PostCrisis_Synthesis",
+  "title": "PostCrisis_Synthesis / transfer, 7 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_tt_2_1",
+      "artifact": "tt",
+      "position": [
+        5,
+        11
+      ],
+      "station": "SE",
+      "height": 1.4,
+      "facing": 270,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_edge_ground_synthesis_5_2",
+      "artifact": "edge_ground_synthesis",
+      "position": [
+        2,
+        10
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 270,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_bias_from_inside_8_2",
+      "artifact": "bias_from_inside",
+      "position": [
+        -1,
+        10
+      ],
+      "station": "SW",
+      "height": 1.085,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_qfep_formula_3d_11_2",
+      "artifact": "qfep_formula_3d",
+      "position": [
+        -4,
+        10
+      ],
+      "station": "SW",
+      "height": 2,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_florensky_sphere_2_5",
+      "artifact": "florensky_sphere",
+      "position": [
+        5,
+        7
+      ],
+      "station": "SE",
+      "height": 1.1,
+      "facing": 180,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_accountability_ledger_11_10",
+      "artifact": "accountability_ledger",
+      "position": [
+        -4,
+        2
+      ],
+      "station": "SW",
+      "height": 0.65,
+      "facing": 0,
+      "scale": 1.8,
+      "config": {
+        "log_interval": "6",
+        "visitor_record": "true"
+      }
+    },
+    {
+      "id": "f2_assembly_return_7_12",
+      "artifact": "assembly_return",
+      "position": [
+        0,
+        0
+      ],
+      "station": "SE",
+      "height": 0,
+      "facing": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

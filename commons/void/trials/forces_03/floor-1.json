@@ -1,0 +1,125 @@
+{
+  "map": "Vectors_Act4b_Oscillation",
+  "title": "Vectors_Act4b_Oscillation",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f1_force_hall_08_0_0",
+      "artifact": "force_hall_08",
+      "position": [
+        -4,
+        14
+      ],
+      "station": "SW",
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_force_play_springs_15_11",
+      "artifact": "force_play_springs",
+      "position": [
+        -4,
+        9
+      ],
+      "station": "SW",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_pendulum_noise_8_20",
+      "artifact": "pendulum_noise",
+      "position": [
+        -17,
+        0
+      ],
+      "station": "SW",
+      "facing": 270.0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_force_play_swings_15_28",
+      "artifact": "force_play_swings",
+      "position": [
+        0,
+        -10.5
+      ],
+      "station": "NE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_force_play_constraints_15_43",
+      "artifact": "force_play_constraints",
+      "position": [
+        33,
+        4
+      ],
+      "station": "SE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    },
+    {
+      "id": "f1_SpringSuspension_8_61",
+      "artifact": "SpringSuspension",
+      "position": [
+        15,
+        10
+      ],
+      "station": "SE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0",
+        "lesson": "museum_spring"
+      }
+    },
+    {
+      "id": "f1_spring_tower_22_61",
+      "artifact": "spring_tower",
+      "position": [
+        0,
+        0
+      ],
+      "station": "SE",
+      "facing": 180.0,
+      "height": 0.0,
+      "scale": 1.0,
+      "config": {
+        "pin": "1",
+        "plinth": "0"
+      }
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

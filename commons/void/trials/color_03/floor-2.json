@@ -1,0 +1,62 @@
+{
+  "map": "Color_Grid_Pallet",
+  "title": "Grid as Color Canvas / 5 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f2_dark_sphere_5_5",
+      "artifact": "dark_sphere",
+      "station": "SW",
+      "position": [-4, 2],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f2_film_foundation_class_17_8",
+      "artifact": "film_foundation_class",
+      "station": "SE",
+      "position": [8, 5],
+      "facing": 270,
+      "height": 0,
+      "scale": 1,
+      "config": {"plinth": "0", "pin": "true"}
+    },
+    {
+      "id": "f2_spectrum_forest_5_12",
+      "artifact": "spectrum_forest",
+      "station": "SW",
+      "position": [-4, 9],
+      "facing": 0,
+      "height": 1.0,
+      "scale": 0.22,
+      "config": {"plinth": "0"}
+    },
+    {
+      "id": "f2_science_screen_15_15",
+      "artifact": "science_screen",
+      "station": "SE",
+      "position": [6, 12],
+      "facing": 180,
+      "height": 1.5,
+      "scale": 1,
+      "config": {"mode": "grid"}
+    },
+    {
+      "id": "f2_gridcolorizer_6_5",
+      "artifact": "gridcolorizer",
+      "station": "SW",
+      "position": [-3, 2],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {"lesson": "addresses"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

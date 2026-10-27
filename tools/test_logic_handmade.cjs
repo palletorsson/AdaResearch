@@ -1,0 +1,14 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),web=path.resolve(root,'../ada_encyclopedia'),out=path.join(root,'ada_run/logic-sequence-2026-10-26'),ts=require(path.join(web,'node_modules/typescript'));
+const box={exports:{},require};vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(web,'src/lib/handmade-prefabs.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,box);
+const original=fs.readFileSync(path.join(root,'commons/modular/terms.json')),fixture=fs.mkdtempSync(path.join(out,'origin-fixture-'));
+fs.mkdirSync(path.join(fixture,'commons/modular'),{recursive:true});fs.writeFileSync(path.join(fixture,'commons/modular/terms.json'),original);
+const doc=JSON.parse(original),raw={source:'pallet_hand_kit',key:'logic-sequence-origin-test',map:'Logic_Assemblage',label:'Logic hand-built test',parts:doc.terms.pallet_hand_kit.handmade.parts,mode:'place',events:[]};
+const result=box.exports.saveHandmadePrefab(fixture,raw),p=box.exports.handmadePrefabs(fixture).find(p=>p.id===result.id),a=box.exports.handmadeAnnotations(fixture).nodes.find(n=>n.id===result.id);
+assert.equal(p.map,'Logic_Assemblage');assert.equal(a.sequence,'logic');assert.equal(a.insertion.map,'Logic_Assemblage');assert.equal(Object.keys(p.placement.config.parts).length,20);
+assert.ok(box.exports.saveHandmadePrefab(fixture,raw).reused);
+const legacy=box.exports.saveHandmadePrefab(fixture,{...raw,key:'logic-sequence-legacy-test',map:undefined});assert.equal(box.exports.handmadePrefabs(fixture).find(p=>p.id===legacy.id).map,'Primitives_Melencolia');
+assert.throws(()=>box.exports.saveHandmadePrefab(fixture,{...raw,key:'logic-unknown-test',map:'../../elsewhere'}),/Unknown pallet workshop/);
+const saved=JSON.parse(fs.readFileSync(path.join(fixture,'commons/modular/terms.json')));for(const [id,t] of Object.entries(doc.terms))assert.deepEqual(saved.terms[id],t);
+assert.equal(Buffer.compare(original,fs.readFileSync(path.join(root,'commons/modular/terms.json'))),0);
+fs.writeFileSync(path.join(out,'handmade-origin-checks.json'),JSON.stringify({passed:true,checks:['Logic saves retain their Logic insertion in the shared tree and workbench','Twenty independent parts retain their saved poses','Retry keys stay idempotent','Legacy saves retain Melencolia defaults','Unknown origins reject','All existing terms and production user sculptures preserved'],scope:'Isolated copies through the real save/catalogue implementation; no production sculpture created.'},null,2)+'\n');console.log('Handmade Logic origin checks passed');

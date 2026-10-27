@@ -1,5 +1,6 @@
 """Publish the tested model study; screenshots are native Godot captures."""
 from pathlib import Path
+from generated_storage import model_directory
 import hashlib,json,shutil,struct
 import markdown
 from museum_placement_status import inspect
@@ -16,7 +17,7 @@ assert 'SCRIPT ERROR' not in log and 'Parse Error' not in log
 for p in [O/'museum',O/'validation',O/'source',WEB/'models',WEB/'vendor/controls',WEB/'vendor/loaders',WEB/'vendor/utils']:p.mkdir(parents=True,exist_ok=True)
 for p in RUN.glob('*.png'):shutil.copy2(p,O/'museum'/p.name)
 models={}
-for p in RUN.glob('*.glb'):
+for p in model_directory(RUN).glob('*.glb'):
     raw=p.read_bytes();assert struct.unpack('<4sII',raw[:12])==(b'glTF',2,len(raw))
     n,t=struct.unpack('<II',raw[12:20]);assert t==0x4e4f534a
     document=json.loads(raw[20:20+n]);assert document['meshes']
@@ -34,7 +35,7 @@ report=(O/'REPORT.md').read_text(encoding='utf-8')
 if placement['main_route']:
     report='> **Installation update:** This study now runs inside the Endless Museum, in Shaders / Patterns. [See the actual hall and native checks](../2026-10-09-glitch-inside-the-museum/index.html). The original research report below documents the earlier standalone experiment.\n\n'+report
 style='''*{box-sizing:border-box}body{margin:0;background:#eeece3;color:#28363a;font:18px/1.65 Georgia,serif}header,main,footer{max-width:1280px;margin:auto;padding:30px 46px}header{font:13px Arial;letter-spacing:.12em;border-bottom:1px solid #b9c0b9}h1{font-size:clamp(40px,6vw,76px);line-height:1.1;font-weight:400}h2{font:24px Arial;margin-top:60px}p,li{max-width:900px}img{width:100%;display:block;margin:28px 0;border:1px solid #b9c0b9}a{color:#97486e}table{width:100%;border-collapse:collapse;font:15px/1.55 Arial}td,th{padding:16px;text-align:left;vertical-align:top;border-bottom:1px solid #bbc2ba}th{background:#ddd6c5}code{font:.82em Consolas,monospace;overflow-wrap:anywhere}footer{font:14px Arial;border-top:1px solid #b9c0b9}@media(max-width:700px){header,main,footer{padding:22px}table{display:block;overflow-x:auto}}'''
-(O/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>When parts stop agreeing</title><style>'+style+'</style></head><body><header>ENDLESS MUSEUM / MODEL STUDIES / 9 OCTOBER 2026</header><main>'+markdown.markdown(report,extensions=['extra'])+'</main><footer>Endless Museum · always another room</footer></body></html>',encoding='utf-8')
+(O/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>When parts stop agreeing</title><style>'+style+'</style></head><body><header>ENDLESS MUSEUM / MODEL STUDIES / 9 OCTOBER 2026</header><main>'+markdown.markdown(report,extensions=['extra'])+'</main><footer>Endless Museum Â· always another room</footer></body></html>',encoding='utf-8')
 sources=[*B.glob('*.gd'),*B.glob('*.tscn'),R/'tools/probes/model_disagreement.gd',R/'commons/artifacts/model_overflow/model_overflow.gd',R/'commons/artifacts/architecture_spine/architecture_spine.gd',R/'commons/artifacts/architecture_variations/architecture_variations.gd',R/'commons/artifacts/camera_glitch_study/glitch_console.gd']
 (O/'validation/source-hashes.json').write_text(json.dumps({p.relative_to(R).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},indent=2),encoding='utf-8')
 print(json.dumps({'report':str(O/'index.html'),'viewer':str(WEB/'index.html'),'checks':len(receipt['checks']),'models':len(models),'placement':placement['status']}))

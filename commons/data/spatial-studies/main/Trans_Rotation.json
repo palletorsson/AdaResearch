@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "map": "Trans_Rotation",
+  "trial": "",
+  "choices": [
+    {
+      "id": "fc6b5a26-4963-4949-8faf-cd662c16bce6",
+      "theme": "path",
+      "decision": "adapt",
+      "text": "PROPOSAL / Rotation review 2026-10-26 / Ground and rhythm. Preserve the old Grid lesson in which the shared floor itself changes: axis bands alternate with flat pauses. Adapt that rhythm and lateral opportunity to the Void; the full 7 x 53 m corridor is not required. Keep this distinct from the newer 2.04 m cube studies.",
+      "created": "2026-10-26T19:00:50.063Z",
+      "updated": "2026-10-26T19:00:50.063Z",
+      "source": {
+        "layer": "grid",
+        "revision": "547826fe3eabc9cc9a2610888113421997581091a85a324d5731b0347a11198e",
+        "path": "git a36f33c996004abcdc67ea2a0ac3fce72eba42fd:commons/maps/Trans_Rotation/map_data.json",
+        "envelope": [
+          7,
+          53
+        ],
+        "historyCommit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+        "route": [],
+        "edition": "historic"
+      }
+    },
+    {
+      "id": "1e1cf251-ce62-47f7-a1fd-74babc257f28",
+      "theme": "spacing",
+      "decision": "adapt",
+      "text": "PROPOSAL / Rotation review 2026-10-26 / Two-dimensional walking. Keep the Museum idea of two columns across each six-angle axis study. First sketch one wider Z section beside the existing single-column comparison, keeping cube size, pitch and angles fixed, to test meaningful sideways choices. Do not widen all lanes blindly: the tower adapter currently forces one column and its banks/spacing need a considered sketch.",
+      "created": "2026-10-26T19:00:51.667Z",
+      "updated": "2026-10-26T19:00:51.667Z",
+      "source": {
+        "layer": "museum",
+        "revision": "d5915abdf8f88daaf27182c43713459587cf1724d9165b7e6a48eb73fc070083",
+        "path": "commons/scenes/endless_museum.gd + current plan/rulings",
+        "envelope": [
+          62,
+          87
+        ],
+        "route": [],
+        "objectId": "museum-12",
+        "label": "rotation_array_compare",
+        "artifact": "rotation_array_compare",
+        "position": [
+          24.5,
+          0,
+          34.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "configuration": {
+          "band_spacing": 7,
+          "columns": 2,
+          "plinth": "0",
+          "row_angle_step": 18,
+          "rows": 6
+        },
+        "footprint": {
+          "id": "museum-12",
+          "label": "rotation_array_compare",
+          "artifact": "rotation_array_compare",
+          "role": "exhibit",
+          "rect": [
+            11.98,
+            33.98,
+            37.62,
+            46.02
+          ],
+          "height": [
+            -2.74,
+            1.28
+          ],
+          "basis": "exported-mesh",
+          "members": 1,
+          "atWalkingHeight": true
+        }
+      }
+    },
+    {
+      "id": "da72045f-c075-4ef5-83c6-91a5cdb4addb",
+      "theme": "staging",
+      "decision": "adapt",
+      "text": "PROPOSAL / Rotation review 2026-10-26 / Local framing. Borrow the Museum threshold, stable approach and separation between encounters. Translate those into a small temporary frame of existing cubes and wedges, with room to see and walk around the study. The complete lobby and 62 x 87 m hall are not the target footprint.",
+      "created": "2026-10-26T19:00:52.046Z",
+      "updated": "2026-10-26T19:00:52.046Z",
+      "source": {
+        "layer": "museum",
+        "revision": "d5915abdf8f88daaf27182c43713459587cf1724d9165b7e6a48eb73fc070083",
+        "path": "commons/scenes/endless_museum.gd + current plan/rulings",
+        "envelope": [
+          62,
+          87
+        ],
+        "route": []
+      }
+    },
+    {
+      "id": "fe1b3933-875b-4663-a6d3-fe6708b51fa0",
+      "theme": "interaction",
+      "decision": "keep",
+      "text": "PROPOSAL / Rotation review 2026-10-26 / Physical baseline. Keep four full-scale raised walking lanes, 2.04 m cubes, six angles 0/18/36/54/72/90, matching cube collision, marked faces and the two-width witness. Keep blocked routes and falls legible and recoverable. Earlier straight-input capsule trials are evidence of differing consequences, not a guarantee that every course should be passable.",
+      "created": "2026-10-26T19:00:52.633Z",
+      "updated": "2026-10-26T19:00:52.633Z",
+      "source": {
+        "layer": "void",
+        "revision": "2c1d403dc7529332e8dbcb26508e3bd1a2e66a662fbb17f295b56ce4b837806f",
+        "path": "commons/void/rooms.json",
+        "envelope": [
+          42,
+          18
+        ],
+        "route": [
+          [
+            -13.4,
+            0.08,
+            -7.5
+          ],
+          [
+            -6.5,
+            3.08,
+            0
+          ],
+          [
+            0,
+            3.08,
+            2
+          ],
+          [
+            0,
+            0.08,
+            0
+          ],
+          [
+            13.4,
+            0.08,
+            7.5
+          ],
+          [
+            10,
+            0.08,
+            0
+          ]
+        ],
+        "objectId": "a:angle-bands",
+        "label": "Walk the same cubes / X, Y, Z and XYZ / 0 to 90 degrees",
+        "artifact": "rotation_array_compare",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          90,
+          0
+        ],
+        "configuration": {
+          "columns": 1,
+          "rows": 6,
+          "band_spacing": 7,
+          "row_angle_step": 18,
+          "tower_bands": false,
+          "editor_label": "Walk the same cubes / X, Y, Z and XYZ / 0 to 90 degrees",
+          "tower_row": false,
+          "show_body_comparison": true,
+          "tower_walkways": true
+        },
+        "footprint": {
+          "id": "a:angle-bands",
+          "label": "Walk the same cubes / X, Y, Z and XYZ / 0 to 90 degrees",
+          "artifact": "rotation_array_compare",
+          "role": "exhibit",
+          "rect": [
+            -6.02,
+            -7.62,
+            6.02,
+            7.02
+          ],
+          "height": [
+            0,
+            3.7
+          ],
+          "basis": "exported-mesh",
+          "members": 1,
+          "atWalkingHeight": true
+        }
+      }
+    },
+    {
+      "id": "515e1439-12bf-46b5-b6e8-aeed923854f6",
+      "theme": "path",
+      "decision": "keep",
+      "text": "PROPOSAL / Rotation review 2026-10-26 / Deliberate descent. Keep the hollow-cube shaft connection as an onward choice after the walking comparisons and a stable pause. Protect its approach and distinguish it from falling off a test lane, so the main encounter is encountered before the exit.",
+      "created": "2026-10-26T19:00:52.960Z",
+      "updated": "2026-10-26T19:00:52.960Z",
+      "source": {
+        "layer": "void",
+        "revision": "2c1d403dc7529332e8dbcb26508e3bd1a2e66a662fbb17f295b56ce4b837806f",
+        "path": "commons/void/rooms.json",
+        "envelope": [
+          42,
+          18
+        ],
+        "route": [
+          [
+            -13.4,
+            0.08,
+            -7.5
+          ],
+          [
+            -6.5,
+            3.08,
+            0
+          ],
+          [
+            0,
+            3.08,
+            2
+          ],
+          [
+            0,
+            0.08,
+            0
+          ],
+          [
+            13.4,
+            0.08,
+            7.5
+          ],
+          [
+            10,
+            0.08,
+            0
+          ]
+        ],
+        "objectId": "a:twisting-tunnel",
+        "label": "Five hollow cubes / turn down into the shaft",
+        "artifact": "void_rotation_boolean_descent",
+        "position": [
+          10,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "configuration": {
+          "connects_next_floor": true,
+          "editor_label": "Five hollow cubes / turn down into the shaft"
+        },
+        "footprint": {
+          "id": "a:twisting-tunnel",
+          "label": "Five hollow cubes / turn down into the shaft",
+          "artifact": "void_rotation_boolean_descent",
+          "role": "exhibit",
+          "rect": [
+            6.25,
+            -2.1,
+            13.75,
+            7.5
+          ],
+          "height": [
+            -3.6,
+            0.24
+          ],
+          "basis": "exported-mesh",
+          "members": 1,
+          "atWalkingHeight": true
+        }
+      }
+    },
+    {
+      "id": "3528900b-4943-45e5-83dc-a8a689f002bd",
+      "theme": "staging",
+      "decision": "adapt",
+      "text": "PROPOSAL / Rotation review 2026-10-26 / Hierarchy and access. Give the central walking study first visual priority. Keep carousels, composition and hinge as optional adjoining encounters using the existing parts. Inspect the close western carousel/crossing approaches and the eastern instruments at eye level before moving anything; projected envelope gaps are not proof of obstruction.",
+      "created": "2026-10-26T19:00:53.250Z",
+      "updated": "2026-10-26T19:00:53.250Z",
+      "source": {
+        "layer": "void",
+        "revision": "2c1d403dc7529332e8dbcb26508e3bd1a2e66a662fbb17f295b56ce4b837806f",
+        "path": "commons/void/rooms.json",
+        "envelope": [
+          42,
+          18
+        ],
+        "route": [
+          [
+            -13.4,
+            0.08,
+            -7.5
+          ],
+          [
+            -6.5,
+            3.08,
+            0
+          ],
+          [
+            0,
+            3.08,
+            2
+          ],
+          [
+            0,
+            0.08,
+            0
+          ],
+          [
+            13.4,
+            0.08,
+            7.5
+          ],
+          [
+            10,
+            0.08,
+            0
+          ]
+        ]
+      }
+    }
+  ]
+}

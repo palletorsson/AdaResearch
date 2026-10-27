@@ -1,0 +1,8 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'..'),src=path.resolve(root,'../ada_encyclopedia/public/studies/matter-and-logic/physics'),C=require(path.join(src,'package/build/cannon.min.js')),{buildGate}=require(path.join(src,'gates.js'));
+const vec=v=>[v.x,v.y,v.z],q=v=>[v.x,v.y,v.z,v.w],graphs={};
+for(const kind of ['and','or','xor','not','half','count']){
+ const g=buildGate(C,kind),ids=new Map(g.world.bodies.map((b,i)=>[b,'body_'+i])),looks=new Map(g.statics.map(p=>[p.body,p.part]));g.rockers.forEach(p=>looks.set(p.body,'rocker'));
+ graphs[kind]={kind,BW:g.BW,BH:g.BH,R:g.R,SLOT:g.SLOT,inlets:g.inlets,zones:g.zones,rockers:g.rockers.map(r=>({body:ids.get(r.body),name:r.name,px:r.px,py:r.py,hc:r.hc,startOne:r.startOne})),bodies:g.world.bodies.map(b=>({id:ids.get(b),look:looks.get(b)||'anchor',position:vec(b.position),quaternion:q(b.quaternion),mass:b.mass,inertia:vec(b.inertia),linear_damping:b.linearDamping,angular_damping:b.angularDamping,material:b.material?.name||'anchor',shapes:b.shapes.map((s,i)=>({type:'box',size:vec(s.halfExtents).map(x=>2*x),at:vec(b.shapeOffsets[i]),quaternion:q(b.shapeOrientations[i])}))})),hinges:g.world.constraints.map(c=>({a:ids.get(c.bodyA),b:ids.get(c.bodyB),pivot_a:vec(c.pivotA),pivot_b:vec(c.pivotB)}))};
+}
+fs.writeFileSync(path.join(root,'commons/artifacts/matter_reference/boards.json'),JSON.stringify({source:'matter-and-logic.zip / physics/gates.js',sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(src,'gates.js'))).digest('hex'),graphs},null,2)+'\n');console.log(Object.fromEntries(Object.entries(graphs).map(([k,v])=>[k,v.bodies.length])));

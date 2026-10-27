@@ -1,0 +1,86 @@
+{
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "title": "WaveFunctions_3D_Wave_Propagation / 5 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f4_film_wave_neighbours_5_4",
+      "artifact": "film_wave_neighbours",
+      "station": "SE",
+      "position": [
+        6,
+        11
+      ],
+      "facing": 0,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "true"
+      }
+    },
+    {
+      "id": "f4_coupled_oscillator_lattice_6_10",
+      "artifact": "coupled_oscillator_lattice",
+      "station": "SE",
+      "position": [
+        10.5,
+        9
+      ],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "comparison": "true",
+        "fabric": "bonds"
+      }
+    },
+    {
+      "id": "f4_kusama_sine_18_11",
+      "artifact": "kusama_sine",
+      "station": "NE",
+      "position": [
+        0,
+        -8.8
+      ],
+      "facing": 180,
+      "height": 2,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f4_wave_propagation_3d_12_25",
+      "artifact": "wave_propagation_3d",
+      "station": "SE",
+      "position": [
+        0,
+        3.5
+      ],
+      "facing": 180,
+      "height": 1.1,
+      "scale": 1,
+      "config": {
+        "museum": "true",
+        "pool": "true"
+      }
+    },
+    {
+      "id": "f4_dark_sphere_21_32",
+      "artifact": "dark_sphere",
+      "station": "NW",
+      "position": [
+        -16,
+        -8
+      ],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

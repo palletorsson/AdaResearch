@@ -1,0 +1,122 @@
+{
+  "map": "Ribbon_Patterns_01",
+  "title": "Ribbon_Patterns_01 / 11 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f4_grid_2d_4x4_2_4",
+      "artifact": "grid_2d_4x4",
+      "station": "SE",
+      "position": [10, 11],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "notation": "none", "show_binary_table": "false"}
+    },
+    {
+      "id": "f4_grid_3d_4x4x4_7_4",
+      "artifact": "grid_3d_4x4x4",
+      "station": "SE",
+      "position": [5, 11],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0", "lesson": "layer_pattern"}
+    },
+    {
+      "id": "f4_column_3_z_18_4",
+      "artifact": "column_3_z",
+      "station": "SW",
+      "position": [-6, 11],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_row_3_x_18_11",
+      "artifact": "row_3_x",
+      "station": "SW",
+      "position": [-5.5, 6.4],
+      "facing": 90,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_xyz_coordinates_5_12",
+      "artifact": "xyz_coordinates",
+      "station": "SE",
+      "position": [7, 4.0],
+      "facing": 270,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_grid3d_6_17",
+      "artifact": "grid3d",
+      "station": "NE",
+      "position": [4, -2],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_bar_array_18_17",
+      "artifact": "bar_array",
+      "station": "NW",
+      "position": [-4, -2],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_bar_array_bubble_sort_6_20",
+      "artifact": "bar_array_bubble_sort",
+      "station": "NE",
+      "position": [6, -5],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_sorting_algorithm_race_18_20",
+      "artifact": "sorting_algorithm_race",
+      "station": "NW",
+      "position": [-6, -5],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_shelf_5_22",
+      "artifact": "shelf",
+      "station": "NE",
+      "position": [7, -7],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    },
+    {
+      "id": "f4_shelf_with_stickers_19_22",
+      "artifact": "shelf_with_stickers",
+      "station": "NW",
+      "position": [-7, -7],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {"pin": "1", "plinth": "0"}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

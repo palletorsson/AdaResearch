@@ -1,0 +1,7 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),web=path.resolve(root,'../ada_encyclopedia'),ts=require(path.join(web,'node_modules/typescript'));
+const files=['src/lib/handmade-prefabs.ts','src/lib/prefab-workbench-store.ts','src/app/prefab-workbench/workbench.tsx','src/app/prefab-workbench/page.tsx'].map(f=>path.join(web,f));
+const program=ts.createProgram([...files,path.join(web,'next-env.d.ts')],{noEmit:true,strict:true,skipLibCheck:true,esModuleInterop:true,types:['node'],typeRoots:[path.join(web,'node_modules/@types')],target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,moduleResolution:ts.ModuleResolutionKind.Bundler,baseUrl:web,paths:{'@/*':['./src/*']},jsx:ts.JsxEmit.ReactJSX});
+const all=ts.getPreEmitDiagnostics(program),errors=all.filter(d=>d.category===ts.DiagnosticCategory.Error&&d.file&&files.includes(path.normalize(d.file.fileName)));
+const messages=errors.map(d=>ts.flattenDiagnosticMessageText(d.messageText,'\n'));
+fs.writeFileSync(path.join(root,'ada_run/logic-sequence-2026-10-26/types-checks.json'),JSON.stringify({passed:!errors.length,files:files.map(f=>path.relative(web,f)),errors:messages,otherDiagnostics:all.length-errors.length,scope:'Changed Logic workbench/catalogue modules; unrelated existing web diagnostics excluded.'},null,2)+'\n');console.log(messages.length?messages.join('\n'):'Logic workbench/catalogue modules type-check.');process.exitCode=errors.length?1:0;

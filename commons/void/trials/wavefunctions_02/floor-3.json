@@ -1,0 +1,113 @@
+{
+  "map": "WaveFunctions_Unit_Circle",
+  "title": "WaveFunctions_Unit_Circle / 7 original placements",
+  "origin": false,
+  "walls": [],
+  "artifacts": [
+    {
+      "id": "f3_unit_circle_advanced_18_10",
+      "artifact": "unit_circle_advanced",
+      "station": "SW",
+      "position": [
+        -4,
+        4
+      ],
+      "facing": 0,
+      "height": 1.6,
+      "scale": 1,
+      "config": {
+        "gallery": "projection",
+        "continue_after_build": "true"
+      }
+    },
+    {
+      "id": "f3_SimpleOscillatingBridge_6_18",
+      "artifact": "SimpleOscillatingBridge",
+      "station": "NE",
+      "position": [
+        5,
+        -4
+      ],
+      "facing": 270,
+      "height": 1,
+      "scale": 0.25,
+      "config": {
+        "museum": "true"
+      }
+    },
+    {
+      "id": "f3_OscillationCurve_19_18",
+      "artifact": "OscillationCurve",
+      "station": "NW",
+      "position": [
+        -8,
+        -6
+      ],
+      "facing": 0,
+      "height": 1.2,
+      "scale": 0.8,
+      "config": {
+        "history_width": "8"
+      }
+    },
+    {
+      "id": "f3_film_circle_projection_22_20",
+      "artifact": "film_circle_projection",
+      "station": "NW",
+      "position": [
+        -11,
+        -6
+      ],
+      "facing": 90,
+      "height": 0,
+      "scale": 1,
+      "config": {
+        "plinth": "0",
+        "pin": "true"
+      }
+    },
+    {
+      "id": "f3_cube_scene_4_24",
+      "artifact": "cube_scene",
+      "station": "NE",
+      "position": [
+        7,
+        -10
+      ],
+      "facing": 180,
+      "height": 0.5,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f3_colorballs_8_24",
+      "artifact": "colorballs",
+      "station": "NE",
+      "position": [
+        3,
+        -10
+      ],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    },
+    {
+      "id": "f3_dark_sphere_19_24",
+      "artifact": "dark_sphere",
+      "station": "NW",
+      "position": [
+        -8,
+        -10
+      ],
+      "facing": 180,
+      "height": 0,
+      "scale": 1,
+      "config": {}
+    }
+  ],
+  "props": [],
+  "impact_cells": [],
+  "route": [],
+  "supply_leads": false
+}

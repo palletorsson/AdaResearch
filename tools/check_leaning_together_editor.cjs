@@ -1,0 +1,18 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),web=path.resolve(root,'../ada_encyclopedia'),out=process.argv[2]?path.resolve(process.argv[2]):path.join(root,'ada_run/leaning-together'),read=f=>JSON.parse(fs.readFileSync(f,'utf8'));
+const ts=require(path.join(web,'node_modules/typescript')),ctx={exports:{},require,structuredClone};vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(web,'src/components/lab-editor/void-model.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,ctx);
+async function run(){
+ const endpoint='http://localhost:3003/api/void-layout',payload=await(await fetch(endpoint)).json(),models=read(path.join(web,'public/void-models/manifest.json')),saved=fs.readFileSync(path.join(root,'commons/void/rooms.json')),before=read(path.join(out,'rooms.before.json')),draft=structuredClone(payload.rooms),checks=[];
+ for(let i=0;i<draft.floors.length;i++)if(i!==46)assert.deepEqual(draft.floors[i],before.floors[i]);assert.deepEqual(draft.floors[46].artifacts.filter(a=>a.id!=='matter-leaning-together'),before.floors[46].artifacts.filter(a=>a.id!=='matter-leaning-together'));checks.push('All other floors and eight existing floor-46 installations retained.');
+ const id='matter-leaning-together',actual=models.floors['46'].artifacts[id],entry=draft.floors[46].artifacts.find(a=>a.id===id);assert.equal(actual.artifact,'matter_leaning_together');assert.equal(entry.scale,1);let parts=0,meshes=0;
+ for(const name of ['LeftPlank','RightPlank','LeftWedge','RightWedge','Cube','Ball','Board','Plinth-96','Plinth96','Controls'])assert.ok(actual.parts[name],name);
+ const entries=ctx.exports.listEntries(draft.floors[46],payload,models,46);
+ for(const [name,part]of Object.entries(actual.parts)){
+  if(part.url){const b=fs.readFileSync(path.join(web,'public',part.url));assert.equal(b.readUInt32LE(0),0x46546c67);assert.equal(b.readUInt32LE(8),b.length);const g=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)));assert.ok(g.meshes?.length);meshes+=g.meshes.length;}else assert.ok(part.labels?.length);
+  const e=entries.find(e=>e.artifactId===id&&e.kind==='part'&&e.id===name);assert.ok(e,name);ctx.exports.place(draft.floors[46],e,[e.position[0]+.01,e.position[1]+.01,e.position[2]],payload);ctx.exports.turn(draft.floors[46],e);parts++;
+ }
+ const cube=entries.find(e=>e.artifactId===id&&e.id==='Cube');ctx.exports.pasteObject(draft.floors[46],ctx.exports.copyObject(draft.floors[46],cube,payload,46),.25);
+ const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rooms:draft,revision:payload.revision,validateOnly:true})});assert.ok(response.ok,await response.text());assert.equal(Buffer.compare(saved,fs.readFileSync(path.join(root,'commons/void/rooms.json'))),0);assert.deepEqual(read('C:/Users/palle/Desktop/Ada Void/rooms.json'),payload.rooms);
+ checks.push('Every member has native model geometry or explicit labels.','All ten members move/rotate in 3D; copying a cube passes production validation without saving test edits.','Desktop and VR share the same saved layout.');
+ const receipt={passed:true,parts,meshes,checks,scope:'Actual native model files and production editor move/rotate/copy/save validation. Runtime hand arrangements are temporary; author starting poses in the lab editor. Physical headset testing remains.'};fs.writeFileSync(path.join(out,'editor-checks.json'),JSON.stringify(receipt,null,2)+'\n');console.log(receipt);
+}run().catch(e=>{console.error(e);process.exitCode=1});

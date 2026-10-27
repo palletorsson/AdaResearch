@@ -40,3 +40,8 @@ The remaining pink electrical risers above the Point Zero roof have also been re
 ## Point Zero floor grid
 
 The fixed roof now carries a four-by-four-metre grid with one-metre spacing, signed X/Z axes and a central origin ring. Peripheral captions sit within a 5.2 m marking plane. Y = 0 is stated explicitly. Ink renders 8 mm above the slab to avoid depth competition; the mathematical origin and sphere remain at (0, 0, 0). This does not alter the pipe-cap observation in the first field note. The literary passage has not yet been rewritten to include the grid.
+
+
+## Later authorial correction
+
+The current passage includes the [situated-care correction](../2026-10-20-model-b-situated-care/README.md): general intellect allows learning and revision; care, attachment and bias shape attention. The roof-to-floor handoff is now “I jump” / “I land.” Earlier snapshots retain their original wording. No gameplay or tutorial changed in this correction.
