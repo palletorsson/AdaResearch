@@ -15,6 +15,13 @@ extends Node3D
 
 var _pending_config: Dictionary = {}
 
+## `#occupancy:<rule>` (opt-in): an address rule (address_rules.gd) decides which addresses hold a
+## pickup cube. Where (rule(x, z) at 2 states + y) mod 2 is 0, the address is built EMPTY: a frame
+## the cube's size and the same [x, y, z] label, so the address remains when its occupant is not
+## there (the array sequence's truth). Without the key the lattice is built as it always was.
+const Rules := preload("res://commons/artifacts/regularity/address_rules.gd")
+const ModMesh := preload("res://commons/modular/mod_mesh.gd")
+
 func _ready() -> void:
 	create_grid_3d()
 	if not _pending_config.is_empty():
@@ -92,11 +99,17 @@ func apply_grid_config(config: Dictionary) -> void:
 		add_child(descent)
 		return
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
+	var occupancy: String = str(config.get("occupancy", "")).strip_edges().to_lower()
+	if not Rules.NAMES.has(occupancy):
+		occupancy = ""
 	for x in range(size_x):
 		for y in range(size_y):
 			for z in range(size_z):
-				var cube_instance = pickup_cube_scene.instantiate()
-				cube_instance.name = "Cube_%d_%d_%d" % [x, y, z]
+				var empty: bool = occupancy != "" and (Rules.state(occupancy, x, z, 2, maxi(size_x, size_z)) + y) % 2 == 0
+				var cube_instance: Node3D = Node3D.new() if empty else pickup_cube_scene.instantiate()
+				cube_instance.name = ("Empty_%d_%d_%d" if empty else "Cube_%d_%d_%d") % [x, y, z]
+				if empty:
+					cube_instance.add_child(ModMesh.make({"p": "mesh", "shape": "cube_edges", "size": [0.52, 0.015], "color": "9aa3ad"}))
 				cube_instance.position = Vector3(x * spacing, y * spacing, z * spacing)
 
 				var label = Label3D.new()

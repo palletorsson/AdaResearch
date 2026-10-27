@@ -70,6 +70,13 @@ var rows: int = 4
 var spacing: float = 1.0
 var label_size: int = 32
 var label_color: Color = Color.WHITE
+## `#occupancy:<rule>` (opt-in): an address rule (address_rules.gd) at 2 states decides which
+## addresses start with a pickup cube. Where it gives 0 the address is built EMPTY (a frame the
+## cube's size, the same [x, z] label) and grid_data / the binary table start that cell at 0, as a
+## cube picked up leaves it: the stored value and the place agree. "" = every address occupied.
+var occupancy: String = ""
+const Rules := preload("res://commons/artifacts/regularity/address_rules.gd")
+const ModMesh := preload("res://commons/modular/mod_mesh.gd")
 
 # Grid data as 2D array (for binary table display)
 var grid_data: Array = []
@@ -108,6 +115,9 @@ func create_grid_2d() -> void:
 	# Create the grid of cubes
 	for x in range(cols):
 		for z in range(rows):
+			if occupancy != "" and Rules.state(occupancy, x, z, 2, maxi(cols, rows)) == 0:
+				_build_empty(x, z)
+				continue
 			var cube_instance = pickup_cube_scene.instantiate()
 			cube_instance.name = "Cube_" + str(x) + "_" + str(z)
 
@@ -183,6 +193,27 @@ func _create_binary_table() -> void:
 	if str(get_meta("config_table_mount", "")) == "ceiling":
 		preload("res://commons/void/ceiling_display_mount.gd").attach(table)
 
+## An address the occupancy rule leaves empty: a frame and the address's label, and a 0 in the data.
+func _build_empty(x: int, z: int) -> void:
+	grid_data[x][z] = 0
+	var empty := Node3D.new()
+	empty.name = "Empty_%d_%d" % [x, z]
+	empty.position = Vector3(x * spacing, 0, z * spacing)
+	empty.add_child(ModMesh.make({"p": "mesh", "shape": "cube_edges", "size": [0.52, 0.015], "color": "9aa3ad"}))
+	if notation == "label":
+		var label = Label3D.new()
+		label.text = "[%d, %d]" % [x, z]
+		label.font_size = label_size
+		label.pixel_size = 0.003
+		label.outline_size = 6
+		label.outline_modulate = Color(0, 0, 0, 1)
+		label.position = Vector3(0, 1.0, 0)
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.no_depth_test = true
+		label.modulate = label_color
+		empty.add_child(label)
+	add_child(empty)
+
 func _on_cube_removed(x: int, z: int) -> void:
 	# Called when a cube is picked up or removed from the grid
 
@@ -252,6 +283,14 @@ func apply_grid_config(config: Dictionary) -> void:
 		var note: String = str(config["notation"]).strip_edges().to_lower()
 		if NOTATIONS.has(note) and note != notation:
 			notation = note
+			changed = true
+
+	if config.has("occupancy"):
+		var occ: String = str(config["occupancy"]).strip_edges().to_lower()
+		if occ in ["all", "none", ""]:
+			occ = ""
+		if (occ == "" or Rules.NAMES.has(occ)) and occ != occupancy:
+			occupancy = occ
 			changed = true
 
 	if not _built:

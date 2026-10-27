@@ -1,5 +1,8 @@
 extends Node3D
 ## The existing pickup-cube lattice, made navigable using the Menger enclosure.
+## `#occupancy:<rule>` (opt-in) passes to the lattice (grid_3d_4x4x4): addresses the rule leaves
+## empty stand as frames with their labels, and start at value 0 here, read from what the lattice
+## built (not recomputed), so an address can hold a 0 before anyone collects from it.
 const Kit = preload("res://commons/artifacts/regularity/room_tools.gd")
 var grid: Node3D
 var enclosure: Node3D
@@ -17,7 +20,10 @@ func _ready() -> void:
 	grid = load("res://algorithms/arrays/grid_3d_4x4x4.gd").new()
 	grid.name = "AddressedVolume"
 	grid.position = Vector3(-3.6,0.7,-3.6)
-	grid.call("apply_grid_config", {"spacing":2.4,"label_size":30})
+	var config := {"spacing":2.4,"label_size":30}
+	var occupancy := str(get_meta("config_occupancy", "")).strip_edges().to_lower()
+	if occupancy != "": config["occupancy"] = occupancy
+	grid.call("apply_grid_config", config)
 	add_child(grid)
 	for y in 4:
 		var layer: Array = []
@@ -45,7 +51,8 @@ func _connect_cells() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	for cell in grid.get_children():
-		if not str(cell.name).begins_with("Cube_"): continue
+		var empty := str(cell.name).begins_with("Empty_")
+		if not str(cell.name).begins_with("Cube_") and not empty: continue
 		# These addresses live inside a navigable enclosure. Respect its opaque
 		# instruction panels instead of drawing all 64 labels through them.
 		for child in cell.get_children():
@@ -54,7 +61,11 @@ func _connect_cells() -> void:
 				# The shared lattice's 0.6m label is inside its pickup cube.
 				child.position.y = 1.0
 		var parts := str(cell.name).split("_")
+		if empty:
+			values[int(parts[2])][int(parts[3])][int(parts[1])] = 0
+			continue
 		cell.tree_exiting.connect(_removed.bind(int(parts[1]),int(parts[2]),int(parts[3])))
+	refresh()
 
 func _removed(x: int, y: int, z: int) -> void:
 	if not is_inside_tree(): return
