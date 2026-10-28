@@ -1,4 +1,4 @@
-// Which knobs of the forces studies are really one knob? The spatial lab's forces studies
+// Which knobs of the forces studies (and the twenty clocks they lead to) are really one knob? The spatial lab's forces studies
 // (ada_encyclopedia/src/lib/colour-study.ts) are compiled in pairs and the two pictures compared
 // number by number. A pair claimed SAME must compile to the identical expression (to 2e-4); a pair
 // claimed DIFFERS must not, so every invariance has a negative beside it that proves the check can
@@ -49,6 +49,11 @@ const claims: Claim[] = [
   {study: 'force_pad', a: pad, b: padHalf, expect: 'same', skip: PAD_ARROWS, says: 'the pad and the body: halve every speed, quarter g, and halve the clock’s rate (arrows aside)'},
   {study: 'force_pad', a: pad, b: {...padHalf, hz: 60}, expect: 'differs', skip: PAD_ARROWS, says: '  negative: keep 60 Hz, and the stepping no longer scales'},
   {study: 'force_pad', a: pad, b: padHalf, expect: 'differs', says: 'the pad’s arrows: clamped to 0.6..1.6 m, so its drawing does not scale with the throw'},
+  {study: 'phase_rods', a: {beat: 7}, b: {beat: 67}, expect: 'same', says: 'twenty clocks: the picture returns every period (6 s)'},
+  {study: 'phase_rods', a: {beat: 7}, b: {beat: 37}, expect: 'differs', says: '  negative: half a period later'},
+  {study: 'phase_rods', a: {beat: 7}, b: {mode: 'WAVE', step: 360, beat: 7}, expect: 'same', says: 'a phase step of 360° is no wave: the same picture as TOGETHER'},
+  {study: 'phase_rods', a: {mode: 'DRIFT', beat: 1500}, b: {beat: 1500}, expect: 'same', says: 'the drift: 4 % fast gains a whole turn in period/0.04 = 150 s, and the grid is together again'},
+  {study: 'phase_rods', a: {mode: 'DRIFT', beat: 750}, b: {beat: 750}, expect: 'differs', says: '  negative: at 75 s the back rows are half a turn ahead'},
   {study: 'centrifuge_ring', a: {beat: 9}, b: {v: 3.17, radius: 1.7, beat: 18, vel_scale: 0.36, pull_scale: 0.2}, expect: 'differs', says: 'the ring: the turn depends on v/r, its size on r: half the ring is a different picture (the pod and the track height do not scale)'},
 ];
 
@@ -80,6 +85,10 @@ track('the spring is the ring’s shadow: √(k/m) = v/r = 2, amplitude = radius
 track('the spring’s swing does not know g: Moon and Earth, measured from where each hangs', b => {
   const e0 = at('spring_tower', {beat: 0}, 'Mass')[1], m0 = at('spring_tower', {g: 1.6, beat: 0}, 'Mass')[1];
   return [at('spring_tower', {beat: b}, 'Mass')[1] - e0, at('spring_tower', {g: 1.6, beat: b}, 'Mass')[1] - m0];
+});
+track('a rod’s eye is the spring again: period 2 s against √(k/m) = π, eye 0.58 out against amplitude 0.58', b => {
+  const s0 = at('spring_tower', {k: Math.PI ** 2, m: 1, amplitude: 0.58, beat: 0}, 'Mass')[1], e0 = at('phase_rods', {period: 2, beat: 0}, 'Eye01')[1];
+  return [at('spring_tower', {k: Math.PI ** 2, m: 1, amplitude: 0.58, beat: b}, 'Mass')[1] - s0, -(at('phase_rods', {period: 2, beat: b}, 'Eye01')[1] - e0)];
 });
 // a shadow at a different speed must not match: the negative for the shadow
 let negWorst = 0;
