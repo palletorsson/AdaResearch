@@ -68,6 +68,9 @@ var generation: int = 0
 var seed_pair: bool = false
 var sample_cell: int = 0
 var _neighbour_study: bool = false
+## The generation at which every cell was first dead, -1 while any lives. On a ring whose width is
+## a power of two, rule 90 from one cell dies at width / 2: the triangle's edges meet and cancel.
+var first_dead: int = -1
 var _rule_label: Label3D
 var _created_nodes: Array[Node] = []
 
@@ -104,7 +107,8 @@ func _ready() -> void:
 	_neighbour_study = str(get_meta("config_study", _grid_config.get("study", ""))) == "neighbours"
 	if _neighbour_study:
 		board_size = 1.6
-		cells_x = 32
+		# `#ring:odd` (opt-in): 33 cells, where rule 90 never cancels; 32 is the hall as it was
+		cells_x = 33 if str(get_meta("config_ring", _grid_config.get("ring", ""))).to_lower() == "odd" else 32
 		rows_visible = 24
 		auto_run = false
 		rule = int(get_meta("config_rule", _grid_config.get("rule", 90)))
@@ -352,6 +356,7 @@ func _update_rule_display() -> void:
 func _reset() -> void:
 	# A replay clears both the stored history and the visible history.
 	generation = 0
+	first_dead = -1
 	_generation_timer = 0.0
 	_grid.clear()
 	_current_row.clear()
@@ -382,6 +387,8 @@ func _advance() -> void:
 
 	_current_row = new_row
 	generation += 1
+	if first_dead < 0 and not new_row.has(true):
+		first_dead = generation
 	_grid.push_front(new_row.duplicate())
 
 	while _grid.size() > rows_visible:
@@ -464,7 +471,27 @@ func neighbourhood_readback() -> Dictionary:
 	var right: bool = _current_row[(i + 1) % cells_x]
 	return {"cell": i, "generation": generation, "inputs": [int(left), int(center), int(right)],
 		"next": int(_apply_rule(left, center, right)), "rule": rule, "running": auto_run,
-		"seed": "pair" if seed_pair else "single", "width": cells_x}
+		"seed": "pair" if seed_pair else "single", "width": cells_x,
+		"pascal": history_is_pascal(), "dead_since": first_dead}
+
+## Whether every stored row is Pascal's triangle mod 2 from the single centre cell: at generation
+## t, cell c + d is alive exactly where t + d is even, |d| <= t and C(t, (t + d) / 2) is odd, which
+## by Lucas' theorem is k AND (t - k) = 0. Rules 90 (and 60, 102 from an edge) draw it from one
+## cell; the tiling floor's pascal and and rules draw it from the address alone.
+func history_is_pascal() -> bool:
+	if seed_pair or _grid.is_empty():
+		return false
+	var c: int = cells_x / 2
+	for j in _grid.size():
+		var t: int = generation - j
+		var row: Array = _grid[j]
+		for i in cells_x:
+			var d: int = i - c
+			var k: int = (t + d) / 2
+			var expected: bool = (t + d) % 2 == 0 and absi(d) <= t and (k & (t - k)) == 0
+			if bool(row[i]) != expected:
+				return false
+	return true
 
 func toggle_seed() -> void:
 	seed_pair = not seed_pair

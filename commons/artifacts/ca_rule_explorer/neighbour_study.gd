@@ -72,10 +72,23 @@ func refresh() -> void:
 	if is_instance_valid(floor_history): floor_history.refresh()
 	if is_instance_valid(room_ring): room_ring.refresh()
 	var d: Dictionary = work.neighbourhood_readback()
-	reading.text = "THREE CELLS\n\nGEN %d / %s\nCELL %d OF %d\n\nLEFT  SELF  RIGHT\n%d       %d       %d\n\nNEXT: %d\nRULE %d\n\nSEED: %s\nEDGES WRAP" % [d.generation, "RUN" if d.running else "HELD", d.cell, d.width, d.inputs[0], d.inputs[1], d.inputs[2], d.next, d.rule, d.seed.to_upper()]
+	reading.text = "THREE CELLS\n\nGEN %d / %s\nCELL %d OF %d\n\nLEFT  SELF  RIGHT\n%d       %d       %d\n\nNEXT: %d\nRULE %d\n\nSEED: %s\nEDGES WRAP" % [d.generation, "RUN" if d.running else "HELD", d.cell, d.width, d.inputs[0], d.inputs[1], d.inputs[2], d.next, d.rule, d.seed.to_upper()] + _history_lines(d)
 	for j in range(3):
 		var col: int = posmod(int(d.cell) + j - 1, work.cells_x)
 		markers[j].position = Vector3((col - work.cells_x / 2.0 + 0.5) * work._cell_size.x, 0.023, -work.board_size / 2.0 + work._cell_size.y * 0.08)
+
+## What the board's history is, said under the readout: Pascal's triangle mod 2 while it is, and
+## when every cell died. On the hall's ring of 32 rule 90 cancels at generation 16: kept, and said.
+func _history_lines(d: Dictionary) -> String:
+	if int(d.get("dead_since", -1)) >= 0:
+		var why := ""
+		var w: int = int(d.width)
+		if int(d.rule) == 90 and w > 0 and (w & (w - 1)) == 0:
+			why = "\nA RING OF %d IS A POWER\nOF TWO: THE EDGES MET\nAND CANCELLED" % w
+		return "\n\nALL DEAD SINCE GEN %d%s" % [int(d.dead_since), why]
+	if bool(d.get("pascal", false)) and int(d.generation) >= 2:
+		return "\n\nPASCAL'S TRIANGLE MOD 2\nROW BY ROW"
+	return ""
 
 func _process(delta: float) -> void:
 	elapsed += delta
