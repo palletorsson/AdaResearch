@@ -99,5 +99,45 @@ for (let b = 0; b <= 60; b++) {
 }
 const negOk = negWorst > 0.05; if (!negOk) failed++;
 console.log(`${negOk ? 'ok  ' : 'FAIL'} ${'across'.padEnd(16)} ${'differs'.padEnd(8)}   negative: the ring at v 1.5 (v/r = 2.14) drifts off the spring by ${negWorst.toFixed(3)} m`);
+
+// every twin the studies offer, at a handful of settings each: the study's own "same picture as", held to it
+console.log('\nTWINS: what each study vouches for, checked');
+const SAMPLES: Record<string, V[]> = {
+  spring_tower: [{}, {damping: 6, beat: 30}, {arrows: 'to scale', beat: 7}, {k: 40, m: 20, beat: 3}],
+  force_pad: [{foresight: 'parabola'}, {approach: 'from the side', foresight: 'landing', beat: 20}, {up: 12, forward: 12, cap: '14 m/s (the court)', beat: 10}],
+  launch_arc: [{}, {drag: 0.6, beat: 10}, {lands: 'on, 1 m below the pad', comparison: 'envelope', theta: 40}, {comparison: 'fan', v0: 5}],
+  centrifuge_ring: [{}, {show: 'all of it', beat: 10}, {release: 20, beat: 32}],
+  phase_rods: [{}, {mode: 'WAVE', beat: 5}, {mode: 'DRIFT', beat: 100}, {mode: 'DRIFT', beat: 1550}],
+  shadow_chain: [{}, {beat: 17}, {reach: 0.9, period: 3}],
+};
+type T = {label: string; says: string; study: string; values: V; skip?: string[]; track?: {part: string; self: string; axis: number; sign: number; beats: number}};
+let twins = 0;
+for (const [id, samples] of Object.entries(SAMPLES)) for (const v of samples) {
+  for (const tw of ((compile(id, v) as {twins?: T[]}).twins ?? [])) {
+    twins++;
+    let ok: boolean, how: string;
+    if (tw.track) {
+      const tr = tw.track, b0 = Number(v.beat ?? 0), t0 = Number(tw.values.beat ?? 0);
+      const self0 = at(id, {...v, beat: b0}, tr.self)[1], other0 = at(tw.study, {...tw.values, beat: t0}, tr.part)[tr.axis];
+      let worst = 0;
+      for (let b = 0; b <= 60; b++) worst = Math.max(worst, Math.abs(tr.sign * (at(tw.study, {...tw.values, beat: t0 + b * tr.beats}, tr.part)[tr.axis] - other0) - (at(id, {...v, beat: b0 + b}, tr.self)[1] - self0)));
+      ok = worst <= 3e-4; how = `moves as its ${tr.self} over 61 frames, worst ${worst.toExponential(1)} m`;
+    } else {
+      const A = compile(id, v).expr as Ex, B = compile(tw.study, tw.values).expr as Ex;
+      const d = tw.skip ? diff(without(A, tw.skip), without(B, tw.skip)) : diff(A, B);
+      ok = d === null; how = ok ? `the same picture${tw.skip ? ' (its named arrows aside)' : ''}` : `differs at ${d}`;
+    }
+    if (!ok) failed++;
+    console.log(`${ok ? 'ok  ' : 'FAIL'} ${id.padEnd(16)} ${JSON.stringify(v).slice(0, 44).padEnd(45)} ${tw.label}${tw.study === id ? '' : ' (' + tw.study + ')'}: ${how}`);
+  }
+}
+// inside the shadow: the three heights on one line, and a detuned spring off it
+for (const [detune, expect] of [[0, 'one line'], [10, 'off the line']] as const) {
+  let worst = 0;
+  for (let b = 0; b <= 120; b++) { const v = {detune, beat: b * 3}, y = at('shadow_chain', v, 'Pod')[1]; worst = Math.max(worst, Math.abs(at('shadow_chain', v, 'Mass')[1] - y), Math.abs(at('shadow_chain', v, 'Eye')[1] - y)); }
+  const ok = expect === 'one line' ? worst <= 2e-4 : worst > 0.05; if (!ok) failed++;
+  console.log(`${ok ? 'ok  ' : 'FAIL'} ${'shadow_chain'.padEnd(16)} ${('detune ' + detune).padEnd(45)} ${expect}: wheel, mass and eye ${worst.toExponential(1)} m apart at worst over 36 s`);
+}
+console.log(`${twins} twins checked`);
 console.log(`\n${failed} failed`);
 process.exit(failed);
