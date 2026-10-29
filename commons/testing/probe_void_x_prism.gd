@@ -3,7 +3,8 @@ extends Node3D
 ## The real Void (commons/void/void.tscn) in forced-XR mode on synthetic trackers, as its own physics tests run
 ## it; the left palm stays DOWN so only the button can show the prism. (A) the Void arrives with the museum
 ## rig carrying InventoryPrism, hidden; (B) left X: the prism is up over the left hand and the game did NOT
-## return to the menu; (C) left X again: down, still in the game. Pictures of both.
+## return to the menu; (S) the right pointer on the Tape card and the trigger through the tracker: the tape chosen
+## and worn; (T) the ▶ ear the same way turns it; (C) left X again: down, still in the game. Pictures.
 ## Writes <out>/{void_x_up.png, void_x_down.png, void_x.json}. Run it from the isolated mirror so the Void's
 ## checkpoint lands in the test app's user://, never in the real save:
 ##   godot --path ada_run/menu-integration-test/run-<id> --xr-mode off --resolution 1280x800
@@ -52,6 +53,53 @@ func _ready() -> void:
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("void_x_up.png"))
 	var up: bool = prism.showing and prism.prism.visible and (prism.prism.global_position - left.global_position).y > .1
 	_check(report, "B left X: the prism is up over the left hand; the game stays (no return to the menu)", up and not bool(game.get("returning")) and game.is_inside_tree(), {"showing": prism.showing, "returning": game.get("returning"), "lift": (prism.prism.global_position - left.global_position).y})
+	# S - SELECT with the real pointer: the right hand aims at the HAND face's Tape card, 35 cm off the face along
+	# its normal, and the trigger is pressed through the tracker; the pointer presses the card, the roll is worn
+	var ui: Node = prism.uis[0];var card: Control = ui.buttons["item:tape"]
+	var c: Vector2 = card.get_global_rect().get_center();var vp_size: Vector2 = prism.faces[0].get("viewport_size");var scr: Vector2 = prism.faces[0].get("screen_size")
+	var face: Node3D = prism.faces[0]
+	var on_face: Vector3 = face.to_global(Vector3((c.x / vp_size.x - .5) * scr.x, (.5 - c.y / vp_size.y) * scr.y, 0))
+	var normal: Vector3 = face.global_basis.z.normalized()
+	var eye_pos: Vector3 = on_face + normal * .35
+	# the pointer's ray starts y_offset (-1.3 cm) below the controller: aim that much above the card, or the
+	# ray lands one card down (it did: the Ball)
+	var lift: Vector3 = Vector3.UP * absf(float(prism._right_pointer().get("y_offset")))
+	var aim := Transform3D(Basis(), eye_pos).looking_at(on_face + lift, Vector3.UP)   # -Z toward the card
+	# a pose is in the ORIGIN's space, and the Void has carried the origin to its arrival crate
+	var to_origin: Transform3D = (origin as Node3D).global_transform.affine_inverse()
+	_right.set_pose(&"aim", to_origin * aim, Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	for i in 12:
+		await get_tree().process_frame
+	var pointer: Node = prism._right_pointer();var target_before: Node = pointer.get("target")
+	var ray: RayCast3D = pointer.get_node("RayCast");var sup: Area3D = pointer.get_node("SuppressArea")
+	var diag := {"enabled": pointer.get("enabled"), "last_target": str(pointer.get("last_target").name) if pointer.get("last_target") else "", "ray_colliding": ray.is_colliding(), "collider": str(ray.get_collider().name) if ray.get_collider() else "", "ray_mask": ray.collision_mask, "ray_enabled": ray.enabled, "ray_origin": ray.global_position, "ray_dir": -ray.global_basis.z, "face_pos": on_face, "card_pos": on_face, "suppress_bodies": sup.has_overlapping_bodies(), "suppress_areas": sup.has_overlapping_areas(), "face_body_layer": face.get("collision_layer"), "face_enabled": face.get("enabled"), "ptr_pos": pointer.global_position, "ctrl_pos": _rt(origin).global_position, "ptr_active": str(pointer.get("_active_controller").name) if pointer.get("_active_controller") else ""}
+	print("[probe_void_x_prism] diag ", JSON.stringify(diag))
+	_right.set_input(&"trigger_click", true)
+	for i in 6:
+		await get_tree().process_frame
+	_right.set_input(&"trigger_click", false)
+	for i in 12:
+		await get_tree().process_frame
+	var roll: Node = prism.hand.worn_node()
+	look.call()
+	for i in 6:
+		await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir.path_join("void_x_select.png"))
+	_check(report, "S select: the right pointer on the Tape card, trigger through the tracker: tape chosen, the roll worn on the right hand, no tape laid", prism.hand.current == "tape" and roll != null and roll.get_parent().name == "RightHand" and roll.segments.is_empty() and roll.start_anchor.is_empty(), {"current": prism.hand.current, "pointer_target_before_press": str(target_before.name) if target_before else "", "worn": roll != null})
+	# T - the ▶ ear, the same way
+	var ear: Control = ui.buttons["ear+1"];var ec: Vector2 = ear.get_global_rect().get_center()
+	var on_ear: Vector3 = face.to_global(Vector3((ec.x / vp_size.x - .5) * scr.x, (.5 - ec.y / vp_size.y) * scr.y, 0))
+	_right.set_pose(&"aim", to_origin * Transform3D(Basis(), on_ear + normal * .35).looking_at(on_ear + lift, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	for i in 12:
+		await get_tree().process_frame
+	_right.set_input(&"trigger_click", true)
+	for i in 6:
+		await get_tree().process_frame
+	_right.set_input(&"trigger_click", false)
+	for i in 30:
+		await get_tree().process_frame
+	_check(report, "T turn: the ▶ ear pressed by the pointer turns the prism to KNOBS", prism.active == 1, {"active": prism.active})
 	# C - left X again
 	left.button_pressed.emit("ax_button")
 	for i in 20:
@@ -63,6 +111,8 @@ func _ready() -> void:
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("void_x_down.png"))
 	_check(report, "C left X again: the prism is down; still in the game", not prism.showing and not prism.prism.visible and not bool(game.get("returning")) and game.is_inside_tree(), {"showing": prism.showing, "returning": game.get("returning")})
 	_finish(report)
+
+func _rt(origin: Node) -> Node3D:return origin.get_node("RightHand")
 
 func _pose(t: XRControllerTracker, p: Vector3) -> void:
 	t.set_pose(&"aim", Transform3D(Basis(), p), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
