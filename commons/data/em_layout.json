@@ -78,7 +78,11 @@
 			"catalyst_target",
 			"wedge_skill_pickup",
 			"catalyst_sustain_demo"
-		]
+		],
+		"inventory": true,
+		"_inventory": "the inventory on the plain hand (commons/player/inventory_wrist.gd, a node of museum_rig.tscn, so the museum and the Void both have it): the ITEMS panel on the left wrist when the left palm turns up, the current item worn on or made in the right hand - trigger lays tape / makes it, grip with the panel up takes it back. Palle, 2026-10-29: the inventory on the plain hand, no bracelet. false switches it off.",
+		"palm_up": 0.55,
+		"_palm_up": "how far the left palm must turn up (the controller's +X against UP, 0..1) before the panel shows; 0.15 of hysteresis below it hides"
 	},
 	"sculptures": {
 		"_readme": "THE DREAM BODIES (2026-08-29, Palle: 'put them in the museum'). Six sculpture families recreated in Godot from his Stable Diffusion panoramas; the museum stands one on a plinth in every hall, the FAMILY chosen by the chapter (so a chapter reads as a room of related bodies) and the SEED by the hall, so no two halls carry the same individual. The Frank Stella relief is a wall work: it hangs on the hall's west wall instead, found by the same ray the weapon cabinets ask.",

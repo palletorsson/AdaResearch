@@ -37,6 +37,33 @@ key the token's script reads (an `@export` it reads back, or a key its `apply_gr
   release_worn / undo_last / apply_config`. See `tape_roll/README.md` § Worn, and the leg rule.
   Probe: `commons/testing/probe_tape_worn.tscn` (7 checks, `ada_run/inventory/tape_worn.{png,json}`).
 
+## On the plain hand (2026-10-29): the museum and the Void
+
+Palle could not reach the inventory in VR: the museum rig keeps **plain hands** (`em_layout.json`
+`rig.plain_hands`, Palle 2026-08-18: "no bracelet, no editing tool, just the VR hands"), which strips the wrist
+tools, ends any bracelet and makes every `becoming_catalyst` ungrabbable - and the Void (`commons/void/game.gd`)
+routes the buttons itself. Palle's ruling: **the inventory on the plain hand, no bracelet.**
+`commons/player/inventory_wrist.gd` is a node of `museum_rig.tscn`, the one rig scene the museum (base.tscn)
+and the Void both drive, so both have it:
+
+- **Left palm up** (a glance at a watch: the left controller's +X against UP past `rig.palm_up`, 0.55, with
+  0.15 of hysteresis) shows the ITEMS panel on the left wrist - the bracelet's own tabbed panel with its tab row
+  hidden, ITEMS alone. Palm down hides it. Choose and turn knobs with the right pointer, as any switch.
+- **Right trigger** lays tape from the worn roll or makes the current item in the right hand's own
+  `FunctionPickup` - never while the right pointer is on a target (a switch, a handle, the panel: the trigger
+  is theirs then). **Right grip with the panel up** takes the last thing back; grip alone stays the Void's grab.
+- `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
+- **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
+  yesterday no longer overrides the choice made in VR a second later, which is what made the wrist probe lay
+  no tape and make a clock instead of a ball; a SEND TO VR after launch still lands within a second.
+
+Probe: `godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_inventory_wrist.tscn` -
+the real museum rig on fake trackers, 7 checks (the node and hidden panel; palm up shows ITEMS alone with the
+items listed, down hides; the tape worn on the right hand; a 3-point 0.8 m stroke from the right trigger; a
+pointer target blocks the trigger; the ball made into the right hand's pickup; grip palm-down leaves it, palm-up
+takes it back). `ada_run/inventory/{wrist.png, wrist.json}`. The palm axis is my definition of "up" for a
+controller, not measured on a hand: if the panel shows at the wrong turn, `rig.palm_up` is the knob.
+
 `hand.json` beside it is the **web page's hand**, `{item, config: {id: {knob: value}}}`, written by the page's
 SEND TO VR and watched by the VR hand once a second. A copy at `user://inventory/` is read first (the headset).
 

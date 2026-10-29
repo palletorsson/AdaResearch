@@ -20,6 +20,7 @@ var held: Node3D = null
 var _worn: Dictionary = {}        # item id -> the node worn on the controller (mount "worn": the tape), made once
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
 var _hand_stamp := -1
+var _born: int = int(Time.get_unix_time_from_system()) - 1   # a hand.json older than this game is not applied unasked
 var _hand_path := ""
 var _since := 0.0
 
@@ -28,6 +29,10 @@ func _process(delta: float) -> void:
 	if _since < 1.0:return
 	_since = 0.0
 	var path := Items.hand_path();var stamp := FileAccess.get_modified_time(path)
+	# first sight of a file written BEFORE this game started: its stamp is noted, its content is old news
+	# (the choice made in VR stands); one written since - the page's SEND TO VR, the headset's copy - lands,
+	# as does any change from here on
+	if _hand_path == "" and stamp != 0 and stamp < _born:_hand_path = path;_hand_stamp = stamp;return
 	if path != _hand_path or (stamp != 0 and stamp != _hand_stamp):_read_hand()
 
 ## The web page's hand: {item, config: {id: {...}}}; an unknown or locked item is left alone.

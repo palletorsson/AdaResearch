@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://do86cuqep43oi" path="res://commons/player/PlayerCustomization.gd" id="24_customization"]
 [ext_resource type="AnimationNodeBlendTree" path="res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres" id="35_left_hand_blend"]
 [ext_resource type="Resource" uid="uid://dertgu7k8alls" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="36_left_hand_pose"]
+[ext_resource type="Script" path="res://commons/player/inventory_wrist.gd" id="37_inventory_wrist"]
 
 [node name="XROrigin3D" type="XROrigin3D"]
 
@@ -107,4 +108,7 @@ debug_joystick = false
 [node name="PlayerCustomization" type="Node" parent="." unique_id=549083165]
 script = ExtResource("24_customization")
 debug_mode = true
+
+[node name="InventoryWrist" type="Node3D" parent="."]
+script = ExtResource("37_inventory_wrist")
 
