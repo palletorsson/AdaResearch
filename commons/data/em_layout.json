@@ -80,7 +80,9 @@
 			"catalyst_sustain_demo"
 		],
 		"inventory": true,
-		"_inventory": "the inventory on the plain hand (commons/player/inventory_wrist.gd, a node of museum_rig.tscn, so the museum and the Void both have it): the ITEMS panel on the left wrist when the left palm turns up, the current item worn on or made in the right hand - trigger lays tape / makes it, grip with the panel up takes it back. Palle, 2026-10-29: the inventory on the plain hand, no bracelet. false switches it off.",
+		"_inventory": "the inventory on the plain hand (commons/player/inventory_prism.gd, a node of museum_rig.tscn, so the museum and the Void both have it): the web palette's four-faced prism (HAND, KNOBS, TAPE, PLACED) floats over the left hand while the left palm is up, the active face turned to the eye, the ears turn it; the right hand is the wand - its pointer presses the faces, trigger lays tape / makes the item, grip with the prism up takes it back. Palle, 2026-10-29: the inventory on the plain hand, no bracelet; the prism in VR, the wrist panel retired. false switches it off.",
+		"prism_always": false,
+		"_prism_always": "true keeps the prism over the left hand at all times, as Open Brush keeps its palette; false shows it only while the palm is up",
 		"palm_up": 0.55,
 		"_palm_up": "how far the left palm must turn up (the controller's +X against UP, 0..1) before the panel shows; 0.15 of hysteresis below it hides"
 	},

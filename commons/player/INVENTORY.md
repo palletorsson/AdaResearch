@@ -37,32 +37,44 @@ key the token's script reads (an `@export` it reads back, or a key its `apply_gr
   release_worn / undo_last / apply_config`. See `tape_roll/README.md` § Worn, and the leg rule.
   Probe: `commons/testing/probe_tape_worn.tscn` (7 checks, `ada_run/inventory/tape_worn.{png,json}`).
 
-## On the plain hand (2026-10-29): the museum and the Void
+## On the plain hand (2026-10-29): the prism, in the museum and the Void
 
 Palle could not reach the inventory in VR: the museum rig keeps **plain hands** (`em_layout.json`
 `rig.plain_hands`, Palle 2026-08-18: "no bracelet, no editing tool, just the VR hands"), which strips the wrist
 tools, ends any bracelet and makes every `becoming_catalyst` ungrabbable - and the Void (`commons/void/game.gd`)
-routes the buttons itself. Palle's ruling: **the inventory on the plain hand, no bracelet.**
-`commons/player/inventory_wrist.gd` is a node of `museum_rig.tscn`, the one rig scene the museum (base.tscn)
-and the Void both drive, so both have it:
+routes the buttons itself. Palle's rulings: **the inventory on the plain hand, no bracelet**, and then **the
+prism in VR, the wrist panel retired** - the web palette (`ada_encyclopedia` `/catalyst-inventory`,
+`OpenBrushCatalystInventory.tsx`) was the prototype for the headset. `commons/player/inventory_prism.gd` is a
+node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void both drive, so both have it:
 
-- **Left palm up** (a glance at a watch: the left controller's +X against UP past `rig.palm_up`, 0.55, with
-  0.15 of hysteresis) shows the ITEMS panel on the left wrist - the bracelet's own tabbed panel with its tab row
-  hidden, ITEMS alone. Palm down hides it. Choose and turn knobs with the right pointer, as any switch.
-- **Right trigger** lays tape from the worn roll or makes the current item in the right hand's own
-  `FunctionPickup` - never while the right pointer is on a target (a switch, a handle, the panel: the trigger
-  is theirs then). **Right grip with the panel up** takes the last thing back; grip alone stays the Void's grab.
+- **Left palm up** (the left controller's +X against UP past `rig.palm_up`, 0.55, hysteresis 0.15) and a
+  four-faced prism floats upright over the left hand, the active face turned to the eye; palm down and it goes.
+  `rig.prism_always: true` keeps it there, as Open Brush keeps its palette.
+- **Four faces as on the web** (`inventory_face.gd`, a Control per face in an XR Tools `Viewport2Din3D`,
+  throttled to 10 fps for the Quest): **HAND** (Nothing · Clock · Tape · Ball · Rod, locked and coming ones dim),
+  **KNOBS** (the current item's: choices as rows, ranges as − value +, text shown), **TAPE** (the designs from
+  `tapes.json` as swatches, prints where it lies / the note, the leg, binds, metres left, UNDO LAST STRIP - it
+  dresses the worn roll live whatever is in the hand, `InventoryHand.set_knob_for`), **PLACED** (what is in the
+  world, last on top; TAKE BACK LAST, TAKE ALL BACK). The **◀ ▶ ears** on every face turn the prism, as the web's
+  frame swipe and Q/E do.
+- **The right hand is the wand**: its pointer presses the faces as any switch (the viewport bodies are on the
+  layers the Void's pointer reads); **trigger** lays tape from the worn roll or makes the current item into the
+  right hand's own `FunctionPickup` - never while the pointer is on a target; **grip, with the prism up**, takes
+  the last thing back (grip alone stays the Void's grab). The web's size ring at the wand tip: a ring the tape's
+  width on the right hand while the tape is in it.
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
-  yesterday no longer overrides the choice made in VR a second later, which is what made the wrist probe lay
-  no tape and make a clock instead of a ball; a SEND TO VR after launch still lands within a second.
+  yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and
+  make a clock instead of a ball); a SEND TO VR after launch still lands within a second.
 
-Probe: `godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_inventory_wrist.tscn` -
-the real museum rig on fake trackers, 7 checks (the node and hidden panel; palm up shows ITEMS alone with the
-items listed, down hides; the tape worn on the right hand; a 3-point 0.8 m stroke from the right trigger; a
-pointer target blocks the trigger; the ball made into the right hand's pickup; grip palm-down leaves it, palm-up
-takes it back). `ada_run/inventory/{wrist.png, wrist.json}`. The palm axis is my definition of "up" for a
-controller, not measured on a hand: if the panel shows at the wrong turn, `rig.palm_up` is the knob.
+Probe: `godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_inventory_prism.tscn` -
+the real museum rig on fake trackers, 8 checks (the node, four faces bound, hidden; palm up shows it upright over
+the left hand with HAND to the eye; ▶ makes KNOBS active and facing; the Tape card worn on the right hand with
+the ring at half the width; the hazard swatch dresses the worn roll; a 3-point 0.8 m stroke from the right
+trigger listed on PLACED; TAKE BACK LAST refills the roll; the Ball card + trigger into the right pickup, grip
+takes it back, palm down hides). `ada_run/inventory/{prism.png, prism.json}`. The palm axis is my definition of
+"up" for a controller, not measured on a hand: if the prism shows at the wrong turn, `rig.palm_up` is the knob.
+A button freed inside its own `pressed` is a locked object: the faces `remove_child` + `queue_free` on refresh.
 
 `hand.json` beside it is the **web page's hand**, `{item, config: {id: {knob: value}}}`, written by the page's
 SEND TO VR and watched by the VR hand once a second. A copy at `user://inventory/` is read first (the headset).

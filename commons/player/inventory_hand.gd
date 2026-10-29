@@ -74,6 +74,20 @@ func set_knob(key: String, value: Variant) -> void:
 	if is_instance_valid(held) and held.has_method("apply_config"):held.apply_config(cfg)
 	_apply_worn(current)
 
+## A knob of an item that is not the one in the hand (the prism's TAPE face dresses the roll whatever is held).
+func set_knob_for(id: String, key: String, value: Variant) -> void:
+	if Items.item(id).is_empty():return
+	if not values.has(id):values[id] = {}
+	values[id][key] = value
+	config_changed.emit(id, config_for(id))
+	if id == current and is_instance_valid(held) and held.has_method("apply_config"):held.apply_config(config_for(id))
+	_apply_worn(id)
+
+## The node worn for an item whether or not it is the current one (the tape's roll keeps its strips and metres).
+func worn_of(id: String) -> Node:
+	var n: Node = _worn.get(id)
+	return n if is_instance_valid(n) else null
+
 func _apply_worn(id: String) -> void:
 	var w: Node = _worn.get(id)
 	if is_instance_valid(w) and w.has_method("apply_config"):w.apply_config(config_for(id))
