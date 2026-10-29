@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "doc": "Tape designs for the tape rolls: a roll with `tape: <id>` wears one. Edited at the encyclopedia's /tape-studio; painted by commons/artifacts/tape_roll/tape_design.gd and src/lib/tape-design.ts with one rule. Colours are sRGB hex. The masking, pink, barrier and printed rolls keep their own skins.",
+  "tapes": {
+    "hazard": {"label": "Hazard / yellow and black", "width": 0.075, "pattern": "diagonal", "a": "f2c230", "b": "1d1d1f", "pitch": 0.2, "ratio": 0.5, "slant": 0.65, "edge": 0.18, "grain": 0.012, "rough": 0.6, "print": {"mode": "none", "note": "", "ink": "1d1d1f"}},
+    "survey": {"label": "Survey / orange with white bands", "width": 0.05, "pattern": "bands", "a": "f26a1b", "b": "f4f0e6", "pitch": 0.5, "ratio": 0.1, "slant": 0, "edge": 0.12, "grain": 0.008, "rough": 0.45, "print": {"mode": "none", "note": "", "ink": "1d1d1f"}},
+    "blueprint": {"label": "Blueprint / a dashed centre line", "width": 0.075, "pattern": "dashes", "a": "2a5db0", "b": "f4f0e6", "pitch": 0.3, "ratio": 0.55, "slant": 0, "edge": 0.15, "grain": 0.01, "rough": 0.7, "print": {"mode": "none", "note": "", "ink": "f4f0e6"}},
+    "chevron": {"label": "Chevron / pink on ivory", "width": 0.1, "pattern": "chevron", "a": "f4f0e6", "b": "ec8fba", "pitch": 0.16, "ratio": 0.45, "slant": 0.9, "edge": 0.1, "grain": 0.01, "rough": 0.5, "print": {"mode": "none", "note": "", "ink": "1d1d1f"}},
+    "dotted_note": {"label": "Dotted / printed with a note", "width": 0.075, "pattern": "dots", "a": "f4f0e6", "b": "c9d6e8", "pitch": 0.09, "ratio": 0.38, "slant": 0, "edge": 0.12, "grain": 0.01, "rough": 0.7, "print": {"mode": "note", "note": "look up", "ink": "2a5db0"}}
+  }
+}
