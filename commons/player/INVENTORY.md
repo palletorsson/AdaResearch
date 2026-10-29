@@ -62,6 +62,12 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   right hand's own `FunctionPickup` - never while the pointer is on a target; **grip, with the prism up**, takes
   the last thing back (grip alone stays the Void's grab). The web's size ring at the wand tip: a ring the tape's
   width on the right hand while the tape is in it.
+- **The current item is a miniature of itself over the right hand** (Palle, 2026-10-29: "the current object
+  must be a small version of the original"): the tape is its bangle; the ball, rod and clock are their own
+  scenes scaled to 7 cm on the longest side (times the item's scale), over the back of the hand, inert -
+  collision off, frozen, pickup disabled, out of every group so a tiny ball never enters the support graph
+  (`InventoryHand._sync_mini`, from `sync_worn`). A knob turned remakes it, so the miniature wears the colour.
+  The trigger makes the full-size one; the bracelet's hand gets the same through the same call.
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and

@@ -18,6 +18,9 @@ var values: Dictionary = {}       # id -> {knob key: value}, over the item's def
 var placed: Array[Node3D] = []
 var held: Node3D = null
 var _worn: Dictionary = {}        # item id -> the node worn on the controller (mount "worn": the tape), made once
+var _mini: Node3D = null          # the current item as a MINIATURE over the hand (Palle: "the current object must be a small version of the original")
+var _mini_id := ""
+const MINI := 0.07                # the miniature's longest side
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
 var _hand_stamp := -1
 var _born: int = int(Time.get_unix_time_from_system()) - 1   # a hand.json older than this game is not applied unasked
@@ -91,13 +94,19 @@ func worn_of(id: String) -> Node:
 func _apply_worn(id: String) -> void:
 	var w: Node = _worn.get(id)
 	if is_instance_valid(w) and w.has_method("apply_config"):w.apply_config(config_for(id))
+	if id == _mini_id and is_instance_valid(_mini):   # a knob turned: the miniature is remade with it
+		var ctrl: Node3D = _mini.get_parent();_mini.get_parent().remove_child(_mini);_mini.queue_free();_mini = null;_mini_id = ""
+		_sync_mini(ctrl)
 
-## The worn item (mount "worn" - the tape): a bangle on the bracelet's controller, made once per item and
-## shown while it is the current item; every other worn thing is put away. `controller` null puts all away
-## (the bracelet out of PLACE, or dropped). Returns the node now worn, or null.
+## What the hand WEARS for the current item: a worn item (mount "worn" - the tape) is the real thing as a
+## bangle on the controller, made once per item and shown while it is current; any other item is shown as a
+## MINIATURE of itself over the back of the hand (Palle, 2026-10-29: "the current object must be a small
+## version of the original") - the trigger makes the full-size one. Everything else is put away. `controller`
+## null puts all away (the bracelet out of PLACE, or dropped). Returns the node now worn, or null.
 func sync_worn(controller: Node3D) -> Node3D:
 	var it := Items.item(current)
 	var want: bool = controller != null and not it.is_empty() and str(it.get("mount", "")) == "worn" and str(it.get("coming", "")) == ""
+	_sync_mini(controller if not want else null)
 	for id in _worn:
 		var n: Node = _worn[id]
 		if is_instance_valid(n) and not (want and str(id) == current) and n.has_method("put_away"):n.put_away()
@@ -114,6 +123,46 @@ func sync_worn(controller: Node3D) -> Node3D:
 		n.name = "Worn_" + current;_worn[current] = n
 	n.wear(controller, float(it.get("scale", 0.4)))   # wear() parents it under the controller
 	return n
+
+## The miniature over the hand: made from the item's own scene, scaled to MINI on its longest side (times the
+## item's scale), its physics and pickup off, out of every group (a tiny ball must not join the support graph).
+func _sync_mini(controller: Node3D) -> void:
+	var it := Items.item(current)
+	var want: bool = controller != null and not it.is_empty() and str(it.get("coming", "")) == "" and str(it.get("mount", "")) != "worn"
+	if not want or current != _mini_id or not is_instance_valid(_mini) or _mini.get_parent() != controller:
+		if is_instance_valid(_mini):_mini.get_parent().remove_child(_mini);_mini.queue_free()
+		_mini = null;_mini_id = ""
+	if not want:return
+	if _mini != null:return
+	var path := Items.scene_for(str(it.get("token", "")))
+	if path == "" or not ResourceLoader.exists(path):return
+	var n: Node = (load(path) as PackedScene).instantiate()
+	if not n is Node3D:n.free();return
+	var cfg := config_for(current)
+	for k in cfg:n.set_meta("config_%s" % str(k), cfg[k])
+	if n.has_method("apply_grid_config"):n.apply_grid_config(cfg)
+	n.name = "Mini_" + current
+	controller.add_child(n)
+	_make_inert(n)
+	var size: Array = it.get("size", [0.1, 0.1, 0.1]);var longest: float = maxf(maxf(float(size[0]), float(size[1])), float(size[2]))
+	var k: float = MINI / maxf(longest, .01) * float(it.get("scale", 1.0))
+	(n as Node3D).transform = Transform3D(Basis().scaled(Vector3.ONE * k), Vector3(0, .05, .09))
+	_mini = n;_mini_id = current
+
+static func _make_inert(n: Node) -> void:
+	var stack: Array = [n]
+	while not stack.is_empty():
+		var x: Node = stack.pop_back()
+		for c in x.get_children():stack.append(c)
+		for g in x.get_groups():x.remove_from_group(g)
+		if x is CollisionShape3D:(x as CollisionShape3D).disabled = true
+		if x is CollisionObject3D:(x as CollisionObject3D).collision_layer = 0;(x as CollisionObject3D).collision_mask = 0
+		if x is RigidBody3D:(x as RigidBody3D).freeze = true;(x as RigidBody3D).gravity_scale = 0
+		if "enabled" in x and x.has_method("pick_up"):x.set("enabled", false)
+		x.set_physics_process(false)
+
+func mini_node() -> Node3D:
+	return _mini if is_instance_valid(_mini) else null
 
 ## The node worn and in use now, or null: the bracelet's trigger and grip go to it instead of making things.
 func worn_node() -> Node3D:
