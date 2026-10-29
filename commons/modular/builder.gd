@@ -539,6 +539,8 @@ static func _prefab(expr: Dictionary) -> Node3D:
 				_prefab_catalog = (d as Dictionary).get("items", {})
 	var info: Dictionary = _prefab_catalog.get(token, _prefab_catalog.get("kit:" + token, _prefab_catalog.get("prop:" + token, {})))
 	var scene_path: String = str(info.get("scene", ""))
+	if scene_path == "":
+		scene_path = _kit_scene(token)
 	var n: Node3D
 	if scene_path != "" and ResourceLoader.exists(scene_path):
 		var inst: Node = (load(scene_path) as PackedScene).instantiate()
@@ -563,6 +565,22 @@ static func _prefab(expr: Dictionary) -> Node3D:
 		else:
 			push_error("modular: prefab does not accept config: " + token)
 	return n
+
+
+## The Void kit (timber, the trace ball, crates, work lights...) is listed in the spawn lists as
+## props without a scene; the Void's own catalogue names the scene. Read only, and only when the
+## spawn list gave nothing, so a token that resolved before resolves the same.
+static var _kit_catalog: Dictionary = {}
+
+static func _kit_scene(token: String) -> String:
+	if _kit_catalog.is_empty():
+		var f := FileAccess.open("res://commons/void/catalog.json", FileAccess.READ)
+		if f != null:
+			var d: Variant = JSON.parse_string(f.get_as_text())
+			if d is Dictionary:
+				_kit_catalog = (d as Dictionary).get("props", {})
+	var entry: Variant = _kit_catalog.get(token, {})
+	return str((entry as Dictionary).get("scene", "")) if entry is Dictionary else ""
 
 
 ## sort: build `of`, read each direct part (size, height, width or name), lay them in a row
