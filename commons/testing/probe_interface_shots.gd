@@ -22,14 +22,22 @@ func _ready() -> void:
 	var cam := Camera3D.new();add_child(cam);cam.fov = 45
 	_left = XRControllerTracker.new();_left.name = &"left_hand";_left.type = XRServer.TRACKER_CONTROLLER;_left.hand = XRPositionalTracker.TRACKER_HAND_LEFT
 	_right = XRControllerTracker.new();_right.name = &"right_hand";_right.type = XRServer.TRACKER_CONTROLLER;_right.hand = XRPositionalTracker.TRACKER_HAND_RIGHT
-	_left.set_pose(&"aim", Transform3D(Basis(Vector3.FORWARD, -PI / 2), Vector3(-0.25, 1.05, -0.25)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)   # palm up
+	_left.set_pose(&"aim", Transform3D(Basis(Vector3.RIGHT, PI / 5), Vector3(-0.25, 1.1, -0.3)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)   # held naturally, tip up: the top panel tilts back to the eye
 	_hand(0.3);XRServer.add_tracker(_left);XRServer.add_tracker(_right)
 	var rig: XROrigin3D = Rig.instantiate();add_child(rig);rig.current = true
 	# the eye: close, in front of the left hand, slightly above - the prism turns to it
-	cam.transform = Transform3D(Basis(), Vector3(-0.55, 1.42, 0.35)).looking_at(Vector3(-0.2, 1.17, -0.2));cam.current = true
+	cam.transform = Transform3D(Basis(), Vector3(-0.12, 1.62, 0.05)).looking_at(Vector3(-0.25, 1.17, -0.38));cam.current = true   # the eye, where the head is
 	for i in 30:
 		await get_tree().process_frame
-	var p: Node = rig.get_node("InventoryPrism")
+	# the costume stands where the head is (built a few frames in, wherever it parents itself): for a picture
+	# from the eye, every mesh that is not a hand, the prism, a strip or the floor goes
+	for m in get_tree().root.find_children("*", "MeshInstance3D", true, false):
+		var n: Node = m;var keep := false
+		while n != null:
+			if n.name in ["LeftHand", "RightHand", "InventoryPrism", "TapeStrip", "TapeStripe"] or n == floor_b:keep = true
+			n = n.get_parent()
+		if not keep:(m as MeshInstance3D).visible = false
+	var p: Node = rig.get_node("InventoryPrism");p.toggle()   # the Void's left X
 	# content: the tape chosen, dressed hazard, a stroke laid from the right hand
 	p.choose("tape");p.set_tape_knob("tape", "hazard")
 	for i in 4:

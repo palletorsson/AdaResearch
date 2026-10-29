@@ -26,7 +26,7 @@
       "mount": "worn",
       "size": [0.34, 0.34, 0.075],
       "scale": 0.4,
-      "defaults": {"freehand_draw": true, "leg": 0.3},
+      "defaults": {"freehand_draw": true, "leg": 0.3, "roll_length": 500, "max_strips": 300, "print_max_px": 4096},
       "knobs": [
         {"key": "kind", "label": "Tape", "choices": [ "printed", "masking", "pink", "barrier" ], "names": [ "printed (words)", "masking", "pink", "barrier" ]},
         {"key": "leg", "label": "Leg", "range": [0.1, 1.0, 0.05], "unit": " m"},

@@ -41,7 +41,7 @@ func _ready() -> void:
 		_finish(report);return
 	# the eye, off to the left front of the hands
 	var cam := Camera3D.new();add_child(cam);cam.fov = 60
-	var look := func():cam.global_transform = Transform3D(Basis(), left.global_position + Vector3(-0.9, 0.45, 0.75)).looking_at(left.global_position + Vector3(0.1, 0.1, -0.1));cam.current = true
+	var look := func():cam.global_transform = Transform3D(Basis(), left.global_position + Vector3(-0.55, 0.55, 0.45)).looking_at(left.global_position + Vector3(0, 0.03, -0.12));cam.current = true
 	# B - left X
 	left.button_pressed.emit("ax_button")
 	for i in 30:
@@ -51,8 +51,9 @@ func _ready() -> void:
 		await get_tree().process_frame
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("void_x_up.png"))
-	var up: bool = prism.showing and prism.prism.visible and (prism.prism.global_position - left.global_position).y > .1
-	_check(report, "B left X: the prism is up over the left hand; the game stays (no return to the menu)", up and not bool(game.get("returning")) and game.is_inside_tree(), {"showing": prism.showing, "returning": game.get("returning"), "lift": (prism.prism.global_position - left.global_position).y})
+	var ahead: float = (prism.prism.global_position - left.global_position).dot(-left.global_basis.z)
+	var up: bool = prism.showing and prism.prism.visible and absf(ahead - .12) < .01
+	_check(report, "B left X: the prism is up on the left controller, 12 cm ahead; the game stays (no return to the menu)", up and not bool(game.get("returning")) and game.is_inside_tree(), {"showing": prism.showing, "returning": game.get("returning"), "ahead": ahead})
 	# S - SELECT with the real pointer: the right hand aims at the HAND face's Tape card, 35 cm off the face along
 	# its normal, and the trigger is pressed through the tracker; the pointer presses the card, the roll is worn
 	var ui: Node = prism.uis[0];var card: Control = ui.buttons["item:tape"]
@@ -63,8 +64,13 @@ func _ready() -> void:
 	var eye_pos: Vector3 = on_face + normal * .35
 	# the pointer's ray starts y_offset (-1.3 cm) below the controller: aim that much above the card, or the
 	# ray lands one card down (it did: the Ball)
-	var lift: Vector3 = Vector3.UP * absf(float(prism._right_pointer().get("y_offset")))
-	var aim := Transform3D(Basis(), eye_pos).looking_at(on_face + lift, Vector3.UP)   # -Z toward the card
+	# the HAND face lies on TOP of the drum, so its normal is near vertical: an up hint that is not parallel to
+	# the look direction, and the y_offset compensation along the controller's own +Y, not the world's
+	var up_hint: Vector3 = Vector3.UP if absf(normal.dot(Vector3.UP)) < .9 else Vector3.FORWARD
+	var y_off: float = absf(float(prism._right_pointer().get("y_offset")))
+	var aim0 := Transform3D(Basis(), eye_pos).looking_at(on_face, up_hint)
+	var lift: Vector3 = aim0.basis.y * y_off
+	var aim := Transform3D(Basis(), eye_pos).looking_at(on_face + lift, up_hint)   # -Z toward the card
 	# a pose is in the ORIGIN's space, and the Void has carried the origin to its arrival crate
 	var to_origin: Transform3D = (origin as Node3D).global_transform.affine_inverse()
 	_right.set_pose(&"aim", to_origin * aim, Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
@@ -90,7 +96,8 @@ func _ready() -> void:
 	# T - the ▶ ear, the same way
 	var ear: Control = ui.buttons["ear+1"];var ec: Vector2 = ear.get_global_rect().get_center()
 	var on_ear: Vector3 = face.to_global(Vector3((ec.x / vp_size.x - .5) * scr.x, (.5 - ec.y / vp_size.y) * scr.y, 0))
-	_right.set_pose(&"aim", to_origin * Transform3D(Basis(), on_ear + normal * .35).looking_at(on_ear + lift, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	var ear0 := Transform3D(Basis(), on_ear + normal * .35).looking_at(on_ear, up_hint)
+	_right.set_pose(&"aim", to_origin * Transform3D(Basis(), on_ear + normal * .35).looking_at(on_ear + ear0.basis.y * y_off, up_hint), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	for i in 12:
 		await get_tree().process_frame
 	_right.set_input(&"trigger_click", true)

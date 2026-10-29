@@ -16,6 +16,12 @@ const SURFACES := 0xFFFFFFFF & ~((1<<17)|(1<<19)) # All solid bodies, excluding 
 @export var tape := ""
 var design: Dictionary = {}
 @export var roll_length := 30.0
+## How many strips a roll may have out at once (the station's three rolls keep 32; the inventory's tape sets
+## 300). Each strip is one mesh; a PRINTED strip also keeps one picture of its words, `print_max_px` wide at
+## most - 4096 x 96 RGBA is 1.5 MB, so 300 printed strips are at most 450 MB on a Quest and in practice far
+## less, since a strip's picture is only as wide as its length needs (96 px per tape width).
+@export var max_strips := 32
+@export var print_max_px := 8192
 @export var reach := 8.0
 @export var max_span := 8.0
 @export var bind_objects := true
@@ -61,7 +67,9 @@ func _init() -> void:
 func apply_grid_config(config: Dictionary) -> void:
 	kind = str(config.get("kind",kind))
 	if kind not in TYPES:kind = "masking"
-	roll_length = clampf(float(config.get("roll_length",roll_length)),1,100)
+	roll_length = clampf(float(config.get("roll_length",roll_length)),1,1000)
+	max_strips = clampi(int(config.get("max_strips",max_strips)),1,1000)
+	print_max_px = clampi(int(config.get("print_max_px",print_max_px)),256,8192)
 	reach = clampf(float(config.get("reach",reach)),.5,12)
 	max_span = clampf(float(config.get("max_span",max_span)),.1,12)
 	bind_objects = bool(config.get("bind_objects",bind_objects))
@@ -190,12 +198,12 @@ func _fire(_who = null) -> void:
 	segments = segments.filter(func(segment):return is_instance_valid(segment) and not segment.is_queued_for_deletion())
 	if length<.06:_refuse("MOVE FURTHER");return
 	if length>max_span:_refuse("SPAN TOO LONG");return
-	if length>remaining or segments.size()>=32:_refuse("ROLL EMPTY / TIDY TO RESET");return
+	if length>remaining or segments.size()>=max_strips:_refuse("ROLL EMPTY / TIDY TO RESET");return
 	var query := PhysicsRayQueryParameters3D.create(a.position+a.normal*.012,hit.position+hit.normal*.012,SURFACES)
 	query.exclude = [get_rid(),a.body.get_rid(),hit.collider.get_rid()]
 	if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():_refuse("SOMETHING CROSSES THE TAPE");return
 	var strip := Strip.new();strip.name = "TapeStrip";get_tree().current_scene.add_child(strip)
-	strip.tape_width = _width()*_tape_scale();strip.material_override = tape_material
+	strip.tape_width = _width()*_tape_scale();strip.material_override = tape_material;strip.print_max_px = print_max_px
 	strip.anchors = [start_anchor,Strip.anchor(hit)];strip.paid_length = length;strip.issuer = weakref(self)
 	print("TAPE_LINK ",a.body.get_path()," -> ",hit.collider.get_path())
 	strip.draw_between(a.position,a.normal,hit.position,hit.normal)
@@ -238,9 +246,9 @@ func _release_fire(_who = null) -> void:
 	_sample_drag(_aim(),true)
 	if drag_points.size()>1 and drag_length>=.06:
 		segments = segments.filter(func(segment):return is_instance_valid(segment) and not segment.is_queued_for_deletion())
-		if segments.size()>=32:_refuse("ROLL EMPTY / TIDY TO RESET");cancel();return
+		if segments.size()>=max_strips:_refuse("ROLL EMPTY / TIDY TO RESET");cancel();return
 		var strip := Strip.new();strip.name = "TapeStripe";get_tree().current_scene.add_child(strip)
-		strip.tape_width = _width()*_tape_scale();strip.material_override = tape_material
+		strip.tape_width = _width()*_tape_scale();strip.material_override = tape_material;strip.print_max_px = print_max_px
 		strip.anchors = drag_points.duplicate();strip.paid_length = drag_length;strip.issuer = weakref(self)
 		if bind_objects:strip.bind_surfaces()
 		if _prints():   # a stroke prints too; it is drawn (and printed) on its next physics frame

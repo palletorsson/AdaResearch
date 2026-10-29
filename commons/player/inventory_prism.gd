@@ -3,10 +3,15 @@ extends Node3D
 ## THE INVENTORY PRISM - the web palette (ada_encyclopedia /catalyst-inventory, OpenBrushCatalystInventory.tsx)
 ## in VR (Palle, 2026-10-29: "build the prism in VR, retire the wrist panel"). A node of museum_rig.tscn, the
 ## one rig scene the museum and the Void both drive, so both have it; plain hands keep it (no bracelet).
-##  - A four-faced prism floats upright over the LEFT hand while the left palm is up (a glance at a watch:
-##    the controller's +X against UP past em_layout rig.palm_up); rig.prism_always true keeps it there.
-##    Faces as on the web: HAND · KNOBS · TAPE · PLACED (inventory_face.gd). The active face turns to the eye;
-##    the ◀ ▶ ears on every face turn it, as the web's frame swipe and Q/E do.
+##  - TILTED LIKE OPEN BRUSH (Palle, 2026-10-29: "read up on the principles"; Open Brush PanelManager.cs:
+##    panels orbit the wand's FORWARD axis at a radius, oriented `wand.rotation * Euler(90,0,0)` - their up
+##    along the controller, their face radially out - rolled in 120° snaps with a jiggle, haptics on each
+##    step, a pane more than 70° off the gaze dropped). Here: a four-faced drum round the LEFT controller's
+##    forward axis, 12 cm ahead of the hand, so the face on top tilts with the hand and reads when the
+##    controller is held naturally; rolling the wrist shows the next face; the ◀ ▶ ears roll it in 90° snaps
+##    (the Void owns the stick); the face the right pointer rests on lifts a centimetre. Shown while the left
+##    palm is up (rig.palm_up), by left X (toggle), or always (rig.prism_always).
+##    Faces as on the web: HAND · KNOBS · TAPE · PLACED (inventory_face.gd).
 ##  - The RIGHT hand is the wand: its pointer presses the faces as any switch; trigger lays tape from the worn
 ##    roll or makes the current item into that hand's own FunctionPickup - never while the pointer is on a
 ##    target (a switch, a handle, the prism); grip, while the prism is up, takes the last thing back (grip
@@ -19,9 +24,10 @@ const FaceScene = preload("res://commons/player/inventory_face.tscn")
 const PanelViewport = preload("res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn")
 const LAYOUT := "res://commons/data/em_layout.json"
 const TAPES := "res://commons/artifacts/tape_roll/tapes.json"
-const SIDE := 0.12          # a face's width, and the prism's
-const TALL := 0.15          # a face's height
-const LIFT := 0.14          # the prism's centre above the left hand
+const SIDE := 0.12          # a face's width, and the drum's diameter
+const TALL := 0.15          # a face's height, along the controller
+const AHEAD := Vector3(0, 0.03, -0.12)   # the drum's centre on the controller: ahead along the aim, a little up
+const HOVER_LIFT := 0.012   # the face the pointer rests on comes out this far (Tilt Brush: lifts and brightens)
 
 @export var palm_up := 0.55
 @export var always := false
@@ -30,14 +36,15 @@ var enabled := true
 var hand: Node = null
 var left: XRController3D = null
 var right: XRController3D = null
-var prism: Node3D = null          # the turning body, upright in the world over the left hand
-var faces: Array = []             # Viewport2Din3D, one per face
+var prism: Node3D = null          # the drum, a child of the left controller, rolled about its forward axis
+var faces: Array = []             # Viewport2Din3D, one per face, round the drum
+var face_rest: Array = []         # each face's resting transform on the drum
 var uis: Array = []               # the inventory_face Controls inside them
-var active := 0
+var active := 0                   # the face on top (at the controller's +Y)
 var showing := false
 var pinned := false              # the Void's left X: up until pressed again, whatever the palm does
 var ring: MeshInstance3D = null
-var _yaw := 0.0
+var _roll := 0.0                  # the drum's roll about the forward axis, snapping to active * 90°
 var _worn_state: Array = []
 
 func _ready() -> void:
@@ -54,16 +61,18 @@ func _ready() -> void:
 	hand = HandLib.new();hand.name = "InventoryHand";add_child(hand)
 	hand.item_changed.connect(func(_id):refresh_faces();_sync_worn())
 	hand.config_changed.connect(func(_id, _cfg):refresh_faces())
-	prism = Node3D.new();prism.name = "Prism";add_child(prism);prism.top_level = true
-	var body := MeshInstance3D.new();body.name = "Body";var box := BoxMesh.new();box.size = Vector3(SIDE - .004, TALL - .004, SIDE - .004);body.mesh = box
-	var bm := StandardMaterial3D.new();bm.albedo_color = Color("0b0f18");bm.roughness = .6;body.material_override = bm;prism.add_child(body)
+	# the drum on the left controller: its axis the controller's forward (-Z), the faces' up along it
+	# no body: four flat panels in the air round the axis (Palle: "the whole interface should be 2d in 3d")
+	prism = Node3D.new();prism.name = "Prism";left.add_child(prism);prism.position = AHEAD
 	for i in 4:
 		var vp: Node3D = PanelViewport.instantiate();vp.name = "Face%d" % i
 		vp.set("scene", FaceScene);vp.set("screen_size", Vector2(SIDE, TALL));vp.set("viewport_size", Vector2(384, 480))
 		vp.set("update_mode", 2);vp.set("throttle_fps", 10.0)   # UPDATE_THROTTLED: four faces on a Quest
-		var turn := Basis(Vector3.UP, i * PI / 2)
-		vp.transform = Transform3D(turn, turn * Vector3(0, 0, SIDE / 2))
-		prism.add_child(vp);faces.append(vp)
+		# a screen faces +Z with its top at +Y: laid on its back it faces +Y with its top along -Z (forward),
+		# then rolled round the forward axis by the face's step - Open Brush's wand.rotation * Euler(90,0,0)
+		var turn := Basis(Vector3.FORWARD, -i * PI / 2)
+		vp.transform = Transform3D(turn * Basis(Vector3.RIGHT, -PI / 2), turn * Vector3(0, SIDE / 2, 0))
+		prism.add_child(vp);faces.append(vp);face_rest.append(vp.transform)
 	ring = MeshInstance3D.new();ring.name = "TipRing";var torus := TorusMesh.new();torus.inner_radius = .03;torus.outer_radius = .0375;torus.rings = 24;torus.ring_segments = 8;ring.mesh = torus
 	var rm := StandardMaterial3D.new();rm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED;rm.albedo_color = Color("f43f5e", .7);rm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;ring.material_override = rm
 	ring.rotation.x = PI / 2;ring.position = Vector3(0, 0, -.03);right.add_child(ring);ring.hide()
@@ -95,8 +104,12 @@ func refresh_faces() -> void:
 
 # ── what the faces ask ───────────────────────────────────────────────────────────────────────────────────────
 
+## The ears roll the drum one face (Open Brush snaps 120° with a jiggle and a haptic tick; four faces, 90° here).
+## The ears roll the drum one face (Open Brush snaps 120° with a jiggle and a haptic tick; four faces, 90° here).
 func turn(d: int) -> void:
 	active = posmod(active + d, 4);refresh_faces()
+	if left != null and left.has_method("trigger_haptic_pulse"):left.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.3, 0.0)
+	if left != null and left.has_method("trigger_haptic_pulse"):left.trigger_haptic_pulse("haptic", 0.0, 0.05, 0.3, 0.0)
 
 func choose(id: String) -> void:
 	hand.set_current(id)
@@ -161,23 +174,24 @@ func _process(delta: float) -> void:
 	var want: bool = always or pinned or up > (palm_up - 0.15 if showing else palm_up)
 	if want != showing:_set_showing(want)
 	_sync_worn()
-	_place_prism(delta)
+	_roll_drum(delta)
 	var roll: Node = hand.worn_node()
 	ring.visible = roll != null and showing
 	if ring.visible:
 		var w: float = roll._width() if roll.has_method("_width") else .075
 		var torus: TorusMesh = ring.mesh;torus.outer_radius = w / 2;torus.inner_radius = maxf(w / 2 - .006, .004)
 
-## Upright over the left hand, the active face turned to the eye.
-func _place_prism(delta: float) -> void:
+## The drum rolls about the controller's forward axis so the active face sits on top (at +Y), snapping fast
+## as Open Brush does; the face the right pointer rests on lifts out a little.
+func _roll_drum(delta: float) -> void:
 	if not showing:return
-	var cam := get_viewport().get_camera_3d()
-	var centre: Vector3 = left.global_position + Vector3.UP * LIFT
-	var to_eye: Vector3 = (cam.global_position - centre) if cam != null else -left.global_basis.z
-	to_eye.y = 0
-	var want_yaw: float = (atan2(to_eye.x, to_eye.z) if to_eye.length() > .01 else _yaw) - active * PI / 2
-	_yaw = lerp_angle(_yaw, want_yaw, minf(1.0, delta * 10.0))
-	prism.global_transform = Transform3D(Basis(Vector3.UP, _yaw), centre)
+	_roll = lerp_angle(_roll, active * PI / 2, minf(1.0, delta * 12.0))
+	prism.transform = Transform3D(Basis(Vector3.FORWARD, _roll), AHEAD)
+	var p: Node = _right_pointer();var over: Node = p.get("last_target") if p != null else null
+	for i in 4:
+		var vp: Node3D = faces[i];var rest: Transform3D = face_rest[i]
+		var lifted: bool = over != null and is_instance_valid(over) and over.get_parent() == vp
+		vp.transform = Transform3D(rest.basis, rest.origin + rest.basis.z * (HOVER_LIFT if lifted else 0.0))
 
 ## The Void's left X (Palle: "I do not get any menu from any button"): the prism up until X again.
 func toggle() -> void:

@@ -47,9 +47,15 @@ prism in VR, the wrist panel retired** - the web palette (`ada_encyclopedia` `/c
 `OpenBrushCatalystInventory.tsx`) was the prototype for the headset. `commons/player/inventory_prism.gd` is a
 node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void both drive, so both have it:
 
-- **Left palm up** (the left controller's +X against UP past `rig.palm_up`, 0.55, hysteresis 0.15) and a
-  four-faced prism floats upright over the left hand, the active face turned to the eye; palm down and it goes.
-  `rig.prism_always: true` keeps it there, as Open Brush keeps its palette.
+- **Tilted like Open Brush** (Palle: "read up on the principles"). Open Brush's `PanelManager.cs` puts the
+  panels on a drum round the wand's FORWARD axis at a radius, each oriented `wand.rotation * Euler(90,0,0)`
+  (its up along the controller, its face radially out), rolled in 120° snaps with a jiggle and a haptic tick,
+  a pane more than 70° off the gaze dropped. So the prism is a four-faced drum round the **left controller's
+  forward axis**, 12 cm ahead of the hand: the face on top tilts with the hand and reads when the controller
+  is held naturally, rolling the wrist shows the next, the ◀ ▶ ears roll it in 90° snaps (the Void owns the
+  stick), and the face the right pointer rests on lifts 1.2 cm (Tilt Brush's panels lift when engaged).
+  Shown while the left palm is up (`rig.palm_up`, 0.55, hysteresis 0.15), by **left X** (toggle, stays up until
+  X again), or always (`rig.prism_always: true`).
 - **Four faces as on the web** (`inventory_face.gd`, a Control per face in an XR Tools `Viewport2Din3D`,
   throttled to 10 fps for the Quest): **HAND** (Nothing · Clock · Tape · Ball · Rod, locked and coming ones dim),
   **KNOBS** (the current item's: choices as rows, ranges as − value +, text shown), **TAPE** (the designs from

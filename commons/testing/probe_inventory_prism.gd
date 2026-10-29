@@ -1,8 +1,8 @@
 extends Node3D
 ## THE INVENTORY PRISM on the real museum rig (commons/player/museum_rig.tscn - the museum's and the Void's),
 ## fake trackers with poses, no bracelet. (A) the rig carries InventoryPrism, four faces bound, hidden; (B) the
-## left palm up shows it upright over the left hand with face 0 (HAND) turned to the eye; (C) the ▶ ear turns
-## it: face 1 active and now the one facing the eye; (D) the HAND face's Tape card: the roll worn on the RIGHT
+## left palm up shows it: a drum on the left controller's forward axis, the HAND face on top, its up along the
+## controller (Open Brush's wand palette); (C) the ▶ ear rolls it a quarter: face 1 active and on top; (D) the HAND face's Tape card: the roll worn on the RIGHT
 ## hand, the tip ring at the tape's width; (E) the TAPE face's hazard swatch: the worn roll wears the design
 ## (live apply_config); (F) the right trigger held and moved lays a stroke, and the PLACED face lists it;
 ## (G) TAKE BACK LAST takes the strip back; (H) the Ball card, trigger: a ball in the right pickup; grip with
@@ -43,17 +43,18 @@ func _ready() -> void:
 	_palm(1.0)
 	for i in 30:
 		await get_tree().process_frame
-	var eye: Vector3 = cam.global_position
-	var f0: Node3D = p.faces[0];var n0: Vector3 = f0.global_basis.z;var to_eye: Vector3 = (eye - f0.global_position);to_eye.y = 0;to_eye = to_eye.normalized()
-	var upright: bool = p.prism.global_basis.y.dot(Vector3.UP) > .99
-	var over_hand: bool = (p.prism.global_position - rig.get_node("LeftHand").global_position).y > .1
-	_check(report, "B palm up: shown, upright over the left hand, the HAND face turned to the eye", p.showing and p.prism.visible and upright and over_hand and n0.dot(to_eye) > .95, {"upright": upright, "over_hand": over_hand, "facing": n0.dot(to_eye)})
+	var lh: Node3D = rig.get_node("LeftHand")
+	var f0: Node3D = p.faces[0]
+	var on_top: float = f0.global_basis.z.dot(lh.global_basis.y)          # the HAND face's normal is the controller's up
+	var along: float = f0.global_basis.y.dot(-lh.global_basis.z)           # its top runs along the controller's forward
+	var ahead: float = (p.prism.global_position - lh.global_position).dot(-lh.global_basis.z)
+	_check(report, "B palm up: shown, a drum on the left controller 12 cm ahead, the HAND face on top with its up along the controller (Open Brush)", p.showing and p.prism.visible and p.prism.get_parent() == lh and on_top > .98 and along > .98 and absf(ahead - .12) < .01, {"on_top": on_top, "along": along, "ahead": ahead})
 	# C - the ▶ ear turns it
 	(p.uis[0].buttons["ear+1"] as Button).pressed.emit()
 	for i in 30:
 		await get_tree().process_frame
-	var f1: Node3D = p.faces[1];var n1: Vector3 = f1.global_basis.z;var to_eye1: Vector3 = eye - f1.global_position;to_eye1.y = 0;to_eye1 = to_eye1.normalized()
-	_check(report, "C turn: ▶ makes face 1 (KNOBS) active, and it now faces the eye", p.active == 1 and n1.dot(to_eye1) > .95, {"active": p.active, "facing": n1.dot(to_eye1)})
+	var f1: Node3D = p.faces[1];var on_top1: float = f1.global_basis.z.dot(lh.global_basis.y)
+	_check(report, "C turn: ▶ rolls the drum a quarter: face 1 (KNOBS) active and now on top", p.active == 1 and on_top1 > .98, {"active": p.active, "on_top": on_top1})
 	# D - the HAND face's Tape card: worn on the right hand, the ring at its width
 	(p.uis[0].buttons["item:tape"] as Button).pressed.emit()
 	for i in 4:

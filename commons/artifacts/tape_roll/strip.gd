@@ -13,6 +13,7 @@ var peeled := false
 ## ribbon's UV runs in metres, so the print lies on the tape wherever the tape goes. Redrawn only when
 ## the words or the length change.
 const PRINT_PX := 96
+var print_max_px := 8192   # the picture's width at most; the roll sets it (its print_max_px)
 var print_source: Callable
 var print_ink := Color("1d1d1f")
 var print_paper := Color("efe9dc")
@@ -138,7 +139,7 @@ func lay_print(a: Vector3,na: Vector3,b: Vector3,nb: Vector3,along := -1.0) -> v
 	var state := [phrase,snappedf(length,.005),flip,tape_width]
 	if state==_print_state:return
 	_print_state = state
-	var wide := clampi(int(round(length/tape_width*PRINT_PX)),PRINT_PX,8192)
+	var wide := clampi(int(round(length/tape_width*PRINT_PX)),PRINT_PX,print_max_px)
 	var font: Font = ThemeDB.fallback_font;var size := int(PRINT_PX*.56);var room := wide-PRINT_PX*.6
 	var width_of := func(t: String) -> float:return font.get_string_size(t,HORIZONTAL_ALIGNMENT_LEFT,-1,size).x
 	var count := int(floor(room/maxf(width_of.call(phrase),1.0)))
