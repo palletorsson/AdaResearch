@@ -1,0 +1,25 @@
+{
+  "artifacts": {
+    "paint_station": {
+      "lookup_name": "paint_station",
+      "name": "Paint the wood / tins, stains and timber panels",
+      "scene": "res://commons/artifacts/paint_buckets/paint_station.tscn",
+      "category": "color",
+      "map_sequences": [
+        "color"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "Six of the kit's one-metre timber panels on an easel wall, six tins of emulsion (red, yellow, blue, white, black, pink) and three jars of stain (cyan, magenta, yellow) on a bench. Hold a tin or a jar, aim at a panel, pull the trigger: one coat. Emulsion lays its colour over what is there (one coat 70 %, so the grain shows; two 91 %); stain filters everything beneath it, so cyan over yellow is green. Mixed in linear light. SAND returns every panel to bare wood; the panels stay carryable.",
+      "footprint": [3.4, 2.9, 1.6],
+      "qfep_connection": "Two ways a colour can sit on a surface: laid over what is there, or filtering what lies beneath. The wood stays in the picture until it is covered.",
+      "tags": [
+        "color",
+        "paint",
+        "subtractive",
+        "timber",
+        "tool"
+      ]
+    }
+  }
+}
