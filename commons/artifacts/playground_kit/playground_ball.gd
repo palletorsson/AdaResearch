@@ -6,13 +6,17 @@ class_name PlaygroundBall
 ## pair is one rigid thing to lift. Origin: the ball's centre. Let go, it SNAPS TO THE GRID (Palle: 'the ball must
 ## be placed in a 1 m snap grid'): its centre to the nearest grid point, x and z at multiples of `grid`, y at
 ## a multiple of `grid` plus the hub's half-height so the lowest row stands on the floor, sockets squared to
-## the grid - and freezes there, a node of the scaffold. A rod only holds where a grid ball holds it; picked
-## up again the ball is a body until it is let go on the next point. Built in code, as the corpus does (construction-materials.json: black steel, pale foam
+## the grid - and holds there only if it is SUPPORTED (Palle: 'balls need support too, build the support
+## graph'): grounded on row 0, or reached from a grounded ball through socketed rods. reevaluate() walks that
+## graph whenever a ball or rod is placed, picked up or removed: supported balls freeze on their points, the
+## rest become bodies and fall with whatever hangs on them. A held ball supports nothing. A rod only holds
+## where a supported ball holds it. Built in code, as the corpus does (construction-materials.json: black steel, pale foam
 ## before Colour, pink after).
 
 signal socket_claimed(index: int, rod: Node3D)
 signal socket_freed(index: int)
 signal placed(at: Vector3)   # snapped to the grid
+signal support_changed(supported: bool)
 
 @export_range(0.03, 0.2) var radius := 0.06        ## the foam ball
 @export_range(0.01, 0.08) var boss := 0.025        ## how far a socket's boss stands out of the ball
@@ -26,6 +30,9 @@ const FOAM := {"pale": "ededed", "pink": "ea72ab", "cyan": "5fd3e6", "steel": "2
 const STEEL := "2a2c30"
 
 var sockets: Array = [null, null, null, null, null, null]   # the rod in each socket, or null
+var on_grid := false     # let go onto a grid point (false once it has fallen or been picked up)
+var held := false        # in a hand: supports nothing
+var supported := false   # the graph's last word
 var _built := false
 
 func _init() -> void:
@@ -46,7 +53,8 @@ func _ready() -> void:
 	super._ready()
 	add_to_group("playground_balls")
 	dropped.connect(func(_who):call_deferred("settle"))
-	picked_up.connect(func(_who):freeze = false)
+	picked_up.connect(func(_who):held = true;on_grid = false;freeze = false;reevaluate(get_tree()))
+	tree_exiting.connect(_leaving)
 	_build()
 
 ## The hub's half-height: the ball plus a socket boss, what stands on the floor.
@@ -57,14 +65,69 @@ func hub() -> float:
 func grid_point(p: Vector3) -> Vector3:
 	return Vector3(roundf(p.x / grid) * grid, roundf((p.y - hub()) / grid) * grid + hub(), roundf(p.z / grid) * grid)
 
-## Let go: onto the nearest grid point, squared, frozen. Returns where, or the ball's own place when snap is off.
+## Let go: onto the nearest grid point, squared - then the graph decides whether it holds there. Returns where,
+## or the ball's own place when snap is off.
 func settle() -> Vector3:
+	held = false
 	if not is_inside_tree() or is_picked_up():return global_position
 	if not snap:return global_position
 	var at := grid_point(global_position)
-	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;freeze = true
-	linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO;global_transform = Transform3D(Basis(), at)
-	placed.emit(at);return at
+	linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO;global_transform = Transform3D(Basis(), at);on_grid = true
+	_hold()
+	_take_rod_ends()
+	placed.emit(at);reevaluate(get_tree());return at
+
+## A loose rod end lying in one of this ball's mouths (within 3 cm) is taken: the ball's side of the snap.
+func _take_rod_ends() -> void:
+	for i in DIRS.size():
+		if not socket_free(i):continue
+		var mouth := socket_global(i)
+		for rod in get_tree().get_nodes_in_group("playground_rods"):
+			if not rod.has_method("attach_end"):continue
+			for end in 2:
+				if rod.end_free(end) and rod.end_global(end).distance_to(mouth) < .03:rod.attach_end(end, self, i);break
+			if not socket_free(i):break
+
+func _hold() -> void:
+	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;freeze = true;linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO
+
+## Standing on row 0 of the grid: the floor holds it.
+func grounded() -> bool:
+	return on_grid and not held and is_equal_approx(global_position.y, hub())
+
+## Taken out of the world: its rods let go of it, and the graph is walked again without it.
+func _leaving() -> void:
+	var tree := get_tree()
+	for rod in sockets:
+		if rod != null and is_instance_valid(rod) and rod.has_method("release_ball"):rod.release_ball(self)
+	if tree:(func():reevaluate(tree)).call_deferred()
+
+## THE SUPPORT GRAPH. From every grounded ball, out through its socketed rods to the balls at their other ends:
+## those are supported. Supported balls hold on their grid points; a ball on the grid that nothing supports
+## becomes a body and falls, and what is jointed to it falls with it. Returns {supported, fell}.
+static func reevaluate(tree: SceneTree) -> Dictionary:
+	if tree == null:return {}
+	var balls := tree.get_nodes_in_group("playground_balls")
+	var seen := {};var queue: Array = []
+	for b in balls:
+		if b.grounded():seen[b] = true;queue.append(b)
+	while not queue.is_empty():
+		var b: Node = queue.pop_front()
+		for rod in b.sockets:
+			if rod == null or not is_instance_valid(rod):continue
+			for jd in rod.joints:
+				var o: Node = jd.ball
+				if is_instance_valid(o) and o.on_grid and not o.held and not seen.has(o):seen[o] = true;queue.append(o)
+	var fell := 0
+	for b in balls:
+		if b.held:continue
+		var was: bool = b.supported;b.supported = seen.has(b)
+		if b.supported:
+			if not b.freeze:b._hold()
+		elif b.on_grid:
+			b.on_grid = false;b.freeze = false;b.sleeping = false;fell += 1
+		if was != b.supported:b.support_changed.emit(b.supported)
+	return {"supported": seen.size(), "fell": fell}
 
 func _build() -> void:
 	for c in get_children():

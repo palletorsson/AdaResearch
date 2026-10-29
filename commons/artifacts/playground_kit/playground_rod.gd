@@ -26,6 +26,7 @@ signal unsnapped
 
 const FOAM := {"pale": "ededed", "pink": "ea72ab", "cyan": "5fd3e6", "steel": "2a2c30"}
 const STEEL := "2a2c30"
+const BallLib = preload("res://commons/artifacts/playground_kit/playground_ball.gd")   # by path: the class cache lags
 
 var joints: Array[Dictionary] = []   # {end, ball, socket, joint}
 var _built := false
@@ -107,18 +108,32 @@ func settle() -> int:
 			if b == found[0][1] or not b.has_method("nearest_free_socket"):continue
 			var i: int = b.nearest_free_socket(p)
 			if i >= 0 and p.distance_to(b.socket_global(i)) < .03:found.append([other, b, i]);break
-	for f in found:
-		var ball: Node3D = f[1];var i: int = f[2]
-		var j := Generic6DOFJoint3D.new();j.name = "Snap%d" % f[0]
-		get_parent().add_child(j);j.global_transform = Transform3D(Basis(), ball.socket_global(i))
-		j.node_a = ball.get_path();j.node_b = get_path()
-		for ax in ["x", "y", "z"]:   # every axis locked: a fixed joint
-			j.set("linear_limit_%s/upper_distance" % ax, 0.0);j.set("linear_limit_%s/lower_distance" % ax, 0.0)
-			j.set("angular_limit_%s/upper_angle" % ax, 0.0);j.set("angular_limit_%s/lower_angle" % ax, 0.0)
-		ball.claim(i, self)
-		joints.append({"end": f[0], "ball": ball, "socket": i, "joint": j})
-		snapped.emit(f[0], ball, i)
+	for f in found:_join(f[0], f[1], f[2])
+	BallLib.reevaluate(get_tree())
 	return found.size()
+
+## Is this end free (in no socket)?
+func end_free(end: int) -> bool:
+	for jd in joints:
+		if jd.end == end:return false
+	return true
+
+## A ball let go with a mouth on this end takes it: the ball's side of the snap (the rod is already in place).
+func attach_end(end: int, ball: Node3D, socket: int) -> void:
+	if not end_free(end):return
+	_join(end, ball, socket)
+
+## The fixed joint at a mouth, the socket claimed, remembered.
+func _join(end: int, ball: Node3D, i: int) -> void:
+	var j := Generic6DOFJoint3D.new();j.name = "Snap%d" % end
+	get_parent().add_child(j);j.global_transform = Transform3D(Basis(), ball.socket_global(i))
+	j.node_a = ball.get_path();j.node_b = get_path()
+	for ax in ["x", "y", "z"]:   # every axis locked: a fixed joint
+		j.set("linear_limit_%s/upper_distance" % ax, 0.0);j.set("linear_limit_%s/lower_distance" % ax, 0.0)
+		j.set("angular_limit_%s/upper_angle" % ax, 0.0);j.set("angular_limit_%s/lower_angle" % ax, 0.0)
+	ball.claim(i, self)
+	joints.append({"end": end, "ball": ball, "socket": i, "joint": j})
+	snapped.emit(end, ball, i)
 
 func unsnap() -> void:
 	if joints.is_empty():return
@@ -126,6 +141,16 @@ func unsnap() -> void:
 		if is_instance_valid(jd.ball):jd.ball.release(self)
 		if is_instance_valid(jd.joint):jd.joint.queue_free()
 	joints.clear();unsnapped.emit()
+	if is_inside_tree():BallLib.reevaluate(get_tree())
+
+## One ball leaving the world: this rod lets go of it and keeps its other end.
+func release_ball(ball: Node) -> void:
+	var keep: Array[Dictionary] = []
+	for jd in joints:
+		if jd.ball == ball:
+			if is_instance_valid(jd.joint):jd.joint.queue_free()
+		else:keep.append(jd)
+	joints = keep
 
 static func _basis_x(axis: Vector3) -> Basis:
 	var up := Vector3.UP if absf(axis.dot(Vector3.UP)) < .9 else Vector3.BACK

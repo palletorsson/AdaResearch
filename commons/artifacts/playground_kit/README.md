@@ -29,6 +29,26 @@ items.json`; `commons/player/INVENTORY.md`).
     thump beneath, pitch and volume by speed). **`body_entered` arrives after the solver has spent the
     velocity**, so the rod remembers its speed from before the step (`_physics_process`) and reports the larger.
 
+## The support graph
+
+Palle: *balls need support too — build the support graph.* Nothing in the code knows a tower or a bridge;
+a thing stands because of this walk, run by `PlaygroundBall.reevaluate(tree)` whenever a ball or rod is
+placed, picked up or removed:
+
+1. A ball is **grounded** when it was let go onto row 0 of the grid (its hub on the floor) and is not held.
+2. From every grounded ball, out through its socketed rods to the balls at their other ends: those are
+   **supported**, and on through theirs.
+3. Supported balls hold frozen on their grid points. A ball on the grid that nothing supports becomes a
+   body and falls — and so does whatever is jointed to it, since the joints are real. A ball let go in the
+   air with nothing under it snaps to its row and drops at once.
+4. A held ball supports nothing: lift the ground ball of a tower and the tower hangs from your hand; let it
+   go off the grid and it all comes down.
+5. The snap works from both sides: a rod let go takes a ball's mouth; a ball let go takes any loose rod
+   end lying in one of its mouths (within 3 cm), so a tower can be built rod first, ball on top.
+
+Taking a ball out of the world (`tree_exiting`) makes its rods let go of it (`release_ball`) and walks the
+graph again without it: the collapse.
+
 **Probe:** `godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_playground_kit.tscn`
 — seven checks with numbers (rest height, snap axis and end-to-mouth distance, the bridge, the chain lifting
 5 cm through the rod, unsnap, the hit at 6 m/s and the thwop's 3,087 samples, the inventory making a ball and a
