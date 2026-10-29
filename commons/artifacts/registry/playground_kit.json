@@ -1,0 +1,29 @@
+{
+  "registry_info": {
+    "name": "playground_kit",
+    "description": "The playground kit: the six-point attachment ball and the two-point rod (a stick, too) of the inventory - steel in foam sleeves on a one-metre unit, snapped together into installations",
+    "category": "construction"
+  },
+  "artifacts": {
+    "playground_ball": {
+      "lookup_name": "playground_ball",
+      "name": "Playground ball / six sockets",
+      "scene": "res://commons/artifacts/playground_kit/playground_ball.tscn",
+      "description": "A foam-sleeved steel hub with a socket on each of its six faces. A rod let go with an end near a free socket snaps in and is joined; two balls a rod's length apart take a rod between them. The POINT of the inventory. Config: radius, boss, colour (pale|pink|cyan|steel), socket_reach.",
+      "category": "construction",
+      "map_ready": true,
+      "map_sequences": ["primitives"],
+      "config": {"radius": 0.06, "boss": 0.025, "colour": "pink", "socket_reach": 0.12}
+    },
+    "playground_rod": {
+      "lookup_name": "playground_rod",
+      "name": "Playground rod / two points",
+      "scene": "res://commons/artifacts/playground_kit/playground_rod.tscn",
+      "description": "A steel core in a foam sleeve, one unit long, bare at the ends. Snaps into a ball's socket when let go near one, bridges two balls, and is a stick: hit anything faster than hit_speed and it gives the foam thwop (made in code). The LINE of the inventory. Config: length, core, sleeve, colour, hit_speed.",
+      "category": "construction",
+      "map_ready": true,
+      "map_sequences": ["primitives"],
+      "config": {"length": 1.0, "core": 0.012, "sleeve": 0.03, "colour": "pink", "hit_speed": 1.2}
+    }
+  }
+}
