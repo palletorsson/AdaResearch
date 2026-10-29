@@ -9,8 +9,9 @@ class_name PlaygroundBall
 ## the grid - and holds there only if it is SUPPORTED (Palle: 'balls need support too, build the support
 ## graph'): grounded on row 0, or reached from a grounded ball through socketed rods. reevaluate() walks that
 ## graph whenever a ball or rod is placed, picked up or removed: supported balls freeze on their points, the
-## rest become bodies and fall with whatever hangs on them. A held ball supports nothing. A rod only holds
-## where a supported ball holds it. Built in code, as the corpus does (construction-materials.json: black steel, pale foam
+## rest become bodies and fall with whatever hangs on them. A held ball supports nothing: lift a tower's ground
+## ball and the tower hangs from the hand on its joints; set it down on a grid point and every ball the walk
+## reaches again snaps to its own point and holds. A rod only holds where a supported ball holds it. Built in code, as the corpus does (construction-materials.json: black steel, pale foam
 ## before Colour, pink after).
 
 signal socket_claimed(index: int, rod: Node3D)
@@ -53,7 +54,9 @@ func _ready() -> void:
 	super._ready()
 	add_to_group("playground_balls")
 	dropped.connect(func(_who):call_deferred("settle"))
-	picked_up.connect(func(_who):held = true;on_grid = false;freeze = false;reevaluate(get_tree()))
+	# held: the hand drives the body itself (XR Tools keeps it frozen under its driver - never touch freeze here,
+	# or the ball slips out of the hand's control); it only stops being a support
+	picked_up.connect(func(_who):held = true;on_grid = false;reevaluate(get_tree()))
 	tree_exiting.connect(_leaving)
 	_build()
 
@@ -113,16 +116,24 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 		if b.grounded():seen[b] = true;queue.append(b)
 	while not queue.is_empty():
 		var b: Node = queue.pop_front()
-		for rod in b.sockets:
+		for i in b.sockets.size():
+			var rod = b.sockets[i]
 			if rod == null or not is_instance_valid(rod):continue
 			for jd in rod.joints:
 				var o: Node = jd.ball
-				if is_instance_valid(o) and o.on_grid and not o.held and not seen.has(o):seen[o] = true;queue.append(o)
+				if is_instance_valid(o) and not o.held and not seen.has(o):
+					# where the rod puts it: out of this socket by the rod's length and the hub (a carried tower
+					# sags on its joints; its place is the rod's, not where it drifted to)
+					seen[o] = b.socket_global(i) + b.socket_dir(i) * (rod.length + o.hub());queue.append(o)
 	var fell := 0
 	for b in balls:
 		if b.held:continue
 		var was: bool = b.supported;b.supported = seen.has(b)
 		if b.supported:
+			# reached again (a lifted tower set back down): onto its grid point and held there
+			if not b.on_grid:
+				var at: Vector3 = seen[b] if seen[b] is Vector3 else b.global_position
+				b.global_transform = Transform3D(Basis(), b.grid_point(at));b.on_grid = true
 			if not b.freeze:b._hold()
 		elif b.on_grid:
 			b.on_grid = false;b.freeze = false;b.sleeping = false;fell += 1

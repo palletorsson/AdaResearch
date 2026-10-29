@@ -60,12 +60,12 @@ func _ready() -> void:
 	_check(report, "D falls: a rod let go in the air with no ball near snapped nothing and fell", n4 == 0 and r4.global_position.y < y4 - .1, {"ends": n4, "fell": y4 - r4.global_position.y})
 	# E — picked up again: the rod unsnaps; the ball is a body until let go on the next point
 	r2.unsnap()
-	a.picked_up.emit(a)   # the hand's signal, as XR Tools sends it
-	var loose: bool = not a.freeze
+	a.picked_up.emit(a)   # the hand's signal, as XR Tools sends it (the hand itself drives freeze; here nobody does)
+	var loose: bool = a.held and not a.on_grid
 	a.global_position = Vector3(1.4, .5, .3);a.dropped.emit(a)   # let go off-grid again
 	for i in 3:
 		await get_tree().physics_frame
-	_check(report, "E again: unsnap frees the sockets; a picked-up ball is a body, and let go it is on the next grid point", r2.joints.is_empty() and a.sockets[5] == null and b.sockets[4] == null and loose and a.freeze and a.global_position.is_equal_approx(Vector3(1, hub, 0)), {"loose_when_held": loose, "a_now": _v(a.global_position)})
+	_check(report, "E again: unsnap frees the sockets; a picked-up ball is held and off the grid, and let go it is on the next grid point", r2.joints.is_empty() and a.sockets[5] == null and b.sockets[4] == null and loose and a.freeze and a.global_position.is_equal_approx(Vector3(1, hub, 0)), {"loose_when_held": loose, "a_now": _v(a.global_position)})
 	# H — SUPPORT: a ball let go in the air with nothing under it snaps to row 1, is unsupported, and falls
 	var h: RigidBody3D = Ball.instantiate();add_child(h);h.global_position = Vector3(3, 1.0, 1)
 	await get_tree().physics_frame
