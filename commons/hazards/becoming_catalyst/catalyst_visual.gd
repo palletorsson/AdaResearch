@@ -24,6 +24,7 @@ const MODE_COLORS := {
 	"wedge_placer":   Color(0.85, 0.55, 0.2),
 	"artifact_edit":  Color(0.4, 1.0, 0.6),
 	"lab_edit":       Color(0.6, 0.9, 1.0),
+	"place":          Color(1.0, 0.85, 0.4),
 	"primitives":     Color(0.85, 0.85, 0.9),
 	"transformation": Color(0.7, 0.3, 0.85),
 	"chromatic":      Color(1.0, 0.4, 0.4),

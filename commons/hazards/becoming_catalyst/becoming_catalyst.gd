@@ -34,6 +34,9 @@ const MODE_DEFS: Array[Dictionary] = [
 	# ADDITIVE: in-headset editing of the utilities layer (spawn/teleporter/ramp/door/…).
 	# No factory script — dispatched inline in _physics_process (mirrors the biome block).
 	{"id": "utility_edit",   "order": 0,  "name": "Utility",        "sequence": "",                   "script": ""},
+	# ADDITIVE: the inventory — things to hold and place (commons/data/inventory/items.json), the panel's
+	# ITEMS tab. Dispatched inline in _on_controller_button to InventoryHand; no factory script.
+	{"id": "place",          "order": 0,  "name": "Place",          "sequence": "",                   "script": ""},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -52,7 +55,7 @@ const MODE_DEFS: Array[Dictionary] = [
 const SequenceBinding := preload("res://commons/hazards/catalyst_sequence_binding.gd")
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "modifier", "utility_edit", "off"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "modifier", "utility_edit", "place", "off"]
 # The curriculum sequence this catalyst belongs to. Resolved passively at
 # _ready (knowledge only) or armed explicitly via the `sequence:` config
 # key. Empty = no sequence context (standalone map, tests).
@@ -441,6 +444,19 @@ func _on_controller_button(button_name: String) -> void:
 					_flash_label("MOVE CANCELLED", Color(1.0, 0.8, 0.4))
 			"by_button":
 				_save_utilities()
+		return
+
+	# PLACE (the inventory) intercepts its buttons like the modes above: trigger = the current item into
+	# this hand; grip = take the last one back; Ax = the next item (or none); By = nothing to save.
+	if mode_id == "place":
+		match button_name:
+			"trigger_click":
+				if not _is_hand_busy():
+					_place_spawn()
+			"grip_click":
+				_place_remove()
+			"ax_button":
+				_place_cycle()
 		return
 
 	match button_name:
@@ -1198,8 +1214,71 @@ func _connect_editor_panel(vp: Node) -> void:
 		ui.utility_type_changed.connect(_on_editor_utility_type)
 	if ui.has_signal("utility_op_selected") and not ui.utility_op_selected.is_connected(_on_editor_utility_op):
 		ui.utility_op_selected.connect(_on_editor_utility_op)
+	# ITEMS tab (the inventory) — pick the item this hand produces and turn its knobs. Guarded like the rest.
+	if ui.has_signal("item_selected") and not ui.item_selected.is_connected(_on_editor_item_selected):
+		ui.item_selected.connect(_on_editor_item_selected)
+	if ui.has_signal("item_knob_changed") and not ui.item_knob_changed.is_connected(_on_editor_item_knob):
+		ui.item_knob_changed.connect(_on_editor_item_knob)
+	_push_items_to_panel()
 	# Sync the panel's active tab to whatever mode we're already in.
 	_sync_editor_panel_tab()
+
+
+# ═════════════════════════════════════════════════════════════════════════
+# PLACE — the inventory (ADDITIVE). The things live in commons/data/inventory/items.json;
+# InventoryHand (commons/player/inventory_hand.gd) holds the choice, the knob values and the
+# making; the panel's ITEMS tab and the web prism are two faces of the same choice.
+# ═════════════════════════════════════════════════════════════════════════
+
+const InventoryHandLib = preload("res://commons/player/inventory_hand.gd")
+var _inventory: Node = null
+
+func _inv() -> Node:
+	if _inventory == null or not is_instance_valid(_inventory):
+		_inventory = InventoryHandLib.new()
+		_inventory.name = "InventoryHand"
+		_inventory.lab = _find_lab_manager()
+		add_child(_inventory)
+		_inventory.item_changed.connect(_on_inventory_item_changed)
+		_inventory.config_changed.connect(func(_id, _cfg): _push_items_to_panel())
+	return _inventory
+
+func _push_items_to_panel() -> void:
+	if _editor_panel_ui and is_instance_valid(_editor_panel_ui) and _editor_panel_ui.has_method("set_items"):
+		_editor_panel_ui.set_items(_inv().available(), _inv().current)
+
+func _on_inventory_item_changed(id: String) -> void:
+	_push_items_to_panel()
+	_flash_label("HOLD: " + (id.to_upper() if id != "" else "NOTHING"), Color(1.0, 0.85, 0.4))
+
+func _on_editor_item_selected(id: String) -> void:
+	_inv().set_current(id)
+
+func _on_editor_item_knob(key: String, value: Variant) -> void:
+	_inv().set_knob(key, value)
+
+func _place_spawn() -> void:
+	if _inv().current == "":
+		_flash_label("HOLDING NOTHING: pick an item", Color(1.0, 0.6, 0.3))
+		return
+	var node: Node3D = _inv().spawn_in(controller if controller else self)
+	if node == null:
+		_flash_label("NOT HERE YET: " + _inv().current.to_upper(), Color(1.0, 0.6, 0.3))
+		return
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.35, 0.0)
+
+func _place_remove() -> void:
+	var gone: Node3D = _inv().remove_last()
+	_flash_label("TAKEN BACK" if gone else "NOTHING PLACED", Color(1.0, 0.8, 0.4))
+
+func _place_cycle() -> void:
+	var ids: Array = [""]
+	for it in _inv().available():
+		if it.unlocked and it.coming == "":
+			ids.append(it.id)
+	var i: int = ids.find(_inv().current)
+	_inv().set_current(str(ids[(i + 1) % ids.size()]))
 
 
 ## Show the panel whenever an edit mode is active; hide in off/projectile modes.
@@ -1207,7 +1286,7 @@ func _connect_editor_panel(vp: Node) -> void:
 func _update_editor_panel_visibility() -> void:
 	var mode_def := _get_current_mode_def()
 	var mode_id: String = mode_def.get("id", "") if not mode_def.is_empty() else ""
-	var edit_modes: Array = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "modifier", "biome_brush", "utility_edit"]
+	var edit_modes: Array = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "modifier", "biome_brush", "utility_edit", "place"]
 	if is_held and mode_id in edit_modes:
 		_ensure_editor_panel()
 		if _editor_panel:
@@ -1238,6 +1317,7 @@ func _sync_editor_panel_tab() -> void:
 		"artifact_edit": tab_id = "ARTIFACTS"
 		"utility_edit": tab_id = "UTILITY"
 		"biome_brush": tab_id = "BIOME"
+		"place": tab_id = "ITEMS"
 	if tab_id != "":
 		_editor_panel_ui.set_active_tab(tab_id)
 
@@ -1257,6 +1337,7 @@ func _on_editor_tab_changed(tab_id: String) -> void:
 		"ARTIFACTS": target_mode = "artifact_edit"
 		"UTILITY": target_mode = "utility_edit"
 		"BIOME": target_mode = "biome_brush"
+		"ITEMS": target_mode = "place"
 	if target_mode == "":
 		return
 	var idx: int = unlocked_modes.find(target_mode)

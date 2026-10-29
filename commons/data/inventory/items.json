@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "doc": "The inventory: the things a hand can hold and place, read by the VR bracelet's PLACE mode (commons/player/inventory_hand.gd) and by the encyclopedia's /catalyst-inventory prism. One item = one registry token, how it mounts, its own defaults (the artifact's defaults stay as they are), and its knobs: each knob names an @export of the token's script (tools/inventory_check.py refuses a knob the code does not have). unlock: '' = always; a sequence id = after that sequence. scale (optional) shrinks the artifact as a whole, so a wall console becomes a hand-sized one without touching the artifact's own size. An item with 'coming' has no scene yet and shows greyed. The ball is the point and the rod the line; a rod let go near a ball's socket snaps in (playground_kit).",
+  "items": [
+    {
+      "id": "clock",
+      "name": "Clock (frame counter)",
+      "token": "frame_counter_display",
+      "unlock": "",
+      "mount": "wall",
+      "size": [0.6, 0.42, 0.09],
+      "scale": 0.48,
+      "defaults": {},
+      "knobs": [
+        {"key": "reading", "label": "Reads", "choices": [ "count", "rate", "delta", "budget" ], "names": [ "frames", "per second", "ms a frame", "90 Hz budget" ]},
+        {"key": "epoch", "label": "Since", "choices": [ "boot", "arrival" ], "names": [ "the machine booted", "you arrived" ]},
+        {"key": "target_hz", "label": "Target", "range": [30, 144, 6], "unit": " Hz"},
+        {"key": "refresh_s", "label": "Refresh", "range": [0, 2, 0.1], "unit": " s"}
+      ]
+    },
+    {
+      "id": "tape",
+      "name": "Tape roll",
+      "token": "tape_roll_printed",
+      "unlock": "",
+      "mount": "hand",
+      "size": [0.34, 0.34, 0.075],
+      "defaults": {},
+      "knobs": [
+        {"key": "bind_objects", "label": "Binds", "choices": [ "true", "false" ], "names": [ "binds what it joins", "marks only" ]},
+        {"key": "tape", "label": "Design", "choices": [ "", "hazard", "survey", "blueprint", "chevron", "dotted_note" ], "names": [ "plain", "hazard", "survey", "blueprint", "chevron", "dotted" ]},
+        {"key": "print", "label": "Prints", "choices": [ "environment", "note" ], "names": [ "where it lies", "a note" ]},
+        {"key": "note", "label": "Note", "text": true}
+      ]
+    },
+    {
+      "id": "point",
+      "name": "Ball (six sockets)",
+      "token": "playground_ball",
+      "unlock": "primitives",
+      "mount": "any",
+      "size": [0.17, 0.17, 0.17],
+      "defaults": {},
+      "knobs": [
+        {"key": "colour", "label": "Foam", "choices": [ "pale", "pink", "cyan", "steel" ], "names": [ "pale", "pink", "cyan", "bare steel" ]},
+        {"key": "grid", "label": "Grid", "choices": [ "0.5", "1", "2" ], "names": [ "half metre", "one metre", "two metres" ]},
+        {"key": "snap", "label": "Let go", "choices": [ "true", "false" ], "names": [ "onto the grid", "where it is" ]}
+      ]
+    },
+    {
+      "id": "rod",
+      "name": "Rod (two points)",
+      "token": "playground_rod",
+      "unlock": "primitives",
+      "mount": "hand",
+      "size": [0.83, 0.06, 0.06],
+      "defaults": {},
+      "knobs": [
+        {"key": "units", "label": "Length", "choices": [ "1", "2", "3" ], "names": [ "one unit", "two units", "three units" ]},
+        {"key": "colour", "label": "Foam", "choices": [ "pale", "pink", "cyan", "steel" ], "names": [ "pale", "pink", "cyan", "bare steel" ]},
+        {"key": "hit_speed", "label": "A hit from", "range": [0.4, 4, 0.2], "unit": " m/s"}
+      ]
+    },
+    {
+      "id": "triangle",
+      "name": "Triangle",
+      "token": "",
+      "unlock": "primitives",
+      "mount": "any",
+      "size": [1.0, 0.87, 0.05],
+      "defaults": {},
+      "knobs": [],
+      "coming": "the playground workshop"
+    }
+  ]
+}

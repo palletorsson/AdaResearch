@@ -26,11 +26,14 @@ signal artifact_sequence_changed(seq: String)
 # UTILITY — the utilities layer (s/t/r/...)
 signal utility_type_changed(code: String)
 signal utility_op_selected(op: String)
+# ITEMS — the inventory (commons/data/inventory/items.json): what this hand produces, and its knobs
+signal item_selected(id: String)
+signal item_knob_changed(key: String, value: Variant)
 
 const BiomeElementsLib = preload("res://commons/biome_layers/biome_elements.gd")
 
-const TABS: Array = ["GRID", "ARTIFACTS", "UTILITY", "BIOME"]
-const TAB_COLORS: Array = [Color(0.45, 0.75, 1.0), Color(0.95, 0.7, 0.35), Color(0.85, 0.5, 0.95), Color(0.5, 0.9, 0.6)]
+const TABS: Array = ["GRID", "ARTIFACTS", "UTILITY", "BIOME", "ITEMS"]
+const TAB_COLORS: Array = [Color(0.45, 0.75, 1.0), Color(0.95, 0.7, 0.35), Color(0.85, 0.5, 0.95), Color(0.5, 0.9, 0.6), Color(1.0, 0.85, 0.4)]
 const GRID_OPS: Array = ["add", "remove", "fill", "raise", "randomize", "ground", "checker", "frame", "ring", "smooth"]
 const PAINT_OPS: Array = ["colorize", "random", "clear"]
 const PALETTE: Array = ["#e08a2a", "#d23b3b", "#2a8ae0", "#3bcf6a", "#c33bd2", "#e0d02a", "#888c95", "#101216"]
@@ -73,6 +76,13 @@ var _util_type_active: int = 0
 var _util_op_buttons: Array = []
 var _util_op_active: int = 0   # default ADD
 
+# ITEMS — the list the host gives (set_items), the current id, and the two boxes the page rebuilds.
+var _items: Array = []
+var _item_current: String = ""
+var _item_buttons: Dictionary = {}   # id -> Button
+var _items_box: VBoxContainer = null
+var _knobs_box: VBoxContainer = null
+
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(540, 540)
@@ -112,6 +122,7 @@ func _ready() -> void:
 	_build_artifact_page(_pages[1])
 	_build_utility_page(_pages[2])
 	_build_biome_page(_pages[3])
+	_build_items_page(_pages[4])
 
 	_refresh_tabs()
 	_refresh_grid_ops()
@@ -359,6 +370,131 @@ func _refresh_util() -> void:
 
 
 # ── shared helpers ────────────────────────────────────────────────────
+# ── ITEMS tab: the inventory ──────────────────────────────────────────
+## What this hand produces: one button per item (locked and not-yet-built ones dimmed), NONE, and below
+## them the knobs of the current item: a row of choices, a slider, or (text) the value the web page set.
+
+func _build_items_page(parent: VBoxContainer) -> void:
+	_section(parent, "IN THE HAND", TAB_COLORS[4])
+	var note := Label.new()
+	note.text = "Trigger makes it in your hand; let go near a wall and it sticks.\nGrip takes the last one back. A = next."
+	note.add_theme_font_size_override("font_size", 15)
+	note.add_theme_color_override("font_color", DIM)
+	parent.add_child(note)
+	_items_box = VBoxContainer.new()
+	_items_box.add_theme_constant_override("separation", 8)
+	parent.add_child(_items_box)
+	_section(parent, "KNOBS", TAB_COLORS[4])
+	_knobs_box = VBoxContainer.new()
+	_knobs_box.add_theme_constant_override("separation", 8)
+	parent.add_child(_knobs_box)
+	_refresh_items()
+
+
+## Host API — the items as InventoryHand.available() lists them, and the current id ("" = none).
+func set_items(items: Array, current: String) -> void:
+	_items = items
+	_item_current = current
+	_refresh_items()
+
+
+## Host API — the current item changed elsewhere (A button, the web page).
+func set_item(id: String) -> void:
+	_item_current = id
+	_refresh_items()
+
+
+func _refresh_items() -> void:
+	if _items_box == null:
+		return
+	for c in _items_box.get_children():
+		c.queue_free()
+	_item_buttons.clear()
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	_items_box.add_child(row)
+	var none := _tool_button("NONE", Vector2(96, 50))
+	none.pressed.connect(func(): item_selected.emit(""))
+	row.add_child(none)
+	_style(none, TAB_COLORS[4], _item_current == "")
+	var n := 1
+	for it in _items:
+		if n % 4 == 0:
+			row = HBoxContainer.new()
+			row.add_theme_constant_override("separation", 8)
+			_items_box.add_child(row)
+		n += 1
+		var id: String = str(it.get("id", ""))
+		var b := _tool_button(str(it.get("name", id)).to_upper(), Vector2(96, 50))
+		var usable: bool = bool(it.get("unlocked", true)) and str(it.get("coming", "")) == ""
+		if not usable:
+			b.disabled = true
+			b.tooltip_text = str(it.get("coming", "")) if str(it.get("coming", "")) != "" else "locked"
+			b.text += "\n(%s)" % ("soon" if str(it.get("coming", "")) != "" else "locked")
+		else:
+			b.pressed.connect(func(): item_selected.emit(id))
+		row.add_child(b)
+		_item_buttons[id] = b
+		_style(b, TAB_COLORS[4], id == _item_current)
+	_refresh_knobs()
+
+
+func _refresh_knobs() -> void:
+	if _knobs_box == null:
+		return
+	for c in _knobs_box.get_children():
+		c.queue_free()
+	var cur: Dictionary = {}
+	for it in _items:
+		if str(it.get("id", "")) == _item_current:
+			cur = it
+	if cur.is_empty():
+		var l := Label.new()
+		l.text = "—"
+		l.add_theme_color_override("font_color", DIM)
+		_knobs_box.add_child(l)
+		return
+	var values: Dictionary = cur.get("values", {})
+	for knob in cur.get("knobs", []):
+		var key: String = str(knob.get("key", ""))
+		var label: String = str(knob.get("label", key))
+		var val: Variant = values.get(key, null)
+		if knob.has("choices"):
+			_section(_knobs_box, label.to_upper(), DIM)
+			var row := HBoxContainer.new()
+			row.add_theme_constant_override("separation", 6)
+			_knobs_box.add_child(row)
+			var choices: Array = knob.get("choices", [])
+			var names: Array = knob.get("names", choices)
+			for i in choices.size():
+				var choice: Variant = choices[i]
+				var b := _tool_button(str(names[i]).to_upper(), Vector2(0, 44))
+				b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				b.pressed.connect(func(): item_knob_changed.emit(key, choice))
+				row.add_child(b)
+				_style(b, TAB_COLORS[4], val != null and str(val) == str(choice))
+		elif knob.has("range"):
+			var r: Array = knob.get("range", [0, 1, 0.1])
+			var v: float = float(val) if val != null else float(r[0])
+			var unit: String = str(knob.get("unit", ""))
+			var lbl := _slider_row(_knobs_box, label, float(r[0]), float(r[1]), float(r[2]), v, func(x: float): pass, "%s%s" % [_num(v), unit])
+			# the slider commits on release, so the hand is not rebuilt at every tick
+			var slider: HSlider = lbl.get_parent().get_child(1)
+			slider.value_changed.connect(func(x: float): lbl.text = "%s%s" % [_num(x), unit])
+			slider.drag_ended.connect(func(changed: bool): if changed: item_knob_changed.emit(key, slider.value))
+		else:
+			var l := Label.new()
+			l.text = "%s: %s   (set on the web page)" % [label, str(val) if val != null and str(val) != "" else "—"]
+			l.add_theme_font_size_override("font_size", 15)
+			l.add_theme_color_override("font_color", DIM)
+			l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			_knobs_box.add_child(l)
+
+
+func _num(x: float) -> String:
+	return str(int(round(x))) if is_equal_approx(x, round(x)) else "%.2f" % x
+
+
 func _tool_button(txt: String, sz: Vector2) -> Button:
 	var b := Button.new()
 	b.text = txt
