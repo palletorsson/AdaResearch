@@ -1,0 +1,27 @@
+{
+  "artifacts": {
+    "sticky_map": {
+      "lookup_name": "sticky_map",
+      "name": "Sticky map / a contextual map on a pinboard",
+      "scene": "res://commons/artifacts/sticky_map/sticky_map.tscn",
+      "category": "annotation",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "map": "ai_assemblage"
+      },
+      "parameters": {
+        "map": "Which map in commons/data/sticky_maps/ (default ai_assemblage)"
+      },
+      "description": "A cork pinboard of sticky notes joined by red threads, drawn from commons/data/sticky_maps/<map>.json: the file the encyclopedia's /sticky-map edits and draws in three.js by the same rules. It watches the file and redraws within a second of a save. Origin on the floor under the middle of the board; the notes face +Z.",
+      "footprint": [7.8, 3.6, 0.5],
+      "qfep_connection": "A knowledge assemblage whose organisation remains open: arguments laid out in space, their relations threaded, rearranged where they are read.",
+      "tags": [
+        "annotation",
+        "map",
+        "notes",
+        "research"
+      ]
+    }
+  }
+}
