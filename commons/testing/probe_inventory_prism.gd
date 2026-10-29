@@ -6,7 +6,7 @@ extends Node3D
 ## hand, the tip ring at the tape's width; (E) the TAPE face's hazard swatch: the worn roll wears the design
 ## (live apply_config); (F) the right trigger held and moved lays a stroke, and the PLACED face lists it;
 ## (G) TAKE BACK LAST takes the strip back; (H) the Ball card, trigger: a ball in the right pickup; grip with
-## the prism up takes it back; palm down hides the prism. Writes ada_run/inventory/{prism.png, prism.json}.
+## the prism up takes it back; palm down hides the prism; (I) toggle() - the Void's left X - pins it up and down. Writes ada_run/inventory/{prism.png, prism.json}.
 ## Run: godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_inventory_prism.tscn
 
 const Rig = preload("res://commons/player/museum_rig.tscn")
@@ -101,6 +101,15 @@ func _ready() -> void:
 	for i in 4:
 		await get_tree().process_frame
 	_check(report, "H ball: the card + trigger makes a ball in the right pickup (tape put away); grip takes it back; palm down hides the prism", made and taken and not p.showing and not p.prism.visible and not p.ring.visible, {"made": made, "taken": taken, "showing": p.showing})
+	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
+	p.toggle()
+	for i in 4:
+		await get_tree().process_frame
+	var pinned_up: bool = p.showing and p.prism.visible
+	p.toggle()
+	for i in 4:
+		await get_tree().process_frame
+	_check(report, "I toggle: X pins the prism up with the palm down; X again takes it down", pinned_up and not p.showing and not p.prism.visible, {"pinned_up": pinned_up, "showing": p.showing})
 	var passed := 0
 	for ch in report.checks:
 		if ch.ok:passed += 1

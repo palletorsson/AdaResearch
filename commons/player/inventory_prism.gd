@@ -35,6 +35,7 @@ var faces: Array = []             # Viewport2Din3D, one per face
 var uis: Array = []               # the inventory_face Controls inside them
 var active := 0
 var showing := false
+var pinned := false              # the Void's left X: up until pressed again, whatever the palm does
 var ring: MeshInstance3D = null
 var _yaw := 0.0
 var _worn_state: Array = []
@@ -157,7 +158,7 @@ func take_all_back() -> void:
 func _process(delta: float) -> void:
 	if left == null:return
 	var up: float = left.global_basis.x.dot(Vector3.UP)
-	var want: bool = always or up > (palm_up - 0.15 if showing else palm_up)
+	var want: bool = always or pinned or up > (palm_up - 0.15 if showing else palm_up)
 	if want != showing:_set_showing(want)
 	_sync_worn()
 	_place_prism(delta)
@@ -177,6 +178,11 @@ func _place_prism(delta: float) -> void:
 	var want_yaw: float = (atan2(to_eye.x, to_eye.z) if to_eye.length() > .01 else _yaw) - active * PI / 2
 	_yaw = lerp_angle(_yaw, want_yaw, minf(1.0, delta * 10.0))
 	prism.global_transform = Transform3D(Basis(Vector3.UP, _yaw), centre)
+
+## The Void's left X (Palle: "I do not get any menu from any button"): the prism up until X again.
+func toggle() -> void:
+	pinned = not pinned
+	_set_showing(pinned)
 
 func _set_showing(v: bool) -> void:
 	showing = v

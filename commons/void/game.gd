@@ -192,8 +192,8 @@ func _ready() -> void:
 		# A trial names its own notice in playable.json; the first trial keeps its text.
 		var trial := Architecture.Content.Source.definition(trial_id)
 		if trial.has("notice"): _notice(str(trial.get("label", trial_id)).to_upper() + "\n" + str(trial.notice))
-		else: _notice("TRANSFORMATION TRIAL\nStill / rise / turn / scale. Then collect.\nA / B: jump. R (desktop): reset the encounter. M or left X: menu.")
-	print("[void] Museum rig. Left stick: move/strafe; right stick: forward/back and turn; right A / B: jump; grip: grab; trigger: point at switches / held tool; smoke: opposite-hand pin, release to throw; empty hands together + trigger: catalyst; left Y: prefab board; left X: menu.")
+		else: _notice("TRANSFORMATION TRIAL\nStill / rise / turn / scale. Then collect.\nA / B: jump. R (desktop): reset the encounter. M (desktop): menu. Left X: inventory.")
+	print("[void] Museum rig. Left stick: move/strafe; right stick: forward/back and turn; right A / B: jump; grip: grab; trigger: point at switches / held tool; smoke: opposite-hand pin, release to throw; empty hands together + trigger: catalyst; left Y: prefab board; left X: inventory prism.")
 
 func _build_player() -> void:
 	var origin := get_node("XROrigin3D") as XROrigin3D
@@ -324,7 +324,7 @@ func _build_signs() -> void:
 		label.pixel_size = 0.003
 		label.outline_size = 0
 		label.modulate = Color("f0e9dd")
-		var directions := "Last structural floor.\nA / B: jump / Left X: menu"
+		var directions := "Last structural floor.\nA / B: jump / Left X: inventory"
 		if index+1 < building.spec.levels.size():
 			if building.spec.descent.get("mode") == "corner_pads":
 				var corner := "south" if (index+1)%2==1 else "north"
@@ -337,7 +337,7 @@ func _build_signs() -> void:
 			elif index < building.spec.descent.get("balcony_sides",[]).size():
 				directions="Next balcony: %s edge\nLand on the pink cushion.\nA / B: jump" % building.spec.descent.balcony_sides[index]
 			else:
-				directions="Open structure below / route not built yet.\nFalls are safe.\nA / B: jump / Left X: menu"
+				directions="Open structure below / route not built yet.\nFalls are safe.\nA / B: jump / Left X: inventory"
 		label.text = str(building.content.data.floors[index].title) + "\n" + directions
 		building.detail_root(index).add_child(label)
 		# A pale pink arrival strip sits on real concrete, outside both holes.
@@ -696,7 +696,10 @@ func fire_catalyst() -> void:
 func _left_button(button: String) -> void:
 	if returning: return
 	if button == "primary_click": inventory_board.toggle()
-	elif button == "ax_button": return_to_menu()
+	elif button == "ax_button":
+		# Palle 2026-10-29: X opens the inventory prism (museum_rig.tscn/InventoryPrism), not the reset to the menu.
+		var prism := get_tree().get_root().find_child("InventoryPrism", true, false)
+		if prism != null and prism.has_method("toggle"): prism.toggle()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not (event is InputEventKey) or not event.pressed or event.echo: return
