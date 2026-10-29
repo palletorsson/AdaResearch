@@ -13,6 +13,28 @@ A carried roll turns two selected points into a visible material strip. The line
 
 Hold a roll, click once at a solid surface to fix A, move the aim while the preview stretches, then click again to fix B. These are two separate clicks, with no double-click timing requirement. Holding the button, moving the hand or releasing the first click never places tape. Only the second press commits one continuous strip with two endpoints. Desktop uses right mouse pickup and left mouse clicks; VR uses grip and trigger presses. Dropping a roll cancels an unfinished strip.
 
+**Worn, from the inventory (2026-10-29).** The bracelet's ITEMS tab has the tape as an item that mounts `worn`
+(`commons/data/inventory/items.json`, `commons/player/INVENTORY.md`): chosen, the roll is a bangle on the
+bracelet's hand (`wear(controller, 0.4)`: over the back of the hand, axis along the forearm, not grabbable, no
+collision, under the controller so it rides with it) and lays tape from that hand without being held — the
+hand stays free. The bracelet's trigger is `fire_worn()` / `release_worn()`, its grip `undo_last()` (the last
+strip back on the roll), another item `put_away()` (hidden, strips kept). A thin aim line runs from the hand to
+the dot. The strips are the roll's full width: a held roll's scale sets its tape width (`_tape_scale()`), a worn
+bangle is a picture of the roll. `apply_config()` takes a knob turned while worn (the kind, a design, the leg)
+and rebuilds the skin. The item's defaults are `freehand_draw: true, leg: 0.3`, so a worn roll works both ways:
+**tap, move, tap** lays a straight strip; **hold, move, let go** lays a stroke of legs.
+
+**The leg rule** (Palle: "do not add lines if we have not moved the raycast point more than 30 cm, straight
+between points"). With `leg > 0` the held stroke reads the aim every `drag_tick` (0.2 s, the slow ray) and
+adds a point only when the aim has moved `leg` from the last point *and* the straight leg to it is clear (a ray
+from point to point, excluding both bodies); the strip is the straight legs between those points, so a hand
+that wavers lays a clean polyline. The ray missing (air, a gap) or a blocked leg starts a fresh patch, and the
+gap leg is not paid. Letting go takes the point where the hand stopped from 6 cm, so the stroke ends there, not
+a leg back; a tap that never moved a leg keeps its start for the next tap. `leg` 0 keeps the dense sampling
+below. Probe: `commons/testing/probe_tape_worn.tscn` — a fake rig wearing the inventory's tape over two slabs
+with a gap: 20 cm no point, 40 cm one leg, the gap a fresh patch, a 5-point stroke 0.9 m paid and printed at
+7.5 cm, undo refills, tap-tap lays 1 m, put away and back. `ada_run/inventory/tape_worn.{png,json}`.
+
 Freehand drawing is an explicit opt-in through `freehand_draw=true` on a roll. In that mode, holding fire and dragging samples the visible surface, and releasing commits the whole stroke. It follows collider curvature and breaks at missed rays instead of painting across empty air. The Point Lines supply defaults to two-click placement to avoid accidental broken patches.
 
 Endpoints and stroke samples are stored in the touched physics bodies' local frames. They follow translation, rotation and scale. Hidden or unloaded endpoint bodies hide/remove the strip. Marks on one object remain surface decoration. Joining separate physics bodies, with at least one rigid body, adds a reversible native Jolt fixed joint. It preserves their relative pose and allows a taped assembly to carry load under gravity. It is an ideal adhesive constraint, not a cloth simulation or a collision wall. Render-only objects without solid colliders cannot be targeted. The standalone roll's `bind_objects=false` configuration enables marks/spans without binding.

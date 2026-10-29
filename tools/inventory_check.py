@@ -69,8 +69,8 @@ def main():
         if iid in seen:
             print(f"{iid}: id twice"); findings += 1
         seen.add(iid)
-        if it.get("mount") not in ("wall", "floor", "hand", "any"):
-            print(f"{iid}: mount is wall, floor, hand or any"); findings += 1
+        if it.get("mount") not in ("wall", "floor", "hand", "any", "worn"):
+            print(f"{iid}: mount is wall, floor, hand, any or worn"); findings += 1
         if it.get("coming"):
             if it.get("token"):
                 print(f"{iid}: 'coming' with a token: drop one of them"); findings += 1

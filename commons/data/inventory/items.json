@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "doc": "The inventory: the things a hand can hold and place, read by the VR bracelet's PLACE mode (commons/player/inventory_hand.gd) and by the encyclopedia's /catalyst-inventory prism. One item = one registry token, how it mounts, its own defaults (the artifact's defaults stay as they are), and its knobs: each knob names an @export of the token's script (tools/inventory_check.py refuses a knob the code does not have). unlock: '' = always; a sequence id = after that sequence. scale (optional) shrinks the artifact as a whole, so a wall console becomes a hand-sized one without touching the artifact's own size. An item with 'coming' has no scene yet and shows greyed. The ball is the point and the rod the line; a rod let go near a ball's socket snaps in (playground_kit).",
+  "doc": "The inventory: the things a hand can hold and place, read by the VR bracelet's PLACE mode (commons/player/inventory_hand.gd) and by the encyclopedia's /catalyst-inventory prism. One item = one registry token, how it mounts (wall, floor, hand, any - or worn: a bangle on the bracelet's hand, used without holding it, as the tape is), its own defaults (the artifact's defaults stay as they are), and its knobs: each knob names an @export of the token's script (tools/inventory_check.py refuses a knob the code does not have). unlock: '' = always; a sequence id = after that sequence. scale (optional) shrinks the artifact as a whole, so a wall console becomes a hand-sized one without touching the artifact's own size. An item with 'coming' has no scene yet and shows greyed. The ball is the point and the rod the line; a rod let go near a ball's socket snaps in (playground_kit).",
   "items": [
     {
       "id": "clock",
@@ -23,10 +23,13 @@
       "name": "Tape roll",
       "token": "tape_roll_printed",
       "unlock": "",
-      "mount": "hand",
+      "mount": "worn",
       "size": [0.34, 0.34, 0.075],
-      "defaults": {},
+      "scale": 0.4,
+      "defaults": {"freehand_draw": true, "leg": 0.3},
       "knobs": [
+        {"key": "kind", "label": "Tape", "choices": [ "printed", "masking", "pink", "barrier" ], "names": [ "printed (words)", "masking", "pink", "barrier" ]},
+        {"key": "leg", "label": "Leg", "range": [0.1, 1.0, 0.05], "unit": " m"},
         {"key": "bind_objects", "label": "Binds", "choices": [ "true", "false" ], "names": [ "binds what it joins", "marks only" ]},
         {"key": "tape", "label": "Design", "choices": [ "", "hazard", "survey", "blueprint", "chevron", "dotted_note" ], "names": [ "plain", "hazard", "survey", "blueprint", "chevron", "dotted" ]},
         {"key": "print", "label": "Prints", "choices": [ "environment", "note" ], "names": [ "where it lies", "a note" ]},

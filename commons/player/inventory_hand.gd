@@ -2,8 +2,9 @@ class_name InventoryHand
 extends Node
 ## The bracelet's PLACE mode: which inventory item the hand produces (or none), each item's knob values, and the
 ## making of it. Trigger spawns the current item into the hand as a pickable (an InventoryCarrier round the
-## artifact, or the artifact itself when it is a pickable, like a roll of tape); let go and it settles (see the
-## carrier). Grip takes the last one back. The web page's hand (hand.json: {item, config}) is watched once a
+## artifact, or the artifact itself when it is a pickable); let go and it settles (see the carrier). Grip takes
+## the last one back. An item that mounts "worn" (the tape) is not made: it is WORN, a bangle on the bracelet's
+## controller (sync_worn), and the trigger and grip go to it: tape is laid from the hand without holding a roll. The web page's hand (hand.json: {item, config}) is watched once a
 ## second, so a choice made in the browser lands here; the panel's ITEMS tab is the same choice made in VR.
 
 const Items = preload("res://commons/player/inventory_items.gd")   # by path: a new class_name is not in the cache until the editor scans
@@ -16,6 +17,7 @@ var current := ""                 # item id, "" = none
 var values: Dictionary = {}       # id -> {knob key: value}, over the item's defaults
 var placed: Array[Node3D] = []
 var held: Node3D = null
+var _worn: Dictionary = {}        # item id -> the node worn on the controller (mount "worn": the tape), made once
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
 var _hand_stamp := -1
 var _hand_path := ""
@@ -41,6 +43,7 @@ func _read_hand() -> void:
 				values[str(id)] = (cfgs[id] as Dictionary).duplicate()
 				config_changed.emit(str(id), config_for(str(id)))
 				if is_instance_valid(held) and held.has_method("apply_config") and str(held.get("item").get("id", "")) == str(id):held.apply_config(config_for(str(id)))
+				_apply_worn(str(id))
 	var want := str(data.get("item", current))
 	if want != current and (want == "" or (not Items.item(want).is_empty() and Items.unlocked(Items.item(want), lab))):
 		current = want;item_changed.emit(current)
@@ -64,6 +67,39 @@ func set_knob(key: String, value: Variant) -> void:
 	values[current][key] = value
 	var cfg := config_for(current);config_changed.emit(current, cfg)
 	if is_instance_valid(held) and held.has_method("apply_config"):held.apply_config(cfg)
+	_apply_worn(current)
+
+func _apply_worn(id: String) -> void:
+	var w: Node = _worn.get(id)
+	if is_instance_valid(w) and w.has_method("apply_config"):w.apply_config(config_for(id))
+
+## The worn item (mount "worn" - the tape): a bangle on the bracelet's controller, made once per item and
+## shown while it is the current item; every other worn thing is put away. `controller` null puts all away
+## (the bracelet out of PLACE, or dropped). Returns the node now worn, or null.
+func sync_worn(controller: Node3D) -> Node3D:
+	var it := Items.item(current)
+	var want: bool = controller != null and not it.is_empty() and str(it.get("mount", "")) == "worn" and str(it.get("coming", "")) == ""
+	for id in _worn:
+		var n: Node = _worn[id]
+		if is_instance_valid(n) and not (want and str(id) == current) and n.has_method("put_away"):n.put_away()
+	if not want:return null
+	var n: Node = _worn.get(current)
+	if not is_instance_valid(n):
+		var path := Items.scene_for(str(it.get("token", "")))
+		if path == "" or not ResourceLoader.exists(path):return null
+		n = (load(path) as PackedScene).instantiate()
+		if not n.has_method("wear"):n.free();return null
+		var cfg := config_for(current)
+		for k in cfg:n.set_meta("config_%s" % str(k), cfg[k])
+		if n.has_method("apply_grid_config"):n.apply_grid_config(cfg)
+		n.name = "Worn_" + current;_worn[current] = n
+	n.wear(controller, float(it.get("scale", 0.4)))   # wear() parents it under the controller
+	return n
+
+## The node worn and in use now, or null: the bracelet's trigger and grip go to it instead of making things.
+func worn_node() -> Node3D:
+	var n: Node = _worn.get(current)
+	return n if is_instance_valid(n) and n.get("worn_on") != null and bool(n.get("worn_active")) else null
 
 func config_for(id: String) -> Dictionary:
 	return Items.config_for(Items.item(id), values.get(id, {}))

@@ -24,6 +24,18 @@ key the token's script reads (an `@export` it reads back, or a key its `apply_gr
   or a wall, which then holds it up. Lift one and the other comes; a bound thing pulled more than 28 cm from
   its place peels the tape. The tape item's **Binds** knob (`bind_objects`) turns this off for marking only.
   Probe: `commons/testing/probe_tape_binds_kit.tscn`.
+- **The tape is WORN, not held** (Palle, 2026-10-29: "I pick up the tape with the hand, but that should really
+  just be the last config of catalyst inventory, and a small version of the tape over the hand rather than
+  holding the tape, then I can use the tape without holding it"). Its item mounts `worn`: choosing it in the
+  ITEMS tab puts the roll on the bracelet's hand as a bangle at 0.4 (over the back of the hand, its axis along
+  the forearm, not grabbable, no collision) and the **trigger lays tape from that hand**, with a thin aim line to
+  the dot; **grip** puts the last strip back on the roll; choosing another item puts the bangle away (its strips
+  stay) and choosing the tape again brings the same roll back. The hand stays free to hold a ball or a rod.
+  Knobs: **Tape** (printed with words / masking / pink / barrier — the words tape is the printed kind, printing
+  where it lies or the **Note**), **Leg**, Binds, Design, Prints, Note. The strips are full width whatever the
+  bangle's size. `InventoryHand.sync_worn(controller)` / `worn_node()`; `roll.gd` `wear / put_away / fire_worn /
+  release_worn / undo_last / apply_config`. See `tape_roll/README.md` § Worn, and the leg rule.
+  Probe: `commons/testing/probe_tape_worn.tscn` (7 checks, `ada_run/inventory/tape_worn.{png,json}`).
 
 `hand.json` beside it is the **web page's hand**, `{item, config: {id: {knob: value}}}`, written by the page's
 SEND TO VR and watched by the VR hand once a second. A copy at `user://inventory/` is read first (the headset).
@@ -40,7 +52,8 @@ SEND TO VR and watched by the VR hand once a second. A copy at `user://inventory
 | `inventory_carrier.gd` | an `XRToolsPickable` body round an artifact that is not a pickable itself; fits a collider to the artifact's meshes; **settles** when let go |
 
 **Trigger** makes the current item in the hand (picked up at once by that hand's `XRToolsFunctionPickup`; an
-artifact that is a pickable itself, like the tape roll, is held as it is). **Let go** and the carrier settles:
+artifact that is a pickable itself, like the ball, is held as it is; an item that mounts `worn`, the tape, is
+not made at all — it is on the hand already, and the trigger goes to it). **Let go** and the carrier settles:
 with its back within 0.35 m of a wall (its `-Z`, the counter's back; the ray looks past the item's own collider)
 it turns to face out of the wall and freezes there; a standing item let go above a surface stands on it;
 otherwise it is a body — it falls and stacks on whatever is under it. **Grip** takes the last one back.

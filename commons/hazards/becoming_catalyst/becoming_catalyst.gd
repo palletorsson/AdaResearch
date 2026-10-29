@@ -292,6 +292,7 @@ func _physics_process(delta: float) -> void:
 	# ADDITIVE: keep the unified tabbed editor panel shown/hidden per mode. Runs
 	# alongside the biome menu's own show/hide below — neither overrides the other.
 	_update_editor_panel_visibility()
+	_sync_worn()
 
 	# Update mode-specific ghost preview
 	var _cur_mode_id := ""
@@ -448,13 +449,20 @@ func _on_controller_button(button_name: String) -> void:
 
 	# PLACE (the inventory) intercepts its buttons like the modes above: trigger = the current item into
 	# this hand; grip = take the last one back; Ax = the next item (or none); By = nothing to save.
+	# A WORN item (the tape, a bangle on this hand) takes the trigger and grip itself: trigger lays, grip undoes.
 	if mode_id == "place":
+		var worn: Node3D = _inv().worn_node()
 		match button_name:
 			"trigger_click":
-				if not _is_hand_busy():
+				if worn != null:
+					worn.fire_worn()
+				elif not _is_hand_busy():
 					_place_spawn()
 			"grip_click":
-				_place_remove()
+				if worn != null:
+					_place_undo_worn(worn)
+				else:
+					_place_remove()
 			"ax_button":
 				_place_cycle()
 		return
@@ -1271,6 +1279,35 @@ func _place_spawn() -> void:
 func _place_remove() -> void:
 	var gone: Node3D = _inv().remove_last()
 	_flash_label("TAKEN BACK" if gone else "NOTHING PLACED", Color(1.0, 0.8, 0.4))
+
+func _place_undo_worn(worn: Node3D) -> void:
+	var gone: Node3D = worn.undo_last() if worn.has_method("undo_last") else null
+	_flash_label("TAPE BACK ON THE ROLL" if gone else "NO TAPE LAID", Color(1.0, 0.8, 0.4))
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.06, 0.3, 0.0)
+
+## The trigger let go: a worn roll ends its stroke there (XR Tools only tells a HELD pickable about releases).
+func _on_controller_button_released(button_name: String) -> void:
+	if button_name != "trigger_click":
+		return
+	var mode_def := _get_current_mode_def()
+	if mode_def.is_empty() or mode_def.get("id", "") != "place":
+		return
+	var worn: Node3D = _inv().worn_node()
+	if worn != null:
+		worn.release_worn()
+
+## Keep the worn item in step: on this hand while the bracelet is held, in PLACE, and the current item mounts
+## "worn"; put away otherwise. Cheap, so it runs from _process; it only acts when something changed.
+var _worn_state: Array = []
+func _sync_worn() -> void:
+	var mode_def := _get_current_mode_def()
+	var in_place: bool = is_held and not mode_def.is_empty() and mode_def.get("id", "") == "place" and is_instance_valid(controller)
+	var state: Array = [in_place, _inv().current, controller.get_instance_id() if is_instance_valid(controller) else 0]
+	if state == _worn_state:
+		return
+	_worn_state = state
+	_inv().sync_worn(controller if in_place else null)
 
 func _place_cycle() -> void:
 	var ids: Array = [""]
@@ -3226,6 +3263,8 @@ func _on_picked_up(_pickable) -> void:
 		_pickup_controller_name = controller.name
 		if not controller.button_pressed.is_connected(_on_controller_button):
 			controller.button_pressed.connect(_on_controller_button)
+		if not controller.button_released.is_connected(_on_controller_button_released):
+			controller.button_released.connect(_on_controller_button_released)
 	else:
 		print("[Catalyst] WARNING: Could not find XRController3D in pickup hierarchy")
 
@@ -3315,6 +3354,8 @@ func _absorb_into_hand() -> void:
 	# Reconnect trigger (let_go → _on_dropped may have disconnected it)
 	if controller and not controller.button_pressed.is_connected(_on_controller_button):
 		controller.button_pressed.connect(_on_controller_button)
+	if controller and not controller.button_released.is_connected(_on_controller_button_released):
+		controller.button_released.connect(_on_controller_button_released)
 
 	# Reparent to the controller so we follow the hand
 	call_deferred("_deferred_reparent")
@@ -3399,6 +3440,8 @@ func _on_dropped(_pickable) -> void:
 	is_held = false
 	if controller and controller.button_pressed.is_connected(_on_controller_button):
 		controller.button_pressed.disconnect(_on_controller_button)
+	if controller and controller.button_released.is_connected(_on_controller_button_released):
+		controller.button_released.disconnect(_on_controller_button_released)
 	controller = null
 
 	if _held_glow:
