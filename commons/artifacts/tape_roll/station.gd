@@ -4,6 +4,7 @@ const Roll := preload("roll.gd")
 const Timber := preload("res://commons/artifacts/primitive_encounters/timber_finish.gd")
 const Plank := preload("res://commons/artifacts/primitive_encounters/timber_plank_1m.tscn")
 const ButtonScene := preload("res://commons/interactables/cube_button.tscn")
+const Design := preload("tape_design.gd")
 var part_defaults: Dictionary = {}
 var config_parts: Dictionary = {}
 var only_parts: Array = []
@@ -11,10 +12,15 @@ var rolls: Array[Node3D] = []
 var history: Array[Node3D] = []
 var buttons: Dictionary = {}
 var home_poses: Dictionary = {}
+## The assortment: a rack beside the crate holding the printed roll and the designs in tapes.json (made at
+## the tape studio page), up to eight rolls, under the same Undo and Tidy. `assortment: false` leaves the
+## three rolls alone as they were.
+var assortment := true
 
 func apply_grid_config(config: Dictionary) -> void:
 	config_parts = config.get("parts",{}).duplicate(true)
 	only_parts = config.get("only_parts",[]).duplicate()
+	assortment = bool(config.get("assortment",assortment))
 	if is_inside_tree():_apply_parts()
 
 func _ready() -> void:
@@ -48,8 +54,31 @@ func _ready() -> void:
 		var offset := Vector3((i-1)*.55,0,0)
 		sample.draw_between(samples.to_global(offset+Vector3(-.21,-.035,0)),Vector3.BACK,samples.to_global(offset+Vector3(.21,.035,0)),Vector3.BACK)
 	remember(samples,Vector3(1.6,.2,.02),"Masking / pink marking / striped barrier samples")
+	if assortment:_build_rack()
 	_apply_parts()
 	for roll in rolls:home_poses[str(roll.name)] = roll.transform
+
+## A timber board standing beside the crate with steel pegs, a roll on each: printed first, then the designs.
+func _build_rack() -> void:
+	var ids: Array = ["printed"]
+	if FileAccess.file_exists(Design.FILE):
+		var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(Design.FILE))
+		if data is Dictionary:ids.append_array(((data as Dictionary).get("tapes",{}) as Dictionary).keys())
+	ids = ids.slice(0,8)
+	var board := solid("TapeRack",Vector3(1.6,.95,-.36),Vector3(1.15,1.9,.055),true)
+	remember(board,Vector3(1.15,1.9,.055),"Tape rack / the printed roll and the designs made at the tape studio")
+	label(board,"MORE TAPE
+PRINTED · DESIGNED AT /TAPE-STUDIO",Vector3(0,.84,.03),18)
+	for i in ids.size():
+		var at := Vector3(1.6+(-.28 if i%2==0 else .28),1.5-floor(i/2.0)*.42,.01)
+		var roll := Roll.new()
+		if ids[i]=="printed":roll.kind = "printed";roll.name = "PrintedRoll"
+		else:roll.tape = str(ids[i]);roll.name = "Tape_"+str(ids[i])
+		roll.position = at;add_child(roll);rolls.append(roll)
+		roll.tape_placed.connect(func(strip):history.append(strip))
+		remember(roll,Vector3(.30,.52,.15),("Printed tape" if ids[i]=="printed" else str(roll.design.get("label",ids[i])))+" / hold, fire A, move, fire B")
+		var peg := solid("RackPeg%d"%i,at+Vector3(0,0,-.19),Vector3(.026,.026,.34),false)
+		remember(peg,Vector3(.026,.026,.34),"Steel peg on the tape rack")
 
 func solid(id: String,at: Vector3,size: Vector3,wood: bool) -> StaticBody3D:
 	var body := StaticBody3D.new();body.name = id;body.position = at;add_child(body)
