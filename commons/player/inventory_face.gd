@@ -29,17 +29,24 @@ func setup(p: Node, i: int) -> void:
 	if is_inside_tree():_build()
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	_fill_viewport()
 	if prism != null:_build()
+
+## A preset keeps a zero rect (feedback_anchors_preset_keeps_zero_rect): the face takes its viewport's size outright.
+func _fill_viewport() -> void:
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var vp := get_viewport()
+	if vp is SubViewport:position = Vector2.ZERO;size = Vector2((vp as SubViewport).size)
 
 func face_id() -> String:return str(FACES[index].id)
 
 func _build() -> void:
 	for c in get_children():remove_child(c);c.queue_free()
+	_fill_viewport()
 	var f: Dictionary = FACES[index];_col = f.col
-	var bg := ColorRect.new();bg.color = BG;bg.set_anchors_preset(Control.PRESET_FULL_RECT);add_child(bg)
-	var root := VBoxContainer.new();root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	root.offset_left = 10;root.offset_top = 10;root.offset_right = -10;root.offset_bottom = -10;root.add_theme_constant_override("separation", 8);add_child(root)
+	var bg := ColorRect.new();bg.color = BG;add_child(bg);bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var root := VBoxContainer.new();add_child(root);root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	root.offset_left = 10;root.offset_top = 10;root.offset_right = -10;root.offset_bottom = -10;root.add_theme_constant_override("separation", 8)
 	# the header band: ◀ eyebrow / TITLE ▶
 	var band := PanelContainer.new();var sb := StyleBoxFlat.new();sb.bg_color = _col.darkened(.6);sb.set_corner_radius_all(12)
 	sb.content_margin_left = 6;sb.content_margin_right = 6;sb.content_margin_top = 6;sb.content_margin_bottom = 6
@@ -73,6 +80,12 @@ func _btn(text: String, col: Color, on: bool, dim := false) -> Button:
 	b.disabled = dim
 	return b
 
+## A knob button with less air round it, so a many-knobbed item (the tape has six) fits one face.
+static func _compact(b: Button) -> void:
+	for state in ["normal", "hover", "pressed", "focus", "disabled"]:
+		var sb: StyleBox = b.get_theme_stylebox(state)
+		if sb is StyleBoxFlat:sb.content_margin_top = 3;sb.content_margin_bottom = 3
+
 func _note(text: String) -> Label:
 	var l := Label.new();l.text = text;l.add_theme_font_size_override("font_size", 11);l.add_theme_color_override("font_color", DIM)
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;return l
@@ -105,6 +118,7 @@ func _page_hand() -> void:
 	_page.add_child(_note("Right trigger makes it in your hand; the tape is worn there. Right grip, with the palette up, takes the last thing back."))
 
 func _page_knobs() -> void:
+	_page.add_theme_constant_override("separation", 4)
 	var current: String = prism.hand.current
 	if current == "":_page.add_child(_note("Nothing in the hand. Pick something on the HAND face."));return
 	var it: Dictionary = prism.item_row(current)
@@ -114,19 +128,22 @@ func _page_knobs() -> void:
 		var key := str(knob.key);var label := Label.new();label.text = str(knob.get("label", key));label.add_theme_font_size_override("font_size", 12);label.add_theme_color_override("font_color", FG);_page.add_child(label)
 		var v: Variant = values.get(key, null)
 		if knob.has("choices"):
-			var r := _row();var names: Array = knob.get("names", knob.choices)
+			var names: Array = knob.get("names", knob.choices);var longest := 0
+			for nm in names:longest = maxi(longest, str(nm).length())
+			var grid := GridContainer.new();grid.columns = 2 if longest > 7 or names.size() > 4 else maxi(1, names.size())
+			grid.add_theme_constant_override("h_separation", 6);grid.add_theme_constant_override("v_separation", 6)
 			for i in (knob.choices as Array).size():
 				var choice: String = str(knob.choices[i]);var on: bool = v != null and str(v) == choice
 				var b := _btn(str(names[i]), _col, on);b.add_theme_font_size_override("font_size", 12);b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				b.pressed.connect(prism.set_knob.bind(key, choice));buttons[key + ":" + choice] = b;r.add_child(b)
-			_page.add_child(r)
+				_compact(b);b.pressed.connect(prism.set_knob.bind(key, choice));buttons[key + ":" + choice] = b;grid.add_child(b)
+			_page.add_child(grid)
 		elif knob.has("range"):
 			var lo: float = float(knob.range[0]);var hi: float = float(knob.range[1]);var step: float = float(knob.range[2]) if (knob.range as Array).size() > 2 else 1.0
 			var now: float = float(v) if v != null else lo
-			var r := _row();var minus := _btn("−", _col, false);minus.custom_minimum_size.x = 48;r.add_child(minus)
+			var r := _row();var minus := _btn("−", _col, false);minus.custom_minimum_size.x = 48;_compact(minus);r.add_child(minus)
 			var val := Label.new();val.text = ("%s" % snappedf(now, step)).rstrip("0").rstrip(".") + str(knob.get("unit", ""));val.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			val.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;val.add_theme_font_size_override("font_size", 16);val.add_theme_color_override("font_color", Color.WHITE);r.add_child(val)
-			var plus := _btn("+", _col, false);plus.custom_minimum_size.x = 48;r.add_child(plus)
+			var plus := _btn("+", _col, false);plus.custom_minimum_size.x = 48;_compact(plus);r.add_child(plus)
 			minus.pressed.connect(prism.set_knob.bind(key, snappedf(clampf(now - step, lo, hi), step)));plus.pressed.connect(prism.set_knob.bind(key, snappedf(clampf(now + step, lo, hi), step)))
 			buttons[key + ":-"] = minus;buttons[key + ":+"] = plus;_page.add_child(r)
 		else:
@@ -159,9 +176,10 @@ func _page_tape() -> void:
 	var minus := _btn("−", _col, false);minus.custom_minimum_size.x = 48;minus.pressed.connect(prism.set_tape_knob.bind("leg", snappedf(clampf(leg - .05, .1, 1.0), .05)));r3.add_child(minus)
 	var val := Label.new();val.text = "leg %.2f m" % leg;val.size_flags_horizontal = Control.SIZE_EXPAND_FILL;val.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;val.add_theme_font_size_override("font_size", 15);val.add_theme_color_override("font_color", Color.WHITE);r3.add_child(val)
 	var plus := _btn("+", _col, false);plus.custom_minimum_size.x = 48;plus.pressed.connect(prism.set_tape_knob.bind("leg", snappedf(clampf(leg + .05, .1, 1.0), .05)));r3.add_child(plus)
-	var binds: bool = str(values.get("bind_objects", "true")) == "true"
-	var bb := _btn("Binds" if binds else "Marks only", _col, binds);bb.add_theme_font_size_override("font_size", 12);bb.pressed.connect(prism.set_tape_knob.bind("bind_objects", "false" if binds else "true"));buttons["binds"] = bb;r3.add_child(bb)
 	buttons["leg:-"] = minus;buttons["leg:+"] = plus;_page.add_child(r3)
+	var binds: bool = str(values.get("bind_objects", "true")) == "true"
+	var bb := _btn("Binds what it joins" if binds else "Marks only, binds nothing", _col, binds);bb.add_theme_font_size_override("font_size", 12)
+	bb.pressed.connect(prism.set_tape_knob.bind("bind_objects", "false" if binds else "true"));buttons["binds"] = bb;_page.add_child(bb)
 	var roll: Node = prism.hand.worn_of("tape")
 	var status := _note(("%.1f m left · %d strips laid" % [roll.remaining, roll.segments.size()]) if roll != null else "The roll is worn when the tape is in the hand.")
 	_page.add_child(status)

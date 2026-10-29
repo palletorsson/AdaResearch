@@ -94,9 +94,9 @@ func _ready() -> void:
 	var pk: Node = XRToolsFunctionPickup.find_instance(rig.get_node("RightHand"))
 	var held: Node = pk.get("picked_up_object") if pk else null
 	var made: bool = held != null and held.has_method("hub") and not roll.visible
-	# the MINIATURE: the chosen ball as a small copy over the right hand, inert, 7 cm for its 17 cm
+	# the MINIATURE: the chosen ball as a small copy over the right hand, inert, 10 cm for its 17 cm
 	var mini: Node3D = p.hand.mini_node()
-	var mini_ok: bool = mini != null and mini.get_parent() == rig.get_node("RightHand") and mini.has_method("hub") and absf(mini.scale.x - .07 / .17) < .01 and mini.collision_layer == 0 and not mini.is_in_group("playground_balls") and mini != held
+	var mini_ok: bool = mini != null and mini.get_parent() == rig.get_node("RightHand") and mini.has_method("hub") and absf(mini.scale.x - .10 / .17) < .01 and mini.collision_layer == 0 and not mini.is_in_group("playground_balls") and mini != held
 	p._on_right_pressed("grip_click")
 	await get_tree().process_frame;await get_tree().process_frame
 	var taken: bool = not is_instance_valid(held) and p.hand.placed.is_empty()
@@ -104,7 +104,7 @@ func _ready() -> void:
 	for i in 4:
 		await get_tree().process_frame
 	_check(report, "H ball: the card + trigger makes a ball in the right pickup (tape put away); grip takes it back; palm down hides the prism", made and taken and not p.showing and not p.prism.visible and not p.ring.visible, {"made": made, "taken": taken, "showing": p.showing})
-	_check(report, "J miniature: the chosen ball shown as a 7 cm inert copy over the right hand, out of the support graph, not the made one", mini_ok, {"mini": mini != null, "scale": mini.scale.x if mini else 0, "layer": mini.collision_layer if mini else -1, "in_group": mini.is_in_group("playground_balls") if mini else null})
+	_check(report, "J miniature: the chosen ball shown as a 10 cm inert copy over the right hand, out of the support graph, not the made one", mini_ok, {"mini": mini != null, "scale": mini.scale.x if mini else 0, "layer": mini.collision_layer if mini else -1, "in_group": mini.is_in_group("playground_balls") if mini else null})
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()
 	for i in 4:

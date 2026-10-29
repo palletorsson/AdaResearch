@@ -20,7 +20,7 @@ var held: Node3D = null
 var _worn: Dictionary = {}        # item id -> the node worn on the controller (mount "worn": the tape), made once
 var _mini: Node3D = null          # the current item as a MINIATURE over the hand (Palle: "the current object must be a small version of the original")
 var _mini_id := ""
-const MINI := 0.07                # the miniature's longest side
+const MINI := 0.10                # the miniature's longest side - the clock came out at 3 cm with its own scale folded in
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
 var _hand_stamp := -1
 var _born: int = int(Time.get_unix_time_from_system()) - 1   # a hand.json older than this game is not applied unasked
@@ -124,8 +124,7 @@ func sync_worn(controller: Node3D) -> Node3D:
 	n.wear(controller, float(it.get("scale", 0.4)))   # wear() parents it under the controller
 	return n
 
-## The miniature over the hand: made from the item's own scene, scaled to MINI on its longest side (times the
-## item's scale), its physics and pickup off, out of every group (a tiny ball must not join the support graph).
+## The miniature over the hand: made from the item's own scene, scaled to MINI on its longest side, its physics and pickup off, out of every group (a tiny ball must not join the support graph).
 func _sync_mini(controller: Node3D) -> void:
 	var it := Items.item(current)
 	var want: bool = controller != null and not it.is_empty() and str(it.get("coming", "")) == "" and str(it.get("mount", "")) != "worn"
@@ -145,7 +144,7 @@ func _sync_mini(controller: Node3D) -> void:
 	controller.add_child(n)
 	_make_inert(n)
 	var size: Array = it.get("size", [0.1, 0.1, 0.1]);var longest: float = maxf(maxf(float(size[0]), float(size[1])), float(size[2]))
-	var k: float = MINI / maxf(longest, .01) * float(it.get("scale", 1.0))
+	var k: float = MINI / maxf(longest, .01)   # the item's own scale is for the real thing, not the miniature
 	(n as Node3D).transform = Transform3D(Basis().scaled(Vector3.ONE * k), Vector3(0, .05, .09))
 	_mini = n;_mini_id = current
 
