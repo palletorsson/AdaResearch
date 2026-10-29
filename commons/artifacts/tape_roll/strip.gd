@@ -8,6 +8,24 @@ var paid_length := 0.0
 var issuer: WeakRef
 var cached: Array = []
 var peeled := false
+## Printed tape: `print_source(a, b)` returns the phrase for the strip as it lies now. It is drawn in 2D
+## (a Label in a SubViewport, repeated along the strip) and that picture is the strip's own skin: the
+## ribbon's UV runs in metres, so the print lies on the tape wherever the tape goes. Redrawn only when
+## the words or the length change.
+const PRINT_PX := 96
+var print_source: Callable
+var print_ink := Color("1d1d1f")
+var print_paper := Color("efe9dc")
+## a design's pattern, one repeat at the print's scale: tiled under the words instead of the plain paper
+var print_paper_texture: Texture2D
+var printed := ""
+## where the person who laid it stood: on a floor the print turns to read for them (a wall reads upright)
+var print_reader := Vector3.ZERO
+var print_reader_set := false
+var _print_view: SubViewport
+var _print_label: Label
+var _print_skin: StandardMaterial3D
+var _print_state: Array = []
 
 static func anchor(hit: Dictionary) -> Dictionary:
 	var body: Node3D = hit.collider
@@ -79,6 +97,7 @@ func draw_path(points: Array[Dictionary]) -> void:
 			tool.set_normal(global_basis.transposed()*(na if k in [0,1,3] else nb));tool.set_uv(uvs[k]);tool.add_vertex(to_local(vertices[k]))
 		distance += length;count += 1
 	if count>0:mesh = tool.commit()
+	if print_source.is_valid() and count>0:lay_print(points[0].position,points[0].normal,points[-1].position,points[-1].normal,distance)
 
 func draw_between(a: Vector3,na: Vector3,b: Vector3,nb: Vector3) -> void:
 	var next: Array = [a,na,b,nb,tape_width,peeled]
@@ -105,3 +124,53 @@ func draw_between(a: Vector3,na: Vector3,b: Vector3,nb: Vector3) -> void:
 	var arrays := [];arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = vertices;arrays[Mesh.ARRAY_NORMAL] = normals;arrays[Mesh.ARRAY_TEX_UV] = uv;arrays[Mesh.ARRAY_INDEX] = indices
 	var ribbon := ArrayMesh.new();ribbon.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays);mesh = ribbon
+	if print_source.is_valid():lay_print(a,na,b,nb)
+
+## The print, drawn in 2D: the phrase repeated as many whole times as the strip holds (a short strip keeps
+## whole items, cut at a separator), ink on the tape's paper, in a SubViewport whose picture is the strip's
+## skin over its whole length. On a wall the picture is turned to read upright.
+func lay_print(a: Vector3,na: Vector3,b: Vector3,nb: Vector3,along := -1.0) -> void:
+	var length := along if along>0 else a.distance_to(b)   # a stroke: its own length, the picture spans it all
+	var phrase: String = str(print_source.call(a,b,length)).to_upper()
+	var axis := (b-a).normalized();var mid := na.lerp(nb,.5);var face := (mid-axis*mid.dot(axis)).normalized()
+	var up := face.cross(axis)   # where the tops of the letters point, unturned
+	var flip := up.y<0 if absf(face.y)<.7 else (print_reader_set and up.dot(a.lerp(b,.5)-print_reader)<0)
+	var state := [phrase,snappedf(length,.005),flip,tape_width]
+	if state==_print_state:return
+	_print_state = state
+	var wide := clampi(int(round(length/tape_width*PRINT_PX)),PRINT_PX,8192)
+	var font: Font = ThemeDB.fallback_font;var size := int(PRINT_PX*.56);var room := wide-PRINT_PX*.6
+	var width_of := func(t: String) -> float:return font.get_string_size(t,HORIZONTAL_ALIGNMENT_LEFT,-1,size).x
+	var count := int(floor(room/maxf(width_of.call(phrase),1.0)))
+	var text := phrase.repeat(count).strip_edges() if count>=1 else ""
+	if count<1:   # too short for the whole phrase: the most whole items that fit
+		var items := phrase.split(" · ",false)
+		for k in range(items.size(),0,-1):
+			var candidate := " · ".join(items.slice(0,k)).strip_edges()
+			if width_of.call(candidate)<=room:text = candidate;break
+	printed = text
+	if _print_view==null:
+		_print_view = SubViewport.new();_print_view.name = "PrintView";_print_view.disable_3d = true;_print_view.transparent_bg = false
+		var paper: Control
+		if print_paper_texture!=null:
+			var tiled := TextureRect.new();tiled.texture = print_paper_texture;tiled.stretch_mode = TextureRect.STRETCH_TILE;tiled.expand_mode = TextureRect.EXPAND_IGNORE_SIZE;paper = tiled
+		else:
+			var plain := ColorRect.new();plain.color = print_paper;paper = plain
+		paper.name = "Paper";_print_view.add_child(paper)
+		_print_label = Label.new();_print_label.name = "Print";_print_view.add_child(_print_label)
+		_print_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER;_print_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		add_child(_print_view)
+		_print_skin = (material_override as StandardMaterial3D).duplicate() if material_override is StandardMaterial3D else StandardMaterial3D.new()
+		_print_skin.albedo_color = Color.WHITE;_print_skin.cull_mode = BaseMaterial3D.CULL_DISABLED
+		_print_skin.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
+		material_override = _print_skin
+	_print_view.size = Vector2i(wide,PRINT_PX)
+	var paper_rect: Control = _print_view.get_node("Paper");paper_rect.position = Vector2.ZERO;paper_rect.size = Vector2(wide,PRINT_PX)   # explicit: a preset anchor keeps a zero rect here
+	_print_label.text = text;_print_label.add_theme_font_size_override("font_size",size);_print_label.add_theme_color_override("font_color",print_ink)
+	_print_label.position = Vector2.ZERO;_print_label.size = Vector2(wide,PRINT_PX);_print_label.pivot_offset = Vector2(wide,PRINT_PX)*.5
+	_print_label.rotation = PI if flip else 0.0
+	_print_view.render_target_update_mode = SubViewport.UPDATE_ONCE
+	# the ribbon's u runs in metres from A, its v from the side the width axis subtracts: one picture
+	# over the whole length, turned over in v so the print is not mirrored
+	_print_skin.albedo_texture = _print_view.get_texture()
+	_print_skin.uv1_scale = Vector3(1.0/maxf(length,.001),-1,1);_print_skin.uv1_offset = Vector3(0,1,0)

@@ -2,10 +2,19 @@ extends XRToolsPickable
 ## A roll defines its width and skin. One trigger edge fixes A; the next fixes B.
 ## Rays use the actual desktop camera or holding controller, never a test target.
 const Strip := preload("strip.gd")
-const TYPES := ["masking","pink","barrier"]
-const WIDTHS := [0.05,0.075,0.12]
+const Design := preload("tape_design.gd")
+const TYPES := ["masking","pink","barrier","printed"]
+const WIDTHS := [0.05,0.075,0.12,0.075]
 const SURFACES := 0xFFFFFFFF & ~((1<<17)|(1<<19)) # All solid bodies, excluding avatar and collision hands.
-@export_enum("masking","pink","barrier") var kind := "masking"
+@export_enum("masking","pink","barrier","printed") var kind := "masking"
+## Printed tape only: `environment` prints what the strip measures where it lies (its length, what it
+## runs from and to or marks, whether it joins them, heading, slope, its number); `note` prints `note`.
+@export_enum("environment","note") var print_mode := "environment"
+@export var note := ""
+## A design from tapes.json (edited at the tape studio page): its width, skin and print replace the
+## kind's. Empty keeps the kind as it was.
+@export var tape := ""
+var design: Dictionary = {}
 @export var roll_length := 30.0
 @export var reach := 8.0
 @export var max_span := 8.0
@@ -41,6 +50,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	max_span = clampf(float(config.get("max_span",max_span)),.1,12)
 	bind_objects = bool(config.get("bind_objects",bind_objects))
 	freehand_draw = bool(config.get("freehand_draw",freehand_draw))
+	print_mode = str(config.get("print",print_mode))
+	if print_mode not in ["environment","note"]:print_mode = "environment"
+	note = str(config.get("note",note))
+	tape = str(config.get("tape",tape))
 
 func _ready() -> void:
 	super._ready()
@@ -49,10 +62,11 @@ func _ready() -> void:
 	remaining = roll_length
 	action_pressed.connect(_fire);action_released.connect(_release_fire)
 	dropped.connect(func(_who):cancel())
-	tape_material = _make_tape_material()
+	design = Design.load_design(tape)
+	tape_material = Design.material(design) if not design.is_empty() else _make_tape_material()
 	_build_roll()
 	preview = Strip.new();preview.name = "LiveTape";add_child(preview);preview.top_level = true
-	preview.tape_width = WIDTHS[TYPES.find(kind)]*absf(global_basis.get_scale().x)
+	preview.tape_width = _width()*absf(global_basis.get_scale().x)
 	var ghost := tape_material.duplicate();ghost.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;ghost.albedo_color.a = .48;preview.material_override = ghost;preview.hide()
 	marker = MeshInstance3D.new();marker.name = "AimDot";var dot := SphereMesh.new();dot.radius = .018;dot.height = .036;marker.mesh = dot
 	var dot_mat := StandardMaterial3D.new();dot_mat.albedo_color = Color("ee478f");dot_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED;marker.material_override = dot_mat
@@ -62,7 +76,7 @@ func _make_tape_material() -> StandardMaterial3D:
 	# A generated texture travels through native GLB exports and Android alike.
 	# UV.x is metres, so stripes repeat at a fixed pitch rather than stretching.
 	var image := Image.create(256,64,false,Image.FORMAT_RGBA8)
-	var base: Color = Color("d6c291") if kind=="masking" else Color("f21c7d")
+	var base: Color = Color("d6c291") if kind=="masking" else Color("efe9dc") if kind=="printed" else Color("f21c7d")
 	for x in 256:
 		for y in 64:
 			var color := base
@@ -77,7 +91,7 @@ func _make_tape_material() -> StandardMaterial3D:
 func _build_roll() -> void:
 	var faces := SurfaceTool.new();faces.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var sides := SurfaceTool.new();sides.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var outer := .14;var inner := .058;var depth: float = WIDTHS[TYPES.find(kind)]+.015
+	var outer := .14;var inner := .058;var depth: float = _width()+.015
 	for i in 48:
 		var a := TAU*float(i)/48;var b := TAU*float(i+1)/48
 		var ra := Vector3(cos(a),sin(a),0);var rb := Vector3(cos(b),sin(b),0)
@@ -85,7 +99,8 @@ func _build_roll() -> void:
 			_quad(faces,ra*inner+Vector3(0,0,z),ra*outer+Vector3(0,0,z),rb*outer+Vector3(0,0,z),rb*inner+Vector3(0,0,z),Vector3(0,0,signf(z)),float(i)/48,float(i+1)/48)
 		_quad(sides,ra*outer+Vector3(0,0,-depth*.5),ra*outer+Vector3(0,0,depth*.5),rb*outer+Vector3(0,0,depth*.5),rb*outer+Vector3(0,0,-depth*.5),(ra+rb).normalized(),a*outer,b*outer)
 		_quad(faces,ra*inner+Vector3(0,0,depth*.5),ra*inner+Vector3(0,0,-depth*.5),rb*inner+Vector3(0,0,-depth*.5),rb*inner+Vector3(0,0,depth*.5),-(ra+rb).normalized(),float(i)/48,float(i+1)/48)
-	var paper := StandardMaterial3D.new();paper.albedo_color = Color("dfd5bb") if kind=="masking" else Color("e89dbb");paper.roughness = .94;paper.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var paper := StandardMaterial3D.new();paper.albedo_color = Color("dfd5bb") if kind in ["masking","printed"] else Color("e89dbb");paper.roughness = .94;paper.cull_mode = BaseMaterial3D.CULL_DISABLED
+	if not design.is_empty():paper.albedo_color = Color(str(design.get("a","dfd5bb")))   # the wound tape shows its own colour at the sides
 	var winding := Image.create(4,256,false,Image.FORMAT_RGBA8)
 	for y in 256:
 		var tone := .91+.09*cos(float(y)/256*TAU*75)
@@ -159,11 +174,15 @@ func _fire(_who = null) -> void:
 	query.exclude = [get_rid(),a.body.get_rid(),hit.collider.get_rid()]
 	if not get_world_3d().direct_space_state.intersect_ray(query).is_empty():_refuse("SOMETHING CROSSES THE TAPE");return
 	var strip := Strip.new();strip.name = "TapeStrip";get_tree().current_scene.add_child(strip)
-	strip.tape_width = WIDTHS[TYPES.find(kind)]*absf(global_basis.get_scale().x);strip.material_override = tape_material
+	strip.tape_width = _width()*absf(global_basis.get_scale().x);strip.material_override = tape_material
 	strip.anchors = [start_anchor,Strip.anchor(hit)];strip.paid_length = length;strip.issuer = weakref(self)
 	print("TAPE_LINK ",a.body.get_path()," -> ",hit.collider.get_path())
 	strip.draw_between(a.position,a.normal,hit.position,hit.normal)
 	if bind_objects:strip.bind_surfaces()
+	if _prints():
+		strip.print_source = printer(strip,a.body,hit.collider,segments.size()+1)
+		_set_reader(strip)
+		strip.lay_print(a.position,a.normal,hit.position,hit.normal)
 	segments.append(strip);remaining -= length;start_anchor = {};preview.hide();_status("CLICK START");tape_placed.emit(strip)
 
 func _sample_drag(hit: Dictionary) -> void:
@@ -192,17 +211,87 @@ func _release_fire(_who = null) -> void:
 		segments = segments.filter(func(segment):return is_instance_valid(segment) and not segment.is_queued_for_deletion())
 		if segments.size()>=32:_refuse("ROLL EMPTY / TIDY TO RESET");cancel();return
 		var strip := Strip.new();strip.name = "TapeStripe";get_tree().current_scene.add_child(strip)
-		strip.tape_width = WIDTHS[TYPES.find(kind)]*absf(global_basis.get_scale().x);strip.material_override = tape_material
+		strip.tape_width = _width()*absf(global_basis.get_scale().x);strip.material_override = tape_material
 		strip.anchors = drag_points.duplicate();strip.paid_length = drag_length;strip.issuer = weakref(self)
 		if bind_objects:strip.bind_surfaces()
+		if _prints():   # a stroke prints too; it is drawn (and printed) on its next physics frame
+			var first := Strip.resolve(drag_points[0]);var last := Strip.resolve(drag_points[-1])
+			if not first.is_empty() and not last.is_empty():strip.print_source = printer(strip,first.body,last.body,segments.size()+1);_set_reader(strip)
 		segments.append(strip);remaining -= drag_length;tape_placed.emit(strip);start_anchor = {};preview.hide();_status("CLICK START")
 	drag_eligible = false;drag_points.clear()
+
+## What a printed strip says. The two bodies and the number are fixed when it is laid; the length,
+## heading, slope and whether it still holds are read again each time the strip is redrawn, so a
+## plank carried away with tape on it changes what the tape says.
+func printer(strip: Node3D,from_body: Node,to_body: Node,number: int) -> Callable:
+	_dress_print(strip)
+	var mode: String = str(design.get("print",{}).get("mode",print_mode)) if not design.is_empty() else print_mode
+	if mode=="note":
+		var words: String = (str(design.get("print",{}).get("note","")) if not design.is_empty() else note).strip_edges()
+		return func(_a,_b,_length):return ("NOTE · "+words+" · ") if words!="" else "NOTE · "
+	var from_name := thing_name(from_body);var to_name := thing_name(to_body);var same := from_body==to_body
+	return func(a: Vector3,b: Vector3,length: float) -> String:
+		var d := b-a;var flat := Vector2(d.x,d.z).length()
+		var parts: Array[String] = ["%.2f M"%length]
+		if length>d.length()+.05:parts.append("A STROKE %.2f M END TO END"%d.length())
+		var bound := false
+		for child in strip.get_children():
+			if child.get_script()==Strip.Binding:bound = true
+		if same:parts.append("ON "+from_name)
+		elif strip.get("peeled"):parts.append("PEELED FROM "+from_name+" AND "+to_name)
+		else:parts.append(("JOINS " if bound else "FROM ")+from_name+(" TO " if not bound else " AND ")+to_name)
+		if flat<.05:parts.append("VERTICAL")
+		else:
+			var heading := fposmod(rad_to_deg(atan2(d.x,-d.z)),360.0)
+			parts.append("HEADING "+["N","NE","E","SE","S","SW","W","NW"][int(round(heading/45.0))%8])
+			var slope := rad_to_deg(atan2(d.y,flat))
+			parts.append("LEVEL" if absf(slope)<3 else ("RISING %d°" if slope>0 else "FALLING %d°")%int(round(absf(slope))))
+		parts.append("TAPE %d"%number)
+		return " · ".join(PackedStringArray(parts))+" · "
+
+func _width() -> float:
+	return float(design.get("width",.075)) if not design.is_empty() else WIDTHS[TYPES.find(kind)]
+
+## A strip prints when the roll is the printed kind, or wears a design that prints.
+func _prints() -> bool:
+	return kind=="printed" or (not design.is_empty() and str(design.get("print",{}).get("mode","none"))!="none")
+
+## A design's print: its ink, on its own pattern as the paper.
+func _dress_print(strip: Node3D) -> void:
+	if design.is_empty():return
+	strip.set("print_ink",Color(str(design.get("print",{}).get("ink","1d1d1f"))))
+	strip.set("print_paper_texture",Design.print_paper(design,Strip.PRINT_PX))
+
+## The print reads for whoever laid it: the head (the viewport's camera, in VR the headset) when it was committed.
+func _set_reader(strip: Node3D) -> void:
+	var head := get_viewport().get_camera_3d()
+	if head!=null:strip.set("print_reader",head.global_position);strip.set("print_reader_set",true)
+
+## A touched body's name as a person would say it: the artifact it belongs to (its registry token
+## or scene), not the collider's node name.
+static func thing_name(body: Node) -> String:
+	var node := body
+	for i in 8:
+		if node==null:break
+		for key in ["lookup_name","config_token","token","artifact"]:
+			if node.has_meta(key) and str(node.get_meta(key))!="":return _humane(str(node.get_meta(key)))
+		if node.scene_file_path!="":return _humane(node.scene_file_path.get_file().get_basename())
+		node = node.get_parent()
+	return _humane(str(body.name)) if body!=null else "?"
+
+static func _humane(raw: String) -> String:
+	var spaced := ""
+	for i in raw.length():
+		var c := raw[i]
+		if i>0 and c==c.to_upper() and c!=c.to_lower() and raw[i-1]==raw[i-1].to_lower() and raw[i-1]!="_":spaced += " "
+		spaced += c
+	return spaced.replace("_"," ").strip_edges().to_upper()
 
 func _refuse(reason: String) -> void:
 	_status(reason);placement_refused.emit(reason)
 
 func _status(message: String) -> void:
-	if readout!=null:readout.text = kind.to_upper()+" / %.1f m\n"%remaining+message
+	if readout!=null:readout.text = (tape if not design.is_empty() else kind).to_upper()+" / %.1f m\n"%remaining+message
 
 func cancel() -> void:
 	start_anchor = {};pressed = false

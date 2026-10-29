@@ -32,6 +32,38 @@
         "editable"
       ]
     },
+    "tape_roll_printed": {
+      "lookup_name": "tape_roll_printed",
+      "name": "Tape roll / printed",
+      "scene": "res://commons/artifacts/tape_roll/printed.tscn",
+      "category": "primitives",
+      "map_sequences": [
+        "primitives"
+      ],
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "kind": "printed"
+      },
+      "description": "Seven-and-a-half-centimetre ivory tape printed with what it reads where it lies: its length, what it runs from and to (or the one thing it marks), whether it joins them, its heading and slope, its number. The print is re-read when the things it is stuck to move. In note mode it prints an annotation instead.",
+      "parameters": {
+        "kind": "printed",
+        "print": "environment (default): what the strip measures; note: the note text",
+        "note": "Text printed in note mode",
+        "roll_length": "1–100 metres",
+        "reach": "0.5–12 metres",
+        "max_span": "0.1–12 metres",
+        "bind_objects": "Default true: separate physics bodies bind; false: marks and spans only"
+      },
+      "qfep_connection": "A line that says what it is and where: the mark becomes an annotation of the space it measures.",
+      "tags": [
+        "line",
+        "tape",
+        "tool",
+        "annotation"
+      ]
+    },
     "tape_roll_masking": {
       "lookup_name": "tape_roll_masking",
       "name": "Tape roll / masking",
