@@ -131,6 +131,16 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   reach snaps its near end to the nearest metre point and lies along the nearest grid axis
   (`playground_rod._lie_on_grid`), a body still. The carrier's `how` says what happened: wall · floor · fall ·
   stay · free.
+- **The hand canvas** (Palle, 2026-10-30: "a large transparency canvas for hand painting - multiple indicators
+  on your hands, touch the canvas with one or many, the stroke changes"; after Point Trace's GlassWall).
+  `commons/artifacts/hand_canvas/`, item `canvas` (4 x 2.5 m, no gravity, on the grid, turned by its knob): every
+  fingertip bone of a tracked hand and the knuckle under the middle finger are indicators; an indicator within
+  2.5 cm in front of the face or up to 8 cm THROUGH it (a hand on a controller pushes through glass; an open hand
+  pressed to its knuckle has its relaxed fingertips 5-6 cm past the face, measured) leaves a mark each frame. One
+  fingertip a thin line, two double, three wider, four a band, the whole hand a soft wash; left and right hands in
+  their own colours; paint accumulates in a viewport that never clears. Pens mark it too. Probe
+  `probe_hand_canvas.tscn` on the real rig's hands: pointing paints a line, the open hand a wash fifteen times
+  the pixels, clear() wipes it. `ada_run/inventory/{hand_canvas.png, hand_canvas_paint.png}`.
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and

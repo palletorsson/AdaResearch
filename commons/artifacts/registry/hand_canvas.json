@@ -1,0 +1,23 @@
+{
+  "registry_info": {
+    "category": "hand_canvas",
+    "description": "The hand canvas: a large pane of glass the hands paint on - every fingertip an indicator, the stroke by how many touch at once. Palle, 2026-10-30; after Point Trace's GlassWall.",
+    "created": "2026-10-30"
+  },
+  "artifacts": {
+    "hand_canvas": {
+      "lookup_name": "hand_canvas",
+      "scene": "res://commons/artifacts/hand_canvas/hand_canvas.tscn",
+      "class_name": "HandCanvas",
+      "name": "Hand canvas",
+      "description": "A 4 x 2.5 m pane of glass on uprights, like Point Trace's GlassWall, that the HANDS paint: every fingertip of a tracked hand and the knuckle under the middle finger are indicators; one within 2.5 cm of the face leaves a mark, and each frame it stays, a segment. One fingertip paints a thin line, two a double-width one, three wider, four a broad band, the whole hand a soft wash; the left and right hands in their own colours. Paint accumulates in a viewport that never clears. Pens mark it too (ada_writable_board). Config: width, height, px_per_m, touch_depth, left_colour, right_colour, wash_alpha.",
+      "category": "hand_canvas",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "footprint": [4, 3, 1],
+      "size_group": "large",
+      "tags": ["canvas", "hands", "paint", "glass", "point_trace"]
+    }
+  }
+}
