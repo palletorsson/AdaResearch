@@ -18,6 +18,7 @@
 [ext_resource type="AnimationNodeBlendTree" path="res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres" id="35_left_hand_blend"]
 [ext_resource type="Resource" uid="uid://dertgu7k8alls" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="36_left_hand_pose"]
 [ext_resource type="Script" path="res://commons/player/inventory_prism.gd" id="37_inventory_prism"]
+[ext_resource type="Script" path="res://commons/player/grab_hint.gd" id="38_grab_hint"]
 
 [node name="XROrigin3D" type="XROrigin3D"]
 
@@ -111,4 +112,7 @@ debug_mode = true
 
 [node name="InventoryPrism" type="Node3D" parent="."]
 script = ExtResource("37_inventory_prism")
+
+[node name="GrabHint" type="Node3D" parent="."]
+script = ExtResource("38_grab_hint")
 

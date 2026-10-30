@@ -72,7 +72,23 @@ func _ready() -> void:
 		await get_tree().process_frame
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("prism_closeup_tape.png"))
-	print("[probe_interface_shots] wrote 6 pictures; strips laid: %d" % (roll.segments.size() if roll else -1))
+	# the ghost: the crate chosen, the hand at the floor a metre ahead - the translucent crate on its metre point
+	# with the aim line; then the clock there, red
+	p.turn(-2);p.choose("crate")
+	for i in 6:
+		await get_tree().process_frame
+	_hand(0.6)
+	for i in 8:
+		await get_tree().process_frame
+	cam.transform = Transform3D(Basis(), Vector3(1.4, 1.5, 1.6)).looking_at(Vector3(0.8, 0.5, -0.8));cam.current = true
+	await RenderingServer.frame_post_draw;await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir.path_join("ghost_crate.png"))
+	p.choose("clock")
+	for i in 8:
+		await get_tree().process_frame
+	await RenderingServer.frame_post_draw;await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir.path_join("ghost_clock_refused.png"))
+	print("[probe_interface_shots] wrote 8 pictures; strips laid: %d" % (roll.segments.size() if roll else -1))
 	get_tree().quit(0)
 
 func _hand(x: float) -> void:

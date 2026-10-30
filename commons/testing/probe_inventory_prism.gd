@@ -161,7 +161,7 @@ func _ready() -> void:
 		await get_tree().process_frame
 	var mini_r: Node3D = p.hand.mini_node();var rubber_worn: bool = mini_r != null and mini_r.name == "Mini_rubber"
 	var target: Vector3 = (second as Node3D).global_position + Vector3(0, .3, 0)
-	_right.set_pose(&"aim", Transform3D(Basis(), target + Vector3(0, 1.0, 0.8)).looking_at(target, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), target + Vector3(0, 1.0, 0.8)).looking_at(target, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	await _ticks(0.2)
 	var before_m: int = p.hand.placed.size()
 	p._on_right_pressed("trigger_click")
@@ -171,6 +171,64 @@ func _ready() -> void:
 	p._on_right_pressed("trigger_click");await get_tree().process_frame
 	var refused_m: bool = p.hand.placed.size() == before_m - 1 and p.hand.notice.begins_with("not yours")
 	_check(report, "M rubber: worn as a miniature; the trigger on the second crate takes it back (one instance left); on the floor, 'not yours'", rubber_worn and erased and refused_m, {"worn": rubber_worn, "erased": erased, "refused": refused_m, "notice": p.hand.notice})
+	# P - the ghost: the crate chosen, the hand at the floor: a translucent crate stands on the metre point with the
+	# aim line; the clock chosen there is a red ghost (refused); grip on the pointed crate takes it back
+	_palm(1.0)   # the ghost and the grip need the palette up
+	p.choose("crate")
+	for i in 6:
+		await get_tree().process_frame
+	_hand(0.7);await _ticks(0.2)
+	for i in 3:
+		await get_tree().process_frame
+	var g: Node3D = p.ghost
+	var ghost_there: bool = g != null and g.visible and absf(g.global_position.x - 1.0) < .01 and absf(g.global_position.z + 1.0) < .01 and p.ghost_ok and p.aim_line != null and p.aim_line.visible
+	p.choose("clock")
+	for i in 3:
+		await get_tree().process_frame
+	var red: bool = p.ghost != null and p.ghost.visible and not p.ghost_ok
+	p.choose("crate")
+	for i in 3:
+		await get_tree().process_frame
+	p._on_right_pressed("trigger_click")
+	for i in 4:
+		await get_tree().physics_frame
+	var crate2: Node = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
+	var tgt: Vector3 = (crate2 as Node3D).global_position + Vector3(0, .5, 0)
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), tgt + Vector3(0, 1.0, 1.0)).looking_at(tgt, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.2)
+	var pointed: bool = p.hand.pointed_own(rig.get_node("RightHand"), 8.0, p._panel_rids()) == crate2
+	p._on_right_pressed("grip_click")
+	await get_tree().process_frame;await get_tree().process_frame
+	var gone2: bool = not is_instance_valid(crate2) and not p.hand.placed.has(crate2)
+	_check(report, "P ghost: the crate's ghost stands on the metre point with the aim line; the clock's ghost there is red; grip on the pointed crate takes it back", ghost_there and red and pointed and gone2, {"ghost_there": ghost_there, "red": red, "pointed": pointed, "gone": gone2})
+	# Q - the grab hint: a ball 1.5 m ahead of the right hand is what it would grab at range: a line and a ring to it
+	p.choose("point")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(0.3);await _ticks(0.2)
+	p._on_right_pressed("trigger_click")
+	for i in 4:
+		await get_tree().physics_frame
+	var ball2: Node3D = p.hand.placed[-1]
+	for i in 10:
+		await get_tree().physics_frame   # the ball settles onto its grid point first; then the hand is aimed at where it IS
+	var ball_at: Vector3 = ball2.global_position
+	# a pose is in the ORIGIN's space, and the player body may have moved the origin: the aim is converted
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), ball_at + Vector3(0, .45, 1.1)).looking_at(ball_at, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	for i in 30:
+		await get_tree().physics_frame
+	var hint: Node = rig.get_node_or_null("GrabHint")
+	var tgt2: Node3D = hint.target_of(rig.get_node("RightHand")) if hint else null
+	var line_on: bool = hint != null and hint.showing_for(rig.get_node("RightHand"))
+	var pk2: Node = XRToolsFunctionPickup.find_instance(rig.get_node("RightHand"))
+	var rh: Node3D = rig.get_node("RightHand");var fwd2: Vector3 = -rh.global_basis.z;var names2: Array = []
+	for c in (pk2.get("_object_in_ranged_area") as Array):
+		if is_instance_valid(c):names2.append("%s dp=%.3f can=%s" % [c.name, fwd2.dot(((c as Node3D).global_position - rh.global_position).normalized()), str(c.can_pick_up(pk2)) if c.has_method("can_pick_up") else "?"])
+	var diag := {"in_area": names2, "angle": pk2.get("ranged_angle"), "closest": str(pk2.get("closest_object")), "in_ranged": (pk2.get("_object_in_ranged_area") as Array).size(), "in_grab": (pk2.get("_object_in_grab_area") as Array).size(), "range_mask": pk2.get("ranged_collision_mask"), "ball_layer": ball2.collision_layer, "ranged_enable": pk2.get("ranged_enable"), "dist": (ball2.global_position - rig.get_node("RightHand").global_position).length(), "ball_frozen": ball2.freeze}
+	_check(report, "Q grab hint: the ball 1.6 m off is the right hand's ranged target - the line and the ring show it", hint != null and tgt2 == ball2 and line_on, {"hint": hint != null, "target": str(tgt2.name) if tgt2 else "", "line": line_on, "diag": diag})
+	p.take_all_back();_palm(0.0)
+	for i in 4:
+		await get_tree().process_frame
 	# O - the metre grid: the wedge, turned east by its knob, stands on the nearest metre point of the floor
 	p.choose("wedge");p.set_knob("_yaw", "90")
 	for i in 3:

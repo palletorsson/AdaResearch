@@ -74,6 +74,19 @@ func instancer() -> Node3D:
 		_instancer = InstancerLib.new();_instancer.name = "InventoryInstancer";get_tree().current_scene.add_child(_instancer)
 	return _instancer
 
+## What the controller points at, if the hand placed it (or a tape strip): the node, or null.
+func pointed_own(controller: Node3D, reach := 8.0, exclude: Array = []) -> Node:
+	var origin: Vector3 = controller.global_position;var dir: Vector3 = -controller.global_basis.z
+	var q := PhysicsRayQueryParameters3D.create(origin, origin + dir * reach, SURFACES);q.exclude = exclude
+	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
+	if hit.is_empty():return null
+	var n: Node = hit.collider
+	while n != null:
+		if placed.has(n):return n
+		if n.get("paid_length") != null and n.get("issuer") != null:return n
+		n = n.get_parent()
+	return null
+
 ## THE RUBBER: the thing the controller points at, if the hand placed it, is taken back; a tape strip too.
 func erase_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> bool:
 	var origin: Vector3 = controller.global_position;var dir: Vector3 = -controller.global_basis.z
@@ -286,18 +299,21 @@ const SURFACES := 0xFFFFFFFF & ~((1 << 17) | (1 << 19))   # all solid bodies but
 ## its own rule (the carrier's wall snap, the ball's grid, the rod's sockets, a plank's gravity). An item that
 ## mounts "wall" asks for a vertical surface and refuses a floor with a notice; "floor" the other way round.
 ## `exclude` is for bodies the ray must look past (the palette's own panels). Returns the node, or null.
-func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) -> Node3D:
-	if current == "":return null
+## Where the current item would go if the trigger were pulled now: {ok, xform, hit, reason, on_grid, point}.
+## The ghost asks every frame, the trigger once; one rule. Not ok: `reason` says why (the notice's words).
+func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dictionary:
+	var out := {"ok": false, "reason": "", "hit": {}, "xform": Transform3D(), "on_grid": false, "point": Vector3.ZERO}
+	if current == "":out.reason = "nothing in the hand";return out
 	var it := Items.item(current)
-	if it.is_empty() or str(it.get("coming", "")) != "":notice = "not here yet";return null
+	if it.is_empty() or str(it.get("coming", "")) != "":out.reason = "not here yet";return out
+	if str(it.get("tool", "")) != "":out.reason = "a tool is not placed";return out
 	var origin: Vector3 = controller.global_position;var dir: Vector3 = -controller.global_basis.z
 	var q := PhysicsRayQueryParameters3D.create(origin, origin + dir * reach, SURFACES)
 	q.exclude = exclude;q.hit_from_inside = false
 	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
-	if hit.is_empty():notice = "point at a floor or a wall";return null
+	if hit.is_empty():out.reason = "point at a floor or a wall";return out
+	out.hit = hit
 	var n: Vector3 = hit.normal;var vertical: bool = absf(n.y) < 0.5;var mount := str(it.get("mount", "any"))
-	if mount == "wall" and not vertical:notice = str(it.get("name", current)) + " needs a wall";return null
-	if mount == "floor" and vertical:notice = str(it.get("name", current)) + " needs a floor";return null
 	var size: Array = it.get("size", [0.3, 0.3, 0.3]);var scale_k: float = float(it.get("scale", 1.0))
 	var cfg := config_for(current);var where: Vector3 = hit.position
 	# THE METRE GRID (Palle: "all artifacts should fit in the snap meter system like in the grid system"): an item
@@ -315,14 +331,23 @@ func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) 
 		var to_me: Vector3 = controller.global_position - hit.position;to_me.y = 0
 		if to_me.length() > .01:basis = Basis.looking_at(-to_me.normalized(), Vector3.UP)
 	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
-	if on_grid and str(it.get("mount", "")) == "floor":lift = .02   # a grid thing's origin is its base
+	if on_grid and mount == "floor":lift = .02   # a grid thing's origin is its base
+	out.xform = Transform3D(basis, where + n * lift);out.on_grid = on_grid;out.point = where
+	if mount == "wall" and not vertical:out.reason = str(it.get("name", current)) + " needs a wall";return out
+	if mount == "floor" and vertical:out.reason = str(it.get("name", current)) + " needs a floor";return out
+	if not fits(current):out.reason = notice;return out
+	out.ok = true;return out
+
+func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) -> Node3D:
+	var at := placement_at(controller, reach, exclude)
+	if not at.ok:notice = at.reason;return null
 	notice = ""
-	var node: Node3D = spawn_at(Transform3D(basis, where + n * lift))
+	var node: Node3D = spawn_at(at.xform)
 	if node == null:
-		if notice == "":notice = "could not make it"   # spawn_at's own reason (the budget) stands
+		if notice == "":notice = "could not make it"   # spawn_at's own reason stands
 		return null
 	if node.has_method("settle"):node.settle()
-	if on_grid and node.is_inside_tree():node.global_position = Vector3(where.x, node.global_position.y, where.z)   # settling keeps its height, the grid its point
+	if at.on_grid and node.is_inside_tree():node.global_position = Vector3(at.point.x, node.global_position.y, at.point.z)   # settling keeps its height, the grid its point
 	notice = "";return node
 
 ## Make the current item in a controller's hand: picked up at once by that hand's pickup function; with no

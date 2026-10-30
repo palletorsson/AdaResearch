@@ -110,6 +110,17 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   out (the clock's digits, the nozzle, the pill's lights, the tape). **The crate merges its planks**
   (`mesh_merge.gd`, one ArrayMesh with a surface per material; `merge_meshes` off keeps every plank a node).
   Probe checks L (refusal + the merged crate), N (two crates, one multimesh, no extra draws), M (the rubber).
+- **The ghost, the grip, the grab hint** (Palle, 2026-10-30: "a ghost object that shows where a possible
+  placement is and a raycast line; remove the object with the grip button; make distance grab more explicit").
+  With the palette up and a prefab in the hand, a translucent copy stands where the trigger would put it - the
+  same rule as the placement (`InventoryHand.placement_at`, asked every frame by the ghost and once by the
+  trigger), the item's own look when the place is good, **red** when it would be refused (a floor for the
+  clock, the budget) - with an amber aim line from the hand to the hit. **Grip**, palette up, takes back the
+  thing the hand points at if the hand placed it (`pointed_own`), else the last thing. `grab_hint.gd` on the rig
+  draws, for each hand, what it would grab at range: a line to the pickup's target and a ring on it in the
+  hand's colour, only beyond arm's reach; it reads the ranged area itself, since XR Tools recomputes its
+  closest object only when a body enters or leaves (a hand turning onto a thing already inside sees nothing).
+  `rig.grab_hint: false` removes it. The whole input tree, context by context, is `EVENT_TREE.md`.
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and
