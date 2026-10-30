@@ -156,7 +156,7 @@
     },
     {
       "id": "cylinder",
-      "name": "Cylinder",
+      "name": "Pipe (a cylinder)",
       "token": "cylinder",
       "unlock": "primitives",
       "floor": 0,
@@ -167,7 +167,7 @@
     },
     {
       "id": "capsule",
-      "name": "Capsule",
+      "name": "Pill (a capsule)",
       "token": "capsule",
       "unlock": "primitives",
       "floor": 0,
@@ -175,6 +175,48 @@
       "size": [0.5, 1.0, 0.5],
       "defaults": {},
       "knobs": []
+    },
+    {
+      "id": "cardboard",
+      "name": "Cardboard box",
+      "token": "cardboard_box",
+      "unlock": "",
+      "floor": 0,
+      "mount": "any",
+      "size": [0.4, 0.35, 0.4],
+      "defaults": {},
+      "knobs": [
+        {"key": "flap_open_deg", "label": "Flaps", "range": [0, 90, 15], "unit": "°"},
+        {"key": "show_flaps", "label": "Top", "choices": [ "true", "false" ], "names": [ "with flaps", "cut flat" ]}
+      ]
+    },
+    {
+      "id": "crate",
+      "name": "Wooden crate",
+      "token": "crate",
+      "unlock": "",
+      "floor": 0,
+      "mount": "any",
+      "size": [0.72, 0.68, 0.72],
+      "defaults": {},
+      "knobs": [
+        {"key": "show_x_brace", "label": "Front", "choices": [ "true", "false" ], "names": [ "X-braced", "plain planks" ]},
+        {"key": "plank_count", "label": "Planks a side", "range": [3, 8, 1]}
+      ]
+    },
+    {
+      "id": "techcrate",
+      "name": "Tech crate",
+      "token": "tech_crate",
+      "unlock": "",
+      "floor": 0,
+      "mount": "any",
+      "size": [1.2, 0.55, 0.6],
+      "defaults": {},
+      "knobs": [
+        {"key": "vent_style", "label": "Vents", "choices": [ "x", "fan", "louver" ], "names": [ "X", "fan grille", "louvres" ]},
+        {"key": "show_leds", "label": "Lights", "choices": [ "true", "false" ], "names": [ "LEDs on", "dark" ]}
+      ]
     }
   ]
 }
