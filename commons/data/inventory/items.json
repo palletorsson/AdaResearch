@@ -20,24 +20,6 @@
       ]
     },
     {
-      "id": "tape",
-      "name": "Tape roll",
-      "token": "tape_roll_printed",
-      "unlock": "",
-      "mount": "worn",
-      "size": [0.34, 0.34, 0.075],
-      "scale": 0.4,
-      "defaults": {"freehand_draw": true, "leg": 0.3, "roll_length": 500, "max_strips": 300, "print_max_px": 4096},
-      "knobs": [
-        {"key": "kind", "label": "Tape", "choices": [ "printed", "masking", "pink", "barrier" ], "names": [ "printed (words)", "masking", "pink", "barrier" ]},
-        {"key": "leg", "label": "Leg", "range": [0.1, 1.0, 0.05], "unit": " m"},
-        {"key": "bind_objects", "label": "Binds", "choices": [ "true", "false" ], "names": [ "binds what it joins", "marks only" ]},
-        {"key": "tape", "label": "Design", "choices": [ "", "hazard", "survey", "blueprint", "chevron", "dotted_note" ], "names": [ "plain", "hazard", "survey", "blueprint", "chevron", "dotted" ]},
-        {"key": "print", "label": "Prints", "choices": [ "environment", "note" ], "names": [ "where it lies", "a note" ]},
-        {"key": "note", "label": "Note", "text": true}
-      ]
-    },
-    {
       "id": "point",
       "name": "Ball (six sockets)",
       "token": "playground_ball",
@@ -67,15 +49,22 @@
       ]
     },
     {
-      "id": "triangle",
-      "name": "Triangle",
-      "token": "",
-      "unlock": "primitives",
-      "mount": "any",
-      "size": [1.0, 0.87, 0.05],
-      "defaults": {},
-      "knobs": [],
-      "coming": "the playground workshop"
+      "id": "tape",
+      "name": "Tape roll",
+      "token": "tape_roll_printed",
+      "unlock": "",
+      "mount": "worn",
+      "size": [0.34, 0.34, 0.075],
+      "scale": 0.4,
+      "defaults": {"freehand_draw": true, "leg": 0.3, "roll_length": 500, "max_strips": 300, "print_max_px": 4096},
+      "knobs": [
+        {"key": "kind", "label": "Tape", "choices": [ "printed", "masking", "pink", "barrier" ], "names": [ "printed (words)", "masking", "pink", "barrier" ]},
+        {"key": "leg", "label": "Leg", "range": [0.1, 1.0, 0.05], "unit": " m"},
+        {"key": "bind_objects", "label": "Binds", "choices": [ "true", "false" ], "names": [ "binds what it joins", "marks only" ]},
+        {"key": "tape", "label": "Design", "choices": [ "", "hazard", "survey", "blueprint", "chevron", "dotted_note" ], "names": [ "plain", "hazard", "survey", "blueprint", "chevron", "dotted" ]},
+        {"key": "print", "label": "Prints", "choices": [ "environment", "note" ], "names": [ "where it lies", "a note" ]},
+        {"key": "note", "label": "Note", "text": true}
+      ]
     },
     {
       "id": "plank",
@@ -120,6 +109,30 @@
       "size": [0.5, 0.5, 0.12],
       "defaults": {},
       "knobs": []
+    },
+    {
+      "id": "dangerx",
+      "name": "Danger X",
+      "token": "mod_danger_x",
+      "unlock": "",
+      "floor": 0,
+      "mount": "any",
+      "size": [2.0, 1.0, 0.1],
+      "defaults": {"term": "danger_x"},
+      "knobs": [
+        {"key": "show_construction", "label": "Shows", "choices": [ "false", "true" ], "names": [ "the thing", "how it was built" ]}
+      ]
+    },
+    {
+      "id": "triangle",
+      "name": "Triangle",
+      "token": "",
+      "unlock": "primitives",
+      "mount": "any",
+      "size": [1.0, 0.87, 0.05],
+      "defaults": {},
+      "knobs": [],
+      "coming": "the playground workshop"
     },
     {
       "id": "wedge",
