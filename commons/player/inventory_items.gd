@@ -40,6 +40,25 @@ static func item(id: String) -> Dictionary:
 ## An item's config as the artifact receives it: the item's own defaults under the hand's values, each value
 ## in the shape its knob declares - a true/false choice as a bool (bool("false") is TRUE in GDScript, so a
 ## string here would turn a knob on in silence), a range as a float, a choice or text as a string.
+static var _costs: Dictionary = {}
+
+## The hall's budget for placed things (items.json "budget"); empty = no budget.
+static func budget() -> Dictionary:
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(items_path()))
+	return (d.get("budget", {}) as Dictionary).duplicate() if d is Dictionary and d.get("budget") is Dictionary else {}
+
+## What one of an item costs (commons/data/inventory/costs.json, measured by probe_inventory_cost.gd), by id.
+static func cost_of(id: String) -> Dictionary:
+	if _costs.is_empty():
+		var path := items_path().get_base_dir().path_join("costs.json")
+		if FileAccess.file_exists(path):
+			var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+			if d is Dictionary:
+				for row in d.get("items", []):
+					if row is Dictionary and row.has("id"):_costs[str(row.id)] = row
+	var c: Dictionary = _costs.get(id, {})
+	return {"draws": int(c.get("draws", 1)), "triangles": int(c.get("triangles", 0)), "lights": int(c.get("lights", 0)), "viewports": int(c.get("viewports", 0))}
+
 static func config_for(it: Dictionary, values: Dictionary) -> Dictionary:
 	var cfg: Dictionary = (it.get("defaults", {}) as Dictionary).duplicate()
 	var knobs: Dictionary = {}

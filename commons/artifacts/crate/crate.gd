@@ -44,6 +44,9 @@ class_name Crate
 @export var plank_color: Color = Color(0.45, 0.32, 0.22)
 @export var plank_color_alt: Color = Color(0.51, 0.36, 0.24)
 @export var strip_color: Color = Color(0.18, 0.16, 0.14)
+## One mesh for the whole crate (MeshMerge): forty-eight draws become one per material. Off keeps every plank its own node.
+@export var merge_meshes: bool = true
+const MergeLib = preload("res://commons/artifacts/mesh_merge.gd")
 @export var stamp_color: Color = Color(0.08, 0.07, 0.06)
 @export var brace_color: Color = Color(0.38, 0.26, 0.18)
 
@@ -287,6 +290,8 @@ func _build() -> void:
 				ch * 0.30, hd + plank_thickness * 0.5 + 0.008)
 			arrow_lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 			add_child(arrow_lbl)
+
+	if merge_meshes:MergeLib.merge(self)
 
 
 func _build_bands() -> void:

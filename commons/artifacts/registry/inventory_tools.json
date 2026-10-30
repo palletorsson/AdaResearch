@@ -1,0 +1,21 @@
+{
+  "registry_info": {
+    "category": "inventory_tools",
+    "description": "Tools of the hand's inventory (commons/data/inventory/items.json) that are not things to leave in the world: the rubber takes one placed thing back.",
+    "created": "2026-10-30"
+  },
+  "artifacts": {
+    "inventory_rubber": {
+      "lookup_name": "inventory_rubber",
+      "scene": "res://commons/artifacts/inventory_rubber/rubber.tscn",
+      "class_name": "InventoryRubber",
+      "name": "Rubber",
+      "description": "An eraser: a pink block with a dark band, 12 cm. The inventory's tool for taking one placed thing back - worn as a miniature on the right hand, the trigger on a thing the hand placed removes it, on a tape strip removes the strip, on the world nothing. Not a thing to place.",
+      "category": "inventory_tools",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "tags": ["inventory", "tool", "eraser"]
+    }
+  }
+}

@@ -118,6 +118,59 @@ func _ready() -> void:
 		await get_tree().process_frame
 	_check(report, "H ball: the card + trigger puts a ball where the hand points, on its grid point (tape put away); grip takes it back; palm down hides the prism", made and taken and not p.showing and not p.prism.visible and not p.ring.visible, {"made": made, "taken": taken, "showing": p.showing, "placed_at": held.global_position if is_instance_valid(held) else null})
 	_check(report, "J miniature: the chosen ball shown as a 10 cm inert copy over the right hand, out of the support graph, not the made one", mini_ok, {"mini": mini != null, "scale": mini.scale.x if mini else 0, "layer": mini.collision_layer if mini else -1, "in_group": mini.is_in_group("playground_balls") if mini else null})
+	# L - the budget: with draws cut to 3 a crate (48 draws) is refused with BUDGET FULL; the budget restored, it is made
+	p.hand.budget_override = {"draws": 3}
+	p.choose("crate")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(0.3);await _ticks(0.2)
+	var before_l: int = p.hand.placed.size()
+	p._on_right_pressed("trigger_click");await get_tree().physics_frame
+	var refused_l: bool = p.hand.placed.size() == before_l and p.hand.notice.begins_with("BUDGET FULL");var notice_l: String = p.hand.notice
+	p.hand.budget_override = {}
+	p._on_right_pressed("trigger_click")
+	for i in 6:
+		await get_tree().physics_frame
+	var crate_made: bool = p.hand.placed.size() == before_l + 1
+	var crate_node: Node = p.hand.placed[-1] if crate_made else null
+	var merged: bool = crate_node != null and crate_node.find_child("Merged", true, false) != null
+	var kids: Array = []
+	if crate_node != null:
+		for ch in crate_node.get_children():kids.append(str(ch.name) + ":" + ch.get_class())
+		var w: Variant = crate_node.get("work")
+		if w is Node:
+			for ch in (w as Node).get_children():kids.append("work/" + str(ch.name) + ":" + ch.get_class())
+	_check(report, "L budget: draws cut to 3, the crate is refused with BUDGET FULL; restored, it is made - as ONE merged mesh", refused_l and crate_made and merged, {"refused": refused_l, "notice_after_refusal": notice_l, "made": crate_made, "merged": merged, "kids": kids})
+	# N - copies: a second crate with the same config is an instance: one multimesh with two instances, its own meshes on layer 0
+	_hand(1.5);await _ticks(0.2)
+	p._on_right_pressed("trigger_click")
+	for i in 6:
+		await get_tree().physics_frame
+	var key: String = p.hand.instance_key("crate")
+	var inst: Node = p.hand.instancer();var two: bool = inst.count(key) == 2
+	var second: Node = p.hand.placed[-1]
+	var hidden := true
+	for m in second.find_children("*", "MeshInstance3D", true, false):
+		if (m as MeshInstance3D).layers != 0:hidden = false
+	var spent_now: Dictionary = p.hand.spent()
+	_check(report, "N copies: the second crate is an instance of the first - 2 in one multimesh, its meshes on layer 0, and it pays no draws", two and hidden and spent_now.draws == 48, {"count": inst.count(key), "groups": inst.groups(), "hidden": hidden, "spent": spent_now})
+	# M - the rubber: pointed at the second crate, the trigger takes it back; at the floor, nothing and a notice
+	p.choose("rubber")
+	for i in 3:
+		await get_tree().process_frame
+	var mini_r: Node3D = p.hand.mini_node();var rubber_worn: bool = mini_r != null and mini_r.name == "Mini_rubber"
+	var target: Vector3 = (second as Node3D).global_position + Vector3(0, .3, 0)
+	_right.set_pose(&"aim", Transform3D(Basis(), target + Vector3(0, 1.0, 0.8)).looking_at(target, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.2)
+	var before_m: int = p.hand.placed.size()
+	p._on_right_pressed("trigger_click")
+	await get_tree().process_frame;await get_tree().process_frame
+	var erased: bool = p.hand.placed.size() == before_m - 1 and not is_instance_valid(second) and inst.count(key) == 1
+	_hand(3.0);await _ticks(0.2)
+	p._on_right_pressed("trigger_click");await get_tree().process_frame
+	var refused_m: bool = p.hand.placed.size() == before_m - 1 and p.hand.notice.begins_with("not yours")
+	_check(report, "M rubber: worn as a miniature; the trigger on the second crate takes it back (one instance left); on the floor, 'not yours'", rubber_worn and erased and refused_m, {"worn": rubber_worn, "erased": erased, "refused": refused_m, "notice": p.hand.notice})
+	p.take_all_back()
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()
 	for i in 4:

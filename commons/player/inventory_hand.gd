@@ -9,6 +9,7 @@ extends Node
 
 const Items = preload("res://commons/player/inventory_items.gd")   # by path: a new class_name is not in the cache until the editor scans
 const Carrier = preload("res://commons/player/inventory_carrier.gd")
+const InstancerLib = preload("res://commons/player/inventory_instancer.gd")
 
 signal item_changed(id: String)
 signal config_changed(id: String, cfg: Dictionary)
@@ -23,6 +24,75 @@ var _mini_id := ""
 const MINI := 0.10                # the miniature's longest side - the clock came out at 3 cm with its own scale folded in
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
 var notice := ""                  # one line for the HAND face: why the last trigger did nothing ("the clock needs a wall")
+var budget_override: Dictionary = {}   # a probe's budget instead of items.json's
+var _instancer: Node3D = null
+
+## The tool the current item is, "" for a thing to place ("rubber": the trigger erases instead).
+func current_tool() -> String:
+	return str(Items.item(current).get("tool", "")) if current != "" else ""
+
+# ── THE BUDGET (Palle: "an object budget in VR") ──────────────────────────────────────────────────────────────
+
+func budget() -> Dictionary:
+	return budget_override if not budget_override.is_empty() else Items.budget()
+
+## What the placed things cost now: each placed item's measured cost (a copy instanced after the first pays no
+## draws), each tape strip one draw and a picture when printed.
+func spent() -> Dictionary:
+	var sum := {"draws": 0, "triangles": 0, "lights": 0, "viewports": 0}
+	var seen_keys: Dictionary = {}
+	for n in placed:
+		if not is_instance_valid(n):continue
+		var id := str(n.get_meta("inv_item", ""));var c := Items.cost_of(id)
+		var key := str(n.get_meta("inv_key", ""))
+		var instanced: bool = key != "" and seen_keys.has(key)
+		seen_keys[key] = true
+		sum.draws += 0 if instanced else c.draws;sum.triangles += c.triangles;sum.lights += c.lights;sum.viewports += c.viewports
+	var roll: Node = worn_of("tape")
+	if roll != null:
+		for s in roll.segments:
+			if is_instance_valid(s):sum.draws += 1;sum.triangles += 16 * maxi(1, (s.anchors as Array).size());sum.viewports += 1 if s.get("print_source") is Callable and (s.get("print_source") as Callable).is_valid() else 0
+	return sum
+
+## Would one more of `id` fit the budget? Sets the notice when not.
+func fits(id: String) -> bool:
+	var b := budget()
+	if b.is_empty():return true
+	var now := spent();var c := Items.cost_of(id)
+	var key := instance_key(id);var instanced: bool = _instancer != null and is_instance_valid(_instancer) and _instancer.count(key) > 0
+	var want := {"draws": now.draws + (0 if instanced else c.draws), "triangles": now.triangles + c.triangles, "lights": now.lights + c.lights, "viewports": now.viewports + c.viewports}
+	for k in ["draws", "lights", "viewports", "triangles"]:
+		if b.has(k) and int(want[k]) > int(b[k]):
+			notice = "BUDGET FULL: %s %d/%d - take something back" % [k, now[k], int(b[k])];return false
+	return true
+
+func instance_key(id: String) -> String:
+	return id + "|" + JSON.stringify(config_for(id))
+
+func instancer() -> Node3D:
+	if _instancer == null or not is_instance_valid(_instancer):
+		_instancer = InstancerLib.new();_instancer.name = "InventoryInstancer";get_tree().current_scene.add_child(_instancer)
+	return _instancer
+
+## THE RUBBER: the thing the controller points at, if the hand placed it, is taken back; a tape strip too.
+func erase_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> bool:
+	var origin: Vector3 = controller.global_position;var dir: Vector3 = -controller.global_basis.z
+	var q := PhysicsRayQueryParameters3D.create(origin, origin + dir * reach, SURFACES);q.exclude = exclude
+	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
+	if hit.is_empty():notice = "point the rubber at a thing";return false
+	var n: Node = hit.collider
+	while n != null:
+		if placed.has(n):
+			placed.erase(n)
+			if n.has_method("is_picked_up") and n.is_picked_up() and n.has_method("drop"):n.drop()
+			n.get_parent().remove_child(n);n.queue_free();notice = "";return true
+		if n.get("paid_length") != null and n.get("issuer") != null:   # a tape strip
+			var roll: Node = (n.get("issuer") as WeakRef).get_ref() if n.get("issuer") is WeakRef else null
+			if roll != null and roll.has_method("remove_strip"):roll.remove_strip(n)
+			else:n.queue_free()
+			notice = "";return true
+		n = n.get_parent()
+	notice = "not yours: the rubber takes back only what the hand placed";return false
 
 func _void() -> Node:
 	return get_tree().get_first_node_in_group("void_game") if is_inside_tree() else null
@@ -180,6 +250,8 @@ func spawn_at(xform: Transform3D) -> Node3D:
 	if current == "":return null
 	var it := Items.item(current)
 	if it.is_empty() or str(it.get("coming", "")) != "":return null
+	if str(it.get("tool", "")) != "":notice = "a tool is not placed";return null
+	if not fits(current):return null
 	var cfg := config_for(current);var node: Node3D = null
 	var path := Items.scene_for(str(it.get("token", "")))
 	if path == "" or not ResourceLoader.exists(path):return null
@@ -196,7 +268,16 @@ func spawn_at(xform: Transform3D) -> Node3D:
 		node = carrier
 	if node.get_parent() == null:get_tree().current_scene.add_child(node)
 	node.global_transform = xform
-	placed.append(node);return node
+	node.set_meta("inv_item", current);node.set_meta("inv_key", instance_key(current))
+	placed.append(node)
+	# copies of one prefab share one multimesh after the first (Palle: "keep the copies multi mesh")
+	if bool(it.get("instance", true)):
+		var art: Node3D = node
+		if node is Carrier:
+			var a: Variant = node.get("work")   # the carrier's artifact
+			art = a if a is Node3D else node
+		instancer().register(node, art, instance_key(current))
+	return node
 
 const SURFACES := 0xFFFFFFFF & ~((1 << 17) | (1 << 19))   # all solid bodies but the avatar and the collision hands
 
@@ -226,8 +307,11 @@ func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) 
 		var to_me: Vector3 = controller.global_position - hit.position;to_me.y = 0
 		if to_me.length() > .01:basis = Basis.looking_at(-to_me.normalized(), Vector3.UP)
 	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
+	notice = ""
 	var node: Node3D = spawn_at(Transform3D(basis, hit.position + n * lift))
-	if node == null:notice = "could not make it";return null
+	if node == null:
+		if notice == "":notice = "could not make it"   # spawn_at's own reason (the budget) stands
+		return null
 	if node.has_method("settle"):node.settle()
 	notice = "";return node
 

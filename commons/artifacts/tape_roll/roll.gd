@@ -333,6 +333,11 @@ func undo_last() -> Node3D:
 	if segments.is_empty():cancel();return null
 	var strip: Node3D = segments.pop_back();remaining = minf(roll_length,remaining+strip.paid_length);cancel();strip.queue_free();return strip
 
+## One strip back onto the roll (the rubber): refunded and freed. Returns true if it was this roll's.
+func remove_strip(strip: Node3D) -> bool:
+	if not segments.has(strip):return false
+	segments.erase(strip);remaining = minf(roll_length,remaining+strip.paid_length);strip.queue_free();return true
+
 ## A knob turned while the roll is in use (the inventory's live config): the config again, and the skin and
 ## roll rebuilt when the kind or the design changed. The tape already laid keeps its skin.
 func apply_config(config: Dictionary) -> void:

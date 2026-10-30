@@ -86,6 +86,8 @@ static func _compact(b: Button) -> void:
 		var sb: StyleBox = b.get_theme_stylebox(state)
 		if sb is StyleBoxFlat:sb.content_margin_top = 3;sb.content_margin_bottom = 3
 
+static func _k(n: int) -> String:return ("%.1fk" % (n / 1000.0)) if n >= 1000 else str(n)
+
 func _note(text: String) -> Label:
 	var l := Label.new();l.text = text;l.add_theme_font_size_override("font_size", 11);l.add_theme_color_override("font_color", DIM)
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;return l
@@ -205,6 +207,12 @@ func _page_tape() -> void:
 	var undo := _btn("UNDO LAST STRIP", _col, false, roll == null or roll.segments.is_empty());undo.pressed.connect(prism.undo_last);buttons["undo"] = undo;_page.add_child(undo)
 
 func _page_placed() -> void:
+	var b: Dictionary = prism.hand.budget()
+	if not b.is_empty():
+		var now: Dictionary = prism.hand.spent();var parts: Array = []
+		for k in ["draws", "triangles", "lights", "viewports"]:
+			if b.has(k):parts.append("%s %s/%s" % [k.to_upper(), _k(int(now[k])), _k(int(b[k]))])
+		var bar := Label.new();bar.text = "BUDGET · " + " · ".join(PackedStringArray(parts));bar.add_theme_font_size_override("font_size", 11);bar.add_theme_color_override("font_color", _col);bar.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;_page.add_child(bar)
 	var placed: Array = prism.placed_rows()
 	if placed.is_empty():_page.add_child(_note("Nothing placed yet. Make things on the HAND face; they are listed here, last on top."))
 	for i in range(placed.size() - 1, -1, -1):

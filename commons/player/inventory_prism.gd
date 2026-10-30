@@ -240,6 +240,9 @@ func _on_right_pressed(button_name: String) -> void:
 			var worn: Node3D = hand.worn_node()
 			if worn != null:
 				worn.fire_worn()
+			elif hand.current_tool() == "rubber":
+				var gone: bool = hand.erase_at(right, 8.0, _panel_rids());refresh_faces()
+				if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06 if gone else 0.15, 0.3 if gone else 0.6, 0.0)
 			elif hand.current != "":
 				# Garry's Mod: the thing appears where the wand points, settled by its own rule; pointing at nothing,
 				# it comes into the hand instead (the kit's tower-in-hand way)

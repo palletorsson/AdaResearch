@@ -243,8 +243,8 @@
     },
     {
       "bodies": 0,
-      "draws": 48,
-      "frame_draws": 49,
+      "draws": 7,
+      "frame_draws": 8,
       "frame_triangles": 602,
       "id": "crate",
       "labels": 2,
@@ -270,7 +270,22 @@
       "token": "tech_crate",
       "triangles": 836,
       "viewports": 0
+    },
+    {
+      "bodies": 0,
+      "draws": 3,
+      "frame_draws": 5,
+      "frame_triangles": 82,
+      "id": "rubber",
+      "labels": 1,
+      "lights": 0,
+      "name": "Rubber (take one back)",
+      "particles": 0,
+      "ticking": 0,
+      "token": "inventory_rubber",
+      "triangles": 24,
+      "viewports": 0
     }
   ],
-  "measured": "2026-10-30T09:12:14"
+  "measured": "2026-10-30T09:33:27"
 }

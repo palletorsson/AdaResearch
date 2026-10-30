@@ -91,6 +91,25 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   `/prefab-timeline`** (the building timeline's form, for prefabs: every item as a station in three.js with its
   model at VR scale, its card beside it, the floor and sequence edited there and written back to items.json by
   `PATCH /api/inventory`, which edits the file's text so nothing else moves).
+- **The budget, the rubber, the copies** (Palle, 2026-10-30: "an object budget in VR … we have to know the
+  polycount … rubber to remove specific items … keep the copies multi mesh"). `probe_inventory_cost.gd` makes one
+  of each and counts triangles, draws, lights, viewports, particles, bodies and ticking scripts into
+  `commons/data/inventory/costs.json` (tracked; re-run it when artifacts change). Nothing is over 2k
+  triangles; **draw calls** are what a Quest runs out of (the crate was 48, the tech crate 32, the clock 22),
+  then lights (the pill has two), then a printed strip's picture. So `items.json` carries a **budget**
+  (`draws 120 · triangles 60k · lights 2 · viewports 16`) spent by what the hand has placed
+  (`InventoryHand.spent`); one more that would overspend is **refused** - "BUDGET FULL: draws 118/120 - take
+  something back" and the long buzz - and nothing is ever taken away unasked (the first thing placed is the
+  foundation; the support graph would drop the tower). The PLACED face shows the bar. **The rubber** is an item
+  (`inventory_rubber`, `"tool": "rubber"`): worn as its miniature, the right trigger on a thing the hand placed
+  takes it back, on a tape strip takes the strip (`roll.remove_strip`), on the world nothing ("not yours").
+  **Copies are instanced**: the first copy of a prefab with a config pays its draws, every further copy with
+  the same config is an instance of the first's merged mesh in one `MultiMeshInstance3D`
+  (`inventory_instancer.gd`: the copy's own meshes go to layer 0, the instance follows it every physics
+  frame, a copy that leaves the tree leaves the multimesh) and pays no draws; `"instance": false` keeps an item
+  out (the clock's digits, the nozzle, the pill's lights, the tape). **The crate merges its planks**
+  (`mesh_merge.gd`, one ArrayMesh with a surface per material; `merge_meshes` off keeps every plank a node).
+  Probe checks L (refusal + the merged crate), N (two crates, one multimesh, no extra draws), M (the rubber).
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and
