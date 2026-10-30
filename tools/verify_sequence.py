@@ -115,7 +115,11 @@ def verify_sequence(seq_name):
         else:
             content_map_names.append(entry.strip())
 
-    if len(content_list) != len(maps_list):
+    if "content" not in seq_info:
+        # The content array is optional: 75 of 133 sequence entries omit it (measured 2026-10-30).
+        # Absent is not a mismatch; only a present array that disagrees with maps is.
+        print(f"  SKIP no content array (optional; {len(maps_list)} maps listed)")
+    elif len(content_list) != len(maps_list):
         print(f"{FAIL} content has {len(content_list)} entries, maps has {len(maps_list)}")
         errors += 1
     else:
