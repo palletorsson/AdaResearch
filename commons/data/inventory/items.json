@@ -1,12 +1,14 @@
 {
   "version": 1,
   "budget": {"draws": 120, "triangles": 60000, "lights": 2, "viewports": 16},
+  "_rules": "THE BASE RULE (Palle, 2026-10-30): a thing is placed on its grid point above whatever is there and FALLS - a body under gravity - so things stack; an item with \"gravity\": false is frozen where it is placed instead (the clock on its wall, the health plus floating, the nozzle, the path bricks - wedge and pyramid - which are walked on and so stand frozen). The ball keeps its own rule (frozen on the metre grid, the support graph); a rod with no ball near snaps its end to a metre point and lies along the grid.",
   "_budget": "What the hand's placed things may cost in one hall, spent against costs.json (probe_inventory_cost.gd measured one of each): draw calls are what a Quest runs out of first, lights second, a printed strip's picture third, triangles a sanity ceiling. Over it the trigger refuses with BUDGET FULL - nothing is taken away unasked; the rubber or grip takes things back. Copies of one prefab with one config are instanced (inventory_instancer.gd) and pay no draws after the first; an item with \"instance\": false is not (its meshes change: the clock's digits, the nozzle's spray, the pill's lights).",
   "doc": "The inventory: the things a hand can hold and place, read by the VR bracelet's PLACE mode (commons/player/inventory_hand.gd) and by the encyclopedia's /catalyst-inventory prism. THE PREFAB LIST (Palle, 2026-10-30: a list to flick through and add to the scene as in Garry's Mod; the clock first and only on a vertical surface, then planks with gravity, danger, health plus, wedge, pyramid, cone - curated, and part of the progression: each sequence or map gives new items). `floor` is the Void floor that hands the item over (0 = from the start; the Void's checkpoint must have reached it); `unlock` the sequence, for the grid maps. One item = one registry token, how it mounts (wall, floor, hand, any - or worn: a bangle on the bracelet's hand, used without holding it, as the tape is), its own defaults (the artifact's defaults stay as they are), and its knobs: each knob names an @export of the token's script (tools/inventory_check.py refuses a knob the code does not have). unlock: '' = always; a sequence id = after that sequence. scale (optional) shrinks the artifact as a whole, so a wall console becomes a hand-sized one without touching the artifact's own size. An item with 'coming' has no scene yet and shows greyed. The ball is the point and the rod the line; a rod let go near a ball's socket snaps in (playground_kit).",
   "items": [
     {
       "id": "clock",
       "name": "Clock (frame counter)",
+      "gravity": false,
       "instance": false,
       "token": "frame_counter_display",
       "unlock": "",
@@ -101,6 +103,7 @@
     {
       "id": "danger",
       "name": "Danger (hazard nozzle)",
+      "gravity": false,
       "instance": false,
       "token": "particle_emitter_hazard",
       "unlock": "",
@@ -113,6 +116,7 @@
     {
       "id": "health",
       "name": "Health plus",
+      "gravity": false,
       "token": "health_cross",
       "unlock": "",
       "floor": 0,
@@ -150,6 +154,7 @@
     {
       "id": "wedge",
       "name": "Wedge (2 m base, 1 m rise)",
+      "gravity": false,
       "token": "path_wedge",
       "unlock": "primitives",
       "floor": 0,
@@ -164,6 +169,7 @@
     {
       "id": "pyramid",
       "name": "Pyramid (1 m mound)",
+      "gravity": false,
       "token": "path_pyramid",
       "unlock": "primitives",
       "floor": 0,

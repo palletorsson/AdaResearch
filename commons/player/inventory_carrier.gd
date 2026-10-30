@@ -16,6 +16,7 @@ var item: Dictionary = {}
 var config: Dictionary = {}
 var work: Node3D = null
 var mount := "any"
+var gravity := true    # items.json "gravity": a body that falls (the base rule), or frozen where it is placed
 var extent := AABB()   # the work's merged mesh box, in the carrier's own space
 var how := ""          # how it last settled
 
@@ -30,7 +31,7 @@ func _ready() -> void:
 
 ## Instantiate the item's scene with its config and fit a collider to what it built.
 func build(it: Dictionary, cfg: Dictionary) -> bool:
-	item = it;config = cfg;mount = str(it.get("mount", "any"));name = "Carrier_" + str(it.get("id", "item"))
+	item = it;config = cfg;mount = str(it.get("mount", "any"));gravity = bool(it.get("gravity", true));name = "Carrier_" + str(it.get("id", "item"))
 	var path := Items.scene_for(str(it.get("token", "")))
 	if path == "" or not ResourceLoader.exists(path):return false
 	work = load(path).instantiate()
@@ -93,6 +94,11 @@ func settle() -> String:
 			var basis := Basis.looking_at(-n, Vector3.UP)   # -Z into the wall, +Z out of it
 			var pos: Vector3 = hit.position + n * (back + .002) - basis * Vector3(c.x, c.y, 0)
 			_freeze_at(Transform3D(basis, pos));how = "wall";settled.emit(self, how);return how
+	# THE BASE RULE (Palle, 2026-10-30: "grid snap above itself and then fall down, so we can place things on top of
+	# each other"): a thing with gravity is left a body where it is - it drops onto the floor or onto whatever
+	# stands there and rests; only a thing without gravity is stood by the ray and frozen
+	if gravity and mount != "wall":
+		freeze = false;gravity_scale = 1.0;how = "fall";settled.emit(self, how);return how
 	if mount in ["floor", "any"]:
 		var below := extent.size.y / 2.0 - c.y
 		# down at least the thing's own height past its bottom: a crate made 0.5 m above the floor still finds it
@@ -103,6 +109,7 @@ func settle() -> String:
 			var basis := Basis(Vector3.UP, yaw)
 			var pos: Vector3 = Vector3(from.x, hit.position.y + below + .002, from.z) - basis * Vector3(c.x, 0, c.z)
 			_freeze_at(Transform3D(basis, pos));how = "floor";settled.emit(self, how);return how
+	if not gravity:_freeze_at(global_transform);how = "stay"
 	settled.emit(self, how);return how
 
 func _freeze_at(t: Transform3D) -> void:

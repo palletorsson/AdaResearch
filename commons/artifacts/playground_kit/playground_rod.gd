@@ -89,7 +89,8 @@ func settle() -> int:
 			var d: float = p.distance_to(b.socket_global(i))
 			if d < best_d:best_d = d;best = b;best_i = i
 		if best != null and not (found.size() == 1 and found[0][1] == best and found[0][2] == best_i):found.append([end, best, best_i])
-	if found.is_empty():return 0
+	if found.is_empty():
+		_lie_on_grid();return 0
 	# place the rod: one end in its socket pointing out of it; two ends between their two sockets
 	var t := global_transform
 	if found.size() == 2:
@@ -161,6 +162,18 @@ func _physics_process(_delta: float) -> void:
 	_speed_before = linear_velocity.length()
 
 ## The stick: a body met faster than hit_speed is a hit, with the foam thwop (higher and louder the harder).
+## No ball in reach: the near end onto the nearest metre point, the rod along the nearest grid axis (x or z) in
+## the direction it was pointing, at its own height - a body still, so it drops onto what is under it.
+func _lie_on_grid() -> void:
+	if grid <= 0:return
+	var e0: Vector3 = end_global(0);var dir: Vector3 = global_basis.x.normalized()
+	var axis: Vector3 = Vector3.RIGHT * signf(dir.x) if absf(dir.x) >= absf(dir.z) else Vector3.BACK * signf(dir.z)
+	if axis.length() < .5:axis = Vector3.RIGHT
+	var p0 := Vector3(roundf(e0.x / grid) * grid, e0.y, roundf(e0.z / grid) * grid)
+	var basis := Basis(axis, Vector3.UP, axis.cross(Vector3.UP).normalized()).orthonormalized()   # +X along the grid
+	freeze = false;linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO
+	global_transform = Transform3D(basis, p0 + axis * length / 2.0)
+
 func _on_body_entered(body: Node) -> void:
 	var speed := maxf(linear_velocity.length(), _speed_before)
 	if speed < hit_speed:return

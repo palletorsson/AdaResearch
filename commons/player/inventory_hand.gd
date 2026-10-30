@@ -332,6 +332,7 @@ func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dict
 		if to_me.length() > .01:basis = Basis.looking_at(-to_me.normalized(), Vector3.UP)
 	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
 	if on_grid and mount == "floor":lift = .02   # a grid thing's origin is its base
+	if bool(it.get("gravity", true)) and not vertical:lift = maxf(lift, .06)   # above whatever is there, then the drop
 	out.xform = Transform3D(basis, where + n * lift);out.on_grid = on_grid;out.point = where
 	if mount == "wall" and not vertical:out.reason = str(it.get("name", current)) + " needs a wall";return out
 	if mount == "floor" and vertical:out.reason = str(it.get("name", current)) + " needs a floor";return out

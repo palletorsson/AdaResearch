@@ -242,10 +242,59 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().physics_frame
 	var at: Vector3 = wedge.global_position if wedge else Vector3.INF
-	var stood: bool = wedge != null and str(wedge.get("how")) == "floor" and bool(wedge.get("freeze"))
+	var stood: bool = wedge != null and str(wedge.get("how")) == "floor" and bool(wedge.get("freeze"))   # a path brick: walked on, so frozen on the floor
 	var east: bool = wedge != null and (-wedge.global_basis.z).dot(Vector3.RIGHT) > .98   # the knob turns clockwise from above: its north (-Z) now points east (+X)
 	var sized: bool = wedge != null and is_equal_approx(float(wedge.get("work").get("size")), 2.0) and is_equal_approx(float(wedge.get("work").get("height")), 1.0)
-	_check(report, "O grid: the wedge stands frozen on the floor at the metre point (1, _, -1), turned east by its knob, 2 m base and 1 m rise", wedge != null and stood and absf(at.x - 1.0) < .01 and absf(at.z + 1.0) < .01 and at.y > -.01 and east and sized, {"at": at, "at0": at0, "at1": at1, "stood": stood, "east": east, "sized": sized})
+	_check(report, "O grid: the wedge stands frozen on the floor at the metre point (1, _, -1), turned east by its knob, 2 m base and 1 m rise", wedge != null and stood and absf(at.x - 1.0) < .02 and absf(at.z + 1.0) < .02 and at.y > -.01 and at.y < .1 and east and sized, {"at": at, "at0": at0, "at1": at1, "stood": stood, "east": east, "sized": sized})
+	p.take_all_back()
+	# R - THE BASE RULE: a crate on its metre point; a cardboard box pointed at the crate's top is placed above it and
+	# FALLS onto it - things stack (Palle: "grid snap above itself and then fall down")
+	p.choose("crate")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(0.7);await _ticks(0.2)
+	p._on_right_pressed("trigger_click")
+	for i in 40:
+		await get_tree().physics_frame
+	var crate_r: Node3D = p.hand.placed[-1]
+	p.choose("cardboard")
+	for i in 3:
+		await get_tree().process_frame
+	var top: Vector3 = Vector3(1.0, 1.0, -1.0)
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), top + Vector3(0.3, 1.2, 0.9)).looking_at(top, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.3)
+	var at_r: Dictionary = p.hand.placement_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
+	p._on_right_pressed("trigger_click")
+	for i in 90:
+		await get_tree().physics_frame
+	var box_r: Node3D = p.hand.placed[-1]
+	var stacked: bool = box_r != crate_r and absf(box_r.global_position.x - 1.0) < .05 and absf(box_r.global_position.z + 1.0) < .05 and box_r.global_position.y > .9 and box_r.global_position.y < 1.2 and str(box_r.get("how")) == "fall"
+	_check(report, "R stack: the box aimed at the crate's top is put above it and falls onto it - resting on the crate at y about 1", stacked, {"hit": at_r.hit.get("position", null) if at_r.hit is Dictionary else null, "put_at": at_r.xform.origin, "box": box_r.global_position, "how": box_r.get("how"), "crate": crate_r.global_position})
+	# S - no gravity: the health plus is frozen where it is placed
+	p.choose("health")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(2.3);await _ticks(0.2)
+	p._on_right_pressed("trigger_click")
+	for i in 30:
+		await get_tree().physics_frame
+	var cross: Node3D = p.hand.placed[-1]
+	var stays: bool = bool(cross.get("freeze")) and str(cross.get("how")) in ["floor", "stay"] and cross.global_position.y > -.01
+	_check(report, "S no gravity: the health plus is frozen where it is placed", stays, {"how": cross.get("how"), "frozen": cross.get("freeze"), "at": cross.global_position})
+	# T2 - the rod with no ball near: its end on a metre point, lying along the grid
+	p.choose("rod")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(3.6);await _ticks(0.2)
+	p._on_right_pressed("trigger_click")
+	for i in 30:
+		await get_tree().physics_frame
+	var rod_t: Node3D = p.hand.placed[-1]
+	var e0: Vector3 = rod_t.end_global(0) if rod_t.has_method("end_global") else Vector3.INF
+	var ax: Vector3 = rod_t.global_basis.x.normalized()
+	var on_point: bool = absf(e0.x - roundf(e0.x)) < .03 and absf(e0.z - roundf(e0.z)) < .03
+	var along_axis: bool = absf(ax.x) > .98 or absf(ax.z) > .98
+	_check(report, "T2 rod on the grid: no ball near, its end sits on a metre point and it lies along a grid axis", on_point and along_axis, {"end0": e0, "axis": ax})
 	p.take_all_back()
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()

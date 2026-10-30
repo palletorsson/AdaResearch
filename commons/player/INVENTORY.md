@@ -121,6 +121,16 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   hand's colour, only beyond arm's reach; it reads the ranged area itself, since XR Tools recomputes its
   closest object only when a body enters or leaves (a hand turning onto a thing already inside sees nothing).
   `rig.grab_hint: false` removes it. The whole input tree, context by context, is `EVENT_TREE.md`.
+- **THE BASE RULE** (Palle, 2026-10-30: "grid snap above itself and then fall down, so we can place things on
+  top of each other; the six-point ball on the snap grid, the rod snapping to the metre grid's ends; other
+  objects may have no gravity"). A placed thing goes to its grid point a little above whatever the ray hit -
+  the floor or the top of another thing - and **falls** as a body onto it, so things stack (probe R: a box aimed
+  at a crate's top rests on the crate). An item with `"gravity": false` is stood by the ray and frozen instead:
+  the clock on its wall, the health plus, the nozzle, and the path bricks (wedge, pyramid), which are walked
+  on. The ball keeps its own rule (frozen on the metre grid, the support graph). A rod let go with no ball in
+  reach snaps its near end to the nearest metre point and lies along the nearest grid axis
+  (`playground_rod._lie_on_grid`), a body still. The carrier's `how` says what happened: wall · floor · fall ·
+  stay · free.
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and
