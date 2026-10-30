@@ -1,7 +1,7 @@
 {
   "registry_info": {
     "category": "inventory_tools",
-    "description": "Tools of the hand's inventory (commons/data/inventory/items.json) that are not things to leave in the world: the rubber takes one placed thing back.",
+    "description": "Tools of the hand's inventory (commons/data/inventory/items.json) that are not things to leave in the world: the rubber takes one placed thing back; the pin freezes a placed thing where it is or releases it.",
     "created": "2026-10-30"
   },
   "artifacts": {
@@ -16,6 +16,18 @@
       "include_in_map_data": false,
       "map_ready": false,
       "tags": ["inventory", "tool", "eraser"]
+    },
+    "inventory_pin": {
+      "lookup_name": "inventory_pin",
+      "scene": "res://commons/artifacts/inventory_pin/pin.tscn",
+      "class_name": "InventoryPin",
+      "name": "Pin",
+      "description": "A push pin: a red head on a steel shaft, 4.5 cm. The inventory's tool for Garry's Mod's physgun click - worn as a miniature on the right hand, the trigger on a thing the hand placed freezes it where it is (mid-air included), on a frozen one releases it to be a body again. Not a thing to place.",
+      "category": "inventory_tools",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "tags": ["inventory", "tool", "pin", "freeze"]
     }
   }
 }

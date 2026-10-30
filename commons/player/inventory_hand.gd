@@ -27,7 +27,7 @@ var notice := ""                  # one line for the HAND face: why the last tri
 var budget_override: Dictionary = {}   # a probe's budget instead of items.json's
 var _instancer: Node3D = null
 
-## The tool the current item is, "" for a thing to place ("rubber": the trigger erases instead).
+## The tool the current item is, "" for a thing to place ("rubber": the trigger erases instead; "pin": it freezes or releases).
 func current_tool() -> String:
 	return str(Items.item(current).get("tool", "")) if current != "" else ""
 
@@ -293,6 +293,38 @@ func spawn_at(xform: Transform3D) -> Node3D:
 	return node
 
 const SURFACES := 0xFFFFFFFF & ~((1 << 17) | (1 << 19))   # all solid bodies but the avatar and the collision hands
+const HANG_REACH := 2.0   # pointing at nothing: the thing hangs this far along the wand (Garry's Mod's frozen prop in the air)
+
+## Frozen where it is - a carrier by its pin, any other body (a plank) by its freeze.
+static func pin_node(n: Node) -> void:
+	if n.has_method("pin"):n.pin()
+	elif n is RigidBody3D:(n as RigidBody3D).freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;(n as RigidBody3D).linear_velocity = Vector3.ZERO;(n as RigidBody3D).angular_velocity = Vector3.ZERO;(n as RigidBody3D).freeze = true
+
+## A body again, under gravity.
+static func unpin_node(n: Node) -> void:
+	if n.has_method("unpin"):n.unpin()
+	elif n is RigidBody3D:(n as RigidBody3D).freeze = false;(n as RigidBody3D).gravity_scale = 1.0;(n as RigidBody3D).sleeping = false
+
+## THE PIN TOOL (the policy's rule 5): the thing pointed at, if the hand placed it, is frozen where it is - mid-air
+## included - or, frozen, released to be a body again. The kit's ball and rod keep their own rule ("hang": false) and
+## tape is not a body. Returns "pinned", "released" or "" (the notice says why).
+func pin_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> String:
+	var n: Node = pointed_own(controller, reach, exclude)
+	if n == null:notice = "point the pin at a thing you placed";return ""
+	if n.get("paid_length") != null and n.get("issuer") != null:notice = "tape is not pinned";return ""
+	var it := Items.item(str(n.get_meta("inv_item", "")))
+	if not bool(it.get("hang", true)):notice = str(it.get("name", "it")) + " keeps its own rule";return ""
+	if not n is RigidBody3D:notice = "not a body";return ""
+	notice = ""
+	if bool(n.get("freeze")):unpin_node(n);return "released"
+	pin_node(n);return "pinned"
+
+## Turned to face the person from `at`, upright; `square` snaps that to the nearest quarter turn (a grid thing is
+## placed square, or the sand-block rule would never catch it - it refuses a rest more than 8 degrees off).
+static func _facing(controller: Node3D, at: Vector3, square := false) -> Basis:
+	var to_me: Vector3 = controller.global_position - at;to_me.y = 0
+	var b: Basis = Basis.looking_at(-to_me.normalized(), Vector3.UP) if to_me.length() > .01 else Basis()
+	return Basis(Vector3.UP, roundf(b.get_euler().y / (PI / 2)) * (PI / 2)) if square else b
 
 ## GARRY'S MOD PLACEMENT (Palle, 2026-10-30: "add them to the scene like in garry's mod"): the item appears where
 ## the controller points - a ray along its -Z up to `reach` - standing on a floor or hung on a wall, settled by
@@ -302,7 +334,7 @@ const SURFACES := 0xFFFFFFFF & ~((1 << 17) | (1 << 19))   # all solid bodies but
 ## Where the current item would go if the trigger were pulled now: {ok, xform, hit, reason, on_grid, point}.
 ## The ghost asks every frame, the trigger once; one rule. Not ok: `reason` says why (the notice's words).
 func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dictionary:
-	var out := {"ok": false, "reason": "", "hit": {}, "xform": Transform3D(), "on_grid": false, "point": Vector3.ZERO}
+	var out := {"ok": false, "reason": "", "hit": {}, "xform": Transform3D(), "on_grid": false, "point": Vector3.ZERO, "hang": false}
 	if current == "":out.reason = "nothing in the hand";return out
 	var it := Items.item(current)
 	if it.is_empty() or str(it.get("coming", "")) != "":out.reason = "not here yet";return out
@@ -311,11 +343,25 @@ func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dict
 	var q := PhysicsRayQueryParameters3D.create(origin, origin + dir * reach, SURFACES)
 	q.exclude = exclude;q.hit_from_inside = false
 	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
-	if hit.is_empty():out.reason = "point at a floor or a wall";return out
+	var mount := str(it.get("mount", "any"));var cfg := config_for(current)
+	if hit.is_empty():
+		# FREE HANGING (the policy's rule 4, Garry's Mod's frozen prop in the air): pointing at nothing, the thing goes
+		# HANG_REACH along the wand - a grid thing to the nearest metre point in all three axes, to be frozen there (a
+		# floating platform); a loose thing falls from there. The kit's ball and rod ("hang": false) have rules of
+		# their own and come into the hand instead, as before; a wall thing still needs its wall.
+		if not bool(it.get("hang", true)):out.reason = "point at a floor or a wall";return out
+		if mount == "wall":out.reason = str(it.get("name", current)) + " needs a wall";return out
+		var where_h: Vector3 = origin + dir * HANG_REACH
+		var grid_h: bool = str(it.get("snap", "")) == "grid"
+		if grid_h:where_h = where_h.round()
+		var basis_h: Basis = Basis(Vector3.UP, -deg_to_rad(float(cfg["_yaw"]))) if cfg.has("_yaw") else _facing(controller, where_h, grid_h)
+		out.xform = Transform3D(basis_h, where_h);out.on_grid = grid_h;out.point = where_h;out.hang = true
+		if not fits(current):out.reason = notice;return out
+		out.ok = true;return out
 	out.hit = hit
-	var n: Vector3 = hit.normal;var vertical: bool = absf(n.y) < 0.5;var mount := str(it.get("mount", "any"))
+	var n: Vector3 = hit.normal;var vertical: bool = absf(n.y) < 0.5
 	var size: Array = it.get("size", [0.3, 0.3, 0.3]);var scale_k: float = float(it.get("scale", 1.0))
-	var cfg := config_for(current);var where: Vector3 = hit.position
+	var where: Vector3 = hit.position
 	# THE METRE GRID (Palle: "all artifacts should fit in the snap meter system like in the grid system"): an item
 	# with "snap": "grid" stands on the metre points of the floor, turned by its _yaw knob - north, east, south,
 	# west - instead of toward the person
@@ -327,9 +373,7 @@ func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dict
 		basis = Basis(basis.x, basis.y, -basis.z) if basis.z.dot(n) < 0 else basis
 	elif cfg.has("_yaw"):   # turned by the knob, on the world's compass
 		basis = Basis(Vector3.UP, -deg_to_rad(float(cfg["_yaw"])))
-	else:          # upright, turned to face the person
-		var to_me: Vector3 = controller.global_position - hit.position;to_me.y = 0
-		if to_me.length() > .01:basis = Basis.looking_at(-to_me.normalized(), Vector3.UP)
+	else:basis = _facing(controller, hit.position, on_grid)   # upright, turned to face the person; a grid thing square
 	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
 	if on_grid and mount == "floor":lift = .02   # a grid thing's origin is its base
 	if bool(it.get("gravity", true)) and not vertical:lift = maxf(lift, .06)   # above whatever is there, then the drop
@@ -347,8 +391,11 @@ func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) 
 	if node == null:
 		if notice == "":notice = "could not make it"   # spawn_at's own reason stands
 		return null
-	if node.has_method("settle"):node.settle()
-	if at.on_grid and node.is_inside_tree():node.global_position = Vector3(at.point.x, node.global_position.y, at.point.z)   # settling keeps its height, the grid its point
+	var it_s := Items.item(current)
+	if at.hang and (str(it_s.get("snap", "")) == "grid" or not bool(it_s.get("gravity", true))):
+		pin_node(node)   # hung in the air: a grid thing or one without gravity is frozen there; a loose thing falls from there
+	elif node.has_method("settle"):node.settle()
+	if at.on_grid and not at.hang and node.is_inside_tree():node.global_position = Vector3(at.point.x, node.global_position.y, at.point.z)   # settling keeps its height, the grid its point
 	# the headset's log is the only instrument for "it lands somewhere else in VR" (Palle, 2026-10-30): one line per placement
 	var origin: Node = controller.get_parent() if controller.get_parent() is XROrigin3D else null
 	print("[inventory] placed %s hand=%s hit=%s at=%s now=%s parent=%s origin=%s origin_scale=%s world_scale=%.3f how=%s" % [current, controller.global_position, at.hit.get("position", null), at.xform.origin, node.global_position, str(node.get_parent().get_path()) if node.get_parent() else "-", (origin as Node3D).global_position if origin else "-", (origin as Node3D).scale if origin else "-", XRServer.world_scale, str(node.get("how"))])

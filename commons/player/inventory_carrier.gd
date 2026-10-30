@@ -8,15 +8,20 @@ extends XRToolsPickable
 
 const Items = preload("res://commons/player/inventory_items.gd")
 
-signal settled(carrier: Node3D, how: String)   # "wall" | "floor" | "free"
+signal settled(carrier: Node3D, how: String)   # "wall" | "floor" | "fall" | "stay" | "block" | "pinned" | "free"
 
 const SNAP_REACH := 0.35
+const SQUARE := 0.14   # radians, 8 degrees: a rest closer than this to a grid pose becomes a block
 
 var item: Dictionary = {}
 var config: Dictionary = {}
 var work: Node3D = null
 var mount := "any"
 var gravity := true    # items.json "gravity": a body that falls (the base rule), or frozen where it is placed
+var snap_grid := false # items.json "snap": "grid": at rest, square, it takes its metre point and freezes (the sand-block rule)
+var pinned := false    # frozen by the pin (or hung in the air); the pin releases it
+var sleeps := 0        # diagnostic: how often the body fell asleep, and what the sand-block rule said last
+var sleep_note := ""
 var extent := AABB()   # the work's merged mesh box, in the carrier's own space
 var how := ""          # how it last settled
 
@@ -28,10 +33,11 @@ func _init() -> void:
 func _ready() -> void:
 	super._ready()
 	dropped.connect(func(_who):call_deferred("settle"))
+	sleeping_state_changed.connect(_on_sleep)
 
 ## Instantiate the item's scene with its config and fit a collider to what it built.
 func build(it: Dictionary, cfg: Dictionary) -> bool:
-	item = it;config = cfg;mount = str(it.get("mount", "any"));gravity = bool(it.get("gravity", true));name = "Carrier_" + str(it.get("id", "item"))
+	item = it;config = cfg;mount = str(it.get("mount", "any"));gravity = bool(it.get("gravity", true));snap_grid = str(it.get("snap", "")) == "grid";name = "Carrier_" + str(it.get("id", "item"))
 	var path := Items.scene_for(str(it.get("token", "")))
 	if path == "" or not ResourceLoader.exists(path):return false
 	work = load(path).instantiate()
@@ -116,7 +122,31 @@ func _freeze_at(t: Transform3D) -> void:
 	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;freeze = true
 	linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO;global_transform = t
 
+## THE SAND-BLOCK RULE (the policy of 2026-10-30, after Minecraft's falling sand): a grid thing that fell and came to
+## rest SQUARE - its up within 8 degrees of UP, its yaw within 8 degrees of a quarter turn - takes its metre point and
+## the nearest quarter turn and freezes. Physics was the gesture, the grid is the record: a dropped crate lands on a
+## crate and becomes a block, walkable, stackable, no slide, no physics once still. Resting tilted it stays a body,
+## and the pin decides.
+func _on_sleep() -> void:
+	sleeps += 1;sleep_note = "sleeping=%s how=%s grid=%s freeze=%s" % [sleeping, how, snap_grid, freeze]
+	if not sleeping or how != "fall" or not snap_grid or freeze or is_picked_up():return
+	var b := global_transform.basis.orthonormalized()
+	if b.y.dot(Vector3.UP) < cos(SQUARE):sleep_note = "tilted %.3f" % b.y.dot(Vector3.UP);return
+	var yaw := b.get_euler().y;var quarter := roundf(yaw / (PI / 2)) * (PI / 2)
+	if absf(angle_difference(yaw, quarter)) > SQUARE:sleep_note = "turned %.3f" % yaw;return
+	var p := global_position
+	_freeze_at(Transform3D(Basis(Vector3.UP, quarter), Vector3(roundf(p.x), p.y, roundf(p.z))));how = "block";settled.emit(self, how)
+
+## THE PIN (Garry's Mod's physgun right click): frozen where it is, mid-air included. Gravity is the item's default
+## at placement; this is the override, a verb on the placed thing.
+func pin() -> void:
+	_freeze_at(global_transform);pinned = true;how = "pinned";settled.emit(self, how)
+
+## Released: a body again, under gravity - it falls, and the sand-block rule may catch it where it lands.
+func unpin() -> void:
+	pinned = false;freeze = false;gravity_scale = 1.0;sleeping = false;how = "fall";settled.emit(self, how)
+
 ## Picked up again: a body once more, so it can be carried and settle elsewhere.
 func pick_up(by: Node3D) -> void:
-	freeze = false;how = ""
+	freeze = false;how = "";pinned = false
 	super.pick_up(by)

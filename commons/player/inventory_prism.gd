@@ -215,15 +215,15 @@ func _update_ghost() -> void:
 		if ghost == null:return
 	var at: Dictionary = hand.placement_at(right, 8.0, _panel_rids())
 	var hit: Dictionary = at.hit
-	if hit.is_empty():ghost.visible = false
-	else:
+	if hit.is_empty() and not bool(at.get("hang", false)):ghost.visible = false
+	else:   # on the hit, or hanging in the air 2 m along the wand
 		ghost.visible = true;ghost.global_transform = at.xform
 		_tint(ghost, Color(1, .25, .3, .45) if not at.ok else Color(1, 1, 1, .45))
 	ghost_ok = at.ok
 	if aim_line == null:
 		aim_line = MeshInstance3D.new();aim_line.name = "AimLine";aim_line.mesh = ImmediateMesh.new();add_child(aim_line);aim_line.top_level = true
 		var lm := StandardMaterial3D.new();lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED;lm.albedo_color = Color("f59e0b", .55);lm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;aim_line.material_override = lm
-	var to: Vector3 = hit.position if not hit.is_empty() else right.global_position - right.global_basis.z * 8.0
+	var to: Vector3 = hit.position if not hit.is_empty() else (at.point if bool(at.get("hang", false)) else right.global_position - right.global_basis.z * 8.0)
 	aim_line.global_transform = Transform3D.IDENTITY
 	var im: ImmediateMesh = aim_line.mesh;im.clear_surfaces();im.surface_begin(Mesh.PRIMITIVE_LINES);im.surface_add_vertex(right.global_position);im.surface_add_vertex(to);im.surface_end();aim_line.visible = true
 
@@ -310,6 +310,10 @@ func _on_right_pressed(button_name: String) -> void:
 			elif hand.current_tool() == "rubber":
 				var gone: bool = hand.erase_at(right, 8.0, _panel_rids());refresh_faces()
 				if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06 if gone else 0.15, 0.3 if gone else 0.6, 0.0)
+			elif hand.current_tool() == "pin":
+				# Garry's Mod's physgun click: the pointed thing frozen where it is, or released to fall
+				var did: String = hand.pin_at(right, 8.0, _panel_rids());refresh_faces()
+				if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06 if did != "" else 0.15, 0.3 if did != "" else 0.6, 0.0)
 			elif hand.current != "":
 				# Garry's Mod: the thing appears where the wand points, settled by its own rule; pointing at nothing,
 				# it comes into the hand instead (the kit's tower-in-hand way)

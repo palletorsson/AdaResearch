@@ -130,7 +130,36 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   on. The ball keeps its own rule (frozen on the metre grid, the support graph). A rod let go with no ball in
   reach snaps its near end to the nearest metre point and lies along the nearest grid axis
   (`playground_rod._lie_on_grid`), a body still. The carrier's `how` says what happened: wall · floor · fall ·
-  stay · free.
+  stay · block · pinned · free.
+- **THE POLICY: gravity, snap, no gravity** (Palle, 2026-10-30: "what is good principal thinking for these
+  objects relating to gravity, snap, no gravity, free hanging - how does it work in Garry's Mod?"). Garry's Mod
+  has one default (every prop is a body under gravity) and one override (the physgun's right click **freezes** it
+  where it is, mid-air included - every floating platform in every contraption is a frozen plank), and the freeze
+  is a state of the placed thing, never of the prop type. So, five rules, each the fallback under a thing's own
+  rule (the ball's support graph, the rod's socket, the tape outrank them):
+  1. **The sand-block rule** for grid things (`"snap": "grid"`: boxes, wedge, pyramid, planks). Placed on the
+     metre point above the aim, they fall, and **when they come to rest square** - up within 8° of UP, yaw within
+     8° of a quarter turn - they take their metre point and the nearest quarter turn and freeze
+     (`InventoryCarrier._on_sleep`, on the body's `sleeping_state_changed`; `how` = `block`). Physics is the
+     gesture, the grid is the record: a dropped crate lands on a crate and becomes a block, walkable, stackable,
+     no slide, no physics once still. Resting tilted it stays a body and the pin decides. (Minecraft's sand.)
+  2. **Loose things stay bodies**: pipe, pill, cone, cylinder - not grid-sized, so the grid has nothing to say.
+  3. **Wall things hang frozen**: clock, danger, health, danger X. Mount constraints are stronger than anything
+     Garry's Mod has, and pedagogical.
+  4. **Free hanging** (`InventoryHand.HANG_REACH` 2 m): pointing at nothing no longer puts the thing into the hand.
+     The ghost sits 2 m along the wand - a grid thing on the nearest metre point in **all three axes** - and the
+     trigger freezes it there (`placement_at` returns `hang: true`; `spawn_where_pointed` pins a grid or
+     no-gravity thing, a loose thing falls from that point). The kit's ball and rod carry `"hang": false` and come
+     into the hand as before; a wall thing still needs its wall.
+  5. **The pin** is a tool beside the rubber (`inventory_pin`, `"tool": "pin"`, a push pin worn as its
+     miniature): the trigger on a placed thing **freezes it where it is**; on a frozen one - pinned, hung, or a
+     block - **releases** it to be a body again, under gravity (`InventoryHand.pin_at`, the carrier's `pin` /
+     `unpin`; a plank, a pickable of its own, by its `freeze`). The item's `gravity` flag is only the DEFAULT at
+     placement; the pin is the override. The ball and the rod are refused ("keeps its own rule"), tape is not a body.
+  Two things watched: the sand-block rule never freezes a tilt (the 8° gate); the budget should one day count
+  sleeping bodies and frozen things apart - frozen is almost free, twenty tumbling crates is a physics bill. Probe
+  checks W (the box and the crate under it become blocks), U (the crate hangs frozen on (1, 1, -2) with the ghost
+  there first), V (the pin releases the hung crate, it lands as a block, releases again; the ball refused).
 - **The hand canvas** (Palle, 2026-10-30: "a large transparency canvas for hand painting - multiple indicators
   on your hands, touch the canvas with one or many, the stroke changes"; after Point Trace's GlassWall).
   `commons/artifacts/hand_canvas/`, item `canvas` (4 x 2.5 m, no gravity, on the grid, turned by its knob): every

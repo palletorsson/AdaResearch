@@ -268,8 +268,14 @@ func _ready() -> void:
 	for i in 90:
 		await get_tree().physics_frame
 	var box_r: Node3D = p.hand.placed[-1]
-	var stacked: bool = box_r != crate_r and absf(box_r.global_position.x - 1.0) < .05 and absf(box_r.global_position.z + 1.0) < .05 and box_r.global_position.y > .9 and box_r.global_position.y < 1.2 and str(box_r.get("how")) == "fall"
+	var stacked: bool = box_r != crate_r and absf(box_r.global_position.x - 1.0) < .05 and absf(box_r.global_position.z + 1.0) < .05 and box_r.global_position.y > .9 and box_r.global_position.y < 1.2 and str(box_r.get("how")) in ["fall", "block"]
 	_check(report, "R stack: the box aimed at the crate's top is put above it and falls onto it - resting on the crate at y about 1", stacked, {"hit": at_r.hit.get("position", null) if at_r.hit is Dictionary else null, "put_at": at_r.xform.origin, "box": box_r.global_position, "how": box_r.get("how"), "crate": crate_r.global_position})
+	# W - THE SAND-BLOCK RULE: at rest, square, the fallen box takes its metre point and freezes - a block; the crate under it too
+	for i in 60:
+		await get_tree().physics_frame
+	var block_w: bool = str(box_r.get("how")) == "block" and bool(box_r.get("freeze")) and absf(box_r.global_position.x - 1.0) < .001 and absf(box_r.global_position.z + 1.0) < .001 and absf(box_r.global_basis.y.dot(Vector3.UP) - 1.0) < .001
+	var crate_w: bool = str(crate_r.get("how")) == "block" and bool(crate_r.get("freeze"))
+	_check(report, "W sand block: resting square, the box is frozen on its metre point as a block; so is the crate it fell onto", block_w and crate_w, {"box_how": box_r.get("how"), "box_frozen": box_r.get("freeze"), "box": box_r.global_position, "crate_how": crate_r.get("how"), "box_sleeping": box_r.get("sleeping"), "box_sleeps": box_r.get("sleeps"), "box_note": box_r.get("sleep_note"), "crate_sleeps": crate_r.get("sleeps"), "box_up": box_r.global_basis.y, "tps": Engine.physics_ticks_per_second})
 	# S - no gravity: the health plus is frozen where it is placed
 	p.choose("health")
 	for i in 3:
@@ -296,6 +302,56 @@ func _ready() -> void:
 	var along_axis: bool = absf(ax.x) > .98 or absf(ax.z) > .98
 	_check(report, "T2 rod on the grid: no ball near, its end sits on a metre point and it lies along a grid axis", on_point and along_axis, {"end0": e0, "axis": ax})
 	p.take_all_back()
+	# U - FREE HANGING: the crate pointed at nothing (the wand level, 8 m of air) hangs 2 m along it, on a metre point in the
+	# air, frozen - a floating platform; the ghost stood there first
+	_palm(1.0);p.choose("crate")
+	for i in 3:
+		await get_tree().process_frame
+	_hand_level(0.6);await _ticks(0.3)
+	var at_u: Dictionary = p.hand.placement_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
+	var ghost_air: bool = p.ghost != null and p.ghost.visible and p.ghost.global_position.distance_to(Vector3(1, 1, -2)) < .05
+	p._on_right_pressed("trigger_click")
+	for i in 40:
+		await get_tree().physics_frame
+	var hung: Node3D = p.hand.placed[-1]
+	var hung_ok: bool = bool(at_u.get("hang", false)) and bool(hung.get("freeze")) and hung.global_position.distance_to(Vector3(1, 1, -2)) < .01 and str(hung.get("how")) == "pinned"
+	_check(report, "U hang: pointed at nothing, the crate hangs frozen on the metre point (1, 1, -2) 2 m along the wand; the ghost stood there first", hung_ok and ghost_air, {"hang": at_u.get("hang"), "ok": at_u.ok, "at": hung.global_position, "how": hung.get("how"), "frozen": hung.get("freeze"), "ghost_air": ghost_air})
+	# V - THE PIN: the trigger on the hung crate releases it - it falls, lands square and becomes a block; the trigger on the
+	# block releases it again (frozen is frozen, whoever froze it); the ball is refused - it keeps its own rule
+	p.choose("pin")
+	for i in 3:
+		await get_tree().process_frame
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), Vector3(1.0, 1.5, 0.0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.3)
+	var pin_mini: bool = p.hand.mini_node() != null and str(p.hand.mini_node().name) == "Mini_pin"
+	p._on_right_pressed("trigger_click")
+	var released: bool = not bool(hung.get("freeze")) and str(hung.get("how")) == "fall"
+	for i in 120:
+		await get_tree().physics_frame
+	var landed: bool = hung.global_position.y < .05 and str(hung.get("how")) == "block" and bool(hung.get("freeze")) and absf(hung.global_position.x - 1.0) < .001 and absf(hung.global_position.z + 2.0) < .001
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), Vector3(1.0, 0.5, 0.0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.3)
+	var did_v: String = p.hand.pin_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
+	var released2: bool = did_v == "released" and not bool(hung.get("freeze"))
+	p.choose("point")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(3.0);await _ticks(0.2)
+	p._on_right_pressed("trigger_click")
+	for i in 45:   # the ball's own rule moves it onto its grid point a few frames after it is made: aim at where it ENDS
+		await get_tree().physics_frame
+	var ball_v: Node3D = p.hand.placed[-1]
+	p.choose("pin")
+	for i in 3:
+		await get_tree().process_frame
+	# straight down from half a metre above the ball (Basis(RIGHT, -PI/2) turns the wand's -Z to DOWN, as _hand's -PI/4 turns it 45
+	# degrees); a pose is in the ORIGIN's space and the player body has moved the origin by now, so it goes through its inverse
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(Vector3.RIGHT, -PI / 2), ball_v.global_position + Vector3(0, 0.5, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.3)
+	var did_ball: String = p.hand.pin_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
+	var ball_refused: bool = did_ball == "" and p.hand.notice.ends_with("keeps its own rule")
+	_check(report, "V pin: worn as a miniature; on the hung crate it releases it - it falls and lands as a block; on the block it releases again; on the ball, refused (its own rule)", pin_mini and released and landed and released2 and ball_refused, {"mini": pin_mini, "released": released, "landed": landed, "at": hung.global_position, "how": hung.get("how"), "released2": did_v, "ball": did_ball, "notice": p.hand.notice, "sleeping": hung.get("sleeping"), "sleeps": hung.get("sleeps"), "note": hung.get("sleep_note"), "frozen": hung.get("freeze"), "ball_name": ball_v.name, "ball_at": ball_v.global_position, "ball_layer": ball_v.get("collision_layer"), "placed": p.hand.placed.size(), "ray_hit": _ray_name(rig.get_node("RightHand")), "ctrl": rig.get_node("RightHand").global_transform})
+	p.take_all_back();_palm(0.0)
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()
 	for i in 4:
@@ -320,6 +376,15 @@ func _palm(up: float) -> void:
 ## The right hand a metre up at x, aiming 45 degrees down along -Z: its aim lands on the floor at (x, 0, -1).
 func _hand(x: float) -> void:
 	_right.set_pose(&"aim", Transform3D(Basis(Vector3.RIGHT, -PI / 4), Vector3(x, 1.0, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+
+## The right hand a metre up at x, aiming level along -Z: 8 m of air, nothing hit; the hang point is (x, 1, -2).
+func _hand_level(x: float) -> void:
+	_right.set_pose(&"aim", Transform3D(Basis(), Vector3(x, 1.0, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+
+func _ray_name(ctrl: Node3D) -> String:
+	var q := PhysicsRayQueryParameters3D.create(ctrl.global_position, ctrl.global_position - ctrl.global_basis.z * 8.0, 0xFFFFFFFF & ~((1 << 17) | (1 << 19)))
+	var h := get_world_3d().direct_space_state.intersect_ray(q)
+	return "%s at %s" % [str(h.collider.name) if not h.is_empty() else "-", str(h.get("position", "-"))]
 
 func _ticks(seconds: float) -> void:
 	for i in int(ceil(seconds * Engine.physics_ticks_per_second)):

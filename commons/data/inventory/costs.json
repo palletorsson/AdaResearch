@@ -315,7 +315,37 @@
       "token": "inventory_rubber",
       "triangles": 24,
       "viewports": 0
+    },
+    {
+      "bodies": 0,
+      "draws": 3,
+      "frame_draws": 5,
+      "frame_triangles": 334,
+      "id": "pin",
+      "labels": 1,
+      "lights": 0,
+      "name": "Pin (freeze / release)",
+      "particles": 0,
+      "ticking": 0,
+      "token": "inventory_pin",
+      "triangles": 288,
+      "viewports": 0
+    },
+    {
+      "bodies": 1,
+      "draws": 8,
+      "frame_draws": 9,
+      "frame_triangles": 266,
+      "id": "canvas",
+      "labels": 1,
+      "lights": 0,
+      "name": "Hand canvas (4 m glass)",
+      "particles": 0,
+      "ticking": 1,
+      "token": "hand_canvas",
+      "triangles": 64,
+      "viewports": 1
     }
   ],
-  "measured": "2026-10-30T09:55:44"
+  "measured": "2026-10-30T17:46:02"
 }

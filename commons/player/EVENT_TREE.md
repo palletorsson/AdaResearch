@@ -39,10 +39,13 @@ pointer on a face/switch ── the face's button / the switch      XR Tools Fun
 trigger, pointing at nothing of the UI:
   ├─ current = tape (worn) ──── roll.fire_worn / release_worn     tape_roll/roll.gd (leg rule, tap-tap)
   ├─ current = rubber (tool) ── hand.erase_at(pointed)            inventory_hand.gd
+  ├─ current = pin (tool) ───── hand.pin_at(pointed)              frozen where it is / released to fall (Garry's Mod's physgun click)
   ├─ current = a prefab ─────── hand.spawn_where_pointed           ghost shows the place first; refused: notice + long buzz
   │     ├─ hit a wall  ──── mount wall|any: hung, back to the wall
-  │     ├─ hit a floor ──── mount floor|any: standing; snap:grid → the metre point, turned by _yaw
-  │     ├─ hit nothing ──── hand.spawn_in: into the hand (the kit's tower-in-hand way)
+  │     ├─ hit a floor ──── mount floor|any: snap:grid → the metre point above, turned by _yaw, FALLS; at rest square → a block (frozen on the grid)
+  │     │                   gravity:false → stood and frozen; loose things stay bodies
+  │     ├─ hit nothing ──── FREE HANGING: 2 m along the wand (a grid thing on the 3D metre point), frozen there; a loose thing falls from there
+  │     │                   the ball and the rod (hang:false): hand.spawn_in, into the hand; a wall thing: "needs a wall"
   │     └─ over budget ──── BUDGET FULL, nothing made
   └─ current = nothing ──────── nothing
 grip, palette up:
@@ -68,5 +71,6 @@ the item's colour when the place is good, red when it would be refused (a floor 
 ## Not in the tree yet
 
 - the per-context default (workbench up, glass on X) — the number has no home
+- the budget counts a frozen block and a tumbling body alike; frozen is almost free
 - the bracelet's PLACE mode does not show the ghost (the grid maps place from the hand)
 - a hall's own switches and the palette's faces both answer the pointer; whoever is hit first wins
