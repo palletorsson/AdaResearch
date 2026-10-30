@@ -93,6 +93,29 @@ func _ready() -> void:
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("void_x_select.png"))
 	_check(report, "S select: the right pointer on the Tape card, trigger through the tracker: tape chosen, the roll worn on the right hand, no tape laid", prism.hand.current == "tape" and roll != null and roll.get_parent().name == "RightHand" and roll.segments.is_empty() and roll.start_anchor.is_empty(), {"current": prism.hand.current, "pointer_target_before_press": str(target_before.name) if target_before else "", "worn": roll != null})
+	# U - PLACEMENT where the origin is far from (0,0,0) (Palle, 2026-10-30: "in VR the placement only happens
+	# around 0,0,0"): the crate chosen, the right hand aimed 45 degrees down at the floor beside the player, the
+	# trigger pulled through the tracker: the crate must land at the hit, within 2 m of the hand, not near the origin
+	prism.choose("crate")
+	for i in 6:
+		await get_tree().process_frame
+	var rh: Node3D = _rt(origin)
+	_right.set_pose(&"aim", Transform3D(Basis(Vector3.RIGHT, -PI / 4), Vector3(0.25, 1.0, -0.25)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	for i in 12:
+		await get_tree().process_frame
+	var at_u: Dictionary = prism.hand.placement_at(rh, 8.0, prism._panel_rids())
+	var ghost_pos: Vector3 = prism.ghost.global_position if prism.ghost != null else Vector3.INF
+	_right.set_input(&"trigger_click", true)
+	for i in 6:
+		await get_tree().process_frame
+	_right.set_input(&"trigger_click", false)
+	for i in 12:
+		await get_tree().physics_frame
+	var made_u: Node3D = prism.hand.placed[-1] if not prism.hand.placed.is_empty() else null
+	var pos_u: Vector3 = made_u.global_position if made_u else Vector3.INF
+	var near_hand: bool = made_u != null and pos_u.distance_to(rh.global_position) < 2.5
+	var near_origin: bool = made_u != null and pos_u.length() < 2.5
+	_check(report, "U placement far from the origin: the crate lands by the hand where the ray hit, not near (0,0,0)", made_u != null and near_hand and not near_origin, {"hand": rh.global_position, "hit": at_u.hit.get("position", null) if at_u.hit is Dictionary else null, "xform_origin": at_u.xform.origin, "ok": at_u.ok, "reason": at_u.reason, "ghost": ghost_pos, "placed_at": pos_u, "origin": (origin as Node3D).global_position, "notice": prism.hand.notice})
 	# T - the ▶ ear, the same way
 	var ear: Control = ui.buttons["ear+1"];var ec: Vector2 = ear.get_global_rect().get_center()
 	var on_ear: Vector3 = face.to_global(Vector3((ec.x / vp_size.x - .5) * scr.x, (.5 - ec.y / vp_size.y) * scr.y, 0))

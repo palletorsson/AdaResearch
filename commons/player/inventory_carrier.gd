@@ -95,7 +95,8 @@ func settle() -> String:
 			_freeze_at(Transform3D(basis, pos));how = "wall";settled.emit(self, how);return how
 	if mount in ["floor", "any"]:
 		var below := extent.size.y / 2.0 - c.y
-		var from := global_transform * c;var to := from + Vector3.DOWN * (extent.size.y / 2.0 + SNAP_REACH)
+		# down at least the thing's own height past its bottom: a crate made 0.5 m above the floor still finds it
+		var from := global_transform * c;var to := from + Vector3.DOWN * (extent.size.y / 2.0 + maxf(SNAP_REACH, extent.size.y))
 		var q := PhysicsRayQueryParameters3D.create(from, to, 1, mine);var hit := space.intersect_ray(q)
 		if not hit.is_empty() and hit.normal.y > .7:
 			var yaw := global_transform.basis.get_euler().y

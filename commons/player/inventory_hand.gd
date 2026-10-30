@@ -348,7 +348,15 @@ func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) 
 		return null
 	if node.has_method("settle"):node.settle()
 	if at.on_grid and node.is_inside_tree():node.global_position = Vector3(at.point.x, node.global_position.y, at.point.z)   # settling keeps its height, the grid its point
+	# the headset's log is the only instrument for "it lands somewhere else in VR" (Palle, 2026-10-30): one line per placement
+	var origin: Node = controller.get_parent() if controller.get_parent() is XROrigin3D else null
+	print("[inventory] placed %s hand=%s hit=%s at=%s now=%s parent=%s origin=%s origin_scale=%s world_scale=%.3f how=%s" % [current, controller.global_position, at.hit.get("position", null), at.xform.origin, node.global_position, str(node.get_parent().get_path()) if node.get_parent() else "-", (origin as Node3D).global_position if origin else "-", (origin as Node3D).scale if origin else "-", XRServer.world_scale, str(node.get("how"))])
+	call_deferred("_report_later", node, current)
 	notice = "";return node
+
+func _report_later(node: Node3D, id: String) -> void:
+	await get_tree().physics_frame;await get_tree().physics_frame
+	if is_instance_valid(node) and node.is_inside_tree():print("[inventory] %s two physics frames on: now=%s frozen=%s" % [id, node.global_position, str(node.get("freeze"))])
 
 ## Make the current item in a controller's hand: picked up at once by that hand's pickup function; with no
 ## pickup (a desktop), left 0.35 m ahead of the hand and settled.
