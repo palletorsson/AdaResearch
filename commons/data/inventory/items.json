@@ -125,14 +125,16 @@
     },
     {
       "id": "triangle",
-      "name": "Triangle",
-      "token": "",
+      "name": "Triangle ruler (wooden)",
+      "token": "mod_triangle_ruler",
       "unlock": "primitives",
+      "floor": 0,
       "mount": "any",
-      "size": [1.0, 0.87, 0.05],
-      "defaults": {},
-      "knobs": [],
-      "coming": "the playground workshop"
+      "size": [2.0, 1.0, 2.0],
+      "defaults": {"term": "triangle_ruler"},
+      "knobs": [
+        {"key": "show_construction", "label": "Shows", "choices": [ "false", "true" ], "names": [ "the thing", "how it was built" ]}
+      ]
     },
     {
       "id": "wedge",

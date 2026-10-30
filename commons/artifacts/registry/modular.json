@@ -744,6 +744,43 @@
     "expr": "association(cross_lines)"
    }
   },
+  "mod_triangle_ruler": {
+   "lookup_name": "mod_triangle_ruler",
+   "name": "modular · triangle_ruler",
+   "description": "triangle_ruler = association(triangle, wood) = a wooden set square (Palle, 2026-10-30: association(triangle) = wooden triangle ruler). A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/composite.tscn",
+   "default_params": {
+    "term": "triangle_ruler"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    2,
+    1,
+    1
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "association"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "triangle_ruler",
+    "chapter": "association",
+    "from": [
+     "triangle"
+    ],
+    "expr": "association(triangle, wood) = a wooden set square (Palle, 2026-10-30: association(triangle) = wooden triangle ruler)"
+   }
+  },
   "mod_triangle": {
    "lookup_name": "mod_triangle",
    "name": "modular · triangle",

@@ -106,7 +106,8 @@ func refresh() -> void:
 		"tape":_page_tape()
 		"placed":_page_placed()
 
-const PER_PAGE := 6
+const PER_PAGE := 10   # two columns of five (Palle: "pack the prefab buttons in columns")
+const COLUMNS := 2
 
 func _page_hand() -> void:
 	var current: String = prism.hand.current
@@ -118,11 +119,14 @@ func _page_hand() -> void:
 		elif it.mount == "wall":sub = "on a wall"
 		cards.append({"id": it.id, "name": it.name, "sub": sub, "dim": it.coming != "" or not it.unlocked})
 	var pages: int = int(ceil(float(cards.size()) / PER_PAGE));var page: int = posmod(prism.hand_page, pages)
+	var grid := GridContainer.new();grid.columns = COLUMNS;grid.add_theme_constant_override("h_separation", 6);grid.add_theme_constant_override("v_separation", 6);_page.add_child(grid)
 	for c in cards.slice(page * PER_PAGE, (page + 1) * PER_PAGE):
 		var on: bool = c.id == current
-		var b := _btn(c.name + ("" if c.sub == "" else "\n" + c.sub), _col, on, c.dim);b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		b.add_theme_font_size_override("font_size", 13);_compact(b)
-		b.pressed.connect(prism.choose.bind(c.id));buttons["item:" + c.id] = b;_page.add_child(b)
+		var title: String = str(c.name).split(" (")[0]   # the short name; the bracket goes to the second line
+		var sub: String = c.sub if c.sub != "" else (str(c.name).split(" (")[1].trim_suffix(")") if str(c.name).find(" (") >= 0 else "")
+		var b := _btn(title + ("" if sub == "" else "\n" + sub), _col, on, c.dim);b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.add_theme_font_size_override("font_size", 12);_compact(b);b.custom_minimum_size = Vector2(0, 44)
+		b.pressed.connect(prism.choose.bind(c.id));buttons["item:" + c.id] = b;grid.add_child(b)
 	# the flick row: ◀ page n/N ▶ (Garry's Mod's spawn list, a page at a time)
 	var r := _row();var prev := _btn("◀", _col, false, pages <= 1);prev.custom_minimum_size.x = 48;prev.pressed.connect(prism.flick.bind(-1, pages));r.add_child(prev)
 	var pl := Label.new();pl.text = "%d / %d" % [page + 1, pages];pl.size_flags_horizontal = Control.SIZE_EXPAND_FILL;pl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

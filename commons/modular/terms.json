@@ -553,6 +553,22 @@
         "story": "danger"
       }
     },
+    "triangle_ruler": {
+      "chapter": "association",
+      "label": "triangle_ruler",
+      "expr": "association(triangle, wood) = a wooden set square (Palle, 2026-10-30: association(triangle) = wooden triangle ruler)",
+      "from": [
+        "triangle"
+      ],
+      "build": {
+        "op": "associate",
+        "of": {
+          "t": "triangle"
+        },
+        "surface": "wood",
+        "story": "set square"
+      }
+    },
     "triangle": {
       "chapter": "triangle",
       "label": "triangle",
