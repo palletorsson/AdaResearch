@@ -87,7 +87,10 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   (`path_wedge`), pyramid (`path_pyramid`), traffic cone, cylinder, capsule - fourteen, to be curated.
   **Progression:** an item's `floor` is the Void floor that hands it over (unlocked once the Void's
   `checkpoint` has reached it; 0 = from the start), `unlock` its sequence for the grid maps; a locked card
-  is dim and says "found on floor N". All floors are 0 until Palle sets them.
+  is dim and says "found on floor N". All floors are 0 until Palle sets them - **curated at the encyclopedia's
+  `/prefab-timeline`** (the building timeline's form, for prefabs: every item as a station in three.js with its
+  model at VR scale, its card beside it, the floor and sequence edited there and written back to items.json by
+  `PATCH /api/inventory`, which edits the file's text so nothing else moves).
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and
