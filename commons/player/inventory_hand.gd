@@ -81,7 +81,7 @@ func pointed_own(controller: Node3D, reach := 8.0, exclude: Array = []) -> Node:
 	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
 	if hit.is_empty():return null
 	var n: Node = hit.collider
-	while n != null:
+	while n != null and n is Node3D:   # up to the scene's root, never into the Window (a typed Array[Node3D] refuses it)
 		if placed.has(n):return n
 		if n.get("paid_length") != null and n.get("issuer") != null:return n
 		n = n.get_parent()
@@ -94,7 +94,7 @@ func erase_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> bool:
 	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
 	if hit.is_empty():notice = "point the rubber at a thing";return false
 	var n: Node = hit.collider
-	while n != null:
+	while n != null and n is Node3D:
 		if placed.has(n):
 			placed.erase(n)
 			if n.has_method("is_picked_up") and n.is_picked_up() and n.has_method("drop"):n.drop()
