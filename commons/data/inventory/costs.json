@@ -155,15 +155,15 @@
       "bodies": 1,
       "draws": 2,
       "frame_draws": 3,
-      "frame_triangles": 50,
+      "frame_triangles": 58,
       "id": "wedge",
       "labels": 0,
       "lights": 0,
-      "name": "Wedge (walkable ramp)",
+      "name": "Wedge (2 m base, 1 m rise)",
       "particles": 0,
       "ticking": 0,
       "token": "path_wedge",
-      "triangles": 16,
+      "triangles": 24,
       "viewports": 0
     },
     {
@@ -234,7 +234,7 @@
       "id": "cardboard",
       "labels": 0,
       "lights": 0,
-      "name": "Cardboard box",
+      "name": "Cardboard box (0.5 m)",
       "particles": 0,
       "ticking": 0,
       "token": "cardboard_box",
@@ -249,7 +249,7 @@
       "id": "crate",
       "labels": 2,
       "lights": 0,
-      "name": "Wooden crate",
+      "name": "Wooden crate (1 m)",
       "particles": 0,
       "ticking": 0,
       "token": "crate",
@@ -264,11 +264,41 @@
       "id": "techcrate",
       "labels": 0,
       "lights": 0,
-      "name": "Tech crate",
+      "name": "Tech crate (2 m)",
       "particles": 0,
       "ticking": 0,
       "token": "tech_crate",
       "triangles": 836,
+      "viewports": 0
+    },
+    {
+      "bodies": 1,
+      "draws": 1,
+      "frame_draws": 2,
+      "frame_triangles": 46,
+      "id": "box3",
+      "labels": 0,
+      "lights": 0,
+      "name": "Box (3 m)",
+      "particles": 0,
+      "ticking": 0,
+      "token": "mod_cube",
+      "triangles": 12,
+      "viewports": 0
+    },
+    {
+      "bodies": 1,
+      "draws": 1,
+      "frame_draws": 2,
+      "frame_triangles": 46,
+      "id": "concrete4",
+      "labels": 0,
+      "lights": 0,
+      "name": "Concrete block (4 m)",
+      "particles": 0,
+      "ticking": 0,
+      "token": "mod_concrete_block",
+      "triangles": 12,
       "viewports": 0
     },
     {
@@ -287,5 +317,5 @@
       "viewports": 0
     }
   ],
-  "measured": "2026-10-30T09:33:27"
+  "measured": "2026-10-30T09:55:44"
 }

@@ -78,8 +78,11 @@
       "floor": 0,
       "mount": "any",
       "size": [1.0, 0.06, 0.25],
+      "snap": "grid",
       "defaults": {},
-      "knobs": []
+      "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]}
+      ]
     },
     {
       "id": "plank2",
@@ -89,8 +92,11 @@
       "floor": 0,
       "mount": "any",
       "size": [2.0, 0.06, 0.25],
+      "snap": "grid",
       "defaults": {},
-      "knobs": []
+      "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]}
+      ]
     },
     {
       "id": "danger",
@@ -143,14 +149,17 @@
     },
     {
       "id": "wedge",
-      "name": "Wedge (walkable ramp)",
+      "name": "Wedge (2 m base, 1 m rise)",
       "token": "path_wedge",
       "unlock": "primitives",
       "floor": 0,
       "mount": "floor",
-      "size": [1.0, 0.5, 1.0],
-      "defaults": {},
-      "knobs": []
+      "size": [2.0, 1.0, 2.0],
+      "snap": "grid",
+      "defaults": {"shape": "ramp", "size": 2.0, "height": 1.0},
+      "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]}
+      ]
     },
     {
       "id": "pyramid",
@@ -160,8 +169,11 @@
       "floor": 0,
       "mount": "floor",
       "size": [1.0, 0.7, 1.0],
+      "snap": "grid",
       "defaults": {},
-      "knobs": []
+      "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]}
+      ]
     },
     {
       "id": "cone",
@@ -199,44 +211,80 @@
     },
     {
       "id": "cardboard",
-      "name": "Cardboard box",
+      "name": "Cardboard box (0.5 m)",
       "token": "cardboard_box",
       "unlock": "",
       "floor": 0,
       "mount": "any",
-      "size": [0.4, 0.35, 0.4],
-      "defaults": {},
+      "size": [0.5, 0.5, 0.5],
+      "snap": "grid",
+      "defaults": {"box_width": 0.5, "box_height": 0.5, "box_depth": 0.5},
       "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]},
         {"key": "flap_open_deg", "label": "Flaps", "range": [0, 90, 15], "unit": "°"},
         {"key": "show_flaps", "label": "Top", "choices": [ "true", "false" ], "names": [ "with flaps", "cut flat" ]}
       ]
     },
     {
       "id": "crate",
-      "name": "Wooden crate",
+      "name": "Wooden crate (1 m)",
       "token": "crate",
       "unlock": "",
       "floor": 0,
       "mount": "any",
-      "size": [0.72, 0.68, 0.72],
-      "defaults": {},
+      "size": [1.0, 1.0, 1.0],
+      "snap": "grid",
+      "defaults": {"crate_width": 1.0, "crate_depth": 1.0, "crate_height": 1.0},
       "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]},
         {"key": "show_x_brace", "label": "Front", "choices": [ "true", "false" ], "names": [ "X-braced", "plain planks" ]},
         {"key": "plank_count", "label": "Planks a side", "range": [3, 8, 1]}
       ]
     },
     {
       "id": "techcrate",
-      "name": "Tech crate",
+      "name": "Tech crate (2 m)",
       "token": "tech_crate",
       "unlock": "",
       "floor": 0,
       "mount": "any",
-      "size": [1.2, 0.55, 0.6],
-      "defaults": {},
+      "size": [2.0, 2.0, 2.0],
+      "snap": "grid",
+      "defaults": {"crate_width": 2.0, "crate_height": 2.0, "crate_depth": 2.0},
       "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]},
         {"key": "vent_style", "label": "Vents", "choices": [ "x", "fan", "louver" ], "names": [ "X", "fan grille", "louvres" ]},
         {"key": "show_leds", "label": "Lights", "choices": [ "true", "false" ], "names": [ "LEDs on", "dark" ]}
+      ]
+    },
+    {
+      "id": "box3",
+      "name": "Box (3 m)",
+      "token": "mod_cube",
+      "unlock": "",
+      "floor": 0,
+      "mount": "floor",
+      "snap": "grid",
+      "size": [3.0, 3.0, 3.0],
+      "scale": 6.0,
+      "defaults": {"term": "cube"},
+      "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]}
+      ]
+    },
+    {
+      "id": "concrete4",
+      "name": "Concrete block (4 m)",
+      "token": "mod_concrete_block",
+      "unlock": "",
+      "floor": 0,
+      "mount": "floor",
+      "snap": "grid",
+      "size": [4.0, 4.0, 4.0],
+      "scale": 8.0,
+      "defaults": {"term": "concrete_block"},
+      "knobs": [
+        {"key": "_yaw", "label": "Turned", "choices": [ "0", "90", "180", "270" ], "names": [ "north", "east", "south", "west" ]}
       ]
     },
     {

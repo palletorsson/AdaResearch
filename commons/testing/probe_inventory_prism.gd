@@ -153,7 +153,8 @@ func _ready() -> void:
 	for m in second.find_children("*", "MeshInstance3D", true, false):
 		if (m as MeshInstance3D).layers != 0:hidden = false
 	var spent_now: Dictionary = p.hand.spent()
-	_check(report, "N copies: the second crate is an instance of the first - 2 in one multimesh, its meshes on layer 0, and it pays no draws", two and hidden and spent_now.draws == 48, {"count": inst.count(key), "groups": inst.groups(), "hidden": hidden, "spent": spent_now})
+	var one_crate: int = int(p.hand.Items.cost_of("crate").draws)
+	_check(report, "N copies: the second crate is an instance of the first - 2 in one multimesh, its meshes on layer 0, and it pays no draws", two and hidden and spent_now.draws == one_crate, {"count": inst.count(key), "groups": inst.groups(), "hidden": hidden, "spent": spent_now, "one_crate": one_crate})
 	# M - the rubber: pointed at the second crate, the trigger takes it back; at the floor, nothing and a notice
 	p.choose("rubber")
 	for i in 3:
@@ -170,6 +171,23 @@ func _ready() -> void:
 	p._on_right_pressed("trigger_click");await get_tree().process_frame
 	var refused_m: bool = p.hand.placed.size() == before_m - 1 and p.hand.notice.begins_with("not yours")
 	_check(report, "M rubber: worn as a miniature; the trigger on the second crate takes it back (one instance left); on the floor, 'not yours'", rubber_worn and erased and refused_m, {"worn": rubber_worn, "erased": erased, "refused": refused_m, "notice": p.hand.notice})
+	# O - the metre grid: the wedge, turned east by its knob, stands on the nearest metre point of the floor
+	p.choose("wedge");p.set_knob("_yaw", "90")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(0.7);await _ticks(0.2)   # the aim lands at (0.7, 0, -1): the metre point is (1, 0, -1)
+	p._on_right_pressed("trigger_click")
+	var wedge: Node3D = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
+	var at0: Vector3 = wedge.global_position if wedge else Vector3.INF
+	await get_tree().physics_frame
+	var at1: Vector3 = wedge.global_position if wedge else Vector3.INF
+	for i in 3:
+		await get_tree().physics_frame
+	var at: Vector3 = wedge.global_position if wedge else Vector3.INF
+	var stood: bool = wedge != null and str(wedge.get("how")) == "floor" and bool(wedge.get("freeze"))
+	var east: bool = wedge != null and (-wedge.global_basis.z).dot(Vector3.RIGHT) > .98   # the knob turns clockwise from above: its north (-Z) now points east (+X)
+	var sized: bool = wedge != null and is_equal_approx(float(wedge.get("work").get("size")), 2.0) and is_equal_approx(float(wedge.get("work").get("height")), 1.0)
+	_check(report, "O grid: the wedge stands frozen on the floor at the metre point (1, _, -1), turned east by its knob, 2 m base and 1 m rise", wedge != null and stood and absf(at.x - 1.0) < .01 and absf(at.z + 1.0) < .01 and at.y > -.01 and east and sized, {"at": at, "at0": at0, "at1": at1, "stood": stood, "east": east, "sized": sized})
 	p.take_all_back()
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()

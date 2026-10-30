@@ -83,9 +83,11 @@ def main():
         if names is None:
             print(f"{iid}: {where}"); findings += 1
             continue
-        if "scale" in it and not (0 < float(it["scale"]) <= 4):
-            print(f"{iid}: scale is a factor between 0 and 4"); findings += 1
+        if "scale" in it and not (0 < float(it["scale"]) <= 10):
+            print(f"{iid}: scale is a factor between 0 and 10"); findings += 1
         for key in list(it.get("defaults", {})) + [k["key"] for k in it.get("knobs", [])]:
+            if key.startswith("_"):   # the hand's own placement knobs (_yaw): not the artifact's
+                continue
             if key not in names:
                 print(f"{iid}: '{key}' is not an @export of {where}"); findings += 1
         for k in it.get("knobs", []):

@@ -299,20 +299,30 @@ func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) 
 	if mount == "wall" and not vertical:notice = str(it.get("name", current)) + " needs a wall";return null
 	if mount == "floor" and vertical:notice = str(it.get("name", current)) + " needs a floor";return null
 	var size: Array = it.get("size", [0.3, 0.3, 0.3]);var scale_k: float = float(it.get("scale", 1.0))
+	var cfg := config_for(current);var where: Vector3 = hit.position
+	# THE METRE GRID (Palle: "all artifacts should fit in the snap meter system like in the grid system"): an item
+	# with "snap": "grid" stands on the metre points of the floor, turned by its _yaw knob - north, east, south,
+	# west - instead of toward the person
+	var on_grid: bool = str(it.get("snap", "")) == "grid" and not vertical
+	if on_grid:where = Vector3(roundf(hit.position.x), hit.position.y, roundf(hit.position.z))
 	var basis := Basis()
 	if vertical:   # facing out of the wall, its back to it
 		basis = Basis.looking_at(-n, Vector3.UP) if absf(n.dot(Vector3.UP)) < .99 else Basis()
 		basis = Basis(basis.x, basis.y, -basis.z) if basis.z.dot(n) < 0 else basis
+	elif cfg.has("_yaw"):   # turned by the knob, on the world's compass
+		basis = Basis(Vector3.UP, -deg_to_rad(float(cfg["_yaw"])))
 	else:          # upright, turned to face the person
 		var to_me: Vector3 = controller.global_position - hit.position;to_me.y = 0
 		if to_me.length() > .01:basis = Basis.looking_at(-to_me.normalized(), Vector3.UP)
 	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
+	if on_grid and str(it.get("mount", "")) == "floor":lift = .02   # a grid thing's origin is its base
 	notice = ""
-	var node: Node3D = spawn_at(Transform3D(basis, hit.position + n * lift))
+	var node: Node3D = spawn_at(Transform3D(basis, where + n * lift))
 	if node == null:
 		if notice == "":notice = "could not make it"   # spawn_at's own reason (the budget) stands
 		return null
 	if node.has_method("settle"):node.settle()
+	if on_grid and node.is_inside_tree():node.global_position = Vector3(where.x, node.global_position.y, where.z)   # settling keeps its height, the grid its point
 	notice = "";return node
 
 ## Make the current item in a controller's hand: picked up at once by that hand's pickup function; with no

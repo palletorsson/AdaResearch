@@ -84,7 +84,9 @@ func settle() -> String:
 	if mount in ["wall", "any"]:
 		# cast from the centre out through the back (-Z), as far as the back is from the centre plus the reach
 		var back := extent.size.z / 2.0 - c.z   # from the origin to the back face (the counter's body is all behind its origin)
-		var from := global_transform * c;var to := from - global_transform.basis.z.normalized() * (back + SNAP_REACH)
+		# the ray starts at the CENTRE, so it must run half the extent to the back face, then the reach (the origin
+		# -to-back distance `back` is for placing; a 2 m wedge with its origin at its base never reached the floor)
+		var from := global_transform * c;var to := from - global_transform.basis.z.normalized() * (extent.size.z / 2.0 + SNAP_REACH)
 		var q := PhysicsRayQueryParameters3D.create(from, to, 1, mine);var hit := space.intersect_ray(q)
 		if not hit.is_empty() and absf(hit.normal.y) < .5:
 			var n: Vector3 = hit.normal.normalized()
@@ -93,7 +95,7 @@ func settle() -> String:
 			_freeze_at(Transform3D(basis, pos));how = "wall";settled.emit(self, how);return how
 	if mount in ["floor", "any"]:
 		var below := extent.size.y / 2.0 - c.y
-		var from := global_transform * c;var to := from + Vector3.DOWN * (below + SNAP_REACH)
+		var from := global_transform * c;var to := from + Vector3.DOWN * (extent.size.y / 2.0 + SNAP_REACH)
 		var q := PhysicsRayQueryParameters3D.create(from, to, 1, mine);var hit := space.intersect_ray(q)
 		if not hit.is_empty() and hit.normal.y > .7:
 			var yaw := global_transform.basis.get_euler().y
