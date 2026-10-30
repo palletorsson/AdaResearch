@@ -74,6 +74,20 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
   collision off, frozen, pickup disabled, out of every group so a tiny ball never enters the support graph
   (`InventoryHand._sync_mini`, from `sync_worn`). A knob turned remakes it, so the miniature wears the colour.
   The trigger makes the full-size one; the bracelet's hand gets the same through the same call.
+- **The prefab list, placed like Garry's Mod** (Palle, 2026-10-30: "a prefab list we can flick from and add to
+  the scene like in Garry's Mod; the first is the counter artifact and that can only be placed on a vertical
+  surface, then planks with gravity, danger, health plus, wedge, pyramid, cone - curated, part of the
+  progression"). The HAND face flicks through pages of six cards (◀ n/N ▶); the right trigger casts a ray
+  along the wand (8 m, every solid body but the hands and the palette's own panels) and the thing appears
+  where it hits - its back to a wall, standing on a floor turned to face you - and settles by its own rule
+  (`InventoryHand.spawn_where_pointed`). An item that mounts `wall` refuses a floor with the notice "needs a
+  wall" and a long buzz (the clock); `floor` refuses a wall; pointing at nothing puts it into the hand as
+  before. The list so far: clock, tape, ball, rod, triangle (coming), plank 1 m / 2 m (`timber_plank_1m/2m`,
+  pickables with gravity), danger (`particle_emitter_hazard`), health plus (`health_cross`), wedge
+  (`path_wedge`), pyramid (`path_pyramid`), traffic cone, cylinder, capsule - fourteen, to be curated.
+  **Progression:** an item's `floor` is the Void floor that hands it over (unlocked once the Void's
+  `checkpoint` has reached it; 0 = from the start), `unlock` its sequence for the grid maps; a locked card
+  is dim and says "found on floor N". All floors are 0 until Palle sets them.
 - `rig.inventory: false` switches it off. A grid map's bracelet keeps its own hand.
 - **hand.json is applied only when it is newer than the game** (`InventoryHand._born`): a file the page wrote
   yesterday no longer overrides the choice made in VR a second later (which made the first probe lay no tape and

@@ -22,6 +22,10 @@ var _mini: Node3D = null          # the current item as a MINIATURE over the han
 var _mini_id := ""
 const MINI := 0.10                # the miniature's longest side - the clock came out at 3 cm with its own scale folded in
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
+var notice := ""                  # one line for the HAND face: why the last trigger did nothing ("the clock needs a wall")
+
+func _void() -> Node:
+	return get_tree().get_first_node_in_group("void_game") if is_inside_tree() else null
 var _hand_stamp := -1
 var _born: int = int(Time.get_unix_time_from_system()) - 1   # a hand.json older than this game is not applied unasked
 var _hand_path := ""
@@ -53,7 +57,7 @@ func _read_hand() -> void:
 				if is_instance_valid(held) and held.has_method("apply_config") and str(held.get("item").get("id", "")) == str(id):held.apply_config(config_for(str(id)))
 				_apply_worn(str(id))
 	var want := str(data.get("item", current))
-	if want != current and (want == "" or (not Items.item(want).is_empty() and Items.unlocked(Items.item(want), lab))):
+	if want != current and (want == "" or (not Items.item(want).is_empty() and Items.unlocked(Items.item(want), lab, _void()))):
 		current = want;item_changed.emit(current)
 
 ## The items as the panel lists them.
@@ -61,13 +65,13 @@ func available() -> Array:
 	var out := []
 	for it in Items.items():
 		var id := str(it.get("id", ""))
-		out.append({"id": id, "name": str(it.get("name", id)), "unlocked": Items.unlocked(it, lab), "coming": str(it.get("coming", "")), "knobs": it.get("knobs", []), "values": config_for(id)})
+		out.append({"id": id, "name": str(it.get("name", id)), "unlocked": Items.unlocked(it, lab, _void()), "coming": str(it.get("coming", "")), "knobs": it.get("knobs", []), "values": config_for(id), "mount": str(it.get("mount", "any")), "floor": int(it.get("floor", 0))})
 	return out
 
 func set_current(id: String) -> void:
-	if id != "" and (Items.item(id).is_empty() or not Items.unlocked(Items.item(id), lab)):return
+	if id != "" and (Items.item(id).is_empty() or not Items.unlocked(Items.item(id), lab, _void())):return
 	if id == current:return
-	current = id;item_changed.emit(current)
+	current = id;notice = "";item_changed.emit(current)
 
 func set_knob(key: String, value: Variant) -> void:
 	if current == "":return
@@ -193,6 +197,39 @@ func spawn_at(xform: Transform3D) -> Node3D:
 	if node.get_parent() == null:get_tree().current_scene.add_child(node)
 	node.global_transform = xform
 	placed.append(node);return node
+
+const SURFACES := 0xFFFFFFFF & ~((1 << 17) | (1 << 19))   # all solid bodies but the avatar and the collision hands
+
+## GARRY'S MOD PLACEMENT (Palle, 2026-10-30: "add them to the scene like in garry's mod"): the item appears where
+## the controller points - a ray along its -Z up to `reach` - standing on a floor or hung on a wall, settled by
+## its own rule (the carrier's wall snap, the ball's grid, the rod's sockets, a plank's gravity). An item that
+## mounts "wall" asks for a vertical surface and refuses a floor with a notice; "floor" the other way round.
+## `exclude` is for bodies the ray must look past (the palette's own panels). Returns the node, or null.
+func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) -> Node3D:
+	if current == "":return null
+	var it := Items.item(current)
+	if it.is_empty() or str(it.get("coming", "")) != "":notice = "not here yet";return null
+	var origin: Vector3 = controller.global_position;var dir: Vector3 = -controller.global_basis.z
+	var q := PhysicsRayQueryParameters3D.create(origin, origin + dir * reach, SURFACES)
+	q.exclude = exclude;q.hit_from_inside = false
+	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
+	if hit.is_empty():notice = "point at a floor or a wall";return null
+	var n: Vector3 = hit.normal;var vertical: bool = absf(n.y) < 0.5;var mount := str(it.get("mount", "any"))
+	if mount == "wall" and not vertical:notice = str(it.get("name", current)) + " needs a wall";return null
+	if mount == "floor" and vertical:notice = str(it.get("name", current)) + " needs a floor";return null
+	var size: Array = it.get("size", [0.3, 0.3, 0.3]);var scale_k: float = float(it.get("scale", 1.0))
+	var basis := Basis()
+	if vertical:   # facing out of the wall, its back to it
+		basis = Basis.looking_at(-n, Vector3.UP) if absf(n.dot(Vector3.UP)) < .99 else Basis()
+		basis = Basis(basis.x, basis.y, -basis.z) if basis.z.dot(n) < 0 else basis
+	else:          # upright, turned to face the person
+		var to_me: Vector3 = controller.global_position - hit.position;to_me.y = 0
+		if to_me.length() > .01:basis = Basis.looking_at(-to_me.normalized(), Vector3.UP)
+	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
+	var node: Node3D = spawn_at(Transform3D(basis, hit.position + n * lift))
+	if node == null:notice = "could not make it";return null
+	if node.has_method("settle"):node.settle()
+	notice = "";return node
 
 ## Make the current item in a controller's hand: picked up at once by that hand's pickup function; with no
 ## pickup (a desktop), left 0.35 m ahead of the hand and settled.

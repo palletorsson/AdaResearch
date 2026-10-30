@@ -104,6 +104,19 @@ func refresh_faces() -> void:
 
 # ── what the faces ask ───────────────────────────────────────────────────────────────────────────────────────
 
+var hand_page := 0   # the HAND face flicks through pages of cards (Garry's Mod's spawn list)
+
+func flick(d: int, pages: int) -> void:
+	hand_page = posmod(hand_page + d, maxi(pages, 1));refresh_faces()
+
+## The palette's own panel bodies, for a placement ray to look past.
+func _panel_rids() -> Array:
+	var out: Array = []
+	for vp in faces:
+		var b: Node = vp.get_node_or_null("StaticBody3D")
+		if b != null:out.append(b.get_rid())
+	return out
+
 ## The ears roll the drum one face (Open Brush snaps 120° with a jiggle and a haptic tick; four faces, 90° here).
 ## The ears roll the drum one face (Open Brush snaps 120° with a jiggle and a haptic tick; four faces, 90° here).
 func turn(d: int) -> void:
@@ -228,12 +241,17 @@ func _on_right_pressed(button_name: String) -> void:
 			if worn != null:
 				worn.fire_worn()
 			elif hand.current != "":
-				var pk: Node = XRToolsFunctionPickup.find_instance(right)
-				if pk != null and is_instance_valid(pk.get("picked_up_object")):return   # the hand is full
-				var made: Node3D = hand.spawn_in(right)
-				if made != null:
-					refresh_faces()
-					if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.35, 0.0)
+				# Garry's Mod: the thing appears where the wand points, settled by its own rule; pointing at nothing,
+				# it comes into the hand instead (the kit's tower-in-hand way)
+				var made: Node3D = hand.spawn_where_pointed(right, 8.0, _panel_rids())
+				if made == null and hand.notice == "point at a floor or a wall":
+					var pk: Node = XRToolsFunctionPickup.find_instance(right)
+					if pk != null and is_instance_valid(pk.get("picked_up_object")):return   # the hand is full
+					made = hand.spawn_in(right)
+				refresh_faces()
+				if right.has_method("trigger_haptic_pulse"):
+					if made != null:right.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.35, 0.0)
+					else:right.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.6, 0.0)   # a longer buzz: not here
 		"grip_click":
 			if not showing:return
 			take_back()

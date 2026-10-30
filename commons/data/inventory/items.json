@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "doc": "The inventory: the things a hand can hold and place, read by the VR bracelet's PLACE mode (commons/player/inventory_hand.gd) and by the encyclopedia's /catalyst-inventory prism. One item = one registry token, how it mounts (wall, floor, hand, any - or worn: a bangle on the bracelet's hand, used without holding it, as the tape is), its own defaults (the artifact's defaults stay as they are), and its knobs: each knob names an @export of the token's script (tools/inventory_check.py refuses a knob the code does not have). unlock: '' = always; a sequence id = after that sequence. scale (optional) shrinks the artifact as a whole, so a wall console becomes a hand-sized one without touching the artifact's own size. An item with 'coming' has no scene yet and shows greyed. The ball is the point and the rod the line; a rod let go near a ball's socket snaps in (playground_kit).",
+  "doc": "The inventory: the things a hand can hold and place, read by the VR bracelet's PLACE mode (commons/player/inventory_hand.gd) and by the encyclopedia's /catalyst-inventory prism. THE PREFAB LIST (Palle, 2026-10-30: a list to flick through and add to the scene as in Garry's Mod; the clock first and only on a vertical surface, then planks with gravity, danger, health plus, wedge, pyramid, cone - curated, and part of the progression: each sequence or map gives new items). `floor` is the Void floor that hands the item over (0 = from the start; the Void's checkpoint must have reached it); `unlock` the sequence, for the grid maps. One item = one registry token, how it mounts (wall, floor, hand, any - or worn: a bangle on the bracelet's hand, used without holding it, as the tape is), its own defaults (the artifact's defaults stay as they are), and its knobs: each knob names an @export of the token's script (tools/inventory_check.py refuses a knob the code does not have). unlock: '' = always; a sequence id = after that sequence. scale (optional) shrinks the artifact as a whole, so a wall console becomes a hand-sized one without touching the artifact's own size. An item with 'coming' has no scene yet and shows greyed. The ball is the point and the rod the line; a rod let go near a ball's socket snaps in (playground_kit).",
   "items": [
     {
       "id": "clock",
@@ -74,6 +74,105 @@
       "defaults": {},
       "knobs": [],
       "coming": "the playground workshop"
+    },
+    {
+      "id": "plank",
+      "name": "Plank (1 m, timber)",
+      "token": "timber_plank_1m",
+      "unlock": "primitives",
+      "floor": 0,
+      "mount": "any",
+      "size": [1.0, 0.06, 0.25],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "plank2",
+      "name": "Plank (2 m, timber)",
+      "token": "timber_plank_2m",
+      "unlock": "primitives",
+      "floor": 0,
+      "mount": "any",
+      "size": [2.0, 0.06, 0.25],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "danger",
+      "name": "Danger (hazard nozzle)",
+      "token": "particle_emitter_hazard",
+      "unlock": "",
+      "floor": 0,
+      "mount": "floor",
+      "size": [0.4, 0.6, 0.4],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "health",
+      "name": "Health plus",
+      "token": "health_cross",
+      "unlock": "",
+      "floor": 0,
+      "mount": "floor",
+      "size": [0.5, 0.5, 0.12],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "wedge",
+      "name": "Wedge (walkable ramp)",
+      "token": "path_wedge",
+      "unlock": "primitives",
+      "floor": 0,
+      "mount": "floor",
+      "size": [1.0, 0.5, 1.0],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "pyramid",
+      "name": "Pyramid (1 m mound)",
+      "token": "path_pyramid",
+      "unlock": "primitives",
+      "floor": 0,
+      "mount": "floor",
+      "size": [1.0, 0.7, 1.0],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "cone",
+      "name": "Traffic cone",
+      "token": "trafficcone",
+      "unlock": "",
+      "floor": 0,
+      "mount": "floor",
+      "size": [0.4, 0.7, 0.4],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "cylinder",
+      "name": "Cylinder",
+      "token": "cylinder",
+      "unlock": "primitives",
+      "floor": 0,
+      "mount": "any",
+      "size": [0.5, 1.0, 0.5],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "capsule",
+      "name": "Capsule",
+      "token": "capsule",
+      "unlock": "primitives",
+      "floor": 0,
+      "mount": "any",
+      "size": [0.5, 1.0, 0.5],
+      "defaults": {},
+      "knobs": []
     }
   ]
 }

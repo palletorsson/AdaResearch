@@ -53,7 +53,10 @@ static func config_for(it: Dictionary, values: Dictionary) -> Dictionary:
 	return cfg
 
 ## Unlocked: no unlock, or the sequence is completed (LabManager / MapProgressionManager answer; neither = unlocked).
-static func unlocked(it: Dictionary, lab: Node) -> bool:
+## In the Void (`void_game`, its `checkpoint` floor) an item with `floor` is unlocked once that floor is reached; in a
+## grid map, once its `unlock` sequence is completed (LabManager); with neither authority, unlocked.
+static func unlocked(it: Dictionary, lab: Node, void_game: Node = null) -> bool:
+	if void_game != null and int(it.get("floor", 0)) > 0:return int(void_game.get("checkpoint")) >= int(it.get("floor", 0))
 	var seq := str(it.get("unlock", ""))
 	if seq == "":return true
 	if lab != null and lab.has_method("is_sequence_completed"):return bool(lab.is_sequence_completed(seq))

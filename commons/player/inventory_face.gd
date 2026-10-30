@@ -106,16 +106,31 @@ func refresh() -> void:
 		"tape":_page_tape()
 		"placed":_page_placed()
 
+const PER_PAGE := 6
+
 func _page_hand() -> void:
 	var current: String = prism.hand.current
 	var cards: Array = [{"id": "", "name": "Nothing", "sub": "the hand is empty", "dim": false}]
 	for it in prism.hand.available():
-		cards.append({"id": it.id, "name": it.name, "sub": ("coming: " + it.coming) if it.coming != "" else ("" if it.unlocked else "locked until " + prism.unlock_of(it.id)), "dim": it.coming != "" or not it.unlocked})
-	for c in cards:
+		var sub := ""
+		if it.coming != "":sub = "coming: " + it.coming
+		elif not it.unlocked:sub = ("found on floor %d" % it.floor) if it.floor > 0 else ("after " + prism.unlock_of(it.id))
+		elif it.mount == "wall":sub = "on a wall"
+		cards.append({"id": it.id, "name": it.name, "sub": sub, "dim": it.coming != "" or not it.unlocked})
+	var pages: int = int(ceil(float(cards.size()) / PER_PAGE));var page: int = posmod(prism.hand_page, pages)
+	for c in cards.slice(page * PER_PAGE, (page + 1) * PER_PAGE):
 		var on: bool = c.id == current
 		var b := _btn(c.name + ("" if c.sub == "" else "\n" + c.sub), _col, on, c.dim);b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.add_theme_font_size_override("font_size", 13);_compact(b)
 		b.pressed.connect(prism.choose.bind(c.id));buttons["item:" + c.id] = b;_page.add_child(b)
-	_page.add_child(_note("Right trigger makes it in your hand; the tape is worn there. Right grip, with the palette up, takes the last thing back."))
+	# the flick row: ◀ page n/N ▶ (Garry's Mod's spawn list, a page at a time)
+	var r := _row();var prev := _btn("◀", _col, false, pages <= 1);prev.custom_minimum_size.x = 48;prev.pressed.connect(prism.flick.bind(-1, pages));r.add_child(prev)
+	var pl := Label.new();pl.text = "%d / %d" % [page + 1, pages];pl.size_flags_horizontal = Control.SIZE_EXPAND_FILL;pl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	pl.add_theme_font_size_override("font_size", 13);pl.add_theme_color_override("font_color", FG);r.add_child(pl)
+	var next := _btn("▶", _col, false, pages <= 1);next.custom_minimum_size.x = 48;next.pressed.connect(prism.flick.bind(1, pages));r.add_child(next)
+	buttons["page:-"] = prev;buttons["page:+"] = next;_page.add_child(r)
+	var notice: String = prism.hand.notice
+	_page.add_child(_note(notice.to_upper() if notice != "" else "Point the right hand at a floor or a wall and pull the trigger: the thing appears there. At nothing: it comes into the hand. Grip, palette up, takes the last back."))
 
 func _page_knobs() -> void:
 	_page.add_theme_constant_override("separation", 4)

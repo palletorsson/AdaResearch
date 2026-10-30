@@ -84,27 +84,39 @@ func _ready() -> void:
 	# G - TAKE BACK LAST on the PLACED face
 	(p.uis[3].buttons["take_back"] as Button).pressed.emit()
 	await get_tree().process_frame;await get_tree().process_frame
-	_check(report, "G take back: the strip is gone, the roll refilled, PLACED empty", not is_instance_valid(strip) and is_equal_approx(roll.remaining, 30.0) and p.placed_rows().is_empty(), {"rows": p.placed_rows(), "remaining": roll.remaining})
+	_check(report, "G take back: the strip is gone, the roll refilled to its length, PLACED empty", not is_instance_valid(strip) and is_equal_approx(roll.remaining, roll.roll_length) and p.placed_rows().is_empty(), {"rows": p.placed_rows(), "remaining": roll.remaining})
 	# H - the ball: made into the right pickup; grip with the prism up takes it back; palm down hides
 	(p.uis[0].buttons["item:point"] as Button).pressed.emit()
 	for i in 3:
 		await get_tree().process_frame
+	_hand(0.3)   # aiming at the floor a metre ahead: Garry's Mod placement, the ball appears there and takes its grid point
+	await _ticks(0.2)
 	p._on_right_pressed("trigger_click")
-	for i in 4:
+	for i in 6:
 		await get_tree().physics_frame
-	var pk: Node = XRToolsFunctionPickup.find_instance(rig.get_node("RightHand"))
-	var held: Node = pk.get("picked_up_object") if pk else null
-	var made: bool = held != null and held.has_method("hub") and not roll.visible
+	var held: Node = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
+	var made: bool = held != null and held.has_method("hub") and not roll.visible and held.on_grid and is_equal_approx(held.global_position.y, held.hub()) and not held.is_picked_up()
 	# the MINIATURE: the chosen ball as a small copy over the right hand, inert, 10 cm for its 17 cm
 	var mini: Node3D = p.hand.mini_node()
 	var mini_ok: bool = mini != null and mini.get_parent() == rig.get_node("RightHand") and mini.has_method("hub") and absf(mini.scale.x - .10 / .17) < .01 and mini.collision_layer == 0 and not mini.is_in_group("playground_balls") and mini != held
+	# K - the clock wants a wall: pointed at the floor it refuses with a notice; the HAND face flicks pages
+	(p.uis[0].buttons["item:clock"] as Button).pressed.emit()
+	for i in 3:
+		await get_tree().process_frame
+	var before: int = p.hand.placed.size()
+	p._on_right_pressed("trigger_click")
+	await get_tree().physics_frame
+	var refused: bool = p.hand.placed.size() == before and p.hand.notice.find("needs a wall") >= 0
+	var pages_ok: bool = p.uis[0].buttons.has("page:+")
+	p.flick(1, 3);var flicked: bool = p.hand_page == 1
+	_check(report, "K prefabs: the clock pointed at the floor is refused with 'needs a wall'; the HAND face has pages and flicks", refused and pages_ok and flicked, {"refused": refused, "notice": p.hand.notice, "pages": pages_ok, "page": p.hand_page})
 	p._on_right_pressed("grip_click")
 	await get_tree().process_frame;await get_tree().process_frame
 	var taken: bool = not is_instance_valid(held) and p.hand.placed.is_empty()
 	_palm(0.0)
 	for i in 4:
 		await get_tree().process_frame
-	_check(report, "H ball: the card + trigger makes a ball in the right pickup (tape put away); grip takes it back; palm down hides the prism", made and taken and not p.showing and not p.prism.visible and not p.ring.visible, {"made": made, "taken": taken, "showing": p.showing})
+	_check(report, "H ball: the card + trigger puts a ball where the hand points, on its grid point (tape put away); grip takes it back; palm down hides the prism", made and taken and not p.showing and not p.prism.visible and not p.ring.visible, {"made": made, "taken": taken, "showing": p.showing, "placed_at": held.global_position if is_instance_valid(held) else null})
 	_check(report, "J miniature: the chosen ball shown as a 10 cm inert copy over the right hand, out of the support graph, not the made one", mini_ok, {"mini": mini != null, "scale": mini.scale.x if mini else 0, "layer": mini.collision_layer if mini else -1, "in_group": mini.is_in_group("playground_balls") if mini else null})
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()
