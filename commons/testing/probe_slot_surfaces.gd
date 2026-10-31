@@ -59,14 +59,14 @@ func _ready() -> void:
 	var spec := {"version": 1, "units": "metres", "places": [{"id": "place", "at": [0, 0], "y": 4, "size": [10, 8], "depth": 1, "type": "plastic_pool", "rim": 1, "access": {"outer": "ramp", "inner": "ramp"}, "activity": {"artifact": "noise_space", "config": {"height_scale": 1.0, "noise_scale": 3.0}}}]}
 	var built: Dictionary = Builder.new().compile(spec)
 	var acts: Array = built.get("recipe", {}).get("activities", [])
-	var act_ok: bool = (built.get("errors", []) as Array).is_empty() and acts.size() == 1 and acts[0].artifact == "noise_space" and acts[0].config.slot_size == [10, 8] and is_equal_approx(float(acts[0].config.slot_depth), 1.0) and is_equal_approx(float(acts[0].position[1]), 3.0) and is_equal_approx(float(acts[0].config.noise_scale), 3.0)
+	var act_ok: bool = (built.get("errors", []) as Array).is_empty() and acts.size() == 1 and acts[0].artifact == "noise_space" and acts[0].config.slot_size == [10, 8] and is_equal_approx(float(acts[0].config.slot_depth), 1.0) and is_equal_approx(float(acts[0].position[1]), 3.03) and is_equal_approx(float(acts[0].config.noise_scale), 3.0)
 	var made: Node3D = Activity.build(acts[0]) if acts.size() == 1 else null
 	if made:add_child(made);Activity.fit(made, acts[0])
 	for f in 3:
 		await get_tree().physics_frame
 	var mbox: AABB = made.mesh_instance.mesh.get_aabb() if made else AABB()
-	var made_ok: bool = made != null and is_equal_approx(made.position.y, 3.0) and absf(mbox.size.x - 10.0) < .05 and mbox.end.y <= .9 + 1e-3 and made.fitted
-	_check(report, "E place: compiled with an activity - recipe.activities carries the slot and the knobs; place_activity builds the noise space on the pool floor at y 3, fitted", act_ok and made_ok, {"errors": built.get("errors", []), "activities": acts, "made_y": made.position.y if made else null, "size": mbox.size})
+	var made_ok: bool = made != null and is_equal_approx(made.position.y, 3.03) and absf(mbox.size.x - 10.0) < .05 and mbox.end.y <= .9 + 1e-3 and made.fitted
+	_check(report, "E place: compiled with an activity - recipe.activities carries the slot and the knobs; place_activity builds the noise space 3 cm above the pool floor at y 3.03, fitted", act_ok and made_ok, {"errors": built.get("errors", []), "activities": acts, "made_y": made.position.y if made else null, "size": mbox.size})
 	# F - WALLS TOO: the noise surface mounted "wall" in a 10 m wide, 1 m high slot stands up - 9 m wide, 1 m high from
 	# its base line, its relief toward -Z and no deeper than 0.4 m, flat at its edges
 	var wall: Node3D = load(Items.scene_for("noise_space")).instantiate()
@@ -90,8 +90,8 @@ func _ready() -> void:
 	for f in 3:
 		await get_tree().physics_frame
 	var wmb: AABB = (wmade.global_transform * wmade.static_body.transform * wmade.mesh_instance.mesh.get_aabb()) if wmade else AABB()
-	var g_made: bool = wmade != null and wmade.mount == "wall" and absf(wmb.size.z - 8.0) < .05 and wmb.position.x < 4.87 and wmb.end.x <= 4.87 + 1e-3 and absf(wmb.position.y - 3.0) < 1e-3
-	_check(report, "G place wall: the east wall activity stands just inside the shell at x 4.87, turned to face the room, 8 m along the wall from the pool floor at y 3", g_ok and g_made, {"errors": wbuilt.get("errors", []), "act": wacts, "box": wmb, "g_ok": g_ok, "g_made": g_made, "pos_eq": is_equal_approx(float(wacts[0].position[0]), 5.0 - 0.13) if wacts.size() == 1 else null, "end_x": wmb.end.x, "mount": wmade.mount if wmade else null})
+	var g_made: bool = wmade != null and wmade.mount == "wall" and absf(wmb.size.z - 8.0) < .05 and wmb.position.x < 4.87 and wmb.end.x <= 4.87 + 1e-3 and absf(wmb.position.y - 3.03) < 1e-3
+	_check(report, "G place wall: the east wall activity stands just inside the shell at x 4.87, turned to face the room, 8 m along the wall, 3 cm above the pool floor", g_ok and g_made, {"errors": wbuilt.get("errors", []), "act": wacts, "box": wmb, "g_ok": g_ok, "g_made": g_made, "pos_eq": is_equal_approx(float(wacts[0].position[0]), 5.0 - 0.13) if wacts.size() == 1 else null, "end_x": wmb.end.x, "mount": wmade.mount if wmade else null})
 	cam.transform = Transform3D(Basis(), Vector3(0, 9, 16)).looking_at(Vector3(0, 0.5, 0));cam.fov = 55
 	for f in 3:
 		await get_tree().process_frame

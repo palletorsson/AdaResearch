@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "artifact": "pocket_test",
+  "prefab": "pocket_test",
+  "category": "playground_test",
+  "playground": "slot_companion",
+  "title": "Pocket test / a hundred balls",
+  "question": "Which surfaces keep what falls on them, and which let it run?",
+  "source_scene": "res://commons/artifacts/pocket_test/pocket_test.tscn",
+  "source_driver": "res://commons/artifacts/pocket_test/pocket_test.gd",
+  "reference": "Torsson 2025, Comparative Topological Flow Analysis Using Perlin and Related Noise Fields: capture rate against the surface's Shannon entropy of normals. Here in a flat basin with a rim: pocketed / rim / rolling instead of escaped.",
+  "physical_model": "Jolt rigid spheres, steel-dense scaled down, bounce 0.1, friction 0.5, released from a jittered grid 1.5 m above the rim height; the reading is taken when the balls sleep or every half second until settle_seconds.",
+  "slot": {
+    "companion_of": "a walkable surface in the same slot",
+    "mount": [
+      "floor"
+    ],
+    "note": "Stands on the slot's front edge; its footprint is the slot's."
+  },
+  "parameters": [
+    {
+      "key": "count",
+      "label": "Balls",
+      "min": 10,
+      "max": 400,
+      "step": 10,
+      "default": 100,
+      "question": "How many balls fall?"
+    },
+    {
+      "key": "bounce",
+      "label": "Bounce",
+      "min": 0.0,
+      "max": 0.8,
+      "step": 0.05,
+      "default": 0.1,
+      "question": "How lively are they? The paper used 0.6; the playground wants them quiet."
+    },
+    {
+      "key": "friction",
+      "label": "Friction",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "default": 0.5,
+      "question": "How much do they grip the ground?"
+    },
+    {
+      "key": "drop_height",
+      "label": "Drop height",
+      "min": 0.5,
+      "max": 4.0,
+      "step": 0.5,
+      "default": 1.5,
+      "question": "How far above the rim do they start?"
+    },
+    {
+      "key": "settle_seconds",
+      "label": "Settle time",
+      "min": 3,
+      "max": 30,
+      "step": 1,
+      "default": 8,
+      "question": "When is the reading final?"
+    },
+    {
+      "key": "seed",
+      "label": "Seed",
+      "min": 0,
+      "max": 9999,
+      "step": 1,
+      "default": 7,
+      "question": "The same rain again, or another?"
+    }
+  ],
+  "presets": [
+    {
+      "id": "quiet",
+      "title": "Quiet / the playground's",
+      "settings": {
+        "bounce": 0.1,
+        "friction": 0.5
+      }
+    },
+    {
+      "id": "paper",
+      "title": "Paper / PhysX defaults",
+      "settings": {
+        "bounce": 0.6,
+        "friction": 0.4
+      }
+    }
+  ]
+}

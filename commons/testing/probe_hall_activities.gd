@@ -8,7 +8,10 @@ const HALL = preload("res://commons/void/trials/principal_places/places.tscn")
 
 func _ready() -> void:
 	var out_dir := ProjectSettings.globalize_path("res://ada_run/workstation");DirAccess.make_dir_recursive_absolute(out_dir)
-	var cam := Camera3D.new();cam.position = Vector3(0, 12, 20);add_child(cam);cam.current = true
+	var cam := Camera3D.new();cam.position = Vector3(0, 12, 20);add_child(cam);cam.current = true;cam.fov = 55
+	var env := WorldEnvironment.new();var e := Environment.new();e.background_mode = Environment.BG_COLOR;e.background_color = Color("2a2c33")
+	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR;e.ambient_light_color = Color("d8d2c8");e.ambient_light_energy = .7;env.environment = e;add_child(env)
+	var sun := DirectionalLight3D.new();sun.rotation_degrees = Vector3(-55, 35, 0);sun.light_energy = 1.0;sun.shadow_enabled = true;add_child(sun)
 	var report := {"checks": []}
 	var hall: Node3D = HALL.instantiate();add_child(hall)
 	for i in 6:
@@ -16,7 +19,7 @@ func _ready() -> void:
 	var found := {}
 	for c in hall.get_children():
 		if c.has_meta("activity_artifact"):found[str(c.name)] = c
-	var want := {"disco-plate_activity": [-14.0, 0.07, 0.0, 8.0, 8.0], "biome-plastic-bath_activity": [0.0, 3.0, 0.0, 10.0, 10.0], "hanging-steel-bath_activity": [14.0, 7.0, 0.0, 8.0, 8.0]}
+	var want := {"disco-plate_activity": [-14.0, 0.07, 0.0, 8.0, 8.0], "biome-plastic-bath_activity": [0.0, 3.03, 0.0, 10.0, 10.0], "hanging-steel-bath_activity": [14.0, 7.03, 0.0, 8.0, 8.0]}
 	for id in want:
 		var n: Node3D = found.get(id);var w: Array = want[id]
 		var box: AABB = n.mesh_instance.mesh.get_aabb() if n else AABB()
@@ -26,6 +29,14 @@ func _ready() -> void:
 	var wb: AABB = (wall.static_body.transform * wall.mesh_instance.mesh.get_aabb()) if wall else AABB()
 	var wall_ok: bool = wall != null and wall.mount == "wall" and is_equal_approx(wall.rotation_degrees.y, 180.0) and absf(wb.size.x - 10.0) < .05 and absf(wb.size.y - 1.0) < .05 and absf(wb.position.y) < 1e-3
 	_check(report, "north wall: the noise wall stands 10 m wide and 1 m high on the bath's north wall, facing in", wall_ok, {"found": wall != null, "box": wb, "yaw": wall.rotation_degrees.y if wall else null})
+	# the pictures: the whole hall, and each sample from its own rim
+	var shots := {"hall": [Vector3(0, 16, 30), Vector3(0, 3, -2)], "disco_noise": [Vector3(-14, 4.5, 9), Vector3(-14, 0.2, 0)], "bath_random": [Vector3(0, 8.5, 10), Vector3(0, 3.2, -1)], "basin_sine": [Vector3(14, 12.5, 10), Vector3(14, 7.2, -1)], "bath_wall": [Vector3(0, 5.2, 3), Vector3(0, 3.5, -5)]}
+	for k in shots:
+		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])
+		for t in 3:
+			await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+		get_viewport().get_texture().get_image().save_png(out_dir.path_join("hall_%s.png" % k))
 	var passed := 0
 	for ch in report.checks:
 		if ch.ok:passed += 1

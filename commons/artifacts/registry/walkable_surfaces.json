@@ -1,7 +1,7 @@
 {
   "registry_info": {
     "category": "walkable_surfaces",
-    "description": "Walkable mathematical surfaces (commons/context/walkgrids) that fit a receiving place's slot (TopologySpace.fit_slot) or stand alone. noise_space and random_space keep their tokens in randomness.json and commons_artifacts.json; the sine FLOOR needed one, since sine_space is the wavefunctions room.",
+    "description": "Walkable mathematical surfaces (commons/context/walkgrids) that fit a receiving place's slot (TopologySpace.fit_slot) or stand alone. noise_space and random_space keep their tokens in randomness.json and commons_artifacts.json; the sine FLOOR needed one, since sine_space is the wavefunctions room. pocket_test is the ball test that reads a slotted surface.",
     "created": "2026-10-31"
   },
   "artifacts": {
@@ -19,6 +19,24 @@
         "walkable",
         "surface",
         "sine",
+        "slot"
+      ]
+    },
+    "pocket_test": {
+      "lookup_name": "pocket_test",
+      "scene": "res://commons/artifacts/pocket_test/pocket_test.tscn",
+      "class_name": "PocketTest",
+      "name": "Pocket test / a hundred balls",
+      "description": "A button on a slot's front edge releases a hundred small, hardly bouncy balls over the surface (Jolt). The readout counts what settles in the surface's pockets, what runs out to the flat rim and what still rolls, beside the surface's Shannon entropy of normals in bits - after Torsson 2025, Comparative Topological Flow Analysis. Placed over a receiving place's activity by place_builder (activity test: balls), or by hand with slot_size.",
+      "category": "walkable_surfaces",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": true,
+      "tags": [
+        "playground",
+        "test",
+        "balls",
+        "entropy",
         "slot"
       ]
     }
