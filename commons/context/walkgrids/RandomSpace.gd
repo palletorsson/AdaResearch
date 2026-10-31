@@ -167,6 +167,8 @@ func _generate_base_heights():
 			var height: float = _draw(chosen)
 			base_heights.append(height * height_scale)
 			current_heights.append(height * height_scale)
+	if fitted:   # in a slot: the floor and the edge band, and the ground stays still under the feet
+		base_heights = finish_heights(base_heights);current_heights = base_heights.duplicate();enable_animation = false
 
 
 ## One vertex, drawn under one law, in the half-open range [-chaos_level,
@@ -431,6 +433,7 @@ func apply_grid_config(config: Dictionary) -> void:
 		return
 	var field_changed: bool = false
 	var material_changed: bool = false
+	if apply_slot_config(config):field_changed = true   # the slot (TopologySpace): footprint, depth, edge band
 	# Per-placement staging. Colour does not redraw the field or its collision.
 	if config.has("surface_color"):
 		var tint := Color.from_string(str(config["surface_color"]), surface_color)

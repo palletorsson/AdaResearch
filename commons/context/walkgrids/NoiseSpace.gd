@@ -65,6 +65,7 @@ class_name NoiseSpace
 const GENERATORS: PackedStringArray = ["simplex", "perlin", "value", "cellular"]
 
 var noise: FastNoiseLite
+var _seed: int = 0   # 0 = the engine's own seed
 
 ## True once _ready has built the terrain. apply_grid_config must not regenerate before it.
 var _built: bool = false
@@ -75,6 +76,7 @@ var walk_study: Node3D
 func _ready():
 	if has_meta("config_stand"):
 		stand = "walk" if str(get_meta("config_stand")) == "walk" else "none"
+	apply_grid_config(meta_config())   # knobs and slot left as config_* metas by a placer; nothing regenerates before _built
 	_build_noise()
 	if stand == "walk":
 		# This local encounter declares the baseline explicitly; legacy stays above.
@@ -109,6 +111,7 @@ func _build_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.frequency = 0.1
 	noise.fractal_octaves = octaves
+	if _seed != 0:noise.seed = _seed
 	var chosen: String = _valid(generator, GENERATORS, "simplex")
 	if chosen == "perlin":
 		noise.noise_type = FastNoiseLite.TYPE_PERLIN
@@ -130,6 +133,7 @@ func generate_space():
 			# Fractal noise - spaces of resistance
 			var height = noise.get_noise_2d(world_x * noise_scale, world_z * noise_scale)
 			heights.append(height * height_scale * edge_weight(Vector2(world_x, world_z)) if stand == "walk" else height * height_scale)
+	heights = finish_heights(heights)   # the slot's floor and edge band, when it has a slot
 
 	var mesh = create_mesh_from_heights(heights)
 	mesh_instance.mesh = mesh
@@ -178,7 +182,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	if stand == "walk": return # the local instrument owns this encounter's state
 	if config.is_empty():
 		return
-	var field_changed: bool = false
+	var field_changed: bool = apply_slot_config(config)   # the slot (TopologySpace): footprint, depth, edge band
+	if config.has("seed"):
+		var sd: int = int(config["seed"])
+		if sd != _seed:
+			_seed = sd
+			field_changed = true
 
 	if config.has("generator"):
 		var g: String = _valid(str(config["generator"]).strip_edges().to_lower(), GENERATORS, generator)

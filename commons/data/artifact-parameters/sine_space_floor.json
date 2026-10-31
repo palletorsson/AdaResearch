@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "artifact": "sine_space_floor",
+  "prefab": "sine_space_floor",
+  "category": "walkable_surface",
+  "playground": "slot_or_alone",
+  "title": "Sine space / walk the equation",
+  "question": "What is it to stand on sin(x) * cos(z)?",
+  "source_scene": "res://commons/context/walkgrids/sine_space.tscn",
+  "source_driver": "res://commons/context/walkgrids/SineSpace.gd",
+  "reference": "A smooth sin * cos ground with trimesh collision; ridges and troughs invite directional walking. (The wavefunctions sine_space is the room version; this is the floor.)",
+  "physical_model": "Static ground. Height is wave_amplitude * sin(x f + px) * cos(z f + pz) * height_scale.",
+  "slot": {
+    "min_size": [
+      4,
+      4
+    ],
+    "max_size": [
+      20,
+      20
+    ],
+    "min_depth": 1,
+    "margin": 0.5,
+    "edge_band": 1.0,
+    "note": "Fitted by TopologySpace.fit_slot: footprint minus the margin, the lowest point on the pool floor, the highest 0.1 m under the rim, the relief fading to the floor across the edge band. Also stands alone with no slot."
+  },
+  "parameters": [
+    {
+      "key": "wave_frequency",
+      "label": "Frequency",
+      "min": 0.2,
+      "max": 4.0,
+      "step": 0.1,
+      "default": 1.2,
+      "question": "How close are the ridges?"
+    },
+    {
+      "key": "wave_amplitude",
+      "label": "Amplitude",
+      "min": 0.1,
+      "max": 2.0,
+      "step": 0.1,
+      "default": 0.7,
+      "question": "How deep are the troughs?"
+    },
+    {
+      "key": "height_scale",
+      "label": "Relief",
+      "min": 0.1,
+      "max": 3.0,
+      "step": 0.1,
+      "default": 2.0,
+      "question": "The overall rise; in a slot the pool depth caps it."
+    },
+    {
+      "key": "phase_x",
+      "label": "Phase X",
+      "min": 0.0,
+      "max": 6.28,
+      "step": 0.1,
+      "default": 0.0,
+      "question": "Where does the first ridge stand?"
+    },
+    {
+      "key": "phase_z",
+      "label": "Phase Z",
+      "min": 0.0,
+      "max": 6.28,
+      "step": 0.1,
+      "default": 0.0,
+      "question": "And across?"
+    },
+    {
+      "key": "edge_band",
+      "label": "Edge band",
+      "min": 0.0,
+      "max": 3.0,
+      "step": 0.25,
+      "default": 1.0,
+      "question": "How wide is the flat margin that meets the pool floor?"
+    }
+  ],
+  "presets": [
+    {
+      "id": "swell",
+      "title": "Swell / long low waves",
+      "settings": {
+        "wave_frequency": 0.5,
+        "wave_amplitude": 0.5
+      }
+    },
+    {
+      "id": "corrugated",
+      "title": "Corrugated / tight ridges",
+      "settings": {
+        "wave_frequency": 3.0,
+        "wave_amplitude": 0.3
+      }
+    }
+  ]
+}

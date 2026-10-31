@@ -17,24 +17,43 @@ class_name SineSpace
 @export var phase_x: float = 0.0
 @export var phase_z: float = 0.0
 
+## The wave's own knobs from a config. True if changed.
+func _take(config: Dictionary) -> bool:
+	var changed := false
+	if config.has("wave_frequency"):wave_frequency = float(config.wave_frequency);changed = true
+	if config.has("wave_amplitude"):wave_amplitude = float(config.wave_amplitude);changed = true
+	if config.has("phase_x"):phase_x = float(config.phase_x);changed = true
+	if config.has("phase_z"):phase_z = float(config.phase_z);changed = true
+	return changed
+
+func _ready():
+	_take(meta_config())
+	super._ready()
+
+func apply_grid_config(config: Dictionary) -> void:
+	var changed := _take(config)
+	changed = apply_slot_config(config) or changed
+	if changed and mesh_instance != null:generate_space()
+
 func generate_space():
 	var heights = []
-	
+
 	for z in range(resolution + 1):
 		for x in range(resolution + 1):
 			var world_x = (x / float(resolution)) * space_size.x - space_size.x/2
 			var world_z = (z / float(resolution)) * space_size.y - space_size.y/2
-			
+
 			# Perfect sine wave topology
 			var height = wave_amplitude * sin(world_x * wave_frequency + phase_x) * cos(world_z * wave_frequency + phase_z)
 			heights.append(height * height_scale)
-	
+	heights = finish_heights(heights)   # the slot's floor and edge band, when it has a slot
+
 	var mesh = create_mesh_from_heights(heights)
 	mesh_instance.mesh = mesh
-	
+
 	# Use Godot's built-in collision creation
 	create_collision_from_mesh(mesh)
-	
+
 	# Smooth material for surveillance aesthetic
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color.WHITE

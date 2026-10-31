@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "artifact": "random_space",
+  "prefab": "random_space",
+  "category": "walkable_surface",
+  "playground": "slot_or_alone",
+  "title": "Random space / one draw per vertex",
+  "question": "What does a ground feel like when no two neighbours agree?",
+  "source_scene": "res://commons/context/walkgrids/random_space.tscn",
+  "source_driver": "res://commons/context/walkgrids/RandomSpace.gd",
+  "reference": "Every vertex an independent draw under a law (uniform, gaussian, poisson, exponential). Animated when alone; in a slot the ground stays still.",
+  "physical_model": "Static ground in a slot (animation off, since a floor that moves under the feet is a different artifact). Trimesh collision of the drawn vertices.",
+  "slot": {
+    "min_size": [
+      4,
+      4
+    ],
+    "max_size": [
+      20,
+      20
+    ],
+    "min_depth": 1,
+    "margin": 0.5,
+    "edge_band": 1.0,
+    "note": "Fitted by TopologySpace.fit_slot: footprint minus the margin, the lowest point on the pool floor, the highest 0.1 m under the rim, the relief fading to the floor across the edge band. Also stands alone with no slot."
+  },
+  "parameters": [
+    {
+      "key": "law",
+      "label": "Law",
+      "choices": [
+        "uniform",
+        "gaussian",
+        "poisson",
+        "exponential"
+      ],
+      "default": "uniform",
+      "question": "Which distribution draws each height?"
+    },
+    {
+      "key": "chaos_level",
+      "label": "Chaos",
+      "min": 0.1,
+      "max": 4.0,
+      "step": 0.1,
+      "default": 2.0,
+      "question": "How far can one draw reach?"
+    },
+    {
+      "key": "seed_value",
+      "label": "Seed",
+      "min": 0,
+      "max": 99999,
+      "step": 1,
+      "default": 12345,
+      "question": "Which of the many grounds this law allows?"
+    },
+    {
+      "key": "height_scale",
+      "label": "Relief",
+      "min": 0.1,
+      "max": 3.0,
+      "step": 0.1,
+      "default": 2.0,
+      "question": "How high do the spikes rise? In a slot the pool depth caps this."
+    },
+    {
+      "key": "resolution",
+      "label": "Vertices per side",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "default": 100,
+      "question": "Coarse steps or fine gravel?"
+    },
+    {
+      "key": "edge_band",
+      "label": "Edge band",
+      "min": 0.0,
+      "max": 3.0,
+      "step": 0.25,
+      "default": 1.0,
+      "question": "How wide is the flat margin that meets the pool floor?"
+    }
+  ],
+  "presets": [
+    {
+      "id": "gravel",
+      "title": "Gravel / fine and low",
+      "settings": {
+        "law": "uniform",
+        "chaos_level": 0.4,
+        "resolution": 60
+      }
+    },
+    {
+      "id": "spikes",
+      "title": "Spikes / coarse gaussian",
+      "settings": {
+        "law": "gaussian",
+        "chaos_level": 2.0,
+        "resolution": 20
+      }
+    }
+  ]
+}

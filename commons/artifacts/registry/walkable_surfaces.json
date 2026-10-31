@@ -1,0 +1,26 @@
+{
+  "registry_info": {
+    "category": "walkable_surfaces",
+    "description": "Walkable mathematical surfaces (commons/context/walkgrids) that fit a receiving place's slot (TopologySpace.fit_slot) or stand alone. noise_space and random_space keep their tokens in randomness.json and commons_artifacts.json; the sine FLOOR needed one, since sine_space is the wavefunctions room.",
+    "created": "2026-10-31"
+  },
+  "artifacts": {
+    "sine_space_floor": {
+      "lookup_name": "sine_space_floor",
+      "scene": "res://commons/context/walkgrids/sine_space.tscn",
+      "class_name": "SineSpace",
+      "name": "Sine space / the floor",
+      "description": "A walkable sin(x) * cos(z) ground with trimesh collision (commons/context/walkgrids/SineSpace.gd). Told a slot - a receiving place's footprint and depth - it fits the pool floor and fades to it at the edges; alone it is the 20 x 20 m surface it always was. Parameters: commons/data/artifact-parameters/sine_space_floor.json.",
+      "category": "walkable_surfaces",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": true,
+      "tags": [
+        "walkable",
+        "surface",
+        "sine",
+        "slot"
+      ]
+    }
+  }
+}
