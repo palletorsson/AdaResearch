@@ -9,7 +9,7 @@
   "source_scene": "res://commons/artifacts/pocket_test/pocket_test.tscn",
   "source_driver": "res://commons/artifacts/pocket_test/pocket_test.gd",
   "reference": "Torsson 2025, Comparative Topological Flow Analysis Using Perlin and Related Noise Fields: capture rate against the surface's Shannon entropy of normals. Here in a flat basin with a rim: pocketed / rim / rolling instead of escaped.",
-  "physical_model": "Jolt rigid spheres, steel-dense scaled down, bounce 0.1, friction 0.5, released from a jittered grid 1.5 m above the rim height; the reading is taken when the balls sleep or every half second until settle_seconds.",
+  "physical_model": "Jolt rigid spheres half a metre across (varying a little), in random bright colours, steel-dense scaled down, bounce 0.1, friction 0.5, released from a jittered grid 1.5 m above the rim height; the reading is taken when the balls sleep or every half second until settle_seconds.",
   "slot": {
     "companion_of": "a walkable surface in the same slot",
     "mount": [
@@ -26,6 +26,15 @@
       "step": 10,
       "default": 100,
       "question": "How many balls fall?"
+    },
+    {
+      "key": "diameter",
+      "label": "Ball size",
+      "min": 0.1,
+      "max": 1.2,
+      "step": 0.05,
+      "default": 0.5,
+      "question": "How big are the balls? Half a metre reads the big pockets; a tenth reads the grain."
     },
     {
       "key": "bounce",

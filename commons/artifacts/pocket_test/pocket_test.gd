@@ -1,8 +1,8 @@
 extends Node3D
 class_name PocketTest
 ## THE POCKET TEST (Palle, 2026-10-31, after "Comparative Topological Flow Analysis Using Perlin and Related Noise
-## Fields", Torsson 2025): a button on the slot's front edge releases a hundred balls over the surface - small, steel-
-## heavy, hardly bouncy - and they fall and roll. Some settle in the surface's pockets, some run out to the flat rim,
+## Fields", Torsson 2025): a button on the slot's front edge releases a hundred balls over the surface - half a metre
+## across, in random bright colours, steel-heavy, hardly bouncy - and they fall and roll. Some settle in the surface's pockets, some run out to the flat rim,
 ## some keep rolling. The counts are a reading of the surface: a random ground pockets more than a sine ground, which
 ## pockets in its troughs. Beside the counts stands the surface's SHANNON ENTROPY of normals in bits (256 equal-area
 ## bins on the upper hemisphere), the paper's complexity measure. Jolt is the engine. Placed by a receiving place
@@ -11,8 +11,9 @@ class_name PocketTest
 signal settled(result: Dictionary)
 
 @export var count := 100
-@export var radius_min := 0.05
-@export var radius_max := 0.09
+@export var diameter := 0.5            ## Palle: "the size of the balls matters - like 50 cm"; radii vary a little around it
+@export var radius_min := 0.22
+@export var radius_max := 0.28
 @export var bounce := 0.1
 @export var friction := 0.5
 @export var drop_height := 1.5          ## above the slot's rim height
@@ -47,6 +48,7 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("slot_depth"):slot_depth = float(config.slot_depth)
 	if config.has("rim_width"):rim_width = float(config.rim_width)
 	if config.has("count"):count = clampi(int(config.count), 1, 400)
+	if config.has("diameter"):diameter = clampf(float(config.diameter), 0.08, 1.2);radius_min = diameter * .44;radius_max = diameter * .56
 	if config.has("bounce"):bounce = clampf(float(config.bounce), 0.0, 1.0)
 	if config.has("friction"):friction = clampf(float(config.friction), 0.0, 1.0)
 	if config.has("drop_height"):drop_height = float(config.drop_height)
@@ -109,8 +111,9 @@ func release() -> void:
 			ball.mass = 7800.0 * (4.0 / 3.0) * PI * rad * rad * rad * 0.1   # steel-dense, scaled down so a hundred stay cheap for Jolt
 			ball.physics_material_override = physics;ball.continuous_cd = true;ball.angular_damp = 1.0;ball.linear_damp = 0.15
 			var shape := CollisionShape3D.new();var sphere := SphereShape3D.new();sphere.radius = rad;shape.shape = sphere;ball.add_child(shape)
-			var mi := MeshInstance3D.new();mi.mesh = _ball_mesh(rad);var mat := StandardMaterial3D.new();mat.albedo_color = Color("eeeeee");mat.metallic = .6;mat.roughness = .35;mi.material_override = mat;ball.add_child(mi)
-			ball.position = Vector3(x, slot_depth + drop_height + (i % 7) * .08, z)
+			# random bright colours (Palle): a full hue each, saturated, light
+			var mi := MeshInstance3D.new();mi.mesh = _ball_mesh(rad);var mat := StandardMaterial3D.new();mat.albedo_color = Color.from_hsv(rng.randf(), .85, 1.0);mat.metallic = .1;mat.roughness = .4;mi.material_override = mat;ball.add_child(mi)
+			ball.position = Vector3(x, slot_depth + drop_height + (i % 7) * (radius_max * .6), z)
 			add_child(ball);balls.append(ball);i += 1
 	since_release = 0.0;result = {}
 	readout.text = "RELEASED %d\n..." % balls.size()
@@ -118,7 +121,7 @@ func release() -> void:
 func _ball_mesh(rad: float) -> SphereMesh:
 	var key := snappedf(rad, .005)
 	if not _mesh_cache.has(key):
-		var m := SphereMesh.new();m.radius = key;m.height = key * 2;m.radial_segments = 12;m.rings = 6;_mesh_cache[key] = m
+		var m := SphereMesh.new();m.radius = key;m.height = key * 2;m.radial_segments = 20;m.rings = 10;_mesh_cache[key] = m
 	return _mesh_cache[key]
 
 func clear() -> void:
