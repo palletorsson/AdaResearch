@@ -133,7 +133,6 @@ func generate_space():
 			# Fractal noise - spaces of resistance
 			var height = noise.get_noise_2d(world_x * noise_scale, world_z * noise_scale)
 			heights.append(height * height_scale * edge_weight(Vector2(world_x, world_z)) if stand == "walk" else height * height_scale)
-	heights = finish_heights(heights)   # the slot's floor and edge band, when it has a slot
 
 	var mesh = create_mesh_from_heights(heights)
 	mesh_instance.mesh = mesh

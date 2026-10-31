@@ -167,8 +167,7 @@ func _generate_base_heights():
 			var height: float = _draw(chosen)
 			base_heights.append(height * height_scale)
 			current_heights.append(height * height_scale)
-	if fitted:   # in a slot: the floor and the edge band, and the ground stays still under the feet
-		base_heights = finish_heights(base_heights);current_heights = base_heights.duplicate();enable_animation = false
+	if fitted:enable_animation = false   # in a slot the ground stays still under the feet; the mesh builder fits and rims it
 
 
 ## One vertex, drawn under one law, in the half-open range [-chaos_level,

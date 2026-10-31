@@ -46,7 +46,6 @@ func generate_space():
 			# Perfect sine wave topology
 			var height = wave_amplitude * sin(world_x * wave_frequency + phase_x) * cos(world_z * wave_frequency + phase_z)
 			heights.append(height * height_scale)
-	heights = finish_heights(heights)   # the slot's floor and edge band, when it has a slot
 
 	var mesh = create_mesh_from_heights(heights)
 	mesh_instance.mesh = mesh

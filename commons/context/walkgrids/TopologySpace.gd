@@ -29,6 +29,13 @@ class_name TopologySpace
 ## room along the node's -Z, fading to the wall plane at its edges. slot_size is then [width, height] and slot_depth
 ## how far the relief may stand out. The placer sets the node at the wall's base and turns it to face the room.
 @export_enum("floor", "wall") var mount := "floor"
+## BUMP MAPS (Palle, 2026-10-31: "bump maps?"): the relief's shading as a normal map on the material, from the same
+## heights, so the WALKED mesh and its collision may be coarser than the LOOK. collision_step 2 makes the trimesh
+## from every second vertex (a quarter of the triangles), 4 a sixteenth; the picture keeps every vertex's slope.
+@export var bump_map := false
+@export var bump_strength := 1.0
+@export_range(1, 8) var collision_step := 1
+var _last_heights: Array = []
 var fitted := false
 const RIM_CLEARANCE := 0.1
 
@@ -56,8 +63,10 @@ func edge_factor(wx: float, wz: float) -> float:
 
 ## The heights as the slot wants them: the band fades toward the field's lowest value (so the perimeter and the
 ## floor meet), then the whole field is lifted onto the floor and scaled under the rim. No slot: the heights as given.
+## Called by create_mesh_from_heights for EVERY surface of the family, so a subclass needs no line of its own; with
+## no slot and no rim it returns the heights untouched.
 func finish_heights(heights: Array) -> Array:
-	if edge_band <= 0.0 and rim_width <= 0.0 and slot_depth <= 0.0:return heights
+	if (edge_band <= 0.0 and rim_width <= 0.0 and slot_depth <= 0.0) or not (fitted or slot_depth > 0.0):return heights
 	var out: Array = heights.duplicate()
 	var lo := INF;var hi := -INF
 	for h in out:lo = minf(lo, float(h));hi = maxf(hi, float(h))
@@ -86,6 +95,9 @@ func apply_slot_config(config: Dictionary) -> bool:
 		if config.has("slot_depth"):slot_depth = maxf(float(config.slot_depth), 0.0);changed = true
 	if config.has("height_scale"):height_scale = float(config.height_scale);changed = true
 	if config.has("resolution"):resolution = clampi(int(config.resolution), 4, 200);changed = true
+	if config.has("bump_map"):bump_map = str(config.bump_map) in ["true", "True", "1"] if not config.bump_map is bool else bool(config.bump_map);changed = true
+	if config.has("bump_strength"):bump_strength = float(config.bump_strength);changed = true
+	if config.has("collision_step"):collision_step = clampi(int(config.collision_step), 1, 8);changed = true
 	if changed:_stand()
 	return changed
 
@@ -141,7 +153,10 @@ func generate_space():
 	# Override in child classes
 	pass
 
-func create_mesh_from_heights(heights: Array) -> ArrayMesh:
+func create_mesh_from_heights(raw_heights: Array) -> ArrayMesh:
+	var heights: Array = finish_heights(raw_heights)   # the slot's floor, rim and band - once, here, for the whole family
+	_last_heights = heights
+	if bump_map:call_deferred("_apply_bump")
 	var array_mesh = ArrayMesh.new()
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
@@ -220,12 +235,46 @@ func create_mesh_from_heights(heights: Array) -> ArrayMesh:
 func create_collision_from_mesh(mesh: ArrayMesh):
 	# Use Godot's built-in mesh collision creation
 	# Option 1: Trimesh collision (most accurate, more expensive)
-	var trimesh_shape = mesh.create_trimesh_shape()
+	# coarser than the look when collision_step > 1: the trimesh of every step-th vertex of the last heights
+	var source: ArrayMesh = _coarse_mesh(collision_step) if collision_step > 1 and not _last_heights.is_empty() else mesh
+	var trimesh_shape = source.create_trimesh_shape()
 	collision_shape.shape = trimesh_shape
 	
 	# Option 2: Convex collision (less accurate, much faster)
 	# var convex_shape = mesh.create_convex_shape()
 	# collision_shape.shape = convex_shape
+
+## The last heights at every step-th vertex, as a mesh of their own (for a coarse collision under a fine look).
+func _coarse_mesh(step: int) -> ArrayMesh:
+	var n := int(resolution / step)
+	var verts := PackedVector3Array();var idx := PackedInt32Array()
+	for z in range(n + 1):
+		for x in range(n + 1):
+			var sx: int = mini(x * step, resolution);var sz: int = mini(z * step, resolution)
+			verts.append(Vector3((sx / float(resolution)) * space_size.x - space_size.x / 2 + position_offset.x, float(_last_heights[sz * (resolution + 1) + sx]) + position_offset.y, (sz / float(resolution)) * space_size.y - space_size.y / 2 + position_offset.z))
+	for z in range(n):
+		for x in range(n):
+			var i := z * (n + 1) + x
+			idx.append(i);idx.append(i + 1);idx.append(i + n + 1);idx.append(i + 1);idx.append(i + n + 2);idx.append(i + n + 1)
+	var arrays := [];arrays.resize(Mesh.ARRAY_MAX);arrays[Mesh.ARRAY_VERTEX] = verts;arrays[Mesh.ARRAY_INDEX] = idx
+	var m := ArrayMesh.new();m.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays);return m
+
+## The normal map of the last heights, onto the material the subclass set (deferred: subclasses assign their
+## material after the mesh). Tangent space of the flat grid: x right, z down the image, y out.
+func _apply_bump() -> void:
+	if mesh_instance == null or _last_heights.is_empty():return
+	var mat := mesh_instance.material_override as StandardMaterial3D
+	if mat == null:
+		mat = StandardMaterial3D.new();mesh_instance.material_override = mat
+	var n := resolution + 1;var img := Image.create(n, n, false, Image.FORMAT_RGB8)
+	var dx := space_size.x / float(resolution);var dz := space_size.y / float(resolution)
+	for z in range(n):
+		for x in range(n):
+			var l: float = float(_last_heights[z * n + maxi(x - 1, 0)]);var r: float = float(_last_heights[z * n + mini(x + 1, n - 1)])
+			var u: float = float(_last_heights[maxi(z - 1, 0) * n + x]);var d: float = float(_last_heights[mini(z + 1, n - 1) * n + x])
+			var nrm := Vector3(-(r - l) / (2.0 * dx) * bump_strength, 1.0, -(d - u) / (2.0 * dz) * bump_strength).normalized()
+			img.set_pixel(x, z, Color(nrm.x * .5 + .5, nrm.z * .5 + .5, nrm.y * .5 + .5))   # OpenGL-style: green is the image's down axis
+	mat.normal_enabled = true;mat.normal_texture = ImageTexture.create_from_image(img);mat.normal_scale = 1.0
 
 func create_collision_single_convex(mesh: ArrayMesh):
 	# Creates single convex hull - good for simple shapes
