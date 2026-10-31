@@ -13,14 +13,25 @@ const LINES = preload("res://commons/artifacts/scaffold_workstation/lines.tscn")
 func _ready() -> void:
 	var out_dir := ProjectSettings.globalize_path("res://ada_run/workstation");DirAccess.make_dir_recursive_absolute(out_dir)
 	var cam := Camera3D.new();cam.position = Vector3(0, 1.6, 1.5);add_child(cam);cam.current = true
+	var env := WorldEnvironment.new();var e := Environment.new();e.background_mode = Environment.BG_COLOR;e.background_color = Color("2a2c33")
+	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR;e.ambient_light_color = Color("d8d2c8");e.ambient_light_energy = .8;env.environment = e;add_child(env)
+	var sun := DirectionalLight3D.new();sun.rotation_degrees = Vector3(-50, 30, 0);sun.light_energy = 1.1;add_child(sun)
 	var report := {"checks": []}
 	# A - the Points station
 	var pts: Node3D = POINTS.instantiate();pts.set_meta("config_persist", false);add_child(pts)
 	for i in 6:
 		await get_tree().process_frame
 	var added_a: bool = pts.model.add({"kind": "point", "at": [0.5, 0, 0]}, 0)
+	pts.model.add({"kind": "point", "at": [1.0, 0, 0]}, 0);pts.model.add({"kind": "point", "at": [0.5, 0.5, 0]}, 0);pts.model.add({"kind": "point", "at": [0, 0, 0.5]}, 0)
 	pts.redraw()
 	await get_tree().process_frame
+	# the picture: the model pad from the front, a little above - the grid lines and the points on them
+	var pad: Vector3 = pts.bench.global_position
+	cam.transform = Transform3D(Basis(), pad + Vector3(0.12, 0.16, 0.34)).looking_at(pad + Vector3(0.03, -0.04, 0.02));cam.fov = 38
+	for i in 3:
+		await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir.path_join("points_station.png"))
 	var placed_a: Node3D = pts.drawing.get_node_or_null("Placed0")
 	var scale_a: float = pts.SCALE;var neck: float = 2 * (.085 + .006) * scale_a
 	var at_a: Vector3 = placed_a.position if placed_a else Vector3.INF
@@ -45,8 +56,15 @@ func _ready() -> void:
 	for i in 6:
 		await get_tree().process_frame
 	var added_b: bool = lns.model.add({"kind": "point", "at": [0.5, 0, 0]}, 1)
+	lns.model.add({"kind": "point", "at": [1.0, 0, 0]}, 1);lns.model.add({"kind": "point", "at": [0.5, 0.5, 0]}, 1);lns.model.add({"kind": "point", "at": [0, 0, 0.5]}, 1)
 	lns.redraw()
 	await get_tree().process_frame
+	var pad_b: Vector3 = lns.bench.global_position
+	cam.transform = Transform3D(Basis(), pad_b + Vector3(0.12, 0.22, 0.5)).looking_at(pad_b + Vector3(0.05, -0.06, 0.02))
+	for i in 3:
+		await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	get_viewport().get_texture().get_image().save_png(out_dir.path_join("lines_station.png"))
 	var placed_b: Node3D = lns.drawing.get_node_or_null("Placed0")
 	var at_b: Vector3 = placed_b.position if placed_b else Vector3.INF
 	_check(report, "B lines: at the Rods station the half-step neighbour stands the half step (.5 x SCALE) from the origin, as before", added_b and placed_b != null and absf(at_b.x - .5 * lns.SCALE) < 1e-6 and lns.lattice() == 1.0, {"added": added_b, "at": at_b, "half_step": .5 * lns.SCALE, "lattice": lns.lattice()})
