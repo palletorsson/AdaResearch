@@ -103,6 +103,7 @@ func _domain() -> ImageTexture:
 	var palette := [Color.from_hsv(rng.randf(), .8, .95), Color.from_hsv(rng.randf(), .8, .9), Color.from_hsv(rng.randf(), .7, 1.0), Color("f3eee5"), Color("23272b")]
 	for y in 4:
 		for x in 4:img.set_pixel(x, y, palette[rng.randi_range(0, palette.size() - 1)])
+	img.resize(64, 64, Image.INTERPOLATE_NEAREST)   # crisp cells: the shader samples with a linear filter, so the 4 x 4 is blown up square first
 	return ImageTexture.create_from_image(img)
 
 ## Where the content faces: +Y for a floor plate, -Z for a wall plate (in the node's space).

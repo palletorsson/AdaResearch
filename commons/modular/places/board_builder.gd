@@ -11,12 +11,19 @@ extends RefCounted
 ## Spec (place.json "boards"):
 ##   {"id","at":[x,y,z] (metres, whole; the board's centre on the floor, its base line on a wall, its height overhead),
 ##    "size":[w,h] (whole metres), "orient":"floor"|"wall"|"ceiling", "facing":"south"|"north"|"east"|"west" (walls),
-##    "frame":true, "posts":true, "repeat":{"count":n,"step":[dx,dy,dz],"turn":0|90|180|270},
+##    "frame":true, "posts":true, "repeat":{"count":n,"step":[dx,dy,dz],"turn":0|90|180|270,"rows":{"count":m,"step":[..]}},
 ##    "content":{display_plate config}, "contents":[{...},...] (one per copy, cycling), "artifact":"display_plate"}
 ## Compiled (build) into recipe.activities (display plates, position + rotation + config) and, with `frame`, bars
 ## and posts through the builder's own `bar` - assemblies of canonical rods, contract-checked like everything else.
 ## The same compiler runs at a hall's load from a sidecar (activities.json beside the recipe), so an approved recipe
 ## stays byte for byte what it was.
+
+## How many plates a spec's boards make.
+static func copies(spec: Dictionary) -> int:
+	var n := 0
+	for b in spec.get("boards", []):
+		var r: Dictionary = b.get("repeat", {});n += int(r.get("count", 1)) * int((r.get("rows", {}) as Dictionary).get("count", 1))
+	return n
 
 const YAW := {"south": 0.0, "north": 180.0, "east": 90.0, "west": -90.0}
 const PLATE_LIFT := 0.08   # the plate rests on its frame's rods (.15 thick): a hair above their crowns
@@ -48,6 +55,10 @@ static func validate(spec: Dictionary) -> PackedStringArray:
 				var st: Variant = r.get("step", [0, 0, 0])
 				if not st is Array or st.size() != 3 or not st.all(func(n): return (n is int or n is float) and is_equal_approx(float(n), roundf(float(n)))):errors.append(id + ": repeat step needs [dx,dy,dz] in whole metres")
 				if int(r.get("turn", 0)) % 90 != 0:errors.append(id + ": repeat turn in quarter turns")
+				if r.has("rows"):
+					var rows: Variant = r.rows
+					if not rows is Dictionary or int(rows.get("count", 1)) < 1 or int(rows.get("count", 1)) > 32:errors.append(id + ": repeat rows count 1 to 32")
+					elif not (rows.get("step", [0, 0, 0]) is Array and (rows.step as Array).size() == 3):errors.append(id + ": repeat rows step needs [dx,dy,dz]")
 		if b.has("contents") and not b.contents is Array:errors.append(id + ": contents must be an array")
 		if str(b.get("orient", "floor")) == "ceiling" and at is Array and at.size() == 3 and float(at[1]) < 2:errors.append(id + ": a ceiling board hangs at 2 m or more")
 	return errors
@@ -65,8 +76,11 @@ static func build(builder: Object, b: Dictionary) -> void:
 	var turn := int(repeat.get("turn", 0));var base_yaw := float(YAW.get(str(b.get("facing", "south")), 0.0))
 	var frame := bool(b.get("frame", true));var posts := bool(b.get("posts", true))
 	var contents: Array = b.get("contents", []);var artifact := str(b.get("artifact", "display_plate"))
-	for i in count:
-		var c := at + step * i;var yaw := fmod(base_yaw + float(turn * i), 360.0)
+	var rows: Dictionary = repeat.get("rows", {});var row_count := int(rows.get("count", 1));var row_step := Vector3.ZERO
+	if rows.has("step"):row_step = Vector3(float(rows.step[0]), float(rows.step[1]), float(rows.step[2]))
+	for i in count * row_count:
+		var col := i % count;var row := int(i / count)
+		var c := at + step * col + row_step * row;var yaw := fmod(base_yaw + float(turn * col), 360.0)
 		var cfg: Dictionary = ((contents[i % contents.size()] if not contents.is_empty() else b.get("content", {})) as Dictionary).duplicate(true)
 		cfg.merge({"slot_size": [w, h], "mount": "wall" if orient == "wall" else "floor", "stand": false})
 		if not cfg.has("title"):cfg.title = "%s %02d" % [id, i + 1]

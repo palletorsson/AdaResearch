@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "units": "metres",
+  "places": [],
+  "principle": "the court",
+  "title": "Pattern_Temple / one rule four ways round a floor, the walker inside",
+  "camera": [
+    [
+      0,
+      7.5,
+      4.5
+    ],
+    [
+      0,
+      0.6,
+      -0.8
+    ]
+  ],
+  "boards": [
+    {
+      "id": "floor",
+      "at": [
+        0,
+        0,
+        0
+      ],
+      "size": [
+        6,
+        6
+      ],
+      "orient": "floor",
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 6.0,
+          "seed": 60,
+          "title": "floor"
+        }
+      ]
+    },
+    {
+      "id": "north",
+      "at": [
+        0,
+        0,
+        -3
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 3.0,
+          "seed": 61,
+          "title": "north"
+        }
+      ]
+    },
+    {
+      "id": "south",
+      "at": [
+        0,
+        0,
+        3
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 3.0,
+          "seed": 62,
+          "title": "south"
+        }
+      ]
+    },
+    {
+      "id": "east",
+      "at": [
+        3,
+        0,
+        0
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "east",
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 3.0,
+          "seed": 63,
+          "title": "east"
+        }
+      ]
+    },
+    {
+      "id": "west",
+      "at": [
+        -3,
+        0,
+        0
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "west",
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 3.0,
+          "seed": 64,
+          "title": "west"
+        }
+      ]
+    }
+  ]
+}

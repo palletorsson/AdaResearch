@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "units": "metres",
+  "places": [],
+  "principle": "the corridor",
+  "title": "Tiling / floor and both walls tiled, walked through",
+  "camera": [
+    [
+      -16,
+      2.2,
+      0
+    ],
+    [
+      0,
+      1.2,
+      0
+    ]
+  ],
+  "boards": [
+    {
+      "id": "floor",
+      "at": [
+        -10,
+        0,
+        0
+      ],
+      "size": [
+        4,
+        4
+      ],
+      "orient": "floor",
+      "repeat": {
+        "count": 6,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 6.0,
+          "seed": 20,
+          "title": "tiles 0"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 1,
+          "repeats": 6.0,
+          "seed": 21,
+          "title": "tiles 1"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 4,
+          "repeats": 6.0,
+          "seed": 24,
+          "title": "tiles 4"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 6,
+          "repeats": 6.0,
+          "seed": 26,
+          "title": "tiles 6"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 9,
+          "repeats": 6.0,
+          "seed": 29,
+          "title": "tiles 9"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 12,
+          "repeats": 6.0,
+          "seed": 32,
+          "title": "tiles 12"
+        }
+      ]
+    },
+    {
+      "id": "north",
+      "at": [
+        -10,
+        0,
+        -3
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "repeat": {
+        "count": 6,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 2,
+          "repeats": 6.0,
+          "seed": 32,
+          "title": "tiles 2"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 3,
+          "repeats": 6.0,
+          "seed": 33,
+          "title": "tiles 3"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 5,
+          "repeats": 6.0,
+          "seed": 35,
+          "title": "tiles 5"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 7,
+          "repeats": 6.0,
+          "seed": 37,
+          "title": "tiles 7"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 6.0,
+          "seed": 38,
+          "title": "tiles 8"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 10,
+          "repeats": 6.0,
+          "seed": 40,
+          "title": "tiles 10"
+        }
+      ]
+    },
+    {
+      "id": "south",
+      "at": [
+        -10,
+        0,
+        3
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "repeat": {
+        "count": 6,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 11,
+          "repeats": 6.0,
+          "seed": 51,
+          "title": "tiles 11"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 13,
+          "repeats": 6.0,
+          "seed": 53,
+          "title": "tiles 13"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 14,
+          "repeats": 6.0,
+          "seed": 54,
+          "title": "tiles 14"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 15,
+          "repeats": 6.0,
+          "seed": 55,
+          "title": "tiles 15"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 16,
+          "repeats": 6.0,
+          "seed": 56,
+          "title": "tiles 16"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 6.0,
+          "seed": 40,
+          "title": "tiles 0"
+        }
+      ]
+    }
+  ]
+}

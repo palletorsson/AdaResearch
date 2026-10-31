@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "units": "metres",
+  "places": [],
+  "principle": "the canopy",
+  "title": "Boards hung overhead at 3 m, walked under, patterns on their undersides",
+  "camera": [
+    [
+      -9,
+      0.7,
+      3.5
+    ],
+    [
+      0,
+      2.9,
+      0
+    ]
+  ],
+  "boards": [
+    {
+      "id": "ground",
+      "at": [
+        -8,
+        0,
+        0
+      ],
+      "size": [
+        4,
+        4
+      ],
+      "orient": "floor",
+      "frame": false,
+      "repeat": {
+        "count": 5,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "colour",
+          "colour": "#2f3a44",
+          "title": "ground"
+        }
+      ]
+    },
+    {
+      "id": "hung",
+      "at": [
+        -8,
+        3,
+        0
+      ],
+      "size": [
+        4,
+        2
+      ],
+      "orient": "ceiling",
+      "repeat": {
+        "count": 5,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 1,
+          "repeats": 4.0,
+          "seed": 51,
+          "title": "group 1"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 5,
+          "repeats": 4.0,
+          "seed": 55,
+          "title": "group 5"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 9,
+          "repeats": 4.0,
+          "seed": 59,
+          "title": "group 9"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 13,
+          "repeats": 4.0,
+          "seed": 63,
+          "title": "group 13"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 15,
+          "repeats": 4.0,
+          "seed": 65,
+          "title": "group 15"
+        }
+      ]
+    }
+  ]
+}

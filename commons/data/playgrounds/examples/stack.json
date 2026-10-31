@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "units": "metres",
+  "places": [],
+  "principle": "the stack",
+  "title": "Floors at 0, 2 and 4 m on posts, the vertical pitch of two",
+  "camera": [
+    [
+      -8,
+      5,
+      8
+    ],
+    [
+      0,
+      2.2,
+      0
+    ]
+  ],
+  "boards": [
+    {
+      "id": "stack",
+      "at": [
+        0,
+        0,
+        0
+      ],
+      "size": [
+        4,
+        4
+      ],
+      "orient": "floor",
+      "repeat": {
+        "count": 3,
+        "step": [
+          0,
+          2,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "shader",
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+          "params": {
+            "grid_size": 6.0,
+            "jitter": 0.85,
+            "display_mode": 0.0,
+            "seed": 13.0
+          },
+          "title": "level 0"
+        },
+        {
+          "content": "shader",
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_truchet.gdshader",
+          "params": {
+            "grid_size": 8.0,
+            "line_thickness": 0.08,
+            "seed": 42.0
+          },
+          "title": "level 1"
+        },
+        {
+          "content": "shader",
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+          "params": {
+            "grid_size": 5.0,
+            "shape_size": 0.3
+          },
+          "title": "level 2"
+        }
+      ]
+    }
+  ]
+}

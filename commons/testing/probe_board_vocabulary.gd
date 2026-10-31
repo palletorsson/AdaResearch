@@ -46,8 +46,10 @@ func _ready() -> void:
 	for c in hall.get_children():
 		if c.has_meta("activity_artifact"):
 			var k: String = str(c.get_meta("activity_artifact"));by_kind[k] = by_kind.get(k, 0) + 1
-	var hall_ok: bool = by_kind.get("display_plate", 0) == 15 and by_kind.get("pocket_test", 0) == 3 and by_kind.get("noise_space", 0) == 2 and by_kind.get("random_space", 0) == 1 and by_kind.get("sine_space_floor", 0) == 1 and hall.recipe.assemblies.size() > approved_assemblies
-	_check(report, "B hall: from the sidecar the four samples, three ball tests, ten path screens and five posters stand, and the frames' assemblies are in the loaded recipe beyond the approved count", hall_ok, {"by_kind": by_kind, "assemblies": hall.recipe.assemblies.size(), "approved": approved_assemblies})
+	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/trials/principal_places/activities.json"))
+	var want_plates: int = preload("res://commons/modular/places/board_builder.gd").copies(side)
+	var hall_ok: bool = by_kind.get("display_plate", 0) == want_plates and by_kind.get("pocket_test", 0) == 3 and by_kind.get("noise_space", 0) == 2 and by_kind.get("random_space", 0) == 1 and by_kind.get("sine_space_floor", 0) == 1 and hall.recipe.assemblies.size() > approved_assemblies
+	_check(report, "B hall: from the sidecar the four samples, three ball tests and every board stand, and the frames' assemblies are in the loaded recipe beyond the approved count", hall_ok, {"by_kind": by_kind, "assemblies": hall.recipe.assemblies.size(), "approved": approved_assemblies})
 	var shots := {"boards_path": [Vector3(-22, 1.7, 9), Vector3(0, 0.5, 10)], "boards_above": [Vector3(0, 12, 22), Vector3(0, 0.5, 10)]}
 	for k in shots:
 		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])
