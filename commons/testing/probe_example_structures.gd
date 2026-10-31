@@ -11,6 +11,7 @@ const Builder = preload("res://commons/modular/places/place_builder.gd")
 const Boards = preload("res://commons/modular/places/board_builder.gd")
 const HALL = preload("res://commons/void/trials/principal_places/places.tscn")
 const DIR := "res://commons/data/playgrounds/examples/"
+const MAPS := "res://commons/data/playgrounds/maps/"
 
 func _ready() -> void:
 	var out_dir := ProjectSettings.globalize_path("res://ada_run/workstation");DirAccess.make_dir_recursive_absolute(out_dir)
@@ -25,8 +26,18 @@ func _ready() -> void:
 		if f.ends_with(".json"):names.append(f.trim_suffix(".json"))
 		f = dir.get_next()
 	names.sort()
-	for name in names:
-		var spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIR + name + ".json"))
+	var mdir := DirAccess.open(MAPS);var mnames: Array[String] = []
+	mdir.list_dir_begin();var mf := mdir.get_next()
+	while mf != "":
+		if mf.ends_with(".json"):mnames.append(mf.trim_suffix(".json"))
+		mf = mdir.get_next()
+	mnames.sort()
+	var runs: Array = []
+	for n in names:runs.append([n, DIR, "example_"])
+	for n in mnames:runs.append([n, MAPS, "map_"])
+	for run in runs:
+		var name: String = run[0];var folder: String = run[1];var prefix: String = run[2]
+		var spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(folder + name + ".json"))
 		var built: Dictionary = Builder.new().compile(spec);var errs: Array = built.get("errors", [])
 		var recipe: Dictionary = built.get("recipe", {});var want := Boards.copies(spec)
 		var acts: Array = recipe.get("activities", [])
@@ -38,14 +49,14 @@ func _ready() -> void:
 			if c.has_meta("activity_artifact"):standing += 1
 		var framed: bool = recipe.get("assemblies", []).size() >= want * 4
 		var ok: bool = errs.is_empty() and acts.size() == want and standing == want and framed
-		report.examples[name] = {"plates": want, "standing": standing, "assemblies": recipe.get("assemblies", []).size(), "principle": spec.get("principle", "")}
+		report.examples[prefix + name] = {"plates": want, "standing": standing, "assemblies": recipe.get("assemblies", []).size(), "principle": spec.get("principle", "")}
 		_check(report, "%s (%s): compiles clean into %d framed plates, all standing" % [name, spec.get("principle", ""), want], ok, {"errors": errs, "activities": acts.size(), "standing": standing, "assemblies": recipe.get("assemblies", []).size()})
 		var look: Array = spec.get("camera", [[0, 10, 22], [0, 1, 0]])
 		cam.transform = Transform3D(Basis(), Vector3(look[0][0], look[0][1], look[0][2])).looking_at(Vector3(look[1][0], look[1][1], look[1][2]))
 		for t in 3:
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
-		get_viewport().get_texture().get_image().save_png(out_dir.path_join("example_%s.png" % name))
+		get_viewport().get_texture().get_image().save_png(out_dir.path_join("%s%s.png" % [prefix, name]))
 		scene.free()
 		_save(out_dir, report)   # progress for the watchdog
 	# the hall with its sidecar: the path, the tiling corridor and the pattern rack
