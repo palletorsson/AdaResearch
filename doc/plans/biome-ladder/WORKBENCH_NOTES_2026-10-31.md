@@ -54,3 +54,22 @@ modules, and the thinking for the presentation. Companion to `INVENTORY_HANDOVER
 - From single code tutorials to a world that can never be finished. Layers.
 - Open choice: start the talk with this, or place it after a segment of more action.
 - Doc: https://docs.google.com/document/d/1z3Sk3YY3VYiNUau5F0IhxHQxusAG-e2sRmDvt3CQn7M/edit?usp=drivesdk
+
+## Inspiration images (Palle, 31 Oct, evening) — read against our pieces
+
+Six indoor-playground pictures (Dreamland-style soft play, a ball pit under a projected game wall, an LED floor
+walkway between poster walls, a grey ball pit with arches, a soft-play castle with a ringed ball pool, a foam
+tile floor). What they say for the scaffolding:
+
+- **The ball pit is a place type.** A low-rimmed basin full of balls, climb-in. The pocket test already fills a
+  basin with a hundred balls; a pit is that with a thousand light ones and no readout, or the readout as the game.
+- **A screen wall over the pit.** The projection wall in the pit picture = a shader screen as the pit's back
+  wall, the balls as the audience. Pit + wall frame is one place recipe.
+- **The LED floor is the walkable glass screen**, as a path: the path-of-screens principle laid on the floor
+  with posters on the walls. Shader_05 could be walked ON rather than past.
+- **Climbing walls with pattern panels** = the rack principle on 3 m frames, panels as 1 × 1 plates with holds
+  between; the tile editor's output as a climbing wall.
+- **The stacked-ball column** (Dreamland's) is our contact-snapped 6-ball column made big: a structure of balls,
+  climbable. The cube towers are the modular cubes.
+- **The foam tile floor** is the tiling array at 1 m with a colour grid: the floor itself is the pattern plate.
+- **Slides, tunnels, arches, trusses** are kit: the pattern tunnel machine, ramps, the scaffold bars.
