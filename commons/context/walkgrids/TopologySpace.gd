@@ -15,9 +15,15 @@ class_name TopologySpace
 ## hand under the rim; and is EDGE-SECURED: within edge_band of its perimeter the relief fades to the floor, so the
 ## surface meets the pool floor flush all round and the rim keeps the walker in. With no slot (slot_depth 0, edge_band
 ## 0) nothing here changes a placed surface. Subclasses pass their heights through finish_heights().
-@export var edge_band := 0.0      # metres from the perimeter over which the relief fades to the floor
+## THE RIM (Palle, 2026-10-31: "the edge of the floor and walls should in most cases have a rim that is flat, so it
+## can be placed in a basin or a wall frame and align with the flat meeting edge"): a band rim_width wide along the
+## whole perimeter that lies exactly at the meeting level - the floor plane, or the wall plane - and only inward of
+## it, across edge_band, the relief rises. The piece fills its slot (slot_margin 0) and its flat rim meets the basin's
+## wall or the frame's edge flush.
+@export var rim_width := 0.5      # metres of flat rim at the meeting level, all round
+@export var edge_band := 0.0      # metres inward of the rim over which the relief rises from the rim
 @export var slot_depth := 0.0     # >0: fitted into a slot this deep
-@export var slot_margin := 0.5    # metres kept free between the surface and the slot's wall
+@export var slot_margin := 0.0    # metres kept free between the surface and the slot's wall (the rim does the meeting)
 ## WALLS TOO (Palle, 2026-10-31: "all there can also be walls"): mounted "wall", the same surface STANDS - its width
 ## along the node's X, its height up the node's Y from the node's origin (the wall's base line), its relief into the
 ## room along the node's -Z, fading to the wall plane at its edges. slot_size is then [width, height] and slot_depth
@@ -26,11 +32,13 @@ class_name TopologySpace
 var fitted := false
 const RIM_CLEARANCE := 0.1
 
-func fit_slot(size: Vector2, depth: float, margin := slot_margin, band := 1.0) -> void:
+func fit_slot(size: Vector2, depth: float, margin := slot_margin, band := 1.0, rim := rim_width) -> void:
 	slot_margin = margin
 	# a wall keeps its foot on the floor: the margin is taken off its width twice and off its height once, at the top
 	space_size = Vector2(size.x - 2.0 * margin, size.y - margin).max(Vector2(1, .5)) if mount == "wall" else (size - Vector2.ONE * 2.0 * margin).max(Vector2(1, 1))
-	slot_depth = depth;edge_band = minf(band, minf(space_size.x, space_size.y) / 4.0);fitted = true;gravity_point_test = false
+	var least := minf(space_size.x, space_size.y)
+	rim_width = clampf(rim, 0.0, least / 4.0);edge_band = clampf(band, 0.0, least / 4.0)
+	slot_depth = depth;fitted = true;gravity_point_test = false
 	_stand()
 
 ## The body stands up for a wall (local z becomes up, local relief becomes -Z) and lies flat for a floor.
@@ -38,20 +46,22 @@ func _stand() -> void:
 	if static_body == null:return
 	static_body.transform = Transform3D(Basis(Vector3.RIGHT, -PI / 2.0), Vector3(0, space_size.y / 2.0, 0)) if mount == "wall" else Transform3D.IDENTITY
 
-## 1 in the interior, 0 at the perimeter, smooth across the band.
+## 0 on the rim (the flat meeting edge), rising smoothly across the band inward of it, 1 in the interior.
 func edge_factor(wx: float, wz: float) -> float:
+	if edge_band <= 0.0 and rim_width <= 0.0:return 1.0
+	var d := minf(space_size.x / 2.0 - absf(wx), space_size.y / 2.0 - absf(wz)) - rim_width
+	if d <= 0.0:return 0.0
 	if edge_band <= 0.0:return 1.0
-	var d := minf(space_size.x / 2.0 - absf(wx), space_size.y / 2.0 - absf(wz))
 	return smoothstep(0.0, 1.0, clampf(d / edge_band, 0.0, 1.0))
 
 ## The heights as the slot wants them: the band fades toward the field's lowest value (so the perimeter and the
 ## floor meet), then the whole field is lifted onto the floor and scaled under the rim. No slot: the heights as given.
 func finish_heights(heights: Array) -> Array:
-	if edge_band <= 0.0 and slot_depth <= 0.0:return heights
+	if edge_band <= 0.0 and rim_width <= 0.0 and slot_depth <= 0.0:return heights
 	var out: Array = heights.duplicate()
 	var lo := INF;var hi := -INF
 	for h in out:lo = minf(lo, float(h));hi = maxf(hi, float(h))
-	if edge_band > 0.0:
+	if edge_band > 0.0 or rim_width > 0.0:
 		for z in range(resolution + 1):
 			for x in range(resolution + 1):
 				var wx := (x / float(resolution)) * space_size.x - space_size.x / 2.0
@@ -69,9 +79,10 @@ func apply_slot_config(config: Dictionary) -> bool:
 	if config.has("mount"):mount = "wall" if str(config.mount) == "wall" else "floor";changed = true
 	if config.has("slot_size") and config.slot_size is Array and (config.slot_size as Array).size() == 2:
 		var sz := Vector2(float(config.slot_size[0]), float(config.slot_size[1]))
-		fit_slot(sz, float(config.get("slot_depth", slot_depth)), float(config.get("slot_margin", slot_margin)), float(config.get("edge_band", 1.0)));changed = true
+		fit_slot(sz, float(config.get("slot_depth", slot_depth)), float(config.get("slot_margin", slot_margin)), float(config.get("edge_band", 1.0)), float(config.get("rim_width", rim_width)));changed = true
 	else:
 		if config.has("edge_band"):edge_band = maxf(float(config.edge_band), 0.0);changed = true
+		if config.has("rim_width"):rim_width = maxf(float(config.rim_width), 0.0);changed = true
 		if config.has("slot_depth"):slot_depth = maxf(float(config.slot_depth), 0.0);changed = true
 	if config.has("height_scale"):height_scale = float(config.height_scale);changed = true
 	if config.has("resolution"):resolution = clampi(int(config.resolution), 4, 200);changed = true

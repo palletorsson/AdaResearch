@@ -22,7 +22,7 @@ func _ready() -> void:
 	var report := {"checks": []}
 	var floor_b := StaticBody3D.new();floor_b.collision_layer = 1;add_child(floor_b)
 	var fs := CollisionShape3D.new();var fb := BoxShape3D.new();fb.size = Vector3(60, .1, 60);fs.shape = fb;fs.position.y = -.05;floor_b.add_child(fs)
-	var slot := {"slot_size": [10, 8], "slot_depth": 1.0, "slot_margin": 0.5, "edge_band": 1.0}
+	var slot := {"slot_size": [10, 8], "slot_depth": 1.0, "slot_margin": 0.0, "rim_width": 0.5, "edge_band": 1.0}
 	var i := 0
 	for token in TOKENS:
 		var path: String = Items.scene_for(token)
@@ -32,20 +32,21 @@ func _ready() -> void:
 		for f in 3:
 			await get_tree().physics_frame
 		var mi: MeshInstance3D = node.mesh_instance;var box: AABB = mi.mesh.get_aabb()
-		var fits: bool = absf(box.size.x - 9.0) < .05 and absf(box.size.z - 7.0) < .05 and absf(box.position.y) < 1e-3 and box.end.y <= 0.9 + 1e-3 and box.end.y > 0.05
-		_check(report, "A %s fits: 9 x 7 m in the 10 x 8 slot, lowest point on the floor, highest under the rim" % token, fits, {"size": box.size, "low": box.position.y, "high": box.end.y})
+		var fits: bool = absf(box.size.x - 10.0) < .05 and absf(box.size.z - 8.0) < .05 and absf(box.position.y) < 1e-3 and box.end.y <= 0.9 + 1e-3 and box.end.y > 0.05
+		_check(report, "A %s fits: fills the 10 x 8 slot, lowest point on the floor, highest under the rim" % token, fits, {"size": box.size, "low": box.position.y, "high": box.end.y})
 		# B - the perimeter at the floor
 		var verts: PackedVector3Array = (mi.mesh as ArrayMesh).surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
-		var worst := 0.0;var rim_n := 0
+		var worst := 0.0;var rim_n := 0;var inner_hi := 0.0
 		for v in verts:
-			if absf(v.x) > 4.5 - 1e-3 or absf(v.z) > 3.5 - 1e-3:rim_n += 1;worst = maxf(worst, absf(v.y))
-		_check(report, "B %s edge-secured: every perimeter vertex at the floor" % token, rim_n > 100 and worst < 1e-3, {"perimeter_vertices": rim_n, "worst": worst})
+			if absf(v.x) > 5.0 - 0.5 - 1e-3 or absf(v.z) > 4.0 - 0.5 - 1e-3:rim_n += 1;worst = maxf(worst, absf(v.y))
+			elif absf(v.x) < 2.0 and absf(v.z) < 1.5:inner_hi = maxf(inner_hi, v.y)
+		_check(report, "B %s flat rim: every vertex within 0.5 m of the perimeter lies at the floor; the middle rises" % token, rim_n > 400 and worst < 1e-3 and inner_hi > 0.05, {"rim_vertices": rim_n, "worst": worst, "inner_high": inner_hi})
 		# C - collision: a ray down at the margin meets the floor height
 		var shape_ok: bool = node.collision_shape.shape is ConcavePolygonShape3D
-		var from: Vector3 = node.global_position + Vector3(4.45, 3, 3.45)   # 5 cm in from the perimeter, where the band has faded to the floor
+		var from: Vector3 = node.global_position + Vector3(4.75, 3, 3.75)   # on the flat rim, 25 cm in from the perimeter
 		var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 6.0, 1);var hit := get_world_3d().direct_space_state.intersect_ray(q)
 		var floor_hit: bool = not hit.is_empty() and absf(hit.position.y - node.global_position.y) < .02 and hit.collider == node.static_body
-		_check(report, "C %s collision: trimesh, and a ray at the margin lands on the floor" % token, shape_ok and floor_hit, {"shape": str(node.collision_shape.shape), "hit_y": hit.get("position", null), "collider": str(hit.collider.name) if not hit.is_empty() else "-"})
+		_check(report, "C %s collision: trimesh, and a ray onto the rim lands on the floor" % token, shape_ok and floor_hit, {"shape": str(node.collision_shape.shape), "hit_y": hit.get("position", null), "collider": str(hit.collider.name) if not hit.is_empty() else "-"})
 		i += 1
 	# D - no slot: the surface as it always was
 	var plain: Node3D = load(Items.scene_for("sine_space_floor")).instantiate();plain.gravity_point_test = false;plain.position = Vector3(0, 0, 30);add_child(plain)
@@ -64,22 +65,22 @@ func _ready() -> void:
 	for f in 3:
 		await get_tree().physics_frame
 	var mbox: AABB = made.mesh_instance.mesh.get_aabb() if made else AABB()
-	var made_ok: bool = made != null and is_equal_approx(made.position.y, 3.0) and absf(mbox.size.x - 9.0) < .05 and mbox.end.y <= .9 + 1e-3 and made.fitted
+	var made_ok: bool = made != null and is_equal_approx(made.position.y, 3.0) and absf(mbox.size.x - 10.0) < .05 and mbox.end.y <= .9 + 1e-3 and made.fitted
 	_check(report, "E place: compiled with an activity - recipe.activities carries the slot and the knobs; place_activity builds the noise space on the pool floor at y 3, fitted", act_ok and made_ok, {"errors": built.get("errors", []), "activities": acts, "made_y": made.position.y if made else null, "size": mbox.size})
 	# F - WALLS TOO: the noise surface mounted "wall" in a 10 m wide, 1 m high slot stands up - 9 m wide, 1 m high from
 	# its base line, its relief toward -Z and no deeper than 0.4 m, flat at its edges
 	var wall: Node3D = load(Items.scene_for("noise_space")).instantiate()
-	var wall_cfg := {"mount": "wall", "slot_size": [10, 1.5], "slot_depth": 0.5, "slot_margin": 0.5, "edge_band": 1.0, "height_scale": 2.0}
+	var wall_cfg := {"mount": "wall", "slot_size": [10, 1.5], "slot_depth": 0.5, "slot_margin": 0.0, "rim_width": 0.3, "edge_band": 0.5, "height_scale": 2.0}
 	for k in wall_cfg:wall.set_meta("config_%s" % k, wall_cfg[k])
 	wall.position = Vector3(0, 0, -12);add_child(wall);wall.apply_grid_config(wall_cfg)
 	for f in 3:
 		await get_tree().physics_frame
 	var wb: AABB = wall.static_body.transform * wall.mesh_instance.mesh.get_aabb()   # in the node's space: the wall's base line at the origin
-	var stands: bool = absf(wb.size.x - 9.0) < .05 and absf(wb.position.y) < 1e-3 and absf(wb.size.y - 1.0) < .05 and wb.end.z <= 1e-3 and wb.position.z >= -0.4 - 1e-3 and wb.position.z < -0.05
+	var stands: bool = absf(wb.size.x - 10.0) < .05 and absf(wb.position.y) < 1e-3 and absf(wb.size.y - 1.5) < .05 and wb.end.z <= 1e-3 and wb.position.z >= -0.4 - 1e-3 and wb.position.z < -0.05
 	var top_from := wall.global_position + Vector3(0, 0.5, -3.0)
 	var wq := PhysicsRayQueryParameters3D.create(top_from, top_from + Vector3.BACK * 6.0, 1);var whit := get_world_3d().direct_space_state.intersect_ray(wq)
 	var wall_hit: bool = not whit.is_empty() and whit.collider == wall.static_body and whit.position.z < wall.global_position.z + 1e-3 and whit.position.z > wall.global_position.z - 0.45
-	_check(report, "F wall: mounted wall, the noise surface stands 9 m wide and 1 m high from its base line, relief into -Z under 0.4 m, and a ray across the room meets it", stands and wall_hit, {"box": wb, "hit": whit.get("position", null)})
+	_check(report, "F wall: mounted wall, the noise surface stands 10 m wide and 1.5 m high from its base line, relief into -Z under 0.4 m, and a ray across the room meets it", stands and wall_hit, {"box": wb, "hit": whit.get("position", null)})
 	# G - the builder puts a wall activity at the pool's south wall, just inside the shell, facing the room
 	var wspec := {"version": 1, "units": "metres", "places": [{"id": "place", "at": [0, 0], "y": 4, "size": [10, 8], "depth": 1, "type": "plastic_pool", "rim": 1, "access": {"outer": "ramp", "inner": "ramp"}, "activity": {"artifact": "sine_space_floor", "mount": "wall", "side": "east"}}]}
 	var wbuilt: Dictionary = Builder.new().compile(wspec);var wacts: Array = wbuilt.get("recipe", {}).get("activities", [])
@@ -89,8 +90,8 @@ func _ready() -> void:
 	for f in 3:
 		await get_tree().physics_frame
 	var wmb: AABB = (wmade.global_transform * wmade.static_body.transform * wmade.mesh_instance.mesh.get_aabb()) if wmade else AABB()
-	var g_made: bool = wmade != null and wmade.mount == "wall" and absf(wmb.size.z - 7.0) < .05 and wmb.position.x < 4.87 and wmb.end.x <= 4.87 + 1e-3 and absf(wmb.position.y - 3.0) < 1e-3
-	_check(report, "G place wall: the east wall activity stands just inside the shell at x 4.87, turned to face the room, 7 m along the wall from the pool floor at y 3", g_ok and g_made, {"errors": wbuilt.get("errors", []), "act": wacts, "box": wmb, "g_ok": g_ok, "g_made": g_made, "pos_eq": is_equal_approx(float(wacts[0].position[0]), 5.0 - 0.13) if wacts.size() == 1 else null, "end_x": wmb.end.x, "mount": wmade.mount if wmade else null})
+	var g_made: bool = wmade != null and wmade.mount == "wall" and absf(wmb.size.z - 8.0) < .05 and wmb.position.x < 4.87 and wmb.end.x <= 4.87 + 1e-3 and absf(wmb.position.y - 3.0) < 1e-3
+	_check(report, "G place wall: the east wall activity stands just inside the shell at x 4.87, turned to face the room, 8 m along the wall from the pool floor at y 3", g_ok and g_made, {"errors": wbuilt.get("errors", []), "act": wacts, "box": wmb, "g_ok": g_ok, "g_made": g_made, "pos_eq": is_equal_approx(float(wacts[0].position[0]), 5.0 - 0.13) if wacts.size() == 1 else null, "end_x": wmb.end.x, "mount": wmade.mount if wmade else null})
 	cam.transform = Transform3D(Basis(), Vector3(0, 9, 16)).looking_at(Vector3(0, 0.5, 0));cam.fov = 55
 	for f in 3:
 		await get_tree().process_frame

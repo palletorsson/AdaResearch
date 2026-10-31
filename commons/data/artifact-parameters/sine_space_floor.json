@@ -20,9 +20,14 @@
       20
     ],
     "min_depth": 1,
-    "margin": 0.5,
+    "margin": 0.0,
+    "rim_width": 0.5,
     "edge_band": 1.0,
-    "note": "Fitted by TopologySpace.fit_slot: footprint minus the margin, the lowest point on the pool floor, the highest 0.1 m under the rim, the relief fading to the floor across the edge band. Also stands alone with no slot."
+    "mount": [
+      "floor",
+      "wall"
+    ],
+    "note": "Fitted by TopologySpace.fit_slot: fills the slot; a flat RIM rim_width wide lies at the meeting level (the pool floor, or the wall plane) all round, so the piece drops into a basin or a wall frame flush with its edge; the relief rises inward of the rim across edge_band; the lowest point rests on the floor and the highest stays 0.1 m under the rim height. Also stands alone with no slot."
   },
   "parameters": [
     {
@@ -77,7 +82,16 @@
       "max": 3.0,
       "step": 0.25,
       "default": 1.0,
-      "question": "How wide is the flat margin that meets the pool floor?"
+      "question": "How far inward of the rim does the relief take to rise?"
+    },
+    {
+      "key": "rim_width",
+      "label": "Flat rim",
+      "min": 0.0,
+      "max": 2.0,
+      "step": 0.25,
+      "default": 0.5,
+      "question": "How wide is the flat band at the edge that meets the basin or the frame?"
     }
   ],
   "presets": [
