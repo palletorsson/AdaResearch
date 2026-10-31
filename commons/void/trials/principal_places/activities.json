@@ -1,0 +1,368 @@
+{
+  "_about": "The sidecar of the principal-places hall (floor 210): activities and framed boards that board_builder.gd compiles into the loaded recipe at the hall's load, so recipe.json - the approved hall - is never edited. activities: the sample surfaces in the three places and their ball tests. boards: the Shader_05 floor path and the posters, as pieces of the structure (frames of the kit's bars).",
+  "activities": [
+    {
+      "artifact": "noise_space",
+      "config": {
+        "edge_band": 1.0,
+        "height_scale": 1.0,
+        "noise_scale": 3.0,
+        "rim_width": 0.5,
+        "slot_depth": 0.5,
+        "slot_floor": 0.07,
+        "slot_margin": 0.0,
+        "slot_rim": 0.5,
+        "slot_size": [
+          8,
+          8
+        ]
+      },
+      "id": "disco-plate_activity",
+      "mount": "floor",
+      "place": "disco-plate",
+      "position": [
+        -14.0,
+        0.07,
+        0.0
+      ]
+    },
+    {
+      "artifact": "random_space",
+      "config": {
+        "chaos_level": 1.0,
+        "edge_band": 1.0,
+        "law": "gaussian",
+        "resolution": 50,
+        "rim_width": 0.5,
+        "slot_depth": 1.0,
+        "slot_floor": 3.0,
+        "slot_margin": 0.0,
+        "slot_rim": 4.0,
+        "slot_size": [
+          10,
+          10
+        ]
+      },
+      "id": "biome-plastic-bath_activity",
+      "mount": "floor",
+      "place": "biome-plastic-bath",
+      "position": [
+        0.0,
+        3.03,
+        0.0
+      ]
+    },
+    {
+      "artifact": "sine_space_floor",
+      "config": {
+        "edge_band": 1.0,
+        "rim_width": 0.5,
+        "slot_depth": 1.0,
+        "slot_floor": 7.0,
+        "slot_margin": 0.0,
+        "slot_rim": 8.0,
+        "slot_size": [
+          8,
+          8
+        ],
+        "wave_amplitude": 0.6,
+        "wave_frequency": 0.8
+      },
+      "id": "hanging-steel-bath_activity",
+      "mount": "floor",
+      "place": "hanging-steel-bath",
+      "position": [
+        14.0,
+        7.03,
+        0.0
+      ]
+    },
+    {
+      "artifact": "noise_space",
+      "config": {
+        "edge_band": 0.4,
+        "height_scale": 1.5,
+        "mount": "wall",
+        "noise_scale": 4.0,
+        "rim_width": 0.3,
+        "slot_depth": 0.5,
+        "slot_floor": 3.0,
+        "slot_margin": 0.0,
+        "slot_rim": 4.0,
+        "slot_size": [
+          10,
+          1
+        ]
+      },
+      "id": "biome-plastic-bath_activity_north",
+      "mount": "wall",
+      "place": "biome-plastic-bath",
+      "position": [
+        0.0,
+        3.03,
+        -4.87
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ],
+      "side": "north"
+    },
+    {
+      "artifact": "pocket_test",
+      "config": {
+        "count": 100,
+        "rim_width": 0.5,
+        "slot_depth": 0.5,
+        "slot_size": [
+          8,
+          8
+        ],
+        "surface": "disco-plate_activity"
+      },
+      "id": "disco-plate_balltest",
+      "mount": "floor",
+      "place": "disco-plate",
+      "position": [
+        -14.0,
+        0.07,
+        0.0
+      ]
+    },
+    {
+      "artifact": "pocket_test",
+      "config": {
+        "count": 100,
+        "rim_width": 0.5,
+        "slot_depth": 1.0,
+        "slot_size": [
+          10,
+          10
+        ],
+        "surface": "biome-plastic-bath_activity"
+      },
+      "id": "biome-plastic-bath_balltest",
+      "mount": "floor",
+      "place": "biome-plastic-bath",
+      "position": [
+        0.0,
+        3.03,
+        0.0
+      ]
+    },
+    {
+      "artifact": "pocket_test",
+      "config": {
+        "count": 100,
+        "rim_width": 0.5,
+        "slot_depth": 1.0,
+        "slot_size": [
+          8,
+          8
+        ],
+        "surface": "hanging-steel-bath_activity"
+      },
+      "id": "hanging-steel-bath_balltest",
+      "mount": "floor",
+      "place": "hanging-steel-bath",
+      "position": [
+        14.0,
+        7.03,
+        0.0
+      ]
+    }
+  ],
+  "boards": [
+    {
+      "id": "shader05_path",
+      "at": [
+        -18,
+        0,
+        10
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "orient": "floor",
+      "frame": true,
+      "repeat": {
+        "count": 10,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "shader",
+          "params": {
+            "animate": 0.0,
+            "grid_size": 5.0,
+            "shape_size": 0.3
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+          "title": "01  Tiling"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "grid_size": 8.0,
+            "line_thickness": 0.08,
+            "seed": 42.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_truchet.gdshader",
+          "title": "02  Truchet"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "dot_size": 0.25,
+            "grid_size": 6.0,
+            "offset_amount": 0.5
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_offset.gdshader",
+          "title": "03  Offset rows"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "cols": 4.0,
+            "mortar": 0.04,
+            "rows": 8.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_brick.gdshader",
+          "title": "04  Brick"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "aperiodic_mix": 1.0,
+            "edge_width": 0.12,
+            "grid_size": 10.0,
+            "seed": 7.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_wang.gdshader",
+          "title": "05  Wang tiles"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "display_mode": 0.0,
+            "grid_size": 6.0,
+            "jitter": 0.85,
+            "seed": 13.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+          "title": "06  Voronoi cells"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "display_mode": 2.0,
+            "grid_size": 8.0,
+            "jitter": 0.9,
+            "seed": 31.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+          "title": "07  Voronoi edges"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "lacunarity": 2.0,
+            "noise_scale": 6.0,
+            "noise_type": 0.0,
+            "octaves_float": 4.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+          "title": "08  Simplex fBm"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "lacunarity": 2.0,
+            "noise_scale": 5.0,
+            "noise_type": 1.0,
+            "octaves_float": 3.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+          "title": "09  Worley cells"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "lacunarity": 2.0,
+            "noise_scale": 4.0,
+            "noise_type": 2.0,
+            "octaves_float": 4.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+          "title": "10  Domain warp"
+        }
+      ]
+    },
+    {
+      "id": "shader05_posters",
+      "at": [
+        -16,
+        0,
+        13
+      ],
+      "size": [
+        2,
+        2
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "repeat": {
+        "count": 5,
+        "step": [
+          8,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 3.0,
+          "seed": 11,
+          "title": "group 0"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 2,
+          "repeats": 3.0,
+          "seed": 12,
+          "title": "group 2"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 4,
+          "repeats": 3.0,
+          "seed": 13,
+          "title": "group 4"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 6,
+          "repeats": 3.0,
+          "seed": 14,
+          "title": "group 6"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 3.0,
+          "seed": 15,
+          "title": "group 8"
+        }
+      ]
+    }
+  ]
+}
