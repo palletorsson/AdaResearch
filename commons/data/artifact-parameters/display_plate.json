@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "artifact": "display_plate",
+  "prefab": "display_plate",
+  "category": "display",
+  "playground": "slot",
+  "title": "Display plate / a content on a plate",
+  "question": "What does a pattern become when it is a floor you walk on, or a wall you face?",
+  "source_scene": "res://commons/artifacts/display_plate/display_plate.tscn",
+  "source_driver": "res://commons/artifacts/display_plate/display_plate.gd",
+  "reference": "The common plate of the tiling, patterns, shaders and colour sequences: their content is a material on a quad; the plate is the slot. Walkable glass on the floor (the LED-floor pictures), a screen or poster on a wall.",
+  "physical_model": "A thin static box the size of the slot (the glass) with the content quad a hair above it inside the rim; stood up for walls; two posts when free-standing.",
+  "slot": {
+    "mount": [
+      "floor",
+      "wall"
+    ],
+    "rim_width": 0.25,
+    "note": "The rim is the frame; the content quad is the slot minus the rim. Sizes 1 to 10 m."
+  },
+  "parameters": [
+    {
+      "key": "content",
+      "label": "Content",
+      "choices": [
+        "shader",
+        "wallpaper",
+        "colour"
+      ],
+      "default": "colour",
+      "question": "A shader chapter, a wallpaper pattern, or a plain colour?"
+    },
+    {
+      "key": "shader",
+      "label": "Shader",
+      "text": true,
+      "default": "",
+      "question": "Which .gdshader (res:// path)?"
+    },
+    {
+      "key": "wallpaper_group",
+      "label": "Group",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "default": 0,
+      "question": "Which of the 17 wallpaper groups tiles the domain?"
+    },
+    {
+      "key": "repeats",
+      "label": "Repeats",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "question": "How many tiles across the plate?"
+    },
+    {
+      "key": "rim_width",
+      "label": "Rim",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "default": 0.25,
+      "question": "How wide is the frame?"
+    },
+    {
+      "key": "thickness",
+      "label": "Glass",
+      "min": 0.02,
+      "max": 0.2,
+      "step": 0.01,
+      "default": 0.04,
+      "question": "How thick is the plate you stand on?"
+    },
+    {
+      "key": "stand",
+      "label": "Posts",
+      "choices": [
+        "false",
+        "true"
+      ],
+      "default": "false",
+      "question": "A wall plate on its own posts, or set into a frame?"
+    }
+  ],
+  "presets": [
+    {
+      "id": "tiling_floor",
+      "title": "Tiling / the chapter's first shader on the floor",
+      "settings": {
+        "content": "shader",
+        "shader": "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader"
+      }
+    },
+    {
+      "id": "poster",
+      "title": "Poster / a wallpaper group on posts",
+      "settings": {
+        "content": "wallpaper",
+        "mount": "wall",
+        "stand": "true"
+      }
+    }
+  ]
+}

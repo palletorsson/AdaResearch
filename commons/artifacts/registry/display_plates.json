@@ -1,0 +1,28 @@
+{
+  "registry_info": {
+    "category": "display_plates",
+    "description": "The display plate: one flat plate that fits a slot (footprint, flat rim as frame, floor or wall) and carries a content - a shader with parameters, a wallpaper domain tiled by a symmetry group, or a colour. On the floor it is walkable glass. The scaffolded playground is a structure of these.",
+    "created": "2026-10-31"
+  },
+  "artifacts": {
+    "display_plate": {
+      "lookup_name": "display_plate",
+      "scene": "res://commons/artifacts/display_plate/display_plate.tscn",
+      "class_name": "DisplayPlate",
+      "name": "Display plate",
+      "description": "A slot-fitted plate with a content on its face: shader (path + params), wallpaper (group + repeats over a painted 4 x 4 domain) or colour. Floor: a thin walkable body with the content under the feet. Wall: stood up, its face into the room, posts when free-standing. Placed by a recipe's activities (place_activity) with slot_size, mount, content...; a gallery is a row of them.",
+      "category": "display_plates",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": true,
+      "tags": [
+        "display",
+        "plate",
+        "shader",
+        "wallpaper",
+        "walkable",
+        "slot"
+      ]
+    }
+  }
+}
