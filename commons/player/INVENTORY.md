@@ -156,6 +156,26 @@ node of `museum_rig.tscn`, the one rig scene the museum (base.tscn) and the Void
      block - **releases** it to be a body again, under gravity (`InventoryHand.pin_at`, the carrier's `pin` /
      `unpin`; a plank, a pickable of its own, by its `freeze`). The item's `gravity` flag is only the DEFAULT at
      placement; the pin is the override. The ball and the rod are refused ("keeps its own rule"), tape is not a body.
+- **THE BENCH'S STAGES** (Palle, 2026-10-31: "set the length between the snap grid in the first work at level 2,
+  point one, where we only can add 6-balls - the ball should snap to each other; in the next instance we have a
+  distance grid like now at point-line level 4; we could also have rules like vertical snap is 2 and horizontal
+  snap is 1 - that would make the floors grow upwards faster"). The snap is a rule of the BENCH, not of the item:
+  `commons/data/inventory/workbench.json` deals a stage per Void floor (`from_floor`, the highest at or under
+  the checkpoint; `default` outside the Void - a museum hall, a probe), each `{snap: grid|contact, grid, grid_y}`.
+  The hand lays `{grid, grid_y, snap_to}` over every item's defaults, under the person's own knobs
+  (`InventoryHand.config_for`, `stage()`, `pitch()`), and uses the pitch itself: grid things and the hang snap
+  to `grid` horizontally and `grid_y` vertically, the carrier's sand-block rule too (`carrier.pitch`).
+  **Point One** (floor 0 on): `contact` - no grid; a ball stands where it is let go, and the next, let go near
+  one, snaps against it hub to hub out of the socket that faces it (`playground_ball.contact_point`, never a
+  socket that would put it under the floor): the balls make their own lattice, pitch two hubs, with nothing
+  under it. The support graph walks through touching contact balls as it does through rods, so a ball set on
+  another holds. **Point Lines** (floor 3 on): `grid`, the metre grid as before; the rod's card unlocks here
+  (`"floor": 3`). The ball carries `grid_y` (its grid point rises on the vertical pitch), so a **tall** stage
+  (`_example_tall` in the file, not dealt to a floor yet) with `grid_y: 2` makes floors grow upward faster.
+  Probe checks X (the contact lattice: beside, on top, held), Y (vertical pitch 2: the hang snaps to y 2, the
+  ball's config carries it), Z (no Void: the default metre stage). The kit probe (9/9) covers the ball's grid
+  path unchanged. What is NOT curated here: which items each floor hands over beyond the rod - that is
+  `/prefab-timeline`.
   Two things watched: the sand-block rule never freezes a tilt (the 8° gate); the budget should one day count
   sleeping bodies and frozen things apart - frozen is almost free, twenty tumbling crates is a physics bill. Probe
   checks W (the box and the crate under it become blocks), U (the crate hangs frozen on (1, 1, -2) with the ghost

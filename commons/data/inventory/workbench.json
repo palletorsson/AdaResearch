@@ -1,0 +1,9 @@
+{
+  "_about": "THE WORKBENCH STAGES (Palle, 2026-10-31: 'set the length between the snap grid in the first work at level 2, point one, where we only can add 6-balls - the ball should snap to each other; in the next instance we have a distance grid like now at point-line level 4; we could also have rules like vertical snap is 2 and horizontal snap is 1 - that would make the floors grow upwards faster'). The snap is a rule of the BENCH, not of the item. In the Void the stage with the highest from_floor at or under the checkpoint floor applies; outside the Void (a museum hall, a probe) `default`. `grid` is the horizontal pitch and `grid_y` the vertical, metres: the hand snaps grid things and the hang to them, the ball's grid point and the rod's lie use them. `snap` is how a ball settles: `grid` onto its pitch, `contact` against the nearest settled ball - hub to hub out of the socket that faces it, so the balls make their own lattice with no grid under it. The hand lays {grid, grid_y, snap_to} over every item's defaults, under the person's own knobs (commons/player/inventory_hand.gd config_for). Edit by hand; nothing round-trips this file.",
+  "default": {"name": "metre", "label": "the metre grid", "snap": "grid", "grid": 1.0, "grid_y": 1.0},
+  "stages": [
+    {"from_floor": 0, "name": "point", "label": "Point One: no grid yet - balls snap to each other", "snap": "contact", "grid": 1.0, "grid_y": 1.0},
+    {"from_floor": 3, "name": "point-line", "label": "Point Lines: the metre grid", "snap": "grid", "grid": 1.0, "grid_y": 1.0}
+  ],
+  "_example_tall": {"from_floor": 99, "name": "tall", "label": "vertical 2, horizontal 1: floors grow upward faster (not dealt to a floor yet)", "snap": "grid", "grid": 1.0, "grid_y": 2.0}
+}

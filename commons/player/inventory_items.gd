@@ -71,6 +71,28 @@ static func config_for(it: Dictionary, values: Dictionary) -> Dictionary:
 		cfg[k] = v
 	return cfg
 
+static var _bench: Dictionary = {}
+static var _bench_stamp := -1
+
+## THE BENCH'S STAGE (commons/data/inventory/workbench.json): in the Void, the stage with the highest from_floor at or
+## under the checkpoint floor; outside it, `default`. {name, snap: grid|contact, grid, grid_y}. Empty if the file is gone.
+static func stage(void_game: Node = null) -> Dictionary:
+	var path := items_path().get_base_dir().path_join("workbench.json")
+	var stamp := FileAccess.get_modified_time(path)
+	if _bench.is_empty() or stamp != _bench_stamp:
+		_bench_stamp = stamp
+		var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+		_bench = d if d is Dictionary else {}
+	if _bench.is_empty():return {}
+	var out: Dictionary = (_bench.get("default", {}) as Dictionary).duplicate()
+	if void_game != null:
+		var floor_now := int(void_game.get("checkpoint"))
+		var best := -1
+		for st in _bench.get("stages", []):
+			var from := int(st.get("from_floor", 0))
+			if from <= floor_now and from > best:best = from;out = (st as Dictionary).duplicate()
+	return out
+
 ## Unlocked: no unlock, or the sequence is completed (LabManager / MapProgressionManager answer; neither = unlocked).
 ## In the Void (`void_game`, its `checkpoint` floor) an item with `floor` is unlocked once that floor is reached; in a
 ## grid map, once its `unlock` sequence is completed (LabManager); with neither authority, unlocked.

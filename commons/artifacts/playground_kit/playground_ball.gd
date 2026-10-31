@@ -23,8 +23,12 @@ signal support_changed(supported: bool)
 @export_range(0.01, 0.08) var boss := 0.025        ## how far a socket's boss stands out of the ball
 @export_enum("pale", "pink", "cyan", "steel") var colour := "pink"
 @export var socket_reach := 0.12                   ## a rod end this close to a free socket snaps in
-@export_range(0.25, 4.0) var grid := 1.0            ## the snap grid's pitch, metres
+@export_range(0.25, 4.0) var grid := 1.0            ## the snap grid's pitch, metres (horizontal)
+@export_range(0.25, 4.0) var grid_y := 1.0          ## the vertical pitch (Palle: "vertical snap 2, horizontal 1 - floors grow upward faster")
 @export var snap := true                            ## let go: to the nearest grid point, frozen
+@export_enum("grid", "contact") var snap_to := "grid"   ## onto the pitch, or against the nearest ball (Point One: no grid yet)
+
+const CONTACT_REACH := 0.6   ## a settled ball this near is what a contact ball snaps against
 
 const DIRS: Array[Vector3] = [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN, Vector3.BACK, Vector3.FORWARD]
 const FOAM := {"pale": "ededed", "pink": "ea72ab", "cyan": "5fd3e6", "steel": "2a2c30"}
@@ -47,7 +51,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	if colour not in FOAM:colour = "pink"
 	socket_reach = clampf(float(config.get("socket_reach", socket_reach)), .02, .5)
 	grid = clampf(float(config.get("grid", grid)), .25, 4)
+	grid_y = clampf(float(config.get("grid_y", grid)), .25, 4)
 	snap = bool(config.get("snap", snap))
+	snap_to = str(config.get("snap_to", snap_to))
+	if snap_to not in ["grid", "contact"]:snap_to = "grid"
 	if _built:_build()
 
 func _ready() -> void:
@@ -64,9 +71,36 @@ func _ready() -> void:
 func hub() -> float:
 	return radius + boss
 
-## The grid point nearest a position: x and z on the grid, y on it plus the hub, so row 0 rests on the floor.
+## The grid point nearest a position: x and z on the grid, y on the vertical pitch plus the hub, so row 0 rests on the floor.
 func grid_point(p: Vector3) -> Vector3:
-	return Vector3(roundf(p.x / grid) * grid, roundf((p.y - hub()) / grid) * grid + hub(), roundf(p.z / grid) * grid)
+	return Vector3(roundf(p.x / grid) * grid, roundf((p.y - hub()) / grid_y) * grid_y + hub(), roundf(p.z / grid) * grid)
+
+## CONTACT (the bench's first stage, Point One, where there is no grid yet - Palle: "the ball should snap to each
+## other"): against the nearest settled ball within reach, hub to hub out of the socket of its that faces this one
+## (never one that would put this ball under the floor) - the balls make their own lattice, pitch two hubs. No ball
+## near: it stands on the floor where it is.
+func contact_point(p: Vector3) -> Vector3:
+	var best: Node = null;var best_d := CONTACT_REACH
+	for b in get_tree().get_nodes_in_group("playground_balls"):
+		if b == self or b.held or not b.on_grid:continue
+		var d: float = b.global_position.distance_to(p)
+		if d < best_d:best_d = d;best = b
+	if best == null:return Vector3(p.x, hub(), p.z)
+	var toward: Vector3 = (p - best.global_position).normalized();var pick := -1;var best_dot := -2.0
+	for i in DIRS.size():
+		var at: Vector3 = best.global_position + best.socket_dir(i) * (best.hub() + hub())
+		if at.y < hub() - .001:continue
+		var dp: float = toward.dot(best.socket_dir(i))
+		if dp > best_dot:best_dot = dp;pick = i
+	return best.global_position + best.socket_dir(pick) * (best.hub() + hub()) if pick >= 0 else Vector3(p.x, hub(), p.z)
+
+## Where this ball settles from `p`: its contact point or its grid point, by the bench's rule.
+func rest_point(p: Vector3) -> Vector3:
+	return contact_point(p) if snap_to == "contact" else grid_point(p)
+
+## Touching another ball, hub to hub (how a contact ball is held).
+func touching(o: Node3D) -> bool:
+	return global_position.distance_to(o.global_position) <= hub() + o.hub() + .01
 
 ## Let go: onto the nearest grid point, squared - then the graph decides whether it holds there. Returns where,
 ## or the ball's own place when snap is off.
@@ -74,7 +108,7 @@ func settle() -> Vector3:
 	held = false
 	if not is_inside_tree() or is_picked_up():return global_position
 	if not snap:return global_position
-	var at := grid_point(global_position)
+	var at := rest_point(global_position)
 	linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO;global_transform = Transform3D(Basis(), at);on_grid = true
 	_hold()
 	_take_rod_ends()
@@ -105,9 +139,10 @@ func _leaving() -> void:
 		if rod != null and is_instance_valid(rod) and rod.has_method("release_ball"):rod.release_ball(self)
 	if tree:(func():reevaluate(tree)).call_deferred()
 
-## THE SUPPORT GRAPH. From every grounded ball, out through its socketed rods to the balls at their other ends:
-## those are supported. Supported balls hold on their grid points; a ball on the grid that nothing supports
-## becomes a body and falls, and what is jointed to it falls with it. Returns {supported, fell}.
+## THE SUPPORT GRAPH. From every grounded ball, out through its socketed rods to the balls at their other ends -
+## and, for contact balls, to every ball touching it hub to hub: those are supported. Supported balls hold on
+## their points; a ball on the grid that nothing supports becomes a body and falls, and what is jointed to it
+## falls with it. Returns {supported, fell}.
 static func reevaluate(tree: SceneTree) -> Dictionary:
 	if tree == null:return {}
 	var balls := tree.get_nodes_in_group("playground_balls")
@@ -125,6 +160,10 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 					# where the rod puts it: out of this socket by the rod's length and the hub (a carried tower
 					# sags on its joints; its place is the rod's, not where it drifted to)
 					seen[o] = b.socket_global(i) + b.socket_dir(i) * (rod.length + o.hub());queue.append(o)
+		if b.snap_to == "contact":
+			for o in balls:
+				if o == b or o.held or seen.has(o) or o.snap_to != "contact" or not o.on_grid:continue
+				if b.touching(o):seen[o] = o.global_position;queue.append(o)
 	var fell := 0
 	for b in balls:
 		if b.held:continue
@@ -133,7 +172,7 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 			# reached again (a lifted tower set back down): onto its grid point and held there
 			if not b.on_grid:
 				var at: Vector3 = seen[b] if seen[b] is Vector3 else b.global_position
-				b.global_transform = Transform3D(Basis(), b.grid_point(at));b.on_grid = true
+				b.global_transform = Transform3D(Basis(), at if b.snap_to == "contact" else b.grid_point(at));b.on_grid = true
 			if not b.freeze:b._hold()
 		elif b.on_grid:
 			b.on_grid = false;b.freeze = false;b.sleeping = false;fell += 1

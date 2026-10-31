@@ -351,7 +351,57 @@ func _ready() -> void:
 	var did_ball: String = p.hand.pin_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
 	var ball_refused: bool = did_ball == "" and p.hand.notice.ends_with("keeps its own rule")
 	_check(report, "V pin: worn as a miniature; on the hung crate it releases it - it falls and lands as a block; on the block it releases again; on the ball, refused (its own rule)", pin_mini and released and landed and released2 and ball_refused, {"mini": pin_mini, "released": released, "landed": landed, "at": hung.global_position, "how": hung.get("how"), "released2": did_v, "ball": did_ball, "notice": p.hand.notice, "sleeping": hung.get("sleeping"), "sleeps": hung.get("sleeps"), "note": hung.get("sleep_note"), "frozen": hung.get("freeze"), "ball_name": ball_v.name, "ball_at": ball_v.global_position, "ball_layer": ball_v.get("collision_layer"), "placed": p.hand.placed.size(), "ray_hit": _ray_name(rig.get_node("RightHand")), "ctrl": rig.get_node("RightHand").global_transform})
-	p.take_all_back();_palm(0.0)
+	p.take_all_back()
+	# X - THE BENCH'S FIRST STAGE (Point One, workbench.json "contact"): no grid - a ball stands where it is let go; the
+	# next, let go beside it, snaps against it hub to hub out of the socket that faces it; one dropped onto it sits on
+	# top, held by contact (the support graph through touching balls)
+	p.hand.stage_override = {"name": "point", "snap": "contact", "grid": 1.0, "grid_y": 1.0}
+	p.choose("point")
+	for i in 3:
+		await get_tree().process_frame
+	_hand(3.3);await _ticks(0.2)
+	var aim_x: Vector3 = p.hand.placement_at(rig.get_node("RightHand"), 8.0, p._panel_rids()).hit.get("position", Vector3.INF)   # where the wand points (the origin has drifted by now)
+	p._on_right_pressed("trigger_click")
+	for i in 20:
+		await get_tree().physics_frame
+	var b1: Node3D = p.hand.placed[-1];var hub_x: float = b1.hub()
+	var free_x: bool = absf(b1.global_position.x - aim_x.x) < .02 and absf(b1.global_position.z - aim_x.z) < .02 and is_equal_approx(b1.global_position.y, hub_x) and bool(b1.get("freeze"))
+	_hand(3.55);await _ticks(0.2)   # beside it, 25 cm on: within reach, the +X socket faces it
+	p._on_right_pressed("trigger_click")
+	for i in 20:
+		await get_tree().physics_frame
+	var b2: Node3D = p.hand.placed[-1]
+	var beside: bool = b2 != b1 and absf(b2.global_position.distance_to(b1.global_position) - 2 * hub_x) < .002 and b2.global_position.is_equal_approx(b1.global_position + Vector3.RIGHT * 2 * hub_x) and bool(b2.get("freeze")) and bool(b2.get("supported"))
+	# onto the first: the wand straight down over it (through the origin's inverse: the player body has moved the rig)
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(Vector3.RIGHT, -PI / 2), b1.global_position + Vector3(0, 0.6, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.3)
+	p._on_right_pressed("trigger_click")
+	for i in 20:
+		await get_tree().physics_frame
+	var b3: Node3D = p.hand.placed[-1]
+	var stacked_x: bool = b3 != b2 and b3.global_position.is_equal_approx(b1.global_position + Vector3.UP * 2 * hub_x) and bool(b3.get("freeze")) and bool(b3.get("supported"))
+	_check(report, "X contact: at the bench's first stage a ball stands where it is let go (under the wand, off any grid), the next snaps against it hub to hub, a third dropped on it sits on top, held by touch", free_x and beside and stacked_x, {"b1": b1.global_position, "b2": b2.global_position, "b3": b3.global_position, "hub": hub_x, "free": free_x, "beside": beside, "on_top": stacked_x, "cfg": p.hand.config_for("point")})
+	p.take_all_back()
+	# Y - A TALL GRID (vertical 2, horizontal 1): the hang snaps to (1, 2, -2); a ball's grid point rises in twos
+	p.hand.stage_override = {"name": "tall", "snap": "grid", "grid": 1.0, "grid_y": 2.0}
+	p.choose("crate")
+	for i in 3:
+		await get_tree().process_frame
+	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), Vector3(0.6, 1.4, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	await _ticks(0.3)   # the hang point (0.6, 1.4, -2): x to 1, y to the nearest 2 m - 2, z -2
+	p._on_right_pressed("trigger_click")
+	for i in 10:
+		await get_tree().physics_frame
+	var tall: Node3D = p.hand.placed[-1]
+	var ball_cfg: Dictionary = p.hand.config_for("point")
+	var tall_ok: bool = tall.global_position.is_equal_approx(Vector3(1, 2, -2)) and bool(tall.get("freeze")) and is_equal_approx(float(ball_cfg.get("grid_y", 0)), 2.0) and is_equal_approx(float(ball_cfg.get("grid", 0)), 1.0)
+	_check(report, "Y tall grid: with vertical pitch 2 the hung crate snaps to (1, 2, -2); the ball's config carries grid 1, grid_y 2", tall_ok, {"at": tall.global_position, "cfg": ball_cfg})
+	p.take_all_back()
+	# Z - outside the Void the bench is the default stage: the metre grid, balls onto the grid (as H showed)
+	p.hand.stage_override = {}
+	var st_z: Dictionary = p.hand.stage();var cfg_z: Dictionary = p.hand.config_for("point")
+	_check(report, "Z default: no Void here - the stage is 'metre', snap grid, pitch 1 x 1; the ball's config says so", str(st_z.get("name", "")) == "metre" and str(cfg_z.get("snap_to", "")) == "grid" and is_equal_approx(float(cfg_z.get("grid", 0)), 1.0), {"stage": st_z, "cfg": cfg_z})
+	_palm(0.0)
 	# I - the Void's left X: toggle() pins it up whatever the palm; again, down
 	p.toggle()
 	for i in 4:

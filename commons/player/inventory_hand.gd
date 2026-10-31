@@ -25,6 +25,7 @@ const MINI := 0.10                # the miniature's longest side - the clock cam
 var lab: Node = null              # answers is_sequence_completed; null = all unlocked
 var notice := ""                  # one line for the HAND face: why the last trigger did nothing ("the clock needs a wall")
 var budget_override: Dictionary = {}   # a probe's budget instead of items.json's
+var stage_override: Dictionary = {}    # a probe's bench stage instead of workbench.json's
 var _instancer: Node3D = null
 
 ## The tool the current item is, "" for a thing to place ("rubber": the trigger erases instead; "pin": it freezes or releases).
@@ -255,8 +256,26 @@ func worn_node() -> Node3D:
 	var n: Node = _worn.get(current)
 	return n if is_instance_valid(n) and n.get("worn_on") != null and bool(n.get("worn_active")) else null
 
+## The bench's stage here (workbench.json by the Void's floor; `default` elsewhere): {snap, grid, grid_y}.
+func stage() -> Dictionary:
+	return stage_override if not stage_override.is_empty() else Items.stage(_void())
+
+## The horizontal and vertical pitch of the bench, metres (1, 1 with no stage).
+func pitch() -> Vector2:
+	var st := stage()
+	var g := maxf(float(st.get("grid", 1.0)), .05)
+	return Vector2(g, maxf(float(st.get("grid_y", g)), .05))
+
+## An item's config: its defaults, under the BENCH'S stage (grid, grid_y, snap_to - the rule of the floor the
+## person stands on), under the person's own knobs.
 func config_for(id: String) -> Dictionary:
-	return Items.config_for(Items.item(id), values.get(id, {}))
+	var over: Dictionary = {}
+	var st := stage()
+	if not st.is_empty():
+		var pt := pitch()
+		over = {"grid": pt.x, "grid_y": pt.y, "snap_to": str(st.get("snap", "grid"))}
+	over.merge(values.get(id, {}), true)
+	return Items.config_for(Items.item(id), over)
 
 ## Make the current item at a transform (the hand's, or in front of a desktop camera) and return it, or null.
 func spawn_at(xform: Transform3D) -> Node3D:
@@ -278,6 +297,7 @@ func spawn_at(xform: Transform3D) -> Node3D:
 		var carrier := Carrier.new()
 		get_tree().current_scene.add_child(carrier);carrier.global_transform = xform
 		if not carrier.build(it, cfg):carrier.queue_free();return null
+		carrier.pitch = pitch()   # the bench's grid for the sand-block rule
 		node = carrier
 	if node.get_parent() == null:get_tree().current_scene.add_child(node)
 	node.global_transform = xform
@@ -353,7 +373,8 @@ func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dict
 		if mount == "wall":out.reason = str(it.get("name", current)) + " needs a wall";return out
 		var where_h: Vector3 = origin + dir * HANG_REACH
 		var grid_h: bool = str(it.get("snap", "")) == "grid"
-		if grid_h:where_h = where_h.round()
+		var pt_h := pitch()
+		if grid_h:where_h = Vector3(snappedf(where_h.x, pt_h.x), snappedf(where_h.y, pt_h.y), snappedf(where_h.z, pt_h.x))
 		var basis_h: Basis = Basis(Vector3.UP, -deg_to_rad(float(cfg["_yaw"]))) if cfg.has("_yaw") else _facing(controller, where_h, grid_h)
 		out.xform = Transform3D(basis_h, where_h);out.on_grid = grid_h;out.point = where_h;out.hang = true
 		if not fits(current):out.reason = notice;return out
@@ -366,7 +387,8 @@ func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dict
 	# with "snap": "grid" stands on the metre points of the floor, turned by its _yaw knob - north, east, south,
 	# west - instead of toward the person
 	var on_grid: bool = str(it.get("snap", "")) == "grid" and not vertical
-	if on_grid:where = Vector3(roundf(hit.position.x), hit.position.y, roundf(hit.position.z))
+	var pt := pitch()
+	if on_grid:where = Vector3(snappedf(hit.position.x, pt.x), hit.position.y, snappedf(hit.position.z, pt.x))
 	var basis := Basis()
 	if vertical:   # facing out of the wall, its back to it
 		basis = Basis.looking_at(-n, Vector3.UP) if absf(n.dot(Vector3.UP)) < .99 else Basis()

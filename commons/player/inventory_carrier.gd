@@ -20,6 +20,7 @@ var mount := "any"
 var gravity := true    # items.json "gravity": a body that falls (the base rule), or frozen where it is placed
 var snap_grid := false # items.json "snap": "grid": at rest, square, it takes its metre point and freezes (the sand-block rule)
 var pinned := false    # frozen by the pin (or hung in the air); the pin releases it
+var pitch := Vector2(1.0, 1.0)   # the bench's horizontal and vertical grid (workbench.json), set by the hand
 var sleeps := 0        # diagnostic: how often the body fell asleep, and what the sand-block rule said last
 var sleep_note := ""
 var extent := AABB()   # the work's merged mesh box, in the carrier's own space
@@ -135,7 +136,7 @@ func _on_sleep() -> void:
 	var yaw := b.get_euler().y;var quarter := roundf(yaw / (PI / 2)) * (PI / 2)
 	if absf(angle_difference(yaw, quarter)) > SQUARE:sleep_note = "turned %.3f" % yaw;return
 	var p := global_position
-	_freeze_at(Transform3D(Basis(Vector3.UP, quarter), Vector3(roundf(p.x), p.y, roundf(p.z))));how = "block";settled.emit(self, how)
+	_freeze_at(Transform3D(Basis(Vector3.UP, quarter), Vector3(snappedf(p.x, pitch.x), p.y, snappedf(p.z, pitch.x))));how = "block";settled.emit(self, how)
 
 ## THE PIN (Garry's Mod's physgun right click): frozen where it is, mid-air included. Gravity is the item's default
 ## at placement; this is the override, a verb on the placed thing.
