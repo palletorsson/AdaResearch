@@ -66,6 +66,31 @@ func _ready() -> void:
 	var mbox: AABB = made.mesh_instance.mesh.get_aabb() if made else AABB()
 	var made_ok: bool = made != null and is_equal_approx(made.position.y, 3.0) and absf(mbox.size.x - 9.0) < .05 and mbox.end.y <= .9 + 1e-3 and made.fitted
 	_check(report, "E place: compiled with an activity - recipe.activities carries the slot and the knobs; place_activity builds the noise space on the pool floor at y 3, fitted", act_ok and made_ok, {"errors": built.get("errors", []), "activities": acts, "made_y": made.position.y if made else null, "size": mbox.size})
+	# F - WALLS TOO: the noise surface mounted "wall" in a 10 m wide, 1 m high slot stands up - 9 m wide, 1 m high from
+	# its base line, its relief toward -Z and no deeper than 0.4 m, flat at its edges
+	var wall: Node3D = load(Items.scene_for("noise_space")).instantiate()
+	var wall_cfg := {"mount": "wall", "slot_size": [10, 1.5], "slot_depth": 0.5, "slot_margin": 0.5, "edge_band": 1.0, "height_scale": 2.0}
+	for k in wall_cfg:wall.set_meta("config_%s" % k, wall_cfg[k])
+	wall.position = Vector3(0, 0, -12);add_child(wall);wall.apply_grid_config(wall_cfg)
+	for f in 3:
+		await get_tree().physics_frame
+	var wb: AABB = wall.static_body.transform * wall.mesh_instance.mesh.get_aabb()   # in the node's space: the wall's base line at the origin
+	var stands: bool = absf(wb.size.x - 9.0) < .05 and absf(wb.position.y) < 1e-3 and absf(wb.size.y - 1.0) < .05 and wb.end.z <= 1e-3 and wb.position.z >= -0.4 - 1e-3 and wb.position.z < -0.05
+	var top_from := wall.global_position + Vector3(0, 0.5, -3.0)
+	var wq := PhysicsRayQueryParameters3D.create(top_from, top_from + Vector3.BACK * 6.0, 1);var whit := get_world_3d().direct_space_state.intersect_ray(wq)
+	var wall_hit: bool = not whit.is_empty() and whit.collider == wall.static_body and whit.position.z < wall.global_position.z + 1e-3 and whit.position.z > wall.global_position.z - 0.45
+	_check(report, "F wall: mounted wall, the noise surface stands 9 m wide and 1 m high from its base line, relief into -Z under 0.4 m, and a ray across the room meets it", stands and wall_hit, {"box": wb, "hit": whit.get("position", null)})
+	# G - the builder puts a wall activity at the pool's south wall, just inside the shell, facing the room
+	var wspec := {"version": 1, "units": "metres", "places": [{"id": "place", "at": [0, 0], "y": 4, "size": [10, 8], "depth": 1, "type": "plastic_pool", "rim": 1, "access": {"outer": "ramp", "inner": "ramp"}, "activity": {"artifact": "sine_space_floor", "mount": "wall", "side": "east"}}]}
+	var wbuilt: Dictionary = Builder.new().compile(wspec);var wacts: Array = wbuilt.get("recipe", {}).get("activities", [])
+	var g_ok: bool = (wbuilt.get("errors", []) as Array).is_empty() and wacts.size() == 1 and wacts[0].config.mount == "wall" and is_equal_approx(float(wacts[0].config.slot_size[0]), 8.0) and is_equal_approx(float(wacts[0].config.slot_size[1]), 1.0) and is_equal_approx(float(wacts[0].position[0]), 5.0 - 0.13) and is_equal_approx(float(wacts[0].rotation[1]), 90.0)
+	var wmade: Node3D = Activity.build(wacts[0]) if wacts.size() == 1 else null
+	if wmade:add_child(wmade);Activity.fit(wmade, wacts[0])
+	for f in 3:
+		await get_tree().physics_frame
+	var wmb: AABB = (wmade.global_transform * wmade.static_body.transform * wmade.mesh_instance.mesh.get_aabb()) if wmade else AABB()
+	var g_made: bool = wmade != null and wmade.mount == "wall" and absf(wmb.size.z - 7.0) < .05 and wmb.position.x < 4.87 and wmb.end.x <= 4.87 + 1e-3 and absf(wmb.position.y - 3.0) < 1e-3
+	_check(report, "G place wall: the east wall activity stands just inside the shell at x 4.87, turned to face the room, 7 m along the wall from the pool floor at y 3", g_ok and g_made, {"errors": wbuilt.get("errors", []), "act": wacts, "box": wmb, "g_ok": g_ok, "g_made": g_made, "pos_eq": is_equal_approx(float(wacts[0].position[0]), 5.0 - 0.13) if wacts.size() == 1 else null, "end_x": wmb.end.x, "mount": wmade.mount if wmade else null})
 	cam.transform = Transform3D(Basis(), Vector3(0, 9, 16)).looking_at(Vector3(0, 0.5, 0));cam.fov = 55
 	for f in 3:
 		await get_tree().process_frame

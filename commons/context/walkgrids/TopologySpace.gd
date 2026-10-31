@@ -18,12 +18,25 @@ class_name TopologySpace
 @export var edge_band := 0.0      # metres from the perimeter over which the relief fades to the floor
 @export var slot_depth := 0.0     # >0: fitted into a slot this deep
 @export var slot_margin := 0.5    # metres kept free between the surface and the slot's wall
+## WALLS TOO (Palle, 2026-10-31: "all there can also be walls"): mounted "wall", the same surface STANDS - its width
+## along the node's X, its height up the node's Y from the node's origin (the wall's base line), its relief into the
+## room along the node's -Z, fading to the wall plane at its edges. slot_size is then [width, height] and slot_depth
+## how far the relief may stand out. The placer sets the node at the wall's base and turns it to face the room.
+@export_enum("floor", "wall") var mount := "floor"
 var fitted := false
 const RIM_CLEARANCE := 0.1
 
 func fit_slot(size: Vector2, depth: float, margin := slot_margin, band := 1.0) -> void:
-	slot_margin = margin;space_size = (size - Vector2.ONE * 2.0 * margin).max(Vector2(1, 1))
-	slot_depth = depth;edge_band = band;fitted = true;gravity_point_test = false
+	slot_margin = margin
+	# a wall keeps its foot on the floor: the margin is taken off its width twice and off its height once, at the top
+	space_size = Vector2(size.x - 2.0 * margin, size.y - margin).max(Vector2(1, .5)) if mount == "wall" else (size - Vector2.ONE * 2.0 * margin).max(Vector2(1, 1))
+	slot_depth = depth;edge_band = minf(band, minf(space_size.x, space_size.y) / 4.0);fitted = true;gravity_point_test = false
+	_stand()
+
+## The body stands up for a wall (local z becomes up, local relief becomes -Z) and lies flat for a floor.
+func _stand() -> void:
+	if static_body == null:return
+	static_body.transform = Transform3D(Basis(Vector3.RIGHT, -PI / 2.0), Vector3(0, space_size.y / 2.0, 0)) if mount == "wall" else Transform3D.IDENTITY
 
 ## 1 in the interior, 0 at the perimeter, smooth across the band.
 func edge_factor(wx: float, wz: float) -> float:
@@ -53,6 +66,7 @@ func finish_heights(heights: Array) -> Array:
 ## The slot and the base's own numbers from a config (the hand's / the place's apply_grid_config keys). True if changed.
 func apply_slot_config(config: Dictionary) -> bool:
 	var changed := false
+	if config.has("mount"):mount = "wall" if str(config.mount) == "wall" else "floor";changed = true
 	if config.has("slot_size") and config.slot_size is Array and (config.slot_size as Array).size() == 2:
 		var sz := Vector2(float(config.slot_size[0]), float(config.slot_size[1]))
 		fit_slot(sz, float(config.get("slot_depth", slot_depth)), float(config.get("slot_margin", slot_margin)), float(config.get("edge_band", 1.0)));changed = true
@@ -61,6 +75,7 @@ func apply_slot_config(config: Dictionary) -> bool:
 		if config.has("slot_depth"):slot_depth = maxf(float(config.slot_depth), 0.0);changed = true
 	if config.has("height_scale"):height_scale = float(config.height_scale);changed = true
 	if config.has("resolution"):resolution = clampi(int(config.resolution), 4, 200);changed = true
+	if changed:_stand()
 	return changed
 
 ## The config_* metas a placer leaves on the node before it enters the tree.
@@ -81,6 +96,7 @@ var collision_shape: CollisionShape3D
 func _ready():
 	apply_slot_config(meta_config())
 	setup_topology_space()
+	_stand()
 	generate_space()
 	if gravity_point_test:
 		var probe := preload("res://commons/artifacts/surface_ball_test/surface_ball_test.tscn").instantiate()

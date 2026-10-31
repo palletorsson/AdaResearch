@@ -16,6 +16,7 @@ static func build(item:Dictionary)->Node3D:
 	for k in cfg:node.set_meta("config_%s"%str(k),cfg[k])
 	node.name=str(item.get("id","activity"))
 	var at:Array=item.get("position",[0,0,0]);(node as Node3D).position=Vector3(float(at[0]),float(at[1]),float(at[2]))
+	var turn:Array=item.get("rotation",[0,0,0]);(node as Node3D).rotation_degrees=Vector3(float(turn[0]),float(turn[1]),float(turn[2]))   # a wall faces the room
 	node.set_meta("activity_artifact",token)
 	return node
 
