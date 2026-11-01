@@ -144,6 +144,17 @@ func _stroke(deg: float, z: float) -> MeshInstance3D:
 	return m
 
 
+## A ZONE IS NOT A BODY (2026-11-01). The museum's walk map seals the cells
+## under every CollisionShape3D it finds (_extent_of(node, true)), and the
+## DangerZone's pad is one: 2.8 m across in passage mode, the full width of the
+## Point_Lines chicane. So the corridor read as severed and gate F stood at
+## no_route, z=61, from 09-30 on — the walker never reached the thing built to
+## charge it. Nothing here stops a body: the strokes are meshes, the pad is an
+## Area3D. The walker passes and pays, which is the whole contract.
+func get_museum_occupied_cells() -> Array:
+	return []
+
+
 ## Is anyone standing in it right now? DangerZone keeps the book.
 func is_occupied() -> bool:
 	if _zone == null or not is_instance_valid(_zone):

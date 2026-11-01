@@ -345,3 +345,13 @@ func _health_node() -> Node:
 ## For a probe.
 func is_spent() -> bool:
 	return _spent
+
+
+## A PICKUP IS NOT A BODY (2026-11-01). The museum's walk map seals the cells
+## under every CollisionShape3D it finds, and the Pad is one — 2.8 m across in
+## passage mode, the whole width of the Point_Lines chicane, where three of
+## these alternate with three anamorphic_cross. The pad is an Area3D: it counts
+## a body in, it never stops one. Say so, or the walk map calls the corridor
+## closed and the walker never reaches the offer.
+func get_museum_occupied_cells() -> Array:
+	return []
