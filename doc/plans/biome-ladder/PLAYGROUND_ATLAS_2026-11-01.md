@@ -77,3 +77,60 @@ not have yet.
 
 The atlas's closing idea is the right one: combine two playground functions in one prefab. The pocket test is
 already that — a ball pit that is a measurement.
+
+
+## The two deep-research reports (1 Nov), what transfers
+
+Palle attached two ChatGPT deep-research PDFs: *Indoor Playgrounds as Generative-Design Systems* (14 pp.) and its
+backing conversation, *Indoor Playgrounds as Computational Landscapes* (a 33-image catalogue: Luckey Climbers,
+Play9, Architensions, Moureaux, COBE, HAO, plus Perlin, Bourke's L-systems, AADRL automata, WFC, Vellum,
+Kangaroo, IAAC differential growth). Their numbers are "exploratory ranges, not specifications". What is worth
+keeping, against the vocabulary we have:
+
+**Rules that transfer directly**
+
+- *The layered stack*: topology → primitive geometry → repetition → deformation → material/physics → colour →
+  label. This is the order our spec already follows (place → board → repeat → surface → content → title) and the
+  order a prompt or a recipe should be written in. Specify topology and geometry before style.
+- *Four compositional modes*: frame systems (columns, beams, decks, tubes), landscape systems (mounds, ramps,
+  contoured floors), village systems (repeated room modules), object-field systems (many small objects on an
+  open floor). Ours: the scaffold and the boards are the frame; the slot surfaces are the landscape; the places
+  are the village; the array and the ball pit are the object field. A hall should declare which mode it is.
+- *Algorithmic clarity*: one algorithm controls the macro-form and one secondary method supplies variation.
+  "The Voronoi playground", "the wave playground", never all at once. The example structures obey this; the hall
+  on floor 210 does not yet — three structures and three samples share one slab.
+- *Legibility at three scales*: room (an understandable circulation), equipment (each object says climb, crawl,
+  slide, balance, hide), detail (pattern and material carry the algorithm). The display plate carries the third;
+  the second is what the pocket test and the kit do; the first is the place recipe's job.
+- *Structured repetition plus controlled perturbation*, and *stratified randomness*: global (the layout family),
+  module (widths, heights, rotations, colours), surface (texture, curvature), micro (balls, seams, grain), each on
+  its own seed. Most parameters vary ±5–15 %, a few ±20–35 %, one hero 40–70 %. For us: a `jitter` on a board's
+  repeat (module randomness), the surfaces' own seeds (surface), the pocket test's radius jitter (micro).
+  Palle's "the playground nodes more and more random" is this ladder walked upward.
+- *Shape-producing vs motion-producing physics*: a still frame needs the first (sag, compression, indentation);
+  the second is for play. The slot surfaces are shape; the pocket test is motion.
+- *Palette roles*, not RGB clusters: background-neutral, material-base, primary zone, secondary zone, accent,
+  safety. Ratios 50–70 / 15–30 / 5–15 / 2–8 %. Our plates and frames have no palette rule yet; the kit's blue
+  and yellow are the material base by accident.
+
+**Parameter ranges, against our parameter files**
+
+| method | the report's range | ours now |
+|---|---|---|
+| Perlin/simplex noise | octaves 2–6, persistence .35–.65, displacement 2–20 % of feature size | noise_space: octaves 1–4, height_scale .1–3 — the displacement rule (relief as a share of the footprint) is the better knob |
+| fBm | Hurst .35–.75, lacunarity 1.7–2.5, 3–7 levels | the fractal surface has no file yet |
+| L-systems | 2–5 iterations, branch angle 15–45°, contraction .55–.85, branching .3–.8 | the L-system surface has no file yet |
+| cellular automata | grid 32²–256², fill .35–.55, 3–12 iterations | the CA surface has no file yet |
+| Voronoi | 10–150 seeds, Lloyd 0–5, jitter 0–40 % | the Voronoi surface has no file yet; Voronoi as a *place layout* (pads, zones) is a missing word |
+| particles / ball pit | 2k–50k, size jitter ±5–15 %, restitution .2–.65, friction .2–.8 | pocket test: 100, jitter ±12 %, bounce .1, friction .5 — the pit is 20× more balls and livelier |
+| soft body / mass-spring | stiffness 20–300, damping .05–.5, 10–60 subdivisions/axis | the recorded SoftBody traps; `net` not built |
+| wave fields | 1–4 base waves, amplitude .02–.15 of width, 2–3 superposed frequencies halving per octave | sine_space_floor: one frequency; the wave-interference surface is the superposition and has no file yet |
+
+**New words the catalogue names that we do not have**: the spiral / helix climber (Luckey's stacked platforms
+rising round an atrium — our stack with a turn per level is the first step: `repeat.turn` on floor boards with a
+vertical step already compiles), the tube and the net (as before), Voronoi partition as a place layout, Wave
+Function Collapse for modular tiles with connection rules, differential growth for folded walls.
+
+**One sentence to keep**: "turn play behaviour into the input of generative systems". The pocket test, the
+live-update chain and the hand canvas are three inputs that exist; a structure that changes because it was
+walked is the piece none of them is yet.
