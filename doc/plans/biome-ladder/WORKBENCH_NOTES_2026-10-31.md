@@ -73,3 +73,42 @@ tile floor). What they say for the scaffolding:
   climbable. The cube towers are the modular cubes.
 - **The foam tile floor** is the tiling array at 1 m with a colour grid: the floor itself is the pattern plate.
 - **Slides, tunnels, arches, trusses** are kit: the pattern tunnel machine, ramps, the scaffold bars.
+
+## Ideas (Palle, 1 Nov, morning) — sorted
+
+**The thesis thread (for the talk and QFEP)**
+- Early image models showed their mutation: the three-armed figure, the transition between bodies as morphology,
+  the world of in-betweens. Optimised models hide the software. Hallucination in language models in the same
+  light: we may prefer a model not to hallucinate, but we deprive it of dreaming of sheep.
+- Three losses QFEP can investigate: operational loss (what the system measures and minimises), representational
+  loss (what its model cannot express), possibility loss (what is never explored because it learned not to look).
+- Design may be solved; can undesign be solved? Intelligence as compression vs discovery. Filters so optimised
+  they go blind; a debt nobody tracks. The moral is mutual aid: allocate resources to the discovery of difference.
+- The line inside large parallel lines. The background static in the game is the calling future, the
+  convergence of human and machine intelligence. Minecraft is Turing complete: already into the paradoxes.
+
+**Playground ideas, by sequence**
+- Waves: the sound system by artifact — the bridge in a cage, the mike and a car, what makes rain or thunder in
+  a theatre; the modular synth.
+- Randomness: the playground nodes more and more random; optimising weight; alien architecture.
+- Shaders: what can and should be in the playground (the path, done); also the endless museum.
+- Particles: where is the particle sequence, where the exploded room. A room with an X of round particles,
+  gaussian blur. Stream the painting's parameters like sculptures, and the camera.
+- Wavefunctions, cellular automata, L-systems: read those playground reports. CA and L-systems make space for the
+  biome; the biome becomes the space between structures of decay.
+- Procedural: the cave — the inside must be enclosed for immersion. Agency gradually more abject. Non-Euclidean space.
+- Primitives: the facade works are central as a playground. The plateau with an edge and one entrance by a wedge;
+  different wedge heights lead to a cylinder with primitives in white; the same in colour, movable; later the
+  kidney form; for complexity, simplex noise for pits and plateaus — golf-course sand pits.
+- Transformation: Ada's hand spins like the rotating cubes; the recursive endless hand in 3D; tape loops on big
+  machines with the word on the tape, right here right now.
+- Colour / art: you are the buckets for Pollock's painting. Inside a profile array like fish bones. A New Order
+  shirt of frequency, but round. Large rotating discs with swirl patterns — Duchamp's rotoreliefs.
+- 64 code: the real code, without rows.
+- Camera: still a camera like a beach water view; zoomed experiments of the waterline on big screens; a UI to move
+  the camera (exists).
+
+**What the vocabulary already answers**: the plateau with wedge entrance and noise pits = a place (plate or pool,
+ramp access) with a noise surface in the slot; shaders in the playground = the path; the sand pits = the slot
+surfaces' pockets; the rotating discs = a board on a rotating part (the kit has motion); the big screens with a
+camera = a display-plate content type "camera"; the ball pit = the one place type still to build.
