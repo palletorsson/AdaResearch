@@ -1,0 +1,85 @@
+{
+  "cliff_landings": {
+    "enabled": false
+  },
+  "column_width": 0.9,
+  "column_x": [
+    -35.0,
+    35.0
+  ],
+  "column_z": [
+    -15.0,
+    15.0
+  ],
+  "depth": 32.0,
+  "descent": {
+    "mode": "corner_pads",
+    "pad_shaft": "B",
+    "boards_per_pad": 2,
+    "pad_shafts": {
+      "1": "B",
+      "2": "B",
+      "3": "B",
+      "4": "B"
+    }
+  },
+  "floor_roles": [
+    "Canopy",
+    "Playground annex",
+    "Facade town",
+    "Mosaic decks",
+    "Catch floor"
+  ],
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract",
+    "3": "abstract",
+    "4": "abstract"
+  },
+  "levels": [
+    -0.0,
+    -12.0,
+    -24.0,
+    -36.0,
+    -48.0
+  ],
+  "service_x": [
+    -34.0,
+    34.0
+  ],
+  "service_z": -12.0,
+  "shaft_depth": 6,
+  "shaft_width": 6,
+  "shafts": [
+    {
+      "name": "A",
+      "x": -31
+    },
+    {
+      "name": "B",
+      "x": 31
+    }
+  ],
+  "slab_thickness": 0.36,
+  "spawn_points": {
+    "1": [
+      6.0,
+      0.14,
+      3.0
+    ],
+    "2": [
+      -17.0,
+      0.14,
+      0.0
+    ],
+    "3": [
+      -20.0,
+      0.14,
+      7.0
+    ]
+  },
+  "status": "Stacked playground trial, written by tools/playground_trial.py stack: Shader_05_Patterns, Facade_Assembly_Principle, Mosaic_Pompeii_Floors",
+  "storey_height": 12.0,
+  "width": 72.0
+}

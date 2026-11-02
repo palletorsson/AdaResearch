@@ -3174,6 +3174,40 @@
           7.0
         ]
       }
+    },
+    "playground_floors": {
+      "title": "Playground floors / the annex, the facade town and the mosaic decks, one under the other",
+      "label": "PLAYGROUND FLOORS / THE ANNEX, THE FACADE TOWN AND THE MOSAIC DECKS, ONE UNDER THE OTHER",
+      "map": "Shader_05_Patterns",
+      "start_floor": 1,
+      "notice": "Playground annex -> Facade town -> Mosaic decks\nJump into shaft B (east) for the next floor; R / T resets the encounter.",
+      "rooms": "res://commons/void/trials/playground_floors/rooms.json",
+      "layout": "res://commons/void/trials/playground_floors/layout.json",
+      "scene": "res://commons/void/trials/playground_floors/trial.tscn",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "spawn_points": {
+        "1": [
+          6.0,
+          0.14,
+          3.0
+        ],
+        "2": [
+          -17.0,
+          0.14,
+          0.0
+        ],
+        "3": [
+          -20.0,
+          0.14,
+          7.0
+        ]
+      }
     }
   }
 }

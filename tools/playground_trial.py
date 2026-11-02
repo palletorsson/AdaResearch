@@ -8,10 +8,14 @@ sized to hold every place and board, plus one entry in commons/void/trials/playa
 editor drafts (room_source.trials_available is false on the Quest); a tower floor is the headset's.
 
   python tools/playground_trial.py make  --spec commons/data/playgrounds/halls/playground_annex.json --id playground_annex --title "..." [--map Map] [--spawn X Y Z]
+  python tools/playground_trial.py stack --id playground_floors --title "..." --floor <spec>@<Map>@<title>@x,y,z ...
   python tools/playground_trial.py check --spec <file> [--slab 42 18] [--offset 0 -1]
   python tools/playground_trial.py check --sidecar commons/void/trials/principal_places/activities.json --slab 42 18 --offset 0 -1
 
-check exits with the number of pieces that do not stand on the slab: the tower's slab is 42 x 18 m and the hall
+stack puts several specs on the floors of ONE trial, joined the tower's way (Palle, 2026-11-02: "can I walk all
+floors"): a slab sized to the widest, two shafts A and B through every slab past the content, a soft corner pad on
+each floor below in shaft B - jump into B and land on the next map. Floor 0 is an empty canopy, the last a catch
+floor. check exits with the number of pieces that do not stand on the slab: the tower's slab is 42 x 18 m and the hall
 on floor 210 sits at room position (0, -1).
 """
 import argparse, json, math, sys
@@ -130,6 +134,68 @@ def make(args):
     return len(bad)
 
 
+def stack(args):
+    floors = []
+    for f in args.floor:
+        parts = f.split("@")
+        spec_path, map_name, title = parts[0], parts[1], parts[2]
+        spawn = [float(v) for v in parts[3].split(",")] if len(parts) > 3 else None
+        spec = load(spec_path)
+        floors.append((spec_path, spec, map_name, title, spawn))
+    boxes = [b for _, spec, _, _, _ in floors for _, b in pieces(spec)]
+    reach_x = max(max(abs(b[0]), abs(b[1])) for b in boxes)
+    reach_z = max(max(abs(b[2]), abs(b[3])) for b in boxes) + 2
+    shaft_w = 6
+    shaft_x = math.ceil(reach_x + 3 + shaft_w / 2)          # a 3 m walk between the content and the hole's edge
+    width = even_up(2 * (shaft_x + shaft_w / 2 + 2))
+    depth = max(16, even_up(2 * reach_z))
+    storey = 12.0
+    n = len(floors) + 2
+    folder = ROOT / "commons/void/trials" / args.id
+    folder.mkdir(parents=True, exist_ok=True)
+    spawns = {str(i + 1): (f[4] or [0, 0.14, depth / 2 - 2]) for i, f in enumerate(floors)}
+    layout = {
+        "cliff_landings": {"enabled": False}, "column_width": 0.9,
+        "column_x": [-(width / 2 - 1), width / 2 - 1], "column_z": [-(depth / 2 - 1), depth / 2 - 1],
+        "depth": float(depth),
+        "descent": {"mode": "corner_pads", "pad_shaft": "B", "boards_per_pad": 2,
+                    "pad_shafts": {str(i): "B" for i in range(1, n)}},
+        "floor_roles": ["Canopy"] + [f[3].split(" / ")[0] for f in floors] + ["Catch floor"],
+        "floor_styles": {str(i): "abstract" for i in range(n)},
+        "levels": [-storey * i for i in range(n)], "service_x": [-(width / 2 - 2), width / 2 - 2], "service_z": -(depth / 2 - 4),
+        "shaft_depth": shaft_w, "shaft_width": shaft_w, "shafts": [{"name": "A", "x": -shaft_x}, {"name": "B", "x": shaft_x}],
+        "slab_thickness": 0.36, "spawn_points": spawns,
+        "status": "Stacked playground trial, written by tools/playground_trial.py stack: " + ", ".join(f[2] for f in floors),
+        "storey_height": storey, "width": float(width)}
+    def floor(title, arts, map_name=""):
+        return {"map": map_name, "title": title, "origin": False, "walls": [], "artifacts": arts,
+                "props": [], "impact_cells": [], "supply_leads": False}
+    records = [floor("Trial canopy", [])]
+    for i, (spec_path, spec, map_name, title, _) in enumerate(floors):
+        res = "res://" + Path(spec_path).as_posix().replace("res://", "").lstrip("/")
+        records.append(floor(title, [{"id": "%s-%d" % (args.id.replace("_", "-"), i + 1), "artifact": "playground_spec_hall", "station": "SE",
+                                      "position": [0, 0], "height": 0.08, "facing": 0, "scale": 1, "config": {"spec": res}}], map_name))
+    records.append(floor("Catch floor", []))
+    (folder / "layout.json").write_text(json.dumps(layout, indent=2) + "\n", encoding="utf-8")
+    (folder / "rooms.json").write_text(json.dumps({"version": 1, "floors": records}, indent=2) + "\n", encoding="utf-8")
+    (folder / "trial.tscn").write_text('[gd_scene load_steps=2 format=3]\n[ext_resource type="PackedScene" path="res://commons/void/void.tscn" id="1"]\n'
+                                       '[node name="PlaygroundStackTrial" instance=ExtResource("1")]\ntrial_id = "%s"\n' % args.id, encoding="utf-8")
+    entry = {"title": args.title, "label": args.title.upper(), "map": floors[0][2], "start_floor": 1,
+             "notice": " -> ".join(f[3].split(" / ")[0] for f in floors) + "\nJump into shaft B (east) for the next floor; R / T resets the encounter.",
+             "rooms": "res://commons/void/trials/%s/rooms.json" % args.id,
+             "layout": "res://commons/void/trials/%s/layout.json" % args.id,
+             "scene": "res://commons/void/trials/%s/trial.tscn" % args.id,
+             "retry_floors": {str(i): min(max(i, 1), len(floors)) for i in range(n)}, "spawn_points": spawns}
+    register(PLAYABLE, args.id, entry)
+    print("trial %s: %d floors (+ canopy and catch), slab %d x %d, shafts at x +-%d, storey %g m" % (args.id, len(floors), width, depth, shaft_x, storey))
+    bad = 0
+    for i, (_, spec, _, title, _) in enumerate(floors):
+        print("floor %d: %s" % (i + 1, title))
+        bad += len(check(spec, (width, depth), (0, 0)))
+    print("walk it:  python tools/launch_void_desktop.py --trial " + args.id)
+    return bad
+
+
 def register(path, trial_id, entry):
     """Add or replace one trial, keeping the file's own format (indent 2, ASCII, its line endings)."""
     raw = path.read_bytes()
@@ -151,6 +217,10 @@ def main():
     m.add_argument("--title", required=True)
     m.add_argument("--map", default="Random_Walk")
     m.add_argument("--spawn", type=float, nargs=3)
+    st = sub.add_parser("stack")
+    st.add_argument("--id", required=True)
+    st.add_argument("--title", required=True)
+    st.add_argument("--floor", action="append", required=True, help="<spec>@<Map>@<title>[@x,y,z spawn]")
     c = sub.add_parser("check")
     c.add_argument("--spec")
     c.add_argument("--sidecar")
@@ -159,6 +229,8 @@ def main():
     args = ap.parse_args()
     if args.cmd == "make":
         sys.exit(make(args))
+    if args.cmd == "stack":
+        sys.exit(stack(args))
     spec = load(args.spec or args.sidecar)
     sys.exit(len(check(spec, args.slab, args.offset)))
 

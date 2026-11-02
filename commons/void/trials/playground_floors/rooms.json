@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_05_Patterns",
+      "title": "Playground annex / what did not fit on floor 210",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "playground-floors-1",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.08,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "spec": "res://commons/data/playgrounds/halls/playground_annex.json"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Facade_Assembly_Principle",
+      "title": "Facade town / eleven plans held a metre up along a street",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "playground-floors-2",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.08,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "spec": "res://commons/data/playgrounds/maps/Facade_Assembly_Principle.json"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Mosaic_Pompeii_Floors",
+      "title": "Mosaic decks / the Pompeii floors inside the scaffolding",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "playground-floors-3",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.08,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "spec": "res://commons/data/playgrounds/maps/Mosaic_Pompeii_Floors.json"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    }
+  ]
+}
