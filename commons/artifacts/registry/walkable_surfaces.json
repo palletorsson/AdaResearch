@@ -39,6 +39,24 @@
         "entropy",
         "slot"
       ]
+    },
+    "ball_pit": {
+      "lookup_name": "ball_pit",
+      "scene": "res://commons/artifacts/pocket_test/ball_pit.tscn",
+      "class_name": "BallPit",
+      "name": "Ball pit / wade through",
+      "description": "The pocket test in pit mode: a pool fills itself at ready with a few hundred light balls, a fifth of a metre across, in random bright colours, lively enough to roll, and the person wades through them - the balls collide with the player body. The button on the rim refills; the readout is off unless asked for. Placed by a receiving place (place_builder: activity {artifact: ball_pit}) in a pool, or by hand with slot_size. The six playground pictures' one place type still to build (2026-11-02).",
+      "category": "walkable_surfaces",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": true,
+      "tags": [
+        "playground",
+        "pit",
+        "balls",
+        "place",
+        "slot"
+      ]
     }
   }
 }

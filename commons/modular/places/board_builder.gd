@@ -123,7 +123,7 @@ static func _posts(builder: Object, cid: String, c: Vector3, sw: float, sh: floa
 		for sz in [-1, 1]:
 			builder.bar(cid + "_post_%d" % k, Vector3(c.x + sx * hx, low, c.z + sz * hz), Vector3(c.x + sx * hx, high, c.z + sz * hz));k += 1
 
-## A hall's sidecar: activities.json beside its recipe - {activities: [...], boards: [...]} - compiled into the
+## A hall's sidecar: activities.json beside its recipe - {activities: [...], boards: [...], places: [...]} - compiled into the
 ## loaded recipe before the playground builds it, so the approved recipe file is never edited.
 static func merge_sidecar(builder: Object, recipe: Dictionary, path: String) -> int:
 	if not FileAccess.file_exists(path):return 0
@@ -136,4 +136,18 @@ static func merge_sidecar(builder: Object, recipe: Dictionary, path: String) -> 
 	if not problems.is_empty():push_warning("board_builder: sidecar boards refused: " + str(problems));return n
 	builder.recipe = recipe
 	for b in side.get("boards", []):build(builder, b);n += 1
+	# PLACES in the sidecar (the ball pit, 2026-11-02): whole places - a pool, its rim, rails, ramps, its activity -
+	# built by the place builder beside the approved ones. The spec is validated as a spec of its own; its tiles are
+	# placed here (compile() does that for a spec; a sidecar has no compile).
+	var places: Array = side.get("places", [])
+	if not places.is_empty():
+		var Spec = load("res://commons/modular/places/place_spec.gd")
+		var refused: PackedStringArray = Spec.validate({"version": 1, "units": "metres", "places": places})
+		if not refused.is_empty():push_warning("board_builder: sidecar places refused: " + str(refused));return n
+		for k in ["places", "lifts", "installations", "work_lights", "place_labels"]:
+			if not recipe.has(k):recipe[k] = []
+		for p in places:builder.build_place(p);n += 1
+		builder.tile_requests.sort_custom(func(a, b): return builder.tile_priority(a) > builder.tile_priority(b))
+		for request in builder.tile_requests:builder.place_tile(request.id, request.at, request.size)
+		builder.tile_requests.clear()
 	return n

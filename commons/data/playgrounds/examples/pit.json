@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "units": "metres",
+  "principle": "the pit",
+  "title": "The ball pit / a pool full of light balls under a screen wall, climb in",
+  "camera": [
+    [
+      6,
+      5.5,
+      11
+    ],
+    [
+      0,
+      0.8,
+      -1
+    ]
+  ],
+  "places": [
+    {
+      "id": "pit",
+      "at": [
+        0,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 1,
+      "type": "plastic_pool",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "ramp"
+      },
+      "colour": "f0b429",
+      "activity": {
+        "artifact": "ball_pit",
+        "config": {
+          "count": 320,
+          "diameter": 0.4
+        }
+      }
+    }
+  ],
+  "boards": [
+    {
+      "id": "pit_wall",
+      "at": [
+        0,
+        3,
+        -6
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "content": {
+        "content": "shader",
+        "params": {
+          "display_mode": 0.0,
+          "grid_size": 6.0,
+          "jitter": 0.85,
+          "seed": 13.0
+        },
+        "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+        "title": "over the pit"
+      }
+    }
+  ]
+}

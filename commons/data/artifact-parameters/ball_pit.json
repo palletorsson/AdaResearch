@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "artifact": "ball_pit",
+  "prefab": "ball_pit",
+  "category": "playground_place",
+  "playground": "pit",
+  "title": "Ball pit / wade through",
+  "question": "How many light balls can a pool hold before the headset notices, and what does wading through them feel like?",
+  "source_scene": "res://commons/artifacts/pocket_test/ball_pit.tscn",
+  "source_driver": "res://commons/artifacts/pocket_test/ball_pit.gd",
+  "reference": "The six indoor-playground pictures (31 Oct) and the deep-research report's object-field systems: a ball pit as a place type - a low-rimmed pool full of balls, climb-in, a screen wall over it. The report's pit is 2k to 50k particles at restitution .2 to .65; ours is a few hundred rigid bodies the person can push.",
+  "physical_model": "Jolt rigid spheres 0.4 m across (varying +-12 %), hollow-plastic density 25 kg/m3, bounce .4, friction .3, in random bright colours, rained in forty per physics tick from half a metre above the rim at ready; they collide with the player body's layer (20), so the person wades through and pushes them; a sleeping ball costs nothing.",
+  "slot": {
+    "fills": "a pool place (plastic_pool or steel_pool) of depth 1",
+    "mount": [
+      "floor"
+    ],
+    "note": "Sized to the pool by the receiving place; the refill button stands on the rim beside the descent."
+  },
+  "parameters": [
+    {
+      "key": "count",
+      "label": "Balls",
+      "min": 50,
+      "max": 800,
+      "step": 50,
+      "default": 320,
+      "question": "How full? Three hundred and twenty beach balls make a layer and a bit in a 6 x 6 pool. The headset pays per ball while they move; probe_ball_pit prints the physics tick."
+    },
+    {
+      "key": "diameter",
+      "label": "Ball size",
+      "min": 0.1,
+      "max": 0.6,
+      "step": 0.05,
+      "default": 0.4,
+      "question": "A beach ball (0.4 m) fills a pool with hundreds; a fifth of a metre would need thousands."
+    },
+    {
+      "key": "bounce",
+      "label": "Bounce",
+      "min": 0.0,
+      "max": 0.8,
+      "step": 0.05,
+      "default": 0.4,
+      "question": "How lively? The report's pit range is .2 to .65."
+    },
+    {
+      "key": "friction",
+      "label": "Friction",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "default": 0.3,
+      "question": "How much do they grip each other and the floor?"
+    },
+    {
+      "key": "density",
+      "label": "Density",
+      "min": 5,
+      "max": 800,
+      "step": 5,
+      "default": 25,
+      "question": "kg per cubic metre: hollow plastic is 25; the pocket test's scaled steel is 780."
+    },
+    {
+      "key": "fill_per_tick",
+      "label": "Rain",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "default": 40,
+      "question": "How many balls arrive per physics tick? Zero drops them all at once and one frame pays for it."
+    },
+    {
+      "key": "readout",
+      "label": "Readout",
+      "min": 0,
+      "max": 1,
+      "step": 1,
+      "default": 0,
+      "question": "Show the count inside the pit? Off, the pit is play; on, the readout is the game."
+    },
+    {
+      "key": "seed",
+      "label": "Seed",
+      "min": 0,
+      "max": 9999,
+      "step": 1,
+      "default": 7,
+      "question": "The same fill again, or another?"
+    }
+  ],
+  "presets": [
+    {
+      "id": "pit",
+      "title": "Pit / the playground's",
+      "settings": {
+        "count": 320,
+        "diameter": 0.4,
+        "bounce": 0.4
+      }
+    },
+    {
+      "id": "quest_light",
+      "title": "Quest light / half the balls",
+      "settings": {
+        "count": 160,
+        "diameter": 0.5,
+        "bounce": 0.3
+      }
+    }
+  ]
+}

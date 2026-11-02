@@ -1,7 +1,7 @@
 extends Node3D
 ## THE EXAMPLE STRUCTURES (Palle, 2026-10-31: "add the element to example structures; show the same principle for tiling
 ## and pattern as well"). Every spec in commons/data/playgrounds/examples/ - path, array, corridor, canopy, court, rack,
-## stack - compiles through the place builder with no errors into as many plates as its boards promise, framed; each
+## stack, pit - compiles through the place builder with no errors into as many plates as its boards promise, framed; each
 ## stands alone in the hall's runtime scene (a preset recipe, no sidecar) and is photographed. Then the hall itself:
 ## from its sidecar it carries the shader path, the tiling corridor and the pattern rack beside the samples.
 ## Writes ada_run/workstation/example_structures.json and example_<name>.png.
@@ -39,7 +39,7 @@ func _ready() -> void:
 		var name: String = run[0];var folder: String = run[1];var prefix: String = run[2]
 		var spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(folder + name + ".json"))
 		var built: Dictionary = Builder.new().compile(spec);var errs: Array = built.get("errors", [])
-		var recipe: Dictionary = built.get("recipe", {});var want := Boards.copies(spec)
+		var recipe: Dictionary = built.get("recipe", {});var want := Boards.copies(spec) + (spec.get("places", []) as Array).filter(func(p): return p.has("activity")).size()   # boards, and a place's own activity (the pit)
 		var acts: Array = recipe.get("activities", [])
 		var scene: Node3D = HALL.instantiate();scene.recipe = recipe;add_child(scene)
 		for i in 5:

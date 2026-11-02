@@ -1,5 +1,5 @@
 {
-  "_about": "The sidecar of the principal-places hall (floor 210): activities and framed boards that board_builder.gd compiles into the loaded recipe at the hall's load, so recipe.json - the approved hall - is never edited. activities: the sample surfaces in the three places and their ball tests. boards: the Shader_05 floor path and the posters, as pieces of the structure (frames of the kit's bars). boards: the Shader_05 floor path and posters (south side), the tiling corridor (north side, floor and two walls) and the pattern rack (east wall).",
+  "_about": "The sidecar of the principal-places hall (floor 210): activities and framed boards that board_builder.gd compiles into the loaded recipe at the hall's load, so recipe.json - the approved hall - is never edited. activities: the sample surfaces in the three places and their ball tests. boards: the Shader_05 floor path and the posters, as pieces of the structure (frames of the kit's bars). boards: the Shader_05 floor path and posters (south side), the tiling corridor (north side, floor and two walls) and the pattern rack (east wall). places: whole places beside the approved three - the ball pit (west, 2026-11-02): a plastic pool, rim at 1 m, climbed by a ramp, filled by ball_pit at ready, a screen wall on its north side.",
   "activities": [
     {
       "artifact": "noise_space",
@@ -760,6 +760,61 @@
           "title": "group 14"
         }
       ]
+    },
+    {
+      "id": "pit_wall",
+      "at": [
+        -30,
+        3,
+        -6
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "content": {
+        "content": "shader",
+        "params": {
+          "display_mode": 0.0,
+          "grid_size": 6.0,
+          "jitter": 0.85,
+          "seed": 13.0
+        },
+        "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+        "title": "over the pit"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "ball_pit",
+      "at": [
+        -30,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 1,
+      "type": "plastic_pool",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "ramp"
+      },
+      "colour": "f0b429",
+      "activity": {
+        "artifact": "ball_pit",
+        "config": {
+          "count": 320,
+          "diameter": 0.4
+        }
+      }
     }
   ]
 }

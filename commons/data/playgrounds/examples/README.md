@@ -1,6 +1,6 @@
 # Example structures - the board vocabulary, one spec per principle
 
-Each file is a place spec (commons/modular/places/place_spec.gd) with no places and only `boards`
+Each file is a place spec (commons/modular/places/place_spec.gd), most with no places and only `boards`
 (board_builder.gd): rectangular display plates on the floor, upright or overhead, framed by the kit's bars,
 repeated by count, step, rows and quarter turns. probe_example_structures.tscn compiles every one, stands it in
 the hall's runtime scene and photographs it (ada_run/workstation/example_<name>.png).
@@ -14,6 +14,7 @@ the hall's runtime scene and photographs it (ada_run/workstation/example_<name>.
 | court | the court | one wallpaper group four ways round a floor, the walker inside |
 | rack | the rack | fifteen pattern candidates on one wall |
 | stack | the stack | three shader floors at 0, 2 and 4 m on posts |
+| pit | the pit | a 6 x 6 pool, rim at 1 m, full of beach balls (ball_pit) under a screen wall; the one spec with a place |
 
 `facing` names the side a wall stands on, looking inward. A spec may carry `principle`, `title` and `camera`
 (`[[eye], [look_at]]`) for the probe's picture. A map that fits gets a spec like these, named for the map.
