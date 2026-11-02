@@ -219,7 +219,8 @@ looking alike, a foot sinking into or floating off the plate, or a body built tw
 
   The run was headless, beside Palle's open play windows (so the native slot was bypassed for it).
   The photo is `ada_run/flight-bay/desktop/troupe_in_court.png`.
-- **XR: not rerun since the workers arrived.** It was last 54/54, before them.
+- **XR: `python tools/test_flight_bay.py --xr` passes 58/58 with the six workers** (run after the play windows
+  closed, through the native slot). The first worker's lowest ankle is at 3.320, and the ring check passes.
 
 ### Lessons on the way
 
