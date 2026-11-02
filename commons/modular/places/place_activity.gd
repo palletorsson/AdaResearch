@@ -6,6 +6,8 @@ extends RefCounted
 ## config_* metas (read in _ready) and stands it on the pool floor; fit() applies the config once it is in the tree.
 ## A surface that knows the slot (commons/context/walkgrids/TopologySpace.gd) fits and edge-secures itself.
 const Items=preload("res://commons/player/inventory_items.gd")
+const GroundPhysics=preload("res://addons/godot-xr-tools/overrides/ground_physics.gd")
+const GroundSettings=preload("res://addons/godot-xr-tools/overrides/ground_physics_settings.gd")
 
 static func build(item:Dictionary)->Node3D:
 	var token:=str(item.get("artifact",""));var path:=Items.scene_for(token)
@@ -37,6 +39,15 @@ static func _walk_body(node:Node3D,item:Dictionary)->void:
 	var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(float(size[0]),.04,float(size[1]));shape.shape=box;shape.position.y=-.015
 	body.add_child(shape);host.add_child(body)
 	body.position=Vector3(float(at[0]),float(at[1]),float(at[2]));body.rotation_degrees=Vector3(0,float(turn[1]),0)
+	var jump_h:=float(item.get("jump",0.0))
+	if jump_h>0.0:
+		# THE SUPER JUMP (Palle, 2026-11-02: "when we jump on these surfaces we should super jump, like 4 metres up"):
+		# the surface's own jump velocity, sqrt(2 g h), in the GroundPhysics node the XR body reads from its floor; the
+		# desktop walker reads the same node (walker._support_jump). Only the jump is this surface's own.
+		var ground:=GroundPhysics.new();ground.name="GroundPhysics";ground.physics=GroundSettings.new()
+		ground.physics.flags=GroundSettings.GroundPhysicsFlags.JUMP_VELOCITY
+		ground.physics.jump_velocity=sqrt(2.0*float(ProjectSettings.get_setting("physics/3d/default_gravity",9.8))*jump_h)
+		body.add_child(ground);body.set_meta("jump_height",jump_h)
 
 ## LABEL (a floor board's "label": true): the artifact's title flat on the walk surface along the board's south edge.
 static func _floor_label(node:Node3D,item:Dictionary)->void:

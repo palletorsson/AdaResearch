@@ -63,6 +63,11 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if jump_queued: velocity.y = JUMP
 		elif not slippery: velocity.y = 0.0
+	# A surface may carry its own jump - its GroundPhysics jump_velocity, which the XR body reads too: the playground's
+	# mosaic floors throw you 4 m up (Palle, 2026-11-02). Kept apart from the line above so it holds whatever that sets.
+	if is_on_floor() and jump_queued:
+		var surface_jump := _support_jump()
+		if surface_jump > 0.0: velocity.y = surface_jump * float(get_meta("ada_body_scale",1.0))
 	# XRTools applies the world's gravity on the jump frame too.
 	velocity += PhysicsServer3D.body_get_direct_state(get_rid()).total_gravity * delta
 	jump_queued = false
@@ -92,6 +97,17 @@ func _slippery_support() -> bool:
 	query.exclude = [get_rid()]
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
 	return not hit.is_empty() and bool(hit.collider.get_meta("void_slippery_surface",false))
+
+## The jump velocity the floor under the walker carries (its GroundPhysics, flag JUMP_VELOCITY), or 0 for none.
+func _support_jump() -> float:
+	var query := PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.12,global_position-Vector3.UP*.20,1)
+	query.exclude = [get_rid()]
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty(): return 0.0
+	var ground: Node = (hit.collider as Node).get_node_or_null("GroundPhysics")
+	if ground == null or ground.get("physics") == null: return 0.0
+	var settings: Resource = ground.get("physics")
+	return float(settings.get("jump_velocity")) if int(settings.get("flags")) & 16 else 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not enabled: return
