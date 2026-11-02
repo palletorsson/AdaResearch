@@ -1,0 +1,52 @@
+{
+  "cliff_landings": {
+    "enabled": false
+  },
+  "column_width": 0.9,
+  "column_x": [
+    -18.0,
+    18.0
+  ],
+  "column_z": [
+    -7.0,
+    7.0
+  ],
+  "depth": 16.0,
+  "descent": {
+    "mode": "shaft_ledges"
+  },
+  "floor_roles": [
+    "Canopy",
+    "Facade town",
+    "Catch floor"
+  ],
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract"
+  },
+  "levels": [
+    0,
+    -16.0,
+    -32.0
+  ],
+  "service_x": [
+    -17.0,
+    17.0
+  ],
+  "service_z": -4.0,
+  "shaft_depth": 6,
+  "shaft_width": 5,
+  "shafts": [],
+  "slab_thickness": 0.36,
+  "spawn_points": {
+    "1": [
+      -17.0,
+      0.14,
+      0.0
+    ]
+  },
+  "status": "Playground spec trial, written by tools/playground_trial.py from res://commons/data/playgrounds/maps/Facade_Assembly_Principle.json",
+  "storey_height": 16.0,
+  "width": 38.0
+}

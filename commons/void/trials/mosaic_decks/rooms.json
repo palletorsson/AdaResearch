@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Mosaic_Pompeii_Floors",
+      "title": "Mosaic decks / the Pompeii floors inside the scaffolding",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "mosaic-decks",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.08,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "spec": "res://commons/data/playgrounds/maps/Mosaic_Pompeii_Floors.json"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    }
+  ]
+}

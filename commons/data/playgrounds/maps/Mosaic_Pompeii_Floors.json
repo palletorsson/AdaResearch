@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "units": "metres",
+  "principle": "the decks",
+  "title": "Mosaic_Pompeii_Floors / the five Pompeii floors inside the playground scaffolding: each a 6 x 6 m deck a metre up, rimmed, railed, climbed by a ramp",
+  "about": "Palle, 2026-11-02: 'mosaics inside the playground scaffolding'. Each mosaic is a plate place at y 1 with its floor in the slot - the plate is what you stand on (the mosaic floors carry no collision of their own), the rim and rails are the scaffold. Tested inside the map's own trial before it moves to the skyscraper.",
+  "camera": [
+    [
+      -26,
+      10,
+      16
+    ],
+    [
+      0,
+      1,
+      0
+    ]
+  ],
+  "places": [
+    {
+      "id": "pompeii_mosaic_deck",
+      "at": [
+        -20,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 0,
+      "type": "plate",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "level"
+      },
+      "colour": "c9b48a",
+      "activity": {
+        "artifact": "pompeii_mosaic_floor",
+        "config": {
+          "tiles_short": 40,
+          "wear_level": 0.3,
+          "floor_size": [
+            6,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "id": "diamonds_squares_deck",
+      "at": [
+        -10,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 0,
+      "type": "plate",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "level"
+      },
+      "colour": "c9b48a",
+      "activity": {
+        "artifact": "diamonds_squares_floor",
+        "config": {
+          "tiles_short": 16,
+          "floor_size": [
+            6,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "id": "octagon_square_deck",
+      "at": [
+        0,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 0,
+      "type": "plate",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "level"
+      },
+      "colour": "c9b48a",
+      "activity": {
+        "artifact": "octagon_square_floor",
+        "config": {
+          "tiles_short": 10,
+          "floor_size": [
+            6,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "id": "tumbling_blocks_deck",
+      "at": [
+        10,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 0,
+      "type": "plate",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "level"
+      },
+      "colour": "c9b48a",
+      "activity": {
+        "artifact": "tumbling_blocks_floor",
+        "config": {
+          "cubes_short": 12,
+          "floor_size": [
+            6,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "id": "free_meander_deck",
+      "at": [
+        20,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 0,
+      "type": "plate",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "level"
+      },
+      "colour": "c9b48a",
+      "activity": {
+        "artifact": "free_meander_floor",
+        "config": {
+          "grid_cells": 160,
+          "floor_size": [
+            6,
+            6
+          ]
+        }
+      }
+    }
+  ],
+  "boards": []
+}

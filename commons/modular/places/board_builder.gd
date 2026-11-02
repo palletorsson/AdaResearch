@@ -12,7 +12,10 @@ extends RefCounted
 ##   {"id","at":[x,y,z] (metres, whole; the board's centre on the floor, its base line on a wall, its height overhead),
 ##    "size":[w,h] (whole metres), "orient":"floor"|"wall"|"ceiling", "facing":"south"|"north"|"east"|"west" (walls),
 ##    "frame":true, "posts":true, "repeat":{"count":n,"step":[dx,dy,dz],"turn":0|90|180|270,"rows":{"count":m,"step":[..]}},
-##    "content":{display_plate config}, "contents":[{...},...] (one per copy, cycling), "artifact":"display_plate"}
+##    "content":{display_plate config}, "contents":[{...},...] (one per copy, cycling), "artifact":"display_plate",
+##    "artifact_turn": degrees added to the artifact's yaw (a facade's front is +Z where a plate's is -Z: 180),
+##    "fit": true - the artifact is scaled uniformly into the board's w x h and centred on it (place_activity.fit),
+##    so a 12 x 10 m facade plan stands in a 6 x 5 m frame (2026-11-02, the facade town)}
 ## Compiled (build) into recipe.activities (display plates, position + rotation + config) and, with `frame`, bars
 ## and posts through the builder's own `bar` - assemblies of canonical rods, contract-checked like everything else.
 ## The same compiler runs at a hall's load from a sidecar (activities.json beside the recipe), so an approved recipe
@@ -40,7 +43,7 @@ static func validate(spec: Dictionary) -> PackedStringArray:
 		if ids.has(id):errors.append("Duplicate board id: " + id)
 		ids[id] = true
 		for key in b.keys():
-			if key not in ["id", "at", "size", "orient", "facing", "frame", "posts", "repeat", "turn", "content", "contents", "artifact"]:errors.append(id + ": unknown field " + str(key))
+			if key not in ["id", "at", "size", "orient", "facing", "frame", "posts", "repeat", "turn", "content", "contents", "artifact", "artifact_turn", "fit"]:errors.append(id + ": unknown field " + str(key))
 		var at: Variant = b.get("at", null)
 		if not at is Array or at.size() != 3 or not at.all(func(n): return (n is int or n is float) and is_equal_approx(float(n), roundf(float(n)))):errors.append(id + ": at needs [x,y,z] in whole metres")
 		var size: Variant = b.get("size", null)
@@ -87,18 +90,19 @@ static func build(builder: Object, b: Dictionary) -> void:
 		var sw := w;var sh := h   # the board's extent along x and z, after the turn
 		if orient != "wall" and int(yaw) % 180 != 0:sw = h;sh = w
 		var cid := "%s_%02d" % [id, i + 1]
+		var turn_extra := float(b.get("artifact_turn", 0.0));var fit: Variant = [w, h, orient] if bool(b.get("fit", false)) else null
 		if orient == "floor":
-			builder.recipe.activities.append({"id": cid, "board": id, "artifact": artifact, "position": builder.arr(c + Vector3(0, PLATE_LIFT, 0)), "rotation": [0, yaw, 0], "config": cfg})
+			builder.recipe.activities.append({"id": cid, "board": id, "artifact": artifact, "position": builder.arr(c + Vector3(0, PLATE_LIFT, 0)), "rotation": [0, yaw + turn_extra, 0], "config": cfg, "fit": fit})
 			if frame:_rect(builder, cid, c, sw, sh)
 			if posts and c.y > 0:_posts(builder, cid, c, sw, sh, 0.0, c.y)
 		elif orient == "ceiling":
-			builder.recipe.activities.append({"id": cid, "board": id, "artifact": artifact, "position": builder.arr(c - Vector3(0, PLATE_LIFT, 0)), "rotation": [180, yaw, 0], "config": cfg})
+			builder.recipe.activities.append({"id": cid, "board": id, "artifact": artifact, "position": builder.arr(c - Vector3(0, PLATE_LIFT, 0)), "rotation": [180, yaw + turn_extra, 0], "config": cfg, "fit": fit})
 			if frame:_rect(builder, cid, c, sw, sh)
 			if posts:_posts(builder, cid, c, sw, sh, 0.0, c.y)
 		else:
 			# upright: w along the wall's axis, h up from the base line; the face toward `facing` turned by the copy's turn
 			var along := Vector3.RIGHT if int(yaw) % 180 == 0 else Vector3.BACK
-			builder.recipe.activities.append({"id": cid, "board": id, "artifact": artifact, "position": builder.arr(c), "rotation": [0, yaw, 0], "config": cfg})
+			builder.recipe.activities.append({"id": cid, "board": id, "artifact": artifact, "position": builder.arr(c), "rotation": [0, yaw + turn_extra, 0], "config": cfg, "fit": fit})
 			if frame:
 				var a := c - along * (w / 2.0);var e := c + along * (w / 2.0)
 				builder.bar(cid + "_sill", a, e);builder.bar(cid + "_head", a + Vector3.UP * h, e + Vector3.UP * h)

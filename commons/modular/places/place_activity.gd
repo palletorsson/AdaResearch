@@ -22,3 +22,30 @@ static func build(item:Dictionary)->Node3D:
 
 static func fit(node:Node3D,item:Dictionary)->void:
 	if node!=null and node.has_method("apply_grid_config"):node.apply_grid_config(item.get("config",{}))
+	if node!=null and item.get("fit")!=null:_fit_into(node,item.fit)
+
+## FIT (a board's "fit": true, 2026-11-02): whatever the artifact built is scaled uniformly into the board's w x h -
+## a wall board's width along local x and height up y, a floor board's w x h on x and z - and moved so its extent is
+## centred on the board, a wall's base on the sill. Measured off the artifact's own meshes, so a facade plan anchored
+## at its left edge, or a floor built from a corner, lands where its frame is.
+static func _fit_into(node:Node3D,fit:Array)->void:
+	var box:=AABB();var first:=true;var inv:=node.global_transform.affine_inverse()
+	for m in node.find_children("*","MeshInstance3D",true,false):
+		var mi:=m as MeshInstance3D
+		if mi.mesh==null or _leaving(mi,node):continue   # a rebuild queue_frees the first build; it is still here this frame
+		var b:AABB=(inv*mi.global_transform)*mi.mesh.get_aabb()
+		box=b if first else box.merge(b);first=false
+	if first or box.size.x<=0.0:return
+	var w:=float(fit[0]);var h:=float(fit[1]);var wall:=str(fit[2])=="wall"
+	var s:=minf(w/box.size.x,h/(box.size.y if wall else maxf(box.size.z,.001)))
+	var c:=box.get_center()
+	var anchor:=Vector3(c.x,box.position.y if wall else 0.0,c.z if not wall else c.z)
+	node.scale=node.scale*s
+	node.position-=node.basis.orthonormalized()*(anchor*s)
+	node.set_meta("fit_scale",s)
+
+static func _leaving(n:Node,root:Node)->bool:
+	while n!=null and n!=root:
+		if n.is_queued_for_deletion():return true
+		n=n.get_parent()
+	return false

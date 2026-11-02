@@ -3130,6 +3130,50 @@
           3.0
         ]
       }
+    },
+    "facade_town": {
+      "title": "Facade town / eleven plans held a metre up along a street",
+      "label": "FACADE TOWN / ELEVEN PLANS HELD A METRE UP ALONG A STREET",
+      "map": "Facade_Assembly_Principle",
+      "start_floor": 1,
+      "notice": "Facade_Assembly_Principle / a mini town: eleven facade plans at half size along a street, each held a metre up in the scaffold's frame\nR / B returns to the start.",
+      "rooms": "res://commons/void/trials/facade_town/rooms.json",
+      "layout": "res://commons/void/trials/facade_town/layout.json",
+      "scene": "res://commons/void/trials/facade_town/trial.tscn",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          -17.0,
+          0.14,
+          0.0
+        ]
+      }
+    },
+    "mosaic_decks": {
+      "title": "Mosaic decks / the Pompeii floors inside the scaffolding",
+      "label": "MOSAIC DECKS / THE POMPEII FLOORS INSIDE THE SCAFFOLDING",
+      "map": "Mosaic_Pompeii_Floors",
+      "start_floor": 1,
+      "notice": "Mosaic_Pompeii_Floors / the five Pompeii floors inside the playground scaffolding: each a 6 x 6 m deck a metre up, rimmed, railed, climbed by a ramp\nR / B returns to the start.",
+      "rooms": "res://commons/void/trials/mosaic_decks/rooms.json",
+      "layout": "res://commons/void/trials/mosaic_decks/layout.json",
+      "scene": "res://commons/void/trials/mosaic_decks/trial.tscn",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          -20.0,
+          0.14,
+          7.0
+        ]
+      }
     }
   }
 }

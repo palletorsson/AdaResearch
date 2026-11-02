@@ -10,6 +10,8 @@ plays tower floors, so a hall that proves itself moves into the skyscraper as a 
 | file | trial | what |
 |---|---|---|
 | playground_annex.json | playground_annex | what did not fit on floor 210: the shader path and posters, the tiling corridor, the pattern rack, the ball pit under its screen wall |
+| ../maps/Facade_Assembly_Principle.json | facade_town | the facade mini town, inside its map |
+| ../maps/Mosaic_Pompeii_Floors.json | mosaic_decks | the mosaic decks, inside their map |
 
 `python tools/playground_trial.py check --sidecar commons/void/trials/principal_places/activities.json --slab 42 18 --offset 0 -1`
 checks that a tower hall's additions stand on the tower's 42 x 18 m slab; it exits with the number that do not.

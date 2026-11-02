@@ -1,0 +1,275 @@
+{
+  "version": 1,
+  "units": "metres",
+  "principle": "the street",
+  "title": "Facade_Assembly_Principle / a mini town: eleven facade plans at half size along a street, each held a metre up in the scaffold's frame",
+  "about": "Palle, 2026-11-02: 'the mini town using the facade work ... the facade work should be a bit elevated, like the playground structure is holding the facade from one metre up in the air'. One board per house: the artifact is facade_builder with a named plan from commons/facade_parts/presets (the works the Facade_* gallery maps show), turned to face the street (a facade's front is +Z, a plate's -Z) and fitted into its frame at half size; the sill on posts at 1 m. Five houses each side of a 6 m street, alleys between them, Bernini's colonnade closing the east end. Tested inside the map's own trial before it moves to the skyscraper.",
+  "camera": [
+    [
+      -18,
+      10,
+      14
+    ],
+    [
+      2,
+      3,
+      0
+    ]
+  ],
+  "places": [],
+  "boards": [
+    {
+      "id": "n_san_michele",
+      "at": [
+        -11,
+        1,
+        -3
+      ],
+      "size": [
+        6,
+        5
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/villa_san_michele.json",
+        "title": "villa san michele"
+      }
+    },
+    {
+      "id": "n_tenement",
+      "at": [
+        -5,
+        1,
+        -3
+      ],
+      "size": [
+        4,
+        8
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/nyc_tenement.json",
+        "title": "nyc tenement"
+      }
+    },
+    {
+      "id": "n_totem",
+      "at": [
+        0,
+        1,
+        -3
+      ],
+      "size": [
+        4,
+        5
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/memphis_totem.json",
+        "title": "memphis totem"
+      }
+    },
+    {
+      "id": "n_portal",
+      "at": [
+        5,
+        1,
+        -3
+      ],
+      "size": [
+        5,
+        7
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/gothic_portal.json",
+        "title": "gothic portal"
+      }
+    },
+    {
+      "id": "n_polychrome",
+      "at": [
+        11,
+        1,
+        -3
+      ],
+      "size": [
+        6,
+        7
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/florentine_polychrome.json",
+        "title": "florentine polychrome"
+      }
+    },
+    {
+      "id": "s_rustication",
+      "at": [
+        -11,
+        1,
+        3
+      ],
+      "size": [
+        6,
+        5
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/naples_diamond_rustication.json",
+        "title": "naples diamond rustication"
+      }
+    },
+    {
+      "id": "s_grid",
+      "at": [
+        -5,
+        1,
+        3
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/superstudio_grid.json",
+        "title": "superstudio grid"
+      }
+    },
+    {
+      "id": "s_fourth_style",
+      "at": [
+        1,
+        1,
+        3
+      ],
+      "size": [
+        6,
+        5
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/pompeii_fourth_style.json",
+        "title": "pompeii fourth style"
+      }
+    },
+    {
+      "id": "s_fragment",
+      "at": [
+        7,
+        1,
+        3
+      ],
+      "size": [
+        5,
+        6
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/decon_fragment.json",
+        "title": "decon fragment"
+      }
+    },
+    {
+      "id": "s_whitewash",
+      "at": [
+        13,
+        1,
+        3
+      ],
+      "size": [
+        6,
+        5
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/capri_whitewash.json",
+        "title": "capri whitewash"
+      }
+    },
+    {
+      "id": "end_colonnade",
+      "at": [
+        17,
+        1,
+        0
+      ],
+      "size": [
+        8,
+        5
+      ],
+      "orient": "wall",
+      "facing": "east",
+      "frame": true,
+      "posts": true,
+      "artifact": "facade_builder",
+      "artifact_turn": 180,
+      "fit": true,
+      "content": {
+        "plan_path": "res://commons/facade_parts/presets/bernini_colonnade.json",
+        "title": "bernini colonnade"
+      }
+    }
+  ]
+}

@@ -10,6 +10,15 @@ compiles and photographs these beside the examples (ada_run/workstation/map_<Map
 | Pattern_Foundry | the array | sixteen groups of one motif in a 4 x 4 field; the four tile rules on a rack behind |
 | Pattern_Temple | the court | one group on the floor and the four walls, the walker inside |
 | Shader_05_Patterns | the path of screens | the chapter's ten shaders as walkable screens, wallpaper posters behind |
+| Facade_Assembly_Principle | the street | a mini town: eleven facade plans (commons/facade_parts/presets) at half size, held a metre up in board frames, fronts turned to the street (`artifact_turn` 180, `fit`); trial `facade_town` |
+| Mosaic_Pompeii_Floors | the decks | the five Pompeii floors, each in the slot of a 6 x 6 m plate a metre up - rimmed, railed, ramped; the plate is what you stand on; trial `mosaic_decks` |
 
-Not yet placed anywhere: these compile and stand on a bench. Walking one needs a trial (tools/build_place_trial)
-or a floor whose sidecar names it.
+A spec is walked as a Void trial named for it: `python tools/playground_trial.py make --spec <file> --id <trial>
+--map <Map>` writes the trial with a slab sized to it, and `python tools/launch_void_desktop.py --trial <trial>`
+opens it on the desktop (Palle, 2026-11-02: "test this inside their maps, then later move to the skyscraper").
+Trials do not ship to the Quest; a tested hall moves into the tower as a floor's space. probe_playground_maps
+checks the town and the decks: fronts at or above 1 m, fitted, turned; decks walkable at 1 m.
+
+Board words for artifacts other than the display plate: `artifact` names the token, `artifact_turn` adds to its
+yaw (a facade's front is +Z, a plate's -Z), `fit: true` scales whatever it built uniformly into the board's w x h
+and centres it, measured off its meshes (place_activity._fit_into).

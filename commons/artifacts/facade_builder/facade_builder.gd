@@ -64,6 +64,10 @@ var symmetry: int = 1
 const ARMATURES: PackedStringArray = ["none", "datum", "scaffold", "gantry"]
 
 # Internal state
+## A config that NAMES a preset or a plan is obeyed: the web editor's sync file (user://facade_plan.json) is only
+## for an unconfigured builder. Without this a sync file left on a desktop turned every configured facade into
+## that one plan, while the headset (no sync file) built the presets (found 2026-11-02, the playground facade town).
+var explicit_config := false
 var _composition = null
 var _mesh_instance: MeshInstance3D = null
 var _primary_material: StandardMaterial3D = null
@@ -127,7 +131,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
-
+	explicit_config = explicit_config or config_data.has("preset") or config_data.has("plan_path")
 	if config_data.has("preset"):
 		preset = str(config_data["preset"])
 	if config_data.has("bay_count"):
@@ -186,7 +190,7 @@ func build_facade() -> void:
 
 	# Also check ada_run/facade_plan.json for web editor sync
 	var sync_path := "user://facade_plan.json"
-	if FileAccess.file_exists(sync_path):
+	if not explicit_config and FileAccess.file_exists(sync_path):
 		var facade_node := FacadeComposerScript.build_from_file(sync_path)
 		if facade_node and facade_node.get_child_count() > 0:
 			add_child(facade_node)

@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Facade_Assembly_Principle",
+      "title": "Facade town / eleven plans held a metre up along a street",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "facade-town",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.08,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "spec": "res://commons/data/playgrounds/maps/Facade_Assembly_Principle.json"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    }
+  ]
+}
