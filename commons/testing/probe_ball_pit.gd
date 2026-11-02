@@ -55,9 +55,18 @@ func _ready() -> void:
 	print("[probe_ball_pit] PHYSICS falling mean %.2f ms peak %.2f ms; asleep mean %.2f ms peak %.2f ms (%d balls, %d sleeping)" % [report.physics_ms.falling_mean, report.physics_ms.falling_peak, report.physics_ms.asleep_mean, report.physics_ms.asleep_peak, count, pit.sleeping()])
 	# C: the push bites - a kinematic body wades across the pit floor; first on a layer the balls ignore, then the player's
 	var floor_y: float = float(pit_place.y) - float(pit_place.depth)
-	var moved_ghost: int = await _wade(hall, pit, Vector3(at.x - 3.0, floor_y, at.z), Vector3(at.x + 3.0, floor_y, at.z), 1 << 18)
-	var moved_player: int = await _wade(hall, pit, Vector3(at.x + 3.0, floor_y, at.z), Vector3(at.x - 3.0, floor_y, at.z), pit.PLAYER_LAYER)
-	_check(report, "C push bites: a body on the player's layer wading across displaces sleeping balls; the same walk on a layer the balls do not mask displaces almost none", moved_player >= 20 and moved_ghost * 5 <= moved_player, {"moved_on_player_layer": moved_player, "moved_on_ghost_layer": moved_ghost})
+	var ghost: Dictionary = await _wade(hall, pit, Vector3(at.x - 3.0, floor_y, at.z), Vector3(at.x + 3.0, floor_y, at.z), 1 << 18)
+	var player: Dictionary = await _wade(hall, pit, Vector3(at.x + 3.0, floor_y, at.z), Vector3(at.x - 3.0, floor_y, at.z), pit.PLAYER_LAYER)
+	_check(report, "C push bites: a body on the player's layer wading across displaces sleeping balls; the same walk on a layer the balls do not mask displaces almost none", player.moved >= 20 and ghost.moved * 5 <= player.moved, {"moved_on_player_layer": player.moved, "moved_on_ghost_layer": ghost.moved})
+	# the fling (Palle: "not so much bounciness, do not repel too much"): a pushed ball stays in the pool, never goes
+	# faster than the cap, and the farthest one travels under two metres
+	var hx: float = float(pit_place.size[0]) / 2.0;var hz: float = float(pit_place.size[1]) / 2.0;var out := 0
+	for b in pit.balls:
+		if absf(b.position.x) > hx or absf(b.position.z) > hz or b.position.y > float(pit_place.depth) + .5:out += 1
+	# a ball bulldozed ahead of the body travels with it (farthest); what Palle means by repel is the COAST after the
+	# body stops - under a metre - and the speed: the kinematic push hands a ball the walking speed for one tick before
+	# the cap bites, so the peak stays under the body's speed plus the cap
+	_check(report, "E quiet: the wade flings no ball out of the pool; after the body stops no ball coasts a metre; no ball passed the body's own 3 m/s plus the %.1f m/s cap" % pit.max_speed, out == 0 and player.coast < 1.0 and player.peak_speed < 3.0 + pit.max_speed, {"out_of_pool": out, "peak_speed": player.peak_speed, "coast_m": player.coast, "farthest_m": player.farthest, "bounce": pit.bounce, "damping": pit.damping, "max_speed": pit.max_speed})
 	# the hall's own physics without the balls: the pit's cost is the difference
 	pit.clear()
 	var baseline := PackedFloat64Array()
@@ -84,27 +93,39 @@ func _ready() -> void:
 		get_viewport().get_texture().get_image().save_png(out_dir.path_join("%s.png" % k))
 	_finish(report, out_dir)
 
-## A capsule body on `layer` walks from a to b through the pit over two seconds; returns how many balls moved more than 5 cm.
-func _wade(hall: Node3D, pit: Node3D, a: Vector3, b: Vector3, layer: int) -> int:
+## A capsule body on `layer` walks from a to b through the pit over two seconds; returns how many balls (asleep at the
+## start) moved more than 5 cm, the fastest any ball went, and the farthest one's travel.
+func _wade(hall: Node3D, pit: Node3D, a: Vector3, b: Vector3, layer: int) -> Dictionary:
 	var before := {}
 	for ball in pit.balls:
 		if ball.sleeping:before[ball] = ball.global_position   # a ball still rolling would count as moved on its own
 	var body := CharacterBody3D.new();body.collision_layer = layer;body.collision_mask = 1
 	var shape := CollisionShape3D.new();var cap := CapsuleShape3D.new();cap.radius = .3;cap.height = 1.8;shape.shape = cap;shape.position = Vector3(0, .9, 0);body.add_child(shape)
 	hall.add_child(body);body.global_position = hall.to_global(a)
-	var ticks := 2 * Engine.physics_ticks_per_second
+	var ticks := 2 * Engine.physics_ticks_per_second;var peak := 0.0
 	for f in ticks:
 		var target: Vector3 = hall.to_global(a.lerp(b, float(f + 1) / ticks))
 		body.velocity = (target - body.global_position) * Engine.physics_ticks_per_second
 		body.move_and_slide()
 		await get_tree().physics_frame
-	for f in Engine.physics_ticks_per_second:
+		for ball in pit.balls:
+			if not ball.sleeping:peak = maxf(peak, ball.linear_velocity.length())
+	var at_stop := {}
+	for ball in pit.balls:at_stop[ball] = ball.global_position   # the body has stopped: what follows is coast
+	for f in 2 * Engine.physics_ticks_per_second:
 		await get_tree().physics_frame
+		for ball in pit.balls:
+			if not ball.sleeping:peak = maxf(peak, ball.linear_velocity.length())
 	body.queue_free()
-	var moved := 0
+	var moved := 0;var farthest := 0.0;var coast := 0.0
 	for ball in pit.balls:
-		if is_instance_valid(ball) and before.has(ball) and ball.global_position.distance_to(before[ball]) > .05:moved += 1
-	return moved
+		if not is_instance_valid(ball):continue
+		if before.has(ball):
+			var d: float = ball.global_position.distance_to(before[ball])
+			if d > .05:moved += 1
+			farthest = maxf(farthest, d)
+		coast = maxf(coast, ball.global_position.distance_to(at_stop[ball]))
+	return {"moved": moved, "peak_speed": peak, "farthest": farthest, "coast": coast}
 
 func _mean(a: PackedFloat64Array) -> float:
 	if a.is_empty():return 0.0

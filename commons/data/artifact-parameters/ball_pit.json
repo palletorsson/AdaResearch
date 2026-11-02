@@ -9,7 +9,7 @@
   "source_scene": "res://commons/artifacts/pocket_test/ball_pit.tscn",
   "source_driver": "res://commons/artifacts/pocket_test/ball_pit.gd",
   "reference": "The six indoor-playground pictures (31 Oct) and the deep-research report's object-field systems: a ball pit as a place type - a low-rimmed pool full of balls, climb-in, a screen wall over it. The report's pit is 2k to 50k particles at restitution .2 to .65; ours is a few hundred rigid bodies the person can push.",
-  "physical_model": "Jolt rigid spheres 0.4 m across (varying +-12 %), hollow-plastic density 25 kg/m3, bounce .4, friction .3, in random bright colours, rained in forty per physics tick from half a metre above the rim at ready; they collide with the player body's layer (20), so the person wades through and pushes them; a sleeping ball costs nothing.",
+  "physical_model": "Jolt rigid spheres 0.4 m across (varying +-12 %), hollow-plastic density 25 kg/m3, bounce .15, friction .4, linear damping 2.0, speed capped at 2.0 m/s, in random bright colours, rained in forty per physics tick from half a metre above the rim at ready; they collide with the player body's layer (20), so the person wades through and pushes them; a sleeping ball costs nothing.",
   "slot": {
     "fills": "a pool place (plastic_pool or steel_pool) of depth 1",
     "mount": [
@@ -42,8 +42,8 @@
       "min": 0.0,
       "max": 0.8,
       "step": 0.05,
-      "default": 0.4,
-      "question": "How lively? The report's pit range is .2 to .65."
+      "default": 0.15,
+      "question": "How lively? Quiet by default (Palle): a ball that bounced out of the pool at .4 stays in at .15."
     },
     {
       "key": "friction",
@@ -51,8 +51,26 @@
       "min": 0.0,
       "max": 1.0,
       "step": 0.05,
-      "default": 0.3,
+      "default": 0.4,
       "question": "How much do they grip each other and the floor?"
+    },
+    {
+      "key": "damping",
+      "label": "Damping",
+      "min": 0.0,
+      "max": 5.0,
+      "step": 0.1,
+      "default": 2.0,
+      "question": "How fast does a pushed ball give up? The pocket test's balls roll on at .15; a pit's coast under a metre after the push stops at 2."
+    },
+    {
+      "key": "max_speed",
+      "label": "Speed cap",
+      "min": 0.0,
+      "max": 10.0,
+      "step": 0.5,
+      "default": 2.0,
+      "question": "The fastest any ball may go, in m/s. A wading body is kinematic and would fling a light ball without it. Zero is no cap."
     },
     {
       "key": "density",
@@ -98,7 +116,9 @@
       "settings": {
         "count": 320,
         "diameter": 0.4,
-        "bounce": 0.4
+        "bounce": 0.15,
+        "damping": 2.0,
+        "max_speed": 2.0
       }
     },
     {
@@ -107,7 +127,18 @@
       "settings": {
         "count": 160,
         "diameter": 0.5,
-        "bounce": 0.3
+        "bounce": 0.15,
+        "damping": 2.5,
+        "max_speed": 1.5
+      }
+    },
+    {
+      "id": "lively",
+      "title": "Lively / the report's range",
+      "settings": {
+        "bounce": 0.5,
+        "damping": 0.3,
+        "max_speed": 0.0
       }
     }
   ]

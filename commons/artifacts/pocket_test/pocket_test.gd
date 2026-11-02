@@ -33,6 +33,8 @@ signal settled(result: Dictionary)
 @export var push_player := false        ## the balls also collide with the player body's layer, so the person wades through them
 @export var show_readout := true
 @export var fill_per_tick := 0          ## 0 = every ball at once (the test); a pit RAINS in this many per physics tick, so no frame pays for all of them
+@export var damping := 0.15             ## linear damp: how fast a pushed ball gives up (Palle: "do not repel too much" - a pit's is 1.2)
+@export var max_speed := 0.0            ## m/s cap on any awake ball, 0 = none; a wading body is kinematic and would otherwise fling a light ball
 const PLAYER_LAYER := 1 << 19           ## walker.gd and the XR player body stand on layer 20
 var _pending: Array = []                ## balls still to rain in: [radius, x, z, i]
 var _physics: PhysicsMaterial
@@ -66,6 +68,8 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("push_player"):push_player = bool(config.push_player)
 	if config.has("readout"):show_readout = bool(config.readout)
 	if config.has("fill_per_tick"):fill_per_tick = clampi(int(config.fill_per_tick), 0, 400)
+	if config.has("damping"):damping = clampf(float(config.damping), 0.0, 10.0)
+	if config.has("max_speed"):max_speed = clampf(float(config.max_speed), 0.0, 50.0)
 	if config.has("diameter"):diameter = clampf(float(config.diameter), 0.08, 1.2);radius_min = diameter * .44;radius_max = diameter * .56
 	if config.has("bounce"):bounce = clampf(float(config.bounce), 0.0, 1.0)
 	if config.has("friction"):friction = clampf(float(config.friction), 0.0, 1.0)
@@ -140,7 +144,7 @@ func _spawn(spec: Array) -> void:
 	var ball := RigidBody3D.new();ball.name = "Ball%d" % i
 	ball.collision_layer = LAYER;ball.collision_mask = 1 | LAYER | (PLAYER_LAYER if push_player else 0)
 	ball.mass = density * (4.0 / 3.0) * PI * rad * rad * rad   # the test's steel scaled down so a hundred stay cheap for Jolt; a pit's hollow plastic
-	ball.physics_material_override = _physics;ball.continuous_cd = true;ball.angular_damp = 1.0;ball.linear_damp = 0.15
+	ball.physics_material_override = _physics;ball.continuous_cd = true;ball.angular_damp = maxf(1.0, damping);ball.linear_damp = damping
 	var shape := CollisionShape3D.new();var sphere := SphereShape3D.new();sphere.radius = rad;shape.shape = sphere;ball.add_child(shape)
 	# random bright colours (Palle): a full hue each, saturated, light
 	var mi := MeshInstance3D.new();mi.mesh = _ball_mesh(rad);var mat := StandardMaterial3D.new();mat.albedo_color = Color.from_hsv(spec[4], .85, 1.0);mat.metallic = .1;mat.roughness = .4;mi.material_override = mat;ball.add_child(mi)
@@ -183,6 +187,9 @@ func reading() -> Dictionary:
 func _physics_process(delta: float) -> void:
 	if since_release < 0.0:return
 	for k in mini(fill_per_tick, _pending.size()):_spawn(_pending.pop_front())   # the rain
+	if max_speed > 0.0:
+		for b in balls:
+			if not b.sleeping and b.linear_velocity.length_squared() > max_speed * max_speed:b.linear_velocity = b.linear_velocity.normalized() * max_speed
 	since_release += delta
 	if int(since_release * 2.0) != int((since_release - delta) * 2.0) or since_release >= settle_seconds:
 		var r := reading();var s: Node3D = surface();var h: float = surface_entropy_bits(s)
