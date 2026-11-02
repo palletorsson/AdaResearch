@@ -22,3 +22,5 @@ checks the town and the decks: fronts at or above 1 m, fitted, turned; decks wal
 Board words for artifacts other than the display plate: `artifact` names the token, `artifact_turn` adds to its
 yaw (a facade's front is +Z, a plate's -Z), `fit: true` scales whatever it built uniformly into the board's w x h
 and centres it, measured off its meshes (place_activity._fit_into). On a floor board, `walk: true` lays a thin body at the artifact's surface (the mosaic floors carry no collision), `label: true` its title at the south edge, and a content may name its own `artifact`, so one board repeats different tokens.
+
+The mosaic floors belong to the Patterns sequence (tiling.json, artifact group `Pattern_Mosaic_Floors`, a pool for curation - Palle, 2026-11-02); the field on Mosaic_Pompeii_Floors is where they can be walked until the space is curated, on floors or, with `artifact_tilt` -90, on the vertical plane (examples/mosaic_wall.json).

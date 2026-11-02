@@ -53,19 +53,28 @@ static func _floor_label(node:Node3D,item:Dictionary)->void:
 ## centred on the board, a wall's base on the sill. Measured off the artifact's own meshes, so a facade plan anchored
 ## at its left edge, or a floor built from a corner, lands where its frame is.
 static func _fit_into(node:Node3D,fit:Array)->void:
-	var box:=AABB();var first:=true;var inv:=node.global_transform.affine_inverse()
+	# measured in the BOARD's frame - the hall's, turned by the artifact's yaw only - so a tilted artifact (a floor
+	# stood up in a wall frame) is fitted by what it shows the room: x along the board, y up, z out of it
+	var host:=node.get_parent()
+	if host==null:return
+	var yaw:=Basis(Vector3.UP,node.rotation.y);var to_board:=yaw.inverse()
+	var lo:=Vector3.INF;var hi:=-Vector3.INF;var any:=false
 	for m in node.find_children("*","MeshInstance3D",true,false):
 		var mi:=m as MeshInstance3D
 		if mi.mesh==null or _leaving(mi,node):continue   # a rebuild queue_frees the first build; it is still here this frame
-		var b:AABB=(inv*mi.global_transform)*mi.mesh.get_aabb()
-		box=b if first else box.merge(b);first=false
-	if first or box.size.x<=0.0:node.set_meta("draws_nothing",true);return   # nothing to fit: the label says so
+		var to_hall:Transform3D=host.global_transform.affine_inverse()*mi.global_transform
+		var box:AABB=mi.mesh.get_aabb()
+		for i in 8:
+			var p:Vector3=to_board*(to_hall*box.get_endpoint(i)-node.position)
+			lo=lo.min(p);hi=hi.max(p);any=true
+	var size:=hi-lo
+	if not any or size.x<=0.0:node.set_meta("draws_nothing",true);return   # nothing to fit: the label says so
 	var w:=float(fit[0]);var h:=float(fit[1]);var wall:=str(fit[2])=="wall"
-	var s:=minf(w/box.size.x,h/(box.size.y if wall else maxf(box.size.z,.001)))
-	var c:=box.get_center()
-	var anchor:=Vector3(c.x,box.position.y if wall else 0.0,c.z if not wall else c.z)
+	var s:=minf(w/size.x,h/(size.y if wall else maxf(size.z,.001)))
+	var c:=(lo+hi)*.5
+	var anchor:=Vector3(c.x,lo.y if wall else 0.0,c.z)
 	node.scale=node.scale*s
-	node.position-=node.basis.orthonormalized()*(anchor*s)
+	node.position-=yaw*(anchor*s)
 	node.set_meta("fit_scale",s)
 
 static func _leaving(n:Node,root:Node)->bool:

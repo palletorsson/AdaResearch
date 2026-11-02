@@ -15,6 +15,7 @@ the hall's runtime scene and photographs it (ada_run/workstation/example_<name>.
 | rack | the rack | fifteen pattern candidates on one wall |
 | stack | the stack | three shader floors at 0, 2 and 4 m on posts |
 | pit | the pit | a 6 x 6 pool, rim at 1 m, full of beach balls (ball_pit) under a screen wall; the one spec with a place |
+| mosaic_wall | the vertical plane | eight mosaic floors stood upright in wall frames (`artifact_tilt` -90, `fit`), faces to the room - the Patterns sequence's mosaic floors on a wall |
 
 `facing` names the side a wall stands on, looking inward. A spec may carry `principle`, `title` and `camera`
 (`[[eye], [look_at]]`) for the probe's picture. A map that fits gets a spec like these, named for the map.

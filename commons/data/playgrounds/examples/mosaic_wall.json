@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "units": "metres",
+  "places": [],
+  "principle": "the vertical plane",
+  "title": "Mosaic wall / eight mosaic floors stood upright in wall frames, faces to the room - the floors of the Patterns sequence on the vertical plane",
+  "about": "Palle, 2026-11-02: 'these should be added to the pattern sequence, but we can also use the vertical plane when we curate the space'. A wall board whose artifact is a mosaic floor, tilted -90 degrees about its own x (artifact_tilt) and fitted to the 3 x 3 m frame. Facing north: the wall stands on the north side and the mosaics look south into the room.",
+  "camera": [
+    [
+      0,
+      2.2,
+      9
+    ],
+    [
+      0,
+      1.5,
+      -1
+    ]
+  ],
+  "boards": [
+    {
+      "id": "mosaic_wall",
+      "at": [
+        -10,
+        0,
+        -2
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "posts": true,
+      "artifact": "radial_mandala_floor",
+      "artifact_tilt": -90,
+      "fit": true,
+      "repeat": {
+        "count": 8,
+        "step": [
+          3,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {"artifact": "radial_mandala_floor", "floor_size": [3, 3], "title": "radial mandala"},
+        {"artifact": "labyrinth_floor", "floor_size": [3, 3], "title": "labyrinth"},
+        {"artifact": "spiral_mosaic_floor", "floor_size": [3, 3], "title": "spiral mosaic"},
+        {"artifact": "pixel_invader_floor", "floor_size": [3, 3], "title": "pixel invader"},
+        {"artifact": "neon_chevron_floor", "floor_size": [3, 3], "title": "neon chevron"},
+        {"artifact": "star_rosette_floor", "floor_size": [3, 3], "title": "star rosette"},
+        {"artifact": "opus_sectile_floor", "floor_size": [3, 3], "title": "opus sectile"},
+        {"artifact": "perspective_cubes_floor", "floor_size": [3, 3], "title": "perspective cubes"}
+      ]
+    }
+  ]
+}

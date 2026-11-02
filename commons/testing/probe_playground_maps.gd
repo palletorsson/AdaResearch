@@ -104,6 +104,18 @@ func _ready() -> void:
 	_check(report, "D field: %d mosaic floors (%d different) - %d fitted in their 4 x 4 boards or labelled as drawing nothing (%s), %d walkable at 8.5 cm; beside the field the ray meets the ground at %.2f" % [field.size(), tokens.size(), field_fit, ", ".join(PackedStringArray(empty)) if not empty.is_empty() else "none", walkable, beside_y], field.size() == 46 and tokens.size() == 46 and field_fit == 46 and walkable == 46 and absf(beside_y) < .03, {"problems": field_rows, "draws_nothing": empty, "beside_y": beside_y})
 	shots = {"decks_row": [Vector3(-27, 9, -1), Vector3(0, 1, -14)], "decks_on": [Vector3(-11, 2.7, -10.5), Vector3(-10, 1, -15.5)], "field_above": [Vector3(0, 24, 26), Vector3(0, 0, 1)], "field_walk": [Vector3(-23, 1.7, 11), Vector3(-10, 0, 0)], "field_close": [Vector3(-3, 3.2, 5), Vector3(-2, 0, 0)]}
 	await _shoot(cam, shots, out_dir)
+	decks.free()
+	# E - the vertical plane (Palle: "we can also use the vertical plane when we curate the space"): the mosaic wall
+	# example stands eight mosaic floors upright in wall frames, faces to the room; the same spec WITHOUT the tilt
+	# lies flat (negative) - the tilt is what stands them up
+	var wall_path := "res://commons/data/playgrounds/examples/mosaic_wall.json"
+	var wall_spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(wall_path))
+	var upright := await _wall_heights(wall_spec)
+	var flat_spec: Dictionary = wall_spec.duplicate(true);(flat_spec.boards[0] as Dictionary).erase("artifact_tilt")
+	var flat := await _wall_heights(flat_spec)
+	var stood: bool = upright.size() == 8 and upright.all(func(r): return r.height > 2.9 and r.height < 3.05 and r.width <= 3.05 and r.depth < .4 and r.faces_room)
+	var lay: bool = flat.size() == 8 and flat.all(func(r): return r.height < .4)
+	_check(report, "E vertical plane: eight mosaic floors stand upright in 3 x 3 m wall frames, faces to the room; without the tilt the same eight lie flat", stood and lay, {"upright": upright, "flat": flat})
 	var passed := 0
 	for ch in report.checks:
 		if ch.ok:passed += 1
@@ -111,6 +123,23 @@ func _ready() -> void:
 	var o := FileAccess.open(out_dir.path_join("playground_maps.json"), FileAccess.WRITE);o.store_string(JSON.stringify(report, "  "));o.close()
 	print("[probe_playground_maps] %d/%d" % [passed, report.checks.size()])
 	get_tree().quit(0 if passed == report.checks.size() else 1)
+
+## Build a wall spec in the spec hall; per mosaic: its extent across the wall, up it and out of it, and whether its
+## face (the floor's own +Y) looks into the room (+Z for a north wall). Photographs the upright one.
+func _wall_heights(wall_spec: Dictionary) -> Array:
+	var hall: Node3D = HALL.instantiate();hall.recipe = load("res://commons/modular/places/place_builder.gd").new().compile(wall_spec).get("recipe", {});add_child(hall)
+	for i in 8:
+		await get_tree().physics_frame
+	var rows := []
+	for c in hall.get_children():
+		if not str(c.name).begins_with("mosaic_wall_") or not c.has_meta("activity_artifact"):continue
+		var box := _aabb(c)
+		rows.append({"name": str(c.name), "token": str(c.get_meta("activity_artifact")), "width": snappedf(box.size.x, .01), "height": snappedf(box.size.y, .01), "depth": snappedf(box.size.z, .01), "faces_room": (c as Node3D).global_basis.y.normalized().dot(Vector3(0, 0, 1)) > .9})
+	if (wall_spec.boards[0] as Dictionary).has("artifact_tilt"):
+		var cam: Camera3D = get_viewport().get_camera_3d()
+		await _shoot(cam, {"mosaic_wall": [Vector3(0, 2.2, 9), Vector3(0, 1.5, -1)], "mosaic_wall_close": [Vector3(-4, 1.7, 3), Vector3(-3, 1.5, -2)]}, ProjectSettings.globalize_path("res://ada_run/workstation"))
+	hall.free()
+	return rows
 
 func _shoot(cam: Camera3D, shots: Dictionary, out_dir: String) -> void:
 	for k in shots:
