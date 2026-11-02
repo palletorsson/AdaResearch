@@ -23,6 +23,24 @@
         "walkable",
         "slot"
       ]
+    },
+    "playground_spec_hall": {
+      "lookup_name": "playground_spec_hall",
+      "scene": "res://commons/void/trials/playground_recipes/spec_hall.tscn",
+      "class_name": "",
+      "name": "Playground spec hall / a place spec walked",
+      "description": "Compiles a playground place spec (places with their activities, framed boards - commons/modular/places) when it loads and builds it as a walkable hall, like the principal-places hall. A Void trial floor names the spec in its config {spec}; tools/playground_trial.py writes such trials, sized to hold every piece. The annex for what did not fit on floor 210 is the first (2026-11-02).",
+      "category": "display_plates",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "tags": [
+        "playground",
+        "hall",
+        "spec",
+        "trial",
+        "scaffold"
+      ]
     }
   }
 }

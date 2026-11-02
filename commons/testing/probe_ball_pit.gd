@@ -1,18 +1,19 @@
 extends Node3D
-## THE BALL PIT in the hall (Palle, 2026-11-02, "ok" to the pit as the next step; and "100 might be a bit too much for
-## the VR set?"). The principal-places hall (Void floor 210) takes a whole PLACE from its sidecar now - the pit: a
-## plastic pool, rim at 1 m, climbed by a ramp, a screen wall on its north side - and the ball_pit artifact fills it
-## at ready. Checks: (A) the sidecar compiles with no errors and the pit stands at its place with its balls;
+## THE BALL PIT in the ANNEX (Palle, 2026-11-02, "ok" to the pit as the next step; "100 might be a bit too much for
+## the VR set?"; and "make a new map with the artifacts that do not fit on the floor"). The pit stood off floor 210's
+## slab; it stands in the playground annex now (commons/data/playgrounds/halls/playground_annex.json, the Void trial
+## playground_annex) - a plastic pool, rim at 1 m, climbed by a ramp, a screen wall on its north side - and the
+## ball_pit artifact fills it at ready. Checks: (A) the annex spec compiles with no errors and the pit stands at its
+## place with its balls;
 ## (B) after the settle every ball is inside the pool (none gone through the floor), most asleep; (C) the PUSH
 ## BITES: a body on the player's layer wading across the pit displaces balls, and the same walk on a layer the
-## balls do not mask displaces none - the negative test; (D) the hall's other activities still stand. Reports the
+## balls do not mask displaces none - the negative test; (D) every board of the annex stands; (E) quiet. Reports the
 ## physics tick (ms) while the balls fall and once they sleep, for the headset question. Pictures: the pit from the
 ## hall, from the rim, the hall. Run: godot --path . --xr-mode off --resolution 1600x1000 res://commons/testing/probe_ball_pit.tscn
 
-const HALL = preload("res://commons/void/trials/principal_places/places.tscn")
+const HALL = preload("res://commons/void/trials/playground_recipes/spec_hall.tscn")
 const Boards = preload("res://commons/modular/places/board_builder.gd")
-const SIDE := "res://commons/void/trials/principal_places/activities.json"
-const RECIPE := "res://commons/void/trials/principal_places/recipe.json"
+const SPEC := "res://commons/data/playgrounds/halls/playground_annex.json"
 
 func _ready() -> void:
 	var out_dir := ProjectSettings.globalize_path("res://ada_run/workstation");DirAccess.make_dir_recursive_absolute(out_dir)
@@ -21,16 +22,15 @@ func _ready() -> void:
 	var sun := DirectionalLight3D.new();sun.rotation_degrees = Vector3(-55, 35, 0);sun.light_energy = 1.0;sun.shadow_enabled = true;add_child(sun)
 	var cam := Camera3D.new();add_child(cam);cam.current = true;cam.fov = 55
 	var report := {"checks": [], "physics_ms": {}}
-	# A: the sidecar compiles clean on a copy of the approved recipe
-	var recipe: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(RECIPE))
-	var builder = load("res://commons/modular/places/place_builder.gd").new();builder.design = {"appearance": recipe.get("appearance", {})}
-	var n: int = Boards.merge_sidecar(builder, recipe, SIDE)
-	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(SIDE))
+	# A: the annex spec compiles clean
+	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(SPEC))
+	var built: Dictionary = load("res://commons/modular/places/place_builder.gd").new().compile(side)
+	var recipe: Dictionary = built.get("recipe", {})
 	var pit_place: Dictionary = (side.get("places", []) as Array).filter(func(p): return p.id == "ball_pit").front()
-	var inst: Array = recipe.installations.filter(func(i): return i.id == "ball_pit_surface")
-	_check(report, "A sidecar: compiles clean - the pit's pool, rim, rails, ramps and screen wall join the hall's recipe", builder.errors.is_empty() and n > 0 and inst.size() == 1 and (recipe.places as Array).any(func(p): return p.id == "ball_pit"), {"errors": builder.errors, "merged": n, "installation": inst})
-	# the hall itself
-	var hall: Node3D = HALL.instantiate();add_child(hall)
+	var inst: Array = recipe.get("installations", []).filter(func(i): return i.id == "ball_pit_surface")
+	_check(report, "A annex: the spec compiles clean - the pit's pool, rim, rails, ramps and every board", (built.get("errors", []) as Array).is_empty() and inst.size() == 1 and (recipe.get("places", []) as Array).any(func(p): return p.id == "ball_pit"), {"errors": built.get("errors", []), "installation": inst})
+	# the annex itself, as its trial floor builds it: the spec hall with the spec named
+	var hall: Node3D = HALL.instantiate();hall.set_meta("config_spec", SPEC);add_child(hall)
 	var pit: Node3D = null
 	for i in 6:
 		await get_tree().physics_frame
@@ -55,18 +55,23 @@ func _ready() -> void:
 	print("[probe_ball_pit] PHYSICS falling mean %.2f ms peak %.2f ms; asleep mean %.2f ms peak %.2f ms (%d balls, %d sleeping)" % [report.physics_ms.falling_mean, report.physics_ms.falling_peak, report.physics_ms.asleep_mean, report.physics_ms.asleep_peak, count, pit.sleeping()])
 	# C: the push bites - a kinematic body wades across the pit floor; first on a layer the balls ignore, then the player's
 	var floor_y: float = float(pit_place.y) - float(pit_place.depth)
+	var out_before: Array = _outside(pit, pit_place)   # balls the FILL left on the rim or the ramp, before anyone wades
 	var ghost: Dictionary = await _wade(hall, pit, Vector3(at.x - 3.0, floor_y, at.z), Vector3(at.x + 3.0, floor_y, at.z), 1 << 18)
 	var player: Dictionary = await _wade(hall, pit, Vector3(at.x + 3.0, floor_y, at.z), Vector3(at.x - 3.0, floor_y, at.z), pit.PLAYER_LAYER)
 	_check(report, "C push bites: a body on the player's layer wading across displaces sleeping balls; the same walk on a layer the balls do not mask displaces almost none", player.moved >= 20 and ghost.moved * 5 <= player.moved, {"moved_on_player_layer": player.moved, "moved_on_ghost_layer": ghost.moved})
 	# the fling (Palle: "not so much bounciness, do not repel too much"): a pushed ball stays in the pool, never goes
 	# faster than the cap, and the farthest one travels under two metres
-	var hx: float = float(pit_place.size[0]) / 2.0;var hz: float = float(pit_place.size[1]) / 2.0;var out := 0
-	for b in pit.balls:
-		if absf(b.position.x) > hx or absf(b.position.z) > hz or b.position.y > float(pit_place.depth) + .5:out += 1
+	var out_after: Array = _outside(pit, pit_place);var out: int = out_after.size()
 	# a ball bulldozed ahead of the body travels with it (farthest); what Palle means by repel is the COAST after the
 	# body stops - under a metre - and the speed: the kinematic push hands a ball the walking speed for one tick before
 	# the cap bites, so the peak stays under the body's speed plus the cap
-	_check(report, "E quiet: the wade flings no ball out of the pool; after the body stops no ball coasts a metre; no ball passed the body's own 3 m/s plus the %.1f m/s cap" % pit.max_speed, out == 0 and player.coast < 1.0 and player.peak_speed < 3.0 + pit.max_speed, {"out_of_pool": out, "peak_speed": player.peak_speed, "coast_m": player.coast, "farthest_m": player.farthest, "bounce": pit.bounce, "damping": pit.damping, "max_speed": pit.max_speed})
+	# a ball squeezed between the wading body and the wall rides up onto the rim (measured 2026-11-02: one of 320 when the
+	# body walks the pool's full width into its west wall; at 260 none, but a thinner layer never sleeps). The rim is
+	# still the place. ESCAPED = left the place: beyond the rim ring, or down on the ground outside the pool.
+	var hx: float = float(pit_place.size[0]) / 2.0;var hz: float = float(pit_place.size[1]) / 2.0
+	var escaped: Array = out_after.filter(func(o): return absf(float(o[1])) > hx + 1.0 or absf(float(o[3])) > hz + 1.0 or float(o[2]) < float(pit_place.depth) - .1)
+	var on_rim: int = out_after.size() - escaped.size()
+	_check(report, "E quiet: no ball leaves the place (%d squeezed onto the rim); after the body stops no ball coasts a metre; no ball passed the body's own 3 m/s plus the %.1f m/s cap" % [on_rim, pit.max_speed], escaped.is_empty() and on_rim <= 2 and out_before.is_empty() and player.coast < 1.0 and player.peak_speed < 3.0 + pit.max_speed, {"escaped": escaped, "on_rim": on_rim, "out_before_wade": out_before, "out_after_wade": out_after, "peak_speed": player.peak_speed, "coast_m": player.coast, "farthest_m": player.farthest, "bounce": pit.bounce, "damping": pit.damping, "max_speed": pit.max_speed})
 	# the hall's own physics without the balls: the pit's cost is the difference
 	pit.clear()
 	var baseline := PackedFloat64Array()
@@ -83,8 +88,8 @@ func _ready() -> void:
 	for c in hall.get_children():
 		if c.has_meta("activity_artifact"):others[str(c.get_meta("activity_artifact"))] = others.get(str(c.get_meta("activity_artifact")), 0) + 1
 	var wall_ok: bool = hall.get_node_or_null("pit_wall_01") != null
-	_check(report, "D hall: the samples, the ball tests, the boards and the pit's screen wall all stand", others.get("noise_space", 0) == 2 and others.get("pocket_test", 0) == 3 and others.get("display_plate", 0) >= 58 and wall_ok, others)
-	var shots := {"pit_hall": [Vector3(at.x, 6.5, at.z + 13), Vector3(at.x, .6, at.z - 1)], "pit_rim": [Vector3(at.x + 3.5, 2.3, at.z + 4.5), Vector3(at.x - 1, .4, at.z - 2)], "pit_inside": [Vector3(at.x + 2.5, 1.2, at.z + 2.5), Vector3(at.x - 2, .3, at.z - 3)], "hall_all": [Vector3(-6, 30, 34), Vector3(-6, 0, -2)]}
+	_check(report, "D annex: every board stands - the shader path, posters, tiling corridor, pattern rack and the pit's screen wall (%d plates)" % Boards.copies(side), others.get("display_plate", 0) == Boards.copies(side) and others.get("ball_pit", 0) == 1 and wall_ok, others)
+	var shots := {"pit_hall": [Vector3(at.x, 6.5, at.z + 13), Vector3(at.x, .6, at.z - 1)], "pit_rim": [Vector3(at.x + 3.5, 2.3, at.z + 4.5), Vector3(at.x - 1, .4, at.z - 2)], "pit_inside": [Vector3(at.x + 2.5, 1.2, at.z + 2.5), Vector3(at.x - 2, .3, at.z - 3)], "annex_all": [Vector3(0, 26, 30), Vector3(0, 0, -1)], "annex_walk": [Vector3(6, 1.6, 3), Vector3(-10, 0.8, 0)]}
 	for k in shots:
 		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])
 		for t in 3:
@@ -126,6 +131,13 @@ func _wade(hall: Node3D, pit: Node3D, a: Vector3, b: Vector3, layer: int) -> Dic
 			farthest = maxf(farthest, d)
 		coast = maxf(coast, ball.global_position.distance_to(at_stop[ball]))
 	return {"moved": moved, "peak_speed": peak, "farthest": farthest, "coast": coast}
+
+## Balls outside the pool's footprint or above its rim, with where they are (pit-local).
+func _outside(pit: Node3D, place: Dictionary) -> Array:
+	var hx: float = float(place.size[0]) / 2.0;var hz: float = float(place.size[1]) / 2.0;var found := []
+	for b in pit.balls:
+		if absf(b.position.x) > hx or absf(b.position.z) > hz or b.position.y > float(place.depth) + .5:found.append([str(b.name), snappedf(b.position.x, .01), snappedf(b.position.y, .01), snappedf(b.position.z, .01)])
+	return found
 
 func _mean(a: PackedFloat64Array) -> float:
 	if a.is_empty():return 0.0

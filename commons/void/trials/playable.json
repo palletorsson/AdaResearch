@@ -3108,6 +3108,28 @@
           5
         ]
       }
+    },
+    "playground_annex": {
+      "title": "Playground annex / what did not fit on floor 210",
+      "label": "PLAYGROUND ANNEX / WHAT DID NOT FIT ON FLOOR 210",
+      "map": "Shader_05_Patterns",
+      "start_floor": 1,
+      "notice": "Playground annex / what did not fit on floor 210: the shader path, the tiling corridor, the pattern rack and the ball pit\nR / B returns to the start.",
+      "rooms": "res://commons/void/trials/playground_annex/rooms.json",
+      "layout": "res://commons/void/trials/playground_annex/layout.json",
+      "scene": "res://commons/void/trials/playground_annex/trial.tscn",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          6.0,
+          0.14,
+          3.0
+        ]
+      }
     }
   }
 }

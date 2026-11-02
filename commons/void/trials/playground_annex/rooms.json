@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Trial canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Shader_05_Patterns",
+      "title": "Playground annex / what did not fit on floor 210",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "playground-annex",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0.08,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "spec": "res://commons/data/playgrounds/halls/playground_annex.json"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "supply_leads": false
+    }
+  ]
+}

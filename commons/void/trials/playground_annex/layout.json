@@ -1,0 +1,52 @@
+{
+  "cliff_landings": {
+    "enabled": false
+  },
+  "column_width": 0.9,
+  "column_x": [
+    -23.0,
+    23.0
+  ],
+  "column_z": [
+    -15.0,
+    15.0
+  ],
+  "depth": 32.0,
+  "descent": {
+    "mode": "shaft_ledges"
+  },
+  "floor_roles": [
+    "Canopy",
+    "Playground annex",
+    "Catch floor"
+  ],
+  "floor_styles": {
+    "0": "abstract",
+    "1": "abstract",
+    "2": "abstract"
+  },
+  "levels": [
+    0,
+    -16.0,
+    -32.0
+  ],
+  "service_x": [
+    -22.0,
+    22.0
+  ],
+  "service_z": -12.0,
+  "shaft_depth": 6,
+  "shaft_width": 5,
+  "shafts": [],
+  "slab_thickness": 0.36,
+  "spawn_points": {
+    "1": [
+      6.0,
+      0.14,
+      3.0
+    ]
+  },
+  "status": "Playground spec trial, written by tools/playground_trial.py from res://commons/data/playgrounds/halls/playground_annex.json",
+  "storey_height": 16.0,
+  "width": 48.0
+}

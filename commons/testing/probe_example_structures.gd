@@ -2,8 +2,9 @@ extends Node3D
 ## THE EXAMPLE STRUCTURES (Palle, 2026-10-31: "add the element to example structures; show the same principle for tiling
 ## and pattern as well"). Every spec in commons/data/playgrounds/examples/ - path, array, corridor, canopy, court, rack,
 ## stack, pit - compiles through the place builder with no errors into as many plates as its boards promise, framed; each
-## stands alone in the hall's runtime scene (a preset recipe, no sidecar) and is photographed. Then the hall itself:
-## from its sidecar it carries the shader path, the tiling corridor and the pattern rack beside the samples.
+## stands alone in the hall's runtime scene (a preset recipe, no sidecar) and is photographed. Then the ANNEX: the
+## shader path, the tiling corridor, the pattern rack and the pit, moved off floor 210's slab (2026-11-02), stand in
+## the spec hall its trial floor builds.
 ## Writes ada_run/workstation/example_structures.json and example_<name>.png.
 ## Run: godot --path . --xr-mode off --resolution 1600x1000 res://commons/testing/probe_example_structures.tscn
 
@@ -59,16 +60,17 @@ func _ready() -> void:
 		get_viewport().get_texture().get_image().save_png(out_dir.path_join("%s%s.png" % [prefix, name]))
 		scene.free()
 		_save(out_dir, report)   # progress for the watchdog
-	# the hall with its sidecar: the path, the tiling corridor and the pattern rack
-	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/trials/principal_places/activities.json"))
-	var want_plates := Boards.copies(side) + (side.get("activities", []) as Array).filter(func(a): return a.artifact == "display_plate").size()
-	var hall: Node3D = HALL.instantiate();add_child(hall)
+	# the annex: the path, the tiling corridor, the pattern rack and the pit's wall, as its trial floor builds them
+	const ANNEX := "res://commons/data/playgrounds/halls/playground_annex.json"
+	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(ANNEX))
+	var want_plates := Boards.copies(side)
+	var hall: Node3D = load("res://commons/void/trials/playground_recipes/spec_hall.tscn").instantiate();hall.set_meta("config_spec", ANNEX);add_child(hall)
 	for i in 6:
 		await get_tree().physics_frame
 	var plates := 0
 	for c in hall.get_children():
 		if c.get_meta("activity_artifact", "") == "display_plate":plates += 1
-	_check(report, "hall: from its sidecar the shader path, the tiling corridor and the pattern rack stand - %d display plates" % want_plates, plates == want_plates and want_plates > 50, {"plates": plates, "want": want_plates, "boards": (side.boards as Array).map(func(b): return b.id)})
+	_check(report, "annex: the shader path, the tiling corridor, the pattern rack and the pit's wall stand - %d display plates" % want_plates, plates == want_plates and want_plates > 50, {"plates": plates, "want": want_plates, "boards": (side.boards as Array).map(func(b): return b.id)})
 	var shots := {"hall_corridor": [Vector3(-23, 2.0, -11), Vector3(0, 1.2, -11)], "hall_rack": [Vector3(16, 1.6, -3), Vector3(22, 1.5, -3)], "hall_all": [Vector3(0, 30, 34), Vector3(0, 0, -2)]}
 	for k in shots:
 		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])

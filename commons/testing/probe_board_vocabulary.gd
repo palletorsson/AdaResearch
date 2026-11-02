@@ -46,10 +46,22 @@ func _ready() -> void:
 	for c in hall.get_children():
 		if c.has_meta("activity_artifact"):
 			var k: String = str(c.get_meta("activity_artifact"));by_kind[k] = by_kind.get(k, 0) + 1
+	# floor 210 keeps what stands on the tower's slab; the boards moved to the ANNEX (2026-11-02), where they are framed
 	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/trials/principal_places/activities.json"))
 	var want_plates: int = preload("res://commons/modular/places/board_builder.gd").copies(side)
-	var hall_ok: bool = by_kind.get("display_plate", 0) == want_plates and by_kind.get("pocket_test", 0) == 3 and by_kind.get("noise_space", 0) == 2 and by_kind.get("random_space", 0) == 1 and by_kind.get("sine_space_floor", 0) == 1 and hall.recipe.assemblies.size() > approved_assemblies
-	_check(report, "B hall: from the sidecar the four samples, three ball tests and every board stand, and the frames' assemblies are in the loaded recipe beyond the approved count", hall_ok, {"by_kind": by_kind, "assemblies": hall.recipe.assemblies.size(), "approved": approved_assemblies})
+	var annex_spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/playgrounds/halls/playground_annex.json"))
+	var hall_ok: bool = by_kind.get("display_plate", 0) == want_plates and by_kind.get("pocket_test", 0) == 3 and by_kind.get("noise_space", 0) == 2 and by_kind.get("random_space", 0) == 1 and by_kind.get("sine_space_floor", 0) == 1 and hall.recipe.assemblies.size() >= approved_assemblies
+	var hall_assemblies: int = hall.recipe.assemblies.size()
+	hall.queue_free()
+	var annex: Node3D = load("res://commons/void/trials/playground_recipes/spec_hall.tscn").instantiate();annex.set_meta("config_spec", "res://commons/data/playgrounds/halls/playground_annex.json");add_child(annex)
+	for i in 6:
+		await get_tree().physics_frame
+	var annex_plates := 0
+	for c in annex.get_children():
+		if c.get_meta("activity_artifact", "") == "display_plate":annex_plates += 1
+	var annex_want: int = preload("res://commons/modular/places/board_builder.gd").copies(annex_spec)
+	hall_ok = hall_ok and annex_plates == annex_want and annex.recipe.assemblies.size() > annex_want
+	_check(report, "B hall: floor 210 keeps its four samples and three ball tests; the boards stand framed in the annex", hall_ok, {"by_kind": by_kind, "assemblies": hall_assemblies, "approved": approved_assemblies, "annex_plates": annex_plates, "annex_want": annex_want})
 	var shots := {"boards_path": [Vector3(-22, 1.7, 9), Vector3(0, 0.5, 10)], "boards_above": [Vector3(0, 12, 22), Vector3(0, 0.5, 10)]}
 	for k in shots:
 		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])

@@ -1,0 +1,663 @@
+{
+  "version": 1,
+  "units": "metres",
+  "principle": "the annex",
+  "title": "Playground annex / what did not fit on floor 210: the shader path, the tiling corridor, the pattern rack and the ball pit",
+  "about": "Palle, 2026-11-02: 'make a new map with the artifacts that do not fit on the floor - I can not walk to these and inspect them'. The tower's slab is 42 x 18 m and six of the hall's eight additions stood off it. Here they stand on a 48 x 32 slab of their own, at the same coordinates as in the hall's sidecar, except the pit (x -30 -> -10). Walked as the Void trial playground_annex (tools/playground_trial.py); later arranged as a space inside the skyscraper.",
+  "camera": [
+    [
+      0,
+      26,
+      30
+    ],
+    [
+      0,
+      0,
+      -1
+    ]
+  ],
+  "places": [
+    {
+      "id": "ball_pit",
+      "at": [
+        -10,
+        0
+      ],
+      "y": 1,
+      "size": [
+        6,
+        6
+      ],
+      "depth": 1,
+      "type": "plastic_pool",
+      "rim": 1,
+      "access": {
+        "outer": "ramp",
+        "inner": "ramp"
+      },
+      "colour": "f0b429",
+      "activity": {
+        "artifact": "ball_pit",
+        "config": {
+          "count": 320,
+          "diameter": 0.4
+        }
+      }
+    }
+  ],
+  "boards": [
+    {
+      "id": "shader05_path",
+      "at": [
+        -18,
+        0,
+        10
+      ],
+      "size": [
+        3,
+        3
+      ],
+      "orient": "floor",
+      "frame": true,
+      "repeat": {
+        "count": 10,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "shader",
+          "params": {
+            "animate": 0.0,
+            "grid_size": 5.0,
+            "shape_size": 0.3
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+          "title": "01  Tiling"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "grid_size": 8.0,
+            "line_thickness": 0.08,
+            "seed": 42.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_truchet.gdshader",
+          "title": "02  Truchet"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "dot_size": 0.25,
+            "grid_size": 6.0,
+            "offset_amount": 0.5
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_offset.gdshader",
+          "title": "03  Offset rows"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "cols": 4.0,
+            "mortar": 0.04,
+            "rows": 8.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_brick.gdshader",
+          "title": "04  Brick"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "aperiodic_mix": 1.0,
+            "edge_width": 0.12,
+            "grid_size": 10.0,
+            "seed": 7.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_wang.gdshader",
+          "title": "05  Wang tiles"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "display_mode": 0.0,
+            "grid_size": 6.0,
+            "jitter": 0.85,
+            "seed": 13.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+          "title": "06  Voronoi cells"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "display_mode": 2.0,
+            "grid_size": 8.0,
+            "jitter": 0.9,
+            "seed": 31.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+          "title": "07  Voronoi edges"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "lacunarity": 2.0,
+            "noise_scale": 6.0,
+            "noise_type": 0.0,
+            "octaves_float": 4.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+          "title": "08  Simplex fBm"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "lacunarity": 2.0,
+            "noise_scale": 5.0,
+            "noise_type": 1.0,
+            "octaves_float": 3.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+          "title": "09  Worley cells"
+        },
+        {
+          "content": "shader",
+          "params": {
+            "lacunarity": 2.0,
+            "noise_scale": 4.0,
+            "noise_type": 2.0,
+            "octaves_float": 4.0
+          },
+          "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+          "title": "10  Domain warp"
+        }
+      ]
+    },
+    {
+      "id": "shader05_posters",
+      "at": [
+        -16,
+        0,
+        13
+      ],
+      "size": [
+        2,
+        2
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "frame": true,
+      "repeat": {
+        "count": 5,
+        "step": [
+          8,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 3.0,
+          "seed": 11,
+          "title": "group 0"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 2,
+          "repeats": 3.0,
+          "seed": 12,
+          "title": "group 2"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 4,
+          "repeats": 3.0,
+          "seed": 13,
+          "title": "group 4"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 6,
+          "repeats": 3.0,
+          "seed": 14,
+          "title": "group 6"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 3.0,
+          "seed": 15,
+          "title": "group 8"
+        }
+      ]
+    },
+    {
+      "id": "tiling_floor",
+      "at": [
+        -18,
+        0,
+        -11
+      ],
+      "size": [
+        4,
+        4
+      ],
+      "orient": "floor",
+      "repeat": {
+        "count": 9,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 6.0,
+          "seed": 100,
+          "title": "tiles 0"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 1,
+          "repeats": 6.0,
+          "seed": 101,
+          "title": "tiles 1"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 4,
+          "repeats": 6.0,
+          "seed": 104,
+          "title": "tiles 4"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 6,
+          "repeats": 6.0,
+          "seed": 106,
+          "title": "tiles 6"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 9,
+          "repeats": 6.0,
+          "seed": 109,
+          "title": "tiles 9"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 12,
+          "repeats": 6.0,
+          "seed": 112,
+          "title": "tiles 12"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 2,
+          "repeats": 6.0,
+          "seed": 102,
+          "title": "tiles 2"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 3,
+          "repeats": 6.0,
+          "seed": 103,
+          "title": "tiles 3"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 5,
+          "repeats": 6.0,
+          "seed": 105,
+          "title": "tiles 5"
+        }
+      ]
+    },
+    {
+      "id": "tiling_north",
+      "at": [
+        -18,
+        0,
+        -14
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "repeat": {
+        "count": 9,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 7,
+          "repeats": 6.0,
+          "seed": 117,
+          "title": "tiles 7"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 6.0,
+          "seed": 118,
+          "title": "tiles 8"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 10,
+          "repeats": 6.0,
+          "seed": 120,
+          "title": "tiles 10"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 11,
+          "repeats": 6.0,
+          "seed": 121,
+          "title": "tiles 11"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 13,
+          "repeats": 6.0,
+          "seed": 123,
+          "title": "tiles 13"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 14,
+          "repeats": 6.0,
+          "seed": 124,
+          "title": "tiles 14"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 15,
+          "repeats": 6.0,
+          "seed": 125,
+          "title": "tiles 15"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 16,
+          "repeats": 6.0,
+          "seed": 126,
+          "title": "tiles 16"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 6.0,
+          "seed": 110,
+          "title": "tiles 0"
+        }
+      ]
+    },
+    {
+      "id": "tiling_south",
+      "at": [
+        -18,
+        0,
+        -8
+      ],
+      "size": [
+        4,
+        3
+      ],
+      "orient": "wall",
+      "facing": "south",
+      "repeat": {
+        "count": 9,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 1,
+          "repeats": 6.0,
+          "seed": 121,
+          "title": "tiles 1"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 2,
+          "repeats": 6.0,
+          "seed": 122,
+          "title": "tiles 2"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 3,
+          "repeats": 6.0,
+          "seed": 123,
+          "title": "tiles 3"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 4,
+          "repeats": 6.0,
+          "seed": 124,
+          "title": "tiles 4"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 5,
+          "repeats": 6.0,
+          "seed": 125,
+          "title": "tiles 5"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 6,
+          "repeats": 6.0,
+          "seed": 126,
+          "title": "tiles 6"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 7,
+          "repeats": 6.0,
+          "seed": 127,
+          "title": "tiles 7"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 6.0,
+          "seed": 128,
+          "title": "tiles 8"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 9,
+          "repeats": 6.0,
+          "seed": 129,
+          "title": "tiles 9"
+        }
+      ]
+    },
+    {
+      "id": "pattern_rack",
+      "at": [
+        22,
+        0,
+        -7
+      ],
+      "size": [
+        1,
+        1
+      ],
+      "orient": "wall",
+      "facing": "east",
+      "repeat": {
+        "count": 5,
+        "step": [
+          0,
+          0,
+          2
+        ],
+        "rows": {
+          "count": 3,
+          "step": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "contents": [
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 0,
+          "repeats": 1.0,
+          "seed": 130,
+          "title": "group 0"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 1,
+          "repeats": 1.0,
+          "seed": 131,
+          "title": "group 1"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 2,
+          "repeats": 1.0,
+          "seed": 132,
+          "title": "group 2"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 3,
+          "repeats": 1.0,
+          "seed": 133,
+          "title": "group 3"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 4,
+          "repeats": 1.0,
+          "seed": 134,
+          "title": "group 4"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 5,
+          "repeats": 1.0,
+          "seed": 135,
+          "title": "group 5"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 6,
+          "repeats": 1.0,
+          "seed": 136,
+          "title": "group 6"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 7,
+          "repeats": 1.0,
+          "seed": 137,
+          "title": "group 7"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 8,
+          "repeats": 1.0,
+          "seed": 138,
+          "title": "group 8"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 9,
+          "repeats": 1.0,
+          "seed": 139,
+          "title": "group 9"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 10,
+          "repeats": 1.0,
+          "seed": 140,
+          "title": "group 10"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 11,
+          "repeats": 1.0,
+          "seed": 141,
+          "title": "group 11"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 12,
+          "repeats": 1.0,
+          "seed": 142,
+          "title": "group 12"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 13,
+          "repeats": 1.0,
+          "seed": 143,
+          "title": "group 13"
+        },
+        {
+          "content": "wallpaper",
+          "wallpaper_group": 14,
+          "repeats": 1.0,
+          "seed": 144,
+          "title": "group 14"
+        }
+      ]
+    },
+    {
+      "id": "pit_wall",
+      "at": [
+        -10,
+        3,
+        -5
+      ],
+      "size": [
+        6,
+        3
+      ],
+      "orient": "wall",
+      "facing": "north",
+      "frame": true,
+      "content": {
+        "content": "shader",
+        "params": {
+          "display_mode": 0.0,
+          "grid_size": 6.0,
+          "jitter": 0.85,
+          "seed": 13.0
+        },
+        "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+        "title": "over the pit"
+      }
+    }
+  ]
+}

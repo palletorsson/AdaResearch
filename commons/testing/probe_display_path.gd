@@ -57,20 +57,20 @@ func _ready() -> void:
 	var pm: Material = pp.face.material_override
 	var papered: bool = pm is ShaderMaterial and (pm as ShaderMaterial).shader.resource_path.ends_with("wallpaper_tile.gdshader") and (pm as ShaderMaterial).get_shader_parameter("domain_texture") is Texture2D and int((pm as ShaderMaterial).get_shader_parameter("wallpaper_group")) == 4
 	_check(report, "C wallpaper plate: the wallpaper shader over a painted 4 x 4 domain, group 4", papered, {"papered": papered})
-	# D - the hall's floor path and posters
-	var hall: Node3D = HALL.instantiate();add_child(hall)
+	# D - the floor path and posters, as boards in the ANNEX (moved off floor 210's slab, 2026-11-02)
+	var hall: Node3D = load("res://commons/void/trials/playground_recipes/spec_hall.tscn").instantiate();hall.set_meta("config_spec", "res://commons/data/playgrounds/halls/playground_annex.json");add_child(hall)
 	for i in 6:
 		await get_tree().physics_frame
 	var screens := [];var posters := []
 	for c in hall.get_children():
 		if c.get_meta("activity_artifact", "") == "display_plate":
-			if c.mount == "wall":posters.append(c)
-			else:screens.append(c)
+			if str(c.name).begins_with("shader05_posters"):posters.append(c)
+			elif str(c.name).begins_with("shader05_path"):screens.append(c)
 	screens.sort_custom(func(a, b): return a.position.x < b.position.x)
-	var in_row: bool = screens.size() == 10 and screens.all(func(s): return absf(s.position.z - 10.0) < .01 and absf(s.position.y - 0.07) < 1e-3)
-	var spaced: bool = screens.size() == 10 and absf((screens[9].position.x - screens[0].position.x) / 9.0 - 3.8) < .01
+	var in_row: bool = screens.size() == 10 and screens.all(func(s): return absf(s.position.z - 10.0) < .01 and absf(s.position.y - 0.08) < 1e-3)   # a board's plate rests PLATE_LIFT over its frame
+	var spaced: bool = screens.size() == 10 and absf((screens[9].position.x - screens[0].position.x) / 9.0 - 4.0) < .01
 	var shaders_differ: bool = screens.size() == 10 and screens.map(func(s): return s.shader_path + str(s.params)).reduce(func(acc, v): return acc if v in acc else acc + [v], []).size() == 10
-	_check(report, "D hall: the Shader_05 floor path - ten walkable screens 3.8 m apart along z 10, ten different contents - and five standing posters behind it", in_row and spaced and shaders_differ and posters.size() == 5, {"screens": screens.size(), "posters": posters.size(), "spaced": spaced, "differ": shaders_differ})
+	_check(report, "D hall: the Shader_05 floor path - ten walkable screens 4 m apart along z 10, ten different contents - and five standing posters behind it", in_row and spaced and shaders_differ and posters.size() == 5, {"screens": screens.size(), "posters": posters.size(), "spaced": spaced, "differ": shaders_differ})
 	var shots := {"path_walker": [Vector3(-21, 1.7, 10), Vector3(0, 0.3, 10)], "path_above": [Vector3(0, 14, 24), Vector3(0, 0.5, 9)], "path_poster": [Vector3(-9, 1.6, 7), Vector3(-7.6, 1.0, 12.4)]}
 	for k in shots:
 		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])
