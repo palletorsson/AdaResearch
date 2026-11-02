@@ -8,10 +8,10 @@
     35.0
   ],
   "column_z": [
-    -15.0,
-    15.0
+    -19.0,
+    19.0
   ],
-  "depth": 32.0,
+  "depth": 40.0,
   "descent": {
     "mode": "corner_pads",
     "pad_shaft": "B",
@@ -27,7 +27,7 @@
     "Canopy",
     "Playground annex",
     "Facade town",
-    "Mosaic decks",
+    "Mosaic floors",
     "Catch floor"
   ],
   "floor_styles": {
@@ -48,7 +48,7 @@
     -34.0,
     34.0
   ],
-  "service_z": -12.0,
+  "service_z": -16.0,
   "shaft_depth": 6,
   "shaft_width": 6,
   "shafts": [
@@ -74,9 +74,9 @@
       0.0
     ],
     "3": [
-      -20.0,
+      -26.0,
       0.14,
-      7.0
+      13.0
     ]
   },
   "status": "Stacked playground trial, written by tools/playground_trial.py stack: Shader_05_Patterns, Facade_Assembly_Principle, Mosaic_Pompeii_Floors",

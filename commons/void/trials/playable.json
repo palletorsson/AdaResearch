@@ -3154,11 +3154,11 @@
       }
     },
     "mosaic_decks": {
-      "title": "Mosaic decks / the Pompeii floors inside the scaffolding",
-      "label": "MOSAIC DECKS / THE POMPEII FLOORS INSIDE THE SCAFFOLDING",
+      "title": "Mosaic floors / all 46 to walk on, and the Pompeii five on raised decks",
+      "label": "MOSAIC FLOORS / ALL 46 TO WALK ON, AND THE POMPEII FIVE ON RAISED DECKS",
       "map": "Mosaic_Pompeii_Floors",
       "start_floor": 1,
-      "notice": "Mosaic_Pompeii_Floors / the five Pompeii floors inside the playground scaffolding: each a 6 x 6 m deck a metre up, rimmed, railed, climbed by a ramp\nR / B returns to the start.",
+      "notice": "Mosaic_Pompeii_Floors / all 46 mosaic floors to walk on, framed by the scaffold, and the five Pompeii floors on raised decks\nR / B returns to the start.",
       "rooms": "res://commons/void/trials/mosaic_decks/rooms.json",
       "layout": "res://commons/void/trials/mosaic_decks/layout.json",
       "scene": "res://commons/void/trials/mosaic_decks/trial.tscn",
@@ -3169,18 +3169,18 @@
       },
       "spawn_points": {
         "1": [
-          -20.0,
+          -26.0,
           0.14,
-          7.0
+          13.0
         ]
       }
     },
     "playground_floors": {
-      "title": "Playground floors / the annex, the facade town and the mosaic decks, one under the other",
-      "label": "PLAYGROUND FLOORS / THE ANNEX, THE FACADE TOWN AND THE MOSAIC DECKS, ONE UNDER THE OTHER",
+      "title": "Playground floors / the annex, the facade town and the mosaic floors, one under the other",
+      "label": "PLAYGROUND FLOORS / THE ANNEX, THE FACADE TOWN AND THE MOSAIC FLOORS, ONE UNDER THE OTHER",
       "map": "Shader_05_Patterns",
       "start_floor": 1,
-      "notice": "Playground annex -> Facade town -> Mosaic decks\nJump into shaft B (east) for the next floor; R / T resets the encounter.",
+      "notice": "Playground annex -> Facade town -> Mosaic floors\nJump into shaft B (east) for the next floor; R / T resets the encounter.",
       "rooms": "res://commons/void/trials/playground_floors/rooms.json",
       "layout": "res://commons/void/trials/playground_floors/layout.json",
       "scene": "res://commons/void/trials/playground_floors/trial.tscn",
@@ -3203,9 +3203,9 @@
           0.0
         ],
         "3": [
-          -20.0,
+          -26.0,
           0.14,
-          7.0
+          13.0
         ]
       }
     }

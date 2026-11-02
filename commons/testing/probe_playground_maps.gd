@@ -65,17 +65,44 @@ func _ready() -> void:
 	var found := {};var walk := [];var space := get_world_3d().direct_space_state
 	for c in decks.get_children():
 		var tok := str(c.get_meta("activity_artifact", ""))
-		if tok in MOSAICS:found[tok] = c.position
+		if tok in MOSAICS and str(c.name).ends_with("_activity"):found[tok] = c.position   # the decks' own, not the field's
 	for p in spec.places:
 		var at := Vector3(float(p.at[0]), 0, float(p.at[1]))
 		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(decks.to_global(at + Vector3(0, 6, 0)), decks.to_global(at + Vector3(0, .5, 0))))
 		walk.append({"deck": p.id, "hit_y": snappedf(decks.to_local(hit.position).y, .01) if hit else null})
 	var on_decks: bool = walk.all(func(w): return w.hit_y != null and absf(float(w.hit_y) - 1.0) < .1)
-	var between := Vector3(-15, 0, -6)   # between the first two decks, behind their envelopes
+	var between := Vector3(-15, 0, -20)   # behind the decks' envelopes (z -18..-8), clear of the field
 	var miss := space.intersect_ray(PhysicsRayQueryParameters3D.create(decks.to_global(between + Vector3(0, 6, 0)), decks.to_global(between + Vector3(0, .5, 0))))
 	var lifted: bool = found.size() == 5 and found.values().all(func(v): return absf(v.y - 1.03) < .01)
 	_check(report, "C decks: five mosaic floors lie on plates at 1 m, each deck walkable at its centre; between the decks nothing up there", lifted and on_decks and miss.is_empty(), {"found": found, "walk": walk, "between": miss.get("position", null)})
-	shots = {"decks_row": [Vector3(-27, 9, 15), Vector3(0, 1, 0)], "decks_on": [Vector3(-11, 2.7, 3.5), Vector3(-10, 1, -1.5)], "decks_meander": [Vector3(19, 4.5, 6), Vector3(20, 1, 0)]}
+	# D - the field of every mosaic floor (Palle: "can I walk all floors - I mean the mosaic floors")
+	var field := [];var tokens := {};var empty: Array = [];var field_fit := 0;var walkable := 0;var field_rows := []
+	for b in spec.boards:
+		var r: Dictionary = b.get("repeat", {});var per: int = int(r.get("count", 1));var n: int = per * int((r.get("rows", {}) as Dictionary).get("count", 1))
+		for i in n:
+			var at := Vector3(float(b.at[0]), float(b.at[1]), float(b.at[2])) + Vector3(float(r.step[0]), 0, float(r.step[2])) * (i % per)
+			if r.has("rows"):at += Vector3(float(r.rows.step[0]), 0, float(r.rows.step[2])) * int(i / per)
+			field.append({"id": "%s_%02d" % [b.id, i + 1], "at": at, "token": str(b.contents[i].artifact)})
+	for f in field:
+		var node: Node3D = decks.get_node_or_null(str(f.id))
+		var box := _aabb(node) if node else AABB()
+		var fits: bool = node != null and box.size.x <= 4.05 and box.size.z <= 4.05 and box.size.x > 2.0 and absf(box.get_center().x - f.at.x) < .15 and absf(box.get_center().z - f.at.z) < .15
+		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(decks.to_global(f.at + Vector3(.7, 3, .7)), decks.to_global(f.at + Vector3(.7, -.5, .7))))
+		var top: float = decks.to_local(hit.position).y if hit else -1.0
+		var walks: bool = absf(top - .085) < .01
+		if node:tokens[str(node.get_meta("activity_artifact", ""))] = true
+		if node and node.get_meta("draws_nothing", false):
+			# an artifact that builds no mesh: nothing to fit, still walkable, its label says so
+			empty.append(f.token)
+			var label: Label3D = decks.get_node_or_null(str(f.id) + "_label")
+			fits = label != null and label.text.ends_with("draws nothing")
+		if fits:field_fit += 1
+		if walks:walkable += 1
+		if not (fits and walks):field_rows.append({"id": f.id, "token": f.token, "found": node != null, "size": [snappedf(box.size.x, .01), snappedf(box.size.z, .01)], "centre": [snappedf(box.get_center().x - f.at.x, .01), snappedf(box.get_center().z - f.at.z, .01)], "top": snappedf(top, .001)})
+	var beside := space.intersect_ray(PhysicsRayQueryParameters3D.create(decks.to_global(Vector3(0, 3, -7)), decks.to_global(Vector3(0, -.5, -7))))
+	var beside_y: float = decks.to_local(beside.position).y if beside else -1.0
+	_check(report, "D field: %d mosaic floors (%d different) - %d fitted in their 4 x 4 boards or labelled as drawing nothing (%s), %d walkable at 8.5 cm; beside the field the ray meets the ground at %.2f" % [field.size(), tokens.size(), field_fit, ", ".join(PackedStringArray(empty)) if not empty.is_empty() else "none", walkable, beside_y], field.size() == 46 and tokens.size() == 46 and field_fit == 46 and walkable == 46 and absf(beside_y) < .03, {"problems": field_rows, "draws_nothing": empty, "beside_y": beside_y})
+	shots = {"decks_row": [Vector3(-27, 9, -1), Vector3(0, 1, -14)], "decks_on": [Vector3(-11, 2.7, -10.5), Vector3(-10, 1, -15.5)], "field_above": [Vector3(0, 24, 26), Vector3(0, 0, 1)], "field_walk": [Vector3(-23, 1.7, 11), Vector3(-10, 0, 0)], "field_close": [Vector3(-3, 3.2, 5), Vector3(-2, 0, 0)]}
 	await _shoot(cam, shots, out_dir)
 	var passed := 0
 	for ch in report.checks:

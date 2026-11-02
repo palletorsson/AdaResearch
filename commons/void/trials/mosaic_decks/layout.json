@@ -8,16 +8,16 @@
     26.0
   ],
   "column_z": [
-    -7.0,
-    7.0
+    -19.0,
+    19.0
   ],
-  "depth": 16.0,
+  "depth": 40.0,
   "descent": {
     "mode": "shaft_ledges"
   },
   "floor_roles": [
     "Canopy",
-    "Mosaic decks",
+    "Mosaic floors",
     "Catch floor"
   ],
   "floor_styles": {
@@ -34,16 +34,16 @@
     -25.0,
     25.0
   ],
-  "service_z": -4.0,
+  "service_z": -16.0,
   "shaft_depth": 6,
   "shaft_width": 5,
   "shafts": [],
   "slab_thickness": 0.36,
   "spawn_points": {
     "1": [
-      -20.0,
+      -26.0,
       0.14,
-      7.0
+      13.0
     ]
   },
   "status": "Playground spec trial, written by tools/playground_trial.py from res://commons/data/playgrounds/maps/Mosaic_Pompeii_Floors.json",

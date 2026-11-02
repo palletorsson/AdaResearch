@@ -2,17 +2,17 @@
   "version": 1,
   "units": "metres",
   "principle": "the decks",
-  "title": "Mosaic_Pompeii_Floors / the five Pompeii floors inside the playground scaffolding: each a 6 x 6 m deck a metre up, rimmed, railed, climbed by a ramp",
-  "about": "Palle, 2026-11-02: 'mosaics inside the playground scaffolding'. Each mosaic is a plate place at y 1 with its floor in the slot - the plate is what you stand on (the mosaic floors carry no collision of their own), the rim and rails are the scaffold. Tested inside the map's own trial before it moves to the skyscraper.",
+  "title": "Mosaic_Pompeii_Floors / all 46 mosaic floors to walk on, framed by the scaffold, and the five Pompeii floors on raised decks",
+  "about": "Palle, 2026-11-02: 'mosaics inside the playground scaffolding'. Each mosaic is a plate place at y 1 with its floor in the slot - the plate is what you stand on (the mosaic floors carry no collision of their own), the rim and rails are the scaffold. Tested inside the map's own trial before it moves to the skyscraper. 2026-11-02, Palle: 'can I walk all floors - I mean the mosaic floors'. The field: every mosaic floor artifact in commons/artifacts/pompeii_mosaic_floor (46) on a 4 x 4 m floor board, framed by the kit's bars, fitted, with a walk body at its surface (the floors carry no collision of their own) and its name at the south edge; density three times each script's one-metre default. The five decks stand north of it.",
   "camera": [
     [
-      -26,
-      10,
-      16
+      0,
+      22,
+      30
     ],
     [
       0,
-      1,
+      0,
       0
     ]
   ],
@@ -21,7 +21,7 @@
       "id": "pompeii_mosaic_deck",
       "at": [
         -20,
-        0
+        -14
       ],
       "y": 1,
       "size": [
@@ -52,7 +52,7 @@
       "id": "diamonds_squares_deck",
       "at": [
         -10,
-        0
+        -14
       ],
       "y": 1,
       "size": [
@@ -82,7 +82,7 @@
       "id": "octagon_square_deck",
       "at": [
         0,
-        0
+        -14
       ],
       "y": 1,
       "size": [
@@ -112,7 +112,7 @@
       "id": "tumbling_blocks_deck",
       "at": [
         10,
-        0
+        -14
       ],
       "y": 1,
       "size": [
@@ -142,7 +142,7 @@
       "id": "free_meander_deck",
       "at": [
         20,
-        0
+        -14
       ],
       "y": 1,
       "size": [
@@ -169,5 +169,462 @@
       }
     }
   ],
-  "boards": []
+  "boards": [
+    {
+      "orient": "floor",
+      "frame": true,
+      "posts": false,
+      "fit": true,
+      "walk": true,
+      "label": true,
+      "artifact": "pompeii_mosaic_floor",
+      "id": "field_a",
+      "at": [
+        -22,
+        0,
+        -4
+      ],
+      "size": [
+        4,
+        4
+      ],
+      "repeat": {
+        "count": 12,
+        "step": [
+          4,
+          0,
+          0
+        ],
+        "rows": {
+          "count": 3,
+          "step": [
+            0,
+            0,
+            4
+          ]
+        }
+      },
+      "contents": [
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "basket_weave",
+          "tiles_short": 24,
+          "artifact": "basket_weave_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "braid_meander",
+          "artifact": "braid_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "chain_link",
+          "tiles_short": 18,
+          "artifact": "chain_link_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "compass_rose",
+          "artifact": "compass_rose_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "dense_carpet",
+          "tiles_short": 40,
+          "artifact": "dense_carpet_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "diamond_lattice",
+          "artifact": "diamond_lattice_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "diamonds_squares",
+          "tiles_short": 24,
+          "artifact": "diamonds_squares_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "double_snake_meander",
+          "artifact": "double_snake_meander"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "exact_meander",
+          "artifact": "exact_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "flower_of_life",
+          "tiles_short": 18,
+          "artifact": "flower_of_life_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "free_meander",
+          "artifact": "free_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "glitch_grid",
+          "tiles_short": 40,
+          "artifact": "glitch_grid_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "guilloche_border",
+          "tiles_short": 40,
+          "artifact": "guilloche_border_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "herringbone",
+          "tiles_short": 24,
+          "artifact": "herringbone_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "honeycomb_hex",
+          "artifact": "honeycomb_hex_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "interlocking_t",
+          "tiles_short": 36,
+          "artifact": "interlocking_t_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "labyrinth",
+          "artifact": "labyrinth_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "meander_threshold",
+          "artifact": "meander_threshold_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "memphis",
+          "tiles_short": 40,
+          "artifact": "memphis_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "mirror_snake_meander",
+          "artifact": "mirror_snake_meander"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "multi_zone_carpet",
+          "artifact": "multi_zone_carpet_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "neon_chevron",
+          "tiles_short": 40,
+          "artifact": "neon_chevron_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "nested_diamonds",
+          "tiles_short": 18,
+          "artifact": "nested_diamonds_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "octagon_square",
+          "tiles_short": 15,
+          "artifact": "octagon_square_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "opus_sectile",
+          "artifact": "opus_sectile_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "pelta_shield",
+          "artifact": "pelta_shield_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "perspective_cubes",
+          "cubes_short": 18,
+          "artifact": "perspective_cubes_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "pixel_cross",
+          "tiles_short": 40,
+          "artifact": "pixel_cross_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "pixel_invader",
+          "tiles_short": 40,
+          "artifact": "pixel_invader_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "polka_dot_field",
+          "tiles_short": 24,
+          "artifact": "polka_dot_field_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "pompeii_meander",
+          "artifact": "pompeii_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "pompeii_mosaic",
+          "tiles_short": 30,
+          "artifact": "pompeii_mosaic_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "radial_mandala",
+          "artifact": "radial_mandala_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "rainbow_checker",
+          "tiles_short": 40,
+          "artifact": "rainbow_checker_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "san_michele_mosaic",
+          "artifact": "san_michele_mosaic_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "solomons_knot",
+          "artifact": "solomons_knot_floor"
+        }
+      ]
+    },
+    {
+      "orient": "floor",
+      "frame": true,
+      "posts": false,
+      "fit": true,
+      "walk": true,
+      "label": true,
+      "artifact": "pompeii_mosaic_floor",
+      "id": "field_b",
+      "at": [
+        -22,
+        0,
+        8
+      ],
+      "size": [
+        4,
+        4
+      ],
+      "repeat": {
+        "count": 10,
+        "step": [
+          4,
+          0,
+          0
+        ]
+      },
+      "contents": [
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "space_filling",
+          "artifact": "space_filling_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "spiral_mosaic",
+          "artifact": "spiral_mosaic_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "star_rosette",
+          "artifact": "star_rosette_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "stepped_zigzag",
+          "artifact": "stepped_zigzag_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "swastika_meander",
+          "artifact": "swastika_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "tile_meander",
+          "artifact": "tile_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "tumbling_blocks",
+          "cubes_short": 18,
+          "artifact": "tumbling_blocks_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "turtle_meander",
+          "tiles_short": 40,
+          "artifact": "turtle_meander_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "wave_scale",
+          "artifact": "wave_scale_floor"
+        },
+        {
+          "floor_size": [
+            4,
+            4
+          ],
+          "title": "windmill",
+          "tiles_short": 18,
+          "artifact": "windmill_floor"
+        }
+      ]
+    }
+  ]
 }
