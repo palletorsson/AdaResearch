@@ -1,0 +1,39 @@
+{
+  "registry_info": {
+    "category": "flight_bay",
+    "description": "Glass bays of the playground plan: a bay is a receiving place with a glass envelope, installed in a host like any other activity.",
+    "created": "2026-11-02"
+  },
+  "artifacts": {
+    "flight_bay": {
+      "lookup_name": "flight_bay",
+      "scene": "res://commons/artifacts/flight_bay/flight_bay.tscn",
+      "class_name": "FlightBay",
+      "name": "Flight bay",
+      "description": "A box of air with glass walls: inside we fly, outside gravity returns. The museum's flight volume (museum_flight_box.gd) as a bay of any width, depth and height, with doors on the sides it names and no floor, so it can stand over a place that stays walkable. In the biome court (floor 210) it is the air above the court: step off the rim through the east or west door and hover over whatever the court holds; sink below the rim to land; a jump from the court floor rises back into it. Its south door stands over the descent ramp, so the walk down into the court is unchanged. mode still keeps the glass and gravity.",
+      "category": "flight_bay",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "default_params": {
+        "width": 9.9,
+        "depth": 9.9,
+        "height": 8.0,
+        "doors": "east,west",
+        "door_width": 2.0,
+        "door_height": 2.6,
+        "mode": "flight",
+        "sill": 0.0
+      },
+      "tags": [
+        "flight",
+        "glass",
+        "bay",
+        "biome",
+        "playground",
+        "inspection",
+        "locomotion"
+      ]
+    }
+  }
+}

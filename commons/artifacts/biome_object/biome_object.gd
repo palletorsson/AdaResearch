@@ -214,6 +214,7 @@ var _ladder_counts: Dictionary = {}  # gen 14: point / rods / lattice — beside
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	var before := [community_seed, residents, seed, size, moisture, relief, wildness, record, foliage, stage, phase]
 	if config.has("community_seed"):
 		community_seed = int(str(config["community_seed"]).to_int())
 	if config.has("residents"):
@@ -237,13 +238,22 @@ func apply_grid_config(config: Dictionary) -> void:
 		stage = s if s != "" else "full"
 	if config.has("phase"):
 		phase = clampf(float(str(config["phase"]).to_float()), 0.0, 1.0)
-	if _built and is_inside_tree():
+	# the same config again (a host that hands it as metas AND calls this) is not a reason to build the world twice
+	if _built and is_inside_tree() and before != [community_seed, residents, seed, size, moisture, relief, wildness, record, foliage, stage, phase]:
 		_rebuild()
 
 
 func _ready() -> void:
 	if _built:
 		return
+	# a host that hands its config as config_* metas before the tree (the playground's activities, 2026-11-02)
+	# builds the configured world once, not the full world first and the configured one on apply_grid_config
+	var config := {}
+	for key in ["community_seed", "residents", "seed", "size", "moisture", "relief", "wildness", "record", "foliage", "stage", "phase"]:
+		if has_meta("config_" + key):
+			config[key] = get_meta("config_" + key)
+	if not config.is_empty():
+		apply_grid_config(config)
 	_build()
 
 

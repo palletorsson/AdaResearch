@@ -1,0 +1,34 @@
+{
+  "registry_info": {
+    "category": "worker_being",
+    "description": "The Void's workers as one being at many stages: the worker ladder of the playground plan.",
+    "created": "2026-11-02"
+  },
+  "artifacts": {
+    "worker_being": {
+      "lookup_name": "worker_being",
+      "scene": "res://commons/artifacts/worker_being/worker_being.tscn",
+      "class_name": "WorkerBeing",
+      "name": "Worker being",
+      "description": "One being, a body per stage of the spine. Like the biome ladder (biome_object), the stage's words decide which parts stand and the seed decides the body plan whatever the stage: at Point_One the heart alone - the biome's black seed point - then rods to four feet, a face, a polyhedron carapace and solid legs with knees and joints, an ornament, a breath; at Transformation hinges, golden segments and a carried cube; at Colour its hue, a lamp, a band, painted feet; at Forces planted feet, springs and a push bar; then a gait, a sampled plan, a noise or rule-30 skin, recursive toes, antennae and a sapling grown by rewriting, eyes; a soft belly, a fused skin; the graphite-and-brass finish of the head crab at the end of the walk. The bench: commons/testing/probe_worker_ladder.tscn, gallery /worker-ladder.",
+      "category": "worker_being",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "default_params": {
+        "stage": "full",
+        "seed": 7,
+        "animate": true
+      },
+      "tags": [
+        "worker",
+        "creature",
+        "body",
+        "biome",
+        "ladder",
+        "playground",
+        "void"
+      ]
+    }
+  }
+}

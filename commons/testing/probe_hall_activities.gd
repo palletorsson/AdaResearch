@@ -19,7 +19,9 @@ func _ready() -> void:
 	var found := {}
 	for c in hall.get_children():
 		if c.has_meta("activity_artifact"):found[str(c.name)] = c
-	var want := {"disco-plate_activity": [-14.0, 0.07, 0.0, 8.0, 8.0], "biome-plastic-bath_activity": [0.0, 3.03, 0.0, 10.0, 10.0], "hanging-steel-bath_activity": [14.0, 7.03, 0.0, 8.0, 8.0]}
+	# the biome bath's gaussian sample left the court on 2026-11-02 for the Primitives stratum and the flight bay
+	# (activities.json "_about"; their own probe: tools/probes/flight_bay_court.gd)
+	var want := {"disco-plate_activity": [-14.0, 0.07, 0.0, 8.0, 8.0], "hanging-steel-bath_activity": [14.0, 7.03, 0.0, 8.0, 8.0]}
 	for id in want:
 		var n: Node3D = found.get(id);var w: Array = want[id]
 		var box: AABB = n.mesh_instance.mesh.get_aabb() if n else AABB()
