@@ -20,7 +20,9 @@ extends RefCounted
 ##    own (the mosaic floors) can be walked; "label": true - its title lies at the board's south edge,
 ##    "artifact_tilt": degrees about the artifact's own x before its yaw - -90 stands a floor artifact upright in a
 ##    wall frame, its face to the room (Palle, 2026-11-02: "we can also use the vertical plane when we curate"),
-##    "jump": metres - a walk surface that throws a jump that high (the mosaic floors: 4 m, "super jump"}
+##    "jump": metres - a walk surface that throws a jump that high,
+##    "bounce": {"bounciness", "threshold", "ceiling"} - a bouncy walk surface: above 1 each landing climbs higher,
+##    capped at the ceiling in metres (the mosaic floors: 1.2, 2 m/s, 4 m - Palle, "the material should be bouncy")}
 ## Compiled (build) into recipe.activities (display plates, position + rotation + config) and, with `frame`, bars
 ## and posts through the builder's own `bar` - assemblies of canonical rods, contract-checked like everything else.
 ## The same compiler runs at a hall's load from a sidecar (activities.json beside the recipe), so an approved recipe
@@ -48,7 +50,7 @@ static func validate(spec: Dictionary) -> PackedStringArray:
 		if ids.has(id):errors.append("Duplicate board id: " + id)
 		ids[id] = true
 		for key in b.keys():
-			if key not in ["id", "at", "size", "orient", "facing", "frame", "posts", "repeat", "turn", "content", "contents", "artifact", "artifact_turn", "artifact_tilt", "fit", "walk", "label", "jump"]:errors.append(id + ": unknown field " + str(key))
+			if key not in ["id", "at", "size", "orient", "facing", "frame", "posts", "repeat", "turn", "content", "contents", "artifact", "artifact_turn", "artifact_tilt", "fit", "walk", "label", "jump", "bounce"]:errors.append(id + ": unknown field " + str(key))
 		var at: Variant = b.get("at", null)
 		if not at is Array or at.size() != 3 or not at.all(func(n): return (n is int or n is float) and is_equal_approx(float(n), roundf(float(n)))):errors.append(id + ": at needs [x,y,z] in whole metres")
 		var size: Variant = b.get("size", null)
@@ -100,7 +102,9 @@ static func build(builder: Object, b: Dictionary) -> void:
 		if orient == "floor":
 			var floor_item := {"id": cid, "board": id, "artifact": art, "position": builder.arr(c + Vector3(0, PLATE_LIFT, 0)), "rotation": [tilt, yaw + turn_extra, 0], "config": cfg, "fit": fit}
 			if bool(b.get("walk", false)):floor_item["walk"] = [w, h]
+			elif art == "display_plate" and c.y < .2:floor_item["skirt"] = [w, h, float(cfg.get("thickness", .04))]   # walkable glass on the ground: a ramp onto it
 			if b.has("jump"):floor_item["jump"] = float(b.jump)
+			if b.has("bounce"):floor_item["bounce"] = (b.bounce as Dictionary).duplicate()
 			if bool(b.get("label", false)):floor_item["label"] = str(cfg.get("title", cid))
 			builder.recipe.activities.append(floor_item)
 			if frame:_rect(builder, cid, c, sw, sh)

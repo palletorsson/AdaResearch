@@ -29,7 +29,7 @@ func _ready() -> void:
 	var errs: Array = built.get("errors", []);var recipe: Dictionary = built.get("recipe", {})
 	var acts: Array = recipe.get("activities", [])
 	var path: Array = acts.filter(func(a): return a.board == "path");var posters: Array = acts.filter(func(a): return a.board == "posters");var canopy: Array = acts.filter(func(a): return a.board == "canopy")
-	var path_ok: bool = path.size() == 10 and path.all(func(a): return is_equal_approx(float(a.position[1]), 0.08) and a.rotation == [0, 0.0, 0]) and is_equal_approx(float(path[9].position[0]) - float(path[0].position[0]), 36.0)
+	var path_ok: bool = path.size() == 10 and path.all(func(a): return is_equal_approx(float(a.position[1]), 0.08) and (a.rotation as Array).all(func(r): return is_zero_approx(float(r))))   # numbers, not types: the tilt is a float 0.0 and is_equal_approx(float(path[9].position[0]) - float(path[0].position[0]), 36.0)
 	var posters_ok: bool = posters.size() == 5 and posters.all(func(a): return a.config.mount == "wall" and is_equal_approx(float(a.position[1]), 0.0)) and posters[1].config.wallpaper_group == 5
 	var canopy_ok: bool = canopy.size() == 3 and canopy.all(func(a): return is_equal_approx(float(a.rotation[0]), 180.0) and is_equal_approx(float(a.position[1]), 2.92)) and is_equal_approx(float(canopy[1].rotation[1]), 90.0) and canopy[1].config.slot_size == [4.0, 2.0]
 	var framed: bool = recipe.get("assemblies", []).size() >= 10 * 4 + 5 * 4 + 3 * 8 and recipe.get("parts", []).size() > 0

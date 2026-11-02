@@ -9,6 +9,7 @@ var camera: Camera3D
 var desktop_pointer: Node3D
 var enabled := true
 var jump_queued := false
+var bounce_pending := 0.0 # a bouncy floor threw us at the last slide; applied before the floor zeroes velocity.y
 var drive := Vector2.ZERO # Also used by the deterministic physics probe.
 var scripted_input := false
 var flight_vertical := 0.0 # Deterministic counterpart of Space / Ctrl.
@@ -68,6 +69,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and jump_queued:
 		var surface_jump := _support_jump()
 		if surface_jump > 0.0: velocity.y = surface_jump * float(get_meta("ada_body_scale",1.0))
+	if bounce_pending > 0.0:
+		velocity.y = bounce_pending;bounce_pending = 0.0
 	# XRTools applies the world's gravity on the jump frame too.
 	velocity += PhysicsServer3D.body_get_direct_state(get_rid()).total_gravity * delta
 	jump_queued = false
@@ -81,7 +84,9 @@ func _physics_process(delta: float) -> void:
 			medium.release_carry(self)
 	if carry_zone != null:
 		velocity = carry_zone.carry_velocity(self, delta, velocity)
+	var pre_slide := velocity
 	move_and_slide()
+	_bounce(pre_slide)
 	if carry_zone != null:
 		carry_zone.record_carry(self)
 		return
@@ -97,6 +102,28 @@ func _slippery_support() -> bool:
 	query.exclude = [get_rid()]
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
 	return not hit.is_empty() and bool(hit.collider.get_meta("void_slippery_surface",false))
+
+## A BOUNCY FLOOR, the rule XR Tools applies to the headset's body (player_body.gd): what the walker hit carries a
+## GroundPhysics bounciness b and threshold; a landing at m >= threshold is thrown back, v + 2 n m b, its rise capped
+## at the floor's bounce_ceiling (metres). Above b = 1 each bounce climbs: a metre's jump, then ~2, ~3.8, then 4.
+func _bounce(pre: Vector3) -> void:
+	if get_slide_collision_count() == 0: return
+	var hit := get_slide_collision(0)
+	var collider: Object = hit.get_collider()
+	if collider == null or not (collider is Node): return
+	var ground: Node = (collider as Node).get_node_or_null("GroundPhysics")
+	if ground == null or ground.get("physics") == null: return
+	var settings: Resource = ground.get("physics")
+	var flags := int(settings.get("flags"))
+	var b: float = float(settings.get("bounciness")) if flags & 32 else 0.0
+	var threshold: float = float(settings.get("bounce_threshold")) if flags & 64 else 1.0
+	var n := hit.get_normal()
+	var m := -n.dot(pre)
+	if b <= 0.0 or m < threshold: return
+	var rise := (pre + 2.0 * n * m * b).y
+	if (collider as Node).has_meta("bounce_ceiling"):
+		rise = minf(rise, sqrt(2.0 * float(ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)) * float((collider as Node).get_meta("bounce_ceiling"))))
+	bounce_pending = rise
 
 ## The jump velocity the floor under the walker carries (its GroundPhysics, flag JUMP_VELOCITY), or 0 for none.
 func _support_jump() -> float:

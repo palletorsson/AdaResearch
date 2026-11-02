@@ -8,6 +8,7 @@ extends RefCounted
 const Items=preload("res://commons/player/inventory_items.gd")
 const GroundPhysics=preload("res://addons/godot-xr-tools/overrides/ground_physics.gd")
 const GroundSettings=preload("res://addons/godot-xr-tools/overrides/ground_physics_settings.gd")
+const BounceCeiling=preload("res://commons/modular/places/bounce_ceiling.gd")
 
 static func build(item:Dictionary)->Node3D:
 	var token:=str(item.get("artifact",""));var path:=Items.scene_for(token)
@@ -27,6 +28,12 @@ static func fit(node:Node3D,item:Dictionary)->void:
 	if node!=null and item.get("fit")!=null:_fit_into(node,item.fit)
 	if node!=null and item.get("walk")!=null:_walk_body(node,item)
 	if node!=null and item.get("label")!=null:_floor_label(node,item)
+	if node!=null and item.get("skirt")!=null:
+		# a floor artifact with its own body (the display plate's glass, its top at its thickness): only the ramp onto it
+		var host:=node.get_parent();var at:Array=item.get("position",[0,0,0]);var sk:Array=item.skirt
+		var ramp:=StaticBody3D.new();ramp.name=str(item.get("id","floor"))+"_skirt";host.add_child(ramp)
+		ramp.position=Vector3(float(at[0]),float(at[1]),float(at[2]));ramp.rotation_degrees=Vector3(0,float((item.get("rotation",[0,0,0]) as Array)[1]),0)
+		_skirt(ramp,float(sk[0])*.5,float(sk[1])*.5,float(at[1]),float(sk[2]))
 
 ## WALK (a floor board's "walk": true): a thin static box under the artifact's surface, the board's w x h, beside it
 ## in the hall - not its child, so a fit's scale does not touch it. The surface of a floor artifact lies at its
@@ -39,15 +46,43 @@ static func _walk_body(node:Node3D,item:Dictionary)->void:
 	var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(float(size[0]),.04,float(size[1]));shape.shape=box;shape.position.y=-.015
 	body.add_child(shape);host.add_child(body)
 	body.position=Vector3(float(at[0]),float(at[1]),float(at[2]));body.rotation_degrees=Vector3(0,float(turn[1]),0)
-	var jump_h:=float(item.get("jump",0.0))
-	if jump_h>0.0:
-		# THE SUPER JUMP (Palle, 2026-11-02: "when we jump on these surfaces we should super jump, like 4 metres up"):
-		# the surface's own jump velocity, sqrt(2 g h), in the GroundPhysics node the XR body reads from its floor; the
-		# desktop walker reads the same node (walker._support_jump). Only the jump is this surface's own.
-		var ground:=GroundPhysics.new();ground.name="GroundPhysics";ground.physics=GroundSettings.new()
-		ground.physics.flags=GroundSettings.GroundPhysicsFlags.JUMP_VELOCITY
-		ground.physics.jump_velocity=sqrt(2.0*float(ProjectSettings.get_setting("physics/3d/default_gravity",9.8))*jump_h)
-		body.add_child(ground);body.set_meta("jump_height",jump_h)
+	if float(at[1])<.2:_skirt(body,float(size[0])*.5,float(size[1])*.5,float(at[1]),.005)
+	var jump_h:=float(item.get("jump",0.0));var bounce:Dictionary=item.get("bounce",{}) if item.get("bounce") is Dictionary else {}
+	if jump_h>0.0 or not bounce.is_empty():
+		# the surface's own ground physics, in the GroundPhysics node the XR body reads from what it stands on and hits;
+		# the desktop walker reads the same node (walker._support_jump, walker._bounce)
+		var ground:=GroundPhysics.new();ground.name="GroundPhysics";ground.physics=GroundSettings.new();ground.physics.flags=0
+		if jump_h>0.0:
+			# a surface that throws a jump that high: sqrt(2 g h)
+			ground.physics.flags|=GroundSettings.GroundPhysicsFlags.JUMP_VELOCITY
+			ground.physics.jump_velocity=sqrt(2.0*float(ProjectSettings.get_setting("physics/3d/default_gravity",9.8))*jump_h)
+			body.set_meta("jump_height",jump_h)
+		if not bounce.is_empty():
+			# THE BOUNCY FLOOR (Palle, 2026-11-02: "the material should be bouncy ... with the 4 m ceiling"): the landing
+			# speed is thrown back, v + 2 n m b - above 1 each bounce climbs - from the threshold (m/s) up, so walking and
+			# stepping do not bounce; the rise is capped at the ceiling (BounceCeiling for the XR body, walker._bounce)
+			ground.physics.flags|=GroundSettings.GroundPhysicsFlags.BOUNCINESS|GroundSettings.GroundPhysicsFlags.BOUNCE_THRESHOLD
+			ground.physics.bounciness=float(bounce.get("bounciness",1.2));ground.physics.bounce_threshold=float(bounce.get("threshold",2.0))
+			body.set_meta("bounce_ceiling",float(bounce.get("ceiling",4.0)))
+			if host.get_node_or_null("BounceCeiling")==null:
+				var ceiling:=BounceCeiling.new();ceiling.name="BounceCeiling";host.add_child(ceiling)
+		body.add_child(ground)
+
+## THE SKIRT of a walk surface on the ground (found 2026-11-02: the desktop walker could not get onto the mosaic
+## field - the frame's bar along its edge stands 7.5 cm and the surface 8.5 cm, and a 20 cm capsule meets either at
+## more than its 45-degree floor angle). Four wedges, 50 cm out from each edge down to the ground: a 10-degree ramp
+## over the bar. Between two boards a wedge lies under the neighbour's surface and does nothing.
+static func _skirt(body:StaticBody3D,hx:float,hz:float,lift:float,top:float)->void:
+	var low:=-lift;var out:=.5
+	for side in [Vector3(1,0,0),Vector3(-1,0,0),Vector3(0,0,1),Vector3(0,0,-1)]:
+		var along:=Vector3(side.z,0,side.x)   # the edge's direction
+		var half:=hz if side.x!=0 else hx;var edge:=(hx if side.x!=0 else hz)
+		var points:=PackedVector3Array()
+		for s in [-1.0,1.0]:
+			var a:Vector3=side*edge+along*half*s
+			points.append(a+Vector3(0,top,0));points.append(a+Vector3(0,low,0));points.append(a+side*out+Vector3(0,low,0))
+		var wedge:=ConvexPolygonShape3D.new();wedge.points=points
+		var cs:=CollisionShape3D.new();cs.name="Skirt";cs.shape=wedge;body.add_child(cs)
 
 ## LABEL (a floor board's "label": true): the artifact's title flat on the walk surface along the board's south edge.
 static func _floor_label(node:Node3D,item:Dictionary)->void:

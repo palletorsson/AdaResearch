@@ -513,7 +513,11 @@
           "artifact": "solomons_knot_floor"
         }
       ],
-      "jump": 4
+      "bounce": {
+        "bounciness": 1.2,
+        "threshold": 2.0,
+        "ceiling": 4
+      }
     },
     {
       "orient": "floor",
@@ -626,7 +630,11 @@
           "artifact": "windmill_floor"
         }
       ],
-      "jump": 4
+      "bounce": {
+        "bounciness": 1.2,
+        "threshold": 2.0,
+        "ceiling": 4
+      }
     }
   ]
 }

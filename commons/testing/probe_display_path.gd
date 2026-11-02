@@ -78,6 +78,23 @@ func _ready() -> void:
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		get_viewport().get_texture().get_image().save_png(out_dir.path_join("%s.png" % k))
+	# E - walking onto the walkable glass (2026-11-02: the desktop walker was stopped by the frame's bar and the 12 cm
+	# glass edge; a skirt ramps onto every ground-level screen): from the ground at the path's south side onto screen 01
+	var floor_body := StaticBody3D.new();var fs := CollisionShape3D.new();var fb := BoxShape3D.new();fb.size = Vector3(60, .2, 40);fs.shape = fb;fs.position.y = -.1;floor_body.add_child(fs);add_child(floor_body)
+	var walker: CharacterBody3D = load("res://commons/void/walker.gd").new();walker.scripted_input = true;add_child(walker)
+	walker.global_position = hall.to_global(Vector3(-18, .02, 7.2))
+	for i in 30:
+		await get_tree().physics_frame
+	walker.drive = Vector2(0, 1)
+	var mid_y := -1.0
+	for i in 120:
+		await get_tree().physics_frame
+		var at_now := hall.to_local(walker.global_position)
+		if at_now.z > 9.5 and at_now.z < 10.5:mid_y = at_now.y   # the middle of the screen
+	walker.drive = Vector2.ZERO
+	var end := hall.to_local(walker.global_position)
+	cam.make_current()
+	_check(report, "E walk on: from the ground the walker walks across the first screen - mid-screen it stands on the glass at %.3f m" % mid_y, absf(mid_y - .12) < .02, {"mid_y": mid_y, "end": [end.x, end.y, end.z]})
 	var passed := 0
 	for ch in report.checks:
 		if ch.ok:passed += 1
