@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://dertgu7k8alls" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="36_left_hand_pose"]
 [ext_resource type="Script" path="res://commons/player/inventory_prism.gd" id="37_inventory_prism"]
 [ext_resource type="Script" path="res://commons/player/grab_hint.gd" id="38_grab_hint"]
+[ext_resource type="Script" path="res://commons/player/comfort_vignette.gd" id="39_comfort_vignette"]
 
 [node name="XROrigin3D" type="XROrigin3D"]
 
@@ -26,6 +27,9 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
 fov = 71.3
 far = 300.0
+
+[node name="ComfortVignette" type="Node3D" parent="XRCamera3D"]
+script = ExtResource("39_comfort_vignette")
 
 [node name="LeftHand" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
