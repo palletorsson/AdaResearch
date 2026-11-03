@@ -1,5 +1,5 @@
 {
-  "_about": "The sidecar of the principal-places hall (floor 210): activities that board_builder.gd compiles into the loaded recipe at the hall's load, so recipe.json - the approved hall - is never edited. activities: the sample surfaces in the three places and their ball tests. It may also carry boards and places, but only what stands on the tower's 42 x 18 m slab (python tools/playground_trial.py check --sidecar <this> --slab 42 18 --offset 0 -1). The shader path, the posters, the tiling corridor, the pattern rack and the ball pit stood off it and moved to the annex (2026-11-02): commons/data/playgrounds/halls/playground_annex.json, walked as the Void trial playground_annex. The biome court (m1) gave its gaussian sample and ball test to the first glass bays of the playground plan (Palle, 2026-11-02; doc/plans/biome-ladder/PLAYGROUND_HANDOVER.md, 'Glass bays, biome strata and workers across the spine'): biome-plastic-bath_stratum, the Primitives stratum (biome_object's ladder - /biome-ladder - at stage primitives, seed 7: the gallery's 12 m world fitted to 7.6 m, its surface 27 cm over the court floor with a walk top), and biome-plastic-bath_flight, the flight bay - the air above the court from its rim. The two removed entries are kept in git history. On the stratum stands its worker: biome-plastic-bath_worker, worker_being at the same stage and seed - the humanoid wearing the dream bodies, wearing the primitives and dancing the whole walk's dance (Palle, 2026-11-02: 'stand it in the court and let it dance'; 'let it dance the full dance, not just the sway'). Round it dance five more (Palle, 2026-11-02: 'make more workers dance in the court'): biome-plastic-bath_worker_lines, _cord, _plates, _slabs and _round_head, worker_being at the halls the walk passes before Primitives (Point_Lines, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Primitives_Ignorance), each its own seed - the bodies the Primitives stratum allows, from the first rods to the ball joints - six in a ring 1.9 m round the stratum's seed point, facing it, all dancing the whole walk's dance at one tempo.",
+  "_about": "The sidecar of the principal-places hall (floor 210): activities that board_builder.gd compiles into the loaded recipe at the hall's load, so recipe.json - the approved hall - is never edited. activities: the sample surfaces in the three places and their ball tests. It may also carry boards and places, but only what stands on the tower's 42 x 18 m slab (python tools/playground_trial.py check --sidecar <this> --slab 42 18 --offset 0 -1). The shader path, the posters, the tiling corridor, the pattern rack and the ball pit stood off it and moved to the annex (2026-11-02): commons/data/playgrounds/halls/playground_annex.json, walked as the Void trial playground_annex. The biome court (m1) gave its gaussian sample and ball test to the first glass bays of the playground plan (Palle, 2026-11-02; doc/plans/biome-ladder/PLAYGROUND_HANDOVER.md, 'Glass bays, biome strata and workers across the spine'): biome-plastic-bath_stratum, the Primitives stratum (biome_object's ladder - /biome-ladder - at stage primitives, seed 7: the gallery's 12 m world fitted to 7.6 m, its surface 27 cm over the court floor with a walk top), and biome-plastic-bath_flight, the flight bay - the air above the court from its rim. The two removed entries are kept in git history. On the stratum stands its worker: biome-plastic-bath_worker, worker_being at the same stage and seed - the humanoid wearing the dream bodies, wearing the primitives and dancing the whole walk's dance (Palle, 2026-11-02: 'stand it in the court and let it dance'; 'let it dance the full dance, not just the sway'). Round it dance five more (Palle, 2026-11-02: 'make more workers dance in the court'): biome-plastic-bath_worker_lines, _cord, _plates, _slabs and _round_head, worker_being at the halls the walk passes before Primitives (Point_Lines, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Primitives_Ignorance), each its own seed - the bodies the Primitives stratum allows, from the first rods to the ball joints - six in a ring 1.9 m round the stratum's seed point, facing it, all dancing the whole walk's dance at one tempo. The Unit (2026-11-03): four stations on the open slab UNDER the biome court (hall-local y -0.08, headroom 2.7 m to the cradle) - the joined pair and the triangle in front, the unjoined control and one unit alone behind, each turned so its button faces the walk in from -z (commons/artifacts/the_unit/, probe commons/testing/probe_the_unit.tscn).",
   "activities": [
     {
       "artifact": "noise_space",
@@ -312,6 +312,86 @@
         14.0,
         7.03,
         0.0
+      ]
+    },
+    {
+      "artifact": "the_unit",
+      "config": {
+        "arrangement": "c",
+        "paper": 3.4,
+        "setup": "pair"
+      },
+      "id": "undercroft-unit_pair",
+      "mount": "floor",
+      "place": "undercroft",
+      "position": [
+        -2.0,
+        -0.08,
+        -1.9
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ]
+    },
+    {
+      "artifact": "the_unit",
+      "config": {
+        "arrangement": "c",
+        "setup": "apart"
+      },
+      "id": "undercroft-unit_apart",
+      "mount": "floor",
+      "place": "undercroft",
+      "position": [
+        -2.0,
+        -0.08,
+        2.1
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ]
+    },
+    {
+      "artifact": "the_unit",
+      "config": {
+        "setup": "one"
+      },
+      "id": "undercroft-unit_one",
+      "mount": "floor",
+      "place": "undercroft",
+      "position": [
+        2.0,
+        -0.08,
+        2.1
+      ],
+      "rotation": [
+        0,
+        180,
+        0
+      ]
+    },
+    {
+      "artifact": "the_unit",
+      "config": {
+        "arrangement": "c",
+        "setup": "triangle"
+      },
+      "id": "undercroft-unit_triangle",
+      "mount": "floor",
+      "place": "undercroft",
+      "position": [
+        2.0,
+        -0.08,
+        -1.9
+      ],
+      "rotation": [
+        0,
+        180,
+        0
       ]
     }
   ],
