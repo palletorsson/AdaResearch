@@ -241,6 +241,21 @@ func link_sense(i: int, pins: Array) -> Array:
 ## For the tendon, link_sense assumes a weightless take-up reel that keeps the cord straight at zero tension, so a unit
 ## reads the exact distance and bearing of its partner's pin even when the cord is slack - which is where keep's push
 ## half acts: in effect a range-and-bearing sensor on the partner, carried by the cord.
+## THE OTHER TWO RULE FAMILIES of the 2026-11-03 Python study, ported for the gallery's zoo (Palle: "as many different
+## examples as possible"). Both read only the unit's own sensors.
+##   steer, steer_chiral  (Braitenberg) turn to keep the rod across the body, w = w0 - 2.0 sin(b) cos(b) (chiral: keep
+##          it on the left, w = w0 - 2.0 cos(b)); speed up when the rod points ahead and go with its pull,
+##          v = v0 (1 + 0.8 cos b) + 0.01 T cos b; the hub gives way to the rod's torque about it, h = h0 + 0.5 tau.
+##   rhythm, rhythm_anti  (Kuramoto through the rod) the hub rate yields to (anti: pushes back against) the rod's
+##          torque on the hub, low-passed over 0.25 s: h = clamp(h0 +- 1.0 tau_f, 0, hmax); the chassis runs its programme.
+## They run here on this model's compliant drive, not on the studies' own physics (stiff servos, a rigid rod,
+## saturating motors and a non-back-drivable hub for steer), so they draw their own figures, not copies of the study's.
+const STEER_KB := 2.0
+const STEER_KA := 0.8
+const STEER_KT := 0.01
+const STEER_KH := 0.5
+const RHYTHM_K := 1.0
+const RHYTHM_TF := 0.25
 const EASE_KAP := 0.2
 const EASE_MU := 1.0
 const EASE_DMAX := 1.0
@@ -303,6 +318,23 @@ func _command(i: int, u: Dictionary, f_par: float, f_lat: float, pins: Array, ds
 				dv += KEEP_KV * e * cos(gam)
 				dw += KEEP_KW * e * sin(gam)
 			cmd = [clampf(v0 + dv, -float(P.vmax), float(P.vmax)), clampf(w0 + dw, -float(P.wmax), float(P.wmax)), h0]
+		"steer", "steer_chiral":
+			var links := link_sense(i, pins)
+			if not links.is_empty():
+				var b: float = links[0].bearing
+				var cb := cos(b)
+				var sb := sin(b)
+				var tau_h := float(P.r_pin) * (cos(ph) * f_lat - sin(ph) * f_par)   # the rod's torque about my hub
+				var cw := w0 - STEER_KB * (sb * cb if str(u.ctrl) == "steer" else cb)
+				var cv := v0 * (1.0 + STEER_KA * cb) + STEER_KT * float(links[0].tension) * cb
+				cmd = [clampf(cv, -float(P.vmax), float(P.vmax)), clampf(cw, -float(P.wmax), float(P.wmax)), clampf(h0 + STEER_KH * tau_h, -float(P.hmax), float(P.hmax))]
+		"rhythm", "rhythm_anti":
+			var tau := float(P.r_pin) * (cos(ph) * f_lat - sin(ph) * f_par)
+			var tf: float = mem.get("tau_f", tau)
+			tf += (tau - tf) * DT / RHYTHM_TF
+			mem.tau_f = tf
+			var kk := RHYTHM_K if str(u.ctrl) == "rhythm" else -RHYTHM_K
+			cmd = [v0, w0, clampf(h0 + kk * tf, 0.0, float(P.hmax))]
 	mem.cmd = cmd
 	mem.tick = steps
 	return cmd
