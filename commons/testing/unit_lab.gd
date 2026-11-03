@@ -7,6 +7,11 @@ extends SceneTree
 ##     (a cord that only pulls, the same stiffness when taut). Drawing, reachable workspace, forces, stability.
 ##   Experiment 2, SENSING: the same physics and starts, the open-loop programme against sensing controllers
 ##     (unit_sim.gd _command); added as arms of the same matrix, so every comparison is one switch.
+##   Experiment f, FAMILIES (the controlled comparison asked for 2026-11-03): the steer and rhythm rules, each on its
+##     own programme - the bare programme with no link, and on a rod and on a cord the bare programme against the
+##     family's two rules, so CONSTRAINED by the link can be told from RESPONDING to it. Every run has a twin with unit 2
+##     moved 1 micrometre: how far apart the two tool points end, and when they first part by 1 cm, says whether the
+##     drawing depends on its start that finely (sensitivity to initial conditions - what "chaotic" would mean).
 ##   Experiment 2h, HOLD: does the sensing HOLD the state it reaches, or only reach it? At KICK_AT every sensing pair
 ##     gets the same kick - unit 1 turned KICK_DEG about its own pin, so the link's length does not jump but the two
 ##     units stop being translates of each other - with the sensing left on (`~kick`), switched off at the same moment
@@ -18,13 +23,16 @@ extends SceneTree
 ## (c, parallel, crossed) and random ones from fixed seeds (unit 2's pin one rod length from unit 1's).
 ## Writes ada_run/workstation/unit_lab/<experiment>/<topology>__<controller>__<start>.json and summary.json;
 ## tools/unit_lab_plots.py draws them.
-## Run: godot --headless --path . --xr-mode off --script res://commons/testing/unit_lab.gd -- --exp=1|2|2h [--T=720] [--seeds=5]
+## Run: godot --headless --path . --xr-mode off --script res://commons/testing/unit_lab.gd -- --exp=1|2|2h|f [--T=720] [--seeds=5]
 
 const Sim = preload("res://commons/artifacts/the_unit/unit_sim.gd")
 const SAMPLE := 60           ## ticks between samples (0.5 s)
 const CELL := 0.02           ## m, the grid that measures covered area
 const KICK_AT := 480.0       ## s, Experiment 2h's kick and switch-off
 const KICK_DEG := 2.0        ## unit 1 turned about its own pin
+## Experiment f: each family on its own programme (the Python study's), and the twin's nudge
+const PRESETS := {"steer": {"v0": .25, "w0": .2, "h0": 1.6}, "rhythm": {"v0": .10, "w0": .09, "h0": 1.2}}
+const TWIN_NUDGE := 1e-6     ## m, unit 2 moved along x in the twin
 
 var T := 720.0
 var window := 120.0          ## the settled window is the last `window` seconds
@@ -50,12 +58,20 @@ func _initialize() -> void:
 	elif experiment == "2h":
 		for arm in [["rod", "ease"], ["rod", "phase"], ["tendon", "keep"]]:
 			for ev in ["kick", "cut~kick", "cut"]:arms.append([arm[0], arm[1], ev])
+	elif experiment == "f":
+		# the steer and rhythm families, each on its own programme: the bare programme with no link, and on a rod and a
+		# cord the bare programme against the family's two rules - constrained by the link, or responding to it
+		for fam in [["steer", ["steer", "steer_chiral"]], ["rhythm", ["rhythm", "rhythm_anti"]]]:
+			arms.append(["none", "programme", "", fam[0]])
+			for topo in ["rod", "tendon"]:
+				arms.append([topo, "programme", "", fam[0]])
+				for c in fam[1]:arms.append([topo, c, "", fam[0]])
 	var summary := {"experiment": experiment, "T": T, "window": window, "starts": starts, "runs": []}
 	var t0 := Time.get_ticks_msec()
 	for arm in arms:
 		for st in starts:
 			var ev: String = str(arm[2]) if arm.size() > 2 else ""
-			var r := _run(str(arm[0]), str(arm[1]), str(st), ev)
+			var r := _run(str(arm[0]), str(arm[1]), str(st), ev, str(arm[3]) if arm.size() > 3 else "")
 			var ctrl: String = str(r.controller)
 			var name := "%s__%s__%s" % [arm[0], ctrl, st]
 			var f := FileAccess.open(out_dir.path_join(name + ".json"), FileAccess.WRITE);f.store_string(JSON.stringify(r));f.close()
@@ -68,10 +84,10 @@ func _initialize() -> void:
 	quit(0)
 
 ## Two units at a start, linked by `topology`, each run by `controller`; the tool point between their pins.
-func make_pair(topology: String, controller: String, start: String):
+func make_pair(topology: String, controller: String, start: String, params := {}):
 	var sim
 	if start.begins_with("seed"):
-		sim = Sim.new({})
+		sim = Sim.new(params)
 		var rng := RandomNumberGenerator.new();rng.seed = int(start.trim_prefix("seed"))
 		sim.add_unit(0.0, 0.0, rng.randf_range(-PI, PI), rng.randf_range(-PI, PI))
 		var beta := rng.randf_range(-PI, PI);var th2 := rng.randf_range(-PI, PI);var ph2 := rng.randf_range(-PI, PI)
@@ -79,7 +95,7 @@ func make_pair(topology: String, controller: String, start: String):
 		var al2 := th2 + ph2
 		sim.add_unit(q2.x - float(sim.P.r_pin) * cos(al2) - float(sim.P.a_hub) * cos(th2), q2.y - float(sim.P.r_pin) * sin(al2) - float(sim.P.a_hub) * sin(th2), th2, ph2)
 	else:
-		sim = Sim.make("apart", start, {}, .5, false)
+		sim = Sim.make("apart", start, params, .5, false)
 		sim.pens.clear()
 	if topology == "rod":sim.add_rod(0, 1)
 	elif topology == "tendon":sim.add_rod(0, 1, -1.0, true)
@@ -94,8 +110,13 @@ func _kick(sim, deg: float) -> void:
 	var r := (Vector2(float(u.x), float(u.z)) - q).rotated(deg_to_rad(deg))
 	u.x = q.x + r.x;u.z = q.y + r.y;u.th = float(u.th) + deg_to_rad(deg)
 
-func _run(topology: String, controller: String, start: String, event := "") -> Dictionary:
-	var sim = make_pair(topology, controller, start)
+func _run(topology: String, controller: String, start: String, event := "", preset := "") -> Dictionary:
+	var params: Dictionary = PRESETS.get(preset, {})
+	var sim = make_pair(topology, controller, start, params)
+	# Experiment f's twin: the same run with unit 2 moved 1 micrometre - does the drawing depend on the start that finely?
+	var twin = make_pair(topology, controller, start, params) if preset != "" else null
+	if twin != null:twin.units[1].x = float(twin.units[1].x) + TWIN_NUDGE
+	var div_max := 0.0;var div_t_1cm := -1.0;var div_end := 0.0
 	var k_event := int(round(KICK_AT / Sim.DT)) if event != "" else -1
 	var trace := []
 	var cells := {}
@@ -117,6 +138,11 @@ func _run(topology: String, controller: String, start: String, event := "") -> D
 			if event.ends_with("kick"):_kick(sim, KICK_DEG)
 		sim.tick()
 		var tool: Vector2 = sim.pen_point(0)
+		if twin != null:
+			twin.tick()
+			div_end = tool.distance_to(twin.pen_point(0))
+			div_max = maxf(div_max, div_end)
+			if div_t_1cm < 0.0 and div_end > 0.01:div_t_1cm = sim.time
 		tool_len += tool.distance_to(last_tool);last_tool = tool
 		cells[Vector2i(int(floor(tool.x / CELL)), int(floor(tool.y / CELL)))] = true
 		lo = Vector2(minf(lo.x, tool.x), minf(lo.y, tool.y));hi = Vector2(maxf(hi.x, tool.x), maxf(hi.y, tool.y))
@@ -168,7 +194,8 @@ func _run(topology: String, controller: String, start: String, event := "") -> D
 		"finite": is_finite(float(sim.units[0].x)) and is_finite(float(sim.units[1].x)),
 		"v_mean_window": [snappedf(v_sum[0] / n, .001), snappedf(v_sum[1] / n, .001)],
 		"rod_pp_window_deg": rad_to_deg(rod_hi - rod_lo), "band_fraction_window": float(band) / n, "contact_ticks": contact, "contact_ticks_window": contact_w,
-		"tool_path_window_m": tool_w, "tool_span_window_m": maxf(whi.x - wlo.x, whi.y - wlo.y), "link_dev_max_window_m": dev_max}
+		"tool_path_window_m": tool_w, "tool_span_window_m": maxf(whi.x - wlo.x, whi.y - wlo.y), "link_dev_max_window_m": dev_max,
+		"twin_div_max_m": div_max, "twin_div_end_m": div_end, "twin_div_1cm_s": div_t_1cm}
 	# Experiment 2's three capability tests (the designers' operational tests), on the settled window
 	var P: Dictionary = sim.P
 	var rates_within := func(tol: float) -> bool:
@@ -178,7 +205,7 @@ func _run(topology: String, controller: String, start: String, event := "") -> D
 	metrics["test_carry"] = sim.rods.size() > 0 and not bool(sim.rods[0].get("tendon", false)) and float(metrics.tension_mean_window) < .5 and float(metrics.tension_peak_window) < 2.0 and rates_within.call(.02)
 	metrics["test_bar"] = sim.rods.size() > 0 and float(metrics.rod_pp_window_deg) < 2.0 and tool_w >= 10.0 and float(metrics.tool_span_window_m) >= .5 and rates_within.call(.10) and dev_max < .005
 	metrics["test_joined"] = sim.rods.size() > 0 and float(metrics.band_fraction_window) >= .95 and float(metrics.tension_peak_window) <= 25.0 and contact_w == 0 and float(v_sum[0]) / n >= .5 * float(P.v0) and float(v_sum[1]) / n >= .5 * float(P.v0)
-	return {"topology": topology, "controller": controller + ("~" + event if event != "" else ""), "start": start, "T": T, "event_at": KICK_AT if event != "" else -1.0, "kick_deg": KICK_DEG if event.ends_with("kick") else 0.0, "fields": ["t", "x0", "z0", "th0", "ph0", "x1", "z1", "th1", "ph1", "pin0x", "pin0z", "pin1x", "pin1z", "toolx", "toolz", "link", "tension", "v0", "w0", "h0", "v1", "w1", "h1"], "trace": trace, "metrics": metrics}
+	return {"topology": topology, "controller": controller + ("@" + preset if preset != "" else "") + ("~" + event if event != "" else ""), "start": start, "T": T, "event_at": KICK_AT if event != "" else -1.0, "kick_deg": KICK_DEG if event.ends_with("kick") else 0.0, "fields": ["t", "x0", "z0", "th0", "ph0", "x1", "z1", "th1", "ph1", "pin0x", "pin0z", "pin1x", "pin1z", "toolx", "toolz", "link", "tension", "v0", "w0", "h0", "v1", "w1", "h1"], "trace": trace, "metrics": metrics}
 
 ## Do the two chassis footprints overlap (separating-axis test on the frames with their wheels: x -0.09..0.33, z +-0.25)?
 func _overlap(a: Dictionary, b: Dictionary) -> bool:

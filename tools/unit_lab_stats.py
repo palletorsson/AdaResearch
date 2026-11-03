@@ -12,7 +12,8 @@ relation takes to form); the final pose (heading and hub differences, and how fa
 0 m is one shared circle, equal headings and hubs are translates); the footprint-overlap episodes (first and last
 overlapping sample); the last moment anything acts (a realised rate off the programme); how the joined test's count
 moves if its lower band edge is 0.90 m instead of 0.85 m (from the 0.5 s samples); and for exp2h (the hold test) the
-timings after the event and which kicked runs are bit-for-bit the same with the sensing on and cut.
+timings after the event and which kicked runs are bit-for-bit the same with the sensing on and cut; for expf (the
+steer and rhythm families) how far each run's twin - unit 2 moved 1 micrometre - ends from it, and when they part by 1 cm.
 Tension times come from the 0.5 s samples, so a graze shorter than a sample can be missed.
 
 Usage: python tools/unit_lab_stats.py [lab dir]  - read-only, deterministic.
@@ -21,6 +22,12 @@ import json, math, os, sys
 import numpy as np
 
 V0, W0, H0 = .15, .25, 1.0
+PRESETS = {"steer": (.25, .2, 1.6), "rhythm": (.10, .09, 1.2)}   # expf's programmes (unit_lab.gd PRESETS), named after '@' in the arm
+
+
+def programme(controller):
+    """The (v0, w0, h0) an arm runs: the default, or the preset named after '@' in its controller name."""
+    return PRESETS.get(controller.partition("@")[2].partition("~")[0], (V0, W0, H0))
 
 
 def load_runs(d):
@@ -56,6 +63,7 @@ def overlap(a, b):
 
 def per_run(r, window):
     tr = r["_trace"]; f = {k: i for i, k in enumerate(tr["fields"])}
+    v0, w0, h0 = programme(r["controller"])
     a = np.array(tr["trace"], dtype=float)
     t = a[:, f["t"]]; T = tr["T"]; late = t >= T - window
     m = r["metrics"]
@@ -68,7 +76,7 @@ def per_run(r, window):
     link = a[:, f["link"]]
     off = np.zeros(len(t), dtype=bool); big = np.zeros(len(t), dtype=bool); dev_win = 0.0
     for u in "01":
-        dev = np.maximum.reduce([np.abs(a[:, f["v" + u]] - V0), np.abs(a[:, f["w" + u]] - W0), np.abs(a[:, f["h" + u]] - H0)])
+        dev = np.maximum.reduce([np.abs(a[:, f["v" + u]] - v0), np.abs(a[:, f["w" + u]] - w0), np.abs(a[:, f["h" + u]] - h0)])
         off |= dev > 1e-6; big |= dev > 1e-3; dev_win = max(dev_win, float(dev[late].max()))
     idle = bool(np.all(a[late, f["tension"]] <= 0) and not off[late].any())  # both units, all three rates on the programme
     acts = np.where(off)[0]; swings = np.where(big)[0]
@@ -96,7 +104,7 @@ def per_run(r, window):
 
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else "ada_run/workstation/unit_lab"
-    for exp in ("exp1", "exp2", "exp2h"):
+    for exp in ("exp1", "exp2", "exp2h", "expf"):
         d = os.path.join(root, exp)
         if not os.path.exists(os.path.join(d, "summary.json")):
             continue
@@ -131,10 +139,14 @@ def main():
                 print("rod turning in the window deg: " + med_range([m["rod_pp_window_deg"] for m in ms], "%.1f") + "  per run: %s" % [round(m["rod_pp_window_deg"], 1) for m in ms])
                 print("footprint overlap, share of the window: %s" % [round(m["contact_ticks_window"] / (win * 120), 3) for m in ms] + "; runs with any overlap: %d" % sum(1 for m in ms if m["contact_ticks"] > 0))
                 print("band share: %s" % [round(m["band_fraction_window"], 3) for m in ms])
+            v0, w0, h0 = programme(k[1])
             pct = lambda key, p0: "%+.1f..%+.1f %%" % (min(100 * (x / p0 - 1) for m in ms for x in m[key]), max(100 * (x / p0 - 1) for m in ms for x in m[key]))
             fast = [max(m["v_mean_window"]) for m in ms]; slow = [min(m["v_mean_window"]) for m in ms]
+            if "twin_div_end_m" in ms[0]:
+                print("twin (unit 2 moved 1 micrometre): tool points apart at the end m %s; first 1 cm apart at s %s; sensitive (apart > 1 cm at the end): %d of %d"
+                      % ([float("%.2g" % m["twin_div_end_m"]) for m in ms], [m["twin_div_1cm_s"] for m in ms], sum(1 for m in ms if m["twin_div_end_m"] > .01), n))
             print("rates in the window against the programme: hub %s, turn %s; the faster unit %+.1f..%+.1f %%, the slower %+.1f..%+.1f %%"
-                  % (pct("h_mean_window", H0), pct("w_mean_window", W0), 100 * (min(fast) / V0 - 1), 100 * (max(fast) / V0 - 1), 100 * (min(slow) / V0 - 1), 100 * (max(slow) / V0 - 1)))
+                  % (pct("h_mean_window", h0), pct("w_mean_window", w0), 100 * (min(fast) / v0 - 1), 100 * (max(fast) / v0 - 1), 100 * (min(slow) / v0 - 1), 100 * (max(slow) / v0 - 1)))
             print("last moment anything acts (a realised rate off the programme) s: %s; off by more than 0.001: %s" % ([p["last_act"] for p in pr], [p["last_swing"] for p in pr]))
             print("footprint overlap episodes (first, last overlapping sample s): %s" % [p["overlap"] for p in pr])
             if "test_joined" in ms[0]:

@@ -1,4 +1,4 @@
-"""The Unit's zoo poster: the most different drawings the model makes, ordered from ordered to chaotic.
+"""The Unit's zoo poster: the most different drawings the model makes, laid out from low to high ink entropy.
 
 Palle, 2026-11-03: "there were other strange examples I liked ... we want as many different examples as possible,
 with different looks and entropy". Reads ada_run/workstation/unit_lab/zoo (commons/testing/unit_zoo.gd): every run
@@ -20,7 +20,13 @@ compared; its width is printed), with two timelines under it: link tension and t
 A top plot shows every candidate's ink entropy against its direction entropy, the picked ones in colour.
 Also writes descriptors.json beside the runs (every candidate's numbers).
 
-Usage: python tools/unit_zoo_poster.py [zoo dir] [--k=80] [--cols=10] [--out=<png>]   - read-only, deterministic.
+Ink entropy measures how the ink fills its box, not dynamical chaos (a periodic spirograph can score high), and a high
+score is not a better drawing. The five pens of one run are five views of one behaviour, not five behaviours.
+--picker=first redraws the first poster's choice (a 16 x 16 thumbnail, no family cap), to show what the picker decides;
+--rejected=N adds a sheet of N drawings it left out, each marked with the pick it sits closest to.
+
+Usage: python tools/unit_zoo_poster.py [zoo dir] [--k=80] [--cols=10] [--picker=blind|first] [--rejected=N] [--out=<png>]
+- read-only, deterministic.
 """
 import glob, json, math, os, sys
 import matplotlib
@@ -86,20 +92,33 @@ def describe(q):
     turn = np.abs((np.diff(a2) + math.pi) % (2 * math.pi) - math.pi) / (cell / 2)   # rad per metre
     curv, _ = np.histogram(np.log10(turn * span + 1e-3), bins=12, range=(-1, 3))   # turning per span, from nearly straight to tight
     curv = np.sqrt(curv / max(curv.sum(), 1))
+    # the FIRST picker's look, kept so its choice can be reproduced: a 16 x 16 thumbnail, which sees the same open
+    # drift at two angles as two different drawings - it filled the first poster with near-straight wanderings
+    tix = np.minimum(ix * THUMB // G, THUMB - 1); tiz = np.minimum(iz * THUMB // G, THUMB - 1)
+    t16 = np.zeros((THUMB, THUMB)); np.add.at(t16, (tiz, tix), 1.0)
+    t16 = np.sqrt(t16); t16 = t16 / (np.linalg.norm(t16) or 1.0)
     return {"h_ink": h_ink, "h_dir": h_dir, "coverage": touched / (G * G), "retrace": path / (touched * cell), "span": span, "path": path,
-            "thumb": np.concatenate([radial, curv]) / math.sqrt(2)}
+            "thumb": np.concatenate([radial, curv]) / math.sqrt(2), "thumb16": t16.ravel()}
 
 
-def pick(cands, k):
-    """Farthest-point sampling, deterministic: start from the candidate nearest the median ink entropy."""
-    X = np.array([np.concatenate([c["thumb"], 1.5 * np.array([c["h_ink"], c["h_dir"], c["coverage"] * 2, math.log10(c["retrace"]) / 2])]) for c in cands])
+def features(cands, picker):
+    look = "thumb16" if picker == "first" else "thumb"
+    return np.array([np.concatenate([c[look], 1.5 * np.array([c["h_ink"], c["h_dir"], c["coverage"] * 2, math.log10(c["retrace"]) / 2])]) for c in cands])
+
+
+def pick(cands, k, picker="blind"):
+    """Farthest-point sampling, deterministic: start from the candidate nearest the median ink entropy.
+    picker 'blind' (the default): the rotation-blind look, every family between 2 and twice its share.
+    picker 'first': the first poster's picker - the 16 x 16 thumbnail, at least two of every family but no cap -
+    to show what it chose."""
+    X = features(cands, picker)
     med = np.median([c["h_ink"] for c in cands])
     first = int(np.argmin([abs(c["h_ink"] - med) for c in cands]))
     chosen = [first]
     dmin = np.linalg.norm(X - X[first], axis=1)
     per_run = {cands[first]["id"]: 1}
     fams = sorted({c["family"] for c in cands})
-    cap = math.ceil(2.0 * k / len(fams))   # no family takes more than twice its share
+    cap = math.ceil(2.0 * k / len(fams)) if picker == "blind" else k   # no family takes more than twice its share
     per_fam = {cands[first]["family"]: 1}
     while len(chosen) < k:
         order = np.argsort(-dmin)
@@ -147,24 +166,46 @@ def main():
             cands.append(desc)
     json.dump([{kk: (v.tolist() if isinstance(v, np.ndarray) else v) for kk, v in c.items() if kk != "thumb"} for c in cands],
               open(os.path.join(d, "descriptors.json"), "w", encoding="utf-8"), indent=1)
-    chosen = pick(cands, k)
-    chosen.sort(key=lambda i: cands[i]["h_ink"])
-    print("%d runs, %d candidate drawings (%d dropped: non-finite runs or still pens); picked %d" % (len(runs), len(cands), dropped, len(chosen)))
-    nrow = math.ceil(len(chosen) / ncol)
+    picker = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--picker=")), "blind")
+    n_rej = int(next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--rejected=")), 0))
+    chosen = pick(cands, k, picker)
+    print("%d runs, %d candidate drawings (%d dropped: non-finite runs or still pens); picked %d with the %s picker" % (len(runs), len(cands), dropped, len(chosen), picker))
+    T = int(next(iter(runs.values()))["T"])
+    nfam = len({c["family"] for c in cands})
+    sub = ("two units, %d rule families, rods 0.6-1.5 m, five pens per run - the five pens of one run are five views of ONE behaviour (the run id is in each panel's corner; "
+           "at most two views of a run are picked); each panel at its own scale (width printed); under each: link tension and the distance between the units over %d s" % (nfam, T))
+    picker_note = {"blind": "Picked by farthest-point sampling over a look blind to rotation and position (radial spread, turning sharpness) and the entropies, every family between 2 and twice its share.",
+                   "first": "Picked by the FIRST picker: farthest-point sampling over a 16 x 16 thumbnail, which counts the same drift at two angles as two drawings - so near-straight wanderings fill it."}[picker]
+    title = "THE UNIT  -  a zoo: %d of %d drawings, from low to high ink entropy" % (len(chosen), len(cands))
+    draw_sheet(cands, runs, sorted(chosen, key=lambda i: cands[i]["h_ink"]), chosen, title, sub, picker_note, ncol, out)
+    if n_rej:
+        # what the picker left out: a seeded random sample of the drawings it did not pick, each marked with the pick it
+        # sits closest to - what the picker counted as already seen
+        X = features(cands, picker)
+        rest = [i for i in range(len(cands)) if i not in set(chosen)]
+        sample = list(np.random.default_rng(0).choice(rest, size=min(n_rej, len(rest)), replace=False))
+        nearest = {int(i): cands[chosen[int(np.argmin([np.linalg.norm(X[i] - X[j]) for j in chosen]))]] for i in sample}
+        rej_out = out.replace(".png", "_left_out.png")
+        draw_sheet(cands, runs, sorted([int(i) for i in sample], key=lambda i: cands[i]["h_ink"]), chosen,
+                   "THE UNIT  -  what the picker left out: %d of the %d drawings not picked" % (len(sample), len(cands) - len(chosen)),
+                   sub, picker_note + " This sheet is a seeded random sample of the rest; each panel names the picked drawing it sits closest to (what the picker counted as already seen).",
+                   ncol, rej_out, nearest=nearest)
+
+
+def draw_sheet(cands, runs, idxs, chosen, title, sub, picker_note, ncol, out, nearest=None):
+    nrow = math.ceil(len(idxs) / ncol)
     head = 3.2
     H = 3.55 * nrow + head + 1.85
     fig = plt.figure(figsize=(2.7 * ncol + .4, H), facecolor="white")
-    fig.suptitle("THE UNIT  -  a zoo: the %d most different drawings of %d, from ordered to chaotic" % (len(chosen), len(cands)), fontsize=24, family="serif", y=1 - .32 / H)
-    fig.text(.5, 1 - .75 / H, "two units, %d rule families, rods 0.6-1.5 m, five pens per run; each panel at its own scale (width printed), "
-             "ink entropy H and direction entropy D under the title; under each: link tension and the distance between the units over %d s"
-             % (len({c['family'] for c in cands}), int(next(iter(runs.values()))["T"])), ha="center", fontsize=11, family="serif", color="#444")
-    # the entropy map
+    fig.suptitle(title, fontsize=24, family="serif", y=1 - .32 / H)
+    fig.text(.5, 1 - .75 / H, sub, ha="center", fontsize=10, family="serif", color="#444", wrap=True)
+    # the entropy map: every candidate in grey, this sheet's drawings in colour
     ax0 = fig.add_axes([.06, 1 - (head + .95) / H, .62, (head - .55) / H])
     ax0.scatter([c["h_ink"] for c in cands], [c["h_dir"] for c in cands], s=5, color="#cccccc", lw=0)
-    for i in chosen:
+    for i in idxs:
         c = cands[i]
         ax0.scatter([c["h_ink"]], [c["h_dir"]], s=22, color=FAMILY_COLORS.get(c["family"], "#000"), lw=0)
-    ax0.set_xlabel("ink entropy H (how evenly the ink fills its box)", fontsize=9, family="serif")
+    ax0.set_xlabel("ink entropy H: how evenly the ink fills its box (not dynamical chaos - a periodic spirograph can score high)", fontsize=9, family="serif")
     ax0.set_ylabel("direction entropy D", fontsize=9, family="serif")
     ax0.tick_params(labelsize=7)
     for sp in ("top", "right"):
@@ -174,16 +215,16 @@ def main():
     for n, fam in enumerate(fams):
         y = 1 - (n + .5) / len(fams)
         lg.scatter([.03], [y], s=40, color=FAMILY_COLORS.get(fam, "#000"))
-        cnt = sum(1 for i in chosen if cands[i]["family"] == fam)
-        lg.text(.08, y, "%s  (%d picked)" % (fam, cnt), va="center", fontsize=9.5, family="serif")
-    gs = fig.add_gridspec(nrow, ncol, left=.01, right=.995, top=1 - (head + 1.75) / H, bottom=.55 / H, wspace=.08, hspace=.28)
-    for n, i in enumerate(chosen):
+        cnt = sum(1 for i in idxs if cands[i]["family"] == fam)
+        lg.text(.08, y, "%s  (%d here, of %d)" % (fam, cnt, sum(1 for c in cands if c["family"] == fam)), va="center", fontsize=9.5, family="serif")
+    gs = fig.add_gridspec(nrow, ncol, left=.01, right=.995, top=1 - (head + 1.75) / H, bottom=.75 / H, wspace=.08, hspace=.28)
+    for n, i in enumerate(idxs):
         c = cands[i]
         run = runs[c["id"]]
         t, units, tools, links = columns(run)
         q = tools[c["pen"]]
-        sub = gs[n // ncol, n % ncol].subgridspec(3, 1, height_ratios=[3.3, .55, .55], hspace=.05)
-        ax = fig.add_subplot(sub[0]); ax.set_facecolor(PAPER)
+        sg = gs[n // ncol, n % ncol].subgridspec(3, 1, height_ratios=[3.3, .55, .55], hspace=.05)
+        ax = fig.add_subplot(sg[0]); ax.set_facecolor(PAPER)
         for sp in ax.spines.values():
             sp.set_color(FAMILY_COLORS.get(c["family"], "#2b2f33")); sp.set_linewidth(1.6)
         ax.set_xticks([]); ax.set_yticks([])
@@ -197,8 +238,11 @@ def main():
         ax.set_title("%s, %s\nL %.1f %s, %s" % (cfg["family"], PEN_NAMES[c["pen"]], cfg["params"]["L"], cfg["link"], cfg["start"] + (" kicked" if cfg["kick"] else "")),
                      fontsize=7, family="serif", pad=2)
         ax.text(.03, .03, "H %.2f  D %.2f  %.2f m" % (c["h_ink"], c["h_dir"], c["span"]), transform=ax.transAxes, fontsize=6.2, family="serif", color="#333")
-        ax.text(.97, .03, c["id"], transform=ax.transAxes, fontsize=5.5, family="serif", color="#999", ha="right")
-        s1, s2 = fig.add_subplot(sub[1]), fig.add_subplot(sub[2])
+        ax.text(.97, .03, c["id"], transform=ax.transAxes, fontsize=6, family="serif", color="#777", ha="right")
+        if nearest:
+            nb = nearest[i]
+            ax.text(.97, .97, "nearest pick: %s %s" % (nb["id"], PEN_NAMES[nb["pen"]]), transform=ax.transAxes, fontsize=5.5, family="serif", color="#a33", ha="right", va="top")
+        s1, s2 = fig.add_subplot(sg[1]), fig.add_subplot(sg[2])
         for s in (s1, s2):
             s.set_facecolor(STRIP_BG); s.tick_params(labelsize=4.5, length=1.5, pad=1); s.set_xlim(0, run["T"]); s.ticklabel_format(axis="y", useOffset=False, style="plain")
             for sp in s.spines.values():
@@ -209,7 +253,9 @@ def main():
             s1.text(.5, .5, "no link", transform=s1.transAxes, ha="center", va="center", fontsize=5, color="#999")
         s2.plot(t, np.hypot(units[0][:, 0] - units[1][:, 0], units[0][:, 1] - units[1][:, 1]), color=UNIT_COLORS[1], lw=.4)
         s1.set_xticklabels([])
-    fig.text(.5, .2 / H, "Ada Research - The Unit (2026-11-03). Model commons/artifacts/the_unit/unit_sim.gd, runs commons/testing/unit_zoo.gd, picked and drawn by "
+    fig.text(.5, .42 / H, picker_note + " Ink entropy measures how the ink fills its box, not dynamical chaos, and a high score is not a better drawing.",
+             ha="center", fontsize=9, family="serif", color="#444")
+    fig.text(.5, .18 / H, "Ada Research - The Unit (2026-11-03). Model commons/artifacts/the_unit/unit_sim.gd, runs commons/testing/unit_zoo.gd, picked and drawn by "
              "tools/unit_zoo_poster.py. Frame colour = rule family. steer and rhythm are the Python study's rules ported onto this model's compliant drive, not copies of the study's figures.",
              ha="center", fontsize=8.5, family="serif", color="#666")
     fig.savefig(out, dpi=130, facecolor="white")

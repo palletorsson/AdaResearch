@@ -33,7 +33,9 @@ def arm_key(r):
     return (r["topology"], r["controller"])
 
 
-CTRL_LABEL = {"ease": "+ sensing: ease\n(unload the rod)", "ease_flip": "+ ease, sign flipped\n(ablation)", "phase": "+ sensing: phase\n(hold the bar)",
+CTRL_LABEL = {"steer": "+ sensing: steer\n(rod across the body)", "steer_chiral": "+ sensing: steer,\nchiral (rod on the left)",
+              "rhythm": "+ sensing: rhythm\n(hub yields to torque)", "rhythm_anti": "+ sensing: rhythm,\nanti (hub resists)",
+              "ease":"+ sensing: ease\n(unload the rod)", "ease_flip": "+ ease, sign flipped\n(ablation)", "phase": "+ sensing: phase\n(hold the bar)",
               "phase_hub": "+ hub reflex alone\n(ablation)", "keep": "+ sensing: keep\n(a distance)", "keep_pull": "+ pull half only\n(ablation)"}
 
 
@@ -41,11 +43,13 @@ EVENT_LABEL = {"kick": "kicked {deg:g}° at {at:g} s", "cut~kick": "sensing cut 
 
 
 def arm_label(t, c, event_at=-1.0, kick_deg=0.0):
-    """The row's name; for Experiment 2h, the event as the run record states it (its time and kick size)."""
+    """The row's name; for Experiment 2h, the event as the run record states it (its time and kick size); for
+    Experiment f, the family's programme the arm runs (named after '@')."""
     base = ROW_LABEL.get(t, t)
-    if c == "programme":
-        return base
-    ctrl, _, event = c.partition("~")
+    c, _, event = c.partition("~")
+    ctrl, _, preset = c.partition("@")
+    if ctrl == "programme":
+        return base + ("\n(%s's programme,\nno sensing)" % preset if preset else "")
     lab = base + "\n" + CTRL_LABEL.get(ctrl, "+ sensing: " + ctrl)
     return lab + ("\n" + EVENT_LABEL[event].format(deg=kick_deg, at=event_at) if event in EVENT_LABEL else "")
 
@@ -124,9 +128,11 @@ def main():
             if i == nr - 1 and j == 0:
                 ax.plot([cx - half + .25, cx - half + 1.25], [cz - half + .45] * 2, color="#222", lw=1.6)
                 ax.text(cx - half + .75, cz - half + .58, "1 m", ha="center", fontsize=7, family="serif")
+    prog = ("steer's v 0.25 m/s, turn 0.2 rad/s, hub 1.6 rad/s; rhythm's v 0.10, turn 0.09, hub 1.2" if any("@" in c for _, c in arms)
+            else "v 0.15 m/s, turn 0.25 rad/s, hub 1.0 rad/s")
     fig.text(.5, .18 / (2.75 * nr + 1.7), "Ada Research - The Unit, Palle's Experiment %s (2026-11-03). Model: commons/artifacts/the_unit/unit_sim.gd; runs: commons/testing/unit_lab.gd; "
-             "each unit drives its programme (v 0.15 m/s, turn 0.25 rad/s, hub 1.0 rad/s) through a compliant drive; rows marked sensing change the command from what the unit feels at its own pin."
-             % " + ".join(title_exp), ha="center", fontsize=8, family="serif", color="#666")
+             "each unit drives its programme (%s) through a compliant drive; rows marked sensing change the command from what the unit feels at its own pin."
+             % (" + ".join(title_exp), prog), ha="center", fontsize=8, family="serif", color="#666")
     fig.savefig(out, dpi=170, facecolor="white")
     plt.close(fig)
     print("poster ->", out)
