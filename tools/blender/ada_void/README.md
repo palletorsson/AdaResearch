@@ -84,7 +84,8 @@ fog volume in the export's fog colour. Then F12, or `render_setup.render_still`.
 sun, and photographs the stack from a raised three-quarter view outside, framing all of it:
 
 ```
-blender -b -P tools/blender/ada_void/tower.py -- --floors 0-4 --out ada_run/blender/void_tower_0-4.png     --blend ada_run/blender/void_tower_0-4.blend --samples 256 --margin 0.9 --elevation 18
+blender -b -P tools/blender/ada_void/tower.py -- --floors 0-4 --out ada_run/blender/void_tower_0-4.png \
+    --blend ada_run/blender/void_tower_0-4.blend --samples 256 --margin 0.9 --elevation 18
 ```
 
 `--floors` takes ranges and lists (`0-4`, `3,7,10-12`); `--azimuth`, `--elevation`, `--lens`, `--margin` and
@@ -96,8 +97,70 @@ Two more modes work on a saved scene, so the camera can be tuned without importi
 `--frame-floors` frames only some floors and lets the others run out of the picture — the tower without an end:
 
 ```
-blender -b ada_run/blender/void_tower_0-9.blend -P tools/blender/ada_void/tower.py -- --append --floors 10-12     --frame-floors 0-9 --out ada_run/blender/void_tower_0-12.png --res 1440x2560 --samples 256     --azimuth -62 --elevation 12 --lens 50 --margin 1.04
+blender -b ada_run/blender/void_tower_0-9.blend -P tools/blender/ada_void/tower.py -- --append --floors 10-12 \
+    --frame-floors 0-9 --out ada_run/blender/void_tower_0-12.png --res 1440x2560 --samples 256 \
+    --azimuth -62 --elevation 12 --lens 50 --margin 1.04
 ```
+
+### The tower from below, and far floors as structure only
+
+`--from-below` puts the camera under the lowest framed slab and out beside the axis, looking up the tower
+(`--drop` metres below, `--offset` metres out, aimed `--aim-up` metres above). A whole tower does not fit in memory with
+its works (the works of 211 floors are about 8 GB, and one 10 PRINT floor alone holds a model of over 1,100 tiles), so
+`--structure-floors` imports only the slab, halls, ceiling and lamps of the floors it names; from a distance the works
+are specks anyway. The randomness floors looking up, with the 10 PRINT floor as structure:
+
+```
+blender -b -P tools/blender/ada_void/tower.py -- --floors 76-79,81-91 --structure-floors 0-75,80 \
+    --frame-floors 76-91 --from-below --drop -18 --offset 55 --aim-up 90 --lens 20 --azimuth -62 \
+    --out ada_run/blender/void_tower_random.png --res 1440x2560 --samples 256
+```
+
+### The carton heap
+
+`carton_pile.py` is not a floor: it redraws the sorting line's AGAIN / YET cartons pixel for pixel from
+`commons/artifacts/cube_sorting_line/carton_skins.gd`, drops them under gravity with Blender's rigid bodies (a narrow
+falling column, `--column 3`, piles higher than a wide one) and photographs the heap lacquered on a dark mirror floor.
+A generated image's pixels written with `foreach_set` render black until `img.update()` is called; the script packs
+them too, so the saved `.blend` keeps its prints.
+
+`--line` puts the heap where the game makes it: floor 7's exported `cube_sorting_line` glb (its 5.2 m belt along y at
+0.95 m, the feeder at +y) with a jam of cartons on the belt and the missed ones spilled off its end, and the large
+`prefab_box_library` shelf (from the ReturnToTheBoxLibrary hall's glb) across the aisle. The imported meshes are
+unparented into world space first: a rigid body ignores its parent's transform. Every imported material gets the
+cartons' lacquer coat.
+
+The still from the visitors' aisle (the shelf across the aisle, the control stand kept):
+
+```
+blender -b -P tools/blender/ada_void/carton_pile.py -- --line --shelf-x -6.2 --keep-controls --count 45 \
+    --cam=-2.4,-8.6,2.3 --look=-2.0,-0.2,1.1 --lens 28 --out ada_run/blender/carton_line.png --samples 256 --res 1920x1080
+```
+
+`--fill N` makes a film of the line RUNNING, seen from the works side with the shelf behind the baskets and the control
+stand left out (the `--line` defaults since 3 Nov). N frames are simulated in one pass and filmed on the way, with a
+step that grows from `--step-start` to `--step-end`; Blender's own ffmpeg encodes the mp4. `--wall` adds an L of 1 m
+walls around the belt's end, so the spill rises in the corner instead of spreading:
+
+```
+blender -b -P tools/blender/ada_void/carton_pile.py -- --line --wall --fill 4800 \
+    --out ada_run/blender/carton_fill.mp4 --res 1280x720 --samples 48
+```
+
+What it took to make the film honest (each was a way it lied):
+
+- The belt is a loop of 41 unrendered slats that carry the cartons by FRICTION. Cartons carried as kinematic bodies
+  have infinite force: once the pile reached the belt every arrival ploughed into it and flung cartons over the wall.
+- A mesh collider's default 4 cm margin lies OUTSIDE the mesh, so the belt's top stood above the slats and held the
+  cartons still: the line's meshes carry a 2 mm margin.
+- A kinematic body keeps the speed of its last move: a carton is held still above the belt for two frames after the
+  jump from its parking place, or it leaves at kilometres a second.
+- Setting a parked kinematic carton's location from Python mid-simulation does not move its body (only the first
+  carton ever arrived); the feeder adds keyframes to curves the carton has had from the start.
+- The feeder holds while the spot under it is taken, as the game's line holds production (`active_limit`); placing a
+  carton into a queue that has backed up to the feeder blasted the queue into the air (one carton ended 314 m up).
+- Building the lights and camera after a simulation resets the rigid-body cache, and a jump of more than one frame
+  without a cache does not simulate: the film is shot during its one pass, frame by frame.
 
 ### What does not survive the glTF export
 

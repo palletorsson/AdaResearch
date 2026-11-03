@@ -40,7 +40,7 @@ if "ada_void" in sys.modules:
         del sys.modules[k]
 
 import ada_void  # noqa: E402
-from ada_void import floor_import, render_setup  # noqa: E402
+from ada_void import chain, floor_import, render_setup  # noqa: E402
 
 
 def floor_range(text: str) -> list[int]:
@@ -69,6 +69,38 @@ def stack(index: int, level: float) -> bpy.types.Object:
         if o is not holder and o.parent is None:
             o.parent = holder
     return holder
+
+
+def structure_only(index: int, manifest: dict, cache) -> int:
+    """a far floor: only its structure (slab, halls, ceiling) and its lamps - from a distance the works are specks,
+    and the whole tower's works would be ~8 GB; returns the lamp count"""
+    mf = (manifest.get("floors") or {}).get(str(index), {})
+    floor_import.clear_floor(index)
+    root = floor_import.floor_collection(index)
+    arch = floor_import.sub_collection(root, "Architecture")
+    lights = floor_import.sub_collection(root, "Lights")
+    mount = floor_import.new_empty(f"floor-{index}", arch, "CUBE", 1.0)
+    st = mf.get("structure") or {}
+    if st.get("url"):
+        cache.instance(st["url"], mount, arch)
+    lamps = st.get("lights") or []
+    floor_import.add_lamps(lamps, mount, lights, f"floor-{index}")
+    return len(lamps)
+
+
+def below_camera(scene, lo: Vector, hi: Vector, lens: float, azimuth: float, drop: float, offset: float, aim_up: float):
+    """under the tower and beside it, looking up its length: the floors recede into the sky"""
+    cx, cy = (lo.x + hi.x) / 2, (lo.y + hi.y) / 2
+    cam = bpy.data.cameras.new("Tower camera")
+    cam.lens = lens
+    cam.clip_end = 5000.0
+    o = bpy.data.objects.new("Tower camera", cam)
+    scene.collection.objects.link(o)
+    o.location = Vector((cx + offset * math.cos(azimuth), cy + offset * math.sin(azimuth), lo.z - drop))
+    target = Vector((cx, cy, lo.z + aim_up))
+    o.rotation_euler = (target - o.location).to_track_quat("-Z", "Y").to_euler()
+    scene.camera = o
+    return o, target, (o.location - target).length
 
 
 def world_bounds(objs) -> tuple[Vector, Vector]:
@@ -121,6 +153,11 @@ def main() -> int:
     ap.add_argument("--reframe", action="store_true", help="the floors are already in the open .blend: only camera and render")
     ap.add_argument("--append", action="store_true", help="import --floors into the open .blend and keep the floors already there")
     ap.add_argument("--frame-floors", default="", help="frame only these floors (the others may run out of the picture)")
+    ap.add_argument("--structure-floors", default="", help="import only the structure and lamps of these floors (far away)")
+    ap.add_argument("--from-below", action="store_true", help="the camera under and beside the tower, looking up it")
+    ap.add_argument("--drop", type=float, default=40.0, help="from below: metres under the lowest slab")
+    ap.add_argument("--offset", type=float, default=34.0, help="from below: metres out from the tower's axis")
+    ap.add_argument("--aim-up", type=float, default=260.0, help="from below: the aim point, metres above the lowest slab")
     args = ap.parse_args(argv)
     if args.enc:
         os.environ["ADA_ENC_URL"] = args.enc
@@ -136,6 +173,24 @@ def main() -> int:
     for o in list(bpy.data.objects):   # a fresh start: the start-up cube, camera and lamp; otherwise only the old camera
         if not keep or o.name.startswith("Tower camera"):
             bpy.data.objects.remove(o, do_unlink=True)
+    sfloors = [] if args.reframe or not args.structure_floors else floor_range(args.structure_floors)
+    if sfloors:
+        layout = chain.get_layout(floor_import.enc_url(), "")
+        manifest = floor_import.load_manifest(layout.get("models") or "/void-models/manifest.json")
+        maps = [f.get("map", "") for f in layout["rooms"].get("floors", [])]
+        cache = floor_import.GlbCache()
+        if not scene.get("ada_void_lighting"):
+            scene["ada_void_lighting"] = json.dumps(manifest.get("lighting") or {})
+        t = time.time()
+        for i in sfloors:
+            if i in floors:
+                continue
+            n_l = structure_only(i, manifest, cache)
+            level = float(levels[i]) if i < len(levels) else -storey * i
+            stack(i, level)
+            report["floors"].append({"index": i, "map": maps[i] if i < len(maps) else "", "level": level, "structure_only": True, "lamps": n_l})
+            if i % 20 == 0:
+                print(f"[tower] structure {i} {maps[i] if i < len(maps) else ''} at {level} m ({round(time.time() - t)} s)", flush=True)
     for i in floors:
         t = time.time()
         st = floor_import.build_floor(bpy.context, i, labels=True)
@@ -175,7 +230,10 @@ def main() -> int:
                 framed += [h] + list(h.children_recursive)
         report["framed_floors"] = args.frame_floors
     lo, hi = world_bounds(framed)
-    cam, centre, dist = outside_camera(scene, lo, hi, args.lens, math.radians(args.azimuth), math.radians(args.elevation), args.margin)
+    if args.from_below:
+        cam, centre, dist = below_camera(scene, lo, hi, args.lens, math.radians(args.azimuth), args.drop, args.offset, args.aim_up)
+    else:
+        cam, centre, dist = outside_camera(scene, lo, hi, args.lens, math.radians(args.azimuth), math.radians(args.elevation), args.margin)
     report.update({"bounds": [list(lo), list(hi)], "centre": list(centre), "camera_distance": round(dist, 1)})
     print(f"[tower] bounds {tuple(round(v, 1) for v in lo)} .. {tuple(round(v, 1) for v in hi)}; camera at {round(dist, 1)} m", flush=True)
 
