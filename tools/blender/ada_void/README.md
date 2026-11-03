@@ -91,6 +91,14 @@ blender -b -P tools/blender/ada_void/tower.py -- --floors 0-4 --out ada_run/blen
 `--exposure` move the camera and the light; a JSON beside the PNG records each floor's level, counts and timings.
 Floors 0–4 import in about 2.5 minutes; the render takes about 30 s on OptiX at 256 samples.
 
+Two more modes work on a saved scene, so the camera can be tuned without importing again: `--reframe` (open the
+`.blend`, move only the camera, render) and `--append` (import more `--floors` into the open `.blend`, keep the rest).
+`--frame-floors` frames only some floors and lets the others run out of the picture — the tower without an end:
+
+```
+blender -b ada_run/blender/void_tower_0-9.blend -P tools/blender/ada_void/tower.py -- --append --floors 10-12     --frame-floors 0-9 --out ada_run/blender/void_tower_0-12.png --res 1440x2560 --samples 256     --azimuth -62 --elevation 12 --lens 50 --margin 1.04
+```
+
 ### What does not survive the glTF export
 
 The export is a photograph of one moment of built Godot scenes

@@ -3,6 +3,10 @@
     blender -b -P tools/blender/ada_void/tower.py -- --floors 0-4 --out ada_run/blender/void_tower_0-4.png \
         [--samples 128] [--res 1920x1080] [--blend ada_run/blender/void_tower_0-4.blend] [--enc http://localhost:3003]
 
+To move only the camera (no import), open the saved scene and reframe it:
+
+    blender -b ada_run/blender/void_tower_0-9.blend -P tools/blender/ada_void/tower.py -- --reframe         --out ada_run/blender/void_tower_0-9.png --res 1440x2560 --azimuth -62 --elevation 12
+
 Each floor is imported with floor_import.build_floor — the same import as the panel, from GET /api/void-layout and the
 glTF export — and everything of that floor is hung under an empty `tower-floor-<i>` at the floor's level from
 commons/void/layout.json (`levels[i]`, Godot y, which is Blender z). World and sun come from the export's lighting;
@@ -114,19 +118,24 @@ def main() -> int:
     ap.add_argument("--margin", type=float, default=1.02)
     ap.add_argument("--exposure", type=float, default=0.9)
     ap.add_argument("--enc", default="")
+    ap.add_argument("--reframe", action="store_true", help="the floors are already in the open .blend: only camera and render")
+    ap.add_argument("--append", action="store_true", help="import --floors into the open .blend and keep the floors already there")
+    ap.add_argument("--frame-floors", default="", help="frame only these floors (the others may run out of the picture)")
     args = ap.parse_args(argv)
     if args.enc:
         os.environ["ADA_ENC_URL"] = args.enc
     t0 = time.time()
     ada_void.register()
     scene = bpy.context.scene
-    for o in list(bpy.data.objects):   # the start-up cube, camera and lamp
-        bpy.data.objects.remove(o, do_unlink=True)
     spec = json.load(open(os.path.join(ROOT, "commons", "void", "layout.json"), encoding="utf-8"))
     levels = spec.get("levels") or []
     storey = float(spec.get("storey_height", 6.0))
-    floors = floor_range(args.floors)
-    report = {"floors": [], "storey_height": storey}
+    floors = [] if args.reframe else floor_range(args.floors)
+    keep = args.reframe or args.append   # the floors (and world and sun) already in the open .blend stay
+    report = {"floors": [], "storey_height": storey, "reframe": args.reframe, "append": args.append}
+    for o in list(bpy.data.objects):   # a fresh start: the start-up cube, camera and lamp; otherwise only the old camera
+        if not keep or o.name.startswith("Tower camera"):
+            bpy.data.objects.remove(o, do_unlink=True)
     for i in floors:
         t = time.time()
         st = floor_import.build_floor(bpy.context, i, labels=True)
@@ -150,13 +159,22 @@ def main() -> int:
     vt = [i.identifier for i in scene.view_settings.bl_rna.properties["view_transform"].enum_items]
     scene.view_settings.view_transform = "AgX" if "AgX" in vt else "Filmic"
     scene.view_settings.exposure = args.exposure
-    lighting = json.loads(scene.get("ada_void_lighting", "{}") or "{}")
-    rig = bpy.data.collections.new("Tower render")
-    scene.collection.children.link(rig)
-    report["world"] = render_setup.setup_world(scene, lighting, False)
-    render_setup.setup_sun(scene, lighting, rig)
+    if not keep:   # a reframe or an append keeps the world and sun the scene was saved with
+        lighting = json.loads(scene.get("ada_void_lighting", "{}") or "{}")
+        rig = bpy.data.collections.new("Tower render")
+        scene.collection.children.link(rig)
+        report["world"] = render_setup.setup_world(scene, lighting, False)
+        render_setup.setup_sun(scene, lighting, rig)
 
-    lo, hi = world_bounds(bpy.data.objects)
+    framed = list(bpy.data.objects)
+    if args.frame_floors:   # only these floors' things: the rest of the tower may run past the edge
+        framed = []
+        for i in floor_range(args.frame_floors):
+            h = bpy.data.objects.get(f"tower-floor-{i}")
+            if h is not None:
+                framed += [h] + list(h.children_recursive)
+        report["framed_floors"] = args.frame_floors
+    lo, hi = world_bounds(framed)
     cam, centre, dist = outside_camera(scene, lo, hi, args.lens, math.radians(args.azimuth), math.radians(args.elevation), args.margin)
     report.update({"bounds": [list(lo), list(hi)], "centre": list(centre), "camera_distance": round(dist, 1)})
     print(f"[tower] bounds {tuple(round(v, 1) for v in lo)} .. {tuple(round(v, 1) for v in hi)}; camera at {round(dist, 1)} m", flush=True)
