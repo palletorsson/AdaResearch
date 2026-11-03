@@ -19,8 +19,10 @@ extends RefCounted
 ## feel tension), but it is a fixed, linear response with no memory and no choice - what a back-drivable motor does by
 ## itself - so the shared rates and the relation below are mechanical self-organisation, not units that adapt. Level 1
 ## is the unjoined control (`apart`): the two programmes, and nothing between them. Units that change their own
-## programme from what they sense, with memory (ease tension, hold a distance, shift a phase), are not built yet; his
-## Experiment 2 (the same units with and without sensing) is what would tell the two levels apart.
+## command from what they sense (ease, phase, keep below) were added for his Experiment 2. ease (a leaky integrator)
+## and keep (a filter and a threshold) carry memory; phase's hub reflex is a fixed, memoryless map from force to rate,
+## which by the criterion above would be level 2 - we place it at level 3 on a different criterion, that it answers a
+## load the passive hub drive cannot feel (the pull along its own hub arm does no work on the hub), and say so.
 ##
 ## THE ROD is physics, not a controller: a rigid pin-to-pin bar of length L, modelled as a stiff spring (k), pulling
 ## the two pins together when stretched and apart when squeezed - equal and opposite (Newton's third law).
@@ -199,8 +201,9 @@ func stretch(j: int) -> float:
 	return pin(int(rod.b)).distance_to(pin(int(rod.a))) - float(rod.L)
 
 ## What unit i senses of each link at its OWN attachment (a swivel encoder and a reel or load cell at the pin): the
-## link's bearing in the unit's body frame (0 ahead, + to the left), its length, and its tension. Nothing of the other
-## unit's state is read - only where the link leaves the unit's own pin.
+## link's bearing in the unit's body frame (0 ahead, + to the left), the straight-line length to the partner's pin,
+## and the tension. The partner's command, heading and hub are not read, but its pin position is: a rod carries it to
+## the swivel; a cord carries it only through the ideal take-up reel described with the controllers below.
 func link_sense(i: int, pins: Array) -> Array:
 	var out := []
 	var u: Dictionary = units[i]
@@ -218,10 +221,91 @@ func link_sense(i: int, pins: Array) -> Array:
 		out.append({"bearing": atan2(-d.x * sn + d.y * c, d.x * c + d.y * sn), "length": ln, "tension": tn, "rest": float(rod.L)})
 	return out
 
-## A sensing unit's command for this sub-step: [cv, cw, ch]. Controllers are added here, each reading only the unit's
-## own sensors (f_par, f_lat at its pin, its hub angle, link_sense) and its own memory `u.mem`.
+## THE SENSING CONTROLLERS (Experiment 2, 2026-11-03; designed and tested in the Python twin of this model, then
+## ported). Each reads only the unit's own sensors and memory and is evaluated once per tick, from the state at the
+## start of the tick (sub-step 0), its command held for the tick's sub-steps. The passive drive stays on in every arm.
+##   ease   (rigid rod) the hub leaks toward easing the RADIAL pull on its own pin - the pull along its own hub arm,
+##          f_rad = f_par cos(ph) + f_lat sin(ph), which does no work on the hub, so a passive hub cannot feel it:
+##          d_h += DT (-0.2 sign(h0) f_rad - 1.0 d_h), clamped to +-1; ch = h0 + d_h. The pair ends with the rod
+##          unloaded while both units keep their whole programme: an unstressed two-point carry.
+##   phase  (rigid rod) the same radial pull as a memoryless hub reflex, ch = h0 - 0.05 f_rad, plus a bearing hold on
+##          the chassis: the rod's spin in the world, rho = d(bearing)/dt + own turn rate (gyro), is pushed against
+##          along the rod's normal (cv = v0 - sin(b) du, cw = w0 + cos(b) du / v0, du = clamp(0.1 L rho, +-0.1)).
+##          The pair carries the bar without it ever turning, like the bar of a drafting machine.
+##   keep   (tendon) pushes away when its own cord, filtered over 3 s, is shorter than 0.95 m (the cord itself does the
+##          pulling): e = min(0, ell_f - 0.95); steer and pace away from where the partner's pin is seen. The hub is
+##          never touched. The pair ends joined at a distance, the chassis apart after the first seconds.
+##   ease_flip, phase_hub, keep_pull: the ablations - the same signal with the opposite sign, the hub reflex alone,
+##          and only the pull half (move toward the partner when the filtered cord is longer than 0.95 m - the half a
+##          tendon already does).
+## For the tendon, link_sense assumes a weightless take-up reel that keeps the cord straight at zero tension, so a unit
+## reads the exact distance and bearing of its partner's pin even when the cord is slack - which is where keep's push
+## half acts: in effect a range-and-bearing sensor on the partner, carried by the cord.
+const EASE_KAP := 0.2
+const EASE_MU := 1.0
+const EASE_DMAX := 1.0
+const PHASE_KT := 0.05
+const PHASE_KD := 0.1
+const PHASE_KLAT := 1.0
+const PHASE_DUMAX := 0.1
+const KEEP_ELL_STAR := 0.95
+const KEEP_TAU_F := 3.0
+const KEEP_KV := 0.8
+const KEEP_KW := 2.0
+
 func _command(i: int, u: Dictionary, f_par: float, f_lat: float, pins: Array, ds: float) -> Array:
-	return [float(P.v0), float(P.w0), float(P.h0)]
+	var mem: Dictionary = u.mem
+	if int(mem.get("tick", -1)) == steps:return mem.cmd
+	var v0: float = P.v0
+	var w0: float = P.w0
+	var h0: float = P.h0
+	var ph: float = u.ph
+	var cmd := [v0, w0, h0]
+	var f_rad := f_par * cos(ph) + f_lat * sin(ph)   # the pull along my own hub arm, outward positive
+	match str(u.ctrl):
+		"ease", "ease_flip":
+			var sign_ := -1.0 if str(u.ctrl) == "ease" else 1.0
+			var d: float = mem.get("d_h", 0.0)
+			d += DT * (sign_ * EASE_KAP * signf(h0) * f_rad - EASE_MU * d)
+			d = clampf(d, -EASE_DMAX, EASE_DMAX)
+			mem.d_h = d
+			cmd = [v0, w0, h0 + d]
+		"phase", "phase_hub":
+			var ch := h0 - PHASE_KT * f_rad
+			var cv := v0
+			var cw := w0
+			var links := link_sense(i, pins)
+			if str(u.ctrl) == "phase" and not links.is_empty():
+				var b: float = links[0].bearing
+				if mem.has("b_prev"):
+					# the rod's spin in the world: its bearing change at my pin plus my own heading change, over the tick
+					var rho := (wrapf(b - float(mem.b_prev), -PI, PI) + (float(u.th) - float(mem.th_prev))) / DT
+					var du := clampf(float(P.L) * PHASE_KD * rho, -PHASE_DUMAX, PHASE_DUMAX)
+					cv = v0 - sin(b) * du
+					cw = w0 + PHASE_KLAT * cos(b) * du / v0
+				mem.b_prev = b
+				mem.th_prev = float(u.th)
+			cmd = [cv, cw, ch]
+		"keep", "keep_pull":
+			var qx := float(P.a_hub) + float(P.r_pin) * cos(ph)
+			var qz := float(P.r_pin) * sin(ph)
+			var dv := 0.0
+			var dw := 0.0
+			var links := link_sense(i, pins)
+			for j in links.size():
+				var ell: float = links[j].length
+				var beta: float = links[j].bearing
+				var key := "ellf%d" % j
+				if mem.has(key):mem[key] = float(mem[key]) + (ell - float(mem[key])) * DT / KEEP_TAU_F
+				else:mem[key] = ell
+				var e := minf(0.0, float(mem[key]) - KEEP_ELL_STAR) if str(u.ctrl) == "keep" else maxf(0.0, float(mem[key]) - KEEP_ELL_STAR)
+				var gam := atan2(qz + ell * sin(beta), qx + ell * cos(beta))
+				dv += KEEP_KV * e * cos(gam)
+				dw += KEEP_KW * e * sin(gam)
+			cmd = [clampf(v0 + dv, -float(P.vmax), float(P.vmax)), clampf(w0 + dw, -float(P.wmax), float(P.wmax)), h0]
+	mem.cmd = cmd
+	mem.tick = steps
+	return cmd
 
 ## Run the model forward by `seconds` of simulated time in whole fixed ticks; the remainder carries to the next call.
 func advance(seconds: float) -> int:

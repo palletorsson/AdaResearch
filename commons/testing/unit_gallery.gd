@@ -33,6 +33,18 @@ const ROWS := [
 		{"id": "facing", "label": "rod, point-symmetric start", "make": "pair", "topology": "rod", "start": "facing"},
 		{"id": "facing_nudged", "label": "the same, one unit turned 0.1 deg", "make": "pair", "topology": "rod", "start": "facing", "kick": [0.0, 1, 0.1]},
 		{"id": "axle_hub", "label": "rod c, hub on the axle (a_hub 0)", "make": "axle"}]],
+	["Sensing: the rod (experiment 2)", [
+		{"id": "s_rod_open", "label": "rod c, no sensing", "make": "pair", "topology": "rod", "start": "c"},
+		{"id": "s_ease_c", "label": "rod c + ease: the rod unloaded", "make": "pair", "topology": "rod", "start": "c", "ctrl": "ease"},
+		{"id": "s_ease_r2", "label": "rod, random 2 + ease", "make": "pair", "topology": "rod", "start": "seed101", "ctrl": "ease"},
+		{"id": "s_phase_c", "label": "rod c + phase: the bar never turns", "make": "pair", "topology": "rod", "start": "c", "ctrl": "phase"},
+		{"id": "s_phase_r2", "label": "rod, random 2 + phase", "make": "pair", "topology": "rod", "start": "seed101", "ctrl": "phase"}]],
+	["Sensing: the cord, and the ablations", [
+		{"id": "s_tendon_open", "label": "tendon c, no sensing", "make": "pair", "topology": "tendon", "start": "c"},
+		{"id": "s_keep_c", "label": "tendon c + keep: joined at a distance", "make": "pair", "topology": "tendon", "start": "c", "ctrl": "keep"},
+		{"id": "s_keep_r4", "label": "tendon, random 4 + keep", "make": "pair", "topology": "tendon", "start": "seed103", "ctrl": "keep"},
+		{"id": "s_ease_flip", "label": "rod c + ease, sign flipped (ablation)", "make": "pair", "topology": "rod", "start": "c", "ctrl": "ease_flip"},
+		{"id": "s_phase_hub", "label": "rod crossed + hub reflex alone (ablation)", "make": "pair", "topology": "rod", "start": "crossed", "ctrl": "phase_hub"}]],
 	["Three in a triangle", [
 		{"id": "tri_c", "label": "triangle, start c", "make": "triangle", "start": "c"},
 		{"id": "tri_scattered", "label": "triangle, scattered", "make": "triangle", "start": "scattered"},
@@ -91,6 +103,7 @@ func _make(spec: Dictionary):
 	if topo == "rod":sim.add_rod(0, 1)
 	elif topo == "tendon":sim.add_rod(0, 1, -1.0, true)
 	sim.add_pen_between(0, 1, .5)
+	for u in sim.units:u.ctrl = str(spec.get("ctrl", "programme"))
 	return sim
 
 func _kick(sim, unit: int, deg: float) -> void:

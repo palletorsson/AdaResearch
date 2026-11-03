@@ -7,17 +7,24 @@ extends SceneTree
 ##     (a cord that only pulls, the same stiffness when taut). Drawing, reachable workspace, forces, stability.
 ##   Experiment 2, SENSING: the same physics and starts, the open-loop programme against sensing controllers
 ##     (unit_sim.gd _command); added as arms of the same matrix, so every comparison is one switch.
+##   Experiment 2h, HOLD: does the sensing HOLD the state it reaches, or only reach it? At KICK_AT every sensing pair
+##     gets the same kick - unit 1 turned KICK_DEG about its own pin, so the link's length does not jump but the two
+##     units stop being translates of each other - with the sensing left on (`~kick`), switched off at the same moment
+##     (`~cut~kick`), or switched off with no kick (`~cut`: is the state an open-loop equilibrium that nothing disturbs?).
+##     Scored on the same last 120 s.
 ##
 ## Each run records, every 0.5 s, both chassis (x, z, heading), both hub angles, both pins, the tool point, the link's
 ## length and tension and both units' rates - all together - and its metrics. Starts: the three hand-set arrangements
 ## (c, parallel, crossed) and random ones from fixed seeds (unit 2's pin one rod length from unit 1's).
 ## Writes ada_run/workstation/unit_lab/<experiment>/<topology>__<controller>__<start>.json and summary.json;
 ## tools/unit_lab_plots.py draws them.
-## Run: godot --headless --path . --xr-mode off --script res://commons/testing/unit_lab.gd -- --exp=1 [--T=720] [--seeds=5]
+## Run: godot --headless --path . --xr-mode off --script res://commons/testing/unit_lab.gd -- --exp=1|2|2h [--T=720] [--seeds=5]
 
 const Sim = preload("res://commons/artifacts/the_unit/unit_sim.gd")
 const SAMPLE := 60           ## ticks between samples (0.5 s)
 const CELL := 0.02           ## m, the grid that measures covered area
+const KICK_AT := 480.0       ## s, Experiment 2h's kick and switch-off
+const KICK_DEG := 2.0        ## unit 1 turned about its own pin
 
 var T := 720.0
 var window := 120.0          ## the settled window is the last `window` seconds
@@ -36,18 +43,25 @@ func _initialize() -> void:
 	var arms: Array = []
 	if experiment == "1":
 		for topo in ["none", "rod", "tendon"]:arms.append([topo, "programme"])
-	else:
-		for spec in experiment.split(",", false):pass
+	elif experiment == "2":
+		# the same physics and starts; only the controller differs - open loop, the sensing controller, an ablation
+		for arm in [["rod", "programme"], ["rod", "ease"], ["rod", "ease_flip"], ["rod", "phase"], ["rod", "phase_hub"],
+				["tendon", "programme"], ["tendon", "keep"], ["tendon", "keep_pull"], ["none", "keep"]]:arms.append(arm)
+	elif experiment == "2h":
+		for arm in [["rod", "ease"], ["rod", "phase"], ["tendon", "keep"]]:
+			for ev in ["kick", "cut~kick", "cut"]:arms.append([arm[0], arm[1], ev])
 	var summary := {"experiment": experiment, "T": T, "window": window, "starts": starts, "runs": []}
 	var t0 := Time.get_ticks_msec()
 	for arm in arms:
 		for st in starts:
-			var r := _run(str(arm[0]), str(arm[1]), str(st))
-			var name := "%s__%s__%s" % [arm[0], arm[1], st]
+			var ev: String = str(arm[2]) if arm.size() > 2 else ""
+			var r := _run(str(arm[0]), str(arm[1]), str(st), ev)
+			var ctrl: String = str(r.controller)
+			var name := "%s__%s__%s" % [arm[0], ctrl, st]
 			var f := FileAccess.open(out_dir.path_join(name + ".json"), FileAccess.WRITE);f.store_string(JSON.stringify(r));f.close()
 			var m: Dictionary = r.metrics
-			summary.runs.append({"name": name, "topology": arm[0], "controller": arm[1], "start": st, "metrics": m})
-			print("[unit_lab] %-40s tool %5.2f m2  |T| %6.1f N (peak %6.1f)  link %.3f+-%.3f  apart max %.2f  R_hub %.2f  corr_w %.2f  w %s" % [name, float(m.tool_area_m2), float(m.tension_mean_window), float(m.tension_peak), float(m.link_mean_window), float(m.link_std_window), float(m.units_apart_max), float(m.hub_order_window), float(m.turn_corr_window), str(m.w_mean_window)])
+			summary.runs.append({"name": name, "topology": arm[0], "controller": ctrl, "start": st, "event_at": r.event_at, "kick_deg": r.kick_deg, "metrics": m})
+			print("[unit_lab] %-36s |T| %5.2f N (win peak %5.1f)  rod turns %6.1f deg  band %3.0f%%  contact %d  v %s w %s h %s  carry %s bar %s joined %s" % [name, float(m.tension_mean_window), float(m.tension_peak_window), float(m.rod_pp_window_deg), 100.0 * float(m.band_fraction_window), int(m.contact_ticks), str(m.v_mean_window), str(m.w_mean_window), str(m.h_mean_window), m.test_carry, m.test_bar, m.test_joined])
 	summary["seconds"] = (Time.get_ticks_msec() - t0) / 1000.0
 	var sf := FileAccess.open(out_dir.path_join("summary.json"), FileAccess.WRITE);sf.store_string(JSON.stringify(summary, "  "));sf.close()
 	print("[unit_lab] done: %d runs in %.0f s -> %s" % [summary.runs.size(), summary.seconds, out_dir])
@@ -73,8 +87,16 @@ func make_pair(topology: String, controller: String, start: String):
 	for u in sim.units:u.ctrl = controller
 	return sim
 
-func _run(topology: String, controller: String, start: String) -> Dictionary:
+## Experiment 2h's kick: unit 1 turned about its own pin, so the pin (and the link's length) stays where it was.
+func _kick(sim, deg: float) -> void:
+	var u: Dictionary = sim.units[1]
+	var q: Vector2 = sim.pin(1)
+	var r := (Vector2(float(u.x), float(u.z)) - q).rotated(deg_to_rad(deg))
+	u.x = q.x + r.x;u.z = q.y + r.y;u.th = float(u.th) + deg_to_rad(deg)
+
+func _run(topology: String, controller: String, start: String, event := "") -> Dictionary:
 	var sim = make_pair(topology, controller, start)
+	var k_event := int(round(KICK_AT / Sim.DT)) if event != "" else -1
 	var trace := []
 	var cells := {}
 	var tool_len := 0.0;var last_tool: Vector2 = sim.pen_point(0)
@@ -83,9 +105,16 @@ func _run(topology: String, controller: String, start: String) -> Dictionary:
 	var w_sum := [0.0, 0.0];var h_sum := [0.0, 0.0];var wx := [];var wy := []
 	var hub_c := 0.0;var hub_s := 0.0;var apart_max := 0.0;var stretch_max := 0.0
 	var lo := Vector2(INF, INF);var hi := -lo
+	var v_sum := [0.0, 0.0];var rod_prev := 0.0;var rod_acc := 0.0;var rod_lo := INF;var rod_hi := -INF;var rod_started := false
+	var band := 0;var contact := 0;var contact_w := 0;var tool_w := 0.0;var wlo := Vector2(INF, INF);var whi := -wlo;var dev_max := 0.0
+	var last_tool_w := Vector2.ZERO;var have_w := false
 	var steps := int(round(T / Sim.DT))
 	var w0 := T - window
 	for k in steps:
+		if k == k_event:
+			if event.begins_with("cut"):
+				for u in sim.units:u.ctrl = "programme"
+			if event.ends_with("kick"):_kick(sim, KICK_DEG)
 		sim.tick()
 		var tool: Vector2 = sim.pen_point(0)
 		tool_len += tool.distance_to(last_tool);last_tool = tool
@@ -101,7 +130,19 @@ func _run(topology: String, controller: String, start: String) -> Dictionary:
 		t_peak = maxf(t_peak, absf(tn))
 		var u0: Dictionary = sim.units[0];var u1: Dictionary = sim.units[1]
 		apart_max = maxf(apart_max, Vector2(float(u0.x), float(u0.z)).distance_to(Vector2(float(u1.x), float(u1.z))))
+		var touching := _overlap(u0, u1)
+		if touching:contact += 1
+		var ang := atan2(p1.y - p0.y, p1.x - p0.x)
 		if sim.time >= w0:
+			if touching:contact_w += 1
+			if not rod_started:rod_started = true;rod_prev = ang
+			rod_acc += wrapf(ang - rod_prev, -PI, PI);rod_prev = ang;rod_lo = minf(rod_lo, rod_acc);rod_hi = maxf(rod_hi, rod_acc)
+			if ln >= .85 and ln <= 1.008:band += 1
+			if sim.rods.size() > 0:dev_max = maxf(dev_max, absf(ln - float(sim.rods[0].L)))
+			if have_w:tool_w += tool.distance_to(last_tool_w)
+			last_tool_w = tool;have_w = true
+			wlo = Vector2(minf(wlo.x, tool.x), minf(wlo.y, tool.y));whi = Vector2(maxf(whi.x, tool.x), maxf(whi.y, tool.y))
+			for i in 2:v_sum[i] += float(sim.units[i].cmd.x)
 			t_sum += absf(tn);t_n += 1;t_peak_w = maxf(t_peak_w, absf(tn))
 			if sim.rods.size() > 0 and bool(sim.rods[0].get("tendon", false)) and tn <= 0.0:slack += 1
 			len_sum += ln;len_sq += ln * ln;len_max = maxf(len_max, ln)
@@ -124,8 +165,41 @@ func _run(topology: String, controller: String, start: String) -> Dictionary:
 		"units_apart_max": apart_max, "stretch_max_m": stretch_max, "skid_m": skid,
 		"w_mean_window": [snappedf(w_sum[0] / n, .001), snappedf(w_sum[1] / n, .001)], "h_mean_window": [snappedf(h_sum[0] / n, .001), snappedf(h_sum[1] / n, .001)],
 		"hub_order_window": Vector2(hub_c, hub_s).length() / n, "turn_corr_window": _corr(wx, wy),
-		"finite": is_finite(float(sim.units[0].x)) and is_finite(float(sim.units[1].x))}
-	return {"topology": topology, "controller": controller, "start": start, "T": T, "fields": ["t", "x0", "z0", "th0", "ph0", "x1", "z1", "th1", "ph1", "pin0x", "pin0z", "pin1x", "pin1z", "toolx", "toolz", "link", "tension", "v0", "w0", "h0", "v1", "w1", "h1"], "trace": trace, "metrics": metrics}
+		"finite": is_finite(float(sim.units[0].x)) and is_finite(float(sim.units[1].x)),
+		"v_mean_window": [snappedf(v_sum[0] / n, .001), snappedf(v_sum[1] / n, .001)],
+		"rod_pp_window_deg": rad_to_deg(rod_hi - rod_lo), "band_fraction_window": float(band) / n, "contact_ticks": contact, "contact_ticks_window": contact_w,
+		"tool_path_window_m": tool_w, "tool_span_window_m": maxf(whi.x - wlo.x, whi.y - wlo.y), "link_dev_max_window_m": dev_max}
+	# Experiment 2's three capability tests (the designers' operational tests), on the settled window
+	var P: Dictionary = sim.P
+	var rates_within := func(tol: float) -> bool:
+		for i in 2:
+			if absf(float(v_sum[i]) / n / float(P.v0) - 1.0) > tol or absf(float(w_sum[i]) / n / float(P.w0) - 1.0) > tol or absf(float(h_sum[i]) / n / float(P.h0) - 1.0) > tol:return false
+		return true
+	metrics["test_carry"] = sim.rods.size() > 0 and not bool(sim.rods[0].get("tendon", false)) and float(metrics.tension_mean_window) < .5 and float(metrics.tension_peak_window) < 2.0 and rates_within.call(.02)
+	metrics["test_bar"] = sim.rods.size() > 0 and float(metrics.rod_pp_window_deg) < 2.0 and tool_w >= 10.0 and float(metrics.tool_span_window_m) >= .5 and rates_within.call(.10) and dev_max < .005
+	metrics["test_joined"] = sim.rods.size() > 0 and float(metrics.band_fraction_window) >= .95 and float(metrics.tension_peak_window) <= 25.0 and contact_w == 0 and float(v_sum[0]) / n >= .5 * float(P.v0) and float(v_sum[1]) / n >= .5 * float(P.v0)
+	return {"topology": topology, "controller": controller + ("~" + event if event != "" else ""), "start": start, "T": T, "event_at": KICK_AT if event != "" else -1.0, "kick_deg": KICK_DEG if event.ends_with("kick") else 0.0, "fields": ["t", "x0", "z0", "th0", "ph0", "x1", "z1", "th1", "ph1", "pin0x", "pin0z", "pin1x", "pin1z", "toolx", "toolz", "link", "tension", "v0", "w0", "h0", "v1", "w1", "h1"], "trace": trace, "metrics": metrics}
+
+## Do the two chassis footprints overlap (separating-axis test on the frames with their wheels: x -0.09..0.33, z +-0.25)?
+func _overlap(a: Dictionary, b: Dictionary) -> bool:
+	var ca := _corners(a);var cb := _corners(b)
+	for th in [float(a.th), float(b.th)]:
+		for axis in [Vector2(cos(th), sin(th)), Vector2(-sin(th), cos(th))]:
+			var amin := INF;var amax := -INF;var bmin := INF;var bmax := -INF
+			for q in ca:
+				var d: float = axis.dot(q)
+				amin = minf(amin, d);amax = maxf(amax, d)
+			for q in cb:
+				var d2: float = axis.dot(q)
+				bmin = minf(bmin, d2);bmax = maxf(bmax, d2)
+			if amax < bmin or bmax < amin:return false
+	return true
+
+func _corners(u: Dictionary) -> Array:
+	var c := cos(float(u.th));var s := sin(float(u.th));var out := []
+	for q in [Vector2(-.09, -.25), Vector2(.33, -.25), Vector2(.33, .25), Vector2(-.09, .25)]:
+		out.append(Vector2(float(u.x) + q.x * c - q.y * s, float(u.z) + q.x * s + q.y * c))
+	return out
 
 func _corr(a: Array, b: Array) -> float:
 	var n := a.size()

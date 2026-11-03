@@ -89,7 +89,8 @@ def draw_cell(fig, cell, run, half, own_scale=False):
     ax.set_xlim(cx - half, cx + half); ax.set_ylim(cz - half, cz + half); ax.set_aspect("equal")
     ax.set_title(run["label"], fontsize=8.6, family="serif", pad=3)
     m = run["metrics"]
-    ax.text(.03, .03, "reach %.2f m2   %.1f N   turn %.3f" % (m["reach_m2"], m["tension_mean"], m["w_mean"]), transform=ax.transAxes, fontsize=6.4, family="serif", color="#333")
+    span = max(max(np.ptp(q[:, 0]), np.ptp(q[:, 1])) for q in tools)
+    ax.text(.03, .03, "span %.2f m   %.1f N   turn %.3f" % (span, m["tension_mean"], m["w_mean"]), transform=ax.transAxes, fontsize=6.4, family="serif", color="#333")
     if own_scale:
         ax.text(.97, .97, "own scale: %.1f m across" % (2 * half), transform=ax.transAxes, fontsize=6.6, family="serif", color="#a33", ha="right", va="top")
     strips = [fig.add_subplot(sub[k]) for k in (1, 2, 3)]
@@ -133,14 +134,15 @@ def main():
     H = 4.15 * nr + 1.6
     fig = plt.figure(figsize=(3.05 * nc + 2.1, H), facecolor="white")
     gs = fig.add_gridspec(nr, nc + 1, width_ratios=[.68] + [1] * nc, left=.008, right=.995, top=1 - 1.05 / H, bottom=.5 / H, wspace=.07, hspace=.2)
-    fig.suptitle("THE UNIT  -  a collection: one unit, two, and three, joined and not", fontsize=21, family="serif", y=1 - .3 / H)
-    fig.text(.5, 1 - .72 / H, "each specimen seen from above, its timelines underneath (link tension N, hub phase difference to unit 1 in degrees, distance to unit 1 in m) over %d s; every row at one scale, unless a panel says otherwise"
+    fig.suptitle("THE UNIT  -  a collection: one unit, two, and three, joined and not, sensing and not", fontsize=21, family="serif", y=1 - .3 / H)
+    fig.text(.5, 1 - .72 / H, "each specimen seen from above, its timelines underneath (link tension N, hub phase difference to unit 1 in degrees, distance to unit 1 in m) over %d s; every row at one scale, unless a panel says otherwise;"
+             " in each panel, the span of the ink (the larger side of its bounding box), the mean link force and the mean turn rate over the run"
              % int(index["T"]), ha="center", fontsize=11, family="serif", color="#444")
     for i, row in enumerate(rows):
         runs = [json.load(open(os.path.join(d, s["id"] + ".json"), encoding="utf-8")) for s in row["specimens"]]
         half, halves = row_scales(runs)
         lab = fig.add_subplot(gs[i, 0]); lab.axis("off")
-        lab.text(.04, .66, row["title"].replace(", ", ",\n"), fontsize=13.5, family="serif", va="center", linespacing=1.15)
+        lab.text(.04, .66, row["title"].replace(", ", ",\n").replace(": ", ":\n").replace(" (", "\n("), fontsize=13.5, family="serif", va="center", linespacing=1.15)
         lab.text(.04, .38, "panels %.1f m across" % (2 * half), fontsize=8.5, family="serif", color="#555")
         lab.text(.04, .14, "tension N\nhub phase deg\ndistance m", fontsize=7.5, family="serif", color="#777", linespacing=2.1)
         for j, run in enumerate(runs):
@@ -148,7 +150,8 @@ def main():
             if j == 0 and i == nr - 1:
                 strips[2].set_xlabel("s", fontsize=6, labelpad=0)
     fig.text(.5, .16 / H, "Ada Research - The Unit (2026-11-03). Model commons/artifacts/the_unit/unit_sim.gd, runs commons/testing/unit_gallery.gd. Each unit drives its own programme "
-             "(pairs: v 0.15 m/s, turn 0.25, hub 1.0 rad/s; triangle: turn 0.8) through a compliant drive and senses nothing.", ha="center", fontsize=8.5, family="serif", color="#666")
+             "(pairs: v 0.15 m/s, turn 0.25, hub 1.0 rad/s; triangle: turn 0.8) through a compliant drive; only the rows marked sensing change their commands from what they feel at their own pin.",
+             ha="center", fontsize=8.5, family="serif", color="#666")
     fig.savefig(out, dpi=150, facecolor="white")
     plt.close(fig)
     print("poster ->", out)
