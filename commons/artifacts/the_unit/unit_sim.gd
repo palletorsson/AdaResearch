@@ -14,11 +14,13 @@ extends RefCounted
 ## WHAT LEVEL THIS IS (Palle, 2026-11-03, on the first studies): keep three things apart - (1) KINEMATIC COMPOSITION,
 ## motions combined geometrically; (2) MECHANICAL INTERACTION, forces and constraints changing the motion; (3)
 ## COLLECTIVE ADAPTATION, local rules and feedback giving new behaviour - "do not label a pattern emergent without
-## explaining the local rules and the causal evidence". This model is LEVEL 2. A unit that gives way in proportion to
-## the force at its pin is what a back-drivable motor does with no decision in it, so the shared rates and the relation
-## below are mechanical self-organisation - two clocks on one beam - not adaptive collective behaviour. Level 1 is the
-## unjoined control (`apart`): the two programmes, and nothing between them. Level 3 - units that change their own
-## programme from what they sense, with memory (ease tension, hold a distance, shift a phase) - is not built yet.
+## explaining the local rules and the causal evidence". By our reading this model sits at the BORDER of levels 2 and
+## 3, and we place it at 2: the rule has the form of Palle's own level-3 example (units change their steering when they
+## feel tension), but it is a fixed, linear response with no memory and no choice - what a back-drivable motor does by
+## itself - so the shared rates and the relation below are mechanical self-organisation, not units that adapt. Level 1
+## is the unjoined control (`apart`): the two programmes, and nothing between them. Units that change their own
+## programme from what they sense, with memory (ease tension, hold a distance, shift a phase), are not built yet; his
+## Experiment 2 (the same units with and without sensing) is what would tell the two levels apart.
 ##
 ## THE ROD is physics, not a controller: a rigid pin-to-pin bar of length L, modelled as a stiff spring (k), pulling
 ## the two pins together when stretched and apart when squeezed - equal and opposite (Newton's third law).
@@ -33,7 +35,8 @@ extends RefCounted
 ## What came of it (a Python study of three rule families, 2026-11-03, then this model run to 960 s; checked again by
 ## an adversarial review): one unit draws a closed four-loop rosette; two unjoined units draw two copies of it. Two
 ## JOINED units, from 10 of 11 starts tried, settle within about ten minutes into one relation neither programme
-## contains: about 73 degrees between headings (either unit leading), both turning at about 0.185 rad/s and their hubs
+## contains: a mean of about 73 degrees between headings that breathes through about 37 (either unit leading), both
+## turning at about 0.185 rad/s and their hubs
 ## at about 0.77, against a programmed 0.25 and 1.0. It is not the only relation: two of six 40-degree kicks move the
 ## pair into a second one near 45 degrees (0.13 rad/s) that holds; the other four are forgotten. For those ten minutes
 ## the pen on the rod spirals inwards; then it keeps to a ring under a metre in radius and draws over its own lines.

@@ -3,9 +3,10 @@ extends Node3D
 ## THE UNIT (Palle, 2026-11-03): a small robot with only three controllable actions - drive forward or back, turn its
 ## chassis, turn an independent hub that carries attachments - and the question whether two identical units joined by
 ## a rod become a third thing, a drawing mechanism made by their relationship. The model and the rule are unit_sim.gd;
-## this node draws them on a sheet of paper on the floor. What is shown is MECHANICAL coupling (Palle's level 2):
-## compliant drives and a rod pulling the units into shared rates - not yet units that adapt (level 3). The pen is the
-## instrument that reads the relation between the bodies.
+## this node draws them on a sheet of paper on the floor. What is shown is mechanical coupling - compliant drives and a
+## rod pulling the units into shared rates - which we place at Palle's level 2, at the border of his level 3: the rule
+## has the form of his level-3 example but no memory and no choice (unit_sim.gd says why). The pen is the instrument
+## that reads the relation between the bodies.
 ##
 ##   setup  one     one unit, a pen on its hub's rim pin: a closed four-loop rosette - all one unit can make
 ##          apart   two identical units with the pair's starts and NO rod, a pen on each: two copies of the rosette

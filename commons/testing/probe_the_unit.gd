@@ -1,7 +1,7 @@
 extends Node3D
 ## THE UNIT (Palle, 2026-11-03): three actions per unit; what two and three identical units joined by rods become. The
-## model (unit_sim.gd) is checked first, then the scene (the_unit.gd). The evidence is for MECHANICAL coupling (Palle's
-## level 2): the rule is a force-yield, what a back-drivable motor does; nothing here shows units adapting (level 3).
+## model (unit_sim.gd) is checked first, then the scene (the_unit.gd). The evidence is for mechanical coupling, which
+## we place at Palle's level 2 (the rule is a fixed force-yield with no memory); nothing here shows units adapting.
 ##   A port      the GDScript model reproduces the Python study (scratchpad unit_sims/compliance, setting S4) at 10 and
 ##               90 s to 1e-5 m / rad
 ##   B local     the rule is one static function of (params, own hub angle, own pin force along and across) - nothing
@@ -99,7 +99,9 @@ func _model_checks() -> void:
 	var one_rel: bool = hs.max() - hs.min() < 2.0 and ws.max() - ws.min() < .01 and hubs.max() - hubs.min() < .03
 	var own: bool = ws.min() > .15 and ws.max() < .22 and hubs.max() < .85   # not the programmed 0.25 and 1.0
 	var stretch_ok: bool = rel.values().all(func(r): return float(r.max_stretch_mm) < 10.0)
-	_check("E relation: settled (900-960 s), three starts hold one relation - %.1f to %.1f deg between headings, turning %s rad/s (programmed %.2f), hubs %s (programmed %.2f); the rod held to %.1f mm" % [hs.min(), hs.max(), str(ws.map(func(v): return snappedf(v, .001))), float(Sim.defaults().w0), str(hubs.map(func(v): return snappedf(v, .001))), float(Sim.defaults().h0), rel.values().map(func(r): return float(r.max_stretch_mm)).max()], one_rel and own and stretch_ok, rel)
+	var breathe: Array = rel.values().map(func(r): return float(r.breathes_deg))
+	var breathing_ok: bool = breathe.max() < 50.0   # the angle breathes round its mean; it does not wander
+	_check("E relation: settled (900-960 s), three starts hold one relation - a mean of %.1f to %.1f deg between headings that breathes through %s deg, turning %s rad/s (programmed %.2f), hubs %s (programmed %.2f); the rod held to %.1f mm" % [hs.min(), hs.max(), str(breathe.map(func(v): return snappedf(v, .1))), str(ws.map(func(v): return snappedf(v, .001))), float(Sim.defaults().w0), str(hubs.map(func(v): return snappedf(v, .001))), float(Sim.defaults().h0), rel.values().map(func(r): return float(r.max_stretch_mm)).max()], one_rel and own and stretch_ok and breathing_ok, rel)
 	# F - not the sum
 	var joined = Sim.make("pair", "c", {}, .5, false)   # both uncentred: the same frame
 	var free = Sim.make("apart", "c", {}, .5, false)
@@ -174,6 +176,7 @@ func _pair_at(params: Dictionary):
 ## Run `sim` to t1 and describe the relation over [t0, t1]; optionally kick unit 2 by 40 degrees at `kick_at`.
 func _relation(sim, t0: float, t1: float, kick_at := -1.0, kick_unit := 1, kick_deg := 40.0) -> Dictionary:
 	var dist := 0.0;var sx := 0.0;var sy := 0.0;var w := [0.0, 0.0];var h := [0.0, 0.0];var n := 0;var max_stretch := 0.0;var kicked := false
+	var hlo := INF;var hhi := -INF
 	while sim.time < t1 - 1e-9:
 		if kick_at >= 0.0 and not kicked and sim.time >= kick_at:
 			kicked = true
@@ -189,11 +192,12 @@ func _relation(sim, t0: float, t1: float, kick_at := -1.0, kick_unit := 1, kick_
 			var a: Dictionary = sim.units[0];var b: Dictionary = sim.units[1]
 			dist += Vector2(float(a.x), float(a.z)).distance_to(Vector2(float(b.x), float(b.z)))
 			var dh := float(a.th) - float(b.th);sx += cos(dh);sy += sin(dh)
+			var dhw := rad_to_deg(wrapf(dh, -PI, PI));hlo = minf(hlo, absf(dhw));hhi = maxf(hhi, absf(dhw))
 			for i in 2:
 				w[i] += float(sim.units[i].cmd.y);h[i] += float(sim.units[i].cmd.z)
 			n += 1
 	n = maxi(n, 1)
-	return {"distance": dist / n, "heading_deg": rad_to_deg(atan2(sy, sx)), "w": [w[0] / n, w[1] / n], "h": [h[0] / n, h[1] / n], "max_stretch_mm": max_stretch}
+	return {"distance": dist / n, "heading_deg": rad_to_deg(atan2(sy, sx)), "w": [w[0] / n, w[1] / n], "h": [h[0] / n, h[1] / n], "max_stretch_mm": max_stretch, "breathes_deg": hhi - hlo}
 
 func _scene_checks() -> void:
 	var env := WorldEnvironment.new();var e := Environment.new();e.background_mode = Environment.BG_COLOR;e.background_color = Color("50565e")
