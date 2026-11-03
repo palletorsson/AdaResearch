@@ -8,16 +8,18 @@ extends Node3D
 ##               else reaches it; each unit's output is exactly three rates inside their limits
 ##   C one       one unit's pen closes its rosette every 2 pi / w0 s (the epitrochoid of its own two rotations)
 ##   D control   two units with the pair's starts and NO rod draw two congruent rosettes at exactly the programmed rates
-##   E relation  joined, from three different starts the pair settles into ONE relation - the same distance and angle
-##               between headings - with both units turning at a shared rate and hub rate that neither rule contains
-##   F not a sum the pen on the rod is not the midpoint of the two free motions (the superposition) - it is far from it
-##   G second    the mirror-symmetric start (facing) falls into a different mode: the units dance, the pen barely moves
-##   H kick      a 40-degree turn of one unit's body under its pin is forgotten: the pair returns to its relation; with
-##               the hub on the axle (a_hub 0) the same kick is remembered (negative - the offset is what makes it an
-##               attractor)
+##   E relation  joined, settled (900-960 s): three different starts hold one relation - the same angle between
+##               headings (either unit leading), both units turning and their hubs at rates neither programme contains
+##   F the rod   the pen on the rod is not where the rod's midpoint would be if the rod pulled on nothing (both runs in
+##               the same frame)
+##   G symmetry  from the point-symmetric start the pen, the symmetry's centre, cannot move; a 0.1-degree difference
+##               breaks it - an unstable state, not a mode
+##   H kicks     six 40-degree kicks: most are forgotten, the rest put the pair into ONE second relation - the pair has
+##               more than one relation (on the axle, a_hub 0, a kick is kept by a conservation law - an identity, not
+##               checked here)
 ##   I rate      the scene's model reaches the same state after 20 s at 60 and at 90 physics ticks per second
-##   L triangle  three units, a rigid rod between every two hubs (w0 0.8): three different starts end in one relation -
-##               the same mean turn and hub rates - and a mirror-symmetric start (tangent) in another, its hubs stopped
+##   L triangle  three units, a rigid rod between every two hubs (w0 0.8): settled (900-960 s), four starts - the
+##               threefold-symmetric one included - end in one relation, the same mean turn and hub rates
 ##   J scene     each setup builds its units, rods and pens; the ink grows; the button steps to the next start and
 ##               clears the paper
 ##   K tower     floor 210's hall builds the four stations from its sidecar, under the biome court
@@ -63,7 +65,7 @@ func _model_checks() -> void:
 	for u in pair.units:
 		var c: Vector3 = u.cmd
 		bounded = bounded and absf(c.x) <= float(pair.P.vmax) + 1e-9 and absf(c.y) <= float(pair.P.wmax) + 1e-9 and absf(c.z) <= float(pair.P.hmax) + 1e-9
-	_check("B local: the rule reads %s - its own hub angle and the force at its own pin - and each unit acts through three bounded rates" % str(args), args == ["p", "phi", "f_par", "f_lat"] and bounded, {"args": args})
+	_check("B local: the rule's signature is %s - its own hub angle and the force at its own pin (the body, on reading, uses nothing else; that force carries the rod's direction and tension, all a unit knows of its partner)" % str(args), args == ["p", "phi", "f_par", "f_lat"] and bounded, {"args": args})
 	# C - one unit's rosette closes
 	var one = Sim.make("one", "c")
 	var period := TAU / float(one.P.w0)
@@ -87,28 +89,20 @@ func _model_checks() -> void:
 			rates_ok = rates_ok and is_equal_approx(c.x, float(apart.P.v0)) and is_equal_approx(c.y, float(apart.P.w0)) and is_equal_approx(c.z, float(apart.P.h0))
 	_check("D control: without the rod the two units draw congruent rosettes (%.3f and %.3f m of ink in two turns) at exactly the programmed rates" % [lengths[0], lengths[1]], absf(lengths[0] - lengths[1]) < .005 * lengths[0] and rates_ok, {"lengths": lengths})
 	# E - the relation, from three starts
-	# within a minute the three starts fall onto one relation (compared over 60-120 s); then all three slide together,
-	# breathing, from about -27 deg toward about -77 deg as the orbit spirals in - compared again over 480-540 s
+	# settled, after about ten minutes: compare 900-960 s (earlier windows catch a transient)
 	var rel := {}
-	var late := {}
 	for arr in ["c", "parallel", "crossed"]:
-		var sim = Sim.make("pair", arr)
-		rel[arr] = _relation(sim, 60.0, 120.0)
-		late[arr] = _relation(sim, 480.0, 540.0)
-	var hl: Array = late.values().map(func(r): return float(r.heading_deg))
-	var ds: Array = rel.values().map(func(r): return float(r.distance))
-	var hs: Array = rel.values().map(func(r): return float(r.heading_deg))
-	var ws: Array = rel.values().map(func(r): return [float(r.w[0]), float(r.w[1])])
-	var shared := true
-	for w in ws:shared = shared and absf(float(w[0]) - float(w[1])) < .02 and maxf(float(w[0]), float(w[1])) < .15   # the relation breathes: within a minute the roles swap a little
-	var spread_d: float = ds.max() - ds.min()
-	var spread_h: float = hs.max() - hs.min()
+		rel[arr] = _relation(Sim.make("pair", arr), 900.0, 960.0)
+	var hs: Array = rel.values().map(func(r): return absf(float(r.heading_deg)))   # either unit may lead
+	var ws: Array = rel.values().map(func(r): return (float(r.w[0]) + float(r.w[1])) / 2.0)
+	var hubs: Array = rel.values().map(func(r): return (float(r.h[0]) + float(r.h[1])) / 2.0)
+	var one_rel: bool = hs.max() - hs.min() < 2.0 and ws.max() - ws.min() < .01 and hubs.max() - hubs.min() < .03
+	var own: bool = ws.min() > .15 and ws.max() < .22 and hubs.max() < .85   # not the programmed 0.25 and 1.0
 	var stretch_ok: bool = rel.values().all(func(r): return float(r.max_stretch_mm) < 10.0)
-	var spread_late: float = hl.max() - hl.min()
-	_check("E relation: a minute in, three starts hold one relation - %.3f-%.3f m apart at %.1f to %.1f deg, both units turning at %s rad/s (programmed %.2f); eight minutes in they are still together at %.1f to %.1f deg; the rod held to %.1f mm" % [ds.min(), ds.max(), hs.min(), hs.max(), str(ws.map(func(w): return [snappedf(float(w[0]), .001), snappedf(float(w[1]), .001)])), float(Sim.defaults().w0), hl.min(), hl.max(), rel.values().map(func(r): return float(r.max_stretch_mm)).max()], spread_d < .015 and spread_h < 3.0 and spread_late < 6.0 and shared and stretch_ok, {"early": rel, "late": late})
+	_check("E relation: settled (900-960 s), three starts hold one relation - %.1f to %.1f deg between headings, turning %s rad/s (programmed %.2f), hubs %s (programmed %.2f); the rod held to %.1f mm" % [hs.min(), hs.max(), str(ws.map(func(v): return snappedf(v, .001))), float(Sim.defaults().w0), str(hubs.map(func(v): return snappedf(v, .001))), float(Sim.defaults().h0), rel.values().map(func(r): return float(r.max_stretch_mm)).max()], one_rel and own and stretch_ok, rel)
 	# F - not the sum
-	var joined = Sim.make("pair", "c")
-	var free = Sim.make("apart", "c")
+	var joined = Sim.make("pair", "c", {}, .5, false)   # both uncentred: the same frame
+	var free = Sim.make("apart", "c", {}, .5, false)
 	var gap := 0.0;var n := 0
 	while joined.time < 120.0 - 1e-9:
 		joined.tick();free.tick()
@@ -116,38 +110,42 @@ func _model_checks() -> void:
 			var sup: Vector2 = (free.pin(0) + free.pin(1)) * .5
 			gap += joined.pen_point(0).distance_to(sup);n += 1
 	gap /= maxf(n, 1)
-	_check("F not a sum: the pen on the rod runs on average %.2f m from where the midpoint of the two free motions would be" % gap, gap > .3, {"mean_gap_m": gap})
-	# G - the second mode
+	_check("F the rod: the pen runs on average %.2f m from where the rod's midpoint would be if the rod pulled on nothing (60-120 s)" % gap, gap > .3, {"mean_gap_m": gap})
+	# G - the point-symmetric start: a symmetry, and how unstable it is
 	var face = Sim.make("pair", "facing")
-	var pen_pts := [];var unit_path := 0.0;var last: Vector2 = Vector2(float(face.units[0].x), float(face.units[0].z))
+	var start_pen: Vector2 = face.pen_point(0);var wander := 0.0
 	while face.time < 120.0 - 1e-9:
-		face.tick()
-		var here := Vector2(float(face.units[0].x), float(face.units[0].z));unit_path += here.distance_to(last);last = here
-		if face.time >= 60.0:pen_pts.append(face.pen_point(0))
-	var c := Vector2.ZERO
-	for q in pen_pts:c += q
-	c /= maxf(pen_pts.size(), 1)
-	var wander := 0.0
-	for q in pen_pts:wander = maxf(wander, (q as Vector2).distance_to(c))
-	_check("G second mode: from the mirrored start the units travel %.1f m in 120 s while the pen stays within %.2f m of one spot" % [unit_path, wander], unit_path > 5.0 and wander < .2, {"unit_path_m": unit_path, "pen_wander_m": wander})
-	# H - a kick is forgotten (offset hub); remembered with the hub on the axle
-	var base := _relation(_pair_at({}), 240.0, 300.0)
-	var kicked := _relation(_pair_at({}), 240.0, 300.0, 120.0)
-	var base0 := _relation(_pair_at({"a_hub": 0.0}), 240.0, 300.0)
-	var kicked0 := _relation(_pair_at({"a_hub": 0.0}), 240.0, 300.0, 120.0)
-	var back := absf(wrapf(float(kicked.heading_deg) - float(base.heading_deg), -180.0, 180.0))
-	var kept := absf(wrapf(float(kicked0.heading_deg) - float(base0.heading_deg), -180.0, 180.0))
-	_check("H kick: turned 40 deg at 120 s, the pair returns to within %.1f deg of its relation; with the hub on the axle the kick stays (%.1f deg off)" % [back, kept], back < 4.0 and kept > 8.0, {"offset_hub": [base, kicked], "axle_hub": [base0, kicked0]})
+		face.tick();wander = maxf(wander, face.pen_point(0).distance_to(start_pen))
+	var nudged = Sim.make("pair", "facing")
+	var u1: Dictionary = nudged.units[1]
+	var pin1: Vector2 = nudged.pin(1);var al1: float = float(u1.th) + float(u1.ph)
+	u1.th = float(u1.th) + deg_to_rad(0.1);u1.ph = al1 - float(u1.th)
+	u1.x = pin1.x - float(nudged.P.a_hub) * cos(float(u1.th)) - float(nudged.P.r_pin) * cos(al1)
+	u1.z = pin1.y - float(nudged.P.a_hub) * sin(float(u1.th)) - float(nudged.P.r_pin) * sin(al1)
+	var face_p0: Vector2 = nudged.pen_point(0);var broke := -1.0
+	while nudged.time < 600.0 - 1e-9 and broke < 0.0:
+		nudged.tick()
+		if nudged.pen_point(0).distance_to(face_p0) > .1:broke = float(nudged.time)
+	_check("G symmetry: from the point-symmetric start the pen, the symmetry's centre, stays within %.1f mm for 120 s; turn one unit 0.1 deg and the pen leaves after %.0f s - an unstable state, not a mode" % [wander * 1000.0, broke], wander < .001 and broke > 0.0, {"pen_wander_m": wander, "broke_after_s": broke})
+	# H - kicks: which are forgotten, and where the others go
+	var base := _relation(Sim.make("pair", "c"), 900.0, 960.0)
+	var kicks := [[120.0, 1, 40.0], [120.0, 1, -40.0], [120.0, 0, 40.0], [300.0, 1, 40.0], [300.0, 0, -40.0], [300.0, 1, -40.0]]
+	var forgot := 0;var elsewhere := []
+	for k in kicks:
+		var r := _relation(Sim.make("pair", "c"), 900.0, 960.0, float(k[0]), int(k[1]), float(k[2]))
+		if absf(absf(float(r.heading_deg)) - absf(float(base.heading_deg))) < 2.0:forgot += 1
+		else:elsewhere.append(snappedf(float(r.heading_deg), .1))
+	var second_one: bool = elsewhere.is_empty() or (elsewhere.map(func(v): return absf(float(v))).max() - elsewhere.map(func(v): return absf(float(v))).min()) < 3.0
+	_check("H kicks: of six 40-degree kicks %d are forgotten (back to %.1f deg); the rest settle at %s deg - a second relation the pair also holds" % [forgot, float(base.heading_deg), str(elsewhere)], forgot >= 3 and second_one, {"base": base, "forgotten": forgot, "elsewhere": elsewhere})
 	# L - the triangle: one relation from three starts, another from the symmetric one
 	var tri := {}
 	for arr in ["c", "scattered", "drifted", "tangent"]:
-		tri[arr] = _triangle_rates(Sim.make("triangle", arr), 150.0, 300.0)
-	var tw: Array = ["c", "scattered", "drifted"].map(func(k): return float(tri[k].w))
-	var th_: Array = ["c", "scattered", "drifted"].map(func(k): return float(tri[k].h))
-	var one_relation: bool = tw.max() - tw.min() < .02 and th_.max() - th_.min() < .02 and tw.min() > .40 and tw.max() < .56
-	var other_mode: bool = absf(float(tri.tangent.h)) < .05 and absf(float(tri.tangent.w) - float(tw[0])) > .2
+		tri[arr] = _triangle_rates(Sim.make("triangle", arr), 900.0, 960.0)
+	var tw: Array = tri.values().map(func(r): return float(r.w))
+	var th_: Array = tri.values().map(func(r): return float(r.h))
+	var one_relation: bool = tw.max() - tw.min() < .01 and th_.max() - th_.min() < .015 and tw.min() > .44 and tw.max() < .52 and th_.max() < .42
 	var held: bool = tri.values().all(func(r): return float(r.max_stretch_mm) < 15.0)
-	_check("L triangle: three starts end in one relation - turning %s rad/s on average (programmed 0.8), hubs %s (programmed 1.0); the symmetric start in another, hubs %.3f, turning %.3f; rods held to %.1f mm" % [str(tw.map(func(v): return snappedf(v, .001))), str(th_.map(func(v): return snappedf(v, .001))), float(tri.tangent.h), float(tri.tangent.w), tri.values().map(func(r): return float(r.max_stretch_mm)).max()], one_relation and other_mode and held, tri)
+	_check("L triangle: settled (900-960 s), four starts end in one relation - turning %s rad/s on average (programmed 0.8), hubs %s (programmed 1.0); rods held to %.1f mm" % [str(tw.map(func(v): return snappedf(v, .001))), str(th_.map(func(v): return snappedf(v, .001))), tri.values().map(func(r): return float(r.max_stretch_mm)).max()], one_relation and held, tri)
 
 ## The triangle's mean turn and hub rate over all three units, [t0, t1].
 func _triangle_rates(sim, t0: float, t1: float) -> Dictionary:
@@ -174,15 +172,15 @@ func _pair_at(params: Dictionary):
 	return sim
 
 ## Run `sim` to t1 and describe the relation over [t0, t1]; optionally kick unit 2 by 40 degrees at `kick_at`.
-func _relation(sim, t0: float, t1: float, kick_at := -1.0) -> Dictionary:
+func _relation(sim, t0: float, t1: float, kick_at := -1.0, kick_unit := 1, kick_deg := 40.0) -> Dictionary:
 	var dist := 0.0;var sx := 0.0;var sy := 0.0;var w := [0.0, 0.0];var h := [0.0, 0.0];var n := 0;var max_stretch := 0.0;var kicked := false
 	while sim.time < t1 - 1e-9:
 		if kick_at >= 0.0 and not kicked and sim.time >= kick_at:
 			kicked = true
-			var u: Dictionary = sim.units[1]
-			var pin: Vector2 = sim.pin(1)
+			var u: Dictionary = sim.units[kick_unit]
+			var pin: Vector2 = sim.pin(kick_unit)
 			var al: float = float(u.th) + float(u.ph)
-			u.th = float(u.th) + deg_to_rad(40.0);u.ph = al - float(u.th)
+			u.th = float(u.th) + deg_to_rad(kick_deg);u.ph = al - float(u.th)
 			u.x = pin.x - float(sim.P.a_hub) * cos(float(u.th)) - float(sim.P.r_pin) * cos(al)
 			u.z = pin.y - float(sim.P.a_hub) * sin(float(u.th)) - float(sim.P.r_pin) * sin(al)
 		sim.tick()
@@ -218,7 +216,6 @@ func _scene_checks() -> void:
 	var views := {}
 	for setup in layout:
 		var u: Node3D = UNIT_SCENE.instantiate();u.name = "Unit_" + setup;u.position = layout[setup];u.set_meta("config_setup", setup)
-		if setup == "pair":u.set_meta("config_paper", 3.4)
 		add_child(u)
 		views[setup] = u
 	await get_tree().physics_frame

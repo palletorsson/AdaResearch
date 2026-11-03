@@ -24,21 +24,22 @@ extends RefCounted
 ## the two pins together when stretched and apart when squeezed - equal and opposite (Newton's third law).
 ##
 ## THE RULE (`rule`) is the same function with the same numbers in every unit. It reads ONLY local things: the unit's
-## own hub angle and the force its own pin feels, in its own frame. Each unit runs its own drive (v0, w0, h0 - a
-## circle with the hub spinning) and GIVES WAY to the rod: forward speed yields to the pull along its heading, the
-## chassis turn to the torque about the axle, the hub to the torque about the hub. No unit reads another unit's
-## state; there is no central controller and no precomputed path.
+## own hub angle and the force its own pin feels, in its own frame - that force carries the rod's direction and
+## tension, which is all a unit knows of its partner. Each unit drives a fixed programmed circle (v0, w0, h0) and GIVES
+## WAY, linearly, to the rod: forward speed to the pull along its heading, the chassis turn to the torque about the
+## axle, the hub to the torque about the hub. Nothing is choreographed - no path or relation is written into the rule -
+## and the shared relation below is the steady state of that coupling.
 ##
-## What came of it (Python study 2026-11-03, scratchpad unit_sims/compliance, setting S4 = this file's defaults):
-## one unit draws a closed four-loop rosette; two unjoined units draw two copies of it; two JOINED units are pulled
-## into a relation neither PROGRAMME contains (mechanically - see the levels above). Within a minute three different starts fall onto ONE relation - 0.985-0.990 m
-## apart, about 27 degrees between headings, both turning at 0.08-0.10 rad/s (programmed 0.25) with their hubs near
-## 0.64 rad/s (programmed 1.0) - and from there all three slide together, breathing, toward about 77 degrees while the
-## pair's orbit spirals in (the units' ring from about 2.1 m to 1.0 m in radius over 15 minutes); the pen on the rod
-## draws a slow wavy spiral that never retraces. A 40-degree kick to one unit's heading is forgotten. A start mirrored
-## exactly (`facing`) falls into a second mode, a dancing dumbbell with the pen nearly still - metastable: after about
-## five minutes it breaks its symmetry and wanders off. With the hub on the axle (a_hub = 0) an exact conservation law,
-## not the interaction, decided the outcome and a kick was remembered; 12 cm ahead breaks it.
+## What came of it (a Python study of three rule families, 2026-11-03, then this model run to 960 s; checked again by
+## an adversarial review): one unit draws a closed four-loop rosette; two unjoined units draw two copies of it. Two
+## JOINED units, from 10 of 11 starts tried, settle within about ten minutes into one relation neither programme
+## contains: about 73 degrees between headings (either unit leading), both turning at about 0.185 rad/s and their hubs
+## at about 0.77, against a programmed 0.25 and 1.0. It is not the only relation: two of six 40-degree kicks move the
+## pair into a second one near 45 degrees (0.13 rad/s) that holds; the other four are forgotten. For those ten minutes
+## the pen on the rod spirals inwards; then it keeps to a ring under a metre in radius and draws over its own lines.
+## `facing` is point-symmetric (turned half a turn): the symmetry holds the pen still at its centre while the units
+## dance - an unstable state that rounding error breaks, not a mode. The hub sits 12 cm ahead of the axle because on
+## the axle the rule conserves g_h*dtheta - g_w*dphi exactly, so the start, not the interaction, fixed the outcome.
 ##
 ## Fixed step: DT = 1/120 s in SUB = 4 sub-steps, Jacobi order (every pin force from the same state before any unit
 ## moves, so the forces stay equal and opposite). Call advance(seconds) with any frame delta; the state after a given
@@ -62,7 +63,7 @@ static func defaults() -> Dictionary:
 ## The starting arrangements, in model metres, exactly as the Python study placed them (unit 2's pin one rod length
 ## from unit 1's), and each one's long-run CENTRE: the mean of the two unit centres over 120-300 s there. make()
 ## subtracts the centre, so the orbit lands on the middle of the paper (the dynamics do not care where they start).
-## `facing` is the mirror-symmetric start - the second mode.
+## `facing` is the point-symmetric start (see above).
 const ARRANGEMENTS := {
 	"c": {"units": [[-0.5, -0.3, 0.0, 1.5707963267948966], [0.6552446958219177, -0.10681463890439558, 2.1, -0.4]], "centre": [-0.821, -0.532]},
 	"parallel": {"units": [[-0.5, -0.5, 0.0, 0.0], [-0.35, 0.35, 0.0, 1.5707963267948966]], "centre": [-0.011, 2.167]},
@@ -74,10 +75,11 @@ const ORDER := ["c", "parallel", "crossed", "facing"]
 ## THREE UNITS IN A TRIANGLE (Palle, 2026-11-03: "can we make three units in a triangle"): three identical units, a
 ## rigid rod between every two hub pins. The rule is unchanged - each unit feels the SUM of the forces at its own pin.
 ## With the pair's programme (w0 0.25) six of eight random starts fall onto one relation, but it travels a circle about
-## 7 m across; with a tighter own circle (w0 0.8 - the triangle's programme, TRIANGLE_PARAMS) nine of eleven starts end
-## in ONE relation - the three turning on average at 0.48 rad/s (programmed 0.8), their hubs at 0.36 (programmed
-## 1.0) - and the pens draw a dense spirograph ring; mirror-symmetric starts (`tangent`) fall into a second mode, the
-## hubs stopped and the triangle counter-rotating. Tendons (cords that only pull) went slack and let the units part.
+## 7 m across; with a tighter own circle (w0 0.8 - the triangle's programme, TRIANGLE_PARAMS) every start tried settles
+## by 900 s into ONE relation - the three turning on average at 0.48 rad/s (programmed 0.8), their hubs at 0.36
+## (programmed 1.0) - and the pens weave a dense spirograph ring. The threefold-symmetric start (`tangent`) holds its
+## symmetry for minutes (its hubs nearly still, the triangle turning backwards) and then joins the same relation.
+## Tendons (cords that only pull) went slack and let the units part. Level 2 again: mechanical coupling, no adaptation.
 ## Starts: the three units exactly as the exploration placed them (each pin on an equilateral triangle of side L), and
 ## each one's long-run centre (the pins' centroid averaged over 150-300 s).
 const TRIANGLE_PARAMS := {"w0": 0.8}

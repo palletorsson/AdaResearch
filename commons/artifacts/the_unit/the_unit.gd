@@ -11,19 +11,21 @@ extends Node3D
 ##          apart   two identical units with the pair's starts and NO rod, a pen on each: two copies of the rosette
 ##                  (the control - the same units, the same rule, only the rod is missing)
 ##          triangle  three units, a rod between every two hubs, a plate between the rods with a pen at its centre
-##                  and a pen at each rod's middle; with a tighter own circle (w0 0.8) nine of eleven starts end in
+##                  and a pen at each rod's middle; with a tighter own circle (w0 0.8) every start tried settles into
 ##                  one relation, the four pens weaving a spirograph ring (unit_sim.gd, TRIANGLES)
 ##          pair    the same two units joined hub pin to hub pin by a 1 m rod, the pen at the rod's middle: within a
-##                  minute the rod pulls them into one relation neither programme contains, then they turn it slowly
-##                  together while their orbit spirals in; the pen draws a slow wavy spiral that never retraces
+##                  few minutes the rod pulls them into a relation neither programme contains (most starts settle in
+##                  about ten minutes; a second relation exists); the pen spirals inwards, then keeps to a ring
 ##   arrangement  c | parallel | crossed | facing - how the pair starts (facing, mirror-symmetric, is the second mode,
-##          a dumbbell that holds about five minutes, then breaks and wanders until the fence starts the next drawing);
+##          point-symmetric: the pen stays put until rounding error breaks the symmetry, then the fence or the button
+##          starts the next drawing);
 ##          the button on the stem steps to the next one and starts the drawing again
 ##   scale_factor  the whole machine and its drawing, model metres to metres; 0 = by setup (0.7 - a unit 28 cm long,
 ##          the pair's ring about 3 m - and 1.0 for the triangle, whose drawing is about 1.2 m)
 ##
-## Each unit: an open frame on two wheels and a front caster, a turntable hub 12 cm ahead of the axle with a pin on its
-## rim; a pen drops from the pin through the open frame to the paper, a rod joins two pins at the top. Wheels turn with
+## Each unit: an open frame on two wheels and a front caster, its rails wide enough that the hub pin's circle never
+## crosses them, a mast and boom holding a turntable hub 12 cm ahead of the axle from above, a pin on its rim; a pen
+## drops from the pin through the open middle to the paper, a rod joins two pins under the boom. Wheels turn with
 ## the drive. The ink is one MultiMesh per pen (append-only, a ring that overwrites its oldest marks after `capacity`),
 ## one draw call each, no texture uploads. A readout over the button names the relation as it forms: the units' own
 ## turn and hub rates against the programmed 0.25 and 1.0 rad/s, the distance between them, the rod's stretch.
@@ -58,9 +60,13 @@ const AVG_SECONDS := 10.0
 
 const SPACING := 0.008              ## model metres between ink marks
 const WIDTH := 0.012                ## model metres, ink line width
-const PIN_TOP := 0.24               ## model height of the pin tops, where rods attach
+const PIN_TOP := 0.25               ## model height of the pin tops, where rods attach (under the boom at 0.33)
+const HUB_Y := 0.19                 ## model height of the turntable's middle
 const WHEEL_R := 0.06
-const TRACK := 0.33                 ## wheel to wheel
+const TRACK := 0.47                 ## wheel to wheel, outside the rails at +-0.20
+## How far a unit may wander from the station's centre, in MODEL metres, before the drawing starts again: past every
+## start's measured excursion, and fixed, so a different paper or scale cannot move the fence onto a drawing.
+const FENCE := {"pair": 3.2, "apart": 2.6, "one": 1.5, "triangle": 1.9}
 
 const KEYS := ["setup", "arrangement", "scale_factor", "paper", "pen_frac", "capacity", "show_button", "show_readout", "lamp", "running"]
 
@@ -78,6 +84,7 @@ func apply_grid_config(config: Dictionary) -> void:
 		if key == "setup" and not val in ["pair", "triangle", "apart", "one"]:
 			push_warning("TheUnit: unknown setup '%s'" % val);continue
 		set(key, val)
+	capacity = maxi(capacity, 64)
 	if not Sim.has_arrangement(setup, arrangement):
 		push_warning("TheUnit: no arrangement '%s' for %s - using c" % [arrangement, setup]);arrangement = "c"
 	_rebuild_if_changed()
@@ -98,6 +105,7 @@ func _rebuild_if_changed() -> void:
 	for c in get_children():
 		remove_child(c);c.free()
 	_units.clear();_rods.clear();_pens.clear();_plate = null
+	_avg.clear();_readout_clock = 0.0
 	_build()
 
 func paper_side() -> float:
@@ -132,32 +140,38 @@ func _build() -> void:
 	edge.material_override = _mat(Color("2b2f33"), .0, .8);edge.position.y = .002;add_child(edge)   # 0..4 mm, under the sheet at 6 mm
 	sim = Sim.make(setup, arrangement, {}, pen_frac)
 	var frame_mat := _mat(Color("3a3f45"), .6, .4)
-	var hub_mat := _mat(Color("ece7dc"), .0, .6)
+	var hub_mat := _mat(Color("c9a46a"), .5, .45)   # brass: the turntable reads against the paper
 	var stripe_mat := _mat(Color("d8432e"), .0, .5)
 	var rubber := _mat(Color("1b1b1b"), .0, .9)
 	for i in sim.units.size():
 		var root := Node3D.new();root.name = "Unit%d" % i;field.add_child(root)
-		# the open frame: two rails, the axle bar, the hub's cross bar; wheels outside, a caster in front
-		_box(root, "RailL", Vector3(.40, .025, .02), Vector3(.10, .075, -.13), frame_mat)
-		_box(root, "RailR", Vector3(.40, .025, .02), Vector3(.10, .075, .13), frame_mat)
-		_box(root, "Axle", Vector3(.02, .02, .28), Vector3(0, .06, 0), frame_mat)
-		_box(root, "FrontBar", Vector3(.02, .025, .28), Vector3(.30, .075, 0), frame_mat)
-		_box(root, "BackBar", Vector3(.02, .025, .28), Vector3(-.10, .075, 0), frame_mat)
-		_box(root, "HubBar", Vector3(.02, .02, .28), Vector3(.12, .09, 0), frame_mat)
-		_cyl(root, "HubPost", .012, .09, Vector3(.12, .135, 0), frame_mat)
-		_cyl(root, "CasterPost", .008, .05, Vector3(.28, .05, 0), frame_mat)
-		_sphere(root, "Caster", .02, Vector3(.28, .02, 0), rubber)
+		# the open frame: the pin circles r_pin round the hub (x -0.03..0.27, z +-0.15), so the rails stand at z +-0.20,
+		# the bars at x -0.09 and 0.33, stub axles reach out to the wheels, and a mast at the back carries the hub on a
+		# boom from above (0.33 m up, over the rods at 0.25) - nothing crosses the pen's path
+		var hx: float = float(sim.P.a_hub)
+		_box(root, "RailL", Vector3(.44, .025, .02), Vector3(.12, .075, .20), frame_mat)
+		_box(root, "RailR", Vector3(.44, .025, .02), Vector3(.12, .075, -.20), frame_mat)
+		_box(root, "FrontBar", Vector3(.02, .025, .42), Vector3(.33, .075, 0), frame_mat)
+		_box(root, "BackBar", Vector3(.02, .025, .42), Vector3(-.09, .075, 0), frame_mat)
+		_box(root, "AxleL", Vector3(.02, .02, .05), Vector3(0, WHEEL_R, .22), frame_mat)
+		_box(root, "AxleR", Vector3(.02, .02, .05), Vector3(0, WHEEL_R, -.22), frame_mat)
+		_cyl(root, "Mast", .012, .27, Vector3(-.09, .075 + .135, 0), frame_mat)
+		_box(root, "Boom", Vector3(hx + .11, .02, .025), Vector3((hx - .09) / 2.0, .335, 0), frame_mat)
+		_cyl(root, "Spindle", .01, .135, Vector3(hx, HUB_Y + .01 + .0675, 0), frame_mat)
+		_cyl(root, "CasterPost", .008, .05, Vector3(.33, .05, 0), frame_mat)
+		_sphere(root, "Caster", .02, Vector3(.33, .02, 0), rubber)
 		var wheels := []
 		for s in [-1.0, 1.0]:
-			var w := Node3D.new();w.name = "Wheel%s" % ("L" if s < 0 else "R");w.position = Vector3(0, WHEEL_R, s * TRACK / 2.0);root.add_child(w)
+			# local -z is the model's right side, local +z its left (root.rotation.y = -heading)
+			var w := Node3D.new();w.name = "Wheel%s" % ("R" if s < 0 else "L");w.position = Vector3(0, WHEEL_R, s * TRACK / 2.0);root.add_child(w)
 			var tyre := _cyl(w, "Tyre", WHEEL_R, .03, Vector3.ZERO, rubber);tyre.rotation.x = PI / 2
 			_box(w, "Spoke", Vector3(WHEEL_R * 1.6, .012, .032), Vector3.ZERO, frame_mat)
 			wheels.append(w)
 		# the hub: a turntable, a red stripe from the centre to the pin, the pin on its rim
-		var hub := Node3D.new();hub.name = "Hub";hub.position = Vector3(float(sim.P.a_hub), .18, 0);root.add_child(hub)
+		var hub := Node3D.new();hub.name = "Hub";hub.position = Vector3(hx, HUB_Y, 0);root.add_child(hub)
 		_cyl(hub, "Disc", .17, .02, Vector3.ZERO, hub_mat)
 		_box(hub, "Stripe", Vector3(float(sim.P.r_pin), .004, .025), Vector3(float(sim.P.r_pin) / 2.0, .012, 0), stripe_mat)
-		_cyl(hub, "Pin", .014, PIN_TOP - .18 + .01, Vector3(float(sim.P.r_pin), (PIN_TOP - .18) / 2.0, 0), frame_mat)
+		_cyl(hub, "Pin", .014, PIN_TOP - HUB_Y, Vector3(float(sim.P.r_pin), (PIN_TOP - HUB_Y) / 2.0, 0), frame_mat)
 		_units.append({"root": root, "hub": hub, "wheels": wheels, "spin": [0.0, 0.0]})
 	for j in sim.rods.size():
 		var bar := _cyl(field, "Rod%d" % j, .012, 1.0, Vector3.ZERO, _mat(Color("6f7880"), .7, .35))
@@ -170,11 +184,11 @@ func _build() -> void:
 		var ink: Color = INKS[j] if setup == "triangle" else (INKS[0] if setup == "pair" else (INKS[1] if j == 0 else INKS[2]))
 		var holder := Node3D.new();holder.name = "Pen%d" % j;field.add_child(holder)
 		var on_rod: bool = sim.pens[j].has("rod") or sim.pens[j].has("plate")
-		var top := PIN_TOP if on_rod else .18
+		var top := PIN_TOP if on_rod else HUB_Y - .01   # a hub pen hangs from the pin, under the turntable
 		_cyl(holder, "Barrel", .011, top - .02, Vector3(0, (top - .02) / 2.0 + .02, 0), _mat(Color("dcd6c8"), .0, .6))
 		_cyl(holder, "Tip", .006, .03, Vector3(0, .015, 0), _mat(ink, .0, .5))
 		var mm := MultiMesh.new();mm.transform_format = MultiMesh.TRANSFORM_3D
-		var seg := BoxMesh.new();seg.size = Vector3(1.0, .0015, WIDTH);mm.mesh = seg
+		var seg := PlaneMesh.new();seg.size = Vector2(1.0, WIDTH);mm.mesh = seg   # two triangles a mark, flat on the paper
 		mm.instance_count = capacity;mm.visible_instance_count = 0
 		var half := side / sf / 2.0 + .5
 		mm.custom_aabb = AABB(Vector3(-half, 0, -half), Vector3(half * 2.0, .02, half * 2.0))
@@ -196,7 +210,8 @@ func _build_furniture(side: float) -> void:
 		stem.name = "Stem"
 		_box(self, "Plate", Vector3(.3, .02, .2), front + Vector3(0, .9, 0), _mat(Color("263638"), .0, .6))
 		var scene: PackedScene = load("res://commons/interactables/push_button.tscn")
-		button = scene.instantiate();button.name = "NextButton";add_child(button);button.position = front + Vector3(0, .92, 0)
+		button = scene.instantiate();button.name = "NextButton";add_child(button)
+		button.rotation = Vector3.ZERO;button.position = front + Vector3(0, .91, 0)   # cap up, on the plate
 		if button.has_signal("pressed"):button.pressed.connect(func(): restart(true))
 	if show_readout:
 		readout = Label3D.new();readout.name = "Readout";readout.font_size = 26;readout.pixel_size = .0035;readout.modulate = Color("e5efe9")
@@ -239,7 +254,7 @@ func _sync(dt := 0.0) -> void:
 		(view.hub as Node3D).rotation = Vector3(0, -float(u.ph), 0)
 		var cmd: Vector3 = u.cmd
 		for s in 2:
-			var side := -1.0 if s == 0 else 1.0
+			var side := 1.0 if s == 0 else -1.0   # wheel 0 is on the right: turning left, it is the outer wheel
 			var rim := cmd.x + cmd.y * side * TRACK / 2.0   # each wheel's ground speed
 			view.spin[s] = float(view.spin[s]) + rim * dt / WHEEL_R
 			(view.wheels[s] as Node3D).rotation = Vector3(0, 0, -float(view.spin[s]))
@@ -296,7 +311,7 @@ func _average(dt: float) -> void:
 
 ## If a unit wanders off its paper (a start that never settles), begin again from the next arrangement.
 func _fence() -> void:
-	var limit := paper_side() / scale_used() / 2.0 + .3
+	var limit: float = FENCE.get(setup, 3.2)
 	for u in sim.units:
 		if absf(float(u.x)) > limit or absf(float(u.z)) > limit:
 			restart(true)

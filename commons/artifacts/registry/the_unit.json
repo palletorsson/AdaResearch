@@ -20,15 +20,14 @@
       "scene": "res://commons/artifacts/the_unit/the_unit.tscn",
       "class_name": "TheUnit",
       "name": "The Unit",
-      "description": "A small robot with exactly three controllable actions: move forward or back, turn its chassis, turn an independent hub that carries a pin. One unit with a pen on the pin draws a closed four-loop rosette. Two identical units joined hub pin to hub pin by a 1 m rod, each keeping its own drive and giving way to the force at its own pin (what a back-drivable motor does), are pulled into one relation neither programme contains: within a minute three different starts hold one distance and angle, both units turning at about a third of their programmed rate, and the pen on the rod draws a slow wavy spiral. Three units in a triangle of rods (a tighter programme, w0 0.8) end in one relation from nine of eleven starts, their pens weaving a spirograph ring. This is mechanical self-organisation (level 2 of Palle's three), not units that adapt (level 3). setup pair | triangle | apart (the control: same units, same starts, no rod) | one. The model and the rule: unit_sim.gd. Bench: commons/testing/probe_the_unit.tscn.",
+      "description": "A small robot with exactly three controllable actions: move forward or back, turn its chassis, turn an independent hub that carries a pin. One unit with a pen on the pin draws a closed four-loop rosette. Two identical units joined hub pin to hub pin by a 1 m rod, each driving a fixed circle and giving way, linearly, to the force at its own pin (what a back-drivable motor does), settle from most starts within about ten minutes into one relation neither programme contains: about 73 degrees between headings, turning at about three quarters of their programmed rate (0.185 against 0.25 rad/s, hubs 0.77 against 1.0); a second relation near 45 degrees also holds. Three units in a triangle of rods (a tighter programme, w0 0.8) settle into one relation from every start tried, their pens weaving a spirograph ring. Mechanical coupling (level 2 of Palle's three), not units that adapt (level 3). setup pair | triangle | apart (the control: same units, same starts, no rod) | one. The model and the rule: unit_sim.gd. Bench: commons/testing/probe_the_unit.tscn.",
       "category": "the_unit",
       "complexity": "intermediate",
       "include_in_map_data": true,
       "map_ready": true,
       "default_params": {
         "setup": "pair",
-        "arrangement": "c",
-        "scale_factor": 0.7
+        "arrangement": "c"
       },
       "tags": [
         "robot",
