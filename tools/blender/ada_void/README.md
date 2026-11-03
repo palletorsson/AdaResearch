@@ -77,6 +77,20 @@ with the sun from `sun_matrix`; a camera at the route waypoint **Arrival** (eye
 height 1.6 m, 28 mm) looking along the route to the next waypoint. Optional thin
 fog volume in the export's fog colour. Then F12, or `render_setup.render_still`.
 
+### The tower from outside
+
+`tower.py` imports several floors with the same `build_floor`, hangs each under an empty at its storey from
+`commons/void/layout.json` (`levels[i]`: 0, −6, −12 … in Godot y, Blender z), lights them with the export's sky and
+sun, and photographs the stack from a raised three-quarter view outside, framing all of it:
+
+```
+blender -b -P tools/blender/ada_void/tower.py -- --floors 0-4 --out ada_run/blender/void_tower_0-4.png     --blend ada_run/blender/void_tower_0-4.blend --samples 256 --margin 0.9 --elevation 18
+```
+
+`--floors` takes ranges and lists (`0-4`, `3,7,10-12`); `--azimuth`, `--elevation`, `--lens`, `--margin` and
+`--exposure` move the camera and the light; a JSON beside the PNG records each floor's level, counts and timings.
+Floors 0–4 import in about 2.5 minutes; the render takes about 30 s on OptiX at 256 samples.
+
 ### What does not survive the glTF export
 
 The export is a photograph of one moment of built Godot scenes
