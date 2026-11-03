@@ -44,6 +44,14 @@ extends RefCounted
 ## dance - an unstable state that rounding error breaks, not a mode. The hub sits 12 cm ahead of the axle because on
 ## the axle the rule conserves g_h*dtheta - g_w*dphi exactly, so the start, not the interaction, fixed the outcome.
 ##
+## PHYSICS AND CONTROLLER (2026-11-03, Experiments 1 and 2): read as physics, the force-yield above is a compliant,
+## back-drivable DRIVE - its mobility (g_v, g_w, g_h) is passive - and (v0, w0, h0) is the drive's COMMAND. A unit's
+## CONTROLLER (`ctrl`) sets that command each tick: "programme" keeps the constant (v0, w0, h0) and senses nothing (the
+## open-loop baseline; everything above is this). A sensing controller computes the command from the unit's OWN local
+## sensors - its hub angle, its own pin's force in its own frame, and each link's bearing, length and tension at its own
+## attachment (link_sense) - with memory if it needs it; the passive mobility stays on either way, so switching
+## sensing off and on is the ablation. drive() is the same physics for any command; rule() is drive() at the programme.
+##
 ## Fixed step: DT = 1/120 s in SUB = 4 sub-steps, Jacobi order (every pin force from the same state before any unit
 ## moves, so the forces stay equal and opposite). Call advance(seconds) with any frame delta; the state after a given
 ## simulated time does not depend on the frame rate. Probe: commons/testing/probe_the_unit.tscn.
@@ -52,9 +60,9 @@ const DT := 1.0 / 120.0
 const SUB := 4
 
 var P := {}
-var units: Array = []     ## each {x, z, th, ph, cmd: Vector3(v, w, h), force: Vector2 (world), skid: float}
+var units: Array = []     ## each {x, z, th, ph, cmd: Vector3(v, w, h), force: Vector2 (world), skid: float, ctrl, mem}
 var rods: Array = []      ## each {a: int, b: int, L: float}
-var pens: Array = []      ## each {unit: int} (on that unit's hub pin) or {rod: int, frac: float} (on a rod)
+var pens: Array = []      ## each {unit: int} (its hub pin), {rod: int, frac} (on a rod), {plate: [..]} or {between: [a, b], frac}
 var time := 0.0
 var steps := 0
 var _carry := 0.0
@@ -118,8 +126,21 @@ static func rule(p: Dictionary, phi: float, f_par: float, f_lat: float) -> Vecto
 		clampf(float(p.w0) + float(p.g_w) * tau_c, -float(p.wmax), float(p.wmax)),
 		clampf(float(p.h0) + float(p.g_h) * tau_h, -float(p.hmax), float(p.hmax)))
 
+## THE DRIVE: the same passive compliance for any COMMAND (cv, cw, ch) - what a back-drivable motor does when its
+## controller asks for those rates and the rod pushes on it. rule() is drive() at the programme (v0, w0, h0).
+static func drive(p: Dictionary, phi: float, f_par: float, f_lat: float, cv: float, cw: float, ch: float) -> Vector3:
+	var a: float = p.a_hub
+	var r: float = p.r_pin
+	var px := a + r * cos(phi)
+	var pz := r * sin(phi)
+	var tau_c := px * f_lat - pz * f_par
+	var tau_h := (px - a) * f_lat - pz * f_par
+	return Vector3(clampf(cv + float(p.g_v) * f_par, -float(p.vmax), float(p.vmax)),
+		clampf(cw + float(p.g_w) * tau_c, -float(p.wmax), float(p.wmax)),
+		clampf(ch + float(p.g_h) * tau_h, -float(p.hmax), float(p.hmax)))
+
 func add_unit(x: float, z: float, th: float, ph: float) -> int:
-	units.append({"x": x, "z": z, "th": th, "ph": ph, "cmd": Vector3.ZERO, "force": Vector2.ZERO, "skid": 0.0})
+	units.append({"x": x, "z": z, "th": th, "ph": ph, "cmd": Vector3.ZERO, "force": Vector2.ZERO, "skid": 0.0, "ctrl": "programme", "mem": {}})
 	return units.size() - 1
 
 ## A rod between two units' hub pins; a TENDON pulls when stretched and goes slack when pushed (a cord, not a bar).
@@ -133,6 +154,11 @@ func add_pen_on_unit(i: int) -> int:
 
 func add_pen_on_rod(j: int, frac: float = .5) -> int:
 	pens.append({"rod": j, "frac": frac})
+	return pens.size() - 1
+
+## A tool point between two pins whether or not a link joins them - the unlinked pair's virtual rod middle.
+func add_pen_between(a: int, b: int, frac: float = .5) -> int:
+	pens.append({"between": [a, b], "frac": frac})
 	return pens.size() - 1
 
 ## A pen at the centroid of some units' pins - on a plate the rods between them carry.
@@ -155,6 +181,9 @@ func pen_point(j: int) -> Vector2:
 	var pen: Dictionary = pens[j]
 	if pen.has("unit"):
 		return pin(int(pen.unit))
+	if pen.has("between"):
+		var pa := pin(int(pen.between[0]))
+		return pa + float(pen.frac) * (pin(int(pen.between[1])) - pa)
 	if pen.has("plate"):
 		var c := Vector2.ZERO
 		for i in pen.plate:c += pin(int(i))
@@ -168,6 +197,31 @@ func pen_point(j: int) -> Vector2:
 func stretch(j: int) -> float:
 	var rod: Dictionary = rods[j]
 	return pin(int(rod.b)).distance_to(pin(int(rod.a))) - float(rod.L)
+
+## What unit i senses of each link at its OWN attachment (a swivel encoder and a reel or load cell at the pin): the
+## link's bearing in the unit's body frame (0 ahead, + to the left), its length, and its tension. Nothing of the other
+## unit's state is read - only where the link leaves the unit's own pin.
+func link_sense(i: int, pins: Array) -> Array:
+	var out := []
+	var u: Dictionary = units[i]
+	var c := cos(float(u.th))
+	var sn := sin(float(u.th))
+	for rod in rods:
+		var other := -1
+		if int(rod.a) == i:other = int(rod.b)
+		elif int(rod.b) == i:other = int(rod.a)
+		if other < 0:continue
+		var d: Vector2 = pins[other] - pins[i]
+		var ln := d.length()
+		var tn: float = float(P.k) * (ln - float(rod.L))
+		if tn < 0.0 and bool(rod.get("tendon", false)):tn = 0.0
+		out.append({"bearing": atan2(-d.x * sn + d.y * c, d.x * c + d.y * sn), "length": ln, "tension": tn, "rest": float(rod.L)})
+	return out
+
+## A sensing unit's command for this sub-step: [cv, cw, ch]. Controllers are added here, each reading only the unit's
+## own sensors (f_par, f_lat at its pin, its hub angle, link_sense) and its own memory `u.mem`.
+func _command(i: int, u: Dictionary, f_par: float, f_lat: float, pins: Array, ds: float) -> Array:
+	return [float(P.v0), float(P.w0), float(P.h0)]
 
 ## Run the model forward by `seconds` of simulated time in whole fixed ticks; the remainder carries to the next call.
 func advance(seconds: float) -> int:
@@ -209,7 +263,12 @@ func tick() -> void:
 			var fz: float = forces[i].y
 			var f_par := fx * c + fz * sn
 			var f_lat := -fx * sn + fz * c
-			var cmd := rule(P, float(u.ph), f_par, f_lat)
+			var cmd: Vector3
+			if str(u.get("ctrl", "programme")) == "programme":
+				cmd = rule(P, float(u.ph), f_par, f_lat)   # the open-loop baseline, bit for bit as before
+			else:
+				var c3: Array = _command(i, u, f_par, f_lat, pins, ds)
+				cmd = drive(P, float(u.ph), f_par, f_lat, float(c3[0]), float(c3[1]), float(c3[2]))
 			# the ground: the wheels hold sideways up to F_slip, past it the chassis skids
 			var excess := absf(f_lat) - float(P.F_slip)
 			var slip := (signf(f_lat) * excess / float(P.b_slip)) if excess > 0.0 else 0.0
