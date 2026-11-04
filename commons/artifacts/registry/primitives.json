@@ -23353,25 +23353,25 @@
 		"truncatedtetrahedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces. DNA: truncation is how deep the cut goes as a fraction of the body (the parameter the Archimedean family is indexed by); origin_solid decides whether the un-cut tetrahedron stands around the result as a translucent shell, so the cut reads as a subtraction. Config: #truncation:0.9#origin_solid:ghost",
+			"description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces: 4 triangles + 4 hexagons, 12 vertices, 18 edges. DNA: truncation is how far along each edge the corner is cut (1/3 = the Archimedean truncated tetrahedron, 1/2 = the cuts meet and the solid is the octahedron); origin_solid decides whether the un-cut tetrahedron stands around the result as a translucent shell, so the cut reads as a subtraction. Config: #truncation:0.2#origin_solid:ghost",
 			"dna": {
 				"promoted": "2026-07-29",
 				"stage": "2 - variation",
 				"axes": {
 					"truncation": [
 						0.1,
-						0.25,
-						0.5,
-						0.75,
-						1
+						0.2,
+						0.3333,
+						0.4,
+						0.5
 					],
 					"origin_solid": [
 						"hidden",
 						"ghost"
 					]
 				},
-				"default": "truncation=0.5, origin_solid=hidden - 0.5 reproduces the previous mesh vertex for vertex (corner vertices at ±0.1 against a body of ±0.2) and hidden is the result shown alone, so the 11 existing placements are unchanged",
-				"was": "zero exports. The artifact claims truncation is an OPERATION and then showed exactly one frozen output of it: the cut depth lived as the bare literal 0.1 in a vertex array, a ratio of one half against the body's 0.2, named nowhere. An operation you can only ever see one result of is indistinguishable from a shape.",
+				"default": "truncation=1/3 (0.3333), origin_solid=hidden - the Archimedean truncated tetrahedron, vertices the permutations of (3,1,1)*BODY/3 with an even number of minus signs, shown alone. Changed 2026-11-04: the 11 placements set no truncation, so every one now stands the real solid where it stood the old 8-vertex mesh (same ±0.2 extent, footprint unchanged)",
+				"was": "zero exports. The artifact claims truncation is an OPERATION and then showed exactly one frozen output of it: the cut depth lived as the bare literal 0.1 in a vertex array, a ratio of one half against the body's 0.2, named nowhere. An operation you can only ever see one result of is indistinguishable from a shape. Then, until 2026-11-04, the mesh itself was a self-described simplified version: the four seed corners plus four inner points closed by crossing faces, measured by platonic_study.topology() as 8 vertices, 19 edges and 8 triangular faces, not a truncated tetrahedron at any setting. truncation was a fraction of the body (0.1-1.0, default 0.5 = that mesh); it is now a fraction of the edge.",
 				"note": "origin_solid=ghost answers the question the static version could not — cut from WHAT. It closes the seed tetrahedron's four faces on the same corner vertices and stands them around the result unshaded at 16% alpha."
 			},
 			"dev_themes": [
