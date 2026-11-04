@@ -12,6 +12,15 @@ const RING_SPACING := 3.0
 const RING_START := -18.5
 const LAST_RING := RING_START+(RING_COUNT-1)*RING_SPACING
 const LOOKOUT := LAST_RING+2.0
+## The pipe around the passage (Palle, 2026-11-04): a hollow cylinder on the rings' own axis (their centre is half
+## the ladder's 4 m outside diameter up), opening just after the entry ramps and onto the lookout. 0.45 m clear of the
+## rings all round, and no wider: floor 11's route passes the limit table at z 3.4, 2.9 m from the axis, and the
+## walker's 0.2 m capsule must still clear the outer wall there (at most 2.6 m out).
+const PIPE_AXIS_Y := 2.0
+const PIPE_INNER := 2.45
+const PIPE_WALL := .15
+const PIPE_START := RING_START+1.1
+const PIPE_END := LAST_RING+1.0
 
 func _ready() -> void:
 	add_to_group("void_exterior_walk")
@@ -35,6 +44,7 @@ func _ready() -> void:
 	ladder.rotation_degrees.y=90
 	ladder.portal_count=RING_COUNT;ladder.portal_spacing=RING_SPACING;ladder.discovery=true
 	add_child(ladder)
+	pipe()
 	var arrivals:=Arrivals.new();arrivals.name="StrangeArrivals"
 	arrivals.position=Vector3(LAST_RING,1,0)
 	arrivals.ring_mesh=ladder._portals.back().mesh
@@ -53,6 +63,37 @@ func _ready() -> void:
 			var bounds := _mesh_bounds(child,child)
 			part_defaults[str(child.name)]={"position":[child.position.x,child.position.y,child.position.z],"rotation":[child.rotation_degrees.x,child.rotation_degrees.y,child.rotation_degrees.z],"bounds":[bounds.position.x,bounds.position.y,bounds.position.z,bounds.size.x,bounds.size.y,bounds.size.z]}
 			if child.has_meta("editor_label"):part_defaults[str(child.name)]["label"]=child.get_meta("editor_label")
+
+## Two open shells - the outer facing out, the inner flipped to be seen from inside - and a lip at each mouth.
+func pipe() -> void:
+	var length := PIPE_END-PIPE_START
+	var body := StaticBody3D.new();body.name="RefinementPipe"
+	body.position=Vector3((PIPE_START+PIPE_END)*.5,PIPE_AXIS_Y,0)
+	body.set_meta("editor_label","pipe around the refinement passage")
+	add_child(body)
+	var glass := StandardMaterial3D.new()
+	# Steel-blue glass: dark enough to read as a pipe against the grey hall, clear enough to keep the rings in view.
+	glass.albedo_color=Color(Color("5f7a96"),.55);glass.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass.metallic=.4;glass.roughness=.25
+	for flip in [false,true]:
+		var shell := CylinderMesh.new()
+		shell.top_radius=PIPE_INNER+(0.0 if flip else PIPE_WALL);shell.bottom_radius=shell.top_radius
+		shell.height=length;shell.radial_segments=72;shell.rings=1
+		shell.cap_top=false;shell.cap_bottom=false;shell.flip_faces=flip
+		var mesh := MeshInstance3D.new();mesh.name="Inner" if flip else "Outer";mesh.mesh=shell
+		mesh.material_override=glass;mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		mesh.rotation_degrees.z=90   # the cylinder's axis is Y; the passage runs along X
+		body.add_child(mesh)
+		var shape := CollisionShape3D.new();shape.name=mesh.name+"Shape";shape.shape=shell.create_trimesh_shape()
+		shape.rotation_degrees.z=90
+		body.add_child(shape)
+	for end in [-1,1]:
+		var lip := MeshInstance3D.new();lip.name="Lip"+("West" if end<0 else "East")
+		var torus := TorusMesh.new();torus.inner_radius=PIPE_INNER-.02;torus.outer_radius=PIPE_INNER+PIPE_WALL+.02
+		torus.rings=72;torus.ring_segments=8;lip.mesh=torus
+		lip.material_override=glass;lip.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		lip.position.x=end*length*.5;lip.rotation_degrees.z=90   # the torus lies around Y; turn it to face along X
+		body.add_child(lip)
 
 func bridge(title: String, at: Vector3, count: int) -> void:
 	var node: Node3D=Bridge.instantiate()
