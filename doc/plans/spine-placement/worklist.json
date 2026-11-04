@@ -1,0 +1,3593 @@
+{
+ "made": "2026-11-03",
+ "spine_order": [
+  "primitives",
+  "transformation",
+  "logic",
+  "array_tutorial",
+  "color",
+  "tiling",
+  "change",
+  "forces",
+  "formfinding",
+  "wavefunctions",
+  "randomness",
+  "noise",
+  "shaders",
+  "cellularautomata",
+  "fractals",
+  "lsystems",
+  "proceduralgeneration",
+  "softbodies",
+  "isosurfaces",
+  "boolean_surfaces",
+  "swarmintelligence",
+  "graphtheory",
+  "machinelearning",
+  "foundationscrisis",
+  "qfeplaboratory",
+  "postfoundationscrisis"
+ ],
+ "items": [
+  {
+   "token": "array_index_bridge",
+   "sequence": "array_tutorial",
+   "hall": "Array",
+   "role": "primary",
+   "also": [
+    "logic"
+   ],
+   "confidence": "high",
+   "reason": "Registry declares sequence array_tutorial; a 7x7 index grid whose index selects a real tile is the array-address lesson of the Array hall.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`array_index_bridge` (Array / hand selects the shaft)",
+   "status": "Void/playground only",
+   "registry": "arrays.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "belt_drive",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Intro",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "Registry category is wavefunctions; two unequal circles at a 2:1 angular ratio sit next to the unit-circle study of rotation as a relation.",
+   "question": "",
+   "fixed": [
+    "hall"
+   ],
+   "kind": "artifact",
+   "label": "`belt_drive` (Two wheels / one belt / 2:1)",
+   "status": "Void/playground only",
+   "registry": "belt_drive.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "bubble_brush",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [
+    "color"
+   ],
+   "confidence": "high",
+   "reason": "Its description reads 'A painting tool for Point Trace': dwell becomes sphere size and movement becomes a chain of points and lines.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`bubble_brush`",
+   "status": "Void/playground only",
+   "registry": "bubble_brush.json",
+   "added": "untracked"
+  },
+  {
+   "token": "stipple_jigsaw",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [
+    "change"
+   ],
+   "confidence": "high",
+   "reason": "Shares the bubble_brush registry and the point/trace tags; each punch leaves a dot, so dot spacing records speed over the interval, which is a point trace.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`stipple_jigsaw`",
+   "status": "Void/playground only",
+   "registry": "bubble_brush.json",
+   "added": "untracked"
+  },
+  {
+   "token": "care_shared_crossing",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "secondary",
+   "also": [
+    "postfoundationscrisis"
+   ],
+   "confidence": "medium",
+   "reason": "Category is transforms, and it is a movable pivot crossing built between the Rotation gantries, where a chosen centre changes reach.",
+   "question": "It is built to span the existing Void Rotation gantries. Should it go into the Trans_Rotation hall, or stay on the Void floor?",
+   "kind": "artifact",
+   "label": "`care_shared_crossing` (Care / shared crossing)",
+   "status": "Void/playground only",
+   "registry": "care_studies.json",
+   "added": "untracked"
+  },
+  {
+   "token": "chains_study_1",
+   "sequence": "postfoundationscrisis",
+   "hall": "new: PostCrisis_Chains",
+   "role": "pool",
+   "also": [
+    "qfeplaboratory"
+   ],
+   "confidence": "low",
+   "reason": "It declares no sequence. It is a worker-autonomy and care study on procedural Dream Bodies, closest to the applied-ethics and situated-computation halls of the post-crisis arc.",
+   "question": "The six Chains studies (cyborg workers built from Dream Bodies) form a six-room run in commons/void/trials/chains_studies. Should they go to a new PostCrisis_Chains hall, to CriticalAlgorithms_Applied_Ethics, or to the playground court beside worker_being?",
+   "fixed": [
+    "question"
+   ],
+   "kind": "artifact",
+   "label": "`chains_study_1` (Chains / Bodies Made for Others)",
+   "status": "Void/playground only",
+   "registry": "chains_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "chains_study_2",
+   "sequence": "postfoundationscrisis",
+   "hall": "new: PostCrisis_Chains",
+   "role": "pool",
+   "also": [
+    "qfeplaboratory"
+   ],
+   "confidence": "low",
+   "reason": "A Chains study (Animated Futures) on the shared Dream Bodies request-and-refusal mechanic, so it goes with the rest of the set.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chains_study_2` (Chains / Animated Futures)",
+   "status": "Void/playground only",
+   "registry": "chains_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "chains_study_3",
+   "sequence": "postfoundationscrisis",
+   "hall": "new: PostCrisis_Chains",
+   "role": "pool",
+   "also": [
+    "qfeplaboratory"
+   ],
+   "confidence": "low",
+   "reason": "The Refusal: refusal changes the result, matching the post-crisis theme of agency over formalised control.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chains_study_3` (Chains / The Refusal)",
+   "status": "Void/playground only",
+   "registry": "chains_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "chains_study_4",
+   "sequence": "postfoundationscrisis",
+   "hall": "new: PostCrisis_Chains",
+   "role": "pool",
+   "also": [
+    "softbodies"
+   ],
+   "confidence": "low",
+   "reason": "Model B / The Unwanted Repair is a Chains study on Dream Bodies about consent to repair. It ties to the model_b tooling and the ethics arc.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chains_study_4` (Chains / Model B / The Unwanted Repair)",
+   "status": "Void/playground only",
+   "registry": "chains_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "chains_study_5",
+   "sequence": "postfoundationscrisis",
+   "hall": "new: PostCrisis_Chains",
+   "role": "pool",
+   "also": [
+    "swarmintelligence"
+   ],
+   "confidence": "low",
+   "reason": "Workers of All Bodies, Connect is about collective negotiation of shared infrastructure, near SpeculativeComputation_Collective_Knowledge.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chains_study_5` (Chains / Workers of All Bodies, Connect)",
+   "status": "Void/playground only",
+   "registry": "chains_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "chains_study_6",
+   "sequence": "postfoundationscrisis",
+   "hall": "new: PostCrisis_Chains",
+   "role": "pool",
+   "also": [
+    "qfeplaboratory"
+   ],
+   "confidence": "low",
+   "reason": "The Occupation: residents take control of shared infrastructure, the last study in the Chains set.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chains_study_6` (Chains / The Occupation)",
+   "status": "Void/playground only",
+   "registry": "chains_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "dice_bridge",
+   "sequence": "randomness",
+   "hall": "Random_Game",
+   "role": "secondary",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "Registry category is randomness: a seeded die supplies an allowance of tiles and placement rules decide the route, a game with chance that replays its draw.",
+   "question": "It builds full size over a Void tower opening. Can it stand in a museum hall, or does it stay on the playground?",
+   "kind": "artifact",
+   "label": "`dice_bridge` (Dice Bridge / build what chance supplies)",
+   "status": "Void/playground only",
+   "registry": "dice_bridge.json",
+   "added": "untracked"
+  },
+  {
+   "token": "playground_spec_hall",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "It compiles a playground place spec (commons/modular/places) into a walkable hall. It is a building tool for Void trial floors, not an exhibit.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`playground_spec_hall` (Playground spec hall / a place spec walked)",
+   "status": "Void/playground only",
+   "registry": "display_plates.json",
+   "added": "2026-10-31"
+  },
+  {
+   "token": "flight_bay",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "A flight volume (museum_flight_box) sized for the biome court on floor 210. It is spatial infrastructure, not a teaching encounter.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`flight_bay`",
+   "status": "Void/playground only",
+   "registry": "flight_bay.json",
+   "added": "2026-11-02"
+  },
+  {
+   "token": "graffiti_stick",
+   "sequence": "color",
+   "hall": "Color_Paint",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "Three spray cans make a held gradient; each nozzle deposits exactly as the Colour Paint spray cans do.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`graffiti_stick`",
+   "status": "Void/playground only",
+   "registry": "graffiti_stick.json",
+   "added": "untracked"
+  },
+  {
+   "token": "moving_canvas",
+   "sequence": "color",
+   "hall": "Color_Paint",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "A motorised spray canvas painted by any spray tool, paired with graffiti_stick. Its rotate/scale/lift loops also teach transformation.",
+   "question": "Should the moving canvas pair with the spray tools in Color_Paint, or teach rotate/scale/lift in Trans_Playground?",
+   "kind": "artifact",
+   "label": "`moving_canvas`",
+   "status": "Void/playground only",
+   "registry": "graffiti_stick.json",
+   "added": "untracked"
+  },
+  {
+   "token": "jacquard_weaver",
+   "sequence": "tiling",
+   "hall": "Pattern_Foundry",
+   "role": "primary",
+   "also": [
+    "array_tutorial"
+   ],
+   "confidence": "high",
+   "reason": "It declares tiling, and Pattern_Foundry's blurb already asks the visitor to follow a loom recipe; the punched cards drive the repeat.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`jacquard_weaver` (Twelve-hook Jacquard loom)",
+   "status": "Void/playground only",
+   "registry": "jacquard_weaver.json",
+   "added": "2026-10-12"
+  },
+  {
+   "token": "weave_layers",
+   "sequence": "tiling",
+   "hall": "Pattern_Foundry",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "It declares tiling and opens the jacquard_weaver's loom records into layers, so it is the loom's companion in the same hall.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`weave_layers` (A pick becomes a layer)",
+   "status": "Void/playground only",
+   "registry": "jacquard_weaver.json",
+   "added": "2026-10-12"
+  },
+  {
+   "token": "matter_friction_ramp",
+   "sequence": "forces",
+   "hall": "Vectors_Act4a_KineticForces",
+   "role": "pool",
+   "also": [
+    "physicssimulation"
+   ],
+   "confidence": "high",
+   "reason": "Gravity and friction decide whether a cube slides on a tilted plank, which is the resistance theme of the kinetic-forces hall.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`matter_friction_ramp` (Matter / Let Go)",
+   "status": "Void/playground only",
+   "registry": "matter_experiments.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "matter_friction_coast",
+   "sequence": "forces",
+   "hall": "Vectors_Act4a_KineticForces",
+   "role": "pool",
+   "also": [
+    "physicssimulation"
+   ],
+   "confidence": "high",
+   "reason": "The same impulse gives different stopping distances on different contact surfaces, so the friction is measured as a result.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`matter_friction_coast` (Matter / Keep Going)",
+   "status": "Void/playground only",
+   "registry": "matter_experiments.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "matter_friction_pull",
+   "sequence": "forces",
+   "hall": "Vectors_Act4a_KineticForces",
+   "role": "pool",
+   "also": [
+    "physicssimulation"
+   ],
+   "confidence": "high",
+   "reason": "A hanging mass against static friction ('Almost Enough'), the threshold case among the friction studies.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`matter_friction_pull` (Matter / Almost Enough)",
+   "status": "Void/playground only",
+   "registry": "matter_experiments.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "matter_leaning_together",
+   "sequence": "forces",
+   "hall": "Vectors_Act4a_KineticForces",
+   "role": "secondary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "medium",
+   "reason": "A precarious gravity balance where forces cancel, with balance offsets you can tune. That matches the hall's line 'where forces cancel, form holds still'.",
+   "question": "It stands with the friction trio on Void floor 51; keep it in Kinetic Forces, or move it to FormFinding_Equilibrium as a balance study?",
+   "fixed": [
+    "sequence",
+    "hall",
+    "question"
+   ],
+   "kind": "artifact",
+   "label": "`matter_leaning_together` (Matter / Leaning Together)",
+   "status": "Void/playground only",
+   "registry": "matter_experiments.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "matter_and",
+   "sequence": "logic",
+   "hall": "Logic_AND",
+   "role": "primary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "high",
+   "reason": "Registry category is logic: a physical AND where a marble arrives only when both gaps are filled.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`matter_and` (Matter / AND)",
+   "status": "Void/playground only",
+   "registry": "matter_gates.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "mod_s_descent_model",
+   "sequence": "transformation",
+   "hall": "Trans_Playground",
+   "role": "pool",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "A modular term whose registry block declares chapter transformation (hollow section x curved path into slide, landing, slide).",
+   "question": "Should the modular terms be shown as exhibits in their declared chapter, or kept as construction kit for the Void?",
+   "kind": "artifact",
+   "label": "`mod_s_descent_model` (modular · S descent / two-storey cutaway model)",
+   "status": "Void/playground only",
+   "registry": "modular.json",
+   "added": "2026-10-24"
+  },
+  {
+   "token": "mod_boolean_s_descent_model",
+   "sequence": "boolean_surfaces",
+   "hall": "Boolean_Works",
+   "role": "pool",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "It declares chapter transformation, but its expression (swept solid minus one connected bore) is a CSG subtraction, so Boolean_Works fits it better.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`mod_boolean_s_descent_model` (modular · Boolean Tunnel / one continuous S passage)",
+   "status": "Void/playground only",
+   "registry": "modular.json",
+   "added": "2026-10-24"
+  },
+  {
+   "token": "mod_s_portal_copies_model",
+   "sequence": "transformation",
+   "hall": "Trans_Playground",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "It declares chapter transformation: one portal under a half-turn, a translation and a curl, the transformations composed.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`mod_s_portal_copies_model` (modular · One portal / falling from standing to its head)",
+   "status": "Void/playground only",
+   "registry": "modular.json",
+   "added": "2026-10-24"
+  },
+  {
+   "token": "place_workshop_5fcebaaa02744416b9500e810b560a54",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "A generated receiving place with a matched workbench, kept as a Void trial experiment. Tags: playground, place parameters.",
+   "question": "There are two generated 'Place / plastic pool' workshops. Keep both, or keep one?",
+   "kind": "artifact",
+   "label": "`place_workshop_5fcebaaa02744416b9500e810b560a54` (Place / plastic pool)",
+   "status": "Void/playground only",
+   "registry": "place_studies.json",
+   "added": "untracked"
+  },
+  {
+   "token": "place_workshop_7f4480baf3a2414f9e018afa5bd60f45",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "A second generated 'plastic pool' place with the same name and description as the first; a playground place-parameter experiment.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`place_workshop_7f4480baf3a2414f9e018afa5bd60f45` (Place / plastic pool)",
+   "status": "Void/playground only",
+   "registry": "place_studies.json",
+   "added": "untracked"
+  },
+  {
+   "token": "pyramid_blocker",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "secondary",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "Category is primitives: a closed five-faced solid, a polyhedron that blocks. Its tags 'construction' and 'reusable' also make it a kit part.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`pyramid_blocker` (Striped pyramid blocker)",
+   "status": "Void/playground only",
+   "registry": "primitive_encounters.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "platform_block",
+   "sequence": "primitives",
+   "hall": "Point_Animatedcube",
+   "role": "infrastructure",
+   "also": [
+    "formfinding",
+    "randomness"
+   ],
+   "confidence": "high",
+   "reason": "A one-metre supporting cube with wp edge joins, already reused as building stock on the Void floors for FormFinding_Descent (58) and Random_Cubes (81); it is a construction part, not an argument of its own.",
+   "question": "",
+   "fixed": [
+    "sequence",
+    "hall"
+   ],
+   "kind": "artifact",
+   "label": "`platform_block` (One-metre platform / structure 2)",
+   "status": "Void/playground only",
+   "registry": "primitive_encounters.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "void_cube_walkway",
+   "sequence": "primitives",
+   "hall": "Point_Animatedcube",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "high",
+   "reason": "It declares primitives and transformation and stands on Void floor 07 (Cube, map Point_Animatedcube); thirty cubes and wp ramps make a walkable platform out of the cube.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`void_cube_walkway` (Cube + wedges / carried walk-up)",
+   "status": "Void/playground only",
+   "registry": "primitive_encounters.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "square_assembly_table",
+   "sequence": "primitives",
+   "hall": "Point_Animatedcube",
+   "role": "secondary",
+   "also": [
+    "formfinding"
+   ],
+   "confidence": "high",
+   "reason": "Folds square faces into a cube (the CUBE button sets 90 degrees) and is placed on Void floor 07, Point_Animatedcube.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`square_assembly_table` (Square faces / folded edge assembly)",
+   "status": "Void/playground only",
+   "registry": "primitive_encounters.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "timber_plank_2m",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "infrastructure",
+   "also": [
+    "primitives",
+    "wavefunctions"
+   ],
+   "confidence": "high",
+   "reason": "Comes from primitive_kit.json: a carried, measured plank that freezes on release. It is building stock, reused as a part on the WaveFunctions_Intro floor (64) and inside sun_feather.",
+   "question": "",
+   "fixed": [
+    "sequence",
+    "hall"
+   ],
+   "kind": "artifact",
+   "label": "`timber_plank_2m` (Timber plank / 2 m)",
+   "status": "Void/playground only",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "scaffold_workstation_points",
+   "sequence": "primitives",
+   "hall": "Point_One",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "The points station of the shared scaffold apparatus. It stands on Void floor 01 (Point_One), and its parts grow from points first.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_points` (Scaffold workstation / points)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scaffold_workstation_lines",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "The rods stage of the scaffold apparatus, placed on Void floor 03 (Point_Lines) beside the tape station.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_lines` (Scaffold workstation / lines)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scaffold_workstation_surfaces",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "The triangular-halves stage of the scaffold apparatus, placed on Void floor 05 (Triangle, map Point_Triangle_Context).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_surfaces` (Scaffold workstation / surfaces)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scaffold_workstation_crossing",
+   "sequence": "transformation",
+   "hall": "Trans_Playground",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "A saved scaffold construction, registry category transformation, in which a 20 cm hand-model edge becomes 2 m at BUILD (a scale change) in neutral materials that come before Colour. No Void floor places it yet, so it sits with the other scaffold builds in Trans_Playground.",
+   "question": "Should the carried crossing be a saved build in the Trans_Playground scaffold bay, or the closing piece of the Cube floor in primitives?",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_crossing` (Scaffold workstation / carried crossing)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scaffold_workstation_quads",
+   "sequence": "primitives",
+   "hall": "Point_Animatedcube",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "The full-square-faces stage of the scaffold apparatus, placed on Void floor 07 (Cube, Point_Animatedcube); it carries the wedge and pyramid shelf from Polyhedra.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_quads` (Scaffold workstation / full square faces)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scaffold_workstation_display",
+   "sequence": "transformation",
+   "hall": "Trans_Playground",
+   "role": "primary",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "high",
+   "reason": "The glass test bay of the assembly shop, registry category transformation, placed on Void floor 20 (Transformation / Scaffold playgrounds, map Trans_Playground).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_display` (Assembly shop / glass test bay)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scaffold_workstation_solids",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "The description says Polyhedra adds its 1:10 wedge and pyramid shelf. It is placed on Void floor 06 (Polyhedra, map Primitives_Polythedra).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scaffold_workstation_solids` (Scaffold workstation / wedge and pyramid)",
+   "status": "Void/playground only",
+   "registry": "scaffold_workstation.json",
+   "added": "untracked"
+  },
+  {
+   "token": "scale_zoetrope",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Intro",
+   "role": "primary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "high",
+   "reason": "A strobed disk (60 RPM at 12 Hz) whose 24 cubes come back each cycle. Registry category wavefunctions; it stands on Void floor 64 (WaveFunctions_Intro, 'the cube comes back').",
+   "question": "",
+   "kind": "artifact",
+   "label": "`scale_zoetrope` (Hand wheel / scale zoetrope)",
+   "status": "Void/playground only",
+   "registry": "scale_zoetrope.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "sine_yoke",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Intro",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "A Scotch yoke: the crank's circular motion is carried out as the sine height of a cube. It is placed on Void floor 64, WaveFunctions_Intro.",
+   "question": "The yoke states circle-to-sine exactly. Should it move to WaveFunctions_Unit_Circle, or stay with the hand wheels on Intro?",
+   "kind": "artifact",
+   "label": "`sine_yoke` (Hand wheel / visible sine yoke)",
+   "status": "Void/playground only",
+   "registry": "sine_yoke.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "single_cube_turntable",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Intro",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "high",
+   "reason": "A hand-turned one-cube platform in the hand-wheel family, placed on Void floor 64 (WaveFunctions_Intro). Rotation as return.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`single_cube_turntable` (Hand wheel / one cube turntable)",
+   "status": "Void/playground only",
+   "registry": "single_cube_turntable.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "spatial_recipe",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "high",
+   "reason": "A modular recipe area (commons/modular/recipe_area.tscn) that binds editable instances. It is a building container used on the Trans_Rotation floor (16) and in the spatial_lab and portal trials, not an exhibit.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`spatial_recipe` (Spatial lab recipe)",
+   "status": "Void/playground only",
+   "registry": "spatial_lab.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "torus_piston",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Intro",
+   "role": "secondary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "high",
+   "reason": "A connecting rod turns wheel rotation into a periodic 1.60 m stroke. It belongs to the spinning_studies family, category wavefunctions, and is placed on Void floor 64.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`torus_piston` (Wheel / cylinder / torus)",
+   "status": "Void/playground only",
+   "registry": "spinning_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "pillar_barber_roll",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Intro",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "high",
+   "reason": "Helical bands seem to climb under pure rotation, and a fixed witness shows the difference. It belongs to spinning_studies, category wavefunctions, and is placed on Void floor 64.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`pillar_barber_roll` (Pillar / pink red white barber roll)",
+   "status": "Void/playground only",
+   "registry": "spinning_studies.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "tape_roll_station",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "It declares primitives and 'give a line a surface', and it stands on Void floor 03 (Point_Lines, 'What gives a line its force?').",
+   "question": "",
+   "kind": "artifact",
+   "label": "`tape_roll_station` (Tape / give a line a surface)",
+   "status": "Void/playground only",
+   "registry": "tape_rolls.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "tiling_weathered",
+   "sequence": "shaders",
+   "hall": "Shader_05_Patterns",
+   "role": "secondary",
+   "also": [
+    "tiling",
+    "array_tutorial"
+   ],
+   "confidence": "medium",
+   "reason": "Registry category shaders. It runs the Tutorial_Tiling_Floor raster through wallpaper_tile.gdshader with aging layers; the shader adds only time. Its earlier note named Shader_05_Patterns as the intended hall, and no Void floor places it yet.",
+   "question": "Should the weathered tiling go to Shader_05_Patterns, or stand in tiling/Tutorial_Tiling_Floor next to the raster it ages?",
+   "kind": "artifact",
+   "label": "`tiling_weathered` (The same pattern, then time)",
+   "status": "Void/playground only",
+   "registry": "tiling_weathered.json",
+   "added": "2026-10-09"
+  },
+  {
+   "token": "trace_paint_box",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "A hand-drawn trace volume where strokes stay after the hand leaves. It is placed on Void floor 04 (Point Trace).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`trace_paint_box` (Hand in / paint kept)",
+   "status": "Void/playground only",
+   "registry": "trace_paint_box.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "movable_pivot_walkway",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "secondary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "Moving the bearing changes the centre of rotation of a walkable deck, so its argument is rotation about a pivot. It is currently placed on Void floor 15 (Trans_Translation).",
+   "question": "It sits on Void floor 15 (Trans_Translation, 'shared bridge'). Keep it there or move it to Trans_Rotation?",
+   "fixed": [
+    "question"
+   ],
+   "kind": "artifact",
+   "label": "`movable_pivot_walkway` (Plank / move the pivot)",
+   "status": "Void/playground only",
+   "registry": "transforms.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "sun_feather",
+   "sequence": "transformation",
+   "hall": "Trans_Translation",
+   "role": "secondary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "Ten planks around one insertion point, with sliders for rotation and uniform scale between copies. This is composed transforms, and it is placed on Void floor 15 (Trans_Translation).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`sun_feather` (Sun feather / ten transformed prefabs)",
+   "status": "Void/playground only",
+   "registry": "transforms.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "barrier_scale_line",
+   "sequence": "transformation",
+   "hall": "Trans_Scale",
+   "role": "secondary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "Nine DO NOT CROSS barriers grow from table toy to a 5.5 m structure, so the argument is scale. It is currently placed on Void floor 15 (Trans_Translation).",
+   "question": "The Void tower already places it on Trans_Translation (floor 15, with sun_feather and movable_pivot_walkway). Keep it there or move it to Trans_Scale?",
+   "fixed": [
+    "question"
+   ],
+   "kind": "artifact",
+   "label": "`barrier_scale_line` (DO NOT CROSS / from toy to architecture)",
+   "status": "Void/playground only",
+   "registry": "transforms.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "transport_cube_study",
+   "sequence": "transformation",
+   "hall": "Trans_Translation",
+   "role": "pool",
+   "also": [
+    "forces"
+   ],
+   "confidence": "medium",
+   "reason": "A parameter study of the transport cube, category transforms: the journey's direction is normalised in the local frame and rotates with the assembly. That is translation under a frame. It has only been tried in the tc_parameters trial.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`transport_cube_study` (TC / choose a journey)",
+   "status": "Void/playground only",
+   "registry": "transforms.json",
+   "added": "untracked"
+  },
+  {
+   "token": "sine_space_floor",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Sine_Space",
+   "role": "primary",
+   "also": [
+    "noise"
+   ],
+   "confidence": "high",
+   "reason": "The walkable sin(x)*cos(z) ground (SineSpace.gd) is the sine space itself. It is only used so far as a pool-floor activity in principal_places.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`sine_space_floor` (Sine space / the floor)",
+   "status": "Void/playground only",
+   "registry": "walkable_surfaces.json",
+   "added": "2026-10-31"
+  },
+  {
+   "token": "pocket_test",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "softbodies",
+    "randomness"
+   ],
+   "confidence": "medium",
+   "reason": "A measuring instrument laid over any receiving surface: a hundred balls, pocket counts and the Shannon entropy of the surface's normals. It is placed by place_builder over playground activities.",
+   "question": "Should the pocket test stay a playground instrument, or stand in Topology_Entropy_Morphogenesis as that hall's entropy measurement?",
+   "kind": "artifact",
+   "label": "`pocket_test` (Pocket test / a hundred balls)",
+   "status": "Void/playground only",
+   "registry": "walkable_surfaces.json",
+   "added": "2026-10-31"
+  },
+  {
+   "token": "ball_pit",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "secondary",
+   "also": [
+    "softbodies"
+   ],
+   "confidence": "high",
+   "reason": "The pocket test in pit mode, placed by a receiving place in a pool on the playground ('the six playground pictures' one place type still to build'). It is about the body wading, not about one algorithm.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`ball_pit` (Ball pit / wade through)",
+   "status": "Void/playground only",
+   "registry": "walkable_surfaces.json",
+   "added": "2026-11-02"
+  },
+  {
+   "token": "worker_being",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "pool",
+   "also": [
+    "primitives",
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "One being with a body per spine stage, like biome_object. It stands as the worker on the biome court (principal_places). By design it belongs to every sequence and to no single one.",
+   "question": "Should the worker being walk the spine with one stage-matched body per hall, or stay on the playground court?",
+   "kind": "artifact",
+   "label": "`worker_being`",
+   "status": "Void/playground only",
+   "registry": "worker_being.json",
+   "added": "2026-11-02"
+  },
+  {
+   "token": "FAMILY matter_reference (36 tokens: matter_reference, matter_reference_and, matter_reference_or, matter_reference_xor, matter_reference_not, matter_reference_nor, matter_reference_nand, marble_reference_and, marble_reference_or, marble_reference_xor, marble_reference_not, marble_reference_half ...)",
+   "sequence": "logic",
+   "hall": "Logic_AND",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "A family of physical logic gates (AND/OR/XOR/NOT/NAND/NOR, plus a marble half adder) whose result Jolt contacts decide. Tried in the matter_logic_reference trial.",
+   "question": "Split by hall? Gates (matter_/marble_reference_*) to Logic_AND, if/else and loops to Logic_Alternatives, threshold_* to Logic_Event, material_array/list_loop to array_tutorial Array, collatz/knitters to Logic_Assemblage.",
+   "fixed": [
+    "confidence",
+    "question"
+   ],
+   "kind": "family",
+   "label": "Family: matter_reference (36 tokens: matter_reference, matter_reference_and, matter_reference_or, matter_reference_xor, matter_reference_not, matter_reference_nor, matter_reference_nand, marble_reference_and, marble_reference_or, marble_reference_xor, marble_reference_not, marble_reference_half ...)",
+   "status": "Void/playground only",
+   "registry": "matter_reference.json",
+   "added": null
+  },
+  {
+   "token": "FAMILY mod_* modular terms (228 tokens: mod_point, mod_mesh_color, mod_collider, mod_grabbable, mod_sphere_collider, mod_grab_sphere, mod_line, mod_tape, mod_plank, mod_plank_sizes, mod_stick, mod_trace, mod_hand_trace, mod_walk_line, mod_red_line, mod_parallel_lines, mod_line_plus, mod_cross_lines, mod_heath_mesh, mod_danger_x ...)",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "Terms of the modular class system (commons/modular/terms.json), built from their parents at ready. These are building vocabulary, none of it placed, and they are not exhibits.",
+   "question": "",
+   "kind": "family",
+   "label": "Family: mod_* modular terms (228 tokens: mod_point, mod_mesh_color, mod_collider, mod_grabbable, mod_sphere_collider, mod_grab_sphere, mod_line, mod_tape, mod_plank, mod_plank_sizes, mod_stick, mod_trace, mod_hand_trace, mod_walk_line, mod_red_line, mod_parallel_lines, mod_line_plus, mod_cross_lines, mod_heath_mesh, mod_danger_x ...)",
+   "status": "stands nowhere",
+   "registry": "modular.json",
+   "added": null
+  },
+  {
+   "token": "IDEA 1",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "secondary",
+   "also": [
+    "foundationscrisis",
+    "array_tutorial"
+   ],
+   "confidence": "medium",
+   "reason": "Point_Lines blurb already says 'Parallel lines organize direction'; a walk-between line among ceiling rods is that hall's idea at body scale (existing parallel_lines declares foundationscrisis/Euclid_Parallel).",
+   "question": "Should the walk-between rods stand in Point_Lines (a line among lines), or in Euclid_Parallel as the parallel postulate made walkable?",
+   "kind": "idea",
+   "label": "Idea: The line inside large parallel lines (black rods to the ceiling, one line you walk between)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 2",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Effect_Sound",
+   "role": "infrastructure",
+   "also": [
+    "proceduralaudio"
+   ],
+   "confidence": "medium",
+   "reason": "A sound-by-artifact inventory and sound-system pass is infrastructure that the wavefunctions sound halls (Effect_Sound, AirMusic, Synthesis_Lab) depend on.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: Waves: optimise the sound system; game sound explored through artifacts (sound-by-artifact inventory)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 3",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_John_Cage",
+   "role": "secondary",
+   "also": [
+    "proceduralaudio"
+   ],
+   "confidence": "medium",
+   "reason": "Foley instruments (thunder sheet, rain drum, wind machine, a miked object in a cage) are the prepared-sound/found-noise lineage the John_Cage hall argues.",
+   "question": "Foley theatre in WaveFunctions_John_Cage, or a new hall in the proceduralaudio branch (e.g. ProceduralAudio_Audio_Effects)?",
+   "kind": "idea",
+   "label": "Idea: Foley theatre: 'the bridge in a cage, the mike and a car', thunder sheet, rain drum, wind machine",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 4",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Synthesis_Lab",
+   "role": "primary",
+   "also": [
+    "proceduralaudio"
+   ],
+   "confidence": "high",
+   "reason": "The Eurorack racks (rack_303_acid etc.) live in the wavefunctions registry and the Synthesis_Lab is that sequence's patching hall.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: The modular synth (Eurorack racks exist: rack_303_acid, rack_808_drums, rack_moog_bass, ambient drone...)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 5",
+   "sequence": "randomness",
+   "hall": "playground",
+   "role": "primary",
+   "also": [
+    "formfinding"
+   ],
+   "confidence": "medium",
+   "reason": "Seeded jitter of the playground frame nodes is chance acting on structure; optimising weight under that jitter borrows formfinding's question.",
+   "question": "Keep the jittering frame on the Void playground, or give it a spine hall such as Random_Space_Geometry?",
+   "kind": "idea",
+   "label": "Idea: Randomness: playground nodes more and more random (seeded jitter of a frame), optimising weight, alien architecture",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 6",
+   "sequence": "shaders",
+   "hall": "Shader_05_Patterns",
+   "role": "pool",
+   "also": [
+    "patterngeneration"
+   ],
+   "confidence": "medium",
+   "reason": "display_plate already carries a shader content (path + params), so more Book of Shaders chapters become a pool of plates for the shaders halls and the patterngeneration branch.",
+   "question": "Which halls receive the plates first: the six shaders halls, the playground, or the endless-museum walls?",
+   "kind": "idea",
+   "label": "Idea: Shaders in the playground and in the endless museum (more Book of Shaders chapters as display plates)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 7",
+   "sequence": "particles",
+   "hall": "new: Particles_Exploded_Shed",
+   "role": "primary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "medium",
+   "reason": "The off-spine particles branch (5 halls) has no frozen-explosion hall; Cornelia Parker's suspended shed as a prefab_sculpture mode is particles held at one instant.",
+   "question": "Should the exploded room be a sixth particles hall, or a prefab_sculpture variant placed inside Particles_Forces?",
+   "kind": "idea",
+   "label": "Idea: The particle sequence (off-spine branch, 5 halls) and the exploded room (Cornelia Parker's exploded shed, prefab_sculpture mode)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 8",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_3D_Wave_Propagation",
+   "role": "secondary",
+   "also": [
+    "proceduralgeneration"
+   ],
+   "confidence": "low",
+   "reason": "Sine and interference floors belong to wave propagation; Wave Function Collapse tiles are a different algorithm that the procgen registry already holds (wfc, wave_function_collapse).",
+   "question": "Did you mean sine/interference floors (wavefunctions) or Wave Function Collapse tiles (proceduralgeneration)?",
+   "kind": "idea",
+   "label": "Idea: Wavefunctions from the playground report (sine/interference floors; or Wave Function Collapse tiles)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 9",
+   "sequence": "cellularautomata",
+   "hall": "playground",
+   "role": "secondary",
+   "also": [
+    "lsystems"
+   ],
+   "confidence": "medium",
+   "reason": "CA cave walls and L-system branches growing round the biome court are generators that carve and frame the biome's space on the playground floor.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: Cellular automata and L-systems making space for the biome (CA cave walls, L-system branches round the court)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 10",
+   "sequence": "softbodies",
+   "hall": "Topology_Entropy_Morphogenesis",
+   "role": "secondary",
+   "also": [
+    "cellularautomata",
+    "randomness"
+   ],
+   "confidence": "low",
+   "reason": "Life growing in the gaps of decaying structure is the entropy/morphogenesis argument; decay artifacts (entropy_ruin, decaying_bridge, random_decay_objects) already exist to be the structures.",
+   "question": "Is this a spine hall (Topology_Entropy_Morphogenesis, or Random_Remove), or a principle for how the biome fills the playground?",
+   "kind": "idea",
+   "label": "Idea: The biome as the space between structures of decay",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 11",
+   "sequence": "proceduralgeneration",
+   "hall": "PG_Caves_Mazes",
+   "role": "primary",
+   "also": [
+    "isosurfaces"
+   ],
+   "confidence": "medium",
+   "reason": "sdf_cavern_room declares proceduralgeneration and is a room-scale enclosed cavern; ISO_Caves already has an inside view built from an isosurface.",
+   "question": "Should the immersive cave be PG_Caves_Mazes (sdf_cavern_room's declared home), or ISO_Caves's 'inside' half?",
+   "kind": "idea",
+   "label": "Idea: The cave: an enclosed inside for immersion (sdf_cavern_room, cave halls)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 12",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "postfoundationscrisis"
+   ],
+   "confidence": "low",
+   "reason": "An abjection value is a new axis on worker_being, which has a body per spine stage; agency growing through the stages lands hardest in the late arcs.",
+   "question": "Should the abjection gradient live on worker_being (the kit/playground, across all stages), or become a Machine Learning hall about agency?",
+   "fixed": [
+    "sequence",
+    "question"
+   ],
+   "kind": "idea",
+   "label": "Idea: Agency gradually more abject (an abjection value on the worker being)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 13",
+   "sequence": "foundationscrisis",
+   "hall": "Godel_Incompleteness",
+   "role": "secondary",
+   "also": [
+    "logic",
+    "cellularautomata"
+   ],
+   "confidence": "medium",
+   "reason": "Block logic built up until it is Turing-complete reaches the halting/incompleteness limit that Godel_Incompleteness stages; the gates themselves start in logic.",
+   "question": "Start the block machine in Logic_Assemblage and pay it off in Godel_Incompleteness, or keep it to one hall?",
+   "kind": "idea",
+   "label": "Idea: Minecraft is Turing complete: block logic into paradox and crisis",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 14",
+   "sequence": "foundationscrisis",
+   "hall": "NonEuclidean_Spaces",
+   "role": "primary",
+   "also": [],
+   "confidence": "high",
+   "reason": "noneuclidean_wing declares foundationscrisis and is the seven-chamber H2/H3 walk-through that NonEuclidean_Spaces names.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: Non-Euclidean space (noneuclidean_wing: bigger inside than out, looping corridor)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 15",
+   "sequence": "postfoundationscrisis",
+   "hall": "PostCrisis_Synthesis",
+   "role": "infrastructure",
+   "also": [
+    "machinelearning",
+    "noise"
+   ],
+   "confidence": "low",
+   "reason": "A radio rack and ambient static bed as 'the calling future' of human-machine convergence fits the closing synthesis; as a sound bed it is infrastructure, not an exhibit.",
+   "question": "Should the static bed close the spine (PostCrisis_Synthesis or ML_Synthesis), or run as ambient sound across the museum?",
+   "kind": "idea",
+   "label": "Idea: Background static: the calling future / convergence of human and machine intelligence (radio rack, ambient bed)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 16",
+   "sequence": "facade_assembly",
+   "hall": "playground",
+   "role": "primary",
+   "also": [
+    "boolean_surfaces"
+   ],
+   "confidence": "medium",
+   "reason": "facade_room_cast declares facade_assembly and boolean_surfaces, and the facade parts form a composition kit that a central playground court can use.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: The facade works as a central playground (facade parts, facade_room_cast)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 17",
+   "sequence": "primitives",
+   "hall": "playground",
+   "role": "primary",
+   "also": [
+    "color",
+    "noise"
+   ],
+   "confidence": "medium",
+   "reason": "Wedges to a cylinder of white primitives is a primitives build; the same in colour and the simplex-noise pits extend it through color and noise.",
+   "question": "Should this be one playground plateau that grows stage by stage, or three placements (Primitives_Columns, a Color hall, Noise_One)?",
+   "kind": "idea",
+   "label": "Idea: Plateau with an edge and a wedge entrance; wedges of different heights to a cylinder of white primitives; the same in colour; movable; later the kidney form; simplex-noise pits and plateaus like golf sand pits",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 18",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "secondary",
+   "also": [
+    "fractals"
+   ],
+   "confidence": "medium",
+   "reason": "Ada's hand spinning like rotating_cube is rotation applied to the body; the recursive endless hand is fractals' self-similarity.",
+   "question": "Trans_Rotation (or Trans_Body) for the spinning hand, and a separate Fractal_Recursion piece for the endless hand?",
+   "kind": "idea",
+   "label": "Idea: Ada's hand spins like the rotating cubes; the recursive endless hand in 3D",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 19",
+   "sequence": "wavefunctions",
+   "hall": "new: WaveFunctions_Tape_Loops",
+   "role": "primary",
+   "also": [
+    "proceduralaudio"
+   ],
+   "confidence": "medium",
+   "reason": "A tape loop with the word on it is a signal that returns, which is the wavefunctions title 'What Returns' as machinery (mod_tape exists in the registry).",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: Tape loops: big machines with the word on the tape, 'right here right now'",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 20",
+   "sequence": "color",
+   "hall": "Color_Paint",
+   "role": "secondary",
+   "also": [
+    "randomness"
+   ],
+   "confidence": "high",
+   "reason": "Color_Paint is 'color as action'; a pour mode in which the player is Pollock's bucket fits beside ball_painting_demo, and pollock_painting_in_3d already exists.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: You are the buckets for the painting (Jackson Pollock): pour mode on the paint bucket",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 21",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "secondary",
+   "also": [
+    "array_tutorial"
+   ],
+   "confidence": "medium",
+   "reason": "A corridor of repeated profile sections (ribs) is a profile arrayed along a path, joining Primitives_Profiles to the array idea.",
+   "question": "Should the rib corridor go in Primitives_Profiles, or in array_tutorial's Array as a walk-through array?",
+   "kind": "idea",
+   "label": "Idea: Inside a profile array like inside fish bones (rib corridor)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 22",
+   "sequence": "array_tutorial",
+   "hall": "Tutorial_3D",
+   "role": "secondary",
+   "also": [
+    "wavefunctions"
+   ],
+   "confidence": "medium",
+   "reason": "pulsar_visualizer declares array_tutorial; stacked pulsar ridgelines (the Unknown Pleasures plot) bent into a cylinder is an array wrapped into round space.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: New Order shirt of frequency but round space (pulsar ridgelines bent into a cylinder)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 23",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "secondary",
+   "also": [
+    "color"
+   ],
+   "confidence": "medium",
+   "reason": "Duchamp's rotoreliefs are flat swirl patterns that read as depth only when they rotate, so the illusion is a direct argument about rotation.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: Large rotating discs with swirl patterns (Duchamp rotoreliefs)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 24",
+   "sequence": "randomness",
+   "hall": "Randomness_10_PRINT_Algorithm",
+   "role": "pool",
+   "also": [],
+   "confidence": "high",
+   "reason": "ten_print declares randomness and is the C64 one-liner; showing the real code as one unbroken ribbon is another variant in that hall's family.",
+   "question": "",
+   "kind": "idea",
+   "label": "Idea: 64 code: the real code without rows (C64 10 PRINT one-liner, or real code as one ribbon)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 25",
+   "sequence": "randomness",
+   "hall": "Random_Gaussian",
+   "role": "secondary",
+   "also": [
+    "shaders",
+    "particles"
+   ],
+   "confidence": "low",
+   "reason": "A bokeh room of round particles under gaussian blur makes the gaussian kernel the experience; it could equally be a shader or particle piece.",
+   "question": "Is the bokeh room about the gaussian (Random_Gaussian), about blur as a shader, or about particles?",
+   "kind": "idea",
+   "label": "Idea: Go into a room with an X: round particles, gaussian blur (bokeh room)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 26",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "color"
+   ],
+   "confidence": "low",
+   "reason": "Streaming a painting's parameters and the camera into sculptures is a live-parameter channel (like the live update bridge), not one sequence's exhibit.",
+   "question": "Which painting artifacts should be streamed first, and is the camera stream a viewer tool or an exhibit?",
+   "kind": "idea",
+   "label": "Idea: Stream the parameters of the painting like sculptures, and the camera",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 27",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_3D_Wave_Propagation",
+   "role": "secondary",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "Zoomed-in waterline views on big screens show waves; a 'camera' content type for display_plate is the kit part that makes it possible.",
+   "question": "Should the camera plate be a general display_plate content (kit), with the waterline view as its first wavefunctions use?",
+   "kind": "idea",
+   "label": "Idea: A still camera like a beach water view: zoomed-in waterline experiments on big screens, UI to move the camera (display_plate 'camera' content)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 28",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "A PDF catalogue of every artifact for Palle to type and comment on is a curation tool outside the spine.",
+   "question": "",
+   "fixed": [
+    "hall"
+   ],
+   "kind": "idea",
+   "label": "Idea: A PDF of all artifacts with images, where Palle adds type and comments",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 29",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "/artifact-3d-gallery is an encyclopedia viewer; closing its coverage gap is web tooling, not a hall.",
+   "question": "",
+   "fixed": [
+    "hall"
+   ],
+   "kind": "idea",
+   "label": "Idea: An artifact viewer in three.js for all artifacts (/artifact-3d-gallery exists, coverage gap)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "IDEA 30",
+   "sequence": "primitives",
+   "hall": "playground",
+   "role": "primary",
+   "also": [
+    "swarmintelligence"
+   ],
+   "confidence": "medium",
+   "reason": "Built 2 Nov in the court on floor 210; biome_object's ladder starts at Primitives and worker_being has a body per stage, so both run the whole spine, with the six dancers as a small swarm.",
+   "question": "Is the court on floor 210 the final home, or should worker_being and biome_object each also stand in one spine hall (e.g. Point_One)?",
+   "kind": "idea",
+   "label": "Idea: The worker being and its six dancers; the flight bay; the biome_object stratum (built 2 Nov in the court, floor 210)",
+   "status": "to build",
+   "registry": null,
+   "added": null
+  },
+  {
+   "token": "flow_field_table",
+   "sequence": "swarmintelligence",
+   "hall": "SwarmIntelligence_FlowFields",
+   "role": "secondary",
+   "also": [
+    "change"
+   ],
+   "confidence": "high",
+   "reason": "Declared map_sequences swarmintelligence; it is a tabletop view of the existing 200-agent flow field, which is exactly the FlowFields hall's subject.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`flow_field_table` (Flow field / live museum table)",
+   "status": "stands nowhere",
+   "registry": "algorithms_misc.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "ambient_listening_room",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Synthesis_Lab",
+   "role": "secondary",
+   "also": [
+    "proceduralaudio"
+   ],
+   "confidence": "medium",
+   "reason": "Registry category waves, tagged wavefunctions; its staged scene returns the visitor to WaveFunctions_Synthesis_Lab, and you enter it from Room Memory.",
+   "question": "It is a walk-in room you enter from Room Memory. Should it hang off the Synthesis Lab as a side room, or go into proceduralaudio?",
+   "kind": "artifact",
+   "label": "`ambient_listening_room` (Slow Circuits — Walk-in Instrument)",
+   "status": "stands nowhere",
+   "registry": "ambient_patch.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "room_memory",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_John_Cage",
+   "role": "secondary",
+   "also": [
+    "proceduralaudio"
+   ],
+   "confidence": "medium",
+   "reason": "After Alvin Lucier: PCM is passed recursively through a room-resonance model, which fits beside Cage as experimental music made from acoustics. Tagged wavefunctions.",
+   "question": "Lucier beside Cage in WaveFunctions_John_Cage, or ProceduralAudio_Audio_Effects (a filter run again and again)?",
+   "kind": "artifact",
+   "label": "`room_memory` (Room Memory - after Alvin Lucier)",
+   "status": "stands nowhere",
+   "registry": "ambient_patch.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "architecture_spine",
+   "sequence": "transformation",
+   "hall": "new: Trans_Hierarchy",
+   "role": "primary",
+   "also": [
+    "lsystems"
+   ],
+   "confidence": "medium",
+   "reason": "Eight bays in a parent-child Node3D chain. Local rotation, offset and a scale ratio compound down the hierarchy (0.9^7), which is transform composition. Category transforms.",
+   "question": "This one, architecture_variations and model_overflow form a trilogy built on one bay. Should they become a new hierarchy/composition hall in transformation, or go into Trans_Playground?",
+   "kind": "artifact",
+   "label": "`architecture_spine` (The Corridor Has a Spine)",
+   "status": "stands nowhere",
+   "registry": "architecture_spine.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "architecture_variations",
+   "sequence": "transformation",
+   "hall": "new: Trans_Hierarchy",
+   "role": "secondary",
+   "also": [
+    "array_tutorial"
+   ],
+   "confidence": "medium",
+   "reason": "Applies curve, hinge, field-repeat and stretch to architecture_spine's bay. These are rigid and deforming transforms side by side. Category transforms.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`architecture_variations` (One Arcade, Four Operations)",
+   "status": "stands nowhere",
+   "registry": "architecture_variations.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "arena_relation_lab",
+   "sequence": "forces",
+   "hall": "VFM_08_Arena",
+   "role": "primary",
+   "also": [
+    "swarmintelligence"
+   ],
+   "confidence": "high",
+   "reason": "VFM_08_Arena's blurb describes this artifact word for word: a creature turns when a candidate becomes visible, a meal changes what it does next, and carts collide under momentum.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`arena_relation_lab` (What Makes an Encounter?)",
+   "status": "stands nowhere",
+   "registry": "arena_experiments.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "biome_inheritance",
+   "sequence": "transformation",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "color",
+    "tiling"
+   ],
+   "confidence": "low",
+   "reason": "A map-driven biome layer whose panels are introduced, then raised at translation, turned at rotation, narrowed at scale, coloured at colour and patterned at tiling. It runs across sequences rather than sitting in one hall.",
+   "question": "It changes per hall along primitives→tiling. Should it be a biome layer dealt into every hall, or one exhibit (if so, which hall)?",
+   "kind": "artifact",
+   "label": "`biome_inheritance` (Inherited forms: doors become banners)",
+   "status": "stands nowhere",
+   "registry": "biome_inheritance.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "biome_primitives",
+   "sequence": "primitives",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "low",
+   "reason": "A 12 m walkable biome ground that steps from point/line/trace/grid to triangles and solids, with rotation and scale revisits. It says it is a prototype and not installed in the spine.",
+   "question": "Should this be the ground for the primitives halls (a biome layer), or does it live on the Void playground beside the floor-210 biome court?",
+   "kind": "artifact",
+   "label": "`biome_primitives` (One world: from a point to a passage)",
+   "status": "stands nowhere",
+   "registry": "biome_primitives.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "ca_history_vault",
+   "sequence": "cellularautomata",
+   "hall": "CA_GameOfLife",
+   "role": "secondary",
+   "also": [
+    "wavefunctions"
+   ],
+   "confidence": "medium",
+   "reason": "A 2D cellular section stacked through 28 generations so that history becomes walkable architecture. That matches GoL's 'same past, differently dressed', and the sine-bent variants touch wavefunctions.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`ca_history_vault` (Walk through a recorded process)",
+   "status": "stands nowhere",
+   "registry": "ca_history_vault.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "ca_volume_lab",
+   "sequence": "cellularautomata",
+   "hall": "new: CA_Volume",
+   "role": "primary",
+   "also": [
+    "isosurfaces",
+    "proceduralgeneration"
+   ],
+   "confidence": "low",
+   "reason": "A 13-cubed, 26-neighbour 3D automaton whose solid, frame and shell readings change collision. No existing CA hall covers a volumetric neighbourhood.",
+   "question": "Is a 3D CA a new hall, or should it go into CA_BeyondBinary or CA_ExpandingSpace?",
+   "kind": "artifact",
+   "label": "`ca_volume_lab` (A volume can become a room)",
+   "status": "stands nowhere",
+   "registry": "ca_volume_lab.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "chroma_drum",
+   "sequence": "color",
+   "hall": "Color_Context_Placed",
+   "role": "pool",
+   "also": [],
+   "confidence": "medium",
+   "reason": "Declared color. It belongs to the chroma DNA family (shingle/fin, colour decided by standpoint) alongside the chroma_stack and chroma_translation censuses already in Color_Context_Placed.",
+   "question": "Into Color_Context_Placed's chroma censuses, or Color_Walls, where colour also depends on where you stand?",
+   "kind": "artifact",
+   "label": "`chroma_drum`",
+   "status": "stands nowhere",
+   "registry": "chroma_drum.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "chroma_filter",
+   "sequence": "color",
+   "hall": "Color_Walls",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "Declared color. Three coloured panes cross in front of a white corner, and how many panes lie between you and the white depends on where you stand. Color_Walls' blurb: 'Step sideways and another colour gathers between the panes.'",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chroma_filter`",
+   "status": "stands nowhere",
+   "registry": "chroma_filter.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "chroma_life",
+   "sequence": "color",
+   "hall": "Color_Grid_Pallet",
+   "role": "secondary",
+   "also": [
+    "cellularautomata"
+   ],
+   "confidence": "medium",
+   "reason": "Declared color. Game of Life columns in which colour records the rule; it fits Color_Grid_Pallet's 'colour at an address... ask the rule to run once more'.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`chroma_life`",
+   "status": "stands nowhere",
+   "registry": "chroma_life.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "line_trace_monitor",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "Declared primitives. Two fixed endpoints keep the same segment while a moving point leaves three sampled routes, which is Point_Trace's line-versus-trace argument.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`line_trace_monitor` (Line and Trace / Live Illustration)",
+   "status": "stands nowhere",
+   "registry": "concept_monitor.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "pythagoras_cubicle",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "Walls made of right-triangle area proofs (c² vs a²+b²), one step on from the triangle hall. Tagged void, so it may be meant for the tower instead.",
+   "question": "Spine (Point_Triangle_Context) or a Void tower floor? Its tags say void.",
+   "kind": "artifact",
+   "label": "`pythagoras_cubicle` (Pythagoras / walls made of proofs)",
+   "status": "stands nowhere",
+   "registry": "construction_geometry.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "triangle_direction_sign",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "A floor-origin signage prefab (pink triangle turned through four directions), tagged void and construction. It is a wayfinding part, not an exhibit.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`triangle_direction_sign` (Pink triangle / four directions)",
+   "status": "stands nowhere",
+   "registry": "construction_geometry.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "construction_triangle_brace",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "high",
+   "reason": "A reusable steel chevron bracing bay, category construction, tagged void. Geometry and collision only.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`construction_triangle_brace` (Temporary triangular steel bracing)",
+   "status": "stands nowhere",
+   "registry": "construction_geometry.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "pythagoras_floor",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "Four congruent right triangles translate inside one square to leave c² or a²+b². It is a triangle area proof done by translation. Tagged void.",
+   "question": "Could go to Trans_Translation instead (same triangles, translated): which argument do you want it to make?",
+   "kind": "artifact",
+   "label": "`pythagoras_floor` (Pythagoras / the same four panels)",
+   "status": "stands nowhere",
+   "registry": "construction_geometry.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "site_striped_barricade",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "Construction-site scenery prop (category construction, tags void/reusable/scenery).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`site_striped_barricade` (Striped folding barricade)",
+   "status": "stands nowhere",
+   "registry": "construction_site.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "site_chainlink_panel",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "Construction-site fence scenery prop, tags void/reusable/scenery.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`site_chainlink_panel` (Chain-link fence panel)",
+   "status": "stands nowhere",
+   "registry": "construction_site.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "site_work_light",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "Construction-site lighting prop, tags void/reusable/scenery.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`site_work_light` (Tripod work light)",
+   "status": "stands nowhere",
+   "registry": "construction_site.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "site_scaffold_tarp",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "Construction-site scaffold bay prop, tags void/reusable/scenery.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`site_scaffold_tarp` (Scaffold with blue tarp)",
+   "status": "stands nowhere",
+   "registry": "construction_site.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "site_unfinished_wall",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "Construction-site stud-wall prop meant to be moved or duplicated, tags void/reusable/scenery.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`site_unfinished_wall` (Unfinished stud wall)",
+   "status": "stands nowhere",
+   "registry": "construction_site.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "constructive_walk_bench",
+   "sequence": "randomness",
+   "hall": "Random_Walk",
+   "role": "secondary",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "Category randomness, tagged random-walk. A seeded planar walk builds points and rods, with seed, replay and step controls. It says it is not yet installed in a hall.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`constructive_walk_bench` (A walk builds / 24 choices)",
+   "status": "stands nowhere",
+   "registry": "constructive_walk.json",
+   "added": "untracked"
+  },
+  {
+   "token": "display_plate",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "tiling",
+    "shaders"
+   ],
+   "confidence": "high",
+   "reason": "A slot-fitted plate showing a shader, wallpaper or colour, placed by a recipe's place_activity. It is a gallery building part, not a single exhibit.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`display_plate`",
+   "status": "stands nowhere",
+   "registry": "display_plates.json",
+   "added": "2026-10-31"
+  },
+  {
+   "token": "force_impact_club",
+   "sequence": "forces",
+   "hall": "VFM_05_Launch",
+   "role": "secondary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "Declared forces. A held club whose real collision sends the PointBody ball onward, i.e. a launch by impulse, which is the ballistics hall.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`force_impact_club` (Oversized impact club)",
+   "status": "stands nowhere",
+   "registry": "force_play.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "hand_canvas",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [
+    "color"
+   ],
+   "confidence": "medium",
+   "reason": "A glass pane 'like Point Trace's GlassWall' that tracked fingertips paint. Marks accumulate as traces, tagged point_trace.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`hand_canvas`",
+   "status": "stands nowhere",
+   "registry": "hand_canvas.json",
+   "added": "2026-10-30"
+  },
+  {
+   "token": "inventory_rubber",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "The inventory's eraser tool, worn on the hand. Its description says 'Not a thing to place'.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`inventory_rubber` (Rubber)",
+   "status": "stands nowhere",
+   "registry": "inventory_tools.json",
+   "added": "2026-10-30"
+  },
+  {
+   "token": "inventory_pin",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [],
+   "confidence": "high",
+   "reason": "The inventory's freeze/release tool (physgun click), worn on the hand. Not a thing to place.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`inventory_pin` (Pin)",
+   "status": "stands nowhere",
+   "registry": "inventory_tools.json",
+   "added": "2026-10-30"
+  },
+  {
+   "token": "landscape_flow_bench",
+   "sequence": "noise",
+   "hall": "Random_Noise_Types",
+   "role": "secondary",
+   "also": [
+    "physicssimulation",
+    "wavefunctions"
+   ],
+   "confidence": "medium",
+   "reason": "Four trays compare sine, independent heights, Perlin and Worley F1 under the same rolling spheres. Comparing noise types is the core of the noise hall, even though the registry category is physicssimulation.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`landscape_flow_bench` (What Leaves? What Remains?)",
+   "status": "stands nowhere",
+   "registry": "landscape_flow_bench.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "letter_tyre",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "secondary",
+   "also": [
+    "softbodies"
+   ],
+   "confidence": "high",
+   "reason": "The O glyph outline swept along a closed path into a tyre. Primitives_Profiles' blurb is about O surrounding an opening, and it comes from glyph_profile_gallery.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`letter_tyre` (O / Roll the closed sweep)",
+   "status": "stands nowhere",
+   "registry": "letter_tyre.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "model_overflow",
+   "sequence": "transformation",
+   "hall": "new: Trans_Hierarchy",
+   "role": "secondary",
+   "also": [
+    "fractals",
+    "array_tutorial"
+   ],
+   "confidence": "low",
+   "reason": "Three faults built on architecture_spine's bay: recursion with no base case, a forgotten transform restore, and vertex writes that wrap modulo. Category transforms; the recursion half also argues Fractal_Recursion.",
+   "question": "Should this go with the architecture trilogy in transformation, or into Fractal_Recursion (how many times can 'again' happen, and what does it cost)?",
+   "kind": "artifact",
+   "label": "`model_overflow` (The Model Calls Itself)",
+   "status": "stands nowhere",
+   "registry": "model_overflow.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "paint_station",
+   "sequence": "color",
+   "hall": "Color_Paint",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "Declared color. Emulsion over stain on timber panels is subtractive mixing done by action, which matches Color_Paint's 'colour as action'.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`paint_station` (Paint the wood / tins, stains and timber panels)",
+   "status": "stands nowhere",
+   "registry": "paint_buckets.json",
+   "added": "2026-10-29"
+  },
+  {
+   "token": "playground_ball",
+   "sequence": "primitives",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "Declared primitives. The six-socket hub is 'the POINT of the inventory', a construction part joined by rods on the playground, not a hall exhibit.",
+   "question": "Stays a playground/inventory part, or should a primitives hall (Point_Zero or Point_Lines) also show it as an exhibit?",
+   "kind": "artifact",
+   "label": "`playground_ball` (Playground ball / six sockets)",
+   "status": "stands nowhere",
+   "registry": "playground_kit.json",
+   "added": "2026-10-29"
+  },
+  {
+   "token": "dream_asawa_wire",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "medium",
+   "reason": "The body is torus rings and swept cord laid on an invisible lathe surface built from a 15-key half-width profile, so the volume exists only as line.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_asawa_wire` (Dream Body — asawa wire)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_bacon_smear",
+   "sequence": "transformation",
+   "hall": "Trans_Translation",
+   "role": "pool",
+   "also": [
+    "change",
+    "isosurfaces"
+   ],
+   "confidence": "medium",
+   "reason": "Each of its 40 strokes is a sample point moved from p0 to p1, a displacement weighted by height that shears the body. Its 'cast' value marches the same strokes with DreamIso.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_bacon_smear` (Dream Body — bacon smear)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_batik_beast",
+   "sequence": "transformation",
+   "hall": "Trans_Scale",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "low",
+   "reason": "Every mass is a non-uniformly squashed SphereMesh (stuffed-toy softness), worn under a batik print painted in code.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_batik_beast` (Dream Body — batik beast)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_botanic_mannequin",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "medium",
+   "reason": "A lofted torso shell whose rings yaw with the square of height and carry contrapposto offsets, so the twist is in the geometry and five prints show it.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_botanic_mannequin` (Dream Body — botanic mannequin)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_brass_stamen",
+   "sequence": "primitives",
+   "hall": "Primitives_Godot",
+   "role": "pool",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "The armature is built only from the engine's primitive shelf: 23 CylinderMesh pipes, 24 SphereMesh elbows, TorusMesh flanges and BoxMesh gear teeth.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_brass_stamen` (Dream Body — brass stamen)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_ceramic_puppet",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "pool",
+   "also": [
+    "graphtheory"
+   ],
+   "confidence": "medium",
+   "reason": "Each limb is a chain of capsule links on ball joints whose lean angle is integrated link by link. The cloth is a spanning-tree maze, so it could also go to GT_Spanning_Trees.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_ceramic_puppet` (Dream Body — ceramic puppet)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_clay_splash",
+   "sequence": "color",
+   "hall": "Color_Paint",
+   "role": "pool",
+   "also": [
+    "isosurfaces",
+    "softbodies"
+   ],
+   "confidence": "medium",
+   "reason": "Its argument is flat paint splashes that ignore anatomy, with a 'paint' axis of flat, crust, flood and bloom. 'Melted' and 'fused' (DreamIso) are side values.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_clay_splash` (Dream Body — clay splash)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_coral_polyp",
+   "sequence": "fractals",
+   "hall": "Fractal_RecursiveTrees",
+   "role": "pool",
+   "also": [
+    "lsystems",
+    "isosurfaces"
+   ],
+   "confidence": "high",
+   "reason": "A recursive static helper grows coral fronds that fork two or three ways, four levels deep, down to club tips.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_coral_polyp` (Dream Body — coral polyp)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_couch_lounge",
+   "sequence": "primitives",
+   "hall": "Primitives_Columns",
+   "role": "pool",
+   "also": [
+    "softbodies"
+   ],
+   "confidence": "low",
+   "reason": "A reclining figure on a chaise built as a superellipsoid sweep (exponent 0.30/0.36), with a dip pressed in and lumpy sine-warped cushions. Its strongest axis value is 'melt'.",
+   "question": "A furniture-and-body piece: should it go in primitives as a superellipsoid study, or in a softbodies hall for its melt/sprawl repose?",
+   "kind": "artifact",
+   "label": "`dream_couch_lounge` (Dream Body — couch lounge)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_crackle_peak",
+   "sequence": "noise",
+   "hall": "Noise_Cellular",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "high",
+   "reason": "Its skin is cut into collage regions by nearest seed point, and one seamless jittered Worley routine at four cell counts makes the mosaic crazing and craquelure.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_crackle_peak` (Dream Body — crackle peak)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_david_drape",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Sine_Space",
+   "role": "pool",
+   "also": [
+    "softbodies"
+   ],
+   "confidence": "medium",
+   "reason": "The robe is the subject: swept panels whose folds are three sine harmonics in theta, with a phase that drifts with height so they spiral as they fall.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_david_drape` (Dream Body — david drape)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_deity_figurine",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "pool",
+   "also": [
+    "array_tutorial"
+   ],
+   "confidence": "medium",
+   "reason": "Four or six arms fanned around the torso by elevation angle, a tribhanga spine of yawed rings, and a trunk whose bend axis rotates each segment.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_deity_figurine` (Dream Body — deity figurine)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_dotted_colossus",
+   "sequence": "tiling",
+   "hall": "Pattern_Temple",
+   "role": "pool",
+   "also": [
+    "noise"
+   ],
+   "confidence": "medium",
+   "reason": "The 'cladding' axis dresses one muscled body in dots, marble, running-bond brick, fur or drape, as world-triplanar textures and as geometry: dressing a surface as a receiver.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_dotted_colossus` (Dream Body — dotted colossus)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_dragon",
+   "sequence": "primitives",
+   "hall": "Primitives_Godot",
+   "role": "pool",
+   "also": [
+    "tiling",
+    "isosurfaces"
+   ],
+   "confidence": "medium",
+   "reason": "An S-spine of SphereMesh segments with cone ridges, capsule legs and PrismMesh frills, under a hexagonal scale texture. DreamIso is used only for its 'cast' value.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_dragon` (Dream Body — dragon)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_dubuffet",
+   "sequence": "randomness",
+   "hall": "Random_Rotate_Random_XYZ",
+   "role": "pool",
+   "also": [
+    "transformation",
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "The art-brut look is stacked BoxMesh slabs, each turned 3 to 25 degrees at random on all three axes and pushed off the limb axis, which matches random rotate XYZ closely.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_dubuffet` (Dream Body — dubuffet)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_fetish_idol",
+   "sequence": "isosurfaces",
+   "hall": "ISO_ImplicitModeling",
+   "role": "secondary",
+   "also": [
+    "shaders",
+    "qfeplaboratory"
+   ],
+   "confidence": "high",
+   "reason": "The one body marched whole from SDF capsules smooth-unioned at 0.075 (dream_iso.gd), wearing dream_gloss.gdshader. em_layout.json already pins it to the isosurfaces chapter.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_fetish_idol` (Dream Body — fetish idol)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_garet_still",
+   "sequence": "color",
+   "hall": "Color_Context_Placed",
+   "role": "pool",
+   "also": [
+    "wavefunctions"
+   ],
+   "confidence": "low",
+   "reason": "A toy plastic figure on Catmull-Rom capsule curves in three loud skins (waves, fishnet, bumps) with a cherry-and-orange still life: a placed colour assignment more than any one algorithm.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_garet_still` (Dream Body — garet still)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_gehry_metal",
+   "sequence": "transformation",
+   "hall": "Trans_Pit",
+   "role": "pool",
+   "also": [
+    "boolean_surfaces"
+   ],
+   "confidence": "low",
+   "reason": "13 to 21 bent sheets, each tipped, rolled and twisted about its own base so they lean past each other. Some are perforated with real holes.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_gehry_metal` (Dream Body — gehry metal)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_griffin_plume",
+   "sequence": "tiling",
+   "hall": "Array_Patterns",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "low",
+   "reason": "Its skin is offset rows of shingled eye-spot ovals, rescaled on neck, belly and legs, worn by an S-spine sphere chain with plume fans.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_griffin_plume` (Dream Body — griffin plume)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_hadid_shell",
+   "sequence": "boolean_surfaces",
+   "hall": "Boolean_Works",
+   "role": "pool",
+   "also": [
+    "isosurfaces",
+    "primitives"
+   ],
+   "confidence": "low",
+   "reason": "A lofted shell where a seeded blob field removes clusters of quads to bore organic holes with rounded rims: a pierced volume at sculpture scale.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_hadid_shell` (Dream Body — hadid shell)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_hicks_fiber",
+   "sequence": "softbodies",
+   "hall": "SoftBodies_Cloth_Physics",
+   "role": "pool",
+   "also": [
+    "wavefunctions",
+    "forces"
+   ],
+   "confidence": "low",
+   "reason": "Fibre is the mass: rope rings, lemniscate coils and helices draped over a mannequin, each ring stretched downward so the loops hang like wet wool.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_hicks_fiber` (Dream Body — hicks fiber)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_hokusai_kimono",
+   "sequence": "tiling",
+   "hall": "Pattern_Foundry",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "One lofted robe wearing six code-painted textile patterns (seigaiha lattice, wave combs, key-fret meander, peony scatter): a loom recipe on a bending sheet.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_hokusai_kimono` (Dream Body — hokusai kimono)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_horse_hybrid",
+   "sequence": "transformation",
+   "hall": "Trans_Body",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "low",
+   "reason": "A striding human body with a swept horse-head muzzle, marble skin and a 'beast' axis (horse, hydra, reliquary, blossom, swarm): a body transformed rather than an algorithm on show.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_horse_hybrid` (Dream Body — horse hybrid)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_kruger_suit",
+   "sequence": "tiling",
+   "hall": "Pattern_Temple",
+   "role": "pool",
+   "also": [
+    "primitives"
+   ],
+   "confidence": "medium",
+   "reason": "The suit is one world-triplanar print (block glyphs, stripes, brush slashes, greek-key maze) that runs unbroken across about 75 primitives.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_kruger_suit` (Dream Body — kruger suit)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_lava_bloom",
+   "sequence": "lsystems",
+   "hall": "LSystems_Growth",
+   "role": "pool",
+   "also": [
+    "fractals",
+    "noise"
+   ],
+   "confidence": "medium",
+   "reason": "A recursive _grow helper, five levels deep, writhes a flowering bough with blossom sprays at the tips and leaves at the nodes, all over domain-warped ridged noise bark.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_lava_bloom` (Dream Body — lava bloom)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_lilac_quarry",
+   "sequence": "boolean_surfaces",
+   "hall": "Boolean_Verbs",
+   "role": "pool",
+   "also": [
+    "transformation",
+    "isosurfaces"
+   ],
+   "confidence": "low",
+   "reason": "Stacked bedding slabs all clipped by one world-space plane, so the cut chords read as a single quarried face, with bathers embedded in it.",
+   "question": "Is the quarry's single plane cut a boolean verb, or would you rather hang it in a geology or proceduralgeneration hall?",
+   "kind": "artifact",
+   "label": "`dream_lilac_quarry` (Dream Body — lilac quarry)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_mannerist_tumble",
+   "sequence": "softbodies",
+   "hall": "SoftBodies_Playground_of_Joy",
+   "role": "pool",
+   "also": [
+    "wavefunctions",
+    "isosurfaces"
+   ],
+   "confidence": "low",
+   "reason": "Four bodies sinking into a heaped cloth mound of faceted lobes with sine fold ridges, frozen like fruit set in jelly. DreamIso is used for 'cast'.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_mannerist_tumble` (Dream Body — mannerist tumble)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_masked_dancer",
+   "sequence": "transformation",
+   "hall": "Trans_Playground",
+   "role": "pool",
+   "also": [
+    "randomness"
+   ],
+   "confidence": "low",
+   "reason": "A mid-step dancer whose spine segments yaw along a seeded 18 to 40 degree twist, one arm thrown out, under a mask shell with eye holes cut by omitting cells.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_masked_dancer` (Dream Body — masked dancer)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_mosaic_body",
+   "sequence": "noise",
+   "hall": "Noise_Cellular",
+   "role": "pool",
+   "also": [
+    "mosaicanalysis",
+    "tiling"
+   ],
+   "confidence": "medium",
+   "reason": "The skin is a wrapped jittered Voronoi lattice with an F2-F1 grout line, plus raised glass tesserae snapped to the surface.",
+   "question": "Should this stay on the spine in Noise_Cellular, or join the off-spine mosaicanalysis halls (Mosaic_Byzantine_Gold)?",
+   "kind": "artifact",
+   "label": "`dream_mosaic_body` (Dream Body — mosaic body)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_nana_gloss",
+   "sequence": "color",
+   "hall": "Color_Rainbow",
+   "role": "pool",
+   "also": [
+    "isosurfaces",
+    "shaders"
+   ],
+   "confidence": "low",
+   "reason": "A Niki-de-Saint-Phalle ovoid dancer in glossy painted skins (meander, Voronoi mosaic, primary blobs). Its 'poured' and fused values march 28 parts with DreamIso.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_nana_gloss` (Dream Body — nana gloss)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_obi_frieze",
+   "sequence": "array_tutorial",
+   "hall": "Array",
+   "role": "pool",
+   "also": [
+    "primitives",
+    "transformation"
+   ],
+   "confidence": "low",
+   "reason": "One plank primitive builds every figure, and the 'chorus' axis (rank, ring, spiral, cascade, huddle) arranges repeated figures.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_obi_frieze` (Dream Body — obi frieze)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_oni_dragon",
+   "sequence": "transformation",
+   "hall": "Trans_Body",
+   "role": "pool",
+   "also": [
+    "primitives",
+    "isosurfaces"
+   ],
+   "confidence": "low",
+   "reason": "A punching sphere-spine body whose 'possession' axis (three_faced, six_armed, brood) multiplies the body. Its 'fused' curse is the heaviest DreamIso use outside fetish_idol.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_oni_dragon` (Dream Body — oni dragon)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_paik_light",
+   "sequence": "color",
+   "hall": "Color_Flashlight",
+   "role": "pool",
+   "also": [
+    "shaders"
+   ],
+   "confidence": "low",
+   "reason": "A white plastic figure whose colour is carried by a second emission texture and raised emissive blobs: colour as light on a surface.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_paik_light` (Dream Body — paik light)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_painted_chorus",
+   "sequence": "tiling",
+   "hall": "Tutorial_Pattern",
+   "role": "pool",
+   "also": [
+    "color"
+   ],
+   "confidence": "medium",
+   "reason": "Three columnar figures where the mark replaces the body: each 'mark' value (labyrinth, banded, marbled, scaled, sliced) rebuilds the segment geometry.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_painted_chorus` (Dream Body — painted chorus)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_panel_robot",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "pool",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "low",
+   "reason": "Panel armour of BoxMesh plates and bent shells held a gap off capsule limbs, with chrome sphere joints: solids assembled into a body.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_panel_robot` (Dream Body — panel robot)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_panton_pop",
+   "sequence": "change",
+   "hall": "Change_Intro",
+   "role": "pool",
+   "also": [
+    "boolean_surfaces"
+   ],
+   "confidence": "low",
+   "reason": "One continuous Panton S-ribbon whose spine is integrated from a keyed tangent angle, so the silhouette is one accumulated gesture. Oval holes are cut through the shell.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_panton_pop` (Dream Body — panton pop)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_pierced_screen",
+   "sequence": "isosurfaces",
+   "hall": "ISO_Introduction",
+   "role": "pool",
+   "also": [
+    "boolean_surfaces"
+   ],
+   "confidence": "medium",
+   "reason": "The sheet is one implicit (u,v) outline minus ellipses, combined by smooth min and meshed by clipping grid cells against the zero contour.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_pierced_screen` (Dream Body — pierced screen)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_pink_scaffold",
+   "sequence": "graphtheory",
+   "hall": "GT_Foundations",
+   "role": "pool",
+   "also": [
+    "formfinding"
+   ],
+   "confidence": "low",
+   "reason": "Struts are drawn on a node graph (a nearest-neighbour connectivity pass plus mutually-near triangles), with welded spheres at nodes of degree three or more.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_pink_scaffold` (Dream Body — pink scaffold)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_piped_icing",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_Unit_Circle",
+   "role": "pool",
+   "also": [
+    "softbodies"
+   ],
+   "confidence": "low",
+   "reason": "24 to 32 tubes, each one helical turn round the body advancing exactly one pitch: a circle stepped along an axis.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_piped_icing` (Dream Body — piped icing)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_porcelain_doll",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "medium",
+   "reason": "51 to 79 TorusMesh bands threaded along each limb, each turned about the limb axis by a precessing phase: a repeated turn becomes a spiral wrap.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_porcelain_doll` (Dream Body — porcelain doll)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_print_inflatable",
+   "sequence": "softbodies",
+   "hall": "SoftBodies_Soft_Body_Deformation",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "medium",
+   "reason": "Pool-toy tubes on Bezier frames with welded seams, whose 'inflation' axis (taut, overblown, slack, deflated, bursting) asks how a body yields.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_print_inflatable` (Dream Body — print inflatable)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_rocaille",
+   "sequence": "tiling",
+   "hall": "Symmetry_Seventeen",
+   "role": "pool",
+   "also": [
+    "isosurfaces",
+    "softbodies"
+   ],
+   "confidence": "low",
+   "reason": "Two entwined capsule-curve bodies dressed in ornament: wave stripes, a fish-scale lattice and volute filigree. 'Slumped' and 'fused' kiln values come off the same joints.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_rocaille` (Dream Body — rocaille)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_sea_forms",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "pool",
+   "also": [
+    "isosurfaces",
+    "fractals"
+   ],
+   "confidence": "low",
+   "reason": "The swan neck and four tentacles are beads laid along splines, spaced by their own radius (points along a path), with a radiolarian ring-lattice ball.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_sea_forms` (Dream Body — sea forms)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_stella_wall",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "pool",
+   "also": [
+    "color"
+   ],
+   "confidence": "medium",
+   "reason": "A wall relief of extruded 2D outlines (annulus arcs, Archimedean spirals, triangulated sectors, plates with real holes) on four tilted depth planes.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_stella_wall` (Dream Body — stella wall)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_stijl_robot",
+   "sequence": "primitives",
+   "hall": "Primitives_Godot",
+   "role": "pool",
+   "also": [
+    "color"
+   ],
+   "confidence": "medium",
+   "reason": "A Rietveld body of BoxMesh slabs and bars that pass each other, with SphereMesh joints and CylinderMesh pins: primitive shelf parts in primary colours.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_stijl_robot` (Dream Body — stijl robot)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_tatlin_red",
+   "sequence": "formfinding",
+   "hall": "FormFinding_Equilibrium",
+   "role": "pool",
+   "also": [
+    "graphtheory",
+    "transformation"
+   ],
+   "confidence": "low",
+   "reason": "A twisting, leaning tower triangulated from ring and rising edges so nearly every cell closes as a triangle, skewered by torn plates: a truss argument.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_tatlin_red` (Dream Body — tatlin red)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_tube_reef",
+   "sequence": "wavefunctions",
+   "hall": "WaveFunctions_TrigWalkingPath",
+   "role": "pool",
+   "also": [
+    "isosurfaces"
+   ],
+   "confidence": "low",
+   "reason": "Tubes sweep on arches that twist round the column with their own phase, swirl and sine wobble, crossing each other. 'Fused' marches them with DreamIso.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_tube_reef` (Dream Body — tube reef)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_type_wrap",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "pool",
+   "also": [
+    "tiling"
+   ],
+   "confidence": "low",
+   "reason": "54 to 78 swept bandage bands printed with huge cropped rectangle-stroke letters (E F H I L T O C U N Z): letter outlines carried onto a body.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`dream_type_wrap` (Dream Body — type wrap)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "dream_vasarely_beast",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "pool",
+   "also": [
+    "isosurfaces"
+   ],
+   "confidence": "low",
+   "reason": "One continuous profile swept along a 25-point Catmull-Rom spine with a 25-key radius profile, routed through a hole in itself.",
+   "question": "Four families are profiles swept along splines (vasarely_beast, tube_reef, print_inflatable, piped_icing). Do you want a sweep hall in primitives (e.g. new: Primitives_Sweeps) instead of scattering them?",
+   "kind": "artifact",
+   "label": "`dream_vasarely_beast` (Dream Body — vasarely beast)",
+   "status": "dressed by the museum",
+   "registry": "dream_figures.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "playground_rod",
+   "sequence": "primitives",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "Registry calls it 'the LINE of the inventory' (map_sequences primitives); it is an inventory item in commons/data/inventory/items.json that snaps between playground balls, so a construction part for the Void playground, not a hall exhibit.",
+   "question": "Should the rod/ball kit appear in a spine hall at all (Point_Lines would fit), or stay only in the inventory and on the playground floor?",
+   "kind": "artifact",
+   "label": "`playground_rod` (Playground rod / two points)",
+   "status": "stands nowhere",
+   "registry": "playground_kit.json",
+   "added": "2026-10-29"
+  },
+  {
+   "token": "head_trace_projection",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "It was written for Point_Trace (the headset path projected to the floor) and was taken out of the hall on 29 Sept; the text is kept in Point_Trace/trace-retired-encounters.md.",
+   "question": "It was retired from Point_Trace on 29 Sept. Do you want it back, or kept as source only?",
+   "kind": "artifact",
+   "label": "`head_trace_projection` (A line you did not hold)",
+   "status": "stands nowhere",
+   "registry": "primitives.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "trace_short_memory",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "pool",
+   "also": [],
+   "confidence": "high",
+   "reason": "A variant of the draw_dot recorder (it keeps only the last 32 positions), the same argument as the Trace hall's duration and residue; listed in trunk_branches and museum_core_encounters under primitives.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`trace_short_memory` (A line with a short memory)",
+   "status": "stands nowhere",
+   "registry": "primitives.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "tetrahedron_blocker",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "secondary",
+   "also": [],
+   "confidence": "high",
+   "reason": "construction_path.json and primitive-prefabs.json place the tetrahedron (4 vertices) in Primitives_Polythedra, where a closed solid becomes an obstruction or a support.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`tetrahedron_blocker` (Striped tetrahedron blocker)",
+   "status": "stands nowhere",
+   "registry": "primitive_encounters.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "wedge_blocker",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "It is the original wp walkable prism adapter; primitive-prefabs says the triangular-prism topology supplies a slope, and the wedge terms sit in Primitives_Polythedra. It works as a ramp part more than as an exhibit.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`wedge_blocker` (Striped wedge / wp ramp)",
+   "status": "stands nowhere",
+   "registry": "primitive_encounters.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "timber_plank_1m",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "construction_path puts kit:timber_plank_1m in Point_Lines: a measured segment given width and a collider (the line made into a building part).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`timber_plank_1m` (Timber plank / 1 m)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "timber_plank_4m",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "The same line-to-timber prefab as the 1 m plank; construction_path maps it to Point_Lines. Fixed copies support a path.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`timber_plank_4m` (Timber plank / 4 m)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "timber_panel_1x1",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "'Two triangles share a diagonal': the face made into a part. construction_path maps it to Point_Triangle_Context.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`timber_panel_1x1` (Timber panel / 1 × 1 m)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "timber_panel_2x1",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "A size variant of the triangle-pair face panel; construction_path maps kit:timber_panel_2x1 to Point_Triangle_Context.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`timber_panel_2x1` (Timber panel / 2 × 1 m)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "timber_panel_2x2",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "A size variant of the triangle-pair face panel; construction_path maps kit:timber_panel_2x2 to Point_Triangle_Context.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`timber_panel_2x2` (Timber panel / 2 × 2 m)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "trace_point_ball",
+   "sequence": "primitives",
+   "hall": "Point_Trace",
+   "role": "secondary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "high",
+   "reason": "Its purpose is to tell the moving body apart from the stored trace; the Trace ramp records its path, and construction_path maps it to Point_Trace.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`trace_point_ball` (Trace ball / 28 cm)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "traffic_pyramid_5",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "pool",
+   "also": [],
+   "confidence": "high",
+   "reason": "A 5-vertex comparison solid kept as a pickable item (it marks a boundary); construction_path maps it to Primitives_Polythedra.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`traffic_pyramid_5` (Traffic pyramid / 5 vertices)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "pentagonal_bipyramid_7",
+   "sequence": "primitives",
+   "hall": "Primitives_Polythedra",
+   "role": "pool",
+   "also": [],
+   "confidence": "high",
+   "reason": "A 7-vertex comparison solid (an optional crystal study, 'seven vertices does not determine a unique solid'); construction_path maps it to Primitives_Polythedra.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`pentagonal_bipyramid_7` (Pentagonal bipyramid / 7 vertices)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "melencolia_platform",
+   "sequence": "primitives",
+   "hall": "Primitives_Melencolia",
+   "role": "primary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "It recomposes the known kit (blocks, timber sheets, wedges) into a usable 5x5 court; construction_path and prefab-workbench map it to Primitives_Melencolia, the sequence's closing hall.",
+   "question": "Should the construction court become Primitives_Melencolia's main encounter, or stand beside the current Melencolia centrepiece?",
+   "kind": "artifact",
+   "label": "`melencolia_platform` (Melencolia / construction court)",
+   "status": "stands nowhere",
+   "registry": "primitive_kit.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "cyrtoid_by_rule",
+   "sequence": "primitives",
+   "hall": "Primitives_Profiles",
+   "role": "secondary",
+   "also": [
+    "proceduralgeneration",
+    "tiling"
+   ],
+   "confidence": "medium",
+   "reason": "Declared primitives first. Its first rules are a profile turned round its axis, which matches Profiles' 'follow a borrowed boundary into a body and keep the source beside it' (the source being Haeckel plate 31).",
+   "question": "Your memory says Haeckel's Cyrtoidea plate opens the Godot course. Should this shell go in Primitives_Profiles (or Primitives_Columns), or at the start of the sequence?",
+   "kind": "artifact",
+   "label": "`cyrtoid_by_rule` (Cyrtoid, by rule)",
+   "status": "stands nowhere",
+   "registry": "radiolaria.json",
+   "added": "2026-10-01"
+  },
+  {
+   "token": "seed_study",
+   "sequence": "randomness",
+   "hall": "Random_Definition",
+   "role": "secondary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "One retained seeded set shown five ways, with keep and replay. Random_Definition already argues seed, replay and +1 DRAW over the same stream.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`seed_study` (Seed Study — 48 Values / Five Spatial Assignments)",
+   "status": "stands nowhere",
+   "registry": "randomness.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "random_structure_columns",
+   "sequence": "randomness",
+   "hall": "Random_Space_Geometry",
+   "role": "primary",
+   "also": [
+    "noise"
+   ],
+   "confidence": "low",
+   "reason": "Declared randomness. Retained draws shape a 10x10 cylinder field (from your Rhino example), which is random geometry shaping space. The existing Random_Space_Geometry blurb is old grid-era text, so the family may want its own hall.",
+   "question": "The four Random Structures studies (columns, spheres, lattice, tree): put them in Random_Space_Geometry, or open a new hall such as Random_Structures?",
+   "kind": "artifact",
+   "label": "`random_structure_columns` (Random Structures — Cylinder Field)",
+   "status": "stands nowhere",
+   "registry": "random_structures.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "random_structure_spheres",
+   "sequence": "randomness",
+   "hall": "Random_Space_Geometry",
+   "role": "pool",
+   "also": [
+    "boolean_surfaces"
+   ],
+   "confidence": "low",
+   "reason": "Declared randomness. It is the same BASELINE/SEED/KEEP/REPLAY family as the columns, with height drawn on a sphere grid; its note that it is not a Boolean union also touches boolean_surfaces.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`random_structure_spheres` (Random Structures — Raised Sphere Grid)",
+   "status": "stands nowhere",
+   "registry": "random_structures.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "random_structure_lattice",
+   "sequence": "randomness",
+   "hall": "Random_Space_Geometry",
+   "role": "pool",
+   "also": [
+    "graphtheory"
+   ],
+   "confidence": "low",
+   "reason": "Declared randomness. Seeded threshold choices add links between legal neighbours, which is randomness acting on connectivity (it could also serve graphtheory).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`random_structure_lattice` (Random Structures — Pipe Lattice)",
+   "status": "stands nowhere",
+   "registry": "random_structures.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "random_structure_tree",
+   "sequence": "randomness",
+   "hall": "Random_Space_Geometry",
+   "role": "pool",
+   "also": [
+    "lsystems",
+    "fractals"
+   ],
+   "confidence": "low",
+   "reason": "Declared randomness. The 3-9-27 branching keeps its parent-child structure while seeded offsets vary the endpoints, so it could also be a bridge into lsystems or fractals.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`random_structure_tree` (Random Structures — Branching Tree)",
+   "status": "stands nowhere",
+   "registry": "random_structures.json",
+   "added": "2026-10-20"
+  },
+  {
+   "token": "paired_time",
+   "sequence": "forces",
+   "hall": "Change_Choreography",
+   "role": "secondary",
+   "also": [
+    "wavefunctions"
+   ],
+   "confidence": "high",
+   "reason": "Registry installed_maps names Change_Choreography, and that hall's artifacts, final and intent texts already describe it (two clocks with drift and offset, after Gonzalez-Torres), yet it is listed as unplaced.",
+   "question": "The registry and the hall text say it is installed in Change_Choreography, but it is listed as unplaced. Is it missing from map_data or the plan?",
+   "kind": "artifact",
+   "label": "`paired_time` (A second together)",
+   "status": "stands nowhere",
+   "registry": "reference_studies.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "film_force_motion",
+   "sequence": "forces",
+   "hall": "VFM_03_Motion",
+   "role": "secondary",
+   "also": [],
+   "confidence": "medium",
+   "reason": "A film of two force vectors summed head to tail bending a journey, then balanced forces leaving the motion as it was. That is VFM_03_Motion's 'what forces do over time' (Vectors_Act1 would be the other choice).",
+   "question": "",
+   "kind": "artifact",
+   "label": "`film_force_motion` (A force changes a journey)",
+   "status": "stands nowhere",
+   "registry": "spine_films.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "film_torque_purchase",
+   "sequence": "forces",
+   "hall": "Vectors_Act4b_Oscillation",
+   "role": "secondary",
+   "also": [
+    "transformation"
+   ],
+   "confidence": "medium",
+   "reason": "The film compares crank arm length against push. Vectors_Act4b_Oscillation is the forces hall that already holds lever_balance and HingeCrank.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`film_torque_purchase` (A longer arm, a smaller push)",
+   "status": "stands nowhere",
+   "registry": "spine_films.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "sticky_map",
+   "sequence": "kit",
+   "hall": "playground",
+   "role": "infrastructure",
+   "also": [
+    "postfoundationscrisis"
+   ],
+   "confidence": "medium",
+   "reason": "An annotation pinboard that draws from commons/data/sticky_maps/<map>.json. Its only map so far is 'AI as a transforming assemblage', which points to ML synthesis, but the board itself is a general tool.",
+   "question": "Is the sticky map a tool any hall can host (with its own data file), or should the AI-assemblage board sit in ML_Synthesis or a post-crisis hall?",
+   "fixed": [
+    "sequence",
+    "hall",
+    "confidence"
+   ],
+   "kind": "artifact",
+   "label": "`sticky_map` (Sticky map / a contextual map on a pinboard)",
+   "status": "stands nowhere",
+   "registry": "sticky_map.json",
+   "added": "2026-10-29"
+  },
+  {
+   "token": "support_polygon_lab",
+   "sequence": "forces",
+   "hall": "VFM_09_Legs",
+   "role": "primary",
+   "also": [
+    "physicssimulation"
+   ],
+   "confidence": "high",
+   "reason": "The VFM_09_Legs blurb ('Remove a support, shift a load, and release') is this lab, and its intent, final and artifacts texts name it, yet it is not placed.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`support_polygon_lab` (What Lets a Body Stand?)",
+   "status": "stands nowhere",
+   "registry": "support_experiments.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "surface_ball_test",
+   "sequence": "primitives",
+   "hall": "Point_Triangle_Context",
+   "role": "infrastructure",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "primitive-prefabs.json maps 'White balls / surface test' to Point_Triangle_Context. It is a reusable component that tests walkable surfaces, so it could also serve Primitives_Polythedra.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`surface_ball_test` (Surface test / white gravity points)",
+   "status": "stands nowhere",
+   "registry": "surface_ball_test.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "suspension_passage",
+   "sequence": "array_tutorial",
+   "hall": "Tutorial_3D",
+   "role": "pool",
+   "also": [],
+   "confidence": "medium",
+   "reason": "The original desktop study after Hatoum (map_ready false). Its museum adapter, reference_suspension, is already installed in Tutorial_3D, so this token is the source version.",
+   "question": "reference_suspension already stands in Tutorial_3D. Keep suspension_passage as a desktop source only, or place it too?",
+   "kind": "artifact",
+   "label": "`suspension_passage` (Seven places for a passage)",
+   "status": "stands nowhere",
+   "registry": "suspension_passage.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "resolution_totem",
+   "sequence": "primitives",
+   "hall": "Primitives_Columns",
+   "role": "pool",
+   "also": [],
+   "confidence": "high",
+   "reason": "It is the shared totem builder behind Primitives_Columns (radial segments and profile sampling); Columns' artifacts.md names it, and a single totem is a variant to curate from.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`resolution_totem` (Rings of Ash — Resolution Totem)",
+   "status": "stands nowhere",
+   "registry": "resolution_colonnade.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "resolution_colonnade",
+   "sequence": "primitives",
+   "hall": "Primitives_Columns",
+   "role": "pool",
+   "also": [],
+   "confidence": "high",
+   "reason": "The standalone 20x28 m gallery (map_ready false). Primitives_Columns already places resolution_colonnade_museum, and artifacts.md calls this one 'a separate source arrangement'.",
+   "question": "The hall uses the _museum adapter. Is the standalone colonnade only a source, or should it get its own room?",
+   "kind": "artifact",
+   "label": "`resolution_colonnade` (Rings of Ash — Gallery)",
+   "status": "stands nowhere",
+   "registry": "resolution_colonnade.json",
+   "added": "2026-10-08"
+  },
+  {
+   "token": "tape_roll_printed",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "secondary",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "The tape prints its own length, endpoints, heading and slope, which is Point_Lines' 'Lines, Networks, Measure'; construction_path puts the tape rolls in Point_Lines.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`tape_roll_printed` (Tape roll / printed)",
+   "status": "stands nowhere",
+   "registry": "tape_rolls.json",
+   "added": "2026-10-29"
+  },
+  {
+   "token": "tape_roll_masking",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "pool",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "Declared primitives: click start, click end for one strip, a line as a tool. construction_path maps kit:tape_roll_masking to Point_Lines.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`tape_roll_masking` (Tape roll / masking)",
+   "status": "stands nowhere",
+   "registry": "tape_rolls.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "tape_roll_pink",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "pool",
+   "also": [
+    "kit"
+   ],
+   "confidence": "high",
+   "reason": "The same tape-line tool in pink; construction_path maps kit:tape_roll_pink to Point_Lines.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`tape_roll_pink` (Tape roll / pink marking)",
+   "status": "stands nowhere",
+   "registry": "tape_rolls.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "tape_roll_barrier",
+   "sequence": "primitives",
+   "hall": "Point_Lines",
+   "role": "pool",
+   "also": [
+    "kit"
+   ],
+   "confidence": "medium",
+   "reason": "A striped tape that marks a boundary without making a collision wall; construction_path maps it to Point_Lines, and it also echoes the boundary argument of Point_Triangle_Context.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`tape_roll_barrier` (Tape roll / striped barrier)",
+   "status": "stands nowhere",
+   "registry": "tape_rolls.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "trans_machine_crank",
+   "sequence": "transformation",
+   "hall": "Trans_Translation",
+   "role": "secondary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "medium",
+   "reason": "Rotation drives a rod that translates a piston; construction_path puts all four machines in Trans_Translation (auto lane, unread).",
+   "question": "The four machines (crank, lever, suspended cube, sorter): keep them together as one bay (Trans_Translation per construction_path, or Trans_Playground), or split them by operation?",
+   "kind": "artifact",
+   "label": "`trans_machine_crank` (Wood crank / metal rod / piston)",
+   "status": "stands nowhere",
+   "registry": "transformation_machines.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "trans_machine_lever",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "secondary",
+   "also": [
+    "forces"
+   ],
+   "confidence": "low",
+   "reason": "A beam turning on a real hinge, pulled at two distances, which is rotation about a fixed centre (Trans_Rotation: 'the centre stays'). construction_path's auto lane says Trans_Translation instead.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`trans_machine_lever` (Working lever / two effort arms)",
+   "status": "stands nowhere",
+   "registry": "transformation_machines.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "trans_machine_suspended",
+   "sequence": "transformation",
+   "hall": "Trans_Translation",
+   "role": "pool",
+   "also": [
+    "forces"
+   ],
+   "confidence": "low",
+   "reason": "A cube pulled on pinned rope links: translation bounded by gravity, contact and a slot. construction_path maps it to Trans_Translation.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`trans_machine_suspended` (Rope / suspended construction cube)",
+   "status": "stands nowhere",
+   "registry": "transformation_machines.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "trans_machine_sorter",
+   "sequence": "transformation",
+   "hall": "Trans_Scale",
+   "role": "pool",
+   "also": [
+    "forces"
+   ],
+   "confidence": "low",
+   "reason": "It sorts equal-mass spheres by physical size on identical rails, so scale has a consequence. construction_path's auto lane says Trans_Translation instead.",
+   "question": "",
+   "kind": "artifact",
+   "label": "`trans_machine_sorter` (Gravity / sort by physical size)",
+   "status": "stands nowhere",
+   "registry": "transformation_machines.json",
+   "added": "2026-10-27"
+  },
+  {
+   "token": "transformation_sampling",
+   "sequence": "transformation",
+   "hall": "Trans_Rotation",
+   "role": "secondary",
+   "also": [
+    "change"
+   ],
+   "confidence": "low",
+   "reason": "Declared transformation and change: zoetrope drums rotating twelve poses through translation, rotation, scale and their composition. Its sampling and aliasing point could also suit change.",
+   "question": "Should this zoetrope study go in Trans_Rotation, Trans_Pre (where translation, rotation and scale combine), or a change hall?",
+   "kind": "artifact",
+   "label": "`transformation_sampling` (Between the Pictures — Transformation Studies)",
+   "status": "stands nowhere",
+   "registry": "transforms.json",
+   "added": "2026-10-08"
+  }
+ ]
+}

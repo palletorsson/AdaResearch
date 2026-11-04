@@ -13,6 +13,7 @@ const InstancerLib = preload("res://commons/player/inventory_instancer.gd")
 
 signal item_changed(id: String)
 signal config_changed(id: String, cfg: Dictionary)
+signal collected(id: String)
 
 var current := ""                 # item id, "" = none
 var values: Dictionary = {}       # id -> {knob key: value}, over the item's defaults
@@ -116,6 +117,11 @@ var _hand_path := ""
 var _since := 0.0
 
 func _process(delta: float) -> void:
+	if not placed.is_empty():_follow_floors()
+	if keep_path != "":
+		_keep_since += delta
+		if _keep_since >= KEEP_EVERY:
+			_keep_since = 0.0;_wake_kept();save_kept()
 	_since += delta
 	if _since < 1.0:return
 	_since = 0.0
@@ -156,6 +162,114 @@ func set_current(id: String) -> void:
 	if id != "" and (Items.item(id).is_empty() or not Items.unlocked(Items.item(id), lab, _void())):return
 	if id == current:return
 	current = id;notice = "";item_changed.emit(current)
+
+# ── THE BELT (Palle, 2026-11-04: "one thumbstick down, we can choose between the different prefabs") ─────────────
+
+## What the thumbstick click steps through: the empty hand, then every item collected, in the order taken.
+func belt() -> Array:
+	var out: Array = [""]
+	for id in Items.collected():
+		if not Items.item(str(id)).is_empty():out.append(str(id))
+	return out
+
+## One step along the belt (d = 1 on, -1 back); an item chosen on the prism that is not on the belt starts the walk
+## from the empty hand. Returns the item now in the hand, "" for the empty hand (place mode off: the hand is free).
+func cycle(d := 1) -> String:
+	var b := belt()
+	var i: int = b.find(current)
+	current = str(b[posmod((i if i >= 0 else 0) + d, b.size())]);notice = ""
+	item_changed.emit(current)
+	return current
+
+## PICKED UP = COLLECTED: the example's item goes on the belt and into the hand at once, its miniature over the
+## hand (sync_worn). Returns true when it was new to the belt.
+func collect(id: String) -> bool:
+	if Items.item(id).is_empty():return false
+	var fresh := Items.collect(id)
+	if current != id:current = id;item_changed.emit(current)
+	notice = "";collected.emit(id)
+	return fresh
+
+## The display name of an item, or "empty hand".
+func name_of(id: String) -> String:
+	return "empty hand" if id == "" else str(Items.item(id).get("name", id)).get_slice(" - ", 0)
+
+# ── MOVE (Palle: "we can place, remove and move the objects"): a placed thing is LIFTED - its collisions off, frozen -
+# and follows the aim as its own ghost until it is set down by the same placement rule that made it ─────────────
+
+var lifted: Node3D = null
+
+## THE TURN (Palle, 2026-11-04: "see and turn"): degrees about the world's up added to every placement - a new thing's
+## and a dragged one's. The VR prism sets it from the right wrist's twist, the desktop from Q / E. A grid thing takes it
+## in quarter turns (the sand-block rule refuses a rest more than 8 degrees off square); a wall thing ignores it.
+var yaw_offset := 0.0
+
+func _turned(basis: Basis, square: bool) -> Basis:
+	var t: float = snappedf(yaw_offset, 90.0) if square else yaw_offset
+	return Basis(Vector3.UP, deg_to_rad(t)) * basis if absf(t) > .01 else basis
+
+## The placed thing the controller points at is lifted; false (with a notice) if it is not the hand's.
+func lift_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) -> bool:
+	var n: Node = pointed_own(controller, reach, exclude)
+	if n == null or n.get("paid_length") != null:return false   # tape keeps its own grip and undo
+	if not n is Node3D:return false
+	lifted = n
+	if n is RigidBody3D:
+		n.set_meta("inv_was_frozen", bool((n as RigidBody3D).freeze))
+		pin_node(n)
+	var layers: Dictionary = {}
+	for c in _bodies_of(n):
+		if c is CollisionObject3D:layers[c.get_instance_id()] = [(c as CollisionObject3D).collision_layer, (c as CollisionObject3D).collision_mask];(c as CollisionObject3D).collision_layer = 0;(c as CollisionObject3D).collision_mask = 0
+	n.set_meta("inv_lift_layers", layers)
+	notice = ""
+	return true
+
+## Where the lifted thing would land now, by its own item's rule.
+func lifted_placement(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dictionary:
+	if not is_instance_valid(lifted):lifted = null;return {"ok": false, "reason": "nothing lifted"}
+	return placement_at(controller, reach, exclude, str(lifted.get_meta("inv_item", "")))
+
+## The lifted thing set down where the controller points (its collisions back, settled or hung as when it was made).
+func set_down(controller: Node3D, reach := 8.0, exclude: Array = []) -> bool:
+	if not is_instance_valid(lifted):lifted = null;return false
+	var at := lifted_placement(controller, reach, exclude)
+	if not at.ok:notice = str(at.reason);return false
+	var n: Node3D = lifted;lifted = null
+	n.global_transform = at.xform
+	_set_down_on(n, at)
+	var layers: Dictionary = n.get_meta("inv_lift_layers", {})
+	for c in _bodies_of(n):
+		if c is CollisionObject3D and layers.has(c.get_instance_id()):(c as CollisionObject3D).collision_layer = layers[c.get_instance_id()][0];(c as CollisionObject3D).collision_mask = layers[c.get_instance_id()][1]
+	n.remove_meta("inv_lift_layers")
+	var it := Items.item(str(n.get_meta("inv_item", "")))
+	if at.hang and (str(it.get("snap", "")) == "grid" or not bool(it.get("gravity", true))):pin_node(n)
+	else:
+		unpin_node(n)
+		if n.has_method("settle"):n.settle()
+	if at.on_grid and not at.hang:n.global_position = Vector3(at.point.x, n.global_position.y, at.point.z)
+	notice = "";return true
+
+static func _bodies_of(n: Node) -> Array:
+	var out: Array = [n]
+	out.append_array(n.find_children("*", "CollisionObject3D", true, false))
+	return out
+
+## SET DOWN, NOT DROPPED (2026-11-04): a carrier with gravity knows its extent - its collider is that box - so a thing
+## put onto a floor or a top stands 2 cm over it instead of falling from the half-height lift placement_at allows for
+## things whose origin is their centre: from there the tall extinguisher tipped over, new or moved. Its physics state is
+## moved with it. A thing without gravity is left to the carrier's stand rule (a health plus floats over its origin).
+func _set_down_on(n: Node3D, at: Dictionary) -> void:
+	var ext: Variant = n.get("extent")
+	if not ext is AABB or at.hang or (at.hit as Dictionary).is_empty() or absf(Vector3(at.hit.normal).y) <= .5:return
+	if n.get("gravity") == false:return   # a thing without gravity is stood by the carrier's own floor ray (settle), not dropped
+	n.global_position.y = Vector3(at.hit.position).y - (ext as AABB).position.y + .02
+	if n is RigidBody3D:PhysicsServer3D.body_set_state((n as RigidBody3D).get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, n.global_transform)
+
+## A lift given up (the hand emptied or put away mid-move): the thing is taken back, as the grip would.
+func cancel_lift() -> void:
+	if not is_instance_valid(lifted):lifted = null;return
+	var n: Node3D = lifted;lifted = null
+	placed.erase(n);n.queue_free()
 
 func set_knob(key: String, value: Variant) -> void:
 	if current == "":return
@@ -221,20 +335,31 @@ func _sync_mini(controller: Node3D) -> void:
 		_mini = null;_mini_id = ""
 	if not want:return
 	if _mini != null:return
+	var n: Node3D = make_mini(current, MINI)
+	if n == null:return
+	controller.add_child(n)
+	n.position = Vector3(0, .05, .09)
+	_mini = n;_mini_id = current
+
+## A miniature of any item: its own scene with its config, scaled so its longest side is `longest`, inert (no physics,
+## no pickup, out of every group - a tiny ball must not join the support graph). Not parented. Null if it cannot be made.
+func make_mini(id: String, longest: float) -> Node3D:
+	var it := Items.item(id)
+	if it.is_empty():return null
 	var path := Items.scene_for(str(it.get("token", "")))
-	if path == "" or not ResourceLoader.exists(path):return
+	if path == "" or not ResourceLoader.exists(path):return null
 	var n: Node = (load(path) as PackedScene).instantiate()
-	if not n is Node3D:n.free();return
-	var cfg := config_for(current)
+	if not n is Node3D:n.free();return null
+	var cfg := config_for(id)
 	for k in cfg:n.set_meta("config_%s" % str(k), cfg[k])
 	if n.has_method("apply_grid_config"):n.apply_grid_config(cfg)
-	n.name = "Mini_" + current
-	controller.add_child(n)
+	n.name = "Mini_" + id
+	# inert before it enters the tree: a pickable's _ready must not register it anywhere first
 	_make_inert(n)
-	var size: Array = it.get("size", [0.1, 0.1, 0.1]);var longest: float = maxf(maxf(float(size[0]), float(size[1])), float(size[2]))
-	var k: float = MINI / maxf(longest, .01)   # the item's own scale is for the real thing, not the miniature
-	(n as Node3D).transform = Transform3D(Basis().scaled(Vector3.ONE * k), Vector3(0, .05, .09))
-	_mini = n;_mini_id = current
+	n.ready.connect(func():_make_inert(n), CONNECT_ONE_SHOT)   # what its _ready built, inert too
+	var size: Array = it.get("size", [0.1, 0.1, 0.1]);var side: float = maxf(maxf(float(size[0]), float(size[1])), float(size[2]))
+	(n as Node3D).scale = Vector3.ONE * (longest / maxf(side, .01))   # the item's own scale is for the real thing, not the miniature
+	return n
 
 static func _make_inert(n: Node) -> void:
 	var stack: Array = [n]
@@ -278,20 +403,24 @@ func config_for(id: String) -> Dictionary:
 	return Items.config_for(Items.item(id), over)
 
 ## Make the current item at a transform (the hand's, or in front of a desktop camera) and return it, or null.
-func spawn_at(xform: Transform3D) -> Node3D:
-	if current == "":return null
-	var it := Items.item(current)
+## Make an item at a transform and return it, or null: the one in the hand with the hand's knobs, or - a kept thing
+## stood again - `for_id` with the config it was made with (`cfg_over`), outside the budget it already paid.
+func spawn_at(xform: Transform3D, for_id := "", cfg_over: Dictionary = {}) -> Node3D:
+	var iid: String = for_id if for_id != "" else current
+	var restoring: bool = for_id != ""
+	if iid == "":return null
+	var it := Items.item(iid)
 	if it.is_empty() or str(it.get("coming", "")) != "":return null
 	if str(it.get("tool", "")) != "":notice = "a tool is not placed";return null
-	if not fits(current):return null
-	var cfg := config_for(current);var node: Node3D = null
+	if not restoring and not fits(iid):return null
+	var cfg: Dictionary = cfg_over if restoring and not cfg_over.is_empty() else config_for(iid);var node: Node3D = null
 	var path := Items.scene_for(str(it.get("token", "")))
 	if path == "" or not ResourceLoader.exists(path):return null
 	var probe := load(path);var inst: Node = probe.instantiate()
 	if inst is XRToolsPickable:   # a pickable of its own (a roll of tape): held as it is
 		for k in cfg:inst.set_meta("config_%s" % str(k), cfg[k])
 		if inst.has_method("apply_grid_config"):inst.apply_grid_config(cfg)
-		node = inst;node.name = "Held_" + current
+		node = inst;node.name = "Held_" + iid
 	else:
 		inst.free()
 		var carrier := Carrier.new()
@@ -301,7 +430,12 @@ func spawn_at(xform: Transform3D) -> Node3D:
 		node = carrier
 	if node.get_parent() == null:get_tree().current_scene.add_child(node)
 	node.global_transform = xform
-	node.set_meta("inv_item", current);node.set_meta("inv_key", instance_key(current))
+	# the body's physics state too, at once: measured 2026-11-04, a falling carrier kept the transform it entered the
+	# tree with (yaw 0) and the first physics step wrote that back over the node - the turn and the face-the-person
+	# basis were lost for every thing with gravity (frozen things were not affected)
+	if node is RigidBody3D:PhysicsServer3D.body_set_state((node as RigidBody3D).get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, xform)
+	var key: String = iid + "|" + JSON.stringify(cfg)
+	node.set_meta("inv_item", iid);node.set_meta("inv_key", key);node.set_meta("inv_cfg", cfg)
 	placed.append(node)
 	# copies of one prefab share one multimesh after the first (Palle: "keep the copies multi mesh")
 	if bool(it.get("instance", true)):
@@ -309,8 +443,124 @@ func spawn_at(xform: Transform3D) -> Node3D:
 		if node is Carrier:
 			var a: Variant = node.get("work")   # the carrier's artifact
 			art = a if a is Node3D else node
-		instancer().register(node, art, instance_key(current))
+		instancer().register(node, art, key)
 	return node
+
+# -- KEEP WHAT YOU BUILD (Palle, 2026-11-04: "keep improving" - after "nothing persists across maps") --------------
+# The placed things of the Void's main tower are written to keep_path every KEEP_EVERY seconds when something changed,
+# and stood again by the next game (restore_kept). They come back frozen where they were left - the Void streams its
+# floors, and a body stood on a floor not yet built would fall through it - and a thing with gravity becomes a body
+# again once a short ray finds its floor under it. keep_path "" keeps nothing (a trial floor, the museum, a probe).
+
+var keep_path := ""
+static var keep_default := "user://inventory/placed.json"   # a probe points it at its own folder before the game boots
+const KEEP_EVERY := 2.0
+var _keep_since := 0.0
+var _kept := ""                    # the last snapshot written
+
+## What would be written now: one row per placed thing (not a lifted one, not one held, not one lost below the tower).
+func kept_rows() -> Array:
+	var rows: Array = []
+	for n in placed:
+		if not is_instance_valid(n) or not n.is_inside_tree() or n == lifted or not n.has_meta("inv_item"):continue
+		if n.has_method("is_picked_up") and n.is_picked_up():continue
+		var t: Transform3D = n.global_transform
+		if t.origin.y < -2000.0:continue
+		var b: Basis = t.basis.orthonormalized()
+		var flat: Array = []
+		for v in [b.x, b.y, b.z]:flat.append_array([snappedf(v.x, .0001), snappedf(v.y, .0001), snappedf(v.z, .0001)])
+		rows.append({"item": str(n.get_meta("inv_item")), "config": n.get_meta("inv_cfg", {}), "basis": flat,
+			"at": [snappedf(t.origin.x, .001), snappedf(t.origin.y, .001), snappedf(t.origin.z, .001)],
+			"frozen": bool(n.get_meta("inv_slept")) if n.has_meta("inv_slept") else bool(n.get("freeze")), "how": str(n.get("how")) if n.get("how") != null else "", "pinned": bool(n.get("pinned"))})
+	return rows
+
+## Written if it changed since the last write (tmp + rename). Returns true when written.
+func save_kept(force := false) -> bool:
+	if keep_path == "":return false
+	var text := JSON.stringify({"version": 1, "placed": kept_rows()}, "  ")
+	if text == _kept and not force:return false
+	var abs_path := ProjectSettings.globalize_path(keep_path)
+	DirAccess.make_dir_recursive_absolute(abs_path.get_base_dir())
+	var f := FileAccess.open(abs_path + ".tmp", FileAccess.WRITE)
+	if f == null:push_warning("inventory: could not keep the placed things at " + abs_path);return false
+	f.store_string(text + "\n");f.close()
+	if FileAccess.file_exists(abs_path):DirAccess.remove_absolute(abs_path)
+	DirAccess.rename_absolute(abs_path + ".tmp", abs_path)
+	_kept = text
+	return true
+
+## Stand the kept things again; returns how many. Every one frozen; one with gravity is marked to wake on its floor.
+func restore_kept() -> int:
+	if keep_path == "" or not FileAccess.file_exists(keep_path):return 0
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(keep_path))
+	if not data is Dictionary or not data.get("placed") is Array:return 0
+	var made := 0
+	for row in data.placed:
+		if not row is Dictionary or Items.item(str(row.get("item", ""))).is_empty():continue
+		var bv: Array = row.get("basis", []);var at: Array = row.get("at", [0, 0, 0])
+		if bv.size() != 9 or at.size() != 3:continue
+		var t := Transform3D(Basis(Vector3(bv[0], bv[1], bv[2]), Vector3(bv[3], bv[4], bv[5]), Vector3(bv[6], bv[7], bv[8])), Vector3(at[0], at[1], at[2]))
+		var cfg: Dictionary = row.get("config", {}) if row.get("config") is Dictionary else {}
+		var n: Node3D = spawn_at(t, str(row.item), cfg)
+		if n == null:continue
+		made += 1
+		if n is RigidBody3D:
+			var rb := n as RigidBody3D
+			rb.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;rb.linear_velocity = Vector3.ZERO;rb.angular_velocity = Vector3.ZERO;rb.freeze = true
+			if n.get("how") != null:n.set("how", str(row.get("how", "")))
+			if n.get("pinned") != null:n.set("pinned", bool(row.get("pinned", false)))
+			if not bool(row.get("frozen", false)):n.set_meta("inv_wake", true)   # a body again when its floor is there
+	_kept = JSON.stringify({"version": 1, "placed": kept_rows()}, "  ")   # as restored: nothing new to write
+	return made
+
+## Keep the placed things here if this is the Void's main tower (not a trial floor, not the museum): the path set and the
+## kept things stood again, once the scene is current. Returns how many came back, or -1 when nothing is kept here.
+func keep_in_void() -> int:
+	for i in 30:
+		if is_inside_tree() and get_tree().current_scene != null and _void() != null:break
+		await get_tree().process_frame
+	var g := _void()
+	if g == null or str(g.get("trial_id")) != "":return -1
+	keep_path = keep_default
+	var n := restore_kept()
+	if n > 0:print("[inventory] %d placed things stood again from %s" % [n, keep_path])
+	return n
+
+## THE FLOOR'S SLEEP (2026-11-04): the Void puts a floor you left to sleep and REMOVES its content's colliders (the cube
+## islands, the plinths, the works; the slab stays). A placed thing - a child of the scene, not of the floor - stood on
+## them would fall, and the keeping would write it down where it landed. So a placed body follows its floor: frozen
+## where it stands while that floor sleeps (meta inv_slept), a body again when it wakes. Every frame: a sleep removes the
+## support at once.
+func _follow_floors() -> void:
+	var g := _void()
+	var stream: Node = g.get("floor_stream") if g != null else null
+	if stream == null or not stream.has_method("floor_at_position"):return
+	var records: Dictionary = stream.get("records")
+	for n in placed:
+		if not is_instance_valid(n) or not n is RigidBody3D or n == lifted:continue
+		var rb := n as RigidBody3D
+		var rec: Variant = records.get(int(stream.floor_at_position(rb.global_position)))
+		var asleep: bool = rec != null and str(rec.get("mode")) == "sleep"
+		if asleep and not rb.has_meta("inv_slept"):
+			if rb.has_method("is_picked_up") and rb.is_picked_up():continue
+			rb.set_meta("inv_slept", rb.freeze)   # what it was, for the waking and for the keeping
+			if not rb.freeze:rb.linear_velocity = Vector3.ZERO;rb.angular_velocity = Vector3.ZERO;rb.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;rb.freeze = true
+		elif not asleep and rb.has_meta("inv_slept"):
+			var was: bool = bool(rb.get_meta("inv_slept"));rb.remove_meta("inv_slept")
+			if not was:rb.freeze = false;rb.sleeping = false
+
+## A restored thing with gravity becomes a body again once its floor is under it (the Void builds floors as you near them).
+func _wake_kept() -> void:
+	if get_viewport() == null:return
+	var space := get_viewport().world_3d.direct_space_state
+	for n in placed:
+		if not is_instance_valid(n) or not n.has_meta("inv_wake") or not n is RigidBody3D:continue
+		var ext: Variant = n.get("extent")
+		var low: float = (n.global_transform * (ext as AABB).position).y if ext is AABB else n.global_position.y
+		var from := Vector3(n.global_position.x, low + .05, n.global_position.z)
+		var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * .15, 1, [(n as RigidBody3D).get_rid()])
+		if space.intersect_ray(q).is_empty():continue
+		n.remove_meta("inv_wake");unpin_node(n)
 
 const SURFACES := 0xFFFFFFFF & ~((1 << 17) | (1 << 19))   # all solid bodies but the avatar and the collision hands
 const HANG_REACH := 2.0   # pointing at nothing: the thing hangs this far along the wand (Garry's Mod's frozen prop in the air)
@@ -353,31 +603,32 @@ static func _facing(controller: Node3D, at: Vector3, square := false) -> Basis:
 ## `exclude` is for bodies the ray must look past (the palette's own panels). Returns the node, or null.
 ## Where the current item would go if the trigger were pulled now: {ok, xform, hit, reason, on_grid, point}.
 ## The ghost asks every frame, the trigger once; one rule. Not ok: `reason` says why (the notice's words).
-func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dictionary:
+func placement_at(controller: Node3D, reach := 8.0, exclude: Array = [], for_id := "") -> Dictionary:
+	var iid: String = for_id if for_id != "" else current   # a lifted thing asks with its own item
 	var out := {"ok": false, "reason": "", "hit": {}, "xform": Transform3D(), "on_grid": false, "point": Vector3.ZERO, "hang": false}
-	if current == "":out.reason = "nothing in the hand";return out
-	var it := Items.item(current)
+	if iid == "":out.reason = "nothing in the hand";return out
+	var it := Items.item(iid)
 	if it.is_empty() or str(it.get("coming", "")) != "":out.reason = "not here yet";return out
 	if str(it.get("tool", "")) != "":out.reason = "a tool is not placed";return out
 	var origin: Vector3 = controller.global_position;var dir: Vector3 = -controller.global_basis.z
 	var q := PhysicsRayQueryParameters3D.create(origin, origin + dir * reach, SURFACES)
 	q.exclude = exclude;q.hit_from_inside = false
 	var hit := get_viewport().world_3d.direct_space_state.intersect_ray(q)
-	var mount := str(it.get("mount", "any"));var cfg := config_for(current)
+	var mount := str(it.get("mount", "any"));var cfg := config_for(iid)
 	if hit.is_empty():
 		# FREE HANGING (the policy's rule 4, Garry's Mod's frozen prop in the air): pointing at nothing, the thing goes
 		# HANG_REACH along the wand - a grid thing to the nearest metre point in all three axes, to be frozen there (a
 		# floating platform); a loose thing falls from there. The kit's ball and rod ("hang": false) have rules of
 		# their own and come into the hand instead, as before; a wall thing still needs its wall.
 		if not bool(it.get("hang", true)):out.reason = "point at a floor or a wall";return out
-		if mount == "wall":out.reason = str(it.get("name", current)) + " needs a wall";return out
+		if mount == "wall":out.reason = str(it.get("name", iid)) + " needs a wall";return out
 		var where_h: Vector3 = origin + dir * HANG_REACH
 		var grid_h: bool = str(it.get("snap", "")) == "grid"
 		var pt_h := pitch()
 		if grid_h:where_h = Vector3(snappedf(where_h.x, pt_h.x), snappedf(where_h.y, pt_h.y), snappedf(where_h.z, pt_h.x))
 		var basis_h: Basis = Basis(Vector3.UP, -deg_to_rad(float(cfg["_yaw"]))) if cfg.has("_yaw") else _facing(controller, where_h, grid_h)
-		out.xform = Transform3D(basis_h, where_h);out.on_grid = grid_h;out.point = where_h;out.hang = true
-		if not fits(current):out.reason = notice;return out
+		out.xform = Transform3D(_turned(basis_h, grid_h), where_h);out.on_grid = grid_h;out.point = where_h;out.hang = true
+		if for_id == "" and not fits(iid):out.reason = notice;return out   # a moved thing is already paid for
 		out.ok = true;return out
 	out.hit = hit
 	var n: Vector3 = hit.normal;var vertical: bool = absf(n.y) < 0.5
@@ -399,10 +650,10 @@ func placement_at(controller: Node3D, reach := 8.0, exclude: Array = []) -> Dict
 	var lift: float = (float(size[2]) * .5 * scale_k) if vertical else (float(size[1]) * .5 * scale_k + .02)
 	if on_grid and mount == "floor":lift = .02   # a grid thing's origin is its base
 	if bool(it.get("gravity", true)) and not vertical:lift = maxf(lift, .06)   # above whatever is there, then the drop
-	out.xform = Transform3D(basis, where + n * lift);out.on_grid = on_grid;out.point = where
-	if mount == "wall" and not vertical:out.reason = str(it.get("name", current)) + " needs a wall";return out
-	if mount == "floor" and vertical:out.reason = str(it.get("name", current)) + " needs a floor";return out
-	if not fits(current):out.reason = notice;return out
+	out.xform = Transform3D(basis if vertical else _turned(basis, on_grid), where + n * lift);out.on_grid = on_grid;out.point = where
+	if mount == "wall" and not vertical:out.reason = str(it.get("name", iid)) + " needs a wall";return out
+	if mount == "floor" and vertical:out.reason = str(it.get("name", iid)) + " needs a floor";return out
+	if for_id == "" and not fits(iid):out.reason = notice;return out   # a moved thing is already paid for
 	out.ok = true;return out
 
 func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) -> Node3D:
@@ -414,6 +665,7 @@ func spawn_where_pointed(controller: Node3D, reach := 8.0, exclude: Array = []) 
 		if notice == "":notice = "could not make it"   # spawn_at's own reason stands
 		return null
 	var it_s := Items.item(current)
+	_set_down_on(node, at)
 	if at.hang and (str(it_s.get("snap", "")) == "grid" or not bool(it_s.get("gravity", true))):
 		pin_node(node)   # hung in the air: a grid thing or one without gravity is frozen there; a loose thing falls from there
 	elif node.has_method("settle"):node.settle()

@@ -59,16 +59,29 @@ def exports(scene_path):
     return names, script
 
 
+CATALOGUE = os.path.join(os.path.dirname(__file__), "..", "commons", "void", "primitive-prefabs.json")
+
+
 def main():
     data = json.load(open(ITEMS, encoding="utf-8"))
     reg = registry()
     findings = 0
     seen = set()
+    # THE KIT AND THE HAND (2026-11-04): every item names the catalogue prefab it is (commons/void/primitive-prefabs.json,
+    # the Primitives construction kit), or "" for a hand-only thing (the clock, the tape, the tools, the crates)
+    kit = {p["id"] for p in json.load(open(CATALOGUE, encoding="utf-8"))["prefabs"]}
+    hand_only = []
     for it in data["items"]:
         iid = it.get("id", "?")
         if iid in seen:
             print(f"{iid}: id twice"); findings += 1
         seen.add(iid)
+        if "prefab" not in it:
+            print(f"{iid}: no \"prefab\" - name its catalogue prefab, or \"\" for a hand-only thing"); findings += 1
+        elif it["prefab"] and it["prefab"] not in kit:
+            print(f"{iid}: prefab {it['prefab']!r} is not in primitive-prefabs.json"); findings += 1
+        elif not it["prefab"]:
+            hand_only.append(iid)
         if it.get("mount") not in ("wall", "floor", "hand", "any", "worn"):
             print(f"{iid}: mount is wall, floor, hand, any or worn"); findings += 1
         if it.get("coming"):
@@ -96,7 +109,7 @@ def main():
                 print(f"{iid}.{k.get('key')}: one of choices, range or text"); findings += 1
             if "names" in k and len(k["names"]) != len(k.get("choices", [])):
                 print(f"{iid}.{k.get('key')}: names and choices differ in length"); findings += 1
-    print(f"{len(data['items'])} items, {findings} findings")
+    print(f"{len(data['items'])} items, {len(data['items']) - len(hand_only)} in the kit, {len(hand_only)} hand-only ({', '.join(hand_only)}), {findings} findings")
     return findings
 
 

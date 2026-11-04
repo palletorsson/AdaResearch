@@ -18,6 +18,10 @@ func _ready() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out_dir = arg.trim_prefix("--out=")
 	if out_dir == "":out_dir = ProjectSettings.globalize_path("user://void_x")
+	# the Void keeps what the hand builds (inventory_hand.gd): this probe's crate goes in its own folder, fresh each run
+	var HandLib = load("res://commons/player/inventory_hand.gd")
+	HandLib.keep_default = out_dir.path_join("placed.json")
+	if FileAccess.file_exists(HandLib.keep_default):DirAccess.remove_absolute(HandLib.keep_default)
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	var report := {"checks": [], "user_dir": OS.get_user_data_dir()}
 	_check(report, "0 isolation: the Void's saves go to the test app's user://, not the real game's", OS.get_user_data_dir().contains("Ada Menu Integration Test"), {"user_dir": OS.get_user_data_dir()})
@@ -140,6 +144,47 @@ func _ready() -> void:
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("void_x_down.png"))
 	_check(report, "C left X again: the prism is down; still in the game", not prism.showing and not prism.prism.visible and not bool(game.get("returning")) and game.is_inside_tree(), {"showing": prism.showing, "returning": game.get("returning")})
+	# K - THE BELT (2026-11-04: "one thumbstick down - we can choose between the different prefabs"): an example picked
+	# up puts its item on the belt; the left stick click (primary_click, through the tracker's signal into game.gd)
+	# steps to the empty hand and back, the miniature over the right hand following
+	var Items = load("res://commons/player/inventory_items.gd")
+	Items.collected_path = out_dir.path_join("collected.json")
+	if FileAccess.file_exists(Items.collected_path):DirAccess.remove_absolute(Items.collected_path)
+	prism.hand.collect("extinguisher")
+	for i in 4:
+		await get_tree().process_frame
+	var mini0: Node3D = prism.hand.mini_node()
+	# read now: the stick click frees it, and a freed node reads as null afterwards
+	var mini0_on_right: bool = mini0 != null and mini0.get_parent().name == "RightHand"
+	var held0: String = prism.hand.current
+	left.button_pressed.emit("primary_click")
+	for i in 4:
+		await get_tree().process_frame
+	var held1: String = prism.hand.current
+	var mini1: Node3D = prism.hand.mini_node()
+	var said: String = str(game.get("status").text) if game.get("status") else ""
+	left.button_pressed.emit("primary_click")
+	for i in 4:
+		await get_tree().process_frame
+	var held2: String = prism.hand.current
+	var mini2: Node3D = prism.hand.mini_node()
+	var belt_view: Node3D = prism.belt
+	var belt_up: bool = belt_view != null and belt_view.get_parent() == left and belt_view.visible
+	# THE TWIST: the right aim rolled 45 degrees right turns the placement 90 degrees clockwise (twice the roll, in steps)
+	var rig_right: Node3D = _rt(origin)
+	var f: Vector3 = -rig_right.global_basis.z
+	_pose(_right, Vector3(0.25, 1.2, -0.3))
+	var aim_basis := Basis.looking_at(Vector3(0, -0.5, -1).normalized(), Vector3.UP)
+	_right.set_pose(&"aim", Transform3D(Basis(aim_basis.z * -1.0, deg_to_rad(-45)) * aim_basis, Vector3(0.25, 1.2, -0.3)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	for i in 6:
+		await get_tree().process_frame
+	var twisted: float = prism.hand.yaw_offset
+	_right.set_pose(&"aim", Transform3D(aim_basis, Vector3(0.25, 1.2, -0.3)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
+	for i in 6:
+		await get_tree().process_frame
+	var straight: float = prism.hand.yaw_offset
+	_check(report, "W twist: the right wrist rolled 45 deg turns the placement %.0f deg; held straight, %.0f" % [twisted, straight], absf(absf(twisted) - 90.0) < 0.5 and absf(straight) < 0.5, {"twisted": twisted, "straight": straight, "aim": str(f)})
+	_check(report, "K belt: collected, the extinguisher is in the hand with its miniature over the right hand; the left stick click gives the empty hand (no miniature), the next the extinguisher again; the belt shows over the left hand", held0 == "extinguisher" and mini0_on_right and held1 == "" and mini1 == null and said.contains("EMPTY HAND") and held2 == "extinguisher" and mini2 != null and belt_up, {"held": [held0, held1, held2], "mini": [mini0_on_right, mini1 != null, mini2 != null], "said": said, "belt_over_left_hand": belt_up})
 	_finish(report)
 
 func _rt(origin: Node) -> Node3D:return origin.get_node("RightHand")

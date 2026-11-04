@@ -253,6 +253,10 @@ func _build_player() -> void:
 		camera = body.camera
 		body.desktop_pointer.ability = catalyst
 		if is_instance_valid(catalyst): catalyst.desktop_source = body.desktop_pointer
+		# The inventory on the desktop: Tab chooses, F places / drags, X takes back (commons/player/inventory_desktop.gd).
+		var desk_inventory := preload("res://commons/player/inventory_desktop.gd").new()
+		desk_inventory.name = "DesktopInventory"; desk_inventory.setup(self, camera)
+		add_child(desk_inventory)
 	camera.near = 0.05
 	camera.far = 350.0
 	# Keep the same environment on the active desktop or XR camera even
@@ -385,7 +389,8 @@ func _build_feedback() -> void:
 		add_child(desktop_help)
 		var help := Label.new()
 		help.position = Vector2(20, 18)
-		help.text = "THE VOID\nWASD: move   Mouse: look   Space: jump   Right click: grab / release\nLeft click: use / drag   Smoke: left click pull pin, then throw   C + click: catalyst\nI: prefab inventory   R: last floor   T: roof   M: menu   Esc: release mouse\nCHARGE: movement drains the battery. Falls and landings are safe. Outside the tower: return to the last floor."
+		help.text = "THE VOID\nWASD: move   Mouse: look   Space: jump   Right click: grab / release\nLeft click: use / drag   Smoke: left click pull pin, then throw   C + click: catalyst\nI: prefab board   Tab: choose a prefab   F: place (hold F on it: move)   Q / E: turn   X: take back
+R: last floor   T: roof   M: menu   Esc: release mouse\nCHARGE: movement drains the battery. Falls and landings are safe. Outside the tower: return to the last floor."
 		if trial_session != null:
 			var label := str(Architecture.Content.Source.definition(trial_id).get("label", trial_id)).to_upper()
 			help.text = help.text.replace("THE VOID", "VOID TRIAL / " + label).replace("R: last floor   T: roof", "R / T: reset the encounter")
@@ -695,7 +700,16 @@ func fire_catalyst() -> void:
 
 func _left_button(button: String) -> void:
 	if returning: return
-	if button == "primary_click": inventory_board.toggle()
+	if button == "primary_click":
+		# Palle 2026-11-04: "one thumbstick down - we can choose between the different prefabs". The left stick click
+		# steps the hand through the empty hand and the collected prefabs (InventoryPrism.cycle); the AND prefab board
+		# stays on the desktop's I.
+		var belt := get_tree().get_root().find_child("InventoryPrism", true, false)
+		if belt != null and belt.has_method("cycle"):
+			var id: String = belt.cycle(1)
+			_notice("IN THE HAND / " + str(belt.hand.name_of(id)).to_upper() + ("" if id == "" else "
+Trigger: place / hold on it: move / Grip: take back"))
+		else: inventory_board.toggle()
 	elif button == "ax_button":
 		# Palle 2026-10-29: X opens the inventory prism (museum_rig.tscn/InventoryPrism), not the reset to the menu.
 		var prism := get_tree().get_root().find_child("InventoryPrism", true, false)

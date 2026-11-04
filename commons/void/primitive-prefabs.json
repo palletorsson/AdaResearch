@@ -1407,6 +1407,66 @@
       ]
     },
     {
+      "id": "door_stop",
+      "title": "Door stop / association(config(wedge))",
+      "map": "Primitives_Polythedra",
+      "family": "Wedge / association",
+      "dimensions": [
+        0.14,
+        0.05,
+        0.07
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_door_stop",
+      "icon": "wedge",
+      "learn": "association(config(wedge)): the wedge, configured - brown rubber, 14 cm - is recognised as a door stop.",
+      "recipe": [
+        "wedge"
+      ]
+    },
+    {
+      "id": "gem",
+      "title": "Gem / association(config(bipyramid))",
+      "map": "Primitives_Polythedra",
+      "family": "Bipyramid / association",
+      "dimensions": [
+        0.2,
+        0.3,
+        0.2
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_gem",
+      "icon": "bipyramid",
+      "learn": "association(config(bipyramid)): the bipyramid, configured - two cones base to base, glassy blue - is recognised as a gem.",
+      "recipe": [
+        "bipyramid"
+      ]
+    },
+    {
+      "id": "walk_ramp",
+      "title": "Walk ramp / association(wedge)",
+      "map": "Primitives_Polythedra",
+      "family": "Wedge / association",
+      "dimensions": [
+        1.0,
+        0.45,
+        0.6
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Taken through its plinth's shell into the inventory (2026-11-04); placed, moved and taken back by the hand. The example stays on its plinth.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_walk_ramp",
+      "icon": "wedge",
+      "learn": "walk_ramp = association(wedge): the tape on the floor writes it.",
+      "recipe": [
+        "wedge"
+      ]
+    },
+    {
       "id": "platonic_grabbables",
       "title": "Five Platonic solids",
       "map": "Primitives_Ignorance",
@@ -2056,6 +2116,26 @@
           }
         }
       }
+    },
+    {
+      "id": "beach_ball",
+      "title": "Beach ball / association(config(sphere))",
+      "map": "Primitives_Ignorance",
+      "family": "Sphere / association",
+      "dimensions": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_beach_ball",
+      "icon": "sphere",
+      "learn": "association(config(sphere)): the sphere, configured - 60 cm, white and red - is recognised as a beach ball.",
+      "recipe": [
+        "sphere"
+      ]
     },
     {
       "id": "column_grove_04_06",
@@ -3158,6 +3238,66 @@
       }
     },
     {
+      "id": "fire_extinguisher",
+      "title": "Fire extinguisher / association(config(cylinder))",
+      "map": "Primitives_Columns",
+      "family": "Cylinder / association",
+      "dimensions": [
+        0.17,
+        0.63,
+        0.17
+      ],
+      "anchor": "Base centre; stands upright, rolls on its side",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks, and rolls when laid down.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_fire_extinguisher",
+      "icon": "cylinder",
+      "learn": "association(config(cylinder)): the cylinder, configured - red, a valve, a handle, a hose - is recognised as a thing.",
+      "recipe": [
+        "cylinder"
+      ]
+    },
+    {
+      "id": "oil_drum",
+      "title": "Oil drum / association(config(cylinder))",
+      "map": "Primitives_Columns",
+      "family": "Cylinder / association",
+      "dimensions": [
+        0.58,
+        0.88,
+        0.58
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_oil_drum",
+      "icon": "cylinder",
+      "learn": "association(config(cylinder)): the cylinder, configured - blue steel, 58 cm across, 88 cm tall, two rolling ribs - is recognised as an oil drum.",
+      "recipe": [
+        "cylinder"
+      ]
+    },
+    {
+      "id": "tin_can",
+      "title": "Tin can / association(config(cylinder))",
+      "map": "Primitives_Columns",
+      "family": "Cylinder / association",
+      "dimensions": [
+        0.08,
+        0.12,
+        0.08
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_tin_can",
+      "icon": "cylinder",
+      "learn": "association(config(cylinder)): the cylinder, configured - 8 cm across, 12 cm tall, a red label - is recognised as a tin can.",
+      "recipe": [
+        "cylinder"
+      ]
+    },
+    {
       "id": "profile_hangingchannel_c",
       "title": "C / Hanging channel",
       "map": "Primitives_Profiles",
@@ -3715,6 +3855,66 @@
           }
         }
       }
+    },
+    {
+      "id": "tyre",
+      "title": "Tyre / association(config(torus))",
+      "map": "Primitives_Profiles",
+      "family": "Torus / association",
+      "dimensions": [
+        0.68,
+        0.12,
+        0.68
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_tyre",
+      "icon": "torus",
+      "learn": "association(config(torus)): the torus, configured - black rubber, 68 cm across, lying flat - is recognised as a tyre.",
+      "recipe": [
+        "torus"
+      ]
+    },
+    {
+      "id": "bowling_pin",
+      "title": "Bowling pin / association(config(revolve))",
+      "map": "Primitives_Profiles",
+      "family": "Revolve / association",
+      "dimensions": [
+        0.12,
+        0.38,
+        0.12
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_bowling_pin",
+      "icon": "revolve",
+      "learn": "association(config(revolve)): the revolve, configured - a profile turned round its axis, 38 cm, white with a red neck band - is recognised as a bowling pin.",
+      "recipe": [
+        "revolve"
+      ]
+    },
+    {
+      "id": "marble_chute",
+      "title": "Marble chute / association(config(channel))",
+      "map": "Primitives_Profiles",
+      "family": "Channel / association",
+      "dimensions": [
+        1.2,
+        0.05,
+        0.1
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_marble_chute",
+      "icon": "channel",
+      "learn": "association(config(channel)): the channel, configured - the C profile swept straight: a 1.2 m timber channel - is recognised as a marble chute.",
+      "recipe": [
+        "channel"
+      ]
     },
     {
       "id": "portal_rings",
@@ -6254,6 +6454,26 @@
         "min_scale": 0.5,
         "max_scale": 1.5
       }
+    },
+    {
+      "id": "hinge",
+      "title": "Hinge / association(config(rotation))",
+      "map": "Trans_Rotation",
+      "family": "Rotation / association",
+      "dimensions": [
+        0.2,
+        0.02,
+        0.09
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_hinge",
+      "icon": "rotation",
+      "learn": "association(config(rotation)): the rotation, configured - two steel leaves and a pin: rotation about one axis, held - is recognised as a hinge.",
+      "recipe": [
+        "rotation"
+      ]
     },
     {
       "id": "trans_17_rotation_landing",
@@ -11401,6 +11621,46 @@
       }
     },
     {
+      "id": "warning_triangle",
+      "title": "Warning triangle / association(config(triangle))",
+      "map": "Point_Triangle_Context",
+      "family": "Triangle / association",
+      "dimensions": [
+        0.45,
+        0.45,
+        0.2
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_warning_triangle",
+      "icon": "triangle",
+      "learn": "association(config(triangle)): the triangle, configured - red, reflective, on a stand - is recognised as a warning triangle.",
+      "recipe": [
+        "triangle"
+      ]
+    },
+    {
+      "id": "wooden_board",
+      "title": "Wooden board / association(config(quad))",
+      "map": "Point_Triangle_Context",
+      "family": "Quad / association",
+      "dimensions": [
+        1.2,
+        0.025,
+        0.6
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_wooden_board",
+      "icon": "quad",
+      "learn": "association(config(quad)): the quad, configured - the quad thickened: 1.2 x 0.6 m, 2.5 cm timber - is recognised as a wooden board.",
+      "recipe": [
+        "quad"
+      ]
+    },
+    {
       "id": "square_assembly_table",
       "title": "Square faces / folded edge assembly",
       "map": "Point_Animatedcube",
@@ -11429,6 +11689,147 @@
           "fold_degrees": 90
         }
       }
+    },
+    {
+      "id": "dice",
+      "title": "Die / association(config(cube))",
+      "map": "Point_Animatedcube",
+      "family": "Cube / association",
+      "dimensions": [
+        0.16,
+        0.16,
+        0.16
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_dice",
+      "icon": "cube",
+      "learn": "association(config(cube)): the cube, configured - white, 16 cm, black pips - is recognised as a die.",
+      "recipe": [
+        "cube"
+      ]
+    },
+    {
+      "id": "wooden_block",
+      "title": "Wooden block / association(config(cube))",
+      "map": "Point_Animatedcube",
+      "family": "Cube / association",
+      "dimensions": [
+        0.3,
+        0.1,
+        0.1
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_wooden_block",
+      "icon": "cube",
+      "learn": "association(config(cube)): the cube, configured - light wood, 30 x 10 x 10 cm, the stacking block - is recognised as a wooden block.",
+      "recipe": [
+        "cube"
+      ]
+    },
+    {
+      "id": "domino_tile",
+      "title": "Domino tile / association(config(cube))",
+      "map": "Point_Animatedcube",
+      "family": "Cube / association",
+      "dimensions": [
+        0.05,
+        0.3,
+        0.15
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_domino_tile",
+      "icon": "cube",
+      "learn": "association(config(cube)): the cube, configured - ivory, 30 cm tall, a line and pips - is recognised as a domino tile.",
+      "recipe": [
+        "cube"
+      ]
+    },
+    {
+      "id": "cinder_block",
+      "title": "Cinder block / association(config(cube))",
+      "map": "Point_Animatedcube",
+      "family": "Cube / association",
+      "dimensions": [
+        0.39,
+        0.19,
+        0.19
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_cinder_block",
+      "icon": "cube",
+      "learn": "association(config(cube)): the cube, configured - grey concrete, 39 x 19 x 19 cm, two cores - the thing that props things up - is recognised as a cinder block.",
+      "recipe": [
+        "cube"
+      ]
+    },
+    {
+      "id": "eu_pallet",
+      "title": "EU pallet / cube * 9 + plank * 3 + plank * 5 + plank * 3",
+      "map": "Point_Animatedcube",
+      "family": "Cube / composition",
+      "dimensions": [
+        1.2,
+        0.144,
+        0.8
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Taken through its plinth's shell into the inventory (2026-11-04); placed, moved and taken back by the hand. The example stays on its plinth.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_eu_pallet",
+      "icon": "cube",
+      "learn": "eu_pallet = cube * 9 + plank * 3 + plank * 5 + plank * 3: the tape on the floor writes it.",
+      "recipe": [
+        "cube",
+        "plank"
+      ]
+    },
+    {
+      "id": "brick",
+      "title": "Brick / a 12 cm block",
+      "map": "Point_Animatedcube",
+      "family": "Cube / block",
+      "dimensions": [
+        0.12,
+        0.12,
+        0.12
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Taken through its plinth's shell into the inventory (2026-11-04); placed, moved and taken back by the hand. The example stays on its plinth.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_brick",
+      "icon": "cube",
+      "learn": "brick = a 12 cm block: the tape on the floor writes it.",
+      "recipe": [
+        "cube"
+      ]
+    },
+    {
+      "id": "wooden_box",
+      "title": "Wooden box / association(cube)",
+      "map": "Point_Animatedcube",
+      "family": "Cube / association",
+      "dimensions": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Taken through its plinth's shell into the inventory (2026-11-04); placed, moved and taken back by the hand. The example stays on its plinth.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_wooden_box",
+      "icon": "cube",
+      "learn": "wooden_box = association(cube): the tape on the floor writes it.",
+      "recipe": [
+        "cube"
+      ]
     },
     {
       "id": "single_cube_turntable",
@@ -11835,6 +12236,26 @@
       }
     },
     {
+      "id": "measuring_stick",
+      "title": "Measuring stick / association(config(line))",
+      "map": "Point_Lines",
+      "family": "Line / association",
+      "dimensions": [
+        1.0,
+        0.03,
+        0.045
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_measuring_stick",
+      "icon": "line",
+      "learn": "association(config(line)): the line, configured - yellow, one metre, ticks every 10 cm - is recognised as a measuring stick.",
+      "recipe": [
+        "line"
+      ]
+    },
+    {
       "id": "logic_event_chain",
       "title": "Logic / event chain",
       "map": "Logic_Event",
@@ -11983,6 +12404,88 @@
         "scale": 1,
         "config": {}
       }
+    },
+    {
+      "id": "skateboard",
+      "title": "Skateboard / plank + wheel * 4 + connect(two axles, rod)",
+      "map": "Trans_Translation",
+      "family": "Composition / connect",
+      "dimensions": [
+        0.8,
+        0.12,
+        0.22
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Taken through its plinth's shell into the inventory (2026-11-04); placed, moved and taken back by the hand. The example stays on its plinth.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_skateboard",
+      "icon": "plank",
+      "learn": "skateboard = plank + wheel * 4 + connect(two axles, rod): the tape on the floor writes it.",
+      "recipe": [
+        "plank",
+        "wheel",
+        "rod"
+      ]
+    },
+    {
+      "id": "wheel",
+      "title": "Wheel / association(cylinder, rubber)",
+      "map": "Trans_Translation",
+      "family": "Cylinder / association",
+      "dimensions": [
+        0.07,
+        0.07,
+        0.04
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Taken through its plinth's shell into the inventory (2026-11-04); placed, moved and taken back by the hand. The example stays on its plinth.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_wheel",
+      "icon": "cylinder",
+      "learn": "wheel = association(cylinder, rubber): the tape on the floor writes it.",
+      "recipe": [
+        "cylinder"
+      ]
+    },
+    {
+      "id": "rubber_ball",
+      "title": "Rubber ball / association(config(point))",
+      "map": "Point_One",
+      "family": "Point / association",
+      "dimensions": [
+        0.22,
+        0.22,
+        0.22
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_rubber_ball",
+      "icon": "point",
+      "learn": "association(config(point)): the point, configured - red rubber, 11 cm - is recognised as a rubber ball.",
+      "recipe": [
+        "point"
+      ]
+    },
+    {
+      "id": "marble",
+      "title": "Marble / association(config(point))",
+      "map": "Point_One",
+      "family": "Point / association",
+      "dimensions": [
+        0.04,
+        0.04,
+        0.04
+      ],
+      "anchor": "Base centre",
+      "behaviour": "Carry and place from the inventory; a body that stands, stacks and falls.",
+      "scene": "res://commons/modular/composite.tscn",
+      "token": "mod_marble",
+      "icon": "point",
+      "learn": "association(config(point)): the point, configured - glass, 4 cm - is recognised as a marble.",
+      "recipe": [
+        "point"
+      ]
     }
   ]
 }

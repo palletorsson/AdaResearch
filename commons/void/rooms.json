@@ -237,6 +237,118 @@
             "editor_label": "point corridor door / original museum",
             "museum_origin": "Point_One:8,0"
           }
+        },
+        {
+          "id": "association-rubber-ball",
+          "artifact": "mod_rubber_ball",
+          "station": "SE",
+          "position": [
+            0,
+            3
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "rubber_ball",
+            "editor_label": "Association / rubber_ball = association(config(point)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-rubber-ball-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            0,
+            2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "rubber_ball = association(config(point))",
+            "mount": "floor",
+            "editor_label": "Association tape / rubber_ball"
+          }
+        },
+        {
+          "id": "association-marble",
+          "artifact": "mod_marble",
+          "station": "SE",
+          "position": [
+            1.5,
+            3
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "marble",
+            "editor_label": "Association / marble = association(config(point)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-marble-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            1.5,
+            2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "marble = association(config(point))",
+            "mount": "floor",
+            "editor_label": "Association tape / marble"
+          }
+        },
+        {
+          "id": "association-rubber-ball-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            0,
+            3
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "rubberball",
+            "holds": "association-rubber-ball",
+            "top": 1,
+            "size": [
+              0.38,
+              0.38
+            ],
+            "editor_label": "Association plinth / rubberball"
+          }
+        },
+        {
+          "id": "association-marble-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            1.5,
+            3
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "marble",
+            "holds": "association-marble",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / marble"
+          }
         }
       ],
       "impact_cells": [
@@ -1975,6 +2087,167 @@
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "parallel-beams",
+          "artifact": "parallel_beams",
+          "station": "SW",
+          "position": [
+            -3.5,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "parallel beams / Palle 2026-11-03: three black beams floor to ceiling, leaning 15 degrees"
+          }
+        },
+        {
+          "id": "candidate-timber_plank_1m",
+          "artifact": "timber_plank_1m",
+          "station": "SE",
+          "position": [
+            12.5,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Point_Lines - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-timber_plank_4m",
+          "artifact": "timber_plank_4m",
+          "station": "NE",
+          "position": [
+            4,
+            -1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Point_Lines - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-tape_roll_printed",
+          "artifact": "tape_roll_printed",
+          "station": "SE",
+          "position": [
+            15,
+            1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Lines - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-tape_roll_masking",
+          "artifact": "tape_roll_masking",
+          "station": "NW",
+          "position": [
+            -0.5,
+            -3.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Lines - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-tape_roll_pink",
+          "artifact": "tape_roll_pink",
+          "station": "NE",
+          "position": [
+            18.5,
+            -1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Lines - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-tape_roll_barrier",
+          "artifact": "tape_roll_barrier",
+          "station": "NW",
+          "position": [
+            -1,
+            -2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Lines - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-measuring-stick",
+          "artifact": "mod_measuring_stick",
+          "station": "SW",
+          "position": [
+            -1.5,
+            6
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "measuring_stick",
+            "editor_label": "Association / measuring_stick = association(config(line)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-measuring-stick-tape",
+          "artifact": "association_tape",
+          "station": "SW",
+          "position": [
+            -1.5,
+            5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "measuring_stick = association(config(line))",
+            "mount": "floor",
+            "editor_label": "Association tape / measuring_stick"
+          }
+        },
+        {
+          "id": "association-measuring-stick-plinth",
+          "artifact": "association_plinth",
+          "station": "SW",
+          "position": [
+            -1.5,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "measuringstick",
+            "holds": "association-measuring-stick",
+            "top": 1,
+            "size": [
+              1.16,
+              0.36
+            ],
+            "editor_label": "Association plinth / measuringstick"
+          }
         }
       ],
       "impact_cells": [],
@@ -2755,6 +3028,81 @@
             "editor_label": "room grammar / original museum",
             "museum_origin": "Point_Line_Grid:7,13"
           }
+        },
+        {
+          "id": "candidate-line_trace_monitor",
+          "artifact": "line_trace_monitor",
+          "station": "NW",
+          "position": [
+            -3.5,
+            -1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Point_Trace - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-hand_canvas",
+          "artifact": "hand_canvas",
+          "station": "SW",
+          "position": [
+            -17,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Trace - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-head_trace_projection",
+          "artifact": "head_trace_projection",
+          "station": "NW",
+          "position": [
+            -1,
+            -0.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Trace - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-trace_short_memory",
+          "artifact": "trace_short_memory",
+          "station": "SW",
+          "position": [
+            -15.5,
+            3.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Trace - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-trace_point_ball",
+          "artifact": "trace_point_ball",
+          "station": "SE",
+          "position": [
+            15,
+            0.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Point_Trace - spine worklist 2026-11-03: keep or remove"
+          }
         }
       ],
       "impact_cells": [],
@@ -3321,6 +3669,178 @@
             "already_started": true,
             "fold_degrees": 70.528779366,
             "parts": {}
+          }
+        },
+        {
+          "id": "candidate-timber_panel_1x1",
+          "artifact": "timber_panel_1x1",
+          "station": "SE",
+          "position": [
+            5.5,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Triangle_Context - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-timber_panel_2x1",
+          "artifact": "timber_panel_2x1",
+          "station": "SE",
+          "position": [
+            8.5,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Triangle_Context - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-timber_panel_2x2",
+          "artifact": "timber_panel_2x2",
+          "station": "NW",
+          "position": [
+            -18,
+            -5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Point_Triangle_Context - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-surface_ball_test",
+          "artifact": "surface_ball_test",
+          "station": "SE",
+          "position": [
+            1,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Point_Triangle_Context - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-warning-triangle",
+          "artifact": "mod_warning_triangle",
+          "station": "SE",
+          "position": [
+            16,
+            1.5
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "warning_triangle",
+            "editor_label": "Association / warning_triangle = association(config(triangle)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-warning-triangle-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            16,
+            0.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "warning_triangle = association(config(triangle))",
+            "mount": "floor",
+            "editor_label": "Association tape / warning_triangle"
+          }
+        },
+        {
+          "id": "association-wooden-board",
+          "artifact": "mod_wooden_board",
+          "station": "SE",
+          "position": [
+            18,
+            4
+          ],
+          "height": 0.6,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "wooden_board",
+            "editor_label": "Association / wooden_board = association(config(quad)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-wooden-board-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            18,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "wooden_board = association(config(quad))",
+            "mount": "floor",
+            "editor_label": "Association tape / wooden_board"
+          }
+        },
+        {
+          "id": "association-warning-triangle-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            16,
+            1.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "warningtriangle",
+            "holds": "association-warning-triangle",
+            "top": 0.75,
+            "size": [
+              0.61,
+              0.36
+            ],
+            "editor_label": "Association plinth / warningtriangle"
+          }
+        },
+        {
+          "id": "association-wooden-board-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            18,
+            4
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "woodenboard",
+            "holds": "association-wooden-board",
+            "top": 0.6,
+            "size": [
+              1.36,
+              0.76
+            ],
+            "editor_label": "Association plinth / woodenboard"
           }
         }
       ],
@@ -4453,6 +4973,290 @@
             "colour": "white",
             "editor_label": "Primitive light / white kite on the north column at x 20"
           }
+        },
+        {
+          "id": "candidate-tetrahedron_blocker",
+          "artifact": "tetrahedron_blocker",
+          "station": "SE",
+          "position": [
+            19.75,
+            1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Primitives_Polythedra - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-wedge_blocker",
+          "artifact": "wedge_blocker",
+          "station": "SE",
+          "position": [
+            20,
+            5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Primitives_Polythedra - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-traffic_pyramid_5",
+          "artifact": "traffic_pyramid_5",
+          "station": "NE",
+          "position": [
+            0.75,
+            -3.75
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Primitives_Polythedra - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-pentagonal_bipyramid_7",
+          "artifact": "pentagonal_bipyramid_7",
+          "station": "SE",
+          "position": [
+            15,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Primitives_Polythedra - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-door-stop",
+          "artifact": "mod_door_stop",
+          "station": "SE",
+          "position": [
+            16.5,
+            5
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "door_stop",
+            "editor_label": "Association / door_stop = association(config(wedge)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-door-stop-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            16.5,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "door_stop = association(config(wedge))",
+            "mount": "floor",
+            "editor_label": "Association tape / door_stop"
+          }
+        },
+        {
+          "id": "association-gem",
+          "artifact": "mod_gem",
+          "station": "SE",
+          "position": [
+            12.5,
+            1
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "gem",
+            "editor_label": "Association / gem = association(config(bipyramid)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-gem-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            12,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "gem = association(config(bipyramid))",
+            "mount": "floor",
+            "editor_label": "Association tape / gem"
+          }
+        },
+        {
+          "id": "association-plastic-cone",
+          "artifact": "mod_plastic_cone",
+          "station": "SE",
+          "position": [
+            3.25,
+            -3.25
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "plastic_cone",
+            "editor_label": "Association / plastic_cone = association(tetrahedron) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-plastic-cone-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            3.25,
+            -2.25
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "plastic_cone = association(tetrahedron)",
+            "mount": "floor",
+            "editor_label": "Association tape / plastic_cone"
+          }
+        },
+        {
+          "id": "association-door-stop-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            16.5,
+            5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "doorstop",
+            "holds": "association-door-stop",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / doorstop"
+          }
+        },
+        {
+          "id": "association-gem-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            12.5,
+            1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "gem",
+            "holds": "association-gem",
+            "top": 0.75,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / gem"
+          }
+        },
+        {
+          "id": "association-plastic-cone-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            3.25,
+            -3.25
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "cone",
+            "holds": "association-plastic-cone",
+            "top": 0.45,
+            "size": [
+              0.56,
+              0.56
+            ],
+            "editor_label": "Association plinth / cone"
+          }
+        },
+        {
+          "id": "association-walk-ramp",
+          "artifact": "mod_walk_ramp",
+          "station": "NE",
+          "position": [
+            13.5,
+            5.5
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "walk_ramp",
+            "editor_label": "Association / walk_ramp = association(wedge)",
+            "support": false
+          }
+        },
+        {
+          "id": "association-walk-ramp-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            13.5,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "walkramp",
+            "holds": "association-walk-ramp",
+            "top": 0.75,
+            "size": [
+              1.16,
+              0.76
+            ],
+            "editor_label": "Association plinth / walkramp"
+          }
+        },
+        {
+          "id": "association-walk-ramp-tape",
+          "artifact": "association_tape",
+          "station": "NE",
+          "position": [
+            13.5,
+            6.23
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "walk_ramp = association(wedge)",
+            "mount": "floor",
+            "editor_label": "Association tape / walk_ramp = association(wedge)"
+          }
         }
       ],
       "impact_cells": [],
@@ -5369,6 +6173,454 @@
             "fold_degrees": 90,
             "parts": {}
           }
+        },
+        {
+          "id": "association-dice",
+          "artifact": "mod_dice",
+          "station": "SE",
+          "position": [
+            13.5,
+            2.5
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "dice",
+            "editor_label": "Association / dice = association(config(cube)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-dice-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            12.5,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "dice = association(config(cube))",
+            "mount": "floor",
+            "editor_label": "Association tape / dice"
+          }
+        },
+        {
+          "id": "association-cardboard-box",
+          "artifact": "mod_cardboard_box",
+          "station": "SE",
+          "position": [
+            15,
+            5.5
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "cardboard_box",
+            "editor_label": "Association / cardboard_box = association(cube) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-cardboard-box-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            14,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "cardboard_box = association(cube)",
+            "mount": "floor",
+            "editor_label": "Association tape / cardboard_box"
+          }
+        },
+        {
+          "id": "association-wooden-block",
+          "artifact": "mod_wooden_block",
+          "station": "SE",
+          "position": [
+            16.5,
+            2.5
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "wooden_block",
+            "editor_label": "Association / wooden_block = association(config(cube)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-wooden-block-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            17.5,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "wooden_block = association(config(cube))",
+            "mount": "floor",
+            "editor_label": "Association tape / wooden_block"
+          }
+        },
+        {
+          "id": "association-domino-tile",
+          "artifact": "mod_domino_tile",
+          "station": "SE",
+          "position": [
+            14.5,
+            1
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "domino_tile",
+            "editor_label": "Association / domino_tile = association(config(cube)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-domino-tile-tape",
+          "artifact": "association_tape",
+          "station": "NE",
+          "position": [
+            14.5,
+            -0.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "domino_tile = association(config(cube))",
+            "mount": "floor",
+            "editor_label": "Association tape / domino_tile"
+          }
+        },
+        {
+          "id": "association-cinder-block",
+          "artifact": "mod_cinder_block",
+          "station": "SE",
+          "position": [
+            17,
+            5.5
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "cinder_block",
+            "editor_label": "Association / cinder_block = association(config(cube)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-cinder-block-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            17,
+            6.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "cinder_block = association(config(cube))",
+            "mount": "floor",
+            "editor_label": "Association tape / cinder_block"
+          }
+        },
+        {
+          "id": "association-dice-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            13.5,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "dice",
+            "holds": "association-dice",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / dice"
+          }
+        },
+        {
+          "id": "association-cardboard-box-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            15,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "cardboard",
+            "holds": "association-cardboard-box",
+            "top": 0.75,
+            "size": [
+              0.66,
+              0.66
+            ],
+            "editor_label": "Association plinth / cardboard"
+          }
+        },
+        {
+          "id": "association-wooden-block-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            16.5,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "woodenblock",
+            "holds": "association-wooden-block",
+            "top": 1,
+            "size": [
+              0.46,
+              0.36
+            ],
+            "editor_label": "Association plinth / woodenblock"
+          }
+        },
+        {
+          "id": "association-domino-tile-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            14.5,
+            1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "dominotile",
+            "holds": "association-domino-tile",
+            "top": 0.75,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / dominotile"
+          }
+        },
+        {
+          "id": "association-cinder-block-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            17,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "cinderblock",
+            "holds": "association-cinder-block",
+            "top": 1,
+            "size": [
+              0.55,
+              0.36
+            ],
+            "editor_label": "Association plinth / cinderblock"
+          }
+        },
+        {
+          "id": "association-eu-pallet",
+          "artifact": "mod_eu_pallet",
+          "station": "NW",
+          "position": [
+            12,
+            5.5
+          ],
+          "height": 0.6,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "eu_pallet",
+            "editor_label": "Association / eu_pallet = cube * 9 + plank * 3 + plank * 5 + plank * 3",
+            "support": false
+          }
+        },
+        {
+          "id": "association-eu-pallet-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            12,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "eupallet",
+            "holds": "association-eu-pallet",
+            "top": 0.6,
+            "size": [
+              1.36,
+              0.96
+            ],
+            "editor_label": "Association plinth / eupallet"
+          }
+        },
+        {
+          "id": "association-eu-pallet-tape",
+          "artifact": "association_tape",
+          "station": "NW",
+          "position": [
+            12,
+            6.33
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "eu_pallet = cube * 9 + plank * 3 + plank * 5 + plank * 3",
+            "mount": "floor",
+            "editor_label": "Association tape / eu_pallet = cube * 9 + plank * 3 + plank * 5 + plank * 3"
+          }
+        },
+        {
+          "id": "association-brick",
+          "artifact": "mod_brick",
+          "station": "NW",
+          "position": [
+            12.5,
+            2
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "brick",
+            "editor_label": "Association / brick = a 12 cm block",
+            "support": false
+          }
+        },
+        {
+          "id": "association-brick-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            12.5,
+            2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "brick",
+            "holds": "association-brick",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / brick"
+          }
+        },
+        {
+          "id": "association-brick-tape",
+          "artifact": "association_tape",
+          "station": "NW",
+          "position": [
+            12.5,
+            2.53
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "brick = a 12 cm block",
+            "mount": "floor",
+            "editor_label": "Association tape / brick = a 12 cm block"
+          }
+        },
+        {
+          "id": "association-wooden-box",
+          "artifact": "mod_wooden_box",
+          "station": "NW",
+          "position": [
+            18,
+            2.5
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "wooden_box",
+            "editor_label": "Association / wooden_box = association(cube)",
+            "support": false
+          }
+        },
+        {
+          "id": "association-wooden-box-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            18,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "woodenbox",
+            "holds": "association-wooden-box",
+            "top": 0.75,
+            "size": [
+              0.66,
+              0.66
+            ],
+            "editor_label": "Association plinth / woodenbox"
+          }
+        },
+        {
+          "id": "association-wooden-box-tape",
+          "artifact": "association_tape",
+          "station": "NW",
+          "position": [
+            18,
+            3.18
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "wooden_box = association(cube)",
+            "mount": "floor",
+            "editor_label": "Association tape / wooden_box = association(cube)"
+          }
         }
       ],
       "impact_cells": [],
@@ -6200,6 +7452,62 @@
             "colour": "white",
             "editor_label": "Primitive light / white kite on the north column at x 20"
           }
+        },
+        {
+          "id": "association-beach-ball",
+          "artifact": "mod_beach_ball",
+          "station": "SE",
+          "position": [
+            5,
+            5.5
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "beach_ball",
+            "editor_label": "Association / beach_ball = association(config(sphere)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-beach-ball-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            4,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "beach_ball = association(config(sphere))",
+            "mount": "floor",
+            "editor_label": "Association tape / beach_ball"
+          }
+        },
+        {
+          "id": "association-beach-ball-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            5,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "beachball",
+            "holds": "association-beach-ball",
+            "top": 0.75,
+            "size": [
+              0.76,
+              0.76
+            ],
+            "editor_label": "Association plinth / beachball"
+          }
         }
       ],
       "impact_cells": [],
@@ -6395,7 +7703,54 @@
           "height": 0,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "only_parts": [
+              "Caption",
+              "Caption_2",
+              "CompositionGuide",
+              "DivisionsGuide",
+              "DivisionsLight",
+              "GroveLightEast",
+              "GroveLightWest",
+              "Grove_04_06",
+              "Grove_04_08",
+              "Grove_04_12",
+              "Grove_04_16",
+              "Grove_06_06",
+              "Grove_06_08",
+              "Grove_06_12",
+              "Grove_06_16",
+              "Grove_08_06",
+              "Grove_08_08",
+              "Grove_08_12",
+              "Grove_08_16",
+              "Grove_12_06",
+              "Grove_12_08",
+              "Grove_12_12",
+              "Grove_12_16",
+              "Grove_16_06",
+              "Grove_16_08",
+              "Grove_16_12",
+              "Grove_16_16",
+              "HeightGuide",
+              "HeightLight",
+              "InteriorColumn_13",
+              "InteriorColumn_14",
+              "InteriorColumn_15",
+              "InteriorColumn_16",
+              "InteriorColumn_17",
+              "InteriorColumn_18",
+              "OutlineGuide",
+              "OutlineLight",
+              "SidesGuide",
+              "SidesLight",
+              "Sides_04",
+              "Sides_06",
+              "Sides_08",
+              "Sides_12",
+              "Sides_16"
+            ]
+          }
         },
         {
           "id": "museum-primitives_columns-14-1",
@@ -6412,6 +7767,469 @@
             "museum_yaw": 180,
             "editor_label": "film foundation function / original museum",
             "museum_origin": "Primitives_Columns:1,14"
+          }
+        },
+        {
+          "id": "candidate-resolution_totem",
+          "artifact": "resolution_totem",
+          "station": "SW",
+          "position": [
+            -12,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Primitives_Columns - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-fire-extinguisher",
+          "artifact": "mod_fire_extinguisher",
+          "station": "NE",
+          "position": [
+            0,
+            -2
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "fire_extinguisher",
+            "editor_label": "Association / fire extinguisher = association(config(cylinder)) - beside the first cylinder",
+            "support": false
+          }
+        },
+        {
+          "id": "association-fire-extinguisher-tape",
+          "artifact": "association_tape",
+          "station": "NE",
+          "position": [
+            0,
+            -2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "text": "fire_extinguisher = association(config(cylinder))",
+            "mount": "floor",
+            "editor_label": "Association tape / fire extinguisher"
+          }
+        },
+        {
+          "id": "association-oil-drum",
+          "artifact": "mod_oil_drum",
+          "station": "NE",
+          "position": [
+            0,
+            -1
+          ],
+          "height": 0.45,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "oil_drum",
+            "editor_label": "Association / oil_drum = association(config(cylinder)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-oil-drum-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            0,
+            0.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "oil_drum = association(config(cylinder))",
+            "mount": "floor",
+            "editor_label": "Association tape / oil_drum"
+          }
+        },
+        {
+          "id": "association-tin-can",
+          "artifact": "mod_tin_can",
+          "station": "SE",
+          "position": [
+            0,
+            2
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "tin_can",
+            "editor_label": "Association / tin_can = association(config(cylinder)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-tin-can-tape",
+          "artifact": "association_tape",
+          "station": "SW",
+          "position": [
+            -3.5,
+            2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "tin_can = association(config(cylinder))",
+            "mount": "floor",
+            "editor_label": "Association tape / tin_can"
+          }
+        },
+        {
+          "id": "association-fire-extinguisher-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            0,
+            -2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "extinguisher",
+            "holds": "association-fire-extinguisher",
+            "top": 0.75,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / extinguisher"
+          }
+        },
+        {
+          "id": "association-oil-drum-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            0,
+            -1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "oildrum",
+            "holds": "association-oil-drum",
+            "top": 0.45,
+            "size": [
+              0.74,
+              0.74
+            ],
+            "editor_label": "Association plinth / oildrum"
+          }
+        },
+        {
+          "id": "association-tin-can-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            0,
+            2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "tincan",
+            "holds": "association-tin-can",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / tincan"
+          }
+        },
+        {
+          "id": "grove-cone-01",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            -5.0,
+            -2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "style": "plain",
+            "height": 0.78,
+            "base": "square",
+            "wear": 0.7,
+            "body": "pickable",
+            "editor_label": "Grove cone / plain 0.78 m square"
+          }
+        },
+        {
+          "id": "grove-cone-02",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            -5.0,
+            0.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 35,
+          "config": {
+            "style": "bands",
+            "height": 0.62,
+            "base": "square",
+            "wear": 0.5,
+            "body": "pickable",
+            "editor_label": "Grove cone / bands 0.62 m square"
+          }
+        },
+        {
+          "id": "grove-cone-03",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            -5.0,
+            2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 70,
+          "config": {
+            "style": "bands",
+            "height": 0.42,
+            "base": "square",
+            "wear": 0.3,
+            "body": "pickable",
+            "editor_label": "Grove cone / bands 0.42 m square"
+          }
+        },
+        {
+          "id": "grove-cone-04",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            -1.7,
+            -2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 15,
+          "config": {
+            "style": "plain",
+            "height": 0.82,
+            "base": "square",
+            "wear": 0.8,
+            "body": "pickable",
+            "editor_label": "Grove cone / plain 0.82 m square"
+          }
+        },
+        {
+          "id": "grove-cone-05",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            -1.7,
+            0.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 55,
+          "config": {
+            "style": "band",
+            "height": 0.6,
+            "base": "square",
+            "wear": 0.4,
+            "body": "pickable",
+            "editor_label": "Grove cone / band 0.60 m square"
+          }
+        },
+        {
+          "id": "grove-cone-06",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            -1.7,
+            2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 25,
+          "config": {
+            "style": "bands",
+            "height": 0.44,
+            "base": "round",
+            "wear": 0.2,
+            "body": "pickable",
+            "editor_label": "Grove cone / bands 0.44 m round"
+          }
+        },
+        {
+          "id": "grove-cone-07",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            1.7,
+            -2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "style": "plain",
+            "height": 0.7,
+            "base": "round",
+            "wear": 0.3,
+            "body": "pickable",
+            "editor_label": "Grove cone / plain 0.70 m round"
+          }
+        },
+        {
+          "id": "grove-cone-08",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            1.7,
+            0.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 35,
+          "config": {
+            "style": "bands",
+            "height": 0.6,
+            "base": "round",
+            "wear": 0.5,
+            "body": "pickable",
+            "editor_label": "Grove cone / bands 0.60 m round"
+          }
+        },
+        {
+          "id": "grove-cone-09",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            1.7,
+            2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 70,
+          "config": {
+            "style": "bands",
+            "height": 0.4,
+            "base": "square",
+            "wear": 0.6,
+            "body": "pickable",
+            "editor_label": "Grove cone / bands 0.40 m square"
+          }
+        },
+        {
+          "id": "grove-cone-10",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            5.0,
+            -2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 15,
+          "config": {
+            "style": "plain",
+            "height": 0.8,
+            "base": "square",
+            "wear": 0.9,
+            "body": "pickable",
+            "editor_label": "Grove cone / plain 0.80 m square"
+          }
+        },
+        {
+          "id": "grove-cone-11",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            5.0,
+            0.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 55,
+          "config": {
+            "style": "bands",
+            "height": 0.64,
+            "base": "square",
+            "wear": 0.3,
+            "body": "pickable",
+            "editor_label": "Grove cone / bands 0.64 m square"
+          }
+        },
+        {
+          "id": "grove-cone-12",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            5.0,
+            2.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 25,
+          "config": {
+            "style": "band",
+            "height": 0.42,
+            "base": "round",
+            "wear": 0.4,
+            "body": "pickable",
+            "editor_label": "Grove cone / band 0.42 m round"
+          }
+        },
+        {
+          "id": "grove-post-1",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            10.0,
+            -5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "style": "post",
+            "height": 1.1,
+            "base": "round",
+            "wear": 0.6,
+            "body": "pickable",
+            "editor_label": "Grove post / delineator 1.10 m"
+          }
+        },
+        {
+          "id": "grove-post-2",
+          "artifact": "traffic_cone",
+          "station": "NW",
+          "position": [
+            10.0,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "style": "post",
+            "height": 1.1,
+            "base": "round",
+            "wear": 0.6,
+            "body": "pickable",
+            "editor_label": "Grove post / delineator 1.10 m"
           }
         }
       ],
@@ -6742,6 +8560,204 @@
             "museum_yaw": 0,
             "editor_label": "film profile travels / original museum",
             "museum_origin": "Primitives_Profiles:1,15"
+          }
+        },
+        {
+          "id": "candidate-letter_tyre",
+          "artifact": "letter_tyre",
+          "station": "SE",
+          "position": [
+            4.5,
+            3
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Primitives_Profiles - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-cyrtoid_by_rule",
+          "artifact": "cyrtoid_by_rule",
+          "station": "NE",
+          "position": [
+            3.5,
+            -5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Primitives_Profiles - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-tyre",
+          "artifact": "mod_tyre",
+          "station": "SW",
+          "position": [
+            -1.5,
+            4
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "tyre",
+            "editor_label": "Association / tyre = association(config(torus)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-tyre-tape",
+          "artifact": "association_tape",
+          "station": "SW",
+          "position": [
+            -2,
+            2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "text": "tyre = association(config(torus))",
+            "mount": "floor",
+            "editor_label": "Association tape / tyre"
+          }
+        },
+        {
+          "id": "association-bowling-pin",
+          "artifact": "mod_bowling_pin",
+          "station": "NW",
+          "position": [
+            -1.5,
+            -3
+          ],
+          "height": 0.75,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "bowling_pin",
+            "editor_label": "Association / bowling_pin = association(config(revolve)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-bowling-pin-tape",
+          "artifact": "association_tape",
+          "station": "NW",
+          "position": [
+            -2,
+            -4
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "bowling_pin = association(config(revolve))",
+            "mount": "floor",
+            "editor_label": "Association tape / bowling_pin"
+          }
+        },
+        {
+          "id": "association-marble-chute",
+          "artifact": "mod_marble_chute",
+          "station": "SE",
+          "position": [
+            2,
+            6
+          ],
+          "height": 0.6,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "marble_chute",
+            "editor_label": "Association / marble_chute = association(config(channel)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-marble-chute-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            2,
+            7
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "marble_chute = association(config(channel))",
+            "mount": "floor",
+            "editor_label": "Association tape / marble_chute"
+          }
+        },
+        {
+          "id": "association-tyre-plinth",
+          "artifact": "association_plinth",
+          "station": "SW",
+          "position": [
+            -1.5,
+            4
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "tyre",
+            "holds": "association-tyre",
+            "top": 1,
+            "size": [
+              0.84,
+              0.84
+            ],
+            "editor_label": "Association plinth / tyre"
+          }
+        },
+        {
+          "id": "association-bowling-pin-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -1.5,
+            -3
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "bowlingpin",
+            "holds": "association-bowling-pin",
+            "top": 0.75,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / bowlingpin"
+          }
+        },
+        {
+          "id": "association-marble-chute-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            2,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "marblechute",
+            "holds": "association-marble-chute",
+            "top": 0.6,
+            "size": [
+              1.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / marblechute"
           }
         }
       ],
@@ -7673,6 +9689,21 @@
             "logic_grammar": "supports",
             "editor_label": "Pallet OR / either supported path"
           }
+        },
+        {
+          "id": "candidate-melencolia_platform",
+          "artifact": "melencolia_platform",
+          "station": "NE",
+          "position": [
+            10.5,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Primitives_Melencolia - spine worklist 2026-11-03: keep or remove"
+          }
         }
       ],
       "impact_cells": [],
@@ -7884,8 +9915,8 @@
           "id": "still",
           "artifact": "pick_up_cube",
           "position": [
-            -5,
-            -2
+            -5.5,
+            0.5
           ],
           "station": "NW",
           "height": 2,
@@ -7896,7 +9927,8 @@
             "editor_label": "still",
             "motion": "still",
             "hold": "collect",
-            "motion_curve": "lerp"
+            "motion_curve": "lerp",
+            "support": false
           }
         },
         {
@@ -7904,7 +9936,7 @@
           "artifact": "pick_up_cube",
           "position": [
             -1.5,
-            -2
+            0.5
           ],
           "station": "NW",
           "height": 2,
@@ -7915,15 +9947,16 @@
             "editor_label": "rise",
             "motion": "slide",
             "hold": "demo",
-            "motion_curve": "lerp"
+            "motion_curve": "lerp",
+            "support": false
           }
         },
         {
           "id": "turn",
           "artifact": "pick_up_cube",
           "position": [
-            2,
-            -2
+            1.5,
+            0.5
           ],
           "station": "NE",
           "height": 2,
@@ -7934,7 +9967,8 @@
             "editor_label": "turn",
             "motion": "idle",
             "hold": "demo",
-            "motion_curve": "lerp"
+            "motion_curve": "lerp",
+            "support": false
           }
         },
         {
@@ -7942,7 +9976,7 @@
           "artifact": "pick_up_cube",
           "position": [
             5.5,
-            -2
+            0.5
           ],
           "station": "NE",
           "height": 2,
@@ -7953,15 +9987,16 @@
             "editor_label": "swell",
             "motion": "all",
             "hold": "demo",
-            "motion_curve": "lerp"
+            "motion_curve": "lerp",
+            "support": false
           }
         },
         {
           "id": "translation-marker",
           "artifact": "y_translation_cube",
           "position": [
-            -1.5,
-            -3.7
+            -0.30000000000000004,
+            0.5
           ],
           "station": "NW",
           "height": 1.7,
@@ -7969,15 +10004,16 @@
           "scale": 1,
           "config": {
             "museum_origin": "Trans_Pre",
-            "editor_label": "translation marker"
+            "editor_label": "translation marker",
+            "support": false
           }
         },
         {
           "id": "rotation-marker",
           "artifact": "rotation_oscillation_cube",
           "position": [
-            2,
-            -3.7
+            2.7,
+            0.5
           ],
           "station": "NE",
           "height": 1.7,
@@ -7986,15 +10022,16 @@
           "config": {
             "museum_origin": "Trans_Pre",
             "editor_label": "rotation marker",
-            "mode": "continuous"
+            "mode": "continuous",
+            "support": false
           }
         },
         {
           "id": "scale-marker",
           "artifact": "uniform_scale_marker",
           "position": [
-            5.5,
-            -3.7
+            6.7,
+            0.5
           ],
           "station": "NE",
           "height": 1.7,
@@ -8003,15 +10040,16 @@
           "config": {
             "museum_origin": "Trans_Pre",
             "editor_label": "scale marker",
-            "motion_curve": "lerp"
+            "motion_curve": "lerp",
+            "support": false
           }
         },
         {
           "id": "pickup-1",
           "artifact": "pick_up_cube",
           "position": [
-            16,
-            -3
+            17.5,
+            5.5
           ],
           "station": "NE",
           "height": 2,
@@ -8022,15 +10060,16 @@
             "editor_label": "pickup 1",
             "motion": "all",
             "motion_curve": "lerp",
-            "hold": "collect"
+            "hold": "collect",
+            "support": false
           }
         },
         {
           "id": "pickup-2",
           "artifact": "pick_up_cube",
           "position": [
-            16,
-            -1
+            18.5,
+            2.5
           ],
           "station": "NE",
           "height": 2,
@@ -8041,15 +10080,16 @@
             "editor_label": "pickup 2",
             "motion": "all",
             "motion_curve": "lerp",
-            "hold": "collect"
+            "hold": "collect",
+            "support": false
           }
         },
         {
           "id": "pickup-3",
           "artifact": "pick_up_cube",
           "position": [
-            16,
-            1
+            19.5,
+            -0.5
           ],
           "station": "NE",
           "height": 2,
@@ -8060,15 +10100,16 @@
             "editor_label": "pickup 3",
             "motion": "all",
             "motion_curve": "lerp",
-            "hold": "collect"
+            "hold": "collect",
+            "support": false
           }
         },
         {
           "id": "pickup-4",
           "artifact": "pick_up_cube",
           "position": [
-            16,
-            3
+            19.5,
+            -2.5
           ],
           "station": "NE",
           "height": 2,
@@ -8079,7 +10120,8 @@
             "editor_label": "pickup 4",
             "motion": "all",
             "motion_curve": "lerp",
-            "hold": "collect"
+            "hold": "collect",
+            "support": false
           }
         },
         {
@@ -8103,8 +10145,8 @@
           "id": "health-2",
           "artifact": "health_cross",
           "position": [
-            18.4,
-            4.5
+            20.3,
+            3.6
           ],
           "station": "NE",
           "height": 0,
@@ -8121,8 +10163,8 @@
           "artifact": "void_step_health_box",
           "station": "SW",
           "position": [
-            -3,
-            0
+            17.5,
+            2.5
           ],
           "height": 0,
           "facing": 0,
@@ -8138,16 +10180,17 @@
           "artifact": "void_step_prefab_box",
           "station": "SE",
           "position": [
-            8,
-            4
+            17.5,
+            -0.5
           ],
           "height": 0,
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Step box / random familiar solid",
+            "editor_label": "Step box / random familiar solid, falling",
             "contents": "prefab",
-            "boost": 25
+            "boost": 25,
+            "drop_m": 2.2
           }
         },
         {
@@ -8155,8 +10198,8 @@
           "artifact": "void_step_health_box",
           "station": "SE",
           "position": [
-            13,
-            4
+            18.5,
+            -2.5
           ],
           "height": 0,
           "facing": 0,
@@ -8166,6 +10209,92 @@
             "contents": "health",
             "boost": 25
           }
+        },
+        {
+          "id": "found-solid-2",
+          "artifact": "void_step_prefab_box",
+          "station": "NE",
+          "position": [
+            16.5,
+            -2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Step box / random familiar solid, falling",
+            "contents": "prefab",
+            "boost": 25,
+            "drop_m": 2.2
+          }
+        },
+        {
+          "id": "tape-still",
+          "artifact": "invariant_tape",
+          "station": "NW",
+          "position": [
+            -5.5,
+            0.5
+          ],
+          "height": 2,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "target": "still",
+            "editor_label": "Invariant tape / still",
+            "support": false
+          }
+        },
+        {
+          "id": "tape-rise",
+          "artifact": "invariant_tape",
+          "station": "NW",
+          "position": [
+            -1.5,
+            0.5
+          ],
+          "height": 2,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "target": "rise",
+            "editor_label": "Invariant tape / rise",
+            "support": false
+          }
+        },
+        {
+          "id": "tape-turn",
+          "artifact": "invariant_tape",
+          "station": "NE",
+          "position": [
+            1.5,
+            0.5
+          ],
+          "height": 2,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "target": "turn",
+            "editor_label": "Invariant tape / turn",
+            "support": false
+          }
+        },
+        {
+          "id": "tape-swell",
+          "artifact": "invariant_tape",
+          "station": "NE",
+          "position": [
+            5.5,
+            0.5
+          ],
+          "height": 2,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "target": "swell",
+            "editor_label": "Invariant tape / swell",
+            "support": false
+          }
         }
       ],
       "props": [
@@ -8173,8 +10302,8 @@
           "id": "demo-work-light",
           "kind": "work_light",
           "position": [
-            -4.8,
-            -4.6
+            -3.5,
+            -6.2
           ],
           "facing": 0,
           "scale": 1
@@ -8183,8 +10312,8 @@
           "id": "route-work-light",
           "kind": "work_light",
           "position": [
-            18.6,
-            6.5
+            20.4,
+            6
           ],
           "facing": 180,
           "scale": 1
@@ -8207,202 +10336,287 @@
           "position": [
             -6,
             4.2
-          ],
-          "height": 0
+          ]
         },
         {
           "label": "01 / STILL",
           "position": [
-            -5,
-            0.85
-          ],
-          "height": 1
+            -5.5,
+            3.7
+          ]
         },
         {
-          "label": "02 / RISE",
+          "label": "over the cube",
+          "position": [
+            -5.5,
+            -2.7
+          ]
+        },
+        {
+          "label": "02 / TRANSLATE",
           "position": [
             -1.5,
-            0.85
-          ],
-          "height": 1
+            -2.7
+          ]
         },
         {
-          "label": "03 / TURN",
+          "label": "over the cube",
           "position": [
-            2,
-            0.85
-          ],
-          "height": 1
+            -1.5,
+            3.7
+          ]
+        },
+        {
+          "label": "03 / ROTATE",
+          "position": [
+            1.5,
+            3.7
+          ]
+        },
+        {
+          "label": "over the cube",
+          "position": [
+            1.5,
+            -2.7
+          ]
         },
         {
           "label": "04 / SCALE",
           "position": [
             5.5,
-            0.85
-          ],
-          "height": 1
+            -2.7
+          ]
         },
         {
-          "label": "FOLLOW THE BOXES",
+          "label": "over the cube",
           "position": [
-            6,
-            3
-          ],
-          "height": 1
-        },
-        {
-          "label": "STEP / SOMETHING INSIDE",
-          "position": [
-            10,
-            5
-          ],
-          "height": 1
+            5.5,
+            3.7
+          ]
         },
         {
           "label": "NOW COLLECT THE MOVEMENT",
           "position": [
-            16,
-            4.7
-          ],
-          "height": 1
+            10,
+            4.6
+          ]
+        },
+        {
+          "label": "05 / TWO CUBES",
+          "position": [
+            13.4,
+            5.5
+          ]
+        },
+        {
+          "label": "on the two cubes",
+          "position": [
+            17.5,
+            5.5
+          ]
+        },
+        {
+          "label": "step off",
+          "position": [
+            17.5,
+            3.8
+          ]
+        },
+        {
+          "label": "06 / THREE CUBES",
+          "position": [
+            13.4,
+            2.5
+          ]
+        },
+        {
+          "label": "on the three cubes",
+          "position": [
+            18.5,
+            2.5
+          ]
+        },
+        {
+          "label": "step off",
+          "position": [
+            18.5,
+            0.9
+          ]
+        },
+        {
+          "label": "07 / TWO PARALLEL ROWS",
+          "position": [
+            13.4,
+            -0.5
+          ]
+        },
+        {
+          "label": "along the first row",
+          "position": [
+            19.5,
+            -0.5
+          ]
+        },
+        {
+          "label": "jump to the parallel row",
+          "position": [
+            19.5,
+            -2.5
+          ]
+        },
+        {
+          "label": "step off",
+          "position": [
+            18,
+            -4
+          ]
         },
         {
           "label": "B / NEXT FLOOR",
           "position": [
             16,
             -6.2
-          ],
-          "height": 0
+          ]
         }
       ],
       "construction": [
         {
-          "id": "Pre-cube-000",
-          "kind": "cube",
+          "id": "Pre-wedge-000",
+          "kind": "wedge",
           "position": [
-            -6,
+            -5.5,
             0,
-            0
+            2
           ],
-          "facing": 0
+          "facing": 180
         },
         {
           "id": "Pre-cube-001",
           "kind": "cube",
           "position": [
-            -6,
+            -5.5,
             0,
-            1
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-002",
-          "kind": "cube",
+          "id": "Pre-wedge-002",
+          "kind": "wedge",
           "position": [
-            -5,
+            -5.5,
             0,
-            0
+            -1
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-003",
-          "kind": "cube",
+          "id": "Pre-wedge-003",
+          "kind": "wedge",
           "position": [
-            -5,
+            -1.5,
             0,
-            1
+            2
           ],
-          "facing": 0
+          "facing": 180
         },
         {
           "id": "Pre-cube-004",
           "kind": "cube",
           "position": [
-            -4,
+            -1.5,
             0,
-            0
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-005",
-          "kind": "cube",
+          "id": "Pre-wedge-005",
+          "kind": "wedge",
           "position": [
-            -4,
+            -1.5,
             0,
-            1
+            -1
           ],
           "facing": 0
+        },
+        {
+          "id": "Pre-wedge-006",
+          "kind": "wedge",
+          "position": [
+            1.5,
+            0,
+            2
+          ],
+          "facing": 180
         },
         {
           "id": "Pre-cube-007",
           "kind": "cube",
           "position": [
-            -3,
+            1.5,
             0,
-            1
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-008",
-          "kind": "cube",
+          "id": "Pre-wedge-008",
+          "kind": "wedge",
           "position": [
-            -2,
+            1.5,
             0,
-            0
+            -1
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-009",
-          "kind": "cube",
+          "id": "Pre-wedge-009",
+          "kind": "wedge",
           "position": [
-            -2,
+            5.5,
             0,
-            1
+            2
           ],
-          "facing": 0
+          "facing": 180
         },
         {
           "id": "Pre-cube-010",
           "kind": "cube",
           "position": [
-            -1,
+            5.5,
             0,
-            0
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-011",
-          "kind": "cube",
+          "id": "Pre-wedge-011",
+          "kind": "wedge",
           "position": [
-            -1,
+            5.5,
             0,
-            1
+            -1
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-012",
-          "kind": "cube",
+          "id": "Pre-wedge-012",
+          "kind": "wedge",
           "position": [
+            15,
             0,
-            0,
-            0
+            5.5
           ],
-          "facing": 0
+          "facing": 90
         },
         {
           "id": "Pre-cube-013",
           "kind": "cube",
           "position": [
+            16.5,
             0,
-            0,
-            1
+            5.5
           ],
           "facing": 0
         },
@@ -8410,29 +10624,29 @@
           "id": "Pre-cube-014",
           "kind": "cube",
           "position": [
-            1,
+            17.5,
             0,
-            0
+            5.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-015",
-          "kind": "cube",
+          "id": "Pre-wedge-015",
+          "kind": "wedge",
           "position": [
-            1,
+            15,
             0,
-            1
+            2.5
           ],
-          "facing": 0
+          "facing": 90
         },
         {
           "id": "Pre-cube-016",
           "kind": "cube",
           "position": [
-            2,
+            16.5,
             0,
-            0
+            2.5
           ],
           "facing": 0
         },
@@ -8440,29 +10654,29 @@
           "id": "Pre-cube-017",
           "kind": "cube",
           "position": [
-            2,
+            18.5,
             0,
-            1
+            2.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-018",
-          "kind": "cube",
+          "id": "Pre-wedge-018",
+          "kind": "wedge",
           "position": [
-            3,
+            15,
             0,
-            0
+            -0.5
           ],
-          "facing": 0
+          "facing": 90
         },
         {
           "id": "Pre-cube-019",
           "kind": "cube",
           "position": [
-            3,
+            16.5,
             0,
-            1
+            -0.5
           ],
           "facing": 0
         },
@@ -8470,9 +10684,9 @@
           "id": "Pre-cube-020",
           "kind": "cube",
           "position": [
-            4,
+            18.5,
             0,
-            0
+            -0.5
           ],
           "facing": 0
         },
@@ -8480,9 +10694,9 @@
           "id": "Pre-cube-021",
           "kind": "cube",
           "position": [
-            4,
+            19.5,
             0,
-            1
+            -0.5
           ],
           "facing": 0
         },
@@ -8490,9 +10704,9 @@
           "id": "Pre-cube-022",
           "kind": "cube",
           "position": [
-            5,
+            17.5,
             0,
-            0
+            -2.5
           ],
           "facing": 0
         },
@@ -8500,1529 +10714,159 @@
           "id": "Pre-cube-023",
           "kind": "cube",
           "position": [
-            5,
+            19.5,
             0,
-            1
+            -2.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-024",
+          "id": "level-cube-12",
           "kind": "cube",
           "position": [
-            6,
+            19.5,
             0,
-            0
+            -3.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-025",
+          "id": "level-cube-1",
           "kind": "cube",
           "position": [
-            6,
+            19.5,
             0,
-            1
+            -1.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-slab-026",
-          "kind": "slab",
+          "id": "level-cube-2",
+          "kind": "cube",
           "position": [
-            -6,
+            19.5,
             0,
-            -2
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-slab-027",
-          "kind": "slab",
+          "id": "level-cube-3",
+          "kind": "cube",
           "position": [
-            -6,
-            0.25,
-            -2
+            19.5,
+            0,
+            1.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-slab-028",
-          "kind": "slab",
+          "id": "level-cube-4",
+          "kind": "cube",
           "position": [
-            -6,
+            18.5,
+            0,
+            3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "level-cube-5",
+          "kind": "cube",
+          "position": [
+            18.5,
+            0,
+            4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "level-cube-6",
+          "kind": "cube",
+          "position": [
+            18.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "level-cube-9",
+          "kind": "cube",
+          "position": [
+            2.5,
+            0,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "level-cube-10",
+          "kind": "cube",
+          "position": [
+            3.5,
+            0,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "level-cube-11",
+          "kind": "cube",
+          "position": [
+            4.5,
+            0,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "level-cube-13",
+          "kind": "cube",
+          "position": [
             0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-029",
-          "kind": "slab",
-          "position": [
-            -6,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-030",
-          "kind": "slab",
-          "position": [
-            -6,
             0,
-            -1
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-slab-031",
-          "kind": "slab",
-          "position": [
-            -6,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-032",
-          "kind": "slab",
-          "position": [
-            -6,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-033",
-          "kind": "slab",
-          "position": [
-            -6,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-034",
-          "kind": "slab",
-          "position": [
-            -5,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-035",
-          "kind": "slab",
-          "position": [
-            -5,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-036",
-          "kind": "slab",
-          "position": [
-            -5,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-037",
-          "kind": "slab",
-          "position": [
-            -5,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-038",
-          "kind": "slab",
-          "position": [
-            -5,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-039",
-          "kind": "slab",
-          "position": [
-            -5,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-040",
-          "kind": "slab",
-          "position": [
-            -5,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-041",
-          "kind": "slab",
-          "position": [
-            -5,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-042",
-          "kind": "slab",
-          "position": [
-            -4,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-043",
-          "kind": "slab",
-          "position": [
-            -4,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-044",
-          "kind": "slab",
-          "position": [
-            -4,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-045",
-          "kind": "slab",
-          "position": [
-            -4,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-046",
-          "kind": "slab",
-          "position": [
-            -4,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-047",
-          "kind": "slab",
-          "position": [
-            -4,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-048",
-          "kind": "slab",
-          "position": [
-            -4,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-049",
-          "kind": "slab",
-          "position": [
-            -4,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-050",
-          "kind": "slab",
-          "position": [
-            -2,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-051",
-          "kind": "slab",
-          "position": [
-            -2,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-052",
-          "kind": "slab",
-          "position": [
-            -2,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-053",
-          "kind": "slab",
-          "position": [
-            -2,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-054",
-          "kind": "slab",
-          "position": [
-            -2,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-055",
-          "kind": "slab",
-          "position": [
-            -2,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-056",
-          "kind": "slab",
-          "position": [
-            -2,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-057",
-          "kind": "slab",
-          "position": [
-            -2,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-058",
-          "kind": "slab",
-          "position": [
-            -1,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-059",
-          "kind": "slab",
-          "position": [
-            -1,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-060",
-          "kind": "slab",
-          "position": [
-            -1,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-061",
-          "kind": "slab",
-          "position": [
-            -1,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-062",
-          "kind": "slab",
-          "position": [
-            -1,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-063",
-          "kind": "slab",
-          "position": [
-            -1,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-064",
-          "kind": "slab",
-          "position": [
-            -1,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-065",
-          "kind": "slab",
-          "position": [
-            -1,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-066",
-          "kind": "slab",
-          "position": [
-            0,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-067",
-          "kind": "slab",
-          "position": [
-            0,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-068",
-          "kind": "slab",
-          "position": [
-            0,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-069",
-          "kind": "slab",
-          "position": [
-            0,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-070",
-          "kind": "slab",
-          "position": [
-            0,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-071",
-          "kind": "slab",
-          "position": [
-            0,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-072",
-          "kind": "slab",
-          "position": [
-            0,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-073",
-          "kind": "slab",
-          "position": [
-            0,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-074",
-          "kind": "slab",
-          "position": [
-            1,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-075",
-          "kind": "slab",
-          "position": [
-            1,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-076",
-          "kind": "slab",
-          "position": [
-            1,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-077",
-          "kind": "slab",
-          "position": [
-            1,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-078",
-          "kind": "slab",
-          "position": [
-            1,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-079",
-          "kind": "slab",
-          "position": [
-            1,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-080",
-          "kind": "slab",
-          "position": [
-            1,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-081",
-          "kind": "slab",
-          "position": [
-            1,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-082",
-          "kind": "slab",
-          "position": [
-            2,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-083",
-          "kind": "slab",
-          "position": [
-            2,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-084",
-          "kind": "slab",
-          "position": [
-            2,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-085",
-          "kind": "slab",
-          "position": [
-            2,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-086",
-          "kind": "slab",
-          "position": [
-            2,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-087",
-          "kind": "slab",
-          "position": [
-            2,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-088",
-          "kind": "slab",
-          "position": [
-            2,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-089",
-          "kind": "slab",
-          "position": [
-            2,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-090",
-          "kind": "slab",
-          "position": [
-            3,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-091",
-          "kind": "slab",
-          "position": [
-            3,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-092",
-          "kind": "slab",
-          "position": [
-            3,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-093",
-          "kind": "slab",
-          "position": [
-            3,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-094",
-          "kind": "slab",
-          "position": [
-            3,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-095",
-          "kind": "slab",
-          "position": [
-            3,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-096",
-          "kind": "slab",
-          "position": [
-            3,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-097",
-          "kind": "slab",
-          "position": [
-            3,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-098",
-          "kind": "slab",
-          "position": [
-            4,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-099",
-          "kind": "slab",
-          "position": [
-            4,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-100",
-          "kind": "slab",
-          "position": [
-            4,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-101",
-          "kind": "slab",
-          "position": [
-            4,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-102",
-          "kind": "slab",
-          "position": [
-            4,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-103",
-          "kind": "slab",
-          "position": [
-            4,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-104",
-          "kind": "slab",
-          "position": [
-            4,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-105",
-          "kind": "slab",
-          "position": [
-            4,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-106",
-          "kind": "slab",
-          "position": [
-            5,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-107",
-          "kind": "slab",
-          "position": [
-            5,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-108",
-          "kind": "slab",
-          "position": [
-            5,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-109",
-          "kind": "slab",
-          "position": [
-            5,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-110",
-          "kind": "slab",
-          "position": [
-            5,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-111",
-          "kind": "slab",
-          "position": [
-            5,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-112",
-          "kind": "slab",
-          "position": [
-            5,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-113",
-          "kind": "slab",
-          "position": [
-            5,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-114",
-          "kind": "slab",
-          "position": [
-            6,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-115",
-          "kind": "slab",
-          "position": [
-            6,
-            0.25,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-116",
-          "kind": "slab",
-          "position": [
-            6,
-            0.5,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-117",
-          "kind": "slab",
-          "position": [
-            6,
-            0.75,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-118",
-          "kind": "slab",
-          "position": [
-            6,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-119",
-          "kind": "slab",
-          "position": [
-            6,
-            0.25,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-120",
-          "kind": "slab",
-          "position": [
-            6,
-            0.5,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-slab-121",
-          "kind": "slab",
-          "position": [
-            6,
-            0.75,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-wedge-122",
-          "kind": "wedge",
-          "position": [
-            -6,
-            0,
-            2.5
-          ],
-          "facing": 180
-        },
-        {
-          "id": "Pre-wedge-123",
-          "kind": "wedge",
-          "position": [
-            -5,
-            0,
-            2.5
-          ],
-          "facing": 180
-        },
-        {
-          "id": "Pre-cube-124",
+          "id": "level-cube-14",
           "kind": "cube",
           "position": [
-            5,
+            -0.5,
             0,
-            2
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-125",
+          "id": "level-cube-15",
           "kind": "cube",
           "position": [
-            5,
+            -2.5,
             0,
-            3
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-126",
+          "id": "level-cube-16",
           "kind": "cube",
           "position": [
-            5,
+            -3.5,
             0,
-            4
+            0.5
           ],
           "facing": 0
         },
         {
-          "id": "Pre-cube-127",
+          "id": "level-cube-17",
           "kind": "cube",
           "position": [
-            5,
+            -4.5,
             0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-128",
-          "kind": "cube",
-          "position": [
-            6,
-            0,
-            2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-129",
-          "kind": "cube",
-          "position": [
-            6,
-            0,
-            3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-130",
-          "kind": "cube",
-          "position": [
-            6,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-131",
-          "kind": "cube",
-          "position": [
-            6,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-132",
-          "kind": "cube",
-          "position": [
-            7,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-133",
-          "kind": "cube",
-          "position": [
-            7,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-135",
-          "kind": "cube",
-          "position": [
-            8,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-136",
-          "kind": "cube",
-          "position": [
-            9,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-137",
-          "kind": "cube",
-          "position": [
-            9,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-138",
-          "kind": "cube",
-          "position": [
-            10,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-139",
-          "kind": "cube",
-          "position": [
-            10,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-140",
-          "kind": "cube",
-          "position": [
-            11,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-141",
-          "kind": "cube",
-          "position": [
-            11,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-142",
-          "kind": "cube",
-          "position": [
-            12,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-143",
-          "kind": "cube",
-          "position": [
-            12,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-145",
-          "kind": "cube",
-          "position": [
-            13,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-146",
-          "kind": "cube",
-          "position": [
-            14,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-147",
-          "kind": "cube",
-          "position": [
-            14,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-148",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-149",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-150",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-151",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-152",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            4
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-153",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-154",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            -3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-155",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-156",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-157",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            0
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-158",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-159",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-160",
-          "kind": "cube",
-          "position": [
-            15,
-            0,
-            3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-wedge-161",
-          "kind": "wedge",
-          "position": [
-            15,
-            0,
-            -4.5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-162",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            -3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-163",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-164",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-165",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            0
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-166",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-167",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-168",
-          "kind": "cube",
-          "position": [
-            16,
-            0,
-            3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-wedge-169",
-          "kind": "wedge",
-          "position": [
-            16,
-            0,
-            -4.5
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-170",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            -3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-171",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            -2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-172",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            -1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-173",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            0
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-174",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            1
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-175",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            2
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-cube-176",
-          "kind": "cube",
-          "position": [
-            17,
-            0,
-            3
-          ],
-          "facing": 0
-        },
-        {
-          "id": "Pre-wedge-177",
-          "kind": "wedge",
-          "position": [
-            17,
-            0,
-            -4.5
+            0.5
           ],
           "facing": 0
         }
@@ -10056,210 +10900,6 @@
               "travel_scale": 1.8
             },
             "connects_next_floor": true
-          }
-        },
-        {
-          "id": "logic-spring-and",
-          "artifact": "matter_spring_and",
-          "station": "SW",
-          "position": [
-            -4.1,
-            3.6
-          ],
-          "height": 0,
-          "facing": 0,
-          "scale": 1,
-          "config": {
-            "editor_label": "Matter / AND / gravity â€” earn the reusable assembly"
-          }
-        },
-        {
-          "id": "logic-spring-or",
-          "artifact": "matter_spring_or",
-          "station": "SE",
-          "position": [
-            0,
-            3.6
-          ],
-          "height": 0,
-          "facing": 0,
-          "scale": 1,
-          "config": {
-            "editor_label": "Matter / OR / gravity â€” earn the reusable assembly"
-          }
-        },
-        {
-          "id": "logic-spring-not",
-          "artifact": "matter_spring_not",
-          "station": "SE",
-          "position": [
-            -1.5,
-            7.25
-          ],
-          "height": 0,
-          "facing": 0,
-          "scale": 1,
-          "config": {
-            "editor_label": "Matter / NOT / gravity â€” earn the reusable assembly",
-            "parts": {
-              "TableAndSupports": {
-                "position": [
-                  -0.04999999999999982,
-                  -3.552713678800501e-15,
-                  0.1499999999999999
-                ]
-              }
-            }
-          }
-        },
-        {
-          "id": "threshold-workshop-again",
-          "artifact": "threshold_again",
-          "station": "NW",
-          "position": [
-            -17.25,
-            -6.4
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "threshold": "again",
-            "editor_label": "Matter / Again",
-            "parts": {
-              "Controls": {
-                "position": [
-                  0,
-                  0.8,
-                  1.2
-                ]
-              }
-            }
-          }
-        },
-        {
-          "id": "threshold-workshop-almost",
-          "artifact": "threshold_almost",
-          "station": "NW",
-          "position": [
-            -10.75,
-            -6.4
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "threshold": "almost",
-            "editor_label": "Matter / Almost",
-            "parts": {
-              "Controls": {
-                "position": [
-                  0.3,
-                  0.8,
-                  1.2
-                ]
-              }
-            }
-          }
-        },
-        {
-          "id": "threshold-workshop-just",
-          "artifact": "threshold_just",
-          "station": "NW",
-          "position": [
-            -4.25,
-            -6.4
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "threshold": "just",
-            "editor_label": "Matter / Just",
-            "parts": {
-              "Controls": {
-                "position": [
-                  -0.2,
-                  0.8,
-                  1.2
-                ]
-              }
-            }
-          }
-        },
-        {
-          "id": "threshold-workshop-barely",
-          "artifact": "threshold_barely",
-          "station": "NW",
-          "position": [
-            2,
-            -6.4
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "threshold": "barely",
-            "editor_label": "Matter / Barely",
-            "parts": {
-              "Controls": {
-                "position": [
-                  -0.7,
-                  0.8,
-                  1.2
-                ]
-              }
-            }
-          }
-        },
-        {
-          "id": "threshold-workshop-still",
-          "artifact": "threshold_still",
-          "station": "NW",
-          "position": [
-            8.5,
-            -6.4
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "threshold": "still",
-            "editor_label": "Matter / Still",
-            "parts": {
-              "Controls": {
-                "position": [
-                  0,
-                  0.8,
-                  1.2
-                ]
-              }
-            }
-          }
-        },
-        {
-          "id": "threshold-workshop-descent",
-          "artifact": "threshold_descent",
-          "station": "NW",
-          "position": [
-            18,
-            4.4
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 270,
-          "config": {
-            "threshold": "descent",
-            "editor_label": "Matter / Eventually",
-            "parts": {
-              "Controls": {
-                "position": [
-                  -0.15,
-                  0.8,
-                  1.2
-                ]
-              }
-            }
           }
         },
         {
@@ -10321,6 +10961,171 @@
           "config": {
             "editor_label": "Polyhedra pyramid / shaft boundary"
           }
+        },
+        {
+          "id": "candidate-invariants_demo",
+          "artifact": "invariants_demo",
+          "station": "NW",
+          "position": [
+            -17,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid MindMap_Transformation - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-shear_matrix_demo",
+          "artifact": "shear_matrix_demo",
+          "station": "NW",
+          "position": [
+            -13.5,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Gallery_Transforms - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-homogeneous_coordinates",
+          "artifact": "homogeneous_coordinates",
+          "station": "NW",
+          "position": [
+            -10,
+            -6.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Gallery_Transforms - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-transform_matrix_cube",
+          "artifact": "transform_matrix_cube",
+          "station": "NW",
+          "position": [
+            -6.5,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Ribbon_Transformation_04 - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-transformation_workbench",
+          "artifact": "transformation_workbench",
+          "station": "NW",
+          "position": [
+            -2,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Gallery_Transforms - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-passage_ledger",
+          "artifact": "passage_ledger",
+          "station": "NW",
+          "position": [
+            2,
+            -6.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Gallery_Transforms - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-vector_translation_demo",
+          "artifact": "vector_translation_demo",
+          "station": "NW",
+          "position": [
+            8,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Trans_Composition - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-chair_assembly_puzzle",
+          "artifact": "chair_assembly_puzzle",
+          "station": "NW",
+          "position": [
+            -17,
+            1
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Trans_Composition - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-instruction_bench",
+          "artifact": "instruction_bench",
+          "station": "NW",
+          "position": [
+            -17,
+            -2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Trans_Composition - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-assembly_line_puzzle",
+          "artifact": "assembly_line_puzzle",
+          "station": "NW",
+          "position": [
+            16,
+            5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Trans_Composition - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-biederman_relief",
+          "artifact": "biederman_relief",
+          "station": "NW",
+          "position": [
+            -3,
+            7.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Trans_Composition - 2026-11-03: keep or remove"
+          }
         }
       ],
       "props": [],
@@ -10352,90 +11157,6 @@
           "position": [
             -5,
             0
-          ]
-        },
-        {
-          "label": "NORTH AISLE / ON THE SOLID SLAB",
-          "position": [
-            -19.2,
-            -3.6
-          ]
-        },
-        {
-          "label": "AGAIN / PHYSICAL MARGINS",
-          "position": [
-            -17.25,
-            -3.6
-          ]
-        },
-        {
-          "label": "ALMOST / PHYSICAL MARGINS",
-          "position": [
-            -10.45,
-            -3.6
-          ]
-        },
-        {
-          "label": "JUST / PHYSICAL MARGINS",
-          "position": [
-            -4.45,
-            -3.6
-          ]
-        },
-        {
-          "label": "BARELY / PHYSICAL MARGINS",
-          "position": [
-            1.3,
-            -3.6
-          ]
-        },
-        {
-          "label": "STILL / PHYSICAL MARGINS",
-          "position": [
-            8.5,
-            -3.6
-          ]
-        },
-        {
-          "label": "AROUND SHAFT B / EAST AISLE",
-          "position": [
-            13.1,
-            -3.6
-          ]
-        },
-        {
-          "label": "EAST BAY / PHYSICAL MARGINS",
-          "position": [
-            13.1,
-            4.25
-          ]
-        },
-        {
-          "label": "EVENTUALLY / COOLING INTO A VALLEY",
-          "position": [
-            15.2,
-            4.25
-          ]
-        },
-        {
-          "label": "AROUND SHAFT B / RETURN",
-          "position": [
-            13.1,
-            4.25
-          ]
-        },
-        {
-          "label": "NORTH AISLE / RETURN",
-          "position": [
-            13.1,
-            -3.6
-          ]
-        },
-        {
-          "label": "RETURN TO SHAFT B",
-          "position": [
-            10,
-            -3.6
           ]
         },
         {
@@ -12510,6 +13231,163 @@
           "scale": 1,
           "config": {
             "editor_label": "03 / blue barriers grow from the table to the floor"
+          }
+        },
+        {
+          "id": "candidate-trans_machine_crank",
+          "artifact": "trans_machine_crank",
+          "station": "SW",
+          "position": [
+            -12.5,
+            3.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / Trans_Translation - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-trans_machine_suspended",
+          "artifact": "trans_machine_suspended",
+          "station": "SW",
+          "position": [
+            -4,
+            2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Trans_Translation - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "candidate-pickup_gate",
+          "artifact": "pickup_gate",
+          "station": "NE",
+          "position": [
+            15.5,
+            -3.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / grid Trans_AxisDecomposition - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-skateboard",
+          "artifact": "mod_skateboard",
+          "station": "NE",
+          "position": [
+            -8,
+            6
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "skateboard",
+            "editor_label": "Association / skateboard = plank + wheel * 4 + connect(two axles, rod)",
+            "support": false
+          }
+        },
+        {
+          "id": "association-skateboard-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            -8,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "skateboard",
+            "holds": "association-skateboard",
+            "top": 1,
+            "size": [
+              0.96,
+              0.38
+            ],
+            "editor_label": "Association plinth / skateboard"
+          }
+        },
+        {
+          "id": "association-skateboard-tape",
+          "artifact": "association_tape",
+          "station": "NE",
+          "position": [
+            -8,
+            6.54
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "skateboard = plank + wheel * 4 + connect(two axles, rod)",
+            "mount": "floor",
+            "editor_label": "Association tape / skateboard = plank + wheel * 4 + connect(two axles, rod)"
+          }
+        },
+        {
+          "id": "association-wheel",
+          "artifact": "mod_wheel",
+          "station": "NE",
+          "position": [
+            -10.5,
+            6
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "wheel",
+            "editor_label": "Association / wheel = association(cylinder, rubber)",
+            "support": false
+          }
+        },
+        {
+          "id": "association-wheel-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            -10.5,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "wheel",
+            "holds": "association-wheel",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / wheel"
+          }
+        },
+        {
+          "id": "association-wheel-tape",
+          "artifact": "association_tape",
+          "station": "NE",
+          "position": [
+            -10.5,
+            6.53
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "wheel = association(cylinder, rubber)",
+            "mount": "floor",
+            "editor_label": "Association tape / wheel = association(cylinder, rubber)"
           }
         }
       ],
@@ -16806,6 +17684,92 @@
             "recipe_document": "res://commons/void/trials/rotation_portal_archive/archive-portal-square/recipe.json",
             "editor_label": "04 / Square portal item"
           }
+        },
+        {
+          "id": "candidate-trans_machine_lever",
+          "artifact": "trans_machine_lever",
+          "station": "NE",
+          "position": [
+            4.5,
+            -2
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Trans_Rotation - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-hinge",
+          "artifact": "mod_hinge",
+          "station": "SE",
+          "position": [
+            18,
+            4.5
+          ],
+          "height": 1,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "term": "hinge",
+            "editor_label": "Association / hinge = association(config(rotation)) - where the form is first met",
+            "support": false
+          }
+        },
+        {
+          "id": "association-hinge-tape",
+          "artifact": "association_tape",
+          "station": "SE",
+          "position": [
+            18,
+            3.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "text": "hinge = association(config(rotation))",
+            "mount": "floor",
+            "editor_label": "Association tape / hinge"
+          }
+        },
+        {
+          "id": "candidate-spin",
+          "artifact": "spin",
+          "station": "NW",
+          "position": [
+            2.5,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / grid Ribbon_Transformation_02 - 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "association-hinge-plinth",
+          "artifact": "association_plinth",
+          "station": "SE",
+          "position": [
+            18,
+            4.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "item": "hinge",
+            "holds": "association-hinge",
+            "top": 1,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / hinge"
+          }
         }
       ],
       "props": [],
@@ -18449,6 +19413,21 @@
           "config": {
             "editor_label": "Drink Me / room, bridge and return path"
           }
+        },
+        {
+          "id": "candidate-trans_machine_sorter",
+          "artifact": "trans_machine_sorter",
+          "station": "SE",
+          "position": [
+            4,
+            3
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "candidate / Trans_Scale - spine worklist 2026-11-03: keep or remove"
+          }
         }
       ],
       "props": [],
@@ -19140,6 +20119,21 @@
           "scale": 1,
           "config": {
             "plinth": "0"
+          }
+        },
+        {
+          "id": "candidate-sweeper_block",
+          "artifact": "sweeper_block",
+          "station": "SE",
+          "position": [
+            -9,
+            -5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "candidate / grid Ribbon_Transformation_01 - 2026-11-03: keep or remove"
           }
         }
       ],
@@ -19873,11 +20867,380 @@
           "scale": 1,
           "facing": 90,
           "config": {}
+        },
+        {
+          "id": "threshold-workshop-again",
+          "artifact": "threshold_again",
+          "station": "SW",
+          "position": [
+            -19,
+            -2.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "threshold": "again",
+            "editor_label": "Matter / Again",
+            "parts": {
+              "Controls": {
+                "position": [
+                  0,
+                  0.8,
+                  1.2
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "threshold-workshop-almost",
+          "artifact": "threshold_almost",
+          "station": "SW",
+          "position": [
+            -9.5,
+            -6.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "threshold": "almost",
+            "editor_label": "Matter / Almost",
+            "parts": {
+              "Controls": {
+                "position": [
+                  0.3,
+                  0.8,
+                  1.2
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "threshold-workshop-just",
+          "artifact": "threshold_just",
+          "station": "SW",
+          "position": [
+            -3,
+            -5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "threshold": "just",
+            "editor_label": "Matter / Just",
+            "parts": {
+              "Controls": {
+                "position": [
+                  -0.2,
+                  0.8,
+                  1.2
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "threshold-workshop-barely",
+          "artifact": "threshold_barely",
+          "station": "SW",
+          "position": [
+            2,
+            -5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "threshold": "barely",
+            "editor_label": "Matter / Barely",
+            "parts": {
+              "Controls": {
+                "position": [
+                  -0.7,
+                  0.8,
+                  1.2
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "threshold-workshop-still",
+          "artifact": "threshold_still",
+          "station": "SW",
+          "position": [
+            9.5,
+            -6.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "threshold": "still",
+            "editor_label": "Matter / Still",
+            "parts": {
+              "Controls": {
+                "position": [
+                  0,
+                  0.8,
+                  1.2
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "physics-play-plank-ball",
+          "artifact": "physics_play_plank_ball",
+          "station": "SW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / plank on a ball - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-tyre-boxes",
+          "artifact": "physics_play_tyre_boxes",
+          "station": "SW",
+          "position": [
+            16,
+            -6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Physics play / tyre and boxes - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-dominoes",
+          "artifact": "physics_play_dominoes",
+          "station": "SW",
+          "position": [
+            -7.5,
+            3.75
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / dominoes - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-stack",
+          "artifact": "physics_play_stack",
+          "station": "SW",
+          "position": [
+            -12,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Physics play / a stack and a ball - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-pendulum",
+          "artifact": "physics_play_pendulum",
+          "station": "SW",
+          "position": [
+            -18.5,
+            4.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Physics play / pendulum - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-seesaw",
+          "artifact": "physics_play_seesaw",
+          "station": "SW",
+          "position": [
+            4,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / seesaw - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-ramp-race",
+          "artifact": "physics_play_ramp_race",
+          "station": "SW",
+          "position": [
+            16,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Physics play / ramp race - Jolt, a precursor to Logic"
+          }
+        },
+        {
+          "id": "physics-play-extinguisher-ramp",
+          "artifact": "physics_play_extinguisher_ramp",
+          "station": "SW",
+          "position": [
+            17,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / extinguisher and boxes - built from the inventory"
+          }
+        },
+        {
+          "id": "physics-play-propped-ramp",
+          "artifact": "physics_play_propped_ramp",
+          "station": "SW",
+          "position": [
+            10,
+            6
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / propped ramp - built from the inventory"
+          }
+        },
+        {
+          "id": "physics-play-tin-can-alley",
+          "artifact": "physics_play_tin_can_alley",
+          "station": "SW",
+          "position": [
+            -1,
+            5.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / tin can alley - built from the inventory"
+          }
+        },
+        {
+          "id": "physics-play-bowling",
+          "artifact": "physics_play_bowling",
+          "station": "SW",
+          "position": [
+            4,
+            4
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / bowling - built from the inventory"
+          }
+        },
+        {
+          "id": "physics-play-marble-run",
+          "artifact": "physics_play_marble_run",
+          "station": "SW",
+          "position": [
+            -4,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / marble run - built from the inventory"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "01 / ONE PUSH. THE TYRES PASS IT ON",
+          "position": [
+            -14.5,
+            3.5
+          ]
+        },
+        {
+          "label": "Pass shaft A on its south side",
+          "position": [
+            -7,
+            3.4
+          ]
+        },
+        {
+          "label": "02 / EVENT AND CONSEQUENCE: TOPPLE, ROLL, KNOCK",
+          "position": [
+            -3,
+            2.5
+          ]
+        },
+        {
+          "label": "03 / BALANCE: WHICH WAY WILL IT GO?",
+          "position": [
+            2,
+            2.5
+          ]
+        },
+        {
+          "label": "Turn north between the seesaw and shaft B",
+          "position": [
+            6.25,
+            2.4
+          ]
+        },
+        {
+          "label": "04 / A LITTLE MORE, AND IT DECIDES",
+          "position": [
+            6.25,
+            -3.6
+          ]
+        },
+        {
+          "label": "Follow the thresholds east, under shaft B",
+          "position": [
+            13.9,
+            -3.6
+          ]
+        },
+        {
+          "label": "Climb the east bank past the extinguisher",
+          "position": [
+            13.9,
+            2.9
+          ]
+        },
+        {
+          "label": "05 / EVERYTHING ROLLS DOWNHILL. WHICH ARRIVES FIRST?",
+          "position": [
+            19.5,
+            2.9
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
@@ -20091,6 +21454,25 @@
             ],
             "connects_next_floor": true,
             "box_size": 5
+          }
+        },
+        {
+          "id": "cone-stands",
+          "artifact": "cone_stands",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "targets": "row,grid,museum-array-5-15",
+            "height": 0.45,
+            "style": "bands",
+            "base": "square",
+            "editor_label": "Cone stands / under the 1D and 2D array cubes"
           }
         }
       ],
@@ -25679,6 +27061,31 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "threshold-workshop-descent",
+          "artifact": "threshold_descent",
+          "station": "SW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "threshold": "descent",
+            "editor_label": "Matter / Eventually",
+            "parts": {
+              "Controls": {
+                "position": [
+                  -0.15,
+                  0.8,
+                  1.2
+                ]
+              }
+            }
+          }
         }
       ],
       "props": [],

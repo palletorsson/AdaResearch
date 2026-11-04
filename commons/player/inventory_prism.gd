@@ -44,10 +44,18 @@ var active := 0                   # the face on top (at the controller's +Y)
 var showing := false
 var pinned := false              # the Void's left X: up until pressed again, whatever the palm does
 var ring: MeshInstance3D = null
-var ghost: Node3D = null          # the current prefab, translucent, where the trigger would put it
-var ghost_ok := false
-var aim_line: MeshInstance3D = null
-var _ghost_key := ""
+const WandLib = preload("res://commons/player/inventory_wand.gd")
+const BeltLib = preload("res://commons/player/inventory_belt_view.gd")
+const BELT_AT := Vector3(0, .07, .03)   # the belt's row over the back of the left hand
+const TWIST_DEAD := 8.0                 # degrees of wrist roll that turn nothing
+var belt: Node3D = null           # the belt, seen (inventory_belt_view.gd): shown a moment after every change of hand
+var wand: Node3D = null           # the ghost, the aim line, place / move / take back (inventory_wand.gd, shared with the desktop)
+var ghost: Node3D:                # the current prefab, translucent, where the trigger would put it
+	get:return wand.ghost if wand != null else null
+var ghost_ok: bool:
+	get:return wand != null and wand.ghost_ok
+var aim_line: MeshInstance3D:
+	get:return wand.aim_line if wand != null else null
 var _roll := 0.0                  # the drum's roll about the forward axis, snapping to active * 90°
 var _worn_state: Array = []
 
@@ -62,7 +70,10 @@ func _ready() -> void:
 	right = get_parent().get_node_or_null("RightHand") as XRController3D
 	if left == null or right == null:
 		set_process(false);return
-	hand = HandLib.new();hand.name = "InventoryHand";add_child(hand)
+	hand = HandLib.new();hand.name = "InventoryHand";add_child(hand);hand.add_to_group("inventory_hands")
+	wand = WandLib.new();wand.name = "Wand";add_child(wand);wand.setup(hand, right, _panel_rids)
+	belt = BeltLib.new();belt.name = "Belt";belt.setup(hand, left, BELT_AT)
+	hand.keep_in_void()   # in the Void's main tower what is built is kept and stood again (inventory_hand.gd)
 	hand.item_changed.connect(func(_id):refresh_faces();_sync_worn())
 	hand.config_changed.connect(func(_id, _cfg):refresh_faces())
 	# the drum on the left controller: its axis the controller's forward (-Z), the faces' up along it
@@ -197,69 +208,17 @@ func _process(delta: float) -> void:
 	if ring.visible:
 		var w: float = roll._width() if roll.has_method("_width") else .075
 		var torus: TorusMesh = ring.mesh;torus.outer_radius = w / 2;torus.inner_radius = maxf(w / 2 - .006, .004)
-	_update_ghost()
+	# PLACE MODE (Palle, 2026-11-04): with a prefab in the hand the ghost and the aim line show whether the drum is up
+	# or not - the hand is chosen with the left stick click and placed with the trigger, nothing held
+	# THE TURN: while placing, the right wrist's twist turns the ghost (and a dragged thing) in 15 degree steps
+	var turn: float = _wrist_yaw(right) if wand.placing() else 0.0
+	if turn != hand.yaw_offset:
+		hand.yaw_offset = turn
+		if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.02, 0.15, 0.0)   # a tick a step
+	wand.update(true, delta)
 
-## THE GHOST (Palle: "a ghost object that shows where a possible placement is, and a raycast line"): while the
-## palette is up and a prefab is in the hand, a translucent copy stands where the trigger would put it - the
-## item's own look when the place is good, red when it would be refused - with the aim line from the hand.
-func _update_ghost() -> void:
-	var placeable: bool = showing and hand.current != "" and hand.worn_node() == null and hand.current_tool() == ""
-	if not placeable:
-		if ghost != null:ghost.visible = false
-		if aim_line != null:aim_line.visible = false
-		return
-	var key: String = hand.instance_key(hand.current)
-	if ghost == null or key != _ghost_key:
-		if ghost != null:ghost.queue_free();ghost = null
-		ghost = _make_ghost();_ghost_key = key
-		if ghost == null:return
-	var at: Dictionary = hand.placement_at(right, 8.0, _panel_rids())
-	var hit: Dictionary = at.hit
-	if hit.is_empty() and not bool(at.get("hang", false)):ghost.visible = false
-	else:   # on the hit, or hanging in the air 2 m along the wand
-		ghost.visible = true;ghost.global_transform = at.xform
-		_tint(ghost, Color(1, .25, .3, .45) if not at.ok else Color(1, 1, 1, .45))
-	ghost_ok = at.ok
-	if aim_line == null:
-		aim_line = MeshInstance3D.new();aim_line.name = "AimLine";aim_line.mesh = ImmediateMesh.new();add_child(aim_line);aim_line.top_level = true
-		var lm := StandardMaterial3D.new();lm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED;lm.albedo_color = Color("f59e0b", .55);lm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;aim_line.material_override = lm
-	var to: Vector3 = hit.position if not hit.is_empty() else (at.point if bool(at.get("hang", false)) else right.global_position - right.global_basis.z * 8.0)
-	aim_line.global_transform = Transform3D.IDENTITY
-	var im: ImmediateMesh = aim_line.mesh;im.clear_surfaces();im.surface_begin(Mesh.PRIMITIVE_LINES);im.surface_add_vertex(right.global_position);im.surface_add_vertex(to);im.surface_end();aim_line.visible = true
-
-## The ghost is the item's own scene, scaled as the carrier would, made inert and translucent.
-func _make_ghost() -> Node3D:
-	var it: Dictionary = hand.Items.item(hand.current)
-	var path: String = hand.Items.scene_for(str(it.get("token", "")))
-	if path == "" or not ResourceLoader.exists(path):return null
-	var n: Node = (load(path) as PackedScene).instantiate()
-	if not n is Node3D:n.free();return null
-	var cfg: Dictionary = hand.config_for(hand.current)
-	for k in cfg:n.set_meta("config_%s" % str(k), cfg[k])
-	if n.has_method("apply_grid_config"):n.apply_grid_config(cfg)
-	n.name = "Ghost_" + hand.current;add_child(n);(n as Node3D).top_level = true
-	hand._make_inert(n)
-	(n as Node3D).scale = Vector3.ONE * float(it.get("scale", 1.0))
-	return n
-
-static func _tint(root: Node, col: Color) -> void:
-	var stack: Array = [root]
-	while not stack.is_empty():
-		var x: Node = stack.pop_back()
-		for c in x.get_children():stack.append(c)
-		if x is MeshInstance3D:
-			var mi := x as MeshInstance3D
-			if not mi.has_meta("ghost_mat"):
-				# the thing's own colour, seen through: a shaded translucent copy of its first material's albedo
-				var base := Color(.85, .85, .85)
-				var src: Material = mi.get_active_material(0) if mi.mesh != null and mi.mesh.get_surface_count() > 0 else null
-				if src is StandardMaterial3D:base = (src as StandardMaterial3D).albedo_color
-				var m := StandardMaterial3D.new();m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA;m.cull_mode = BaseMaterial3D.CULL_DISABLED;m.roughness = .7
-				mi.material_override = m;mi.set_meta("ghost_mat", true);mi.set_meta("ghost_base", base)
-			var base_col: Color = mi.get_meta("ghost_base")
-			var tinted: Color = base_col.lerp(Color(col.r, col.g, col.b), 0.0 if col.is_equal_approx(Color(1, 1, 1, col.a)) else .75)
-			(mi.material_override as StandardMaterial3D).albedo_color = Color(tinted.r, tinted.g, tinted.b, col.a)
-		elif x is Label3D:(x as Label3D).modulate = col
+## THE GHOST (Palle: "a ghost object that shows where a possible placement is, and a raycast line"): the wand
+## (inventory_wand.gd) stands a translucent copy where the trigger would put it, red when it would be refused.
 
 ## The drum rolls about the controller's forward axis so the active face sits on top (at +Y), snapping fast
 ## as Open Brush does; the face the right pointer rests on lifts out a little.
@@ -272,6 +231,18 @@ func _roll_drum(delta: float) -> void:
 		var vp: Node3D = faces[i];var rest: Transform3D = face_rest[i]
 		var lifted: bool = over != null and is_instance_valid(over) and over.get_parent() == vp
 		vp.transform = Transform3D(rest.basis, rest.origin + rest.basis.z * (HOVER_LIFT if lifted else 0.0))
+
+## The twist of a controller about its own aim, as a turn for the thing placed: rolled right (clockwise, seen from
+## behind the hand) the thing turns clockwise seen from above; twice the roll, in 15 degree steps, inside a dead zone
+## nothing. Pointing straight up or down the roll has no reference, so the last turn stands.
+func _wrist_yaw(c: Node3D) -> float:
+	var f: Vector3 = -c.global_basis.z.normalized()
+	if absf(f.dot(Vector3.UP)) > .95:return hand.yaw_offset
+	var ref: Vector3 = (Vector3.UP - f * f.dot(Vector3.UP)).normalized()
+	var u: Vector3 = c.global_basis.y.normalized()
+	var roll: float = rad_to_deg(atan2(f.dot(ref.cross(u)), ref.dot(u)))
+	if absf(roll) < TWIST_DEAD:return 0.0
+	return snappedf(-clampf(roll, -90.0, 90.0) * 2.0, 15.0)
 
 ## The Void's left X (Palle: "I do not get any menu from any button"): the prism up until X again.
 func toggle() -> void:
@@ -304,37 +275,44 @@ func _on_right_pressed(button_name: String) -> void:
 	match button_name:
 		"trigger_click":
 			if _pointing_at_something():return
-			var worn: Node3D = hand.worn_node()
-			if worn != null:
-				worn.fire_worn()
-			elif hand.current_tool() == "rubber":
-				var gone: bool = hand.erase_at(right, 8.0, _panel_rids());refresh_faces()
-				if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06 if gone else 0.15, 0.3 if gone else 0.6, 0.0)
-			elif hand.current_tool() == "pin":
-				# Garry's Mod's physgun click: the pointed thing frozen where it is, or released to fall
-				var did: String = hand.pin_at(right, 8.0, _panel_rids());refresh_faces()
-				if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06 if did != "" else 0.15, 0.3 if did != "" else 0.6, 0.0)
-			elif hand.current != "":
-				# Garry's Mod: the thing appears where the wand points, settled by its own rule; pointing at nothing,
-				# it comes into the hand instead (the kit's tower-in-hand way)
-				var made: Node3D = hand.spawn_where_pointed(right, 8.0, _panel_rids())
-				if made == null and hand.notice == "point at a floor or a wall":
-					var pk: Node = XRToolsFunctionPickup.find_instance(right)
-					if pk != null and is_instance_valid(pk.get("picked_up_object")):return   # the hand is full
-					made = hand.spawn_in(right)
-				refresh_faces()
-				if right.has_method("trigger_haptic_pulse"):
-					if made != null:right.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.35, 0.0)
-					else:right.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.6, 0.0)   # a longer buzz: not here
+			var did: String = wand.press()
+			if did == "" or did == "pending":return
+			# Garry's Mod: pointing at nothing with a thing that does not hang, it comes into the hand instead (the kit's
+			# tower-in-hand way)
+			if did == "refused" and hand.notice == "point at a floor or a wall":
+				var pk: Node = XRToolsFunctionPickup.find_instance(right)
+				if pk == null or not is_instance_valid(pk.get("picked_up_object")):
+					if hand.spawn_in(right) != null:did = "placed"
+			refresh_faces()
+			if right.has_method("trigger_haptic_pulse") and did != "worn":
+				if did == "refused":right.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.6, 0.0)   # a longer buzz: not here
+				elif did != "":right.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.35, 0.0)
 		"grip_click":
-			if not showing:return
-			# the thing pointed at, if the hand placed it (Palle: "remove the object with the grip button"); else the last
-			if hand.pointed_own(right, 8.0, _panel_rids()) != null:hand.erase_at(right, 8.0, _panel_rids());refresh_faces()
-			else:take_back()
-			if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06, 0.3, 0.0)
+			# the thing pointed at, if the hand placed it (Palle: "remove the object with the grip button") - in place
+			# mode or with the drum up; with the drum up and nothing pointed at, the last one. Otherwise the grip is the
+			# Void's grab.
+			if not showing and not wand.placing():return
+			var taken: bool = wand.grip()
+			if not taken and showing:take_back();taken = true
+			refresh_faces()
+			if taken and right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.06, 0.3, 0.0)
+
+## THE BELT (Palle: "one thumbstick down - we can choose between the different prefabs"): the Void's left stick click
+## steps the hand through the empty hand and the collected prefabs; a haptic tick and the name on the HAND face.
+func cycle(d := 1) -> String:
+	if hand == null:return ""
+	if is_instance_valid(hand.lifted):hand.cancel_lift()
+	var id: String = hand.cycle(d)
+	refresh_faces()
+	if left != null and left.has_method("trigger_haptic_pulse"):left.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.25, 0.0)
+	return id
 
 func _on_right_released(button_name: String) -> void:
 	if hand == null or button_name != "trigger_click":return
 	var worn: Node3D = hand.worn_node()
 	if worn != null:
-		worn.release_worn();refresh_faces()
+		worn.release_worn();refresh_faces();return
+	var did: String = wand.release()   # a drag set down, or a tap on a placed thing placed onto it
+	if did == "":return
+	refresh_faces()
+	if right.has_method("trigger_haptic_pulse"):right.trigger_haptic_pulse("haptic", 0.0, 0.15 if did == "refused" else 0.08, 0.6 if did == "refused" else 0.35, 0.0)

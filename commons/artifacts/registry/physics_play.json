@@ -1,0 +1,307 @@
+{
+  "registry_info": {
+    "category": "physics_play",
+    "description": "Physics play: Jolt set-ups for the Transformation floors, a precursor to the Logic sequence's artifacts (Palle, 2026-11-03).",
+    "created": "2026-11-03"
+  },
+  "artifacts": {
+    "physics_play_plank_ball": {
+      "lookup_name": "physics_play_plank_ball",
+      "scene": "res://commons/artifacts/physics_play/physics_play_plank_ball.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Plank on a ball",
+      "description": "A plank laid across a ball on a mat: balance that cannot last. Press one end (RELEASE) or take the plank and lay it again. Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "plank_on_ball"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_tyre_boxes": {
+      "lookup_name": "physics_play_tyre_boxes",
+      "scene": "res://commons/artifacts/physics_play/physics_play_tyre_boxes.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Tyre and boxes",
+      "description": "A tyre held at the top of a ramp; RELEASE lets it roll into a stack of four boxes. The tyre chain of the Matter and Logic port, without the logic: only the contact. Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "tyre_and_boxes"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_dominoes": {
+      "lookup_name": "physics_play_dominoes",
+      "scene": "res://commons/artifacts/physics_play/physics_play_dominoes.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Dominoes",
+      "description": "Nine slabs in a row; one push (RELEASE) passes along. Stand them again by hand. Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "dominoes"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_stack": {
+      "lookup_name": "physics_play_stack",
+      "scene": "res://commons/artifacts/physics_play/physics_play_stack.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / A stack and a ball",
+      "description": "A tower of five boxes and a ball thrown at it (RELEASE): what holds a tower up, and what does not. Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "stack"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_pendulum": {
+      "lookup_name": "physics_play_pendulum",
+      "scene": "res://commons/artifacts/physics_play/physics_play_pendulum.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Pendulum",
+      "description": "A bob on a real hinge, 1.6 m from its pivot. RELEASE lets it go from 40 degrees; the console times the swing against 2 pi sqrt(L / g). Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "pendulum"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_seesaw": {
+      "lookup_name": "physics_play_seesaw",
+      "scene": "res://commons/artifacts/physics_play/physics_play_seesaw.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Seesaw",
+      "description": "A plank on a fulcrum with a light box on one end; RELEASE drops a heavy box on the other and throws the light one. Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "seesaw"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_ramp_race": {
+      "lookup_name": "physics_play_ramp_race",
+      "scene": "res://commons/artifacts/physics_play/physics_play_ramp_race.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Ramp race",
+      "description": "A ball, a cylinder and a box let go together down one slope (RELEASE): rolling against sliding; the console names who crosses the line first. Real Jolt bodies, grabbable and throwable on desktop and in XR; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "ramp_race"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_extinguisher_ramp": {
+      "lookup_name": "physics_play_extinguisher_ramp",
+      "scene": "res://commons/artifacts/physics_play/physics_play_extinguisher_ramp.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Extinguisher and boxes",
+      "description": "Built from the inventory: the fire extinguisher (fire_extinguisher = association(config(cylinder)), a term of the modular grammar) held on its side at the top of a ramp, and three of the inventory's own cardboard boxes stacked at its foot. RELEASE: it rolls into them. Real Jolt bodies, grabbable; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "extinguisher_ramp"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "inventory",
+        "association",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_propped_ramp": {
+      "lookup_name": "physics_play_propped_ramp",
+      "scene": "res://commons/artifacts/physics_play/physics_play_propped_ramp.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / A propped ramp",
+      "description": "Built from the inventory: two cinder blocks (association(cube)) prop a wooden board (association(quad)) as a ramp; the oil drum (association(config(cylinder))) held at its top rolls into a pyramid of tin cans. Cinder blocks are what props things up. Real Jolt bodies, grabbable; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "propped_ramp"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "inventory",
+        "association",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_tin_can_alley": {
+      "lookup_name": "physics_play_tin_can_alley",
+      "scene": "res://commons/artifacts/physics_play/physics_play_tin_can_alley.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Tin-can alley",
+      "description": "Built from the inventory: a wooden board across two cinder blocks is the shelf; ten tin cans stand on it, 4-3-2-1; RELEASE throws the rubber ball. Real Jolt bodies, grabbable; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "tin_can_alley"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "inventory",
+        "association",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_bowling": {
+      "lookup_name": "physics_play_bowling",
+      "scene": "res://commons/artifacts/physics_play/physics_play_bowling.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Bowling",
+      "description": "Built from the inventory: ten bowling pins (association(config(revolve))) in their triangle; RELEASE rolls the rubber ball, at a bowling ball's 5 kg. Real Jolt bodies, grabbable; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "bowling"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "inventory",
+        "association",
+        "precursor_to_logic",
+        "void"
+      ]
+    },
+    "physics_play_marble_run": {
+      "lookup_name": "physics_play_marble_run",
+      "scene": "res://commons/artifacts/physics_play/physics_play_marble_run.tscn",
+      "class_name": "PhysicsPlay",
+      "name": "Physics play / Marble run",
+      "description": "Built from the inventory: the marble chute (association(config(channel))) propped on a cinder block; RELEASE lets five marbles go. The road to the Logic sequence's marble machines. Real Jolt bodies, grabbable; RESET puts them back.",
+      "category": "transforms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "default_params": {
+        "setup": "marble_run"
+      },
+      "tags": [
+        "physics",
+        "jolt",
+        "play",
+        "inventory",
+        "association",
+        "precursor_to_logic",
+        "void"
+      ]
+    }
+  }
+}

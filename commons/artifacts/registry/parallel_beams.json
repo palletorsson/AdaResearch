@@ -1,0 +1,39 @@
+{
+  "registry_info": {
+    "category": "primitives",
+    "description": "Parallel lines at the scale of the room: the upgrade of parallel_lines, black all the way to the ceiling.",
+    "created": "2026-11-03"
+  },
+  "artifacts": {
+    "parallel_beams": {
+      "lookup_name": "parallel_beams",
+      "scene": "res://commons/artifacts/parallel_beams/parallel_beams.tscn",
+      "class_name": "ParallelBeams",
+      "name": "Parallel beams",
+      "description": "Three square black beams from the floor into the ceiling, parallel and leaning 15 degrees in the plane they are spaced in - the small parallel_lines' three leaning lines (/ / /) at the scale of the room, so the visitor walks between them: a line inside large parallel lines. Config: count, lean_deg, height_m (default 5.64, a Void storey's clear height), spacing_m (foot to foot), section_m, color, collide.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "default_params": {
+        "count": 3,
+        "lean_deg": 15,
+        "height_m": 5.64,
+        "spacing_m": 1.8,
+        "section_m": 0.24,
+        "color": "0b0b0c",
+        "collide": true
+      },
+      "tags": [
+        "line",
+        "parallel",
+        "point_lines",
+        "room_scale",
+        "void"
+      ]
+    }
+  }
+}

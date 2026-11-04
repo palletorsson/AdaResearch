@@ -93,10 +93,45 @@ static func stage(void_game: Node = null) -> Dictionary:
 			if from <= floor_now and from > best:best = from;out = (st as Dictionary).duplicate()
 	return out
 
+## THE COLLECTED (Palle, 2026-11-04: "when we pick up the object it should be added to the inventory"): the ids of the
+## items whose example the person has picked up, in the order taken - the hand's belt, which the left thumbstick click
+## steps through. Kept in user://, so a game started again still holds them. A probe points `collected_path` elsewhere.
+const COLLECTED_USER := "user://inventory/collected.json"
+static var collected_path := COLLECTED_USER
+static var _collected: Array = []
+static var _collected_read := ""
+
+static func collected() -> Array:
+	if _collected_read != collected_path:
+		_collected_read = collected_path;_collected = []
+		var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(collected_path)) if FileAccess.file_exists(collected_path) else null
+		if d is Dictionary and d.get("collected") is Array:
+			for id in d.collected:
+				if not item(str(id)).is_empty() and not _collected.has(str(id)):_collected.append(str(id))
+	return _collected
+
+static func is_collected(id: String) -> bool:
+	return collected().has(id)
+
+## Add an item to the collected; true if it was new. Written at once (tmp + rename): a crash must not lose a pick-up.
+static func collect(id: String) -> bool:
+	if item(id).is_empty() or is_collected(id):return false
+	_collected.append(id)
+	var abs_path := ProjectSettings.globalize_path(collected_path)
+	DirAccess.make_dir_recursive_absolute(abs_path.get_base_dir())
+	var f := FileAccess.open(abs_path + ".tmp", FileAccess.WRITE)
+	if f == null:push_warning("inventory: could not write " + abs_path);return true
+	f.store_string(JSON.stringify({"version": 1, "collected": _collected}, "  ") + "\n");f.close()
+	if FileAccess.file_exists(abs_path):DirAccess.remove_absolute(abs_path)
+	DirAccess.rename_absolute(abs_path + ".tmp", abs_path)
+	return true
+
 ## Unlocked: no unlock, or the sequence is completed (LabManager / MapProgressionManager answer; neither = unlocked).
 ## In the Void (`void_game`, its `checkpoint` floor) an item with `floor` is unlocked once that floor is reached; in a
 ## grid map, once its `unlock` sequence is completed (LabManager); with neither authority, unlocked.
+## An item marked "collect" is unlocked by picking up its example (an association_plinth), wherever it is.
 static func unlocked(it: Dictionary, lab: Node, void_game: Node = null) -> bool:
+	if bool(it.get("collect", false)):return is_collected(str(it.get("id", "")))
 	if void_game != null and int(it.get("floor", 0)) > 0:return int(void_game.get("checkpoint")) >= int(it.get("floor", 0))
 	var seq := str(it.get("unlock", ""))
 	if seq == "":return true

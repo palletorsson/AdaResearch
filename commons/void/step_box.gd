@@ -17,6 +17,9 @@ const NAMES = ["tetrahedron", "pyramid", "wedge"]
 @export var boost := 25.0
 ## A non-negative seed makes a later probability lesson repeatable.
 @export var reward_seed := -1
+## Trans_Pre's "random falling prefabs" (Palle, 2026-11-03): above 0 a prefab reward appears this many metres higher
+## and falls onto the box under gravity, then stays a loose pickable solid. 0 keeps the floating reward.
+@export var drop_m := 0.0
 var health_provider: Node
 var opened := false
 var selected_kind := ""
@@ -29,6 +32,7 @@ func apply_grid_config(config: Dictionary) -> void:
 	if contents not in ["health", "prefab"]: contents = "health"
 	boost = clampf(float(config.get("boost", boost)), 1, 100)
 	reward_seed = int(config.get("reward_seed", reward_seed))
+	drop_m = clampf(float(config.get("drop_m", drop_m)), 0, 5)
 
 func _ready() -> void:
 	var support := Cube.instantiate()
@@ -106,6 +110,10 @@ func open_box() -> void:
 		collision.shape = shape
 		collision.position.y = .15
 		reward.add_child(collision)
+		if drop_m > 0:
+			reward.position.y += drop_m
+			reward.set("floats", false)
+			reward.set("freeze", false)
 	badge.emission_energy_multiplier = .1
 	revealed.emit(selected_kind)
 	# Late-created pickables must be discovered by floor streaming.

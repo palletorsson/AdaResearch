@@ -683,7 +683,8 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 				artifact.add_child(lamp)
 				lamp.global_position = host.to_global(terminal)
 				lamp.set_lit(bool(host.get_meta("point_lights_enabled",true)))
-	if float(item.height)>0.08:
+	# config "support": false - a raised work that floats free (Trans_Pre's pick-up cubes, Palle 2026-11-03)
+	if float(item.height)>0.08 and str(item.get("config",{}).get("support",true)) not in ["false","False","0"]:
 		var back := mount.position+Vector3(0,0,-0.22*float(item.scale)).rotated(Vector3.UP,deg_to_rad(float(item.facing)))
 		building.pipe(host,"ArtifactSupport",Vector3(back.x,0.04,back.z)+Vector3(0.16,0,0),back+Vector3(0.16,0,0),0.06,building.steel)
 

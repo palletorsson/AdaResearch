@@ -7,6 +7,8 @@ extends Node3D
 ## (live apply_config); (F) the right trigger held and moved lays a stroke, and the PLACED face lists it;
 ## (G) TAKE BACK LAST takes the strip back; (H) the Ball card, trigger: a ball in the right pickup; grip with
 ## the prism up takes it back; palm down hides the prism; (I) toggle() - the Void's left X - pins it up and down. Writes ada_run/inventory/{prism.png, prism.json}.
+## A trigger after the tape stroke is a TAP, press and release (2026-11-04: a press on a thing the hand placed waits
+## for the release - a tap places onto it, a hold moves it; inventory_wand.gd).
 ## Run: godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_inventory_prism.tscn
 
 const Rig = preload("res://commons/player/museum_rig.tscn")
@@ -91,7 +93,7 @@ func _ready() -> void:
 		await get_tree().process_frame
 	_hand(0.3)   # aiming at the floor a metre ahead: Garry's Mod placement, the ball appears there and takes its grid point
 	await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 6:
 		await get_tree().physics_frame
 	var held: Node = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
@@ -104,7 +106,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	var before: int = p.hand.placed.size()
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	await get_tree().physics_frame
 	var refused: bool = p.hand.placed.size() == before and p.hand.notice.find("needs a wall") >= 0
 	var pages_ok: bool = p.uis[0].buttons.has("page:+")
@@ -125,10 +127,10 @@ func _ready() -> void:
 		await get_tree().process_frame
 	_hand(0.3);await _ticks(0.2)
 	var before_l: int = p.hand.placed.size()
-	p._on_right_pressed("trigger_click");await get_tree().physics_frame
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click");await get_tree().physics_frame
 	var refused_l: bool = p.hand.placed.size() == before_l and p.hand.notice.begins_with("BUDGET FULL");var notice_l: String = p.hand.notice
 	p.hand.budget_override = {}
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 6:
 		await get_tree().physics_frame
 	var crate_made: bool = p.hand.placed.size() == before_l + 1
@@ -143,7 +145,7 @@ func _ready() -> void:
 	_check(report, "L budget: draws cut to 3, the crate is refused with BUDGET FULL; restored, it is made - as ONE merged mesh", refused_l and crate_made and merged, {"refused": refused_l, "notice_after_refusal": notice_l, "made": crate_made, "merged": merged, "kids": kids})
 	# N - copies: a second crate with the same config is an instance: one multimesh with two instances, its own meshes on layer 0
 	_hand(1.5);await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 6:
 		await get_tree().physics_frame
 	var key: String = p.hand.instance_key("crate")
@@ -164,11 +166,11 @@ func _ready() -> void:
 	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), target + Vector3(0, 1.0, 0.8)).looking_at(target, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	await _ticks(0.2)
 	var before_m: int = p.hand.placed.size()
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	await get_tree().process_frame;await get_tree().process_frame
 	var erased: bool = p.hand.placed.size() == before_m - 1 and not is_instance_valid(second) and inst.count(key) == 1
 	_hand(3.0);await _ticks(0.2)
-	p._on_right_pressed("trigger_click");await get_tree().process_frame
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click");await get_tree().process_frame
 	var refused_m: bool = p.hand.placed.size() == before_m - 1 and p.hand.notice.begins_with("not yours")
 	_check(report, "M rubber: worn as a miniature; the trigger on the second crate takes it back (one instance left); on the floor, 'not yours'", rubber_worn and erased and refused_m, {"worn": rubber_worn, "erased": erased, "refused": refused_m, "notice": p.hand.notice})
 	# P - the ghost: the crate chosen, the hand at the floor: a translucent crate stands on the metre point with the
@@ -189,7 +191,7 @@ func _ready() -> void:
 	p.choose("crate")
 	for i in 3:
 		await get_tree().process_frame
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 4:
 		await get_tree().physics_frame
 	var crate2: Node = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
@@ -206,7 +208,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(0.3);await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 4:
 		await get_tree().physics_frame
 	var ball2: Node3D = p.hand.placed[-1]
@@ -234,7 +236,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(0.7);await _ticks(0.2)   # the aim lands at (0.7, 0, -1): the metre point is (1, 0, -1)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	var wedge: Node3D = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
 	var at0: Vector3 = wedge.global_position if wedge else Vector3.INF
 	await get_tree().physics_frame
@@ -253,7 +255,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(0.7);await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 40:
 		await get_tree().physics_frame
 	var crate_r: Node3D = p.hand.placed[-1]
@@ -264,7 +266,7 @@ func _ready() -> void:
 	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), top + Vector3(0.3, 1.2, 0.9)).looking_at(top, Vector3.UP), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	await _ticks(0.3)
 	var at_r: Dictionary = p.hand.placement_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 90:
 		await get_tree().physics_frame
 	var box_r: Node3D = p.hand.placed[-1]
@@ -281,7 +283,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(2.3);await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 30:
 		await get_tree().physics_frame
 	var cross: Node3D = p.hand.placed[-1]
@@ -292,7 +294,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(3.6);await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 30:
 		await get_tree().physics_frame
 	var rod_t: Node3D = p.hand.placed[-1]
@@ -310,7 +312,7 @@ func _ready() -> void:
 	_hand_level(0.6);await _ticks(0.3)
 	var at_u: Dictionary = p.hand.placement_at(rig.get_node("RightHand"), 8.0, p._panel_rids())
 	var ghost_air: bool = p.ghost != null and p.ghost.visible and p.ghost.global_position.distance_to(Vector3(1, 1, -2)) < .05
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 40:
 		await get_tree().physics_frame
 	var hung: Node3D = p.hand.placed[-1]
@@ -324,7 +326,7 @@ func _ready() -> void:
 	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), Vector3(1.0, 1.5, 0.0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	await _ticks(0.3)
 	var pin_mini: bool = p.hand.mini_node() != null and str(p.hand.mini_node().name) == "Mini_pin"
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	var released: bool = not bool(hung.get("freeze")) and str(hung.get("how")) == "fall"
 	for i in 120:
 		await get_tree().physics_frame
@@ -337,7 +339,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(3.0);await _ticks(0.2)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 45:   # the ball's own rule moves it onto its grid point a few frames after it is made: aim at where it ENDS
 		await get_tree().physics_frame
 	var ball_v: Node3D = p.hand.placed[-1]
@@ -361,13 +363,13 @@ func _ready() -> void:
 		await get_tree().process_frame
 	_hand(3.3);await _ticks(0.2)
 	var aim_x: Vector3 = p.hand.placement_at(rig.get_node("RightHand"), 8.0, p._panel_rids()).hit.get("position", Vector3.INF)   # where the wand points (the origin has drifted by now)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 20:
 		await get_tree().physics_frame
 	var b1: Node3D = p.hand.placed[-1];var hub_x: float = b1.hub()
 	var free_x: bool = absf(b1.global_position.x - aim_x.x) < .02 and absf(b1.global_position.z - aim_x.z) < .02 and is_equal_approx(b1.global_position.y, hub_x) and bool(b1.get("freeze"))
 	_hand(3.55);await _ticks(0.2)   # beside it, 25 cm on: within reach, the +X socket faces it
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 20:
 		await get_tree().physics_frame
 	var b2: Node3D = p.hand.placed[-1]
@@ -375,7 +377,7 @@ func _ready() -> void:
 	# onto the first: the wand straight down over it (through the origin's inverse: the player body has moved the rig)
 	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(Vector3.RIGHT, -PI / 2), b1.global_position + Vector3(0, 0.6, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	await _ticks(0.3)
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 20:
 		await get_tree().physics_frame
 	var b3: Node3D = p.hand.placed[-1]
@@ -389,7 +391,7 @@ func _ready() -> void:
 		await get_tree().process_frame
 	_right.set_pose(&"aim", rig.global_transform.affine_inverse() * Transform3D(Basis(), Vector3(0.6, 1.4, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 	await _ticks(0.3)   # the hang point (0.6, 1.4, -2): x to 1, y to the nearest 2 m - 2, z -2
-	p._on_right_pressed("trigger_click")
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
 	for i in 10:
 		await get_tree().physics_frame
 	var tall: Node3D = p.hand.placed[-1]

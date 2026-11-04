@@ -115706,6 +115706,1793 @@
           }
         ]
       }
+    },
+    "fire_extinguisher": {
+      "chapter": "association",
+      "label": "fire_extinguisher",
+      "expr": "association(config(cylinder)) = a fire extinguisher (Palle, 2026-11-03: the cylinder, configured - red, a valve, a handle, a hose - and recognised as a thing)",
+      "from": [
+        "cylinder"
+      ],
+      "config": {
+        "radius": 0.085,
+        "height": 0.5,
+        "colour": "c8102e",
+        "parts": [
+          "valve",
+          "handle",
+          "hose",
+          "label band"
+        ]
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.085,
+                0.5
+              ],
+              "color": "c8102e",
+              "at": [
+                0,
+                0.25,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.087,
+                0.1
+              ],
+              "color": "f2efe8",
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.06,
+                0.04
+              ],
+              "color": "a50d24",
+              "at": [
+                0,
+                0.52,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.024,
+                0.07
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.575,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.16,
+                0.02,
+                0.035
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.03,
+                0.62,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.012,
+                0.34
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.1,
+                0.42,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.03,
+                0.06,
+                0.03
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.1,
+                0.23,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "cylinder",
+              "size": [
+                0.085,
+                0.6
+              ],
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "rubber_ball": {
+      "chapter": "association",
+      "label": "rubber_ball",
+      "expr": "association(config(point)) = a rubber ball (Palle, 2026-11-03: the point, configured - red rubber, 11 cm - and recognised as a thing)",
+      "from": [
+        "point"
+      ],
+      "config": {
+        "form": "point",
+        "as": "a rubber ball",
+        "note": "red rubber, 11 cm"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "sphere",
+              "size": [
+                0.11
+              ],
+              "color": "d23b2f",
+              "at": [
+                0,
+                0.11,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "sphere",
+              "size": [
+                0.11
+              ],
+              "at": [
+                0,
+                0.11,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "measuring_stick": {
+      "chapter": "association",
+      "label": "measuring_stick",
+      "expr": "association(config(line)) = a measuring stick (Palle, 2026-11-03: the line, configured - yellow, one metre, ticks every 10 cm - and recognised as a thing)",
+      "from": [
+        "line"
+      ],
+      "config": {
+        "form": "line",
+        "as": "a measuring stick",
+        "note": "yellow, one metre, ticks every 10 cm"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.0,
+                0.02,
+                0.045
+              ],
+              "color": "f2c94c",
+              "at": [
+                0,
+                0.01,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.4,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.3,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.2,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.09999999999999998,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.034
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.0,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.09999999999999998,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.19999999999999996,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.30000000000000004,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.006,
+                0.003,
+                0.02
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.4,
+                0.021,
+                -0.008
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                1.0,
+                0.02,
+                0.045
+              ],
+              "at": [
+                0,
+                0.01,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "warning_triangle": {
+      "chapter": "association",
+      "label": "warning_triangle",
+      "expr": "association(config(triangle)) = a warning triangle (Palle, 2026-11-03: the triangle, configured - red, reflective, on a stand - and recognised as a thing)",
+      "from": [
+        "triangle"
+      ],
+      "config": {
+        "form": "triangle",
+        "as": "a warning triangle",
+        "note": "red, reflective, on a stand"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.45,
+                0.035,
+                0.03
+              ],
+              "color": "d0342c",
+              "at": [
+                0,
+                0.06,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.45,
+                0.035,
+                0.03
+              ],
+              "color": "d0342c",
+              "at": [
+                -0.1125,
+                0.2548557158514987,
+                0
+              ],
+              "rot": [
+                0,
+                0,
+                60
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.45,
+                0.035,
+                0.03
+              ],
+              "color": "d0342c",
+              "at": [
+                0.1125,
+                0.2548557158514987,
+                0
+              ],
+              "rot": [
+                0,
+                0,
+                -60
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.3,
+                0.02,
+                0.18
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.01,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.45,
+                0.45,
+                0.2
+              ],
+              "at": [
+                0,
+                0.225,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "door_stop": {
+      "chapter": "association",
+      "label": "door_stop",
+      "expr": "association(config(wedge)) = a door stop (Palle, 2026-11-03: the wedge, configured - brown rubber, 14 cm - and recognised as a thing)",
+      "from": [
+        "wedge"
+      ],
+      "config": {
+        "form": "wedge",
+        "as": "a door stop",
+        "note": "brown rubber, 14 cm"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "wedge",
+              "size": [
+                0.14,
+                0.05,
+                0.07
+              ],
+              "color": "6b4a2f",
+              "at": [
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.14,
+                0.05,
+                0.07
+              ],
+              "at": [
+                0,
+                0.025,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "gem": {
+      "chapter": "association",
+      "label": "gem",
+      "expr": "association(config(bipyramid)) = a gem (Palle, 2026-11-03: the bipyramid, configured - two cones base to base, glassy blue - and recognised as a thing)",
+      "from": [
+        "tetrahedron"
+      ],
+      "config": {
+        "form": "bipyramid",
+        "as": "a gem",
+        "note": "two cones base to base, glassy blue"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.1,
+                0.12
+              ],
+              "color": "6fc3e6",
+              "at": [
+                0,
+                0.21,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cone",
+              "size": [
+                0.1,
+                0.18
+              ],
+              "color": "4aa6d6",
+              "at": [
+                0,
+                0.09,
+                0
+              ],
+              "rot": [
+                180,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "sphere",
+              "size": [
+                0.1
+              ],
+              "at": [
+                0,
+                0.15,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "dice": {
+      "chapter": "association",
+      "label": "dice",
+      "expr": "association(config(cube)) = a die (Palle, 2026-11-03: the cube, configured - white, 16 cm, black pips - and recognised as a thing)",
+      "from": [
+        "cube"
+      ],
+      "config": {
+        "form": "cube",
+        "as": "a die",
+        "note": "white, 16 cm, black pips"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.16,
+                0.16,
+                0.16
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.08,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.161,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.045,
+                0.161,
+                -0.045
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.045,
+                0.161,
+                0.045
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.045,
+                0.161,
+                -0.045
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.045,
+                0.161,
+                0.045
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                -0.045,
+                0.125,
+                0.081
+              ],
+              "rot": [
+                90,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.08,
+                0.081
+              ],
+              "rot": [
+                90,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.014,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.045,
+                0.035,
+                0.081
+              ],
+              "rot": [
+                90,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.16,
+                0.16,
+                0.16
+              ],
+              "at": [
+                0,
+                0.08,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "beach_ball": {
+      "chapter": "association",
+      "label": "beach_ball",
+      "expr": "association(config(sphere)) = a beach ball (Palle, 2026-11-03: the sphere, configured - 60 cm, white and red - and recognised as a thing)",
+      "from": [
+        "point"
+      ],
+      "config": {
+        "form": "sphere",
+        "as": "a beach ball",
+        "note": "60 cm, white and red"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "sphere",
+              "size": [
+                0.3
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "dome",
+              "size": [
+                0.302,
+                0.302
+              ],
+              "color": "e0473a",
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "sphere",
+              "size": [
+                0.3
+              ],
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "tyre": {
+      "chapter": "association",
+      "label": "tyre",
+      "expr": "association(config(torus)) = a tyre (Palle, 2026-11-03: the torus, configured - black rubber, 68 cm across, lying flat - and recognised as a thing)",
+      "from": [
+        "cylinder"
+      ],
+      "config": {
+        "form": "torus",
+        "as": "a tyre",
+        "note": "black rubber, 68 cm across, lying flat"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "torus",
+              "size": [
+                0.34,
+                0.12
+              ],
+              "color": "202226",
+              "at": [
+                0,
+                0.06,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "cylinder",
+              "size": [
+                0.34,
+                0.12
+              ],
+              "at": [
+                0,
+                0.06,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "oil_drum": {
+      "chapter": "association",
+      "label": "oil_drum",
+      "expr": "association(config(cylinder)) = an oil drum (Palle, 2026-11-03: the cylinder, configured - blue steel, 58 cm across, 88 cm tall, two rolling ribs - and recognised as a thing)",
+      "from": [
+        "cylinder"
+      ],
+      "config": {
+        "form": "cylinder",
+        "as": "an oil drum",
+        "note": "blue steel, 58 cm across, 88 cm tall, two rolling ribs"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.29,
+                0.88
+              ],
+              "color": "1f5fa8",
+              "at": [
+                0,
+                0.44,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "torus",
+              "size": [
+                0.296,
+                0.02
+              ],
+              "color": "17497f",
+              "at": [
+                0,
+                0.3,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "torus",
+              "size": [
+                0.296,
+                0.02
+              ],
+              "color": "17497f",
+              "at": [
+                0,
+                0.6,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.27,
+                0.01
+              ],
+              "color": "9aa3a8",
+              "at": [
+                0,
+                0.885,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "cylinder",
+              "size": [
+                0.29,
+                0.88
+              ],
+              "at": [
+                0,
+                0.44,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "tin_can": {
+      "chapter": "association",
+      "label": "tin_can",
+      "expr": "association(config(cylinder)) = a tin can (Palle, 2026-11-03: the cylinder, configured - 8 cm across, 12 cm tall, a red label - and recognised as a thing)",
+      "from": [
+        "cylinder"
+      ],
+      "config": {
+        "form": "cylinder",
+        "as": "a tin can",
+        "note": "8 cm across, 12 cm tall, a red label"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.04,
+                0.12
+              ],
+              "color": "b8bec4",
+              "at": [
+                0,
+                0.06,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.041,
+                0.07
+              ],
+              "color": "c8102e",
+              "at": [
+                0,
+                0.06,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "cylinder",
+              "size": [
+                0.04,
+                0.12
+              ],
+              "at": [
+                0,
+                0.06,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "bowling_pin": {
+      "chapter": "association",
+      "label": "bowling_pin",
+      "expr": "association(config(revolve)) = a bowling pin (Palle, 2026-11-03: the revolve, configured - a profile turned round its axis, 38 cm, white with a red neck band - and recognised as a thing)",
+      "from": [
+        "cylinder"
+      ],
+      "config": {
+        "form": "revolve",
+        "as": "a bowling pin",
+        "note": "a profile turned round its axis, 38 cm, white with a red neck band"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.035,
+                0.03
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.015,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "sphere",
+              "size": [
+                0.06
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.11,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.045,
+                0.08
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.19,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.025,
+                0.07
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.265,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.027,
+                0.015
+              ],
+              "color": "c8102e",
+              "at": [
+                0,
+                0.27,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "sphere",
+              "size": [
+                0.036
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.335,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "cylinder",
+              "size": [
+                0.055,
+                0.38
+              ],
+              "at": [
+                0,
+                0.19,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "marble": {
+      "chapter": "association",
+      "label": "marble",
+      "expr": "association(config(point)) = a marble (Palle, 2026-11-03: the point, configured - glass, 4 cm - and recognised as a thing)",
+      "from": [
+        "point"
+      ],
+      "config": {
+        "form": "point",
+        "as": "a marble",
+        "note": "glass, 4 cm"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "sphere",
+              "size": [
+                0.02
+              ],
+              "color": "4fb3d9",
+              "at": [
+                0,
+                0.02,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "sphere",
+              "size": [
+                0.02
+              ],
+              "at": [
+                0,
+                0.02,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "marble_chute": {
+      "chapter": "association",
+      "label": "marble_chute",
+      "expr": "association(config(channel)) = a marble chute (Palle, 2026-11-03: the channel, configured - the C profile swept straight: a 1.2 m timber channel - and recognised as a thing)",
+      "from": [
+        "line"
+      ],
+      "config": {
+        "form": "channel",
+        "as": "a marble chute",
+        "note": "the C profile swept straight: a 1.2 m timber channel"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.012,
+                0.1
+              ],
+              "color": "c9a66b",
+              "at": [
+                0,
+                0.006,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.04,
+                0.012
+              ],
+              "color": "b8925a",
+              "at": [
+                0,
+                0.03,
+                -0.044
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.04,
+                0.012
+              ],
+              "color": "b8925a",
+              "at": [
+                0,
+                0.03,
+                0.044
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.012,
+                0.1
+              ],
+              "at": [
+                0,
+                0.006,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.04,
+                0.012
+              ],
+              "at": [
+                0,
+                0.03,
+                -0.044
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.04,
+                0.012
+              ],
+              "at": [
+                0,
+                0.03,
+                0.044
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "wooden_block": {
+      "chapter": "association",
+      "label": "wooden_block",
+      "expr": "association(config(cube)) = a wooden block (Palle, 2026-11-03: the cube, configured - light wood, 30 x 10 x 10 cm, the stacking block - and recognised as a thing)",
+      "from": [
+        "cube"
+      ],
+      "config": {
+        "form": "cube",
+        "as": "a wooden block",
+        "note": "light wood, 30 x 10 x 10 cm, the stacking block"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.3,
+                0.1,
+                0.1
+              ],
+              "color": "d9b27c",
+              "at": [
+                0,
+                0.05,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.3,
+                0.1,
+                0.1
+              ],
+              "at": [
+                0,
+                0.05,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "domino_tile": {
+      "chapter": "association",
+      "label": "domino_tile",
+      "expr": "association(config(cube)) = a domino tile (Palle, 2026-11-03: the cube, configured - ivory, 30 cm tall, a line and pips - and recognised as a thing)",
+      "from": [
+        "cube"
+      ],
+      "config": {
+        "form": "cube",
+        "as": "a domino tile",
+        "note": "ivory, 30 cm tall, a line and pips"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.05,
+                0.3,
+                0.15
+              ],
+              "color": "f4f1ea",
+              "at": [
+                0,
+                0.15,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.052,
+                0.006,
+                0.13
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0,
+                0.15,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.012,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.026,
+                0.23,
+                -0.035
+              ],
+              "rot": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.012,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.026,
+                0.23,
+                0.035
+              ],
+              "rot": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.012,
+                0.003
+              ],
+              "color": "1c1c1e",
+              "at": [
+                0.026,
+                0.07,
+                0
+              ],
+              "rot": [
+                0,
+                0,
+                90
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.05,
+                0.3,
+                0.15
+              ],
+              "at": [
+                0,
+                0.15,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "cinder_block": {
+      "chapter": "association",
+      "label": "cinder_block",
+      "expr": "association(config(cube)) = a cinder block (Palle, 2026-11-03: the cube, configured - grey concrete, 39 x 19 x 19 cm, two cores - the thing that props things up - and recognised as a thing)",
+      "from": [
+        "cube"
+      ],
+      "config": {
+        "form": "cube",
+        "as": "a cinder block",
+        "note": "grey concrete, 39 x 19 x 19 cm, two cores - the thing that props things up"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.39,
+                0.19,
+                0.19
+              ],
+              "color": "8d8f8f",
+              "at": [
+                0,
+                0.095,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.13,
+                0.004,
+                0.12
+              ],
+              "color": "4a4c4d",
+              "at": [
+                -0.095,
+                0.191,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.13,
+                0.004,
+                0.12
+              ],
+              "color": "4a4c4d",
+              "at": [
+                0.095,
+                0.191,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.39,
+                0.19,
+                0.19
+              ],
+              "at": [
+                0,
+                0.095,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "wooden_board": {
+      "chapter": "association",
+      "label": "wooden_board",
+      "expr": "association(config(quad)) = a wooden board (Palle, 2026-11-03: the quad, configured - the quad thickened: 1.2 x 0.6 m, 2.5 cm timber - and recognised as a thing)",
+      "from": [
+        "quad"
+      ],
+      "config": {
+        "form": "quad",
+        "as": "a wooden board",
+        "note": "the quad thickened: 1.2 x 0.6 m, 2.5 cm timber"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.025,
+                0.6
+              ],
+              "color": "c9a66b",
+              "at": [
+                0,
+                0.0125,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.18,
+                0.002,
+                0.004
+              ],
+              "color": "a8854f",
+              "at": [
+                0,
+                0.026,
+                -0.2
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.18,
+                0.002,
+                0.004
+              ],
+              "color": "a8854f",
+              "at": [
+                0,
+                0.026,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                1.18,
+                0.002,
+                0.004
+              ],
+              "color": "a8854f",
+              "at": [
+                0,
+                0.026,
+                0.2
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                1.2,
+                0.025,
+                0.6
+              ],
+              "at": [
+                0,
+                0.0125,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
+    },
+    "hinge": {
+      "chapter": "association",
+      "label": "hinge",
+      "expr": "association(config(rotation)) = a hinge (Palle, 2026-11-03: the rotation, configured - two steel leaves and a pin: rotation about one axis, held - and recognised as a thing)",
+      "from": [
+        "quad"
+      ],
+      "config": {
+        "form": "rotation",
+        "as": "a hinge",
+        "note": "two steel leaves and a pin: rotation about one axis, held"
+      },
+      "build": {
+        "op": "associate",
+        "of": {
+          "op": "compose",
+          "parts": [
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.09,
+                0.004,
+                0.08
+              ],
+              "color": "9aa3a8",
+              "at": [
+                -0.05,
+                0.01,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "box",
+              "size": [
+                0.09,
+                0.004,
+                0.08
+              ],
+              "color": "9aa3a8",
+              "at": [
+                0.05,
+                0.01,
+                0
+              ]
+            },
+            {
+              "p": "mesh",
+              "shape": "cylinder",
+              "size": [
+                0.008,
+                0.09
+              ],
+              "color": "6f767e",
+              "at": [
+                0,
+                0.01,
+                0
+              ],
+              "rot": [
+                90,
+                0,
+                0
+              ]
+            },
+            {
+              "p": "collider",
+              "shape": "box",
+              "size": [
+                0.2,
+                0.02,
+                0.09
+              ],
+              "at": [
+                0,
+                0.01,
+                0
+              ]
+            },
+            {
+              "t": "grabbable"
+            }
+          ]
+        }
+      }
     }
   },
   "track": [

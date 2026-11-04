@@ -1,0 +1,548 @@
+{
+  "registry_info": {
+    "category": "associations",
+    "description": "The Primitives' forms recognised as things: association(config(form)) - the associated object a hall stands beside the form where it is first met, and the tape that writes the association (Palle, 2026-11-03).",
+    "created": "2026-11-03"
+  },
+  "artifacts": {
+    "mod_fire_extinguisher": {
+      "lookup_name": "mod_fire_extinguisher",
+      "name": "Fire extinguisher / association(config(cylinder))",
+      "description": "fire_extinguisher = association(config(cylinder)): the cylinder of Primitives_Columns, configured (red, a valve, a handle, a hose, a label band) and recognised as a thing. A term of the modular class system (commons/modular/terms.json), built from its parent at ready; a grabbable body with a cylinder collider, so it stands, is carried, and rolls.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "fire_extinguisher"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cylinder",
+        "inventory",
+        "void"
+      ]
+    },
+    "association_tape": {
+      "lookup_name": "association_tape",
+      "name": "Association tape",
+      "scene": "res://commons/artifacts/association_tape/association_tape.tscn",
+      "class_name": "AssociationTape",
+      "description": "A strip of printed tape laid on the floor or a wall, printed with one association: e.g. fire_extinguisher = association(config(cylinder)). Authored, so a hall carries its own sentence; ink, never a step. Config: text, mount floor|wall, ink.",
+      "category": "annotation",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "default_params": {
+        "text": "association(config(cylinder))",
+        "mount": "floor"
+      },
+      "tags": [
+        "association",
+        "tape",
+        "annotation",
+        "void"
+      ]
+    },
+    "mod_rubber_ball": {
+      "lookup_name": "mod_rubber_ball",
+      "name": "Rubber ball / association(config(point))",
+      "description": "rubber_ball = association(config(point)): the point of Point_One, configured (red rubber, 11 cm) and recognised as a rubber ball. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "rubber_ball"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "point",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_measuring_stick": {
+      "lookup_name": "mod_measuring_stick",
+      "name": "Measuring stick / association(config(line))",
+      "description": "measuring_stick = association(config(line)): the line of Point_Lines, configured (yellow, one metre, ticks every 10 cm) and recognised as a measuring stick. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "measuring_stick"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "line",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_warning_triangle": {
+      "lookup_name": "mod_warning_triangle",
+      "name": "Warning triangle / association(config(triangle))",
+      "description": "warning_triangle = association(config(triangle)): the triangle of Point_Triangle_Context, configured (red, reflective, on a stand) and recognised as a warning triangle. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "warning_triangle"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "triangle",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_door_stop": {
+      "lookup_name": "mod_door_stop",
+      "name": "Door stop / association(config(wedge))",
+      "description": "door_stop = association(config(wedge)): the wedge of Primitives_Polythedra, configured (brown rubber, 14 cm) and recognised as a door stop. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "door_stop"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "wedge",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_gem": {
+      "lookup_name": "mod_gem",
+      "name": "Gem / association(config(bipyramid))",
+      "description": "gem = association(config(bipyramid)): the bipyramid of Primitives_Polythedra, configured (two cones base to base, glassy blue) and recognised as a gem. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "gem"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "bipyramid",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_dice": {
+      "lookup_name": "mod_dice",
+      "name": "Die / association(config(cube))",
+      "description": "dice = association(config(cube)): the cube of Point_Animatedcube, configured (white, 16 cm, black pips) and recognised as a die. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "dice"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cube",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_beach_ball": {
+      "lookup_name": "mod_beach_ball",
+      "name": "Beach ball / association(config(sphere))",
+      "description": "beach_ball = association(config(sphere)): the sphere of Primitives_Ignorance, configured (60 cm, white and red) and recognised as a beach ball. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "beach_ball"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "sphere",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_tyre": {
+      "lookup_name": "mod_tyre",
+      "name": "Tyre / association(config(torus))",
+      "description": "tyre = association(config(torus)): the torus of Primitives_Profiles, configured (black rubber, 68 cm across, lying flat) and recognised as a tyre. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "tyre"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "torus",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_oil_drum": {
+      "lookup_name": "mod_oil_drum",
+      "name": "Oil drum / association(config(cylinder))",
+      "description": "oil_drum = association(config(cylinder)): the cylinder of Primitives_Columns, configured (blue steel, 58 cm across, 88 cm tall, two rolling ribs) and recognised as an oil drum. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "oil_drum"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cylinder",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_tin_can": {
+      "lookup_name": "mod_tin_can",
+      "name": "Tin can / association(config(cylinder))",
+      "description": "tin_can = association(config(cylinder)): the cylinder of Primitives_Columns, configured (8 cm across, 12 cm tall, a red label) and recognised as a tin can. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "tin_can"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cylinder",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_bowling_pin": {
+      "lookup_name": "mod_bowling_pin",
+      "name": "Bowling pin / association(config(revolve))",
+      "description": "bowling_pin = association(config(revolve)): the revolve of Primitives_Profiles, configured (a profile turned round its axis, 38 cm, white with a red neck band) and recognised as a bowling pin. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "bowling_pin"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "revolve",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_marble": {
+      "lookup_name": "mod_marble",
+      "name": "Marble / association(config(point))",
+      "description": "marble = association(config(point)): the point of Point_One, configured (glass, 4 cm) and recognised as a marble. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "marble"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "point",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_marble_chute": {
+      "lookup_name": "mod_marble_chute",
+      "name": "Marble chute / association(config(channel))",
+      "description": "marble_chute = association(config(channel)): the channel of Primitives_Profiles, configured (the C profile swept straight: a 1.2 m timber channel) and recognised as a marble chute. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "marble_chute"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "channel",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_wooden_block": {
+      "lookup_name": "mod_wooden_block",
+      "name": "Wooden block / association(config(cube))",
+      "description": "wooden_block = association(config(cube)): the cube of Point_Animatedcube, configured (light wood, 30 x 10 x 10 cm, the stacking block) and recognised as a wooden block. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "wooden_block"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cube",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_domino_tile": {
+      "lookup_name": "mod_domino_tile",
+      "name": "Domino tile / association(config(cube))",
+      "description": "domino_tile = association(config(cube)): the cube of Point_Animatedcube, configured (ivory, 30 cm tall, a line and pips) and recognised as a domino tile. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "domino_tile"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cube",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_cinder_block": {
+      "lookup_name": "mod_cinder_block",
+      "name": "Cinder block / association(config(cube))",
+      "description": "cinder_block = association(config(cube)): the cube of Point_Animatedcube, configured (grey concrete, 39 x 19 x 19 cm, two cores - the thing that props things up) and recognised as a cinder block. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "cinder_block"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "cube",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_wooden_board": {
+      "lookup_name": "mod_wooden_board",
+      "name": "Wooden board / association(config(quad))",
+      "description": "wooden_board = association(config(quad)): the quad of Point_Triangle_Context, configured (the quad thickened: 1.2 x 0.6 m, 2.5 cm timber) and recognised as a wooden board. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "wooden_board"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "quad",
+        "inventory",
+        "void"
+      ]
+    },
+    "mod_hinge": {
+      "lookup_name": "mod_hinge",
+      "name": "Hinge / association(config(rotation))",
+      "description": "hinge = association(config(rotation)): the rotation of Trans_Rotation, configured (two steel leaves and a pin: rotation about one axis, held) and recognised as a hinge. A term of the modular class system (commons/modular/terms.json); a grabbable body.",
+      "category": "modular",
+      "complexity": "beginner",
+      "scene": "res://commons/modular/composite.tscn",
+      "default_params": {
+        "term": "hinge"
+      },
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "association",
+        "rotation",
+        "inventory",
+        "void"
+      ]
+    },
+    "invariant_tape": {
+      "lookup_name": "invariant_tape",
+      "name": "Invariant tape / the cube's own ruler",
+      "description": "A printed-tape strip pinned edge to edge across the top of a Trans_Pre cube, in the cube's own frame (scale included), reprinting its length, its ratio to the length it was laid at, and its heading. Moved or turned it reads x1.00; scaled it changes as you watch. config: target (the cube's artifact id).",
+      "category": "associations",
+      "complexity": "beginner",
+      "scene": "res://commons/artifacts/invariant_tape/invariant_tape.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "transformation"
+      ],
+      "tags": [
+        "tape",
+        "invariant",
+        "transformation",
+        "void"
+      ]
+    },
+    "association_plinth": {
+      "lookup_name": "association_plinth",
+      "name": "Association plinth / pick it up: into your inventory",
+      "description": "A solid plinth at reach height under an association example (fire_extinguisher = association(config(cylinder)) ...). Picking the example up collects its inventory item: it goes on the hand's belt (left stick click chooses) and into the hand as a miniature; the example returns to the plinth. config: item, holds (the example's id), top, size [x, z], label.",
+      "category": "associations",
+      "complexity": "beginner",
+      "scene": "res://commons/artifacts/association_plinth/association_plinth.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "inventory",
+        "plinth",
+        "association",
+        "void"
+      ],
+      "configure_before_ready": true
+    },
+    "traffic_cone": {
+      "lookup_name": "traffic_cone",
+      "name": "Traffic cone / plain, banded, post",
+      "description": "A traffic cone family (Palle, 2026-11-04, two pictures): an orange frustum with a flat tip and no, one or two white bands on a square or round plate, or a tall delineator post banded near its top. One shared vertex-coloured mesh per setting; solid (static) or a pickable frozen until taken. config: style plain|band|bands|post, height, base square|round|none, wear 0..1, body static|pickable.",
+      "category": "associations",
+      "complexity": "beginner",
+      "scene": "res://commons/artifacts/traffic_cone/traffic_cone.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "primitives",
+        "arrays"
+      ],
+      "tags": [
+        "cone",
+        "association",
+        "void"
+      ]
+    },
+    "cone_stands": {
+      "lookup_name": "cone_stands",
+      "name": "Cone stands / a cone under every array cube",
+      "description": "Finds the pick-up cubes of the named arrays on its floor and stands a solid traffic cone under each, the cube seated on its tip (bob stopped, spin kept); the cones stay when a cube is collected. config: targets (artifact ids), height, style, base.",
+      "category": "associations",
+      "complexity": "beginner",
+      "scene": "res://commons/artifacts/cone_stands/cone_stands.tscn",
+      "configure_before_ready": true,
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "arrays"
+      ],
+      "tags": [
+        "cone",
+        "array",
+        "void"
+      ]
+    }
+  }
+}
