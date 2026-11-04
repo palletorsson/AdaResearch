@@ -4032,7 +4032,7 @@
             -4.8
           ],
           "height": 0,
-          "scale": 0.2,
+          "scale": 2.0,
           "facing": 0,
           "config": {
             "museum_yaw": 0,
@@ -9662,7 +9662,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Matter / AND / gravity â€” earn the reusable assembly"
+            "editor_label": "Matter / AND / gravity — earn the reusable assembly"
           }
         },
         {
@@ -9677,7 +9677,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Matter / OR / gravity â€” earn the reusable assembly"
+            "editor_label": "Matter / OR / gravity — earn the reusable assembly"
           }
         },
         {
@@ -9692,7 +9692,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Matter / NOT / gravity â€” earn the reusable assembly",
+            "editor_label": "Matter / NOT / gravity — earn the reusable assembly",
             "parts": {
               "TableAndSupports": {
                 "position": [
@@ -28083,7 +28083,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "SEED / REPLAY",
-            "action": "SET Â· RECORD Â· REPLAY",
+            "action": "SET · RECORD · REPLAY",
             "clearance": 0.15,
             "accent": "#d86e32"
           }
@@ -28105,7 +28105,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "TOUCH / KEEP MOTION",
-            "action": "TOUCH A POINT Â· REPLAY",
+            "action": "TOUCH A POINT · REPLAY",
             "clearance": 0.3,
             "accent": "#d86e32"
           }
@@ -28127,7 +28127,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "PRNG / CRANK",
-            "action": "CRANK Â· RESET Â· SET SEED",
+            "action": "CRANK · RESET · SET SEED",
             "clearance": 0.25,
             "accent": "#d86e32"
           }
@@ -28152,7 +28152,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "1955 / NUMBER PAGE",
-            "action": "READ Â· ADVANCE ROWS",
+            "action": "READ · ADVANCE ROWS",
             "clearance": 0.25,
             "accent": "#d86e32"
           }
@@ -28285,7 +28285,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "LAVA / CAPTURE",
-            "action": "CAPTURE Â· HEAT Â· COVER",
+            "action": "CAPTURE · HEAT · COVER",
             "clearance": 0.2,
             "accent": "#d86e32"
           }
@@ -28307,7 +28307,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "PRNG / REGISTER",
-            "action": "PAUSE Â· REPLAY Â· STEP",
+            "action": "PAUSE · REPLAY · STEP",
             "clearance": 0.28,
             "accent": "#d86e32"
           }
@@ -28352,7 +28352,7 @@
           "interface": {
             "style": "ceiling_instrument",
             "title": "FRAME / VARIATION",
-            "action": "HOLD Â· REPLAY Â· RANGE",
+            "action": "HOLD · REPLAY · RANGE",
             "clearance": 0.24,
             "accent": "#d86e32"
           }
