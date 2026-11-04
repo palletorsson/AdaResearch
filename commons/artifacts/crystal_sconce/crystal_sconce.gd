@@ -56,7 +56,8 @@ func _build() -> void:
 	crystal.mesh=_bipyramid(int(spec[0]), float(spec[1]), float(spec[2]), depth)
 	var glass := StandardMaterial3D.new()
 	glass.albedo_color=Color(light, .82);glass.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
-	glass.emission_enabled=true;glass.emission=light;glass.emission_energy_multiplier=1.4
+	# White glass at full glow is a blob of light: dimmer, so its flat facets still read as a polyhedron.
+	glass.emission_enabled=true;glass.emission=light;glass.emission_energy_multiplier=.45 if colour=="white" else 1.4
 	glass.roughness=.15;glass.metallic=.1;glass.rim_enabled=true;glass.rim=.6
 	crystal.material_override=glass;crystal.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	crystal.position=Vector3(0, ARM_RISE+.03+depth, ARM_REACH);add_child(crystal)
