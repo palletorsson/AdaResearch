@@ -5137,21 +5137,6 @@
           }
         },
         {
-          "id": "catalyst-spider",
-          "artifact": "void_catalyst_spider",
-          "station": "NW",
-          "position": [
-            0,
-            -7.25
-          ],
-          "height": 0.035,
-          "facing": 180,
-          "scale": 1,
-          "config": {
-            "editor_label": "Spider / catalyst calms, then supplies health"
-          }
-        },
-        {
           "id": "carried-walkway",
           "artifact": "void_cube_walkway",
           "station": "SE",
@@ -5163,37 +5148,6 @@
           "facing": 0,
           "scale": 1,
           "config": {}
-        },
-        {
-          "id": "matter-and",
-          "artifact": "matter_and",
-          "station": "NW",
-          "position": [
-            0,
-            -0.25
-          ],
-          "height": 0,
-          "facing": 0,
-          "scale": 1,
-          "config": {
-            "editor_label": "Matter / AND â€” earn the reusable assembly",
-            "parts": {
-              "Controls": {
-                "position": [
-                  -0.1,
-                  0.94,
-                  0.29
-                ]
-              },
-              "Instruction": {
-                "position": [
-                  0.08,
-                  0.75,
-                  0.431
-                ]
-              }
-            }
-          }
         },
         {
           "id": "square-edge-assembly",
