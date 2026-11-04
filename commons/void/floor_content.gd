@@ -525,6 +525,9 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		terrain_anchor.name = "PerlinNoiseTerrain"
 		artifact.add_child(terrain_anchor)
 	mount.add_child(artifact)
+	if item.get("config", {}).has("platonic"):
+		# One look for a floor's primitives, or a study like the hall's solids; only placements carrying the key.
+		preload("res://commons/void/primitive_finish.gd").dress(mount, artifact, str(item.config.platonic), item.config)
 	if artifact_trial == "cellularautomata_03" and item.artifact == "ca_chair_test":
 		var chair_controls := Node3D.new()
 		chair_controls.set_script(preload("res://commons/void/trials/cellularautomata_03/chair_controls.gd"))

@@ -27,13 +27,7 @@ func setup(pickable: XRToolsPickable) -> void:
 		for vertex in [a,b,c]:
 			flat.set_normal(normal);flat.add_vertex(vertex)
 	surface.mesh=flat.commit()
-	var finish := Kit.material(Color("e7ded0"))
-	finish.roughness=.48
-	finish.metallic=.05
-	finish.emission_enabled=true
-	finish.emission=Color("e7ded0")
-	finish.emission_energy_multiplier=.035
-	surface.material_override=finish
+	surface.material_override=finish()
 	# One batched mesh for actual polyhedron edges and their endpoints. Cylinders
 	# remain legible in stereo, unlike one-pixel wireframe rendering.
 	var outline := SurfaceTool.new()
@@ -75,9 +69,31 @@ func setup(pickable: XRToolsPickable) -> void:
 	Kit.block(group,Vector3(.99,.42,.025),Vector3(0,.56,.574),Color("262531"),false).name="ReadingPlate"
 	var name_label := Kit.label(group,String(body.get_meta("solid_type")).to_upper(),Vector3(0,.68,.591),.00165)
 	name_label.modulate=Color("fff0db")
-	var counts := "%d vertices   /   %d edges\n%d %s faces"%[geometry.vertices.size(),geometry.edges.size(),geometry.planes.size(),"square" if geometry.planes.size()==6 else "pentagonal" if geometry.planes.size()==12 else "triangular"]
+	var counts := "%d vertices   /   %d edges\n%s"%[geometry.vertices.size(),geometry.edges.size(),faces_text(geometry)]
 	Kit.label(group,counts,Vector3(0,.55,.591),.0011).modulate=Color("fff0db")
 	Kit.label(group,"PICK UP / TURN / COMPARE",Vector3(0,.41,.591),.0009).modulate=Color("e9bf82")
+
+## "6 square faces", or for a solid with more than one kind, "4 triangular + 4 hexagonal faces" - by each face's corners.
+static func faces_text(geometry: Dictionary) -> String:
+	var names := {3:"triangular",4:"square",5:"pentagonal",6:"hexagonal",8:"octagonal",10:"decagonal"}
+	var by_size := {}
+	for corners in geometry.face_vertices:
+		var n: int=(corners as Array).size()
+		by_size[n]=int(by_size.get(n,0))+1
+	var sizes := by_size.keys();sizes.sort()
+	var parts: Array[String]=[]
+	for n in sizes:parts.append("%d %s"%[by_size[n],names.get(n,"%d-sided"%n)])
+	return " + ".join(parts)+" faces"
+
+## The solids' warm white finish, shared with every primitive that should read as one of them (primitive_finish.gd).
+static func finish() -> StandardMaterial3D:
+	var m := Kit.material(Color("e7ded0"))
+	m.roughness=.48
+	m.metallic=.05
+	m.emission_enabled=true
+	m.emission=Color("e7ded0")
+	m.emission_energy_multiplier=.035
+	return m
 
 func _held(_object: Node3D) -> void:
 	edge_material.emission_energy_multiplier=1.6

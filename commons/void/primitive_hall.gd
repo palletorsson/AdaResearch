@@ -121,6 +121,52 @@ func _primitives() -> void:
 	counts_prompt.name="CountPrompt"
 	var atlas_prompt := words("03 / TWO DIRECTIONS OF RESOLUTION",Vector3(-16,.026,4.0),true,.0011)
 	atlas_prompt.name="AtlasPrompt"
+	_play_platform()
+
+## The first playground space (Palle, 2026-11-04, after a soft-play corner): a low round platform in the middle of the
+## bay with an assortment of play primitives, all in the solids' white finish, each frozen until it is picked up.
+## The rim is a 12 cm bevel over 50 cm (about 14 degrees): the walker's capsule meets anything steeper than 45 degrees,
+## or a bare edge, as a wall.
+const PLAY_TOP := .12
+func _play_platform() -> void:
+	var finish := PlatonicStudy.finish()
+	var group := Node3D.new();group.name="PlayPlatform";group.position=Vector3(0,0,.75);add_child(group)
+	var platform := StaticBody3D.new();platform.name="Platform";group.add_child(platform)
+	var disc := CylinderMesh.new();disc.top_radius=2.6;disc.bottom_radius=3.1;disc.height=PLAY_TOP
+	disc.radial_segments=72;disc.rings=1
+	var visual := MeshInstance3D.new();visual.mesh=disc;visual.material_override=finish;visual.position.y=PLAY_TOP*.5
+	platform.add_child(visual)
+	var shape := CollisionShape3D.new();shape.shape=disc.create_convex_shape();shape.position.y=PLAY_TOP*.5
+	platform.add_child(shape)
+	var bar := BoxMesh.new();bar.size=Vector3(.9,.3,.3)
+	var cube := BoxMesh.new();cube.size=Vector3.ONE*.42
+	var drum := CylinderMesh.new();drum.top_radius=.2;drum.bottom_radius=.2;drum.height=.42;drum.radial_segments=24
+	var roller := CylinderMesh.new();roller.top_radius=.17;roller.bottom_radius=.17;roller.height=.7;roller.radial_segments=24
+	var wedge := PrismMesh.new();wedge.size=Vector3(.6,.4,.42);wedge.left_to_right=0.0
+	var pill := CapsuleMesh.new();pill.radius=.15;pill.height=.8
+	var ring := TorusMesh.new();ring.inner_radius=.12;ring.outer_radius=.3
+	# [name, mesh, x, y above the platform, z, yaw, lying on its side]
+	var pieces := [
+		["LongBar_1",bar,-1.2,0,-.9,20,false],["LongBar_2",bar,.6,0,1.4,-35,false],["LongBar_3",bar,1.5,0,-.6,80,false],
+		["Cube_1",cube,-.4,0,.3,10,false],["Cube_2",cube,1.8,0,.9,40,false],
+		["Drum_1",drum,.2,0,-1.6,0,false],["Drum_2",drum,-1.9,0,.6,0,false],["Drum_Stacked",drum,-.4,.42,.3,0,false],
+		["Roller_1",roller,1.0,0,.2,15,true],["Roller_2",roller,-1.0,0,1.7,70,true],
+		["Wedge_1",wedge,-1.9,0,-.5,90,false],["Wedge_2",wedge,.3,0,2.1,200,false],
+		["RoundBar_1",pill,-.2,0,-.6,50,true],["RoundBar_2",pill,1.5,0,-1.7,-20,true],
+		["SoftRing",ring,-1.4,0,-1.8,0,false],
+	]
+	for p in pieces:
+		var mesh: Mesh=p[1]
+		var box := mesh.get_aabb()
+		var body := Kit.pickable_mesh(group,mesh,Vector3(p[2],0,p[4]),Kit.WHITE,maxf(box.size.x,maxf(box.size.y,box.size.z)))
+		body.name=p[0];body.get_child(0).material_override=finish
+		if p[6]:
+			# On its side: the long axis turns horizontal, and the round section is what now stands on the platform.
+			body.rotation_degrees=Vector3(0,p[5],90);body.position.y=PLAY_TOP+float(p[3])+box.size.x*.5
+		else:
+			body.rotation_degrees.y=p[5];body.position.y=PLAY_TOP+float(p[3])+box.size.y*.5
+	var sign_text := Kit.label(group,"PLAY  /  PICK UP, STACK, LEAN, BUILD",Vector3(0,PLAY_TOP+.004,2.25),.0012)
+	sign_text.rotation_degrees.x=-90;sign_text.modulate=Color("5c5249")
 
 func _godot() -> void:
 	for i in Library.TYPES.size():
