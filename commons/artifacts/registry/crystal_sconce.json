@@ -1,0 +1,24 @@
+{
+  "registry_info": {
+    "category": "crystal_sconce",
+    "description": "Primitive lights: polyhedra of coloured light on bent arms, for the walls and columns of the tower.",
+    "created": "2026-11-04"
+  },
+  "artifacts": {
+    "crystal_sconce": {
+      "lookup_name": "crystal_sconce",
+      "scene": "res://commons/artifacts/crystal_sconce/crystal_sconce.tscn",
+      "class_name": "CrystalSconce",
+      "name": "Crystal sconce",
+      "description": "A primitive as a lamp: a faceted bipyramid of coloured light (hexagonal crystal, square diamond or long kite) on a curved arm from a wall plate, with a soft lamp of its own colour inside. The origin is the plate's centre on the wall; the light projects along +Z, so a placement's height is its mounting height. Config: #shape:crystal|diamond|kite #colour:white|yellow|blue|violet|green|pink",
+      "category": "crystal_sconce",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [1, 1, 1],
+      "parameters": {"footprint": [1, 1, 1], "size_group": "compact"},
+      "tags": ["primitive", "light", "fixture"]
+    }
+  }
+}
