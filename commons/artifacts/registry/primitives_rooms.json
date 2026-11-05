@@ -1,0 +1,127 @@
+{
+  "registry_info": {
+    "category": "primitives_rooms",
+    "description": "Rooms and instruments for the Primitives floors (Palle, 2026-11-05): the black point room, the standing grid, the box and grid round the Melencolia sculpture, the form table.",
+    "created": "2026-11-05"
+  },
+  "artifacts": {
+    "point_line_room": {
+      "lookup_name": "point_line_room",
+      "scene": "res://commons/artifacts/primitives_rooms/point_line_room.tscn",
+      "class_name": "PointLineRoom",
+      "name": "The point room (a line is two points brought together)",
+      "description": "A black lining inside the scaffold workstation's glass bay over shaft A on Point_Lines (floor, back, sides, ceiling, and a front with a doorway), and in it the pairing field at room size: eight large lettered points hanging in the dark. Bring two close and release: they join in a line (the snap-point system of pairing_point_field). Move them apart and the line follows; the back wall writes how long each line is, the newest one large. The lining adds no body inside the bay except the front beside the doorway, so the workstation's BUILD, drop test and quarter-size visit are unchanged; its glass gate is opened so a visitor walks in. config size, height, door, points, open_gate.",
+      "category": "primitives_rooms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "configure_before_ready": true,
+      "default_params": {
+        "size": 6.6
+      },
+      "spatial_needs": {
+        "footprint_cells": [
+          7,
+          7
+        ]
+      },
+      "tags": [
+        "point",
+        "line",
+        "measure",
+        "dark-room",
+        "snap",
+        "void",
+        "primitives"
+      ]
+    },
+    "standing_grid": {
+      "lookup_name": "standing_grid",
+      "scene": "res://commons/artifacts/primitives_rooms/standing_grid.tscn",
+      "class_name": "StandingGrid",
+      "name": "Standing grid (Dürer's screen at the size of a wall)",
+      "description": "A net of thin strings, half a metre apart, held in a heavy timber frame - two posts, a head beam, a sill - standing on two feet: Dürer's drawing screen (dgrid) at the size of a wall, 8 m long and 4 m high by default. The strings are only seen, never touched; the frame is solid. config length, height, cell, base, frame, finish timber|black|white, feet, strings.",
+      "category": "primitives_rooms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "configure_before_ready": true,
+      "default_params": {
+        "length": 8.0,
+        "height": 4.0
+      },
+      "spatial_needs": {
+        "footprint_cells": [
+          9,
+          3
+        ]
+      },
+      "tags": [
+        "grid",
+        "durer",
+        "perspective",
+        "frame",
+        "trace",
+        "void",
+        "primitives"
+      ]
+    },
+    "durer_box": {
+      "lookup_name": "durer_box",
+      "scene": "res://commons/artifacts/primitives_rooms/durer_box.tscn",
+      "class_name": "DurerBox",
+      "name": "Box and grid round the Melencolia sculpture",
+      "description": "Three walls to the ceiling - back and two sides - round the sculpture after Melencolia I on floor 12, its front open; in the opening a standing grid at the opening's size (standing_grid), and across the shaft, where a visitor can stand, Dürer's sight: a post with an eye-piece at 1.6 m. Through it the net cuts the work into cells - the draughtsman's set-up of 1525 with the grid as the instrument and the engraving as the model. config width, depth, height, wall, colour, cell, sight_distance, sight_height.",
+      "category": "primitives_rooms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "configure_before_ready": true,
+      "default_params": {},
+      "spatial_needs": {
+        "footprint_cells": [
+          8,
+          6
+        ]
+      },
+      "tags": [
+        "durer",
+        "melencolia",
+        "grid",
+        "perspective",
+        "box",
+        "void",
+        "primitives"
+      ]
+    },
+    "form_table": {
+      "lookup_name": "form_table",
+      "scene": "res://commons/artifacts/primitives_rooms/form_table.tscn",
+      "class_name": "FormTable",
+      "name": "Form table (cones and column parts that snap)",
+      "description": "A table set with white parts turned from profiles - drums, tall drums, cones, a spire, funnels, capitals, square bases - each held as a hand holds anything. Released with its foot near another part's top it snaps: upright, centred, and it stays; over the table it stands where it is let go; anywhere else it falls. Lifting a part lifts the stack on it, and setting it down snaps the bottom of it, the rest riding along. One example column stands at the table's end. config length, width, top, snap.",
+      "category": "primitives_rooms",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "configure_before_ready": true,
+      "default_params": {},
+      "spatial_needs": {
+        "footprint_cells": [
+          3,
+          2
+        ]
+      },
+      "tags": [
+        "profile",
+        "cone",
+        "column",
+        "stack",
+        "snap",
+        "form",
+        "void",
+        "primitives"
+      ]
+    }
+  }
+}

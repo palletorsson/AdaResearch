@@ -2061,12 +2061,12 @@
           "artifact": "two_points_line",
           "station": "NW",
           "position": [
-            -18,
-            -7.5
+            -12.4,
+            1.0
           ],
           "height": 0.9,
           "scale": 1,
-          "facing": 0,
+          "facing": 90,
           "config": {
             "reactive": "break",
             "rebuild": "8",
@@ -2247,6 +2247,21 @@
               0.36
             ],
             "editor_label": "Association plinth / measuringstick"
+          }
+        },
+        {
+          "id": "point-room",
+          "artifact": "point_line_room",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "The point room: black, in the workstation bay over shaft A"
           }
         }
       ],
@@ -3102,6 +3117,21 @@
           "facing": 90,
           "config": {
             "editor_label": "candidate / Point_Trace - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "primitives-standing-grid",
+          "artifact": "standing_grid",
+          "station": "NW",
+          "position": [
+            -11.5,
+            -5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Standing grid: 8 x 4 m, a net in a large frame"
           }
         }
       ],
@@ -8231,6 +8261,21 @@
             "body": "pickable",
             "editor_label": "Grove post / delineator 1.10 m"
           }
+        },
+        {
+          "id": "primitives-form-table",
+          "artifact": "form_table",
+          "station": "NE",
+          "position": [
+            3.5,
+            -1.5
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Form table: cones and column parts that snap"
+          }
         }
       ],
       "impact_cells": [],
@@ -9371,8 +9416,8 @@
           "artifact": "snap_pyramid_puzzle",
           "station": "NW",
           "position": [
-            -13.5,
-            -4.5
+            -12.2,
+            -5.2
           ],
           "height": 0.195,
           "scale": 1,
@@ -9551,8 +9596,8 @@
           "artifact": "bigframe",
           "station": "SW",
           "position": [
-            -15,
-            3
+            -17.5,
+            4.5
           ],
           "height": 1.435,
           "scale": 1,
@@ -9568,8 +9613,8 @@
           "artifact": "bigframe",
           "station": "SW",
           "position": [
-            -13.5,
-            3
+            -16.0,
+            4.5
           ],
           "height": 1.435,
           "scale": 1,
@@ -9637,8 +9682,8 @@
           "artifact": "eleven_dots",
           "station": "NW",
           "position": [
-            -18.0279,
-            -4.4167
+            -18.0,
+            -6.4
           ],
           "height": 0.029,
           "scale": 1,
@@ -9703,6 +9748,21 @@
           "facing": 0,
           "config": {
             "editor_label": "candidate / Primitives_Melencolia - spine worklist 2026-11-03: keep or remove"
+          }
+        },
+        {
+          "id": "durer-box",
+          "artifact": "durer_box",
+          "station": "NW",
+          "position": [
+            -15.85,
+            -0.9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Box and grid round the Melencolia sculpture, the sight across the shaft"
           }
         }
       ],
