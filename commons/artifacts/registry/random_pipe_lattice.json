@@ -1,0 +1,24 @@
+{
+  "registry_info": {
+    "category": "random_pipe_lattice",
+    "description": "Structures grown by chance for the Randomness sequence.",
+    "created": "2026-11-05"
+  },
+  "artifacts": {
+    "random_pipe_lattice": {
+      "lookup_name": "random_pipe_lattice",
+      "scene": "res://commons/artifacts/random_pipe_lattice/random_pipe_lattice.tscn",
+      "class_name": "RandomPipeLattice",
+      "name": "Random pipe lattice",
+      "description": "A lattice grown by chance, ported from Palle's Rhino script: a size x size grid of points stacked in levels 1 m apart (spacing), every point piped straight up, and piped to each of eight neighbours on the next level only when a random draw beats prob (0.6 = a 40 % chance each). Quirks of the script kept: only points short of the last row and column start pipes, the 'away left' draw repeats 'away up', and Python's negative indices wrap some pipes to the far side (neighbours:local drops those). Pipes and joints are solid. Origin = centre of the bottom level. Config: #seed #prob #size #levels #spacing #pipe_radius #deviation #neighbours:as_written|local",
+      "category": "random_pipe_lattice",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "large",
+      "footprint": [7, 4, 7],
+      "parameters": {"footprint": [7, 4, 7], "size_group": "large"},
+      "tags": ["randomness", "structure", "lattice", "climbing"]
+    }
+  }
+}

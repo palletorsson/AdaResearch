@@ -32232,6 +32232,21 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "random-pipe-lattice",
+          "artifact": "random_pipe_lattice",
+          "station": "NW",
+          "position": [
+            16.8,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Random pipe lattice / Palle's Rhino script: up always, eight neighbours by chance (seed 7, prob 0.6)"
+          }
         }
       ],
       "props": [],
