@@ -11,10 +11,12 @@ func shoot() -> void:
 	var folder := ""
 	var height := 28.0
 	var oblique := false
+	var pitch := -18.0   # --pitch=deg: the walker's eyes, up positive
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--plan-output="):folder=arg.trim_prefix("--plan-output=")
 		if arg.begins_with("--plan-height="):height=float(arg.trim_prefix("--plan-height="))
 		if arg=="--plan-oblique":oblique=true
+		if arg.begins_with("--pitch="):pitch=float(arg.trim_prefix("--pitch="))
 	load("res://commons/void/room_source.gd").use_main_tower=true
 	game=load("res://commons/void/void.tscn").instantiate()
 	root.add_child(game);current_scene=game
@@ -36,7 +38,7 @@ func shoot() -> void:
 			var start := Vector3(w[0],base+.06,w[1]);var target := Vector3(w[2],base,w[3])
 			game.place_player(start)
 			game.body.rotation.y=atan2(-(target.x-start.x),-(target.z-start.z))
-			game.camera.rotation=Vector3(-.32,0,0)
+			game.camera.rotation=Vector3(deg_to_rad(pitch),0,0)
 			for i in 30:await physics_frame
 			await RenderingServer.frame_post_draw
 			root.get_texture().get_image().save_png(folder.path_join("eye.png"))
