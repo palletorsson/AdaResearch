@@ -32483,6 +32483,21 @@
           "config": {
             "plinth": "1.05"
           }
+        },
+        {
+          "id": "random-walk-tubes",
+          "artifact": "random_walk_tubes",
+          "station": "NW",
+          "position": [
+            17,
+            0
+          ],
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "editor_label": "Random walk tubes / Palle's second Rhino script: a biased walk, piped to its middle (seed 5)"
+          }
         }
       ],
       "props": [],

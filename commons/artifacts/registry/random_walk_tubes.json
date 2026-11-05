@@ -1,0 +1,24 @@
+{
+  "registry_info": {
+    "category": "random_walk_tubes",
+    "description": "A biased random walk as a body, for the Randomness sequence.",
+    "created": "2026-11-05"
+  },
+  "artifacts": {
+    "random_walk_tubes": {
+      "lookup_name": "random_walk_tubes",
+      "scene": "res://commons/artifacts/random_walk_tubes/random_walk_tubes.tscn",
+      "class_name": "RandomWalkTubes",
+      "name": "Random walk tubes",
+      "description": "A walk toward a goal made of chance, ported from Palle's second Rhino script: from a random start, six steps, each trying five random moves (-1..5 on every axis) and keeping those that end nearer the goal than the step began; every step piped to one middle point with spheres at the ends, and a thick tube along the cubic B-spline the steps steer (rs.AddCurve: start and goal are passed through, the steps are control points). The walk's diagonal runs along +X; scale sets metres per unit, and a walk that climbs taller than fit_height (5.2 m) is scaled down to fit under a storey. Solid. Config: #seed #scale #steps #tries #step_min #step_max #fit_height",
+      "category": "random_walk_tubes",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "large",
+      "footprint": [12, 6, 2],
+      "parameters": {"footprint": [12, 6, 2], "size_group": "large"},
+      "tags": ["randomness", "random_walk", "structure"]
+    }
+  }
+}
