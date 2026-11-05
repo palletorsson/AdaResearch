@@ -9,16 +9,32 @@
       "lookup_name": "random_pipe_lattice",
       "scene": "res://commons/artifacts/random_pipe_lattice/random_pipe_lattice.tscn",
       "class_name": "RandomPipeLattice",
-      "name": "Random pipe lattice",
-      "description": "A lattice grown by chance, ported from Palle's Rhino script: a size x size grid of points stacked in levels 1 m apart (spacing), every point piped straight up, and piped to each of eight neighbours on the next level only when a random draw beats prob (0.6 = a 40 % chance each). Quirks of the script kept: only points short of the last row and column start pipes, the 'away left' draw repeats 'away up', and Python's negative indices wrap some pipes to the far side (neighbours:local drops those). Pipes and joints are solid. Origin = centre of the bottom level. Config: #seed #prob #size #levels #spacing #pipe_radius #deviation #neighbours:as_written|local",
+      "name": "Random pipe lattice (order to chance)",
+      "description": "A grid net that starts in order and gradually becomes chance, from Palle's Rhino script (a grid of points in levels 1 m apart, every point piped up, and piped to each of eight next-level neighbours when random() > prob) and his request to make it 'a grid net that starts non random and gradually becomes more random', thinner. Each start point has a randomness t from 0 to 1 along the net (gradient y; or levels; none = the script everywhere): with probability t a pipe is the script's draw, otherwise the regular net's (up, right and away up); points drift by up to deviation x t. The script's quirks are kept (only points short of the last row and column start pipes, 'away left' repeats 'away up', Python's negative indices wrap some pipes to the far side; neighbours:local drops those). 7 x 13 points by default (6 x 12 m), pipes r 0.035, joints r 0.07, solid. Origin = centre of the bottom level. Config: #seed #prob #size_x #size_y #levels #spacing #pipe_radius #joint_radius #deviation #gradient:y|levels|none #neighbours:as_written|local",
       "category": "random_pipe_lattice",
       "complexity": "intermediate",
       "include_in_map_data": true,
       "map_ready": true,
       "size_group": "large",
-      "footprint": [7, 4, 7],
-      "parameters": {"footprint": [7, 4, 7], "size_group": "large"},
-      "tags": ["randomness", "structure", "lattice", "climbing"]
+      "footprint": [
+        7,
+        4,
+        13
+      ],
+      "parameters": {
+        "footprint": [
+          7,
+          4,
+          13
+        ],
+        "size_group": "large"
+      },
+      "tags": [
+        "randomness",
+        "structure",
+        "lattice",
+        "climbing"
+      ]
     }
   }
 }
