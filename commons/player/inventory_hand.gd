@@ -399,7 +399,7 @@ func config_for(id: String) -> Dictionary:
 	if not st.is_empty():
 		var pt := pitch()
 		over = {"grid": pt.x, "grid_y": pt.y, "snap_to": str(st.get("snap", "grid"))}
-		for key in ["diagonals", "rigidity"]:   # the Triangle stage's (playground_ball.gd); a stage without them adds nothing
+		for key in ["diagonals", "rigidity", "fold"]:   # the Triangle stage's and the built look's (playground_ball.gd); a stage without them adds nothing
 			if st.has(key):over[key] = st[key]
 	over.merge(values.get(id, {}), true)
 	return Items.config_for(Items.item(id), over)

@@ -94,7 +94,47 @@ changes nothing.
 falls over sideways. A wall needs buttresses, and a point in space needs three rods. That leads straight to floor 6,
 Polyhedra, and the tetrahedron.
 
+## Three playground grids, one record (2026-11-06, asked on the forum: 261106-godli)
+
+Three playground grids exist today. They share no record, no rules and no look:
+
+| | Inventory kit (the hand, in the Void) | Web editor `/catalyst-inventory` | Playground workstation (floor 20 / 210, `/playground-workbench`) |
+|---|---|---|---|
+| Record | balls and rods at world metres, 1 m grid | the kit's rules in TypeScript (`kit-graph.ts`) | integer addresses × a step: 0.2 m hand model, 2 m world, quarter-scale glass copy |
+| Pieces | 6/18-socket ball, rod, brace, faces | ball, rod | point, 1-8 m rods, triangle halves, quads, wedges, panels |
+
+The proposal:
+- **One record:** integer addresses × a step, the workstation's form.
+- **One rule set per language,** twin-tested.
+- **The look chosen by state:** detailed while held or edited, *built* once settled, points or lines far away.
+
+Palle decides the record. The workstation side has been asked.
+
+### The built-look pilot (kit only, measured)
+
+`commons/artifacts/playground_kit/kit_structure.gd`. A kit ball with `fold` on that the support graph holds on its
+point, and every rod whose ends are all in such balls, fold into one scene node: one MultiMesh of low spheres and one of
+thin tubes. Their own meshes hide, a built rod freezes and stops its per-frame script, and the bodies stay. The hand, the
+support graph, the sockets and the Triangle stage's counts therefore work as before. A flexible ball keeps its detailed
+look, so the wobble still shows. Picked up, a piece unfolds; set down, it folds back. **Off by default:** the hand passes
+a stage's `fold` key, and no stage sets it yet.
+
+`commons/testing/probe_kit_built.tscn` 5/5, a 10 × 10 × 4 field (400 balls, 1,020 rods) on the mobile renderer:
+
+| | Draw calls | Triangles | Frame (desktop, vsync off) | Physics per tick |
+|---|---|---|---|---|
+| detailed | 4,842 | 1,172,708 | 6.35 ms | 2.85 ms |
+| **built** | **5** | **56,726** | **0.83 ms** | 1.49 ms |
+
+The draw calls and triangles are the gate: the hand's budget is 120 draws and 60k triangles a hall. Frame and physics
+times are desktop numbers, reported but not gated, and they vary between runs (physics read 3.2 / 0.93 ms on the run
+before). The rods were already asleep before folding (0 active bodies both times), so the physics saving is the scripts
+that stopped, not the solver. The built look drops the steel sockets: up close the detailed piece shows them, and from
+a distance the built one doesn't need them.
+
 ## Next steps (not built)
+
+0. **Turn the built look on** for the bench stages (`"fold": true` in `workbench.json`), after a try in the game.
 
 1. **The load test.** The verb that lets the scaffold go: flexible balls become bodies on hinged joints and fall the way
    their free motion says. It could be the pin tool's release, applied to a whole piece.
