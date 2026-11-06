@@ -91,9 +91,9 @@ func _ready() -> void:
 	(p.uis[0].buttons["item:point"] as Button).pressed.emit()
 	for i in 3:
 		await get_tree().process_frame
-	_hand(0.3)   # aiming at the floor a metre ahead: Garry's Mod placement, the ball appears there and takes its grid point
+	_hand(0.3)   # aiming at the floor a metre ahead: the node editor's first shot sets its box there, the next puts the ball on the nearest floor node
 	await _ticks(0.2)
-	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
+	await _kit_trigger(p)
 	for i in 6:
 		await get_tree().physics_frame
 	var held: Node = p.hand.placed[-1] if not p.hand.placed.is_empty() else null
@@ -208,7 +208,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(0.3);await _ticks(0.2)
-	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
+	await _kit_trigger(p)
 	for i in 4:
 		await get_tree().physics_frame
 	var ball2: Node3D = p.hand.placed[-1]
@@ -289,20 +289,23 @@ func _ready() -> void:
 	var cross: Node3D = p.hand.placed[-1]
 	var stays: bool = bool(cross.get("freeze")) and str(cross.get("how")) in ["floor", "stay"] and cross.global_position.y > -.01
 	_check(report, "S no gravity: the health plus is frozen where it is placed", stays, {"how": cross.get("how"), "frozen": cross.get("freeze"), "at": cross.global_position})
-	# T2 - the rod with no ball near: its end on a metre point, lying along the grid
+	# T2 - THE NODE EDITOR'S ROD (2026-11-06, replacing "a rod with no ball near lies on the grid"): two shots at two floor
+	# nodes a metre apart make a rod between them, and the two balls it needs
 	p.choose("rod")
 	for i in 3:
 		await get_tree().process_frame
-	_hand(3.6);await _ticks(0.2)
+	_hand(1.0);await _ticks(0.2)
+	await _kit_trigger(p)   # the first node (after the box, if the box had to move here)
+	_hand(2.0);await _ticks(0.2)
 	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
-	for i in 30:
+	for i in 10:
 		await get_tree().physics_frame
-	var rod_t: Node3D = p.hand.placed[-1]
-	var e0: Vector3 = rod_t.end_global(0) if rod_t.has_method("end_global") else Vector3.INF
-	var ax: Vector3 = rod_t.global_basis.x.normalized()
-	var on_point: bool = absf(e0.x - roundf(e0.x)) < .03 and absf(e0.z - roundf(e0.z)) < .03
-	var along_axis: bool = absf(ax.x) > .98 or absf(ax.z) > .98
-	_check(report, "T2 rod on the grid: no ball near, its end sits on a metre point and it lies along a grid axis", on_point and along_axis, {"end0": e0, "axis": ax})
+	var rods_t: Array = p.hand.placed.filter(func(n):return is_instance_valid(n) and n.has_method("end_global"))
+	var rod_t: Node3D = rods_t.back() if not rods_t.is_empty() else null
+	var ax: Vector3 = rod_t.global_basis.x.normalized() if rod_t else Vector3.ZERO
+	var along_axis: bool = absf(ax.x) > .98
+	var joined: bool = rod_t != null and rod_t.joints.size() == 2
+	_check(report, "T2 rod by nodes: two shots at two floor nodes a metre apart make a rod along x, its two balls made and both ends joined", rod_t != null and along_axis and joined, {"axis": ax, "joints": rod_t.joints.size() if rod_t else -1, "placed": p.hand.placed.size()})
 	p.take_all_back()
 	# U - FREE HANGING: the crate pointed at nothing (the wand level, 8 m of air) hangs 2 m along it, on a metre point in the
 	# air, frozen - a floating platform; the ghost stood there first
@@ -339,7 +342,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	_hand(3.0);await _ticks(0.2)
-	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
+	await _kit_trigger(p)
 	for i in 45:   # the ball's own rule moves it onto its grid point a few frames after it is made: aim at where it ENDS
 		await get_tree().physics_frame
 	var ball_v: Node3D = p.hand.placed[-1]
@@ -426,6 +429,17 @@ func _palm(up: float) -> void:
 	_left.set_pose(&"aim", Transform3D(Basis(Vector3.FORWARD, -PI / 2 * up), Vector3(-0.25, 1.05, -0.25)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 
 ## The right hand a metre up at x, aiming 45 degrees down along -Z: its aim lands on the floor at (x, 0, -1).
+## The trigger with a kit piece in the hand (inventory_wand.gd + kit_node_editor.gd, 2026-11-06): a shot on the floor
+## outside the node editor's box only sets the box down there, so the trigger is pressed again to place on the node.
+func _kit_trigger(p: Node) -> void:
+	var ed: Node = p.wand.editor
+	var had: bool = ed != null and ed.has_box;var o0: Vector3 = ed.origin if ed != null else Vector3.ZERO
+	p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
+	await get_tree().process_frame
+	if ed != null and ed.active() and ed.has_box and (not had or not ed.origin.is_equal_approx(o0)):   # that shot set the box
+		p._on_right_pressed("trigger_click");p._on_right_released("trigger_click")
+	await get_tree().process_frame
+
 func _hand(x: float) -> void:
 	_right.set_pose(&"aim", Transform3D(Basis(Vector3.RIGHT, -PI / 4), Vector3(x, 1.0, 0)), Vector3.ZERO, Vector3.ZERO, XRPose.XR_TRACKING_CONFIDENCE_HIGH)
 

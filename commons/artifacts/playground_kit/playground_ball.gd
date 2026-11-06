@@ -57,6 +57,13 @@ var sockets: Array = [null, null, null, null, null, null]   # the rod in each so
 var on_grid := false     # let go onto a grid point (false once it has fallen or been picked up)
 var held := false        # in a hand: supports nothing
 var supported := false   # the graph's last word
+## Placed by the node editor (kit_node_editor.gd, Palle 2026-11-06: "the editor should work as a selector"): held where
+## it was fired, like Blender's edit mode - supported or not, it does not fall; the graph still says whether it is
+## supported, and the kit renderer marks it when it is not.
+var editing := false
+## The floor under it when it settled (NAN: none found - then row 0 is world height 0, as on the old benches). The
+## Void's floors stand at -6 x floor: a ball is grounded on the floor it stands on, not at world height 0.
+var floor_y := NAN
 var flexible := false    # rigidity "bars": held, but the bars do not fix it
 var _built := false
 
@@ -119,14 +126,36 @@ func contact_point(p: Vector3) -> Vector3:
 		if b == self or b.held or not b.on_grid:continue
 		var d: float = b.global_position.distance_to(p)
 		if d < best_d:best_d = d;best = b
-	if best == null:return Vector3(p.x, hub(), p.z)
+	var fy := _floor_or_zero(p)
+	if best == null:return Vector3(p.x, fy + hub(), p.z)
 	var toward: Vector3 = (p - best.global_position).normalized();var pick := -1;var best_dot := -2.0
 	for i in dirs().size():
 		var at: Vector3 = best.global_position + best.socket_dir(i) * (best.hub() + hub())
-		if at.y < hub() - .001:continue
+		if at.y < fy + hub() - .001:continue
 		var dp: float = toward.dot(best.socket_dir(i))
 		if dp > best_dot:best_dot = dp;pick = i
-	return best.global_position + best.socket_dir(pick) * (best.hub() + hub()) if pick >= 0 else Vector3(p.x, hub(), p.z)
+	return best.global_position + best.socket_dir(pick) * (best.hub() + hub()) if pick >= 0 else Vector3(p.x, fy + hub(), p.z)
+
+## The top of the first surface that is not the kit under `p`, within `reach` below it; NAN when there is none.
+func floor_below(p: Vector3, reach := 0.0) -> float:
+	if not is_inside_tree():return NAN
+	var space := get_world_3d().direct_space_state
+	var skip: Array[RID] = [get_rid()]
+	var to := p - Vector3.UP * (reach if reach > 0.0 else hub() + .03)
+	for i in 8:
+		var q := PhysicsRayQueryParameters3D.create(p + Vector3.UP * .02, to, 1);q.exclude = skip
+		var hit := space.intersect_ray(q)
+		if hit.is_empty():return NAN
+		var c: Object = hit.collider
+		if c is Node and ((c as Node).is_in_group("playground_balls") or (c as Node).is_in_group("playground_rods")):
+			skip.append(hit.rid);continue
+		return float(hit.position.y)
+	return NAN
+
+## The floor under `p` for a contact ball let go there (looking a metre down), or world height 0 when none is found.
+func _floor_or_zero(p: Vector3) -> float:
+	var f := floor_below(p, 1.0)
+	return 0.0 if is_nan(f) else f
 
 ## Where this ball settles from `p`: its contact point or its grid point, by the bench's rule.
 func rest_point(p: Vector3) -> Vector3:
@@ -144,6 +173,11 @@ func settle() -> Vector3:
 	if not snap:return global_position
 	var at := rest_point(global_position)
 	linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO;global_transform = Transform3D(Basis(), at);on_grid = true
+	# the physics state too, at once: a body keeps the transform it entered the tree with, and with a space query in
+	# between (floor_below) the first physics step wrote that back - measured 2026-11-06, a 10x10x4 field's floor balls
+	# all jumped to (0, 0, 0) and the field fell (the same trap as the carrier's, inventory_hand.gd spawn_at)
+	PhysicsServer3D.body_set_state(get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, global_transform)
+	floor_y = floor_below(at)
 	_hold()
 	_take_rod_ends()
 	placed.emit(at);reevaluate(get_tree());return at
@@ -163,9 +197,12 @@ func _take_rod_ends() -> void:
 func _hold() -> void:
 	freeze_mode = RigidBody3D.FREEZE_MODE_STATIC;freeze = true;linear_velocity = Vector3.ZERO;angular_velocity = Vector3.ZERO
 
-## Standing on row 0 of the grid: the floor holds it.
+## Standing on the floor: on its grid point, and the floor found under it when it settled is a hub below it (no
+## floor found: row 0 at world height 0, the old benches' rule).
 func grounded() -> bool:
-	return on_grid and not held and is_equal_approx(global_position.y, hub())
+	if not on_grid or held:return false
+	if is_nan(floor_y):return is_equal_approx(global_position.y, hub())
+	return absf(global_position.y - (floor_y + hub())) < .003
 
 ## Taken out of the world: its rods let go of it, and the graph is walked again without it.
 func _leaving() -> void:
@@ -208,9 +245,10 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 			if not b.on_grid:
 				var at: Vector3 = seen[b] if seen[b] is Vector3 else b.global_position
 				b.global_transform = Transform3D(Basis(), at if b.snap_to == "contact" else b.grid_point(at));b.on_grid = true
+				PhysicsServer3D.body_set_state(b.get_rid(), PhysicsServer3D.BODY_STATE_TRANSFORM, b.global_transform)
 			if not b.freeze:b._hold()
-		elif b.on_grid:
-			b.on_grid = false;b.freeze = false;b.sleeping = false;fell += 1
+		elif b.on_grid and not b.editing:   # placed by the node editor: held where it was fired
+			b.on_grid = false;b.floor_y = NAN;b.freeze = false;b.sleeping = false;fell += 1
 		if was != b.supported:b.support_changed.emit(b.supported)
 	var out := {"supported": seen.size(), "fell": fell}
 	_read_as_bars(tree, balls, out)
@@ -232,6 +270,7 @@ static func _read_as_bars(tree: SceneTree, balls: Array, out: Dictionary) -> voi
 		if is_instance_valid(b) and b.rigidity == "bars" and b.supported and not b.held and b.on_grid:held.append(b)
 		elif is_instance_valid(b):b.flexible = false
 	var host: Node = tree.current_scene if tree.current_scene != null else tree.root
+	if host == null:return   # the game is quitting
 	var shown: Node = host.get_node_or_null("PlaygroundFaces")
 	if held.is_empty():
 		if shown != null:shown.show_kit([])

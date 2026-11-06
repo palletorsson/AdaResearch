@@ -155,6 +155,39 @@ lower-detail sphere, still matters for a big playground on the Quest. Earlier pr
 probe_playground_kit 9/9. probe_inventory_place is 8/9, and its failing check C ("let go in the air, it falls") fails
 the same with the renderer off: the clock now hangs where it is let go, by the free-hanging rule.
 
+### The node editor (Palle: "the editor should work as a selector", same day)
+
+`commons/player/kit_node_editor.gd`, driven by `inventory_wand.gd` for both rigs (the VR prism's right controller, the
+desktop camera).
+- **Choosing:** you choose the ball, the rod or the brace in the hand, and the trigger fires at the nodes of an edit
+  space: a 6 × 4 × 6 box on the bench's grid, drawn as dots. The first shot on a floor sets the box down; a shot on the
+  floor outside it moves it.
+- **Aiming:** a node is hit when the aim line passes within 20 cm of it, or, pointing at the floor inside the box, the
+  floor node nearest the spot is picked.
+- **The pieces:**
+  - **Ball:** one hit.
+  - **Rod / brace:** two hits, with a line stretching from the first node. Any number of steps works, along one axis
+    for a rod or along a face diagonal for a brace. Missing end balls are made, as Blender makes an edge's vertices.
+- **Grip:** lets a half-made rod go; pointing at no node, it clears the box.
+- **Edit mode:** pieces are held where they were fired. A ball with nothing under it stays put and is drawn amber until
+  something supports it.
+- **Where it applies:** only on GRID stages (floor 3 and up). On the contact stage (floors 0-2) there are no nodes yet,
+  and the ball is placed where the hand points, as before.
+
+Fixed on the way:
+- **Grounded on the real floor.** A ball was "grounded" only at world height 0, so on every Void floor below 0
+  (floor f is at −6f) nothing was ever supported. A ball now measures the floor under it when it settles.
+- **The settle write-back.** That floor ray made the first physics step write a ball's entry transform back over it
+  (the carrier's old trap): the 10 × 10 × 4 field's floor balls all jumped to (0, 0, 0). `settle()` now sets the
+  physics state too.
+- **The budget.** Kit pieces skip the hand's instancer, which drew them a second time and hid the built look under a
+  detailed copy. The budget now pays the kit's six draws once, and built pieces' triangles at the built look's cost.
+
+Probes:
+- `probe_kit_node_editor.tscn` 9/9, on a floor at −30 m like the Void's floor 5.
+- `probe_inventory_prism.tscn` 26/26, with H, Q, T2 and V rewritten for node firing.
+- The kit probes still pass: triangle 7/7, playground kit 9/9, built field 5/5, bench fold 3/3.
+
 ## Next steps (not built)
 
 0. **Turn the built look on** for the bench stages (`"fold": true` in `workbench.json`), after a try in the game.

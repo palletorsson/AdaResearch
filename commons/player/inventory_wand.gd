@@ -21,10 +21,16 @@ const HOLD := 0.3                 # seconds: a press on a placed thing held this
 var _pending: Node3D = null       # the placed thing under a trigger pressed less than HOLD ago
 var _pending_t := 0.0
 var _dragging := false            # the lifted thing goes down when the trigger is let go
+## THE NODE EDITOR (2026-11-06): with a kit element in the hand (ball, rod, brace) the trigger fires at the nodes of
+## an edit space instead of placing a prefab on a surface (commons/player/kit_node_editor.gd).
+var editor: Node3D = null
 
 func setup(p_hand: Node, p_aim: Node3D, p_exclude: Callable = Callable()) -> void:
 	hand = p_hand;aim = p_aim
 	if p_exclude.is_valid():exclude = p_exclude
+	if editor == null:
+		editor = preload("res://commons/player/kit_node_editor.gd").new();editor.name = "KitNodeEditor";add_child(editor)
+	editor.hand = hand
 
 ## Place mode: a thing to place is in the hand (not a worn roll, not a tool), or a thing is lifted.
 func placing() -> bool:
@@ -46,6 +52,13 @@ func update(show := true, delta := 0.0) -> void:
 		if bool(at.get("ok", false)) or bool(at.get("hang", false)):hand.lifted.global_transform = at.xform
 		_draw_aim(at)
 		return
+	if editor != null and editor.active() and not is_instance_valid(hand.lifted):
+		_hide_ghost()
+		if aim_line != null:aim_line.visible = false
+		if show:editor.update(aim, exclude.call())
+		else:editor.hide_all()
+		return
+	if editor != null:editor.hide_all()
 	if not show or not placing():
 		_hide_ghost()
 		if aim_line != null:aim_line.visible = false
@@ -88,6 +101,10 @@ func press() -> String:
 	if hand.current_tool() == "rubber":return "rubber" if hand.erase_at(aim, REACH, exclude.call()) else "refused"
 	if hand.current_tool() == "pin":return "pin" if hand.pin_at(aim, REACH, exclude.call()) != "" else "refused"
 	if is_instance_valid(hand.lifted):_dragging = false;return "set_down" if hand.set_down(aim, REACH, exclude.call()) else "refused"
+	if editor != null and editor.active():
+		var said: String = editor.press(aim, exclude.call())
+		if editor.notice != "":hand.notice = editor.notice
+		return said
 	var own: Node = hand.pointed_own(aim, REACH, exclude.call())
 	if own is Node3D and own.get("paid_length") == null:
 		_pending = own;_pending_t = 0.0;return "pending"
@@ -117,7 +134,9 @@ func grip() -> bool:
 	if hand == null or aim == null:return false
 	_pending = null
 	if is_instance_valid(hand.lifted):_dragging = false;hand.cancel_lift();return true
-	if hand.pointed_own(aim, REACH, exclude.call()) == null:return false
+	if editor != null and editor.active() and editor.first != null:editor.first = null;return true   # a half-made rod let go
+	if hand.pointed_own(aim, REACH, exclude.call()) == null:
+		return editor != null and editor.grip()   # the node editor: pointing at no node clears the edit space
 	return hand.erase_at(aim, REACH, exclude.call())
 
 ## The ghost is the item's own scene, scaled as the carrier would, made inert and translucent.

@@ -20,6 +20,11 @@ const FOAM_R := .06          # the shared foam sphere's radius
 const SOCKET_H := .035       # the shared socket boss's height (top .016, bottom .02 - the ball's own)
 const CORE_R := .012
 const SLEEVE_R := .03
+const UNSUPPORTED := Color("f59e0b")   # a ball the node editor holds where nothing supports it yet
+## What a kit piece costs the hand's budget (inventory_hand.gd spent/fits): the six multimeshes are paid once for the
+## whole kit; triangles are the look's - the detailed ones measured (costs.json), the built ones these.
+const KIT_DRAWS := 6
+const BUILT_TRIANGLES := {"ball": 64, "rod": 12}
 
 static var enabled := true
 static var _current: Node = null
@@ -122,7 +127,10 @@ func redraw() -> void:
 			var c: MeshInstance3D = list[i]
 			mm.set_instance_transform(i, Transform3D())   # written below with the scale
 			var mat: Variant = c.material_override
-			mm.set_instance_color(i, mat.albedo_color if mat is StandardMaterial3D else Color.WHITE)
+			var colour: Color = mat.albedo_color if mat is StandardMaterial3D else Color.WHITE
+			var owner_piece: Node = c.get_parent()
+			if role == "foam" and owner_piece.get("editing") == true and owner_piece.get("supported") == false:colour = UNSUPPORTED
+			mm.set_instance_color(i, colour)
 	for p in _slots:
 		var resolved: Array = []
 		for s in _slots[p]:
@@ -162,6 +170,10 @@ func _fold(balls: Array, rods: Array) -> void:
 	folded_balls = now_balls;folded_rods = now_rods
 	_built_ids.clear()
 	for p in now_balls + now_rods:_built_ids[p] = true
+
+## Is this piece drawn in the built look now?
+func is_built(p: Node) -> bool:
+	return _built_ids.has(p)
 
 static func _role(c: MeshInstance3D) -> String:
 	var n := str(c.name)

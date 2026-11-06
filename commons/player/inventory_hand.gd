@@ -8,6 +8,7 @@ extends Node
 ## second, so a choice made in the browser lands here; the panel's ITEMS tab is the same choice made in VR.
 
 const Items = preload("res://commons/player/inventory_items.gd")   # by path: a new class_name is not in the cache until the editor scans
+const KitStructure = preload("res://commons/artifacts/playground_kit/kit_structure.gd")
 const Carrier = preload("res://commons/player/inventory_carrier.gd")
 const InstancerLib = preload("res://commons/player/inventory_instancer.gd")
 
@@ -43,9 +44,16 @@ func budget() -> Dictionary:
 func spent() -> Dictionary:
 	var sum := {"draws": 0, "triangles": 0, "lights": 0, "viewports": 0}
 	var seen_keys: Dictionary = {}
+	var kit_paid := false
 	for n in placed:
 		if not is_instance_valid(n):continue
 		var id := str(n.get_meta("inv_item", ""));var c := Items.cost_of(id)
+		if _is_kit(n):   # the playground kit is drawn by its own multimeshes (kit_structure.gd): six draws once for all
+			if not kit_paid:sum.draws += KitStructure.KIT_DRAWS;kit_paid = true
+			var st: Node = KitStructure.current(null)
+			var built: bool = st != null and st.is_built(n)
+			sum.triangles += KitStructure.BUILT_TRIANGLES["ball" if n.has_method("grid_point") else "rod"] if built else int(c.triangles)
+			continue
 		var key := str(n.get_meta("inv_key", ""))
 		var instanced: bool = key != "" and seen_keys.has(key)
 		seen_keys[key] = true
@@ -62,11 +70,21 @@ func fits(id: String) -> bool:
 	if b.is_empty():return true
 	var now := spent();var c := Items.cost_of(id)
 	var key := instance_key(id);var instanced: bool = _instancer != null and is_instance_valid(_instancer) and _instancer.count(key) > 0
+	if _kit_item(id):   # the kit's multimeshes: their six draws are paid once, by the first kit piece
+		instanced = placed.any(func(n):return is_instance_valid(n) and _is_kit(n))
+		c = c.duplicate();c.draws = KitStructure.KIT_DRAWS
 	var want := {"draws": now.draws + (0 if instanced else c.draws), "triangles": now.triangles + c.triangles, "lights": now.lights + c.lights, "viewports": now.viewports + c.viewports}
 	for k in ["draws", "lights", "viewports", "triangles"]:
 		if b.has(k) and int(want[k]) > int(b[k]):
 			notice = "BUDGET FULL: %s %d/%d - take something back" % [k, now[k], int(b[k])];return false
 	return true
+
+## A playground kit piece (a ball, rod or brace): drawn by the kit's own multimeshes, not the instancer.
+static func _is_kit(n: Node) -> bool:
+	return n.is_in_group("playground_balls") or n.is_in_group("playground_rods")
+
+static func _kit_item(id: String) -> bool:
+	return str(Items.item(id).get("token", "")) in ["playground_ball", "playground_rod"]
 
 func instance_key(id: String) -> String:
 	return id + "|" + JSON.stringify(config_for(id))
@@ -440,7 +458,7 @@ func spawn_at(xform: Transform3D, for_id := "", cfg_over: Dictionary = {}) -> No
 	node.set_meta("inv_item", iid);node.set_meta("inv_key", key);node.set_meta("inv_cfg", cfg)
 	placed.append(node)
 	# copies of one prefab share one multimesh after the first (Palle: "keep the copies multi mesh")
-	if bool(it.get("instance", true)):
+	if bool(it.get("instance", true)) and not _is_kit(node):   # the kit draws itself as multimeshes (kit_structure.gd)
 		var art: Node3D = node
 		if node is Carrier:
 			var a: Variant = node.get("work")   # the carrier's artifact
