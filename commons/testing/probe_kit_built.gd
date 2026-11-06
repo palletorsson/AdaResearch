@@ -1,18 +1,22 @@
 extends Node3D
-## The built look's pilot, measured (Palle, 2026-11-06: "if we create a really large playground we want the geometry
-## as simple as possible - or does it not matter?"). A 10 x 10 x 4 field of kit balls and rods is built by the kit's
-## own rules (rods up, balls on their ends, rods across), then measured over 120 frames DETAILED (every piece its own
-## meshes and body) and BUILT (the same pieces folded into kit_structure.gd). Checks:
-## (A) the field stands: every ball supported, every rod in two sockets; (B) NEGATIVE: with fold off no structure node
-## exists; (C) built: every ball and rod folded, draw calls down by at least 90 %, triangles down; (D) built rods are
-## frozen and stop ticking: active physics bodies down; (E) a ball picked up unfolds (its own meshes back, 399 in the
-## structure) and set down again folds back (400).
-## Writes ada_run/kit_built/{detailed.png, built.png, report.json}.
+## The kit drawn as multimeshes, measured (Palle, 2026-11-06: "if we create a really large playground we want the
+## geometry as simple as possible", then "these should all be multimesh"). A 10 x 10 x 4 field of kit balls and rods
+## is built by the kit's own rules (rods up, balls on their ends, rods across), then measured over 120 frames in three
+## states: OWN MESHES (kit_structure.gd disabled - every piece draws itself, as before), MULTIMESH DETAILED (every
+## piece copied into the kit's shared foam / socket / core / sleeve multimeshes) and MULTIMESH BUILT (balls with
+## `fold` on, settled pieces in the simple look). Checks:
+## (A) the field stands: every ball supported, every rod in two sockets; (B) NEGATIVE: disabled, no renderer exists and
+## every piece's own meshes are visible; (C) multimesh detailed: every piece's own meshes hidden, one foam per ball,
+## its six sockets, one core and one sleeve per rod, and at most 12 draws; (D) built: every ball and rod folded,
+## triangles down again, draws still at most 12, built rods frozen with their script off; (E) a ball picked up leaves
+## the built look (399 built) and its detailed foam instance FOLLOWS it when it moves; set down, 400 again.
+## Writes ada_run/kit_built/{own_meshes.png, multimesh_detailed.png, multimesh_built.png, report.json}.
 ## Run: godot --path <abs> --xr-mode off --resolution 1280x800 --rendering-method mobile res://commons/testing/probe_kit_built.tscn
 
 const Ball = preload("res://commons/artifacts/playground_kit/playground_ball.tscn")
 const Rod = preload("res://commons/artifacts/playground_kit/playground_rod.tscn")
 const BallLib = preload("res://commons/artifacts/playground_kit/playground_ball.gd")
+const Structure = preload("res://commons/artifacts/playground_kit/kit_structure.gd")
 const NX := 10
 const NZ := 10
 const NY := 4
@@ -32,6 +36,7 @@ func _ready() -> void:
 	var fm := MeshInstance3D.new();var fbm := BoxMesh.new();fbm.size = Vector3(30, .1, 30);fm.mesh = fbm;fm.position = Vector3(4.5, -.05, 4.5)
 	var fmat := StandardMaterial3D.new();fmat.albedo_color = Color("8f8a84");fm.material_override = fmat;floor_b.add_child(fm)
 	var cam := Camera3D.new();cam.transform = Transform3D(Basis(), Vector3(15, 9, 17)).looking_at(Vector3(4.5, 1.2, 4.5));cam.fov = 50;add_child(cam);cam.current = true
+	Structure.enabled = false   # the BEFORE: every piece draws its own meshes
 	await _run()
 	var passed: int = report.checks.filter(func(c):return c.ok).size()
 	report["passed"] = passed;report["total"] = report.checks.size()
@@ -58,32 +63,48 @@ func _run() -> void:
 	_check("A the field stands: %d balls all supported, %d rods each in two sockets" % [NX * NY * NZ, expected_rods],
 		balls.size() == NX * NY * NZ and balls.all(func(b):return b.supported and b.freeze) and rods.size() == expected_rods and rods.all(func(r):return r.joints.size() == 2),
 		{"balls": balls.size(), "rods": rods.size(), "unsupported": balls.filter(func(b):return not b.supported).size(), "short_rods": rods.filter(func(r):return r.joints.size() != 2).size()})
-	var detailed := await _measure("detailed")
-	_check("B negative: with fold off there is no PlaygroundStructure node", get_node_or_null("PlaygroundStructure") == null, {})
-	# fold every ball and read the graph again
-	for b in balls:b.fold = true
-	BallLib.reevaluate(get_tree())
-	var built := await _measure("built")
+	var own := await _measure("own_meshes")
+	_check("B negative: with the renderer disabled no PlaygroundStructure exists and every piece shows its own meshes",
+		get_node_or_null("PlaygroundStructure") == null and balls.all(func(x):return x.get_node("Foam").visible), {})
+	# the kit as multimeshes: every piece registers, as it does from its own _build in the game
+	Structure.enabled = true
+	for p in balls + rods:Structure.track(p)
+	for i in 3:await get_tree().process_frame
 	var st: Node = get_node_or_null("PlaygroundStructure")
+	var detailed := await _measure("multimesh_detailed")
+	var counts := {}
+	if st:
+		for c in st.get_children():counts[str(c.name)] = (c as MultiMeshInstance3D).multimesh.instance_count
+	var hidden: bool = (balls + rods).all(func(x):return x.get_children().all(func(c):return not (c is MeshInstance3D) or not c.visible))
+	_check("C multimesh detailed: own meshes hidden; 400 foam, 2400 sockets, 1020 cores and sleeves; at most 12 draws",
+		st != null and hidden and counts.get("Foam", -1) == balls.size() and counts.get("Socket", -1) == 6 * balls.size() and counts.get("Core", -1) == rods.size() and counts.get("Sleeve", -1) == rods.size() and detailed.draws <= 12,
+		{"instances": counts, "own_meshes_hidden": hidden, "draws": [own.draws, detailed.draws], "triangles": [own.triangles, detailed.triangles]})
+	# the built look: fold every ball and read the graph again
+	for x in balls:x.fold = true
+	BallLib.reevaluate(get_tree())
+	for i in 3:await get_tree().process_frame
+	var built := await _measure("multimesh_built")
 	var nb: int = st.folded_balls.size() if st else -1;var nr: int = st.folded_rods.size() if st else -1
-	_check("C built: every ball and rod folded; draw calls down at least 90 %%, triangles down",
-		nb == balls.size() and nr == rods.size() and built.draws <= detailed.draws * .1 and built.triangles < detailed.triangles,
-		{"folded_balls": nb, "folded_rods": nr, "draws": [detailed.draws, built.draws], "triangles": [detailed.triangles, built.triangles]})
-	# Not a claim about physics time: jointed rods fall ASLEEP once settled (Jolt counted 0 active bodies before folding
-	# too), so the first run's "active bodies down" was a guess the field refuted. What folding does is this:
-	_check("D built rods are frozen and their per-frame script is off (physics time is reported, not claimed)",
-		rods.all(func(r):return r.freeze and not r.is_physics_processing()),
-		{"active_bodies": [detailed.active_bodies, built.active_bodies], "physics_ms": [detailed.physics_ms, built.physics_ms]})
-	# E - a top corner ball picked up, then set down
+	_check("D built: every ball and rod folded, triangles down again, draws at most 12, built rods frozen with their script off",
+		nb == balls.size() and nr == rods.size() and built.triangles < detailed.triangles and built.draws <= 12 and rods.all(func(r):return r.freeze and not r.is_physics_processing()),
+		{"folded_balls": nb, "folded_rods": nr, "draws": [own.draws, detailed.draws, built.draws], "triangles": [own.triangles, detailed.triangles, built.triangles],
+		"physics_ms": [own.physics_ms, detailed.physics_ms, built.physics_ms]})
+	# E - a top corner ball picked up and carried, then set down
 	var top: RigidBody3D = grid[Vector3i(NX - 1, NY - 1, NZ - 1)]
 	top.picked_up.emit(top)
-	await get_tree().physics_frame
-	var lifted: int = st.folded_balls.size();var foam_back: bool = top.get_node("Foam").visible
-	top.global_position += Vector3(.05, .04, -.03);top.dropped.emit(top)
+	for i in 3:await get_tree().process_frame
+	var lifted: int = st.folded_balls.size()
+	top.global_position += Vector3(0, .5, 0)   # carried
+	for i in 2:await get_tree().process_frame
+	var foam_mm: MultiMesh = st.get_node("Foam").multimesh;var follows := false
+	for i in foam_mm.instance_count:
+		if foam_mm.get_instance_transform(i).origin.distance_to(top.global_position) < .001:follows = true
+	top.global_position = Vector3(NX - 1, NY - 1, NZ - 1) + Vector3(.05, .085 + .04, -.03);top.dropped.emit(top)
 	for i in 4:await get_tree().physics_frame
-	_check("E pick-up unfolds one ball (its foam visible, %d in the structure) and setting it down folds it back" % (balls.size() - 1),
-		lifted == balls.size() - 1 and foam_back and st.folded_balls.size() == balls.size() and not top.get_node("Foam").visible,
-		{"while_held": lifted, "foam_visible_held": foam_back, "after": st.folded_balls.size()})
+	for i in 3:await get_tree().process_frame
+	_check("E picked up it leaves the built look (%d built) and its detailed foam follows it 0.5 m up; set down, %d again" % [balls.size() - 1, balls.size()],
+		lifted == balls.size() - 1 and follows and st.folded_balls.size() == balls.size(),
+		{"while_held": lifted, "foam_follows": follows, "after": st.folded_balls.size()})
 
 func _measure(tag: String) -> Dictionary:
 	for i in 30:await get_tree().process_frame

@@ -30,6 +30,7 @@ signal unsnapped
 const FOAM := {"pale": "ededed", "pink": "ea72ab", "cyan": "5fd3e6", "steel": "2a2c30"}
 const STEEL := "2a2c30"
 const BallLib = preload("res://commons/artifacts/playground_kit/playground_ball.gd")   # by path: the class cache lags
+const Structure = preload("res://commons/artifacts/playground_kit/kit_structure.gd")
 
 var joints: Array[Dictionary] = []   # {end, ball, socket, joint}
 var _built := false
@@ -74,6 +75,7 @@ func _build() -> void:
 	var s := MeshInstance3D.new();var smm := CylinderMesh.new();smm.top_radius = sleeve;smm.bottom_radius = sleeve;smm.height = maxf(.05, length - 2 * sleeve_ends);smm.radial_segments = 20;s.mesh = smm;s.material_override = foam;s.basis = along;s.name = "Sleeve";add_child(s)
 	var shape := CollisionShape3D.new();var cap := CapsuleShape3D.new();cap.radius = sleeve;cap.height = length;shape.shape = cap;shape.basis = along;add_child(shape)
 	_built = true
+	Structure.track(self)   # drawn by the scene's kit multimeshes; these meshes stay as the record of its shape
 
 ## `units` grid steps mouth to mouth: along an axis, or (a brace) along a face diagonal.
 func unit_length() -> float:

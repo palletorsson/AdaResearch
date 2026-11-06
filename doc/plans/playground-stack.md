@@ -132,6 +132,29 @@ before). The rods were already asleep before folding (0 active bodies both times
 that stopped, not the solver. The built look drops the steel sockets: up close the detailed piece shows them, and from
 a distance the built one doesn't need them.
 
+### All multimesh (Palle: "these should all be multimesh", same day)
+
+Every kit ball and rod in the main world is now drawn by `kit_structure.gd`, in every state, and it is **on by
+default**. There are six shared multimeshes: detailed foam, sockets, core and sleeve, plus the built look's sphere and
+tube. A piece keeps its body and its own MeshInstance3D children, hidden: bounds, previews and the cost probe still read
+them. The detailed instances are copied from those children's transforms and colours, so the Triangle stage's wobble
+moves the drawing without changes. Moving pieces (held, awake, flexible) are rewritten every frame, and a change of the
+support graph redraws once per frame. A piece in another viewport (a SubViewport preview) still draws itself.
+
+`probe_kit_built.tscn` 5/5, the same 10 × 10 × 4 field:
+
+| | Draw calls | Triangles |
+|---|---|---|
+| own meshes (before) | 4,842 | 1,172,698 |
+| **multimesh, detailed** | **7** | 987,126 |
+| **multimesh, built** (`fold`) | **9** | 56,726 |
+
+The detailed multimesh shot differs from the own-mesh shot in 55 of 1,024,000 pixels. The draw calls are solved for
+both looks. **Triangles** are what remain: the detailed look is ~1M on this field, which is why the built look, or a
+lower-detail sphere, still matters for a big playground on the Quest. Earlier probes: probe_kit_triangle 7/7,
+probe_playground_kit 9/9. probe_inventory_place is 8/9, and its failing check C ("let go in the air, it falls") fails
+the same with the renderer off: the clock now hangs where it is let go, by the free-hanging rule.
+
 ## Next steps (not built)
 
 0. **Turn the built look on** for the bench stages (`"fold": true` in `workbench.json`), after a try in the game.

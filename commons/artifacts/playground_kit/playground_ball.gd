@@ -33,8 +33,9 @@ signal support_changed(supported: bool)
 ## "bars": held balls are also analysed as points joined by bars (kit_rigidity.gd); a ball the bars do not fix shows
 ## its free motion and the piece shows its faces and count (playground_faces.gd). "none": the support graph only.
 @export_enum("none", "bars") var rigidity := "none"
-## THE BUILT LOOK (2026-11-06 pilot): held on its point, this ball - and every rod whose ends are all in such balls -
-## folds into the scene's one instanced structure (kit_structure.gd): two draws for the whole build. Off by default.
+## THE BUILT LOOK (2026-11-06): held on its point, this ball - and every rod whose ends are all in such balls - is
+## drawn in the kit multimeshes' simple look (a low sphere, a thin tube) instead of the detailed one. Off by default;
+## either way every piece is drawn as multimeshes (kit_structure.gd).
 @export var fold := false
 
 const CONTACT_REACH := 0.6   ## a settled ball this near is what a contact ball snaps against
@@ -216,16 +217,10 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 	_fold_built(tree, balls, out)
 	return out
 
-## THE BUILT LOOK: settled pieces drawn as one instanced structure (kit_structure.gd). No ball with `fold` and no
-## structure yet: nothing is made.
-static func _fold_built(tree: SceneTree, balls: Array, out: Dictionary) -> void:
-	var host: Node = tree.current_scene if tree.current_scene != null else tree.root
-	var shown: Node = host.get_node_or_null("PlaygroundStructure")
-	if shown == null:
-		if not balls.any(func(b):return is_instance_valid(b) and b.fold):return
-		shown = Structure.new();host.add_child(shown)
-	shown.refresh(balls, tree.get_nodes_in_group("playground_rods"))
-	out["built_balls"] = shown.folded_balls.size();out["built_rods"] = shown.folded_rods.size()
+## The kit is drawn as multimeshes (kit_structure.gd): the graph changed, so it redraws on the next frame - which pieces
+## are built (a `fold` ball held on its point) is decided there.
+static func _fold_built(tree: SceneTree, _balls: Array, _out: Dictionary) -> void:
+	Structure.mark(tree)
 
 ## THE TRIANGLE STAGE: the held balls whose rigidity is "bars", read as a framework - points, the rods between two
 ## of them as bars, the grounded ones as anchors - piece by connected piece (kit_rigidity.gd). Each ball learns
@@ -285,6 +280,7 @@ func _build() -> void:
 		add_child(b)
 	var shape := CollisionShape3D.new();var ss := SphereShape3D.new();ss.radius = radius + boss;shape.shape = ss;add_child(shape)
 	_built = true
+	Structure.track(self)   # drawn by the scene's kit multimeshes; these meshes stay as the record of its shape
 
 ## A socket's mouth in the world (where a rod's end sits), and the way a rod in it points away from the ball.
 func socket_global(i: int) -> Vector3:
