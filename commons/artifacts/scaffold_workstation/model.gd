@@ -47,7 +47,7 @@ func has_record(candidate: Dictionary) -> bool:
 	return false
 
 static func required_tier(kind:String) -> int:
-	return {"point":0,"rod":1,"rod_short":1,"rod_4":1,"rod_8":1,"panel":2,"quad":3,"quad_4":3,"wedge":2,"pyramid":2}.get(kind,99)
+	return {"point":0,"rod":1,"rod_short":1,"rod_4":1,"rod_8":1,"diag":2,"panel":2,"quad":3,"quad_4":3,"wedge":2,"pyramid":2}.get(kind,99)
 
 ## THE LONG RODS (Palle, 2026-10-31: "1, 2, 4, 8 m rods - add a 6-ball to every metre of the rod, so it works as a
 ## faster way to build for the player and for automatic reconstruction"). A long rod is a MACRO, not a record: laid
@@ -111,7 +111,7 @@ func face_records(candidate:Dictionary)->Array[Dictionary]:
 ## A point nothing holds on to: no rod ends on it, no face has it for a corner.
 func point_free(at:Vector3)->bool:
 	for r in records:
-		if r.kind in ["rod","rod_short"] and (vec(r.at)==at or vec(r.end)==at):return false
+		if r.kind in ["rod","rod_short","diag"] and (vec(r.at)==at or vec(r.end)==at):return false
 		if r.kind in ["panel","quad"]:
 			var s:float=float(r.get("span",1));var u:Vector3=Vector3(AXES[r.plane[0]])*s;var v:Vector3=Vector3(AXES[r.plane[1]])*s;var q:Vector3=vec(r.at)
 			if at in [q,q+u,q+v,q+u+v]:return false
@@ -130,6 +130,22 @@ func covered(a:Vector3,b:Vector3)->bool:
 	return false
 
 ## A rod record between exactly these two addresses (either way round).
+## A diagonal record between exactly these two addresses (either way round).
+func diag_exists(a:Vector3,b:Vector3)->bool:
+	for r in records:
+		if r.kind=="diag" and ((vec(r.at)==a and vec(r.end)==b) or (vec(r.at)==b and vec(r.end)==a)):return true
+	return false
+
+## A half face's own three edges: two sides of its square and the diagonal it is cut along. Halves 0 and 1 are cut
+## along at -> at+u+v, halves 2 and 3 along at+u -> at+v.
+func triangle_edges(p:Vector3,u:Vector3,v:Vector3,half:int)->bool:
+	match half:
+		0:return edge(p,p+u) and edge(p+u,p+u+v) and diag_exists(p,p+u+v)
+		1:return edge(p,p+v) and edge(p+v,p+u+v) and diag_exists(p,p+u+v)
+		2:return edge(p,p+u) and edge(p,p+v) and diag_exists(p+u,p+v)
+		3:return edge(p+u,p+u+v) and edge(p+v,p+u+v) and diag_exists(p+u,p+v)
+	return false
+
 func edge_exact(a:Vector3,b:Vector3)->bool:
 	for r in records:
 		if r.kind in ["rod","rod_short"] and ((vec(r.at)==a and vec(r.end)==b) or (vec(r.at)==b and vec(r.end)==a)):return true
@@ -137,14 +153,29 @@ func edge_exact(a:Vector3,b:Vector3)->bool:
 
 static func is_prefab(kind:String)->bool:return kind in ["wedge","pyramid"]
 
+## A solid's side in addresses: 1 (the 2 m bay solid, centred on `at`) or .5 (the CELL solid, 2026-11-06: it
+## stands in the 1 m cell whose low corner is `at`, between the balls - a pyramid fills that cell to the next
+## node level, a wedge runs on into the next cell along its facing and rises one level over the two).
+static func prefab_span(r:Dictionary)->float:return .5 if float(r.get("span",1))==.5 else 1.0
+
+## The envelope a solid occupies, in addresses.
+static func prefab_box(r:Dictionary)->AABB:
+	return pose(r)*prefab_envelope(r)
+
+## The same in the solid's own frame (before its turn).
+static func prefab_envelope(r:Dictionary)->AABB:
+	if prefab_span(r)==1.0:return AABB(Vector3(-.5,0,-.5),Vector3(1,.5,1))
+	if str(r.get("kind",""))=="wedge":return AABB(Vector3(-.25,0,-.25),Vector3(.5,.5,1))
+	return AABB(Vector3(-.25,0,-.25),Vector3(.5,.5,.5))
+
 func prefab_fits(candidate:Dictionary)->bool:
 	if candidate.is_empty() or not inside(vec(candidate.at)):return false
-	# Completed solids occupy a 2 x 1 x 2 m envelope, rotated in quarter turns.
-	var bounds:AABB=pose(candidate)*AABB(Vector3(-.5,0,-.5),Vector3(1,.5,1))
+	# Completed solids occupy a 2 x 1 x 2 m envelope (a cell pyramid 1 x 1 x 1 m, a cell wedge 1 x 1 x 2 m), in quarter turns.
+	var bounds:AABB=prefab_box(candidate)
 	if not inside(bounds.position) or not inside(bounds.end):return false
 	for r in records:
 		if is_prefab(r.kind):
-			var other:AABB=pose(r)*AABB(Vector3(-.5,0,-.5),Vector3(1,.5,1))
+			var other:AABB=prefab_box(r)
 			if bounds.grow(-.001).intersects(other.grow(-.001)):return false
 	return true
 
@@ -157,7 +188,7 @@ func face_occupied(at:Array,plane:Array,half:int=-1,span:float=1) -> bool:
 		var a:=Rect2(float(at[u]),float(at[v]),span,span)
 		var b:=Rect2(float(r.at[u]),float(r.at[v]),other,other)
 		if not a.intersects(b):continue
-		if a!=b or half<0 or r.kind=="quad" or r.half==half:return true
+		if a!=b or half<0 or r.kind=="quad" or r.half==half or (int(r.half)<2)!=(half<2):return true   # 0/1 split one diagonal, 2/3 the other
 	return false
 
 func candidates(kind:String,tier:int) -> Array[Dictionary]:
@@ -186,12 +217,22 @@ func candidates(kind:String,tier:int) -> Array[Dictionary]:
 					var q:Vector3=p+Vector3(axis)*sign_value*float(MACRO_UNITS[kind])
 					var c:Dictionary={"kind":kind,"at":arr(p),"end":arr(q)}
 					if inside(q) and not macro_records(c).is_empty() and c not in result:result.append(c)
+		elif kind=="diag":
+			# THE DIAGONAL (2026-11-06): across a square's face, either way, a whole or a half step
+			for plane in [[0,1],[0,2],[1,2]]:
+				for span in [.5,1.0]:
+					var u:Vector3=Vector3(AXES[plane[0]])*span;var v:Vector3=Vector3(AXES[plane[1]])*span
+					for q:Vector3 in [p+u+v,p+u-v]:
+						if nodes.has(key(q)) and inside(q) and not diag_exists(p,q) and not seen.has(key(p)+">"+key(q)) and not seen.has(key(q)+">"+key(p)):
+							result.append({"kind":"diag","at":arr(p),"end":arr(q)});seen[key(p)+">"+key(q)]=true
 		elif kind in ["panel","quad"]:
 			for plane in [[0,1],[0,2],[1,2]]:
 				for span in [.5,1.0]:
 					var u:Vector3=Vector3(AXES[plane[0]])*span;var v:Vector3=Vector3(AXES[plane[1]])*span
-					if not (edge(p,p+u) and edge(p,p+v) and edge(p+u,p+u+v) and edge(p+v,p+u+v)):continue
-					for half in ([-1] if kind=="quad" else [0,1]):
+					var square:bool=edge(p,p+u) and edge(p,p+v) and edge(p+u,p+u+v) and edge(p+v,p+u+v)
+					if kind=="quad" and not square:continue
+					for half in ([-1] if kind=="quad" else [0,1,2,3]):
+						if kind=="panel" and not (square or triangle_edges(p,u,v,half)):continue
 						if face_occupied(arr(p),plane,half,span):continue
 						var r:Dictionary={"kind":kind,"at":arr(p),"plane":plane}
 						if kind=="panel":r.half=half
@@ -249,9 +290,9 @@ static func canonical(raw:Dictionary) -> Dictionary:
 	# JSON numbers arrive as floats. Rebuild the integer grammar before matching
 	# candidate dictionaries. Half addresses are the added 1m lattice; integers stay integers.
 	var kind:String=str(raw.get("kind",""));var result:Dictionary={"kind":kind}
-	if kind not in ["point","rod","rod_short","panel","quad","wedge","pyramid"]:return {}
+	if kind not in ["point","rod","rod_short","diag","panel","quad","wedge","pyramid"]:return {}
 	var fields:Array=["at"]
-	if kind in ["rod","rod_short"]:fields.append("end")
+	if kind in ["rod","rod_short","diag"]:fields.append("end")
 	if kind in ["panel","quad"]:fields.append("plane")
 	for field:String in fields:
 		var value=raw.get(field)
@@ -268,9 +309,12 @@ static func canonical(raw:Dictionary) -> Dictionary:
 		for n in turn:
 			if not (n is int or n is float) or not is_finite(float(n)) or float(n)!=roundf(float(n)):return {}
 			result.turn.append(posmod(int(n),4))
+		if raw.has("span"):
+			if not (raw.span is int or raw.span is float) or float(raw.span) not in [.5,1.0]:return {}
+			if float(raw.span)==.5:result.span=.5
 	if kind=="panel":
 		var half=raw.get("half")
-		if not (half is int or half is float) or (float(half)!=0.0 and float(half)!=1.0):return {}
+		if not (half is int or half is float) or float(half) not in [0.0,1.0,2.0,3.0]:return {}
 		result.half=int(half)
 	if kind in ["panel","quad"] and raw.has("span"):
 		if raw.span not in [.5,1,1.0,2,2.0]:return {}
@@ -283,14 +327,16 @@ static func pose(raw: Dictionary) -> Transform3D:
 	var p:=Vector3(vec(r.at))
 	if is_prefab(r.kind):
 		var axes:=Basis.from_euler(vec(r.get("turn",[0,0,0]))*PI*.5)
+		if prefab_span(r)==.5:p+=Vector3(.25,0,.25)   # the cell solid turns about its own cell's centre
 		return Transform3D(Basis(axes.x.round(),axes.y.round(),axes.z.round()),p)
-	if r.kind in ["rod","rod_short"] or is_macro(r.kind):
+	if r.kind in ["rod","rod_short","diag"] or is_macro(r.kind):
 		var q:=Vector3(vec(r.end));var centre:Vector3=(p+q)*.5
 		if r.get("_seated",false):centre.y-=.0375
 		return Transform3D(Basis(Quaternion(Vector3.UP,(q-p).normalized())),centre)
 	if r.kind in ["panel","quad"]:
 		var u:=Vector3(AXES[r.plane[0]]);var v:=Vector3(AXES[r.plane[1]]);var span:float=float(r.get("span",1))
-		var centre:=Vector3(.5,0,.5) if r.kind=="quad" else (Vector3(2.0/3,0,1.0/3) if r.half==0 else Vector3(1.0/3,0,2.0/3))
+		var centres:Array[Vector3]=[Vector3(2.0/3,0,1.0/3),Vector3(1.0/3,0,2.0/3),Vector3(1.0/3,0,1.0/3),Vector3(2.0/3,0,2.0/3)]
+		var centre:Vector3=Vector3(.5,0,.5) if r.kind=="quad" else centres[int(r.half)]
 		# The named face is the contact plane. Thickness extends behind it, so a
 		# horizontal face at one metre has its walkable top at exactly one metre.
 		var normal:Vector3=v.cross(u)
@@ -307,7 +353,7 @@ static func ground_for(all:Array)->float:
 	for r in all:
 		if r.kind=="point":lowest=minf(lowest,vec(r.at).y)
 		if is_prefab(r.kind):
-			var bounds:AABB=pose(r)*AABB(Vector3(-.5,0,-.5),Vector3(1,.5,1))
+			var bounds:AABB=prefab_box(r)
 			lowest=minf(lowest,bounds.position.y)
 	return lowest
 

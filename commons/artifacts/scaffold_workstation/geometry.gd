@@ -5,7 +5,7 @@ const Kit=preload("res://commons/artifacts/primitive_encounters/geometry.gd")
 const Finishes=preload("res://commons/modular/construction_materials.gd")
 
 static func vertices(half:int,unit:float,span:float=1) -> PackedVector3Array:
-	var corners:=[Vector3.ZERO,Vector3.RIGHT,Vector3(1,0,1)] if half==0 else [Vector3.ZERO,Vector3(1,0,1),Vector3.BACK]
+	var corners:Array=[[Vector3.ZERO,Vector3.RIGHT,Vector3(1,0,1)],[Vector3.ZERO,Vector3(1,0,1),Vector3.BACK],[Vector3.ZERO,Vector3.RIGHT,Vector3.BACK],[Vector3.RIGHT,Vector3(1,0,1),Vector3.BACK]][clampi(half,0,3)]
 	var centre:Vector3=(corners[0]+corners[1]+corners[2])/3
 	var result:=PackedVector3Array()
 	for y in [-.018,.018]:
@@ -15,11 +15,13 @@ static func vertices(half:int,unit:float,span:float=1) -> PackedVector3Array:
 static func shape_for(raw:Dictionary,unit:float) -> Shape3D:
 	var r:Dictionary=Model.as_face(raw)
 	if Model.is_prefab(r.kind):
-		var solid:=ConvexPolygonShape3D.new();solid.points=prefab_vertices(r.kind,unit);return solid
+		var solid:=ConvexPolygonShape3D.new();solid.points=prefab_vertices(r.kind,unit,Model.prefab_span(r));return solid
 	if r.kind=="point":
 		if r.get("_seated",false):
 			var joint:=ConvexPolygonShape3D.new();joint.points=seated_joint(unit).vertices;return joint
 		var sphere:=SphereShape3D.new();sphere.radius=.09*unit;return sphere
+	if r.kind=="diag":
+		var box:=BoxShape3D.new();box.size=Vector3(.075,Model.vec(r.at).distance_to(Model.vec(r.end)),.075)*unit;return box
 	if r.kind in ["rod","rod_short"]:
 		var box:=BoxShape3D.new();box.size=Vector3(.075,.5 if r.kind=="rod_short" else 1,.075)*unit;return box
 	if Model.is_macro(r.kind):
@@ -33,7 +35,7 @@ static func visual(raw:Dictionary,unit:float,phase:String="monochrome") -> MeshI
 	var mesh:=MeshInstance3D.new()
 	if Model.is_prefab(r.kind):
 		var faces:Array=Kit.wedge_faces() if r.kind=="wedge" else [[0,3,2,1],[0,1,4],[1,2,4],[2,3,4],[3,0,4]]
-		mesh.mesh=Kit.mesh(prefab_vertices(r.kind,unit),faces)
+		mesh.mesh=Kit.mesh(prefab_vertices(r.kind,unit,Model.prefab_span(r)),faces)
 		mesh.material_override=Finishes.surface("timber",phase)
 	elif r.kind=="point":
 		if r.get("_seated",false):
@@ -47,6 +49,8 @@ static func visual(raw:Dictionary,unit:float,phase:String="monochrome") -> MeshI
 				var socket:=MeshInstance3D.new();var disk:=CylinderMesh.new();disk.top_radius=.035*unit;disk.bottom_radius=.035*unit;disk.height=.012*unit;disk.radial_segments=8
 				socket.mesh=disk;socket.material_override=Finishes.surface("collar",phase);socket.position=Vector3(axis)*direction*.085*unit
 				socket.quaternion=Quaternion(Vector3.UP,Vector3(axis)*direction);mesh.add_child(socket)
+	elif r.kind=="diag":
+		var brace:=BoxMesh.new();brace.size=Vector3(.075,Model.vec(r.at).distance_to(Model.vec(r.end)),.075)*unit;mesh.mesh=brace;mesh.material_override=Finishes.surface("rail",phase)
 	elif r.kind in ["rod","rod_short"]:
 		var beam:=BoxMesh.new();beam.size=Vector3(.075,.5 if r.kind=="rod_short" else 1,.075)*unit;mesh.mesh=beam;mesh.material_override=Finishes.surface("rail",phase)
 	elif Model.is_macro(r.kind):
@@ -85,7 +89,15 @@ static func seated_joint(unit:float)->Dictionary:
 	for i in 12:faces.append([36+i,36+(i+1)%12,48])
 	return {"vertices":vertices,"faces":faces}
 
-static func prefab_vertices(kind:String,unit:float)->PackedVector3Array:
+static func prefab_vertices(kind:String,unit:float,span:float=1.0)->PackedVector3Array:
+	if span==.5:
+		# THE CELL SOLIDS (2026-11-06), about the centre of their first 1 m cell. The wedge: .8 of the cell wide,
+		# two cells long, one node level high - the bay ramp's slope; its high edge meets the rail as before.
+		if kind=="wedge":
+			var cell_ramp:=Kit.wedge(unit*.4,unit*.5,unit)
+			for i in cell_ramp.size():cell_ramp[i].z+=unit*(.25-.0375)
+			return cell_ramp
+		return PackedVector3Array([Vector3(-.25,0,-.25)*unit,Vector3(.25,0,-.25)*unit,Vector3(.25,0,.25)*unit,Vector3(-.25,0,.25)*unit,Vector3(0,.5,0)*unit])
 	if kind=="wedge":
 		# A 2m bay includes its fittings. The 1.6m clear ramp passes between
 		# 36cm joints; its high edge meets the outer face of the 15cm rail.

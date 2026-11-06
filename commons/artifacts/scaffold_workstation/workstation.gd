@@ -558,7 +558,7 @@ func build_copy() -> bool:
 		structure.add_child(body);body.transform=copy_pose(r);body.set_meta("workshop_kind",r.kind)
 		if Model.is_prefab(r.kind):
 			body.grid=output;body.grid_offset=copy_pose(r).origin-Model.pose(r).origin*unit*lattice()
-			body.unit_scale=unit/WORLD_UNIT
+			body.unit_scale=unit/WORLD_UNIT*Model.prefab_span(r)   # a cell solid snaps to its own 1 m cells
 			body.gravity_scale=unit/WORLD_UNIT
 	built=visible_records().duplicate(true)
 	feedback.text="BUILT / 20 cm becomes 2 m. The same connections, ten times larger."

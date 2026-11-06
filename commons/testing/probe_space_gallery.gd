@@ -36,24 +36,25 @@ func _ready() -> void:
 		["bridge", "Two towers 3 m apart joined by a decked bridge at 1 m", Callable(self, "_bridge")],
 		["pavilion", "Four posts and the 4 m plate as a roof, a bench of quads inside", Callable(self, "_pavilion")],
 		["triangle_shade", "Walls of half faces: a sawtooth screen and a triangle roof", Callable(self, "_triangle_shade")],
-		["solid_garden", "Wedges and pyramids as a landscape: ramps, hills, a stepped terrace", Callable(self, "_solid_garden")],
+		["solid_garden", "Cell wedges and pyramids as a landscape: two ridges, a checker of hills, a ramp, a hedge", Callable(self, "_solid_garden")],
 		["stair_tower", "Platforms at three levels reached by wedges, a fine half-metre cage beside", Callable(self, "_stair_tower")],
+		["triangle_tent", "Real triangles: diagonals and three-edge triangles - a tent, a braced tower, a sawtooth roof", Callable(self, "_triangle_tent")],
 	]
 	for i in designs.size():
 		var d: Array = designs[i]
 		ws.model.records.clear(); added = 0; refused = []
 		(d[2] as Callable).call()
 		ws.redraw(); ws.space_hide()
-		ws._refresh_space_sockets("")   # the finished playground, without the lit dots of the next ball (they stay in the game)
+		ws.space_tool = ""; ws._refresh_space_sockets()   # the finished playground, without the lit dots of the next ball (they stay in the game)
 		var guide: Node3D = ws.output.get_node_or_null("SpaceGuide")
 		if guide: guide.visible = false
 		for f in 4: await get_tree().process_frame
 		var counts := {}
 		for r in ws.model.records: counts[str(r.kind)] = int(counts.get(str(r.kind), 0)) + 1
 		var name := "%d_%s" % [i + 1, d[0]]
-		await _shoot(name + "_hall", ws.output.global_position + Vector3(-3.4, 3.1, 4.3), ws.output.global_position + Vector3(.1, 1.8, -.1), 56.0)
-		# inside: the visitor at half size stands on the 1 m floor near START, eyes .85 m above it
-		await _shoot(name + "_inside", ws.output.global_position + Vector3(.9, 1.0 + .85, 2.7), ws.output.global_position + Vector3(-.2, 1.6, -.2), 82.0)
+		await _shoot(name + "_hall", ws.output.global_position + Vector3(-5.6, 4.2, 7.2), ws.output.global_position + Vector3(.1, 1.6, -.1), 58.0)
+		# inside: the visitor stands on the box floor, eyes at 1.65 m
+		await _shoot(name + "_inside", ws.output.global_position + Vector3(2.4, 1.65, 2.9), ws.output.global_position + Vector3(-.4, 1.5, -.4), 82.0)
 		var row := {"name": name, "what": d[1], "records": ws.model.records.size(), "kinds": counts, "added": added, "refused": refused.map(func(r): return JSON.stringify(r))}
 		report.designs.append(row)
 		print("[space_gallery] %s: %d records %s; refused %d" % [name, ws.model.records.size(), JSON.stringify(counts), refused.size()])
@@ -108,7 +109,9 @@ func _box_points(x0: float, x1: float, y0: float, y1: float, z0: float, z1: floa
 
 func _quad(at: Vector3, plane: Array) -> bool: return _add({"kind": "quad", "at": Model.arr(at), "plane": plane})
 func _panel(at: Vector3, plane: Array, half: int) -> bool: return _add({"kind": "panel", "at": Model.arr(at), "plane": plane, "half": half})
-func _solid(kind: String, at: Vector3, turn := [0, 0, 0]) -> bool: return _add(Model.canonical({"kind": kind, "at": Model.arr(at), "turn": turn}))
+## A CELL solid (2026-11-06), as the box lays them: `at` is the low corner of its first 1 m cell; a wedge runs on into
+## the next cell along its turn (turn 0: +z, 1: +x, 2: -z, 3: -x) and rises one node level.
+func _solid(kind: String, at: Vector3, turn := [0, 0, 0]) -> bool: return _add(Model.canonical({"kind": kind, "at": Model.arr(at), "turn": turn, "span": .5}))
 
 # ── the playgrounds ─────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -125,7 +128,7 @@ func _catalogue() -> void:
 	_panel(Vector3(-1, 0, 0), [0, 2], 0)                                             # a half face beside it
 	_grow([Vector3(-1, 1, -1), Vector3(-1, 0, -1)])
 	_add({"kind": "rod_4", "at": [-1, 0, -1], "end": [1, 0, -1]})                   # a long rod: 2 m, balls every metre
-	_solid("wedge", Vector3(1.5, 0, 1.5))
+	_solid("wedge", Vector3(1.5, 0, 1))
 	_solid("pyramid", Vector3(-.5, 0, 1.5))
 
 func _climbing_frame() -> void:
@@ -174,11 +177,11 @@ func _triangle_shade() -> void:
 		_panel(Vector3(x, 1, 0), [0, 2], (x + 1) % 2)                                # a triangle roof, half open to the sky
 
 func _solid_garden() -> void:
-	_solid("wedge", Vector3(-.5, 0, -.5), [0, 0, 0]); _solid("wedge", Vector3(.5, 0, -.5), [0, 1, 0])
-	_solid("pyramid", Vector3(1.5, 0, -.5))
-	_solid("wedge", Vector3(-.5, 0, .5), [0, 2, 0]); _solid("pyramid", Vector3(.5, 0, .5)); _solid("wedge", Vector3(1.5, 0, .5), [0, 3, 0])
-	_solid("pyramid", Vector3(-.5, 0, 1.5)); _solid("wedge", Vector3(.5, 0, 1.5), [0, 1, 0]); _solid("wedge", Vector3(1.5, 0, 1.5), [0, 2, 0])
-	_solid("wedge", Vector3(.5, .5, .5), [0, 0, 0])                                  # a terrace: a wedge on the hill
+	for x in [-1.0, -.5]:                                                            # two ridges: wedges meeting high, one level up
+		_solid("wedge", Vector3(x, 0, 0), [0, 0, 0]); _solid("wedge", Vector3(x, 0, 1.5), [0, 2, 0])
+	for c in [Vector3(.5, 0, 0), Vector3(1.5, 0, 0), Vector3(1, 0, .5), Vector3(.5, 0, 1), Vector3(1.5, 0, 1)]: _solid("pyramid", c)   # a checker of hills
+	_solid("wedge", Vector3(.5, 0, 1.5), [0, 1, 0])                                  # a ramp along the far side
+	for x in [-1.0, -.5, 0.0, .5, 1.0, 1.5]: _solid("pyramid", Vector3(x, 0, -1))   # a hedge
 	var post := [Vector3(0, 0, 0), Vector3(0, .5, 0), Vector3(0, 1, 0), Vector3(0, 1.5, 0)]
 	_grow(post); _link(post, .5)                                                     # a post from the corner four solids share
 	var bar := [Vector3(-1, 1.5, 0), Vector3(0, 1.5, 0), Vector3(1, 1.5, 0), Vector3(2, 1.5, 0)]
@@ -191,6 +194,29 @@ func _stair_tower() -> void:
 	var low := _box_points(0, 1, .5, .5, 0, 1, .5)
 	_grow(low); _link(low, .5)
 	_add({"kind": "quad", "at": [0, .5, 0], "plane": [0, 2], "span": .5}); _add({"kind": "quad", "at": [.5, .5, .5], "plane": [0, 2], "span": .5})
-	_solid("wedge", Vector3(-.5, 0, .5), [0, 1, 0])                                  # the first step up
+	_solid("wedge", Vector3(-1, 0, 0), [0, 1, 0])                                    # the first step up: one level over two cells
 	var cage := _box_points(-1, 0, 0, 1, -1, 0, .5)                                   # a fine half-metre cage beside, grown from the origin
 	_grow(cage); _link(cage, .5)
+
+func _diag(a: Vector3, b: Vector3) -> bool: return _add({"kind": "diag", "at": Model.arr(a), "end": Model.arr(b)})
+
+func _triangle_tent() -> void:
+	# a tent: two gable walls of triangles, their diagonals meeting at the ridge, a ridge pole between them
+	var frame := []
+	for z in [0, 1]:
+		for v in [Vector3(-1, 0, z), Vector3(0, 0, z), Vector3(1, 0, z), Vector3(0, 1, z)]: frame.append(v)
+	_grow(frame)
+	for z in [0, 1]:
+		_add({"kind": "rod", "at": [-1, 0, z], "end": [0, 0, z]}); _add({"kind": "rod", "at": [0, 0, z], "end": [1, 0, z]}); _add({"kind": "rod", "at": [0, 0, z], "end": [0, 1, z]})
+		_diag(Vector3(-1, 0, z), Vector3(0, 1, z)); _diag(Vector3(0, 1, z), Vector3(1, 0, z))
+		_panel(Vector3(-1, 0, z), [0, 1], 0)   # left gable: (-1,0)-(0,0)-(0,1)
+		_panel(Vector3(0, 0, z), [0, 1], 2)    # right gable: (0,0)-(1,0)-(0,1)
+	_add({"kind": "rod", "at": [0, 1, 0], "end": [0, 1, 1]})
+	for x in [-1, 1]: _add({"kind": "rod", "at": [x, 0, 0], "end": [x, 0, 1]})
+	# a braced tower beside it: a 1 m column stiffened by diagonals on two faces
+	var tower := _box_points(2, 2, 0, 2, 0, 1)
+	tower += _box_points(1, 1, 0, 2, 0, 0)
+	_grow(tower); _link(tower)
+	for y in [0, 1]:
+		_diag(Vector3(1, y, 0), Vector3(2, y + 1, 0)); _panel(Vector3(1, y, 0), [0, 1], 0 if y == 0 else 1)
+

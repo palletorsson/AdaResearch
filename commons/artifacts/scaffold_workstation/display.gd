@@ -164,6 +164,8 @@ var space_aimed:Dictionary={}       # the record a placement would add, or {}
 var space_aimed_index:=-1           # the placed record under the aim (select / rubber), or -1
 var space_aimed_item:=-1            # the placed item under the aim (select / rubber), or -1
 var space_aimed_quad:Dictionary={}  # the quad an item would stand on
+var space_aimed_solid:=-1          # a placed solid of the tool's kind under the aim: the trigger turns it
+var space_turn:=0                  # the quarter turn new solids are laid in (the last one turned)
 var space_hover_tile:=""            # the jumbotron tile under the aim
 var space_notice:=""
 var space_guide:Label3D
@@ -208,6 +210,7 @@ func _enter_space()->void:
 	space_guide.outline_size=10;space_guide.modulate=Color("17302e");space_guide.outline_modulate=Color(1,1,1,.85);space_guide.width=1000;space_guide.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	space_guide.billboard=BaseMaterial3D.BILLBOARD_FIXED_Y;space_guide.position=Vector3(0,chamber_height-2.25,0);output.add_child(space_guide)
 	_build_jumbotron()
+	_load_space_build()
 	_load_space_items()
 	add_to_group("space_editors")
 	_redraw_space();_draw_grid();_refresh_space_sockets();_guide_state()
@@ -272,9 +275,10 @@ func _candidates()->Array[Dictionary]:
 	if space_tool in ["","rubber"] or tool_item(space_tool)!="" or not tool_open(space_tool):return out
 	for kind in tool_kinds(space_tool):
 		if Model.is_prefab(kind):
-			for xi in 7:
-				for zi in 7:
-					var c:=Model.canonical({"kind":kind,"at":Model.arr(Vector3(-1+xi*.5,0,-1+zi*.5)),"turn":[0,0,0]})
+			# THE CELL SOLID (2026-11-06): one 1 m cell between four balls, not a 2 m bay over four of them
+			for xi in 6:
+				for zi in 6:
+					var c:=Model.canonical({"kind":kind,"at":Model.arr(Vector3(-1+xi*.5,0,-1+zi*.5)),"turn":[0,space_turn,0],"span":.5})
 					if not c.is_empty() and model.prefab_fits(c):out.append(c)
 			continue
 		for r in model.candidates(kind,tier):
@@ -356,6 +360,7 @@ func _icon(id:String,open:bool)->Node3D:
 				match k:
 					"point":record={"kind":"point","at":[0,0,0]}
 					"rod","rod_short":record={"kind":"rod","at":[0,0,0],"end":[1,0,0]}
+					"diag":record={"kind":"diag","at":[0,0,0],"end":[1,1,0]}
 					"panel":record={"kind":"panel","at":[0,0,0],"plane":[0,1],"half":0}
 					"quad":record={"kind":"quad","at":[0,0,0],"plane":[0,1]}
 					"wedge","pyramid":record={"kind":k,"at":[0,0,0],"turn":[0,0,0]}
@@ -364,7 +369,7 @@ func _icon(id:String,open:bool)->Node3D:
 		return holder
 	if not record.is_empty():
 		var mesh:=visual(record,.13,material_phase);holder.add_child(mesh);mesh.transform=Model.pose(record);mesh.position*=.13
-		mesh.position-=Vector3(.065 if record.has("end") or record.kind in ["panel","quad"] else 0,.065 if record.kind in ["panel","quad"] else 0,0)
+		mesh.position-=Vector3(.065 if record.has("end") or record.kind in ["panel","quad"] else 0,.065 if record.kind in ["panel","quad","diag"] else 0,0)
 		if not open:mesh.material_override=Kit.material(Color("4a5355"))
 		return holder
 	var item:=tool_item(id)
@@ -450,7 +455,7 @@ func _free_quads()->Array:
 ## item, or the placed piece (or item) the select / rubber would take.
 func space_update(aim:Node3D,_hand:Node=null)->void:
 	var s:=_aim_segment(aim)
-	clear_children(space_ghost);space_aimed={};space_aimed_index=-1;space_aimed_item=-1;space_aimed_quad={}
+	clear_children(space_ghost);space_aimed={};space_aimed_index=-1;space_aimed_item=-1;space_aimed_quad={};space_aimed_solid=-1
 	var hover:=_tile_under(s)
 	if hover!=space_hover_tile:space_hover_tile=hover;_paint_tiles()
 	if hover!="":
@@ -494,6 +499,18 @@ func space_update(aim:Node3D,_hand:Node=null)->void:
 		for r in _candidates():
 			var d:=_line_distance(output.to_global(space_point(r)),s[0],s[1])
 			if d<distance:distance=d;best_c=r
+		# a solid of this tool already standing under the aim: the trigger turns it a quarter
+		var kinds:Array=tool_kinds(space_tool)
+		for i in model.records.size():
+			var placed:Dictionary=model.records[i]
+			if not Model.is_prefab(str(placed.kind)) or placed.kind not in kinds:continue
+			var d:=_line_distance(output.to_global(space_point(placed)+Vector3(0,.25,0)),s[0],s[1])
+			if d<distance:distance=d;space_aimed_solid=i;best_c={}
+		if space_aimed_solid>=0:
+			var turned:Dictionary=_turned_fit(space_aimed_solid)
+			target=output.to_global(space_point(model.records[space_aimed_solid])+Vector3(0,.25,0));colour=Color("5fb3c0") if not turned.is_empty() else Color("ef7974")
+			if not turned.is_empty():
+				var mesh:=visual(turned,output_unit(),material_phase);Geometry.hologram(mesh);space_ghost.add_child(mesh);mesh.transform=copy_pose(turned)
 		space_aimed=best_c
 		if not best_c.is_empty():
 			var mesh:=visual(best_c,output_unit(),material_phase);Geometry.hologram(mesh);space_ghost.add_child(mesh);mesh.transform=copy_pose(best_c)
@@ -542,11 +559,32 @@ func space_press(aim:Node3D,hand:Node=null)->String:
 		if space_aimed_quad.is_empty():space_notice="point at a finished quad";return "refused"
 		_place_item(tool_item(space_tool),space_aimed_quad);_save_space_items();space_hide();_refresh_space_sockets()
 		space_notice="placed";return "placed"
+	if space_aimed_solid>=0:
+		var before_turn:Array=model.records.duplicate(true)
+		var turned:Dictionary=_turned_fit(space_aimed_solid)
+		if turned.is_empty():space_notice="no room to turn it";return "refused"
+		model.records[space_aimed_solid]=turned;space_turn=int(turned.turn[1])
+		remember_edit(before_turn);space_hide();share();redraw()
+		space_notice="turned";return "turned"
 	if space_aimed.is_empty():space_notice="no lit node under the aim";return "refused"
 	var before:Array=model.records.duplicate(true)
 	if not model.add(space_aimed,tier):space_notice="refused here";return "refused"
 	remember_edit(before);space_hide();share();redraw()
 	space_notice="placed";return "placed"
+
+## A solid a quarter turn further about the vertical (it stays in its own cell: a square turns into itself).
+static func _turned(r:Dictionary)->Dictionary:
+	var t:Dictionary=r.duplicate(true);var turn:Array=t.get("turn",[0,0,0]).duplicate()
+	turn[1]=posmod(int(turn[1])+1,4);t.turn=turn;return t
+
+## The next quarter turn of a placed solid that has room (the others stay where they are), or {}.
+func _turned_fit(i:int)->Dictionary:
+	var test=Model.new();test.records=model.records.duplicate(true);test.records.remove_at(i)
+	var t:Dictionary=model.records[i]
+	for k in 3:
+		t=_turned(t)
+		if test.prefab_fits(t):return t
+	return {}
 
 func space_grip()->bool:
 	if not player_inside:return false
@@ -650,3 +688,52 @@ func _corner_triangles(face_w:float,face_h:float)->void:
 	var corners:=MeshInstance3D.new();corners.name="CornerTriangles";corners.mesh=st.commit()
 	var m:=StandardMaterial3D.new();m.albedo_color=Color("0b0d0e");m.roughness=.6;m.cull_mode=BaseMaterial3D.CULL_DISABLED;corners.material_override=m
 	jumbotron.add_child(corners)
+
+# ── each floor its own build (Palle, 2026-11-06: "each floor its own build") ───────────────────────────────────
+## The workstation shared ONE construction between every station (the root meta, user://void_scaffold_work.json, the
+## scaffold_workstations group). A playground editor keeps its own per floor: user://void_space_build_<floor>.json.
+## On a first visit it starts from the nearest lower floor's build, the pieces this floor allows - the playground
+## grows down the tower - and from then on the two are separate.
+const SPACE_FLOORS:=[1,3,5,6,7,20]
+func _space_build_path(floor:int)->String:return "user://void_space_build_%d.json"%floor
+
+func _load_space_build()->void:
+	model.restore([]);edit_history.clear()
+	if not persist:return
+	var raw:Array=_read_build(_space_build_path(space_floor))
+	if raw.is_empty() and not FileAccess.file_exists(_space_build_path(space_floor)):
+		for f in range(space_floor-1,-1,-1):
+			if FileAccess.file_exists(_space_build_path(f)):
+				raw=_read_build(_space_build_path(f)).filter(func(r):return r is Dictionary and can_use(str(r.get("kind",""))))
+				break
+	var kept:=Model.new()
+	for raw_r in raw:
+		var r=raw_r
+		if r is Dictionary and Model.is_prefab(str(r.get("kind",""))) and Model.prefab_span(r)==1.0 and r.get("at") is Array:
+			# the 2 m solid of v11 becomes the cell solid that lies inside its old footprint
+			var old_box:AABB=Model.prefab_box(r)
+			for off:Vector3 in [Vector3(-.5,0,-.5),Vector3(0,0,-.5),Vector3(-.5,0,0),Vector3(0,0,0)]:
+				var cell:Dictionary=r.duplicate(true);cell.span=.5;cell.at=Model.arr(Model.vec(r.at)+off)
+				if old_box.grow(.001).encloses(Model.prefab_box(cell)):r=cell;break
+		var c:=Model.canonical(r)
+		if not c.is_empty() and kept.add(c,3):pass   # a piece that no longer fits (a removed support) is dropped, not the whole build
+	model.restore(kept.records.duplicate(true))
+	if FileAccess.file_exists(_space_build_path(space_floor)) or not model.records.is_empty():_save_space_build()
+
+static func _read_build(path:String)->Array:
+	if not FileAccess.file_exists(path):return []
+	var d=JSON.parse_string(FileAccess.get_file_as_string(path))
+	return d.get("records",[]) if d is Dictionary and d.get("records") is Array else []
+
+func _save_space_build()->void:
+	if not persist:return
+	var f:=FileAccess.open(_space_build_path(space_floor),FileAccess.WRITE)
+	if f:f.store_string(JSON.stringify({"version":1,"floor":space_floor,"records":model.records},"	"))
+
+func share()->void:
+	if space:_save_space_build();return   # this floor's build only: no shared blueprint, no other station told
+	super.share()
+
+func receive(records:Array,sender:Node)->void:
+	if space:return   # another station's build is not this floor's
+	super.receive(records,sender)

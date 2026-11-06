@@ -279,3 +279,45 @@ states, sheet `ada_run/space-interface/interface_sheet.png`. Tower check on floo
 Known: on floor 5 the floor's own folded-triangle work stands partly inside the box (as it did beside the old output
 bay); the boxes on floors 1, 3, 5, 7 stand over shaft A, as the stations' output bays always did.
 
+## Real triangles, and a build per floor (2026-11-06, Palle: "can we improve" -> real triangles, each floor its own build)
+
+**Real triangles.** The record (`model.gd`) gains a `diag` edge across a square's face, either diagonal, a whole or a
+half step (records at/end, posed and drawn like a rod as long as its span). Half faces 0 and 1 split along at -> at+u+v
+as before; new halves 2 and 3 split along at+u -> at+v (`geometry.vertices`, the pose centres, `canonical` accepts 0-3,
+`face_occupied` lets the two halves of one diagonal share a square and refuses halves of crossing diagonals). A half
+face is a candidate when its OWN three edges stand - two sides of its square and its diagonal (`triangle_edges`) - or
+all four sides, as before. The jumbotron gains DIAGONAL on the triangle floor (5).
+
+**Each floor its own build.** The workstation shared one construction between every station. A playground editor now
+keeps its own in `user://void_space_build_<floor>.json` (`share()` writes only it; `receive()` ignores other
+stations). On a first visit it starts from the nearest lower floor's build, kept to the pieces this floor allows - the
+playground grows down the tower - then the two are separate. The old shared blueprint (`void_scaffold_work.json`) is
+no longer read by the editor.
+
+Measured: `probe_space_editor.tscn` 11/11 (I: two sides alone offer no triangle; a diagonal plus two sides close
+one; I2: a triangle across the other diagonal; J: floor 91 builds a ball, floor 92 starts from it and adds its own,
+91 keeps one). Gallery 8/8 built with nothing refused, a new `triangle_tent` (gables of three-edge triangles, a braced
+tower). Tower check below.
+
+## Solids at the scale of the balls (2026-11-06, Palle: "harmonize the scale, the wedge and pyramid is too big to fit")
+
+The wedge and pyramid were still the bay solids of the old table: a 2 x 2 m footprint, one address on a side. At full
+scale the balls stand 1 m apart, so one solid covered four cells and the ball in the middle of them. The box now lays
+**cell solids**, an additive record field `span: .5` (a record without it is the old 2 m solid, unchanged everywhere
+else):
+
+- `at` is the low corner of the solid's first 1 m cell; it is posed about that cell's centre, so a quarter turn keeps
+  it on the lattice (`model.gd` `prefab_span`, `prefab_envelope`, `prefab_box`; `geometry.gd` `prefab_vertices(kind,
+  unit, span)`).
+- **pyramid**: one cell, 1 x 1 x 1 m, between eight balls.
+- **wedge**: one cell wide, two long, rising 1 m: the old ramp's slope, and its high edge meets the next node level, so
+  a ramp still reaches a 1 m landing. Halving everything would have given a 0.5 m rise, which meets no node.
+- **turning**: with WEDGE or PYRAMID in hand, the trigger on a placed one turns it a quarter, skipping a turn that has
+  no room (a wedge swings into another cell); the next ones are laid in that turn. Boxed in, it says so.
+- a build saved by v11 keeps its 2 m solids as the cell solid lying inside each old footprint.
+
+Measured: `probe_space_editor.tscn` 12/12, with K: a 1 x 1 x 2 m wedge and a 1 x 1 x 1 m pyramid side by side, a ball on
+their shared corner, a turn that skips the blocked quarter, a boxed-in wedge refused, a v11 wedge migrated. Gallery
+8/8 with nothing refused (`solid_garden` redrawn: two ridges, a checker of hills, a ramp, a hedge; `stair_tower`'s
+first step is a cell wedge onto the 1 m landing).
+
