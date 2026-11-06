@@ -349,6 +349,36 @@
             ],
             "editor_label": "Association plinth / marble"
           }
+        },
+        {
+          "id": "vending-prefabs",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -12.6,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "prefabs"
+          }
+        },
+        {
+          "id": "vending-tools",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -7.4,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "tools"
+          }
         }
       ],
       "impact_cells": [
@@ -2263,6 +2293,36 @@
           "config": {
             "editor_label": "The point room: black, in the workstation bay over shaft A"
           }
+        },
+        {
+          "id": "vending-prefabs",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -14,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "prefabs"
+          }
+        },
+        {
+          "id": "vending-tools",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -6.2,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "tools"
+          }
         }
       ],
       "impact_cells": [],
@@ -3872,6 +3932,36 @@
             ],
             "editor_label": "Association plinth / woodenboard"
           }
+        },
+        {
+          "id": "vending-prefabs",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -12.6,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "prefabs"
+          }
+        },
+        {
+          "id": "vending-tools",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -7.4,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "tools"
+          }
         }
       ],
       "impact_cells": [],
@@ -5287,6 +5377,36 @@
             "mount": "floor",
             "editor_label": "Association tape / walk_ramp = association(wedge)"
           }
+        },
+        {
+          "id": "vending-prefabs",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            7,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "prefabs"
+          }
+        },
+        {
+          "id": "vending-tools",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            12.2,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "tools"
+          }
         }
       ],
       "impact_cells": [],
@@ -6650,6 +6770,36 @@
             "text": "wooden_box = association(cube)",
             "mount": "floor",
             "editor_label": "Association tape / wooden_box = association(cube)"
+          }
+        },
+        {
+          "id": "vending-prefabs",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -12.6,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "prefabs"
+          }
+        },
+        {
+          "id": "vending-tools",
+          "artifact": "vending_machine",
+          "station": "SW",
+          "position": [
+            -7.4,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "tools"
           }
         }
       ],
@@ -23285,10 +23435,10 @@
           "artifact": "color_sets_overview",
           "station": "NE",
           "position": [
-            15,
-            9
+            20,
+            -0.25
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
@@ -23342,14 +23492,19 @@
           "artifact": "spectrum_forest",
           "station": "SW",
           "position": [
-            -4,
-            9
+            -10,
+            0
           ],
           "facing": 0,
-          "height": 1,
-          "scale": 0.22,
+          "height": 0,
+          "scale": 1,
           "config": {
-            "plinth": "0"
+            "plinth": "0",
+            "forest_width": 6,
+            "forest_depth": 6,
+            "ceiling_height": 5.6,
+            "line_length": 5.6,
+            "connects_next_floor": true
           }
         },
         {
@@ -23386,7 +23541,8 @@
       "props": [],
       "impact_cells": [],
       "route": [],
-      "supply_leads": false
+      "supply_leads": false,
+      "copies": []
     },
     {
       "map": "Color_Paint",
@@ -23412,7 +23568,7 @@
           "artifact": "albers_wall_gallery",
           "station": "NE",
           "position": [
-            -4,
+            -9.5,
             8
           ],
           "facing": 180,
@@ -23453,8 +23609,8 @@
           "artifact": "dark_sphere",
           "station": "SW",
           "position": [
-            -15.3,
-            15
+            -11.5,
+            8
           ],
           "facing": 180,
           "height": 0,
@@ -23466,13 +23622,17 @@
           "artifact": "rainbow_hallway",
           "station": "SW",
           "position": [
-            -16.7,
-            13.4
+            -17,
+            6
           ],
           "facing": 0,
-          "height": 1,
+          "height": 2.7,
           "scale": 1,
-          "config": {}
+          "config": {
+            "num_segments": 5,
+            "start_radius": 2.5,
+            "end_radius": 1.2
+          }
         },
         {
           "id": "f2_color_constellation_office_23_20",
@@ -23480,7 +23640,7 @@
           "station": "SE",
           "position": [
             0,
-            3.4
+            1.2
           ],
           "facing": 180,
           "height": 0,

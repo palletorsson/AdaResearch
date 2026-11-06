@@ -1,0 +1,22 @@
+{
+	"registry_info": {
+		"category": "inventory",
+		"description": "The vending machines (Palle, 2026-11-06): one interface to pick up the prefabs, and another for the tools - a lit cabinet of holographic miniatures, each over the tape line that writes its association; grabbing one collects the item with the tape's config.",
+		"created": "2026-11-06"
+	},
+	"artifacts": {
+		"vending_machine": {
+			"lookup_name": "vending_machine",
+			"name": "Vending machine / prefabs or tools, holographic",
+			"description": "A cabinet with a lit glass front and shelves. Every slot holds a holographic miniature of one inventory item (commons/data/inventory/items.json) over a tape line - rubber_ball = association(config(point)) - and hands over the tape's config (the item's defaults, the term's config). Grabbing a slot collects the item onto the hand's belt and into the hand, as the association plinth does; the miniature goes straight back, a machine never runs out. The glass has no collider. Locked items show dark with their floor. config: kind prefabs|tools, columns, mini, title.",
+			"category": "inventory",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/vending_machine/vending_machine.tscn",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": ["primitives", "transformation"],
+			"tags": ["inventory", "prefabs", "tools", "vending", "void", "playground"],
+			"configure_before_ready": true
+		}
+	}
+}

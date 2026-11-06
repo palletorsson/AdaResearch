@@ -192,8 +192,12 @@ func mesh_bounds(host: Node3D) -> AABB:
 	var first := true
 	for node in host.find_children("*", "GeometryInstance3D", true, false):
 		var bounds: AABB
-		if node is MeshInstance3D: bounds = node.mesh.get_aabb()
-		elif node is MultiMeshInstance3D: bounds = node.multimesh.get_aabb()
+		if node is MeshInstance3D:
+			if node.mesh == null: continue # an empty MeshInstance3D (a capture anchor awaiting its mesh) has no box
+			bounds = node.mesh.get_aabb()
+		elif node is MultiMeshInstance3D:
+			if node.multimesh == null: continue
+			bounds = node.multimesh.get_aabb()
 		else: continue # Text stencil does not change the shell dimensions.
 		bounds = (host.global_transform.affine_inverse() * node.global_transform) * bounds
 		result = bounds if first else result.merge(bounds)
