@@ -24,6 +24,7 @@ var _dragging := false            # the lifted thing goes down when the trigger 
 ## THE NODE EDITOR (2026-11-06): with a kit element in the hand (ball, rod, brace) the trigger fires at the nodes of
 ## an edit space instead of placing a prefab on a surface (commons/player/kit_node_editor.gd).
 var editor: Node3D = null
+const KitTest = preload("res://commons/artifacts/playground_kit/kit_test.gd")
 
 func setup(p_hand: Node, p_aim: Node3D, p_exclude: Callable = Callable()) -> void:
 	hand = p_hand;aim = p_aim
@@ -100,6 +101,10 @@ func press() -> String:
 	if worn != null:worn.fire_worn();return "worn"
 	if hand.current_tool() == "rubber":return "rubber" if hand.erase_at(aim, REACH, exclude.call()) else "refused"
 	if hand.current_tool() == "pin":return "pin" if hand.pin_at(aim, REACH, exclude.call()) != "" else "refused"
+	if hand.current_tool() == "test":   # the load test (kit_test.gd): start or undo it on the pointed kit structure
+		var did: String = KitTest.toggle_at(aim, REACH, exclude.call(), hand.SURFACES)
+		hand.notice = {"started": "testing: what the bars do not hold is loose", "holds": "it holds: nothing moves", "reset": "back on the nodes", "": "point at a ball or rod of the kit"}[did]
+		return "test_" + did if did != "" else "refused"
 	if is_instance_valid(hand.lifted):_dragging = false;return "set_down" if hand.set_down(aim, REACH, exclude.call()) else "refused"
 	if editor != null and editor.active():
 		var said: String = editor.press(aim, exclude.call())

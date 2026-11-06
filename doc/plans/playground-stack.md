@@ -188,6 +188,27 @@ Probes:
 - `probe_inventory_prism.tscn` 26/26, with H, Q, T2 and V rewritten for node firing.
 - The kit probes still pass: triangle 7/7, playground kit 9/9, built field 5/5, bench fold 3/3.
 
+### The load test (same day)
+
+The hand's TEST tool (`items.json` "test", from floor 3) is a little cast-iron weight worn like the rubber and the pin.
+Its code is `commons/artifacts/playground_kit/kit_test.gd`; the miniature is `commons/artifacts/inventory_load_test/`.
+- **Starting a test:** fire it at any ball or rod and the whole structure it belongs to is tested. Every ball the bars
+  do not fix, or that nothing supports, becomes a body; every rod becomes a hinge at both ends; and each loose ball
+  gets a small push (0.6 m/s) along its own free motion. A square standing exactly on its nodes is balanced like a
+  pencil on its tip: without the push it sagged only 14 cm in 2.5 s, from rounding noise.
+- **Undoing it:** fire it again and everything goes back on its nodes, frozen, with every joint fixed.
+- **A rigid structure** answers "it holds" and nothing moves.
+
+`probe_kit_load_test.tscn` 5/5, built with the node editor on a floor at −30 m:
+
+| Structure | Result |
+|---|---|
+| Unbraced square | folds to the floor (each top ball drops 1.0 m) |
+| Square braced in its own plane | tips 0.8 m out of its plane |
+| Corner tetrahedron | holds |
+
+Undone, the balls are back exactly; the test fired at the floor is refused.
+
 ## Next steps (not built)
 
 0. **Turn the built look on** for the bench stages (`"fold": true` in `workbench.json`), after a try in the game.

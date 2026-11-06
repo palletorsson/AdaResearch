@@ -686,6 +686,20 @@
       "knobs": []
     },
     {
+      "id": "test",
+      "name": "Load test (let physics loose)",
+      "token": "inventory_load_test",
+      "prefab": "",
+      "tool": "test",
+      "instance": false,
+      "unlock": "primitives",
+      "floor": 3,
+      "mount": "hand",
+      "size": [0.05, 0.06, 0.05],
+      "defaults": {},
+      "knobs": []
+    },
+    {
       "id": "canvas",
       "name": "Hand canvas (4 m glass)",
       "token": "hand_canvas",

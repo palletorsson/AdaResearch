@@ -156,7 +156,7 @@ func redraw() -> void:
 func _fold(balls: Array, rods: Array) -> void:
 	var now_balls: Array = [];var now_rods: Array = [];var built := {}
 	for b in balls:
-		if b.fold and b.supported and b.on_grid and not b.held and not b.flexible:built[b] = true;now_balls.append(b)
+		if b.fold and b.supported and b.on_grid and not b.held and not b.flexible and not b.testing:built[b] = true;now_balls.append(b)
 	for r in rods:
 		if r.joints.is_empty() or r.is_picked_up():continue
 		if r.joints.all(func(j):return built.has(j.ball)):now_rods.append(r)

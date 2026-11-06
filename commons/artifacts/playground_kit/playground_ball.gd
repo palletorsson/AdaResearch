@@ -61,6 +61,9 @@ var supported := false   # the graph's last word
 ## it was fired, like Blender's edit mode - supported or not, it does not fall; the graph still says whether it is
 ## supported, and the kit renderer marks it when it is not.
 var editing := false
+## Under the load test (kit_test.gd): a body under gravity on hinged rods, or still on its node if the bars hold it; the
+## support graph, the faces and the built look leave it alone until the test is undone.
+var testing := false
 ## The floor under it when it settled (NAN: none found - then row 0 is world height 0, as on the old benches). The
 ## Void's floors stand at -6 x floor: a ball is grounded on the floor it stands on, not at world height 0.
 var floor_y := NAN
@@ -219,6 +222,7 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 	if tree == null:return {}
 	var balls := tree.get_nodes_in_group("playground_balls")
 	var seen := {};var queue: Array = []
+	balls = balls.filter(func(b):return not b.testing)   # a structure under the load test is the test's
 	for b in balls:
 		if b.grounded():seen[b] = true;queue.append(b)
 	while not queue.is_empty():

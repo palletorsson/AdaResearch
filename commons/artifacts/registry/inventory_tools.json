@@ -28,6 +28,18 @@
       "include_in_map_data": false,
       "map_ready": false,
       "tags": ["inventory", "tool", "pin", "freeze"]
+    },
+    "inventory_load_test": {
+      "lookup_name": "inventory_load_test",
+      "scene": "res://commons/artifacts/inventory_load_test/load_test.tscn",
+      "class_name": "InventoryLoadTest",
+      "name": "Load test",
+      "description": "A cast-iron weight with a ring, 5 cm. The inventory's tool for testing what the playground kit's node editor built (Palle, 2026-11-06: build in edit mode, then let physics loose) - worn as a miniature on the right hand, the trigger on a ball or rod tests the whole structure: what the bars and the floor do not hold becomes a body on hinged rods and falls or swings; fired again, everything goes back on its nodes. Not a thing to place.",
+      "category": "inventory_tools",
+      "complexity": "beginner",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "tags": ["inventory", "tool", "test", "rigidity", "playground_kit"]
     }
   }
 }
