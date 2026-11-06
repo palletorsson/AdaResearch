@@ -23,6 +23,9 @@ signal unsnapped
 @export_enum("pale", "pink", "cyan", "steel") var colour := "pink"
 @export var hit_speed := 1.2                        ## m/s: slower than this is a touch, not a hit
 @export var sleeve_ends := 0.08                     ## the sleeve stops this far from each end: bare steel goes in the socket
+## A BRACE (the Triangle stage, Palle 2026-11-06): one unit along a face diagonal, sqrt(2) x grid mouth to mouth less
+## two hubs (1.24 m on the metre grid), and it goes only into a ball's diagonal sockets - as a rod only into its axis ones.
+@export var diagonal := false
 
 const FOAM := {"pale": "ededed", "pink": "ea72ab", "cyan": "5fd3e6", "steel": "2a2c30"}
 const STEEL := "2a2c30"
@@ -41,7 +44,9 @@ func _init() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	units = clampi(int(config.get("units", units)), 0, 8);grid = clampf(float(config.get("grid", grid)), .25, 4);hub = clampf(float(config.get("hub", hub)), .02, .3)
-	length = clampf(float(config.get("length", length)), .25, 4) if units == 0 else clampf(units * grid - 2 * hub, .1, 8)
+	var dg: Variant = config.get("diagonal", diagonal)
+	diagonal = dg if dg is bool else str(dg).to_lower() in ["true", "1"]   # bool("false") is true
+	length = clampf(float(config.get("length", length)), .25, 4) if units == 0 else unit_length()
 	core = clampf(float(config.get("core", core)), .006, .03)
 	sleeve = clampf(float(config.get("sleeve", sleeve)), .01, .06)
 	colour = str(config.get("colour", colour))
@@ -51,7 +56,7 @@ func apply_grid_config(config: Dictionary) -> void:
 
 func _ready() -> void:
 	super._ready()
-	if units > 0:length = clampf(units * grid - 2 * hub, .1, 8)
+	if units > 0:length = unit_length()
 	add_to_group("playground_rods")
 	dropped.connect(func(_who):call_deferred("settle"))
 	picked_up.connect(func(_who):unsnap())
@@ -70,6 +75,14 @@ func _build() -> void:
 	var shape := CollisionShape3D.new();var cap := CapsuleShape3D.new();cap.radius = sleeve;cap.height = length;shape.shape = cap;shape.basis = along;add_child(shape)
 	_built = true
 
+## `units` grid steps mouth to mouth: along an axis, or (a brace) along a face diagonal.
+func unit_length() -> float:
+	return clampf(units * grid * (sqrt(2.0) if diagonal else 1.0) - 2 * hub, .1, 12)
+
+## Which of a ball's sockets this takes: 1 the diagonal ones (a brace), 0 the axis ones.
+func socket_kind() -> int:
+	return 1 if diagonal else 0
+
 ## An end in the world: 0 at -X, 1 at +X.
 func end_global(end: int) -> Vector3:
 	return global_transform * Vector3((length / 2.0) * (1.0 if end == 1 else -1.0), 0, 0)
@@ -84,7 +97,7 @@ func settle() -> int:
 		var p := end_global(end);var best: Node3D = null;var best_i := -1;var best_d := INF
 		for b in balls:
 			if not b.has_method("nearest_free_socket"):continue
-			var i: int = b.nearest_free_socket(p)
+			var i: int = b.nearest_free_socket(p, socket_kind())
 			if i < 0:continue
 			var d: float = p.distance_to(b.socket_global(i))
 			if d < best_d:best_d = d;best = b;best_i = i
@@ -107,7 +120,7 @@ func settle() -> int:
 		var other: int = 1 - int(found[0][0]);var p := end_global(other)
 		for b in balls:
 			if b == found[0][1] or not b.has_method("nearest_free_socket"):continue
-			var i: int = b.nearest_free_socket(p)
+			var i: int = b.nearest_free_socket(p, socket_kind())
 			if i >= 0 and p.distance_to(b.socket_global(i)) < .03:found.append([other, b, i]);break
 	for f in found:_join(f[0], f[1], f[2])
 	BallLib.reevaluate(get_tree())

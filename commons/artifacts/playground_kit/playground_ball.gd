@@ -27,10 +27,24 @@ signal support_changed(supported: bool)
 @export_range(0.25, 4.0) var grid_y := 1.0          ## the vertical pitch (Palle: "vertical snap 2, horizontal 1 - floors grow upward faster")
 @export var snap := true                            ## let go: to the nearest grid point, frozen
 @export_enum("grid", "contact") var snap_to := "grid"   ## onto the pitch, or against the nearest ball (Point One: no grid yet)
+## THE TRIANGLE STAGE (Palle, 2026-11-06; workbench.json from floor 5): twelve more sockets on the face diagonals,
+## so a brace (a rod sqrt(2) units long) can close a triangle - and the support graph reads what is built as bars.
+@export var diagonals := false
+## "bars": held balls are also analysed as points joined by bars (kit_rigidity.gd); a ball the bars do not fix shows
+## its free motion and the piece shows its faces and count (playground_faces.gd). "none": the support graph only.
+@export_enum("none", "bars") var rigidity := "none"
 
 const CONTACT_REACH := 0.6   ## a settled ball this near is what a contact ball snaps against
 
 const DIRS: Array[Vector3] = [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN, Vector3.BACK, Vector3.FORWARD]
+const D := 0.70710678
+## The six axis sockets, then the twelve face diagonals (index 6 on): a brace goes only in these, a rod only in the six.
+const DIRS_18: Array[Vector3] = [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN, Vector3.BACK, Vector3.FORWARD,
+	Vector3(D, D, 0), Vector3(D, -D, 0), Vector3(-D, D, 0), Vector3(-D, -D, 0),
+	Vector3(D, 0, D), Vector3(D, 0, -D), Vector3(-D, 0, D), Vector3(-D, 0, -D),
+	Vector3(0, D, D), Vector3(0, D, -D), Vector3(0, -D, D), Vector3(0, -D, -D)]
+const Rigidity = preload("res://commons/artifacts/playground_kit/kit_rigidity.gd")
+const Faces = preload("res://commons/artifacts/playground_kit/playground_faces.gd")
 const FOAM := {"pale": "ededed", "pink": "ea72ab", "cyan": "5fd3e6", "steel": "2a2c30"}
 const STEEL := "2a2c30"
 
@@ -38,6 +52,7 @@ var sockets: Array = [null, null, null, null, null, null]   # the rod in each so
 var on_grid := false     # let go onto a grid point (false once it has fallen or been picked up)
 var held := false        # in a hand: supports nothing
 var supported := false   # the graph's last word
+var flexible := false    # rigidity "bars": held, but the bars do not fix it
 var _built := false
 
 func _init() -> void:
@@ -55,6 +70,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	snap = bool(config.get("snap", snap))
 	snap_to = str(config.get("snap_to", snap_to))
 	if snap_to not in ["grid", "contact"]:snap_to = "grid"
+	var dg: Variant = config.get("diagonals", diagonals)
+	diagonals = dg if dg is bool else str(dg).to_lower() in ["true", "1"]   # bool("false") is true
+	rigidity = str(config.get("rigidity", rigidity))
+	if rigidity not in ["none", "bars"]:rigidity = "none"
 	if _built:_build()
 
 func _ready() -> void:
@@ -66,6 +85,14 @@ func _ready() -> void:
 	picked_up.connect(func(_who):held = true;on_grid = false;reevaluate(get_tree()))
 	tree_exiting.connect(_leaving)
 	_build()
+
+## This ball's socket directions: the six axes, or the eighteen of the Triangle stage.
+func dirs() -> Array[Vector3]:
+	return DIRS_18 if diagonals else DIRS
+
+## A socket on a face diagonal (a brace's), or on an axis (a rod's).
+static func is_diagonal(i: int) -> bool:
+	return i >= 6
 
 ## The hub's half-height: the ball plus a socket boss, what stands on the floor.
 func hub() -> float:
@@ -87,7 +114,7 @@ func contact_point(p: Vector3) -> Vector3:
 		if d < best_d:best_d = d;best = b
 	if best == null:return Vector3(p.x, hub(), p.z)
 	var toward: Vector3 = (p - best.global_position).normalized();var pick := -1;var best_dot := -2.0
-	for i in DIRS.size():
+	for i in dirs().size():
 		var at: Vector3 = best.global_position + best.socket_dir(i) * (best.hub() + hub())
 		if at.y < hub() - .001:continue
 		var dp: float = toward.dot(best.socket_dir(i))
@@ -116,12 +143,13 @@ func settle() -> Vector3:
 
 ## A loose rod end lying in one of this ball's mouths (within 3 cm) is taken: the ball's side of the snap.
 func _take_rod_ends() -> void:
-	for i in DIRS.size():
+	for i in dirs().size():
 		if not socket_free(i):continue
 		var mouth := socket_global(i)
 		for rod in get_tree().get_nodes_in_group("playground_rods"):
 			if not rod.has_method("attach_end"):continue
 			for end in 2:
+				if bool(rod.get("diagonal")) != is_diagonal(i):continue
 				if rod.end_free(end) and rod.end_global(end).distance_to(mouth) < .03:rod.attach_end(end, self, i);break
 			if not socket_free(i):break
 
@@ -177,16 +205,63 @@ static func reevaluate(tree: SceneTree) -> Dictionary:
 		elif b.on_grid:
 			b.on_grid = false;b.freeze = false;b.sleeping = false;fell += 1
 		if was != b.supported:b.support_changed.emit(b.supported)
-	return {"supported": seen.size(), "fell": fell}
+	var out := {"supported": seen.size(), "fell": fell}
+	_read_as_bars(tree, balls, out)
+	return out
+
+## THE TRIANGLE STAGE: the held balls whose rigidity is "bars", read as a framework - points, the rods between two
+## of them as bars, the grounded ones as anchors - piece by connected piece (kit_rigidity.gd). Each ball learns
+## whether it is `flexible`; the scene's PlaygroundFaces node shows faces, free motions and counts. No such ball and
+## no node yet: nothing at all is made, so a floor without the stage stays as it was.
+static func _read_as_bars(tree: SceneTree, balls: Array, out: Dictionary) -> void:
+	var held: Array = []
+	for b in balls:
+		if is_instance_valid(b) and b.rigidity == "bars" and b.supported and not b.held and b.on_grid:held.append(b)
+		elif is_instance_valid(b):b.flexible = false
+	var host: Node = tree.current_scene if tree.current_scene != null else tree.root
+	var shown: Node = host.get_node_or_null("PlaygroundFaces")
+	if held.is_empty():
+		if shown != null:shown.show_kit([])
+		return
+	var index := {}
+	for i in held.size():index[held[i]] = i
+	var bars: Array = [];var bar_rods: Array = [];var bar_ends: Array = []
+	for rod in tree.get_nodes_in_group("playground_rods"):
+		if not is_instance_valid(rod) or rod.joints.size() < 2:continue
+		var a: Dictionary = rod.joints[0];var c: Dictionary = rod.joints[1]
+		if not index.has(a.ball) or not index.has(c.ball):continue
+		bars.append(Vector2i(index[a.ball], index[c.ball]));bar_rods.append(rod);bar_ends.append(Vector2i(a.end, c.end))
+	var pieces: Array = [];var motions := 0
+	for group: Array in Rigidity.components(held.size(), bars):
+		var local := {}
+		for k in group.size():local[group[k]] = k
+		var pts: Array = [];var anchored: Array = [];var piece_balls: Array = []
+		for g in group:pts.append(held[g].global_position);anchored.append(held[g].grounded());piece_balls.append(held[g])
+		var lbars: Array = [];var rods: Array = [];var ends: Array = []
+		for k in bars.size():
+			if local.has(bars[k].x):lbars.append(Vector2i(local[bars[k].x], local[bars[k].y]));rods.append(bar_rods[k]);ends.append(bar_ends[k])
+		var r: Dictionary = Rigidity.analyse(pts, anchored, lbars)
+		for k in group.size():piece_balls[k].flexible = r.flexible[k]
+		if lbars.is_empty():continue   # a lone ball: nothing to show
+		motions += int(r.free_motions)
+		pieces.append({"balls": piece_balls, "rods": rods, "bars": lbars, "rod_ends": ends, "flexible": r.flexible,
+			"mode": r.mode, "free_motions": int(r.free_motions), "anchored": anchored,
+			"faces": Rigidity.faces(group.size(), lbars, pts)})
+	out["free_motions"] = motions;out["pieces"] = pieces.size()
+	if shown == null:
+		shown = Faces.new();shown.name = "PlaygroundFaces";host.add_child(shown)
+	shown.show_kit(pieces)
 
 func _build() -> void:
+	if sockets.size() != dirs().size():   # the stage changed how many sockets there are (before any rod is in)
+		sockets.resize(dirs().size())
 	for c in get_children():
 		if c is MeshInstance3D or c is CollisionShape3D:remove_child(c);c.queue_free()
 	var foam := StandardMaterial3D.new();foam.albedo_color = Color(FOAM[colour]);foam.roughness = .88
 	var steel := StandardMaterial3D.new();steel.albedo_color = Color(STEEL);steel.metallic = .6;steel.roughness = .35
 	var ball := MeshInstance3D.new();var sm := SphereMesh.new();sm.radius = radius;sm.height = radius * 2;sm.radial_segments = 32;sm.rings = 16;ball.mesh = sm;ball.material_override = foam;ball.name = "Foam";add_child(ball)
-	for i in DIRS.size():
-		var d: Vector3 = DIRS[i]
+	for i in dirs().size():
+		var d: Vector3 = dirs()[i]
 		var b := MeshInstance3D.new();var cm := CylinderMesh.new();cm.top_radius = .016;cm.bottom_radius = .02;cm.height = boss + .01;cm.radial_segments = 12;b.mesh = cm;b.material_override = steel
 		b.name = "Socket%d" % i;b.position = d * (radius + boss / 2.0);b.basis = Basis(Quaternion(Vector3.UP, d)) if d != Vector3.UP and d != Vector3.DOWN else (Basis() if d == Vector3.UP else Basis(Vector3.RIGHT, PI))
 		add_child(b)
@@ -195,19 +270,21 @@ func _build() -> void:
 
 ## A socket's mouth in the world (where a rod's end sits), and the way a rod in it points away from the ball.
 func socket_global(i: int) -> Vector3:
-	return global_transform * (DIRS[i] * (radius + boss))
+	return global_transform * (dirs()[i] * (radius + boss))
 
 func socket_dir(i: int) -> Vector3:
-	return (global_transform.basis * DIRS[i]).normalized()
+	return (global_transform.basis * dirs()[i]).normalized()
 
 func socket_free(i: int) -> bool:
 	return sockets[i] == null or not is_instance_valid(sockets[i])
 
 ## The nearest free socket to a point within reach, or -1.
-func nearest_free_socket(p: Vector3) -> int:
+## `kind`: -1 any socket, 0 the axis sockets (a rod), 1 the diagonal ones (a brace).
+func nearest_free_socket(p: Vector3, kind := -1) -> int:
 	var best := -1;var best_d := socket_reach
-	for i in DIRS.size():
+	for i in dirs().size():
 		if not socket_free(i):continue
+		if kind >= 0 and int(is_diagonal(i)) != kind:continue
 		var d := p.distance_to(socket_global(i))
 		if d < best_d:best_d = d;best = i
 	return best

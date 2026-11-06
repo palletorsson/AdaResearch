@@ -60,6 +60,22 @@
       ]
     },
     {
+      "id": "brace",
+      "name": "Brace (a rod on the diagonal)",
+      "token": "playground_rod",
+      "prefab": "",
+      "hang": false,
+      "unlock": "primitives",
+      "floor": 5,
+      "mount": "hand",
+      "size": [1.24, 0.06, 0.06],
+      "defaults": {"diagonal": true, "colour": "pale"},
+      "knobs": [
+        {"key": "units", "label": "Length", "choices": [ "1", "2" ], "names": [ "one diagonal", "two diagonals" ]},
+        {"key": "colour", "label": "Foam", "choices": [ "pale", "pink", "cyan", "steel" ], "names": [ "pale", "pink", "cyan", "bare steel" ]}
+      ]
+    },
+    {
       "id": "tape",
       "name": "Tape roll",
       "instance": false,

@@ -3,7 +3,9 @@
   "default": {"name": "metre", "label": "the metre grid", "snap": "grid", "grid": 1.0, "grid_y": 1.0},
   "stages": [
     {"from_floor": 0, "name": "point", "label": "Point One: no grid yet - balls snap to each other", "snap": "contact", "grid": 1.0, "grid_y": 1.0},
-    {"from_floor": 3, "name": "point-line", "label": "Point Lines: the metre grid", "snap": "grid", "grid": 1.0, "grid_y": 1.0}
+    {"from_floor": 3, "name": "point-line", "label": "Point Lines: the metre grid", "snap": "grid", "grid": 1.0, "grid_y": 1.0},
+    {"from_floor": 5, "name": "triangle", "label": "Triangle: braces on the diagonals; what you build is read as bars - free motions shown, faces filled", "snap": "grid", "grid": 1.0, "grid_y": 1.0, "diagonals": true, "rigidity": "bars"}
   ],
+  "_triangle": "THE TRIANGLE STAGE (Palle, 2026-11-06, chosen over 'faces only' and 'an editor apart from the kit'): `diagonals` gives every ball twelve face-diagonal sockets beside its six axis ones, so the brace (items.json, a rod sqrt(2) units long) can close a triangle; `rigidity: bars` reads what is held as points joined by bars with the floor balls as anchors (commons/artifacts/playground_kit/kit_rigidity.gd) - a ball the bars do not fix rocks along its free motion, faces fill triangles and plain squares, and a label counts points, rods and free motions. The scaffold still holds every ball: the lesson is shown, never a collapse. A diagonal needs grid == grid_y.",
   "_example_tall": {"from_floor": 99, "name": "tall", "label": "vertical 2, horizontal 1: floors grow upward faster (not dealt to a floor yet)", "snap": "grid", "grid": 1.0, "grid_y": 2.0}
 }
