@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "construction-material-progression",
+  "scope": "Shared scaffold kit and grid constructions; preserves dimensions, collision and motion.",
+  "progression": [
+    {"id":"monochrome","from":"primitives","until":"color","palette":"monochrome","structure":"authored","state":"implemented","question":"What can shape, surface and movement tell us before colour?"},
+    {"id":"colour","from":"color","palette":"colour","structure":"authored","state":"implemented","question":"What changes when the same kit gains colour relationships?"},
+    {"id":"randomness","from":"randomness","palette":"colour","structure":"seeded-node-variation","state":"planned","parameters":["seed","occupied_nodes","orientation_choices","size_choices"],"question":"Which variations keep a usable route? Retain the seed and compare outcomes."},
+    {"id":"cellularautomata","from":"cellularautomata","palette":"colour","structure":"neighbour-rule","state":"planned","parameters":["seed","initial_occupancy","neighbourhood","birth","survival","generations"],"question":"Let neighbour relations propose nodes and connections; inspect support and access before placement."}
+  ],
+  "roles": {
+    "steel":{"monochrome":"#202020","colour":"#242832","roughness":0.34,"metallic":0.78,"opacity":1,"shader":"surface"},
+    "foam":{"monochrome":"#ededed","colour":"#ea72ab","roughness":0.88,"metallic":0,"opacity":1,"shader":"surface"},
+    "rail":{"monochrome":"#c7c7c7","colour":"#75cbd0","roughness":0.85,"metallic":0,"opacity":1,"shader":"surface"},
+    "collar":{"monochrome":"#a4a4a4","colour":"#eee8d9","roughness":0.4,"metallic":0.65,"opacity":1,"shader":"surface"},
+    "timber":{"monochrome":"#d5d5d5","colour":"#d0aa78","roughness":0.72,"metallic":0,"opacity":1,"shader":"grain"},
+    "moving":{"monochrome":"#f2f2f2","colour":"#f0e9da","roughness":0.55,"metallic":0.12,"opacity":1,"shader":"surface"},
+    "danger":{"monochrome":"#f5f5f5","colour":"#ff5f98","roughness":0.48,"metallic":0.12,"opacity":1,"shader":"bands"},
+    "field":{"monochrome":"#ededed","colour":"#62e695","roughness":0.4,"metallic":0,"opacity":0.14,"shader":"grid"}
+  },
+  "shaders": {
+    "surface":{"model":"standard-pbr","use":"Steel, foam and collars retain different light responses."},
+    "grain":{"model":"standard-pbr","use":"Retain the timber texture; desaturate its albedo before Colour."},
+    "bands":{"model":"standard-pbr","texture_size":32,"period":16,"width":8,"dark":"#202020","use":"Diagonal black bands identify electrical contact in both palettes."},
+    "grid":{"model":"standard-pbr","texture_size":32,"period":16,"width":2,"use":"A translucent cross-hatched volume marks literal scale, including in monochrome."}
+  }
+}

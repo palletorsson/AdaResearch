@@ -1,0 +1,179 @@
+{
+  "artifacts": {
+    "scaffold_workstation_points": {
+      "lookup_name": "scaffold_workstation_points",
+      "name": "Scaffold workstation / points",
+      "scene": "res://commons/artifacts/scaffold_workstation/points.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One assembly apparatus: a near-edge 1:10 hand model, a semicircular holographic tool rack, rectangular BUILD / DROP TEST / UNDO controls and a floor-level glass chamber with a four-times-hand-model result, full floor grid, fixed START pad and side-table visor for quarter-size visits. Available parts grow from points to 1m and 2m rods, triangular halves, wedge and pyramid prefabs, then quads. The same saved graph is carried between stations; unavailable parts are retained, not erased.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD copies introduced parts at four times tabletop size inside the glass bay and keeps its glass enclosure closed.",
+        "DROP TEST releases a physical ball; observe what holds.",
+        "UNDO revises the hand model while keeping the last built copy.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session.",
+        "Grip the model visor and hold it near your eyes to arrive at the fixed START pad. TAKE OFF VR GLASSES returns to the bench."
+      ],
+      "footprint": [
+        6.6,
+        5.4,
+        10.9
+      ]
+    },
+    "scaffold_workstation_lines": {
+      "lookup_name": "scaffold_workstation_lines",
+      "name": "Scaffold workstation / lines",
+      "scene": "res://commons/artifacts/scaffold_workstation/lines.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One assembly apparatus: a near-edge 1:10 hand model, a semicircular holographic tool rack, rectangular BUILD / DROP TEST / UNDO controls and a floor-level glass chamber with a four-times-hand-model result, full floor grid, fixed START pad and side-table visor for quarter-size visits. Available parts grow from points to 1m and 2m rods, triangular halves, wedge and pyramid prefabs, then quads. The same saved graph is carried between stations; unavailable parts are retained, not erased.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD copies introduced parts at four times tabletop size inside the glass bay and keeps its glass enclosure closed.",
+        "DROP TEST releases a physical ball; observe what holds.",
+        "UNDO revises the hand model while keeping the last built copy.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session.",
+        "Grip the model visor and hold it near your eyes to arrive at the fixed START pad. TAKE OFF VR GLASSES returns to the bench."
+      ],
+      "footprint": [
+        6.6,
+        5.4,
+        10.9
+      ]
+    },
+    "scaffold_workstation_surfaces": {
+      "lookup_name": "scaffold_workstation_surfaces",
+      "name": "Scaffold workstation / surfaces",
+      "scene": "res://commons/artifacts/scaffold_workstation/surfaces.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One assembly apparatus: a near-edge 1:10 hand model, a semicircular holographic tool rack, rectangular BUILD / DROP TEST / UNDO controls and a floor-level glass chamber with a four-times-hand-model result, full floor grid, fixed START pad and side-table visor for quarter-size visits. Available parts grow from points to 1m and 2m rods, triangular halves, wedge and pyramid prefabs, then quads. The same saved graph is carried between stations; unavailable parts are retained, not erased.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD copies introduced parts at four times tabletop size inside the glass bay and keeps its glass enclosure closed.",
+        "DROP TEST releases a physical ball; observe what holds.",
+        "UNDO revises the hand model while keeping the last built copy.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session.",
+        "Grip the model visor and hold it near your eyes to arrive at the fixed START pad. TAKE OFF VR GLASSES returns to the bench."
+      ],
+      "footprint": [
+        6.6,
+        5.4,
+        10.9
+      ]
+    },
+    "scaffold_workstation_crossing": {
+      "lookup_name": "scaffold_workstation_crossing",
+      "name": "Scaffold workstation / carried crossing",
+      "scene": "res://commons/artifacts/scaffold_workstation/crossing.tscn",
+      "museum_import": true,
+      "category": "transformation",
+      "complexity": "beginner",
+      "description": "One saved construction: six-port points, two-metre rods and complementary halves of a 2 x 2 m square. A 20 cm hand-model edge becomes 2 m at BUILD. Neutral construction materials precede the Colour sequence.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Continue the construction saved in Primitives.",
+        "Complete a horizontal square with four rods and either two halves or one quad.",
+        "BUILD installs the entire graph at the receiver; walk across your square.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_quads": {
+      "lookup_name": "scaffold_workstation_quads",
+      "name": "Scaffold workstation / full square faces",
+      "scene": "res://commons/artifacts/scaffold_workstation/quads.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One assembly apparatus: a near-edge 1:10 hand model, a semicircular holographic tool rack, rectangular BUILD / DROP TEST / UNDO controls and a floor-level glass chamber with a four-times-hand-model result, full floor grid, fixed START pad and side-table visor for quarter-size visits. Available parts grow from points to 1m and 2m rods, triangular halves, wedge and pyramid prefabs, then quads. The same saved graph is carried between stations; unavailable parts are retained, not erased. Carries the wedge and pyramid shelf introduced at Polyhedra.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD copies introduced parts at four times tabletop size inside the glass bay and keeps its glass enclosure closed.",
+        "DROP TEST releases a physical ball; observe what holds.",
+        "UNDO revises the hand model while keeping the last built copy.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session.",
+        "Grip the model visor and hold it near your eyes to arrive at the fixed START pad. TAKE OFF VR GLASSES returns to the bench."
+      ],
+      "footprint": [
+        6.6,
+        5.4,
+        10.9
+      ]
+    },
+    "scaffold_workstation_display": {
+      "lookup_name": "scaffold_workstation_display",
+      "name": "Assembly shop / glass test bay",
+      "scene": "res://commons/artifacts/scaffold_workstation/display.tscn",
+      "museum_import": true,
+      "category": "transformation",
+      "complexity": "beginner",
+      "description": "One assembly apparatus: a near-edge 1:10 hand model, a semicircular holographic tool rack, rectangular BUILD / DROP TEST / UNDO controls and a floor-level glass chamber with a four-times-hand-model result, full floor grid, fixed START pad and side-table visor for quarter-size visits. Available parts grow from points to 1m and 2m rods, triangular halves, wedge and pyramid prefabs, then quads. The same saved graph is carried between stations; unavailable parts are retained, not erased. Carries the wedge and pyramid shelf introduced at Polyhedra.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD copies introduced parts at four times tabletop size inside the glass bay and keeps its glass enclosure closed.",
+        "DROP TEST releases a physical ball; observe what holds.",
+        "UNDO revises the hand model while keeping the last built copy.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session.",
+        "Grip the model visor and hold it near your eyes to arrive at the fixed START pad. TAKE OFF VR GLASSES returns to the bench."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_solids": {
+      "lookup_name": "scaffold_workstation_solids",
+      "name": "Scaffold workstation / wedge and pyramid",
+      "scene": "res://commons/artifacts/scaffold_workstation/solids.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Polyhedra adds a shelf of 1:10 wedge and pyramid prefabs. BUILD makes a loose wedge (1.6m clear width, 2m run, 1m rise) and pyramid (2m square base, 1m height), with gravity, opens the glass chamber and lets the visitor walk into the result. Close releases align gently to the metre grid; the body remains physical.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD copies introduced parts at four times tabletop size inside the glass bay.",
+        "DROP TEST releases a physical ball; observe what holds.",
+        "UNDO revises the hand model while keeping the last built copy.",
+        "Grip a placed miniature member and release at another valid socket to move it.",
+        "Release a placed member in the REMOVE basket to discard it; remove dependent faces or rods first.",
+        "UNDO restores the last move or removal in the current workstation session.",
+        "Place or rotate shelf solids on the model grid; use the existing basket and UNDO.",
+        "After BUILD, walk around the bench into the chamber. Grip full-size solids to rearrange them; gravity remains active.",
+        "Grip the model visor and hold it near your eyes to arrive at the fixed START pad. TAKE OFF VR GLASSES returns to the bench."
+      ],
+      "footprint": [
+        6.6,
+        5.4,
+        10.9
+      ]
+    }
+  }
+}

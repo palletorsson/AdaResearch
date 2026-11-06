@@ -379,6 +379,39 @@
           "config": {
             "kind": "tools"
           }
+        },
+        {
+          "artifact": "scaffold_workstation_display",
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_points",
+            "tier": 0,
+            "space": true,
+            "chamber_height": 5.4,
+            "space_floor": 1
+          },
+          "facing": 0,
+          "height": 0,
+          "id": "scaffold-workstation",
+          "position": [
+            -10,
+            4.25
+          ],
+          "scale": 1,
+          "station": "SW"
         }
       ],
       "impact_cells": [
@@ -2323,6 +2356,39 @@
           "config": {
             "kind": "tools"
           }
+        },
+        {
+          "artifact": "scaffold_workstation_display",
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_lines",
+            "tier": 1,
+            "space": true,
+            "chamber_height": 5.4,
+            "space_floor": 3
+          },
+          "facing": 0,
+          "height": 0,
+          "id": "scaffold-workstation",
+          "position": [
+            -10,
+            4.25
+          ],
+          "scale": 1,
+          "station": "SW"
         }
       ],
       "impact_cells": [],
@@ -3962,6 +4028,39 @@
           "config": {
             "kind": "tools"
           }
+        },
+        {
+          "artifact": "scaffold_workstation_display",
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_surfaces",
+            "tier": 2,
+            "space": true,
+            "chamber_height": 5.4,
+            "space_floor": 5
+          },
+          "facing": 90,
+          "height": 0,
+          "id": "scaffold-workstation",
+          "position": [
+            -5.75,
+            0
+          ],
+          "scale": 1,
+          "station": "SW"
         }
       ],
       "impact_cells": [],
@@ -5407,6 +5506,39 @@
           "config": {
             "kind": "tools"
           }
+        },
+        {
+          "artifact": "scaffold_workstation_display",
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_solids",
+            "tier": 2,
+            "space": true,
+            "chamber_height": 5.4,
+            "space_floor": 6
+          },
+          "facing": 0,
+          "height": 0,
+          "id": "scaffold-workstation",
+          "position": [
+            10,
+            4.25
+          ],
+          "scale": 1,
+          "station": "SE"
         }
       ],
       "impact_cells": [],
@@ -6800,6 +6932,39 @@
           "scale": 1,
           "config": {
             "kind": "tools"
+          }
+        },
+        {
+          "id": "scaffold-workstation",
+          "artifact": "scaffold_workstation_display",
+          "station": "SE",
+          "position": [
+            -5.75,
+            0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_quads",
+            "tier": 3,
+            "space": true,
+            "chamber_height": 5.4,
+            "space_floor": 7
           }
         }
       ],

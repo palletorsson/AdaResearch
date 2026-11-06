@@ -198,6 +198,13 @@ func take_all_back() -> void:
 
 func _process(delta: float) -> void:
 	if left == null:return
+	# THE PLAYGROUND EDITOR (2026-11-06, Palle: "when we enter the glass playground editor the hand menu disappears"): inside
+	# a glass box in space mode the prism stays down and the wand hands the trigger to the box's own menu, the jumbotron
+	if in_space_editor():
+		if showing:_set_showing(false)
+		if ring != null:ring.visible = false
+		wand.update(true, delta)
+		return
 	var up: float = left.global_basis.x.dot(Vector3.UP)
 	var want: bool = always or pinned or up > (palm_up - 0.15 if showing else palm_up)
 	if want != showing:_set_showing(want)
@@ -245,7 +252,14 @@ func _wrist_yaw(c: Node3D) -> float:
 	return snappedf(-clampf(roll, -90.0, 90.0) * 2.0, 15.0)
 
 ## The Void's left X (Palle: "I do not get any menu from any button"): the prism up until X again.
+## The player stands inside a playground editor (display.gd `space`): the hand menu steps aside.
+func in_space_editor() -> bool:
+	for n in get_tree().get_nodes_in_group("space_editors"):
+		if bool(n.get("player_inside")):return true
+	return false
+
 func toggle() -> void:
+	if in_space_editor():return
 	pinned = not pinned
 	_set_showing(pinned)
 
@@ -291,6 +305,7 @@ func _on_right_pressed(button_name: String) -> void:
 			# the thing pointed at, if the hand placed it (Palle: "remove the object with the grip button") - in place
 			# mode or with the drum up; with the drum up and nothing pointed at, the last one. Otherwise the grip is the
 			# Void's grab.
+			if in_space_editor():wand.grip();return   # the playground editor: the grip puts the tool down
 			if not showing and not wand.placing():return
 			var taken: bool = wand.grip()
 			if not taken and showing:take_back();taken = true
@@ -301,6 +316,7 @@ func _on_right_pressed(button_name: String) -> void:
 ## steps the hand through the empty hand and the collected prefabs; a haptic tick and the name on the HAND face.
 func cycle(d := 1) -> String:
 	if hand == null:return ""
+	if in_space_editor():return hand.current   # inside the playground editor the belt is the jumbotron's
 	if is_instance_valid(hand.lifted):hand.cancel_lift()
 	var id: String = hand.cycle(d)
 	refresh_faces()

@@ -53,6 +53,14 @@ func update(show := true, delta := 0.0) -> void:
 		if bool(at.get("ok", false)) or bool(at.get("hang", false)):hand.lifted.global_transform = at.xform
 		_draw_aim(at)
 		return
+	var se: Node = _space_editor()
+	if se != null:
+		_hide_ghost()
+		if aim_line != null:aim_line.visible = false
+		if editor != null:editor.hide_all()
+		if show:se.space_update(aim, hand)
+		else:se.space_hide()
+		return
 	if editor != null and editor.active() and not is_instance_valid(hand.lifted):
 		_hide_ghost()
 		if aim_line != null:aim_line.visible = false
@@ -99,6 +107,11 @@ func press() -> String:
 	if hand == null or aim == null:return ""
 	var worn: Node3D = hand.worn_node()
 	if worn != null:worn.fire_worn();return "worn"
+	var se: Node = _space_editor()
+	if se != null:
+		var said_space: String = se.space_press(aim, hand)
+		if str(se.get("space_notice")) != "":hand.notice = str(se.get("space_notice"))
+		return said_space
 	if hand.current_tool() == "rubber":return "rubber" if hand.erase_at(aim, REACH, exclude.call()) else "refused"
 	if hand.current_tool() == "pin":return "pin" if hand.pin_at(aim, REACH, exclude.call()) != "" else "refused"
 	if hand.current_tool() == "test":   # the load test (kit_test.gd): start or undo it on the pointed kit structure
@@ -139,6 +152,8 @@ func grip() -> bool:
 	if hand == null or aim == null:return false
 	_pending = null
 	if is_instance_valid(hand.lifted):_dragging = false;hand.cancel_lift();return true
+	var se: Node = _space_editor()
+	if se != null and se.space_grip():return true
 	if editor != null and editor.active() and editor.first != null:editor.first = null;return true   # a half-made rod let go
 	if hand.pointed_own(aim, REACH, exclude.call()) == null:
 		return editor != null and editor.grip()   # the node editor: pointing at no node clears the edit space
@@ -177,3 +192,12 @@ static func _tint(root: Node, col: Color) -> void:
 			var tinted: Color = base_col.lerp(Color(col.r, col.g, col.b), 0.0 if col.is_equal_approx(Color(1, 1, 1, col.a)) else .75)
 			(mi.material_override as StandardMaterial3D).albedo_color = Color(tinted.r, tinted.g, tinted.b, col.a)
 		elif x is Label3D:(x as Label3D).modulate = col
+
+## THE SPACE EDITOR (2026-11-06): a scaffold workstation whose glass box is the editor (display.gd `space`) takes the
+## aim while the line passes through its box - a kit piece in the hand fires at its sockets, the empty hand takes a
+## piece back, the rubber erases (group space_editors, first come first served). Null when none claims the aim.
+func _space_editor() -> Node:
+	if hand == null or aim == null or is_instance_valid(hand.lifted):return null
+	for n in get_tree().get_nodes_in_group("space_editors"):
+		if n.has_method("space_active") and n.space_active(hand, aim):return n
+	return null
