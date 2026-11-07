@@ -21,6 +21,7 @@ static func floor_window(current: int, count: int) -> Array[int]:
 func configure(owner_game: Node3D) -> void:
 	game=owner_game;building=game.building;content=building.content
 	content.floor_changed.connect(_changed)
+	content.artifact_built.connect(_built)
 
 ## The switch happens after leaving a slab, not when merely jumping above it.
 func floor_at(y: float) -> int:
@@ -59,7 +60,21 @@ func floor_at_position(at: Vector3) -> int:
 			ancestor=ancestor.get_parent()
 	return floor_at(at.y)
 
+## THE ARRIVAL (2026-11-07): the floor below streams in one work per frame, and each build re-walked and re-paused the
+## whole floor (~20 ms on floor 7, every build frame for seconds). A queued build now pauses its own work only; the
+## floor_changed that follows it is then not a reason to walk the floor again. Every other change still is.
+var _adopted: Dictionary = {}
+
+func _built(index: int, added: Array) -> void:
+	if not records.has(index): return
+	for node in added:
+		if node is Node3D and is_instance_valid(node): records[index].adopt(node)
+	_adopted[index]=true
+
 func _changed(index: int) -> void:
+	if _adopted.has(index) and records.has(index):
+		_adopted.erase(index)
+		return
 	if not records.has(index): records[index]=Residency.new(content.roots[index],building)
 	records[index].refresh_pickables()
 	records[index].needs_refresh=true

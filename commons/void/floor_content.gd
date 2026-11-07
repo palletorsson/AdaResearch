@@ -33,12 +33,16 @@ var build_indices: Array = []
 var warming: Dictionary = {}
 var warm_resources: Dictionary = {}
 signal floor_changed(index: int)
+## One queued work was built (before floor_changed for it): `added` is every node the build hung on the floor - the
+## work's mount, its supply lead, its support - so the residency can pause those alone (floor_stream.gd).
+signal artifact_built(index: int, added: Array)
 signal panel_activated(world_position: Vector3)
 
 func _ready() -> void:
 	building = get_parent()
 	data = Source.read_rooms(trial_id)
 	catalog = JSON.parse_string(FileAccess.get_file_as_string(CATALOG))
+	_index_registry_in_background()
 	add_to_group("biome_grid") # Existing catalyst projectiles call react_at_world.
 	if not lazy:
 		for index in range(data.floors.size()): load_floor(index)
@@ -91,10 +95,14 @@ func _process(_delta: float) -> void:
 			selected=i;break
 	if selected<0: return
 	var job: Dictionary = pending.pop_at(selected)
+	var known := {}
+	for child in roots[job.index].get_children(): known[child.get_instance_id()]=true
 	var start := Time.get_ticks_usec()
 	_build_artifact(roots[job.index],job.index,job.item)
 	last_build_ms = (Time.get_ticks_usec()-start)/1000.0
 	max_build_ms = maxf(max_build_ms,last_build_ms)
+	var added: Array = roots[job.index].get_children().filter(func(child): return not known.has(child.get_instance_id()))
+	artifact_built.emit(job.index, added)
 	floor_changed.emit(job.index)
 
 ## LIGHT LOD (2026-11-07, Palle: "can we do something with the frame rather a LOD setup" ... "apply it to every
@@ -713,19 +721,42 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		var back := mount.position+Vector3(0,0,-0.22*float(item.scale)).rotated(Vector3.UP,deg_to_rad(float(item.facing)))
 		building.pipe(host,"ArtifactSupport",Vector3(back.x,0.04,back.z)+Vector3(0.16,0,0),back+Vector3(0.16,0,0),0.06,building.steel)
 
-func _definition(key: String) -> Dictionary:
-	if catalog.artifacts.has(key): return catalog.artifacts[key]
+## THE REGISTRY INDEX (2026-11-07, the arrival stutter): a work the Void catalogue does not name used to be looked
+## up by parsing every registry file (396 files, 12 MB: ~350 ms), once per new key, on the main thread, inside the build
+## queue - the floor below arriving with a dozen such keys stalled a dozen frames. Now every registry file is read ONCE,
+## on a worker thread started in _ready, into key -> entry with the same precedence (sorted files, the last file whose
+## entry has an existing scene wins). A key found nowhere is remembered as found nowhere.
+var _registry_index: Dictionary = {}
+var _registry_task := -1
+
+func _index_registry_in_background() -> void:
+	if _registry_task < 0 and _registry_index.is_empty():
+		_registry_task = WorkerThreadPool.add_task(_build_registry_index, false, "void registry index")
+
+func _build_registry_index() -> void:
 	var directory := "res://commons/artifacts/registry"
 	var files := DirAccess.get_files_at(directory)
 	files.sort()
-	# Same deterministic precedence as the editor's registry reader.
-	var found: Dictionary = {}
+	var index: Dictionary = {}
 	for file in files:
 		if not file.ends_with(".json"): continue
-		var registry: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join(file)))
-		var entry: Dictionary = registry.get("artifacts", {}).get(key, {})
-		if not entry.is_empty() and entry.has("scene") and ResourceLoader.exists(str(entry.scene)):
-			found = entry
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join(file)))
+		if not parsed is Dictionary: continue
+		var artifacts: Variant = (parsed as Dictionary).get("artifacts", {})
+		if not artifacts is Dictionary: continue
+		for key in artifacts:
+			var entry: Variant = artifacts[key]
+			if entry is Dictionary and entry.has("scene") and ResourceLoader.exists(str(entry.scene)):
+				index[key] = entry
+	_registry_index = index
+
+func _definition(key: String) -> Dictionary:
+	if catalog.artifacts.has(key): return catalog.artifacts[key]
+	if _registry_task < 0 and _registry_index.is_empty(): _build_registry_index()   # a factory or probe without _ready
+	elif _registry_task >= 0:
+		WorkerThreadPool.wait_for_task_completion(_registry_task)   # a worker task must be waited to be released
+		_registry_task = -1
+	var found: Dictionary = _registry_index.get(key, {})
 	if not found.is_empty(): catalog.artifacts[key] = found
 	return found
 

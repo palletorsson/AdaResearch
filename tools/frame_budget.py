@@ -39,7 +39,7 @@ def main() -> int:
                             "--rendering-method", renderer, "--xr-mode", "off", "--path", str(stage),
                             "--script", "res://tools/probes/frame_budget.gd", "--", "--no-bridges",
                             f"--void-start-floor={floor}", "--play-output=" + out.as_posix(),
-                            *[a for a in sys.argv if a.startswith("--yaws=") or a == "--baseline-only"]],
+                            *[a for a in sys.argv if a.startswith("--yaws=") or a in ("--baseline-only", "--bisect")]],
                            stdout=stream, stderr=subprocess.STDOUT, timeout=1800, creationflags=subprocess.CREATE_NO_WINDOW)
         try:
             r = json.loads((out / "budget.json").read_text(encoding="utf8"))

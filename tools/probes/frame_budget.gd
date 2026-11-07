@@ -36,8 +36,24 @@ func open_game() -> void:
 	# THE ARRIVAL: every frame for 14 s - its length, and which works were built in it (the floor below streams in now)
 	var seen := {};var hitches: Array=[];var t_start := Time.get_ticks_usec();var last := t_start
 	for key in game.building.content.exhibits:seen[key]=true
+	# --bisect: from 2.5 s, 0.8 s windows, each with one suspect's processing switched off (longest frame per window)
+	var bisect := OS.get_cmdline_user_args().has("--bisect")
+	var suspects: Array=[["none",null],["floor_stream",game.floor_stream],["none",null],["game_self",game],["none",null],
+		["content_live_floor",game.building.content.roots[floor]],["none",null],["floor_content_node",game.building.content],["none",null]]
+	var windows: Array=[];var current := -1
 	while Time.get_ticks_usec()-t_start<14e6:
+		if bisect:
+			var w := int(((Time.get_ticks_usec()-t_start)/1e6-2.5)/0.8)
+			if w!=current and w>=0 and w<=suspects.size():
+				if current>=0 and current<suspects.size() and suspects[current][1]!=null:suspects[current][1].set_process(true)
+				current=w
+				if w<suspects.size():
+					if suspects[w][1]!=null:suspects[w][1].set_process(false)
+					windows.append({"suspect":suspects[w][0],"max_ms":0.0,"frames":0,"pending_at_start":game.building.content.pending.size()})
 		await process_frame
+		if bisect and current>=0 and current<suspects.size() and not windows.is_empty():
+			var fm := (Time.get_ticks_usec()-last)/1000.0
+			windows[-1].max_ms=maxf(windows[-1].max_ms,snappedf(fm,.1));windows[-1].frames+=1
 		var now := Time.get_ticks_usec();var ms := (now-last)/1000.0;last=now
 		var fresh: Array=[]
 		for key in game.building.content.exhibits:
@@ -46,13 +62,42 @@ func open_game() -> void:
 				var item: Dictionary=game.building.content.data.floors[int(str(key).get_slice("/",0))].artifacts.filter(func(a):return a.id==str(key).get_slice("/",1)).front() if true else {}
 				fresh.append(str(key)+" ("+str(item.get("artifact","?"))+")")
 		if ms>30.0 or not fresh.is_empty():
-			hitches.append({"t_s":snappedf((now-t_start)/1e6,.01),"ms":snappedf(ms,.1),"built":fresh,"last_build_ms":snappedf(float(game.building.content.last_build_ms),.1),"pending":game.building.content.pending.size()})
+			hitches.append({"t_s":snappedf((now-t_start)/1e6,.01),"ms":snappedf(ms,.1),"built":fresh,
+				"physics_ms":snappedf(Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS)*1000.0,.1),
+				"process_ms":snappedf(Performance.get_monitor(Performance.TIME_PROCESS)*1000.0,.1),
+				"render_cpu_ms":snappedf(RenderingServer.viewport_get_measured_render_time_cpu(vp),.1),
+				"render_gpu_ms":snappedf(RenderingServer.viewport_get_measured_render_time_gpu(vp),.1),
+				"bodies":int(Performance.get_monitor(Performance.PHYSICS_3D_ACTIVE_OBJECTS)),"last_build_ms":snappedf(float(game.building.content.last_build_ms),.1),"pending":game.building.content.pending.size()})
 	# what one residency pass over the floor below costs, synchronously, and a lone die: build, then each next frame
-	var experiments := {}
+	var experiments := {"bisect":windows}
+	# each floor_changed listener, once, for the floor below
+	var below_i := floor+1
+	var t0 := Time.get_ticks_usec();game._content_changed(below_i);experiments["game_content_changed_ms"]=snappedf((Time.get_ticks_usec()-t0)/1000.0,.1)
+	t0=Time.get_ticks_usec()
+	for key in game.building.content.props:
+		if str(key).begins_with(str(below_i)+"/"):game.render_quality.filter_branch(game.building.content.props[key])
+	experiments["filter_floor_materials_ms"]=snappedf((Time.get_ticks_usec()-t0)/1000.0,.1)
+	t0=Time.get_ticks_usec();game.floor_stream._changed(below_i);experiments["floor_stream_changed_ms"]=snappedf((Time.get_ticks_usec()-t0)/1000.0,.1)
 	var fs: Node=game.floor_stream
 	if fs.records.has(floor+1):
+		var shown := func():
+			var out: Array=[]
+			for n in game.building.content.roots[floor+1].find_children("*","Node3D",true,false):
+				if n.is_visible_in_tree() and n is GeometryInstance3D:out.append(str(game.building.content.roots[floor+1].get_path_to(n)))
+			out.sort();return out
+		var bodies := func():
+			var out: Array=[]
+			for n in game.building.content.roots[floor+1].find_children("*","CollisionObject3D",true,false):
+				if n.can_process() or n.process_mode!=Node.PROCESS_MODE_DISABLED:out.append(str(n.get_path()))
+			return out.size()
+		var before_vis: Array=shown.call();var before_units: int=fs.records[floor+1].preview_units;var before_pick: int=fs.records[floor+1].pickables.size()
 		var t := Time.get_ticks_usec();fs.records[floor+1].needs_refresh=true;fs._refresh()
 		experiments["residency_refresh_ms"]=snappedf((Time.get_ticks_usec()-t)/1000.0,.1)
+		var after_vis: Array=shown.call()
+		experiments["incremental_vs_full"]={"visible_meshes_incremental":before_vis.size(),"visible_meshes_full":after_vis.size(),
+			"same_visible_set":before_vis==after_vis,"only_incremental":before_vis.filter(func(x):return not x in after_vis).slice(0,25),
+			"only_full":after_vis.filter(func(x):return not x in before_vis).slice(0,10),"preview_units":[before_units,fs.records[floor+1].preview_units],
+			"pickables_incremental":before_pick,"mode":fs.records[floor+1].mode}
 		t=Time.get_ticks_usec();fs.records[floor+1].refresh_pickables()
 		experiments["refresh_pickables_ms"]=snappedf((Time.get_ticks_usec()-t)/1000.0,.1)
 	for term in ["dice","brick"]:

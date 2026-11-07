@@ -23,6 +23,20 @@ func set_mode(next: String) -> void:
 	root.visible=mode=="preview"
 	if mode=="preview": _preview()
 
+## One new work on this floor (floor_stream._built): its pickables, and paused / filtered for the preview like the rest,
+## without walking the floor again.
+func adopt(unit: Node3D) -> void:
+	for node in unit.find_children("*","RigidBody3D",true,false):
+		if node.has_method("is_picked_up"): pickables.append(node)
+	if mode=="live": return
+	_capture_and_pause(unit)
+	if mode!="preview": return
+	var artifact := unit.get_node_or_null("Artifact")
+	if artifact!=null and "part_defaults" in artifact:
+		for part in artifact.get_children():
+			if part is Node3D: _show_unit(part)
+	else: _show_unit(unit)
+
 func refresh_pickables() -> void:
 	pickables.clear()
 	for node in root.find_children("*","RigidBody3D",true,false):
