@@ -1,4 +1,5 @@
 extends "res://tools/probes/void_game_probe.gd"
+const TimelineWalkLib := preload("res://commons/void/timeline_walk.gd")
 ## THE TIMELINE IN THE TOWER (2026-11-07): on each floor the main works carry their timeline numbers on the slab,
 ## and a floor without a hand-made route shows the walk in number order. Built in the actual tower from
 ## commons/data/artifact_timeline_walk.json and photographed from above (orthographic, under the slab overhead)
@@ -35,7 +36,7 @@ func check_floor(f: int, expect: Dictionary) -> void:
 	var stops := walk.find_children("Stop_*", "Node3D", false, false)
 	check("floor %d: %d number captions for %d main works" % [f, stops.size(), expect.stops.size()], stops.size() == expect.stops.size())
 	var first: Dictionary = expect.stops[0]
-	var cap: Node3D = walk.get_node("Stop_%04d" % int(first.n))
+	var cap: Node3D = walk.get_node(TimelineWalkLib.stop_name(first))
 	var to_work := Vector3(float(first.at[0]), 0, float(first.at[1])) - Vector3(cap.position.x, 0, cap.position.z)
 	var top := -cap.global_basis.z; top.y = 0
 	check("floor %d: #%d reads toward its work (%.0f deg off)" % [f, int(first.n), rad_to_deg(top.angle_to(to_work))], to_work.length() < .01 or top.angle_to(to_work) < .05)
@@ -45,7 +46,7 @@ func check_floor(f: int, expect: Dictionary) -> void:
 	var space := game.get_world_3d().direct_space_state
 	var buried := []
 	for stop in expect.stops:
-		var p := cap.get_parent().get_node("Stop_%04d" % int(stop.n)).global_position as Vector3
+		var p := cap.get_parent().get_node(TimelineWalkLib.stop_name(stop)).global_position as Vector3
 		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(p + Vector3(0, 1.5, 0), p - Vector3(0, .5, 0)))
 		if not hit.is_empty() and hit.position.y > p.y + .005: buried.append("#%d %.2f m under %s" % [int(stop.n), hit.position.y - p.y, hit.collider.name])
 	check("floor %d: no caption lies under a walking surface %s" % [f, str(buried.slice(0, 4))], buried.is_empty())

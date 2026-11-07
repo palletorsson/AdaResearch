@@ -14,6 +14,13 @@ AUTHORED (edit here or in /artifact-timeline):  commons/data/artifact_timeline.j
                  Not numbered; shown smaller. Props are keyed "prop:<kind>".
     removed      taken off the path: {"key", "reason", "at"}. The tower is NOT edited by this
                  tool; a removed work still standing in the tower is reported until it is taken out.
+    form         (optional, on main and environment rows - Palle, 2026-11-07: "differentiate between artifacts and
+                 collections ... understand what artifacts are associative children of a base artifact ... children
+                 share base number") {"kind": "base"|"child"|"collection", "of": <the base's key, a child>,
+                 "term": <its commons/modular/terms.json term>, "op": array|times|assemblage|collation|set (a
+                 collection), "algorithmic": true when the collection IS the algorithm (main track) - false: an
+                 environment collection, "guessed": true until confirmed on the page}. A child whose base is a numbered
+                 main row shares the base's number: #0412.a, .b ... in its order on the track.
 
 DERIVED (rebuilt, never edit):  ada_run/artifact_timeline_view.json  - what the page reads.
     For each row: where it stands in the tower (floor, placement id, the nearest stop of that
@@ -24,6 +31,7 @@ DERIVED (rebuilt, never edit):  ada_run/artifact_timeline_view.json  - what the 
     python tools/artifact_timeline.py seed [--force]   # first version from the tower as it stands
     python tools/artifact_timeline.py view             # rebuild the derived view
     python tools/artifact_timeline.py check [--markdown]
+    python tools/artifact_timeline.py forms [--refresh]   # guess the missing forms (--refresh: re-guess the guessed)
         exit code = unfiled tower works + main works with no place in the tower
                     + removed works still standing (the three accounting failures)
 """
@@ -77,8 +85,11 @@ def registry() -> dict:
             continue
         for k, v in arts.items():
             if isinstance(v, dict) and k not in out:
+                term = None
+                if "modular/composite.tscn" in str(v.get("scene", "")):
+                    term = (v.get("default_params") or {}).get("term") or k.removeprefix("mod_")
                 out[k] = {"title": v.get("name") or k, "scene": v.get("scene", ""), "category": v.get("category"),
-                          "file": p.name, "description": v.get("description", "")}
+                          "file": p.name, "description": v.get("description", ""), "term": term}
     cat = read(CATALOG)
     for k, v in cat.get("artifacts", {}).items():
         if k not in out:
@@ -240,6 +251,105 @@ def write_authored(doc: dict) -> None:
             lines.append(f"  {json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}{end}")
     lines.append("}")
     AUTHORED.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
+# ---- forms: base, child, collection (Palle, 2026-11-07) -------------------------------------------------------
+TERMS = ROOT / "commons/modular/terms.json"
+FORM_KINDS = ("base", "child", "collection")
+COLLECTION_OPS = ("array", "times", "assemblage", "collation", "set")
+# words in a key that name a collection of things (a guess, confirmed on the page); "room", "wall", "table" are not:
+# they are as often one work
+COLLECTION_WORDS = {"collection", "gallery", "array", "row", "rows", "stack", "shelf", "forest", "garden", "pile", "cluster"}
+ALGORITHMIC_CHAPTERS = {"array", "randomness", "noise", "tiling", "fractals", "lsystems", "swarms", "automata", "graphs"}
+
+
+def terms() -> dict:
+    try:
+        return read(TERMS).get("terms", {})
+    except (OSError, ValueError):
+        return {}
+
+
+def guess_form(key: str, floor, keys_on: dict, reg: dict, tm: dict) -> dict | None:
+    """a first form for a row, marked guessed. keys_on: floor -> main keys numbered there, in timeline order."""
+    term = (reg.get(key) or {}).get("term") or (key if key in tm else None)
+    if term and term in tm:
+        t = tm[term]
+        expr, op = str(t.get("expr", "")), str((t.get("build") or {}).get("op", ""))
+        if expr.startswith("association("):
+            base_term = (t.get("from") or [None])[0]
+            form = {"kind": "child", "term": term, "guessed": True}
+            if base_term:
+                cands = [k for k in keys_on.get(floor, []) if k != key and not k.startswith("mod_")
+                         and base_term in k.lower().split("_")]
+                exact = [k for k in cands if k == base_term or k.endswith("_" + base_term) or "primitive_" + base_term in k]
+                if exact or cands:
+                    form["of"] = (exact or cands)[0]
+                form["of_form"] = base_term
+            return form
+        if op in ("times", "array", "assemblage") or expr.split("(")[0] in ("array", "times"):
+            return {"kind": "collection", "term": term, "op": op if op in COLLECTION_OPS else "array",
+                    "algorithmic": t.get("chapter") in ALGORITHMIC_CHAPTERS, "guessed": True}
+        return {"kind": "base", "term": term, "guessed": True}
+    if COLLECTION_WORDS & set(key.lower().replace("prop:", "").split("_")):
+        return {"kind": "collection", "op": "set", "guessed": True}
+    return None
+
+
+def forms(refresh: bool) -> int:
+    doc, reg, tm = read(AUTHORED), registry(), terms()
+    keys_on = defaultdict(list)
+    for r in doc.get("main", []):
+        keys_on[r.get("floor")].append(r["key"])
+    changed = 0
+    for track in ("main", "environment"):
+        for r in doc.get(track, []):
+            if r.get("form") and not (refresh and r["form"].get("guessed")):
+                continue
+            g = guess_form(r["key"], r.get("floor"), keys_on, reg, tm)
+            if track == "environment" and g and g.get("kind") == "collection":
+                g["algorithmic"] = False
+            if track == "main" and g and g.get("kind") == "collection" and g.get("op") == "set":
+                g["algorithmic"] = True   # on the main track now: it stays there until the page says otherwise
+            if g and g != r.get("form"):
+                r["form"] = g
+                changed += 1
+    if changed:
+        write_authored(doc)
+    print(f"forms: {changed} rows given a guessed form")
+    return 0
+
+
+def numbering(main_rows: list) -> dict:
+    """key -> {"n": int|None, "label": "#0412" | "#0412.a", "base": key|None, "sort": float}. A child shares its base's
+    number when its base is a numbered main row (not itself a child); otherwise it keeps a number of its own."""
+    by_key = {r["key"]: r for r in main_rows}
+
+    def child_of(r):
+        f = r.get("form") or {}
+        if f.get("kind") != "child" or f.get("of") not in by_key or f.get("of") == r["key"]:
+            return None
+        base = by_key[f["of"]]
+        bf = base.get("form") or {}
+        if bf.get("kind") == "child" and bf.get("of") in by_key:
+            return None   # a child of a child keeps its own number
+        return f["of"]
+    out, n = {}, 0
+    for r in main_rows:
+        if child_of(r) is None:
+            n += 1
+            out[r["key"]] = {"n": n, "label": f"#{n:04d}", "base": None, "sort": float(n)}
+    letters = defaultdict(int)
+    for r in main_rows:
+        if r["key"] in out:
+            continue
+        of = child_of(r)
+        b = out[of]
+        i = letters[of]
+        letters[of] += 1
+        tag = chr(ord("a") + i) if i < 26 else f"z{i - 25}"
+        out[r["key"]] = {"n": None, "label": f"{b['label']}.{tag}", "base": of, "sort": b["n"] + (i + 1) / 100.0}
+    return out
 
 
 def exports_count() -> dict:
@@ -406,9 +516,12 @@ def build_walk(doc: dict, reg: dict) -> dict:
     frame = read(ROOT / "commons/void/layout.json")
     catalog = read(CATALOG)
     numbered = defaultdict(list)
-    for n, row in enumerate(doc.get("main", []), start=1):
+    num = numbering(doc.get("main", []))
+    for row in doc.get("main", []):
         if row.get("floor") is not None:
-            numbered[row["floor"]].append((n, row["key"]))
+            numbered[row["floor"]].append((num[row["key"]]["sort"], row["key"]))
+    for f in numbered:
+        numbered[f].sort()
     floors, stale = {}, []
     try:
         occupancy = read(OCCUPANCY).get("floors", {})
@@ -463,7 +576,7 @@ def build_walk(doc: dict, reg: dict) -> dict:
             towards = prev or (0.0, 0.0)
             stand = min(ring, key=lambda p: math.dist(p, towards) + .5 * math.dist(p, at)) if ring else None
             title = (reg.get(key) or {}).get("title", key)
-            stops.append({"n": n, "key": key, "id": here.get("id"), "title": title[:60], "at": [at[0], at[1]],
+            stops.append({"n": n, "label": num[key]["label"], "key": key, "id": here.get("id"), "title": title[:60], "at": [at[0], at[1]],
                           "stand": list(stand) if stand else [at[0], at[1]],
                           "y": walkgrid.height(stand) if stand else 0.0, "free": stand is not None,
                           **({"far": round(math.dist(stand, at), 1)} if far and stand else {})})
@@ -534,9 +647,22 @@ def build_view() -> dict:
                 "registered": key in reg, "places": places, "path": cp.get(key), "exports": ex.get(key, 0)}
 
     main, gaps = [], defaultdict(list)
-    for n, row in enumerate(doc.get("main", []), start=1):
-        e = {**describe(row["key"]), "n": n, "floor": row.get("floor"), "note": row.get("note", "")}
+    num = numbering(doc.get("main", []))
+    children = defaultdict(list)
+    for row in doc.get("main", []):
+        if num[row["key"]]["base"]:
+            children[num[row["key"]]["base"]].append(row["key"])
+    for row in doc.get("main", []):
+        nb = num[row["key"]]
+        n = nb["label"]
+        e = {**describe(row["key"]), "n": nb["n"], "label": nb["label"], "base": nb["base"], "children": children.get(row["key"], []),
+             "form": row.get("form"), "floor": row.get("floor"), "note": row.get("note", "")}
         flags = []
+        form = row.get("form") or {}
+        if form.get("kind") == "child" and not nb["base"]:
+            flags.append(f"its base ({form.get('of') or form.get('of_form') or '?'}) is not a numbered main work")
+        if form.get("guessed"):
+            flags.append("form guessed")
         if not e["places"]:
             flags.append("not in the tower")
         else:
@@ -555,9 +681,10 @@ def build_view() -> dict:
             flags.append("no registry entry")
         e["flags"] = flags
         for f in flags:
-            gaps[f.split(",")[0] if f.startswith("numbered") else f].append(n)
+            gaps[f.split(",")[0] if f.startswith("numbered") else ("its base is not a numbered main work" if f.startswith("its base") else f)].append(n)
         main.append(e)
-    env = [{**describe(r["key"]), "why": r.get("why", "")} for r in doc.get("environment", [])]
+    env = [{**describe(r["key"]), "why": r.get("why", ""), "form": r.get("form"),
+            "lane": "collections" if (r.get("form") or {}).get("kind") == "collection" else "works"} for r in doc.get("environment", [])]
     removed = [{**describe(r["key"]), "reason": r.get("reason", ""), "at": r.get("at")} for r in doc.get("removed", [])]
     filed = {r["key"] for r in doc.get("main", []) + doc.get("environment", []) + doc.get("removed", [])}
     unfiled = [describe(k) for k in sorted(tw, key=lambda k: (min(p["floor"] for p in tw[k]), k)) if k not in filed]
@@ -569,7 +696,12 @@ def build_view() -> dict:
     catalogue = sorted(({"key": k, "title": (reg.get(k) or {}).get("title", k), "in_tower": k in tw, "filed": k in filed,
                          "placeable": k in placeable}
                         for k in catalogue_keys), key=lambda c: c["key"])
-    counts = {"main": len(main), "environment": len(env), "removed": len(removed), "unfiled": len(unfiled),
+    counts = {"main": len(main), "numbered": sum(1 for e in main if e["n"] is not None),
+              "children": sum(1 for e in main if e["base"]),
+              "main_collections": sum(1 for e in main if (e["form"] or {}).get("kind") == "collection"),
+              "environment": len(env), "environment_collections": sum(1 for e in env if e["lane"] == "collections"),
+              "forms_guessed": sum(1 for e in main + env if (e.get("form") or {}).get("guessed")),
+              "removed": len(removed), "unfiled": len(unfiled),
               "removed_still_standing": len(standing), "duplicates": len(dup),
               "tower_works": len(tw), "catalogue": len(catalogue),
               **{"gap: " + k: len(v) for k, v in sorted(gaps.items())}}
@@ -805,6 +937,20 @@ def save(text: str) -> int:
                           "conflict": True, "current": cur.get("edited_at") or cur.get("seeded_at")}))
         return 4
 
+    def clean_form(f):
+        if not isinstance(f, dict) or f.get("kind") not in FORM_KINDS:
+            return None
+        out = {"kind": f["kind"]}
+        for k in ("of", "term", "of_form"):
+            if isinstance(f.get(k), str) and f[k].strip():
+                out[k] = f[k].strip()
+        if f["kind"] == "collection":
+            out["op"] = f.get("op") if f.get("op") in COLLECTION_OPS else "set"
+            out["algorithmic"] = bool(f.get("algorithmic"))
+        if f.get("guessed"):
+            out["guessed"] = True
+        return out
+
     def clean(rows, fields):
         out = []
         for r in rows if isinstance(rows, list) else []:
@@ -817,13 +963,17 @@ def save(text: str) -> int:
                             row[f] = v
                     elif f == "floor" and (isinstance(v, int) or v is None):
                         row[f] = v
+                    elif f == "form":
+                        cf = clean_form(v)
+                        if cf:
+                            row[f] = cf
                     elif f != "floor" and isinstance(v, str) and v.strip():
                         row[f] = v.strip()
                 out.append(row)
         return out
 
-    main_rows = clean(body.get("main"), ["floor", "note"])
-    env_rows = clean(body.get("environment"), ["why"])
+    main_rows = clean(body.get("main"), ["floor", "note", "form"])
+    env_rows = clean(body.get("environment"), ["why", "form"])
     rem_rows = clean(body.get("removed"), ["reason", "at", "placements"])
     keys = [r["key"] for r in main_rows + env_rows + rem_rows]
     twice = sorted({k for k in keys if keys.count(k) > 1})
@@ -849,6 +999,10 @@ def main(argv: list) -> int:
         return 0
     if cmd == "check":
         return min(check("--markdown" in argv), 255)
+    if cmd == "forms":
+        forms("--refresh" in argv)
+        write_view()
+        return 0
     if cmd == "plan":
         # bytes, never print(): Windows stdout is cp1252 and would re-encode every non-ASCII label in rooms.json
         sys.stdout.buffer.write(json.dumps(plan(json.loads(sys.stdin.buffer.read().decode("utf-8"))), ensure_ascii=False).encode("utf-8"))

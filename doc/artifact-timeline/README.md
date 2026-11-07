@@ -114,3 +114,33 @@ know them. So the floor is now measured in the built game:
   cell as its stand (`far`: the distance), so its number still lies where it can be seen.
 - Result over the whole tower: 1,079 stops, every one on a free measured cell; 23 stops on 11 floors the walk
   cannot reach (closed rooms, annexes) - flagged on the page as "the walk cannot reach it".
+
+## Base, child, collection (2026-11-07)
+
+Palle: "we need to differentiate between artifacts and collections ... part of the main track if they exemplify an
+algorithm, like arrays of things or random collations ... sometimes the collections are just an example and part of
+the environment ... we should also be able to understand what artifacts are associative children of a base artifact"
+- and: "children share base number".
+
+Every main and environment row may carry a `form`:
+
+| kind | means | on the timeline |
+|---|---|---|
+| `base` | one work (with its grammar `term` when commons/modular/terms.json describes it) | a numbered square |
+| `child` | `association(config(base))`: a thing recognised in a base form - `of` names the base's key | a small letter under its base, sharing its number: `#0095.a` |
+| `collection` | many things: `op` array, times, assemblage, collation or set; `algorithmic` true = the collection IS the algorithm | main track: a double-framed number; `algorithmic: false`: the environment collections lane |
+
+`python tools/artifact_timeline.py forms` guesses the missing forms (`--refresh` re-guesses the ones still marked
+`guessed`): a work the grammar describes takes its term's operator (`association(...)` -> child, `times`/`array`/
+`assemblage` -> collection); a child's base is guessed as the first numbered work on its floor whose key names the base
+form (`void_primitive_cube` for the cube's dice, cardboard box, ...); otherwise a collection is guessed from words in the
+key (gallery, collection, array, row, stack, shelf, forest, garden, pile, cluster). Every guess is marked `guessed` and
+flagged on the page until a form is set there (Confirm).
+
+First pass: 74 forms guessed - 10 children under their bases (#0006 .a .b, #0026.a, #0067.a, #0095 .a-.f), 37 collections
+on the main track, 14 children whose base form has no work on their floor yet (they keep their own numbers, flagged).
+The walk file carries each stop's `label`; commons/void/timeline_walk.gd writes it on the slab (`#0095.a`).
+
+Why it matters (the grammar's compression): a child is its base plus a configuration, a collection is an operator over
+a base - the same expression the builder executes. A repeated collection is also what a MultiMesh draws as one mesh and
+a list of transforms: the next step (collections as MultiMesh) reads `op` from here.

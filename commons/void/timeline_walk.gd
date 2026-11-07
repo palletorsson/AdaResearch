@@ -37,6 +37,14 @@ static func build(host: Node3D, index: int) -> Node3D:
 			_line(root, lines[i], i)
 	return root
 
+## "#0095", or "#0095.a" for a child sharing its base's number (2026-11-07); an older walk file has no label.
+static func label_of(stop: Dictionary) -> String:
+	return str(stop.get("label", "#%04d" % int(stop.n)))
+
+## Sibling names must differ: a child's n is fractional (95.01), so the name comes from the label.
+static func stop_name(stop: Dictionary) -> String:
+	return "Stop_" + label_of(stop).trim_prefix("#").replace(".", "_")
+
 static func _caption(root: Node3D, stop: Dictionary) -> void:
 	var lift := LIFT + float(stop.get("y", 0.0))   # on the measured surface (a 2 cm mat), not under it
 	var stand := Vector3(float(stop.stand[0]), lift, float(stop.stand[1]))
@@ -45,13 +53,14 @@ static func _caption(root: Node3D, stop: Dictionary) -> void:
 	# lying on the slab, the top of the words toward the work: the reader stands on the words facing it
 	var yaw := atan2(-d.x, -d.z) if d.length() > .01 else 0.0
 	var holder := Node3D.new()
-	holder.name = "Stop_%04d" % int(stop.n)
+	holder.name = stop_name(stop)
 	holder.position = stand
 	holder.rotation.y = yaw
 	holder.set_meta("key", stop.key)
-	holder.set_meta("n", int(stop.n))
+	holder.set_meta("n", float(stop.n))
+	holder.set_meta("label", label_of(stop))
 	root.add_child(holder)
-	var number := _label("#%04d" % int(stop.n), .003, 8)
+	var number := _label(label_of(stop), .003, 8)
 	number.name = "Number"
 	number.position = Vector3(0, .002, -.62)   # ahead of the feet, toward the work
 	holder.add_child(number)
