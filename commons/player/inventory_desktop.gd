@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	match k.keycode:
 		KEY_TAB:
 			if not k.pressed:return
-			if get_tree().get_nodes_in_group("space_editors").any(func(n): return bool(n.get("player_inside"))):return   # inside a playground editor the belt is its jumbotron's
+			if get_tree().get_nodes_in_group("space_editors").any(func(n): return bool(n.get("player_inside")) and bool(n.get("hides_hand_menu"))):return   # an editor that hides the hand menu keeps the belt
 			if is_instance_valid(hand.lifted):hand.cancel_lift()
 			var id: String = hand.cycle(-1 if k.shift_pressed else 1)
 			_say("IN THE HAND / " + hand.name_of(id).to_upper() + ("" if id == "" else "\nF: place / hold F on it: move / X: take back"))

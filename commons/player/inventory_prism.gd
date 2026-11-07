@@ -198,8 +198,8 @@ func take_all_back() -> void:
 
 func _process(delta: float) -> void:
 	if left == null:return
-	# THE PLAYGROUND EDITOR (2026-11-06, Palle: "when we enter the glass playground editor the hand menu disappears"): inside
-	# a glass box in space mode the prism stays down and the wand hands the trigger to the box's own menu, the jumbotron
+	# THE PLAYGROUND EDITOR: an editor that hides the hand menu (none since the jumbotron went, 2026-11-06 - Palle: "refer
+	# the other prefab to the hand menu") keeps the prism down; otherwise the menu works in the box as anywhere
 	if in_space_editor():
 		if showing:_set_showing(false)
 		if ring != null:ring.visible = false
@@ -252,10 +252,11 @@ func _wrist_yaw(c: Node3D) -> float:
 	return snappedf(-clampf(roll, -90.0, 90.0) * 2.0, 15.0)
 
 ## The Void's left X (Palle: "I do not get any menu from any button"): the prism up until X again.
-## The player stands inside a playground editor (display.gd `space`): the hand menu steps aside.
+## The player stands inside a playground editor that hides the hand menu (`hides_hand_menu`): the menu steps aside.
+## The glass box (display.gd `space`) no longer does: it takes only the EMPTY hand (inventory_wand._space_editor).
 func in_space_editor() -> bool:
 	for n in get_tree().get_nodes_in_group("space_editors"):
-		if bool(n.get("player_inside")):return true
+		if bool(n.get("player_inside")) and bool(n.get("hides_hand_menu")):return true
 	return false
 
 func toggle() -> void:
@@ -305,7 +306,7 @@ func _on_right_pressed(button_name: String) -> void:
 			# the thing pointed at, if the hand placed it (Palle: "remove the object with the grip button") - in place
 			# mode or with the drum up; with the drum up and nothing pointed at, the last one. Otherwise the grip is the
 			# Void's grab.
-			if in_space_editor():wand.grip();return   # the playground editor: the grip puts the tool down
+			if in_space_editor() or wand.space_claims():wand.grip();return   # the playground editor: the grip takes away the piece under the aim
 			if not showing and not wand.placing():return
 			var taken: bool = wand.grip()
 			if not taken and showing:take_back();taken = true

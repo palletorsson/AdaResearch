@@ -128,54 +128,43 @@ func _physics_process(delta:float)->void:
 		test_active=false;feedback.text="NOT CAUGHT / the ball reached the chamber. Change the surface and test again."
 
 ## THE PLAYGROUND EDITOR (Palle, 2026-11-06). First: "use the glass box 3d space as the editing space ... non blocking
-## ... We take on the vr glasses and we enter the space as the space". Then, after playing: "The editing floor should be
-## at zero ... at the point floor we can only add points ... one triangle floor we can add triangles and quad. When we
-## add a quad we can start to add things on the place ... like health and danger ... in the menu we should have an
-## icon for the thing we can add at that level", "a jumbotron monitor editor menu that shows the option on each screen
-## in the ceiling of the glass. We click pick and can add the element ... when we enter the glass playground editor
-## the hand menu disappears", "the playground editor always have a grid on".
-## config `space: true` (+ `space_floor`: the Void floor, which opens the tools of commons/data/inventory/space_editor.json):
+## ... We take on the vr glasses and we enter the space as the space". Then: "The editing floor should be at zero ... at
+## the point floor we can only add points", "the playground editor always have a grid on". Then, after playing the
+## jumbotron: "the jumbotron does not work as interface ... point, wedge, triangle quad all have unique positions in the
+## grid so we could just have if we point at the position and fire when the element is created ... Remove the
+## jumbotron and refer the other prefab to the hand menu".
+## config `space: true` (+ `space_floor`: the Void floor, which opens the kinds of commons/data/inventory/space_editor.json):
 ##   - the table, the arc, the plate, the hand model and the visor dock go dark; the glass box stands on the slab at full
-##     scale (one address = WORLD_STEP = 2 m, a half address = 1 m, the hand's metre), its panes without colliders;
-##   - the GRID is always on: a faint dot at every node of the build volume, the nodes the current tool can fill lit;
-##   - the JUMBOTRON hangs from the box ceiling: four faces tilted down, the same tiles on each - one per tool, later ones
-##     dark with the floor that opens them; ray + trigger on a tile picks the tool;
-##   - ray + trigger into the space places the tool there (model.add, the record's own grammar); an ITEM tool (health,
-##     danger ...) places onto a finished horizontal quad, one per quad; SELECT takes a piece back and makes its kind
-##     the tool; the RUBBER erases;
-##   - INSIDE the box the editor has the hand: the hand menu (prism, belt) is hidden and the wand routes here
-##     (inventory_wand._space_editor); outside, the box is inert and the hand is the environment's.
+##     scale (one address = 2 m, a half address = 1 m, the hand's metre), its panes without colliders;
+##   - the GRID is always on: a faint dot at every node of the build volume, the nodes a ball can go to lit;
+##   - NO TOOLS: every piece has places of its own. The ray finds the first place it meets - a free node (BALL), the
+##     line between two balls (EDGE), the middle of a square closed by four edges (QUAD), the corner of two edges (a
+##     TRIANGLE, which brings its own diagonal), a floor cell (a WEDGE, rising away from you) - and shows that piece's
+##     ghost; the TRIGGER makes it. A placed piece the ray meets first lights red: the GRIP takes it away (when nothing
+##     still stands on it). Only the kinds this floor opens are offered;
+##   - THINGS come from the hand menu (health, danger, a crate, the pyramid ...), which stays up inside the box: with a
+##     thing in the hand the box steps aside and the hand places it as it does anywhere (inventory_wand).
 @export var space:=false
 const SPACE_SCALE:=1.0
-const SPACE_PICK:=.35
 const SPACE_REACH:=9.0
+const NODE_HIT:=.16       # metres: the ray meets a node this close to its centre
+const EDGE_HIT:=.10       # and an edge this close to its line (its middle 70 %: the ends are the balls')
+const QUAD_MIDDLE:=.25    # a closed square's middle, each way from its centre in the square's own 0-1 frame, is the quad's; the rest is its corners' triangles
 const SPACE_TABLE:="res://commons/data/inventory/space_editor.json"
-const ItemsLib=preload("res://commons/player/inventory_items.gd")
-const HandLib=preload("res://commons/player/inventory_hand.gd")
+const KIND_WORDS:={"point":"ball","rod":"edge","rod_short":"edge","diag":"diagonal","panel":"triangle","quad":"quad","wedge":"wedge","pyramid":"pyramid"}
 var space_floor:=20
-var space_tools:Array=[]           # the table's tools, in order
-var space_tool:=""                  # the current tool id: "" select, "rubber", or a table tool id
+var space_tools:Array=[]           # the table's rows: which kinds each floor opens
 var space_sockets:Node3D
 var space_grid:MultiMeshInstance3D
 var space_ghost:Node3D
-var space_items_root:Node3D
-var space_items:Array=[]            # [{item, quad}] - things placed onto quads
-var space_aimed:Dictionary={}       # the record a placement would add, or {}
-var space_aimed_index:=-1           # the placed record under the aim (select / rubber), or -1
-var space_aimed_item:=-1            # the placed item under the aim (select / rubber), or -1
-var space_aimed_quad:Dictionary={}  # the quad an item would stand on
-var space_aimed_solid:=-1          # a placed solid of the tool's kind under the aim: the trigger turns it
-var space_turn:=0                  # the quarter turn new solids are laid in (the last one turned)
-var space_hover_tile:=""            # the jumbotron tile under the aim
+var space_hover:Dictionary={}      # what the ray meets first: {make: [records]} or {remove: index}, with `at` (Output's frame)
 var space_notice:=""
 var space_guide:Label3D
 var space_ray:MeshInstance3D
-var jumbotron:Node3D
-var jumbo_bottom:=99.0   # the drum's lowest point and half width, in Output's frame: builds stay below it
-var jumbo_half:=0.0
-var tiles:Array=[]                  # [{id, node, mat, size, open}]
 var player_inside:=false
 var space_inside_override:=-1       # probes: -1 the player body decides, 0 / 1 forced
+var _ball_spots:Array=[]           # per edit: the free nodes a ball can go to
+var _edge_spots:Array=[]           # and the edges that can be laid
 
 func _enter_space()->void:
 	space=true;model_scale=SPACE_SCALE;visitor_scale=SPACE_SCALE;tier=3;prefabs_enabled=true
@@ -196,46 +185,40 @@ func _enter_space()->void:
 	Furniture.glass_cube(bay,CHAMBER,chamber_height,1.0)
 	for pane in bay.find_children("GlassPane*","MeshInstance3D",false,false):
 		for body in pane.find_children("*","StaticBody3D",true,false):body.free()
-	var label:=Kit.label(bay,"PLAYGROUND EDITOR / WALK IN / PICK ON THE SCREENS ABOVE",Vector3(0,.18,CHAMBER*.5+.018),26)
+	# Palle, 2026-11-06: "remove the block from the wall" - the service cassette and its vents at the back corners
+	for n in bay.get_children():
+		if String(n.name).begins_with("ServiceCassette") or String(n.name).begins_with("Vent"):n.free()
+	var label:=Kit.label(bay,"PLAYGROUND EDITOR / WALK IN / POINT AT A PLACE AND PULL / GRIP TAKES AWAY",Vector3(0,.18,CHAMBER*.5+.018),26)
 	label.modulate=Color("455657")
 	space_grid=MultiMeshInstance3D.new();space_grid.name="SpaceGrid";output.add_child(space_grid)
 	space_sockets=Node3D.new();space_sockets.name="SpaceSockets";output.add_child(space_sockets)
 	space_ghost=Node3D.new();space_ghost.name="SpaceGhost";output.add_child(space_ghost)
-	space_items_root=Node3D.new();space_items_root.name="SpaceItems";output.add_child(space_items_root)
 	space_ray=MeshInstance3D.new();space_ray.name="SpaceRay";space_ray.top_level=true;space_ray.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var rod:=CylinderMesh.new();rod.top_radius=.006;rod.bottom_radius=.006;rod.height=1.0;rod.radial_segments=6;rod.rings=1;space_ray.mesh=rod
 	var rm:=StandardMaterial3D.new();rm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;rm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;rm.no_depth_test=true;space_ray.material_override=rm
 	space_ray.visible=false;output.add_child(space_ray)
 	space_guide=Label3D.new();space_guide.name="SpaceGuide";space_guide.font_size=30;space_guide.pixel_size=.0022
 	space_guide.outline_size=10;space_guide.modulate=Color("17302e");space_guide.outline_modulate=Color(1,1,1,.85);space_guide.width=1000;space_guide.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-	space_guide.billboard=BaseMaterial3D.BILLBOARD_FIXED_Y;space_guide.position=Vector3(0,chamber_height-2.25,0);output.add_child(space_guide)
-	_build_jumbotron()
+	space_guide.billboard=BaseMaterial3D.BILLBOARD_FIXED_Y;space_guide.position=Vector3(0,chamber_height-.7,0);output.add_child(space_guide)
 	_load_space_build()
-	_load_space_items()
 	add_to_group("space_editors")
 	_redraw_space();_draw_grid();_refresh_space_sockets();_guide_state()
 
 # ── the progression ─────────────────────────────────────────────────────────────────────────────────────────────
 
-func tool_def(id:String)->Dictionary:
-	for t in space_tools:
-		if str(t.id)==id:return t
-	return {}
-
-func tool_open(id:String)->bool:
-	if id in ["","select","rubber"]:return true
-	var t:=tool_def(id)
-	return not t.is_empty() and int(t.get("from_floor",0))<=space_floor
-
-## A record kind is shown and edited here when an open tool lays it (the shared blueprint may carry later kinds).
+## A record kind is offered, shown and edited here when a row of the table this floor has reached lays it.
 func can_use(kind:String)->bool:
 	if not space:return super.can_use(kind)
 	for t in space_tools:
 		if kind in t.get("kinds",[]) and int(t.get("from_floor",0))<=space_floor:return true
 	return false
 
-func tool_kinds(id:String)->Array:return tool_def(id).get("kinds",[])
-func tool_item(id:String)->String:return str(tool_def(id).get("item",""))
+## The names of what this floor builds in the box (rows marked `hand` come from the hand menu instead).
+func open_labels()->Array:
+	var out:=[]
+	for t in space_tools:
+		if int(t.get("from_floor",0))<=space_floor and not bool(t.get("hand",false)):out.append(str(t.get("label",t.get("id",""))))
+	return out
 
 # ── the grid and the lit nodes ──────────────────────────────────────────────────────────────────────────────────
 
@@ -244,15 +227,16 @@ func space_point(r:Dictionary)->Vector3:
 
 func _node_world(v:Vector3)->Vector3:return v*output_unit()+fitted_offset
 
+## Output's frame -> addresses (the inverse of _node_world).
+func _address(local:Vector3)->Vector3:return (local-fitted_offset)/output_unit()
+
 func _fits_height(r:Dictionary)->bool:
 	var at:Vector3=Model.vec(r.at)
 	if at.y<0:return false
 	if r.has("end") and Model.vec(r.end).y<0:return false
-	var at_w:=space_point(r);var top:float=at_w.y+(.6 if Model.is_prefab(str(r.kind)) else .2)
-	if jumbotron!=null and absf(at_w.x)<jumbo_half+.3 and absf(at_w.z)<jumbo_half+.3:return top<=jumbo_bottom-.15   # under the drum
-	return top<=chamber_height-.3
+	return space_point(r).y+(1.1 if Model.is_prefab(str(r.kind)) else .2)<=chamber_height-.3
 
-## Every node of the build volume as a faint dot, whatever the tool: the grid is always on.
+## Every node of the build volume as a faint dot: the grid is always on.
 func _draw_grid()->void:
 	var dot:=SphereMesh.new();dot.radius=.016;dot.height=.032;dot.radial_segments=6;dot.rings=3
 	var mm:=MultiMesh.new();mm.transform_format=MultiMesh.TRANSFORM_3D;mm.mesh=dot
@@ -260,156 +244,33 @@ func _draw_grid()->void:
 	for xi in 7:
 		for yi in 7:
 			for zi in 7:
-				var v:=Vector3(-1+xi*.5,yi*.5,-1+zi*.5)
-				var at:=_node_world(v)
-				var under:bool=absf(at.x)<jumbo_half+.3 and absf(at.z)<jumbo_half+.3
-				if at.y<=(jumbo_bottom-.15 if under else chamber_height-.3):points.append(at)
+				var at:=_node_world(Vector3(-1+xi*.5,yi*.5,-1+zi*.5))
+				if at.y<=chamber_height-.3:points.append(at)
 	mm.instance_count=points.size()
 	for i in points.size():mm.set_instance_transform(i,Transform3D(Basis.IDENTITY,points[i]))
 	space_grid.multimesh=mm
 	var m:=Kit.material(Color(.25,.42,.45,.35));m.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;m.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
 	space_grid.material_override=m;space_grid.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-func _candidates()->Array[Dictionary]:
-	var out:Array[Dictionary]=[]
-	if space_tool in ["","rubber"] or tool_item(space_tool)!="" or not tool_open(space_tool):return out
-	for kind in tool_kinds(space_tool):
-		if Model.is_prefab(kind):
-			# THE CELL SOLID (2026-11-06): one 1 m cell between four balls, not a 2 m bay over four of them
-			for xi in 6:
-				for zi in 6:
-					var c:=Model.canonical({"kind":kind,"at":Model.arr(Vector3(-1+xi*.5,0,-1+zi*.5)),"turn":[0,space_turn,0],"span":.5})
-					if not c.is_empty() and model.prefab_fits(c):out.append(c)
-			continue
-		for r in model.candidates(kind,tier):
-			if _fits_height(r):out.append(r)
-	return out
-
-## The nodes the current tool can fill, lit; for an item, the quads it can stand on.
+## After every edit: where a ball and an edge can go now, and the free nodes lit.
 func _refresh_space_sockets()->void:
+	_ball_spots=[];_edge_spots=[]
+	if not space:return
+	if can_use("point"):
+		for r in model.candidates("point",tier):
+			if _fits_height(r):_ball_spots.append(r)
+	for k in ["rod_short","rod"]:
+		if can_use(k):
+			for r in model.candidates(k,tier):
+				if _fits_height(r):_edge_spots.append(r)
 	if space_sockets==null:return
 	clear_children(space_sockets)
-	var spots:Array=[]
-	if tool_item(space_tool)!="" and tool_open(space_tool):
-		for q in _free_quads():spots.append(space_point(q))
-	else:
-		for r in _candidates().slice(0,160):spots.append(space_point(r))
-	for at in spots:
-		var marker:=MeshInstance3D.new();var sphere:=SphereMesh.new();sphere.radius=.06;sphere.height=.12;sphere.radial_segments=10;sphere.rings=5
-		marker.mesh=sphere;var m:=Kit.material(Color(1,.96,.85,.7));m.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;m.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
-		marker.material_override=m;space_sockets.add_child(marker);marker.position=at
+	for r in _ball_spots.slice(0,200):
+		var marker:=MeshInstance3D.new();var sphere:=SphereMesh.new();sphere.radius=.035;sphere.height=.07;sphere.radial_segments=10;sphere.rings=5
+		marker.mesh=sphere;var m:=Kit.material(Color(1,.9,.6,.4));m.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;m.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
+		marker.material_override=m;space_sockets.add_child(marker);marker.position=_node_world(Model.vec(r.at))+Vector3(0,.05,0)   # lifted: a floor node's dot is not buried in the floor
 
-# ── the jumbotron ───────────────────────────────────────────────────────────────────────────────────────────────
-
-const TILE:=Vector2(.40,.34)
-const FACE_COLS:=5
-const JUMBO_SCALE:=.75   # Palle: "the monitor should be a bit smaller"
-const JUMBO_TILT:=28.0
-
-## Four faces hung from the box ceiling, tilted down toward the visitor, the same tiles on each: SELECT, RUBBER, then
-## the table's tools; a tool its floor has not opened shows dark with that floor.
-func _build_jumbotron()->void:
-	jumbotron=Node3D.new();jumbotron.name="Jumbotron";output.add_child(jumbotron)
-	jumbotron.position=Vector3(0,chamber_height-.8,0)
-	var ids:Array=["select","rubber"]
-	for t in space_tools:ids.append(str(t.id))
-	var rows:int=ceili(float(ids.size())/FACE_COLS)
-	var face_w:float=FACE_COLS*TILE.x+.16;var face_h:float=rows*TILE.y+.22
-	var hub:=MeshInstance3D.new();var hb:=BoxMesh.new();hb.size=Vector3(face_w*.6,face_h*.7,face_w*.6);hub.mesh=hb;hub.material_override=Kit.material(Color("1f2629"));jumbotron.add_child(hub)
-	var stem:=MeshInstance3D.new();var sb:=BoxMesh.new();sb.size=Vector3(.08,.95,.08);stem.mesh=sb;stem.position.y=face_h*.4+.47;stem.material_override=Kit.material(Color("3a4448"));jumbotron.add_child(stem)
-	jumbotron.scale=Vector3.ONE*JUMBO_SCALE
-	jumbo_bottom=jumbotron.position.y-face_h*.62*JUMBO_SCALE;jumbo_half=(face_w*.5+.1)*JUMBO_SCALE
-	_corner_triangles(face_w,face_h)
-	tiles.clear()
-	for f in 4:
-		var face:=Node3D.new();face.name="Face%d"%f;jumbotron.add_child(face)
-		face.rotation.y=f*PI*.5
-		face.position=Vector3(0,0,face_w*.5+.04).rotated(Vector3.UP,f*PI*.5)   # the screens meet at the corners; closer in, a screen's outer tiles stood in front of its neighbour's
-		face.rotate_object_local(Vector3.RIGHT,deg_to_rad(JUMBO_TILT))   # the screen faces down toward someone standing in the box
-		var back:=MeshInstance3D.new();var bb:=BoxMesh.new();bb.size=Vector3(face_w,face_h,.05);back.mesh=bb;back.position.z=-.03;back.material_override=Kit.material(Color("161b1d"));face.add_child(back)
-		for i in ids.size():
-			var c:int=i%FACE_COLS;var r:int=floori(float(i)/FACE_COLS)
-			var at:=Vector3(-face_w*.5+.08+TILE.x*(c+.5),face_h*.5-.11-TILE.y*(r+.5),0)
-			tiles.append(_tile(face,str(ids[i]),at))
-	_paint_tiles()
-
-func _tile(face:Node3D,id:String,at:Vector3)->Dictionary:
-	var node:=Node3D.new();node.name="Tile_"+id;face.add_child(node);node.position=at
-	var plate:=MeshInstance3D.new();var pb:=BoxMesh.new();pb.size=Vector3(TILE.x-.04,TILE.y-.04,.02);plate.mesh=pb
-	var mat:=StandardMaterial3D.new();mat.albedo_color=Color("2f3c41");mat.emission_enabled=true;mat.emission=Color("000000");plate.material_override=mat;node.add_child(plate)
-	var open:=tool_open(id)
-	var icon:=_icon(id,open);if icon!=null:node.add_child(icon);icon.position=Vector3(0,.03,.06)
-	var name:String={"select":"SELECT","rubber":"RUBBER"}.get(id,str(tool_def(id).get("label",id)))
-	if not open:name+="\nFLOOR %d"%int(tool_def(id).get("from_floor",0))
-	var words:=Label3D.new();words.text=name;words.font_size=30;words.pixel_size=.0018;words.width=200;words.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;words.outline_size=6
-	words.modulate=Color("eef7f4") if open else Color("7d8a8c");words.outline_modulate=Color("101416");words.position=Vector3(0,-TILE.y*.33,.025);node.add_child(words)
-	return {"id":id,"node":node,"mat":mat,"open":open}
-
-## A tile's icon: the record itself at icon size, or the item's own miniature; dimmed when not yet open.
-func _icon(id:String,open:bool)->Node3D:
-	var holder:=Node3D.new()
-	var record:Dictionary={}
-	match id:
-		"select":record={}
-		"rubber":
-			var box:=MeshInstance3D.new();var bm:=BoxMesh.new();bm.size=Vector3(.14,.06,.08);box.mesh=bm;box.material_override=Kit.material(Color("ee8fb8"));holder.add_child(box);return holder
-		_:
-			var kinds:Array=tool_kinds(id)
-			if not kinds.is_empty():
-				var k:String=str(kinds[-1])
-				match k:
-					"point":record={"kind":"point","at":[0,0,0]}
-					"rod","rod_short":record={"kind":"rod","at":[0,0,0],"end":[1,0,0]}
-					"diag":record={"kind":"diag","at":[0,0,0],"end":[1,1,0]}
-					"panel":record={"kind":"panel","at":[0,0,0],"plane":[0,1],"half":0}
-					"quad":record={"kind":"quad","at":[0,0,0],"plane":[0,1]}
-					"wedge","pyramid":record={"kind":k,"at":[0,0,0],"turn":[0,0,0]}
-	if id=="select":
-		var ray:=MeshInstance3D.new();var cm:=CylinderMesh.new();cm.top_radius=.012;cm.bottom_radius=.012;cm.height=.16;ray.mesh=cm;ray.rotation.z=PI*.25;ray.material_override=Kit.material(Color("f59e0b"));holder.add_child(ray)
-		return holder
-	if not record.is_empty():
-		var mesh:=visual(record,.13,material_phase);holder.add_child(mesh);mesh.transform=Model.pose(record);mesh.position*=.13
-		mesh.position-=Vector3(.065 if record.has("end") or record.kind in ["panel","quad"] else 0,.065 if record.kind in ["panel","quad","diag"] else 0,0)
-		if not open:mesh.material_override=Kit.material(Color("4a5355"))
-		return holder
-	var item:=tool_item(id)
-	if item!="":
-		var it:=ItemsLib.item(item);var path:=ItemsLib.scene_for(str(it.get("token","")))
-		if path!="" and ResourceLoader.exists(path):
-			var n:Node=(load(path) as PackedScene).instantiate()
-			if n is Node3D:
-				var cfg:=ItemsLib.config_for(it,{})
-				for k in cfg:n.set_meta("config_%s"%str(k),cfg[k])
-				if n.has_method("apply_grid_config"):n.apply_grid_config(cfg)
-				HandLib._make_inert(n);n.ready.connect(func():HandLib._make_inert(n),CONNECT_ONE_SHOT)
-				var size:Array=it.get("size",[.3,.3,.3]);var side:float=maxf(maxf(float(size[0]),float(size[1])),float(size[2]))
-				(n as Node3D).scale=Vector3.ONE*(.16/maxf(side,.01));holder.add_child(n);(n as Node3D).position.y=-.06
-	return holder
-
-func _paint_tiles()->void:
-	for t in tiles:
-		var mat:StandardMaterial3D=t.mat
-		if not t.open:mat.albedo_color=Color("1c2225");mat.emission=Color.BLACK
-		elif t.id==space_tool or (t.id=="select" and space_tool==""):mat.albedo_color=Color("b8741a");mat.emission=Color("f59e0b");mat.emission_energy_multiplier=.6
-		elif t.id==space_hover_tile:mat.albedo_color=Color("3f5a60");mat.emission=Color("5fb3c0");mat.emission_energy_multiplier=.35
-		else:mat.albedo_color=Color("4b6168");mat.emission=Color("1f3a40");mat.emission_energy_multiplier=.4
-
-## The tile the aim passes through, or "" - tested in each tile's own frame (the faces are turned and tilted).
-func _tile_under(s:Array)->String:
-	var best:="";var nearest:=INF
-	for t in tiles:
-		var node:Node3D=t.node;var inv:=node.global_transform.affine_inverse()
-		var a:Vector3=inv*(s[0] as Vector3);var b:Vector3=inv*(s[1] as Vector3)
-		if absf(b.z-a.z)<.0001:continue
-		var k:=(0.0-a.z)/(b.z-a.z)
-		if k<0 or k>1:continue
-		var p:=a+(b-a)*k
-		if absf(p.x)<=TILE.x*.5 and absf(p.y)<=TILE.y*.5:
-			var d:=(s[0] as Vector3).distance_to(node.global_position)
-			if d<nearest:nearest=d;best=str(t.id)
-	return best
-
-# ── inside: the editor has the hand ─────────────────────────────────────────────────────────────────────────────
+# ── inside: the editor has the empty hand ───────────────────────────────────────────────────────────────────────
 
 func _update_inside()->void:
 	var inside:=false
@@ -423,102 +284,176 @@ func _update_inside()->void:
 		player_inside=inside
 		if not inside:space_hide()
 
-## The wand asks each frame: is the hand this editor's? While the player stands inside the box.
-func space_active(_hand:Node,aim:Node3D)->bool:
-	return space and _interactive and aim!=null and player_inside
+## The wand asks each frame: is the hand this editor's? While the player stands inside the box with nothing in the
+## hand - a thing chosen on the hand menu is the hand's to place, as anywhere.
+func space_active(hand:Node,aim:Node3D)->bool:
+	if not (space and _interactive and aim!=null and player_inside):return false
+	if hand==null:return true
+	var holding=hand.get("current")
+	return holding==null or str(holding)==""
 
 func space_hide()->void:
-	space_aimed={};space_aimed_index=-1;space_aimed_item=-1;space_aimed_quad={}
+	space_hover={}
 	if space_ghost!=null:clear_children(space_ghost)
 	if space_ray!=null:space_ray.visible=false
-	if space_hover_tile!="":space_hover_tile="";_paint_tiles()
 
-func _aim_segment(aim:Node3D)->Array:
-	var from:Vector3=aim.global_position;return [from,from-aim.global_basis.z*SPACE_REACH]
+# ── what the ray meets ──────────────────────────────────────────────────────────────────────────────────────────
 
-static func _line_distance(p:Vector3,a:Vector3,b:Vector3)->float:
-	var d:=b-a;var t:=clampf((p-a).dot(d)/maxf(d.length_squared(),.0001),0.0,1.0)
-	return p.distance_to(a+d*t)
+## The aim as a segment in Output's frame: [from, unit direction, length].
+func _aim_local(aim:Node3D)->Array:
+	var a:=output.to_local(aim.global_position);var b:=output.to_local(aim.global_position-aim.global_basis.z*SPACE_REACH)
+	var length:=a.distance_to(b);return [a,(b-a)/maxf(length,.0001),length]
 
-## Horizontal quads with nothing placed on them yet.
-func _free_quads()->Array:
-	var out:=[]
-	for r in model.records:
-		if r.kind=="quad" and r.plane==[0,2] and can_use("quad"):
-			var taken:=false
-			for it in space_items:
-				if it.quad==r:taken=true
-			if not taken:out.append(r)
-	return out
+## Distance along the ray to its closest approach to `c`, if that is within `r`; else INF.
+static func _ray_sphere(a:Vector3,d:Vector3,length:float,c:Vector3,r:float)->float:
+	var s:=clampf((c-a).dot(d),0.0,length)
+	return s if (a+d*s).distance_to(c)<=r else INF
 
-## What the trigger would do now, shown before the pull: the hovered tile, the ghost of the piece, the quad lit for an
-## item, or the placed piece (or item) the select / rubber would take.
-func space_update(aim:Node3D,_hand:Node=null)->void:
-	var s:=_aim_segment(aim)
-	clear_children(space_ghost);space_aimed={};space_aimed_index=-1;space_aimed_item=-1;space_aimed_quad={};space_aimed_solid=-1
-	var hover:=_tile_under(s)
-	if hover!=space_hover_tile:space_hover_tile=hover;_paint_tiles()
-	if hover!="":
-		var t:Dictionary={}
-		for x in tiles:
-			if x.id==hover:t=x
-		_draw_ray(s[0],(t.node as Node3D).global_position if not t.is_empty() else s[1],Color("5fb3c0"));_guide_state();return
-	var target:Vector3=s[1];var colour:=Color(1,1,1,.35)
-	if space_tool in ["","rubber"]:
-		var best:=-1;var best_item:=-1;var distance:=SPACE_PICK
-		for i in model.records.size():
-			if not can_use(model.records[i].kind):continue
-			var d:=_line_distance(output.to_global(space_point(model.records[i])),s[0],s[1])
-			if d<distance:distance=d;best=i
-		for i in space_items.size():
-			var node:Node3D=space_items[i].get("node")
-			if node==null:continue
-			var d:=_line_distance(node.global_position+Vector3(0,.2,0),s[0],s[1])
-			if d<distance:distance=d;best_item=i;best=-1
-		space_aimed_index=best;space_aimed_item=best_item
-		var tint:=Color("ef7974") if space_tool=="rubber" else Color("f59e0b")
-		if best>=0:
-			var r:Dictionary=Model.fit_record(model.records[best],visible_records())
-			var mesh:=visual(r,output_unit(),material_phase);mesh.material_override=Kit.material(tint);space_ghost.add_child(mesh);mesh.transform=copy_pose(r)
-			target=output.to_global(space_point(model.records[best]));colour=tint
-		elif best_item>=0:
-			target=(space_items[best_item].node as Node3D).global_position+Vector3(0,.2,0);colour=tint
-	elif tool_item(space_tool)!="":
-		var best_q:Dictionary={};var distance:=SPACE_PICK*2.5
-		for q in _free_quads():
-			var d:=_line_distance(output.to_global(space_point(q)),s[0],s[1])
-			if d<distance:distance=d;best_q=q
-		space_aimed_quad=best_q
-		if not best_q.is_empty():
-			target=output.to_global(space_point(best_q));colour=Color("f59e0b")
-			var mark:=MeshInstance3D.new();var pm:=BoxMesh.new();pm.size=Vector3(output_unit()*.9,.03,output_unit()*.9);mark.mesh=pm
-			var mm:=Kit.material(Color(1,.7,.2,.35));mm.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;mm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;mark.material_override=mm
-			space_ghost.add_child(mark);mark.position=space_point(best_q)+Vector3(0,.03,0)
+## Distance along the ray to where it passes within `r` of the segment p-q (its middle part only), else INF.
+static func _ray_segment(a:Vector3,d:Vector3,length:float,p:Vector3,q:Vector3,r:float,ends:=.15)->float:
+	var u:=q-p;var w:=a-p;var b:=d.dot(u);var c:=u.dot(u);var dd:=d.dot(w);var e:=u.dot(w)
+	var den:=c-b*b
+	if c<.000001 or absf(den)<.000001:return INF   # parallel to the ray: it is met at a ball, not along its length
+	var t:=clampf((e-b*dd)/den,0.0,1.0)
+	var s:=clampf((p+u*t-a).dot(d),0.0,length)
+	if t<ends or t>1.0-ends:return INF
+	return s if (a+d*s).distance_to(p+u*t)<=r else INF
+
+## Where the ray crosses the square at P0 spanned by U and V: [distance, x, y] (x, y in the square's 0-1 frame), or [].
+static func _ray_square(a:Vector3,d:Vector3,length:float,p0:Vector3,u:Vector3,v:Vector3)->Array:
+	var n:=u.cross(v);var den:=n.dot(d)
+	if absf(den)<.000001:return []
+	var s:=n.dot(p0-a)/den
+	if s<0 or s>length:return []
+	var h:=a+d*s-p0;var x:=h.dot(u)/u.length_squared();var y:=h.dot(v)/v.length_squared()
+	if x<0 or x>1 or y<0 or y>1:return []
+	return [s,x,y]
+
+## A half face's region in its square's 0-1 frame (geometry.gd's four corner sets).
+static func _in_half(half:int,x:float,y:float)->bool:
+	match half:
+		0:return x>=y
+		1:return y>=x
+		2:return x+y<=1.0
+		3:return x+y>=1.0
+	return false
+
+## The first thing the ray meets: a placed piece (to take away) or the place of a new one (to make).
+func _space_hover(aim:Node3D)->Dictionary:
+	var seg:=_aim_local(aim);var a:Vector3=seg[0];var d:Vector3=seg[1];var length:float=seg[2]
+	var unit:float=output_unit()
+	var best:={"s":INF,"what":{}}   # a lambda captures a float by value: the running best lives in a dictionary
+	# ties go to the placed piece, then a face, an edge, a ball, a wedge: the more deliberate place first
+	var consider:=func(s:float,bias:float,what:Dictionary)->void:
+		if s<INF and s+bias<float(best.s):best.s=s+bias;what.at=a+d*s;best.what=what
+	# the placed pieces
+	for i in model.records.size():
+		var r:Dictionary=model.records[i];var kind:String=str(r.kind)
+		if not can_use(kind):continue
+		var s:=INF
+		if kind=="point":s=_ray_sphere(a,d,length,_node_world(Model.vec(r.at)),NODE_HIT)
+		elif kind in ["rod","rod_short","diag"]:s=_ray_segment(a,d,length,_node_world(Model.vec(r.at)),_node_world(Model.vec(r.end)),EDGE_HIT,.1)
+		elif kind in ["quad","panel"]:
+			var span:float=float(r.get("span",1))
+			var hit:=_ray_square(a,d,length,_node_world(Model.vec(r.at)),Vector3(Model.AXES[r.plane[0]])*span*unit,Vector3(Model.AXES[r.plane[1]])*span*unit)
+			if not hit.is_empty() and (kind=="quad" or _in_half(int(r.half),hit[1],hit[2])):s=hit[0]
+		elif Model.is_prefab(kind):
+			var box:AABB=Model.prefab_box(r);var local:=AABB(box.position*unit+fitted_offset,box.size*unit)
+			var hit_at:Variant=local.intersects_segment(a,a+d*length)
+			if hit_at!=null:s=a.distance_to(hit_at)
+		consider.call(s,0.0,{"remove":i})
+	# the new pieces: balls, edges
+	for r in _ball_spots:consider.call(_ray_sphere(a,d,length,_node_world(Model.vec(r.at)),NODE_HIT),.04,{"make":[r]})
+	for r in _edge_spots:consider.call(_ray_segment(a,d,length,_node_world(Model.vec(r.at)),_node_world(Model.vec(r.end)),EDGE_HIT),.02 if r.kind=="rod_short" else .03,{"make":[r]})
+	# faces: the squares the ray crosses, in each of the three orientations, at every level
+	if can_use("quad") or can_use("panel"):
+		var A:=_address(a);var B:=_address(a+d*length)
+		for plane:Array in [[0,1],[0,2],[1,2]]:
+			var n:int=3-plane[0]-plane[1];var iu:int=plane[0];var iv:int=plane[1]
+			if absf(B[n]-A[n])<.000001:continue
+			for li in 7:
+				var level:=-1.0+li*.5
+				var k:=(level-A[n])/(B[n]-A[n])
+				if k<0 or k>1:continue
+				var h:=A+(B-A)*k
+				for span:float in [.5,1.0]:
+					var starts_u:=[floorf(h[iu]/span)*span];var starts_v:=[floorf(h[iv]/span)*span]
+					if span==1.0:starts_u.append(floorf((h[iu]-.5)/span)*span+.5);starts_v.append(floorf((h[iv]-.5)/span)*span+.5)
+					for su:float in starts_u:
+						for sv:float in starts_v:
+							var p:=Vector3.ZERO;p[n]=level;p[iu]=su;p[iv]=sv
+							var made:=_face_piece(p,plane,span,(h[iu]-su)/span,(h[iv]-sv)/span)
+							if not made.is_empty():consider.call(k*length,0.001 if span==1.0 else 0.0,{"make":made})
+	# a wedge on the floor: the cell the ray meets, rising away from the hand
+	if can_use("wedge"):
+		var A:=_address(a);var B:=_address(a+d*length)
+		if B.y<A.y and A.y>0:
+			var k:=A.y/(A.y-B.y)
+			if k<=1:
+				var h:=A+(B-A)*k;var cell:=Vector3(floorf(h.x/.5)*.5,0,floorf(h.z/.5)*.5)
+				var dir:=B-A;var turn:=(1 if dir.x>0 else 3) if absf(dir.x)>absf(dir.z) else (0 if dir.z>0 else 2)
+				var w:=Model.canonical({"kind":"wedge","at":Model.arr(cell),"turn":[0,turn,0],"span":.5})
+				if not w.is_empty() and model.prefab_fits(w) and _fits_height(w):consider.call(k*length,.06,{"make":[w]})
+	return best.what
+
+## The piece a square makes where the ray crosses it at (x, y): a QUAD in the middle of a square closed by four edges;
+## else a TRIANGLE - on a diagonal's side when the square has one, or at the corner of two edges nearest the hit,
+## bringing its own diagonal. [] when nothing can go there.
+func _face_piece(p:Vector3,plane:Array,span:float,x:float,y:float)->Array:
+	if not Model.inside(p):return []
+	var u:=Vector3(Model.AXES[plane[0]])*span;var v:=Vector3(Model.AXES[plane[1]])*span
+	var e_u0:bool=model.edge(p,p+u);var e_v0:bool=model.edge(p,p+v);var e_u1:bool=model.edge(p+v,p+u+v);var e_v1:bool=model.edge(p+u,p+u+v)
+	if int(e_u0)+int(e_v0)+int(e_u1)+int(e_v1)<2:return []
+	var at:=Model.arr(p);var base:={"at":at,"plane":[int(plane[0]),int(plane[1])]}
+	if span!=1.0:base.span=span
+	if p.y<0 or (p+u+v).y<0:return []
+	var d0:bool=model.diag_exists(p,p+u+v);var d1:bool=model.diag_exists(p+u,p+v)
+	var square:=e_u0 and e_v0 and e_u1 and e_v1
+	var middle:=absf(x-.5)<QUAD_MIDDLE and absf(y-.5)<QUAD_MIDDLE
+	if square and not d0 and not d1 and can_use("quad") and (middle or not can_use("panel")):
+		if model.face_occupied(at,base.plane,-1,span):return []
+		var q:Dictionary=base.duplicate(true);q.kind="quad";return [q]
+	if not can_use("panel"):return []
+	var half:=-1;var needs:={}
+	if d0:
+		half=0 if x>=y else 1
+		if not model.triangle_edges(p,u,v,half):return []
+	elif d1:
+		half=2 if x+y<=1.0 else 3
+		if not model.triangle_edges(p,u,v,half):return []
 	else:
-		var best_c:Dictionary={};var distance:=SPACE_PICK
-		for r in _candidates():
-			var d:=_line_distance(output.to_global(space_point(r)),s[0],s[1])
-			if d<distance:distance=d;best_c=r
-		# a solid of this tool already standing under the aim: the trigger turns it a quarter
-		var kinds:Array=tool_kinds(space_tool)
-		for i in model.records.size():
-			var placed:Dictionary=model.records[i]
-			if not Model.is_prefab(str(placed.kind)) or placed.kind not in kinds:continue
-			var d:=_line_distance(output.to_global(space_point(placed)+Vector3(0,.25,0)),s[0],s[1])
-			if d<distance:distance=d;space_aimed_solid=i;best_c={}
-		if space_aimed_solid>=0:
-			var turned:Dictionary=_turned_fit(space_aimed_solid)
-			target=output.to_global(space_point(model.records[space_aimed_solid])+Vector3(0,.25,0));colour=Color("5fb3c0") if not turned.is_empty() else Color("ef7974")
-			if not turned.is_empty():
-				var mesh:=visual(turned,output_unit(),material_phase);Geometry.hologram(mesh);space_ghost.add_child(mesh);mesh.transform=copy_pose(turned)
-		space_aimed=best_c
-		if not best_c.is_empty():
-			var mesh:=visual(best_c,output_unit(),material_phase);Geometry.hologram(mesh);space_ghost.add_child(mesh);mesh.transform=copy_pose(best_c)
-			target=output.to_global(space_point(best_c));colour=Color("f59e0b")
-	if target==s[1]:
-		var hit:Variant=_space_box().intersects_segment(s[1],s[0])
-		if hit!=null:target=hit
-	_draw_ray(s[0],target,colour);_guide_state()
+		var nearest:=INF
+		for c:Array in [[2,e_u0 and e_v0,Vector2(0,0)],[0,e_u0 and e_v1,Vector2(1,0)],[1,e_v0 and e_u1,Vector2(0,1)],[3,e_v1 and e_u1,Vector2(1,1)]]:
+			if not c[1] or not _in_half(c[0],x,y):continue
+			var dist:float=Vector2(x,y).distance_to(c[2])
+			if dist<nearest:nearest=dist;half=c[0]
+		if half<0:return []
+		needs={"kind":"diag","at":Model.arr(p if half<2 else p+u),"end":Model.arr(p+u+v if half<2 else p+v)}
+	if model.face_occupied(at,base.plane,half,span):return []
+	var tri:Dictionary=base.duplicate(true);tri.kind="panel";tri.half=half
+	return [tri] if needs.is_empty() else [needs,tri]
+
+## What the trigger would do now, shown before the pull: the ghost of the piece it makes, or the placed piece the
+## grip would take away, in red.
+func space_update(aim:Node3D,_hand:Node=null)->void:
+	clear_children(space_ghost)
+	space_hover=_space_hover(aim)
+	var colour:=Color(1,1,1,.35);var target:Vector3=output.to_local(aim.global_position-aim.global_basis.z*SPACE_REACH)
+	if space_hover.has("make"):
+		for r:Dictionary in space_hover.make:
+			var mesh:=visual(r,output_unit(),material_phase);Geometry.hologram(mesh);space_ghost.add_child(mesh);mesh.transform=copy_pose(r)
+			# amber like the ray (the pale hologram vanished against the pale floor); a horizontal face lifted clear of the floor it lies in
+			var glow:StandardMaterial3D=mesh.material_override;glow.albedo_color=Color(.96,.62,.04,.55);glow.emission=Color("f59e0b");glow.emission_energy_multiplier=.6
+			if str(r.kind) in ["quad","panel"] and r.plane==[0,2]:mesh.position.y+=.03
+		colour=Color("f59e0b");target=space_hover.at
+	elif space_hover.has("remove"):
+		var r:Dictionary=Model.fit_record(model.records[space_hover.remove],visible_records())
+		var mesh:=visual(r,output_unit(),material_phase);mesh.material_override=Kit.material(Color("ef7974"));space_ghost.add_child(mesh);mesh.transform=copy_pose(r)
+		colour=Color("ef7974");target=space_hover.at
+	else:
+		var hit:Variant=_space_box().intersects_segment(aim.global_position-aim.global_basis.z*SPACE_REACH,aim.global_position)
+		if hit!=null:target=output.to_local(hit)
+	_draw_ray(aim.global_position,output.to_global(target),colour);_guide_state()
 
 func _space_box()->AABB:
 	return AABB(output.global_position+Vector3(-CHAMBER*.5,0,-CHAMBER*.5),Vector3(CHAMBER,chamber_height,CHAMBER))
@@ -531,115 +466,32 @@ func _draw_ray(from:Vector3,to:Vector3,colour:Color)->void:
 	space_ray.global_transform=Transform3D(Basis(Quaternion(Vector3.UP,(to-from)/length))*Basis.from_scale(Vector3(1,length,1)),(from+to)*.5)
 	space_ray.visible=true
 
-## The trigger. Returns what happened: picked, placed, taken, rubber, refused.
+## The trigger: makes the piece under the aim. Returns placed or refused.
 func space_press(aim:Node3D,hand:Node=null)->String:
 	space_update(aim,hand)
 	space_notice=""
-	if space_hover_tile!="":
-		var id:=space_hover_tile
-		if not tool_open(id):space_notice="%s opens on floor %d"%[str(tool_def(id).get("label",id)),int(tool_def(id).get("from_floor",0))];return "refused"
-		pick_tool("" if id=="select" else id);space_notice="%s in hand"%({"select":"SELECT","rubber":"RUBBER"}.get(id,str(tool_def(id).get("label",id))));return "picked"
-	if space_tool in ["","rubber"]:
-		if space_aimed_item>=0:
-			var it:Dictionary=space_items[space_aimed_item]
-			if is_instance_valid(it.get("node")):(it.node as Node).queue_free()
-			space_items.remove_at(space_aimed_item);_save_space_items();space_hide();_refresh_space_sockets()
-			if space_tool=="":pick_tool(_tool_for_item(str(it.item)))
-			space_notice="taken" if space_tool!="rubber" else "erased";return "taken" if space_tool!="rubber" else "rubber"
-		if space_aimed_index<0:space_notice="point at a piece";return "refused"
-		var taken:Dictionary=model.records[space_aimed_index]
-		var result:Dictionary=model.revision(space_aimed_index,{})
-		if not result.ok:space_notice="still holding another piece: take its faces or rods first";return "refused"
-		var before:Array=model.records.duplicate(true);model.records.assign(result.records);remember_edit(before)
-		_drop_items_off_missing_quads();space_hide();share();redraw()
-		if space_tool=="":pick_tool(_tool_for_kind(str(taken.kind)));space_notice="taken: %s"%str(taken.kind).replace("_"," ");return "taken"
-		space_notice="erased";return "rubber"
-	if not tool_open(space_tool):space_notice="not open on this floor";return "refused"
-	if tool_item(space_tool)!="":
-		if space_aimed_quad.is_empty():space_notice="point at a finished quad";return "refused"
-		_place_item(tool_item(space_tool),space_aimed_quad);_save_space_items();space_hide();_refresh_space_sockets()
-		space_notice="placed";return "placed"
-	if space_aimed_solid>=0:
-		var before_turn:Array=model.records.duplicate(true)
-		var turned:Dictionary=_turned_fit(space_aimed_solid)
-		if turned.is_empty():space_notice="no room to turn it";return "refused"
-		model.records[space_aimed_solid]=turned;space_turn=int(turned.turn[1])
-		remember_edit(before_turn);space_hide();share();redraw()
-		space_notice="turned";return "turned"
-	if space_aimed.is_empty():space_notice="no lit node under the aim";return "refused"
-	var before:Array=model.records.duplicate(true)
-	if not model.add(space_aimed,tier):space_notice="refused here";return "refused"
+	if space_hover.has("remove"):space_notice="that one stands: the grip takes it away";return "refused"
+	if not space_hover.has("make"):space_notice="point at a place in the grid";return "refused"
+	var before:Array=model.records.duplicate(true);var made_kind:=str(space_hover.make[-1].kind)
+	for r:Dictionary in space_hover.make:
+		var ok:bool=model.add(r,tier)
+		if not ok and r.kind=="diag":ok=model.add({"kind":"diag","at":r.end,"end":r.at},tier)   # the record keeps one direction of a diagonal
+		if not ok:model.records.assign(before);space_notice="not here";return "refused"
 	remember_edit(before);space_hide();share();redraw()
-	space_notice="placed";return "placed"
+	space_notice="made: %s"%str(KIND_WORDS.get(made_kind,made_kind))
+	return "placed"
 
-## A solid a quarter turn further about the vertical (it stays in its own cell: a square turns into itself).
-static func _turned(r:Dictionary)->Dictionary:
-	var t:Dictionary=r.duplicate(true);var turn:Array=t.get("turn",[0,0,0]).duplicate()
-	turn[1]=posmod(int(turn[1])+1,4);t.turn=turn;return t
-
-## The next quarter turn of a placed solid that has room (the others stay where they are), or {}.
-func _turned_fit(i:int)->Dictionary:
-	var test=Model.new();test.records=model.records.duplicate(true);test.records.remove_at(i)
-	var t:Dictionary=model.records[i]
-	for k in 3:
-		t=_turned(t)
-		if test.prefab_fits(t):return t
-	return {}
-
+## The grip: takes away the placed piece under the aim. False when there is none, so the grip stays the hand's
+## (a thing placed from the hand menu is taken back by the hand).
 func space_grip()->bool:
-	if not player_inside:return false
-	pick_tool("");return true   # the grip lets the tool go: the hand is SELECT again
-
-func pick_tool(id:String)->void:
-	space_tool=id;_paint_tiles();_refresh_space_sockets();_guide_state()
-
-func _tool_for_kind(kind:String)->String:
-	for t in space_tools:
-		if kind in t.get("kinds",[]) and tool_open(str(t.id)):return str(t.id)
-	return ""
-
-func _tool_for_item(item:String)->String:
-	for t in space_tools:
-		if str(t.get("item",""))==item:return str(t.id)
-	return ""
-
-# ── things on quads ─────────────────────────────────────────────────────────────────────────────────────────────
-
-func _place_item(item:String,quad:Dictionary)->void:
-	var it:=ItemsLib.item(item);var path:=ItemsLib.scene_for(str(it.get("token","")))
-	if path=="" or not ResourceLoader.exists(path):return
-	var n:Node=(load(path) as PackedScene).instantiate()
-	if not n is Node3D:n.free();return
-	var cfg:=ItemsLib.config_for(it,{})
-	for k in cfg:n.set_meta("config_%s"%str(k),cfg[k])
-	if n.has_method("apply_grid_config"):n.apply_grid_config(cfg)
-	n.name="On_"+item;space_items_root.add_child(n);(n as Node3D).position=space_point(quad)+Vector3(0,.02,0)
-	if n is RigidBody3D:(n as RigidBody3D).freeze=true
-	space_items.append({"item":item,"quad":quad.duplicate(true),"node":n})
-
-func _drop_items_off_missing_quads()->void:
-	for i in range(space_items.size()-1,-1,-1):
-		if not model.has_record(space_items[i].quad):
-			if is_instance_valid(space_items[i].get("node")):(space_items[i].node as Node).queue_free()
-			space_items.remove_at(i)
-	_save_space_items()
-
-func _space_items_path()->String:return "user://void_space_items_%d.json"%space_floor
-
-func _save_space_items()->void:
-	if not persist:return
-	var rows:=[]
-	for it in space_items:rows.append({"item":it.item,"quad":it.quad})
-	var f:=FileAccess.open(_space_items_path(),FileAccess.WRITE)
-	if f:f.store_string(JSON.stringify({"version":1,"items":rows},"\t"))
-
-func _load_space_items()->void:
-	if not persist or not FileAccess.file_exists(_space_items_path()):return
-	var d=JSON.parse_string(FileAccess.get_file_as_string(_space_items_path()))
-	if not d is Dictionary:return
-	for row in d.get("items",[]):
-		var q:=Model.canonical(row.get("quad",{}))
-		if not q.is_empty() and model.has_record(q):_place_item(str(row.get("item","")),q)
+	if not player_inside or not space_hover.has("remove"):return false
+	var i:int=space_hover.remove
+	var kind:String=str(model.records[i].kind)
+	var result:Dictionary=model.revision(i,{})
+	if not result.ok:space_notice="something still stands on it: take that first";return true
+	var before:Array=model.records.duplicate(true);model.records.assign(result.records);remember_edit(before)
+	space_hide();share();redraw()
+	space_notice="taken away: %s"%str(KIND_WORDS.get(kind,kind));return true
 
 # ── the construction, live ──────────────────────────────────────────────────────────────────────────────────────
 
@@ -652,18 +504,14 @@ func _redraw_space()->void:
 		body.add_child(visual(r,unit,material_phase));var shape:=CollisionShape3D.new();shape.name="Collision";shape.shape=shape_for(r,unit);body.add_child(shape)
 		structure.add_child(body);body.transform=copy_pose(r);body.set_meta("workshop_kind",r.kind)
 	built=visible_records().duplicate(true)
-	for it in space_items:
-		if is_instance_valid(it.get("node")):(it.node as Node3D).position=space_point(it.quad)+Vector3(0,.02,0)
 
-## The guide: what is in hand, what the trigger does now.
+## The guide: what this floor builds, and what the trigger or grip does now.
 func _guide_state()->void:
 	if space_guide==null:return
 	var now:String
-	if space_hover_tile!="":now="TRIGGER: pick %s"%({"select":"SELECT","rubber":"RUBBER"}.get(space_hover_tile,str(tool_def(space_hover_tile).get("label",space_hover_tile))))+("" if tool_open(space_hover_tile) else " - opens on floor %d"%int(tool_def(space_hover_tile).get("from_floor",0)))
-	elif space_tool=="":now="SELECT: point at a piece and pull to take it back. Pick a tool on the screens above."
-	elif space_tool=="rubber":now="RUBBER: point at a piece and pull to erase it."
-	elif tool_item(space_tool)!="":now="%s: point at a finished quad and pull. Grip: put it down."%str(tool_def(space_tool).get("label",""))
-	else:now="%s: point at a lit dot and pull. Grip: put it down."%str(tool_def(space_tool).get("label",""))
+	if space_hover.has("make"):now="PULL: make the %s"%str(KIND_WORDS.get(str(space_hover.make[-1].kind),"piece")).to_upper()
+	elif space_hover.has("remove"):now="GRIP: take away the %s"%str(KIND_WORDS.get(str(model.records[space_hover.remove].kind),"piece")).to_upper()
+	else:now="THIS FLOOR BUILDS: %s\nPoint at a place in the grid and pull. Things come from the hand menu."%", ".join(open_labels())
 	if space_guide.text!=now:space_guide.text=now
 
 func redraw()->void:
@@ -672,22 +520,6 @@ func redraw()->void:
 
 func _process_space()->void:
 	_update_inside()
-
-## THE CORNERS (Palle: "the monitor should have black triangle corners"): where two tilted screens meet, the gap between
-## their edges is closed by two black triangles - the screen frame's corner, as on an arena scoreboard.
-func _corner_triangles(face_w:float,face_h:float)->void:
-	var d:float=face_w*.5+.04;var s:float=sin(deg_to_rad(JUMBO_TILT));var c:float=cos(deg_to_rad(JUMBO_TILT));var hw:float=face_w*.5;var hh:float=face_h*.5
-	# the corner between the +z screen's right edge and the +x screen's left edge, in the drum's frame
-	var a:=Vector3(hw,-hh*c,d-hh*s);var b:=Vector3(hw,hh*c,d+hh*s)          # the +z screen's right edge, bottom and top
-	var cc:=Vector3(d+hh*s,hh*c,hw);var dd:=Vector3(d-hh*s,-hh*c,hw)        # the +x screen's left edge, top and bottom
-	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for f in 4:
-		var turn:=Basis(Vector3.UP,f*PI*.5)
-		for v in [a,b,cc,a,cc,dd]:st.add_vertex(turn*v)
-	st.generate_normals()
-	var corners:=MeshInstance3D.new();corners.name="CornerTriangles";corners.mesh=st.commit()
-	var m:=StandardMaterial3D.new();m.albedo_color=Color("0b0d0e");m.roughness=.6;m.cull_mode=BaseMaterial3D.CULL_DISABLED;corners.material_override=m
-	jumbotron.add_child(corners)
 
 # ── each floor its own build (Palle, 2026-11-06: "each floor its own build") ───────────────────────────────────
 ## The workstation shared ONE construction between every station (the root meta, user://void_scaffold_work.json, the

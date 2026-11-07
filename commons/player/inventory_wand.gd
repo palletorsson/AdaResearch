@@ -194,8 +194,10 @@ static func _tint(root: Node, col: Color) -> void:
 		elif x is Label3D:(x as Label3D).modulate = col
 
 ## THE SPACE EDITOR (2026-11-06): a scaffold workstation whose glass box is the editor (display.gd `space`) takes the
-## aim while the line passes through its box - a kit piece in the hand fires at its sockets, the empty hand takes a
-## piece back, the rubber erases (group space_editors, first come first served). Null when none claims the aim.
+## EMPTY hand while the player stands in its box: the trigger makes the piece at the place the ray meets, the grip
+## takes a placed one away (group space_editors, first come first served). Null when none claims the aim.
+func space_claims() -> bool:return _space_editor() != null
+
 func _space_editor() -> Node:
 	if hand == null or aim == null or is_instance_valid(hand.lifted):return null
 	for n in get_tree().get_nodes_in_group("space_editors"):

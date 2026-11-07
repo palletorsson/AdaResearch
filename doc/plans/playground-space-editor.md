@@ -321,3 +321,45 @@ their shared corner, a turn that skips the blocked quarter, a boxed-in wedge ref
 8/8 with nothing refused (`solid_garden` redrawn: two ridges, a checker of hills, a ramp, a hedge; `stair_tower`'s
 first step is a cell wedge onto the 1 m landing).
 
+## The direct editor: no jumbotron, no tools (2026-11-06, Palle after playing it)
+
+> "the jumbotron does not work as interface. We can not add quad in horizontal plans only vertically. point, wedge,
+> triangle quad all have unique positions in the grid so we could just have if we point at the position and fire when
+> the element is created. ... Remove the jumpotone and refer the other prefab to the hand menu?"
+
+Answers (same night): the pyramid goes to the hand menu (it shares a floor cell with the wedge, so the cell cannot say
+which); the grip takes a piece away, the trigger only makes.
+
+**The horizontal quad.** On the bench a floor quad was offered and picked from eye height, even inside a cube of edges.
+What the headset hid was its lit dot: a floor quad's dot sat at its centre, 3.6 cm under the box floor, buried; a
+wall's floated in the air. The new hover shows the piece itself, amber, a floor face lifted 3 cm clear.
+
+**What the ray meets first** (`display.gd` `_space_hover`; the ray in Output's frame, ties to the more deliberate place):
+
+| place | piece made by the trigger |
+|---|---|
+| a free node next to the build (the lit dots) | BALL |
+| the line between two balls, its middle 70 % | EDGE (1 m, or 2 m between balls 2 m apart) |
+| the middle of a square closed by four edges (`QUAD_MIDDLE`) | QUAD |
+| a square's corner where two edges meet; a side of a diagonal | TRIANGLE (bringing its own diagonal) |
+| a floor cell | WEDGE, rising away from the hand |
+| a placed piece | nothing: it lights red and the GRIP takes it away, unless something still stands on it |
+
+Faces are found by crossing the ray with every lattice plane (3 orientations x 7 levels, 1 m and 2 m squares), not by
+the nearest centre: the first surface the ray reaches wins, so a floor square is reached past a wall beside it.
+
+**The hand menu stays up in the box.** The box claims only the EMPTY hand (`space_active` reads `hand.current`); a
+thing chosen on the menu - health, danger, a crate, a plank, the pyramid - is placed by the hand as anywhere.
+`inventory_prism.in_space_editor()` now asks for an editor's `hides_hand_menu` (none does); the prism's grip reaches the
+box through `inventory_wand.space_claims()`; desktop Tab and X work as anywhere.
+
+**The table** (`space_editor.json`) says only which kinds each floor offers: BALL 0, EDGE 3, TRIANGLE (+ diagonal) 5,
+QUAD 5, WEDGE 6, and PYRAMID 6 marked `hand` (built from the menu, shown and taken away here). The guide over the box
+says what this floor builds, then what the trigger or grip does now. Gone: the jumbotron, its tiles and corners, the
+SELECT / RUBBER tools, items placed onto quads (`user://void_space_items_*.json` is no longer read), the solid turn.
+
+Measured: `probe_space_editor.tscn` 12/12 (B no jumbotron; C the empty hand only; D ball; E edge; F the floor quad
+with a wall square beside it, then the wall quad; G a corner triangle with its diagonal; H a wedge rising away; I the
+grip takes a free ball and a wedge, keeps a ball an edge holds, the trigger on a placed piece makes nothing; J floor 3
+offers no quad or wedge; K solids; L builds per floor). `probe_space_interface.tscn` photographs the eight states.
+

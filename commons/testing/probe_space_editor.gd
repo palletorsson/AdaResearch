@@ -1,12 +1,16 @@
 extends Node3D
-## THE PLAYGROUND EDITOR ON A BENCH (2026-11-06, the jumbotron design): the display workstation in `space` mode, no
-## Void, an aim node moved as a hand would. Proves, with numbers: (A) the glass box stands on the floor at zero, its
-## panes free, the table, the hand model and the visor dark; (B) the grid is always on and the jumbotron hangs from the
-## ceiling with one tile per tool on each of four faces; (C) outside the box the editor does not take the hand, inside
-## it does; (D) a tile is picked by aiming at it and pulling; (E) a BALL is placed at a lit node, an EDGE between two
-## balls, a QUAD on a square of edges; (F) HEALTH goes only onto a finished quad, one per quad; (G) SELECT takes a
-## piece back and makes its kind the tool; (H) a tool the floor has not opened is refused, with its floor said.
-## Writes ada_run/space-editor/{bench.png, report.json}.
+## THE PLAYGROUND EDITOR ON A BENCH (2026-11-06, the direct design: no jumbotron, no tools - Palle: "point, wedge,
+## triangle quad all have unique positions in the grid so we could just have if we point at the position and fire when
+## the element is created"). The display workstation in `space` mode, no Void, an aim node moved as a hand would.
+## Proves, with numbers: (A) the box on the floor at zero, panes free, table / hand model / visor dark; (B) the grid on,
+## no jumbotron, the guide saying what this floor builds; (C) outside the box the editor leaves the hand alone; inside it
+## takes the EMPTY hand, never a hand holding a thing (the hand menu's); (D) a ball made by aiming at a free node; (E)
+## an edge by aiming between two balls; (F) a FLOOR quad aimed from eye height with a wall square standing beside it
+## (Palle: "we can not add quad in horizontal plans only vertically"), then the wall quad; (G) a triangle at the corner
+## of two edges, bringing its own diagonal; (H) a wedge on a floor cell, rising away from the hand; (I) the grip takes
+## a free piece away, refuses one something stands on, and the trigger on a placed piece makes nothing; (J) a floor
+## that has not opened quads and wedges offers neither; (K) the cell solids' sizes and a v11 build migrated; (L) each
+## floor its own build. Writes ada_run/space-editor/{bench.png, report.json}.
 ## Run: godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_space_editor.tscn
 
 const Station = preload("res://commons/artifacts/scaffold_workstation/display.tscn")
@@ -28,97 +32,71 @@ func _ready() -> void:
 	for i in 40: await get_tree().process_frame
 	ws.model.records.clear(); ws.redraw()
 	var bay: Node3D = ws.output.get_node("Bay")
-	# A — the box
+	# A - the box
 	var pane_bodies := 0
 	for pane in bay.find_children("GlassPane*", "MeshInstance3D", false, false): pane_bodies += pane.find_children("*", "StaticBody3D", true, false).size()
 	_check("A the box on the floor at %.2f m, %d pane colliders, table %s, hand model %s, visor %s" % [ws.output.global_position.y, pane_bodies, "dark" if not ws.support.visible else "SHOWN", "dark" if not ws.bench.visible else "SHOWN", "off" if not ws.visit.headset.enabled else "ON"], absf(ws.output.global_position.y) < .01 and pane_bodies == 0 and not ws.support.visible and not ws.bench.visible and not ws.visit.headset.enabled)
-	# B — the grid and the jumbotron
+	# B - the grid, no jumbotron, the guide
 	var dots: int = ws.space_grid.multimesh.instance_count if ws.space_grid and ws.space_grid.multimesh else 0
-	var per_face: int = ws.space_tools.size() + 2
-	_check("B the grid is on with no tool (%d node dots); the jumbotron hangs at %.2f m with %d tiles (%d tools + select + rubber on 4 faces)" % [dots, ws.jumbotron.global_position.y, ws.tiles.size(), ws.space_tools.size()], dots > 100 and ws.tiles.size() == per_face * 4 and ws.jumbotron.global_position.y > 3.5)
-	# C — outside / inside
+	var drum: Node = ws.output.find_child("Jumbotron", true, false)
+	ws.space_hide(); ws._guide_state()
+	var guide: String = ws.space_guide.text
+	_check("B the grid is on (%d node dots); jumbotron %s; the guide: %s" % [dots, "GONE" if drum == null else "STILL THERE", guide.replace("\n", " / ")], dots > 100 and drum == null and guide.contains("BALL, EDGE, TRIANGLE, QUAD, WEDGE") and not guide.contains("PYRAMID"))
+	# C - outside / inside, the empty hand / a thing in the hand
+	var holding := Node.new(); var s := GDScript.new(); s.source_code = "extends Node\nvar current := \"crate\"\n"; s.reload(); holding.set_script(s); add_child(holding)
+	var empty := Node.new(); var s2 := GDScript.new(); s2.source_code = "extends Node\nvar current := \"\"\n"; s2.reload(); empty.set_script(s2); add_child(empty)
 	ws.space_inside_override = 0; ws._update_inside()
-	_aim_at(ws.output.global_position + Vector3(0, 1, 0), Vector3(0, 0, 4))
-	var outside: bool = ws.space_active(null, aim)
+	var outside: bool = ws.space_active(empty, aim)
 	ws.space_inside_override = 1; ws._update_inside()
-	var inside: bool = ws.space_active(null, aim)
-	_check("C outside the box the editor leaves the hand alone (%s), inside it takes it (%s)" % [str(outside), str(inside)], not outside and inside)
-	# D — pick BALL on the jumbotron
-	var said_d := _pick("point")
-	_check("D aimed at the BALL tile and pulled -> %s; the tool is '%s'; %d nodes lit" % [said_d, ws.space_tool, ws.space_sockets.get_child_count()], said_d == "picked" and ws.space_tool == "point" and ws.space_sockets.get_child_count() > 0)
-	# E — a ball, an edge, a quad
-	var said_ball := _place_at({"kind": "point", "at": [1, 0, 0]})
-	_pick("edge")
-	var said_edge := _place_at({"kind": "rod", "at": [0, 0, 0], "end": [1, 0, 0]})
-	for p in [[0, 0, 1], [1, 0, 1]]: ws.model.add({"kind": "point", "at": p}, ws.tier)
-	for r in [[[0, 0, 0], [0, 0, 1]], [[1, 0, 0], [1, 0, 1]], [[0, 0, 1], [1, 0, 1]]]: ws.model.add({"kind": "rod", "at": r[0], "end": r[1]}, ws.tier)
+	var inside_empty: bool = ws.space_active(empty, aim); var inside_holding: bool = ws.space_active(holding, aim)
+	_check("C outside the box: %s; inside with the empty hand: %s; inside holding a crate from the hand menu: %s" % [str(outside), str(inside_empty), str(inside_holding)], not outside and inside_empty and not inside_holding)
+	# D - a ball at a free node
+	var said_d := _fire(Vector3(.5, 0, 0), Vector3(.5, .8, 1.5))
+	_check("D aimed at the free node (0.5,0,0) and pulled -> %s (%s); a ball there: %s" % [said_d, ws.space_notice, str(_has({"kind": "point", "at": [.5, 0, 0]}))], said_d == "placed" and _has({"kind": "point", "at": [.5, 0, 0]}))
+	# E - an edge between two balls
+	var said_e := _fire(Vector3(.25, 0, 0), Vector3(.25, .8, 1.5))
+	_check("E aimed between the origin and that ball -> %s (%s)" % [said_e, ws.space_notice], said_e == "placed" and _has({"kind": "rod_short", "at": [0, 0, 0], "end": [.5, 0, 0]}))
+	# F - the floor quad, with a wall square standing on its back edge; then the wall quad
+	for p in [[0, 0, .5], [.5, 0, .5], [0, .5, 0], [.5, .5, 0]]: _add_point(p)
+	for r in [[[0, 0, 0], [0, 0, .5]], [[.5, 0, 0], [.5, 0, .5]], [[0, 0, .5], [.5, 0, .5]], [[0, 0, 0], [0, .5, 0]], [[.5, 0, 0], [.5, .5, 0]], [[0, .5, 0], [.5, .5, 0]]]: _add_rod(r[0], r[1])
 	ws.redraw()
-	_pick("quad")
-	var said_quad := _place_at({"kind": "quad", "at": [0, 0, 0], "plane": [0, 2]})
-	_check("E ball -> %s, edge -> %s, quad on a square of edges -> %s (%d records, %d bodies in the box)" % [said_ball, said_edge, said_quad, ws.model.records.size(), ws.output.get_node("Structure").get_child_count()], said_ball == "placed" and said_edge == "placed" and said_quad == "placed")
-	# F — HEALTH onto the quad, once
-	_pick("health")
-	var quad: Dictionary = {"kind": "quad", "at": [0, 0, 0], "plane": [0, 2]}
-	var said_h := _place_at(quad)
-	var said_h2 := _place_at(quad)
-	_check("F health onto the finished quad -> %s (%d items); a second onto the same quad -> %s" % [said_h, ws.space_items.size(), said_h2], said_h == "placed" and ws.space_items.size() == 1 and said_h2 == "refused")
-	# G — SELECT takes the edge back
-	_pick("select")
-	var before: int = ws.model.records.size()
-	ws.model.add({"kind": "point", "at": [2, 0, 0]}, ws.tier); ws.model.add({"kind": "rod", "at": [1, 0, 0], "end": [2, 0, 0]}, ws.tier); ws.redraw()
-	var said_g := _place_at({"kind": "rod", "at": [1, 0, 0], "end": [2, 0, 0]})
-	_check("G SELECT on a free edge -> %s; the tool is now '%s'" % [said_g, ws.space_tool], said_g == "taken" and ws.space_tool == "edge" and ws.model.records.size() == before + 1)
-	# H — a floor that has not opened the tool
-	ws.space_floor = 3
-	var said_hh := _pick("triangle")
-	_check("H on floor 3 the TRIANGLE tile -> %s (%s)" % [said_hh, ws.space_notice], said_hh == "refused" and ws.space_notice.contains("floor 5"))
-	ws.space_floor = 20
-	# I - real triangles: a diagonal and two sides close a half face; two sides alone do not; the other diagonal too
-	ws.model.records.clear()
-	for p in [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0]]: ws.model.add({"kind": "point", "at": p}, ws.tier)
-	ws.model.add({"kind": "rod", "at": [0, 0, 0], "end": [1, 0, 0]}, ws.tier); ws.model.add({"kind": "rod", "at": [1, 0, 0], "end": [1, 1, 0]}, ws.tier)
-	ws.redraw()
-	var tri0 := {"kind": "panel", "at": [0, 0, 0], "plane": [0, 1], "half": 0}
-	var before_diag: bool = tri0 in ws.model.candidates("panel", ws.tier)
-	_pick("diagonal")
-	var said_diag := _place_at({"kind": "diag", "at": [0, 0, 0], "end": [1, 1, 0]})
-	_pick("triangle")
-	var said_tri := _place_at(tri0)
-	# the other diagonal: (1,0,0) - (0,1,0), with the sides (0,0,0)-(0,1,0) and (0,1,0)-(1,1,0) for halves 2 and 3
-	ws.model.add({"kind": "rod", "at": [0, 0, 0], "end": [0, 1, 0]}, ws.tier); ws.redraw()
-	_pick("diagonal")
-	var said_anti := _place_at({"kind": "diag", "at": [0, 1, 0], "end": [1, 0, 0]})
-	var tri2 := {"kind": "panel", "at": [0, 0, 0], "plane": [0, 1], "half": 2}
-	var tri2_open: bool = tri2 in ws.model.candidates("panel", ws.tier)
-	_check("I a triangle on two sides alone: %s; DIAGONAL -> %s; TRIANGLE on its three edges -> %s; the other diagonal -> %s, its triangle %s (crossing the first: refused, as it should)" % ["offered" if before_diag else "not offered", said_diag, said_tri, said_anti, "offered" if tri2_open else "not offered"], not before_diag and said_diag == "placed" and said_tri == "placed" and said_anti == "placed" and not tri2_open)
-	# I2 - a triangle across the other diagonal, in a square of its own: (1,0,0)-(2,0,0)-(2,1,0)-(1,1,0)
-	ws.model.add({"kind": "point", "at": [2, 0, 0]}, ws.tier); ws.model.add({"kind": "point", "at": [2, 1, 0]}, ws.tier)
-	ws.model.add({"kind": "rod", "at": [1, 1, 0], "end": [2, 1, 0]}, ws.tier); ws.model.add({"kind": "rod", "at": [2, 0, 0], "end": [2, 1, 0]}, ws.tier)
-	ws.model.add({"kind": "diag", "at": [1, 1, 0], "end": [2, 0, 0]}, ws.tier); ws.redraw()
-	_pick("triangle")
-	var said_t3 := _place_at({"kind": "panel", "at": [1, 0, 0], "plane": [0, 1], "half": 3})
-	_check("I2 across the other diagonal: the upper-right triangle on its sides (1,1)-(2,1), (2,0)-(2,1) and the diagonal (1,1)-(2,0) -> %s" % said_t3, said_t3 == "placed")
-	# K - the cell solids: a wedge one 1 m cell wide, two long, rising to the next node level; a pyramid filling one
-	# cell; a ball still fits on the corner beside them; the trigger on a placed wedge turns it, and refuses when the
-	# swing has no room; a 2 m solid saved by v11 comes back as a cell solid inside its old footprint
+	var floor_q := {"kind": "quad", "at": [0, 0, 0], "plane": [0, 2], "span": .5}
+	var wall_q := {"kind": "quad", "at": [0, 0, 0], "plane": [0, 1], "span": .5}
+	var said_floor := _fire(Vector3(.25, 0, .25), Vector3(.25, .8, 1.5))
+	var said_wall := _fire(Vector3(.25, .25, 0), Vector3(.25, .4, 1.5))
+	_check("F a floor square with a wall square on its back edge: aimed from eye height at the floor's middle -> %s, the floor quad %s; at the wall's middle -> %s, the wall quad %s" % [said_floor, "made" if _has(floor_q) else "MISSING", said_wall, "made" if _has(wall_q) else "MISSING"], said_floor == "placed" and _has(floor_q) and said_wall == "placed" and _has(wall_q))
+	# G - a triangle at the corner of two edges, its diagonal with it
+	for p in [[1, 0, 0], [1.5, 0, 0], [1, 0, .5]]: _add_point(p)
+	_add_rod([1, 0, 0], [1.5, 0, 0]); _add_rod([1, 0, 0], [1, 0, .5]); ws.redraw()
+	var tri := {"kind": "panel", "at": [1, 0, 0], "plane": [0, 2], "half": 2, "span": .5}
+	var said_g := _fire(Vector3(1.1, 0, .1), Vector3(1.1, .8, 1.5))
+	var diag_g: bool = ws.model.diag_exists(Vector3(1.5, 0, 0), Vector3(1, 0, .5))
+	_check("G aimed into the corner of two edges at (1,0,0) -> %s (%s): the triangle %s, its diagonal %s" % [said_g, ws.space_notice, "made" if _has(tri) else "MISSING", "made" if diag_g else "MISSING"], said_g == "placed" and _has(tri) and diag_g)
+	# H - a wedge on a floor cell, rising away from the hand
+	var said_h := _fire(Vector3(-.75, 0, 1.25), Vector3(-.75, .8, .4))
+	var wedge := {"kind": "wedge", "at": [-1, 0, 1], "turn": [0, 0, 0], "span": .5}
+	var w_size: Vector3 = Model.prefab_box(wedge).size * ws.output_unit()
+	_check("H aimed at the floor cell (-1,0,1) looking +z -> %s (%s); a wedge there rising +z: %s, %.1f x %.1f x %.1f m" % [said_h, ws.space_notice, str(_has(wedge)), w_size.x, w_size.y, w_size.z], said_h == "placed" and _has(wedge) and w_size.is_equal_approx(Vector3(1, 1, 2)))
+	# I - the grip takes away; refuses what something stands on; the trigger on a placed piece makes nothing
+	_add_point([0, .5, .5]); ws.redraw()
+	var n_before: int = ws.model.records.size()
+	var said_trigger := _fire(Vector3(0, .5, .5), Vector3(.6, .9, 1.6))
+	var took_ball := _grip(Vector3(0, .5, .5), Vector3(.6, .9, 1.6)) and not _has({"kind": "point", "at": [0, .5, .5]})
+	var took_wedge := _grip(Vector3(-.75, .25, 1.4), Vector3(-.75, 1.0, 2.6)) and not _has(wedge)
+	var held := _grip(Vector3(1.5, 0, 0), Vector3(2.4, .7, -.3)); var still: bool = _has({"kind": "point", "at": [1.5, 0, 0]})   # an edge and the triangle's diagonal hold it
+	_check("I the trigger on a placed ball -> %s (records %d -> %d); grip on that free ball: %s; on the wedge: %s; on the ball the edges hold: %s (%s)" % [said_trigger, n_before, ws.model.records.size() + 2, "taken" if took_ball else "NOT TAKEN", "taken" if took_wedge else "NOT TAKEN", "kept" if still else "TAKEN", ws.space_notice], said_trigger == "refused" and took_ball and took_wedge and held and still and ws.space_notice.contains("stands on it"))
+	# J - a floor that has not opened quads and wedges: a closed square and a free cell offer neither
+	ws.space_floor = 3; ws._refresh_space_sockets()
 	ws.model.records.clear(); ws.redraw()
-	_pick("wedge")
-	var said_w := _place_at({"kind": "wedge", "at": [0, 0, 0], "turn": [0, 0, 0], "span": .5})
-	var w_size: Vector3 = Model.prefab_box(ws.model.records[0]).size * ws.output_unit() if ws.model.records.size() == 1 else Vector3.ZERO
-	_pick("pyramid")
-	var said_p := _place_at({"kind": "pyramid", "at": [.5, 0, 0], "turn": [0, 0, 0], "span": .5})
-	var p_size: Vector3 = Model.prefab_box(ws.model.records[-1]).size * ws.output_unit() if ws.model.records.size() == 2 else Vector3.ZERO
-	var ball_ok: bool = ws.model.add({"kind": "point", "at": [.5, 0, 0]}, ws.tier); ws.redraw()   # the corner the two solids share, grown from the origin (always there)
-	_pick("wedge")
-	var said_turn := _place_at(ws.model.records[0])
-	var turned: Array = ws.model.records[0].get("turn", [])
-	# boxed in: a wedge with pyramids on every side its swing would take
-	ws.model.records.clear()
-	ws.model.add({"kind": "wedge", "at": [0, 0, 0], "turn": [0, 0, 0], "span": .5}, ws.tier)
-	for c in [[.5, 0, 0], [-.5, 0, 0], [0, 0, -.5]]: ws.model.add({"kind": "pyramid", "at": c, "turn": [0, 0, 0], "span": .5}, ws.tier)
-	ws.redraw(); _pick("wedge")
-	var said_stuck := _place_at(ws.model.records[0])
-
+	for p in [[.5, 0, 0], [0, 0, .5], [.5, 0, .5]]: _add_point(p)
+	for r in [[[0, 0, 0], [.5, 0, 0]], [[0, 0, 0], [0, 0, .5]], [[.5, 0, 0], [.5, 0, .5]], [[0, 0, .5], [.5, 0, .5]]]: _add_rod(r[0], r[1])
+	ws.redraw()
+	var on3_square := _hover(Vector3(.25, 0, .25), Vector3(.25, .8, 1.5)); var on3_cell := _hover(Vector3(-.75, 0, 1.25), Vector3(-.75, .8, .4))
+	ws.space_floor = 20; ws._refresh_space_sockets()
+	var on20_square := _hover(Vector3(.25, 0, .25), Vector3(.25, .8, 1.5))
+	_check("J on floor 3 the closed square offers %s, the free cell %s; on floor 20 the same square offers %s" % [_what(on3_square), _what(on3_cell), _what(on20_square)], _what(on3_square) != "quad" and _what(on3_cell) != "wedge" and _what(on20_square) == "quad")
+	# K - the cell solids' sizes; a v11 2 m wedge comes back as a cell solid inside its old footprint
+	var p_size: Vector3 = Model.prefab_box({"kind": "pyramid", "at": [0, 0, 0], "turn": [0, 0, 0], "span": .5}).size * ws.output_unit()
 	var v11 := {"kind": "wedge", "at": [.5, 0, .5], "turn": [0, 2, 0]}
 	var v11_file := FileAccess.open("user://void_space_build_93.json", FileAccess.WRITE); v11_file.store_string(JSON.stringify({"version": 1, "floor": 93, "records": [v11]})); v11_file.close()
 	var c: Node3D = Station.instantiate(); c.set_meta("config_space", true); c.set_meta("config_space_floor", 93); add_child(c)
@@ -126,54 +104,58 @@ func _ready() -> void:
 	var migrated: Dictionary = c.model.records[0] if c.model.records.size() == 1 else {}
 	var inside_old: bool = not migrated.is_empty() and Model.prefab_box(v11).grow(.001).encloses(Model.prefab_box(migrated)) and float(migrated.get("span", 1)) == .5
 	c.queue_free(); DirAccess.remove_absolute(ProjectSettings.globalize_path("user://void_space_build_93.json"))
-	_check("K wedge -> %s, %.1f x %.1f x %.1f m; pyramid beside it -> %s, %.1f x %.1f x %.1f m; a ball on their shared corner %s; the trigger on the wedge -> %s (turn %s: turn 1 would hit the pyramid); boxed in -> %s (%s); a v11 2 m wedge comes back as %s" % [said_w, w_size.x, w_size.y, w_size.z, said_p, p_size.x, p_size.y, p_size.z, "fits" if ball_ok else "REFUSED", said_turn, str(turned), said_stuck, ws.space_notice, str(migrated)],
-		said_w == "placed" and w_size.is_equal_approx(Vector3(1, 1, 2)) and said_p == "placed" and p_size.is_equal_approx(Vector3(1, 1, 1)) and ball_ok and said_turn == "turned" and turned == [0, 2, 0] and said_stuck == "refused" and inside_old)
-	# J - each floor its own build: a first visit starts from the floor above's build, then the two are separate
+	_check("K a cell pyramid is %.1f x %.1f x %.1f m (from the hand menu); a v11 2 m wedge comes back as %s" % [p_size.x, p_size.y, p_size.z, str(migrated)], p_size.is_equal_approx(Vector3(1, 1, 1)) and inside_old)
+	# L - each floor its own build: a first visit starts from the floor above's build, then the two are separate
 	for f in [91, 92]:
 		if FileAccess.file_exists("user://void_space_build_%d.json" % f): DirAccess.remove_absolute(ProjectSettings.globalize_path("user://void_space_build_%d.json" % f))
 	var a: Node3D = Station.instantiate(); a.set_meta("config_space", true); a.set_meta("config_space_floor", 91); add_child(a)
-	var b: Node3D
 	for i in 30: await get_tree().process_frame
 	a.model.add({"kind": "point", "at": [1, 0, 0]}, a.tier); a.share()
-	b = Station.instantiate(); b.set_meta("config_space", true); b.set_meta("config_space_floor", 92); add_child(b)
+	var b: Node3D = Station.instantiate(); b.set_meta("config_space", true); b.set_meta("config_space_floor", 92); add_child(b)
 	for i in 30: await get_tree().process_frame
 	var seeded: int = b.model.records.size()
 	b.model.add({"kind": "point", "at": [0, 0, 1]}, b.tier); b.share()
 	await get_tree().process_frame
-	_check("J floor 91 builds one ball; floor 92 starts from it (%d records), adds its own; floor 91 still has %d, floor 92 %d" % [seeded, a.model.records.size(), b.model.records.size()], a.persist and seeded == 1 and a.model.records.size() == 1 and b.model.records.size() == 2)
+	_check("L floor 91 builds one ball; floor 92 starts from it (%d records), adds its own; floor 91 still has %d, floor 92 %d" % [seeded, a.model.records.size(), b.model.records.size()], a.persist and seeded == 1 and a.model.records.size() == 1 and b.model.records.size() == 2)
 	for f in [91, 92]: DirAccess.remove_absolute(ProjectSettings.globalize_path("user://void_space_build_%d.json" % f))
 	a.queue_free(); b.queue_free()
-	ws.model.records.clear(); ws.redraw(); ws.pick_tool("point")
-	cam.global_position = ws.output.global_position + Vector3(2.2, 2.0, 2.6); cam.look_at(ws.output.global_position + Vector3(-.4, 2.4, -.6))
-	_aim_at(ws.output.to_global(ws.space_point({"kind": "point", "at": [1, 1, 0]})), Vector3(.6, -.3, 1.6)); ws.space_update(aim)
+	# the picture: the floor square closed, the quad's ghost under the aim
+	cam.global_position = _world(Vector3(1.4, .9, 1.6)); cam.look_at(_world(Vector3(.2, .1, .1)))
+	_hover(Vector3(.25, 0, .25), Vector3(.25, .8, 1.5))
 	for i in 6: await get_tree().process_frame
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(out_dir.path_join("bench.png"))
-	var passed: int = report.checks.filter(func(c): return c.ok).size()
+	var passed: int = report.checks.filter(func(x): return x.ok).size()
 	report["passed"] = passed == report.checks.size()
 	FileAccess.open("res://ada_run/space-editor/report.json", FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 	print("[probe_space_editor] %d/%d" % [passed, report.checks.size()])
 	get_tree().quit(0 if report.passed else 1)
 
-## The hand at `target + back`, pointing at the target.
-func _aim_at(target: Vector3, back: Vector3) -> void:
-	aim.global_position = target + back; aim.look_at(target)
+## An address in the box -> the world.
+func _world(addr: Vector3) -> Vector3: return ws.output.to_global(ws._node_world(addr))
 
-## Aim at a tool's tile on the face nearest the hand and pull.
-func _pick(id: String) -> String:
-	for t in ws.tiles:
-		if str(t.id) != id: continue
-		var node: Node3D = t.node
-		var front: Vector3 = node.global_basis.z.normalized()
-		if front.dot(Vector3(0, 0, 1)) < .5: continue   # the face toward the +z side of the box
-		_aim_at(node.global_position, front * 1.8)
-		return ws.space_press(aim)
-	return "no tile"
+## The hand at `from` (an address), pointing at `target` (an address).
+func _aim(target: Vector3, from: Vector3) -> void:
+	aim.global_position = _world(from); aim.look_at(_world(target))
 
-## Aim at where a record sits and pull.
-func _place_at(r: Dictionary) -> String:
-	_aim_at(ws.output.to_global(ws.space_point(r)), Vector3(.3, .8, 1.8))
-	return ws.space_press(aim)
+func _hover(target: Vector3, from: Vector3) -> Dictionary:
+	_aim(target, from); ws.space_update(aim); return ws.space_hover
+
+func _fire(target: Vector3, from: Vector3) -> String:
+	_aim(target, from); return ws.space_press(aim)
+
+func _grip(target: Vector3, from: Vector3) -> bool:
+	_aim(target, from); ws.space_update(aim); return ws.space_grip()
+
+## What a hover would make ("quad", "wedge" ...), "remove", or "nothing".
+func _what(h: Dictionary) -> String:
+	if h.has("make"): return str(h.make[-1].kind)
+	return "remove" if h.has("remove") else "nothing"
+
+func _has(r: Dictionary) -> bool: return ws.model.has_record(Model.canonical(r))
+
+func _add_point(p: Array) -> void: ws.model.add({"kind": "point", "at": Model.arr(Vector3(p[0], p[1], p[2]))}, ws.tier)
+func _add_rod(p: Array, q: Array) -> void: ws.model.add({"kind": "rod_short", "at": Model.arr(Vector3(p[0], p[1], p[2])), "end": Model.arr(Vector3(q[0], q[1], q[2]))}, ws.tier)
 
 func _check(what: String, ok: bool) -> void:
 	report.checks.append({"what": what, "ok": ok})
