@@ -32,6 +32,14 @@ DERIVED (rebuilt, never edit):  ada_run/artifact_timeline_view.json  - what the 
     python tools/artifact_timeline.py view             # rebuild the derived view
     python tools/artifact_timeline.py check [--markdown]
     python tools/artifact_timeline.py forms [--refresh]   # guess the missing forms (--refresh: re-guess the guessed)
+
+THREADS (comments and instructions in the time - Palle, 2026-11-07: "comment and add artifacts in the time by
+instruction prompt, so we can prompt in the context of the time"): commons/data/artifact_timeline_threads.json
+    python tools/artifact_timeline.py thread list | add | set <id>     # the page's /api/artifact-timeline/instruct
+    python tools/artifact_timeline.py prompt <id>       # the instruction with its context, as a model reads it
+    python tools/artifact_timeline.py instructions      # the queued ones (no model reached), for an agent session
+    python tools/artifact_timeline.py answer <id>       # an agent's {"reply", "operations"} on stdin -> proposed
+    An answer only PROPOSES: the page applies its operations to the unsaved timeline; the person saves.
         exit code = unfiled tower works + main works with no place in the tower
                     + removed works still standing (the three accounting failures)
 """
@@ -987,6 +995,199 @@ def save(text: str) -> int:
     return 0
 
 
+# ---- threads: comments and instructions in the time (Palle, 2026-11-07) ---------------------------------------
+THREADS = ROOT / "commons/data/artifact_timeline_threads.json"
+OPS = ("add", "move", "remove", "form", "note", "to_environment", "to_main")
+
+
+def read_threads() -> dict:
+    try:
+        return read(THREADS)
+    except (OSError, ValueError):
+        return {"_doc": "AUTHORED by the page /artifact-timeline (and agents answering instructions) - comments and "
+                        "instructions anchored at a timeline work, with the agent's answer: a reply and proposed "
+                        "operations, applied by the person on the page. tools/artifact_timeline.py thread|answer.",
+                "entries": []}
+
+
+def write_threads(doc: dict) -> None:
+    lines = ["{", f'  "_doc": {json.dumps(doc["_doc"])},', '  "entries": [']
+    for i, e in enumerate(doc["entries"]):
+        lines.append("    " + json.dumps(e, ensure_ascii=False) + ("," if i < len(doc["entries"]) - 1 else ""))
+    lines += ["  ]", "}"]
+    THREADS.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
+def _view() -> dict:
+    try:
+        v = read(VIEW)
+        if v.get("base") == (read(AUTHORED).get("edited_at") or read(AUTHORED).get("seeded_at")):
+            return v
+    except (OSError, ValueError):
+        pass
+    return write_view()
+
+
+def context(anchor: str, span: int = 8) -> dict:
+    """what a model needs to answer an instruction at `anchor`: the anchor, its neighbours on the track, the works on
+    its floor, its children, its grammar term"""
+    v, tm = _view(), terms()
+    main = v["main"]
+
+    def brief(e):
+        f = e.get("form") or {}
+        return {"label": e.get("label"), "key": e["key"], "title": e["title"], "floor": e.get("floor"),
+                **({"form": f} if f else {}), **({"note": e["note"]} if e.get("note") else {}),
+                **({"flags": e["flags"]} if e.get("flags") else {})}
+    i = next((n for n, e in enumerate(main) if e["key"] == anchor), None)
+    env = next((e for e in v["environment"] if e["key"] == anchor), None)
+    out = {"anchor": anchor, "track": "main" if i is not None else ("environment" if env else "unfiled/catalogue")}
+    if i is not None:
+        a = main[i]
+        out["work"] = {**brief(a), "places": [{"floor": p["floor"], "map": p["map"], "id": p["id"]} for p in a["places"]],
+                       "construction_path": a.get("path"), "children": a.get("children", [])}
+        out["before"] = [brief(e) for e in main[max(0, i - span):i]]
+        out["after"] = [brief(e) for e in main[i + 1:i + 1 + span]]
+        if a.get("floor") is not None:
+            out["floor"] = {"floor": a["floor"], "map": next((f["map"] for f in v["floors"] if f["floor"] == a["floor"]), ""),
+                            "title": next((f["title"] for f in v["floors"] if f["floor"] == a["floor"]), ""),
+                            "works": [brief(e) for e in main if e.get("floor") == a["floor"]],
+                            "environment": [e["key"] for e in v["environment"] if any(p["floor"] == a["floor"] for p in e["places"])]}
+    elif env:
+        out["work"] = {"key": env["key"], "title": env["title"], "why": env.get("why"), "form": env.get("form"),
+                       "places": [{"floor": p["floor"], "map": p["map"], "id": p["id"]} for p in env["places"]]}
+    reg = registry().get(anchor) or {}
+    term = reg.get("term") or (anchor if anchor in tm else None)
+    if term and term in tm:
+        t = tm[term]
+        out["grammar"] = {"term": term, "expr": t.get("expr"), "from": t.get("from"), "chapter": t.get("chapter"),
+                          "children_terms": sorted(k for k, x in tm.items() if term in (x.get("from") or []))[:30]}
+    out["counts"] = {k: n for k, n in v["counts"].items() if not k.startswith("gap")}
+    return out
+
+
+PROMPT = """You are helping Palle curate the artifact timeline of Ada Research (a VR museum that teaches algorithms,
+built as the Void tower: one numbered main track of works, an environment track of works that make the space).
+Palle wrote an INSTRUCTION at one point of the timeline. Answer it in the context of that point.
+
+THE MODEL OF THE TIMELINE
+- main: the numbered track. A work's form: base (one work) | child (an associative child of a base: association(config(
+  base)) - it SHARES its base's number, #0095.a) | collection (op array|times|assemblage|collation|set; algorithmic
+  true = the collection IS the algorithm and stays on the main track; false = an example, it belongs on the
+  environment collections lane).
+- environment: works that make the space (barriers, lights, plinths, props); an environment collection has its own lane.
+- The grammar (commons/modular/terms.json) writes things as expressions over primitives: association(config(form)),
+  times, array, assemblage. A child is its base plus a configuration; a collection is an operator over a base.
+- You may READ the repository to check keys and context: commons/data/artifact_timeline.json (the timeline),
+  commons/modular/terms.json, commons/artifacts/registry/*.json (every registered work: its key, name, description),
+  commons/void/rooms.json (the tower), commons/data/construction_path.json. You cannot write; you only propose.
+
+ANSWER WITH ONE JSON OBJECT AND NOTHING ELSE:
+{"reply": "<a short answer to Palle in plain words: what you propose and why, or your comment>",
+ "operations": [ ... zero or more of:
+   {"op": "add", "key": "<registry key>", "after": "<main key it follows>", "floor": <int, optional>,
+    "form": {...optional}, "note": "<optional annotation>"},
+   {"op": "move", "key": "<main key>", "after": "<main key>" | null (null = first)},
+   {"op": "remove", "key": "<key>", "reason": "<why it leaves the path>"},
+   {"op": "form", "key": "<key>", "form": {"kind": "base"|"child"|"collection", "of": "<base key>", "op": "...", "algorithmic": true|false}},
+   {"op": "note", "key": "<main key>", "note": "<annotation>"},
+   {"op": "to_environment", "key": "<main key>", "why": "<why>"},
+   {"op": "to_main", "key": "<environment key>", "after": "<main key>"} ]}
+Use only keys that exist (check the registry for a work to add). If the instruction is a question or a comment, answer
+in "reply" with no operations. Keep the reply under 120 words.
+
+THE INSTRUCTION (at {anchor}):
+{text}
+
+THE CONTEXT (derived from the timeline now):
+{context}
+"""
+
+
+def make_prompt(entry: dict) -> str:
+    ctx = context(entry["anchor"])
+    return (PROMPT.replace("{anchor}", f'{entry.get("label_at") or ""} {entry["anchor"]}'.strip())
+            .replace("{text}", entry["text"]).replace("{context}", json.dumps(ctx, ensure_ascii=False, indent=1)))
+
+
+def check_ops(ops) -> list:
+    """each operation with valid true/false and why: keys must exist where the operation needs them"""
+    doc, reg = read(AUTHORED), registry()
+    main_keys = [r["key"] for r in doc.get("main", [])]
+    env_keys = {r["key"] for r in doc.get("environment", [])}
+    filed = set(main_keys) | env_keys | {r["key"] for r in doc.get("removed", [])}
+    placeable = set(_validator().available_artifacts())
+    out = []
+    for o in ops if isinstance(ops, list) else []:
+        if not isinstance(o, dict) or o.get("op") not in OPS or not isinstance(o.get("key"), str):
+            out.append({**(o if isinstance(o, dict) else {"raw": o}), "valid": False, "why": "not an operation"})
+            continue
+        k, op, why = o["key"], o["op"], ""
+        after = o.get("after")
+        if op == "add":
+            if k in main_keys or k in env_keys:
+                why = f"{k} is already on the timeline"
+            elif k not in reg and k not in placeable:
+                why = f"{k} is not a registered work"
+            elif k not in placeable and k not in tower():
+                why = f"{k} has no scene the tower can build"
+        elif op in ("move", "note", "to_environment") and k not in main_keys:
+            why = f"{k} is not on the main track"
+        elif op == "to_main" and k not in env_keys:
+            why = f"{k} is not on the environment track"
+        elif op in ("remove", "form") and k not in filed:
+            why = f"{k} is not on the timeline"
+        if not why and op in ("add", "move", "to_main") and after is not None and after not in main_keys:
+            why = f"after: {after} is not on the main track"
+        if not why and op == "form":
+            f = o.get("form")
+            if not isinstance(f, dict) or f.get("kind") not in FORM_KINDS:
+                why = "the form needs a kind: base, child or collection"
+            elif f["kind"] == "child" and f.get("of") and f["of"] not in main_keys:
+                why = f"of: {f['of']} is not on the main track"
+        out.append({**o, "valid": not why, **({"why": why} if why else {})})
+    return out
+
+
+def thread(cmd: str, arg: str | None, text: str) -> int:
+    doc = read_threads()
+    if cmd == "list":
+        sys.stdout.buffer.write(json.dumps(doc["entries"], ensure_ascii=False).encode("utf-8"))
+        return 0
+    body = json.loads(text) if text.strip() else {}
+    if cmd == "add":
+        if body.get("kind") not in ("comment", "instruction") or not str(body.get("text", "")).strip() or not body.get("anchor"):
+            print(json.dumps({"error": "a thread entry needs an anchor, a kind (comment|instruction) and text"}))
+            return 3
+        num = numbering(read(AUTHORED).get("main", []))
+        e = {"id": "t" + datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S%f")[:-3], "anchor": body["anchor"],
+             "label_at": (num.get(body["anchor"]) or {}).get("label"), "at": now(), "kind": body["kind"],
+             "text": str(body["text"]).strip(), "status": "note" if body["kind"] == "comment" else "asked"}
+        doc["entries"].append(e)
+        write_threads(doc)
+        sys.stdout.buffer.write(json.dumps(e, ensure_ascii=False).encode("utf-8"))
+        return 0
+    e = next((x for x in doc["entries"] if x["id"] == arg), None)
+    if e is None:
+        print(json.dumps({"error": f"no thread entry {arg}"}))
+        return 3
+    if cmd == "set":
+        for k in ("status", "error"):
+            if k in body:
+                e[k] = body[k]
+        if body.get("answer") is not None:
+            a = body["answer"]
+            e["answer"] = {"reply": str(a.get("reply", "")).strip(), "operations": check_ops(a.get("operations", [])),
+                           "by": a.get("by", "agent"), "at": now()}
+            e["status"] = "proposed"
+            e.pop("error", None)
+        write_threads(doc)
+        sys.stdout.buffer.write(json.dumps(e, ensure_ascii=False).encode("utf-8"))
+        return 0
+    print(json.dumps({"error": f"unknown thread command {cmd}"}))
+    return 2
+
+
 def main(argv: list) -> int:
     cmd = argv[1] if len(argv) > 1 else "check"
     if cmd == "seed":
@@ -1003,6 +1204,26 @@ def main(argv: list) -> int:
         forms("--refresh" in argv)
         write_view()
         return 0
+    if cmd == "thread":
+        return thread(argv[2] if len(argv) > 2 else "list", argv[3] if len(argv) > 3 else None,
+                      sys.stdin.buffer.read().decode("utf-8") if len(argv) > 2 and argv[2] in ("add", "set") else "")
+    if cmd == "prompt":
+        e = next((x for x in read_threads()["entries"] if x["id"] == argv[2]), None)
+        if e is None:
+            print(f"no thread entry {argv[2]}")
+            return 3
+        sys.stdout.buffer.write(make_prompt(e).encode("utf-8"))
+        return 0
+    if cmd == "instructions":
+        waiting = [e for e in read_threads()["entries"] if e["kind"] == "instruction" and e["status"] in ("asked", "queued")]
+        for e in waiting:
+            print(f"{e['id']}  {e.get('label_at') or ''} {e['anchor']}  ({e['status']}{', ' + e['error'] if e.get('error') else ''})")
+            print(f"    {e['text']}")
+        print(f"{len(waiting)} waiting. Read one with: prompt <id>; answer with: answer <id>  ({{\"reply\", \"operations\"}} on stdin)")
+        return 0
+    if cmd == "answer":
+        a = json.loads(sys.stdin.buffer.read().decode("utf-8"))
+        return thread("set", argv[2], json.dumps({"answer": {**a, "by": a.get("by", "agent session")}}))
     if cmd == "plan":
         # bytes, never print(): Windows stdout is cp1252 and would re-encode every non-ASCII label in rooms.json
         sys.stdout.buffer.write(json.dumps(plan(json.loads(sys.stdin.buffer.read().decode("utf-8"))), ensure_ascii=False).encode("utf-8"))

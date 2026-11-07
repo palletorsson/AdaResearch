@@ -144,3 +144,20 @@ The walk file carries each stop's `label`; commons/void/timeline_walk.gd writes 
 Why it matters (the grammar's compression): a child is its base plus a configuration, a collection is an operator over
 a base - the same expression the builder executes. A repeated collection is also what a MultiMesh draws as one mesh and
 a list of transforms: the next step (collections as MultiMesh) reads `op` from here.
+
+## In the time: comments and instructions (2026-11-07)
+
+Palle: "we need to comment and add artifacts in the time by instruction prompt, so we can prompt in the context of the
+time". Under a selected work, "In the time" keeps a thread (commons/data/artifact_timeline_threads.json, one entry per
+line): a **comment** is stored; an **instruction** is stored and put to a model with its context - the work, eight
+neighbours each side with their labels, forms, notes and flags, the works of its floor, its children, its grammar term
+(`python tools/artifact_timeline.py prompt <id>` prints exactly what the model reads).
+
+- The model runs READ-ONLY (Claude Code `-p --tools Read Grep Glob`, cwd the repo): it can look things up, not write.
+- It answers `{"reply", "operations"}` - add, move, remove, form, note, to_environment, to_main. The tool checks each
+  operation (keys must exist where the operation needs them) and refuses the rest, shown struck through.
+- Nothing is saved by the answer: "Apply to the timeline" applies the valid operations to the page's unsaved timeline;
+  the person looks at the strip and saves (and on save the tower follows, as before). "Reject" keeps the record.
+- No model reachable (on 2026-11-07 the Claude Code login had expired; no ANTHROPIC_API_KEY in .env.local): the
+  instruction is QUEUED. An agent session answers it: `python tools/artifact_timeline.py instructions`, then
+  `prompt <id>` and `answer <id>` with the JSON on stdin; the page shows the proposal.
