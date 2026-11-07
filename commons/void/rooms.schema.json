@@ -604,6 +604,12 @@
         "supply_leads": {
           "type": "boolean",
           "description": "Show decorative pink extensions between the ceiling supply and artifacts."
+        },
+        "light_fade_m": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 60,
+          "description": "Light LOD: the lamps of the floor's works and props fade out beyond this distance from the camera, and the sun's shadows reach twice it (floor_content.gd LIGHT_FADE_M, 14 when absent). 0: no fade, the sun's shadows reach 70 m."
         }
       }
     }

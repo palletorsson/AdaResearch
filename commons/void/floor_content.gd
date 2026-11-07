@@ -97,6 +97,26 @@ func _process(_delta: float) -> void:
 	max_build_ms = maxf(max_build_ms,last_build_ms)
 	floor_changed.emit(job.index)
 
+## LIGHT LOD (2026-11-07, Palle: "can we do something with the frame rather a LOD setup" ... "apply it to every
+## floor"): the lamps of a floor's works and props fade out beyond LIGHT_FADE_M from the camera, their shadows sooner. A
+## faded lamp is culled: its shadow map is not drawn (floor 6 measured: a 10 m work light's shadow was 1156 draw calls)
+## and it takes no slot in a mesh's light list. A floor's `light_fade_m` overrides it; 0 turns it off. Lamps with
+## their own fade keep it; the sun is floor_stream.gd's (its shadow reach is twice this).
+const LIGHT_FADE_M := 14.0
+
+func light_fade(index: int) -> float:
+	return float(data.floors[index].get("light_fade_m",LIGHT_FADE_M)) if index>=0 and index<data.floors.size() else LIGHT_FADE_M
+
+func _fade_lights(node: Node, index: int) -> void:
+	var reach := light_fade(index)
+	if reach <= 0.0: return
+	for lamp in node.find_children("*","Light3D",true,false):
+		if lamp is DirectionalLight3D or lamp.distance_fade_enabled: continue
+		lamp.distance_fade_enabled = true
+		lamp.distance_fade_begin = reach
+		lamp.distance_fade_length = 4.0
+		lamp.distance_fade_shadow = reach*.6
+
 func _queue_artifact(index: int, item: Dictionary) -> void:
 	pending.append({"index":index,"item":item})
 
@@ -146,6 +166,7 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 			# Work lamps provide orientation; interactive objects and retained
 			# traces supply close light. Editor copies retain this floor profile.
 			props["%d/%s" % [index, item.id]].get_node("Prefab").beam_energy = 1.2
+		_fade_lights(props["%d/%s" % [index, item.id]], index)
 	if not record.get("construction", []).is_empty():
 		var construction := Construction.new()
 		construction.name = "Construction"
@@ -652,6 +673,7 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	if item.artifact == "CoordinateSystem3M":
 		var point: Node3D = artifact._find_point()
 		if point != null: point.origin_point = artifact.global_position
+	_fade_lights(artifact, index)
 	exhibits["%d/%s" % [index, item.id]] = mount
 	if OS.get_environment("VOID_TRACE_ARTIFACTS") == "1": print("VOID_LOAD_END ", artifact_trial, " / ", item.id)
 	# Retrofitted instruments carry their own rigid supply and structural mount.

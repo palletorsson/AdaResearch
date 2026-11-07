@@ -73,6 +73,13 @@ func set_focus(index: int) -> void:
 	if focus+1<building.spec.levels.size(): content.load_floor(focus+1,false)
 	for i in content.roots:
 		if not records.has(i): _changed(i)
+	# Light LOD (2026-11-07): the sun's shadows reach twice the floor's light fade (floor_content.light_fade, 14 m by
+	# default), not 70 m. Every object inside the reach is drawn again into each shadow split (floor 6 measured: 3933
+	# draw calls, 6.8 ms). A floor with `light_fade_m: 0` keeps the 70 m.
+	var sun: DirectionalLight3D=game.atmosphere.get_node_or_null("WarmSun") if game.atmosphere!=null else null
+	if sun!=null:
+		var fade: float=content.light_fade(focus)
+		sun.directional_shadow_max_distance = fade*2.0 if fade>0.0 else 70.0
 	building.show_floor_window(floor_window(focus,building.floors.size()))
 	_refresh()
 

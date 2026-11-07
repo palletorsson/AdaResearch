@@ -47,13 +47,17 @@ def run(stage: Path, seq: str, floor: int, slot: int) -> dict:
                                GODOT, "--log-file", str(out / "godot.log"), "--windowed", "--position", f"{3200 + slot * 40},3200",
                                "--resolution", "1280x800", "--rendering-method", "gl_compatibility", "--xr-mode", "off",
                                "--path", str(stage), "--script", "res://tools/probes/sample_void_desktop.gd", "--", "--no-bridges",
-                               f"--void-start-floor={floor}", "--play-output=" + out.as_posix()],
+                               f"--void-start-floor={floor}", "--play-output=" + out.as_posix(),
+                               *[a for a in sys.argv if a.startswith(("--play-spawn=", "--play-look-at="))]],
                               stdout=stream, stderr=subprocess.STDOUT, timeout=900, creationflags=subprocess.CREATE_NO_WINDOW).returncode
     text = (out / "engine.log").read_text(encoding="utf8", errors="replace")
     if (out / "godot.log").exists():
         text += (out / "godot.log").read_text(encoding="utf8", errors="replace")
     errors = sorted({l.strip()[:220] for l in text.splitlines() if ERR.search(l)})
     row = {"sequence": seq, "floor": floor, "exit": code, "errors": errors}
+    if any(a.startswith("--play-spawn=") for a in sys.argv):   # a photograph, not a play test
+        row["problems"] = [] if (out / "sample.json").exists() else ["did not report, exit %d" % code]
+        return row
     try:
         row.update(json.loads((out / "sample.json").read_text(encoding="utf8")))
     except (OSError, ValueError):

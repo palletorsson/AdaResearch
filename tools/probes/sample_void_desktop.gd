@@ -10,8 +10,11 @@ func _initialize() -> void:
 	open_game.call_deferred()
 
 func open_game() -> void:
+	var spawn: Array=[];var look: Array=[]
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--play-output="):folder=arg.trim_prefix("--play-output=")
+		if arg.begins_with("--play-spawn="):spawn=Array(arg.trim_prefix("--play-spawn=").split(",")).map(func(v):return float(v))
+		if arg.begins_with("--play-look-at="):look=Array(arg.trim_prefix("--play-look-at=").split(",")).map(func(v):return float(v))
 	load("res://commons/void/room_source.gd").use_main_tower=true
 	game=load("res://commons/void/void.tscn").instantiate()
 	root.add_child(game);current_scene=game
@@ -31,6 +34,18 @@ func open_game() -> void:
 	var missing: Array=record.artifacts.filter(func(a):return not game.building.content.exhibits.has(str(floor)+"/"+a.id)).map(func(a):return a.id)
 	for i in 30:await physics_frame
 	var level: float=game.building.spec.levels[floor]
+	if spawn.size()==3:
+		# a chosen standpoint and gaze (floor-local), photographed (--play-spawn=x,y,z --play-look-at=x,y,z)
+		game.place_player(Vector3(spawn[0],level+spawn[1],spawn[2]))
+		for i in 20:await physics_frame
+		if look.size()==3:
+			var o: Vector3=Vector3(look[0],level+look[1],look[2])-game.camera.global_position
+			game.body.rotation.y=atan2(-o.x,-o.z);game.camera.rotation=Vector3(atan2(o.y,Vector2(o.x,o.z).length()),0,0)
+		game.body.enabled=false
+		await _wait_s(1.0)
+		var shots: Array=[await _shot("view.png")]
+		FileAccess.open(folder.path_join("sample.json"),FileAccess.WRITE).store_string(JSON.stringify({"floor":floor,"shots":shots}))
+		quit(0);return
 	var start: Vector3=game.body.global_position
 	await _wait_s(3.0)
 	var fps_stand := Engine.get_frames_per_second()
