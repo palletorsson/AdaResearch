@@ -223,6 +223,7 @@ static func _compose(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 static func _times(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 	var root := Node3D.new()
 	root.name = "times"
+	root.set_meta("repeat", "times")   # batch_repeats finds it after a term renames it
 	var n: int = int(expr.get("n", 2))
 	var layout: String = str(expr.get("layout", "row"))
 	var gap: float = float(expr.get("gap", 0.3))
@@ -315,6 +316,7 @@ static func bind_arguments(value: Variant, bindings: Dictionary) -> Variant:
 static func _array(expr: Dictionary, terms: Dictionary, depth: int) -> Node3D:
 	var root := Node3D.new()
 	root.name = "array"
+	root.set_meta("repeat", "array")
 	var n: int = int(expr.get("n", 3))
 	var step: float = float(expr.get("step", 0.3))
 	var dims: int = int(expr.get("dims", 2))
@@ -729,6 +731,132 @@ static func _top_of(n: Node3D) -> float:
 		var t: float = (m.transform * aabb).end.y
 		top = maxf(top, t)
 	return top
+
+
+## COLLECTIONS AS MULTIMESH (Palle, 2026-11-07: "It is also important that the collections are multi-mesh").
+## After a thing is built (composite.gd, once its scaffold is gone): every `times` / `array` node's copies draw as ONE
+## MultiMesh per kind of piece - copies of the same mesh with the same material - instead of one draw per copy. Only the
+## DRAWING changes: each copy's mesh node stays where it was (its colliders, body, names and metadata untouched) with
+## layers 0 and no shadow, so the scanner, the probes and describe() read the same construction. A repeat whose copies
+## hold a script, a moving body (RigidBody3D, CharacterBody3D), an animation or particles is left alone, and so is a
+## scripted node and everything under it (an `engine` moves its copies). A group needs BATCH_MIN copies.
+## Returns the number of mesh nodes now drawn by a MultiMesh.
+const BATCH_MIN := 4
+
+static func batch_repeats(root: Node) -> int:
+	var done := 0
+	if root.get_script() != null and not root is MeshInstance3D:
+		return 0
+	if root is Node3D and root.has_meta("repeat") and _batchable(root):
+		done += _batch(root as Node3D)
+	for c in root.get_children():
+		if not c is MultiMeshInstance3D:
+			done += batch_repeats(c)
+	return done
+
+
+static func _batchable(n: Node) -> bool:
+	for c in n.get_children():
+		if c.get_script() != null or c is RigidBody3D or c is CharacterBody3D or c is AnimationPlayer \
+				or c is GPUParticles3D or c is CPUParticles3D or c is SoftBody3D:
+			return false
+		if not _batchable(c):
+			return false
+	return true
+
+
+static func _batch(root: Node3D) -> int:
+	var groups: Dictionary = {}   # signature -> [{node, xform}]
+	for m in _meshes(root):
+		var mi := m as MeshInstance3D
+		if mi.mesh == null or mi.has_meta("batched") or not mi.visible or mi.layers == 0:
+			continue
+		var per_surface := false
+		for i in mi.get_surface_override_material_count():
+			if mi.get_surface_override_material(i) != null:
+				per_surface = true
+		if per_surface:
+			continue
+		var key := _mesh_sig(mi.mesh) + "|" + _mat_sig(mi.material_override)
+		if not groups.has(key):
+			groups[key] = []
+		groups[key].append({"node": mi, "xform": _relative(mi, root)})
+	var done := 0
+	var k := 0
+	for key in groups:
+		var g: Array = groups[key]
+		if g.size() < BATCH_MIN:
+			continue
+		var first: MeshInstance3D = g[0].node
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.mesh = first.mesh
+		mm.instance_count = g.size()
+		for i in g.size():
+			mm.set_instance_transform(i, g[i].xform)
+		var mmi := MultiMeshInstance3D.new()
+		mmi.name = "Batch_%d" % k
+		k += 1
+		mmi.multimesh = mm
+		mmi.material_override = first.material_override
+		mmi.cast_shadow = first.cast_shadow
+		mmi.set_meta("batched_from", g.size())
+		root.add_child(mmi)
+		for e in g:
+			var mi: MeshInstance3D = e.node
+			mi.set_meta("batched", true)
+			mi.layers = 0
+			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		done += g.size()
+	if done > 0:
+		root.set_meta("batched", done)
+	return done
+
+
+## A node's transform in `root`'s frame, walking the parents (the tree may not be in the scene yet).
+static func _relative(n: Node3D, root: Node3D) -> Transform3D:
+	var t := n.transform
+	var p := n.get_parent()
+	while p != null and p != root:
+		if p is Node3D:
+			t = (p as Node3D).transform * t
+		p = p.get_parent()
+	return t
+
+
+## Two copies are one kind of piece when their meshes match: the class, the bounds, the faces; PrimitiveMeshes carry
+## their own material too.
+static func _mesh_sig(mesh: Mesh) -> String:
+	var b := mesh.get_aabb()
+	var faces := 0
+	for i in mesh.get_surface_count():
+		faces += mesh.surface_get_array_index_len(i) if mesh is ArrayMesh else 0
+	var mat := ""
+	if mesh is PrimitiveMesh:
+		mat = _mat_sig((mesh as PrimitiveMesh).material)
+	elif mesh.get_surface_count() > 0:
+		for i in mesh.get_surface_count():
+			mat += _mat_sig(mesh.surface_get_material(i)) + ";"
+	if mesh is ArrayMesh:
+		# same bounds are not the same mesh: two hand-made shapes can share a box
+		return "A%d|%s|%d|%s|%s" % [mesh.get_instance_id(), str(b), faces, mat, mesh.resource_path]
+	var props := ""
+	for prop in mesh.get_property_list():
+		if prop.usage & PROPERTY_USAGE_STORAGE and prop.type in [TYPE_FLOAT, TYPE_INT, TYPE_BOOL, TYPE_VECTOR2, TYPE_VECTOR3]:
+			props += "%s=%s," % [prop.name, str(mesh.get(prop.name))]
+	return "%s|%s|%s|%s" % [mesh.get_class(), str(b), props, mat]
+
+
+## A material by what it shows: the same look is the same material, even as two objects.
+static func _mat_sig(m: Material) -> String:
+	if m == null:
+		return "-"
+	if m is StandardMaterial3D:
+		var s := m as StandardMaterial3D
+		return "S|%s|%s|%.3f|%.3f|%d|%d|%d|%s|%s|%.3f|%s|%d" % [s.albedo_color.to_html(), str(s.albedo_texture.get_rid() if s.albedo_texture else 0),
+			s.roughness, s.metallic, s.transparency, s.shading_mode, s.cull_mode, str(s.emission_enabled), s.emission.to_html(),
+			s.emission_energy_multiplier, str(s.vertex_color_use_as_albedo), s.texture_filter]
+	return "%s#%d" % [m.get_class(), m.get_instance_id()]
 
 
 static func _meshes(n: Node) -> Array:

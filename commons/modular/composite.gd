@@ -112,6 +112,8 @@ func rebuild() -> void:
 		_spill_scaffold(scaffold)
 		for sc in scaffold:
 			(sc as Node).free()
+	# a collection's copies draw as one MultiMesh per kind of piece (builder.gd batch_repeats, 2026-11-07)
+	Builder.batch_repeats(built)
 	add_child(built)
 	set_meta("modular_term", term)
 
