@@ -14,6 +14,7 @@ const LinesTrace := preload("lines_trace.gd")
 const Construction := preload("construction_grid.gd")
 const AbstractFinish := preload("abstract_finish.gd")
 const LessonScore := preload("lesson_score.gd")
+const TimelineWalk := preload("timeline_walk.gd")
 var building: Node3D
 var data: Dictionary
 var catalog: Dictionary
@@ -123,6 +124,8 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 			var caption := _text(floor_root, waypoint.label, Vector3(waypoint.position[0], float(waypoint.get("height",0))+.025, waypoint.position[1]), .002)
 			caption.rotation_degrees.x = -90
 			caption.modulate = Color("efc5dd")
+	# the artifact timeline in the tower (2026-11-07): number captions, and the walk where no route is hand-made
+	if trial_id.is_empty(): TimelineWalk.build(floor_root, index)
 	var abstract: bool = building.abstract_floor(index)
 	if not abstract: _build_feed(floor_root,index != 0)
 	for wall in record.walls:
