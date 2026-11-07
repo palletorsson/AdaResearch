@@ -141,18 +141,41 @@ static func unlocked(it: Dictionary, lab: Node, void_game: Node = null) -> bool:
 ## The scene a registry token names, scanning the registry files once.
 static func scene_for(token: String) -> String:
 	if token == "":return ""
-	if _scenes.is_empty():
-		var dir := DirAccess.open("res://commons/artifacts/registry/")
-		if dir:
-			dir.list_dir_begin()
-			var f := dir.get_next()
-			while f != "":
-				if not dir.current_is_dir() and f.ends_with(".json"):
-					var d: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://commons/artifacts/registry/" + f))
-					if d is Dictionary:
-						for src in [d, d.get("artifacts", {})]:
-							if src is Dictionary:
-								for k in src:
-									if src[k] is Dictionary and src[k].has("scene"):_scenes[str(k)] = str(src[k].scene)
-				f = dir.get_next()
+	if _scenes_task >= 0:
+		WorkerThreadPool.wait_for_task_completion(_scenes_task)   # a worker task must be waited to be released
+		_scenes_task = -1
+	if _scenes.is_empty():_scenes = _read_scenes()
 	return str(_scenes.get(token, ""))
+
+## The token -> scene table (2026-11-07, the arrival stutter: the first scene_for of a session parsed every registry
+## file, ~500 ms, on the main thread - a vending machine's first _ready). The Void's registry index reads those files
+## once on a worker thread (floor_content._build_registry_index) and offers the table here; warm_scenes is for a game
+## without it. scene_for waits for a running warm; without an offer or a warm it reads the files itself.
+static var _scenes_task := -1
+
+static func warm_scenes() -> void:
+	if _scenes_task < 0 and _scenes.is_empty():
+		_scenes_task = WorkerThreadPool.add_task(func(): _scenes = _read_scenes(), false, "inventory scene table")
+
+static func offer_scenes(table: Dictionary) -> void:
+	if _scenes.is_empty() and _scenes_task < 0: _scenes = table
+
+## One registry file's tokens with a scene, into `out` (both layouts: top-level tokens and an "artifacts" dict).
+static func collect_scenes(d: Dictionary, out: Dictionary) -> void:
+	for src in [d, d.get("artifacts", {})]:
+		if src is Dictionary:
+			for k in src:
+				if src[k] is Dictionary and src[k].has("scene"):out[str(k)] = str(src[k].scene)
+
+static func _read_scenes() -> Dictionary:
+	var out := {}
+	var dir := DirAccess.open("res://commons/artifacts/registry/")
+	if dir:
+		dir.list_dir_begin()
+		var f := dir.get_next()
+		while f != "":
+			if not dir.current_is_dir() and f.ends_with(".json"):
+				var d: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://commons/artifacts/registry/" + f))
+				if d is Dictionary:collect_scenes(d, out)
+			f = dir.get_next()
+	return out

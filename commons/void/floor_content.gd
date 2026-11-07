@@ -725,7 +725,9 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 ## up by parsing every registry file (396 files, 12 MB: ~350 ms), once per new key, on the main thread, inside the build
 ## queue - the floor below arriving with a dozen such keys stalled a dozen frames. Now every registry file is read ONCE,
 ## on a worker thread started in _ready, into key -> entry with the same precedence (sorted files, the last file whose
-## entry has an existing scene wins). A key found nowhere is remembered as found nowhere.
+## entry has an existing scene wins). A key found nowhere is remembered as found nowhere. The same read fills the
+## inventory's token -> scene table (InventoryItems.scene_for: the vending machines, the hand), which would otherwise
+## parse the registry again on the main thread the first time a machine is built.
 var _registry_index: Dictionary = {}
 var _registry_task := -1
 
@@ -738,10 +740,12 @@ func _build_registry_index() -> void:
 	var files := DirAccess.get_files_at(directory)
 	files.sort()
 	var index: Dictionary = {}
+	var scenes: Dictionary = {}
 	for file in files:
 		if not file.ends_with(".json"): continue
 		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join(file)))
 		if not parsed is Dictionary: continue
+		InventoryItems.collect_scenes(parsed, scenes)
 		var artifacts: Variant = (parsed as Dictionary).get("artifacts", {})
 		if not artifacts is Dictionary: continue
 		for key in artifacts:
@@ -749,6 +753,7 @@ func _build_registry_index() -> void:
 			if entry is Dictionary and entry.has("scene") and ResourceLoader.exists(str(entry.scene)):
 				index[key] = entry
 	_registry_index = index
+	InventoryItems.offer_scenes(scenes)
 
 func _definition(key: String) -> Dictionary:
 	if catalog.artifacts.has(key): return catalog.artifacts[key]

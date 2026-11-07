@@ -33,7 +33,11 @@ func _ready() -> void:
 	var prefabs: Node3D = Machine.instantiate(); prefabs.name = "Prefabs"; prefabs.set_meta("config_kind", "prefabs"); add_child(prefabs); prefabs.position = Vector3(-1.05, 0, 0)
 	var tools: Node3D = Machine.instantiate(); tools.name = "Tools"; tools.set_meta("config_kind", "tools"); add_child(tools); tools.position = Vector3(1.0, 0, 0)
 	var cam := Camera3D.new(); cam.transform = Transform3D(Basis(), Vector3(0, 1.45, 3.1)).looking_at(Vector3(0, 1.0, 0)); cam.fov = 62; add_child(cam); cam.current = true
-	for i in 45: await get_tree().process_frame
+	# the machines stock a few slots per frame once their scenes are in (2026-11-07): wait for both, then the seating
+	for i in 600:
+		if bool(prefabs.get("stocked")) and bool(tools.get("stocked")): break
+		await get_tree().process_frame
+	for i in 25: await get_tree().process_frame
 	# A — the stock
 	var p_slots := prefabs.get_children().filter(func(c): return str(c.name).begins_with("Slot_"))
 	var t_slots := tools.get_children().filter(func(c): return str(c.name).begins_with("Slot_"))

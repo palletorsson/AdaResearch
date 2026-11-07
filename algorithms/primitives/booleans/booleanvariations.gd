@@ -11,6 +11,14 @@
 @export var fixed_seed: int = 12345
 @export var material_variations: bool = true
 
+## One variation per frame instead of all 75 in one (2026-11-07, the arrival stutter in the Void: building them all
+## was a 3.2 s frame). A fixed seed still builds at once - the shapes come from the global random stream, which other
+## code would draw from between frames.
+@export var progressive: bool = true
+var _queue: Array = []
+## The pickables' stability script, compiled once - not once per variation (75 compiles, ~240 ms).
+static var _stability_script: GDScript
+
 # Arrays to store different primitive types and operations
 var primitive_types = ["box", "sphere", "cylinder", "torus", "prism"]
 var operation_types = [CSGShape3D.OPERATION_UNION, CSGShape3D.OPERATION_SUBTRACTION, CSGShape3D.OPERATION_INTERSECTION]
@@ -50,24 +58,37 @@ func generate_csg_grid() -> void:
 		seed(fixed_seed)
 	
 	var variation_index = 0
-	
+	_queue.clear()
 	for x in range(grid_size.x):
 		for y in range(grid_size.y):
 			for z in range(grid_size.z):
-				var position = Vector3(x * spacing, y * spacing, z * spacing)
-				var csg_object = create_csg_variation(variation_index)
-				
-				if csg_object:
-					# Wrap the CSG object in a grab_cube for VR interaction
-					var grab_cube = create_grab_cube_wrapper(csg_object, variation_index)
-					grab_cube.position = position
-					add_child(grab_cube)
-					
-					# Add a label for identification
-					var label = create_variation_label(variation_index, position)
-					add_child(label)
-				
+				_queue.append([variation_index, Vector3(x * spacing, y * spacing, z * spacing)])
 				variation_index += 1
+	if progressive and use_random_seed and is_inside_tree():
+		set_process(true)
+		return
+	while not _queue.is_empty(): _build_next()
+	set_process(false)
+
+func _process(_delta: float) -> void:
+	if _queue.is_empty():
+		set_process(false)
+		return
+	_build_next()
+
+func _build_next() -> void:
+	var job: Array = _queue.pop_front()
+	var variation_index: int = job[0]
+	var position: Vector3 = job[1]
+	var csg_object = create_csg_variation(variation_index)
+	if csg_object:
+		# Wrap the CSG object in a grab_cube for VR interaction
+		var grab_cube = create_grab_cube_wrapper(csg_object, variation_index)
+		grab_cube.position = position
+		add_child(grab_cube)
+		# Add a label for identification
+		var label = create_variation_label(variation_index, position)
+		add_child(label)
 
 func create_csg_variation(index: int) -> CSGCombiner3D:
 	var combiner = CSGCombiner3D.new()
@@ -186,6 +207,10 @@ func create_perforated_cube(combiner: CSGCombiner3D) -> void:
 					continue
 				var hole = CSGSphere3D.new()
 				hole.radius = randf_range(0.1, 0.3)
+				# 124 holes of 1-3 cm at the shipped scale: 6 x 3 segments, not the default 12 x 6. At 12 x 6 one
+				# perforated cube was ~65k vertices and ~400 ms of CSG on the main thread (2026-11-07, the arrival stutter).
+				hole.radial_segments = 6
+				hole.rings = 3
 				hole.operation = CSGShape3D.OPERATION_SUBTRACTION
 				hole.position = Vector3(x * 0.4, y * 0.4, z * 0.4)
 				combiner.add_child(hole)
@@ -612,8 +637,9 @@ func create_grab_cube_wrapper(csg_object: CSGCombiner3D, index: int) -> Node3D:
 	
 	# Add a script to handle stability.
 	# Must include highlight_updated signal so HighlightRing child doesn't error.
-	var stability_script = GDScript.new()
-	stability_script.source_code = """
+	if _stability_script == null:
+		_stability_script = GDScript.new()
+		_stability_script.source_code = """
 extends RigidBody3D
 
 signal highlight_updated(pickable, enable)
@@ -629,7 +655,8 @@ func _integrate_forces(_state) -> void:
 	if angular_velocity.length() > 0.1:
 		angular_velocity *= 0.9
 """
-	grab_cube.set_script(stability_script)
+		_stability_script.reload()
+	grab_cube.set_script(_stability_script)
 	
 	return grab_cube
 

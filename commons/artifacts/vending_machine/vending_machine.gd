@@ -48,6 +48,17 @@ var height := 1.9
 var _variants: Dictionary = VARIANTS.duplicate(true)
 var _glow: Dictionary = {}      # slot key -> glow left (the spot lights up when taken)
 var _turns: Array[Node3D] = []  # the miniatures' turntables
+## THE STOCKING (2026-11-07, the arrival stutter in the Void): a machine used to load every item's scene and make every
+## miniature in its _ready - 744 ms for the first prefabs machine, 128 ms once the scenes were cached, in one frame. Now
+## the cabinet stands at once, the item scenes load on a worker thread, and the slots are filled a few per frame
+## (STOCK_BUDGET_MS) in their order, each once its scene is in. `stocked` says when the last slot is made.
+const STOCK_BUDGET_MS := 6.0
+const PICKABLE := "res://addons/godot-xr-tools/objects/pickable.tscn"
+var stocked := false
+var _stock: Array = []          # [entry, at] still to be made, in shelf order
+var _loading: Dictionary = {}   # scene path -> true while its worker load runs
+var _loaded: Dictionary = {}    # scene path -> PackedScene, held while the machine stocks
+signal stock_complete
 
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("kind") and str(config.kind) in ["prefabs", "tools"]: kind = str(config.kind)
@@ -157,10 +168,41 @@ func _build() -> void:
 		var y: float = y0 + r * PITCH_Y
 		_box(cabinet, "Shelf", Vector3(0, y - .008, -.04), Vector3(width - .12, .016, d - .22), SHELF)
 		_box(cabinet, "ShelfLip", Vector3(0, y + .022, d * .5 - .14), Vector3(width - .12, .06, .006), Color("c8d0cc"))
+	_stock.clear(); stocked = false
 	for i in entries.size():
 		var c: int = i % cols; var r: int = floori(float(i) / float(cols))
-		_slot(entries[i], Vector3(x0 + c * PITCH_X, y0 + r * PITCH_Y, -.04))
+		_stock.append([entries[i], Vector3(x0 + c * PITCH_X, y0 + r * PITCH_Y, -.04)])
+		_request(Items.scene_for(str(entries[i].item.get("token", ""))))
+	_request(PICKABLE)
 	set_process(true)
+
+## Ask a worker thread for a scene this machine will need, unless it is cached or already asked for.
+func _request(path: String) -> void:
+	if path == "" or _loading.has(path) or _loaded.has(path) or ResourceLoader.has_cached(path) or not ResourceLoader.exists(path): return
+	if ResourceLoader.load_threaded_request(path, "PackedScene") == OK: _loading[path] = true
+
+## Whether a slot's scene can be used now without a load on this thread (a failed worker load falls back to load()).
+func _ready_to_make(path: String) -> bool:
+	if path == "" or not _loading.has(path): return true
+	var status := ResourceLoader.load_threaded_get_status(path)
+	if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS: return false
+	if status == ResourceLoader.THREAD_LOAD_LOADED: _loaded[path] = ResourceLoader.load_threaded_get(path)
+	_loading.erase(path)
+	return true
+
+## A few slots per frame, in shelf order, within the budget.
+func _stock_some() -> void:
+	if stocked: return
+	if not _ready_to_make(PICKABLE): return
+	var start := Time.get_ticks_usec()
+	while not _stock.is_empty() and (Time.get_ticks_usec() - start) / 1000.0 < STOCK_BUDGET_MS:
+		var next: Array = _stock[0]
+		if not _ready_to_make(Items.scene_for(str(next[0].item.get("token", "")))): return
+		_stock.pop_front()
+		_slot(next[0], next[1])
+	if _stock.is_empty():
+		stocked = true; _loaded.clear()
+		stock_complete.emit()
 
 func _slot(entry: Dictionary, at: Vector3) -> void:
 	var it: Dictionary = entry.item; var id := str(it.get("id", "")); var key := str(entry.key); var knobs: Dictionary = entry.knobs
@@ -304,6 +346,7 @@ func _return_home(key: String) -> void:
 	shell.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC; shell.freeze = true
 
 func _process(delta: float) -> void:
+	_stock_some()
 	for t in _turns:
 		if is_instance_valid(t): t.rotation.y += delta * .5
 	for key in _glow.keys():
@@ -314,7 +357,7 @@ func _process(delta: float) -> void:
 		if _glow[key] <= 0.0: _glow.erase(key)
 
 func get_state() -> Dictionary:
-	return {"kind": kind, "slots": slots.size(), "entries": slot_list().size(), "stock": stock().size(), "width": width, "height": height}
+	return {"kind": kind, "slots": slots.size(), "entries": slot_list().size(), "stock": stock().size(), "width": width, "height": height, "stocked": stocked}
 
 static func _box(parent: Node3D, title_: String, at: Vector3, size: Vector3, colour: Color) -> MeshInstance3D:
 	var m := MeshInstance3D.new(); m.name = title_; m.position = at
