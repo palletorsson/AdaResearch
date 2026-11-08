@@ -33,6 +33,14 @@ DERIVED (rebuilt, never edit):  ada_run/artifact_timeline_view.json  - what the 
     python tools/artifact_timeline.py check [--markdown]
     python tools/artifact_timeline.py forms [--refresh]   # guess the missing forms (--refresh: re-guess the guessed)
 
+CARDS (transitions - Palle, 2026-11-08: "transition cards between artifacts in the timeline. The motivation for the
+transition. The point is genesis ... line = distance(point, point), extension(line) = plank ... a short sentence and the
+formula"; "extension is body, association is name"). A card lives on its TERM in commons/modular/terms.json:
+card {formula, motive, op, said}. The view puts it once, before the first main work whose form is that term; a card
+whose term no formed work carries yet is listed as unplaced.
+    python tools/artifact_timeline.py cards              # every card, where it falls in the time
+    python tools/artifact_timeline.py card <term>        # {formula, motive, op} on stdin -> written on the term
+
 THREADS (comments and instructions in the time - Palle, 2026-11-07: "comment and add artifacts in the time by
 instruction prompt, so we can prompt in the context of the time"): commons/data/artifact_timeline_threads.json
     python tools/artifact_timeline.py thread list | add | set <id>     # the page's /api/artifact-timeline/instruct
@@ -656,6 +664,8 @@ def build_view() -> dict:
 
     main, gaps = [], defaultdict(list)
     num = numbering(doc.get("main", []))
+    tm = terms()
+    carded: dict = {}   # term -> the key of the work the card falls before
     children = defaultdict(list)
     for row in doc.get("main", []):
         if num[row["key"]]["base"]:
@@ -687,6 +697,10 @@ def build_view() -> dict:
             flags.append("not on the construction path")
         if not e["registered"]:
             flags.append("no registry entry")
+        term = form.get("term")
+        if term and term not in carded and isinstance((tm.get(term) or {}).get("card"), dict):
+            carded[term] = row["key"]
+            e["card"] = card_of(term, tm)
         e["flags"] = flags
         for f in flags:
             gaps[f.split(",")[0] if f.startswith("numbered") else ("its base is not a numbered main work" if f.startswith("its base") else f)].append(n)
@@ -704,7 +718,8 @@ def build_view() -> dict:
     catalogue = sorted(({"key": k, "title": (reg.get(k) or {}).get("title", k), "in_tower": k in tw, "filed": k in filed,
                          "placeable": k in placeable}
                         for k in catalogue_keys), key=lambda c: c["key"])
-    counts = {"main": len(main), "numbered": sum(1 for e in main if e["n"] is not None),
+    card_list = [{**card_of(t, tm), "at": carded.get(t)} for t, v in tm.items() if isinstance(v.get("card"), dict)]
+    counts = {"main": len(main), "cards": len(card_list), "cards_unplaced": sum(1 for c in card_list if not c["at"]), "numbered": sum(1 for e in main if e["n"] is not None),
               "children": sum(1 for e in main if e["base"]),
               "main_collections": sum(1 for e in main if (e["form"] or {}).get("kind") == "collection"),
               "environment": len(env), "environment_collections": sum(1 for e in env if e["lane"] == "collections"),
@@ -716,7 +731,43 @@ def build_view() -> dict:
     return {"_doc": "DERIVED by tools/artifact_timeline.py view - never edit; the authored file is commons/data/artifact_timeline.json",
             "generated_at": now(), "edited_at": doc.get("edited_at"), "base": doc.get("edited_at") or doc.get("seeded_at"), "counts": counts, "floors": floors,
             "main": main, "environment": env, "removed": removed, "unfiled": unfiled, "duplicates": dup,
-            "gaps": {k: v for k, v in gaps.items()}, "catalogue": catalogue}
+            "gaps": {k: v for k, v in gaps.items()}, "catalogue": catalogue, "cards": card_list}
+
+
+def card_of(term: str, tm: dict) -> dict:
+    t = tm.get(term) or {}
+    c = t.get("card") or {}
+    return {"term": term, "label": t.get("label", term), "formula": c.get("formula", ""), "motive": c.get("motive", ""),
+            "op": c.get("op", ""), "from": t.get("from", []), "said": c.get("said", "")}
+
+
+CARD_OPS = ("genesis", "distance", "extension", "association", "closure", "step", "hand", "times", "array", "tie", "drive")
+
+
+def set_card(term: str, body: dict) -> dict:
+    """write card {formula, motive, op} on a term of terms.json - a JSON round trip that is byte-identical except for
+    the card (the file is indent 2; checked before writing). An empty formula and motive removes the card."""
+    raw = TERMS.read_bytes()
+    g = json.loads(raw.decode("utf-8"))
+    if (json.dumps(g, indent=2, ensure_ascii=False) + "\n").encode("utf-8") != raw:
+        return {"error": "terms.json is not in its indent-2 form; not writing (open it, it was reformatted)"}
+    if term not in g.get("terms", {}):
+        return {"error": f"no term {term!r} in terms.json"}
+    formula, motive = str(body.get("formula", "")).strip(), str(body.get("motive", "")).strip()
+    op = str(body.get("op", "")).strip()
+    if op and op not in CARD_OPS:
+        return {"error": f"op {op!r}: one of {', '.join(CARD_OPS)}"}
+    if len(motive) > 120:
+        return {"error": "a card is one short sentence (120 characters at most)"}
+    t = g["terms"][term]
+    if not formula and not motive:
+        t.pop("card", None)
+    else:
+        old = t.get("card") or {}
+        t["card"] = {"formula": formula, "motive": motive, "op": op or old.get("op", ""),
+                     "said": str(body.get("said") or old.get("said") or "").strip()}
+    TERMS.write_bytes((json.dumps(g, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
+    return {"ok": True, "term": term, "card": t.get("card")}
 
 
 def write_view() -> dict:
@@ -1204,6 +1255,19 @@ def main(argv: list) -> int:
         forms("--refresh" in argv)
         write_view()
         return 0
+    if cmd == "cards":
+        v = write_view()
+        for c in v["cards"]:
+            at = c["at"] or "(no work of this form yet)"
+            sys.stdout.buffer.write(f"{c['formula']:<36} {c['motive']}\n{'':36}   before {at}\n".encode("utf-8"))
+        print(f"{len(v['cards'])} cards, {v['counts']['cards_unplaced']} unplaced")
+        return 0
+    if cmd == "card":
+        r = set_card(argv[2], json.loads(sys.stdin.buffer.read().decode("utf-8") or "{}"))
+        if r.get("ok"):
+            write_view()
+        sys.stdout.buffer.write(json.dumps(r, ensure_ascii=False).encode("utf-8"))
+        return 0 if r.get("ok") else 3
     if cmd == "thread":
         return thread(argv[2] if len(argv) > 2 else "list", argv[3] if len(argv) > 3 else None,
                       sys.stdin.buffer.read().decode("utf-8") if len(argv) > 2 and argv[2] in ("add", "set") else "")

@@ -1,5 +1,5 @@
 {
-  "_doc": "The modular class system's terms: every thing is an expression over primitives (p) and other terms (t). One file for the Godot kernel (commons/modular/composite.gd builds it), the web tree (/knowledge-tree) and the tutorial path (tools/modular_path.py: derivation order = lesson order). Palle, 2026-10-23: 'point + mesh(color) + collider = sphere_collider … everything in this 3d world is triangles'. Primitives: point, mesh{shape,size,color}, collider{shape,size}, body{kind}, grabbable, label{text}, light. Operators: compose{parts}, associate{of,surface,story}, times{of,n,layout}, array{of,n,step,dims}, assemblage{parts[{of,at,rot,scale}]}, engine{of,kind}, transform{of,at,rot,scale}. A part with \"scaffold\": true is shown while the thing is being built and removed when it is done (Palle: the tape ends alone, line and points gone). A mesh may name a \"shader\" (ink: the drawn stroke, tapered ends, darker silhouette). {\"op\":\"sort\",\"of\":…,\"by\":size|height|width|name} lays a thing's parts in a row by a reading of each (measure's first operator); {\"p\":\"prefab\",\"token\":name} stands a registry artifact in the grammar as itself. {\"op\":\"connect\",\"of\":…,\"a\":i,\"b\":j,\"kind\":rope|rod|spring} (or \"ties\":[[i,j,kind]…]) ties two parts of a thing by index — the strings. `track` lists the main track: each step gives one new capacity (checked by tools/capacity_track.py); every other term and every spine artifact hangs off its nearest step as a branch.",
+  "_doc": "The modular class system's terms: every thing is an expression over primitives (p) and other terms (t). One file for the Godot kernel (commons/modular/composite.gd builds it), the web tree (/knowledge-tree) and the tutorial path (tools/modular_path.py: derivation order = lesson order). Palle, 2026-10-23: 'point + mesh(color) + collider = sphere_collider … everything in this 3d world is triangles'. Primitives: point, mesh{shape,size,color}, collider{shape,size}, body{kind}, grabbable, label{text}, light. Operators: compose{parts}, associate{of,surface,story}, times{of,n,layout}, array{of,n,step,dims}, assemblage{parts[{of,at,rot,scale}]}, engine{of,kind}, transform{of,at,rot,scale}. A part with \"scaffold\": true is shown while the thing is being built and removed when it is done (Palle: the tape ends alone, line and points gone). A mesh may name a \"shader\" (ink: the drawn stroke, tapered ends, darker silhouette). {\"op\":\"sort\",\"of\":…,\"by\":size|height|width|name} lays a thing's parts in a row by a reading of each (measure's first operator); {\"p\":\"prefab\",\"token\":name} stands a registry artifact in the grammar as itself. {\"op\":\"connect\",\"of\":…,\"a\":i,\"b\":j,\"kind\":rope|rod|spring} (or \"ties\":[[i,j,kind]…]) ties two parts of a thing by index — the strings. `track` lists the main track: each step gives one new capacity (checked by tools/capacity_track.py); every other term and every spine artifact hangs off its nearest step as a branch. CARDS (Palle, 2026-11-08: 'transition cards between artifacts in the timeline ... a short sentence and the formula'): a term may carry card {formula, motive, op, said} - the transition INTO it, in the fewest words: op is one of genesis | distance | extension (a body) | association (a name) | ...; the artifact timeline shows it once, before the first work of that form.",
   "version": 1,
   "chapters": [
     "point",
@@ -45,6 +45,53 @@
         "p": "point",
         "color": "ffffff",
         "radius": 0.035
+      },
+      "card": {
+        "formula": "point",
+        "motive": "a position and nothing else: somewhere to begin",
+        "op": "genesis",
+        "said": "Palle, 2026-11-08: 'The point is genesis'"
+      }
+    },
+    "black_point": {
+      "chapter": "point",
+      "label": "black point",
+      "expr": "extension(point) = black point (Palle, 2026-11-08: 'an extension(point) = black dot, is better in our hand, it is desire' - the point given a body: 7 cm, black, it can be taken)",
+      "from": [
+        "point"
+      ],
+      "build": {
+        "op": "compose",
+        "parts": [
+          {
+            "t": "point",
+            "scaffold": true
+          },
+          {
+            "p": "mesh",
+            "shape": "sphere",
+            "size": [
+              0.07
+            ],
+            "color": "020203"
+          },
+          {
+            "p": "collider",
+            "shape": "sphere",
+            "size": [
+              0.07
+            ]
+          },
+          {
+            "t": "grabbable"
+          }
+        ]
+      },
+      "card": {
+        "formula": "extension(point) = black point",
+        "motive": "the position takes a body small enough to hold",
+        "op": "extension",
+        "said": "Palle, 2026-11-08: 'extension(point) = black dot, is better in our hand, it is desire'; 'extension is body'"
       }
     },
     "mesh_color": {
@@ -190,6 +237,12 @@
             "shader": "ink"
           }
         ]
+      },
+      "card": {
+        "formula": "line = distance(point, point)",
+        "motive": "two positions ask how far apart they are",
+        "op": "distance",
+        "said": "Palle, 2026-11-08: 'line = distance(point, point)'"
       }
     },
     "tape": {
@@ -277,6 +330,12 @@
             "kind": "static"
           }
         ]
+      },
+      "card": {
+        "formula": "extension(line) = plank",
+        "motive": "the distance takes a body you can stand on",
+        "op": "extension",
+        "said": "Palle, 2026-11-08: 'extension(line) = plank'; 'extension is body'"
       }
     },
     "plank_sizes": {
@@ -117503,7 +117562,7 @@
     },
     {
       "term": "line",
-      "adds": "extension: a length",
+      "adds": "distance: a length",
       "axis": "form:1"
     },
     {
