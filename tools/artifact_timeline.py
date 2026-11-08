@@ -36,8 +36,10 @@ DERIVED (rebuilt, never edit):  ada_run/artifact_timeline_view.json  - what the 
 CARDS (transitions - Palle, 2026-11-08: "transition cards between artifacts in the timeline. The motivation for the
 transition. The point is genesis ... line = distance(point, point), extension(line) = plank ... a short sentence and the
 formula"; "extension is body, association is name"). A card lives on its TERM in commons/modular/terms.json:
-card {formula, motive, op, said}. The view puts it once, before the first main work whose form is that term; a card
-whose term no formed work carries yet is listed as unplaced.
+card {formula, motive, op, said}. The view puts it once: before the main row that names it in "cards" (written by
+hand - where the tower stages a step with no work of that form), else before the first main work MADE of that form
+(its form term is the term, or a child of it, or a term whose grammar `from` holds it). A card no work carries yet is
+listed as unplaced.
     python tools/artifact_timeline.py cards              # every card, where it falls in the time
     python tools/artifact_timeline.py card <term>        # {formula, motive, op} on stdin -> written on the term
 
@@ -666,6 +668,31 @@ def build_view() -> dict:
     num = numbering(doc.get("main", []))
     tm = terms()
     carded: dict = {}   # term -> the key of the work the card falls before
+    has_card = {t for t, v in tm.items() if isinstance(v.get("card"), dict)}
+    for row in doc.get("main", []):   # placed by hand: a row's "cards"
+        for t in row.get("cards") or []:
+            if t in has_card and t not in carded:
+                carded[t] = row["key"]
+    for row in doc.get("main", []):   # else the first work made of the form
+        f = row.get("form") or {}
+        made_of = {f.get("term"), f.get("of_form") if f.get("kind") == "child" else None,
+                   *((tm.get(f.get("term")) or {}).get("from") or [])}
+        for t in sorted(made_of & has_card, key=lambda x: 0 if x == f.get("term") else 1):
+            if t not in carded:
+                carded[t] = row["key"]
+    try:
+        track_at = {st["term"]: i for i, st in enumerate(read(TERMS).get("track", []))}
+    except (OSError, ValueError):
+        track_at = {}
+    grammar_at = {t: i for i, t in enumerate(tm)}
+    cards_before = defaultdict(list)
+    for t in sorted(carded, key=lambda x: (track_at.get(x, 999), grammar_at[x])):   # two cards on one work: the track's order
+        cards_before[carded[t]].append(t)
+    made_of = {}   # the page places cards itself as rows move: it needs what each formed term is made of
+    for row in doc.get("main", []):
+        ft = (row.get("form") or {}).get("term")
+        if ft in tm:
+            made_of[ft] = [x for x in (tm[ft].get("from") or []) if x in has_card]
     children = defaultdict(list)
     for row in doc.get("main", []):
         if num[row["key"]]["base"]:
@@ -697,10 +724,10 @@ def build_view() -> dict:
             flags.append("not on the construction path")
         if not e["registered"]:
             flags.append("no registry entry")
-        term = form.get("term")
-        if term and term not in carded and isinstance((tm.get(term) or {}).get("card"), dict):
-            carded[term] = row["key"]
-            e["card"] = card_of(term, tm)
+        if row.get("cards"):
+            e["cards_by_hand"] = list(row["cards"])   # the authored list: the page must send it back on Save
+        if cards_before.get(row["key"]):
+            e["cards"] = [card_of(t, tm) for t in cards_before[row["key"]]]
         e["flags"] = flags
         for f in flags:
             gaps[f.split(",")[0] if f.startswith("numbered") else ("its base is not a numbered main work" if f.startswith("its base") else f)].append(n)
@@ -718,7 +745,9 @@ def build_view() -> dict:
     catalogue = sorted(({"key": k, "title": (reg.get(k) or {}).get("title", k), "in_tower": k in tw, "filed": k in filed,
                          "placeable": k in placeable}
                         for k in catalogue_keys), key=lambda c: c["key"])
-    card_list = [{**card_of(t, tm), "at": carded.get(t)} for t, v in tm.items() if isinstance(v.get("card"), dict)]
+    pos = {r["key"]: i for i, r in enumerate(doc.get("main", []))}
+    card_list = sorted(({**card_of(t, tm), "at": carded.get(t)} for t, v in tm.items() if isinstance(v.get("card"), dict)),
+                       key=lambda c: (pos.get(c["at"], 10 ** 6), track_at.get(c["term"], 999)))
     counts = {"main": len(main), "cards": len(card_list), "cards_unplaced": sum(1 for c in card_list if not c["at"]), "numbered": sum(1 for e in main if e["n"] is not None),
               "children": sum(1 for e in main if e["base"]),
               "main_collections": sum(1 for e in main if (e["form"] or {}).get("kind") == "collection"),
@@ -731,7 +760,7 @@ def build_view() -> dict:
     return {"_doc": "DERIVED by tools/artifact_timeline.py view - never edit; the authored file is commons/data/artifact_timeline.json",
             "generated_at": now(), "edited_at": doc.get("edited_at"), "base": doc.get("edited_at") or doc.get("seeded_at"), "counts": counts, "floors": floors,
             "main": main, "environment": env, "removed": removed, "unfiled": unfiled, "duplicates": dup,
-            "gaps": {k: v for k, v in gaps.items()}, "catalogue": catalogue, "cards": card_list}
+            "gaps": {k: v for k, v in gaps.items()}, "catalogue": catalogue, "cards": card_list, "made_of": made_of}
 
 
 def card_of(term: str, tm: dict) -> dict:
@@ -741,7 +770,8 @@ def card_of(term: str, tm: dict) -> dict:
             "op": c.get("op", ""), "from": t.get("from", []), "said": c.get("said", "")}
 
 
-CARD_OPS = ("genesis", "distance", "extension", "association", "closure", "step", "hand", "times", "array", "tie", "drive")
+CARD_OPS = ("genesis", "distance", "extension", "association", "closure", "step", "hand", "times", "array", "tie", "drive",
+            "assemblage", "sort", "decide", "field")
 
 
 def set_card(term: str, body: dict) -> dict:
@@ -1022,6 +1052,9 @@ def save(text: str) -> int:
                             row[f] = v
                     elif f == "floor" and (isinstance(v, int) or v is None):
                         row[f] = v
+                    elif f == "cards":
+                        if isinstance(v, list) and any(isinstance(t, str) and t.strip() for t in v):
+                            row[f] = [t.strip() for t in v if isinstance(t, str) and t.strip()]
                     elif f == "form":
                         cf = clean_form(v)
                         if cf:
@@ -1031,7 +1064,7 @@ def save(text: str) -> int:
                 out.append(row)
         return out
 
-    main_rows = clean(body.get("main"), ["floor", "note", "form"])
+    main_rows = clean(body.get("main"), ["floor", "note", "form", "cards"])
     env_rows = clean(body.get("environment"), ["why", "form"])
     rem_rows = clean(body.get("removed"), ["reason", "at", "placements"])
     keys = [r["key"] for r in main_rows + env_rows + rem_rows]

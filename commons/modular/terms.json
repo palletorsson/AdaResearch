@@ -758,6 +758,12 @@
             "alpha": 0.9
           }
         ]
+      },
+      "card": {
+        "formula": "quad = distance(line, line)",
+        "motive": "two lines ask what lies between them: a surface",
+        "op": "distance",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "wooden_plane": {
@@ -1131,6 +1137,12 @@
             "kind": "static"
           }
         ]
+      },
+      "card": {
+        "formula": "extension(box) = cube",
+        "motive": "the solid takes a body: it is in the way",
+        "op": "extension",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "wooden_box": {
@@ -1237,6 +1249,12 @@
             ]
           }
         ]
+      },
+      "card": {
+        "formula": "assemblage(sphere, plank) = elevated plank",
+        "motive": "two kinds of part rest on each other",
+        "op": "assemblage",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "physics_test": {
@@ -1446,6 +1464,12 @@
             "t": "grabbable"
           }
         ]
+      },
+      "card": {
+        "formula": "hand(cube) = pick-up cube",
+        "motive": "the falling body fits a hand: it can be taken",
+        "op": "hand",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "game_spaces": {
@@ -1621,6 +1645,12 @@
         "kind": "sine",
         "amplitude": 0.25,
         "period": 2
+      },
+      "card": {
+        "formula": "drive(point, sin t) = movement",
+        "motive": "the position becomes a function of time",
+        "op": "drive",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "sine_surface": {
@@ -2203,6 +2233,12 @@
             }
           ]
         }
+      },
+      "card": {
+        "formula": "sort(pallet taken apart, by size) = a reading",
+        "motive": "the parts laid in a row by a measure",
+        "op": "sort",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "tied_pallet": {
@@ -5484,6 +5520,12 @@
             ]
           }
         }
+      },
+      "card": {
+        "formula": "tie(cube, sphere) = pendulum",
+        "motive": "one part holds another: the fall becomes a swing",
+        "op": "tie",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "cylinder": {
@@ -38200,6 +38242,12 @@
             }
           ]
         }
+      },
+      "card": {
+        "formula": "assemblage(deck, truck × 2, wheel × 4) = skateboard",
+        "motive": "many kinds of part become one thing to ride",
+        "op": "assemblage",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "handmade_pallet_396e98dd840e21a0": {
@@ -47729,6 +47777,12 @@
           }
         ],
         "ticks": 300
+      },
+      "card": {
+        "formula": "decide(input, input) = and",
+        "motive": "two inputs become one output: both, or nothing",
+        "op": "decide",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "not_frame": {
@@ -48984,6 +49038,12 @@
           0.25,
           0
         ]
+      },
+      "card": {
+        "formula": "box = closure(quad × 6)",
+        "motive": "the surfaces close on each other: a solid you see",
+        "op": "closure",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "falling_cube": {
@@ -49010,6 +49070,12 @@
             0
           ]
         }
+      },
+      "card": {
+        "formula": "step(cube, physics) = falling cube",
+        "motive": "the body takes mass: it falls",
+        "op": "step",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "cube_row": {
@@ -49027,6 +49093,12 @@
         "n": 4,
         "step": 0.6,
         "dims": 1
+      },
+      "card": {
+        "formula": "array(cube, n) = cube row",
+        "motive": "the same cube again: now it can be counted",
+        "op": "array",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "lattice": {
@@ -49049,6 +49121,12 @@
         "n": 6,
         "step": 0.2,
         "dims": 3
+      },
+      "card": {
+        "formula": "array(cube row, n, 3d) = lattice",
+        "motive": "repetition at scale turns into a material",
+        "op": "array",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "exhibit_cube": {
@@ -51185,6 +51263,12 @@
         ],
         "res": 36,
         "color": "c0568a"
+      },
+      "card": {
+        "formula": "metaballs = field(point, point, …)",
+        "motive": "points become a field; a surface rises where it is strong",
+        "op": "field",
+        "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
     "gyroid": {
