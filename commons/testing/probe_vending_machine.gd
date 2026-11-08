@@ -2,8 +2,8 @@ extends Node3D
 ## THE VENDING MACHINES ON A BENCH (2026-11-06): a prefabs machine and a tools machine on a floor, no Void, a fake hand in
 ## the inventory_hands group. Proves, with numbers: (A) the prefabs machine shows one slot per non-tool item and the
 ## tools machine the eight tools, the tape in all nine of its configurations; (B) every unlocked slot has a pick shell,
-## and the miniatures have meshes in their own colours (no override); (C) the rubber ball's tape reads its association
-## line and the masking tape's its configuration; (D) grabbing the rubber ball's slot collects it (the fake hand, the
+## and the miniatures have meshes in their own colours (no override); (C) the beach ball's tape reads its association
+## line and the masking tape's its configuration; (D) grabbing the beach ball's slot collects it (the fake hand, the
 ## collected file) and the shell is back on its shelf a frame later; grabbing the masking tape's slot sets the hand's
 ## tape knob before collecting; (E) the glass has no collider and the cabinet's one collider leaves the front free.
 ## Writes ada_run/vending/{bench.png, report.json}.
@@ -42,10 +42,13 @@ func _ready() -> void:
 	var p_slots := prefabs.get_children().filter(func(c): return str(c.name).begins_with("Slot_"))
 	var t_slots := tools.get_children().filter(func(c): return str(c.name).begins_with("Slot_"))
 	var tapes := t_slots.filter(func(c): return str(c.name).begins_with("Slot_tape_"))
-	var all_items: int = Items.items().size()
+	var all_items: int = Items.items().filter(func(it): return bool(it.get("vending", true))).size()   # "vending": false is never stocked (2026-11-08)
 	_check("A prefabs machine: %d slots = %d items less the %d tools; tools machine: %d slots, %d of them tapes" % [p_slots.size(), all_items, 8, t_slots.size(), tapes.size()], p_slots.size() == all_items - 8 and t_slots.size() == 7 + 9 and tapes.size() == 9)
 	var t_ids: Array = t_slots.map(func(c): return str(c.name).trim_prefix("Slot_"))
-	_check("the tools machine holds the measuring stick, both planks, the tapes, the rubber, the pin, the weight and the clock (%s)" % [", ".join(t_ids)], "measuringstick" in t_ids and "plank2" in t_ids and "tape_1" in t_ids and not ("rubberball" in t_ids))
+	var p_ids: Array = p_slots.map(func(c): return str(c.name).trim_prefix("Slot_"))
+	# 2026-11-08 ("vending": false): the red and blue points of Point One are on no shelf; the beach ball stands in below
+	_check("the rubber ball and the marble are on no shelf (%s)" % str(p_ids.filter(func(i): return i in ["rubberball", "marble"])), not ("rubberball" in p_ids) and not ("marble" in p_ids))
+	_check("the tools machine holds the measuring stick, both planks, the tapes, the rubber, the pin, the weight and the clock (%s)" % [", ".join(t_ids)], "measuringstick" in t_ids and "plank2" in t_ids and "tape_1" in t_ids and not ("beachball" in t_ids))
 	# B — shells and miniatures, in their own colours
 	var shells := 0; var with_mesh := 0; var without: Array = []; var unlocked := 0; var overridden := 0
 	for m in [prefabs, tools]:
@@ -66,9 +69,9 @@ func _ready() -> void:
 	_check("B the miniatures have meshes (%d of %d; none: %s)" % [with_mesh, total, ", ".join(without)], with_mesh >= total * 0.8)
 	_check("B unlocked miniatures keep their own colours (%d carry a shade)" % overridden, overridden == 0)
 	# C — the tape lines
-	var ball: Node3D = prefabs.get_node_or_null("Slot_rubberball")
+	var ball: Node3D = prefabs.get_node_or_null("Slot_beachball")
 	var said: String = ball.get_node("Print").text if ball != null and ball.has_node("Print") else ""
-	_check("C the rubber ball's tape reads its association (\"%s\")" % said.replace("\n", " / "), said.contains("rubber_ball = association(config(point))"))
+	_check("C the beach ball's tape reads its association (\"%s\")" % said.replace("\n", " / "), said.contains("beach_ball = association(config(sphere))"))
 	var masking: Node3D = tools.get_node_or_null("Slot_tape_7")
 	var said_m: String = masking.get_node("Print").text if masking != null and masking.has_node("Print") else ""
 	var hazard: Node3D = tools.get_node_or_null("Slot_tape_2")
@@ -81,13 +84,13 @@ func _ready() -> void:
 		shell.global_position += Vector3(0, .3, .4)   # a hand took it somewhere
 		shell.picked_up.emit(shell)
 	for i in 4: await get_tree().physics_frame
-	_check("D grabbing the rubber ball's slot collects it: the hand got %s, the collected file says %s" % [str(hand.got), str(Items.is_collected("rubberball"))], hand.got == ["rubberball"] and Items.is_collected("rubberball"))
+	_check("D grabbing the beach ball's slot collects it: the hand got %s, the collected file says %s" % [str(hand.got), str(Items.is_collected("beachball"))], hand.got == ["beachball"] and Items.is_collected("beachball"))
 	var back: float = shell.global_position.distance_to(home.origin) if shell != null else INF
 	_check("D the shell is back on its shelf (%.3f m from home)" % back, back < .001)
 	var m_shell: RigidBody3D = masking.get_node_or_null("Pick") if masking != null else null
 	if m_shell != null: m_shell.picked_up.emit(m_shell)
 	for i in 4: await get_tree().physics_frame
-	_check("D grabbing the masking tape's slot sets the hand's tape knob (%s) and collects the tape (%s)" % [str(hand.knobs), str(hand.got)], hand.knobs.get("tape.kind") == "masking" and hand.got == ["rubberball", "tape"])
+	_check("D grabbing the masking tape's slot sets the hand's tape knob (%s) and collects the tape (%s)" % [str(hand.knobs), str(hand.got)], hand.knobs.get("tape.kind") == "masking" and hand.got == ["beachball", "tape"])
 	# E — the glass and the collider
 	var pane: Node = prefabs.get_node_or_null("Cabinet/Glass")
 	var pane_free: bool = pane != null and pane.find_children("*", "CollisionShape3D", true, false).is_empty()

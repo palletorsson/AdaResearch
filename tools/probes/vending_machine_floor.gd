@@ -1,4 +1,5 @@
 extends "res://tools/probes/void_game_probe.gd"
+const Items := preload("res://commons/player/inventory_items.gd")
 ## THE VENDING MACHINES ON FLOOR 20 (Trans_Playground), beside the scaffold workstation (Palle, 2026-11-06): the
 ## prefabs machine and the tools machine from rooms.json, built in the actual tower - each with its slots, standing on
 ## the slab, cutting into no other work's box - and photographed. Run: python tools/test_vending_machine.py
@@ -65,7 +66,10 @@ func check_floor(f: int) -> void:
 		check("floor %d: %s stands (rooms.json)" % [f, id], art != null)
 		if art == null: continue
 		var state: Dictionary = art.get_state() if art.has_method("get_state") else {}
-		check("floor %d: %s is a %s machine with %d slots (%.2f x %.2f m)" % [f, id, state.get("kind", "?"), int(state.get("slots", 0)), float(state.get("width", 0)), float(state.get("height", 0))], int(state.get("stock", 0)) > 0)
+		# the floor's own (2026-11-08): the machine stocks exactly the items given on the floor it stands on
+		var want: Array = Items.items().filter(func(it): return bool(it.get("vending", true)) and int(it.get("floor", 0)) == f 			and ((str(it.get("id", "")) in (art.get_script().get_script_constant_map().get("TOOLS", []) as Array)) == (str(state.get("kind", "")) == "tools"))).map(func(it): return str(it.get("id", "")))
+		check("floor %d: %s is a %s machine of floor %d's own: %s (%.2f x %.2f m)" % [f, id, state.get("kind", "?"), int(state.get("given_floor", -1)), str(state.get("stock_ids", [])), float(state.get("width", 0)), float(state.get("height", 0))],
+			int(state.get("given_floor", -1)) == f and state.get("stock_ids", []) == want)
 		var under := ray(mount.global_position + Vector3(0, .5, 0), mount.global_position + Vector3(0, -.6, 0))
 		check("floor %d: %s stands on the slab" % [f, id], not under.is_empty() and absf(under.position.y - level) < .1)
 		var mine: AABB = boxes.get(key, AABB())

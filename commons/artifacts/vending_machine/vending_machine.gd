@@ -80,11 +80,30 @@ func _ready() -> void:
 	apply_grid_config(cfg)
 	_build()
 
-## The items this machine sells: the tools, or everything else, in items.json's order.
+## The items this machine sells: the tools, or everything else, in items.json's order. An item marked
+## `"vending": false` is never on the shelf (Palle, 2026-11-08: the red and blue points left Point One - "we have to
+## be disciplined"; the machine on that floor must not hand them over either).
+##
+## THE FLOOR'S OWN (Palle, 2026-11-08: "discipline the vending machine: only show the artifact given at that floor in
+## the middle of the machine for easy reach"): standing in the Void tower, a machine stocks only the items whose
+## `floor` is the floor it stands on, centred around REACH_Y; off the tower (a bench, a grid map) it keeps them all.
+const REACH_Y := 1.05   # where the middle of the stocked shelves sits: a standing hand's easy reach
+var given_floor := -1   # the Void floor this machine stands on, or -1 off the tower
+
+func _given_floor() -> int:
+	if has_meta("config_floor"): return int(get_meta("config_floor"))
+	var n: Node = get_parent()
+	while n != null:
+		if n.has_meta("void_content_floor"): return int(n.get_meta("void_content_floor"))
+		n = n.get_parent()
+	return -1
+
 func stock() -> Array:
 	var out := []
 	for it in Items.items():
 		var id := str(it.get("id", ""))
+		if not bool(it.get("vending", true)): continue
+		if given_floor >= 0 and int(it.get("floor", 0)) != given_floor: continue
 		if id != "" and ((id in TOOLS) == (kind == "tools")): out.append(it)
 	return out
 
@@ -130,12 +149,15 @@ func _unlocked(it: Dictionary) -> bool:
 func _build() -> void:
 	for c in get_children(): remove_child(c); c.queue_free()
 	slots.clear(); _glow.clear(); _turns.clear()
+	given_floor = _given_floor()
 	var entries := slot_list()
 	var cols: int = columns if columns > 0 else (4 if kind == "tools" else 6)
 	var rows: int = maxi(1, ceili(float(entries.size()) / float(cols)))
 	width = cols * PITCH_X + .24
 	var shelves_h: float = rows * PITCH_Y
-	height = maxf(1.9, shelves_h + .78)
+	# the shelves: from .40 m up (the whole stock), or - a floor's own few - centred on the reach height
+	var y0: float = .40 if given_floor < 0 else maxf(.40, REACH_Y - (rows - 1) * PITCH_Y * .5)
+	height = maxf(1.9, y0 + shelves_h + .38)
 	var d := DEPTH
 	var cabinet := StaticBody3D.new(); cabinet.name = "Cabinet"; cabinet.collision_layer = 1; add_child(cabinet)
 	_box(cabinet, "Back", Vector3(0, height * .5, -d * .5 + .03), Vector3(width, height, .06), BODY)
@@ -149,7 +171,7 @@ func _build() -> void:
 	var shape := CollisionShape3D.new(); var bs := BoxShape3D.new(); bs.size = Vector3(width, height, d - REACH); shape.shape = bs
 	shape.position = Vector3(0, height * .5, -REACH * .5); cabinet.add_child(shape)
 	# the lit interior
-	var mid: float = .40 + shelves_h * .5 + .02
+	var mid: float = y0 + shelves_h * .5 + .02
 	_box(cabinet, "Interior", Vector3(0, mid, -d * .5 + .07), Vector3(width - .1, shelves_h + .12, .02), Color("aab6b4"))
 	var light := OmniLight3D.new(); light.name = "ShelfLight"; light.light_color = Color("f3f7ff"); light.light_energy = 1.2
 	light.omni_range = maxf(width, shelves_h) + .4; light.position = Vector3(0, mid, .05); light.shadow_enabled = false; cabinet.add_child(light)
@@ -160,17 +182,20 @@ func _build() -> void:
 	pane.material_override = glass; pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	# the name plate
 	_label(cabinet, title if title != "" else ("TOOLS" if kind == "tools" else "PREFABS"), Vector3(0, height - .165, d * .5 - .018), 40, .0012, Color("e9f2ee"))
-	_label(cabinet, "GRAB A THING: INTO YOUR HAND", Vector3(0, height - .25, d * .5 - .018), 15, .0012, Color("9fb3ae"))
+	_label(cabinet, "GRAB A THING: INTO YOUR HAND" if given_floor < 0 else "GIVEN ON FLOOR %d: INTO YOUR HAND" % given_floor, Vector3(0, height - .25, d * .5 - .018), 15, .0012, Color("9fb3ae"))
 	# the shelves and their lips, then a slot per entry
-	var x0: float = -(cols - 1) * PITCH_X * .5
-	var y0: float = .40
 	for r in rows:
 		var y: float = y0 + r * PITCH_Y
 		_box(cabinet, "Shelf", Vector3(0, y - .008, -.04), Vector3(width - .12, .016, d - .22), SHELF)
 		_box(cabinet, "ShelfLip", Vector3(0, y + .022, d * .5 - .14), Vector3(width - .12, .06, .006), Color("c8d0cc"))
+	if entries.is_empty() and given_floor >= 0:
+		_label(cabinet, "NOTHING IS GIVEN ON FLOOR %d" % given_floor, Vector3(0, y0 + .03, d * .5 - .135), 15, .0012, Color("6d6a62"))
 	_stock.clear(); stocked = false
 	for i in entries.size():
 		var c: int = i % cols; var r: int = floori(float(i) / float(cols))
+		# each row centred: a short last row (or a floor's two or three) stands in the middle, not at the left
+		var in_row: int = mini(cols, entries.size() - r * cols)
+		var x0: float = -(in_row - 1) * PITCH_X * .5
 		_stock.append([entries[i], Vector3(x0 + c * PITCH_X, y0 + r * PITCH_Y, -.04)])
 		_request(Items.scene_for(str(entries[i].item.get("token", ""))))
 	_request(PICKABLE)
@@ -357,7 +382,7 @@ func _process(delta: float) -> void:
 		if _glow[key] <= 0.0: _glow.erase(key)
 
 func get_state() -> Dictionary:
-	return {"kind": kind, "slots": slots.size(), "entries": slot_list().size(), "stock": stock().size(), "width": width, "height": height, "stocked": stocked}
+	return {"kind": kind, "slots": slots.size(), "entries": slot_list().size(), "stock": stock().size(), "width": width, "height": height, "stocked": stocked, "given_floor": given_floor, "stock_ids": stock().map(func(it): return str(it.get("id", "")))}
 
 static func _box(parent: Node3D, title_: String, at: Vector3, size: Vector3, colour: Color) -> MeshInstance3D:
 	var m := MeshInstance3D.new(); m.name = title_; m.position = at
