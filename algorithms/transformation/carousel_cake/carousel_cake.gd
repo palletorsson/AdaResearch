@@ -51,7 +51,30 @@ var _baked_retargeted: bool = false
 var _stack_anchor: MeshInstance3D = null
 var _gallery_clean := false
 @export var base_radial_segments: int = 32
+## Per-layer facet step: layer i is cut with base_radial_segments + segments_increment * i sides. It takes effect only
+## when a placement's config names "segments_step" (or "radial_segments"), so every placement without those keys keeps
+## eight 32-sided drums, as it always had.
 @export var segments_increment: int = 2
+
+# ── LOOK + FACETS (Palle, 2026-11-09, floor 17 "Carousel rotation") ───────────
+## config "look": "white_edges" — the Transformation floors' white (PlatonicStudy.finish()) with dark FEATURE edges
+## (commons/void/edge_outline.gd), as on Primitives_Ignorance: "we have not introduced color yet". A white drum of 32
+## sides turning shows nothing; its seams are what make a turn visible, so the look and the facets go together.
+## config "radial_segments": the base side count (3..128). config "segments_step": the per-layer step (negative allowed:
+## 18 stepping -2 is a round slow base under a square fast top). The edge overlay is a MultiMesh of each group's edge
+## mesh whose instance transforms are rewritten in the same loop that turns the layers, so seams never lag their faces.
+const LOOKS: PackedStringArray = ["white_edges"]
+const EdgeOutline = preload("res://commons/void/edge_outline.gd")
+const PlatonicStudy = preload("res://commons/void/platonic_study.gd")
+var look := ""
+var outline_angle := 25.0
+var _segments_stepped := false
+var _segments_configured := false
+# One MultiMesh per distinct side count. _groups[0] is always mm_inst; extra ones are built only when layers differ.
+# _layer_slot[i] = Vector2i(group, index within that group's MultiMesh).
+var _groups: Array[MultiMeshInstance3D] = []
+var _layer_slot: Array[Vector2i] = []
+var _dressed := false
 @export var base_rotation_speed: float = 0.5
 @export var rotation_speed_multiplier: float = 1.2  # Each layer spins faster
 var alternate_direction := false
@@ -96,11 +119,14 @@ func generate_carousel() -> void:
 	_read_dna()
 	# The gallery compares the actual rotating stacks. Its opt-in removes the
 	# scene's saved duplicate and makes collision follow the displayed profile.
-	if _gallery_clean:
+	# The white look removes the baked twin too: a 32-sided circus-shaded stack standing in a 6-sided white one would
+	# poke through every flat face (a polygon is inscribed in its circle).
+	if _gallery_clean or look == "white_edges":
 		for child in get_children():
 			if (child is MultiMeshInstance3D and child != mm_inst) or (child is StaticBody3D and not _collider_bodies.has(child)):
 				remove_child(child)
 				child.queue_free()
+	_clear_groups()
 	# Same freed-reference story from the other end: rebuild after a teardown and
 	# mm_inst is a ghost, so get_parent() below would throw instead of returning
 	# null. Build a new one rather than dereference the old.
@@ -117,10 +143,6 @@ func generate_carousel() -> void:
 	if Engine.is_editor_hint():
 		mm_inst.owner = get_tree().edited_scene_root
 
-	var mm := MultiMesh.new()
-	mm_inst.multimesh = mm
-	mm.use_colors = alternating_colors
-
 	# Validate arrays
 	if layer_radii.is_empty() or layer_heights.is_empty():
 		push_error("CarouselCake: layer_radii and layer_heights cannot be empty")
@@ -129,13 +151,6 @@ func generate_carousel() -> void:
 	var layer_count = min(layer_radii.size(), layer_heights.size())
 	# PROFILE: the radii the drawn stack uses. "cake" returns layer_radii unchanged.
 	_vis_radii = _profile_radii(layer_count)
-
-	# Create base cylinder mesh (unit cylinder, will be scaled per instance)
-	var cylinder := CylinderMesh.new()
-	cylinder.height = 1.0  # Unit height
-	cylinder.top_radius = 1.0  # Unit radius
-	cylinder.bottom_radius = 1.0
-	cylinder.radial_segments = base_radial_segments
 
 	# Create material
 	var mat: Material
@@ -154,17 +169,49 @@ func generate_carousel() -> void:
 		var std_mat := StandardMaterial3D.new()
 		std_mat.vertex_color_use_as_albedo = true
 		mat = std_mat
-	cylinder.material = mat
 
-	mm.mesh = cylinder
-	mm.transform_format = MultiMesh.TRANSFORM_3D
-	mm.use_custom_data = true  # Enable custom data for layer index
-	mm.instance_count = layer_count
+	# One unit cylinder (scaled per instance) per distinct side count, in layer order; the first is mm_inst. On the
+	# default every layer has base_radial_segments, so this is the single 8-instance MultiMesh it always was.
+	var counts: Array[int] = []
+	var members: Array = []
+	_layer_slot.clear()
+	for i in range(layer_count):
+		var sides := _layer_segments(i)
+		var g := counts.find(sides)
+		if g < 0:
+			g = counts.size()
+			counts.append(sides)
+			members.append([])
+		_layer_slot.append(Vector2i(g, (members[g] as Array).size()))
+		(members[g] as Array).append(i)
+	_groups.clear()
+	for g in range(counts.size()):
+		var holder: MultiMeshInstance3D = mm_inst
+		if g > 0:
+			holder = MultiMeshInstance3D.new()
+			holder.name = "CarouselLayers_%d" % counts[g]
+			add_child(holder)
+		var cylinder := CylinderMesh.new()
+		cylinder.height = 1.0  # Unit height
+		cylinder.top_radius = 1.0  # Unit radius
+		cylinder.bottom_radius = 1.0
+		cylinder.radial_segments = counts[g]
+		cylinder.material = mat
+		var group_mm := MultiMesh.new()
+		group_mm.use_colors = alternating_colors
+		group_mm.mesh = cylinder
+		group_mm.transform_format = MultiMesh.TRANSFORM_3D
+		group_mm.use_custom_data = true  # Enable custom data for layer index
+		group_mm.instance_count = (members[g] as Array).size()
+		holder.multimesh = group_mm
+		_groups.append(holder)
 
 	var cumulative_y: float = 0.0
 
 	for i in range(layer_count):
 		var transform := Transform3D.IDENTITY
+		var slot: Vector2i = _layer_slot[i]
+		var mm: MultiMesh = _groups[slot.x].multimesh
 
 		var current_radius: float = _vis_radii[i]
 		var current_height: float = layer_heights[i]
@@ -176,15 +223,15 @@ func generate_carousel() -> void:
 		# Scale the cylinder to the current radius and height
 		transform.basis = transform.basis.scaled(Vector3(current_radius, current_height, current_radius))
 
-		mm.set_instance_transform(i, transform)
+		mm.set_instance_transform(slot.y, transform)
 
 		# Set layer index as custom data for shader (x = layer index)
-		mm.set_instance_custom_data(i, Color(float(i), 0.0, 0.0, 1.0))
+		mm.set_instance_custom_data(slot.y, Color(float(i), 0.0, 0.0, 1.0))
 
 		# Set alternating colors (only used when not using stripe shader)
 		if alternating_colors and not use_stripe_shader:
 			var use_color_a := i % 2 == 0
-			mm.set_instance_color(i, color_a if use_color_a else color_b)
+			mm.set_instance_color(slot.y, color_a if use_color_a else color_b)
 
 		# Update cumulative height for next layer
 		cumulative_y += current_height
@@ -193,6 +240,8 @@ func generate_carousel() -> void:
 	# gallery:clean so collision follows the displayed profile.
 	if enable_colliders:
 		_generate_colliders()
+
+	_apply_look()
 
 	# Appended LAST, so nothing above shifts. Both are no-ops on the default "cake".
 	_retarget_baked_stack()
@@ -225,10 +274,21 @@ func update_carousel_rotation() -> void:
 	if not is_instance_valid(mm_inst) or mm_inst.multimesh == null:
 		return
 
-	var mm := mm_inst.multimesh
+	# Each group's edge overlay (ours, or the one primitive_finish's "platonic": "outline" attached) is looked up once
+	# per frame and rewritten beside its faces below.
+	var edge_mms: Array[MultiMesh] = []
+	for holder in _groups:
+		var overlay: MultiMeshInstance3D = null
+		if is_instance_valid(holder):
+			overlay = holder.get_node_or_null(EdgeOutline.NAME) as MultiMeshInstance3D
+		edge_mms.append(overlay.multimesh if overlay != null else null)
 	var cumulative_y: float = 0.0
 
-	for i in range(mm.instance_count):
+	for i in range(_layer_slot.size()):
+		var slot: Vector2i = _layer_slot[i]
+		if slot.x >= _groups.size() or not is_instance_valid(_groups[slot.x]) or _groups[slot.x].multimesh == null:
+			continue
+		var mm: MultiMesh = _groups[slot.x].multimesh
 		# Each layer rotates at different speed (faster as you go up)
 		var layer_speed: float = _layer_speed(i)
 		var angle: float = _rotation_angle * layer_speed
@@ -242,7 +302,10 @@ func update_carousel_rotation() -> void:
 		transform.basis = Basis.IDENTITY.rotated(Vector3.UP, angle)
 		transform.basis = transform.basis.scaled(Vector3(current_radius, current_height, current_radius))
 
-		mm.set_instance_transform(i, transform)
+		mm.set_instance_transform(slot.y, transform)
+		var edge_mm: MultiMesh = edge_mms[slot.x]
+		if edge_mm != null and slot.y < edge_mm.instance_count:
+			edge_mm.set_instance_transform(slot.y, _edge_transform(transform))
 
 		# Update cumulative height for next layer
 		cumulative_y += current_height
@@ -268,9 +331,16 @@ func _generate_colliders() -> void:
 			body.owner = get_tree().edited_scene_root
 
 		# Create CylinderShape3D
-		var shape := CylinderShape3D.new()
-		shape.radius = current_radius
-		shape.height = current_height
+		var shape: Shape3D
+		if _segments_configured and _layer_segments(i) < 24:
+			# A faceted layer collides as the prism it is drawn as, not as the circle around it: a square's sides sit
+			# 29 % inside that circle, which a visitor would meet as an invisible wall.
+			shape = _prism_shape(_layer_segments(i), current_radius, current_height)
+		else:
+			var round_shape := CylinderShape3D.new()
+			round_shape.radius = current_radius
+			round_shape.height = current_height
+			shape = round_shape
 
 		# Create CollisionShape3D
 		var collision_shape := CollisionShape3D.new()
@@ -319,8 +389,14 @@ func apply_grid_config(config: Dictionary) -> void:
 	var was_profile: String = profile
 	var was_clean := _gallery_clean
 	var was_caption := motion_caption
+	var was_look := look
+	var was_sides := base_radial_segments
+	var was_step := segments_increment
+	var was_stepped := _segments_stepped
 	_read_dna()
-	if profile != was_profile or was_clean != _gallery_clean or was_caption != motion_caption:
+	if profile != was_profile or was_clean != _gallery_clean or was_caption != motion_caption \
+			or look != was_look or base_radial_segments != was_sides or segments_increment != was_step \
+			or _segments_stepped != was_stepped:
 		generate_carousel()
 
 
@@ -336,6 +412,82 @@ func _read_dna() -> void:
 	if has_meta("config_profile"):
 		var p: String = str(get_meta("config_profile")).strip_edges().to_lower()
 		profile = p if PROFILES.has(p) else profile
+	if has_meta("config_look"):
+		var l: String = str(get_meta("config_look")).strip_edges().to_lower()
+		look = l if LOOKS.has(l) else ""
+	outline_angle = clampf(float(get_meta("config_outline_angle", outline_angle)), 1.0, 89.0)
+	if has_meta("config_radial_segments"):
+		base_radial_segments = clampi(int(get_meta("config_radial_segments")), 3, 128)
+		_segments_configured = true
+	if has_meta("config_segments_step"):
+		segments_increment = clampi(int(get_meta("config_segments_step")), -32, 32)
+		_segments_stepped = true
+		_segments_configured = true
+
+
+## Sides of layer i. Uniform base_radial_segments unless a placement asked for a step.
+func _layer_segments(i: int) -> int:
+	if not _segments_stepped:
+		return base_radial_segments
+	return clampi(base_radial_segments + segments_increment * i, 3, 128)
+
+
+## The edge overlay's instance: the layer's own transform grown 0.3 % about the layer's centre, so its lines win the
+## depth test against the faces they border.
+func _edge_transform(xf: Transform3D) -> Transform3D:
+	return Transform3D(xf.basis.scaled(Vector3.ONE * 1.003), xf.origin)
+
+
+## White finish + a dark feature-edge MultiMesh under each group. Off (no "look"), anything we dressed is undressed.
+func _apply_look() -> void:
+	if look == "white_edges":
+		var white := PlatonicStudy.finish()
+		for holder in _groups:
+			holder.material_override = white
+			EdgeOutline.refresh(holder, outline_angle)
+			var overlay := holder.get_node_or_null(EdgeOutline.NAME) as MultiMeshInstance3D
+			if overlay != null:
+				for k in range(overlay.multimesh.instance_count):
+					overlay.multimesh.set_instance_transform(k, _edge_transform(holder.multimesh.get_instance_transform(k)))
+		_dressed = true
+	elif _dressed:
+		for holder in _groups:
+			holder.material_override = null
+			var overlay := holder.get_node_or_null(EdgeOutline.NAME)
+			if overlay != null:
+				holder.remove_child(overlay)
+				overlay.free()
+		_dressed = false
+
+
+func _clear_groups() -> void:
+	for holder in _groups:
+		if holder != mm_inst and is_instance_valid(holder):
+			if holder.get_parent():
+				holder.get_parent().remove_child(holder)
+			holder.queue_free()
+	_groups.clear()
+
+
+## An n-sided prism with exactly the drawn cylinder's corners (taken from a CylinderMesh of the same side count).
+func _prism_shape(sides: int, r: float, h: float) -> ConvexPolygonShape3D:
+	var probe := CylinderMesh.new()
+	probe.top_radius = 1.0
+	probe.bottom_radius = 1.0
+	probe.height = 1.0
+	probe.rings = 0
+	probe.radial_segments = sides
+	var seen := {}
+	var points := PackedVector3Array()
+	for v in probe.get_faces():
+		var p := Vector3(v.x * r, v.y * h, v.z * r)
+		var key := str(p.snapped(Vector3.ONE * 0.0001))
+		if not seen.has(key):
+			seen[key] = true
+			points.append(p)
+	var shape := ConvexPolygonShape3D.new()
+	shape.points = points
+	return shape
 
 
 ## The drawn radii for each layer. "cake" hands back layer_radii itself, so the eight

@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "carousel_ring": {
+      "lookup_name": "carousel_ring",
+      "name": "Carousel ring / ball and handle",
+      "label": "Carousel ring / ball and handle",
+      "scene": "res://commons/artifacts/carousel_ring/carousel_ring.tscn",
+      "description": "A faceted handrail ring around a carousel with one ball rolling on it. The ball turns slowly round the ring on its own; grab the handle over it (XR hand, desktop right-click carry or left-click drag) and it follows your hand's angle round the ring, never off it. Let go and it keeps some of your speed, then settles back to its own turn. Two rotations at once: the ball about the carousel's axis, and about its own axle. White with dark feature edges. The rail has no collision, so it never fences a visitor in or out.",
+      "qfep_connection": "A constraint is a path, not a cage: the hand moves freely, the ball takes only the angle of that movement. Rotation about a centre and rotation about oneself are read off the same travel.",
+      "category": "transformation",
+      "dev_category": "transformation",
+      "map_sequences": [
+        "transformation"
+      ],
+      "map_ready": true,
+      "museum_import": true,
+      "size_group": "environment",
+      "footprint": [
+        6.0,
+        1.4,
+        6.0
+      ],
+      "parameters": {
+        "radius": "m, ring centre line from the axis (default 2.9 - a cake carousel at scale 0.6 has a 2.4 m base plate)",
+        "height": "m, tube centre above the floor (default 1.05, a handrail)",
+        "tube": "m, tube radius (default 0.035)",
+        "ring_segments": "facets round the ring (default 48)",
+        "tube_segments": "facets round the tube (default 6: six seams run round the ring)",
+        "ball_radius": "m (default 0.11)",
+        "ball_segments": "ball facets (default 8, so its roll is visible)",
+        "speed": "rad/s, the ball's own turn; sign = direction (default 0.12)",
+        "momentum": "share of the hand's release speed kept (default 0.6)",
+        "settle": "s, time constant back to the own turn (default 2.5)",
+        "start_angle": "degrees, where the ball starts (0 = local +Z)",
+        "look": "white_edges (default) or plain",
+        "outline_angle": "degrees, feature-edge threshold (default 25)"
+      },
+      "tags": [
+        "transformation",
+        "rotation",
+        "constraint",
+        "grab",
+        "carousel"
+      ]
+    }
+  }
+}
