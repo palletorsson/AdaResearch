@@ -1,5 +1,23 @@
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+## The wind, on the GPU: the same sway the CPU redraw computed, applied to the vertices of a mesh built once.
+const WIND_SHADER := """
+shader_type spatial;
+render_mode unshaded, cull_disabled;
+uniform float wind_strength = 0.04;
+uniform float wind_speed = 1.2;
+uniform float height_norm = 0.75;
+vec3 to_linear(vec3 c) { return mix(pow((c + 0.055) / 1.055, vec3(2.4)), c / 12.92, lessThan(c, vec3(0.04045))); }
+void vertex() {
+	vec3 p = VERTEX;
+	float h = max(p.y, 0.0) / max(height_norm, 0.01);
+	VERTEX.x += sin(TIME * wind_speed + p.y * 3.0) * wind_strength * h;
+	VERTEX.z += cos(TIME * wind_speed * 0.7 + p.x * 2.0) * wind_strength * h * 0.5;
+}
+void fragment() { ALBEDO = to_linear(COLOR.rgb); }
+"""
+
 # @identity
 # essence: generation_timer → lsystem.generate() → interpret → draw_with_wind — growth made visible in time
 # desire: To grow before your eyes — each generation adding branches with tapering thickness and wind sway
@@ -23,6 +41,11 @@ extends Node3D
 @export var length_decay: float = 0.72
 @export var angle_spread_per_gen: float = 1.12  # angles widen each generation
 @export var display_size: float = 1.0
+## Trunk thickness as a fraction of display_size; each branch keeps the turtle's own taper (thickness_decay per
+## bracket) down to a quarter of it. 0 keeps the old crossed ribbons, a few millimetres wide (2026-11-09): the
+## growing tree read as hairs, and was rebuilt on the CPU every frame to sway - now it is built once a generation
+## and the wind moves it in the vertex shader.
+@export_range(0.0, 0.05, 0.001) var branch_radius: float = 0.012
 
 ## Wind
 @export var wind_strength: float = 0.04
@@ -37,6 +60,7 @@ var _lsystem: LSystem
 var _current_iteration: int = 0
 var _growth_timer: float = 0.0
 var _is_growing: bool = true
+var _wind_mat: ShaderMaterial
 var _rng: RandomNumberGenerator
 
 # Rendering
@@ -77,9 +101,12 @@ func _process(delta: float) -> void:
 			_growth_timer = 0.0
 			_grow_one_generation()
 
-	# Continuous wind redraw
-	if not _segments.is_empty():
+	# Continuous wind redraw - only for the old ribbons; tubes sway in the shader
+	if branch_radius <= 0.0 and not _segments.is_empty():
 		_draw_tree()
+	elif _wind_mat:
+		_wind_mat.set_shader_parameter("wind_strength", wind_strength)
+		_wind_mat.set_shader_parameter("wind_speed", wind_speed)
 
 
 func _grow_one_generation() -> void:
@@ -203,6 +230,10 @@ func _draw_tree() -> void:
 
 	var safe_max_depth := maxi(_max_depth, 1)
 
+	if branch_radius > 0.0:
+		_draw_tree_tubes(safe_max_depth)
+		return
+
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
 	for seg in _segments:
@@ -303,6 +334,32 @@ func _draw_tree() -> void:
 		_draw_leaves()
 
 
+## Built once a generation: tapering tubes, colour by depth, leaves at the tips; the shader sways them.
+func _draw_tree_tubes(safe_max_depth: int) -> void:
+	var pairs := PackedVector3Array()
+	var cols := PackedColorArray()
+	var radii := PackedFloat32Array()
+	var trunk_r: float = display_size * branch_radius
+	for seg in _segments:
+		pairs.append((seg[0] - _center) * _scale_factor)
+		pairs.append((seg[1] - _center) * _scale_factor)
+		var t: float = clampf(float(seg[2]) / float(safe_max_depth), 0.0, 1.0)
+		var col: Color
+		if t < 0.4:
+			col = trunk_color.lerp(branch_color, t / 0.4)
+		elif t < 0.8:
+			col = branch_color.lerp(leaf_color, (t - 0.4) / 0.4)
+		else:
+			col = leaf_color.lightened((t - 0.8) * 0.5)
+		cols.append(col)
+		radii.append(trunk_r * maxf(float(seg[3]) / maxf(initial_thickness, 0.0001), 0.25))
+	ThickLine.append_segments(_immediate_mesh, pairs, cols, trunk_r, 5 if cols.size() < 4000 else 3, radii)
+	if _wind_mat:
+		_wind_mat.set_shader_parameter("height_norm", display_size * 0.75)
+	if _max_depth > 1:
+		_draw_leaves()
+
+
 func _draw_leaves() -> void:
 	var safe_max_depth := maxi(_max_depth, 1)
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -314,6 +371,8 @@ func _draw_leaves() -> void:
 
 		var tip: Vector3 = (seg[1] - _center) * _scale_factor
 		var height_factor := maxf(tip.y, 0.0) / maxf(display_size * 0.75, 0.01)
+		if branch_radius > 0.0:
+			height_factor = 0.0   # the shader sways the leaves with their branches
 		tip += Vector3(
 			sin(_time * wind_speed + tip.y * 3.0) * wind_strength * height_factor,
 			0.0,
@@ -322,6 +381,8 @@ func _draw_leaves() -> void:
 
 		# Small triangle leaf
 		var leaf_size: float = 0.012 * _scale_factor
+		if branch_radius > 0.0:
+			leaf_size = display_size * 0.022   # a leaf you can see on a 1 m tree, not a 3 mm speck
 		var t: float = clampf(float(depth) / float(safe_max_depth), 0.0, 1.0)
 		var col := leaf_color.lightened(0.15 + t * 0.1)
 		col.a = 1.0
@@ -348,11 +409,21 @@ func _create_display() -> void:
 	_mesh_instance.name = "TreeDisplay"
 	_mesh_instance.mesh = _immediate_mesh
 
-	var mat := StandardMaterial3D.new()
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.vertex_color_use_as_albedo = true
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	_mesh_instance.material_override = mat
+	if branch_radius > 0.0:
+		var sh := Shader.new()
+		sh.code = WIND_SHADER
+		_wind_mat = ShaderMaterial.new()
+		_wind_mat.shader = sh
+		_wind_mat.set_shader_parameter("wind_strength", wind_strength)
+		_wind_mat.set_shader_parameter("wind_speed", wind_speed)
+		_wind_mat.set_shader_parameter("height_norm", display_size * 0.75)
+		_mesh_instance.material_override = _wind_mat
+	else:
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.vertex_color_use_as_albedo = true
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		_mesh_instance.material_override = mat
 
 	add_child(_mesh_instance)
 
@@ -383,13 +454,16 @@ func _create_ui() -> void:
 	_info_label.outline_size = 4
 	_info_label.modulate = Color(0.4, 0.8, 0.3)
 	_info_label.position = Vector3(0, display_size + 0.15, 0)
+	# the two labels were both centred within 13 cm of each other and overprinted: stack them (2026-11-09)
+	_info_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 	add_child(_info_label)
 
 	_gen_label = Label3D.new()
 	_gen_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_gen_label.font_size = 20
 	_gen_label.modulate = Color(0.6, 0.85, 0.5)
-	_gen_label.position = Vector3(0, display_size + 0.02, 0)
+	_gen_label.position = Vector3(0, display_size + 0.12, 0)
+	_gen_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 	_gen_label.width = 600.0
 	_gen_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(_gen_label)

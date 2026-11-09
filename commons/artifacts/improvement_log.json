@@ -1129,6 +1129,19 @@
       ],
       "tower": "floor 163 (Boolean_Works): the cabinet holds its grid",
       "capture": "ada_run/improve/booleanvariations/before_after.png"
+    },
+    {
+      "lookup_name": "AnimatedTree",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "branch_radius export (0.012 of display_size; 0 = the old crossed ribbons, a few mm wide): tapering tubes keeping the turtle's own thickness decay (floor 25 %), leaves 2.2 % of display_size",
+        "built once a generation; the wind moves in a vertex shader with the CPU's formula - the whole tree (1488 segments at generation 5) was rebuilt on the CPU every frame to sway",
+        "the two labels were both centred within 13 cm and overprinted: stacked (bottom / top aligned)"
+      ],
+      "tower": "floor 125 (LSystems_Growth), unchanged placement",
+      "capture": "ada_run/improve/AnimatedTree/before_after.png (shot without the scene's own current camera, which the tower strips)"
     }
   ]
 }
