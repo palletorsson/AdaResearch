@@ -1,0 +1,19 @@
+[
+ {"map": "Shader_05_Patterns", "id": "f2_shader_pattern_passage_27_7", "token": "shader_pattern_passage", "fit": {"strip": ["floor", "walls"]}, "strategies": ["strip_floor", "strip_walls"],
+  "note": "A 12.6 x 10.9 m passage room: its plain floor and walls go; the patterned surfaces wear the shader and stay."},
+ {"map": "Shader_05_Patterns", "id": "f2_reference_pattern_garden_10_20", "token": "reference_pattern_garden", "fit": {"strip": ["floor", "walls"]}, "strategies": ["strip_floor", "strip_walls"],
+  "note": "A 12 x 13 m garden room around the pattern: room goes, pattern stays."},
+ {"map": "Shader_11_QueerRubber", "id": "f1_shader_material_parlour_24_8", "token": "shader_material_parlour", "fit": {"strip": ["floor", "walls"]}, "strategies": ["strip_floor", "strip_walls"],
+  "note": "A 14 x 11 m parlour: fixed bodies and lights stay, the parlour's floor and walls go."},
+ {"map": "Shader_09_FBM", "id": "f2_basin_water_12_4", "token": "basin_water", "set": {"config": {"width": "8", "depth": "8", "study": "on", "pin": "1", "plinth": "0"}},
+  "fit": {"strip": ["walls"]}, "strategies": ["reduce_repeats", "strip_walls"], "note": "A 19 x 23 m water study set to 11 x 11: 8 x 8, its walls go; the water wears the shader."},
+ {"map": "Shader_12_PinkExtravaganza", "id": "f3_shader_12_pinkextravaganza_7_8", "token": "shader_12_pinkextravaganza",
+  "set": {"config": {"bodies": "1.5", "shapes": "sphere,torus,cube,plane,sphere_big", "stage": "0.35", "water": "7"}}, "strategies": ["reduce_repeats"],
+  "note": "Its water was 12 m across: 7."},
+ {"map": "Shader_12_PinkExtravaganza", "id": "f3_shader_composition_stage_27_8", "token": "shader_composition_stage", "fit": {"strip": ["floor"]}, "strategies": ["strip_floor"],
+  "note": "A 19 x 14 m stage: the floor goes; the backdrop stays - 'change the material, then change what surrounds it' is the idea, the surround is the wall."},
+ {"map": "Shader_12_PinkExtravaganza", "id": "f3_reference_plural_body_10_26", "token": "reference_plural_body", "fit": {"strip": ["floor", "walls"]}, "strategies": ["strip_floor", "strip_walls"],
+  "note": "A 14 x 13.5 m station room."},
+ {"map": "Shader_10_ReactionDiffusion", "id": "f4_shader_state_chamber_12_12", "token": "shader_state_chamber", "fit": {"strip": ["floor", "walls", "ceiling"]}, "strategies": ["strip_floor", "strip_walls", "strip_ceiling"],
+  "note": "An 18 x 13 m chamber 7.2 m tall: the chamber goes; the retained wall wears the reaction-diffusion and stays."}
+]

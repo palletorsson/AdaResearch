@@ -128,3 +128,37 @@ These are the floors that were curated in the tower.
 - Rerun `python tools/void_size_survey.py run` and then `report` after a curation pass. It takes about 25 minutes, two games at a time.
 - The measured boxes could be kept beside the placements, so that the floor editor draws a work's real footprint and the timeline's "add from catalogue" places by size.
 - The restore and transfer tools placed by distance from neighbours. A size-aware placement would have avoided most of this.
+
+## First passes: machine learning and shaders (2026-11-09, same day)
+
+Palle: *"start with the moves on machine learning and shaders, but we need to learn the strategies and what works ...
+we can build a catalog of strategies that make it easier to fit the work ... In the end it is about conveying an
+idea."*
+
+**Mechanisms built:**
+- `config.fit` on a placement: `strip` (floor / walls / ceiling, found by shape), `strip_parts`, `keep_parts` and `set`. `set` takes the work's own exported counts and is applied before the work builds. A part that wears a shader is never stripped by shape.
+- `void_slab_extension`: a side slab up to 10 m out, on tangled beams down to the floor below.
+- `tools/void_fit.py apply|survey|record` and the pass files in `doc/fit-passes/`.
+
+The strategies, with what each pass taught, are in `commons/void/fit_strategies.json`.
+
+**Result:**
+- Machine learning: 22 → 3 that don't fit. The three are code cases: two drop something hundreds of metres; one is 0.3 m through a ceiling.
+- Shaders: 18 → 0.
+- Across 41 works and 4 side slabs:
+
+| strategy | worked | partly |
+|---|---|---|
+| move | 27 | 1 |
+| strip floor | 11 | |
+| raise | 9 | 2 |
+| turn | 8 | |
+| scale | 7 | 2 |
+| strip walls | 6 | |
+| reduce repeats | 4 | |
+| side slab | 6 works on 4 slabs | |
+
+**What was learned:**
+- **Machine learning:** the works were built for museum stages. They sat below their origin, and their bodies fell. *Raise* plus *strip floor* fixed most of them.
+- **Shaders:** the rooms are the shader. Floor and walls wear it, so stripping did little. They fit by *side slab* and *move*. The playground setup Palle asked for is the real answer: a surface to carry the shader, without a room around it.
+- **Order matters:** strip, raise and scale first; then re-measure; then the fit pass. Sizes change, so moves come last.

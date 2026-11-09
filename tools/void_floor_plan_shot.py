@@ -2,7 +2,7 @@
 
 Usage: python tools/void_floor_plan_shot.py --floor 8 [--height 28] [--oblique] [--walk x0,z0,x1,z1]
 With --walk the walker is driven from a start to a target first; eye.png and plan.json's walk record show it.
-Writes ada_run/floor-plans/floor-<n>-<id>/plan.png and plan.json. Holds the native slot while it runs.
+Writes ada_run/floor-plans/floor-<n>-<id>/plan.png and plan.json. Runs beside other games (VOID_PLAN_SLOT=wait to queue).
 """
 import argparse, os, subprocess, uuid
 from pathlib import Path
@@ -22,7 +22,9 @@ def main():
     out = root / "ada_run/floor-plans" / ("floor-%d-%s" % (args.floor, uuid.uuid4().hex[:8]))
     out.mkdir(parents=True)
     print("Plan folder:", out, flush=True)
-    acquire_native_slot("floor plan shot of floor %d" % args.floor, timeout=120)
+    # An independent run with its own output folder: it does not wait for the global slot (Palle, 2026-11-06).
+    if os.environ.get("VOID_PLAN_SLOT") == "wait":
+        acquire_native_slot("floor plan shot of floor %d" % args.floor, timeout=120)
     stage = stage_runtime()
     with (out / "game.log").open("w", encoding="utf-8") as log:
         code = subprocess.run([os.environ.get("GODOT_EXE", "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe"),

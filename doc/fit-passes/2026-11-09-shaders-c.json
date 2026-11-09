@@ -1,0 +1,103 @@
+[
+ {
+  "map": "Shader_05_Patterns",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "position": [
+    0,
+    -9
+   ],
+   "config": {
+    "length": 39,
+    "depth": 8,
+    "seed": 104,
+    "editor_label": "Side slab / room for the pattern passage and garden (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "Lengthened to 39 m: the passage (x -19.3..-6.7) and the garden (6.9..19.1) both stand on it."
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "position": [
+    6,
+    -9
+   ],
+   "config": {
+    "length": 30,
+    "depth": 6,
+    "seed": 107,
+    "editor_label": "Side slab / room for the composition stage and the plural body (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "Lengthened to 30 m (x -9..21)."
+ },
+ {
+  "map": "Shader_09_FBM",
+  "id": "f2_basin_water_12_4",
+  "token": "basin_water",
+  "set": {
+   "position": [
+    -1,
+    2.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: 15 m inward, now that it is 0.62."
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "id": "f3_shader_12_pinkextravaganza_7_8",
+  "token": "shader_12_pinkextravaganza",
+  "set": {
+   "position": [
+    0,
+    5
+   ],
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: 3 m in, a quarter turn."
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_fuzzy_doorway_8_53",
+  "token": "fuzzy_doorway",
+  "set": {
+   "scale": 0.97,
+   "position": [
+    -3,
+    5.5
+   ]
+  },
+  "strategies": [
+   "scale_area",
+   "move"
+  ],
+  "note": "0.1 m through the ceiling, 1.5 m past the south edge."
+ }
+]

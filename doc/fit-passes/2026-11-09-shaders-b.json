@@ -1,0 +1,276 @@
+[
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_model_disagreement_28_45",
+  "token": "void_shader_disagreement",
+  "set": {
+   "position": [
+    0.5,
+    0.0
+   ],
+   "facing": 90.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 1.9 m (2 of 5 samples past the slab have ground); moved 11.8 m"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_fuzzy_body_8_40",
+  "token": "void_shader_fuzzy_body",
+  "set": {
+   "position": [
+    -17.0,
+    2.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 1.1 m (0 of 5 samples past the slab have ground); moved 4.5 m"
+ },
+ {
+  "map": "Shader_11_QueerRubber",
+  "id": "f1_shader_11_queerrubber_8_7",
+  "token": "shader_11_queerrubber",
+  "set": {
+   "position": [
+    0.0,
+    5.0
+   ],
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 4.6 m (5 of 10 samples past the slab have ground; moved 3.0 m"
+ },
+ {
+  "map": "Shader_01_Shaping",
+  "id": "f1_shader_01_shaping_1_10",
+  "token": "shader_01_shaping",
+  "set": {
+   "position": [
+    -3.0,
+    -6.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-3.0, 1.6, -11.3); moved 6.0 m"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_shader_05_patterns_6_1",
+  "token": "shader_05_patterns",
+  "set": {
+   "position": [
+    4.5,
+    -0.9
+   ],
+   "facing": 90.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-0.2, 1.6, -12.7); moved 13.3 m"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_camera_glitch_study_17_13",
+  "token": "camera_glitch_study",
+  "set": {
+   "position": [
+    -10.0,
+    5.5
+   ],
+   "facing": 90.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-10.3, 1.5, 12.7); moved 6.5 m"
+ },
+ {
+  "map": "Shader_10_ReactionDiffusion",
+  "id": "f4_shader_10_reactiondiffusion_8_23",
+  "token": "shader_10_reactiondiffusion",
+  "set": {
+   "position": [
+    10.5,
+    7.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.6 m (4 of 10 samples past the slab have ground; moved 1.8 m"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_film_shader_repeat_1_12",
+  "token": "film_shader_repeat",
+  "set": {
+   "position": [
+    3.5,
+    8.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 1.3, 14.5); moved 7.0 m"
+ },
+ {
+  "map": "Shader_09_FBM",
+  "id": "f2_dark_sphere_4_20",
+  "token": "dark_sphere",
+  "set": {
+   "position": [
+    0.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.4 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    -1,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 28,
+    "depth": 8,
+    "seed": 104,
+    "editor_label": "Side slab / room for the pattern passage and garden (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "28 x 8 m north: the passage and the garden stood 6-7 m past the north edge on a full floor."
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NE",
+   "position": [
+    8,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 26,
+    "depth": 6,
+    "seed": 107,
+    "editor_label": "Side slab / room for the composition stage and the plural body (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "26 x 6 m north for the stage (6 m past) and the plural body (4.5 m past)."
+ },
+ {
+  "map": "Shader_11_QueerRubber",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 16,
+    "depth": 5,
+    "seed": 105,
+    "editor_label": "Side slab / room for the material parlour (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "16 x 5 m north for the parlour (3.9 m past)."
+ },
+ {
+  "map": "Shader_09_FBM",
+  "id": "f2_basin_water_12_4",
+  "token": "basin_water",
+  "set": {
+   "scale": 0.62
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "Still 18 x 15.5 m after width/depth 8: a water surface, looked at - 0.62."
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "id": "f3_shader_composition_stage_27_8",
+  "token": "shader_composition_stage",
+  "set": {
+   "scale": 0.92
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "0.4 m through the ceiling: 0.92 (its sofa, sphere and cube stay larger than a body)."
+ },
+ {
+  "map": "Shader_10_ReactionDiffusion",
+  "id": "f4_shader_state_chamber_12_12",
+  "token": "shader_state_chamber",
+  "set": {
+   "scale": 0.92,
+   "position": [
+    0,
+    -5.5
+   ]
+  },
+  "strategies": [
+   "scale_area",
+   "move"
+  ],
+  "note": "0.4 m through the ceiling and 3 m past the north edge after the chamber went."
+ }
+]

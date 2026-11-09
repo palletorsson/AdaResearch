@@ -7,7 +7,8 @@
       "status": "tool",
       "when": "Its footprint fits the slab (42 x 18 m) and its height the storey, it just stands past an edge or over nothing.",
       "how": "python tools/void_fit_pass.py (nearest free spot: on the slab or a side slab, off the shafts, round no column, clear of every other work); edit position.",
-      "cost": "Order and route are not in the search; check the floor's arrangement (/api/spine-roles)."
+      "cost": "Order and route are not in the search; check the floor's arrangement (/api/spine-roles).",
+      "learned": "2026-11-09 ML + shaders: 27 of 28 fitted by a move alone or after another strategy. Run the fit pass AFTER strip/raise/scale (sizes change), and per floor in sequence - the first version put two works on one spot."
     },
     {
       "id": "turn",
@@ -15,7 +16,8 @@
       "status": "tool",
       "when": "A long work fits along the floor but not across it.",
       "how": "facing +90 (the fit pass tries it).",
-      "cost": "Labels and approach side change."
+      "cost": "Labels and approach side change.",
+      "learned": "8 of 8: long works (a row of panels, a line of bodies) fit along the floor's 42 m."
     },
     {
       "id": "strip_floor",
@@ -24,7 +26,8 @@
       "says": "Many works have a floor and walls of their own and they have to be removed.",
       "when": "The work brings a ground plane, grid or stage floor bigger than what it shows.",
       "how": "config.fit.strip: [\"floor\"] (flat, at the base, >= 25 % of the work) or strip_parts by name.",
-      "cost": "Bodies that rolled or walked on its floor now use the tower slab: inside the building only."
+      "cost": "Bodies that rolled or walked on its floor now use the tower slab: inside the building only.",
+      "learned": "11 of 11 where the floor was a plain ground plane, grid or stage (ML: 40 m creature ground, 48 m grid, 12 m planes). On shader rooms it did little: their floors wear the shader and are kept - those need a surface, i.e. the playground setup."
     },
     {
       "id": "strip_walls",
@@ -32,14 +35,16 @@
       "status": "key",
       "when": "Backdrops, room walls, frames around the idea.",
       "how": "config.fit.strip: [\"walls\"] (upright, thin, on its perimeter).",
-      "cost": "If a wall is needed, use tower_walls or the playground."
+      "cost": "If a wall is needed, use tower_walls or the playground.",
+      "learned": "6 of 6, but the shader parlour and pattern rooms barely shrank: their walls are the shader too."
     },
     {
       "id": "strip_ceiling",
       "name": "Remove its own ceiling",
       "status": "key",
       "when": "A lid or canopy that pushes it through the slab above.",
-      "how": "config.fit.strip: [\"ceiling\"]."
+      "how": "config.fit.strip: [\"ceiling\"].",
+      "learned": "1 of 1 (the reaction-diffusion chamber)."
     },
     {
       "id": "tower_walls",
@@ -66,7 +71,8 @@
       "says": "We can have an extra slab on the side but then I do not want that to be more than like ten meters out and then I want tangled support beams to the floor under. We can let the slab contract and expand, 10 meters per floor.",
       "when": "A work or a field that needs more depth than 18 m, or room beside a full floor.",
       "how": "Place void_slab_extension on the building edge facing out: config length (2-42), depth (1-10).",
-      "cost": "It reads as architecture: use it where the idea needs the room."
+      "cost": "It reads as architecture: use it where the idea needs the room.",
+      "learned": "6 works stand on 4 slabs (ML_Evolution south 16 x 8; Shader_05 north 39 x 8; Shader_11 north 16 x 5; Shader_12 north 30 x 6): rooms 4-7 m past the north edge of a full floor. A slab must span the whole overhang along the edge, not just most of it."
     },
     {
       "id": "raise",
@@ -74,7 +80,8 @@
       "status": "key",
       "when": "It was built on a museum stage: its parts sit below its origin and go down through the slab (and bodies fall).",
       "how": "placement height = the depth it reaches below the slab.",
-      "cost": "None when its top still fits."
+      "cost": "None when its top still fits.",
+      "learned": "9 of 11: museum stage works build below their origin (2-3 m); in the tower they sat under the slab and their bodies fell for hundreds of metres. Raise by the depth the survey reports. Two then hit the ceiling: raise + scale."
     },
     {
       "id": "scale_area",
@@ -83,7 +90,8 @@
       "says": "Sometimes it can work to scale the area artifact.",
       "when": "Fields, landscapes, diagrams - works looked at or walked round, not walked through at body scale.",
       "how": "placement scale.",
-      "cost": "Never for works whose lesson is the body's size (passages, Drink Me, approach works)."
+      "cost": "Never for works whose lesson is the body's size (passages, Drink Me, approach works).",
+      "learned": "7 of 9: fields and water surfaces (creature field 0.35, basin 0.62); a small step (0.92) clears a ceiling."
     },
     {
       "id": "reduce_repeats",
@@ -92,7 +100,8 @@
       "says": "sometimes we can reduce the artifact if it consists of many of the same element.",
       "when": "Layers, feature maps, rows, copies: the idea survives with fewer.",
       "how": "config.fit.set: the work's own exported count (num_layers, feature_map_count, grid_size, ...).",
-      "cost": "Check the count still carries the idea (three of a kind still reads as a series; one does not)."
+      "cost": "Check the count still carries the idea (three of a kind still reads as a series; one does not).",
+      "learned": "4 of 4 once the right setting was found: read the script that is actually placed (the CNN's VR script has num_filters_per_layer, not feature_map_count; the first try was refused and reported). Typed arrays are rebuilt by fit.set."
     },
     {
       "id": "distribute",
@@ -141,7 +150,8 @@
       "status": "manual",
       "when": "It is drawn far from its floor or its bodies fly off: world-coordinate meshes, physics blow-ups.",
       "how": "Read its code.",
-      "cost": "Per work."
+      "cost": "Per work.",
+      "learned": "joint_learn_walk reset its walker to world (0,1,0) - the top of the tower - and flew apart: its own frame now. neural_networks_vr still drops something ~495 m: open."
     },
     {
       "id": "remove_duplicate",
@@ -149,7 +159,8 @@
       "status": "manual",
       "when": "The same work stands on two floors of the same sequence.",
       "how": "Remove the second placement; say why.",
-      "cost": "Check which floor's idea it carries."
+      "cost": "Check which floor's idea it carries.",
+      "learned": "The evolved creatures stood on ML_Evolution and ML_Gradient_Landscape: kept on Evolution."
     }
   ],
   "cases": [
@@ -462,6 +473,300 @@
       "after": "fits",
       "verdict": "worked",
       "note": "Its 10 m box overlapped shaft A and something of it fell 14.6 m down the shaft: between the shafts instead."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_shader_pattern_passage_27_7",
+      "token": "shader_pattern_passage",
+      "strategies": [
+        "strip_floor",
+        "strip_walls"
+      ],
+      "before": "overflows: edge: north 6.1 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 12.6 x 10.9 m passage room: its plain floor and walls go; the patterned surfaces wear the shader and stay."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_reference_pattern_garden_10_20",
+      "token": "reference_pattern_garden",
+      "strategies": [
+        "strip_floor",
+        "strip_walls"
+      ],
+      "before": "overflows: edge: north 7.0 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 12 x 13 m garden room around the pattern: room goes, pattern stays."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_11_QueerRubber",
+      "id": "f1_shader_material_parlour_24_8",
+      "token": "shader_material_parlour",
+      "strategies": [
+        "strip_floor",
+        "strip_walls"
+      ],
+      "before": "overflows: edge: north 4.5 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 14 x 11 m parlour: fixed bodies and lights stay, the parlour's floor and walls go."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_09_FBM",
+      "id": "f2_basin_water_12_4",
+      "token": "basin_water",
+      "strategies": [
+        "move",
+        "reduce_repeats",
+        "scale_area",
+        "strip_walls"
+      ],
+      "before": "overflows: edge: west 0.5 m, north 20.4 m (0 of 21 samples past the slab have ground); floor: 0.7 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 19 x 23 m water study set to 11 x 11: 8 x 8, its walls go; the water wears the shader. | Still 18 x 15.5 m after width/depth 8: a water surface, looked at - 0.62. | fit pass: 15 m inward, now that it is 0.62."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_12_PinkExtravaganza",
+      "id": "f3_shader_12_pinkextravaganza_7_8",
+      "token": "shader_12_pinkextravaganza",
+      "strategies": [
+        "move",
+        "reduce_repeats",
+        "turn"
+      ],
+      "before": "overflows: edge: south 5.0 m (2 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "Its water was 12 m across: 7. | fit pass: 3 m in, a quarter turn."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_12_PinkExtravaganza",
+      "id": "f3_shader_composition_stage_27_8",
+      "token": "shader_composition_stage",
+      "strategies": [
+        "scale_area",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: north 6.0 m (1 of 10 samples past the slab have ground); ceiling: 0.4 m through the slab above (top 6.1, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 19 x 14 m stage: the floor goes; the backdrop stays - 'change the material, then change what surrounds it' is the idea, the surround is the wall. | 0.4 m through the ceiling: 0.92 (its sofa, sphere and cube stay larger than a body)."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_12_PinkExtravaganza",
+      "id": "f3_reference_plural_body_10_26",
+      "token": "reference_plural_body",
+      "strategies": [
+        "move",
+        "side_slab",
+        "strip_floor",
+        "strip_walls"
+      ],
+      "before": "overflows: edge: east 1.0 m, north 5.2 m (0 of 13 samples past the slab have ground); ceiling: 0.4 m through the slab above (top 6.0, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 14 x 13.5 m station room. | 10 cm past the east end of its slab."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_10_ReactionDiffusion",
+      "id": "f4_shader_state_chamber_12_12",
+      "token": "shader_state_chamber",
+      "strategies": [
+        "move",
+        "scale_area",
+        "strip_ceiling",
+        "strip_floor",
+        "strip_walls"
+      ],
+      "before": "overflows: edge: north 5.5 m (0 of 10 samples past the slab have ground); ceiling: 1.6 m through the slab above (top 7.2, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "An 18 x 13 m chamber 7.2 m tall: the chamber goes; the retained wall wears the reaction-diffusion and stays. | 0.4 m through the ceiling and 3 m past the north edge after the chamber went."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_model_disagreement_28_45",
+      "token": "void_shader_disagreement",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 1.9 m (2 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 1.9 m (2 of 5 samples past the slab have ground); moved 11.8 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_fuzzy_body_8_40",
+      "token": "void_shader_fuzzy_body",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: south 1.1 m (0 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 1.1 m (0 of 5 samples past the slab have ground); moved 4.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_11_QueerRubber",
+      "id": "f1_shader_11_queerrubber_8_7",
+      "token": "shader_11_queerrubber",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 4.6 m (5 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 4.6 m (5 of 10 samples past the slab have ground; moved 3.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_01_Shaping",
+      "id": "f1_shader_01_shaping_1_10",
+      "token": "shader_01_shaping",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-3.0, 1.6, -11.3)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-3.0, 1.6, -11.3); moved 6.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_shader_05_patterns_6_1",
+      "token": "shader_05_patterns",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-0.2, 1.6, -12.7)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-0.2, 1.6, -12.7); moved 13.3 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_camera_glitch_study_17_13",
+      "token": "camera_glitch_study",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-10.3, 1.5, 12.7)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-10.3, 1.5, 12.7); moved 6.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_10_ReactionDiffusion",
+      "id": "f4_shader_10_reactiondiffusion_8_23",
+      "token": "shader_10_reactiondiffusion",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: south 0.6 m (4 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 0.6 m (4 of 10 samples past the slab have ground; moved 1.8 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_film_shader_repeat_1_12",
+      "token": "film_shader_repeat",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (0.0, 1.3, 14.5)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (0.0, 1.3, 14.5); moved 7.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_09_FBM",
+      "id": "f2_dark_sphere_4_20",
+      "token": "dark_sphere",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: south 0.4 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 0.4 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "28 x 8 m north: the passage and the garden stood 6-7 m past the north edge on a full floor. | Lengthened to 39 m: the passage (x -19.3..-6.7) and the garden (6.9..19.1) both stand on it."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_12_PinkExtravaganza",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "26 x 6 m north for the stage (6 m past) and the plural body (4.5 m past). | Lengthened to 30 m (x -9..21)."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_11_QueerRubber",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "16 x 5 m north for the parlour (3.9 m past)."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Shader_05_Patterns",
+      "id": "f2_fuzzy_doorway_8_53",
+      "token": "fuzzy_doorway",
+      "strategies": [
+        "move",
+        "scale_area"
+      ],
+      "before": "overflows: edge: south 1.5 m (0 of 5 samples past the slab have ground); ceiling: 0.1 m through the slab above (top 5.8, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "0.1 m through the ceiling, 1.5 m past the south edge."
     }
   ]
 }

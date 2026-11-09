@@ -33801,15 +33801,21 @@
           "id": "f1_shader_01_shaping_1_10",
           "artifact": "shader_01_shaping",
           "position": [
-            -3,
-            -12
+            -3.0,
+            -6.0
           ],
           "height": 0,
           "facing": 0,
           "scale": 1,
           "station": "NW",
           "config": {
-            "setting": "wall"
+            "setting": "wall",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-3.0, 1.6, -11.3); moved 6.0 m"
+            }
           }
         },
         {
@@ -33869,15 +33875,22 @@
           "id": "f2_shader_05_patterns_6_1",
           "artifact": "shader_05_patterns",
           "position": [
-            0,
-            -13.4
+            4.5,
+            -0.9
           ],
           "height": 0,
-          "facing": 0,
+          "facing": 90.0,
           "scale": 1,
           "station": "NE",
           "config": {
-            "setting": "wall"
+            "setting": "wall",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-0.2, 1.6, -12.7); moved 13.3 m"
+            }
           }
         },
         {
@@ -33906,15 +33919,26 @@
           "station": "NW",
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strip": [
+                "floor",
+                "walls"
+              ],
+              "strategies": [
+                "strip_floor",
+                "strip_walls"
+              ],
+              "note": "A 12.6 x 10.9 m passage room: its plain floor and walls go; the patterned surfaces wear the shader and stay."
+            }
           }
         },
         {
           "id": "f2_film_shader_repeat_1_12",
           "artifact": "film_shader_repeat",
           "position": [
-            0,
-            14.5
+            3.5,
+            8.5
           ],
           "height": 0,
           "facing": 180,
@@ -33922,24 +33946,37 @@
           "station": "SE",
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (0.0, 1.3, 14.5); moved 7.0 m"
+            }
           }
         },
         {
           "id": "f2_camera_glitch_study_17_13",
           "artifact": "camera_glitch_study",
           "position": [
-            -10,
-            12
+            -10.0,
+            5.5
           ],
           "height": 0,
-          "facing": 0,
+          "facing": 90.0,
           "scale": 1,
           "station": "SW",
           "config": {
             "plinth": "0",
             "pin": "1",
-            "lesson": "record_reading"
+            "lesson": "record_reading",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-10.3, 1.5, 12.7); moved 6.5 m"
+            }
           }
         },
         {
@@ -33955,15 +33992,26 @@
           "station": "NE",
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strip": [
+                "floor",
+                "walls"
+              ],
+              "strategies": [
+                "strip_floor",
+                "strip_walls"
+              ],
+              "note": "A 12 x 13 m garden room around the pattern: room goes, pattern stays."
+            }
           }
         },
         {
           "id": "f2_fuzzy_body_8_40",
           "artifact": "void_shader_fuzzy_body",
           "position": [
-            -15,
-            6.5
+            -17.0,
+            2.5
           ],
           "height": 0,
           "facing": 0,
@@ -33971,25 +34019,38 @@
           "station": "SW",
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 1.1 m (0 of 5 samples past the slab have ground); moved 4.5 m"
+            }
           }
         },
         {
           "id": "f2_model_disagreement_28_45",
           "artifact": "void_shader_disagreement",
           "position": [
-            10,
-            7
+            0.5,
+            0.0
           ],
           "height": 0,
-          "facing": 0,
+          "facing": 90.0,
           "scale": 1,
           "station": "SE",
           "config": {
             "plinth": "0",
             "pin": "1",
             "exhibit_scale": "0.35",
-            "museum_installation": "1"
+            "museum_installation": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 1.9 m (2 of 5 samples past the slab have ground); moved 11.8 m"
+            }
           }
         },
         {
@@ -33997,15 +34058,46 @@
           "artifact": "fuzzy_doorway",
           "position": [
             -3,
-            7
+            5.5
           ],
           "height": 0,
           "facing": 0,
-          "scale": 1,
+          "scale": 0.97,
           "station": "SW",
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "0.1 m through the ceiling, 1.5 m past the south edge."
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 39,
+            "depth": 8,
+            "seed": 104,
+            "editor_label": "Side slab / room for the pattern passage and garden (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ],
+              "note": "Lengthened to 39 m: the passage (x -19.3..-6.7) and the garden (6.9..19.1) both stand on it."
+            }
           }
         }
       ],
@@ -34038,10 +34130,10 @@
           "artifact": "shader_11_queerrubber",
           "station": "SE",
           "position": [
-            0,
-            8
+            0.0,
+            5.0
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
           "config": {
@@ -34049,7 +34141,14 @@
             "gap": "2.2",
             "bodies": "1.35",
             "shapes": "sphere,torus,sphere,capsule,cube",
-            "stage": "0.4"
+            "stage": "0.4",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 4.6 m (5 of 10 samples past the slab have ground; moved 3.0 m"
+            }
           }
         },
         {
@@ -34065,7 +34164,18 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strip": [
+                "floor",
+                "walls"
+              ],
+              "strategies": [
+                "strip_floor",
+                "strip_walls"
+              ],
+              "note": "A 14 x 11 m parlour: fixed bodies and lights stay, the parlour's floor and walls go."
+            }
           }
         },
         {
@@ -34082,6 +34192,29 @@
           "config": {
             "plinth": "0",
             "pin": "true"
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 16,
+            "depth": 5,
+            "seed": 105,
+            "editor_label": "Side slab / room for the material parlour (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -34101,18 +34234,30 @@
           "artifact": "basin_water",
           "station": "NW",
           "position": [
-            -12,
-            -8
+            -1,
+            2.5
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.62,
           "config": {
-            "width": "11",
-            "depth": "11",
+            "width": "8",
+            "depth": "8",
             "study": "on",
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strip": [
+                "walls"
+              ],
+              "strategies": [
+                "move",
+                "reduce_repeats",
+                "scale_area",
+                "strip_walls"
+              ],
+              "note": "fit pass: 15 m inward, now that it is 0.62."
+            }
           }
         },
         {
@@ -34120,14 +34265,20 @@
           "artifact": "dark_sphere",
           "station": "SE",
           "position": [
-            0,
-            9
+            0.0,
+            8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.4 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+            }
           }
         },
         {
@@ -34178,16 +34329,24 @@
           "station": "SE",
           "position": [
             0,
-            8
+            5
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
           "config": {
             "bodies": "1.5",
             "shapes": "sphere,torus,cube,plane,sphere_big",
             "stage": "0.35",
-            "water": "12"
+            "water": "7",
+            "fit": {
+              "strategies": [
+                "move",
+                "reduce_repeats",
+                "turn"
+              ],
+              "note": "fit pass: 3 m in, a quarter turn."
+            }
           }
         },
         {
@@ -34200,10 +34359,20 @@
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.92,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strip": [
+                "floor"
+              ],
+              "strategies": [
+                "scale_area",
+                "strip_floor"
+              ],
+              "note": "0.4 m through the ceiling: 0.92 (its sofa, sphere and cube stay larger than a body)."
+            }
           }
         },
         {
@@ -34211,7 +34380,7 @@
           "artifact": "reference_plural_body",
           "station": "NE",
           "position": [
-            15,
+            14.6,
             -8
           ],
           "facing": 0,
@@ -34219,7 +34388,44 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strip": [
+                "floor",
+                "walls"
+              ],
+              "strategies": [
+                "move",
+                "side_slab",
+                "strip_floor",
+                "strip_walls"
+              ],
+              "note": "10 cm past the east end of its slab."
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NE",
+          "position": [
+            6,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 30,
+            "depth": 6,
+            "seed": 107,
+            "editor_label": "Side slab / room for the composition stage and the plural body (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ],
+              "note": "Lengthened to 30 m (x -9..21)."
+            }
           }
         }
       ],
@@ -34240,14 +34446,29 @@
           "station": "NE",
           "position": [
             0,
-            -8
+            -5.5
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.92,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strip": [
+                "floor",
+                "walls",
+                "ceiling"
+              ],
+              "strategies": [
+                "move",
+                "scale_area",
+                "strip_ceiling",
+                "strip_floor",
+                "strip_walls"
+              ],
+              "note": "0.4 m through the ceiling and 3 m past the north edge after the chamber went."
+            }
           }
         },
         {
@@ -34270,8 +34491,8 @@
           "artifact": "shader_10_reactiondiffusion",
           "station": "SE",
           "position": [
-            12,
-            8
+            10.5,
+            7.0
           ],
           "facing": 0,
           "height": 0,
@@ -34279,7 +34500,13 @@
           "config": {
             "plinth": "0",
             "pin": "1",
-            "setting": "wall"
+            "setting": "wall",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.6 m (4 of 10 samples past the slab have ground; moved 1.8 m"
+            }
           }
         }
       ],
