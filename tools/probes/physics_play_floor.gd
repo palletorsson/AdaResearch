@@ -7,7 +7,8 @@ extends "res://tools/probes/void_game_probe.gd"
 ## The PENDULUM went down to floor 14 on 2026-11-09 (Palle: "Move the pendulum below the skateboard") - the tie is met
 ## before the skateboard's axles on 15; the PLANK ON A BALL followed the same day ("move the plank on a ball below the
 ## skateboard too" - two kinds of part before many). tools/probes/physics_play_floor14.gd checks both there. Ten stay here.
-const FLOOR := 21
+# found by map name: floor numbers move when a floor is inserted above (Trans_Scale, 2026-11-09)
+var FLOOR: int = _floor_of("Logic_Event")
 const THRESHOLDS := ["again", "almost", "just", "barely", "still"]
 
 func run() -> void:
@@ -24,7 +25,7 @@ func run() -> void:
 	var ex: Dictionary = content.exhibits
 	var on14: Array = content.data.floors[14].artifacts.filter(func(a): return (str(a.artifact).begins_with("physics_play") and not a.artifact in ["physics_play_pendulum", "physics_play_plank_ball"]) or str(a.artifact).begins_with("threshold_"))
 	check("floor 14 is the Introduction again: no physics play but the pendulum and the plank on a ball, no threshold, no gate (%d left)" % on14.size(), on14.is_empty() and not content.data.floors[14].artifacts.any(func(a): return str(a.artifact).begins_with("matter_spring")))
-	check("they stand on the Logic floors (22 AND, 23 OR and NOT)", content.data.floors[22].artifacts.any(func(a): return a.artifact == "matter_spring_and") and content.data.floors[23].artifacts.filter(func(a): return a.artifact in ["matter_spring_or", "matter_spring_not"]).size() == 2)
+	check("they stand on the Logic floors (AND, OR and NOT)", content.data.floors[_floor_of("Logic_AND")].artifacts.any(func(a): return a.artifact == "matter_spring_and") and content.data.floors[_floor_of("Logic_Alternatives")].artifacts.filter(func(a): return a.artifact in ["matter_spring_or", "matter_spring_not"]).size() == 2)
 	var plays: Array = []
 	for k in ex.keys():
 		if str(k).begins_with("%d/physics-play-" % FLOOR):
@@ -33,7 +34,7 @@ func run() -> void:
 	check("ten physics play set-ups are built on floor %d (the pendulum and the plank on a ball are on 14), none with a button (%d)" % [FLOOR, plays.size()], plays.size() == 10 and not plays.any(func(p): return p.setup in ["pendulum", "plank_on_ball"]) and not plays.any(func(p): return p.find_children("*", "Node3D", true, false).any(func(n): return n.has_signal("pressed"))))
 	var built: Array = THRESHOLDS.filter(func(t): return ex.has("%d/threshold-workshop-%s" % [FLOOR, t]))
 	check("the five tipping points stand beside them (%s)" % ",".join(PackedStringArray(built)), built.size() == 5)
-	check("threshold_descent cools on Form Finding, floor 62", content.data.floors[62].artifacts.any(func(a): return a.artifact == "threshold_descent"))
+	check("threshold_descent cools on Form Finding", content.data.floors[_floor_of("FormFinding_Annealing")].artifacts.any(func(a): return a.artifact == "threshold_descent"))
 	check("the tyre chain still opens the floor", ex.has("%d/logic-event" % FLOOR))
 	# THE ROUTE, swept by the visitor's own capsule from label to label: nothing stands in the way
 	var level: float = float(game.building.spec.levels[FLOOR])
@@ -112,3 +113,9 @@ func _overview(name: String, level: float) -> void:
 	await frames(6); await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(out.path_join(name))
 	camera.queue_free()
+
+func _floor_of(map_name: String) -> int:
+	var d: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/rooms.json"))
+	for i in d.floors.size():
+		if d.floors[i].map == map_name: return i
+	return -1

@@ -16,7 +16,7 @@ def main():
     parser.add_argument("--height", type=float, default=28.0)
     parser.add_argument("--oblique", action="store_true")
     parser.add_argument("--pitch", type=float, help="the walker's eye pitch in degrees for eye.png (up positive; default -18)")
-    parser.add_argument("--walk", help="x0,z0,x1,z1: drive the walker from a start to a target first (floor-local m)")
+    parser.add_argument("--walk", help="x0,z0,x1,z1[,h]: drive the walker from a start to a target first (floor-local m; h starts it that high)")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     out = root / "ada_run/floor-plans" / ("floor-%d-%s" % (args.floor, uuid.uuid4().hex[:8]))

@@ -42,8 +42,14 @@ func _ready() -> void:
 		["Y",-0.5*band_spacing,Vector3.UP,1.0,Color(0.38,0.68,0.46),"TURN IN THE HORIZONTAL PLANE"],
 		["Z",0.5*band_spacing,Vector3.BACK,1.0,Color(0.38,0.55,0.78),"RIDGES ALONG YOUR ROUTE"],
 		["XYZ",1.5*band_spacing,Vector3.ZERO,1.0,Color(0.62,0.43,0.74),"COMBINED / X THEN Y THEN Z"]]
+	# config "axes": only these bands, each at its own place in the band order (2026-11-09: the floor-16 scaffold
+	# banks have two pits, which hold the middle pair, Y and Z). Absent = every band, as before.
+	var only_axes: Array = []
+	var configured_axes = get_meta("config_axes", [])
+	if configured_axes is Array: only_axes = configured_axes.map(func(a): return str(a).to_upper())
 	for spec in specs:
 		if single_axis != "ALL" and spec[0] != single_axis: continue
+		if not only_axes.is_empty() and spec[0] not in only_axes: continue
 		var band := Node3D.new()
 		band.name = spec[0]
 		band.position.x = spec[1]

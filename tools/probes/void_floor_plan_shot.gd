@@ -35,7 +35,8 @@ func shoot() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--walk="):
 			var w := Array(arg.trim_prefix("--walk=").split(",")).map(func(s):return float(s))
-			var start := Vector3(w[0],base+.06,w[1]);var target := Vector3(w[2],base,w[3])
+			# a fifth number starts the walker that high above the slab (on a deck or bank), e.g. --walk=6,0,0,0,3.1
+			var start := Vector3(w[0],base+.06+(w[4] if w.size()>4 else 0.0),w[1]);var target := Vector3(w[2],base,w[3])
 			game.place_player(start)
 			game.body.rotation.y=atan2(-(target.x-start.x),-(target.z-start.z))
 			game.camera.rotation=Vector3(deg_to_rad(pitch),0,0)

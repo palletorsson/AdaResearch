@@ -72,7 +72,7 @@ for x in d["doc"]["main"]:
         x.pop("cards")
 next(x for x in d["doc"]["main"] if x["key"] == "row_3_x").setdefault("cards", []).append("rainbow_row")
 r = grammar.check(d)
-check("BITES: colour's root card standing on the Array floor is refused", any(t.startswith("color: root card rainbow_row stands on floor 25") for t in kinds(r, "spine")))
+check("BITES: colour's root card standing on the Array floor is refused", any(t.startswith("color: root card rainbow_row stands on floor %d" % next(x["floor"] for x in d["doc"]["main"] if x["key"] == "row_3_x")) for t in kinds(r, "spine")))
 
 # 5. an operation used before any card introduces it
 d = copy.deepcopy(base)

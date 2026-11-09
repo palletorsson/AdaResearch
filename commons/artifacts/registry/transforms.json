@@ -476,6 +476,10 @@
       "name": "carousel_cake",
       "parameters": {
         "gallery": "clean - opt-in single live stack, labelled profile and collision matching the visible radii",
+        "look": "white_edges - white finish + dark feature edges (commons/void/edge_outline.gd) that turn with their layers; removes the baked twin stack",
+        "radial_segments": "int 3-128, sides of every layer (default 32); faceted layers collide as prisms",
+        "segments_step": "int, per-layer side step: layer i has radial_segments + step * i sides (negative allowed)",
+        "outline_angle": "degrees, feature-edge threshold for look white_edges (default 25)",
         "footprint": [
           1.0,
           6.0,

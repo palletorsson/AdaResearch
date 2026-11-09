@@ -19540,8 +19540,8 @@
       ]
     },
     {
-      "map": "Trans_Scale",
-      "title": "Seven carousels / Drink Me",
+      "map": "Trans_Carousel",
+      "title": "Carousel rotation",
       "origin": false,
       "supply_leads": false,
       "artifacts": [
@@ -19563,7 +19563,9 @@
             "speed_multiplier": 1.2,
             "alternate_direction": false,
             "motion_caption": "EACH LAYER / 1.2 TIMES FASTER",
-            "editor_label": "Carousel / cake"
+            "editor_label": "Carousel / cake",
+            "look": "white_edges",
+            "radial_segments": 8
           }
         },
         {
@@ -19584,7 +19586,27 @@
             "speed_multiplier": 1,
             "alternate_direction": false,
             "motion_caption": "ALL EIGHT LAYERS / ONE SPEED",
-            "editor_label": "Carousel / together"
+            "editor_label": "Carousel / together",
+            "look": "white_edges",
+            "radial_segments": 6
+          }
+        },
+        {
+          "id": "carousel-ring",
+          "artifact": "carousel_ring",
+          "station": "NW",
+          "position": [
+            -3.6,
+            -3.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "radius": 2.9,
+            "height": 1.05,
+            "speed": 0.12,
+            "editor_label": "Carousel ring / ball and handle round the one-speed merry-go-round"
           }
         },
         {
@@ -19605,7 +19627,9 @@
             "speed_multiplier": 1.2,
             "alternate_direction": true,
             "motion_caption": "NEIGHBOURING LAYERS / OPPOSITE TURNS",
-            "editor_label": "Carousel / opposed"
+            "editor_label": "Carousel / opposed",
+            "look": "white_edges",
+            "radial_segments": 6
           }
         },
         {
@@ -19626,7 +19650,9 @@
             "speed_multiplier": 1.2,
             "alternate_direction": false,
             "motion_caption": "SAME SPEED RULE / CHANGED PROFILE",
-            "editor_label": "Carousel / spindle"
+            "editor_label": "Carousel / spindle",
+            "look": "white_edges",
+            "radial_segments": 12
           }
         },
         {
@@ -19647,7 +19673,10 @@
             "speed_multiplier": 1.2,
             "alternate_direction": false,
             "motion_caption": "SAME SPEED RULE / WIDENING",
-            "editor_label": "Carousel / flare"
+            "editor_label": "Carousel / flare",
+            "look": "white_edges",
+            "radial_segments": 18,
+            "segments_step": -2
           }
         },
         {
@@ -19668,7 +19697,10 @@
             "speed_multiplier": 1.2,
             "alternate_direction": false,
             "motion_caption": "SAME SPEED RULE / NARROWING",
-            "editor_label": "Carousel / ziggurat"
+            "editor_label": "Carousel / ziggurat",
+            "look": "white_edges",
+            "radial_segments": 4,
+            "segments_step": 2
           }
         },
         {
@@ -19689,9 +19721,39 @@
             "speed_multiplier": 1.2,
             "alternate_direction": false,
             "motion_caption": "SAME RADIUS / DIFFERENT SPEEDS",
-            "editor_label": "Carousel / column"
+            "editor_label": "Carousel / column",
+            "look": "white_edges",
+            "radial_segments": 5
           }
+        }
+      ],
+      "props": [],
+      "walls": [],
+      "construction": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "ROTATION BECOMES A ROOM OF TURNS",
+          "position": [
+            4,
+            0
+          ]
         },
+        {
+          "label": "TAKE THE HANDLE / RIDE THE RING ROUND",
+          "position": [
+            -3.6,
+            -0.2
+          ]
+        }
+      ]
+    },
+    {
+      "map": "Trans_Scale",
+      "title": "Scale / Drink Me",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
         {
           "id": "drink-me",
           "artifact": "void_scale_chamber",
@@ -19724,25 +19786,24 @@
         }
       ],
       "props": [],
-      "walls": [],
-      "construction": [],
       "impact_cells": [],
       "route": [
-        {
-          "label": "ROTATION BECOMES A ROOM OF TURNS",
-          "position": [
-            4,
-            0
-          ]
-        },
         {
           "label": "SCALE / FOLLOW THE BRIDGE",
           "position": [
             0,
             8
           ]
+        },
+        {
+          "label": "WHO FITS THROUGH?",
+          "position": [
+            -14,
+            0
+          ]
         }
-      ]
+      ],
+      "supply_leads": false
     },
     {
       "map": "Trans_Body",
@@ -19842,7 +19903,8 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "platonic": "outline"
           }
         },
         {
@@ -19859,9 +19921,12 @@
           "config": {
             "width": 12,
             "height": 4.4,
-            "slats": 14,
+            "slats": 15,
             "aperture": 1.6,
-            "reach": 2.8
+            "reach": 2.8,
+            "segments": 3,
+            "latch": true,
+            "look": "white_edges"
           }
         },
         {
@@ -19881,7 +19946,8 @@
             "cells_x": 35,
             "cells_y": 7,
             "cells_z": 13,
-            "cell_m": 0.34
+            "cell_m": 0.34,
+            "platonic": "finish"
           }
         },
         {
@@ -19889,20 +19955,24 @@
           "artifact": "approach_scale",
           "station": "NE",
           "position": [
-            17,
+            16.5,
             0
           ],
           "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
-            "cols": 5,
-            "rows": 3,
-            "blocks": 15,
-            "spacing": 2.3,
-            "block": 2.1,
+            "cols": 8,
+            "rows": 4,
+            "blocks": 32,
+            "spacing": 1.5,
+            "block": 1.2,
+            "block_height": 2.1,
             "min_scale": 0.34,
-            "reach": 2.7
+            "reach": 6.0,
+            "latch": true,
+            "commit": 0.5,
+            "look": "white_edges"
           }
         },
         {
@@ -19931,7 +20001,8 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "platonic": "outline"
           }
         }
       ],
@@ -19947,7 +20018,7 @@
           "height": 0
         },
         {
-          "label": "The opening follows your body",
+          "label": "Three doors: the one you take stays open",
           "position": [
             -14,
             0
@@ -19987,7 +20058,7 @@
           "height": 0
         },
         {
-          "label": "Leave and watch the room return",
+          "label": "Leave: the way you made stays open",
           "position": [
             20,
             0
@@ -30494,7 +30565,7 @@
           "config": {
             "hall_seed": "435",
             "editor_source": {
-              "floor": 75,
+              "floor": 76,
               "id": "slots-2"
             },
             "editor_label": "Slot Machine (copy 1)"
