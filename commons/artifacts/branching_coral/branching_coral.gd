@@ -17,10 +17,15 @@ extends Node3D
 
 class_name BranchingCoral
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 ## Display settings
 @export var display_size: float = 0.7
 @export var base_color: Color = Color(0.35, 0.15, 0.25)
 @export var tip_color: Color = Color(0.95, 0.45, 0.55)
+## Base thickness as a fraction of display_size; branches thin to 30 % at the tips. 0 draws the old one-pixel lines,
+## under which the coral - a body that IS its branches - was a pink haze a few metres off (2026-11-09).
+@export_range(0.0, 0.05, 0.001) var branch_radius: float = 0.014
 
 ## L-system configuration
 @export var iterations: int = 4
@@ -119,6 +124,8 @@ func _create_display() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.vertex_color_use_as_albedo = true
+	# the gradient stops are a readout of recursion depth; authored as sRGB, read as linear they washed out (2026-11-09)
+	mat.vertex_color_is_srgb = true
 	_mesh_instance.material_override = mat
 
 	add_child(_mesh_instance)
@@ -356,7 +363,13 @@ func _draw_coral(segments: Array, max_depth: int) -> void:
 	var mid_color: Color = pal[1]
 	var col_tip: Color = pal[2]
 
-	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	var tubes: bool = branch_radius > 0.0
+	var pairs := PackedVector3Array()
+	var cols := PackedColorArray()
+	var radii := PackedFloat32Array()
+	var base_r: float = display_size * branch_radius
+	if not tubes:
+		_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	for seg in segments:
 		var p1: Vector3 = (seg[0] - center) * scale_factor
@@ -375,11 +388,20 @@ func _draw_coral(segments: Array, max_depth: int) -> void:
 		# Lighten tips for glow feel
 		col = col.lightened(t * 0.2)
 
+		if tubes:
+			pairs.append(p1)
+			pairs.append(p2)
+			cols.append(col)
+			radii.append(base_r * lerpf(1.0, 0.3, t))
+			continue
 		_immediate_mesh.surface_set_color(col)
 		_immediate_mesh.surface_add_vertex(p1)
 		_immediate_mesh.surface_set_color(col)
 		_immediate_mesh.surface_add_vertex(p2)
 
+	if tubes:
+		ThickLine.append_segments(_immediate_mesh, pairs, cols, base_r, 5 if cols.size() < 4000 else 3, radii)
+		return
 	_immediate_mesh.surface_end()
 
 

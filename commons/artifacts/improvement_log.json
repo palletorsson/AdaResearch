@@ -1069,6 +1069,18 @@
       ],
       "tower": "floor 125 (LSystems_Growth), unchanged placement",
       "capture": "ada_run/improve/parametric_lsystem/before_after.png"
+    },
+    {
+      "lookup_name": "branching_coral",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "branch_radius export (0.014 of display_size; 0 = lines): tubes thick at the base, 30 % at the tips",
+        "vertex_color_is_srgb: the depth gradient washed out"
+      ],
+      "tower": "floors 128 and 129, unchanged placements",
+      "capture": "ada_run/improve/branching_coral/before_after.png"
     }
   ]
 }
