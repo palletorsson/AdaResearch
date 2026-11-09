@@ -7,6 +7,7 @@ extends SceneTree
 ##   --scene=res://algorithms/fractals/koch/koch_curve.tscn \
 ##   --out=user://scene_shots/koch_curve.png \
 ##   --wait=3.0 --distance=0
+##   --physics=2700   (optional: run 2700 physics ticks = 45 s of simulated time before the shot)
 
 var _scene_path: String = ""
 var _output_path: String = "user://scene_shots/capture.png"
@@ -18,6 +19,7 @@ var _show_ground: bool = true  # false = skip scaffold ground plane
 var _lift_to_ground: bool = true  # shift instance up so AABB bottom sits at y=0
 var _orbit_focus_override: Vector3 = Vector3.INF  # INF = auto from AABB
 var _frame_wait: int = 0  # >0 = use N await process_frame instead of OS.delay_msec
+var _physics_wait: int = 0  # >0 = N physics ticks (N/60 s of simulated time, however fast frames render)
 
 func _initialize() -> void:
 	_parse_args()
@@ -62,6 +64,9 @@ func _parse_args() -> void:
 			"frames":
 				if value.is_valid_int():
 					_frame_wait = maxi(0, int(value))
+			"physics":
+				if value.is_valid_int():
+					_physics_wait = maxi(0, int(value))
 			"focus":
 				# Format: "x,y,z" e.g. "0,0,0"
 				var parts = value.split(",")
@@ -151,7 +156,13 @@ func _run_capture() -> void:
 	await process_frame
 	await process_frame
 	await process_frame
-	if _frame_wait > 0:
+	if _physics_wait > 0:
+		# Physics-tick wait: a simulation (a pendulum, a flock) runs exactly N/60 s, whatever the render rate -
+		# process frames run unthrottled in a capture window, so --frames=1200 can be a second of physics (2026-11-09).
+		print("capture_tscn_shot: Running %d physics ticks..." % _physics_wait)
+		for _i in range(_physics_wait):
+			await physics_frame
+	elif _frame_wait > 0:
 		# Frame-based wait: lets _process() run each frame.
 		# Use for scenes that build geometry over multiple _process() calls.
 		print("capture_tscn_shot: Running %d process frames..." % _frame_wait)

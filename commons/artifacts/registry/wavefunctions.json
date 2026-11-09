@@ -8793,7 +8793,7 @@
 	  },
 	  "category": "waves",
 	  "complexity": "advanced",
-	  "description": "A brass pendulum swings from high above, drawing rosette patterns on a cream canvas below. The swing plane slowly precesses—Foucault's elegant proof that Earth rotates beneath us. Dark ink traces accumulate into intricate spirograph-like figures over time.",
+	  "description": "A pendulum hangs from the sky and draws on the floor. Its plane of swing stays put while the floor turns under it: the ink fans out stroke by stroke (old strokes fade to sepia, new ones are dark), and a ring of pegs on the canvas falls two arcs at a time as the plane passes them - the museum Foucault clock. Overhead, a ring of 24 hour marks is the sky, turning once a day (sped up); the swing plane follows it at sin(latitude) of its pace, 0.71 at 45 degrees N. A plaque at eye height counts the fallen pegs and the plane's turn. Only gravity and the turning floor touch the swing: that is the proof.",
 	  "dev_themes": [
 		"art",
 		"oscillation",
@@ -8821,6 +8821,10 @@
 		"size_group": "xlarge"
 	  },
 	  "qfep_connection": "The pendulum maintains its F (swing plane) while the frame rotates beneath it. Inertia as F-preservation — the system resists external perturbation, holding its internal model constant against a changing reference frame.",
+	  "gamwell_reference": "Foucault, Pantheon, Paris, 1851: a 67 m pendulum whose swing plane turned clockwise about 11 degrees an hour - the first laboratory proof that the Earth turns, made without looking at the sky.",
+	  "interactions": ["watch the pegs fall in two opposite arcs as the swing plane passes", "read the plaque: pegs down and the plane's turn in degrees", "look up: the sky ring turns faster than the plane, in the same sense", "interference axis: fence / attractors / swarm spoil the proof on purpose"],
+	  "signals": ["peg_toppled(index, fallen)"],
+	  "capacity": "READ a rotating reference frame from a trace: tell what turns (the floor) from what holds still (the swing plane), and why the rate is sin(latitude) of a day",
 	  "scene": "res://commons/artifacts/foucault_pendulum/foucault_pendulum.tscn",
 	  "sequence": "wavefunctions",
 	  "size_group": "xlarge",
@@ -8829,7 +8833,12 @@
 		"math",
 		"pendulum",
 		"visualization",
-        "wave"
+        "wave",
+		"foucault",
+		"rotating_frame",
+		"inertia",
+		"precession",
+		"clock"
 	  ],
 	  "geometry_spec": {
 		"mesh_type": "hybrid",

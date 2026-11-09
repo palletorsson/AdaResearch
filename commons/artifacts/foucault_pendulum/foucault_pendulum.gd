@@ -14,8 +14,8 @@ class_name FoucaultPendulum
 # desire: Watch a pendulum draw rosette patterns as the Earth rotates beneath its fixed swing plane
 # critical_parameter: earth_rotation_rate — controls precession speed (normally 360 deg/sidereal day * sin(lat))
 # triggers: time drives both pendulum swing and Earth rotation; trail accumulates on canvas
-# emerges: spirograph-like rosettes from the interaction of two independent rotational periods
-# needs: VR observation of canvas [has], latitude control [missing]
+# emerges: a fan of strokes turning stroke by stroke; two opposite arcs of fallen pegs that measure the plane's turn against the floor, while the sky ring overhead turns faster in the same sense
+# needs: VR observation of canvas [has], legible trace at distance [has: ink ribbon], a clock for the turn [has: pegs], latitude control [missing]
 # relationships: depends on inertial frame physics; contrasts with WavePaintings (inertial vs chaotic trace); unlocks rotating reference frame intuition
 # truth: The pendulum does not rotate — the Earth rotates beneath it, and the trail is proof.
 
@@ -119,6 +119,27 @@ class_name FoucaultPendulum
 @export var interference: String = "none"
 const INTERFERENCES: PackedStringArray = ["none", "fence", "attractors", "swarm"]
 
+@export_category("Telling")
+## THE PROOF HAS TO BE READ FROM ACROSS THE ROOM (2026-11-09). Four things make the idea visible; none of them touches
+## the swing equation or the precession rate.
+## A ring of pegs on the canvas, fixed to the floor: the bob knocks each one over as its swing plane passes it, and
+## they stay down - the museum Foucault clock. The arc of fallen pegs is how far the floor has turned under the swing.
+@export var pegs_enabled: bool = true
+@export_range(8, 72) var peg_count: int = 36
+## The ink as a ribbon marker_width wide (a line strip draws one pixel at any width), fresh ink dark, older ink fading
+## to sepia, so the rosette reads as a slowly turning fan of strokes.
+@export var ink_ribbon: bool = true
+@export var aged_ink_color: Color = Color(0.74, 0.62, 0.46)
+## The turning ring is the SKY, overhead round the pivot, with 24 hour marks: the canvas is the floor - the Earth - so
+## the only thing that can turn once a day above it is the sky. The swing plane follows it at sin(latitude) of its pace.
+@export var show_sky: bool = true
+## A plaque at eye height reads the proof out, with a live count of the fallen pegs and the plane's turn.
+@export var show_plaque: bool = true
+## The tip marker and its ray down to the canvas (a development aid).
+@export var show_debug: bool = false
+
+signal peg_toppled(index: int, fallen: int)
+
 # State
 var theta: float = 0.0  # Swing angle
 var omega: float = 0.0  # Angular velocity
@@ -141,6 +162,16 @@ var _debug_tip: MeshInstance3D
 var _earth_ring: Node3D  # Rotating reference frame
 var _compass_markers: Array[Node3D] = []
 var _gravity_spheres: Array[Node3D] = []  # Grabbable attractors
+
+# The telling (pegs, ink, sky, plaque)
+var _peg_pivots: Array[Node3D] = []
+var _peg_angle: PackedFloat32Array = PackedFloat32Array()   # each peg's bearing on the canvas
+var _peg_fall: PackedFloat32Array = PackedFloat32Array()    # < 0 standing, else seconds since it was struck
+var _peg_radius: float = 0.0
+var _pegs_down: int = 0
+var _all_down_for: float = -1.0
+var _plaque_live: Label3D
+var _ink_tick: int = 0
 
 # Shared materials (allocated once, reused)
 var _debug_line_mat: StandardMaterial3D
@@ -181,8 +212,11 @@ func _ready() -> void:
 	_create_gravity_spheres()
 	_create_trail_mesh()
 	_create_labels()
-	_create_debug_visuals()
+	if show_debug:
+		_create_debug_visuals()
 	_update_pendulum_visual()
+	_create_pegs()
+	_create_plaque()
 
 	# INTERFERENCE, applied LAST so every child index above it is exactly where the
 	# legacy build put it. "none" falls through and adds nothing at all.
@@ -439,26 +473,51 @@ func _create_earth_ring() -> void:
 
 	var ring_radius = canvas_size / 2.0 + 0.3
 	var ring_height = 0.02
+	if show_sky:
+		# THE SKY: overhead, just under the pivot - the canvas below is the floor that turns with the Earth
+		_earth_ring.position.y = pendulum_length - 0.6
 
-	# Ring mesh (torus approximated with segments)
+	# Ring mesh. A TorusMesh already lies in the XZ plane: the old "lay flat" quarter turn stood it up as an arch.
 	var ring_mesh = MeshInstance3D.new()
 	var torus = TorusMesh.new()
 	torus.inner_radius = ring_radius - 0.04
 	torus.outer_radius = ring_radius + 0.04
-	torus.rings = 32
+	torus.rings = 48
 	torus.ring_segments = 12
 	ring_mesh.mesh = torus
-	ring_mesh.position.y = ring_height
-	ring_mesh.rotation.x = PI / 2  # Lay flat
+	ring_mesh.position.y = 0.0 if show_sky else ring_height
 
 	var ring_mat = StandardMaterial3D.new()
-	ring_mat.albedo_color = Color(0.4, 0.35, 0.3)
+	ring_mat.albedo_color = Color(0.13, 0.16, 0.3) if show_sky else Color(0.4, 0.35, 0.3)
 	ring_mat.metallic = 0.3
 	ring_mat.roughness = 0.7
 	ring_mesh.material_override = ring_mat
 	_earth_ring.add_child(ring_mesh)
+	if not show_sky:
+		return
 
-	# Compass markers removed - cleaner visualization
+	# 24 hour marks, star-bright; hour 0 larger, so the turn can be followed by eye
+	var star_mat := StandardMaterial3D.new()
+	star_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	star_mat.albedo_color = Color(1.0, 0.95, 0.78)
+	for h in 24:
+		var star := MeshInstance3D.new()
+		var s := SphereMesh.new()
+		var r: float = 0.11 if h == 0 else (0.075 if h % 6 == 0 else 0.05)
+		s.radius = r; s.height = r * 2.0; s.radial_segments = 12; s.rings = 6
+		star.mesh = s
+		star.material_override = star_mat
+		var a: float = TAU * float(h) / 24.0
+		star.position = Vector3(cos(a) * ring_radius, 0.0, sin(a) * ring_radius)
+		_earth_ring.add_child(star)
+	var sky := Label3D.new()
+	sky.text = "THE SKY  ·  one turn a day, sped up"
+	sky.font_size = 64
+	sky.outline_size = 8
+	sky.modulate = Color(1.0, 0.95, 0.8)
+	sky.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	sky.position = Vector3(0, pendulum_length - 0.25, 0)
+	add_child(sky)
 
 
 ## ring_gap defaults to the legacy 0.8, so the existing call site is unchanged. Only
@@ -592,6 +651,8 @@ func _create_labels() -> void:
 	_title_label.outline_size = 4
 	add_child(_title_label)
 
+	if show_plaque:
+		return   # the plaque says it at eye height (and says it right: the turning ring is the sky, not the Earth)
 	var precession_factor = sin(deg_to_rad(latitude))
 	var info = Label3D.new()
 	info.text = "Latitude: %.0f° | Precession = Ω × sin(%.0f°) = %.2f×Ω" % [latitude, latitude, precession_factor]
@@ -600,12 +661,126 @@ func _create_labels() -> void:
 	info.modulate = Color(0.4, 0.35, 0.3)
 	add_child(info)
 
-	var info2 = Label3D.new()
-	info2.text = "Ring rotates with Earth — pendulum swings in fixed plane"
-	info2.font_size = 24
-	info2.position = Vector3(0, pendulum_length - 0.05, 0)
-	info2.modulate = Color(0.5, 0.45, 0.4)
-	add_child(info2)
+
+## The plaque: what the trace proves, at eye height beside the canvas, with a live line - pegs down and how far the
+## swing plane has turned against the floor.
+func _create_plaque() -> void:
+	if not show_plaque:
+		return
+	var k: float = sin(deg_to_rad(latitude))
+	var corner := Vector3(-canvas_size * 0.5 - 0.35, 1.75, canvas_size * 0.5 + 0.35)
+	var text := Label3D.new()
+	text.name = "Plaque"
+	text.text = "FOUCAULT'S PENDULUM\nThe floor turns. The swing does not.\nAt %.0f° N its plane turns at sin %.0f° = %.2f of the sky's pace." % [latitude, latitude, k]
+	text.font_size = 56
+	text.outline_size = 6
+	text.modulate = Color(0.97, 0.94, 0.86)
+	text.outline_modulate = Color(0.12, 0.1, 0.08)
+	text.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	text.position = corner
+	text.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM   # the text stands ON the corner, the live line hangs under it
+	add_child(text)
+	_plaque_live = Label3D.new()
+	_plaque_live.name = "PlaqueLive"
+	_plaque_live.font_size = 50
+	_plaque_live.outline_size = 6
+	_plaque_live.modulate = Color(1.0, 0.82, 0.45)
+	_plaque_live.outline_modulate = Color(0.12, 0.1, 0.08)
+	_plaque_live.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_plaque_live.position = corner + Vector3(0, -0.06, 0)
+	_plaque_live.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	add_child(_plaque_live)
+	_refresh_plaque()
+
+
+func _refresh_plaque() -> void:
+	if _plaque_live == null:
+		return
+	var turned: float = fposmod(rad_to_deg(swing_direction - initial_direction), 360.0)
+	if pegs_enabled and not _peg_pivots.is_empty():
+		_plaque_live.text = "pegs down %d / %d  ·  the plane has turned %.0f°" % [_pegs_down, _peg_pivots.size(), turned]
+	else:
+		_plaque_live.text = "the plane has turned %.0f° against the floor" % turned
+
+
+## THE CLOCK. Dominoes on a ring fixed to the floor, each standing just tall enough for the bob to strike at that
+## radius (the bob rides L(1 - cos) higher the further it swings out). A peg is struck when the tip passes within
+## reach of it; it falls outward and stays down. The plane meets the ring at both ends of its swing, so two opposite
+## arcs fall: after half a precession every peg is down, and after a short pause they stand up again.
+func _create_pegs() -> void:
+	if not pegs_enabled:
+		return
+	var amp: float = target_amplitude if drive_enabled else initial_amplitude
+	var reach: float = pendulum_length * sin(amp)
+	_peg_radius = minf(reach * 0.82, canvas_size * 0.5 - 0.3)
+	var rise: float = pendulum_length * (1.0 - cos(asin(clampf(_peg_radius / pendulum_length, 0.0, 1.0))))
+	var h: float = rise + tip_hover_height + 0.16
+	var peg_mat := StandardMaterial3D.new()
+	peg_mat.albedo_color = Color(0.86, 0.3, 0.2)
+	peg_mat.roughness = 0.45
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(0.035, h, 0.13)
+	var pegs := Node3D.new()
+	pegs.name = "Pegs"
+	add_child(pegs)
+	_peg_angle.resize(peg_count)
+	_peg_fall.resize(peg_count)
+	for i in peg_count:
+		var a: float = TAU * float(i) / float(peg_count)
+		var pivot := Node3D.new()
+		# local +x points outward along the radius (a yaw of -a), so the peg falls outward about its local z
+		pivot.position = Vector3(cos(a) * _peg_radius, 0.1, sin(a) * _peg_radius)
+		pivot.rotation = Vector3(0, -a, 0)
+		var m := MeshInstance3D.new()
+		m.mesh = mesh
+		m.material_override = peg_mat
+		m.position = Vector3(0, h * 0.5, 0)
+		pivot.add_child(m)
+		pegs.add_child(pivot)
+		_peg_pivots.append(pivot)
+		_peg_angle[i] = a
+		_peg_fall[i] = -1.0
+
+
+func _update_pegs(delta: float) -> void:
+	if _peg_pivots.is_empty():
+		return
+	var n: int = _peg_pivots.size()
+	# the tip, on the canvas, in the floor's frame (the pivot hangs at the origin, unturned)
+	var tip := Vector2(_cone.position.x, _cone.position.z)
+	var r: float = tip.length()
+	if absf(r - _peg_radius) < 0.18:
+		var i: int = posmod(roundi(atan2(tip.y, tip.x) / TAU * float(n)), n)
+		var p := Vector2(cos(_peg_angle[i]), sin(_peg_angle[i])) * _peg_radius
+		if _peg_fall[i] < 0.0 and tip.distance_to(p) < 0.17:
+			_peg_fall[i] = 0.0
+			_pegs_down += 1
+			peg_toppled.emit(i, _pegs_down)
+			_refresh_plaque()
+	for i in n:
+		if _peg_fall[i] < 0.0:
+			continue
+		_peg_fall[i] += delta
+		var t: float = clampf(_peg_fall[i] / 0.5, 0.0, 1.0)
+		# a fall that lands: ease in, with a small rebound off the canvas
+		var fall: float = t * t * (3.0 - 2.0 * t)
+		var bounce: float = 0.06 * sin(clampf((_peg_fall[i] - 0.5) / 0.25, 0.0, 1.0) * PI)
+		_peg_pivots[i].rotation = Vector3(0, -_peg_angle[i], -(PI * 0.5 - 0.03) * fall + bounce)
+	if _pegs_down >= n:
+		if _all_down_for < 0.0:
+			_all_down_for = 0.0
+		_all_down_for += delta
+		if _all_down_for > 4.0:
+			_stand_pegs()
+
+
+func _stand_pegs() -> void:
+	for i in _peg_pivots.size():
+		_peg_fall[i] = -1.0
+		_peg_pivots[i].rotation = Vector3(0, -_peg_angle[i], 0)
+	_pegs_down = 0
+	_all_down_for = -1.0
+	_refresh_plaque()
 
 
 func _physics_process(delta: float) -> void:
@@ -640,14 +815,18 @@ func _physics_process(delta: float) -> void:
 	# Swing direction changes relative to Earth at precession_rate
 	swing_direction += precession_rate * delta
 
-	# Rotate the Earth reference ring
+	# Rotate the reference ring. As the SKY it turns the way the swing plane precesses (clockwise from above, as in the
+	# northern hemisphere: swing_direction grows from +x toward +z), and faster - the plane follows it at sin(latitude).
 	if _earth_ring:
-		_earth_ring.rotation.y = earth_angle
+		_earth_ring.rotation.y = -earth_angle if show_sky else earth_angle
 
 	_update_pendulum_visual()
 	_update_debug_visuals()
 	_record_trail_point()
 	_update_trail_mesh()
+	_update_pegs(delta)
+	if Engine.get_physics_frames() % 30 == 0:
+		_refresh_plaque()
 
 
 func _apply_gravity_sphere_forces(delta: float) -> void:
@@ -813,6 +992,9 @@ func _record_trail_point() -> void:
 func _update_trail_mesh() -> void:
 	if trail_points.size() < 2:
 		return
+	if ink_ribbon:
+		_update_ink_ribbon()
+		return
 
 	# Build line strip mesh
 	var st = SurfaceTool.new()
@@ -824,6 +1006,44 @@ func _update_trail_mesh() -> void:
 
 	_trail_mesh.mesh = st.commit()
 	_trail_mat.albedo_color = marker_color
+
+
+## The ink as a flat ribbon marker_width wide, coloured by age: the oldest stroke aged_ink_color, the newest
+## marker_color. Rebuilt six times a second from packed arrays - a ribbon of max_trail_points rebuilt every tick costs
+## more than the whole swing.
+func _update_ink_ribbon() -> void:
+	_ink_tick += 1
+	if _ink_tick % 10 != 1:
+		return
+	var n: int = trail_points.size()
+	var verts := PackedVector3Array()
+	var cols := PackedColorArray()
+	verts.resize(n * 2)
+	cols.resize(n * 2)
+	var hw: float = marker_width * 0.5
+	var last_side := Vector3(hw, 0, 0)
+	for i in n:
+		var a: Vector3 = trail_points[maxi(i - 1, 0)]
+		var b: Vector3 = trail_points[mini(i + 1, n - 1)]
+		var t := Vector2(b.x - a.x, b.z - a.z)
+		if t.length_squared() > 1e-10:
+			t = t.normalized()
+			last_side = Vector3(-t.y, 0.0, t.x) * hw
+		var c: Color = aged_ink_color.lerp(marker_color, pow(float(i) / float(n - 1), 0.7))
+		verts[i * 2] = trail_points[i] - last_side
+		verts[i * 2 + 1] = trail_points[i] + last_side
+		cols[i * 2] = c
+		cols[i * 2 + 1] = c
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_COLOR] = cols
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLE_STRIP, arrays)
+	_trail_mesh.mesh = mesh
+	# the vertex colours ARE the ink: an albedo of marker_color would darken every age to the same black
+	_trail_mat.albedo_color = Color.WHITE
+	_trail_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 
 
 func _exit_tree() -> void:
@@ -846,6 +1066,8 @@ func reset() -> void:
 		_trail_mesh.mesh = null
 	if _earth_ring:
 		_earth_ring.rotation.y = 0.0
+	if not _peg_pivots.is_empty():
+		_stand_pegs()
 
 
 func set_earth_rotation_rate(rate: float) -> void:

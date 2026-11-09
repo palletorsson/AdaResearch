@@ -761,6 +761,44 @@
       "gdscript_changed": false,
       "identity_source": true,
       "verified": true
+    },
+    {
+      "lookup_name": "foucault_pendulum",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "before_score": "4/8",
+      "after_score": "8/8",
+      "fields_added": [
+        "gamwell_reference",
+        "interactions",
+        "signals",
+        "capacity"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "docs": [
+        "description rewritten (pegs, sky, ink, the proof)",
+        "gamwell_reference",
+        "interactions",
+        "signals",
+        "capacity",
+        "tags +5"
+      ],
+      "code": [
+        "pegs that fall (the Foucault clock) + peg_toppled signal",
+        "ink as an aging ribbon (a line strip is 1 px)",
+        "the ring lies flat (a TorusMesh already lies in XZ) and is the SKY overhead, turning with the plane's sense",
+        "plaque at eye height with a live count",
+        "debug markers off by default",
+        "scene: sine nudge off, amplitude 0.35 (the swing stayed on the canvas)"
+      ],
+      "capture": "ada_run/improve/foucault_pendulum/before_after_standalone.png, before_after_tower.png (45 s of physics via capture_tscn_shot --physics)",
+      "tower": "floor 66, shaft B, scale 0.65 -> 0.9 (Palle: make it a bit larger)"
     }
   ]
 }
