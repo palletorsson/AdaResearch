@@ -40,6 +40,9 @@ card {formula, motive, op, said}. The view puts it once: before the main row tha
 hand - where the tower stages a step with no work of that form), else before the first main work MADE of that form
 (its form term is the term, or a child of it, or a term whose grammar `from` holds it). A card no work carries yet is
 listed as unplaced.
+    The op words are the operations of commons/modular/grammar.json (one vocabulary, 2026-11-09); a card also carries
+    `axes` (the axis level it raises) and may carry `with` (a second operation it introduces). place_cards() is the one
+    placement rule; tools/grammar.py checks the cards against the tower (earned order, axis levels, a root per sequence).
     python tools/artifact_timeline.py cards              # every card, where it falls in the time
     python tools/artifact_timeline.py card <term>        # {formula, motive, op} on stdin -> written on the term
 
@@ -667,27 +670,8 @@ def build_view() -> dict:
     main, gaps = [], defaultdict(list)
     num = numbering(doc.get("main", []))
     tm = terms()
-    carded: dict = {}   # term -> the key of the work the card falls before
     has_card = {t for t, v in tm.items() if isinstance(v.get("card"), dict)}
-    for row in doc.get("main", []):   # placed by hand: a row's "cards"
-        for t in row.get("cards") or []:
-            if t in has_card and t not in carded:
-                carded[t] = row["key"]
-    for row in doc.get("main", []):   # else the first work made of the form
-        f = row.get("form") or {}
-        made_of = {f.get("term"), f.get("of_form") if f.get("kind") == "child" else None,
-                   *((tm.get(f.get("term")) or {}).get("from") or [])}
-        for t in sorted(made_of & has_card, key=lambda x: 0 if x == f.get("term") else 1):
-            if t not in carded:
-                carded[t] = row["key"]
-    try:
-        track_at = {st["term"]: i for i, st in enumerate(read(TERMS).get("track", []))}
-    except (OSError, ValueError):
-        track_at = {}
-    grammar_at = {t: i for i, t in enumerate(tm)}
-    cards_before = defaultdict(list)
-    for t in sorted(carded, key=lambda x: (track_at.get(x, 999), grammar_at[x])):   # two cards on one work: the track's order
-        cards_before[carded[t]].append(t)
+    carded, cards_before, track_at = place_cards(doc, tm)
     made_of = {}   # the page places cards itself as rows move: it needs what each formed term is made of
     for row in doc.get("main", []):
         ft = (row.get("form") or {}).get("term")
@@ -747,7 +731,7 @@ def build_view() -> dict:
                         for k in catalogue_keys), key=lambda c: c["key"])
     pos = {r["key"]: i for i, r in enumerate(doc.get("main", []))}
     card_list = sorted(({**card_of(t, tm), "at": carded.get(t)} for t, v in tm.items() if isinstance(v.get("card"), dict)),
-                       key=lambda c: (pos.get(c["at"], 10 ** 6), track_at.get(c["term"], 999)))
+                       key=lambda c: (pos.get(c["at"], 10 ** 6), (cards_before.get(c["at"]) or [c["term"]]).index(c["term"])))
     counts = {"main": len(main), "cards": len(card_list), "cards_unplaced": sum(1 for c in card_list if not c["at"]), "numbered": sum(1 for e in main if e["n"] is not None),
               "children": sum(1 for e in main if e["base"]),
               "main_collections": sum(1 for e in main if (e["form"] or {}).get("kind") == "collection"),
@@ -760,18 +744,60 @@ def build_view() -> dict:
     return {"_doc": "DERIVED by tools/artifact_timeline.py view - never edit; the authored file is commons/data/artifact_timeline.json",
             "generated_at": now(), "edited_at": doc.get("edited_at"), "base": doc.get("edited_at") or doc.get("seeded_at"), "counts": counts, "floors": floors,
             "main": main, "environment": env, "removed": removed, "unfiled": unfiled, "duplicates": dup,
-            "gaps": {k: v for k, v in gaps.items()}, "catalogue": catalogue, "cards": card_list, "made_of": made_of}
+            "gaps": {k: v for k, v in gaps.items()}, "catalogue": catalogue, "cards": card_list, "made_of": made_of,
+            "card_ops": list(CARD_OPS)}
+
+
+def place_cards(doc: dict, tm: dict) -> tuple:
+    """where each card falls: {term: key of the main work it stands before}, {key: [terms in reading order]}, track
+    index. The rule (one implementation - tools/grammar.py and the page mirror it): a row's "cards" (written by hand)
+    first, else the first main work MADE of the form (its form term, a child's of_form, a term in its term's `from`).
+    Several cards on one work read in the hand-written order, then the track's, then the grammar file's."""
+    carded: dict = {}
+    hand_at: dict = {}
+    has_card = {t for t, v in tm.items() if isinstance(v.get("card"), dict)}
+    for row in doc.get("main", []):   # placed by hand: a row's "cards"
+        for i, t in enumerate(row.get("cards") or []):
+            if t in has_card and t not in carded:
+                carded[t] = row["key"]
+                hand_at[t] = i
+    for row in doc.get("main", []):   # else the first work made of the form
+        f = row.get("form") or {}
+        made_of = {f.get("term"), f.get("of_form") if f.get("kind") == "child" else None,
+                   *((tm.get(f.get("term")) or {}).get("from") or [])}
+        for t in sorted(made_of & has_card, key=lambda x: 0 if x == f.get("term") else 1):
+            if t not in carded:
+                carded[t] = row["key"]
+    try:
+        track_at = {st["term"]: i for i, st in enumerate(read(TERMS).get("track", []))}
+    except (OSError, ValueError):
+        track_at = {}
+    grammar_at = {t: i for i, t in enumerate(tm)}
+    cards_before = defaultdict(list)
+    for t in sorted(carded, key=lambda x: (hand_at.get(x, 999), track_at.get(x, 999), grammar_at[x])):
+        cards_before[carded[t]].append(t)
+    return carded, cards_before, track_at
 
 
 def card_of(term: str, tm: dict) -> dict:
     t = tm.get(term) or {}
     c = t.get("card") or {}
+    axes = c.get("axes") or ([c["axis"]] if c.get("axis") else [])
     return {"term": term, "label": t.get("label", term), "formula": c.get("formula", ""), "motive": c.get("motive", ""),
-            "op": c.get("op", ""), "from": t.get("from", []), "said": c.get("said", "")}
+            "op": c.get("op", ""), "with": c.get("with", []), "axes": axes, "from": t.get("from", []), "said": c.get("said", "")}
 
 
-CARD_OPS = ("genesis", "distance", "extension", "association", "closure", "step", "hand", "times", "array", "tie", "drive",
-            "assemblage", "sort", "decide", "field")
+GRAMMAR = ROOT / "commons/modular/grammar.json"   # the one vocabulary of operations (Palle, 2026-11-09)
+
+
+def card_ops() -> tuple:
+    try:
+        return tuple(read(GRAMMAR)["operations"])
+    except (OSError, ValueError, KeyError):
+        return ("genesis", "distance", "extension", "association")
+
+
+CARD_OPS = card_ops()
 
 
 def set_card(term: str, body: dict) -> dict:
@@ -794,7 +820,7 @@ def set_card(term: str, body: dict) -> dict:
         t.pop("card", None)
     else:
         old = t.get("card") or {}
-        t["card"] = {"formula": formula, "motive": motive, "op": op or old.get("op", ""),
+        t["card"] = {**old, "formula": formula, "motive": motive, "op": op or old.get("op", ""),   # keeps with / axes
                      "said": str(body.get("said") or old.get("said") or "").strip()}
     TERMS.write_bytes((json.dumps(g, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     return {"ok": True, "term": term, "card": t.get("card")}

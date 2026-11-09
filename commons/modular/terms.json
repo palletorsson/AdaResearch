@@ -50,6 +50,9 @@
         "formula": "point",
         "motive": "a position and nothing else: somewhere to begin",
         "op": "genesis",
+        "axes": [
+          "start:1"
+        ],
         "said": "Palle, 2026-11-08: 'The point is genesis'"
       }
     },
@@ -91,6 +94,9 @@
         "formula": "extension(point) = black point",
         "motive": "the position takes a body small enough to hold",
         "op": "extension",
+        "axes": [
+          "body:1"
+        ],
         "said": "Palle, 2026-11-08: 'extension(point) = black dot, is better in our hand, it is desire'; 'extension is body'"
       }
     },
@@ -242,6 +248,9 @@
         "formula": "line = distance(point, point)",
         "motive": "two positions ask how far apart they are",
         "op": "distance",
+        "axes": [
+          "form:1"
+        ],
         "said": "Palle, 2026-11-08: 'line = distance(point, point)'"
       }
     },
@@ -335,6 +344,9 @@
         "formula": "extension(line) = plank",
         "motive": "the distance takes a body you can stand on",
         "op": "extension",
+        "axes": [
+          "body:1"
+        ],
         "said": "Palle, 2026-11-08: 'extension(line) = plank'; 'extension is body'"
       }
     },
@@ -461,6 +473,15 @@
           ]
         },
         "kind": "trace"
+      },
+      "card": {
+        "formula": "trace = trail(point, time)",
+        "motive": "the point moves and leaves its path behind: a line made of time",
+        "op": "trail",
+        "axes": [
+          "path:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "hand_trace": {
@@ -644,6 +665,18 @@
         },
         "n": 3,
         "layout": "polygon"
+      },
+      "card": {
+        "formula": "triangle = closure(line × 3)",
+        "motive": "three lengths close on each other: the first inside, a face",
+        "op": "closure",
+        "axes": [
+          "form:2"
+        ],
+        "with": [
+          "times"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "triangle_face": {
@@ -760,9 +793,12 @@
         ]
       },
       "card": {
-        "formula": "quad = distance(line, line)",
-        "motive": "two lines ask what lies between them: a surface",
-        "op": "distance",
+        "formula": "quad = triangle × 2",
+        "motive": "two faces share an edge and close a square",
+        "op": "times",
+        "axes": [
+          "form:2"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -1142,6 +1178,9 @@
         "formula": "extension(box) = cube",
         "motive": "the solid takes a body: it is in the way",
         "op": "extension",
+        "axes": [
+          "body:1"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -1254,6 +1293,9 @@
         "formula": "assemblage(sphere, plank) = elevated plank",
         "motive": "two kinds of part rest on each other",
         "op": "assemblage",
+        "axes": [
+          "parts:1"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -1469,6 +1511,9 @@
         "formula": "hand(cube) = pick-up cube",
         "motive": "the falling body fits a hand: it can be taken",
         "op": "hand",
+        "axes": [
+          "body:3"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -1650,6 +1695,9 @@
         "formula": "drive(point, sin t) = movement",
         "motive": "the position becomes a function of time",
         "op": "drive",
+        "axes": [
+          "drive:1"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -2238,6 +2286,9 @@
         "formula": "sort(pallet taken apart, by size) = a reading",
         "motive": "the parts laid in a row by a measure",
         "op": "sort",
+        "axes": [
+          "measure:1"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -5525,6 +5576,9 @@
         "formula": "tie(cube, sphere) = pendulum",
         "motive": "one part holds another: the fall becomes a swing",
         "op": "tie",
+        "axes": [
+          "joint:1"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -38247,6 +38301,9 @@
         "formula": "assemblage(deck, truck × 2, wheel × 4) = skateboard",
         "motive": "many kinds of part become one thing to ride",
         "op": "assemblage",
+        "axes": [
+          "parts:2"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -46810,6 +46867,15 @@
             "kind": "static"
           }
         ]
+      },
+      "card": {
+        "formula": "domino = step(plank on edge, a push)",
+        "motive": "a body waits at a threshold until something tips it",
+        "op": "step",
+        "axes": [
+          "react:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "or_frame": {
@@ -47782,6 +47848,9 @@
         "formula": "decide(input, input) = and",
         "motive": "two inputs become one output: both, or nothing",
         "op": "decide",
+        "axes": [
+          "react:2"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -49043,6 +49112,9 @@
         "formula": "box = closure(quad × 6)",
         "motive": "the surfaces close on each other: a solid you see",
         "op": "closure",
+        "axes": [
+          "form:3"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -49075,6 +49147,9 @@
         "formula": "step(cube, physics) = falling cube",
         "motive": "the body takes mass: it falls",
         "op": "step",
+        "axes": [
+          "body:2"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -49098,6 +49173,9 @@
         "formula": "array(cube, n) = cube row",
         "motive": "the same cube again: now it can be counted",
         "op": "array",
+        "axes": [
+          "many:1"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -49126,6 +49204,9 @@
         "formula": "array(cube row, n, 3d) = lattice",
         "motive": "repetition at scale turns into a material",
         "op": "array",
+        "axes": [
+          "many:2"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -49385,6 +49466,15 @@
           0,
           0
         ]
+      },
+      "card": {
+        "formula": "transform(cube, at) = moved cube",
+        "motive": "the body keeps its form and changes its place",
+        "op": "transform",
+        "axes": [
+          "place:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "turned_cube": {
@@ -49588,6 +49678,15 @@
           "277da1",
           "7a4b8a"
         ]
+      },
+      "card": {
+        "formula": "rainbow row = config(cube row, i → hue)",
+        "motive": "each count gets its own colour: the value is read by address",
+        "op": "config",
+        "axes": [
+          "value:2"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "color_grid": {
@@ -49752,6 +49851,15 @@
         "n": 3,
         "step": 1.0,
         "dims": 2
+      },
+      "card": {
+        "formula": "pattern = times(motif, a symmetry group)",
+        "motive": "one motif repeated by turns and mirrors: the rule fills the plane",
+        "op": "times",
+        "axes": [
+          "many:3"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "star_tiling": {
@@ -49884,6 +49992,15 @@
             ]
           }
         ]
+      },
+      "card": {
+        "formula": "arrow = distance(point → point)",
+        "motive": "the length gets a direction: it can push",
+        "op": "distance",
+        "axes": [
+          "direction:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "vector_sum": {
@@ -50227,6 +50344,15 @@
             ]
           }
         }
+      },
+      "card": {
+        "formula": "catenary = step(chain, gravity) until it rests",
+        "motive": "the body moves until nothing changes: the form is where it stops",
+        "op": "step",
+        "axes": [
+          "rest:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "gradient_descent": {
@@ -50600,6 +50726,15 @@
           "dims": 1,
           "y": 0.4
         }
+      },
+      "card": {
+        "formula": "wave = drive(ball × 15, sin(x − t))",
+        "motive": "the sine spreads along space as well as time",
+        "op": "drive",
+        "axes": [
+          "drive:2"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "beat_graph": {
@@ -50698,6 +50833,15 @@
           "step": 0.55,
           "dims": 2
         }
+      },
+      "card": {
+        "formula": "random sizes = sample(box × 6, size)",
+        "motive": "each value is drawn, not computed: neighbours know nothing of each other",
+        "op": "sample",
+        "axes": [
+          "chance:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "gaussian_bins": {
@@ -50752,6 +50896,15 @@
           "dims": 2,
           "y": 0.3
         }
+      },
+      "card": {
+        "formula": "noise = field(sample, near values close)",
+        "motive": "chance given at every point of space: neighbours share their values",
+        "op": "field",
+        "axes": [
+          "chance:2"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "layered_noise": {
@@ -50838,6 +50991,15 @@
             "scale": 0.5
           }
         ]
+      },
+      "card": {
+        "formula": "sierpinski = recurse(triangle, 3 halves)",
+        "motive": "a rule applied to its own result: the same shape at every scale",
+        "op": "recurse",
+        "axes": [
+          "rule:2"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "cantor_set": {
@@ -51218,6 +51380,15 @@
         "angle": 60,
         "step": 0.022,
         "heading": 0
+      },
+      "card": {
+        "formula": "koch = rewrite(F → F+F−−F+F)",
+        "motive": "a sentence rewrites itself, and the sentence is drawn: grammar becomes form",
+        "op": "rewrite",
+        "axes": [
+          "rule:3"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "metaballs": {
@@ -51268,6 +51439,9 @@
         "formula": "metaballs = field(point, point, …)",
         "motive": "points become a field; a surface rises where it is strong",
         "op": "field",
+        "axes": [
+          "form:4"
+        ],
         "said": "drafted 2026-11-08 for Palle's rule 'extension is body, association is name' - not yet his words"
       }
     },
@@ -51465,6 +51639,15 @@
         ],
         "res": 40,
         "color": "f3ecdd"
+      },
+      "card": {
+        "formula": "union = boolean(box, sphere)",
+        "motive": "two solids combined by what is inside them",
+        "op": "boolean",
+        "axes": [
+          "form:5"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "bool_subtract": {
@@ -51670,6 +51853,15 @@
           "t": "cube"
         },
         "surface": "glow"
+      },
+      "card": {
+        "formula": "shader = field(pixel, light, view, t)",
+        "motive": "a rule runs for every pixel at once: the surface answers light, view and time",
+        "op": "field",
+        "axes": [
+          "light:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "rim_sphere": {
@@ -52006,6 +52198,15 @@
           "step": 0.2,
           "dims": 2
         }
+      },
+      "card": {
+        "formula": "percolation = sample(tile × 64, keep 0.6)",
+        "motive": "each tile survives a draw: chance kept where the rule lets it connect",
+        "op": "sample",
+        "axes": [
+          "chance:3"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "soft_cube": {
@@ -52647,6 +52848,15 @@
             "y": 0.6
           }
         }
+      },
+      "card": {
+        "formula": "soft cube = tie(ball × 27, springs)",
+        "motive": "many ties at once: the body bends and comes back",
+        "op": "tie",
+        "axes": [
+          "joint:2"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "boids": {
@@ -52687,6 +52897,15 @@
           "dims": 3,
           "y": 0.35
         }
+      },
+      "card": {
+        "formula": "flock = drive(ball × 27, neighbours)",
+        "motive": "each body is driven by the ones near it: no leader",
+        "op": "drive",
+        "axes": [
+          "drive:3"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "graph": {
@@ -52833,6 +53052,15 @@
             }
           ]
         }
+      },
+      "card": {
+        "formula": "graph = connect(point × 7, edges)",
+        "motive": "which joins which, and nothing more: a relation without a length",
+        "op": "connect",
+        "axes": [
+          "relation:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "graph_circle": {
@@ -54132,6 +54360,15 @@
             }
           ]
         }
+      },
+      "card": {
+        "formula": "net = decide(inputs, weights ← error)",
+        "motive": "the decision's rule is changed by its own results",
+        "op": "decide",
+        "axes": [
+          "react:3"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "spherical_triangle": {
@@ -54798,6 +55035,15 @@
             }
           ]
         }
+      },
+      "card": {
+        "formula": "rhizome = connect(point × 24, nearest earlier)",
+        "motive": "connections grown without a centre or a top",
+        "op": "connect",
+        "axes": [
+          "relation:2"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "circle_limit": {
@@ -65748,6 +65994,15 @@
             ]
           }
         ]
+      },
+      "card": {
+        "formula": "reflect(parallel axiom) = another geometry",
+        "motive": "an axiom is questioned: the same triangle, another space",
+        "op": "reflect",
+        "axes": [
+          "rule:4"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "generations": {
@@ -73935,6 +74190,15 @@
             ]
           }
         ]
+      },
+      "card": {
+        "formula": "QFE = F − λ·E(S) + φ·dE(S,t)",
+        "motive": "order, chance and change weighed in one formula",
+        "op": "assemblage",
+        "axes": [
+          "parts:3"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "lingering_cells": {
@@ -73971,6 +74235,15 @@
           "op": "compose",
           "parts": []
         }
+      },
+      "card": {
+        "formula": "life = rule(cell, neighbours → next)",
+        "motive": "each cell's next state comes from its neighbours: nothing sees the whole",
+        "op": "rule",
+        "axes": [
+          "rule:1"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "difference_spread": {
@@ -116228,6 +116501,19 @@
             }
           ]
         }
+      },
+      "card": {
+        "formula": "measuring stick = association(config(line))",
+        "motive": "the line takes a name you already know, and the marks that make it that one",
+        "op": "association",
+        "axes": [
+          "name:1",
+          "value:1"
+        ],
+        "with": [
+          "config"
+        ],
+        "said": "drafted 2026-11-09 for the spine grammar (commons/modular/grammar.json) - not yet his words"
       }
     },
     "warning_triangle": {
