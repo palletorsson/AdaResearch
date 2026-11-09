@@ -81,6 +81,14 @@ const SLIDE_SPAN := 1.6               # slide_x moves a slat this many of its ow
 ## The one place the mode names are written down, so the export hint, the config
 ## reader and the index cannot drift apart.
 const MODE_NAMES := ["swing", "slide_y", "slide_x"]
+## The white-with-edges finish (Palle, 2026-11-09, Trans_Body: "make all artifact in this map white (since we have
+## not introduced color yet). Use the same outline shader as in Primitives Ignorance").
+const EdgeOutline = preload("res://commons/void/edge_outline.gd")
+const PlatonicStudy = preload("res://commons/void/platonic_study.gd")
+## How close to the plane a visitor must be, either side, for a change of side to count as walking THROUGH rather
+## than around the end of the wall. A slat is at most ~1 m long when swung, so a body that crosses the plane
+## inside this band went through the hole.
+const CROSS_BAND_M := 1.5
 
 ## How many slats the wall is cut into, ASKED FOR — the build lowers it if the
 ## slats would come out too narrow to walk between. More slats means the hole can
@@ -122,6 +130,18 @@ const MODE_NAMES := ["swing", "slide_y", "slide_x"]
 ## so out loud.
 @export var seal_report_s: float = 4.0
 @export var slat_color: Color = Color(0.62, 0.63, 0.66)
+## 2026-11-09, Palle, Trans_Body: "Approach_wall have three segments of door and keep the one the player walks
+## through open."
+## SEGMENTS: 0 is the wall as it always was, one continuous hole that follows you. N > 0 cuts the span into N doors
+## of equal width, each with its own run of slats hinged on the door's own middle, so a door parts like a pair of
+## shutters. A door opens AS A DOOR: every slat in it takes the door's openness, which rises as you come within
+## reach in front of it (or within an aperture of its edge). The 0.62 m guarantee still runs on top, per slat.
+@export var segments: int = 0
+## LATCH: the opening you actually walk THROUGH stays open. With segments it is that whole door; without, the run
+## of slats the guarantee opened where you crossed. Everything else still closes behind you.
+@export var latch: bool = false
+## "" keeps the grey boards; "white_edges" is the platonic white with dark feature edges (edge_outline.gd).
+@export var look: String = ""
 
 ## The wall has just given way. The fraction is how far the widest slat had got at
 ## that moment. Sent on the rising edge and again whenever the opening grows
@@ -168,6 +188,13 @@ var _covered := false
 var _is_open := false
 var _reported := 0.0
 var _sealed_said := false
+var _seg_n := 0                        # built door count, 0 = no doors
+var _per := 0                          # slats per door
+var _seg_w := 0.0
+var _seg_open := PackedFloat32Array()  # this frame's door openness, from the visitors
+var _held := PackedFloat32Array()      # per slat: 1 = latched open, never closes again
+var _last_z := {}                      # visitor instance id -> last wall-local z, for the crossing test
+var _last_x := {}
 
 
 func _ready() -> void:
@@ -205,8 +232,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			slat_color = c
 		elif typeof(c) == TYPE_STRING and Color.html_is_valid(str(c)):
 			slat_color = Color.html(str(c))
+	if config_data.has("segments"):
+		segments = int(config_data["segments"])
+	if config_data.has("latch"):
+		latch = _truthy(config_data["latch"])
+	if config_data.has("look"):
+		look = str(config_data["look"])
 	if is_inside_tree():
 		_build()
+
+
+## A map token arrives as a bool, a number or a string ("true", "1", "yes").
+static func _truthy(v: Variant) -> bool:
+	if typeof(v) == TYPE_BOOL:
+		return v
+	if typeof(v) == TYPE_INT or typeof(v) == TYPE_FLOAT:
+		return float(v) != 0.0
+	return str(v).strip_edges().to_lower() in ["true", "1", "yes", "on"]
 
 
 func _take_mode(v: Variant) -> void:
@@ -233,6 +275,8 @@ func _build() -> void:
 	_reported = 0.0
 	_sealed_said = false
 	_resync = 0.0
+	_last_z.clear()
+	_last_x.clear()
 
 	# A map is allowed to ask for something silly. The ceiling is what a Quest can
 	# carry as moving colliders without the frame budget noticing.
@@ -255,11 +299,26 @@ func _build() -> void:
 	# So the count is bounded by the promise rather than the promise hoped for
 	# from the count, and it says so when a map asks for more than it can have.
 	var most: int = maxi(1, int(floor(width_m / (min_clear_m + thickness_m))))
-	if n > most:
+	_seg_n = maxi(0, segments)
+	if _seg_n > 0:
+		# DOORS: the same promise, asked of each door's width. Every door gets the same count, so every slat in the
+		# wall is the same width and the guarantee's index arithmetic below holds unchanged.
+		_seg_w = width_m / float(_seg_n)
+		_per = maxi(1, int(round(float(n) / float(_seg_n))))
+		var most_door: int = maxi(1, int(floor(_seg_w / (min_clear_m + thickness_m))))
+		if _per > most_door:
+			push_warning("approach_wall: %d slats per %.2f m door cannot promise %.2f m — %d per door"
+				% [_per, _seg_w, min_clear_m, most_door])
+			_per = most_door
+		n = _per * _seg_n
+	elif n > most:
 		push_warning("approach_wall: %d slats across %.2f m gives %.2f m each, and a slat clears only its width less %.2f m of hinge — %d slats to promise %.2f m"
 			% [n, width_m, width_m / float(n), thickness_m, most, min_clear_m])
 		n = most
 	_slat_w = width_m / float(n)
+	_seg_open.resize(_seg_n)
+	_held.resize(n)
+	_held.fill(0.0)
 	# One slat now clears min_clear_m by construction, so the run only has to be
 	# long enough to hold it — but keep the arithmetic, because a map may raise
 	# min_clear_m past what one slat gives and then it takes two.
@@ -289,12 +348,24 @@ func _build() -> void:
 		mats.append(m)
 
 	var size := Vector3(_slat_w, height_m, thickness_m)
+	# The white look shares ONE box between all the slats (they are all the same size), so edge_outline computes the
+	# box's twelve edges once; the slats only ever turn and slide, so the overlay riding each body stays true.
+	var white: StandardMaterial3D = null
+	var shared_box: BoxMesh = null
+	if look == "white_edges":
+		white = PlatonicStudy.finish()
+		shared_box = BoxMesh.new()
+		shared_box.size = size
 	for i in n:
 		var cx: float = -width_m * 0.5 + (float(i) + 0.5) * _slat_w
 		# The hinge is the slat's edge nearer the wall's middle, so a hole opened at
 		# the centre parts like two shutters and one opened at an end swings a
-		# single board clear.
+		# single board clear. With doors, nearer the DOOR's middle.
 		var s: float = 1.0 if cx >= 0.0 else -1.0
+		if _seg_n > 0:
+			@warning_ignore("integer_division")
+			var door_c: float = -width_m * 0.5 + (float(i / _per) + 0.5) * _seg_w
+			s = 1.0 if cx >= door_c - 0.0001 else -1.0
 		_cx[i] = cx
 		_hx[i] = cx - s * _slat_w * 0.5
 		_off[i] = s * _slat_w * 0.5
@@ -316,12 +387,19 @@ func _build() -> void:
 		add_child(body)
 
 		var mesh := MeshInstance3D.new()
-		var bm := BoxMesh.new()
-		bm.size = size
-		mesh.mesh = bm
-		mesh.material_override = mats[i % 2]
-		mesh.position = Vector3(_off[i], height_m * 0.5, 0.0)
-		body.add_child(mesh)
+		if white != null:
+			mesh.name = "Board"
+			mesh.mesh = shared_box
+			mesh.position = Vector3(_off[i], height_m * 0.5, 0.0)
+			body.add_child(mesh)
+			EdgeOutline.outline(mesh, 25.0, white)
+		else:
+			var bm := BoxMesh.new()
+			bm.size = size
+			mesh.mesh = bm
+			mesh.material_override = mats[i % 2]
+			mesh.position = Vector3(_off[i], height_m * 0.5, 0.0)
+			body.add_child(mesh)
 
 		var col := CollisionShape3D.new()
 		var shape := BoxShape3D.new()
@@ -380,6 +458,8 @@ func _physics_process(delta: float) -> void:
 		return
 	_sense(delta)
 	_force_core()
+	if _seg_n > 0:
+		_doors()
 
 	# Frame-rate independent approach: the same fraction of the remaining distance
 	# per second whatever the headset is managing. Nothing here allocates.
@@ -387,6 +467,8 @@ func _physics_process(delta: float) -> void:
 	var widest := 0.0
 	for i in _slats.size():
 		var target: float = maxf(_target_for(i), _force[i])
+		if _held[i] > target:
+			target = _held[i]
 		# The latch is taken on the way up only. A visitor who walks through the
 		# plane flips the sign of their own z, and without this the slat would swing
 		# back through the body it just made room for.
@@ -443,6 +525,17 @@ func _sense(delta: float) -> void:
 			for b in _field.get_overlapping_bodies():
 				if _is_visitor(b):
 					_visitors.append(b)
+		if latch and not _last_z.is_empty():
+			# Forget whoever has left the field, so a later re-entry from the far side is not read as a crossing.
+			for id in _last_z.keys():
+				var still := false
+				for b in _visitors:
+					if is_instance_valid(b) and b.get_instance_id() == id:
+						still = true
+						break
+				if not still:
+					_last_z.erase(id)
+					_last_x.erase(id)
 
 	var inv := global_transform.affine_inverse()
 	var half_x: float = width_m * 0.5 + aperture_m
@@ -457,6 +550,8 @@ func _sense(delta: float) -> void:
 		_vx[_vn] = p.x
 		_vz[_vn] = p.z
 		_vn += 1
+		if latch:
+			_track_crossing(b.get_instance_id(), p)
 		# In front of the wall's own span, not merely somewhere in the room. A
 		# person walking past the far end is not evidence of anything.
 		if absf(p.z) < reach_m and absf(p.x) < half_x:
@@ -502,11 +597,62 @@ func _force_core() -> void:
 				_force[j] = g
 
 
+## THE CROSSING, for latch. A visitor whose wall-local z changes sign while near the plane, inside the wall's span,
+## has walked through the hole; the opening where they crossed is held open from then on.
+func _track_crossing(id: int, p: Vector3) -> void:
+	if _last_z.has(id):
+		var pz: float = float(_last_z[id])
+		if (pz < 0.0) != (p.z < 0.0) and absf(pz) < CROSS_BAND_M and absf(p.z) < CROSS_BAND_M:
+			var x: float = (float(_last_x[id]) + p.x) * 0.5
+			if absf(x) < width_m * 0.5:
+				_hold_at(x)
+	_last_z[id] = p.z
+	_last_x[id] = p.x
+
+
+## Hold open what a body just walked through: its door, or (without doors) the guarantee's run at that x.
+func _hold_at(x: float) -> void:
+	if _held.is_empty() or _slat_w <= 0.0:
+		return
+	if _seg_n > 0:
+		var door: int = clampi(int(floor((x + width_m * 0.5) / _seg_w)), 0, _seg_n - 1)
+		for j in range(door * _per, mini((door + 1) * _per, _held.size())):
+			_held[j] = 1.0
+		return
+	var mid: int = clampi(int(round((x + width_m * 0.5) / _slat_w - 0.5)), 0, _held.size() - 1)
+	var first: int = clampi(mid - _core / 2, 0, maxi(0, _held.size() - _core))
+	for j in range(first, mini(first + _core, _held.size())):
+		_held[j] = 1.0
+
+
+## THE DOORS. A door's openness is the strongest claim on it: a visitor in front of its span (or within half an
+## aperture of its edge) commits it fully open by COMMIT_AT of the reach, the same walking-up distance as the
+## guarantee. A door does not open by halves along its width; that is what makes it a door and not the hole.
+func _doors() -> void:
+	var rc: float = maxf(reach_m, 0.001)
+	var margin: float = maxf(aperture_m * 0.5, 0.001)
+	for kd in _seg_n:
+		var c: float = -width_m * 0.5 + (float(kd) + 0.5) * _seg_w
+		var best := 0.0
+		for v in _vn:
+			var e: float = maxf(0.0, absf(_vx[v] - c) - _seg_w * 0.5)
+			if e >= margin:
+				continue
+			var g: float = clampf((1.0 - absf(_vz[v]) / rc) / COMMIT_AT, 0.0, 1.0) * (1.0 - e / margin)
+			g = g * g * (3.0 - 2.0 * g)
+			if g > best:
+				best = g
+		_seg_open[kd] = best
+
+
 ## How far this slat should be out of the way, given where everybody is.
 ##
 ## Two visitors at one slat take the wider of their two claims rather than the sum:
 ## a hole is opened by a body, and two bodies do not make a body twice as wide.
 func _target_for(i: int) -> float:
+	if _seg_n > 0:
+		@warning_ignore("integer_division")
+		return _seg_open[clampi(i / _per, 0, _seg_n - 1)]
 	var best := 0.0
 	var cx: float = _cx[i]
 	var ap: float = maxf(aperture_m, 0.001)
@@ -632,3 +778,23 @@ func is_passable() -> bool:
 ## with nobody in the scene, which is the headless case and is not a fault.
 func visitor_count() -> int:
 	return _vn
+
+
+## For a probe: how open door k is — its LEAST open slat, because a door is open only when all of it is. Without
+## doors, k is ignored and this is openness().
+func door_openness(k: int) -> float:
+	if _seg_n <= 0:
+		return _widest
+	var least := 1.0
+	for j in range(clampi(k, 0, _seg_n - 1) * _per, mini((clampi(k, 0, _seg_n - 1) + 1) * _per, _open.size())):
+		least = minf(least, _open[j])
+	return least
+
+
+## For a probe: how many slats are latched open.
+func held_count() -> int:
+	var c := 0
+	for h in _held:
+		if h > 0.0:
+			c += 1
+	return c

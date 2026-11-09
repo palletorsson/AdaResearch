@@ -70,6 +70,10 @@ const SHOULDER_M := 0.52
 const POLL_S := 0.08
 ## How long a visitor stands inside reach before an unmoving field is a complaint.
 const RIGID_AFTER_S := 3.5
+## The white-with-edges finish (Palle, 2026-11-09, Trans_Body: "make all artifact in this map white (since we have
+## not introduced color yet). Use the same outline shader as in Primitives Ignorance").
+const EdgeOutline = preload("res://commons/void/edge_outline.gd")
+const PlatonicStudy = preload("res://commons/void/platonic_study.gd")
 
 ## How many blocks actually get built, laid out row-major across the grid below.
 ## Fewer than cols * rows leaves the tail cells empty, which is a hole authored
@@ -97,6 +101,19 @@ const RIGID_AFTER_S := 3.5
 ## The colour of a block at rest. It brightens as it gives way and returns to this
 ## when it is full size again, so the field's state is readable at a glance.
 @export var block_color: Color = Color(0.42, 0.46, 0.55)
+## How tall a block stands at full size, metres; 0 keeps it a cube of block_m. It scales by the same factor, and the
+## plan arithmetic in the header (the gap) does not depend on it.
+@export var block_height_m: float = 0.0
+## 2026-11-09, Palle, Trans_Body: "start contract earlier by distance, stay in contracted position."
+## LATCH: a block never grows back. Its factor only ever goes down (it keeps the smallest size your distance has
+## asked of it), and once you have come within commit * reach_m of it, it settles all the way to min_scale. The
+## field becomes a record of where you walked instead of a corridor that closes behind you. Off by default: every
+## other placement of this artifact is the breathing field.
+@export var latch: bool = false
+## With latch: the fraction of reach_m inside which a block commits to min_scale.
+@export_range(0.0, 1.0, 0.01) var commit: float = 0.5
+## "" keeps the tinted blocks; "white_edges" is the platonic white with dark feature edges (edge_outline.gd).
+@export var look: String = ""
 
 ## The narrowest gap near a visitor first became wider than a shoulder.
 signal passage_opened()
@@ -130,6 +147,10 @@ var _open := false
 var _ever_open := false
 var _rigid_said := false
 var _local_gap := 0.0
+var _held := PackedFloat32Array()       # with latch: the smallest factor each block has been asked for
+var _white := false                     # look == "white_edges", resolved at build
+var _cubes: Array[MeshInstance3D] = []  # white look: one unit cube per block, NODE-scaled (see _apply_size)
+var _h_m := 0.0                         # built block height at full size
 
 
 func _ready() -> void:
@@ -159,8 +180,25 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			block_color = c
 		elif typeof(c) == TYPE_STRING and Color.html_is_valid(str(c)):
 			block_color = Color.html(str(c))
+	if config_data.has("block_height"):
+		block_height_m = float(config_data["block_height"])
+	if config_data.has("latch"):
+		latch = _truthy(config_data["latch"])
+	if config_data.has("commit"):
+		commit = float(config_data["commit"])
+	if config_data.has("look"):
+		look = str(config_data["look"])
 	if is_inside_tree():
 		_build()
+
+
+## A map token arrives as a bool, a number or a string ("true", "1", "yes").
+static func _truthy(v: Variant) -> bool:
+	if typeof(v) == TYPE_BOOL:
+		return v
+	if typeof(v) == TYPE_INT or typeof(v) == TYPE_FLOAT:
+		return float(v) != 0.0
+	return str(v).strip_edges().to_lower() in ["true", "1", "yes", "on"]
 
 
 func _build() -> void:
@@ -170,6 +208,7 @@ func _build() -> void:
 	_meshes.clear()
 	_shapes.clear()
 	_mats.clear()
+	_cubes.clear()
 	_own.clear()
 	_open = false
 	_ever_open = false
@@ -188,10 +227,14 @@ func _build() -> void:
 	min_scale = clampf(min_scale, 0.02, 1.0)
 	reach_m = maxf(reach_m, 0.0)
 	ease_s = maxf(ease_s, 0.0)
+	commit = clampf(commit, 0.0, 1.0)
+	_h_m = block_height_m if block_height_m > 0.0 else block_m
+	_white = look == "white_edges"
 	_centres.resize(_count)
 	_factor.resize(_count)
 	_shown.resize(_count)
 	_dist2.resize(_count)
+	_held.resize(_count)
 
 	_field = Node3D.new()
 	_field.name = "Field"
@@ -203,6 +246,17 @@ func _build() -> void:
 	base.emission_enabled = true
 	base.emission = block_color.lightened(0.45)
 	base.emission_energy_multiplier = 0.0
+	# THE WHITE LOOK SCALES THE NODE, NOT THE MESH. The edge overlay is a line mesh computed from one mesh resource
+	# and cached by it; a BoxMesh resized every frame would need its edges recomputed every frame. So in this look
+	# every block shows ONE shared unit cube, scaled as a node: the overlay is its child and rides the scale for
+	# free, and its edges are computed once for the whole field. The COLLIDER still resizes its own BoxShape3D and
+	# the body is never scaled, so the header's rule (scale the shape, not the node) holds where it matters.
+	var unit: BoxMesh = null
+	var white: StandardMaterial3D = null
+	if _white:
+		unit = BoxMesh.new()
+		unit.size = Vector3.ONE
+		white = PlatonicStudy.finish()
 
 	for i in _count:
 		var c: int = i % cols
@@ -214,6 +268,7 @@ func _build() -> void:
 			(float(r) - float(rows - 1) * 0.5) * spacing_m)
 		_centres[i] = centre
 		_factor[i] = 1.0
+		_held[i] = 1.0
 		_dist2[i] = INF         # nobody has arrived yet, so nothing is asked of it
 
 		# ANIMATABLE, NOT STATIC, and the difference is the visitor's ankles.
@@ -229,7 +284,7 @@ func _build() -> void:
 		# the physics server otherwise restores the initial y=0 pose after
 		# _apply_size, and deferred grounding lifts the entire field by half
 		# a block. Later size changes would then float above the floor.
-		body.position = centre + Vector3.UP * (block_m * 0.5)
+		body.position = centre + Vector3.UP * (_h_m * 0.5)
 		body.sync_to_physics = true
 		# On layer 1 on purpose: it has to be solid to the same bodies the area is
 		# watching. It is refused as a visitor by ancestry — see _is_visitor.
@@ -237,14 +292,22 @@ func _build() -> void:
 		body.collision_mask = 0
 
 		var mesh := MeshInstance3D.new()
-		var bm := BoxMesh.new()
-		mesh.mesh = bm
-		# One material per block, made once at build. The tint has to be per-block
-		# because the whole point is that they are at different sizes, and nine
-		# StandardMaterial3D at build time is cheaper than one shader at runtime.
-		var mat := base.duplicate() as StandardMaterial3D
-		mesh.material_override = mat
-		body.add_child(mesh)
+		var bm: BoxMesh = null
+		var mat: StandardMaterial3D = null
+		if _white:
+			mesh.name = "Cube"
+			mesh.mesh = unit
+			body.add_child(mesh)
+			EdgeOutline.outline(mesh, 25.0, white)
+		else:
+			bm = BoxMesh.new()
+			mesh.mesh = bm
+			# One material per block, made once at build. The tint has to be per-block
+			# because the whole point is that they are at different sizes, and nine
+			# StandardMaterial3D at build time is cheaper than one shader at runtime.
+			mat = base.duplicate() as StandardMaterial3D
+			mesh.material_override = mat
+			body.add_child(mesh)
 
 		var col := CollisionShape3D.new()
 		var shape := BoxShape3D.new()   # one per block; a shared shape resizes all nine
@@ -256,6 +319,7 @@ func _build() -> void:
 		_meshes.append(bm)
 		_shapes.append(shape)
 		_mats.append(mat)
+		_cubes.append(mesh)
 		_own[body.get_instance_id()] = true
 		_apply_size(i, 1.0)
 
@@ -279,13 +343,14 @@ func _build() -> void:
 	# Overlap detection is unchanged: shape owners are how CollisionObject3D holds
 	# shapes either way.
 	var abox := BoxShape3D.new()
+	var area_h: float = 2.4 if block_height_m <= 0.0 else maxf(2.4, _h_m + 0.5)
 	abox.size = Vector3(
 		float(cols - 1) * spacing_m + block_m + reach_m * 2.0,
-		2.4,
+		area_h,
 		float(rows - 1) * spacing_m + block_m + reach_m * 2.0)
 	var _oid: int = _area.create_shape_owner(_area)
 	_area.shape_owner_add_shape(_oid, abox)
-	_area.shape_owner_set_transform(_oid, Transform3D(Basis.IDENTITY, Vector3(0.0, 1.2, 0.0)))
+	_area.shape_owner_set_transform(_oid, Transform3D(Basis.IDENTITY, Vector3(0.0, area_h * 0.5, 0.0)))
 	add_child(_area)
 
 	_visitors.resize(0)
@@ -398,6 +463,19 @@ func _measure() -> void:
 ## THE LAW: factor = lerp(min_scale, 1.0, eased(dist / reach_m)). Your distance is
 ## the only input. Standing still is the identity operation.
 func _target_for(i: int) -> float:
+	var law: float = _law_for(i)
+	if not latch:
+		return law
+	# LATCH: the field remembers. What a block keeps is the smallest it has ever been asked to be, and inside the
+	# commit radius that is min_scale outright, so a block you passed close to does not hang at 0.4 forever.
+	if reach_m > 0.0 and not is_inf(_dist2[i]) and sqrt(_dist2[i]) <= reach_m * commit:
+		law = min_scale
+	if law < _held[i]:
+		_held[i] = law
+	return _held[i]
+
+
+func _law_for(i: int) -> float:
 	if reach_m <= 0.0 or is_inf(_dist2[i]):
 		return 1.0
 	var t: float = clampf(sqrt(_dist2[i]) / reach_m, 0.0, 1.0)
@@ -410,13 +488,18 @@ func _target_for(i: int) -> float:
 ## on the floor. Half of the shrinking you see is this.
 func _apply_size(i: int, f: float) -> void:
 	var s: float = maxf(0.01, block_m * f)
-	_meshes[i].size = Vector3(s, s, s)
-	_shapes[i].size = Vector3(s, s, s)
+	var h: float = s if block_height_m <= 0.0 else maxf(0.01, _h_m * f)
+	_shapes[i].size = Vector3(s, h, s)
 	var b: AnimatableBody3D = _bodies[i]
-	b.position.y = s * 0.5
-	# Quiet: the emission only comes up as the block gives way, so the shrinking is
-	# legible from the far end of a hall without the field becoming a light source.
-	_mats[i].emission_energy_multiplier = (1.0 - f) * 0.9
+	b.position.y = h * 0.5
+	if _white:
+		# The white look: a unit cube scaled as a node, its edge overlay riding along (see _build).
+		_cubes[i].scale = Vector3(s, h, s)
+	else:
+		_meshes[i].size = Vector3(s, h, s)
+		# Quiet: the emission only comes up as the block gives way, so the shrinking is
+		# legible from the far end of a hall without the field becoming a light source.
+		_mats[i].emission_energy_multiplier = (1.0 - f) * 0.9
 	_shown[i] = f
 
 
@@ -426,7 +509,11 @@ func _apply_size(i: int, f: float) -> void:
 func _check_passage(delta: float) -> void:
 	var gap: float = INF
 	var any_near := false
-	var r2: float = reach_m * reach_m
+	# With latch the reach is long on purpose (blocks start to give way well before you arrive), so the pairs that
+	# say whether you can pass are the ones inside the commit radius, already at min_scale, not every pair that
+	# has merely started to move: asked of the whole reach the field reports itself rigid while it is wide open.
+	var rp: float = reach_m * commit if latch else reach_m
+	var r2: float = rp * rp
 	for i in _count:
 		var near_i: bool = _dist2[i] <= r2
 		any_near = any_near or near_i

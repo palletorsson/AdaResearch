@@ -67,7 +67,7 @@
   "approach_wall": {
    "category": "transformations",
    "complexity": "intermediate",
-   "description": "A wall of slats that is closed and opens exactly where you approach it, then closes again behind you. Not a door - a door has one hinge and one place it opens; this one makes way where your body is, so the aperture is a portrait of your approach. Opens by swinging, sinking or parting.",
+   "description": "A wall of slats that is closed and opens exactly where you approach it, then closes again behind you. Not a door - a door has one hinge and one place it opens; this one makes way where your body is, so the aperture is a portrait of your approach. Opens by swinging, sinking or parting. Config 'segments' (N > 0) cuts it into N doors that each open whole on approach; 'latch' keeps the opening you walked through open; 'look': 'white_edges' is the white finish with dark feature edges.",
    "dev_themes": [
     "commons",
     "transformations"
@@ -144,7 +144,7 @@
   "approach_scale": {
    "category": "transformations",
    "complexity": "intermediate",
-   "description": "A field of blocks set too close together to walk between. The ones near you scale down about their own centres until the gap is wide enough to pass, and grow back once you are through, so the size of the room is a function of how close you are standing.",
+   "description": "A field of blocks set too close together to walk between. The ones near you scale down about their own centres until the gap is wide enough to pass, and grow back once you are through, so the size of the room is a function of how close you are standing. Config 'latch' makes a block stay contracted (settling to min_scale inside 'commit' x reach); 'block_height' makes them taller than wide; 'look': 'white_edges' is the white finish with dark feature edges.",
    "dev_themes": [
     "commons",
     "transformations"
