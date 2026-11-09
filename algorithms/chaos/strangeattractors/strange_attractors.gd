@@ -31,6 +31,13 @@ var _max_velocity: float = 0.001
 var _lyapunov_sum: float = 0.0
 var _lyapunov_count: int = 0
 var _lyapunov_exponent: float = 0.0
+# Benettin's method (2026-11-09): a shadow trajectory D0 away along a separation direction that is carried forward
+# and renormalised every step. The estimate perturbed along a FIXED x each step and averaged the one-step stretch,
+# which measures stretching along x, not along the unstable direction - for the dissipative Lorenz flow (divergence
+# -13.7) that average is negative, and the chaotic attractor was labelled "(stable)".
+const LYAP_D0 := 0.00001
+var _sep3: Vector3 = Vector3(1, 0, 0)
+var _sep2: Vector2 = Vector2(1, 0)
 
 # Parameter interpolation
 var _target_params: Dictionary = {}
@@ -324,12 +331,14 @@ func _iterate() -> void:
 			(_position_3d.z - 25.0) / 50.0,
 			_position_3d.y / 50.0
 		) * bounding_size * 0.5
-		# Lyapunov from divergence of nearby trajectory
-		var perturbed := _lorenz_step(prev_3d + Vector3(0.0001, 0, 0))
-		var d1 := (_position_3d - perturbed).length()
-		if d1 > 1e-12:
-			_lyapunov_sum += log(d1 / 0.0001)
+		# Lyapunov (Benettin): per unit time, so divide the per-step log stretch by dt
+		var dt: float = float(_current_params.get("dt", 0.005))
+		var diff3: Vector3 = _lorenz_step(prev_3d + _sep3 * LYAP_D0) - _position_3d
+		var d1 := diff3.length()
+		if d1 > 1e-14 and dt > 0.0:
+			_lyapunov_sum += log(d1 / LYAP_D0) / dt
 			_lyapunov_count += 1
+			_sep3 = diff3 / d1
 	else:
 		_position_2d = _iterate_2d(_position_2d)
 		# Lift 2D attractors into 3D: y = velocity-based displacement
@@ -339,12 +348,13 @@ func _iterate() -> void:
 			vel_2d * bounding_size * 0.3,
 			_position_2d.y * bounding_size * 0.15
 		)
-		# Lyapunov for 2D maps
-		var perturbed := _iterate_2d(prev_2d + Vector2(0.0001, 0))
-		var d1 := (_position_2d - perturbed).length()
-		if d1 > 1e-12:
-			_lyapunov_sum += log(d1 / 0.0001)
+		# Lyapunov for 2D maps (Benettin), per iteration
+		var diff2: Vector2 = _iterate_2d(prev_2d + _sep2 * LYAP_D0) - _position_2d
+		var d1 := diff2.length()
+		if d1 > 1e-14:
+			_lyapunov_sum += log(d1 / LYAP_D0)
 			_lyapunov_count += 1
+			_sep2 = diff2 / d1
 
 	if world_point.length() > 100.0:
 		return
@@ -567,6 +577,8 @@ func _reset_position() -> void:
 	_lyapunov_sum = 0.0
 	_lyapunov_count = 0
 	_lyapunov_exponent = 0.0
+	_sep3 = Vector3(1, 0, 0)
+	_sep2 = Vector2(1, 0)
 
 
 func apply_grid_config(config: Dictionary) -> void:

@@ -1166,6 +1166,17 @@
       ],
       "tower": "floor 120 (Fractal_KochSierpinski), lesson mode: the snowflake no longer dips into the slab",
       "capture": "ada_run/improve/fractal_koch_curve/before_after.png"
+    },
+    {
+      "lookup_name": "strange_attractors",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG: the Lyapunov readout perturbed along a FIXED x each step and averaged the one-step stretch - stretching along x, not along the unstable direction. For the dissipative Lorenz flow that average is negative: the chaotic attractor read 'lambda ~ -0.048 (stable)'. Now Benettin's method (separation carried forward and renormalised; per unit time for the flow). Probe, 60k steps: Lorenz -0.048 -> +1.02 (literature 0.906; explicit Euler at dt 0.005), Clifford 0.41 -> 0.29"
+      ],
+      "tower": "floor 123 (Fractal_Synthesis): scale 0.18 -> 1.0 - a 14 cm attractor with 4 mm labels became a 0.76 m one",
+      "capture": "probe numbers above; known cost left as is: the 8000-point trail rebuilt as lines every frame, 3.8 ms"
     }
   ]
 }
