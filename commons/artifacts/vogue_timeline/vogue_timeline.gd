@@ -99,12 +99,30 @@ func _dress_learning_bay() -> void:
 	_label("TEACH / TEST / REVISE", Vector3(0.3,2.85,-0.65), 36, GOLD, 0.0025, bay)
 	_label("One sphere. Your examples.", Vector3(0.3,2.68,-0.65), 23, Color.WHITE, 0.002, bay)
 
+## The CURRENT rig: the XROrigin3D above the current camera (VR), the xr_origin group, or the current origin at the
+## top of the scene (desktop) - the lookup punching_bag.gd's _rig_controllers() uses.
+func _rig_origin() -> Node:
+	var origin: Node = get_viewport().get_camera_3d()
+	while origin != null and not origin is XROrigin3D: origin = origin.get_parent()
+	if origin == null: origin = get_tree().get_first_node_in_group("xr_origin")
+	if origin == null:
+		# desktop: the camera is the walker's, and the rig stands beside it at the top of the scene
+		var scene: Node = get_tree().current_scene
+		for child in (scene.get_children() if scene else []):
+			if child is XROrigin3D and child.current: origin = child; break
+	return origin
+
+## Head and hands from the current rig, every 2 s. It searched the whole scene tree twice (XRCamera3D, then
+## XRController3D): in the tower ~24,900 nodes and 30-67 ms on floor 183 - three to six 90 Hz frames lost every
+## two seconds (2026-11-09).
 func _resolve_rig() -> void:
-	for n in get_tree().root.find_children("*", "XRCamera3D", true, false):
+	var origin := _rig_origin()
+	if origin == null: return
+	for n in origin.find_children("*", "XRCamera3D", true, false):
 		if n.is_inside_tree():
 			head = n
 			break
-	for n in get_tree().root.find_children("*", "XRController3D", true, false):
+	for n in origin.find_children("*", "XRController3D", true, false):
 		if n.tracker == &"left_hand": left = n
 		if n.tracker == &"right_hand": right = n
 

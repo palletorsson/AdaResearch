@@ -1212,6 +1212,17 @@
       ],
       "tower": "floor 4 (Point_Trace, candidate-hand_canvas), unchanged placement",
       "capture": "headless Void probe (no visual change), median of 7 calls: VR 14.2 -> 0.081 ms, desktop 30.6 -> 0.003 ms; skeletons 2 -> 2 (VR), 0 -> 0 (desktop)"
+    },
+    {
+      "lookup_name": "vogue_timeline",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the every-two-seconds rig lookup (_resolve_rig from _process, unguarded) searched the whole scene tree twice, for XRCamera3D and then XRController3D: measured in the tower on floor 183, ~24,900 nodes and 30.0 ms (VR, tracked) to 66.8 ms (desktop) - three to six 90 Hz frames lost every two seconds. It now searches the current rig (the XROrigin3D above the current camera, the xr_origin group, or the current origin at the top of the scene), as punching_bag does. 0.10 ms (VR) / 0.005 ms (desktop); the same head (XROrigin3D/XRCamera3D) and the same left and right controllers found"
+      ],
+      "tower": "floor 183 (ML_Perception, f3_vogue_timeline_14_6), unchanged placement",
+      "capture": "headless Void probe (no visual change), median of 7 calls: VR 30.0 -> 0.102 ms, desktop 66.8 -> 0.005 ms; head/left/right identical before and after"
     }
   ]
 }
