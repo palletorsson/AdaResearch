@@ -13,7 +13,7 @@ extends Node3D
 # critical_parameter: frequency — controls how many oscillations per unit length
 # triggers: time progression continuously extends the wave trail
 # emerges: the connection between circular motion parameters and wave shape
-# needs: VR sliders for amplitude/frequency [missing]
+# needs: VR sliders for amplitude/frequency [missing], a curve legible across a room [has: tube]
 # relationships: depends on ImmediateMesh trail; contrasts with UnitCircleTrig (projection vs direct plot); unlocks wave parameter intuition
 # truth: A sine wave is the shadow of uniform circular motion projected onto a line.
 
@@ -29,6 +29,10 @@ extends Node3D
 @export var max_points: int = 200
 # Optional gallery width in local metres; zero retains the original sample-count limit.
 @export var history_width: float = 0.0
+## The curve as a tube this thick (m); 0 = the old one-pixel LINE_STRIP, which vanishes beyond a metre (2026-11-09).
+@export_range(0.0, 0.2, 0.005) var line_radius: float = 0.03
+
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
 
 var time: float = 0.0
 var points: Array[Vector3] = []
@@ -42,7 +46,9 @@ func _setup_visuals() -> void:
 	
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(0.2, 1.0, 0.5) # Green trail
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	# lit, so the tube reads as a body; it glows its own green
+	material.emission_enabled = true
+	material.emission = Color(0.2, 1.0, 0.5) * 0.35
 	material.use_point_size = true
 	material.point_size = 4.0
 	trail_instance.material_override = material
@@ -90,6 +96,9 @@ func _draw_trail() -> void:
 	if points.is_empty():
 		return
 		
+	if line_radius > 0.0 and points.size() >= 2:
+		ThickLine.append_tube(trail_mesh, PackedVector3Array(points), PackedColorArray(), line_radius, 6)
+		return
 	trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for p in points:
 		trail_mesh.surface_add_vertex(p)

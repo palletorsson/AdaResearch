@@ -836,6 +836,19 @@
       ],
       "capture": "ada_run/improve/sine_oscillation/before_after.png",
       "tower": "floor 75 at 2.5 (was 1: a 0.8 m table-top instrument)"
+    },
+    {
+      "lookup_name": "OscillationCurve",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "code": [
+        "the curve a lit 3 cm tube through ThickLine (line_radius 0 keeps the 1-px LINE_STRIP)"
+      ],
+      "tower": "floor 68: frequency 3.2 (its 8 m history held less than one cycle at the default)",
+      "capture": "ada_run/improve/OscillationCurve/before_after.png"
     }
   ]
 }

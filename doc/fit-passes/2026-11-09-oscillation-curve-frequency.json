@@ -1,0 +1,16 @@
+[
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_OscillationCurve_19_18",
+  "token": "OscillationCurve",
+  "fit": {
+   "set": {
+    "frequency": 3.2
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "note": "At its default frequency (1 rad/s at 2 m/s: a 12.6 m wavelength) its 8 m history never held one full cycle - a sine that does not read as a wave. 3.2 rad/s: a 3.9 m wavelength, two cycles on the strip."
+ }
+]

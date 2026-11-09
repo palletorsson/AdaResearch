@@ -29016,9 +29016,13 @@
             "fit": {
               "strategies": [
                 "move",
-                "raise"
+                "raise",
+                "reduce_repeats"
               ],
-              "note": "overlap check: a tower column inside it; moved 0.5 m"
+              "note": "At its default frequency (1 rad/s at 2 m/s: a 12.6 m wavelength) its 8 m history never held one full cycle - a sine that does not read as a wave. 3.2 rad/s: a 3.9 m wavelength, two cycles on the strip.",
+              "set": {
+                "frequency": 3.2
+              }
             }
           }
         },
