@@ -36,6 +36,9 @@ var cosine_mesh: ImmediateMesh
 @export var time_speed: float = 2.0 # Speed of Z-axis movement
 @export var max_trail_length: int = 400
 @export var projection_offset: float = 2.5 # Distance to project waves
+## The time trails and the projection lines as tubes this thick (m); 0 = the old one-pixel lines (2026-11-09).
+@export_range(0.0, 0.2, 0.005) var line_radius: float = 0.03
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
 
 var time: float = 0.0
 var angle: float = 0.0
@@ -119,6 +122,9 @@ func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]) -> void:
 	mesh.clear_surfaces()
 	if points.is_empty(): return
 	
+	if line_radius > 0.0 and points.size() >= 2:
+		ThickLine.append_tube(mesh, PackedVector3Array(points), PackedColorArray(), line_radius, 6)
+		return
 	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for p in points:
 		mesh.surface_add_vertex(p)
@@ -127,9 +133,11 @@ func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]) -> void:
 func _draw_connections() -> void:
 	var mesh = connection_lines.mesh as ImmediateMesh
 	mesh.clear_surfaces()
-	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	
 	var center = driver_ball.position
+	if line_radius > 0.0:
+		ThickLine.append_segments(mesh, PackedVector3Array([center, sine_ball.position, center, cosine_ball.position, Vector3.ZERO, center]), PackedColorArray(), line_radius * 0.6, 5)
+		return
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	# Line to Sine (Horizontal)
 	mesh.surface_add_vertex(center)

@@ -30540,15 +30540,17 @@
             -8.0
           ],
           "station": "NW",
-          "facing": 0,
-          "height": 0.42,
-          "scale": 0.1,
+          "facing": 180,
+          "height": 2.0,
+          "scale": 0.4,
           "config": {
             "fit": {
               "strategies": [
-                "move"
+                "move",
+                "scale_area",
+                "turn"
               ],
-              "note": "fit pass: drawn outside the building, box centre (-1.9, 0.3, -10.3); moved 2.0 m"
+              "note": "At 0.1 it was a 0.8 m ornament: 0.4 (the circle 1.2 m across, its centre at 2 m, the cosine shadow 0.4 m off the floor), turned so its time trails stream 5 m into the floor instead of off the north edge."
             }
           }
         },

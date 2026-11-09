@@ -872,6 +872,18 @@
       ],
       "tower": "floor 75: its own size (2.4 m rows of 96 spheres, 0.5 m apart, 18 cm amplitude) at scale 1, turned to face into the floor (it faced the edge), a metre east of the column",
       "capture": "ada_run/improve/beat_frequency_demo/before_after.png"
+    },
+    {
+      "lookup_name": "UnitCircleTrig",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the sine and cosine time trails and the projection lines as tubes through ThickLine (line_radius 0 keeps the 1-px lines)"
+      ],
+      "tower": "floor 76: 0.4 (was 0.1, a 0.8 m ornament), turned so its trails stream into the floor",
+      "capture": "ada_run/improve/UnitCircleTrig/before_after.png"
     }
   ]
 }
