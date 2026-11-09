@@ -25603,22 +25603,6 @@
       "walls": [],
       "artifacts": [
         {
-          "id": "f1_force_hall_04_0_0",
-          "artifact": "force_hall_04",
-          "position": [
-            -4,
-            14
-          ],
-          "station": "SW",
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
-        {
           "id": "f1_euler_drift_29_6",
           "artifact": "euler_drift",
           "position": [
@@ -25644,12 +25628,18 @@
           ],
           "station": "SE",
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.86,
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "launch_chamber"
+            "lesson": "launch_chamber",
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "6.5 m tall, 0.9 m through the ceiling: 0.86."
+            }
           }
         },
         {
@@ -25758,12 +25748,64 @@
           ],
           "station": "NE",
           "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.95,
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "live_fountain"
+            "lesson": "live_fountain",
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "0.2 m through the ceiling: 0.95."
+            }
+          }
+        },
+        {
+          "id": "side-slab-south",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "length": 40,
+            "depth": 7,
+            "seed": 49,
+            "editor_label": "Side slab / room for the launch arc and the two catapult trials, 5-6 m past the south edge (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 40,
+            "depth": 7,
+            "seed": 491,
+            "editor_label": "Side slab / room for the torque play, the catapult and the human catapult, 3-6 m past the north edge (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -25778,22 +25820,6 @@
       "origin": false,
       "walls": [],
       "artifacts": [
-        {
-          "id": "f2_force_hall_05_0_0",
-          "artifact": "force_hall_05",
-          "position": [
-            -4,
-            14
-          ],
-          "station": "SW",
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
         {
           "id": "f2_force_play_mass_14_10",
           "artifact": "force_play_mass",
@@ -25846,8 +25872,8 @@
           "id": "f2_force_mower_14_46",
           "artifact": "force_mower",
           "position": [
-            0.8,
-            12
+            0.3,
+            5
           ],
           "station": "SE",
           "facing": 90,
@@ -25857,8 +25883,39 @@
             "pin": "1",
             "plinth": "0",
             "lesson": "flower_garden",
-            "lawn_width": "20",
-            "lawn_length": "28"
+            "lawn_width": 13,
+            "lawn_length": 14,
+            "fit": {
+              "strategies": [
+                "move",
+                "reduce_repeats",
+                "scale_area"
+              ],
+              "note": "The lawn runs 12.7 m behind the machine and 1.7 m ahead: mower at z 5 with a 13 m lawn keeps it between the shafts and on the floor."
+            }
+          }
+        },
+        {
+          "id": "side-slab-south",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "length": 40,
+            "depth": 6,
+            "seed": 50,
+            "editor_label": "Side slab / room for the mass, trolley and puzzle plays, each 5 m past the south edge (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -25873,22 +25930,6 @@
       "origin": false,
       "walls": [],
       "artifacts": [
-        {
-          "id": "f3_force_hall_06_0_0",
-          "artifact": "force_hall_06",
-          "station": "SE",
-          "position": [
-            -4,
-            14
-          ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
         {
           "id": "f3_force_play_vortex_14_13",
           "artifact": "force_play_vortex",
@@ -25927,7 +25968,7 @@
           "artifact": "wind_room",
           "station": "SW",
           "position": [
-            -16.5,
+            -13,
             8.5
           ],
           "facing": 180,
@@ -25936,7 +25977,14 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "hands_on_wind"
+            "lesson": "hands_on_wind",
+            "fit": {
+              "strategies": [
+                "move",
+                "side_slab"
+              ],
+              "note": "16 x 14 m, 3.5 m past the west edge: east 3.5 m, onto a south slab."
+            }
           }
         },
         {
@@ -25971,6 +26019,52 @@
             "pin": "1",
             "plinth": "0"
           }
+        },
+        {
+          "id": "side-slab-south",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            -12,
+            9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "length": 20,
+            "depth": 7,
+            "seed": 51,
+            "editor_label": "Side slab / room for the wind room, 6.5 m past the south edge (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            5,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 24,
+            "depth": 7,
+            "seed": 511,
+            "editor_label": "Side slab / room for the vector field flow and the vortex, 3.5-6 m past the north edge (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
         }
       ],
       "props": [],
@@ -25984,22 +26078,6 @@
       "origin": false,
       "walls": [],
       "artifacts": [
-        {
-          "id": "f4_force_hall_07_0_0",
-          "artifact": "force_hall_07",
-          "station": "SE",
-          "position": [
-            -4,
-            14
-          ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
         {
           "id": "f4_force_play_liquids_15_13",
           "artifact": "force_play_liquids",
@@ -26053,8 +26131,8 @@
           "artifact": "centrifuge_ring",
           "station": "SE",
           "position": [
-            0,
-            7
+            0.0,
+            0.5
           ],
           "facing": 180,
           "height": 0,
@@ -26062,7 +26140,13 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "hand_ring"
+            "lesson": "hand_ring",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 4.0 m (1 of 10 samples past the slab have ground; moved 6.5 m"
+            }
           }
         },
         {
@@ -26202,22 +26286,6 @@
       "walls": [],
       "artifacts": [
         {
-          "id": "f1_force_hall_08_0_0",
-          "artifact": "force_hall_08",
-          "position": [
-            -4,
-            14
-          ],
-          "station": "SW",
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
-        {
           "id": "f1_force_play_springs_15_11",
           "artifact": "force_play_springs",
           "position": [
@@ -26285,8 +26353,8 @@
           "id": "f1_SpringSuspension_8_61",
           "artifact": "SpringSuspension",
           "position": [
-            15,
-            10
+            16.5,
+            7.5
           ],
           "station": "SE",
           "facing": 180,
@@ -26295,7 +26363,13 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "museum_spring"
+            "lesson": "museum_spring",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 2.0 m (0 of 20 samples past the slab have ground; moved 2.9 m"
+            }
           }
         },
         {
@@ -26307,11 +26381,17 @@
           ],
           "station": "SE",
           "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "height": 0.03,
+          "scale": 0.97,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "0.1 m through the ceiling: 0.97."
+            }
           }
         }
       ],
@@ -26327,27 +26407,11 @@
       "walls": [],
       "artifacts": [
         {
-          "id": "f2_force_hall_09_0_0",
-          "artifact": "force_hall_09",
-          "position": [
-            -4,
-            14
-          ],
-          "station": "SW",
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
-        {
           "id": "f2_phase_rod_array_12_8",
           "artifact": "phase_rod_array",
           "position": [
-            -8,
-            -9
+            -16.5,
+            -3.5
           ],
           "station": "NW",
           "facing": 0,
@@ -26355,7 +26419,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.8 m (0 of 10 samples past the slab have ground; moved 10.1 m"
+            }
           }
         },
         {
@@ -26373,6 +26443,29 @@
             "pin": "1",
             "plinth": "0"
           }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            4,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 16,
+            "depth": 7,
+            "seed": 54,
+            "editor_label": "Side slab / room for the conveyor trial (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
         }
       ],
       "props": [],
@@ -26386,22 +26479,6 @@
       "origin": false,
       "walls": [],
       "artifacts": [
-        {
-          "id": "f3_force_hall_10_0_0",
-          "artifact": "force_hall_10",
-          "position": [
-            -4,
-            14
-          ],
-          "station": "SW",
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
         {
           "id": "f3_force_play_mutual_17_14",
           "artifact": "force_play_mutual",
@@ -26470,8 +26547,8 @@
           "id": "f3_orbit_walk_17_70",
           "artifact": "orbit_walk",
           "position": [
-            -14,
-            10
+            -10.5,
+            6.0
           ],
           "station": "SW",
           "facing": 180,
@@ -26479,7 +26556,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 3.6 m (0 of 15 samples past the slab have ground; moved 5.3 m"
+            }
           }
         }
       ],
@@ -26494,22 +26577,6 @@
       "origin": false,
       "walls": [],
       "artifacts": [
-        {
-          "id": "f4_force_hall_11_0_0",
-          "artifact": "force_hall_11",
-          "station": "SE",
-          "position": [
-            -4,
-            14
-          ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
         {
           "id": "f4_force_play_support_14_13",
           "artifact": "force_play_support",
@@ -26531,19 +26598,26 @@
           "artifact": "one_leg",
           "station": "NE",
           "position": [
-            9,
-            -9
+            9.0,
+            -8.0
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.72,
           "config": {
             "pin": "1",
             "plinth": "0",
             "driven_by_player": "false",
             "show_foot_markers": "false",
             "pace_reach": "1.1",
-            "patrol_speed": "0.25"
+            "patrol_speed": "0.25",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (8.9, 3.3, -9.4); moved 1.0 m"
+            }
           }
         },
         {
@@ -26551,19 +26625,26 @@
           "artifact": "four_leg_critter",
           "station": "NE",
           "position": [
-            0,
-            -9
+            0.0,
+            -8.0
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.72,
           "config": {
             "pin": "1",
             "plinth": "0",
             "driven_by_player": "false",
             "show_foot_markers": "false",
             "pace_reach": "1.1",
-            "patrol_speed": "0.25"
+            "patrol_speed": "0.25",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "fit pass: edge: north 0.8 m (0 of 20 samples past the slab have ground; moved 1.0 m"
+            }
           }
         },
         {
@@ -26571,19 +26652,26 @@
           "artifact": "six_leg_critter",
           "station": "NW",
           "position": [
-            -9,
-            -9
+            -9.0,
+            -8.0
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.72,
           "config": {
             "pin": "1",
             "plinth": "0",
             "driven_by_player": "false",
             "show_foot_markers": "false",
             "pace_reach": "1.1",
-            "patrol_speed": "0.25"
+            "patrol_speed": "0.25",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "fit pass: edge: north 0.4 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+            }
           }
         }
       ],
@@ -26598,22 +26686,6 @@
       "origin": false,
       "walls": [],
       "artifacts": [
-        {
-          "id": "f5_force_hall_12_0_0",
-          "artifact": "force_hall_12",
-          "station": "SE",
-          "position": [
-            -4,
-            14
-          ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
         {
           "id": "f5_force_play_bowling_8_17",
           "artifact": "force_play_bowling",
@@ -26667,7 +26739,13 @@
             "total_balls": "8",
             "spawn_spread": "0.4",
             "drop_interval_min": "2",
-            "drop_interval_max": "3"
+            "drop_interval_max": "3",
+            "fit": {
+              "strategies": [
+                "code_fix"
+              ],
+              "note": "Inside the slab and off the shafts, yet its balls are found 2.4 m below it: physics, code case, open."
+            }
           }
         },
         {
@@ -26691,15 +26769,21 @@
           "artifact": "force_punching_bag",
           "station": "NE",
           "position": [
-            16,
-            -9
+            16.0,
+            -3.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 3.5 m (0 of 10 samples past the slab have ground; moved 6.0 m"
+            }
           }
         },
         {
@@ -26723,15 +26807,21 @@
           "artifact": "momentum_cradle",
           "station": "NW",
           "position": [
-            -8,
-            -11
+            -8.0,
+            -8.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-8.0, 0.7, -11.0); moved 2.5 m"
+            }
           }
         },
         {
@@ -26739,15 +26829,21 @@
           "artifact": "newton_cradle",
           "station": "NW",
           "position": [
-            -18,
-            -11
+            -18.0,
+            -8.0
           ],
           "facing": 0,
           "height": 0.82,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-18.0, 0.8, -11.0); moved 3.0 m"
+            }
           }
         }
       ],
@@ -26763,33 +26859,24 @@
       "walls": [],
       "artifacts": [
         {
-          "id": "f1_force_hall_13_0_0",
-          "artifact": "force_hall_13",
-          "position": [
-            -4,
-            14
-          ],
-          "station": "SW",
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "pin": "1",
-            "plinth": "0"
-          }
-        },
-        {
           "id": "f1_free_vector_2_2",
           "artifact": "free_vector",
           "position": [
-            -16,
-            11
+            -10.5,
+            7.0
           ],
           "station": "SW",
           "facing": 180,
           "height": 0,
           "scale": 0.7,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-16.8, 0.5, 11.0); moved 6.8 m"
+            }
+          }
         },
         {
           "id": "f1_force_field_11_4",
@@ -26883,14 +26970,21 @@
           "id": "f1_invisible_hill_12_18",
           "artifact": "invisible_hill",
           "position": [
-            -16,
-            -9
+            -16.5,
+            -7.0
           ],
           "station": "NW",
           "facing": 180,
           "height": 0,
           "scale": 0.68,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 1.6 m (0 of 10 samples past the slab have ground; moved 2.1 m"
+            }
+          }
         },
         {
           "id": "f1_endless_racer_11_20",
@@ -36414,11 +36508,17 @@
               4,
               5
             ],
-            "source_token": "fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true#room:thresholds"
+            "source_token": "fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true#room:thresholds",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.8 m (0 of 15 samples past the slab have ground; moved 3.9 m"
+            }
           },
           "position": [
-            -8.5,
-            -9.5
+            -11.0,
+            -6.5
           ]
         },
         {
@@ -36438,11 +36538,17 @@
               12,
               5
             ],
-            "source_token": "example_8_3_recursion_circles_vr:180:2.4#depth:1#rotation_speed:0#lesson:true"
+            "source_token": "example_8_3_recursion_circles_vr:180:2.4#depth:1#rotation_speed:0#lesson:true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.8 m (0 of 15 samples past the slab have ground; moved 3.0 m"
+            }
           },
           "position": [
             8.5,
-            -9.5
+            -6.5
           ]
         },
         {
@@ -36590,11 +36696,17 @@
               4,
               22
             ],
-            "source_token": "fibonacci_pagoda:180:0.7:0.55"
+            "source_token": "fibonacci_pagoda:180:0.7:0.55",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-8.6, 2.6, 11.6); moved 4.5 m"
+            }
           },
           "position": [
-            -8.5,
-            11.5
+            -10.5,
+            7.5
           ]
         },
         {
@@ -36613,11 +36725,17 @@
               12,
               22
             ],
-            "source_token": "synthesis_stand#subject:dark_sphere#mode:hero"
+            "source_token": "synthesis_stand#subject:dark_sphere#mode:hero",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (8.5, 0.3, 11.6); moved 4.0 m"
+            }
           },
           "position": [
             8.5,
-            11.5
+            7.5
           ]
         }
       ],
@@ -36670,11 +36788,17 @@
               4,
               5
             ],
-            "source_token": "recursive_tree_2:180#lesson:true#room:canopy"
+            "source_token": "recursive_tree_2:180#lesson:true#room:canopy",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.9 m (0 of 15 samples past the slab have ground; moved 3.5 m"
+            }
           },
           "position": [
-            -8.5,
-            -9.5
+            -9.0,
+            -6.0
           ]
         },
         {
@@ -36692,11 +36816,17 @@
               12,
               5
             ],
-            "source_token": "recursive_tree:180:0:0.42#lesson:true"
+            "source_token": "recursive_tree:180:0:0.42#lesson:true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.8 m (0 of 15 samples past the slab have ground; moved 3.0 m"
+            }
           },
           "position": [
-            8.5,
-            -9.5
+            9.0,
+            -6.5
           ]
         },
         {
@@ -36799,11 +36929,17 @@
               3,
               15
             ],
-            "source_token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true"
+            "source_token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.4 m (0 of 5 samples past the slab have ground); moved 1.8 m"
+            }
           },
           "position": [
-            -15.5,
-            7
+            -17.0,
+            6.0
           ]
         },
         {
@@ -36831,7 +36967,7 @@
           "id": "f2_cube_desk_2_17",
           "artifact": "cube_desk",
           "station": "SW",
-          "facing": 0,
+          "facing": 90.0,
           "height": 0,
           "scale": 1,
           "config": {
@@ -36841,11 +36977,18 @@
               2,
               17
             ],
-            "source_token": "cube_desk"
+            "source_token": "cube_desk",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-16.5, 0.4, 11.5); moved 5.7 m"
+            }
           },
           "position": [
-            -16.5,
-            11.5
+            -12.5,
+            7.5
           ]
         },
         {
@@ -36864,11 +37007,17 @@
               13,
               17
             ],
-            "source_token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true#aftermath:strata"
+            "source_token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true#aftermath:strata",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.9 m (0 of 5 samples past the slab have ground); moved 1.8 m"
+            }
           },
           "position": [
-            15.5,
-            7.5
+            16.5,
+            6.0
           ]
         },
         {
@@ -36906,11 +37055,17 @@
               3,
               22
             ],
-            "source_token": "mobius_world:0:1.25:0.06"
+            "source_token": "mobius_world:0:1.25:0.06",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-9.3, 1.2, 11.5); moved 5.0 m"
+            }
           },
           "position": [
             -9.5,
-            11.5
+            6.5
           ]
         }
       ],
@@ -36952,15 +37107,21 @@
           "artifact": "film_cantor_thirds",
           "station": "SW",
           "position": [
-            -17,
-            10
+            -17.0,
+            8.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-17.0, 1.3, 10.0); moved 1.5 m"
+            }
           }
         },
         {
@@ -37018,10 +37179,16 @@
             -8
           ],
           "facing": 0,
-          "height": 0,
+          "height": 1.02,
           "scale": 1,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "raise"
+              ],
+              "note": "1.0 m below the slab: raised."
+            }
           }
         },
         {
@@ -37030,12 +37197,19 @@
           "station": "NE",
           "position": [
             15,
-            -8
+            -7.4
           ],
           "facing": 180,
           "height": 5,
           "scale": 0.25,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "0.4 m past the north edge."
+            }
+          }
         },
         {
           "id": "f1_stochastic_tree_separated_4_18",
@@ -37068,13 +37242,20 @@
           "artifact": "stochastic_tree_separated",
           "station": "NW",
           "position": [
-            -17,
-            -10.5
+            -17.0,
+            -8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-16.8, 2.1, -10.8); moved 2.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -37093,14 +37274,21 @@
           "artifact": "fractal_koch_curve",
           "station": "SW",
           "position": [
-            -15,
-            8
+            -17.0,
+            6.5
           ],
-          "facing": 0,
+          "facing": 90.0,
           "height": 0,
           "scale": 1,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 1.6 m (0 of 10 samples past the slab have ground; moved 2.5 m"
+            }
           }
         },
         {
@@ -37139,13 +37327,20 @@
           "station": "SE",
           "position": [
             0,
-            7
+            5.9
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.97,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "0.9 m past the south edge."
+            }
           }
         },
         {
@@ -37194,21 +37389,28 @@
           "artifact": "dark_sphere",
           "station": "NE",
           "position": [
-            0,
-            -13
+            0.0,
+            -8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (0.0, 0.5, -13.0); moved 5.0 m"
+            }
+          }
         },
         {
           "id": "f2_sierpinski_pyramid_6_25",
           "artifact": "sierpinski_pyramid",
           "station": "NW",
           "position": [
-            -7,
-            -10
+            -7.0,
+            -7.5
           ],
           "facing": 0,
           "height": 1.0125,
@@ -37216,7 +37418,13 @@
           "config": {
             "tick": "fine",
             "lesson": "true",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.0 m (0 of 15 samples past the slab have ground; moved 2.5 m"
+            }
           }
         },
         {
@@ -37224,14 +37432,20 @@
           "artifact": "koch_curve_3d",
           "station": "NE",
           "position": [
-            7,
-            -10
+            7.5,
+            -8.0
           ],
           "facing": 0,
           "height": 0.05,
           "scale": 1,
           "config": {
-            "tick": "coarse"
+            "tick": "coarse",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (7.1, 2.0, -10.1); moved 2.1 m"
+            }
           }
         }
       ],
@@ -37251,15 +37465,21 @@
           "artifact": "film_menger_twenty",
           "station": "SW",
           "position": [
-            -17,
-            10
+            -17.0,
+            8.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-17.0, 1.3, 10.0); moved 1.5 m"
+            }
           }
         },
         {
@@ -37271,9 +37491,17 @@
             9
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 2.62,
+          "scale": 0.4,
+          "config": {
+            "fit": {
+              "strategies": [
+                "raise",
+                "scale_area"
+              ],
+              "note": "A 17 x 13 m aggregation wall through the ceiling and past the east edge: 0.4."
+            }
+          }
         },
         {
           "id": "f3_catalyst_prompter_box_1_6",
@@ -37301,11 +37529,17 @@
             0
           ],
           "facing": 180,
-          "height": 2,
-          "scale": 1,
+          "height": 0.04,
+          "scale": 0.38,
           "config": {
             "flight_box": "true",
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "A 12 m Menger sponge, 8.4 m through the ceiling: 0.38 (4.6 m)."
+            }
           }
         },
         {
@@ -37356,14 +37590,22 @@
           "artifact": "fibonacci_sequences",
           "station": "SE",
           "position": [
-            0,
-            8
+            1.0,
+            2.0
           ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "facing": 270.0,
+          "height": 0.02,
+          "scale": 0.5,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 2.3 m (1 of 5 samples past the slab have ground); moved 6.1 m"
+            }
           }
         },
         {
@@ -37371,15 +37613,22 @@
           "artifact": "golden_rectangle",
           "station": "SE",
           "position": [
-            15,
-            8
+            15.0,
+            6.0
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
           "config": {
             "preset": "rainbow",
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 3.2 m (0 of 20 samples past the slab have ground; moved 2.0 m"
+            }
           }
         },
         {
@@ -37404,22 +37653,37 @@
             -8
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 2.85,
+          "scale": 0.38,
+          "config": {
+            "fit": {
+              "strategies": [
+                "raise",
+                "scale_area"
+              ],
+              "note": "0.2 m through the ceiling at 0.4: 0.38."
+            }
+          }
         },
         {
           "id": "f4_dark_sphere_11_30",
           "artifact": "dark_sphere",
           "station": "NE",
           "position": [
-            0,
-            -13
+            -4.5,
+            -8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (0.0, 0.5, -13.0); moved 6.7 m"
+            }
+          }
         },
         {
           "id": "f4_fibonacci_terrain_6_34",
@@ -37466,27 +37730,40 @@
           "artifact": "fractal_procedure_gallery",
           "station": "NE",
           "position": [
-            0,
-            -10
+            0.0,
+            -8.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (0.0, 0.5, -10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f5_cantor_set_5_6",
           "artifact": "cantor_set",
           "station": "SW",
           "position": [
-            -14,
-            8
+            -10.5,
+            6.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 1.2 m (0 of 15 samples past the slab have ground; moved 3.8 m"
+            }
           }
         },
         {
@@ -37494,14 +37771,20 @@
           "artifact": "recursive_tree",
           "station": "SE",
           "position": [
-            14,
-            8
+            10.0,
+            6.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 0.42,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 1.3 m (0 of 5 samples past the slab have ground); moved 4.3 m"
+            }
           }
         },
         {
@@ -37589,26 +37872,40 @@
           "artifact": "romanesco",
           "station": "NW",
           "position": [
-            -15,
-            -10
+            -15.0,
+            -8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 0.65,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-15.0, 0.4, -10.0); moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f5_fibonacci_sequences_10_27",
           "artifact": "fibonacci_sequences",
           "station": "NE",
           "position": [
-            13,
-            -11
+            11.5,
+            -6.5
           ],
           "facing": 180,
           "height": 1.1,
           "scale": 0.4,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 4.2 m (0 of 20 samples past the slab have ground; moved 4.7 m"
+            }
+          }
         }
       ],
       "props": [],

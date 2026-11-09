@@ -1,0 +1,425 @@
+[
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_force_hall_04_0_0",
+  "token": "force_hall_04",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_hall_05_0_0",
+  "token": "force_hall_05",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "f3_force_hall_06_0_0",
+  "token": "force_hall_06",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "Vectors_Act4a_KineticForces",
+  "id": "f4_force_hall_07_0_0",
+  "token": "force_hall_07",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "Vectors_Act4b_Oscillation",
+  "id": "f1_force_hall_08_0_0",
+  "token": "force_hall_08",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "Change_Choreography",
+  "id": "f2_force_hall_09_0_0",
+  "token": "force_hall_09",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "VFM_07_Gravity",
+  "id": "f3_force_hall_10_0_0",
+  "token": "force_hall_10",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "VFM_09_Legs",
+  "id": "f4_force_hall_11_0_0",
+  "token": "force_hall_11",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "VFM_08_Arena",
+  "id": "f5_force_hall_12_0_0",
+  "token": "force_hall_12",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "Vectors_Act5_ForceAsPlace",
+  "id": "f1_force_hall_13_0_0",
+  "token": "force_hall_13",
+  "remove": true,
+  "strategies": [
+   "remove_museum_furniture"
+  ],
+  "note": "Museum wayfinding: a lectern whose buttons teleport to the museum's previous / next hall - no halls to teleport between in the tower; on the timeline's environment track (now removed)."
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_launch_arc_14_8",
+  "token": "launch_arc",
+  "set": {
+   "scale": 0.86,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "6.5 m tall, 0.9 m through the ceiling: 0.86."
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_firework_burst_31_66",
+  "token": "firework_burst",
+  "set": {
+   "scale": 0.95,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "0.2 m through the ceiling: 0.95."
+ },
+ {
+  "map": "VFM_05_Launch",
+  "add": {
+   "id": "side-slab-south",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "length": 40,
+    "depth": 7,
+    "seed": 49,
+    "editor_label": "Side slab / room for the launch arc and the two catapult trials, 5-6 m past the south edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "40 x 7 m south: room for the launch arc and the two catapult trials, 5-6 m past the south edge"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 40,
+    "depth": 7,
+    "seed": 491,
+    "editor_label": "Side slab / room for the torque play, the catapult and the human catapult, 3-6 m past the north edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "40 x 7 m north: room for the torque play, the catapult and the human catapult, 3-6 m past the north edge"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "add": {
+   "id": "side-slab-south",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "length": 40,
+    "depth": 6,
+    "seed": 50,
+    "editor_label": "Side slab / room for the mass, trolley and puzzle plays, each 5 m past the south edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "40 x 6 m south: room for the mass, trolley and puzzle plays, each 5 m past the south edge"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_mower_14_46",
+  "token": "force_mower",
+  "set": {
+   "scale": 0.5,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 20 x 28 m mowing field across the floor: 0.5."
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "f3_wind_room_14_52",
+  "token": "wind_room",
+  "set": {
+   "position": [
+    -13,
+    8.5
+   ]
+  },
+  "strategies": [
+   "move",
+   "side_slab"
+  ],
+  "note": "16 x 14 m, 3.5 m past the west edge: east 3.5 m, onto a south slab."
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "add": {
+   "id": "side-slab-south",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    -12,
+    9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "length": 20,
+    "depth": 7,
+    "seed": 51,
+    "editor_label": "Side slab / room for the wind room, 6.5 m past the south edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "20 x 7 m south: room for the wind room, 6.5 m past the south edge"
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    5,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 24,
+    "depth": 7,
+    "seed": 511,
+    "editor_label": "Side slab / room for the vector field flow and the vortex, 3.5-6 m past the north edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "24 x 7 m north: room for the vector field flow and the vortex, 3.5-6 m past the north edge"
+ },
+ {
+  "map": "Vectors_Act4b_Oscillation",
+  "id": "f1_spring_tower_22_61",
+  "token": "spring_tower",
+  "set": {
+   "scale": 0.97,
+   "height": 0.03
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "0.1 m through the ceiling: 0.97."
+ },
+ {
+  "map": "VFM_09_Legs",
+  "id": "f4_one_leg_5_31",
+  "token": "one_leg",
+  "set": {
+   "scale": 0.72,
+   "height": 0
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "Legs 5 m long, 1.6 m through the ceiling: 0.72."
+ },
+ {
+  "map": "VFM_09_Legs",
+  "id": "f4_four_leg_critter_14_31",
+  "token": "four_leg_critter",
+  "set": {
+   "scale": 0.72,
+   "height": 0
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "Legs 5 m long, 1.6 m through the ceiling: 0.72."
+ },
+ {
+  "map": "VFM_09_Legs",
+  "id": "f4_six_leg_critter_23_31",
+  "token": "six_leg_critter",
+  "set": {
+   "scale": 0.72,
+   "height": 0
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "Legs 5 m long, 1.6 m through the ceiling: 0.72."
+ },
+ {
+  "map": "Fractal_MengerSponge",
+  "id": "f3_menger_sponge_7_9",
+  "token": "menger_sponge",
+  "set": {
+   "scale": 0.38,
+   "height": 0.04
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 12 m Menger sponge, 8.4 m through the ceiling: 0.38 (4.6 m)."
+ },
+ {
+  "map": "Fractal_MengerSponge",
+  "id": "f3_diffusion_limited_aggregation_4_4",
+  "token": "diffusion_limited_aggregation",
+  "set": {
+   "scale": 0.4,
+   "height": 2.62
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 17 x 13 m aggregation wall through the ceiling and past the east edge: 0.4."
+ },
+ {
+  "map": "Fractal_GoldenSpiral",
+  "id": "f4_diffusion_limited_aggregation_16_29",
+  "token": "diffusion_limited_aggregation",
+  "set": {
+   "scale": 0.4,
+   "height": 2.85
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "The same 17 x 13 m aggregation wall: 0.4."
+ },
+ {
+  "map": "Fractal_GoldenSpiral",
+  "id": "f4_fibonacci_sequences_11_8",
+  "token": "fibonacci_sequences",
+  "set": {
+   "scale": 0.5,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 20 x 22 m Fibonacci field through the ceiling: 0.5."
+ },
+ {
+  "map": "Fractal_CantorSet",
+  "id": "f1_example_8_4_cantor_pagoda_vr_9_12",
+  "token": "example_8_4_cantor_pagoda_vr",
+  "set": {
+   "height": 1.02
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.0 m below the slab: raised."
+ }
+]
