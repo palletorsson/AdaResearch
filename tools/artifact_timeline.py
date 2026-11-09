@@ -65,6 +65,17 @@ import sys
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+import os
+
+
+def _write(path: Path, text: str) -> None:
+    """Write through a temp file and swap it in. A plain open(path, "w") on Windows sometimes fails with EINVAL
+    (Errno 22) on a file another process holds open (an editor, the dev server reading it): measured 2026-11-09 on
+    artifact_timeline_walk.json, where `check` crashed before writing anything."""
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+    os.replace(tmp, path)
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTHORED = ROOT / "commons/data/artifact_timeline.json"
@@ -271,7 +282,7 @@ def write_authored(doc: dict) -> None:
         else:
             lines.append(f"  {json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}{end}")
     lines.append("}")
-    AUTHORED.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    _write(AUTHORED, "\n".join(lines) + "\n")
 
 
 # ---- forms: base, child, collection (Palle, 2026-11-07) -------------------------------------------------------
@@ -650,7 +661,7 @@ def write_walk(doc: dict, reg: dict) -> dict:
     lines += ["  }", "}"]
     text = "\n".join(lines) + "\n"
     if not WALK.exists() or WALK.read_text(encoding="utf-8") != text:   # tracked: write only on change
-        WALK.write_text(text, encoding="utf-8", newline="\n")
+        _write(WALK, text)
     return w
 
 
@@ -829,7 +840,7 @@ def set_card(term: str, body: dict) -> dict:
 def write_view() -> dict:
     v = build_view()
     VIEW.parent.mkdir(parents=True, exist_ok=True)
-    VIEW.write_text(json.dumps(v, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    _write(VIEW, json.dumps(v, ensure_ascii=False, separators=(",", ":")))
     return v
 
 
@@ -1125,7 +1136,7 @@ def write_threads(doc: dict) -> None:
     for i, e in enumerate(doc["entries"]):
         lines.append("    " + json.dumps(e, ensure_ascii=False) + ("," if i < len(doc["entries"]) - 1 else ""))
     lines += ["  ]", "}"]
-    THREADS.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    _write(THREADS, "\n".join(lines) + "\n")
 
 
 def _view() -> dict:
