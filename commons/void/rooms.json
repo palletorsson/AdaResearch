@@ -11389,6 +11389,21 @@
           "config": {
             "editor_label": "candidate / grid Trans_Composition - 2026-11-03: keep or remove"
           }
+        },
+        {
+          "id": "physics-play-pendulum",
+          "artifact": "physics_play_pendulum",
+          "station": "SE",
+          "position": [
+            10,
+            6.75
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 90,
+          "config": {
+            "editor_label": "Physics play / pendulum - Jolt; the tie, met before the skateboard's axles (moved from floor 21, 2026-11-09)"
+          }
         }
       ],
       "props": [],
@@ -21314,21 +21329,6 @@
           "facing": 90,
           "config": {
             "editor_label": "Physics play / a stack and a ball - Jolt, a precursor to Logic"
-          }
-        },
-        {
-          "id": "physics-play-pendulum",
-          "artifact": "physics_play_pendulum",
-          "station": "SW",
-          "position": [
-            -18.5,
-            4.5
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 90,
-          "config": {
-            "editor_label": "Physics play / pendulum - Jolt, a precursor to Logic"
           }
         },
         {
