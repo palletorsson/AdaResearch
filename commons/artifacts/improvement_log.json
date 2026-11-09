@@ -1081,6 +1081,18 @@
       ],
       "tower": "floors 128 and 129, unchanged placements",
       "capture": "ada_run/improve/branching_coral/before_after.png"
+    },
+    {
+      "lookup_name": "lsystem_editor",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "stroke_radius export (0.004 of display_size; 0 = lines): the curve the grammar writes as tubes",
+        "vertex_color_is_srgb"
+      ],
+      "tower": "floor 124 (Grammar Lab) Koch lesson, unchanged placement",
+      "capture": "ada_run/improve/lsystem_editor/before_after.png"
     }
   ]
 }

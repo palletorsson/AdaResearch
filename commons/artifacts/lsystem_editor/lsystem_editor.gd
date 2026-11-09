@@ -16,6 +16,8 @@ extends Node3D
 
 class_name LSystemEditor
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 signal drawing_changed
 var lesson_enabled := false
 var _batching := false
@@ -53,6 +55,9 @@ var max_symbols := 100000
 ## Display settings
 @export var display_size: float = 1.0
 @export var line_color: Color = Color(0.3, 0.8, 0.3)
+## Stroke thickness as a fraction of display_size. 0 draws the old one-pixel lines - the curve the grammar writes
+## (a Koch edge, a dragon, a plant) thinned to a hair a few metres off (2026-11-09).
+@export_range(0.0, 0.03, 0.001) var stroke_radius: float = 0.004
 @export var max_line_length: float = 0.02
 
 ## L-system parameters
@@ -152,6 +157,7 @@ func _create_display():
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.albedo_color = line_color
 	mat.vertex_color_use_as_albedo = true
+	mat.vertex_color_is_srgb = true   # authored as sRGB; read as linear the strokes washed pale (2026-11-09)
 	_mesh_instance.material_override = mat
 	
 	add_child(_mesh_instance)
@@ -362,7 +368,11 @@ func _draw_lsystem():
 	# Anchor at bottom-center so tree grows upward from the base
 	var center = Vector3((min_bounds.x + max_bounds.x) / 2.0, min_bounds.y, (min_bounds.z + max_bounds.z) / 2.0)
 	
-	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	var tubes: bool = stroke_radius > 0.0
+	var pairs := PackedVector3Array()
+	var cols := PackedColorArray()
+	if not tubes:
+		_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
 	for i in range(0, lines.size(), 2):
 		var p1 = (lines[i] - center) * scale_factor
@@ -376,12 +386,20 @@ func _draw_lsystem():
 		var c1 = line_color.lerp(Color(0.9, 0.95, 0.8), t1 * 0.5)
 		var c2 = line_color.lerp(Color(0.9, 0.95, 0.8), t2 * 0.5)
 		
+		if tubes:
+			pairs.append(p1)
+			pairs.append(p2)
+			cols.append(c1.lerp(c2, 0.5))
+			continue
 		_immediate_mesh.surface_set_color(c1)
 		_immediate_mesh.surface_add_vertex(p1)
 		_immediate_mesh.surface_set_color(c2)
 		_immediate_mesh.surface_add_vertex(p2)
 	
-	_immediate_mesh.surface_end()
+	if tubes:
+		ThickLine.append_segments(_immediate_mesh, pairs, cols, display_size * stroke_radius, 5 if cols.size() < 4000 else 3)
+	else:
+		_immediate_mesh.surface_end()
 	drawing_changed.emit()
 
 func _update_info():
