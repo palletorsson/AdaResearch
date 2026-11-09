@@ -4,7 +4,8 @@ that leaves the building or floats outside it but whose footprint would fit the 
 (0.5 m grid, optionally a quarter turn) where its box lies on the 42 x 18 m slab, off the shaft openings, round no
 building column, and clear of every other work's measured box. Writes PROPOSALS only - nothing in the tower changes.
 
-    python tools/void_fit_pass.py [--markdown]
+    python tools/void_fit_pass.py [--maps=A,B] [--overlaps] [--markdown]
+--overlaps also moves works that the survey calls fitting but that stand in a neighbour or round a tower column.
 Output: ada_run/void-size-survey/fit_pass.json (+ fit_pass.md)."""
 import json, math, sys
 from pathlib import Path
@@ -18,10 +19,41 @@ def rects_overlap(a, b, shrink=0.05):
     return a[0] + shrink < b[2] - shrink and b[0] + shrink < a[2] - shrink and a[1] + shrink < b[3] - shrink and b[1] + shrink < a[3] - shrink
 
 
+def overlap_movers(building, floors, columns, maps, already):
+    """Works the survey calls fitting that stand in a neighbour or round a tower column (a work scaled where it stood
+    keeps its centre, and can shrink onto a column line). Of a pair, the one round a column moves, else the smaller."""
+    out = []
+    flat = lambda b: (b[3] - b[0]) <= 1 or (b[5] - b[2]) <= 1
+    for key, f in floors.items():
+        if maps and f.get("map") not in maps: continue
+        ws = [w for w in f["works"] if w.get("box") and None not in w["box"] and w.get("token") not in ("void_slab_extension", "playground_spec_hall")
+              and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40]
+        rect = lambda w: (w["box"][0], w["box"][2], w["box"][3], w["box"][5])
+        movers = {}
+        for w in ws:
+            if not flat(w["box"]) and any(rects_overlap(rect(w), c, 0.0) for c in columns):
+                movers[w["id"]] = (w, "a tower column inside it")
+        for i, a in enumerate(ws):
+            for b in ws[i + 1:]:
+                ra, rb = rect(a), rect(b)
+                if min(ra[2], rb[2]) - max(ra[0], rb[0]) > .3 and min(ra[3], rb[3]) - max(ra[1], rb[1]) > .3:
+                    if a["id"] in movers or b["id"] in movers: continue
+                    area = lambda r: (r[2] - r[0]) * (r[3] - r[1])
+                    w, other = (a, b) if area(ra) <= area(rb) else (b, a)
+                    movers[w["id"]] = (w, "stands in " + other["id"])
+        for ident, (w, why) in movers.items():
+            if (int(key), ident) in already: continue
+            b = w["box"]
+            out.append({"floor": int(key), "map": f.get("map"), "id": ident, "token": w.get("token", ""), "origin": "overlap",
+                        "size": [round(b[3] - b[0], 2), round(b[4] - b[1], 2), round(b[5] - b[2], 2)], "overflow": ["overlap: " + why]})
+    return out
+
+
 def main():
     sys.path.insert(0, str(ROOT / "tools"))
     import void_size_survey as S
     building, floors = S.load()
+    rooms = json.loads((ROOT / "commons/void/rooms.json").read_text(encoding="utf-8"))
     report = json.loads((OUT / "report.json").read_text(encoding="utf-8"))
     hw, hd = building["width"] / 2, building["depth"] / 2
     shafts = [(float(s["x"]) - building["shaft_width"] / 2, -building["shaft_depth"] / 2,
@@ -32,6 +64,8 @@ def main():
     todo += [r for r in report.get("displaced", []) if r.get("size") and r["size"][0] <= 2 * hw and r["size"][2] <= 2 * hd]
     maps = next((a.split("=", 1)[1].split(",") for a in sys.argv if a.startswith("--maps=")), None)
     if maps: todo = [r for r in todo if r["map"] in maps]
+    if "--overlaps" in sys.argv:
+        todo += overlap_movers(building, floors, columns, maps, {(r["floor"], r["id"]) for r in todo})
     proposals, stuck = [], []
     moved_boxes = {}   # (floor, id) -> box after an accepted move: later works on the floor avoid where it now goes
     # the biggest first: they have the fewest places to go
@@ -47,16 +81,15 @@ def main():
         others = [w["box"] for k, w in works.items() if k != r["id"] and w.get("box") and None not in w["box"]
                   and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40 and (w["box"][5] - w["box"][2]) < 16]
         others = [(b[0], b[2], b[3], b[5]) for b in others]
-        # a side slab is floor too: its box (less its tangled beams' spread) joins the slab
-        slabs = [(w["box"][0] + .05, w["box"][2], w["box"][3] - .05, w["box"][5]) for w in f["works"]
-                 if w.get("token") == "void_slab_extension" and w.get("box")]
+        # a side slab is floor too: its deck (from the placement, not the box, which holds the beams) joins the slab
+        slabs = S.slab_grounds(rooms["floors"][r["floor"]], MARGIN)
         def on_floor(rect):
             xs = [rect[0] + (rect[2] - rect[0]) * i / 6 for i in range(7)]
             zs = [rect[1] + (rect[3] - rect[1]) * j / 6 for j in range(7)]
             for x in xs:
                 for z in zs:
                     if -hw + MARGIN <= x <= hw - MARGIN and -hd + MARGIN <= z <= hd - MARGIN: continue
-                    if any(s[0] + MARGIN <= x <= s[2] - MARGIN and s[1] <= z <= s[3] - MARGIN for s in slabs): continue
+                    if any(s[0] <= x <= s[2] and s[1] <= z <= s[3] for s in slabs): continue
                     return False
             return True
         best = None

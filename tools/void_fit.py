@@ -2,6 +2,7 @@
 
     python tools/void_fit.py apply <decisions.json> [--stage]   edit rooms.json floor by floor (by map name)
     python tools/void_fit.py survey <decisions.json>            re-measure the floors the decisions touch
+    python tools/void_fit.py overlaps <decisions.json>          pairs of works standing in each other, columns inside works
     python tools/void_fit.py record <decisions.json> --before=<report.json snapshot>
                                                                 append one case per work to commons/void/fit_strategies.json
 
@@ -145,9 +146,43 @@ def record(path, before_path):
         print("  %-8s %-26s %-40s %s -> %s" % (c["verdict"], c["map"][:26], c["id"][:40], c["before"][:40], c["after"][:50]))
 
 
+def overlaps(path, margin=0.3):
+    """The survey judges each work alone, against the slab and the ceiling: two works standing in each other, or a
+    tower column inside a work, both read "fits". This compares every pair on the floors a decisions file touches,
+    from the last measured boxes (footprints only; side slabs, the floor's own playgrounds and flat or point-like
+    boxes left out). A pair is reported when the boxes cross by more than `margin` on both axes."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import void_size_survey as S
+    building, floors = S.load()
+    rooms = json.loads(ROOMS.read_text(encoding="utf-8"))
+    index = {f["map"]: i for i, f in enumerate(rooms["floors"])}
+    rows = json.loads(Path(path).read_text(encoding="utf-8"))
+    cw = building["column_width"] / 2
+    found = 0
+    for m in sorted({r["map"] for r in rows}):
+        f = floors.get(str(index[m]))
+        if not f: continue
+        ws = [w for w in f["works"] if w.get("box") and None not in w["box"] and w.get("token") not in ("void_slab_extension", "playground_spec_hall")
+              and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40]
+        for a_i, a in enumerate(ws):
+            ax0, _, az0, ax1, _, az1 = a["box"]
+            for cx in building["column_x"]:
+                for cz in building["column_z"]:
+                    if ax0 < cx + cw - .05 and ax1 > cx - cw + .05 and az0 < cz + cw - .05 and az1 > cz - cw + .05 and (ax1 - ax0) > 1 and (az1 - az0) > 1:
+                        print("  %-24s %-40s column (%g, %g) in it" % (m[:24], a["id"][:40], cx, cz)); found += 1
+            for b in ws[a_i + 1:]:
+                bx0, _, bz0, bx1, _, bz1 = b["box"]
+                ox, oz = min(ax1, bx1) - max(ax0, bx0), min(az1, bz1) - max(az0, bz0)
+                if ox > margin and oz > margin:
+                    print("  %-24s %-40s x %-40s %.1f x %.1f m" % (m[:24], a["id"][:40], b["id"][:40], ox, oz)); found += 1
+    print("%d overlaps" % found)
+    return found
+
+
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf8")
     cmd, path = sys.argv[1], sys.argv[2]
     if cmd == "apply": apply(path, "--stage" in sys.argv or "--stage-only" in sys.argv, working="--stage-only" not in sys.argv)
+    elif cmd == "overlaps": overlaps(path)
     elif cmd == "survey": survey(path)
     elif cmd == "record": record(path, next(a.split("=", 1)[1] for a in sys.argv if a.startswith("--before=")))

@@ -8,7 +8,7 @@
       "when": "Its footprint fits the slab (42 x 18 m) and its height the storey, it just stands past an edge or over nothing.",
       "how": "python tools/void_fit_pass.py (nearest free spot: on the slab or a side slab, off the shafts, round no column, clear of every other work); edit position.",
       "cost": "Order and route are not in the search; check the floor's arrangement (/api/spine-roles).",
-      "learned": "2026-11-09 ML + shaders: 27 of 28 fitted by a move alone or after another strategy. Run the fit pass AFTER strip/raise/scale (sizes change), and per floor in sequence - the first version put two works on one spot. Isosurfaces + soft bodies: 45 of 45 - nine chapter consoles stood 3-5 m past the south edge; a quarter turn put each on the edge band."
+      "learned": "2026-11-09 ML + shaders: 27 of 28 fitted by a move alone or after another strategy. Run the fit pass AFTER strip/raise/scale (sizes change), and per floor in sequence - the first version put two works on one spot. Isosurfaces + soft bodies: 45 of 45 - nine chapter consoles stood 3-5 m past the south edge; a quarter turn put each on the edge band. L-systems + boolean surfaces: 30 of 30. THE SURVEY JUDGES EACH WORK ALONE: two works standing in each other, or a tower column through a work, both read 'fits' - after pass A, 22 such pairs stood on these 11 floors, most from works SCALED where they stood (a scale keeps the box centre, and a smaller box can land astride a column row). `void_fit.py overlaps <decisions>` lists them and `void_fit_pass.py --overlaps` moves them (the one round a column, else the smaller of the pair). Run both after every pass. Two fit-pass faults found on the way: it read a side slab's measured box as deck, but the box holds the tangled beams, whose feet spread 1 m past the deck's ends (a work 0.4 m off the slab's end read as on it); and it kept its edge margin on a north slab's INNER edge, leaving a 27 cm strip of no ground just inside the edge. Both read the deck from the placement now (void_size_survey.slab_decks / slab_grounds)."
     },
     {
       "id": "turn",
@@ -73,7 +73,7 @@
       "when": "A work or a field that needs more depth than 18 m, or room beside a full floor.",
       "how": "Place void_slab_extension on the building edge facing out: config length (2-42), depth (1-10).",
       "cost": "It reads as architecture: use it where the idea needs the room.",
-      "learned": "6 works stand on 4 slabs (ML_Evolution south 16 x 8; Shader_05 north 39 x 8; Shader_11 north 16 x 5; Shader_12 north 30 x 6): rooms 4-7 m past the north edge of a full floor. A slab must span the whole overhang along the edge, not just most of it. Procedural generation + swarm: six works that are walked at body scale (three walkable fitness landscapes, a crowd walk, a maze, a drone comparison) stood 3-6 m past one edge of a floor with no free centre: one slab each, as long as the work and its overhang plus a metre deep - all fit. Forces: VFM_05_Launch got slabs on both sides (40 x 7), VFM_03_Motion one south for three 10 m plays, the fields floor both sides, Change_Choreography one north for the conveyor."
+      "learned": "6 works stand on 4 slabs (ML_Evolution south 16 x 8; Shader_05 north 39 x 8; Shader_11 north 16 x 5; Shader_12 north 30 x 6): rooms 4-7 m past the north edge of a full floor. A slab must span the whole overhang along the edge, not just most of it. Procedural generation + swarm: six works that are walked at body scale (three walkable fitness landscapes, a crowd walk, a maze, a drone comparison) stood 3-6 m past one edge of a floor with no free centre: one slab each, as long as the work and its overhang plus a metre deep - all fit. Forces: VFM_05_Launch got slabs on both sides (40 x 7), VFM_03_Motion one south for three 10 m plays, the fields floor both sides, Change_Choreography one north for the conveyor. L-systems + boolean surfaces: the tower's columns stand on two rows, z = +-7, at x = +-5, +-14, +-20 (at most 10 m apart), so a work wider than 10 m can never cross a column row: inside the building it must stay within z +-6.5 (13 m, minus the shafts at x +-10), and anything deeper stands on a slab, where the deck plus the edge strip to the column row gives 11.5 m at a 10 m slab. Boolean_Works (13 works, two walk-in bays of 12.7 and 16.7 m) took both: north 26 x 10 (burrow, SDF cavern, eggs), south 22 x 10 (the Kapoor bay, its inner edge 5 cm past the column row, turned so its console faces the floor). Keep a work off the slab's side rails: they are the deck's ends."
     },
     {
       "id": "raise",
@@ -92,7 +92,7 @@
       "when": "Fields, landscapes, diagrams - works looked at or walked round, not walked through at body scale.",
       "how": "placement scale.",
       "cost": "Never for works whose lesson is the body's size (passages, Drink Me, approach works).",
-      "learned": "7 of 9: fields and water surfaces (creature field 0.35, basin 0.62); a small step (0.92) clears a ceiling. Isosurfaces: landscapes and fields 0.025-0.42 (11 of 11). Watch body-scale meaning: the gyroid at 0.13 keeps its probe but its passages are now below body size - the probe honestly reports them closed. Not for works with bodies inside scaled colliders: the random-walk cave was reverted to full size (taller-floor case)."
+      "learned": "7 of 9: fields and water surfaces (creature field 0.35, basin 0.62); a small step (0.92) clears a ceiling. Isosurfaces: landscapes and fields 0.025-0.42 (11 of 11). Watch body-scale meaning: the gyroid at 0.13 keeps its probe but its passages are now below body size - the probe honestly reports them closed. Not for works with bodies inside scaled colliders: the random-walk cave was reverted to full size (taller-floor case). L-systems: trees, curves and cities are looked at, not walked: the 19.5 m Modulor cypress 0.28, the 22.7 m tube tree 0.24, the 22 m city 0.25, the 15 m Hilbert curve 0.35 (those four want a shaft or a taller floor if the height is the point). A scale keeps the work's centre: eight of the scaled works then stood round a tower column - run the overlap check after a scale, not only after a move. Application bays (the cone of 'One cut, three rooms') are walked: 0.68 is the smallest kept, chosen to fit the open middle between the shafts."
     },
     {
       "id": "reduce_repeats",
@@ -2932,6 +2932,607 @@
       "after": "overflows: floor: 0.4 m down through its own slab",
       "verdict": "partly",
       "note": "Inside the slab and off the shafts, yet its balls are found 2.4 m below it: physics, code case, open."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammar_Lab",
+      "id": "f1_grammar_provenance_6_19",
+      "token": "grammar_provenance",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area",
+        "turn"
+      ],
+      "before": "overflows: floor: 5.5 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 16 m L-system tree hanging 5.5 m through the slab: 0.55, on the slab. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Growth",
+      "id": "f2_parametric_lsystem_9_7",
+      "token": "parametric_lsystem",
+      "strategies": [
+        "scale_area"
+      ],
+      "before": "overflows: ceiling: 2.7 m through the slab above (top 8.4, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "8.4 m tall: 0.65."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Growth",
+      "id": "f2_modulor_cypress_12_18",
+      "token": "modulor_cypress",
+      "strategies": [
+        "scale_area"
+      ],
+      "before": "overflows: ceiling: 13.9 m through the slab above (top 19.5, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 19.5 m cypress drawn in Modulor cups: 0.28 (5.5 m). A tall work: candidate for a shaft or a taller floor."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammars_And_Curves",
+      "id": "f1_ContextFreeGrammars_5_18",
+      "token": "ContextFreeGrammars",
+      "strategies": [
+        "raise"
+      ],
+      "before": "overflows: floor: 1.6 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "1.6 m below the slab: raised."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammars_And_Curves",
+      "id": "f1_Hilbert3D_7_19",
+      "token": "Hilbert3D",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: floor: 12.7 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 15.3 m Hilbert curve reaching 12.7 m down: 0.35 (5.4 m), on the slab. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 2.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammars_And_Curves",
+      "id": "f1_lindenmayer_tube_tree_12_24",
+      "token": "lindenmayer_tube_tree",
+      "strategies": [
+        "scale_area"
+      ],
+      "before": "overflows: ceiling: 17.0 m through the slab above (top 22.7, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 22.7 m tube tree: 0.24 (5.4 m). Candidate for a shaft or a taller floor."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammars_And_Curves",
+      "id": "f1_tube_painting_11_39",
+      "token": "tube_painting",
+      "strategies": [
+        "move",
+        "scale_area"
+      ],
+      "before": "overflows: edge: east 4.6 m, north 8.1 m (0 of 19 samples past the slab have ground); ceiling: 2.4 m through the slab above (top 8.1, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 17 x 8 x 14 m tube painting through the ceiling and past two edges: 0.6. | fit pass: edge: east 1.1 m, north 5.2 m (12 of 17 samples past the sla; moved 2.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Architecture",
+      "id": "f2_lsystem_dungeon_9_7",
+      "token": "lsystem_dungeon",
+      "strategies": [
+        "move",
+        "scale_area",
+        "turn"
+      ],
+      "before": "overflows: edge: north 8.4 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 26 m dungeon plan across the floor: turned along it, 0.5. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 5.6 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Architecture",
+      "id": "f2_CityGenerator_6_27",
+      "token": "CityGenerator",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: east 1.9 m, north 5.7 m (0 of 13 samples past the slab have ground); ceiling: 14.4 m through the slab above (top 20.0, headroom 5.6); floor: 1.5 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 22 m generated city through the ceiling: 0.25. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 2.9 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Architecture",
+      "id": "f2_mesh_grammar_coral_fingers_14_31",
+      "token": "mesh_grammar_coral_fingers",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: edge: north 0.4 m (0 of 10 samples past the slab have ground); floor: 0.3 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "0.3 m below the slab: raised. | fit pass: edge: north 0.6 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Competition",
+      "id": "f3_ForestCompetition_9_8",
+      "token": "ForestCompetition",
+      "strategies": [
+        "scale_area",
+        "turn"
+      ],
+      "before": "overflows: edge: north 9.6 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 21 m competing forest across the floor: turned along it, 0.7."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Shape_Grammars",
+      "id": "f5_form_grammar_canopy_10_31",
+      "token": "form_grammar_canopy",
+      "strategies": [
+        "move",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 1.9 m (0 of 5 samples past the slab have ground); ceiling: 1.6 m through the slab above (top 7.2, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 7.2 m canopy through the ceiling: 0.76. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 8.4 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Assemblage_Same_Desire",
+      "id": "f6_ten_print_textile_9_8",
+      "token": "ten_print_textile",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area",
+        "turn"
+      ],
+      "before": "overflows: edge: north 11.3 m (3 of 15 samples past the slab have ground); floor: 0.9 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 30 m 10 PRINT textile across the floor and 0.9 m down: turned, 0.55, on the slab. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 3.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_recursive_boolean_cube_12_8",
+      "token": "recursive_boolean_cube",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: edge: south 2.8 m (5 of 25 samples past the slab have ground); floor: 1.0 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "1.0 m below the slab: raised. | fit pass: stands in f1_kapoor_void_studies_18_89; moved 4.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_coincident_face_13_51",
+      "token": "coincident_face",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: floor: 0.3 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "0.3 m below the slab: raised. | Out of the cone's new footprint, to the south band."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_booleanvariations_5_51",
+      "token": "booleanvariations",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: west 1.7 m, south 0.8 m (0 of 9 samples past the slab have ground); ceiling: 0.9 m through the slab above (top 6.5, headroom 5.6); floor: 3.4 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "12 x 10 x 15.5 m of boolean variations through the ceiling: 0.55. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_conical_sightline_23_67",
+      "token": "conical_sightline",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 4.8 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "An 18.7 m shared cone, 4.8 m past the north edge: 0.9 (it still takes a body inside its cone). | One cut, three rooms: at 0.9 it is 16.8 x 16.7 m, and no 16.8 m span of this floor misses a column line. 0.68 (12.7 x 12.6 m) stands it in the open middle, between the shafts and inside the column rows: the floor's hero, still entered."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_kapoor_void_studies_18_89",
+      "token": "kapoor_void_studies",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area",
+        "side_slab",
+        "turn"
+      ],
+      "before": "overflows: edge: east 0.5 m, south 1.3 m (1 of 9 samples past the slab have ground); ceiling: 0.3 m through the slab above (top 6.0, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "19 x 6.2 m of void studies through the ceiling: 0.88. | The surface that says depth: a 16.7 x 11 m application bay, columns on two of its sides wherever it stands in the building. On the south slab, its edge 5 cm past the column row, turned so its console faces the floor."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammars_And_Curves",
+      "id": "f1_the_believing_turtle_9_7",
+      "token": "the_believing_turtle",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: south 0.7 m (1 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 0.7 m (1 of 5 samples past the slab have ground); moved 3.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Architecture",
+      "id": "f2_dragon_room_12_26",
+      "token": "dragon_room",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 1.5 m (0 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 1.5 m (0 of 5 samples past the slab have ground); moved 8.4 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Assemblage_Same_Desire",
+      "id": "f6_pattern_atlas_gallery_8_24",
+      "token": "pattern_atlas_gallery",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: north 2.6 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 2.6 m (0 of 15 samples past the slab have ground; moved 3.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Verbs",
+      "id": "f1_the_argument_of_solids_4_22",
+      "token": "the_argument_of_solids",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: north 2.3 m (0 of 20 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 2.3 m (0 of 20 samples past the slab have ground; moved 4.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_removal_room_4_23",
+      "token": "removal_room",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (9.3, 0.8, -11.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (9.3, 0.8, -11.9); moved 4.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_removal_room_6_23",
+      "token": "removal_room",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (3.3, 0.8, -11.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (3.3, 0.8, -11.9); moved 4.7 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_removal_room_10_23",
+      "token": "removal_room",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-3.3, 0.8, -11.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-3.3, 0.8, -11.9); moved 6.7 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_removal_room_12_23",
+      "token": "removal_room",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-9.3, 0.8, -11.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-9.3, 0.8, -11.9); moved 6.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_film_boolean_overlap_1_29",
+      "token": "film_boolean_overlap",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 0.3 m (0 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 0.3 m (0 of 5 samples past the slab have ground); moved 0.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Architecture",
+      "id": "f2_catalyst_vent_4_24",
+      "token": "catalyst_vent",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-18.0, 2.0, -10.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-18.0, 2.0, -10.0); moved 2.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammar_Lab",
+      "id": "f1_dark_sphere_8_22",
+      "token": "dark_sphere",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (1.0, 0.5, -9.5)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (1.0, 0.5, -9.5); moved 1.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Assemblage_Same_Desire",
+      "id": "f6_incompleteness_scale_12_35",
+      "token": "incompleteness_scale",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (16.0, 0.7, -12.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (16.0, 0.7, -12.0); moved 3.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Living",
+      "id": "f4_living_paper_dragon_12_30",
+      "token": "living_paper_dragon",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (0.0, 0.0, -10.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (0.0, 0.0, -10.0); moved 1.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "26 x 10 m north: room for the boolean burrow and the SDF cavern, two walk-in rooms of 11 x 9 and 7 x 7 m."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "side-slab-south",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "22 x 10 m south: room for the Kapoor void studies, an application bay 16.7 x 11 m."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "LSystems_Grammars_And_Curves",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "20 x 9 m north: room for the tube painting bay (10 x 8.5 m)."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Assemblage_Same_Desire",
+      "id": "side-slab-south",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "18 x 7 m south: room for the 10 PRINT textile (16.3 x 6.1 m)."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_boolean_burrow_8_22",
+      "token": "boolean_burrow",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 4.5 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 3.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_sdf_cavern_room_8_33",
+      "token": "sdf_cavern_room",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 4.6 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_boolean_eggs_7_43",
+      "token": "boolean_eggs",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 2.6 m (0 of 20 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 2.6 m (0 of 20 samples past the slab have ground; moved 13.7 m | fit pass: 0.4 m past the north slab's end (the fit pass had read the slab's box, beams and all, as deck); moved 1.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_sphere_splitting_showcase_4_8",
+      "token": "sphere_splitting_showcase",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: south 2.0 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 2.0 m (0 of 15 samples past the slab have ground; moved 2.7 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_csg_compose_workbench_4_3",
+      "token": "csg_compose_workbench",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 1.6 m (20 of 25 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 1.6 m (20 of 25 samples past the slab have groun; moved 0.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_subtraction_suite_12_3",
+      "token": "subtraction_suite",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-16.0, 0.7, 11.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-16.0, 0.7, 11.0); moved 3.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_csg_difference_demo_2_3",
+      "token": "csg_difference_demo",
+      "strategies": [
+        "move"
+      ],
+      "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 1.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Gallery",
+      "id": "f2_csg_difference_demo_14_3",
+      "token": "csg_difference_demo",
+      "strategies": [
+        "move"
+      ],
+      "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "Boolean_Works",
+      "id": "f1_csg_architecture_cavity_8_14",
+      "token": "csg_architecture_cavity",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: south 4.2 m (5 of 20 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: stands in f1_kapoor_void_studies_18_89; moved 8.5 m"
     }
   ]
 }

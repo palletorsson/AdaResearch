@@ -37968,14 +37968,24 @@
           "id": "f1_grammar_provenance_6_19",
           "artifact": "grammar_provenance",
           "position": [
-            3,
+            3.0,
             -6.5
           ],
           "station": "NE",
-          "height": 0,
-          "facing": 180,
-          "scale": 1,
-          "config": {}
+          "height": 3.06,
+          "facing": 270.0,
+          "scale": 0.55,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area",
+                "turn"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.0 m"
+            }
+          }
         },
         {
           "id": "f1_lsystem_tree_9_19",
@@ -38020,14 +38030,21 @@
           "id": "f1_dark_sphere_8_22",
           "artifact": "dark_sphere",
           "position": [
-            1,
-            -9.5
+            1.0,
+            -8.0
           ],
           "station": "NE",
           "height": 0,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (1.0, 0.5, -9.5); moved 1.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -38255,16 +38272,22 @@
             6.5
           ],
           "station": "SE",
-          "height": 0,
+          "height": 0.02,
           "facing": 0,
-          "scale": 1,
+          "scale": 0.65,
           "config": {
             "lesson": "true",
             "iterations": "1",
             "base_length": "0.8",
             "base_angle": "40",
             "angle_variation": "0",
-            "length_decay": "0.72"
+            "length_decay": "0.72",
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "8.4 m tall: 0.65."
+            }
           }
         },
         {
@@ -38314,10 +38337,17 @@
             -4.5
           ],
           "station": "NW",
-          "height": 0,
+          "height": 0.02,
           "facing": 180,
-          "scale": 1,
-          "config": {}
+          "scale": 0.28,
+          "config": {
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "A 19.5 m cypress drawn in Modulor cups: 0.28 (5.5 m). A tall work: candidate for a shaft or a taller floor."
+            }
+          }
         }
       ],
       "props": [],
@@ -38481,14 +38511,20 @@
           "artifact": "the_believing_turtle",
           "station": "SE",
           "position": [
-            0,
-            7
+            -0.5,
+            3.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.7 m (1 of 5 samples past the slab have ground); moved 3.5 m"
+            }
           }
         },
         {
@@ -38500,9 +38536,16 @@
             7
           ],
           "facing": 90,
-          "height": 0,
+          "height": 1.58,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "raise"
+              ],
+              "note": "1.6 m below the slab: raised."
+            }
+          }
         },
         {
           "id": "f1_space_filling_curve_gallery_9_18",
@@ -38522,13 +38565,22 @@
           "artifact": "Hilbert3D",
           "station": "SE",
           "position": [
-            15,
-            8
+            15.0,
+            6.0
           ],
           "facing": 90,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 4.45,
+          "scale": 0.35,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f1_lindenmayer_tube_tree_12_24",
@@ -38539,9 +38591,16 @@
             -7
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 0.02,
+          "scale": 0.24,
+          "config": {
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "A 22.7 m tube tree: 0.24 (5.4 m). Candidate for a shaft or a taller floor."
+            }
+          }
         },
         {
           "id": "f1_film_grammar_forward_4_25",
@@ -38564,15 +38623,45 @@
           "artifact": "tube_painting",
           "station": "NE",
           "position": [
-            17,
-            -10
+            15.5,
+            -12.0
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.6,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "fit pass: edge: east 1.1 m, north 5.2 m (12 of 17 samples past the sla; moved 2.5 m"
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            11,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 20,
+            "depth": 9,
+            "seed": 126,
+            "editor_label": "Side slab / room for the tube painting bay (10 x 8.5 m) (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -38592,14 +38681,22 @@
           "artifact": "lsystem_dungeon",
           "station": "SE",
           "position": [
-            0,
-            6
+            5.0,
+            3.5
           ],
-          "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "facing": 90.0,
+          "height": 0.02,
+          "scale": 0.5,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 5.6 m"
+            }
           }
         },
         {
@@ -38607,8 +38704,8 @@
           "artifact": "catalyst_vent",
           "station": "NW",
           "position": [
-            -18,
-            -10
+            -18.0,
+            -8.0
           ],
           "facing": 180,
           "height": 0,
@@ -38617,7 +38714,13 @@
             "emit_interval_s": "2.5",
             "wave_size": "3",
             "start_delay_s": "5.0",
-            "sequence": "auto"
+            "sequence": "auto",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-18.0, 2.0, -10.0); moved 2.0 m"
+            }
           }
         },
         {
@@ -38651,26 +38754,42 @@
           "artifact": "dragon_room",
           "station": "NW",
           "position": [
-            -14,
-            -7
+            -16.5,
+            1.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 1.5 m (0 of 5 samples past the slab have ground); moved 8.4 m"
+            }
+          }
         },
         {
           "id": "f2_CityGenerator_6_27",
           "artifact": "CityGenerator",
           "station": "NE",
           "position": [
-            14,
-            -7
+            15.5,
+            -4.5
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 0.4,
+          "scale": 0.25,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 2.9 m"
+            }
+          }
         },
         {
           "id": "f2_grammar_seed_6_29",
@@ -38707,13 +38826,21 @@
           "artifact": "mesh_grammar_coral_fingers",
           "station": "NE",
           "position": [
-            0,
-            -9
+            0.0,
+            -8.0
           ],
           "facing": 180,
-          "height": 0,
+          "height": 0.37,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise"
+              ],
+              "note": "fit pass: edge: north 0.6 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -38735,11 +38862,18 @@
             0,
             0
           ],
-          "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "facing": 90.0,
+          "height": 0.02,
+          "scale": 0.7,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "scale_area",
+                "turn"
+              ],
+              "note": "A 21 m competing forest across the floor: turned along it, 0.7."
+            }
           }
         },
         {
@@ -38852,13 +38986,20 @@
           "artifact": "living_paper_dragon",
           "station": "NE",
           "position": [
-            0,
-            -10
+            0.0,
+            -8.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (0.0, 0.0, -10.0); moved 1.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -38890,13 +39031,21 @@
           "artifact": "form_grammar_canopy",
           "station": "NE",
           "position": [
-            10,
-            -2
+            2.0,
+            0.5
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 0.02,
+          "scale": 0.76,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 8.4 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -38915,14 +39064,23 @@
           "artifact": "ten_print_textile",
           "station": "SE",
           "position": [
-            0,
-            7
+            0.0,
+            10.0
           ],
-          "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "facing": 90.0,
+          "height": 0.5,
+          "scale": 0.55,
           "config": {
-            "lesson": "true"
+            "lesson": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area",
+                "turn"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 3.0 m"
+            }
           }
         },
         {
@@ -38972,13 +39130,21 @@
           "artifact": "pattern_atlas_gallery",
           "station": "NE",
           "position": [
-            0,
-            -7
+            0.5,
+            -3.5
           ],
-          "facing": 0,
+          "facing": 90.0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: north 2.6 m (0 of 15 samples past the slab have ground; moved 3.5 m"
+            }
+          }
         },
         {
           "id": "f6_dragon_bench_15_28",
@@ -39024,13 +39190,43 @@
           "artifact": "incompleteness_scale",
           "station": "NE",
           "position": [
-            16,
-            -12
+            16.0,
+            -8.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (16.0, 0.7, -12.0); moved 3.5 m"
+            }
+          }
+        },
+        {
+          "id": "side-slab-south",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            -7,
+            9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "length": 18,
+            "depth": 7,
+            "seed": 131,
+            "editor_label": "Side slab / room for the 10 PRINT textile (16.3 x 6.1 m) (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
         }
       ],
       "props": [],
@@ -42052,14 +42248,22 @@
           "id": "f1_the_argument_of_solids_4_22",
           "artifact": "the_argument_of_solids",
           "position": [
-            2,
-            -10
+            2.0,
+            -6.0
           ],
           "station": "NE",
           "height": 0,
-          "facing": 180,
+          "facing": 270.0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: north 2.3 m (0 of 20 samples past the slab have ground; moved 4.0 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -42289,15 +42493,21 @@
           "id": "f2_csg_difference_demo_2_3",
           "artifact": "csg_difference_demo",
           "position": [
-            6,
-            8
+            7.0,
+            8.0
           ],
           "station": "SE",
           "height": 0,
           "facing": 180,
           "scale": 1,
           "config": {
-            "workings": "outcome"
+            "workings": "outcome",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 1.0 m"
+            }
           }
         },
         {
@@ -42334,15 +42544,21 @@
           "id": "f2_csg_difference_demo_14_3",
           "artifact": "csg_difference_demo",
           "position": [
-            -6,
-            8
+            -6.5,
+            8.0
           ],
           "station": "SW",
           "height": 0,
           "facing": 180,
           "scale": 1,
           "config": {
-            "workings": "expression"
+            "workings": "expression",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m"
+            }
           }
         },
         {
@@ -42590,44 +42806,62 @@
           "artifact": "removal_room",
           "position": [
             9.3,
-            -12
+            -8.0
           ],
           "station": "NE",
           "height": 0,
           "facing": 180,
           "scale": 1,
           "config": {
-            "subtraction": "cross"
+            "subtraction": "cross",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (9.3, 0.8, -11.9); moved 4.0 m"
+            }
           }
         },
         {
           "id": "f2_removal_room_6_23",
           "artifact": "removal_room",
           "position": [
-            3.3,
-            -12
+            1.8,
+            -7.5
           ],
           "station": "NE",
           "height": 0,
           "facing": 180,
           "scale": 1,
           "config": {
-            "subtraction": "gasket"
+            "subtraction": "gasket",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (3.3, 0.8, -11.9); moved 4.7 m"
+            }
           }
         },
         {
           "id": "f2_removal_room_10_23",
           "artifact": "removal_room",
           "position": [
-            -3.3,
-            -12
+            -8.3,
+            -7.5
           ],
           "station": "NW",
           "height": 0,
           "facing": 180,
           "scale": 1,
           "config": {
-            "subtraction": "third"
+            "subtraction": "third",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-3.3, 0.8, -11.9); moved 6.7 m"
+            }
           }
         },
         {
@@ -42635,22 +42869,28 @@
           "artifact": "removal_room",
           "position": [
             -9.3,
-            -12
+            -6.0
           ],
           "station": "NW",
           "height": 0,
           "facing": 180,
           "scale": 1,
           "config": {
-            "subtraction": "figure"
+            "subtraction": "figure",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-9.3, 0.8, -11.9); moved 6.0 m"
+            }
           }
         },
         {
           "id": "f2_film_boolean_overlap_1_29",
           "artifact": "film_boolean_overlap",
           "position": [
-            15,
-            -8
+            15.0,
+            -7.5
           ],
           "station": "NE",
           "height": 0,
@@ -42658,7 +42898,13 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 0.3 m (0 of 5 samples past the slab have ground); moved 0.5 m"
+            }
           }
         }
       ],
@@ -42903,14 +43149,21 @@
           "artifact": "csg_compose_workbench",
           "station": "SE",
           "position": [
-            0,
-            10
+            0.0,
+            10.0
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
           "config": {
-            "algebra": "complete"
+            "algebra": "complete",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 1.6 m (20 of 25 samples past the slab have groun; moved 0.0 m"
+            }
           }
         },
         {
@@ -42918,67 +43171,102 @@
           "artifact": "subtraction_suite",
           "station": "SW",
           "position": [
-            -16,
-            11
+            -16.0,
+            8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-16.0, 0.7, 11.0); moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f1_sphere_splitting_showcase_4_8",
           "artifact": "sphere_splitting_showcase",
           "station": "SW",
           "position": [
-            -8,
-            11
+            -9.0,
+            8.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 2.0 m (0 of 15 samples past the slab have ground; moved 2.7 m"
+            }
+          }
         },
         {
           "id": "f1_recursive_boolean_cube_12_8",
           "artifact": "recursive_boolean_cube",
           "station": "SE",
           "position": [
-            8,
-            11
+            8.0,
+            6.5
           ],
           "facing": 180,
-          "height": 0,
+          "height": 1.02,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise"
+              ],
+              "note": "fit pass: stands in f1_kapoor_void_studies_18_89; moved 4.5 m"
+            }
+          }
         },
         {
           "id": "f1_csg_architecture_cavity_8_14",
           "artifact": "csg_architecture_cavity",
           "station": "SE",
           "position": [
-            16,
-            11
+            16.0,
+            2.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: stands in f1_kapoor_void_studies_18_89; moved 8.5 m"
+            }
+          }
         },
         {
           "id": "f1_boolean_burrow_8_22",
           "artifact": "boolean_burrow",
           "station": "NW",
           "position": [
-            -14,
-            -9
+            -14.0,
+            -12.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "carver_profile": "level",
-            "section": "off"
+            "section": "off",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 3.0 m"
+            }
           }
         },
         {
@@ -42986,52 +43274,83 @@
           "artifact": "sdf_cavern_room",
           "station": "NW",
           "position": [
-            -1,
-            -10
+            -0.5,
+            -10.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m"
+            }
+          }
         },
         {
           "id": "f1_boolean_eggs_7_43",
           "artifact": "boolean_eggs",
           "station": "NE",
           "position": [
-            14,
-            -10
+            0.5,
+            -15.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: 0.4 m past the north slab's end (the fit pass had read the slab's box, beams and all, as deck); moved 1.0 m"
+            }
+          }
         },
         {
           "id": "f1_booleanvariations_5_51",
           "artifact": "booleanvariations",
           "station": "SW",
           "position": [
-            -16,
-            2
+            -16.0,
+            1.5
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 1.88,
+          "scale": 0.55,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area"
+              ],
+              "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m"
+            }
+          }
         },
         {
           "id": "f1_coincident_face_13_51",
           "artifact": "coincident_face",
           "station": "SW",
           "position": [
-            -5,
-            6
+            -4,
+            8.2
           ],
           "facing": 180,
-          "height": 0,
+          "height": 0.33,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise"
+              ],
+              "note": "Out of the cone's new footprint, to the south band."
+            }
+          }
         },
         {
           "id": "f1_film_boolean_room_17_56",
@@ -43054,15 +43373,23 @@
           "artifact": "conical_sightline",
           "station": "NE",
           "position": [
-            6,
-            -3
+            -3.43,
+            1.03
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.16,
+          "scale": 0.68,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area"
+              ],
+              "note": "One cut, three rooms: at 0.9 it is 16.8 x 16.7 m, and no 16.8 m span of this floor misses a column line. 0.68 (12.7 x 12.6 m) stands it in the open middle, between the shafts and inside the column rows: the floor's hero, still entered."
+            }
           }
         },
         {
@@ -43070,15 +43397,71 @@
           "artifact": "kapoor_void_studies",
           "station": "SE",
           "position": [
-            12,
-            4
+            10,
+            13
           ],
-          "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "facing": 180,
+          "height": 0.2,
+          "scale": 0.88,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area",
+                "side_slab",
+                "turn"
+              ],
+              "note": "The surface that says depth: a 16.7 x 11 m application bay, columns on two of its sides wherever it stands in the building. On the south slab, its edge 5 cm past the column row, turned so its console faces the floor."
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            -8,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 26,
+            "depth": 10,
+            "seed": 163,
+            "editor_label": "Side slab / room for the boolean burrow and the SDF cavern, two walk-in rooms of 11 x 9 and 7 x 7 m (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
+        },
+        {
+          "id": "side-slab-south",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            10,
+            9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "length": 22,
+            "depth": 10,
+            "seed": 164,
+            "editor_label": "Side slab / room for the Kapoor void studies, an application bay 16.7 x 11 m (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],

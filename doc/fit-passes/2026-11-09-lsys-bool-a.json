@@ -1,0 +1,245 @@
+[
+ {
+  "map": "LSystems_Grammar_Lab",
+  "id": "f1_grammar_provenance_6_19",
+  "token": "grammar_provenance",
+  "set": {
+   "scale": 0.55,
+   "height": 3.06
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 16 m L-system tree hanging 5.5 m through the slab: 0.55, on the slab."
+ },
+ {
+  "map": "LSystems_Growth",
+  "id": "f2_parametric_lsystem_9_7",
+  "token": "parametric_lsystem",
+  "set": {
+   "scale": 0.65,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "8.4 m tall: 0.65."
+ },
+ {
+  "map": "LSystems_Growth",
+  "id": "f2_modulor_cypress_12_18",
+  "token": "modulor_cypress",
+  "set": {
+   "scale": 0.28,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 19.5 m cypress drawn in Modulor cups: 0.28 (5.5 m). A tall work: candidate for a shaft or a taller floor."
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_ContextFreeGrammars_5_18",
+  "token": "ContextFreeGrammars",
+  "set": {
+   "height": 1.58
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.6 m below the slab: raised."
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_Hilbert3D_7_19",
+  "token": "Hilbert3D",
+  "set": {
+   "scale": 0.35,
+   "height": 4.45
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 15.3 m Hilbert curve reaching 12.7 m down: 0.35 (5.4 m), on the slab."
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_lindenmayer_tube_tree_12_24",
+  "token": "lindenmayer_tube_tree",
+  "set": {
+   "scale": 0.24,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 22.7 m tube tree: 0.24 (5.4 m). Candidate for a shaft or a taller floor."
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_tube_painting_11_39",
+  "token": "tube_painting",
+  "set": {
+   "scale": 0.6,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 17 x 8 x 14 m tube painting through the ceiling and past two edges: 0.6."
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_lsystem_dungeon_9_7",
+  "token": "lsystem_dungeon",
+  "set": {
+   "scale": 0.5,
+   "height": 0.02,
+   "facing": 90.0
+  },
+  "strategies": [
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 26 m dungeon plan across the floor: turned along it, 0.5."
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_CityGenerator_6_27",
+  "token": "CityGenerator",
+  "set": {
+   "scale": 0.25,
+   "height": 0.4
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 22 m generated city through the ceiling: 0.25."
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_mesh_grammar_coral_fingers_14_31",
+  "token": "mesh_grammar_coral_fingers",
+  "set": {
+   "height": 0.37
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.3 m below the slab: raised."
+ },
+ {
+  "map": "LSystems_Competition",
+  "id": "f3_ForestCompetition_9_8",
+  "token": "ForestCompetition",
+  "set": {
+   "scale": 0.7,
+   "height": 0.02,
+   "facing": 90.0
+  },
+  "strategies": [
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 21 m competing forest across the floor: turned along it, 0.7."
+ },
+ {
+  "map": "LSystems_Shape_Grammars",
+  "id": "f5_form_grammar_canopy_10_31",
+  "token": "form_grammar_canopy",
+  "set": {
+   "scale": 0.76,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 7.2 m canopy through the ceiling: 0.76."
+ },
+ {
+  "map": "Assemblage_Same_Desire",
+  "id": "f6_ten_print_textile_9_8",
+  "token": "ten_print_textile",
+  "set": {
+   "scale": 0.55,
+   "height": 0.5,
+   "facing": 90.0
+  },
+  "strategies": [
+   "scale_area",
+   "turn",
+   "raise"
+  ],
+  "note": "A 30 m 10 PRINT textile across the floor and 0.9 m down: turned, 0.55, on the slab."
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_recursive_boolean_cube_12_8",
+  "token": "recursive_boolean_cube",
+  "set": {
+   "height": 1.02
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.0 m below the slab: raised."
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_coincident_face_13_51",
+  "token": "coincident_face",
+  "set": {
+   "height": 0.33
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.3 m below the slab: raised."
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_booleanvariations_5_51",
+  "token": "booleanvariations",
+  "set": {
+   "scale": 0.55,
+   "height": 1.88
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "12 x 10 x 15.5 m of boolean variations through the ceiling: 0.55."
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_conical_sightline_23_67",
+  "token": "conical_sightline",
+  "set": {
+   "scale": 0.9,
+   "height": 0.2
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "An 18.7 m shared cone, 4.8 m past the north edge: 0.9 (it still takes a body inside its cone)."
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_kapoor_void_studies_18_89",
+  "token": "kapoor_void_studies",
+  "set": {
+   "scale": 0.88,
+   "height": 0.2
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "19 x 6.2 m of void studies through the ceiling: 0.88."
+ }
+]

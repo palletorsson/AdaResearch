@@ -1,0 +1,471 @@
+[
+ {
+  "map": "LSystems_Grammar_Lab",
+  "id": "f1_grammar_provenance_6_19",
+  "token": "grammar_provenance",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 16 m L-system tree hanging 5.5 m through the slab: 0.55, on the slab. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.0 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Growth",
+  "id": "f2_parametric_lsystem_9_7",
+  "token": "parametric_lsystem",
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "8.4 m tall: 0.65.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Growth",
+  "id": "f2_modulor_cypress_12_18",
+  "token": "modulor_cypress",
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 19.5 m cypress drawn in Modulor cups: 0.28 (5.5 m). A tall work: candidate for a shaft or a taller floor.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_ContextFreeGrammars_5_18",
+  "token": "ContextFreeGrammars",
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.6 m below the slab: raised.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_Hilbert3D_7_19",
+  "token": "Hilbert3D",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "A 15.3 m Hilbert curve reaching 12.7 m down: 0.35 (5.4 m), on the slab. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_lindenmayer_tube_tree_12_24",
+  "token": "lindenmayer_tube_tree",
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 22.7 m tube tree: 0.24 (5.4 m). Candidate for a shaft or a taller floor.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_tube_painting_11_39",
+  "token": "tube_painting",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 17 x 8 x 14 m tube painting through the ceiling and past two edges: 0.6. | fit pass: edge: east 1.1 m, north 5.2 m (12 of 17 samples past the sla; moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_lsystem_dungeon_9_7",
+  "token": "lsystem_dungeon",
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 26 m dungeon plan across the floor: turned along it, 0.5. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 5.6 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_CityGenerator_6_27",
+  "token": "CityGenerator",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "A 22 m generated city through the ceiling: 0.25. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 2.9 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_mesh_grammar_coral_fingers_14_31",
+  "token": "mesh_grammar_coral_fingers",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "0.3 m below the slab: raised. | fit pass: edge: north 0.6 m (0 of 10 samples past the slab have ground; moved 1.0 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Competition",
+  "id": "f3_ForestCompetition_9_8",
+  "token": "ForestCompetition",
+  "strategies": [
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 21 m competing forest across the floor: turned along it, 0.7.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Shape_Grammars",
+  "id": "f5_form_grammar_canopy_10_31",
+  "token": "form_grammar_canopy",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 7.2 m canopy through the ceiling: 0.76. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 8.4 m",
+  "remove": false
+ },
+ {
+  "map": "Assemblage_Same_Desire",
+  "id": "f6_ten_print_textile_9_8",
+  "token": "ten_print_textile",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 30 m 10 PRINT textile across the floor and 0.9 m down: turned, 0.55, on the slab. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_recursive_boolean_cube_12_8",
+  "token": "recursive_boolean_cube",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "1.0 m below the slab: raised. | fit pass: stands in f1_kapoor_void_studies_18_89; moved 4.5 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_coincident_face_13_51",
+  "token": "coincident_face",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "0.3 m below the slab: raised. | Out of the cone's new footprint, to the south band.",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_booleanvariations_5_51",
+  "token": "booleanvariations",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "12 x 10 x 15.5 m of boolean variations through the ceiling: 0.55. | fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_conical_sightline_23_67",
+  "token": "conical_sightline",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "An 18.7 m shared cone, 4.8 m past the north edge: 0.9 (it still takes a body inside its cone). | One cut, three rooms: at 0.9 it is 16.8 x 16.7 m, and no 16.8 m span of this floor misses a column line. 0.68 (12.7 x 12.6 m) stands it in the open middle, between the shafts and inside the column rows: the floor's hero, still entered.",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_kapoor_void_studies_18_89",
+  "token": "kapoor_void_studies",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area",
+   "side_slab",
+   "turn"
+  ],
+  "note": "19 x 6.2 m of void studies through the ceiling: 0.88. | The surface that says depth: a 16.7 x 11 m application bay, columns on two of its sides wherever it stands in the building. On the south slab, its edge 5 cm past the column row, turned so its console faces the floor.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "f1_the_believing_turtle_9_7",
+  "token": "the_believing_turtle",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.7 m (1 of 5 samples past the slab have ground); moved 3.5 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_dragon_room_12_26",
+  "token": "dragon_room",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.5 m (0 of 5 samples past the slab have ground); moved 8.4 m",
+  "remove": false
+ },
+ {
+  "map": "Assemblage_Same_Desire",
+  "id": "f6_pattern_atlas_gallery_8_24",
+  "token": "pattern_atlas_gallery",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: north 2.6 m (0 of 15 samples past the slab have ground; moved 3.5 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Verbs",
+  "id": "f1_the_argument_of_solids_4_22",
+  "token": "the_argument_of_solids",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: north 2.3 m (0 of 20 samples past the slab have ground; moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_removal_room_4_23",
+  "token": "removal_room",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (9.3, 0.8, -11.9); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_removal_room_6_23",
+  "token": "removal_room",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (3.3, 0.8, -11.9); moved 4.7 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_removal_room_10_23",
+  "token": "removal_room",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-3.3, 0.8, -11.9); moved 6.7 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_removal_room_12_23",
+  "token": "removal_room",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-9.3, 0.8, -11.9); moved 6.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_film_boolean_overlap_1_29",
+  "token": "film_boolean_overlap",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 0.3 m (0 of 5 samples past the slab have ground); moved 0.5 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Architecture",
+  "id": "f2_catalyst_vent_4_24",
+  "token": "catalyst_vent",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-18.0, 2.0, -10.0); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammar_Lab",
+  "id": "f1_dark_sphere_8_22",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (1.0, 0.5, -9.5); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "Assemblage_Same_Desire",
+  "id": "f6_incompleteness_scale_12_35",
+  "token": "incompleteness_scale",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (16.0, 0.7, -12.0); moved 3.5 m",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Living",
+  "id": "f4_living_paper_dragon_12_30",
+  "token": "living_paper_dragon",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.0, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "26 x 10 m north: room for the boolean burrow and the SDF cavern, two walk-in rooms of 11 x 9 and 7 x 7 m.",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "22 x 10 m south: room for the Kapoor void studies, an application bay 16.7 x 11 m.",
+  "remove": false
+ },
+ {
+  "map": "LSystems_Grammars_And_Curves",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "20 x 9 m north: room for the tube painting bay (10 x 8.5 m).",
+  "remove": false
+ },
+ {
+  "map": "Assemblage_Same_Desire",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "18 x 7 m south: room for the 10 PRINT textile (16.3 x 6.1 m).",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_boolean_burrow_8_22",
+  "token": "boolean_burrow",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_sdf_cavern_room_8_33",
+  "token": "sdf_cavern_room",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_boolean_eggs_7_43",
+  "token": "boolean_eggs",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.6 m (0 of 20 samples past the slab have ground; moved 13.7 m | fit pass: 0.4 m past the north slab's end (the fit pass had read the slab's box, beams and all, as deck); moved 1.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_sphere_splitting_showcase_4_8",
+  "token": "sphere_splitting_showcase",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 2.0 m (0 of 15 samples past the slab have ground; moved 2.7 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_csg_compose_workbench_4_3",
+  "token": "csg_compose_workbench",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 1.6 m (20 of 25 samples past the slab have groun; moved 0.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_subtraction_suite_12_3",
+  "token": "subtraction_suite",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-16.0, 0.7, 11.0); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_csg_difference_demo_2_3",
+  "token": "csg_difference_demo",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 1.0 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Gallery",
+  "id": "f2_csg_difference_demo_14_3",
+  "token": "csg_difference_demo",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: a tower column inside it (it fitted the slab, not the tower's columns); moved 0.5 m",
+  "remove": false
+ },
+ {
+  "map": "Boolean_Works",
+  "id": "f1_csg_architecture_cavity_8_14",
+  "token": "csg_architecture_cavity",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: stands in f1_kapoor_void_studies_18_89; moved 8.5 m",
+  "remove": false
+ }
+]

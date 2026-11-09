@@ -86,6 +86,41 @@ def load():
     return building, floors
 
 
+def _slabs(floor_record):
+    for a in floor_record.get("artifacts", []):
+        if a.get("artifact") != "void_slab_extension": continue
+        c = a.get("config") or {}
+        L = min(max(float(c.get("length", 12)), 2.0), 42.0); D = min(max(float(c.get("depth", 6)), 1.0), 10.0)
+        px, pz = (float(v) for v in a.get("position", [0, 0])[:2])
+        turn = round(float(a.get("facing", 0))) % 360
+        if turn == 0: yield (px - L / 2, pz - .025, px + L / 2, pz + D + .025), turn
+        elif turn == 180: yield (px - L / 2, pz - D - .025, px + L / 2, pz + .025), turn
+        elif turn == 90: yield (px - .025, pz - L / 2, px + D + .025, pz + L / 2), turn
+        elif turn == 270: yield (px - D - .025, pz - L / 2, px + .025, pz + L / 2), turn
+
+
+def slab_decks(floor_record):
+    """A floor's side-slab DECKS as (x0, z0, x1, z1), from their placements (commons/void/slab_extension.gd: `length`
+    along the edge, `depth` out along the slab's facing, 5 cm into the building). Not the measured box: that holds the
+    tangled beams too, whose feet spread up to 1 m past the deck's ends, so a work there reads as standing on air."""
+    return [d for d, _ in _slabs(floor_record)]
+
+
+def slab_grounds(floor_record, margin):
+    """The ground a side slab adds, as (x0, z0, x1, z1) for an `x0 <= x <= x1 and z0 <= z <= z1` test: its deck kept
+    `margin` in from the rails on its three open sides, and run 0.5 m into the building on the fourth (the side it
+    faces away from), so a point crossing the building's edge is never caught between two margins."""
+    out = []
+    for d, turn in _slabs(floor_record):
+        x0, z0, x1, z1 = d[0] + margin, d[1] + margin, d[2] - margin, d[3] - margin
+        if turn == 0: z0 = d[1] - .5
+        elif turn == 180: z1 = d[3] + .5
+        elif turn == 90: x0 = d[0] - .5
+        else: x1 = d[2] + .5
+        out.append((x0, z0, x1, z1))
+    return out
+
+
 def classify(b, f, w):
     hw, hd = b["width"] / 2, b["depth"] / 2
     box = w.get("box")

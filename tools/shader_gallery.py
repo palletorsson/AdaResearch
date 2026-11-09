@@ -71,12 +71,12 @@ def place(map_name, console, script, size=2, out=None, gid="shader-gallery"):
     cols = [(x - .6, z - .6, x + .6, z + .6) for x in building["column_x"] for z in building["column_z"]]
     boxes = [(w["box"][0], w["box"][2], w["box"][3], w["box"][5]) for w in f["works"] if w.get("box") and None not in w["box"]
              and w.get("token") != "void_slab_extension" and (w["box"][3] - w["box"][0]) < 40]
-    slabs = [(w["box"][0], w["box"][2], w["box"][3], w["box"][5]) for w in f["works"] if w.get("token") == "void_slab_extension" and w.get("box")]
+    slabs = S.slab_grounds(rooms["floors"][index], .3)
     me = next(w for w in f["works"] if w["id"] == console)
     cx, cz = (me["box"][0] + me["box"][3]) / 2, (me["box"][2] + me["box"][5]) / 2
     def on_ground(r):
         def inside(x, z):
-            return (-hw + .3 <= x <= hw - .3 and -hd + .3 <= z <= hd - .3) or any(s[0] + .3 <= x <= s[2] - .3 and s[1] <= z <= s[3] - .3 for s in slabs)
+            return (-hw + .3 <= x <= hw - .3 and -hd + .3 <= z <= hd - .3) or any(s[0] <= x <= s[2] and s[1] <= z <= s[3] for s in slabs)
         return all(inside(r[0] + (r[2] - r[0]) * i / 4, r[1] + (r[3] - r[1]) * j / 2) for i in range(5) for j in range(3))
     clash = lambda r, b, m=.3: r[0] - m < b[2] and b[0] < r[2] + m and r[1] - m < b[3] and b[1] < r[3] + m
     best = None

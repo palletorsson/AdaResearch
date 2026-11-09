@@ -162,3 +162,41 @@ The strategies, with what each pass taught, are in `commons/void/fit_strategies.
 - **Machine learning:** the works were built for museum stages. They sat below their origin, and their bodies fell. *Raise* plus *strip floor* fixed most of them.
 - **Shaders:** the rooms are the shader. Floor and walls wear it, so stripping did little. They fit by *side slab* and *move*. The playground setup Palle asked for is the real answer: a surface to carry the shader, without a room around it.
 - **Order matters:** strip, raise and scale first; then re-measure; then the fit pass. Sizes change, so moves come last.
+
+## The passes since (2026-11-09, same day)
+
+Each sequence was fitted the same way: a pass of strip, raise, scale and turn; a re-measure; the fit pass for moves and
+side slabs; then repeat until nothing is left. The cases are in `commons/void/fit_strategies.json`, the pass files in
+`doc/fit-passes/`.
+
+Counts are from the recorded cases. "Left" is the run the pass was recorded on; the physics cases come and go from run
+to run.
+
+| sequences | not fitting before | fitted | removed | left |
+|---|---|---|---|---|
+| machine learning | 21 | 18 | 1 | 2: `neural_networks_vr` drops something about 494 m; `transformers_vr` is 0.3 m through a ceiling |
+| shaders | 18 | 18 | 0 | 0; the six floors' shader galleries are in the working tree only, waiting for the playground system's commit |
+| isosurfaces + soft bodies | 58 | 58 | 0 | 0; `rounded_softbody_test` blows up on some runs |
+| procedural generation + swarm | 28 | 26 | 0 | 2: `caverandomwalk` (physics fliers, a taller-floor case) and `rhizomatic_maze_space` (0.8 m through a ceiling) |
+| forces + fractals | 55 | 46 | 9 (museum wayfinding) | 0; the ball dropper's balls fall under the slab on some runs |
+| L-systems + boolean surfaces | 40 | 40 | 0 | 0; 4 side slabs; no work in another, no column through a work |
+
+**What the L-systems and boolean pass taught:**
+- **The survey judges each work alone.** Two works standing in each other, or a tower column through a work, both read
+  "fits". After the first pass there were 22 such pairs on these 11 floors, most from works scaled where they stood: a
+  scale keeps the box's centre, and the smaller box can land across a column row.
+  - `python tools/void_fit.py overlaps <pass.json>` lists them.
+  - `python tools/void_fit_pass.py --overlaps` moves them: the one round a column, otherwise the smaller of the pair.
+  - Run both after every pass.
+- **The columns stand on two rows, z = ±7.** On each row they are at most 10 m apart (x = ±5, ±14, ±20).
+  - A work wider than 10 m can never cross a row. Inside the building it must stay within z ±6.5.
+  - Anything deeper goes on a side slab, where the deck plus the edge strip gives 11.5 m.
+  - Boolean_Works holds two walk-in bays. The cone ("One cut, three rooms", now 0.68) stands in the open middle. The
+    Kapoor bay stands on a 10 m south slab, turned so its console faces the floor.
+- **Two faults in the fit pass, both fixed.** Both now read the deck from the slab's placement (`slab_decks`,
+  `slab_grounds` in `tools/void_size_survey.py`):
+  - It read a side slab's measured box as deck. The box also holds the tangled beams, whose feet spread 1 m past the deck.
+  - It kept its margin on a north slab's inner edge, which left a 27 cm strip of no ground just inside the edge.
+- **Tall works scaled down to fit, not to keep their meaning.** Four L-system works were cut to a quarter or a third of
+  their height: the Modulor cypress, the tube tree, the city and the 3D Hilbert curve. If their height is the point, they
+  are candidates for a shaft or a taller floor.
