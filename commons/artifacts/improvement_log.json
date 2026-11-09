@@ -860,6 +860,18 @@
         "the shared grab stick's live X/Y/Z readout hidden on the metallophone's stick (stick_readout, default false); the shared stick is unchanged"
       ],
       "capture": "ada_run/improve/resonating_metallophone/before_after.png"
+    },
+    {
+      "lookup_name": "beat_frequency_demo",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "text sizes, label offsets and the control panel follow the row width (k = row_width / 0.5; identical at the default)"
+      ],
+      "tower": "floor 75: its own size (2.4 m rows of 96 spheres, 0.5 m apart, 18 cm amplitude) at scale 1, turned to face into the floor (it faced the edge), a metre east of the column",
+      "capture": "ada_run/improve/beat_frequency_demo/before_after.png"
     }
   ]
 }

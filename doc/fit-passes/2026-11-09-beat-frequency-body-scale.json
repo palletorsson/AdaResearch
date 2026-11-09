@@ -1,0 +1,30 @@
+[
+ {
+  "map": "WaveFunctions_TrigWalkingPath",
+  "id": "f1_beat_frequency_demo_7_7",
+  "token": "beat_frequency_demo",
+  "set": {
+   "scale": 1,
+   "facing": 180,
+   "position": [
+    -2,
+    7.2
+   ]
+  },
+  "fit": {
+   "set": {
+    "row_width": 2.4,
+    "amplitude": 0.18,
+    "row_spacing": 0.5,
+    "sphere_radius": 0.028,
+    "sphere_count": 96
+   }
+  },
+  "strategies": [
+   "move",
+   "turn",
+   "reduce_repeats"
+  ],
+  "note": "A 0.5 m panel at 2x, facing the edge 2 m behind it (its text read mirrored from the floor): its own size - 2.4 m rows of 96 spheres 0.5 m apart, 18 cm amplitude, the text and controls following - at scale 1, turned to face into the floor, a metre east so its control panel clears the column at (-5, 7)."
+ }
+]

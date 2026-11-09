@@ -43,9 +43,13 @@ var _beat_label: Label3D
 var _freq_label: Label3D
 
 var _base_y: float = 0.9   # center height of the display
+## The text and the controls follow the rows: k is the row width against the 0.5 m it was drawn for, so a
+## placement that widens the rows to body scale (row_width, amplitude, row_spacing) keeps them readable (2026-11-09).
+var _k: float = 1.0
 
 
 func _ready() -> void:
+	_k = maxf(row_width / 0.5, 0.25)
 	_create_row_labels()
 	_create_spheres()
 	_create_beat_label()
@@ -142,11 +146,11 @@ func _animate_spheres() -> void:
 # ═════════════════════════════════════════════════════════════════════════
 
 func _create_row_labels() -> void:
-	var label_x := -row_width / 2.0 - 0.06
+	var label_x := -row_width / 2.0 - 0.06 * _k
 
 	var la := Label3D.new()
 	la.text = "A"
-	la.pixel_size = 0.0012
+	la.pixel_size = 0.0012 * _k
 	la.font_size = 14
 	la.modulate = color_a
 	la.position = Vector3(label_x, _base_y + row_spacing, 0)
@@ -155,7 +159,7 @@ func _create_row_labels() -> void:
 
 	var lb := Label3D.new()
 	lb.text = "B"
-	lb.pixel_size = 0.0012
+	lb.pixel_size = 0.0012 * _k
 	lb.font_size = 14
 	lb.modulate = color_b
 	lb.position = Vector3(label_x, _base_y, 0)
@@ -164,7 +168,7 @@ func _create_row_labels() -> void:
 
 	var ls := Label3D.new()
 	ls.text = "(A+B)/2"
-	ls.pixel_size = 0.0012
+	ls.pixel_size = 0.0012 * _k
 	ls.font_size = 14
 	ls.modulate = color_sum
 	ls.position = Vector3(label_x, _base_y - row_spacing, 0)
@@ -176,20 +180,20 @@ func _create_beat_label() -> void:
 	_beat_label = Label3D.new()
 	_beat_label.name = "BeatLabel"
 	_beat_label.text = ""
-	_beat_label.pixel_size = 0.0018
+	_beat_label.pixel_size = 0.0018 * _k
 	_beat_label.font_size = 16
 	_beat_label.modulate = color_sum
-	_beat_label.position = Vector3(0, _base_y + row_spacing + 0.15, 0)
+	_beat_label.position = Vector3(0, _base_y + row_spacing + amplitude + 0.09 * _k, 0)
 	_beat_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(_beat_label)
 
 	_freq_label = Label3D.new()
 	_freq_label.name = "FreqLabel"
 	_freq_label.text = ""
-	_freq_label.pixel_size = 0.001
+	_freq_label.pixel_size = 0.001 * _k
 	_freq_label.font_size = 12
 	_freq_label.modulate = Color(0.65, 0.65, 0.7)
-	_freq_label.position = Vector3(0, _base_y + row_spacing + 0.10, 0)
+	_freq_label.position = Vector3(0, _base_y + row_spacing + amplitude + 0.04 * _k, 0)
 	_freq_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(_freq_label)
 
@@ -214,7 +218,7 @@ func _create_controls() -> void:
 			{"type": "slider_h", "label": "FREQ B", "default": 0.444},
 		],
 	])
-	panel.position = Vector3(0.35, 0.8, 0.1)
+	panel.position = Vector3(row_width * 0.7, 0.8, 0.1)
 	panel.rotation_degrees = Vector3(-15, -20, 0)
 	add_child(panel)
 
