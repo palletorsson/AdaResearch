@@ -30174,9 +30174,16 @@
           ],
           "station": "SE",
           "facing": 0,
-          "height": 1.5,
-          "scale": 1,
-          "config": {}
+          "height": 1.6,
+          "scale": 2.5,
+          "config": {
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "A 0.8 m table-top instrument (its layout is in fixed constants): 2.5, so the rotating point, its shadow and the wave read from the floor - the circle's centre at 1.6 m, the sliders at hand height."
+            }
+          }
         },
         {
           "id": "f1_lissajous_curves_28_19",

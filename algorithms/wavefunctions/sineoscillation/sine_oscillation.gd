@@ -33,6 +33,8 @@ enum WaveType { SINE, COSINE, BOTH }
 @export var circle_color: Color = Color(0.6, 0.6, 0.6)
 @export var point_color: Color = Color(1.0, 0.2, 0.2)
 @export var projection_color: Color = Color(1.0, 1.0, 0.3, 0.7)
+## Lines as tubes this thick (m); 0 = the old one-pixel lines, which vanish beyond a metre (2026-11-09).
+@export_range(0.0, 0.05, 0.001) var line_radius: float = 0.004
 
 # Layout constants
 const CIRCLE_X := -0.25
@@ -41,6 +43,7 @@ const WAVE_X_END := 0.55
 const WAVE_SAMPLES := 200
 const CIRCLE_SEGMENTS := 64
 const TRAIL_LENGTH := 40
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
 
 # State
 var _angle: float = 0.0
@@ -148,35 +151,13 @@ func _setup_axes() -> void:
 
 func _draw_axes() -> void:
 	_axis_mesh.clear_surfaces()
-	_axis_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
 	var axis_col := Color(0.3, 0.3, 0.3, 0.5)
-
-	# Horizontal axis along wave
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(WAVE_X_START, 0, 0))
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(WAVE_X_END, 0, 0))
-
-	# Vertical axis at circle
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(CIRCLE_X, -amplitude * 1.3, 0))
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(CIRCLE_X, amplitude * 1.3, 0))
-
-	# Vertical axis at wave start
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(WAVE_X_START, -amplitude * 1.3, 0))
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(WAVE_X_START, amplitude * 1.3, 0))
-
-	# Horizontal zero line through circle
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(CIRCLE_X - amplitude * 1.3, 0, 0))
-	_axis_mesh.surface_set_color(axis_col)
-	_axis_mesh.surface_add_vertex(Vector3(CIRCLE_X + amplitude * 1.3, 0, 0))
-
-	_axis_mesh.surface_end()
+	var pairs := PackedVector3Array([
+		Vector3(WAVE_X_START, 0, 0), Vector3(WAVE_X_END, 0, 0),
+		Vector3(CIRCLE_X, -amplitude * 1.3, 0), Vector3(CIRCLE_X, amplitude * 1.3, 0),
+		Vector3(WAVE_X_START, -amplitude * 1.3, 0), Vector3(WAVE_X_START, amplitude * 1.3, 0),
+		Vector3(CIRCLE_X - amplitude * 1.3, 0, 0), Vector3(CIRCLE_X + amplitude * 1.3, 0, 0)])
+	_emit_segments(_axis_mesh, pairs, PackedColorArray([axis_col]), 0.5)
 
 
 # ---------------------------------------------------------------------------
@@ -195,21 +176,11 @@ func _setup_circle() -> void:
 
 func _draw_circle() -> void:
 	_circle_mesh.clear_surfaces()
-	_circle_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
-	for i in range(CIRCLE_SEGMENTS):
+	var pts := PackedVector3Array()
+	for i in range(CIRCLE_SEGMENTS + 1):
 		var a0 := TAU * float(i) / float(CIRCLE_SEGMENTS)
-		var a1 := TAU * float(i + 1) / float(CIRCLE_SEGMENTS)
-		var y0 := amplitude * sin(a0)
-		var z0 := amplitude * cos(a0)
-		var y1 := amplitude * sin(a1)
-		var z1 := amplitude * cos(a1)
-		_circle_mesh.surface_set_color(circle_color)
-		_circle_mesh.surface_add_vertex(Vector3(CIRCLE_X, y0, z0))
-		_circle_mesh.surface_set_color(circle_color)
-		_circle_mesh.surface_add_vertex(Vector3(CIRCLE_X, y1, z1))
-
-	_circle_mesh.surface_end()
+		pts.append(Vector3(CIRCLE_X, amplitude * sin(a0), amplitude * cos(a0)))
+	_emit_polyline(_circle_mesh, pts, PackedColorArray([circle_color]), 1.0)
 
 
 # ---------------------------------------------------------------------------
@@ -238,53 +209,22 @@ func _setup_waves() -> void:
 func _draw_waves() -> void:
 	var show_sine := wave_type == WaveType.SINE or wave_type == WaveType.BOTH
 	var show_cosine := wave_type == WaveType.COSINE or wave_type == WaveType.BOTH
-
-	# Sine wave
 	_sine_mesh.clear_surfaces()
-	if show_sine:
-		_sine_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-		var dx := (WAVE_X_END - WAVE_X_START) / float(WAVE_SAMPLES)
-		for i in range(WAVE_SAMPLES):
-			var x0 := WAVE_X_START + dx * float(i)
-			var x1 := WAVE_X_START + dx * float(i + 1)
-			var t0 := (x0 - WAVE_X_START) / (WAVE_X_END - WAVE_X_START)
-			var t1 := (x1 - WAVE_X_START) / (WAVE_X_END - WAVE_X_START)
-			var phase0 := _angle - t0 * TAU * frequency
-			var phase1 := _angle - t1 * TAU * frequency
-			var y0 := amplitude * sin(phase0)
-			var y1 := amplitude * sin(phase1)
-
-			# Color intensity fades along wave length
-			var fade0 := 1.0 - t0 * 0.4
-			var fade1 := 1.0 - t1 * 0.4
-			_sine_mesh.surface_set_color(sine_color * fade0)
-			_sine_mesh.surface_add_vertex(Vector3(x0, y0, 0))
-			_sine_mesh.surface_set_color(sine_color * fade1)
-			_sine_mesh.surface_add_vertex(Vector3(x1, y1, 0))
-		_sine_mesh.surface_end()
-
-	# Cosine wave
 	_cosine_mesh.clear_surfaces()
-	if show_cosine:
-		_cosine_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-		var dx := (WAVE_X_END - WAVE_X_START) / float(WAVE_SAMPLES)
-		for i in range(WAVE_SAMPLES):
-			var x0 := WAVE_X_START + dx * float(i)
-			var x1 := WAVE_X_START + dx * float(i + 1)
-			var t0 := (x0 - WAVE_X_START) / (WAVE_X_END - WAVE_X_START)
-			var t1 := (x1 - WAVE_X_START) / (WAVE_X_END - WAVE_X_START)
-			var phase0 := _angle - t0 * TAU * frequency
-			var phase1 := _angle - t1 * TAU * frequency
-			var y0 := amplitude * cos(phase0)
-			var y1 := amplitude * cos(phase1)
-
-			var fade0 := 1.0 - t0 * 0.4
-			var fade1 := 1.0 - t1 * 0.4
-			_cosine_mesh.surface_set_color(cosine_color * fade0)
-			_cosine_mesh.surface_add_vertex(Vector3(x0, y0, 0))
-			_cosine_mesh.surface_set_color(cosine_color * fade1)
-			_cosine_mesh.surface_add_vertex(Vector3(x1, y1, 0))
-		_cosine_mesh.surface_end()
+	for wave in [0, 1]:
+		if (wave == 0 and not show_sine) or (wave == 1 and not show_cosine):
+			continue
+		var pts := PackedVector3Array()
+		var cols := PackedColorArray()
+		var base: Color = sine_color if wave == 0 else cosine_color
+		for i in range(WAVE_SAMPLES + 1):
+			var t := float(i) / float(WAVE_SAMPLES)
+			var x := WAVE_X_START + (WAVE_X_END - WAVE_X_START) * t
+			var phase := _angle - t * TAU * frequency
+			var y := amplitude * (sin(phase) if wave == 0 else cos(phase))
+			pts.append(Vector3(x, y, 0))
+			cols.append(base * (1.0 - t * 0.4))   # fades along its length, as it always has
+		_emit_polyline(_sine_mesh if wave == 0 else _cosine_mesh, pts, cols, 1.0)
 
 
 # ---------------------------------------------------------------------------
@@ -304,40 +244,24 @@ func _setup_projection() -> void:
 
 func _draw_projection() -> void:
 	_projection_mesh.clear_surfaces()
-	_projection_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
 	var show_sine := wave_type == WaveType.SINE or wave_type == WaveType.BOTH
 	var show_cosine := wave_type == WaveType.COSINE or wave_type == WaveType.BOTH
-
 	var circle_y := amplitude * sin(_angle)
 	var circle_z := amplitude * cos(_angle)
 	var circle_pos := Vector3(CIRCLE_X, circle_y, circle_z)
-
+	var pairs := PackedVector3Array()
+	var cols := PackedColorArray()
 	if show_sine:
-		# Horizontal projection line from circle point to sine wave start
-		var sine_y := amplitude * sin(_angle)
-		var sine_pos := Vector3(WAVE_X_START, sine_y, 0)
-		_projection_mesh.surface_set_color(projection_color)
-		_projection_mesh.surface_add_vertex(circle_pos)
-		_projection_mesh.surface_set_color(projection_color)
-		_projection_mesh.surface_add_vertex(sine_pos)
-
-		# Horizontal guide from circle to Y axis
-		_projection_mesh.surface_set_color(Color(sine_color.r, sine_color.g, sine_color.b, 0.3))
-		_projection_mesh.surface_add_vertex(Vector3(CIRCLE_X, circle_y, 0))
-		_projection_mesh.surface_set_color(Color(sine_color.r, sine_color.g, sine_color.b, 0.3))
-		_projection_mesh.surface_add_vertex(sine_pos)
-
+		var sine_pos := Vector3(WAVE_X_START, amplitude * sin(_angle), 0)
+		pairs.append_array([circle_pos, sine_pos])      # the point's shadow, carried to the wave
+		cols.append(projection_color)
+		pairs.append_array([Vector3(CIRCLE_X, circle_y, 0), sine_pos])
+		cols.append(Color(sine_color.r, sine_color.g, sine_color.b, 0.3))
 	if show_cosine:
-		# Cosine = cos(angle) — corresponds to Z component on unit circle
 		var cos_y := amplitude * cos(_angle)
-		var cos_pos := Vector3(WAVE_X_START, cos_y, 0)
-		_projection_mesh.surface_set_color(Color(cosine_color.r, cosine_color.g, cosine_color.b, 0.5))
-		_projection_mesh.surface_add_vertex(Vector3(CIRCLE_X, cos_y, circle_z))
-		_projection_mesh.surface_set_color(Color(cosine_color.r, cosine_color.g, cosine_color.b, 0.5))
-		_projection_mesh.surface_add_vertex(cos_pos)
-
-	_projection_mesh.surface_end()
+		pairs.append_array([Vector3(CIRCLE_X, cos_y, circle_z), Vector3(WAVE_X_START, cos_y, 0)])
+		cols.append(Color(cosine_color.r, cosine_color.g, cosine_color.b, 0.5))
+	_emit_segments(_projection_mesh, pairs, cols, 0.7)
 
 
 # ---------------------------------------------------------------------------
@@ -357,26 +281,14 @@ func _draw_trail() -> void:
 	_trail_mesh.clear_surfaces()
 	if _trail_points.size() < 2:
 		return
-
-	_trail_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
+	var pts := PackedVector3Array()
+	var cols := PackedColorArray()
 	var count := _trail_points.size()
-	for i in range(count - 1):
-		var t := float(i) / float(count)
-		var alpha := t * 0.8  # Fade from transparent to opaque
-		var col := Color(point_color.r, point_color.g, point_color.b, alpha)
-
+	for i in range(count):
 		var a0 := _trail_points[i]
-		var a1 := _trail_points[i + 1]
-		var p0 := Vector3(CIRCLE_X, amplitude * sin(a0), amplitude * cos(a0))
-		var p1 := Vector3(CIRCLE_X, amplitude * sin(a1), amplitude * cos(a1))
-
-		_trail_mesh.surface_set_color(col)
-		_trail_mesh.surface_add_vertex(p0)
-		_trail_mesh.surface_set_color(col)
-		_trail_mesh.surface_add_vertex(p1)
-
-	_trail_mesh.surface_end()
+		pts.append(Vector3(CIRCLE_X, amplitude * sin(a0), amplitude * cos(a0)))
+		cols.append(Color(point_color.r, point_color.g, point_color.b, float(i) / float(count) * 0.8))   # fades in toward the point
+	_emit_polyline(_trail_mesh, pts, cols, 1.6)
 
 
 # ---------------------------------------------------------------------------
@@ -395,19 +307,37 @@ func _setup_radius_arm() -> void:
 
 func _draw_radius_arm() -> void:
 	_radius_mesh.clear_surfaces()
-	_radius_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
-	var center := Vector3(CIRCLE_X, 0, 0)
 	var tip := Vector3(CIRCLE_X, amplitude * sin(_angle), amplitude * cos(_angle))
-	var arm_color := Color(0.9, 0.9, 0.9, 0.7)
+	_emit_segments(_radius_mesh, PackedVector3Array([Vector3(CIRCLE_X, 0, 0), tip]), PackedColorArray([Color(0.9, 0.9, 0.9, 0.7)]), 1.0)
 
-	_radius_mesh.surface_set_color(arm_color)
-	_radius_mesh.surface_add_vertex(center)
-	_radius_mesh.surface_set_color(arm_color)
-	_radius_mesh.surface_add_vertex(tip)
 
-	_radius_mesh.surface_end()
+## Every line here goes through one of these two: tubes line_radius thick (times `weight`), or with line_radius 0
+## the old one-pixel PRIMITIVE_LINES. A hairline circle and a hairline wave are invisible beyond a metre.
+func _emit_polyline(im: ImmediateMesh, pts: PackedVector3Array, cols: PackedColorArray, weight: float) -> void:
+	if pts.size() < 2:
+		return
+	if line_radius > 0.0:
+		ThickLine.append_tube(im, pts, cols, line_radius * weight, 6)
+		return
+	var pairs := PackedVector3Array()
+	var pc := PackedColorArray()
+	for i in pts.size() - 1:
+		pairs.append_array([pts[i], pts[i + 1]])
+		pc.append(cols[mini(i, cols.size() - 1)])
+	_emit_segments(im, pairs, pc, weight)
 
+
+func _emit_segments(im: ImmediateMesh, pairs: PackedVector3Array, cols: PackedColorArray, weight: float) -> void:
+	if pairs.size() < 2:
+		return
+	if line_radius > 0.0:
+		ThickLine.append_segments(im, pairs, cols, line_radius * weight, 5)
+		return
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in pairs.size():
+		im.surface_set_color(cols[mini(i / 2, cols.size() - 1)])
+		im.surface_add_vertex(pairs[i])
+	im.surface_end()
 
 # ---------------------------------------------------------------------------
 # Marker spheres (circle point, sine point, cosine point)

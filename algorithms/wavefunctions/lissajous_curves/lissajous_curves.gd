@@ -87,6 +87,7 @@ extends Node3D
 @export var rotation_speed: float = 0.2
 
 const PHI: float = 1.6180339887498949
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
 
 # The allow-lists apply_grid_config validates a map token against. They must
 # stay identical to the @export_enum lists above.
@@ -110,8 +111,6 @@ var _last_ratio: String = ""
 var _last_evidence: String = ""
 var _built: bool = false
 var _tube_instance: MeshInstance3D
-var _tube_indices: PackedInt32Array = PackedInt32Array()
-var _tube_key: Vector2i = Vector2i(-1, -1)   # (points, sides) the cached index buffer was built for
 var _ratio_plate: Label3D
 
 func _ready() -> void:
@@ -183,7 +182,6 @@ func _setup_visualization() -> void:
 
 	# The tube: its own mesh, lit so it reads as a body in the room, glowing in its own colour
 	_tube_instance = null
-	_tube_key = Vector2i(-1, -1)
 	if tube:
 		_tube_instance = MeshInstance3D.new()
 		_tube_instance.name = "CurveTube"
@@ -305,59 +303,13 @@ func _update_curve_mesh() -> void:
 		_add_component_strip(true)
 		_add_component_strip(false)
 
-## The curve as a tube: a ring of tube_sides vertices round each sample, carried along the curve without twisting
-## (each ring's normal is the last one with its along-curve part taken out). The index buffer depends only on the
-## sample and side counts, so it is built once and reused while the phase drifts.
+## The curve as a tube (ThickLine: rings carried along the curve without twisting), coloured along its length.
 func _build_tube() -> void:
 	var n: int = curve_points.size()
-	var s: int = tube_sides
-	var r: float = maxf(line_width, 0.004)
-	var verts := PackedVector3Array(); verts.resize(n * s)
-	var norms := PackedVector3Array(); norms.resize(n * s)
-	var cols := PackedColorArray(); cols.resize(n * s)
-	var cosv := PackedFloat32Array(); var sinv := PackedFloat32Array()
-	cosv.resize(s); sinv.resize(s)
-	for k in s:
-		cosv[k] = cos(TAU * float(k) / float(s)); sinv[k] = sin(TAU * float(k) / float(s))
-	var t0: Vector3 = (curve_points[1] - curve_points[0]).normalized()
-	var nrm: Vector3 = t0.cross(Vector3.UP if absf(t0.dot(Vector3.UP)) < 0.9 else Vector3.RIGHT).normalized()
+	var cols := PackedColorArray(); cols.resize(n)
 	for i in n:
-		var a: Vector3 = curve_points[maxi(i - 1, 0)]
-		var b: Vector3 = curve_points[mini(i + 1, n - 1)]
-		var tan: Vector3 = b - a
-		if tan.length_squared() > 1e-12:
-			tan = tan.normalized()
-			nrm = (nrm - tan * nrm.dot(tan))
-			if nrm.length_squared() < 1e-10:
-				nrm = tan.cross(Vector3.UP if absf(tan.dot(Vector3.UP)) < 0.9 else Vector3.RIGHT)
-			nrm = nrm.normalized()
-		var bin: Vector3 = tan.cross(nrm)
-		var col: Color = Color.from_hsv(float(i) / float(n), 0.95, 0.95) if rainbow_gradient else Color(0.3, 0.8, 1.0)
-		for k in s:
-			var d: Vector3 = nrm * cosv[k] + bin * sinv[k]
-			verts[i * s + k] = curve_points[i] + d * r
-			norms[i * s + k] = d
-			cols[i * s + k] = col
-	if _tube_key != Vector2i(n, s):
-		_tube_key = Vector2i(n, s)
-		_tube_indices = PackedInt32Array(); _tube_indices.resize((n - 1) * s * 6)
-		var w: int = 0
-		for i in n - 1:
-			for k in s:
-				var k2: int = (k + 1) % s
-				var p0: int = i * s + k; var p1: int = i * s + k2; var p2: int = (i + 1) * s + k2; var p3: int = (i + 1) * s + k
-				_tube_indices[w] = p0; _tube_indices[w + 1] = p1; _tube_indices[w + 2] = p2
-				_tube_indices[w + 3] = p0; _tube_indices[w + 4] = p2; _tube_indices[w + 5] = p3
-				w += 6
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = verts
-	arrays[Mesh.ARRAY_NORMAL] = norms
-	arrays[Mesh.ARRAY_COLOR] = cols
-	arrays[Mesh.ARRAY_INDEX] = _tube_indices
-	var mesh := ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	_tube_instance.mesh = mesh
+		cols[i] = Color.from_hsv(float(i) / float(n), 0.95, 0.95) if rainbow_gradient else Color(0.3, 0.8, 1.0)
+	_tube_instance.mesh = ThickLine.tube_mesh(curve_points, cols, maxf(line_width, 0.004), tube_sides)
 
 
 func _tube_shader() -> Shader:

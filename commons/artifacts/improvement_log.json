@@ -823,6 +823,19 @@
         "a ratio line above the figure: rational closes, irrational never does"
       ],
       "capture": "ada_run/improve/lissajous_curves/before_after.png (5 s via capture_tscn_shot --physics)"
+    },
+    {
+      "lookup_name": "sine_oscillation",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "code": [
+        "every line (circle, radius, the point's shadow carried to the wave, sine and cosine, the trail, the axes) a tube through the shared ThickLine helper; line_radius 0 keeps the old 1-px lines"
+      ],
+      "capture": "ada_run/improve/sine_oscillation/before_after.png",
+      "tower": "floor 75 at 2.5 (was 1: a 0.8 m table-top instrument)"
     }
   ]
 }
