@@ -10,9 +10,31 @@ extends RefCounted
 ##        ceiling  flat, >= 2 m2, its underside >= 2.2 m above the slab
 ##   "strip_parts": ["GroundPlane", "Walls/*"]  parts found by NAME (a node name, or a path glob below the artifact)
 ##   "keep_parts": [...]                        never stripped, whatever the shape says
+##   "set": {"num_layers": 5}                   the work's own exported settings, set before it builds (before_ready)
 ## A stripped part is not drawn (layers = 0: its children stay) and no longer collides (the shapes of the body it is,
 ## sits in or carries are disabled). Applied again a second later for works that build after _ready.
 const NAMES := ["fit_floor", "fit_walls", "fit_ceiling"]
+
+## Before the work builds: "set": {property: value} - the work's own exported settings (fewer layers, fewer feature
+## maps, a smaller grid: REDUCE REPEATS). Each value is converted to the property's own type first, because a typed
+## property refuses a value of the wrong type in silence; what could not be set is kept in meta fit_rejected.
+static func before_ready(artifact: Node, fit: Variant) -> void:
+	if not (fit is Dictionary) or not (fit as Dictionary).has("set"): return
+	var rejected := []
+	for key in (fit as Dictionary).set:
+		var name := str(key)
+		if not (name in artifact):
+			rejected.append(name); continue
+		var current: Variant = artifact.get(name)
+		var value: Variant = (fit as Dictionary).set[key]
+		match typeof(current):
+			TYPE_INT: value = int(value)
+			TYPE_FLOAT: value = float(value)
+			TYPE_BOOL: value = str(value).to_lower() in ["true", "1", "on", "yes"]
+			TYPE_STRING: value = str(value)
+		artifact.set(name, value)
+		if artifact.get(name) != value: rejected.append(name)
+	if not rejected.is_empty(): artifact.set_meta("fit_rejected", rejected)
 
 static func apply(mount: Node3D, artifact: Node3D, fit: Variant, config: Dictionary) -> void:
 	if not (fit is Dictionary): return

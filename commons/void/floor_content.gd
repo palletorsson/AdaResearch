@@ -556,6 +556,9 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		var terrain_anchor := Node3D.new()
 		terrain_anchor.name = "PerlinNoiseTerrain"
 		artifact.add_child(terrain_anchor)
+	if item.get("config", {}).has("fit"):
+		# the work's own settings before it builds (fit.set: reduce repeats, a smaller grid)
+		preload("res://commons/void/fit_strategies.gd").before_ready(artifact, item.config.fit)
 	mount.add_child(artifact)
 	if item.get("config", {}).has("platonic"):
 		# One look for a floor's primitives, or a study like the hall's solids; only placements carrying the key.

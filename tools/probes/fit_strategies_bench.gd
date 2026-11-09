@@ -43,6 +43,20 @@ func _run() -> void:
 	await process_frame
 	Fit.strip(mount, kept, {"strip": ["floor"], "keep_parts": ["Ground*"]})
 	check("keep_parts wins over shape", g2.get_child(0).layers != 0)
+	# fit.set before the work builds: typed values converted, unknown names reported
+	var src := GDScript.new()
+	src.source_code = "extends Node3D
+@export var num_layers: int = 10
+@export var spacing: float = 1.2
+@export var on: bool = true
+"
+	src.reload()
+	var work := Node3D.new(); work.set_script(src)
+	Fit.before_ready(work, {"set": {"num_layers": "5", "spacing": 1, "on": "false", "nonsense": 3}})
+	check("fit.set converts to the property's type (layers %s, spacing %s, on %s)" % [work.get("num_layers"), work.get("spacing"), work.get("on")],
+		work.get("num_layers") == 5 and is_equal_approx(work.get("spacing"), 1.0) and work.get("on") == false)
+	check("an unknown setting is reported, not silently dropped", work.get_meta("fit_rejected", []) == ["nonsense"])
+	work.free()
 	# the side slab
 	var slab: Node3D = load("res://commons/void/slab_extension.tscn").instantiate()
 	slab.set_meta("config_length", 14); slab.set_meta("config_depth", 12); slab.set_meta("config_drop", 6)
