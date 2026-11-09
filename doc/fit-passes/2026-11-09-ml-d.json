@@ -1,0 +1,7 @@
+[
+ {"map": "ML_Perception", "id": "f3_convolutional_neural_networks_cnns_vr_1_6", "token": "convolutional_neural_networks_cnns_vr", "set": {"height": 2.6}, "strategies": ["raise"], "note": "0.3 m still under the slab."},
+ {"map": "ML_Sequence_Memory", "id": "f1_transformers_vr_9_17", "token": "transformers_vr", "set": {"scale": 0.34}, "strategies": ["scale_area", "code_fix"],
+  "note": "1 m through the ceiling at 0.4: 0.34. Something of it still falls ~445 m although its tokens have no gravity - code case, open."},
+ {"map": "ML_Neural_Networks", "id": "f2_neural_networks_vr_2_8", "token": "neural_networks_vr", "strategies": ["code_fix"],
+  "note": "Inside the slab now, yet something still falls ~495 m - its throwable data particles have gravity; code case, open."}
+]

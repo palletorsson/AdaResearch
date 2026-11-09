@@ -30,10 +30,15 @@ def main():
     columns = [(x - cw, z - cw, x + cw, z + cw) for x in building["column_x"] for z in building["column_z"]]
     todo = [r for r in report["overflowing"] if r["fit"] == "move" and any(o.startswith("edge") for o in r["overflow"])]
     todo += [r for r in report.get("displaced", []) if r.get("size") and r["size"][0] <= 2 * hw and r["size"][2] <= 2 * hd]
+    maps = next((a.split("=", 1)[1].split(",") for a in sys.argv if a.startswith("--maps=")), None)
+    if maps: todo = [r for r in todo if r["map"] in maps]
     proposals, stuck = [], []
+    moved_boxes = {}   # (floor, id) -> box after an accepted move: later works on the floor avoid where it now goes
+    # the biggest first: they have the fewest places to go
+    todo.sort(key=lambda r: -((r.get("size") or [0, 0, 0])[0] * (r.get("size") or [0, 0, 0])[2]))
     for r in todo:
         f = floors[str(r["floor"])]
-        works = {w["id"]: w for w in f["works"]}
+        works = {w["id"]: (dict(w, box=moved_boxes[(r["floor"], w["id"])]) if (r["floor"], w["id"]) in moved_boxes else w) for w in f["works"]}
         me = works.get(r["id"])
         if not me or not me.get("box"):
             continue
@@ -42,6 +47,18 @@ def main():
         others = [w["box"] for k, w in works.items() if k != r["id"] and w.get("box") and None not in w["box"]
                   and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40 and (w["box"][5] - w["box"][2]) < 16]
         others = [(b[0], b[2], b[3], b[5]) for b in others]
+        # a side slab is floor too: its box (less its tangled beams' spread) joins the slab
+        slabs = [(w["box"][0] + .05, w["box"][2], w["box"][3] - .05, w["box"][5]) for w in f["works"]
+                 if w.get("token") == "void_slab_extension" and w.get("box")]
+        def on_floor(rect):
+            xs = [rect[0] + (rect[2] - rect[0]) * i / 6 for i in range(7)]
+            zs = [rect[1] + (rect[3] - rect[1]) * j / 6 for j in range(7)]
+            for x in xs:
+                for z in zs:
+                    if -hw + MARGIN <= x <= hw - MARGIN and -hd + MARGIN <= z <= hd - MARGIN: continue
+                    if any(s[0] + MARGIN <= x <= s[2] - MARGIN and s[1] <= z <= s[3] - MARGIN for s in slabs): continue
+                    return False
+            return True
         best = None
         for turn in (0, 90):
             # the box about the mount: a quarter turn swaps its offsets
@@ -56,7 +73,7 @@ def main():
                             continue
                         nx, nz = round(px + dx2 * .5, 2), round(pz + dz2 * .5, 2)
                         rect = (nx + ox0, nz + oz0, nx + ox1, nz + oz1)
-                        if rect[0] < -hw + MARGIN or rect[2] > hw - MARGIN or rect[1] < -hd + MARGIN or rect[3] > hd - MARGIN:
+                        if not on_floor(rect):
                             continue
                         if any(rects_overlap(rect, s, 0.0) for s in shafts) or any(rects_overlap(rect, c, 0.0) for c in columns):
                             continue
@@ -73,6 +90,10 @@ def main():
                "why": r.get("displaced") or "; ".join(r["overflow"]), "size": r.get("size"), "from": [px, pz]}
         if best:
             row.update({"to": [best[1], best[2]], "turn": best[3], "moved_m": round(best[0] - (1.0 if best[3] else 0), 2)})
+            bx0, bz0, bx1, bz1 = x0 - px, z0 - pz, x1 - px, z1 - pz
+            if best[3]: bx0, bz0, bx1, bz1 = bz0, -bx1, bz1, -bx0
+            y0, y1 = me["box"][1], me["box"][4]
+            moved_boxes[(r["floor"], r["id"])] = [best[1] + bx0, y0, best[2] + bz0, best[1] + bx1, y1, best[2] + bz1]
             proposals.append(row)
         else:
             stuck.append(row)

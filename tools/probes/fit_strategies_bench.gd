@@ -36,6 +36,12 @@ func _run() -> void:
 	check("the ceiling is kept when not asked", lid.get_child(0).layers != 0)
 	check("the receiver in the middle is kept", sofa.get_child(0).layers != 0 and not (sofa.get_child(1) as CollisionShape3D).disabled)
 	check("a small flat plate is not a floor", label.get_child(0).layers != 0)
+	var shaded := body_box(art, "ShaderFloor", Vector3(18, .016, 13), Vector3(0, .02, 0))
+	var sm := ShaderMaterial.new(); sm.shader = Shader.new(); sm.shader.code = "shader_type spatial; void fragment(){ ALBEDO = vec3(1.0); }"
+	(shaded.get_child(0) as MeshInstance3D).material_override = sm
+	await process_frame
+	Fit.strip(mount, art, {"strip": ["floor"]})
+	check("a floor that wears a shader is kept (it is the idea)", shaded.get_child(0).layers != 0)
 	var named := Fit.strip(mount, art, {"strip_parts": ["Lid*"]})
 	check("strip by name", lid.get_child(0).layers == 0 and named.size() == 1)
 	var kept := Node3D.new(); mount.add_child(kept)
@@ -49,12 +55,14 @@ func _run() -> void:
 @export var num_layers: int = 10
 @export var spacing: float = 1.2
 @export var on: bool = true
+@export var filters: Array[int] = [16, 32, 64]
 "
 	src.reload()
 	var work := Node3D.new(); work.set_script(src)
-	Fit.before_ready(work, {"set": {"num_layers": "5", "spacing": 1, "on": "false", "nonsense": 3}})
+	Fit.before_ready(work, {"set": {"num_layers": "5", "spacing": 1, "on": "false", "nonsense": 3, "filters": [4.0, 8, "8"]}})
 	check("fit.set converts to the property's type (layers %s, spacing %s, on %s)" % [work.get("num_layers"), work.get("spacing"), work.get("on")],
 		work.get("num_layers") == 5 and is_equal_approx(work.get("spacing"), 1.0) and work.get("on") == false)
+	check("a typed array is rebuilt with its element type (%s)" % str(work.get("filters")), work.get("filters") == [4, 8, 8] and (work.get("filters") as Array).is_typed())
 	check("an unknown setting is reported, not silently dropped", work.get_meta("fit_rejected", []) == ["nonsense"])
 	work.free()
 	# the side slab

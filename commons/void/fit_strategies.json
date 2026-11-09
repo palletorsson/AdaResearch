@@ -1,0 +1,467 @@
+{
+  "_doc": "How a work that does not fit the Void tower is made to fit (Palle, 2026-11-09: 'we can build a catalog of strategies that make it easier to fit the work ... In the end it is about conveying an idea'). AUTHORED: strategies are edited by hand; cases are appended by tools/void_fit.py record after each work is fitted and re-measured (tools/void_size_survey.py). A placement that uses a strategy carries config.fit {strategies: [...], strip, strip_parts, keep_parts, set, note} - the tower records what was done, this file what was learned.",
+  "strategies": [
+    {
+      "id": "move",
+      "name": "Move it on its own floor",
+      "status": "tool",
+      "when": "Its footprint fits the slab (42 x 18 m) and its height the storey, it just stands past an edge or over nothing.",
+      "how": "python tools/void_fit_pass.py (nearest free spot: on the slab or a side slab, off the shafts, round no column, clear of every other work); edit position.",
+      "cost": "Order and route are not in the search; check the floor's arrangement (/api/spine-roles)."
+    },
+    {
+      "id": "turn",
+      "name": "A quarter turn",
+      "status": "tool",
+      "when": "A long work fits along the floor but not across it.",
+      "how": "facing +90 (the fit pass tries it).",
+      "cost": "Labels and approach side change."
+    },
+    {
+      "id": "strip_floor",
+      "name": "Remove its own floor",
+      "status": "key",
+      "says": "Many works have a floor and walls of their own and they have to be removed.",
+      "when": "The work brings a ground plane, grid or stage floor bigger than what it shows.",
+      "how": "config.fit.strip: [\"floor\"] (flat, at the base, >= 25 % of the work) or strip_parts by name.",
+      "cost": "Bodies that rolled or walked on its floor now use the tower slab: inside the building only."
+    },
+    {
+      "id": "strip_walls",
+      "name": "Remove its own walls",
+      "status": "key",
+      "when": "Backdrops, room walls, frames around the idea.",
+      "how": "config.fit.strip: [\"walls\"] (upright, thin, on its perimeter).",
+      "cost": "If a wall is needed, use tower_walls or the playground."
+    },
+    {
+      "id": "strip_ceiling",
+      "name": "Remove its own ceiling",
+      "status": "key",
+      "when": "A lid or canopy that pushes it through the slab above.",
+      "how": "config.fit.strip: [\"ceiling\"]."
+    },
+    {
+      "id": "tower_walls",
+      "name": "Tower elements as walls",
+      "status": "key",
+      "says": "In many cases if a wall is needed we can use tower elements or the playground.",
+      "when": "The idea needs a wall, a backdrop or a corner after its own were stripped.",
+      "how": "The floor's construction cells (cube, deck, truss, wedge) in /lab-editor, or the building's columns and edge.",
+      "cost": "Hand placement per floor."
+    },
+    {
+      "id": "playground_setup",
+      "name": "Fit it into a playground setup",
+      "status": "pilot",
+      "says": "the shader should be fit into playground setups",
+      "when": "Shader and material works: a few receivers with a material, sliders, a label, inside a stage or parlour.",
+      "how": "Strip the stage (floor, walls); stand the receivers and controls on or in a slim scaffold playground (the Transformation floors' kit).",
+      "cost": "The scaffold playground system is not committed yet (2026-11-09)."
+    },
+    {
+      "id": "side_slab",
+      "name": "A side slab, at most 10 m out",
+      "status": "key",
+      "says": "We can have an extra slab on the side but then I do not want that to be more than like ten meters out and then I want tangled support beams to the floor under. We can let the slab contract and expand, 10 meters per floor.",
+      "when": "A work or a field that needs more depth than 18 m, or room beside a full floor.",
+      "how": "Place void_slab_extension on the building edge facing out: config length (2-42), depth (1-10).",
+      "cost": "It reads as architecture: use it where the idea needs the room."
+    },
+    {
+      "id": "raise",
+      "name": "Raise it onto the slab",
+      "status": "key",
+      "when": "It was built on a museum stage: its parts sit below its origin and go down through the slab (and bodies fall).",
+      "how": "placement height = the depth it reaches below the slab.",
+      "cost": "None when its top still fits."
+    },
+    {
+      "id": "scale_area",
+      "name": "Scale an area work",
+      "status": "key",
+      "says": "Sometimes it can work to scale the area artifact.",
+      "when": "Fields, landscapes, diagrams - works looked at or walked round, not walked through at body scale.",
+      "how": "placement scale.",
+      "cost": "Never for works whose lesson is the body's size (passages, Drink Me, approach works)."
+    },
+    {
+      "id": "reduce_repeats",
+      "name": "Fewer of the same element",
+      "status": "key",
+      "says": "sometimes we can reduce the artifact if it consists of many of the same element.",
+      "when": "Layers, feature maps, rows, copies: the idea survives with fewer.",
+      "how": "config.fit.set: the work's own exported count (num_layers, feature_map_count, grid_size, ...).",
+      "cost": "Check the count still carries the idea (three of a kind still reads as a series; one does not)."
+    },
+    {
+      "id": "distribute",
+      "name": "Distribute it across the floor",
+      "status": "manual",
+      "says": "sometimes we might be able to convey the meaning of the artifact by distributing across the floor in another way.",
+      "when": "A work made of separable stations or panels that stood together in a hall.",
+      "how": "Several placements of its parts, or the floor's own route through them.",
+      "cost": "Per work."
+    },
+    {
+      "id": "shaft_rise",
+      "name": "Rise through a shaft",
+      "status": "manual",
+      "when": "Too tall for the storey: stand it under a shaft opening so it rises into the floor above (the tower already does this).",
+      "how": "Position over shaft A or B on a floor whose shaft is open above.",
+      "cost": "The floor above must keep the opening clear."
+    },
+    {
+      "id": "taller_floor",
+      "name": "A taller floor",
+      "status": "tool",
+      "when": "Several tall works on one floor.",
+      "how": "python tools/insert_void_floor.py --storey 12 for a new floor; an existing floor's storey is a levels edit.",
+      "cost": "Every floor below drops; floor numbers do not change."
+    },
+    {
+      "id": "own_floor",
+      "name": "A floor of its own",
+      "status": "tool",
+      "when": "A space bigger than a floor (atria, landscapes, arenas): a room in its own right.",
+      "how": "tools/insert_void_floor.py; or an exterior extension like Drink Me.",
+      "cost": "Renumbers floors below."
+    },
+    {
+      "id": "portal",
+      "name": "A portal",
+      "status": "later",
+      "says": "Later in the spine we can use Godot's 3D portal.",
+      "when": "Later sequences: a space elsewhere, seen and entered through an opening.",
+      "how": "Not built yet."
+    },
+    {
+      "id": "code_fix",
+      "name": "Fix the work",
+      "status": "manual",
+      "when": "It is drawn far from its floor or its bodies fly off: world-coordinate meshes, physics blow-ups.",
+      "how": "Read its code.",
+      "cost": "Per work."
+    },
+    {
+      "id": "remove_duplicate",
+      "name": "Keep one",
+      "status": "manual",
+      "when": "The same work stands on two floors of the same sequence.",
+      "how": "Remove the second placement; say why.",
+      "cost": "Check which floor's idea it carries."
+    }
+  ],
+  "cases": [
+    {
+      "at": "2026-11-09",
+      "map": "ML_Evolution",
+      "id": "f1_evolved_creatures_2_2",
+      "token": "void_ml_evolved_creatures",
+      "strategies": [
+        "scale_area",
+        "side_slab"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-36.0, 0.3, 0.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 40 m field of evolved walkers (24 m at 0.6), drawn 36 m west of the building. At 0.35 it is 14 m: between the shafts, half on the floor and half on a side slab south."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Evolution",
+      "id": "side-slab-south",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "16 x 8 m south, tangled beams to the floor below."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Evolution",
+      "id": "f1_evolvingflowers_2_7",
+      "token": "evolvingflowers",
+      "strategies": [
+        "move",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: east 11.0 m, north 2.0 m (0 of 21 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "Its own 12 m ground plane goes; the flowers stand on the tower slab. | fit pass: drawn outside the building, box centre (25.9, 0.9, -5.0); moved 9.3 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Gradient_Landscape",
+      "id": "f2_evolved_creatures_9_8",
+      "token": "void_ml_evolved_creatures",
+      "strategies": [
+        "remove_duplicate"
+      ],
+      "before": "overflows: edge: west 35.0 m, north 11.0 m, south 11.0 m (0 of 24 samples past the slab have ground); floor: 0.4 m down through its own slab",
+      "after": "removed",
+      "verdict": "worked",
+      "note": "The same creature field stands on ML_Evolution, the floor above; 40 m here, drawn 36 m west of the building."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Classification",
+      "id": "f1_enhanced_kmeans_7_4",
+      "token": "enhanced_kmeans",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: edge: north 2.1 m (0 of 10 samples past the slab have ground); floor: 0.5 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "0.5 m below the slab. | fit pass: edge: north 2.1 m (0 of 10 samples past the slab have ground; moved 2.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Classification",
+      "id": "f1_svm_visualization_6_11",
+      "token": "svm_visualization",
+      "strategies": [
+        "move",
+        "raise",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: north 3.0 m (0 of 10 samples past the slab have ground); floor: 1.3 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "Built 1.3 m below its origin on a 6 m grid plane: raised onto the slab, the plane goes. | fit pass: edge: north 3.0 m (0 of 10 samples past the slab have ground; moved 8.1 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Classification",
+      "id": "f1_random_forest_visualization_10_12",
+      "token": "random_forest_visualization",
+      "strategies": [
+        "move",
+        "raise",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: south 5.0 m (2 of 10 samples past the slab have ground); floor: 2.4 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "2.4 m below the slab on a 12 m ground plane. | fit pass: edge: south 5.0 m (2 of 10 samples past the slab have ground; moved 7.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Neural_Networks",
+      "id": "f2_neural_network_visualization_2_3",
+      "token": "neural_network_visualization",
+      "strategies": [
+        "move",
+        "raise",
+        "turn"
+      ],
+      "before": "overflows: edge: west 0.9 m (0 of 5 samples past the slab have ground); floor: 2.9 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "2.9 m below the slab. | fit pass: edge: west 1.1 m (0 of 5 samples past the slab have ground); moved 3.2 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Neural_Networks",
+      "id": "f2_neural_networks_vr_2_8",
+      "token": "neural_networks_vr",
+      "strategies": [
+        "code_fix",
+        "move",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: south 1.4 m (1 of 5 samples past the slab have ground); floor: 663.3 m down through its own slab",
+      "after": "overflows: floor: 494.2 m down through its own slab",
+      "verdict": "partly",
+      "note": "Layers 2.7 m below the slab; something of it fell 660 m - likely bodies spawned under the slab. | Second try: raised 2.8 m at 0.6 it went through the slab above; at 0.45, raised 2.1 m. | Its throwable data particles have gravity; standing 0.8 m past the edge they fell off the building. Inward. | Inside the slab now, yet something still falls ~495 m - its throwable data particles have gravity; code case, open."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Neural_Networks",
+      "id": "f2_fine_tuning_vr_9_8",
+      "token": "fine_tuning_vr",
+      "strategies": [
+        "raise",
+        "reduce_repeats",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 2.9 m (0 of 10 samples past the slab have ground); ceiling: 6.0 m through the slab above (top 11.7, headroom 5.6); floor: 30.3 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "Ten layer discs stacked to 9.8 m: five layers, at 0.6. | Second try: five layers still reached 3 m down and 4.3 m up at 0.6; at 0.45, raised 2.3 m, it stands in the storey."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Perception",
+      "id": "f3_computer_vision_vr_3_3",
+      "token": "computer_vision_vr",
+      "strategies": [
+        "raise"
+      ],
+      "before": "overflows: floor: 1.2 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "1.2 m below the slab."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Perception",
+      "id": "f3_convolutional_neural_networks_cnns_vr_1_6",
+      "token": "convolutional_neural_networks_cnns_vr",
+      "strategies": [
+        "move",
+        "raise",
+        "reduce_repeats"
+      ],
+      "before": "overflows: edge: north 0.7 m (0 of 10 samples past the slab have ground); ceiling: 10.3 m through the slab above (top 16.0, headroom 5.6); floor: 16.0 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A wall of feature maps 30 m wide and 32 m tall: one feature map per layer on a 6 grid. | 16, 32 and 64 filters stacked four to a row made a column 56 m tall (33 m at 0.6), centred on its origin: 4, 8, 8 still grow layer by layer, two rows at most; layers 4 m apart; raised onto the slab. The first try set feature_map_count, which this script does not have (refused, reported). | 0.3 m still under the slab."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Sequence_Memory",
+      "id": "f1_transformers_vr_9_17",
+      "token": "transformers_vr",
+      "strategies": [
+        "code_fix",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: floor: 447.1 m down through its own slab",
+      "after": "overflows: ceiling: 0.3 m through the slab above (top 6.0, headroom 5.6); floor: 377.0 m down through its own slab",
+      "verdict": "partly",
+      "note": "Sequences 2.1 m below the slab; something of it fell 447 m. | 1 m through the ceiling at 0.4: 0.34. Something of it still falls ~445 m although its tokens have no gravity - code case, open."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Generative",
+      "id": "f2_generative_adversarial_networks_gans_vr_9_11",
+      "token": "generative_adversarial_networks_gans_vr",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: edge: north 1.7 m (0 of 5 samples past the slab have ground); floor: 1.0 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "1.0 m below the slab. | fit pass: edge: north 1.7 m (0 of 5 samples past the slab have ground); moved 4.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Synthesis",
+      "id": "f3_anomaly_detection_2_2",
+      "token": "anomaly_detection",
+      "strategies": [
+        "move",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: north 4.4 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 10.8 m ground at 2 m height: on the slab, the ground goes. | fit pass: edge: north 2.2 m (0 of 10 samples past the slab have ground; moved 6.1 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Synthesis",
+      "id": "f3_joint_learn_walk_6_2",
+      "token": "joint_learn_walk",
+      "strategies": [
+        "code_fix",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: west 3.0 m, east 3.0 m, north 7.0 m, south 23.0 m (0 of 19 samples past the slab have ground); ceiling: 1078.3 m through the slab above (top 1083.9, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 48 m grid and a 30 m floor at 2 m; the walker learns on the tower slab. One limb flew to 1 km: physics blow-up, watch it. | Reset put the core body at world (0,1,0) - the top of the tower - and the limbs stretched a kilometre to follow; fixed in joint_learn_walk.gd to its own frame."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Synthesis",
+      "id": "f3_explainable_ai_xai_vr_2_7",
+      "token": "explainable_ai_xai_vr",
+      "strategies": [
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 1.2 m (0 of 10 samples past the slab have ground); ceiling: 1.2 m through the slab above (top 6.8, headroom 5.6); floor: 2.8 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "17.6 m wide with a 9.6 m SHAP axis through both slabs: at 0.35 it is 10 m wide and stands within the storey."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Perception",
+      "id": "f3_vogue_timeline_14_6",
+      "token": "vogue_timeline",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 2.1 m (4 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 2.1 m (4 of 10 samples past the slab have ground; moved 12.7 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Gradient_Landscape",
+      "id": "f2_pca_visualization_5_5",
+      "token": "void_ml_pca",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "displaced: drawn outside the building, box centre (35.0, 2.1, 7.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (34.7, 2.3, 7.0); moved 19.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Evolution",
+      "id": "f1_gradient_descent_visualization_6_2",
+      "token": "gradient_descent_visualization",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 2.7 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 2.7 m (0 of 10 samples past the slab have ground; moved 3.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Gradient_Landscape",
+      "id": "f2_gradient_descent_visualization_3_3",
+      "token": "gradient_descent_visualization",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: east 2.6 m, north 3.7 m (0 of 19 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: east 2.6 m, north 3.7 m (0 of 19 samples past the slab; moved 11.2 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "ML_Sequence_Memory",
+      "id": "f1_lstms_vr_9_7",
+      "token": "lstms_vr",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 3.0 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "Its 10 m box overlapped shaft A and something of it fell 14.6 m down the shaft: between the shafts instead."
+    }
+  ]
+}

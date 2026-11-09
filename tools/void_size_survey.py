@@ -36,6 +36,10 @@ def run(args):
             lo, hi = [int(x) for x in a.split("=", 1)[1].split("-")]
     chunks = int(next((a.split("=")[1] for a in args if a.startswith("--chunks=")), 6))
     floors = list(range(lo, hi + 1))
+    for a in args:
+        if a.startswith("--maps="):
+            want = a.split("=", 1)[1].split(",")
+            floors = [i for i, f in enumerate(rooms["floors"]) if f["map"] in want]
     tag = next((a.split("=", 1)[1] for a in args if a.startswith("--tag=")), "chunk")
     if "--missing" in args:
         # only floors no earlier chunk measured (a run that crashed part-way keeps what it wrote)
@@ -71,7 +75,8 @@ def run(args):
 
 def load():
     building, floors = None, {}
-    for d in sorted(OUT.glob("*-[0-9]*")):
+    # oldest first, so a floor measured again later (a fitting pass) is read from its newest run
+    for d in sorted(OUT.glob("*-[0-9]*"), key=lambda d: (d / "survey.json").stat().st_mtime if (d / "survey.json").exists() else 0):
         p = d / "survey.json"
         if not p.exists():
             continue

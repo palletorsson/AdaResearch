@@ -42804,27 +42804,42 @@
           "id": "f1_evolved_creatures_2_2",
           "artifact": "void_ml_evolved_creatures",
           "position": [
-            -36,
-            0
+            0,
+            9.5
           ],
           "station": "SW",
           "height": 0.025,
           "facing": 0,
-          "scale": 0.6,
-          "config": {}
+          "scale": 0.35,
+          "config": {
+            "fit": {
+              "strategies": [
+                "scale_area",
+                "side_slab"
+              ],
+              "note": "A 40 m field of evolved walkers (24 m at 0.6), drawn 36 m west of the building. At 0.35 it is 14 m: between the shafts, half on the floor and half on a side slab south."
+            }
+          }
         },
         {
           "id": "f1_gradient_descent_visualization_6_2",
           "artifact": "gradient_descent_visualization",
           "position": [
-            0,
-            -9
+            0.0,
+            -6.0
           ],
           "station": "NE",
           "height": 0.552,
           "facing": 0,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.7 m (0 of 10 samples past the slab have ground; moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f1_non_teleological_evolution_6_3",
@@ -42843,14 +42858,25 @@
           "id": "f1_evolvingflowers_2_7",
           "artifact": "evolvingflowers",
           "position": [
-            26,
-            -5
+            17.0,
+            -2.5
           ],
           "station": "NE",
           "height": 0.02,
           "facing": 0,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strip": [
+                "floor"
+              ],
+              "strategies": [
+                "move",
+                "strip_floor"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (25.9, 0.9, -5.0); moved 9.3 m"
+            }
+          }
         },
         {
           "id": "f1_science_screen_8_9",
@@ -42865,6 +42891,29 @@
           "scale": 1,
           "config": {
             "mode": "scatter"
+          }
+        },
+        {
+          "id": "side-slab-south",
+          "artifact": "void_slab_extension",
+          "station": "SE",
+          "position": [
+            0,
+            9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "length": 16,
+            "depth": 8,
+            "seed": 179,
+            "editor_label": "Side slab / room for the evolved creatures' field (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -42883,28 +42932,42 @@
           "id": "f2_gradient_descent_visualization_3_3",
           "artifact": "gradient_descent_visualization",
           "position": [
-            21,
-            -10
+            10.5,
+            -6.0
           ],
           "station": "NE",
           "height": 0.552,
           "facing": 0,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: east 2.6 m, north 3.7 m (0 of 19 samples past the slab; moved 11.2 m"
+            }
+          }
         },
         {
           "id": "f2_pca_visualization_5_5",
           "artifact": "void_ml_pca",
           "position": [
-            35,
-            7
+            17.0,
+            1.0
           ],
           "station": "SE",
           "height": 2.4,
-          "facing": 0,
+          "facing": 90.0,
           "scale": 0.6,
           "config": {
-            "desktop_ui": "off"
+            "desktop_ui": "off",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (34.7, 2.3, 7.0); moved 19.0 m"
+            }
           }
         },
         {
@@ -42937,19 +43000,6 @@
           "config": {
             "plinth": "1.0"
           }
-        },
-        {
-          "id": "f2_evolved_creatures_9_8",
-          "artifact": "void_ml_evolved_creatures",
-          "position": [
-            -36,
-            0
-          ],
-          "station": "SW",
-          "height": 0.025,
-          "facing": 0,
-          "scale": 1,
-          "config": {}
         }
       ],
       "props": [],
@@ -42968,15 +43018,22 @@
           "artifact": "enhanced_kmeans",
           "station": "NW",
           "position": [
-            -10,
-            -9
+            -10.0,
+            -6.5
           ],
           "facing": 180,
-          "height": 0.15,
+          "height": 0.65,
           "scale": 0.2,
           "config": {
             "natural_cluster_count": "3",
-            "lesson_controls": "on"
+            "lesson_controls": "on",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise"
+              ],
+              "note": "fit pass: edge: north 2.1 m (0 of 10 samples past the slab have ground; moved 2.5 m"
+            }
           }
         },
         {
@@ -42984,14 +43041,25 @@
           "artifact": "svm_visualization",
           "station": "NE",
           "position": [
-            10,
-            -9
+            16.0,
+            -3.5
           ],
           "facing": 180,
-          "height": 0,
+          "height": 1.3,
           "scale": 0.6,
           "config": {
-            "desktop_ui": "off"
+            "desktop_ui": "off",
+            "fit": {
+              "strip": [
+                "floor"
+              ],
+              "strategies": [
+                "move",
+                "raise",
+                "strip_floor"
+              ],
+              "note": "fit pass: edge: north 3.0 m (0 of 10 samples past the slab have ground; moved 8.1 m"
+            }
           }
         },
         {
@@ -42999,14 +43067,25 @@
           "artifact": "random_forest_visualization",
           "station": "SE",
           "position": [
-            0,
-            8
+            0.0,
+            0.5
           ],
           "facing": 180,
-          "height": 0,
+          "height": 2.4,
           "scale": 0.6,
           "config": {
-            "desktop_ui": "off"
+            "desktop_ui": "off",
+            "fit": {
+              "strip": [
+                "floor"
+              ],
+              "strategies": [
+                "move",
+                "raise",
+                "strip_floor"
+              ],
+              "note": "fit pass: edge: south 5.0 m (2 of 10 samples past the slab have ground; moved 7.5 m"
+            }
           }
         }
       ],
@@ -43026,13 +43105,22 @@
           "artifact": "neural_network_visualization",
           "station": "NW",
           "position": [
-            -14,
-            -8
+            -16.5,
+            -6.0
           ],
-          "facing": 180,
-          "height": 0,
+          "facing": 270.0,
+          "height": 2.9,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "turn"
+              ],
+              "note": "fit pass: edge: west 1.1 m (0 of 5 samples past the slab have ground); moved 3.2 m"
+            }
+          }
         },
         {
           "id": "f2_neural_networks_vr_2_8",
@@ -43040,12 +43128,22 @@
           "station": "SE",
           "position": [
             0,
-            8
+            4.5
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 0.6,
-          "config": {}
+          "height": 2.1,
+          "scale": 0.45,
+          "config": {
+            "fit": {
+              "strategies": [
+                "code_fix",
+                "move",
+                "raise",
+                "scale_area"
+              ],
+              "note": "Inside the slab now, yet something still falls ~495 m - its throwable data particles have gravity; code case, open."
+            }
+          }
         },
         {
           "id": "f2_fine_tuning_vr_9_8",
@@ -43056,9 +43154,21 @@
             -8
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 2.3,
+          "scale": 0.45,
+          "config": {
+            "fit": {
+              "set": {
+                "num_layers": 5
+              },
+              "strategies": [
+                "raise",
+                "reduce_repeats",
+                "scale_area"
+              ],
+              "note": "Second try: five layers still reached 3 m down and 4.3 m up at 0.6; at 0.45, raised 2.3 m, it stands in the storey."
+            }
+          }
         }
       ],
       "props": [],
@@ -43081,32 +43191,56 @@
             8
           ],
           "facing": 180,
-          "height": 0,
+          "height": 1.2,
           "scale": 0.28,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "raise"
+              ],
+              "note": "1.2 m below the slab."
+            }
+          }
         },
         {
           "id": "f3_convolutional_neural_networks_cnns_vr_1_6",
           "artifact": "convolutional_neural_networks_cnns_vr",
           "station": "SE",
           "position": [
-            -17,
-            -9
+            -12,
+            -6
           ],
           "facing": 0,
-          "height": 0,
+          "height": 2.6,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "set": {
+                "num_filters_per_layer": [
+                  4,
+                  8,
+                  8
+                ],
+                "layer_spacing": 4
+              },
+              "strategies": [
+                "move",
+                "raise",
+                "reduce_repeats"
+              ],
+              "note": "0.3 m still under the slab."
+            }
+          }
         },
         {
           "id": "f3_vogue_timeline_14_6",
           "artifact": "vogue_timeline",
           "station": "NE",
           "position": [
-            3,
-            8
+            1.0,
+            -4.5
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
           "config": {
@@ -43115,7 +43249,14 @@
             "learning_x": "11",
             "learning_z": "-1",
             "learning_yaw": "0",
-            "learning_bay": "1"
+            "learning_bay": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 2.1 m (4 of 10 samples past the slab have ground; moved 12.7 m"
+            }
           }
         }
       ],
@@ -43135,14 +43276,20 @@
           "artifact": "lstms_vr",
           "station": "NW",
           "position": [
-            -10,
-            -7
+            0,
+            -3.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "recurrent": "on"
+            "recurrent": "on",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Its 10 m box overlapped shaft A and something of it fell 14.6 m down the shaft: between the shafts instead."
+            }
           }
         },
         {
@@ -43154,9 +43301,18 @@
             7
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 0.4,
-          "config": {}
+          "height": 2.2,
+          "scale": 0.34,
+          "config": {
+            "fit": {
+              "strategies": [
+                "code_fix",
+                "raise",
+                "scale_area"
+              ],
+              "note": "1 m through the ceiling at 0.4: 0.34. Something of it still falls ~445 m although its tokens have no gravity - code case, open."
+            }
+          }
         }
       ],
       "props": [],
@@ -43175,13 +43331,21 @@
           "artifact": "generative_adversarial_networks_gans_vr",
           "station": "NE",
           "position": [
-            0,
-            -7
+            0.0,
+            -2.5
           ],
           "facing": 180,
-          "height": 0,
+          "height": 1.0,
           "scale": 0.65,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise"
+              ],
+              "note": "fit pass: edge: north 1.7 m (0 of 5 samples past the slab have ground); moved 4.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -43200,13 +43364,24 @@
           "artifact": "anomaly_detection",
           "station": "NW",
           "position": [
-            -13,
-            -8
+            -16.5,
+            -3.0
           ],
           "facing": 180,
-          "height": 2,
+          "height": 0,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strip": [
+                "floor"
+              ],
+              "strategies": [
+                "move",
+                "strip_floor"
+              ],
+              "note": "fit pass: edge: north 2.2 m (0 of 10 samples past the slab have ground; moved 6.1 m"
+            }
+          }
         },
         {
           "id": "f3_joint_learn_walk_6_2",
@@ -43217,9 +43392,21 @@
             8
           ],
           "facing": 180,
-          "height": 2,
+          "height": 0,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strip_parts": [
+                "Grid",
+                "Floor"
+              ],
+              "strategies": [
+                "code_fix",
+                "strip_floor"
+              ],
+              "note": "Reset put the core body at world (0,1,0) - the top of the tower - and the limbs stretched a kilometre to follow; fixed in joint_learn_walk.gd to its own frame."
+            }
+          }
         },
         {
           "id": "f3_explainable_ai_xai_vr_2_7",
@@ -43230,9 +43417,17 @@
             -8
           ],
           "facing": 180,
-          "height": 2,
-          "scale": 0.6,
-          "config": {}
+          "height": 2.8,
+          "scale": 0.35,
+          "config": {
+            "fit": {
+              "strategies": [
+                "raise",
+                "scale_area"
+              ],
+              "note": "17.6 m wide with a 9.6 m SHAP axis through both slabs: at 0.35 it is 10 m wide and stands within the storey."
+            }
+          }
         }
       ],
       "props": [],

@@ -156,6 +156,8 @@ func run() -> void:
 			var b := world_box(mount)
 			row["mounted"] = true
 			row["soft_bodies"] = mount.find_children("*", "SoftBody3D", true, false).size()
+			var art_node: Node = mount.get_node_or_null("Artifact")
+			if art_node != null and art_node.has_meta("fit_rejected"): row["fit_rejected"] = art_node.get_meta("fit_rejected")
 			row["extension"] = _extension(mount)
 			if b.size.length() < .01:
 				row["box"] = null

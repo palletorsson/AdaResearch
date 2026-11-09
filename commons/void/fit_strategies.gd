@@ -8,6 +8,7 @@ extends RefCounted
 ##        floor    flat (< 0.25 m), at the base (within 0.35 m of the slab), covering >= 2 m2 and >= 25 % of the work
 ##        walls    upright and thin (< 0.4 m), >= 1.8 m tall, >= 2.5 m long, standing on the work's perimeter
 ##        ceiling  flat, >= 2 m2, its underside >= 2.2 m above the slab
+##   A part that wears a ShaderMaterial is never stripped by shape: in a shader work the floor or wall IS the idea.
 ##   "strip_parts": ["GroundPlane", "Walls/*"]  parts found by NAME (a node name, or a path glob below the artifact)
 ##   "keep_parts": [...]                        never stripped, whatever the shape says
 ##   "set": {"num_layers": 5}                   the work's own exported settings, set before it builds (before_ready)
@@ -32,6 +33,12 @@ static func before_ready(artifact: Node, fit: Variant) -> void:
 			TYPE_FLOAT: value = float(value)
 			TYPE_BOOL: value = str(value).to_lower() in ["true", "1", "on", "yes"]
 			TYPE_STRING: value = str(value)
+			TYPE_ARRAY:
+				# a typed array (Array[int]) refuses a plain one: rebuild it with the element type
+				if (current as Array).is_typed() and value is Array:
+					var typed: Array = (current as Array).duplicate(); typed.clear()
+					for v in value: typed.append(type_convert(v, (current as Array).get_typed_builtin()))
+					value = typed
 		artifact.set(name, value)
 		if artifact.get(name) != value: rejected.append(name)
 	if not rejected.is_empty(): artifact.set_meta("fit_rejected", rejected)
@@ -71,6 +78,7 @@ static func strip(mount: Node3D, artifact: Node3D, settings: Dictionary) -> Dict
 		if _matches(g, path, keep): continue
 		var role := ""
 		if _matches(g, path, names): role = "named"
+		elif _wears_shader(g): continue   # a part that wears a shader is the idea, not the room: only by name
 		else:
 			var b: AABB = boxes[g]
 			var flat := b.size.y < .25
@@ -86,6 +94,15 @@ static func strip(mount: Node3D, artifact: Node3D, settings: Dictionary) -> Dict
 		_disable_collision(g)
 		done[path] = role
 	return done
+
+static func _wears_shader(g: MeshInstance3D) -> bool:
+	if g.material_override is ShaderMaterial: return true
+	for i in g.get_surface_override_material_count():
+		if g.get_surface_override_material(i) is ShaderMaterial: return true
+	if g.mesh != null:
+		for i in g.mesh.get_surface_count():
+			if g.mesh.surface_get_material(i) is ShaderMaterial: return true
+	return false
 
 static func _matches(g: Node, path: String, patterns: Array) -> bool:
 	for p in patterns:

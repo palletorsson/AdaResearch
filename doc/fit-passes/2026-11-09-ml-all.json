@@ -1,0 +1,246 @@
+[
+ {
+  "map": "ML_Evolution",
+  "id": "f1_evolved_creatures_2_2",
+  "token": "void_ml_evolved_creatures",
+  "strategies": [
+   "scale_area",
+   "side_slab"
+  ],
+  "note": "A 40 m field of evolved walkers (24 m at 0.6), drawn 36 m west of the building. At 0.35 it is 14 m: between the shafts, half on the floor and half on a side slab south.",
+  "remove": false
+ },
+ {
+  "map": "ML_Evolution",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "16 x 8 m south, tangled beams to the floor below.",
+  "remove": false
+ },
+ {
+  "map": "ML_Evolution",
+  "id": "f1_evolvingflowers_2_7",
+  "token": "evolvingflowers",
+  "strategies": [
+   "move",
+   "strip_floor"
+  ],
+  "note": "Its own 12 m ground plane goes; the flowers stand on the tower slab. | fit pass: drawn outside the building, box centre (25.9, 0.9, -5.0); moved 9.3 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Gradient_Landscape",
+  "id": "f2_evolved_creatures_9_8",
+  "token": "void_ml_evolved_creatures",
+  "strategies": [
+   "remove_duplicate"
+  ],
+  "note": "The same creature field stands on ML_Evolution, the floor above; 40 m here, drawn 36 m west of the building.",
+  "remove": true
+ },
+ {
+  "map": "ML_Classification",
+  "id": "f1_enhanced_kmeans_7_4",
+  "token": "enhanced_kmeans",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "0.5 m below the slab. | fit pass: edge: north 2.1 m (0 of 10 samples past the slab have ground; moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Classification",
+  "id": "f1_svm_visualization_6_11",
+  "token": "svm_visualization",
+  "strategies": [
+   "move",
+   "raise",
+   "strip_floor"
+  ],
+  "note": "Built 1.3 m below its origin on a 6 m grid plane: raised onto the slab, the plane goes. | fit pass: edge: north 3.0 m (0 of 10 samples past the slab have ground; moved 8.1 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Classification",
+  "id": "f1_random_forest_visualization_10_12",
+  "token": "random_forest_visualization",
+  "strategies": [
+   "move",
+   "raise",
+   "strip_floor"
+  ],
+  "note": "2.4 m below the slab on a 12 m ground plane. | fit pass: edge: south 5.0 m (2 of 10 samples past the slab have ground; moved 7.5 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Neural_Networks",
+  "id": "f2_neural_network_visualization_2_3",
+  "token": "neural_network_visualization",
+  "strategies": [
+   "move",
+   "raise",
+   "turn"
+  ],
+  "note": "2.9 m below the slab. | fit pass: edge: west 1.1 m (0 of 5 samples past the slab have ground); moved 3.2 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Neural_Networks",
+  "id": "f2_neural_networks_vr_2_8",
+  "token": "neural_networks_vr",
+  "strategies": [
+   "code_fix",
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "Layers 2.7 m below the slab; something of it fell 660 m - likely bodies spawned under the slab. | Second try: raised 2.8 m at 0.6 it went through the slab above; at 0.45, raised 2.1 m. | Its throwable data particles have gravity; standing 0.8 m past the edge they fell off the building. Inward. | Inside the slab now, yet something still falls ~495 m - its throwable data particles have gravity; code case, open.",
+  "remove": false
+ },
+ {
+  "map": "ML_Neural_Networks",
+  "id": "f2_fine_tuning_vr_9_8",
+  "token": "fine_tuning_vr",
+  "strategies": [
+   "raise",
+   "reduce_repeats",
+   "scale_area"
+  ],
+  "note": "Ten layer discs stacked to 9.8 m: five layers, at 0.6. | Second try: five layers still reached 3 m down and 4.3 m up at 0.6; at 0.45, raised 2.3 m, it stands in the storey.",
+  "remove": false
+ },
+ {
+  "map": "ML_Perception",
+  "id": "f3_computer_vision_vr_3_3",
+  "token": "computer_vision_vr",
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.2 m below the slab.",
+  "remove": false
+ },
+ {
+  "map": "ML_Perception",
+  "id": "f3_convolutional_neural_networks_cnns_vr_1_6",
+  "token": "convolutional_neural_networks_cnns_vr",
+  "strategies": [
+   "move",
+   "raise",
+   "reduce_repeats"
+  ],
+  "note": "A wall of feature maps 30 m wide and 32 m tall: one feature map per layer on a 6 grid. | 16, 32 and 64 filters stacked four to a row made a column 56 m tall (33 m at 0.6), centred on its origin: 4, 8, 8 still grow layer by layer, two rows at most; layers 4 m apart; raised onto the slab. The first try set feature_map_count, which this script does not have (refused, reported). | 0.3 m still under the slab.",
+  "remove": false
+ },
+ {
+  "map": "ML_Sequence_Memory",
+  "id": "f1_transformers_vr_9_17",
+  "token": "transformers_vr",
+  "strategies": [
+   "code_fix",
+   "raise",
+   "scale_area"
+  ],
+  "note": "Sequences 2.1 m below the slab; something of it fell 447 m. | 1 m through the ceiling at 0.4: 0.34. Something of it still falls ~445 m although its tokens have no gravity - code case, open.",
+  "remove": false
+ },
+ {
+  "map": "ML_Generative",
+  "id": "f2_generative_adversarial_networks_gans_vr_9_11",
+  "token": "generative_adversarial_networks_gans_vr",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "1.0 m below the slab. | fit pass: edge: north 1.7 m (0 of 5 samples past the slab have ground); moved 4.5 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Synthesis",
+  "id": "f3_anomaly_detection_2_2",
+  "token": "anomaly_detection",
+  "strategies": [
+   "move",
+   "strip_floor"
+  ],
+  "note": "A 10.8 m ground at 2 m height: on the slab, the ground goes. | fit pass: edge: north 2.2 m (0 of 10 samples past the slab have ground; moved 6.1 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Synthesis",
+  "id": "f3_joint_learn_walk_6_2",
+  "token": "joint_learn_walk",
+  "strategies": [
+   "code_fix",
+   "strip_floor"
+  ],
+  "note": "A 48 m grid and a 30 m floor at 2 m; the walker learns on the tower slab. One limb flew to 1 km: physics blow-up, watch it. | Reset put the core body at world (0,1,0) - the top of the tower - and the limbs stretched a kilometre to follow; fixed in joint_learn_walk.gd to its own frame.",
+  "remove": false
+ },
+ {
+  "map": "ML_Synthesis",
+  "id": "f3_explainable_ai_xai_vr_2_7",
+  "token": "explainable_ai_xai_vr",
+  "strategies": [
+   "raise",
+   "scale_area"
+  ],
+  "note": "17.6 m wide with a 9.6 m SHAP axis through both slabs: at 0.35 it is 10 m wide and stands within the storey.",
+  "remove": false
+ },
+ {
+  "map": "ML_Perception",
+  "id": "f3_vogue_timeline_14_6",
+  "token": "vogue_timeline",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 2.1 m (4 of 10 samples past the slab have ground; moved 12.7 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Gradient_Landscape",
+  "id": "f2_pca_visualization_5_5",
+  "token": "void_ml_pca",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (34.7, 2.3, 7.0); moved 19.0 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Evolution",
+  "id": "f1_gradient_descent_visualization_6_2",
+  "token": "gradient_descent_visualization",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.7 m (0 of 10 samples past the slab have ground; moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Gradient_Landscape",
+  "id": "f2_gradient_descent_visualization_3_3",
+  "token": "gradient_descent_visualization",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: east 2.6 m, north 3.7 m (0 of 19 samples past the slab; moved 11.2 m",
+  "remove": false
+ },
+ {
+  "map": "ML_Sequence_Memory",
+  "id": "f1_lstms_vr_9_7",
+  "token": "lstms_vr",
+  "strategies": [
+   "move"
+  ],
+  "note": "Its 10 m box overlapped shaft A and something of it fell 14.6 m down the shaft: between the shafts instead.",
+  "remove": false
+ }
+]

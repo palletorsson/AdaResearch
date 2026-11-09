@@ -653,7 +653,9 @@ func end_episode() -> void:
 	
 	# Move back to starting position
 	if is_instance_valid(core_body):
-		core_body.global_position = Vector3(0, 1, 0)
+		# its own start, not the world origin: in the Void the origin is the top of the tower, and the limbs
+		# stretched a kilometre through their joints to follow (2026-11-09)
+		core_body.global_position = global_transform * Vector3(0, 1, 0)
 	
 	# Reset learning variables
 	episode_reward = 0.0

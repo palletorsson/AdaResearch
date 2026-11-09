@@ -1,0 +1,10 @@
+[
+ {"map": "ML_Perception", "id": "f3_convolutional_neural_networks_cnns_vr_1_6", "token": "convolutional_neural_networks_cnns_vr",
+  "set": {"height": 2.2, "position": [-12, -6]}, "fit": {"set": {"num_filters_per_layer": [4, 8, 8], "layer_spacing": 4}},
+  "strategies": ["reduce_repeats", "raise", "move"],
+  "note": "16, 32 and 64 filters stacked four to a row made a column 56 m tall (33 m at 0.6), centred on its origin: 4, 8, 8 still grow layer by layer, two rows at most; layers 4 m apart; raised onto the slab. The first try set feature_map_count, which this script does not have (refused, reported)."},
+ {"map": "ML_Neural_Networks", "id": "f2_neural_networks_vr_2_8", "token": "neural_networks_vr", "set": {"position": [0, 4.5]},
+  "strategies": ["move"], "note": "Its throwable data particles have gravity; standing 0.8 m past the edge they fell off the building. Inward."},
+ {"map": "ML_Synthesis", "id": "f3_joint_learn_walk_6_2", "token": "joint_learn_walk", "strategies": ["code_fix"],
+  "note": "Reset put the core body at world (0,1,0) - the top of the tower - and the limbs stretched a kilometre to follow; fixed in joint_learn_walk.gd to its own frame."}
+]
