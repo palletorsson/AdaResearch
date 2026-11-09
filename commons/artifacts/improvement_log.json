@@ -938,6 +938,17 @@
       ],
       "tower": "floors 66, 70, 73 build for the first time: raised by their bore radius; 66 turned in place, 70 moved in from outside the north edge (it had no path: l_bend preset)",
       "capture": "ada_run/improve/BigPipeSystem/tower_after.png (before: nothing was built)"
+    },
+    {
+      "lookup_name": "strobe_lasers",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "each beam's transform built in its own frame (yaw * pitch * length scale, origin pushed out along its own direction): Transform3D.rotated/translated/scaled act in parent axes, so every beam pointed -Z, its thickness was stretched by the beam length, and the origin was scaled to L*L/2 - 112 m above the work at the scene's 15 m"
+      ],
+      "tower": "floor 47 (Ribbon_Patterns_03) now shows a 2.4 m fan where it showed nothing",
+      "capture": "ada_run/improve/strobe_lasers/before_after.png (before: empty frame)"
     }
   ]
 }

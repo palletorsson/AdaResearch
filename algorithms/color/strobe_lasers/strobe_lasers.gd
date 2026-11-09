@@ -117,20 +117,15 @@ func _update_beams() -> void:
 		angle_step = TAU / beam_count
 	
 	for i in range(beam_count):
-		var t = Transform3D()
-		# Fan rotation around Y
+		# Each beam in its OWN frame (fixed 2026-11-09). Transform3D.rotated / translated / scaled act in the PARENT's
+		# axes, so the old chain pitched every beam to the same -Z whatever its fan angle, lifted it L*L/2 instead of
+		# pushing it forward (112 m up at 15 m beams), and stretched its THICKNESS by L: one far slab, not a fan.
 		var angle = start_angle + (i * angle_step)
-		t = t.rotated(Vector3.UP, angle)
-		
-		# Rotate -90 on X so the cylinder (Y-up) points forward (-Z)
-		t = t.rotated(Vector3.RIGHT, -PI/2.0)
-		
-		# Translate forward (which is now local Y of the rotated cylinder)
-		t = t.translated(Vector3(0, beam_length / 2.0, 0))
-		
-		# Scale length (Y)
-		t = t.scaled(Vector3(1, beam_length, 1))
-		
+		var yaw := Basis(Vector3.UP, angle)
+		# the cylinder is Y-up: a -90 degree pitch lays it along -Z, the yaw fans it, the scale is its length
+		var b := yaw * Basis(Vector3.RIGHT, -PI / 2.0) * Basis.from_scale(Vector3(1, beam_length, 1))
+		var t := Transform3D(b, yaw * Vector3(0, 0, -beam_length / 2.0))
+
 		mm.set_instance_transform(i, t)
 
 func set_beam_count(val: int) -> void:
