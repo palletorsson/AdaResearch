@@ -1,0 +1,26 @@
+[
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_RotatingLaser_23_24",
+  "token": "RotatingLaser",
+  "set": {
+   "config": {
+    "pin": "1",
+    "plinth": "0",
+    "beam_length": "4",
+    "rig_height": "4",
+    "fit": {
+     "strategies": [
+      "reduce_repeats"
+     ],
+     "note": "beam_length 3 -> 2: at 3 its 10 x 8 m sweep still found no free spot on the crowded floor."
+    }
+   }
+  },
+  "strategies": [
+   "kept"
+  ],
+  "before": "overlaps: a tower column inside its sweep; the sweep 2 m past the north edge",
+  "note": "KEPT where the tiling curation left it: a laser rig mounted on the column at (14, -7), 4 m up (rig_height 4), beam_length 4 as the curation set it. Its bounds are a sweep of light crossing the column and the edge, not a body; 3 m and 2 m beams found no free spot on this floor either."
+ }
+]

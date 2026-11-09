@@ -22537,28 +22537,43 @@
           "artifact": "array_flight_lab",
           "station": "NE",
           "position": [
-            0,
-            20
+            17.0,
+            -0.15
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
-          "config": {}
+          "height": 0.05,
+          "scale": 0.45,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "A 12 m flight cube drawn 13-27 m south of the building: 0.45 (5.4 m) in the east bay."
+            }
+          }
         },
         {
           "id": "f1_open_structures_10_35",
           "artifact": "open_structures",
           "station": "NE",
           "position": [
-            0,
-            -2
+            0.0,
+            -0.48
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.93,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "14 x 13.5 m, 6 m tall, round two columns and 0.4 m through the ceiling: 0.93 (13 x 12.6 x 5.6 m) in the open middle between the shafts."
+            }
           }
         },
         {
@@ -22566,15 +22581,45 @@
           "artifact": "reference_suspension",
           "station": "NE",
           "position": [
-            0,
-            -23
+            0.0,
+            -13.58
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.84,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "Drawn 16-29 m north of the building (the restore's staging position): 0.84 (11.8 x 11.3 m, 5 m tall) wholly on a new north slab."
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 14,
+            "depth": 10,
+            "seed": 27,
+            "editor_label": "Side slab / room for the suspension study (14 x 13.5 m at 0.84) (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -22610,14 +22655,21 @@
           "artifact": "tiling_principles",
           "station": "NE",
           "position": [
-            0,
-            -2
+            -0.48,
+            -1.4
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "height": 0.07,
+          "scale": 0.6,
           "config": {
-            "mode": "floor"
+            "mode": "floor",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "13 x 21.7 m on an 18 m floor, round four columns: 0.6 (7.8 x 13 m) in the open middle between the shafts."
+            }
           }
         }
       ],
@@ -22637,14 +22689,21 @@
           "artifact": "tiling_principles",
           "station": "NE",
           "position": [
-            0,
-            -2
+            0.45,
+            -1.37
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "height": 0.08,
+          "scale": 0.59,
           "config": {
-            "mode": "walls"
+            "mode": "walls",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "16 x 21.9 m on an 18 m floor, round four columns and 0.7 m through the ceiling: 0.59 (9.5 x 12.9 m, 3.7 m tall) in the open middle."
+            }
           }
         },
         {
@@ -22652,15 +22711,21 @@
           "artifact": "wall_exception",
           "station": "NE",
           "position": [
-            10,
-            -12
+            9.0,
+            -7.0
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (11.5, 2.1, -11.5); moved 5.1 m"
+            }
           }
         }
       ],
@@ -22680,14 +22745,20 @@
           "artifact": "disco_controls",
           "station": "SE",
           "position": [
-            0,
-            9
+            0.0,
+            8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "mode": "mono"
+            "mode": "mono",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.6 m (0 of 15 samples past the slab have ground; moved 1.0 m"
+            }
           }
         },
         {
@@ -24204,13 +24275,20 @@
           "artifact": "pattern_studio_plate",
           "station": "SE",
           "position": [
-            4,
-            10
+            8,
+            6
           ],
           "facing": 180,
           "height": 0.85,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 15 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [4, 10] -> (8, 6)."
+            }
+          }
         },
         {
           "id": "f2_pattern_tile_plate_4_7",
@@ -24262,14 +24340,20 @@
           "artifact": "pattern_maker_station",
           "station": "SW",
           "position": [
-            -16,
-            9
+            -16.5,
+            4.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "lesson": "fixed_motif"
+            "lesson": "fixed_motif",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 14 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-16, 9] -> (-16.5, 4.5)."
+            }
           }
         },
         {
@@ -24383,12 +24467,19 @@
           "station": "SW",
           "position": [
             -3,
-            11
+            8.5
           ],
           "facing": 0,
           "height": 1.5,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 23 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-3, 11] -> (-3, 8.5)."
+            }
+          }
         },
         {
           "id": "f1_pattern_tile_4x4_4_4",
@@ -24396,39 +24487,59 @@
           "station": "SE",
           "position": [
             10,
-            9
+            7.5
           ],
           "facing": 180,
           "height": 1.35,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 22 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [10, 9] -> (10, 7.5)."
+            }
+          }
         },
         {
           "id": "f1_vr_tile_editor_mirror_9_5",
           "artifact": "vr_tile_editor_mirror",
           "station": "SE",
           "position": [
-            3,
-            7
+            1.5,
+            5.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
+          }
         },
         {
           "id": "f1_facade_grammar_demo_13_5",
           "artifact": "facade_grammar_demo",
           "station": "SW",
           "position": [
-            -4,
-            6
+            -9,
+            6.5
           ],
           "facing": 180,
           "height": 0.02,
           "scale": 0.28,
           "config": {
-            "embedded": "true"
+            "embedded": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 20 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-4, 6] -> (-9, 6.5)."
+            }
           }
         },
         {
@@ -24449,14 +24560,20 @@
           "artifact": "tiling_demo",
           "station": "SE",
           "position": [
-            16,
-            8
+            18,
+            6
           ],
           "facing": 180,
           "height": 0.75,
           "scale": 0.25,
           "config": {
-            "embedded": "true"
+            "embedded": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 21 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [16, 8] -> (18, 6)."
+            }
           }
         },
         {
@@ -24464,21 +24581,28 @@
           "artifact": "pattern_tile_plate",
           "station": "SE",
           "position": [
-            2,
-            1
+            -1.5,
+            5
           ],
           "facing": 180,
           "height": 0.51,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 17 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [2, 1] -> (-1.5, 5)."
+            }
+          }
         },
         {
           "id": "f1_pattern_tunnel_machine_24_11",
           "artifact": "pattern_tunnel_machine",
           "station": "NW",
           "position": [
-            -14,
-            -8
+            0,
+            -4
           ],
           "facing": 180,
           "height": 1,
@@ -24487,7 +24611,13 @@
             "lesson": "addresses",
             "tunnel_length": "6",
             "group_index": "0",
-            "platform_route": "true"
+            "platform_route": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 16 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-14, -8] -> (0, -4)."
+            }
           }
         },
         {
@@ -24521,13 +24651,20 @@
           "artifact": "grid_model",
           "station": "NW",
           "position": [
-            -3,
-            -5
+            -12,
+            7
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 18 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-3, -5] -> (-12, 7)."
+            }
+          }
         },
         {
           "id": "f1_panel_bridge_loom_6_16",
@@ -24535,25 +24672,39 @@
           "station": "NE",
           "position": [
             10,
-            -12
+            -6
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 24 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [10, -12] -> (10, -6)."
+            }
+          }
         },
         {
           "id": "f1_dark_sphere_8_16",
           "artifact": "dark_sphere",
           "station": "NE",
           "position": [
-            4,
-            -12
+            8,
+            -8
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 25 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [4, -12] -> (8, -8)."
+            }
+          }
         }
       ],
       "props": [],
@@ -24585,54 +24736,83 @@
           "artifact": "loom_escher_mirror",
           "station": "SE",
           "position": [
-            12,
-            9
+            12.0,
+            8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.4 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+            }
+          }
         },
         {
           "id": "f2_pattern_loom_10_5",
           "artifact": "pattern_loom",
           "station": "SE",
           "position": [
-            5,
-            9
+            8,
+            8
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 31 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [5, 9] -> (8, 8)."
+            }
+          }
         },
         {
           "id": "f2_loom_alhambra_p6m_16_5",
           "artifact": "loom_alhambra_p6m",
           "station": "SW",
           "position": [
-            -2,
-            9
+            -1.5,
+            7.5
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "fit pass: edge: south 0.4 m (3 of 5 samples past the slab have ground); moved 1.6 m"
+            }
+          }
         },
         {
           "id": "f2_wall_pattern_gallery_8_6",
           "artifact": "wall_pattern_gallery",
           "station": "NE",
           "position": [
-            9,
-            -8
+            8.5,
+            -6.5
           ],
           "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
             "surfaces": "walls",
-            "emission_strength": "0.25"
+            "emission_strength": "0.25",
+            "fit": {
+              "strategies": [
+                "kept",
+                "move"
+              ],
+              "note": "KEPT: a 15 m row of pattern cubes standing as the floor's north wall, the columns (+-5, -7) among its cubes - the tiling curation's placement ('works as a wall')."
+            }
           }
         },
         {
@@ -24655,13 +24835,20 @@
           "artifact": "mill_persian_p4",
           "station": "SE",
           "position": [
-            16,
-            6
+            17.2,
+            8.2
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 28 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [16, 6] -> (17.2, 8.2)."
+            }
+          }
         },
         {
           "id": "f2_mill_alhambra_p6m_10_12",
@@ -24681,14 +24868,20 @@
           "artifact": "jacquard_studio",
           "station": "SW",
           "position": [
-            -4,
+            -3.4,
             3
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 30 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-4, 3] -> (-3.4, 3)."
+            }
           }
         },
         {
@@ -24709,13 +24902,20 @@
           "artifact": "mill_escher_p4g",
           "station": "NE",
           "position": [
-            16,
-            -4
+            11,
+            -6
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 29 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [16, -4] -> (11, -6)."
+            }
+          }
         },
         {
           "id": "f2_kaleidoscope_21_18",
@@ -24723,13 +24923,19 @@
           "station": "NW",
           "position": [
             -16,
-            -11
+            -8.3
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "plinth": "0.90"
+            "plinth": "0.90",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 32 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-16, -11] -> (-16, -8.3)."
+            }
           }
         },
         {
@@ -24767,26 +24973,41 @@
           "artifact": "tile_meander_floor",
           "station": "NE",
           "position": [
-            0,
-            -9
+            -10,
+            -6
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 33 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [0, -9] -> (-10, -6)."
+            }
+          }
         },
         {
           "id": "f2_pattern_atlas_gallery_13_26",
           "artifact": "pattern_atlas_gallery",
           "station": "NE",
           "position": [
-            0,
-            -13
+            17.6,
+            0
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "Tiling curation row 27 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [0, -13] -> (17.6, 0) facing 90."
+            }
+          }
         }
       ],
       "props": [],
@@ -24811,7 +25032,20 @@
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "set": {
+                "wall_height": 5.6,
+                "dome_height": 0.5
+              },
+              "strategies": [
+                "code_fix",
+                "kept",
+                "reduce_repeats"
+              ],
+              "note": "KEPT with the building's four columns (+-5, +-7) inside its 14 m court: the tiling curation's reading - 'the price of a 14 m court on this slab ... bare concrete among the pattern reads as what it is. Leave.'"
+            }
+          }
         }
       ],
       "props": [],
@@ -24831,7 +25065,7 @@
           "station": "SE",
           "position": [
             10,
-            11
+            6.6
           ],
           "facing": 180,
           "height": 0,
@@ -24840,7 +25074,13 @@
             "pin": "1",
             "plinth": "0",
             "notation": "none",
-            "show_binary_table": "false"
+            "show_binary_table": "false",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 36 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [10, 11] -> (10, 6.6)."
+            }
           }
         },
         {
@@ -24848,8 +25088,8 @@
           "artifact": "grid_3d_4x4x4",
           "station": "SE",
           "position": [
-            5,
-            11
+            -1.5,
+            5.8
           ],
           "facing": 180,
           "height": 0,
@@ -24857,7 +25097,13 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "layer_pattern"
+            "lesson": "layer_pattern",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
           }
         },
         {
@@ -24865,15 +25111,21 @@
           "artifact": "column_3_z",
           "station": "SW",
           "position": [
-            -6,
-            11
+            -7.5,
+            7.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 39 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-6, 11] -> (-7.5, 7.5)."
+            }
           }
         },
         {
@@ -24881,7 +25133,7 @@
           "artifact": "row_3_x",
           "station": "SW",
           "position": [
-            -5.5,
+            -6.0,
             6.4
           ],
           "facing": 90,
@@ -24889,7 +25141,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
           }
         },
         {
@@ -24897,15 +25155,21 @@
           "artifact": "xyz_coordinates",
           "station": "SE",
           "position": [
-            7,
-            4
+            5.5,
+            1.5
           ],
           "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 38 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [7, 4] -> (5.5, 1.5)."
+            }
           }
         },
         {
@@ -25021,16 +25285,23 @@
           "artifact": "SimultaneousContrast",
           "station": "SE",
           "position": [
-            7,
-            9
+            -17,
+            0
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "context"
+            "lesson": "context",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "Tiling curation row 40 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [7, 9] -> (-17, 0) facing 90."
+            }
           }
         },
         {
@@ -25038,16 +25309,23 @@
           "artifact": "MetamerismLab",
           "station": "SW",
           "position": [
-            -7,
-            9
+            17,
+            0
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "carrier"
+            "lesson": "carrier",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "Tiling curation row 41 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-7, 9] -> (17, 0) facing 270."
+            }
           }
         },
         {
@@ -25136,15 +25414,21 @@
           "artifact": "prism",
           "station": "NW",
           "position": [
-            -7,
-            -6
+            -3,
+            -7
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 45 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-7, -6] -> (-3, -7)."
+            }
           }
         },
         {
@@ -25169,14 +25453,20 @@
           "station": "NE",
           "position": [
             7,
-            -11
+            -7
           ],
           "facing": 180,
           "height": 0,
           "scale": 0.45,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 42 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [7, -11] -> (7, -7)."
+            }
           }
         },
         {
@@ -25184,15 +25474,21 @@
           "artifact": "color_scanner",
           "station": "NW",
           "position": [
-            -7,
-            -11
+            -10,
+            -6.5
           ],
           "facing": 180,
           "height": 1.85,
           "scale": 0.45,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 43 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-7, -11] -> (-10, -6.5)."
+            }
           }
         },
         {
@@ -25200,15 +25496,21 @@
           "artifact": "grab_stick",
           "station": "NW",
           "position": [
-            -11,
-            -13
+            -19.5,
+            4
           ],
           "facing": 270,
           "height": 0,
           "scale": 0.4,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 44 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-11, -13] -> (-19.5, 4)."
+            }
           }
         }
       ],
@@ -25228,7 +25530,7 @@
           "artifact": "drag_catwalk",
           "position": [
             0,
-            -3
+            7
           ],
           "station": "NE",
           "facing": 180,
@@ -25236,31 +25538,44 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 46 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [0, -3] -> (0, 7)."
+            }
           }
         },
         {
           "id": "f1_fabric_shader_studio_6_5",
           "artifact": "fabric_shader_studio",
           "position": [
-            -9,
-            10
+            -4.5,
+            -1.5
           ],
           "station": "SW",
-          "facing": 180,
+          "facing": 270.0,
           "height": 0,
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move",
+                "turn"
+              ],
+              "note": "overlap check: a tower column inside it; moved 10.3 m"
+            }
           }
         },
         {
           "id": "f1_super_drag_mirror_12_7",
           "artifact": "super_drag_mirror",
           "position": [
-            0,
-            11
+            4.5,
+            8
           ],
           "station": "SE",
           "facing": 180,
@@ -25268,15 +25583,21 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 48 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [0, 11] -> (4.5, 8)."
+            }
           }
         },
         {
           "id": "f1_garment_cutting_table_6_12",
           "artifact": "garment_cutting_table",
           "position": [
-            12,
-            10
+            16,
+            4
           ],
           "station": "SE",
           "facing": 180,
@@ -25284,7 +25605,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 49 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [12, 10] -> (16, 4)."
+            }
           }
         },
         {
@@ -25307,8 +25634,8 @@
           "id": "f1_standalone_disco_23_18",
           "artifact": "standalone_disco",
           "position": [
-            -16,
-            6
+            -17,
+            2
           ],
           "station": "SW",
           "facing": 180,
@@ -25316,15 +25643,21 @@
           "scale": 0.7,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 54 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-16, 6] -> (-17, 2)."
+            }
           }
         },
         {
           "id": "f1_coloredlines_6_24",
           "artifact": "coloredlines",
           "position": [
-            11,
-            -8
+            9.0,
+            -7.5
           ],
           "station": "NE",
           "facing": 180,
@@ -25333,7 +25666,13 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "embedded": "true"
+            "embedded": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_glitchcolor_6_32; moved 2.1 m"
+            }
           }
         },
         {
@@ -25350,8 +25689,15 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "beam_length": "6",
-            "rig_height": "4"
+            "beam_length": "4",
+            "rig_height": "4",
+            "fit": {
+              "strategies": [
+                "kept",
+                "reduce_repeats"
+              ],
+              "note": "KEPT where the tiling curation left it: a laser rig mounted on the column at (14, -7), 4 m up (rig_height 4), beam_length 4 as the curation set it. Its bounds are a sweep of light crossing the column and the edge, not a body; 3 m and 2 m beams found no free spot on this floor either."
+            }
           }
         },
         {
@@ -25359,7 +25705,7 @@
           "artifact": "minimalglitch",
           "position": [
             -9,
-            -12
+            -8.3
           ],
           "station": "NW",
           "facing": 180,
@@ -25368,7 +25714,13 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "embedded": "true"
+            "embedded": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 50 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [-9, -12] -> (-9, -8.3)."
+            }
           }
         },
         {
@@ -25392,7 +25744,7 @@
           "artifact": "glitchcolor",
           "position": [
             9,
-            -12
+            -8.3
           ],
           "station": "NE",
           "facing": 180,
@@ -25400,7 +25752,13 @@
           "scale": 0.65,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 51 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [9, -12] -> (9, -8.3)."
+            }
           }
         },
         {
@@ -25456,8 +25814,8 @@
           "id": "f1_strobe_lasers_6_41",
           "artifact": "strobe_lasers",
           "position": [
-            -14,
-            -8
+            -14.0,
+            -5.0
           ],
           "station": "SW",
           "facing": 180,
@@ -25465,7 +25823,17 @@
           "scale": 0.4,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move",
+                "reduce_repeats"
+              ],
+              "note": "overlap check: stands in f1_textureglitch_23_28; moved 0.5 m",
+              "set": {
+                "beam_length": 2.4
+              }
+            }
           }
         },
         {
@@ -25505,7 +25873,7 @@
           "artifact": "laser_turret",
           "position": [
             17,
-            -14
+            -8.5
           ],
           "station": "NE",
           "facing": 180,
@@ -25514,7 +25882,13 @@
           "config": {
             "target_player": "false",
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Tiling curation row 53 (doc/book/iterations/2026-11-05-tiling-curation (claude-tiling, 5 Nov; floor numbers +1 since the Drink Me insert)): [17, -14] -> (17, -8.5)."
+            }
           }
         }
       ],
@@ -48033,60 +48407,88 @@
           "id": "f2_tt_2_1",
           "artifact": "tt",
           "position": [
-            4,
-            11
+            4.0,
+            8.0
           ],
           "station": "SE",
           "height": 1.4,
           "facing": 270,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (4.0, 1.4, 11.0); moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f2_excluded_class_visualizer_4_2",
           "artifact": "excluded_class_visualizer",
           "position": [
-            2,
-            10
+            2.5,
+            7.5
           ],
           "station": "SE",
           "height": 0,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (2.0, 0.1, 10.0); moved 2.5 m"
+            }
+          }
         },
         {
           "id": "f2_bias_from_inside_5_2",
           "artifact": "bias_from_inside",
           "position": [
-            1,
-            10
+            -2.0,
+            8.0
           ],
           "station": "SE",
           "height": 1.085,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 1.7 m (0 of 20 samples past the slab have ground; moved 3.6 m"
+            }
+          }
         },
         {
           "id": "f2_godel_statement_plaque_8_2",
           "artifact": "godel_statement_plaque",
           "position": [
-            -2,
-            10
+            -3.0,
+            8.5
           ],
           "station": "SW",
           "height": 1.3,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-2.0, 1.2, 10.1); moved 1.8 m"
+            }
+          }
         },
         {
           "id": "f2_synthesis_stand_1_3",
           "artifact": "synthesis_stand",
           "position": [
-            5,
-            9
+            6.5,
+            8.0
           ],
           "station": "SE",
           "height": 1.7,
@@ -48094,7 +48496,13 @@
           "scale": 1,
           "config": {
             "subject": "tt",
-            "mode": "hero"
+            "mode": "hero",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.8 m (2 of 10 samples past the slab have ground; moved 1.8 m"
+            }
           }
         },
         {
@@ -48159,40 +48567,61 @@
           "id": "f1_shannon_workbench_10_5",
           "artifact": "shannon_workbench",
           "position": [
-            5,
-            8
+            3.5,
+            8.0
           ],
           "station": "SE",
           "height": 0,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f1_superposition_display_4_6",
           "artifact": "superposition_display",
           "position": [
-            -4,
-            1
+            -5.5,
+            1.0
           ],
           "station": "SW",
           "height": 0.6,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_rhizome_vault_9_10; moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f1_schrodinger_box_8_6",
           "artifact": "schrodinger_box",
           "position": [
-            4,
-            1
+            5.0,
+            1.0
           ],
           "station": "SE",
           "height": 1,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_rhizome_vault_9_10; moved 1.0 m"
+            }
+          }
         },
         {
           "id": "f1_cap_theorem_walk_8_8",
@@ -48211,28 +48640,41 @@
           "id": "f1_tt_6_9",
           "artifact": "tt",
           "position": [
-            -5,
-            11
+            -5.0,
+            8.0
           ],
           "station": "SW",
           "height": 1.4,
           "facing": 270,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-5.0, 1.4, 11.0); moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f1_rhizome_vault_9_10",
           "artifact": "rhizome_vault",
           "position": [
-            0,
-            -8
+            -0.04,
+            -1.71
           ],
           "station": "NE",
           "height": 0,
           "facing": 0,
           "scale": 1,
           "config": {
-            "ground_top": "0"
+            "ground_top": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "9.8 x 9.4 m, 3.7 m past the north edge and round two columns: into the open middle; the small works there make way."
+            }
           }
         }
       ],
@@ -48251,8 +48693,8 @@
           "id": "f2_situated_readout_2_2",
           "artifact": "situated_readout",
           "position": [
-            3,
-            10
+            3.0,
+            8.0
           ],
           "station": "SE",
           "height": 0,
@@ -48262,15 +48704,21 @@
             "verdict": "NW",
             "interactive": "true",
             "address": "footnote",
-            "museum_yaw": 45
+            "museum_yaw": 45,
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (2.7, 0.8, 10.0); moved 2.0 m"
+            }
           }
         },
         {
           "id": "f2_situated_readout_7_2",
           "artifact": "situated_readout",
           "position": [
-            -2,
-            10
+            -2.0,
+            8.0
           ],
           "station": "SW",
           "height": 0,
@@ -48280,7 +48728,13 @@
             "verdict": "NE",
             "interactive": "true",
             "address": "footnote",
-            "museum_yaw": 45
+            "museum_yaw": 45,
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-2.0, 0.8, 9.7); moved 2.0 m"
+            }
           }
         },
         {
@@ -48352,7 +48806,7 @@
           "artifact": "museum_witnesses",
           "position": [
             0,
-            -7.25
+            0
           ],
           "station": "NE",
           "height": 0,
@@ -48360,7 +48814,14 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "kept",
+                "move"
+              ],
+              "note": "KEPT: its 14 x 12.5 m room plate stands inside the column rows; the columns its bounds still hold are its portable camera stands, which place themselves round their target, not the room."
+            }
           }
         }
       ],
@@ -48379,14 +48840,21 @@
           "id": "f1_the_fourth_limit_9_4",
           "artifact": "the_fourth_limit",
           "position": [
-            -3,
-            -6
+            -3.0,
+            -5.0
           ],
           "station": "NW",
           "height": 0,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
+          }
         },
         {
           "id": "f1_peer_production_tool_6_5",
@@ -48448,8 +48916,8 @@
           "id": "f2_rhizome_grower_4_2",
           "artifact": "rhizome_grower",
           "position": [
-            11,
-            10
+            11.0,
+            7.5
           ],
           "station": "SE",
           "height": 0,
@@ -48459,7 +48927,13 @@
             "interactive": "true",
             "spread": "0.85",
             "grow_period": "0.8",
-            "sample_seed": "47"
+            "sample_seed": "47",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 2.1 m (19 of 25 samples past the slab have groun; moved 2.5 m"
+            }
           }
         },
         {
@@ -48523,19 +48997,27 @@
           "artifact": "MolecularDesigner",
           "station": "NW",
           "position": [
-            -5,
-            -6
+            -4.7,
+            -1.36
           ],
-          "height": 0.025,
+          "height": 0,
           "facing": 0,
-          "scale": 2,
+          "scale": 1.0,
           "config": {
             "body_study": "true",
             "body_workshop": "true",
             "body_ragdoll": "true",
             "body_furniture": "true",
             "float_duration": "8",
-            "assemble_duration": "18"
+            "assemble_duration": "18",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "scale_area"
+              ],
+              "note": "Its body is a ragdoll: one run it sank 1.6 m through the slab, the next it stood 6 m tall, so a raise cannot be right for both. Back on the slab, at 1.0 (5.5 m standing)."
+            }
           }
         },
         {
@@ -48543,13 +49025,20 @@
           "artifact": "markov_blanket_room",
           "station": "NE",
           "position": [
-            10,
-            -8
+            10.0,
+            -6.0
           ],
           "height": 2.8,
           "facing": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 1.7 m (0 of 10 samples past the slab have ground; moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f1_boolean_neck_3_8",
@@ -48593,66 +49082,101 @@
           "id": "f2_tt_2_1",
           "artifact": "tt",
           "position": [
-            5,
-            11
+            5.0,
+            8.0
           ],
           "station": "SE",
           "height": 1.4,
           "facing": 270,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (5.0, 1.4, 11.0); moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f2_edge_ground_synthesis_5_2",
           "artifact": "edge_ground_synthesis",
           "position": [
-            2,
-            10
+            2.0,
+            8.0
           ],
           "station": "SE",
           "height": 0,
           "facing": 270,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (2.0, 0.7, 10.0); moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f2_bias_from_inside_8_2",
           "artifact": "bias_from_inside",
           "position": [
-            -1,
-            10
+            -1.0,
+            8.0
           ],
           "station": "SW",
           "height": 1.085,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 1.7 m (0 of 20 samples past the slab have ground; moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f2_qfep_formula_3d_11_2",
           "artifact": "qfep_formula_3d",
           "position": [
-            -4,
-            10
+            -4.0,
+            8.5
           ],
           "station": "SW",
           "height": 2,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-4.0, 2.0, 10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_florensky_sphere_2_5",
           "artifact": "florensky_sphere",
           "position": [
-            5,
-            7
+            5.0,
+            6.0
           ],
           "station": "SE",
           "height": 1.1,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
+          }
         },
         {
           "id": "f2_accountability_ledger_11_10",

@@ -1,0 +1,73 @@
+[
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_strobe_lasers_6_41",
+  "token": "strobe_lasers",
+  "set": {
+   "position": [
+    -14.0,
+    -5.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_textureglitch_23_28; moved 0.5 m",
+  "before": "overlaps: stands in f1_textureglitch_23_28 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SpeculativeComputation_Paraconsistent_Engineering",
+  "id": "f1_superposition_display_4_6",
+  "token": "superposition_display",
+  "set": {
+   "position": [
+    -5.5,
+    1.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_rhizome_vault_9_10; moved 1.5 m",
+  "before": "overlaps: stands in f1_rhizome_vault_9_10 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SpeculativeComputation_Paraconsistent_Engineering",
+  "id": "f1_schrodinger_box_8_6",
+  "token": "schrodinger_box",
+  "set": {
+   "position": [
+    5.0,
+    1.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_rhizome_vault_9_10; moved 1.0 m",
+  "before": "overlaps: stands in f1_rhizome_vault_9_10 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_RotatingLaser_23_24",
+  "token": "RotatingLaser",
+  "set": {
+   "config": {
+    "pin": "1",
+    "plinth": "0",
+    "beam_length": "2",
+    "rig_height": "4",
+    "fit": {
+     "strategies": [
+      "reduce_repeats"
+     ],
+     "note": "beam_length 4 -> 3: its 9.4 m sweep found no free spot on the crowded floor; at 3 m the fit pass places it."
+    }
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "note": "beam_length 3 -> 2: at 3 its 10 x 8 m sweep still found no free spot on the crowded floor."
+ }
+]

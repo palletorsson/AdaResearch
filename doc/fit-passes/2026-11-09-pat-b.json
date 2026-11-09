@@ -1,0 +1,54 @@
+[
+ {
+  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+  "id": "f1_MolecularDesigner_3_5",
+  "token": "MolecularDesigner",
+  "set": {
+   "position": [
+    -4.7,
+    -1.36
+   ],
+   "height": 1.61
+  },
+  "strategies": [
+   "raise",
+   "move"
+  ],
+  "note": "At 1.1 its body sat 1.6 m below the slab and 0.8 m over shaft A's opening: raised, and 1.5 m east of the opening."
+ },
+ {
+  "map": "SpeculativeComputation_Situated_Computation",
+  "id": "f2_museum_witnesses_11_20",
+  "token": "museum_witnesses",
+  "set": {
+   "position": [
+    0,
+    0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Its 14 x 12.5 m room stood centred 7.25 m north, so the plate ran 4.5 m past the north edge and round two columns: in the open middle, the plate inside the column rows. (Its measured 22 m depth includes portable camera stands placed round their target, not the room.)"
+ },
+ {
+  "map": "Pattern_Temple",
+  "id": "f3_pattern_temple_12_12",
+  "token": "pattern_temple",
+  "strategies": [
+   "kept"
+  ],
+  "before": "overlaps: four tower columns inside its 14 m court",
+  "note": "KEPT with the building's four columns (+-5, +-7) inside its 14 m court: the tiling curation's reading - 'the price of a 14 m court on this slab ... bare concrete among the pattern reads as what it is. Leave.'"
+ },
+ {
+  "map": "Symmetry_Seventeen",
+  "id": "f2_wall_pattern_gallery_8_6",
+  "token": "wall_pattern_gallery",
+  "strategies": [
+   "kept"
+  ],
+  "before": "overlaps: two tower columns in its row",
+  "note": "KEPT: a 15 m row of pattern cubes standing as the floor's north wall, the columns (+-5, -7) among its cubes - the tiling curation's placement ('works as a wall')."
+ }
+]

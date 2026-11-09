@@ -181,6 +181,7 @@ to run.
 | forces + fractals | 55 | 46 | 9 (museum wayfinding) | 0; the ball dropper's balls fall under the slab on some runs |
 | L-systems + boolean surfaces | 40 | 40 | 0 | 0; 4 side slabs; no work in another, no column through a work |
 | noise + wave functions | 57 | 55 | 0 | 0 of these; 2 barber pillars kept on the columns they dress; see below for what another session holds |
+| post-foundations crisis + array + tiling | 62 | 59 | 0 | 0; 3 kept on purpose (the Symmetry gallery's wall row, the column-mounted laser, the witnesses' room) |
 
 **What the L-systems and boolean pass taught:**
 - **The survey judges each work alone.** Two works standing in each other, or a tower column through a work, both read
@@ -261,3 +262,26 @@ column or a neighbour. Three passes (`doc/fit-passes/2026-11-09-noise-wave-a..c.
   - the Sky_Stairs math objects, round two columns
 - **Asked, not moved.** Two orbit spheres made in the tower float 15 and 24 m north of WaveFunctions_Intro
   (`sphere-a`, `sphere-b`). This may be deliberate.
+
+## Post-foundations crisis, array and tiling (2026-11-09, same day)
+
+22 floors (26-30, 39-47, 203-210). 62 works did not fit; six passes
+(`doc/fit-passes/2026-11-09-pat-a..f.json`) fitted 59 and kept 3.
+
+- **The tiling session's curation came first.** On 5 Nov the tiling session tested floors 38-46 in the tower and wrote
+  55 proposals judged for meaning (`doc/book/iterations/2026-11-05-tiling-curation`). Floor numbers are +1 since the
+  Drink Me insert. Its rows 14-33 and 36-55 went in as pass A. Row 35, option (a), gave `pattern_temple.gd` the
+  exports `wall_height` and `dome_height`: on floor 44, 5.6 m walls and a 0.5 m vault, so the dome is no longer a hill on
+  the floor above. Its own applied moves on Pattern_Foundry are still uncommitted and were held.
+- **Big rooms.** On Tutorial_3D, three 14 m rooms:
+  - one in the open middle at 0.93
+  - one on a new north slab at 0.84
+  - the 12 m flight cube at 0.45 in the east bay
+
+  The tiling-principles rooms (22 m deep) are at 0.6 in the open middle. The witnesses' room moved into the
+  middle; its measured depth was its portable camera stands.
+- **Kept, with notes:**
+  - the Temple's court, with four columns inside it
+  - the Symmetry gallery's wall row
+  - a laser rig mounted on its column (its bounds are a sweep of light)
+- **Held:** on the Array floor, the cone stands (another session's work, at Palle's word) stand under the array works.

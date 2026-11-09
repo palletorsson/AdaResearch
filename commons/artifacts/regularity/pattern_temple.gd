@@ -32,7 +32,13 @@ const SOURCES_FIXED := [
 ]
 const AGES := [0.0, 0.25, 0.5, 0.75, 1.0]
 const HALF := 7.0
-const WALL_H := 6.0
+## The court was built for a 6 m storey; the Void tower's is 5.64 m clear, so the walls went 0.36 m into the slab
+## above and the dome (to 8.3 m) stood as a 2.3 m hill on the floor above (2026-11-09, after the tiling
+## curation's option (a)). Defaults keep the museum's temple; a tower placement lowers them.
+@export var wall_height: float = 6.0
+## The dome's rise above the ring beam (the hemisphere's height). 0.5 makes it a shallow patterned vault.
+@export var dome_height: float = 3.2
+var WALL_H: float = 6.0
 const DOOR := 3.2
 const RING := 4.2
 var sources: Array = []
@@ -48,6 +54,8 @@ var _gen: Node = null
 var _pending: Dictionary = {}
 
 func _ready() -> void:
+	WALL_H = clampf(wall_height, 5.2, 6.0)
+	dome_height = clampf(dome_height, 0.3, 3.2)
 	_gen = PatternGen.new()
 	sources = SOURCES_FIXED.duplicate(true)
 	for path in _studio_packages():
@@ -142,7 +150,7 @@ func _build_court() -> void:
 	dome.name = "Dome"
 	var sphere := SphereMesh.new()
 	sphere.radius = RING + 0.45
-	sphere.height = 3.2
+	sphere.height = dome_height
 	sphere.is_hemisphere = true
 	sphere.flip_faces = true      # the pattern faces inward, where the visitor looks up
 	sphere.radial_segments = 48
@@ -155,7 +163,7 @@ func _build_court() -> void:
 	shell.name = "DomeShell"
 	var outer := SphereMesh.new()
 	outer.radius = RING + 0.5
-	outer.height = 3.25
+	outer.height = dome_height + 0.05
 	outer.is_hemisphere = true
 	outer.radial_segments = 48
 	outer.rings = 24
@@ -163,7 +171,7 @@ func _build_court() -> void:
 	shell.position = Vector3(0, 5.1, 0)
 	add_child(shell)
 	_receiver(6, shell, Vector2(2 * PI * (RING + 0.45), 6.0))
-	marks[6] = Vector3(0, 6.6, 0)
+	marks[6] = Vector3(0, 5.1 + dome_height * 0.47, 0)
 	marker = MeshInstance3D.new()
 	marker.name = "TargetMarker"
 	var ball := SphereMesh.new()

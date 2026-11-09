@@ -1,0 +1,26 @@
+[
+ {
+  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+  "id": "f1_MolecularDesigner_3_5",
+  "token": "MolecularDesigner",
+  "set": {
+   "scale": 1.0,
+   "height": 0
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "Its body is a ragdoll: one run it sank 1.6 m through the slab, the next it stood 6 m tall, so a raise cannot be right for both. Back on the slab, at 1.0 (5.5 m standing)."
+ },
+ {
+  "map": "SpeculativeComputation_Situated_Computation",
+  "id": "f2_museum_witnesses_11_20",
+  "token": "museum_witnesses",
+  "strategies": [
+   "kept",
+   "move"
+  ],
+  "before": "overlaps: columns inside its bounds",
+  "note": "KEPT: its 14 x 12.5 m room plate stands inside the column rows; the columns its bounds still hold are its portable camera stands, which place themselves round their target, not the room."
+ }
+]

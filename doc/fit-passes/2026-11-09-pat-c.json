@@ -1,0 +1,458 @@
+[
+ {
+  "map": "Ribbon_Patterns_01",
+  "id": "f4_grid_3d_4x4x4_7_4",
+  "token": "grid_3d_4x4x4",
+  "set": {
+   "position": [
+    -1.5,
+    5.8
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+  "id": "f1_markov_blanket_room_6_6",
+  "token": "markov_blanket_room",
+  "set": {
+   "position": [
+    10.0,
+    -6.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.7 m (0 of 10 samples past the slab have ground; moved 2.0 m"
+ },
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_fabric_shader_studio_6_5",
+  "token": "fabric_shader_studio",
+  "set": {
+   "position": [
+    -4.5,
+    -1.5
+   ],
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "overlap check: a tower column inside it; moved 10.3 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Tutorial_Tiling_Walls",
+  "id": "f1_wall_exception_20_25",
+  "token": "wall_exception",
+  "set": {
+   "position": [
+    9.0,
+    -7.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (11.5, 2.1, -11.5); moved 5.1 m"
+ },
+ {
+  "map": "SpeculativeComputation_Collective_Knowledge",
+  "id": "f1_the_fourth_limit_9_4",
+  "token": "the_fourth_limit",
+  "set": {
+   "position": [
+    -3.0,
+    -5.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.0 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Array_Patterns",
+  "id": "f1_vr_tile_editor_mirror_9_5",
+  "token": "vr_tile_editor_mirror",
+  "set": {
+   "position": [
+    1.5,
+    5.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Symmetry_Seventeen",
+  "id": "f2_loom_alhambra_p6m_16_5",
+  "token": "loom_alhambra_p6m",
+  "set": {
+   "position": [
+    -1.5,
+    7.5
+   ],
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 0.4 m (3 of 5 samples past the slab have ground); moved 1.6 m"
+ },
+ {
+  "map": "SpeculativeComputation_Rhizome_Network",
+  "id": "f2_rhizome_grower_4_2",
+  "token": "rhizome_grower",
+  "set": {
+   "position": [
+    11.0,
+    7.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 2.1 m (19 of 25 samples past the slab have groun; moved 2.5 m"
+ },
+ {
+  "map": "Ribbon_Patterns_01",
+  "id": "f4_row_3_x_18_11",
+  "token": "row_3_x",
+  "set": {
+   "position": [
+    -6.0,
+    6.4
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "CriticalAlgorithms_Applied_Ethics",
+  "id": "f2_excluded_class_visualizer_4_2",
+  "token": "excluded_class_visualizer",
+  "set": {
+   "position": [
+    2.5,
+    7.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (2.0, 0.1, 10.0); moved 2.5 m"
+ },
+ {
+  "map": "CriticalAlgorithms_Applied_Ethics",
+  "id": "f2_synthesis_stand_1_3",
+  "token": "synthesis_stand",
+  "set": {
+   "position": [
+    6.5,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.8 m (2 of 10 samples past the slab have ground; moved 1.8 m"
+ },
+ {
+  "map": "CriticalAlgorithms_Applied_Ethics",
+  "id": "f2_bias_from_inside_5_2",
+  "token": "bias_from_inside",
+  "set": {
+   "position": [
+    -2.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 1.7 m (0 of 20 samples past the slab have ground; moved 3.6 m"
+ },
+ {
+  "map": "PostCrisis_Synthesis",
+  "id": "f2_bias_from_inside_8_2",
+  "token": "bias_from_inside",
+  "set": {
+   "position": [
+    -1.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 1.7 m (0 of 20 samples past the slab have ground; moved 2.0 m"
+ },
+ {
+  "map": "Symmetry_Seventeen",
+  "id": "f2_loom_escher_mirror_4_5",
+  "token": "loom_escher_mirror",
+  "set": {
+   "position": [
+    12.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.4 m (0 of 10 samples past the slab have ground; moved 1.0 m"
+ },
+ {
+  "map": "PostCrisis_Synthesis",
+  "id": "f2_florensky_sphere_2_5",
+  "token": "florensky_sphere",
+  "set": {
+   "position": [
+    5.0,
+    6.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.0 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SpeculativeComputation_Paraconsistent_Engineering",
+  "id": "f1_shannon_workbench_10_5",
+  "token": "shannon_workbench",
+  "set": {
+   "position": [
+    3.5,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SpeculativeComputation_Situated_Computation",
+  "id": "f2_situated_readout_2_2",
+  "token": "situated_readout",
+  "set": {
+   "position": [
+    3.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (2.7, 0.8, 10.0); moved 2.0 m"
+ },
+ {
+  "map": "SpeculativeComputation_Situated_Computation",
+  "id": "f2_situated_readout_7_2",
+  "token": "situated_readout",
+  "set": {
+   "position": [
+    -2.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-2.0, 0.8, 9.7); moved 2.0 m"
+ },
+ {
+  "map": "Tutorial_Disco",
+  "id": "f2_disco_controls_9_4",
+  "token": "disco_controls",
+  "set": {
+   "position": [
+    0.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.6 m (0 of 15 samples past the slab have ground; moved 1.0 m"
+ },
+ {
+  "map": "PostCrisis_Synthesis",
+  "id": "f2_edge_ground_synthesis_5_2",
+  "token": "edge_ground_synthesis",
+  "set": {
+   "position": [
+    2.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (2.0, 0.7, 10.0); moved 2.0 m"
+ },
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_coloredlines_6_24",
+  "token": "coloredlines",
+  "set": {
+   "position": [
+    9.0,
+    -7.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_glitchcolor_6_32; moved 2.1 m",
+  "before": "overlaps: stands in f1_glitchcolor_6_32 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "CriticalAlgorithms_Applied_Ethics",
+  "id": "f2_godel_statement_plaque_8_2",
+  "token": "godel_statement_plaque",
+  "set": {
+   "position": [
+    -3.0,
+    8.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-2.0, 1.2, 10.1); moved 1.8 m"
+ },
+ {
+  "map": "PostCrisis_Synthesis",
+  "id": "f2_qfep_formula_3d_11_2",
+  "token": "qfep_formula_3d",
+  "set": {
+   "position": [
+    -4.0,
+    8.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-4.0, 2.0, 10.0); moved 1.5 m"
+ },
+ {
+  "map": "CriticalAlgorithms_Applied_Ethics",
+  "id": "f2_tt_2_1",
+  "token": "tt",
+  "set": {
+   "position": [
+    4.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (4.0, 1.4, 11.0); moved 3.0 m"
+ },
+ {
+  "map": "SpeculativeComputation_Paraconsistent_Engineering",
+  "id": "f1_tt_6_9",
+  "token": "tt",
+  "set": {
+   "position": [
+    -5.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-5.0, 1.4, 11.0); moved 3.0 m"
+ },
+ {
+  "map": "PostCrisis_Synthesis",
+  "id": "f2_tt_2_1",
+  "token": "tt",
+  "set": {
+   "position": [
+    5.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (5.0, 1.4, 11.0); moved 3.0 m"
+ },
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_RotatingLaser_23_24",
+  "token": "RotatingLaser",
+  "set": {
+   "config": {
+    "pin": "1",
+    "plinth": "0",
+    "beam_length": "3",
+    "rig_height": "4",
+    "fit": {
+     "strategies": [
+      "reduce_repeats"
+     ],
+     "note": "Tiling curation row 55: beam_length 4 - the box is the sweep; shorter beams stop crossing the glitch boards and the edge."
+    }
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "before": "overlaps: a tower column inside its sweep (it stood on the column)",
+  "note": "beam_length 4 -> 3: its 9.4 m sweep found no free spot on the crowded floor; at 3 m the fit pass places it."
+ },
+ {
+  "map": "Ribbon_Patterns_03",
+  "id": "f1_strobe_lasers_6_41",
+  "token": "strobe_lasers",
+  "fit": {
+   "set": {
+    "beam_length": 2.4
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "before": "overlaps: a tower column inside its sweep",
+  "note": "beam_length 2.4 (its own default is 20 m): a 5 m sweep that finds room."
+ },
+ {
+  "map": "SpeculativeComputation_Paraconsistent_Engineering",
+  "id": "f1_rhizome_vault_9_10",
+  "token": "rhizome_vault",
+  "set": {
+   "position": [
+    -0.04,
+    -1.71
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "9.8 x 9.4 m, 3.7 m past the north edge and round two columns: into the open middle; the small works there make way."
+ }
+]
