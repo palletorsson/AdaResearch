@@ -884,6 +884,26 @@
       ],
       "tower": "floor 76: 0.4 (was 0.1, a 0.8 m ornament), turned so its trails stream into the floor",
       "capture": "ada_run/improve/UnitCircleTrig/before_after.png"
+    },
+    {
+      "lookup_name": "chord_tension_spring",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the coils between the chord's notes as tubes through ThickLine (COIL_WIRE 0 keeps the 1-px LINE_STRIP)"
+      ],
+      "capture": "ada_run/improve/chord_tension_spring/before_after.png"
+    },
+    {
+      "lookup_name": "spring_demo",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the coil and the phase / wave trace as tubes through ThickLine (WIRE 0 keeps the 1-px lines)"
+      ],
+      "capture": "ada_run/improve/spring_demo/before_after.png"
     }
   ]
 }

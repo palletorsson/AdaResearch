@@ -113,6 +113,9 @@ var spring_radius: float = 0.05
 ## Trail for phase space visualization
 var trail_points: Array[Vector2] = []  # (position, velocity)
 const MAX_TRAIL = 300
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+## The coil and the trace as tubes this thick (m); 0 = the old one-pixel lines (2026-11-09).
+const WIRE := 0.006
 
 ## Built lazily, and only when trace != "off".
 var _trace_mesh: MeshInstance3D = null
@@ -214,8 +217,8 @@ func _update_spring_visual() -> void:
 		spring_mesh.mesh = mesh
 		return
 	
-	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
-	
+	var coil_pts := PackedVector3Array()
+	var coil_cols := PackedColorArray()
 	# Generate coil points
 	var points_per_coil = 8
 	var total_points = spring_coils * points_per_coil
@@ -230,10 +233,16 @@ func _update_spring_visual() -> void:
 		# Color based on tension
 		var tension = abs(position_y) / initial_displacement
 		var color = Color(0.5 + tension * 0.5, 0.5, 0.5 - tension * 0.3)
-		mesh.surface_set_color(color)
-		mesh.surface_add_vertex(Vector3(x, y, z))
-	
-	mesh.surface_end()
+		coil_pts.append(Vector3(x, y, z))
+		coil_cols.append(color)
+	if WIRE > 0.0:
+		ThickLine.append_tube(mesh, coil_pts, coil_cols, WIRE, 6)
+	else:
+		mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for i in coil_pts.size():
+			mesh.surface_set_color(coil_cols[i])
+			mesh.surface_add_vertex(coil_pts[i])
+		mesh.surface_end()
 	spring_mesh.mesh = mesh
 
 func _update_force_arrow(force: float) -> void:
@@ -310,22 +319,24 @@ func _draw_trace() -> void:
 		mesh.surface_add_vertex(Vector3(TRACE_X, rest_position + TRACE_W, 0.0))
 		mesh.surface_end()
 
-	mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	var tp := PackedVector3Array()
+	var tc := PackedColorArray()
 	for i in range(n):
 		var p: Vector2 = trail_points[i]
 		var age: float = float(i) / float(n - 1)
-		mesh.surface_set_color(Color(0.30 + age * 0.65, 0.35 + age * 0.45, 0.95, 1.0))
+		tc.append(Color(0.30 + age * 0.65, 0.35 + age * 0.45, 0.95, 1.0))
 		if trace == "phase":
-			mesh.surface_add_vertex(Vector3(
-				TRACE_X + p.x * PHASE_X_SCALE,
-				rest_position + p.y * PHASE_V_SCALE,
-				0.0))
+			tp.append(Vector3(TRACE_X + p.x * PHASE_X_SCALE, rest_position + p.y * PHASE_V_SCALE, 0.0))
 		else:
-			mesh.surface_add_vertex(Vector3(
-				0.0,
-				rest_position + p.x,
-				-float(n - 1 - i) * WAVE_STEP))
-	mesh.surface_end()
+			tp.append(Vector3(0.0, rest_position + p.x, -float(n - 1 - i) * WAVE_STEP))
+	if WIRE > 0.0:
+		ThickLine.append_tube(mesh, tp, tc, WIRE * 0.7, 5)
+	else:
+		mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for i in tp.size():
+			mesh.surface_set_color(tc[i])
+			mesh.surface_add_vertex(tp[i])
+		mesh.surface_end()
 	_trace_mesh.mesh = mesh
 
 # Slider callbacks

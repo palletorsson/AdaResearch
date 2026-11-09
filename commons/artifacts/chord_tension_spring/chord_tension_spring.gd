@@ -39,6 +39,10 @@ class_name ChordTensionSpring
 
 const _P = preload("res://commons/ui/ada_palette.gd")
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+## The coils as tubes this thick (m); 0 = the old one-pixel LINE_STRIP. A coil drawn one pixel wide shows neither
+## its tightness nor its colour - the two things it says about the interval (2026-11-09).
+const COIL_WIRE := 0.0022
 
 # ── Configuration ──
 const NUM_NODES := 4  # Root, third, fifth, seventh
@@ -644,16 +648,21 @@ func _update_spring_visuals() -> void:
 		else:
 			spring_color = _P.ACCENT_RED.lerp(_P.ACCENT_YELLOW, consonance / 0.3)
 		
+		var coil_pts := PackedVector3Array()
 		for p in range(total_points + 1):
 			var t := float(p) / total_points
 			var base_pos := pos_a + direction * t
 			var angle := t * coils * TAU
 			var offset: Vector3 = perp1 * cos(angle) * coil_radius + perp2 * sin(angle) * coil_radius
-			
-			mesh.surface_set_color(spring_color)
-			mesh.surface_add_vertex(base_pos + offset)
-		
-		mesh.surface_end()
+			coil_pts.append(base_pos + offset)
+		if COIL_WIRE > 0.0:
+			mesh.surface_end()   # the empty strip opened above
+			ThickLine.append_tube(mesh, coil_pts, PackedColorArray([spring_color]), COIL_WIRE, 5)
+		else:
+			for q in coil_pts:
+				mesh.surface_set_color(spring_color)
+				mesh.surface_add_vertex(q)
+			mesh.surface_end()
 		spring_lines[idx].mesh = mesh
 
 func _update_tension_display() -> void:
