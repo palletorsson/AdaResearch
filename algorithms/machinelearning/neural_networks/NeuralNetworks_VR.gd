@@ -1,5 +1,7 @@
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
@@ -48,6 +50,8 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## they drive the particle animations and a still catches them at an arbitrary
 ## phase) and room_height (resizes the glass without changing what the network is).
 @export_enum("graded", "flat", "deep", "widened", "pinched") var topology: String = "graded"
+## Weight lines as tubes whose radius grows with |weight| (radius * (0.4 + |w|)); 0 = one-pixel lines (2026-11-09).
+@export var weight_line_radius: float = 0.02
 @export var layer_sizes: Array[int] = [5, 4, 3, 2]  # Neurons per layer — derived from `topology`
 @export var enable_bias_neurons: bool = true
 @export var activation_function: String = "ReLU"  # ReLU, Sigmoid, Tanh
@@ -844,13 +848,21 @@ func _animate_weights(_delta) -> void:
 			var src = weight_data.src
 			var dst = weight_data.dst
 
-			# Update line geometry
+			# Update line geometry - in the LINE's own space (2026-11-09). The vertices were global positions written
+			# into a mesh that the line's transform (= the work's) moves again: at the origin the same thing, anywhere
+			# else - the tower, hundreds of metres down, at scale 0.45 - the network's every weight was drawn far away.
 			var immediate_mesh = line.mesh as ImmediateMesh
 			immediate_mesh.clear_surfaces()
+			var a: Vector3 = line.to_local(src.global_position)
+			var b: Vector3 = line.to_local(dst.global_position)
+			if weight_line_radius > 0.0:
+				var w: float = absf(float(weight_data.get("weight", 0.5)))
+				ThickLine.append_segments(immediate_mesh, PackedVector3Array([a, b]), PackedColorArray(), weight_line_radius * (0.4 + w), 5)
+				continue
 			immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 
-			immediate_mesh.surface_add_vertex(src.global_position)
-			immediate_mesh.surface_add_vertex(dst.global_position)
+			immediate_mesh.surface_add_vertex(a)
+			immediate_mesh.surface_add_vertex(b)
 
 			immediate_mesh.surface_end()
 
