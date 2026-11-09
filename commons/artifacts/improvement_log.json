@@ -904,6 +904,17 @@
         "the coil and the phase / wave trace as tubes through ThickLine (WIRE 0 keeps the 1-px lines)"
       ],
       "capture": "ada_run/improve/spring_demo/before_after.png"
+    },
+    {
+      "lookup_name": "harmonic_distance_table",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the overtone chords scaled in the cylinder's own frame: Basis.scaled() scales along world axes, so every horizontal chord stood up as a vertical thread"
+      ],
+      "tower": "floor 70: scale 2 at table height, line_scale 1.5, clear of the column",
+      "capture": "ada_run/improve/harmonic_distance_table/before_after.png"
     }
   ]
 }

@@ -516,7 +516,10 @@ func _build_overtone_lines() -> void:
 				var look_basis := Basis.looking_at(direction, Vector3.UP)
 				look_basis = look_basis * Basis(Vector3.RIGHT, PI / 2.0)
 				xf.basis = look_basis
-		xf.basis = xf.basis.scaled(Vector3(thickness, length, thickness))
+		# scale in the cylinder's OWN frame (its y along the line): Basis.scaled() scales along the world axes, which
+		# squeezed every horizontal chord to thread width and stood it up `length` tall - the consonance network
+		# rendered as a rain of vertical threads through the plate (fixed 2026-11-09)
+		xf.basis = xf.basis * Basis.from_scale(Vector3(thickness, length, thickness))
 		xf.origin = midpoint
 		_lines_mm.set_instance_transform(idx, xf)
 

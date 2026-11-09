@@ -29368,14 +29368,25 @@
           "id": "f1_harmonic_distance_table_18_5",
           "artifact": "harmonic_distance_table",
           "position": [
-            6,
-            -8
+            7.5,
+            -7.6
           ],
           "station": "NE",
           "facing": 0,
-          "height": 0.65,
-          "scale": 1,
-          "config": {}
+          "height": 0.9,
+          "scale": 2,
+          "config": {
+            "fit": {
+              "set": {
+                "line_scale": 1.5
+              },
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "A 0.7 m table at knee height: 2 at table height (0.9 m), its chords 1.5x, so how thick each consonance is reads from standing; 1.5 m east, clear of the column at (5, -7)."
+            }
+          }
         },
         {
           "id": "f1_chord_tension_spring_21_5",
