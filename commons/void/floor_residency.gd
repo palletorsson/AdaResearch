@@ -18,6 +18,7 @@ func set_mode(next: String) -> void:
 	if next!=mode:
 		_restore()
 		mode=next
+	_watch_soft_births(mode=="preview")
 	if mode=="live": return
 	_capture_and_pause(root)
 	root.visible=mode=="preview"
@@ -29,6 +30,9 @@ func adopt(unit: Node3D) -> void:
 	for node in unit.find_children("*","RigidBody3D",true,false):
 		if node.has_method("is_picked_up"): pickables.append(node)
 	if mode=="live": return
+	# At frame end, after the work's own deferred setup: a pin takes its offset from the live points (soft_mushrooms,
+	# revolving_joy_ride pin by call_deferred). A body born here is still in the solver until then (_soft_born).
+	_hold_soft_bodies.call_deferred(unit)
 	_capture_and_pause(unit)
 	if mode!="preview": return
 	var artifact := unit.get_node_or_null("Artifact")
@@ -42,11 +46,74 @@ func refresh_pickables() -> void:
 	for node in root.find_children("*","RigidBody3D",true,false):
 		if node.has_method("is_picked_up"): pickables.append(node)
 
-func _capture_and_pause(node: Node) -> void:
-	if node == root:
+## A paused SoftBody3D leaves Jolt (DISABLE_MODE_REMOVE), and on return Jolt rebuilds it from its render mesh. A body
+## never drawn comes back at the mesh's own coordinates - the world origin: rounded_softbody_test stood 876 m above
+## floor 144 on every arrival from floor 143 (14 of 14), and walking down floors 139-146 left 127 of 127 soft bodies
+## off their floor (2026-11-09). So each body's solver points are kept here at pause and put back after the rebuild.
+## A floor without soft bodies keeps nothing.
+var held_points: Dictionary = {}
+
+## The floor below builds its works one per frame while it is paused (floor_content._process builds only the focus
+## and the floor below). Each is mounted live and then set to INHERIT, which takes its soft bodies out of Jolt before
+## adopt() can keep their points: a body born here stays in the solver (KEEP_ACTIVE) until _hold_soft_bodies.
+func _watch_soft_births(on: bool) -> void:
+	var tree := root.get_tree() if is_instance_valid(root) else null
+	if tree == null: return
+	if on and not tree.node_added.is_connected(_soft_born): tree.node_added.connect(_soft_born)
+	elif not on and tree.node_added.is_connected(_soft_born): tree.node_added.disconnect(_soft_born)
+
+func _soft_born(node: Node) -> void:
+	if not is_instance_valid(root):
+		node.get_tree().node_added.disconnect(_soft_born); return
+	if node is SoftBody3D and root.is_ancestor_of(node):
+		(node as SoftBody3D).disable_mode = SoftBody3D.DISABLE_MODE_KEEP_ACTIVE
+
+func _hold_soft_bodies(host: Node) -> void:
+	# A deferred hold after the floor went live keeps nothing: there is no pause for it to outlast.
+	if mode=="live" or not is_instance_valid(host): return
+	for found in host.find_children("*", "SoftBody3D", true, false):
+		var soft := found as SoftBody3D
 		# Flush queued placement transforms before DISABLED removes their Jolt space.
-		for soft in root.find_children("*", "SoftBody3D", true, false):
-			if soft.can_process(): soft.force_update_transform()
+		if soft.can_process(): soft.force_update_transform()
+		# Only a body still in the solver has points to keep; a removed one reads as zeros.
+		var in_solver := soft.can_process() or soft.disable_mode == SoftBody3D.DISABLE_MODE_KEEP_ACTIVE
+		var rid: RID = soft.get_physics_rid()
+		if not in_solver or soft.mesh == null or soft.mesh.get_surface_count() == 0 or not PhysicsServer3D.soft_body_get_space(rid).is_valid(): continue
+		if soft.get_meta("void_held_mesh", RID()) != soft.mesh.get_rid():
+			# Jolt omits mesh vertices no face uses; querying them is an error (tools/probes/export_void_editor.gd).
+			var arrays: Array = soft.mesh.surface_get_arrays(0)
+			var used := PackedInt32Array()
+			if arrays[Mesh.ARRAY_INDEX] == null:
+				for i in (arrays[Mesh.ARRAY_VERTEX] as PackedVector3Array).size(): used.append(i)
+			else:
+				var seen := {}
+				for i in (arrays[Mesh.ARRAY_INDEX] as PackedInt32Array): seen[i] = true
+				used = PackedInt32Array(seen.keys())
+			soft.set_meta("void_held_indices", used); soft.set_meta("void_held_mesh", soft.mesh.get_rid())
+		var indices: PackedInt32Array = soft.get_meta("void_held_indices")
+		var points := PackedVector3Array(); points.resize(indices.size())
+		var box := AABB()
+		for k in indices.size():
+			points[k] = PhysicsServer3D.soft_body_get_point_global_position(rid, indices[k])
+			box = AABB(points[k], Vector3.ZERO) if k == 0 else box.expand(points[k])
+		if box.size.length() > 0.001:
+			held_points[soft.get_instance_id()] = {"node": weakref(soft), "mesh": soft.mesh.get_rid(), "points": points}
+		# Paused, it leaves the solver as it always has: nothing simulates or draws until the floor is live.
+		soft.disable_mode = SoftBody3D.DISABLE_MODE_REMOVE
+
+func _release_soft_bodies() -> void:
+	for id in held_points:
+		var soft := held_points[id].node.get_ref() as SoftBody3D
+		if soft == null or not soft.is_inside_tree() or soft.mesh == null or soft.mesh.get_rid() != held_points[id].mesh: continue
+		var rid: RID = soft.get_physics_rid()
+		if not soft.can_process() or not PhysicsServer3D.soft_body_get_space(rid).is_valid(): continue
+		var indices: PackedInt32Array = soft.get_meta("void_held_indices")
+		var points: PackedVector3Array = held_points[id].points
+		for k in mini(indices.size(), points.size()): PhysicsServer3D.soft_body_move_point(rid, indices[k], points[k])
+	held_points.clear()
+
+func _capture_and_pause(node: Node) -> void:
+	if node == root: _hold_soft_bodies(root)
 	# Procedural artifacts may rebuild/free children while a floor is loading.
 	# Object keys change identity when freed, which can break Dictionary iteration.
 	# Stable IDs + weak references let restoration safely skip deleted children.
@@ -95,6 +162,7 @@ func _restore() -> void:
 		node.process_mode=state.mode
 		if state.get("flight_group",false): node.add_to_group("ada_museum_flight")
 	saved.clear()
+	_release_soft_bodies()
 
 func _preview() -> void:
 	preview_units=0

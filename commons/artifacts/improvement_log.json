@@ -1303,6 +1303,21 @@
       ],
       "tower": "floor 142 (SoftBodies_Obsticals)",
       "capture": "ada_run/improve/flagdancer/before_after.png (front and behind; the HEAD before taken with the script uid stripped - see the memory note on the uid trap)"
+    },
+    {
+      "lookup_name": "rounded_softbody_test (and every SoftBody3D in the tower)",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "NOT A BLOW-UP: the survey's '876 m up' was the specimen standing at the WORLD ORIGIN (box top 876.35 above floor 144 = world y 0.35). It happened whenever floor 144 had been the paused preview below floor 143 first - exactly the survey runs that visited 143 just before 144 - and never on a direct arrival. 'Comes and goes' was visit order, not chance.",
+        "CAUSE (Godot 4.6 source): floor residency pauses a floor with PROCESS_MODE_DISABLED; a SoftBody3D with the default DISABLE_MODE_REMOVE then leaves Jolt, and on ENABLED Jolt rebuilds it from mesh_surface_get_arrays of its render mesh (_create_shared_settings). A body never drawn rebuilds at the mesh's own coordinates (the origin); the placement transform submitted at build is lost. Floor_content builds the floor below one work per frame while it is already paused, so its soft bodies left Jolt at mount INHERIT before the residency ever saw them; soft_mushrooms and revolving_joy_ride then pinned by call_deferred against those removed points and dragged their caps to the origin every frame (bodies 856 m long).",
+        "FIX, commons/void/floor_residency.gd only: each soft body's solver points are kept at pause and put back after the rebuild; a soft body born under the preview floor stays in the solver (KEEP_ACTIVE) until a frame-end hold after the work's own deferred setup, then leaves it as before (REMOVE), so a paused body still costs nothing per frame (freezing with KEEP_ACTIVE + pins was measured instead: ~20 us per body per frame, forever). The scene, its physics settings and the lesson path are unchanged.",
+        "RATES, 20 s per run: standalone scene 0/60 before (60 and 90 Hz, lesson, adapter, plain) - the scene itself never blew up; through the residency headless 20/20 stranded before, 0/30 after (60, 90 Hz, a Point Zero cube at the origin). Tower floor 144 walked down from 143: 14/14 stranded before (60 + 90 Hz, first arrivals and returns), 0/26 after; direct arrivals 0/13 before, 0/12 after and identical. Floors 139-146 walked down: 127 of 127 soft bodies off their floor before, 3 after, none from pausing (jelly_variants' ball falls through its slab on a fresh build too; softstopscene freezes its own spheres by disabling them). No NaN, no rigid body moved.",
+        "STILL OPEN, not changed: a floor LEFT and RETURNED TO rebuilds a drawn body from its last drawn pose, which becomes its rest shape - the specimen goes 0.61 -> 0.28 m tall over nine returns (0.49 -> 0.16 m on direct arrivals, the same before and after). Also: headless soft bodies are not the game's - under the dummy renderer the specimen settles 0.63 m tall, under a real renderer 0.48 m; and the 'table floating 1.8 m' in a standalone capture is the scene's original drop-test harness height kept for non-lesson placements (bench at y=3, harness box top 0.32); lesson:true (the tower's config) stands the legs on y=0."
+      ],
+      "tower": "floor 144 (SoftBodies_Playground_of_Joy, f4_rounded_softbody_test_8_10); the residency change reaches all 128 soft bodies on floors 139-146 and 202",
+      "capture": "headless + gl_compatibility probe numbers above (probes deleted); notes in the side-session notes folder of the fitting session"
     }
   ]
 }
