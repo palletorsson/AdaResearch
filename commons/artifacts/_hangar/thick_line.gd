@@ -10,6 +10,8 @@ extends RefCounted
 ##   ThickLine.append_tube(im, points, colors, radius)        into an ImmediateMesh, between surface_begin/end calls
 ##                                                             of its own (one surface per call)
 ##   ThickLine.append_segments(im, pairs, colors, radius)      the same for PRIMITIVE_LINES data: pairs of points
+##                                       (..., radius, sides, radii)  radii: one per pair (a tree: thick trunk, thin
+##                                                                    tips); where given it overrides `radius`
 ##   ThickLine.tube_mesh(points, colors, radius) -> ArrayMesh  a standing mesh, indexed
 ##
 ## colors may be empty (white), one colour (the whole line) or one per point.
@@ -78,7 +80,8 @@ static func append_tube(im: ImmediateMesh, points: PackedVector3Array, colors: P
 
 
 ## PRIMITIVE_LINES data (point pairs) as short tubes, one surface. colors: one per pair, or one for all, or empty.
-static func append_segments(im: ImmediateMesh, pairs: PackedVector3Array, colors: PackedColorArray, radius: float, sides: int = 5) -> void:
+## radii: one per pair, or empty (all `radius`).
+static func append_segments(im: ImmediateMesh, pairs: PackedVector3Array, colors: PackedColorArray, radius: float, sides: int = 5, radii: PackedFloat32Array = PackedFloat32Array()) -> void:
 	if pairs.size() < 2:
 		return
 	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -92,6 +95,7 @@ static func append_segments(im: ImmediateMesh, pairs: PackedVector3Array, colors
 		var nrm: Vector3 = tan.cross(Vector3.UP if absf(tan.dot(Vector3.UP)) < 0.9 else Vector3.RIGHT).normalized()
 		var bin: Vector3 = tan.cross(nrm)
 		var col: Color = _color_at(colors, s)
+		var r: float = radii[s] if s < radii.size() else radius
 		for k in sides:
 			var a0: float = TAU * float(k) / float(sides)
 			var a1: float = TAU * float(k + 1) / float(sides)
@@ -100,7 +104,7 @@ static func append_segments(im: ImmediateMesh, pairs: PackedVector3Array, colors
 			for v in [[a, d0], [a, d1], [b, d1], [a, d0], [b, d1], [b, d0]]:
 				im.surface_set_color(col)
 				im.surface_set_normal(v[1])
-				im.surface_add_vertex(v[0] + v[1] * radius)
+				im.surface_add_vertex(v[0] + v[1] * r)
 	im.surface_end()
 
 

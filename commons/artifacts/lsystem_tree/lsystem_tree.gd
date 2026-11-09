@@ -18,10 +18,16 @@ extends Node3D
 
 class_name LSystemTree
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 ## Display settings
 @export var display_size: float = 0.6
 @export var trunk_color: Color = Color(0.45, 0.28, 0.12)
 @export var tip_color: Color = Color(0.2, 0.65, 0.15)
+## Trunk thickness as a fraction of display_size; branches thin toward the tips (to 30 % at the deepest). 0 draws the
+## old one-pixel lines: Godot draws PRIMITIVE_LINES one pixel wide at any distance, so the tree - the thing the
+## grammar makes - was a cloud of hairlines a few metres off (2026-11-09).
+@export_range(0.0, 0.05, 0.001) var branch_radius: float = 0.012
 
 ## L-system configuration
 @export var iterations: int = 4
@@ -74,6 +80,9 @@ func _create_display() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.vertex_color_use_as_albedo = true
+	# The colours are a readout of recursion depth (brown trunk -> green tips) and were authored as sRGB; read as
+	# linear they washed out to one pale yellow and the depth was unreadable (2026-11-09).
+	mat.vertex_color_is_srgb = true
 	_mesh_instance.material_override = mat
 
 	add_child(_mesh_instance)
@@ -316,9 +325,11 @@ func _draw_tree(gens: Array) -> void:
 	var center := (min_bounds + max_bounds) / 2.0
 	center.y = min_bounds.y
 
-	# Draw all segments with depth-based coloring
-	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
+	# Draw all segments with depth-based coloring (collected, then tubes or lines)
+	var pairs := PackedVector3Array()
+	var cols := PackedColorArray()
+	var radii := PackedFloat32Array()
+	var trunk_r: float = display_size * branch_radius
 	for fig in figures:
 		var dx2: float = shift[int(fig["column"])]
 		var slide2: Vector3 = Vector3(dx2, 0.0, 0.0)
@@ -339,11 +350,21 @@ func _draw_tree(gens: Array) -> void:
 			if shade < 0.999:
 				col = col.darkened(1.0 - shade)
 
-			_immediate_mesh.surface_set_color(col)
-			_immediate_mesh.surface_add_vertex(p1)
-			_immediate_mesh.surface_set_color(col)
-			_immediate_mesh.surface_add_vertex(p2)
+			pairs.append(p1)
+			pairs.append(p2)
+			cols.append(col)
+			radii.append(trunk_r * lerpf(1.0, 0.3, t))
 
+	if trunk_r > 0.0:
+		# five sides while the tree is small, three past ~4000 segments (iteration 6 is 15,625)
+		ThickLine.append_segments(_immediate_mesh, pairs, cols, trunk_r, 5 if cols.size() < 4000 else 3, radii)
+		return
+	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in cols.size():
+		_immediate_mesh.surface_set_color(cols[i])
+		_immediate_mesh.surface_add_vertex(pairs[i * 2])
+		_immediate_mesh.surface_set_color(cols[i])
+		_immediate_mesh.surface_add_vertex(pairs[i * 2 + 1])
 	_immediate_mesh.surface_end()
 
 
@@ -387,6 +408,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		var wanted_length: float = clampf(float(config_data["base_length"]), 0.01, 0.5)
 		if not is_equal_approx(wanted_length, base_length):
 			base_length = wanted_length
+			changed = true
+
+	if config_data.has("branch_radius") and str(config_data["branch_radius"]).is_valid_float():
+		var wanted_radius: float = clampf(float(str(config_data["branch_radius"])), 0.0, 0.05)
+		if not is_equal_approx(wanted_radius, branch_radius):
+			branch_radius = wanted_radius
 			changed = true
 
 	if config_data.has("display_size"):
