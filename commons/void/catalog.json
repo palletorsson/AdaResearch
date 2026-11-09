@@ -7976,6 +7976,16 @@
         "encounter": "The same hand movement becomes different material under four sampling and surface rules."
       }
     },
+    "void_slab_extension": {
+      "scene": "res://commons/void/slab_extension.tscn",
+      "label": "Side slab / up to 10 m out, tangled supports to the floor below",
+      "footprint": [
+        12,
+        0.4,
+        6
+      ],
+      "description": "Palle 2026-11-09: an extra slab on the side of a floor, at most ten metres out, on tangled support beams to the floor below. Place it on the building edge facing out; config length, depth, rail, beams, seed. A visitor on it belongs to the floor."
+    },
     "void_scale_chamber": {
       "scene": "res://commons/void/scale_chamber.tscn",
       "museum_import": true,
