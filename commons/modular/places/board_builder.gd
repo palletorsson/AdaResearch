@@ -21,6 +21,9 @@ extends RefCounted
 ##    "artifact_tilt": degrees about the artifact's own x before its yaw - -90 stands a floor artifact upright in a
 ##    wall frame, its face to the room (Palle, 2026-11-02: "we can also use the vertical plane when we curate"),
 ##    "jump": metres - a walk surface that throws a jump that high,
+##    "wear": a work on the same floor (placement id) - each plate wears that work's LIVE shader material, copy i its
+##    material i ("wear_from" offsets, "wear_cycle" repeats, "wear_part" names a node in the work): the gallery and the
+##    work share one material, so the work's own sliders change the gallery (Palle, 2026-11-09),
 ##    "bounce": {"bounciness", "threshold", "ceiling"} - a bouncy walk surface: above 1 each landing climbs higher,
 ##    capped at the ceiling in metres (the mosaic floors: 1.2, 2 m/s, 4 m - Palle, "the material should be bouncy")}
 ## Compiled (build) into recipe.activities (display plates, position + rotation + config) and, with `frame`, bars
@@ -50,7 +53,7 @@ static func validate(spec: Dictionary) -> PackedStringArray:
 		if ids.has(id):errors.append("Duplicate board id: " + id)
 		ids[id] = true
 		for key in b.keys():
-			if key not in ["id", "at", "size", "orient", "facing", "frame", "posts", "repeat", "turn", "content", "contents", "artifact", "artifact_turn", "artifact_tilt", "fit", "walk", "label", "jump", "bounce"]:errors.append(id + ": unknown field " + str(key))
+			if key not in ["id", "at", "size", "orient", "facing", "frame", "posts", "repeat", "turn", "content", "contents", "artifact", "artifact_turn", "artifact_tilt", "fit", "walk", "label", "jump", "bounce", "wear", "wear_from", "wear_cycle", "wear_part"]:errors.append(id + ": unknown field " + str(key))
 		var at: Variant = b.get("at", null)
 		if not at is Array or at.size() != 3 or not at.all(func(n): return (n is int or n is float) and is_equal_approx(float(n), roundf(float(n)))):errors.append(id + ": at needs [x,y,z] in whole metres")
 		var size: Variant = b.get("size", null)
@@ -93,6 +96,13 @@ static func build(builder: Object, b: Dictionary) -> void:
 		var c := at + step * col + row_step * row;var yaw := fmod(base_yaw + float(turn * col), 360.0)
 		var cfg: Dictionary = ((contents[i % contents.size()] if not contents.is_empty() else b.get("content", {})) as Dictionary).duplicate(true)
 		cfg.merge({"slot_size": [w, h], "mount": "wall" if orient == "wall" else "floor", "stand": false})
+		# WEAR: the board's plates wear a work's live shaders, copy i the work's material i (from wear_from, cycling every
+		# wear_cycle) - the gallery and the work share one material, so the work's own controls change the gallery
+		if b.has("wear") and not cfg.has("wear"):
+			var k := int(b.get("wear_from", 0)) + i
+			if b.has("wear_cycle") and int(b.wear_cycle) > 0:k = int(b.get("wear_from", 0)) + i % int(b.wear_cycle)
+			cfg.merge({"wear": str(b.wear), "wear_index": k})
+			if b.has("wear_part"):cfg["wear_part"] = str(b.wear_part)
 		if not cfg.has("title"):cfg.title = "%s %02d" % [id, i + 1]
 		var art: String = str(cfg.get("artifact", artifact));cfg.erase("artifact")   # a content may name its own token
 		var sw := w;var sh := h   # the board's extent along x and z, after the turn

@@ -34,6 +34,12 @@ func _ready() -> void:
 	var canopy_ok: bool = canopy.size() == 3 and canopy.all(func(a): return is_equal_approx(float(a.rotation[0]), 180.0) and is_equal_approx(float(a.position[1]), 2.92)) and is_equal_approx(float(canopy[1].rotation[1]), 90.0) and canopy[1].config.slot_size == [4.0, 2.0]
 	var framed: bool = recipe.get("assemblies", []).size() >= 10 * 4 + 5 * 4 + 3 * 8 and recipe.get("parts", []).size() > 0
 	_check(report, "A compile: ten floor boards in a row, five upright posters, three hung and turned - eighteen plates posed and framed by bars, no errors", errs.is_empty() and path_ok and posters_ok and canopy_ok and framed, {"errors": errs, "path": path_ok, "posters": posters_ok, "canopy": canopy_ok, "assemblies": recipe.get("assemblies", []).size(), "parts": recipe.get("parts", []).size()})
+	# A2 - WEAR (2026-11-09): the board's own words are accepted, a misspelt one still refused
+	var worn := Builder.new().compile({"version": 1, "units": "metres", "places": [], "boards": [{"id": "gallery", "at": [0, 0, 0], "size": [2, 3], "orient": "wall", "repeat": {"count": 3, "step": [3, 0, 0]}, "wear": "stage", "wear_from": 1, "wear_part": "Receivers"}]})
+	var typo := Builder.new().compile({"version": 1, "units": "metres", "places": [], "boards": [{"id": "gallery", "at": [0, 0, 0], "size": [2, 3], "orient": "wall", "waer": "stage"}]})
+	var wacts: Array = (worn.get("recipe", {}) as Dictionary).get("activities", [])
+	var wear_ok: bool = (worn.get("errors", []) as Array).is_empty() and wacts.map(func(a): return [a.config.wear, int(a.config.wear_index), a.config.wear_part]) == [["stage", 1, "Receivers"], ["stage", 2, "Receivers"], ["stage", 3, "Receivers"]]
+	_check(report, "A2 wear: a board's wear / wear_from / wear_part reach every plate (indices 1, 2, 3); 'waer' is refused", wear_ok and not (typo.get("errors", []) as Array).is_empty(), {"errors": worn.get("errors", []), "typo_errors": typo.get("errors", [])})
 	# C - the approved recipe file carries no activities
 	var file_text := FileAccess.get_file_as_string(RECIPE);var file_recipe: Dictionary = JSON.parse_string(file_text)
 	var approved_assemblies: int = file_recipe.get("assemblies", []).size()

@@ -1,0 +1,443 @@
+[
+ {
+  "map": "Shader_01_Shaping",
+  "add": {
+   "id": "shader-gallery",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_01_Shaping / the chapter's shaders as walkable screens, wearing f1_shader_01_shaping_1_10's live materials",
+     "boards": [
+      {
+       "id": "chapter",
+       "at": [
+        -6,
+        0,
+        -3
+       ],
+       "size": [
+        2,
+        2
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 5,
+        "step": [
+         2,
+         0,
+         0
+        ]
+       },
+       "wear": "f1_shader_01_shaping_1_10",
+       "contents": [
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/shaping_step.gdshader",
+         "params": {},
+         "title": "01  step()"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/shaping_smoothstep.gdshader",
+         "params": {},
+         "title": "02  smoothstep()"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/shaping_sin.gdshader",
+         "params": {},
+         "title": "03  sin()"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/shaping_pow.gdshader",
+         "params": {},
+         "title": "04  pow()"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/shaping_combined.gdshader",
+         "params": {},
+         "title": "05  Combined"
+        }
+       ],
+       "label": true
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the playground's screens wear f1_shader_01_shaping_1_10's live shaders (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "5 screens along x from [-6, 0, -3], 2.7 m from the console"
+ },
+ {
+  "map": "Shader_09_FBM",
+  "add": {
+   "id": "shader-gallery",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_09_FBM / the chapter's shaders as walkable screens, wearing f2_shader_09_fbm_12_24's live materials",
+     "boards": [
+      {
+       "id": "chapter",
+       "at": [
+        9,
+        0,
+        -5
+       ],
+       "size": [
+        2,
+        2
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 4,
+        "step": [
+         2,
+         0,
+         0
+        ]
+       },
+       "wear": "f2_shader_09_fbm_12_24",
+       "contents": [
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/fbm_basic.gdshader",
+         "params": {
+          "scale": 4.0,
+          "octaves": 5.0,
+          "gain": 0.5,
+          "lacunarity": 2.0
+         },
+         "title": "01  FBM"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/fbm_ridged.gdshader",
+         "params": {
+          "scale": 4.0,
+          "octaves": 5.0,
+          "sharpness": 1.5
+         },
+         "title": "02  Ridged"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/fbm_turbulence.gdshader",
+         "params": {
+          "scale": 4.0,
+          "octaves": 5.0,
+          "speed": 0.5
+         },
+         "title": "03  Turbulence"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/fbm_domain_warp.gdshader",
+         "params": {
+          "scale": 3.0,
+          "warp_amount": 2.0,
+          "warp_layers": 2.0
+         },
+         "title": "04  Domain Warp"
+        }
+       ],
+       "label": true
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the playground's screens wear f2_shader_09_fbm_12_24's live shaders (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "4 screens along x from [9, 0, -5], 2.3 m from the console"
+ },
+ {
+  "map": "Shader_10_ReactionDiffusion",
+  "add": {
+   "id": "shader-gallery",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_10_ReactionDiffusion / the chapter's shaders as walkable screens, wearing f4_shader_10_reactiondiffusion_8_23's live materials",
+     "boards": [
+      {
+       "id": "chapter",
+       "at": [
+        10,
+        0,
+        5
+       ],
+       "size": [
+        3,
+        3
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 1,
+        "step": [
+         3,
+         0,
+         0
+        ]
+       },
+       "wear": "f4_shader_10_reactiondiffusion_8_23",
+       "contents": [
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/dla_visual.gdshader",
+         "params": {
+          "scale": 3.0,
+          "growth": 1.0,
+          "branch_density": 0.55
+         },
+         "title": "01  DLA Growth"
+        }
+       ],
+       "label": true
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the playground's screens wear f4_shader_10_reactiondiffusion_8_23's live shaders (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "1 screens along x from [10, 0, 5], 2.8 m from the console"
+ },
+ {
+  "map": "Shader_11_QueerRubber",
+  "add": {
+   "id": "shader-gallery",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_11_QueerRubber / the chapter's shaders as walkable screens, wearing f1_shader_11_queerrubber_8_7's live materials",
+     "boards": [
+      {
+       "id": "chapter",
+       "at": [
+        -4,
+        0,
+        2
+       ],
+       "size": [
+        2,
+        2
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 5,
+        "step": [
+         2,
+         0,
+         0
+        ]
+       },
+       "wear": "f1_shader_11_queerrubber_8_7",
+       "contents": [
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_materials/leather.gdshader",
+         "params": {},
+         "title": "01  LEATHER"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_collection_2/oil_slick_latex.gdshader",
+         "params": {},
+         "title": "02  OIL SLICK LATEX"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_materials/pop_plastic.gdshader",
+         "params": {},
+         "title": "03  POP PLASTIC"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_materials/fur_velvet.gdshader",
+         "params": {},
+         "title": "04  FUR VELVET"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_collection_2/sad_metal.gdshader",
+         "params": {},
+         "title": "05  SAD METAL"
+        }
+       ],
+       "label": true
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the playground's screens wear f1_shader_11_queerrubber_8_7's live shaders (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "5 screens along x from [-4, 0, 2], 3.0 m from the console"
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "add": {
+   "id": "shader-gallery-pink",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_12_PinkExtravaganza / the chapter's shaders as walkable screens, wearing f3_shader_12_pinkextravaganza_7_8's live materials",
+     "boards": [
+      {
+       "id": "chapter",
+       "at": [
+        5,
+        0,
+        4
+       ],
+       "size": [
+        2,
+        2
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 5,
+        "step": [
+         2,
+         0,
+         0
+        ]
+       },
+       "wear": "f3_shader_12_pinkextravaganza_7_8",
+       "contents": [
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_collection_2/melted_candy.gdshader",
+         "params": {},
+         "title": "01  MELTED CANDY"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_collection_2/crushed_pearl.gdshader",
+         "params": {},
+         "title": "02  CRUSHED PEARL"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/queer_collection_2/oil_slick_latex.gdshader",
+         "params": {},
+         "title": "03  OIL SLICK LATEX"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/queer_water.gdshader",
+         "params": {},
+         "title": "04  QUEER WATER"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/drag_extravaganza.gdshader",
+         "params": {},
+         "title": "05  ★ DRAG EXTRAVAGANZA ★"
+        }
+       ],
+       "label": true
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the playground's screens wear f3_shader_12_pinkextravaganza_7_8's live shaders (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "5 screens along x from [5, 0, 4], 9.0 m from the console"
+ }
+]

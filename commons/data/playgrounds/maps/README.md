@@ -25,3 +25,16 @@ and centres it, measured off its meshes (place_activity._fit_into). On a floor b
 
 The mosaic floors belong to the Patterns sequence (tiling.json, artifact group `Pattern_Mosaic_Floors`, a pool for curation - Palle, 2026-11-02); the field on Mosaic_Pompeii_Floors is where they can be walked until the space is curated, on floors or, with `artifact_tilt` -90, on the vertical plane (examples/mosaic_wall.json).
 The field's floors are a bouncy material (board word `bounce`: bounciness 1.2 from 2 m/s, ceiling 4 m - Palle 2026-11-02, 'the material should be bouncy'): an XR Tools GroundPhysics on each walk body. The headset's body bounces by XR Tools' rule (v + 2 n m b) - but XR Tools alone lands dead unless the stick is held, so BounceCeiling completes the bounce and caps it for the XR body (probe_comfort_vignette C: standing still, 1.04, 2.02, 3.79, 3.93 m); the desktop walker uses the same rule (walker._bounce). In the headset the comfort vignette (commons/player/comfort_vignette.gd, on the shared rig) closes the view's edge while airborne. A jump is the ordinary metre, then each landing climbs: 1.04, 2.01, 3.79, 3.93 m (probe_bouncy_floors). Ground-level walk surfaces and display screens carry a 50 cm skirt so you can walk onto them.
+
+## Wear: a gallery of a floor's own shaders (2026-11-09)
+
+Palle: "the playground's own panels wear the shaders as a gallery; there should be a syntax for this ... mixed with the
+existing shader setup in a very nice way". One board word, `wear`, names a work standing on the same floor (its
+placement id); each plate of the board wears that work's LIVE ShaderMaterial, the same instance, so the work's own
+sliders change the gallery. A plate that names its own shader wears the work's material with that shader (by shader:
+a Book of Shaders console builds only its current mode's materials, the screen follows a mode switch and shows its
+own copy meanwhile); a plate without one wears the work's material number `wear_index` (`wear_from`, `wear_cycle` on the
+board). `python tools/shader_gallery.py place <Map> <console id> <console script>` writes a floor's gallery from the
+console's own shader list - titles, default settings - at the nearest free strip; in the tower (working tree, with the
+playground system) all six shader floors have one, and the composition stage on Shader_12 stands on twenty boards that
+wear its own material. Tests: probe_display_path F (11/11), probe_board_vocabulary A2, tools/test_shader_gallery_tower.py.

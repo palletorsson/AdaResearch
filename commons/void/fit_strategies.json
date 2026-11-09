@@ -58,11 +58,12 @@
     {
       "id": "playground_setup",
       "name": "Fit it into a playground setup",
-      "status": "pilot",
+      "status": "syntax",
       "says": "the shader should be fit into playground setups",
       "when": "Shader and material works: a few receivers with a material, sliders, a label, inside a stage or parlour.",
-      "how": "Strip the stage (floor, walls); stand the receivers and controls on or in a slim scaffold playground (the Transformation floors' kit).",
-      "cost": "The scaffold playground system is not committed yet (2026-11-09)."
+      "how": "A board with \"wear\": <the shader work on the floor> - its plates wear the work's live materials (by shader, or wear_index); tools/shader_gallery.py place writes a floor's gallery from its console. Strip the stage around it first.",
+      "cost": "The scaffold playground system is not committed yet (2026-11-09).",
+      "learned": "2026-11-09: all six shader floors have a gallery of walkable screens wearing their console (tools/test_shader_gallery_tower.py 6/6); the composition stage stands on boards wearing its own material - the surround IS the material. A chapter console builds one mode at a time: the other screens show their own copy until it switches."
     },
     {
       "id": "side_slab",

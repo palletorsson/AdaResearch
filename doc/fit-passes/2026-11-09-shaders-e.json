@@ -1,0 +1,247 @@
+[
+ {
+  "map": "Shader_05_Patterns",
+  "add": {
+   "id": "shader-gallery",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_05 / the chapter's ten shaders as walkable screens, wearing the console's live materials",
+     "boards": [
+      {
+       "id": "chapter",
+       "at": [
+        -4,
+        0,
+        -11
+       ],
+       "size": [
+        2,
+        2
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 5,
+        "step": [
+         2,
+         0,
+         0
+        ],
+        "rows": {
+         "count": 2,
+         "step": [
+          0,
+          0,
+          -3
+         ]
+        }
+       },
+       "wear": "f2_shader_05_patterns_6_1",
+       "contents": [
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+         "params": {
+          "animate": 0.0,
+          "grid_size": 5.0,
+          "shape_size": 0.3
+         },
+         "title": "01  Tiling"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_truchet.gdshader",
+         "params": {
+          "grid_size": 8.0,
+          "line_thickness": 0.08,
+          "seed": 42.0
+         },
+         "title": "02  Truchet"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_offset.gdshader",
+         "params": {
+          "dot_size": 0.25,
+          "grid_size": 6.0,
+          "offset_amount": 0.5
+         },
+         "title": "03  Offset rows"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_brick.gdshader",
+         "params": {
+          "cols": 4.0,
+          "mortar": 0.04,
+          "rows": 8.0
+         },
+         "title": "04  Brick"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_wang.gdshader",
+         "params": {
+          "aperiodic_mix": 1.0,
+          "edge_width": 0.12,
+          "grid_size": 10.0,
+          "seed": 7.0
+         },
+         "title": "05  Wang tiles"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+         "params": {
+          "display_mode": 0.0,
+          "grid_size": 6.0,
+          "jitter": 0.85,
+          "seed": 13.0
+         },
+         "title": "06  Voronoi cells"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_voronoi.gdshader",
+         "params": {
+          "display_mode": 2.0,
+          "grid_size": 8.0,
+          "jitter": 0.9,
+          "seed": 31.0
+         },
+         "title": "07  Voronoi edges"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+         "params": {
+          "lacunarity": 2.0,
+          "noise_scale": 6.0,
+          "noise_type": 0.0,
+          "octaves_float": 4.0
+         },
+         "title": "08  Simplex fBm"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+         "params": {
+          "lacunarity": 2.0,
+          "noise_scale": 5.0,
+          "noise_type": 1.0,
+          "octaves_float": 3.0
+         },
+         "title": "09  Worley cells"
+        },
+        {
+         "content": "shader",
+         "shader": "res://algorithms/shaders/book_of_shaders/patterns_noise.gdshader",
+         "params": {
+          "lacunarity": 2.0,
+          "noise_scale": 4.0,
+          "noise_type": 2.0,
+          "octaves_float": 4.0
+         },
+         "title": "10  Domain warp"
+        }
+       ],
+       "label": true
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the playground's panels wear the chapter's live shaders (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup",
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "Ten floor boards on the north slab between the passage and the garden; board 'wear' = the Patterns console, copy i its material i, the chapter's titles kept."
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "add": {
+   "id": "shader-gallery",
+   "artifact": "playground_spec_hall",
+   "station": "NW",
+   "position": [
+    0,
+    0
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "place_spec": {
+     "version": 1,
+     "units": "metres",
+     "places": [],
+     "title": "Shader_12 / the composition stage stands on a floor that wears its own material",
+     "boards": [
+      {
+       "id": "stage_floor",
+       "at": [
+        -6,
+        0,
+        -3
+       ],
+       "size": [
+        3,
+        3
+       ],
+       "orient": "floor",
+       "repeat": {
+        "count": 5,
+        "step": [
+         3,
+         0,
+         0
+        ],
+        "rows": {
+         "count": 4,
+         "step": [
+          0,
+          0,
+          -3
+         ]
+        }
+       },
+       "wear": "f3_shader_composition_stage_27_8",
+       "wear_cycle": 1,
+       "content": {
+        "content": "colour",
+        "colour": "#2a1a2c"
+       }
+      }
+     ]
+    },
+    "editor_label": "Shader gallery / the stage's floor wears the stage's own material (2026-11-09)",
+    "fit": {
+     "strategies": [
+      "playground_setup"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "playground_setup"
+  ],
+  "note": "The stage's own floor was stripped; twenty floor boards under it wear its live material (wear_cycle 1): its sliders change its floor."
+ }
+]

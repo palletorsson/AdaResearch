@@ -7,6 +7,16 @@ class_name DisplayPlate
 ## shader), or a plain colour. On the floor it is WALKABLE GLASS: a thin body you stand on, the content under your
 ## feet. On a wall it stands up, its face into the room; free-standing it brings two posts. A place's activity
 ## (place_builder) or any recipe can put one anywhere with a config; a gallery is a row of them.
+## WEAR (Palle, 2026-11-09: "the playground's own panels wear the shaders as a gallery ... mixed with the existing
+## shader setup"): config "wear" names a work on the same floor (its placement id) and the plate wears
+## that work's LIVE ShaderMaterial - the same instance, so the work's own sliders change the gallery too.
+##   BY SHADER: a plate that names its own shader wears the work's material with that shader (where the work has the
+##   shader twice - Voronoi cells and edges - the one whose settings match the plate's own). A chapter console builds only
+##   its current mode's materials and replaces them on a mode switch, so the plate looks again every second: that mode's
+##   screens go live, the others show their own copy. Title and shader always agree.
+##   BY INDEX: a plate without a shader of its own wears material "wear_index" (the work's _materials, then its
+##   `material`, then its meshes', in tree order) - a work with one stable material, like the composition stage.
+## "wear_part" names a node inside the work to take it from. Meta "wearing" says what it wears, "wear_missing" why not.
 
 @export var slot_size := Vector2(3, 3)
 @export_enum("floor", "wall") var mount := "floor"
@@ -22,6 +32,9 @@ class_name DisplayPlate
 @export var stand := false                ## a wall plate on its own posts
 @export var title := ""
 @export var rim_colour := Color("1d2226")
+@export var wear := ""                    ## a work on the same floor whose live shader this plate wears
+@export var wear_index := 0
+@export var wear_part := ""
 
 const WALLPAPER := "res://commons/resourses/shaders/wallpaper_tile.gdshader"
 var body: StaticBody3D
@@ -52,6 +65,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("seed"):seed_value = int(config.seed)
 	if config.has("stand"):stand = bool(config.stand) if config.stand is bool else str(config.stand) in ["true", "1"]
 	if config.has("title"):title = str(config.title)
+	if config.has("wear"):wear = str(config.wear)
+	if config.has("wear_index"):wear_index = maxi(int(config.wear_index), 0)
+	if config.has("wear_part"):wear_part = str(config.wear_part)
 	if _built:_build()
 
 ## The plate, built flat (face up) in the node's XZ and stood up for a wall.
@@ -80,6 +96,7 @@ func _build() -> void:
 				post.material_override = rim_mat;post.position = Vector3(sx * (slot_size.x / 2.0 - .1), (slot_size.y + .1) / 2.0, thickness + .03);add_child(post)
 				var foot := MeshInstance3D.new();var fm := BoxMesh.new();fm.size = Vector3(.3, .04, .6);foot.mesh = fm;foot.material_override = rim_mat;foot.position = Vector3(sx * (slot_size.x / 2.0 - .1), .02, .15);add_child(foot)
 	_built = true
+	if wear != "" and is_inside_tree():_wear_tick.call_deferred()
 
 ## The content as a material: the named shader with its uniforms, the wallpaper shader over a painted domain, or a colour.
 func _material() -> Material:
@@ -95,6 +112,72 @@ func _material() -> Material:
 		for k in params:m.set_shader_parameter(str(k), params[k])
 		return m
 	var s := StandardMaterial3D.new();s.albedo_color = colour;s.roughness = .4;return s
+
+## Wear, and keep looking: works build late, and a chapter console replaces its materials on a mode switch.
+func _wear_tick() -> void:
+	if not is_inside_tree() or face == null:return
+	var found := wear_material()
+	if found != null:
+		if face.material_override != found:face.material_override = found
+		set_meta("wearing", "%s#%s" % [wear, found.shader.resource_path.get_file() if found.shader != null else str(wear_index)])
+		if has_meta("wear_missing"):remove_meta("wear_missing")
+	else:
+		if has_meta("wearing"):
+			face.material_override = _material();remove_meta("wearing")   # the worn one went (a mode switch): our own again
+		set_meta("wear_missing", "no work '%s' with a matching shader material on this floor (yet)" % wear)
+	get_tree().create_timer(1.0).timeout.connect(func(): if is_instance_valid(self):_wear_tick())
+
+## The worn work's materials, in order: its _materials (a chapter's one per shader), its `material`, then its meshes'.
+func wear_material() -> ShaderMaterial:
+	var work := _find_work()
+	if work == null:return null
+	var from: Node = work
+	if wear_part != "":
+		var parts := work.find_children(wear_part, "Node", true, false)
+		if parts.is_empty():return null
+		from = parts[0]
+	var mats: Array[ShaderMaterial] = []
+	for key in ["_materials", "materials"]:
+		var v: Variant = from.get(key) if key in from else null
+		if v is Array:
+			for m in v:
+				if m is ShaderMaterial and not mats.has(m):mats.append(m)
+	if "material" in from and from.get("material") is ShaderMaterial and not mats.has(from.get("material")):mats.append(from.get("material"))
+	for g in from.find_children("*", "GeometryInstance3D", true, false):
+		var m: Material = (g as GeometryInstance3D).material_override
+		if m is ShaderMaterial and not mats.has(m):mats.append(m)
+	if content == "shader" and shader_path != "":
+		# by shader: the work's material with this plate's own shader; among several, the one sharing most settings
+		var best: ShaderMaterial = null;var score := -1
+		for m in mats:
+			if m.shader == null or m.shader.resource_path != shader_path:continue
+			var same := 0
+			for k in params:
+				var v: Variant = m.get_shader_parameter(str(k))
+				if v != null and (v == params[k] or (typeof(v) in [TYPE_FLOAT, TYPE_INT] and typeof(params[k]) in [TYPE_FLOAT, TYPE_INT] and is_equal_approx(float(v), float(params[k])))):same += 1
+			if same > score:best = m;score = same
+		return best
+	return mats[wear_index] if wear_index < mats.size() else null
+
+## The work, by its placement id: up the tree, the first ancestor with a child of that name (its mount), else a node
+## of that name anywhere under the floor root (an ancestor marked void_content_floor), else under the scene.
+func _find_work() -> Node:
+	var node: Node = get_parent()
+	var floor_root: Node = null
+	while node != null:
+		var hit := node.get_node_or_null(NodePath(wear))
+		if hit != null and hit != self and not is_ancestor_of(hit):
+			var art := hit.get_node_or_null("Artifact")
+			return art if art != null else hit
+		if floor_root == null and node.has_meta("void_content_floor"):floor_root = node
+		node = node.get_parent()
+	var scope: Node = floor_root if floor_root != null else get_tree().current_scene
+	if scope == null:return null
+	var named := scope.find_child(wear, true, false)
+	if named != null and named != self and not is_ancestor_of(named):
+		var art2 := named.get_node_or_null("Artifact")
+		return art2 if art2 != null else named
+	return null
 
 ## A painted 4 x 4 domain from the seed: four bright colours and a dark, as a pattern studio would leave it.
 func _domain() -> ImageTexture:

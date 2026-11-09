@@ -6,6 +6,8 @@ extends Node3D
 ## -Z, two posts; (C) a wallpaper plate carries the wallpaper shader over a painted domain; (D) the principal-places
 ## hall builds the Shader_05 floor path - ten walkable screens in a row - and five standing posters beside it, from
 ## its recipe. Pictures: the path from the walker's end and from above. ada_run/workstation/display_path.json.
+## (F, 2026-11-09) WEAR: plates wear a work's live shader material - a chapter work's material i, the composition
+## stage's own; a missing work leaves the plate its own shader; a board says it once and copy i wears material i.
 ## Run: godot --path . --xr-mode off --resolution 1600x1000 res://commons/testing/probe_display_path.tscn
 
 const Items = preload("res://commons/player/inventory_items.gd")
@@ -95,6 +97,64 @@ func _ready() -> void:
 	var end := hall.to_local(walker.global_position)
 	cam.make_current()
 	_check(report, "E walk on: from the ground the walker walks across the first screen - mid-screen it stands on the glass at %.3f m" % mid_y, absf(mid_y - .12) < .02, {"mid_y": mid_y, "end": [end.x, end.y, end.z]})
+	# F - WEAR (Palle, 2026-11-09: "the playground's own panels wear the shaders as a gallery ... mixed with the existing
+	# shader setup"): a plate wears a work's LIVE material - the same instance - so the work's controls change the gallery
+	var room := Node3D.new();room.name = "WearRoom";room.position = Vector3(0, 0, -60);add_child(room)
+	var chapter_src := GDScript.new()
+	chapter_src.source_code = "extends Node3D
+var _materials: Array[ShaderMaterial] = []
+func _ready():
+	for p in ['patterns_tile', 'patterns_truchet', 'patterns_brick']:
+		var m := ShaderMaterial.new(); m.shader = load('res://algorithms/shaders/book_of_shaders/%s.gdshader' % p); _materials.append(m)
+"
+	chapter_src.reload()
+	var chapter := Node3D.new();chapter.name = "chapter_work";chapter.set_script(chapter_src);room.add_child(chapter)
+	var worn: Node3D = load(Items.scene_for("display_plate")).instantiate()
+	var cfg_1 := {"slot_size": [3, 3], "mount": "wall", "content": "colour", "wear": "chapter_work", "wear_index": 1, "title": "worn"}
+	for k in cfg_1:worn.set_meta("config_%s" % k, cfg_1[k])
+	room.add_child(worn)
+	var lost: Node3D = load(Items.scene_for("display_plate")).instantiate()
+	var cfg_2 := {"slot_size": [3, 3], "content": "shader", "shader": "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader", "wear": "nobody_here", "title": "lost"}
+	for k in cfg_2:lost.set_meta("config_%s" % k, cfg_2[k])
+	room.add_child(lost);lost.position.x = 5
+	var stage: Node3D = load("res://commons/artifacts/shader_composition_stage/shader_composition_stage.tscn").instantiate();stage.name = "stage_work";stage.position.x = -14;room.add_child(stage)
+	var surround: Node3D = load(Items.scene_for("display_plate")).instantiate()
+	var cfg_3 := {"slot_size": [3, 3], "mount": "wall", "wear": "stage_work"}
+	for k in cfg_3:surround.set_meta("config_%s" % k, cfg_3[k])
+	room.add_child(surround);surround.position.x = -8
+	for i in 20:
+		await get_tree().physics_frame
+	var same: bool = worn.face.material_override == chapter._materials[1]
+	chapter._materials[1].set_shader_parameter("grid_size", 11.0)
+	var live: bool = is_equal_approx(float((worn.face.material_override as ShaderMaterial).get_shader_parameter("grid_size")), 11.0)
+	_check(report, "F wear: a plate wears the chapter work's material 1 - the same instance - and a slider's change on the work shows on the plate", same and live and str(worn.get_meta("wearing", "")) == "chapter_work#patterns_truchet.gdshader", {"same": same, "live": live, "wearing": worn.get_meta("wearing", "")})
+	var stage_mat: Variant = stage.get("material")
+	_check(report, "F wear: a plate wears the composition stage's own material - its sofa, sphere, cube and the plate are one surface", stage_mat is ShaderMaterial and surround.face.material_override == stage_mat, {"wearing": surround.get_meta("wearing", "")})
+	_check(report, "F wear: a plate whose work is not on the floor keeps its own shader (no silent blank)", lost.face.material_override is ShaderMaterial and (lost.face.material_override as ShaderMaterial).shader.resource_path.ends_with("patterns_tile.gdshader") and not lost.has_meta("wearing"), {"own": str(lost.face.material_override)})
+	# by shader: a plate naming its own shader wears the work's material with that shader; a mode switch follows
+	var bricks: Node3D = load(Items.scene_for("display_plate")).instantiate()
+	var cfg_b := {"slot_size": [2, 2], "content": "shader", "shader": "res://algorithms/shaders/book_of_shaders/patterns_brick.gdshader", "params": {"rows": 8.0}, "wear": "chapter_work", "wear_index": 0}
+	for k in cfg_b:bricks.set_meta("config_%s" % k, cfg_b[k])
+	room.add_child(bricks);bricks.position.x = 9
+	var trux: Node3D = load(Items.scene_for("display_plate")).instantiate()
+	var cfg_t := {"slot_size": [2, 2], "content": "shader", "shader": "res://algorithms/shaders/book_of_shaders/patterns_truchet.gdshader", "wear": "chapter_work"}
+	for k in cfg_t:trux.set_meta("config_%s" % k, cfg_t[k])
+	room.add_child(trux);trux.position.x = 12
+	for i in 12:
+		await get_tree().physics_frame
+	var by_shader: bool = bricks.face.material_override == chapter._materials[2] and trux.face.material_override == chapter._materials[1]
+	_check(report, "F wear by shader: the brick plate wears the work's brick material (its 3rd), the truchet plate the truchet - not by index", by_shader, {"bricks": bricks.get_meta("wearing", ""), "trux": trux.get_meta("wearing", "")})
+	var fresh := ShaderMaterial.new();fresh.shader = load("res://algorithms/shaders/book_of_shaders/patterns_truchet.gdshader")
+	chapter._materials.clear();chapter._materials.append(fresh)   # the console switched mode: only a new truchet now
+	await get_tree().create_timer(1.6).timeout
+	var followed: bool = trux.face.material_override == fresh and bricks.face.material_override is ShaderMaterial and bricks.face.material_override != fresh and (bricks.face.material_override as ShaderMaterial).shader.resource_path.ends_with("patterns_brick.gdshader") and not bricks.has_meta("wearing")
+	_check(report, "F wear follows a mode switch: the truchet plate takes the console's new truchet; the brick plate, no longer worn, shows its own brick again", followed, {"trux": trux.get_meta("wearing", ""), "bricks_missing": bricks.get_meta("wear_missing", "")})
+	var Builder := load("res://commons/modular/places/place_builder.gd")
+	var wspec := {"version": 1, "units": "metres", "places": [], "boards": [{"id": "gallery", "at": [0, 0, 0], "size": [3, 3], "orient": "wall", "facing": "south", "repeat": {"count": 4, "step": [4, 0, 0]}, "wear": "chapter_work", "wear_cycle": 3}]}
+	var compiled: Dictionary = Builder.new().compile(wspec)
+	var acts: Array = (compiled.get("recipe", compiled) as Dictionary).get("activities", [])
+	var idx: Array = acts.filter(func(a): return a.get("board", "") == "gallery").map(func(a): return int(a.config.get("wear_index", -1)))
+	_check(report, "F wear: a board says it once - copy i wears material i, cycling every 3 (indices %s)" % str(idx), idx == [0, 1, 2, 0], {"indices": idx, "errors": compiled.get("errors", [])})
 	var passed := 0
 	for ch in report.checks:
 		if ch.ok:passed += 1
