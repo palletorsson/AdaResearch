@@ -282,6 +282,9 @@ def check(data: dict | None = None) -> dict:
 def main(argv: list) -> int:
     sys.stdout.reconfigure(encoding="utf-8")
     cmd = argv[1] if len(argv) > 1 and not argv[1].startswith("--") else "check"
+    if cmd == "assembly":   # Assembly Theory's index of the grammar: tools/grammar_assembly.py (2026-11-09)
+        import grammar_assembly
+        return grammar_assembly.main(argv)
     r = check()
     if "--json" in argv:
         print(json.dumps(r, ensure_ascii=False, indent=1))
