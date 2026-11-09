@@ -162,8 +162,6 @@
     {"key": "code_display", "floor": 12},
     {"key": "invariant_tape", "floor": 13, "cards": ["moved_cube"]},
     {"key": "y_translation_cube", "floor": 13, "cards": ["sine_movement"]},
-    {"key": "rotation_oscillation_cube", "floor": 13},
-    {"key": "uniform_scale_marker", "floor": 13},
     {"key": "void_pickup_coin", "floor": 13, "note": "filed 2026-11-09 for review: new in the tower, placed by its floor's route order"},
     {"key": "chair_factory", "floor": 13, "note": "filed 2026-11-09 for review: new in the tower, placed by its floor's route order"},
     {"key": "void_step_health_box", "floor": 13},
@@ -207,7 +205,6 @@
     {"key": "void_rotation_wheel", "floor": 16},
     {"key": "trans_machine_lever", "floor": 16},
     {"key": "care_shared_crossing", "floor": 16},
-    {"key": "rotation_array_compare", "floor": 16, "form": {"kind": "collection", "op": "set", "algorithmic": true, "guessed": true}},
     {"key": "void_rotation_electric_bed", "floor": 16},
     {"key": "void_rotation_gantry", "floor": 16},
     {"key": "spin", "floor": 16},
@@ -1167,6 +1164,9 @@
     {"key": "force_hall_10", "reason": "Palle 2026-11-09 (fitting works to the tower): museum wayfinding - a lectern teleporting to the museum's previous / next hall; the tower has no halls to teleport between", "at": "2026-11-09", "placements": [{"floor": 55, "list": "artifacts", "index": 0, "row": {"id": "f3_force_hall_10_0_0", "artifact": "force_hall_10", "position": [-4, 14], "station": "SW", "facing": 180, "height": 0, "scale": 1, "config": {"pin": "1", "plinth": "0"}}}]},
     {"key": "force_hall_11", "reason": "Palle 2026-11-09 (fitting works to the tower): museum wayfinding - a lectern teleporting to the museum's previous / next hall; the tower has no halls to teleport between", "at": "2026-11-09", "placements": [{"floor": 56, "list": "artifacts", "index": 0, "row": {"id": "f4_force_hall_11_0_0", "artifact": "force_hall_11", "station": "SE", "position": [-4, 14], "facing": 180, "height": 0, "scale": 1, "config": {"pin": "1", "plinth": "0"}}}]},
     {"key": "force_hall_12", "reason": "Palle 2026-11-09 (fitting works to the tower): museum wayfinding - a lectern teleporting to the museum's previous / next hall; the tower has no halls to teleport between", "at": "2026-11-09", "placements": [{"floor": 57, "list": "artifacts", "index": 0, "row": {"id": "f5_force_hall_12_0_0", "artifact": "force_hall_12", "station": "SE", "position": [-4, 14], "facing": 180, "height": 0, "scale": 1, "config": {"pin": "1", "plinth": "0"}}}]},
-    {"key": "force_hall_13", "reason": "Palle 2026-11-09 (fitting works to the tower): museum wayfinding - a lectern teleporting to the museum's previous / next hall; the tower has no halls to teleport between", "at": "2026-11-09", "placements": [{"floor": 58, "list": "artifacts", "index": 0, "row": {"id": "f1_force_hall_13_0_0", "artifact": "force_hall_13", "position": [-4, 14], "station": "SW", "facing": 180, "height": 0, "scale": 1, "config": {"pin": "1", "plinth": "0"}}}]}
+    {"key": "force_hall_13", "reason": "Palle 2026-11-09 (fitting works to the tower): museum wayfinding - a lectern teleporting to the museum's previous / next hall; the tower has no halls to teleport between", "at": "2026-11-09", "placements": [{"floor": 58, "list": "artifacts", "index": 0, "row": {"id": "f1_force_hall_13_0_0", "artifact": "force_hall_13", "position": [-4, 14], "station": "SW", "facing": 180, "height": 0, "scale": 1, "config": {"pin": "1", "plinth": "0"}}}]},
+    {"key": "rotation_oscillation_cube", "reason": "Palle 2026-11-09: no place in the tower - numbered on the timeline but standing on no floor", "at": "2026-11-09"},
+    {"key": "uniform_scale_marker", "reason": "Palle 2026-11-09: no place in the tower - numbered on the timeline but standing on no floor", "at": "2026-11-09"},
+    {"key": "rotation_array_compare", "reason": "Palle 2026-11-09: no place in the tower - numbered on the timeline but standing on no floor", "at": "2026-11-09"}
   ]
 }
