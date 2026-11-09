@@ -1292,6 +1292,17 @@
       ],
       "tower": "none of the four is placed in the tower; they stand in grid and museum maps away from the origin",
       "capture": "headless probe numbers above"
+    },
+    {
+      "lookup_name": "flagdancer",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the SurfaceTool pride flag's stripes are vertex colours and its mesh had no material; with no Skin the skeleton had no bind poses. What showed was the scene's 1 m white placeholder quad from the front and nothing from behind. Now an unshaded-free two-sided vertex-colour material (sRGB), skin = skeleton.create_skin_from_rest_transforms(), placeholder hidden"
+      ],
+      "tower": "floor 142 (SoftBodies_Obsticals)",
+      "capture": "ada_run/improve/flagdancer/before_after.png (front and behind; the HEAD before taken with the script uid stripped - see the memory note on the uid trap)"
     }
   ]
 }

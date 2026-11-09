@@ -208,6 +208,11 @@ var flag_colors: Dictionary = {
 }
 
 func _ready() -> void:
+	# The scene keeps a placeholder 1 m white QuadMesh in the flag's own plane, at its centre; the flag is the
+	# SurfaceTool mesh built below (2026-11-09).
+	var placeholder := get_node_or_null("SkinnedMeshInstance3D")
+	if placeholder is MeshInstance3D:
+		placeholder.visible = false
 	create_pride_flag_with_bones()
 	setup_joyful_animation()
 	_config_sig = _sig(crimp, heading, frozen_phase, wave_seed)
@@ -292,6 +297,16 @@ func create_pride_flag_with_bones() -> void:
 			st.add_index(i + verts_per_row)
 
 	skinned_mesh.mesh = st.commit()
+	# 2026-11-09: the stripes are VERTEX colours and the mesh had no material, and with no Skin the skeleton had no
+	# bind poses (the bones' rest offsets were added on top of vertices already placed at those offsets). What showed
+	# was the scene's 1 m white placeholder quad from the front and nothing from behind - no pride flag at all.
+	var cloth := StandardMaterial3D.new()
+	cloth.vertex_color_use_as_albedo = true
+	cloth.vertex_color_is_srgb = true
+	cloth.cull_mode = BaseMaterial3D.CULL_DISABLED
+	cloth.roughness = 0.85
+	skinned_mesh.material_override = cloth
+	skinned_mesh.skin = skeleton.create_skin_from_rest_transforms()
 
 func setup_joyful_animation() -> void:
 	# SHIPPED PATH, character for character, whenever no seed is asked for — the same
