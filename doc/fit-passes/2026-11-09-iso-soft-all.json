@@ -1,0 +1,652 @@
+[
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_voxel_noise_demo_11_47",
+  "token": "voxel_noise_demo",
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.9 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_mc_inside_cave_20_14",
+  "token": "mc_inside_cave",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "0.8 m below the slab (built for a museum plinth): raised by that. | fit pass: edge: north 1.0 m (0 of 5 samples past the slab have ground); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_metaball_world_15_14",
+  "token": "metaball_world",
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.8 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_raymarched_metaballs_7_22",
+  "token": "raymarched_metaballs",
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.2 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_nakama_metaballs_23_22",
+  "token": "nakama_metaballs",
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.9 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_flagdancer_8_25",
+  "token": "flagdancer",
+  "strategies": [
+   "raise"
+  ],
+  "note": "2.1 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_gridagent_4_26",
+  "token": "gridagent",
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.4 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_mesh_grammar_detailed_bulge_8_22",
+  "token": "mesh_grammar_detailed_bulge",
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.3 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "Topology_Entropy_Morphogenesis",
+  "id": "f2_entropy_morphogenesis_15_14",
+  "token": "entropy_morphogenesis",
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.0 m below the slab (built for a museum plinth): raised by that.",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_softbody_gallery_part2_17_8",
+  "token": "softbody_gallery_part2",
+  "strategies": [
+   "move",
+   "raise",
+   "turn"
+  ],
+  "note": "0.5 m below the slab (built for a museum plinth): raised by that. | fit pass: edge: north 10.5 m (0 of 20 samples past the slab have groun; moved 5.6 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals_Part2",
+  "id": "f3_softbody_gallery_part2_9_10",
+  "token": "softbody_gallery_part2",
+  "strategies": [
+   "move",
+   "raise",
+   "turn"
+  ],
+  "note": "0.5 m below the slab (built for a museum plinth): raised by that. | fit pass: edge: north 7.5 m (0 of 15 samples past the slab have ground; moved 5.5 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_mc_portal_landscape_7_14",
+  "token": "mc_portal_landscape",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "A 48 x 48 m marching-cubes landscape with portals: a landscape, looked at - 0.025 (15 m). | Still 15 m at 0.025 with no free spot: 0.02 (12 m); moved next pass. | fit pass: 13.3 m inward at 0.02.",
+  "remove": false
+ },
+ {
+  "map": "ISO_LookupTable",
+  "id": "f2_mc_cave_7_29",
+  "token": "mc_cave",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 30 m cave terrain drawn 46 m west of the building: 0.07 (14 m), then moved in. | fit pass: edge: north 3.0 m (0 of 5 samples past the slab have ground); moved 5.0 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_GyroidDemo_23_16",
+  "token": "GyroidDemo",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "A 20 m gyroid at 0.5 through two slabs: 0.13 (5.2 m). | fit pass: edge: north 0.6 m (0 of 5 samples past the slab have ground); moved 1.8 m | Centred on its origin: at 0.13 it reached 2.6 m below the slab.",
+  "remove": false
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_metaballs_15_28",
+  "token": "metaballs",
+  "strategies": [
+   "raise",
+   "scale_area"
+  ],
+  "note": "A 12 m metaball field at 1, 2.4 m through the slab above: 0.42 (5 m).",
+  "remove": false
+ },
+ {
+  "map": "ISO_ImplicitModeling",
+  "id": "f5_implicit_surface_modeling_8_10",
+  "token": "implicit_surface_modeling",
+  "strategies": [
+   "raise",
+   "scale_area"
+  ],
+  "note": "The same 12 m implicit-surface cube, 3.6 m through the slab above: 0.42.",
+  "remove": false
+ },
+ {
+  "map": "ISO_Sculpting",
+  "id": "f3_fountain_demo_9_27",
+  "token": "fountain_demo",
+  "strategies": [
+   "raise",
+   "scale_area"
+  ],
+  "note": "An 8 m fountain, 3 m below the slab: 0.055 (5.5 m), on the slab.",
+  "remove": false
+ },
+ {
+  "map": "ISO_Introduction",
+  "id": "f1_voxel_noise_demo_7_12",
+  "token": "voxel_noise_demo",
+  "strategies": [
+   "move",
+   "raise",
+   "scale_area"
+  ],
+  "note": "A 5.8 m voxel world floating at 4 m and through the slab above: 0.15, on the slab. | fit pass: edge: north 1.4 m (0 of 10 samples past the slab have ground; moved 3.6 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_iso_gyroid_console_16_3",
+  "token": "iso_gyroid_console",
+  "strategies": [
+   "code_fix",
+   "strip_floor"
+  ],
+  "note": "A console 26 m deep with a 12 m flat part: its own floor goes. | Its 12 m straight probe (6 m each side of the gyroid, made for the gyroid at 0.5) now scales with the gyroid. Cost: at 0.13 the gyroid's passages are below body size, so the probe reports them closed - a body-scale work; candidate for a floor of its own.",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Cloth_Physics",
+  "id": "f2_tension_membrane_15_57",
+  "token": "tension_membrane",
+  "strategies": [
+   "move",
+   "strip_floor"
+  ],
+  "note": "A 14 x 12.5 m membrane on a 14 m plate: the plate goes, the membrane hangs from its own frame. | fit pass: edge: north 1.8 m (0 of 10 samples past the slab have ground; moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "id": "f6_rhizome_inside_17_17",
+  "token": "rhizome_inside",
+  "strategies": [
+   "raise",
+   "scale_area",
+   "side_slab"
+  ],
+  "note": "A 25 x 25 m body you walk inside (its scale is the body's): raised 0.8 m and given a slab on each long side. | 5.84 m tall in a 5.64 m storey: 0.96 - the body's scale barely changes. | It ignores its placement scale (0.96 changed nothing) and is 5.84 m tall in a 5.64 m storey: its lowest 0.2 m sinks into the 0.36 m slab instead.",
+  "remove": false
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "28 x 5 m north: the body reaches 3.5 m past this edge.",
+  "remove": false
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "28 x 5 m south: the body reaches 3.5 m past this edge.",
+  "remove": false
+ },
+ {
+  "map": "ISO_FlatTerrain",
+  "id": "f4_mc_overhang_landscape_19_13",
+  "token": "mc_overhang_landscape",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 5.0 m (0 of 10 samples past the slab have ground; moved 7.5 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_PortalLandscape",
+  "id": "f5_marchingcubes_portal_landscape_8_12",
+  "token": "marchingcubes_portal_landscape",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 3.0 m (0 of 5 samples past the slab have ground); moved 5.5 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_LookupTable",
+  "id": "f2_fifteen_cases_demo_12_11",
+  "token": "fifteen_cases_demo",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: north 1.6 m (0 of 5 samples past the slab have ground); moved 16.8 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_mc_torus_sculpture_8_16",
+  "token": "mc_torus_sculpture",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "fit pass: edge: north 1.5 m (0 of 5 samples past the slab have ground); moved 6.0 m | It turns: 0.7 m below the slab at its new spot.",
+  "remove": false
+ },
+ {
+  "map": "ISO_FlatTerrain",
+  "id": "f4_mc_terrain_demo_8_37",
+  "token": "mc_terrain_demo",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.9 m (0 of 10 samples past the slab have ground; moved 5.4 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_soft_sampled_gallery_21_41",
+  "token": "soft_sampled_gallery",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: north 3.2 m (0 of 20 samples past the slab have ground; moved 7.2 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_soft_capture_gravity_7_27",
+  "token": "soft_capture_gravity",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.2 m (0 of 15 samples past the slab have ground; moved 5.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_soft_capture_skin_22_32",
+  "token": "soft_capture_skin",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.2 m (0 of 15 samples past the slab have ground; moved 3.9 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_FlatTerrain",
+  "id": "f4_mc_flat_landscape_9_13",
+  "token": "mc_flat_landscape",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.0 m (0 of 5 samples past the slab have ground); moved 2.1 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Soft_Body_Deformation",
+  "id": "f1_radiolaria_18_22",
+  "token": "radiolaria",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.8 m (0 of 20 samples past the slab have ground; moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_cloth_straps_7_16",
+  "token": "cloth_straps",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.5 m (0 of 10 samples past the slab have ground; moved 3.2 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_cloth_straps_7_19",
+  "token": "cloth_straps",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.5 m (0 of 10 samples past the slab have ground; moved 3.2 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_cloth_straps_7_22",
+  "token": "cloth_straps",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 1.5 m (0 of 10 samples past the slab have ground; moved 3.2 m",
+  "remove": false
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_the_confessing_body_16_34",
+  "token": "the_confessing_body",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (15.1, 0.4, -10.1); moved 2.2 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_LookupTable",
+  "id": "f2_film_iso_cell_1_17",
+  "token": "film_iso_cell",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 0.3 m (0 of 5 samples past the slab have ground); moved 0.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Cloth_Physics",
+  "id": "f2_film_cloth_relations_1_27",
+  "token": "film_cloth_relations",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (15.0, 1.3, -12.0); moved 4.5 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_synthesis_stand_5_7",
+  "token": "synthesis_stand",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (17.0, 0.3, 10.9); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Cloth_Physics",
+  "id": "f2_soft_workshop_console_11_5",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 3.2 m (1 of 25 samples past the slab have ground; moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_soft_workshop_console_11_5",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 13.9); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_iso_cave_console_14_7",
+  "token": "iso_cave_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 12.9); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "Topology_Entropy_Morphogenesis",
+  "id": "f2_soft_workshop_console_15_9",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: edge: south 4.2 m (10 of 25 samples past the slab have groun; moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_soft_workshop_console_11_5",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 13.9); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_soft_workshop_console_11_5",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 13.9); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals_Part2",
+  "id": "f3_soft_workshop_console_11_5",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 13.9); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Affect_Theory_Visualization",
+  "id": "f5_soft_workshop_console_15_11",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 13.9); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_soft_workshop_console_8_6",
+  "token": "soft_workshop_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-7.0, 0.7, 12.9); moved 3.2 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_Sculpting",
+  "id": "f3_iso_sculpt_console_9_5",
+  "token": "iso_sculpt_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 11.9); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_PortalLandscape",
+  "id": "f5_iso_portal_console_14_6",
+  "token": "iso_portal_console",
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 11.9); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_iso_metaball_console_15_5",
+  "token": "iso_metaball_console",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.5 m (0 of 15 samples past the slab have ground; moved 1.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_flex_cloth_pad_24_6",
+  "token": "flex_cloth_pad",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-17.0, 1.9, 10.0); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals_Part2",
+  "id": "f3_pick_up_cube_5_6",
+  "token": "pick_up_cube",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-17.0, 0.3, 10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_pick_up_cube_5_6",
+  "token": "pick_up_cube",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-17.0, 0.3, 10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_pick_up_cube_5_9",
+  "token": "pick_up_cube",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (16.0, 0.3, 11.0); moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_grab_long_stick_11_6",
+  "token": "grab_long_stick",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (16.8, 0.0, 10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_rd_museum_gallery_22_29",
+  "token": "rd_museum_gallery",
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 30 m row of reaction-diffusion plinths across the floor's 18 m: turned along the floor, at 0.6 (18 m) between the shafts and the south edge.",
+  "remove": false
+ },
+ {
+  "map": "ISO_ShapesGallery",
+  "id": "f1_iso_shapes_console_14_3",
+  "token": "iso_shapes_console",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 20.5 x 7.5 m console 3.2 m past the south edge; the band between the shafts and the edge is 6 m deep: 0.72.",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_soft_mushroom_23_24",
+  "token": "soft_mushroom",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "An 11.4 m soft mushroom field on the carousel floor: 0.5; moved next pass. | 0.4 m past the west edge on a full floor: 0.45, a metre in.",
+  "remove": false
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_rounded_softbody_test_8_10",
+  "token": "rounded_softbody_test",
+  "strategies": [
+   "code_fix"
+  ],
+  "note": "Something of it reached 876 m up in this survey and not the last: a soft-body blow-up that comes and goes - code case, open.",
+  "remove": false
+ }
+]

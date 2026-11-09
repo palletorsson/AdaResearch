@@ -1,0 +1,56 @@
+[
+ {
+  "map": "ISO_RhizomeBody",
+  "id": "f6_rhizome_inside_17_17",
+  "token": "rhizome_inside",
+  "set": {
+   "scale": 1,
+   "height": 0.56
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "It ignores its placement scale (0.96 changed nothing) and is 5.84 m tall in a 5.64 m storey: its lowest 0.2 m sinks into the 0.36 m slab instead."
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_mc_portal_landscape_7_14",
+  "token": "mc_portal_landscape",
+  "set": {
+   "position": [
+    -1,
+    -0.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: 13.3 m inward at 0.02."
+ },
+ {
+  "map": "SoftBodies_Carusell",
+  "id": "f1_soft_mushroom_23_24",
+  "token": "soft_mushroom",
+  "set": {
+   "scale": 0.45,
+   "position": [
+    -16,
+    -2
+   ]
+  },
+  "strategies": [
+   "scale_area",
+   "move"
+  ],
+  "note": "0.4 m past the west edge on a full floor: 0.45, a metre in."
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_iso_gyroid_console_16_3",
+  "token": "iso_gyroid_console",
+  "strategies": [
+   "code_fix"
+  ],
+  "note": "Its 12 m straight probe (6 m each side of the gyroid, made for the gyroid at 0.5) now scales with the gyroid. Cost: at 0.13 the gyroid's passages are below body size, so the probe reports them closed - a body-scale work; candidate for a floor of its own."
+ }
+]

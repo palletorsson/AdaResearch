@@ -98,7 +98,10 @@ func probe_endpoints() -> Array[Vector3]:
 	# Fixed horizontal test at head/torso height through the domain's centreline.
 	var centre: Vector3 = works.GyroidDemo.global_position
 	centre.y = floor_y + 1.0
-	return [centre + Vector3(0, 0, -6), centre + Vector3(0, 0, 6)]
+	# 6 m each way at the gyroid's museum scale 0.5; a tower that scales the gyroid down scales its probe with it, so the
+	# line still crosses the same relative path (and stays on the floor) - 2026-11-09
+	var half := 6.0 * works.GyroidDemo.global_basis.get_scale().x / 0.5
+	return [centre + Vector3(0, 0, -half), centre + Vector3(0, 0, half)]
 
 func _run_probe() -> void:
 	var colliders: Array = []

@@ -1,0 +1,336 @@
+[
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_voxel_noise_demo_11_47",
+  "token": "voxel_noise_demo",
+  "set": {
+   "height": 1.94
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.9 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_mc_inside_cave_20_14",
+  "token": "mc_inside_cave",
+  "set": {
+   "height": 0.87
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.8 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_metaball_world_15_14",
+  "token": "metaball_world",
+  "set": {
+   "height": 0.8
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.8 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_raymarched_metaballs_7_22",
+  "token": "raymarched_metaballs",
+  "set": {
+   "height": 1.22
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.2 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_nakama_metaballs_23_22",
+  "token": "nakama_metaballs",
+  "set": {
+   "height": 0.93
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.9 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_flagdancer_8_25",
+  "token": "flagdancer",
+  "set": {
+   "height": 2.11
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "2.1 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "SoftBodies_Playground_of_Joy",
+  "id": "f4_gridagent_4_26",
+  "token": "gridagent",
+  "set": {
+   "height": 0.42
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.4 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_mesh_grammar_detailed_bulge_8_22",
+  "token": "mesh_grammar_detailed_bulge",
+  "set": {
+   "height": 0.35
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.3 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "Topology_Entropy_Morphogenesis",
+  "id": "f2_entropy_morphogenesis_15_14",
+  "token": "entropy_morphogenesis",
+  "set": {
+   "height": 5.02
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.0 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "SoftBodies_Obsticals",
+  "id": "f2_softbody_gallery_part2_17_8",
+  "token": "softbody_gallery_part2",
+  "set": {
+   "height": 0.52
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.5 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "SoftBodies_Obsticals_Part2",
+  "id": "f3_softbody_gallery_part2_9_10",
+  "token": "softbody_gallery_part2",
+  "set": {
+   "height": 0.52
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.5 m below the slab (built for a museum plinth): raised by that."
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_mc_portal_landscape_7_14",
+  "token": "mc_portal_landscape",
+  "set": {
+   "scale": 0.025,
+   "height": 0.27
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 48 x 48 m marching-cubes landscape with portals: a landscape, looked at - 0.025 (15 m)."
+ },
+ {
+  "map": "ISO_LookupTable",
+  "id": "f2_mc_cave_7_29",
+  "token": "mc_cave",
+  "set": {
+   "scale": 0.07,
+   "height": 2.98,
+   "position": [
+    0,
+    -5
+   ]
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 30 m cave terrain drawn 46 m west of the building: 0.07 (14 m), then moved in."
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_GyroidDemo_23_16",
+  "token": "GyroidDemo",
+  "set": {
+   "scale": 0.13,
+   "height": 0.01
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 20 m gyroid at 0.5 through two slabs: 0.13 (5.2 m)."
+ },
+ {
+  "map": "ISO_Metaballs",
+  "id": "f4_metaballs_15_28",
+  "token": "metaballs",
+  "set": {
+   "scale": 0.42,
+   "height": 2.54
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 12 m metaball field at 1, 2.4 m through the slab above: 0.42 (5 m)."
+ },
+ {
+  "map": "ISO_ImplicitModeling",
+  "id": "f5_implicit_surface_modeling_8_10",
+  "token": "implicit_surface_modeling",
+  "set": {
+   "scale": 0.42,
+   "height": 2.54
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "The same 12 m implicit-surface cube, 3.6 m through the slab above: 0.42."
+ },
+ {
+  "map": "ISO_Sculpting",
+  "id": "f3_fountain_demo_9_27",
+  "token": "fountain_demo",
+  "set": {
+   "scale": 0.055,
+   "height": 2.77
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "An 8 m fountain, 3 m below the slab: 0.055 (5.5 m), on the slab."
+ },
+ {
+  "map": "ISO_Introduction",
+  "id": "f1_voxel_noise_demo_7_12",
+  "token": "voxel_noise_demo",
+  "set": {
+   "scale": 0.15,
+   "height": 2.42
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 5.8 m voxel world floating at 4 m and through the slab above: 0.15, on the slab."
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_iso_gyroid_console_16_3",
+  "token": "iso_gyroid_console",
+  "fit": {
+   "strip": [
+    "floor"
+   ]
+  },
+  "strategies": [
+   "strip_floor"
+  ],
+  "note": "A console 26 m deep with a 12 m flat part: its own floor goes."
+ },
+ {
+  "map": "SoftBodies_Cloth_Physics",
+  "id": "f2_tension_membrane_15_57",
+  "token": "tension_membrane",
+  "fit": {
+   "strip": [
+    "floor"
+   ]
+  },
+  "strategies": [
+   "strip_floor"
+  ],
+  "note": "A 14 x 12.5 m membrane on a 14 m plate: the plate goes, the membrane hangs from its own frame."
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "id": "f6_rhizome_inside_17_17",
+  "token": "rhizome_inside",
+  "set": {
+   "height": 0.78
+  },
+  "strategies": [
+   "raise",
+   "side_slab"
+  ],
+  "note": "A 25 x 25 m body you walk inside (its scale is the body's): raised 0.8 m and given a slab on each long side."
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 28,
+    "depth": 5,
+    "seed": 160,
+    "editor_label": "Side slab / room for the rhizome body (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "28 x 5 m north: the body reaches 3.5 m past this edge."
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "add": {
+   "id": "side-slab-south",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 0,
+   "config": {
+    "length": 28,
+    "depth": 5,
+    "seed": 161,
+    "editor_label": "Side slab / room for the rhizome body (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "28 x 5 m south: the body reaches 3.5 m past this edge."
+ }
+]
