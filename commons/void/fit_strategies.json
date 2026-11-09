@@ -73,7 +73,7 @@
       "when": "A work or a field that needs more depth than 18 m, or room beside a full floor.",
       "how": "Place void_slab_extension on the building edge facing out: config length (2-42), depth (1-10).",
       "cost": "It reads as architecture: use it where the idea needs the room.",
-      "learned": "6 works stand on 4 slabs (ML_Evolution south 16 x 8; Shader_05 north 39 x 8; Shader_11 north 16 x 5; Shader_12 north 30 x 6): rooms 4-7 m past the north edge of a full floor. A slab must span the whole overhang along the edge, not just most of it."
+      "learned": "6 works stand on 4 slabs (ML_Evolution south 16 x 8; Shader_05 north 39 x 8; Shader_11 north 16 x 5; Shader_12 north 30 x 6): rooms 4-7 m past the north edge of a full floor. A slab must span the whole overhang along the edge, not just most of it. Procedural generation + swarm: six works that are walked at body scale (three walkable fitness landscapes, a crowd walk, a maze, a drone comparison) stood 3-6 m past one edge of a floor with no free centre: one slab each, as long as the work and its overhang plus a metre deep - all fit."
     },
     {
       "id": "raise",
@@ -92,7 +92,7 @@
       "when": "Fields, landscapes, diagrams - works looked at or walked round, not walked through at body scale.",
       "how": "placement scale.",
       "cost": "Never for works whose lesson is the body's size (passages, Drink Me, approach works).",
-      "learned": "7 of 9: fields and water surfaces (creature field 0.35, basin 0.62); a small step (0.92) clears a ceiling. Isosurfaces: landscapes and fields 0.025-0.42 (11 of 11). Watch body-scale meaning: the gyroid at 0.13 keeps its probe but its passages are now below body size - the probe honestly reports them closed."
+      "learned": "7 of 9: fields and water surfaces (creature field 0.35, basin 0.62); a small step (0.92) clears a ceiling. Isosurfaces: landscapes and fields 0.025-0.42 (11 of 11). Watch body-scale meaning: the gyroid at 0.13 keeps its probe but its passages are now below body size - the probe honestly reports them closed. Not for works with bodies inside scaled colliders: the random-walk cave was reverted to full size (taller-floor case)."
     },
     {
       "id": "reduce_repeats",
@@ -152,7 +152,7 @@
       "when": "It is drawn far from its floor or its bodies fly off: world-coordinate meshes, physics blow-ups.",
       "how": "Read its code.",
       "cost": "Per work.",
-      "learned": "joint_learn_walk reset its walker to world (0,1,0) - the top of the tower - and flew apart: its own frame now. neural_networks_vr still drops something ~495 m: open. The gyroid console's 12 m probe was fixed to the gyroid's museum scale: it now scales with it. rounded_softbody_test blows up only on some runs (876 m): open."
+      "learned": "joint_learn_walk reset its walker to world (0,1,0) - the top of the tower - and flew apart: its own frame now. neural_networks_vr still drops something ~495 m: open. The gyroid console's 12 m probe was fixed to the gyroid's museum scale: it now scales with it. rounded_softbody_test blows up only on some runs (876 m): open. boid_manager: its boids' boundary was a box round the world origin (the tower's top); the manager now gives them its own frame, and an opt-in boid_boundary (with a firmer steer) keeps a flock on one floor. Physics that misbehaves on some runs only (caverandomwalk 828 m, rhizomatic_maze_space 80-90 m) is not caused by the fit: reverting the scale or height did not stop it. Compile-check every touched script - a typed-inference error once shipped (6f48ba100)."
     },
     {
       "id": "remove_duplicate",
@@ -1601,6 +1601,470 @@
       "after": "overflows: ceiling: 870.7 m through the slab above (top 876.4, headroom 5.6)",
       "verdict": "partly",
       "note": "Something of it reached 876 m up in this survey and not the last: a soft-body blow-up that comes and goes - code case, open."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Genetic_Evolution",
+      "id": "f1_GeneticProgramming_9_5",
+      "token": "GeneticProgramming",
+      "strategies": [
+        "move",
+        "strip_floor"
+      ],
+      "before": "overflows: edge: north 5.0 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 12 m plate under the genetic programming lesson: its own floor goes. | fit pass: edge: north 4.0 m (0 of 10 samples past the slab have ground; moved 7.6 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Space_Colonization",
+      "id": "f2_space_colonization_algorithm_9_5",
+      "token": "space_colonization_algorithm",
+      "strategies": [
+        "move",
+        "strip_floor",
+        "turn"
+      ],
+      "before": "overflows: edge: north 4.5 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "An 8 m plate under the space-colonisation tree: its own floor goes. | fit pass: edge: north 2.5 m (0 of 5 samples past the slab have ground); moved 5.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Branching_Growth",
+      "id": "f1_branching_growth_algorithm_8_10",
+      "token": "branching_growth_algorithm",
+      "strategies": [
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: ceiling: 0.6 m through the slab above (top 6.2, headroom 5.6); floor: 2.9 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 9.2 m branching tree 2.9 m below the slab and through the ceiling: 0.6, on the slab."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Branching_Growth",
+      "id": "f1_organic_space_18_15",
+      "token": "organic_space",
+      "strategies": [
+        "move",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 4.2 m (0 of 10 samples past the slab have ground); ceiling: 0.6 m through the slab above (top 6.2, headroom 5.6); floor: 6.2 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 12.5 m organic space at 0.5 through the ceiling: 0.22 (5.5 m). | fit pass: edge: north 0.8 m (0 of 5 samples past the slab have ground); moved 1.8 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Caves_Mazes",
+      "id": "f3_caverandomwalk_19_11",
+      "token": "caverandomwalk",
+      "strategies": [
+        "code_fix",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 1.0 m (2 of 5 samples past the slab have ground); ceiling: 4.4 m through the slab above (top 10.0, headroom 5.6)",
+      "after": "overflows: edge: north 1.0 m (3 of 5 samples past the slab have ground); ceiling: 822.6 m through the slab above (top 828.3, headroom 5.6)",
+      "verdict": "partly",
+      "note": "A 10 m random-walk cave through the ceiling: 0.54. Cost: its passages are now below body size. | Back to full size: at 0.54 something of it flew 828 m (a body in scaled colliders). A 10 m cave in a 5.6 m storey: a taller-floor or own-floor case, open. | Something of it flies 828 m on some runs, at full size too - not the scale; code case, open."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Caves_Mazes",
+      "id": "f3_maze_generation_22_19",
+      "token": "maze_generation",
+      "strategies": [
+        "strip_floor"
+      ],
+      "before": "overflows: edge: north 4.8 m (0 of 10 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "The maze's 13.5 m Floor goes; its walls are the maze."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Caves_Mazes",
+      "id": "f3_binary_space_partitioning_11_23",
+      "token": "binary_space_partitioning",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: edge: south 2.0 m (0 of 10 samples past the slab have ground); floor: 1.6 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "1.6 m below the slab: raised by that. | fit pass: edge: south 2.0 m (0 of 10 samples past the slab have ground; moved 2.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Sculpted_Forms",
+      "id": "f4_cube_mound_scene_8_11",
+      "token": "cube_mound_scene",
+      "strategies": [
+        "scale_area"
+      ],
+      "before": "overflows: ceiling: 1.4 m through the slab above (top 7.0, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 7 m mound of cubes through the ceiling: 0.78."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Sculpted_Forms",
+      "id": "f4_dome_23_13",
+      "token": "dome",
+      "strategies": [
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 2.1 m (0 of 5 samples past the slab have ground); ceiling: 8.5 m through the slab above (top 14.1, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 14.3 m CSG dome at 0.55: 0.21 (5.5 m)."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Mirrored_Patterns",
+      "id": "f5_rhizomatic_maze_space_22_14",
+      "token": "rhizomatic_maze_space",
+      "strategies": [
+        "code_fix",
+        "raise",
+        "scale_area"
+      ],
+      "before": "overflows: ceiling: 0.4 m through the slab above (top 6.0, headroom 5.6)",
+      "after": "overflows: ceiling: 0.8 m through the slab above (top 6.4, headroom 5.6); floor: 82.2 m down through its own slab",
+      "verdict": "partly",
+      "note": "Hung at 4 m, 0.4 m through the ceiling: 0.45 m lower. | Lowered 0.45 m, something of it fell 89 m through the slab: back at 4 m, and 0.65 instead of 0.7. | Something of it falls 80-90 m on some runs, back at its own height too; code case, open."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Mirrored_Patterns",
+      "id": "f5_pattern_tunnel_machine_14_22",
+      "token": "pattern_tunnel_machine",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 13.0 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "An 18.9 m tunnel across the floor's 18 m depth: turned along the floor, on the band between the shafts and the south edge."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "id": "f1_particle_swarm_optimization_legacy_1_4",
+      "token": "void_swarm_legacy_pso",
+      "strategies": [
+        "raise",
+        "scale_area"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-33.0, -1.3, 0.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 20 m particle-swarm field drawn 33 m west of the building: 0.27 (5.4 m), moved in next pass."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "id": "f1_physarum_trace_gallery_20_5",
+      "token": "physarum_trace_gallery",
+      "strategies": [
+        "scale_area"
+      ],
+      "before": "overflows: edge: north 0.8 m (0 of 5 samples past the slab have ground); ceiling: 1.1 m through the slab above (top 6.7, headroom 5.6)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "6.7 m tall, 1.1 m through the ceiling: 0.82."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_FlowFields",
+      "id": "f2_flow_crowd_22_7",
+      "token": "flow_crowd",
+      "strategies": [
+        "strip_floor"
+      ],
+      "before": "overflows: edge: north 6.0 m (0 of 15 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "A 15 m plate under the flow-field crowd: its own floor goes."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "id": "f1_boids_aquarium_4_6",
+      "token": "boids_aquarium",
+      "strategies": [
+        "raise"
+      ],
+      "before": "overflows: floor: 0.7 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "0.7 m below the slab: raised by that."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "id": "f1_boids_2d_in_3d_2_8",
+      "token": "boids_2d_in_3d",
+      "strategies": [
+        "move",
+        "raise"
+      ],
+      "before": "overflows: edge: north 0.5 m (0 of 5 samples past the slab have ground); floor: 1.0 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "1.0 m below the slab: raised by that. | fit pass: edge: north 0.5 m (0 of 5 samples past the slab have ground); moved 1.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "id": "f1_boid_manager_5_8",
+      "token": "boid_manager",
+      "strategies": [
+        "code_fix",
+        "move",
+        "raise",
+        "reduce_repeats"
+      ],
+      "before": "displaced: drawn above its floor, box centre (15.0, 30.6, -6.7)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "Its flock flew 30 m above the floor: the boids' boundary was a box round the WORLD origin (the top of the tower); boid_manager now gives them its own frame. | With its own frame the flock roamed the boids' 50 x 30 x 50 m box round the manager: the opt-in boid_boundary keeps it in 16 x 4 x 14 m, spawned in 10 x 2.5 x 10, in the middle of the floor. | boid_boundary now also steers harder (25 m/s, from 2 m inside): the flock stays in 17 x 5 x 15 m; it dipped 0.9 m under the slab - a metre up."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "id": "f1_self_organizing_patterns_12_19",
+      "token": "self_organizing_patterns",
+      "strategies": [
+        "raise"
+      ],
+      "before": "overflows: floor: 0.8 m down through its own slab",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "0.8 m below the slab: raised by that."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "id": "f3_ant_scale_atlas_26_8",
+      "token": "ant_scale_atlas",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 1.1 m (2 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 1.1 m (2 of 5 samples past the slab have ground); moved 8.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "id": "f2_listening_horde_18_4",
+      "token": "listening_horde",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 0.4 m (0 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 0.4 m (0 of 5 samples past the slab have ground); moved 3.9 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "id": "f1_fitness_landscape_politics_4_19",
+      "token": "fitness_landscape_politics",
+      "strategies": [
+        "move"
+      ],
+      "before": "overflows: edge: north 0.6 m (0 of 5 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: north 0.6 m (0 of 5 samples past the slab have ground); moved 2.2 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "id": "f1_film_boid_neighbour_3_1",
+      "token": "film_boid_neighbour",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-18.0, 1.3, 10.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-18.0, 1.3, 10.0); moved 1.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "id": "f2_catalyst_prompter_box_3_1",
+      "token": "catalyst_prompter_box",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (-18.0, 0.7, 10.0)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (-18.0, 0.7, 10.0); moved 2.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Sculpted_Forms",
+      "id": "f4_pg_workshop_console_11_5",
+      "token": "pg_workshop_console",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "overflows: edge: south 3.2 m (14 of 25 samples past the slab have ground)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: edge: south 3.2 m (14 of 25 samples past the slab have groun; moved 2.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Branching_Growth",
+      "id": "f1_pg_workshop_console_8_5",
+      "token": "pg_workshop_console",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "displaced: drawn outside the building, box centre (0.0, 0.7, 10.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 10.9); moved 1.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Caves_Mazes",
+      "id": "f3_pg_workshop_console_14_5",
+      "token": "pg_workshop_console",
+      "strategies": [
+        "move",
+        "turn"
+      ],
+      "before": "displaced: drawn outside the building, box centre (0.0, 0.7, 12.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 12.9); moved 3.0 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Mirrored_Patterns",
+      "id": "f5_pg_workshop_console_11_5",
+      "token": "pg_workshop_console",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (0.0, 0.7, 11.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (0.0, 0.7, 11.9); moved 3.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "id": "f1_science_screen_10_2",
+      "token": "science_screen",
+      "strategies": [
+        "move"
+      ],
+      "before": "displaced: drawn outside the building, box centre (17.0, 2.6, 9.9)",
+      "after": "fits",
+      "verdict": "worked",
+      "note": "fit pass: drawn outside the building, box centre (17.0, 2.6, 9.9); moved 1.5 m"
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_FlowFields",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "18 x 7 m north for f2_flow_crowd_22_7, a crowd walk 5.6 m past the edge on a floor with no free centre."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "12 x 4 m north for f1_drone_comparison_20_6, 3.1 m past the edge."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "14 x 6 m north for f3_ant_colony_walk_8_8, a walkable fitness landscape at body scale, 4.8 m past the edge."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "id": "side-slab-south",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "14 x 6 m south for f1_particle_swarm_walk_8_9, a walkable landscape, 5.1 m past the edge."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "id": "side-slab-south",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "15 x 6 m south for f2_population_account_walk_8_10, a walkable landscape, 5.2 m past the edge."
+    },
+    {
+      "at": "2026-11-09",
+      "map": "PG_Caves_Mazes",
+      "id": "side-slab-north",
+      "token": "void_slab_extension",
+      "strategies": [
+        "side_slab"
+      ],
+      "before": "fits",
+      "after": "fits",
+      "verdict": "unchanged",
+      "note": "15 x 6 m north for f3_maze_generation_22_19, a maze you walk, 4.6 m past the edge."
     }
   ]
 }

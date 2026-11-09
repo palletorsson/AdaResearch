@@ -101,6 +101,9 @@ const CAPTION_FONT_SIZE: int = 70
 
 # Spawn area
 @export var spawn_area_size = Vector3(20, 10, 20)
+## Opt-in: each boid's own boundary box (its boundary_size, 50 x 30 x 50 m by default) takes this size round the manager
+## - a flock that has to stay on one floor of the Void tower (2026-11-09). Zero leaves the boids' own.
+@export var boid_boundary := Vector3.ZERO
 
 # VR related
 @export var vr_player_path: NodePath
@@ -309,6 +312,15 @@ func _make_boid() -> Node3D:
 ## Everything that has to happen after the child is in the tree but is not
 ## deposit-specific.
 func _after_add(b: Node3D) -> void:
+	# The flock is spawned round this manager: its boundary is too. Unset, a boid steered back to a box round the
+	# WORLD origin - the top of the Void tower, a kilometre up (2026-11-09).
+	if "boundary_frame" in b and b.get("boundary_frame") == null:
+		b.set("boundary_frame", self)
+	if boid_boundary != Vector3.ZERO and "boundary_size" in b:
+		b.set("boundary_size", boid_boundary)
+		# a soft 5 m/s steer from 5 m inside the edge lets a 5-10 m/s flock overshoot by metres: a tight box steers harder
+		if "boundary_force" in b: b.set("boundary_force", maxf(float(b.get("boundary_force")), 25.0))
+		if "boundary_margin" in b: b.set("boundary_margin", minf(float(b.get("boundary_margin")), 2.0))
 	if vr_player and b.has_method("set"):
 		b.set("vr_player_path", b.get_path_to(vr_player))
 

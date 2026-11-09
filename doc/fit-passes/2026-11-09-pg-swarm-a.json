@@ -1,0 +1,245 @@
+[
+ {
+  "map": "PG_Genetic_Evolution",
+  "id": "f1_GeneticProgramming_9_5",
+  "token": "GeneticProgramming",
+  "fit": {
+   "strip": [
+    "floor"
+   ]
+  },
+  "strategies": [
+   "strip_floor"
+  ],
+  "note": "A 12 m plate under the genetic programming lesson: its own floor goes."
+ },
+ {
+  "map": "PG_Space_Colonization",
+  "id": "f2_space_colonization_algorithm_9_5",
+  "token": "space_colonization_algorithm",
+  "fit": {
+   "strip": [
+    "floor"
+   ]
+  },
+  "strategies": [
+   "strip_floor"
+  ],
+  "note": "An 8 m plate under the space-colonisation tree: its own floor goes."
+ },
+ {
+  "map": "PG_Branching_Growth",
+  "id": "f1_branching_growth_algorithm_8_10",
+  "token": "branching_growth_algorithm",
+  "set": {
+   "scale": 0.6,
+   "height": 1.82
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 9.2 m branching tree 2.9 m below the slab and through the ceiling: 0.6, on the slab."
+ },
+ {
+  "map": "PG_Branching_Growth",
+  "id": "f1_organic_space_18_15",
+  "token": "organic_space",
+  "set": {
+   "scale": 0.22,
+   "height": 2.77
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 12.5 m organic space at 0.5 through the ceiling: 0.22 (5.5 m)."
+ },
+ {
+  "map": "PG_Caves_Mazes",
+  "id": "f3_caverandomwalk_19_11",
+  "token": "caverandomwalk",
+  "set": {
+   "scale": 0.54,
+   "height": 0.29
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 10 m random-walk cave through the ceiling: 0.54. Cost: its passages are now below body size."
+ },
+ {
+  "map": "PG_Caves_Mazes",
+  "id": "f3_maze_generation_22_19",
+  "token": "maze_generation",
+  "fit": {
+   "strip": [],
+   "strip_parts": [
+    "Floor"
+   ]
+  },
+  "strategies": [
+   "strip_floor"
+  ],
+  "note": "The maze's 13.5 m Floor goes; its walls are the maze."
+ },
+ {
+  "map": "PG_Caves_Mazes",
+  "id": "f3_binary_space_partitioning_11_23",
+  "token": "binary_space_partitioning",
+  "set": {
+   "height": 1.67
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.6 m below the slab: raised by that."
+ },
+ {
+  "map": "PG_Sculpted_Forms",
+  "id": "f4_cube_mound_scene_8_11",
+  "token": "cube_mound_scene",
+  "set": {
+   "scale": 0.78,
+   "height": 0.04
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "A 7 m mound of cubes through the ceiling: 0.78."
+ },
+ {
+  "map": "PG_Sculpted_Forms",
+  "id": "f4_dome_23_13",
+  "token": "dome",
+  "set": {
+   "scale": 0.21,
+   "height": 0.08
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 14.3 m CSG dome at 0.55: 0.21 (5.5 m)."
+ },
+ {
+  "map": "PG_Mirrored_Patterns",
+  "id": "f5_rhizomatic_maze_space_22_14",
+  "token": "rhizomatic_maze_space",
+  "set": {
+   "height": 3.55
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "Hung at 4 m, 0.4 m through the ceiling: 0.45 m lower."
+ },
+ {
+  "map": "PG_Mirrored_Patterns",
+  "id": "f5_pattern_tunnel_machine_14_22",
+  "token": "pattern_tunnel_machine",
+  "set": {
+   "facing": 270.0,
+   "position": [
+    0,
+    6
+   ]
+  },
+  "strategies": [
+   "turn",
+   "move"
+  ],
+  "note": "An 18.9 m tunnel across the floor's 18 m depth: turned along the floor, on the band between the shafts and the south edge."
+ },
+ {
+  "map": "SwarmIntelligence_PhysarumColony",
+  "id": "f1_particle_swarm_optimization_legacy_1_4",
+  "token": "void_swarm_legacy_pso",
+  "set": {
+   "scale": 0.27,
+   "height": 2.72,
+   "position": [
+    0,
+    -4
+   ]
+  },
+  "strategies": [
+   "scale_area",
+   "raise"
+  ],
+  "note": "A 20 m particle-swarm field drawn 33 m west of the building: 0.27 (5.4 m), moved in next pass."
+ },
+ {
+  "map": "SwarmIntelligence_PhysarumColony",
+  "id": "f1_physarum_trace_gallery_20_5",
+  "token": "physarum_trace_gallery",
+  "set": {
+   "scale": 0.82,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "6.7 m tall, 1.1 m through the ceiling: 0.82."
+ },
+ {
+  "map": "SwarmIntelligence_FlowFields",
+  "id": "f2_flow_crowd_22_7",
+  "token": "flow_crowd",
+  "fit": {
+   "strip": [
+    "floor"
+   ]
+  },
+  "strategies": [
+   "strip_floor"
+  ],
+  "note": "A 15 m plate under the flow-field crowd: its own floor goes."
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boids_aquarium_4_6",
+  "token": "boids_aquarium",
+  "set": {
+   "height": 0.69
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.7 m below the slab: raised by that."
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boids_2d_in_3d_2_8",
+  "token": "boids_2d_in_3d",
+  "set": {
+   "height": 1.02
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.0 m below the slab: raised by that."
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boid_manager_5_8",
+  "token": "boid_manager",
+  "strategies": [
+   "code_fix"
+  ],
+  "note": "Its flock flew 30 m above the floor: the boids' boundary was a box round the WORLD origin (the top of the tower); boid_manager now gives them its own frame."
+ },
+ {
+  "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+  "id": "f1_self_organizing_patterns_12_19",
+  "token": "self_organizing_patterns",
+  "set": {
+   "height": 1.45
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.8 m below the slab: raised by that."
+ }
+]

@@ -33,6 +33,8 @@ static func before_ready(artifact: Node, fit: Variant) -> void:
 			TYPE_FLOAT: value = float(value)
 			TYPE_BOOL: value = str(value).to_lower() in ["true", "1", "on", "yes"]
 			TYPE_STRING: value = str(value)
+			TYPE_VECTOR3: if value is Array and (value as Array).size() == 3: value = Vector3(float(value[0]), float(value[1]), float(value[2]))
+			TYPE_VECTOR2: if value is Array and (value as Array).size() == 2: value = Vector2(float(value[0]), float(value[1]))
 			TYPE_ARRAY:
 				# a typed array (Array[int]) refuses a plain one: rebuild it with the element type
 				if (current as Array).is_typed() and value is Array:

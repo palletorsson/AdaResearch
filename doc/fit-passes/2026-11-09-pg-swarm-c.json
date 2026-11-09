@@ -1,0 +1,8 @@
+[
+ {"map": "SwarmIntelligence_Boids_Algorithm", "id": "f1_boid_manager_5_8", "token": "boid_manager", "set": {"height": 2.5}, "strategies": ["raise", "code_fix"],
+  "note": "boid_boundary now also steers harder (25 m/s, from 2 m inside): the flock stays in 17 x 5 x 15 m; it dipped 0.9 m under the slab - a metre up."},
+ {"map": "PG_Caves_Mazes", "id": "f3_caverandomwalk_19_11", "token": "caverandomwalk", "strategies": ["code_fix"],
+  "note": "Something of it flies 828 m on some runs, at full size too - not the scale; code case, open."},
+ {"map": "PG_Mirrored_Patterns", "id": "f5_rhizomatic_maze_space_22_14", "token": "rhizomatic_maze_space", "strategies": ["code_fix"],
+  "note": "Something of it falls 80-90 m on some runs, back at its own height too; code case, open."}
+]
