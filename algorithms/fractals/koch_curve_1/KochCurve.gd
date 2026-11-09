@@ -71,7 +71,8 @@ func setup_materials() -> void:
 	koch_material.emission_enabled = true
 	koch_material.emission = Color(0.1, 0.4, 0.6)
 	koch_material.emission_energy_multiplier = 1.5
-	koch_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED  # VR optimization
+	koch_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	koch_material.cull_mode = BaseMaterial3D.CULL_DISABLED  # a flat ribbon, absent from behind (2026-11-09)  # VR optimization
 	koch_mesh_instance.material_override = koch_material
 	
 	# Iteration control material
@@ -98,9 +99,10 @@ func initialize_koch_curve() -> void:
 	var height = triangle_size * sqrt(3) / 2.0
 	
 	# Three vertices of equilateral triangle
+	# clockwise (2026-11-09): the bump goes on the left of travel, which counter-clockwise is INSIDE (anti-snowflake)
 	points.append(Vector2(-triangle_size/2, -height/3))
-	points.append(Vector2(triangle_size/2, -height/3))
 	points.append(Vector2(0, 2*height/3))
+	points.append(Vector2(triangle_size/2, -height/3))
 	points.append(Vector2(-triangle_size/2, -height/3))  # Close the triangle
 	
 	# Reset iteration counter
@@ -171,7 +173,7 @@ func generate_koch_segment(start: Vector2, end: Vector2) -> Array:
 	# Calculate the peak of the equilateral triangle
 	var perpendicular = Vector2(-unit_dir.y, unit_dir.x)  # Rotate 90 degrees
 	var triangle_height = (length / 3.0) * sqrt(3) / 2.0
-	var p3 = p2 + perpendicular * triangle_height
+	var p3 = (p2 + p4) * 0.5 + perpendicular * triangle_height   # over the MIDDLE of the middle third (was p2: lopsided)
 	
 	return [p1, p2, p3, p4, p5]
 

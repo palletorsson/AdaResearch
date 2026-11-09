@@ -1190,6 +1190,17 @@
       ],
       "tower": "floor 123 (Fractal_Synthesis), evidence trace at scale 0.09: height 1.6 -> 2.2, because the outward snowflake reaches 2.1 m below its centre (it would have stood 0.48 m into the slab)",
       "capture": "ada_run/improve/koch_curve/before_after.png (front and back)"
+    },
+    {
+      "lookup_name": "koch_curve_1 (procgen_extra copy of KochCurve.gd)",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the same three fixes as koch_curve: peak over the middle of the middle third, triangle clockwise (outward bumps), two-sided ribbon"
+      ],
+      "tower": "not placed in the tower; registered in procgen_extra.json",
+      "capture": "ada_run/improve/koch_curve_1/after.png (iteration 1: the six-pointed star, from the front where it was absent)"
     }
   ]
 }
