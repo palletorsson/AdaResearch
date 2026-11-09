@@ -1234,6 +1234,18 @@
       ],
       "tower": "every floor (an autoload child, not a placement); measured on floors 4 and 183",
       "capture": "headless Void probe with tracked fake controllers (no visual change), median of 7 calls: floor 4 14.8 -> 0.064 ms, floor 183 13.3 -> 0.062 ms; origin/left/right identical before and after"
+    },
+    {
+      "lookup_name": "branching_growth_algorithm",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "branch_radius (0.03, declared but never reaching the drawing) now draws the branches as tubes thinning to 40 % at the youngest generation (tube_branches, default on; off = the lines)",
+        "vertex_color_is_srgb on the default material"
+      ],
+      "tower": "floor 134 (PG_Branching_Growth)",
+      "capture": "ada_run/improve/branching_growth_algorithm/before_after.png"
     }
   ]
 }

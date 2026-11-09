@@ -1,5 +1,7 @@
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 # @identity
 # essence: space colonization algorithm — branches grow toward attractors, each step: find closest attractor, add jitter, extend by growth_distance, mark reached attractors as consumed
 # desire: to watch a tree grow toward light in real time — branches reaching, splitting, and filling space as attractors guide their path through 3D
@@ -21,6 +23,10 @@ extends Node3D
 # 🏳️‍🌈 QUEER VISUAL PARAMETERS 🏳️‍⚧️
 @export var branch_material: Material
 @export var branch_radius = 0.03
+## Draw the living branches as tubes of branch_radius (thinning to 40 % at the youngest generation) instead of
+## one-pixel lines (2026-11-09). branch_radius was declared and never reached the drawing: the tree growing toward
+## its light read as a scribble of hairs. Off = the old lines.
+@export var tube_branches: bool = true
 @export var growth_per_frame = 8  # Faster, more dynamic growth
 @export var enable_pride_colors = true
 @export var enable_sparkles = true
@@ -162,6 +168,7 @@ func _ready() -> void:
 		var material = StandardMaterial3D.new()
 		material.flags_unshaded = true
 		material.vertex_color_use_as_albedo = true
+		material.vertex_color_is_srgb = true   # the flag colours are authored as sRGB (2026-11-09)
 		material.albedo_color = Color.WHITE
 		mesh_instance.material_override = material
 	else:
@@ -355,7 +362,13 @@ func update_mesh_immediate() -> void:
 	if branches.size() < 2:
 		_draw_aftermath()
 		return
-	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	var tube_pairs := PackedVector3Array()
+	var tube_cols := PackedColorArray()
+	var tube_radii := PackedFloat32Array()
+	var max_gen: int = 1
+	for b in branches: max_gen = maxi(max_gen, int(b.generation))
+	if not tube_branches:
+		immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	# Draw all branches with FABULOUS QUEER COLORS! 🌈✨
 	for i in range(branches.size()):
@@ -382,12 +395,21 @@ func update_mesh_immediate() -> void:
 			# age, and age is unreadable through a heartbeat.
 			color = _aftermath_tint(branch, color)
 			
+			if tube_branches:
+				tube_pairs.append(parent.position)
+				tube_pairs.append(branch.position)
+				tube_cols.append(color)
+				tube_radii.append(float(branch_radius) * lerpf(1.0, 0.4, float(branch.generation) / float(max_gen)))
+				continue
 			immediate_mesh.surface_set_color(color)
 			immediate_mesh.surface_add_vertex(parent.position)
 			immediate_mesh.surface_set_color(color)
 			immediate_mesh.surface_add_vertex(branch.position)
 	
-	immediate_mesh.surface_end()
+	if tube_branches:
+		ThickLine.append_segments(immediate_mesh, tube_pairs, tube_cols, float(branch_radius), 5, tube_radii)
+	else:
+		immediate_mesh.surface_end()
 
 	# APPENDED LAST. Opens a SECOND surface on the same ImmediateMesh, so the
 	# branch surface above is untouched and `form` never reaches this at all.
