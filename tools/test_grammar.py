@@ -28,18 +28,30 @@ check("every card speaks the grammar's vocabulary (%d cards)" % live["cards"], n
 check("every spine sequence with floors has its root card on its own floors", not kinds(live, "spine"))
 check("the skateboard's tie is earned: the pendulum stands below it",
       not any("mod_skateboard" in t and " tie " in t for t in kinds(live, "earned")))
+check("the elevated plank (parts:1) is met before the skateboard (parts:2)", not any("raises parts to 2" in t for t in kinds(live, "axes")))
 check("the grammar reads nearly every expression word (%d unread)" % len(live["unknown"]), len(live["unknown"]) <= 6)
 
-# 1. the pendulum back on floor 21, after the plank on a ball: the skateboard uses a tie before its card
+# 1. the pendulum back on floor 21, after the seesaw: the skateboard uses a tie before its card
 d = copy.deepcopy(base)
 main = d["doc"]["main"]
 row = next(r for r in main if r["key"] == "physics_play_pendulum")
 main.remove(row)
 row["floor"] = 21
-main.insert(next(i for i, r in enumerate(main) if r["key"] == "physics_play_plank_ball") + 1, row)
+main.insert(next(i for i, r in enumerate(main) if r["key"] == "physics_play_seesaw") + 1, row)
 r = grammar.check(d)
 check("BITES: with the pendulum back on floor 21 the skateboard uses tie unearned",
       any("mod_skateboard" in t and "uses tie before its card" in t for t in kinds(r, "earned")))
+
+# 1b. the plank on a ball back on floor 21: the skateboard's parts:2 stands before parts:1 again
+d = copy.deepcopy(base)
+main = d["doc"]["main"]
+row = next(r for r in main if r["key"] == "physics_play_plank_ball")
+main.remove(row)
+row["floor"] = 21
+main.insert(next(i for i, r in enumerate(main) if r["key"] == "physics_play_seesaw") + 1, row)
+r = grammar.check(d)
+check("BITES: with the plank on a ball back on floor 21 the skateboard's parts:2 comes before parts:1",
+      any("skateboard_3 raises parts to 2" in t for t in kinds(r, "axes")))
 
 # 2. no domino card: the AND gate raises react to 2 with no level 1 below it
 d = copy.deepcopy(base)

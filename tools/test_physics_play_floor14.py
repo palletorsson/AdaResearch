@@ -1,12 +1,12 @@
-"""The pendulum on floor 14 (Trans_Introduction; moved from floor 21 on 2026-11-09, below the skateboard on 15) in the
-actual tower, desktop walker. Probe: tools/probes/pendulum_floor14.gd.
-Output: ada_run/pendulum-floor14/checks.json (+ photographs). Runs beside other Godot jobs (2026-11-06 rule)."""
+"""The pendulum and the plank on a ball on floor 14 (Trans_Introduction; moved from floor 21 on 2026-11-09, below the
+skateboard on 15) in the actual tower, desktop walker. Probe: tools/probes/physics_play_floor14.gd.
+Output: ada_run/physics-play-floor14/checks.json (+ photographs). Runs beside other Godot jobs (2026-11-06 rule)."""
 from pathlib import Path
 import json, os, subprocess, sys
 from void_trial_runtime import stage_runtime
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'ada_run/pendulum-floor14'
+OUT = ROOT / 'ada_run/physics-play-floor14'
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
         result = subprocess.run([sys.executable, str(ROOT / 'tools/godot_watchdog.py'), '--expect=' + str(destination), '--grace=240', '--stall=120', '--',
             os.environ.get('GODOT_EXE', 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe'),
             '--log-file', str(destination / 'godot.log'), '--path', str(stage), '--xr-mode', 'off',
-            '--resolution', '1600x1000', '--script', 'res://tools/probes/pendulum_floor14.gd', '--', '--out=' + destination.as_posix()
+            '--resolution', '1600x1000', '--script', 'res://tools/probes/physics_play_floor14.gd', '--', '--out=' + destination.as_posix()
         ], stdout=stream, stderr=subprocess.STDOUT, timeout=900, creationflags=subprocess.CREATE_NO_WINDOW)
     text = (destination / 'engine.log').read_text(encoding='utf8', errors='replace')
     log = destination / 'godot.log'

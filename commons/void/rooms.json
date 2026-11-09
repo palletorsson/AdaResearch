@@ -11404,6 +11404,21 @@
           "config": {
             "editor_label": "Physics play / pendulum - Jolt; the tie, met before the skateboard's axles (moved from floor 21, 2026-11-09)"
           }
+        },
+        {
+          "id": "physics-play-plank-ball",
+          "artifact": "physics_play_plank_ball",
+          "station": "SE",
+          "position": [
+            7.5,
+            7.0
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 0,
+          "config": {
+            "editor_label": "Physics play / plank on a ball - Jolt; two kinds of part resting on each other, met before the skateboard (moved from floor 21, 2026-11-09)"
+          }
         }
       ],
       "props": [],
@@ -21269,21 +21284,6 @@
                 ]
               }
             }
-          }
-        },
-        {
-          "id": "physics-play-plank-ball",
-          "artifact": "physics_play_plank_ball",
-          "station": "SW",
-          "position": [
-            0,
-            0
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "editor_label": "Physics play / plank on a ball - Jolt, a precursor to Logic"
           }
         },
         {

@@ -5,7 +5,8 @@ extends "res://tools/probes/void_game_probe.gd"
 ## commons/void/rooms.json: still before RELEASE, moving after it, home after RESET, nothing lost off the floor, and a
 ## route a body can walk. Run: python tools/test_physics_play_floor.py
 ## The PENDULUM went down to floor 14 on 2026-11-09 (Palle: "Move the pendulum below the skateboard") - the tie is met
-## before the skateboard's axles on 15; tools/probes/pendulum_floor14.gd checks it there. Eleven set-ups stay here.
+## before the skateboard's axles on 15; the PLANK ON A BALL followed the same day ("move the plank on a ball below the
+## skateboard too" - two kinds of part before many). tools/probes/physics_play_floor14.gd checks both there. Ten stay here.
 const FLOOR := 21
 const THRESHOLDS := ["again", "almost", "just", "barely", "still"]
 
@@ -21,15 +22,15 @@ func run() -> void:
 	await frames(90)
 	var content: Node3D = game.building.content
 	var ex: Dictionary = content.exhibits
-	var on14: Array = content.data.floors[14].artifacts.filter(func(a): return (str(a.artifact).begins_with("physics_play") and a.artifact != "physics_play_pendulum") or str(a.artifact).begins_with("threshold_"))
-	check("floor 14 is the Introduction again: no physics play but the pendulum, no threshold, no gate (%d left)" % on14.size(), on14.is_empty() and not content.data.floors[14].artifacts.any(func(a): return str(a.artifact).begins_with("matter_spring")))
+	var on14: Array = content.data.floors[14].artifacts.filter(func(a): return (str(a.artifact).begins_with("physics_play") and not a.artifact in ["physics_play_pendulum", "physics_play_plank_ball"]) or str(a.artifact).begins_with("threshold_"))
+	check("floor 14 is the Introduction again: no physics play but the pendulum and the plank on a ball, no threshold, no gate (%d left)" % on14.size(), on14.is_empty() and not content.data.floors[14].artifacts.any(func(a): return str(a.artifact).begins_with("matter_spring")))
 	check("they stand on the Logic floors (22 AND, 23 OR and NOT)", content.data.floors[22].artifacts.any(func(a): return a.artifact == "matter_spring_and") and content.data.floors[23].artifacts.filter(func(a): return a.artifact in ["matter_spring_or", "matter_spring_not"]).size() == 2)
 	var plays: Array = []
 	for k in ex.keys():
 		if str(k).begins_with("%d/physics-play-" % FLOOR):
 			var found: Array = (ex[k] as Node).find_children("*", "Node3D", true, false).filter(func(n): return n.get_script() != null and n.get_script().resource_path.ends_with("physics_play/physics_play.gd"))
 			if not found.is_empty(): plays.append(found[0])
-	check("eleven physics play set-ups are built on floor %d (the pendulum is on 14), none with a button (%d)" % [FLOOR, plays.size()], plays.size() == 11 and not plays.any(func(p): return p.setup == "pendulum") and not plays.any(func(p): return p.find_children("*", "Node3D", true, false).any(func(n): return n.has_signal("pressed"))))
+	check("ten physics play set-ups are built on floor %d (the pendulum and the plank on a ball are on 14), none with a button (%d)" % [FLOOR, plays.size()], plays.size() == 10 and not plays.any(func(p): return p.setup in ["pendulum", "plank_on_ball"]) and not plays.any(func(p): return p.find_children("*", "Node3D", true, false).any(func(n): return n.has_signal("pressed"))))
 	var built: Array = THRESHOLDS.filter(func(t): return ex.has("%d/threshold-workshop-%s" % [FLOOR, t]))
 	check("the five tipping points stand beside them (%s)" % ",".join(PackedStringArray(built)), built.size() == 5)
 	check("threshold_descent cools on Form Finding, floor 62", content.data.floors[62].artifacts.any(func(a): return a.artifact == "threshold_descent"))
