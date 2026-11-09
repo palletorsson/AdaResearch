@@ -40,6 +40,13 @@ extends Node3D
 @export var food_source_count: int = 4
 @export var lesson_seed: int = 20260920
 @export var lesson_display: bool = false
+## When every source is eaten, wait replenish_pause seconds and lay new food elsewhere (2026-11-09). Off (default)
+## the colony runs once: within a minute the four sources are gone, the trails evaporate and the ants wander among
+## grey husks for the rest of the day - a visitor who arrives late never sees a trail form. On, old trails fade
+## while new ones crystallise, which is the evaporation the work is about, shown again and again.
+@export var replenish: bool = false
+@export var replenish_pause: float = 4.0
+var _replenish_timer: float = 0.0
 const SIMULATION_STEP: float = 1.0 / 60.0
 var _step_remainder: float = 0.0
 var _rng := RandomNumberGenerator.new()
@@ -450,6 +457,19 @@ func _process(delta: float) -> void:
 
 func _simulate_step(delta: float) -> void:
 	_time += delta
+	if replenish:
+		var any_left := false
+		for food in _food_sources:
+			if food["remaining"] > 0.0:
+				any_left = true
+				break
+		if any_left:
+			_replenish_timer = 0.0
+		else:
+			_replenish_timer += delta
+			if _replenish_timer >= replenish_pause:
+				_replenish_timer = 0.0
+				_spawn_food_sources()   # the generator has moved on: new places, new qualities
 	_evaporate_pheromones(delta)
 	_update_ants(delta)
 	_update_recruitment_signals(delta)
@@ -924,6 +944,8 @@ func _update_labels() -> void:
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("lesson_seed"):
 		lesson_seed = int(config["lesson_seed"])
+	if config.has("replenish"):
+		replenish = str(config["replenish"]).to_lower() in ["true", "on", "1"]
 	if config.has("lesson_display"):
 		lesson_display = str(config["lesson_display"]).to_lower() in ["true", "on", "1"]
 		if lesson_display and is_instance_valid(_control_panel):

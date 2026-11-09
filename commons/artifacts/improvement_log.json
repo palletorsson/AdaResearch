@@ -1246,6 +1246,17 @@
       ],
       "tower": "floor 134 (PG_Branching_Growth)",
       "capture": "ada_run/improve/branching_growth_algorithm/before_after.png"
+    },
+    {
+      "lookup_name": "ant_colony_optimization",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "replenish export (default off = the single seeded run): when every source is eaten, wait replenish_pause (4 s) and lay new food elsewhere - old trails evaporate while new ones crystallise. Off, the colony ate all four sources in ~40 s and the trails were gone for good"
+      ],
+      "tower": "floor 167 (SwarmIntelligence_Agent_Based_Modeling_ABM): replenish on",
+      "capture": "ada_run/improve/ant_colony_optimization/before_after.png (50 s and 70 s), timeline.png (7/15/25 s: the trails do form)"
     }
   ]
 }
