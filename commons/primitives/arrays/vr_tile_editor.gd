@@ -21,6 +21,11 @@ extends Node3D
 
 @export var tile_size: int = 4
 @export var repeat_mode: int = 3  ## MIRROR_XY (kaleidoscope) by default
+## The draft the tile arrives carrying - PatternTilePuzzle's motif axis (blank | checker | cross | twill |
+## houndstooth). blank (default) is the shipped empty tile and an empty carpet: the room's claim - edit in your
+## hands, the floor becomes it - is invisible until someone edits. A placement naming a motif starts with the
+## floor already woven, still editable cell by cell (2026-11-09).
+@export var motif: String = "blank"
 
 @export_group("Carpet")
 @export var carpet_size: Vector2 = Vector2(3.0, 3.0)
@@ -112,6 +117,8 @@ func _apply_initial_config() -> void:
 		"tile_size": tile_size,
 		"repeat_mode": repeat_mode,
 	}
+	if motif != "blank":
+		config["motif"] = motif
 	if _puzzle.has_method("apply_grid_config"):
 		_puzzle.apply_grid_config(config)
 	_update_mode_label()
@@ -381,6 +388,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		tile_size = int(config_data["tile_size"])
 	if config_data.has("repeat_mode"):
 		repeat_mode = int(config_data["repeat_mode"])
+	if config_data.has("motif"):
+		# kept here too: a config that arrives before _ready() has no puzzle to delegate to
+		motif = str(config_data["motif"]).to_lower().strip_edges()
 
 	# Delegate to puzzle if it's ready
 	if _puzzle and _puzzle.has_method("apply_grid_config"):

@@ -985,6 +985,17 @@
         "hill_line_radius export (0.009 screen-local, 1.8 cm in the room at plate_scale 2; 0 = the old line): the H(p) curve - the figure the bench is about - is a tube lifted its own radius off the screen, the baseline at 60 %"
       ],
       "capture": "ada_run/improve/shannon_workbench/before_after.png"
+    },
+    {
+      "lookup_name": "vr_tile_editor (vr_tile_editor_mirror)",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "motif export passed to the wrapped PatternTilePuzzle (blank default = the shipped empty tile and empty carpet); apply_grid_config keeps it for a config that arrives before _ready"
+      ],
+      "tower": "floor 42 (Array_Patterns): the kaleidoscope editor starts with a houndstooth tile, so the floor carpet and the wall panel already show what MIRROR_XY does to it; still editable cell by cell",
+      "capture": "ada_run/improve/vr_tile_editor/before_after.png"
     }
   ]
 }
