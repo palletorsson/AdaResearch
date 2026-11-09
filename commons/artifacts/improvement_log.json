@@ -1142,6 +1142,17 @@
       ],
       "tower": "floor 125 (LSystems_Growth), unchanged placement",
       "capture": "ada_run/improve/AnimatedTree/before_after.png (shot without the scene's own current camera, which the tower strips)"
+    },
+    {
+      "lookup_name": "force_punching_bag",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the once-a-second hand scan searched the whole scene tree for XRController3D: measured in the tower on floor 57, 23,487 nodes and 12.0 ms - a hitch longer than a 90 Hz frame every second. It now takes the current rig: the XROrigin3D above the current camera (VR), the xr_origin group, or the current origin at the top of the scene (desktop). 0.009 ms; the same 2 controllers found, 2 mitts"
+      ],
+      "tower": "floor 57 (VFM_08_Arena)",
+      "capture": "headless Void probe (no visual change): before 12.0 ms / scan, after 0.009 ms, controllers 2 -> 2"
     }
   ]
 }

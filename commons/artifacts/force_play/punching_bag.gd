@@ -54,8 +54,23 @@ func step(dt: float) -> void:
 		item.active=near
 	status.text="7 kg / %.2f m/s\nHit, release, watch the return."%bag.linear_velocity.length()
 
+## The hands of the CURRENT rig. It searched the whole scene tree for XRController3D once a second: in the tower that
+## is ~23,500 nodes and 12 ms, a hitch longer than a 90 Hz frame every second on floor 57 (2026-11-09). The current
+## rig is the XROrigin3D above the current camera (VR), or the current one at the top of the scene (desktop).
+func _rig_controllers() -> Array:
+	var origin: Node = get_viewport().get_camera_3d()
+	while origin != null and not origin is XROrigin3D: origin = origin.get_parent()
+	if origin == null: origin = get_tree().get_first_node_in_group("xr_origin")
+	if origin == null:
+		# desktop: the camera is the walker's, and the rig stands beside it at the top of the scene
+		var scene: Node = get_tree().current_scene
+		for child in (scene.get_children() if scene else []):
+			if child is XROrigin3D and child.current: origin = child; break
+	if origin == null: return []
+	return origin.find_children("*", "XRController3D", true, false)
+
 func _scan_hands() -> void:
-	for controller in get_tree().root.find_children("*","XRController3D",true,false):
+	for controller in _rig_controllers():
 		var origin: Node=controller.get_parent()
 		while origin!=null and not origin is XROrigin3D:origin=origin.get_parent()
 		if origin==null or not origin.current:continue
