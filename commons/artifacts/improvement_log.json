@@ -1201,6 +1201,17 @@
       ],
       "tower": "not placed in the tower; registered in procgen_extra.json",
       "capture": "ada_run/improve/koch_curve_1/after.png (iteration 1: the six-pointed star, from the front where it was absent)"
+    },
+    {
+      "lookup_name": "hand_canvas",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the once-a-second hand scan (_scan_hands from _physics_process, unguarded) searched the whole scene tree for Skeleton3D: measured in the tower on floor 4, ~27,900 nodes and 14.2 ms (VR, tracked hands) to 30.6 ms (desktop) per scan - a hitch longer than a 90 Hz frame every second. It now searches the current rig: the XROrigin3D above the current camera (VR), the xr_origin group, or the current origin at the top of the scene (desktop), as punching_bag does. 0.08 ms (VR) / 0.003 ms (desktop); the same two hand skeletons found (Hand_L_Nails and Hand_R_Nails, 5 tips each)"
+      ],
+      "tower": "floor 4 (Point_Trace, candidate-hand_canvas), unchanged placement",
+      "capture": "headless Void probe (no visual change), median of 7 calls: VR 14.2 -> 0.081 ms, desktop 30.6 -> 0.003 ms; skeletons 2 -> 2 (VR), 0 -> 0 (desktop)"
     }
   ]
 }

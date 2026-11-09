@@ -93,10 +93,27 @@ func write_surfaces() -> Array:
 	return [{"origin": xf * Vector3(0, height / 2, SURFACE_THICKNESS), "normal": (xf.basis * Vector3(0, 0, 1)).normalized(),
 		"u": (xf.basis * Vector3(1, 0, 0)).normalized(), "v": (xf.basis * Vector3(0, 1, 0)).normalized(), "half_w": width / 2, "half_h": height / 2}]
 
-## Every tracked hand in the tree: a Skeleton3D with fingertip bones. Looked for once a second.
+## The CURRENT rig: the XROrigin3D above the current camera (VR), the xr_origin group, or the current origin at the
+## top of the scene (desktop) - the lookup punching_bag.gd's _rig_controllers() uses.
+func _rig_origin() -> Node:
+	var origin: Node = get_viewport().get_camera_3d()
+	while origin != null and not origin is XROrigin3D: origin = origin.get_parent()
+	if origin == null: origin = get_tree().get_first_node_in_group("xr_origin")
+	if origin == null:
+		# desktop: the camera is the walker's, and the rig stands beside it at the top of the scene
+		var scene: Node = get_tree().current_scene
+		for child in (scene.get_children() if scene else []):
+			if child is XROrigin3D and child.current: origin = child; break
+	return origin
+
+## Every tracked hand on the rig: a Skeleton3D with fingertip bones. Looked for once a second. It searched the whole
+## scene tree: in the tower ~27,900 nodes and 14-31 ms, a hitch longer than a 90 Hz frame every second on floor 4
+## (2026-11-09). The hand skeletons hang under the rig's controllers, so the rig is where to look.
 func _scan_hands() -> void:
 	_hands.clear()
-	for sk in get_tree().root.find_children("*", "Skeleton3D", true, false):
+	var origin := _rig_origin()
+	if origin == null: return
+	for sk in origin.find_children("*", "Skeleton3D", true, false):
 		var s := sk as Skeleton3D;var side := ""
 		for sfx in ["L", "R"]:
 			if s.find_bone("Index_Tip_" + sfx) >= 0:side = sfx
