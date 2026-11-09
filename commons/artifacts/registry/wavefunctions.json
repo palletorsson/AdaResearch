@@ -10249,7 +10249,7 @@
 		"was": "a fixed 3:2:1 figure. The frequency ratio - the artifact's own declared critical_parameter, and the subject of its truth line - was reachable only from set_preset(), a public method no map token could call, so every one of the 19 placements showed the same curve.",
 		"note": "The ratio is visible in a still here, unlike SphericalHarmonics: _generate_full_curve sweeps the whole parameter range into standing geometry every frame, so the closed figure is the object, not something a tracer draws over time. 1_phi_0 carries its own six-turn span and 3x sample count because non-closure cannot appear inside one period."
 	  },
-	  "description": "Parametric curves with particle tracer",
+	  "description": "Two oscillations at right angles, and a third in depth, draw one figure. The figure IS the frequency ratio: 1:1 a circle or an ellipse, 2:1 a figure eight, 3:2:1 a knot that closes after one period; at 1:phi, an irrational ratio, the curve never closes and densens turn after turn. Drawn as a glowing tube with a tracer riding it, and a line above that says what the ratio does. The phase drifts, so the figure turns without changing what it is.",
 	  "dev_themes": [
 		"oscillation",
 		"physics",
@@ -10263,10 +10263,13 @@
 	  ],
 	  "name": "LissajousCurves",
 	  "qfep_connection": "Two orthogonal oscillations creating complex figures — the ratio of frequencies determines the pattern. Rational ratios produce closed curves (low F), irrational ratios produce space-filling chaos (high E(S)). Commensurability as order.",
+	  "gamwell_reference": "Jules Antoine Lissajous, 1857: a light beam reflected from two tuning-fork mirrors at right angles drew these figures on a wall - the ratio of two pitches made visible, a century before the oscilloscope.",
+	  "interactions": ["watch the tracer close the figure after one period", "ratio axis: compare a closing knot with the 1:phi curve that never closes", "evidence axis: result, trace, longhand (the two oscillations beside the figure), axiom (the equations)"],
+	  "capacity": "READ a frequency ratio from a figure: count the lobes on each axis, and tell a rational ratio (it closes) from an irrational one (it never does)",
 	  "scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
 	  "sequence": "wavefunctions",
 	  "tags": [
-        "waves"
+        "waves", "lissajous", "frequency_ratio", "oscillation", "parametric_curve"
 	  ],
 	  "geometry_spec": {
 		"mesh_type": "procedural_line",

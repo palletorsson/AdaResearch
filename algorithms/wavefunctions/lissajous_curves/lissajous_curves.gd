@@ -12,7 +12,7 @@ extends Node3D
 # critical_parameter: freq_ratio_x / freq_ratio_y — rational ratios close the curve, irrational ratios fill space
 # triggers: time drives the parametric position; preset selection switches between classic ratio combinations
 # emerges: complex geometric figures from the interference of perpendicular oscillations
-# needs: VR frequency ratio control [missing], 3D rotation [has]
+# needs: VR frequency ratio control [missing], 3D rotation [has], a curve legible across a room [has: tube], the ratio said aloud [has: ratio line]
 # relationships: depends on ImmediateMesh trail rendering; contrasts with SphericalHarmonics (planar vs spherical oscillation); unlocks frequency ratio visualization
 # truth: The ratio of two frequencies determines whether a curve closes or wanders forever.
 
@@ -73,6 +73,13 @@ extends Node3D
 @export var show_particle: bool = true
 @export var particle_size: float = 0.08
 @export var rainbow_gradient: bool = true
+## Draw the curve as a glowing tube line_width thick. A LINE_STRIP is one pixel at any line_width, so from two metres
+## the figure - the whole argument - was a hairline (2026-11-09).
+@export var tube: bool = true
+@export_range(3, 12) var tube_sides: int = 6
+@export_range(0.0, 4.0, 0.1) var glow: float = 0.7
+## A line under the figure that says what the ratio does: rational closes, irrational never does.
+@export var ratio_label: bool = true
 
 @export_group("Animation")
 @export var animation_speed: float = 1.0
@@ -102,6 +109,10 @@ var _sample_scale: float = 1.0
 var _last_ratio: String = ""
 var _last_evidence: String = ""
 var _built: bool = false
+var _tube_instance: MeshInstance3D
+var _tube_indices: PackedInt32Array = PackedInt32Array()
+var _tube_key: Vector2i = Vector2i(-1, -1)   # (points, sides) the cached index buffer was built for
+var _ratio_plate: Label3D
 
 func _ready() -> void:
 	_apply_ratio()
@@ -118,6 +129,8 @@ func _process(delta: float) -> void:
 		_apply_ratio()
 		if evidence == "axiom":
 			_setup_visualization()
+		if _ratio_plate != null:
+			_ratio_plate.text = _ratio_text()
 	if evidence != _last_evidence:
 		_last_evidence = evidence
 		_setup_visualization()
@@ -167,6 +180,32 @@ func _setup_visualization() -> void:
 	curve_instance.material_override = mat
 
 	add_child(curve_instance)
+
+	# The tube: its own mesh, lit so it reads as a body in the room, glowing in its own colour
+	_tube_instance = null
+	_tube_key = Vector2i(-1, -1)
+	if tube:
+		_tube_instance = MeshInstance3D.new()
+		_tube_instance.name = "CurveTube"
+		var tube_mat := ShaderMaterial.new()
+		tube_mat.shader = _tube_shader()
+		tube_mat.set_shader_parameter("glow", glow)
+		_tube_instance.material_override = tube_mat
+		add_child(_tube_instance)
+
+	_ratio_plate = null
+	if ratio_label and evidence != "axiom":
+		_ratio_plate = Label3D.new()
+		_ratio_plate.name = "RatioLine"
+		_ratio_plate.font_size = 44
+		_ratio_plate.pixel_size = 0.004
+		_ratio_plate.outline_size = 8
+		_ratio_plate.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_ratio_plate.modulate = Color(0.92, 0.95, 1.0)
+		_ratio_plate.outline_modulate = Color(0.05, 0.06, 0.1)
+		_ratio_plate.position = Vector3(0.0, amplitude_y + 0.42, 0.0)   # above: under the figure it sat at the visitor's feet
+		_ratio_plate.text = _ratio_text()
+		add_child(_ratio_plate)
 
 	# Create particle
 	if _wants_particle():
@@ -233,6 +272,13 @@ func _update_curve_mesh() -> void:
 	if curve_points.size() < 2:
 		return
 
+	if tube and _tube_instance != null:
+		_build_tube()
+		if evidence == "longhand":
+			_add_component_strip(true)
+			_add_component_strip(false)
+		return
+
 	curve_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 
 	for i in range(curve_points.size()):
@@ -258,6 +304,87 @@ func _update_curve_mesh() -> void:
 	if evidence == "longhand":
 		_add_component_strip(true)
 		_add_component_strip(false)
+
+## The curve as a tube: a ring of tube_sides vertices round each sample, carried along the curve without twisting
+## (each ring's normal is the last one with its along-curve part taken out). The index buffer depends only on the
+## sample and side counts, so it is built once and reused while the phase drifts.
+func _build_tube() -> void:
+	var n: int = curve_points.size()
+	var s: int = tube_sides
+	var r: float = maxf(line_width, 0.004)
+	var verts := PackedVector3Array(); verts.resize(n * s)
+	var norms := PackedVector3Array(); norms.resize(n * s)
+	var cols := PackedColorArray(); cols.resize(n * s)
+	var cosv := PackedFloat32Array(); var sinv := PackedFloat32Array()
+	cosv.resize(s); sinv.resize(s)
+	for k in s:
+		cosv[k] = cos(TAU * float(k) / float(s)); sinv[k] = sin(TAU * float(k) / float(s))
+	var t0: Vector3 = (curve_points[1] - curve_points[0]).normalized()
+	var nrm: Vector3 = t0.cross(Vector3.UP if absf(t0.dot(Vector3.UP)) < 0.9 else Vector3.RIGHT).normalized()
+	for i in n:
+		var a: Vector3 = curve_points[maxi(i - 1, 0)]
+		var b: Vector3 = curve_points[mini(i + 1, n - 1)]
+		var tan: Vector3 = b - a
+		if tan.length_squared() > 1e-12:
+			tan = tan.normalized()
+			nrm = (nrm - tan * nrm.dot(tan))
+			if nrm.length_squared() < 1e-10:
+				nrm = tan.cross(Vector3.UP if absf(tan.dot(Vector3.UP)) < 0.9 else Vector3.RIGHT)
+			nrm = nrm.normalized()
+		var bin: Vector3 = tan.cross(nrm)
+		var col: Color = Color.from_hsv(float(i) / float(n), 0.95, 0.95) if rainbow_gradient else Color(0.3, 0.8, 1.0)
+		for k in s:
+			var d: Vector3 = nrm * cosv[k] + bin * sinv[k]
+			verts[i * s + k] = curve_points[i] + d * r
+			norms[i * s + k] = d
+			cols[i * s + k] = col
+	if _tube_key != Vector2i(n, s):
+		_tube_key = Vector2i(n, s)
+		_tube_indices = PackedInt32Array(); _tube_indices.resize((n - 1) * s * 6)
+		var w: int = 0
+		for i in n - 1:
+			for k in s:
+				var k2: int = (k + 1) % s
+				var p0: int = i * s + k; var p1: int = i * s + k2; var p2: int = (i + 1) * s + k2; var p3: int = (i + 1) * s + k
+				_tube_indices[w] = p0; _tube_indices[w + 1] = p1; _tube_indices[w + 2] = p2
+				_tube_indices[w + 3] = p0; _tube_indices[w + 4] = p2; _tube_indices[w + 5] = p3
+				w += 6
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_NORMAL] = norms
+	arrays[Mesh.ARRAY_COLOR] = cols
+	arrays[Mesh.ARRAY_INDEX] = _tube_indices
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	_tube_instance.mesh = mesh
+
+
+func _tube_shader() -> Shader:
+	var sh := Shader.new()
+	sh.code = """shader_type spatial;
+render_mode cull_disabled;
+uniform float glow = 0.7;
+void fragment() {
+	ALBEDO = COLOR.rgb;
+	EMISSION = COLOR.rgb * COLOR.rgb * glow * 0.5;   // squared: saturated hues glow without washing out to white
+	ROUGHNESS = 0.45;
+	METALLIC = 0.0;
+	RIM = 0.4;
+}
+"""
+	return sh
+
+
+## What the ratio does, in one line: the figure closes for any rational ratio, and never for an irrational one.
+func _ratio_text() -> String:
+	if ratio == "1_phi_0":
+		return "1 : φ   ·   irrational - the curve never closes"
+	var parts: Array = [_fmt(freq_ratio_x), _fmt(freq_ratio_y)]
+	if absf(amplitude_z) > 0.001 and absf(freq_ratio_z) > 0.001:
+		parts.append(_fmt(freq_ratio_z))
+	return "%s   ·   rational - the curve closes" % " : ".join(parts)
+
 
 func _add_component_strip(is_x_component: bool) -> void:
 	if not curve_mesh:

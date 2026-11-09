@@ -799,6 +799,30 @@
       ],
       "capture": "ada_run/improve/foucault_pendulum/before_after_standalone.png, before_after_tower.png (45 s of physics via capture_tscn_shot --physics)",
       "tower": "floor 66, shaft B, scale 0.65 -> 0.9 (Palle: make it a bit larger)"
+    },
+    {
+      "lookup_name": "lissajous_curves",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "before_score": "2/8",
+      "after_score": "6/8",
+      "fields_added": [
+        "gamwell_reference",
+        "interactions",
+        "capacity"
+      ],
+      "fields_updated": [
+        "description",
+        "tags"
+      ],
+      "gdscript_changed": true,
+      "identity_source": true,
+      "verified": true,
+      "code": [
+        "the curve as a glowing tube line_width thick (it was a 1-px LINE_STRIP; line_width was declared and never used)",
+        "a ratio line above the figure: rational closes, irrational never does"
+      ],
+      "capture": "ada_run/improve/lissajous_curves/before_after.png (5 s via capture_tscn_shot --physics)"
     }
   ]
 }
