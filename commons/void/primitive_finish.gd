@@ -5,6 +5,7 @@ extends RefCounted
 ##   finish  every solid mesh of the exhibit takes the platonic solids' warm white finish (PlatonicStudy.finish()).
 ##           Left as they are: anything transparent (glass, ghost shells), screens, labels and text, highlights, and
 ##           whatever a SubViewport draws. Applied again a second later for exhibits that build after _ready.
+##   outline the same white plus dark FEATURE edges (edge_outline.gd) - the Transformation floors' look, 2026-11-09.
 ##   study   the exhibit becomes one of the hall's solids: its mesh on a plinth, a pickable that stays frozen until it
 ##           is picked up and falls only when released, with the finish, gold edges and reading plate of PlatonicStudy.
 ##           config "study_name" names it on the plate; "study_solid" builds a named solid exactly (SOLIDS) instead of
@@ -22,6 +23,14 @@ static func dress(mount: Node3D, artifact: Node3D, mode: String, config: Diction
 			# Some exhibits build their meshes a frame or more after _ready.
 			if artifact.is_inside_tree():
 				artifact.get_tree().create_timer(1.0).timeout.connect(func(): if is_instance_valid(artifact): apply(artifact, finish))
+		"outline":
+			# The Transformation floors' white with dark feature edges (edge_outline.gd); "outline_angle" in degrees.
+			var Outline = preload("res://commons/void/edge_outline.gd")
+			var angle := float(config.get("outline_angle", 25.0))
+			var white := PlatonicStudy.finish()
+			Outline.outline(artifact, angle, white)
+			if artifact.is_inside_tree():
+				artifact.get_tree().create_timer(1.0).timeout.connect(func(): if is_instance_valid(artifact): Outline.outline(artifact, angle, white))
 		"study":
 			var exact: Mesh = solid(str(config.get("study_solid", "")))
 			study(mount, artifact, str(config.get("study_name", str(artifact.get_meta("void_artifact", "solid")))), exact)
