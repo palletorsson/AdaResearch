@@ -26,6 +26,14 @@ signal target_lost
 @export var target_player: bool = true
 @export var idle_reset_time: float = 10.0
 
+@export_category("Practice")
+## Balls of its own to hunt, drifting on slow Lissajous loops 1-4 m in front of it (2026-11-09). 0 (default) = none.
+## Where no dropper stands - the tower - the turret otherwise sweeps an empty room forever and the idea (aim by
+## vector arithmetic: yaw from atan2 of the target's x and z, pitch from its height, fire when the dot product of
+## barrel and target direction passes 0.97) is never shown. A burnt ball pops and another drifts in.
+@export_range(0, 6) var practice_targets: int = 0
+@export var practice_respawn: float = 2.5
+
 # State
 var current_target: Node3D = null
 var target_rb: RigidBody3D = null
@@ -37,6 +45,19 @@ var last_target_direction: Vector3 = Vector3.FORWARD
 var last_target_position: Vector3 = Vector3.ZERO
 var idle_time: float = 0.0
 var total_kills: int = 0
+
+# Practice targets (practice_targets > 0)
+var _practice: Array = []
+var _practice_wait: float = 0.0
+var _practice_serial: int = 0
+
+# The name-based fallback search, walked a slice per frame (2026-11-09). It used to recurse the WHOLE scene tree every
+# idle frame: on floor 47 of the tower that is 28,991 nodes and 33 ms a frame, with no ball in range to find.
+const SCAN_NODES_PER_FRAME := 600
+var _scan_stack: Array = []
+var _scan_found: Array = []
+var _scan_cache: Array = []
+var _scan_rest: float = 0.0
 
 # Components
 var turret_base: Node3D
@@ -51,6 +72,8 @@ var eye_glow: MeshInstance3D
 # Placements can retain ball hunting without making the visitor a target.
 # Configuration may arrive before _ready or while a target is already locked.
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("practice_targets") and str(config["practice_targets"]).is_valid_int():
+		practice_targets = clampi(int(str(config["practice_targets"])), 0, 6)
 	if not config.has("target_player"):
 		return
 	match str(config["target_player"]).strip_edges().to_lower():
@@ -247,6 +270,8 @@ func _build_lighting() -> void:
 	add_child(fill_light)
 
 func _process(delta: float) -> void:
+	if practice_targets > 0:
+		_update_practice(delta)
 	if auto_target and current_target == null:
 		idle_time += delta
 		
@@ -355,12 +380,45 @@ func _get_all_balls() -> Array:
 				if is_instance_valid(ball):
 					balls.append(ball)
 	
+	for ball in _practice:
+		if is_instance_valid(ball):
+			balls.append(ball)
+
 	if balls.is_empty():
-		_scan_for_balls(get_tree().root, balls)
-	
+		_advance_scan()
+		for ball in _scan_cache:
+			if is_instance_valid(ball) and ball.is_inside_tree():
+				balls.append(ball)
+
 	return balls
 
+## One slice of the name-based search; the finished sweep becomes the cache, and the next starts a second later.
+## Only PHYSICAL balls qualify - a RigidBody3D, or a node carrying one - so a mesh that merely has "ball" in its
+## name (a disco ball, a ball joint) is never burnt and freed.
+func _advance_scan() -> void:
+	if _scan_stack.is_empty():
+		if _scan_rest > 0.0:
+			_scan_rest -= get_process_delta_time()
+			return
+		_scan_stack = [get_tree().root]
+		_scan_found = []
+	var budget := SCAN_NODES_PER_FRAME
+	while budget > 0 and not _scan_stack.is_empty():
+		var node: Node = _scan_stack.pop_back()
+		budget -= 1
+		if not is_instance_valid(node):
+			continue
+		var node_name := String(node.name).to_lower()
+		if "ball" in node_name and "dropper" not in node_name and "turret" not in node_name:
+			if node is Node3D and node.visible and (node is RigidBody3D or node.get_node_or_null("RigidBody3D") is RigidBody3D):
+				_scan_found.append(node)
+		_scan_stack.append_array(node.get_children())
+	if _scan_stack.is_empty():
+		_scan_cache = _scan_found
+		_scan_rest = 1.0
+
 func _scan_for_balls(node: Node, results: Array) -> void:
+	# kept for callers outside this file; the turret itself walks the tree a slice at a time (_advance_scan)
 	var node_name = node.name.to_lower()
 	if "ball" in node_name and "dropper" not in node_name and "turret" not in node_name:
 		if node is Node3D and node.visible:
@@ -368,6 +426,53 @@ func _scan_for_balls(node: Node, results: Array) -> void:
 	
 	for child in node.get_children():
 		_scan_for_balls(child, results)
+
+
+# --- Practice targets -------------------------------------------------------------------------------------------
+
+func _update_practice(delta: float) -> void:
+	_practice = _practice.filter(func(b): return is_instance_valid(b) and not b.is_queued_for_deletion())
+	if _practice.size() < practice_targets:
+		_practice_wait -= delta
+		if _practice_wait <= 0.0:
+			_spawn_practice()
+			_practice_wait = practice_respawn
+	var t := Time.get_ticks_msec() * 0.001
+	for b in _practice:
+		var k: float = b.get_meta("practice_phase")
+		# a loop 2 m out in FRONT of the barrel's rest direction (-Z): never behind the turret - in the tower that is
+		# the slab edge it stands against
+		var r := 0.7 + 0.5 * (1.0 + sin(t * 0.21 + k * 1.7))
+		var body: Node3D = b.get_node("RigidBody3D")
+		body.position = Vector3(r * cos(t * 0.33 + k), 0.9 + 0.55 * sin(t * 0.47 + k * 2.3), -2.0 + r * sin(t * 0.29 + k * 1.3))
+
+func _spawn_practice() -> void:
+	_practice_serial += 1
+	var ball := Node3D.new()
+	ball.name = "PracticeBall%d" % _practice_serial
+	ball.set_meta("practice_phase", float(_practice_serial) * 2.39996)   # the golden angle: no two share a path
+	var body := RigidBody3D.new()
+	body.name = "RigidBody3D"
+	body.freeze = true
+	body.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	body.collision_layer = 0
+	body.collision_mask = 0
+	ball.add_child(body)
+	var mesh := MeshInstance3D.new()
+	mesh.name = "MeshInstance3D"
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.11
+	sphere.height = 0.22
+	mesh.mesh = sphere
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color.from_hsv(fmod(float(_practice_serial) * 0.618, 1.0), 0.65, 0.95)
+	mat.emission_enabled = true
+	mat.emission = mat.albedo_color
+	mat.emission_energy_multiplier = 0.8
+	mesh.material_override = mat
+	body.add_child(mesh)
+	add_child(ball)
+	_practice.append(ball)
 
 func _acquire_target(ball: Node3D) -> void:
 	current_target = ball

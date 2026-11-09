@@ -1008,6 +1008,19 @@
       ],
       "tower": "floor 43 (Symmetry_Seventeen): the plinth that held nothing (a bare token builds nothing by design) now carries a p4 tile, the group of the Persian mill the museum plan pairs it with",
       "capture": "ada_run/improve/pattern_artifact/before_after.png (six groups, dot vs F)"
+    },
+    {
+      "lookup_name": "laser_turret",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the name-based fallback search walks the tree a 600-node slice per frame (cached sweep, 1 s rest) instead of recursing the whole scene tree every idle frame: measured on floor 47, 28,991 nodes, 32.9 ms -> 0.47 ms a frame (0.005 ms once it has targets)",
+        "only PHYSICAL balls qualify for the name fallback (a RigidBody3D, or a node carrying one): a mesh that merely has 'ball' in its name within 25 m - three floors either way in the tower - is no longer burnt and queue_free'd",
+        "practice_targets export (0 = none, default): balls of its own drifting on Lissajous loops 1-4 m in front of the barrel; burnt, popped in confetti, replaced after practice_respawn"
+      ],
+      "tower": "floor 47 (Ribbon_Patterns_03): practice_targets 3 - it hunted nothing (target_player false, no dropper), now it locks, burns and pops; probe: 3 kills in 6.7 s, all inside the slab",
+      "capture": "ada_run/improve/laser_turret/before_after.png"
     }
   ]
 }
