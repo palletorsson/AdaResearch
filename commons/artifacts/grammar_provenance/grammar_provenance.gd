@@ -17,6 +17,7 @@ extends Node3D
 class_name GrammarProvenance
 
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
 
 ## How many generations to expand each L-system
 @export_range(1, 6) var generation_depth: int = 4:
@@ -25,6 +26,13 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 		if is_inside_tree():
 			_regenerate_all()
 
+## Stroke thickness in metres at the trunk (branches thin to 35 % at the deepest bracket). 0 draws the old one-pixel
+## lines: three grammars, three worldviews, drawn as hairlines you had to stand close to tell apart (2026-11-09).
+@export_range(0.0, 0.03, 0.001) var stroke_radius: float = 0.006
+## Each figure is fitted to this many metres on its longest side, standing on its base, so depth changes what a
+## grammar draws and not how big (2026-11-09). The lengths were left to grow: at depth 4 the Lindenmayer tree stood
+## 2.2 m and the Islamic island would have spanned 3.5 m across its neighbours. 0 = the old unfitted lengths.
+@export_range(0.0, 3.0, 0.05) var figure_size: float = 1.1
 ## Spacing between the three trees (meters)
 @export var tree_spacing: float = 1.2
 
@@ -95,6 +103,7 @@ func _build_trees() -> void:
 		var mat := StandardMaterial3D.new()
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		mat.vertex_color_use_as_albedo = true
+		mat.vertex_color_is_srgb = true   # authored as sRGB; read as linear the three palettes washed pale (2026-11-09)
 		mi.material_override = mat
 		mi.position = Vector3((i - 1) * tree_spacing, 0.30, 0)
 		add_child(mi)
@@ -275,7 +284,9 @@ func _render_lsystem(im: ImmediateMesh, grammar: Dictionary, depth: int) -> void
 	if max_depth_count == 0:
 		max_depth_count = 1
 
-	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	var pairs := PackedVector3Array()
+	var cols := PackedColorArray()
+	var radii := PackedFloat32Array()
 
 	current_depth = 0
 	for ch in lstring:
@@ -283,16 +294,20 @@ func _render_lsystem(im: ImmediateMesh, grammar: Dictionary, depth: int) -> void
 			"F":
 				var t := float(current_depth) / float(max_depth_count)
 				var col := color_base.lerp(color_tip, t)
-				im.surface_set_color(col)
-				im.surface_add_vertex(pos)
 				var new_pos := pos + direction * seg_length
-				im.surface_set_color(col)
-				im.surface_add_vertex(new_pos)
+				pairs.append(pos)
+				pairs.append(new_pos)
+				cols.append(col)
+				radii.append(stroke_radius * lerpf(1.0, 0.35, t))
 				pos = new_pos
+			# Turn in the drawing plane, about its fixed normal (+Z) (2026-11-09). It turned about right x heading with right
+			# fixed at +X, which is (0, 0, heading.y): every turn REVERSED while the turtle headed down and had no axis at
+			# all when it headed sideways - the trees, mostly growing up, hid it; the 90-degree Islamic island, always
+			# turning sideways and down, collapsed into a squiggle on its base.
 			"+":
-				direction = direction.rotated(right.cross(direction).normalized(), angle_rad)
+				direction = direction.rotated(Vector3.BACK, angle_rad)
 			"-":
-				direction = direction.rotated(right.cross(direction).normalized(), -angle_rad)
+				direction = direction.rotated(Vector3.BACK, -angle_rad)
 			"[":
 				stack.append({"pos": pos, "dir": direction, "right": right, "depth": current_depth})
 				current_depth += 1
@@ -304,6 +319,28 @@ func _render_lsystem(im: ImmediateMesh, grammar: Dictionary, depth: int) -> void
 					right = state["right"]
 					current_depth = state["depth"]
 
+	if figure_size > 0.0 and not pairs.is_empty():
+		var lo := Vector3(INF, INF, INF)
+		var hi := Vector3(-INF, -INF, -INF)
+		for v in pairs:
+			lo = lo.min(v)
+			hi = hi.max(v)
+		var span: Vector3 = hi - lo
+		var k: float = figure_size / maxf(maxf(span.x, span.y), 0.001)
+		var foot := Vector3((lo.x + hi.x) * 0.5, lo.y, (lo.z + hi.z) * 0.5)
+		for i in pairs.size():
+			pairs[i] = (pairs[i] - foot) * k
+
+	if stroke_radius > 0.0:
+		# the Islamic island at depth 4 is 16,384 segments: three-sided tubes past 4000
+		ThickLine.append_segments(im, pairs, cols, stroke_radius, 5 if cols.size() < 4000 else 3, radii)
+		return
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in cols.size():
+		im.surface_set_color(cols[i])
+		im.surface_add_vertex(pairs[i * 2])
+		im.surface_set_color(cols[i])
+		im.surface_add_vertex(pairs[i * 2 + 1])
 	im.surface_end()
 
 

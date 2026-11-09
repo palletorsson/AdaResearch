@@ -1093,6 +1093,19 @@
       ],
       "tower": "floor 124 (Grammar Lab) Koch lesson, unchanged placement",
       "capture": "ada_run/improve/lsystem_editor/before_after.png"
+    },
+    {
+      "lookup_name": "grammar_provenance",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG: the turtle turned about right x heading with right fixed at +X = (0,0,heading.y): every turn reversed while it headed down and had no axis heading sideways; the 90-degree Islamic island (F+F+F+F, F->F+F-F-FF+F+F-F) collapsed into a squiggle on its base. Turns now about the plane normal (+Z)",
+        "figure_size export (1.1 m): each grammar fitted to the same size standing on its base, so depth changes what it draws, not how big (the tree stood 2.2 m at depth 4, the island would have spanned 3.5 m)",
+        "stroke_radius export (0.006 m; 0 = lines): tubes tapering with bracket depth; vertex colours read as sRGB"
+      ],
+      "tower": "floor 124 (LSystems_Grammar_Lab): the three worldviews - UP, OUT, AROUND - finally three shapes",
+      "capture": "ada_run/improve/grammar_provenance/before_after.png"
     }
   ]
 }
