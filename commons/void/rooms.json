@@ -28847,15 +28847,23 @@
           "id": "f1_BigPipeSystem_18_25",
           "artifact": "BigPipeSystem",
           "position": [
-            15,
-            8
+            15.0,
+            8.0
           ],
           "station": "SE",
-          "height": 0,
-          "facing": 180,
+          "height": 0.82,
+          "facing": 270.0,
           "scale": 1,
           "config": {
-            "path": "straight,corner_right,straight"
+            "path": "straight,corner_right,straight",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "turn"
+              ],
+              "note": "Built for the first time (the path token used to be discarded): its 1.6 m bore sat on its centreline, 0.8 m into the slab - raised; edge: south 1.8 m (0 of 15 samples past the slab h, moved 0.0 m."
+            }
           }
         }
       ],
@@ -29277,14 +29285,24 @@
           "id": "f1_BigPipeSystem_2_3",
           "artifact": "BigPipeSystem",
           "position": [
-            -17,
-            -11
+            -6.0,
+            -3.0
           ],
           "station": "NW",
           "facing": 180,
-          "height": 0,
+          "height": 0.82,
           "scale": 1,
-          "config": {}
+          "config": {
+            "preset": "l_bend",
+            "fit": {
+              "strategies": [
+                "code_fix",
+                "move",
+                "raise"
+              ],
+              "note": "Built for the first time (the path token used to be discarded): its 1.6 m bore sat on its centreline, 0.8 m into the slab - raised; edge: north 2.0 m (0 of 10 samples past the slab h, moved 13.6 m."
+            }
+          }
         },
         {
           "id": "f1_pick_up_cube_8_3",
@@ -30073,10 +30091,16 @@
             -5
           ],
           "facing": 270,
-          "height": 1,
+          "height": 2.82,
           "scale": 1,
           "config": {
-            "path": "straight,straight,up,straight,down,straight,straight"
+            "path": "straight,straight,up,straight,down,straight,straight",
+            "fit": {
+              "strategies": [
+                "raise"
+              ],
+              "note": "Built for the first time (the path token used to be discarded): its 1.6 m bore sat on its centreline, 1.8 m into the slab - raised."
+            }
           }
         }
       ],

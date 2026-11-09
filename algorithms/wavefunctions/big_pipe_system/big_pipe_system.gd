@@ -4,7 +4,7 @@
 # critical_parameter: config_file or turtle command string — every junction, elbow, and branch lives in the string; geometry is just rendered grammar
 # triggers: _ready() runs the auto_build pass; build_pipe_system() walks turtle commands, sets bezier IN/OUT handles per anchor, extrudes circular cross-sections via sample_baked tangent frames
 # emerges: cathedral-organ topology from text — branching drain networks the player can walk through, with smooth corners that cost two lines of bezier instead of a hundred lines of arc math
-# needs: VR walking inside pipes [has]; per-segment audio routing [missing]; runtime turtle editing [missing]; apply_grid_config [missing]
+# needs: VR walking inside pipes [has]; per-segment audio routing [missing]; runtime turtle editing [missing]; apply_grid_config [has: path / preset build, 2026-11-09]
 # relationships: pairs with seismograph (the readout) and coupled_oscillator_lattice (the medium) to form the wavefunctions plumbing-as-resonance arc; appears in Gravity Creates Rhythm, Sound as Waveform, Spatial Sound Laboratory
 # truth: a pipe is a path with mass — when you bend a command string, you bend the air column, and the geometry becomes the instrument
 
@@ -79,6 +79,7 @@ signal build_complete
 ## Nothing here is a rate. The corner_smoothness / segment_length knobs above stay what
 ## they were; this axis is about what the geometry ADMITS, not how fast anything moves.
 @export var slack: String = "spline"
+var _built_path: String = ""
 const SLACKS: PackedStringArray = ["chord", "spline", "catenary", "festoon", "truss"]
 
 # Turtle state
@@ -154,21 +155,28 @@ func clear() -> void:
 
 
 func apply_grid_config(_config: Dictionary) -> void:
-	# LEGACY: this has always discarded everything the grid handed it, including the
-	# `#path:` token four maps in the corpus pass. That is left exactly as it was —
-	# see the report; it is a wiring bug, not something to quietly change inside a DNA
-	# pass. The one thing this now does is adopt a `slack` token, and re-emit ONLY if
-	# the system already has curves AND the value actually changed. With no curves
-	# (which is every placement today) it is a no-op.
-	if not _config.has("slack"):
-		return
-	var s: String = str(_config["slack"]).strip_edges().to_lower()
-	if not SLACKS.has(s) or s == slack:
-		return
-	slack = s
-	if _curves.size() > 0:
+	# THE WIRING BUG, FIXED (2026-11-09): this discarded everything the grid handed it, including the `path` token
+	# the placements pass, and the scene ships auto_build = false - so every placement in the tower built NOTHING.
+	# A `path` (turtle commands) or a `preset` (a configs/<name>.json) now builds the pipe, once, or again when it
+	# changes. `slack` keeps its behaviour: adopted, and re-emitted only when there are curves and it changed.
+	var code: String = ""
+	if _config.has("path") and typeof(_config["path"]) == TYPE_STRING:
+		code = str(_config["path"]).strip_edges()
+	if _config.has("slack"):
+		var s: String = str(_config["slack"]).strip_edges().to_lower()
+		if SLACKS.has(s) and s != slack:
+			slack = s
+			if code == "" and _curves.size() > 0:
+				clear()
+				_emit_tubes()
+	if code != "" and code != _built_path:
+		_built_path = code
 		clear()
-		_emit_tubes()
+		generate(code)
+	elif code == "" and _config.has("preset") and _curves.is_empty():
+		var preset_path: String = "res://algorithms/wavefunctions/big_pipe_system/configs/%s.json" % str(_config["preset"]).strip_edges()
+		if FileAccess.file_exists(preset_path):
+			load_config_from_file(preset_path)
 
 
 # ─── Turtle state ───────────────────────────────────────────────────
@@ -200,10 +208,10 @@ func _pitch(angle: float) -> void:
 func _dispatch(cmd: String) -> void:
 	match cmd:
 		"f", "forward", "straight": _cmd_forward()
-		"l", "left":  _queue_turn(); _yaw(-PI / 2)
-		"r", "right": _queue_turn(); _yaw(PI / 2)
-		"u", "up":    _queue_turn(); _pitch(-PI / 2)
-		"d", "down":  _queue_turn(); _pitch(PI / 2)
+		"l", "left", "corner_left":  _queue_turn(); _yaw(-PI / 2)
+		"r", "right", "corner_right": _queue_turn(); _yaw(PI / 2)
+		"u", "up", "corner_up":    _queue_turn(); _pitch(-PI / 2)
+		"d", "down", "corner_down":  _queue_turn(); _pitch(PI / 2)
 		"t", "tee", "junction":  _cmd_branch_perp(-1.0)
 		"x", "cross":            _cmd_cross()
 		"cap", "end", "endcap":  _cmd_cap()

@@ -926,6 +926,18 @@
       ],
       "tower": "floor 98: thickness 0.03, color e8dcc8, weave_speed 8 (strands were 8 mm near-black: invisible)",
       "capture": "ada_run/improve/voronoi_strands/before_after.png"
+    },
+    {
+      "lookup_name": "BigPipeSystem",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "apply_grid_config builds the placement's `path` (or a `preset` from configs/) - it discarded the token and the scene ships auto_build off, so every placement built nothing",
+        "corner_left / corner_right / corner_up / corner_down accepted as the turns they name (two placements spell them)"
+      ],
+      "tower": "floors 66, 70, 73 build for the first time: raised by their bore radius; 66 turned in place, 70 moved in from outside the north edge (it had no path: l_bend preset)",
+      "capture": "ada_run/improve/BigPipeSystem/tower_after.png (before: nothing was built)"
     }
   ]
 }

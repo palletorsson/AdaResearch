@@ -1,0 +1,16 @@
+[
+ {
+  "map": "WaveFunctions_Effect_Sound",
+  "id": "f1_BigPipeSystem_2_3",
+  "token": "BigPipeSystem",
+  "set": {
+   "config": {
+    "preset": "l_bend"
+   }
+  },
+  "strategies": [
+   "code_fix"
+  ],
+  "note": "It never built: the grid's path token was discarded and the scene ships auto_build off. Now a path or preset builds it; this placement had none - the L-bend preset."
+ }
+]
