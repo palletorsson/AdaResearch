@@ -1177,6 +1177,19 @@
       ],
       "tower": "floor 123 (Fractal_Synthesis): scale 0.18 -> 1.0 - a 14 cm attractor with 4 mm labels became a 0.76 m one",
       "capture": "probe numbers above; known cost left as is: the 8000-point trail rebuilt as lines every frame, 3.8 ms"
+    },
+    {
+      "lookup_name": "koch_curve",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG: the bump's peak stood over the START of the middle third (p2 + perpendicular*h), not its middle: every 'equilateral bump' was a lopsided tooth",
+        "BUG: the bump goes on the left of travel and the triangle ran counter-clockwise: inward - the anti-snowflake. The triangle now runs clockwise, so a single left-to-right segment (the longhand rule) still bumps upward",
+        "BUG: a flat single-sided ribbon - from the front (the capture's default, and half the visitors) it was simply absent. All its ribbon materials are two-sided"
+      ],
+      "tower": "floor 123 (Fractal_Synthesis), evidence trace at scale 0.09: height 1.6 -> 2.2, because the outward snowflake reaches 2.1 m below its centre (it would have stood 0.48 m into the slab)",
+      "capture": "ada_run/improve/koch_curve/before_after.png (front and back)"
     }
   ]
 }
