@@ -6,6 +6,8 @@ const Sources=preload("grid_native_sources.gd")
 const Finishes=preload("construction_materials.gd")
 const GroundProfile=preload("ground_profile.gd")
 const WorkshopContract=preload("res://commons/artifacts/scaffold_workstation/contract.gd")
+const Fitted=preload("res://commons/artifacts/scaffold_workstation/fitted_geometry.gd")
+const Windmill=preload("windmill.gd")
 @export_file("*.json") var recipe_path="res://commons/void/trials/revolving_playground/recipe.json"
 @export var embedded_study:=false
 @export var field_size:=Vector2(6,4)
@@ -34,6 +36,8 @@ var push_contacts:=0
 var ground_regions:Array[Rect2]=[]
 var ground_mesh:MeshInstance3D
 var ground_refresh_queued:=false
+var palette:="" # "white": slim fitted parts, white with dark edges (config "palette", or the recipe's appearance)
+var windmills:Dictionary={} # the windmill sidecar applied (config "windmills"), {} when none
 
 func _ready()->void:
 	process_physics_priority=-150 # Before XRTools (-100) and desktop (0).
@@ -41,6 +45,7 @@ func _ready()->void:
 	var errors:=WorkshopContract.validate(recipe)
 	if not errors.is_empty():
 		push_error("Invalid workshop playground: "+str(errors));set_physics_process(false);return
+	_apply_style()
 	source_factory=Sources.new();source_factory.phase=Finishes.phase_for(self,str(recipe.get("appearance",{}).get("phase","monochrome")));add_child(source_factory)
 	for p in recipe.parts: parts[p.id]=p
 	for p in recipe.parts:
@@ -49,7 +54,10 @@ func _ready()->void:
 		body.name=p.id;body.set_meta("grid_part",p.id);body.set_meta("electrical",p.get("electrical",false));body.set_meta("grid_owner",get_instance_id());body.set_meta("padded_pusher",(p.source=="paddle" or p.get("pusher",false)) and not p.get("electrical",false))
 		body.set_meta("assembly_root",p.get("assembly_root",p.id))
 		if moving and body is AnimatableBody3D: body.sync_to_physics=false
-		add_child(body);source_factory.populate(body,p)
+		add_child(body)
+		if p.source==Windmill.PADDLE:Windmill.populate(body,p,source_factory.phase)
+		else:source_factory.populate(body,p)
+		if p.get("workshop_palette","")==Fitted.PALETTE_WHITE:Fitted.whiten(body)
 		if visual_only_preview:
 			for child in body.get_children():
 				if child is CollisionShape3D:child.free()
@@ -64,6 +72,23 @@ func _ready()->void:
 	set_meta("void_preview_kind","Native Jolt recipe; editor geometry at clock zero. Moving parts remain editable.")
 
 func array(v:Vector3)->Array: return [v.x,v.y,v.z]
+
+## OPT-IN LOOKS AND PREFABS (2026-11-09), applied to an in-memory copy after the recipe validated, so the recipe JSON
+## stays as authored and a playground without these keys builds exactly as before:
+##   palette "white"  every part in the white-with-edges finish; workshop parts take the slim fitted profile
+##   windmills        true (the sidecar <recipe>-windmills.json), a sidecar path, or the spec: windmill.gd
+func _apply_style()->void:
+	palette=str(get_meta("config_palette",recipe.get("appearance",{}).get("palette","")))
+	var mills:Variant=get_meta("config_windmills") if has_meta("config_windmills") else null
+	var wanted:bool=mills!=null and not (mills is bool and not mills)
+	var any_white:=palette==Fitted.PALETTE_WHITE
+	for p in recipe.parts:any_white=any_white or p.get("workshop_palette","")==Fitted.PALETTE_WHITE
+	if not any_white and not wanted:return
+	recipe=recipe.duplicate(true)
+	if wanted:windmills=Windmill.install(recipe,mills,recipe_path)
+	for p in recipe.parts:
+		if palette==Fitted.PALETTE_WHITE:p.workshop_palette=Fitted.PALETTE_WHITE
+		if p.get("workshop_palette","")==Fitted.PALETTE_WHITE and str(p.source).begins_with("workshop_"):p.workshop_profile="fitted"
 
 func _make_field()->void:
 	var field:=Node3D.new();field.name="ElectricalField";add_child(field)

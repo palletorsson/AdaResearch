@@ -1,0 +1,17 @@
+{
+  "note": "Windmill prefabs for the revolving playground (Palle, 2026-11-09). Read by grid_playground.gd when the placement config has \"windmills\": true; builder commons/modular/windmill.gd. Each windmill grows from an existing top joint of a dock tower (its corner) and turns beside the walkway, never through the structure (tools/probes/playground_white_windmills.gd). The free-floating rotors they replace are dropped in memory only; revolving.json is untouched.",
+  "replaces": ["bay-0-rotor", "bay-2-rotor", "bay-3-sweep"],
+  "windmills": [
+    {"id": "windmill-x", "axis": "x", "corner": [8.4, 4.185, 0.5], "corner_part": "dock-1-008-point", "out": -1, "paddles": 3, "period": 12, "start": 90,
+     "note": "dock-1's outer corner where bay-0 arrives; the stand runs along the dock's outer edge, the axle over the bridge end: face the sails"},
+    {"id": "windmill-z", "axis": "z", "corner": [16.4, 4.185, 10.5], "corner_part": "dock-3-009-point", "out": -1, "paddles": 2, "period": 16, "start": 90,
+     "note": "dock-3's outer corner where bay-2 arrives; two sails across the outer side of the walkway"},
+    {"id": "windmill-y", "axis": "y", "corner": [14.4, 4.185, 12.5], "corner_part": "dock-3-010-point", "paddles": 2, "period": 16, "start": 0,
+     "note": "dock-3's outer corner where bay-3 leaves; a 1 m mast and a 1 m bar, two upright paddles at hip height"}
+  ],
+  "stages": {
+    "bay-0": {"title": "02 / Windmill X / face the sails", "hint": "Three sails turn across the bridge end. Keep to the open inner side, or pass while they are up."},
+    "bay-2": {"title": "04 / Windmill Z / the open side", "hint": "Two sails turn over the outer half of the bridge end. Keep to the inner side, or time them."},
+    "bay-3": {"title": "05 / Windmill Y / time the paddles", "hint": "Two paddles revolve on the corner at hip height. Let one pass, then go."}
+  }
+}

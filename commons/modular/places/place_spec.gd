@@ -11,7 +11,7 @@ const Connectors=preload("res://commons/modular/places/grid_connectors.gd")
 
 static func validate(spec:Dictionary)->PackedStringArray:
 	var errors:=PackedStringArray()
-	if spec.get("palette","") not in ["","trans"]:errors.append("Unknown structural palette")
+	if spec.get("palette","") not in ["","trans","white"]:errors.append("Unknown structural palette")
 	if spec.get("version",0)!=1:errors.append("Expected place specification version 1")
 	if spec.get("units","")!="metres":errors.append("Units must be metres")
 	if not spec.get("places",null) is Array:return PackedStringArray(["places must be an array"])

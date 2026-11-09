@@ -27,8 +27,10 @@ func compile(raw:Dictionary)->Dictionary:
 	Boards.build_all(self,raw)   # rectangular boards, framed and repeated, as pieces of the structure
 	tile_requests.sort_custom(func(a,b):return tile_priority(a)>tile_priority(b))
 	for request in tile_requests:place_tile(request.id,request.at,request.size)
-	if raw.get("palette","")=="trans":
-		for part in recipe.parts:part["workshop_palette"]="trans"
+	if raw.get("palette","") in ["trans","white"]:
+		# "white" (2026-11-09): the slim fitted parts in white with dark edges, pools and plates included.
+		for part in recipe.parts:part["workshop_palette"]=raw.palette
+		if raw.palette=="white":recipe.appearance=recipe.appearance.duplicate();recipe.appearance.palette="white"
 	errors.append_array(Contract.validate(recipe))
 	if not errors.is_empty():return {"errors":errors}
 	return {"recipe":recipe,"errors":[]}

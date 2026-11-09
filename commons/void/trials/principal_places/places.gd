@@ -18,6 +18,7 @@ func _ready()->void:
 	super._ready()
 	for item in recipe.get("installations",[]):
 		var body:=Insert.build(item);add_child(body)
+		if palette==Fitted.PALETTE_WHITE:Fitted.whiten(body)   # the pools and plates take the white too
 		body.transform=Motion.pose(item,recipe.grid,0,{})
 		body.set_meta("grid_part",item.id);body.set_meta("grid_owner",get_instance_id())
 		bodies[item.id]=body;parts[item.id]=item;offsets[item.id]=Transform3D.IDENTITY;previous_poses[item.id]=body.transform

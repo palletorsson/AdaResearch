@@ -6,6 +6,52 @@ const Legacy=preload("geometry.gd")
 const ROD_SIDES=12
 const JOINT_RADIUS=.05 # 20cm diameter at the 2m world unit; always a whole sphere.
 static var materials:Dictionary={}
+## THE WHITE PALETTE (opt-in, Palle 2026-11-09: "for all the playground in the sequence we should use the white shader
+## (since we have not introduced color yet). Use the same outline shader as in Primitives Ignorance"). Floor 8's white
+## (PlatonicStudy.finish) with dark FEATURE edges (edge_outline.gd), on these same slim fitted parts. A rod shows its two
+## rims, a panel its outline, a joint only its silhouette (40 degrees: a 12-sided rod's 30-degree facets stay smooth).
+## Nothing changes for a part without palette "white".
+const PALETTE_WHITE:="white"
+const EDGE_ANGLE:=40.0
+const EdgeOutline=preload("res://commons/void/edge_outline.gd")
+const PlatonicStudy=preload("res://commons/void/platonic_study.gd")
+static var _white:StandardMaterial3D
+
+static func white_finish()->StandardMaterial3D:
+	if _white==null:_white=PlatonicStudy.finish()
+	return _white
+
+## One mesh (and its mesh children): white, with its edge overlay as a CHILD. For a lone visual (the workstation's
+## miniature, the glass box's built pieces) that is moved as one node.
+static func white(mesh:MeshInstance3D)->MeshInstance3D:
+	for node:Node in [mesh]+mesh.find_children("*","MeshInstance3D",true,false):
+		if not solid(node):continue
+		node.material_override=white_finish();EdgeOutline.refresh(node,EDGE_ANGLE)
+	return mesh
+
+## Every solid mesh directly under a playground body: white, with its edge overlay as a SIBLING (same parent, the
+## overlay's own pose composed in), so the playground's static batching draws the lines as it draws the faces.
+static func whiten(host:Node3D)->int:
+	var count:=0
+	for node in host.get_children():
+		if not node is MeshInstance3D or not solid(node):continue
+		node.material_override=white_finish();count+=1
+		var line:=EdgeOutline.overlay(node.mesh,EDGE_ANGLE)
+		if line==null:continue
+		line.name=EdgeOutline.NAME+str(count);line.transform=node.transform*line.transform;host.add_child(line)
+	return count
+
+## A surface the white takes: an opaque, visible mesh that is not itself an edge overlay. Glass, water and shader
+## looks keep theirs (edge_outline's own test also skips by name, and would skip a pool's "Shell").
+static func solid(node:Node)->bool:
+	if not node is MeshInstance3D or node.name.begins_with(EdgeOutline.NAME):return false
+	var mesh:MeshInstance3D=node
+	if mesh.mesh==null or mesh.mesh is ImmediateMesh or not mesh.visible or mesh.layers==0:return false
+	var material:Material=mesh.material_override
+	if material is ShaderMaterial:return false
+	var base:=material as BaseMaterial3D
+	if base!=null and (base.transparency!=BaseMaterial3D.TRANSPARENCY_DISABLED or base.albedo_color.a<.99):return false
+	return true
 
 static func finish(role:String)->StandardMaterial3D:
 	if not materials.has(role):

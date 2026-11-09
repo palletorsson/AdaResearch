@@ -9,6 +9,7 @@ const PrefabPiece=preload("prefab_piece.gd")
 const ButtonScene=preload("res://commons/interactables/push_button.tscn")
 const Finishes=preload("res://commons/modular/construction_materials.gd")
 const PartsArc=preload("parts_arc.gd")
+const Fitted=preload("fitted_geometry.gd")
 const SCALE:=Model.HAND_STEP
 const WORLD_UNIT:=Model.WORLD_STEP
 ## THE LATTICE STEP PER STATION (Palle, 2026-10-31: at Point One "the 6-ball neck to neck", then from Point Lines "a
@@ -53,6 +54,7 @@ var built:Array=[]
 var _ready_done:=false
 var _interactive:=true
 var material_phase:="monochrome"
+var workshop_look:="" # "white" (config "palette"): the playground's slim fitted parts, white with dark edges
 var basket:Node3D
 var edit_options:Array[Dictionary]=[]
 var edit_history:Array[Dictionary]=[]
@@ -66,6 +68,7 @@ var brush_target:=""
 
 func _ready() -> void:
 	tier=int(get_meta("config_tier",tier));persist=bool(get_meta("config_persist",persist))
+	workshop_look=str(get_meta("config_palette",workshop_look))
 	material_phase=Finishes.phase_for(self)
 	# Export/test projects never read or write the visitor's construction.
 	persist=persist and str(ProjectSettings.get_setting("application/config/name"))!="Ada Void Trial Test"
@@ -157,7 +160,8 @@ func make_tool(kind:String) -> void:
 	if kind=="point":
 		var sphere:=SphereShape3D.new();sphere.radius=.045;collider.shape=sphere
 		mesh.scale=Vector3.ONE*1.8
-	if kind in ["rod","rod_short"]:collider.shape.size=Vector3(.05,.1 if kind=="rod_short" else .2,.05)
+	if kind in ["rod","rod_short"]:
+		var grip:=BoxShape3D.new();grip.size=Vector3(.05,.1 if kind=="rod_short" else .2,.05);collider.shape=grip   # a box grip in either look
 	if kind in ["panel","quad","quad_4"]:
 		var handle:=BoxShape3D.new();handle.size=Vector3(.19,.045,.19);collider.shape=handle
 		piece.rotation.x=PI/2
@@ -255,8 +259,14 @@ func _remove_at(at:Vector3,delta:float)->void:
 	feedback.text="REMOVED / move to another piece. UNDO restores it."
 
 static func vertices(half:int,unit:float)->PackedVector3Array:return Geometry.vertices(half,unit)
-static func shape_for(r:Dictionary,unit:float)->Shape3D:return Geometry.shape_for(r,unit)
-static func visual(r:Dictionary,unit:float,phase:String="monochrome")->MeshInstance3D:return Geometry.visual(r,unit,phase)
+## The part library this bench draws with. Default: the legacy kit, as before. With workshop_look "white" the SAME
+## slim fitted parts and white-with-edges finish the playground draws with that palette (points, rods, quads fitted;
+## the cell solids and triangles keep their kit geometry, whitened), so the bench, the glass box and the floor agree.
+func fitted_kind(r:Dictionary)->bool:return workshop_look==Fitted.PALETTE_WHITE and str(r.get("kind","")) in ["point","rod","rod_short","quad"]
+func shape_for(r:Dictionary,unit:float)->Shape3D:return Fitted.shape_for(r,unit) if fitted_kind(r) else Geometry.shape_for(r,unit)
+func visual(r:Dictionary,unit:float,phase:String="monochrome")->MeshInstance3D:
+	if workshop_look!=Fitted.PALETTE_WHITE:return Geometry.visual(r,unit,phase)
+	return Fitted.white(Fitted.visual(r,unit,phase) if fitted_kind(r) else Geometry.visual(r,unit,phase))
 
 func lift(piece:Node3D) -> void:
 	if not _interactive or get_meta("place_mode",false):return
