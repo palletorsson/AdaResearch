@@ -35,6 +35,9 @@ static func build_all(b:Object,raw:Dictionary)->void:
 			# Legs stay within occupied cells; no beam bridges a source hole.
 			if p.y>0:
 				for corner in [Vector3.ZERO,Vector3(span,0,span)]:
+					# "leg_clear": [[x,z,r],...] in the spec frame - no leg within r of a work standing under the deck
+					# (Trans_Introduction / Trans_Rotation, 2026-11-09). The tile stays; only its leg goes.
+					if _leg_cleared(g,p+corner):continue
 					# Match the fitted plate's node seat, keeping whole-metre rods.
 					var seat:float=.04 if b.design.appearance.get("workshop_profile","")=="fitted" else 0.0
 					var end:Vector3=p+corner-Vector3.UP*seat
@@ -42,3 +45,8 @@ static func build_all(b:Object,raw:Dictionary)->void:
 	b.recipe["source_grid"]={"map":g.get("map",""),"crop":g.get("crop",[]),"occupied":occupied,"holes":holes,"at":g.at}
 	for ratio in [.2,.8]:
 		b.recipe.work_lights.append({"position":[origin.x+cells[0].size()*ratio,origin.y+4,origin.z+cells.size()*.5],"energy":1.2,"range":22})
+
+static func _leg_cleared(g:Dictionary,at:Vector3)->bool:
+	for c in g.get("leg_clear",[]):
+		if c is Array and c.size()>=3 and Vector2(at.x-float(c[0]),at.z-float(c[1])).length()<float(c[2]):return true
+	return false

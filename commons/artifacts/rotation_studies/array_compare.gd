@@ -50,6 +50,8 @@ func _ready() -> void:
 	for spec in specs:
 		if single_axis != "ALL" and spec[0] != single_axis: continue
 		if not only_axes.is_empty() and spec[0] not in only_axes: continue
+		# config look "white_edges": the cubes take the white of the Transformation floors (their edges are drawn anyway)
+		if str(get_meta("config_look", "")) == "white_edges": spec[4] = Color("e7ded0")
 		var band := Node3D.new()
 		band.name = spec[0]
 		band.position.x = spec[1]
@@ -105,6 +107,14 @@ func _ready() -> void:
 		for i in range(bands.size()):
 			bands[i].node.scale = Vector3.ONE*0.5
 			bands[i].node.position = Vector3((i-1.5)*2.7,2.0,0)
+	# config "band_yaw" (degrees): each band turns about its own centre, so its rows run along another axis -
+	# 90 lays the four bands end to end down one long basin, X then Y then Z then XYZ (Trans_Rotation, 2026-11-09).
+	var band_yaw := float(get_meta("config_band_yaw", 0.0))
+	if band_yaw != 0.0 and not tower_walkways and not tower_row:
+		var run := cube_pitch/4.0 + (rows-1)*cube_pitch/2.0
+		for band in bands:
+			band.node.rotation_degrees.y = band_yaw
+			band.node.position -= Vector3(sin(deg_to_rad(band_yaw)), 0, cos(deg_to_rad(band_yaw))) * run
 	apply_gradient()
 	if show_body_comparison:
 		body_comparison = BodyComparison.new()
