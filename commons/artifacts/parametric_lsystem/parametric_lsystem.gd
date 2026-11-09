@@ -17,6 +17,8 @@ extends Node3D
 
 class_name ParametricLSystem
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 signal tree_changed
 var lesson_enabled := false
 var _built := false
@@ -32,6 +34,9 @@ var max_symbols := 80000
 @export var display_size: float = 1.2
 @export var trunk_color: Color = Color(0.55, 0.35, 0.15)
 @export var tip_color: Color = Color(0.3, 0.8, 0.2)
+## Trunk thickness as a fraction of display_size; branches thin to 30 % at the deepest. 0 keeps the old drawing:
+## five one-pixel copies 2 mm apart, a hairline imitating a stroke (2026-11-09).
+@export_range(0.0, 0.05, 0.001) var branch_radius: float = 0.012
 
 ## Parametric L-system configuration
 @export var axiom: String = "F"
@@ -84,6 +89,8 @@ func _create_display() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.vertex_color_use_as_albedo = true
+	# the trunk -> tip colours read depth; authored as sRGB, read as linear they washed pale (2026-11-09)
+	mat.vertex_color_is_srgb = true
 	_mesh_instance.material_override = mat
 
 	add_child(_mesh_instance)
@@ -282,6 +289,20 @@ func _draw_tree() -> void:
 		Vector3(0, 0, 0.002),
 		Vector3(0, 0, -0.002),
 	]
+
+	if branch_radius > 0.0:
+		var pairs := PackedVector3Array()
+		var cols := PackedColorArray()
+		var radii := PackedFloat32Array()
+		var trunk_r: float = display_size * branch_radius
+		for seg in segments:
+			pairs.append((seg[0] - center) * scale_factor)
+			pairs.append((seg[1] - center) * scale_factor)
+			var tt: float = clampf(float(seg[2]) / float(max_depth), 0.0, 1.0)
+			cols.append(trunk_color.lerp(tip_color, tt).lightened(tt * 0.15))
+			radii.append(trunk_r * lerpf(1.0, 0.3, tt))
+		ThickLine.append_segments(_immediate_mesh, pairs, cols, trunk_r, 5 if cols.size() < 4000 else 3, radii)
+		return
 
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 

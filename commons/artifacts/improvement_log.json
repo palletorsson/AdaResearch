@@ -1057,6 +1057,18 @@
       ],
       "tower": "floors 124 and 125 at display_size 1.8 (they stood 0.6 m on the floor); floor 129 (Living) 1.8 with habit spiral",
       "capture": "ada_run/improve/lsystem_tree/before_after.png"
+    },
+    {
+      "lookup_name": "parametric_lsystem",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "branch_radius export (0.012 of display_size; 0 = the old five one-pixel copies 2 mm apart): tapering tubes via ThickLine",
+        "vertex_color_is_srgb: the trunk->tip depth colours washed pale"
+      ],
+      "tower": "floor 125 (LSystems_Growth), unchanged placement",
+      "capture": "ada_run/improve/parametric_lsystem/before_after.png"
     }
   ]
 }
