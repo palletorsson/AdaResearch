@@ -21,6 +21,10 @@ var turtle: Turtle3D
 @export var structure_thickness: float = 0.06
 @export var angle: float = 90.0
 @export var show_animation: bool = false
+## Square beams of this width (m) instead of the turtle's round 6 cm rods (2026-11-09). 0 = the rods. At 0.5 m steps
+## the structure is 16 x 21 x 16 m; drawn in 6 cm rods it read as a few poles, and at the tower's 0.25 scale as
+## 1.5 cm hairs - no buildings, bridges or towers. Joints overlap by one width, so the beams meet as solid nodes.
+@export_range(0.0, 1.0, 0.01) var beam_width: float = 0.0
 
 # Materials
 var structure_material: StandardMaterial3D
@@ -79,6 +83,10 @@ func generate_structure() -> void:
 	# Apply metallic/concrete material to all branches
 	for branch in turtle.branches:
 		branch.material_override = structure_material
+		if beam_width > 0.0 and branch.mesh is CylinderMesh:
+			var box := BoxMesh.new()
+			box.size = Vector3(beam_width, (branch.mesh as CylinderMesh).height + beam_width, beam_width)
+			branch.mesh = box
 
 	update_ui()
 
@@ -139,11 +147,20 @@ func set_iterations(val: int) -> void:
 		generation_controller.set_value(float(val))
 	generate_structure()
 
+func apply_grid_config(config: Dictionary) -> void:
+	var regen := false
+	if config.has("beam_width") and str(config["beam_width"]).is_valid_float():
+		beam_width = clampf(float(str(config["beam_width"])), 0.0, 1.0)
+		regen = true
+	if config.has("iterations") and str(config["iterations"]).is_valid_int():
+		iterations = clampi(int(str(config["iterations"])), 1, 4)
+		regen = true
+	if regen and is_inside_tree() and lsystem != null:
+		generate_structure()
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
 
 
-func apply_grid_config(config: Dictionary) -> void:
-	pass

@@ -1106,6 +1106,18 @@
       ],
       "tower": "floor 124 (LSystems_Grammar_Lab): the three worldviews - UP, OUT, AROUND - finally three shapes",
       "capture": "ada_run/improve/grammar_provenance/before_after.png"
+    },
+    {
+      "lookup_name": "CityGenerator",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "beam_width export (0 = the turtle's round 6 cm rods): square beams, joints overlapping by one width so they meet in solid nodes",
+        "apply_grid_config reads beam_width and iterations (it was an empty stub)"
+      ],
+      "tower": "floor 127 (LSystems_Architecture) at its fitted scale 0.25: beam_width 0.32 (8 cm in the room) where the rods were 1.5 cm",
+      "capture": "ada_run/improve/CityGenerator/before_after.png"
     }
   ]
 }
