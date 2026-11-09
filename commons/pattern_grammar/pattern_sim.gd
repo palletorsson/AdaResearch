@@ -98,6 +98,35 @@ static func generate_dot_motif(tile_size: int, n_colors: int, motif_seed: int,
 	return grid
 
 
+## Generate a "glyph" motif - a letter F, the mark crystallographers stamp into a fundamental region (2026-11-09).
+## The dot is round, so every rotation and mirror of it is itself: under a dot, p1, p4 and p4m draw the same picture
+## and the group is invisible. An F has no symmetry of its own, so every symmetry the GROUP adds shows - turned Fs
+## for rotations, backwards Fs for mirrors, offset backwards Fs for glides. Stem, arms and a heel in three colours.
+static func generate_glyph_motif(tile_size: int, n_colors: int) -> Array:
+	var n: float = float(tile_size)
+	var c1: int = mini(1, n_colors - 1)
+	var c2: int = mini(2, n_colors - 1)
+	var c3: int = mini(3, n_colors - 1)
+	var grid: Array = []
+	for y in tile_size:
+		var row: Array = []
+		for x in tile_size:
+			var u: float = (float(x) + 0.5) / n
+			var v: float = (float(y) + 0.5) / n
+			var cell: int = 0
+			if u >= 0.28 and u < 0.42 and v >= 0.16 and v < 0.84:
+				cell = c1                                   # the stem
+			elif v >= 0.16 and v < 0.30 and u >= 0.42 and u < 0.76:
+				cell = c2                                   # the top arm, long
+			elif v >= 0.44 and v < 0.56 and u >= 0.42 and u < 0.64:
+				cell = c2                                   # the middle arm, short
+			elif v >= 0.74 and v < 0.84 and u >= 0.16 and u < 0.28:
+				cell = c3                                   # a heel to the left of the foot
+			row.append(cell)
+		grid.append(row)
+	return grid
+
+
 ## Render the pattern to a PackedByteArray image (RGBA8, canvas_size × canvas_size).
 ## Each output pixel queries WallpaperGroups.get_symmetric_color to find its tile
 ## coordinate, then looks up the motif color index → palette.
@@ -118,6 +147,7 @@ static func render_to_image(cfg: Dictionary) -> Image:
 	match motif_type:
 		"dot":   motif = generate_dot_motif(tile_size, n_colors, motif_seed,
 				float(cfg.get("radius_factor", 0.35)))
+		"glyph": motif = generate_glyph_motif(tile_size, n_colors)
 		_:       motif = generate_motif(tile_size, n_colors, motif_seed, density)
 
 	var img := Image.create(canvas_size, canvas_size, false, Image.FORMAT_RGBA8)

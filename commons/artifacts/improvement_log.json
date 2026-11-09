@@ -996,6 +996,18 @@
       ],
       "tower": "floor 42 (Array_Patterns): the kaleidoscope editor starts with a houndstooth tile, so the floor carpet and the wall panel already show what MIRROR_XY does to it; still editable cell by cell",
       "capture": "ada_run/improve/vr_tile_editor/before_after.png"
+    },
+    {
+      "lookup_name": "pattern_artifact",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "PatternSim gains a 'glyph' motif - a letter F, the crystallographers' mark for a fundamental region (additive: no other consumer asks for it)",
+        "pattern_artifact's DEFAULT_DNA motif dot -> glyph: the dot is round, its own rotation and mirror, so all seventeen groups drew one picture and the group axis could not show what it named; no placement names a group, so nothing placed changes"
+      ],
+      "tower": "floor 43 (Symmetry_Seventeen): the plinth that held nothing (a bare token builds nothing by design) now carries a p4 tile, the group of the Persian mill the museum plan pairs it with",
+      "capture": "ada_run/improve/pattern_artifact/before_after.png (six groups, dot vs F)"
     }
   ]
 }

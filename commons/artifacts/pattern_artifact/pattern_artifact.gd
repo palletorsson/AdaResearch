@@ -33,13 +33,16 @@ const GROUP_NAMES: PackedStringArray = ["unset", "p1", "p2", "pm", "pg", "cm", "
 
 ## The rest of the DNA when a group is named but no config file is supplied.
 ## These are PatternSim's own defaults (tile 32, seed 7, bauhaus) with the ONE
-## departure the staged corpus already made: a dot motif rather than a random
+## departure the staged corpus already made: a fixed motif rather than a random
 ## one, because a random motif at density 0.5 buries the symmetry in noise and
-## the symmetry is the only thing this axis is about.
+## the symmetry is the only thing this axis is about. The motif is a letter F
+## (2026-11-09; it was a dot): a dot is round, so it is its own rotation and its
+## own mirror, and p1, p4 and p4m drew the same picture - the axis named the group
+## and could not show it. An F has no symmetry of its own, so the group's shows.
 const DEFAULT_DNA: Dictionary = {
 	"tile_size": 32,
 	"motif_seed": 7,
-	"motif": "dot",
+	"motif": "glyph",
 	"radius_factor": 0.38,
 	"palette": "bauhaus",
 	"canvas_size": 512,
