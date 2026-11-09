@@ -1,0 +1,32 @@
+[
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_voronoi_strands_34_40",
+  "token": "voronoi_strands",
+  "set": {
+   "config": {
+    "plinth": "0",
+    "pin": "true",
+    "fit": {
+     "set": {
+      "surface_reach": 6.0
+     },
+     "strategies": [
+      "kept",
+      "move",
+      "reduce_repeats",
+      "scale_area"
+     ],
+     "note": "KEPT: its tethers (surface_reach 6) fix to the nearest surfaces, and in the east bay those are the four tower columns - the net is strung between them. The columns in its bounds are its anchors. | 2026-11-09: strands 3 cm and warm white (they were 1.2 cm and near-black - a few dark specks in the tower), and the spider weaves at 8 m/s so the net stands within seconds."
+    },
+    "thickness": 0.03,
+    "color": "e8dcc8",
+    "weave_speed": 8
+   }
+  },
+  "strategies": [
+   "kept"
+  ],
+  "note": "KEPT: its tethers (surface_reach 6) fix to the nearest surfaces, and in the east bay those are the four tower columns - the net is strung between them. The columns in its bounds are its anchors. | 2026-11-09: strands 3 cm and warm white (they were 1.2 cm and near-black - a few dark specks in the tower), and the spider weaves at 8 m/s so the net stands within seconds."
+ }
+]

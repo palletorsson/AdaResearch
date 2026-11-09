@@ -531,6 +531,9 @@ func apply_grid_config(config: Dictionary) -> void:
 		simulate_tension = str(config.tension).to_lower() not in ["false", "0"]
 	if config.has("compliance"):
 		cable_compliance = clampf(float(config.compliance), 0.000001, 0.001)
+	# the strand colour as a hex word: the near-black default vanishes against a pale or dusky room (2026-11-09)
+	if config.has("color") and Color.html_is_valid(str(config.color)):
+		line_color = Color.html(str(config.color))
 	if config.has("knot_mass"):
 		knot_mass = clampf(float(config.knot_mass), 0.001, 0.1)
 	if is_node_ready():

@@ -915,6 +915,17 @@
       ],
       "tower": "floor 70: scale 2 at table height, line_scale 1.5, clear of the column",
       "capture": "ada_run/improve/harmonic_distance_table/before_after.png"
+    },
+    {
+      "lookup_name": "voronoi_strands",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "config key `color` (hex) for the strands"
+      ],
+      "tower": "floor 98: thickness 0.03, color e8dcc8, weave_speed 8 (strands were 8 mm near-black: invisible)",
+      "capture": "ada_run/improve/voronoi_strands/before_after.png"
     }
   ]
 }
