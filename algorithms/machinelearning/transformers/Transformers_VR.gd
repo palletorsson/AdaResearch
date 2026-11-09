@@ -1,5 +1,7 @@
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
@@ -32,6 +34,8 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var auto_train: bool = true
 @export var training_speed: float = 0.15
 @export var show_attention_beams: bool = true
+## Attention beams as tubes whose radius grows with the attention weight (radius * (0.25 + w)); 0 = lines (2026-11-09).
+@export var beam_radius: float = 0.03
 @export var show_positional_encoding: bool = true
 
 @export_group("Interactive Elements")
@@ -522,18 +526,22 @@ func _animate_attention_beams(_delta) -> void:
 			var beam = attention_beams[head][q_idx][k_idx]
 
 			if beam.visible:
-				# Update beam geometry
+				# Update beam geometry - in the BEAM's own space (2026-11-09): global positions were written into a mesh the
+				# beam's transform (= the work's) moves again, so anywhere but the origin the attention was drawn far away.
 				var immediate_mesh = beam.mesh as ImmediateMesh
 				immediate_mesh.clear_surfaces()
-				immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
-				immediate_mesh.surface_add_vertex(query_token.global_position)
-				immediate_mesh.surface_add_vertex(key_token.global_position)
-
-				immediate_mesh.surface_end()
+				var weight = attention_weights[head][q_idx][k_idx]
+				var a: Vector3 = beam.to_local(query_token.global_position)
+				var b: Vector3 = beam.to_local(key_token.global_position)
+				if beam_radius > 0.0:
+					ThickLine.append_segments(immediate_mesh, PackedVector3Array([a, b]), PackedColorArray(), beam_radius * (0.25 + float(weight)), 5)
+				else:
+					immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+					immediate_mesh.surface_add_vertex(a)
+					immediate_mesh.surface_add_vertex(b)
+					immediate_mesh.surface_end()
 
 				# Update intensity based on attention weight
-				var weight = attention_weights[head][q_idx][k_idx]
 				beam.material_override.emission_energy_multiplier = weight * 2.0
 
 func _animate_positional_encoding(_delta) -> void:

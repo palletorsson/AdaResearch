@@ -1269,6 +1269,18 @@
       ],
       "tower": "floor 185 area (machinelearning): the network's connections are back between its neurons",
       "capture": "ada_run/improve/neural_networks_vr/before_after.png (placed off-origin, turned, scale 0.45)"
+    },
+    {
+      "lookup_name": "transformers_vr",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG: the same as neural_networks_vr - attention beams wrote the tokens' GLOBAL positions into a mesh the beam's transform moves again; off the origin the attention hung detached from the tokens. Vertices through beam.to_local()",
+        "beam_radius (0.03; 0 = lines): tubes whose radius grows with the attention weight"
+      ],
+      "tower": "machinelearning floors: attention now runs from query to key token",
+      "capture": "ada_run/improve/transformers_vr/before_after.png (placed off-origin, turned, scale 0.45)"
     }
   ]
 }
