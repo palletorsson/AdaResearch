@@ -180,6 +180,7 @@ to run.
 | procedural generation + swarm | 28 | 26 | 0 | 2: `caverandomwalk` (physics fliers, a taller-floor case) and `rhizomatic_maze_space` (0.8 m through a ceiling) |
 | forces + fractals | 55 | 46 | 9 (museum wayfinding) | 0; the ball dropper's balls fall under the slab on some runs |
 | L-systems + boolean surfaces | 40 | 40 | 0 | 0; 4 side slabs; no work in another, no column through a work |
+| noise + wave functions | 57 | 55 | 0 | 0 of these; 2 barber pillars kept on the columns they dress; see below for what another session holds |
 
 **What the L-systems and boolean pass taught:**
 - **The survey judges each work alone.** Two works standing in each other, or a tower column through a work, both read
@@ -233,3 +234,30 @@ overlaps: 99 were a tower column through a work, 22 were two works standing in e
   Read a work's parts before moving the whole work.
 - **A fix that makes a work build can make it overflow.** The gyroid console failed to parse until earlier today.
   Once it built, it stood 2 m past the edge with a 12 m rail. Measure again after any parse fix.
+
+## Noise and wave functions (2026-11-09, same day)
+
+23 floors (65-76, 92-102), fitted with the overlap check from the start: 57 works did not fit, 12 of them only because of a
+column or a neighbour. Three passes (`doc/fit-passes/2026-11-09-noise-wave-a..c.json`) fitted 55 and kept 2.
+
+- **Rooms bigger than a floor.** Noise_Cellular's womb and atrium and Noise_Box's shell and atrium are 22-26 m wide and
+  9.6 m tall. The box rooms had been drawn 22-48 m beside the building.
+  - Each floor's atrium went into the open middle at about 0.5.
+  - Each floor's womb or shell went turned onto a new 16 x 10 m north slab.
+  - Each keeps a walkable clearing.
+- **Hung in a shaft.** The Foucault pendulum (7.4 m tall) hangs in shaft B. That is the shaft its floor does not descend
+  by (`layout.json` `descent.pad_shafts`), and its top rises into the open shaft of the floor above. The survey now reads
+  a rise through an open shaft as a note, the way it already read a descent.
+- **A box can be physics, not size.** The work's own settings fixed three works the box made look too big:
+  - The voronoi net's tethers searched 80 m for a surface and found a floor 42 m down a shaft. `surface_reach` is now 6 m.
+  - The colorballs' rain rolled 13 m. Its bounce and throw are lower now.
+  - The sine staircase keeps its 0.10 m step and has fewer steps: 47 instead of 80.
+- **Held, not touched.** Another session has uncommitted playground work on seven of these floors (forum 261109-o47js).
+  Its placements were never moved, and they never made a neighbour move. Still overflowing or overlapping among them:
+  - the Sine_Space colorballs and flow tray
+  - the 39 m unit-circle work, 1.3 m down
+  - the two 16 m wave pools over the shafts, 3 m down
+  - Bernini's columns, 0.7 m down
+  - the Sky_Stairs math objects, round two columns
+- **Asked, not moved.** Two orbit spheres made in the tower float 15 and 24 m north of WaveFunctions_Intro
+  (`sphere-a`, `sphere-b`). This may be deliberate.

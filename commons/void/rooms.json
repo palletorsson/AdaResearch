@@ -28080,7 +28080,15 @@
           "height": 0,
           "facing": 0,
           "scale": 1,
-          "station": "SE"
+          "station": "SE",
+          "config": {
+            "fit": {
+              "strategies": [
+                "kept"
+              ],
+              "note": "KEPT: it stands on the tower column at (14, 7) on purpose - a barber pole rolling round the column."
+            }
+          }
         },
         {
           "id": "barber-pillar-north",
@@ -28094,7 +28102,13 @@
           "scale": 1,
           "station": "NE",
           "config": {
-            "spin_speed": -0.075
+            "spin_speed": -0.075,
+            "fit": {
+              "strategies": [
+                "kept"
+              ],
+              "note": "KEPT: it stands on the tower column at (14, -7) on purpose - a barber pole rolling round the column."
+            }
           }
         },
         {
@@ -28675,14 +28689,21 @@
           "id": "f1_dark_sphere_2_5",
           "artifact": "dark_sphere",
           "position": [
-            -3,
-            10
+            -3.0,
+            8.0
           ],
           "station": "SW",
           "height": 0,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-3.0, 0.5, 10.0); moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f1_PendulumWave_6_6",
@@ -28704,14 +28725,22 @@
           "id": "f1_foucault_pendulum_15_6",
           "artifact": "foucault_pendulum",
           "position": [
-            14,
-            -7
+            10.0,
+            0.0
           ],
           "station": "NE",
           "height": 0.72,
           "facing": 180,
           "scale": 0.65,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "shaft_rise"
+              ],
+              "note": "7.4 m tall in a 5.6 m storey, past the north edge and round a column: hung in shaft B (this floor descends by shaft A), its top through the open shaft of the floor above, its canvas in the shaft - a Foucault pendulum in a stairwell."
+            }
+          }
         },
         {
           "id": "f1_seismograph_17_13",
@@ -28762,15 +28791,21 @@
           "id": "f1_GlassRack_17_18",
           "artifact": "GlassRack",
           "position": [
-            7,
-            7
+            7.0,
+            6.5
           ],
           "station": "SE",
           "height": 0.8,
           "facing": 0,
           "scale": 1,
           "config": {
-            "config": "reflux_apparatus"
+            "config": "reflux_apparatus",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_lab_table_17_17; moved 0.5 m"
+            }
           }
         },
         {
@@ -28792,14 +28827,21 @@
           "id": "f1_WavePaintings_10_23",
           "artifact": "WavePaintings",
           "position": [
-            0,
-            -9
+            0.0,
+            -4.5
           ],
           "station": "NE",
           "height": 0.9,
           "facing": 0,
           "scale": 0.6,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.0 m (0 of 20 samples past the slab have ground; moved 4.5 m"
+            }
+          }
         },
         {
           "id": "f1_BigPipeSystem_18_25",
@@ -28963,14 +29005,21 @@
           "artifact": "OscillationCurve",
           "station": "NW",
           "position": [
-            -8,
-            -6
+            -8.0,
+            -5.5
           ],
           "facing": 0,
-          "height": 1.2,
+          "height": 1.66,
           "scale": 0.8,
           "config": {
-            "history_width": "8"
+            "history_width": "8",
+            "fit": {
+              "strategies": [
+                "move",
+                "raise"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
           }
         },
         {
@@ -28994,39 +29043,90 @@
           "artifact": "cube_scene",
           "station": "NE",
           "position": [
-            7,
-            -10
+            10.5,
+            -8.0
           ],
           "facing": 180,
           "height": 0.5,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (7.0, 0.5, -10.0); moved 4.0 m"
+            }
+          }
         },
         {
           "id": "f3_colorballs_8_24",
           "artifact": "colorballs",
           "station": "NE",
           "position": [
-            3,
-            -10
+            1.85,
+            -12.91
           ],
           "facing": 180,
-          "height": 0,
+          "height": 1.3,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "raise",
+                "reduce_repeats"
+              ],
+              "note": "Chromatic rain: its 10 g balls bounced (0.8) and were thrown (2 m/s) across 13 m, off the slab and over the column row - its own physics, ball_bounce 0.35, initial_velocity_range 0.6, linear_damp 0.8: the rain lands and stays on the slab.",
+              "set": {
+                "ball_bounce": 0.35,
+                "initial_velocity_range": 0.6,
+                "linear_damp": 0.8
+              }
+            }
+          }
         },
         {
           "id": "f3_dark_sphere_19_24",
           "artifact": "dark_sphere",
           "station": "NW",
           "position": [
-            -8,
-            -10
+            -8.0,
+            -8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-8.0, 0.5, -10.0); moved 2.0 m"
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            3,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 13,
+            "depth": 10,
+            "seed": 68,
+            "editor_label": "Side slab / room for the colorballs (11.4 x 10.3 m); the floor's middle is crossed end to end by the unit-circle work (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
+          }
         }
       ],
       "props": [],
@@ -29045,15 +29145,21 @@
           "artifact": "film_wave_neighbours",
           "station": "SE",
           "position": [
-            6,
-            11
+            6.0,
+            8.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (6.0, 1.3, 11.0); moved 2.5 m"
+            }
           }
         },
         {
@@ -29061,15 +29167,21 @@
           "artifact": "coupled_oscillator_lattice",
           "station": "SE",
           "position": [
-            10.5,
-            9
+            8.42,
+            -10.4
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "comparison": "true",
-            "fabric": "bonds"
+            "fabric": "bonds",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Between the two wave pools there is no room that holds from run to run (the pools are drawn by their waves): onto the north slab beside Kusama's sine."
+            }
           }
         },
         {
@@ -29077,13 +29189,20 @@
           "artifact": "kusama_sine",
           "station": "NE",
           "position": [
-            0,
-            -8.8
+            -0.0,
+            -12.1
           ],
           "facing": 180,
           "height": 2,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "8.5 x 9.1 m, 4.3 m past the north edge, round a column and into both wave pools: wholly onto a new north slab past the column row."
+            }
+          }
         },
         {
           "id": "f4_wave_propagation_3d_12_25",
@@ -29113,6 +29232,30 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 22,
+            "depth": 10,
+            "seed": 69,
+            "editor_label": "Side slab / room for Kusama's sine (8.5 x 9.1 m); the two 16 m wave pools over the shafts fill the floor (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ],
+              "note": "10 x 10 -> 22 x 10 m: Kusama's sine and the coupled-oscillator lattice side by side (the two wave pools over the shafts fill the floor)."
+            }
+          }
         }
       ],
       "props": [],
@@ -29350,14 +29493,21 @@
           "id": "f1_wave_interference_3d_19_12",
           "artifact": "wave_interference_3d",
           "position": [
-            3,
-            -11
+            3.0,
+            -8.5
           ],
           "station": "NE",
           "facing": 180,
           "height": 0.3,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (3.0, 0.5, -11.1); moved 2.5 m"
+            }
+          }
         },
         {
           "id": "f1_AudioContr_3_17",
@@ -29439,14 +29589,21 @@
           "id": "f1_VRAudioMonitor_20_21",
           "artifact": "VRAudioMonitor",
           "position": [
-            16,
-            10
+            16.0,
+            8.5
           ],
           "station": "SE",
           "facing": 0,
           "height": 1.25,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (16.0, 1.2, 10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f1_Rack303Acid_3_22",
@@ -29547,14 +29704,21 @@
           "id": "f1_cable_builder_18_26",
           "artifact": "cable_builder",
           "position": [
-            12,
-            -12
+            12.0,
+            -8.5
           ],
           "station": "NE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (12.0, 0.9, -12.0); moved 3.5 m"
+            }
+          }
         },
         {
           "id": "f1_lab_table_3_28",
@@ -29573,14 +29737,21 @@
           "id": "f1_dark_sphere_20_28",
           "artifact": "dark_sphere",
           "position": [
-            4,
-            12
+            5.0,
+            8.0
           ],
           "station": "SE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (4.0, 0.5, 12.0); moved 4.1 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -29680,27 +29851,42 @@
           "id": "f3_dark_sphere_5_10",
           "artifact": "dark_sphere",
           "position": [
-            -3,
-            11
+            -3.0,
+            8.0
           ],
           "station": "SW",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-3.0, 0.5, 11.0); moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f3_john_cage_tech_noir_16_18",
           "artifact": "john_cage_tech_noir",
           "position": [
-            4,
-            -1
+            -0.36,
+            3.83
           ],
           "station": "NE",
           "facing": 0,
           "height": 0.85,
-          "scale": 1,
-          "config": {}
+          "scale": 0.95,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "14.5 x 13.1 m, past the north edge and round a column: 0.95 (13.8 x 12.5 m) in the open middle between the shafts."
+            }
+          }
         },
         {
           "id": "f3_ruth_asawa_sculpture_5_19",
@@ -29732,14 +29918,20 @@
           "artifact": "resonating_metallophone",
           "station": "SE",
           "position": [
-            4,
-            8
+            3.5,
+            8.0
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "stand": "table"
+            "stand": "table",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
           }
         },
         {
@@ -29747,13 +29939,20 @@
           "artifact": "air_music_display_case",
           "station": "SW",
           "position": [
-            -4,
-            8
+            -3.5,
+            7.5
           ],
           "facing": 0,
           "height": 1,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.7 m"
+            }
+          }
         },
         {
           "id": "f1_GlassRack_3_12",
@@ -29895,13 +30094,25 @@
           "artifact": "sine_cylinder_staircase",
           "station": "NE",
           "position": [
-            1.5,
-            -9.5
+            17.0,
+            -2.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "set": {
+                "STEP_COUNT": 47,
+                "TOTAL_TURNS": 1.2
+              },
+              "strategies": [
+                "move",
+                "reduce_repeats"
+              ],
+              "note": "A 9 m helix of 80 steps through the 5.6 m storey: 47 steps of the same 0.10 m rise (1.2 turns; its rail rides 0.9 m above the top tread), so it climbs 4.7 m at body scale; into the east bay, off the column row and the north edge. Candidate to climb through a shaft into the floor above, if a stair between floors is wanted."
+            }
+          }
         },
         {
           "id": "f2_math_objects_19_17",
@@ -29997,27 +30208,41 @@
           "id": "f1_wave_interference_25_33",
           "artifact": "wave_interference",
           "position": [
-            6,
-            -9
+            16.0,
+            -3.5
           ],
           "station": "NE",
           "facing": 0,
           "height": 1.4,
           "scale": 0.45,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.9 m (0 of 15 samples past the slab have ground; moved 11.4 m"
+            }
+          }
         },
         {
           "id": "f1_dark_sphere_28_42",
           "artifact": "dark_sphere",
           "position": [
-            4,
-            12
+            4.0,
+            8.0
           ],
           "station": "SE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (4.0, 0.5, 12.0); moved 4.0 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -30065,14 +30290,21 @@
           "id": "f2_samplevialrack_20_14",
           "artifact": "samplevialrack",
           "position": [
-            16,
-            -10
+            16.0,
+            -8.5
           ],
           "station": "NE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (16.0, 0.0, -10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_dna_specimen_3_15",
@@ -30091,55 +30323,82 @@
           "id": "f2_GlassRack_5_15",
           "artifact": "GlassRack",
           "position": [
-            -14,
-            -10
+            -14.0,
+            -8.5
           ],
           "station": "NW",
           "facing": 0,
           "height": 0.01,
           "scale": 1,
           "config": {
-            "config": "spiral_tube"
+            "config": "spiral_tube",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-14.1, 0.1, -10.0); moved 1.5 m"
+            }
           }
         },
         {
           "id": "f2_lissajous_curves_7_15",
           "artifact": "lissajous_curves",
           "position": [
-            -10,
-            -10
+            -10.0,
+            -8.5
           ],
           "station": "NW",
           "facing": 180,
           "height": 0.105,
           "scale": 0.1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-10.0, 0.1, -10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_hallway_scene_16_15",
           "artifact": "hallway_scene",
           "position": [
-            8,
-            -10
+            8.0,
+            -7.5
           ],
           "station": "NE",
           "facing": 180,
           "height": 0,
           "scale": 0.03,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.2 m (0 of 20 samples past the slab have ground; moved 2.5 m"
+            }
+          }
         },
         {
           "id": "f2_oscilloscope_20_16",
           "artifact": "oscilloscope",
           "position": [
-            12,
-            -10
+            12.0,
+            -8.5
           ],
           "station": "NE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (12.0, 0.1, -10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_holographicdisplay_3_18",
@@ -30171,27 +30430,41 @@
           "id": "f2_biomagneticresonator_7_18",
           "artifact": "biomagneticresonator",
           "position": [
-            -5,
-            -10
+            -5.0,
+            -8.5
           ],
           "station": "NW",
           "facing": 0,
           "height": 0.08,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-5.0, 0.2, -10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_ambient_patch_16_20",
           "artifact": "ambient_patch",
           "position": [
-            2,
-            -10
+            2.0,
+            -8.5
           ],
           "station": "NE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (2.0, 1.0, -10.0); moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_record_room_20_20",
@@ -30236,14 +30509,21 @@
           "id": "f2_UnitCircleTrig_7_21",
           "artifact": "UnitCircleTrig",
           "position": [
-            -2,
-            -10
+            -2.0,
+            -8.0
           ],
           "station": "NW",
           "facing": 0,
           "height": 0.42,
           "scale": 0.1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-1.9, 0.3, -10.3); moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f2_SoundscapeRadioRack_16_23",
@@ -30314,23 +30594,29 @@
           "id": "f2_double_helix_scene_6_27",
           "artifact": "double_helix_scene",
           "position": [
-            -8,
-            10
+            -8.0,
+            7.0
           ],
           "station": "SW",
           "facing": 180,
           "height": 0.25,
           "scale": 0.5,
           "config": {
-            "trail_drop": "4.8"
+            "trail_drop": "4.8",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 2.7 m (0 of 20 samples past the slab have ground; moved 3.0 m"
+            }
           }
         },
         {
           "id": "f2_synthesis_stand_16_27",
           "artifact": "synthesis_stand",
           "position": [
-            7,
-            10
+            7.5,
+            7.0
           ],
           "station": "SE",
           "facing": 180,
@@ -30338,47 +30624,74 @@
           "scale": 0.04,
           "config": {
             "subject": "hallway_scene",
-            "mode": "hero"
+            "mode": "hero",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 2.6 m (16 of 20 samples past the slab have groun; moved 3.0 m"
+            }
           }
         },
         {
           "id": "f2_chemicalapparatus_20_27",
           "artifact": "chemicalapparatus",
           "position": [
-            12,
-            10
+            12.0,
+            8.5
           ],
           "station": "SE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 1.2 m (20 of 25 samples past the slab have groun; moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f2_dark_sphere_9_28",
           "artifact": "dark_sphere",
           "position": [
-            4,
-            12
+            4.0,
+            8.0
           ],
           "station": "SE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (4.0, 0.5, 12.0); moved 4.0 m"
+            }
+          }
         },
         {
           "id": "f2_multimeter_20_29",
           "artifact": "multimeter",
           "position": [
-            16,
-            10
+            16.0,
+            8.5
           ],
           "station": "SE",
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (16.0, 0.1, 10.0); moved 1.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -33240,8 +33553,8 @@
           "id": "spectrum",
           "artifact": "NoiseColors3D",
           "position": [
-            4,
-            7
+            3.0,
+            7.0
           ],
           "station": "SE",
           "height": 1.05,
@@ -33249,15 +33562,21 @@
           "scale": 0.1,
           "config": {
             "stand": "gallery",
-            "seed": "31415"
+            "seed": "31415",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
           }
         },
         {
           "id": "surface",
           "artifact": "geometry_noise",
           "position": [
-            15,
-            7
+            17.0,
+            6.5
           ],
           "station": "SE",
           "height": 0,
@@ -33265,21 +33584,34 @@
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.1 m"
+            }
           }
         },
         {
           "id": "weather",
           "artifact": "related_weather",
           "position": [
-            -2,
-            -7
+            -2.0,
+            -1.5
           ],
           "station": "NW",
           "height": 0,
           "facing": 180,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: north 2.6 m (0 of 5 samples past the slab have ground); moved 5.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -33370,8 +33702,8 @@
           "id": "family",
           "artifact": "synthesis_stand",
           "position": [
-            -4,
-            8
+            -3.5,
+            7.5
           ],
           "station": "SW",
           "height": 0,
@@ -33379,7 +33711,13 @@
           "scale": 1,
           "config": {
             "subject": "dark_sphere",
-            "mode": "hero"
+            "mode": "hero",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.7 m"
+            }
           }
         }
       ],
@@ -33415,14 +33753,20 @@
           "station": "SW",
           "position": [
             -1.5,
-            10
+            7.5
           ],
           "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 2.3 m (0 of 20 samples past the slab have ground; moved 2.5 m"
+            }
           }
         },
         {
@@ -33434,10 +33778,16 @@
             8
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.7,
           "config": {
-            "stand": "pair"
+            "stand": "pair",
+            "fit": {
+              "strategies": [
+                "scale_area"
+              ],
+              "note": "7.8 m tall: 0.7 (5.5 m), looked at, not walked."
+            }
           }
         },
         {
@@ -33445,14 +33795,20 @@
           "artifact": "noiselayers",
           "station": "SW",
           "position": [
-            -5,
-            5
+            -4.5,
+            4.0
           ],
           "facing": 180,
           "height": 0.8,
           "scale": 1,
           "config": {
-            "stand": "basin"
+            "stand": "basin",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.1 m"
+            }
           }
         },
         {
@@ -33485,16 +33841,23 @@
           "artifact": "voxelnoise",
           "station": "NW",
           "position": [
-            -6,
-            -30.1
+            -0.0,
+            -1.5
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.19,
           "config": {
             "stand": "volume",
             "cell_size": "1",
-            "flight_box": "true"
+            "flight_box": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "A 28 x 28 x 29 m voxel terrain drawn 15-45 m north of the floor: 0.19 (5.4 m), a table-top landscape in the middle of the floor."
+            }
           }
         },
         {
@@ -33577,14 +33940,20 @@
           "artifact": "shader_noise_space",
           "station": "SW",
           "position": [
-            -5,
-            7
+            -4.5,
+            4.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "stand": "room"
+            "stand": "room",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 0.5 m (0 of 5 samples past the slab have ground); moved 3.0 m"
+            }
           }
         },
         {
@@ -33617,27 +33986,41 @@
           "artifact": "dark_sphere",
           "station": "SE",
           "position": [
-            4,
-            2
+            4.5,
+            2.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f4_noisesphere_6_5; moved 0.5 m"
+            }
+          }
         },
         {
           "id": "f4_noisesphere_6_5",
           "artifact": "noisesphere",
           "station": "SE",
           "position": [
-            1,
-            0
+            0.0,
+            -0.17
           ],
           "facing": 0,
-          "height": 0,
-          "scale": 1,
+          "height": 0.02,
+          "scale": 0.85,
           "config": {
-            "stand": "warp"
+            "stand": "warp",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "A 10 m walk-in sphere 0.9 m through the ceiling: 0.85 (8.4 m, 5.5 m tall), still entered."
+            }
           }
         },
         {
@@ -33645,15 +34028,21 @@
           "artifact": "film_noise_relief",
           "station": "NW",
           "position": [
-            -4,
-            -4
+            -4.5,
+            -4.0
           ],
           "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f4_noisesphere_6_5; moved 0.5 m"
+            }
           }
         }
       ],
@@ -33673,16 +34062,24 @@
           "artifact": "cellular_womb_space",
           "station": "SE",
           "position": [
-            14.5,
-            17.2
+            -0.06,
+            -13.28
           ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "facing": 270.0,
+          "height": 0.28,
+          "scale": 0.515,
           "config": {
             "floor": "false",
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "A 22 x 26.5 m walk-in womb, 9.6 m tall, 22 m past the south edge: turned and 0.515 (13.7 x 11.3 m, 4.9 m tall), wholly on a new north slab past the column row."
+            }
           }
         },
         {
@@ -33690,16 +34087,23 @@
           "artifact": "cellular_atrium_space",
           "station": "SW",
           "position": [
-            -14,
-            16
+            0.0,
+            -0.02
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "height": 0.27,
+          "scale": 0.5,
           "config": {
             "floor": "false",
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "A 25 x 25 m walk-in atrium, 9.4 m tall, 20 m past the south edge: 0.5 (12.7 m, 4.7 m tall) in the open middle between the shafts. Its clearing stays walkable (radius 2.3 m)."
+            }
           }
         },
         {
@@ -33708,14 +34112,49 @@
           "station": "NE",
           "position": [
             17,
-            -10.5
+            0
           ],
           "facing": 180,
           "height": 0,
-          "scale": 1,
+          "scale": 0.65,
           "config": {
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "set": {
+                "surface_reach": 6.0
+              },
+              "strategies": [
+                "kept",
+                "move",
+                "reduce_repeats",
+                "scale_area"
+              ],
+              "note": "KEPT: its tethers (surface_reach 6) fix to the nearest surfaces, and in the east bay those are the four tower columns - the net is strung between them. The columns in its bounds are its anchors."
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 16,
+            "depth": 10,
+            "seed": 98,
+            "editor_label": "Side slab / room for the cellular womb, a 22 x 26 m walk-in room at 0.52 (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -33735,16 +34174,24 @@
           "artifact": "box_shell_space",
           "station": "NE",
           "position": [
-            35,
-            -6
+            0.0,
+            -13.31
           ],
-          "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "facing": 270.0,
+          "height": 0.27,
+          "scale": 0.5,
           "config": {
             "floor": "false",
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "A 22.5 x 28 m walk-in shell, 9.7 m tall, drawn 23-46 m east of the floor: turned and 0.5 (13.9 x 11.3 m, 4.9 m tall), wholly on a new north slab past the column row."
+            }
           }
         },
         {
@@ -33752,16 +34199,46 @@
           "artifact": "box_atrium_space",
           "station": "NW",
           "position": [
-            -35,
-            -6
+            0.0,
+            0.0
           ],
           "facing": 180,
-          "height": 0,
-          "scale": 1,
+          "height": 0.26,
+          "scale": 0.485,
           "config": {
             "floor": "false",
             "plinth": "0",
-            "pin": "true"
+            "pin": "true",
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "A 26 x 26 m walk-in atrium, 9.7 m tall, drawn 22-48 m west of the floor: 0.485 (12.5 x 12.8 m, 4.7 m tall) in the open middle between the shafts."
+            }
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 16,
+            "depth": 10,
+            "seed": 99,
+            "editor_label": "Side slab / room for the box shell, a 22.5 x 28 m walk-in room at 0.5 (fit pass 2026-11-09)",
+            "fit": {
+              "strategies": [
+                "side_slab"
+              ]
+            }
           }
         }
       ],
@@ -33782,26 +34259,39 @@
           "station": "SW",
           "position": [
             -11.5,
-            11.2
+            8.2
           ],
           "facing": 180,
           "height": 1,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: drawn outside the building, box centre (-11.5, 1.5, 11.2); moved 3.0 m"
+            }
+          }
         },
         {
           "id": "f2_noise_space_6_6",
           "artifact": "noise_space",
           "station": "SW",
           "position": [
-            -6.5,
-            8.2
+            -2.0,
+            1.7
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "stand": "walk"
+            "stand": "walk",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "fit pass: edge: south 3.7 m (0 of 10 samples past the slab have ground; moved 7.9 m"
+            }
           }
         }
       ],
@@ -33879,8 +34369,8 @@
           "artifact": "perlin_noise",
           "station": "SW",
           "position": [
-            -3,
-            0
+            -3.5,
+            0.0
           ],
           "facing": 180,
           "height": 1.1,
@@ -33894,7 +34384,13 @@
             "frequency": "10",
             "amplitude": "0.8",
             "persistence": "0.5",
-            "octaves": "4"
+            "octaves": "4",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f3_simplex_noise_3_13; moved 0.5 m"
+            }
           }
         },
         {

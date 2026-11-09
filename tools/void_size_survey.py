@@ -121,7 +121,7 @@ def slab_grounds(floor_record, margin):
     return out
 
 
-def classify(b, f, w):
+def classify(b, f, w, above_closed=()):
     hw, hd = b["width"] / 2, b["depth"] / 2
     box = w.get("box")
     out = {"overflow": [], "notes": []}
@@ -159,7 +159,15 @@ def classify(b, f, w):
             out["overflow"].append("edge: " + ", ".join("%s %.1f m" % kv for kv in over.items()) +
                                    (" (%d of %d samples past the slab have ground)" % (gr.get("outside_held", 0), gr.get("outside", 0)) if gr else ""))
     if y1 > head + 0.05:
-        out["overflow"].append("ceiling: %.1f m through the slab above (top %.1f, headroom %.1f)" % (y1 - head, y1, head))
+        # above the slab INSIDE a shaft opening is the same thing upward: the slab above has the same hole (unless the
+        # floor above closes that shaft), so a tall work stood under it rises into the floor above - the spectrum
+        # forest in shaft A, a pendulum hung in shaft B (2026-11-09)
+        foot = max((x1 - x0) * (z1 - z0), 1e-6)
+        rising = [s["name"] for s in b["shafts"] if s["name"] not in above_closed and
+                  max(0, min(x1, float(s["x"]) + b["shaft_width"] / 2) - max(x0, float(s["x"]) - b["shaft_width"] / 2)) *
+                  max(0, min(z1, b["shaft_depth"] / 2) - max(z0, -b["shaft_depth"] / 2)) >= .5 * foot]
+        if rising: out["notes"].append("rises %.1f m through shaft %s into the floor above" % (y1 - head, rising[0]))
+        else: out["overflow"].append("ceiling: %.1f m through the slab above (top %.1f, headroom %.1f)" % (y1 - head, y1, head))
     if y0 < -DOWN:
         # below the slab INSIDE a shaft opening is a descent the floor is built for (a wheel down to the next floor,
         # a falling bend), not an overflow; anywhere else it pokes into the floor beneath
@@ -196,10 +204,13 @@ def report(args):
     if not floors:
         print("no survey yet: python tools/void_size_survey.py run"); return
     rows = []
+    records = json.loads((ROOT / "commons/void/rooms.json").read_text(encoding="utf-8"))["floors"]
     for k in sorted(floors, key=int):
         f = floors[k]
+        # the slab above this floor is the floor above's own: a shaft it encloses has no hole to rise through
+        above_closed = records[int(k) - 1].get("enclosed_shafts", []) if 0 < int(k) <= len(records) else ["A", "B"]
         for w in f["works"]:
-            c = classify(b, f, w)
+            c = classify(b, f, w, above_closed)
             ident = str(w.get("id"))
             origin = "museum transfer" if re.match(r"f\d+_", ident) else "museum restore" if ident.startswith("museum-") or w.get("museum") else "tower"
             rows.append({"floor": int(k), "map": f["map"], "origin": origin, **{x: w.get(x) for x in ("id", "token", "museum", "scale", "at", "copy", "parts")}, **c})

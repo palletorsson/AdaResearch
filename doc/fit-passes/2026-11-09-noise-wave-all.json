@@ -1,0 +1,645 @@
+[
+ {
+  "map": "WaveFunctions_Pendulum",
+  "id": "f1_foucault_pendulum_15_6",
+  "token": "foucault_pendulum",
+  "strategies": [
+   "move",
+   "shaft_rise"
+  ],
+  "note": "7.4 m tall in a 5.6 m storey, past the north edge and round a column: hung in shaft B (this floor descends by shaft A), its top through the open shaft of the floor above, its canvas in the shaft - a Foucault pendulum in a stairwell.",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_OscillationCurve_19_18",
+  "token": "OscillationCurve",
+  "strategies": [
+   "move",
+   "raise"
+  ],
+  "note": "0.4 m below the slab: raised. | overlap check: a tower column inside it; moved 0.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_colorballs_8_24",
+  "token": "colorballs",
+  "strategies": [
+   "move",
+   "raise",
+   "reduce_repeats"
+  ],
+  "note": "1.3 m below the slab: raised. | 11.4 x 10.3 m, 5.8 m past the north edge and round a column, on a floor crossed end to end by the 39 m unit-circle work: wholly onto a new north slab past the column row. | Chromatic rain: its 10 g balls bounced (0.8) and were thrown (2 m/s) across 13 m, off the slab and over the column row - its own physics, ball_bounce 0.35, initial_velocity_range 0.6, linear_damp 0.8: the rain lands and stays on the slab.",
+  "remove": false
+ },
+ {
+  "map": "Wavefunctions_Sky_Stairs",
+  "id": "f2_sine_cylinder_staircase_7_16",
+  "token": "sine_cylinder_staircase",
+  "strategies": [
+   "move",
+   "reduce_repeats"
+  ],
+  "note": "A 9 m helix of 80 steps through the 5.6 m storey: 52 steps of the same 0.10 m rise (1.3 turns), so it climbs 5.2 m at body scale. Candidate to climb through a shaft into the floor above, if a stair between floors is wanted. | A 9 m helix of 80 steps through the 5.6 m storey: 47 steps of the same 0.10 m rise (1.2 turns; its rail rides 0.9 m above the top tread), so it climbs 4.7 m at body scale; into the east bay, off the column row and the north edge. Candidate to climb through a shaft into the floor above, if a stair between floors is wanted.",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Intro",
+  "id": "barber-pillar-south",
+  "token": "pillar_barber_roll",
+  "strategies": [
+   "kept"
+  ],
+  "note": "KEPT: it stands on the tower column at (14, 7) on purpose - a barber pole rolling round the column.",
+  "remove": false,
+  "before": "overlaps: a tower column inside it"
+ },
+ {
+  "map": "WaveFunctions_Intro",
+  "id": "barber-pillar-north",
+  "token": "pillar_barber_roll",
+  "strategies": [
+   "kept"
+  ],
+  "note": "KEPT: it stands on the tower column at (14, -7) on purpose - a barber pole rolling round the column.",
+  "remove": false,
+  "before": "overlaps: a tower column inside it"
+ },
+ {
+  "map": "Noise_One",
+  "id": "f1_noisetorus_5_4",
+  "token": "noisetorus",
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "7.8 m tall: 0.7 (5.5 m), looked at, not walked.",
+  "remove": false
+ },
+ {
+  "map": "Noise_Voxel",
+  "id": "f2_voxelnoise_16_24",
+  "token": "voxelnoise",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 28 x 28 x 29 m voxel terrain drawn 15-45 m north of the floor: 0.19 (5.4 m), a table-top landscape in the middle of the floor.",
+  "remove": false
+ },
+ {
+  "map": "Noise_Inside_Noise",
+  "id": "f4_noisesphere_6_5",
+  "token": "noisesphere",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 10 m walk-in sphere 0.9 m through the ceiling: 0.85 (8.4 m, 5.5 m tall), still entered.",
+  "remove": false
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "16 x 10 m north: room for the cellular womb, a 22 x 26 m walk-in room at 0.52.",
+  "remove": false,
+  "before": "fits"
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_cellular_atrium_space_51_19",
+  "token": "cellular_atrium_space",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 25 x 25 m walk-in atrium, 9.4 m tall, 20 m past the south edge: 0.5 (12.7 m, 4.7 m tall) in the open middle between the shafts. Its clearing stays walkable (radius 2.3 m).",
+  "remove": false
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_cellular_womb_space_17_19",
+  "token": "cellular_womb_space",
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 22 x 26.5 m walk-in womb, 9.6 m tall, 22 m past the south edge: turned and 0.515 (13.7 x 11.3 m, 4.9 m tall), wholly on a new north slab past the column row.",
+  "remove": false
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_voronoi_strands_34_40",
+  "token": "voronoi_strands",
+  "strategies": [
+   "kept",
+   "move",
+   "reduce_repeats",
+   "scale_area"
+  ],
+  "note": "Its tethers search 80 m for a surface and found the floor 42 m down a shaft: surface_reach 6 m (the slab under it and the one over it). Its net (6.6 x 7 x 5.8 m, hung 4.3 m up) rose through the ceiling: 0.65, in the east bay, its tethers to the floor and the ceiling. | KEPT: its tethers (surface_reach 6) fix to the nearest surfaces, and in the east bay those are the four tower columns - the net is strung between them. The columns in its bounds are its anchors.",
+  "remove": false
+ },
+ {
+  "map": "Noise_Box",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "16 x 10 m north: room for the box shell, a 22.5 x 28 m walk-in room at 0.5.",
+  "remove": false,
+  "before": "fits"
+ },
+ {
+  "map": "Noise_Box",
+  "id": "f1_box_atrium_space_51_19",
+  "token": "box_atrium_space",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 26 x 26 m walk-in atrium, 9.7 m tall, drawn 22-48 m west of the floor: 0.485 (12.5 x 12.8 m, 4.7 m tall) in the open middle between the shafts.",
+  "remove": false
+ },
+ {
+  "map": "Noise_Box",
+  "id": "f1_box_shell_space_17_19",
+  "token": "box_shell_space",
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 22.5 x 28 m walk-in shell, 9.7 m tall, drawn 23-46 m east of the floor: turned and 0.5 (13.9 x 11.3 m, 4.9 m tall), wholly on a new north slab past the column row.",
+  "remove": false
+ },
+ {
+  "map": "Random_Noise_Types",
+  "id": "weather",
+  "token": "related_weather",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.6 m (0 of 5 samples past the slab have ground); moved 5.5 m",
+  "remove": false
+ },
+ {
+  "map": "Noise_Space_10",
+  "id": "f2_noise_space_6_6",
+  "token": "noise_space",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 3.7 m (0 of 10 samples past the slab have ground; moved 7.9 m",
+  "remove": false
+ },
+ {
+  "map": "Noise_Perlin_Simplex",
+  "id": "f3_perlin_noise_8_13",
+  "token": "perlin_noise",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f3_simplex_noise_3_13; moved 0.5 m",
+  "remove": false,
+  "before": "overlaps: stands in f3_simplex_noise_3_13 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "WaveFunctions_TrigWalkingPath",
+  "id": "f1_wave_interference_25_33",
+  "token": "wave_interference",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.9 m (0 of 15 samples past the slab have ground; moved 11.4 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Pendulum",
+  "id": "f1_WavePaintings_10_23",
+  "token": "WavePaintings",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.0 m (0 of 20 samples past the slab have ground; moved 4.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "id": "f4_coupled_oscillator_lattice_6_10",
+  "token": "coupled_oscillator_lattice",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 2.5 m (0 of 15 samples past the slab have ground; moved 10.4 m | Between the two wave pools there is no room that holds from run to run (the pools are drawn by their waves): onto the north slab beside Kusama's sine.",
+  "remove": false
+ },
+ {
+  "map": "Noise_6_Wall",
+  "id": "f3_shader_noise_space_6_6",
+  "token": "shader_noise_space",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 0.5 m (0 of 5 samples past the slab have ground); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "Noise_One",
+  "id": "f1_noiselayers_5_7",
+  "token": "noiselayers",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.1 m",
+  "remove": false,
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Random_Noise_Types",
+  "id": "surface",
+  "token": "geometry_noise",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 2.1 m",
+  "remove": false,
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_double_helix_scene_6_27",
+  "token": "double_helix_scene",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 2.7 m (0 of 20 samples past the slab have ground; moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_synthesis_stand_16_27",
+  "token": "synthesis_stand",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 2.6 m (16 of 20 samples past the slab have groun; moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_AirMusic",
+  "id": "f1_air_music_display_case_13_6",
+  "token": "air_music_display_case",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.7 m",
+  "remove": false,
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "WaveFunctions_AirMusic",
+  "id": "f1_resonating_metallophone_5_6",
+  "token": "resonating_metallophone",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.5 m",
+  "remove": false,
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Random_Noise_Types",
+  "id": "spectrum",
+  "token": "NoiseColors3D",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.0 m",
+  "remove": false,
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Noise_Columns",
+  "id": "family",
+  "token": "synthesis_stand",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.7 m",
+  "remove": false,
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Noise_One",
+  "id": "f1_film_noise_layers_1_2",
+  "token": "film_noise_layers",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 2.3 m (0 of 20 samples past the slab have ground; moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "id": "f4_film_wave_neighbours_5_4",
+  "token": "film_wave_neighbours",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (6.0, 1.3, 11.0); moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "Noise_Inside_Noise",
+  "id": "f4_film_noise_relief_11_9",
+  "token": "film_noise_relief",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f4_noisesphere_6_5; moved 0.5 m",
+  "remove": false,
+  "before": "overlaps: stands in f4_noisesphere_6_5 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_cube_scene_4_24",
+  "token": "cube_scene",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (7.0, 0.5, -10.0); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Pendulum",
+  "id": "f1_dark_sphere_2_5",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-3.0, 0.5, 10.0); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_dark_sphere_19_24",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-8.0, 0.5, -10.0); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Effect_Sound",
+  "id": "f1_dark_sphere_20_28",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (4.0, 0.5, 12.0); moved 4.1 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_John_Cage",
+  "id": "f3_dark_sphere_5_10",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-3.0, 0.5, 11.0); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_TrigWalkingPath",
+  "id": "f1_dark_sphere_28_42",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (4.0, 0.5, 12.0); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_dark_sphere_9_28",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (4.0, 0.5, 12.0); moved 4.0 m",
+  "remove": false
+ },
+ {
+  "map": "Noise_Space_10",
+  "id": "f2_dark_sphere_11_3",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-11.5, 1.5, 11.2); moved 3.0 m",
+  "remove": false
+ },
+ {
+  "map": "Noise_Inside_Noise",
+  "id": "f4_dark_sphere_3_3",
+  "token": "dark_sphere",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f4_noisesphere_6_5; moved 0.5 m",
+  "remove": false,
+  "before": "overlaps: stands in f4_noisesphere_6_5 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_ambient_patch_16_20",
+  "token": "ambient_patch",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (2.0, 1.0, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_hallway_scene_16_15",
+  "token": "hallway_scene",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: north 2.2 m (0 of 20 samples past the slab have ground; moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_chemicalapparatus_20_27",
+  "token": "chemicalapparatus",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: edge: south 1.2 m (20 of 25 samples past the slab have groun; moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_UnitCircleTrig_7_21",
+  "token": "UnitCircleTrig",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-1.9, 0.3, -10.3); moved 2.0 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Effect_Sound",
+  "id": "f1_cable_builder_18_26",
+  "token": "cable_builder",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (12.0, 0.9, -12.0); moved 3.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_oscilloscope_20_16",
+  "token": "oscilloscope",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (12.0, 0.1, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Pendulum",
+  "id": "f1_GlassRack_17_18",
+  "token": "GlassRack",
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_lab_table_17_17; moved 0.5 m",
+  "remove": false,
+  "before": "overlaps: stands in f1_lab_table_17_17 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "WaveFunctions_Effect_Sound",
+  "id": "f1_wave_interference_3d_19_12",
+  "token": "wave_interference_3d",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (3.0, 0.5, -11.1); moved 2.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_biomagneticresonator_7_18",
+  "token": "biomagneticresonator",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-5.0, 0.2, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_GlassRack_5_15",
+  "token": "GlassRack",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-14.1, 0.1, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Effect_Sound",
+  "id": "f1_VRAudioMonitor_20_21",
+  "token": "VRAudioMonitor",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (16.0, 1.2, 10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_lissajous_curves_7_15",
+  "token": "lissajous_curves",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (-10.0, 0.1, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_samplevialrack_20_14",
+  "token": "samplevialrack",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (16.0, 0.0, -10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Synthesis_Lab",
+  "id": "f2_multimeter_20_29",
+  "token": "multimeter",
+  "strategies": [
+   "move"
+  ],
+  "note": "fit pass: drawn outside the building, box centre (16.0, 0.1, 10.0); moved 1.5 m",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_John_Cage",
+  "id": "f3_john_cage_tech_noir_16_18",
+  "token": "john_cage_tech_noir",
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "14.5 x 13.1 m, past the north edge and round a column: 0.95 (13.8 x 12.5 m) in the open middle between the shafts.",
+  "remove": false
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "13 x 10 m north: room for the colorballs (11.4 x 10.3 m); the floor's middle is crossed end to end by the unit-circle work.",
+  "remove": false,
+  "before": "fits"
+ },
+ {
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "10 x 10 m north: room for Kusama's sine (8.5 x 9.1 m); the two 16 m wave pools over the shafts fill the floor. | 10 x 10 -> 22 x 10 m: Kusama's sine and the coupled-oscillator lattice side by side (the two wave pools over the shafts fill the floor).",
+  "remove": false,
+  "before": "fits"
+ },
+ {
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "id": "f4_kusama_sine_18_11",
+  "token": "kusama_sine",
+  "strategies": [
+   "move"
+  ],
+  "note": "8.5 x 9.1 m, 4.3 m past the north edge, round a column and into both wave pools: wholly onto a new north slab past the column row.",
+  "remove": false
+ }
+]

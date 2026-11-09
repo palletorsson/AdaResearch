@@ -1,0 +1,286 @@
+[
+ {
+  "map": "WaveFunctions_Pendulum",
+  "id": "f1_foucault_pendulum_15_6",
+  "token": "foucault_pendulum",
+  "set": {
+   "position": [
+    10.0,
+    0.0
+   ]
+  },
+  "strategies": [
+   "shaft_rise",
+   "move"
+  ],
+  "note": "7.4 m tall in a 5.6 m storey, past the north edge and round a column: hung in shaft B (this floor descends by shaft A), its top through the open shaft of the floor above, its canvas in the shaft - a Foucault pendulum in a stairwell."
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_OscillationCurve_19_18",
+  "token": "OscillationCurve",
+  "set": {
+   "height": 1.66
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "0.4 m below the slab: raised."
+ },
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_colorballs_8_24",
+  "token": "colorballs",
+  "set": {
+   "height": 1.3
+  },
+  "strategies": [
+   "raise"
+  ],
+  "note": "1.3 m below the slab: raised."
+ },
+ {
+  "map": "Wavefunctions_Sky_Stairs",
+  "id": "f2_sine_cylinder_staircase_7_16",
+  "token": "sine_cylinder_staircase",
+  "fit": {
+   "set": {
+    "STEP_COUNT": 52,
+    "TOTAL_TURNS": 1.3
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "note": "A 9 m helix of 80 steps through the 5.6 m storey: 52 steps of the same 0.10 m rise (1.3 turns), so it climbs 5.2 m at body scale. Candidate to climb through a shaft into the floor above, if a stair between floors is wanted."
+ },
+ {
+  "map": "WaveFunctions_Intro",
+  "id": "barber-pillar-south",
+  "token": "pillar_barber_roll",
+  "strategies": [
+   "kept"
+  ],
+  "note": "KEPT: it stands on the tower column at (14, 7) on purpose - a barber pole rolling round the column.",
+  "before": "overlaps: a tower column inside it"
+ },
+ {
+  "map": "WaveFunctions_Intro",
+  "id": "barber-pillar-north",
+  "token": "pillar_barber_roll",
+  "strategies": [
+   "kept"
+  ],
+  "note": "KEPT: it stands on the tower column at (14, -7) on purpose - a barber pole rolling round the column.",
+  "before": "overlaps: a tower column inside it"
+ },
+ {
+  "map": "Noise_One",
+  "id": "f1_noisetorus_5_4",
+  "token": "noisetorus",
+  "set": {
+   "scale": 0.7,
+   "height": 0.02
+  },
+  "strategies": [
+   "scale_area"
+  ],
+  "note": "7.8 m tall: 0.7 (5.5 m), looked at, not walked."
+ },
+ {
+  "map": "Noise_Voxel",
+  "id": "f2_voxelnoise_16_24",
+  "token": "voxelnoise",
+  "set": {
+   "position": [
+    -0.0,
+    -1.5
+   ],
+   "scale": 0.19
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 28 x 28 x 29 m voxel terrain drawn 15-45 m north of the floor: 0.19 (5.4 m), a table-top landscape in the middle of the floor."
+ },
+ {
+  "map": "Noise_Inside_Noise",
+  "id": "f4_noisesphere_6_5",
+  "token": "noisesphere",
+  "set": {
+   "position": [
+    0.0,
+    -0.17
+   ],
+   "scale": 0.85,
+   "height": 0.02
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 10 m walk-in sphere 0.9 m through the ceiling: 0.85 (8.4 m, 5.5 m tall), still entered."
+ },
+ {
+  "map": "Noise_Cellular",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 16,
+    "depth": 10,
+    "seed": 98,
+    "editor_label": "Side slab / room for the cellular womb, a 22 x 26 m walk-in room at 0.52 (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "16 x 10 m north: room for the cellular womb, a 22 x 26 m walk-in room at 0.52.",
+  "before": "fits"
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_cellular_atrium_space_51_19",
+  "token": "cellular_atrium_space",
+  "set": {
+   "position": [
+    0.0,
+    -0.02
+   ],
+   "scale": 0.5,
+   "height": 0.27
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 25 x 25 m walk-in atrium, 9.4 m tall, 20 m past the south edge: 0.5 (12.7 m, 4.7 m tall) in the open middle between the shafts. Its clearing stays walkable (radius 2.3 m)."
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_cellular_womb_space_17_19",
+  "token": "cellular_womb_space",
+  "set": {
+   "position": [
+    -0.06,
+    -13.28
+   ],
+   "scale": 0.515,
+   "height": 0.28,
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 22 x 26.5 m walk-in womb, 9.6 m tall, 22 m past the south edge: turned and 0.515 (13.7 x 11.3 m, 4.9 m tall), wholly on a new north slab past the column row."
+ },
+ {
+  "map": "Noise_Cellular",
+  "id": "f5_voronoi_strands_34_40",
+  "token": "voronoi_strands",
+  "set": {
+   "position": [
+    17,
+    0
+   ],
+   "scale": 0.65
+  },
+  "strategies": [
+   "move",
+   "reduce_repeats",
+   "scale_area"
+  ],
+  "note": "Its tethers search 80 m for a surface and found the floor 42 m down a shaft: surface_reach 6 m (the slab under it and the one over it). Its net (6.6 x 7 x 5.8 m, hung 4.3 m up) rose through the ceiling: 0.65, in the east bay, its tethers to the floor and the ceiling.",
+  "fit": {
+   "set": {
+    "surface_reach": 6.0
+   }
+  }
+ },
+ {
+  "map": "Noise_Box",
+  "add": {
+   "id": "side-slab-north",
+   "artifact": "void_slab_extension",
+   "station": "NW",
+   "position": [
+    0,
+    -9
+   ],
+   "height": 0,
+   "scale": 1,
+   "facing": 180,
+   "config": {
+    "length": 16,
+    "depth": 10,
+    "seed": 99,
+    "editor_label": "Side slab / room for the box shell, a 22.5 x 28 m walk-in room at 0.5 (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "16 x 10 m north: room for the box shell, a 22.5 x 28 m walk-in room at 0.5.",
+  "before": "fits"
+ },
+ {
+  "map": "Noise_Box",
+  "id": "f1_box_atrium_space_51_19",
+  "token": "box_atrium_space",
+  "set": {
+   "position": [
+    0.0,
+    0.0
+   ],
+   "scale": 0.485,
+   "height": 0.26
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 26 x 26 m walk-in atrium, 9.7 m tall, drawn 22-48 m west of the floor: 0.485 (12.5 x 12.8 m, 4.7 m tall) in the open middle between the shafts."
+ },
+ {
+  "map": "Noise_Box",
+  "id": "f1_box_shell_space_17_19",
+  "token": "box_shell_space",
+  "set": {
+   "position": [
+    0.0,
+    -13.31
+   ],
+   "scale": 0.5,
+   "height": 0.27,
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "A 22.5 x 28 m walk-in shell, 9.7 m tall, drawn 23-46 m east of the floor: turned and 0.5 (13.9 x 11.3 m, 4.9 m tall), wholly on a new north slab past the column row."
+ }
+]

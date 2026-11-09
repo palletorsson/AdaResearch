@@ -1,0 +1,58 @@
+[
+ {
+  "map": "WaveFunctions_Unit_Circle",
+  "id": "f3_colorballs_8_24",
+  "token": "colorballs",
+  "fit": {
+   "set": {
+    "ball_bounce": 0.35,
+    "initial_velocity_range": 0.6,
+    "linear_damp": 0.8
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "note": "Chromatic rain: its 10 g balls bounced (0.8) and were thrown (2 m/s) across 13 m, off the slab and over the column row - its own physics, ball_bounce 0.35, initial_velocity_range 0.6, linear_damp 0.8: the rain lands and stays on the slab.",
+  "before": "overflows: edge: north 10.3 m; a tower column inside it (its balls roll 13 m)"
+ },
+ {
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 22,
+    "depth": 10,
+    "seed": 69,
+    "editor_label": "Side slab / room for Kusama's sine (8.5 x 9.1 m); the two 16 m wave pools over the shafts fill the floor (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "10 x 10 -> 22 x 10 m: Kusama's sine and the coupled-oscillator lattice side by side (the two wave pools over the shafts fill the floor).",
+  "before": "fits"
+ },
+ {
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "id": "f4_coupled_oscillator_lattice_6_10",
+  "token": "coupled_oscillator_lattice",
+  "set": {
+   "position": [
+    8.42,
+    -10.4
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Between the two wave pools there is no room that holds from run to run (the pools are drawn by their waves): onto the north slab beside Kusama's sine.",
+  "before": "overlaps: stands in the wave pool over shaft B (another session's, held)"
+ }
+]
