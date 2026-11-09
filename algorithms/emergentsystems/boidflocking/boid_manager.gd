@@ -104,6 +104,9 @@ const CAPTION_FONT_SIZE: int = 70
 ## Opt-in: each boid's own boundary box (its boundary_size, 50 x 30 x 50 m by default) takes this size round the manager
 ## - a flock that has to stay on one floor of the Void tower (2026-11-09). Zero leaves the boids' own.
 @export var boid_boundary := Vector3.ZERO
+## With boid_boundary: how hard a boid is steered back once inside the margin. The steer grows with depth, so the
+## flock swings about max_speed / sqrt(force / margin) past the edge: 25 lets a 10 m/s flock swing ~2.8 m (2026-11-09).
+@export var boid_boundary_force := 25.0
 
 # VR related
 @export var vr_player_path: NodePath
@@ -319,7 +322,7 @@ func _after_add(b: Node3D) -> void:
 	if boid_boundary != Vector3.ZERO and "boundary_size" in b:
 		b.set("boundary_size", boid_boundary)
 		# a soft 5 m/s steer from 5 m inside the edge lets a 5-10 m/s flock overshoot by metres: a tight box steers harder
-		if "boundary_force" in b: b.set("boundary_force", maxf(float(b.get("boundary_force")), 25.0))
+		if "boundary_force" in b: b.set("boundary_force", maxf(float(b.get("boundary_force")), boid_boundary_force))
 		if "boundary_margin" in b: b.set("boundary_margin", minf(float(b.get("boundary_margin")), 2.0))
 	if vr_player and b.has_method("set"):
 		b.set("vr_player_path", b.get_path_to(vr_player))

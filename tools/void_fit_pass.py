@@ -5,7 +5,8 @@ that leaves the building or floats outside it but whose footprint would fit the 
 building column, and clear of every other work's measured box. Writes PROPOSALS only - nothing in the tower changes.
 
     python tools/void_fit_pass.py [--maps=A,B] [--overlaps] [--markdown]
---overlaps also moves works that the survey calls fitting but that stand in a neighbour or round a tower column.
+--overlaps also moves works that the survey calls fitting but that stand in a neighbour or round a tower column;
+--hold=id,... names works that must not move nor make a neighbour move (another session's uncommitted placements).
 Output: ada_run/void-size-survey/fit_pass.json (+ fit_pass.md)."""
 import json, math, sys
 from pathlib import Path
@@ -19,18 +20,23 @@ def rects_overlap(a, b, shrink=0.05):
     return a[0] + shrink < b[2] - shrink and b[0] + shrink < a[2] - shrink and a[1] + shrink < b[3] - shrink and b[1] + shrink < a[3] - shrink
 
 
-def overlap_movers(building, floors, columns, maps, already):
+def overlap_movers(building, floors, rooms, columns, maps, already, hold=()):
     """Works the survey calls fitting that stand in a neighbour or round a tower column (a work scaled where it stood
-    keeps its centre, and can shrink onto a column line). Of a pair, the one round a column moves, else the smaller."""
+    keeps its centre, and can shrink onto a column line). Of a pair, the one round a column moves, else the smaller.
+    A work in `hold` (another session's uncommitted placement) never moves and never makes its neighbour move: those
+    pairs are printed, for whoever owns it. It stays an obstacle to every other move. A work whose config.fit.strategies
+    holds "kept" was left where it stands on purpose (its note says why) and is not checked."""
     out = []
     flat = lambda b: (b[3] - b[0]) <= 1 or (b[5] - b[2]) <= 1
     for key, f in floors.items():
         if maps and f.get("map") not in maps: continue
+        kept = {a["id"] for a in rooms["floors"][int(key)].get("artifacts", []) if "kept" in ((a.get("config") or {}).get("fit") or {}).get("strategies", [])}
         ws = [w for w in f["works"] if w.get("box") and None not in w["box"] and w.get("token") not in ("void_slab_extension", "playground_spec_hall")
-              and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40]
+              and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40 and w["id"] not in kept]
         rect = lambda w: (w["box"][0], w["box"][2], w["box"][3], w["box"][5])
         movers = {}
         for w in ws:
+            if w["id"] in hold: continue
             if not flat(w["box"]) and any(rects_overlap(rect(w), c, 0.0) for c in columns):
                 movers[w["id"]] = (w, "a tower column inside it")
         for i, a in enumerate(ws):
@@ -38,6 +44,8 @@ def overlap_movers(building, floors, columns, maps, already):
                 ra, rb = rect(a), rect(b)
                 if min(ra[2], rb[2]) - max(ra[0], rb[0]) > .3 and min(ra[3], rb[3]) - max(ra[1], rb[1]) > .3:
                     if a["id"] in movers or b["id"] in movers: continue
+                    if a["id"] in hold or b["id"] in hold:
+                        print("  held: %s / %s stands in %s" % (f.get("map"), a["id"], b["id"])); continue
                     area = lambda r: (r[2] - r[0]) * (r[3] - r[1])
                     w, other = (a, b) if area(ra) <= area(rb) else (b, a)
                     movers[w["id"]] = (w, "stands in " + other["id"])
@@ -65,7 +73,8 @@ def main():
     maps = next((a.split("=", 1)[1].split(",") for a in sys.argv if a.startswith("--maps=")), None)
     if maps: todo = [r for r in todo if r["map"] in maps]
     if "--overlaps" in sys.argv:
-        todo += overlap_movers(building, floors, columns, maps, {(r["floor"], r["id"]) for r in todo})
+        hold = set(next((a.split("=", 1)[1].split(",") for a in sys.argv if a.startswith("--hold=")), []))
+        todo += overlap_movers(building, floors, rooms, columns, maps, {(r["floor"], r["id"]) for r in todo}, hold)
     proposals, stuck = [], []
     moved_boxes = {}   # (floor, id) -> box after an accepted move: later works on the floor avoid where it now goes
     # the biggest first: they have the fewest places to go

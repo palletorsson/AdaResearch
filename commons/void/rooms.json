@@ -25606,8 +25606,8 @@
           "id": "f1_euler_drift_29_6",
           "artifact": "euler_drift",
           "position": [
-            0,
-            5
+            -5.0,
+            8.0
           ],
           "station": "SE",
           "facing": 0,
@@ -25616,15 +25616,21 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "step_study"
+            "lesson": "step_study",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_firework_burst_31_66; moved 5.8 m"
+            }
           }
         },
         {
           "id": "f1_launch_arc_14_8",
           "artifact": "launch_arc",
           "position": [
-            3,
-            10
+            3.0,
+            11.98
           ],
           "station": "SE",
           "facing": 0,
@@ -25636,9 +25642,10 @@
             "lesson": "launch_chamber",
             "fit": {
               "strategies": [
+                "move",
                 "scale_area"
               ],
-              "note": "6.5 m tall, 0.9 m through the ceiling: 0.86."
+              "note": "A column stood in the arc; onto the south slab past the column row."
             }
           }
         },
@@ -25646,8 +25653,8 @@
           "id": "f1_bubble_blaster_32_12",
           "artifact": "bubble_blaster",
           "position": [
-            -5,
-            4
+            -7.5,
+            4.0
           ],
           "station": "SW",
           "facing": 180,
@@ -25655,15 +25662,21 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_firework_burst_31_66; moved 2.5 m"
+            }
           }
         },
         {
           "id": "f1_force_trial_catapult_7_26",
           "artifact": "force_trial_catapult",
           "position": [
-            -15,
-            9
+            -15.0,
+            11.5
           ],
           "station": "SW",
           "facing": 180,
@@ -25671,15 +25684,21 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.5 m"
+            }
           }
         },
         {
           "id": "f1_force_trial_pipe_20_26",
           "artifact": "force_trial_pipe",
           "position": [
-            15,
-            9
+            15.0,
+            11.5
           ],
           "station": "SE",
           "facing": 180,
@@ -25687,7 +25706,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.5 m"
+            }
           }
         },
         {
@@ -25711,8 +25736,8 @@
           "id": "f1_force_play_torque_15_41",
           "artifact": "force_play_torque",
           "position": [
-            0,
-            -9
+            0.0,
+            -12.5
           ],
           "station": "NE",
           "facing": 180,
@@ -25720,15 +25745,21 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Two columns stood in the play; onto the north slab past the column row."
+            }
           }
         },
         {
           "id": "f1_human_catapult_10_62",
           "artifact": "human_catapult",
           "position": [
-            15,
-            -8
+            16.0,
+            -8.0
           ],
           "station": "NE",
           "facing": 180,
@@ -25736,29 +25767,36 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
           }
         },
         {
           "id": "f1_firework_burst_31_66",
           "artifact": "firework_burst",
           "position": [
-            0,
-            -2
+            0.0,
+            0.0
           ],
           "station": "NE",
           "facing": 180,
           "height": 0.02,
-          "scale": 0.95,
+          "scale": 0.8,
           "config": {
             "pin": "1",
             "plinth": "0",
             "lesson": "live_fountain",
             "fit": {
               "strategies": [
+                "move",
                 "scale_area"
               ],
-              "note": "0.2 m through the ceiling: 0.95."
+              "note": "A 15 m burst of particles round two columns: 0.8 (12.8 m) in the open middle between the shafts."
             }
           }
         },
@@ -25775,13 +25813,14 @@
           "facing": 0,
           "config": {
             "length": 40,
-            "depth": 7,
+            "depth": 8,
             "seed": 49,
             "editor_label": "Side slab / room for the launch arc and the two catapult trials, 5-6 m past the south edge (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "7 -> 8 m: the launch arc clears the column row."
             }
           }
         },
@@ -25798,13 +25837,14 @@
           "facing": 180,
           "config": {
             "length": 40,
-            "depth": 7,
+            "depth": 9,
             "seed": 491,
             "editor_label": "Side slab / room for the torque play, the catapult and the human catapult, 3-6 m past the north edge (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "7 -> 9 m: the torque play (10 m deep) clears the column row."
             }
           }
         }
@@ -25824,8 +25864,8 @@
           "id": "f2_force_play_mass_14_10",
           "artifact": "force_play_mass",
           "position": [
-            -14,
-            9
+            -13.8,
+            12.5
           ],
           "station": "SW",
           "facing": 180,
@@ -25833,15 +25873,21 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Columns stood in the play at the slab's edge; wholly onto the deepened south slab."
+            }
           }
         },
         {
           "id": "f2_force_play_trolley_8_28",
           "artifact": "force_play_trolley",
           "position": [
-            0,
-            9
+            0.0,
+            12.5
           ],
           "station": "SE",
           "facing": 180,
@@ -25849,15 +25895,21 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Columns stood in the play at the slab's edge; wholly onto the deepened south slab."
+            }
           }
         },
         {
           "id": "f2_force_play_puzzle_20_28",
           "artifact": "force_play_puzzle",
           "position": [
-            14,
-            9
+            14.0,
+            12.5
           ],
           "station": "SE",
           "facing": 180,
@@ -25865,7 +25917,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Columns stood in the play at the slab's edge; wholly onto the deepened south slab."
+            }
           }
         },
         {
@@ -25873,7 +25931,7 @@
           "artifact": "force_mower",
           "position": [
             0.3,
-            5
+            4.8
           ],
           "station": "SE",
           "facing": 90,
@@ -25884,14 +25942,14 @@
             "plinth": "0",
             "lesson": "flower_garden",
             "lawn_width": 13,
-            "lawn_length": 14,
+            "lawn_length": 12.4,
             "fit": {
               "strategies": [
                 "move",
                 "reduce_repeats",
                 "scale_area"
               ],
-              "note": "The lawn runs 12.7 m behind the machine and 1.7 m ahead: mower at z 5 with a 13 m lawn keeps it between the shafts and on the floor."
+              "note": "Its lawn (14 m) crossed both column rows: lawn_length 12.4, and 0.2 m north, so it lies between them."
             }
           }
         },
@@ -25908,13 +25966,14 @@
           "facing": 0,
           "config": {
             "length": 40,
-            "depth": 6,
+            "depth": 9,
             "seed": 50,
             "editor_label": "Side slab / room for the mass, trolley and puzzle plays, each 5 m past the south edge (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "6 -> 9 m: three 10 x 10 m plays stand wholly past the column row."
             }
           }
         }
@@ -25951,8 +26010,8 @@
           "artifact": "VectorFieldFlow",
           "station": "NE",
           "position": [
-            0,
-            -10
+            0.0,
+            -13.79
           ],
           "facing": 0,
           "height": 0,
@@ -25960,7 +26019,13 @@
           "config": {
             "pin": "1",
             "plinth": "0",
-            "lesson": "field_receivers"
+            "lesson": "field_receivers",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Two columns stood in the field; onto the deepened north slab past the column row (the open middle is the vortex playground's)."
+            }
           }
         },
         {
@@ -25968,12 +26033,12 @@
           "artifact": "wind_room",
           "station": "SW",
           "position": [
-            -13,
-            8.5
+            -12.0,
+            12.96
           ],
           "facing": 180,
           "height": 0,
-          "scale": 1,
+          "scale": 0.91,
           "config": {
             "pin": "1",
             "plinth": "0",
@@ -25981,9 +26046,14 @@
             "fit": {
               "strategies": [
                 "move",
-                "side_slab"
+                "scale_area",
+                "side_slab",
+                "strip_floor"
               ],
-              "note": "16 x 14 m, 3.5 m past the west edge: east 3.5 m, onto a south slab."
+              "note": "Three columns stood in the room (16 x 14 m floor, walls 14.8 x 12 m). Its floor plate stripped (the slab is the floor) and 0.91: 13.6 x 11.3 m wholly on the deepened south slab - 0.94 left its far rail 0.2 m past the deck. A physics play: the smallest scale that fits.",
+              "strip": [
+                "floor"
+              ]
             }
           }
         },
@@ -26033,13 +26103,14 @@
           "facing": 0,
           "config": {
             "length": 20,
-            "depth": 7,
+            "depth": 10,
             "seed": 51,
             "editor_label": "Side slab / room for the wind room, 6.5 m past the south edge (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "7 -> 10 m: the wind room clears the column row."
             }
           }
         },
@@ -26056,13 +26127,14 @@
           "facing": 180,
           "config": {
             "length": 24,
-            "depth": 7,
+            "depth": 10,
             "seed": 511,
             "editor_label": "Side slab / room for the vector field flow and the vortex, 3.5-6 m past the north edge (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "7 -> 10 m: the vector field (9 m) clears the column row."
             }
           }
         }
@@ -26185,13 +26257,19 @@
           "station": "NW",
           "position": [
             15.8,
-            -5.8
+            -5.3
           ],
           "height": 0,
           "scale": 1,
           "facing": 0,
           "config": {
-            "study": "coast"
+            "study": "coast",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
           }
         },
         {
@@ -26432,8 +26510,8 @@
           "id": "f2_force_trial_conveyor_12_24",
           "artifact": "force_trial_conveyor",
           "position": [
-            7,
-            -9
+            7.0,
+            -13.0
           ],
           "station": "NE",
           "facing": 180,
@@ -26441,7 +26519,13 @@
           "scale": 1,
           "config": {
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "The column row z -7 ran through it; onto the deepened north slab, its edge 5 cm past the row."
+            }
           }
         },
         {
@@ -26457,13 +26541,14 @@
           "facing": 180,
           "config": {
             "length": 16,
-            "depth": 7,
+            "depth": 10,
             "seed": 54,
             "editor_label": "Side slab / room for the conveyor trial (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "7 -> 10 m deep: the conveyor trial (11 m) stands wholly past the column row."
             }
           }
         }
@@ -33916,14 +34001,21 @@
           "id": "f1_shader_shaping_wall_20_11",
           "artifact": "shader_shaping_wall",
           "position": [
-            11,
-            6
+            10.0,
+            6.0
           ],
           "height": 0,
           "facing": 0,
           "scale": 1,
           "station": "SE",
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
+          }
         },
         {
           "id": "f1_dark_sphere_16_16",
@@ -34004,8 +34096,8 @@
           "id": "f2_shader_pattern_passage_27_7",
           "artifact": "shader_pattern_passage",
           "position": [
-            -13,
-            -9.6
+            -12.9,
+            -12.94
           ],
           "height": 0,
           "facing": 0,
@@ -34020,10 +34112,11 @@
                 "walls"
               ],
               "strategies": [
+                "move",
                 "strip_floor",
                 "strip_walls"
               ],
-              "note": "A 12.6 x 10.9 m passage room: its plain floor and walls go; the patterned surfaces wear the shader and stay."
+              "note": "A column stood in the passage; wholly onto the deepened north slab."
             }
           }
         },
@@ -34077,12 +34170,12 @@
           "id": "f2_reference_pattern_garden_10_20",
           "artifact": "reference_pattern_garden",
           "position": [
-            13,
-            -10.5
+            13.5,
+            -13.93
           ],
           "height": 0,
           "facing": 0,
-          "scale": 1,
+          "scale": 0.88,
           "station": "NE",
           "config": {
             "plinth": "0",
@@ -34093,10 +34186,12 @@
                 "walls"
               ],
               "strategies": [
+                "move",
+                "scale_area",
                 "strip_floor",
                 "strip_walls"
               ],
-              "note": "A 12 x 13 m garden room around the pattern: room goes, pattern stays."
+              "note": "A column stood in the garden (12.8 m deep): 0.88 (11.3 m) wholly on the deepened north slab."
             }
           }
         },
@@ -34151,11 +34246,11 @@
           "id": "f2_fuzzy_doorway_8_53",
           "artifact": "fuzzy_doorway",
           "position": [
-            -3,
-            5.5
+            16.68,
+            0.13
           ],
           "height": 0,
-          "facing": 0,
+          "facing": 90.0,
           "scale": 0.97,
           "station": "SW",
           "config": {
@@ -34164,9 +34259,10 @@
             "fit": {
               "strategies": [
                 "move",
-                "scale_area"
+                "scale_area",
+                "turn"
               ],
-              "note": "0.1 m through the ceiling, 1.5 m past the south edge."
+              "note": "A column stood in the doorway, and it stood in the model-disagreement room: turned into the open east bay (the north slab holds the passage, the garden and the shader gallery)."
             }
           }
         },
@@ -34183,14 +34279,14 @@
           "facing": 180,
           "config": {
             "length": 39,
-            "depth": 8,
+            "depth": 10,
             "seed": 104,
             "editor_label": "Side slab / room for the pattern passage and garden (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
               ],
-              "note": "Lengthened to 39 m: the passage (x -19.3..-6.7) and the garden (6.9..19.1) both stand on it."
+              "note": "8 -> 10 m: the pattern passage and garden stand wholly past the column row."
             }
           }
         }
@@ -34250,8 +34346,8 @@
           "artifact": "shader_material_parlour",
           "station": "NE",
           "position": [
-            0,
-            -8
+            0.0,
+            -1.5
           ],
           "facing": 0,
           "height": 0,
@@ -34265,10 +34361,11 @@
                 "walls"
               ],
               "strategies": [
+                "move",
                 "strip_floor",
                 "strip_walls"
               ],
-              "note": "A 14 x 11 m parlour: fixed bodies and lights stay, the parlour's floor and walls go."
+              "note": "overlap check: a tower column inside it; moved 6.5 m"
             }
           }
         },
@@ -34380,8 +34477,8 @@
           "artifact": "shader_09_fbm",
           "station": "NE",
           "position": [
-            12,
-            -8
+            12.0,
+            -6.0
           ],
           "facing": 0,
           "height": 0,
@@ -34389,7 +34486,13 @@
           "config": {
             "setting": "wall",
             "pin": "1",
-            "plinth": "0"
+            "plinth": "0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.0 m"
+            }
           }
         }
       ],
@@ -34448,8 +34551,8 @@
           "artifact": "shader_composition_stage",
           "station": "NE",
           "position": [
-            0,
-            -8
+            0.0,
+            -12.31
           ],
           "facing": 0,
           "height": 0,
@@ -34462,10 +34565,11 @@
                 "floor"
               ],
               "strategies": [
+                "move",
                 "scale_area",
                 "strip_floor"
               ],
-              "note": "0.4 m through the ceiling: 0.92 (its sofa, sphere and cube stay larger than a body)."
+              "note": "Two columns stood in the stage; wholly onto the deepened north slab (its floor boards, which wear its material, moved with it: 4 m, the boards' whole-metre grid)."
             }
           }
         },
@@ -34474,12 +34578,12 @@
           "artifact": "reference_plural_body",
           "station": "NE",
           "position": [
-            14.6,
-            -8
+            15.3,
+            -13.93
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.88,
           "config": {
             "plinth": "0",
             "pin": "1",
@@ -34490,11 +34594,12 @@
               ],
               "strategies": [
                 "move",
+                "scale_area",
                 "side_slab",
                 "strip_floor",
                 "strip_walls"
               ],
-              "note": "10 cm past the east end of its slab."
+              "note": "Two columns stood in the bay (12.8 m deep): 0.88 (11.3 m) wholly on the deepened north slab."
             }
           }
         },
@@ -34511,14 +34616,14 @@
           "facing": 180,
           "config": {
             "length": 30,
-            "depth": 6,
+            "depth": 10,
             "seed": 107,
             "editor_label": "Side slab / room for the composition stage and the plural body (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
               ],
-              "note": "Lengthened to 30 m (x -9..21)."
+              "note": "6 -> 10 m: the composition stage and the plural body stand wholly past the column row."
             }
           }
         }
@@ -34539,10 +34644,10 @@
           "artifact": "shader_state_chamber",
           "station": "NE",
           "position": [
-            0,
-            -5.5
+            0.0,
+            -2.0
           ],
-          "facing": 0,
+          "facing": 90.0,
           "height": 0,
           "scale": 0.92,
           "config": {
@@ -34559,9 +34664,10 @@
                 "scale_area",
                 "strip_ceiling",
                 "strip_floor",
-                "strip_walls"
+                "strip_walls",
+                "turn"
               ],
-              "note": "0.4 m through the ceiling and 3 m past the north edge after the chamber went."
+              "note": "overlap check: a tower column inside it; moved 3.5 m"
             }
           }
         },
@@ -36567,10 +36673,16 @@
               4,
               11
             ],
-            "source_token": "cube_subdivision:180:1.5#seed_value:31415#lesson:true"
+            "source_token": "cube_subdivision:180:1.5#seed_value:31415#lesson:true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
           },
           "position": [
-            -16,
+            -17.0,
             -5.5
           ]
         },
@@ -36589,11 +36701,17 @@
               12,
               11
             ],
-            "source_token": "recursive_chair:180:0#lesson:true"
+            "source_token": "recursive_chair:180:0#lesson:true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
           },
           "position": [
             16.5,
-            -5.5
+            -5.0
           ]
         },
         {
@@ -37034,10 +37152,16 @@
               5,
               20
             ],
-            "source_token": "fractal_scene:0:1:0.65"
+            "source_token": "fractal_scene:0:1:0.65",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
           },
           "position": [
-            -5.5,
+            -6.5,
             7.5
           ]
         },
@@ -37196,7 +37320,7 @@
           "artifact": "fractal_clouds",
           "station": "NE",
           "position": [
-            15,
+            16.0,
             -7.4
           ],
           "facing": 180,
@@ -37207,7 +37331,7 @@
               "strategies": [
                 "move"
               ],
-              "note": "0.4 m past the north edge."
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
             }
           }
         },
@@ -37311,14 +37435,20 @@
           "artifact": "recursion_observatory",
           "station": "SE",
           "position": [
-            15,
-            8
+            15.0,
+            5.5
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "tick": "coarse"
+            "tick": "coarse",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.5 m"
+            }
           }
         },
         {
@@ -37326,7 +37456,7 @@
           "artifact": "box_counting_dimension",
           "station": "SE",
           "position": [
-            0,
+            -1.0,
             5.9
           ],
           "facing": 0,
@@ -37339,7 +37469,7 @@
                 "move",
                 "scale_area"
               ],
-              "note": "0.9 m past the south edge."
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
             }
           }
         },
@@ -37636,13 +37766,20 @@
           "artifact": "the_recursion_cabinet",
           "station": "SW",
           "position": [
-            -15,
-            8
+            -16.5,
+            8.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f4_diffusion_limited_aggregation_16_29",
@@ -39373,8 +39510,8 @@
           "artifact": "branching_growth_algorithm",
           "station": "NW",
           "position": [
-            -12,
-            -6
+            -11.5,
+            -6.0
           ],
           "facing": 180,
           "height": 1.82,
@@ -39383,10 +39520,11 @@
             "lesson": "true",
             "fit": {
               "strategies": [
+                "move",
                 "raise",
                 "scale_area"
               ],
-              "note": "A 9.2 m branching tree 2.9 m below the slab and through the ceiling: 0.6, on the slab."
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
             }
           }
         },
@@ -39545,12 +39683,12 @@
           "artifact": "maze_generation",
           "station": "NE",
           "position": [
-            3,
-            -1
+            5.82,
+            5.82
           ],
           "facing": 180,
           "height": 0,
-          "scale": 1,
+          "scale": 0.97,
           "config": {
             "lesson": "true",
             "fit": {
@@ -39559,9 +39697,11 @@
                 "Floor"
               ],
               "strategies": [
+                "move",
+                "scale_area",
                 "strip_floor"
               ],
-              "note": "The maze's 13.5 m Floor goes; its walls are the maze."
+              "note": "A column stood in the maze, half on the north slab: 0.97 (12.8 m) in the open middle between the shafts."
             }
           }
         },
@@ -39669,8 +39809,8 @@
           "artifact": "dome",
           "station": "NW",
           "position": [
-            -15,
-            -5
+            -15.5,
+            -4.0
           ],
           "facing": 180,
           "height": 0.08,
@@ -39678,10 +39818,11 @@
           "config": {
             "fit": {
               "strategies": [
+                "move",
                 "raise",
                 "scale_area"
               ],
-              "note": "A 14.3 m CSG dome at 0.55: 0.21 (5.5 m)."
+              "note": "overlap check: a tower column inside it; moved 1.1 m"
             }
           }
         },
@@ -39690,13 +39831,20 @@
           "artifact": "layered_membrane",
           "station": "NE",
           "position": [
-            15,
-            -5
+            15.0,
+            -4.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 0.5,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -39736,21 +39884,28 @@
           "artifact": "mirror_cellular_texture_for_3d",
           "station": "SW",
           "position": [
-            -16,
-            7
+            -17.0,
+            6.5
           ],
           "facing": 180,
           "height": 0.12,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.1 m"
+            }
+          }
         },
         {
           "id": "f5_rhizomatic_maze_space_22_14",
           "artifact": "rhizomatic_maze_space",
           "station": "NE",
           "position": [
-            2,
-            -4
+            1.5,
+            -4.0
           ],
           "facing": 180,
           "height": 4,
@@ -39760,10 +39915,11 @@
             "fit": {
               "strategies": [
                 "code_fix",
+                "move",
                 "raise",
                 "scale_area"
               ],
-              "note": "Something of it falls 80-90 m on some runs, back at its own height too; code case, open."
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
             }
           }
         },
@@ -39772,19 +39928,20 @@
           "artifact": "pattern_tunnel_machine",
           "station": "SE",
           "position": [
-            0,
-            6
+            0.22,
+            4.78
           ],
           "facing": 270.0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.95,
           "config": {
             "fit": {
               "strategies": [
                 "move",
+                "scale_area",
                 "turn"
               ],
-              "note": "An 18.9 m tunnel across the floor's 18 m depth: turned along the floor, on the band between the shafts and the south edge."
+              "note": "Three columns stood in the 19 m tunnel: 0.95 (3.4 m deep) in the strip between the shafts and the column row."
             }
           }
         }
@@ -40246,8 +40403,8 @@
           "artifact": "cloth_straps",
           "station": "NW",
           "position": [
-            -14,
-            -7
+            -11.0,
+            -7.0
           ],
           "facing": 180,
           "height": 0,
@@ -40259,7 +40416,13 @@
             "strap_count": "10",
             "strap_width": "0.32",
             "strap_height": "3.0",
-            "strap_overlap": "0.04"
+            "strap_overlap": "0.04",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 3.0 m"
+            }
           }
         },
         {
@@ -40382,8 +40545,8 @@
           "artifact": "cloth_straps",
           "station": "SW",
           "position": [
-            -14,
-            7
+            -14.0,
+            5.0
           ],
           "facing": 180,
           "height": 0,
@@ -40395,7 +40558,13 @@
             "strap_count": "10",
             "strap_width": "0.32",
             "strap_height": "3.0",
-            "strap_overlap": "0.04"
+            "strap_overlap": "0.04",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.0 m"
+            }
           }
         },
         {
@@ -40777,13 +40946,20 @@
           "artifact": "soft_capture_times",
           "station": "NW",
           "position": [
-            -15,
-            -7
+            -15.0,
+            -5.0
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.0 m"
+            }
+          }
         },
         {
           "id": "f4_branching_growth_algorithm_8_23",
@@ -40931,13 +41107,20 @@
           "artifact": "radiolaria",
           "station": "NE",
           "position": [
-            0,
-            -3
+            0.0,
+            -0.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -40978,8 +41161,8 @@
           "artifact": "turing_pattern_generator",
           "station": "SW",
           "position": [
-            -14,
-            7
+            -16.5,
+            7.0
           ],
           "facing": 0,
           "height": 1,
@@ -40987,7 +41170,13 @@
           "config": {
             "pattern_seed": "1337",
             "seeding": "centre",
-            "resolution": "32"
+            "resolution": "32",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.5 m"
+            }
           }
         },
         {
@@ -41041,12 +41230,12 @@
           "artifact": "rd_museum_gallery",
           "station": "NE",
           "position": [
-            0,
-            6
+            -0.34,
+            4.78
           ],
           "facing": 270.0,
           "height": 0,
-          "scale": 0.6,
+          "scale": 0.49,
           "config": {
             "fit": {
               "strategies": [
@@ -41054,7 +41243,7 @@
                 "scale_area",
                 "turn"
               ],
-              "note": "A 30 m row of reaction-diffusion plinths across the floor's 18 m: turned along the floor, at 0.6 (18 m) between the shafts and the south edge."
+              "note": "Two columns stood in the 18 m gallery: 0.6 -> 0.49 (3.4 m deep) in the strip between the shafts and the column row."
             }
           }
         },
@@ -41276,14 +41465,21 @@
           "id": "f2_the_threshold_opinion_12_20",
           "artifact": "the_threshold_opinion",
           "position": [
-            -3,
-            8
+            -1.5,
+            7.5
           ],
           "height": 0,
           "facing": 0,
           "scale": 1,
           "station": "SW",
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.6 m"
+            }
+          }
         },
         {
           "id": "f2_mc_cave_7_29",
@@ -41338,19 +41534,19 @@
           "artifact": "iso_shapes_console",
           "station": "SE",
           "position": [
-            0,
-            6
+            0.0,
+            -2.99
           ],
           "facing": 0,
           "height": 0,
-          "scale": 0.72,
+          "scale": 0.66,
           "config": {
             "fit": {
               "strategies": [
                 "move",
                 "scale_area"
               ],
-              "note": "A 20.5 x 7.5 m console 3.2 m past the south edge; the band between the shafts and the edge is 6 m deep: 0.72."
+              "note": "Two columns stood in the 14.8 m console, and it lay over the gallery: 0.66 (13.6 x 5 m) north of the gallery, inside the column rows."
             }
           }
         },
@@ -41359,8 +41555,8 @@
           "artifact": "mc_shapes_gallery",
           "station": "NE",
           "position": [
-            0,
-            -7
+            0.0,
+            -6.0
           ],
           "facing": 180,
           "height": 3,
@@ -41368,7 +41564,13 @@
           "config": {
             "spacing": "5.5",
             "shape_scale": "0.09",
-            "preserve_empty_result": "true"
+            "preserve_empty_result": "true",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "1.1 m south, to leave the console its strip."
+            }
           }
         },
         {
@@ -41376,39 +41578,60 @@
           "artifact": "mc_torus_sculpture",
           "station": "SW",
           "position": [
-            -14,
-            7
+            -16.5,
+            6.5
           ],
           "facing": 180,
           "height": 1,
           "scale": 0.04,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 2.5 m"
+            }
+          }
         },
         {
           "id": "f1_mc_sculpt_vr_14_35",
           "artifact": "mc_sculpt_vr",
           "station": "SE",
           "position": [
-            0,
-            5
+            0.0,
+            6.5
           ],
           "facing": 180,
           "height": 1,
           "scale": 0.2,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: stands in f1_mc_shapes_gallery_14_21; moved 1.5 m"
+            }
+          }
         },
         {
           "id": "f1_gyroid_demo_20_36",
           "artifact": "gyroid_demo",
           "station": "SE",
           "position": [
-            14,
-            7
+            12.5,
+            7.0
           ],
           "facing": 180,
           "height": 1,
           "scale": 0.04,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.5 m"
+            }
+          }
         }
       ],
       "props": [],
@@ -41428,9 +41651,9 @@
           "station": "SE",
           "position": [
             0,
-            11
+            8
           ],
-          "facing": 0,
+          "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
@@ -41440,9 +41663,12 @@
               ],
               "strategies": [
                 "code_fix",
-                "strip_floor"
+                "kept",
+                "move",
+                "strip_floor",
+                "turn"
               ],
-              "note": "Its 12 m straight probe (6 m each side of the gyroid, made for the gyroid at 0.5) now scales with the gyroid. Cost: at 0.13 the gyroid's passages are below body size, so the probe reports them closed - a body-scale work; candidate for a floor of its own."
+              "note": "KEPT on the edge band like the chapter's other consoles: it draws its clearance probe through the gyroid it tests, so its bounds span the floor from the console to the gyroid and cross the gyroid by design. The probe rail now lies along the world probe and takes its real length (it was a fixed 12 m in the console's own frame)."
             }
           }
         },
@@ -41547,13 +41773,22 @@
           "artifact": "mc_sculpt_vr",
           "station": "NW",
           "position": [
-            -8,
-            -6
+            -2,
+            -1
           ],
-          "facing": 180,
+          "facing": 270.0,
           "height": 1.4,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "Its 14.6 m 'field' was never a size: a 2 m sculpting volume and a brush marker resting up to 15 m from it (it follows the hand in VR). Back to full scale, its volume near the middle; the marker rests 7 m off, clear of shafts and column rows."
+            }
+          }
         },
         {
           "id": "f3_fountain_demo_9_27",
@@ -41808,13 +42043,20 @@
           "artifact": "queer_marching_cave",
           "station": "SW",
           "position": [
-            -14,
-            7
+            -15.5,
+            7.0
           ],
           "facing": 180,
           "height": 1,
           "scale": 0.13,
-          "config": {}
+          "config": {
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 0.5 m"
+            }
+          }
         },
         {
           "id": "f1_rhizome_cave_demo_7_37",
@@ -42137,11 +42379,12 @@
           "config": {
             "fit": {
               "strategies": [
+                "kept",
                 "raise",
                 "scale_area",
                 "side_slab"
               ],
-              "note": "It ignores its placement scale (0.96 changed nothing) and is 5.84 m tall in a 5.64 m storey: its lowest 0.2 m sinks into the 0.36 m slab instead."
+              "note": "KEPT with four columns in its 24 x 25 m bounds: a body walked inside, already at its smallest walkable size (world_scale 1; it sets its own scale over the placement's). Candidate for its own floor, or a world_scale below 1 checked against its passages."
             }
           }
         },
@@ -43529,8 +43772,8 @@
           "id": "f1_physarum_trace_gallery_20_5",
           "artifact": "physarum_trace_gallery",
           "position": [
-            4,
-            -6
+            8.5,
+            -5.5
           ],
           "height": 0.02,
           "facing": 0,
@@ -43541,9 +43784,10 @@
             "pin": "1",
             "fit": {
               "strategies": [
+                "move",
                 "scale_area"
               ],
-              "note": "6.7 m tall, 1.1 m through the ceiling: 0.82."
+              "note": "overlap check: a tower column inside it; moved 4.5 m"
             }
           }
         }
@@ -43563,8 +43807,8 @@
           "id": "f2_flow_direction_table_4_2",
           "artifact": "flow_direction_table",
           "position": [
-            -4,
-            6
+            -3.0,
+            5.5
           ],
           "height": 0,
           "facing": 0,
@@ -43572,7 +43816,13 @@
           "station": "SW",
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.1 m"
+            }
           }
         },
         {
@@ -43611,8 +43861,8 @@
           "id": "f2_flow_crowd_22_7",
           "artifact": "flow_crowd",
           "position": [
-            3,
-            -9.5
+            2.99,
+            -13.6
           ],
           "height": 0,
           "facing": 0,
@@ -43626,9 +43876,10 @@
                 "floor"
               ],
               "strategies": [
+                "move",
                 "strip_floor"
               ],
-              "note": "A 15 m plate under the flow-field crowd: its own floor goes."
+              "note": "Two columns stood in the crowd; wholly onto the deepened north slab."
             }
           }
         },
@@ -43645,13 +43896,14 @@
           "facing": 180,
           "config": {
             "length": 18,
-            "depth": 7,
+            "depth": 10,
             "seed": 165,
             "editor_label": "Side slab / room for f2_flow_crowd_22_7 (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "7 -> 10 m: the flow crowd stands wholly past the column row."
             }
           }
         }
@@ -43715,15 +43967,21 @@
           "artifact": "boids_neighbour_lens",
           "station": "SW",
           "position": [
-            -14,
-            7
+            -14.0,
+            6.0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
+            }
           }
         },
         {
@@ -43731,8 +43989,8 @@
           "artifact": "boids_aquarium",
           "station": "SE",
           "position": [
-            14,
-            7
+            13.0,
+            7.0
           ],
           "facing": 180,
           "height": 0.69,
@@ -43741,9 +43999,10 @@
             "plinth": "0.5",
             "fit": {
               "strategies": [
+                "move",
                 "raise"
               ],
-              "note": "0.7 m below the slab: raised by that."
+              "note": "overlap check: a tower column inside it; moved 1.0 m"
             }
           }
         },
@@ -43752,15 +44011,21 @@
           "artifact": "drone_comparison",
           "station": "NW",
           "position": [
-            -15,
-            -7
+            -14.98,
+            -13.65
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "A column stood in it; wholly onto the deepened north slab."
+            }
           }
         },
         {
@@ -43790,7 +44055,7 @@
           "station": "NE",
           "position": [
             0,
-            1
+            -0.3
           ],
           "facing": 180,
           "height": 2.5,
@@ -43803,7 +44068,7 @@
                 "raise",
                 "reduce_repeats"
               ],
-              "note": "boid_boundary now also steers harder (25 m/s, from 2 m inside): the flock stays in 17 x 5 x 15 m; it dipped 0.9 m under the slab - a metre up.",
+              "note": "The flock's 16 x 14 m bounds held four columns: boid_boundary 10.5 x 10.5 m, centred between the shafts and 0.3 m north. Its steer back grows with depth into the margin, so the flock swings about max_speed / sqrt(force / margin) past it: at 25 that is 2.8 m, which put it 1.4 m through the slab. New boid_boundary_force (opt-in, like boid_boundary): 70, about 1.7 m.",
               "set": {
                 "spawn_area_size": [
                   10,
@@ -43811,10 +44076,11 @@
                   10
                 ],
                 "boid_boundary": [
-                  16,
+                  10.5,
                   4,
-                  14
-                ]
+                  10.5
+                ],
+                "boid_boundary_force": 70
               }
             }
           }
@@ -43824,8 +44090,8 @@
           "artifact": "fish_school",
           "station": "SE",
           "position": [
-            0,
-            1
+            15.62,
+            0.9
           ],
           "facing": 180,
           "height": 0,
@@ -43833,7 +44099,13 @@
           "config": {
             "plinth": "0",
             "pin": "true",
-            "offset": "-7,0,0"
+            "offset": "-7,0,0",
+            "fit": {
+              "strategies": [
+                "move"
+              ],
+              "note": "Placed on the same spot as the boid flock: a second swarm, given the open east bay of its own."
+            }
           }
         },
         {
@@ -43849,13 +44121,14 @@
           "facing": 180,
           "config": {
             "length": 12,
-            "depth": 4,
+            "depth": 10,
             "seed": 166,
             "editor_label": "Side slab / room for f1_drone_comparison_20_6 (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "4 -> 10 m: the drone comparison stands wholly past the column row."
             }
           }
         }
@@ -44013,13 +44286,21 @@
           "artifact": "ant_colony_walk",
           "station": "NW",
           "position": [
-            -10,
-            -7
+            -10.05,
+            -13.1
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
-          "config": {}
+          "scale": 0.83,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area"
+              ],
+              "note": "Two columns stood in the 13.5 m walk: 0.83 (11.2 m) wholly on the deepened north slab."
+            }
+          }
         },
         {
           "id": "f3_ant_scale_atlas_26_8",
@@ -44057,13 +44338,14 @@
           "facing": 180,
           "config": {
             "length": 14,
-            "depth": 6,
+            "depth": 10,
             "seed": 168,
             "editor_label": "Side slab / room for f3_ant_colony_walk_8_8 (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "6 -> 10 m: the ant colony walk stands wholly past the column row."
             }
           }
         }
@@ -44084,13 +44366,22 @@
           "artifact": "particle_swarm_walk",
           "station": "SE",
           "position": [
-            0,
-            7
+            -0.05,
+            0.0
           ],
-          "facing": 0,
+          "facing": 90.0,
           "height": 0,
-          "scale": 1,
-          "config": {}
+          "scale": 0.95,
+          "config": {
+            "fit": {
+              "strategies": [
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "Two columns stood in the 14 m walk, half on a south slab: turned and 0.95 (13.3 x 11.5 m) in the open middle between the shafts."
+            }
+          }
         },
         {
           "id": "f1_tick_flock_1_13",
@@ -44144,29 +44435,6 @@
               "note": "0.8 m below the slab: raised by that."
             }
           }
-        },
-        {
-          "id": "side-slab-south",
-          "artifact": "void_slab_extension",
-          "station": "NW",
-          "position": [
-            0.0,
-            9
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
-          "config": {
-            "length": 14,
-            "depth": 6,
-            "seed": 169,
-            "editor_label": "Side slab / room for f1_particle_swarm_walk_8_9 (fit pass 2026-11-09)",
-            "fit": {
-              "strategies": [
-                "side_slab"
-              ]
-            }
-          }
         }
       ],
       "props": [],
@@ -44185,34 +44453,20 @@
           "artifact": "population_account_walk",
           "station": "SE",
           "position": [
-            0,
-            7
+            -0.05,
+            0.0
           ],
-          "facing": 0,
+          "facing": 90.0,
           "height": 0,
-          "scale": 1,
-          "config": {}
-        },
-        {
-          "id": "side-slab-south",
-          "artifact": "void_slab_extension",
-          "station": "NW",
-          "position": [
-            0.0,
-            9
-          ],
-          "height": 0,
-          "scale": 1,
-          "facing": 0,
+          "scale": 0.93,
           "config": {
-            "length": 15,
-            "depth": 6,
-            "seed": 170,
-            "editor_label": "Side slab / room for f2_population_account_walk_8_10 (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
-                "side_slab"
-              ]
+                "move",
+                "scale_area",
+                "turn"
+              ],
+              "note": "Two columns stood in the 14.4 m walk, half on a south slab: turned and 0.93 (13.4 x 11.7 m) in the open middle between the shafts."
             }
           }
         }
@@ -44557,20 +44811,21 @@
           "id": "f1_evolved_creatures_2_2",
           "artifact": "void_ml_evolved_creatures",
           "position": [
-            0,
-            9.5
+            0.0,
+            13.15
           ],
           "station": "SW",
           "height": 0.025,
           "facing": 0,
-          "scale": 0.35,
+          "scale": 0.28,
           "config": {
             "fit": {
               "strategies": [
+                "move",
                 "scale_area",
                 "side_slab"
               ],
-              "note": "A 40 m field of evolved walkers (24 m at 0.6), drawn 36 m west of the building. At 0.35 it is 14 m: between the shafts, half on the floor and half on a side slab south."
+              "note": "Two columns stood in the field: 0.35 -> 0.28 (11.2 m), wholly on the deepened south slab."
             }
           }
         },
@@ -44659,13 +44914,14 @@
           "facing": 0,
           "config": {
             "length": 16,
-            "depth": 8,
+            "depth": 10,
             "seed": 179,
             "editor_label": "Side slab / room for the evolved creatures' field (fit pass 2026-11-09)",
             "fit": {
               "strategies": [
                 "side_slab"
-              ]
+              ],
+              "note": "8 -> 10 m: the evolved-creatures field stands wholly past the column row."
             }
           }
         }
@@ -44903,8 +45159,8 @@
           "artifact": "fine_tuning_vr",
           "station": "NE",
           "position": [
-            14,
-            -8
+            15.5,
+            -5.5
           ],
           "facing": 180,
           "height": 2.3,
@@ -44915,11 +45171,12 @@
                 "num_layers": 5
               },
               "strategies": [
+                "move",
                 "raise",
                 "reduce_repeats",
                 "scale_area"
               ],
-              "note": "Second try: five layers still reached 3 m down and 4.3 m up at 0.6; at 0.45, raised 2.3 m, it stands in the storey."
+              "note": "overlap check: a tower column inside it; moved 2.9 m"
             }
           }
         }
@@ -44960,8 +45217,8 @@
           "artifact": "convolutional_neural_networks_cnns_vr",
           "station": "SE",
           "position": [
-            -12,
-            -6
+            -16.5,
+            -5.5
           ],
           "facing": 0,
           "height": 2.6,
@@ -44981,7 +45238,7 @@
                 "raise",
                 "reduce_repeats"
               ],
-              "note": "0.3 m still under the slab."
+              "note": "overlap check: a tower column inside it; moved 4.5 m"
             }
           }
         },
@@ -45029,8 +45286,8 @@
           "artifact": "lstms_vr",
           "station": "NW",
           "position": [
-            0,
-            -3.5
+            0.0,
+            -1.5
           ],
           "facing": 180,
           "height": 0,
@@ -45041,7 +45298,7 @@
               "strategies": [
                 "move"
               ],
-              "note": "Its 10 m box overlapped shaft A and something of it fell 14.6 m down the shaft: between the shafts instead."
+              "note": "overlap check: a tower column inside it; moved 2.0 m"
             }
           }
         },
@@ -45166,8 +45423,8 @@
           "artifact": "explainable_ai_xai_vr",
           "station": "NE",
           "position": [
-            13,
-            -8
+            13.0,
+            -5.0
           ],
           "facing": 180,
           "height": 2.8,
@@ -45175,10 +45432,11 @@
           "config": {
             "fit": {
               "strategies": [
+                "move",
                 "raise",
                 "scale_area"
               ],
-              "note": "17.6 m wide with a 9.6 m SHAP axis through both slabs: at 0.35 it is 10 m wide and stands within the storey."
+              "note": "overlap check: a tower column inside it; moved 3.0 m"
             }
           }
         }

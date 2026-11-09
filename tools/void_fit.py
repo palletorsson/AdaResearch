@@ -12,6 +12,7 @@ A decisions file is a list of rows {"map", "id", ...}:
     "remove": true (the placement goes; say why in "note")
     "add":    a whole new placement (e.g. a void_slab_extension)
     "strategies", "note": what was tried and why (also written into config.fit)
+    "before": (optional) what was wrong, for record, when the survey reads it as fitting (an overlap, a column inside)
 Strategies: commons/void/fit_strategies.json. Measurements: tools/void_size_survey.py. Moves: tools/void_fit_pass.py.
 --stage writes the same edits onto the staged (index) rooms.json, for floors whose committed and working records agree;
 --stage-only does that alone (a pass already applied to the working tree, committed afterwards)."""
@@ -133,7 +134,8 @@ def record(path, before_path):
     n = 0
     for r in rows:
         ident = r.get("id") or (r.get("add") or {}).get("id")
-        b = status(before, r["map"], ident); a = "removed" if r.get("remove") else status(after, r["map"], ident)
+        # a row may say what was wrong when the survey could not see it (two works in each other, a column inside)
+        b = r.get("before") or status(before, r["map"], ident); a = "removed" if r.get("remove") else status(after, r["map"], ident)
         cat["cases"].append({"at": time.strftime("%Y-%m-%d"), "map": r["map"], "id": ident, "token": r.get("token", ""),
                              "strategies": r.get("strategies", []), "before": b, "after": a,
                              "verdict": "worked" if a in ("fits", "removed") and b != "fits" else ("unchanged" if a == b else "partly" if a != "fits" else "kept fitting"),
@@ -159,11 +161,14 @@ def overlaps(path, margin=0.3):
     rows = json.loads(Path(path).read_text(encoding="utf-8"))
     cw = building["column_width"] / 2
     found = 0
+    kept_n = 0
     for m in sorted({r["map"] for r in rows}):
         f = floors.get(str(index[m]))
         if not f: continue
+        kept = kept_ids(rooms["floors"][index[m]])
+        kept_n += len(kept)
         ws = [w for w in f["works"] if w.get("box") and None not in w["box"] and w.get("token") not in ("void_slab_extension", "playground_spec_hall")
-              and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40]
+              and not w.get("extension") and (w["box"][3] - w["box"][0]) < 40 and w["id"] not in kept]
         for a_i, a in enumerate(ws):
             ax0, _, az0, ax1, _, az1 = a["box"]
             for cx in building["column_x"]:
@@ -175,8 +180,14 @@ def overlaps(path, margin=0.3):
                 ox, oz = min(ax1, bx1) - max(ax0, bx0), min(az1, bz1) - max(az0, bz0)
                 if ox > margin and oz > margin:
                     print("  %-24s %-40s x %-40s %.1f x %.1f m" % (m[:24], a["id"][:40], b["id"][:40], ox, oz)); found += 1
-    print("%d overlaps" % found)
+    print("%d overlaps (%d works kept on purpose: config.fit.strategies has \"kept\", the note says why)" % (found, kept_n))
     return found
+
+
+def kept_ids(floor_record):
+    """Works a fit pass KEPT where they stand on purpose (config.fit.strategies holds "kept", config.fit.note says why):
+    a body bigger than a column bay, a work that draws its probe through another. The overlap checks leave them out."""
+    return {a["id"] for a in floor_record.get("artifacts", []) if "kept" in ((a.get("config") or {}).get("fit") or {}).get("strategies", [])}
 
 
 if __name__ == "__main__":

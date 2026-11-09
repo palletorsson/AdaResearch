@@ -1,0 +1,827 @@
+[
+ {
+  "map": "Change_Choreography",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 16,
+    "depth": 10,
+    "seed": 54,
+    "editor_label": "Side slab / room for the conveyor trial (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "7 -> 10 m deep: the conveyor trial (11 m) stands wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "Change_Choreography",
+  "id": "f2_force_trial_conveyor_12_24",
+  "token": "force_trial_conveyor",
+  "set": {
+   "position": [
+    7.0,
+    -13.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "The column row z -7 ran through it; onto the deepened north slab, its edge 5 cm past the row.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 40,
+    "depth": 9,
+    "seed": 491,
+    "editor_label": "Side slab / room for the torque play, the catapult and the human catapult, 3-6 m past the north edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "7 -> 9 m: the torque play (10 m deep) clears the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 40,
+    "depth": 8,
+    "seed": 49,
+    "editor_label": "Side slab / room for the launch arc and the two catapult trials, 5-6 m past the south edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "7 -> 8 m: the launch arc clears the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_force_play_torque_15_41",
+  "token": "force_play_torque",
+  "set": {
+   "position": [
+    0.0,
+    -12.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Two columns stood in the play; onto the north slab past the column row.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_launch_arc_14_8",
+  "token": "launch_arc",
+  "set": {
+   "position": [
+    3.0,
+    11.98
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "A column stood in the arc; onto the south slab past the column row.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_firework_burst_31_66",
+  "token": "firework_burst",
+  "set": {
+   "position": [
+    0.0,
+    0.0
+   ],
+   "scale": 0.8
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A 15 m burst of particles round two columns: 0.8 (12.8 m) in the open middle between the shafts.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 40,
+    "depth": 9,
+    "seed": 50,
+    "editor_label": "Side slab / room for the mass, trolley and puzzle plays, each 5 m past the south edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "6 -> 9 m: three 10 x 10 m plays stand wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_play_mass_14_10",
+  "token": "force_play_mass",
+  "set": {
+   "position": [
+    -13.8,
+    12.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Columns stood in the play at the slab's edge; wholly onto the deepened south slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_play_trolley_8_28",
+  "token": "force_play_trolley",
+  "set": {
+   "position": [
+    0.0,
+    12.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Columns stood in the play at the slab's edge; wholly onto the deepened south slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_play_puzzle_20_28",
+  "token": "force_play_puzzle",
+  "set": {
+   "position": [
+    14.0,
+    12.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Columns stood in the play at the slab's edge; wholly onto the deepened south slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_mower_14_46",
+  "token": "force_mower",
+  "set": {
+   "config": {
+    "pin": "1",
+    "plinth": "0",
+    "lesson": "flower_garden",
+    "lawn_width": 13,
+    "lawn_length": 12.4,
+    "fit": {
+     "strategies": [
+      "move",
+      "reduce_repeats",
+      "scale_area"
+     ],
+     "note": "The lawn runs 12.7 m behind the machine and 1.7 m ahead: mower at z 5 with a 13 m lawn keeps it between the shafts and on the floor."
+    }
+   }
+  },
+  "strategies": [
+   "reduce_repeats"
+  ],
+  "note": "Its lawn (14 m) crossed both column rows: lawn_length 12.4, so it fits between them; the fit pass then places it.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 24,
+    "depth": 10,
+    "seed": 511,
+    "editor_label": "Side slab / room for the vector field flow and the vortex, 3.5-6 m past the north edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "7 -> 10 m: the vector field (9 m) clears the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 20,
+    "depth": 10,
+    "seed": 51,
+    "editor_label": "Side slab / room for the wind room, 6.5 m past the south edge (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "7 -> 10 m: the wind room clears the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "f3_VectorFieldFlow_14_35",
+  "token": "VectorFieldFlow",
+  "set": {
+   "position": [
+    0.0,
+    -13.79
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Two columns stood in the field; onto the deepened north slab past the column row (the open middle is the vortex playground's).",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "f3_wind_room_14_52",
+  "token": "wind_room",
+  "set": {
+   "position": [
+    -12.0,
+    13.15
+   ],
+   "scale": 0.94
+  },
+  "strategies": [
+   "move",
+   "strip_floor",
+   "scale_area"
+  ],
+  "note": "Three columns stood in the room (16 x 14 m floor, walls 14.8 x 12 m). Its floor plate stripped (the slab is the floor) and 0.94: 13.9 x 11.3 m wholly on the deepened south slab. A physics play: the smallest scale that fits.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+  "fit": {
+   "strip": [
+    "floor"
+   ]
+  }
+ },
+ {
+  "map": "ML_Evolution",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 16,
+    "depth": 10,
+    "seed": 179,
+    "editor_label": "Side slab / room for the evolved creatures' field (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "8 -> 10 m: the evolved-creatures field stands wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "ML_Evolution",
+  "id": "f1_evolved_creatures_2_2",
+  "token": "void_ml_evolved_creatures",
+  "set": {
+   "position": [
+    0.0,
+    13.15
+   ],
+   "scale": 0.28
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "Two columns stood in the field: 0.35 -> 0.28 (11.2 m), wholly on the deepened south slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "PG_Caves_Mazes",
+  "id": "f3_maze_generation_22_19",
+  "token": "maze_generation",
+  "set": {
+   "position": [
+    5.82,
+    5.82
+   ],
+   "scale": 0.97
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A column stood in the maze, half on the north slab: 0.97 (12.8 m) in the open middle between the shafts.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "PG_Mirrored_Patterns",
+  "id": "f5_pattern_tunnel_machine_14_22",
+  "token": "pattern_tunnel_machine",
+  "set": {
+   "position": [
+    0.22,
+    4.78
+   ],
+   "scale": 0.95
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "Three columns stood in the 19 m tunnel: 0.95 (3.4 m deep) in the strip between the shafts and the column row.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_rd_museum_gallery_22_29",
+  "token": "rd_museum_gallery",
+  "set": {
+   "position": [
+    -0.34,
+    4.78
+   ],
+   "scale": 0.49
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "Two columns stood in the 18 m gallery: 0.6 -> 0.49 (3.4 m deep) in the strip between the shafts and the column row.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 39,
+    "depth": 10,
+    "seed": 104,
+    "editor_label": "Side slab / room for the pattern passage and garden (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ],
+     "note": "Lengthened to 39 m: the passage (x -19.3..-6.7) and the garden (6.9..19.1) both stand on it."
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "8 -> 10 m: the pattern passage and garden stand wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_shader_pattern_passage_27_7",
+  "token": "shader_pattern_passage",
+  "set": {
+   "position": [
+    -12.9,
+    -12.94
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "A column stood in the passage; wholly onto the deepened north slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_reference_pattern_garden_10_20",
+  "token": "reference_pattern_garden",
+  "set": {
+   "position": [
+    13.5,
+    -13.93
+   ],
+   "scale": 0.88
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "A column stood in the garden (12.8 m deep): 0.88 (11.3 m) wholly on the deepened north slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 30,
+    "depth": 10,
+    "seed": 107,
+    "editor_label": "Side slab / room for the composition stage and the plural body (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ],
+     "note": "Lengthened to 30 m (x -9..21)."
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "6 -> 10 m: the composition stage and the plural body stand wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "id": "f3_shader_composition_stage_27_8",
+  "token": "shader_composition_stage",
+  "set": {
+   "position": [
+    0.0,
+    -12.31
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Two columns stood in the stage; wholly onto the deepened north slab (its floor boards, which wear its material, moved with it: 4 m, the boards' whole-metre grid).",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Shader_12_PinkExtravaganza",
+  "id": "f3_reference_plural_body_10_26",
+  "token": "reference_plural_body",
+  "set": {
+   "position": [
+    15.3,
+    -13.93
+   ],
+   "scale": 0.88
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "Two columns stood in the bay (12.8 m deep): 0.88 (11.3 m) wholly on the deepened north slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Ant_Colony_Optimization",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 14,
+    "depth": 10,
+    "seed": 168,
+    "editor_label": "Side slab / room for f3_ant_colony_walk_8_8 (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "6 -> 10 m: the ant colony walk stands wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "SwarmIntelligence_Ant_Colony_Optimization",
+  "id": "f3_ant_colony_walk_8_8",
+  "token": "ant_colony_walk",
+  "set": {
+   "position": [
+    -10.05,
+    -13.1
+   ],
+   "scale": 0.83
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "Two columns stood in the 13.5 m walk: 0.83 (11.2 m) wholly on the deepened north slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 12,
+    "depth": 10,
+    "seed": 166,
+    "editor_label": "Side slab / room for f1_drone_comparison_20_6 (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "4 -> 10 m: the drone comparison stands wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_drone_comparison_20_6",
+  "token": "drone_comparison",
+  "set": {
+   "position": [
+    -14.98,
+    -13.65
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "A column stood in it; wholly onto the deepened north slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boid_manager_5_8",
+  "token": "boid_manager",
+  "set": {
+   "position": [
+    0,
+    0
+   ]
+  },
+  "fit": {
+   "set": {
+    "spawn_area_size": [
+     10,
+     2.5,
+     10
+    ],
+    "boid_boundary": [
+     12.4,
+     4,
+     12.4
+    ]
+   }
+  },
+  "strategies": [
+   "reduce_repeats",
+   "move"
+  ],
+  "note": "The flock's 16 x 14 m bounds held two columns: boid_boundary 12.4 x 12.4 m, centred between the shafts.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_FlowFields",
+  "id": "side-slab-north",
+  "token": "void_slab_extension",
+  "set": {
+   "config": {
+    "length": 18,
+    "depth": 10,
+    "seed": 165,
+    "editor_label": "Side slab / room for f2_flow_crowd_22_7 (fit pass 2026-11-09)",
+    "fit": {
+     "strategies": [
+      "side_slab"
+     ]
+    }
+   }
+  },
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "7 -> 10 m: the flow crowd stands wholly past the column row.",
+  "before": "fits"
+ },
+ {
+  "map": "SwarmIntelligence_FlowFields",
+  "id": "f2_flow_crowd_22_7",
+  "token": "flow_crowd",
+  "set": {
+   "position": [
+    2.99,
+    -13.6
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Two columns stood in the crowd; wholly onto the deepened north slab.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+  "id": "f1_particle_swarm_walk_8_9",
+  "token": "particle_swarm_walk",
+  "set": {
+   "position": [
+    -0.05,
+    0.0
+   ],
+   "scale": 0.95,
+   "facing": 90.0
+  },
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "Two columns stood in the 14 m walk, half on a south slab: turned and 0.95 (13.3 x 11.5 m) in the open middle between the shafts.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "remove": true,
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "Its one work moved to the middle of the floor; an empty slab is clutter.",
+  "before": "fits"
+ },
+ {
+  "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+  "id": "f2_population_account_walk_8_10",
+  "token": "population_account_walk",
+  "set": {
+   "position": [
+    -0.05,
+    0.0
+   ],
+   "scale": 0.93,
+   "facing": 90.0
+  },
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "Two columns stood in the 14.4 m walk, half on a south slab: turned and 0.93 (13.4 x 11.7 m) in the open middle between the shafts.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+  "id": "side-slab-south",
+  "token": "void_slab_extension",
+  "remove": true,
+  "strategies": [
+   "side_slab"
+  ],
+  "note": "Its one work moved to the middle of the floor; an empty slab is clutter.",
+  "before": "fits"
+ },
+ {
+  "map": "ISO_ShapesGallery",
+  "id": "f1_iso_shapes_console_14_3",
+  "token": "iso_shapes_console",
+  "set": {
+   "position": [
+    0.0,
+    -2.99
+   ],
+   "scale": 0.66
+  },
+  "strategies": [
+   "move",
+   "scale_area"
+  ],
+  "note": "Two columns stood in the 14.8 m console, and it lay over the gallery: 0.66 (13.6 x 5 m) north of the gallery, inside the column rows.",
+  "before": "overlaps: two tower columns inside it and the shapes gallery under it (the survey judges a work alone)"
+ },
+ {
+  "map": "ISO_ShapesGallery",
+  "id": "f1_mc_shapes_gallery_14_21",
+  "token": "mc_shapes_gallery",
+  "set": {
+   "position": [
+    0.0,
+    -6.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "1.1 m south, to leave the console its strip.",
+  "before": "fits"
+ },
+ {
+  "map": "ISO_Sculpting",
+  "id": "f3_mc_sculpt_vr_9_9",
+  "token": "mc_sculpt_vr",
+  "set": {
+   "position": [
+    -5.66,
+    3.4
+   ],
+   "scale": 0.9,
+   "facing": 270.0
+  },
+  "strategies": [
+   "move",
+   "scale_area",
+   "turn"
+  ],
+  "note": "Two columns stood in the 14.6 m sculpting field: turned and 0.9 (13.1 x 8.6 m) in the open middle between the shafts.",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_iso_gyroid_console_16_3",
+  "token": "iso_gyroid_console",
+  "set": {
+   "position": [
+    0,
+    8
+   ],
+   "facing": 90
+  },
+  "strategies": [
+   "move",
+   "turn",
+   "code_fix"
+  ],
+  "note": "It failed to parse until 6f48ba100, so the isosurfaces pass measured nothing and left it 2 m past the south edge. On the edge band like the other chapter consoles; its probe rail and readout now take the probe's real length (the rail was a fixed 12 m, past the north edge).",
+  "before": "overflows: edge: north 3.0 m, south 4.2 m (it built nothing until its parse fix; its rail was a fixed 12 m)"
+ },
+ {
+  "map": "ISO_RhizomeBody",
+  "id": "f6_rhizome_inside_17_17",
+  "token": "rhizome_inside",
+  "strategies": [
+   "kept"
+  ],
+  "note": "KEPT with four columns in its 24 x 25 m bounds: a body walked inside, already at its smallest walkable size (world_scale 1; it sets its own scale over the placement's). Candidate for its own floor, or a world_scale below 1 checked against its passages.",
+  "before": "overlaps: four tower columns inside its bounds"
+ }
+]

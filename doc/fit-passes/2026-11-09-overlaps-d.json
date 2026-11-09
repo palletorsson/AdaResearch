@@ -1,0 +1,51 @@
+[
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boid_manager_5_8",
+  "token": "boid_manager",
+  "set": {
+   "position": [
+    0,
+    -0.3
+   ]
+  },
+  "fit": {
+   "set": {
+    "spawn_area_size": [
+     10,
+     2.5,
+     10
+    ],
+    "boid_boundary": [
+     10.5,
+     4,
+     10.5
+    ],
+    "boid_boundary_force": 70
+   }
+  },
+  "strategies": [
+   "code_fix",
+   "move",
+   "reduce_repeats"
+  ],
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+  "note": "The flock's 16 x 14 m bounds held four columns: boid_boundary 10.5 x 10.5 m, centred between the shafts and 0.3 m north. Its steer back grows with depth into the margin, so the flock swings about max_speed / sqrt(force / margin) past it: at 25 that is 2.8 m, which put it 1.4 m through the slab. New boid_boundary_force (opt-in, like boid_boundary): 70, about 1.7 m."
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_fish_school_1_10",
+  "token": "fish_school",
+  "set": {
+   "position": [
+    15.62,
+    0.9
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "Placed on the same spot as the boid flock: a second swarm, given the open east bay of its own.",
+  "before": "overlaps: stands in the boid flock's volume (both placed at (0, 1))"
+ }
+]

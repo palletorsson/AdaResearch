@@ -134,11 +134,16 @@ func _draw_probe() -> void:
 		marker.mesh = sphere; marker.material_override = material("f29c6b" if i == 2 else "f5e9b9", true)
 		probe_marks.add_child(marker); marker.global_position = ends[i] if i < 2 else ends[0].lerp(ends[1], fraction)
 		if i == 2: marker.visible = probe_result.available
-	var rail := box(Vector3.ZERO, Vector3(0.025, 0.025, 12), material("f5e9b9", true), false, probe_marks)
+	# the rail is the probe's own length: a fixed 12 m drew past the floor's edge when the tower scales the gyroid
+	var rail := box(Vector3.ZERO, Vector3(0.025, 0.025, ends[0].distance_to(ends[1])), material("f5e9b9", true), false, probe_marks)
 	rail.global_position = (ends[0] + ends[1]) * 0.5
+	# the probe runs along the world's z (probe_endpoints), whichever way the console itself faces
+	rail.global_basis = Basis.IDENTITY
 
 func refresh() -> void:
 	if readout == null: return
 	var result := "Collider unavailable: no clearance claim"
-	if probe_result.available: result = "Straight probe: %.2f / 12 m clear" % (12.0 * probe_result.fraction)
+	if probe_result.available:
+		var ends := probe_endpoints(); var length: float = ends[0].distance_to(ends[1])
+		result = "Straight probe: %.2f / %.1f m clear" % [length * probe_result.fraction, length]
 	readout.text = "%s / %s | level 1 | 64 cubed samples\nCapsule radius %.2f m / height 1.70 m\n%s. Held copy is visual only." % [model.period, model.intrusion, RADII[probe_index], result]

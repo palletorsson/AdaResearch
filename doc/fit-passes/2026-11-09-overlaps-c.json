@@ -1,0 +1,350 @@
+[
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_force_trial_catapult_7_26",
+  "token": "force_trial_catapult",
+  "set": {
+   "position": [
+    -15.0,
+    11.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 2.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_force_trial_pipe_20_26",
+  "token": "force_trial_pipe",
+  "set": {
+   "position": [
+    15.0,
+    11.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 2.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_human_catapult_10_62",
+  "token": "human_catapult",
+  "set": {
+   "position": [
+    16.0,
+    -8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.0 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "PG_Mirrored_Patterns",
+  "id": "f5_rhizomatic_maze_space_22_14",
+  "token": "rhizomatic_maze_space",
+  "set": {
+   "position": [
+    1.5,
+    -4.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "PG_Mirrored_Patterns",
+  "id": "f5_mirror_cellular_texture_for_3d_8_10",
+  "token": "mirror_cellular_texture_for_3d",
+  "set": {
+   "position": [
+    -17.0,
+    6.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.1 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_ShapesGallery",
+  "id": "f1_mc_torus_sculpture_7_35",
+  "token": "mc_torus_sculpture",
+  "set": {
+   "position": [
+    -16.5,
+    6.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 2.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_FlowFields",
+  "id": "f2_flow_direction_table_4_2",
+  "token": "flow_direction_table",
+  "set": {
+   "position": [
+    -3.0,
+    5.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.1 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+  "id": "f1_turing_pattern_generator_8_9",
+  "token": "turing_pattern_generator",
+  "set": {
+   "position": [
+    -16.5,
+    7.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 2.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_euler_drift_29_6",
+  "token": "euler_drift",
+  "set": {
+   "position": [
+    -5.0,
+    8.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_firework_burst_31_66; moved 5.8 m",
+  "before": "overlaps: stands in f1_firework_burst_31_66 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_Caves",
+  "id": "f1_queer_marching_cave_14_24",
+  "token": "queer_marching_cave",
+  "set": {
+   "position": [
+    -15.5,
+    7.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 0.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_ShapesGallery",
+  "id": "f1_gyroid_demo_20_36",
+  "token": "gyroid_demo",
+  "set": {
+   "position": [
+    12.5,
+    7.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.5 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boids_neighbour_lens_9_3",
+  "token": "boids_neighbour_lens",
+  "set": {
+   "position": [
+    -14.0,
+    6.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.0 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_ShapesGallery",
+  "id": "f1_mc_sculpt_vr_14_35",
+  "token": "mc_sculpt_vr",
+  "set": {
+   "position": [
+    0.0,
+    6.5
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_mc_shapes_gallery_14_21; moved 1.5 m",
+  "before": "overlaps: stands in f1_mc_shapes_gallery_14_21 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "VFM_05_Launch",
+  "id": "f1_bubble_blaster_32_12",
+  "token": "bubble_blaster",
+  "set": {
+   "position": [
+    -7.5,
+    4.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: stands in f1_firework_burst_31_66; moved 2.5 m",
+  "before": "overlaps: stands in f1_firework_burst_31_66 (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boids_aquarium_4_6",
+  "token": "boids_aquarium",
+  "set": {
+   "position": [
+    13.0,
+    7.0
+   ]
+  },
+  "strategies": [
+   "move"
+  ],
+  "note": "overlap check: a tower column inside it; moved 1.0 m",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "Shader_05_Patterns",
+  "id": "f2_fuzzy_doorway_8_53",
+  "token": "fuzzy_doorway",
+  "set": {
+   "position": [
+    16.68,
+    0.13
+   ],
+   "facing": 90.0
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "note": "A column stood in the doorway, and it stood in the model-disagreement room: turned into the open east bay (the north slab holds the passage, the garden and the shader gallery).",
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_Sculpting",
+  "id": "f3_mc_sculpt_vr_9_9",
+  "token": "mc_sculpt_vr",
+  "set": {
+   "position": [
+    -2,
+    -1
+   ],
+   "scale": 1
+  },
+  "strategies": [
+   "move",
+   "turn"
+  ],
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+  "note": "Its 14.6 m 'field' was never a size: a 2 m sculpting volume and a brush marker resting up to 15 m from it (it follows the hand in VR). Back to full scale, its volume near the middle; the marker rests 7 m off, clear of shafts and column rows."
+ },
+ {
+  "map": "SwarmIntelligence_Boids_Algorithm",
+  "id": "f1_boid_manager_5_8",
+  "token": "boid_manager",
+  "fit": {
+   "set": {
+    "spawn_area_size": [
+     10,
+     2.5,
+     10
+    ],
+    "boid_boundary": [
+     11,
+     4,
+     11
+    ]
+   }
+  },
+  "strategies": [
+   "reduce_repeats",
+   "move"
+  ],
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+  "note": "The flock's bounds held four columns: boid_boundary 11 x 11 m, centred between the shafts (the flock overshoots its bounds by about 0.6 m: 12.4 m read 14.2)."
+ },
+ {
+  "map": "VFM_03_Motion",
+  "id": "f2_force_mower_14_46",
+  "token": "force_mower",
+  "set": {
+   "position": [
+    0.3,
+    4.8
+   ]
+  },
+  "strategies": [
+   "reduce_repeats",
+   "move"
+  ],
+  "before": "overlaps: a tower column inside it (the survey judges a work alone: it read as fitting)",
+  "note": "Its lawn (14 m) crossed both column rows: lawn_length 12.4, and 0.2 m north, so it lies between them."
+ },
+ {
+  "map": "Vectors_Act3_FieldsAndMotion",
+  "id": "f3_wind_room_14_52",
+  "token": "wind_room",
+  "set": {
+   "position": [
+    -12.0,
+    12.96
+   ],
+   "scale": 0.91
+  },
+  "strategies": [
+   "move",
+   "strip_floor",
+   "scale_area"
+  ],
+  "note": "Three columns stood in the room (16 x 14 m floor, walls 14.8 x 12 m). Its floor plate stripped (the slab is the floor) and 0.91: 13.6 x 11.3 m wholly on the deepened south slab - 0.94 left its far rail 0.2 m past the deck. A physics play: the smallest scale that fits.",
+  "before": "overlaps: three tower columns inside it (the survey judges a work alone: it read as fitting)"
+ },
+ {
+  "map": "ISO_TorusGyroid",
+  "id": "f2_iso_gyroid_console_16_3",
+  "token": "iso_gyroid_console",
+  "strategies": [
+   "kept",
+   "code_fix"
+  ],
+  "before": "overlaps: its probe, drawn through the gyroid 14 m away, spans two column rows",
+  "note": "KEPT on the edge band like the chapter's other consoles: it draws its clearance probe through the gyroid it tests, so its bounds span the floor from the console to the gyroid and cross the gyroid by design. The probe rail now lies along the world probe and takes its real length (it was a fixed 12 m in the console's own frame)."
+ }
+]

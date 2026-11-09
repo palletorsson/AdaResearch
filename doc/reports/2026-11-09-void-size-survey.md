@@ -200,3 +200,36 @@ to run.
 - **Tall works scaled down to fit, not to keep their meaning.** Four L-system works were cut to a quarter or a third of
   their height: the Modulor cypress, the tube tree, the city and the 3D Hilbert curve. If their height is the point, they
   are candidates for a shaft or a taller floor.
+
+## The overlap pass over the five earlier pairs (2026-11-09, same day)
+
+The first five pairs were fitted before the overlap check existed. A fresh survey of their 68 floors found **121
+overlaps: 99 were a tower column through a work, 22 were two works standing in each other.** Four passes
+(`doc/fit-passes/2026-11-09-overlaps-a..d.json`) cleared all but two cases, and kept two works on purpose.
+
+| remedy | works | what |
+|---|---|---|
+| move (fit pass `--overlaps`) | 42 | small works a metre or two off a column row |
+| slab deepened, work wholly past the column row | 16 | 12 slabs went to 8-10 m; e.g. the force plays, the composition stage, the flow crowd, the ant walk |
+| into the open middle (14 x 13 m between the shafts) or an end bay | 7 | the maze, the swarm walks (turned, 0.93-0.95), the firework burst (0.8), the sculpting volume; the fuzzy doorway and the fish school in the east bays |
+| scaled into the strip between a shaft and a column row | 3 | the pattern tunnel (0.95), the RD gallery (0.6 -> 0.49), the shapes console (0.72 -> 0.66, its gallery 1.1 m south) |
+| own size setting | 2 | the mower's lawn (14 -> 12.4 m), the boid flock (bounds 10.5 m, and a new `boid_boundary_force`) |
+| code fix | 2 | the gyroid console's probe rail, the flock's boundary steer |
+| kept, with a note in `config.fit` | 2 | the rhizome body (24 x 25 m, walked inside, at its smallest walkable size), the gyroid console (its probe crosses the gyroid by design) |
+| slab removed | 2 | empty once their walks moved to the middle |
+
+**Left:**
+- `caverandomwalk`: its fliers vary per run, a code case.
+- Two of the Unit's drones (`unit-steer`, `unit-rhythm`, another session's uncommitted placements) stand in the boid
+  flock's volume.
+
+**What it taught:**
+- **The columns stand on two rows, z = ±7.** A work fitted at the slab's edge ended up across a row. The rule now: a
+  slab work's inner edge sits at |z| ≥ 7.45.
+- **A box is not a body.** Two flags were markers, not size:
+  - a VR brush resting 15 m from its 2 m sculpting volume
+  - a probe drawn through the work it tests
+
+  Read a work's parts before moving the whole work.
+- **A fix that makes a work build can make it overflow.** The gyroid console failed to parse until earlier today.
+  Once it built, it stood 2 m past the edge with a 12 m rail. Measure again after any parse fix.
