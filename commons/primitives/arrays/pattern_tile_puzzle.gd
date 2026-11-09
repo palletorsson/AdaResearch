@@ -913,8 +913,11 @@ func _update_cursor_display() -> void:
 
 ## Calculate the source index for a preview position (reverse of _get_tiled_color)
 func _calculate_source_index(px: int, py: int) -> Vector2i:
-	var tx: int
-	var ty: int
+	# The ONE mapping from a preview cell to the tile cell it repeats (2026-11-09). The preview and the
+	# cursor each kept their own copy; the cursor's lacked BRICK, HERRINGBONE and DIAMOND and fell back
+	# to plain modulo, so in those modes the index arithmetic it shows pointed at the wrong source cell.
+	var tx: int  # Tile-local x
+	var ty: int  # Tile-local y
 
 	match repeat_mode:
 		RepeatMode.SIMPLE:
@@ -964,9 +967,37 @@ func _calculate_source_index(px: int, py: int) -> Vector2i:
 				tx = tile_size - 1 - tx
 				ty = tile_size - 1 - ty
 
-		_:
+		RepeatMode.BRICK_X:
+			var tile_y = py / tile_size
+			var offset = (tile_size / 2) * (tile_y % 2)
+			tx = (px + offset) % tile_size
+			ty = py % tile_size
+
+		RepeatMode.BRICK_Y:
+			var tile_x = px / tile_size
+			var offset = (tile_size / 2) * (tile_x % 2)
+			tx = px % tile_size
+			ty = (py + offset) % tile_size
+
+		RepeatMode.HERRINGBONE:
+			# A herringbone is a twill that REVERSES every block column with a BREAK: odd columns run
+			# mirrored and shifted half a tile, so the diagonals meet offset rather than in a clean V
+			# (the clean V is MIRROR_X, the point twill). Fixed 2026-11-09: this transposed the block on
+			# a checkerboard ("swap and flip", but only the swap was written), and a transpose leaves a
+			# diagonal - the twill every herringbone is made of - exactly as SIMPLE draws it.
+			var block_x = px / tile_size
 			tx = px % tile_size
 			ty = py % tile_size
+			if block_x % 2 == 1:
+				tx = tile_size - 1 - tx
+				ty = (py + tile_size / 2) % tile_size
+
+		RepeatMode.DIAMOND:
+			# Rotate 45 degrees conceptually
+			var rotated_x = px + py
+			var rotated_y = py - px + preview_repeats.x * tile_size
+			tx = abs(rotated_x) % tile_size
+			ty = abs(rotated_y) % tile_size
 
 	return Vector2i(clampi(tx, 0, tile_size - 1), clampi(ty, 0, tile_size - 1))
 
@@ -1245,92 +1276,8 @@ func _get_tiled_color(px: int, py: int) -> int:
 	if symmetry_mode == SymmetryMode.WALLPAPER:
 		return WallpaperGroups.get_symmetric_color(px, py, tile_size, _grid_data, wallpaper_group)
 
-	var tx: int  # Tile-local x
-	var ty: int  # Tile-local y
-
-	match repeat_mode:
-		RepeatMode.SIMPLE:
-			tx = px % tile_size
-			ty = py % tile_size
-
-		RepeatMode.MIRROR_X:
-			var tile_x = px / tile_size
-			tx = px % tile_size
-			if tile_x % 2 == 1:
-				tx = tile_size - 1 - tx
-			ty = py % tile_size
-
-		RepeatMode.MIRROR_Y:
-			tx = px % tile_size
-			var tile_y = py / tile_size
-			ty = py % tile_size
-			if tile_y % 2 == 1:
-				ty = tile_size - 1 - ty
-
-		RepeatMode.MIRROR_XY:
-			var tile_x = px / tile_size
-			var tile_y = py / tile_size
-			tx = px % tile_size
-			ty = py % tile_size
-			if tile_x % 2 == 1:
-				tx = tile_size - 1 - tx
-			if tile_y % 2 == 1:
-				ty = tile_size - 1 - ty
-
-		RepeatMode.ROTATE_90:
-			var tile_idx = (px / tile_size + py / tile_size) % 4
-			tx = px % tile_size
-			ty = py % tile_size
-			for i in range(tile_idx):
-				var new_tx = tile_size - 1 - ty
-				var new_ty = tx
-				tx = new_tx
-				ty = new_ty
-
-		RepeatMode.ROTATE_180:
-			var tile_x = px / tile_size
-			var tile_y = py / tile_size
-			tx = px % tile_size
-			ty = py % tile_size
-			if (tile_x + tile_y) % 2 == 1:
-				tx = tile_size - 1 - tx
-				ty = tile_size - 1 - ty
-
-		RepeatMode.BRICK_X:
-			var tile_y = py / tile_size
-			var offset = (tile_size / 2) * (tile_y % 2)
-			tx = (px + offset) % tile_size
-			ty = py % tile_size
-
-		RepeatMode.BRICK_Y:
-			var tile_x = px / tile_size
-			var offset = (tile_size / 2) * (tile_x % 2)
-			tx = px % tile_size
-			ty = (py + offset) % tile_size
-
-		RepeatMode.HERRINGBONE:
-			var block_x = px / tile_size
-			var block_y = py / tile_size
-			tx = px % tile_size
-			ty = py % tile_size
-			if (block_x + block_y) % 2 == 1:
-				# Swap and flip for herringbone effect
-				var temp = tx
-				tx = ty
-				ty = temp
-
-		RepeatMode.DIAMOND:
-			# Rotate 45 degrees conceptually
-			var rotated_x = px + py
-			var rotated_y = py - px + preview_repeats.x * tile_size
-			tx = abs(rotated_x) % tile_size
-			ty = abs(rotated_y) % tile_size
-
-	# Clamp to valid range
-	tx = clampi(tx, 0, tile_size - 1)
-	ty = clampi(ty, 0, tile_size - 1)
-
-	return _grid_data[ty][tx]
+	var src := _calculate_source_index(px, py)
+	return _grid_data[src.y][src.x]
 
 
 ## Cycle to next repeat mode (legacy mode)
