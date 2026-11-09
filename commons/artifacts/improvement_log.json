@@ -1021,6 +1021,17 @@
       ],
       "tower": "floor 47 (Ribbon_Patterns_03): practice_targets 3 - it hunted nothing (target_player false, no dropper), now it locks, burns and pops; probe: 3 kills in 6.7 s, all inside the slab",
       "capture": "ada_run/improve/laser_turret/before_after.png"
+    },
+    {
+      "lookup_name": "disco_lights",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": false,
+      "verified": true,
+      "code": [
+        "own shader mirrorball.gdshader (the shared discoLights.gdshader stays for the softbodies joy ride): tiles of flat mirror in grout - each tile's normal its centre direction - metallic, the ball turning, a few tiles at a time flashing a disco colour; the scene's three uniforms keep their meaning"
+      ],
+      "tower": "floor 47 (Ribbon_Patterns_03), hung at 3 m over the disco floor: a mirrorball where there was a flat coloured disc",
+      "capture": "ada_run/improve/disco_lights/before_after.png"
     }
   ]
 }

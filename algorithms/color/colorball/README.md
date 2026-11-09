@@ -4,7 +4,7 @@ A sphere rendered with a custom shader that produces animated, multi-colored dis
 
 ## How It Works
 
-The scene places a standard sphere mesh and applies a ShaderMaterial driven by the `discoLights.gdshader`. The shader animates color patterns over time using parameters for speed, base color, and intensity. The result is a pulsating, multi-hued light ball that illustrates how fragment shaders compute per-pixel color from mathematical functions of time and surface coordinates.
+The scene places a standard sphere mesh and applies a ShaderMaterial driven by `mirrorball.gdshader` (since 2026-11-09; it was the shared `discoLights.gdshader`, which painted one pulsing colour flat over the ball). The sphere is tiled into small flat mirrors set in grout - each tile's normal is its centre direction, so it reflects the room in one piece - the ball turns, and now and then a tile flashes a disco colour. The shader animates color patterns over time using parameters for speed, base color, and intensity. The result is a pulsating, multi-hued light ball that illustrates how fragment shaders compute per-pixel color from mathematical functions of time and surface coordinates.
 
 ## Parameters
 
@@ -24,4 +24,5 @@ Shader parameters (set on the ShaderMaterial):
 
 ## Files
 
-- `disco_lights.tscn` -- Scene file (references `discoLights.gdshader`)
+- `disco_lights.tscn` -- Scene file (references `mirrorball.gdshader`)
+- `mirrorball.gdshader` -- the tiled, turning mirror surface; `lon_tiles`, `lat_tiles`, `grout`, `spin` beside the original three
