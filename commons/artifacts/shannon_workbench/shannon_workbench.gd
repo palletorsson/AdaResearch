@@ -1,6 +1,8 @@
 extends Node3D
 class_name ShannonWorkbench
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 # @identity
 # essence: A fixed-seed Bernoulli sample and binary source entropy H(p).
 # desire: Distinguish source uncertainty from errors made by a particular predictor.
@@ -73,6 +75,10 @@ const EVIDENCE_DRAWS := {
 ## Sample resolution of the hill polyline.
 @export var hill_samples: int = 100
 @export var hill_color: Color = Color(1.0, 0.97, 0.7)
+## Thickness of the H(p) curve, in screen-local metres (x plate_scale in the room). 0 draws the old one-pixel line:
+## Godot draws PRIMITIVE_LINE_STRIP one pixel wide at any distance, so the hill - the figure the bench is about -
+## thinned to a hair a few metres off (2026-11-09). The baseline is drawn at 60 % of it.
+@export_range(0.0, 0.03, 0.001) var hill_line_radius: float = 0.009
 ## Marker dot color.
 @export var marker_color: Color = Color(1.0, 0.2, 0.2)
 @export var marker_radius: float = 0.025
@@ -391,6 +397,13 @@ func _build_entropy_hill() -> void:
 
 func _emit_hill_curve() -> void:
 	_hill_mesh.clear_surfaces()
+	if hill_line_radius > 0.0:
+		# A tube, lifted its own radius off the screen so it never sinks into the glass.
+		var pts := PackedVector3Array()
+		for i in range(hill_samples + 1):
+			pts.append(_curve_point(float(i) / float(hill_samples)) + Vector3(0, 0, hill_line_radius))
+		ThickLine.append_tube(_hill_mesh, pts, PackedColorArray(), hill_line_radius, 8)
+		return
 	_hill_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for i in range(hill_samples + 1):
 		var p: float = float(i) / float(hill_samples)
@@ -404,10 +417,14 @@ func _emit_baseline() -> void:
 	# to rise above, which is what makes it land as a landscape and not a
 	# floating squiggle.
 	var base_mesh := ImmediateMesh.new()
-	base_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-	base_mesh.surface_add_vertex(Vector3(-hill_width * 0.5, 0.0, 0.0))
-	base_mesh.surface_add_vertex(Vector3(hill_width * 0.5, 0.0, 0.0))
-	base_mesh.surface_end()
+	if hill_line_radius > 0.0:
+		var r: float = hill_line_radius * 0.6
+		ThickLine.append_segments(base_mesh, PackedVector3Array([Vector3(-hill_width * 0.5, 0.0, r), Vector3(hill_width * 0.5, 0.0, r)]), PackedColorArray(), r, 6)
+	else:
+		base_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+		base_mesh.surface_add_vertex(Vector3(-hill_width * 0.5, 0.0, 0.0))
+		base_mesh.surface_add_vertex(Vector3(hill_width * 0.5, 0.0, 0.0))
+		base_mesh.surface_end()
 
 	var base_inst := MeshInstance3D.new()
 	base_inst.name = "Baseline"

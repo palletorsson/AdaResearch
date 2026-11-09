@@ -975,6 +975,16 @@
       ],
       "tower": "floor 46 (Ribbon_Patterns_02), at scale 0.6: the fan is a fan, not a few coloured hairs",
       "capture": "ada_run/improve/dark_side_prism/before_after.png (+ grid.png at 9 m and 22 m)"
+    },
+    {
+      "lookup_name": "shannon_workbench",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "hill_line_radius export (0.009 screen-local, 1.8 cm in the room at plate_scale 2; 0 = the old line): the H(p) curve - the figure the bench is about - is a tube lifted its own radius off the screen, the baseline at 60 %"
+      ],
+      "capture": "ada_run/improve/shannon_workbench/before_after.png"
     }
   ]
 }
