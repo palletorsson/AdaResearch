@@ -19,6 +19,21 @@ const BAR_SPACING := 0.018
 const ROW_SPACING := 0.12
 const MAX_BAR_HEIGHT := 0.08
 
+## The bars and their row labels at this many times their size, growing UP from the bottom row so the control
+## panel stays where it was (2026-11-09). At 1 the race is 27 cm wide with bars at most 8 cm tall - a race you
+## lean in to read, on a floor 42 m long.
+@export_range(1.0, 5.0, 0.1) var bar_scale: float = 1.0: set = _set_bar_scale
+## Race without anyone pressing RUN: run, pause when all four are done, reshuffle, run again. Off by default (the
+## race waits for its RUN button); in the tower nobody stands at the panel, so the bars sat shuffled and still.
+@export var autorun: bool = false
+@export_range(0.0, 1.0) var autorun_speed: float = 0.2   ## the SPEED slider's value while autorunning
+@export var autorun_pause: float = 3.0
+
+var _bar_root: Node3D
+var _panel: Node3D
+var _restart_in: float = -1.0
+var _materials: Array = []     # one per bar value, made once (they were remade for all 64 bars every tick)
+
 var _arrays: Array = []        # Array of Array[int] — one per row
 var _bars: Array = []          # Array of Array[MeshInstance3D]
 var _states: Array = []        # per-algorithm state dictionaries
@@ -35,12 +50,40 @@ var _speed_slider: Node = null
 var _run_btn: Node = null
 
 func _ready() -> void:
+	_bar_root = Node3D.new()
+	_bar_root.name = "Bars"
+	add_child(_bar_root)
 	_build_bars()
 	_build_panel()
+	_set_bar_scale(bar_scale)
 	_shuffle_all()
+	if autorun:
+		_start_autorun()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	if config_data.has("bar_scale") and str(config_data["bar_scale"]).is_valid_float():
+		_set_bar_scale(clampf(float(str(config_data["bar_scale"])), 1.0, 5.0))
+	if config_data.has("autorun"):
+		var on := str(config_data["autorun"]).to_lower() in ["true", "1", "yes", "on"]
+		if on != autorun:
+			autorun = on
+			if autorun and is_inside_tree():
+				_start_autorun()
+
+func _start_autorun() -> void:
+	_step_speed = autorun_speed
+	_running = true
+
+func _set_bar_scale(value: float) -> void:
+	bar_scale = value
+	if _bar_root == null:
+		return
+	# bottom row stays at -ROW_SPACING * (ROW_COUNT - 1); everything above it grows
+	_bar_root.scale = Vector3.ONE * bar_scale
+	_bar_root.position.y = ROW_SPACING * (ROW_COUNT - 1) * (bar_scale - 1.0)
+	# the names grow faster than the bars: at 3x a 5.6 mm name would still be under 2 cm
+	for lbl in _row_labels:
+		lbl.pixel_size = 0.0004 * lerpf(1.0, 2.5, clampf((bar_scale - 1.0) / 2.0, 0.0, 1.0))
 
 # ── Bar construction ────────────────────────────────────────────────
 
@@ -61,7 +104,7 @@ func _build_bars() -> void:
 		lbl.modulate = Color(0.85, 0.85, 0.85)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		lbl.transform.origin = Vector3(start_x - 0.03, row_y_offset + MAX_BAR_HEIGHT / 2.0, 0)
-		add_child(lbl)
+		_bar_root.add_child(lbl)
 		_row_labels.append(lbl)
 
 		for i in BAR_COUNT:
@@ -71,12 +114,21 @@ func _build_bars() -> void:
 			bar.mesh = box
 			bar.material_override = _make_bar_material(i)
 			bar.transform.origin = Vector3(start_x + i * BAR_SPACING, row_y_offset, 0)
-			add_child(bar)
+			_bar_root.add_child(bar)
 			row_bars.append(bar)
 
 		_bars.append(row_bars)
 
 func _make_bar_material(value: int) -> StandardMaterial3D:
+	if _materials.size() == BAR_COUNT:
+		return _materials[value]
+	if _materials.is_empty():
+		for v in BAR_COUNT:
+			_materials.append(_new_bar_material(v))
+		return _materials[value]
+	return _new_bar_material(value)
+
+func _new_bar_material(value: int) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
 	var hue := float(value) / float(BAR_COUNT)
 	mat.albedo_color = Color.from_hsv(hue, 0.8, 0.9)
@@ -98,6 +150,7 @@ func _build_panel() -> void:
 	])
 	panel.transform.origin = Vector3(0, -ROW_SPACING * ROW_COUNT - 0.06, 0)
 	add_child(panel)
+	_panel = panel
 
 	# Wire up controls
 	_speed_slider = panel.find_child("Param_0", true, false)
@@ -180,6 +233,11 @@ func _process(delta: float) -> void:
 			if _flash_timers[row] <= 0:
 				_row_labels[row].modulate = Color(0.4, 1.0, 0.4)
 
+	if _restart_in > 0.0:
+		_restart_in -= delta
+		if _restart_in <= 0.0:
+			_shuffle_all()
+			_start_autorun()
 	if not _running:
 		return
 
@@ -210,6 +268,8 @@ func _step_all() -> void:
 			break
 	if all_done:
 		_running = false
+		if autorun:
+			_restart_in = autorun_pause
 
 # ── Bubble Sort step ────────────────────────────────────────────────
 

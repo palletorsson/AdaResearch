@@ -1032,6 +1032,19 @@
       ],
       "tower": "floor 47 (Ribbon_Patterns_03), hung at 3 m over the disco floor: a mirrorball where there was a flat coloured disc",
       "capture": "ada_run/improve/disco_lights/before_after.png"
+    },
+    {
+      "lookup_name": "sorting_algorithm_race",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "bar_scale export (1-5, default 1): the bars and row names grow UP from the bottom row under a 'Bars' root, the control panel stays where it was; names grow faster than bars above 1",
+        "autorun export (default off): race, pause autorun_pause s when all four are done, reshuffle, race again, at autorun_speed",
+        "bar materials made once (16, by value): they were remade for all 64 bars every tick, up to 60 ticks a second"
+      ],
+      "tower": "floor 45 (Ribbon_Patterns_01): bar_scale 3, autorun - an 80 cm race running on its own where a 27 cm one sat shuffled, waiting for RUN",
+      "capture": "ada_run/improve/sorting_algorithm_race/before_after.png"
     }
   ]
 }
