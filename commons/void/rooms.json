@@ -46101,7 +46101,7 @@
                 "raise",
                 "scale_area"
               ],
-              "note": "Inside the slab now, yet something still falls ~495 m - its throwable data particles have gravity; code case, open."
+              "note": "Inside the slab. The part that 'fell ~495 m' was the weight lines, drawn with their neurons' global positions inside the work's transform (fixed a85dae543); re-survey 2026-11-09: 1.0 m through its own slab remains."
             }
           }
         },
@@ -46271,7 +46271,7 @@
                 "raise",
                 "scale_area"
               ],
-              "note": "1 m through the ceiling at 0.4: 0.34. Something of it still falls ~445 m although its tokens have no gravity - code case, open."
+              "note": "0.34 to clear the ceiling. The part that 'fell ~445 m' was the attention beams, drawn with global positions inside the work's transform (fixed 92bf42038); re-survey 2026-11-09: 0.3 m up, 1.1 m down through the slabs remain."
             }
           }
         }
