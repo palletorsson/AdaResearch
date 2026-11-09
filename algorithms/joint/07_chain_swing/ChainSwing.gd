@@ -174,7 +174,7 @@ func _update_trail() -> void:
 		return
 	_trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	for point in _trail_points:
-		_trail_mesh.surface_add_vertex(point)
+		_trail_mesh.surface_add_vertex(_trail_instance.to_local(point))   # world point, drawn in the trail's own space (2026-11-09)
 	_trail_mesh.surface_end()
 
 func _nudge() -> void:

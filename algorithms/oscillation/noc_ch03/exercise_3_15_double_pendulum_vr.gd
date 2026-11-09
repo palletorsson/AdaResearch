@@ -193,7 +193,7 @@ func _update_trail() -> void:
 	for i in range(_trail_points.size()):
 		var alpha := float(i) / _trail_points.size()
 		mesh.surface_set_color(Color(1.0, 0.75, 0.95, alpha * 0.6))
-		mesh.surface_add_vertex(_trail_points[i])
+		mesh.surface_add_vertex(_trail.to_local(_trail_points[i]))   # world point, drawn in the trail's own space (2026-11-09)
 
 	mesh.surface_end()
 	_trail.mesh = mesh

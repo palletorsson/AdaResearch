@@ -1281,6 +1281,17 @@
       ],
       "tower": "machinelearning floors: attention now runs from query to key token",
       "capture": "ada_run/improve/transformers_vr/before_after.png (placed off-origin, turned, scale 0.45)"
+    },
+    {
+      "lookup_name": "PendulumPin / ChainSwing / GradientDescentDemo / exercise_3_15_double_pendulum_vr",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG (the neural_networks_vr pattern): each collected its trail or path in WORLD positions and drew them as vertices of a mesh that is a child of the work - the work's transform applied twice. Vertices now go through the trail node's to_local(). Probe, PendulumPin under a parent at (3, 1.5, -2), turned 90, scale 0.7: first trail vertex 2.641 m from the bob in HEAD, 0.0 m fixed"
+      ],
+      "tower": "none of the four is placed in the tower; they stand in grid and museum maps away from the origin",
+      "capture": "headless probe numbers above"
     }
   ]
 }

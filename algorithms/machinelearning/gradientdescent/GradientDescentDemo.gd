@@ -260,7 +260,7 @@ func _update_path_mesh() -> void:
 	immediate.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	immediate.surface_set_color(COLOR_PATH)
 	for point in _path_points:
-		immediate.surface_add_vertex(point)
+		immediate.surface_add_vertex(path_mesh.to_local(point))   # world point, drawn in the path's own space (2026-11-09)
 	immediate.surface_end()
 
 func _update_gradient_mesh(gradient: Vector2) -> void:
