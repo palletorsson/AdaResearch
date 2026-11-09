@@ -1223,6 +1223,17 @@
       ],
       "tower": "floor 183 (ML_Perception, f3_vogue_timeline_14_6), unchanged placement",
       "capture": "headless Void probe (no visual change), median of 7 calls: VR 30.0 -> 0.102 ms, desktop 66.8 -> 0.005 ms; head/left/right identical before and after"
+    },
+    {
+      "lookup_name": "first_catalyst_ability (commons/hazards/becoming_catalyst; the rig's two-hand catalyst, /root/CatalystCapabilityManager/FirstCatalystAbility)",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "_resolve_hands (from _physics_process, every 0.5 s while either VR hand is untracked or inactive - with both hands tracked it does not run, and on the desktop the desktop source returns first) searched the whole scene tree for every XROrigin3D: measured in the tower, ~27,900 nodes and 13.3-14.8 ms per search on floors 4 and 183 - a hitch longer than a 90 Hz frame twice a second whenever a controller is set down or loses tracking. It now takes the current rig (the XROrigin3D above the current camera, the xr_origin group, or the current origin at the top of the scene), as punching_bag does, and keeps the old current-and-visible test and the one-origin pairing. 0.06 ms; the same origin and the same left and right controllers found"
+      ],
+      "tower": "every floor (an autoload child, not a placement); measured on floors 4 and 183",
+      "capture": "headless Void probe with tracked fake controllers (no visual change), median of 7 calls: floor 4 14.8 -> 0.064 ms, floor 183 13.3 -> 0.062 ms; origin/left/right identical before and after"
     }
   ]
 }

@@ -135,6 +135,19 @@ func _hide_all() -> void:
 	left_glow.hide()
 	right_glow.hide()
 
+## The CURRENT rig: the XROrigin3D above the current camera (VR), the xr_origin group, or the current origin at the
+## top of the scene (desktop) - the lookup punching_bag.gd's _rig_controllers() uses.
+func _rig_origin() -> Node:
+	var origin: Node = get_viewport().get_camera_3d()
+	while origin != null and not origin is XROrigin3D: origin = origin.get_parent()
+	if origin == null: origin = get_tree().get_first_node_in_group("xr_origin")
+	if origin == null:
+		# desktop: the camera is the walker's, and the rig stands beside it at the top of the scene
+		var scene: Node = get_tree().current_scene
+		for child in (scene.get_children() if scene else []):
+			if child is XROrigin3D and child.current: origin = child; break
+	return origin
+
 func _resolve_hands() -> void:
 	for controller in [_left, _right]:
 		if is_instance_valid(controller):
@@ -143,8 +156,11 @@ func _resolve_hands() -> void:
 	_left = null
 	_right = null
 	_origin = null
-	# Match both hands within ONE origin, so preview rigs cannot be mixed.
-	for origin in get_tree().root.find_children("*", "XROrigin3D", true, false):
+	# Match both hands within ONE origin, so preview rigs cannot be mixed. Only the current origin owns the hands, and
+	# it is found without walking the tree: the search for every XROrigin3D ran twice a second while a hand was
+	# untracked, ~27,900 nodes and 13-22 ms in the tower (2026-11-09).
+	var rig := _rig_origin()
+	for origin in ([rig] if rig != null else []):
 		if not origin.current or not origin.is_visible_in_tree():
 			continue
 		var left: XRController3D = null
