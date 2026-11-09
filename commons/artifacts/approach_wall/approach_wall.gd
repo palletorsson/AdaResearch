@@ -137,6 +137,8 @@ const CROSS_BAND_M := 1.5
 ## shutters. A door opens AS A DOOR: every slat in it takes the door's openness, which rises as you come within
 ## reach in front of it (or within an aperture of its edge). The 0.62 m guarantee still runs on top, per slat.
 @export var segments: int = 0
+## With segments: boards per door, hinged on the door's outer edges. 2 is a double door; `slats` is not used.
+@export var leaves: int = 2
 ## LATCH: the opening you actually walk THROUGH stays open. With segments it is that whole door; without, the run
 ## of slats the guarantee opened where you crossed. Everything else still closes behind you.
 @export var latch: bool = false
@@ -234,6 +236,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			slat_color = Color.html(str(c))
 	if config_data.has("segments"):
 		segments = int(config_data["segments"])
+	if config_data.has("leaves"):
+		leaves = int(config_data["leaves"])
 	if config_data.has("latch"):
 		latch = _truthy(config_data["latch"])
 	if config_data.has("look"):
@@ -301,15 +305,14 @@ func _build() -> void:
 	var most: int = maxi(1, int(floor(width_m / (min_clear_m + thickness_m))))
 	_seg_n = maxi(0, segments)
 	if _seg_n > 0:
-		# DOORS: the same promise, asked of each door's width. Every door gets the same count, so every slat in the
-		# wall is the same width and the guarantee's index arithmetic below holds unchanged.
+		# DOORS ARE LEAVES, NOT SLATS. The first cut gave each door its share of `slats` (five of 0.8 m) hinged on the
+		# door's middle, and a door full of swung slats is a row of fins 0.8 m apart: 0.68 m slots, 0.61 m at a 95
+		# degree tip. The Void walker (radius 0.2) went through the middle door because z = 0 is exactly a slot centre,
+		# and stopped dead 0.22 m short of the plane at z = -4, 0.2 m off one. So a door is `leaves` boards (2: a
+		# double door) hinged on the door's OUTER edges, and open it clears its whole width less a thickness.
+		# `slats` is not read here. Every door the same count, so the guarantee's index arithmetic holds unchanged.
 		_seg_w = width_m / float(_seg_n)
-		_per = maxi(1, int(round(float(n) / float(_seg_n))))
-		var most_door: int = maxi(1, int(floor(_seg_w / (min_clear_m + thickness_m))))
-		if _per > most_door:
-			push_warning("approach_wall: %d slats per %.2f m door cannot promise %.2f m — %d per door"
-				% [_per, _seg_w, min_clear_m, most_door])
-			_per = most_door
+		_per = clampi(leaves, 1, 8)
 		n = _per * _seg_n
 	elif n > most:
 		push_warning("approach_wall: %d slats across %.2f m gives %.2f m each, and a slat clears only its width less %.2f m of hinge — %d slats to promise %.2f m"
@@ -360,12 +363,13 @@ func _build() -> void:
 		var cx: float = -width_m * 0.5 + (float(i) + 0.5) * _slat_w
 		# The hinge is the slat's edge nearer the wall's middle, so a hole opened at
 		# the centre parts like two shutters and one opened at an end swings a
-		# single board clear. With doors, nearer the DOOR's middle.
+		# single board clear. With doors, a leaf hangs on the DOOR's outer edge nearer it (s = +1 hinges on the
+		# left edge), so a double door opens from its middle like one; a single leaf hangs on the left.
 		var s: float = 1.0 if cx >= 0.0 else -1.0
 		if _seg_n > 0:
 			@warning_ignore("integer_division")
 			var door_c: float = -width_m * 0.5 + (float(i / _per) + 0.5) * _seg_w
-			s = 1.0 if cx >= door_c - 0.0001 else -1.0
+			s = 1.0 if cx <= door_c + 0.0001 else -1.0
 		_cx[i] = cx
 		_hx[i] = cx - s * _slat_w * 0.5
 		_off[i] = s * _slat_w * 0.5

@@ -15,7 +15,8 @@ extends SceneTree
 ##        NEGATIVE: same config, latch off -> the corridor regrows.                  [the test bites]
 ##        white_edges: every block has its edge overlay, cube scale == shape size.   [look]
 ## WALL   segments=3 latch: approach door 0 and back off -> it opens, then closes.
-##        Walk through door 1 and away -> door 1 stays open, doors 0/2 shut; a shoulder fits in door 1 only.
+##        Push a solid body through door 1 0.9 m off centre (fins stopped the Void walker); walk on -> door 1 stays
+##        open (>= 2.5 m of free shoulder centres), doors 0/2 shut; a shoulder fits in door 1 only.
 ##        NEGATIVE: latch off -> door 1 closes after the crossing.
 ##        Default config: opens on approach, shuts after (unchanged).
 ##
@@ -163,7 +164,7 @@ func _wall_doors(latched: bool) -> void:
 	var w := await _make(WALL, cfg)
 	var tag := "wall 3 doors latch=%s" % str(latched)
 	var built: Array = w.get("_slats")
-	_say("%s: built %d slats of %.3f m, %d per door" % [tag, built.size(), float(w.get("_slat_w")), int(w.get("_per"))])
+	_say("%s: built %d boards of %.3f m, %d per door" % [tag, built.size(), float(w.get("_slat_w")), int(w.get("_per"))])
 	# Door 0 (x -6..-2): walk up to 0.8 m in front, then back off without crossing.
 	await _walk(Vector3(-4, 0, -5), Vector3(-4, 0, -0.8))
 	await _settle(40)
@@ -175,18 +176,23 @@ func _wall_doors(latched: bool) -> void:
 	var d0_after: float = w.door_openness(0)
 	_say("%s: door 0 approached %.2f (door 1 meanwhile %.2f), backed off %.2f" % [tag, d0_open, d1_then, d0_after])
 	_check(d0_open > 0.9 and d1_then < 0.05 and d0_after < 0.02, tag + ": an approached door opens alone and closes again")
-	# Door 1 (x -2..2): walk straight through and on, 5 m past.
-	await _walk(Vector3(0, 0, -5), Vector3(0, 0, 5))
+	# Door 1 (x -2..2): walk through it OFF-CENTRE (x 0.9, the Void walker's failure was 0.2 m off a slot centre),
+	# as a SOLID body pushed with move_and_collide, then on 5 m past. A door full of fins stops it.
+	var through: bool = await _push_through(Vector3(0.9, 0, -5), Vector3(0.9, 0, 5))
 	_park()
 	await _settle(120)
 	var o := [w.door_openness(0), w.door_openness(1), w.door_openness(2)]
 	var fit := [_line_free(Vector3(-5.9, 1.05, 0), Vector3(-2.1, 1.05, 0)),
 		_line_free(Vector3(-1.9, 1.05, 0), Vector3(1.9, 1.05, 0)),
 		_line_free(Vector3(2.1, 1.05, 0), Vector3(5.9, 1.05, 0))]
-	_say("%s: after walking through door 1 and away: openness %.2f / %.2f / %.2f, a shoulder fits %s / %s / %s, held %d"
-		% [tag, o[0], o[1], o[2], str(fit[0]), str(fit[1]), str(fit[2]), int(w.held_count())])
+	var run1: float = _free_run(Vector3(-2.0, 1.05, 0), Vector3(2.0, 1.05, 0))
+	_say("%s: solid body pushed through door 1 at x 0.9: %s" % [tag, str(through)])
+	_say("%s: after walking through door 1 and away: openness %.2f / %.2f / %.2f, a shoulder fits %s / %s / %s, held %d, door 1 free run %.2f m of shoulder centres"
+		% [tag, o[0], o[1], o[2], str(fit[0]), str(fit[1]), str(fit[2]), int(w.held_count()), run1])
+	_check(through, tag + ": a solid 0.25 m body walks through door 1 0.9 m off its centre")
 	if latched:
 		_check(o[1] > 0.98 and fit[1], tag + ": the door walked through STAYS open and a shoulder fits")
+		_check(run1 >= 2.5, tag + ": the open door clears most of its 4 m (a shoulder can cross anywhere in %.2f m), not slots" % run1)
 		_check(o[0] < 0.02 and o[2] < 0.02 and not fit[0] and not fit[2], tag + ": the other two doors are shut")
 	else:
 		_check(o[1] < 0.02 and not fit[1], "NEGATIVE " + tag + ": without latch the door closes behind you")
@@ -261,6 +267,52 @@ func _line_free(from: Vector3, to: Vector3) -> bool:
 		if not space.intersect_shape(q, 1).is_empty():
 			return false
 	return true
+
+
+## Push a solid capsule (the bench walker, radius 0.25) from -> to with move_and_collide, one step per physics frame,
+## as the Void walker moves. True when it gets within 0.25 m of the target.
+func _push_through(from: Vector3, to: Vector3) -> bool:
+	_walker.collision_mask = 1
+	_walker.global_position = from
+	await physics_frame
+	var stuck := 0
+	var ok := false
+	for i in 600:
+		var left: Vector3 = to - _walker.global_position
+		left.y = 0.0
+		if left.length() < 0.25:
+			ok = true
+			break
+		var before: Vector3 = _walker.global_position
+		_walker.move_and_collide(left.normalized() * minf(STEP, left.length()))
+		_walker.global_position.y = 0.0
+		stuck = stuck + 1 if before.distance_to(_walker.global_position) < STEP * 0.2 else 0
+		if stuck > 120:
+			break
+		await physics_frame
+	_walker.collision_mask = 0
+	return ok
+
+
+## The longest run of free shoulder-sphere centres along a line, metres.
+func _free_run(from: Vector3, to: Vector3) -> float:
+	var space: PhysicsDirectSpaceState3D = get_root().world_3d.direct_space_state
+	var shape := SphereShape3D.new()
+	shape.radius = SHOULDER_R
+	var q := PhysicsShapeQueryParameters3D.new()
+	q.shape = shape
+	q.exclude = [_walker.get_rid()]
+	var steps: int = maxi(1, int(ceil(from.distance_to(to) / 0.02)))
+	var best := 0.0
+	var run := 0.0
+	for i in steps + 1:
+		q.transform = Transform3D(Basis.IDENTITY, from.lerp(to, float(i) / float(steps)))
+		if space.intersect_shape(q, 1).is_empty():
+			run += 0.02
+			best = maxf(best, run)
+		else:
+			run = 0.0
+	return best
 
 
 func _park() -> void:
