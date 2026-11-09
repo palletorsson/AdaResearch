@@ -5,7 +5,9 @@ extends Node3D
 # desire: to stand inside the album cover and watch white light split into a rainbow you can almost touch
 # critical_parameter: fan_length — controls how far the spectrum spreads, making refraction feel gentle or dramatic
 # triggers: none — static sculpture, always present, always splitting
-# emerges: the glow/bloom system makes the beams feel volumetric even though they are 1-pixel ImmediateMesh lines
+# emerges: the beams are tubes of light (beam_radius); under the album's own black-and-bloom environment they glow, and in a
+#   lit room - where the tower strips that environment - they still read across the floor. Until 2026-11-09 they were
+#   1-pixel ImmediateMesh lines, carried by the bloom alone: in the tower the rainbow was a few coloured hairs.
 # needs: VR interaction [missing]; adjustable prism angle [missing]; Label3D [missing]
 # relationships: contrasts with rainbow (full arc vs linear split); precedes spectrum_forest (spatial color mapping)
 # truth: white light is not the absence of color — it is every color compressed into one, waiting for a boundary to reveal the multiplicity
@@ -44,6 +46,12 @@ extends Node3D
 @export_enum("one", "three", "seven", "continuum") var bands: String = "seven"
 @export_enum("result", "trace", "longhand", "axiom") var evidence: String = "result"
 
+## How thick a beam of light is, in metres. 0 draws the old one-pixel lines (Godot draws PRIMITIVE_LINES one pixel
+## wide at any distance, so the fan vanished a few metres off). The law geometry is drawn at 40 % of it.
+@export_range(0.0, 0.1, 0.002) var beam_radius: float = 0.03
+
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 const BANDS_VALUES := ["one", "three", "seven", "continuum"]
 const EVIDENCE_VALUES := ["result", "trace", "longhand", "axiom"]
 
@@ -75,6 +83,9 @@ var _law_node: MeshInstance3D
 var _law_mesh: ImmediateMesh
 var _formula_label: Label3D
 var _built: bool = false
+# Segments collected by _draw_line between _seg_begin() and _seg_flush(): emitted as tubes, or as the old lines.
+var _pairs := PackedVector3Array()
+var _pair_colors := PackedColorArray()
 
 func _ready() -> void:
 	_create_environment()
@@ -150,6 +161,10 @@ func _add_prism_edges(parent, size) -> void:
 	var br = Vector3(size.x/2, -size.y/2, size.z/2)
 	var bl = Vector3(-size.x/2, -size.y/2, size.z/2)
 
+	if beam_radius > 0.0:
+		mat.vertex_color_use_as_albedo = true
+		ThickLine.append_tube(im, PackedVector3Array([bl, top, br, bl]), PackedColorArray([Color(0.6, 0.6, 0.6)]), beam_radius * 0.4, 6)
+		return
 	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
 	im.surface_add_vertex(bl)
 	im.surface_add_vertex(top)
@@ -217,7 +232,7 @@ func _palette() -> Array[Color]:
 
 func _paint_beams() -> void:
 	_beam_mesh.clear_surfaces()
-	_beam_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_seg_begin()
 
 	var palette: Array[Color] = _palette()
 
@@ -255,12 +270,33 @@ func _paint_beams() -> void:
 			# Draw from exit point to fan end
 			_draw_line(_beam_mesh, BEAM_EXIT, end_pos, color)
 
-	_beam_mesh.surface_end()
+	_seg_flush(_beam_mesh, beam_radius)
 
-func _draw_line(im: ImmediateMesh, from: Vector3, to: Vector3, color: Color) -> void:
-	im.surface_set_color(color)
-	im.surface_add_vertex(from)
-	im.surface_add_vertex(to)
+func _draw_line(_im: ImmediateMesh, from: Vector3, to: Vector3, color: Color) -> void:
+	_pairs.append(from)
+	_pairs.append(to)
+	_pair_colors.append(color)
+
+
+func _seg_begin() -> void:
+	_pairs = PackedVector3Array()
+	_pair_colors = PackedColorArray()
+
+
+## The collected segments as tubes of `radius`, or - at 0 - the one-pixel lines they always were.
+func _seg_flush(im: ImmediateMesh, radius: float) -> void:
+	if _pairs.is_empty():
+		return
+	if radius > 0.0:
+		ThickLine.append_segments(im, _pairs, _pair_colors, radius, 6)
+	else:
+		im.surface_begin(Mesh.PRIMITIVE_LINES)
+		for i in _pair_colors.size():
+			im.surface_set_color(_pair_colors[i])
+			im.surface_add_vertex(_pairs[i * 2])
+			im.surface_add_vertex(_pairs[i * 2 + 1])
+		im.surface_end()
+	_seg_begin()
 
 
 # ---------------------------------------------------------------------------
@@ -307,7 +343,7 @@ func _apply_evidence() -> void:
 	var internal: Vector3 = (BEAM_EXIT - BEAM_HIT).normalized()
 
 	_law_mesh.clear_surfaces()
-	_law_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_seg_begin()
 
 	# The normals, dashed, drawn through the face in both directions. Without these the
 	# frame has no line to measure an angle against, which is the whole complaint.
@@ -322,7 +358,7 @@ func _apply_evidence() -> void:
 	if evidence == "longhand":
 		_draw_measurements(_law_mesh, n_out)
 
-	_law_mesh.surface_end()
+	_seg_flush(_law_mesh, beam_radius * 0.4)
 
 
 func _create_law_nodes() -> void:
@@ -432,6 +468,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		var want_bands: String = str(config_data["bands"]).strip_edges().to_lower()
 		if want_bands != bands and BANDS_VALUES.has(want_bands):
 			bands = want_bands
+			changed = true
+
+	if config_data.has("beam_radius") and str(config_data["beam_radius"]).is_valid_float():
+		var want_radius: float = clampf(float(config_data["beam_radius"]), 0.0, 0.1)
+		if not is_equal_approx(want_radius, beam_radius):
+			beam_radius = want_radius
 			changed = true
 
 	if config_data.has("evidence"):

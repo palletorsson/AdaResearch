@@ -962,6 +962,19 @@
       "registry": "the five variant tokens carry motif=twill in their config (applied by the Void before the preview is built): they arrived blank, so four repeat rules showed four identical cream panels; the base pattern_tile_puzzle stays blank to draw on",
       "tower": "Pattern_Foundry's 4x4 / mirror / brick / herringbone row now shows one twill under four rules: stripes, diamonds, broken steps, herringbone",
       "capture": "ada_run/improve/pattern_tile/before_after.png, herringbone.png"
+    },
+    {
+      "lookup_name": "dark_side_prism",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "beam_radius export (default 0.03 m, 0 = the old lines): the white ray, the internal segment and every band of the fan are tubes via ThickLine; the prism outline and the law geometry (normals, arcs, rule) at 40 % of it",
+        "apply_grid_config reads beam_radius",
+        "@identity emerges line rewritten: the beams were 1-pixel lines held up by the album's bloom, which the tower strips with the environment"
+      ],
+      "tower": "floor 46 (Ribbon_Patterns_02), at scale 0.6: the fan is a fan, not a few coloured hairs",
+      "capture": "ada_run/improve/dark_side_prism/before_after.png (+ grid.png at 9 m and 22 m)"
     }
   ]
 }
