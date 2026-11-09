@@ -632,7 +632,10 @@ func create_grab_cube_wrapper(csg_object: CSGCombiner3D, index: int) -> Node3D:
 	if collision_shape:
 		# Create a box collision that encompasses the CSG object
 		var box_shape = BoxShape3D.new()
-		box_shape.size = Vector3(2.0, 2.0, 2.0)  # Adjust based on your CSG object size
+		# The specimen's own size: its primitives span about 2 units and the combiner is scaled by scale_factor
+		# (2026-11-09). A fixed 2 m box on a 0.4 m grid made 75 boxes overlap at spawn; they pushed each other
+		# apart and the lattice of variations exploded into a cloud scattered across the floor.
+		box_shape.size = Vector3.ONE * 2.0 * scale_factor
 		collision_shape.shape = box_shape
 	
 	# Add a script to handle stability.

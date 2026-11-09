@@ -1118,6 +1118,17 @@
       ],
       "tower": "floor 127 (LSystems_Architecture) at its fitted scale 0.25: beam_width 0.32 (8 cm in the room) where the rods were 1.5 cm",
       "capture": "ada_run/improve/CityGenerator/before_after.png"
+    },
+    {
+      "lookup_name": "booleanvariations",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG: every specimen's collision box was a fixed 2 x 2 x 2 m ('adjust based on your CSG object size') while the specimen is scaled to scale_factor 0.1 on a 0.4 m grid: 75 overlapping boxes pushed apart at spawn and the lattice exploded across ~10 m, leaving the labels in an empty grid. The box is now 2 * scale_factor"
+      ],
+      "tower": "floor 163 (Boolean_Works): the cabinet holds its grid",
+      "capture": "ada_run/improve/booleanvariations/before_after.png"
     }
   ]
 }
