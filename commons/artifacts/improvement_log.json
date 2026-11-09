@@ -1153,6 +1153,19 @@
       ],
       "tower": "floor 57 (VFM_08_Arena)",
       "capture": "headless Void probe (no visual change): before 12.0 ms / scan, after 0.009 ms, controllers 2 -> 2"
+    },
+    {
+      "lookup_name": "fractal_koch_curve",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "BUG: the bump went along (-dir.y, dir.x), the left of travel, and the triangle runs counter-clockwise - INTO the shape; only the lesson flipped it. Outside the lesson the 'Koch snowflake' was drawn as the anti-snowflake. The sign now applies in both modes",
+        "line_thickness (12 mm, was 3 mm and lesson-only) drawn as a tube in both modes via ThickLine; vertex colours sRGB",
+        "the figure stands on its floor (lifted by the deepest generation's lowest point - the outward bumps reach ~0.2 m below the base edge, also in the tower's lesson mode) and its labels sit above its apex instead of across it"
+      ],
+      "tower": "floor 120 (Fractal_KochSierpinski), lesson mode: the snowflake no longer dips into the slab",
+      "capture": "ada_run/improve/fractal_koch_curve/before_after.png"
     }
   ]
 }

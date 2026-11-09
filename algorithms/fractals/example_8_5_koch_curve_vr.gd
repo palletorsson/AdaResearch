@@ -9,6 +9,8 @@
 
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+
 ## Example 8.5: Koch Curve
 ## Koch snowflake fractal with animated depth growth, color gradient, and VR controls
 ## Chapter 08: Fractals
@@ -26,7 +28,9 @@ extends Node3D
 signal generation_complete(depth: int, segment_count: int)
 
 @export var max_depth: int = 4
-@export var line_thickness: float = 0.003
+## Width of the curve (m), drawn as a tube in both modes (2026-11-09). It was one-pixel lines, or in the lesson flat
+## ribbons 3 mm wide: on a 0.8 m snowflake the curve whose length goes to infinity was a hair. 0 = the old drawing.
+@export var line_thickness: float = 0.012
 @export var animate_growth: bool = true
 @export var snowflake_mode: bool = true
 
@@ -122,8 +126,13 @@ func _koch_subdivide(start: Vector3, end: Vector3, depth: int) -> Array[Dictiona
 	# Equilateral triangle peak
 	var mid_point := (b + d) / 2.0
 	var perpendicular := Vector3(-dir.y, dir.x, 0)
+	# (-dir.y, dir.x) is the LEFT of travel, and the triangle runs counter-clockwise, so for the snowflake it points
+	# INTO the shape. Only the lesson flipped it (2026-11-09): outside the lesson every bump grew inward and the
+	# "Koch snowflake" was drawn as the anti-snowflake - lobes on thin necks, the finite area eaten from inside.
+	var side := -1.0 if snowflake_mode else 1.0
 	if lesson_enabled:
-		perpendicular *= peak_side * (-1.0 if snowflake_mode else 1.0)
+		side *= peak_side
+	perpendicular *= side
 	var height := (len / 3.0) * sqrt(3.0) / 2.0
 	var c := mid_point + perpendicular * height
 
@@ -146,6 +155,7 @@ func _setup_mesh() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.vertex_color_use_as_albedo = true
+	mat.vertex_color_is_srgb = true   # the depth colours were authored as sRGB (2026-11-09)
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	_mesh_instance.material_override = mat
 
@@ -156,9 +166,32 @@ func _draw_depth(depth: int) -> void:
 		return
 
 	_immediate_mesh.clear_surfaces()
+	var segments: Array = _lines_by_depth[depth]
+	# Stand the figure on its floor: the snowflake's outward bumps on the base edge reach ~0.2 m below it, so lift
+	# by the deepest generation's lowest point (fixed, so the figure does not jump as it grows).
+	if _mesh_instance and not _lines_by_depth.is_empty():
+		var low := 0.0
+		var high := 0.0
+		for seg in _lines_by_depth[_lines_by_depth.size() - 1]:
+			low = minf(low, minf(seg.start.y, seg.end.y))
+			high = maxf(high, maxf(seg.start.y, seg.end.y))
+		_mesh_instance.position.y = -low + line_thickness * 0.5
+		# and the two labels above it, not across its apex
+		var top: float = high - low + line_thickness
+		if _dimension_label: _dimension_label.position.y = top + 0.1
+		if _info_label: _info_label.position.y = top + 0.25
+	if line_thickness > 0.0:
+		var pairs := PackedVector3Array()
+		var cols := PackedColorArray()
+		for seg in segments:
+			pairs.append(seg.start)
+			pairs.append(seg.end)
+			cols.append(_color_for_depth(seg.depth, depth))
+		# depth 6 of the snowflake is 12,288 segments: three-sided tubes past 4000
+		ThickLine.append_segments(_immediate_mesh, pairs, cols, line_thickness * 0.5, 5 if cols.size() < 4000 else 3)
+		return
 	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES if lesson_enabled else Mesh.PRIMITIVE_LINES)
 
-	var segments: Array = _lines_by_depth[depth]
 	for seg in segments:
 		var col := _color_for_depth(seg.depth, depth)
 		if lesson_enabled:
@@ -271,7 +304,7 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("depth"):
 		max_depth = clampi(int(config.depth), 1, 6)
 	if config.has("line_thickness"):
-		line_thickness = config.line_thickness
+		line_thickness = float(str(config.line_thickness))
 	if config.has("color_scheme"):
 		var scheme_name: String = str(config.color_scheme)
 		match scheme_name.to_lower():
