@@ -145,6 +145,9 @@ const BAR_COLORS = [
 ## rings without displacing them, the combined wave and its voices readout above the row.
 ## Nothing about the tuning or the sound changes with the stand.
 @export var stand: String = "none"
+## The shared grab stick carries a live X / Y / Z readout of its tip (its own lesson, elsewhere). Here it is noise
+## over the bars: the instrument is about what rings, not where the stick is (2026-11-09).
+@export var stick_readout: bool = false
 
 const TABLE_H: float = 0.85
 const TABLE_W: float = 1.50
@@ -307,6 +310,11 @@ func _create_stick() -> void:
 			# the row, and Astra's review read it as lying across the playable row)
 			stick.position = Vector3(-0.70, TABLE_H + 0.13, 0.0)
 			stick.rotation_degrees = Vector3(0.0, 90.0, 0.0)
+		if not stick_readout:
+			for path in ["Blade/Top/Displayobjectposition", "Blade/Top/TrackBall/TextNode"]:
+				var readout: Node = stick.get_node_or_null(path)
+				if readout != null and readout is Node3D:
+					(readout as Node3D).visible = false
 		stick.add_to_group("stick")  # Add to group so bars recognize it
 		add_child(stick)
 		_stick = stick

@@ -849,6 +849,17 @@
       ],
       "tower": "floor 68: frequency 3.2 (its 8 m history held less than one cycle at the default)",
       "capture": "ada_run/improve/OscillationCurve/before_after.png"
+    },
+    {
+      "lookup_name": "resonating_metallophone",
+      "registry_file": "wavefunctions.json",
+      "timestamp": "2026-11-09",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "the shared grab stick's live X/Y/Z readout hidden on the metallophone's stick (stick_readout, default false); the shared stick is unchanged"
+      ],
+      "capture": "ada_run/improve/resonating_metallophone/before_after.png"
     }
   ]
 }
