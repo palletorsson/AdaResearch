@@ -10,7 +10,7 @@ some). Floors are found by MAP NAME in each version, so a version with an extra 
 
 What names a floor by index (found 2026-11-09; the Logic and Trans_Playground inserts had to remap the same set):
   rooms.json             the new floor (after --after), every config.editor_source.floor
-  layout.json            levels (the new floor takes the old level; everything below drops by --storey), floor_roles,
+  layout.json            levels (the new floor stands --storey below the one it follows; everything below drops by --storey), floor_roles,
                          floor_styles / spawn_points / floor_sign_positions / floor_sources / floor_columns keys,
                          descent.pad_shafts / pad_x_sides keys, descent.pad_disabled_floors, spine[].floors
   spine.json             floors[].floor and source.floor (main-tower sources), a new row; sequences = layout.spine
@@ -121,8 +121,10 @@ def rooms_text(raw: str, after, new_floor):
 def layout_doc(doc, at, title, storey):
     mv = moved_fn(at)
     levels = doc["levels"]
-    doc["levels"] = levels[:at] + [levels[at] if at < len(levels) else levels[-1] - doc["storey_height"]] + \
-        [round(l - storey, 6) for l in levels[at:]]
+    # A floor's headroom is the gap UP to the floor above (architecture.gd, floor_stream.gd): the new floor stands
+    # --storey below the one it follows, and every floor below it drops by the same --storey.
+    drop = lambda l: int(l - storey) if float(l - storey).is_integer() else round(l - storey, 6)
+    doc["levels"] = levels[:at] + [drop(levels[at - 1]) if at > 0 else levels[0]] + [drop(l) for l in levels[at:]]
     if "floor_roles" in doc:
         doc["floor_roles"].insert(at, title)
     for key in ["floor_styles", "spawn_points", "floor_sign_positions", "floor_sources", "floor_columns"]:
