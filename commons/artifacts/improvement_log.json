@@ -1368,6 +1368,22 @@
       ],
       "tower": "floor 116 (CA_EdgeOfChaos) at scale 0.8, unchanged placement",
       "capture": "ada_run/improve/crackpropagation_ca/before_after.png (standalone pair at one camera, seed 7, plus the tower shot)"
+    },
+    {
+      "lookup_name": "ca_sphere",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "auto_evolve default true (the default was the fault): no placement started it, so every visitor met a still blue ball; it now loops (cycle, hold_seconds) instead of freezing after the last step",
+        "lattice export, default 'geodesic' ('uv' keeps the original): a subdivided icosahedron, 2562 cells of six neighbours (twelve of five), no seam - the SphereMesh lattice duplicated its seam and pole vertices, so the automaton was torn along a meridian and pinched at the poles",
+        "geodesic_rule 'B2/S34' (hexagonal Life): Conway's B3/S23 on a six-neighbour lattice settles into a still life within ~20 generations (measured: 159 cells fixed from gen 20); B2/S34 keeps moving for hundreds",
+        "the state is drawn: vertex colours - amber just born, cyan to white with age, a fading ghost where a cell died, navy dead - and older colonies stand as smoothed mounds",
+        "a generation is spread over nine frames (four rule slices, four relief slices, one mesh build; worst frame 0.5 ms + a 1 ms mesh) instead of one 8.7 ms SurfaceTool rebuild",
+        "keyboard controls only when the work IS the scene: placed in the desktop tower, Space toggled it and an arrow key switched its mode and reset it from anywhere"
+      ],
+      "tower": "floor 114 (CA_SoftRules), scale 1, unchanged placement",
+      "capture": "ada_run/improve/ca_sphere/before_after.png (standalone pair at one camera + the tower before/after)"
     }
   ]
 }
