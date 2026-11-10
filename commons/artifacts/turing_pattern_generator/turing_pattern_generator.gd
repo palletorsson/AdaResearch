@@ -484,6 +484,9 @@ func _update_texture():
 	_texture.update(_image)
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump), R (the retry) and the digits reset it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6:

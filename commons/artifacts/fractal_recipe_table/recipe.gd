@@ -90,7 +90,9 @@ func park() -> void:
 	point.global_transform = global_transform * Transform3D(Basis.IDENTITY, home)
 
 func _process(_dt: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	# Space only when the table IS the scene: in the tower it is the desktop jump, and kept a recipe from any floor.
+	# A visitor keeps one with the point's trigger.
+	if get_tree().current_scene == self and Input.is_action_just_pressed("ui_accept"):
 		keep_current()
 
 func total(intervals: Array[Vector2]) -> float:

@@ -450,6 +450,9 @@ func _process(delta):
 		_advance()
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and R (the retry) ran and reseeded the dish from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:

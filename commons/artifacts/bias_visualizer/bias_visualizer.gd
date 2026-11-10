@@ -767,6 +767,9 @@ func _process(delta):
 		_spin.rotation.y = wrapf(_spin.rotation.y + delta * 0.3, 0.0, TAU)
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and the digits changed it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1:

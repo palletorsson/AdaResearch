@@ -356,6 +356,9 @@ func get_fractal_info() -> Dictionary:
 # Input handling for testing
 func _input(event: InputEvent) -> void:
 	"""Handles user input to manually advance the iteration."""
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) advanced the curve from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_accept"):  # Space key
 		generate_next_iteration()
 	

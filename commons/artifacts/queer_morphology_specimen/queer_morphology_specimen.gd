@@ -764,6 +764,9 @@ func _physics_process(delta: float) -> void:
 		_update_state_label()
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower the arrows and digits moved its lambda and phi from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_LEFT:

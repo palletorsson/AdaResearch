@@ -549,6 +549,9 @@ func enable_cylinder_rendering(enable: bool = true) -> void:
 
 # 🌈 FABULOUS DEBUG FUNCTIONS! ✨
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene (the grower is a child of it): in the desktop tower R (the retry) regrew it from any floor.
+	if get_tree().current_scene != owner:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:

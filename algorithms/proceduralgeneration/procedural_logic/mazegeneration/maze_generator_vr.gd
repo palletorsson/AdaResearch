@@ -435,6 +435,9 @@ func get_total_size() -> Vector3:
 	return Vector3(maze_width * cell_size, wall_height, maze_height * cell_size)
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower R (the retry), G and I regenerated the maze from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:

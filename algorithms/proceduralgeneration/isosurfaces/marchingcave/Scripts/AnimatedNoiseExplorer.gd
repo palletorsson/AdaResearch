@@ -713,6 +713,9 @@ func _sync_frame_anchor() -> void:
 		_owned.clear()
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene (the chunk is a child of it): in the desktop tower Space (the jump) toggled it from any floor.
+	if get_tree().current_scene != owner:
+		return
 	# Space to toggle animation
 	if event.is_action_pressed("ui_accept"):
 		if is_animating:

@@ -271,6 +271,9 @@ func _input(event: InputEvent) -> void:
 				is_mouse_captured = false
 	
 	elif event is InputEventKey:
+		# Keys only when the work IS the scene: in the desktop tower Esc freed the mouse from any floor.
+		if get_tree().current_scene != self:
+			return
 		if event.keycode == KEY_ESCAPE and event.pressed:
 			if is_mouse_captured:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

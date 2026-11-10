@@ -43,7 +43,9 @@ func _physics_process(_dt: float) -> void:
 		request_step()
 
 func _process(_dt: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	# Space only when the desk IS the scene: in the tower it is the desktop jump, and stepped the sum from any floor.
+	# A visitor steps it with a point's trigger, or by bringing the two points together.
+	if get_tree().current_scene == self and Input.is_action_just_pressed("ui_accept"):
 		request_step()
 
 func request_step(_body = null) -> void:

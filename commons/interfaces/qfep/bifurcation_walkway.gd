@@ -499,10 +499,12 @@ func _process(delta: float) -> void:
 			var local_pos: Vector3 = to_local(xr_origin.global_position)
 			x_pos = clampf(local_pos.x, 0.0, walkway_length)
 	else:
-		# Keyboard fallback — arrow keys
-		if Input.is_key_pressed(KEY_RIGHT):
+		# Keyboard fallback — arrow keys, only when the walkway IS the scene: in the desktop tower they
+		# swept r from any floor.
+		var keys := get_tree().current_scene == self
+		if keys and Input.is_key_pressed(KEY_RIGHT):
 			_keyboard_pos += 2.0 * delta
-		if Input.is_key_pressed(KEY_LEFT):
+		if keys and Input.is_key_pressed(KEY_LEFT):
 			_keyboard_pos -= 2.0 * delta
 		_keyboard_pos = clampf(_keyboard_pos, 0.0, walkway_length)
 		x_pos = _keyboard_pos

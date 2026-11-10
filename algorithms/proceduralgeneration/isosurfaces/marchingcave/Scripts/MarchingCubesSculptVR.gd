@@ -542,6 +542,9 @@ func _handle_keyboard_input(_delta) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
+		# Keys only when the work IS the scene: in the desktop tower Space (the jump), R (the retry) and C painted and cleared it from any floor.
+		if get_tree().current_scene != self:
+			return
 		match event.keycode:
 			KEY_SPACE:
 				# Paint at center (desktop mode)

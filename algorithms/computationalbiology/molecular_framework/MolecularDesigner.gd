@@ -94,6 +94,9 @@ func _process(delta: float) -> void:
 		_update_bonds()
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower R (the retry), A, F and the digits reassembled it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if not event is InputEventKey:
 		return
 
