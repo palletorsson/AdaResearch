@@ -3,7 +3,7 @@ extends "res://tools/probes/void_game_probe.gd"
 ## "Move the pendulum below the skateboard" and then "move the plank on a ball below the skateboard too". The
 ## skateboard on floor 15 joins its wheels with axles (a tie) and is an assemblage of many kinds of part; the pendulum
 ## introduces the tie (joint:1) and the plank on a ball the first assemblage (parts:1), so both are met before it.
-## They stood on floor 21 with the other physics plays.
+## They stood on Logic_Event with the other physics plays.
 ## Per set-up: placed on 14 and on no other floor; numbered before the skateboard; overlaps no other work; on the slab;
 ## the route not blocked by it; still before RELEASE, moving after it, nothing off the floor, home on RESET.
 ## Run: python tools/test_physics_play_floor14.py

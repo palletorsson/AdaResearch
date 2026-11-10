@@ -1,7 +1,7 @@
 extends "res://tools/probes/random_definition_hardware_probe.gd"
 
 func start(use_xr: bool) -> void:
-	xr=use_xr;level=72
+	xr=use_xr;level=VoidFloor.of("Random_Entropies")
 	if xr:
 		head=tracker("head",XRServer.TRACKER_HEAD,"default",Vector3(0,1.65,0))
 		left=tracker("left_hand",XRServer.TRACKER_CONTROLLER,"aim",Vector3(-.3,1.2,-.4))
@@ -25,7 +25,7 @@ func run() -> void:
 		quit(0 if failed.is_empty() else 1);return
 	await start(false)
 	var report: Dictionary={}
-	for item in game.building.content.data.floors[72].artifacts:
+	for item in game.building.content.data.floors[level].artifacts:
 		var source:=station(item.id)
 		var b:=AABB()
 		var first:=true
@@ -49,15 +49,15 @@ func run() -> void:
 func verify(mode: bool) -> void:
 	await start(mode)
 	var tag: String="XR: " if xr else "Desktop: "
-	check(tag+"floor 72 retains the original nine placements",game.checkpoint==72 and game.building.content.data.floors[72].artifacts.size()==9)
-	game.building.content.load_floor(73);await frames(5)
-	var lower: Node3D=game.building.content.exhibits["73/f1_signal_room_12_48"].get_node("Artifact")
+	check(tag+"Random_Entropies retains the original nine placements",game.checkpoint==level and game.building.content.data.floors[level].artifacts.size()==9)
+	var below: int=VoidFloor.of("Random_Entropy");game.building.content.load_floor(below);await frames(5)
+	var lower: Node3D=game.building.content.exhibits["%d/f1_signal_room_12_48" % below].get_node("Artifact")
 	check(tag+"Signal Room roof stays below this floor",Hardware._world_bounds(lower).end.y<=-432.36)
 	var signal_study: Node3D=lower.specimen
 	signal_study.set_pattern(2,435);var before: PackedByteArray=signal_study.values.duplicate();signal_study.step_rows()
 	check(tag+"lower Signal Room retains values and row-shift behaviour",signal_study.values==before and signal_study.row_offset==1 and before.count(1)==2048)
-	check(tag+"two partitions and four prefab props editable",game.building.content.data.floors[72].walls.size()==2 and game.building.content.data.floors[72].props.size()==4)
-	for item in game.building.content.data.floors[72].artifacts:
+	check(tag+"two partitions and four prefab props editable",game.building.content.data.floors[level].walls.size()==2 and game.building.content.data.floors[level].props.size()==4)
+	for item in game.building.content.data.floors[level].artifacts:
 		var source:=station(item.id)
 		check(tag+item.id+" original source survives",source.get_script().resource_path.contains("ordinary_entropies") or item.id=="research")
 		for contact in source.find_children("SlabContact*","Marker3D",true,false):

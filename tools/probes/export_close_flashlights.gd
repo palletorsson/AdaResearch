@@ -3,15 +3,16 @@ func run() -> void:
 	var building: Node3D=load("res://commons/void/architecture.gd").new()
 	building.stream_content=true
 	root.add_child(building);current_scene=building
-	building.content.load_floor(26)
+	var flash: int=preload("res://tools/probes/void_floor.gd").of("Color_Flashlight")
+	building.content.load_floor(flash)
 	for i in range(20):await physics_frame
 	await RenderingServer.frame_post_draw
 	building.process_mode=Node.PROCESS_MODE_DISABLED
 	var file := out.path_join("manifest.json")
 	manifest=JSON.parse_string(FileAccess.get_file_as_string(file))
 	for id in ["lamps","rooms"]:
-		var node: Node3D=building.content.exhibits["26/"+id].get_node("Artifact")
-		var item: Dictionary=building.content.data.floors[26].artifacts.filter(func(a):return a.id==id)[0]
+		var node: Node3D=building.content.exhibits["%d/" % flash + id].get_node("Artifact")
+		var item: Dictionary=building.content.data.floors[flash].artifacts.filter(func(a):return a.id==id)[0]
 		var data: Dictionary={"artifact":item.artifact,"config":item.config.duplicate(true),"parts":{}}
 		if id=="lamps":data.model=snapshot(node,"26-close-"+id)
 		else:

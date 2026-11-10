@@ -3,6 +3,7 @@ import copy
 import json
 import urllib.request
 from pathlib import Path
+from void_floors import floor_of
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'doc/book/iterations/2026-10-23-door-calculation'
@@ -25,14 +26,14 @@ if __name__ == '__main__':
     before = json.loads((OUT / 'before-floor.json').read_text(encoding='utf8'))
     draft = json.loads((OUT / 'draft-rooms.json').read_text(encoding='utf8'))
     baseline = next(a for a in before['artifacts'] if a['id'] == 'doors')
-    target = next(a for a in draft['floors'][72]['artifacts'] if a['id'] == 'doors')
-    doors = next(a for a in fresh['rooms']['floors'][72]['artifacts'] if a['id'] == 'doors')
+    target = next(a for a in draft['floors'][floor_of('Random_Entropies',draft)]['artifacts'] if a['id'] == 'doors')
+    doors = next(a for a in fresh['rooms']['floors'][floor_of('Random_Entropies',fresh['rooms'])]['artifacts'] if a['id'] == 'doors')
     assert doors in [baseline, target], 'Door placement changed during testing; reconcile it before publishing.'
     doors.update(copy.deepcopy(target))
     # Prove the merge contains only the tested artifact change.
     check = copy.deepcopy(fresh['rooms'])
-    index = next(i for i, a in enumerate(check['floors'][72]['artifacts']) if a['id'] == 'doors')
-    check['floors'][72]['artifacts'][index] = original['floors'][72]['artifacts'][index]
+    index = next(i for i, a in enumerate(check['floors'][floor_of('Random_Entropies',check)]['artifacts']) if a['id'] == 'doors')
+    check['floors'][floor_of('Random_Entropies',check)]['artifacts'][index] = original['floors'][floor_of('Random_Entropies',original)]['artifacts'][index]
     assert check == original
     (OUT / 'before-publish.json').write_text(json.dumps(original, indent=2) + '\n', encoding='utf8')
     receipt = request({'rooms': fresh['rooms'], 'revision': fresh['revision']})

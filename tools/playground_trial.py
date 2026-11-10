@@ -1,4 +1,4 @@
-"""A playground spec as a walkable Void trial, and the slab check that would have caught floor 210.
+"""A playground spec as a walkable Void trial, and the slab check that would have caught the court floor (Playground_PrincipalPlaces, 2026-11-02).
 
 Palle, 2026-11-02: "make a new map with the artifacts that do not fit on the floor - I can not walk to these and
 inspect them", and "test this inside their maps, then later move to the skyscraper". A place spec (places + boards,
@@ -16,7 +16,7 @@ stack puts several specs on the floors of ONE trial, joined the tower's way (Pal
 floors"): a slab sized to the widest, two shafts A and B through every slab past the content, a soft corner pad on
 each floor below in shaft B - jump into B and land on the next map. Floor 0 is an empty canopy, the last a catch
 floor. check exits with the number of pieces that do not stand on the slab: the tower's slab is 42 x 18 m and the hall
-on floor 210 sits at room position (0, -1).
+on the court floor sits at room position (0, -1).
 """
 import argparse, json, math, sys
 from pathlib import Path

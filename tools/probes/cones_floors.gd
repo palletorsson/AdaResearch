@@ -1,6 +1,6 @@
 extends "res://tools/probes/void_game_probe.gd"
 ## CONES AND POLES (Palle, 2026-11-04): floor 13 Trans_Pre without the black support poles under its three markers;
-## floor 25 Array with a solid cone under every pick-up cube of its 1D and 2D arrays, each cube seated on its tip; floor
+## the Array floor with a solid cone under every pick-up cube of its 1D and 2D arrays, each cube seated on its tip; floor
 ## 09 Primitives_Columns with 14 grove columns swapped for an assortment of cones and two posts. Photographs each.
 ## Run: python tools/test_cones_floors.py
 
@@ -30,10 +30,11 @@ func run() -> void:
 	check("floor 13: no black pole under the three markers (%d pole meshes, %d supports)" % [poles, supports], poles == 0 and supports == 0 and markers.all(func(id): return ex.has("13/%s" % id)))
 	if DisplayServer.get_name() != "headless": await _shot("trans_pre.png", Vector3(0, lv13 + 3.6, 7.5), Vector3(0, lv13 + 1.6, 0.5))
 
-	# FLOOR 25: a cone under every array cube, the cube seated on its tip
-	game.place_player(game.spawn_for(25)); await create_timer(2.5).timeout
-	var lv25: float = float(game.building.spec.levels[25])
-	var stands_m: Node3D = game.building.content.exhibits.get("25/cone-stands")
+	# THE ARRAY FLOOR: a cone under every array cube, the cube seated on its tip
+	var arr: int = preload("res://tools/probes/void_floor.gd").of("Array")
+	game.place_player(game.spawn_for(arr)); await create_timer(2.5).timeout
+	var lv25: float = float(game.building.spec.levels[arr])
+	var stands_m: Node3D = game.building.content.exhibits.get("%d/cone-stands" % arr)
 	var stands: Node = stands_m.get_node_or_null("Artifact") if stands_m else null
 	var cubes: Array = stands._cubes() if stands else []
 	var n_cones: int = (stands.cones as Array).size() if stands else 0
@@ -48,7 +49,7 @@ func run() -> void:
 	var y_then: float = stands.seated[0].global_position.y if stands and not (stands.seated as Array).is_empty() else 0.0
 	await create_timer(1.0).timeout
 	var still: bool = stands != null and not (stands.seated as Array).is_empty() and absf(stands.seated[0].global_position.y - y_then) < .002
-	check("floor 25: %d cones under the %d cubes of the row, the grid and the column; every cube's body on its cone's tip (worst %.3f m), the bob stopped (%s), every cone solid (%s)" % [n_cones, cubes.size(), worst, still, solid], n_cones == 85 and cubes.size() == 85 and worst < .01 and still and solid)
+	check("Array floor: %d cones under the %d cubes of the row, the grid and the column; every cube's body on its cone's tip (worst %.3f m), the bob stopped (%s), every cone solid (%s)" % [n_cones, cubes.size(), worst, still, solid], n_cones == 85 and cubes.size() == 85 and worst < .01 and still and solid)
 	if DisplayServer.get_name() != "headless":
 		await _shot("array_grid.png", Vector3(0.6, lv25 + 2.4, 9.0), Vector3(0.25, lv25 + .5, 3.0))
 		await _shot("array_row.png", Vector3(-12.5, lv25 + 2.0, -1.0), Vector3(-8.5, lv25 + 1.3, -5.0))

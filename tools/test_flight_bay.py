@@ -1,6 +1,7 @@
-"""The flight bay in the biome court (floor 210): desktop walker and synthetic XR rig in the actual tower.
+"""The flight bay in the biome court (Playground_PrincipalPlaces): desktop walker and synthetic XR rig in the actual tower.
 Probe: tools/probes/flight_bay_court.gd. Output: ada_run/flight-bay/<mode>/checks.json and photographs."""
 from pathlib import Path
+from void_floors import floor_of
 import json, os, subprocess, sys
 from void_trial_runtime import stage_runtime
 from void_native_slot import acquire_native_slot
@@ -10,7 +11,7 @@ OUT = ROOT / 'ada_run/flight-bay'
 
 def main():
     sys.stdout.reconfigure(encoding='utf8')
-    floor = next((s.split('=', 1)[1] for s in sys.argv if s.startswith('--main-floor=')), '210')
+    floor = next((s.split('=', 1)[1] for s in sys.argv if s.startswith('--main-floor=')), str(floor_of('Playground_PrincipalPlaces')))
     modes = [m for m in ('desktop', 'xr') if '--' + m in sys.argv] or ['desktop', 'xr']
     wait = float(next((s.split('=', 1)[1] for s in sys.argv if s.startswith('--wait=')), '7200'))
     slot = acquire_native_slot('Flight bay in the biome court', timeout=wait)

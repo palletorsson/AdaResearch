@@ -2,26 +2,28 @@ extends "res://tools/probes/zoetrope_playback.gd"
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene;root.size = Vector2i(1440,900)
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
 	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("before-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59];building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown);level_y = building.spec.levels[59]
+	var before_i: int = VoidFloor.index(before, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i];building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown);level_y = building.spec.levels[wave_floor]
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("343039")
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR;env.environment.ambient_light_color = Color("e8dde6")
 	env.environment.ambient_light_energy = .65;scene.add_child(env)
 	var light := DirectionalLight3D.new();light.rotation_degrees = Vector3(-38,-28,0);light.light_energy = 1.1;light.shadow_enabled = true;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 56;scene.add_child(camera);camera.make_current();await tick(12)
-	work = building.content.exhibits["59/torus-crank-study"].get_node("Artifact")
-	var sleeve: Node3D = building.content.exhibits["59/barber-pillar-south"].get_node("Artifact")
-	var other: Node3D = building.content.exhibits["59/barber-pillar-north"].get_node("Artifact")
-	var unchanged: bool = draft.floors[59].construction==before.floors[59].construction and draft.floors[59].props==before.floors[59].props
-	for a in before.floors[59].artifacts:unchanged = unchanged and draft.floors[59].artifacts.has(a)
-	check("all visitor placements and construction preserved; only three occurrences added",unchanged and draft.floors[59].artifacts.size()==before.floors[59].artifacts.size()+3)
+	work = building.content.exhibits["%d/torus-crank-study" % wave_floor].get_node("Artifact")
+	var sleeve: Node3D = building.content.exhibits["%d/barber-pillar-south" % wave_floor].get_node("Artifact")
+	var other: Node3D = building.content.exhibits["%d/barber-pillar-north" % wave_floor].get_node("Artifact")
+	var unchanged: bool = draft.floors[draft_i].construction==before.floors[before_i].construction and draft.floors[draft_i].props==before.floors[before_i].props
+	for a in before.floors[before_i].artifacts:unchanged = unchanged and draft.floors[draft_i].artifacts.has(a)
+	check("all visitor placements and construction preserved; only three occurrences added",unchanged and draft.floors[draft_i].artifacts.size()==before.floors[before_i].artifacts.size()+3)
 	var start: float = work.angle_degrees;await tick(12)
 	check("shared motor advances exposed mechanism",absf(work.angle_degrees-start)>1)
 	work.set_process(false);work.auto_run = false
@@ -88,6 +90,6 @@ func run() -> void:
 	camera.fov = 60
 	await photo("02-pillar-barber-rolls",at(20,5.1,9),at(14,2.8,0))
 	await photo("03-east-bay-studies",at(20.5,9.8,12),at(14.5,1.5,-1))
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Existing floor59 draft, finite-rod geometry, actual desktop controls, supplied XR poses, and real walking capsule. No physical headset or force solver claim."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Existing WaveFunctions_Intro draft, finite-rod geometry, actual desktop controls, supplied XR poses, and real walking capsule. No physical headset or force solver claim."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SPINNING_STUDIES_RESULT ",checks.size()," failures:",failed);quit(0 if failed.is_empty() else 1)

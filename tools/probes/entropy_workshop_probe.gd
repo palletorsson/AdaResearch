@@ -1,6 +1,6 @@
 extends "res://tools/probes/random_definition_hardware_probe.gd"
 func start(use_xr: bool) -> void:
-	xr=use_xr;level=73
+	xr=use_xr;level=VoidFloor.of("Random_Entropy")
 	if xr:
 		head=tracker("head",XRServer.TRACKER_HEAD,"default",Vector3(0,1.65,0))
 		left=tracker("left_hand",XRServer.TRACKER_CONTROLLER,"aim",Vector3(-.3,1.2,-.4))
@@ -52,9 +52,9 @@ func run() -> void:
 func workshop(mode: bool) -> void:
 	await start(mode)
 	var tag: String="XR: " if xr else "Desktop: "
-	check(tag+"Random Entropy starts on floor 73",game.checkpoint==73 and game.building.content.data.floors[73].map=="Random_Entropy")
-	check(tag+"all ten existing artifacts retained",game.building.content.data.floors[73].artifacts.size()==10)
-	for item in game.building.content.data.floors[73].artifacts:
+	check(tag+"Random Entropy starts on its own floor (%d)" % level,game.checkpoint==level and game.building.content.data.floors[level].map=="Random_Entropy")
+	check(tag+"all ten existing artifacts retained",game.building.content.data.floors[level].artifacts.size()==10)
+	for item in game.building.content.data.floors[level].artifacts:
 		var source:=station(item.id)
 		if item.artifact=="entropy_axiom":continue
 		check(tag+item.artifact+" installed with grid connection",source.has_meta("entropy_workshop_installed") and not source.find_children("HardwareSupply","Node3D",true,false).is_empty())

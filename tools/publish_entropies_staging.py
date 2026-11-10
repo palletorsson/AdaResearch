@@ -1,6 +1,7 @@
 """Merge only the tested floor and the lower room's clearance setting."""
 import json, urllib.request
 from pathlib import Path
+from void_floors import floor_of
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'doc/book/iterations/2026-10-23-entropies-staging'
@@ -16,10 +17,10 @@ if __name__=='__main__':
     fresh=request()
     before=json.loads((OUT/'before-floor.json').read_text(encoding='utf8'))
     draft=json.loads((OUT/'draft-rooms.json').read_text(encoding='utf8'))
-    assert fresh['rooms']['floors'][72]==before,'Floor 72 changed in the editor: merge that work before publishing.'
+    assert fresh['rooms']['floors'][floor_of('Random_Entropies',fresh['rooms'])]==before,'Random_Entropies changed in the editor: merge that work before publishing.'
     (OUT/'before-publish.json').write_text(json.dumps(fresh['rooms'],indent=2)+'\n',encoding='utf8')
-    fresh['rooms']['floors'][72]=draft['floors'][72]
-    room=next(a for a in fresh['rooms']['floors'][73]['artifacts'] if a['id']=='f1_signal_room_12_48')
+    fresh['rooms']['floors'][floor_of('Random_Entropies',fresh['rooms'])]=draft['floors'][floor_of('Random_Entropies',draft)]
+    room=next(a for a in fresh['rooms']['floors'][floor_of('Random_Entropy',fresh['rooms'])]['artifacts'] if a['id']=='f1_signal_room_12_48')
     room.setdefault('config',{})['void_room_height']=5.4
     # Keep the person's current room position, facing and scale.
     result=request({'rooms':fresh['rooms'],'revision':fresh['revision']})

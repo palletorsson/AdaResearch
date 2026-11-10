@@ -1,6 +1,9 @@
 extends SceneTree
 ## Targeted staging: native source cycle, shared viewing and physical circulation.
 const Source := preload("res://commons/void/room_source.gd")
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+const WAVE_MAP := "WaveFunctions_Intro"
+var wave_floor := -1 # set in run(), by name: the live tower's floor; a draft keeps its own index (VoidFloor.index)
 var out := ""
 var building: Node3D
 var lens: Camera3D
@@ -68,14 +71,15 @@ func walk(visitor: CharacterBody3D, points: Array, label: String) -> void:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out=arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	var scene := Node3D.new();root.add_child(scene);current_scene=scene
 	building=load("res://commons/void/architecture.gd").new();building.stream_content=true;scene.add_child(building)
 	var draft: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59]=draft.floors[59]
-	building.content.load_floor(59)
-	var shown: Array[int]=[59];building.show_floor_window(shown)
-	level_y=building.spec.levels[59]
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor]=draft.floors[draft_i]
+	building.content.load_floor(wave_floor)
+	var shown: Array[int]=[wave_floor];building.show_floor_window(shown)
+	level_y=building.spec.levels[wave_floor]
 	root.size=Vector2i(1440,900)
 	var env:=WorldEnvironment.new();env.environment=Environment.new()
 	env.environment.background_mode=Environment.BG_COLOR;env.environment.background_color=Color("293137")
@@ -85,10 +89,10 @@ func run() -> void:
 	lens=Camera3D.new();lens.current=true;lens.fov=65;lens.far=70;scene.add_child(lens)
 	await frames(45)
 	check("standard42m floor and two shafts retained", building.spec.width==42 and building.spec.shafts.size()==2)
-	check("all21 original artifacts retained", draft.floors[59].artifacts.size()==21)
-	var clock:Node3D=building.content.exhibits["59/clock"].get_node("Artifact")
-	var turn:Node3D=building.content.exhibits["59/turn"].get_node("Artifact")
-	var bench:Node3D=building.content.props["59/clock-bench"]
+	check("all21 original artifacts retained", draft.floors[draft_i].artifacts.size()==21)
+	var clock:Node3D=building.content.exhibits["%d/clock" % wave_floor].get_node("Artifact")
+	var turn:Node3D=building.content.exhibits["%d/turn" % wave_floor].get_node("Artifact")
+	var bench:Node3D=building.content.props["%d/clock-bench" % wave_floor]
 	var top_y:float=bounds(bench.get_node("Prefab")).end.y
 	var low:=INF;var high:=-INF
 	var initial_angle:float=turn._current_angle
@@ -106,7 +110,7 @@ func run() -> void:
 	check("comparison cube still turns",angle_travel>5)
 	observations["cycle"]={"bench_top":top_y-level_y,"cube_min":low-level_y,"cube_max":high-level_y,"clearance":low-top_y,"sample_physics_frames":240}
 	for id in ["backdrop","side","low-edge","store","stock","lamp"]:
-		var prop:Node3D=building.content.props["59/return-bay-"+id]
+		var prop:Node3D=building.content.props["%d/return-bay-" % wave_floor + id]
 		var box:AABB=bounds(prop)
 		check(id+" has actual native geometry",box.size.length()>.1)
 		check(id+" stays within central floor and storey",box.position.x> -7.4 and box.end.x<7.4 and box.position.z> -8.5 and box.end.z<8.5 and box.end.y<level_y+5.64)
@@ -134,7 +138,7 @@ func run() -> void:
 	await photo("01-shared-work-area",at(-1.5,1.65,6.6),at(-1.5,1.5,2.5))
 	await photo("02-arriving-at-the-benches",at(-6.4,2.1,7.4),at(-1.7,1.5,2.7))
 	await photo("03-room-to-walk-around",at(1.25,2.0,1.8),at(-2.0,1.2,3.1))
-	var result:Dictionary={"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"One staged comparison bay on actual main-floor59 geometry. Four-second native cycle, actual tabletop, physical desktop capsule routes and collision sightlines. Other artifact interactions and physical VR headset playthrough not tested. Neutral inspection lighting in captures."}
+	var result:Dictionary={"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"One staged comparison bay on actual main WaveFunctions_Intro floor geometry. Four-second native cycle, actual tabletop, physical desktop capsule routes and collision sightlines. Other artifact interactions and physical VR headset playthrough not tested. Neutral inspection lighting in captures."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(result,"  "))
 	print("SHARED_BAY_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

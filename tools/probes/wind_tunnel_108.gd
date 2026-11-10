@@ -5,7 +5,7 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
 		if arg.begins_with("--mode="):mode = arg.trim_prefix("--mode=")
-	xr = mode=="xr";take_photos = not xr;await start(xr);level = 108
+	xr = mode=="xr";take_photos = not xr;await start(xr);level = VoidFloor.of("CA_SoftRules")
 	game.place_player(game.spawn_for(level));await frames(100)
 	var tag := "XR: " if xr else "Desktop: "
 	var work: Node3D = artifact("lattice_gas_pump")

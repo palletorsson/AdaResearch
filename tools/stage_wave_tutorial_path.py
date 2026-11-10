@@ -1,6 +1,8 @@
 """Stage the three-machine path; preserve occurrence IDs and unrelated floors."""
 import copy,hashlib,json,sys,urllib.request
 from pathlib import Path
+from void_floors import floor_of
+MAP='WaveFunctions_Intro' # found by MAP NAME in each rooms document (index 59 in the 2026-10-2x drafts)
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'ada_run/wave-tutorial-path';URL='http://localhost:3003/api/void-layout'
 def read(p):return json.loads(p.read_text(encoding='utf-8'))
 def write(p,d):p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
@@ -11,12 +13,12 @@ def prepare():
  write(ROOT/'commons/artifacts/registry/single_cube_turntable.json',{'artifacts':{'single_cube_turntable':entry}})
  p=ROOT/'commons/void/catalog.json';d=read(p);d['artifacts']['single_cube_turntable']=entry;write(p,d)
  p=ROOT/'commons/void/primitive-prefabs.json';d=read(p);assert not any(n['id']=='single_cube_turntable' for n in d['prefabs'])
- d['prefabs'].append(dict(id='single_cube_turntable',title=entry['name'],map='WaveFunctions_Intro',family='Wavefunctions / physical animation',scene=entry['scene'],dimensions=entry['footprint'],anchor='Floor-local plate axis. Plate top 1.05 m; controls face +Z and remain at hand height.',behaviour=entry['description'],learn='One cube stays fixed to a moving platform: one parent transform changes position and orientation together.',icon='body',recipe=['construction_cube','sine_yoke'],placement=dict(artifact='single_cube_turntable',source_floor=59,source_id='hand-single-turntable',height=0,scale=1,config={'motor_rpm':10.0,'auto_run':True})))
+ d['prefabs'].append(dict(id='single_cube_turntable',title=entry['name'],map='WaveFunctions_Intro',family='Wavefunctions / physical animation',scene=entry['scene'],dimensions=entry['footprint'],anchor='Floor-local plate axis. Plate top 1.05 m; controls face +Z and remain at hand height.',behaviour=entry['description'],learn='One cube stays fixed to a moving platform: one parent transform changes position and orientation together.',icon='body',recipe=['construction_cube','sine_yoke'],placement=dict(artifact='single_cube_turntable',source_floor=floor_of(MAP),source_id='hand-single-turntable',height=0,scale=1,config={'motor_rpm':10.0,'auto_run':True})))
  write(p,d)
  p=ROOT/'commons/void/capacity-artifacts.json';d=read(p)
  d['nodes'].append(dict(id='single_cube_turntable',title=entry['name'],sequence='wavefunctions',learn='A single rigid attachment carries position and orientation through one turn.',use=entry['description'],icon='body',insertion=dict(map='WaveFunctions_Intro',basis='authored',reason='The physical step between a crank-driven projection and a sequence of carried cubes.')))
  d['edges'].extend([dict(source='sine_yoke',target='single_cube_turntable',kind='develop',label='Carry the hand-driven angle into a rotating support.'),dict(source='construction_cube',target='single_cube_turntable',kind='combine',label='One known body fixed to the plate.'),dict(source='single_cube_turntable',target='scale_zoetrope',kind='develop',label='One carried body becomes a sequence of fixed frames.')]);write(p,d)
- now=json.load(urllib.request.urlopen(URL));rooms=copy.deepcopy(now['rooms']);f=rooms['floors'][59]
+ now=json.load(urllib.request.urlopen(URL));rooms=copy.deepcopy(now['rooms']);f=rooms['floors'][floor_of(MAP,rooms)]
  assert f['map']=='WaveFunctions_Intro'
  moves={'clock':[-18,-6.4],'turn':[-15.5,-6.4],'monitor':[-4.6,1.0],'pendulum':[-4.6,-1.8],'driven':[-4.6,-4.7],'dark':[-18.5,-2.7]}
  for a in f['artifacts']:
@@ -50,14 +52,14 @@ def prepare():
  f.setdefault('construction',[]).extend(new_cells)
  f['route']=[dict(label='01 / HAND TO HEIGHT',position=[-1.6,7.2]),dict(label='02 / ONE CUBE. ONE TURN.',position=[6.8,2.1]),dict(label='03 / FIXED CUBES. MOVING SEQUENCE.',position=[5,-3.5],height=1)]
  write(OUT/'before-rooms.json',now['rooms']);write(OUT/'draft-rooms.json',rooms)
- write(OUT/'plan.json',dict(moves=moves,new_cells=len(new_cells),original_artifacts=len(now['rooms']['floors'][59]['artifacts']),artifacts=len(f['artifacts']),route_feet=[[-1.6,0,7.2],[1,0,7.2],[3.5,0,6.5],[5.7,0,4.7],[6.8,0,3.3],[6.8,0,2.1],[6.8,0,1.25],[5.1,0,1.25],[5.1,1,-1.5],[5.1,1,-3.5],[5.8,1,-4.5],[5.8,0,-7.7]]))
+ write(OUT/'plan.json',dict(moves=moves,new_cells=len(new_cells),original_artifacts=len(now['rooms']['floors'][floor_of(MAP,now['rooms'])]['artifacts']),artifacts=len(f['artifacts']),route_feet=[[-1.6,0,7.2],[1,0,7.2],[3.5,0,6.5],[5.7,0,4.7],[6.8,0,3.3],[6.8,0,2.1],[6.8,0,1.25],[5.1,0,1.25],[5.1,1,-1.5],[5.1,1,-3.5],[5.8,1,-4.5],[5.8,0,-7.7]]))
  valid=post(dict(rooms=rooms,validateOnly=True));write(OUT/'validation.json',valid);assert valid['valid'],valid
  print('Staged',len(new_cells),'independent cube/wedge modules and one turntable; live floor unchanged.')
 def publish():
  report=read(OUT/'checks.json');assert report['passed'],report
  assert report['draft_sha256']==hashlib.sha256((OUT/'draft-rooms.json').read_bytes()).hexdigest()
  now=json.load(urllib.request.urlopen(URL));before=read(OUT/'before-rooms.json');draft=read(OUT/'draft-rooms.json')
- assert now['rooms']['floors'][59]==before['floors'][59],'Floor59 changed; merge required'
- rooms=copy.deepcopy(now['rooms']);rooms['floors'][59]=draft['floors'][59]
- result=post(dict(rooms=rooms,revision=now['revision']));write(OUT/'save-receipt.json',result);assert result['saved'];print('Saved floor59 path, preserving current other floors.')
+ assert now['rooms']['floors'][floor_of(MAP,now['rooms'])]==before['floors'][floor_of(MAP,before)],'WaveFunctions_Intro changed; merge required'
+ rooms=copy.deepcopy(now['rooms']);rooms['floors'][floor_of(MAP,rooms)]=draft['floors'][floor_of(MAP,draft)]
+ result=post(dict(rooms=rooms,revision=now['revision']));write(OUT/'save-receipt.json',result);assert result['saved'];print('Saved WaveFunctions_Intro path, preserving current other floors.')
 if __name__=='__main__':publish() if '--publish' in sys.argv else prepare()

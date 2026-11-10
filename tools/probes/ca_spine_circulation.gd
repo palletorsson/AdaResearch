@@ -2,7 +2,7 @@ extends "res://tools/probes/ca_spine_active.gd"
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	await start(false);level = 109;game.place_player(game.spawn_for(level));await frames(90)
+	await start(false);level = VoidFloor.of("CA_AgentsCircuits");game.place_player(game.spawn_for(level));await frames(90)
 	var wall: Node3D = artifact("void_ca_history_wall");var y: float = game.building.spec.levels[level]
 	var hit: Dictionary = ray(wall.to_global(Vector3(0,2.5,1)),wall.to_global(Vector3(0,2.5,-1)))
 	check("architectural receiver has a real solid face",not hit.is_empty() and wall.is_ancestor_of(hit.collider))

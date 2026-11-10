@@ -31,12 +31,12 @@ func player_photo(work: Node3D,name: String) -> void:
 	await input_aim_camera(work.to_global(Vector3(0,1.3,0)),20);await RenderingServer.frame_post_draw;root.get_texture().get_image().save_png(out.path_join(name+".png"))
 
 func run() -> void:
-	root.size = Vector2i(1440,900);level = 46
+	root.size = Vector2i(1440,900);kinetic_floor = VoidFloor.of("Vectors_Act4a_KineticForces");level = kinetic_floor
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out=" ):out = arg.trim_prefix("--out=")
 	var rows: Array = []
 	for use_xr in [false,true]:
-		await start(use_xr);var tag := "XR / " if xr else "Desktop / ";var y: float = game.building.spec.levels[46];var work: Node3D = station("matter-leaning-together")
+		await start(use_xr);var tag := "XR / " if xr else "Desktop / ";var y: float = game.building.spec.levels[kinetic_floor];var work: Node3D = station("matter-leaning-together")
 		game.place_player(Vector3(-16.8,y+.06,3.8));await frames(300);active_tag = tag+"brittle / "
 		check(active_tag+"precarious stack starts with all six parts under gravity",is_standing(work) and work.bodies.values().all(func(body):return not body.freeze and body.gravity_scale==1))
 		await player_photo(work,"leaning-brittle-player-before")
@@ -70,5 +70,5 @@ func run() -> void:
 		game.queue_free();await frames(12)
 		if xr:
 			for tracker_node in [head,left,right]:XRServer.remove_tracker(tracker_node)
-	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"rows":rows,"scope":"Actual floor 46, desktop mouse and synthetic XR trigger taps on plank/cube/chock, a physical ungripped XR collision-hand nudge, ball grab and held reset. This is not physical-headset acceptance or a claim that any infinitesimal contact always collapses it."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"rows":rows,"scope":"Actual Vectors_Act4a_KineticForces floor, desktop mouse and synthetic XR trigger taps on plank/cube/chock, a physical ungripped XR collision-hand nudge, ball grab and held reset. This is not physical-headset acceptance or a claim that any infinitesimal contact always collapses it."}
 	FileAccess.open(out.path_join("leaning-brittle-player-checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "));print("MATTER_REFERENCE_RESULT ",JSON.stringify(report));quit(0 if failed.is_empty() else 1)

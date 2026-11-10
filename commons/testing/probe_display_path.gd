@@ -59,7 +59,7 @@ func _ready() -> void:
 	var pm: Material = pp.face.material_override
 	var papered: bool = pm is ShaderMaterial and (pm as ShaderMaterial).shader.resource_path.ends_with("wallpaper_tile.gdshader") and (pm as ShaderMaterial).get_shader_parameter("domain_texture") is Texture2D and int((pm as ShaderMaterial).get_shader_parameter("wallpaper_group")) == 4
 	_check(report, "C wallpaper plate: the wallpaper shader over a painted 4 x 4 domain, group 4", papered, {"papered": papered})
-	# D - the floor path and posters, as boards in the ANNEX (moved off floor 210's slab, 2026-11-02)
+	# D - the floor path and posters, as boards in the ANNEX (moved off the court floor's slab, 2026-11-02)
 	var hall: Node3D = load("res://commons/void/trials/playground_recipes/spec_hall.tscn").instantiate();hall.set_meta("config_spec", "res://commons/data/playgrounds/halls/playground_annex.json");add_child(hall)
 	for i in 6:
 		await get_tree().physics_frame

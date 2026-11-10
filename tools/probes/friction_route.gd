@@ -3,9 +3,9 @@ extends "res://tools/probes/sine_yoke.gd"
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true;scene = Node3D.new();root.add_child(scene);current_scene = scene
-	var building: Node3D = load("res://commons/void/architecture.gd").new();building.stream_content = true;scene.add_child(building);building.content.load_floor(46);await tick(10)
-	var world := building.get_world_3d().direct_space_state;var y: float = building.spec.levels[46];var capsule := CapsuleShape3D.new();capsule.radius = .24;capsule.height = 1.75
+	Source.use_main_tower = true;var kf: int = VoidFloor.of("Vectors_Act4a_KineticForces");scene = Node3D.new();root.add_child(scene);current_scene = scene
+	var building: Node3D = load("res://commons/void/architecture.gd").new();building.stream_content = true;scene.add_child(building);building.content.load_floor(kf);await tick(10)
+	var world := building.get_world_3d().direct_space_state;var y: float = building.spec.levels[kf];var capsule := CapsuleShape3D.new();capsule.radius = .24;capsule.height = 1.75
 	var free: Dictionary = {};var obstacles: Dictionary = {}
 	for ix in range(-38,39):
 		for iz in range(-16,17):

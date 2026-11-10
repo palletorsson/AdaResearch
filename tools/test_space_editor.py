@@ -1,7 +1,8 @@
-"""The vending machines on floor 20 (Trans_Playground) in the actual tower, 2026-11-06: built, standing on the slab,
+"""The vending machines on the Trans_Playground floor in the actual tower, 2026-11-06: built, standing on the slab,
 cutting into nothing, photographed. Probe: tools/probes/space_editor_floor.gd.
 Output: ada_run/space-editor/tower/checks.json (+ floor20_*.png). `--beside-play`: no native slot, window off-screen."""
 from pathlib import Path
+from void_floors import floor_of
 import json, os, subprocess, sys
 from void_trial_runtime import stage_runtime
 from void_native_slot import acquire_native_slot
@@ -16,7 +17,7 @@ def main():
     for stale in ('checks.json', 'progress.json', 'godot.log'):
         (OUT / stale).unlink(missing_ok=True)   # a crash must not read the last run's report
     beside = '--beside-play' in sys.argv   # Palle (2026-11-06): independent runs need not wait for the slot
-    slot = None if beside else acquire_native_slot('Space editor floor 20', timeout=7200)
+    slot = None if beside else acquire_native_slot('Space editor floor %d (Trans_Playground)' % floor_of('Trans_Playground'), timeout=7200)
     stage = stage_runtime()
     with (OUT / 'engine.log').open('w', encoding='utf8') as stream:
         result = subprocess.run([sys.executable, str(ROOT / 'tools/godot_watchdog.py'), '--expect=' + str(OUT), '--grace=300', '--stall=120', '--',

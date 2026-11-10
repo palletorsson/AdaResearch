@@ -22,7 +22,7 @@ extends Node3D
 ##               threefold-symmetric one included - end in one relation, the same mean turn and hub rates
 ##   J scene     each setup builds its units, rods and pens; the ink grows; the button steps to the next start and
 ##               clears the paper
-##   K tower     floor 210's hall builds the four stations from its sidecar, under the biome court
+##   K tower     the court floor's hall builds the four stations from its sidecar, under the biome court
 ## Pictures: the_unit_quartet.png, the_unit_pair.png, the_unit_triangle.png, the_unit_close.png,
 ## the_unit_undercroft.png. Report ada_run/workstation/the_unit.json.
 ## Run: godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_the_unit.tscn
@@ -253,7 +253,7 @@ func _scene_checks() -> void:
 	cam.transform = Transform3D(Basis(), mid + Vector3(.2, .75, .95)).looking_at(mid + Vector3(0, .05, 0))
 	await _shoot("the_unit_close")
 	for c in views.values():(c as Node).queue_free()
-	# K - in the tower: floor 210's hall builds the four stations from its sidecar, under the court
+	# K - in the tower: the court floor's hall builds the four stations from its sidecar, under the court
 	floor_mesh.position.y = -.09   # the hall stands its stations on the tower slab, 8 cm under its own datum
 	var hall: Node3D = load("res://commons/void/trials/principal_places/places.tscn").instantiate();add_child(hall)
 	for i in 6:
@@ -266,7 +266,7 @@ func _scene_checks() -> void:
 	var placed := found.size() == 4
 	for v in found.values():
 		placed = placed and want.has(v.setup) and Vector3(float(v.at[0]), float(v.at[1]), float(v.at[2])).distance_to(Vector3(float(want[v.setup][0]), float(want[v.setup][1]), float(want[v.setup][2]))) < .01 and absf(absf(float(v.yaw)) - 180.0) < 1.0
-	_check("K tower: floor 210's hall builds %d Unit stations from its sidecar, under the court: %s" % [found.size(), str(found.values().map(func(v): return "%s at %s" % [v.setup, str(v.at)]))], placed, {"found": found})
+	_check("K tower: the court floor's hall builds %d Unit stations from its sidecar, under the court: %s" % [found.size(), str(found.values().map(func(v): return "%s at %s" % [v.setup, str(v.at)]))], placed, {"found": found})
 	cam.transform = Transform3D(Basis(), hall.global_position + Vector3(0.0, 1.7, -6.4)).looking_at(hall.global_position + Vector3(0.0, 0.2, -0.6))
 	for c in hall.get_children():
 		if c.get_meta("activity_artifact", "") == "the_unit":c.run_for(120.0)

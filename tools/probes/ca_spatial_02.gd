@@ -7,11 +7,12 @@ func run() -> void:
 		if arg.begins_with("--mode="):mode = arg.trim_prefix("--mode=")
 	xr = mode=="xr";take_photos = not xr
 	await start(xr)
-	for floor in [104,107]:
+	var slice_f: int = VoidFloor.of("CA_ElementaryRules")
+	for floor in [slice_f,VoidFloor.of("CA_ExpandingSpace")]:
 		level = floor;game.place_player(game.spawn_for(level));await frames(100)
 		var tag := ("XR " if xr else "Desktop ")+str(level)+": "
 		check(tag+"safe actual main-floor arrival",game.body.is_on_floor() and game.floor_stream.focus==level)
-		if floor==104:await slice_checks(tag)
+		if floor==slice_f:await slice_checks(tag)
 		else:await canopy_checks(tag)
 		var y: float = game.building.spec.levels[level]
 		for entry in game.building.content.data.floors[level].artifacts:

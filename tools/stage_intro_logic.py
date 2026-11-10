@@ -24,7 +24,7 @@ def prepare():
   f['artifacts'].append(dict(id=id,artifact=key,station='SW' if x<0 else 'SE',position=[x,3.6],height=0,facing=0,scale=1,config={'editor_label':title}))
  for p,d in [(catp,catalog),(pp,prefabs),(gp,graph),(ROOT/'commons/artifacts/registry/matter_spring_logic.json',registry),(OUT/'before-rooms.json',now['rooms']),(OUT/'draft-rooms.json',rooms)]:write(p,d)
  v=post(dict(rooms=rooms,validateOnly=True));write(OUT/'validation.json',v);assert v['valid'],v
- print('Staged AND, OR, NOT on floor14. Raised course, floor7 and floor59 unchanged.')
+ print('Staged AND, OR, NOT on floor14. Raised course, floor7 and WaveFunctions_Intro unchanged.')
 def publish():
  assert read(OUT/'checks.json')['passed']
  now=json.load(urllib.request.urlopen(URL));before=read(OUT/'before-rooms.json');draft=read(OUT/'draft-rooms.json')

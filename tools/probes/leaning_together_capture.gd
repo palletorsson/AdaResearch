@@ -5,13 +5,13 @@ class FixtureHand extends Node3D:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true;scene = Node3D.new();root.add_child(scene);current_scene = scene;root.size = Vector2i(1440,900)
-	var building: Node3D = load("res://commons/void/architecture.gd").new();building.stream_content = true;scene.add_child(building);building.content.load_floor(46);var visible: Array[int] = [46];building.show_floor_window(visible);await tick(240)
-	for key in building.content.exhibits:building.content.exhibits[key].visible = str(key).begins_with("46/")
+	Source.use_main_tower = true;var kf: int = VoidFloor.of("Vectors_Act4a_KineticForces");scene = Node3D.new();root.add_child(scene);current_scene = scene;root.size = Vector2i(1440,900)
+	var building: Node3D = load("res://commons/void/architecture.gd").new();building.stream_content = true;scene.add_child(building);building.content.load_floor(kf);var visible: Array[int] = [kf];building.show_floor_window(visible);await tick(240)
+	for key in building.content.exhibits:building.content.exhibits[key].visible = str(key).begins_with("%d/" % kf)
 	for layer in root.find_children("*","CanvasLayer",true,false):layer.hide()
 	var env := Environment.new();env.background_mode = Environment.BG_COLOR;env.background_color = Color("33323a");env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR;env.ambient_light_color = Color("fff1df");env.ambient_light_energy = .35;env.tonemap_mode = Environment.TONE_MAPPER_FILMIC;env.tonemap_exposure = .45
 	var light := DirectionalLight3D.new();light.rotation_degrees = Vector3(-42,-30,0);light.light_energy = .5;light.shadow_enabled = true;scene.add_child(light);camera = Camera3D.new();camera.fov = 48;camera.environment = env;scene.add_child(camera)
-	var work: Node3D = building.content.exhibits["46/matter-leaning-together"].get_node("Artifact")
+	var work: Node3D = building.content.exhibits["%d/matter-leaning-together" % kf].get_node("Artifact")
 	var state: Dictionary = work.observations();check("actual floor supports the two leaning planks and both loose chocks",state.contacts.has("LeftPlank + RightPlank") and state.contacts.has("LeftPlank + LeftWedge") and state.contacts.has("RightPlank + RightWedge"))
 	await photo("leaning-together",work.to_global(Vector3(2.6,2.4,4.5)),work.to_global(Vector3(0,.85,0)))
 	var hand := FixtureHand.new();scene.add_child(hand);hand.global_transform = work.bodies.LeftWedge.global_transform;work.bodies.LeftWedge.pick_up(hand);hand.global_position += work.global_basis.x*-.7+Vector3.UP*.35;await tick(180)

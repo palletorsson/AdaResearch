@@ -3,7 +3,7 @@ extends "res://tools/probes/ca_spine_active.gd"
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	take_photos = true;await start(false);level = 104
+	take_photos = true;await start(false);level = VoidFloor.of("CA_ElementaryRules")
 	game.place_player(game.spawn_for(level));await frames(100)
 	var study: Node3D = artifact("structure_growth").get_node("StructureStudy")
 	study.replay();study.step_once();await frames(8)

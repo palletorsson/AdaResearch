@@ -1,6 +1,8 @@
 """One floor staging revision: existing boxes and wp ramps replace benches."""
 import copy,hashlib,json,sys,urllib.request,urllib.error
 from pathlib import Path
+from void_floors import floor_of
+MAP='WaveFunctions_Intro' # found by MAP NAME in each rooms document (index 59 in the 2026-10-2x drafts)
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'ada_run/wavefunctions-block-supports';OUT.mkdir(exist_ok=True)
 URL='http://localhost:3003/api/void-layout'
 def read(p):return json.loads(p.read_text(encoding='utf-8'))
@@ -11,7 +13,7 @@ def post(d):
  except urllib.error.HTTPError as e:raise RuntimeError(e.read().decode()) from e
 def prepare():
  assert not (OUT/'before-rooms.json').exists(),'Preserve existing draft.'
- current=json.load(urllib.request.urlopen(URL,timeout=30));rooms=copy.deepcopy(current['rooms']);f=rooms['floors'][59]
+ current=json.load(urllib.request.urlopen(URL,timeout=30));rooms=copy.deepcopy(current['rooms']);f=rooms['floors'][floor_of(MAP,rooms)]
  assert f['map']=='WaveFunctions_Intro'
  removed=[p for p in f['props'] if p['kind']=='workbench'];assert len(removed)==7
  f['props']=[p for p in f['props'] if p['kind']!='workbench']
@@ -31,15 +33,15 @@ def prepare():
   if a['id'].startswith('size-'):a['height']=1
  result=post(dict(rooms=rooms,validateOnly=True));assert result['valid'],result
  write(OUT/'before-rooms.json',current['rooms']);write(OUT/'draft-rooms.json',rooms);write(OUT/'validation.json',result)
- write(OUT/'plan.json',dict(removed_benches=[p['id'] for p in removed],added_cells=len(f['construction']),scope='Floor59 block supports and two pickup ramp runs. Scale/rotate room clarification pending. No new room behaviour.'))
+ write(OUT/'plan.json',dict(removed_benches=[p['id'] for p in removed],added_cells=len(f['construction']),scope='WaveFunctions_Intro block supports and two pickup ramp runs. Scale/rotate room clarification pending. No new room behaviour.'))
  print('Staged removal of seven benches and 27 existing cube/wedge modules. Live layout unchanged.')
 def publish():
  report=read(OUT/'checks.json');assert report['passed'],report
  assert report['draft_sha256']==hashlib.sha256((OUT/'draft-rooms.json').read_bytes()).hexdigest()
  before=read(OUT/'before-rooms.json');draft=read(OUT/'draft-rooms.json');now=json.load(urllib.request.urlopen(URL,timeout=30))
- assert now['rooms']['floors'][59]==before['floors'][59],'Floor59 changed; merge with review.'
- rooms=copy.deepcopy(now['rooms']);rooms['floors'][59]=draft['floors'][59]
+ assert now['rooms']['floors'][floor_of(MAP,now['rooms'])]==before['floors'][floor_of(MAP,before)],'WaveFunctions_Intro changed; merge with review.'
+ rooms=copy.deepcopy(now['rooms']);rooms['floors'][floor_of(MAP,rooms)]=draft['floors'][floor_of(MAP,draft)]
  write(OUT/'before-publish-rooms.json',now['rooms']);write(OUT/'save-receipt.json',post(dict(rooms=rooms,revision=now['revision'])))
  assert json.load(urllib.request.urlopen(URL,timeout=30))['rooms']==rooms
- print('Saved only floor59 through revisioned editor API.')
+ print('Saved only WaveFunctions_Intro through revisioned editor API.')
 if __name__=='__main__':publish() if '--publish' in sys.argv else prepare()

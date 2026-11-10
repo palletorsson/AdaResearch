@@ -1,6 +1,13 @@
 extends "res://commons/void/trials/cellularautomata_03/probe.gd"
 ## Reuses the original real-input checks on the actual main-tower floors.
-var selected_floors: Array[int] = [103,104,105,106,107,108,109,110]
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+## The eight CA halls, by MAP NAME (floors 103-110 when this was written, 2026-10-23); --floors= still takes indices.
+const CA_MAPS := ["CA_Introduction","CA_ElementaryRules","CA_GameOfLife","CA_BeyondBinary","CA_ExpandingSpace","CA_SoftRules","CA_AgentsCircuits","CA_EdgeOfChaos"]
+var selected_floors: Array[int] = ca_floors()
+static func ca_floors() -> Array[int]:
+	var result: Array[int] = []
+	for m in CA_MAPS:result.append(VoidFloor.of(m))
+	return result
 var mode := "both"
 func start(use_xr: bool) -> void:
 	xr = use_xr;Source.use_main_tower = true
@@ -26,15 +33,15 @@ func run() -> void:
 			level = index;game.place_player(game.spawn_for(level));await frames(90)
 			var tag := ("XR: " if xr else "Desktop: ")+str(level)+" "
 			check(tag+"actual42x18 main-tower floor is live",game.building.spec.width==42 and game.building.spec.depth==18 and game.floor_stream.focus==level)
-			match level:
-				103:await introduction_checks(tag)
-				104:await states_checks(tag)
-				105:await history_checks(tag)
-				106:await life_checks(tag)
-				107:await proximity_checks(tag)
-				108:await exchange_checks(tag)
-				109:await neighbour_checks(tag)
-				110:await live_difference_checks(tag)
+			match str(game.building.content.data.floors[level].map):
+				"CA_Introduction":await introduction_checks(tag)
+				"CA_ElementaryRules":await states_checks(tag)
+				"CA_GameOfLife":await history_checks(tag)
+				"CA_BeyondBinary":await life_checks(tag)
+				"CA_ExpandingSpace":await proximity_checks(tag)
+				"CA_SoftRules":await exchange_checks(tag)
+				"CA_AgentsCircuits":await neighbour_checks(tag)
+				"CA_EdgeOfChaos":await live_difference_checks(tag)
 			check(tag+"visitor camera retained",game.get_viewport().get_camera_3d()==game.camera)
 			FileAccess.open(out.path_join("active-%s.json"%mode),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty(),"checks":checks,"failed":failed,"floors":selected_floors,"mode":mode},"  "))
 		game.queue_free();await frames(10)

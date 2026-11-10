@@ -1,6 +1,8 @@
 extends "res://tools/probes/void_transfer_probe.gd"
 ## New placement/progression checks; existing gate mechanisms are reused unchanged.
 var take_logic_photos := false
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+var logic_floor := -1 # Logic_Event, the first Logic room, set by name in start()
 var pointer: Node3D
 
 func start(use_xr: bool) -> void:
@@ -11,7 +13,8 @@ func start(use_xr: bool) -> void:
 		right = tracker("right_hand",XRServer.TRACKER_CONTROLLER,"aim",Vector3(.3,1.2,-.4))
 		left.set_input("primary",Vector2.ZERO);right.set_input("primary",Vector2.ZERO)
 		right.set_input("trigger_click",false);right.set_input("grip",0.0)
-	load("res://commons/void/game.gd").requested_floor = 20
+	logic_floor = VoidFloor.of("Logic_Event")
+	load("res://commons/void/game.gd").requested_floor = logic_floor
 	game = load("res://commons/void/void.tscn").instantiate();game.force_xr = xr
 	root.add_child(game);current_scene = game
 	if not xr:game.body.scripted_input = true
@@ -53,8 +56,8 @@ func run() -> void:
 	for use_xr in [false,true]:
 		await start(use_xr);var tag := "Synthetic XR / " if xr else "Desktop / "
 		if not xr:check("fresh isolated gate inventory",not game.prefab_inventory.unlocked("matter_spring_and") and not game.prefab_inventory.unlocked("matter_spring_or") and not game.prefab_inventory.unlocked("matter_spring_not"))
-		check(tag+"four rooms follow Transformation",game.building.content.data.floors[19].map=="Trans_Pit" and game.building.content.data.floors[24].map=="Array" and game.building.spec.levels.size()==209)
-		for i in range(20,24):
+		check(tag+"four rooms follow Transformation",str(game.building.content.data.floors[logic_floor-1].map).begins_with("Trans_") and game.building.content.data.floors[logic_floor+4].map=="Array" and game.building.spec.levels.size()==game.building.content.data.floors.size())
+		for i in range(logic_floor,logic_floor+4):
 			await visit_logic_floor(i)
 			check(tag+"floor "+str(i)+" starts on a solid slab",game.body.is_on_floor() and not game.recovering)
 			for a in game.building.content.data.floors[i].artifacts:

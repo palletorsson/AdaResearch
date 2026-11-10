@@ -2,6 +2,7 @@ extends SceneTree
 ## Native construction check for the thirteen Random Definition instruments.
 
 const Hardware := preload("res://commons/void/randomness_interface_hardware.gd")
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
 var checks: Array[Dictionary] = []
 var failed: Array[String] = []
 var controls: Dictionary = {}
@@ -22,18 +23,19 @@ func run() -> void:
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true
 	scene.add_child(building)
-	building.content.load_floor(71)
+	var rd: int = VoidFloor.of("Random_Definition")
+	building.content.load_floor(rd)
 	for frame in range(120):
 		await physics_frame
 
-	var floor_root: Node3D = building.floors[71]
-	var record: Dictionary = building.content.data.floors[71]
-	var expected_slab: float = building.global_position.y + float(building.spec.levels[70]) - float(building.spec.slab_thickness)
-	check("Random Definition remains floor 71", str(record.map) == "Random_Definition")
-	check("all thirteen original placements remain", record.artifacts.size() == 13 and record.artifacts.all(func(item): return building.content.exhibits.has("71/" + str(item.id))))
+	var floor_root: Node3D = building.floors[rd]
+	var record: Dictionary = building.content.data.floors[rd]
+	var expected_slab: float = building.global_position.y + float(building.spec.levels[rd - 1]) - float(building.spec.slab_thickness)
+	check("Random Definition is the floor its name finds (%d)" % rd, str(record.map) == "Random_Definition")
+	check("all thirteen original placements remain", record.artifacts.size() == 13 and record.artifacts.all(func(item): return building.content.exhibits.has("%d/" % rd + str(item.id))))
 	for item in record.artifacts:
 		var prefix := str(item.id) + ": "
-		var mount: Node3D = building.content.exhibits["71/" + str(item.id)]
+		var mount: Node3D = building.content.exhibits["%d/" % rd + str(item.id)]
 		var source: Node3D = mount.get_node("Artifact")
 		var hardware: Node3D = source.get_node_or_null("ArchitecturalHardware")
 		if item.id == "page": print("PAGE_BOUNDS ", source.global_position, " ", content_bounds(source,hardware))
@@ -66,7 +68,7 @@ func run() -> void:
 		"checks": checks,
 		"failed": failed,
 		"controls": controls,
-		"scope": "Native floor 71 construction and source interaction-body retention. No physical headset test."
+		"scope": "Native Random_Definition floor construction and source interaction-body retention. No physical headset test."
 	}
 	FileAccess.open(out.path_join("checks.json"), FileAccess.WRITE).store_string(JSON.stringify(report, "\t"))
 	print("RANDOM_DEFINITION_CEILING_RESULT ", checks.size(), " checks; failures: ", failed)

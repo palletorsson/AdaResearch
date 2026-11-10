@@ -1,5 +1,5 @@
 extends "res://tools/probes/principal_places.gd"
-## THE FLIGHT BAY IN THE BIOME COURT (2026-11-02), in the actual tower (floor 210) with the desktop walker or a
+## THE FLIGHT BAY IN THE BIOME COURT (2026-11-02), in the actual tower (the biome court floor (Playground_PrincipalPlaces)) with the desktop walker or a
 ## synthetic XR rig. Walks the hall's own route to the court's east rim, then: the rim walk never flies; step off the
 ## rim through the door and hover; rise until the roof holds; the glass holds above the doors; sink below the rim and
 ## land on the court floor; a jump from that floor is caught by the air; fly out of the east door onto the rim. The
@@ -165,7 +165,7 @@ func run()->void:
 	finish()
 
 func finish()->void:
-	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty(),"checks":checks,"failed":failed,"walks":details,"observations":observations,"scope":"Actual tower floor 210, desktop walker or synthetic XR rig: entry, hover, rise, glass, landing, jump, exit and the still-glass control. Headset comfort, motion sickness and the court's look in the headset are human checks."},"  "))
+	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty(),"checks":checks,"failed":failed,"walks":details,"observations":observations,"scope":"Actual tower biome court (Playground_PrincipalPlaces), desktop walker or synthetic XR rig: entry, hover, rise, glass, landing, jump, exit and the still-glass control. Headset comfort, motion sickness and the court's look in the headset are human checks."},"  "))
 	print("FLIGHT_BAY_COURT ",failed.is_empty());quit(0 if failed.is_empty() else 1)
 
 ## The flight zone at a court-local point (Vector3) - or, given the body's world position, at the visitor.

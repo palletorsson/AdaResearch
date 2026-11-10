@@ -1,6 +1,7 @@
 """Add playback defaults without moving or replacing any floor object."""
 import copy,hashlib,json,sys,urllib.request
 from pathlib import Path
+from void_floors import floor_of
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'ada_run/scale-zoetrope-playback';URL='http://localhost:3003/api/void-layout'
 def read(p):return json.loads(p.read_text(encoding='utf-8'))
 def write(p,d):p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
@@ -15,7 +16,7 @@ def prepare():
  p=ROOT/'commons/void/catalog.json';d=read(p);d['artifacts']['scale_zoetrope']=entry;write(p,d)
  p=ROOT/'commons/void/primitive-prefabs.json';d=read(p);prefab=next(x for x in d['prefabs'] if x['id']=='scale_zoetrope');prefab['placement']['config'].update(defaults);prefab['behaviour']=description;prefab['learn']='A discrete display samples moving fixed-size objects. One cube advance per sample holds its position while size changes; detuning reveals drift.';write(p,d)
  p=ROOT/'commons/void/capacity-artifacts.json';d=read(p);node=next(x for x in d['nodes'] if x['id']=='scale_zoetrope');node['use']=description;node['learn']=prefab['learn'];write(p,d)
- now=json.load(urllib.request.urlopen(URL));rooms=copy.deepcopy(now['rooms']);piece=next(x for x in rooms['floors'][59]['artifacts'] if x['id']=='hand-scale-zoetrope');piece.setdefault('config',{}).update(defaults)
+ now=json.load(urllib.request.urlopen(URL));rooms=copy.deepcopy(now['rooms']);piece=next(x for x in rooms['floors'][floor_of('WaveFunctions_Intro',rooms)]['artifacts'] if x['id']=='hand-scale-zoetrope');piece.setdefault('config',{}).update(defaults)
  valid=post(dict(rooms=rooms,validateOnly=True));assert valid['valid'],valid
  write(OUT/'before-rooms.json',now['rooms']);write(OUT/'draft-rooms.json',rooms);write(OUT/'validation.json',valid)
  print('Staged playback settings only; no layout changes published.')
@@ -23,8 +24,8 @@ def publish():
  report=read(OUT/'checks.json');assert report['passed'],report
  assert report['draft_sha256']==hashlib.sha256((OUT/'draft-rooms.json').read_bytes()).hexdigest()
  now=json.load(urllib.request.urlopen(URL));before=read(OUT/'before-rooms.json');draft=read(OUT/'draft-rooms.json')
- assert now['rooms']['floors'][59]==before['floors'][59],'Floor changed; review merge'
- rooms=copy.deepcopy(now['rooms']);rooms['floors'][59]=draft['floors'][59]
+ assert now['rooms']['floors'][floor_of('WaveFunctions_Intro',now['rooms'])]==before['floors'][floor_of('WaveFunctions_Intro',before)],'Floor changed; review merge'
+ rooms=copy.deepcopy(now['rooms']);rooms['floors'][floor_of('WaveFunctions_Intro',rooms)]=draft['floors'][floor_of('WaveFunctions_Intro',draft)]
  write(OUT/'save-receipt.json',post(dict(rooms=rooms,revision=now['revision'])))
  print('Saved playback defaults, preserving every object placement.')
 if __name__=='__main__':publish() if '--publish' in sys.argv else prepare()

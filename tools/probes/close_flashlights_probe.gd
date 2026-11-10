@@ -1,17 +1,19 @@
 extends "res://tools/probes/triangle_shaft_quad_probe.gd"
 const Layout := preload("res://commons/void/trials/color_flashlight/close_lamps.gd")
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
 
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out=arg.trim_prefix("--out=")
 	DirAccess.make_dir_recursive_absolute(out)
 	for mode in ([true] if "--reach-only" in OS.get_cmdline_user_args() else [false,true]):
-		load("res://commons/void/game.gd").requested_floor=26
+		var flash: int=VoidFloor.of("Color_Flashlight")
+		load("res://commons/void/game.gd").requested_floor=flash
 		await start(mode)
 		var tag := "Synthetic XR: " if mode else "Desktop: "
 		var content: Node3D=game.building.content
-		var board: Node3D=content.exhibits["26/lamps"].get_node("Artifact")
-		var rooms: Node3D=content.exhibits["26/rooms"].get_node("Artifact")
+		var board: Node3D=content.exhibits["%d/lamps" % flash].get_node("Artifact")
+		var rooms: Node3D=content.exhibits["%d/rooms" % flash].get_node("Artifact")
 		var groups: Array=[board,rooms.white_room,rooms.light_well]
 		if not mode:
 			game.body.hide();game.get_node("CareBody").hide()
@@ -24,7 +26,7 @@ func run() -> void:
 			var lamps: Array=[]
 			for name in ["RedFlashlight","GreenFlashlight","BlueFlashlight","WhiteFlashlight"]: lamps.append(group.get_node(name))
 			var standing: Vector3=group.to_global(lamps[0].get_meta("void_lamp_standing_point"))+Vector3.UP*.06
-			game.checkpoint=26;game.place_player(standing)
+			game.checkpoint=flash;game.place_player(standing)
 			if mode:
 				var forward: Vector3=lamps[0].global_position-standing
 				forward.y=0
@@ -46,6 +48,6 @@ func run() -> void:
 		game.queue_free();await frames(12)
 		if mode:
 			for input_tracker in [head,left,right]:XRServer.remove_tracker(input_tracker)
-	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty(),"checks":checks,"failed":failed,"scope":"Main floor 26. Native desktop and synthetic XR pickup of all twelve lamps from three fixed standing positions; geometry, shafts and beam settings. Physical headset not tested."},"  "))
+	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty(),"checks":checks,"failed":failed,"scope":"Main Color_Flashlight floor. Native desktop and synthetic XR pickup of all twelve lamps from three fixed standing positions; geometry, shafts and beam settings. Physical headset not tested."},"  "))
 	print("CLOSE_FLASHLIGHTS ",checks.size()," ",failed)
 	quit(0 if failed.is_empty() else 1)

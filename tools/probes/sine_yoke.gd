@@ -1,5 +1,8 @@
 extends SceneTree
 const Source = preload("res://commons/void/room_source.gd")
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+const WAVE_MAP := "WaveFunctions_Intro"
+var wave_floor := -1 # set in run(), by name: the live tower's floor; a draft keeps its own index (VoidFloor.index)
 var out := ""
 var checks: Array = []
 var failed: Array = []
@@ -21,15 +24,16 @@ func photo(id: String,eye: Vector3,target: Vector3) -> void:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59]
-	building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown)
-	level_y = building.spec.levels[59]
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i]
+	building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown)
+	level_y = building.spec.levels[wave_floor]
 	root.size = Vector2i(1440,900)
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("30383f")
@@ -40,9 +44,9 @@ func run() -> void:
 	light.light_energy = .9;light.shadow_enabled = true;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 52;scene.add_child(camera)
 	await tick(30)
-	var work: Node3D = building.content.exhibits["59/hand-sine-yoke"].get_node("Artifact")
+	var work: Node3D = building.content.exhibits["%d/hand-sine-yoke" % wave_floor].get_node("Artifact")
 	var wheel: Node3D = work.wheel
-	check("standard floor and all21 originals plus one converter",building.spec.width == 42 and building.spec.shafts.size() == 2 and draft.floors[59].artifacts.size() == 22)
+	check("standard floor and all21 originals plus one converter",building.spec.width == 42 and building.spec.shafts.size() == 2 and draft.floors[draft_i].artifacts.size() == 22)
 	check("wheel exposes native XRTools crank grip",wheel.grip.is_xr_class("XRToolsInteractableHandle") and wheel.hinge.grabbed_handles.is_empty())
 	var still: float = work.yoke.position.y;await tick(60)
 	check("no clock or motor moves an untouched wheel",is_equal_approx(work.yoke.position.y,still) and is_equal_approx(work.angle_degrees,-25))
@@ -132,7 +136,7 @@ func run() -> void:
 	await photo("02-visible-pin-and-slot",at(-1.65,1.65,7.85),at(-1.95,1.27,6.05))
 	wheel.set_angle_degrees(90)
 	await photo("03-cube-at-top-of-stroke",at(-1.65,1.65,7.85),at(-1.95,1.27,6.05))
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual main-floor59, production rim pointer events, native XRTools pickup with supplied controller poses, negative-floor moved/rotated coupling and desktop capsule circulation. Ideal kinematic constraint; no force dynamics or physical-headset acceptance."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual main WaveFunctions_Intro floor, production rim pointer events, native XRTools pickup with supplied controller poses, negative-floor moved/rotated coupling and desktop capsule circulation. Ideal kinematic constraint; no force dynamics or physical-headset acceptance."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SINE_YOKE_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

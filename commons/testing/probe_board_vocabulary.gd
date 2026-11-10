@@ -52,7 +52,7 @@ func _ready() -> void:
 	for c in hall.get_children():
 		if c.has_meta("activity_artifact"):
 			var k: String = str(c.get_meta("activity_artifact"));by_kind[k] = by_kind.get(k, 0) + 1
-	# floor 210 keeps what stands on the tower's slab; the boards moved to the ANNEX (2026-11-02), where they are framed
+	# the court floor (Playground_PrincipalPlaces) keeps what stands on the tower's slab; the boards moved to the ANNEX (2026-11-02), where they are framed
 	var side: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/void/trials/principal_places/activities.json"))
 	var want_plates: int = preload("res://commons/modular/places/board_builder.gd").copies(side)
 	var annex_spec: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/playgrounds/halls/playground_annex.json"))
@@ -74,7 +74,7 @@ func _ready() -> void:
 		if c.get_meta("activity_artifact", "") == "display_plate":annex_plates += 1
 	var annex_want: int = preload("res://commons/modular/places/board_builder.gd").copies(annex_spec)
 	hall_ok = hall_ok and annex_plates == annex_want and annex.recipe.assemblies.size() > annex_want
-	_check(report, "B hall: floor 210 stands what its sidecar lists, kind by kind, and no boards; the boards stand framed in the annex", hall_ok, {"by_kind": by_kind, "want_kinds": want_kinds, "assemblies": hall_assemblies, "approved": approved_assemblies, "annex_plates": annex_plates, "annex_want": annex_want})
+	_check(report, "B hall: the court floor stands what its sidecar lists, kind by kind, and no boards; the boards stand framed in the annex", hall_ok, {"by_kind": by_kind, "want_kinds": want_kinds, "assemblies": hall_assemblies, "approved": approved_assemblies, "annex_plates": annex_plates, "annex_want": annex_want})
 	var shots := {"boards_path": [Vector3(-22, 1.7, 9), Vector3(0, 0.5, 10)], "boards_above": [Vector3(0, 12, 22), Vector3(0, 0.5, 10)]}
 	for k in shots:
 		cam.transform = Transform3D(Basis(), shots[k][0]).looking_at(shots[k][1])

@@ -1,6 +1,8 @@
-"""Register one hand-driven converter; stage and revision-save only floor59."""
+"""Register one hand-driven converter; stage and revision-save only WaveFunctions_Intro."""
 import copy, json, sys, urllib.request, urllib.error, hashlib
 from pathlib import Path
+from void_floors import floor_of
+MAP='WaveFunctions_Intro' # found by MAP NAME in each rooms document (index 59 in the 2026-10-2x drafts)
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'ada_run/sine-yoke'
 OUT.mkdir(exist_ok=True)
@@ -29,7 +31,7 @@ def register():
         kit['prefabs'].append(dict(id=key,title=definition['name'],map='WaveFunctions_Intro',family='Wavefunctions / motion converter',scene=definition['scene'],dimensions=[1.9,2,.85],
             anchor='Floor origin at timber feet. Mechanism and support are editable groups; wheel, pin, slot and cube stay coupled.',
             behaviour=definition['description'],learn='The circle\'s vertical coordinate becomes the cube\'s displacement. A sine in time requires constant turning speed.',icon='body',recipe=['timber_plank_2m','construction_cube'],
-            placement=dict(artifact=key,source_floor=59,source_id='hand-sine-yoke',height=0,scale=1,config={'initial_angle':-25})))
+            placement=dict(artifact=key,source_floor=floor_of(MAP),source_id='hand-sine-yoke',height=0,scale=1,config={'initial_angle':-25})))
         write(kitfile,kit)
     graphfile=ROOT/'commons/void/capacity-artifacts.json';graph=read(graphfile)
     if not any(n['id']==key for n in graph['nodes']):
@@ -41,7 +43,7 @@ def prepare():
     assert not (OUT/'before-rooms.json').exists(),'Draft already prepared; preserve it.'
     register()
     current=json.load(urllib.request.urlopen(URL,timeout=30));rooms=copy.deepcopy(current['rooms'])
-    floor=rooms['floors'][59];assert floor['map']=='WaveFunctions_Intro'
+    floor=rooms['floors'][floor_of(MAP,rooms)];assert floor['map']=='WaveFunctions_Intro'
     assert not any(a['id']=='hand-sine-yoke' for a in floor['artifacts'])
     floor['artifacts'].append(dict(id='hand-sine-yoke',artifact='sine_yoke',position=[-2.3,5.9],height=0,facing=0,scale=1,station='SW',config={'initial_angle':-25}))
     validation=post(dict(rooms=rooms,validateOnly=True));assert validation['valid'],validation
@@ -51,10 +53,10 @@ def publish():
     report=read(OUT/'checks.json');assert report['passed'],report
     assert report['draft_sha256']==hashlib.sha256((OUT/'draft-rooms.json').read_bytes()).hexdigest()
     before=read(OUT/'before-rooms.json');draft=read(OUT/'draft-rooms.json')
-    current=json.load(urllib.request.urlopen(URL,timeout=30));assert current['rooms']['floors'][59]==before['floors'][59],'Floor changed; review merge.'
-    rooms=copy.deepcopy(current['rooms']);rooms['floors'][59]=draft['floors'][59]
+    current=json.load(urllib.request.urlopen(URL,timeout=30));assert current['rooms']['floors'][floor_of(MAP,current['rooms'])]==before['floors'][floor_of(MAP,before)],'Floor changed; review merge.'
+    rooms=copy.deepcopy(current['rooms']);rooms['floors'][floor_of(MAP,rooms)]=draft['floors'][floor_of(MAP,draft)]
     write(OUT/'before-publish-rooms.json',current['rooms'])
     result=post(dict(rooms=rooms,revision=current['revision']));write(OUT/'save-receipt.json',result)
     saved=json.load(urllib.request.urlopen(URL,timeout=30));assert saved['rooms']==rooms
-    print('Saved one artifact on floor59; all existing items and other floors preserved.')
+    print('Saved one artifact on WaveFunctions_Intro; all existing items and other floors preserved.')
 if __name__=='__main__':publish() if '--publish' in sys.argv else prepare()

@@ -3,14 +3,15 @@ extends "res://tools/probes/zoetrope_playback.gd"
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59];building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown)
-	level_y = building.spec.levels[59];root.size = Vector2i(1440,900)
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i];building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown)
+	level_y = building.spec.levels[wave_floor];root.size = Vector2i(1440,900)
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("30383f")
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
@@ -18,16 +19,17 @@ func run() -> void:
 	var light := DirectionalLight3D.new();light.rotation_degrees = Vector3(-40,-30,0);light.light_energy = .9;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 58;scene.add_child(camera);camera.make_current()
 	await tick(15)
-	var single: Node3D = building.content.exhibits["59/hand-single-turntable"].get_node("Artifact")
-	var large: Node3D = building.content.exhibits["59/hand-scale-zoetrope"].get_node("Artifact")
-	var yoke: Node3D = building.content.exhibits["59/hand-sine-yoke"].get_node("Artifact")
+	var single: Node3D = building.content.exhibits["%d/hand-single-turntable" % wave_floor].get_node("Artifact")
+	var large: Node3D = building.content.exhibits["%d/hand-scale-zoetrope" % wave_floor].get_node("Artifact")
+	var yoke: Node3D = building.content.exhibits["%d/hand-sine-yoke" % wave_floor].get_node("Artifact")
 	work = single;pointer = Node3D.new();scene.add_child(pointer)
 	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("before-rooms.json")))
+	var before_i: int = VoidFloor.index(before, WAVE_MAP)
 	var all_kept := true
-	for a in before.floors[59].artifacts:
-		all_kept = all_kept and draft.floors[59].artifacts.any(func(b):return a.id==b.id and a.artifact==b.artifact and a.get("config",{})==b.get("config",{}))
-	check("all23 original occurrences kept and one turntable added",all_kept and draft.floors[59].artifacts.size()==24)
-	check("cube-wedge modules remain individually authored",draft.floors[59].construction.filter(func(c):return str(c.id).begins_with("wave-path-")).size()==31)
+	for a in before.floors[before_i].artifacts:
+		all_kept = all_kept and draft.floors[draft_i].artifacts.any(func(b):return a.id==b.id and a.artifact==b.artifact and a.get("config",{})==b.get("config",{}))
+	check("all23 original occurrences kept and one turntable added",all_kept and draft.floors[draft_i].artifacts.size()==24)
+	check("cube-wedge modules remain individually authored",draft.floors[draft_i].construction.filter(func(c):return str(c.id).begins_with("wave-path-")).size()==31)
 	check("one real cube fixed to one rotating platform",single.cubes.size()==1 and single.cubes[0].get_parent()==single.disk and single.part_defaults.size()==2 and not single.has_node("RoomShell"))
 	check("large24-frame disk retains original size and speed",large.cubes.size()==24 and large.plate_radius==2.5 and large.deck_y==2 and large.motor_rpm==60 and large.sample_hz==12)
 	single.set_process(false);single.auto_run = true;single.manual_cooldown = 0
@@ -67,7 +69,7 @@ func run() -> void:
 		var a := i*PI/36;controller.global_position = single.wheel.to_global(Vector3(cos(a)*.48,sin(a)*.48,.29));await tick(2)
 	check("supplied XR hand turns the yawed one-cube machine",single.wheel.grip.is_picked_up() and absf(single.angle_degrees-initial)>60)
 	single.wheel.grip.let_go(pickup,Vector3.ZERO,Vector3.ZERO);origin.queue_free();await tick(3)
-	check("X/Y rack and follower occupy the side study",building.content.exhibits["59/monitor"].position.x< -4 and building.content.exhibits["59/driven"].position.x< -4 and building.content.exhibits["59/clock"].position.x< -14)
+	check("X/Y rack and follower occupy the side study",building.content.exhibits["%d/monitor" % wave_floor].position.x< -4 and building.content.exhibits["%d/driven" % wave_floor].position.x< -4 and building.content.exhibits["%d/clock" % wave_floor].position.x< -14)
 	# Walk the intended path with the real capsule, gravity, slope rules and all
 	# authored collisions. No teleports, jumping, removed blockers or flight.
 	var plan: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("plan.json")))
@@ -98,7 +100,7 @@ func run() -> void:
 	await photo("03-yoke-entry",at(-.5,2.5,8.6),yoke.to_global(Vector3(.45,1.0,0)))
 	camera.fov = 70
 	await photo("04-raised-disk-view",at(5.1,2.6,-3.5),large.to_global(Vector3(.2,2.25,0)))
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual floor59 draft and original collisions; complete capsule route, production pointer controls and supplied-pose XR turntable grab. No physical-headset acceptance. Original artifacts retained; rack moved aside."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual WaveFunctions_Intro draft and original collisions; complete capsule route, production pointer controls and supplied-pose XR turntable grab. No physical-headset acceptance. Original artifacts retained; rack moved aside."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("WAVE_PATH_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

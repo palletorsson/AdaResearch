@@ -1,4 +1,5 @@
 extends "res://tools/probes/movable_pivot_probe.gd"
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
 ## Actual main tower, shared recipe and collisions. No synthetic traversal claim.
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
@@ -7,8 +8,9 @@ func run() -> void:
 	var world:=WorldEnvironment.new();var env:=Environment.new();env.background_mode=Environment.BG_COLOR;env.background_color=Color("bbb6bc");env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;env.ambient_light_color=Color.WHITE;env.ambient_light_energy=.8;world.environment=env;host.add_child(world)
 	var sun:=DirectionalLight3D.new();sun.rotation_degrees=Vector3(-50,-35,0);sun.light_energy=1.3;host.add_child(sun)
 	var building: Node3D=load("res://commons/void/architecture.gd").new();building.stream_content=true;host.add_child(building)
-	for i in [16,17,18]:building.content.load_floor(i)
-	await ticks(25);artifact=building.content.exhibits["16/twisting-tunnel"].get_node("Artifact");await artifact.prepare_editor_preview();await ticks(5)
+	var rot: int=VoidFloor.of("Trans_Rotation") # the tunnel's floor; it descends through the next two
+	for i in [rot,rot+1,rot+2]:building.content.load_floor(i)
+	await ticks(25);artifact=building.content.exhibits["%d/twisting-tunnel" % rot].get_node("Artifact");await artifact.prepare_editor_preview();await ticks(5)
 	check("saved main Rotation floor loads the full-size square recipe",artifact.has_node("Portal01") and artifact.has_node("EntryBridge") and artifact.global_position.is_equal_approx(Vector3(10,-96,0)))
 	var envelope:=AABB();var first:=true;var exclude: Array[RID]=[]
 	for body in artifact.find_children("*","CollisionObject3D",true,false):exclude.append(body.get_rid())
@@ -42,10 +44,10 @@ func run() -> void:
 			var point: Vector3=bridge.to_global(Vector3(0,.09,sign*(length/2-.15)))
 			var query:=PhysicsRayQueryParameters3D.create(point+Vector3.UP*.2,point-Vector3.UP*.5,1);query.exclude=exclude
 			var hit: Dictionary=host.get_world_3d().direct_space_state.intersect_ray(query)
-			if not hit.is_empty() and (building.floors[16].is_ancestor_of(hit.collider) or building.floors[18].is_ancestor_of(hit.collider) or building.floors[17].is_ancestor_of(hit.collider)):surface=true
+			if not hit.is_empty() and (building.floors[rot].is_ancestor_of(hit.collider) or building.floors[rot+2].is_ancestor_of(hit.collider) or building.floors[rot+1].is_ancestor_of(hit.collider)):surface=true
 		check(id+" overlaps a real tower slab",surface);landing_results.append({"id":id,"slab_supported":surface})
 	var record: Dictionary={"artifact":"spatial_recipe","config":artifact.cfg.duplicate(true) if artifact.get("cfg")!=null else {},"parts":{}}
-	for item in building.content.data.floors[16].artifacts:
+	for item in building.content.data.floors[rot].artifacts:
 		if item.id=="twisting-tunnel":record.config=item.config.duplicate(true)
 	for child in artifact.get_children():
 		if child is Node3D and artifact.part_defaults.has(str(child.name)):
@@ -54,7 +56,7 @@ func run() -> void:
 	camera=Camera3D.new();camera.fov=60;host.add_child(camera)
 	for layer in root.find_children("*","CanvasLayer",true,false):layer.hide()
 	await shot("03-floor16-entry",Vector3(-1.5,1.7,5),Vector3(-.4,1.0,1.5))
-	for i in [16,17,18]:building.floors[i].hide()
+	for i in [rot,rot+1,rot+2]:building.floors[i].hide()
 	await shot("04-floor16-descent",Vector3(10,3,13),Vector3(0,-5,0))
 	var failed: Array=checks.filter(func(c):return not c.passed)
 	FileAccess.open(pictures.path_join("floor16-checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty() and failures.is_empty(),"checks":checks,"obstructions":obstructions,"landings":landing_results,"scope":"Actual main floors 16–18, native geometry and collision, unchanged shaft envelope, entry/exit slab overlap and exported independent members. Descent photo hides slab visuals. Whole-body passage and headset comfort remain unverified."},"  "))

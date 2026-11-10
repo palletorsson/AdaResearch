@@ -1,12 +1,14 @@
 extends "res://tools/probes/void_game_probe.gd"
 ## THE COLOUR FLOORS SURVEYED (Palle, 2026-11-05: "test and curate other artifacts ... start from the color sequence
-## ... how they fit into the room ... have presence, many work but others not fully"). Floors 30-37 in the actual Void:
+## ... how they fit into the room ... have presence, many work but others not fully"). The eight Colour floors in the actual Void:
 ## every mounted work measured - its meshes' world box (presence), visible meshes, bodies (can it be touched or walked
 ## into), labels (does it speak), its distance from the floor's route (is it met), whether it stands on slab, and how
 ## long it took to build - and photographed: each floor from two vantages, each work from 3 m, framed by its box.
 ## Report ada_run/color-survey/desktop/survey.json. Run: python tools/test_color_survey.py
-const FLOORS := [30, 31, 32, 33, 34, 35, 36, 37]
-var floors: Array = FLOORS
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+## The Colour floors by MAP NAME (30-37 on 2026-11-05); --floors= still takes indices.
+const COLOUR_MAPS := ["Color_Context_Placed", "Color_Flashlight", "Color_Nails", "Color_Rainbow", "Color_Pillar", "Color_Grid_Pallet", "Color_Paint", "Color_Walls"]
+var floors: Array = VoidFloor.all(COLOUR_MAPS)
 
 ## The world box of a work's meshes: the local box of each mesh carried by its own global transform, merged.
 func world_bounds(host: Node3D) -> AABB:

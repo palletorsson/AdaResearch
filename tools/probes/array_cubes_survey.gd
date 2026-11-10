@@ -1,7 +1,7 @@
 extends "res://tools/probes/void_game_probe.gd"
-## Survey (2026-11-04): every pick-up cube of floor 25 (Array) - its mount, the bottom of its body, its motion, and what
+## Survey (2026-11-04): every pick-up cube of the Array floor - its mount, the bottom of its body, its motion, and what
 ## stands under it. Writes <out>/cubes.json. Run once from a staged runtime (see the inventory runners).
-const FLOOR := 25
+var FLOOR: int = preload("res://tools/probes/void_floor.gd").of("Array")
 
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():

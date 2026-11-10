@@ -18,13 +18,14 @@ func walk(visitor: CharacterBody3D, targets: Array, label: String) -> void:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59];building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown);level_y = building.spec.levels[59]
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i];building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown);level_y = building.spec.levels[wave_floor]
 	root.size = Vector2i(1440,900)
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("30383f")
@@ -36,15 +37,15 @@ func run() -> void:
 	var score: Node = load("res://commons/void/lesson_score.gd").new();scene.add_child(score)
 	var pickups: Array = []
 	for id in ["pickup-still","pickup-turn","pickup-transform","size-1","size-2","size-3","size-4","size-5"]:
-		var pickup: Node3D = building.content.exhibits["59/"+id].get_node("Artifact")
+		var pickup: Node3D = building.content.exhibits["%d/" % wave_floor + id].get_node("Artifact")
 		pickup.score_provider = score;pickups.append(pickup)
 	await tick(30)
-	check("all22 artifacts retained including hand wheel",draft.floors[59].artifacts.size()==22 and building.content.exhibits.has("59/hand-sine-yoke"))
-	check("no workbench props remain",draft.floors[59].props.all(func(p):return p.kind!="workbench"))
-	check("27 original cube and wp modules built",draft.floors[59].construction.size()==27 and building.content.roots[59].has_node("Construction"))
+	check("all22 artifacts retained including hand wheel",draft.floors[draft_i].artifacts.size()==22 and building.content.exhibits.has("%d/hand-sine-yoke" % wave_floor))
+	check("no workbench props remain",draft.floors[draft_i].props.all(func(p):return p.kind!="workbench"))
+	check("27 original cube and wp modules built",draft.floors[draft_i].construction.size()==27 and building.content.roots[wave_floor].has_node("Construction"))
 	check("all eight pickups remain until approached",score.score==0 and pickups.all(func(n):return is_instance_valid(n) and not n.has_been_collected))
-	var clock: Node3D = building.content.exhibits["59/clock"].get_node("Artifact")
-	var driven: Node3D = building.content.exhibits["59/driven"].get_node("Artifact")
+	var clock: Node3D = building.content.exhibits["%d/clock" % wave_floor].get_node("Artifact")
+	var driven: Node3D = building.content.exhibits["%d/driven" % wave_floor].get_node("Artifact")
 	var clock_low := INF;var driven_low := INF
 	for i in 240:
 		var clock_box: AABB = clock._cube_mesh.global_transform*clock._cube_mesh.get_aabb()
@@ -78,7 +79,7 @@ func run() -> void:
 	check("size pickup route collects original five sizes",score.score==8)
 	visitor.position = at(-3.8,.06,7.3);visitor.velocity = Vector3.ZERO;await tick(8)
 	await walk(visitor,[at(-.6,0,7.3),at(-.6,0,4.6),at(1.35,0,4.6),at(1.35,0,1.8),at(-4.6,0,1.8),at(-4.6,0,4.6)],"wheel approach and shared block bypass remain clear")
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Main floor59 source geometry, original animated cube clearance sample, actual desktop capsule walking wp ramps without jumps, original body-overlap pickup collection with isolated score, and wheel/bay bypass. Physical XR headset and a new scale/rotate room are outside this check."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Main WaveFunctions_Intro source geometry, original animated cube clearance sample, actual desktop capsule walking wp ramps without jumps, original body-overlap pickup collection with isolated score, and wheel/bay bypass. Physical XR headset and a new scale/rotate room are outside this check."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("BLOCK_SUPPORTS_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

@@ -28,14 +28,15 @@ func pixels() -> Dictionary:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59];building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown)
-	level_y = building.spec.levels[59];root.size = Vector2i(1440,900)
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i];building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown)
+	level_y = building.spec.levels[wave_floor];root.size = Vector2i(1440,900)
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("30383f")
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
@@ -43,7 +44,7 @@ func run() -> void:
 	scene.add_child(env)
 	var light := DirectionalLight3D.new();light.rotation_degrees = Vector3(-40,-30,0);light.light_energy = .8;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 60;scene.add_child(camera);camera.make_current()
-	work = building.content.exhibits["59/hand-scale-zoetrope"].get_node("Artifact")
+	work = building.content.exhibits["%d/hand-scale-zoetrope" % wave_floor].get_node("Artifact")
 	pointer = Node3D.new();scene.add_child(pointer)
 	var start: float = work.angle_degrees;await tick(15)
 	check("default motor advances without a hand and blind starts off",work.auto_run and not work.shutter.visible and absf(work.angle_degrees-start)>5)
@@ -158,7 +159,7 @@ func run() -> void:
 	await photo("04-shutter-between-frames",work.to_global(Vector3(0,1.45,3.3)),work.to_global(Vector3(0,1.2,1.25)))
 	work.set_shutter(false);reset_motion(60,24);work.match_clock();work.refresh_controls();camera.fov=44
 	await photo("05-matched-clock-reading",work.to_global(Vector3(1.03,2.0,3.55)),work.console.global_position)
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual floor59 source, production pointer buttons/faders, manual override and release, supplied-pose XR grip, time-based motion, local sample clocks, native rendered cube widths with shutter off/on, real measured render loops, copied part configuration. No physical-headset or subjective smoothness acceptance."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual WaveFunctions_Intro source, production pointer buttons/faders, manual override and release, supplied-pose XR grip, time-based motion, local sample clocks, native rendered cube widths with shutter off/on, real measured render loops, copied part configuration. No physical-headset or subjective smoothness acceptance."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("ZOETROPE_PLAYBACK_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

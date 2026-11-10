@@ -1,6 +1,8 @@
 extends SceneTree
 ## Human play only: read the latest saved tower; keep tour/spawn state in memory.
 const OUT := "res://ada_run/matter-studies-desktop/"
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+var kf := -1 # the Kinetic Forces floor, set by name in open_game()
 var game: Node3D
 var index := 0
 var busy := false
@@ -25,7 +27,7 @@ class TourKeys extends Node:
 func _initialize() -> void:open_game.call_deferred()
 
 func work() -> Node3D:
-	return game.building.content.exhibits["46/"+str(stops[index].id)].get_node("Artifact")
+	return game.building.content.exhibits["%d/" % kf + str(stops[index].id)].get_node("Artifact")
 
 func face_work() -> void:
 	var delta: Vector3 = work().to_global(Vector3(0,1.15,0))-game.body.camera.global_position
@@ -35,13 +37,13 @@ func face_work() -> void:
 func visit(next: int) -> void:
 	if busy:return
 	busy = true;index = posmod(next,stops.size())
-	var at: Vector3 = work().get_node("Controls").to_global(Vector3(0,0,1.5));at.y = game.building.spec.levels[46]+.06
-	game.building.spec.get_or_add("spawn_points",{})["46"] = [at.x,.06,at.z]
-	game.place_player(at);game.checkpoint = 46
+	var at: Vector3 = work().get_node("Controls").to_global(Vector3(0,0,1.5));at.y = game.building.spec.levels[kf]+.06
+	game.building.spec.get_or_add("spawn_points",{})[str(kf)] = [at.x,.06,at.z]
+	game.place_player(at);game.checkpoint = kf
 	for n in 15:await physics_frame
 	face_work();game.body.camera.make_current()
 	caption.text = "%d / %d   %s\nF6: next · F7: previous · F8: reset this study\n%s"%[index+1,stops.size(),stops[index].title,stops[index].tip]
-	DisplayServer.window_set_title("Ada / Floor 46 / "+str(stops[index].title)+" / F6 next")
+	DisplayServer.window_set_title("Ada / Floor %d / " % kf+str(stops[index].title)+" / F6 next")
 	busy = false
 
 func reset_current() -> void:
@@ -57,9 +59,10 @@ func make_tour_ui() -> void:
 
 func open_game() -> void:
 	load("res://commons/void/room_source.gd").use_main_tower = true
+	kf = VoidFloor.of("Vectors_Act4a_KineticForces")
 	game = load("res://commons/void/void.tscn").instantiate();game.force_xr = false;root.add_child(game);current_scene = game;game.scene_loaded();game.scene_visible()
 	for n in 600:
-		if game.building.content.exhibits.has("46/matter-leaning-together") and game.floor_stream.focus==46:break
+		if game.building.content.exhibits.has("%d/matter-leaning-together" % kf) and game.floor_stream.focus==kf:break
 		await physics_frame
 	for n in 20:await physics_frame
 	make_tour_ui();game.body.camera.fov = 85;await visit(0)

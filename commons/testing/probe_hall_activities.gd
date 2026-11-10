@@ -1,6 +1,6 @@
 extends Node3D
 ## THE SAMPLES IN THE HALL (Palle, 2026-10-31: "at what level can I see the samples"): the principal-places hall
-## (Void floor 210) builds four activities from its recipe - noise on the disco plate, random in the biome bath, the
+## (Void floor Playground_PrincipalPlaces) builds four activities from its recipe - noise on the disco plate, random in the biome bath, the
 ## sine floor in the hanging basin, a noise wall on the bath's north wall - each fitted and rimmed where its place is.
 ## Writes ada_run/workstation/hall_activities.json. Run: godot --path . --xr-mode off --resolution 1280x800 res://commons/testing/probe_hall_activities.tscn
 

@@ -1,6 +1,6 @@
 extends Node3D
 ## THE BALL PIT in the ANNEX (Palle, 2026-11-02, "ok" to the pit as the next step; "100 might be a bit too much for
-## the VR set?"; and "make a new map with the artifacts that do not fit on the floor"). The pit stood off floor 210's
+## the VR set?"; and "make a new map with the artifacts that do not fit on the floor"). The pit stood off the biome court floor's
 ## slab; it stands in the playground annex now (commons/data/playgrounds/halls/playground_annex.json, the Void trial
 ## playground_annex) - a plastic pool, rim at 1 m, climbed by a ramp, a screen wall on its north side - and the
 ## ball_pit artifact fills it at ready. Checks: (A) the annex spec compiles with no errors and the pit stands at its

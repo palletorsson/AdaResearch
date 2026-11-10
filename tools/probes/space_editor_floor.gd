@@ -1,9 +1,9 @@
 extends "res://tools/probes/void_game_probe.gd"
-## THE SPACE EDITOR ON FLOOR 20 (Trans_Playground), the display workstation in `space` mode from rooms.json, built
+## THE SPACE EDITOR ON THE TRANS_PLAYGROUND FLOOR, the display workstation in `space` mode from rooms.json, built
 ## in the actual tower: the box with its base plane 1 m over the slab, panes without colliders, the table dark, the
 ## sockets lit, the visor docked - and photographed. Nothing is fired here: the station persists Palle's own
 ## construction. Run: python tools/test_space_editor.py
-var floors: Array = [20]
+var floors: Array = [] # --floors=a,b; default the Trans_Playground floor, found by name in run()
 
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
@@ -11,6 +11,7 @@ func run() -> void:
 		if arg.begins_with("--floors="):
 			floors = []
 			for s in arg.trim_prefix("--floors=").split(","): floors.append(int(s))
+	if floors.is_empty(): floors = [preload("res://tools/probes/void_floor.gd").of("Trans_Playground")]
 	Engine.physics_ticks_per_second = 90
 	preload("res://commons/void/room_source.gd").use_main_tower = true
 	load("res://commons/void/game.gd").requested_floor = int(floors[0])

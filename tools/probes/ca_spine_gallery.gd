@@ -8,7 +8,7 @@ func run() -> void:
 	await start(false)
 	for floor in selected_floors:
 		level = floor;game.place_player(game.spawn_for(level));await frames(90)
-		var y: float = game.building.spec.levels[level]
+		var y: float = game.building.spec.levels[level];var hall: String = str(game.building.content.data.floors[level].map)
 		check(str(level)+" safe main-floor arrival",game.body.is_on_floor() and absf(game.body.global_position.y-y)<.2)
 		for entry in game.building.content.data.floors[level].artifacts:
 			var node: Node3D = station(entry.id);var boxes: Array = [];geometry(node,boxes)
@@ -19,13 +19,13 @@ func run() -> void:
 			measured_rows.append({"floor":level,"id":entry.id,"artifact":entry.artifact,"min":[b.position.x,b.position.y,b.position.z],"max":[b.end.x,b.end.y,b.end.z]})
 			check(str(level)+"/"+entry.id+" fits tower XZ",b.position.x>=-21.05 and b.end.x<=21.05 and b.position.z>=-9.05 and b.end.z<=9.05)
 		await photo("ca-%d-overview"%level,Vector3(0,y+2.6,8.7),Vector3(0,y+1.2,-1))
-		if floor==103:
+		if hall=="CA_Introduction":
 			await photo("ca-103-neighbourhood",Vector3(-.3,y+1.85,5.2),Vector3(-3.5,y+1.4,1.8))
-		if floor==105:
+		if hall=="CA_GameOfLife":
 			await photo("ca-105-laboratory",Vector3(-12.8,y+2.2,7.5),Vector3(-16.2,y+1.7,0))
-		if floor==108:
+		if hall=="CA_SoftRules":
 			await photo("ca-108-exchange",Vector3(-4.5,y+2.2,7.5),Vector3(0,y+1.4,1))
-		if floor==110:
+		if hall=="CA_EdgeOfChaos":
 			await photo("ca-110-infection",Vector3(12.8,y+2.3,6.5),Vector3(16,y+2.3,0))
 		FileAccess.open(out.path_join("final-bounds.json"),FileAccess.WRITE).store_string(JSON.stringify(measured_rows,"  "))
 	FileAccess.open(out.path_join("gallery-checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failed":failed,"passed":failed.is_empty()},"  "))

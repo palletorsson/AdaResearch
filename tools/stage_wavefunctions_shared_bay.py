@@ -6,6 +6,8 @@ import urllib.request
 import urllib.error
 import hashlib
 from pathlib import Path
+from void_floors import floor_of
+MAP='WaveFunctions_Intro' # found by MAP NAME in each rooms document (index 59 in the 2026-10-2x drafts)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'ada_run/wavefunctions-shared-bay'
@@ -24,7 +26,7 @@ def prepare():
     current = json.load(urllib.request.urlopen(URL, timeout=30))
     assert not (OUT / 'before-rooms.json').exists(), 'Preserve the current draft and edits.'
     rooms = copy.deepcopy(current['rooms'])
-    floor = rooms['floors'][59]
+    floor = rooms['floors'][floor_of(MAP,rooms)]
     assert floor['map'] == 'WaveFunctions_Intro'
     assert not any(p['id'].startswith('return-bay-') for p in floor['props'])
     clock = next(a for a in floor['artifacts'] if a['id'] == 'clock')
@@ -55,17 +57,17 @@ def publish():
     draft = json.loads((OUT / 'draft-rooms.json').read_text(encoding='utf-8'))
     current = json.load(urllib.request.urlopen(URL, timeout=30))
     # Preserve concurrent work on other floors; refuse to overwrite this floor.
-    assert current['rooms']['floors'][59] == before['floors'][59], 'Floor59 changed; merge by review.'
+    assert current['rooms']['floors'][floor_of(MAP,current['rooms'])] == before['floors'][floor_of(MAP,before)], 'WaveFunctions_Intro changed; merge by review.'
     rooms = copy.deepcopy(current['rooms'])
-    rooms['floors'][59] = draft['floors'][59]
+    rooms['floors'][floor_of(MAP,rooms)] = draft['floors'][floor_of(MAP,draft)]
     (OUT / 'before-publish-rooms.json').write_text(json.dumps(current['rooms'], indent=2) + '\n', encoding='utf-8')
     receipt = post(dict(rooms=rooms, revision=current['revision']))
     saved = json.load(urllib.request.urlopen(URL, timeout=30))['rooms']
     assert saved == rooms
     (OUT / 'save-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
     assert all(saved['floors'][i] == current['rooms']['floors'][i]
-               for i in range(len(saved['floors'])) if i != 59)
-    print('Saved only floor59 through the revisioned editor API; other floors preserved.')
+               for i in range(len(saved['floors'])) if i != floor_of(MAP,current['rooms']))
+    print('Saved only WaveFunctions_Intro through the revisioned editor API; other floors preserved.')
 
 if __name__ == '__main__':
     publish() if '--publish' in sys.argv else prepare()

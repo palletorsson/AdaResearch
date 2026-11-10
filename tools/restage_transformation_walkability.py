@@ -1,6 +1,7 @@
 """Stage bodily encounters, preserving all original exhibits and other floors."""
 import copy, json, urllib.request
 from pathlib import Path
+from void_floors import floor_of
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'ada_run/transformation-walkability'; OUT.mkdir(parents=True,exist_ok=True)
@@ -45,7 +46,7 @@ for c in f['construction']:
 f['title']='Rotation / four walkable angle gradients'
 route(f,[('Climb the common start bank',[-9.5,-7.5],0),('Choose X, Y, Z or combined turns',[-6.5,0],3),('Walk across the same six angles',[0,2],3),('Compare the two body widths',[0,0],0),('Descend the finish bank',[9.5,7.5],0),('Return through the wheel or hollow cubes',[10,0],0)])
 
-f=rooms['floors'][18]; f['construction']=[]; f['walls']=[]
+f=rooms['floors'][floor_of('Trans_Body',rooms)]; f['construction']=[]; f['walls']=[]
 for a in f['artifacts']:
     if a['artifact']=='approach_wall':
         a.update(position=[-15,0],facing=90,scale=1)

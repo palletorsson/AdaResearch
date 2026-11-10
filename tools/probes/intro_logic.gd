@@ -38,6 +38,7 @@ func run() -> void:
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
 	building.content.data.floors[14] = draft.floors[14];building.content.load_floor(14)
 	var shown: Array[int] = [14];building.show_floor_window(shown)
 	level_y = building.spec.levels[14];root.size = Vector2i(1440,900)
@@ -50,7 +51,8 @@ func run() -> void:
 	var inventory: Node = load("res://commons/void/prefab_inventory.gd").new();scene.add_child(inventory);inventory.bind_lesson(building.content,"")
 	await tick(30)
 	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("before-rooms.json")))
-	check("floor7 AND and floor59 machines preserved",before.floors[7]==draft.floors[7] and before.floors[59]==draft.floors[59])
+	var before_i: int = VoidFloor.index(before, WAVE_MAP)
+	check("floor7 AND and WaveFunctions_Intro machines preserved",before.floors[7]==draft.floors[7] and before.floors[before_i]==draft.floors[draft_i])
 	check("standard floor and raised crossing retained",building.spec.width==42 and draft.floors[14].construction==before.floors[14].construction and draft.floors[14].artifacts[0]==before.floors[14].artifacts[0])
 	var runs: Array = []
 	for op in ["AND","OR","NOT"]:

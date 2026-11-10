@@ -1,4 +1,6 @@
 extends "res://tools/probes/threshold_workshop_main.gd"
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
+var kinetic_floor := -1 # set in run(), by name, in the rooms the game reads (--void-draft= honoured)
 ## Actual main tutorial and real pointer/grip input. No source artifacts replaced.
 func press(button: Node3D) -> void:
 	if xr:await super.press(button);return
@@ -15,7 +17,7 @@ func press(button: Node3D) -> void:
 		await input_aim_camera(target,8)
 
 func friction_visit(kind: String) -> Node3D:
-	var work: Node3D = station("matter-friction-"+kind);var foot: Vector3 = work.get_node("Controls").to_global(Vector3(0,0,1.5));foot.y = game.building.spec.levels[46]+.06;game.place_player(foot);await frames(20);active_tag = ("XR / " if xr else "Desktop / ")+kind+" / ";return work
+	var work: Node3D = station("matter-friction-"+kind);var foot: Vector3 = work.get_node("Controls").to_global(Vector3(0,0,1.5));foot.y = game.building.spec.levels[kinetic_floor]+.06;game.place_player(foot);await frames(20);active_tag = ("XR / " if xr else "Desktop / ")+kind+" / ";return work
 
 func wait_reading(work: Node3D) -> void:
 	for n in 650:
@@ -27,12 +29,12 @@ func snap(work: Node3D,name: String) -> void:
 	await input_aim_camera(work.to_global(Vector3(.3,1.0,.1)),20);await frames(3);await RenderingServer.frame_post_draw;root.get_texture().get_image().save_png(out.path_join("friction-main-"+name+".png"))
 
 func run() -> void:
-	root.size = Vector2i(1440,900);level = 46
+	root.size = Vector2i(1440,900);kinetic_floor = VoidFloor.of("Vectors_Act4a_KineticForces");level = kinetic_floor
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
 	for use_xr in [false,true]:
-		await start(use_xr);var tag := "XR / " if xr else "Desktop / ";var y: float = game.building.spec.levels[46]
-		check(tag+"main floor retains all five originals and three new mechanisms",game.checkpoint==46 and game.building.content.data.floors[46].artifacts.size()==8 and game.building.spec.width==42)
+		await start(use_xr);var tag := "XR / " if xr else "Desktop / ";var y: float = game.building.spec.levels[kinetic_floor]
+		check(tag+"main floor retains all five originals and three new mechanisms",game.checkpoint==kinetic_floor and game.building.content.data.floors[kinetic_floor].artifacts.size()==8 and game.building.spec.width==42)
 		game.place_player(Vector3(-14.2,y+.06,3.2));await frames(20)
 		for destination in [Vector3(-18,y,3.2),Vector3(-18,y,-2.65),Vector3(-16,y,-2.65),Vector3(-18,y,-2.65),Vector3(-18,y,3.2),Vector3(15.8,y,3.2),Vector3(15.8,y,-2.6)]:check(tag+"approach on solid slab "+str(destination),await move_to(destination,false,1200))
 		var ramp: Node3D = await friction_visit("ramp");check(active_tag+"controls stand on solid slab",game.body.is_on_floor() and not game.recovering)
@@ -54,5 +56,5 @@ func run() -> void:
 		game.queue_free();await frames(12)
 		if xr:
 			for tracker in [head,left,right]:XRServer.remove_tracker(tracker)
-	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"scope":"Three new mechanisms on main floor 46. Actual desktop/synthetic XR movement, parameter/release/reset controls, real cube pickup/reset, measured contact/cable motion and a weight above shaft A. Ideal elastic cable is explicit; no physical-headset acceptance."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"scope":"Three new mechanisms on the main Vectors_Act4a_KineticForces floor. Actual desktop/synthetic XR movement, parameter/release/reset controls, real cube pickup/reset, measured contact/cable motion and a weight above shaft A. Ideal elastic cable is explicit; no physical-headset acceptance."}
 	FileAccess.open(out.path_join("friction-main-checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "));print("MATTER_REFERENCE_RESULT ",JSON.stringify(report));quit(0 if failed.is_empty() else 1)

@@ -3,14 +3,15 @@ extends "res://tools/probes/zoetrope_playback.gd"
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59];building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown)
-	level_y = building.spec.levels[59];root.size = Vector2i(1440,900)
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i];building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown)
+	level_y = building.spec.levels[wave_floor];root.size = Vector2i(1440,900)
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("30383f")
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
@@ -18,7 +19,7 @@ func run() -> void:
 	var light := DirectionalLight3D.new();light.rotation_degrees = Vector3(-40,-30,0);light.light_energy = .9;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 58;scene.add_child(camera);camera.make_current()
 	await tick(15)
-	work = building.content.exhibits["59/hand-scale-zoetrope"].get_node("Artifact")
+	work = building.content.exhibits["%d/hand-scale-zoetrope" % wave_floor].get_node("Artifact")
 	pointer = Node3D.new();scene.add_child(pointer)
 	check("room walls, ceiling, floor and service leaf removed",not work.has_node("RoomShell") and not work.has_node("ServicePanel"))
 	check("disk and control stand remain separate editable groups",work.part_defaults.size()==2 and work.part_defaults.has("DiskAndCrank") and work.part_defaults.has("PlaybackControls"))
@@ -49,7 +50,7 @@ func run() -> void:
 				var corner: Vector3 = a.transform*Vector3(x*a.mesh.size.x,0,z*a.mesh.size.z)
 				on_plate = on_plate and Vector2(corner.x,corner.z).length()<2.49
 	check("24 cube footprints fit inside plate with neighbour gaps",clear and on_plate)
-	var yoke: Node3D = building.content.exhibits["59/hand-sine-yoke"].get_node("Artifact")
+	var yoke: Node3D = building.content.exhibits["%d/hand-sine-yoke" % wave_floor].get_node("Artifact")
 	check("hand-yoke shares outlined ivory cube and pink grip",yoke.cube.material_override.albedo_color==work.MachineFinish.IVORY and yoke.cube.has_node("AbstractOutline") and yoke.wheel.rotor.get_node("PinkGrip").material_override.albedo_color==work.MachineFinish.PINK)
 
 	work.set_process(false);reset_motion(60,12)
@@ -79,7 +80,7 @@ func run() -> void:
 	await photo("02-floor-eye-view",work.to_global(Vector3(.2,1.65,4.35)),work.to_global(Vector3(.4,1.9,.3)))
 	camera.fov = 48
 	await photo("03-yoke-palette",yoke.to_global(Vector3(2.5,2.1,3.3)),yoke.to_global(Vector3(.55,1.1,0)))
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"scope":"Actual floor59:5m black-steel disk,24 fixed outlined ivory cubes,pink handles,pairwise footprint clearance,reachable controls,shared yoke palette,24-frame MATCH,desktop wheel override/release/RUN. No new physical-headset acceptance."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"scope":"Actual WaveFunctions_Intro floor:5m black-steel disk,24 fixed outlined ivory cubes,pink handles,pairwise footprint clearance,reachable controls,shared yoke palette,24-frame MATCH,desktop wheel override/release/RUN. No new physical-headset acceptance."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("ZOETROPE_FINISH_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

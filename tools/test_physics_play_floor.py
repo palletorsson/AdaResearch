@@ -1,7 +1,8 @@
-"""Physics play on floor 21 (Logic_Event; moved from floor 14 on 2026-11-03) in the actual tower, desktop walker.
+"""Physics play on the Logic_Event floor (moved from floor 14 on 2026-11-03) in the actual tower, desktop walker.
 Probe: tools/probes/physics_play_floor.gd. Bench: tools/test_physics_play.py.
 Output: ada_run/physics-play-floor/<survey|desktop>/checks.json (+ survey.json, photographs)."""
 from pathlib import Path
+from void_floors import floor_of
 import json, os, subprocess, sys
 from void_trial_runtime import stage_runtime
 from void_native_slot import acquire_native_slot
@@ -17,7 +18,7 @@ def main():
     destination.mkdir(parents=True, exist_ok=True)
     for stale in ('checks.json', 'progress.json', 'godot.log', 'survey.json'):
         (destination / stale).unlink(missing_ok=True)   # a crash must not read the last run's report
-    slot = acquire_native_slot('Physics play floor 21', timeout=7200)
+    slot = acquire_native_slot('Physics play floor %d (Logic_Event)' % floor_of('Logic_Event'), timeout=7200)
     stage = stage_runtime()
     with (destination / 'engine.log').open('w', encoding='utf8') as stream:
         # the 16-second rule: the watchdog kills a run that stops writing (the tower boots in ~60 s)

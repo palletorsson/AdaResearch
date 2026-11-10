@@ -1,5 +1,5 @@
 extends "res://tools/probes/void_game_probe.gd"
-## PHYSICS PLAY ON FLOOR 21 (Logic_Event, "event and consequence"), in the actual tower. First stood on floor 14
+## PHYSICS PLAY ON THE LOGIC_EVENT FLOOR ("event and consequence"), in the actual tower. First stood on floor 14
 ## (Trans_Introduction) in place of the logic gates; Palle moved it on 2026-11-03 to open Logic, with the five
 ## tipping-point thresholds beside it (threshold_descent went to Form Finding). Built by the floor from
 ## commons/void/rooms.json: still before RELEASE, moving after it, home after RESET, nothing lost off the floor, and a

@@ -11,15 +11,16 @@ func green_count() -> int:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59]
-	building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown)
-	level_y = building.spec.levels[59];root.size = Vector2i(1440,900)
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i]
+	building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown)
+	level_y = building.spec.levels[wave_floor];root.size = Vector2i(1440,900)
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("30383f")
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
@@ -29,11 +30,11 @@ func run() -> void:
 	light.light_energy = .9;light.shadow_enabled = true;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 52;scene.add_child(camera)
 	await tick(30)
-	work = building.content.exhibits["59/hand-scale-zoetrope"].get_node("Artifact")
+	work = building.content.exhibits["%d/hand-scale-zoetrope" % wave_floor].get_node("Artifact")
 	# This older geometric/manual probe deliberately pauses the new motor.
 	work.auto_run = false;work.set_shutter(true);work.wheel.set_angle_degrees(0)
 	var wheel: Node3D = work.wheel
-	check("one additive study on standard floor, original22 and27 modules retained",draft.floors[59].artifacts.size()==23 and draft.floors[59].construction.size()==27 and building.spec.width==42)
+	check("one additive study on standard floor, original22 and27 modules retained",draft.floors[draft_i].artifacts.size()==23 and draft.floors[draft_i].construction.size()==27 and building.spec.width==42)
 	var phases: Array = [];var shapes: Array = []
 	for cube in work.cubes:phases.append(cube.transform);shapes.append(cube.mesh.get_aabb().size)
 	var owner := Node3D.new();scene.add_child(owner)
@@ -155,7 +156,7 @@ func run() -> void:
 	await photo("05-twelve-fixed-cubes-inspection",at(3.8,4.4,-2.5),at(1,1.2,-5.4))
 	work.shell.visible = true;work.panel.visible = true;work.set_service_open(false,true);wheel.set_angle_degrees(0)
 	owner.queue_free()
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Native main floor59; production pointer, supplied-pose XRTools grip, physical panel, fixed frame geometry, actual optical isolation renders, moved/rotated editable assembly, desktop capsule access. Ideal gearing; physical headset and perceptual smoothness are not accepted by these tests."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Native main WaveFunctions_Intro floor; production pointer, supplied-pose XRTools grip, physical panel, fixed frame geometry, actual optical isolation renders, moved/rotated editable assembly, desktop capsule access. Ideal gearing; physical headset and perceptual smoothness are not accepted by these tests."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("SCALE_ZOETROPE_RESULT ",checks.size()," failures:",failed)
 	quit(0 if failed.is_empty() else 1)

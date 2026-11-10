@@ -20,23 +20,25 @@ func xr_turn(control: Node3D) -> bool:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
-	Source.use_main_tower = true
+	Source.use_main_tower = true;wave_floor = VoidFloor.of(WAVE_MAP)
 	scene = Node3D.new();root.add_child(scene);current_scene = scene;root.size = Vector2i(1440,900)
 	var building: Node3D = load("res://commons/void/architecture.gd").new();building.stream_content = true;scene.add_child(building)
 	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("draft-rooms.json")))
+	var draft_i: int = VoidFloor.index(draft, WAVE_MAP)
 	var before: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("before-rooms.json")))
-	building.content.data.floors[59] = draft.floors[59];building.content.load_floor(59)
-	var shown: Array[int] = [59];building.show_floor_window(shown);level_y = building.spec.levels[59]
+	var before_i: int = VoidFloor.index(before, WAVE_MAP)
+	building.content.data.floors[wave_floor] = draft.floors[draft_i];building.content.load_floor(wave_floor)
+	var shown: Array[int] = [wave_floor];building.show_floor_window(shown);level_y = building.spec.levels[wave_floor]
 	var env := WorldEnvironment.new();env.environment = Environment.new()
 	env.environment.background_mode = Environment.BG_COLOR;env.environment.background_color = Color("302e38")
 	env.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR;env.environment.ambient_light_color = Color("e8dfe6")
 	env.environment.ambient_light_energy = .5;env.environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC;scene.add_child(env)
 	var light := DirectionalLight3D.new();light.rotation_degrees = Vector3(-38,-28,0);light.light_energy = .8;light.shadow_enabled = true;scene.add_child(light)
 	camera = Camera3D.new();camera.fov = 57;scene.add_child(camera);camera.make_current();await tick(12)
-	work = building.content.exhibits["59/two-wheel-belt-drive"].get_node("Artifact")
-	var preserved: bool = draft.floors[59].construction==before.floors[59].construction and draft.floors[59].props==before.floors[59].props
-	for item in before.floors[59].artifacts:preserved = preserved and draft.floors[59].artifacts.has(item)
-	check("one additive mechanism preserves every existing placement",preserved and draft.floors[59].artifacts.size()==before.floors[59].artifacts.size()+1)
+	work = building.content.exhibits["%d/two-wheel-belt-drive" % wave_floor].get_node("Artifact")
+	var preserved: bool = draft.floors[draft_i].construction==before.floors[before_i].construction and draft.floors[draft_i].props==before.floors[before_i].props
+	for item in before.floors[before_i].artifacts:preserved = preserved and draft.floors[draft_i].artifacts.has(item)
+	check("one additive mechanism preserves every existing placement",preserved and draft.floors[draft_i].artifacts.size()==before.floors[before_i].artifacts.size()+1)
 	var start: float = work.angle_degrees;await tick(10)
 	check("starts still for hand exploration",not work.auto_run and is_equal_approx(start,work.angle_degrees))
 	work.set_process(false);pointer = Node3D.new();scene.add_child(pointer)
@@ -94,6 +96,6 @@ func run() -> void:
 	await photo("01-two-wheels-one-belt",work.to_global(Vector3(4.5,3.9,6.4)),work.to_global(Vector3(-.55,1.4,.3)))
 	camera.fov = 64
 	await photo("02-belt-drive-on-floor59",at(9.5,8.4,10.5),at(1,1.2,-.5))
-	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual floor59 draft, desktop input on both wheels, supplied XR grips at both physical scales, inverse coupling, shared motor, tangent belt and real capsule access. Ideal kinematics; no physical-headset or belt-traction claim."}
+	var report := {"passed":failed.is_empty(),"checks":checks,"failed":failed,"observations":observations,"scope":"Actual WaveFunctions_Intro draft, desktop input on both wheels, supplied XR grips at both physical scales, inverse coupling, shared motor, tangent belt and real capsule access. Ideal kinematics; no physical-headset or belt-traction claim."}
 	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("BELT_DRIVE_RESULT ",checks.size()," failures:",failed);quit(0 if failed.is_empty() else 1)

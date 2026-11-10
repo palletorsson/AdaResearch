@@ -1,6 +1,7 @@
 """Curate only the four requested floors through the normal revisioned save API."""
 import copy, json, math, urllib.request
 from pathlib import Path
+from void_floors import floor_of
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'ada_run/transformation-workbench';OUT.mkdir(parents=True,exist_ok=True)
 URL='http://localhost:3003/api/void-layout'
@@ -60,7 +61,7 @@ f['title']='Rotation / one row, four axes, two shaft descents'
 f['route']=[dict(label=label,position=at,height=h) for label,at,h in [('Climb to the comparison row',[-18.5,-7],0),('X then Y then Z',[0,-5.1],2),('Same turn, different profiles',[0,5],0),('Wheel down shaft A',[-10,0],0),('Turn the hollow cubes down shaft B',[10,0],0)]]
 
 # Use the 42 m length rather than staging a museum strip across 18 m depth.
-f=rooms['floors'][18]
+f=rooms['floors'][floor_of('Trans_Body',rooms)]
 for a in f['artifacts']:
     x,z=rotate(*a['position']);a['position']=[x,z];a['facing']=(a['facing']+90)%360
     if a['artifact']=='approach_wall':a.update(position=[-15,0],facing=90,scale=1.65)

@@ -1,4 +1,4 @@
-"""The pendulum and the plank on a ball on floor 14 (Trans_Introduction; moved from floor 21 on 2026-11-09, below the
+"""The pendulum and the plank on a ball on floor 14 (Trans_Introduction; moved from Logic_Event on 2026-11-09, below the
 skateboard on 15) in the actual tower, desktop walker. Probe: tools/probes/physics_play_floor14.gd.
 Output: ada_run/physics-play-floor14/checks.json (+ photographs). Runs beside other Godot jobs (2026-11-06 rule)."""
 from pathlib import Path

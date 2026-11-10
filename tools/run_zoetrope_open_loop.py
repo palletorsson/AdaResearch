@@ -1,6 +1,7 @@
 """Focused rendered check of the requested open gaps and fixed-size loop."""
 import hashlib,json,os,subprocess
 from pathlib import Path
+from void_floors import floor_of
 from void_native_slot import acquire_native_slot
 from void_trial_runtime import stage_runtime
 from void_log_diagnostics import split_errors
@@ -15,7 +16,7 @@ log=(OUT/'native.log').read_text(encoding='utf-8',errors='replace')
 errors,shutdown=split_errors(log,'ZOETROPE_OPEN_LOOP_RESULT ',allow_shutdown=result.returncode==0)
 report=json.loads((OUT/'checks.json').read_text()) if (OUT/'checks.json').exists() else {'passed':False,'failed':['No receipt']}
 before=json.loads(saved);after=json.loads((ROOT/'commons/void/rooms.json').read_bytes())
-report.update(engine_exit=result.returncode,engine_errors=errors,shutdown_diagnostics=shutdown,rooms_sha256=hashlib.sha256(saved).hexdigest(),floor59_unchanged=before['floors'][59]==after['floors'][59],concurrent_changed_floors=[i for i,(a,b) in enumerate(zip(before['floors'],after['floors'])) if a!=b])
+report.update(engine_exit=result.returncode,engine_errors=errors,shutdown_diagnostics=shutdown,rooms_sha256=hashlib.sha256(saved).hexdigest(),floor59_unchanged=before['floors'][floor_of('WaveFunctions_Intro',before)]==after['floors'][floor_of('WaveFunctions_Intro',after)],concurrent_changed_floors=[i for i,(a,b) in enumerate(zip(before['floors'],after['floors'])) if a!=b])
 report['passed']=bool(report['passed'] and result.returncode==0 and not errors and report['floor59_unchanged'])
 (OUT/'checks.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(log[-2500:]);assert report['passed'],report

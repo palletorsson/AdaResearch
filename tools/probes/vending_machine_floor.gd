@@ -1,9 +1,9 @@
 extends "res://tools/probes/void_game_probe.gd"
 const Items := preload("res://commons/player/inventory_items.gd")
-## THE VENDING MACHINES ON FLOOR 20 (Trans_Playground), beside the scaffold workstation (Palle, 2026-11-06): the
+## THE VENDING MACHINES ON THE TRANS_PLAYGROUND FLOOR, beside the scaffold workstation (Palle, 2026-11-06): the
 ## prefabs machine and the tools machine from rooms.json, built in the actual tower - each with its slots, standing on
 ## the slab, cutting into no other work's box - and photographed. Run: python tools/test_vending_machine.py
-var floors: Array = [20]
+var floors: Array = [] # --floors=a,b; default the Trans_Playground floor, found by name in run()
 const IDS := ["vending-prefabs", "vending-tools"]
 
 func world_bounds(host: Node3D) -> AABB:
@@ -25,6 +25,7 @@ func run() -> void:
 		if arg.begins_with("--floors="):
 			floors = []
 			for s in arg.trim_prefix("--floors=").split(","): floors.append(int(s))
+	if floors.is_empty(): floors = [preload("res://tools/probes/void_floor.gd").of("Trans_Playground")]
 	Engine.physics_ticks_per_second = 90
 	preload("res://commons/void/room_source.gd").use_main_tower = true
 	load("res://commons/void/game.gd").requested_floor = int(floors[0])

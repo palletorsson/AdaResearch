@@ -3,7 +3,7 @@ extends Node3D
 ## and pattern as well"). Every spec in commons/data/playgrounds/examples/ - path, array, corridor, canopy, court, rack,
 ## stack, pit - compiles through the place builder with no errors into as many plates as its boards promise, framed; each
 ## stands alone in the hall's runtime scene (a preset recipe, no sidecar) and is photographed. Then the ANNEX: the
-## shader path, the tiling corridor, the pattern rack and the pit, moved off floor 210's slab (2026-11-02), stand in
+## shader path, the tiling corridor, the pattern rack and the pit, moved off the court floor's slab (2026-11-02), stand in
 ## the spec hall its trial floor builds.
 ## Writes ada_run/workstation/example_structures.json and example_<name>.png.
 ## Run: godot --path . --xr-mode off --resolution 1600x1000 res://commons/testing/probe_example_structures.tscn

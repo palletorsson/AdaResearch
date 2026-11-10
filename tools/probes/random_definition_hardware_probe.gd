@@ -1,8 +1,9 @@
 extends "res://tools/probes/randomness_trial_probe.gd"
 const Hardware = preload("res://commons/void/randomness_interface_hardware.gd")
+const VoidFloor = preload("res://tools/probes/void_floor.gd")
 
 func start(use_xr: bool) -> void:
-	xr=use_xr;level=71
+	xr=use_xr;level=VoidFloor.of("Random_Definition")
 	if xr:
 		head=tracker("head",XRServer.TRACKER_HEAD,"default",Vector3(0,1.65,0))
 		left=tracker("left_hand",XRServer.TRACKER_CONTROLLER,"aim",Vector3(-.3,1.2,-.4))
@@ -54,8 +55,8 @@ func shot(file: String, source: Node3D, at: Vector3, target: Vector3) -> void:
 func encounter(mode: bool) -> void:
 	await start(mode)
 	var tag: String="XR: " if xr else "Desktop: "
-	check(tag+"real tower starts on floor 71",game.checkpoint==71 and game.building.content.data.floors[71].map=="Random_Definition")
-	var room: Dictionary=game.building.content.data.floors[71]
+	check(tag+"real tower starts on the Random_Definition floor (%d)" % level,game.checkpoint==level and game.building.content.data.floors[level].map=="Random_Definition")
+	var room: Dictionary=game.building.content.data.floors[level]
 	var placements: Array=room.artifacts.duplicate()
 	placements.append_array(room.get("copies",[]))
 	for item in placements:

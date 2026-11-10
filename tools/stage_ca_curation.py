@@ -1,6 +1,7 @@
 """Reflow existing CA occurrences for the actual 42x18 tower; never regenerate sources."""
 import copy,json,math,urllib.request
 from pathlib import Path
+from void_floors import floor_of
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'ada_run/ca-curation';TRIALS=ROOT/'commons/void/trials'
 def read(p):return json.loads(p.read_text(encoding='utf-8'))
 def write(p,d):p.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
@@ -9,16 +10,16 @@ def turn(p,degrees):
     return [c*p[0]+s*p[1],-s*p[0]+c*p[1]]
 def corners(lo,hi):return [[x,z] for x in [lo[0],hi[0]] for z in [lo[1],hi[1]]]
 def rect(points):return [min(v[0] for v in points),min(v[1] for v in points),max(v[0] for v in points),max(v[1] for v in points)]
-# Desired centres of full drawn XZ bounds, yaw. These retain human-scale geometry.
+# Desired centres of full drawn XZ bounds, yaw, per CA hall by MAP NAME. These retain human-scale geometry.
 PLANS={
-103:{'ca_rule_explorer':(-3.5,2,0),'persian_rug':(3.5,3.4,0),'synthesis_stand':(5.5,6,0),'dark_sphere':(3.5,3.8,0),'langton_swarm':(0,0,0),'line_network_ca':(3.5,-3,0),'ca_showcase':(-3.5,-3,0),'rule110_computer':(0,-6.5,0)},
-104:{'structure_growth':(0,0,0),'dark_sphere':(5,5,0)},
-105:{'ca_bridge':(0,0,90),'lab_room':(-16.4,0,270),'film_cellular_history':(5.5,6.6,0),'dark_sphere':(16,-4.5,0),'ca_columns':(16,0,0),'mirrored_cellular_automata':(16,4.5,0)},
-106:{'game_of_life_petri':(0,0,90),'science_screen':(-16,-5,90),'mold_network':(-16,1,0),'dark_sphere':(-16,5,0),'hexagon_ca_vr':(16,0,0),'ca_growth_network':(16,5.5,0)},
-107:{'decaying_bridge':(0,0,90),'crossway_ca':(16,3,0),'ca_chair_test':(16,-3,0),'dark_sphere':(16,6,0),'catalyst_vent':(-16,1,0),'catalyst_prompter_box':(-16,5,0),'cellular_automata_3d_tree':(-16,-3,0)},
-108:{'rd_artifact':(0,1,180),'the_clockmaker_of_rules':(0,-5.5,0),'crack_propagation_ca':(-16,-5,0),'lattice_gas_pump':(16,0,0),'ca_sphere':(-16,0,0),'rule_30_110_gravity':(16,-5,0)},
-109:{'ca_rule_explorer':(-1,0,0),'film_ca_triplet':(-16,0,0),'sierpinski_pyramid':(16,0,0)},
-110:{'self_organization_ca':(0,0,0),'ca_screen':(16,5.5,0),'disease_spread_ca':(16,-.5,0),'volumetric_fog_ca':(-16,-2,0),'crackpropagation_ca':(-16,4,0)}}
+'CA_Introduction':{'ca_rule_explorer':(-3.5,2,0),'persian_rug':(3.5,3.4,0),'synthesis_stand':(5.5,6,0),'dark_sphere':(3.5,3.8,0),'langton_swarm':(0,0,0),'line_network_ca':(3.5,-3,0),'ca_showcase':(-3.5,-3,0),'rule110_computer':(0,-6.5,0)},
+'CA_ElementaryRules':{'structure_growth':(0,0,0),'dark_sphere':(5,5,0)},
+'CA_GameOfLife':{'ca_bridge':(0,0,90),'lab_room':(-16.4,0,270),'film_cellular_history':(5.5,6.6,0),'dark_sphere':(16,-4.5,0),'ca_columns':(16,0,0),'mirrored_cellular_automata':(16,4.5,0)},
+'CA_BeyondBinary':{'game_of_life_petri':(0,0,90),'science_screen':(-16,-5,90),'mold_network':(-16,1,0),'dark_sphere':(-16,5,0),'hexagon_ca_vr':(16,0,0),'ca_growth_network':(16,5.5,0)},
+'CA_ExpandingSpace':{'decaying_bridge':(0,0,90),'crossway_ca':(16,3,0),'ca_chair_test':(16,-3,0),'dark_sphere':(16,6,0),'catalyst_vent':(-16,1,0),'catalyst_prompter_box':(-16,5,0),'cellular_automata_3d_tree':(-16,-3,0)},
+'CA_SoftRules':{'rd_artifact':(0,1,180),'the_clockmaker_of_rules':(0,-5.5,0),'crack_propagation_ca':(-16,-5,0),'lattice_gas_pump':(16,0,0),'ca_sphere':(-16,0,0),'rule_30_110_gravity':(16,-5,0)},
+'CA_AgentsCircuits':{'ca_rule_explorer':(-1,0,0),'film_ca_triplet':(-16,0,0),'sierpinski_pyramid':(16,0,0)},
+'CA_EdgeOfChaos':{'self_organization_ca':(0,0,0),'ca_screen':(16,5.5,0),'disease_spread_ca':(16,-.5,0),'volumetric_fog_ca':(-16,-2,0),'crackpropagation_ca':(-16,4,0)}}
 def main():
     rooms=read(OUT/'before-rooms.json');draft=copy.deepcopy(rooms);bounds={};sources={}
     for trial in ['cellularautomata','cellularautomata_02','cellularautomata_03']:
@@ -30,8 +31,8 @@ def main():
             f=src['floors'][m['floor']];a=next(a for a in f['artifacts'] if a['id']==m['id']);sources[m['id']]=(a,f)
             bounds[m['id']]=m
     notes=[]
-    for index,plan in PLANS.items():
-        floor=draft['floors'][index]
+    for hall,plan in PLANS.items():
+        index=floor_of(hall,draft);floor=draft['floors'][index]
         for a in floor['artifacts']:
             before=copy.deepcopy(a)
             old,sourcefloor=sources[a['id']];m=bounds[a['id']];x,z,yaw=plan[a['artifact']]
@@ -70,16 +71,16 @@ def main():
         floor['title']=floor['map'].replace('CA_','CA / ').replace('_',' ')
         # Transfer provenance remains in the inventory; it is not floor signage.
         floor['route']=[]
-        if index==109:
+        if hall=='CA_AgentsCircuits':
             floor['artifacts'].append(dict(id='ca-architectural-history',artifact='void_ca_history_wall',station='NW',position=[0,-5.8],height=0,facing=0,scale=1,config=dict(source_id='f4_ca_rule_explorer_3_5')))
         def wall(name,a,b,height):
             floor.setdefault('walls',[]).append(dict(id='ca-stage-'+name,**{'from':a,'to':b},height=height,finish='unfinished'))
-        if index==103:
+        if hall=='CA_Introduction':
             wall('row-pocket',[-6.5,.3],[-6.5,4.5],1.7)
             wall('rug-back',[1.5,.7],[6,.7],1.55)
             wall('showcase-edge',[-6.5,-4.8],[-6.5,-1.5],1.7)
             wall('network-edge',[6.5,-4.8],[6.5,-1.5],1.7)
-        elif index==104:
+        elif hall=='CA_ElementaryRules':
             wall('neighbour-left',[-5.5,-3.5],[-5.5,3],1.7)
             wall('neighbour-right',[6,-3.5],[6,3],1.7)
         else:
@@ -88,10 +89,10 @@ def main():
             wall('west-back',[-20.3,-6.3],[-13.3,-6.3],1.4)
             wall('east-back',[13.3,-6.3],[20.3,-6.3],1.4)
         cells=floor.setdefault('construction',[])
-        for number,(kind,p,yaw) in enumerate([('cube',[-6.5,0,6.2],0),('wedge',[-6.5,0,4.7],0)] if index in [103,104] else [('cube',[-19.2,0,6.5],0),('wedge',[-17.7,0,6.5],270),('cube',[19.2,0,6.5],0),('wedge',[17.7,0,6.5],90)]):
+        for number,(kind,p,yaw) in enumerate([('cube',[-6.5,0,6.2],0),('wedge',[-6.5,0,4.7],0)] if hall in ['CA_Introduction','CA_ElementaryRules'] else [('cube',[-19.2,0,6.5],0),('wedge',[-17.7,0,6.5],270),('cube',[19.2,0,6.5],0),('wedge',[17.7,0,6.5],90)]):
             cells.append(dict(id='ca-stage-threshold-'+str(number),kind=kind,position=p,facing=yaw))
-        lamps=[([-6.5,5.5],270),([7,5.9],0)] if index==103 else [([-18.6,6.1],0),([18.6,6.1],0)]
-        if index==104:lamps=[([-6.8,4.5],270),([6.8,4.5],90)]
+        lamps=[([-6.5,5.5],270),([7,5.9],0)] if hall=='CA_Introduction' else [([-18.6,6.1],0),([18.6,6.1],0)]
+        if hall=='CA_ElementaryRules':lamps=[([-6.8,4.5],270),([6.8,4.5],90)]
         if index>=105:lamps.append(([-6.5,6.5],270))
         for number,(p,yaw) in enumerate(lamps):floor.setdefault('props',[]).append(dict(id='ca-stage-light-'+str(number),kind='work_light',position=p,facing=yaw,scale=1))
     write(OUT/'draft-rooms.json',draft);write(OUT/'reflow.json',notes)

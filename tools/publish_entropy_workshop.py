@@ -1,8 +1,9 @@
-"""Merge the tested floor-73 fittings and partitions into the current editor layout."""
+"""Merge the tested Random_Entropy fittings and partitions into the current editor layout."""
 import copy
 import json
 import urllib.request
 from pathlib import Path
+from void_floors import floor_of
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'doc/book/iterations/2026-10-23-entropy-workshop'
@@ -27,8 +28,8 @@ if __name__ == '__main__':
     fresh = request()
     original = copy.deepcopy(fresh['rooms'])
     before = json.loads((OUT / 'before-floor.json').read_text(encoding='utf8'))
-    target = json.loads((OUT / 'draft-rooms.json').read_text(encoding='utf8'))['floors'][73]
-    floor = fresh['rooms']['floors'][73]
+    target = (lambda d: d['floors'][floor_of('Random_Entropy',d)])(json.loads((OUT / 'draft-rooms.json').read_text(encoding='utf8')))
+    floor = fresh['rooms']['floors'][floor_of('Random_Entropy',fresh['rooms'])]
     for wanted in target['artifacts']:
         baseline = next(a for a in before['artifacts'] if a['id'] == wanted['id'])
         current = next(a for a in floor['artifacts'] if a['id'] == wanted['id'])
@@ -44,8 +45,8 @@ if __name__ == '__main__':
             if current is None:
                 floor[category].append(copy.deepcopy(wanted))
     check = copy.deepcopy(fresh['rooms'])
-    check['floors'][73] = original['floors'][73]
-    assert check == original, 'Only floor 73 may change.'
+    check['floors'][floor_of('Random_Entropy',check)] = original['floors'][floor_of('Random_Entropy',original)]
+    assert check == original, 'Only Random_Entropy may change.'
     (OUT / 'before-publish.json').write_text(json.dumps(original, indent=2)+'\n', encoding='utf8')
     receipt = request({'rooms': fresh['rooms'], 'revision': fresh['revision']})
     (OUT / 'publish.json').write_text(json.dumps(receipt, indent=2)+'\n', encoding='utf8')

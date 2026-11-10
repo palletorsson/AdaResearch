@@ -10,19 +10,19 @@ func keypress(code: Key,shift := false) -> void:
 		var event := InputEventKey.new();event.keycode = code;event.physical_keycode = code;event.shift_pressed = shift;event.pressed = down;Input.parse_input_event(event);await frames(5)
 
 func run() -> void:
-	root.size = Vector2i(1440,900);level = 46
+	root.size = Vector2i(1440,900);kinetic_floor = VoidFloor.of("Vectors_Act4a_KineticForces");level = kinetic_floor
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out = arg.trim_prefix("--out=")
 	if "--photo-only" in OS.get_cmdline_user_args():
 		await start(false);var work: Node3D = station("matter-leaning-together")
-		game.place_player(Vector3(-16.8,game.building.spec.levels[46]+.06,3.8));await frames(80);active_tag = "Desktop / final photograph / "
+		game.place_player(Vector3(-16.8,game.building.spec.levels[kinetic_floor]+.06,3.8));await frames(80);active_tag = "Desktop / final photograph / "
 		await click(work,"RESET");await frames(120);await input_aim_camera(work.to_global(Vector3(0,1.05,0)),20);await RenderingServer.frame_post_draw;root.get_texture().get_image().save_png(out.path_join("leaning-player.png"))
 		var receipt := {"passed":failed.is_empty(),"checks":checks,"failures":failed,"scope":"Final actual player photograph after moving readout text onto the existing control strip. Reset clicked through the native mouse; the full input receipt is separate."}
 		FileAccess.open(out.path_join("leaning-player-photo-checks.json"),FileAccess.WRITE).store_string(JSON.stringify(receipt,"  "));print("MATTER_REFERENCE_RESULT ",JSON.stringify(receipt));quit(0 if failed.is_empty() else 1);return
 	for use_xr in [false,true]:
-		await start(use_xr);var tag := "XR / " if xr else "Desktop / ";var y: float = game.building.spec.levels[46]
+		await start(use_xr);var tag := "XR / " if xr else "Desktop / ";var y: float = game.building.spec.levels[kinetic_floor]
 		var work: Node3D = station("matter-leaning-together")
-		check(tag+"main floor retains the existing eight installations and open shafts",game.building.content.data.floors[46].artifacts.size()==9 and game.building.spec.width==42 and ray(Vector3(-10,y+1,0),Vector3(-10,y-.5,0)).is_empty() and ray(Vector3(10,y+1,0),Vector3(10,y-.5,0)).is_empty())
+		check(tag+"main floor retains the existing eight installations and open shafts",game.building.content.data.floors[kinetic_floor].artifacts.size()==9 and game.building.spec.width==42 and ray(Vector3(-10,y+1,0),Vector3(-10,y-.5,0)).is_empty() and ray(Vector3(10,y+1,0),Vector3(10,y-.5,0)).is_empty())
 		game.place_player(Vector3(-18,y+.06,3.2));await frames(20)
 		for destination in [Vector3(-19.2,y,4),Vector3(-19.2,y,7.7),Vector3(-14.8,y,7.7),Vector3(-14.8,y,4),Vector3(-16.8,y,3.8)]:
 			var reached := await move_to(destination,false,550);print("LEANING_WALK ",{"target":destination,"actual":game.body.global_position,"recovering":game.recovering});check(tag+"walk around the work area "+str(destination),reached)
