@@ -217,7 +217,11 @@ func _page_placed() -> void:
 	if placed.is_empty():_page.add_child(_note("Nothing placed yet. Make things on the HAND face; they are listed here, last on top."))
 	for i in range(placed.size() - 1, -1, -1):
 		var l := Label.new();l.text = "%d · %s" % [i + 1, placed[i]];l.add_theme_font_size_override("font_size", 13);l.add_theme_color_override("font_color", FG);_page.add_child(l)
+	# Nothing to take back = nothing placed AND no tape laid. With only tape down both buttons were greyed,
+	# though the tape is what spends the budget (a draw a strip): the only way back was strip by strip.
+	var laid_roll: Node = prism.hand.worn_of("tape")
+	var nothing_back: bool = placed.is_empty() and (laid_roll == null or (laid_roll.segments as Array).is_empty())
 	var r := _row()
-	var last := _btn("TAKE BACK LAST", _col, false, placed.is_empty());last.size_flags_horizontal = Control.SIZE_EXPAND_FILL;last.pressed.connect(prism.take_back);buttons["take_back"] = last;r.add_child(last)
-	var all := _btn("TAKE ALL BACK", _col, false, placed.is_empty());all.size_flags_horizontal = Control.SIZE_EXPAND_FILL;all.pressed.connect(prism.take_all_back);buttons["take_all"] = all;r.add_child(all)
+	var last := _btn("TAKE BACK LAST", _col, false, nothing_back);last.size_flags_horizontal = Control.SIZE_EXPAND_FILL;last.pressed.connect(prism.take_back);buttons["take_back"] = last;r.add_child(last)
+	var all := _btn("TAKE ALL BACK", _col, false, nothing_back);all.size_flags_horizontal = Control.SIZE_EXPAND_FILL;all.pressed.connect(prism.take_all_back);buttons["take_all"] = all;r.add_child(all)
 	_page.add_child(r)

@@ -61,7 +61,11 @@ func spent() -> Dictionary:
 	var roll: Node = worn_of("tape")
 	if roll != null:
 		for s in roll.segments:
-			if is_instance_valid(s):sum.draws += 1;sum.triangles += 16 * maxi(1, (s.anchors as Array).size());sum.viewports += 1 if s.get("print_source") is Callable and (s.get("print_source") as Callable).is_valid() else 0
+			# A strip is a draw. A PRINTED strip is not a viewport: its words are drawn once (UPDATE_ONCE) into a picture
+			# that is its skin from then on - no render a frame. Counted as one, sixteen printed strips filled the
+			# budget's 16 viewports and every placement after them was refused, its ghost red (2026-11-10). The
+			# pictures' memory is bounded by the roll's own max_strips and print_max_px.
+			if is_instance_valid(s):sum.draws += 1;sum.triangles += 16 * maxi(1, (s.anchors as Array).size())
 	return sum
 
 ## Would one more of `id` fit the budget? Sets the notice when not.
