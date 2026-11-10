@@ -1398,6 +1398,22 @@
       ],
       "tower": "floor 175 (GT_Connectivity) at scale 0.5, mutuality split, unchanged placement",
       "capture": "ada_run/improve/tarjan_algorithm/before_after.png (standalone crop at one camera + tower crops)"
+    },
+    {
+      "lookup_name": "ca_growth_network",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "tips persist: a tip whose growth roll failed (growth_probability 0.35) was dropped, so each tip survived a step at ~0.37 and the network died out within a few generations - floor 112 held five loose cubes. tip_patience (8) tries before it gives up",
+        "attractors converted to world units: they were placed in grid units around (16,16,16), compared with world positions, 27 m from every tip and past max_growth_distance 20 - no goal ever pulled and every step was random",
+        "a tip takes the best FREE direction ranked by the pull (+ noise): the single strongest axis often pointed through the core and was blocked; the clump test no longer counts the core's own cells (it refused every step along a face)",
+        "the per-cell colours are read (vertex_color_use_as_albedo): seed brown, branch by age, tip green - every cell stood grey",
+        "show_core: the obstacle the network wraps is drawn; show_attractors: the goals as faint points that light amber when reached; consume_attractors: a reached goal stops pulling, growth moves on",
+        "cycle + hold_seconds: a new network after the last generation (it froze)"
+      ],
+      "tower": "floor 112 (CA_BeyondBinary) at scale 0.35, unchanged placement",
+      "capture": "ada_run/improve/ca_growth_network/before_after.png (standalone pair at one camera + the tower before/after)"
     }
   ]
 }

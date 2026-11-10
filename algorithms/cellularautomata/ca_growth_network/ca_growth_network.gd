@@ -39,6 +39,18 @@ extends Node3D
 @export var color_branch: Color = Color(0.2, 0.6, 0.3)
 @export var color_tip: Color = Color(0.3, 0.8, 0.4)
 
+# 2026-11-10. What the network grows from and toward, made visible; and a network that keeps growing.
+@export_category("Growth Repairs")
+## A tip whose growth roll fails WAITS and tries again; it dies after this many failed tries in a row. The tip was
+## dropped on the first failure (growth_probability 0.35), so the whole network died out within a few steps.
+@export_range(1, 30) var tip_patience: int = 8
+## An attractor a tip reaches is used up and lights; growth moves on to the next. (They pulled forever.)
+@export var consume_attractors: bool = true
+@export var show_core: bool = true          # the obstacle the network wraps, drawn (it was invisible)
+@export var show_attractors: bool = true    # the goals, faint until reached
+@export var cycle: bool = true              # after the last generation, hold, then grow a new one
+@export_range(0.0, 30.0, 0.5) var hold_seconds: float = 4.0
+
 var grid: Dictionary = {}  # Vector3i -> cell_data {age: int, is_tip: bool, attractors_reached: Array}
 var attractors: Array[Vector3] = []  # World positions of attractors
 var seeds: Array[Vector3i] = []  # Grid positions of seeds
@@ -48,11 +60,16 @@ var timer: float = 0.0
 var is_growing: bool = false
 
 var multi_mesh_instance: MultiMeshInstance3D
+var _core: MeshInstance3D
+var _goal_marks: MultiMeshInstance3D
+var _reached: Array[bool] = []
+var _hold := 0.0
 
 func _ready() -> void:
 	# Try to get existing MultiMeshInstance3D node, or create one
 	if has_node("MultiMeshInstance3D"):
 		multi_mesh_instance = get_node("MultiMeshInstance3D")
+		_colour_cells()
 	else:
 		_setup_multimesh()
 
@@ -71,6 +88,10 @@ func _process(delta: float) -> void:
 		if timer >= generation_interval:
 			timer = 0.0
 			grow_step()
+	elif cycle and generation > 0:
+		_hold += delta
+		if _hold >= hold_seconds:
+			start_growth()
 
 func _setup_multimesh() -> void:
 	multi_mesh_instance = MultiMeshInstance3D.new()
@@ -84,6 +105,18 @@ func _setup_multimesh() -> void:
 	multimesh.use_colors = true
 	multimesh.instance_count = 0
 	multi_mesh_instance.multimesh = multimesh
+	_colour_cells()
+
+func _colour_cells() -> void:
+	# The per-cell colours (seed, branch by age, tip) were written to the MultiMesh and never shown: the
+	# material did not read them, so every cell stood grey.
+	if multi_mesh_instance == null:
+		return
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.vertex_color_is_srgb = true
+	mat.roughness = 0.6
+	multi_mesh_instance.material_override = mat
 
 func _setup_default_gradient() -> void:
 	gradient = Gradient.new()
@@ -110,6 +143,12 @@ func start_growth() -> void:
 	# Place seeds on obstacle surface
 	_place_seeds()
 
+	_hold = 0.0
+	_reached.clear()
+	for i in attractors.size():
+		_reached.append(false)
+	if not Engine.is_editor_hint():
+		_build_core_and_goals()
 	is_growing = true
 	_update_multimesh()
 
@@ -142,7 +181,11 @@ func _place_attractors() -> void:
 		var y = center.y + r * sin(angle2) * sin(angle1)
 		var z = center.z + r * cos(angle2)
 
-		attractors.append(Vector3(x, y, z))
+		# Grid units -> the world units every growth step measures in. They were left in grid units: centred
+		# on (16, 16, 16) "metres", 27 m from every tip and past max_growth_distance, so no attractor ever
+		# pulled and every direction was random.
+		var offset := grid_size / 2.0
+		attractors.append(Vector3(x - offset, y - offset, z - offset) * cell_size)
 
 func _place_seeds() -> void:
 	# Place seeds on the surface of the obstacle cube
@@ -188,14 +231,18 @@ func grow_step() -> void:
 		if not cell.is_tip:
 			continue
 
-		# Find best direction based on attractors
-		var best_dir = _find_best_growth_direction(tip_pos)
+		# Find best direction based on attractors - the best FREE one. The single strongest axis was often
+		# blocked (the pull of goals all round the core points straight through it), and a blocked tip only
+		# waited and died.
+		var best_dir = _free_growth_direction(tip_pos)
+		var grew := false
 
 		if best_dir != Vector3i.ZERO:
 			var new_pos = tip_pos + best_dir
 
 			# Check if we can grow here
 			if _can_grow_at(new_pos, tip_pos):
+				grew = true
 				# Grow
 				grid[new_pos] = {
 					"age": generation,
@@ -220,9 +267,45 @@ func grow_step() -> void:
 							}
 							new_tips.append(branch_pos)
 
+		if not grew:
+			# A failed roll is a pause, not a death: wait, try again, give up after tip_patience tries.
+			cell["tries"] = int(cell.get("tries", 0)) + 1
+			if cell.tries < tip_patience:
+				new_tips.append(tip_pos)
+			else:
+				cell.is_tip = false
+		elif consume_attractors:
+			_consume_near(tip_pos + best_dir)
+
 	active_tips = new_tips
 	generation += 1
 	_update_multimesh()
+
+func _free_growth_direction(pos: Vector3i) -> Vector3i:
+	var want := _attractor_force(pos)
+	var aim := want.normalized() if want.length() > 0.0001 else Vector3.ZERO
+	var best := Vector3i.ZERO
+	var best_score := -INF
+	for d: Vector3i in [Vector3i(1, 0, 0), Vector3i(-1, 0, 0), Vector3i(0, 1, 0), Vector3i(0, -1, 0), Vector3i(0, 0, 1), Vector3i(0, 0, -1)]:
+		var n := pos + d
+		if not _room_at(n, pos):
+			continue
+		var score := aim.dot(Vector3(d)) + randf() * 0.6
+		if score > best_score:
+			best_score = score
+			best = d
+	return best
+
+func _attractor_force(pos: Vector3i) -> Vector3:
+	var world_pos := _grid_to_world(pos)
+	var total := Vector3.ZERO
+	for ai in attractors.size():
+		if consume_attractors and ai < _reached.size() and _reached[ai]:
+			continue
+		var dist := world_pos.distance_to(attractors[ai])
+		if dist < max_growth_distance and dist > 0.1:
+			total += (attractors[ai] - world_pos).normalized() * attractor_strength / (dist * dist + 1.0)
+	return total
 
 func _find_best_growth_direction(pos: Vector3i) -> Vector3i:
 	# Calculate weighted direction toward nearest attractors
@@ -230,7 +313,10 @@ func _find_best_growth_direction(pos: Vector3i) -> Vector3i:
 	var total_force = Vector3.ZERO
 	var valid_attractors = 0
 
-	for attractor in attractors:
+	for ai in attractors.size():
+		if consume_attractors and ai < _reached.size() and _reached[ai]:
+			continue
+		var attractor: Vector3 = attractors[ai]
 		var dist = world_pos.distance_to(attractor)
 
 		# Only consider attractors within range
@@ -302,7 +388,8 @@ func _can_grow_at(pos: Vector3i, from_pos: Vector3i) -> bool:
 					if dx == 0 and dy == 0 and dz == 0:
 						continue
 					var neighbor = pos + Vector3i(dx, dy, dz)
-					if neighbor != from_pos and grid.has(neighbor):
+					# The core is not part of the clump: counting its cells refused every step along its face.
+					if neighbor != from_pos and grid.has(neighbor) and grid[neighbor].age >= 0:
 						neighbor_count += 1
 
 		# Don't grow if too many neighbors (prevents thick clumps)
@@ -310,6 +397,21 @@ func _can_grow_at(pos: Vector3i, from_pos: Vector3i) -> bool:
 			return false
 
 	return randf() < growth_probability
+
+## The structural half of _can_grow_at, without the growth roll: is there room at pos?
+func _room_at(pos: Vector3i, from_pos: Vector3i) -> bool:
+	if pos.x < 0 or pos.x >= grid_size or pos.y < 0 or pos.y >= grid_size or pos.z < 0 or pos.z >= grid_size or grid.has(pos):
+		return false
+	if not avoid_self_intersection:
+		return true
+	var neighbor_count := 0
+	for dx in [-1, 0, 1]:
+		for dy in [-1, 0, 1]:
+			for dz in [-1, 0, 1]:
+				var neighbor: Vector3i = pos + Vector3i(dx, dy, dz)
+				if neighbor != pos and neighbor != from_pos and grid.has(neighbor) and grid[neighbor].age >= 0:
+					neighbor_count += 1
+	return neighbor_count <= 3
 
 func _grid_to_world(pos: Vector3i) -> Vector3:
 	var offset = grid_size / 2.0
@@ -355,6 +457,59 @@ func _update_multimesh() -> void:
 		mm.set_instance_color(idx, color)
 		idx += 1
 
+func _consume_near(pos: Vector3i) -> void:
+	var w := _grid_to_world(pos)
+	for ai in attractors.size():
+		if ai < _reached.size() and not _reached[ai] and w.distance_to(attractors[ai]) < cell_size * 2.5:
+			_reached[ai] = true
+			if _goal_marks and _goal_marks.multimesh:
+				_goal_marks.multimesh.set_instance_color(ai, Color(1.0, 0.85, 0.35))
+
+func _build_core_and_goals() -> void:
+	var side := center_obstacle_size * cell_size
+	# The core's cells span [-half, half) around the grid centre, a half cell off the world centre.
+	var core_centre := _grid_to_world(Vector3i(grid_size / 2, grid_size / 2, grid_size / 2)) - Vector3.ONE * cell_size * 0.5
+	if show_core:
+		if _core == null:
+			_core = MeshInstance3D.new()
+			_core.name = "Core"
+			add_child(_core)
+			var box := BoxMesh.new()
+			_core.mesh = box
+			var cm := StandardMaterial3D.new()
+			cm.albedo_color = Color(0.16, 0.12, 0.1)
+			cm.roughness = 0.9
+			_core.material_override = cm
+		(_core.mesh as BoxMesh).size = Vector3.ONE * side * 0.98
+		_core.position = core_centre
+	if show_attractors:
+		if _goal_marks == null:
+			_goal_marks = MultiMeshInstance3D.new()
+			_goal_marks.name = "Attractors"
+			add_child(_goal_marks)
+			var gm := StandardMaterial3D.new()
+			gm.vertex_color_use_as_albedo = true
+			gm.vertex_color_is_srgb = true
+			gm.emission_enabled = true
+			gm.emission = Color(0.6, 0.5, 0.25)
+			gm.emission_energy_multiplier = 0.6
+			_goal_marks.material_override = gm
+			_goal_marks.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.use_colors = true
+		var sm := SphereMesh.new()
+		sm.radius = cell_size * 0.45
+		sm.height = cell_size * 0.9
+		sm.radial_segments = 10
+		sm.rings = 5
+		mm.mesh = sm
+		mm.instance_count = attractors.size()
+		for ai in attractors.size():
+			mm.set_instance_transform(ai, Transform3D(Basis(), attractors[ai]))
+			mm.set_instance_color(ai, Color(0.35, 0.33, 0.3))
+		_goal_marks.multimesh = mm
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -362,4 +517,7 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("cycle"):
+		cycle = str(config.cycle).to_lower() in ["true", "1", "on"]
+	if config.has("show_attractors"):
+		show_attractors = str(config.show_attractors).to_lower() in ["true", "1", "on"]
