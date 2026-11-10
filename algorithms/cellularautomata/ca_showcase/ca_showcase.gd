@@ -35,6 +35,12 @@ enum CAType {
 const DendriteGrowthCA = preload("res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.gd")
 const DiseaseSpreadCA = preload("res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd")
 
+## 2026-11-10. Dendrite Growth and Disease Spread were the "refactored" BaseCA children, each on its own 64^3
+## nested-Array grid: when the cycle reached Disease Spread, ONE frame took 8 s (measured: the full SIR rule
+## over 262 144 cells, every frame) and the Dendrite showcase cost 58 ms a frame - on floor 109 the tower froze
+## for ~16 s every two minutes. light_systems runs both on this showcase's own 20^3 grid like the other ten.
+@export var light_systems: bool = true
+
 func _ready() -> void:
  
 	initialize_ca_showcases()
@@ -98,10 +104,14 @@ func create_ca_showcase(ca_type: CAType, platform_pos: Vector3) -> Node3D:
 		CAType.RECRYSTALLIZATION:
 			create_recrystallization_ca(showcase)
 		CAType.DENDRITE_GROWTH:
-			# Use the refactored class
-			var ca = DendriteGrowthCA.new()
-			showcase.add_child(ca)
-			showcase.set_meta("type", "dendrite_refactored")
+			if light_systems:
+				create_3d_grid(showcase, "Dendrite Growth")
+				showcase.set_meta("type", "dendrite_light")
+			else:
+				# Use the refactored class
+				var ca = DendriteGrowthCA.new()
+				showcase.add_child(ca)
+				showcase.set_meta("type", "dendrite_refactored")
 		CAType.PERCOLATION:
 			create_percolation_ca(showcase)
 		CAType.CRACK_PROPAGATION:
@@ -115,10 +125,14 @@ func create_ca_showcase(ca_type: CAType, platform_pos: Vector3) -> Node3D:
 		CAType.ECOSYSTEM:
 			create_ecosystem_ca(showcase)
 		CAType.DISEASE_SPREAD:
-			# Use the refactored class
-			var ca = DiseaseSpreadCA.new()
-			showcase.add_child(ca)
-			showcase.set_meta("type", "disease_refactored")
+			if light_systems:
+				create_3d_grid(showcase, "Disease Spread")
+				showcase.set_meta("type", "disease_light")
+			else:
+				# Use the refactored class
+				var ca = DiseaseSpreadCA.new()
+				showcase.add_child(ca)
+				showcase.set_meta("type", "disease_refactored")
 		CAType.BLOOD_FLOW:
 			create_blood_flow_ca(showcase)
 		CAType.DROPLET_BEHAVIOR:
@@ -465,11 +479,19 @@ func create_3d_grid(parent: Node3D, label: String) -> Array:
 					(z - GRID_SIZE/2.0) * spacing
 				)
 				# Start invisible (scale 0)
-				var transform = Transform3D(Basis().scaled(Vector3(0.01, 0.01, 0.01)), pos)
+				# Scale 0, not 0.01: 8000 cells at 1 % still drew a lattice of specks round every system.
+				var transform = Transform3D(Basis().scaled(Vector3.ZERO), pos)
 				multi_mesh.set_instance_transform(index, transform)
 				multi_mesh.set_instance_color(index, Color(1, 1, 1, 0))  # Transparent
 	
 	multi_mesh_instance.multimesh = multi_mesh
+	# Every update_* writes a colour per cell (orange crystals, aqua water, red cracks...) and the material never
+	# read them: every system stood as the same white spheres. (2026-11-10)
+	var cell_mat := StandardMaterial3D.new()
+	cell_mat.vertex_color_use_as_albedo = true
+	cell_mat.vertex_color_is_srgb = true
+	cell_mat.roughness = 0.45
+	multi_mesh_instance.material_override = cell_mat
 	parent.add_child(multi_mesh_instance)
 	parent.set_meta("visual_multimesh", multi_mesh_instance)
 	parent.set_meta("active_cells", [])  # Track active cells for animation
@@ -656,10 +678,14 @@ func update_current_showcase(delta) -> void:
 		
 	var showcase = showcases[current_showcase]
 	var ca_type = showcase.get_meta("type")
-	
+
 	match ca_type:
 		"recrystallization":
 			update_recrystallization(showcase, delta)
+		"dendrite_light":
+			update_dendrite_light(showcase, delta)
+		"disease_light":
+			update_disease_light(showcase, delta)
 		"dendrite_refactored":
 			pass # Handled by the class itself
 		"percolation":
@@ -726,20 +752,29 @@ func update_recrystallization(showcase: Node3D, delta) -> void:
 	if active_cells.size() < 1000:  # Limit growth
 		for site in nucleation_sites:
 			if randf() < 5.0 * delta:  # Fast growth
-				# Grow in random direction
+				# Grow in random direction - from the grain's FRONT. It grew from the nucleus itself, so a crystal
+				# could never pass its 26 neighbours: five 3x3x3 specks. Each grain now spreads from any of its
+				# cells. (grain membership: the per-site list kept in meta "grains")
+				var grains: Dictionary = showcase.get_meta("grains", {})
+				var grain: Array = grains.get(site, [site])
+				var from: Vector3i = grain[randi() % grain.size()]
 				var direction = Vector3i(
 					randi_range(-1, 1),
 					randi_range(-1, 1),
 					randi_range(-1, 1)
 				)
-				var new_pos = site + direction
-				
-				# Bounds check
+				var new_pos = from + direction
+
+				# Bounds check; a cell another grain holds stays its: grains grow until they meet, and the
+				# meeting surfaces are the grain boundaries - each grain in its own shade of the metal.
 				if new_pos.x >= 0 and new_pos.x < GRID_SIZE and \
 				   new_pos.y >= 0 and new_pos.y < GRID_SIZE and \
-				   new_pos.z >= 0 and new_pos.z < GRID_SIZE:
-					# Activate with orange/gold color
-					var color = Color(1.0, 0.6 + randf() * 0.4, 0.0)
+				   new_pos.z >= 0 and new_pos.z < GRID_SIZE and not active_cells.has(new_pos):
+					grain.append(new_pos)
+					grains[site] = grain
+					showcase.set_meta("grains", grains)
+					var shade := float(nucleation_sites.find(site)) / maxf(1.0, nucleation_sites.size() - 1.0)
+					var color = Color.from_hsv(0.02 + 0.12 * shade, 0.85, 1.0 - 0.25 * randf() * shade)
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
 
@@ -877,6 +912,91 @@ func update_self_organization(showcase: Node3D, delta) -> void:
 				var color = Color.from_hsv(randf(), 0.8 + randf() * 0.2, 1.0)  # Rainbow
 				activate_cell(showcase, x, y, z, color)
 
+## Dendrite, on the showcase's own grid: diffusion-limited growth from a centre seed - a new cell only joins
+## next to the crystal, preferring to grow away from the centre and avoiding crowded spots, so arms branch.
+func update_dendrite_light(showcase: Node3D, delta) -> void:
+	var active_cells: Array = showcase.get_meta("active_cells")
+	if active_cells.is_empty() or active_cells.size() >= 900:
+		return
+	var centre := Vector3i(GRID_SIZE / 2, GRID_SIZE / 2, GRID_SIZE / 2)
+	for attempt in range(int(clampf(4.0 * delta * 60.0, 1.0, 8.0))):
+		var from: Vector3i = active_cells[randi() % active_cells.size()]
+		# Mostly along the lattice axes, as cubic crystals send their arms.
+		var axes := [Vector3i(1, 0, 0), Vector3i(-1, 0, 0), Vector3i(0, 1, 0), Vector3i(0, -1, 0), Vector3i(0, 0, 1), Vector3i(0, 0, -1)]
+		var step: Vector3i = axes[randi() % 6] if randf() < 0.8 else Vector3i(randi_range(-1, 1), randi_range(-1, 1), randi_range(-1, 1))
+		var to := from + step
+		if step == Vector3i.ZERO or to.x < 0 or to.y < 0 or to.z < 0 or to.x >= GRID_SIZE or to.y >= GRID_SIZE or to.z >= GRID_SIZE:
+			continue
+		if active_cells.has(to) or Vector3(to - centre).length() < Vector3(from - centre).length():
+			continue
+		# A new cell may touch the crystal only where it attaches: anywhere crowded is screened, so arms stay thin.
+		var crowd := 0
+		for dx in [-1, 0, 1]:
+			for dy in [-1, 0, 1]:
+				for dz in [-1, 0, 1]:
+					var n: Vector3i = to + Vector3i(dx, dy, dz)
+					if n != to and n != from and active_cells.has(n):
+						crowd += 1
+		if crowd > 1:
+			continue
+		var r := clampf(Vector3(to - centre).length() / (GRID_SIZE * 0.5), 0.0, 1.0)
+		activate_cell(showcase, to.x, to.y, to.z, Color(0.55, 0.95, 1.0).lerp(Color(0.1, 0.35, 0.95), r))
+
+## Disease, on the showcase's own grid: S -> I -> R. Infected cells (red) infect a random neighbour now and then
+## and recover (green) after a few seconds; the susceptible are the empty lattice. An infection wavefront with
+## an immune interior - the shape of an epidemic.
+func update_disease_light(showcase: Node3D, delta) -> void:
+	var infected: Dictionary = showcase.get_meta("infected", {})
+	var active_cells: Array = showcase.get_meta("active_cells")
+	var now := Time.get_ticks_msec() / 1000.0
+	var keys := infected.keys()
+	keys.shuffle()
+	for k in range(mini(keys.size(), 60)):
+		var cell: Vector3i = keys[k]
+		if now - float(infected[cell]) > 2.5:
+			infected.erase(cell)
+			_recolour_cell(showcase, cell, Color(0.25, 0.85, 0.35))   # recovered, immune
+			continue
+		if randf() < 6.0 * delta:
+			var to := cell + Vector3i(randi_range(-1, 1), randi_range(-1, 1), randi_range(-1, 1))
+			if to.x >= 0 and to.y >= 0 and to.z >= 0 and to.x < GRID_SIZE and to.y < GRID_SIZE and to.z < GRID_SIZE and not active_cells.has(to):
+				activate_cell(showcase, to.x, to.y, to.z, Color(1.0, 0.15, 0.12))
+				infected[to] = now
+	showcase.set_meta("infected", infected)
+
+func _recolour_cell(showcase: Node3D, cell: Vector3i, color: Color) -> void:
+	var mmi: MultiMeshInstance3D = showcase.get_meta("visual_multimesh")
+	mmi.multimesh.set_instance_color(cell.x * GRID_SIZE * GRID_SIZE + cell.y * GRID_SIZE + cell.z, color)
+
+## A system starts again each time the cycle comes round to it (it stayed saturated at its cap for good), from
+## its seeds: the crack's stress points (it had none active, so it never grew), the crystal nuclei, the
+## dendrite's centre, the first infections.
+func _restart_showcase(showcase: Node3D) -> void:
+	if not showcase.has_meta("visual_multimesh") or not showcase.has_meta("active_cells"):
+		return
+	var mm: MultiMesh = (showcase.get_meta("visual_multimesh") as MultiMeshInstance3D).multimesh
+	var active_cells: Array = showcase.get_meta("active_cells")
+	var spacing := 0.15
+	for c: Vector3i in active_cells:
+		var pos := Vector3((c.x - GRID_SIZE / 2.0) * spacing, (c.y - GRID_SIZE / 2.0) * spacing, (c.z - GRID_SIZE / 2.0) * spacing)
+		mm.set_instance_transform(c.x * GRID_SIZE * GRID_SIZE + c.y * GRID_SIZE + c.z, Transform3D(Basis().scaled(Vector3.ZERO), pos))
+	active_cells.clear()
+	showcase.set_meta("grains", {})
+	showcase.set_meta("infected", {})
+	match str(showcase.get_meta("type", "")):
+		"crack":
+			for sp: Vector3i in showcase.get_meta("stress_points", []):
+				activate_cell(showcase, sp.x, sp.y, sp.z, Color(1.0, 0.3, 0.1))
+		"dendrite_light":
+			activate_cell(showcase, GRID_SIZE / 2, GRID_SIZE / 2, GRID_SIZE / 2, Color(0.8, 1.0, 1.0))
+		"disease_light":
+			var infected := {}
+			for i in 3:
+				var c := Vector3i(randi() % GRID_SIZE, randi() % GRID_SIZE, randi() % GRID_SIZE)
+				activate_cell(showcase, c.x, c.y, c.z, Color(1.0, 0.15, 0.12))
+				infected[c] = Time.get_ticks_msec() / 1000.0
+			showcase.set_meta("infected", infected)
+
 func cycle_to_next_showcase() -> void:
 	current_showcase = (current_showcase + 1) % SHOWCASE_COUNT
 	highlight_current_showcase()
@@ -886,6 +1006,8 @@ func highlight_current_showcase() -> void:
 	for i in range(showcases.size()):
 		var showcase = showcases[i]
 		var is_active = (i == current_showcase)
+		if is_active and light_systems:
+			_restart_showcase(showcase)
 		showcase.visible = is_active
 		info_panels[i].visible = is_active
 		
@@ -1076,6 +1198,10 @@ func on_vr_controller_input(_controller_id: int, input_type: String) -> void:
 
 func _input(event: InputEvent) -> void:
 	"""Handle keyboard input for testing and control"""
+	# The keys belong to the work only when it IS the scene. Placed in the tower they reached it from anywhere:
+	# Space (the desktop jump) cycled it and R (the retry) rebuilt it, floors away.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:

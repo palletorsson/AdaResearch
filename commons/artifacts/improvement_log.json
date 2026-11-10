@@ -1428,6 +1428,22 @@
       ],
       "tower": "floor 113 (CA_ExpandingSpace) at scale 0.12, unchanged placement",
       "capture": "ada_run/improve/ca_chair_test/before_after.png (the tower before + the five strategies' chairs from one tower camera)"
+    },
+    {
+      "lookup_name": "ca_showcase",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "THE FREEZE: Dendrite Growth and Disease Spread were BaseCA children on 64^3 nested-Array grids; when the 10 s cycle reached Disease Spread ONE frame took 8 s (measured: the full SIR rule over 262 144 cells every frame) and Dendrite cost 58 ms a frame - on floor 109 the tower froze ~16 s every two minutes. light_systems (default on) runs both on the showcase's own 20^3 grid: a diffusion-limited dendrite with thin axis-aligned arms, and S->I->R with a red front and a green immune interior (0.05 / 0.04 ms an update)",
+        "colours: every update writes a colour per cell and the material never read them - all twelve systems stood as white spheres; vertex_color_use_as_albedo",
+        "Recrystallization grew only from each nucleus, so a grain could never pass its 26 neighbours (five 3x3x3 specks): grains now grow from any of their cells, each in its own shade, until they meet (grain boundaries). Crack Propagation started with no active cell and never grew: its stress points are seeded",
+        "each system restarts from its seeds when the cycle comes round to it (they stayed saturated at their caps for good); parked cells at scale 0 (8000 at 1 % drew a lattice of specks)",
+        "keys only when the work IS the scene: in the desktop tower Space (the jump) cycled it and R (the retry) rebuilt it",
+        "NOT done: avalanche, traffic, flood, blood flow and droplet never had a cell grid (activate_cell returns without one) - those five show only their helper geometry"
+      ],
+      "tower": "floor 109 (CA_Introduction) at scale 1, unchanged placement",
+      "capture": "ada_run/improve/ca_showcase/before_after.png (one camera: HEAD vs after at 9 s, plus Dendrite and Disease)"
     }
   ]
 }
