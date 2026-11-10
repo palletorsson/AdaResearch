@@ -26,6 +26,13 @@ const CAStrategy = preload("res://algorithms/cellularautomata/CAchairtests/CAStr
 @onready var btn_strategy = $UI/Panel/VBox/HBox2/BtnStrategy
 @onready var speed_slider = $UI/Panel/VBox/HBox3/SpeedSlider
 
+## Placed in a world (2026-11-10): the demo's UI is hidden there, and Play lived only in that UI, so the
+## work stood as its four seed cells forever. Embedded it now plays by itself and, after each chair, holds it
+## and grows the next strategy from the same seed - five chairs, the claim of the piece.
+@export var autoplay_embedded: bool = true
+@export var tour_strategies: bool = true
+@export_range(0.0, 30.0, 0.5) var hold_seconds: float = 4.0
+
 # State
 var current_strategy: CAStrategy
 var strategy_type: int = CAStrategy.StrategyType.SIMPLE_SWITCHED
@@ -33,6 +40,8 @@ var is_playing: bool = false
 var step_timer: float = 0.0
 var step_interval: float = 0.5
 var _embedded: bool = false  # true when loaded as an artifact inside a map (vs run standalone)
+var _hold := -1.0
+var _caption: Label3D
 
 # Camera
 var _xr_active: bool = false
@@ -55,6 +64,18 @@ func _ready() -> void:
 		setup_camera()
 	setup_ui()
 	reset_simulation()
+	if _embedded and autoplay_embedded:
+		_caption = Label3D.new()
+		_caption.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		_caption.pixel_size = 0.022
+		_caption.font_size = 64
+		_caption.outline_size = 12
+		_caption.modulate = Color(0.95, 0.93, 0.88)
+		_caption.position = Vector3(10, 27, 10)
+		add_child(_caption)
+		step_interval = 0.35
+		is_playing = true
+		update_ui()
 
 func _use_host_lighting() -> void:
 	for child in get_children():
@@ -87,7 +108,16 @@ func reset_simulation() -> void:
 	ca_grid.update_visualization()
 
 func _process(delta: float) -> void:
-	handle_camera(delta)
+	if not _embedded:
+		handle_camera(delta)   # embedded, WASD is the visitor walking, not this hidden camera
+	if _hold >= 0.0:
+		_hold += delta
+		if _hold >= hold_seconds:
+			_hold = -1.0
+			strategy_type = (strategy_type + 1) % 5
+			reset_simulation()
+			is_playing = true
+		return
 	
 	if is_playing:
 		step_timer += delta
@@ -102,6 +132,8 @@ func step_simulation() -> void:
 	else:
 		is_playing = false
 		btn_play.text = "Play"
+		if _embedded and autoplay_embedded and tour_strategies:
+			_hold = 0.0
 
 func update_ui() -> void:
 	gen_label.text = "Generation: %d" % ca_grid.generation
@@ -115,6 +147,9 @@ func update_ui() -> void:
 		"Downward Columns"
 	]
 	strategy_label.text = "Strategy: " + strategy_names[strategy_type]
+	if _caption:
+		_caption.text = "%s
+generation %d / 30" % [strategy_names[strategy_type], ca_grid.generation]
 
 func handle_camera(delta) -> void:
 	if _xr_active:

@@ -4,8 +4,15 @@ extends Node3D
 
 
 var grid_size: Vector3i = Vector3i(20, 20, 25)
+## "part" (2026-11-10): each cell in the colour of the part it grew from - front legs amber, back legs teal,
+## seat and platform pale - so the anatomy the rules found can be read. "height": the original gradient.
+## (Neither showed before: the material never read the instance colours, every cell stood grey.)
+@export_enum("part", "height") var colour_by: String = "part"
 var cells: Array = []
 var generation: int = 0
+## The occupied cells, in the order they grew (2026-11-10). Every strategy and every redraw walked all
+## 10 000 cells to find the few hundred alive: 2-8 ms a step, and the gradient strategy 84 ms.
+var occupied: Array = []
 
 # Visualization
 var multimesh_instance: MultiMeshInstance3D
@@ -37,6 +44,11 @@ func setup_multimesh() -> void:
 	
 	multimesh_instance.multimesh = multi_mesh
 	multimesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.vertex_color_is_srgb = true
+	mat.roughness = 0.7
+	multimesh_instance.material_override = mat
 
 func initialize_grid() -> void:
 	"""Initialize 3D cell grid"""
@@ -65,10 +77,16 @@ func get_cell_by_index(idx: int) -> ChairCell:
 func reset() -> void:
 	"""Clear all cells"""
 	generation = 0
-	for cell in cells:
-		if cell:
-			cell.clear()
+	for cell in occupied:
+		cell.clear()
+	occupied.clear()
 	update_visualization()
+
+## Occupy a cell and remember it. Strategies and seeds go through here, never set_occupied directly.
+func occupy(cell: ChairCell, type: ChairCell.CellType) -> void:
+	if not cell.is_occupied:
+		occupied.append(cell)
+	cell.set_occupied(type, generation)
 
 func seed_chair_base() -> void:
 	"""Seed initial 4 pillar positions"""
@@ -94,7 +112,7 @@ func seed_chair_base() -> void:
 		var pos = positions[i]
 		var cell = get_cell(pos.x, pos.y, pos.z)
 		if cell:
-			cell.set_occupied(types[i], generation)
+			occupy(cell, types[i])
 
 func seed_floating_platform() -> void:
 	"""Seed 8x8 platform at height 6"""
@@ -108,24 +126,17 @@ func seed_floating_platform() -> void:
 		for y in range(start_y, end_y + 1):
 			var cell = get_cell(x, y, z)
 			if cell:
-				cell.set_occupied(ChairCell.CellType.STRUCTURE, generation)
+				occupy(cell, ChairCell.CellType.STRUCTURE)
 
 func get_occupied_count() -> int:
-	var count = 0
-	for cell in cells:
-		if cell and cell.is_occupied:
-			count += 1
-	return count
+	return occupied.size()
 
 func update_visualization() -> void:
 	"""Update MultiMesh with current cell states"""
 	cell_positions.clear()
 	cell_colors.clear()
 	
-	var occupied_cells = []
-	for cell in cells:
-		if cell and cell.is_occupied:
-			occupied_cells.append(cell)
+	var occupied_cells = occupied
 	
 	var mm = multimesh_instance.multimesh
 	if occupied_cells.is_empty():
@@ -135,6 +146,8 @@ func update_visualization() -> void:
 	# Reset to 0 first so use_colors stays enabled when resizing
 	mm.instance_count = 0
 	mm.instance_count = occupied_cells.size()
+	# An empty grid set visible_instance_count to 0 above and nothing set it back: a reset-then-seed drew nothing.
+	mm.visible_instance_count = -1
 	
 	for i in range(occupied_cells.size()):
 		var cell = occupied_cells[i]
@@ -148,6 +161,15 @@ func update_visualization() -> void:
 		# Set color based on height
 		var height_ratio = float(pos.z) / float(grid_size.z)
 		var color = Color(0.3 + height_ratio * 0.5, 0.5, 0.3 + height_ratio * 0.3)
+		if colour_by == "part":
+			var part := Color(0.86, 0.84, 0.78)                                   # seat, platform, structure
+			match cell.cell_type:
+				ChairCell.CellType.FRONT_LEFT, ChairCell.CellType.FRONT_RIGHT:
+					part = Color(0.95, 0.62, 0.28)
+				ChairCell.CellType.BACK_LEFT, ChairCell.CellType.BACK_RIGHT:
+					part = Color(0.3, 0.7, 0.86)
+			color = part * (0.72 + 0.28 * height_ratio)
+			color.a = 1.0
 		mm.set_instance_color(i, color)
 
 func _exit_tree() -> void:

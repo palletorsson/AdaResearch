@@ -68,7 +68,7 @@ func strategy_downward_columns() -> void:
 	
 	# Apply new states
 	for state in new_states:
-		state[0].set_occupied(state[1], grid.generation)
+		grid.occupy(state[0], state[1])
 
 func is_occupied(x: int, y: int, z: int) -> bool:
 	var cell = grid.get_cell(x, y, z)
@@ -88,7 +88,7 @@ func strategy_simple_switched() -> void:
 
 	if grid.generation < 10:
 		# Phase 1: All pillars grow vertically
-		for cell in grid.cells:
+		for cell in grid.occupied.duplicate():
 			if cell.is_occupied:
 				var above = grid.get_cell(cell.position.x, cell.position.y, cell.position.z + 1)
 				if above and not above.is_occupied:
@@ -96,7 +96,7 @@ func strategy_simple_switched() -> void:
 
 	elif grid.generation < 15:
 		# Phase 2: Front spread, back continue up
-		for cell in grid.cells:
+		for cell in grid.occupied.duplicate():
 			if cell.is_occupied:
 				var type = cell.memory_type
 
@@ -106,8 +106,10 @@ func strategy_simple_switched() -> void:
 					if above and not above.is_occupied:
 						new_states.append([above, type])
 
-				# Front pillars spread horizontally (with constraints)
-				elif type in [ChairCell.CellType.FRONT_LEFT, ChairCell.CellType.FRONT_RIGHT]:
+				# Front pillars spread horizontally (with constraints) - at SEAT height only. Every front cell spread,
+				# at all eleven heights, so the seat filled the whole leg volume: a solid block, not a chair.
+				# The legs grow one cell a generation for the first ten, so their top - the seat - is z = 10.
+				elif type in [ChairCell.CellType.FRONT_LEFT, ChairCell.CellType.FRONT_RIGHT] and cell.position.z == 10:
 					# Only edge cells can spread
 					var horiz_neighbors = count_horizontal_neighbors(cell)
 
@@ -132,13 +134,13 @@ func strategy_simple_switched() -> void:
 
 	# Apply new states
 	for state in new_states:
-		state[0].set_occupied(state[1], grid.generation)
+		grid.occupy(state[0], state[1])
 
 func strategy_memory_based() -> void:
 	"""Strategy 2: Cells remember origin and act accordingly"""
 	var new_states = []
 	
-	for cell in grid.cells:
+	for cell in grid.occupied.duplicate():
 		if cell.is_occupied:
 			var age = grid.generation - cell.generation_born
 			var type = cell.memory_type
@@ -176,24 +178,41 @@ func strategy_memory_based() -> void:
 	
 	# Apply new states
 	for state in new_states:
-		state[0].set_occupied(state[1], grid.generation)
+		grid.occupy(state[0], state[1])
 
 func compute_gradient() -> void:
 	"""Compute distance gradient from back edge"""
 	var back_cells = []
 	
-	for cell in grid.cells:
+	for cell in grid.occupied.duplicate():
 		if cell.is_occupied and cell.memory_type in [ChairCell.CellType.BACK_LEFT, ChairCell.CellType.BACK_RIGHT]:
 			back_cells.append(cell)
 	
 	if back_cells.is_empty():
 		return
-	
-	for cell in grid.cells:
-		var min_dist = INF
-		for back_cell in back_cells:
-			var dist = cell.position.distance_to(back_cell.position)
-			min_dist = min(min_dist, dist)
+
+	# Only occupied cells read a gradient, and the back cells stand in vertical runs, so the distance to a
+	# run is exact from its (x, y) and z span. This compared every one of 10 000 cells with every back cell:
+	# 84 ms a step, 167 ms at worst - in a headset. Same values for every cell that is read. (2026-11-10)
+	var runs := {}   # Vector2i(x, y) -> Vector2i(z_min, z_max)
+	for back_cell in back_cells:
+		var key := Vector2i(back_cell.position.x, back_cell.position.y)
+		if runs.has(key):
+			runs[key] = Vector2i(mini(runs[key].x, back_cell.position.z), maxi(runs[key].y, back_cell.position.z))
+		else:
+			runs[key] = Vector2i(back_cell.position.z, back_cell.position.z)
+	for cell in grid.occupied:
+		var min_dist := INF
+		for key: Vector2i in runs:
+			var span: Vector2i = runs[key]
+			var dz := 0
+			if cell.position.z < span.x:
+				dz = span.x - cell.position.z
+			elif cell.position.z > span.y:
+				dz = cell.position.z - span.y
+			var dx: int = cell.position.x - key.x
+			var dy: int = cell.position.y - key.y
+			min_dist = minf(min_dist, sqrt(float(dx * dx + dy * dy + dz * dz)))
 		cell.gradient = min_dist
 
 func strategy_gradient_based() -> void:
@@ -201,12 +220,17 @@ func strategy_gradient_based() -> void:
 	compute_gradient()
 	var new_states = []
 	
-	for cell in grid.cells:
+	for cell in grid.occupied.duplicate():
 		if cell.is_occupied:
 			var gradient_value = cell.gradient
 			
-			# High gradient (far from back) = horizontal growth
-			if gradient_value > 5.0 and grid.generation > 5:
+			# High gradient (far from back) = horizontal growth - from the TOP of a column only. Every cell spread,
+			# at every height, so the work filled into a 2 942-cell block (23-84 ms a step); from the top it lays a
+			# seat, and where the seat reaches the back legs' field it turns upward into a back. (2026-11-10)
+			var above_cell := grid.get_cell(cell.position.x, cell.position.y, cell.position.z + 1)
+			if gradient_value > 5.0 and grid.generation > 5 and above_cell != null and above_cell.is_occupied:
+				pass
+			elif gradient_value > 5.0 and grid.generation > 5:
 				for dx in [-1, 0, 1]:
 					for dy in [-1, 0, 1]:
 						var neighbor = grid.get_cell(
@@ -214,7 +238,10 @@ func strategy_gradient_based() -> void:
 							cell.position.y + dy,
 							cell.position.z
 						)
-						if neighbor and not neighbor.is_occupied:
+						# ...and within the legs' footprint plus two cells, as the switched strategy bounds its seat.
+						if neighbor and not neighbor.is_occupied \
+								and absi(neighbor.position.x - grid.grid_size.x / 2) <= 5 \
+								and absi(neighbor.position.y - grid.grid_size.y / 2) <= 5:
 							new_states.append([neighbor, cell.memory_type])
 			else:
 				# Low gradient = vertical growth
@@ -224,7 +251,7 @@ func strategy_gradient_based() -> void:
 	
 	# Apply new states
 	for state in new_states:
-		state[0].set_occupied(state[1], grid.generation)
+		grid.occupy(state[0], state[1])
 
 func strategy_pure_ca() -> void:
 	"""Strategy 4: Pure CA with state encoding"""
@@ -232,14 +259,14 @@ func strategy_pure_ca() -> void:
 	
 	# Calculate local "clock" from column heights
 	var heights = {}
-	for cell in grid.cells:
+	for cell in grid.occupied.duplicate():
 		if cell.is_occupied:
 			var key = Vector2i(cell.position.x, cell.position.y)
 			if not heights.has(key):
 				heights[key] = 0
 			heights[key] = max(heights[key], cell.position.z + 1)
 	
-	for cell in grid.cells:
+	for cell in grid.occupied.duplicate():
 		if cell.is_occupied:
 			var key = Vector2i(cell.position.x, cell.position.y)
 			var height = heights.get(key, 0)
@@ -274,7 +301,7 @@ func strategy_pure_ca() -> void:
 
 	# Apply new states
 	for state in new_states:
-		state[0].set_occupied(state[1], grid.generation)
+		grid.occupy(state[0], state[1])
 
 func count_horizontal_neighbors(cell: ChairCell) -> int:
 	"""Count neighbors in the same horizontal layer (Z level)"""

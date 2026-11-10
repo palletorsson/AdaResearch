@@ -1414,6 +1414,20 @@
       ],
       "tower": "floor 112 (CA_BeyondBinary) at scale 0.35, unchanged placement",
       "capture": "ada_run/improve/ca_growth_network/before_after.png (standalone pair at one camera + the tower before/after)"
+    },
+    {
+      "lookup_name": "ca_chair_test",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "Main: placed in a world the demo's UI is hidden and Play lived only in that UI, so floor 113 showed the four seed cells forever. autoplay_embedded + tour_strategies: it grows by itself and, after each chair, holds it (hold_seconds) and grows the next strategy from the same seed - five chairs, the claim of the piece; a Label3D names the strategy; WASD no longer drives the hidden demo camera",
+        "CAGrid: colour_by 'part' - front legs amber, back legs teal, seat/platform pale ('height' keeps the original); neither showed before, the material never read the instance colours. An occupied-cell list replaces every walk over all 10 000 cells; a reset-then-seed no longer leaves visible_instance_count at 0",
+        "CAStrategy: Simple Rule Switching spread its seat from every front-leg cell at all eleven heights - a solid block, not a chair; now at seat height (z 10) only. Gradient: horizontal growth from the top of a column only and within the legs' footprint + 2 (it filled a 2 942-cell block), and compute_gradient measures occupied cells against the back-leg runs (exact, same values) instead of 10 000 cells x every back cell",
+        "cost per step: switched 7.6 -> 0.5 ms, gradient 84 (167 worst) -> 2.4 ms, the others 2.4-5 -> 0.4-0.6 ms"
+      ],
+      "tower": "floor 113 (CA_ExpandingSpace) at scale 0.12, unchanged placement",
+      "capture": "ada_run/improve/ca_chair_test/before_after.png (the tower before + the five strategies' chairs from one tower camera)"
     }
   ]
 }
