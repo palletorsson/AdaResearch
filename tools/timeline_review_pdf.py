@@ -274,10 +274,9 @@ def build(seq: str, do_shoot: bool, only: set | None = None) -> Path:
         text_x = M
         if img:
             th = fit(img, M, y, thumb_w, thumb_h)
-            c.setFont("Body", 6.5); c.setFillColor(grey)
-            c.drawString(M, y - th - 3 * mm, ("alone: " + alone_note)[:48])
+            cap = ParagraphStyle("cap", fontName="Body", fontSize=6.5, leading=8, textColor=grey)
+            thumb_bottom = para("alone: " + alone_note, cap, M, y - th - 1 * mm, thumb_w) - 2 * mm
             text_x = M + thumb_w + 5 * mm
-            thumb_bottom = y - th - 5 * mm
         else:
             thumb_bottom = y
         desc = fix_text((reg.get(key) or {}).get("description") or "")
