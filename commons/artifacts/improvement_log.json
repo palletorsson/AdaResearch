@@ -1318,6 +1318,17 @@
       ],
       "tower": "floor 144 (SoftBodies_Playground_of_Joy, f4_rounded_softbody_test_8_10); the residency change reaches all 128 soft bodies on floors 139-146 and 202",
       "capture": "headless + gl_compatibility probe numbers above (probes deleted); notes in the side-session notes folder of the fitting session"
+    },
+    {
+      "lookup_name": "mst_visualization",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "edge_radius export (0.05 m; 0 = one-pixel lines): graph edges as tubes via ThickLine.tube_mesh, the edges the spanning tree takes at 2.5x - its 'make MST edges thicker' could only change a colour on a line"
+      ],
+      "tower": "floor 176 (GT_Spanning_Trees) at scale 0.28: edges 1.4 cm, tree edges 3.5 cm",
+      "capture": "ada_run/improve/mst_visualization/before_after.png (scene camera stripped, uid stripped)"
     }
   ]
 }

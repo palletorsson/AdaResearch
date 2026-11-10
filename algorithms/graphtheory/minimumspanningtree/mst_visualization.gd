@@ -1,6 +1,11 @@
 class_name MSTVisualization
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+## Edge thickness (m); the edges the spanning tree takes are drawn 2.5x as thick. 0 = one-pixel lines, under which
+## "make MST edges thicker" could only change a colour (2026-11-09).
+@export var edge_radius: float = 0.05
+
 # @identity
 # essence: Kruskal's (sort edges by weight, Union-Find to reject cycles) or Prim's (grow tree from starting vertex, always add cheapest crossing edge) — both find the minimum-weight spanning tree
 # desire: to watch the cheapest skeleton of a network assemble edge by edge — green edges accepted, red edges rejected for creating cycles, the MST growing like a nervous system
@@ -557,10 +562,11 @@ func create_edge_visualization() -> void:
 			add_child(label)
 			edge_labels.append(label)
 
-func create_edge_line(from_pos: Vector3, to_pos: Vector3, color: Color) -> MeshInstance3D:
+func create_edge_line(from_pos: Vector3, to_pos: Vector3, color: Color, radius: float = -1.0) -> MeshInstance3D:
 	"""Create a line mesh between two positions"""
 	var mesh_instance = MeshInstance3D.new()
-	var mesh = create_line_mesh(from_pos, to_pos)
+	var r: float = edge_radius if radius < 0.0 else radius
+	var mesh = ThickLine.tube_mesh(PackedVector3Array([from_pos, to_pos]), PackedColorArray(), r, 8) if r > 0.0 else create_line_mesh(from_pos, to_pos)
 	mesh_instance.mesh = mesh
 	
 	var material = StandardMaterial3D.new()
@@ -943,9 +949,9 @@ func create_mst_edge_visualization(edge) -> void:
 	var from_pos = vertices[edge.from].position
 	var to_pos = vertices[edge.to].position
 	
-	var mst_mesh = create_edge_line(from_pos, to_pos, mst_edge_color)
+	var mst_mesh = create_edge_line(from_pos, to_pos, mst_edge_color, edge_radius * 2.5)
 	
-	# Make MST edges thicker
+	# Make MST edges thicker (they are: 2.5x the graph's edge radius)
 	var material = mst_mesh.material_override as StandardMaterial3D
 	material.emission = mst_edge_color * 0.6
 	
