@@ -95,6 +95,8 @@ const CAPTION_CLEARANCE: float = 0.35
 @export var scc_color_4: Color = Color(0.9, 0.2, 0.9, 1.0)
 @export var scc_color_5: Color = Color(0.2, 0.9, 0.9, 1.0)
 @export var edge_color: Color = Color(0.6, 0.6, 0.6, 0.8)
+## Edge thickness (2026-11-10). The edges were 2 cm rods, about a centimetre at the tower's 0.5 scale.
+@export_range(0.005, 0.1, 0.005) var edge_radius: float = 0.03
 @export var back_edge_color: Color = Color(0.9, 0.3, 0.3, 1.0)
 @export var cross_edge_color: Color = Color(0.3, 0.9, 0.3, 1.0)
 
@@ -468,12 +470,21 @@ func create_edge_visual(edge: Dictionary) -> void:
 	add_child(line_container)
 	_created.append(line_container)
 
+	# The arrow runs from sphere SURFACE to sphere surface and its head touches the head vertex. Before
+	# 2026-11-10 the cone sat 0.1 x the edge length short of the head's centre - inside its 0.2 m sphere on
+	# every edge shorter than 2 m - so no edge showed which way it pointed, and strong connectivity IS the
+	# directions. (vertex spheres: radius 0.2, see build.)
+	var vertex_r := 0.2
+	var head_len := clampf(distance - 2.0 * vertex_r, 0.02, 0.2)
+	var shaft := maxf(0.01, distance - 2.0 * vertex_r - head_len)
 	var line := MeshInstance3D.new()
 	var cylinder := CylinderMesh.new()
-	cylinder.top_radius = 0.02
-	cylinder.bottom_radius = 0.02
-	cylinder.height = distance * 0.85
+	cylinder.top_radius = edge_radius
+	cylinder.bottom_radius = edge_radius
+	cylinder.height = shaft
+	cylinder.radial_segments = 10
 	line.mesh = cylinder
+	line.position = Vector3(0, -distance * 0.5 + vertex_r + shaft * 0.5, 0)
 	var material: StandardMaterial3D = _make_material(edge_color, 0.3, 1.0, true)
 	line.material_override = material
 	line_container.add_child(line)
@@ -502,11 +513,12 @@ func create_edge_visual(edge: Dictionary) -> void:
 	var arrow := MeshInstance3D.new()
 	var cone := CylinderMesh.new()
 	cone.top_radius = 0.0
-	cone.bottom_radius = 0.1
-	cone.height = 0.2
+	cone.bottom_radius = maxf(0.06, edge_radius * 2.6)
+	cone.height = head_len
+	cone.radial_segments = 12
 	arrow.mesh = cone
 	arrow.material_override = material.duplicate()
-	arrow.position = Vector3(0, distance * 0.4, 0)
+	arrow.position = Vector3(0, distance * 0.5 - vertex_r - head_len * 0.5, 0)
 	line_container.add_child(arrow)
 
 	edge_lines[edge.from + "_" + edge.to] = line_container
@@ -654,14 +666,21 @@ func update_vertex_color(vertex: String, color: Color) -> void:
 func update_edge_color(from: String, to: String, color: Color) -> void:
 	var edge_key = from + "_" + to
 	if edge_lines.has(edge_key):
-		var line = edge_lines[edge_key].get_child(0)
-		line.material_override = _make_material(color, 0.4, 1.2, true)
+		# Shaft AND head: only the shaft took the colour, so a back edge wore a grey arrowhead.
+		var mat := _make_material(color, 0.4, 1.2, true)
+		for part in edge_lines[edge_key].get_children():
+			if part is MeshInstance3D:
+				part.material_override = mat
 
 func update_info_text(text: String) -> void:
 	if info_label:
 		info_label.text = text
 
 func _input(event: InputEvent) -> void:
+	# The keys belong to the work only when it IS the scene. Placed in a world they reached it from anywhere:
+	# in the desktop tower Space started or paused it and Esc rebuilt it, floors away.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()

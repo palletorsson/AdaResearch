@@ -1384,6 +1384,20 @@
       ],
       "tower": "floor 114 (CA_SoftRules), scale 1, unchanged placement",
       "capture": "ada_run/improve/ca_sphere/before_after.png (standalone pair at one camera + the tower before/after)"
+    },
+    {
+      "lookup_name": "tarjan_algorithm",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "arrows run sphere surface to sphere surface, the head touching the head vertex: the cone sat 0.1 x the edge length short of the head's centre - inside its 0.2 m sphere on every edge under 2 m - so the direction of most edges was invisible, and strong connectivity IS the directions",
+        "update_edge_color colours the head too (only the shaft took it: back edges wore grey arrowheads)",
+        "edge_radius export 0.03 (was a fixed 0.02 m rod, about a centimetre at the tower's 0.5)",
+        "keys only when the work IS the scene: in the desktop tower Space started/paused it and Esc rebuilt it from anywhere"
+      ],
+      "tower": "floor 175 (GT_Connectivity) at scale 0.5, mutuality split, unchanged placement",
+      "capture": "ada_run/improve/tarjan_algorithm/before_after.png (standalone crop at one camera + tower crops)"
     }
   ]
 }
