@@ -676,6 +676,11 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 			if sun.get_viewport()==get_viewport(): sun.hide()
 		for environment in artifact.find_children("*", "WorldEnvironment", true, false):
 			if environment.get_viewport()==get_viewport(): environment.environment = null
+		# ...nor its screen panels: a standalone demo's CanvasLayer drew over the desktop visitor's view on every
+		# floor it was resident (fibonacci_sequences' panel on 122-123, 11-10). The grid does the same
+		# (GridInteractablesComponent._suppress_embedded_chrome); a monitor's private SubViewport keeps its own.
+		for layer in artifact.find_children("*", "CanvasLayer", true, false):
+			if layer.get_viewport()==get_viewport(): layer.hide()
 		if item.get("config", {}).has("reactive"):
 			Reactions.attach.call_deferred(artifact, item.config)
 	if data.floors[index].map == "Point_Coordinates" and item.artifact == "point_held":

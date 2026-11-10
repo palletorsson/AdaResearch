@@ -1444,6 +1444,21 @@
       ],
       "tower": "floor 109 (CA_Introduction) at scale 1, unchanged placement",
       "capture": "ada_run/improve/ca_showcase/before_after.png (one camera: HEAD vs after at 9 s, plus Dendrite and Disease)"
+    },
+    {
+      "lookup_name": "fibonacci_sequences",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "THE 2 FPS FLOOR: _process freed and rebuilt every view every frame - ~630 CSG nodes, each with a NEW material - only to move a red highlight along the towers and breathe the spiral's spheres. Measured alone (headless): 491.8 ms a frame, worst 1.3 s; floor 123 (Fractal_Synthesis, no lesson config) ran it in the tower. Built once now, shared meshes + materials; the frame swaps two towers' materials and scales 80 spheres: own _process 0.063 ms (the engine's idle headless frame is 8.3 ms either way)",
+        "CSG -> MeshInstance3D with CSG's own facets (SphereMesh 12x6, CylinderMesh 8 sides): a default SphereMesh on ~260 spheres would be a million triangles",
+        "the builders keep their names, containers and dimensions - golden_mapping_lesson (floor 122) and fractal_procedure_gallery (Fractal_Synthesis) call them to stage held examples; the original oriented each connector with look_at_from_position BEFORE add_child (read as LOCAL), so the connectors are oriented in the local frame (after add_child the call reads GLOBAL and every connector moves wherever the container is not at the origin)",
+        "the scene's screen panel (a CanvasLayer driven by a lost FibUI, now a stub) is gone; it drew over the desktop visitor's view on floors 122-123. The Void now hides every museum import's CanvasLayer (floor_content.gd, as the grid's _suppress_embedded_chrome does)",
+        "NOT done: the views still overlap at the origin (pinecone, tower row, hanging tree) - the lesson and the gallery re-place the containers themselves, so moving the defaults would move them too"
+      ],
+      "tower": "floors 122 (lesson, unchanged) and 123 (scale 0.4, height 1.1, unchanged placement): same picture, panel gone",
+      "capture": "ada_run/improve/fibonacci_sequences/before_after.png (standalone HEAD vs after; floors 123 and 122 in the tower, color_survey.gd)"
     }
   ]
 }
