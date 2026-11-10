@@ -1,0 +1,1 @@
+One rule turns seven white carousels: each layer turns 1.2 times faster than the layer below it. On one carousel every layer turns at the same speed, and you can ride a ball around it. Change the profile and the same rule draws a different shape.
