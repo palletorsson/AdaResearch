@@ -677,6 +677,9 @@ func end_episode() -> void:
 
 # Input for debugging and control
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) ended its episode from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_SPACE:

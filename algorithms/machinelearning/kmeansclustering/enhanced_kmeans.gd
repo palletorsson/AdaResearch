@@ -289,6 +289,9 @@ func _process(delta: float) -> void:
 	_update_lesson_label()
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) stepped it and Esc restarted it, from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_accept"):  # Space key
 		if step_by_step_mode or is_paused:
 			manual_step = true

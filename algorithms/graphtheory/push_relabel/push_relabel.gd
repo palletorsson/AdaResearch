@@ -1089,6 +1089,9 @@ func update_operation_text(text: String) -> void:
 		operation_label.text = "Operation: " + text
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) started or stopped it and Esc reset it, from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()

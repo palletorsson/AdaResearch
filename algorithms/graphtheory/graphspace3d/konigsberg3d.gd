@@ -929,6 +929,9 @@ func demonstrate_bridge_removal() -> void:
 
 func _input(event: InputEvent) -> void:
 	"""Handle educational interactions"""
+	# Keys only when the work IS the scene: in the desktop tower E, H, D and B ran and redrew the bridges from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_E:

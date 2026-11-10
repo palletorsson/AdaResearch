@@ -168,6 +168,9 @@ func change_order() -> void:
 	reset()
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower R (the retry), 1 and O reset and advanced the study from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_1:
 			advance()

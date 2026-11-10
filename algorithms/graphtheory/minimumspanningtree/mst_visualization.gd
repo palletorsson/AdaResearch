@@ -1077,6 +1077,9 @@ func get_min_key() -> float:
 
 func _input(event: InputEvent) -> void:
 	"""Handle user input"""
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump), R (the retry) and the digits ran and reset it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:

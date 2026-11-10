@@ -257,6 +257,9 @@ func _input(event: InputEvent) -> void:
 
 	# Handle keyboard shortcuts
 	if event is InputEventKey and event.pressed:
+		# Keys only when the work IS the scene: in the desktop tower Space (the jump) and R (the retry) reset it from any floor.
+		if get_tree().current_scene != self:
+			return
 		match event.keycode:
 			KEY_R:
 				reset_network()
