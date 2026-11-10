@@ -1,6 +1,11 @@
 class_name PushRelabel
 extends Node3D
 
+const ThickLine := preload("res://commons/artifacts/_hangar/thick_line.gd")
+## Edge arrows as a tube with a cone head, stopping at the target node's surface (2026-11-09). 0 = the old one-pixel
+## line arrows, whose head ended at the node's CENTRE - inside its 0.2 m sphere, so no edge showed its direction.
+@export var edge_radius: float = 0.025
+
 # @identity
 # essence: preflow-push with height labels — initialize by saturating source edges, then repeatedly: push excess flow along admissible edges (height[u] > height[v]), or relabel (raise height) if no push is possible
 # desire: to see excess accumulate and labels rise, then notice where a forward-only allocation gets stuck
@@ -757,6 +762,8 @@ func create_edge_visual(edge: Dictionary) -> void:
 	_own(capacity_label)
 
 func create_arrow_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
+	if edge_radius > 0.0:
+		return _arrow_tube_mesh(from, to)
 	var mesh := ArrayMesh.new()
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -798,6 +805,39 @@ func create_arrow_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
 	arrays[Mesh.ARRAY_INDEX] = indices
 
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
+	return mesh
+
+
+## Shaft and head in ONE mesh, so the material update_visuals() swaps onto the edge colours both.
+func _arrow_tube_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
+	var dir: Vector3 = (to - from).normalized()
+	var node_r := 0.22                                   # the node spheres are 0.2 m
+	var a: Vector3 = from + dir * node_r
+	var tip: Vector3 = to - dir * node_r
+	var head_len: float = minf(0.24, a.distance_to(tip) * 0.35)
+	var base: Vector3 = tip - dir * head_len
+	var mesh: ArrayMesh = ThickLine.tube_mesh(PackedVector3Array([a, base]), PackedColorArray(), edge_radius, 8)
+	var side: Vector3 = dir.cross(Vector3.UP if absf(dir.dot(Vector3.UP)) < 0.9 else Vector3.RIGHT).normalized()
+	var up: Vector3 = side.cross(dir)
+	var verts := PackedVector3Array()
+	var norms := PackedVector3Array()
+	var sides := 12
+	var head_r: float = edge_radius * 2.6
+	for k in sides:
+		var a0: float = TAU * float(k) / float(sides)
+		var a1: float = TAU * float(k + 1) / float(sides)
+		var p0: Vector3 = base + (side * cos(a0) + up * sin(a0)) * head_r
+		var p1: Vector3 = base + (side * cos(a1) + up * sin(a1)) * head_r
+		var n: Vector3 = ((p0 + p1) * 0.5 - base).normalized()
+		for v in [p0, p1, tip]:
+			verts.append(v); norms.append(n)
+		for v in [base, p1, p0]:                       # the cap
+			verts.append(v); norms.append(-dir)
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_NORMAL] = norms
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
 
 

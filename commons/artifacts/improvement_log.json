@@ -1329,6 +1329,17 @@
       ],
       "tower": "floor 176 (GT_Spanning_Trees) at scale 0.28: edges 1.4 cm, tree edges 3.5 cm",
       "capture": "ada_run/improve/mst_visualization/before_after.png (scene camera stripped, uid stripped)"
+    },
+    {
+      "lookup_name": "push_relabel_algorithm",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "edge_radius export (0.025 m; 0 = the old arrows): each edge a tube shaft with a cone head, in ONE mesh so update_visuals()' material swaps colour both; the arrow now stops at the target node's surface - the old line arrowhead ended at the node's centre, inside its 0.2 m sphere, so no edge showed its direction"
+      ],
+      "tower": "floor 177 (GT_Flow) at scale 0.32",
+      "capture": "ada_run/improve/push_relabel_algorithm/before_after.png (the work's own camera, high-res crop)"
     }
   ]
 }
