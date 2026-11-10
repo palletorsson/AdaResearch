@@ -1459,6 +1459,21 @@
       ],
       "tower": "floors 122 (lesson, unchanged) and 123 (scale 0.4, height 1.1, unchanged placement): same picture, panel gone",
       "capture": "ada_run/improve/fibonacci_sequences/before_after.png (standalone HEAD vs after; floors 123 and 122 in the tower, color_survey.gd)"
+    },
+    {
+      "lookup_name": "diffusion_limited_aggregation",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "IT NEVER GREW: walkers launched on a 6 m circle took one 0.1 m step a FRAME; a walker needed thousands of frames to arrive and ~90 % escaped past 8 m first, so the crystal grew about one particle a minute - in the tower (floors 121, 122) a seed, a few yellow specks and a magenta bar. Now the textbook method: launch just outside the cluster, stride on circles while far (a circle that cannot reach the cluster), unit steps near, freeze on touch; a dense grid with a near-flag answers 'touching?' (~1.7 us a step). ~25 particles a second; the 1.25 m disc fills at ~600-700 and a new seed starts after 8 s",
+        "drawn as one MultiMesh of particles + one of the contacts that froze them, so the arms read as arms; arrival order gold -> blue (scaled to the fill the disc holds); the last walker's final steps stay as faint footprints (a MultiMesh: a ThickLine tube of 200 points cost 20-70 ms); N and the mass-radius dimension (slope of log N(r), sorted radii + bsearch) read below - 1.55-1.85 measured, 1.71 expected",
+        "the two bar indicators 8 m out and the 6 m spawn ring made the fit pass shrink it to 0.4 and lift it 2.7 m; the work is a 2.6 m disc on a stand now, own size on the floor",
+        "cost: own _process 0.1-0.5 ms a frame (300 steps budget); spikes seen in a 90 s headless run came in clustered windows on a busy machine (preemption), not tied to N or the trail",
+        "exports: stickiness (the critical parameter: < 1 thickens toward a blob), grow_per_second, steps_per_frame, max_points, prewarm_points (captures), seed_value; apply_grid_config takes stickiness / grow_per_second / prewarm_points"
+      ],
+      "tower": "floor 121 (17, 8.3) facing 180 and floor 122 (17, -8.3) facing 0 (it faced the sky), scale 1, height 0 (were 0.4 / 2.62 and 0.38 / 2.85); survey: on slab, no faults",
+      "capture": "ada_run/improve/diffusion_limited_aggregation/before_after.png (standalone HEAD vs grown; floors 121 and 122 in the tower)"
     }
   ]
 }

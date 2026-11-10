@@ -38559,19 +38559,20 @@
           "artifact": "diffusion_limited_aggregation",
           "station": "SE",
           "position": [
-            15,
-            9
+            17,
+            8.3
           ],
           "facing": 180,
-          "height": 2.62,
-          "scale": 0.4,
+          "height": 0,
+          "scale": 1,
           "config": {
             "fit": {
               "strategies": [
+                "move",
                 "raise",
                 "scale_area"
               ],
-              "note": "A 17 x 13 m aggregation wall through the ceiling and past the east edge: 0.4."
+              "note": "11-10 improvement pass: the work is a 2.6 m glass disc on a stand now (it was a 17 x 13 m spawn ring + indicators, hence 0.4 and a 2.6 m lift); own size, on the floor, between columns 14 and 20, the foot inside the north edge, the disc facing the hall."
             }
           }
         },
@@ -38728,19 +38729,21 @@
           "artifact": "diffusion_limited_aggregation",
           "station": "NE",
           "position": [
-            16,
-            -8
+            17,
+            -8.3
           ],
-          "facing": 180,
-          "height": 2.85,
-          "scale": 0.38,
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
           "config": {
             "fit": {
               "strategies": [
+                "move",
                 "raise",
-                "scale_area"
+                "scale_area",
+                "turn"
               ],
-              "note": "0.2 m through the ceiling at 0.4: 0.38."
+              "note": "11-10 improvement pass: a 2.6 m glass disc on a stand now (was scaled 0.38 and lifted 2.85 m); own size, on the floor between columns 14 and 20 at the south edge, turned to face the hall (facing 180 showed the sky its face)."
             }
           }
         },
