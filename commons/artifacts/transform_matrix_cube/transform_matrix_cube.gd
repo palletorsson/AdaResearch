@@ -408,6 +408,9 @@ func _update_labels() -> void:
 		_det_label.modulate = Color(0.3, 1, 0.5)  # Green - proper
 
 func _input(event) -> void:
+	# Keys only when the work IS the scene: in the desktop tower the digits applied its matrices from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: _apply_matrix(Basis.IDENTITY)

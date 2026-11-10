@@ -309,6 +309,9 @@ func _hash_vec3(v: Vector3) -> float:
 
 # ----------------- Controls ---------------------
 func _input(e: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower C, G, D, +/- cleared and restyled the trails from any floor.
+	if get_tree().current_scene != self:
+		return
 	if e is InputEventKey and e.pressed:
 		match e.keycode:
 			KEY_C:

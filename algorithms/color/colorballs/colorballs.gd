@@ -597,6 +597,9 @@ func create_ball_at_y(y_position: float = 7.0) -> void:
 	_log("Created ball at y=%.1f with radius: %.3f, color: %s" % [y_position, fixed_radius, color])
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) added a ball and Esc removed one, from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_accept"):  # Space key
 		add_ball()
 	elif event.is_action_pressed("ui_cancel"):  # Escape key

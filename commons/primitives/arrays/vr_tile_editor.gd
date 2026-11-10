@@ -327,6 +327,9 @@ func _on_group_changed(_group: int) -> void:
 # --- Desktop Keyboard Fallback ---
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower M and the arrows switched its lattice and group from any floor.
+	if get_tree().current_scene != self:
+		return
 	if symmetry_lesson: return
 	if not _puzzle:
 		return

@@ -1085,6 +1085,9 @@ func _animate_button_press():
 		tween.tween_property(mesh, "position:z", 0.0, 0.1)
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and R (the retry) ran and reset it from any floor.
+	if get_tree().current_scene != self:
+		return
 	# Keyboard controls for testing
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:

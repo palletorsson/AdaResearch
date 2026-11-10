@@ -1536,6 +1536,10 @@ func _on_pointer_pressed(_position: Vector3) -> void:
 func _input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
+	# Keys only when the work (or the VR tile editor holding it) IS the scene: in the desktop tower Space (the jump)
+	# and the arrows, digits, Q, E, A, D, W and Tab moved its cursor and switched its group from any floor.
+	if get_tree().current_scene != self and get_tree().current_scene != get_parent():
+		return
 
 	if event is InputEventKey:
 		var key = event as InputEventKey

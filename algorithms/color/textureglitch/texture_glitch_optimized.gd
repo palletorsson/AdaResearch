@@ -214,6 +214,9 @@ func update_layer_transforms(layers: Array, anim_data: Dictionary) -> void:
 			layer.scale = Vector3.ONE * (s_fact + sin(time * 3.0 + i) * 0.1)
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) toggled its layer separation from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			enable_layer_separation = !enable_layer_separation

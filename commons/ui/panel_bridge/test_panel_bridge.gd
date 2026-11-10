@@ -168,6 +168,9 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower R (the retry) and the digits reloaded its example from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key := event as InputEventKey
 		match key.keycode:

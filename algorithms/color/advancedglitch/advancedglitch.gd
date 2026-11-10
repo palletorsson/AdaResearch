@@ -544,6 +544,9 @@ func _on_intensity_changed(value: float) -> void:
 	glitch_intensity = value
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and R (the retry) toggled and reset it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:

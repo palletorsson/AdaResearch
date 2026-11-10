@@ -1046,6 +1046,9 @@ func _select_color(idx: int) -> void:
 # ══════════════════════════════════════════════════════════════════════
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower the digits, Q, E, Tab and C repainted and cleared it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: _select_color(0)
