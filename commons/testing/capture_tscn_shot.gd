@@ -20,6 +20,7 @@ var _lift_to_ground: bool = true  # shift instance up so AABB bottom sits at y=0
 var _orbit_focus_override: Vector3 = Vector3.INF  # INF = auto from AABB
 var _frame_wait: int = 0  # >0 = use N await process_frame instead of OS.delay_msec
 var _physics_wait: int = 0  # >0 = N physics ticks (N/60 s of simulated time, however fast frames render)
+var _no_scene_camera: bool = false  # --nocam=true: the scene's own cameras are switched off; the capture camera shoots
 
 func _initialize() -> void:
 	_parse_args()
@@ -67,6 +68,8 @@ func _parse_args() -> void:
 			"physics":
 				if value.is_valid_int():
 					_physics_wait = maxi(0, int(value))
+			"nocam":
+				_no_scene_camera = (value.to_lower() != "false" and value != "0")
 			"focus":
 				# Format: "x,y,z" e.g. "0,0,0"
 				var parts = value.split(",")
@@ -275,6 +278,13 @@ func _run_capture() -> void:
 		) * orbit_dist
 		camera.global_position = orbit_focus + offset
 		camera.look_at(orbit_focus, Vector3.UP)
+		# --nocam=true: a scene that carries its own current Camera3D (cantor_set, romanesco, DLA, Koch, ...) is
+		# otherwise shot from THAT camera - it becomes current on entering the tree, after ours. Switch every camera
+		# in the instance off and make ours current (a deliberate CaptureCamera is honoured above). 2026-11-10.
+		if _no_scene_camera:
+			for c in instance.find_children("*", "Camera3D", true, false):
+				(c as Camera3D).current = false
+			camera.make_current()
 
 	# Render frames with final camera position — OS.delay_msec doesn't render,
 	# so we must await process_frame to actually produce a frame from this angle.

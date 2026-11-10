@@ -12,6 +12,7 @@ var floors: Array = FLOORS
 func world_bounds(host: Node3D) -> AABB:
 	var result := AABB(); var first := true
 	for node in host.find_children("*", "GeometryInstance3D", true, false):
+		if node.get_viewport() != host.get_viewport(): continue # a private filmed world (SubViewport) is not the work's footprint: the films measured 728 m tall
 		var bounds: AABB
 		if node is MeshInstance3D and node.mesh != null: bounds = node.mesh.get_aabb()
 		elif node is MultiMeshInstance3D and node.multimesh != null: bounds = node.multimesh.get_aabb()
@@ -87,7 +88,7 @@ func run() -> void:
 				"visuals": visuals.size(), "bodies": bodies.size(), "pickables": pickables.size(), "labels": labels.map(func(l): return str((l as Label3D).text).left(80)), "lights": lights.size(),
 				"route_m": snappedf(near, .1) if near < INF else null,
 				"world_box": [snappedf(wb.position.x, .01), snappedf(wb.position.z, .01), snappedf(wb.end.x, .01), snappedf(wb.end.z, .01)], "world_bottom": snappedf(wb.position.y - level, .01), "world_top": snappedf(wb.end.y - level, .01), "faults": faults(wb, level), "on_slab": not under.is_empty() and absf(under.position.y - level) < .1, "class": art.get_class(), "script": str(art.get_script().resource_path) if art.get_script() else ""}
-			await _photo_work(f, level, id, mount, b)
+			await _photo_work(f, level, id, mount, wb)   # the WORLD box: mesh_bounds() is in the work's own frame, so aiming by it shot the ceiling (52 of 65 flat, 11-10)
 		survey[str(f)] = {"map": str(data.get("map", "")), "title": str(data.get("title", "")), "route_points": route.size(), "build_ms": Time.get_ticks_msec() - t0, "works": rows}
 		await _photo_floor(f, level)
 		FileAccess.open(out.path_join("survey.json"), FileAccess.WRITE).store_string(JSON.stringify(survey, "  ", false))
@@ -119,8 +120,19 @@ func _photo_work(f: int, level: float, id: String, mount: Node3D, b: AABB) -> vo
 	if toward.length() < 1.0: toward = Vector3(0, 0, 1)
 	toward = toward.normalized()
 	var dist := clampf(maxf(b.size.x, b.size.z) * 1.1 + 1.6, 3.0, 9.0)
-	var eye := c + toward * dist
-	eye.y = clampf(c.y + b.size.y * .25 + .6, level + 1.3, level + 4.8)
+	var eye_y := clampf(c.y + b.size.y * .25 + .6, level + 1.3, level + 4.8)
+	var eye := c + toward * dist; eye.y = eye_y
+	# A column or slab between the eye and the work photographs the column (the corner films, 11-10): turn around the
+	# work until the line to its centre is clear - nothing hit, or only the work itself - from an eye not inside a body.
+	var space := game.get_world_3d().direct_space_state
+	var near_work := b.grow(.3)
+	for turn in [0.0, .6, -.6, 1.2, -1.2, 1.8, -1.8, PI]:
+		var e: Vector3 = c + toward.rotated(Vector3.UP, turn) * dist; e.y = eye_y
+		var at_eye := PhysicsPointQueryParameters3D.new(); at_eye.position = e
+		if not space.intersect_point(at_eye, 1).is_empty(): continue
+		var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(e, c))
+		if hit.is_empty() or near_work.has_point(hit.position):
+			eye = e; break
 	var camera := _cam(60.0)
 	camera.global_position = eye; camera.look_at(c)
 	await _shoot(camera, "%02d_%s" % [f, id.replace("/", "_").left(40)])
