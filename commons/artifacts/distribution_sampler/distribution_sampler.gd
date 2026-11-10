@@ -679,6 +679,9 @@ func _update_stats() -> void:
 	_stats_label.text = "%s\nn = %d\nμ = %.3f\nσ = %.3f" % [dist_names[distribution], _total_samples, mean, std]
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump), the digits, C and S resampled it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: distribution = DistType.UNIFORM

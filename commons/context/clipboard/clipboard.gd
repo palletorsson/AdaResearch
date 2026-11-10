@@ -302,8 +302,11 @@ func _input(event: InputEvent) -> void:
 	if description_sets.size() <= 1:
 		return
 
-	# Keyboard navigation for testing (works anytime)
+	# Arrow keys page it while it is held, or when the clipboard IS the scene: in the tower they paged every
+	# multi-page clipboard from any floor.
 	if event is InputEventKey and event.pressed and not event.echo:
+		if get_tree().current_scene != self and not _is_being_held:
+			return
 		if event.keycode == KEY_RIGHT or event.keycode == KEY_DOWN:
 			_next_page()
 			get_viewport().set_input_as_handled()

@@ -315,6 +315,9 @@ func _clear_generated() -> void:
 	_generated.clear()
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) regenerated the cloud from any floor.
+	if get_tree().current_scene != self:
+		return
 	# Press R to regenerate
 	if event.is_action_pressed("ui_accept"):
 		_clear_generated()

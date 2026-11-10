@@ -262,6 +262,9 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and R (the retry) toggled and reset the board from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE:

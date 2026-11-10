@@ -88,6 +88,9 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump), R (the retry) and the digits respawned it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		var key: InputEventKey = event as InputEventKey
 		match key.keycode:

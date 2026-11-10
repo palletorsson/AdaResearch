@@ -86,6 +86,9 @@ func _process(delta: float) -> void:
 		_advance_layer(layer, delta, start_factor)
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) toggled the decay and Home reset it, from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_home"):
 		_reset_layers()
 	elif event.is_action_pressed("ui_accept"):

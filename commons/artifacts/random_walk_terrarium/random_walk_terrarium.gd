@@ -656,6 +656,9 @@ func _update_stats():
 	_stats_label.text = "%s Walk\nSteps: %d\nMSD: %.4f" % [mode_names[walk_mode], _total_steps, msd]
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower R (the retry) and the digits reset the walkers from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: walk_mode = WalkMode.WALK_2D

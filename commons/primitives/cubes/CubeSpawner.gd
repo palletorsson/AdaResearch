@@ -753,6 +753,9 @@ func _update_field_readout() -> void:
 
 # Debug methods
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower P, O and C toggled, fired and cleared it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_P:  # P to toggle spawner
 			if is_active:

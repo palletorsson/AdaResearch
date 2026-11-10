@@ -394,6 +394,9 @@ func _get_dominant_controller_position() -> Vector3:
 # ============================================================
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) paused it and Home reset it, from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event.is_action_pressed("ui_accept"):
 		_paused = not _paused
 	elif event.is_action_pressed("ui_home"):
