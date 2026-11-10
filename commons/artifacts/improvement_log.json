@@ -1355,6 +1355,19 @@
       ],
       "tower": "floor 139 (SoftBodies_Soft_Body_Deformation, f1_jelly_variants_8_16); jelly_cube's only other placement (f1_jelly_cube_8_8, crown, 0.3 m) is unaffected",
       "capture": "bench before/after screenshots and probe numbers in the fixing session's scratchpad (not committed: no images in the repo); probes deleted"
+    },
+    {
+      "lookup_name": "crackpropagation_ca",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "fracture_model export, default 'tips' (the default was the fault): the original rule ('flood', kept) had no limit on a crack - every cracked cell pushed stress into all eight neighbours and every stressed cell cracked with at least 8 % a step, so within seconds every interior cell had cracked and the work stood as a solid orange plate (floor 116 showed exactly that)",
+        "tips: a crack is a tip that runs along its heading until it meets another crack (a T-junction) or the edge, sometimes splitting (branch_chance); a crack relieves a disc of stress (relief_radius / relief_strength), so the next nucleates where the plate is still loaded; the far-field load rises to load_max, so the network refines in generations - primaries widest and coolest, the cracks between them thinner, fresh tips pale; cycle + hold_seconds then a fresh plate (it never ran again once settled)",
+        "cost: nucleation scan only when an upper bound says a crack can start (0.16 ms a step), relief disc precomputed, settled quads frozen and the mesh rebuilt at 5 Hz (0.8 ms); crack quads cast no shadow; config keys fracture_model / seed / cycle"
+      ],
+      "tower": "floor 116 (CA_EdgeOfChaos) at scale 0.8, unchanged placement",
+      "capture": "ada_run/improve/crackpropagation_ca/before_after.png (standalone pair at one camera, seed 7, plus the tower shot)"
     }
   ]
 }
