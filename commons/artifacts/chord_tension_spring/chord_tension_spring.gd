@@ -825,6 +825,9 @@ func _update_chord_name() -> void:
 # ═══════════════════════════════════════════
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump), R (the retry), QWE and the digits retuned it from any floor.
+	if get_tree().current_scene != self:
+		return
 	if _xr_active:
 		return
 	if event is InputEventKey and event.pressed:

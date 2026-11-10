@@ -99,6 +99,9 @@ func _process(delta: float) -> void:
 	_update_info()
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and R (the retry) stopped and restarted the particle from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			reposition_particle(Vector3.ZERO)

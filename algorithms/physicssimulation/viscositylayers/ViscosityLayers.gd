@@ -220,6 +220,9 @@ func _reset() -> void:
 		_speed_labels[i].text = ""
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) dropped the balls and R (the retry) reset them, from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE: _drop_all()

@@ -522,6 +522,9 @@ func _generate_audio() -> void:
 # ═══════════════════════════════════════════
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower F1-F9 switched its preset from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		# F1-F9 trigger presets
 		var key_map := {

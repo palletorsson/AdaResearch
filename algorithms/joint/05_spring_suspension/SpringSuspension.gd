@@ -181,8 +181,8 @@ func _process(delta: float) -> void:
 			var t=float(i+1)/_museum_coil.size()
 			var p=top.lerp(bottom,t)+Vector3(cos(t*TAU*8),0,sin(t*TAU*8))*sin(t*PI)*0.15
 			_museum_coil[i].set_ends(previous,p);previous=p
-	# Physics impulse trigger (unchanged)
-	if Input.is_action_just_pressed("ui_accept"):
+	# Physics impulse trigger, only when the work IS the scene: in the desktop tower Space (the jump) kicked the wheel from any floor.
+	if get_tree().current_scene == self and Input.is_action_just_pressed("ui_accept"):
 		wheel.apply_impulse(Vector3(0.0, 6.0, 0.0))
 
 	if not is_instance_valid(wheel):

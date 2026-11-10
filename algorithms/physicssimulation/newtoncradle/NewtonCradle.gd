@@ -309,6 +309,9 @@ func _update_info() -> void:
 	_info_label.text = "NEWTON'S CRADLE\nKE=%.3f  PE=%.3f  Total=%.3f" % [total_ke, total_pe, total_ke + total_pe]
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower R (the retry) and the digits released and reset the balls from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1: _release_left(1)

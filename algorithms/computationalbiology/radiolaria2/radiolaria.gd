@@ -1056,6 +1056,9 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	# Handle keyboard input
 	if event is InputEventKey and event.pressed:
+		# Keys only when the work IS the scene: in the desktop tower R (the retry) regenerated it from any floor.
+		if get_tree().current_scene != self:
+			return
 		match event.keycode:
 			KEY_R:
 				regenerate_forms()

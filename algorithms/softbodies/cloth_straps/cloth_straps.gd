@@ -321,6 +321,9 @@ func setup_straps() -> void:
 		add_child(body)
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) threw a ball into the straps from any floor.
+	if get_tree().current_scene != self:
+		return
 	if not walkway and event.is_action_pressed("ui_accept"):
 		# Throw a ball to test interaction
 		var ball = RigidBody3D.new()

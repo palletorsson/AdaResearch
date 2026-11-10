@@ -864,6 +864,9 @@ func _update_multimesh():
 		_multimesh.set_instance_transform(i, transform)
 
 func _input(event):
+	# Keys only when the work IS the scene: in the desktop tower R (the retry) and the digits respawned and reweighted the flock from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1:

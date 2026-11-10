@@ -387,6 +387,9 @@ func _get_soft_body_material(soft_body: SoftBody3D, surface_index: int = 0) -> M
 
 func _input(event: InputEvent) -> void:
 	"""Handle input"""
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) restarted it and the digits stopped bodies, from any floor.
+	if get_tree().current_scene != self:
+		return
 	
 	if event.is_action_pressed("ui_accept"):  # Space key
 		restart_all()

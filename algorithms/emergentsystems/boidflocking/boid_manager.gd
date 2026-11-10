@@ -543,6 +543,9 @@ func _on_right_controller_button_released(button_name) -> void:
 
 # Alternative input method for desktop testing
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower Space (the jump) and Esc pushed the flock from any floor.
+	if get_tree().current_scene != self:
+		return
 	# For testing without VR hardware
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:

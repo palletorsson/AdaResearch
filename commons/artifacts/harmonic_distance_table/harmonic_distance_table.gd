@@ -612,6 +612,9 @@ func _stop_tone(voice_idx: int) -> void:
 # ═══════════════════════════════════════════
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene: in the desktop tower the digits, - and = sounded its nodes from any floor.
+	if get_tree().current_scene != self:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		# Number keys 1-9, 0, -, = map to the 12 nodes
 		var key_map := {

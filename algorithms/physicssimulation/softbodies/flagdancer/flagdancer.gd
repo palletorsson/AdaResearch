@@ -366,7 +366,8 @@ func _process(_delta: float) -> void:
 	var shaped: bool = heading != "none"
 	var last_bone: float = float(maxi(flag_bones.size() - 1, 1))
 
-	if Input.is_action_just_pressed("ui_accept"):
+	# Only when the work IS the scene (the dancer is a child of it): in the desktop tower Space (the jump) toggled it from any floor.
+	if get_tree().current_scene == owner and Input.is_action_just_pressed("ui_accept"):
 		celebration_mode = !celebration_mode
 		var flag_name = FlagType.keys()[flag_type]
 
@@ -420,6 +421,9 @@ func _process(_delta: float) -> void:
 	rotation.z = wind_sway
 
 func _input(event: InputEvent) -> void:
+	# Keys only when the work IS the scene (the dancer is a child of it): in the desktop tower Space (the jump) burst particles from any floor.
+	if get_tree().current_scene != owner:
+		return
 	if event.is_action_pressed("ui_accept"):
 		create_themed_particles()
 
