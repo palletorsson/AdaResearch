@@ -1485,6 +1485,18 @@
       ],
       "tower": "floor 83 (Random_Rotate_Random_XYZ) at (2, 2), scale 1, unchanged placement",
       "capture": "ada_run/improve/Random_Rotate_Random_XYZ/before_after.png (tools/probes/color_survey.gd, the same camera before and after)"
+    },
+    {
+      "lookup_name": "remove_random",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": false,
+      "verified": true,
+      "code": [
+        "placement config local_grid: true - the work removes from an OWNED grid only and fails closed without one (by design, R1b); the floor-81 placement had config {}, so it drew nothing. With local_grid it builds its 8x8 bench: the chosen set amber, a named seed, REMOVE ONE / RESET / NEW SEED",
+        "moved (3, 11) -> (1, 7): it stood 3.4 m past the slab's south edge, unnoticed while it was empty"
+      ],
+      "tower": "floor 81 (Randomness_10_PRINT_Algorithm), now at (1, 7) on the slab",
+      "capture": "ada_run/improve/remove_random/before_after.png (tools/probes/color_survey.gd)"
     }
   ]
 }

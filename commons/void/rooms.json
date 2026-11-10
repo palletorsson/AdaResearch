@@ -32094,13 +32094,15 @@
           "artifact": "remove_random",
           "station": "SE",
           "position": [
-            3,
-            11
+            1,
+            7
           ],
           "facing": 270,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "local_grid": "true"
+          }
         },
         {
           "id": "f2_pickup_cube_placer_1_3",
