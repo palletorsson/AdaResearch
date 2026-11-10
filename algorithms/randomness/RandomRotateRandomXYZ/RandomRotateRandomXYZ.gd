@@ -65,6 +65,11 @@ enum SelectionMode {
 
 @export_group("Targeting")
 @export var multimesh_path: NodePath = "../GridMultiMesh"
+## No grid floor in reach (the Void tower, a museum hall): build an OWNED lattice of cubes on a pedestal and
+## turn that, instead of turning nothing. Floor 83 of the tower is named after this work and stood empty - the
+## work owns no geometry and found no grid there (2026-11-10). A grid map's GridMultiMesh is still found first.
+@export var own_lattice_fallback: bool = true
+@export var own_lattice_size: Vector3i = Vector3i(8, 3, 8)
 @export var selection_mode: SelectionMode = SelectionMode.UNIFORM
 
 @export_group("DNA")
@@ -144,6 +149,9 @@ func _ready() -> void:
 	if not multimesh_instance:
 		multimesh_instance = _find_multimesh_instance(get_parent())
 
+	if not multimesh_instance and own_lattice_fallback:
+		multimesh_instance = _build_own_lattice()
+
 	if multimesh_instance:
 		multimesh = multimesh_instance.multimesh
 		if multimesh and multimesh.instance_count > 0:
@@ -165,6 +173,50 @@ func _ready() -> void:
 			push_warning("MultiMesh found but has no instances")
 	else:
 		push_warning("Could not find MultiMeshInstance3D - path: %s" % multimesh_path)
+
+## The owned lattice: own_lattice_size cubes at unit pitch (the grid's own spacing, so bell_center and
+## bell_radius mean the same in both), shrunk onto a pedestal. Each layer a little lighter than the one below,
+## so a tumbled cube shows against its neighbours.
+func _build_own_lattice() -> MultiMeshInstance3D:
+	var pitch := 0.12
+	var size := own_lattice_size
+	var pedestal := MeshInstance3D.new()
+	pedestal.name = "LatticePedestal"
+	var box := BoxMesh.new()
+	box.size = Vector3(size.x * pitch + 0.16, 0.9, size.z * pitch + 0.16)
+	pedestal.mesh = box
+	var pm := StandardMaterial3D.new()
+	pm.albedo_color = Color(0.08, 0.11, 0.16)
+	pm.roughness = 0.8
+	pedestal.material_override = pm
+	pedestal.position = Vector3(0, 0.45, 0)
+	add_child(pedestal)
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "GridMultiMesh"
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	var cube := BoxMesh.new()
+	cube.size = Vector3.ONE * 0.82
+	var cm := StandardMaterial3D.new()
+	cm.vertex_color_use_as_albedo = true
+	cm.vertex_color_is_srgb = true
+	cm.roughness = 0.55
+	cube.material = cm
+	mm.mesh = cube
+	mm.instance_count = size.x * size.y * size.z
+	var i := 0
+	for y in range(size.y):
+		for z in range(size.z):
+			for x in range(size.x):
+				mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(x, y, z)))
+				mm.set_instance_color(i, Color(0.55, 0.66, 0.78).lerp(Color(0.93, 0.95, 0.97), float(y) / maxf(1.0, size.y - 1.0)))
+				i += 1
+	mmi.multimesh = mm
+	mmi.scale = Vector3.ONE * pitch
+	mmi.position = Vector3(-(size.x - 1) * 0.5 * pitch, 0.9 + 0.5 * pitch, -(size.z - 1) * 0.5 * pitch)
+	add_child(mmi)
+	return mmi
 
 ## The fallback search accepts a GRID FLOOR only (GridStructureComponent names it
 ## GridMultiMesh). In the endless museum a hall has no grid floor, and the first

@@ -1474,6 +1474,17 @@
       ],
       "tower": "floor 121 (17, 8.3) facing 180 and floor 122 (17, -8.3) facing 0 (it faced the sky), scale 1, height 0 (were 0.4 / 2.62 and 0.38 / 2.85); survey: on slab, no faults",
       "capture": "ada_run/improve/diffusion_limited_aggregation/before_after.png (standalone HEAD vs grown; floors 121 and 122 in the tower)"
+    },
+    {
+      "lookup_name": "Random_Rotate_Random_XYZ",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "own_lattice_fallback (on): with no grid floor in reach the work builds an owned 8x3x8 lattice of cubes on a pedestal (unit pitch, so bell_center / bell_radius mean the same) and turns that. It owns no geometry and hunts ../GridMultiMesh; in the Void tower there is none, so floor 83 - the hall NAMED after this work - stood without it (survey: no measurable mesh). A grid map's GridMultiMesh is still found first; the museum-furniture guard stands."
+      ],
+      "tower": "floor 83 (Random_Rotate_Random_XYZ) at (2, 2), scale 1, unchanged placement",
+      "capture": "ada_run/improve/Random_Rotate_Random_XYZ/before_after.png (tools/probes/color_survey.gd, the same camera before and after)"
     }
   ]
 }
