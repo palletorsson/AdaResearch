@@ -21,6 +21,8 @@ var _orbit_focus_override: Vector3 = Vector3.INF  # INF = auto from AABB
 var _frame_wait: int = 0  # >0 = use N await process_frame instead of OS.delay_msec
 var _physics_wait: int = 0  # >0 = N physics ticks (N/60 s of simulated time, however fast frames render)
 var _no_scene_camera: bool = false  # --nocam=true: the scene's own cameras are switched off; the capture camera shoots
+var _config: Dictionary = {}  # --config=<json>: the Void's order - config_* metas before _ready, apply_grid_config after
+var _config_before_ready: bool = false  # --config_before=true: apply_grid_config before add_child (configure_before_ready works)
 
 func _initialize() -> void:
 	_parse_args()
@@ -70,6 +72,14 @@ func _parse_args() -> void:
 					_physics_wait = maxi(0, int(value))
 			"nocam":
 				_no_scene_camera = (value.to_lower() != "false" and value != "0")
+			"config":
+				var parsed: Variant = JSON.parse_string(value)
+				if parsed is Dictionary:
+					_config = parsed
+				else:
+					push_error("capture_tscn_shot: --config is not a JSON object: %s" % value)
+			"config_before":
+				_config_before_ready = (value.to_lower() != "false" and value != "0")
 			"focus":
 				# Format: "x,y,z" e.g. "0,0,0"
 				var parts = value.split(",")
@@ -152,8 +162,17 @@ func _run_capture() -> void:
 		quit(1)
 		return
 
+	# --config: a placement's config, applied the way commons/void/floor_content.gd applies it - the config_* metas
+	# before _ready, apply_grid_config after it (or before, with --config_before=true). A work that is blank
+	# standalone may only be unconfigured. 2026-11-10.
+	for key in _config:
+		instance.set_meta("config_" + str(key), _config[key])
+	if not _config.is_empty() and _config_before_ready and instance.has_method("apply_grid_config"):
+		instance.call("apply_grid_config", _config)
 	scene_root.add_child(instance)
 	print("capture_tscn_shot: Instantiated %s" % _scene_path)
+	if not _config.is_empty() and not _config_before_ready and instance.has_method("apply_grid_config"):
+		instance.call("apply_grid_config", _config)
 
 	# Let _ready() run + 3 initial frames (safe for all scenes).
 	await process_frame
