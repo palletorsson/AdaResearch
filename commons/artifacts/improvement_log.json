@@ -1340,6 +1340,21 @@
       ],
       "tower": "floor 177 (GT_Flow) at scale 0.32",
       "capture": "ada_run/improve/push_relabel_algorithm/before_after.png (the work's own camera, high-res crop)"
+    },
+    {
+      "lookup_name": "jelly_variants (jelly_cube.gd)",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": true,
+      "verified": true,
+      "code": [
+        "NOT A THIN-SLAB TUNNEL AT REST. On floor 139 BouncyBall left the floor on every arrival (-1527 to -270 m after 20 s), WaterBalloon on most, and JellyCube either fell or ended as a flat sheet 0.000 m tall. None was resting and slipping through: the ball inflated from 0.28 to 0.71 m tall in 0.13 s and threw itself 3.8 m up; the balloon pancaked and its points came out of the slab's underside at exactly -0.36 m (the slab's thickness). The same scene on a bench slab, and on its own 4 cm pedestals with no slab, lost the same bodies, so it was the work, not the tower.",
+        "CAUSE: Jolt joins soft-body points only where mesh vertices are bit-identical, and BoxMesh builds each face's edge vertices on its own. At 0.25 m/4 subdivisions (JellyCube) and 0.20 and 0.22 m/5 (BouncyBall, WaterBalloon) neighbouring faces disagree by 1.3e-8 m: 52-63 OPEN SEAMS, so pressure pushes the faces apart and the body tears, launches itself or turns inside out flat. SlimePuddle (0.28/4) and QueerMorph (0.25/6) have 8 split points and always held; the 0.3 m default has none. Census: 315 of 864 cube BoxMesh configs (0.05-1.00 m x 0-8 subdivisions) have open seams, none at 0-3 subdivisions; SphereMesh, CapsuleMesh and CylinderMesh have none.",
+        "Settings swept on the bench before the seams were counted, each on its own: pressure halved, damping 0.08, stiffness 0.8 still lost or exploded a body; subdivisions 6 rescued two variants and blew WaterBalloon to 88 km (74 open seams); mass 4 and pressure 0 held all five but squashed them or took the pressure away. No setting fixes an open seam.",
+        "FIX, jelly_cube.gd only: _welded() snaps every BoxMesh vertex to the first one within 10 um before the mesh goes to the SoftBody3D, so each seam is one point. Vertex order is kept (the crown anchor's index still names its point), and a mesh with no split seam comes back bit-identical. jelly_variants.tscn and every authored number are unchanged; the five now stand as jellies 0.23-0.27 m tall (slime 0.11-0.15) where three were shards.",
+        "RATES, tower floor 139, 20 s per walk after arrival, every soft body on the floor (7: the five variants, the crown jelly_cube, softmill's sphere) against the band slab -0.25 m .. +5.5 m, windowed gl_compatibility: BEFORE 10 of 10 walks lost a body, 19 of 70 bodies out (BouncyBall 10/10, WaterBalloon 6/10, JellyCube 3/10, and flat in 5 more); AFTER 0 of 20 walks, 0 of 140 bodies, no NaN. Both runs mixed direct arrivals and walks down from 138 (the paused preview first) at 60 and 90 Hz. The crown jelly_cube (0.3 m, no split seam) and the softmill sphere measured the same before and after. Bench (scene on a 12.8 x 0.36 m slab and with no slab, 60 and 90 Hz): 2-3 of 5 lost before in every case, 0 of 5 after in all four."
+      ],
+      "tower": "floor 139 (SoftBodies_Soft_Body_Deformation, f1_jelly_variants_8_16); jelly_cube's only other placement (f1_jelly_cube_8_8, crown, 0.3 m) is unaffected",
+      "capture": "bench before/after screenshots and probe numbers in the fixing session's scratchpad (not committed: no images in the repo); probes deleted"
     }
   ]
 }

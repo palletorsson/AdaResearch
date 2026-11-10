@@ -196,7 +196,7 @@ func _create_soft_body() -> void:
 	box.subdivide_width = subdivisions
 	box.subdivide_height = subdivisions
 	box.subdivide_depth = subdivisions
-	_soft_body.mesh = box
+	_soft_body.mesh = _welded(box)
 
 	_soft_body.simulation_precision = 5
 	_soft_body.total_mass = mass
@@ -228,6 +228,30 @@ func _create_soft_body() -> void:
 
 	add_child(_soft_body)
 	_track_node(_soft_body)
+
+## Jolt joins soft-body points only where mesh vertices are bit-identical, and a
+## BoxMesh builds each face's edge vertices on its own. At some sizes neighbouring
+## faces disagree by ~1e-8 m (0.25 m at 4 subdivisions, 0.2 and 0.22 m at 5), so
+## those edges stay OPEN seams and pressure pushes the faces apart: the body tears,
+## launches itself or turns inside out flat. jelly_variants lost two of five
+## through the floor that way (floor 139, 2026-11-10). Every vertex is snapped to
+## the first one within 10 µm of it, so each seam becomes one point. A mesh with no
+## split seam (the 0.3 m default) comes back bit-identical; vertex order is kept,
+## so the crown anchor's index still names the same point.
+func _welded(source: PrimitiveMesh) -> ArrayMesh:
+	var arrays: Array = source.get_mesh_arrays()
+	var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var first := {}
+	for i in verts.size():
+		var key := Vector3i((verts[i] * 1e5).round())
+		if first.has(key):
+			verts[i] = first[key]
+		else:
+			first[key] = verts[i]
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	var welded := ArrayMesh.new()
+	welded.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return welded
 
 func _create_pedestal() -> void:
 	if anchor == "crown":
