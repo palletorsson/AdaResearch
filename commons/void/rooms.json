@@ -38879,10 +38879,20 @@
             -17,
             1
           ],
-          "facing": 0,
+          "facing": 90,
           "height": 1.4,
           "scale": 1,
-          "config": {}
+          "config": {
+            "fit": {
+              "set": {
+                "initial_radius": 0.8
+              },
+              "strategies": [
+                "turn"
+              ],
+              "note": "11-10 improvement pass: it faced along the west edge (facing 0), so from the hall it stood edge-on, a dark stick; turned to face the hall (east), and its own initial_radius 0.4 -> 0.8 (a 1.6 m ring in a 1.76 m frame, 0.52-2.28 m high) instead of a 0.8 m disc in a 42 m hall."
+            }
+          }
         },
         {
           "id": "f5_koch_curve_16_16",

@@ -1497,6 +1497,18 @@
       ],
       "tower": "floor 81 (Randomness_10_PRINT_Algorithm), now at (1, 7) on the slab",
       "capture": "ada_run/improve/remove_random/before_after.png (tools/probes/color_survey.gd)"
+    },
+    {
+      "lookup_name": "fractal_recursion_1",
+      "timestamp": "2026-11-10",
+      "gdscript_changed": false,
+      "verified": true,
+      "code": [
+        "placement only: on floor 123 it faced along the west edge (facing 0), so from the hall it stood edge-on - a dark stick in the tower review; turned to face the hall (facing 90) and grown by its own initial_radius 0.4 -> 0.8 through config.fit.set (a 1.6 m ring in a 1.76 m frame) instead of a placement scale",
+        "NOT done: it still hangs at 1.4 m with nothing under it (as before)"
+      ],
+      "tower": "floor 123 (Fractal_Synthesis) (-17, 1): facing 0 -> 90, fit.set initial_radius 0.8; survey: no faults",
+      "capture": "ada_run/improve/fractal_recursion_1/before_after.png (floor 123, color_survey.gd)"
     }
   ]
 }
