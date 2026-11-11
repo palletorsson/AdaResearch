@@ -1562,6 +1562,19 @@
       ],
       "tower": "floor 87 (Random_Space_Geometry) (-5, -5) h4 s0.5 -> (9.5, -5.6) h2.6 s0.35, space_size 10,6.8,7: was 11 m past the north edge, over both shafts, six columns and seven neighbours inside it, bottom 262 m below; now x 6.05-12.95, z -9.29 - -3.19, 0.39-5.15 m over the slab, no faults",
       "capture": "ada_run/improve/env_one/before_after.png; probe: a parent at y -519.4 put the lowest connector at -701.6 before, -521.1 after"
+    },
+    {
+      "lookup_name": "nature_system_demo",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "the eye unit (Fable 5.2): 'large coloured limbs in the foreground and creatures as specks strung out over the clouds, far past the west edge' - verdict partly, fault too big",
+      "code": [
+        "NOT CONFIGURABLE: apply_grid_config was 'pass', so the tower could not shrink the shipped 4 x 4 per kingdom at 3 m (+4 m between kingdoms), a 9 x 57 m field. It reads grid_rows, grid_cols, grid_spacing and a new kingdom_gap (export, default 4.0 - the hard-coded 4.0 it replaces) and respawns; _ready reads the same keys from config_* metadata first, so a configured placement never spawns 64 critters to keep 24",
+        "NOT CHANGED: the creatures are chains of body segments ~3.4 m each at a DNA size up to 2.35, up to ~20 m long, and flowers reach ~3.6 m below their root - the Nature System's own morphology, also used by the biome ring; the tower placement takes a scale instead"
+      ],
+      "tower": "floor 81 (Randomness_10_PRINT_Algorithm) (-21.5, -6) facing 270 s1 -> (16, -7.5) facing 0 s0.3, grid 2 x 3, spacing 3, gap 3: was 54 m past the west edge with two columns inside; now x 15.3-18.4, z -8.3-1.6, no faults. Also ten_print_structure (-10, 5) -> (-19.4, -8.5): the morning's eye move had put its maze around film_chance_passage",
+      "capture": "ada_run/improve/nature_system_demo/before_after.png"
     }
   ]
 }

@@ -30,6 +30,7 @@ extends Node3D
 @export var grid_rows: int = 4          ## Rows per kingdom
 @export var grid_cols: int = 4          ## Columns per kingdom
 @export var grid_spacing: float = 3.0   ## Distance between critters
+@export var kingdom_gap: float = 4.0    ## Extra distance between one kingdom block and the next
 @export var initial_lod: int = 1        ## Starting LOD (0=highest, 3=lowest)
 @export var auto_populate: bool = true  ## Spawn on ready?
 @export var auto_evolve: bool = false   ## Run evolution automatically?
@@ -51,6 +52,12 @@ var _hybrid_mode: bool = false
 
 
 func _ready() -> void:
+	# A placement's config arrives as config_* metadata before _ready: read it here so the
+	# first population is already the configured one (the tower never spawns 64 to keep 24).
+	var meta_config := {}
+	for key in CONFIG_KEYS:
+		if has_meta("config_" + key): meta_config[key] = get_meta("config_" + key)
+	_read_config(meta_config)
 	_current_lod = initial_lod
 
 	# Create systems
@@ -135,7 +142,7 @@ func _spawn_kingdom_grid() -> void:
 
 	for kingdom in range(4):
 		var kingdom_offset_x: float = 0.0
-		var kingdom_offset_z: float = float(kingdom) * float(grid_rows) * grid_spacing + float(kingdom) * 4.0
+		var kingdom_offset_z: float = float(kingdom) * float(grid_rows) * grid_spacing + float(kingdom) * kingdom_gap
 
 		for row in grid_rows:
 			for col in grid_cols:
@@ -261,5 +268,22 @@ func _on_cross_kingdom(_parent_a: CritterEntity, _parent_b: CritterEntity, child
 func _on_ability_granted(ability_name: String, _data: Dictionary) -> void:
 	print("[Demo] Ability granted: %s" % ability_name)
 
+const CONFIG_KEYS := ["grid_rows", "grid_cols", "grid_spacing", "kingdom_gap"]
+
+## The grid's size, so a placement can fit its slab: the shipped 4 x 4 per kingdom at 3 m
+## (+4 m between kingdoms) is a 9 x 57 m field. Absent keys keep the shipped values.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if _read_config(config) and _spawner != null:
+		_evolution.target_population = grid_rows * grid_cols * 4
+		_spawner.despawn_all()
+		_spawn_kingdom_grid()
+
+
+## True when a value changed.
+func _read_config(config: Dictionary) -> bool:
+	var before := [grid_rows, grid_cols, grid_spacing, kingdom_gap]
+	if config.has("grid_rows"): grid_rows = maxi(1, int(str(config["grid_rows"])))
+	if config.has("grid_cols"): grid_cols = maxi(1, int(str(config["grid_cols"])))
+	if config.has("grid_spacing"): grid_spacing = maxf(0.1, float(str(config["grid_spacing"])))
+	if config.has("kingdom_gap"): kingdom_gap = maxf(0.0, float(str(config["kingdom_gap"])))
+	return before != [grid_rows, grid_cols, grid_spacing, kingdom_gap]

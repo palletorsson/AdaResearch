@@ -32122,8 +32122,8 @@
           "artifact": "ten_print_structure",
           "station": "SW",
           "position": [
-            -10,
-            5
+            -19.4,
+            -8.5
           ],
           "facing": 0,
           "height": 0,
@@ -32250,13 +32250,18 @@
           "artifact": "nature_system_demo",
           "station": "NW",
           "position": [
-            -21.5,
-            -6
+            16,
+            -7.5
           ],
-          "facing": 270,
+          "facing": 0,
           "height": 0,
-          "scale": 1,
-          "config": {}
+          "scale": 0.3,
+          "config": {
+            "grid_rows": "2",
+            "grid_cols": "3",
+            "grid_spacing": "3",
+            "kingdom_gap": "3"
+          }
         }
       ],
       "props": [],
