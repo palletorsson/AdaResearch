@@ -1125,8 +1125,12 @@ func connect_modules() -> void:
 		create_connection(module_a, module_b)
 
 func create_connection(module_a, module_b) -> void:
-	# Choose connection type based on distance
-	var distance = module_a.global_position.distance_to(module_b.global_position)
+	# Choose connection type based on distance. Modules are this node's children and
+	# connectors are added as children too, so both live in LOCAL space. (They read
+	# global_position until 2026-11-11: under a parent away from the origin every
+	# connector was displaced by the pivot's own offset - in the Void tower, at floor
+	# 87, the pipes and beams hung 180 m below the slab.)
+	var distance = module_a.position.distance_to(module_b.position)
 	
 	if distance < 5.0:
 		create_mechanical_connection(module_a, module_b)
@@ -1136,8 +1140,8 @@ func create_connection(module_a, module_b) -> void:
 		create_floating_connection(module_a, module_b)
 
 func create_mechanical_connection(module_a, module_b) -> void:
-	var start_pos = module_a.global_position
-	var end_pos = module_b.global_position
+	var start_pos = module_a.position
+	var end_pos = module_b.position
 	
 	if _draw_randf() > 0.5:
 		# Pipe connection
@@ -1220,8 +1224,8 @@ func create_solid_connector(start_pos, end_pos) -> void:
 	add_child(connector)
 
 func create_beam_connection(module_a, module_b) -> void:
-	var start_pos = module_a.global_position
-	var end_pos = module_b.global_position
+	var start_pos = module_a.position
+	var end_pos = module_b.position
 	
 	# Create a beam effect - thinner and with emission
 	var beam = MeshInstance3D.new()
@@ -1252,8 +1256,8 @@ func create_beam_connection(module_a, module_b) -> void:
 		add_particles_along_beam(start_pos, end_pos, color_theme["accent"])
 
 func create_floating_connection(module_a, module_b) -> void:
-	var start_pos = module_a.global_position
-	var end_pos = module_b.global_position
+	var start_pos = module_a.position
+	var end_pos = module_b.position
 	var steps = _draw_randi() % 5 + 3
 
 	var sphere_data: Array[Transform3D] = []
@@ -1587,6 +1591,18 @@ func _read_meta_overrides() -> void:
 		kitbash_seed = int(str(get_meta("config_kitbash_seed")))
 	if has_meta("config_generation_rules"):
 		generation_rules = str(get_meta("config_generation_rules")).strip_edges().to_lower()
+	# The field's extent, "x,y,z" in metres before the placement's scale. Modules
+	# scatter in +-space_size/2, ambient parts and particles in +-space_size, so a
+	# placement that must fit a storey (the Void tower) sizes the whole field here.
+	# Absent, the shipped 30 x 15 x 30 stands for the 43 map placements.
+	if has_meta("config_space_size"):
+		var v: Variant = get_meta("config_space_size")
+		if v is Vector3:
+			space_size = v
+		else:
+			var p: PackedStringArray = str(v).replace("(", "").replace(")", "").split(",", false)
+			if p.size() == 3 and Array(p).all(func(s: String) -> bool: return s.strip_edges().is_valid_float()):
+				space_size = Vector3(float(p[0]), float(p[1]), float(p[2])).max(Vector3.ONE * 0.5)
 
 
 # ── DISCLOSURE ───────────────────────────────────────────────────────────────

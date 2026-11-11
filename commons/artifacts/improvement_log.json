@@ -1549,6 +1549,19 @@
       ],
       "tower": "floor 89 (Random_Pheromone) (-6, 9) -> (-2, 0): half the 4.8 m field stood 2.4 m past the south edge with column (-5, 7) inside it; config warmup_steps 240. Survey: no faults, 'step 240', pheromone 136",
       "capture": "ada_run/improve/pheromone_terrain/before_after.png"
+    },
+    {
+      "lookup_name": "env_one",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "the eye unit (Fable 5.2): its own photo unusable (camera fitted to 60 x 548 m), the field everywhere in the neighbours' photos - verdict partly, fault too big",
+      "code": [
+        "CONNECTORS HUNG FAR BELOW: create_connection and the mechanical / beam / floating connectors read module_a/b.global_position and built children of this node at those coordinates, so under any parent away from the origin every pipe and beam was displaced by the pivot's own offset (x scale): at floor 87 they hung 180 m below the slab, and the bounds that reached there sent the survey camera down shaft B. Modules and connectors are both this node's children, so they use local position now; at an unscaled placement at the origin the world is unchanged",
+        "SIZE WAS NOT CONFIGURABLE: _read_meta_overrides reads config space_size \"x,y,z\" (modules scatter in +-space/2, ambient parts and particles in +-space); absent, the shipped 30 x 15 x 30 stands for the 43 map placements"
+      ],
+      "tower": "floor 87 (Random_Space_Geometry) (-5, -5) h4 s0.5 -> (9.5, -5.6) h2.6 s0.35, space_size 10,6.8,7: was 11 m past the north edge, over both shafts, six columns and seven neighbours inside it, bottom 262 m below; now x 6.05-12.95, z -9.29 - -3.19, 0.39-5.15 m over the slab, no faults",
+      "capture": "ada_run/improve/env_one/before_after.png; probe: a parent at y -519.4 put the lowest connector at -701.6 before, -521.1 after"
     }
   ]
 }
