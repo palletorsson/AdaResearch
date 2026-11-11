@@ -1600,6 +1600,22 @@
       ],
       "tower": "floor 87 (Random_Space_Geometry) (-9, -5): height 0.25 -> 1.0, scale 1 -> 2.5: a 1.75 m box at chest height (0.37-1.63 m), no faults",
       "capture": "ada_run/improve/curl_noise_particles/before_after.png"
+    },
+    {
+      "lookup_name": "floor 85 Random_Gaussian: distribution_sampler, distribution_comparator, galton_board, GaussianPaintSplatter",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": false,
+      "verified": true,
+      "found_by": "the density measure (works' footprint over the slab, box volume over the storey) on floors 77-92: floor 85 was the emptiest, 0.8 % and 0.2 %, and its four cabinets showed their dark backs to anyone arriving by the shafts",
+      "tower": [
+        "STAGED (Palle: 'they need wall or other prefab divider, margin, context, like in the beginning of the sequence'): one gallery wall along the north band, a fin between neighbours, a taller panel behind the canvas and the Galton board, a ceiling carrier with a title on five works, a four-stop route - 12 walls, all data in rooms.json",
+        "A FAMILY: distribution_sampler stands four times, law uniform | gaussian | poisson | exponential - an axis declared 2026-08-03 that no placement had used",
+        "ARRIVE MID-PROCESS: evidence=census on the samplers, the comparator and the Galton board - every histogram is already counted (the sampler's default left it empty)",
+        "BIGGER: galton_board scale 1.5 -> 3 with derivation=paths (top 4.65 m), GaussianPaintSplatter 0.65 -> 1.2 on the wall across shaft B, distribution_comparator 1 -> 1.8",
+        "ORDER: west to east as the timeline numbers them (#0611 comparator, #0612 sampler, #0613 canvas, #0614 Galton board); all face south, so the route captions read"
+      ],
+      "measured": "4 works -> 7; footprint 0.8 % -> 7.2 % of the slab; volume 0.2 % -> 6.7 % of the storey; mesh instances 370 -> 936 (floors 77-79 carry 1900-2300); validator: no finding on floor 85; survey: no faults",
+      "capture": "ada_run/improve/density_85/overview_before_after.png, after_gallery.png, before_fronts.png"
     }
   ]
 }

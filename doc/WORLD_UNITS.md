@@ -76,6 +76,29 @@ vocabulary: one-pixel lines, a part hidden inside another, colours written and n
 the tower, a simulation that saturates and freezes, a size wrong for its place, staging that hides the subject.
 Fixes land one work per commit with a before/after at one camera.
 
+## Density: how a floor is filled
+
+Palle, 2026-11-11: "arrange the floor to have more and more visual density ... many of the objects need wall or other
+prefab divider, margin, context, like in the beginning of the sequence ... if a floor has small artifacts that do not
+fill, either add more artifacts or fold the artifacts into another floor."
+
+Measured on the randomness floors (footprint of the works over the slab, their box volume over the storey): the staged
+floors 77-79 fill 62-76 % of their storey; floor 85 filled 0.2 %. The moves, in the order they pay:
+
+1. **Stage it** - a wall behind every work (`walls`), a fin between neighbours, a ceiling carrier with a title
+   (`interface: ceiling_instrument`), a route on the slab. All data in `commons/void/rooms.json`; no work stands
+   against the sky. The tower's convention: works face south, the visitor reads facing north.
+2. **A family, not a single** - place a work's declared variants side by side (184 artifacts have `dna.axes`).
+3. **Arrive mid-process** - open with history already made (`evidence=census`, `warmup_steps`, a pre-roll).
+4. **Bigger, where the work is spatial** - and by a shaft, so the floor above sees it.
+5. **Consolidate** - a floor of small works takes more works, or is folded into the floor that shares its part.
+6. **Let motion leave matter**, **use the height**, **see one work through another**, **print on the slab**.
+
+Pilot, floor 85 (Random_Gaussian, where "the count" lives): four cabinets loose on the slab became one north gallery
+in the timeline's order - the comparator, the sampler as four laws in bays, the canvas across shaft B, the Galton board
+at three times its size - every histogram already counted. 4 works -> 7, footprint 0.8 % -> 7.2 %, volume 0.2 % ->
+6.7 %, no code changed. Density is not fullness: env_one once filled a storey and swallowed seven neighbours.
+
 ## The rules
 
 - **Each floor only what it has earned** - and a row may say `early` (why) for a deliberate glimpse.

@@ -33264,15 +33264,172 @@
       "map": "Random_Gaussian",
       "title": "Random_Gaussian",
       "origin": false,
-      "walls": [],
+      "walls": [
+        {
+          "id": "gallery-wall",
+          "from": [
+            -19.6,
+            -6.0
+          ],
+          "to": [
+            19.6,
+            -6.0
+          ],
+          "height": 3.0,
+          "finish": "concrete"
+        },
+        {
+          "id": "count-fin-1",
+          "from": [
+            -6.8,
+            -6.0
+          ],
+          "to": [
+            -6.8,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "count-fin-2",
+          "from": [
+            -3.4,
+            -6.0
+          ],
+          "to": [
+            -3.4,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "count-fin-3",
+          "from": [
+            0,
+            -6.0
+          ],
+          "to": [
+            0,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "count-fin-4",
+          "from": [
+            3.4,
+            -6.0
+          ],
+          "to": [
+            3.4,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "count-fin-5",
+          "from": [
+            6.8,
+            -6.0
+          ],
+          "to": [
+            6.8,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "rules-fin-west",
+          "from": [
+            -18.4,
+            -6.0
+          ],
+          "to": [
+            -18.4,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "rules-fin-east",
+          "from": [
+            -14.8,
+            -6.0
+          ],
+          "to": [
+            -14.8,
+            -3.9
+          ],
+          "height": 2.1,
+          "finish": "concrete"
+        },
+        {
+          "id": "galton-fin-west",
+          "from": [
+            14.4,
+            -6.0
+          ],
+          "to": [
+            14.4,
+            -3.9
+          ],
+          "height": 2.6,
+          "finish": "concrete"
+        },
+        {
+          "id": "galton-fin-east",
+          "from": [
+            18.6,
+            -6.0
+          ],
+          "to": [
+            18.6,
+            -3.9
+          ],
+          "height": 2.6,
+          "finish": "concrete"
+        },
+        {
+          "id": "galton-panel",
+          "from": [
+            14.4,
+            -6.25
+          ],
+          "to": [
+            18.6,
+            -6.25
+          ],
+          "height": 4.5,
+          "finish": "unfinished"
+        },
+        {
+          "id": "splatter-panel",
+          "from": [
+            7.4,
+            -6.25
+          ],
+          "to": [
+            12.6,
+            -6.25
+          ],
+          "height": 4.5,
+          "finish": "unfinished"
+        }
+      ],
       "artifacts": [
         {
           "id": "f4_distribution_sampler_5_6",
           "artifact": "distribution_sampler",
-          "station": "SE",
+          "station": "NW",
           "position": [
-            0,
-            6
+            -1.47,
+            -5.2
           ],
           "facing": 0,
           "height": 0,
@@ -33281,52 +33438,190 @@
             "stand": "cabinet",
             "controls": "compact",
             "control_front": "1.05",
-            "readout": "wing"
+            "readout": "wing",
+            "law": "gaussian",
+            "evidence": "census"
+          },
+          "interface": {
+            "style": "ceiling_instrument",
+            "title": "COUNT / GAUSSIAN",
+            "action": "BATCH  /  PAUSE  /  NEW SEED",
+            "clearance": 0.2,
+            "accent": "#d86e32"
           }
         },
         {
           "id": "f4_GaussianPaintSplatter_2_7",
           "artifact": "GaussianPaintSplatter",
-          "station": "SE",
+          "station": "NE",
           "position": [
-            3,
-            5
+            10,
+            -5.2
           ],
           "facing": 0,
-          "height": 1.5,
-          "scale": 0.65,
-          "config": {}
+          "height": 2.43,
+          "scale": 1.2,
+          "config": {},
+          "interface": {
+            "style": "ceiling_instrument",
+            "title": "GAUSS / WHERE THE PAINT LANDS",
+            "action": "WATCH  /  COUNT THE FAR ONES",
+            "clearance": 0.2,
+            "accent": "#d86e32"
+          }
         },
         {
           "id": "f4_galton_board_2_10",
           "artifact": "galton_board",
-          "station": "SE",
+          "station": "NE",
           "position": [
-            3,
-            2
+            16.3,
+            -5.2
           ],
           "facing": 0,
-          "height": 0.9,
-          "scale": 1.5,
-          "config": {}
+          "height": 1.8,
+          "scale": 3,
+          "config": {
+            "evidence": "census",
+            "derivation": "paths"
+          }
         },
         {
           "id": "f4_distribution_comparator_8_10",
           "artifact": "distribution_comparator",
-          "station": "SW",
+          "station": "NW",
           "position": [
-            -3,
-            2
+            -16.6,
+            -5.2
           ],
           "facing": 0,
-          "height": 0.83,
+          "height": 1.49,
+          "scale": 1.8,
+          "config": {
+            "evidence": "census"
+          },
+          "interface": {
+            "style": "ceiling_instrument",
+            "title": "ONE SOURCE / THREE RULES",
+            "action": "COMPARE  /  REDRAW",
+            "clearance": 0.2,
+            "accent": "#d86e32"
+          }
+        },
+        {
+          "id": "f4_distribution_sampler_uniform",
+          "artifact": "distribution_sampler",
+          "station": "NW",
+          "position": [
+            -4.87,
+            -5.2
+          ],
+          "facing": 0,
+          "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "stand": "cabinet",
+            "controls": "compact",
+            "control_front": "1.05",
+            "readout": "wing",
+            "law": "uniform",
+            "evidence": "census"
+          },
+          "interface": {
+            "style": "ceiling_instrument",
+            "title": "COUNT / UNIFORM",
+            "action": "BATCH  /  PAUSE  /  NEW SEED",
+            "clearance": 0.2,
+            "accent": "#d86e32"
+          }
+        },
+        {
+          "id": "f4_distribution_sampler_poisson",
+          "artifact": "distribution_sampler",
+          "station": "NE",
+          "position": [
+            1.93,
+            -5.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "cabinet",
+            "controls": "compact",
+            "control_front": "1.05",
+            "readout": "wing",
+            "law": "poisson",
+            "evidence": "census"
+          },
+          "interface": {
+            "style": "ceiling_instrument",
+            "title": "COUNT / POISSON",
+            "action": "BATCH  /  PAUSE  /  NEW SEED",
+            "clearance": 0.2,
+            "accent": "#d86e32"
+          }
+        },
+        {
+          "id": "f4_distribution_sampler_exponential",
+          "artifact": "distribution_sampler",
+          "station": "NE",
+          "position": [
+            5.33,
+            -5.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stand": "cabinet",
+            "controls": "compact",
+            "control_front": "1.05",
+            "readout": "wing",
+            "law": "exponential",
+            "evidence": "census"
+          },
+          "interface": {
+            "style": "ceiling_instrument",
+            "title": "COUNT / EXPONENTIAL",
+            "action": "BATCH  /  PAUSE  /  NEW SEED",
+            "clearance": 0.2,
+            "accent": "#d86e32"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "01 / ONE SOURCE, THREE RULES\nRead across: which shape belongs to which rule?",
+          "position": [
+            -16.6,
+            -3.3
+          ]
+        },
+        {
+          "label": "02 / ONE MACHINE, FOUR LAWS\nThe same draws. Four rules for what a draw is worth.",
+          "position": [
+            0,
+            -3.2
+          ]
+        },
+        {
+          "label": "03 / WHERE THE PAINT LANDS\nMost near the middle. A few far out.",
+          "position": [
+            10,
+            3.6
+          ]
+        },
+        {
+          "label": "04 / CHANCE FALLS\nLeft or right, eight times. Count where they land.",
+          "position": [
+            16.3,
+            -3.3
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
