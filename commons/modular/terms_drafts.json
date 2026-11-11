@@ -3564,6 +3564,5129 @@
    },
    "drafted_for": "noise_config_wall",
    "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "rock": {
+   "expr": "mesh(sphere, 4 x 3, every vertex wiggled) + collider + body = rock - an irregular solid: no two alike",
+   "from": [
+    "tetrahedron"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "p": "mesh",
+      "shape": "sphere",
+      "size": [
+       0.25
+      ],
+      "segments": [
+       4,
+       3
+      ],
+      "wiggle": 0.15,
+      "color": "999aa6"
+     },
+     {
+      "p": "collider",
+      "shape": "convex"
+     },
+     {
+      "p": "body",
+      "kind": "rigid"
+     }
+    ]
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "sphere": {
+   "expr": "mesh(sphere) = sphere - every point of it at one distance from a point; the engine gives it to us, and its smoothness is a count of rings and segments (kin of box: a visible solid with no boundary)",
+   "from": [
+    "point"
+   ],
+   "chapter": "solid",
+   "build": {
+    "p": "mesh",
+    "shape": "sphere",
+    "size": [
+     0.25
+    ],
+    "color": "808080"
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "capsule": {
+   "expr": "mesh(capsule) = capsule - a cylinder closed by two half spheres; the engine gives it to us",
+   "from": [
+    "cylinder",
+    "sphere"
+   ],
+   "chapter": "solid",
+   "build": {
+    "p": "mesh",
+    "shape": "capsule",
+    "size": [
+     0.25,
+     1.0
+    ]
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "torus": {
+   "expr": "mesh(torus) = torus - a circle carried round a circle: the first solid with a hole through it; the engine gives it to us",
+   "from": [
+    "line"
+   ],
+   "chapter": "solid",
+   "build": {
+    "p": "mesh",
+    "shape": "torus",
+    "size": [
+     0.34,
+     0.12
+    ]
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "coin": {
+   "expr": "association(config(cylinder)) = a coin - the cylinder made thin, stood on its edge and stamped",
+   "from": [
+    "cylinder"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "associate",
+    "surface": "coin",
+    "story": "a stamped disc on its edge",
+    "of": {
+     "op": "transform",
+     "of": {
+      "t": "cylinder"
+     },
+     "rot": [
+      90,
+      0,
+      0
+     ],
+     "scale": [
+      1,
+      0.08,
+      1
+     ]
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "step_box": {
+   "expr": "decide(concrete_block + what it holds, a visitor stands on it) = step_box - a one-metre support that reveals its reward once (a health cross, or one of three blockers)",
+   "from": [
+    "concrete_block",
+    "heath_mesh"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "logic",
+    "gate": "a visitor stands on it -> reveal once",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "concrete_block"
+      },
+      {
+       "t": "heath_mesh"
+      }
+     ]
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "matrix_cube": {
+   "expr": "exhibit(hand(trs_cube), its matrix) = matrix_cube - the cube moved, turned and scaled by hand with its numbers written beside it",
+   "from": [
+    "trs_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "exhibit",
+    "text": "its matrix, live",
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "by": "grab or sliders",
+     "of": {
+      "t": "trs_cube"
+     }
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "chair_puzzle": {
+   "expr": "hand(association(trs_cube * 6, chair), ghost guides) = chair_puzzle - seat, four legs and a back are one cube moved, turned and scaled six ways",
+   "from": [
+    "trs_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "move, turn and scale each part into its ghost guide",
+    "of": {
+     "op": "associate",
+     "surface": "chair",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "trs_cube"
+      },
+      "n": 6
+     }
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "profile_sweeps": {
+   "expr": "extension(profile, path) * 6 = profile_sweeps - one glyph outline carried along a path: a passage, a vessel, two wells, a channel, a closed ring, two bodies",
+   "from": [
+    "line"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "times",
+    "n": 6,
+    "config": "glyph and path",
+    "of": {
+     "op": "extension",
+     "as": "swept along a path",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "line"
+      },
+      "n": 12,
+      "layout": "glyph outline"
+     }
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "scaffold_bay": {
+   "chapter": "assemblage",
+   "from": [
+    "point",
+    "stick",
+    "quad"
+   ],
+   "expr": "connect(point * 8 + stick * 12 + quad, rods between the points) = scaffold_bay - the workshop's six-port points, two-metre rods and quads joined into one walkable bay",
+   "build": {
+    "op": "connect",
+    "kind": "rod",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "t": "point"
+       },
+       "n": 8
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "stick"
+       },
+       "n": 12
+      },
+      {
+       "t": "quad"
+      }
+     ]
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "gated_ramp": {
+   "chapter": "assemblage",
+   "from": [
+    "wedge",
+    "stick"
+   ],
+   "expr": "wedge + stick laid across it = gated_ramp - a slope and a bar in two forks; what rests against the bar goes when a hand lifts it out",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "wedge"
+     },
+     {
+      "t": "stick"
+     }
+    ]
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "hand_lever": {
+   "chapter": "logic",
+   "from": [
+    "stick",
+    "hinge"
+   ],
+   "expr": "hand(connect(stick, hinge)) = hand_lever - a stick turning on one pin; its angle is the input",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "connect",
+     "kind": "hinge",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "stick"
+       },
+       {
+        "t": "hinge"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "curved_track": {
+   "chapter": "logic",
+   "from": [
+    "plank"
+   ],
+   "expr": "array(plank, 50, profile curve) = curved_track - short timber segments laid along one curvature",
+   "build": {
+    "op": "array",
+    "of": {
+     "t": "plank"
+    },
+    "n": 50,
+    "dims": 1,
+    "profile": "curve"
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "guided_input_cube": {
+   "chapter": "logic",
+   "from": [
+    "cube"
+   ],
+   "expr": "step(connect(cube, vertical slider guide), physics) = guided_input_cube - an input is a cube that falls on its guide when let go",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "connect",
+     "kind": "slider",
+     "of": {
+      "t": "cube"
+     }
+    }
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "gravity_bench": {
+   "chapter": "logic",
+   "from": [
+    "walk_ramp",
+    "sphere_collider",
+    "plank",
+    "hinge",
+    "stick"
+   ],
+   "expr": "walk_ramp + sphere_collider + stick (the stop) + connect(plank, hinge) (the target) = gravity_bench - a one-metre slope supplies the motion; lifting the stop lets the ball go; a hinged plank reports the arrival",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "walk_ramp"
+     },
+     {
+      "t": "sphere_collider"
+     },
+     {
+      "t": "stick"
+     },
+     {
+      "op": "connect",
+      "kind": "hinge",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "t": "plank"
+        },
+        {
+         "t": "hinge"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "here_mark": {
+   "expr": "association(point, 'you are here') = here_mark - a position named in words and ringed on the floor; the point before it has a body",
+   "from": [
+    "point"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "associate",
+    "story": "you are here",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "point",
+       "scaffold": true
+      },
+      {
+       "p": "mesh",
+       "shape": "torus",
+       "part": "ring",
+       "size": [
+        0.9
+       ]
+      },
+      {
+       "p": "mesh",
+       "shape": "text",
+       "part": "YOU ARE HERE"
+      }
+     ]
+    }
+   },
+   "drafted_for": "you_are_here",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "nested_frames": {
+   "expr": "drive(times(transform(closure(line * 4), scale 0.85), 10)) = nested_frames - one rectangle of four lines, ten times, each 0.85 of the last, marching inward",
+   "from": [
+    "line"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "drive",
+    "kind": "cycle",
+    "period": 4,
+    "of": {
+     "op": "times",
+     "n": 10,
+     "of": {
+      "op": "transform",
+      "scale": [
+       0.85,
+       0.85,
+       1
+      ],
+      "of": {
+       "op": "closure",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "line"
+        },
+        "n": 4,
+        "layout": "ring"
+       }
+      }
+     }
+    }
+   },
+   "drafted_for": "folding_past",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "located_point": {
+   "expr": "exhibit(point + arrow * 4 + line * 2 crossed) = located_point - a position with no body, found only by what points at it",
+   "from": [
+    "point",
+    "arrow",
+    "line"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "exhibit",
+    "text": "vitrine",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "point",
+       "scaffold": true
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "arrow"
+       },
+       "n": 4,
+       "layout": "ring"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "line"
+       },
+       "n": 2,
+       "layout": "ring"
+      }
+     ]
+    }
+   },
+   "drafted_for": "the_invisible_point",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "point_target": {
+   "expr": "decide(point in catch sphere) -> step(sphere_collider * 7, physics) = point_target - a marked place; putting the point there makes seven spheres fall",
+   "from": [
+    "sphere_collider"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "decide",
+    "on": "a coordinate point enters the catch sphere",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "p": "mesh",
+       "shape": "cone",
+       "part": "arrow marker"
+      },
+      {
+       "p": "mesh",
+       "shape": "torus",
+       "part": "ring"
+      },
+      {
+       "p": "collider",
+       "shape": "sphere",
+       "size": [
+        0.45
+       ],
+       "area": true
+      },
+      {
+       "op": "engine",
+       "kind": "physics",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "sphere_collider"
+        },
+        "n": 7
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "drag_point_target",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "coordinate_frame": {
+   "expr": "point + line * 3 at right angles = coordinate_frame - an origin and three measured directions: where every position is read from",
+   "from": [
+    "point",
+    "line"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "point",
+      "part": "origin"
+     },
+     {
+      "op": "times",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "line"
+       },
+       "scale": [
+        3,
+        1,
+        1
+       ]
+      },
+      "n": 3,
+      "layout": "orthogonal x y z"
+     }
+    ]
+   },
+   "drafted_for": "CoordinateSystem3M",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "value_places_point": {
+   "expr": "exhibit(drive(point, y = value)) = value_places_point - a screen films one number moving one sphere along a ruler",
+   "from": [
+    "point"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "drive",
+     "by": "height value, 0.1 m steps",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "point"
+       },
+       {
+        "p": "mesh",
+        "shape": "cylinder",
+        "part": "ruler, 0-4 m"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "film_foundation_point",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "sphere_drift": {
+   "expr": "drive(random(array(point, 44)), drift) = sphere_drift - a few dozen points scattered in a volume and left to drift",
+   "from": [
+    "point"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "drive",
+    "kind": "drift",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "point"
+      },
+      "n": 44,
+      "dims": 3
+     }
+    }
+   },
+   "drafted_for": "floating_sphere_field",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "laser_measure": {
+   "expr": "hand(distance(point in the hand, point the ray hits)) = laser_measure - a line whose far end is wherever you aim; the tool reads its length",
+   "from": [
+    "line",
+    "grabbable"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "hand",
+    "of": {
+     "op": "distance",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "line",
+        "part": "beam, guard to hit point"
+       },
+       {
+        "p": "mesh",
+        "shape": "cylinder",
+        "part": "handle"
+       },
+       {
+        "p": "mesh",
+        "shape": "box",
+        "part": "lcd readout"
+       },
+       {
+        "p": "collider",
+        "shape": "box"
+       },
+       {
+        "t": "grabbable"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "laser_measure",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "line_count_wall": {
+   "expr": "exhibit(line, line * 2, triangle, closure(line * 4), array(line, 3 x 3), array(line, 4 x 4)) = line_count_wall - count the segments, arrange them, connect them",
+   "from": [
+    "line",
+    "triangle"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "exhibit",
+    "text": "wall",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "line"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "line"
+       },
+       "n": 2,
+       "layout": "row"
+      },
+      {
+       "t": "triangle"
+      },
+      {
+       "op": "closure",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "line"
+        },
+        "n": 4,
+        "layout": "ring"
+       }
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "line"
+       },
+       "n": [
+        3,
+        2
+       ],
+       "dims": 2
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "line"
+       },
+       "n": [
+        4,
+        2
+       ],
+       "dims": 2
+      }
+     ]
+    }
+   },
+   "drafted_for": "line_count_wall",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "recovery_plus": {
+   "expr": "association(line_plus, red, 'recover') = recovery_plus - the same two lines as the danger X, turned 45 degrees and read as help",
+   "from": [
+    "line_plus"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "associate",
+    "of": {
+     "t": "line_plus"
+    },
+    "surface": "red",
+    "story": "recover"
+   },
+   "drafted_for": "health_cross",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "exploding_sphere": {
+   "expr": "decide(laser hits sphere_collider) -> burst(point * 30) = exploding_sphere - one solid point that a line turns into thirty",
+   "from": [
+    "sphere_collider"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "decide",
+    "on": "laser hit",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "sphere_collider"
+      },
+      {
+       "op": "engine",
+       "kind": "burst",
+       "of": {
+        "op": "times",
+        "of": {
+         "p": "mesh",
+         "shape": "sphere",
+         "size": [
+          0.02
+         ],
+         "part": "fragment"
+        },
+        "n": 30
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "laser_exploding_sphere",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "rod_gallery": {
+   "expr": "array(stick, 4 x 8) + reflect(line * 12, one eye point) = rod_gallery - a rack of rods to take, and rods hung in depth that read as figures from one place",
+   "from": [
+    "stick",
+    "line"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "array",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "stick"
+       },
+       "scale": [
+        2,
+        1,
+        1
+       ]
+      },
+      "n": [
+       4,
+       8
+      ],
+      "dims": 2
+     },
+     {
+      "op": "reflect",
+      "view": "one marked eye point per figure",
+      "of": {
+       "op": "times",
+       "of": {
+        "op": "transform",
+        "of": {
+         "t": "line"
+        },
+        "scale": [
+         2,
+         1,
+         1
+        ]
+       },
+       "n": 12
+      }
+     }
+    ]
+   },
+   "drafted_for": "line_rod_gallery",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "light_rod": {
+   "expr": "association(config(line), light) = light_rod - the line stood upright and made of light",
+   "from": [
+    "line"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "associate",
+    "surface": "light",
+    "of": {
+     "op": "transform",
+     "of": {
+      "t": "line"
+     },
+     "rot": [
+      0,
+      0,
+      90
+     ],
+     "scale": [
+      2,
+      1,
+      1
+     ]
+    }
+   },
+   "drafted_for": "lightrod",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "scale_lines": {
+   "expr": "array(config(line, length x 10)) = scale_lines - the same line at each power of ten, stacked as a ladder",
+   "from": [
+    "line"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "array",
+    "n": 4,
+    "dims": 1,
+    "profile": "length x 10 per rung",
+    "of": {
+     "op": "config",
+     "axes": "length",
+     "of": {
+      "t": "line"
+     }
+    }
+   },
+   "drafted_for": "scale_lines",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "parallel_beams": {
+   "expr": "transform(plank, lean 15) * 3 = parallel_beams - three bodies of one direction, room high: you walk between parallel lines",
+   "from": [
+    "plank"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "times",
+    "n": 3,
+    "layout": "row",
+    "gap": 1.8,
+    "of": {
+     "op": "transform",
+     "of": {
+      "t": "plank"
+     },
+     "rot": [
+      0,
+      0,
+      75
+     ],
+     "scale": [
+      5.8,
+      4,
+      1.1
+     ]
+    }
+   },
+   "drafted_for": "parallel_beams",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "sledgehammer": {
+   "expr": "association(stick + head, 'strike') = sledgehammer - a line you hold by one end, weighted at the other",
+   "from": [
+    "stick"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "associate",
+    "story": "strike",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "stick",
+       "part": "haft"
+      },
+      {
+       "p": "mesh",
+       "shape": "box",
+       "size": [
+        0.28,
+        0.12,
+        0.12
+       ],
+       "part": "head"
+      },
+      {
+       "p": "collider",
+       "shape": "sphere",
+       "part": "strike volume",
+       "area": true
+      }
+     ]
+    }
+   },
+   "drafted_for": "line_sledgehammer",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "line_channel": {
+   "expr": "line + drive(point, along it) = line_channel - two unlike points and a third that travels the between",
+   "from": [
+    "line",
+    "point"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "line"
+     },
+     {
+      "op": "drive",
+      "along": "A to B and back",
+      "of": {
+       "t": "point"
+      }
+     }
+    ]
+   },
+   "drafted_for": "two_points_line",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "line_association_table": {
+   "expr": "sample(association(hand(line))) = line_association_table - move an end of the line, let go, and one of its names drops onto the table",
+   "from": [
+    "line",
+    "measuring_stick",
+    "stick",
+    "plank",
+    "tape",
+    "walk_line",
+    "red_line"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "sample",
+    "n": 11,
+    "replace": false,
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "hand",
+       "of": {
+        "t": "line"
+       }
+      },
+      {
+       "t": "measuring_stick"
+      },
+      {
+       "t": "stick"
+      },
+      {
+       "t": "plank"
+      },
+      {
+       "t": "tape"
+      },
+      {
+       "t": "walk_line"
+      },
+      {
+       "t": "red_line"
+      }
+     ]
+    }
+   },
+   "drafted_for": "line_association_table",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "modulor_figure": {
+   "expr": "association(connect(line * n), 'a body as a measure') = modulor_figure - lines joined end to end until they are a person, then read as a ruler",
+   "from": [
+    "line"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "associate",
+    "story": "the body as a measure, 2.26 m",
+    "of": {
+     "op": "connect",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "line"
+      },
+      "n": 12,
+      "layout": "polyline"
+     }
+    }
+   },
+   "drafted_for": "modulor_man_demo",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "perspective_lines": {
+   "expr": "times(transform(line, toward one point), 4) = perspective_lines - four lines that would be parallel, drawn to the point where they meet",
+   "from": [
+    "line",
+    "point"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "point",
+      "part": "vanishing point"
+     },
+     {
+      "op": "times",
+      "n": 4,
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "line"
+       },
+       "to": "the vanishing point"
+      }
+     }
+    ]
+   },
+   "drafted_for": "perspective_lines",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "bubble_chain": {
+   "expr": "hand(grab_sphere) -> trail(black_point grown by dwell + line to the next centre) = bubble_chain - how long the hand stays is the size of the mark",
+   "from": [
+    "grab_sphere",
+    "black_point",
+    "line"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "grab_sphere"
+      },
+      {
+       "op": "engine",
+       "kind": "trail",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "t": "black_point"
+         },
+         {
+          "t": "line"
+         }
+        ]
+       },
+       "grow": "dwell: 0.05 m/s while the hand stays inside, up to 0.45 m"
+      }
+     ]
+    }
+   },
+   "drafted_for": "bubble_brush",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "projected_trace": {
+   "expr": "trail(point, headset) + transform(the same trail, y = floor) = projected_trace - one measured path, two representations",
+   "from": [
+    "point",
+    "hand_trace"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "trail",
+      "of": {
+       "t": "point"
+      },
+      "by": "headset position, 256 kept"
+     },
+     {
+      "op": "transform",
+      "of": {
+       "op": "engine",
+       "kind": "trail",
+       "of": {
+        "t": "point"
+       },
+       "by": "headset position, 256 kept"
+      },
+      "scale": [
+       1,
+       0,
+       1
+      ]
+     }
+    ]
+   },
+   "drafted_for": "head_trace_projection",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "room_plan": {
+   "expr": "recurse(quad, split one rectangle in two, depth 5) + doors = room_plan - a floor plan is a rule for dividing space",
+   "from": [
+    "quad"
+   ],
+   "chapter": "procedural",
+   "build": {
+    "op": "recurse",
+    "of": {
+     "t": "quad"
+    },
+    "depth": 5,
+    "rule": "binary space partition; a door gap on each shared wall; rooms tinted by area"
+   },
+   "drafted_for": "room_grammar",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "contact_mark": {
+   "expr": "hand(point, touching a surface) = contact_mark - contact leaves a mark",
+   "from": [
+    "point"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "point"
+      },
+      {
+       "p": "mesh",
+       "shape": "plane",
+       "size": [
+        3,
+        1.1
+       ],
+       "part": "glass"
+      }
+     ]
+    },
+    "by": "contact"
+   },
+   "drafted_for": "void_trace_surface",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "stipple_line": {
+   "expr": "hand(drive(contact_mark, interval 1/5 s)) = stipple_line - the machine keeps time, the hand keeps place: spacing is speed over the interval",
+   "from": [
+    "contact_mark"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "p": "mesh",
+       "shape": "box",
+       "part": "machine"
+      },
+      {
+       "op": "engine",
+       "kind": "drive",
+       "of": {
+        "t": "contact_mark"
+       },
+       "f": "pen stroke every 1/5 s"
+      }
+     ]
+    }
+   },
+   "drafted_for": "stipple_jigsaw",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "line_vs_trace": {
+   "expr": "exhibit(line + trail(array(point, 33))) = line_vs_trace - two fixed ends keep one straight distance while a sampled route between them grows longer",
+   "from": [
+    "line",
+    "hand_trace"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "line"
+      },
+      {
+       "op": "engine",
+       "kind": "trail",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "point"
+        },
+        "n": 33,
+        "dims": 1
+       },
+       "routes": 3
+      }
+     ]
+    }
+   },
+   "drafted_for": "line_trace_monitor",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "hand_readout_pair": {
+   "expr": "exhibit(hand(point), x y z log) * 2 = hand_readout_pair - each hand is a position on its own feed",
+   "from": [
+    "point"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "times",
+    "of": {
+     "op": "exhibit",
+     "text": "coordinate log",
+     "of": {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "t": "point"
+      }
+     }
+    },
+    "n": 2
+   },
+   "drafted_for": "hand_telemetry_diptych",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "hand_canvas": {
+   "expr": "contact_mark * 12 (five fingertips and a knuckle per hand) = hand_canvas - how many indicators touch decides the stroke",
+   "from": [
+    "contact_mark"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "times",
+    "of": {
+     "t": "contact_mark"
+    },
+    "n": 12,
+    "stroke": "width by how many of one hand touch"
+   },
+   "drafted_for": "hand_canvas",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "kept_stroke": {
+   "expr": "hand_trace inside a box, kept on leaving = kept_stroke - the volume decides when the hand draws; only Clear erases",
+   "from": [
+    "hand_trace"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "hand_trace"
+     },
+     {
+      "p": "mesh",
+      "shape": "box",
+      "size": [
+       0.6,
+       1.4,
+       0.6
+      ],
+      "part": "drawing volume, wire"
+     }
+    ],
+    "brush": "tube|ribbon|beads|grid"
+   },
+   "drafted_for": "trace_paint_box",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "short_memory_trace": {
+   "expr": "association(config(hand_trace, keeps 32)) = short_memory_trace - continuing the gesture removes its beginning",
+   "from": [
+    "hand_trace"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "associate",
+    "of": {
+     "t": "hand_trace"
+    },
+    "config": "keeps the last 32 positions; a bead per point, a cord per pair"
+   },
+   "drafted_for": "trace_short_memory",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "string_grid": {
+   "expr": "line * 15 upright + line * 7 level + plank * 4 = string_grid - Duerer's drawing screen at the size of a wall",
+   "from": [
+    "line",
+    "plank"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "t": "line"
+      },
+      "n": 15,
+      "layout": "upright, 0.5 m apart"
+     },
+     {
+      "op": "transform",
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "line"
+       },
+       "n": 7,
+       "layout": "level, 0.5 m apart"
+      },
+      "rot": [
+       0,
+       0,
+       90
+      ]
+     },
+     {
+      "op": "times",
+      "of": {
+       "t": "plank"
+      },
+      "n": 4,
+      "layout": "two posts, head beam, sill"
+     }
+    ]
+   },
+   "drafted_for": "standing_grid",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "sampled_join": {
+   "expr": "exhibit(connect(decide(array(point, 8), distance >= 0.8 m))) = sampled_join - read a candidate, keep a position, join a pair",
+   "from": [
+    "point",
+    "line"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "connect",
+     "ties": "retained neighbours",
+     "of": {
+      "op": "decide",
+      "rule": "keep when distance to the last kept >= 0.8 m",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "point"
+       },
+       "n": 8,
+       "dims": 1
+      }
+     }
+    }
+   },
+   "drafted_for": "film_foundation_trace",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "snapped_trace": {
+   "expr": "hand(rule(grab_sphere, round(position / grid_size) * grid_size)) over grid = snapped_trace - continuous movement, countable positions",
+   "from": [
+    "grab_sphere",
+    "grid"
+   ],
+   "chapter": "line",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "engine",
+     "kind": "rule",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "grab_sphere"
+       },
+       {
+        "t": "grid"
+       }
+      ]
+     },
+     "fn": "round(position / grid_size) * grid_size"
+    }
+   },
+   "drafted_for": "grab_sphere_point_snap",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "folded_triangles": {
+   "expr": "hand(connect(triangle_face * 12, edge to edge at a chosen fold)) = folded_triangles - faces joined at their edges close toward a body",
+   "from": [
+    "triangle_face"
+   ],
+   "chapter": "triangle",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "connect",
+     "ties": "two free edges brought together snap at the fold angle (70.53 deg here)",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "triangle_face"
+      },
+      "n": 12
+     }
+    }
+   },
+   "drafted_for": "triangle_assembly_table",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "bipyramid": {
+   "expr": "triangle_face * 10 around five waist corners and two tips = bipyramid - seven vertices do not determine one solid",
+   "from": [
+    "triangle_face"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "triangle_face",
+      "scaffold": true
+     },
+     {
+      "p": "mesh",
+      "shape": "bipyramid",
+      "size": [
+       0.42,
+       0.9
+      ],
+      "faces": 10
+     },
+     {
+      "p": "collider",
+      "shape": "convex"
+     },
+     {
+      "t": "grabbable"
+     }
+    ]
+   },
+   "drafted_for": "pentagonal_bipyramid_7",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "building_solids": {
+   "expr": "tetrahedron + pyramid + wedge at building size = building_solids - completed solids become pieces that block or carry",
+   "from": [
+    "tetrahedron",
+    "pyramid",
+    "wedge"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "assemblage",
+    "parts": [
+     {
+      "of": {
+       "t": "tetrahedron"
+      },
+      "at": [
+       -3.2,
+       0,
+       0
+      ]
+     },
+     {
+      "of": {
+       "t": "pyramid"
+      },
+      "at": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "of": {
+       "t": "wedge"
+      },
+      "at": [
+       3.2,
+       0,
+       0
+      ],
+      "rot": [
+       0,
+       180,
+       0
+      ]
+     }
+    ]
+   },
+   "drafted_for": "void_polyhedra_obstruction",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "surface_and_hull": {
+   "expr": "(triangle_face * 3 + closed collider) + grab(tetrahedron) + hand(pyramid, corners) = surface_and_hull - what is seen and what collides are two boundaries",
+   "from": [
+    "triangle_face",
+    "tetrahedron",
+    "pyramid"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "times",
+        "of": {
+         "t": "triangle_face"
+        },
+        "n": 3
+       },
+       {
+        "p": "collider",
+        "shape": "convex"
+       },
+       {
+        "t": "grabbable"
+       }
+      ]
+     },
+     {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "tetrahedron"
+       },
+       {
+        "t": "grabbable"
+       }
+      ]
+     },
+     {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "t": "pyramid"
+      },
+      "by": "corner handles"
+     }
+    ]
+   },
+   "drafted_for": "void_polyhedra_boundaries",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "traffic_pyramid": {
+   "expr": "association(config(pyramid)) = traffic_pyramid - a square pyramid borrows the warning role of a traffic cone",
+   "from": [
+    "pyramid"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "associate",
+    "surface": "orange with one ivory band",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "pyramid"
+      },
+      {
+       "t": "grabbable"
+      }
+     ]
+    }
+   },
+   "drafted_for": "traffic_pyramid_5",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "cross_section": {
+   "expr": "exhibit(drive(rock intersect plane, the plane rises and falls)) = cross_section - a solid read one slice at a time",
+   "from": [
+    "rock"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "exhibit",
+    "text": "2D section on a screen",
+    "of": {
+     "op": "engine",
+     "kind": "drive",
+     "of": {
+      "intersect": [
+       {
+        "t": "rock"
+       },
+       {
+        "p": "mesh",
+        "shape": "plane",
+        "part": "scan plane"
+       }
+      ]
+     },
+     "f": "y between 0 and 3 m at 0.5 m/s"
+    }
+   },
+   "drafted_for": "rock_scanner",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "rock_fall": {
+   "expr": "step(random(rock * 30, place), physics) = rock_fall - irregular solids do not pack: the gaps are the lesson",
+   "from": [
+    "rock"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "rock"
+      },
+      "n": 30
+     },
+     "what": "position in 3 x 2 x 3 m, rotation"
+    }
+   },
+   "drafted_for": "rock_spawner",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "twist_tower": {
+   "expr": "array(octahedron, 12, up, turn 15 deg x i) = twist_tower - the same solid counted upward, each turned a little more: the helix is the rule",
+   "from": [
+    "octahedron"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "array",
+    "of": {
+     "t": "octahedron"
+    },
+    "n": 12,
+    "dims": 1,
+    "axis": "y",
+    "turn": "15 deg x i (linear|fixed|alternating|accelerating)"
+   },
+   "drafted_for": "diamonds",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "crate_stack": {
+   "expr": "assemblage(wooden_box * 2, cardboard_box, concrete_block, cylinder) = crate_stack - boxes kept: the cube as stored goods",
+   "from": [
+    "cardboard_box",
+    "wooden_box",
+    "concrete_block",
+    "cylinder"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "assemblage",
+    "parts": [
+     {
+      "of": {
+       "t": "wooden_box"
+      }
+     },
+     {
+      "of": {
+       "t": "wooden_box"
+      },
+      "at": [
+       0.45,
+       0,
+       0.1
+      ],
+      "scale": [
+       0.8,
+       0.8,
+       0.8
+      ]
+     },
+     {
+      "of": {
+       "t": "cardboard_box"
+      },
+      "at": [
+       0,
+       0.5,
+       0
+      ],
+      "scale": [
+       0.7,
+       0.7,
+       0.7
+      ]
+     },
+     {
+      "of": {
+       "t": "concrete_block"
+      },
+      "at": [
+       0.4,
+       0.4,
+       0.1
+      ],
+      "scale": [
+       0.5,
+       0.5,
+       0.5
+      ]
+     },
+     {
+      "of": {
+       "t": "cylinder"
+      },
+      "at": [
+       -0.4,
+       0,
+       0.3
+      ]
+     }
+    ]
+   },
+   "drafted_for": "station_crates",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "fold_print_sort": {
+   "expr": "sort(hand(random(drive(step(cube_assembly, physics), belt), edition)), into baskets) = fold_print_sort - a net closes, falls, is named by chance and put with its kind",
+   "from": [
+    "cube_assembly",
+    "falling_cube"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "sort",
+    "by": "edition AGAIN|YET into labelled baskets",
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "of": {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "engine",
+       "kind": "drive",
+       "of": {
+        "op": "engine",
+        "kind": "physics",
+        "of": {
+         "t": "cube_assembly"
+        }
+       },
+       "f": "conveyor 0.55 m/s"
+      },
+      "what": "carton edition"
+     }
+    }
+   },
+   "drafted_for": "cube_sorting_line",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "cube_from_corners": {
+   "expr": "exhibit(point * 8 + line * 12 + triangle_face * 12, corner 6 moved) = cube_from_corners - the diagonal was already in the face list",
+   "from": [
+    "point",
+    "line",
+    "triangle_face",
+    "cube"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "t": "point"
+       },
+       "n": 8
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "line"
+       },
+       "n": 12
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "triangle_face"
+       },
+       "n": 12
+      }
+     ]
+    }
+   },
+   "drafted_for": "film_cube_corner",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "supply_pile": {
+   "expr": "crate_stack + cylinder(gas) + plastic_cone = supply_pile - a corner left mid-shift",
+   "from": [
+    "crate_stack",
+    "cylinder",
+    "plastic_cone"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "assemblage",
+    "parts": [
+     {
+      "of": {
+       "t": "crate_stack"
+      }
+     },
+     {
+      "of": {
+       "t": "cylinder"
+      },
+      "at": [
+       0.8,
+       0,
+       0
+      ],
+      "scale": [
+       1,
+       4,
+       1
+      ]
+     },
+     {
+      "of": {
+       "t": "plastic_cone"
+      },
+      "at": [
+       0.6,
+       0,
+       0.7
+      ]
+     }
+    ]
+   },
+   "drafted_for": "hangar_supply_pile",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "cube_walkway": {
+   "expr": "assemblage(cube * 30, wedge * 6) = cube_walkway - one recipe of named pieces: a platform you walk up",
+   "from": [
+    "cube",
+    "wedge"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "assemblage",
+    "parts": [
+     {
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "cube"
+       },
+       "n": 30
+      }
+     },
+     {
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "wedge"
+       },
+       "n": 6
+      }
+     }
+    ]
+   },
+   "drafted_for": "void_cube_walkway",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "phosphor_point": {
+   "expr": "exhibit(drive(point, blink 530 ms), oscilloscope) = phosphor_point - one dot on dark glass: the medium's first point",
+   "from": [
+    "point"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "exhibit",
+    "text": "oscilloscope on a cart",
+    "of": {
+     "op": "engine",
+     "kind": "drive",
+     "of": {
+      "t": "point"
+     },
+     "f": "blink 530 ms with phosphor persistence"
+    }
+   },
+   "drafted_for": "first_phosphor",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "cube_edges": {
+   "expr": "line * 12 on a cube's adjacency = cube_edges - twelve edges and no faces: the volume is an inference",
+   "from": [
+    "line"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "times",
+    "of": {
+     "t": "line"
+    },
+    "n": 12,
+    "layout": "cube edges"
+   },
+   "drafted_for": "cube_lines",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "first_shadow": {
+   "expr": "triangle_face + line under one spotlight = first_shadow - the face casts a shadow, the line casts none",
+   "from": [
+    "triangle_face",
+    "line"
+   ],
+   "chapter": "triangle",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "triangle_face"
+     },
+     {
+      "t": "line"
+     },
+     {
+      "p": "mesh",
+      "shape": "plane",
+      "part": "pale floor that receives the shadow"
+     }
+    ],
+    "light": "one spot, shadows on"
+   },
+   "drafted_for": "first_shadow",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "folded_squares": {
+   "expr": "hand(connect(quad * 12, edge to edge at 90 deg)) = folded_squares - six of them close a cube",
+   "from": [
+    "quad",
+    "folded_triangles"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "connect",
+     "ties": "two free edges brought together snap at the fold angle (90 deg here)",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "quad"
+      },
+      "n": 12
+     }
+    }
+   },
+   "drafted_for": "square_assembly_table",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "star": {
+   "expr": "closure(triangle_face * 40 over 22 listed vertices) = star - a named form that is a table of points and a table of faces",
+   "from": [
+    "triangle_face"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "triangle_face",
+      "scaffold": true
+     },
+     {
+      "p": "mesh",
+      "shape": "star",
+      "points": 5,
+      "size": [
+       0.5,
+       0.25,
+       0.25
+      ]
+     },
+     {
+      "p": "collider",
+      "shape": "trimesh"
+     },
+     {
+      "p": "body",
+      "kind": "static"
+     }
+    ]
+   },
+   "drafted_for": "star_primitive",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "resolution_film": {
+   "expr": "exhibit(cylinder + capsule + sphere, screen: segments, rings) = resolution_film - a camera films three engine meshes while two counts change",
+   "from": [
+    "cylinder",
+    "capsule",
+    "sphere"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "config": "segments, rings",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "cylinder"
+      },
+      {
+       "t": "capsule"
+      },
+      {
+       "t": "sphere"
+      }
+     ]
+    }
+   },
+   "drafted_for": "resolution_reveal_monitor",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "rough_rock": {
+   "expr": "random(polyhedron of 8 vertices, seed, roughness) = rough_rock - a fixed face list over vertices each pushed by a seeded draw",
+   "from": [],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "seed": 0,
+    "draws": "vertex offset",
+    "of": {
+     "p": "mesh",
+     "shape": "polyhedron",
+     "vertices": 8
+    }
+   },
+   "drafted_for": "roughrock",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "snap_octahedron": {
+   "expr": "connect(grab_sphere * 6, 12 edges) = snap_octahedron - six held points, joined, close an octahedron",
+   "from": [
+    "grab_sphere",
+    "octahedron"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "connect",
+    "kind": "rod",
+    "edges": 12,
+    "of": {
+     "op": "times",
+     "of": {
+      "t": "grab_sphere"
+     },
+     "n": 6,
+     "layout": "octahedron"
+    }
+   },
+   "drafted_for": "snap_octahedron_puzzle",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "capsule_reliquary": {
+   "expr": "assemblage(array(cylinder, 8 stacked, 4 to 11 sides) + transform(capsule, scale 1.6)) = capsule_reliquary - a five-sided capsule over eight drums that each count one side more",
+   "from": [
+    "cylinder",
+    "capsule"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "assemblage",
+    "parts": [
+     {
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "cylinder"
+       },
+       "n": 8,
+       "dims": 1,
+       "layout": "stacked",
+       "profile": "radial segments 4 to 11, radius tapering"
+      }
+     },
+     {
+      "of": {
+       "t": "capsule"
+      },
+      "scale": 1.6,
+      "at": [
+       0,
+       1.9,
+       0
+      ]
+     }
+    ]
+   },
+   "drafted_for": "capsule_reliquary",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "form_in_hand": {
+   "expr": "transform(torus, at 5 m: rings, tube segments) + hand(black_point) = form_in_hand - a form overhead that two counts change, and a point that simplifies while it is held",
+   "from": [
+    "torus",
+    "black_point"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "transform",
+      "of": {
+       "t": "torus"
+      },
+      "at": [
+       0,
+       5,
+       0
+      ],
+      "config": "rings, tube segments"
+     },
+     {
+      "op": "engine",
+      "kind": "hand",
+      "by": "grip simplifies, trigger sends the current form",
+      "of": {
+       "t": "black_point"
+      }
+     }
+    ]
+   },
+   "drafted_for": "form_in_hand",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "cone_cordon": {
+   "expr": "plastic_cone * 3 round a centre = cone_cordon - three cones at 120 degrees say a hole that is not drawn",
+   "from": [
+    "plastic_cone"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "times",
+    "of": {
+     "t": "plastic_cone"
+    },
+    "n": 3,
+    "layout": "ring, 120 degrees, 0.9 m out"
+   },
+   "drafted_for": "hole_with_cones",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "truncated_tetrahedron": {
+   "expr": "closure(triangle_face * 4 + hexagon * 4) = truncated_tetrahedron - the tetrahedron with each corner cut a third along its edges",
+   "from": [
+    "tetrahedron",
+    "triangle_face",
+    "line"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "tetrahedron",
+      "scaffold": true
+     },
+     {
+      "op": "times",
+      "of": {
+       "t": "triangle_face"
+      },
+      "n": 4
+     },
+     {
+      "op": "times",
+      "n": 4,
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "line"
+       },
+       "n": 6,
+       "layout": "polygon"
+      }
+     },
+     {
+      "p": "collider",
+      "shape": "trimesh"
+     },
+     {
+      "p": "body",
+      "kind": "static"
+     }
+    ]
+   },
+   "drafted_for": "truncatedtetrahedron",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "form_table": {
+   "expr": "hand((cylinder + grabbable) * 16: drum, tall, cone, spire, funnel, capital, base) + column = form_table - turned parts that snap foot to top: a column made by hand",
+   "from": [
+    "cylinder",
+    "grabbable",
+    "column"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "released foot-to-top a part snaps upright and stays",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "n": 16,
+       "config": "drum, tall, cone, spire, funnel, capital, base",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "t": "cylinder"
+         },
+         {
+          "t": "grabbable"
+         }
+        ]
+       }
+      },
+      {
+       "t": "column"
+      }
+     ]
+    }
+   },
+   "drafted_for": "form_table",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "function_film": {
+   "expr": "exhibit(cylinder * 2: radial count, height, screen) = function_film - one angular rule makes two columns, a fixed one and one you set",
+   "from": [
+    "cylinder"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "times",
+     "of": {
+      "t": "cylinder"
+     },
+     "n": 2,
+     "config": "radial count, height"
+    }
+   },
+   "drafted_for": "film_foundation_function",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "cyrtoid": {
+   "expr": "recurse(extension(boolean(revolve(profile), a pore per cell), feet and teeth from the lip), bristles) = cyrtoid - one radiolarian shell as a sentence of five operations",
+   "from": [
+    "line"
+   ],
+   "chapter": "procedural",
+   "build": {
+    "op": "recurse",
+    "depth": 1,
+    "rule": "bristles branch from a few bars",
+    "of": {
+     "op": "extension",
+     "as": "feet and teeth extruded from the lip",
+     "of": {
+      "op": "boolean",
+      "kind": "subtract",
+      "what": "a pore opened in every cell",
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "line"
+       },
+       "n": 24,
+       "layout": "revolve: the profile turned round its axis"
+      }
+     }
+    }
+   },
+   "drafted_for": "cyrtoid_by_rule",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "profile_film": {
+   "expr": "exhibit(profile_sweeps, screen) = profile_film - two O and one I become a passage, an open vessel and a closed sweep, section by section",
+   "from": [
+    "profile_sweeps"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "t": "profile_sweeps"
+    },
+    "config": "three of the six: O + depth, O + changing width, I + closed path"
+   },
+   "drafted_for": "film_profile_travels",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "portal_span": {
+   "expr": "array(torus, 20, 3 m apart, ring segments rising) + casing + deck = portal_span - twenty rings, each finer than the last: a finite walk into the sky",
+   "from": [
+    "torus"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "array",
+      "of": {
+       "t": "torus"
+      },
+      "n": 20,
+      "step": 3.0,
+      "dims": 1,
+      "profile": "ring segments rising"
+     },
+     {
+      "p": "mesh",
+      "shape": "cylinder",
+      "part": "casing from the third ring",
+      "size": [
+       2.6,
+       55
+      ]
+     },
+     {
+      "op": "compose",
+      "parts": [
+       {
+        "p": "mesh",
+        "shape": "box",
+        "part": "bridge deck"
+       },
+       {
+        "p": "collider",
+        "shape": "box"
+       },
+       {
+        "p": "body",
+        "kind": "static"
+       }
+      ]
+     }
+    ]
+   },
+   "drafted_for": "void_portal_span",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "refinement_passage": {
+   "expr": "array(torus, 7, 1.8 m apart, ring segments rising) = refinement_passage - the same ring refined seven times: a finite mesh, another refinement",
+   "from": [
+    "torus"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "array",
+    "of": {
+     "t": "torus"
+    },
+    "n": 7,
+    "step": 1.8,
+    "dims": 1,
+    "profile": "ring segments rising"
+   },
+   "drafted_for": "void_primitive_portals",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "diamond_torus": {
+   "expr": "torus + (line + octahedron) * 7 round it = diamond_torus - seven diamonds hung on thin rods from one ring",
+   "from": [
+    "torus",
+    "line",
+    "octahedron"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "torus"
+     },
+     {
+      "op": "times",
+      "n": 7,
+      "layout": "ring",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "op": "transform",
+         "of": {
+          "t": "line"
+         },
+         "rot": [
+          0,
+          0,
+          90
+         ]
+        },
+        {
+         "op": "transform",
+         "of": {
+          "t": "octahedron"
+         },
+         "scale": 0.5
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "drafted_for": "diamondtoruscollection",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "box_frame": {
+   "expr": "plank * 4 in a closed loop = box_frame - a thickened line bent round an opening: the hollow is the point",
+   "from": [
+    "plank"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "times",
+    "of": {
+     "t": "plank"
+    },
+    "n": 4,
+    "layout": "closed loop 2.0 x 2.5 m"
+   },
+   "drafted_for": "bigframe",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "durer_box": {
+   "expr": "wall * 3 + array(line, net) + sight = durer_box - three walls round a work, a string net across the open front and an eye-piece to read it through",
+   "from": [
+    "line"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "n": 3,
+      "layout": "back and two sides",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "p": "mesh",
+         "shape": "box",
+         "part": "wall"
+        },
+        {
+         "p": "collider",
+         "shape": "box"
+        }
+       ]
+      }
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "line"
+      },
+      "n": [
+       15,
+       11
+      ],
+      "dims": 2,
+      "as": "string net in a timber frame"
+     },
+     {
+      "p": "mesh",
+      "shape": "torus",
+      "part": "eye-piece on a post"
+     }
+    ]
+   },
+   "drafted_for": "durer_box",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "eleven_dots": {
+   "expr": "sphere * 11 placed along rays from a mark + tape = eleven_dots - a cross that is only there from where you stand",
+   "from": [
+    "sphere",
+    "tape"
+   ],
+   "chapter": "point",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "t": "sphere"
+      },
+      "n": 11,
+      "layout": "a cross as projected from the standing mark"
+     },
+     {
+      "t": "tape"
+     }
+    ]
+   },
+   "drafted_for": "eleven_dots",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "snap_pyramid": {
+   "expr": "connect(grab_sphere * 5, 8 edges) = snap_pyramid - four held points and an apex, joined, close a square pyramid",
+   "from": [
+    "grab_sphere",
+    "pyramid"
+   ],
+   "chapter": "solid",
+   "build": {
+    "op": "connect",
+    "kind": "rod",
+    "edges": 8,
+    "of": {
+     "op": "times",
+     "of": {
+      "t": "grab_sphere"
+     },
+     "n": 5,
+     "layout": "square base and apex"
+    }
+   },
+   "drafted_for": "snap_pyramid_puzzle",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "block_court": {
+   "expr": "array(concrete_block, 5 x 5) + array(wooden_plane, 5 x 5) + plank * 8 = block_court - a walkable court recomposed from the kit, no new primitive",
+   "from": [
+    "concrete_block",
+    "wooden_plane",
+    "plank"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "array",
+      "of": {
+       "t": "concrete_block"
+      },
+      "n": [
+       5,
+       5
+      ],
+      "dims": 2,
+      "step": 1.0
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "wooden_plane"
+      },
+      "n": [
+       5,
+       5
+      ],
+      "dims": 2,
+      "step": 1.0
+     },
+     {
+      "op": "times",
+      "of": {
+       "t": "plank"
+      },
+      "n": 8,
+      "layout": "rim"
+     }
+    ]
+   },
+   "drafted_for": "melencolia_platform",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "invariant_tape": {
+   "expr": "connect(tape, pick_up_cube: pinned in the cube's own frame) = invariant_tape - the cube's ruler: its length survives a move and a turn, not a scale",
+   "from": [
+    "tape",
+    "pick_up_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "connect",
+    "kind": "pinned in the cube's own frame",
+    "a": 0,
+    "b": 1,
+    "reads": "length, ratio to the laid length, heading",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "tape"
+      },
+      {
+       "t": "pick_up_cube"
+      }
+     ]
+    }
+   },
+   "drafted_for": "invariant_tape",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "coin_pickup": {
+   "expr": "association(pick_up_cube, coin) = coin_pickup - the moving, score-bearing pickup wearing the coin",
+   "from": [
+    "pick_up_cube",
+    "coin"
+   ],
+   "chapter": "association",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "pick_up_cube",
+      "scaffold": true
+     },
+     {
+      "t": "coin"
+     }
+    ]
+   },
+   "drafted_for": "void_pickup_coin",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "chair_factory": {
+   "expr": "connect(hand(plank * 2 sections: saw to length, lay out), nails) = chair_factory - cuts make pieces, nails make groups that move as one",
+   "from": [
+    "plank"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "connect",
+    "kind": "nail",
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "by": "feed, saw to length, lay out on a ghost",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "plank"
+      },
+      "n": 2,
+      "config": "two timber sections"
+     }
+    }
+   },
+   "drafted_for": "chair_factory",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "assembly_line": {
+   "expr": "hand(drive(assemblage(cube, pyramid), conveyor), ghost slots) = assembly_line - parts arrive on a belt; a house is a cube and a pyramid in the right slots",
+   "from": [
+    "cube",
+    "pyramid"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "place each piece in its ghost slot",
+    "of": {
+     "op": "engine",
+     "kind": "drive",
+     "f": "conveyor",
+     "of": {
+      "op": "assemblage",
+      "parts": [
+       {
+        "of": {
+         "t": "cube"
+        }
+       },
+       {
+        "of": {
+         "t": "pyramid"
+        },
+        "at": [
+         0,
+         0.5,
+         0
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "assembly_line_puzzle",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "passage_ledger": {
+   "expr": "array(travelling_cube, 5: ghost, sweep, terminus, formula, none) = passage_ledger - one passage at one instant, told five ways",
+   "from": [
+    "travelling_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "array",
+    "of": {
+     "t": "travelling_cube"
+    },
+    "n": 5,
+    "dims": 1,
+    "step": 0.86,
+    "config": "account: ghost, sweep, terminus, formula, none"
+   },
+   "drafted_for": "passage_ledger",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "unit_corner": {
+   "expr": "quad * 3 in a corner + trail(drive(drone, x, y, z, one turn)) = unit_corner - each canvas keeps what it can see of the move",
+   "from": [
+    "quad"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "t": "quad"
+      },
+      "n": 3,
+      "layout": "floor and two walls meeting at one point"
+     },
+     {
+      "op": "engine",
+      "kind": "trail",
+      "on": "each canvas, sprayed",
+      "of": {
+       "op": "engine",
+       "kind": "drive",
+       "f": "move along x, y, z, then one whole turn",
+       "of": {
+        "p": "mesh",
+        "shape": "drone"
+       }
+      }
+     }
+    ]
+   },
+   "drafted_for": "unit_drone_corner",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "transformation_crossings": {
+   "expr": "tween(plank, rot) + growing_cube = transformation_crossings - a gap you cross when the plank aligns, and one you cross when the cube has grown",
+   "from": [
+    "plank",
+    "growing_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "tween",
+      "of": {
+       "t": "plank"
+      },
+      "rot": [
+       0,
+       180,
+       0
+      ],
+      "period": 8
+     },
+     {
+      "t": "growing_cube"
+     }
+    ]
+   },
+   "drafted_for": "void_trial_introduction_mezzanine",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "relief_puzzle": {
+   "expr": "hand(quad + trs_cube * 6: depth, colour, ghost guides) = relief_puzzle - six bars scaled and set at their depths on a backing plane",
+   "from": [
+    "quad",
+    "trs_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "scale each bar and place it on its ghost",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "quad"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "trs_cube"
+       },
+       "n": 6,
+       "config": "width, height, depth, colour"
+      }
+     ]
+    }
+   },
+   "drafted_for": "biederman_relief",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "balance_stack": {
+   "expr": "decide(hand(falling_cube * 8), above 0.4 m and still for 1.5 s) = balance_stack - a stack is stable or it is not; the pieces decide together",
+   "from": [
+    "falling_cube"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "logic",
+    "gate": "above 0.4 m and still for 1.5 s",
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "by": "drop and stack",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "falling_cube"
+      },
+      "n": 8
+     }
+    }
+   },
+   "drafted_for": "balance_puzzle",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "instruction_bench": {
+   "expr": "array(chair_puzzle, 4: ghost, none, mark, exemplar) = instruction_bench - one half-built chair, told four ways",
+   "from": [
+    "chair_puzzle"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "array",
+    "of": {
+     "t": "chair_puzzle"
+    },
+    "n": 4,
+    "dims": 1,
+    "step": 0.64,
+    "config": "tell: ghost, none, mark, exemplar"
+   },
+   "drafted_for": "instruction_bench",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "invariant_triangle": {
+   "expr": "hand(transform(triangle: translate, rotate, scale, shear, project)) = invariant_triangle - sides, angles and area read after each move: what holds says what the move is",
+   "from": [
+    "triangle"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "buttons: translate, rotate, scale, shear, project",
+    "reads": "side lengths, angles, area",
+    "of": {
+     "op": "transform",
+     "of": {
+      "t": "triangle"
+     }
+    }
+   },
+   "drafted_for": "invariants_demo",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "gimbal": {
+   "expr": "hand(torus * 3 nested, one axis each + transform(cube, rot)) = gimbal - three rings turn one cube; at 90 degrees two of them become one axis",
+   "from": [
+    "torus",
+    "cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "three Euler sliders",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "t": "torus"
+       },
+       "n": 3,
+       "layout": "nested, one axis each"
+      },
+      {
+       "op": "transform",
+       "of": {
+        "t": "cube"
+       },
+       "rot": "x, y, z"
+      }
+     ]
+    }
+   },
+   "drafted_for": "rotation_gimbal",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "sheared_quad": {
+   "expr": "quad + transform(quad, shear 0.5) = sheared_quad - the square beside its parallelogram: the move that keeps area and loses the right angle",
+   "from": [
+    "quad"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "quad"
+     },
+     {
+      "op": "transform",
+      "of": {
+       "t": "quad"
+      },
+      "shear": 0.5
+     }
+    ]
+   },
+   "drafted_for": "shear_matrix_demo",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "order_of_transforms": {
+   "expr": "transform(transform(house, rot), at) + transform(transform(house, at), rot) = order_of_transforms - the same two moves in the other order land somewhere else",
+   "from": [
+    "line"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "transform",
+      "of": {
+       "op": "transform",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "line"
+        },
+        "n": 15,
+        "layout": "house wireframe"
+       },
+       "rot": [
+        0,
+        45,
+        0
+       ]
+      },
+      "at": [
+       0.3,
+       0,
+       0
+      ]
+     },
+     {
+      "op": "transform",
+      "of": {
+       "op": "transform",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "line"
+        },
+        "n": 15,
+        "layout": "house wireframe"
+       },
+       "at": [
+        0.3,
+        0,
+        0
+       ]
+      },
+      "rot": [
+       0,
+       45,
+       0
+      ]
+     }
+    ]
+   },
+   "drafted_for": "transform_composition",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "plank_on_ball": {
+   "expr": "step(assemblage(beach_ball, plank), physics) = plank_on_ball - a plank laid across one ball: balance that cannot last",
+   "from": [
+    "beach_ball",
+    "plank"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "assemblage",
+     "parts": [
+      {
+       "of": {
+        "t": "beach_ball"
+       }
+      },
+      {
+       "of": {
+        "t": "plank"
+       },
+       "at": [
+        0,
+        0.62,
+        0
+       ],
+       "scale": [
+        2,
+        1,
+        1
+       ]
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_plank_ball",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "turn_and_swing": {
+   "expr": "tween(torus, rot) + trail(drive(cylinder, sin)) = turn_and_swing - a ring that turns beside a cylinder that rises and falls; the trail writes the sine",
+   "from": [
+    "turning_cube",
+    "cylinder"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "tween",
+      "of": {
+       "p": "mesh",
+       "shape": "torus",
+       "size": [
+        1.0,
+        0.3
+       ]
+      },
+      "rot": [
+       0,
+       360,
+       0
+      ]
+     },
+     {
+      "op": "engine",
+      "kind": "trail",
+      "of": {
+       "op": "engine",
+       "kind": "drive",
+       "of": {
+        "t": "cylinder"
+       },
+       "fn": "sin",
+       "axis": "y"
+      }
+     }
+    ]
+   },
+   "drafted_for": "toruscylinder",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "pivot_walkway": {
+   "expr": "hand(transform(plank, turn about a pivot that slides)) + landing * 3 + walk_ramp = pivot_walkway - move the bearing and the same turn carries the deck somewhere else",
+   "from": [
+    "plank",
+    "pick_up_cube",
+    "wooden_box",
+    "walk_ramp"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "op": "transform",
+         "of": {
+          "t": "plank"
+         },
+         "scale": [
+          6,
+          1,
+          5
+         ],
+         "rot": [
+          0,
+          "angle",
+          0
+         ],
+         "pivot": "slides on a rail"
+        },
+        {
+         "op": "times",
+         "of": {
+          "t": "pick_up_cube"
+         },
+         "n": 2
+        }
+       ]
+      }
+     },
+     {
+      "op": "times",
+      "of": {
+       "t": "wooden_box"
+      },
+      "n": 3
+     },
+     {
+      "t": "walk_ramp"
+     }
+    ]
+   },
+   "drafted_for": "movable_pivot_walkway",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "crank_piston": {
+   "expr": "step(connect(drive(plank, motor) + stick + cube on a slider, pins), physics) + sphere_collider = crank_piston - a turn made into a stroke: rotor, rod, piston; contact delivers the ball",
+   "from": [
+    "plank",
+    "stick",
+    "cube",
+    "sphere_collider"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "connect",
+       "kind": "pin",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "op": "engine",
+          "kind": "drive",
+          "of": {
+           "t": "plank"
+          },
+          "motor": "hinge"
+         },
+         {
+          "t": "stick"
+         },
+         {
+          "op": "connect",
+          "kind": "slider",
+          "of": {
+           "t": "cube"
+          }
+         }
+        ]
+       }
+      },
+      {
+       "t": "sphere_collider"
+      }
+     ]
+    }
+   },
+   "drafted_for": "trans_machine_crank",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "suspended_cube": {
+   "expr": "hand(step(connect(stick * 4 + cube, pins), physics)) + slot = suspended_cube - a cube on four pinned links; pull, release, and the slot decides its passage",
+   "from": [
+    "stick",
+    "cube",
+    "pendulum"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "op": "engine",
+       "kind": "physics",
+       "of": {
+        "op": "connect",
+        "kind": "pin",
+        "of": {
+         "op": "compose",
+         "parts": [
+          {
+           "op": "times",
+           "of": {
+            "t": "stick"
+           },
+           "n": 4
+          },
+          {
+           "t": "cube"
+          }
+         ]
+        }
+       }
+      }
+     },
+     {
+      "op": "times",
+      "of": {
+       "t": "plank"
+      },
+      "n": 3
+     }
+    ]
+   },
+   "drafted_for": "trans_machine_suspended",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "constrained_door": {
+   "expr": "decide(hand(transform(wooden_plane + grab_sphere, at)), only along the allowed axis, leg 1 before leg 2) * 2 = constrained_door - a door that concedes one displacement at a time",
+   "from": [
+    "wooden_plane",
+    "grab_sphere",
+    "moved_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "times",
+    "of": {
+     "op": "decide",
+     "of": {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "t": "wooden_plane"
+        },
+        {
+         "t": "grab_sphere"
+        }
+       ]
+      }
+     },
+     "rule": "motion projected onto the allowed axis; the second leg unlocks when the first is complete"
+    },
+    "n": 2
+   },
+   "drafted_for": "translation_cube_demo",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "counting_gate": {
+   "expr": "decide(cube in the way, pick_up_cube collected >= n) = counting_gate - closed, then open, because enough moved things changed a count",
+   "from": [
+    "cube",
+    "pick_up_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "cube"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "pick_up_cube"
+       },
+       "n": "required_pickups"
+      }
+     ]
+    },
+    "rule": "score >= required_pickups opens the gate"
+   },
+   "drafted_for": "pickup_gate",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "carousel_cake": {
+   "expr": "tween(array(cylinder, 8, stacked), rot, speed x 1.2 per layer) = carousel_cake - one turning rule, compounded layer by layer",
+   "from": [
+    "cylinder",
+    "turning_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "tween",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "cylinder"
+     },
+     "n": 8,
+     "dims": 1,
+     "axis": "y"
+    },
+    "rot": [
+     0,
+     360,
+     0
+    ],
+    "speed": "base * 1.2^i"
+   },
+   "drafted_for": "carousel_cake",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "turning_blades": {
+   "expr": "tween(plank 8.4 m, rot about its centre, hold at the crossing) on y, x and z = turning_blades - one blade per axis: a level swing and two climbs",
+   "from": [
+    "plank",
+    "turning_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "tween",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "plank"
+       },
+       "scale": [
+        8.4,
+        3,
+        11
+       ]
+      },
+      "rot": [
+       0,
+       90,
+       0
+      ],
+      "hold": 12
+     },
+     {
+      "op": "engine",
+      "kind": "tween",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "plank"
+       },
+       "scale": [
+        8.4,
+        3,
+        11
+       ]
+      },
+      "rot": [
+       23.2,
+       0,
+       0
+      ],
+      "hold": 12
+     },
+     {
+      "op": "engine",
+      "kind": "tween",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "plank"
+       },
+       "scale": [
+        8.4,
+        3,
+        11
+       ]
+      },
+      "rot": [
+       0,
+       0,
+       23.2
+      ],
+      "hold": 12
+     }
+    ]
+   },
+   "drafted_for": "rotation_wall_crossings",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "descent_wheel": {
+   "expr": "tween(torus + plank * 8 spokes + quad deck kept level, half a turn) = descent_wheel - a rotation that carries a standing body down one storey",
+   "from": [
+    "plank",
+    "quad",
+    "turning_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "tween",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "p": "mesh",
+       "shape": "torus",
+       "size": [
+        3.0,
+        0.1
+       ]
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 8,
+       "layout": "ring"
+      },
+      {
+       "t": "quad"
+      }
+     ]
+    },
+    "rot": [
+     180,
+     0,
+     0
+    ],
+    "hold": 8
+   },
+   "drafted_for": "void_rotation_wheel",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "working_lever": {
+   "expr": "hand(step(connect(plank on wedge + cube pinned to it, hinge), physics), grip near or far) = working_lever - the same load, two effort arms",
+   "from": [
+    "wedge",
+    "plank",
+    "cube",
+    "pick_up_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "connect",
+      "kind": "hinge",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "t": "wedge"
+        },
+        {
+         "t": "plank"
+        },
+        {
+         "t": "cube"
+        }
+       ]
+      }
+     }
+    },
+    "grips": 2
+   },
+   "drafted_for": "trans_machine_lever",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "spin_copies": {
+   "expr": "times(transform(box, at), 10) + times(transform(box, at, rot 15), 12) + times(transform(box, at), 10) = spin_copies - translate, translate and turn, translate: the turn in the middle changes where the rest lands",
+   "from": [
+    "box",
+    "moved_cube",
+    "turned_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "box"
+       },
+       "at": [
+        0.14,
+        0,
+        0
+       ]
+      },
+      "n": 10
+     },
+     {
+      "op": "times",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "box"
+       },
+       "at": [
+        0.14,
+        0,
+        0
+       ],
+       "rot": [
+        0,
+        0,
+        15
+       ]
+      },
+      "n": 12
+     },
+     {
+      "op": "times",
+      "of": {
+       "op": "transform",
+       "of": {
+        "t": "box"
+       },
+       "at": [
+        0.14,
+        0,
+        0
+       ]
+      },
+      "n": 10
+     }
+    ]
+   },
+   "drafted_for": "spin",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "axial_sweep": {
+   "expr": "trail(turning_cube) -> cylinder; trail(tween(triangle_face, rot y)) -> cone = axial_sweep - a body and the space it occupies over a turn are different things",
+   "from": [
+    "turning_cube",
+    "triangle_face",
+    "cylinder"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "engine",
+       "kind": "trail",
+       "of": {
+        "t": "turning_cube"
+       }
+      },
+      {
+       "op": "engine",
+       "kind": "trail",
+       "of": {
+        "op": "engine",
+        "kind": "tween",
+        "of": {
+         "t": "triangle_face"
+        },
+        "rot": [
+         0,
+         360,
+         0
+        ]
+       }
+      },
+      {
+       "t": "cylinder"
+      }
+     ]
+    },
+    "controls": [
+     "shape",
+     "pause",
+     "boundary"
+    ]
+   },
+   "drafted_for": "axial_sweep",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "hinged_plates": {
+   "expr": "hand(connect(quad * 6, hinge at each shared edge)) = hinged_plates - each plate's frame is its parent's frame times an edge times a hinge turn; a pose is what the hand leaves",
+   "from": [
+    "quad",
+    "hinge"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "connect",
+     "kind": "hinge",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "times",
+        "of": {
+         "t": "quad"
+        },
+        "n": 6
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "hinge"
+        },
+        "n": 5
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "hinge_release",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "order_pair": {
+   "expr": "hand(transform(transform(tetrahedron, T1), T2) beside transform(transform(tetrahedron, T2), T1) + tetrahedron, one of 4 pairs) = order_pair - the same two operations in both orders",
+   "from": [
+    "tetrahedron",
+    "trs_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "transform",
+       "of": {
+        "op": "transform",
+        "of": {
+         "t": "tetrahedron"
+        },
+        "by": "T1"
+       },
+       "by": "T2"
+      },
+      {
+       "op": "transform",
+       "of": {
+        "op": "transform",
+        "of": {
+         "t": "tetrahedron"
+        },
+        "by": "T2"
+       },
+       "by": "T1"
+      },
+      {
+       "t": "tetrahedron"
+      }
+     ]
+    },
+    "slider": "4 pairs"
+   },
+   "drafted_for": "transform_composition_workbench",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "scaled_passage": {
+   "expr": "hand(transform(cube * 2 + lintel, opening 0.48 - 1.68 m)) + cylinder = scaled_passage - a wall whose gap is the parameter: who fits through?",
+   "from": [
+    "cube",
+    "cylinder",
+    "scaled_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "op": "times",
+         "of": {
+          "op": "transform",
+          "of": {
+           "t": "cube"
+          },
+          "scale": [
+           1.8,
+           3.5,
+           0.36
+          ]
+         },
+         "n": 2
+        },
+        {
+         "op": "transform",
+         "of": {
+          "t": "cube"
+         },
+         "scale": [
+          1,
+          1.45,
+          0.36
+         ]
+        }
+       ]
+      },
+      "scale": "width"
+     },
+     {
+      "t": "cylinder"
+     }
+    ]
+   },
+   "drafted_for": "reference_passage",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "size_sorter": {
+   "expr": "sort(step((plank * 2 diverging + transform(sphere_collider, scale)) * 3, physics), by size) = size_sorter - equal mass, three sizes: gravity and the widening rails sort them",
+   "from": [
+    "plank",
+    "sphere_collider",
+    "scaled_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "sort",
+    "by": "size",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "times",
+        "of": {
+         "op": "times",
+         "of": {
+          "t": "plank"
+         },
+         "n": 2
+        },
+        "n": 3
+       },
+       {
+        "op": "transform",
+        "of": {
+         "t": "sphere_collider"
+        },
+        "scale": 0.16
+       },
+       {
+        "op": "transform",
+        "of": {
+         "t": "sphere_collider"
+        },
+        "scale": 0.29
+       },
+       {
+        "op": "transform",
+        "of": {
+         "t": "sphere_collider"
+        },
+        "scale": 0.44
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "trans_machine_sorter",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "ring_ball_handle": {
+   "expr": "hand(tween(torus rail + sphere_collider rolling on it + grabbable yoke, rot y)) = ring_ball_handle - two rotations at once: the ball round the ring, and the ball about itself",
+   "from": [
+    "sphere_collider",
+    "grabbable"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "engine",
+     "kind": "tween",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "p": "mesh",
+        "shape": "torus",
+        "size": [
+         2.0,
+         0.05
+        ]
+       },
+       {
+        "t": "sphere_collider"
+       },
+       {
+        "t": "grabbable"
+       }
+      ]
+     },
+     "rot": [
+      0,
+      360,
+      0
+     ]
+    }
+   },
+   "drafted_for": "carousel_ring",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "drink_me_room": {
+   "expr": "hand(transform(walls + small exit, scale 4), drink) + association(cylinder, bottle) + walls unscaled = drink_me_room - only the room grows; the witness doorway keeps its size",
+   "from": [
+    "walls",
+    "cylinder",
+    "scaled_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "hand",
+      "of": {
+       "op": "transform",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "op": "times",
+          "of": {
+           "t": "walls"
+          },
+          "n": 2
+         },
+         {
+          "t": "cylinder"
+         }
+        ]
+       },
+       "scale": 4
+      },
+      "trigger": "drink"
+     },
+     {
+      "op": "associate",
+      "of": {
+       "t": "cylinder"
+      },
+      "story": "DRINK ME"
+     },
+     {
+      "t": "walls"
+     }
+    ]
+   },
+   "drafted_for": "void_scale_chamber",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "approach_wall": {
+   "expr": "decide(tween(array(plank, 7), rot | at), open where a body is within the aperture) = approach_wall - a wall that makes way where you arrive",
+   "from": [
+    "plank",
+    "turning_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "engine",
+     "kind": "tween",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "plank"
+      },
+      "n": 7,
+      "dims": 1
+     },
+     "rot": [
+      0,
+      90,
+      0
+     ]
+    },
+    "rule": "slats within aperture_m of a body open; they shut behind it"
+   },
+   "drafted_for": "approach_wall",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "carve_grid": {
+   "expr": "decide(array(box, 11 x 4 x 11), remove every box a body touches) = carve_grid - translation done with the legs: the tunnel is the record",
+   "from": [
+    "box",
+    "lattice"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "box"
+     },
+     "n": [
+      11,
+      4,
+      11
+     ],
+     "dims": 3
+    },
+    "rule": "a box the body reaches is removed and stays removed"
+   },
+   "drafted_for": "carve_grid",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "approach_scale": {
+   "expr": "drive(array(cube, 3 x 3), scale by distance to the body, min 0.34) = approach_scale - blocks shrink about their centres until there is a way through",
+   "from": [
+    "cube",
+    "growing_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "drive",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "cube"
+     },
+     "n": [
+      3,
+      3
+     ],
+     "dims": 2
+    },
+    "by": "distance to the nearest body",
+    "scale": 0.34
+   },
+   "drafted_for": "approach_scale",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "ball_launcher": {
+   "expr": "step(drive(sphere_collider thrown from a cylinder mouth, clock), physics) = ball_launcher - one unaimed thing: thrown on its own clock whether anybody stands there or not",
+   "from": [
+    "sphere_collider",
+    "cylinder"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "engine",
+     "kind": "drive",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "sphere_collider"
+       },
+       {
+        "t": "cylinder"
+       }
+      ]
+     },
+     "clock": "interval"
+    }
+   },
+   "drafted_for": "free_ball_launcher",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "fan_crossing": {
+   "expr": "tween(plank * 3 paddles, rot x 360) + scaffold_bay + plank deck = fan_crossing - a padded propeller turns beside the crossing; contact pushes",
+   "from": [
+    "plank",
+    "scaffold_bay",
+    "turning_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "tween",
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 3,
+       "layout": "ring"
+      },
+      "rot": [
+       360,
+       0,
+       0
+      ]
+     },
+     {
+      "t": "scaffold_bay"
+     },
+     {
+      "t": "plank"
+     }
+    ]
+   },
+   "drafted_for": "native_crossing_fan_x",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "trs_airlock": {
+   "expr": "decide(tween(trs_cube * 2 leaves: apart and up, a quarter turn, shrink), a visitor near) = trs_airlock - the three operations in order become a passage",
+   "from": [
+    "trs_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "engine",
+     "kind": "tween",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "trs_cube"
+      },
+      "n": 2
+     },
+     "order": "at, rot 90, scale"
+    },
+    "rule": "a visitor in the sensor opens; an empty clearance closes"
+   },
+   "drafted_for": "transformation_airlock",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "turning_portals": {
+   "expr": "tween((plank * 4 frame), rot x 360) * 2, a quarter-cycle apart + scaffold_bay + plank deck = turning_portals - find the opening, pause, pass the second",
+   "from": [
+    "plank",
+    "scaffold_bay",
+    "turning_cube"
+   ],
+   "chapter": "transformation",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "op": "engine",
+       "kind": "tween",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "plank"
+        },
+        "n": 4,
+        "layout": "frame"
+       },
+       "rot": [
+        360,
+        0,
+        0
+       ]
+      },
+      "n": 2,
+      "phase": 90
+     },
+     {
+      "t": "scaffold_bay"
+     },
+     {
+      "t": "plank"
+     }
+    ]
+   },
+   "drafted_for": "native_crossing_gates",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "moving_scaffold": {
+   "expr": "drive(array(scaffold_bay, 6), ride, turn, leaves, slide, lift) = moving_scaffold - whole assemblies move; member lengths stay fixed",
+   "from": [
+    "scaffold_bay",
+    "travelling_cube"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "drive",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "scaffold_bay"
+     },
+     "n": 6,
+     "dims": 1
+    },
+    "moves": [
+     "at",
+     "rot 90",
+     "rot -75",
+     "at"
+    ]
+   },
+   "drafted_for": "scaffold_playground_motion",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "scaffold_link": {
+   "expr": "scaffold_bay * 2 + decide(tween(scaffold_bay, at -10.2), a rider boards) = scaffold_link - a crossing between two studies and a carried descent that starts when boarded",
+   "from": [
+    "scaffold_bay",
+    "travelling_cube"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "t": "scaffold_bay"
+      },
+      "n": 2
+     },
+     {
+      "op": "decide",
+      "of": {
+       "op": "engine",
+       "kind": "tween",
+       "of": {
+        "t": "scaffold_bay"
+       },
+       "at": [
+        0,
+        -10.221,
+        0
+       ]
+      },
+      "rule": "starts on boarding; returns empty"
+     }
+    ]
+   },
+   "drafted_for": "scaffold_playground_connection",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "revolving_scaffold": {
+   "expr": "drive(array(scaffold_bay, 6), rot 360 about x, y, z; a sweep) = revolving_scaffold - the same bays, each carrying a rotor on another axis",
+   "from": [
+    "scaffold_bay",
+    "turning_cube"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "drive",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "scaffold_bay"
+     },
+     "n": 6,
+     "dims": 1
+    },
+    "moves": [
+     "rot x 360",
+     "rot y 360",
+     "rot z 360",
+     "sweep"
+    ]
+   },
+   "drafted_for": "scaffold_playground_revolving",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "stack_and_ball": {
+   "expr": "step(cardboard_box * 4 stacked + rubber_ball thrown, physics) = stack_and_ball - what holds a tower up, and what does not",
+   "from": [
+    "cardboard_box",
+    "rubber_ball"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "t": "cardboard_box"
+       },
+       "n": 4,
+       "layout": "stack"
+      },
+      {
+       "t": "rubber_ball"
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_stack",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "tyre_chain": {
+   "expr": "decide(step(tyre on walk_ramp + plank loose + wedge + cardboard_box * 4 stacked + cardboard_box * 2 + wooden_box, physics), the top box fell) = tyre_chain - a chain of contacts read as one bit",
+   "from": [
+    "tyre",
+    "walk_ramp",
+    "plank",
+    "wedge",
+    "cardboard_box",
+    "wooden_box"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "tyre"
+       },
+       {
+        "t": "walk_ramp"
+       },
+       {
+        "t": "plank"
+       },
+       {
+        "t": "wedge"
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "cardboard_box"
+        },
+        "n": 4,
+        "layout": "stack"
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "cardboard_box"
+        },
+        "n": 2
+       },
+       {
+        "t": "wooden_box"
+       }
+      ]
+     }
+    },
+    "rule": "output = the tyre met the stack and its top box dropped 0.6 m"
+   },
+   "drafted_for": "reference_tyre_chain",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "threshold_again": {
+   "expr": "hand(step(curved_track (curvature k) + sphere_collider, physics), the same small release again) = threshold_again - one curvature turns return into drift or escape",
+   "from": [
+    "curved_track",
+    "sphere_collider"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "curved_track"
+       },
+       {
+        "t": "sphere_collider"
+       }
+      ]
+     }
+    },
+    "repeat": true,
+    "param": "k"
+   },
+   "drafted_for": "threshold_again",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "domino_row": {
+   "expr": "step(domino_tile * 12 in a row, physics) = domino_row - one push, passed along",
+   "from": [
+    "domino_tile"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "times",
+     "of": {
+      "t": "domino_tile"
+     },
+     "n": 12,
+     "layout": "row"
+    }
+   },
+   "drafted_for": "physics_play_dominoes",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "threshold_almost": {
+   "expr": "hand(step(curved_track with a lip + sphere_collider, physics), release height by the millimetre) = threshold_almost - the measured rise against the lip",
+   "from": [
+    "curved_track",
+    "sphere_collider"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "transform",
+        "of": {
+         "t": "curved_track"
+        },
+        "lip": true
+       },
+       {
+        "t": "sphere_collider"
+       }
+      ]
+     }
+    },
+    "param": "h"
+   },
+   "drafted_for": "threshold_almost",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "marble_run": {
+   "expr": "step(marble_chute propped on cinder_block + door_stop + marble * 5, physics) = marble_run - the road to the marble machines",
+   "from": [
+    "marble_chute",
+    "cinder_block",
+    "door_stop",
+    "marble"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "marble_chute"
+      },
+      {
+       "t": "cinder_block"
+      },
+      {
+       "t": "door_stop"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "marble"
+       },
+       "n": 5
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_marble_run",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "tin_can_alley": {
+   "expr": "step(wooden_board across cinder_block * 2 + tin_can * 10 (4-3-2-1) + rubber_ball thrown, physics) = tin_can_alley",
+   "from": [
+    "wooden_board",
+    "cinder_block",
+    "tin_can",
+    "rubber_ball"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "wooden_board"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "cinder_block"
+       },
+       "n": 2
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "tin_can"
+       },
+       "n": 10,
+       "layout": "4-3-2-1"
+      },
+      {
+       "t": "rubber_ball"
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_tin_can_alley",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "threshold_just": {
+   "expr": "hand(step(connect(plank beam, hinge) + cube pan + marble * 4 grains, physics), one more grain) = threshold_just - the balance decides which grain tips it",
+   "from": [
+    "plank",
+    "hinge",
+    "cube",
+    "marble"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "connect",
+        "kind": "hinge",
+        "of": {
+         "op": "compose",
+         "parts": [
+          {
+           "t": "plank"
+          },
+          {
+           "t": "hinge"
+          }
+         ]
+        }
+       },
+       {
+        "t": "cube"
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "marble"
+        },
+        "n": 4
+       }
+      ]
+     }
+    },
+    "add": "grain"
+   },
+   "drafted_for": "threshold_just",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "bowling_lane": {
+   "expr": "step(bowling_pin * 10 in their triangle + rubber_ball rolled at 5 kg, physics) = bowling_lane",
+   "from": [
+    "bowling_pin",
+    "rubber_ball"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "t": "bowling_pin"
+       },
+       "n": 10,
+       "layout": "triangle"
+      },
+      {
+       "t": "rubber_ball"
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_bowling",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "seesaw": {
+   "expr": "step(plank across a wedge ridge + cube light on one end + cube heavy dropped on the other, physics) = seesaw - a heavy drop throws a light box",
+   "from": [
+    "plank",
+    "wedge",
+    "cube"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "plank"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "wedge"
+       },
+       "n": 2
+      },
+      {
+       "op": "transform",
+       "of": {
+        "t": "cube"
+       },
+       "scale": 0.3,
+       "mass": 0.6
+      },
+      {
+       "op": "transform",
+       "of": {
+        "t": "cube"
+       },
+       "scale": 0.36,
+       "mass": 6
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_seesaw",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "threshold_barely": {
+   "expr": "step(plank * 3 track + sphere_collider + cube struck at its edge, physics) = threshold_barely - the measured tilt against the critical angle",
+   "from": [
+    "plank",
+    "sphere_collider",
+    "cube"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 3
+      },
+      {
+       "t": "sphere_collider"
+      },
+      {
+       "t": "cube"
+      }
+     ]
+    }
+   },
+   "drafted_for": "threshold_barely",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "threshold_still": {
+   "expr": "step(sphere_collider on a dome + plank * 6 bin, physics) = threshold_still - a tiny offset, and the time the ball takes to decide",
+   "from": [
+    "sphere_collider",
+    "plank"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "p": "mesh",
+       "shape": "sphere",
+       "size": [
+        0.5
+       ],
+       "half": true
+      },
+      {
+       "p": "collider",
+       "shape": "sphere",
+       "size": [
+        0.5
+       ]
+      },
+      {
+       "t": "sphere_collider"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 6
+      }
+     ]
+    }
+   },
+   "drafted_for": "threshold_still",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "lever_or_return": {
+   "expr": "connect(decide(hand_lever * 2, A or B lifts the carriage) + travelling_cube, return rod from the output back to A) = lever_or_return - an output wired to its own input: feedback",
+   "from": [
+    "hand_lever",
+    "travelling_cube",
+    "stick"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "connect",
+    "kind": "rod",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "decide",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "hand_lever"
+        },
+        "n": 2
+       },
+       "rule": "A or B"
+      },
+      {
+       "t": "travelling_cube"
+      },
+      {
+       "t": "hand_lever"
+      },
+      {
+       "t": "stick"
+      }
+     ]
+    },
+    "ties": [
+     [
+      "output",
+      "A"
+     ]
+    ]
+   },
+   "drafted_for": "logic_feedback_bench",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "tyre_into_boxes": {
+   "expr": "step(gated_ramp + tyre + cardboard_box * 3 stacked, physics) = tyre_into_boxes - momentum passes into the stack: the tyre chain without the logic",
+   "from": [
+    "gated_ramp",
+    "tyre",
+    "cardboard_box"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "gated_ramp"
+      },
+      {
+       "t": "tyre"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "cardboard_box"
+       },
+       "n": 3,
+       "layout": "stack"
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_tyre_boxes",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "lever_gate": {
+   "expr": "decide(hand_lever, transform(cube stopper, at up its plank * 2 guides)) = lever_gate - a hand lever lifts a solid stopper and opens a passage",
+   "from": [
+    "hand_lever",
+    "cube",
+    "plank"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "hand_lever"
+      },
+      {
+       "op": "transform",
+       "of": {
+        "t": "cube"
+       },
+       "at": [
+        0,
+        2.3,
+        0
+       ]
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 2
+      }
+     ]
+    },
+    "rule": "lever angle past the switch lifts the stopper"
+   },
+   "drafted_for": "logic_lever_gate",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "propped_ramp": {
+   "expr": "step(wooden_board propped on cinder_block * 2 + stick (the gate) + oil_drum + tin_can * 6 pyramid, physics) = propped_ramp - cinder blocks are what props things up",
+   "from": [
+    "cinder_block",
+    "wooden_board",
+    "oil_drum",
+    "tin_can",
+    "stick"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "wooden_board"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "cinder_block"
+       },
+       "n": 2
+      },
+      {
+       "t": "stick"
+      },
+      {
+       "t": "oil_drum"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "tin_can"
+       },
+       "n": 6,
+       "layout": "3-2-1"
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_propped_ramp",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "ramp_race": {
+   "expr": "sort(step(gated_ramp + rubber_ball + fire_extinguisher + dice, physics), by arrival) = ramp_race - rolling against sliding; the line names who crossed first",
+   "from": [
+    "gated_ramp",
+    "rubber_ball",
+    "fire_extinguisher",
+    "dice"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "sort",
+    "by": "arrival at the line",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "gated_ramp"
+       },
+       {
+        "t": "rubber_ball"
+       },
+       {
+        "t": "fire_extinguisher"
+       },
+       {
+        "t": "dice"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "physics_play_ramp_race",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "extinguisher_into_boxes": {
+   "expr": "step(gated_ramp + fire_extinguisher on its side + cardboard_box * 3 stacked, physics) = extinguisher_into_boxes",
+   "from": [
+    "gated_ramp",
+    "fire_extinguisher",
+    "cardboard_box"
+   ],
+   "chapter": "assemblage",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "gated_ramp"
+      },
+      {
+       "t": "fire_extinguisher"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "cardboard_box"
+       },
+       "n": 3,
+       "layout": "stack"
+      }
+     ]
+    }
+   },
+   "drafted_for": "physics_play_extinguisher_ramp",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "matter_and": {
+   "expr": "step(gravity_bench + plank * 3 runs + guided_input_cube * 2 in series, physics) = matter_and - serial supports: the ball arrives only when both inputs have fallen into the gaps",
+   "from": [
+    "gravity_bench",
+    "guided_input_cube",
+    "plank"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "gravity_bench"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 3,
+       "layout": "series"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "guided_input_cube"
+       },
+       "n": 2,
+       "layout": "series"
+      }
+     ]
+    }
+   },
+   "drafted_for": "matter_spring_and",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "matter_or": {
+   "expr": "step(gravity_bench + sphere_collider + plank * 4 in two lanes + guided_input_cube * 2 in parallel, physics) = matter_or - two independently supported lanes, two balls: either arrival tips the target",
+   "from": [
+    "gravity_bench",
+    "guided_input_cube",
+    "plank",
+    "sphere_collider"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "gravity_bench"
+      },
+      {
+       "t": "sphere_collider"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "plank"
+       },
+       "n": 4,
+       "layout": "two lanes"
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "guided_input_cube"
+       },
+       "n": 2,
+       "layout": "parallel"
+      }
+     ]
+    }
+   },
+   "drafted_for": "matter_spring_or",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "matter_not": {
+   "expr": "step(gravity_bench + plank unbroken run + guided_input_cube as a blocker, physics) = matter_not - the ball always arrives, unless the input lowers a real blocker",
+   "from": [
+    "gravity_bench",
+    "guided_input_cube",
+    "plank"
+   ],
+   "chapter": "logic",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "gravity_bench"
+      },
+      {
+       "t": "plank"
+      },
+      {
+       "t": "guided_input_cube"
+      }
+     ]
+    }
+   },
+   "drafted_for": "matter_spring_not",
+   "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
   }
  }
 }
