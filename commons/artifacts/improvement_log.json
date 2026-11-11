@@ -1616,6 +1616,21 @@
       ],
       "measured": "4 works -> 7; footprint 0.8 % -> 7.2 % of the slab; volume 0.2 % -> 6.7 % of the storey; mesh instances 370 -> 936 (floors 77-79 carry 1900-2300); validator: no finding on floor 85; survey: no faults",
       "capture": "ada_run/improve/density_85/overview_before_after.png, after_gallery.png, before_fronts.png"
+    },
+    {
+      "lookup_name": "staging kit: concrete_slab, counter_wall, formwork_panel, timber_scaffold, plywood_hoarding, art_crate_open, closure_backdrop, steel_props, dust_sheet, container_20ft, container_10ft",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "Palle: 'we need to have like 10 or more that we reuse of walling ... build the ten and fold floor 82 into 85'",
+      "code": [
+        "nine new scenes in commons/artifacts/construction_site/ on stock.gd (530-1,400 triangles, 3-5 materials each, parts collision), built by three Opus agents to one brief; all nine compiled in one boot and looked at here (ada_run/improve/staging_kit/kit_sheet.png)",
+        "commons/void/set_dressing.gd: nine PREFABS rows; every kind beginning 'container' is built from its catalogue size (20 ft, 10 ft beside the 40 ft)",
+        "commons/void/catalog.json + rooms.schema.json: eleven prop kinds; reaches_ceiling on the three 5.6 m pieces; tools/validate_void_rooms.py lets those stand as tall as the clear storey"
+      ],
+      "tower": "floor 85 (Random_Gaussian): dice_throw, continuing_die, paired_dice_column, coin_toss folded in from floor 82 (timeline #0611-#0614 after the Galton board); a second south-facing line with a backdrop behind each, a parapet of seven counter walls, the coin out of its crate between steel props, a timber scaffold and formwork on the gallery wall, containers in the south corners - 20 kit pieces. Validator: no finding on floor 85; survey: no faults; floor build 6.2 s -> 9.1 s (floors 77-79: 10-15 s)",
+      "left": "floor 82 still stands with the edge-profile field and two spawners; the browser palette export and the kit's own test suite are not run",
+      "capture": "ada_run/improve/staging_kit/kit_sheet.png, ada_run/improve/density_85/kit_throw_line.png, kit_overview.png"
     }
   ]
 }

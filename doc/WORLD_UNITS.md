@@ -93,6 +93,17 @@ floors 77-79 fill 62-76 % of their storey; floor 85 filled 0.2 %. The moves, in 
 4. **Bigger, where the work is spatial** - and by a shaft, so the floor above sees it.
 5. **Consolidate** - a floor of small works takes more works, or is folded into the floor that shares its part.
 6. **Let motion leave matter**, **use the height**, **see one work through another**, **print on the slab**.
+7. **A playground, where there is ground** - Palle: "know when we can make a playground, for instance if we have a
+   walkable surface that can scaffold with a playground structure." A work that is a surface to stand on (a relief, a
+   maze of cubes, a lattice) is not an object to look at: give it a way up. The pieces exist - `cube_walkway`,
+   `platform_block`, `wedge_blocker`, timber planks and panels, the construction unit's job `playground` on floor 21 -
+   and the test is measurable: standable area and the step up from the slab. Not piloted yet.
+
+**The staging kit** (2026-11-11, `commons/artifacts/construction_site/README.md`): sixteen reusable pieces at three
+heights - a margin you see over (counter wall, barriers), a backdrop above head height (concrete slab, hoarding,
+formwork, stud wall, scaffold bays, chain-link, containers, crates), a closure that meets the slab above (closure
+backdrop, steel props, dust sheet). **The first fold**: floor 82's four dice works joined floor 85 and follow the
+Galton board in the timeline; floor 85 now carries 11 works and 20 kit pieces on two south-facing lines.
 
 Pilot, floor 85 (Random_Gaussian, where "the count" lives): four cabinets loose on the slab became one north gallery
 in the timeline's order - the comparator, the sampler as four laws in bays, the canvas across shaft B, the Galton board
