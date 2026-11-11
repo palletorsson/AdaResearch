@@ -43,5 +43,5 @@ Palle: "we need to have like 10 or more that we reuse of walling." Nine more flo
 | Full-height dust sheet | `dust_sheet.tscn` | 3.16 x 5.60 x 0.27 | closure | 976 |
 | 20 ft / 10 ft shipping container | (built from size) | 2.44 x 2.59 x 6.06 / 2.99 | backdrop / mass | - |
 
-The three closure pieces carry `reaches_ceiling` in `commons/void/catalog.json`; `tools/validate_void_rooms.py` lets such a prop stand as tall as the clear storey. A backdrop must leave a work's 1.3 m access square free: stand the work about 1.2 m in front of the prop's centre. First use: floor 85 (Random_Gaussian), 20 pieces. Not done yet: `python tools/export_void_editor.py` (the browser palette's models and thumbnails) and `python tools/test_void_site_props.py`.
+The three closure pieces carry `reaches_ceiling` in `commons/void/catalog.json`; `tools/validate_void_rooms.py` lets such a prop stand as tall as the clear storey. A backdrop must leave a work's 1.3 m access square free: stand the work about 1.2 m in front of the prop's centre. First use: floor 85 (Random_Gaussian), 20 pieces. Their palette models and thumbnails are exported (`python tools/void_export_sync.py` exports any catalogue kind the browser and Blender have not seen). Not done yet: `python tools/test_void_site_props.py`.
 

@@ -99,6 +99,32 @@ On the day it was written it convicted three floors arranged that same day from 
 moved ONTO the spawn point, on floor 90 a walk-up stood 1.3 m in front of the face, on floor 85 the floor's first works
 were hidden behind its later ones. All three were re-laid by the rule and walked from the arrival point.
 
+## Where each tool works: write, look, judge
+
+Palle, 2026-11-11: "do you have the right tool for fast processing? we have a Godot, three.js, Blender, JSON cross
+over - where do you work best?" Measured the same day:
+
+| | used for | speed | limit |
+|---|---|---|---|
+| **JSON** (`commons/void/rooms.json`, catalogue, timeline) | WRITE: every placement, wall, route, config | seconds, exact, staged per floor | it cannot be seen |
+| **Blender** (`tools/blender/ada_void`, headless, Blender 4.2) | LOOK: the arrival view, the stacked cutaway | about 25 s a floor (three views) | shows only what has been exported; no game lighting, no enclosure |
+| **Three.js** (the browser editor) | LOOK, and where the person accepts | the same exported models | the same |
+| **Godot** (the game, `tools/probes/`) | JUDGE: walk test, running works, the final photograph | about 2 minutes a floor per look | too slow to iterate a layout on |
+
+The layout the two fast eyes draw is LIVE (`/api/void-layout`): a work moved or turned shows at once. The models are
+EXPORTED: a new placement, a re-configured work, a new prop kind does not show until it is exported - on 2026-11-11
+Blender drew floor 85 with 5 of its 11 works and 1 of its 20 props, and 53 of the tower's 212 floors had placements
+without a model.
+
+    python tools/void_export_sync.py --check        which floors and prop kinds are stale
+    python tools/void_export_sync.py                export them (floors through tools/export_void_floors.py, about 20 s
+                                                    each; prop kinds through one palette run, 22 s for twelve)
+    blender -b -P tools/blender/ada_void/arrival.py -- --floors 85,87,90 --out ada_run/blender/arrival --enc http://localhost:3003
+    python tools/void_arrival_shots.py <outdir> <floors>      the same view in the game, for the verdict
+
+`blender` on this machine's PATH is 2.93; the add-on needs `C:\Program Files\Blender Foundation\Blender 4.2lender.exe`.
+The arrival script draws the floor's `walls` itself: neither the export nor the add-on's import carries them.
+
 ## Density: how a floor is filled
 
 Palle, 2026-11-11: "arrange the floor to have more and more visual density ... many of the objects need wall or other
