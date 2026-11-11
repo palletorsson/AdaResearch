@@ -1575,6 +1575,18 @@
       ],
       "tower": "floor 81 (Randomness_10_PRINT_Algorithm) (-21.5, -6) facing 270 s1 -> (16, -7.5) facing 0 s0.3, grid 2 x 3, spacing 3, gap 3: was 54 m past the west edge with two columns inside; now x 15.3-18.4, z -8.3-1.6, no faults. Also ten_print_structure (-10, 5) -> (-19.4, -8.5): the morning's eye move had put its maze around film_chance_passage",
       "capture": "ada_run/improve/nature_system_demo/before_after.png"
+    },
+    {
+      "lookup_name": "void_random_frames",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "the eye unit (Fable 5.2): 'a hanging black screen with nothing visible on it' - verdict hidden, fault thin lines. CORRECTED: its photo was the screen's BACK (the survey camera stands toward the room's middle; floor 77's works face +z, the route puts the visitor south of them). From the front the trace and grid read at 10 m (front_before/front_after)",
+      "code": [
+        "algorithms/randomness/seed_replay/frame_jitter_scope.gd: the trace was three one-pixel PRIMITIVE_LINES 2 mm apart ('a 4 mm ribbon'), which merge to 1-2 px in the headset at arm's length. It is now its one-pixel line plus a flat 8 mm ribbon in the screen plane (export trace_width), never thinner than before at any distance. The grid stays one pixel: tried as 3 mm ribbons it went sub-pixel at 10 m and read FAINTER than the 1 px lines, so it was reverted before commit"
+      ],
+      "tower": "floor 77 (Random_Definition) 'frames' (10, 6.2) facing 0 - unchanged; its orientation belongs to the authored route",
+      "capture": "ada_run/improve/void_random_frames/before_after.png (2.6 m, from the front); front_before / front_after at 10 m"
     }
   ]
 }

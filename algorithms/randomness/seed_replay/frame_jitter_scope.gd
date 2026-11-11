@@ -21,6 +21,12 @@ var readings: Label3D
 var axis: Label3D
 var controls: Node3D
 var kept_seed := -1
+## Width of the jitter trace, metres: a flat ribbon in the screen plane (the plot faces the visitor, so a
+## tube would only cost vertices), drawn over its old one-pixel line. PRIMITIVE_LINES alone is one pixel at
+## any distance - a hair at arm's length; a ribbon alone goes sub-pixel and aliases from across the floor
+## (measured 2026-11-11, a 3 mm grid drawn that way read fainter than the 1 px one). Both: never thinner
+## than before, 8 mm up close. The grid stays one pixel: it is the background.
+@export var trace_width: float = 0.008
 
 func _ready() -> void:
 	name = "FrameJitterScope"
@@ -146,6 +152,7 @@ func redraw() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.vertex_color_use_as_albedo=true
+	mat.cull_mode=BaseMaterial3D.CULL_DISABLED
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES,mat)
 	for column in range(11):
 		var x := -1.12+2.24*column/10.0
@@ -153,16 +160,21 @@ func redraw() -> void:
 	for row in range(5):
 		var y := 1.92+row*0.13
 		_line(mesh,Vector3(-1.12,y,0.01),Vector3(1.12,y,0.01),Color("9f8350") if row==2 else Color("254642"))
+	var strokes: Array = []
 	for i in range(intervals.size()):
 		if absf(deviation_ms(i))>range_ms: clipped+=1
 		if i==0: continue
 		var a := plot_point(i-1)
 		var b := plot_point(i)
 		var colour := Color("ffad78") if absf(deviation_ms(i))>range_ms else Color("8affca")
-		# A 4 mm ribbon stays legible in the headset without simulating a pulse.
-		for dy in [-0.002,0.0,0.002]:
-			_line(mesh,a+Vector3.UP*dy,b+Vector3.UP*dy,colour)
-	mesh.surface_end(); trace.mesh=mesh
+		_line(mesh,a,b,colour)
+		strokes.append([a,b,colour])
+	mesh.surface_end()
+	if trace_width > 0.0 and not strokes.is_empty():
+		mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES,mat)
+		for stroke in strokes: _ribbon(mesh,stroke[0],stroke[1],stroke[2],trace_width)
+		mesh.surface_end()
+	trace.mesh=mesh
 	var title := "KEPT RECORDING · seed %d" % kept_seed if mode=="KEPT" else mode
 	status.text="%s · %d frames · %.2f s" % [title,intervals.size(),span]
 	var ref_name := "recording mean" if mode=="KEPT" else "reference"
@@ -177,3 +189,12 @@ func plot_point(index: int) -> Vector3:
 
 func _line(mesh: ImmediateMesh, a: Vector3, b: Vector3, colour: Color) -> void:
 	mesh.surface_set_color(colour); mesh.surface_add_vertex(a); mesh.surface_add_vertex(b)
+
+## One straight stroke as a flat quad in the screen plane, `width` across.
+func _ribbon(mesh: ImmediateMesh, a: Vector3, b: Vector3, colour: Color, width: float) -> void:
+	var along := Vector2(b.x-a.x,b.y-a.y)
+	if along.length_squared() < 1e-12: return
+	var side := Vector2(-along.y,along.x).normalized()*width*0.5
+	var s3 := Vector3(side.x,side.y,0.0)
+	mesh.surface_set_color(colour)
+	for v in [a-s3,a+s3,b+s3,a-s3,b+s3,b-s3]: mesh.surface_add_vertex(v)
