@@ -17,6 +17,7 @@ const PREFABS := {
 	"portal_ferry": preload("res://commons/void/portal_ferry.tscn"),
 	"portal_span": preload("res://commons/void/portal_span.tscn"),
 	"cube_walkway": preload("res://commons/void/cube_walkway.tscn"),
+	"walkup_lookout": preload("res://commons/void/cube_walkway.tscn"),   # the same scene; the catalogue's settings give it its own recipe
 	"tetrahedron_blocker": preload("res://commons/artifacts/primitive_encounters/tetrahedron_blocker.tscn"),
 	"pyramid_blocker": preload("res://commons/artifacts/primitive_encounters/pyramid_blocker.tscn"),
 	"wedge_blocker": preload("res://commons/artifacts/primitive_encounters/wedge_blocker.tscn"),

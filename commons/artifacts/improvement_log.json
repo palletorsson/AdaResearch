@@ -1631,6 +1631,21 @@
       "tower": "floor 85 (Random_Gaussian): dice_throw, continuing_die, paired_dice_column, coin_toss folded in from floor 82 (timeline #0611-#0614 after the Galton board); a second south-facing line with a backdrop behind each, a parapet of seven counter walls, the coin out of its crate between steel props, a timber scaffold and formwork on the gallery wall, containers in the south corners - 20 kit pieces. Validator: no finding on floor 85; survey: no faults; floor build 6.2 s -> 9.1 s (floors 77-79: 10-15 s)",
       "left": "floor 82 still stands with the edge-profile field and two spawners; the browser palette export and the kit's own test suite are not run",
       "capture": "ada_run/improve/staging_kit/kit_sheet.png, ada_run/improve/density_85/kit_throw_line.png, kit_overview.png"
+    },
+    {
+      "lookup_name": "random_space (floor 90 as a playground) + walkup_lookout + tools/probes/void_standable.gd",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "Palle: 'know when we can make a playground, for instance if we have a walkable surface that can scaffold with a playground structure' ... 'start with random_space on floor 90'",
+      "code": [
+        "tools/probes/void_standable.gd (new): each work and prop of a tower floor rayed down on a 0.25 m grid - standable area near the slab / raised / high, steep area, the first step from the slab, neighbouring steps, a verdict (not ground | walkable | out of reach | rough) - and --walk=x,z;... drives the Void's desktop walker along waypoints and reports each leg",
+        "tools/probes/void_work_shots.gd: --view=x,h,z:x,h,z;... takes pictures from a chosen eye (the look from a lookout)",
+        "commons/void/walkup_lookout.json + catalogue kind walkup_lookout: cube_walkway.tscn with its own recipe (no lesson signs), wired through the catalogue's settings"
+      ],
+      "tower": "floor 90 (Random_Space): random_space (0.25,-3) s1.4 h0.2 -> (0,-1.6) s1 h0.02 with slot_size 12.8 x 9.6, slot_depth 0.45, rim 0.5, edge band 1.0, height_scale 0.17, resolution 26; prop walkup_lookout at (0, 4.95); two route stops. Before: box 15.4 x 28 m, 8 m past the north edge, over both shafts, four columns inside, half buried in the slab; rays 'walkable' (276 m2, first step 0.04) but the walker stopped at its border. After: 12.8 x 9.6 m, no faults; rays 97 m2 standable, 0.4 m2 steep; the walker climbs the lookout to 2.0 m, returns, steps onto the field and crosses it (feet up to 0.34 m)",
+      "learned": "the rays called it walkable twice when a body could not walk it: a jagged border (the slot's flat rim fixes it) and, once fitted at the default mesh, 22 % of the ground steeper than 45 degrees (resolution 26; the verdict now counts the steep share)",
+      "capture": "ada_run/improve/playground_90/playground_before_after.png; before/standable.json, after/standable.json"
     }
   ]
 }

@@ -5,6 +5,8 @@ extends SceneTree
 ##   [--works=id,id] [--settle=600]  (settle = physics ticks after the floor is built)
 ##   [--from=front]  stand on the work's own +Z (where a facing-0 screen looks) instead of toward the room's middle
 ##   [--dist=2.5]  stand this far from the box centre (default: far enough to hold the whole box)
+##   [--view=x,h,z:x,h,z;...]  extra pictures from a chosen eye to a chosen point (h = metres over the slab), saved as
+##       view_1.png ...: the look from a lookout, down a gallery, across a shaft. With --works=none only these are taken.
 var game: Node3D
 
 func _initialize() -> void:
@@ -33,12 +35,18 @@ func shoot() -> void:
 	var settle := 600
 	var from_front := false
 	var dist := -1.0
+	var views: Array = []
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):folder = arg.trim_prefix("--out=")
 		if arg.begins_with("--works="):only = arg.trim_prefix("--works=").split(",")
 		if arg.begins_with("--settle="):settle = int(arg.trim_prefix("--settle="))
 		if arg == "--from=front":from_front = true
 		if arg.begins_with("--dist="):dist = float(arg.trim_prefix("--dist="))
+		if arg.begins_with("--view="):
+			for pair in arg.trim_prefix("--view=").split(";", false):
+				var ends := pair.split(":")
+				var a := ends[0].split(",");var b := ends[1].split(",")
+				views.append([Vector3(float(a[0]), float(a[1]), float(a[2])), Vector3(float(b[0]), float(b[1]), float(b[2]))])
 	DirAccess.make_dir_recursive_absolute(folder)
 	load("res://commons/void/room_source.gd").use_main_tower = true
 	game = load("res://commons/void/void.tscn").instantiate()
@@ -77,6 +85,13 @@ func shoot() -> void:
 		var path := folder.path_join(str(item.artifact) + "__" + str(item.id) + ".png")
 		root.get_texture().get_image().save_png(path)
 		report.append({"id":item.id, "artifact":item.artifact, "center":[snappedf(c.x,.01),snappedf(c.y-base,.01),snappedf(c.z,.01)], "radius":snappedf(r,.01), "png":path})
+	for n in views.size():
+		var eye: Vector3 = views[n][0];var aim: Vector3 = views[n][1]
+		cam.global_position = Vector3(eye.x, base + eye.y, eye.z)
+		cam.look_at(Vector3(aim.x, base + aim.y, aim.z), Vector3.UP)
+		for i in 4:await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(folder.path_join("view_%d.png" % (n + 1)))
 	FileAccess.open(folder.path_join("works.json"), FileAccess.WRITE).store_string(JSON.stringify(report, "  "))
 	print("VOID_WORK_SHOTS ", report.size())
 	quit(0)

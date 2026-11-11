@@ -84128,6 +84128,21 @@
       ],
       "color": "#4f6b78",
       "group": "Storage"
+    },
+    "walkup_lookout": {
+      "label": "Walk-up lookout / cubes and wedges, 2 m",
+      "scene": "res://commons/void/cube_walkway.tscn",
+      "size": [
+        9,
+        2,
+        3
+      ],
+      "color": "#b8b5ab",
+      "collision": "parts",
+      "group": "Building solids",
+      "settings": {
+        "recipe_path": "res://commons/void/walkup_lookout.json"
+      }
     }
   }
 }

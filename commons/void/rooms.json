@@ -34249,16 +34249,24 @@
           "artifact": "random_space",
           "station": "NE",
           "position": [
-            0.25,
-            -3
+            0,
+            -1.6
           ],
           "facing": 180,
-          "height": 0.2,
-          "scale": 1.4,
+          "height": 0.02,
+          "scale": 1,
           "config": {
-            "offset": "0,0.2,0",
             "surface_color": "6b427d",
-            "emission_strength": "0.02"
+            "emission_strength": "0.02",
+            "slot_size": [
+              12.8,
+              9.6
+            ],
+            "slot_depth": 0.45,
+            "edge_band": 1.0,
+            "rim_width": 0.5,
+            "height_scale": 0.17,
+            "resolution": 26
           }
         },
         {
@@ -34305,9 +34313,35 @@
           }
         }
       ],
-      "props": [],
+      "props": [
+        {
+          "id": "playground-lookout",
+          "kind": "walkup_lookout",
+          "position": [
+            0,
+            4.95
+          ],
+          "facing": 0,
+          "scale": 1
+        }
+      ],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "01 / LOOK DOWN\nFrom two metres the ground is a picture.",
+          "position": [
+            -6.2,
+            6.2
+          ]
+        },
+        {
+          "label": "02 / WALK THE DRAW\nEvery height was drawn alone. Step on anywhere.",
+          "position": [
+            5.3,
+            4.3
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

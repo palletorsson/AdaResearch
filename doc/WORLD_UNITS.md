@@ -95,9 +95,18 @@ floors 77-79 fill 62-76 % of their storey; floor 85 filled 0.2 %. The moves, in 
 6. **Let motion leave matter**, **use the height**, **see one work through another**, **print on the slab**.
 7. **A playground, where there is ground** - Palle: "know when we can make a playground, for instance if we have a
    walkable surface that can scaffold with a playground structure." A work that is a surface to stand on (a relief, a
-   maze of cubes, a lattice) is not an object to look at: give it a way up. The pieces exist - `cube_walkway`,
-   `platform_block`, `wedge_blocker`, timber planks and panels, the construction unit's job `playground` on floor 21 -
-   and the test is measurable: standable area and the step up from the slab. Not piloted yet.
+   maze of cubes, a lattice) is not an object to look at: let the visitor on, and give them a way up.
+   **The test** (`tools/probes/void_standable.gd`, in the real tower): rays straight down on a 0.25 m grid give each
+   work its standable area, the first step from the slab, the steps between neighbours and the share steeper than 45
+   degrees - verdict *not ground / walkable / out of reach / rough* - and then the Void's own walker is driven along
+   waypoints, because a ray is not a walk.
+   **Pilot, floor 90** (`random_space`, the randomness sequence's own ground): by rays it was 276 m2 of walkable
+   ground with a 4 cm first step - and the walker stopped dead at its jagged border, while the relief lay half
+   buried in the slab and ran 8 m past the edge. Fitted with Palle's slot of 2026-10-31 (`slot_size`, a flat rim that
+   meets the slab flush) it is a 12.8 x 9.6 m field the walker steps onto anywhere; at the default mesh the fitted
+   bumps were too steep (22 % over 45 degrees, the walker stuck in a pocket), so `resolution: 26` gives it the cells
+   it had. Beside it a walk-up lookout (`walkup_lookout`: the cube + wedge walk-up with its own recipe): the walker
+   climbs to 2 m, looks down on the field, comes down and crosses it. Both mistakes were found by the walk, not the rays.
 
 **The staging kit** (2026-11-11, `commons/artifacts/construction_site/README.md`): sixteen reusable pieces at three
 heights - a margin you see over (counter wall, barriers), a backdrop above head height (concrete slab, hoarding,
