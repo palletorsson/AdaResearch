@@ -1,7 +1,7 @@
 """arrival.py — floors of The Void photographed from where the player lands, in one Blender process.
 
     blender -b -P tools/blender/ada_void/arrival.py -- --floors 85,87,90 --out ada_run/blender/arrival \
-        [--samples 16] [--res 1280x800] [--no-ceiling] [--no-labels] [--enc http://localhost:3003]
+        [--samples 16] [--res 1280x800] [--views 1] [--skip-existing] [--no-ceiling] [--no-labels] [--enc http://localhost:3003]
 
 THE ARRIVAL RULE (doc/WORLD_UNITS.md; Palle, 2026-11-11): 176 of the tower's 199 spawn points are one spot, (0, 7.8),
 looking north, so a floor is curated from there. tools/void_arrival_shots.py takes that picture in the game - the
@@ -10,7 +10,7 @@ as the panel and tower.py do) in a few seconds a floor: the eye at the floor's s
 commons/void/layout.json, 1.6 m up, looking at the middle of the floor, then turned 40 degrees to each side.
 
     <out>/f<floor>/view_1.png  straight ahead      view_2.png  40 degrees left      view_3.png  40 degrees right
-    <out>/arrival.json         per floor: map, works, props, models missing, seconds
+    <out>/arrival_<floors>.json   per floor: map, works, props, walls, models missing, seconds
 
 The slab of the floor above is imported as the ceiling (structure only) unless --no-ceiling. It shows what has been
 EXPORTED: after new placements, new prop kinds or a re-configured work, run `python tools/void_export_sync.py` first.
@@ -87,6 +87,8 @@ def main() -> int:
     ap.add_argument("--exposure", type=float, default=0.9)
     ap.add_argument("--no-ceiling", action="store_true")
     ap.add_argument("--no-labels", action="store_true", help="skip the text labels: faster, for layout only")
+    ap.add_argument("--views", type=int, default=3, help="1 = straight ahead only (a tower-wide sheet), 3 = also 40 degrees each side")
+    ap.add_argument("--skip-existing", action="store_true", help="leave a floor whose view_1.png is already there (resume a long run)")
     ap.add_argument("--enc", default="")
     args = ap.parse_args(argv)
     if args.enc:
@@ -116,7 +118,6 @@ def main() -> int:
 
     layout = chain.get_layout(floor_import.enc_url(), "")
     manifest = floor_import.load_manifest(layout.get("models") or "/void-models/manifest.json")
-    cache = floor_import.GlbCache()
     cam_data = bpy.data.cameras.new("Arrival eye")
     cam_data.sensor_fit = "VERTICAL"
     cam_data.angle_y = math.radians(60.0)      # the game probe's vertical field of view
@@ -129,14 +130,29 @@ def main() -> int:
     report = {"device": device, "samples": args.samples, "floors": []}
     rigged = False
     for i in tower.floor_range(args.floors):
+        folder = os.path.join(os.path.abspath(args.out), "f%d" % i)
+        if args.skip_existing and os.path.exists(os.path.join(folder, "view_1.png")):
+            continue
         t = time.time()
         clear(keep)
-        st = floor_import.build_floor(bpy.context, i, labels=not args.no_labels)
+        # a FRESH model cache for every floor: GlbCache keeps the imported objects as templates and copies them on a
+        # second use, and clear() has just removed them - a shared cache stopped all three processes of the first
+        # tower-wide run with "StructRNA of type Object has been removed" as soon as two floors shared a slab model
+        cache = floor_import.GlbCache()
+        try:
+            st = floor_import.build_floor(bpy.context, i, labels=not args.no_labels)
+        except Exception as e:  # noqa: BLE001 - one floor that will not import costs only itself
+            report["floors"].append({"floor": i, "error": repr(e)[:300]})
+            print("[arrival]", json.dumps(report["floors"][-1]), flush=True)
+            continue
         records = layout["rooms"].get("floors", [])
         walls = add_walls(records[i]) if i < len(records) else 0
         if not args.no_ceiling and i > 0:
-            tower.structure_only(i - 1, manifest, cache)
-            tower.stack(i - 1, storey)
+            try:
+                tower.structure_only(i - 1, manifest, cache)
+                tower.stack(i - 1, storey)
+            except Exception as e:  # noqa: BLE001 - a floor without its ceiling is still a picture
+                print("[arrival] ceiling of floor", i, "not imported:", repr(e)[:160], flush=True)
         if not rigged:      # world and sun once, from the export's own lighting
             lighting = json.loads(scene.get("ada_void_lighting", "{}") or "{}")
             rig = bpy.data.collections.new("Arrival render")
@@ -148,11 +164,10 @@ def main() -> int:
             rigged = True
         bpy.context.view_layer.update()
         x, _y, z = spawns.get(str(i), [0, 0.06, 7.8])
-        folder = os.path.join(os.path.abspath(args.out), "f%d" % i)
         os.makedirs(folder, exist_ok=True)
         dx, dz = -float(x), -float(z)
         n = math.hypot(dx, dz) or 1.0
-        for k, turn in enumerate(TURNS):
+        for k, turn in enumerate(TURNS[:max(1, args.views)]):
             a = math.radians(turn)
             rxx, rzz = (dx * math.cos(a) - dz * math.sin(a)) / n, (dx * math.sin(a) + dz * math.cos(a)) / n
             eye = Vector(frames.godot_to_blender_point([float(x), EYE, float(z)]))
@@ -164,10 +179,14 @@ def main() -> int:
         row = {"floor": i, "map": st.get("map"), "artifacts": st.get("artifacts"), "props": st.get("props"), "walls": walls,
                "models_missing": len(st.get("models_missing") or []), "spawn": [x, z], "seconds": round(time.time() - t, 1)}
         report["floors"].append(row)
+        with open(os.path.join(folder, "row.json"), "w", encoding="utf-8") as f:      # per floor, so a stopped run keeps what it has
+            json.dump(row, f)
         print("[arrival]", json.dumps(row), flush=True)
     report["seconds"] = round(time.time() - t0, 1)
     os.makedirs(os.path.abspath(args.out), exist_ok=True)
-    with open(os.path.join(os.path.abspath(args.out), "arrival.json"), "w", encoding="utf-8") as f:
+    # named by the floors it holds, so several processes can share one --out (the tower in three parts)
+    name = "arrival_%s.json" % args.floors.replace(",", "_")[:60]
+    with open(os.path.join(os.path.abspath(args.out), name), "w", encoding="utf-8") as f:
         json.dump(report, f, indent=1)
     print("[arrival] done", json.dumps({"floors": len(report["floors"]), "seconds": report["seconds"], "device": device}), flush=True)
     return 0
