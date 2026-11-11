@@ -50,6 +50,7 @@ A unit earns its place by **real verbs in the tower** - a unit that only narrate
 | the rule: earned | `tools/artifact_timeline.py` `earned_flags` (`check`) | derived |
 | the pictures: the works seen in place | `tools/probes/color_survey.gd --floors=`, `survey.json` | the eye unit |
 | what was improved and why | `commons/artifacts/improvement_log.json` | every fix |
+| what does not fit, and what would have to change | `commons/modular/misfits.json` (`python tools/misfits.py`) | every unit; a proposal is accepted by the principal |
 | what the hand holds, what each floor grants | `commons/data/inventory/items.json`, `space_editor.json`, `/map-capabilities` | authored |
 
 ## The loops
@@ -75,6 +76,22 @@ behind an export that would make the picture show it. The faults found by hand i
 vocabulary: one-pixel lines, a part hidden inside another, colours written and never read, a work that never runs in
 the tower, a simulation that saturates and freezes, a size wrong for its place, staging that hides the subject.
 Fixes land one work per commit with a before/after at one camera.
+
+**The misfit ledger** (Palle, 2026-11-11: "can we build a category or assemblage theory that is not restrictive?";
+pilot: the randomness floors): the grammar stays strict, because a strict check is what makes a misfit visible. What
+changes is what happens to the misfit. A unit does not reject it and does not quietly fix it: it files it in
+`commons/modular/misfits.json` with the reading that found it (timeline, parts, words, eye, body, arrival), how we
+know (**imagined** - said by a proposed form or a box; **built** - in the repo; **observed** - measured in the running
+tower), and one line: *what would have to change for this to fit*, and where that change would land (the grammar, a
+card, a term's wording, the timeline, the floor, the work, or the reading itself - thirteen of the eye's findings were
+the camera's fault). An entry may stay open for good: a singleton is allowed. When several entries ask for the same
+change it becomes a **proposal**, tested by re-reading the floors with the change applied in memory - what it
+removes, what it creates - and stating what it forecloses. *An operation is real when several works need it and
+accepting it removes misfits without creating more.* The readings are kept apart; where two disagree both are
+recorded (rays say ground, the walker is stopped by glass). On floors 77-92: 24 entries, six proposals - `field`
+before noise (removes 15 order faults, creates 0), a comparison (`beside`, in 12 formulas the reader skips), ground
+("it fits a foot"), `exhibit` (16 formulas, no operation). `python tools/misfits.py --test` re-measures every
+recorded number and exits 1 on drift.
 
 ## The arrival rule: how a floor is curated
 
@@ -179,6 +196,7 @@ at three times its size - every histogram already counted. 4 works -> 7, footpri
 
 - **Each floor only what it has earned** - and a row may say `early` (why) for a deliberate glimpse.
 - **The principal accepts.** Units propose; nothing canonical is written without the person applying it.
+- **File the misfit.** What a strict reading turns away is recorded with what would have to change; it is not rejected and not quietly fixed.
 - **No new surfaces.** The timeline, the headset and the proposal lane are where proposals arrive.
 - **Refuse, never evict** (the budget), **defaults kept** unless the default is the fault.
 
