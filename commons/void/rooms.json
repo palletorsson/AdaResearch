@@ -33624,15 +33624,16 @@
           "artifact": "pheromone_terrain",
           "station": "SW",
           "position": [
-            -6,
-            9
+            -2,
+            0
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
             "comparison": "true",
-            "walk_seed": "190919"
+            "walk_seed": "190919",
+            "warmup_steps": "240"
           }
         },
         {

@@ -607,6 +607,13 @@ func replay_comparison() -> void:
 	_create_walkers()
 	time_accumulator = 0.0
 	_comparison_steps = 0
+	# warmup_steps reaches the comparison too: the visitor arrives at ridges already
+	# raised (and, under ATTRACT, scent on them), and ATTRACT / AVOID / REPLAY each
+	# show their law at once. The readout counts these steps. 0 is the shipped flat start.
+	for _i in range(warmup_steps):
+		_decay_pheromones(1.0 / maxf(walk_speed, 0.001))
+		_walk_step()
+		_comparison_steps += 1
 	_update_mesh()
 	_update_info_label()
 	_update_comparison()

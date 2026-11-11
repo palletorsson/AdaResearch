@@ -1537,6 +1537,18 @@
         "floor 90 random_space height 0 -> 0.2: the slab cut its relief; lifted, the relief stands whole (its size faults remain - a code fix, not a move)"
       ],
       "capture": "ada_run/improve/eye_placements/before_after.png (tools/probes/color_survey.gd --floors=81,82,88,90)"
+    },
+    {
+      "lookup_name": "pheromone_terrain",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "the eye unit (Fable 5.2): 'a flat pale plane, one cyan dot, a console; no trails, no ridges' - verdict hidden, fault never runs",
+      "code": [
+        "NEVER RAN IN THE TOWER: the tower's comparison:true path calls replay_comparison() and turns process off, and warmup_steps was honoured only on the live path (_warmup), so the floor opened at 'step 0, pheromone 0' until a visitor pressed +1 STEP. replay_comparison() now runs warmup_steps fixed steps after its reset (the advance loop without the 20 clamp) and counts them on the readout; ATTRACT / AVOID / REPLAY each re-warm, so the two laws differ at once. Default 0 keeps the flat start"
+      ],
+      "tower": "floor 89 (Random_Pheromone) (-6, 9) -> (-2, 0): half the 4.8 m field stood 2.4 m past the south edge with column (-5, 7) inside it; config warmup_steps 240. Survey: no faults, 'step 240', pheromone 136",
+      "capture": "ada_run/improve/pheromone_terrain/before_after.png"
     }
   ]
 }
