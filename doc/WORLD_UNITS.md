@@ -60,6 +60,15 @@ posted as one answered instruction on `/artifact-timeline`; applying an operatio
 its drafted term into `terms.json`. The earned check then names what breaks the order: a part first shown after a
 work that uses it (an order fix), or a shared form the tower never shows on its own.
 
+**Recurrence first** (Palle, 2026-11-11: "the world should find an emergent knowledge tree"; pilot: the randomness
+floors): one term per work is a catalogue - of 245 drafted terms, 223 were used by no other. The tree is what the works
+*share*. So the ordering unit next reads a sequence's forms together, finds the parts three or more works are made of,
+and brings those few to the principal as drafted **cards** (a formula, a motive, an operation, an axis) with the works
+that descend from each. A work names its part in its term's `from` - the tree's edge - while its own build stays its own.
+On floors 77-92: 87 of 95 works descend from 12 parts; six were new cards (the count, the walk, the generator, order
+and shuffle, the thrown body, without replacement), and with them the grammar check on those floors falls from 46 order
+faults to 17. Single-use forms are each work's own construction and need no ruling.
+
 **The eye unit** - *the algorithm's desire to find visual capacity*: 1294 scripts state a `desire:` in `@identity`.
 The eye reads the desire, sees the work in place, reads the code where the two disagree, and proposes the one change
 behind an export that would make the picture show it. The faults found by hand in the improvement pass are its

@@ -71,6 +71,18 @@ try:
     ok(sorted(left) == ["probe_unused"], "only the accepted drafts leave the drafts file")
     ok(at.promote_drafts({"probe_outer"}) == [], "promoting twice moves nothing")
 
+    # a member names the shared part it descends from in `from`, while its own build spells the structure out
+    shutil.copy(saved[1], at.TERMS)
+    at.DRAFTS.write_text(json.dumps({"_doc": "test", "terms": {
+        "probe_part": {"expr": "p", "from": ["box"], "chapter": "randomness", "build": {"op": "sample", "of": {"t": "box"}},
+                       "card": {"formula": "p = sample(box)", "motive": "m", "op": "sample", "axes": ["chance:1"], "said": "drafted"}},
+        "probe_member": {"expr": "m", "from": ["box", "probe_part"], "chapter": "randomness",
+                         "build": {"op": "sample", "of": {"op": "array", "of": {"t": "box"}, "n": 9, "dims": 2}}}}},
+        indent=1), encoding="utf-8")
+    moved = at.promote_drafts({"probe_member"})
+    ok(moved == ["probe_member", "probe_part"], f"a draft brings the drafted part it descends from ({moved})")
+    ok(at.terms()["probe_part"].get("card", {}).get("op") == "sample", "the part arrives with its card")
+
     # the save: a row given a draft form and an early note
     shutil.copy(saved[1], at.TERMS)
     at.DRAFTS.write_text(json.dumps({"_doc": "test", "terms": {

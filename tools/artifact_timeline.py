@@ -400,7 +400,7 @@ def earned_flags(doc: dict, tm: dict) -> dict:
 
 
 def promote_drafts(names) -> list:
-    """the drafts these form terms name, with every draft they are built from, into terms.json (byte-stable indent 2,
+    """the drafts these form terms name, with every draft they are built from or descend from, into terms.json (byte-stable indent 2,
     as set_card writes it); removed from the drafts file. Returns what moved, or raises ValueError."""
     dt_doc = read(DRAFTS) if DRAFTS.exists() else {"terms": {}}
     dt = dt_doc.get("terms", {})
@@ -427,6 +427,9 @@ def promote_drafts(names) -> list:
         want.add(n)
         inner = set()
         refs(dt[n].get("build"), inner)
+        # ... and every draft it descends from: `from` is the tree's edge (a work made of a shared part names the part
+        # there even when its own build spells the structure out), so the part - with its card - comes along
+        inner |= {str(x) for x in dt[n].get("from") or []}
         stack += [x for x in inner if x in dt and x not in have]
     if not want:
         return []

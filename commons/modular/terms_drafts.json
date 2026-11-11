@@ -64,13 +64,23 @@
      "t": "dice"
     }
    },
-   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10",
+   "card": {
+    "formula": "throw = step(die, physics)",
+    "motive": "the draw is where a body comes to rest: read, not computed",
+    "op": "step",
+    "axes": [
+     "rest:1"
+    ],
+    "said": "drafted 2026-11-11 from recurrence on the randomness floors (5 works share it) - not yet his words"
+   }
   },
   "random_step_walk": {
    "expr": "trail(random(point, step)) = random_step_walk - each position is the last one plus a draw; the trail is what is kept",
    "from": [
     "point",
-    "trace"
+    "trace",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -86,7 +96,19 @@
      }
     }
    },
-   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10",
+   "card": {
+    "formula": "walk = trail(sample(point, step from the last))",
+    "motive": "each position is the last one plus a draw: the path remembers, the draws do not",
+    "op": "trail",
+    "with": [
+     "sample"
+    ],
+    "axes": [
+     "path:1"
+    ],
+    "said": "drafted 2026-11-11 from recurrence on the randomness floors (13 works share it) - not yet his words"
+   }
   },
   "sampled_histogram": {
    "expr": "sort(sample(array(box, 16)), by bin) = sampled_histogram — draws binned: the bars are a record of a sample, not the law itself",
@@ -114,7 +136,19 @@
    "used_by": [
     "distribution_comparator"
    ],
-   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10",
+   "card": {
+    "formula": "count = sort(sample(box × n), by bin)",
+    "motive": "many draws counted into bins: a shape appears that no single draw has",
+    "op": "sort",
+    "with": [
+     "sample"
+    ],
+    "axes": [
+     "measure:1"
+    ],
+    "said": "drafted 2026-11-11 from recurrence on the randomness floors (13 works share it) - not yet his words"
+   }
   },
   "min_distance_sample": {
    "expr": "decide(random(array(point, 30)), no nearer than d to any kept point) = min_distance_sample — dart throwing: a candidate is refused when it lands too close; spacing is a rule of admission",
@@ -187,7 +221,9 @@
   },
   "random_digit_page": {
    "expr": "hand(drive(random(array(number, 10 x 28)), cascade), freeze) = random_digit_page - a table of drawn digits flows; a touch keeps one",
-   "from": [],
+   "from": [
+    "random_sizes"
+   ],
    "chapter": "randomness",
    "build": {
     "op": "engine",
@@ -257,13 +293,23 @@
     }
    },
    "drafted_for": "prng_crank_machine",
-   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10",
+   "card": {
+    "formula": "generator = rule(number, next from the last)",
+    "motive": "the next number is computed from the last: the same seed gives the same draws",
+    "op": "rule",
+    "axes": [
+     "chance:1"
+    ],
+    "said": "drafted 2026-11-11 from recurrence on the randomness floors (7 works share it) - not yet his words"
+   }
   },
   "seed_replay": {
    "expr": "hand(random(array(box, 8), seed s) * 2 + random(array(box, 8), seed s + 1)) = seed_replay - the same seed repaints the same grid; one more and it is another grid",
    "from": [
     "box",
-    "random_sizes"
+    "random_sizes",
+    "lcg_step"
    ],
    "chapter": "randomness",
    "build": {
@@ -315,7 +361,8 @@
    "expr": "trail(hand(array(random(line + bead, target x), 5))) = random_abacus - five beads sent to drawn positions at four speeds; the wall keeps where each has been",
    "from": [
     "line",
-    "sphere_collider"
+    "sphere_collider",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -358,7 +405,9 @@
    "expr": "random(seed 435) -> transform(point, at) + transform(point, scale) + transform(cube, rot) + config(point, hue) = one_number_four_uses - one drawn value, four consequences",
    "from": [
     "sphere_collider",
-    "cube"
+    "cube",
+    "random_sizes",
+    "lcg_step"
    ],
    "chapter": "randomness",
    "build": {
@@ -407,7 +456,9 @@
    "expr": "hand(random(cylinder * 3) + array(box, 6, counts), lever) = slot_machine - three independent draws stop one by one; the counts flatten as you keep pulling",
    "from": [
     "cylinder",
-    "box"
+    "box",
+    "random_sizes",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -471,7 +522,8 @@
    "from": [
     "grab_sphere",
     "arrow",
-    "point"
+    "point",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -517,7 +569,10 @@
    "expr": "decide(random(array(point, 96), exponential gaps), t1 < t2) + array(box, 24) = interval_bits - bits taken from which of two waits was longer",
    "from": [
     "point",
-    "box"
+    "box",
+    "random_sizes",
+    "sampled_histogram",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -558,7 +613,9 @@
    "expr": "rule(field(drive(array(ball * 4, 6 x 2)), sampled image 96 x 48), hash) + array(box, 48) = lava_hash_wall - moving blobs are photographed and hashed into 48 values",
    "from": [
     "ball",
-    "box"
+    "box",
+    "lcg_step",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -654,7 +711,8 @@
   "chair_colour_shares": {
    "expr": "array(random(array(chair, 8, palette shares), draw one), 4) = chair_colour_shares - Shannon: which colour comes next, at 4:4, 7:1 and 8:0",
    "from": [
-    "chair"
+    "chair",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -688,7 +746,8 @@
   "chair_arrangements": {
    "expr": "array(config(array(chair, 8), brief), 3) = chair_arrangements - Boltzmann: how many arrangements fit one description, 1 or 36",
    "from": [
-    "chair"
+    "chair",
+    "sorted_and_shuffled"
    ],
    "chapter": "randomness",
    "build": {
@@ -743,7 +802,8 @@
   "chair_scatter_recipe": {
    "expr": "random(array(chair, 8), seed 435: scatter) = chair_scatter_recipe - algorithmic complexity: a scatter with a short recipe, the seed",
    "from": [
-    "chair"
+    "chair",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -798,7 +858,9 @@
   },
   "door_map_pair": {
    "expr": "hand(rule(door * 2, x/2) + rule(door * 2, 2x mod 1), step) = door_map_pair - two starts under two rules: one pair closes together, the other separates",
-   "from": [],
+   "from": [
+    "lcg_step"
+   ],
    "chapter": "randomness",
    "build": {
     "op": "engine",
@@ -844,7 +906,8 @@
   "one_guess_piles": {
    "expr": "random(chair_pyramid * 4, palettes 8/8, 8/4/4, 12/4, 16/0: draw one) = one_guess_piles - min-entropy: the best single guess, whatever the pile looks like",
    "from": [
-    "chair_pyramid"
+    "chair_pyramid",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -872,7 +935,8 @@
    "expr": "step(hand(drum * 8 * 4 + array(brick, 12 x 6), pull one), physics) = ruin - one support is drawn out; contact and gravity decide what still holds",
    "from": [
     "cylinder",
-    "brick"
+    "brick",
+    "falling_cube"
    ],
    "chapter": "randomness",
    "build": {
@@ -952,7 +1016,9 @@
    "expr": "sort(step(hand(association(cylinder, glass) + marble * 40 + marble * 40), physics), colour by height band) = entropy_jar - shaking changes local shares; the whole-jar share stays 40/40",
    "from": [
     "cylinder",
-    "marble"
+    "marble",
+    "sorted_and_shuffled",
+    "falling_cube"
    ],
    "chapter": "randomness",
    "build": {
@@ -1007,7 +1073,10 @@
    "expr": "sort(random(array(tile, 200), 10 symbols), by symbol) + array(box, 10, counts) = entropy_meter - a reading of symbol shares; the order of the record does not enter it",
    "from": [
     "box",
-    "gaussian_bins"
+    "gaussian_bins",
+    "random_sizes",
+    "sampled_histogram",
+    "sorted_and_shuffled"
    ],
    "chapter": "randomness",
    "build": {
@@ -1047,7 +1116,8 @@
   "jar_states": {
    "expr": "random(array(association(cylinder, glass) + marble * 40 + marble * 40, 4, starts: sorted, stirred, mixed, shelled), bounded walk) = jar_states - four beginnings under one continuing mixing",
    "from": [
-    "entropy_jar"
+    "entropy_jar",
+    "sorted_and_shuffled"
    ],
    "chapter": "randomness",
    "build": {
@@ -1106,7 +1176,8 @@
    "expr": "random(array(grab_sphere, 10 x 10 x 40), jitter rising along z) = order_to_cloud - a lattice walked from grid into cloud",
    "from": [
     "grab_sphere",
-    "lattice"
+    "lattice",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1132,7 +1203,8 @@
   "prefab_disorder": {
    "expr": "hand(assemblage(box, monitor, stool, microscope) + random(the same assemblage, graft parts), slider) = prefab_disorder - the same fifty parts as originals, scattered, and seeded hybrids",
    "from": [
-    "cardboard_box"
+    "cardboard_box",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1197,7 +1269,8 @@
   "two_compartments": {
    "expr": "random(array(sphere, 8, A) + array(sphere, 8, B) + divider, pair swap) = two_compartments - the colour shares never change; the count of arrangements does",
    "from": [
-    "sphere_collider"
+    "sphere_collider",
+    "sorted_and_shuffled"
    ],
    "chapter": "randomness",
    "build": {
@@ -1244,7 +1317,8 @@
   "four_cube_sort": {
    "expr": "sort(hand(pick_up_cube * 2 pink + pick_up_cube * 2 black + divider), colour into boxes) = four_cube_sort - four cubes, sorted by hand: how many ways fit each partition",
    "from": [
-    "pick_up_cube"
+    "pick_up_cube",
+    "sorted_and_shuffled"
    ],
    "chapter": "randomness",
    "build": {
@@ -1292,7 +1366,8 @@
    "expr": "sort(array(cell, 4 x 4)) + random(array(cell, 4 x 4), shuffle) = same_values_shuffled - the same values with different neighbours",
    "from": [
     "box",
-    "grid"
+    "grid",
+    "sorted_and_shuffled"
    ],
    "chapter": "randomness",
    "build": {
@@ -1335,7 +1410,8 @@
    "expr": "random(decide(array(box, 8), eligible: range, row, column, all), remove without replacement) = random_removal - eligibility is decided before the draw; what is gone cannot be drawn again",
    "from": [
     "box",
-    "percolation"
+    "percolation",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1358,12 +1434,26 @@
     }
    },
    "drafted_for": "remove_random",
-   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10",
+   "card": {
+    "formula": "removal = sample(decide(box × 8, eligible), without replacement)",
+    "motive": "a draw that changes what can be drawn next",
+    "op": "sample",
+    "with": [
+     "decide"
+    ],
+    "axes": [
+     "chance:1"
+    ],
+    "said": "drafted 2026-11-11 from recurrence on the randomness floors (3 works share it) - not yet his words"
+   }
   },
   "with_without_replacement": {
    "expr": "hand(random(array(box, 8), returned) + random(array(box, 8), removed), lever) = with_without_replacement - a draw changes its future only if the member leaves the set",
    "from": [
-    "box"
+    "box",
+    "random_sizes",
+    "random_removal"
    ],
    "chapter": "randomness",
    "build": {
@@ -1441,7 +1531,8 @@
    "expr": "random(pick_up_cube * 10, place: random, grid, circle, line) = pickup_scatter - where the cubes land shows what the placement rule honours",
    "from": [
     "pick_up_cube",
-    "random_cubes"
+    "random_cubes",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1463,7 +1554,8 @@
    "expr": "array(random(array(line, 10), deal exactly k turned), 4, k = 1, 5, 30, 50) = dealt_diagonals - a count dealt, not a chance rolled: at which count order stops reading as order",
    "from": [
     "line",
-    "ten_print"
+    "ten_print",
+    "random_removal"
    ],
    "chapter": "randomness",
    "build": {
@@ -1556,7 +1648,9 @@
   },
   "critter_grid": {
    "expr": "rule(random(array(critter, 4 x 4 x 4 kingdoms), dna), select, cross, mutate) = critter_grid - drawn DNA under selection: kingdoms as regions of one morphospace",
-   "from": [],
+   "from": [
+    "random_sizes"
+   ],
    "chapter": "randomness",
    "build": {
     "op": "engine",
@@ -1588,7 +1682,8 @@
    "expr": "random(array(point, 5), heights, ends held) = pinned_random_profile - a random shape is what was refused as much as what was drawn",
    "from": [
     "point",
-    "gaussian_bins"
+    "gaussian_bins",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1615,7 +1710,8 @@
    "expr": "decide(thrown_die + array(box, 5, faces), six -> throw again) = continuing_die - the rule, not the die, continues",
    "from": [
     "thrown_die",
-    "box"
+    "box",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -1648,7 +1744,8 @@
    "from": [
     "thrown_die",
     "ball",
-    "box"
+    "box",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -1686,7 +1783,8 @@
    "expr": "decide(thrown_die * 2, sum) + array(box, 12, sums) = paired_dice_sum - two read faces become one height; the same height returns by another pair",
    "from": [
     "thrown_die",
-    "box"
+    "box",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -1722,7 +1820,8 @@
    "expr": "random(step(cube * 20, physics), arrival clock and victim) = random_replacement - at capacity every arrival needs a removal",
    "from": [
     "cube",
-    "falling_cube"
+    "falling_cube",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1752,7 +1851,9 @@
    "from": [
     "cylinder",
     "grabbable",
-    "box"
+    "box",
+    "thrown_die",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -1826,7 +1927,8 @@
   "decay_stacks": {
    "expr": "random(array(box, 5 x 4), accumulate, rate a) + random(array(prism, 12 x 10), accumulate, rate b) = decay_stacks - small draws that add up: two stacks drift, turn and sink at different rates",
    "from": [
-    "box"
+    "box",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1876,7 +1978,8 @@
    "expr": "random(field(array(box, 8 x 3 x 8), visitation: even, bell, weather), turn one) = random_rotation_field - a field of chances decides which cube is turned next",
    "from": [
     "box",
-    "lattice"
+    "lattice",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -1907,7 +2010,9 @@
    "expr": "step(random(array(pyramid, 5), tilt), physics) = pyramid_drop - twenty-five inverted pyramids, each with a small drawn tilt, released at once",
    "from": [
     "pyramid",
-    "balls_test_grid"
+    "balls_test_grid",
+    "random_sizes",
+    "falling_cube"
    ],
    "chapter": "randomness",
    "build": {
@@ -1935,7 +2040,8 @@
    "from": [
     "cylinder",
     "grab_sphere",
-    "pendulum"
+    "pendulum",
+    "random_step_walk"
    ],
    "chapter": "randomness",
    "build": {
@@ -1974,7 +2080,9 @@
    "from": [
     "line",
     "box",
-    "grab_sphere"
+    "grab_sphere",
+    "random_sizes",
+    "random_step_walk"
    ],
    "chapter": "randomness",
    "build": {
@@ -2130,7 +2238,9 @@
   "pixel_cloud": {
    "expr": "decide(random(cube * 23, step weighted upward), never revisit) = pixel_cloud - a walk that refuses its own past, kept as cubes",
    "from": [
-    "cube"
+    "cube",
+    "random_step_walk",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -2158,7 +2268,8 @@
    "expr": "field(random_step_walk + array(box, 32), height = visits) = walk_height_field - the walk has no memory; the ground it walked on does",
    "from": [
     "random_step_walk",
-    "box"
+    "box",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -2206,7 +2317,9 @@
    "from": [
     "point",
     "gaussian_bins",
-    "line"
+    "line",
+    "random_sizes",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -2252,7 +2365,9 @@
    "expr": "trail(decide(sample(point, gauss), outside the safe zone)) on quad = gauss_splatter — a bell curve painted dot by dot, with the draws near the centre refused",
    "from": [
     "point",
-    "quad"
+    "quad",
+    "random_sizes",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -2287,7 +2402,9 @@
    "from": [
     "cylinder",
     "ball",
-    "gaussian_bins"
+    "gaussian_bins",
+    "thrown_die",
+    "sampled_histogram"
    ],
    "chapter": "randomness",
    "build": {
@@ -2335,7 +2452,8 @@
   "arrivals": {
    "expr": "step(sample(array(figure, 6), without replacement), random wait) = arrivals — six places filled one at a time: each draw removes what it drew",
    "from": [
-    "quad"
+    "quad",
+    "random_removal"
    ],
    "chapter": "randomness",
    "build": {
@@ -2363,7 +2481,9 @@
   },
   "three_seeds_one_recipe": {
    "expr": "times(config(figure, seed), 3) = three_seeds_one_recipe — one generator, three seeds side by side: what differs is only the draw",
-   "from": [],
+   "from": [
+    "lcg_step"
+   ],
    "chapter": "randomness",
    "build": {
     "op": "times",
@@ -2388,7 +2508,8 @@
    "expr": "decide(sample(array(mushroom, 100)), by noise) + ring(mushroom) + cluster(mushroom) on field(noise ground) = mushroom_field — candidates thrown, kept where the noise allows; rings and clusters are written by rule",
    "from": [
     "noise_heights",
-    "percolation"
+    "percolation",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -2472,7 +2593,8 @@
   "bubble_rise": {
    "expr": "step(sample(array(sphere, 200), place, size, drift), rise + fade) in a dish = bubble_rise — a rate of random births, each rising and vanishing",
    "from": [
-    "mesh_color"
+    "mesh_color",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -2576,7 +2698,8 @@
   "kitbash": {
    "expr": "connect(sample(array(module, 30), place)) = kitbash — thirty assembled modules thrown into space and tied by pipes, beams and bridges",
    "from": [
-    "cone_field"
+    "cone_field",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -2616,7 +2739,8 @@
    "from": [
     "random_cubes",
     "trs_cube",
-    "noise_heights"
+    "noise_heights",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -2684,7 +2808,8 @@
   "noise_sculpt": {
    "expr": "noise(assemblage(block, fluid mass, fabric, sphere, drips, bubbles)) = noise_sculpt — a composition whose placements and deformations are read off one noise seed",
    "from": [
-    "noise_blobs"
+    "noise_blobs",
+    "noise_heights"
    ],
    "chapter": "randomness",
    "build": {
@@ -2728,7 +2853,9 @@
    "from": [
     "random_sizes",
     "noise_heights",
-    "grid"
+    "grid",
+    "lcg_step",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -2771,7 +2898,8 @@
    "from": [
     "lattice",
     "percolation",
-    "line"
+    "line",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -2801,7 +2929,8 @@
    "expr": "trail(step(sample(stroke: place, colour, width))) on quad + cursor = drip_painting — a random stroke generator leaves its marks; the painting only accumulates",
    "from": [
     "quad",
-    "trace"
+    "trace",
+    "random_step_walk"
    ],
    "chapter": "randomness",
    "build": {
@@ -2834,7 +2963,10 @@
    "expr": "decide(sample(array(point, 500)), inside the circle) on quad = dart_estimate — count what falls inside: an area, and pi, from draws",
    "from": [
     "point",
-    "quad"
+    "quad",
+    "random_sizes",
+    "sampled_histogram",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -2873,7 +3005,9 @@
    "expr": "trail(decide(sample(direction of 6), no reversal, prefer straight), cylinder × 180) = pipe_walk — a walk in three dimensions that keeps its body",
    "from": [
     "cylinder",
-    "trace"
+    "trace",
+    "random_step_walk",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -2904,7 +3038,8 @@
    "from": [
     "random_cubes",
     "noise_heights",
-    "boids"
+    "boids",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -2978,7 +3113,8 @@
   "pheromone_relief": {
    "expr": "field(height = accumulated mark, pheromone_mark with 5 walkers) = pheromone_relief — the marks pile up into ground: a ridge is where walkers kept agreeing",
    "from": [
-    "pheromone_mark"
+    "pheromone_mark",
+    "random_step_walk"
    ],
    "chapter": "randomness",
    "build": {
@@ -2996,7 +3132,9 @@
    "expr": "field(F2 − F1, distance to sample(array(point, 30))) on quad = worley_cells — thrown points divide the plane: the pattern is who is nearest",
    "from": [
     "point",
-    "quad"
+    "quad",
+    "random_sizes",
+    "noise_heights"
    ],
    "chapter": "randomness",
    "build": {
@@ -3062,7 +3200,8 @@
    "expr": "field(sum(field(sine layer) × 4, persistence, lacunarity)) on quad = octave_sum — one broad layer plus weaker, finer ones: detail is addition",
    "from": [
     "layered_noise",
-    "quad"
+    "quad",
+    "noise_heights"
    ],
    "chapter": "randomness",
    "build": {
@@ -3093,7 +3232,9 @@
    "from": [
     "point",
     "line",
-    "trace"
+    "trace",
+    "random_step_walk",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -3140,7 +3281,8 @@
   "one_safe_door": {
    "expr": "decide(hand, random(door × 3, one passage)) = one_safe_door — the draw is made before you choose; you learn it with your body",
    "from": [
-    "cube"
+    "cube",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -3179,7 +3321,8 @@
   "draw_choose_reveal": {
    "expr": "times(config(decide(hand, random(lane × 2, which is short)), order of draw/choose/reveal), 3) = draw_choose_reveal — the same draw and the same choice in three orders: when did the door decide?",
    "from": [
-    "one_safe_door"
+    "one_safe_door",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -3227,7 +3370,8 @@
    "expr": "step(random(cube, wait), fixed cycle of states) = random_wait_cube — you know what it will do next, never when",
    "from": [
     "cube",
-    "travelling_cube"
+    "travelling_cube",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -3250,7 +3394,8 @@
    "expr": "physics(step(random(array(cube, 20), start, velocity, jitter), every interval)) = timed_emitter — a clock that keeps throwing: the source is fixed, each throw is drawn",
    "from": [
     "falling_cube",
-    "random_cubes"
+    "random_cubes",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -3347,7 +3492,8 @@
   "clipped_point": {
    "expr": "rule(hand(random(grab_sphere, x y)), clamp to bounds) = clipped_point — one draw you can carry, and the bounds that keep correcting it",
    "from": [
-    "grab_sphere"
+    "grab_sphere",
+    "random_sizes"
    ],
    "chapter": "randomness",
    "build": {
@@ -3372,7 +3518,9 @@
    "expr": "random(array(point, 30)) beside min_distance_sample = spacing_bench — the same stream thrown twice: kept as it falls, or filtered by distance",
    "from": [
     "min_distance_sample",
-    "random_cubes"
+    "random_cubes",
+    "random_sizes",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -3486,7 +3634,9 @@
    "expr": "random(array(slit, 8)) | step(accumulate) | drive(pink filter), one stream of draws = related_signals — the same draws three times: fresh, summed, filtered; relation is what the draw is added to",
    "from": [
     "random_sizes",
-    "accumulation"
+    "accumulation",
+    "random_step_walk",
+    "noise_heights"
    ],
    "chapter": "randomness",
    "build": {
@@ -3547,7 +3697,8 @@
   "spacing_wall": {
    "expr": "array(config(min_distance_sample, rule, distance, load, seed), 8) = spacing_wall — eight settings of one generator at a fixed volume: read the parameter off the spacing",
    "from": [
-    "min_distance_sample"
+    "min_distance_sample",
+    "percolation"
    ],
    "chapter": "randomness",
    "build": {
@@ -8687,6 +8838,58 @@
    },
    "drafted_for": "matter_spring_not",
    "drafted_by": "robot (Fable 5.2), Root of the knowledge tree (floors 0-25)"
+  },
+  "sorted_and_shuffled": {
+   "expr": "sort(array(box, 4 x 4)) + random(array(box, 4 x 4), shuffle) = sorted_and_shuffled - the same parts in order and out of it: what is counted is how many arrangements look alike",
+   "from": [
+    "pallet_sorted",
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "sort",
+      "by": "address",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 4,
+       "dims": 2
+      }
+     },
+     {
+      "op": "engine",
+      "kind": "random",
+      "draws": "shuffle",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 4,
+       "dims": 2
+      }
+     }
+    ]
+   },
+   "drafted_by": "robot (Fable 5.2), recurring parts of the randomness floors, 2026-11-11",
+   "drafted_for": "signal_room",
+   "card": {
+    "formula": "order | shuffle = sort(box × 16) beside sample(box × 16, shuffle)",
+    "motive": "the same parts in order and out of it: disorder is the arrangement with more ways to be made",
+    "op": "sort",
+    "with": [
+     "sample"
+    ],
+    "axes": [
+     "measure:1"
+    ],
+    "said": "drafted 2026-11-11 from recurrence on the randomness floors (7 works share it) - not yet his words"
+   }
   }
  }
 }
