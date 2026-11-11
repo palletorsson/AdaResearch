@@ -1,0 +1,3569 @@
+{
+ "_doc": "DRAFT terms: proposed by an agent for works that have no term yet, waiting for acceptance. A timeline form may name one; saving that form on /artifact-timeline moves the draft (and every draft it is built from) into commons/modular/terms.json (tools/artifact_timeline.py promote_drafts). Same shape as a terms.json term, plus drafted_by / drafted_for.",
+ "terms": {
+  "chair_pyramid": {
+   "expr": "step(array(chair, 3 x 3) + array(chair, 2 x 2) + chair * 2 + chair, physics) = chair_pyramid - sixteen chairs stacked 9 + 4 + 2 + 1; gravity decides what falls",
+   "from": [
+    "chair"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "array",
+       "of": {
+        "t": "chair"
+       },
+       "n": [
+        3,
+        3
+       ],
+       "dims": 2
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "chair"
+       },
+       "n": [
+        2,
+        2
+       ],
+       "dims": 2
+      },
+      {
+       "op": "times",
+       "of": {
+        "t": "chair"
+       },
+       "n": 2
+      },
+      {
+       "t": "chair"
+      }
+     ]
+    }
+   },
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "thrown_die": {
+   "expr": "step(dice, physics) = thrown_die - the die leaves the hand; the settled face is read, not generated",
+   "from": [
+    "dice",
+    "falling_cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "t": "dice"
+    }
+   },
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_step_walk": {
+   "expr": "trail(random(point, step)) = random_step_walk - each position is the last one plus a draw; the trail is what is kept",
+   "from": [
+    "point",
+    "trace"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "trail",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": "step",
+     "accumulate": true,
+     "of": {
+      "t": "point"
+     }
+    }
+   },
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "sampled_histogram": {
+   "expr": "sort(sample(array(box, 16)), by bin) = sampled_histogram — draws binned: the bars are a record of a sample, not the law itself",
+   "from": [
+    "gaussian_bins",
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "sort",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 16,
+      "dims": 1
+     }
+    },
+    "by": "bin"
+   },
+   "used_by": [
+    "distribution_comparator"
+   ],
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "min_distance_sample": {
+   "expr": "decide(random(array(point, 30)), no nearer than d to any kept point) = min_distance_sample — dart throwing: a candidate is refused when it lands too close; spacing is a rule of admission",
+   "from": [
+    "grab_sphere",
+    "percolation"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "grab_sphere"
+      },
+      "n": 30,
+      "dims": 3
+     }
+    },
+    "rule": "refuse within d of an admitted point",
+    "attempts": "finite"
+   },
+   "used_by": [
+    "void_noise_spacing",
+    "noise_config_wall"
+   ],
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "lcg_register_film": {
+   "expr": "exhibit(lcg_step + array(bit, 64) + array(bar, 16)) = lcg_register_film - a screen films the crank's own arithmetic: sixteen outputs replayed from one seed",
+   "from": [
+    "lcg_step",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "lcg_step"
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 64,
+       "dims": 1
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 16,
+       "dims": 1,
+       "profile": "values"
+      }
+     ]
+    }
+   },
+   "drafted_for": "film_prng_register",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_digit_page": {
+   "expr": "hand(drive(random(array(number, 10 x 28)), cascade), freeze) = random_digit_page - a table of drawn digits flows; a touch keeps one",
+   "from": [],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "touch freezes one",
+    "of": {
+     "op": "engine",
+     "kind": "drive",
+     "f": "cascade",
+     "of": {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "array",
+       "of": {
+        "p": "label",
+        "text": "00000"
+       },
+       "n": [
+        10,
+        28
+       ],
+       "dims": 2
+      }
+     }
+    }
+   },
+   "drafted_for": "random_number_book_page_1955",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "lcg_step": {
+   "expr": "hand(rule(array(lamp, 32), x' = (a*x + c) mod m)) + array(box, 8, counts) = lcg_step - the next number is computed from the last one: the same seed gives the same sequence",
+   "from": [
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "crank",
+    "of": {
+     "op": "engine",
+     "kind": "rule",
+     "rule": "x' = (a*x + c) mod 2^32",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 32,
+        "dims": 1
+       },
+       {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 8,
+        "dims": 1,
+        "profile": "counts"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "prng_crank_machine",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "seed_replay": {
+   "expr": "hand(random(array(box, 8), seed s) * 2 + random(array(box, 8), seed s + 1)) = seed_replay - the same seed repaints the same grid; one more and it is another grid",
+   "from": [
+    "box",
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "movement sampler supplies the seed",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "op": "engine",
+        "kind": "random",
+        "seed": "s",
+        "vary": "colour",
+        "of": {
+         "op": "array",
+         "of": {
+          "t": "box"
+         },
+         "n": 8,
+         "dims": 2
+        }
+       },
+       "n": 2
+      },
+      {
+       "op": "engine",
+       "kind": "random",
+       "seed": "s+1",
+       "vary": "colour",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 8,
+        "dims": 2
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "void_random_seed",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_abacus": {
+   "expr": "trail(hand(array(random(line + bead, target x), 5))) = random_abacus - five beads sent to drawn positions at four speeds; the wall keeps where each has been",
+   "from": [
+    "line",
+    "sphere_collider"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "trail",
+    "marks": 12,
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "by": "contact moves one bead",
+     "of": {
+      "op": "array",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "draws": [
+        "x"
+       ],
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "t": "line"
+         },
+         {
+          "t": "sphere_collider"
+         }
+        ]
+       }
+      },
+      "n": 5,
+      "dims": 1
+     }
+    }
+   },
+   "drafted_for": "random_touch",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "one_number_four_uses": {
+   "expr": "random(seed 435) -> transform(point, at) + transform(point, scale) + transform(cube, rot) + config(point, hue) = one_number_four_uses - one drawn value, four consequences",
+   "from": [
+    "sphere_collider",
+    "cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "seed": 435,
+    "values": 8,
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "transform",
+       "of": {
+        "t": "sphere_collider"
+       },
+       "at": "u"
+      },
+      {
+       "op": "transform",
+       "of": {
+        "t": "sphere_collider"
+       },
+       "scale": "u"
+      },
+      {
+       "op": "transform",
+       "of": {
+        "t": "cube"
+       },
+       "rot": "u"
+      },
+      {
+       "op": "associate",
+       "surface": "hue u",
+       "of": {
+        "t": "sphere_collider"
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "randomness_tutorial_shelf",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "slot_machine": {
+   "expr": "hand(random(cylinder * 3) + array(box, 6, counts), lever) = slot_machine - three independent draws stop one by one; the counts flatten as you keep pulling",
+   "from": [
+    "cylinder",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "lever",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "engine",
+       "kind": "random",
+       "symbols": 6,
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "cylinder"
+        },
+        "n": 3
+       }
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 6,
+       "dims": 1,
+       "profile": "counts"
+      }
+     ]
+    }
+   },
+   "drafted_for": "slot_machine",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "frame_interval_trace": {
+   "expr": "trail(array(point, 240, measured frame intervals)) = frame_interval_trace - the clock's own jitter, recorded: what the seed witness hashes",
+   "from": [
+    "point"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "trail",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "point"
+     },
+     "n": 240,
+     "dims": 1,
+     "profile": "measured"
+    }
+   },
+   "drafted_for": "void_random_frames",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_return": {
+   "expr": "drive(random(grab_sphere + arrow * 2 + ring of 24 points, angle and radius), out and back) = random_return - one drawn destination per excursion; the return is authored",
+   "from": [
+    "grab_sphere",
+    "arrow",
+    "point"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "drive",
+    "f": "out, wait, back",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": [
+      "angle",
+      "radius"
+     ],
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "grab_sphere"
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "arrow"
+        },
+        "n": 2
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "point"
+        },
+        "n": 24,
+        "layout": "ring"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "void_random_return",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "interval_bits": {
+   "expr": "decide(random(array(point, 96), exponential gaps), t1 < t2) + array(box, 24) = interval_bits - bits taken from which of two waits was longer",
+   "from": [
+    "point",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "logic",
+      "gate": "t1 < t2",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "distribution": "exponential",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "point"
+        },
+        "n": 96,
+        "dims": 1
+       }
+      }
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 24,
+      "dims": 1
+     }
+    ]
+   },
+   "drafted_for": "geiger_counter",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "lava_hash_wall": {
+   "expr": "rule(field(drive(array(ball * 4, 6 x 2)), sampled image 96 x 48), hash) + array(box, 48) = lava_hash_wall - moving blobs are photographed and hashed into 48 values",
+   "from": [
+    "ball",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "rule",
+      "rule": "sha256",
+      "of": {
+       "op": "field",
+       "kind": "sampled image",
+       "of": {
+        "op": "engine",
+        "kind": "drive",
+        "f": "heat",
+        "of": {
+         "op": "array",
+         "of": {
+          "op": "times",
+          "of": {
+           "t": "ball"
+          },
+          "n": 4
+         },
+         "n": [
+          6,
+          2
+         ],
+         "dims": 2
+        }
+       }
+      }
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 48,
+      "dims": 1,
+      "profile": "values"
+     }
+    ]
+   },
+   "drafted_for": "lava_entropy_wall",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "chair": {
+   "expr": "association(leg * 4 + seat + back + collider + grabbable) = chair - an ordinary thing that can be counted, coloured and moved",
+   "from": [
+    "grabbable"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "associate",
+    "surface": "chair",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "times",
+       "of": {
+        "p": "mesh",
+        "shape": "box",
+        "part": "leg"
+       },
+       "n": 4
+      },
+      {
+       "p": "mesh",
+       "shape": "box",
+       "part": "seat"
+      },
+      {
+       "p": "mesh",
+       "shape": "box",
+       "part": "back"
+      },
+      {
+       "p": "collider",
+       "shape": "box"
+      },
+      {
+       "t": "grabbable"
+      }
+     ]
+    }
+   },
+   "drafted_for": "entropy_chair_reference",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "chair_colour_shares": {
+   "expr": "array(random(array(chair, 8, palette shares), draw one), 4) = chair_colour_shares - Shannon: which colour comes next, at 4:4, 7:1 and 8:0",
+   "from": [
+    "chair"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "array",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draw": 1,
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "chair"
+      },
+      "n": 8,
+      "dims": 1,
+      "palette": "shares"
+     }
+    },
+    "n": 4,
+    "dims": 2,
+    "shares": [
+     "4:4",
+     "4:4",
+     "7:1",
+     "8:0"
+    ]
+   },
+   "drafted_for": "entropy_chairs_shannon",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "chair_arrangements": {
+   "expr": "array(config(array(chair, 8), brief), 3) = chair_arrangements - Boltzmann: how many arrangements fit one description, 1 or 36",
+   "from": [
+    "chair"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "array",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "chair"
+     },
+     "n": 8,
+     "dims": 2,
+     "palette": "brief"
+    },
+    "n": 3,
+    "dims": 1,
+    "assignments": [
+     1,
+     36,
+     36
+    ]
+   },
+   "drafted_for": "entropy_chairs_boltzmann",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "cooling_cup_series": {
+   "expr": "drive(array(association(cylinder, cup of coffee), 5, times 0-60 s), clock) = cooling_cup_series - thermodynamic entropy: the same cup at five moments of cooling and mixing",
+   "from": [
+    "cylinder"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "drive",
+    "f": "cooling",
+    "of": {
+     "op": "array",
+     "of": {
+      "op": "associate",
+      "surface": "cup of coffee",
+      "of": {
+       "t": "cylinder"
+      }
+     },
+     "n": 5,
+     "dims": 1,
+     "profile": "time"
+    }
+   },
+   "drafted_for": "entropy_cooling_cup",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "chair_scatter_recipe": {
+   "expr": "random(array(chair, 8), seed 435: scatter) = chair_scatter_recipe - algorithmic complexity: a scatter with a short recipe, the seed",
+   "from": [
+    "chair"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "seed": 435,
+    "jitter": true,
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "chair"
+     },
+     "n": 8,
+     "dims": 2
+    }
+   },
+   "drafted_for": "entropy_chairs_description",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "frosted_chair_series": {
+   "expr": "array(chair + association(pane, frosted glass), 5, palette alpha) = frosted_chair_series - conditional entropy: what remains to guess once the glass hides detail",
+   "from": [
+    "chair",
+    "alpha_steps"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "array",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "chair"
+      },
+      {
+       "op": "associate",
+       "surface": "frosted glass",
+       "of": {
+        "p": "mesh",
+        "shape": "box",
+        "part": "pane"
+       }
+      }
+     ]
+    },
+    "n": 5,
+    "dims": 1,
+    "palette": "alpha"
+   },
+   "drafted_for": "entropy_frosted_chair",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "door_map_pair": {
+   "expr": "hand(rule(door * 2, x/2) + rule(door * 2, 2x mod 1), step) = door_map_pair - two starts under two rules: one pair closes together, the other separates",
+   "from": [],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "STEP",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "engine",
+       "kind": "rule",
+       "rule": "x/2",
+       "of": {
+        "op": "times",
+        "of": {
+         "p": "mesh",
+         "shape": "box",
+         "part": "door leaf"
+        },
+        "n": 2
+       }
+      },
+      {
+       "op": "engine",
+       "kind": "rule",
+       "rule": "2x mod 1",
+       "of": {
+        "op": "times",
+        "of": {
+         "p": "mesh",
+         "shape": "box",
+         "part": "door leaf"
+        },
+        "n": 2
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "entropy_door_dynamics",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "one_guess_piles": {
+   "expr": "random(chair_pyramid * 4, palettes 8/8, 8/4/4, 12/4, 16/0: draw one) = one_guess_piles - min-entropy: the best single guess, whatever the pile looks like",
+   "from": [
+    "chair_pyramid"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "draw": 1,
+    "of": {
+     "op": "times",
+     "of": {
+      "t": "chair_pyramid"
+     },
+     "n": 4,
+     "palette": [
+      "8/8",
+      "8/4/4",
+      "12/4",
+      "16/0"
+     ]
+    }
+   },
+   "drafted_for": "entropy_ball_pit",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "ruin": {
+   "expr": "step(hand(drum * 8 * 4 + array(brick, 12 x 6), pull one), physics) = ruin - one support is drawn out; contact and gravity decide what still holds",
+   "from": [
+    "cylinder",
+    "brick"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "by": "pull one stone",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "times",
+        "of": {
+         "op": "times",
+         "of": {
+          "t": "cylinder"
+         },
+         "n": 8
+        },
+        "n": 4
+       },
+       {
+        "op": "array",
+        "of": {
+         "t": "brick"
+        },
+        "n": [
+         12,
+         6
+        ],
+        "dims": 2
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "entropy_ruin",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "hand_decay": {
+   "expr": "hand(association(cube + sphere + cylinder, decay), velocity, grip, head) = hand_decay - the visitor's own movement is the source that wears the surfaces",
+   "from": [
+    "cube",
+    "sphere_collider",
+    "cylinder"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "velocity, grip, head turn",
+    "of": {
+     "op": "associate",
+     "surface": "decay",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "cube"
+       },
+       {
+        "t": "sphere_collider"
+       },
+       {
+        "t": "cylinder"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "hardware_entropy_decay",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "entropy_jar": {
+   "expr": "sort(step(hand(association(cylinder, glass) + marble * 40 + marble * 40), physics), colour by height band) = entropy_jar - shaking changes local shares; the whole-jar share stays 40/40",
+   "from": [
+    "cylinder",
+    "marble"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "sort",
+    "by": "colour within six height bands",
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "engine",
+      "kind": "hand",
+      "by": "shake",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "op": "associate",
+         "surface": "glass",
+         "of": {
+          "t": "cylinder"
+         }
+        },
+        {
+         "op": "times",
+         "of": {
+          "t": "marble"
+         },
+         "n": 40,
+         "palette": [
+          "a"
+         ]
+        },
+        {
+         "op": "times",
+         "of": {
+          "t": "marble"
+         },
+         "n": 40,
+         "palette": [
+          "b"
+         ]
+        }
+       ]
+      }
+     }
+    }
+   },
+   "drafted_for": "entropy_jar",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "entropy_meter": {
+   "expr": "sort(random(array(tile, 200), 10 symbols), by symbol) + array(box, 10, counts) = entropy_meter - a reading of symbol shares; the order of the record does not enter it",
+   "from": [
+    "box",
+    "gaussian_bins"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "sort",
+      "by": "symbol",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "symbols": 10,
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 200,
+        "dims": 1
+       }
+      }
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 10,
+      "dims": 1,
+      "profile": "counts"
+     }
+    ]
+   },
+   "drafted_for": "shannon_entropy_meter",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "jar_states": {
+   "expr": "random(array(association(cylinder, glass) + marble * 40 + marble * 40, 4, starts: sorted, stirred, mixed, shelled), bounded walk) = jar_states - four beginnings under one continuing mixing",
+   "from": [
+    "entropy_jar"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "mode": "bounded walk",
+    "seed": 435,
+    "of": {
+     "op": "array",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "associate",
+        "surface": "glass",
+        "of": {
+         "t": "cylinder"
+        }
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "marble"
+        },
+        "n": 40,
+        "palette": [
+         "a"
+        ]
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "marble"
+        },
+        "n": 40,
+        "palette": [
+         "b"
+        ]
+       }
+      ]
+     },
+     "n": 4,
+     "dims": 1,
+     "states": [
+      "sorted",
+      "stirred",
+      "mixed",
+      "shelled"
+     ]
+    }
+   },
+   "drafted_for": "entropy_jar_states",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "order_to_cloud": {
+   "expr": "random(array(grab_sphere, 10 x 10 x 40), jitter rising along z) = order_to_cloud - a lattice walked from grid into cloud",
+   "from": [
+    "grab_sphere",
+    "lattice"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "jitter": "ramp z",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "grab_sphere"
+     },
+     "n": [
+      10,
+      10,
+      40
+     ],
+     "dims": 3
+    }
+   },
+   "drafted_for": "entropy_axiom",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "prefab_disorder": {
+   "expr": "hand(assemblage(box, monitor, stool, microscope) + random(the same assemblage, graft parts), slider) = prefab_disorder - the same fifty parts as originals, scattered, and seeded hybrids",
+   "from": [
+    "cardboard_box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "slider",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "assemblage",
+       "parts": [
+        {
+         "t": "cardboard_box"
+        },
+        {
+         "p": "mesh",
+         "shape": "crt_monitor"
+        },
+        {
+         "p": "mesh",
+         "shape": "lab_stool"
+        },
+        {
+         "p": "mesh",
+         "shape": "microscope"
+        }
+       ]
+      },
+      {
+       "op": "engine",
+       "kind": "random",
+       "graft": true,
+       "seed": 435,
+       "of": {
+        "op": "assemblage",
+        "parts": [
+         {
+          "t": "cardboard_box"
+         },
+         {
+          "p": "mesh",
+          "shape": "crt_monitor"
+         },
+         {
+          "p": "mesh",
+          "shape": "lab_stool"
+         },
+         {
+          "p": "mesh",
+          "shape": "microscope"
+         }
+        ]
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "prefab_disorder",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "two_compartments": {
+   "expr": "random(array(sphere, 8, A) + array(sphere, 8, B) + divider, pair swap) = two_compartments - the colour shares never change; the count of arrangements does",
+   "from": [
+    "sphere_collider"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "mode": "pair swap",
+    "seed": 435,
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "array",
+       "of": {
+        "t": "sphere_collider"
+       },
+       "n": 8,
+       "dims": 1,
+       "palette": [
+        "A"
+       ]
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "sphere_collider"
+       },
+       "n": 8,
+       "dims": 1,
+       "palette": [
+        "B"
+       ]
+      },
+      {
+       "p": "mesh",
+       "shape": "box",
+       "part": "divider"
+      }
+     ]
+    }
+   },
+   "drafted_for": "entropy_compartments",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "four_cube_sort": {
+   "expr": "sort(hand(pick_up_cube * 2 pink + pick_up_cube * 2 black + divider), colour into boxes) = four_cube_sort - four cubes, sorted by hand: how many ways fit each partition",
+   "from": [
+    "pick_up_cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "sort",
+    "by": "colour",
+    "of": {
+     "op": "engine",
+     "kind": "hand",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "op": "times",
+        "of": {
+         "t": "pick_up_cube"
+        },
+        "n": 2,
+        "palette": [
+         "pink"
+        ]
+       },
+       {
+        "op": "times",
+        "of": {
+         "t": "pick_up_cube"
+        },
+        "n": 2,
+        "palette": [
+         "black"
+        ]
+       },
+       {
+        "p": "mesh",
+        "shape": "box",
+        "part": "divider"
+       }
+      ]
+     }
+    }
+   },
+   "drafted_for": "entropy_sorting_table",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "same_values_shuffled": {
+   "expr": "sort(array(cell, 4 x 4)) + random(array(cell, 4 x 4), shuffle) = same_values_shuffled - the same values with different neighbours",
+   "from": [
+    "box",
+    "grid"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "sort",
+      "by": "address",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 4,
+       "dims": 2,
+       "palette": "values"
+      }
+     },
+     {
+      "op": "engine",
+      "kind": "random",
+      "shuffle": true,
+      "seed": 2026,
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 4,
+       "dims": 2,
+       "palette": "values"
+      }
+     }
+    ]
+   },
+   "drafted_for": "signal_room",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_removal": {
+   "expr": "random(decide(array(box, 8), eligible: range, row, column, all), remove without replacement) = random_removal - eligibility is decided before the draw; what is gone cannot be drawn again",
+   "from": [
+    "box",
+    "percolation"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "replace": false,
+    "remove": true,
+    "of": {
+     "op": "engine",
+     "kind": "logic",
+     "gate": "eligible",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 8,
+      "dims": 2
+     }
+    }
+   },
+   "drafted_for": "remove_random",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "with_without_replacement": {
+   "expr": "hand(random(array(box, 8), returned) + random(array(box, 8), removed), lever) = with_without_replacement - a draw changes its future only if the member leaves the set",
+   "from": [
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "lever",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "engine",
+       "kind": "random",
+       "replace": true,
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 8,
+        "dims": 1
+       }
+      },
+      {
+       "op": "engine",
+       "kind": "random",
+       "replace": false,
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 8,
+        "dims": 1
+       }
+      }
+     ]
+    }
+   },
+   "drafted_for": "sampling_hoppers",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "chance_passage_film": {
+   "expr": "exhibit(random(array(slab, 4), angles 45/135)) = chance_passage_film - a screen films sixteen coin decisions becoming walls",
+   "from": [
+    "ten_print"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "exhibit",
+    "text": "screen",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "angles": [
+      45,
+      135
+     ],
+     "seed": 1982,
+     "of": {
+      "op": "array",
+      "of": {
+       "p": "mesh",
+       "shape": "box",
+       "part": "slab"
+      },
+      "n": 4,
+      "dims": 2
+     }
+    }
+   },
+   "drafted_for": "film_chance_passage",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "pickup_scatter": {
+   "expr": "random(pick_up_cube * 10, place: random, grid, circle, line) = pickup_scatter - where the cubes land shows what the placement rule honours",
+   "from": [
+    "pick_up_cube",
+    "random_cubes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "place": "random",
+    "of": {
+     "op": "times",
+     "of": {
+      "t": "pick_up_cube"
+     },
+     "n": 10
+    }
+   },
+   "drafted_for": "pickup_cube_placer",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "dealt_diagonals": {
+   "expr": "array(random(array(line, 10), deal exactly k turned), 4, k = 1, 5, 30, 50) = dealt_diagonals - a count dealt, not a chance rolled: at which count order stops reading as order",
+   "from": [
+    "line",
+    "ten_print"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "array",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "deal": "k",
+     "angles": [
+      45,
+      135
+     ],
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "line"
+      },
+      "n": 10,
+      "dims": 2
+     }
+    },
+    "n": 4,
+    "dims": 1,
+    "counts": [
+     1,
+     5,
+     30,
+     50
+    ]
+   },
+   "drafted_for": "composition_stochastique",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "ten_print_ant_maze": {
+   "expr": "trail(drive(ten_print, turn one wall every 0.08 s), ant search) = ten_print_ant_maze - a maze nobody designed, changing while something looks for a way through",
+   "from": [
+    "ten_print"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "trail",
+    "agents": 1,
+    "mode": "ant search",
+    "of": {
+     "op": "engine",
+     "kind": "drive",
+     "f": "churn",
+     "of": {
+      "t": "ten_print"
+     }
+    }
+   },
+   "drafted_for": "ten_print_maze_3d",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "ten_print_cloth": {
+   "expr": "association(ten_print, cloth) * 3 (diagonals, stitches, pixels) + dress = ten_print_cloth - the same 252 draws read as three fabrics, then worn",
+   "from": [
+    "ten_print"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "op": "associate",
+       "surface": "cloth",
+       "of": {
+        "t": "ten_print"
+       }
+      },
+      "n": 3,
+      "marks": [
+       "diagonal",
+       "stitch",
+       "pixel"
+      ]
+     },
+     {
+      "p": "mesh",
+      "shape": "dress"
+     }
+    ]
+   },
+   "drafted_for": "textile_comparison",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "critter_grid": {
+   "expr": "rule(random(array(critter, 4 x 4 x 4 kingdoms), dna), select, cross, mutate) = critter_grid - drawn DNA under selection: kingdoms as regions of one morphospace",
+   "from": [],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "rule",
+    "rule": "select, cross, mutate",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": "dna",
+     "of": {
+      "op": "array",
+      "of": {
+       "p": "mesh",
+       "shape": "critter"
+      },
+      "n": [
+       4,
+       4,
+       4
+      ],
+      "dims": 3
+     }
+    }
+   },
+   "drafted_for": "nature_system_demo",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "pinned_random_profile": {
+   "expr": "random(array(point, 5), heights, ends held) = pinned_random_profile - a random shape is what was refused as much as what was drawn",
+   "from": [
+    "point",
+    "gaussian_bins"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "draws": "height",
+    "pinned": [
+     "first",
+     "last"
+    ],
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "point"
+     },
+     "n": 5,
+     "dims": 1
+    }
+   },
+   "drafted_for": "random_edge_profile",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "continuing_die": {
+   "expr": "decide(thrown_die + array(box, 5, faces), six -> throw again) = continuing_die - the rule, not the die, continues",
+   "from": [
+    "thrown_die",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "logic",
+    "gate": "six -> again",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "thrown_die"
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 5,
+       "dims": 1,
+       "profile": "faces"
+      }
+     ]
+    }
+   },
+   "drafted_for": "continuing_die",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "die_throw": {
+   "expr": "thrown_die + array(box, 6, counts) + step(ball * 96, physics) = die_throw - a physical throw, a record of faces, and a reward in proportion",
+   "from": [
+    "thrown_die",
+    "ball",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "thrown_die"
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 6,
+      "dims": 1,
+      "profile": "counts"
+     },
+     {
+      "op": "engine",
+      "kind": "physics",
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "ball"
+       },
+       "n": 96
+      }
+     }
+    ]
+   },
+   "drafted_for": "dice_throw",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "paired_dice_sum": {
+   "expr": "decide(thrown_die * 2, sum) + array(box, 12, sums) = paired_dice_sum - two read faces become one height; the same height returns by another pair",
+   "from": [
+    "thrown_die",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "logic",
+      "gate": "sum",
+      "of": {
+       "op": "times",
+       "of": {
+        "t": "thrown_die"
+       },
+       "n": 2
+      }
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 12,
+      "dims": 1,
+      "profile": "sums"
+     }
+    ]
+   },
+   "drafted_for": "paired_dice_column",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_replacement": {
+   "expr": "random(step(cube * 20, physics), arrival clock and victim) = random_replacement - at capacity every arrival needs a removal",
+   "from": [
+    "cube",
+    "falling_cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "draws": [
+     "interval",
+     "victim"
+    ],
+    "of": {
+     "op": "engine",
+     "kind": "physics",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "cube"
+      },
+      "n": 20
+     }
+    }
+   },
+   "drafted_for": "random_object_spawner",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "coin_toss": {
+   "expr": "step(association(cylinder + grabbable, coin) * 8, physics) + array(box, 2, counts) = coin_toss - one binary outcome, read from which face is up",
+   "from": [
+    "cylinder",
+    "grabbable",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "physics",
+      "of": {
+       "op": "times",
+       "of": {
+        "op": "associate",
+        "surface": "coin",
+        "of": {
+         "op": "compose",
+         "parts": [
+          {
+           "t": "cylinder"
+          },
+          {
+           "t": "grabbable"
+          }
+         ]
+        }
+       },
+       "n": 8
+      }
+     },
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 2,
+      "dims": 1,
+      "profile": "counts"
+     }
+    ]
+   },
+   "drafted_for": "coin_toss",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "slope_gradient_cubes": {
+   "expr": "drive(array(cube, 10 x 30, turn rising along z), sway) = slope_gradient_cubes - a graded tilt across a counted floor (no draw in it)",
+   "from": [
+    "cube",
+    "rate_steps"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "drive",
+    "f": "sway",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "cube"
+     },
+     "n": [
+      10,
+      30
+     ],
+     "dims": 2,
+     "profile": "ramp",
+     "vary": "rot"
+    }
+   },
+   "drafted_for": "RotateGridCubes",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "decay_stacks": {
+   "expr": "random(array(box, 5 x 4), accumulate, rate a) + random(array(prism, 12 x 10), accumulate, rate b) = decay_stacks - small draws that add up: two stacks drift, turn and sink at different rates",
+   "from": [
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "accumulate": true,
+      "rate": "a",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": [
+        5,
+        4
+       ],
+       "dims": 2
+      }
+     },
+     {
+      "op": "engine",
+      "kind": "random",
+      "accumulate": true,
+      "rate": "b",
+      "of": {
+       "op": "array",
+       "of": {
+        "p": "mesh",
+        "shape": "prism"
+       },
+       "n": [
+        12,
+        10
+       ],
+       "dims": 2
+      }
+     }
+    ]
+   },
+   "drafted_for": "random_decay_multimesh",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_rotation_field": {
+   "expr": "random(field(array(box, 8 x 3 x 8), visitation: even, bell, weather), turn one) = random_rotation_field - a field of chances decides which cube is turned next",
+   "from": [
+    "box",
+    "lattice"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "draws": "rotation step",
+    "of": {
+     "op": "field",
+     "kind": "visitation probability",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": [
+       8,
+       3,
+       8
+      ],
+      "dims": 3
+     }
+    }
+   },
+   "drafted_for": "Random_Rotate_Random_XYZ",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "pyramid_drop": {
+   "expr": "step(random(array(pyramid, 5), tilt), physics) = pyramid_drop - twenty-five inverted pyramids, each with a small drawn tilt, released at once",
+   "from": [
+    "pyramid",
+    "balls_test_grid"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "physics",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": "tilt",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "pyramid"
+      },
+      "n": 5,
+      "dims": 2
+     }
+    }
+   },
+   "drafted_for": "pyramid_drop_grid",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "leashed_walk": {
+   "expr": "trail(random(step(connect(post + grab_sphere, rope), physics), impulse every 0.3 s)) = leashed_walk - drawn tugs on a tethered body, felt in the hand",
+   "from": [
+    "cylinder",
+    "grab_sphere",
+    "pendulum"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "trail",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": "impulse",
+     "of": {
+      "op": "engine",
+      "kind": "physics",
+      "of": {
+       "op": "connect",
+       "kind": "rope",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "t": "cylinder"
+         },
+         {
+          "t": "grab_sphere"
+         }
+        ]
+       }
+      }
+     }
+    }
+   },
+   "drafted_for": "random_walk_leash",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "position_vs_step": {
+   "expr": "hand(random(rail + carriage, new position) + random(rail + carriage, step from the last) + grab_sphere, lever) = position_vs_step - a new position discards the old one; a step needs somewhere to start",
+   "from": [
+    "line",
+    "box",
+    "grab_sphere"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "by": "lever",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "op": "engine",
+       "kind": "random",
+       "mode": "position",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "t": "line"
+         },
+         {
+          "t": "box"
+         }
+        ]
+       }
+      },
+      {
+       "op": "engine",
+       "kind": "random",
+       "mode": "step",
+       "accumulate": true,
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "t": "line"
+         },
+         {
+          "t": "box"
+         }
+        ]
+       }
+      },
+      {
+       "t": "grab_sphere"
+      }
+     ]
+    }
+   },
+   "drafted_for": "random_position_rails",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "walk_terrarium": {
+   "expr": "random_step_walk * 5 + association(box, glass) = walk_terrarium - five walks in a reflecting tank, each with a 200-position tail",
+   "from": [
+    "random_step_walk",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "times",
+      "of": {
+       "t": "random_step_walk"
+      },
+      "n": 5
+     },
+     {
+      "op": "associate",
+      "surface": "glass",
+      "of": {
+       "t": "box"
+      }
+     }
+    ]
+   },
+   "drafted_for": "random_walk_terrarium",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "hand_plus_walk": {
+   "expr": "hand(random_step_walk) = hand_plus_walk - the drawing hand and a bounded walk added: the mark is both",
+   "from": [
+    "random_step_walk",
+    "hand_trace"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "hand",
+    "bound": 0.25,
+    "of": {
+     "t": "random_step_walk"
+    }
+   },
+   "drafted_for": "random_draw_dot",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "walk_laws_rack": {
+   "expr": "association(random_step_walk + grabbable, paper) * 6, six step laws = walk_laws_rack - six sheets, six laws: random was never one thing",
+   "from": [
+    "random_step_walk",
+    "grabbable"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "times",
+    "of": {
+     "op": "associate",
+     "surface": "paper",
+     "of": {
+      "op": "compose",
+      "parts": [
+       {
+        "t": "random_step_walk"
+       },
+       {
+        "t": "grabbable"
+       }
+      ]
+     }
+    },
+    "n": 6,
+    "laws": [
+     "simple",
+     "diagonal",
+     "brownian",
+     "fractal",
+     "self-avoiding",
+     "levy"
+    ]
+   },
+   "drafted_for": "random_walk_collection",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "constructive_walk": {
+   "expr": "connect(random_step_walk, rod per accepted step) = constructive_walk - a walk that builds: every legal step leaves a point and a rod",
+   "from": [
+    "random_step_walk",
+    "stick"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "connect",
+    "kind": "rod",
+    "of": {
+     "t": "random_step_walk"
+    }
+   },
+   "drafted_for": "constructive_walk_bench",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "pixel_cloud": {
+   "expr": "decide(random(cube * 23, step weighted upward), never revisit) = pixel_cloud - a walk that refuses its own past, kept as cubes",
+   "from": [
+    "cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "logic",
+    "gate": "unvisited",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": "step",
+     "bias": "+y x 3",
+     "of": {
+      "op": "times",
+      "of": {
+       "t": "cube"
+      },
+      "n": 23
+     }
+    }
+   },
+   "drafted_for": "pixel_cloud",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "walk_height_field": {
+   "expr": "field(random_step_walk + array(box, 32), height = visits) = walk_height_field - the walk has no memory; the ground it walked on does",
+   "from": [
+    "random_step_walk",
+    "box"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "field",
+    "kind": "visit count",
+    "of": {
+     "op": "compose",
+     "parts": [
+      {
+       "t": "random_step_walk"
+      },
+      {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 32,
+       "dims": 2
+      }
+     ]
+    }
+   },
+   "drafted_for": "random_walk_128",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "law_columns": {
+   "expr": "sampled_histogram × 3 (three laws, one sample count) = law_columns — the same number of draws under three laws: shape is what tells them apart",
+   "from": [
+    "sampled_histogram"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "times",
+    "of": {
+     "t": "sampled_histogram"
+    },
+    "n": 3,
+    "config": "law"
+   },
+   "drafted_for": "distribution_comparator",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "falling_histogram": {
+   "expr": "step(sample(point, law)) + sort(array(box, 30)) + line(pdf) = falling_histogram — each draw falls into its bin beside the curve it is supposed to follow",
+   "from": [
+    "point",
+    "gaussian_bins",
+    "line"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "step",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "t": "point"
+       },
+       "law": "uniform|gaussian|poisson|exponential"
+      },
+      "motion": "fall"
+     },
+     {
+      "op": "sort",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 30,
+       "dims": 1
+      },
+      "by": "bin"
+     },
+     {
+      "op": "drive",
+      "of": {
+       "t": "line"
+      },
+      "by": "theoretical pdf"
+     }
+    ]
+   },
+   "drafted_for": "distribution_sampler",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "gauss_splatter": {
+   "expr": "trail(decide(sample(point, gauss), outside the safe zone)) on quad = gauss_splatter — a bell curve painted dot by dot, with the draws near the centre refused",
+   "from": [
+    "point",
+    "quad"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "quad"
+     },
+     {
+      "op": "trail",
+      "of": {
+       "op": "decide",
+       "of": {
+        "op": "engine",
+        "kind": "random",
+        "of": {
+         "t": "point"
+        },
+        "law": "gauss"
+       },
+       "rule": "refuse inside safe zone"
+      },
+      "on": "image"
+     }
+    ]
+   },
+   "drafted_for": "GaussianPaintSplatter",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "galton": {
+   "expr": "array(peg, 8 rows) + step(ball × 50, physics) + sort(array(box, 9)) = galton — left-or-right at every peg, a bell curve in the bins",
+   "from": [
+    "cylinder",
+    "ball",
+    "gaussian_bins"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "array",
+      "of": {
+       "t": "cylinder"
+      },
+      "n": 36,
+      "dims": 2,
+      "layout": "triangle",
+      "rows": 8
+     },
+     {
+      "op": "engine",
+      "kind": "physics",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "ball"
+       },
+       "n": 50,
+       "dims": 1
+      }
+     },
+     {
+      "op": "sort",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 9,
+       "dims": 1
+      },
+      "by": "bin"
+     }
+    ]
+   },
+   "drafted_for": "galton_board",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "arrivals": {
+   "expr": "step(sample(array(figure, 6), without replacement), random wait) = arrivals — six places filled one at a time: each draw removes what it drew",
+   "from": [
+    "quad"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "step",
+    "of": {
+     "op": "sample",
+     "of": {
+      "op": "array",
+      "of": {
+       "op": "associate",
+       "of": {
+        "t": "quad"
+       },
+       "story": "dressed silhouette"
+      },
+      "n": 6,
+      "dims": 2
+     },
+     "without_replacement": true
+    },
+    "wait": "random 1.5-3.5 s"
+   },
+   "drafted_for": "silhouette_arrivals",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "three_seeds_one_recipe": {
+   "expr": "times(config(figure, seed), 3) = three_seeds_one_recipe — one generator, three seeds side by side: what differs is only the draw",
+   "from": [],
+   "chapter": "randomness",
+   "build": {
+    "op": "times",
+    "of": {
+     "op": "config",
+     "of": {
+      "op": "associate",
+      "of": {
+       "p": "mesh",
+       "shape": "figure"
+      },
+      "story": "couture beast"
+     },
+     "axis": "seed"
+    },
+    "n": 3
+   },
+   "drafted_for": "couture_comparison",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "mushroom_field": {
+   "expr": "decide(sample(array(mushroom, 100)), by noise) + ring(mushroom) + cluster(mushroom) on field(noise ground) = mushroom_field — candidates thrown, kept where the noise allows; rings and clusters are written by rule",
+   "from": [
+    "noise_heights",
+    "percolation"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "field",
+      "fn": "noise ground"
+     },
+     {
+      "op": "decide",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "op": "compose",
+         "parts": [
+          {
+           "p": "mesh",
+           "shape": "stem"
+          },
+          {
+           "p": "mesh",
+           "shape": "cap"
+          }
+         ]
+        },
+        "n": 100,
+        "dims": 2
+       }
+      },
+      "by": "noise filter"
+     },
+     {
+      "op": "times",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "p": "mesh",
+         "shape": "stem"
+        },
+        {
+         "p": "mesh",
+         "shape": "cap"
+        }
+       ]
+      },
+      "n": 8,
+      "layout": "ring"
+     },
+     {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "times",
+       "of": {
+        "op": "compose",
+        "parts": [
+         {
+          "p": "mesh",
+          "shape": "stem"
+         },
+         {
+          "p": "mesh",
+          "shape": "cap"
+         }
+        ]
+       },
+       "n": 5
+      },
+      "layout": "cluster"
+     }
+    ]
+   },
+   "drafted_for": "mushrooms",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "bubble_rise": {
+   "expr": "step(sample(array(sphere, 200), place, size, drift), rise + fade) in a dish = bubble_rise — a rate of random births, each rising and vanishing",
+   "from": [
+    "mesh_color"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "p": "mesh",
+      "shape": "dish"
+     },
+     {
+      "op": "step",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "mesh_color"
+        },
+        "n": 200,
+        "dims": 1
+       }
+      },
+      "motion": "rise, shrink, vanish",
+      "rate": "spawn_rate"
+     }
+    ]
+   },
+   "drafted_for": "bubbles_random",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "curl_flow": {
+   "expr": "trail(step(array(point, 300), curl(noise))) = curl_flow — particles carried by a field made from noise that can neither gather nor spread",
+   "from": [
+    "flow_field",
+    "noise_heights"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "trail",
+    "of": {
+     "op": "step",
+     "of": {
+      "op": "engine",
+      "kind": "noise",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "point"
+       },
+       "n": 300,
+       "dims": 1
+      },
+      "curl": true
+     },
+     "motion": "advect"
+    }
+   },
+   "drafted_for": "curl_noise_particles",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "throw_beside_field": {
+   "expr": "random(array(box, 16×16)) beside noise(array(box, 16×16)) = throw_beside_field — independent draws against values that agree with their neighbours",
+   "from": [
+    "random_sizes",
+    "noise_heights"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 16,
+       "dims": 2
+      }
+     },
+     {
+      "op": "engine",
+      "kind": "noise",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 16,
+       "dims": 2
+      }
+     }
+    ]
+   },
+   "drafted_for": "perlin_noise_bridge",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "kitbash": {
+   "expr": "connect(sample(array(module, 30), place)) = kitbash — thirty assembled modules thrown into space and tied by pipes, beams and bridges",
+   "from": [
+    "cone_field"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "connect",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "array",
+      "of": {
+       "op": "assemblage",
+       "parts": [
+        {
+         "t": "box"
+        },
+        {
+         "p": "mesh",
+         "shape": "cylinder"
+        },
+        {
+         "p": "mesh",
+         "shape": "sphere"
+        }
+       ]
+      },
+      "n": 30,
+      "dims": 3
+     }
+    },
+    "ties": "pipes, beams, bridges between random pairs"
+   },
+   "drafted_for": "env_one",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_transforms": {
+   "expr": "random(transform(box, sphere, cylinder, cone)) + four sampled rows + noise(array(box, 8×8)) = random_transforms — the same solids, each beside a copy that was turned, scaled and moved by draws",
+   "from": [
+    "random_cubes",
+    "trs_cube",
+    "noise_heights"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "t": "box"
+        },
+        {
+         "p": "mesh",
+         "shape": "sphere"
+        },
+        {
+         "p": "mesh",
+         "shape": "cylinder"
+        },
+        {
+         "p": "mesh",
+         "shape": "cone"
+        }
+       ]
+      },
+      "what": "rotation, scale, translation"
+     },
+     {
+      "op": "times",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 20,
+        "dims": 1
+       }
+      },
+      "n": 4,
+      "config": "law"
+     },
+     {
+      "op": "engine",
+      "kind": "noise",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 8,
+       "dims": 2
+      }
+     }
+    ]
+   },
+   "drafted_for": "random_transformations_geometric",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "noise_sculpt": {
+   "expr": "noise(assemblage(block, fluid mass, fabric, sphere, drips, bubbles)) = noise_sculpt — a composition whose placements and deformations are read off one noise seed",
+   "from": [
+    "noise_blobs"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "noise",
+    "of": {
+     "op": "assemblage",
+     "parts": [
+      {
+       "t": "box"
+      },
+      {
+       "p": "mesh",
+       "shape": "fluid mass"
+      },
+      {
+       "p": "mesh",
+       "shape": "fabric"
+      },
+      {
+       "p": "mesh",
+       "shape": "sphere"
+      },
+      {
+       "p": "mesh",
+       "shape": "drip"
+      },
+      {
+       "p": "mesh",
+       "shape": "bubble"
+      }
+     ]
+    },
+    "what": "placement and deformation"
+   },
+   "drafted_for": "sculpt_one",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "plan_to_room": {
+   "expr": "array(box, 8×8) plan + rule(random(array(cube, 8×8), height), passage kept open) = plan_to_room — one seeded array read twice: as a plan on the wall and as the room you walk",
+   "from": [
+    "random_sizes",
+    "noise_heights",
+    "grid"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 8,
+      "dims": 2,
+      "role": "plan"
+     },
+     {
+      "op": "rule",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "cube"
+        },
+        "n": 8,
+        "dims": 2
+       },
+       "what": "height",
+       "driver": "independent|perlin"
+      },
+      "fn": "passage mask stays open"
+     }
+    ]
+   },
+   "drafted_for": "seeded_room",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "order_to_chance_net": {
+   "expr": "connect(decide(array(point, 7×13×3), regular net | draw > prob, by position)) = order_to_chance_net — one net from a rule you can predict to a rule you can only describe",
+   "from": [
+    "lattice",
+    "percolation",
+    "line"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "connect",
+    "of": {
+     "op": "decide",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "point"
+      },
+      "n": [
+       7,
+       13,
+       3
+      ],
+      "dims": 3
+     },
+     "rule": "with probability t(position) a draw decides the pipe, else the regular net"
+    },
+    "ties": "pipes up and to eight next-level neighbours"
+   },
+   "drafted_for": "random_pipe_lattice",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "drip_painting": {
+   "expr": "trail(step(sample(stroke: place, colour, width))) on quad + cursor = drip_painting — a random stroke generator leaves its marks; the painting only accumulates",
+   "from": [
+    "quad",
+    "trace"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "quad"
+     },
+     {
+      "op": "trail",
+      "of": {
+       "op": "step",
+       "of": {
+        "op": "engine",
+        "kind": "random",
+        "of": {
+         "t": "mesh_color"
+        },
+        "what": "stroke path, colour, width"
+       }
+      },
+      "on": "canvas texture"
+     }
+    ]
+   },
+   "drafted_for": "pollock_painting_in_3d",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "dart_estimate": {
+   "expr": "decide(sample(array(point, 500)), inside the circle) on quad = dart_estimate — count what falls inside: an area, and pi, from draws",
+   "from": [
+    "point",
+    "quad"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "quad"
+     },
+     {
+      "p": "mesh",
+      "shape": "circle"
+     },
+     {
+      "op": "decide",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "point"
+        },
+        "n": 500,
+        "dims": 2
+       }
+      },
+      "rule": "inside circle",
+      "count": "4 * inside / total"
+     }
+    ]
+   },
+   "drafted_for": "monte_carlo_dartboard",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "pipe_walk": {
+   "expr": "trail(decide(sample(direction of 6), no reversal, prefer straight), cylinder × 180) = pipe_walk — a walk in three dimensions that keeps its body",
+   "from": [
+    "cylinder",
+    "trace"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "trail",
+    "of": {
+     "op": "decide",
+     "of": {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "cylinder"
+       },
+       "n": 180,
+       "dims": 1
+      },
+      "what": "direction of six"
+     },
+     "rule": "no immediate reversal, prefer straight, stay in bounds"
+    }
+   },
+   "drafted_for": "pipe_dream",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "five_kinds_of_chance": {
+   "expr": "array(sphere, 100) under random | noise | rule | flock | sort = five_kinds_of_chance — the same hundred particles moved by five different meanings of random",
+   "from": [
+    "random_cubes",
+    "noise_heights",
+    "boids"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "mesh_color"
+       },
+       "n": 100,
+       "dims": 1
+      }
+     },
+     {
+      "op": "engine",
+      "kind": "noise",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "mesh_color"
+       },
+       "n": 100,
+       "dims": 1
+      }
+     },
+     {
+      "op": "rule",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "mesh_color"
+       },
+       "n": 100,
+       "dims": 1
+      },
+      "fn": "spiral: angle by index, radius by draw"
+     },
+     {
+      "op": "engine",
+      "kind": "flock",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "mesh_color"
+       },
+       "n": 100,
+       "dims": 1
+      }
+     },
+     {
+      "op": "sort",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "mesh_color"
+       },
+       "n": 100,
+       "dims": 1
+      },
+      "by": "distance to target"
+     }
+    ]
+   },
+   "drafted_for": "extreme_randomness",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "pheromone_relief": {
+   "expr": "field(height = accumulated mark, pheromone_mark with 5 walkers) = pheromone_relief — the marks pile up into ground: a ridge is where walkers kept agreeing",
+   "from": [
+    "pheromone_mark"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "field",
+    "of": {
+     "t": "pheromone_mark"
+    },
+    "fn": "height = accumulated deposit",
+    "agents": 5
+   },
+   "drafted_for": "pheromone_terrain",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "worley_cells": {
+   "expr": "field(F2 − F1, distance to sample(array(point, 30))) on quad = worley_cells — thrown points divide the plane: the pattern is who is nearest",
+   "from": [
+    "point",
+    "quad"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "quad"
+     },
+     {
+      "op": "field",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "point"
+        },
+        "n": 30,
+        "dims": 2
+       }
+      },
+      "fn": "second-nearest minus nearest distance"
+     }
+    ]
+   },
+   "drafted_for": "worley_noise",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "white_noise_ground": {
+   "expr": "step(random(heightfield, law)) + collider = white_noise_ground — a floor with one independent draw per vertex, redrawn as you stand on it",
+   "from": [
+    "random_sizes",
+    "field_terrain"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "step",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "p": "mesh",
+        "shape": "heightfield"
+       },
+       "law": "uniform|gaussian|poisson|exponential"
+      },
+      "motion": "heights animate"
+     },
+     {
+      "p": "collider",
+      "shape": "trimesh"
+     }
+    ]
+   },
+   "drafted_for": "random_space",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "octave_sum": {
+   "expr": "field(sum(field(sine layer) × 4, persistence, lacunarity)) on quad = octave_sum — one broad layer plus weaker, finer ones: detail is addition",
+   "from": [
+    "layered_noise",
+    "quad"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "quad"
+     },
+     {
+      "op": "field",
+      "of": {
+       "op": "times",
+       "of": {
+        "op": "field",
+        "fn": "sine layer at seeded offset"
+       },
+       "n": 4
+      },
+      "fn": "weighted sum, normalised"
+     }
+    ]
+   },
+   "drafted_for": "noise_mixer",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "biased_walk_tube": {
+   "expr": "extension(decide(sample(step × 6, 5 tries), nearer the goal), tube) + connect(steps, middle point) = biased_walk_tube — a walk that wanders but arrives, given a body and held to a centre",
+   "from": [
+    "point",
+    "line",
+    "trace"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "extension",
+      "as": "swept tube",
+      "of": {
+       "op": "decide",
+       "of": {
+        "op": "engine",
+        "kind": "random",
+        "of": {
+         "op": "array",
+         "of": {
+          "t": "point"
+         },
+         "n": 8,
+         "dims": 1
+        },
+        "tries": 5
+       },
+       "rule": "keep a move that ends nearer the goal"
+      }
+     },
+     {
+      "op": "connect",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "line"
+       },
+       "n": 8,
+       "dims": 1
+      },
+      "to": "one middle point"
+     }
+    ]
+   },
+   "drafted_for": "random_walk_tubes",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "one_safe_door": {
+   "expr": "decide(hand, random(door × 3, one passage)) = one_safe_door — the draw is made before you choose; you learn it with your body",
+   "from": [
+    "cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "decide",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "times",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "t": "box"
+        },
+        {
+         "p": "collider",
+         "shape": "box"
+        },
+        {
+         "p": "body",
+         "kind": "area",
+         "role": "fire jet"
+        }
+       ]
+      },
+      "n": 3
+     },
+     "pick": "one of three is the passage"
+    },
+    "by": "hand: choose a door"
+   },
+   "drafted_for": "random_doors",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "draw_choose_reveal": {
+   "expr": "times(config(decide(hand, random(lane × 2, which is short)), order of draw/choose/reveal), 3) = draw_choose_reveal — the same draw and the same choice in three orders: when did the door decide?",
+   "from": [
+    "one_safe_door"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "times",
+    "of": {
+     "op": "config",
+     "of": {
+      "op": "decide",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "times",
+        "of": {
+         "op": "compose",
+         "parts": [
+          {
+           "t": "box"
+          },
+          {
+           "p": "collider",
+           "shape": "box"
+          },
+          {
+           "p": "body",
+           "kind": "area",
+           "role": "choice plate"
+          }
+         ]
+        },
+        "n": 2
+       },
+       "pick": "which lane is the shortcut"
+      },
+      "by": "walk onto a floor plate"
+     },
+     "axis": "schedule: shown first | drawn after | hidden first"
+    },
+    "n": 3
+   },
+   "drafted_for": "door_timing_trials",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "random_wait_cube": {
+   "expr": "step(random(cube, wait), fixed cycle of states) = random_wait_cube — you know what it will do next, never when",
+   "from": [
+    "cube",
+    "travelling_cube"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "step",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "t": "cube"
+     },
+     "what": "standing and hidden waits"
+    },
+    "states": "idle, going out, hidden, coming back",
+    "collision": "switched with state"
+   },
+   "drafted_for": "r_c",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "timed_emitter": {
+   "expr": "physics(step(random(array(cube, 20), start, velocity, jitter), every interval)) = timed_emitter — a clock that keeps throwing: the source is fixed, each throw is drawn",
+   "from": [
+    "falling_cube",
+    "random_cubes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "t": "box"
+     },
+     {
+      "op": "engine",
+      "kind": "physics",
+      "of": {
+       "op": "step",
+       "of": {
+        "op": "engine",
+        "kind": "random",
+        "of": {
+         "op": "array",
+         "of": {
+          "t": "cube"
+         },
+         "n": 20,
+         "dims": 1
+        },
+        "what": "start x/z, velocity, jitter"
+       },
+       "every": "spawn interval"
+      }
+     }
+    ]
+   },
+   "drafted_for": "cube_projectile_spawner",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "waiting_and_profile": {
+   "expr": "step(pick_up_cube × 2, random wait) + array(random(array(point, 17), height), 5 in depth) = waiting_and_profile — chance in time beside chance in space: a wait you cannot predict, a ridge you can look across",
+   "from": [
+    "pick_up_cube",
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "step",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "times",
+        "of": {
+         "t": "pick_up_cube"
+        },
+        "n": 2
+       },
+       "what": "wait 0.3-1.3 s"
+      },
+      "motion": "arrive in one of two places"
+     },
+     {
+      "op": "array",
+      "of": {
+       "op": "compose",
+       "parts": [
+        {
+         "op": "engine",
+         "kind": "random",
+         "of": {
+          "op": "array",
+          "of": {
+           "t": "point"
+          },
+          "n": 17,
+          "dims": 1
+         },
+         "what": "height, ends fixed"
+        },
+        {
+         "p": "mesh",
+         "shape": "profile plane"
+        }
+       ]
+      },
+      "n": 5,
+      "dims": 1,
+      "config": "seed"
+     }
+    ]
+   },
+   "drafted_for": "waiting_profile",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "clipped_point": {
+   "expr": "rule(hand(random(grab_sphere, x y)), clamp to bounds) = clipped_point — one draw you can carry, and the bounds that keep correcting it",
+   "from": [
+    "grab_sphere"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "rule",
+    "of": {
+     "op": "hand",
+     "of": {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "t": "grab_sphere"
+      },
+      "what": "initial x, y"
+     }
+    },
+    "fn": "clamp to the square, z = 0"
+   },
+   "drafted_for": "randompoint",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "spacing_bench": {
+   "expr": "random(array(point, 30)) beside min_distance_sample = spacing_bench — the same stream thrown twice: kept as it falls, or filtered by distance",
+   "from": [
+    "min_distance_sample",
+    "random_cubes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "grab_sphere"
+       },
+       "n": 30,
+       "dims": 3
+      },
+      "law": "uniform|gaussian"
+     },
+     {
+      "t": "min_distance_sample"
+     }
+    ]
+   },
+   "drafted_for": "void_noise_spacing",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "spectral_bars": {
+   "expr": "times(random(array(box, 200), around a power law), 5 colours) = spectral_bars — noise told apart by what it weighs at each frequency: brown, pink, white, blue, violet",
+   "from": [
+    "gaussian_bins",
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "times",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "box"
+      },
+      "n": 200,
+      "dims": 1,
+      "profile": "power law"
+     },
+     "what": "variation around the prescribed curve"
+    },
+    "n": 5,
+    "config": "noise colour"
+   },
+   "drafted_for": "NoiseColors3D",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "white_noise_bars": {
+   "expr": "random(array(box, 50×50), height) = white_noise_bars — 2,500 heights, each drawn alone: no neighbour says anything about the next",
+   "from": [
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "random",
+    "of": {
+     "op": "array",
+     "of": {
+      "t": "box"
+     },
+     "n": 50,
+     "dims": 2
+    },
+    "what": "height"
+   },
+   "drafted_for": "WhiteNoiseGallery",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "uncertain_surface": {
+   "expr": "surface beside hand(random(surface, gauss per vertex), strength) = uncertain_surface — the same connections with moved points: how much noise before it is another surface?",
+   "from": [
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "p": "mesh",
+      "shape": "grid surface 16x16"
+     },
+     {
+      "op": "hand",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "p": "mesh",
+        "shape": "grid surface 16x16"
+       },
+       "law": "gauss",
+       "what": "vertex displacement"
+      },
+      "control": "strength slider"
+     }
+    ]
+   },
+   "drafted_for": "geometry_noise",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "related_signals": {
+   "expr": "random(array(slit, 8)) | step(accumulate) | drive(pink filter), one stream of draws = related_signals — the same draws three times: fresh, summed, filtered; relation is what the draw is added to",
+   "from": [
+    "random_sizes",
+    "accumulation"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "box"
+       },
+       "n": 8,
+       "dims": 1
+      },
+      "what": "shared uniform innovations"
+     },
+     {
+      "op": "step",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 8,
+        "dims": 1
+       },
+       "what": "shared uniform innovations"
+      },
+      "fn": "accumulate"
+     },
+     {
+      "op": "drive",
+      "of": {
+       "op": "engine",
+       "kind": "random",
+       "of": {
+        "op": "array",
+        "of": {
+         "t": "box"
+        },
+        "n": 8,
+        "dims": 1
+       },
+       "what": "shared uniform innovations"
+      },
+      "fn": "approximate pink filter"
+     }
+    ]
+   },
+   "drafted_for": "related_weather",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  },
+  "spacing_wall": {
+   "expr": "array(config(min_distance_sample, rule, distance, load, seed), 8) = spacing_wall — eight settings of one generator at a fixed volume: read the parameter off the spacing",
+   "from": [
+    "min_distance_sample"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "array",
+    "of": {
+     "op": "config",
+     "of": {
+      "t": "min_distance_sample"
+     },
+     "axes": "rule, distance, count, seed"
+    },
+    "n": 8,
+    "dims": 1
+   },
+   "drafted_for": "noise_config_wall",
+   "drafted_by": "robot pilot (Fable 5.2), 2026-11-10"
+  }
+ }
+}

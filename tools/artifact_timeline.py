@@ -302,6 +302,144 @@ def terms() -> dict:
         return {}
 
 
+# ---- drafts and the earned rule (Palle, 2026-11-10: "yes, do steps 2 and 3 on randomness") -------------------------
+# DRAFTS: terms an agent proposed for works that have none (the randomness pilot: Fable 5.2 read each work's code and
+# drafted a structural build tree). They wait in commons/modular/terms_drafts.json; a form may name one. When the page
+# SAVES a form whose term is a draft, the draft - with every draft it is built from - moves into terms.json: applying
+# the form on the page is the acceptance.
+# EARNED (Palle, 2026-11-08: "each floor only what it has earned"): a main row's form is made of parts. A part is
+# earned at that number when it is a block (assembly index 0), when an earlier row has shown it (as its form or inside
+# its form), when the hand holds it by the row's floor (items.json) or when the floor grants it (space_editor.json).
+# A row that needs a part nothing has earned is flagged "not earned"; a row field "early" (why) marks a deliberate
+# early glimpse and silences the flag.
+DRAFTS = ROOT / "commons/modular/terms_drafts.json"
+ITEMS = ROOT / "commons/data/inventory/items.json"
+SPACE_EDITOR = ROOT / "commons/data/inventory/space_editor.json"
+GRANT_TERMS = {"point": "point", "edge": "line", "triangle": "triangle", "quad": "quad", "wedge": "wedge",
+               "pyramid": "pyramid", "cube": "cube"}
+
+
+def drafts() -> dict:
+    try:
+        return read(DRAFTS).get("terms", {})
+    except (OSError, ValueError):
+        return {}
+
+
+def _assembly(tm: dict):
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from grammar_assembly import Assembly
+    return Assembly(tm)
+
+
+def _floor_terms(tm: dict) -> tuple:
+    """(hand, grants): term -> the first floor the hand holds it / the floor grants it"""
+    hand, grant = {}, {}
+    try:
+        for it in read(ITEMS).get("items", []):
+            fl = it.get("floor")
+            if not isinstance(fl, int):
+                continue
+            for name in (it.get("id"), it.get("token"), str(it.get("token") or "").removeprefix("mod_")):
+                if name and name in tm:
+                    hand[name] = min(hand.get(name, fl), fl)
+    except (OSError, ValueError):
+        pass
+    try:
+        se = read(SPACE_EDITOR)
+        for g in se.get("tools", []) + se.get("programs", []):
+            t = GRANT_TERMS.get(g.get("id"))
+            if t and isinstance(g.get("from_floor"), int):
+                grant[t] = min(grant.get(t, g["from_floor"]), g["from_floor"])
+    except (OSError, ValueError):
+        pass
+    return hand, grant
+
+
+def earned_flags(doc: dict, tm: dict) -> dict:
+    """main key -> its earned flag ("" when earned), walking the main track in number order. `tm` = terms + drafts."""
+    asm = _assembly(tm)
+    hand, grant = _floor_terms(tm)
+    blocks = {t for t in tm if not asm.term(t)[0]}
+    own_first = {}   # term -> the first main key whose own form it is (for "first shown at")
+    num = numbering(doc.get("main", []))
+    for r in doc.get("main", []):
+        t = (r.get("form") or {}).get("term")
+        if t:
+            own_first.setdefault(t, r["key"])
+    # a part only ONE work is made of, and nobody's own form, is that work's own construction (a helper a draft was
+    # built with), not something the track must show first; a part several works share is a form the tree needs
+    users = defaultdict(set)
+    for r in doc.get("main", []):
+        t = (r.get("form") or {}).get("term")
+        if t in tm:
+            for p in asm.term(t)[2]:
+                users[p].add(r["key"])
+    internal = {p for p, ks in users.items() if len(ks) == 1 and p not in own_first}
+    met, out = set(), {}
+    for r in doc.get("main", []):
+        t = (r.get("form") or {}).get("term")
+        out[r["key"]] = ""
+        if not t:
+            continue
+        if t not in tm:
+            out[r["key"]] = f"term {t} is not in the grammar"
+            continue
+        fl = r.get("floor") if isinstance(r.get("floor"), int) else 10 ** 6
+        parts = sorted(asm.term(t)[2])
+        missing = [p for p in parts if p not in met and p not in blocks and p not in internal
+                   and hand.get(p, 10 ** 6) > fl and grant.get(p, 10 ** 6) > fl]
+        if missing and not r.get("early"):
+            def where(p):
+                k = own_first.get(p)
+                return f"first shown at {num[k]['label']}" if k and k != r["key"] else "never shown on its own"
+            out[r["key"]] = "not earned: " + "; ".join(f"{p} ({where(p)})" for p in missing)
+        met.add(t)
+        met.update(parts)
+    return out
+
+
+def promote_drafts(names) -> list:
+    """the drafts these form terms name, with every draft they are built from, into terms.json (byte-stable indent 2,
+    as set_card writes it); removed from the drafts file. Returns what moved, or raises ValueError."""
+    dt_doc = read(DRAFTS) if DRAFTS.exists() else {"terms": {}}
+    dt = dt_doc.get("terms", {})
+    raw = TERMS.read_bytes()
+    g = json.loads(raw.decode("utf-8"))
+    if (json.dumps(g, indent=2, ensure_ascii=False) + "\n").encode("utf-8") != raw:
+        raise ValueError("terms.json is not in its indent-2 form; drafts not promoted")
+    have = g.get("terms", {})
+
+    def refs(n, out):
+        if isinstance(n, list):
+            for x in n:
+                refs(x, out)
+        elif isinstance(n, dict):
+            if "t" in n and "op" not in n:
+                out.add(str(n["t"]))
+            for v in n.values():
+                refs(v, out)
+    want, stack = set(), [n for n in names if n in dt and n not in have]
+    while stack:
+        n = stack.pop()
+        if n in want:
+            continue
+        want.add(n)
+        inner = set()
+        refs(dt[n].get("build"), inner)
+        stack += [x for x in inner if x in dt and x not in have]
+    if not want:
+        return []
+    for n in sorted(want):
+        d = dt.pop(n)
+        have[n] = {**{k: v for k, v in d.items() if k not in ("draft", "drafted_for", "drafted_by", "used_by")},
+                   "accepted": {"at": now(), "by": "timeline save", "drafted_by": d.get("drafted_by", ""),
+                                "drafted_for": d.get("drafted_for", "")}}
+    TERMS.write_bytes((json.dumps(g, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
+    _write(DRAFTS, json.dumps(dt_doc, indent=1, ensure_ascii=False) + "\n")
+    return sorted(want)
+
+
 def guess_form(key: str, floor, keys_on: dict, reg: dict, tm: dict) -> dict | None:
     """a first form for a row, marked guessed. keys_on: floor -> main keys numbered there, in timeline order."""
     term = (reg.get(key) or {}).get("term") or (key if key in tm else None)
@@ -692,6 +830,7 @@ def build_view() -> dict:
     for row in doc.get("main", []):
         if num[row["key"]]["base"]:
             children[num[row["key"]]["base"]].append(row["key"])
+    earned = earned_flags(doc, {**drafts(), **tm})
     for row in doc.get("main", []):
         nb = num[row["key"]]
         n = nb["label"]
@@ -719,13 +858,18 @@ def build_view() -> dict:
             flags.append("not on the construction path")
         if not e["registered"]:
             flags.append("no registry entry")
+        if earned.get(row["key"]):
+            flags.append(earned[row["key"]])
+        if row.get("early"):
+            e["early"] = row["early"]   # a deliberate early glimpse: the earned rule is silenced for it
         if row.get("cards"):
             e["cards_by_hand"] = list(row["cards"])   # the authored list: the page must send it back on Save
         if cards_before.get(row["key"]):
             e["cards"] = [card_of(t, tm) for t in cards_before[row["key"]]]
         e["flags"] = flags
         for f in flags:
-            gaps[f.split(",")[0] if f.startswith("numbered") else ("its base is not a numbered main work" if f.startswith("its base") else f)].append(n)
+            gaps[f.split(",")[0] if f.startswith("numbered") else ("its base is not a numbered main work" if f.startswith("its base")
+                 else ("not earned" if f.startswith("not earned") else ("term not in the grammar" if f.startswith("term ") else f)))].append(n)
         main.append(e)
     env = [{**describe(r["key"]), "why": r.get("why", ""), "form": r.get("form"),
             "lane": "collections" if (r.get("form") or {}).get("kind") == "collection" else "works"} for r in doc.get("environment", [])]
@@ -1101,7 +1245,7 @@ def save(text: str) -> int:
                 out.append(row)
         return out
 
-    main_rows = clean(body.get("main"), ["floor", "note", "form", "cards"])
+    main_rows = clean(body.get("main"), ["floor", "note", "form", "cards", "early"])
     env_rows = clean(body.get("environment"), ["why", "form"])
     rem_rows = clean(body.get("removed"), ["reason", "at", "placements"])
     keys = [r["key"] for r in main_rows + env_rows + rem_rows]
@@ -1111,8 +1255,15 @@ def save(text: str) -> int:
         return 5
     cur.update({"edited_at": now(), "main": main_rows, "environment": env_rows, "removed": rem_rows})
     write_authored(cur)
+    # a form saved with a DRAFT term is the draft accepted: it (and the drafts it is built from) joins terms.json
+    promoted, promote_error = [], ""
+    try:
+        promoted = promote_drafts({(r.get("form") or {}).get("term") for r in main_rows + env_rows} - {None})
+    except ValueError as e:
+        promote_error = str(e)
     v = write_view()
-    print(json.dumps({"ok": True, "edited_at": cur["edited_at"], "counts": v["counts"]}))
+    print(json.dumps({"ok": True, "edited_at": cur["edited_at"], "counts": v["counts"],
+                      **({"terms_accepted": promoted} if promoted else {}), **({"warning": promote_error} if promote_error else {})}))
     return 0
 
 
