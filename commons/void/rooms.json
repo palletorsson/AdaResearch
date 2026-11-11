@@ -33540,8 +33540,8 @@
           "artifact": "dice_throw",
           "station": "SE",
           "position": [
-            5.1,
-            3.9
+            9.6,
+            5.7
           ],
           "facing": 0,
           "height": 0,
@@ -33553,8 +33553,8 @@
           "artifact": "continuing_die",
           "station": "SE",
           "position": [
-            1.6,
-            4.0
+            3.9,
+            4.3
           ],
           "facing": 0,
           "height": 0,
@@ -33566,8 +33566,8 @@
           "artifact": "paired_dice_column",
           "station": "SW",
           "position": [
-            -2.3,
-            4.0
+            -3.8,
+            4.3
           ],
           "facing": 0,
           "height": 0,
@@ -33592,21 +33592,11 @@
       ],
       "props": [
         {
-          "id": "kit-slab-throw",
-          "kind": "concrete_slab",
-          "position": [
-            5.1,
-            2.0
-          ],
-          "facing": 0,
-          "scale": 1
-        },
-        {
           "id": "kit-closure-again",
           "kind": "closure_backdrop",
           "position": [
-            1.6,
-            2.0
+            3.9,
+            2.9
           ],
           "facing": 0,
           "scale": 1
@@ -33615,30 +33605,20 @@
           "id": "kit-hoarding-sum",
           "kind": "plywood_hoarding",
           "position": [
-            -2.3,
-            2.0
+            -3.8,
+            2.9
           ],
           "facing": 0,
           "scale": 1
         },
         {
-          "id": "kit-sheet-west",
-          "kind": "dust_sheet",
+          "id": "kit-slab-throw",
+          "kind": "concrete_slab",
           "position": [
-            -4.45,
-            2.0
+            9.6,
+            4.2
           ],
-          "facing": 270,
-          "scale": 1
-        },
-        {
-          "id": "kit-sheet-east",
-          "kind": "dust_sheet",
-          "position": [
-            6.8,
-            2.0
-          ],
-          "facing": 90,
+          "facing": 0,
           "scale": 1
         },
         {
@@ -33742,6 +33722,26 @@
           "scale": 1
         },
         {
+          "id": "kit-parapet-8",
+          "kind": "counter_wall",
+          "position": [
+            8.4,
+            8.55
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "kit-parapet-9",
+          "kind": "counter_wall",
+          "position": [
+            10.86,
+            8.55
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
           "id": "kit-scaffold-north",
           "kind": "timber_scaffold",
           "position": [
@@ -33795,52 +33795,52 @@
       "impact_cells": [],
       "route": [
         {
-          "label": "01 / ONE SOURCE, THREE RULES\nRead across: which shape belongs to which rule?",
+          "label": "01 / THROW AGAIN, ADD TWO\nA six goes on. Two dice make a peak in the middle.",
+          "position": [
+            0,
+            6.2
+          ]
+        },
+        {
+          "label": "02 / THE THROW\nThe die decides. Nobody computes it.",
+          "position": [
+            9.6,
+            7.6
+          ]
+        },
+        {
+          "label": "03 / HEADS OR TAILS\nTwo bins are enough to count.",
+          "position": [
+            -10.0,
+            8.0
+          ]
+        },
+        {
+          "label": "04 / ONE SOURCE, THREE RULES\nRead across: which shape belongs to which rule?",
           "position": [
             -16.6,
             -3.3
           ]
         },
         {
-          "label": "02 / ONE MACHINE, FOUR LAWS\nThe same draws. Four rules for what a draw is worth.",
+          "label": "05 / ONE MACHINE, FOUR LAWS\nThe same draws. Four rules for what a draw is worth.",
           "position": [
             0,
             -3.2
           ]
         },
         {
-          "label": "03 / WHERE THE PAINT LANDS\nMost near the middle. A few far out.",
+          "label": "06 / WHERE THE PAINT LANDS\nMost near the middle. A few far out.",
           "position": [
             10,
-            3.6
+            3.4
           ]
         },
         {
-          "label": "04 / CHANCE FALLS\nLeft or right, eight times. Count where they land.",
+          "label": "07 / CHANCE FALLS\nLeft or right, eight times. Count where they land.",
           "position": [
             16.3,
             -3.3
-          ]
-        },
-        {
-          "label": "05 / THE THROW\nThe die decides. Nobody computes it.",
-          "position": [
-            5.1,
-            6.4
-          ]
-        },
-        {
-          "label": "06 / THROW AGAIN, ADD TWO\nA six goes on. Two dice make a peak in the middle.",
-          "position": [
-            -0.4,
-            6.4
-          ]
-        },
-        {
-          "label": "07 / HEADS OR TAILS\nTwo bins are enough to count.",
-          "position": [
-            -10.0,
-            8.0
           ]
         }
       ],
@@ -33942,10 +33942,10 @@
           "artifact": "seeded_room",
           "station": "SE",
           "position": [
-            0,
-            4.4
+            0.1,
+            1.8
           ],
-          "facing": 0,
+          "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
@@ -34318,7 +34318,7 @@
           "id": "playground-lookout",
           "kind": "walkup_lookout",
           "position": [
-            0,
+            6.5,
             4.95
           ],
           "facing": 0,
@@ -34328,17 +34328,17 @@
       "impact_cells": [],
       "route": [
         {
-          "label": "01 / LOOK DOWN\nFrom two metres the ground is a picture.",
+          "label": "01 / WALK THE DRAW\nEvery height was drawn alone. Step on anywhere.",
           "position": [
-            -6.2,
-            6.2
+            0,
+            5.3
           ]
         },
         {
-          "label": "02 / WALK THE DRAW\nEvery height was drawn alone. Step on anywhere.",
+          "label": "02 / LOOK DOWN\nFrom two metres the ground is a picture.",
           "position": [
-            5.3,
-            4.3
+            1.7,
+            7.4
           ]
         }
       ],

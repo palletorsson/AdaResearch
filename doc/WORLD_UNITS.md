@@ -76,6 +76,29 @@ vocabulary: one-pixel lines, a part hidden inside another, colours written and n
 the tower, a simulation that saturates and freezes, a size wrong for its place, staging that hides the subject.
 Fixes land one work per commit with a before/after at one camera.
 
+## The arrival rule: how a floor is curated
+
+Palle, 2026-11-11, showing the first twelve floors: "this is where I worked most on the setup; the floors we are
+working on could be better. Can you imagine walking the floor and improving them for the player? Any universal idea
+that easily could fix the progression and the curation of space?"
+
+**Stand where the player lands.** 176 of the 199 declared spawn points are one spot - (0, 7.8), the south middle of
+the slab, looking north - and on the randomness floors the way down is shaft A. So every floor is a line from that
+spot to that shaft, and it is composed from that spot:
+
+1. **Nothing in the face** - 3 m clear in front of the arrival point.
+2. **The first work first** - the floor's first work in timeline order is the nearest thing, or the way to it is what
+   the eye meets; later works stand deeper. Space and the timeline tell the same order.
+3. **The biggest thing in view** - the floor's hero is visible from the arrival point, even if it comes last.
+4. **Works face south** (toward the arriving player) and captions read facing north.
+5. **Light and a clear floor** - on floors 0-11 each stop has a pool of light and bare slab around it; the randomness
+   floors have no work lights at all (2.1 a floor against 0.0), and 17 route stops a floor against 1.8.
+
+`python tools/void_arrival_shots.py <outdir> <floors>` takes the picture (straight ahead, 40 degrees left and right).
+On the day it was written it convicted three floors arranged that same day from above: on floor 87 a room had been
+moved ONTO the spawn point, on floor 90 a walk-up stood 1.3 m in front of the face, on floor 85 the floor's first works
+were hidden behind its later ones. All three were re-laid by the rule and walked from the arrival point.
+
 ## Density: how a floor is filled
 
 Palle, 2026-11-11: "arrange the floor to have more and more visual density ... many of the objects need wall or other
