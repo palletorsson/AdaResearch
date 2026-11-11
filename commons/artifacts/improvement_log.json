@@ -1646,6 +1646,17 @@
       "tower": "floor 90 (Random_Space): random_space (0.25,-3) s1.4 h0.2 -> (0,-1.6) s1 h0.02 with slot_size 12.8 x 9.6, slot_depth 0.45, rim 0.5, edge band 1.0, height_scale 0.17, resolution 26; prop walkup_lookout at (0, 4.95); two route stops. Before: box 15.4 x 28 m, 8 m past the north edge, over both shafts, four columns inside, half buried in the slab; rays 'walkable' (276 m2, first step 0.04) but the walker stopped at its border. After: 12.8 x 9.6 m, no faults; rays 97 m2 standable, 0.4 m2 steep; the walker climbs the lookout to 2.0 m, returns, steps onto the field and crosses it (feet up to 0.34 m)",
       "learned": "the rays called it walkable twice when a body could not walk it: a jagged border (the slot's flat rim fixes it) and, once fitted at the default mesh, 22 % of the ground steeper than 45 degrees (resolution 26; the verdict now counts the steep share)",
       "capture": "ada_run/improve/playground_90/playground_before_after.png; before/standable.json, after/standable.json"
+    },
+    {
+      "lookup_name": "seeded_room (floor 87) + the standable test across floors 77-92",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": false,
+      "verified": true,
+      "found_by": "Palle: 'yes, run the test across the randomness floors'; tools/probes/void_standable.gd on all sixteen floors, then the walker sent to each work the rays called walkable",
+      "measured": "192 works and props: 167 not ground, 7 walkable by rays, 10 out of reach, 3 rough, 4 outside the slab, 1 no mesh. Of the ray-walkable ones the walker reached tile_floor_study (80), pheromone_terrain (89, flat collider) and geometry_noise (92); it was stopped at entropy_ruin's border (79) and at random_walk_128's glass (84, 81 m2 of ground under an authored enclosure). Out of reach but real platforms: the kit's container roofs on floor 85 (2.59 m)",
+      "tower": "floor 87 (Random_Space_Geometry): seeded_room (-1.5, 4.5) facing 180 -> (0, 4.4) facing 0. Its entrance - the blue path a rule keeps open - faced the void 0.3 m past the south edge, with column (-5, 7) inside the room; now it faces the floor's centre and the room stands on the slab between the columns (x +-4.37, z -1.36..8.77), no faults. Walked: entrance, ten legs of the path, out the west side - every leg arrives",
+      "left": "Palle's calls: open random_walk_128's glass or keep it a specimen; give pheromone_terrain a collider that follows its ridges; a way up to the container roofs; mushrooms (floor 86) is 59 % steeper than 45 degrees",
+      "capture": "ada_run/improve/playground_87/seeded_room_before_after.png; ada_run/improve/standable_randomness/ground.json and walks/"
     }
   ]
 }

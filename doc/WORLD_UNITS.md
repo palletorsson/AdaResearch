@@ -107,6 +107,13 @@ floors 77-79 fill 62-76 % of their storey; floor 85 filled 0.2 %. The moves, in 
    bumps were too steep (22 % over 45 degrees, the walker stuck in a pocket), so `resolution: 26` gives it the cells
    it had. Beside it a walk-up lookout (`walkup_lookout`: the cube + wedge walk-up with its own recipe): the walker
    climbs to 2 m, looks down on the field, comes down and crosses it. Both mistakes were found by the walk, not the rays.
+   **Across the randomness floors** (77-92, 192 works and props): 167 not ground, 7 walkable by rays, 10 out of
+   reach, 3 rough. The walker then went to each "walkable" one: `random_walk_128` (81 m2, floor 84) is ground under a
+   glass enclosure and `entropy_ruin` stops a body at its border - closed; `tile_floor_study`, `pheromone_terrain`
+   (a flat collider under its ridges) and `geometry_noise` let it in. So the rays find candidates and the walk decides.
+   **Second playground, floor 87**: `seeded_room` calls itself a walkable room, and its entrance faced the void
+   0.3 m past the south edge; turned to face the floor's centre, the walker enters the blue path and walks all ten
+   legs of it out the other side.
 
 **The staging kit** (2026-11-11, `commons/artifacts/construction_site/README.md`): sixteen reusable pieces at three
 heights - a margin you see over (counter wall, barriers), a backdrop above head height (concrete slab, hoarding,
