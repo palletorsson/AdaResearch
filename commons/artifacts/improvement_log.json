@@ -1523,6 +1523,20 @@
       ],
       "tower": "floor 116 (CA_EdgeOfChaos) (-16, -2), scale 0.4, height 2, preview_grid 12 - unchanged placement; survey: no faults",
       "capture": "ada_run/improve/volumetric_fog_ca/before_after.png (standalone and floor 116)"
+    },
+    {
+      "lookup_name": "ten_print_structure, dice_throw, coin_toss, extreme_randomness, random_space",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": false,
+      "verified": true,
+      "found_by": "the eye unit (Fable 5.2, randomness floors 77-92): each work photographed where it stands against its desire:",
+      "tower": [
+        "floor 81 (Randomness_10_PRINT_Algorithm) ten_print_structure (-7, 10) -> (-10, 5): its maze ran off the slab's long edge; now on the slab, no faults",
+        "floor 82 dice_throw (-3, 10) -> (1, 7) and coin_toss (-8, 10) -> (-11, 7): they stood on the z = 9 edge, so a thrown die or coin fell into the void; now on the slab, no faults",
+        "floor 88 extreme_randomness z -10 -> -7: it hung past the slab edge; it hangs at 1.5 m by design, now over the floor",
+        "floor 90 random_space height 0 -> 0.2: the slab cut its relief; lifted, the relief stands whole (its size faults remain - a code fix, not a move)"
+      ],
+      "capture": "ada_run/improve/eye_placements/before_after.png (tools/probes/color_survey.gd --floors=81,82,88,90)"
     }
   ]
 }
