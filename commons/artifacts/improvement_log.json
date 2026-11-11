@@ -1587,6 +1587,19 @@
       ],
       "tower": "floor 77 (Random_Definition) 'frames' (10, 6.2) facing 0 - unchanged; its orientation belongs to the authored route",
       "capture": "ada_run/improve/void_random_frames/before_after.png (2.6 m, from the front); front_before / front_after at 10 m"
+    },
+    {
+      "lookup_name": "curl_noise_particles",
+      "timestamp": "2026-11-11",
+      "gdscript_changed": true,
+      "verified": true,
+      "found_by": "the eye unit (Fable 5.2): 'a faint 70 cm wire box at ankle height with a dusting of pale blue specks; no ribbons, no swirl to be read' - verdict partly, fault thin lines. Confirmed from 1.6 m before the change",
+      "code": [
+        "NO RIBBONS: the desire is 'swirling blue-to-white ribbons', the drawing was 4 mm dots plus a one-pixel 2.5 cm stub on every third particle, rebuilt as an ImmediateMesh every frame. Now each particle leaves its last trail_samples (10) positions, one every trail_interval (0.05 s), as crossed-quad segments trail_width (4 mm) thick in one MultiMesh, coloured by speed, fading with age in a small shader that reads the age from INSTANCE_ID - so a sample writes one transform per particle (the newest segment over the oldest) whatever the ribbon's length; a particle that leaves the bounds clears its ribbon. trail_samples 0 draws none",
+        "COST, measured headless over 360 frames: 2.4-2.6 ms a frame with or without the trail (HEAD with its per-frame stubs 2.4-3.4 ms); the simulation itself is the 2.4 ms - 300 particles x 12 sin-noise samples a frame in GDScript, a Quest budget question left for later. Ribbon span at the median speed 0.24 m/s: 12 cm (30 cm at the tower's scale)"
+      ],
+      "tower": "floor 87 (Random_Space_Geometry) (-9, -5): height 0.25 -> 1.0, scale 1 -> 2.5: a 1.75 m box at chest height (0.37-1.63 m), no faults",
+      "capture": "ada_run/improve/curl_noise_particles/before_after.png"
     }
   ]
 }

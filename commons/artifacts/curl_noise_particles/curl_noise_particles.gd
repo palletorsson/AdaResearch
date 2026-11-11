@@ -23,6 +23,13 @@ class_name CurlNoiseParticles
 @export var noise_scale: float = 2.5
 @export var flow_speed: float = 0.3
 @export var time_scale: float = 0.15
+## The ribbons: each particle leaves its last `trail_samples` positions, one every `trail_interval`
+## seconds, as segments `trail_width` thick that fade with age. Until 2026-11-11 the flow was
+## drawn as one-pixel 2.5 cm stubs on every third particle beside 4 mm dots - specks, no
+## ribbon and no swirl to read (the eye unit, floor 87). trail_samples 0 draws no trail.
+@export var trail_samples: int = 10
+@export var trail_interval: float = 0.05
+@export var trail_width: float = 0.004
 
 # --- Internal ---
 
@@ -34,7 +41,12 @@ var _info_label: Label3D
 
 var _positions: PackedVector3Array
 var _velocities: PackedVector3Array
-var _trail_mesh: MeshInstance3D
+var _trail_mesh: MultiMeshInstance3D
+var _trail_mm: MultiMesh
+var _trail_mat: ShaderMaterial
+var _trail_head: int = 0            # the ring slot written last; every particle shares it
+var _trail_clock: float = 0.0
+var _last_sample: PackedVector3Array  # where each particle's newest segment ends
 
 var _time: float = 0.0
 var _rng: RandomNumberGenerator
@@ -142,14 +154,60 @@ func _create_multimesh() -> void:
 # Trail mesh (ImmediateMesh rebuilt each frame for flow ribbons)
 # ------------------------------------------------------------------
 
+const TRAIL_SHADER := """
+shader_type spatial;
+render_mode unshaded, cull_disabled, blend_mix, depth_draw_never;
+uniform int head = 0;
+uniform int samples = 10;
+varying float age;
+void vertex() {
+	// instances are laid out particle-major: particle * samples + slot
+	int slot = INSTANCE_ID % samples;
+	age = float((head - slot + samples) % samples) / float(samples);
+}
+void fragment() {
+	ALBEDO = COLOR.rgb;
+	ALPHA = COLOR.a * (1.0 - age);
+}
+"""
+
+
+## A ring of `trail_samples` segments per particle in one MultiMesh. A sample writes only the
+## newest segment of each particle (over its oldest), and the shader fades each by its age, so
+## the cost is one transform per particle per sample whatever the ribbon's length.
 func _create_trail_mesh() -> void:
-	_trail_mesh = MeshInstance3D.new()
+	trail_samples = maxi(0, trail_samples)
+	if trail_samples < 2:
+		return
+	# Two crossed quads along +Z, unit length and width: visible from every side but its own axis.
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for side: Vector3 in [Vector3(0.5, 0, 0), Vector3(0, 0.5, 0)]:
+		var a: Vector3 = -side + Vector3(0, 0, -0.5)
+		var b: Vector3 = side + Vector3(0, 0, -0.5)
+		var c: Vector3 = side + Vector3(0, 0, 0.5)
+		var d: Vector3 = -side + Vector3(0, 0, 0.5)
+		for v in [a, b, c, a, c, d]: st.add_vertex(v)
+	_trail_mm = MultiMesh.new()
+	_trail_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_trail_mm.use_colors = true
+	_trail_mm.mesh = st.commit()
+	_trail_mm.instance_count = particle_count * trail_samples
+	var hidden := Transform3D(Basis().scaled(Vector3.ZERO), Vector3.ZERO)
+	for i in _trail_mm.instance_count:
+		_trail_mm.set_instance_transform(i, hidden)
+		_trail_mm.set_instance_color(i, Color(0, 0, 0, 0))
+	var shader := Shader.new()
+	shader.code = TRAIL_SHADER
+	_trail_mat = ShaderMaterial.new()
+	_trail_mat.shader = shader
+	_trail_mat.set_shader_parameter("samples", trail_samples)
+	_trail_mesh = MultiMeshInstance3D.new()
 	_trail_mesh.name = "TrailMesh"
-	var mat = StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	_trail_mesh.material_override = mat
+	_trail_mesh.multimesh = _trail_mm
+	_trail_mesh.material_override = _trail_mat
+	# The ribbons stay inside the bounds the particles respawn in.
+	_trail_mesh.custom_aabb = AABB(-bounds * 0.5, bounds)
 	add_child(_trail_mesh)
 
 
@@ -204,6 +262,7 @@ func _spawn_particles() -> void:
 			_rng.randf_range(-hz, hz)
 		)
 		_velocities[i] = Vector3.ZERO
+	_last_sample = _positions.duplicate()
 
 
 # ------------------------------------------------------------------
@@ -255,7 +314,7 @@ func _process(delta: float) -> void:
 	_time += delta
 	_update_particles(delta)
 	_update_multimesh()
-	_update_trails()
+	_update_trails(delta)
 
 
 func _update_particles(delta: float) -> void:
@@ -282,6 +341,7 @@ func _update_particles(delta: float) -> void:
 				randf_range(-hz * 0.9, hz * 0.9)
 			)
 			_velocities[i] = Vector3.ZERO
+			_clear_trail(i)
 
 
 func _update_multimesh() -> void:
@@ -316,46 +376,48 @@ func _update_multimesh() -> void:
 		_multimesh.set_instance_color(i, color)
 
 
-func _update_trails() -> void:
-	# Draw short trail lines behind a subset of particles for flow visualization
-	var im = ImmediateMesh.new()
-	im.surface_begin(Mesh.PRIMITIVE_LINES)
+func _update_trails(delta: float) -> void:
+	if _trail_mm == null:
+		return
+	_trail_clock += delta
+	if _trail_clock < trail_interval:
+		return
+	_trail_clock = 0.0
+	_trail_head = (_trail_head + 1) % trail_samples
+	_trail_mat.set_shader_parameter("head", _trail_head)
 
 	var max_speed_sq: float = 0.0
 	for i in range(particle_count):
-		var spd_sq = _velocities[i].length_squared()
-		if spd_sq > max_speed_sq:
-			max_speed_sq = spd_sq
-	var max_spd = sqrt(max_speed_sq) if max_speed_sq > 0.0001 else 1.0
+		max_speed_sq = maxf(max_speed_sq, _velocities[i].length_squared())
+	var max_spd: float = sqrt(max_speed_sq) if max_speed_sq > 0.0001 else 1.0
 
-	# Draw trails for every 3rd particle to keep it readable
-	var trail_length: float = 0.025
-	for i in range(0, particle_count, 3):
-		var pos = _positions[i]
-		var vel = _velocities[i]
-		var spd = vel.length()
-		if spd < 0.001:
+	for i in range(particle_count):
+		var a: Vector3 = _last_sample[i]
+		var b: Vector3 = _positions[i]
+		_last_sample[i] = b
+		var slot: int = i * trail_samples + _trail_head
+		var along: Vector3 = b - a
+		var length: float = along.length()
+		if length < 0.00001:
+			_trail_mm.set_instance_transform(slot, Transform3D(Basis().scaled(Vector3.ZERO), b))
 			continue
+		var z: Vector3 = along / length
+		var x: Vector3 = z.cross(Vector3.UP if absf(z.y) < 0.9 else Vector3.RIGHT).normalized()
+		var y: Vector3 = z.cross(x)
+		_trail_mm.set_instance_transform(slot, Transform3D(Basis(x * trail_width, y * trail_width, z * length), (a + b) * 0.5))
+		var t_norm: float = clampf(_velocities[i].length() / max_spd, 0.0, 1.0)
+		var color: Color = _color_slow.lerp(_color_mid, t_norm * 2.0) if t_norm < 0.5 else _color_mid.lerp(_color_fast, (t_norm - 0.5) * 2.0)
+		color.a = 0.55 + 0.45 * t_norm
+		_trail_mm.set_instance_color(slot, color)
 
-		var tail = pos - vel.normalized() * trail_length
 
-		var t_norm = clampf(spd / max_spd, 0.0, 1.0)
-		var color: Color
-		if t_norm < 0.5:
-			color = _color_slow.lerp(_color_mid, t_norm * 2.0)
-		else:
-			color = _color_mid.lerp(_color_fast, (t_norm - 0.5) * 2.0)
-
-		var head_color = Color(color, 0.5)
-		var tail_color = Color(color, 0.08)
-
-		im.surface_set_color(tail_color)
-		im.surface_add_vertex(tail)
-		im.surface_set_color(head_color)
-		im.surface_add_vertex(pos)
-
-	im.surface_end()
-	_trail_mesh.mesh = im
+## A particle that left the bounds starts again elsewhere: its old ribbon would draw a line across the box.
+func _clear_trail(i: int) -> void:
+	if _trail_mm == null:
+		return
+	_last_sample[i] = _positions[i]
+	for k in trail_samples:
+		_trail_mm.set_instance_transform(i * trail_samples + k, Transform3D(Basis().scaled(Vector3.ZERO), _positions[i]))
 
 
 # ------------------------------------------------------------------
