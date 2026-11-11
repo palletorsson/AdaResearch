@@ -18,6 +18,19 @@ func world_box(host: Node3D) -> AABB:
 		result = bounds if first else result.merge(bounds); first = false
 	return result
 
+## What a BODY meets (2026-11-11, tools/void_arrange.py): the box of the parts that begin below head height. The whole
+## box also holds what hangs above - the supply line a ceiling carrier runs to its station at 4.8 m made every carried
+## work read 10 to 13 m wide - and that is not a footprint.
+func body_box(host: Node3D, level: float) -> AABB:
+	var result := AABB(); var first := true
+	for node in host.find_children("*", "GeometryInstance3D", true, false):
+		var g := node as GeometryInstance3D
+		if not _counts(host, g): continue
+		var bounds := _part_box(g)
+		if bounds.size.length() < .001 or bounds.position.y - level > 1.9 or bounds.end.y - level < .02: continue
+		result = bounds if first else result.merge(bounds); first = false
+	return result
+
 ## Is there floor under the work? A 5 x 5 grid of rays over its footprint, from 0.4 m above the slab down to 0.4 m
 ## below it, ignoring the work's own bodies: "under" = samples with ground, "outside" = samples past the 42 x 18 m
 ## slab, "outside_held" = those of them that still find ground (a landing, a balcony, an extension).
@@ -164,6 +177,10 @@ func run() -> void:
 			else:
 				row["box"] = [snappedf(b.position.x, .01), snappedf(b.position.y - level, .01), snappedf(b.position.z, .01),
 					snappedf(b.end.x, .01), snappedf(b.end.y - level, .01), snappedf(b.end.z, .01)]
+				var fb := body_box(mount, level)
+				if fb.size.length() >= .01:
+					row["foot"] = [snappedf(fb.position.x, .01), snappedf(fb.position.y - level, .01), snappedf(fb.position.z, .01),
+						snappedf(fb.end.x, .01), snappedf(fb.end.y - level, .01), snappedf(fb.end.z, .01)]
 				row["parts"] = largest(mount, level)
 				row["ground"] = ground(mount, b, level)
 			rows.append(row)

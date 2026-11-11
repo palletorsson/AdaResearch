@@ -36,13 +36,18 @@ ENCLOSURE = 60.0      # m2: a work whose box is this large is a room or a ground
 
 
 def measured() -> dict:
-    """(map, placement id) -> (at [x, z], box [x0, y0, z0, x1, y1, z1]) from the last tower-wide size survey"""
+    """(map, placement id) -> (at [x, z], box [x0, y0, z0, x1, y1, z1]) from the size surveys, the newest run of a
+    floor last so it wins (as tools/void_size_survey.py reads them). Where a run recorded `foot` - the box of the parts
+    that begin below head height - that is the box: a whole-work box also holds the supply line a ceiling carrier
+    runs to its station at 4.8 m, which made every carried work read 10 to 13 m wide (floor 79, 2026-11-11)."""
     out = {}
-    for p in glob.glob(str(ROOT / "ada_run/void-size-survey/all-*/survey.json")):
-        for f in json.loads(Path(p).read_text(encoding="utf-8"))["floors"].values():
+    runs = [Path(p) for p in glob.glob(str(ROOT / "ada_run/void-size-survey/*-[0-9]*/survey.json"))]
+    for p in sorted(runs, key=lambda p: p.stat().st_mtime):
+        for f in json.loads(p.read_text(encoding="utf-8"))["floors"].values():
             for w in f.get("works", []):
-                if w.get("box") and w.get("at") and all(isinstance(v, (int, float)) for v in list(w["box"]) + list(w["at"])):
-                    out[(f.get("map"), w["id"])] = (w["at"], w["box"])
+                b = w.get("foot") or w.get("box")
+                if b and w.get("at") and all(isinstance(v, (int, float)) for v in list(b) + list(w["at"])):
+                    out[(f.get("map"), w["id"])] = (w["at"], b)
     return out
 
 
