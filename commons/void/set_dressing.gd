@@ -34,7 +34,16 @@ const PREFABS := {
 	"scaffold_tarp": preload("res://commons/artifacts/construction_site/scaffold_tarp.tscn"),
 	"striped_barricade": preload("res://commons/artifacts/construction_site/striped_barricade.tscn"),
 	"chainlink_panel": preload("res://commons/artifacts/construction_site/chainlink_panel.tscn"),
-	"unfinished_wall": preload("res://commons/artifacts/construction_site/unfinished_wall.tscn")
+	"unfinished_wall": preload("res://commons/artifacts/construction_site/unfinished_wall.tscn"),
+	"concrete_slab": preload("res://commons/artifacts/construction_site/concrete_slab.tscn"),
+	"counter_wall": preload("res://commons/artifacts/construction_site/counter_wall.tscn"),
+	"formwork_panel": preload("res://commons/artifacts/construction_site/formwork_panel.tscn"),
+	"timber_scaffold": preload("res://commons/artifacts/construction_site/timber_scaffold.tscn"),
+	"plywood_hoarding": preload("res://commons/artifacts/construction_site/plywood_hoarding.tscn"),
+	"art_crate_open": preload("res://commons/artifacts/construction_site/art_crate_open.tscn"),
+	"closure_backdrop": preload("res://commons/artifacts/construction_site/closure_backdrop.tscn"),
+	"steel_props": preload("res://commons/artifacts/construction_site/steel_props.tscn"),
+	"dust_sheet": preload("res://commons/artifacts/construction_site/dust_sheet.tscn")
 }
 
 static func build(building: Node3D, host: Node3D, item: Dictionary, definition: Dictionary) -> StaticBody3D:
@@ -69,10 +78,10 @@ static func build(building: Node3D, host: Node3D, item: Dictionary, definition: 
 		for key in definition.get("settings",{}): prefab.set(key,definition.settings[key])
 		body.add_child(prefab)
 		return body
-	var finish: StandardMaterial3D = building.material(Color(str(item.get("color", definition.color))), 0.83, 0.15 if item.kind == "container" else 0.0)
+	var finish: StandardMaterial3D = building.material(Color(str(item.get("color", definition.color))), 0.83, 0.15 if str(item.kind).begins_with("container") else 0.0)
 	var dark: StandardMaterial3D = building.material(Color("343b3d"), 0.7, 0.4)
 	building.box(body, "Shell", Vector3(0, size.y/2, 0), size - Vector3(0.06, 0.04, 0.06), finish, false)
-	if item.kind == "container":
+	if str(item.kind).begins_with("container"):   # 40 ft, 20 ft, 10 ft: one builder, the size from the catalogue
 		# Repeated corrugations share one draw per long side.
 		for side in [-1, 1]:
 			var placements: Array[Vector3] = []

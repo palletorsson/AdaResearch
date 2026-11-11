@@ -83997,6 +83997,137 @@
       "scene": "res://commons/void/laser_pickup.tscn",
       "collision": "parts",
       "group": "Architectural interfaces"
+    },
+    "concrete_slab": {
+      "label": "Free-standing concrete slab",
+      "size": [
+        3.0,
+        3.2,
+        0.9
+      ],
+      "color": "#9a9b95",
+      "scene": "res://commons/artifacts/construction_site/concrete_slab.tscn",
+      "collision": "parts",
+      "group": "Building"
+    },
+    "counter_wall": {
+      "label": "Counter wall",
+      "size": [
+        2.46,
+        1.05,
+        0.44
+      ],
+      "color": "#b9b9b3",
+      "scene": "res://commons/artifacts/construction_site/counter_wall.tscn",
+      "collision": "parts",
+      "group": "Barriers"
+    },
+    "formwork_panel": {
+      "label": "Propped formwork panel",
+      "size": [
+        2.5,
+        3.0,
+        1.52
+      ],
+      "color": "#b9a27c",
+      "scene": "res://commons/artifacts/construction_site/formwork_panel.tscn",
+      "collision": "parts",
+      "group": "Building"
+    },
+    "timber_scaffold": {
+      "label": "Timber scaffold bay",
+      "size": [
+        3.14,
+        3.4,
+        1.42
+      ],
+      "color": "#9b8f78",
+      "scene": "res://commons/artifacts/construction_site/timber_scaffold.tscn",
+      "collision": "parts",
+      "group": "Building"
+    },
+    "plywood_hoarding": {
+      "label": "Plywood site hoarding",
+      "size": [
+        3.64,
+        2.5,
+        0.99
+      ],
+      "color": "#c4ae88",
+      "scene": "res://commons/artifacts/construction_site/plywood_hoarding.tscn",
+      "collision": "parts",
+      "group": "Barriers"
+    },
+    "art_crate_open": {
+      "label": "Opened art crate",
+      "size": [
+        2.44,
+        2.36,
+        1.8
+      ],
+      "color": "#b9a27c",
+      "scene": "res://commons/artifacts/construction_site/art_crate_open.tscn",
+      "collision": "parts",
+      "group": "Storage"
+    },
+    "closure_backdrop": {
+      "label": "Full-height closure backdrop",
+      "size": [
+        4.0,
+        5.6,
+        0.96
+      ],
+      "color": "#e2dfd4",
+      "scene": "res://commons/artifacts/construction_site/closure_backdrop.tscn",
+      "collision": "parts",
+      "group": "Building",
+      "reaches_ceiling": true
+    },
+    "steel_props": {
+      "label": "Steel props, row of three",
+      "size": [
+        2.6,
+        5.6,
+        0.25
+      ],
+      "color": "#8a4a3c",
+      "scene": "res://commons/artifacts/construction_site/steel_props.tscn",
+      "collision": "parts",
+      "group": "Building",
+      "reaches_ceiling": true
+    },
+    "dust_sheet": {
+      "label": "Full-height dust sheet",
+      "size": [
+        3.16,
+        5.6,
+        0.27
+      ],
+      "color": "#cfd4d2",
+      "scene": "res://commons/artifacts/construction_site/dust_sheet.tscn",
+      "collision": "parts",
+      "group": "Building",
+      "reaches_ceiling": true
+    },
+    "container_20ft": {
+      "label": "20 ft standard shipping container",
+      "size": [
+        2.438,
+        2.591,
+        6.058
+      ],
+      "color": "#7a5a4a",
+      "group": "Storage"
+    },
+    "container_10ft": {
+      "label": "10 ft shipping container",
+      "size": [
+        2.438,
+        2.591,
+        2.991
+      ],
+      "color": "#4f6b78",
+      "group": "Storage"
     }
   }
 }

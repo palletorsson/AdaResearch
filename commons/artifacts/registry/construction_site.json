@@ -62,6 +62,150 @@
         "reusable",
         "scenery"
       ]
+    },
+    "site_concrete_slab": {
+      "lookup_name": "site_concrete_slab",
+      "scene": "res://commons/artifacts/construction_site/concrete_slab.tscn",
+      "name": "Free-standing concrete slab",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Board-marked concrete slab with tie holes on two steel feet with rear braces: a backdrop that reads as placed, not built in. Face +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_counter_wall": {
+      "lookup_name": "site_counter_wall",
+      "scene": "res://commons/artifacts/construction_site/counter_wall.tscn",
+      "name": "Counter wall",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Waist-high block wall with a thick timber top: a margin you can see over. Face +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_formwork_panel": {
+      "lookup_name": "site_formwork_panel",
+      "scene": "res://commons/artifacts/construction_site/formwork_panel.tscn",
+      "name": "Propped formwork panel",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Ply shuttering face on steel soldiers and walers, held by two push-pull props to base plates. Ply face +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_timber_scaffold": {
+      "lookup_name": "site_timber_scaffold",
+      "scene": "res://commons/artifacts/construction_site/timber_scaffold.tscn",
+      "name": "Timber scaffold bay",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "One bay of temporary timber scaffolding with a plank deck at 2.3 m, braces and a guard rail; open front +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_plywood_hoarding": {
+      "lookup_name": "site_plywood_hoarding",
+      "scene": "res://commons/artifacts/construction_site/plywood_hoarding.tscn",
+      "name": "Plywood site hoarding",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Three ply sheets on timber posts with raking back braces and a stencil block. Sheet face +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_art_crate_open": {
+      "lookup_name": "site_art_crate_open",
+      "scene": "res://commons/artifacts/construction_site/art_crate_open.tscn",
+      "name": "Opened art crate",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "A battened art-transport crate on skids, front panel off and leaning beside it, foam lining inside; open to +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_closure_backdrop": {
+      "lookup_name": "site_closure_backdrop",
+      "scene": "res://commons/artifacts/construction_site/closure_backdrop.tscn",
+      "name": "Full-height closure backdrop",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Six pale board panels on a steel frame from slab to slab (5.6 m), two raking struts behind. Calm face +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_steel_props": {
+      "lookup_name": "site_steel_props",
+      "scene": "res://commons/artifacts/construction_site/steel_props.tscn",
+      "name": "Steel props, row of three",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Three adjustable red-oxide props from a timber sole plank to a header under the slab above (5.6 m).",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_dust_sheet": {
+      "lookup_name": "site_dust_sheet",
+      "scene": "res://commons/artifacts/construction_site/dust_sheet.tscn",
+      "name": "Full-height dust sheet",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "A pale opaque polythene curtain on a batten between two telescopic poles, slab to slab (5.6 m). Sheet face +Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "staging",
+        "reusable",
+        "scenery"
+      ]
     }
   }
 }

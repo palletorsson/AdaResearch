@@ -187,7 +187,10 @@ def validate(data, frame_path=None):
             if prop['facing'] in [90,270]: w,d = d,w
             x,z = prop['position']; bounds = rect(x,z,w,d)
             placement(bounds, 'prop '+prop['id'])
-            if h > frame['storey_height']-.6: errors.append(f'{prefix}: prop exceeds storey clearance')
+            # a prop the catalogue marks reaches_ceiling (props, closure backdrops, dust sheets) is meant to meet the slab above:
+            # it may stand as tall as the clear storey, never taller
+            limit = frame['storey_height']-frame.get('slab_thickness',.36) if catalog['props'][prop['kind']].get('reaches_ceiling') else frame['storey_height']-.6
+            if h > limit+1e-6: errors.append(f'{prefix}: prop exceeds storey clearance')
             if any(overlaps(bounds,b) for b in columns): errors.append(f'{prefix}: prop overlaps a column')
             if any(overlaps(bounds,b) for b in occupied): errors.append(f'{prefix}: prop covers an artifact access footprint')
             if any(overlaps(bounds,b) for b in wall_bounds): errors.append(f'{prefix}: prop intersects a wall')
