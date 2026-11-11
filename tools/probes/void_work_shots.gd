@@ -3,6 +3,8 @@ extends SceneTree
 ## configs and scale applied (a standalone shot misses all three). One PNG per placement into --out.
 ## godot --path <stage> --script res://tools/probes/void_work_shots.gd -- --no-bridges --void-start-floor=N --out=<dir>
 ##   [--works=id,id] [--settle=600]  (settle = physics ticks after the floor is built)
+##   [--from=front]  stand on the work's own +Z (where a facing-0 screen looks) instead of toward the room's middle
+##   [--dist=2.5]  stand this far from the box centre (default: far enough to hold the whole box)
 var game: Node3D
 
 func _initialize() -> void:
@@ -29,10 +31,14 @@ func shoot() -> void:
 	var folder := ""
 	var only: PackedStringArray = []
 	var settle := 600
+	var from_front := false
+	var dist := -1.0
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):folder = arg.trim_prefix("--out=")
 		if arg.begins_with("--works="):only = arg.trim_prefix("--works=").split(",")
 		if arg.begins_with("--settle="):settle = int(arg.trim_prefix("--settle="))
+		if arg == "--from=front":from_front = true
+		if arg.begins_with("--dist="):dist = float(arg.trim_prefix("--dist="))
 	DirAccess.make_dir_recursive_absolute(folder)
 	load("res://commons/void/room_source.gd").use_main_tower = true
 	game = load("res://commons/void/void.tscn").instantiate()
@@ -60,7 +66,9 @@ func shoot() -> void:
 		var out := Vector3(-c.x, 0, -c.z)
 		if out.length() < 0.5:out = Vector3(0, 0, 1)
 		out = out.normalized().rotated(Vector3.UP, deg_to_rad(30))
+		if from_front:out = (mount.global_transform.basis.z * Vector3(1, 0, 1)).normalized().rotated(Vector3.UP, deg_to_rad(12))
 		var d := r / tan(deg_to_rad(cam.fov * 0.5)) * 1.15
+		if dist > 0.0:d = dist
 		cam.global_position = c + out * d + Vector3(0, maxf(0.35 * d, 0.0), 0)
 		cam.global_position.y = maxf(cam.global_position.y, base + 0.4)
 		cam.look_at(c, Vector3.UP)
