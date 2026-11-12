@@ -8,7 +8,8 @@ extends Node3D
 ## block when it is not - so opening more never closes a cell, and the same field is watched all the way through.
 ##   A BODY goes from floor to floor across a shared FACE. Two blocks that touch at a corner leave it no gap.
 ##   A SIGNAL also passes where two floor cells touch at a CORNER.
-## From the visitor's side the field floods: blue where a body gets, pink where only a signal gets. Somewhere
+## From the visitor's side the field floods: blue where a body gets, pink where only a signal gets (and a thin pink
+## post stands on every such cell, so the signal's reach is seen over the blocks). Somewhere
 ## between a third and two thirds open the pink reaches the far side and the blue does not: the signal crosses and
 ## you cannot. A little further and you can. On an endless field those two shares are 0.407 and 0.593; a field of 120
 ## cells decides near them, not on them, and every NEW FIELD decides a little differently.
@@ -22,7 +23,7 @@ const ROWS := 10
 const CELL := 0.8
 const TALL := 1.2
 const BODY := Color("5bcefa")
-const SIGNAL := Color("f5a9b8")
+const SIGNAL := Color("f07fa0")
 const BARE := Color(0.80, 0.81, 0.84)
 const BLOCK := Color(0.30, 0.33, 0.40)
 const AROUND: Array[Vector2i] = [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, 1), Vector2i(-1, -1)]
@@ -39,6 +40,7 @@ var _solid := PackedByteArray()         # the block's collider is on
 var _shapes: Array[CollisionShape3D] = []
 var _blocks: MultiMesh
 var _tiles: MultiMesh
+var _posts: MultiMesh                   # a thin pink post on every cell only a signal reaches: seen over the blocks
 var _goal: MeshInstance3D
 var _board: Label3D
 var _far: Array[Label3D] = []
@@ -181,6 +183,11 @@ func _build() -> void:
 	flat.vertex_color_use_as_albedo = true
 	flat.vertex_color_is_srgb = true
 	flat.roughness = 0.9
+	# the flood is a colour code, not a surface: under this hall's strong light a lit pink tile reads as white
+	var paint := StandardMaterial3D.new()
+	paint.vertex_color_use_as_albedo = true
+	paint.vertex_color_is_srgb = true
+	paint.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_tiles = MultiMesh.new()
 	_tiles.transform_format = MultiMesh.TRANSFORM_3D
 	_tiles.use_colors = true
@@ -212,11 +219,27 @@ func _build() -> void:
 			shape.disabled = true
 			body.add_child(shape)
 			_shapes.append(shape)
+	_posts = MultiMesh.new()
+	_posts.transform_format = MultiMesh.TRANSFORM_3D
+	var post_mesh := BoxMesh.new()
+	post_mesh.size = Vector3(0.07, TALL + 0.45, 0.07)
+	_posts.mesh = post_mesh
+	_posts.instance_count = count
+	for i in count: _posts.set_instance_transform(i, Transform3D(Basis().scaled(Vector3(1, 0.001, 1)), _cell_at(i / ROWS, i % ROWS)))
+	var pink := StandardMaterial3D.new()
+	pink.albedo_color = SIGNAL
+	pink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	var posts := MultiMeshInstance3D.new()
+	posts.name = "SignalPosts"
+	posts.multimesh = _posts
+	posts.material_override = pink
+	posts.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(posts)
 	for pair in [["Floor", _tiles], ["Standing", _blocks]]:
 		var shown := MultiMeshInstance3D.new()
 		shown.name = pair[0]
 		shown.multimesh = pair[1]
-		shown.material_override = flat
+		shown.material_override = paint if pair[0] == "Floor" else flat
 		add_child(shown)
 	# the two side walls: the field is a channel from this side to the far one
 	var dark := StandardMaterial3D.new()
@@ -380,6 +403,8 @@ func _paint() -> void:
 				tone = SIGNAL
 				if r == ROWS - 1: reached_by_signal = true
 			_tiles.set_instance_color(i, tone)
+			var up: float = 1.0 if tone == SIGNAL else 0.001
+			_posts.set_instance_transform(i, Transform3D(Basis().scaled(Vector3(1, up, 1)), _cell_at(c, r) + Vector3(0, (TALL + 0.45) * 0.5 * up, 0)))
 	var far := BODY if reached_by_body else (SIGNAL if reached_by_signal else BARE)
 	var glow: StandardMaterial3D = _goal.material_override
 	glow.albedo_color = far
