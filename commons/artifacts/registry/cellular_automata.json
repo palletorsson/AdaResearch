@@ -6823,62 +6823,110 @@
         1
       ]
     },
-      "termite_stack": {
-        "lookup_name": "termite_stack",
-        "scene": "res://algorithms/cellularautomata/termite_stack/termite_stack.tscn",
-        "name": "Termite Stack",
-        "description": "A cellular automaton with one worker. Every cell of a 41-cell lattice carries a stack; a termite reads the height under it, turns as the instruction says for that height, adds one unit (a full stack falls) and steps on: Langton's ant with as many colours as the instruction has letters, the colour being matter piled in y. Five instructions on square and hexagonal lattices each build one form - a mound, a lace, a walled city, terraces, a weave - in the number of steps measured on a bench before the work was built; the form is held, falls, and the next instruction begins. A level is a hexagonal prism, a drum, a block or a spire.",
-        "category": "cellular_automata",
-        "complexity": "intermediate",
-        "include_in_map_data": true,
-        "map_ready": true,
-        "map_sequences": [
-          "cellularautomata"
-        ],
-        "sequence": "cellularautomata",
-        "interaction": "watch",
-        "size_group": "room",
-        "tags": [
-          "cellular-automata",
-          "applied",
-          "turmite",
-          "langton's",
-          "termite",
-          "hexagonal",
-          "instruction"
-        ],
-        "qfep_connection": "Nothing in the instruction describes the form: a body that only reads what is under its feet and answers it builds a city it never sees.",
-        "dev_themes": [
-          "cellular_automata"
-        ],
-        "dna": {
-          "axes": {
-            "rule": [
-              "mound",
-              "lace",
-              "city",
-              "terraces",
-              "weave"
-            ],
-            "unit": [
-              "hex",
-              "drum",
-              "block",
-              "spire"
-            ]
-          },
-          "fixture": {
-            "build_at_once": true,
-            "cycle": false,
-            "hold_seconds": 0
-          },
-          "predicted_degeneracy": {
-            "pair": "unit: hex ~ drum",
-            "percent": 0.6,
-            "arithmetic": "A hexagonal prism and a drum of the same width differ only in six slivers between the hexagon and its inscribed circle, 9 % of a column's top and a thin edge of its sides; the mound stands 714 columns in some 12 % of the frame, so about 0.09 x 0.5 x 0.12 = 0.6 % of the frame changes. Among the rules the closest are lace ~ weave, two sparse hexagonal forms of 186 and 227 columns that share few cells."
-          }
+    "automaton_organ": {
+      "lookup_name": "automaton_organ",
+      "scene": "res://algorithms/cellularautomata/automaton_organ/automaton_organ.tscn",
+      "name": "Automaton Organ",
+      "description": "A cellular automaton heard three ways. Sixteen cells in a ring follow one elementary rule; every cell owns a pipe, and pipe k is the first pipe's 3.12 m divided by k, so it sounds k times 55 Hz: a row is a set of partials of one tone. A row is also one bar of sixteen steps: a playhead crosses it and each live cell sounds its pipe (steps), or every live pipe sounds at the top of the bar (chord), or each live cell is one drum (pulse). At the end of a bar the rule makes the next row and the old rows slide out over the floor as a carpet eight rows deep - rule 90's whole triangle on a ring of sixteen. Stepping on a pad of the present row flips its cell. Where a rule explorer stands on the same floor the organ plays the rule its console is set to. It sounds only while a body is near.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "sequence": "cellularautomata",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "cellular-automata",
+        "applied",
+        "sound",
+        "rhythm",
+        "harmonics",
+        "elementary-rule",
+        "sequencer"
+      ],
+      "qfep_connection": "The score is nowhere: each bar is read off the last one, and a body that steps on the row is written into the music without being asked what it meant.",
+      "dev_themes": [
+        "cellular_automata"
+      ],
+      "dna": {
+        "axes": {
+          "rule": [
+            "sierpinski",
+            "chaos",
+            "gliders",
+            "weave",
+            "traffic"
+          ]
+        },
+        "fixture": {
+          "preroll": 7
+        },
+        "predicted_degeneracy": {
+          "pair": "rule: chaos ~ weave",
+          "percent": 1.6,
+          "arithmetic": "After seven bars from one seed, rule 30 and rule 150 differ in 17 of the carpet's 128 pads (computed on the ring of sixteen; the next closest pair, sierpinski ~ weave, differs in 25). The carpet is 8 x 4 m seen at a pitch of 0.26 rad, so it projects to about 32 x sin(0.26) = 8.2 square metres of a frame fitted to the work's 10.5 m diagonal, some 12 % of it; 17 / 128 of 12 % is 1.6 % of the frame. The pipes and the bench do not change with the rule."
         }
-      },
+      }
+    },
+    "termite_stack": {
+      "lookup_name": "termite_stack",
+      "scene": "res://algorithms/cellularautomata/termite_stack/termite_stack.tscn",
+      "name": "Termite Stack",
+      "description": "A cellular automaton with one worker. Every cell of a 41-cell lattice carries a stack; a termite reads the height under it, turns as the instruction says for that height, adds one unit (a full stack falls) and steps on: Langton's ant with as many colours as the instruction has letters, the colour being matter piled in y. Five instructions on square and hexagonal lattices each build one form - a mound, a lace, a walled city, terraces, a weave - in the number of steps measured on a bench before the work was built; the form is held, falls, and the next instruction begins. A level is a hexagonal prism, a drum, a block or a spire.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "sequence": "cellularautomata",
+      "interaction": "watch",
+      "size_group": "room",
+      "tags": [
+        "cellular-automata",
+        "applied",
+        "turmite",
+        "langton's",
+        "termite",
+        "hexagonal",
+        "instruction"
+      ],
+      "qfep_connection": "Nothing in the instruction describes the form: a body that only reads what is under its feet and answers it builds a city it never sees.",
+      "dev_themes": [
+        "cellular_automata"
+      ],
+      "dna": {
+        "axes": {
+          "rule": [
+            "mound",
+            "lace",
+            "city",
+            "terraces",
+            "weave"
+          ],
+          "unit": [
+            "hex",
+            "drum",
+            "block",
+            "spire"
+          ]
+        },
+        "fixture": {
+          "build_at_once": true,
+          "cycle": false,
+          "hold_seconds": 0
+        },
+        "predicted_degeneracy": {
+          "pair": "unit: hex ~ drum",
+          "percent": 0.6,
+          "arithmetic": "A hexagonal prism and a drum of the same width differ only in six slivers between the hexagon and its inscribed circle, 9 % of a column's top and a thin edge of its sides; the mound stands 714 columns in some 12 % of the frame, so about 0.09 x 0.5 x 0.12 = 0.6 % of the frame changes. Among the rules the closest are lace ~ weave, two sparse hexagonal forms of 186 and 227 columns that share few cells."
+        }
+      }
+    },
     "langton_swarm": {
       "lookup_name": "langton_swarm",
       "scene": "res://commons/artifacts/langton_swarm/langton_swarm.tscn",

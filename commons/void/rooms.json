@@ -39266,8 +39266,8 @@
           "artifact": "film_ca_triplet",
           "station": "SW",
           "position": [
-            -16,
-            0
+            -15.3,
+            -5.5
           ],
           "facing": 0,
           "height": 0,
@@ -39462,6 +39462,21 @@
             "show_place_dimensions": false,
             "editor_label": "Automaton hill | a kit hill of tiles and wedge ramps: a smoothed seed is the ground plan, each storey the one below after one step of erosion"
           }
+        },
+        {
+          "id": "automaton-organ",
+          "artifact": "automaton_organ",
+          "station": "SW",
+          "position": [
+            -19.6,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Automaton organ | sixteen cells, sixteen pipes of 3.12 m / k: a rule's rows as bars of sixteen steps, as chords of partials, as a carpet you can step on"
+          }
         }
       ],
       "props": [
@@ -39510,6 +39525,13 @@
           "position": [
             4.2,
             7.9
+          ]
+        },
+        {
+          "label": "FURTHER LEFT / THE AUTOMATON ORGAN\nSixteen cells, sixteen pipes. A rule plays its own rows.",
+          "position": [
+            -11.5,
+            6.4
           ]
         }
       ],
