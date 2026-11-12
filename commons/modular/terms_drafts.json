@@ -8931,6 +8931,34 @@
    },
    "drafted_for": "bounded_plank_causeway",
    "drafted_by": "Claude Fable 5.2, 2026-11-12: random_edge_profile's idea at the scale of a body"
+  },
+  "sorted_draw_stairs": {
+   "expr": "sort(random(array(plank, 24), height: uniform | gaussian | exponential)) = sorted_draw_stairs - one table of draws through three rules, each sorted into a walk: the shape of a law under the feet",
+   "from": [
+    "plank",
+    "random_sizes",
+    "sampled_histogram"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "sort",
+    "by": "height",
+    "of": {
+     "op": "engine",
+     "kind": "random",
+     "draws": "height by law",
+     "of": {
+      "op": "array",
+      "of": {
+       "t": "plank"
+      },
+      "n": 24,
+      "dims": 1
+     }
+    }
+   },
+   "drafted_for": "sorted_draw_stairs",
+   "drafted_by": "Claude Fable 5.2, 2026-11-12: the count at the scale of a body"
   }
  }
 }

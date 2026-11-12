@@ -152,7 +152,11 @@
   {"id": "m29", "reading": "idea", "status": "observed", "state": "open", "floors": [82], "lands_in": "grammar", "proposal": "p7", "needed_by": 7,
    "works": ["random_edge_profile", "bounded_plank_causeway"],
    "misfit": "Read as code, not as a one-liner, random_edge_profile does one thing: it fixes two of five values and leaves the rest to chance. The same move builds forms the tower has already shown: a line (two fixed ends, a sampled route between), a catenary and a curtain (points pinned, the rest hangs), a pendulum, a standing wave, a point clamped to its bounds. The grammar has `tie` for one body holding another and no word for a form whose points are held while the rest is free.",
-   "would_change": "An operation for holding: some points of a form are fixed, the rest stays free. Then the profile and the causeway are the randomness instance of a part the tree already depends on, not two singletons."}
+   "would_change": "An operation for holding: some points of a form are fixed, the rest stays free. Then the profile and the causeway are the randomness instance of a part the tree already depends on, not two singletons."},
+  {"id": "m30", "reading": "idea", "status": "observed", "state": "closed", "floors": [85], "lands_in": "work", "needed_by": 7,
+   "works": ["distribution_sampler", "distribution_comparator", "galton_board", "sorted_draw_stairs"],
+   "misfit": "Floor Random_Gaussian shows the count seven ways - four sampler cabinets, a comparator, a paint canvas, a Galton board - and all of them are watched. Their code shares one idea: a shape appears that no single draw has, and the same randomness makes a different shape under each rule. Nothing let a body meet a shape.",
+   "would_change": "The same draws sorted into three plank walks (uniform, gaussian, exponential) rising toward the Galton board. Measured with the tower's walker: it reaches the top of the even walk and of the bell walk, and on the exponential one it is stopped at 0.67 m - the tail. A first build with one flat plank per draw failed: the walker cannot take a 5 cm riser, only a slope.", "closed_by": "f2e252353"}
  ],
  "proposals": [
   {"id": "p1", "state": "proposed", "title": "`field` before noise", "asked_by": ["m01", "m02"], "needed_by": "15 works on floors 77-90",
