@@ -823,6 +823,55 @@
 		"derived_from": "aabb_size + category"
 	  }
 	},
+	"noise_ring_walk": {
+	  "dna": {
+	   "axes": {
+	   "split": [
+	   "halves",
+	   "relief",
+	   "colour",
+	   "both"
+	   ]
+	   },
+	   "fixture": {
+	   "hold": true,
+	   "time": 12.5,
+	   "collide": false
+	   },
+	   "predicted_degeneracy": {
+	   "pair": "halves ~ relief",
+	   "percent": 4.0,
+	   "arithmetic": "The two differ only on the north half, which is the far half from the canonical camera: about a third of the ring's pixels. A flat ring 12 m across seen at pitch -0.26 fills some 12 % of the frame, so about 4 % of the frame changes, from black-and-colour patches to grey swells. halves ~ colour differs on the near half and is larger."
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "intermediate",
+	  "description": "The noise torus laid flat round a shaft, to walk: the top face of the bench ring, in the bench ring's own units and wearing its own shader, scaled to a track 4.4 to 6.0 m from the shaft's middle. On the south half the field value is height: the slab swells and sinks as the field slides through and a standing body is lifted and set down. On the north half the same value is light on a flat floor. Where the stand of two rings is on the same floor its console holds, scales and regrains the walk. Negative values stay under the slab, as the colour reading clips them to black.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "noise_ring_walk",
+	  "map_ready": true,
+	  "map_sequences": [
+		"noise"
+	  ],
+	  "name": "Noise Ring Walk",
+	  "qfep_connection": "The same number can carry a body or only colour the ground it stands on: a value does nothing until something agrees to be moved by it.",
+	  "scene": "res://algorithms/randomness/noisetorus/ring_walk/noise_ring_walk.tscn",
+	  "sequence": "noise",
+	  "size_group": "room",
+	  "tags": [
+		"noise",
+		"field",
+		"relief",
+		"colour",
+		"walk",
+		"ring"
+	  ]
+	},
 	"melting_pillar_hall": {
 	  "dna": {
 	   "axes": {

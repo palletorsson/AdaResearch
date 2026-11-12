@@ -35366,28 +35366,59 @@
                 "scale_area"
               ],
               "note": "7.8 m tall: 0.7 (5.5 m), looked at, not walked."
-            }
+            },
+            "ring_scale": "2.2"
           }
         },
         {
           "id": "f1_noiselayers_5_7",
-          "artifact": "noiselayers",
-          "station": "SW",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
           "position": [
-            -4.5,
-            4.0
+            10,
+            0
           ],
-          "facing": 180,
-          "height": 0.8,
+          "facing": 0,
+          "height": 0,
           "scale": 1,
           "config": {
-            "stand": "basin",
-            "fit": {
-              "strategies": [
-                "move"
-              ],
-              "note": "overlap check: a tower column inside it; moved 1.1 m"
-            }
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Noise_One / three fields, one ground, in a basin over shaft B",
+              "places": [
+                {
+                  "id": "noise_basin",
+                  "at": [
+                    0,
+                    0
+                  ],
+                  "y": 1,
+                  "size": [
+                    6,
+                    6
+                  ],
+                  "depth": 1,
+                  "type": "plastic_pool",
+                  "rim": 1,
+                  "colour": "5bcefa",
+                  "access": {
+                    "outer": "ramp",
+                    "inner": "ramp"
+                  },
+                  "activity": {
+                    "artifact": "noiselayers",
+                    "config": {
+                      "stand": "basin"
+                    }
+                  }
+                }
+              ]
+            },
+            "resident_height": 3.5,
+            "show_place_dimensions": false,
+            "editor_label": "Noise basin | the layered terrain as the activity of a pool over shaft B, fitted to the slot, to walk"
           }
         },
         {
@@ -35395,18 +35426,49 @@
           "artifact": "dark_sphere",
           "station": "SW",
           "position": [
-            -8,
-            4
+            -3.4,
+            7.4
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "ring-walk",
+          "artifact": "noise_ring_walk",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "east",
+            "editor_label": "Ring walk | the bench ring laid flat round shaft A: south half height, north half light; the bench console runs it"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "LEFT / THE RING, TO WALK\nOne half lifts you, the other lights the floor.",
+          "position": [
+            -2.9,
+            5.2
+          ]
+        },
+        {
+          "label": "RIGHT / THREE FIELDS, ONE GROUND\nUp the ramp, down into the basin.",
+          "position": [
+            2.9,
+            5.2
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

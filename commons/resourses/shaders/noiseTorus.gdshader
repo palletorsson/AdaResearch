@@ -19,6 +19,11 @@ uniform vec3 plain_albedo = vec3(0.60, 0.59, 0.56);   // the tone used when show
 uniform bool pair_field = false;
 uniform float local_time = 0.0;
 uniform bool remap_signed = false;
+
+// Opt-in for a flat mesh a body walks on (noise_ring_walk, 2026-11-12). The relief is scaled per vertex by
+// COLOR.r, so it can fade to nothing at an edge, and the lighting normal is taken from the displaced surface
+// itself: a flat mesh's own normals all point up and would light a hill like a floor. Off: nothing changes.
+uniform bool walk_surface = false;
 varying vec3 v_object_position;
 
 float pair_hash(vec2 p) {
@@ -75,6 +80,7 @@ void vertex() {
     // Generate noise and apply displacement
     float noise_value = noise(noise_input);
     vec3 displacement = NORMAL * noise_value * height_multiplier * show_relief;
+    if (walk_surface) { displacement *= COLOR.r; }
     VERTEX = object_pos + displacement;
 
     // Pass object space position to fragment shader
@@ -102,4 +108,8 @@ void fragment() {
     float brightness = pair_field ? (remap_signed ? (noise_value + 1.0) * 0.5 : max(noise_value, 0.0)) : noise_value;
     ALBEDO = mix(plain_albedo, rainbow_color * brightness, show_colour);
     EMISSION = rainbow_color * brightness * 0.5 * show_colour;
+    if (walk_surface) {
+        vec3 facet = normalize(cross(dFdx(VERTEX), dFdy(VERTEX)));
+        NORMAL = dot(facet, VERTEX) > 0.0 ? -facet : facet;
+    }
 }

@@ -168,6 +168,10 @@ const PAIR_AMPS: Array = [0.0, 0.01, 0.02, 0.04]
 const PAIR_FREQS: Array = [7.0, 14.0, 24.0]
 const PAIR_SAMPLES: Array = [0.0, TAU / 6.0, TAU / 3.0, PI, TAU * 2.0 / 3.0, TAU * 5.0 / 6.0]   # radians round the ring
 
+## The two rings this many times larger, on the same bench with the same console (config ring_scale; the Void,
+## 2026-11-12, Palle: "make torus larger"). The holder is scaled, not the mesh, so a ring samples the same field at
+## the same coordinates and only stands bigger. 1.0 is the shipped stand, to the millimetre.
+var pair_ring_scale: float = 1.0
 var _pair_root: Node3D = null
 var _rings: Array = []              # [{kind, mesh, mat, marker}]
 var _pair_readout: Label3D = null
@@ -283,6 +287,8 @@ func _read_meta_overrides() -> void:
 		hue_shift_speed = float(str(get_meta("config_hue_shift_speed")))
 	if has_meta("config_stray_planet"):
 		stray_planet = _is_truthy(get_meta("config_stray_planet"))
+	if has_meta("config_ring_scale"):
+		pair_ring_scale = clampf(float(str(get_meta("config_ring_scale"))), 1.0, 4.0)
 	if has_meta("config_stand"):
 		var sv: String = str(get_meta("config_stand")).strip_edges().to_lower()
 		stand = "pair" if sv in ["pair", "two", "compare", "bench"] else "none"
@@ -388,12 +394,16 @@ func _build_pair() -> void:
 	body.add_child(col)
 
 	_rings.clear()
-	for entry in [["relief", -PAIR_GAP * 0.5, "AS RELIEF · the field moves the surface"], ["colour", PAIR_GAP * 0.5, "AS COLOUR · the field lights the surface"]]:
+	var rs: float = pair_ring_scale
+	var gap: float = PAIR_GAP if rs <= 1.0 else maxf(PAIR_GAP, 2.0 * PAIR_OUTER * rs + 0.25)
+	var ring_h: float = PAIR_H if rs <= 1.0 else PAIR_BENCH_H + 0.12 + (PAIR_OUTER + float(PAIR_AMPS.back())) * rs
+	for entry in [["relief", -gap * 0.5, "AS RELIEF · the field moves the surface"], ["colour", gap * 0.5, "AS COLOUR · the field lights the surface"]]:
 		var kind: String = entry[0]
 		var x: float = entry[1]
 		var holder := Node3D.new()
 		holder.name = "Ring_%s" % kind
-		holder.position = Vector3(x, PAIR_H, 0.0)
+		holder.position = Vector3(x, ring_h, 0.0)
+		holder.scale = Vector3.ONE * maxf(rs, 1.0)
 		holder.rotation.x = PI * 0.5 # Turn the mesh and its coordinate marker together.
 		_pair_root.add_child(holder)
 		var ring := MeshInstance3D.new()
@@ -413,7 +423,7 @@ func _build_pair() -> void:
 		ring.material_override = mat
 		holder.add_child(ring)
 		# A display mount reaches into the lowest tube, including its relief range.
-		var mount_top: float = PAIR_H - PAIR_OUTER + float(PAIR_AMPS.back())
+		var mount_top: float = ring_h - (PAIR_OUTER - float(PAIR_AMPS.back())) * maxf(rs, 1.0)
 		var post: MeshInstance3D = HangarKit.box(Vector3(x, (mount_top + PAIR_BENCH_H) * 0.5, 0.0),
 				Vector3(0.06, mount_top - PAIR_BENCH_H, 0.06), stone)
 		post.name = "Post_%s" % kind

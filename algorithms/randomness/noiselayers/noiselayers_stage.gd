@@ -5,12 +5,18 @@ var basin: bool = false
 var terrain: MeshInstance3D
 var plate: Label3D
 var layer_index: int = 0
+## A playground place's slot to lie in (the place kit's slot_size, metres). With one, the stand builds no tray of its
+## own: the terrain is scaled to the slot, its lowest valley on the place's floor, to be walked (the Void, 2026-11-12).
+var slot := Vector2.ZERO
+var model_scale := 0.02
 const WEIGHTS := Vector3(12.0, 6.0, 1.5)
 const NAMES := ["SUM", "LOW", "MIDDLE", "HIGH"]
 
 func _enter_tree() -> void:
 	basin = str(get_meta("config_stand", "")) == "basin"
 	if not basin: return
+	var asked = get_meta("config_slot_size", null)
+	if asked is Array and asked.size() == 2: slot = Vector2(float(asked[0]), float(asked[1]))
 	rotation.x = 0.0
 	terrain = get_node("MeshInstance3D")
 	# A table model needs one stable mesh. Legacy LOD meshes bypass the erosion pass.
@@ -36,6 +42,8 @@ func _enter_tree() -> void:
 			mat.set_shader_parameter("major_line_color",Color(0.82,0.98,1.0,0.13))
 			mat.set_shader_parameter("emission_strength",0.15)
 			child.material_override=mat
+			# In a slot the terrain is walked: the frame's ceiling and wall would stand through the body. The floor grid stays.
+			if slot != Vector2.ZERO and str(child.name) != "GridStructure": child.visible=false
 
 func _ready() -> void:
 	if not basin: return
@@ -43,13 +51,14 @@ func _ready() -> void:
 	var dark := StandardMaterial3D.new()
 	dark.albedo_color = Color(0.045,0.075,0.09)
 	dark.roughness = 0.7
-	add_child(kit.box(Vector3(0,-0.63,0),Vector3(4.5,0.1,4.5),dark))
-	for x in [-2.24,2.24]:
-		add_child(kit.box(Vector3(x,-0.34,0),Vector3(0.06,0.55,4.5),dark))
+	if slot == Vector2.ZERO:
+		add_child(kit.box(Vector3(0,-0.63,0),Vector3(4.5,0.1,4.5),dark))
+		for x in [-2.24,2.24]:
+			add_child(kit.box(Vector3(x,-0.34,0),Vector3(0.06,0.55,4.5),dark))
 	var panel := load("res://commons/audio/rack_templates/RackTemplates.gd").create_panel("",[[{"type":"button","label":"SUM"},{"type":"button","label":"LOW"}],[{"type":"button","label":"MIDDLE"},{"type":"button","label":"HIGH"}]],true) as Node3D
 	panel.name = "LayerPanel"
 	panel.set_meta("em_local_instrument",true)
-	panel.position=Vector3(0.8,0.22,2.30)
+	panel.position=Vector3(0.8,0.22,2.30) if slot == Vector2.ZERO else Vector3(0.8,1.0,-slot.y*0.5+0.42)
 	panel.rotation_degrees.x=-25
 	panel.scale=Vector3.ONE*1.5
 	add_child(panel)
@@ -57,12 +66,23 @@ func _ready() -> void:
 		var area: Node=panel.find_child("Btn_%d" % i,true,false).get_node("InteractableAreaButton")
 		area.button_pressed.connect(func(_b): choose_layer(i))
 	var case_ := Node3D.new()
-	case_.name="LayerReadout";case_.position=Vector3(-0.55,0.26,2.23);case_.rotation_degrees.x=-18
+	case_.name="LayerReadout";case_.position=Vector3(-0.55,0.26,2.23) if slot == Vector2.ZERO else Vector3(-0.55,1.04,-slot.y*0.5+0.36);case_.rotation_degrees.x=-18
 	case_.set_meta("em_local_instrument",true);add_child(case_)
 	case_.add_child(kit.box(Vector3.ZERO,Vector3(1.35,0.27,0.025),dark))
 	plate=Label3D.new();plate.name="Text";plate.font_size=22;plate.pixel_size=0.0014;plate.position.z=0.02
 	plate.modulate=Color(0.78,0.94,0.91);case_.add_child(plate)
+	_seat()
 	update_plate()
+
+## In a slot: as wide as the slot allows, centred, the lowest valley on the place's floor.
+func _seat() -> void:
+	if slot == Vector2.ZERO or terrain == null or terrain.mesh == null: return
+	var box: AABB = terrain.mesh.get_aabb()
+	var model: Node3D = get_node("Model")
+	model_scale = (minf(slot.x, slot.y) - 0.5) / maxf(box.size.x, box.size.z)
+	model.scale = Vector3.ONE * model_scale
+	var centre: Vector3 = box.get_center()
+	model.position = Vector3(-centre.x, -box.position.y, -centre.z) * model_scale + Vector3(0, 0.02, 0)
 
 func choose_layer(index: int) -> void:
 	if not basin or index==layer_index: return
@@ -75,10 +95,11 @@ func choose_layer(index: int) -> void:
 			terrain.remove_child(child);child.queue_free()
 	terrain.call("generate_terrain")
 	terrain.call("setup_collision")
+	_seat()
 	update_plate()
 
 func update_plate() -> void:
-	plate.text="%s | three fields, one height\nweights %.1f / %.1f / %.1f\n1:50 model | 101 x 101 samples\nsame three-pass slope lowering" % [NAMES[layer_index],terrain.get("low_freq_amplitude"),terrain.get("med_freq_amplitude"),terrain.get("high_freq_amplitude")]
+	plate.text="%s | three fields, one height\nweights %.1f / %.1f / %.1f\n1:%d model | 101 x 101 samples\nsame three-pass slope lowering" % [NAMES[layer_index],terrain.get("low_freq_amplitude"),terrain.get("med_freq_amplitude"),terrain.get("high_freq_amplitude"),roundi(1.0/model_scale)]
 
 func apply_grid_config(_config: Dictionary) -> void:
 	pass # Stand mode is read before the authored children enter the tree.
