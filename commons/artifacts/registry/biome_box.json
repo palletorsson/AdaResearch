@@ -28,6 +28,7 @@
    "dna": {
     "axes": {
      "stage": [
+      "hall",
       "randomness",
       "lsystems",
       "full"
@@ -37,9 +38,9 @@
      "builds": "always"
     },
     "predicted_degeneracy": {
-     "pair": "stage: lsystems ~ full",
-     "percent": 1.5,
-     "arithmetic": "On a bench (seed 7) the ground, the pool, the web and the tree are the same at lsystems and at full; what full adds is the residents and the last connections, a dozen bodies of about 0.3 m. Twelve bodies of some 0.07 square metres each are 0.8 square metres of a picture that shows the 6 m box on about a third of the frame of 55: 0.8 / 55 = 1.5 %. randomness ~ lsystems differs by the whole tree, a crown about 2 m across."
+     "pair": "stage: hall ~ full",
+     "percent": 0.0,
+     "arithmetic": "By construction: hall means the sequence of the floor the box stands on, and on a bench there is no floor, so hall builds full - the two tiles are the same picture. Among the others the closest are lsystems ~ full: the ground, the pool, the web and the trees are the same and full adds the residents and the last connections, a dozen bodies of about 0.3 m, some 0.8 square metres of a frame of 55 with the box on a third of it: 1.5 %. randomness ~ lsystems differs by the whole tree, a crown about 2 m across."
     }
    }
   }

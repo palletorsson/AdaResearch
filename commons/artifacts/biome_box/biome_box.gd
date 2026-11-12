@@ -13,8 +13,8 @@ extends Node3D
 ## The box is 6.6 m square: it stands on the rim of a shaft's six-metre opening and closes it. The lines on the
 ## glass are one metre apart, the size of the biome's cells; the biome is `cells` across, 30 cm in from the glass. A body cannot walk in: the biome has no ground to stand on.
 ##
-## `stage`: hall = the sequence of the floor the box stands on (read from the floor's map), full = everything, or a
-## sequence named outright. The biome's builders take about a second (the mycelium most of it), so with
+## `stage`: full = everything (the default, and what a box on a bench shows), hall = the sequence of the floor the
+## box stands on, read from the floor's map (what a row in the tower asks for), or a sequence named outright. The biome's builders take about a second (the mycelium most of it), so with
 ## `builds: arrival` the box stays an empty grid until a body arrives on its floor; `always` builds at once.
 const Biome := preload("res://commons/artifacts/biome_object/biome_object.tscn")
 const Grammar := preload("res://commons/biome_layers/biome_grammar.gd")
@@ -23,9 +23,7 @@ const SET_IN := Vector3(0.05, 0.0, -0.27)   # before `full` a body lies half a m
 const LIFT := 0.44                     # the biome's cut section reaches this far under its surface
 const LINE := Color("f5a9b8")
 
-@export_enum("hall", "full", "primitives", "transformation", "array_tutorial", "color", "tiling", "change", "forces", "formfinding", "wavefunctions",
-	"randomness", "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration", "softbodies", "isosurfaces", "boolean_surfaces",
-	"swarmintelligence", "machinelearning", "graphtheory", "foundationscrisis", "qfeplaboratory", "postfoundationscrisis") var stage := "hall"
+@export_enum("hall", "full", "randomness", "lsystems") var stage := "full"      ## a config may name any sequence the biome vocabulary knows
 @export_range(0.0, 1.0) var phase := 1.0          ## how far what arrives at this stage has come
 @export var world_seed := 7                       ## the one ground: the same number on every floor
 @export_range(4, 6) var cells := 6                ## the biome's cells across, a metre each (seed 7 has no tree below six)
