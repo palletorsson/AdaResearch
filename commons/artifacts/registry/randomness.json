@@ -2413,6 +2413,44 @@
 		"seed"
 	  ]
 	},
+	"stone_cross_crossing": {
+	  "dna": {
+	   "axes": {
+	   "notice": [
+	   "early",
+	   "late",
+	   "none"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "Four three-stone crossings meet in a cross over a 6 x 6 m opening. Each stone stands, leaves, is down and returns on its own drawn waits; a stone that leaves carries whoever stands on it down to a live grid a metre below, and a stone that returns carries them back up. The grid takes charge with every shock; a health cross on the platform in the middle gives it back. A ring gives notice, gold before a stone leaves and green before it returns. A clock runs from rim to rim.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "stone_cross_crossing",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Stone Cross Crossing",
+	  "qfep_connection": "What it costs to be wrong about timing can be paid back: risk, cost and repair share one floor.",
+	  "scene": "res://algorithms/randomness/stone_cross_crossing/stone_cross_crossing.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"game",
+		"stones",
+		"timing",
+		"hazard",
+		"health",
+		"seed"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",

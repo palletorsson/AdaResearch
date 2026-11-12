@@ -34733,6 +34733,90 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "shaft-a-basin",
+          "artifact": "playground_spec_hall",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": -1,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Random_Game / the basin in shaft A and the platform in its middle",
+              "places": [],
+              "decks": [
+                {
+                  "id": "grid",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "size": [
+                    6,
+                    6
+                  ],
+                  "enclosure": "open"
+                },
+                {
+                  "id": "middle",
+                  "at": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "size": [
+                    2,
+                    2
+                  ],
+                  "enclosure": "open"
+                }
+              ]
+            },
+            "resident_region": false,
+            "show_place_dimensions": false,
+            "editor_label": "Basin in shaft A | a kit floor a metre down and a platform in the middle, for the stone cross"
+          }
+        },
+        {
+          "id": "shaft-a-stone-cross",
+          "artifact": "stone_cross_crossing",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
+        },
+        {
+          "id": "shaft-a-health",
+          "artifact": "health_cross",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "boost": "21",
+            "take_below": "1",
+            "respawn": "8",
+            "color": "bdebdc",
+            "editor_label": "health cross / the middle of the stone cross"
+          }
         }
       ],
       "props": [],
