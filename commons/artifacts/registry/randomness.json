@@ -2218,6 +2218,44 @@
 		"comparison"
 	  ]
 	},
+	"sorted_draw_stairs": {
+	  "dna": {
+	   "axes": {
+	   "order": [
+	   "sorted",
+	   "drawn",
+	   "reversed"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "The same draws, sorted, as three stairs of planks. One table of draws goes through three rules - uniform, gaussian, exponential - and each lane lays a plank per draw at that height, in order. An even climb; steep, easy, steep; a long flat and then steps too tall to take. Red poles beside each lane keep the draws as they came. Step on the plate to draw again: the jumble changes, the three shapes do not.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "sorted_draw_stairs",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Sorted Draw Stairs",
+	  "qfep_connection": "A law is not seen in any one event; it is what many of them add up to, and a body can learn it by climbing.",
+	  "scene": "res://algorithms/randomness/sorted_draw_stairs/sorted_draw_stairs.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"plank",
+		"playground",
+		"walkable",
+		"distribution",
+		"sorted",
+		"comparison"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",

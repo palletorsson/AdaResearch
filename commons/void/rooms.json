@@ -33610,6 +33610,19 @@
           "config": {
             "disclosure": "origin"
           }
+        },
+        {
+          "id": "sorted-draw-stairs",
+          "artifact": "sorted_draw_stairs",
+          "station": "SE",
+          "position": [
+            17.05,
+            3.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
         }
       ],
       "props": [
@@ -33797,8 +33810,8 @@
           "id": "kit-container-10",
           "kind": "container_10ft",
           "position": [
-            17.0,
-            4.7
+            17,
+            7.0
           ],
           "facing": 90,
           "scale": 1
