@@ -148,7 +148,11 @@
   {"id": "m28", "reading": "body", "status": "observed", "state": "closed", "floors": [82], "lands_in": "work", "needed_by": 1,
    "works": ["bounded_plank_causeway"],
    "misfit": "The first build of the causeway claimed that the lane with nothing refused cannot be walked. The tower's walker crossed both lanes: at five points a span and 0.28 m of variation the cliffs were small enough to ride over.",
-   "would_change": "Three points a span and 0.6 m of variation: the held lane is walked end to end, the other stops the walker inside its first span. The work's header keeps the failed measurement (`measured`).", "closed_by": "eb198fb13"}
+   "would_change": "Three points a span and 0.6 m of variation: the held lane is walked end to end, the other stops the walker inside its first span. The work's header keeps the failed measurement (`measured`).", "closed_by": "eb198fb13"},
+  {"id": "m29", "reading": "idea", "status": "observed", "state": "open", "floors": [82], "lands_in": "grammar", "proposal": "p7", "needed_by": 7,
+   "works": ["random_edge_profile", "bounded_plank_causeway"],
+   "misfit": "Read as code, not as a one-liner, random_edge_profile does one thing: it fixes two of five values and leaves the rest to chance. The same move builds forms the tower has already shown: a line (two fixed ends, a sampled route between), a catenary and a curtain (points pinned, the rest hangs), a pendulum, a standing wave, a point clamped to its bounds. The grammar has `tie` for one body holding another and no word for a form whose points are held while the rest is free.",
+   "would_change": "An operation for holding: some points of a form are fixed, the rest stays free. Then the profile and the causeway are the randomness instance of a part the tree already depends on, not two singletons."}
  ],
  "proposals": [
   {"id": "p1", "state": "proposed", "title": "`field` before noise", "asked_by": ["m01", "m02"], "needed_by": "15 works on floors 77-90",
@@ -184,6 +188,11 @@
    "in_words": "research_info_wall and clipboard go to the environment track.",
    "delta": [{"timeline": [{"op": "to_environment", "key": "research_info_wall"}, {"op": "to_environment", "key": "clipboard"}]}],
    "test": {"reading": "parts", "before": 8, "after": 6, "removes": 2, "creates": 0, "note": "counted from ada_run/robot_pilot/randomness/parts.json"},
-   "forecloses": "They stop being numbered works. Nothing else."}
+   "forecloses": "They stop being numbered works. Nothing else."},
+  {"id": "p7", "state": "proposed", "title": "hold: some points fixed, the rest free", "asked_by": ["m29"], "needed_by": "7 forms across five sequences: line_vs_trace, catenary, curtain, pendulum, standing_wave, clipped_point, pinned_random_profile",
+   "in_words": "hold(form, where): the named points keep their place; everything between them is free to hang, to wave or to be drawn. What a boundary is for.",
+   "delta": [{"operation": {"name": "hold", "kind": "rule", "sig": "(form, points) -> held form", "adds": "some points are fixed: the rest is free between them", "aliases": ["hold", "held", "pinned"]}}],
+   "test": {"reading": "vocabulary", "creates": 0, "note": "Counted by reading the formulas: seven say that points are held, pinned, fixed or clamped while the rest moves. Not testable in the order check until a form says hold(...)."},
+   "forecloses": "It sits close to `tie` (one body holds another). If both exist, a pinned rope end is a tie to the world and a held value is a hold; Palle draws the line or folds them into one."}
  ]
 }

@@ -185,7 +185,7 @@ func _gate(text: String, x: float) -> void:
 	var label := Label3D.new()
 	label.text = text
 	label.font_size = 48
-	label.pixel_size = .00135
+	label.pixel_size = .0011      # the longest line must stay inside the board
 	label.outline_size = 0
 	label.alpha_cut = Label3D.ALPHA_CUT_DISCARD      # a cut-out: no sorting against the tower's other glass and text
 	label.modulate = Color("202329")
