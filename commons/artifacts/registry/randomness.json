@@ -2256,6 +2256,44 @@
 		"comparison"
 	  ]
 	},
+	"noise_ground_pair": {
+	  "dna": {
+	   "axes": {
+	   "agreement": [
+	   "far",
+	   "none",
+	   "near"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "Two grounds from one seed. On the left every height is drawn alone and knows nothing of the next: a ground nobody can cross. On the right the heights are read off a field in which neighbours agree, and it can be walked from end to end. Step on the plate to draw again. The body-scale sibling of perlin_noise_bridge and the door to the noise floors.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "noise_ground_pair",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Noise Ground Pair",
+	  "qfep_connection": "Relation is what makes a ground: where neighbours agree a body can go, and nothing else was added.",
+	  "scene": "res://algorithms/randomness/noise_ground_pair/noise_ground_pair.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"noise",
+		"ground",
+		"walkable",
+		"playground",
+		"comparison",
+		"seed"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",

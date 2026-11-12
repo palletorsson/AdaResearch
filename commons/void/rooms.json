@@ -33994,10 +33994,10 @@
           "artifact": "perlin_noise_bridge",
           "station": "NW",
           "position": [
-            -6,
-            -4
+            -6.2,
+            7.6
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -34036,12 +34036,12 @@
           "artifact": "random_transformations_geometric",
           "station": "NW",
           "position": [
-            -3,
-            -6
+            -17,
+            -5.5
           ],
           "facing": 180,
-          "height": 1,
-          "scale": 0.2,
+          "height": 0.6,
+          "scale": 0.4,
           "config": {}
         },
         {
@@ -34064,7 +34064,7 @@
           "artifact": "dark_sphere",
           "station": "NW",
           "position": [
-            -6,
+            -6.3,
             -8
           ],
           "facing": 180,
@@ -34086,6 +34086,19 @@
           "config": {
             "editor_label": "Random pipe lattice / Palle's Rhino script: up always, eight neighbours by chance (seed 7, prob 0.6)"
           }
+        },
+        {
+          "id": "noise-ground-pair",
+          "artifact": "noise_ground_pair",
+          "station": "SW",
+          "position": [
+            -13.55,
+            5.8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
         }
       ],
       "props": [],
