@@ -13534,6 +13534,49 @@
         2
       ]
     },
+    "percolation_crossing": {
+      "lookup_name": "percolation_crossing",
+      "scene": "res://algorithms/proceduralgeneration/growth_systems/percolation_crossing/percolation_crossing.tscn",
+      "name": "Percolation Crossing (a body by faces, a signal by corners)",
+      "description": "Site percolation at the size of a floor: a field 12 cells across and 10 deep, 0.8 m a cell, between two side walls. Every cell holds one seeded number; with a share of the field open a cell is floor when its number is under that share and a block when it is not, so opening more never closes a cell. A body goes from floor to floor across a shared face - two blocks that touch at a corner leave it no gap; a signal also passes where two floor cells touch at a corner. From the visitor's side the field floods blue where a body gets and pink where only a signal gets, and the far side takes the colour of whoever arrives. Field 11 lets a signal across from 35 % open and a body from 60 %. Three plates: open more, open less, a new field. A cell with a body on it does not close.",
+      "category": "procedural_generation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "proceduralgeneration"
+      ],
+      "sequence": "proceduralgeneration",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "percolation",
+        "threshold",
+        "connectivity",
+        "lattice",
+        "walkable"
+      ],
+      "qfep_connection": "The same field is open or closed depending on who asks: connection is not a property of the lattice but of what is allowed to count as touching.",
+      "dev_themes": [
+        "procedural",
+        "generation"
+      ],
+      "dna": {
+        "axes": {
+          "open": [
+            0.3,
+            0.45,
+            0.6,
+            0.75
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "open: 0.3 ~ 0.45",
+          "percent": 4.0,
+          "arithmetic": "On field 11 the bench counts 33 floor cells at 30 % and 51 at 45 %: 18 of 120 cells change from a block to floor, and the flood's colour changes on the cells a signal newly reaches (22 -> 47). Eighteen blocks 1.2 m tall leaving the picture is about 15 % of the standing mass; with the field on roughly a third of the frame and a block's side showing about as much as its top, some 0.33 x 0.15 x 0.8 = 4 % of the frame changes. The other neighbours differ more: 0.45 ~ 0.6 opens 17 cells and turns the far side blue."
+        }
+      }
+    },
     "pg_workshop_console": {
       "lookup_name": "pg_workshop_console",
       "scene": "res://commons/artifacts/timing_machines/pg_workshop.tscn",

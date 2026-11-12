@@ -43009,11 +43009,41 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "percolation-crossing",
+          "artifact": "percolation_crossing",
+          "station": "SW",
+          "position": [
+            0,
+            1.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Percolation crossing | a field 12 x 10 cells of 0.8 m across the centre: blue where a body gets by faces, pink where only a signal gets by corners; open more, open less, a new field"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / CAN YOU GET ACROSS?\nBlue is where a body gets. Pink is where only a signal gets.",
+          "position": [
+            2.2,
+            7.5
+          ]
+        },
+        {
+          "label": "LEFT / OPEN MORE, OPEN LESS, A NEW FIELD\nThree plates, and how the field is made.",
+          "position": [
+            -3.4,
+            7.6
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
