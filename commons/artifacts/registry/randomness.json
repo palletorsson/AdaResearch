@@ -2451,6 +2451,44 @@
 		"seed"
 	  ]
 	},
+	"finding_out_field": {
+	  "dna": {
+	   "axes": {
+	   "tells": [
+	   "count",
+	   "self",
+	   "none"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "A field of 192 covered half-metre tiles over 48 one-metre cells. One draw at the start of a round assigns every cell: a safe path from one end to the other is written first, then every other cell is safe with P = 0.3 and live otherwise. A step uncovers a cell and makes no draw: a safe cell turns green and shows how many of its eight neighbours are live; a live cell turns red and takes charge. COVER AGAIN hides everything and keeps the assignment; NEW DRAW deals another. A clock runs from one end to the other. random_doors at the scale of a field.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "finding_out_field",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Finding Out Field",
+	  "qfep_connection": "A draw made before you arrived is no longer chance but something to find out: what changes with each step is what a body knows.",
+	  "scene": "res://algorithms/randomness/finding_out_field/finding_out_field.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"game",
+		"tiles",
+		"hidden",
+		"deduction",
+		"memory",
+		"seed"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",
