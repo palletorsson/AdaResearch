@@ -2489,6 +2489,44 @@
 		"seed"
 	  ]
 	},
+	"rain_tile_field": {
+	  "dna": {
+	   "axes": {
+	   "falls": [
+	   "even",
+	   "clumped",
+	   "aimed"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "Drops fall on a field of 192 half-metre tiles at drawn moments and drawn places: the wait to the next drop is exponential, the tile uniform, and the rate climbs from 3 to 9 a second over a 40 s round. A drop is seen coming for a second and takes charge from a body it lands on. Every tile keeps count of its hits; after a round the board sets the tiles hit 0, 1, 2, 3 and more times beside what Poisson gives. Stepping onto the field starts a round.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "rain_tile_field",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Rain Tile Field",
+	  "qfep_connection": "Nothing aims, and still some ground is hit again and again: clumping is what independence looks like, not evidence of intent.",
+	  "scene": "res://algorithms/randomness/rain_tile_field/rain_tile_field.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"game",
+		"tiles",
+		"arrivals",
+		"poisson",
+		"dodge",
+		"seed"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",

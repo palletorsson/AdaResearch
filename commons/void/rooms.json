@@ -34867,6 +34867,56 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "east-bay-ribs",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            17,
+            -1
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Random_Game / ribs for the rain field",
+              "places": [],
+              "lattices": [
+                {
+                  "id": "ribs",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "cells": [
+                    6,
+                    8
+                  ]
+                }
+              ]
+            },
+            "resident_region": false,
+            "editor_label": "Ribs in the east bay | a lattice of kit rods; the rain field sits in its cells"
+          }
+        },
+        {
+          "id": "east-bay-rain",
+          "artifact": "rain_tile_field",
+          "station": "SE",
+          "position": [
+            17,
+            -1
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
         }
       ],
       "props": [],
