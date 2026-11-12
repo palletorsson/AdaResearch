@@ -34118,13 +34118,15 @@
           "station": "SE",
           "position": [
             0,
-            6
+            5.2
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "support": "floor"
+            "support": "floor",
+            "pixel_size": "0.006",
+            "body_paints": "true"
           }
         },
         {
@@ -34156,8 +34158,8 @@
             -3
           ],
           "facing": 0,
-          "height": 1.15,
-          "scale": 0.25,
+          "height": 0.2,
+          "scale": 0.5,
           "config": {
             "residue": "path"
           }

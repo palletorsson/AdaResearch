@@ -7,6 +7,13 @@
 # needs: SubViewport for 2D painting [has]; Sprite3D projection [has]; VR proximity viewing [has]
 # relationships: feeds Randomness_Examples_of_Randomness map; contrasts with monte_carlo_dartboard (aesthetic vs computational randomness)
 # truth: A Pollock painting is not random — it is the trace of a body moving through a random field with intention.
+# history: a grid-map work (Randomness_Examples_of_Randomness); the support axis put the canvas back on the floor.
+#   2026-11-12, read as code: the truth above names a body, and the only body was a cursor. Where a room asks
+#   (body_paints), a visitor who walks on the floor canvas leaves the black line: the path is theirs, and chance
+#   decides how wide it runs, how far it wobbles and whether it throws drops. Off by default.
+# lineage: ART - Jackson Pollock, 1947 on: the canvas on the studio floor, paint poured from above while walking
+#   round it; Hans Namuth's 1950 film through glass; Yves Klein's body prints; Janine Antoni's Loving Care (1993),
+#   a floor painted with the body. MATH - a path integral: the mark is a sum along where the body went.
 
 extends Node3D
 
@@ -48,6 +55,12 @@ const SUPPORTS := ["floor", "table", "easel", "wall"]
 # measurement would be about the paint. A non-zero seed repaints the canvas once,
 # deterministically, so the frames differ only in the axis. Set from dna.fixture.
 @export var paint_seed: int = 0
+## A room may ask for this (the Void, 2026-11-12): on the floor support, a body walking on the canvas is the brush.
+@export var body_paints: bool = false
+@export var body_color: Color = Color(0.05, 0.045, 0.05, 1.0)
+var _body_area: Area3D = null
+var _body_last := {}
+var _body_clock := 0.0
 
 @onready var sprite_3d: Sprite3D = $Sprite3D
 @onready var sub_viewport: SubViewport = $SubViewport
@@ -59,6 +72,8 @@ var _built: bool = false
 
 
 func _ready() -> void:
+	if has_meta("config_pixel_size"): pixel_size = maxf(0.001, float(str(get_meta("config_pixel_size"))))
+	if has_meta("config_body_paints"): body_paints = str(get_meta("config_body_paints")).to_lower() in ["true", "1", "yes"]
 	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	await get_tree().process_frame
 
@@ -72,7 +87,57 @@ func _ready() -> void:
 	_create_frame_panels()
 	_connect_stroke_signal()
 	_create_brush_cursor()
+	if body_paints and support == "floor":
+		_watch_bodies()
 	_built = true
+
+
+## The canvas as a place a body can be on.
+func _watch_bodies() -> void:
+	var content := Vector2(sub_viewport.size.x, sub_viewport.size.y) * pixel_size
+	_body_area = Area3D.new()
+	_body_area.name = "CanvasBodies"
+	_body_area.collision_layer = 0
+	_body_area.collision_mask = 0xFFFFFFFF
+	_body_area.position = Vector3(sprite_3d.position.x, 1.0, sprite_3d.position.z)
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(content.x, 2.0, content.y)
+	shape.shape = box
+	_body_area.add_child(shape)
+	add_child(_body_area)
+
+
+## The inverse of _canvas_pixel_to_world, for a point on the floor.
+func world_to_canvas_pixel(world: Vector3) -> Vector2:
+	var local := sprite_3d.to_local(world)
+	return Vector2(float(sub_viewport.size.x) * 0.5 + local.x / pixel_size, float(sub_viewport.size.y) * 0.5 - local.y / pixel_size)
+
+
+func _physics_process(delta: float) -> void:
+	if _body_area == null or _paint_2d == null or not _paint_2d.has_method("paint_trace"):
+		return
+	_body_clock += delta
+	if _body_clock < 0.06:
+		return
+	var seen := {}
+	for body in _body_area.get_overlapping_bodies():
+		if not body is CharacterBody3D:
+			continue
+		var id := body.get_instance_id()
+		seen[id] = true
+		var px := world_to_canvas_pixel((body as Node3D).global_position)
+		if _body_last.has(id):
+			var gone: float = (_body_last[id] as Vector2).distance_to(px)
+			if gone > 2.0:
+				_paint_2d.call("paint_trace", _body_last[id], px, gone * pixel_size / _body_clock, body_color)
+				_body_last[id] = px
+		else:
+			_body_last[id] = px
+	for id in _body_last.keys():
+		if not seen.has(id):
+			_body_last.erase(id)
+	_body_clock = 0.0
 
 
 func _setup_sprite_material() -> void:

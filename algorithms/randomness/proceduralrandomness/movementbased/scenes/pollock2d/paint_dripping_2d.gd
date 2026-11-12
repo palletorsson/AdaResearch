@@ -185,6 +185,24 @@ func _emit_stroke_path(points: Array, stroke_color: Color, stroke_width: float) 
 ## Nothing calls this unless the host's paint_seed is non-zero, and that defaults to 0,
 ## so _ready's rng.randomize() and a fresh painting per launch are untouched in the
 ## rooms this already stands in.
+## THE VISITOR'S OWN TRACE (2026-11-12). The body gives the path; chance gives the mark: how wide the line runs, how
+## far it wobbles off the foot, whether it throws drops. Slow feet pool the paint, quick feet thin it and fling it.
+## Returns the number of marks made, for a probe.
+func paint_trace(from_px: Vector2, to_px: Vector2, speed: float, color: Color) -> int:
+	var quick := clampf(speed / 3.0, 0.0, 1.0)
+	var width := clampf(lerpf(9.0, 3.0, quick) * rng.randf_range(0.7, 1.3), 2.0, 12.0)
+	var wobble := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)) * (1.5 + quick * 5.0)
+	_paint_line(from_px, to_px + wobble, color, width)
+	var marks := 1
+	if rng.randf() < 0.2 + 0.3 * quick:
+		for i in rng.randi_range(1, 4):
+			var off := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)) * rng.randf_range(10, 50) * (0.5 + quick)
+			_paint_circle(to_px + off, rng.randf_range(min_drip_size + 1.0, max_drip_size * 0.45), color)
+			marks += 1
+	_update_texture()
+	return marks
+
+
 func repaint_with_seed(new_seed: int) -> void:
 	if canvas == null:
 		return
