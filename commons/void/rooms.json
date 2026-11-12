@@ -34152,21 +34152,48 @@
         },
         {
           "id": "f2_pipe_dream_10_15",
-          "artifact": "pipe_dream",
+          "artifact": "playground_spec_hall",
           "station": "NW",
           "position": [
-            0,
-            -4.5
+            1,
+            -4.4
           ],
           "facing": 0,
-          "height": 2.05,
+          "height": 0,
           "scale": 1,
           "config": {
-            "residue": "path",
-            "playground": "true",
-            "bounds": "6.65,1.9,1.9",
-            "max_segments": "520",
-            "walk_seed": "7"
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Randomness examples / the pipe walk, laid with the kit",
+              "places": [],
+              "walks": [
+                {
+                  "id": "pipes",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "cells": [
+                    6,
+                    2
+                  ],
+                  "levels": 4,
+                  "steps": 200,
+                  "seed": 32,
+                  "straight": 0.32,
+                  "ramps": 2,
+                  "out": [
+                    "west",
+                    "east"
+                  ]
+                }
+              ]
+            },
+            "resident_height": 4.5,
+            "editor_label": "Pipe walk | a seeded walk laid with the playground kit: bars, floors where four corners exist, ramps"
           }
         },
         {

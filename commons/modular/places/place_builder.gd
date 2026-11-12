@@ -6,6 +6,7 @@ const Corridors=preload("res://commons/modular/places/corridor_builder.gd")
 const Paths=preload("res://commons/modular/places/path_builder.gd")
 const Decks=preload("res://commons/modular/places/deck_builder.gd")
 const Banks=preload("res://commons/modular/places/grid_banks.gd")
+const Walks=preload("res://commons/modular/places/walk_builder.gd")
 const ACTIVITY_LIFT:=.03   # a slotted surface sits this much above its place floor: its flat rim must not share the shell's plane (z-fighting)
 func compile(raw:Dictionary)->Dictionary:
 	seen.clear();tiles.clear();tile_requests.clear();errors.clear()
@@ -24,6 +25,7 @@ func compile(raw:Dictionary)->Dictionary:
 	Paths.build_all(self,raw)
 	Decks.build_all(self,raw)
 	Banks.build_all(self,raw)
+	Walks.build_all(self,raw)    # bars, floors and ramps laid by a seeded walk: the same parts
 	Boards.build_all(self,raw)   # rectangular boards, framed and repeated, as pieces of the structure
 	tile_requests.sort_custom(func(a,b):return tile_priority(a)>tile_priority(b))
 	for request in tile_requests:place_tile(request.id,request.at,request.size)
