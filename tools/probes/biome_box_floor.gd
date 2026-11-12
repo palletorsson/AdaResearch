@@ -1,0 +1,128 @@
+extends SceneTree
+## THE BIOME BOX on one floor (the growth floors of the Void; Palle, 2026-11-12)
+## A glass box with the biome's cell grid on it, closing shaft B, and inside it the biome object at the stage of the
+## floor it stands on. Read in the running tower, with its own walker:
+##   the box stands on the floor and its biome is built once a body has arrived there;
+##   the stage is the floor's own sequence, read from the floor's map, and the phase is the row's;
+##   everything the biome draws lies inside the glass;
+##   the glass keeps a body out, and the box's floor closes the shaft (a body set on the roof stays on it);
+##   what the build cost.
+##
+##   godot --path <stage> --script res://tools/probes/biome_box_floor.gd -- --no-bridges
+##       --void-start-floor=<floor> --out=<dir> [--stage=lsystems]
+##
+## box.json: checks with what was read. arrival.png, box.png, close.png.
+const ID := "biome-box"
+var game: Node3D
+var level := 0.0
+
+
+func _initialize() -> void:
+	run.call_deferred()
+
+
+func _shot(cam: Camera3D, at: Vector3, target: Vector3, path: String) -> void:
+	cam.global_position = at
+	cam.look_at(target, Vector3.UP)
+	cam.current = true
+	for i in 4: await process_frame
+	root.get_viewport().get_texture().get_image().save_png(path)
+	cam.current = false
+
+
+func _go(body: CharacterBody3D, target: Vector3, ticks_max: int = 600, speed: float = 0.5) -> float:
+	var best := INF
+	for i in ticks_max:
+		var d := Vector2(body.global_position.x, body.global_position.z).distance_to(Vector2(target.x, target.z))
+		best = minf(best, d)
+		if d < 0.15: break
+		body.look_at(Vector3(target.x, body.global_position.y, target.z), Vector3.UP)
+		body.drive = Vector2(0, -speed)
+		await physics_frame
+	body.drive = Vector2.ZERO
+	for i in 20: await physics_frame
+	return best
+
+
+func run() -> void:
+	var folder := ""
+	var want_stage := "lsystems"
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--out="): folder = arg.trim_prefix("--out=")
+		if arg.begins_with("--stage="): want_stage = arg.trim_prefix("--stage=")
+	DirAccess.make_dir_recursive_absolute(folder)
+	load("res://commons/void/room_source.gd").use_main_tower = true
+	game = load("res://commons/void/void.tscn").instantiate()
+	root.add_child(game); current_scene = game
+	game.body.scripted_input = true; game.body.set_process_unhandled_input(false)
+	game.scene_loaded(); game.scene_visible()
+	var floor: int = game.checkpoint
+	var record: Dictionary = game.building.content.data.floors[floor]
+	var checks := []
+	var result := {"floor": floor, "map": str(record.map), "checks": checks, "passed": false}
+	var row = null
+	for a in record.artifacts:
+		if str(a.id) == ID: row = a
+	for i in 1500:
+		if game.building.content.exhibits.has(str(floor) + "/" + ID): break
+		await physics_frame
+	var mount: Node3D = game.building.content.exhibits.get(str(floor) + "/" + ID)
+	var box: Node3D = mount.get_node_or_null("Artifact") if mount != null else null
+	checks.append({"check": "the floor holds a biome box", "ok": box != null and box.has_method("grow") and row != null})
+	if box != null and box.has_method("grow") and row != null:
+		var built := false
+		for i in 900:
+			if bool(box.state().built): built = true; break
+			await physics_frame
+		for i in 240: await physics_frame
+		level = float(game.building.spec.levels[floor]) + game.building.global_position.y
+		var body: CharacterBody3D = game.body
+		for layer in root.find_children("*", "CanvasLayer", true, false):
+			if layer.get_viewport() == root: layer.hide()
+		var cam := Camera3D.new()
+		cam.fov = 80
+		root.add_child(cam)
+		var at: Vector3 = box.global_position
+		var st: Dictionary = box.state()
+		var want_phase: float = float((row.config as Dictionary).get("phase", 1.0))
+		checks.append({"check": "a body has arrived on the floor and the biome is built in the box", "ok": built, "state": st})
+		checks.append({"check": "the stage is the floor's own sequence and the phase is the row's", "ok": str(st.stage) == want_stage and is_equal_approx(float(st.phase), want_phase), "stage": str(st.stage), "phase": float(st.phase), "arriving": st.arriving})
+		# everything the biome draws lies inside the glass
+		var low := Vector3(INF, INF, INF)
+		var high := Vector3(-INF, -INF, -INF)
+		var drawn := 0
+		for n in box.biome().find_children("*", "GeometryInstance3D", true, false):
+			var g := n as GeometryInstance3D
+			if not g.is_visible_in_tree() or g.get_aabb().size == Vector3.ZERO: continue
+			var world: AABB = g.global_transform * g.get_aabb()
+			low = low.min(world.position)
+			high = high.max(world.end)
+			drawn += 1
+		var half: float = box.half_side()
+		var inside: bool = drawn > 0 and low.x >= at.x - half - 0.06 and high.x <= at.x + half + 0.06 and low.z >= at.z - half - 0.06 and high.z <= at.z + half + 0.06 and low.y >= at.y - 0.02 and high.y <= at.y + float(box.tall) + 0.02
+		checks.append({"check": "everything the biome draws lies inside the glass", "ok": inside, "drawn": drawn,
+			"from": [snappedf(low.x - at.x, .01), snappedf(low.y - at.y, .01), snappedf(low.z - at.z, .01)], "to": [snappedf(high.x - at.x, .01), snappedf(high.y - at.y, .01), snappedf(high.z - at.z, .01)]})
+		game.place_player(Vector3(0, level + 0.3, 8.6))
+		for i in 20: await physics_frame
+		await _shot(cam, Vector3(0, level + 1.6, 7.8), at + Vector3(0, 1.4, 0), folder.path_join("arrival.png"))
+		await _shot(cam, at + Vector3(-4.6, 2.3, 6.2), at + Vector3(0, 1.3, 0), folder.path_join("box.png"))
+		await _shot(cam, at + Vector3(0.4, 1.6, 4.3), at + Vector3(0, 1.2, 0), folder.path_join("close.png"))
+		# the glass keeps a body out
+		game.place_player(at + Vector3(0.9, 0.3, half + 1.6))
+		for i in 40: await physics_frame
+		await _go(body, at + Vector3(0.9, 0, 0), 300)
+		var stopped: float = body.global_position.z - at.z
+		checks.append({"check": "the glass keeps a body out", "ok": stopped >= half + 0.15, "stopped_m_from_the_middle": snappedf(stopped, .01)})
+		# the box closes the shaft: a body set on its roof stays there
+		game.place_player(at + Vector3(0, float(box.tall) + 0.4, 0))
+		for i in 90: await physics_frame
+		var on_roof: float = body.global_position.y - at.y
+		checks.append({"check": "a body set on the roof stays on it: the box closes the shaft", "ok": absf(on_roof - float(box.tall)) < 0.25 and int(game.checkpoint) == floor, "feet_m": snappedf(on_roof, .01)})
+		checks.append({"check": "the build is reported (the biome's own builders: about 1.3 s alone on this machine, more when several towers run at once)", "ok": int(st.build_ms) > 0, "build_ms": int(st.build_ms), "trees": int(st.trees), "creatures": int(st.creatures)})
+		game.place_player(Vector3(0, level + 0.3, 8.6))
+		result["passed"] = checks.all(func(c): return c.ok)
+	var file := FileAccess.open(folder.path_join("box.json"), FileAccess.WRITE)
+	file.store_string(JSON.stringify(result, "\t"))
+	file.close()
+	print("[biome_box_floor] ", "PASSED" if result.passed else "FAILED")
+	quit()

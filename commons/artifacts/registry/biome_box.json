@@ -1,0 +1,47 @@
+{
+ "artifacts": {
+  "biome_box": {
+   "lookup_name": "biome_box",
+   "scene": "res://commons/artifacts/biome_box/biome_box.tscn",
+   "name": "Biome Box (the biome in a transparent grid box)",
+   "description": "The biome in a transparent grid box. A glass box six metres square, the size of a shaft's opening, with the biome's own cell lines carried out onto the glass one metre apart; inside it biome_object, one ground from one seed, the same in every box down the tower. What differs from floor to floor is the stage: the biome may only be made of what the halls above have taught (the biome vocabulary), and phase says how far what arrives with this floor's sequence has come. A run of boxes down one shaft is one world growing as the visitor descends: on the L-system floors the tree and the creature arrive. The box closes the shaft and keeps a body out. It stays an empty grid with its seed until a body arrives on its floor, because the biome's builders take about a second.",
+   "category": "biome",
+   "artifact_type": "installation",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "sequence": "biome_lab",
+   "interaction": "watch",
+   "size_group": "room",
+   "tags": [
+    "biome",
+    "living",
+    "ecology",
+    "ladder",
+    "glass",
+    "grid"
+   ],
+   "qfep_connection": "The same ground is asked again on every floor what it is allowed to be: what a place can grow is a matter of what has been taught above it.",
+   "dev_themes": [
+    "biome"
+   ],
+   "dna": {
+    "axes": {
+     "stage": [
+      "randomness",
+      "lsystems",
+      "full"
+     ]
+    },
+    "fixture": {
+     "builds": "always"
+    },
+    "predicted_degeneracy": {
+     "pair": "stage: lsystems ~ full",
+     "percent": 1.5,
+     "arithmetic": "On a bench (seed 7) the ground, the pool, the web and the tree are the same at lsystems and at full; what full adds is the residents and the last connections, a dozen bodies of about 0.3 m. Twelve bodies of some 0.07 square metres each are 0.8 square metres of a picture that shows the 6 m box on about a third of the frame of 55: 0.8 / 55 = 1.5 %. randomness ~ lsystems differs by the whole tree, a crown about 2 m across."
+    }
+   }
+  }
+ }
+}
