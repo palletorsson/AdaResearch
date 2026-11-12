@@ -34979,36 +34979,38 @@
             "stand": "compare",
             "count": "24",
             "size": "0.9",
-            "seed": "31415"
+            "seed": "31415",
+            "point_look": "glass"
           }
         },
         {
           "id": "needles",
           "artifact": "WhiteNoiseGallery",
           "position": [
-            0,
-            7
+            -10,
+            0
           ],
           "station": "SE",
-          "height": 1.05,
+          "height": 0,
           "facing": 0,
-          "scale": 0.05,
+          "scale": 0.6,
           "config": {
             "stand": "gallery",
-            "seed": "31415"
+            "seed": "31415",
+            "console_at": "0,1.05,3.6"
           }
         },
         {
           "id": "spectrum",
           "artifact": "NoiseColors3D",
           "position": [
-            3.0,
-            7.0
+            10,
+            0
           ],
           "station": "SE",
-          "height": 1.05,
+          "height": 0,
           "facing": 0,
-          "scale": 0.1,
+          "scale": 0.6,
           "config": {
             "stand": "gallery",
             "seed": "31415",
@@ -35017,7 +35019,8 @@
                 "move"
               ],
               "note": "overlap check: a tower column inside it; moved 1.0 m"
-            }
+            },
+            "console_at": "0,1.05,3.6"
           }
         },
         {

@@ -10,7 +10,13 @@ static func stage(gallery: Node3D, panel: Node3D, status: Label3D, kind: String)
 	unit.set_meta("em_local_instrument", true)
 	gallery.add_child(unit)
 	unit.scale = Vector3.ONE / gallery.global_basis.get_scale().abs()
-	unit.position = Vector3(0.78, 0, 0) / gallery.global_basis.get_scale().abs()
+	# Where the console stands, in metres from the work's origin. The default is beside a miniature on its plinth; a
+	# room that lets the work fill a shaft at floor level names a place on the slab ("console_at": "x,y,z").
+	var console_at := Vector3(0.78, 0, 0)
+	var asked := str(gallery.get_meta("config_console_at", "")).split(",")
+	if asked.size() == 3:
+		console_at = Vector3(float(asked[0]), float(asked[1]), float(asked[2]))
+	unit.position = console_at / gallery.global_basis.get_scale().abs()
 	panel.reparent(unit, false)
 	panel.name = "Panel"
 	panel.position = Vector3(0, 0.22, 0.73)

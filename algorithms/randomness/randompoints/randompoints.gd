@@ -50,6 +50,10 @@ var _dist_asked: bool = false    # did the map name the rule's distance, or is i
 var _base_count: int = 24
 
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_color_with_text.tscn")
+## How a point of the compare stand is shown: "point" is the shipped small opaque sphere; "glass" a transparent
+## sphere three times as wide (the Void, 2026-11-12; Palle: "use transparent spheres instead").
+var point_look: String = "point"
+var _glass := {}
 
 func _ready() -> void:
 	# Auto-detect type from node name if generic script is used
@@ -201,6 +205,10 @@ func apply_grid_config(config: Dictionary) -> void:
 		if c > 0 and c != num_points:
 			num_points = c
 			restage = true
+
+	if config.has("point_look") and str(config["point_look"]) in ["point", "glass"] and str(config["point_look"]) != point_look:
+		point_look = str(config["point_look"])
+		restage = true
 
 	if config.has("size"):
 		var sz: float = float(config["size"])
@@ -445,6 +453,22 @@ func _fill_volumes() -> void:
 			p.set_meta("cloud", key)
 			root.add_child(p)
 			p.position = list[i]
+			if point_look == "glass":
+				var ball: MeshInstance3D = p.get_node_or_null("MeshInstance3DSphere") as MeshInstance3D
+				if ball != null:
+					if not _glass.has(key):
+						var glass := StandardMaterial3D.new()
+						glass.albedo_color = Color(0.35, 0.85, 1.0, 0.42) if key == "admitted" else Color(1.0, 0.72, 0.30, 0.42)
+						glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+						glass.roughness = 0.15
+						glass.emission_enabled = true
+						glass.emission = Color(glass.albedo_color, 1.0)
+						glass.emission_energy_multiplier = 0.25
+						_glass[key] = glass
+					ball.material_override = _glass[key]
+					ball.scale = Vector3.ONE * 3.0
+					for inner in ball.get_children():
+						if inner is Node3D and not inner is Label3D: (inner as Node3D).visible = false
 			var lbl: Node = p.get_node_or_null("MeshInstance3DSphere/Label3D")
 			if lbl != null:
 				(lbl as Node3D).visible = false   # the readout carries the numbers; eighty
