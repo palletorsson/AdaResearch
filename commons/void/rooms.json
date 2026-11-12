@@ -40658,11 +40658,78 @@
               "note": "fit pass: drawn outside the building, box centre (-16.8, 2.1, -10.8); moved 2.5 m"
             }
           }
+        },
+        {
+          "id": "cantor-staircase",
+          "artifact": "cantor_staircase",
+          "station": "SE",
+          "position": [
+            0.9,
+            1.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Cantor staircase | the Cantor function as a stair: 13.5 m, 2 m up, over shaft B; what rises is the Cantor set, a landing never moves; at the fifth cut a body cannot climb it"
+          }
+        },
+        {
+          "id": "cantor-landing",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            15.5,
+            1.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Fractal_CantorSet / the landing the Cantor staircase arrives at",
+              "places": [],
+              "decks": [
+                {
+                  "id": "landing",
+                  "at": [
+                    0,
+                    2,
+                    0
+                  ],
+                  "size": [
+                    2,
+                    2
+                  ],
+                  "enclosure": "rails",
+                  "openings": [
+                    "west",
+                    "south"
+                  ],
+                  "ramp": "south"
+                }
+              ]
+            },
+            "resident_region": false,
+            "show_place_dimensions": false,
+            "editor_label": "Cantor landing | a kit deck 2 x 2 m at 2 m where the Cantor staircase arrives, rails, a ramp down to the south"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / WHERE DOES IT RISE?\nA stair that is level almost everywhere, and still climbs.",
+          "position": [
+            1.2,
+            6.2
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

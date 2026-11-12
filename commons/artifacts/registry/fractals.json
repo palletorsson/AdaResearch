@@ -1146,6 +1146,52 @@
         1.0
       ]
     },
+    "cantor_staircase": {
+      "lookup_name": "cantor_staircase",
+      "scene": "res://algorithms/fractals/cantor_staircase/cantor_staircase.tscn",
+      "name": "Cantor Staircase (the Cantor function to walk)",
+      "description": "The Cantor function as a stair to walk: 13.5 m long, rising 2 m from the middle of the floor over shaft B to a landing. Lay a ramp, make its middle third level at half its height and steepen the two ends; do the same to every ramp that is left. After n cuts the stair still arrives; what rises is the Cantor set of that depth (2^n ramps, (2/3)^n of the length, each (3/2)^n times as steep) and every landing stays at the height its cut gave it. The ramps are pink, the landings pale, the walls under them carry the same colours, so the side of the stair is the set's row of bars under its own graph. Two plates cut again or put back. At the fifth cut the ramps pass 45 degrees: the stair still arrives and a body cannot climb it.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "sequence": "fractals",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "fractal",
+        "cantor",
+        "cantor-function",
+        "devils-staircase",
+        "measure",
+        "walkable"
+      ],
+      "qfep_connection": "A path can arrive without ever being seen to climb: all of the change sits where there is nothing to stand on, and the body finds the limit before the mathematics does.",
+      "dev_themes": [
+        "fractals",
+        "recursion"
+      ],
+      "dna": {
+        "axes": {
+          "cut": [
+            "whole",
+            "once",
+            "twice",
+            "thrice",
+            "four_times",
+            "five_times"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "cut: four_times ~ five_times",
+          "percent": 0.9,
+          "arithmetic": "The fifth cut changes only what lies on the fourth cut's sixteen ramps: of the 13.5 m, 2.67 m rises after four cuts and 1.78 m after five, so 0.89 m of top face (1.6 m wide) and of wall (about 1 m high on average) turns from pink to pale, and the graph itself moves by at most 6 cm. Seen at a pitch of 0.26 rad the top face shows 0.89 x 1.6 x sin(0.26) = 0.37 square metres and one wall about 0.7, some 1.1 square metres of a frame of about 119 fitted to the stair's 13.8 m diagonal: 0.9 %."
+        }
+      }
+    },
     "cantor_bench": {
       "lookup_name": "cantor_bench",
       "scene": "res://commons/artifacts/cantor_bench/cantor_bench.tscn",
