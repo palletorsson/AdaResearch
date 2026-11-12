@@ -39306,6 +39306,61 @@
           "config": {
             "source_id": "f4_ca_rule_explorer_3_5"
           }
+        },
+        {
+          "id": "termite-yard",
+          "artifact": "playground_spec_hall",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "CA_AgentsCircuits / a railed yard over shaft A for the termite stack",
+              "places": [],
+              "decks": [
+                {
+                  "id": "yard",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "size": [
+                    6,
+                    6
+                  ],
+                  "enclosure": "rails"
+                }
+              ]
+            },
+            "resident_region": false,
+            "show_place_dimensions": false,
+            "editor_label": "Termite yard | a kit deck 6 x 6 m with rails all round, over shaft A; the termite stack stands in it"
+          }
+        },
+        {
+          "id": "termite-stack",
+          "artifact": "termite_stack",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lift": "0.07",
+            "editor_label": "Termite stack | one worker reads the stack under it, turns as the instruction says, adds a unit; five instructions, five forms"
+          }
         }
       ],
       "props": [
@@ -39341,7 +39396,15 @@
         }
       ],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "LEFT / THE TERMITE STACK\nOne worker, one instruction. The form is written nowhere else.",
+          "position": [
+            -3.4,
+            4.8
+          ]
+        }
+      ],
       "supply_leads": false,
       "construction": [
         {
