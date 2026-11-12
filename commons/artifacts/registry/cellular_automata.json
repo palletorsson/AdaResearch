@@ -6823,6 +6823,55 @@
         1
       ]
     },
+    "fracture_automaton": {
+      "lookup_name": "fracture_automaton",
+      "scene": "res://algorithms/cellularautomata/fracture_automaton/fracture_automaton.tscn",
+      "name": "Fracture Automaton",
+      "description": "A cellular automaton that fractures an object. A block of 12 x 10 x 6 quarter-metre cells; a bond is the face two cells share, with a strength (the grain) and a load. A stone's blow is a load on the bonds round one lattice point. A bond breaks when its load is more than its strength, uses the strength up and hands the excess to the live bonds ahead of it in its own plane; only with none left does the crack turn the corner. The pieces are the cells still joined, and each gets a rigid body, so what the rule separates gravity takes apart; a later stone breaks a fallen piece by the same rule. Five grains under the same six blows: even (rubble), layered (slabs), columnar (columns), glass (shards), knotted (a boulder and chips). The skin shows the grain; the inside is pink. After the sixth blow the pieces go back and the next grain begins.",
+      "category": "cellular_automata",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "sequence": "cellularautomata",
+      "interaction": "watch",
+      "size_group": "room",
+      "tags": [
+        "cellular-automata",
+        "applied",
+        "fracture",
+        "bonds",
+        "threshold",
+        "rigid-bodies",
+        "grain"
+      ],
+      "qfep_connection": "Nothing in the rule knows what a piece is: a break is only a bond that carried more than it could, and the shape of the ruin was in the grain before the stone.",
+      "dev_themes": [
+        "cellular_automata"
+      ],
+      "dna": {
+        "axes": {
+          "grain": [
+            "even",
+            "layered",
+            "columnar",
+            "glass",
+            "knotted"
+          ]
+        },
+        "fixture": {
+          "preblows": 6,
+          "exploded": 0.5
+        },
+        "predicted_degeneracy": {
+          "pair": "grain: even ~ glass",
+          "percent": 12.0,
+          "arithmetic": "Every grain has its own skin, so no pair is alike over the whole block; the two palest skins are even (0.80, 0.80, 0.78) and glass (0.78, 0.92, 0.98), 31 and 51 levels apart on green and blue. In the held-apart still after six blows the pieces fill about 30 % of the frame; the pink fracture faces, the same in both, are some 45 % of what shows of even's 61 pieces and more of glass's 145, so the skin that differs is about 0.30 x 0.4 = 12 % of the frame, before counting that the pieces themselves are cut differently."
+        }
+      }
+    },
     "automaton_organ": {
       "lookup_name": "automaton_organ",
       "scene": "res://algorithms/cellularautomata/automaton_organ/automaton_organ.tscn",

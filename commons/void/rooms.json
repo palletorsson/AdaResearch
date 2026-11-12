@@ -39715,14 +39715,63 @@
           "artifact": "crackpropagation_ca",
           "station": "SW",
           "position": [
-            -16,
-            4
+            -17.8,
+            3.4
           ],
           "facing": 0,
           "height": 0.9,
           "scale": 0.8,
           "config": {
             "plinth": "0"
+          }
+        },
+        {
+          "id": "fracture-quarry",
+          "artifact": "playground_spec_hall",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "CA_EdgeOfChaos / a pool over shaft A for the block a rule breaks",
+              "places": [
+                {
+                  "id": "quarry",
+                  "at": [
+                    0,
+                    0
+                  ],
+                  "y": 1,
+                  "size": [
+                    6,
+                    6
+                  ],
+                  "depth": 1,
+                  "type": "plastic_pool",
+                  "rim": 1,
+                  "colour": "3f5566",
+                  "access": {
+                    "outer": "ramp",
+                    "inner": "ramp"
+                  },
+                  "activity": {
+                    "artifact": "fracture_automaton",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            "resident_height": 3.5,
+            "show_place_dimensions": false,
+            "editor_label": "Fracture quarry | a kit pool over shaft A; its activity is a block a cellular automaton breaks: bonds, loads, strengths, and the pieces fall"
           }
         }
       ],
@@ -39765,6 +39814,13 @@
           "position": [
             -1.5,
             5.6
+          ]
+        },
+        {
+          "label": "LEFT / A BLOCK BROKEN BY A RULE\nA bond breaks when its load is more than its strength.",
+          "position": [
+            -7.0,
+            8.0
           ]
         }
       ],
