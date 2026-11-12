@@ -9000,6 +9000,41 @@
    },
    "drafted_for": "noise_ground_pair",
    "drafted_by": "Claude Fable 5.2, 2026-11-12: the bridge from chance to noise at the scale of a body"
+  },
+  "scent_trail_ground": {
+   "expr": "trail(walker × 120, sense 4 cells ahead, turn toward the strongest scent, deposit 0.2) + trail(visitor, deposit 2) on ground 12 × 10 m = scent_trail_ground — a body enters the channel: its feet write the signal the walkers read (pink, fades) and the record that stays (pale); the walkers that meet its line turn onto it",
+   "from": [
+    "pheromone_mark",
+    "record_vs_signal"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "engine",
+    "kind": "trail",
+    "size": [
+     12,
+     10
+    ],
+    "cells": 120,
+    "agents": 120,
+    "seed": 20261131,
+    "follow": 1,
+    "wander": 10,
+    "evaporate": 0.12,
+    "diffuse": 0,
+    "sense": 4,
+    "angle": 45,
+    "turn": 45,
+    "deposit": 0.2,
+    "warm": 900,
+    "saturate": 1,
+    "of": {
+     "op": "compose",
+     "parts": []
+    }
+   },
+   "drafted_for": "scent_trail_ground",
+   "drafted_by": "Claude Fable 5.2, 2026-11-12: the channel at the scale of a body"
   }
  }
 }
