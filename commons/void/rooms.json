@@ -34272,9 +34272,9 @@
           "station": "SW",
           "position": [
             10,
-            6.3
+            0.25
           ],
-          "facing": 270,
+          "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
@@ -34338,6 +34338,21 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "shaft-b-scaffold",
+          "artifact": "site_shaft_play_scaffold",
+          "station": "SW",
+          "position": [
+            10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "caption": "height is where the walkers went   pink is what they smell now"
+          }
         }
       ],
       "props": [],

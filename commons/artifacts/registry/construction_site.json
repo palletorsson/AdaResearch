@@ -206,6 +206,23 @@
         "reusable",
         "scenery"
       ]
+    },
+    "site_shaft_play_scaffold": {
+      "lookup_name": "site_shaft_play_scaffold",
+      "scene": "res://commons/artifacts/construction_site/shaft_play_scaffold.tscn",
+      "name": "Light play scaffold round a shaft",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Blue standards and pink ledgers round a 6 x 6 m shaft, for a work that lies over the opening. Two bearers cross under the work. On the north side (facing 0) a deck of pink and blue quads hangs 0.9 m out over the opening at 2 m: a plank ramp goes up to its west end, a slide comes down from its east end. Origin at the shaft centre. Config: deck_height, ramp_run, slide_run, mirrored, bearers, caption.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible - and are climbed.",
+      "tags": [
+        "construction",
+        "void",
+        "scaffold",
+        "playground",
+        "shaft",
+        "reusable"
+      ]
     }
   }
 }
