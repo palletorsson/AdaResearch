@@ -35548,11 +35548,34 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "layer-floor",
+          "artifact": "threshold_layer_floor",
+          "station": "SE",
+          "position": [
+            10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Layer floor | the block's held layer as 576 cells over shaft B; a cell above the line is there, the rest is the shaft"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "RIGHT / THE SAME LAYER, AS A FLOOR\nCross shaft B on what the line admits.",
+          "position": [
+            3.4,
+            5.0
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

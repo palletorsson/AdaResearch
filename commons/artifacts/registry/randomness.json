@@ -823,6 +823,49 @@
 		"derived_from": "aabb_size + category"
 	  }
 	},
+	"threshold_layer_floor": {
+	  "dna": {
+	   "axes": {
+	   "shows": [
+	   "matter",
+	   "margin",
+	   "field"
+	   ]
+	   },
+	   "predicted_degeneracy": {
+	   "pair": "matter ~ margin",
+	   "percent": 1.0,
+	   "arithmetic": "margin adds only the outlines of cells within 0.06 under the line. On layer 12 at line 0.00 that is some 40 of 576 cells, 7 %, each drawn as a thin frame covering about a quarter of its square, on a floor that fills some 30 % of the frame: 0.07 x 0.25 x 0.30 = 0.5 %, doubled for the glow. field replaces every cube with a flat tile and removes every gap, and differs from both by far more."
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "intermediate",
+	  "description": "One layer of the voxel block as a floor over a shaft: 24 x 24 cells of a quarter metre, the shaft's six metres. A cell above the line is a cube with its top at the slab; a cell below it is not there and under it is the shaft. The floor is a receiver of the sculptor bench like the block: told the seed, scale, line and held cell, it asks the field through the bench's own contract at the same normalised places, so its cells are the block's cells on the held layer. Two plates at the rim press the bench's own buttons: MOVE THE LINE and NEXT CELL.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "threshold_layer_floor",
+	  "map_ready": true,
+	  "map_sequences": [
+		"noise"
+	  ],
+	  "name": "Threshold Layer Floor",
+	  "qfep_connection": "Whether there is ground under the next step is not a property of the ground: it is where a line was drawn through something continuous.",
+	  "scene": "res://algorithms/randomness/voxelnoise/layer_floor/threshold_layer_floor.tscn",
+	  "sequence": "noise",
+	  "size_group": "room",
+	  "tags": [
+		"noise",
+		"voxel",
+		"threshold",
+		"layer",
+		"walk",
+		"shaft"
+	  ]
+	},
 	"noise_ring_walk": {
 	  "dna": {
 	   "axes": {
