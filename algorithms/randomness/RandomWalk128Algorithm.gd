@@ -11,6 +11,19 @@
 # needs: cube_scene.tscn [has], a 10x10 m clear floor [has]
 # relationships: shares the `residue` ladder word for word with [[random_walk_leash]] — the same walk, one you stand on and one you hold
 # truth: A random walk has no memory, but the ground it walked on does. Everything you can see of chance is something that was kept.
+# history: a grid-map work (Random_Walk). In the Void it stands in a glass room with two doorways. 2026-11-12, read as
+#   code: it walked its 10 000 steps in the 17 s after its floor was built and then stopped for good, so a visitor found a
+#   finished mound and never the assembling the desire asks for; and its first cube stood 17 cm proud, a kerb round the range.
+#   Now, where a room asks (restart_on_enter), the walk begins again when a body steps onto the plain, and `sink` lowers
+#   the first step so the range rises under the feet. Measured the same day with the tower's walker: ten thousand steps
+#   on this lattice visit a cell about ten times, so the range stood 14 cm high - a carpet. `height_scale` draws a visit
+#   taller (the count itself is untouched) and stretches each cube down to the floor. But a body ON a growing lattice
+#   was boxed in between columns at 2x and stood knee-deep in them at 4x (tools/probes/walk_room_enter.gd). So the
+#   Void places the lattice smaller inside its glass room: the visitor stands on the plain around it, as the desire
+#   says, and `enter_margin` starts the walk at the doorway. All four are off by default.
+# lineage: MATH - the lattice random walk, whose spread grows like the square root of its steps (Polya: in the plane it
+#   returns to its start again and again). ART - Richard Long's walked lines: the work is what the walking left on the
+#   ground. ARCHITECTURE - desire paths: a lawn remembers where people chose to cross.
 
 class_name RandomWalk128Algorithm
 extends Node3D
@@ -145,6 +158,17 @@ const RESIDUE_RUNGS := {
 ## what every room ships.
 @export var preroll_steps: int = 0
 
+## A room may ask for these (the Void, 2026-11-12). Off at the defaults: nothing a grid map shipped changes.
+## restart_on_enter: the walk begins again when a body steps onto the plain, if it is not running.
+## sink: metres every cube is lowered, so the first visit is a low step and not a 17 cm kerb.
+@export var restart_on_enter: bool = false
+@export var sink: float = 0.0
+## How tall a visit is DRAWN (1 = as shipped). The visit count in grid[][] is never scaled.
+@export var height_scale: float = 1.0
+## How far beyond the lattice the threshold reaches, in the work's own metres: a room sets it so that the walk
+## begins at its doorway and the visitor can stay on the plain around the lattice.
+@export var enter_margin: float = 0.0
+
 # State tracking
 var current_step: int = 0
 var is_running: bool = false
@@ -236,6 +260,8 @@ func _ready() -> void:
 	# consumes its legacy draws. At the shipped defaults (preroll_steps 0,
 	# residue "path") the first call does nothing, the second finds nothing to
 	# refresh and the third builds nothing.
+	if restart_on_enter:
+		_watch_the_plain()
 	if preroll_steps > 0:
 		_preroll(preroll_steps)
 	_refresh_residue()
@@ -431,6 +457,9 @@ func _create_cube_at(x: int, z: int) -> void:
 	var world_pos = _grid_to_world_position(x, z)
 	cube.position = Vector3(world_pos.x, _cube_y(x, z), world_pos.y)
 
+	if height_scale != 1.0:
+		_column(cube, x, z)
+
 	# Store reference
 	cube_instances[x][z] = cube
 	add_child(cube)
@@ -441,6 +470,17 @@ func _update_cube_height(x: int, z: int) -> void:
 	if cube:
 		var world_pos = _grid_to_world_position(x, z)
 		cube.position = Vector3(world_pos.x, _cube_y(x, z), world_pos.y)
+		if height_scale != 1.0:
+			_column(cube, x, z)
+
+
+## Drawn taller than shipped, a lifted cube would float over a gap: it is stretched down to the floor instead.
+func _column(cube: Node3D, x: int, z: int) -> void:
+	var top := _cube_y(x, z) + CUBE_SIZE / 2.0
+	var tall := maxf(CUBE_SIZE, top + sink + 0.02)
+	cube.scale = Vector3(CUBE_SCALE, CUBE_SCALE * tall / CUBE_SIZE, CUBE_SCALE)
+	cube.position.y = top - tall / 2.0
+
 
 func _grid_to_world_position(grid_x: int, grid_z: int) -> Vector2:
 	"""Convert grid coordinates to world position"""
@@ -484,6 +524,24 @@ func _count_created_cubes() -> int:
 	return count
 
 # === PUBLIC API ===
+
+## The plain as a threshold: a body that steps onto it finds the walk beginning, not ended.
+func _watch_the_plain() -> void:
+	var area := Area3D.new()
+	area.name = "PlainThreshold"
+	area.collision_layer = 0
+	area.collision_mask = 0xFFFFFFFF
+	area.position = Vector3(0, 1.0, 0)
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(GRID_AREA_SIZE + 2.0 * enter_margin, 2.0, GRID_AREA_SIZE + 2.0 * enter_margin)
+	shape.shape = box
+	area.add_child(shape)
+	add_child(area)
+	area.body_entered.connect(func(body: Node) -> void:
+		if body is CharacterBody3D and not is_running:
+			restart_walk())
+
 
 func restart_walk() -> void:
 	"""Restart the walk from the beginning"""
@@ -583,8 +641,8 @@ func _rung() -> int:
 ##   residue:head            0.0, always. The carpet lies flat.
 func _cube_y(x: int, z: int) -> float:
 	if _rung() >= 2:
-		return float(grid[x][z]) / 2.0
-	return 0.0
+		return float(grid[x][z]) / 2.0 * height_scale - sink
+	return 0.0 - sink
 
 
 ## The walker's y. Legacy expression at residue:path and above; at head/tail the
@@ -841,3 +899,13 @@ func _read_meta_overrides() -> void:
 		walk_seed = int(str(get_meta("config_walk_seed")))
 	if has_meta("config_preroll_steps"):
 		preroll_steps = int(str(get_meta("config_preroll_steps")))
+	if has_meta("config_restart_on_enter"):
+		restart_on_enter = str(get_meta("config_restart_on_enter")).to_lower() in ["true", "1", "yes"]
+	if has_meta("config_sink"):
+		sink = float(str(get_meta("config_sink")))
+	if has_meta("config_enter_margin"):
+		enter_margin = maxf(0.0, float(str(get_meta("config_enter_margin"))))
+	if has_meta("config_height_scale"):
+		height_scale = maxf(0.1, float(str(get_meta("config_height_scale"))))
+	if has_meta("config_steps_per_frame"):
+		steps_per_frame = maxi(1, int(str(get_meta("config_steps_per_frame"))))

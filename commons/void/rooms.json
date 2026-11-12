@@ -33165,13 +33165,19 @@
           ],
           "facing": 0,
           "height": 0,
-          "scale": 1,
+          "scale": 0.7,
           "config": {
-            "glass_width": "12",
-            "glass_depth": "12",
-            "glass_height": "5",
+            "glass_width": "17.14",
+            "glass_depth": "15.71",
+            "glass_height": "7.14",
             "glass_title": "WALK / RETAIN",
-            "glass_moat": "true"
+            "glass_moat": "false",
+            "restart_on_enter": "true",
+            "sink": "0.13",
+            "steps_per_frame": "5",
+            "height_scale": "5",
+            "enter_margin": "3.2",
+            "glass_entry": "3.14"
           }
         }
       ],
