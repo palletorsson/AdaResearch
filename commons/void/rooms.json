@@ -34997,7 +34997,7 @@
           "config": {
             "stand": "gallery",
             "seed": "31415",
-            "console_at": "0,1.05,3.6"
+            "console_at": "2.3,1.05,3.6"
           }
         },
         {
@@ -35020,7 +35020,7 @@
               ],
               "note": "overlap check: a tower column inside it; moved 1.0 m"
             },
-            "console_at": "0,1.05,3.6"
+            "console_at": "2.3,1.05,3.6"
           }
         },
         {
@@ -35063,6 +35063,94 @@
               ],
               "note": "fit pass: edge: north 2.6 m (0 of 5 samples past the slab have ground); moved 5.5 m"
             }
+          }
+        },
+        {
+          "id": "shaft-a-bridge",
+          "artifact": "playground_spec_hall",
+          "station": "SW",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Random_Noise_Types / a bridge through white noise",
+              "places": [],
+              "decks": [
+                {
+                  "id": "through",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "size": [
+                    2,
+                    6
+                  ],
+                  "enclosure": "rails",
+                  "openings": [
+                    "north",
+                    "south"
+                  ],
+                  "opening_width": 2
+                }
+              ]
+            },
+            "resident_region": false,
+            "show_place_dimensions": false,
+            "editor_label": "Bridge through white noise | a kit deck 2 x 6 m with rails, rim to rim over shaft A"
+          }
+        },
+        {
+          "id": "shaft-b-bridge",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Random_Noise_Types / a bridge across the colours of noise",
+              "places": [],
+              "decks": [
+                {
+                  "id": "through",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "size": [
+                    2,
+                    6
+                  ],
+                  "enclosure": "rails",
+                  "openings": [
+                    "north",
+                    "south"
+                  ],
+                  "opening_width": 2
+                }
+              ]
+            },
+            "resident_region": false,
+            "show_place_dimensions": false,
+            "editor_label": "Bridge across the colours of noise | a kit deck 2 x 6 m with rails, rim to rim over shaft B"
           }
         }
       ],
@@ -35109,6 +35197,20 @@
           "position": [
             -6,
             2
+          ]
+        },
+        {
+          "label": "01 / WHITE NOISE\nEvery needle was drawn alone. A bridge runs through it: left, over shaft A.",
+          "position": [
+            -2.4,
+            6.2
+          ]
+        },
+        {
+          "label": "02 / FIVE COLOURS OF NOISE\nCross them in order, brown to violet: right, over shaft B.",
+          "position": [
+            2.4,
+            6.2
           ]
         }
       ],
