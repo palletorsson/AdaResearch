@@ -39450,10 +39450,10 @@
           "artifact": "self_organization_ca",
           "station": "SE",
           "position": [
-            0.775,
-            -2.055
+            -1.5,
+            3.6
           ],
-          "facing": 0,
+          "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
@@ -39566,7 +39566,15 @@
         }
       ],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "ONE CHANGED CELL\nWalk in between the two volumes: where you stand selects the slice.",
+          "position": [
+            -1.5,
+            5.6
+          ]
+        }
+      ],
       "supply_leads": false,
       "construction": [
         {
