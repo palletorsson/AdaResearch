@@ -160,7 +160,11 @@
   {"id": "m31", "reading": "idea", "status": "observed", "state": "closed", "floors": [87], "lands_in": "work", "needed_by": 3,
    "works": ["perlin_noise_bridge", "seeded_room", "noise_ground_pair"],
    "misfit": "The bridge from chance to noise - 'independent draws versus spatial correlation' - stood on floor Random_Space_Geometry as two 24 cm grids at chest height behind the room, and as two buttons of seeded_room that show one state at a time. The comparison has a meaning for legs that nothing let them try.",
-   "would_change": "Two grounds from one seed beside the arrival: heights drawn alone, and heights read off a field. Measured with the tower's walker: it crosses the related ground end to end (0.64 m of hill) and is stopped 0.3 m into the one drawn alone. The 24 cm model now stands at the pair. Also on this floor: random_transformations_geometric taken out of sculpt_one's footprint into the west bay (m19).", "closed_by": "24b18ae51"}
+   "would_change": "Two grounds from one seed beside the arrival: heights drawn alone, and heights read off a field. Measured with the tower's walker: it crosses the related ground end to end (0.64 m of hill) and is stopped 0.3 m into the one drawn alone. The 24 cm model now stands at the pair. Also on this floor: random_transformations_geometric taken out of sculpt_one's footprint into the west bay (m19).", "closed_by": "24b18ae51"},
+  {"id": "m32", "reading": "idea", "status": "observed", "state": "closed", "floors": [88], "lands_in": "work", "needed_by": 1,
+   "works": ["pollock_painting_in_3d", "pipe_dream"],
+   "misfit": "pollock_painting_in_3d says a drip painting is the trace of a body moving through a random field with intention, and its own notes say the break was a posture: the canvas on the floor, the body walking round it. The only body was a cursor, on a 4 m canvas beside the spawn point.",
+   "would_change": "Where a room asks, a body walking on the floor canvas is the brush: the path is the visitor's, chance decides width, wobble and drops. The canvas lies 7.2 x 4.8 m where the player lands. Measured: the tower's walker crossed it and left a line the full width of the image. One thing not explained: the view tool photographed the canvas plain grey from the spawn point, while the probe with the walker present photographed it painted.", "closed_by": "9a3f80464"}
  ],
  "proposals": [
   {"id": "p1", "state": "proposed", "title": "`field` before noise", "asked_by": ["m01", "m02"], "needed_by": "15 works on floors 77-90",
