@@ -9035,6 +9035,42 @@
    },
    "drafted_for": "scent_trail_ground",
    "drafted_by": "Claude Fable 5.2, 2026-11-12: the channel at the scale of a body"
+  },
+  "layer_sum_islands": {
+   "expr": "array(field(sine layer i, height × 0.5^i, 2^i times as fine), 4, each a ground) + field(their sum, a ground) = layer_sum_islands — the sum laid out for the feet: each term an island to stand on, the last their stack",
+   "from": [
+    "octave_sum",
+    "noise_ground_pair"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "array",
+      "n": 4,
+      "dims": 1,
+      "of": {
+       "op": "field",
+       "fn": "sine layer at seeded offset, 0.5^i as tall, 2^i as fine",
+       "of": {
+        "p": "mesh",
+        "shape": "heightfield"
+       }
+      }
+     },
+     {
+      "op": "field",
+      "fn": "the four added",
+      "of": {
+       "p": "mesh",
+       "shape": "heightfield"
+      }
+     }
+    ]
+   },
+   "drafted_for": "layer_sum_islands",
+   "drafted_by": "Claude Fable 5.2, 2026-11-12: the mixer's sum at the scale of a body"
   }
  }
 }
