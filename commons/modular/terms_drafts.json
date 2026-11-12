@@ -8959,6 +8959,47 @@
    },
    "drafted_for": "sorted_draw_stairs",
    "drafted_by": "Claude Fable 5.2, 2026-11-12: the count at the scale of a body"
+  },
+  "noise_ground_pair": {
+   "expr": "random(array(point, 13 x 13), height) + noise(array(point, 13 x 13), height) = noise_ground_pair - one seed, two grounds: where each height is drawn alone nobody crosses; where neighbours agree a body walks",
+   "from": [
+    "random_sizes",
+    "noise_heights",
+    "field_terrain"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "draws": "height",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "point"
+       },
+       "n": 13,
+       "dims": 2
+      }
+     },
+     {
+      "op": "field",
+      "kind": "perlin height",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "point"
+       },
+       "n": 13,
+       "dims": 2
+      }
+     }
+    ]
+   },
+   "drafted_for": "noise_ground_pair",
+   "drafted_by": "Claude Fable 5.2, 2026-11-12: the bridge from chance to noise at the scale of a body"
   }
  }
 }

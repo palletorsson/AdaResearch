@@ -156,7 +156,11 @@
   {"id": "m30", "reading": "idea", "status": "observed", "state": "closed", "floors": [85], "lands_in": "work", "needed_by": 7,
    "works": ["distribution_sampler", "distribution_comparator", "galton_board", "sorted_draw_stairs"],
    "misfit": "Floor Random_Gaussian shows the count seven ways - four sampler cabinets, a comparator, a paint canvas, a Galton board - and all of them are watched. Their code shares one idea: a shape appears that no single draw has, and the same randomness makes a different shape under each rule. Nothing let a body meet a shape.",
-   "would_change": "The same draws sorted into three plank walks (uniform, gaussian, exponential) rising toward the Galton board. Measured with the tower's walker: it reaches the top of the even walk and of the bell walk, and on the exponential one it is stopped at 0.67 m - the tail. A first build with one flat plank per draw failed: the walker cannot take a 5 cm riser, only a slope.", "closed_by": "f2e252353"}
+   "would_change": "The same draws sorted into three plank walks (uniform, gaussian, exponential) rising toward the Galton board. Measured with the tower's walker: it reaches the top of the even walk and of the bell walk, and on the exponential one it is stopped at 0.67 m - the tail. A first build with one flat plank per draw failed: the walker cannot take a 5 cm riser, only a slope.", "closed_by": "f2e252353"},
+  {"id": "m31", "reading": "idea", "status": "observed", "state": "closed", "floors": [87], "lands_in": "work", "needed_by": 3,
+   "works": ["perlin_noise_bridge", "seeded_room", "noise_ground_pair"],
+   "misfit": "The bridge from chance to noise - 'independent draws versus spatial correlation' - stood on floor Random_Space_Geometry as two 24 cm grids at chest height behind the room, and as two buttons of seeded_room that show one state at a time. The comparison has a meaning for legs that nothing let them try.",
+   "would_change": "Two grounds from one seed beside the arrival: heights drawn alone, and heights read off a field. Measured with the tower's walker: it crosses the related ground end to end (0.64 m of hill) and is stopped 0.3 m into the one drawn alone. The 24 cm model now stands at the pair. Also on this floor: random_transformations_geometric taken out of sculpt_one's footprint into the west bay (m19).", "closed_by": "24b18ae51"}
  ],
  "proposals": [
   {"id": "p1", "state": "proposed", "title": "`field` before noise", "asked_by": ["m01", "m02"], "needed_by": "15 works on floors 77-90",
