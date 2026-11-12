@@ -2294,6 +2294,48 @@
 		"seed"
 	  ]
 	},
+	"scent_trail_ground": {
+	  "dna": {
+	   "axes": {
+	   "reads": [
+	   "follow",
+	   "avoid",
+	   "blind"
+	   ]
+	   },
+	   "fixture": {
+	   "warm_at_once": true
+	   },
+	   "predicted_degeneracy": "PREDICTED BEFORE ANY SWEEP (2026-11-12, bench, six seeds, 900 steps, no body). Closest pair: avoid / blind. Both spread their wear evenly - the share of all wear lying in the most worn twentieth of the ground is 0.083 under avoid and 0.093 under blind, against 0.19 under follow (0.05 would be perfectly even) - so the pale layer of the two is nearly the same picture and they are told apart by the pink only: avoid lays lanes that keep clear of each other, blind leaves short tails. Expect avoid / blind under a third of follow / blind. A LOWER BOUND, not a forecast: the figure is a statistic of the wear record, not a rendered difference. The still needs the fixture: without warm_at_once the ground is photographed part way through being walked in."
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "A ground a body walks on that keeps two records of every step. Scent (pink) fades by the second and is what the blue walkers read: each keeps a heading, looks left, straight and right, and steps toward the strongest scent. Wear (pale) stays for minutes and is read by nobody but the visitor. The visitor writes both with its feet: walk a line and the walkers that meet it turn onto it. The body-scale sibling of pheromone_terrain.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "scent_trail_ground",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Scent Trail Ground",
+	  "qfep_connection": "The channel is the ground: a body that enters it is read by the others without addressing any of them.",
+	  "scene": "res://algorithms/randomness/scent_trail_ground/scent_trail_ground.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"stigmergy",
+		"pheromone",
+		"ground",
+		"walkable",
+		"trail",
+		"body"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",

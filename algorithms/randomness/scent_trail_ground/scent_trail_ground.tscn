@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/randomness/scent_trail_ground/scent_trail_ground.gd" id="1"]
+
+[node name="ScentTrailGround" type="Node3D"]
+script = ExtResource("1")
