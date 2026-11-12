@@ -81,6 +81,14 @@ var _comparison_panel: Node3D
 var _comparison_readout: Label3D
 var _walker_markers: Array[MeshInstance3D] = []
 const COMPARISON_DISPLAY_SIZE: float = 4.8
+## THE SLOT (the Void, 2026-11-12; Palle: "use the playground maker and make a basin and fit the artifact"). A place
+## of the playground kit hands its activity the slot it stands in - `slot_size` [width, length] of the pool floor
+## (commons/modular/places/place_builder.gd). The comparison then fits itself: the display fills the floor inside
+## the shell's walls and the console stands inside the pool at the wall away from the descent ramp. Without a slot
+## the two defaults are the shipped comparison: a 4.8 m display, the console 2.9 m out in front.
+@export var display_size: float = COMPARISON_DISPLAY_SIZE
+@export var console_out: float = 2.9
+var _in_slot: bool = false
 var _plane_transform_before_comparison: Transform3D
 var _material_override_before_comparison: Material
 var _comparison_carrier_fitted: bool = false
@@ -552,6 +560,13 @@ func apply_grid_config(config: Dictionary) -> void:
 	var old_seed: int = walk_seed
 	if config.has("comparison"):
 		comparison = str(config["comparison"]).to_lower() in ["true", "1", "yes"]
+	if config.has("slot_size") and config["slot_size"] is Array and (config["slot_size"] as Array).size() == 2:
+		var slot: Array = config["slot_size"]
+		_in_slot = true
+		display_size = clampf(minf(float(slot[0]), float(slot[1])) - 0.4, 1.0, 20.0)      # clear of the shell's rounded walls
+		console_out = -(float(slot[1]) / 2.0 - 0.45)      # the descent ramp comes in at +z: the console stands at the far wall
+	if config.has("display_size"): display_size = clampf(float(config["display_size"]), 1.0, 20.0)
+	if config.has("console_out"): console_out = float(config["console_out"])
 	# An unknown word is ignored rather than assigned, so a typo falls back to the
 	# shipped law instead of stalling the walkers.
 	if config.has("rule"):
@@ -643,18 +658,21 @@ func advance_comparison(count: int = 1) -> void:
 ## The museum measures collision before _ready. Fit the existing carrier during
 ## configuration too, so its navigation reservation uses the displayed footprint.
 func _fit_comparison_carrier() -> void:
-	if _comparison_carrier_fitted:
-		return
 	var carrier: Node3D = get_node_or_null("Plane")
 	var field: MeshInstance3D = _find_mesh_instance(carrier) if carrier else null
 	if not field:
+		return
+	if _comparison_carrier_fitted:
+		# a later configuration may resize or sink the display; the saved transform and material stay the first ones
+		var fitted_width: float = field.mesh.size.x if field.mesh is PlaneMesh else float(field.get_meta("plane_width", 20.0))
+		carrier.scale = Vector3.ONE * (display_size / fitted_width)
 		return
 	# Keep the simulation coordinates and values; fit their rendered carrier to this
 	# room. Collision remains the original flat box, scaled with the plane, not a
 	# walkable copy of the growing visual surface.
 	_plane_transform_before_comparison = carrier.transform
 	var width: float = field.mesh.size.x if field.mesh is PlaneMesh else float(field.get_meta("plane_width", 20.0))
-	carrier.scale = Vector3.ONE * (COMPARISON_DISPLAY_SIZE / width)
+	carrier.scale = Vector3.ONE * (display_size / width)
 	carrier.position.y = 0.03
 	# The live scene's magenta wire emission colours every edge, including cells
 	# with no scent. In this comparison the existing vertex colours carry scent
@@ -676,16 +694,17 @@ func _build_comparison() -> void:
 	_comparison_root.name = "StepComparison"
 	add_child(_comparison_root)
 	_fit_comparison_carrier()
+	# In a slot a body walks on the display: the two labels stand over the console, not in its way.
 	if _info_label:
-		_info_label.position = Vector3(0, 1.5, -1.6)
+		_info_label.position = Vector3(0, 1.5, -1.6) if not _in_slot else Vector3(0, 1.74, console_out)
 	if _title_label:
-		_title_label.position = Vector3(0, 1.8, -1.6)
+		_title_label.position = Vector3(0, 1.8, -1.6) if not _in_slot else Vector3(0, 1.96, console_out)
 	# A full-size console stands just beyond the front of the reduced display.
 	var cabinet := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = Vector3(1.2, 0.65, 0.6)
 	cabinet.mesh = box
-	cabinet.position = Vector3(0, 0.325, 2.9)
+	cabinet.position = Vector3(0, 0.325, console_out)
 	var finish := StandardMaterial3D.new()
 	finish.albedo_color = Color(0.10, 0.11, 0.13)
 	finish.roughness = 0.8
@@ -707,7 +726,7 @@ func _build_comparison() -> void:
 	])
 	_comparison_panel.name = "ComparisonPanel"
 	_comparison_panel.set_meta("em_local_instrument", true)
-	_comparison_panel.position = Vector3(0, 0.98, 2.9)
+	_comparison_panel.position = Vector3(0, 0.98, console_out)
 	_comparison_panel.rotation_degrees.x = -60
 	_comparison_panel.scale = Vector3.ONE * 4.0
 	_comparison_root.add_child(_comparison_panel)
@@ -722,7 +741,7 @@ func _build_comparison() -> void:
 	_comparison_readout.name = "ComparisonReadout"
 	_comparison_readout.font_size = 18
 	_comparison_readout.pixel_size = 0.0014
-	_comparison_readout.position = Vector3(0, 1.4, 2.7)
+	_comparison_readout.position = Vector3(0, 1.4, console_out - 0.2)
 	_comparison_readout.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_comparison_readout.no_depth_test = false
 	_comparison_readout.modulate = Color(0.85, 0.95, 1.0)

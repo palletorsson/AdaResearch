@@ -34268,19 +34268,54 @@
       "artifacts": [
         {
           "id": "f3_pheromone_terrain_6_3",
-          "artifact": "pheromone_terrain",
+          "artifact": "playground_spec_hall",
           "station": "SW",
           "position": [
             10,
-            0.25
+            0
           ],
-          "facing": 90,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "comparison": "true",
-            "walk_seed": "190919",
-            "warmup_steps": "240"
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Random_Pheromone / the model in a basin over shaft B",
+              "places": [
+                {
+                  "id": "scent_basin",
+                  "at": [
+                    0,
+                    0
+                  ],
+                  "y": 1,
+                  "size": [
+                    6,
+                    6
+                  ],
+                  "depth": 1,
+                  "type": "plastic_pool",
+                  "rim": 1,
+                  "colour": "f5a9b8",
+                  "access": {
+                    "outer": "ramp",
+                    "inner": "ramp"
+                  },
+                  "activity": {
+                    "artifact": "pheromone_terrain",
+                    "config": {
+                      "comparison": "true",
+                      "walk_seed": "190919",
+                      "warmup_steps": "240"
+                    }
+                  }
+                }
+              ]
+            },
+            "resident_height": 3.5,
+            "editor_label": "Scent basin | the pheromone model as the activity of a pool over shaft B"
           }
         },
         {
@@ -34338,21 +34373,6 @@
           "height": 0,
           "scale": 1,
           "config": {}
-        },
-        {
-          "id": "shaft-b-scaffold",
-          "artifact": "site_shaft_play_scaffold",
-          "station": "SW",
-          "position": [
-            10,
-            0
-          ],
-          "facing": 0,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "caption": "height is where the walkers went   pink is what they smell now"
-          }
         }
       ],
       "props": [],
