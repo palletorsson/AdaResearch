@@ -36518,7 +36518,29 @@
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "INSIDE NOISE\nThe sphere is walked into. Two doors: round the left side, round the right side.",
+          "position": [
+            0,
+            5.3
+          ]
+        },
+        {
+          "label": "DOOR / WALK IN",
+          "position": [
+            -5.9,
+            -0.17
+          ]
+        },
+        {
+          "label": "DOOR / WALK IN",
+          "position": [
+            5.9,
+            -0.17
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
