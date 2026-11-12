@@ -40922,11 +40922,34 @@
               "note": "fit pass: drawn outside the building, box centre (7.1, 2.0, -10.1); moved 2.1 m"
             }
           }
+        },
+        {
+          "id": "koch-coast",
+          "artifact": "koch_coast_walk",
+          "station": "SW",
+          "position": [
+            -17.2,
+            -1.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Koch coast walk | a Koch island 5.2 m across to walk round; the coast grows by a third each generation, a body's lap does not: the body is a ruler 0.4 m wide"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "LEFT / HOW LONG IS THE COAST, FOR YOU?\nWalk round the island. It counts your lap.",
+          "position": [
+            -5.5,
+            7.4
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

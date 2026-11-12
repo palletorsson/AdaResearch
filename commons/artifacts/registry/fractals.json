@@ -1146,6 +1146,52 @@
         1.0
       ]
     },
+    "koch_coast_walk": {
+      "lookup_name": "koch_coast_walk",
+      "scene": "res://algorithms/fractals/koch_coast_walk/koch_coast_walk.tscn",
+      "name": "Koch Coast Walk (the body as a ruler)",
+      "description": "A Koch island to walk round: the snowflake on a triangle of side 4.5 m, half a metre high, its coast a wall. Every generation puts a bump on the middle third of every straight piece, so the coast is 13.5, 18, 24, 32, 42.7, 56.9 m long - without end. The work counts how far a body goes in one lap close to the coast and writes it on a three-sided sign beside the coast's length. A body is a ruler 0.4 m wide and cannot enter a notch narrower than itself: its lap grows with the coast for two generations (14.8, 19.1, 24.6 m), is shorter at the third (22.1) and then stops changing (21.4, 21.3). The top of the island keeps each generation's bumps in their own colour. A finished lap puts the next generation on.",
+      "category": "fractals",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "sequence": "fractals",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "fractal",
+        "koch",
+        "coastline",
+        "dimension",
+        "measure",
+        "walkable"
+      ],
+      "qfep_connection": "The coast has no length of its own: every length is a meeting between a line and whatever is measuring it, and the body is one of the rulers.",
+      "dev_themes": [
+        "fractals",
+        "recursion"
+      ],
+      "dna": {
+        "axes": {
+          "generation": [
+            "seed",
+            "first",
+            "second",
+            "third",
+            "fourth",
+            "fifth"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "generation: fourth ~ fifth",
+          "percent": 0.3,
+          "arithmetic": "The fifth generation adds 768 triangles of side 1.85 cm: 0.11 square metres on an island of about 9.3, 1.2 % of its top, and moves the wall by at most 1.6 cm. With the island on about a quarter of the frame that is 0.25 x 1.2 % = 0.3 %. The bench says the same of a body: its lap is 21.36 m at the fourth and 21.31 m at the fifth. At this size the last step of the axis is nearly invisible, and that is the work's point."
+        }
+      }
+    },
     "cantor_staircase": {
       "lookup_name": "cantor_staircase",
       "scene": "res://algorithms/fractals/cantor_staircase/cantor_staircase.tscn",
