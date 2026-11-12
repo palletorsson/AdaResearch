@@ -75,10 +75,15 @@ INNER_RE = re.compile(r"^[ \t]+class\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:extends[^:]
 def godot_walk(root: Path, exts: tuple = (".gd",)):
     """Every file of these kinds Godot's EditorFileSystem would scan: no
     dot-dirs, no dot-files, no folder with a .gdignore in it (and nothing
-    beneath one). Extensions compare case-blind, as the scan does."""
+    beneath one), and no subfolder that is a project of its own - a folder
+    holding a project.godot is skipped whole (EditorFileSystem::
+    _should_skip_directory: "Detected another project.godot ... The folder
+    will be ignored"). 2026-11-12: a test project under ada_run/ with copies
+    of commons/ and addons/ printed 100 DUPLICATE rows the editor can never
+    raise. Extensions compare case-blind, as the scan does."""
     for dirpath, dirnames, filenames in os.walk(root):
         d = Path(dirpath)
-        if (d / ".gdignore").exists() and d != root:
+        if d != root and ((d / ".gdignore").exists() or (d / "project.godot").exists()):
             dirnames[:] = []
             continue
         dirnames[:] = sorted(x for x in dirnames if not x.startswith("."))
