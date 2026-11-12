@@ -34683,6 +34683,56 @@
             "control_front": "-1.7",
             "control_facing": "-z"
           }
+        },
+        {
+          "id": "shaft-b-ribs",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "Random_Game / ribs over shaft B",
+              "places": [],
+              "lattices": [
+                {
+                  "id": "ribs",
+                  "at": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "cells": [
+                    6,
+                    6
+                  ]
+                }
+              ]
+            },
+            "resident_region": false,
+            "editor_label": "Ribs over shaft B | a lattice of kit rods; the tile crossing sits in its cells"
+          }
+        },
+        {
+          "id": "shaft-b-crossing",
+          "artifact": "vanishing_tile_crossing",
+          "station": "SE",
+          "position": [
+            10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {}
         }
       ],
       "props": [],

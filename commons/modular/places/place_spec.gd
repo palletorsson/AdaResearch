@@ -8,6 +8,7 @@ const Paths=preload("res://commons/modular/places/path_builder.gd")
 const Decks=preload("res://commons/modular/places/deck_builder.gd")
 const Banks=preload("res://commons/modular/places/grid_banks.gd")
 const Connectors=preload("res://commons/modular/places/grid_connectors.gd")
+const Lattices=preload("res://commons/modular/places/lattice_builder.gd")   # ribs over an opening: bars only (2026-11-12)
 const Walks=preload("res://commons/modular/places/walk_builder.gd")   # a seeded walk that lays bars, tiles and ramps (2026-11-12)
 
 static func validate(spec:Dictionary)->PackedStringArray:
@@ -16,7 +17,7 @@ static func validate(spec:Dictionary)->PackedStringArray:
 	if spec.get("version",0)!=1:errors.append("Expected place specification version 1")
 	if spec.get("units","")!="metres":errors.append("Units must be metres")
 	if not spec.get("places",null) is Array:return PackedStringArray(["places must be an array"])
-	if spec.places.is_empty() and spec.get("boards",[])==[] and spec.get("corridors",[])==[] and spec.get("paths",[])==[] and spec.get("decks",[])==[] and spec.get("walks",[])==[] and not spec.has("grid_banks"):errors.append("At least one place, board, corridor, path, deck or grid bank is required")
+	if spec.places.is_empty() and spec.get("boards",[])==[] and spec.get("corridors",[])==[] and spec.get("paths",[])==[] and spec.get("decks",[])==[] and spec.get("walks",[])==[] and spec.get("lattices",[])==[] and not spec.has("grid_banks"):errors.append("At least one place, board, corridor, path, deck or grid bank is required")
 	if spec.has("boards"):errors.append_array(Boards.validate(spec))
 	errors.append_array(Corridors.validate(spec))
 	errors.append_array(Paths.validate(spec))
@@ -24,6 +25,7 @@ static func validate(spec:Dictionary)->PackedStringArray:
 	errors.append_array(Banks.validate(spec))
 	errors.append_array(Connectors.validate(spec))
 	errors.append_array(Walks.validate(spec))
+	errors.append_array(Lattices.validate(spec))
 	var ids:Dictionary={}
 	for p in spec.places:
 		if not p is Dictionary:errors.append("Each place must be an object");continue

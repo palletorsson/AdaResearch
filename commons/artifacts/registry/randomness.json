@@ -2375,6 +2375,44 @@
 		"strata"
 	  ]
 	},
+	"vanishing_tile_crossing": {
+	  "dna": {
+	   "axes": {
+	   "notice": [
+	   "early",
+	   "late",
+	   "none"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "A field of 144 half-metre tiles in a rib lattice over a 6 x 6 m opening. Every tile runs the same four states in the same order - it stands, it leaves, it is gone, it returns - and draws its own waits. A gold ring gives notice before a tile leaves. A clock runs from the first tile a body steps on to the rim on the other side; the board keeps the last and the best time and the falls. r_c at the scale of a field.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "vanishing_tile_crossing",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Vanishing Tile Crossing",
+	  "qfep_connection": "Knowing what comes next is not knowing when: a body plans inside an order it was told and a timing it has to find out.",
+	  "scene": "res://algorithms/randomness/vanishing_tile_crossing/vanishing_tile_crossing.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"game",
+		"tiles",
+		"timing",
+		"crossing",
+		"walkable",
+		"seed"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",
