@@ -2336,6 +2336,45 @@
 		"body"
 	  ]
 	},
+	"layer_sum_islands": {
+	  "dna": {
+	   "axes": {
+	   "weigh": [
+	   "halving",
+	   "fading",
+	   "lingering"
+	   ]
+	   },
+	   "predicted_degeneracy": "PREDICTED BEFORE ANY SWEEP (2026-11-12, bench, seed 42). Closest pair: fading / halving. The first island is the same under every weight; the other three layers stand 0.12 / 0.04 / 0.02 m tall at fading against 0.18 / 0.08 / 0.04 m at halving, and the sum 0.40 against 0.48 m (steepest rise over run 0.74 against 0.99). halving / lingering is the far pair: layers 0.24 / 0.16 / 0.11 m, sum 0.68 m, steepest 1.53. So expect fading / halving at about half of halving / lingering. A LOWER BOUND, not a forecast: heights of low relief on a 16 m row are a small share of a frame, and the row is a wide flat subject - it will need dna.framing below 1.0 before the numbers mean anything."
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "The noise mixer's sum taken apart for the feet. Five islands in a row from one seed: one wave at full height; the same wave twice as fine and half as tall; four times as fine; eight times as fine; and all four added. Each island rises from the floor on its east shore and ends in cut faces; the cut faces of the last island show the four layers lying on each other. Two plates: DRAW AGAIN, and the weight of each finer layer (0.35, 0.5, 0.7). The last island seen from above is the mixer's picture.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "layer_sum_islands",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Layer Sum Islands",
+	  "qfep_connection": "What reads as one landscape is a stack of repetitions; standing on each term makes the naming of land a choice and not a fact.",
+	  "scene": "res://algorithms/randomness/layer_sum_islands/layer_sum_islands.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"noise",
+		"octaves",
+		"sum",
+		"ground",
+		"walkable",
+		"strata"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",
