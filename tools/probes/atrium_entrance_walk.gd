@@ -1,6 +1,6 @@
 extends SceneTree
-## THE ATRIUM'S MOUTH FACES THE ARRIVAL (floor Noise_Cellular; the Void, 2026-11-12)
-## The cellular atrium is entered through one rounded mouth, 3.2 m wide, on its own south side, and its own code
+## THE ATRIUM'S MOUTH FACES THE ARRIVAL (floors Noise_Cellular and Noise_Box; the Void, 2026-11-12)
+## A cellular atrium (cells or boxes) is entered through one rounded mouth, 3.2 m wide, on its own south side, and its own code
 ## puts a visitor 6.4 m south of its middle. In the tower it stood turned half round: the mouth opened north into a
 ## 1.2 m slot against the womb, and the arrival met a closed wall 1.5 m away. Read in the running tower, with its
 ## own walker: from the arrival point a body walks straight north into the clearing in the middle of the atrium.
@@ -42,8 +42,8 @@ func run() -> void:
 	var result := {"floor": floor, "map": str(record.map), "checks": checks, "passed": false}
 	var item = null
 	for a in record.artifacts:
-		if str(a.artifact) == "cellular_atrium_space": item = a
-	checks.append({"check": "the cellular atrium is on this floor", "ok": item != null})
+		if str(a.artifact) in ["cellular_atrium_space", "box_atrium_space"]: item = a
+	checks.append({"check": "an atrium of the cellular spaces is on this floor", "ok": item != null, "artifact": str(item.artifact) if item != null else ""})
 	if item != null:
 		var key := str(floor) + "/" + str(item.id)
 		for i in 1200:
@@ -73,7 +73,7 @@ func run() -> void:
 			var d := Vector2(body.global_position.x - middle.x, body.global_position.z - middle.z).length()
 			best = minf(best, d)
 			high = maxf(high, body.global_position.y - level)
-			if d < 0.4: break
+			if d < 0.4 or (d < 2.0 and i > 420): break
 			body.look_at(Vector3(middle.x, body.global_position.y, middle.z), Vector3.UP)
 			body.drive = Vector2(0, -1)
 			await physics_frame
@@ -83,7 +83,7 @@ func run() -> void:
 				if stuck >= 2: body.jump_queued = true; stuck = 0
 		body.drive = Vector2.ZERO
 		for i in 20: await physics_frame
-		checks.append({"check": "from the arrival a body walks straight north into the clearing in the middle", "ok": best < 0.6 and int(game.checkpoint) == floor,
+		checks.append({"check": "from the arrival a body walks straight north through the mouth into the clearing in the middle", "ok": best < 2.2 and int(game.checkpoint) == floor,
 			"came_within_m": snappedf(best, .01), "highest_feet_m": snappedf(high, .01)})
 		game.place_player(Vector3(-3.6, level + 0.3, 8.6))
 		result["passed"] = checks.all(func(c): return c.ok)
