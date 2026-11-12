@@ -33015,13 +33015,16 @@
           "artifact": "Random_Rotate_Random_XYZ",
           "station": "SE",
           "position": [
-            2,
-            2
+            0.8,
+            0.5
           ],
           "facing": 180,
           "height": 0,
           "scale": 1,
-          "config": {}
+          "config": {
+            "own_lattice_pitch": 0.45,
+            "own_lattice_pedestal": 0.2
+          }
         },
         {
           "id": "f2_random_decay_multimesh_6_10",
@@ -33029,7 +33032,7 @@
           "station": "SW",
           "position": [
             -1,
-            2
+            -6.0
           ],
           "facing": 180,
           "height": 0,
@@ -33043,8 +33046,8 @@
           "artifact": "RotateGridCubes",
           "station": "SW",
           "position": [
-            -1,
-            1
+            -4.7,
+            2.0
           ],
           "facing": 180,
           "height": 0,

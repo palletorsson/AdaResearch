@@ -70,6 +70,11 @@ enum SelectionMode {
 ## work owns no geometry and found no grid there (2026-11-10). A grid map's GridMultiMesh is still found first.
 @export var own_lattice_fallback: bool = true
 @export var own_lattice_size: Vector3i = Vector3i(8, 3, 8)
+## The owned lattice's pitch in metres and the height of what it stands on. The defaults are a model on a pedestal
+## (1 m wide, 0.9 m up). The tower floor named after this work sets them to the scale of a body: there the model
+## stood behind a 10 m wall of another work and nobody could meet the hall's own subject (2026-11-12).
+@export var own_lattice_pitch: float = 0.12
+@export var own_lattice_pedestal: float = 0.9
 @export var selection_mode: SelectionMode = SelectionMode.UNIFORM
 
 @export_group("DNA")
@@ -178,18 +183,19 @@ func _ready() -> void:
 ## bell_radius mean the same in both), shrunk onto a pedestal. Each layer a little lighter than the one below,
 ## so a tumbled cube shows against its neighbours.
 func _build_own_lattice() -> MultiMeshInstance3D:
-	var pitch := 0.12
+	var pitch := maxf(0.04, own_lattice_pitch)
+	var stand := maxf(0.05, own_lattice_pedestal)
 	var size := own_lattice_size
 	var pedestal := MeshInstance3D.new()
 	pedestal.name = "LatticePedestal"
 	var box := BoxMesh.new()
-	box.size = Vector3(size.x * pitch + 0.16, 0.9, size.z * pitch + 0.16)
+	box.size = Vector3(size.x * pitch + 0.16, stand, size.z * pitch + 0.16)
 	pedestal.mesh = box
 	var pm := StandardMaterial3D.new()
 	pm.albedo_color = Color(0.08, 0.11, 0.16)
 	pm.roughness = 0.8
 	pedestal.material_override = pm
-	pedestal.position = Vector3(0, 0.45, 0)
+	pedestal.position = Vector3(0, stand / 2.0, 0)
 	add_child(pedestal)
 	var mmi := MultiMeshInstance3D.new()
 	mmi.name = "GridMultiMesh"
@@ -214,7 +220,7 @@ func _build_own_lattice() -> MultiMeshInstance3D:
 				i += 1
 	mmi.multimesh = mm
 	mmi.scale = Vector3.ONE * pitch
-	mmi.position = Vector3(-(size.x - 1) * 0.5 * pitch, 0.9 + 0.5 * pitch, -(size.z - 1) * 0.5 * pitch)
+	mmi.position = Vector3(-(size.x - 1) * 0.5 * pitch, stand + 0.5 * pitch, -(size.z - 1) * 0.5 * pitch)
 	add_child(mmi)
 	return mmi
 
@@ -356,6 +362,10 @@ func _read_meta_overrides() -> void:
 		warmup_steps = int(str(get_meta("config_warmup_steps")))
 	if has_meta("config_noise_scale"):
 		noise_scale = float(str(get_meta("config_noise_scale")))
+	if has_meta("config_own_lattice_pitch"):
+		own_lattice_pitch = float(str(get_meta("config_own_lattice_pitch")))
+	if has_meta("config_own_lattice_pedestal"):
+		own_lattice_pedestal = float(str(get_meta("config_own_lattice_pedestal")))
 
 
 ## Was `pass` — every `#token: value` a map put on a placement was parsed,
