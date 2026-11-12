@@ -11,6 +11,14 @@ extends Node3D
 ## needs: cardinal direction set [has]; head light + emissive material [has]; configurable bounds [has]; growth tween [has]
 ## relationships: the fourth walk of the group — shares the `residue` ladder word for word with [[random_walk_128]], [[random_walk_leash]] and [[random_walk_collection]]; kin to [[random_walk_terrarium]] (a constrained walk in a vessel); cousin of Hilbert/Peano curves (deterministic space-fillers)
 ## truth: A walker that remembers where it has been is no longer just random — it becomes a maker of structure.
+## history: 2026-11-12, the Void. Read as code the truth above was only looked at: a 1.5 m model on a stand. Palle:
+##   "the 3d pipe must be higher and wider and must be an automatic playground maker in pink and bleu add floor quads
+##   if all four corners are created." With `playground` the walk starts on its lowest level, uprights are blue and
+##   rails pink, and every lattice square whose four corners the walk has visited on one level gets a floor a body
+##   can stand on. The structure the walker makes is one a visitor can climb into.
+## lineage: DESIGN - the 3D Pipes screensaver (Windows NT, 1990s). ARCHITECTURE - Aldo van Eyck's climbing frames;
+##   Constant's New Babylon and Yona Friedman's Ville Spatiale, space frames that grow floors where they are wanted;
+##   scaffolding, a lattice that becomes a floor when four standards carry a board.
 ##
 ## ─────────────────────────────────────────────────────────────────────────────
 ## STAGE-2 DNA PROMOTION (2026-08-05) — residue
@@ -167,6 +175,22 @@ const TAIL_SEGMENTS: int = 18
 ## real one.
 const GHOST_WALKS: int = 3
 
+@export_group("Playground")
+## A room may ask for this (the Void, 2026-11-12; Palle: "an automatic playground maker in pink and bleu add floor
+## quads if all four corners are created"). The walk starts on its lowest level; uprights are blue and rails pink;
+## wherever the four corners of a lattice square have been visited on one level, a floor quad is laid that a body
+## can stand on. A plate in front makes another. Off by default: nothing a grid map shipped changes.
+@export var playground: bool = false
+## How far the lowest level stands over the floor the work is placed on.
+@export var floor_below: float = 0.15
+var _made := {}
+var _quads := {}
+var _quad_root: Node3D
+var _play_mats := {}
+var _last_remake := -10.0
+var _mm := {}             # batch name -> MultiMeshInstance3D
+var _mm_count := {}
+
 var rng := RandomNumberGenerator.new()
 var direction: Vector3 = Vector3.FORWARD
 var current_position: Vector3 = Vector3.ZERO
@@ -204,10 +228,13 @@ var _built: bool = false
 
 
 func _ready() -> void:
+	_read_meta()
 	if walk_seed >= 0:
 		rng.seed = walk_seed
 	else:
 		rng.randomize()
+	if playground:
+		current_position = _lowest()
 	_animate_growth = growth_tween_time > 0.0 and not _is_instant()
 	_setup_meshes()
 	_setup_roots()
@@ -260,6 +287,13 @@ func _setup_roots() -> void:
 	_joint_root.name = "Joints"
 	add_child(_joint_root)
 
+	_quad_root = Node3D.new()
+	_quad_root.name = "FloorQuads"
+	add_child(_quad_root)
+	if playground:
+		_made[_key(current_position)] = true
+		_build_plate()
+
 
 func _setup_head_light() -> void:
 	_head_light = OmniLight3D.new()
@@ -285,13 +319,20 @@ func _create_next_segment() -> void:
 	_points.append(tentative_end)
 
 	var segment_color := _segment_color(segment_count)
+	if playground:
+		segment_color = base_color if absf(direction.y) > 0.5 else accent_color      # uprights blue, rails pink
+		_made[_key(tentative_end)] = true
+		_try_quads(tentative_end)
 	var rung: int = _rung()
 
 	# At every rung except `head` the pipe is drawn exactly as it always was.
 	if rung >= 1:
-		_add_segment(start_pos, tentative_end, segment_color)
-		if segment_count > 0:
-			_add_joint(start_pos, segment_color)
+		if playground:
+			_play_segment(start_pos, tentative_end, absf(direction.y) > 0.5)
+		else:
+			_add_segment(start_pos, tentative_end, segment_color)
+			if segment_count > 0:
+				_add_joint(start_pos, segment_color)
 
 	current_position = tentative_end
 	direction = _choose_next_direction(rng, current_position, direction, false)
@@ -333,6 +374,10 @@ func _add_joint(joint_pos: Vector3, segment_color: Color) -> void:
 	var joint := MeshInstance3D.new()
 	joint.mesh = _joint_mesh
 	joint.position = joint_pos
+	if playground:
+		joint.material_override = _build_pipe_material(segment_color)
+		_joint_root.add_child(joint)
+		return
 
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = segment_color.darkened(0.12)
@@ -350,7 +395,11 @@ func _add_joint(joint_pos: Vector3, segment_color: Color) -> void:
 
 
 func _build_pipe_material(segment_color: Color) -> StandardMaterial3D:
+	if playground and _play_mats.has(segment_color):
+		return _play_mats[segment_color]      # two materials for the whole frame, not one a pipe
 	var mat := StandardMaterial3D.new()
+	if playground:
+		_play_mats[segment_color] = mat
 	mat.albedo_color = segment_color
 	mat.metallic = metallic
 	mat.roughness = roughness
@@ -684,6 +733,183 @@ func _exit_tree() -> void:
 ## walk_seed and growth are deliberately NOT accepted here. Both are consumed in
 ## _ready and honouring them afterwards would mean re-rolling the walk, which is
 ## the one thing a redraw must not do.
+## The lowest lattice point under the middle: where a playground begins.
+func _lowest() -> Vector3:
+	return Vector3(0, -floorf(bounds_extent.y / segment_length) * segment_length, 0)
+
+
+func _key(p: Vector3) -> Vector3i:
+	return Vector3i(roundi(p.x / segment_length), roundi(p.y / segment_length), roundi(p.z / segment_length))
+
+
+## Every square on this level that has the new point for a corner: if its other three corners exist, floor it.
+func _try_quads(p: Vector3) -> void:
+	var k := _key(p)
+	for dx in [-1, 0]:
+		for dz in [-1, 0]:
+			var corner := Vector3i(k.x + dx, k.y, k.z + dz)
+			if _quads.has(corner):
+				continue
+			if _made.has(corner) and _made.has(corner + Vector3i(1, 0, 0)) and _made.has(corner + Vector3i(0, 0, 1)) and _made.has(corner + Vector3i(1, 0, 1)):
+				_lay_quad(corner)
+
+
+func _lay_quad(corner: Vector3i) -> void:
+	var colour: Color = accent_color if posmod(corner.x + corner.y + corner.z, 2) == 0 else base_color
+	var body := StaticBody3D.new()
+	body.name = "FloorQuad"
+	body.position = Vector3((corner.x + 0.5) * segment_length, corner.y * segment_length + pipe_radius, (corner.z + 0.5) * segment_length)
+	var pink: bool = colour == accent_color
+	var batch := "quad_pink" if pink else "quad_blue"
+	if not _mm.has(batch):
+		var slab := BoxMesh.new()
+		slab.size = Vector3(segment_length - pipe_radius, 0.05, segment_length - pipe_radius)
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = colour.darkened(0.08)
+		mat.roughness = 0.55
+		mat.emission_enabled = true
+		mat.emission = colour
+		mat.emission_energy_multiplier = 0.3
+		_batch(batch, slab, mat, 320, _quad_root)
+	_put(batch, Transform3D(Basis(), body.position))
+	var collider := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(segment_length, 0.05, segment_length)
+	collider.shape = box
+	body.add_child(collider)
+	_quad_root.add_child(body)
+	_quads[corner] = body
+
+
+## One instanced batch: a mesh, a material, room for `capacity` copies, none shown yet.
+func _batch(batch: String, mesh: Mesh, material: Material, capacity: int, parent: Node3D) -> void:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = batch
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = mesh
+	mm.instance_count = capacity
+	mm.visible_instance_count = 0
+	mmi.multimesh = mm
+	mmi.material_override = material
+	mmi.custom_aabb = AABB(-bounds_extent - Vector3.ONE, bounds_extent * 2.0 + Vector3.ONE * 2.0)
+	parent.add_child(mmi)
+	_mm[batch] = mmi
+	_mm_count[batch] = 0
+
+
+func _put(batch: String, xf: Transform3D) -> void:
+	var mmi: MultiMeshInstance3D = _mm[batch]
+	var n: int = _mm_count[batch]
+	if n >= mmi.multimesh.instance_count:
+		return
+	mmi.multimesh.set_instance_transform(n, xf)
+	_mm_count[batch] = n + 1
+	mmi.multimesh.visible_instance_count = n + 1
+
+
+## A playground's pipe: uprights blue, rails pink, with the joint it starts from. Six draw calls carry the whole frame
+## (a pipe a node was about nine hundred of them at 340 steps - too many for a headset).
+func _play_segment(start_pos: Vector3, end_pos: Vector3, upright: bool) -> void:
+	var colour: Color = base_color if upright else accent_color
+	var pipes := "pipe_blue" if upright else "pipe_pink"
+	var joints := "joint_blue" if upright else "joint_pink"
+	if not _mm.has(pipes):
+		_batch(pipes, _segment_mesh, _build_pipe_material(colour), max_segments + 2, _segment_root)
+		_batch(joints, _joint_mesh, _build_pipe_material(colour), max_segments + 2, _joint_root)
+	_put(pipes, Transform3D(_basis_from_direction(end_pos - start_pos), (start_pos + end_pos) * 0.5))
+	_put(joints, Transform3D(Basis(), start_pos))
+
+
+## For probes: how many floor quads lie on each level, lowest first, and where one of them is.
+func playground_state() -> Dictionary:
+	var levels := {}
+	var one = null
+	for corner in _quads:
+		levels[corner.y] = int(levels.get(corner.y, 0)) + 1
+		if one == null or corner.y < one.y: one = corner
+	return {"quads": _quads.size(), "levels": levels, "segments": segment_count, "of": max_segments,
+		"a_low_quad": (_quads[one] as Node3D).global_position if one != null else null}
+
+
+func _build_plate() -> void:
+	var at := Vector3(0, _lowest().y - floor_below + 0.02, bounds_extent.z + 1.4)
+	var plate := MeshInstance3D.new()
+	plate.name = "MakeAnother"
+	var slab := BoxMesh.new()
+	slab.size = Vector3(0.8, 0.04, 0.8)
+	plate.mesh = slab
+	plate.position = at
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = accent_color.darkened(0.15)
+	mat.roughness = 0.6
+	plate.material_override = mat
+	add_child(plate)
+	var words := Label3D.new()
+	words.text = "MAKE ANOTHER"
+	words.font_size = 48
+	words.pixel_size = 0.0015
+	words.alpha_cut = Label3D.ALPHA_CUT_DISCARD
+	words.modulate = Color(0.1, 0.1, 0.12)
+	words.rotation.x = -PI / 2
+	words.position = Vector3(0, 0.025, 0)
+	plate.add_child(words)
+	var area := Area3D.new()
+	area.name = "MakeAnotherArea"
+	area.collision_layer = 0
+	area.collision_mask = 0xFFFFFFFF
+	area.position = at + Vector3(0, 0.5, 0)
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(0.8, 1.0, 0.8)
+	shape.shape = box
+	area.add_child(shape)
+	add_child(area)
+	area.body_entered.connect(_remake)
+
+
+## Clear the frame and its floors and walk again from a new draw.
+func _remake(body: Node = null) -> void:
+	if body != null and not body is CharacterBody3D:
+		return
+	var now := Time.get_ticks_msec() / 1000.0
+	if now - _last_remake < 2.0:
+		return
+	_last_remake = now
+	for c in _quad_root.get_children():
+		if c is StaticBody3D:
+			_quad_root.remove_child(c)
+			c.queue_free()
+	for batch in _mm:
+		_mm_count[batch] = 0
+		(_mm[batch] as MultiMeshInstance3D).multimesh.visible_instance_count = 0
+	_points = PackedVector3Array()
+	_made.clear()
+	_quads.clear()
+	segment_count = 0
+	segment_timer = 0.0
+	rng.seed = rng.randi()
+	direction = Vector3.FORWARD
+	current_position = _lowest()
+	_made[_key(current_position)] = true
+	_create_next_segment()
+
+
+func _read_meta() -> void:
+	if has_meta("config_playground"):
+		playground = str(get_meta("config_playground")).to_lower() in ["true", "1", "yes"]
+	if has_meta("config_bounds"):
+		var parts := str(get_meta("config_bounds")).split(",")
+		if parts.size() == 3:
+			bounds_extent = Vector3(float(parts[0]), float(parts[1]), float(parts[2]))
+	if has_meta("config_max_segments"):
+		max_segments = maxi(1, int(str(get_meta("config_max_segments")).to_float()))
+	if has_meta("config_walk_seed"):
+		walk_seed = int(str(get_meta("config_walk_seed")).to_float())
+	if has_meta("config_turn_interval"):
+		turn_interval = maxf(0.01, float(str(get_meta("config_turn_interval"))))
+
+
 func apply_grid_config(config: Dictionary) -> void:
 	if config.is_empty():
 		return

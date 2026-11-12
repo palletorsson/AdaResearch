@@ -1,13 +1,15 @@
 extends SceneTree
-## IS THE VISITOR'S BODY THE BRUSH? (pollock_painting_in_3d with body_paints; Palle, 2026-11-12)
-## The work says a drip painting "is the trace of a body moving through a random field with intention". Where a room
-## asks, a body walking on the floor canvas leaves the black line. The Void's own walker is driven straight across
-## the canvas; the canvas image is read before and after along the band it walked.
+## DOES THE PLAYER PAINT WITH AN OPEN BUCKET? (pollock_painting_in_3d with body_paints and buckets; Palle, 2026-11-12)
+## The work says a drip painting "is the trace of a body moving through a random field with intention". Open buckets
+## stand in a row on the floor canvas; a body takes one by walking up to it and pours that colour as it walks.
+## The Void's own walker crosses the canvas without a bucket, takes one, and crosses again; the canvas image is read
+## along both walks. With no buckets configured the first crossing alone is the test (the body itself is the brush).
 ##
 ##   godot --path <stage> --script res://tools/probes/pollock_body_brush.gd -- --no-bridges --void-start-floor=88
 ##       --out=<dir>
 ##
-## body_brush.json: checks with what was read; from_above.png and from_spawn.png show the canvas afterwards.
+## body_brush.json: checks with what was read. arrival.png is taken BEFORE anything walks (the canvas as a visitor
+## finds it), painted.png afterwards, both from the spawn point.
 var game: Node3D
 
 
@@ -15,25 +17,37 @@ func _initialize() -> void:
 	run.call_deferred()
 
 
-## Dark pixels (the body's colour) in a horizontal band of the canvas, sampled every third pixel; and their x extent.
-func _dark(image: Image, row: int, half: int) -> Dictionary:
-	var count := 0
-	var lo := 99999
-	var hi := -1
-	for y in range(maxi(0, row - half), mini(image.get_height(), row + half), 3):
-		for x in range(0, image.get_width(), 3):
-			if image.get_pixel(x, y).get_luminance() < 0.12:
-				count += 1
-				lo = mini(lo, x); hi = maxi(hi, x)
-	return {"count": count, "span_px": maxi(0, hi - lo)}
+func _band(image: Image, row: int) -> PackedByteArray:
+	return image.get_region(Rect2i(0, clampi(row - 14, 0, image.get_height() - 28), image.get_width(), 28)).get_data()
 
 
-func _shot(cam: Camera3D, at: Vector3, target: Vector3, up: Vector3, path: String) -> void:
+func _changed(a: PackedByteArray, b: PackedByteArray) -> int:
+	var n := 0
+	for i in range(0, a.size(), 4):
+		if a[i] != b[i] or a[i + 1] != b[i + 1] or a[i + 2] != b[i + 2]: n += 1
+	return n
+
+
+func _go(body: CharacterBody3D, target: Vector3, ticks_max: int = 900) -> float:
+	var best := INF
+	for i in ticks_max:
+		var d := Vector2(body.global_position.x, body.global_position.z).distance_to(Vector2(target.x, target.z))
+		best = minf(best, d)
+		if d < 0.3: break
+		body.look_at(Vector3(target.x, body.global_position.y, target.z), Vector3.UP)
+		body.drive = Vector2(0, -1)
+		await physics_frame
+	body.drive = Vector2.ZERO
+	return best
+
+
+func _shot(cam: Camera3D, at: Vector3, target: Vector3, path: String) -> void:
 	cam.global_position = at
-	cam.look_at(target, up)
+	cam.look_at(target, Vector3.UP)
 	cam.current = true
 	for i in 4: await process_frame
 	root.get_viewport().get_texture().get_image().save_png(path)
+	cam.current = false
 
 
 func run() -> void:
@@ -71,34 +85,60 @@ func run() -> void:
 		var image: Image = painter.canvas
 		var middle: Vector3 = work.global_position
 		var half_w: float = float(image.get_width()) * float(work.pixel_size) / 2.0
-		result["canvas_m"] = [snappedf(half_w * 2.0, .01), snappedf(float(image.get_height()) * float(work.pixel_size), .01)]
-		checks.append({"check": "the room asked for it: body_paints is on", "ok": bool(work.body_paints)})
-		var row := int(work.world_to_canvas_pixel(Vector3(middle.x, level, middle.z)).y)
-		var before := _dark(image, row, 70)
-		var body: CharacterBody3D = game.body
-		game.place_player(Vector3(middle.x - half_w - 0.7, level + 0.3, middle.z))
-		for i in 60: await physics_frame
-		var target := Vector3(middle.x + half_w + 0.6, level, middle.z)
-		var best := INF
-		for i in 900:
-			var d := Vector2(body.global_position.x, body.global_position.z).distance_to(Vector2(target.x, target.z))
-			best = minf(best, d)
-			if d < 0.35: break
-			body.look_at(Vector3(target.x, body.global_position.y, target.z), Vector3.UP)
-			body.drive = Vector2(0, -1)
-			await physics_frame
-		body.drive = Vector2.ZERO
+		var half_d: float = float(image.get_height()) * float(work.pixel_size) / 2.0
+		var buckets: int = int(work.buckets)
+		result["canvas_m"] = [snappedf(half_w * 2.0, .01), snappedf(half_d * 2.0, .01)]
+		result["buckets"] = buckets
+		for layer in root.find_children("*", "CanvasLayer", true, false):      # the game's overlays, not a work's own layers
+			if layer.get_viewport() == root: layer.hide()
+		game.place_player(Vector3(middle.x + half_w - 1.2, level + 0.3, middle.z + half_d - 0.4))      # aside: not in front of the lens
 		for i in 30: await physics_frame
-		var after := _dark(image, row, 70)
-		checks.append({"check": "the body walked across the canvas", "ok": best < 0.4, "closest": snappedf(best, .01)})
-		checks.append({"check": "its walk left paint along the band it walked", "ok": int(after.count) - int(before.count) > 150, "dark_before": before.count, "dark_after": after.count})
-		checks.append({"check": "the line runs the width of the canvas", "ok": int(after.span_px) > int(image.get_width() * 0.8), "span_px": after.span_px, "canvas_px": image.get_width()})
-		game.place_player(Vector3(middle.x + half_w + 3.0, level + 0.3, middle.z - 6.0))      # out of the picture
-		for i in 20: await physics_frame
 		var cam := Camera3D.new()
 		root.add_child(cam)
-		await _shot(cam, Vector3(middle.x, level + 5.2, middle.z + 0.01), Vector3(middle.x, level, middle.z), Vector3(0, 0, -1), folder.path_join("from_above.png"))
-		await _shot(cam, Vector3(0, level + 1.6, 7.8), Vector3(0, level, 4.2), Vector3.UP, folder.path_join("from_spawn.png"))
+		await _shot(cam, Vector3(0, level + 1.6, 7.8), Vector3(0, level + 0.2, middle.z + half_d * 0.2), folder.path_join("arrival.png"))
+		var body: CharacterBody3D = game.body
+		checks.append({"check": "the room asked for it: body_paints is on", "ok": bool(work.body_paints)})
+		# 1 across the canvas with empty hands
+		var z1: float = middle.z - half_d * 0.45
+		var row1 := int(work.world_to_canvas_pixel(Vector3(middle.x, level, z1)).y)
+		var before1 := _band(image, row1)
+		game.place_player(Vector3(middle.x - half_w + 0.6, level + 0.3, z1))
+		for i in 40: await physics_frame
+		var reach1 := await _go(body, Vector3(middle.x + half_w - 0.6, level, z1))
+		for i in 20: await physics_frame
+		var bare := _changed(before1, _band(image, row1))
+		if buckets == 0:
+			checks.append({"check": "the body walked across the canvas", "ok": reach1 < 0.4})
+			checks.append({"check": "its walk left paint along the band it walked", "ok": bare > 1500, "pixels_changed": bare})
+		else:
+			checks.append({"check": "with empty hands a walk across the canvas pours nothing", "ok": reach1 < 0.4 and bare < 400, "pixels_changed": bare})
+			# 2 take a bucket by walking up to it
+			var states: Array = work.bucket_state()
+			var pick: int = mini(buckets - 1, buckets / 2 + 1)
+			var home: Vector3 = states[pick].home
+			game.place_player(Vector3(home.x, level + 0.3, home.z + 1.3))
+			for i in 40: await physics_frame
+			await _go(body, Vector3(home.x, level, home.z + 0.15), 300)
+			for i in 20: await physics_frame
+			states = work.bucket_state()
+			var away: float = (states[pick].at as Vector3).distance_to(home)
+			checks.append({"check": "walking up to an open bucket takes it", "ok": bool(states[pick].held), "bucket": pick})
+			# 3 across the canvas with the bucket
+			var z2: float = middle.z - half_d * 0.1
+			var row2 := int(work.world_to_canvas_pixel(Vector3(middle.x, level, z2)).y)
+			await _go(body, Vector3(middle.x + half_w - 0.8, level, z2))
+			var before2 := _band(image, row2 - 30)      # the bucket rides beside the hip: its line runs a little off the feet
+			var wide_before := image.get_region(Rect2i(0, clampi(row2 - 60, 0, image.get_height() - 120), image.get_width(), 120)).get_data()
+			var reach2 := await _go(body, Vector3(middle.x - half_w + 0.8, level, z2))
+			for i in 20: await physics_frame
+			var poured := _changed(wide_before, image.get_region(Rect2i(0, clampi(row2 - 60, 0, image.get_height() - 120), image.get_width(), 120)).get_data())
+			states = work.bucket_state()
+			checks.append({"check": "the bucket travels with its bearer", "ok": (states[pick].at as Vector3).distance_to(home) > 2.0, "from_home_m": snappedf((states[pick].at as Vector3).distance_to(home), .01)})
+			checks.append({"check": "carrying it, the walk pours a line across the canvas", "ok": reach2 < 0.4 and poured > 1500 and poured > 5 * maxi(bare, 60), "pixels_changed": poured})
+		game.place_player(Vector3(middle.x + half_w - 1.2, level + 0.3, middle.z + half_d - 0.4))      # aside, still on this floor
+		for i in 20: await physics_frame
+		await _shot(cam, Vector3(0, level + 1.6, 7.8), Vector3(0, level + 0.2, middle.z + half_d * 0.2), folder.path_join("painted.png"))
+		await _shot(cam, Vector3(middle.x - half_w - 1.5, level + 3.6, middle.z + half_d + 0.5), Vector3(middle.x, level, middle.z), folder.path_join("canvas.png"))
 		result["passed"] = checks.all(func(c): return c.ok)
 	else:
 		checks.append({"check": "pollock_painting_in_3d stands on this floor", "ok": false})

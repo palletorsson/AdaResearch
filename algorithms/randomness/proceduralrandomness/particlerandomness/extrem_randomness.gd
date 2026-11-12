@@ -624,6 +624,8 @@ func _read_grid_config_meta() -> void:
 			chapter = str(node.get_meta("config_chapter"))
 		if node.has_meta("config_scatter_seed"):
 			scatter_seed = int(node.get_meta("config_scatter_seed"))
+		if node.has_meta("config_num_particles"):      # a room that shows all five kinds at once asks for fewer of each
+			num_particles = clampi(int(str(node.get_meta("config_num_particles")).to_float()), 10, 400)
 		node = node.get_parent()
 
 

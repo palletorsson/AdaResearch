@@ -59,7 +59,10 @@ func shoot() -> void:
 		if record.artifacts.all(func(a):return game.building.content.exhibits.has(str(floor)+"/"+a.id)):break
 		await physics_frame
 	for i in settle:await physics_frame
-	for canvas in root.find_children("*", "CanvasLayer", true, false):canvas.hide()
+	# the game's own overlays only: a CanvasLayer inside a work's SubViewport IS the work (2026-11-12: hiding them all
+	# photographed the Pollock canvas as a plain grey sheet - its painting lives on a layer in its own viewport)
+	for canvas in root.find_children("*", "CanvasLayer", true, false):
+		if canvas.get_viewport() == root:canvas.hide()
 	var base: float = game.building.spec.levels[floor]
 	var cam := Camera3D.new();cam.fov = 60.0;cam.far = 200.0;root.add_child(cam);cam.current = true
 	var report := []

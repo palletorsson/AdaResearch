@@ -34118,15 +34118,16 @@
           "station": "SE",
           "position": [
             0,
-            5.2
+            4.0
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "support": "floor",
-            "pixel_size": "0.006",
-            "body_paints": "true"
+            "pixel_size": "0.0115",
+            "body_paints": "true",
+            "buckets": "6"
           }
         },
         {
@@ -34134,10 +34135,10 @@
           "artifact": "monte_carlo_dartboard",
           "station": "SE",
           "position": [
-            3,
-            0
+            16.5,
+            2.5
           ],
-          "facing": 0,
+          "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
@@ -34154,14 +34155,18 @@
           "artifact": "pipe_dream",
           "station": "NW",
           "position": [
-            -3,
-            -3
+            0,
+            -4.5
           ],
           "facing": 0,
-          "height": 0.2,
-          "scale": 0.5,
+          "height": 2.05,
+          "scale": 1,
           "config": {
-            "residue": "path"
+            "residue": "path",
+            "playground": "true",
+            "bounds": "6.65,1.9,1.9",
+            "max_segments": "520",
+            "walk_seed": "7"
           }
         },
         {
@@ -34169,15 +34174,84 @@
           "artifact": "extreme_randomness",
           "station": "NE",
           "position": [
-            2,
-            -7
+            -17,
+            -7.0
           ],
-          "facing": 0,
-          "height": 1.5,
-          "scale": 0.2,
+          "facing": 90,
+          "height": 1.6,
+          "scale": 0.3,
           "config": {
-            "chapter": "all",
-            "gallery_radius": "7"
+            "chapter": "chaos",
+            "gallery_radius": "7",
+            "num_particles": "80"
+          }
+        },
+        {
+          "id": "five-kinds-noise",
+          "artifact": "extreme_randomness",
+          "station": "NE",
+          "facing": 90,
+          "position": [
+            -17,
+            -3.5
+          ],
+          "height": 1.6,
+          "scale": 0.3,
+          "config": {
+            "chapter": "noise",
+            "gallery_radius": "7",
+            "num_particles": "80"
+          }
+        },
+        {
+          "id": "five-kinds-pattern",
+          "artifact": "extreme_randomness",
+          "station": "NE",
+          "facing": 90,
+          "position": [
+            -17,
+            0.0
+          ],
+          "height": 1.6,
+          "scale": 0.3,
+          "config": {
+            "chapter": "pattern",
+            "gallery_radius": "7",
+            "num_particles": "80"
+          }
+        },
+        {
+          "id": "five-kinds-emergence",
+          "artifact": "extreme_randomness",
+          "station": "NE",
+          "facing": 90,
+          "position": [
+            -17,
+            3.5
+          ],
+          "height": 1.6,
+          "scale": 0.3,
+          "config": {
+            "chapter": "emergence",
+            "gallery_radius": "7",
+            "num_particles": "80"
+          }
+        },
+        {
+          "id": "five-kinds-evolution",
+          "artifact": "extreme_randomness",
+          "station": "NE",
+          "facing": 90,
+          "position": [
+            -17,
+            7.0
+          ],
+          "height": 1.6,
+          "scale": 0.3,
+          "config": {
+            "chapter": "evolution",
+            "gallery_radius": "7",
+            "num_particles": "80"
           }
         }
       ],

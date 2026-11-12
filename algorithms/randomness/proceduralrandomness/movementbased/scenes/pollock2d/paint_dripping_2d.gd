@@ -188,9 +188,11 @@ func _emit_stroke_path(points: Array, stroke_color: Color, stroke_width: float) 
 ## THE VISITOR'S OWN TRACE (2026-11-12). The body gives the path; chance gives the mark: how wide the line runs, how
 ## far it wobbles off the foot, whether it throws drops. Slow feet pool the paint, quick feet thin it and fling it.
 ## Returns the number of marks made, for a probe.
-func paint_trace(from_px: Vector2, to_px: Vector2, speed: float, color: Color) -> int:
+## slow_px / quick_px: the line's radius in pixels at a standstill and at a run - a room with a large canvas passes
+## smaller numbers, so the poured line stays the width of a pour.
+func paint_trace(from_px: Vector2, to_px: Vector2, speed: float, color: Color, slow_px: float = 9.0, quick_px: float = 3.0) -> int:
 	var quick := clampf(speed / 3.0, 0.0, 1.0)
-	var width := clampf(lerpf(9.0, 3.0, quick) * rng.randf_range(0.7, 1.3), 2.0, 12.0)
+	var width := clampf(lerpf(slow_px, quick_px, quick) * rng.randf_range(0.7, 1.3), 1.2, 12.0)
 	var wobble := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)) * (1.5 + quick * 5.0)
 	_paint_line(from_px, to_px + wobble, color, width)
 	var marks := 1
