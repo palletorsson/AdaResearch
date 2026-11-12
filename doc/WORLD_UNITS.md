@@ -93,6 +93,33 @@ before noise (removes 15 order faults, creates 0), a comparison (`beside`, in 12
 ("it fits a foot"), `exhibit` (16 formulas, no operation). `python tools/misfits.py --test` re-measures every
 recorded number and exits 1 on drift.
 
+## Idea first: the pass over one work
+
+Palle, 2026-11-12: "all artifacts should convey an idea that they exist for a reason ... what is the idea of this
+artifact and can it be expressed in a better way ... its history ... the same idea in different scales ... part of the
+assembly tree ... how the idea it is leaning on has been expressed in art, math, design, and architecture ... work
+with before and after images." The measuring units (the eye, the sorter, the arranger) say what is wrong with a work
+where it stands; none of them says what the work is FOR. So the order is turned round: the idea first, the place last.
+
+1. **Before**: one picture from the spawn point and one from the work's front.
+2. **Its idea**: read the work's own statement (`@identity`: essence, desire, truth) and say it in one sentence.
+3. **Its record**: where it has stood (the grid map, the museum hall, the Void floor), what was changed and why.
+   The header gains `history:`.
+4. **Its lineage**: how the idea has been given form in mathematics, art, design and architecture; the header gains
+   `lineage:`. This is where a better form comes from.
+5. **Its scales and its parts**: at which scale the idea exists here (hand, table, body, room) and which is missing;
+   what it is made of in the tree, and whether it is made of the tower's own parts.
+6. **The change**: improve the work, or build the missing scale from parts the tower has earned by that floor, and
+   place it by the arrival rule.
+7. **After**: the same pictures, and a walk if a body is meant to use it. What the measurement refuted stays in the
+   header (`measured:`); what does not fit goes to the ledger.
+
+First run, floor Random_Cubes: `random_edge_profile` (2025) says "the interior is free because somebody decided in
+advance where the ends would be"; its floor held 48 black plates. `bounded_plank_causeway` is that idea at the scale of
+a body - two plank causeways from one table of draws, nothing refused beside the ends held - laid from the tower's own
+22 cm plank. The first build failed its own claim (the walker crossed both lanes) and was rebuilt; now the held lane
+is walked end to end and the other stops the walker in its first span. Evidence: `ada_run/improve/causeway/`.
+
 ## The arrival rule: how a floor is curated
 
 Palle, 2026-11-11, showing the first twelve floors: "this is where I worked most on the setup; the floors we are
@@ -196,6 +223,7 @@ at three times its size - every histogram already counted. 4 works -> 7, footpri
 
 - **Each floor only what it has earned** - and a row may say `early` (why) for a deliberate glimpse.
 - **The principal accepts.** Units propose; nothing canonical is written without the person applying it.
+- **Idea first.** A work is read for what it is for before it is measured, moved or staged.
 - **File the misfit.** What a strict reading turns away is recorded with what would have to change; it is not rejected and not quietly fixed.
 - **No new surfaces.** The timeline, the headset and the proposal lane are where proposals arrive.
 - **Refuse, never evict** (the budget), **defaults kept** unless the default is the fault.

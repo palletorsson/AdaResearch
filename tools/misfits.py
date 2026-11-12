@@ -148,6 +148,8 @@ def run_tests(doc: dict) -> int:
 
 
 def main(argv: list) -> int:
+    if hasattr(sys.stdout, "reconfigure"):      # a Windows console is cp1252 and the entries quote formulas
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     doc = json.loads(LEDGER.read_text(encoding="utf-8"))
     bad = shape(doc)
     for b in bad:

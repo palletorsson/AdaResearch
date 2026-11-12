@@ -5,7 +5,7 @@
   "filed": "2026-11-11",
   "by": "Claude Fable 5.2",
   "forms": "t20261110123727167",
-  "note": "95 works. Only 2 of them have a confirmed form today; the timeline, parts and words readings below are read WITH the forms proposed in that thread applied in memory, so their status is 'imagined' until the forms are confirmed."
+  "note": "95 works. Only 2 of them have a confirmed form today; the timeline, parts and words readings below are read WITH the forms proposed in that thread applied in memory, so their status is 'imagined' until the forms are confirmed. Floor numbers are the working tree's: the committed rooms.json has two floors fewer (other sessions' uncommitted insertions), so an entry names the map where it matters."
  },
  "readings": {
   "timeline": "the earned rule and the axis levels (tools/grammar.py check): a work may use an operation only after the card that introduces it",
@@ -13,7 +13,8 @@
   "words": "what the term formulas say that the grammar has no operation for: unknown call words, and joining words the reader skips",
   "eye": "one photograph of each work against what its form says it wants to show (ada_run/robot_pilot/randomness/eye_*.json)",
   "body": "rays on a 0.25 m grid and the Void's walker driven across (tools/probes/void_standable.gd)",
-  "arrival": "the floor from its spawn point (tools/void_arrival_worklist.py sorts boxes; the pictures and the walk decide)"
+  "arrival": "the floor from its spawn point (tools/void_arrival_worklist.py sorts boxes; the pictures and the walk decide)",
+  "idea": "each work's own statement (its @identity: essence, desire, truth), its history and its lineage, against what the floor lets a visitor do with it (Palle, 2026-11-12: 'what is the idea of this artifact and can it be expressed in a better way')"
  },
  "status": {
   "imagined": "said by a proposed form, a plan or a box: nothing in the running tower has been asked",
@@ -110,11 +111,11 @@
    "works": ["entropy_door_dynamics", "RotateGridCubes", "random_walk_collection", "random_transformations_geometric", "random_doors", "cube_projectile_spawner", "waiting_profile"],
    "misfit": "Seven works are hidden by where they stand: behind another work, inside another work's footprint, or past the edge of the slab.",
    "would_change": "Placement, floor by floor, photographed from the spawn point before and after (the arrival rule)."},
-  {"id": "m20", "reading": "arrival", "status": "imagined", "state": "open", "floors": [79, 80, 81, 82, 83, 84, 86, 90, 91, 92], "lands_in": "floor", "needed_by": 10,
+  {"id": "m20", "reading": "arrival", "status": "observed", "state": "open", "floors": [83, 92], "lands_in": "floor", "needed_by": 2,
    "works": [],
-   "misfit": "From the layout data, ten of the sixteen floors do not read from the spawn point: the player lands inside a work on 80, 84, 91 and 92; something stands in the face on 81; the first work of the timeline is the farthest on 86; the biggest work is not ahead on 79, 82, 83 and 90.",
-   "would_change": "Each floor is re-laid from where the player lands. First the pictures: this reading is boxes, and a box is not a body.",
-   "second": {"reading": "eye", "says": "Floor 90 was photographed from the spawn point in the game after it was re-laid (ab23c3de8): the ground lies ahead. The sorter still says 'hero behind' because it takes the biggest box, random_walk_tubes, for the hero. The sorter is wrong there."}},
+   "misfit": "From the layout data ten of the sixteen floors did not read from the spawn point. Pictures from the spawn point then judged nine of them: three real faults (Random_Remove, Randomness_10_PRINT_Algorithm, Random_Walk: the player landed on or behind a work - fixed, bc4d0bab1), three composed arrivals misread as faults (m26), Random_Cubes dark and sparse (m27). Random_Rotate_Random_XYZ (crowded at the spawn point) and Random_Noise_Types (not pictured) are still open.",
+   "would_change": "The two open floors are looked at from the spawn point and re-laid only if the picture shows a fault.",
+   "second": {"reading": "eye", "says": "Floor 90 was photographed from the spawn point in the game after it was re-laid (ab23c3de8): the ground lies ahead. The sorter said 'hero behind' because it took the biggest box for the hero. The sorter was wrong there."}},
   {"id": "m21", "reading": "words", "status": "observed", "state": "kept", "floors": [77, 92], "lands_in": "nowhere", "needed_by": 0,
    "works": [],
    "misfit": "Staging, arrival, folding a floor into another, a playground: the acts that made floors 85 and 90 readable are acts on a FLOOR, not on a form. They live in prose (doc/WORLD_UNITS.md) and in rooms.json (walls, props, routes, carriers); the grammar of forms cannot say one of them.",
@@ -130,7 +131,24 @@
   {"id": "m24", "reading": "arrival", "status": "observed", "state": "closed", "floors": [85, 87, 90], "lands_in": "floor", "needed_by": 3,
    "works": ["seeded_room", "walkup_lookout", "dice_throw"],
    "misfit": "Three faults made while staging: a room moved ONTO the spawn point, a walk-up 1.3 m in front of it, a gallery hidden behind the works folded in front of it.",
-   "would_change": "Re-laid from the spawn point; the dice rows moved before the count gallery in the timeline.", "closed_by": "ab23c3de8"}
+   "would_change": "Re-laid from the spawn point; the dice rows moved before the count gallery in the timeline.", "closed_by": "ab23c3de8"},
+  {"id": "m25", "reading": "arrival", "status": "observed", "state": "closed", "floors": [77, 92], "lands_in": "reading", "needed_by": 16,
+   "works": [],
+   "misfit": "A work's measured box is not its footprint: the box also holds the supply line a ceiling carrier runs to its station at 4.8 m, so a 2.3 m meter read 11.2 m wide and the sorter and the arranger saw overlaps that are not there.",
+   "would_change": "The survey also records `foot`, the box of the parts that begin below head height; the sorter and the arranger read it. Measured on these sixteen floors only - the rest of the tower still has whole boxes.", "closed_by": "ff5dc3148"},
+  {"id": "m26", "reading": "arrival", "status": "observed", "state": "open", "floors": [79, 86, 91], "lands_in": "floor", "needed_by": 3,
+   "works": ["entropy_axiom", "mushrooms", "r_c"],
+   "misfit": "Three floors were flagged because the player lands at or on a work - and on all three that is the point: a doorway straight ahead (Random_Entropy), a control console (Random_Mushrooms), a green path to a plinth (Random_Game). The arranger wanted to move them away.",
+   "would_change": "A placement can say it is the floor's WELCOME - the work the arriving player is meant to stand at or on - and the sorter and the arranger leave it. Three floors have one; that it recurs is the reason to name it.",
+   "second": {"reading": "eye", "says": "These are the three best arrivals of the sixteen floors. Each was composed from an idea of what the arriving body does - enter, operate, follow - not from boxes."}},
+  {"id": "m27", "reading": "idea", "status": "observed", "state": "closed", "floors": [82], "lands_in": "work", "needed_by": 48,
+   "works": ["random_edge_profile", "bounded_plank_causeway"],
+   "misfit": "random_edge_profile says 'the interior is free because somebody decided in advance where the ends would be'. Its floor held 48 placements of it, black from the spawn point, and nothing let a body meet the idea.",
+   "would_change": "The same idea at the scale of a body, from parts the tower has earned by then: two plank causeways from one table of draws, nothing refused beside the ends held. The 48 plates were not touched: whether they stay a field or become three (relief, plate, column) is Palle's.", "closed_by": "eb198fb13"},
+  {"id": "m28", "reading": "body", "status": "observed", "state": "closed", "floors": [82], "lands_in": "work", "needed_by": 1,
+   "works": ["bounded_plank_causeway"],
+   "misfit": "The first build of the causeway claimed that the lane with nothing refused cannot be walked. The tower's walker crossed both lanes: at five points a span and 0.28 m of variation the cliffs were small enough to ride over.",
+   "would_change": "Three points a span and 0.6 m of variation: the held lane is walked end to end, the other stops the walker inside its first span. The work's header keeps the failed measurement (`measured`).", "closed_by": "eb198fb13"}
  ],
  "proposals": [
   {"id": "p1", "state": "proposed", "title": "`field` before noise", "asked_by": ["m01", "m02"], "needed_by": "15 works on floors 77-90",
