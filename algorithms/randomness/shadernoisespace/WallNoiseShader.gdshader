@@ -28,6 +28,9 @@ uniform int noise_basis : hint_range(0, 3) = 1;
 uniform int layers : hint_range(1, 6) = 6;
 uniform int show_term : hint_range(0, 1) = 0;   // 0 = the room's picture, 1 = the sum alone
 uniform float term_gain : hint_range(0.5, 4.0) = 2.0;   // the same on every comparison patch
+// Opt-in (the corridor of plates on floor Noise_6_Wall, 2026-11-12): the terms before this one are stepped over,
+// so a surface can show ONE term of the sum alone. 0 = every term from the first: the shipped loop, value for value.
+uniform int first_layer : hint_range(0, 5) = 0;
 
 varying vec2 world_uv;
 varying vec3 world_position;
@@ -130,11 +133,13 @@ float cloud_noise(vec2 pos, float t) {
     // 0.5 of the weight, the first two 0.75, the first four 0.9375 and all six 0.984375 —
     // the actual brightness also depends on sampled values and the display encoding.
     for (int i = 0; i < layers; i++) {
-        vec2 animated_pos = pos * frequency;
-        animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
-        animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
+        if (i >= first_layer) {
+            vec2 animated_pos = pos * frequency;
+            animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
+            animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
 
-        value += amplitude * abs(noise2d(animated_pos));
+            value += amplitude * abs(noise2d(animated_pos));
+        }
         amplitude *= 0.5;
         frequency *= 2.0;
     }
