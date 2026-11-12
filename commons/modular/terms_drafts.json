@@ -8890,6 +8890,47 @@
     ],
     "said": "drafted 2026-11-11 from recurrence on the randomness floors (7 works share it) - not yet his words"
    }
+  },
+  "bounded_causeway": {
+   "expr": "random(array(plank, 10), height) + random(array(plank, 10), height, ends held) = bounded_causeway - the same draws twice: where nothing is refused the spans miss each other, where the ends are held the planks meet",
+   "from": [
+    "plank",
+    "random_sizes"
+   ],
+   "chapter": "randomness",
+   "build": {
+    "op": "compose",
+    "parts": [
+     {
+      "op": "engine",
+      "kind": "random",
+      "draws": "height",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "plank"
+       },
+       "n": 10,
+       "dims": 1
+      }
+     },
+     {
+      "op": "engine",
+      "kind": "random",
+      "draws": "height, ends held",
+      "of": {
+       "op": "array",
+       "of": {
+        "t": "plank"
+       },
+       "n": 10,
+       "dims": 1
+      }
+     }
+    ]
+   },
+   "drafted_for": "bounded_plank_causeway",
+   "drafted_by": "Claude Fable 5.2, 2026-11-12: random_edge_profile's idea at the scale of a body"
   }
  }
 }

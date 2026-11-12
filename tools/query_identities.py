@@ -22,7 +22,10 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 SEARCH_DIRS = [REPO / "algorithms", REPO / "commons" / "artifacts"]
 IDENTITY_FIELDS = ["essence", "desire", "critical_parameter", "triggers",
-                   "emerges", "needs", "relationships", "truth"]
+                   "emerges", "needs", "relationships", "truth",
+                   # what a work has been and what it leans on (Palle, 2026-11-12: "each artifact should record its
+                   # own history ... how the idea has been expressed in art, math, design and architecture")
+                   "history", "lineage", "measured"]
 
 
 def extract_all():

@@ -2180,6 +2180,44 @@
 	  },
 	  "qfep_connection": "A box whose interior is ray-marched each frame, density accumulating wherever noise says vapor; the script's entire job is telling the shader where the sun and your eye currently are. The cloud owns no surface — it is a negotiation between viewpoint and light, resettled sixty times a second."
 	},
+	"bounded_plank_causeway": {
+	  "dna": {
+	   "axes": {
+	   "held": [
+	   "ends",
+	   "middle",
+	   "all"
+	   ]
+	   }
+	  },
+	  "category": "randomness",
+	  "complexity": "beginner",
+	  "description": "Two plank causeways built from one table of draws. On the left nothing is refused: every span ends where chance left it, and the next begins somewhere else. On the right the ends of every span are held at one height and the planks meet. Step on the plate to draw again: the red posts never move. The body-scale sibling of random_edge_profile.",
+	  "dev_themes": [
+		"probability",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "bounded_plank_causeway",
+	  "map_ready": true,
+	  "map_sequences": [
+		"randomness"
+	  ],
+	  "name": "Bounded Plank Causeway",
+	  "qfep_connection": "A bound is not less freedom but the condition of joining: the interior is free because the ends were agreed in advance.",
+	  "scene": "res://algorithms/randomness/bounded_plank_causeway/bounded_plank_causeway.tscn",
+	  "sequence": "randomness",
+	  "size_group": "room",
+	  "tags": [
+		"plank",
+		"playground",
+		"walkable",
+		"bounded",
+		"seed",
+		"comparison"
+	  ]
+	},
 	"coin_toss": {
 	  "category": "randomness",
 	  "complexity": "beginner",

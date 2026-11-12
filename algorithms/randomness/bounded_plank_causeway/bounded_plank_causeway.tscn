@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/randomness/bounded_plank_causeway/bounded_plank_causeway.gd" id="1"]
+
+[node name="BoundedPlankCauseway" type="Node3D"]
+script = ExtResource("1")
