@@ -35273,6 +35273,24 @@
               "note": "overlap check: a tower column inside it; moved 0.7 m"
             }
           }
+        },
+        {
+          "id": "nine-pillars",
+          "artifact": "melting_pillar_hall",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "seed": "31415",
+            "speed": "0.9",
+            "ceiling": "5.64",
+            "editor_label": "Nine pillars, three clocks | floor to ceiling, three on each clock of the melting columns; the small stand's console runs them"
+          }
         }
       ],
       "props": [],
@@ -35290,6 +35308,13 @@
           "position": [
             -3,
             10
+          ]
+        },
+        {
+          "label": "NINE PILLARS, THREE CLOCKS\nThree move as one. Which three ever come back?",
+          "position": [
+            0,
+            4.3
           ]
         }
       ],

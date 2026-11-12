@@ -823,6 +823,54 @@
 		"derived_from": "aabb_size + category"
 	  }
 	},
+	"melting_pillar_hall": {
+	  "dna": {
+	   "axes": {
+	   "holds": [
+	   "ceiling",
+	   "free",
+	   "hung"
+	   ]
+	   },
+	   "fixture": {
+	   "build_at_once": true,
+	   "hold": true
+	   },
+	   "predicted_degeneracy": {
+	   "pair": "free ~ hung",
+	   "percent": 1.5,
+	   "arithmetic": "At the held clock t = 0 the sine and the field both stand at phase 0.5, so six of nine shafts have lost 0.67 m and three 0.13 m. free and hung show the same shaft moved by that much, so only two bands a pillar wide change: about 9 x 1.0 m x 0.5 m of 9 x 1.0 m x 4.9 m of shaft, a tenth of a subject that fills some 15 % of the frame. ceiling stretches every shaft over its whole length and differs from both by more."
+	   }
+	  },
+	  "category": "procedural",
+	  "complexity": "intermediate",
+	  "description": "Nine pillars from the slab to the ceiling, eight metres and more apart across a whole floor, three on each of the melting columns' three clocks: a fixed phase, a sine, a seeded noise field. The shaft is the columns' own mesh function and the phase their own driver; a pillar takes one of 36 meshes built once, so nothing is built while the hall runs. Where the stand of three small columns is on the same floor, its console holds, spins, reskins and names all twelve. The three on one clock move as one.",
+	  "dev_themes": [
+		"probability",
+		"procedural",
+		"randomness"
+	  ],
+	  "include_in_map_data": true,
+	  "interaction": "walk",
+	  "lookup_name": "melting_pillar_hall",
+	  "map_ready": true,
+	  "map_sequences": [
+		"noise"
+	  ],
+	  "name": "Melting Pillar Hall",
+	  "qfep_connection": "A body that carries a ceiling keeps changing inside the span it holds: what repeats and what only drifts can be told apart by who moves together.",
+	  "scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/hall/melting_pillar_hall.tscn",
+	  "sequence": "noise",
+	  "size_group": "room",
+	  "tags": [
+		"columns",
+		"noise",
+		"sine",
+		"comparison",
+		"hall",
+		"seed"
+	  ]
+	},
 	"MeltingBerniniScene": {
 	  "category": "procedural",
 	  "complexity": "intermediate",
