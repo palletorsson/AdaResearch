@@ -36582,7 +36582,7 @@
             0.0,
             -0.02
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.27,
           "scale": 0.5,
           "config": {
@@ -36655,7 +36655,22 @@
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "CELLS / WALK IN",
+          "position": [
+            0,
+            7.0
+          ]
+        },
+        {
+          "label": "BEHIND THE ATRIUM: THE WOMB, ENTERED FROM THE WEST",
+          "position": [
+            -9.5,
+            -5.4
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
