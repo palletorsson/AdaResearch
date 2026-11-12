@@ -42859,11 +42859,34 @@
             "plinth": "0",
             "pin": "true"
           }
+        },
+        {
+          "id": "colonization-floor",
+          "artifact": "colonization_floor",
+          "station": "SW",
+          "position": [
+            0,
+            4.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Colonization floor | a dark field 12 x 4.4 m at the arrival: points ask, sites answer; a body's walk leaves points and the branches come to it; every site answers, or only a tip"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / THE POINTS ARE YOURS\nWalk on the dark field: the branches come to where you have been.",
+          "position": [
+            -2.6,
+            7.7
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

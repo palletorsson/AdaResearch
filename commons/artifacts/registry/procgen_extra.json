@@ -13534,6 +13534,50 @@
         2
       ]
     },
+    "colonization_floor": {
+      "lookup_name": "colonization_floor",
+      "scene": "res://algorithms/proceduralgeneration/growth_systems/colonization_floor/colonization_floor.tscn",
+      "name": "Colonization Floor (the points are yours)",
+      "description": "Space colonization on the floor, with the points handed to the visitor. A dark field 12 x 4.4 m in front of the arrival; the root stands at the visitor's feet. Every point asks the nearest site within 1.6 m; a site that is asked grows 15 cm toward the sum of the unit directions to its askers; a point is taken when a site stands within 30 cm. The field begins with sixty seeded points and a tree comes to them; then every 45 cm of a body's walk leaves a point, and what grows in answer to it is pink. The axis is the hall's own comparison: every site may answer again (a tree: field 3 takes all sixty points with 228 sites) or only a tip may (one thread that cannot branch spends all 900 sites on six points).",
+      "category": "procedural_generation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "proceduralgeneration"
+      ],
+      "sequence": "proceduralgeneration",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "space-colonization",
+        "growth",
+        "branching",
+        "attractors",
+        "walkable"
+      ],
+      "qfep_connection": "A form that looks grown is a record of who was allowed to ask and who was allowed to answer; here a body walking is one of those who ask.",
+      "dev_themes": [
+        "procedural",
+        "generation"
+      ],
+      "dna": {
+        "axes": {
+          "answers": [
+            "all",
+            "tips"
+          ]
+        },
+        "fixture": {
+          "pregrown": true
+        },
+        "predicted_degeneracy": {
+          "pair": "answers: all ~ tips",
+          "percent": 0.8,
+          "arithmetic": "The axis has two values. On field 3 the tree is 228 pieces (34 m of branch 5 cm wide, 1.7 square metres spread over the field) and leaves no point; the thread is 900 pieces (135 m) wound over itself in one patch of some 2 square metres, with 54 points still on the field. About 3 square metres of the 52.8 change. The field lies flat: at a pitch of 0.26 rad those 3 show as 0.8 of a frame of about 102 fitted to the 12.8 m diagonal - 0.8 %."
+        }
+      }
+    },
     "percolation_crossing": {
       "lookup_name": "percolation_crossing",
       "scene": "res://algorithms/proceduralgeneration/growth_systems/percolation_crossing/percolation_crossing.tscn",
