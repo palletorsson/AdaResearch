@@ -7,11 +7,14 @@ extends SceneTree
 ##   everything the biome draws lies inside the glass;
 ##   the glass keeps a body out, and the box's floor closes the shaft (a body set on the roof stays on it);
 ##   what the build cost.
+## A box in the slanted form (flare_height above 0: a larger ground carried up on a glass funnel) is read the same way,
+## with the body walking in under the lean from the west, set down on the open top, and - when the floor has a
+## `biome-lookout` row - walking up the ramp to the deck beside the rim.
 ##
 ##   godot --path <stage> --script res://tools/probes/biome_box_floor.gd -- --no-bridges
 ##       --void-start-floor=<floor> --out=<dir> [--stage=lsystems]
 ##
-## box.json: checks with what was read. arrival.png, box.png, close.png.
+## box.json: checks with what was read. arrival.png, box.png, close.png; below.png for the slanted form.
 const ID := "biome-box"
 var game: Node3D
 var level := 0.0
@@ -99,25 +102,86 @@ func run() -> void:
 			high = high.max(world.end)
 			drawn += 1
 		var half: float = box.half_side()
-		var inside: bool = drawn > 0 and low.x >= at.x - half - 0.06 and high.x <= at.x + half + 0.06 and low.z >= at.z - half - 0.06 and high.z <= at.z + half + 0.06 and low.y >= at.y - 0.02 and high.y <= at.y + float(box.tall) + 0.02
-		checks.append({"check": "everything the biome draws lies inside the glass", "ok": inside, "drawn": drawn,
+		var rim: float = float(box.flare_height)
+		var flared: bool = rim > 0.0
+		var spec: Dictionary = game.building.spec
+		var ceiling: float = float(spec.levels[floor - 1]) - float(spec.levels[floor]) - float(spec.slab_thickness) if flared else float(box.tall)      # an open top: the trees stay under the slab above
+		var ground := {}
+		if flared and box.biome().has_method("_h_at"):
+			# the ground's own relief, read from the biome: the upright glass has to stand as high as the cut edge it holds
+			var n: int = int(box.cells)
+			var top_all := -INF
+			var top_edge := -INF
+			for i in n * 4 + 1:
+				for j in n * 4 + 1:
+					var h: float = float(box.biome().call("_h_at", -n * 0.5 + i * 0.25, -n * 0.5 + j * 0.25))
+					top_all = maxf(top_all, h)
+					if i == 0 or j == 0 or i == n * 4 or j == n * 4: top_edge = maxf(top_edge, h)
+			var surface: float = box.biome().global_position.y - at.y
+			ground = {"highest_m": snappedf(surface + top_all, .01), "highest_at_the_edge_m": snappedf(surface + top_edge, .01), "glass_top_m": float(box.glass_top())}
+			checks.append({"check": "the upright glass stands higher than the ground's cut edge everywhere", "ok": surface + top_edge <= float(box.glass_top()) - 0.05, "ground": ground})
+		var risers := []
+		for n in root.find_children("*Riser*", "MeshInstance3D", true, false):
+			var m := n as MeshInstance3D
+			if m.is_visible_in_tree() and absf(m.global_position.y - (at.y + 3.0)) < 3.2 and absf(m.global_position.x - at.x) < half and absf(m.global_position.z - at.z) < half:
+				risers.append([snappedf(m.global_position.x - at.x, .01), snappedf(m.global_position.z - at.z, .01)])
+		var inside: bool = drawn > 0 and low.x >= at.x - half - 0.06 and high.x <= at.x + half + 0.06 and low.z >= at.z - half - 0.06 and high.z <= at.z + half + 0.06 and low.y >= at.y + rim - 0.02 and high.y <= at.y + ceiling + 0.02
+		checks.append({"check": "everything the biome draws lies inside the glass" if not flared else "everything the biome draws lies inside the rim, on the tray and under the slab above", "ok": inside, "drawn": drawn, "ceiling_m": snappedf(ceiling, .01), "service_risers_inside_the_rim": risers,
 			"from": [snappedf(low.x - at.x, .01), snappedf(low.y - at.y, .01), snappedf(low.z - at.z, .01)], "to": [snappedf(high.x - at.x, .01), snappedf(high.y - at.y, .01), snappedf(high.z - at.z, .01)]})
 		game.place_player(Vector3(0, level + 0.3, 8.6))
 		for i in 20: await physics_frame
 		await _shot(cam, Vector3(0, level + 1.6, 7.8), at + Vector3(0, 1.4, 0), folder.path_join("arrival.png"))
-		await _shot(cam, at + Vector3(-4.6, 2.3, 6.2), at + Vector3(0, 1.3, 0), folder.path_join("box.png"))
-		await _shot(cam, at + Vector3(0.4, 1.6, 4.3), at + Vector3(0, 1.2, 0), folder.path_join("close.png"))
-		# the glass keeps a body out
-		game.place_player(at + Vector3(0.9, 0.3, half + 1.6))
-		for i in 40: await physics_frame
-		await _go(body, at + Vector3(0.9, 0, 0), 300)
-		var stopped: float = body.global_position.z - at.z
-		checks.append({"check": "the glass keeps a body out", "ok": stopped >= half + 0.15, "stopped_m_from_the_middle": snappedf(stopped, .01)})
-		# the box closes the shaft: a body set on its roof stays there
-		game.place_player(at + Vector3(0, float(box.tall) + 0.4, 0))
-		for i in 90: await physics_frame
-		var on_roof: float = body.global_position.y - at.y
-		checks.append({"check": "a body set on the roof stays on it: the box closes the shaft", "ok": absf(on_roof - float(box.tall)) < 0.25 and int(game.checkpoint) == floor, "feet_m": snappedf(on_roof, .01)})
+		if not flared:
+			await _shot(cam, at + Vector3(-4.6, 2.3, 6.2), at + Vector3(0, 1.3, 0), folder.path_join("box.png"))
+			await _shot(cam, at + Vector3(0.4, 1.6, 4.3), at + Vector3(0, 1.2, 0), folder.path_join("close.png"))
+			# the glass keeps a body out
+			game.place_player(at + Vector3(0.9, 0.3, half + 1.6))
+			for i in 40: await physics_frame
+			await _go(body, at + Vector3(0.9, 0, 0), 300)
+			var stopped: float = body.global_position.z - at.z
+			checks.append({"check": "the glass keeps a body out", "ok": stopped >= half + 0.15, "stopped_m_from_the_middle": snappedf(stopped, .01)})
+			# the box closes the shaft: a body set on its roof stays there
+			game.place_player(at + Vector3(0, float(box.tall) + 0.4, 0))
+			for i in 90: await physics_frame
+			var on_roof: float = body.global_position.y - at.y
+			checks.append({"check": "a body set on the roof stays on it: the box closes the shaft", "ok": absf(on_roof - float(box.tall)) < 0.25 and int(game.checkpoint) == floor, "feet_m": snappedf(on_roof, .01)})
+		else:
+			await _shot(cam, at + Vector3(-half - 2.4, rim + 3.3, half + 2.7), at + Vector3(0, rim + 0.5, 0), folder.path_join("box.png"))
+			await _shot(cam, at + Vector3(2.0, rim + 1.6, half + 1.1), at + Vector3(-1.0, rim + 0.7, 0), folder.path_join("close.png"))
+			await _shot(cam, at + Vector3(-half - 3.4, 1.6, 3.4), at + Vector3(0, 1.7, 0), folder.path_join("below.png"))
+			# the lean keeps a body off the shaft: it walks in under the glass from the west and is stopped before the foot
+			game.place_player(at + Vector3(-half - 1.6, 0.3, 0.9))
+			for i in 40: await physics_frame
+			await _go(body, at + Vector3(0, 0, 0.9), 400)
+			var short: float = at.x - body.global_position.x
+			checks.append({"check": "a body walking in under the lean is stopped before the foot, on the floor", "ok": short >= float(box.foot_half()) + 0.15 and absf(body.global_position.y - level) < 0.3,
+				"stopped_m_from_the_middle": snappedf(short, .01), "foot_half_m": float(box.foot_half())})
+			# the open top: a body set down over the middle comes to rest on the tray under the ground, on this floor
+			game.place_player(at + Vector3(0, float(box.glass_top()) + 0.4, 0))
+			for i in 120: await physics_frame
+			var on_tray: float = body.global_position.y - at.y
+			var under := ""
+			var query := PhysicsRayQueryParameters3D.create(body.global_position + Vector3(0, 0.3, 0), body.global_position + Vector3(0, -0.6, 0))
+			query.exclude = [body.get_rid()]
+			var hit: Dictionary = root.get_world_3d().direct_space_state.intersect_ray(query)
+			if not hit.is_empty(): under = str((hit.collider as Node).get_path()).get_slice("/Artifact/", 1).left(90)
+			checks.append({"check": "a body set down on the open top stays on this floor, on the tray or on what the biome holds: the funnel closes the shaft", "ok": on_tray >= rim - 0.1 and on_tray < float(box.glass_top()) + 1.0 and int(game.checkpoint) == floor,
+				"feet_m": snappedf(on_tray, .01), "stands_on": under})
+			# the lookout, when the floor has one: up the ramp to a deck beside the rim
+			var lookout = null
+			for a in record.artifacts:
+				if str(a.id) == "biome-lookout": lookout = a
+			if lookout != null:
+				var deck := Vector3(float(lookout.position[0]), level, float(lookout.position[1]))
+				game.place_player(deck + Vector3(-6.2, 0.3, 0))
+				for i in 40: await physics_frame
+				await _go(body, deck, 700, 0.34)
+				var up_m: float = body.global_position.y - level
+				checks.append({"check": "a body walks up the ramp to the lookout and stands two metres up beside the rim", "ok": absf(up_m - 2.0) < 0.3 and Vector2(body.global_position.x - deck.x, body.global_position.z - deck.z).length() < 0.6,
+					"feet_m": snappedf(up_m, .01), "at": [snappedf(body.global_position.x, .01), snappedf(body.global_position.z, .01)]})
+				for layer in root.find_children("*", "CanvasLayer", true, false):
+					if layer.get_viewport() == root: layer.hide()
+				await _shot(cam, body.global_position + Vector3(0, 1.6, 0), at + Vector3(-1.5, rim + 0.6, -1.0), folder.path_join("lookout.png"))
 		checks.append({"check": "the build is reported (the biome's own builders: about 1.3 s alone on this machine, more when several towers run at once)", "ok": int(st.build_ms) > 0, "build_ms": int(st.build_ms), "trees": int(st.trees), "creatures": int(st.creatures)})
 		game.place_player(Vector3(0, level + 0.3, 8.6))
 		result["passed"] = checks.all(func(c): return c.ok)

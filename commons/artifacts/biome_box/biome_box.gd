@@ -13,6 +13,20 @@ extends Node3D
 ## The box is 6.6 m square: it stands on the rim of a shaft's six-metre opening and closes it. The lines on the
 ## glass are one metre apart, the size of the biome's cells; the biome is `cells` across, 30 cm in from the glass. A body cannot walk in: the biome has no ground to stand on.
 ##
+## THE SLANTED FORM (Palle, 2026-11-13: "Can we make the biome larger by slanting the side from 6 m up to 12 m from 0
+## to 2 in y"). With `flare_height` above 0 the box stands on the same 6.6 m foot on the shaft's rim, its four sides
+## lean outward to the biome's own width at that height, and the ground lies on top: `cells: 12, flare_height: 2` is a
+## twelve-metre ground carried two metres up on a glass funnel. Upright glass 1.8 m high stands round the ground (its cut edge rises that far at the hills) and
+## the top is open, so the trees rise out of it. The metre lines are the cell boundaries of the larger ground, cut
+## where each one leaves a slanted side. The straight box is the default and is unchanged.
+##
+## THE WINDOW ("...and open the shaft above the biome to 12"). With `window` the artifact is only a clear glass floor
+## set flush in a shaft's six-metre opening, with the metre lines on it: a body walks out on it and looks down at the
+## biome of the floor below. From an eye 1.6 m over the middle of a six-metre opening, a ground 3.6 m below the slab
+## is in view out to 7.9 m from the middle, so a twelve-metre ground is seen whole without cutting the slab. The
+## floor under a body is paused by the tower (its sensors are out of physics), so the box below cannot notice a body
+## up here: the window, which is awake, asks every box (group `biome_boxes`) and the one straight under it builds.
+##
 ## `stage`: full = everything (the default, and what a box on a bench shows), hall = the sequence of the floor the
 ## box stands on, read from the floor's map (what a row in the tower asks for), or a sequence named outright. The biome's builders take about a second (the mycelium most of it), so with
 ## `builds: arrival` the box stays an empty grid until a body arrives on its floor; `always` builds at once.
@@ -22,13 +36,18 @@ const MARGIN := 0.3                   # glass to the biome's edge
 const SET_IN := Vector3(0.05, 0.0, -0.27)   # before `full` a body lies half a metre over the biome's south edge: the ground stands that much north
 const LIFT := 0.44                     # the biome's cut section reaches this far under its surface
 const LINE := Color("f5a9b8")
+const SHAFT := 6.0                    # a shaft's opening: the foot of both forms stands on its rim
+const BAND := 1.8                     # in the slanted form, the upright glass round the ground: seed 7 at twelve cells has a hill on its edge 1.29 m over the ground's level, 1.73 m over the rim
 
 @export_enum("hall", "full", "randomness", "lsystems") var stage := "full"      ## a config may name any sequence the biome vocabulary knows
 @export_range(0.0, 1.0) var phase := 1.0          ## how far what arrives at this stage has come
 @export var world_seed := 7                       ## the one ground: the same number on every floor
-@export_range(4, 6) var cells := 6                ## the biome's cells across, a metre each (seed 7 has no tree below six)
+@export_range(4, 12) var cells := 6               ## the biome's cells across, a metre each (seed 7 has no tree below six); above six needs the slanted form
+@export_range(0.0, 3.0) var flare_height := 0.0   ## above 0: the sides lean outward from the shaft's rim to the biome's width at this height, the ground on top
+@export var sign_side := "south"                  ## south | west: the side the low sign stands on
 @export var tall := 3.6
 @export_enum("arrival", "always") var builds := "arrival"
+@export var window := false                       ## true: only a clear glass floor in the shaft's opening, to stand on and look down from; no biome of its own
 
 var _biome: Node3D
 var _stage_now := ""
@@ -36,14 +55,23 @@ var _sign: Label3D
 var _seed_mark: MeshInstance3D
 var _build_ms := -1
 var _built_config := []
+var _ask_until := 0
+var _answered := false
 
 
 func _ready() -> void:
 	var given := {}
-	for key in ["stage", "phase", "world_seed", "cells", "tall", "builds"]:
+	for key in ["stage", "phase", "world_seed", "cells", "tall", "builds", "flare_height", "sign_side", "window"]:
 		if has_meta("config_" + key): given[key] = get_meta("config_" + key)
 	_take(given)
-	_box()
+	if window:
+		_window()
+		_write()
+		_watch()
+		return
+	add_to_group("biome_boxes")
+	if flare_height > 0.0: _hopper()
+	else: _box()
 	_stage_now = _resolve()
 	_write()
 	if builds == "always": grow.call_deferred()
@@ -54,14 +82,21 @@ func _take(config_data: Dictionary) -> void:
 	if config_data.has("stage"): stage = str(config_data["stage"]).strip_edges()
 	if config_data.has("phase"): phase = clampf(float(str(config_data["phase"])), 0.0, 1.0)
 	if config_data.has("world_seed"): world_seed = int(float(str(config_data["world_seed"])))
-	if config_data.has("cells"): cells = clampi(int(float(str(config_data["cells"]))), 4, 6)
+	if config_data.has("flare_height"): flare_height = clampf(float(str(config_data["flare_height"])), 0.0, 3.0)
+	if config_data.has("cells"): cells = clampi(int(float(str(config_data["cells"]))), 4, 12)
+	if flare_height <= 0.0: cells = mini(cells, 6)      # the straight box stands on a six-metre opening
+	if config_data.has("sign_side") and str(config_data["sign_side"]) in ["south", "west"]: sign_side = str(config_data["sign_side"])
 	if config_data.has("tall"): tall = clampf(float(str(config_data["tall"])), 2.0, 5.4)
 	if config_data.has("builds") and str(config_data["builds"]) in ["arrival", "always"]: builds = str(config_data["builds"])
+	if config_data.has("window"): window = str(config_data["window"]).to_lower() in ["true", "1", "1.0"]
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	_take(config_data)
 	if not is_inside_tree() or _sign == null: return
+	if window:
+		_write()
+		return
 	_stage_now = _resolve()
 	_write()
 	if _biome != null and _built_config != [_stage_now, phase, world_seed, cells]:
@@ -156,6 +191,22 @@ func _box() -> void:
 		for edge in [-half, half]:
 			lines.append(Transform3D(Basis().scaled(Vector3(wide, 0.008, 0.008)), Vector3(0, y, edge)))
 			lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, wide)), Vector3(edge, y, 0)))
+	_draw(lines)
+	var pale := StandardMaterial3D.new()
+	pale.albedo_color = Color("c4cccc")
+	pale.roughness = 0.5
+	for x in [-half, half]:
+		for z in [-half, half]:
+			_bar(Vector3(x, tall * 0.5, z), Vector3(0.06, tall, 0.06), pale)
+	for y in [0.0, tall]:
+		for edge in [-half, half]:
+			_bar(Vector3(0, y, edge), Vector3(wide, 0.045, 0.045), pale)
+			_bar(Vector3(edge, y, 0), Vector3(0.045, 0.045, wide), pale)
+	_seed()
+	_stand_sign(half + 0.55)
+
+
+func _draw(lines: Array[Transform3D]) -> void:
 	var thin := MultiMesh.new()
 	thin.transform_format = MultiMesh.TRANSFORM_3D
 	var unit := BoxMesh.new()
@@ -172,17 +223,10 @@ func _box() -> void:
 	grid.material_override = ink
 	grid.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(grid)
-	var pale := StandardMaterial3D.new()
-	pale.albedo_color = Color("c4cccc")
-	pale.roughness = 0.5
-	for x in [-half, half]:
-		for z in [-half, half]:
-			_bar(Vector3(x, tall * 0.5, z), Vector3(0.06, tall, 0.06), pale)
-	for y in [0.0, tall]:
-		for edge in [-half, half]:
-			_bar(Vector3(0, y, edge), Vector3(wide, 0.045, 0.045), pale)
-			_bar(Vector3(edge, y, 0), Vector3(0.045, 0.045, wide), pale)
-	# the seed: where the biome begins, shown while the box is still empty
+
+
+## The seed: where the biome begins, shown while the box is still empty.
+func _seed() -> void:
 	_seed_mark = MeshInstance3D.new()
 	_seed_mark.name = "Seed"
 	var ball := SphereMesh.new()
@@ -194,13 +238,19 @@ func _box() -> void:
 	_seed_mark.material_override = lit
 	_seed_mark.position = Vector3(0, 0.8, 0)
 	add_child(_seed_mark)
-	# the sign: low, outside the south glass
+
+
+## The sign: low, `out` metres from the middle, outside the glass on the side asked for.
+func _stand_sign(out: float) -> void:
 	var dark := StandardMaterial3D.new()
 	dark.albedo_color = Color(0.11, 0.115, 0.13)
 	dark.roughness = 0.85
 	var stand := Node3D.new()
 	stand.name = "Sign"
-	stand.position = Vector3(0, 0, half + 0.55)
+	stand.position = Vector3(0, 0, out)
+	if sign_side == "west":
+		stand.position = Vector3(-out, 0, 0)
+		stand.rotation.y = -PI * 0.5
 	add_child(stand)
 	var panel := MeshInstance3D.new()
 	var face := BoxMesh.new()
@@ -223,6 +273,160 @@ func _box() -> void:
 	panel.add_child(_sign)
 
 
+## ---- the slanted form ----
+
+## A thin bar from a to b, as a transform of the unit box.
+func _between(a: Vector3, b: Vector3, thick: float = 0.008) -> Transform3D:
+	var along: Vector3 = b - a
+	var up: Vector3 = along.normalized()
+	var side: Vector3 = up.cross(Vector3.RIGHT if absf(up.x) < 0.9 else Vector3.BACK).normalized()
+	return Transform3D(Basis(side * thick, up * along.length(), side.cross(up) * thick), (a + b) * 0.5)
+
+
+func _strut(a: Vector3, b: Vector3, thick: float, material: Material) -> void:
+	var shown := MeshInstance3D.new()
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(1, 1, 1)
+	shown.mesh = mesh
+	shown.material_override = material
+	shown.transform = _between(a, b, thick)
+	add_child(shown)
+
+
+func _pane(body: StaticBody3D, at: Vector3, size: Vector3, material: Material) -> void:
+	var shown := MeshInstance3D.new()
+	var sheet := BoxMesh.new()
+	sheet.size = size
+	shown.mesh = sheet
+	shown.material_override = material
+	shown.position = at
+	shown.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	body.add_child(shown)
+	var shape := CollisionShape3D.new()
+	var solid := BoxShape3D.new()
+	solid.size = size.max(Vector3(0.08, 0.08, 0.08))
+	shape.shape = solid
+	shape.position = at
+	body.add_child(shape)
+
+
+## Only a floor of clear glass, flush in the shaft's opening, and the metre lines on it.
+func _window() -> void:
+	var half: float = SHAFT * 0.5 - 0.01
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = Color(0.8, 0.92, 0.94, 0.09)
+	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
+	glass.roughness = 0.12
+	glass.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var body := StaticBody3D.new()
+	body.name = "Glass"
+	add_child(body)
+	_pane(body, Vector3(0, -0.04, 0), Vector3(half * 2.0, 0.08, half * 2.0), glass)
+	var lines: Array[Transform3D] = []
+	for i in int(SHAFT) + 1:
+		var mx: float = clampf(-SHAFT * 0.5 + float(i) + SET_IN.x, -half, half)      # the cell lines of the ground below, straight over them
+		var mz: float = clampf(-SHAFT * 0.5 + float(i) + SET_IN.z, -half, half)
+		lines.append(Transform3D(Basis().scaled(Vector3(half * 2.0, 0.008, 0.008)), Vector3(0, 0.004, mz)))
+		lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, half * 2.0)), Vector3(mx, 0.004, 0)))
+	_draw(lines)
+	var pale := StandardMaterial3D.new()
+	pale.albedo_color = Color("c4cccc")
+	pale.roughness = 0.5
+	for side in [-1.0, 1.0]:
+		_strut(Vector3(-half, -0.03, side * half), Vector3(half, -0.03, side * half), 0.045, pale)
+		_strut(Vector3(side * half, -0.03, -half), Vector3(side * half, -0.03, half), 0.045, pale)
+	_stand_sign(SHAFT * 0.5 + 0.85)
+
+
+func _hopper() -> void:
+	var low: float = SHAFT * 0.5 + MARGIN              # half the foot: the straight box's own 6.6 m
+	var high: float = float(cells) * 0.5 + MARGIN       # half the rim
+	var rim: float = flare_height
+	var lean: float = maxf((high - low) / rim, 0.001)   # metres outward for a metre up
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = Color(0.8, 0.92, 0.94, 0.07)
+	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
+	glass.roughness = 0.18
+	glass.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var floor_glass := StandardMaterial3D.new()
+	floor_glass.albedo_color = Color(0.16, 0.18, 0.22, 0.55)
+	floor_glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	floor_glass.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var body := StaticBody3D.new()
+	body.name = "Glass"
+	add_child(body)
+	# the foot closes the shaft; the tray carries the ground; a metre of upright glass stands round it; the top is open
+	_pane(body, Vector3(0, -0.05, 0), Vector3(low * 2.0, 0.1, low * 2.0), floor_glass)
+	_pane(body, Vector3(0, rim - 0.02, 0), Vector3(high * 2.0, 0.04, high * 2.0), floor_glass)
+	for side in [-1.0, 1.0]:
+		_pane(body, Vector3(0, rim + BAND * 0.5, side * high), Vector3(high * 2.0, BAND, 0.02), glass)
+		_pane(body, Vector3(side * high, rim + BAND * 0.5, 0), Vector3(0.02, BAND, high * 2.0), glass)
+	# the four slanted sides: one sheet each, and a thin solid behind it
+	for turn in 4:
+		var spin := Basis(Vector3.UP, PI * 0.5 * float(turn))
+		var corners: Array[Vector3] = [spin * Vector3(-low, 0, low), spin * Vector3(low, 0, low), spin * Vector3(high, rim, high), spin * Vector3(-high, rim, high)]
+		var outward: Vector3 = (spin * Vector3(0, -lean, 1.0)).normalized()
+		var st := SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for ix in [0, 2, 1, 0, 3, 2]:
+			st.set_normal(outward)
+			st.add_vertex(corners[ix])
+		var shown := MeshInstance3D.new()
+		shown.mesh = st.commit()
+		shown.material_override = glass
+		shown.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		body.add_child(shown)
+		var points := PackedVector3Array()
+		for c in corners:
+			points.append(c)
+			points.append(c - outward * 0.08)
+		var solid := ConvexPolygonShape3D.new()
+		solid.points = points
+		var shape := CollisionShape3D.new()
+		shape.shape = solid
+		body.add_child(shape)
+	# the grid: the cell lines of the ground above, a metre apart, cut where each leaves a slanted side
+	var lines: Array[Transform3D] = []
+	for i in cells + 1:
+		var mx: float = -float(cells) * 0.5 + float(i) + SET_IN.x
+		var mz: float = -float(cells) * 0.5 + float(i) + SET_IN.z
+		lines.append(Transform3D(Basis().scaled(Vector3(high * 2.0, 0.008, 0.008)), Vector3(0, rim - 0.046, mz)))      # under the tray
+		lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, high * 2.0)), Vector3(mx, rim - 0.046, 0)))
+		if absf(mz) <= low: lines.append(Transform3D(Basis().scaled(Vector3(low * 2.0, 0.008, 0.008)), Vector3(0, 0.004, mz)))      # on the foot
+		if absf(mx) <= low: lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, low * 2.0)), Vector3(mx, 0.004, 0)))
+		var from_x: float = clampf((absf(mx) - low) / lean, 0.0, rim)
+		var from_z: float = clampf((absf(mz) - low) / lean, 0.0, rim)
+		for side in [-1.0, 1.0]:
+			lines.append(_between(Vector3(mx, rim, side * high), Vector3(mx, rim + BAND, side * high)))
+			lines.append(_between(Vector3(side * high, rim, mz), Vector3(side * high, rim + BAND, mz)))
+			if from_x < rim - 0.01: lines.append(_between(Vector3(mx, from_x, side * (low + lean * from_x)), Vector3(mx, rim, side * high)))
+			if from_z < rim - 0.01: lines.append(_between(Vector3(side * (low + lean * from_z), from_z, mz), Vector3(side * high, rim, mz)))
+	var up := 1.0
+	while up < rim + BAND - 0.2:
+		var reach: float = minf(low + lean * up, high)      # on the lean below the rim, on the upright glass above it
+		if absf(up - rim) > 0.2:
+			for side in [-1.0, 1.0]:
+				lines.append(Transform3D(Basis().scaled(Vector3(reach * 2.0, 0.008, 0.008)), Vector3(0, up, side * reach)))
+				lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, reach * 2.0)), Vector3(side * reach, up, 0)))
+		up += 1.0
+	_draw(lines)
+	var pale := StandardMaterial3D.new()
+	pale.albedo_color = Color("c4cccc")
+	pale.roughness = 0.5
+	for x in [-1.0, 1.0]:
+		for z in [-1.0, 1.0]:
+			_strut(Vector3(x * low, 0, z * low), Vector3(x * high, rim, z * high), 0.06, pale)
+			_strut(Vector3(x * high, rim, z * high), Vector3(x * high, rim + BAND, z * high), 0.06, pale)
+	for level in [[0.0, low], [rim, high], [rim + BAND, high]]:
+		var y: float = level[0]
+		var reach: float = level[1]
+		for side in [-1.0, 1.0]:
+			_strut(Vector3(-reach, y, side * reach), Vector3(reach, y, side * reach), 0.045, pale)
+			_strut(Vector3(side * reach, y, -reach), Vector3(side * reach, y, reach), 0.045, pale)
+	_seed()
+	_stand_sign(high + 0.55)
+
+
 func _bar(at: Vector3, size: Vector3, material: Material) -> void:
 	var shown := MeshInstance3D.new()
 	var mesh := BoxMesh.new()
@@ -235,11 +439,16 @@ func _bar(at: Vector3, size: Vector3, material: Material) -> void:
 
 func _write() -> void:
 	if _sign == null: return
+	if window:
+		_sign.text = "\n".join(PackedStringArray(["THE BIOME, FROM ABOVE",
+			"The glass is a floor: walk out on it. One floor down the same ground stands at the stage of the hall below.",
+			"From the middle of the glass all of it is in view."]))
+		return
 	var words := arriving()
 	var here := "everything the tower teaches" if _stage_now == "full" else _stage_now.to_upper()
 	var comes := ", ".join(words) if not words.is_empty() else "nothing new to see"
 	_sign.text = "\n".join(PackedStringArray(["THE BIOME, AT THIS FLOOR",
-		"One ground from one seed, the same in every box down the tower. It may only be made of what the halls above have taught.",
+		("One ground from one seed, the same in every box down the tower." if flare_height <= 0.0 else "One ground from one seed, here %d metres across, carried %s m up on slanted glass." % [cells, str(snappedf(flare_height, 0.1))]) + " It may only be made of what the halls above have taught.",
 		"Here: %s.  Arriving with it: %s%s." % [here, comes, "" if words.is_empty() or _stage_now == "full" else " - %d %% of the way" % int(roundf(phase * 100.0))],
 		"" if _biome != null else "The box is empty until someone arrives on its floor."]))
 
@@ -257,9 +466,33 @@ func _watch() -> void:
 	zone.add_child(shape)
 	zone.top_level = true
 	add_child(zone)
-	zone.global_position = Vector3(0, global_position.y + 2.5, 0)
+	zone.global_position = Vector3(0, global_position.y + room.size.y * 0.5, 0)
 	zone.body_entered.connect(func(b: Node) -> void:
-		if b is CharacterBody3D and _biome == null: grow.call_deferred())
+		if not b is CharacterBody3D: return
+		if window:
+			_ask_until = Time.get_ticks_msec() + 30000
+			_ask.call_deferred()
+		elif _biome == null: grow.call_deferred())
+
+
+## The window asks for the biome under it until a box answers: the floor below may still be building its works.
+func _ask() -> void:
+	if _answered or not is_inside_tree(): return
+	get_tree().call_group("biome_boxes", "asked_from_above", self)
+	if not _answered and Time.get_ticks_msec() < _ask_until: get_tree().create_timer(0.5).timeout.connect(_ask)
+
+
+func answered_from_below() -> void:
+	_answered = true
+
+
+## A window in the floor above asks: the box straight under it builds now, paused as its floor is.
+func asked_from_above(asker: Node3D) -> void:
+	if window or not is_instance_valid(asker) or not is_inside_tree(): return
+	var gap: Vector3 = asker.global_position - global_position
+	if absf(gap.x) > 1.0 or absf(gap.z) > 1.0 or gap.y < 3.0 or gap.y > 9.0: return
+	grow()
+	if asker.has_method("answered_from_below"): asker.answered_from_below()
 
 
 ## Build the biome in the box (once).
@@ -270,7 +503,7 @@ func grow() -> void:
 	_biome.name = "Biome"
 	for pair in [["seed", world_seed], ["size", cells], ["stage", _stage_now], ["phase", phase], ["record", "off"]]:
 		_biome.set_meta("config_" + str(pair[0]), pair[1])
-	_biome.position = SET_IN + Vector3(0, LIFT, 0)
+	_biome.position = SET_IN + Vector3(0, LIFT + flare_height, 0)
 	add_child(_biome)
 	_built_config = [_stage_now, phase, world_seed, cells]
 	_build_ms = Time.get_ticks_msec() - began
@@ -282,7 +515,7 @@ func grow() -> void:
 
 func state() -> Dictionary:
 	var counts: Dictionary = _biome.get("_counts") if _biome != null else {}
-	return {"stage": _stage_now, "phase": phase, "built": _biome != null, "build_ms": _build_ms, "trees": int(counts.get("tree", 0)), "creatures": int(counts.get("creature", 0)),
+	return {"stage": _stage_now, "phase": phase, "window": window, "built": _biome != null, "build_ms": _build_ms, "trees": int(counts.get("tree", 0)), "creatures": int(counts.get("creature", 0)),
 		"fungus": int(counts.get("fungus", 0)), "flowers": int(counts.get("flower", 0)), "water": int(counts.get("water", 0)), "arriving": arriving()}
 
 
@@ -292,3 +525,13 @@ func biome() -> Node3D:
 
 func half_side() -> float:
 	return (float(cells) + MARGIN * 2.0) * 0.5
+
+
+## Half the foot on the floor: the shaft's rim in the slanted form, the box itself otherwise.
+func foot_half() -> float:
+	return SHAFT * 0.5 + MARGIN if flare_height > 0.0 else half_side()
+
+
+## How high the glass stands: the box's lid, or the top of the upright band round a raised ground.
+func glass_top() -> float:
+	return flare_height + BAND if flare_height > 0.0 else tall

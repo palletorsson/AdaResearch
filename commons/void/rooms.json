@@ -42449,7 +42449,7 @@
           "config": {}
         },
         {
-          "id": "biome-box",
+          "id": "biome-window",
           "artifact": "biome_box",
           "station": "SE",
           "position": [
@@ -42460,9 +42460,8 @@
           "height": 0,
           "scale": 1,
           "config": {
-            "stage": "hall",
-            "phase": 0.4,
-            "editor_label": "Biome box | the biome in a glass grid box closing shaft B: one ground, the same on every floor, at this floor's stage; phase 0.4"
+            "window": true,
+            "editor_label": "Biome window | a clear glass floor set flush in shaft B's opening, metre lines on it: walk out and look down at the 12 m biome of the floor below"
           }
         }
       ],
@@ -42581,7 +42580,53 @@
           "config": {
             "stage": "hall",
             "phase": 0.8,
-            "editor_label": "Biome box | the biome in a glass grid box closing shaft B: one ground, the same on every floor, at this floor's stage; phase 0.8"
+            "editor_label": "Biome box, slanted | a 12 m ground carried 2 m up on a glass funnel standing on shaft B's rim, open top; this floor's stage, phase 0.8; the window on the floor above makes it build",
+            "cells": 12,
+            "flare_height": 2,
+            "sign_side": "west"
+          }
+        },
+        {
+          "id": "biome-lookout",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            12,
+            7.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "LSystems_Living / a lookout beside the rim of the raised biome",
+              "places": [],
+              "decks": [
+                {
+                  "id": "lookout",
+                  "at": [
+                    0,
+                    2,
+                    0
+                  ],
+                  "size": [
+                    2,
+                    2
+                  ],
+                  "enclosure": "rails",
+                  "openings": [
+                    "west"
+                  ],
+                  "ramp": "west"
+                }
+              ]
+            },
+            "resident_region": false,
+            "show_place_dimensions": false,
+            "editor_label": "Biome lookout | a kit deck 2 x 2 m at 2 m beside the south rim of the raised biome, rails, a ramp up from the west"
           }
         }
       ],
