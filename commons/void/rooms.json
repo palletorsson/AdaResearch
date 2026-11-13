@@ -48276,11 +48276,35 @@
             "plinth": "0",
             "pin": "1"
           }
+        },
+        {
+          "id": "way-back",
+          "artifact": "way_back",
+          "station": "SW",
+          "position": [
+            0,
+            0.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "mutuality": "split",
+            "editor_label": "A way back | three places of building cubes a metre apart in height, wedges both ways and drops one way; ramp from the arrival side up to the first; the lesson's value: split"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / GETTING ACROSS IS EASY. NOW TRY TO RETURN.\nUp the ramp, then step off.",
+          "position": [
+            1.6,
+            7.0
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

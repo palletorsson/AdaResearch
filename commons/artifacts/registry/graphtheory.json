@@ -132,6 +132,47 @@
 				}
 			}
 		},
+		"way_back": {
+			"lookup_name": "way_back",
+			"map_ready": true,
+			"name": "A Way Back",
+			"class_name": "",
+			"scene": "res://algorithms/graphtheory/way_back/way_back.tscn",
+			"description": "Strongly connected groups for a body, with gravity as the arrow: a wedge is walked both ways, a drop of a metre one way. Three places stand in a row, each a metre lower than the last - ONE (2 m up, reached from the hall floor by a ramp of wedges), TWO (1 m up), THREE (a court at floor level) - built from the spatial lab's prefabs through the lab's own adapter: one-metre building cubes, walkable wedges, the blue DO NOT CROSS barrier on every edge that is not a connection, planks where a drop begins. The axis mutuality is the lesson's word: none (drops only: no place has a way back), split (a wedge joins THREE and TWO: two groups and one arrow, the lesson's value on this floor), total (a wedge returns from TWO to ONE: one group). The return is built from inside, by standing still on a plate. Each place lies on a mat in the colour of its group.",
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"sequence": "graphtheory",
+			"interaction": "walk",
+			"size_group": "room",
+			"tags": [
+				"graph",
+				"directed",
+				"strongly-connected",
+				"reachability",
+				"one-way",
+				"walkable"
+			],
+			"qfep_connection": "Being able to get there says nothing about being able to come back: the body learns the difference by dropping a metre.",
+			"dev_themes": [
+				"algorithms",
+				"graphs"
+			],
+			"dna": {
+				"axes": {
+					"mutuality": [
+						"none",
+						"split",
+						"total"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "mutuality: split ~ total",
+					"percent": 1.0,
+					"arithmetic": "split and total differ by one wedge (1 x 1 x 2 m, about 2.2 square metres seen from the side) and by the colour of two mats of 2.6 x 2.6 m, which change from the second group's colour to the first's: 13.5 square metres of flat mat seen at a low angle, perhaps a fifth of that in the picture. The work is 9 x 7 m with its ramp and fills about half the frame: (2.2 + 2.7) / 63 x 0.5 = 3.9 %; a flat rasteriser sees the mats poorly behind the barriers, so 1 % as the floor. none ~ split differ by one wedge and one mat."
+				}
+			}
+		},
 		"two_travelers": {
 			"lookup_name": "two_travelers",
 			"map_ready": true,
