@@ -173,6 +173,47 @@
 				}
 			}
 		},
+		"plank_price": {
+			"lookup_name": "plank_price",
+			"map_ready": true,
+			"name": "The Price of One More Route",
+			"class_name": "",
+			"scene": "res://algorithms/graphtheory/plank_price/plank_price.tscn",
+			"description": "A minimum spanning tree for a body, with a real price. Seven lands lie in water - the south bank and two rows of three islands - and ten places can take a bridge. A bridge is planks: the channels are one, two or four metres wide, the lengths of the three plank prefabs, so a bridge costs its length. Built from the spatial lab's prefabs through the lab's own adapter: decks of five planks let into the floor, plank rails on the four-metre bridges, the blue DO NOT CROSS barrier on the shores and across the mouth of a place without a bridge, concrete barriers round the edge. Outside the way in lies a map of the city at a fifth of its size: standing still on one of its bridges lays that bridge or takes it away. Each land lies on a mat, green when it can be reached from where the body stands, grey when it is cut off. The cheapest set is six bridges and 12 m with nothing spare; one more bridge costs 4 m and buys the right to lose one; all ten cost 24 m.",
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"sequence": "graphtheory",
+			"interaction": "walk",
+			"size_group": "room",
+			"tags": [
+				"graph",
+				"spanning-tree",
+				"kruskal",
+				"weights",
+				"redundancy",
+				"walkable"
+			],
+			"qfep_connection": "The cheapest way to reach everything has nothing to spare: resilience is the price of one more route, paid in planks.",
+			"dev_themes": [
+				"algorithms",
+				"graphs"
+			],
+			"dna": {
+				"axes": {
+					"planks": [
+						"tree",
+						"one_more",
+						"all"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "planks: tree ~ one_more",
+					"percent": 1.0,
+					"arithmetic": "tree and one_more differ by one four-metre bridge: five planks (4 x 1.25 m, 5 square metres) and two plank rails where there was water and a barrier across each mouth, of a city of 156 square metres. From the bench's standpoint the city fills about half the frame: 5 / 156 x 0.5 = 1.6 %; a flat rasteriser misses the rails, so 1 % as the floor. one_more ~ all differ by three bridges of two metres."
+				}
+			}
+		},
 		"two_travelers": {
 			"lookup_name": "two_travelers",
 			"map_ready": true,

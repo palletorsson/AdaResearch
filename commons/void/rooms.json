@@ -48343,11 +48343,35 @@
           "config": {
             "desktop_ui": "off"
           }
+        },
+        {
+          "id": "plank-price",
+          "artifact": "plank_price",
+          "station": "SW",
+          "position": [
+            0,
+            -1.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "planks": "tree",
+            "editor_label": "The price of one more route | seven lands in water, ten plank bridge places (1, 2, 4 m planks); a map outside the way in lays and takes bridges; begins as the cheapest tree, 12 m"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / THE CHEAPEST WAY TO REACH EVERYTHING\nSix plank bridges, 12 m. Now break one - on the map.",
+          "position": [
+            0.4,
+            6.9
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
