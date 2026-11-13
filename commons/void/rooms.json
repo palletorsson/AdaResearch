@@ -48174,11 +48174,35 @@
             "graph": "cube",
             "layout_seed": "41"
           }
+        },
+        {
+          "id": "carried-point",
+          "artifact": "carried_point",
+          "station": "SW",
+          "position": [
+            0,
+            -0.8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "graph": "cube",
+            "editor_label": "The carried point | the hall's blue graph on the floor, 12 x 11 m inside cones: eight balls, twelve cords; walk to the black ball and it becomes you - your three follow, the rest make room"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / A CONNECTION IS NOT A COORDINATE\nWalk to the black point. It becomes you.",
+          "position": [
+            -0.6,
+            6.9
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

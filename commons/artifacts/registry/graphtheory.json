@@ -338,6 +338,47 @@
 				}
 			}
 		},
+		"carried_point": {
+			"lookup_name": "carried_point",
+			"map_ready": true,
+			"name": "The Carried Point",
+			"class_name": "",
+			"scene": "res://algorithms/graphtheory/carried_point/carried_point.tscn",
+			"description": "The hall's blue graph on the floor, 12 x 11 m, and the black point is the body. Eight trace balls - seven tinted blue, one left black - joined by cords that lie flat between them. A cord pulls its two ends together, every point pushes every other away, and traffic pyramids mark the bounds someone chose. Walk to the black point and it becomes you: a black disc under your feet, and wherever you go the points you have a cord to follow and the others make room. The board says how near the nearest point without a cord is: nearness is not a connection. Walk out past the cones and the drawing goes on without you. The rule is the tutorial's own (GT_Layout study, layout.gd: forces and step, vertex 0 pinned to the body as the study pins it to the hand); the floor gives it metres and bounds. The connections are the hall artifact's own lists. Axis graph: cube (twelve cords, three each), ring (one cycle, two follow), star (the black point is the hub and all seven follow).",
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"sequence": "graphtheory",
+			"interaction": "walk",
+			"size_group": "room",
+			"tags": [
+				"graph",
+				"layout",
+				"force-directed",
+				"springs",
+				"embodiment",
+				"walkable"
+			],
+			"qfep_connection": "Where a point stands is a choice of the drawing; whom it can reach is the record. Carrying the point changes the first and never the second.",
+			"dev_themes": [
+				"algorithms",
+				"graphs"
+			],
+			"dna": {
+				"axes": {
+					"graph": [
+						"cube",
+						"ring",
+						"star"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "graph: ring ~ star",
+					"percent": 1.2,
+					"arithmetic": "ring and star both settle as seven or eight balls on a circle of about three metres' radius; they differ by the cords (ring: 8 x 2.69 m along the circle, star: 7 x 2.87 m as spokes, 0.1 m wide, about 2.1 square metres each and hardly overlapping), by the hub ball in the middle and by seven balls shifted along the circle (0.16 square metres each, twice). About 6.5 square metres of a floor drawing of 130 that fills about half the frame from the bench's standpoint: 2.5 %; a flat rasteriser sees thin cords poorly, so 1.2 % as the floor. cube is compact (2.9 x 4.3 m) and differs from both by more."
+				}
+			}
+		},
 		"two_travelers": {
 			"lookup_name": "two_travelers",
 			"map_ready": true,
