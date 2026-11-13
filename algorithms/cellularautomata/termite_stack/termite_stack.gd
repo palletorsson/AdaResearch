@@ -38,6 +38,7 @@ const HALF := 20                                 # the field reaches this many c
 @export var field := 5.6                         ## metres across (a playground slot's smaller side, less a margin)
 @export var tallest := 2.4                       ## the height of a full stack, metres, whatever the instruction
 @export var lift := 0.0                          ## the stacks stand this far above the work's origin (a deck's tiles)
+@export var stand_out := 0.0                     ## the board and the plates stand this far from the middle; 0 = a metre past the field
 @export var build_seconds := 75.0                ## how long a form takes to build
 @export var hold_seconds := 40.0                 ## how long it stands before it falls
 @export var cycle := true                        ## after a form falls, the next instruction; false: the same again
@@ -69,7 +70,7 @@ var _frames := 0
 
 
 func _ready() -> void:
-	for key in ["rule", "unit", "tallest", "cycle", "build_seconds", "hold_seconds", "slot_size", "lift"]:
+	for key in ["rule", "unit", "tallest", "cycle", "build_seconds", "hold_seconds", "slot_size", "lift", "stand_out"]:
 		if has_meta("config_" + key): apply_grid_config({key: get_meta("config_" + key)})
 	_begin(rule)
 	if build_at_once: finish()
@@ -84,6 +85,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("cycle"): cycle = str(config_data["cycle"]).to_lower() in ["true", "1", "yes"]
 	if config_data.has("build_seconds"): build_seconds = maxf(1.0, float(config_data["build_seconds"]))
 	if config_data.has("hold_seconds"): hold_seconds = maxf(0.0, float(config_data["hold_seconds"]))
+	if config_data.has("stand_out"): stand_out = float(str(config_data["stand_out"])); again = true
 	if config_data.has("slot_size") and config_data["slot_size"] is Array and (config_data["slot_size"] as Array).size() == 2:
 		field = minf(float(config_data["slot_size"][0]), float(config_data["slot_size"][1])) - 0.4; again = true
 	if again and is_inside_tree() and _columns != null:
@@ -211,7 +213,7 @@ void fragment() {
 	var dark := StandardMaterial3D.new()
 	dark.albedo_color = Color(0.11, 0.115, 0.13)
 	dark.roughness = 0.85
-	var out: float = field * 0.5 + 1.0
+	var out: float = stand_out if stand_out > 0.0 else field * 0.5 + 1.0
 	var stand := Node3D.new()
 	stand.name = "Board"
 	stand.position = Vector3(out + 0.1, 0, -field * 0.5 - 0.3)

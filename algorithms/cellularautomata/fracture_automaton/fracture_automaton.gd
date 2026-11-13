@@ -1,5 +1,5 @@
 extends Node3D
-## THE FRACTURE AUTOMATON (floor CA_EdgeOfChaos; Palle, 2026-11-12: "Can we use cellular automata to fracture
+## THE FRACTURE AUTOMATON (floor CA_SoftRules, over shaft B; Palle, 2026-11-12: "Can we use cellular automata to fracture
 ## objects?")
 ##
 ## A block of 12 x 10 x 6 cells, a quarter metre each. A BOND is the face two neighbouring cells share. Every bond

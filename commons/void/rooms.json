@@ -39104,6 +39104,55 @@
           "config": {
             "host_lighting": "1"
           }
+        },
+        {
+          "id": "fracture-quarry",
+          "artifact": "playground_spec_hall",
+          "station": "SE",
+          "position": [
+            10,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "place_spec": {
+              "version": 1,
+              "units": "metres",
+              "palette": "trans",
+              "title": "CA_SoftRules / a pool over shaft B for the block a rule breaks",
+              "places": [
+                {
+                  "id": "quarry",
+                  "at": [
+                    0,
+                    0
+                  ],
+                  "y": 1,
+                  "size": [
+                    6,
+                    6
+                  ],
+                  "depth": 1,
+                  "type": "plastic_pool",
+                  "rim": 1,
+                  "colour": "3f5566",
+                  "access": {
+                    "outer": "ramp",
+                    "inner": "ramp"
+                  },
+                  "activity": {
+                    "artifact": "fracture_automaton",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            "resident_height": 3.5,
+            "show_place_dimensions": false,
+            "editor_label": "Fracture quarry | a kit pool over shaft B; its activity is a block a cellular automaton breaks: bonds, loads, strengths, and the pieces fall"
+          }
         }
       ],
       "props": [
@@ -39139,7 +39188,15 @@
         }
       ],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "RIGHT / A BLOCK BROKEN BY A RULE\nA bond breaks when its load is more than its strength.",
+          "position": [
+            4.2,
+            8.2
+          ]
+        }
+      ],
       "supply_leads": false,
       "construction": [
         {
@@ -39323,7 +39380,7 @@
               "version": 1,
               "units": "metres",
               "palette": "trans",
-              "title": "CA_AgentsCircuits / a railed yard over shaft A for the termite stack",
+              "title": "CA_AgentsCircuits / a railed yard in shaft A for the termite stack, a metre of open shaft round it",
               "places": [],
               "decks": [
                 {
@@ -39334,8 +39391,8 @@
                     0
                   ],
                   "size": [
-                    6,
-                    6
+                    4,
+                    4
                   ],
                   "enclosure": "rails"
                 }
@@ -39343,7 +39400,7 @@
             },
             "resident_region": false,
             "show_place_dimensions": false,
-            "editor_label": "Termite yard | a kit deck 6 x 6 m with rails all round, over shaft A; the termite stack stands in it"
+            "editor_label": "Termite yard | a kit deck 4 x 4 m with rails all round in shaft A, a metre of open shaft round it (the way down); the termite stack stands in it"
           }
         },
         {
@@ -39359,7 +39416,12 @@
           "scale": 1,
           "config": {
             "lift": "0.07",
-            "editor_label": "Termite stack | one worker reads the stack under it, turns as the instruction says, adds a unit; five instructions, five forms"
+            "editor_label": "Termite stack | one worker reads the stack under it, turns as the instruction says, adds a unit; five instructions, five forms",
+            "slot_size": [
+              4,
+              4
+            ],
+            "stand_out": "3.8"
           }
         },
         {
@@ -39715,63 +39777,14 @@
           "artifact": "crackpropagation_ca",
           "station": "SW",
           "position": [
-            -17.8,
-            3.4
+            -16,
+            4
           ],
           "facing": 0,
           "height": 0.9,
           "scale": 0.8,
           "config": {
             "plinth": "0"
-          }
-        },
-        {
-          "id": "fracture-quarry",
-          "artifact": "playground_spec_hall",
-          "station": "SW",
-          "position": [
-            -10,
-            0
-          ],
-          "facing": 0,
-          "height": 0,
-          "scale": 1,
-          "config": {
-            "place_spec": {
-              "version": 1,
-              "units": "metres",
-              "palette": "trans",
-              "title": "CA_EdgeOfChaos / a pool over shaft A for the block a rule breaks",
-              "places": [
-                {
-                  "id": "quarry",
-                  "at": [
-                    0,
-                    0
-                  ],
-                  "y": 1,
-                  "size": [
-                    6,
-                    6
-                  ],
-                  "depth": 1,
-                  "type": "plastic_pool",
-                  "rim": 1,
-                  "colour": "3f5566",
-                  "access": {
-                    "outer": "ramp",
-                    "inner": "ramp"
-                  },
-                  "activity": {
-                    "artifact": "fracture_automaton",
-                    "config": {}
-                  }
-                }
-              ]
-            },
-            "resident_height": 3.5,
-            "show_place_dimensions": false,
-            "editor_label": "Fracture quarry | a kit pool over shaft A; its activity is a block a cellular automaton breaks: bonds, loads, strengths, and the pieces fall"
           }
         }
       ],
@@ -39814,13 +39827,6 @@
           "position": [
             -1.5,
             5.6
-          ]
-        },
-        {
-          "label": "LEFT / A BLOCK BROKEN BY A RULE\nA bond breaks when its load is more than its strength.",
-          "position": [
-            -7.0,
-            8.0
           ]
         }
       ],

@@ -7,7 +7,7 @@ extends SceneTree
 ##   each of the five instructions builds exactly the predicted form (standing cells, cells at each height);
 ##   no stack is taller than the work says, and all are under the ceiling;
 ##   left running, a form grows; the plate at the rim gives the next instruction;
-##   the rails of the kit yard keep a body out; what a frame costs while it builds and while it stands.
+##   the yard is an island in shaft A, open shaft all round (the way down); what a frame costs while it builds and stands.
 ##
 ##   godot --path <stage> --script res://tools/probes/termite_stack_build.gd -- --no-bridges
 ##       --void-start-floor=<floor> --out=<dir>
@@ -107,21 +107,31 @@ func run() -> void:
 		await _shot(cam, hub + Vector3(4.4, 3.6, 5.6), hub + Vector3(0, 0.9, 0), folder.path_join("growing.png"))
 		# 3 the plate gives the next instruction
 		var was: String = str(work.rule)
-		game.place_player(work.to_global(Vector3(float(work.field) * 0.5 + 1.0, 0.3, -0.9)))
+		var out: float = float(work.stand_out) if float(work.stand_out) > 0.0 else float(work.field) * 0.5 + 1.0
+		game.place_player(work.to_global(Vector3(out, 0.3, -0.9)))
 		for i in 60: await physics_frame
 		checks.append({"check": "the plate at the rim gives the next instruction", "ok": str(work.rule) != was, "from": was, "to": str(work.rule)})
-		# 4 the yard keeps a body out
-		game.place_player(hub + Vector3(5.2, 0.3, 2.2))
+		# 4 a body that walks at the stacks from the slab never gets among them: the rails stand round the yard, and round
+		# the yard a metre of shaft is open (shaft A is the way down and has to stay open, 2026-11-13)
+		game.place_player(hub + Vector3(5.2, 0.3, 0.6))
 		for i in 40: await physics_frame
+		var among := false
 		var nearest := INF
+		var half_field: float = float(work.field) * 0.5
 		for i in 300:
-			nearest = minf(nearest, body.global_position.x - hub.x)
-			body.look_at(Vector3(hub.x, body.global_position.y, hub.z + 2.2), Vector3.UP)
+			var from_hub: Vector3 = body.global_position - hub
+			if body.global_position.y > level - 0.3:
+				nearest = minf(nearest, maxf(absf(from_hub.x), absf(from_hub.z)))
+				if absf(from_hub.x) < half_field and absf(from_hub.z) < half_field: among = true
+			if body.global_position.y < level - 3.0: break
+			body.look_at(Vector3(hub.x, body.global_position.y, hub.z + 0.6), Vector3.UP)
 			body.drive = Vector2(0, -1)
 			await physics_frame
 		body.drive = Vector2.ZERO
+		var dropped: bool = body.global_position.y < level - 3.0
 		for i in 20: await physics_frame
-		checks.append({"check": "the rails of the yard keep a body out of the stacks", "ok": nearest > float(work.field) * 0.5 and int(game.checkpoint) == floor, "nearest_to_the_middle_m": snappedf(nearest, .01), "field_half_m": snappedf(float(work.field) * 0.5, .01)})
+		checks.append({"check": "a body walking at the stacks from the slab never gets among them", "ok": not among and nearest >= half_field,
+			"nearest_to_the_middle_at_floor_level_m": snappedf(nearest, .01), "field_half_m": snappedf(half_field, .01), "dropped_into_the_open_shaft": dropped})
 		checks.append({"check": "it costs little: while it builds, and next to nothing while a form stands", "ok": ms_build < 0.6 and ms_hold < 0.08, "ms_a_frame_building": snappedf(ms_build, .001), "ms_a_frame_standing": snappedf(ms_hold, .001)})
 		work.cycle = true
 		work.call("_begin", "mound")

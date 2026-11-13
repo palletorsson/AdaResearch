@@ -1,5 +1,5 @@
 extends SceneTree
-## THE FRACTURE AUTOMATON (floor CA_EdgeOfChaos; Palle, 2026-11-12: "Can we use cellular automata to fracture
+## THE FRACTURE AUTOMATON (floor CA_SoftRules; Palle, 2026-11-12: "Can we use cellular automata to fracture
 ## objects?")
 ## A block of 720 cells; a bond is the face two cells share, with a strength and a load; a bond breaks when its load
 ## is more than its strength and hands the excess to the bonds ahead in its own plane; the pieces are the cells still
@@ -203,9 +203,9 @@ func run() -> void:
 
 		# 5 the body: the ramp, the deck, the post, the pool
 		var post: Vector3 = work.post_point(0)
-		game.place_player(Vector3(hall.x - 5.1, level + 0.3, 7.9))
+		game.place_player(Vector3(hall.x - 5.9, level + 0.3, 7.9))      # west of the tower column that stands south of the ramp's foot
 		for i in 40: await physics_frame
-		await _go(body, Vector3(hall.x - 5.1, level, 5.0))
+		await _go(body, Vector3(hall.x - 5.9, level, 5.0))
 		var blows_before: int = int(work.state().blows)
 		var landing := await _go(body, Vector3(hall.x - 0.2, level, 5.0), 900)
 		var deck_feet: float = body.global_position.y - level
