@@ -20,6 +20,15 @@ extends Node3D
 ## the top is open, so the trees rise out of it. The metre lines are the cell boundaries of the larger ground, cut
 ## where each one leaves a slanted side. The straight box is the default and is unchanged.
 ##
+## THE WAY IN (2026-11-13). The biome's ground carries a body (its one collider is the ground itself), so with
+## `gate_side` the slanted form can be walked: two metres of the upright glass are left out on that side, and once the
+## ground is built a short lip and a board run from a deck standing outside at `gate_height` down onto the ground, the
+## board's far end under the surface so a foot never meets an edge. The deck has to stand above the ground's cut edge
+## at the gate (seed 7 at twelve cells: 2.73-2.84 m over the floor along the middle of the west side). With a gate the
+## solid behind the glass reaches in to the ground's own edge - on the south side there is a trench 57 cm wide between
+## ground and glass, wide enough to fall into - and up to just under the slab above, because the ground's highest hill
+## stands 7 cm under the glass's top. Trees, crystals, water and creatures have no solid: a body walks through them.
+##
 ## THE WINDOW ("...and open the shaft above the biome to 12"). With `window` the artifact is only a clear glass floor
 ## set flush in a shaft's six-metre opening, with the metre lines on it: a body walks out on it and looks down at the
 ## biome of the floor below. From an eye 1.6 m over the middle of a six-metre opening, a ground 3.6 m below the slab
@@ -37,6 +46,8 @@ const SET_IN := Vector3(0.05, 0.0, -0.27)   # before `full` a body lies half a m
 const LIFT := 0.44                     # the biome's cut section reaches this far under its surface
 const LINE := Color("f5a9b8")
 const SHAFT := 6.0                    # a shaft's opening: the foot of both forms stands on its rim
+const GATE := 2.0                     # the opening a gate leaves in the upright glass: a kit deck's width
+const CLEAR := 5.6                    # with a gate a body is inside: the solid round the ground stands to just under the slab above
 const BAND := 1.8                     # in the slanted form, the upright glass round the ground: seed 7 at twelve cells has a hill on its edge 1.29 m over the ground's level, 1.73 m over the rim
 
 @export_enum("hall", "full", "randomness", "lsystems") var stage := "full"      ## a config may name any sequence the biome vocabulary knows
@@ -45,8 +56,12 @@ const BAND := 1.8                     # in the slanted form, the upright glass r
 @export_range(4, 12) var cells := 6               ## the biome's cells across, a metre each (seed 7 has no tree below six); above six needs the slanted form
 @export_range(0.0, 3.0) var flare_height := 0.0   ## above 0: the sides lean outward from the shaft's rim to the biome's width at this height, the ground on top
 @export var sign_side := "south"                  ## south | west: the side the low sign stands on
+@export var sign_at := 0.0                        ## where along that side, metres from its middle (a gate deck may stand in the middle)
 @export var tall := 3.6
 @export_enum("arrival", "always") var builds := "arrival"
+@export var gate_side := ""                       ## south | north | east | west: a way in on that side of the slanted form (empty = none)
+@export var gate_at := 0.0                        ## where along that side the gate stands, metres from its middle
+@export_range(0.0, 5.0) var gate_height := 3.0    ## the level of the deck outside the gate, over the floor: above the ground's cut edge there
 @export var window := false                       ## true: only a clear glass floor in the shaft's opening, to stand on and look down from; no biome of its own
 
 var _biome: Node3D
@@ -56,12 +71,15 @@ var _seed_mark: MeshInstance3D
 var _build_ms := -1
 var _built_config := []
 var _ask_until := 0
+var _way_in: StaticBody3D
+var _way_reach := 0.0
+var _way_clears := false
 var _answered := false
 
 
 func _ready() -> void:
 	var given := {}
-	for key in ["stage", "phase", "world_seed", "cells", "tall", "builds", "flare_height", "sign_side", "window"]:
+	for key in ["stage", "phase", "world_seed", "cells", "tall", "builds", "flare_height", "sign_side", "sign_at", "window", "gate_side", "gate_at", "gate_height"]:
 		if has_meta("config_" + key): given[key] = get_meta("config_" + key)
 	_take(given)
 	if window:
@@ -89,6 +107,10 @@ func _take(config_data: Dictionary) -> void:
 	if config_data.has("tall"): tall = clampf(float(str(config_data["tall"])), 2.0, 5.4)
 	if config_data.has("builds") and str(config_data["builds"]) in ["arrival", "always"]: builds = str(config_data["builds"])
 	if config_data.has("window"): window = str(config_data["window"]).to_lower() in ["true", "1", "1.0"]
+	if config_data.has("gate_side") and str(config_data["gate_side"]) in ["", "south", "north", "east", "west"]: gate_side = str(config_data["gate_side"])
+	if config_data.has("gate_at"): gate_at = float(str(config_data["gate_at"]))
+	if config_data.has("sign_at"): sign_at = float(str(config_data["sign_at"]))
+	if config_data.has("gate_height"): gate_height = clampf(float(str(config_data["gate_height"])), 0.0, 5.0)
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -247,9 +269,9 @@ func _stand_sign(out: float) -> void:
 	dark.roughness = 0.85
 	var stand := Node3D.new()
 	stand.name = "Sign"
-	stand.position = Vector3(0, 0, out)
+	stand.position = Vector3(sign_at, 0, out)
 	if sign_side == "west":
-		stand.position = Vector3(-out, 0, 0)
+		stand.position = Vector3(-out, 0, sign_at)
 		stand.rotation.y = -PI * 0.5
 	add_child(stand)
 	var panel := MeshInstance3D.new()
@@ -338,6 +360,138 @@ func _window() -> void:
 	_stand_sign(SHAFT * 0.5 + 0.85)
 
 
+## The four sides of the rim: the way out, the way along, how far inside the glass the ground's own edge stands, and
+## the set-in of the cell lines along that side.
+func _sides() -> Array:
+	var half: float = float(cells) * 0.5
+	var high: float = half + MARGIN
+	return [
+		{"name": "south", "out": Vector3(0, 0, 1), "along": Vector3(1, 0, 0), "kerb": high - (half + SET_IN.z), "shift": SET_IN.x},
+		{"name": "north", "out": Vector3(0, 0, -1), "along": Vector3(1, 0, 0), "kerb": high - (half - SET_IN.z), "shift": SET_IN.x},
+		{"name": "east", "out": Vector3(1, 0, 0), "along": Vector3(0, 0, 1), "kerb": high - (half + SET_IN.x), "shift": SET_IN.z},
+		{"name": "west", "out": Vector3(-1, 0, 0), "along": Vector3(0, 0, 1), "kerb": high - (half - SET_IN.x), "shift": SET_IN.z}]
+
+
+## The stretches of one side that carry glass: all of it, or what the gate leaves.
+func _stretches(side: Dictionary, high: float) -> Array:
+	if gate_side != str(side["name"]): return [[-high, high]]
+	return [[-high, gate_at - GATE * 0.5], [gate_at + GATE * 0.5, high]]
+
+
+## The upright glass round the raised ground, side by side. Without a gate the solid is the glass. With a gate a body
+## is inside: the solid reaches in over the ground's own edge and up to just under the slab above.
+func _band(body: StaticBody3D, glass: Material, pale: Material, lines: Array[Transform3D]) -> void:
+	var high: float = float(cells) * 0.5 + MARGIN
+	var rim: float = flare_height
+	var walked: bool = gate_side != ""
+	for side in _sides():
+		var out: Vector3 = side["out"]
+		var along: Vector3 = side["along"]
+		var stretches: Array = _stretches(side, high)
+		for stretch in stretches:
+			var from: float = stretch[0]
+			var to: float = stretch[1]
+			if to - from < 0.05: continue
+			var middle: Vector3 = out * high + along * ((from + to) * 0.5)
+			var shown := MeshInstance3D.new()
+			var sheet := BoxMesh.new()
+			sheet.size = along.abs() * (to - from) + out.abs() * 0.02 + Vector3(0, BAND, 0)
+			shown.mesh = sheet
+			shown.material_override = glass
+			shown.position = middle + Vector3(0, rim + BAND * 0.5, 0)
+			shown.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			body.add_child(shown)
+			var deep: float = float(side["kerb"]) + 0.09 if walked else 0.08      # from 4 cm outside the glass to 5 cm over the ground's edge
+			var stands: float = CLEAR - rim if walked else BAND
+			var solid := BoxShape3D.new()
+			solid.size = along.abs() * (to - from) + out.abs() * deep + Vector3(0, stands, 0)
+			var shape := CollisionShape3D.new()
+			shape.shape = solid
+			shape.position = out * (high + 0.04 - deep * 0.5) + along * ((from + to) * 0.5) + Vector3(0, rim + stands * 0.5, 0)
+			body.add_child(shape)
+			_strut(out * high + along * from + Vector3(0, rim + BAND, 0), out * high + along * to + Vector3(0, rim + BAND, 0), 0.045, pale)
+			var level: float = ceilf(rim + 0.2)
+			while level < rim + BAND - 0.2:
+				lines.append(_between(out * high + along * from + Vector3(0, level, 0), out * high + along * to + Vector3(0, level, 0)))
+				level += 1.0
+		for i in cells + 1:
+			var at: float = -float(cells) * 0.5 + float(i) + float(side["shift"])
+			for stretch in stretches:
+				if at >= float(stretch[0]) - 0.01 and at <= float(stretch[1]) + 0.01:
+					lines.append(_between(out * high + along * at + Vector3(0, rim, 0), out * high + along * at + Vector3(0, rim + BAND, 0)))
+					break
+
+
+## How high the ground stands over this box's own floor under a point of the box. Where there is no ground: -INF.
+func _ground_at(p: Vector3) -> float:
+	if _biome == null or not _biome.has_method("_h_at"): return -INF
+	var bx: float = p.x - SET_IN.x
+	var bz: float = p.z - SET_IN.z
+	var half: float = float(cells) * 0.5
+	if absf(bx) > half or absf(bz) > half: return -INF
+	return flare_height + LIFT + float(_biome.call("_h_at", bx, bz))
+
+
+## A board whose TOP face runs from a to b, with its solid.
+func _board(body: StaticBody3D, a: Vector3, b: Vector3, material: Material) -> void:
+	var x: Vector3 = (b - a).normalized()
+	var z: Vector3 = x.cross(Vector3.UP).normalized()
+	var y: Vector3 = z.cross(x)
+	var size := Vector3((b - a).length(), 0.05, GATE - 0.4)
+	var at := Transform3D(Basis(x, y, z), (a + b) * 0.5 - y * 0.025)
+	var shown := MeshInstance3D.new()
+	var plank := BoxMesh.new()
+	plank.size = size
+	shown.mesh = plank
+	shown.material_override = material
+	shown.transform = at
+	body.add_child(shown)
+	var solid := BoxShape3D.new()
+	solid.size = size
+	var shape := CollisionShape3D.new()
+	shape.shape = solid
+	shape.transform = at
+	body.add_child(shape)
+
+
+## The way in, laid once the ground exists: a lip that rises over the deck's edge rod, then a board falling one in
+## three from the glass line until it lies a quarter metre under the ground.
+func _lay_way_in() -> void:
+	if _way_in != null:
+		remove_child(_way_in)
+		_way_in.queue_free()
+		_way_in = null
+	_way_reach = 0.0
+	_way_clears = false
+	if gate_side == "" or flare_height <= 0.0 or _biome == null: return
+	var side := {}
+	for s in _sides():
+		if str(s["name"]) == gate_side: side = s
+	if side.is_empty(): return
+	var high: float = float(cells) * 0.5 + MARGIN
+	var out: Vector3 = side["out"]
+	var foot: Vector3 = out * high + (side["along"] as Vector3) * gate_at      # on the glass line, under the gate's middle
+	var crest: float = gate_height + 0.06
+	var reach := 0.3
+	var last := crest
+	while reach < 4.0:
+		last = crest - reach / 3.0
+		if last <= _ground_at(foot - out * reach) - 0.25: break
+		reach += 0.1
+	_way_reach = reach
+	var edge: float = float(side["kerb"]) + 0.03      # just inside the ground's cut edge
+	_way_clears = crest - edge / 3.0 >= _ground_at(foot - out * edge)
+	if not _way_clears: push_warning("biome_box: the gate's deck stands under the ground's cut edge (%s m): the board runs into it" % str(snappedf(_ground_at(foot - out * edge), 0.01)))
+	_way_in = StaticBody3D.new()
+	_way_in.name = "WayIn"
+	add_child(_way_in)
+	var timber := StandardMaterial3D.new()
+	timber.albedo_color = Color("c9a978")
+	timber.roughness = 0.8
+	_board(_way_in, foot + out * 0.45 + Vector3(0, gate_height - 0.04, 0), foot + Vector3(0, crest, 0), timber)
+	_board(_way_in, foot + Vector3(0, crest, 0), foot - out * reach + Vector3(0, last, 0), timber)
+
+
 func _hopper() -> void:
 	var low: float = SHAFT * 0.5 + MARGIN              # half the foot: the straight box's own 6.6 m
 	var high: float = float(cells) * 0.5 + MARGIN       # half the rim
@@ -358,9 +512,11 @@ func _hopper() -> void:
 	# the foot closes the shaft; the tray carries the ground; a metre of upright glass stands round it; the top is open
 	_pane(body, Vector3(0, -0.05, 0), Vector3(low * 2.0, 0.1, low * 2.0), floor_glass)
 	_pane(body, Vector3(0, rim - 0.02, 0), Vector3(high * 2.0, 0.04, high * 2.0), floor_glass)
-	for side in [-1.0, 1.0]:
-		_pane(body, Vector3(0, rim + BAND * 0.5, side * high), Vector3(high * 2.0, BAND, 0.02), glass)
-		_pane(body, Vector3(side * high, rim + BAND * 0.5, 0), Vector3(0.02, BAND, high * 2.0), glass)
+	var lines: Array[Transform3D] = []
+	var pale := StandardMaterial3D.new()
+	pale.albedo_color = Color("c4cccc")
+	pale.roughness = 0.5
+	_band(body, glass, pale, lines)
 	# the four slanted sides: one sheet each, and a thin solid behind it
 	for turn in 4:
 		var spin := Basis(Vector3.UP, PI * 0.5 * float(turn))
@@ -386,7 +542,6 @@ func _hopper() -> void:
 		shape.shape = solid
 		body.add_child(shape)
 	# the grid: the cell lines of the ground above, a metre apart, cut where each leaves a slanted side
-	var lines: Array[Transform3D] = []
 	for i in cells + 1:
 		var mx: float = -float(cells) * 0.5 + float(i) + SET_IN.x
 		var mz: float = -float(cells) * 0.5 + float(i) + SET_IN.z
@@ -397,27 +552,21 @@ func _hopper() -> void:
 		var from_x: float = clampf((absf(mx) - low) / lean, 0.0, rim)
 		var from_z: float = clampf((absf(mz) - low) / lean, 0.0, rim)
 		for side in [-1.0, 1.0]:
-			lines.append(_between(Vector3(mx, rim, side * high), Vector3(mx, rim + BAND, side * high)))
-			lines.append(_between(Vector3(side * high, rim, mz), Vector3(side * high, rim + BAND, mz)))
 			if from_x < rim - 0.01: lines.append(_between(Vector3(mx, from_x, side * (low + lean * from_x)), Vector3(mx, rim, side * high)))
 			if from_z < rim - 0.01: lines.append(_between(Vector3(side * (low + lean * from_z), from_z, mz), Vector3(side * high, rim, mz)))
 	var up := 1.0
-	while up < rim + BAND - 0.2:
-		var reach: float = minf(low + lean * up, high)      # on the lean below the rim, on the upright glass above it
-		if absf(up - rim) > 0.2:
-			for side in [-1.0, 1.0]:
-				lines.append(Transform3D(Basis().scaled(Vector3(reach * 2.0, 0.008, 0.008)), Vector3(0, up, side * reach)))
-				lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, reach * 2.0)), Vector3(side * reach, up, 0)))
+	while up < rim - 0.2:
+		var reach: float = low + lean * up
+		for side in [-1.0, 1.0]:
+			lines.append(Transform3D(Basis().scaled(Vector3(reach * 2.0, 0.008, 0.008)), Vector3(0, up, side * reach)))
+			lines.append(Transform3D(Basis().scaled(Vector3(0.008, 0.008, reach * 2.0)), Vector3(side * reach, up, 0)))
 		up += 1.0
 	_draw(lines)
-	var pale := StandardMaterial3D.new()
-	pale.albedo_color = Color("c4cccc")
-	pale.roughness = 0.5
 	for x in [-1.0, 1.0]:
 		for z in [-1.0, 1.0]:
 			_strut(Vector3(x * low, 0, z * low), Vector3(x * high, rim, z * high), 0.06, pale)
 			_strut(Vector3(x * high, rim, z * high), Vector3(x * high, rim + BAND, z * high), 0.06, pale)
-	for level in [[0.0, low], [rim, high], [rim + BAND, high]]:
+	for level in [[0.0, low], [rim, high]]:
 		var y: float = level[0]
 		var reach: float = level[1]
 		for side in [-1.0, 1.0]:
@@ -448,7 +597,7 @@ func _write() -> void:
 	var here := "everything the tower teaches" if _stage_now == "full" else _stage_now.to_upper()
 	var comes := ", ".join(words) if not words.is_empty() else "nothing new to see"
 	_sign.text = "\n".join(PackedStringArray(["THE BIOME, AT THIS FLOOR",
-		("One ground from one seed, the same in every box down the tower." if flare_height <= 0.0 else "One ground from one seed, here %d metres across, carried %s m up on slanted glass." % [cells, str(snappedf(flare_height, 0.1))]) + " It may only be made of what the halls above have taught.",
+		("One ground from one seed, the same in every box down the tower." if flare_height <= 0.0 else "One ground from one seed, here %d metres across, carried %s m up on slanted glass." % [cells, str(snappedf(flare_height, 0.1))]) + " It may only be made of what the halls above have taught." + ("" if gate_side == "" or flare_height <= 0.0 else " The way in is up the ramp on the %s side: the ground carries you." % gate_side),
 		"Here: %s.  Arriving with it: %s%s." % [here, comes, "" if words.is_empty() or _stage_now == "full" else " - %d %% of the way" % int(roundf(phase * 100.0))],
 		"" if _biome != null else "The box is empty until someone arrives on its floor."]))
 
@@ -509,13 +658,14 @@ func grow() -> void:
 	_build_ms = Time.get_ticks_msec() - began
 	if _seed_mark != null: _seed_mark.visible = false
 	_write()
+	_lay_way_in()
 
 
 ## ---- for a test ----
 
 func state() -> Dictionary:
 	var counts: Dictionary = _biome.get("_counts") if _biome != null else {}
-	return {"stage": _stage_now, "phase": phase, "window": window, "built": _biome != null, "build_ms": _build_ms, "trees": int(counts.get("tree", 0)), "creatures": int(counts.get("creature", 0)),
+	return {"stage": _stage_now, "phase": phase, "window": window, "gate": gate_side, "way_in_reach_m": snappedf(_way_reach, 0.01), "way_in_clears_the_edge": _way_clears, "built": _biome != null, "build_ms": _build_ms, "trees": int(counts.get("tree", 0)), "creatures": int(counts.get("creature", 0)),
 		"fungus": int(counts.get("fungus", 0)), "flowers": int(counts.get("flower", 0)), "water": int(counts.get("water", 0)), "arriving": arriving()}
 
 

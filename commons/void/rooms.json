@@ -42580,19 +42580,23 @@
           "config": {
             "stage": "hall",
             "phase": 0.8,
-            "editor_label": "Biome box, slanted | a 12 m ground carried 2 m up on a glass funnel standing on shaft B's rim, open top; this floor's stage, phase 0.8; the window on the floor above makes it build",
+            "editor_label": "Biome box, slanted, walked | a 12 m ground 2 m up on a glass funnel on shaft B's rim; a gate on the west side, a board from the gate deck down onto the ground; this floor's stage, phase 0.8",
             "cells": 12,
             "flare_height": 2,
-            "sign_side": "west"
+            "sign_side": "west",
+            "sign_at": 2.6,
+            "gate_side": "west",
+            "gate_at": -0.5,
+            "gate_height": 3
           }
         },
         {
-          "id": "biome-lookout",
+          "id": "biome-gate",
           "artifact": "playground_spec_hall",
           "station": "SE",
           "position": [
-            12,
-            7.4
+            2.7,
+            -0.5
           ],
           "facing": 0,
           "height": 0,
@@ -42602,14 +42606,14 @@
               "version": 1,
               "units": "metres",
               "palette": "trans",
-              "title": "LSystems_Living / a lookout beside the rim of the raised biome",
+              "title": "LSystems_Living / the deck at the gate of the raised biome",
               "places": [],
               "decks": [
                 {
-                  "id": "lookout",
+                  "id": "gate",
                   "at": [
                     0,
-                    2,
+                    3,
                     0
                   ],
                   "size": [
@@ -42618,7 +42622,8 @@
                   ],
                   "enclosure": "rails",
                   "openings": [
-                    "west"
+                    "west",
+                    "east"
                   ],
                   "ramp": "west"
                 }
@@ -42626,7 +42631,7 @@
             },
             "resident_region": false,
             "show_place_dimensions": false,
-            "editor_label": "Biome lookout | a kit deck 2 x 2 m at 2 m beside the south rim of the raised biome, rails, a ramp up from the west"
+            "editor_label": "Biome gate | a kit deck 2 x 2 m at 3 m against the west rim of the raised biome, open east into the gate, a ramp up from the west across the middle of the hall"
           }
         }
       ],
