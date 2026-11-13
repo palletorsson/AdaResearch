@@ -45110,7 +45110,10 @@
       "route": [
         {
           "label": "WALK THE CUT\nA / Main passage. B / Pinch passage. Change the threshold from either end.",
-          "position": [16.8, 6.1]
+          "position": [
+            16.8,
+            6.1
+          ]
         }
       ],
       "supply_leads": false
@@ -48087,8 +48090,8 @@
           "id": "f1_two_travelers_9_7",
           "artifact": "two_travelers",
           "position": [
-            -3,
-            5
+            -2.75,
+            6.2
           ],
           "station": "SW",
           "height": 0,
@@ -48103,8 +48106,8 @@
           "id": "f1_KonigsbergBridge_3_8",
           "artifact": "void_gt_bridge",
           "position": [
-            3,
-            4
+            17,
+            2
           ],
           "station": "SE",
           "height": 0.12,
@@ -48114,11 +48117,41 @@
             "plinth": "0",
             "pin": "1"
           }
+        },
+        {
+          "id": "seven-bridges",
+          "artifact": "seven_bridges",
+          "station": "NW",
+          "position": [
+            0,
+            -1.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Seven bridges to walk | a city 12 x 14 m of the lab's prefabs: a river, an island, three lands, the lesson's bridges over 2 m channels; the way in is on the south side, facing the arrival"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / CAN YOU CROSS EVERY BRIDGE ONCE?\nSeven bridges, four lands. Walk in and try.",
+          "position": [
+            0,
+            6.6
+          ]
+        },
+        {
+          "label": "RIGHT, PAST THE SHAFT / THE SAME CITY ON A TABLE\nFour lands, seven bridges, counted.",
+          "position": [
+            5.2,
+            8.3
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

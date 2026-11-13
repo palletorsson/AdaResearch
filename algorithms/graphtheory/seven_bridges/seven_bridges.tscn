@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/seven_bridges/seven_bridges.gd" id="1"]
+
+[node name="SevenBridges" type="Node3D"]
+script = ExtResource("1")

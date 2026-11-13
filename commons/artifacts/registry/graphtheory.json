@@ -90,6 +90,48 @@
 				"clearance_m": 0.6
 			}
 		},
+		"seven_bridges": {
+			"lookup_name": "seven_bridges",
+			"map_ready": true,
+			"name": "Seven Bridges to Walk",
+			"class_name": "",
+			"scene": "res://algorithms/graphtheory/seven_bridges/seven_bridges.tscn",
+			"description": "Euler's question at the size of a body: a city 12 x 14 m on the floor, built from the spatial lab's prefabs through the lab's own adapter - shores fenced with the blue DO NOT CROSS barrier, the edge with concrete barriers, nine bridge places over channels two metres wide, each bridge its own construction (a panel between crate stalls, planks between concrete parapets, planks with plank rails, two walkable wedges a metre high, a ten-metre plank footbridge) - where the walk is the visitor's own. The bridges are the lesson's: the bridge table of konigsberg3d.gd for the axis parity, read from an instance of that script, so the model on the table and the city on the floor are one set. A bridge counts a crossing when a body enters by one end and leaves by the other; crossed once it turns green, twice red. Water holds a body off. Standing on a land's pink plate begins the count again there; the blue plate outside changes the city. When a bridge has been crossed twice, or all once, the lands show the number of bridges at each, red where it is odd. From the way in: 6 of 7 (blocked), 7 of 8 (walk; 8 of 8 from Altstadt), 9 of 9 (circuit), 4 of 4 with Loebenicht never reached (severed).",
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"sequence": "graphtheory",
+			"interaction": "walk",
+			"size_group": "room",
+			"tags": [
+				"graph",
+				"euler",
+				"konigsberg",
+				"bridges",
+				"parity",
+				"walkable"
+			],
+			"qfep_connection": "What a structure allows is decided before any route is tried: the body finds out with its feet what the count at each land already says.",
+			"dev_themes": [
+				"algorithms",
+				"graphs"
+			],
+			"dna": {
+				"axes": {
+					"parity": [
+						"blocked",
+						"walk",
+						"circuit",
+						"severed"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "parity: walk ~ circuit",
+					"percent": 0.8,
+					"arithmetic": "walk and circuit differ by one bridge between the island and the east land: two panels of 2 x 1 m and four traffic pyramids where there was water and a barrier across each mouth, 4 square metres of a city of 168. From the bench's standpoint the city fills about half the frame: 4 / 168 x 0.5 = 1.2 %; a flat rasteriser sees less of the pyramids than the render will, so 0.8 % as the floor. blocked ~ walk differ by the ten-metre footbridge with its rails (12.5 square metres: 3.7 %); severed loses three bridges and leaves a land alone."
+				}
+			}
+		},
 		"two_travelers": {
 			"lookup_name": "two_travelers",
 			"map_ready": true,
