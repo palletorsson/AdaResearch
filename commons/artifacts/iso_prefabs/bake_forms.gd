@@ -1,8 +1,9 @@
 extends SceneTree
 ## BAKE THE ISOSURFACE PREFABS (Boolean_Verbs; the boolean floor, 2026-11-13)
 ##
-## tools/iso_prefabs.py marches each form's signed-distance expression into a mesh and writes it, with the colour of
-## where each face came from and a coarser march for collision, to ada_run/iso_prefabs/<form>.bin. This turns those
+## tools/iso_prefabs.py marches each form's signed-distance expression into a mesh and writes it - with vertex colour as
+## DATA (r a difference cut the face, g an intersection trimmed it, b a smooth union's band, a ambient occlusion baked from
+## the field), a coarser march for collision - to ada_run/iso_prefabs/<form>.bin (format ISO2). This turns those
 ## into what the game loads: forms/<form>.res, one ArrayMesh per form, simplified by the engine's own meshoptimizer to a
 ## triangle budget, with its distance LODs, and carrying in its metadata what the artifact needs to stand it up - the
 ## collision faces (simplified the same way) or, for a convex form, the points of its hull - and the form's title,
@@ -39,7 +40,7 @@ func _initialize() -> void:
 
 func _bake(form: String, info: Dictionary) -> Dictionary:
 	var f := FileAccess.open(SOURCE + form + ".bin", FileAccess.READ)
-	if f == null or f.get_buffer(4).get_string_from_ascii() != "ISO1":
+	if f == null or f.get_buffer(4).get_string_from_ascii() != "ISO2":
 		return {"error": "no bin"}
 	var nv := f.get_32()
 	var ni := f.get_32()
@@ -47,7 +48,7 @@ func _bake(form: String, info: Dictionary) -> Dictionary:
 	var nh := f.get_32()
 	var pos := f.get_buffer(nv * 12).to_float32_array()
 	var nrm := f.get_buffer(nv * 12).to_float32_array()
-	var col := f.get_buffer(nv * 12).to_float32_array()
+	var col := f.get_buffer(nv * 16).to_float32_array()
 	var idx := f.get_buffer(ni * 4).to_int32_array()
 	var soup := f.get_buffer(ns * 12).to_float32_array()
 	var hull := f.get_buffer(nh * 12).to_float32_array()
@@ -60,7 +61,7 @@ func _bake(form: String, info: Dictionary) -> Dictionary:
 	for i in nv:
 		verts[i] = Vector3(pos[3 * i], pos[3 * i + 1], pos[3 * i + 2])
 		normals[i] = Vector3(nrm[3 * i], nrm[3 * i + 1], nrm[3 * i + 2])
-		colours[i] = Color(col[3 * i], col[3 * i + 1], col[3 * i + 2])
+		colours[i] = Color(col[4 * i], col[4 * i + 1], col[4 * i + 2], col[4 * i + 3])
 	# the bench winds each face counter-clockwise seen from outside; Godot's front faces are clockwise
 	for t in ni / 3:
 		var keep := idx[3 * t + 1]
@@ -68,7 +69,7 @@ func _bake(form: String, info: Dictionary) -> Dictionary:
 		idx[3 * t + 2] = keep
 	var size: Array = info.get("dimensions", [1, 1, 1])
 	var large: bool = float(size[0]) * float(size[2]) > 2.0 or float(size[1]) > 1.6
-	var budget: int = BUDGET_LARGE if large else BUDGET_SMALL
+	var budget: int = int(info.get("budget", 0)) if int(info.get("budget", 0)) > 0 else (BUDGET_LARGE if large else BUDGET_SMALL)
 	var near := _simplify(verts, normals, colours, idx, budget)
 	var im := ImporterMesh.new()
 	im.add_surface(Mesh.PRIMITIVE_TRIANGLES, near.arrays)
@@ -81,6 +82,17 @@ func _bake(form: String, info: Dictionary) -> Dictionary:
 		var c: Array = info["centroid"]
 		mesh.set_meta("centroid", Vector3(float(c[0]), float(c[1]), float(c[2])))
 	mesh.set_meta("form", form)
+	var extras: Dictionary = info.get("extras", {}) if info.get("extras") is Dictionary else {}
+	if extras.has("paths"):                     # a carving: the path(s) its cutters were set along, for the demo's orange line
+		var paths := []
+		for path in extras["paths"]:
+			var line := PackedVector3Array()
+			for q in path: line.append(Vector3(float(q[0]), float(q[1]), float(q[2])))
+			paths.append(line)
+		mesh.set_meta("paths", paths)
+		mesh.set_meta("line", bool(extras.get("line", true)))
+		for key in ["seed", "cutters", "pattern"]:
+			if extras.has(key): mesh.set_meta(key, extras[key])
 	if nh > 0:
 		var points := PackedVector3Array()
 		for i in nh: points.append(Vector3(hull[3 * i], hull[3 * i + 1], hull[3 * i + 2]))

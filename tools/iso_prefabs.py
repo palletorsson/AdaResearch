@@ -9,10 +9,22 @@ revolved, swept or roughened before it is cut. Palle, 2026-11-13: "We have prefa
 principal opportunities. Can you make 20 new prefabs using iso surfaces? ... I mean in the boolean floor."
 
 Each form is a signed-distance expression; marching cubes (scikit-image) draws its zero set. Every vertex also carries
-where its face came from, read from the expression: a face a DIFFERENCE cut is orange (the hall's own CUT_COLOR), a face
-an INTERSECTION trimmed is sea-green, the band where a SMOOTH UNION melted two bodies together is the union demo's seam
-yellow, every other face is the pale body. The hall says of its difference demo "we could make the new faces announce
-another origin" - here they do.
+DATA read from the expression - where its face came from (a DIFFERENCE cut it, an INTERSECTION trimmed it, it lies in
+the band where a SMOOTH UNION melted two bodies) and how open the air round it is (ambient occlusion read from the field
+along the normal, the floor counted as an occluder) - as vertex colour (r cut, g trim, b band, a occlusion). The
+artifact's shader turns that into a finish: paint (the hall's CUT_COLOR orange for a cut), rock (the Cave System's own
+procedural texture: a cut shows fresh pale stone, a trim dressed stone, a band worn smooth), or one pale cast. The hall
+says of its difference demo "we could make the new faces announce another origin" - here they do.
+
+Palle, 2026-11-13, later: "Make the space a bit bigger and find the procedural boolean surface caves and place the object
+in a boolean map, use the same texture as in the example and make them look very good ... they use sine and random etc to
+carve in a space in cubes." The example is the Random Boolean Carving (algorithms/proceduralgeneration/constraint_solvers/
+randomboolean/advanced_carver.gd; map ProceduralGenerationBooleanPatterns, registry boolean_patterns): a cube minus
+low-poly spheres along a path - a random walk, a sine spiral, random branches, a sine-driven "Perlin" path, grid tunnels.
+Its demo (all_patterns_demo.tscn) carves six 10 m cubes; the forms `carved_*` here are those six at 0.28 of their size
+(a cube of 2.8 m, every length scaled alike), with the same seeds, steps and faceted cutters (6 segments, 4 rings), and
+the finish `satin` is the demo's material: albedo (0.7, 0.7, 0.8), metallic 0.3, roughness 0.7, its SSAO stood in for by
+the occlusion baked into each vertex.
 
   python tools/iso_prefabs.py check [form ...]     build each form, measure it, run its checks; print a table
   python tools/iso_prefabs.py export [form ...]    ... and write ada_run/iso_prefabs/<form>.bin + manifest.json
@@ -363,24 +375,33 @@ def roughened(fn, amplitude, scale, seed, octaves=3):
 
 # ---------------------------------------------------------------- the twenty
 
+# The walk-in forms were first drawn tight for a body of 1.7 m (a tunnel 1.3 m wide, a dome 3.4 m across); walked in
+# the tower they read as narrow. They are a third bigger now: a passage 1.8 m wide under a 2.95 m crown, a room 2.8 m
+# across, a dome 4.7 m across inside.
+TUNNEL_WIDE, TUNNEL_SPRING = 1.8, 2.05
+CROSSING_WIDE, CROSSING_SPRING, CROSSING_ROOM = 1.6, 2.1, 1.4
+DOOR_X, DOOR_WIDE, DOOR_SPRING = -0.9, 1.3, 2.0
+PORT_X = 1.2
+
+
 def _tunnel():
-    block = rbox((0, 1.35, 0), (1.5, 1.35, 1.2), 0.22)
-    way = arch('x', 1.3, 1.55, 4.0)
-    return ON_FLOOR(D(block, way, k=0.06))
+    block = rbox((0, 1.75, 0), (2.0, 1.75, 1.6), 0.3)
+    way = arch('x', TUNNEL_WIDE, TUNNEL_SPRING, 5.2)
+    return ON_FLOOR(D(block, way, k=0.08))
 
 
 def _crossing():
-    block = rbox((0, 1.4, 0), (1.6, 1.4, 1.6), 0.25)
-    room = U(cyl((0, 0.8, 0), 'y', 1.0, 1.2), sphere((0, 1.6, 0), 1.0))
-    return ON_FLOOR(D(block, arch('x', 1.2, 1.6, 4.0), arch('z', 1.2, 1.6, 4.0), room, k=0.06))
+    block = rbox((0, 1.95, 0), (2.15, 1.95, 2.15), 0.32)
+    room = U(cyl((0, 1.05, 0), 'y', CROSSING_ROOM, 1.6), sphere((0, 2.1, 0), CROSSING_ROOM))
+    return ON_FLOOR(D(block, arch('x', CROSSING_WIDE, CROSSING_SPRING, 5.4), arch('z', CROSSING_WIDE, CROSSING_SPRING, 5.4), room, k=0.08))
 
 
 def _thresholds():
-    wall = rbox((0, 1.4, 0), (1.6, 1.4, 0.18), 0.08)
-    door = arch('z', 1.0, 1.55, 1.0, c=(-0.7, 0, 0))
-    porthole = cyl((0.85, 1.05, 0), 'z', 0.17, 0.5)
-    mousehole = cyl((0.85, 0.05, 0), 'z', 0.2, 0.5)
-    return ON_FLOOR(D(wall, door, porthole, mousehole, k=0.04))
+    wall = rbox((0, 1.75, 0), (2.15, 1.75, 0.2), 0.1)
+    door = arch('z', DOOR_WIDE, DOOR_SPRING, 1.2, c=(DOOR_X, 0, 0))
+    porthole = cyl((PORT_X, 1.2, 0), 'z', 0.2, 0.5)
+    mousehole = cyl((PORT_X, 0.05, 0), 'z', 0.2, 0.5)
+    return ON_FLOOR(D(wall, door, porthole, mousehole, k=0.045))
 
 
 SIEVE_TILT = 14.0
@@ -402,12 +423,15 @@ def _sieve():
     return ON_FLOOR(SU(0.04, tray, *legs))
 
 
+DOME_Y, DOME_OUT, DOME_IN = 0.75, 2.7, 2.45
+
+
 def _dome():
-    outer = sphere((0, 0.55, 0), 2.0)
-    inner = sphere((0, 0.55, 0), 1.8)
-    door = arch('z', 1.0, 1.5, 2.0, c=(0, 0, 1.6))
-    oculus = cyl((0, 2.4, 0), 'y', 0.3, 0.6)
-    return ON_FLOOR(D(outer, inner, door, oculus, k=0.05))
+    outer = sphere((0, DOME_Y, 0), DOME_OUT)
+    inner = sphere((0, DOME_Y, 0), DOME_IN)
+    door = arch('z', 1.3, 1.9, 2.4, c=(0, 0, 2.2))
+    oculus = cyl((0, 3.3, 0), 'y', 0.42, 0.8)
+    return ON_FLOOR(D(outer, inner, door, oculus, k=0.06))
 
 
 def _basin():
@@ -583,22 +607,191 @@ def _boulder():
     return ON_FLOOR(I(SU(0.12, ground, rock), rbox((0, 0, 0), (1.0, 1.2, 0.9)), role=BODY))
 
 
+# ---------------------------------------------------------------- the carvings (Random Boolean Carving, its demo)
+
+CARVE_SCALE = 0.28              # the demo's 10 m cubes at 2.8 m: every length alike, so the carvings keep their look
+CARVINGS = {                    # all_patterns_demo.tscn, node by node (unset fields take advanced_carver.gd's defaults)
+    'carved_walk': dict(pattern='walk', seed=1, steps=50, step=1.5, radius=2.5, label='Random Walk'),
+    'carved_spiral': dict(pattern='spiral', seed=2, steps=60, step=1.8, radius=2.8, turns=4.0, decay=0.3, label='Spiral'),
+    # Branches at the demo's own numbers (seed 3, step 2.0 in a 10 m cube, trunk from the centre) climbs out in two steps and
+    # never branches - its own code prints "main path too short". Started at the floor with a 0.8 m step (seed 4, branch
+    # chance 0.5) the rule fires: a 12-point trunk and three branches. Shown in section, so that they can be seen.
+    'carved_branches': dict(pattern='branches', seed=4, steps=50, step=0.8, radius=1.2, branch_p=0.5, branches=6, start=(0.0, -4.0, 0.0),
+                            section=True, label='Branches',
+                            principle="The demo's trunk starts mid-cube with 4.5 m to climb, and a branch may leave only after 11 points 0.6 m apart: none ever fits. Started at the floor, it branches; the block is cut open to show it."),
+    'carved_perlin': dict(pattern='perlin', seed=4, steps=70, step=1.5, radius=2.5, perlin_scale=0.25, perlin_strength=2.0, label='Sine Field',
+                          principle='The demo calls it Perlin, but no noise is drawn: each step turns by sin and cos of where it stands and how many steps it has tried. 19 of its 70 tries land.'),
+    'carved_grid': dict(pattern='grid', seed=5, steps=60, step=1.5, radius=2.5, line=False, label='Grid Tunnels',
+                        principle="Nine straight tunnels on a fixed grid. Only each sphere's size is drawn (+-20 %), and that draw alone decides where the skin breaks."),
+    'carved_sphere': dict(pattern='spiral', seed=6, steps=50, step=1.8, radius=2.8, turns=3.0, decay=0.5, base='sphere', label='Sphere + Spiral',
+                          principle='Spheres up to 1.9 m across, on turns 0.75 m apart, overlap from turn to turn: the spiral takes 97 % of the sphere. A difference can leave less than either operand.'),
+}
+
+
+def carving_paths(spec, size=10.0):
+    """advanced_carver.gd's path generators, step for step, in the demo's own units (a 10 m cube centred on the
+    origin). Python's generator stands in for Godot's: the same procedure and seeds, not the same draws."""
+    rng = np.random.RandomState(spec['seed'])
+    half = size * 0.45
+    cross = 0.6                                         # crossing_check_distance
+    occupied = []
+
+    def valid(q):
+        if np.any(np.abs(q) > half):
+            return False
+        return all(np.linalg.norm(q - o) >= cross for o in occupied)
+    paths = []
+    if spec['pattern'] == 'walk':
+        cur = np.zeros(3)
+        path = [cur]
+        occupied.append(cur)
+        dirs = [np.array(v, float) for v in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, -1), (0, 0, 1))]
+        for _ in range(spec['steps']):
+            for attempt in range(20):
+                nxt = cur + dirs[rng.randint(6)] * spec['step']
+                if valid(nxt):
+                    cur = nxt
+                    path.append(cur)
+                    occupied.append(cur)
+                    break
+        paths.append(path)
+    elif spec['pattern'] == 'spiral':
+        path = []
+        n = spec['steps']
+        for i in range(n):
+            t = i / n
+            angle = t * spec['turns'] * 2 * np.pi
+            radius = size * 0.4 * (1.0 - t * spec['decay'])
+            path.append(np.array([np.cos(angle) * radius, (t - 0.5) * size * 0.8, np.sin(angle) * radius]))
+        paths.append(path)
+    elif spec['pattern'] == 'branches':
+        def branch(start, main, steps):
+            cur, out = start, [start]
+            for _ in range(steps):
+                d = main + rng.uniform(-0.3, 0.3, 3)
+                nxt = cur + d / np.linalg.norm(d) * spec['step']
+                if valid(nxt):
+                    cur = nxt
+                    out.append(cur)
+                    occupied.append(cur)
+            return out
+        trunk = branch(np.array(spec.get('start', (0.0, 0.0, 0.0)), float), np.array([0.0, 1.0, 0.0]), int(spec['steps'] * 0.6))
+        paths.append(trunk)
+        if len(trunk) > 10:
+            made = 0
+            for _ in range(spec['branches']):
+                if rng.uniform() < spec['branch_p'] and made < spec['branches']:
+                    start = trunk[rng.randint(max(1, len(trunk) - 10))]
+                    d = np.array([rng.uniform(-1, 1), rng.uniform(-0.5, 0.5), rng.uniform(-1, 1)])
+                    paths.append(branch(start, d / np.linalg.norm(d), int(spec['steps'] * 0.3)))
+                    made += 1
+    elif spec['pattern'] == 'perlin':
+        cur = np.zeros(3)
+        path = [cur]
+        ps, st = spec['perlin_scale'], spec['perlin_strength']
+        for step in range(spec['steps']):
+            d = np.array([np.sin(cur[0] * ps + step * 0.1) * st, np.cos(cur[1] * ps + step * 0.15) * st, np.sin(cur[2] * ps + step * 0.12) * st])
+            nxt = cur + d / max(np.linalg.norm(d), 1e-9) * spec['step']
+            if valid(nxt):
+                cur = nxt
+                path.append(cur)
+                occupied.append(cur)
+        paths.append(path)
+    elif spec['pattern'] == 'grid':
+        g = 3
+        spacing = size / (g + 1)
+        for y in range(g):
+            for z in range(g):
+                paths.append([np.array([x * spacing * 0.5, (y - g / 2.0 + 0.5) * spacing, (z - g / 2.0 + 0.5) * spacing]) for x in range(-g, g + 1)])
+    # every point once, each with its radius varied +-20 % (radius_variation 0.2)
+    points, seen = [], set()
+    for path in paths:
+        for q in path:
+            key = tuple(np.round(q, 4))
+            if key not in seen:
+                seen.add(key)
+                points.append((q, spec['radius'] * rng.uniform(0.8, 1.2)))
+    return paths, points
+
+
+def lowpoly_sphere(c, r, radial=6, rings=4):
+    """A CSGSphere3D with radial_segments 6 and rings 4 - the carver's cutter - as a convex polyhedron: the ball its
+    vertices span, cut flat at every face. Its gradient is piecewise constant, so the cavities come out faceted, as
+    in the demo."""
+    c = np.asarray(c, float)
+    normals, offsets = [], []
+    lat = [np.pi * (i / rings) - np.pi / 2 for i in range(rings + 1)]
+    for i in range(rings):
+        for j in range(radial):
+            a0, a1 = 2 * np.pi * j / radial, 2 * np.pi * (j + 1) / radial
+            quad = []
+            for la in (lat[i], lat[i + 1]):
+                for a in (a0, a1):
+                    quad.append(np.array([np.cos(la) * np.sin(a), np.sin(la), np.cos(la) * np.cos(a)]) * r)
+            n = np.cross(quad[1] - quad[0], quad[2] - quad[0])
+            if np.linalg.norm(n) < 1e-9:
+                n = np.cross(quad[3] - quad[1], quad[2] - quad[1])
+            n /= np.linalg.norm(n)
+            centre = np.mean(quad, axis=0)
+            if n @ centre < 0:
+                n = -n
+            normals.append(n)
+            offsets.append(max(n @ v for v in quad))
+    normals, offsets = np.array(normals), np.array(offsets)
+
+    def d(p):
+        return ((p - c) @ normals.T - offsets).max(axis=1)
+    return leaf(d)
+
+
+def _carved(name):
+    spec = CARVINGS[name]
+    k = CARVE_SCALE
+    edge = 10.0 * k
+    centre = np.array([0.0, edge / 2, 0.0])
+    _, points = carving_paths(spec)
+    if spec.get('base') == 'sphere':                   # seated 15 cm into the floor, not balanced on a point
+        centre = centre - np.array([0.0, 0.15, 0.0])
+        base = sphere(centre, edge / 2)
+    else:
+        base = rbox(centre, (edge / 2, edge / 2, edge / 2), 0.02)
+    cutters = [lowpoly_sphere(centre + q * k, r * k) for q, r in points]
+    if spec.get('section'):                             # cut open: the north half stands, its cut face to the south
+        return ON_FLOOR(I(D(base, *cutters), half_space((0, 0, 1), 0.05), role=TRIM))
+    return ON_FLOOR(D(base, *cutters))
+
+
+def carving_cutters(name):
+    """A carving's cutters in metres (centre, radius), the cube lifted onto the floor."""
+    spec = CARVINGS[name]
+    k = CARVE_SCALE
+    edge = 10.0 * k
+    centre = np.array([0.0, edge / 2 - (0.15 if spec.get('base') == 'sphere' else 0.0), 0.0])
+    _, points = carving_paths(spec)
+    return [(centre + q * k, r * k) for q, r in points]
+
+
+def _carving_builder(name):
+    return lambda: _carved(name)
+
+
+# ---------------------------------------------------------------- the catalogue of forms
 # ---------------------------------------------------------------- the catalogue of forms
 
 FORMS = {
-    'tunnel': dict(build=_tunnel, verb='difference', h=0.04, title='Tunnel',
+    'tunnel': dict(build=_tunnel, verb='difference', h=0.05, title='Tunnel',
                    expression='difference(round_box, arch)',
                    principle='A passage through a solid: a body is inside the work and still on its way.'),
-    'crossing': dict(build=_crossing, verb='difference', h=0.04, title='Crossing',
+    'crossing': dict(build=_crossing, verb='difference', h=0.05, title='Crossing',
                      expression='difference(block, union(arch_x, arch_z, room))',
                      principle='The cut is itself a union: four ways meet in a room, a vertex a body can stand in.'),
-    'thresholds': dict(build=_thresholds, verb='difference', h=0.03, title='Thresholds',
+    'thresholds': dict(build=_thresholds, verb='difference', h=0.035, title='Thresholds',
                        expression='difference(wall, door, porthole, mousehole)',
                        principle='Each cut is sized for whom it lets through: a body by the door, a hand by the porthole, a small ball under the wall.'),
-    'sieve': dict(build=_sieve, verb='difference', h=0.02, hc=0.022, cbudget=4000, title='Sieve',
+    'sieve': dict(build=_sieve, verb='difference', h=0.02, hc=0.022, cbudget=4000, ao_reach=0.3, title='Sieve',
                   expression='difference(tilted plate, repeat(sphere)) + legs',
                   principle='A repeated cut is a filter: a rubber ball falls through, a trace ball rolls off.'),
-    'dome': dict(build=_dome, verb='difference', h=0.045, title='Dome',
+    'dome': dict(build=_dome, verb='difference', h=0.055, title='Dome',
                  expression='difference(sphere, sphere, door, oculus)',
                  principle='Two differences make an inside: one takes the room out of the body, one lets you into the room.'),
     'basin': dict(build=_basin, verb='difference', h=0.025, title='Basin',
@@ -619,7 +812,7 @@ FORMS = {
     'die': dict(build=_die, verb='intersection', h=0.012, title='Die', rigid=True, mass=6.0,
                 expression='difference(intersection(cube, sphere), pips)',
                 principle='The cube gives faces to rest on, the sphere takes the corners off so it can roll: thrown, it lands on a number.'),
-    'gyroid_screen': dict(build=_gyroid_screen, verb='intersection', h=0.03, hc=0.03, cbudget=4000, title='Gyroid screen',
+    'gyroid_screen': dict(build=_gyroid_screen, verb='intersection', h=0.03, hc=0.03, cbudget=4000, ao_reach=0.2, title='Gyroid screen',
                           expression='intersection(box, shell(gyroid)) + frame',
                           principle='A periodic field cut to a panel: open everywhere and closed everywhere; the eye passes, a body does not.'),
     'stile': dict(build=_stile, verb='union', h=0.025, title='Stile',
@@ -631,7 +824,7 @@ FORMS = {
     'stones': dict(build=_stones, verb='union', h=0.025, title='Stones',
                    expression='smooth_union(floor, metaballs(3))',
                    principle='Summed fields: near enough, two stones share one boundary; the third stands alone.'),
-    'pipe_tee': dict(build=_pipe_tee, verb='union', h=0.02, hc=0.022, cbudget=4000, title='Pipe tee',
+    'pipe_tee': dict(build=_pipe_tee, verb='union', h=0.02, hc=0.022, cbudget=4000, ao_reach=0.3, title='Pipe tee',
                      expression='difference(union(pipes, legs), union(bores))',
                      principle='Join first, then bore: the junction is open. Bored first and then joined, each wall would close it.'),
     'spiral_ramp': dict(build=_spiral_ramp, verb='field', h=0.035, title='Spiral ramp',
@@ -647,6 +840,23 @@ FORMS = {
                     expression='smooth_union(floor, ellipsoid + noise)',
                     principle='A boundary made from values: the noise moves every point of it in or out.'),
 }
+_CARVE_TEXT = {
+    'walk': ('difference(cube, faceted spheres along a random walk)', 'Six directions, chosen at random, never crossing itself: the walk is the cave.'),
+    'spiral': ('difference(cube, faceted spheres along a sine spiral)', 'x = cos(angle) r, z = sin(angle) r, rising as the radius decays: a cave wound by a sine.'),
+    'branches': ('difference(cube, spheres along a trunk and random branches)', "A trunk should climb and branches leave it. At the demo's own numbers (a 2 m step in a 10 m cube) it climbs out in two steps and no branch starts: three cutters, a shaft."),
+    'perlin': ('difference(cube, spheres along a sine-steered path)', 'Each step turns by sin and cos of where it stands: a path that follows a field.'),
+    'grid': ('difference(cube, spheres along a 3 x 3 grid of tunnels)', 'Nine straight tunnels, evenly spaced: the same verb, no chance at all.'),
+}
+for _name, _spec in CARVINGS.items():
+    _expr, _why = _CARVE_TEXT[_spec['pattern']]
+    _why = _spec.get('principle', _why)
+    if _spec.get('base') == 'sphere':
+        _expr = _expr.replace('difference(cube,', 'difference(sphere,')
+    if _spec.get('section'):
+        _expr = 'intersection(' + _expr + ', half-space)'
+    FORMS[_name] = dict(build=_carving_builder(_name), verb='difference', h=0.022, hc=0.045, cbudget=5000, budget=9000,
+                        extent=(1.8, 3.2, 1.8), title=_spec['label'], expression=_expr, principle=_why,
+                        rigid=False, carving=True)
 
 
 # ---------------------------------------------------------------- marching, measuring
@@ -659,12 +869,13 @@ def evaluate(f, p, chunk=400000):
     return np.concatenate(ds), np.concatenate(rs), np.concatenate(bs)
 
 
-def bounds(f, h, rigid):
+def bounds(f, h, rigid, extent=(3.0, 4.6, 3.0)):
     """Find the box the form lives in by a coarse search, then pad it."""
-    c = 0.08
-    xs = np.arange(-3.0, 3.0 + c, c)
-    ys = np.arange(-0.5, 3.2 + c, c)
-    g = np.stack(np.meshgrid(xs, ys, xs, indexing='ij'), axis=-1).reshape(-1, 3)
+    c = 0.08 if extent[0] <= 3.0 else 0.15
+    xs = np.arange(-extent[0], extent[0] + c, c)
+    ys = np.arange(-0.5, extent[1] + c, c)
+    zs = np.arange(-extent[2], extent[2] + c, c)
+    g = np.stack(np.meshgrid(xs, ys, zs, indexing='ij'), axis=-1).reshape(-1, 3)
     d, _, _ = evaluate(f, g)
     inside = g[d < c]
     lo, hi = inside.min(axis=0) - 3 * h, inside.max(axis=0) + 3 * h
@@ -673,12 +884,19 @@ def bounds(f, h, rigid):
     return lo, hi
 
 
-def march(f, h, rigid):
-    lo, hi = bounds(f, h, rigid)
+def march(f, h, rigid, extent=(3.0, 4.6, 3.0), grounded_only=False):
+    lo, hi = bounds(f, h, rigid, extent)
     axes = [np.arange(lo[i], hi[i] + h, h) for i in range(3)]
     g = np.stack(np.meshgrid(*axes, indexing='ij'), axis=-1).reshape(-1, 3)
     d, _, _ = evaluate(f, g)
     vol = d.reshape([len(a) for a in axes])
+    if grounded_only:                                   # a carving keeps only solid that reaches the floor: a cutter can
+        labels, n = measure.label(vol < 0, return_num=True)     # leave a piece floating in the air, which no body could stand
+        low = axes[1] < 0.1
+        standing = set(np.unique(labels[:, low, :])) - {0}
+        for k in range(1, n + 1):
+            if k not in standing:
+                vol[labels == k] = h
     verts, faces, _, _ = measure.marching_cubes(vol, level=0.0, spacing=(h, h, h), allow_degenerate=False)
     verts = verts + np.array([a[0] for a in axes])
     return verts, faces
@@ -736,12 +954,38 @@ def clip_above(verts, normals, colours, faces, y0):
     return verts[used], normals[used], colours[used], remap[faces]
 
 
+def ambient_occlusion(f, p, n, floor=True, reach=0.6, steps=5):
+    """How open the air round a point is, read from the field along its normal (Inigo Quilez's distance-field
+    occlusion): where solid is nearer than the distance walked out, light is shut out. The floor counts as solid for a
+    form standing on it - the dark line where a wall meets the ground. 1 open, 0 shut in."""
+    occ = np.zeros(len(p))
+    total = 0.0
+    for i in range(1, steps + 1):
+        hh = reach * i / steps
+        q = p + n * hh
+        d, _, _ = evaluate(f, q)
+        if floor:
+            d = np.minimum(d, q[:, 1])
+        w = 1.0 / i
+        occ += w * np.clip((hh - d) / hh, 0.0, 1.0)
+        total += w
+    return np.clip(1.0 - 1.5 * occ / total, 0.0, 1.0)
+
+
+def data_colours(f, verts, normals, h, rigid, reach=0.6):
+    """Vertex colour as data: r = a difference cut this face, g = an intersection trimmed it, b = a smooth union's band,
+    a = ambient occlusion."""
+    _, role, band = evaluate(f, verts - normals * h * 0.05)
+    ao = ambient_occlusion(f, verts + normals * h * 0.1, normals, floor=not rigid, reach=reach)
+    return np.stack([(role == CUT).astype(float), (role == TRIM).astype(float), band, ao], axis=1), role, band
+
+
 def mesh_of(name, h=None, purpose='render'):
     spec = FORMS[name]
     f = spec['build']()
     h = h or spec['h']
     rigid = spec.get('rigid', False)
-    verts, faces = march(f, h, rigid)
+    verts, faces = march(f, h, rigid, spec.get('extent', (3.0, 4.6, 3.0)), grounded_only=bool(spec.get('carving')))
     normals = gradient(f, verts, h * 0.5)
     # each face wound so that its geometric normal agrees with the field's gradient (outward)
     tri = verts[faces]
@@ -755,12 +999,24 @@ def mesh_of(name, h=None, purpose='render'):
     remap = -np.ones(len(verts), int)
     remap[used] = np.arange(len(used))
     verts, normals, faces = verts[used], normals[used], remap[faces]
-    _, role, band = evaluate(f, verts - normals * h * 0.05)
-    colours = np.array([PALETTE[int(r)] for r in range(4)])[role]
-    colours = colours * (1 - band[:, None]) + np.array(BAND) * band[:, None]
-    if not rigid and purpose == 'render':               # what lies under the floor (or on it) is never seen
-        verts, normals, colours, faces = clip_above(verts, normals, colours, faces, 0.003)
+    if purpose == 'collision':
         _, role, band = evaluate(f, verts - normals * h * 0.05)
+        colours = np.zeros((len(verts), 4))
+    else:
+        if not rigid:                                   # what lies under the floor (or on it) is never seen
+            verts, normals, _, faces = clip_above(verts, normals, np.zeros((len(verts), 4)), faces, 0.003)
+        colours, role, band = data_colours(f, verts, normals, h, rigid, spec.get('ao_reach', 0.6))
+        if spec.get('carving'):                         # P8 (d): the demo's cutters are smooth-shaded (smooth_faces): a cave
+            cut = colours[:, 0] > 0.5                    # wall's normal points to the centre of its nearest cutter
+            if cut.any():
+                cs = carving_cutters(name)
+                centres = np.array([c for c, _ in cs])
+                radii = np.array([r for _, r in cs])
+                pv = verts[cut]
+                nearest = np.argmin(np.linalg.norm(pv[:, None, :] - centres[None, :, :], axis=2) - radii[None, :], axis=1)
+                towards = centres[nearest] - pv
+                normals = normals.copy()
+                normals[cut] = towards / np.maximum(np.linalg.norm(towards, axis=1), 1e-9)[:, None]
     return dict(f=f, verts=verts.astype(np.float32), normals=normals.astype(np.float32), faces=faces.astype(np.uint32),
                 colours=colours.astype(np.float32), role=role, band=band)
 
@@ -881,123 +1137,56 @@ def checks(name, m):
         out.append(dict(check=label, value=round(float(value), 3), ok=bool(ok), want=want))
 
     if name == 'tunnel':
-        c, margin = clear_capsule(f, line((-1.7, 0), (1.7, 0)))
-        need('a standing body clears the passage', c, c >= margin, '>= 0.02 m')
-        c, _ = clear_capsule(f, line((-1.7, 0.3), (1.7, 0.3)))
-        need('... and 30 cm off its middle', c, c >= 0.0, '>= 0')
+        c, margin = clear_capsule(f, line((-2.3, 0), (2.3, 0)))
+        need('a standing body clears the passage', c, c >= 0.45, '>= 0.45 m (the sampler reads up to 0.5)')
+        c, _ = clear_capsule(f, line((-2.3, 0.5), (2.3, 0.5)))
+        need('... and 50 cm off its middle', c, c >= 0.1, '>= 0.1')
     elif name == 'crossing':
-        c1, margin = clear_capsule(f, line((-1.9, 0), (1.9, 0)))
-        c2, _ = clear_capsule(f, line((0, -1.9), (0, 1.9)))
-        need('west-east way clear', c1, c1 >= margin, '>= 0.02 m')
-        need('north-south way clear', c2, c2 >= margin, '>= 0.02 m')
-        c3, _ = clear_capsule(f, arc(0.55, 0, 360))
-        need('a body can turn round in the room (r 0.55)', c3, c3 >= 0.0, '>= 0')
+        c1, margin = clear_capsule(f, line((-2.4, 0), (2.4, 0)))
+        c2, _ = clear_capsule(f, line((0, -2.4), (0, 2.4)))
+        need('west-east way clear', c1, c1 >= 0.35, '>= 0.35 m')
+        need('north-south way clear', c2, c2 >= 0.35, '>= 0.35 m')
+        c3, _ = clear_capsule(f, arc(0.8, 0, 360))
+        need('a body can walk round in the room (r 0.8)', c3, c3 >= 0.05, '>= 0.05')
     elif name == 'thresholds':
-        c, margin = clear_capsule(f, line((-0.7, -0.5), (-0.7, 0.5)))
-        need('a body passes the door', c, c >= margin, '>= 0.02 m')
-        pr = ball_path(f, line((0.85, 1.05, -0.5), (0.85, 1.05, 0.5)), TRACE)
+        c, margin = clear_capsule(f, line((DOOR_X, -0.6), (DOOR_X, 0.6)))
+        need('a body passes the door', c, c >= 0.3, '>= 0.3 m')
+        pr = ball_path(f, line((PORT_X, 1.2, -0.5), (PORT_X, 1.2, 0.5)), TRACE)
         need('the porthole passes a trace ball held at its middle', pr, pr >= 0.01, '>= 0.01 m')
-        mr = ball_path(f, line((0.85, RUBBER, -0.5), (0.85, RUBBER, 0.5)), RUBBER)
+        mr = ball_path(f, line((PORT_X, RUBBER, -0.5), (PORT_X, RUBBER, 0.5)), RUBBER)
         need('a rubber ball rolls under the wall', mr, mr >= 0.015, '>= 0.015 m')
-        mt = ball_path(f, line((0.85, TRACE, -0.5), (0.85, TRACE, 0.5)), TRACE)
+        mt = ball_path(f, line((PORT_X, TRACE, -0.5), (PORT_X, TRACE, 0.5)), TRACE)
         need('a trace ball does not', mt, mt < 0.0, '< 0')
     elif name == 'sieve':
         opening = 2 * np.sqrt(SIEVE_HOLE ** 2 - 0.03 ** 2)
         need('hole opening (m)', opening, 2 * RUBBER + 0.02 <= opening <= 2 * TRACE - 0.02, 'rubber 0.22 + 2 cm .. trace 0.28 - 2 cm')
     elif name == 'dome':
-        c, margin = clear_capsule(f, line((0, 2.4), (0, 0.0)))
-        need('a body walks in to the middle', c, c >= margin, '>= 0.02 m')
-        hs = surface_height(f, [(0, 0)], top=2.9)
+        c, margin = clear_capsule(f, line((0, 3.2), (0, 0.0)))
+        need('a body walks in to the middle', c, c >= 0.3, '>= 0.3 m')
+        c2, _ = clear_capsule(f, arc(1.2, 0, 360))
+        need('and round inside it (r 1.2)', c2, c2 >= 0.1, '>= 0.1 m')
+        hs = surface_height(f, [(0, 0)], top=4.0)
         need('ceiling over the middle (the oculus is open)', hs[0], hs[0] < 0.01, 'open')
-    elif name == 'basin':
-        w = walk_profile(f, line((-1.0, 0), (1.0, 0)))
-        need('rim height', w['top'], w['top'] > 2 * RUBBER, '> a ball')
-        depth = w['top'] - float(surface_height(f, [(0, 0)])[0])
-        need('dish depth at the middle', depth, depth > RUBBER, '> a ball radius')
-    elif name == 'gutter_ramp':
-        w = walk_profile(f, line((-1.8, 0.45), (1.45, 0.45), 120))
-        need('the lane starts at the floor (lip m)', w['start'], w['start'] <= 0.01, '<= 0.01')
-        need('the lane is walkable (deg)', w['max_slope'], w['max_slope'] <= 40, '<= 40')
-        need('the lane climbs to (m)', w['top'], w['top'] >= GUTTER_RISE - 0.05, f'>= {GUTTER_RISE - 0.05}')
-        slope = GUTTER_RISE / GUTTER_LONG
-        g = ball_path(f, [(x, slope * (x + 1.5) - 0.04 - 0.13 + RUBBER + 0.005, 0) for x in np.linspace(-1.2, 1.4, 60)], RUBBER)
-        need('a rubber ball lies in the gutter', g, g >= -0.006, '>= -0.006 (resting on it)')
-    elif name == 'mould':
-        hs = surface_height(f, [(0, 0)])
-        need('the cup is as deep as the cast (m)', 0.5 - hs[0], abs(0.5 - hs[0] - MOULD_R) < 0.02, f'~{MOULD_R}')
-    elif name == 'cast':
+    elif name in CARVINGS:
+        spec = CARVINGS[name]
+        paths, points = carving_paths(spec)
         v = m['verts']
-        need('the cast is convex (hull volume / volume)', 1.0, True, 'by construction: intersection of convex')
-        need('height (m)', v[:, 1].max() - v[:, 1].min(), abs(v[:, 1].max() - v[:, 1].min() - (MOULD_R - 0.016)) < 0.02, f'~{MOULD_R - 0.016}')
-    elif name == 'hump_bridge':
-        w = walk_profile(f, line((-2.3, 0), (2.3, 0), 160))
-        need('the deck starts at the floor (lip m)', max(w['start'], w['end']), max(w['start'], w['end']) <= 0.01, '<= 0.01')
-        need('the deck is walkable (deg)', w['max_slope'], w['max_slope'] <= 40, '<= 40')
-        need('the deck rises to (m)', w['top'], w['top'] >= 0.4, '>= 0.4')
-        lips = np.abs(np.diff(w['heights'])).max()
-        need('no lip on the way (m per 3 cm)', lips, lips <= 0.02, '<= 0.02')
-        b = ball_path(f, line((0, RUBBER, -0.9), (0, RUBBER, 0.9)), RUBBER)
-        need('a rubber ball rolls through the culvert', b, b >= 0.02, '>= 0.02 m')
-    elif name == 'die':
-        need('edge (m)', 0.5, True, '0.5')
-    elif name == 'gyroid_screen':
-        rays = 0
-        for x in np.linspace(-0.9, 0.9, 19):
-            for y in np.linspace(0.18, 1.98, 19):
-                d, _, _ = evaluate(f, np.array([(x, y, z) for z in np.linspace(-0.3, 0.3, 61)]))
-                rays += int(d.min() > 0)
-        need('sight lines straight through (of 361)', rays, rays > 20, '> 20')
-        c, _ = clear_capsule(f, line((0, -0.6), (0, 0.6)))
-        need('a body cannot pass', c, c < 0, '< 0')
-    elif name == 'stile':
-        smooth = walk_profile(f, line((-2.6, 0.5), (2.6, 0.5), 260))
-        hard = walk_profile(f, line((-2.0, -0.5), (2.0, -0.5), 200))
-        need('smooth half: steepest (deg)', smooth['max_slope'], smooth['max_slope'] <= 40, '<= 40')
-        need('smooth half: biggest lip per 2 cm (m)', smooth['max_lip'], smooth['max_lip'] <= 0.02, '<= 0.02')
-        need('smooth half: rises to (m)', smooth['top'], smooth['top'] >= 0.65, '>= 0.65')
-        need('hard half: biggest lip (m) - a step the walker cannot take', hard['max_lip'], hard['max_lip'] >= 0.15, '>= 0.15')
-    elif name == 'mound':
-        w = walk_profile(f, line((-2.0, 0), (2.0, 0), 200))
-        need('walkable (deg)', w['max_slope'], w['max_slope'] <= 35, '<= 35')
-        need('no lip at the foot (m)', w['start'], w['start'] <= 0.01, '<= 0.01')
-        need('height (m)', w['top'], w['top'] >= 0.5, '>= 0.5')
-    elif name == 'stones':
-        w = walk_profile(f, line((-2.3, 0), (2.4, 0), 240))
-        need('walkable over all three (deg)', w['max_slope'], w['max_slope'] <= 40, '<= 40')
-        need('no lip at the foot (m)', w['start'], w['start'] <= 0.01, '<= 0.01')
-        h = surface_height(f, [((STONES[0][0] + STONES[1][0]) / 2, 0.02)])
-        need('a neck joins the first two (m above floor)', h[0], h[0] > 0.04, '> 0.04')
-        between = surface_height(f, [(x, z) for x in np.linspace(STONES[1][0], STONES[2][0], 80) for z in (-0.05, 0.0, 0.05)])
-        need('... and the floor shows between the last two (lowest m, drawn from 0.003)', between.min(), between.min() < 0.003, '< 0.003')
-    elif name == 'pipe_tee':
-        r = TEE_BORE
-        top, mid, ex, ey = 1.25, 0.55, 0.85, 0.25
-        b1 = ball_path(f, line((0, top + 0.1, 0), (0, mid, 0)) + line((0, mid, 0), (ex + 0.1, ey - 0.1 * (mid - ey) / ex, 0)), TRACE)
-        b2 = ball_path(f, line((0, mid, 0), (-ex - 0.1, ey - 0.1 * (mid - ey) / ex, 0)), TRACE)
-        need('a trace ball runs from the inlet out of the east end', b1, b1 >= 0.008, '>= 0.008 m')
-        need('... and of the west end', b2, b2 >= 0.008, '>= 0.008 m')
-    elif name == 'spiral_ramp':
-        w = walk_profile(f, arc(1.0, -12, 290, 260))
-        need('the way up starts at the floor (m)', w['start'], w['start'] <= 0.03, '<= 0.03')
-        need('the way up is walkable at r 1.0 (deg)', w['max_slope'], w['max_slope'] <= 25, '<= 25')
-        need('it reaches (m)', w['top'], w['top'] >= SPIRAL_RISE - 0.02, f'>= {SPIRAL_RISE - 0.02}')
-        lips = np.abs(np.diff(w['heights'])).max()
-        need('no lip on the way (m per step)', lips, lips <= 0.02, '<= 0.02')
-    elif name == 'funnel':
-        inner = FUNNEL_THROAT - FUNNEL_SKIN
-        need('throat (m across)', 2 * inner, 2 * TRACE + 0.02 <= 2 * inner < 4 * RUBBER, 'passes one trace ball, not two rubber balls')
-    elif name == 'chute':
-        cv = _chute_curve()
-        centres = [(x, y - CHUTE_R + RUBBER + 0.004, 0) for x, y in cv[20:-10]]   # from 25 cm down: the end wall is 4 cm
-        b = ball_path(f, centres, RUBBER)
-        need('a rubber ball lies in the channel all the way', b, b >= -0.008, '>= -0.008 (resting on it)')
-        need('it drops from (m)', cv[0, 1], cv[0, 1] >= 1.15, '>= 1.15')
+        need('cutters set along the path(s)', len(points), len(points) >= 9, '>= 9')
+        if spec['pattern'] == 'branches':
+            need('the trunk branches', len(paths), len(paths) >= 2, '>= 2 paths')
+        k = CARVE_SCALE
+        lift = 10.0 * k / 2
+        inside = evaluate(f, np.array([[q[0] * k, q[1] * k + lift, q[2] * k] for q, _ in points]))[0]
+        need('every cutter left air where it stood', inside.min(), inside.min() > 0.0, '> 0 (outside the solid)')
+        need('it is still one block (largest dimension m)', (v.max(axis=0) - v.min(axis=0)).max(), (v.max(axis=0) - v.min(axis=0)).max() <= 10.0 * k + 0.05, '<= 2.85')
     elif name == 'boulder':
         w = walk_profile(f, line((-1.2, 0), (1.2, 0), 120))
         need('a seat, not a step: height (m)', w['top'], 0.35 <= w['top'] <= 0.75, '0.35 .. 0.75')
     v = m['verts']
     lo, hi = v.min(axis=0), v.max(axis=0)
-    need('fits under the ceiling (m)', hi[1], hi[1] < 5.5, '< 5.5')
+    top = surface_height(f, [(0.0, 0.0)], top=6.0)[0]
+    need('the march reached its top (field top vs mesh top, m)', abs(top - hi[1]) if top > 0.05 else 0.0, top <= hi[1] + 0.02 or top < 0.05, 'the mesh is as tall as the field')
+    need('fits under the ceiling (m)', hi[1], hi[1] < 5.3, '< 5.3')
     if not FORMS[name].get('rigid'):
         need('stands on the floor (lowest drawn y)', lo[1], 0.0 <= lo[1] <= 0.01, '0 .. 0.01')
     return out
@@ -1050,9 +1239,22 @@ def collision_of(name, render):
     return soup.astype(np.float32), np.zeros((0, 3), np.float32)
 
 
+def extras_of(name):
+    """What a form's artifact needs beyond its mesh: for a carving, the path(s) its cutters were set along (the demo
+    draws them as an orange line, path_line_color (1, 0.5, 0); Grid Tunnels does not)."""
+    spec = CARVINGS.get(name)
+    if spec is None:
+        return {}
+    paths, points = carving_paths(spec)
+    k = CARVE_SCALE
+    lift = 10.0 * k / 2
+    return {'paths': [[[round(float(q[0] * k), 3), round(float(q[1] * k + lift), 3), round(float(q[2] * k), 3)] for q in path] for path in paths],
+            'line': bool(spec.get('line', True)), 'seed': spec['seed'], 'cutters': len(points), 'pattern': spec['pattern']}
+
+
 def write_bin(path, render, soup, hull):
     with open(path, 'wb') as fh:
-        fh.write(b'ISO1')
+        fh.write(b'ISO2')
         fh.write(struct.pack('<4I', len(render['verts']), render['faces'].size, len(soup), len(hull)))
         fh.write(render['verts'].tobytes())
         fh.write(render['normals'].tobytes())
@@ -1089,6 +1291,7 @@ def run(command, names):
                                   triangles=int(len(m['faces'])), collision_triangles=int(len(soup) // 3), hull_points=int(len(hull)),
                                   collision_voxel=float(spec.get('hc', min(max(spec['h'] * 2.0, 0.05), 0.08))), collision_budget=int(spec.get('cbudget', 2400)),
                                   centroid=[round(float(c), 4) for c in centroid(m)[0]] if spec.get('rigid') else None,
+                                  budget=int(spec.get('budget', 0)), extras=extras_of(name),
                                   area=area_by_role(m), checks=cs)
         if command == 'views':
             views(name, m)

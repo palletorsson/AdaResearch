@@ -177,8 +177,12 @@ func run() -> void:
 	for form in works:
 		var s: Dictionary = works[form].state()
 		drawn[form] = [int(s.triangles), int(s.collision_triangles), bool(s.rigid)]
-	var whole: bool = works.size() == 20 and drawn.values().all(func(v): return v[0] > 1000 and (v[1] > 300 or v[2]))
-	checks.append({"check": "all twenty mounted, drawn, with collision (a hull for the rigid two)", "ok": whole, "count": works.size(), "drawn": drawn})
+	var whole: bool = works.size() == 26 and drawn.values().all(func(v): return v[0] > 1000 and (v[1] > 300 or v[2]))
+	var lines := 0
+	for form in works:
+		if str(form).begins_with("carved") and works[form].find_child("IsoPath", true, false) != null: lines += 1
+	checks.append({"check": "all twenty-six mounted (the twenty and the six carvings), drawn, with collision; five carvings draw their path, as in the demo (Grid Tunnels does not)",
+		"ok": whole and lines == 5, "count": works.size(), "path_lines": lines, "drawn": drawn})
 	if works.size() < 20:
 		_finish(folder, result)
 		return
@@ -187,25 +191,28 @@ func run() -> void:
 	await _shot(Vector3(17.0, level + 2.3, 8.7), Vector3(17.0, level + 0.6, -4.0), folder.path_join("east_wing.png"))
 	await _shot(Vector3(-11.0, level + 4.6, 8.2), Vector3(-17.0, level + 0.5, -3.0), folder.path_join("yard_west.png"))
 	await _shot(Vector3(11.0, level + 4.6, 8.2), Vector3(17.0, level + 0.4, -3.0), folder.path_join("yard_east.png"))
+	await _shot(Vector3(-8.0, level + 2.0, -10.2), Vector3(-13.0, level + 1.2, -15.4), folder.path_join("slab_carvings.png"))
+	await _shot(Vector3(0.0, level + 4.4, -9.6), Vector3(0.0, level + 0.9, -15.4), folder.path_join("slab_from_above.png"))
+	await _shot(Vector3(8.0, level + 2.0, -10.2), Vector3(13.0, level + 1.2, -15.4), folder.path_join("slab_dome.png"))
 	await _shot(Vector3(-5.8, level + 1.7, -3.6), Vector3(-10.5, level + 0.3, -7.2), folder.path_join("intersection.png"))
 	await _shot(Vector3(5.8, level + 1.7, 3.8), Vector3(10.0, level + 0.4, 7.0), folder.path_join("field.png"))
 
 	# ---- walking THROUGH ----
-	await _place(_at("tunnel", -2.4, 0))
-	var r := await _path([_at("tunnel", -1.0, 0), _at("tunnel", 1.0, 0), _at("tunnel", 2.4, 0)])
+	await _place(_at("tunnel", -2.7, 0))
+	var r := await _path([_at("tunnel", -1.0, 0), _at("tunnel", 1.0, 0), _at("tunnel", 2.7, 0)])
 	checks.append({"check": "a body walks through the tunnel", "ok": r.reached, "end_local": _local("tunnel", r.end)})
-	await _place(_at("crossing", 0, 2.4))
-	r = await _path([_at("crossing", 0, 1.0), _at("crossing", 0, 0), _at("crossing", 1.0, 0), _at("crossing", 2.4, 0)])
+	await _place(_at("crossing", 0, 2.9))
+	r = await _path([_at("crossing", 0, 1.0), _at("crossing", 0, 0), _at("crossing", 1.0, 0), _at("crossing", 2.9, 0)])
 	checks.append({"check": "a body walks in by the crossing's south door, through its room, out by the east door", "ok": r.reached, "end_local": _local("crossing", r.end)})
-	await _place(_at("dome", 0, 2.6))
-	r = await _path([_at("dome", 0, 1.4), _at("dome", 0, 0)])
+	await _place(_at("dome", 0, 3.4))
+	r = await _path([_at("dome", 0, 1.6), _at("dome", 0, 0)])
 	await _shot(_at("dome", 0.9, -0.9, 1.5), _at("dome", -0.2, 1.9, 1.0), folder.path_join("inside_dome.png"))
-	var r2 := await _path([_at("dome", 0, 1.4), _at("dome", 0, 2.6)])
+	var r2 := await _path([_at("dome", 0, 1.6), _at("dome", 0, 3.4)])
 	checks.append({"check": "a body walks into the dome to its middle and out again", "ok": r.reached and r2.reached, "in": _local("dome", r.end), "out": _local("dome", r2.end)})
-	await _place(_at("thresholds", -0.7, 1.2))
-	r = await _path([_at("thresholds", -0.7, 0), _at("thresholds", -0.7, -1.2)])
-	await _place(_at("thresholds", 0.85, 1.2))
-	r2 = await _path([_at("thresholds", 0.85, 0), _at("thresholds", 0.85, -1.2)])
+	await _place(_at("thresholds", -0.9, 1.2))
+	r = await _path([_at("thresholds", -0.9, 0), _at("thresholds", -0.9, -1.2)])
+	await _place(_at("thresholds", 1.2, 1.2))
+	r2 = await _path([_at("thresholds", 1.2, 0), _at("thresholds", 1.2, -1.2)])
 	var stopped: Vector3 = _local("thresholds", r2.end)
 	checks.append({"check": "a body passes the thresholds' door, and the wall beside it stops a body", "ok": r.reached and not r2.reached and stopped.z > 0.15,
 		"door": _local("thresholds", r.end), "wall_stopped_at": stopped})
@@ -237,6 +244,9 @@ func run() -> void:
 	r2 = await _path(down, 0.45, 0.3)
 	checks.append({"check": "a body walks up the spiral ramp to a metre and back down to the floor", "ok": r.reached and at_top >= 0.9 and r2.reached and body.global_position.y - level < 0.1,
 		"top": snappedf(at_top, 0.01), "back_at": snappedf(body.global_position.y - level, 0.01)})
+	await _place(Vector3(-8.6, level, -7.0))
+	r = await _path([Vector3(-8.6, level, -9.6), Vector3(-6.0, level, -10.8), Vector3(-0.6, level, -10.8), _at("dome", 0, 3.4)])
+	checks.append({"check": "a body walks from the floor onto the north slab, along the row of carvings, to the dome's door", "ok": r.reached, "end": r.end})
 	await _place(_at("gutter_ramp", -1.9, 0.45))
 	r = await _path(_line("gutter_ramp", Vector2(-1.4, 0.45), Vector2(1.25, 0.45)))
 	checks.append({"check": "a body walks up the gutter ramp's lane (it rose >= 0.6 m)", "ok": r.reached and float(r.top) >= 0.6, "top": r.top})
@@ -248,12 +258,12 @@ func run() -> void:
 	game.place_player(Vector3(0, level + 0.3, 8.9))
 
 	# ---- balls ----
-	var across: Vector3 = (_at("thresholds", 0.85, -1.0) - _at("thresholds", 0.85, 1.0)).normalized() * 2.0
-	var rb := _ball(0.11, _at("thresholds", 0.85, 1.0, 0.11), across)
+	var across: Vector3 = (_at("thresholds", 1.2, -1.0) - _at("thresholds", 1.2, 1.0)).normalized() * 2.0
+	var rb := _ball(0.11, _at("thresholds", 1.2, 1.0, 0.11), across)
 	await _wait(2.5)
 	var rubber_at := _local("thresholds", rb.global_position)
 	await _clear_balls()
-	var tb := _ball(0.14, _at("thresholds", 0.85, 1.0, 0.14), across)
+	var tb := _ball(0.14, _at("thresholds", 1.2, 1.0, 0.14), across)
 	await _wait(2.5)
 	var trace_at := _local("thresholds", tb.global_position)
 	checks.append({"check": "a rubber ball rolls under the thresholds' wall; a trace ball does not", "ok": rubber_at.z < -0.3 and trace_at.z > 0.15,

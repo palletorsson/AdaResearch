@@ -46114,13 +46114,14 @@
           "station": "SW",
           "position": [
             -17.0,
-            6.4
+            6.6
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "form": "thresholds",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Thresholds | difference(wall, door, porthole, mousehole) | iso prefab, difference; the boolean floor yard"
           }
@@ -46131,13 +46132,14 @@
           "station": "SW",
           "position": [
             -17.0,
-            2.5
+            2.35
           ],
           "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
             "form": "tunnel",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Tunnel | difference(round_box, arch) | iso prefab, difference; the boolean floor yard"
           }
@@ -46148,32 +46150,145 @@
           "station": "NW",
           "position": [
             -17.0,
-            -2.4
+            -4.2
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "form": "crossing",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Crossing | difference(block, union(arch_x, arch_z, room)) | iso prefab, difference; the boolean floor yard"
           }
         },
         {
-          "id": "iso-dome",
+          "id": "iso-carved-grid",
           "artifact": "iso_prefab",
           "station": "NW",
           "position": [
-            -17.0,
-            -6.9
+            -17.1,
+            -15.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "carved_grid",
+            "finish": "satin",
+            "plaque": true,
+            "editor_label": "Grid Tunnels | difference(cube, spheres along a 3 x 3 grid of tunnels) | iso prefab, difference; the boolean floor yard",
+            "body_turn": 90
+          }
+        },
+        {
+          "id": "iso-carved-walk",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -11.85,
+            -15.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "carved_walk",
+            "finish": "satin",
+            "plaque": true,
+            "editor_label": "Random Walk | difference(cube, faceted spheres along a random walk) | iso prefab, difference; the boolean floor yard",
+            "body_turn": 180
+          }
+        },
+        {
+          "id": "iso-carved-spiral",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -6.6,
+            -15.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "carved_spiral",
+            "finish": "satin",
+            "plaque": true,
+            "editor_label": "Spiral | difference(cube, faceted spheres along a sine spiral) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-dome",
+          "artifact": "iso_prefab",
+          "station": "NE",
+          "position": [
+            0.0,
+            -14.6
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "form": "dome",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Dome | difference(sphere, sphere, door, oculus) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-carved-sphere",
+          "artifact": "iso_prefab",
+          "station": "NE",
+          "position": [
+            7.0,
+            -15.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "carved_sphere",
+            "finish": "satin",
+            "plaque": true,
+            "editor_label": "Sphere + Spiral | difference(sphere, faceted spheres along a sine spiral) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-carved-perlin",
+          "artifact": "iso_prefab",
+          "station": "NE",
+          "position": [
+            11.85,
+            -15.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "carved_perlin",
+            "finish": "satin",
+            "plaque": true,
+            "editor_label": "Sine Field | difference(cube, spheres along a sine-steered path) | iso prefab, difference; the boolean floor yard",
+            "body_turn": 270
+          }
+        },
+        {
+          "id": "iso-carved-branches",
+          "artifact": "iso_prefab",
+          "station": "NE",
+          "position": [
+            17.1,
+            -14.05
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "carved_branches",
+            "finish": "satin",
+            "plaque": true,
+            "editor_label": "Branches | intersection(difference(cube, spheres along a trunk and random branches), half-space) | iso prefab, difference; the boolean floor yard"
           }
         },
         {
@@ -46189,6 +46304,7 @@
           "scale": 1,
           "config": {
             "form": "gutter_ramp",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Gutter ramp | difference(wedge, capsule) | iso prefab, difference; the boolean floor yard"
           }
@@ -46206,6 +46322,7 @@
           "scale": 1,
           "config": {
             "form": "sieve",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Sieve | difference(tilted plate, repeat(sphere)) + legs | iso prefab, difference; the boolean floor yard"
           }
@@ -46223,6 +46340,7 @@
           "scale": 1,
           "config": {
             "form": "hump_bridge",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Hump bridge | difference(intersection(beam, sphere), culvert) | iso prefab, intersection; the boolean floor yard"
           }
@@ -46232,7 +46350,7 @@
           "artifact": "iso_prefab",
           "station": "NW",
           "position": [
-            -10.4,
+            -12.2,
             -8.35
           ],
           "facing": 0,
@@ -46240,6 +46358,7 @@
           "scale": 1,
           "config": {
             "form": "gyroid_screen",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Gyroid screen | intersection(box, shell(gyroid)) + frame | iso prefab, intersection; the boolean floor yard"
           }
@@ -46257,6 +46376,7 @@
           "scale": 1,
           "config": {
             "form": "mould",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Mould | difference(block, sphere)  (A - B) | iso prefab, difference; the boolean floor yard"
           }
@@ -46274,6 +46394,7 @@
           "scale": 1,
           "config": {
             "form": "cast",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Cast | intersection(block, sphere)  (A & B) | iso prefab, intersection; the boolean floor yard"
           }
@@ -46291,6 +46412,7 @@
           "scale": 1,
           "config": {
             "form": "die",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Die | difference(intersection(cube, sphere), pips) | iso prefab, intersection; the boolean floor yard"
           }
@@ -46308,6 +46430,7 @@
           "scale": 1,
           "config": {
             "form": "stones",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Stones | smooth_union(floor, metaballs(3)) | iso prefab, union; the boolean floor yard"
           }
@@ -46325,6 +46448,7 @@
           "scale": 1,
           "config": {
             "form": "mound",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Mound | smooth_union(floor, sphere, k = 0.75) | iso prefab, union; the boolean floor yard"
           }
@@ -46342,6 +46466,7 @@
           "scale": 1,
           "config": {
             "form": "pipe_tee",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Pipe tee | difference(union(pipes, legs), union(bores)) | iso prefab, union; the boolean floor yard"
           }
@@ -46359,6 +46484,7 @@
           "scale": 1,
           "config": {
             "form": "stile",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Stile | union(steps)  beside  smooth_union(floor, steps, k = 0.5) | iso prefab, union; the boolean floor yard"
           }
@@ -46376,6 +46502,7 @@
           "scale": 1,
           "config": {
             "form": "basin",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Basin | difference(round_box, sphere) | iso prefab, difference; the boolean floor yard"
           }
@@ -46393,6 +46520,7 @@
           "scale": 1,
           "config": {
             "form": "chute",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Chute | difference(sweep(trough, curve) + legs, sweep(bore, curve)) | iso prefab, field; the boolean floor yard"
           }
@@ -46410,6 +46538,7 @@
           "scale": 1,
           "config": {
             "form": "funnel",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Funnel | revolve(shell(profile)) + legs | iso prefab, field; the boolean floor yard"
           }
@@ -46427,6 +46556,7 @@
           "scale": 1,
           "config": {
             "form": "boulder",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Boulder | smooth_union(floor, ellipsoid + noise) | iso prefab, field; the boolean floor yard"
           }
@@ -46444,8 +46574,27 @@
           "scale": 1,
           "config": {
             "form": "spiral_ramp",
+            "finish": "satin",
             "plaque": true,
             "editor_label": "Spiral ramp | smooth_union(helix(rise 1 m, 300 deg), post) | iso prefab, field; the boolean floor yard"
+          }
+        },
+        {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0.0,
+            -9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 42.0,
+            "depth": 10.0,
+            "seed": 161,
+            "editor_label": "Side slab / the yard's north room: the six carvings of the Random Boolean Carving and the dome"
           }
         }
       ],
@@ -46664,10 +46813,17 @@
           ]
         },
         {
-          "label": "DIFFERENCE / A WAY THROUGH, A ROOM, AN INSIDE\nEach cut is a place a body can be.",
+          "label": "DIFFERENCE / A WAY THROUGH, A ROOM - AND NORTH, AN INSIDE\nEach cut is a place a body can be.",
           "position": [
             -17.0,
             8.55
+          ]
+        },
+        {
+          "label": "THE RANDOM BOOLEAN CARVING\nCubes and a sphere minus spheres along a random, sine or grid walk.",
+          "position": [
+            -3.5,
+            -9.7
           ]
         },
         {

@@ -13,23 +13,38 @@ extends Node3D
 ##   INTERSECTION cast, hump_bridge, die, gyroid_screen                                   (keep what is shared)
 ##   UNION        stile, mound, stones, pipe_tee                                          (melt, join, then bore)
 ##   FIELD        spiral_ramp, funnel, chute, boulder                                     (twist, revolve, sweep, noise)
+##   CARVINGS     carved_walk, carved_spiral, carved_branches, carved_perlin, carved_grid, carved_sphere
+##
+## The carvings are the Random Boolean Carving (algorithms/proceduralgeneration/constraint_solvers/randomboolean,
+## Palle: "they use sine and random etc to carve in a space in cubes"): its demo's six carvings - a cube minus faceted
+## spheres along a random walk, a sine spiral, a trunk and branches, a sine-steered path, a grid of tunnels, and a sphere
+## minus a spiral - at 0.28 of their size, with the walk that carved them drawn as the demo draws it, an orange line.
 ##
 ## What two convex shapes share is convex, so the cast and the die are rigid bodies (a convex hull) that roll and land;
 ## everything a difference made is concave and stands still (a static concave mesh). That is the physics engine's rule
 ## and the verb's, at once.
 ##
-## `finish`: provenance paints each face by where it came from - orange where a difference cut it (the hall's own
-## CUT_COLOR), sea-green where an intersection trimmed it, the union demo's seam yellow in a smooth union's band, the
-## pale body elsewhere (the hall: "we could make the new faces announce another origin"); cast is one pale material.
+## `finish` (one shader, iso_prefab.gdshader, reading vertex colour as data - where each face came from and how open the
+## air round it is): provenance paints a cut orange (the hall's CUT_COLOR), a trim sea-green, a smooth union's band
+## yellow (the hall: "we could make the new faces announce another origin"); satin is the Random Boolean Carving's own
+## material (0.7 0.7 0.8, metallic 0.3, roughness 0.7, its demo's SSAO stood in for by baked occlusion; the inside of a cut
+## a little warmer); cast is one pale material.
 ##
 ## Geometry: tools/iso_prefabs.py (the expressions, their checks, the march) -> bake_forms.gd -> forms/<form>.res.
 ## Walked in the tower by tools/probes/iso_prefabs_walk.gd.
 const FORMS_DIR := "res://commons/artifacts/iso_prefabs/forms/"
-const FORMS := ["tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder"]
-const PALE := Color(0.80, 0.78, 0.74)
+const FORMS := ["tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere"]
+const FINISHES := ["provenance", "satin", "cast"]
+const SHADER := preload("res://commons/artifacts/iso_prefabs/iso_prefab.gdshader")
+const PATH_COLOUR := Color(1, 0.5, 0)                 # advanced_carver.gd path_line_color
 
-@export_enum("tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder") var form := "tunnel"
-@export_enum("provenance", "cast") var finish := "provenance"
+@export_enum("tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere") var form := "tunnel"
+@export_enum("provenance", "satin", "cast") var finish := "provenance"
+## A carving's path drawn as its demo draws it (an orange line); Grid Tunnels has none, as in the demo.
+@export var path_line := true
+## The body (mesh, collision, path line) turned about y in quarter turns, the plaque left in front: a carving can show its
+## most-carved face to the visitor and stay exactly the demo's object. (Not `turn`: that is a fit strategy's id.)
+@export var body_turn := 0
 ## A small lectern beside the piece with its name, its expression and what it makes possible (the boolean floor's
 ## samples carry one; a piece placed as part of a work does not).
 @export var plaque := false
@@ -40,18 +55,21 @@ static var _materials := {}
 var _body: CollisionObject3D
 var _mesh: MeshInstance3D
 var _sign: Node3D
+var _line: Node3D
 var _built := ""
 
 
 func _ready() -> void:
-	for key in ["form", "finish", "plaque", "frozen"]:
+	for key in ["form", "finish", "plaque", "frozen", "path_line", "body_turn"]:
 		if has_meta("config_" + key): _take({key: get_meta("config_" + key)})
 	_build()
 
 
 func _take(config_data: Dictionary) -> void:
 	if config_data.has("form") and str(config_data["form"]) in FORMS: form = str(config_data["form"])
-	if config_data.has("finish") and str(config_data["finish"]) in ["provenance", "cast"]: finish = str(config_data["finish"])
+	if config_data.has("finish") and str(config_data["finish"]) in FINISHES: finish = str(config_data["finish"])
+	if config_data.has("path_line"): path_line = str(config_data["path_line"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
+	if config_data.has("body_turn"): body_turn = posmod(roundi(float(str(config_data["body_turn"])) / 90.0) * 90, 360)
 	if config_data.has("plaque"): plaque = str(config_data["plaque"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
 	if config_data.has("frozen"): frozen = str(config_data["frozen"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
 
@@ -62,7 +80,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _build() -> void:
-	var key := "%s|%s|%s|%s" % [form, finish, plaque, frozen]
+	var key := "%s|%s|%s|%s|%s|%s" % [form, finish, plaque, frozen, path_line, body_turn]
 	if key == _built: return
 	var mesh := load(FORMS_DIR + form + ".res") as ArrayMesh
 	if mesh == null:
@@ -71,10 +89,15 @@ func _build() -> void:
 	if _built.get_slice("|", 0) != form or _body == null:
 		_build_body(mesh)
 	_mesh.material_override = _material(finish)
+	if _body is StaticBody3D: _body.rotation_degrees.y = float(body_turn)
 	if _sign != null:
 		_sign.queue_free()
 		_sign = null
 	if plaque: _sign = _build_plaque(mesh)
+	if _line != null:
+		_line.queue_free()
+		_line = null
+	if path_line and bool(mesh.get_meta("line", false)): _line = _build_path_line(mesh)
 	if _body is RigidBody3D: (_body as RigidBody3D).freeze = frozen
 	_built = key
 
@@ -117,19 +140,52 @@ func _build_body(mesh: ArrayMesh) -> void:
 	add_child(_body)
 
 
-func _material(which: String) -> StandardMaterial3D:
+## One shared material per finish (every placed piece of a finish batches with the others).
+func _material(which: String) -> ShaderMaterial:
 	if _materials.has(which): return _materials[which]
-	var m := StandardMaterial3D.new()
-	m.roughness = 0.78
-	if which == "provenance":
-		m.vertex_color_use_as_albedo = true
-		m.vertex_color_is_srgb = true
-		m.albedo_color = Color.WHITE
-	else:
-		m.albedo_color = PALE
-		m.roughness = 0.86
+	var m := ShaderMaterial.new()
+	m.shader = SHADER
+	m.set_shader_parameter("finish", maxi(0, FINISHES.find(which)))
 	_materials[which] = m
 	return m
+
+
+## The walk that carved a carving, drawn as its demo draws it - orange, unlit - as thin tubes (a one-pixel line
+## shimmers in a headset), one per segment, all in one MultiMesh.
+func _build_path_line(mesh: ArrayMesh) -> Node3D:
+	var segments := []
+	for path in mesh.get_meta("paths", []):
+		var line: PackedVector3Array = path
+		for i in line.size() - 1: segments.append([line[i], line[i + 1]])
+	if segments.is_empty(): return null
+	var tube := CylinderMesh.new()
+	tube.top_radius = 0.011
+	tube.bottom_radius = 0.011
+	tube.height = 1.0
+	tube.radial_segments = 6
+	tube.rings = 1
+	var many := MultiMesh.new()
+	many.transform_format = MultiMesh.TRANSFORM_3D
+	many.mesh = tube
+	many.instance_count = segments.size()
+	for i in segments.size():
+		var a: Vector3 = segments[i][0]
+		var b: Vector3 = segments[i][1]
+		var along := b - a
+		var up := along.normalized() if along.length() > 1e-5 else Vector3.UP
+		var side := up.cross(Vector3.FORWARD if absf(up.dot(Vector3.FORWARD)) < 0.9 else Vector3.RIGHT).normalized()
+		var basis := Basis(side, up * maxf(along.length(), 0.001), side.cross(up).normalized())
+		many.set_instance_transform(i, Transform3D(basis, (a + b) * 0.5))
+	var holder := MultiMeshInstance3D.new()
+	holder.name = "IsoPath"
+	holder.multimesh = many
+	var paint := StandardMaterial3D.new()
+	paint.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	paint.albedo_color = PATH_COLOUR
+	holder.material_override = paint
+	holder.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	(_body if _body != null else self).add_child(holder)
+	return holder
 
 
 ## A lectern at the piece's south-west corner, turned to a visitor coming from the south.
