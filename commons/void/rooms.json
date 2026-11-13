@@ -44984,7 +44984,7 @@
     },
     {
       "map": "ISO_LookupTable",
-      "title": "ISO_LookupTable",
+      "title": "Isosurfaces / Walk the threshold",
       "origin": false,
       "walls": [],
       "artifacts": [
@@ -45074,22 +45074,20 @@
           "id": "f2_mc_cave_7_29",
           "artifact": "mc_cave",
           "position": [
-            0.0,
-            0.0
+            16.8,
+            0
           ],
-          "height": 2.98,
-          "facing": 90.0,
-          "scale": 0.07,
-          "station": "SW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NE",
           "config": {
+            "threshold_walk": true,
             "fit": {
               "strategies": [
-                "move",
-                "raise",
-                "scale_area",
-                "turn"
+                "move"
               ],
-              "note": "fit pass: edge: north 3.0 m (0 of 5 samples past the slab have ground); moved 5.0 m"
+              "note": "Two slab-level passages in the east bay. The live cut controls both rock and collision."
             }
           }
         },
@@ -45097,7 +45095,7 @@
           "id": "f2_metaball_world_15_30",
           "artifact": "metaball_world",
           "position": [
-            15,
+            7,
             -8
           ],
           "height": 2,
@@ -45109,7 +45107,12 @@
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "WALK THE CUT\nA / Main passage. B / Pinch passage. Change the threshold from either end.",
+          "position": [16.8, 6.1]
+        }
+      ],
       "supply_leads": false
     },
     {

@@ -293,6 +293,12 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	artifact.name = "Artifact"
 	if item.artifact == "entropy_door_dynamics" and bool(item.get("config",{}).get("void_door_frames",false)):
 		artifact.set_script(preload("res://commons/void/entropy_door_walkthrough.gd"))
+	if item.artifact == "mc_cave" and bool(item.get("config", {}).get("threshold_walk", false)):
+		# This placement samples a route-sized field with the CPU marcher so
+		# the walkable boundary is also available without a compute device.
+		for child in artifact.get_children():
+			child.free()
+		artifact.set_script(preload("res://commons/void/trials/isosurfaces/cave_threshold.gd"))
 	if artifact_trial == "color_flashlight" and item.artifact == "flashlight_demo":
 		artifact.set_script(preload("res://commons/void/trials/color_flashlight/close_station.gd"))
 	if artifact_trial == "wavefunctions_04" and item.artifact == "math_objects":
