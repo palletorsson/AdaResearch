@@ -299,6 +299,8 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		for child in artifact.get_children():
 			child.free()
 		artifact.set_script(preload("res://commons/void/trials/isosurfaces/cave_threshold.gd"))
+	if item.artifact == "iso_shapes_console" and bool(item.get("config", {}).get("overlay_comparison", false)):
+		artifact.set_script(preload("res://commons/void/trials/isosurfaces/shapes_console.gd"))
 	if artifact_trial == "color_flashlight" and item.artifact == "flashlight_demo":
 		artifact.set_script(preload("res://commons/void/trials/color_flashlight/close_station.gd"))
 	if artifact_trial == "wavefunctions_04" and item.artifact == "math_objects":

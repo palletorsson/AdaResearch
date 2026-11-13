@@ -45117,7 +45117,7 @@
     },
     {
       "map": "ISO_ShapesGallery",
-      "title": "ISO_ShapesGallery",
+      "title": "Isosurfaces / What survives the cut",
       "origin": false,
       "walls": [],
       "artifacts": [
@@ -45126,19 +45126,19 @@
           "artifact": "iso_shapes_console",
           "station": "SE",
           "position": [
-            0.0,
-            -2.99
+            -1.5,
+            3.2
           ],
           "facing": 0,
           "height": 0,
-          "scale": 0.66,
+          "scale": 1,
           "config": {
+            "overlay_comparison": true,
             "fit": {
               "strategies": [
-                "move",
-                "scale_area"
+                "move"
               ],
-              "note": "Two columns stood in the 14.8 m console, and it lay over the gallery: 0.66 (13.6 x 5 m) north of the gallery, inside the column rows."
+              "note": "The compact comparison console faces the south arrival aisle."
             }
           }
         },
@@ -45147,21 +45147,21 @@
           "artifact": "mc_shapes_gallery",
           "station": "NE",
           "position": [
-            0.0,
-            -6.0
+            0,
+            5.75
           ],
-          "facing": 180,
-          "height": 3,
+          "facing": 0,
+          "height": 2.85,
           "scale": 1,
           "config": {
-            "spacing": "5.5",
-            "shape_scale": "0.09",
+            "spacing": "4.4",
+            "shape_scale": "0.06",
             "preserve_empty_result": "true",
             "fit": {
               "strategies": [
                 "move"
               ],
-              "note": "1.1 m south, to leave the console its strip."
+              "note": "Six specimens sit between the shafts with room to walk around the comparison."
             }
           }
         },
@@ -45190,8 +45190,8 @@
           "artifact": "mc_sculpt_vr",
           "station": "SE",
           "position": [
-            0.0,
-            6.5
+            17.5,
+            1.5
           ],
           "facing": 180,
           "height": 1,
@@ -45201,7 +45201,7 @@
               "strategies": [
                 "move"
               ],
-              "note": "overlap check: stands in f1_mc_shapes_gallery_14_21; moved 1.5 m"
+              "note": "The sculpting tool has its own bay east of shaft B, clear of the arrival aisle."
             }
           }
         },
@@ -45228,7 +45228,15 @@
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "HOLD A SHAPE\nThen press LEVEL and OVERLAY to find what disappeared.",
+          "position": [
+            -1.5,
+            7.35
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
