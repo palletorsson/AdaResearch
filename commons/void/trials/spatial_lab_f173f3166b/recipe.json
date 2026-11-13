@@ -1,0 +1,20 @@
+{
+  "recipe": "lab_domino",
+  "bindings": {
+    "source": "construction_cube",
+    "count": 9,
+    "size": 0.65,
+    "ratio": 1.18,
+    "gap": 0.3,
+    "lean": 0
+  },
+  "recipe_hash": "f0b2c32c171703fa1f24319bb64f2d080752987dd06b434c6cba1a7d84c81fa4",
+  "sources": {
+    "construction_cube": {
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn",
+      "fingerprint": "ef7925945dc69fa114f21209bd819beb3deb50fd7a88e494630263e2c66a096c"
+    }
+  },
+  "created_at": "2026-11-13T08:20:45+0100",
+  "job": "f173f3166b99433d991b6e2beb389dac"
+}

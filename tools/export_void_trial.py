@@ -39,7 +39,7 @@ recipe_tokens=set()
 for registry_name in ['modular.json','spatial_lab.json']:
     registry_path=ROOT/'commons/artifacts/registry'/registry_name
     if registry_path.exists():
-        recipe_tokens.update(key for key,value in json.loads(registry_path.read_text(encoding='utf8'))['artifacts'].items() if value.get('scene')=='res://commons/modular/recipe_area.tscn')
+        recipe_tokens.update(key for key,value in json.loads(registry_path.read_text(encoding='utf8'))['artifacts'].items() if value.get('scene') in ('res://commons/modular/recipe_area.tscn','res://commons/modular/sphere_fractal_live.tscn'))
 for floor in manifest['floors'].values():
     for item in floor['artifacts'].values():
         if item['parts']:

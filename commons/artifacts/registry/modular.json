@@ -8683,6 +8683,242 @@
     ],
     "expr": "one square portal × translation and rotation"
    }
+  },
+  "mod_lab_backrooms": {
+   "lookup_name": "mod_lab_backrooms",
+   "name": "modular · Backrooms / rooms within a room",
+   "description": "Repeated rooms, alternating doorways, short connecting corridors. Reuses construction prefabs fitted to structural sizes. Remove the roofs to inspect; save to move, rotate or copy each wall separately.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_backrooms"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    3.78,
+    2.79,
+    12.18
+   ],
+   "size_group": "medium",
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_backrooms",
+    "chapter": "transformation",
+    "from": [
+     "lab_packed",
+     "lab_warehouse"
+    ],
+    "expr": "panel → room → translate × repeat; scale + openings"
+   }
+  },
+  "mod_lab_domino": {
+   "lookup_name": "mod_lab_domino",
+   "name": "Growing domino study",
+   "description": "A small upright becomes an oversized neighbour. Change growth, distance and lean to compose a cascade. This is a static arrangement study; toppling dynamics are not enabled.",
+   "category": "modular",
+   "complexity": "intermediate",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_domino"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "tags": [
+    "modular",
+    "transformation",
+    "array"
+   ],
+   "modular": {
+    "term": "lab_domino",
+    "chapter": "transformation",
+    "from": [
+     "lab_packed"
+    ],
+    "expr": "A small upright becomes an oversized neighbour. Change growth, distance and lean to compose a cascade. This is a static arrangement study; toppling dynamics are not enabled."
+   }
+  },
+  "mod_lab_thresholds": {
+   "lookup_name": "mod_lab_thresholds",
+   "name": "Narrowing / turning thresholds",
+   "description": "The same doorway repeats until the body no longer fits. Twist the frames to turn a familiar opening into an obstacle. Reduced headroom and below-floor geometry are findings, not guaranteed routes.",
+   "category": "modular",
+   "complexity": "intermediate",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_thresholds"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "tags": [
+    "modular",
+    "transformation",
+    "array"
+   ],
+   "modular": {
+    "term": "lab_thresholds",
+    "chapter": "transformation",
+    "from": [
+     "lab_backrooms"
+    ],
+    "expr": "The same doorway repeats until the body no longer fits. Twist the frames to turn a familiar opening into an obstacle. Reduced headroom and below-floor geometry are findings, not guaranteed routes."
+   }
+  },
+  "mod_lab_turning_passage": {
+   "lookup_name": "mod_lab_turning_passage",
+   "name": "Turning / twisting passage",
+   "description": "Thick frames turn into architecture. Change yaw, pitch and roll separately. Ribs overlap by design; extreme bends can intersect themselves. Walking and sliding need a later placement test.",
+   "category": "modular",
+   "complexity": "intermediate",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_turning_passage"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "tags": [
+    "modular",
+    "transformation"
+   ],
+   "modular": {
+    "term": "lab_turning_passage",
+    "chapter": "transformation",
+    "from": [
+     "lab_backrooms"
+    ],
+    "expr": "Thick frames turn into architecture. Change yaw, pitch and roll separately. Ribs overlap by design; extreme bends can intersect themselves. Walking and sliding need a later placement test."
+   }
+  },
+  "mod_lab_branching": {
+   "lookup_name": "mod_lab_branching",
+   "name": "Branching scaffold",
+   "description": "Each beam produces two smaller beams at its tip. One rule builds the whole tree; every branch remains a separate editable part. At five generations the finite study has 63 beams.",
+   "category": "modular",
+   "complexity": "intermediate",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_branching"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "modular": {
+    "term": "lab_branching",
+    "chapter": "fractals",
+    "from": [
+     "lab_backrooms"
+    ],
+    "expr": "Each beam produces two smaller beams at its tip. One rule builds the whole tree; every branch remains a separate editable part. At five generations the finite study has 63 beams."
+   }
+  },
+  "mod_lab_seeded_field": {
+   "lookup_name": "mod_lab_seeded_field",
+   "name": "Seeded / unsettled field",
+   "description": "Start from a grid, then displace, turn and omit pieces with a repeatable seed. Heights vary too. The first cell stays as an anchor; changing missing fraction leaves surviving pieces in place.",
+   "category": "modular",
+   "complexity": "intermediate",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_seeded_field"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "tags": [
+    "modular",
+    "randomness",
+    "array"
+   ],
+   "modular": {
+    "term": "lab_seeded_field",
+    "chapter": "randomness",
+    "from": [
+     "lab_packed"
+    ],
+    "expr": "Start from a grid, then displace, turn and omit pieces with a repeatable seed. Heights vary too. The first cell stays as an anchor; changing missing fraction leaves surviving pieces in place."
+   }
+  },
+  "mod_lab_fractal_assembly": {
+   "lookup_name": "mod_lab_fractal_assembly",
+   "name": "Fractal assemblage / four prefab roles",
+   "description": "Repeat an assembly, not just a shape: branches carry joints and platforms, with a different prefab at the tips. Each child inherits its parent frame, turns in 3D and shrinks. Change any of the four prefab roles. A finite recursive study, with up to 147 independently editable parts; touching or intersecting pieces are not a tested load-bearing structure.",
+   "category": "modular",
+   "complexity": "intermediate",
+   "scene": "res://commons/modular/recipe_area.tscn",
+   "default_params": {
+    "recipe": "lab_fractal_assembly"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "modular": {
+    "term": "lab_fractal_assembly",
+    "chapter": "fractals",
+    "expr": "Repeat an assembly, not just a shape: branches carry joints and platforms, with a different prefab at the tips. Each child inherits its parent frame, turns in 3D and shrinks. Change any of the four prefab roles. A finite recursive study, with up to 147 independently editable parts; touching or intersecting pieces are not a tested load-bearing structure.",
+    "from": [
+     "lab_branching",
+     "lab_radial",
+     "lab_growing"
+    ]
+   }
+  },
+  "mod_lab_sphere_fractal": {
+   "lookup_name": "mod_lab_sphere_fractal",
+   "name": "modular · 3D Sphere Fractal / five-way growth",
+   "description": "3D Sphere Fractal / five-way growth = From 11 / 3D Sphere MultiMesh Fractal in Fractal RecursiveTrees: five children inherit each parent’s rotation, shrink and sag, with independent spin and some reversed branches. Preview motion, pause on a pose and save every part separately. Four levels give 156 parts; sag is procedural, not simulated gravity.. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
+   "category": "modular",
+   "complexity": "beginner",
+   "scene": "res://commons/modular/sphere_fractal_live.tscn",
+   "default_params": {
+    "recipe": "lab_sphere_fractal"
+   },
+   "configure_before_ready": true,
+   "map_ready": true,
+   "include_in_map_data": true,
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "size_group": "compact",
+   "tags": [
+    "modular",
+    "fractals"
+   ],
+   "dev_themes": [
+    "modular",
+    "construction"
+   ],
+   "map_sequences": [],
+   "modular": {
+    "term": "lab_sphere_fractal",
+    "chapter": "fractals",
+    "from": [
+     "lab_fractal_assembly"
+    ],
+    "expr": "From 11 / 3D Sphere MultiMesh Fractal in Fractal RecursiveTrees: five children inherit each parent’s rotation, shrink and sag, with independent spin and some reversed branches. Preview motion, pause on a pose and save every part separately. Four levels give 156 parts; sag is procedural, not simulated gravity."
+   }
   }
  }
 }

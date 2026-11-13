@@ -117922,6 +117922,380 @@
           ]
         }
       }
+    },
+    "lab_backrooms": {
+      "chapter": "transformation",
+      "label": "Backrooms / rooms within a room",
+      "expr": "panel → room → translate × repeat; scale + openings",
+      "parameters": {
+        "source": "timber_panel_2x2",
+        "count": 3,
+        "size": 1,
+        "opening": 1.4,
+        "corridor": 1.2,
+        "roof": 1
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "room_chain",
+        "source": {
+          "arg": "source"
+        },
+        "count": {
+          "arg": "count"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "opening": {
+          "arg": "opening"
+        },
+        "corridor": {
+          "arg": "corridor"
+        },
+        "roof": {
+          "arg": "roof"
+        }
+      },
+      "from": [
+        "lab_packed",
+        "lab_warehouse"
+      ]
+    },
+    "lab_domino": {
+      "chapter": "transformation",
+      "label": "Growing domino study",
+      "expr": "A small upright becomes an oversized neighbour. Change growth, distance and lean to compose a cascade. This is a static arrangement study; toppling dynamics are not enabled.",
+      "parameters": {
+        "source": "construction_cube",
+        "count": 9,
+        "size": 0.65,
+        "ratio": 1.18,
+        "gap": 0.3,
+        "lean": 0
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "spatial_study",
+        "kind": "domino",
+        "source": {
+          "arg": "source"
+        },
+        "count": {
+          "arg": "count"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "ratio": {
+          "arg": "ratio"
+        },
+        "gap": {
+          "arg": "gap"
+        },
+        "lean": {
+          "arg": "lean"
+        }
+      },
+      "from": [
+        "lab_packed"
+      ]
+    },
+    "lab_thresholds": {
+      "chapter": "transformation",
+      "label": "Narrowing / turning thresholds",
+      "expr": "The same doorway repeats until the body no longer fits. Twist the frames to turn a familiar opening into an obstacle. Reduced headroom and below-floor geometry are findings, not guaranteed routes.",
+      "parameters": {
+        "source": "timber_panel_2x2",
+        "count": 6,
+        "size": 1,
+        "opening": 2.4,
+        "ratio": 0.9,
+        "gap": 1.2,
+        "twist": 0
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "spatial_study",
+        "kind": "threshold",
+        "source": {
+          "arg": "source"
+        },
+        "count": {
+          "arg": "count"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "opening": {
+          "arg": "opening"
+        },
+        "ratio": {
+          "arg": "ratio"
+        },
+        "gap": {
+          "arg": "gap"
+        },
+        "twist": {
+          "arg": "twist"
+        }
+      },
+      "from": [
+        "lab_backrooms"
+      ]
+    },
+    "lab_turning_passage": {
+      "chapter": "transformation",
+      "label": "Turning / twisting passage",
+      "expr": "Thick frames turn into architecture. Change yaw, pitch and roll separately. Ribs overlap by design; extreme bends can intersect themselves. Walking and sliding need a later placement test.",
+      "parameters": {
+        "source": "timber_panel_2x2",
+        "count": 12,
+        "size": 1,
+        "opening": 2.4,
+        "gap": 0.7,
+        "turn": 8,
+        "pitch": 0,
+        "twist": 0
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "spatial_study",
+        "kind": "passage",
+        "source": {
+          "arg": "source"
+        },
+        "count": {
+          "arg": "count"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "opening": {
+          "arg": "opening"
+        },
+        "gap": {
+          "arg": "gap"
+        },
+        "turn": {
+          "arg": "turn"
+        },
+        "pitch": {
+          "arg": "pitch"
+        },
+        "twist": {
+          "arg": "twist"
+        }
+      },
+      "from": [
+        "lab_backrooms"
+      ]
+    },
+    "lab_branching": {
+      "chapter": "fractals",
+      "label": "Branching scaffold",
+      "expr": "Each beam produces two smaller beams at its tip. One rule builds the whole tree; every branch remains a separate editable part. At five generations the finite study has 63 beams.",
+      "parameters": {
+        "source": "timber_plank_2m",
+        "depth": 3,
+        "size": 0.65,
+        "ratio": 0.7,
+        "angle": 32
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "spatial_study",
+        "kind": "tree",
+        "source": {
+          "arg": "source"
+        },
+        "depth": {
+          "arg": "depth"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "ratio": {
+          "arg": "ratio"
+        },
+        "angle": {
+          "arg": "angle"
+        }
+      },
+      "from": [
+        "lab_backrooms"
+      ]
+    },
+    "lab_seeded_field": {
+      "chapter": "randomness",
+      "label": "Seeded / unsettled field",
+      "expr": "Start from a grid, then displace, turn and omit pieces with a repeatable seed. Heights vary too. The first cell stays as an anchor; changing missing fraction leaves surviving pieces in place.",
+      "parameters": {
+        "source": "construction_cube",
+        "columns": 5,
+        "rows": 5,
+        "size": 0.7,
+        "spacing": 1.4,
+        "scatter": 0.45,
+        "angle": 35,
+        "missing": 0.18,
+        "seed": 17
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "spatial_study",
+        "kind": "random",
+        "source": {
+          "arg": "source"
+        },
+        "columns": {
+          "arg": "columns"
+        },
+        "rows": {
+          "arg": "rows"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "spacing": {
+          "arg": "spacing"
+        },
+        "scatter": {
+          "arg": "scatter"
+        },
+        "angle": {
+          "arg": "angle"
+        },
+        "missing": {
+          "arg": "missing"
+        },
+        "seed": {
+          "arg": "seed"
+        }
+      },
+      "from": [
+        "lab_packed"
+      ]
+    },
+    "lab_fractal_assembly": {
+      "chapter": "fractals",
+      "label": "Fractal assemblage / four prefab roles",
+      "expr": "Repeat an assembly, not just a shape: branches carry joints and platforms, with a different prefab at the tips. Each child inherits its parent frame, turns in 3D and shrinks. Change any of the four prefab roles. A finite recursive study, with up to 147 independently editable parts; touching or intersecting pieces are not a tested load-bearing structure.",
+      "parameters": {
+        "source": "timber_plank_2m",
+        "joint_source": "construction_cube",
+        "deck_source": "timber_panel_1x1",
+        "tip_source": "traffic_pyramid_5",
+        "depth": 3,
+        "branches": 3,
+        "size": 0.85,
+        "ratio": 0.66,
+        "angle": 42,
+        "twist": 35
+      },
+      "editor_adapter": "recipe_area",
+      "build": {
+        "op": "spatial_study",
+        "kind": "fractal_assembly",
+        "source": {
+          "arg": "source"
+        },
+        "joint_source": {
+          "arg": "joint_source"
+        },
+        "deck_source": {
+          "arg": "deck_source"
+        },
+        "tip_source": {
+          "arg": "tip_source"
+        },
+        "depth": {
+          "arg": "depth"
+        },
+        "branches": {
+          "arg": "branches"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "ratio": {
+          "arg": "ratio"
+        },
+        "angle": {
+          "arg": "angle"
+        },
+        "twist": {
+          "arg": "twist"
+        }
+      },
+      "from": [
+        "lab_branching",
+        "lab_radial",
+        "lab_growing"
+      ]
+    },
+    "lab_sphere_fractal": {
+      "chapter": "fractals",
+      "label": "3D Sphere Fractal / five-way growth",
+      "expr": "From 11 / 3D Sphere MultiMesh Fractal in Fractal RecursiveTrees: five children inherit each parent’s rotation, shrink and sag, with independent spin and some reversed branches. Preview motion, pause on a pose and save every part separately. Four levels give 156 parts; sag is procedural, not simulated gravity.",
+      "parameters": {
+        "source": "trace_point_ball",
+        "inner_source": "trace_point_ball",
+        "tip_source": "construction_cube",
+        "depth": 4,
+        "size": 1.2,
+        "ratio": 0.5,
+        "spacing": 1.5,
+        "sag": 20,
+        "speed": 22.5,
+        "reverse": 0.25,
+        "seed": 17,
+        "phase": 0
+      },
+      "editor_adapter": "sphere_fractal_live",
+      "build": {
+        "op": "spatial_study",
+        "kind": "sphere_fractal",
+        "source": {
+          "arg": "source"
+        },
+        "inner_source": {
+          "arg": "inner_source"
+        },
+        "tip_source": {
+          "arg": "tip_source"
+        },
+        "depth": {
+          "arg": "depth"
+        },
+        "size": {
+          "arg": "size"
+        },
+        "ratio": {
+          "arg": "ratio"
+        },
+        "spacing": {
+          "arg": "spacing"
+        },
+        "sag": {
+          "arg": "sag"
+        },
+        "speed": {
+          "arg": "speed"
+        },
+        "reverse": {
+          "arg": "reverse"
+        },
+        "seed": {
+          "arg": "seed"
+        },
+        "phase": {
+          "arg": "phase"
+        }
+      },
+      "from": [
+        "lab_fractal_assembly"
+      ]
     }
   },
   "track": [

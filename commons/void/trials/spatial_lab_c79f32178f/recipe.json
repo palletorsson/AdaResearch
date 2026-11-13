@@ -1,0 +1,23 @@
+{
+  "recipe": "lab_seeded_field",
+  "bindings": {
+    "source": "construction_cube",
+    "columns": 5,
+    "rows": 5,
+    "size": 0.7,
+    "spacing": 1.4,
+    "scatter": 0.45,
+    "angle": 35,
+    "missing": 0.18,
+    "seed": 17
+  },
+  "recipe_hash": "31b44f28f3a151ad469b372ad52f70440ef3d78c7ed7dd47af63b205682b99ca",
+  "sources": {
+    "construction_cube": {
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn",
+      "fingerprint": "ef7925945dc69fa114f21209bd819beb3deb50fd7a88e494630263e2c66a096c"
+    }
+  },
+  "created_at": "2026-11-13T08:25:13+0100",
+  "job": "c79f32178ff543168c25995aa8b59f32"
+}

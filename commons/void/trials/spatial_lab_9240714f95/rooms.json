@@ -1,0 +1,69 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "title": "Lab variation / lab_sphere_fractal",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "variation",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_sphere_fractal",
+            "bindings": {
+              "source": "trace_point_ball",
+              "inner_source": "trace_point_ball",
+              "tip_source": "construction_cube",
+              "depth": 4,
+              "size": 1.2,
+              "ratio": 0.5,
+              "spacing": 1.5,
+              "sag": 20,
+              "speed": 22.5,
+              "reverse": 0.25,
+              "seed": 17,
+              "phase": 0
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

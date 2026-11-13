@@ -1,0 +1,36 @@
+{
+  "recipe": "lab_fractal_assembly",
+  "bindings": {
+    "source": "construction_cube",
+    "joint_source": "trace_point_ball",
+    "deck_source": "timber_panel_1x1",
+    "tip_source": "pentagonal_bipyramid_7",
+    "depth": 3,
+    "branches": 3,
+    "size": 0.8,
+    "ratio": 0.78,
+    "angle": 18,
+    "twist": 75
+  },
+  "recipe_hash": "9380fe3340f1cb15bd65a24dc3867f4d8183450eb81a9dd616be532dbf51e3f8",
+  "sources": {
+    "construction_cube": {
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn",
+      "fingerprint": "ef7925945dc69fa114f21209bd819beb3deb50fd7a88e494630263e2c66a096c"
+    },
+    "trace_point_ball": {
+      "scene": "res://commons/artifacts/primitive_encounters/trace_point_ball.tscn",
+      "fingerprint": "9daca5477c0e17c8f893638fa207bb31b6c88c2d19ef57425977a4bca823d577"
+    },
+    "timber_panel_1x1": {
+      "scene": "res://commons/artifacts/primitive_encounters/timber_panel_1x1.tscn",
+      "fingerprint": "b5669e252a210fe6b232aec0ac633dd48245dc8da6e7f90f2e16078c18ec54e9"
+    },
+    "pentagonal_bipyramid_7": {
+      "scene": "res://commons/artifacts/primitive_encounters/pentagonal_bipyramid_7.tscn",
+      "fingerprint": "6f71e760f65787bba52f6ce5f1635edfe935d58c7c055e32e7119da47de83721"
+    }
+  },
+  "created_at": "2026-11-13T08:53:31+0100",
+  "job": "ab97e953fe2f404b93f537e75cf18314"
+}

@@ -76,6 +76,10 @@ static func build(expr: Dictionary, terms: Dictionary, depth: int = 0) -> Node3D
 	if expr.has("p"):
 		return _primitive(expr)
 	match str(expr.get("op", "")):
+		"spatial_study":
+			return build(preload("res://commons/modular/spatial_studies.gd").expression(expr), terms, depth)
+		"room_chain":
+			return build(preload("res://commons/modular/room_chain.gd").expression(expr), terms, depth)
 		"compose":
 			return _compose(expr, terms, depth)
 		"associate":
@@ -531,6 +535,8 @@ static func _prefab(expr: Dictionary) -> Node3D:
 	if bool(expr.get("lab_input", false)):
 		var input: Node3D = load("res://commons/modular/lab_input.gd").new()
 		input.token = token
+		if expr.get("fit_box") is Array:
+			input.fit_box = Vector3(expr.fit_box[0],expr.fit_box[1],expr.fit_box[2])
 		input.set_meta("prefab", token)
 		return input
 	if _prefab_catalog.is_empty():

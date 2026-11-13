@@ -20,6 +20,42 @@
         4,
         10
       ]
+    },
+    "sphere_fractal_live": {
+      "lookup_name": "sphere_fractal_live",
+      "name": "Living sphere fractal",
+      "scene": "res://commons/modular/sphere_fractal_live.tscn",
+      "description": "Five children inherit spin and sag; runtime speed, size and depth preserve the saved editor offsets.",
+      "category": "fractals",
+      "dev_category": "fractals",
+      "complexity": "intermediate",
+      "tags": [
+        "fractal",
+        "lab",
+        "editable",
+        "motion"
+      ],
+      "configure_before_ready": true,
+      "parameters": {},
+      "qfep_connection": "Local inherited rules produce an organic whole; reversed branches resist a single collective direction."
+    },
+    "sphere_fractal_controls": {
+      "lookup_name": "sphere_fractal_controls",
+      "name": "Sphere fractal controls",
+      "scene": "res://commons/modular/sphere_fractal_controls.tscn",
+      "description": "Physical speed, size and depth sliders linked to a living fractal placement. Speed zero holds the pose.",
+      "category": "fractals",
+      "dev_category": "fractals",
+      "complexity": "intermediate",
+      "tags": [
+        "fractal",
+        "lab",
+        "editable",
+        "motion"
+      ],
+      "configure_before_ready": true,
+      "parameters": {},
+      "qfep_connection": "Local inherited rules produce an organic whole; reversed branches resist a single collective direction."
     }
   }
 }

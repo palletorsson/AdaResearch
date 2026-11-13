@@ -36,14 +36,15 @@ def build() -> dict:
     for tid, t in terms.items():
         token = f"mod_{tid}"
         chapter = t.get("chapter", "")
-        editable_recipe = t.get("editor_adapter") == "recipe_area"
+        adapter = t.get("editor_adapter")
+        editable_recipe = adapter in ("recipe_area", "sphere_fractal_live")
         artifacts[token] = {
             "lookup_name": token,
             "name": f"modular · {t.get('label', tid)}",
             "description": f"{t.get('label', tid)} = {t.get('expr', '')}. A term of the modular class system (commons/modular/terms.json), built from its parents at ready.",
             "category": "modular",
             "complexity": "beginner",
-            "scene": "res://commons/modular/recipe_area.tscn" if editable_recipe else SCENE,
+            "scene": f"res://commons/modular/{adapter}.tscn" if editable_recipe else SCENE,
             "default_params": {"recipe": tid} if editable_recipe else {"term": tid},
             "configure_before_ready": True,
             "map_ready": True,

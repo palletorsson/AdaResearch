@@ -1,0 +1,36 @@
+{
+  "recipe": "lab_fractal_assembly",
+  "bindings": {
+    "source": "timber_plank_2m",
+    "joint_source": "construction_cube",
+    "deck_source": "timber_panel_1x1",
+    "tip_source": "traffic_pyramid_5",
+    "depth": 3,
+    "branches": 3,
+    "size": 0.85,
+    "ratio": 0.66,
+    "angle": 42,
+    "twist": 35
+  },
+  "recipe_hash": "9380fe3340f1cb15bd65a24dc3867f4d8183450eb81a9dd616be532dbf51e3f8",
+  "sources": {
+    "timber_plank_2m": {
+      "scene": "res://commons/artifacts/primitive_encounters/timber_plank_2m.tscn",
+      "fingerprint": "429a4ce017c25af9a1ab8ce3c84cb4da7abc8cb3eee38043b1fc91dd1f8b794c"
+    },
+    "construction_cube": {
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn",
+      "fingerprint": "ef7925945dc69fa114f21209bd819beb3deb50fd7a88e494630263e2c66a096c"
+    },
+    "timber_panel_1x1": {
+      "scene": "res://commons/artifacts/primitive_encounters/timber_panel_1x1.tscn",
+      "fingerprint": "b5669e252a210fe6b232aec0ac633dd48245dc8da6e7f90f2e16078c18ec54e9"
+    },
+    "traffic_pyramid_5": {
+      "scene": "res://commons/artifacts/primitive_encounters/traffic_pyramid_5.tscn",
+      "fingerprint": "c7c6b95beaee599adfa0d03f2fd5d8ea19cae25c0a386edcc84d03a8bf4b08ff"
+    }
+  },
+  "created_at": "2026-11-13T08:47:19+0100",
+  "job": "65975d3a607f4717944f06bdd876f433"
+}

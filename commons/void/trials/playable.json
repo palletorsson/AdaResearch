@@ -3208,6 +3208,216 @@
           13.0
         ]
       }
+    },
+    "spatial_lab_f173f3166b": {
+      "title": "Lab variation / lab_domino",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_f173f3166b/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_f173f3166b/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_f173f3166b/trial.tscn",
+      "models": "/void-trials/spatial_lab_f173f3166b/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_76c98d9d97": {
+      "title": "Lab variation / lab_thresholds",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_76c98d9d97/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_76c98d9d97/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_76c98d9d97/trial.tscn",
+      "models": "/void-trials/spatial_lab_76c98d9d97/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_4c708e1fb1": {
+      "title": "Lab variation / lab_turning_passage",
+      "map": "Trans_Rotation",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_4c708e1fb1/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_4c708e1fb1/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_4c708e1fb1/trial.tscn",
+      "models": "/void-trials/spatial_lab_4c708e1fb1/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_f6c6a1996d": {
+      "title": "Lab variation / lab_branching",
+      "map": "Fractal_RecursiveTrees",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_f6c6a1996d/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_f6c6a1996d/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_f6c6a1996d/trial.tscn",
+      "models": "/void-trials/spatial_lab_f6c6a1996d/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_c79f32178f": {
+      "title": "Lab variation / lab_seeded_field",
+      "map": "Randomness_Random_Transformations",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_c79f32178f/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_c79f32178f/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_c79f32178f/trial.tscn",
+      "models": "/void-trials/spatial_lab_c79f32178f/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_65975d3a60": {
+      "title": "Lab variation / lab_fractal_assembly",
+      "map": "Fractal_Synthesis",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_65975d3a60/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_65975d3a60/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_65975d3a60/trial.tscn",
+      "models": "/void-trials/spatial_lab_65975d3a60/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_e7a6ef2bb1": {
+      "title": "Lab variation / lab_fractal_assembly",
+      "map": "Fractal_Synthesis",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_e7a6ef2bb1/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_e7a6ef2bb1/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_e7a6ef2bb1/trial.tscn",
+      "models": "/void-trials/spatial_lab_e7a6ef2bb1/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_ab97e953fe": {
+      "title": "Lab variation / lab_fractal_assembly",
+      "map": "Fractal_Synthesis",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_ab97e953fe/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_ab97e953fe/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_ab97e953fe/trial.tscn",
+      "models": "/void-trials/spatial_lab_ab97e953fe/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_9240714f95": {
+      "title": "Lab variation / lab_sphere_fractal",
+      "map": "Fractal_RecursiveTrees",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_9240714f95/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_9240714f95/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_9240714f95/trial.tscn",
+      "models": "/void-trials/spatial_lab_9240714f95/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
+    },
+    "spatial_lab_ca573ae619": {
+      "title": "Lab variation / lab_sphere_fractal",
+      "map": "Fractal_RecursiveTrees",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_ca573ae619/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_ca573ae619/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_ca573ae619/trial.tscn",
+      "models": "/void-trials/spatial_lab_ca573ae619/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
     }
   }
 }

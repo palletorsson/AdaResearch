@@ -14,7 +14,11 @@
         "radius": 0.65,
         "ratio": 1,
         "size": 0.3
-      }
+      },
+      "sequences": [
+        "array",
+        "transformation"
+      ]
     },
     {
       "id": "lab_radial",
@@ -27,14 +31,22 @@
         "radius": 0.65,
         "ratio": 1,
         "size": 0.3
-      }
+      },
+      "sequences": [
+        "array",
+        "transformation"
+      ]
     },
     {
       "id": "lab_growing",
-      "label": "Table \u2192 ground \u2192 oversized",
+      "label": "Table → ground → oversized",
       "defaults": {
         "source": "do_not_cross_barrier"
-      }
+      },
+      "sequences": [
+        "transformation",
+        "array"
+      ]
     },
     {
       "id": "lab_warehouse",
@@ -106,7 +118,821 @@
           2
         ]
       },
-      "gap_editor": true
+      "gap_editor": true,
+      "sequences": [
+        "array"
+      ]
+    },
+    {
+      "id": "lab_backrooms",
+      "label": "Backrooms / rooms within a room",
+      "defaults": {
+        "source": "timber_panel_2x2",
+        "count": 3,
+        "size": 1,
+        "opening": 1.4,
+        "corridor": 1.2,
+        "roof": 1
+      },
+      "controls": [
+        "count",
+        "size",
+        "opening",
+        "corridor",
+        "roof"
+      ],
+      "limits": {
+        "count": [
+          2,
+          6
+        ],
+        "size": [
+          0.85,
+          1.3
+        ],
+        "opening": [
+          0.85,
+          2.4
+        ],
+        "corridor": [
+          0.8,
+          2.4
+        ],
+        "roof": [
+          0,
+          1
+        ]
+      },
+      "sources": [
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "construction_cube"
+      ],
+      "labels": {
+        "count": "Repeated rooms",
+        "size": "Room scale",
+        "opening": "Opening width / m",
+        "corridor": "Corridor length / m",
+        "roof": "Roof · 0 open / 1 enclosed"
+      },
+      "description": "Repeated rooms, alternating doorways, short connecting corridors. Reuses construction prefabs fitted to structural sizes. Remove the roofs to inspect; save to move, rotate or copy each wall separately.",
+      "editor": "/lab-editor?mode=void&floor=18",
+      "sequences": [
+        "transformation",
+        "array"
+      ]
+    },
+    {
+      "id": "lab_domino",
+      "label": "Growing domino study",
+      "kind": "domino",
+      "sequences": [
+        "transformation",
+        "array"
+      ],
+      "defaults": {
+        "source": "construction_cube",
+        "count": 9,
+        "size": 0.65,
+        "ratio": 1.18,
+        "gap": 0.3,
+        "lean": 0
+      },
+      "controls": [
+        "count",
+        "size",
+        "ratio",
+        "gap",
+        "lean"
+      ],
+      "limits": {
+        "count": [
+          2,
+          12
+        ],
+        "size": [
+          0.3,
+          1
+        ],
+        "ratio": [
+          0.85,
+          1.25
+        ],
+        "gap": [
+          0.05,
+          0.8
+        ],
+        "lean": [
+          -30,
+          30
+        ]
+      },
+      "labels": {
+        "count": "Standing pieces",
+        "size": "Starting scale",
+        "ratio": "Scale ratio per piece",
+        "gap": "Clear gap / m",
+        "lean": "Lean / degrees"
+      },
+      "description": "A small upright becomes an oversized neighbour. Change growth, distance and lean to compose a cascade. This is a static arrangement study; toppling dynamics are not enabled.",
+      "sources": [
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "construction_cube",
+        "timber_plank_2m"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "presets": [
+        {
+          "label": "Equal neighbours",
+          "bindings": {
+            "ratio": 1
+          }
+        },
+        {
+          "label": "Growing procession",
+          "bindings": {
+            "ratio": 1.18,
+            "lean": 0
+          }
+        },
+        {
+          "label": "Held in suspense",
+          "bindings": {
+            "ratio": 1.12,
+            "lean": 18
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab_thresholds",
+      "label": "Narrowing / turning thresholds",
+      "kind": "threshold",
+      "sequences": [
+        "transformation",
+        "array"
+      ],
+      "defaults": {
+        "source": "timber_panel_2x2",
+        "count": 6,
+        "size": 1,
+        "opening": 2.4,
+        "ratio": 0.9,
+        "gap": 1.2,
+        "twist": 0
+      },
+      "controls": [
+        "count",
+        "size",
+        "opening",
+        "ratio",
+        "gap",
+        "twist"
+      ],
+      "limits": {
+        "count": [
+          2,
+          12
+        ],
+        "size": [
+          0.4,
+          1.2
+        ],
+        "opening": [
+          1,
+          3
+        ],
+        "ratio": [
+          0.8,
+          1.08
+        ],
+        "gap": [
+          0.45,
+          1.8
+        ],
+        "twist": [
+          -15,
+          15
+        ]
+      },
+      "labels": {
+        "count": "Thresholds",
+        "size": "Whole scale",
+        "opening": "First opening / m",
+        "ratio": "Opening ratio per frame",
+        "gap": "Spacing / m",
+        "twist": "Roll per frame / degrees"
+      },
+      "description": "The same doorway repeats until the body no longer fits. Twist the frames to turn a familiar opening into an obstacle. Reduced headroom and below-floor geometry are findings, not guaranteed routes.",
+      "sources": [
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "construction_cube",
+        "timber_plank_2m"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "presets": [
+        {
+          "label": "Closing in",
+          "bindings": {
+            "ratio": 0.9,
+            "twist": 0
+          }
+        },
+        {
+          "label": "Turning doorways",
+          "bindings": {
+            "ratio": 1,
+            "twist": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab_turning_passage",
+      "label": "Turning / twisting passage",
+      "kind": "passage",
+      "sequences": [
+        "transformation"
+      ],
+      "defaults": {
+        "source": "timber_panel_2x2",
+        "count": 12,
+        "size": 1,
+        "opening": 2.4,
+        "gap": 0.7,
+        "turn": 8,
+        "pitch": 0,
+        "twist": 0
+      },
+      "controls": [
+        "count",
+        "size",
+        "opening",
+        "gap",
+        "turn",
+        "pitch",
+        "twist"
+      ],
+      "limits": {
+        "count": [
+          3,
+          18
+        ],
+        "size": [
+          0.35,
+          1.1
+        ],
+        "opening": [
+          1.2,
+          3
+        ],
+        "gap": [
+          0.4,
+          1.1
+        ],
+        "turn": [
+          -18,
+          18
+        ],
+        "pitch": [
+          -8,
+          8
+        ],
+        "twist": [
+          -12,
+          12
+        ]
+      },
+      "labels": {
+        "count": "Portal ribs",
+        "size": "Whole scale",
+        "opening": "Opening width / m",
+        "gap": "Forward step / m",
+        "turn": "Yaw per step / degrees",
+        "pitch": "Pitch per step / degrees",
+        "twist": "Roll per rib / degrees"
+      },
+      "description": "Thick frames turn into architecture. Change yaw, pitch and roll separately. Ribs overlap by design; extreme bends can intersect themselves. Walking and sliding need a later placement test.",
+      "sources": [
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "construction_cube",
+        "timber_plank_2m"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "presets": [
+        {
+          "label": "A gentle bend",
+          "bindings": {
+            "turn": 8,
+            "pitch": 0,
+            "twist": 0
+          }
+        },
+        {
+          "label": "Falling and turning",
+          "bindings": {
+            "turn": 7,
+            "pitch": -4,
+            "twist": 5
+          }
+        },
+        {
+          "label": "A corkscrew",
+          "bindings": {
+            "turn": 0,
+            "pitch": 0,
+            "twist": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab_sphere_fractal",
+      "label": "3D Sphere Fractal / five-way growth",
+      "kind": "sphere_fractal",
+      "sequences": [
+        "fractals"
+      ],
+      "defaults": {
+        "source": "trace_point_ball",
+        "inner_source": "trace_point_ball",
+        "tip_source": "construction_cube",
+        "depth": 4,
+        "size": 1.2,
+        "ratio": 0.5,
+        "spacing": 1.5,
+        "sag": 20,
+        "speed": 22.5,
+        "reverse": 0.25,
+        "seed": 17,
+        "phase": 0
+      },
+      "source_slots": {
+        "source": "Root + branches",
+        "inner_source": "Alternating inner branches",
+        "tip_source": "Terminal generation"
+      },
+      "sources": [
+        "do_not_cross_barrier",
+        "timber_plank_1m",
+        "timber_plank_2m",
+        "timber_plank_4m",
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "trace_point_ball",
+        "traffic_pyramid_5",
+        "pentagonal_bipyramid_7",
+        "construction_cube",
+        "wp",
+        "tetrahedron_blocker"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "motion": true,
+      "description": "From 11 / 3D Sphere MultiMesh Fractal in Fractal RecursiveTrees: five children inherit each parent’s rotation, shrink and sag, with independent spin and some reversed branches. Preview motion, pause on a pose and save every part separately. Four levels give 156 parts; sag is procedural, not simulated gravity.",
+      "controls": [
+        "depth",
+        "size",
+        "ratio",
+        "spacing",
+        "sag",
+        "speed",
+        "reverse",
+        "seed",
+        "phase"
+      ],
+      "limits": {
+        "depth": [
+          1,
+          4
+        ],
+        "size": [
+          0.4,
+          1.8
+        ],
+        "ratio": [
+          0.35,
+          0.65
+        ],
+        "spacing": [
+          0.8,
+          2.2
+        ],
+        "sag": [
+          0,
+          50
+        ],
+        "speed": [
+          0,
+          45
+        ],
+        "reverse": [
+          0,
+          1
+        ],
+        "seed": [
+          1,
+          9999
+        ],
+        "phase": [
+          0,
+          60
+        ]
+      },
+      "labels": {
+        "depth": "Levels including root",
+        "size": "Root diameter / m",
+        "ratio": "Child / parent scale",
+        "spacing": "Child offset / child size",
+        "sag": "Sag / degrees",
+        "speed": "Spin / degrees per second",
+        "reverse": "Reverse-spin fraction",
+        "seed": "Motion seed",
+        "phase": "Pose time / seconds"
+      },
+      "presets": [
+        {
+          "label": "Sphere + cube original rule",
+          "bindings": {
+            "source": "trace_point_ball",
+            "inner_source": "trace_point_ball",
+            "tip_source": "construction_cube",
+            "depth": 4,
+            "size": 1.2,
+            "ratio": 0.5,
+            "spacing": 1.5,
+            "sag": 20,
+            "speed": 22.5,
+            "reverse": 0.25,
+            "seed": 17,
+            "phase": 0
+          }
+        },
+        {
+          "label": "Geometric crystal",
+          "bindings": {
+            "source": "trace_point_ball",
+            "inner_source": "trace_point_ball",
+            "tip_source": "construction_cube",
+            "depth": 4,
+            "size": 1.2,
+            "ratio": 0.5,
+            "spacing": 1.5,
+            "sag": 0,
+            "speed": 22.5,
+            "reverse": 0.25,
+            "seed": 17,
+            "phase": 0
+          }
+        },
+        {
+          "label": "Mixed suspended form",
+          "bindings": {
+            "source": "trace_point_ball",
+            "inner_source": "traffic_pyramid_5",
+            "tip_source": "pentagonal_bipyramid_7",
+            "depth": 4,
+            "size": 1.2,
+            "ratio": 0.5,
+            "spacing": 1.5,
+            "sag": 28,
+            "speed": 22.5,
+            "reverse": 0.25,
+            "seed": 17,
+            "phase": 7
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab_fractal_assembly",
+      "label": "Fractal assemblage / four prefab roles",
+      "kind": "fractal_assembly",
+      "sequences": [
+        "fractals"
+      ],
+      "defaults": {
+        "source": "timber_plank_2m",
+        "joint_source": "construction_cube",
+        "deck_source": "timber_panel_1x1",
+        "tip_source": "traffic_pyramid_5",
+        "depth": 3,
+        "branches": 3,
+        "size": 0.85,
+        "ratio": 0.66,
+        "angle": 42,
+        "twist": 35
+      },
+      "source_slots": {
+        "source": "Branch",
+        "joint_source": "Joint",
+        "deck_source": "Platform",
+        "tip_source": "Terminal"
+      },
+      "sources": [
+        "do_not_cross_barrier",
+        "timber_plank_1m",
+        "timber_plank_2m",
+        "timber_plank_4m",
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "trace_point_ball",
+        "traffic_pyramid_5",
+        "pentagonal_bipyramid_7",
+        "construction_cube",
+        "wp",
+        "tetrahedron_blocker"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "description": "Repeat an assembly, not just a shape: branches carry joints and platforms, with a different prefab at the tips. Each child inherits its parent frame, turns in 3D and shrinks. Change any of the four prefab roles. A finite recursive study, with up to 147 independently editable parts; touching or intersecting pieces are not a tested load-bearing structure.",
+      "controls": [
+        "depth",
+        "branches",
+        "size",
+        "ratio",
+        "angle",
+        "twist"
+      ],
+      "limits": {
+        "depth": [
+          0,
+          3
+        ],
+        "branches": [
+          1,
+          3
+        ],
+        "size": [
+          0.3,
+          1.5
+        ],
+        "ratio": [
+          0.45,
+          0.8
+        ],
+        "angle": [
+          5,
+          80
+        ],
+        "twist": [
+          -180,
+          180
+        ]
+      },
+      "labels": {
+        "depth": "Recursive generations",
+        "branches": "Children per branch",
+        "size": "Whole assembly scale",
+        "ratio": "Child / parent scale",
+        "angle": "Outward lean / degrees",
+        "twist": "Local twist / degrees"
+      },
+      "presets": [
+        {
+          "label": "Branching canopy",
+          "bindings": {
+            "source": "timber_plank_2m",
+            "joint_source": "construction_cube",
+            "deck_source": "timber_panel_1x1",
+            "tip_source": "traffic_pyramid_5",
+            "depth": 3,
+            "branches": 3,
+            "size": 0.85,
+            "ratio": 0.66,
+            "angle": 42,
+            "twist": 35
+          }
+        },
+        {
+          "label": "Spiral tower",
+          "bindings": {
+            "source": "construction_cube",
+            "joint_source": "trace_point_ball",
+            "deck_source": "timber_panel_1x1",
+            "tip_source": "pentagonal_bipyramid_7",
+            "depth": 3,
+            "branches": 3,
+            "size": 0.8,
+            "ratio": 0.78,
+            "angle": 18,
+            "twist": 75
+          }
+        },
+        {
+          "label": "Wide coral",
+          "bindings": {
+            "source": "timber_plank_2m",
+            "joint_source": "trace_point_ball",
+            "deck_source": "wp",
+            "tip_source": "tetrahedron_blocker",
+            "depth": 3,
+            "branches": 3,
+            "size": 1.0,
+            "ratio": 0.62,
+            "angle": 68,
+            "twist": -55
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab_branching",
+      "label": "Branching scaffold",
+      "kind": "tree",
+      "sequences": [
+        "fractals"
+      ],
+      "defaults": {
+        "source": "timber_plank_2m",
+        "depth": 3,
+        "size": 0.65,
+        "ratio": 0.7,
+        "angle": 32
+      },
+      "controls": [
+        "depth",
+        "size",
+        "ratio",
+        "angle"
+      ],
+      "limits": {
+        "depth": [
+          0,
+          5
+        ],
+        "size": [
+          0.3,
+          1
+        ],
+        "ratio": [
+          0.45,
+          0.8
+        ],
+        "angle": [
+          10,
+          75
+        ]
+      },
+      "labels": {
+        "depth": "Recursive generations",
+        "size": "Trunk scale",
+        "ratio": "Child / parent scale",
+        "angle": "Branch angle / degrees"
+      },
+      "description": "Each beam produces two smaller beams at its tip. One rule builds the whole tree; every branch remains a separate editable part. At five generations the finite study has 63 beams.",
+      "sources": [
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "construction_cube",
+        "timber_plank_2m"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "presets": [
+        {
+          "label": "Open branching",
+          "bindings": {
+            "angle": 32,
+            "ratio": 0.7
+          }
+        },
+        {
+          "label": "Dense crown",
+          "bindings": {
+            "angle": 60,
+            "ratio": 0.65
+          }
+        },
+        {
+          "label": "Reaching upward",
+          "bindings": {
+            "angle": 12,
+            "ratio": 0.78
+          }
+        }
+      ]
+    },
+    {
+      "id": "lab_seeded_field",
+      "label": "Seeded / unsettled field",
+      "kind": "random",
+      "sequences": [
+        "randomness",
+        "array"
+      ],
+      "defaults": {
+        "source": "construction_cube",
+        "columns": 5,
+        "rows": 5,
+        "size": 0.7,
+        "spacing": 1.4,
+        "scatter": 0.45,
+        "angle": 35,
+        "missing": 0.18,
+        "seed": 17
+      },
+      "controls": [
+        "columns",
+        "rows",
+        "size",
+        "spacing",
+        "scatter",
+        "angle",
+        "missing",
+        "seed"
+      ],
+      "limits": {
+        "columns": [
+          2,
+          9
+        ],
+        "rows": [
+          2,
+          9
+        ],
+        "size": [
+          0.3,
+          1.4
+        ],
+        "spacing": [
+          0.7,
+          2
+        ],
+        "scatter": [
+          0,
+          1
+        ],
+        "angle": [
+          0,
+          90
+        ],
+        "missing": [
+          0,
+          0.6
+        ],
+        "seed": [
+          1,
+          9999
+        ]
+      },
+      "labels": {
+        "columns": "Columns",
+        "rows": "Rows",
+        "size": "Block width / m",
+        "spacing": "Grid spacing / m",
+        "scatter": "Position disorder",
+        "angle": "Maximum yaw / degrees",
+        "missing": "Missing fraction",
+        "seed": "Seed / repeatable choice"
+      },
+      "description": "Start from a grid, then displace, turn and omit pieces with a repeatable seed. Heights vary too. The first cell stays as an anchor; changing missing fraction leaves surviving pieces in place.",
+      "sources": [
+        "timber_panel_1x1",
+        "timber_panel_2x1",
+        "timber_panel_2x2",
+        "construction_cube",
+        "timber_plank_2m"
+      ],
+      "all_parts": true,
+      "fitted": true,
+      "presets": [
+        {
+          "label": "Ordered field",
+          "bindings": {
+            "scatter": 0,
+            "angle": 0,
+            "missing": 0
+          }
+        },
+        {
+          "label": "Unsettled",
+          "bindings": {
+            "scatter": 0.65,
+            "angle": 60,
+            "missing": 0.25
+          }
+        },
+        {
+          "label": "Another possibility",
+          "bindings": {
+            "seed": 53
+          }
+        }
+      ]
     }
   ],
   "sources": [
@@ -191,6 +1017,30 @@
     "Tabletop copies below half size are non-blocking studies. Larger copies retain barrier collision or the declared crate box collider.",
     "Overlap and overhang are measured and reported, never silently packed away.",
     "Three.js previews static geometry. Native checks cover source identity, layout measurements and editable-part transforms; they do not accept hand interaction or physical-headset behaviour.",
-    "Inputs retain authored dimensions and are aligned to a common bottom insertion point. Gravity and autonomous animation are held still in the lab; original game scenes remain unchanged."
+    "Ordinary arrangements retain authored dimensions and are aligned to a common bottom insertion point. Gravity and autonomous animation are held still in the lab; original game scenes remain unchanged.",
+    "Backrooms explicitly fits construction prefab geometry to structural panel sizes, with matching static collision; it does not alter the original source scenes.",
+    "Spatial studies fit real prefab geometry to explicit construction dimensions. Sphere Fractal variations animate in Godot with speed, size and depth controls; other studies remain static. Seeded randomness is deterministic; recursion is bounded, not infinite."
+  ],
+  "sequences": [
+    {
+      "id": "transformation",
+      "label": "Transformation",
+      "tutorial": "transformation"
+    },
+    {
+      "id": "array",
+      "label": "Array",
+      "tutorial": "array_tutorial"
+    },
+    {
+      "id": "fractals",
+      "label": "Fractal",
+      "tutorial": "fractals"
+    },
+    {
+      "id": "randomness",
+      "label": "Randomness",
+      "tutorial": "randomness"
+    }
   ]
 }

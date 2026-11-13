@@ -1,0 +1,67 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Canopy",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Translation",
+      "title": "Lab variation / lab_fractal_assembly",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "variation",
+          "artifact": "spatial_recipe",
+          "station": "SE",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "lab_fractal_assembly",
+            "bindings": {
+              "source": "construction_cube",
+              "joint_source": "trace_point_ball",
+              "deck_source": "timber_panel_1x1",
+              "tip_source": "pentagonal_bipyramid_7",
+              "depth": 3,
+              "branches": 3,
+              "size": 0.8,
+              "ratio": 0.78,
+              "angle": 18,
+              "twist": 75
+            }
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    },
+    {
+      "map": "",
+      "title": "Catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
+      "supply_leads": false
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "recipe": "lab_fractal_assembly",
+  "bindings": {
+    "source": "timber_plank_2m",
+    "joint_source": "trace_point_ball",
+    "deck_source": "wp",
+    "tip_source": "tetrahedron_blocker",
+    "depth": 3,
+    "branches": 3,
+    "size": 1,
+    "ratio": 0.62,
+    "angle": 68,
+    "twist": -55
+  },
+  "recipe_hash": "9380fe3340f1cb15bd65a24dc3867f4d8183450eb81a9dd616be532dbf51e3f8",
+  "sources": {
+    "timber_plank_2m": {
+      "scene": "res://commons/artifacts/primitive_encounters/timber_plank_2m.tscn",
+      "fingerprint": "429a4ce017c25af9a1ab8ce3c84cb4da7abc8cb3eee38043b1fc91dd1f8b794c"
+    },
+    "trace_point_ball": {
+      "scene": "res://commons/artifacts/primitive_encounters/trace_point_ball.tscn",
+      "fingerprint": "9daca5477c0e17c8f893638fa207bb31b6c88c2d19ef57425977a4bca823d577"
+    },
+    "wp": {
+      "scene": "res://commons/artifacts/primitive_encounters/wedge_blocker.tscn",
+      "fingerprint": "9f3ba1310f14ff4f189ccd390532577a35d94e44fde3871b7d4928dff60bf734"
+    },
+    "tetrahedron_blocker": {
+      "scene": "res://commons/artifacts/primitive_encounters/tetrahedron_blocker.tscn",
+      "fingerprint": "a2400271cf844a44fb87f014b9e7a0d59bb81d8acba04b60712cddad92b66335"
+    }
+  },
+  "created_at": "2026-11-13T08:51:22+0100",
+  "job": "e7a6ef2bb17445c9a2ee666a44c04828"
+}

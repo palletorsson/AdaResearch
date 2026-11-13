@@ -27,14 +27,17 @@ def validate(request):
     term=terms[recipe];bindings=dict(term['parameters']);provided=request.get('bindings',{})
     assert isinstance(provided,dict) and set(provided)<=set(bindings), 'Unknown recipe argument'
     bindings.update(provided)
-    assert bindings['source'] in inputs(), 'Unknown prefab source'
     settings=next(v for v in spec['recipes'] if v['id']==recipe)
+    slots=settings.get('source_slots',{'source':'Source'})
+    for key in slots:
+        assert bindings[key] in inputs(), 'Unknown prefab source: '+key
+        assert not settings.get('sources') or bindings[key] in settings['sources'], 'Choose a supported prefab for '+key
     for key,value in bindings.items():
-        if key=='source':continue
+        if key in slots:continue
         if key=='holes':continue
         low,high=settings.get('limits',{}).get(key,spec['limits'].get(key))
         assert type(value) in [int,float] and math.isfinite(value) and low<=value<=high, 'Invalid '+key
-        if key in ['count','columns','rows']:assert int(value)==value,'Grid sizes must be integers'
+        if key in ['count','columns','rows','roof','depth','seed','branches']:assert int(value)==value,'Discrete controls must be integers'
     if 'holes' in bindings:
         holes=bindings['holes'];assert isinstance(holes,list) and len(holes)<=81,'Invalid missing cells'
         assert all(isinstance(c,list) and len(c)==2 and all(type(v)==int for v in c) and 0<=c[0]<bindings['columns'] and 0<=c[1]<bindings['rows'] for c in holes),'Invalid missing-cell coordinate'
@@ -50,8 +53,12 @@ def create_trial(request,job):
     rooms=read(ROOT/'commons/void/trials/spatial_lab/rooms.json')
     rooms['floors']=[rooms['floors'][0],rooms['floors'][1],rooms['floors'][3]]
     floor=rooms['floors'][1];floor['title']='Lab variation / '+recipe
+    if recipe=='lab_sphere_fractal':floor['map']='Fractal_RecursiveTrees'
     # Keep the same staging centre used in the reference trial, clear of shafts.
     floor['artifacts']=[{'id':'variation','artifact':'spatial_recipe','station':'SE','position':[-17 if recipe=='lab_growing' else 0,0],'facing':0,'height':0,'scale':1,'config':{'recipe':recipe,'bindings':bindings}}]
+    if recipe=='lab_sphere_fractal':
+        floor['artifacts'][0]['artifact']='sphere_fractal_live'
+        floor['artifacts'].append({'id':'fractal-controls','artifact':'sphere_fractal_controls','position':[2.2,2.4],'facing':0,'height':0,'scale':1,'config':{'target_id':'variation'}})
     layout=read(ROOT/'commons/void/trials/spatial_lab/layout.json');layout['levels']=[0,-6,-12];layout['floor_roles']=['Canopy','Lab variation','Catch floor']
     write(directory/'rooms.json',rooms);write(directory/'layout.json',layout)
     (directory/'trial.tscn').write_text('[gd_scene load_steps=2 format=3]\n[ext_resource type="PackedScene" path="res://commons/void/void.tscn" id="1"]\n[node name="LabVariation" instance=ExtResource("1")]\ntrial_id = "'+trial+'"\n')
@@ -60,18 +67,31 @@ def create_trial(request,job):
     item=dict(registry['trials']['spatial_lab']);item.update(title='Lab variation / '+recipe,map='Trans_Translation',rooms='res://'+(directory/'rooms.json').relative_to(ROOT).as_posix(),layout='res://'+(directory/'layout.json').relative_to(ROOT).as_posix(),scene='res://'+(directory/'trial.tscn').relative_to(ROOT).as_posix(),models='/void-trials/'+trial+'/manifest.json',retry_floors={'0':1,'1':1,'2':1},spawn_points={'1':[-14,.06,4] if recipe=='lab_growing' else [0,.06,4]})
     if recipe=='lab_warehouse':
         item['spawn_points']={'1':[0,float(bindings['deck'])+.06,(int(bindings['rows'])-1)*float(bindings['spacing'])/2+.8]}
+    if recipe=='lab_backrooms':
+        item['map']='Trans_Scale'
+        item['spawn_points']={'1':[0,.06,((bindings['count']-1)*(3.2+bindings['corridor'])/2+1.6)*bindings['size']+.65]}
+    if recipe in ['lab_domino','lab_thresholds','lab_turning_passage','lab_branching','lab_seeded_field','lab_fractal_assembly','lab_sphere_fractal']:
+        item['map']={'lab_sphere_fractal':'Fractal_RecursiveTrees','lab_fractal_assembly':'Fractal_Synthesis','lab_branching':'Fractal_RecursiveTrees','lab_seeded_field':'Randomness_Random_Transformations'}.get(recipe,'Trans_Rotation')
+        item['spawn_points']={'1':[3.5,.06,4]}
     registry['trials'][trial]=item;write(path,registry)
-    selected=inputs()[bindings['source']]
-    write(directory/'recipe.json',{'recipe':recipe,'bindings':bindings,'recipe_hash':digest,'sources':{selected['id']:{'scene':selected['scene'],'fingerprint':input_fingerprint(selected)}},'created_at':time.strftime('%Y-%m-%dT%H:%M:%S%z'),'job':job})
+    catalogue=inputs();slots=next(r for r in read(ROOT/'commons/modular/lab.json')['recipes'] if r['id']==recipe).get('source_slots',{'source':'Source'})
+    selected={bindings[k]:catalogue[bindings[k]] for k in slots}
+    write(directory/'recipe.json',{'recipe':recipe,'bindings':bindings,'recipe_hash':digest,'sources':{k:{'scene':v['scene'],'fingerprint':input_fingerprint(v)} for k,v in selected.items()},'created_at':time.strftime('%Y-%m-%dT%H:%M:%S%z'),'job':job})
     return trial
 
 def check(trial,folder,state=None):
     folder.mkdir(parents=True,exist_ok=True);timing={};started=time.perf_counter()
     main_hash=fingerprint(ROOT/'commons/void/rooms.json')
-    provenance={file:fingerprint(ROOT/file) for file in ['commons/modular/terms.json','commons/modular/builder.gd','commons/modular/recipe_area.gd','commons/modular/lab_input.gd','commons/modular/lab.json','commons/void/primitive-prefabs.json','tools/probes/spatial_lab_probe.gd']}
+    provenance={file:fingerprint(ROOT/file) for file in ['commons/modular/terms.json','commons/modular/builder.gd','commons/modular/room_chain.gd','commons/modular/spatial_studies.gd','commons/modular/fractal_assemblage.gd','commons/modular/sphere_fractal.gd','commons/modular/sphere_fractal_live.gd','commons/modular/sphere_fractal_controls.gd','algorithms/fractals/meshfractal/fractal.gd','commons/modular/recipe_area.gd','commons/modular/lab_input.gd','commons/modular/lab.json','commons/void/primitive-prefabs.json','tools/probes/spatial_lab_probe.gd']}
     definitions=read(ROOT/'commons/void/trials/playable.json')['trials'][trial]
     rooms=read(ROOT/definitions['rooms'][6:]);catalogue=inputs()
-    used={v.get('config',{}).get('bindings',{}).get('source','do_not_cross_barrier') for floor in rooms['floors'] for v in floor.get('artifacts',[]) if v['artifact']=='spatial_recipe'}
+    recipes={r['id']:r for r in read(ROOT/'commons/modular/lab.json')['recipes']}
+    used=set()
+    for floor in rooms['floors']:
+        for v in floor.get('artifacts',[]):
+            if v['artifact'] not in ['spatial_recipe','sphere_fractal_live']:continue
+            config=v.get('config',{});settings=recipes[config['recipe']];b={**settings['defaults'],**config.get('bindings',{})}
+            used.update(b[k] for k in settings.get('source_slots',{'source':'Source'}))
     input_provenance={key:{'scene':catalogue[key]['scene'],'fingerprint':input_fingerprint(catalogue[key])} for key in used}
     env=dict(os.environ,VOID_EXPORT_SKIP_PALETTE='1')
     t=time.perf_counter()
@@ -105,10 +125,14 @@ def check(trial,folder,state=None):
         gltf=json.loads(b[20:20+struct.unpack_from('<I',b,12)[0]].decode().strip());assert gltf.get('meshes'),file
         model_count+=1
     for file in models.glob('source-*.glb'):shutil.copy2(file,public/file.name)
-    assert main_hash==fingerprint(ROOT/'commons/void/rooms.json'),'Main tower changed during research; inspect concurrent work'
+    # A user can arrange the main tower while this isolated trial is checked.
+    # Record that concurrent change; never restore or overwrite their layout.
+    main_hash_after=fingerprint(ROOT/'commons/void/rooms.json')
     timing['check_total_seconds']=round(time.perf_counter()-started,3)
     timing['construction_ms']={p['key']:p['build_ms'] for p in receipt['poses']}
     result={'passed':True,'trial':trial,'editor':'/lab-editor?mode=void&trial='+trial+'&floor=1','models':model_count,'native_checks':len(receipt['checks']),'timing':timing,'findings':receipt['findings'],'source_files':manifest.get('source_files',{}),'provenance':provenance,'inputs':input_provenance,'main_rooms_sha256':main_hash,'scope':receipt['scope'],'shutdown_diagnostics':cleanup}
+    result['main_rooms_after_sha256']=main_hash_after
+    result['main_layout_changed_concurrently']=main_hash!=main_hash_after
     write(folder/'result.json',result)
     return result
 
