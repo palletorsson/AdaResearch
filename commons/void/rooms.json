@@ -48436,11 +48436,35 @@
             "plinth": "0",
             "pin": "1"
           }
+        },
+        {
+          "id": "room-for-another",
+          "artifact": "room_for_another",
+          "station": "SW",
+          "position": [
+            0,
+            -0.8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "promised": "first",
+            "editor_label": "Room for another | the hall's harbour for a body: a basin 10 x 12 m, nine one-crate bridges with one-way gates; the first delivery stands, the second must walk one promise backwards"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / ROOM FOR ANOTHER\nOne delivery is promised. Bring the second through.",
+          "position": [
+            0.4,
+            7.0
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
