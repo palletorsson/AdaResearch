@@ -21,6 +21,20 @@ def write(path, value):
 def fingerprint(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def recipe_hash(term): return hashlib.sha256(json.dumps(term,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
 
+def presentation(request,recipe,bindings):
+    mode=request.get('presentation','original')
+    assert mode in ['original','studio'],'Unknown presentation'
+    if mode=='studio':
+        assert recipe=='lab_sphere_fractal','Studio staging is available for the sphere fractal'
+        spec=read(ROOT/'commons/modular/fractal_studio.json')
+        distance=0.0;radius=0.0
+        for level in range(spec['depth_max']):
+            size=spec['size_max']*bindings['ratio']**level
+            if level:distance+=bindings['spacing']*size
+            radius=max(radius,distance+math.sqrt(3)*size/2)
+        assert radius<=spec['max_motion_radius'],'Branches exceed the studio stage. Reduce child spacing or scale ratio, or choose Original materials / no stage.'
+    return mode
+
 def validate(request):
     spec=read(ROOT/'commons/modular/lab.json');terms=read(ROOT/'commons/modular/terms.json')['terms']
     recipe=request.get('recipe');assert recipe in [v['id'] for v in spec['recipes']], 'Unknown recipe'
@@ -43,6 +57,7 @@ def validate(request):
         assert all(isinstance(c,list) and len(c)==2 and all(type(v)==int for v in c) and 0<=c[0]<bindings['columns'] and 0<=c[1]<bindings['rows'] for c in holes),'Invalid missing-cell coordinate'
         assert len({tuple(c) for c in holes})==len(holes),'Duplicate missing cells'
     if request.get('recipe_hash'):assert request['recipe_hash']==recipe_hash(term),'Recipe changed; reload before saving'
+    presentation(request,recipe,bindings)
     return recipe,bindings,recipe_hash(term)
 
 def create_trial(request,job):
@@ -50,6 +65,7 @@ def create_trial(request,job):
     directory=ROOT/'commons/void/trials'/trial
     assert not directory.exists(), 'Variation already exists'
     directory.mkdir(parents=True)
+    mode=presentation(request,recipe,bindings)
     rooms=read(ROOT/'commons/void/trials/spatial_lab/rooms.json')
     rooms['floors']=[rooms['floors'][0],rooms['floors'][1],rooms['floors'][3]]
     floor=rooms['floors'][1];floor['title']='Lab variation / '+recipe
@@ -58,7 +74,15 @@ def create_trial(request,job):
     floor['artifacts']=[{'id':'variation','artifact':'spatial_recipe','station':'SE','position':[-17 if recipe=='lab_growing' else 0,0],'facing':0,'height':0,'scale':1,'config':{'recipe':recipe,'bindings':bindings}}]
     if recipe=='lab_sphere_fractal':
         floor['artifacts'][0]['artifact']='sphere_fractal_live'
-        floor['artifacts'].append({'id':'fractal-controls','artifact':'sphere_fractal_controls','position':[2.2,2.4],'facing':0,'height':0,'scale':1,'config':{'target_id':'variation'}})
+        floor['artifacts'].append({'id':'fractal-controls','artifact':'sphere_fractal_controls','station':'SE','position':[2.2,2.4],'facing':0,'height':0,'scale':1,'config':{'target_id':'variation'}})
+        if mode=='studio':
+            studio=read(ROOT/'commons/modular/fractal_studio.json')
+            floor['artifacts'][0]['height']=studio['height']
+            floor['artifacts'][0]['config']['studio_finish']=True
+            floor['artifacts'][1]['position']=studio['controls_position']
+            floor['artifacts'][1]['config']['studio_finish']=True
+            floor['artifacts'].append({'id':'fractal-stage','artifact':'sphere_fractal_stage','station':'NW','position':[0,0],'facing':0,'height':0,'scale':1,'config':{}})
+
     layout=read(ROOT/'commons/void/trials/spatial_lab/layout.json');layout['levels']=[0,-6,-12];layout['floor_roles']=['Canopy','Lab variation','Catch floor']
     write(directory/'rooms.json',rooms);write(directory/'layout.json',layout)
     (directory/'trial.tscn').write_text('[gd_scene load_steps=2 format=3]\n[ext_resource type="PackedScene" path="res://commons/void/void.tscn" id="1"]\n[node name="LabVariation" instance=ExtResource("1")]\ntrial_id = "'+trial+'"\n')
@@ -76,7 +100,7 @@ def create_trial(request,job):
     registry['trials'][trial]=item;write(path,registry)
     catalogue=inputs();slots=next(r for r in read(ROOT/'commons/modular/lab.json')['recipes'] if r['id']==recipe).get('source_slots',{'source':'Source'})
     selected={bindings[k]:catalogue[bindings[k]] for k in slots}
-    write(directory/'recipe.json',{'recipe':recipe,'bindings':bindings,'recipe_hash':digest,'sources':{k:{'scene':v['scene'],'fingerprint':input_fingerprint(v)} for k,v in selected.items()},'created_at':time.strftime('%Y-%m-%dT%H:%M:%S%z'),'job':job})
+    write(directory/'recipe.json',{'recipe':recipe,'bindings':bindings,'presentation':mode,'recipe_hash':digest,'sources':{k:{'scene':v['scene'],'fingerprint':input_fingerprint(v)} for k,v in selected.items()},'created_at':time.strftime('%Y-%m-%dT%H:%M:%S%z'),'job':job})
     return trial
 
 def check(trial,folder,state=None):
@@ -91,7 +115,7 @@ def check(trial,folder,state=None):
             if document.startswith('res://commons/void/trials/'):
                 file=document[6:];provenance[file]=fingerprint(ROOT/file)
             if item['artifact']=='sphere_fractal_stage':
-                for file in ['commons/modular/sphere_fractal_stage.gd','commons/modular/sphere_fractal_finish.gd']:
+                for file in ['commons/modular/sphere_fractal_stage.gd','commons/modular/sphere_fractal_finish.gd','commons/modular/fractal_studio.json']:
                     provenance[file]=fingerprint(ROOT/file)
     recipes={r['id']:r for r in read(ROOT/'commons/modular/lab.json')['recipes']}
     used=set()
@@ -103,7 +127,9 @@ def check(trial,folder,state=None):
     input_provenance={key:{'scene':catalogue[key]['scene'],'fingerprint':input_fingerprint(catalogue[key])} for key in used}
     env=dict(os.environ,VOID_EXPORT_SKIP_PALETTE='1')
     t=time.perf_counter()
-    result=subprocess.run([sys.executable,str(ROOT/'tools/export_void_trial.py'),trial],cwd=ROOT,env=env,capture_output=True,text=True,encoding='utf8',timeout=300,creationflags=subprocess.CREATE_NO_WINDOW)
+    # The exporter waits up to 20 minutes for the shared slot before its own
+    # five-minute render budget starts. Do not kill a queued export at 5 minutes.
+    result=subprocess.run([sys.executable,str(ROOT/'tools/export_void_trial.py'),trial],cwd=ROOT,env=env,capture_output=True,text=True,encoding='utf8',timeout=1560,creationflags=subprocess.CREATE_NO_WINDOW)
     (folder/'export.log').write_text(result.stdout+result.stderr,encoding='utf8')
     assert result.returncode==0,'Export failed; see export.log'
     timing['export_process_seconds']=round(time.perf_counter()-t,3)

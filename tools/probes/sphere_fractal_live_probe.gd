@@ -6,6 +6,7 @@ func run() -> void:
 	trial="spatial_lab_ca573ae619"
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):out=arg.trim_prefix("--out=")
+		if arg.begins_with("--void-trial="):trial=arg.trim_prefix("--void-trial=")
 	await start(false)
 	var item: Node3D=station("variation")
 	var controls: Node3D=station("fractal-controls")
@@ -14,7 +15,7 @@ func run() -> void:
 	var stage: Node3D=station("fractal-stage")
 	check("ten staging boards and blocks remain independently editable",stage.part_defaults.size()==10)
 	check("ivory terminal material is a local override",item.get_node("Root_1_1_1/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("eee8dc")))
-	check("generation two uses pink instead of its source traffic pattern",item.get_node("Root_1_1/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("e64b91")))
+	check("generation two uses a local pink finish",item.get_node("Root_1_1/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("e64b91")))
 	check("control handles use the same pink",controls.sliders.speed.get_node("SliderOrigin/InteractableSlider/HandleOrigin/HandleMesh").material_override.albedo_color.is_equal_approx(Color("e64b91")))
 	# All-time conservative envelope: add each inherited child offset plus its
 	# rotated cube-envelope radius. This covers every phase, not only pictures.
@@ -77,7 +78,7 @@ func run() -> void:
 	# Restore the unmodified saved layout before rendering; tests never write it.
 	item.apply_grid_config({"recipe":"lab_sphere_fractal","bindings":item.bindings,"parts":{}})
 	await frames(15)
-	check("control readouts follow reloaded editor settings",absf(controls.sliders.speed.get_normalized_value()-.5)<.001 and absf(controls.sliders.size.get_normalized_value()-(1.2-.4)/1.4)<.001)
+	check("control readouts follow reloaded editor settings",absf(controls.sliders.speed.get_normalized_value()-float(item.bindings.speed)/45.0)<.001 and absf(controls.sliders.size.get_normalized_value()-(1.2-.4)/1.4)<.001)
 	await photograph("desktop-moving",Vector3(0,-2.8,7),Vector3(0,-3.6,-.2))
 	await photograph("controls",Vector3(3.05,-4.45,4.3),Vector3(2.85,-4.82,3.15))
 	var edit_base: Vector3=stage.get_node("LeftFoot").position
@@ -86,7 +87,7 @@ func run() -> void:
 	var stage_copy: Node3D=load("res://commons/modular/sphere_fractal_stage.tscn").instantiate()
 	stage_copy.apply_grid_config({"only_parts":["Backdrop"]})
 	stage_copy.position=Vector3(-7,-6,0);game.add_child(stage_copy);await frames(3)
-	check("catalogue stage and isolated copies retain the local recipe and ivory finish",stage_copy.get_child_count()==1 and stage_copy.has_node("Backdrop") and stage_copy.get_node("Backdrop/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("eee8dc")))
+	check("catalogue stage and isolated copies retain the shared recipe and ivory finish",stage_copy.get_child_count()==1 and stage_copy.has_node("Backdrop") and stage_copy.get_node("Backdrop/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("eee8dc")))
 	stage_copy.queue_free()
 	await item.prepare_editor_preview()
 	initial=item.get_node("Root_1").transform;await frames(15)

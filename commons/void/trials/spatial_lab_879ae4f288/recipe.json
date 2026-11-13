@@ -1,0 +1,35 @@
+{
+  "recipe": "lab_sphere_fractal",
+  "bindings": {
+    "source": "construction_cube",
+    "inner_source": "wp",
+    "tip_source": "trace_point_ball",
+    "depth": 4,
+    "size": 1.2,
+    "ratio": 0.5,
+    "spacing": 1.5,
+    "sag": 14,
+    "speed": 14,
+    "reverse": 0.65,
+    "seed": 17,
+    "phase": 6.05
+  },
+  "presentation": "studio",
+  "recipe_hash": "3de510d338e353b7fb5d56ea6168cdfd74f4b0e3b1b675cd49ceb31d56f5a5f0",
+  "sources": {
+    "construction_cube": {
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn",
+      "fingerprint": "ef7925945dc69fa114f21209bd819beb3deb50fd7a88e494630263e2c66a096c"
+    },
+    "wp": {
+      "scene": "res://commons/artifacts/primitive_encounters/wedge_blocker.tscn",
+      "fingerprint": "9f3ba1310f14ff4f189ccd390532577a35d94e44fde3871b7d4928dff60bf734"
+    },
+    "trace_point_ball": {
+      "scene": "res://commons/artifacts/primitive_encounters/trace_point_ball.tscn",
+      "fingerprint": "9daca5477c0e17c8f893638fa207bb31b6c88c2d19ef57425977a4bca823d577"
+    }
+  },
+  "created_at": "2026-11-13T11:18:12+0100",
+  "job": "879ae4f288984e1f8f1992637e4b80ec"
+}

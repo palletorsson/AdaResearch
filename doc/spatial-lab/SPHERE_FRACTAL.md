@@ -157,3 +157,58 @@ Screenshots: `ada_run/sphere-fractal-live/desktop-moving.png` and `controls.png`
 ![Staged living fractal](evidence/sphere-fractal-staged.png)
 
 ![Pink physical controls](evidence/sphere-fractal-controls.png)
+
+
+## Reuse the staging
+
+In Spatial Lab choose **Black / pink / ivory studio** under **Presentation**.
+The Three.js preview and new Godot trial use the same ten-part stage term and
+material palette. **Original materials / no stage** keeps the source finishes
+and omits the stage. This choice is saved alongside the recipe bindings and
+restored by **Reuse recipe settings**. Existing saved arrangements are untouched.
+
+The shared stage lives in `fractal_studio_stage` in `commons/modular/terms.json`;
+its palette, placement and envelope limits are in `commons/modular/fractal_studio.json`.
+Older trial-local stage recipes remain supported. All stage members remain
+individually editable, including independent copies.
+
+The stage supports a conservative 2.6 m motion radius over all four native depth
+settings and the full native size-slider range. Oversized spacing/ratio choices
+remain visible in the preview, with a warning and no staged save. Reduce those
+relations or select no stage; the tool never shrinks the original automatically.
+This bound assumes unedited member poses and the declared fitted collision boxes.
+
+**Counter-rotating blocks** reuses the same rule with construction cubes, walkable
+wedges and trace balls. The speed is 14 degrees/s, sag 14 degrees and reverse-spin
+fraction 0.65. It is a prescribed moving sculpture, not a hinged physics assembly.
+
+The saved mixed study is `spatial_lab_879ae4f288`, paused at 6.05 seconds in the
+browser before saving. It contains 156 moving members, ten separate staging
+pieces and a control stand. The main Void arrangement is not part of this edit.
+Choose this preset to explore another combination, or use **Reuse recipe settings**
+on the saved variation to recover its exact starting pose and presentation.
+
+The native export runner now allows the shared slot's 20-minute queue budget
+before its five-minute render budget. Previously the outer timeout could kill a
+valid queued export while a desktop playtest or Quest build occupied the slot.
+
+The mixed study passes 478 native source/geometry checks and 30 live desktop
+input/motion checks. Its 170 exported model files and every member pose agree
+with the web editor; independent move/rotate/copy, validation, isolated
+save/reload and stale-save rejection pass. The ten staging pieces are included.
+The main layout hash stayed unchanged during the successful check.
+
+The variation saved in 0.106 seconds; the successful native export and placement
+check took 25.375 seconds (12.769 export + 12.413 native process, plus receipt
+work). The full first attempt took longer because a shared Quest export occupied
+the native slot and missing station defaults required a correction. The durable
+job receipt records that queue/recovery time separately from the successful run.
+Physical headset interaction has not been tested.
+
+Receipts: `ada_run/fractal-studio-reuse/live/checks.json`,
+`ada_run/spatial-studies-2026-11-13/editor-checks.json`, and
+`ada_run/spatial-lab-2026-10-27/spatial_lab_879ae4f288/result.json`.
+
+![Counter-rotating cubes, wedges and spheres](evidence/fractal-blocks-desktop-moving.png)
+
+![Speed, size and level controls](evidence/fractal-blocks-controls.png)

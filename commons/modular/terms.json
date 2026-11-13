@@ -118296,6 +118296,194 @@
       "from": [
         "lab_fractal_assembly"
       ]
+    },
+    "fractal_studio_stage": {
+      "parameters": {},
+      "build": {
+        "op": "assemblage",
+        "parts": [
+          {
+            "id": "Deck",
+            "at": [
+              0,
+              0.06,
+              0
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "timber_panel_2x2",
+              "lab_input": true,
+              "fit_box": [
+                5.6,
+                0.12,
+                5.6
+              ]
+            }
+          },
+          {
+            "id": "Backdrop",
+            "at": [
+              0,
+              2.65,
+              -3.4
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "timber_panel_2x2",
+              "lab_input": true,
+              "fit_box": [
+                6,
+                5.3,
+                0.1
+              ]
+            }
+          },
+          {
+            "id": "LeftUpright",
+            "at": [
+              -3.06,
+              2.65,
+              -3.4
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "construction_cube",
+              "lab_input": true,
+              "fit_box": [
+                0.12,
+                5.3,
+                0.12
+              ]
+            }
+          },
+          {
+            "id": "LeftFoot",
+            "at": [
+              -3.06,
+              0.15,
+              -3.4
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "construction_cube",
+              "lab_input": true,
+              "fit_box": [
+                0.5,
+                0.3,
+                1.2
+              ]
+            }
+          },
+          {
+            "id": "RightUpright",
+            "at": [
+              3.06,
+              2.65,
+              -3.4
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "construction_cube",
+              "lab_input": true,
+              "fit_box": [
+                0.12,
+                5.3,
+                0.12
+              ]
+            }
+          },
+          {
+            "id": "RightFoot",
+            "at": [
+              3.06,
+              0.15,
+              -3.4
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "construction_cube",
+              "lab_input": true,
+              "fit_box": [
+                0.5,
+                0.3,
+                1.2
+              ]
+            }
+          },
+          {
+            "id": "EdgeLeft",
+            "at": [
+              -2.77,
+              0.123,
+              0
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "timber_panel_2x2",
+              "lab_input": true,
+              "fit_box": [
+                0.035,
+                0.006,
+                5.54
+              ]
+            }
+          },
+          {
+            "id": "EdgeRight",
+            "at": [
+              2.77,
+              0.123,
+              0
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "timber_panel_2x2",
+              "lab_input": true,
+              "fit_box": [
+                0.035,
+                0.006,
+                5.54
+              ]
+            }
+          },
+          {
+            "id": "EdgeBack",
+            "at": [
+              0,
+              0.123,
+              -2.77
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "timber_panel_2x2",
+              "lab_input": true,
+              "fit_box": [
+                5.54,
+                0.006,
+                0.035
+              ]
+            }
+          },
+          {
+            "id": "EdgeFront",
+            "at": [
+              0,
+              0.123,
+              2.77
+            ],
+            "of": {
+              "p": "prefab",
+              "token": "timber_panel_2x2",
+              "lab_input": true,
+              "fit_box": [
+                5.54,
+                0.006,
+                0.035
+              ]
+            }
+          }
+        ]
+      }
     }
   },
   "track": [

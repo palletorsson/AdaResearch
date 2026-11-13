@@ -24,7 +24,9 @@ async function main(){
  checks.push('Seeds reproduce exactly; omissions retain surviving positions; another seed changes the field');
  const tree=spec.recipes.find(r=>r.id==='lab_branching');for(let depth=0;depth<=5;depth++)assert.equal(spatialStudy({kind:'tree',...tree.defaults,depth}).parts.length,2**(depth+1)-1);
  checks.push('The binary branching rule produces 1, 3, 7, 15, 31 and 63 editable beams');
- for(const [recipe,ref] of Object.entries(refs).filter(([id])=>process.argv.length<3||id.startsWith(process.argv[2]))){
+ const selectedRefs=Object.entries(refs).filter(([id])=>process.argv.length<3||id.startsWith(process.argv[2]));
+ assert(selectedRefs.length,'No saved native reference matches the requested test filter');
+ for(const [recipe,ref] of selectedRefs){
   const dir=path.join(root,'ada_run/spatial-lab-2026-10-27',ref.trial),receipt=read(path.join(dir,'checks.json'));assert(receipt.passed);
   for(const pose of receipt.poses){const object=new Builder(terms).build({t:pose.recipe,with:pose.bindings});object.updateMatrixWorld(true);
    for(const p of pose.parts){if(['lab_fractal_assembly','lab_sphere_fractal'].includes(pose.recipe)){const expr=spatialStudy({kind:spec.recipes.find(r=>r.id===pose.recipe).kind,...pose.bindings});assert.equal(p.source,expr.parts.find(q=>q.id===p.id).of.token);}const child=object.getObjectByName(p.id);assert(child,p.id);const pos=new THREE.Vector3(),q=new THREE.Quaternion(),s=new THREE.Vector3();child.matrixWorld.decompose(pos,q,s);assert(pos.distanceTo(new THREE.Vector3(...p.position))<.00003,recipe+'/'+p.id+' position');const expected=new THREE.Quaternion().setFromEuler(new THREE.Euler(...p.rotation.map(v=>v*Math.PI/180),'YXZ'));assert(q.angleTo(expected)<.00003,recipe+'/'+p.id+' rotation');}
@@ -35,14 +37,14 @@ async function main(){
   const draft=structuredClone(payload.rooms),floor=draft.floors[1],part=entries[0];model.place(floor,part,[part.position[0]+.2,part.position[1],part.position[2]],payload);model.turn(floor,part);model.pasteObject(floor,model.copyObject(floor,part,payload,1),.4);
   assert.deepEqual(floor.copies.at(-1).config.only_parts,[part.id]);
   const staging=model.listEntries(payload.rooms.floors[1],payload,manifest,1).filter(e=>e.kind==='part'&&e.artifactId==='fractal-stage');
-  if(ref.trial==='spatial_lab_ca573ae619'){
+  if(staging.length){
    assert.equal(staging.length,10);
    const stage=staging.find(e=>e.id==='LeftFoot');assert(stage);
    model.place(floor,stage,[stage.position[0]-.2,stage.position[1],stage.position[2]],payload);model.turn(floor,stage);model.pasteObject(floor,model.copyObject(floor,stage,payload,1),.4);
    assert.deepEqual(floor.copies.at(-1).config.only_parts,['LeftFoot']);
-   assert.equal(floor.copies.at(-1).config.recipe_document,'res://commons/void/trials/spatial_lab_ca573ae619/stage/recipe.json');
+   assert.equal(floor.copies.at(-1).config.recipe_document,payload.rooms.floors[1].artifacts.find(a=>a.id==='fractal-stage').config?.recipe_document);
    for(const e of staging){const b=fs.readFileSync(path.join(web,'public',e.model.url));assert.equal(b.readUInt32LE(0),0x46546c67);const gltf=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)));assert(gltf.meshes.length);assert(gltf.materials.some(m=>m.pbrMetallicRoughness?.baseColorFactor),'staging GLB has actual materials');}
-   checks.push('Ten staging pieces expose real GLBs, local materials and independent move/rotate/copy with the local recipe retained');
+   checks.push('Ten staging pieces expose real GLBs, local materials and independent move/rotate/copy with their recipe retained');
   }
   const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rooms:draft,revision:payload.revision,validateOnly:true})});assert.equal(response.status,200,await response.text());
   const fixture=fs.mkdtempSync(path.join(out,'save-fixture-')),td=path.join(fixture,'commons/void/trials',ref.trial);fs.mkdirSync(td,{recursive:true});fs.copyFileSync(path.join(root,'commons/void/trials/playable.json'),path.join(fixture,'commons/void/trials/playable.json'));const raw=JSON.stringify(payload.rooms)+'\n';fs.writeFileSync(path.join(td,'rooms.json'),raw);saveLayout(fixture,draft,layoutRevision(raw),path.join(fixture,'Desktop'),ref.trial);assert.deepEqual(read(path.join(td,'rooms.json')),draft);assert.deepEqual(read(path.join(fixture,'Desktop/trials',ref.trial,'rooms.json')),draft);assert.throws(()=>saveLayout(fixture,draft,'stale',path.join(fixture,'Desktop'),ref.trial),LayoutConflict);

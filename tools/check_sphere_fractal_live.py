@@ -1,15 +1,16 @@
 """Focused real-input acceptance for the moving, editable sphere fractal."""
-import os, subprocess, json
+import os, subprocess, json, argparse
 from pathlib import Path
 from void_native_slot import acquire_native_slot
 from void_trial_runtime import stage_runtime
 from void_log_diagnostics import split_errors
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'ada_run/sphere-fractal-live'
-OUT.mkdir(exist_ok=True)
+parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--trial',default='spatial_lab_ca573ae619');parser.add_argument('--out',default='ada_run/sphere-fractal-live');options=parser.parse_args()
+OUT=ROOT/options.out
+OUT.mkdir(parents=True,exist_ok=True)
 with acquire_native_slot('Living sphere fractal / desktop controls',timeout=60):
     stage=stage_runtime()
-    args=[os.environ.get('GODOT_EXE','C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe'),'--no-window','--path',str(stage),'--rendering-method','gl_compatibility','--xr-mode','off','--resolution','1440x1000','--fixed-fps','60','--script','res://tools/probes/sphere_fractal_live_probe.gd','--','--no-bridges','--void-trial=spatial_lab_ca573ae619','--out='+str(OUT)]
+    args=[os.environ.get('GODOT_EXE','C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe'),'--no-window','--path',str(stage),'--rendering-method','gl_compatibility','--xr-mode','off','--resolution','1440x1000','--fixed-fps','60','--script','res://tools/probes/sphere_fractal_live_probe.gd','--','--no-bridges','--void-trial='+options.trial,'--out='+str(OUT)]
     with (OUT/'native.log').open('w',encoding='utf-8') as log:
         result=subprocess.run(args,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,timeout=120,creationflags=subprocess.CREATE_NO_WINDOW)
 log=(OUT/'native.log').read_text(encoding='utf-8',errors='replace')

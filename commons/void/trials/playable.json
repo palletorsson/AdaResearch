@@ -3418,6 +3418,27 @@
           4
         ]
       }
+    },
+    "spatial_lab_879ae4f288": {
+      "title": "Lab variation / lab_sphere_fractal",
+      "map": "Fractal_RecursiveTrees",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/spatial_lab_879ae4f288/rooms.json",
+      "layout": "res://commons/void/trials/spatial_lab_879ae4f288/layout.json",
+      "scene": "res://commons/void/trials/spatial_lab_879ae4f288/trial.tscn",
+      "models": "/void-trials/spatial_lab_879ae4f288/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          3.5,
+          0.06,
+          4
+        ]
+      }
     }
   }
 }
