@@ -297,6 +297,47 @@
 				}
 			}
 		},
+		"making_room": {
+			"lookup_name": "making_room",
+			"map_ready": true,
+			"name": "Making Room",
+			"class_name": "",
+			"scene": "res://algorithms/graphtheory/making_room/making_room.tscn",
+			"description": "The hall's workshop at the size of a body, and the body is the maker who waits. Four makers, four tools: cone figures A, B and C stand at the benches they took first, the fourth chair is the visitor's, and the visitor's task needs the drill. A line on the floor from a chair to a bench: that maker's task permits that tool. The drill is taken and the lathe stands unused. Standing still on ASK sends the question down the row - A could use the saw if B lets go of it, B the plane if C lets go of it, C finds the lathe free - and the moves come back: C steps to the lathe, B to the plane, A to the saw, and the drill is free. No new tool arrived. The pairing is the hall's own model (GT_Matching study, matching_model.gd): its greedy() is the first arrangement, its alternating_path() the question, its augment() the rearrangement. Axis arrangement: first; revised; short (no lathe - four makers and three tools: the question comes back and nobody moves). Built from the tower's prefabs: counter walls and salvaged chairs from the catalogue, traffic pyramids with trace balls for heads as the makers.",
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"sequence": "graphtheory",
+			"interaction": "walk",
+			"size_group": "room",
+			"tags": [
+				"graph",
+				"matching",
+				"bipartite",
+				"augmenting-path",
+				"allocation",
+				"walkable"
+			],
+			"qfep_connection": "What looked like a shortage was partly the consequence of an earlier allocation: asking changes what the room can offer - until the shortage is real.",
+			"dev_themes": [
+				"algorithms",
+				"graphs"
+			],
+			"dna": {
+				"axes": {
+					"arrangement": [
+						"first",
+						"revised",
+						"short"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "arrangement: first ~ short",
+					"percent": 0.8,
+					"arithmetic": "first and short differ by the lathe's bench - one counter wall 2.46 x 1.05 m seen from its front (2.6 square metres), its sign, its mat of one square metre and one floor line - and one sentence of the board; the three makers stand where they stood. Against a workshop of 12 x 8 m that fills about half the frame from the bench's standpoint: 3.6 / 96 x 0.5 = 1.9 %; a flat rasteriser misses the counter's relief and the sign, so 0.8 % as the floor. first ~ revised moves three makers one bench east and recolours six lines and three mats."
+				}
+			}
+		},
 		"two_travelers": {
 			"lookup_name": "two_travelers",
 			"map_ready": true,

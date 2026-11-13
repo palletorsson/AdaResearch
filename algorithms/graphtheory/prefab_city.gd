@@ -57,7 +57,11 @@ func catalogue_part(parent: Node3D, id: String, at: Vector3, yaw_degrees: float 
 	var config: Variant = found.get("config")
 	if path.ends_with("composite.tscn"): node.set("term", str(found.get("token", "")).trim_prefix("mod_"))
 	elif config is Dictionary:
-		for key in config: node.set_meta("config_" + str(key), config[key])
+		# a config key that is one of the scene's own properties is set before the scene builds: some scenes build
+		# in _ready from what they were given (the salvaged furniture's `piece`), and are only told afterwards
+		for key in config:
+			node.set_meta("config_" + str(key), config[key])
+			if str(key) in node: node.set(str(key), config[key])
 	node.position = at
 	node.rotation_degrees.y = yaw_degrees
 	parent.add_child(node)
