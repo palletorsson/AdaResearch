@@ -46107,6 +46107,346 @@
               "note": "fit pass: edge: north 2.3 m (0 of 20 samples past the slab have ground; moved 4.0 m"
             }
           }
+        },
+        {
+          "id": "iso-thresholds",
+          "artifact": "iso_prefab",
+          "station": "SW",
+          "position": [
+            -17.0,
+            6.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "thresholds",
+            "plaque": true,
+            "editor_label": "Thresholds | difference(wall, door, porthole, mousehole) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-tunnel",
+          "artifact": "iso_prefab",
+          "station": "SW",
+          "position": [
+            -17.0,
+            2.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "tunnel",
+            "plaque": true,
+            "editor_label": "Tunnel | difference(round_box, arch) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-crossing",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -17.0,
+            -2.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "crossing",
+            "plaque": true,
+            "editor_label": "Crossing | difference(block, union(arch_x, arch_z, room)) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-dome",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -17.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "dome",
+            "plaque": true,
+            "editor_label": "Dome | difference(sphere, sphere, door, oculus) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-gutter-ramp",
+          "artifact": "iso_prefab",
+          "station": "SW",
+          "position": [
+            -10.9,
+            5.5
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "gutter_ramp",
+            "plaque": true,
+            "editor_label": "Gutter ramp | difference(wedge, capsule) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-sieve",
+          "artifact": "iso_prefab",
+          "station": "SW",
+          "position": [
+            -7.6,
+            7.0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "sieve",
+            "plaque": true,
+            "editor_label": "Sieve | difference(tilted plate, repeat(sphere)) + legs | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-hump-bridge",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -10.8,
+            -6.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "hump_bridge",
+            "plaque": true,
+            "editor_label": "Hump bridge | difference(intersection(beam, sphere), culvert) | iso prefab, intersection; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-gyroid-screen",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -10.4,
+            -8.35
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "gyroid_screen",
+            "plaque": true,
+            "editor_label": "Gyroid screen | intersection(box, shell(gyroid)) + frame | iso prefab, intersection; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-mould",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -7.6,
+            -8.1
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "mould",
+            "plaque": true,
+            "editor_label": "Mould | difference(block, sphere)  (A - B) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-cast",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -7.6,
+            -6.75
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "cast",
+            "plaque": true,
+            "editor_label": "Cast | intersection(block, sphere)  (A & B) | iso prefab, intersection; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-die",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -6.2,
+            -5.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "die",
+            "plaque": true,
+            "editor_label": "Die | difference(intersection(cube, sphere), pips) | iso prefab, intersection; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-stones",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            17.0,
+            5.9
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "stones",
+            "plaque": true,
+            "editor_label": "Stones | smooth_union(floor, metaballs(3)) | iso prefab, union; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-mound",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            16.6,
+            1.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "mound",
+            "plaque": true,
+            "editor_label": "Mound | smooth_union(floor, sphere, k = 0.75) | iso prefab, union; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-pipe-tee",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            19.9,
+            1.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "pipe_tee",
+            "plaque": true,
+            "editor_label": "Pipe tee | difference(union(pipes, legs), union(bores)) | iso prefab, union; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-stile",
+          "artifact": "iso_prefab",
+          "station": "NE",
+          "position": [
+            17.0,
+            -4.6
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "stile",
+            "plaque": true,
+            "editor_label": "Stile | union(steps)  beside  smooth_union(floor, steps, k = 0.5) | iso prefab, union; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-basin",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            8.6,
+            6.1
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "basin",
+            "plaque": true,
+            "editor_label": "Basin | difference(round_box, sphere) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-chute",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            10.4,
+            6.1
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "chute",
+            "plaque": true,
+            "editor_label": "Chute | difference(sweep(trough, curve) + legs, sweep(bore, curve)) | iso prefab, field; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-funnel",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            12.2,
+            8.0
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "funnel",
+            "plaque": true,
+            "editor_label": "Funnel | revolve(shell(profile)) + legs | iso prefab, field; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-boulder",
+          "artifact": "iso_prefab",
+          "station": "SE",
+          "position": [
+            6.9,
+            8.25
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "boulder",
+            "plaque": true,
+            "editor_label": "Boulder | smooth_union(floor, ellipsoid + noise) | iso prefab, field; the boolean floor yard"
+          }
+        },
+        {
+          "id": "iso-spiral-ramp",
+          "artifact": "iso_prefab",
+          "station": "NE",
+          "position": [
+            10.0,
+            -6.95
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "spiral_ramp",
+            "plaque": true,
+            "editor_label": "Spiral ramp | smooth_union(helix(rise 1 m, 300 deg), post) | iso prefab, field; the boolean floor yard"
+          }
         }
       ],
       "props": [],
@@ -46321,6 +46661,48 @@
           "position": [
             0,
             -2.8
+          ]
+        },
+        {
+          "label": "DIFFERENCE / A WAY THROUGH, A ROOM, AN INSIDE\nEach cut is a place a body can be.",
+          "position": [
+            -17.0,
+            8.55
+          ]
+        },
+        {
+          "label": "DIFFERENCE / CUTS SIZED FOR A BALL",
+          "position": [
+            -9.6,
+            4.0
+          ]
+        },
+        {
+          "label": "INTERSECTION / KEEP WHAT BOTH ALLOW\nWhat two convex shapes share is convex: it can roll.",
+          "position": [
+            -9.4,
+            -4.75
+          ]
+        },
+        {
+          "label": "UNION / CONNECTED IS NOT PASSABLE\nThe smoothing band decides whether a body gets over.",
+          "position": [
+            17.0,
+            8.55
+          ]
+        },
+        {
+          "label": "FIELD / TWIST, TURN, SWEEP, ROUGHEN - THEN CUT",
+          "position": [
+            9.6,
+            4.0
+          ]
+        },
+        {
+          "label": "TWENTY PREFABS MADE AS ISOSURFACES\nUnlike the three verbs here, every one of them has collision.",
+          "position": [
+            -5.95,
+            -0.6
           ]
         }
       ],

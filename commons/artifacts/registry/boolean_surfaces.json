@@ -1,5 +1,83 @@
 {
 	"artifacts": {
+		"iso_prefab": {
+			"dna": {
+				"axes": {
+					"form": [
+						"tunnel",
+						"crossing",
+						"thresholds",
+						"sieve",
+						"dome",
+						"basin",
+						"gutter_ramp",
+						"mould",
+						"cast",
+						"hump_bridge",
+						"die",
+						"gyroid_screen",
+						"stile",
+						"mound",
+						"stones",
+						"pipe_tee",
+						"spiral_ramp",
+						"funnel",
+						"chute",
+						"boulder"
+					],
+					"finish": [
+						"provenance",
+						"cast"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "form: mould ~ basin",
+					"percent": 4.0,
+					"arithmetic": "Both are a pale rounded block with an orange spherical dish, and the bench fits each to its own box, so both fill the frame. They differ in proportion (height over width 0.55 against 0.22) and in the depth of the cup (0.36 m against 0.26 m): about a third of the subject's silhouette moves, the subject is about a third of the frame, so 0.33 x 0.35 = 12 % of the frame changes somewhere, most of it by small grey steps; 4 % in the hottest pixels as the floor. finish: provenance ~ cast on the default tunnel recolours its cut faces (15.3 of 45 m2) where the camera sees into the passage, about 3 %."
+				}
+			},
+			"name": "Isosurface prefabs: twenty pieces the verbs make",
+			"lookup_name": "iso_prefab",
+			"description": "Twenty construction prefabs made as isosurfaces: signed-distance shapes combined with union, intersection and difference (and smooth union, twist, revolve, sweep, noise), marched into meshes, and given collision a body and a ball meet - the things the tower's primitive kit cannot be: a tunnel and a crossing to walk through, a dome to be inside, a wall whose three cuts are sized for a body, a hand and a ball, a sieve, a basin, a gutter ramp, a mould and the cast that fills it, a hump bridge with a culvert, a die, a gyroid screen, a stile whose smoothed half a body can climb and whose plain union it cannot, a mound and stones blended into the floor, a pipe tee bored after it was joined, a spiral ramp a metre up in one turn, a funnel with a throat, a chute and a noise boulder. Each face is painted by where it came from (orange: a difference cut it; sea-green: an intersection trimmed it; yellow: a smooth union's band). What two convex shapes share is convex, so the cast and the die are rigid bodies that roll; everything a difference made stands still. Geometry from tools/iso_prefabs.py (the expressions and their checks), baked by bake_forms.gd.",
+			"scene": "res://commons/artifacts/iso_prefabs/iso_prefab.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "BUILD WITH the verbs: pass through, keep, filter, climb, roll",
+			"dev_themes": [
+				"boolean_surfaces",
+				"isosurfaces",
+				"construction_kit"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"boolean",
+				"isosurface",
+				"sdf",
+				"marching-cubes",
+				"prefab",
+				"walkable",
+				"construction"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"interaction": "walk",
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					4
+				],
+				"size_group": "room"
+			},
+			"qfep_connection": "The verbs become architecture: a cut is a place a body can be, a shared region can roll away, and a union that is connected is still not passable until the band between its parts is smoothed. Each face says which operation made it - an absence given a surface, in its own colour."
+		},
 		"csg_union_demo": {
 			"dna": {
 				"promoted": "2026-08-11",
