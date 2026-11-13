@@ -85,6 +85,14 @@ def check(trial,folder,state=None):
     provenance={file:fingerprint(ROOT/file) for file in ['commons/modular/terms.json','commons/modular/builder.gd','commons/modular/room_chain.gd','commons/modular/spatial_studies.gd','commons/modular/fractal_assemblage.gd','commons/modular/sphere_fractal.gd','commons/modular/sphere_fractal_live.gd','commons/modular/sphere_fractal_controls.gd','algorithms/fractals/meshfractal/fractal.gd','commons/modular/recipe_area.gd','commons/modular/lab_input.gd','commons/modular/lab.json','commons/void/primitive-prefabs.json','tools/probes/spatial_lab_probe.gd']}
     definitions=read(ROOT/'commons/void/trials/playable.json')['trials'][trial]
     rooms=read(ROOT/definitions['rooms'][6:]);catalogue=inputs()
+    for floor in rooms['floors']:
+        for item in floor.get('artifacts',[]):
+            document=item.get('config',{}).get('recipe_document','')
+            if document.startswith('res://commons/void/trials/'):
+                file=document[6:];provenance[file]=fingerprint(ROOT/file)
+            if item['artifact']=='sphere_fractal_stage':
+                for file in ['commons/modular/sphere_fractal_stage.gd','commons/modular/sphere_fractal_finish.gd']:
+                    provenance[file]=fingerprint(ROOT/file)
     recipes={r['id']:r for r in read(ROOT/'commons/modular/lab.json')['recipes']}
     used=set()
     for floor in rooms['floors']:

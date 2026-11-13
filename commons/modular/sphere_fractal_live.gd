@@ -2,6 +2,8 @@ extends "res://commons/modular/recipe_area.gd"
 ## Live five-way recursion. Saved part poses are offsets from the authored pose;
 ## they survive animation, scale changes and temporary depth reduction.
 const SphereRule = preload("res://commons/modular/sphere_fractal.gd")
+const Finish = preload("res://commons/modular/sphere_fractal_finish.gd")
+var studio_finish := false
 var running := true
 var preview_frozen := false
 var runtime_speed := 22.5
@@ -11,6 +13,10 @@ var phase_clock := 0.0 # equivalent seconds at 22.5 degrees/s; speed changes nev
 var _members: Dictionary = {}
 var _offsets: Dictionary = {}
 var _depth_pending := false
+
+func apply_grid_config(config: Dictionary) -> void:
+	studio_finish=bool(config.get("studio_finish",studio_finish))
+	super.apply_grid_config(config)
 
 func rebuild() -> void:
 	# Complete defaults also make the registered catalogue entry usable directly.
@@ -34,6 +40,9 @@ func _cache_members() -> void:
 		_offsets[id]={"position":child.position-Vector3(base.position[0],base.position[1],base.position[2]),"basis":child.basis*reference.inverse()}
 		# Moving solids follow the physics clock, with unscaled collision shapes.
 		var source: Node3D=child.get_node("Source")
+		if studio_finish:
+			var generation: int=id.count("_")
+			Finish.apply(source,"ivory" if generation==runtime_depth-1 else "pink" if generation>0 and generation%2==0 else "steel")
 		var old: StaticBody3D=source.get_node_or_null("StructuralCollision")
 		if old!=null and not old is AnimatableBody3D:
 			var body:=AnimatableBody3D.new();body.name="StructuralCollision";body.sync_to_physics=false
@@ -99,6 +108,7 @@ func _rebuild_depth() -> void:
 func prepare_editor_preview() -> void:
 	# Stable exported models use the saved pose, never a random animation frame.
 	preview_frozen=true;set_physics_process(false)
+	runtime_depth=int(bindings.depth);runtime_size=float(bindings.size)
 	super.rebuild();_cache_members()
 	await super.prepare_editor_preview()
 

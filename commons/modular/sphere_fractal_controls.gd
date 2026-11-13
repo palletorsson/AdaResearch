@@ -1,6 +1,8 @@
 extends Node3D
 ## Companion control stand. A separate editable artifact, linked by placement ID.
 const ControlPanel = preload("res://commons/ui/control_panel.gd")
+const Finish = preload("res://commons/modular/sphere_fractal_finish.gd")
+var studio_finish := false
 var target_id := "variation"
 var target: Node3D
 var panel: Node3D
@@ -11,15 +13,19 @@ var _syncing := false
 
 func apply_grid_config(config: Dictionary) -> void:
 	target_id=str(config.get("target_id",target_id))
+	studio_finish=bool(config.get("studio_finish",studio_finish))
 
 func _ready() -> void:
 	panel=ControlPanel.new();panel.name="FractalControls";panel.title="FIVE CHILDREN / ONE RULE"
 	panel.tilt_degrees=-18;panel.layout_columns=3
+	if studio_finish:
+		panel.panel_color=Color("eee8dc");panel.frame_color=Color("171c26");panel.accent_color=Color("e64b91")
 	panel.position=Vector3(0,1.1,0);add_child(panel)
 	readout=panel.add_readout("CONNECTING TO STUDY")
 	for entry in [["speed","SPEED / DEG S",0.0,45.0,1],["size","SIZE / METRES",.4,1.8,2],["depth","LEVELS / 1-4",1.0,4.0,0]]:
 		var slider: Node3D=panel.add_slider(entry[1]);slider.name=str(entry[0]).capitalize()
 		slider.set_range(entry[2],entry[3]);slider.decimal_places=entry[4]
+		if studio_finish:slider.get_node("SliderOrigin/InteractableSlider/HandleOrigin/HandleMesh").material_override=Finish.material("pink")
 		sliders[entry[0]]=slider
 		slider.slider_moved.connect(_slider_changed.bind(str(entry[0]),float(entry[2]),float(entry[3])))
 	# A plain black steel stand leaves the form visible above the controls.
@@ -66,6 +72,7 @@ func _process(delta: float) -> void:
 		sliders[entry[0]].set_normalized_value(inverse_lerp(entry[2],entry[3],entry[1]))
 	_syncing=false
 	readout.text="%.1f DEG/S | %.2f M | %d LEVELS\n%d PARTS / SPEED ZERO HOLDS THE POSE"%[target.runtime_speed,target.runtime_size,target.runtime_depth,target._members.size()]
+	if studio_finish:readout.add_theme_color_override("font_color",Color("eee8dc"))
 
 func prepare_editor_preview() -> void:
 	set_process(false)

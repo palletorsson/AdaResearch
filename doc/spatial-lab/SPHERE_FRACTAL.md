@@ -57,7 +57,7 @@ updated alongside visible size. This is prescribed motion, not a physically
 connected assembly or Jolt simulation. Overlaps remain findings to inspect.
 
 The existing mixed reference `spatial_lab_ca573ae619` has been upgraded in place;
-its saved arrangement was preserved. The older sphere/cube reference remains a
+its member arrangement was preserved; the staged version raises the whole study by 1.05 metres. The older sphere/cube reference remains a
 static historical pose. New variations and the reusable catalogue entry use
 `sphere_fractal_live.tscn`.
 
@@ -122,3 +122,38 @@ rebuilds, retained member edits, static copies and frozen export poses. Receipts
 and native pictures live in `ada_run/sphere-fractal-live/`. This does not certify
 physical-headset interaction. The separate source/editor probe is still used to
 verify the exported saved pose and actual member models.
+
+
+## Staged mixed reference — 13 November 2026
+
+`spatial_lab_ca573ae619` now frames the moving form with a 5.6 m square,
+12 cm high charcoal deck, a freestanding ivory backdrop and pink edge strips.
+The backdrop, feet, uprights, deck and strips are ten separate editable parts
+made from existing construction boards and cubes. The control stand sits just
+outside the motion envelope, on the front right. Walk around the deck to inspect
+the inherited motion and its changing silhouette on the backdrop.
+
+`studio_finish: true` applies local material overrides: black steel branches,
+pink inner polyhedra and ivory tips. The source prefab scenes and materials are
+unchanged. The editor exports the same finishes. The stage adapter supplies its
+local recipe when placed from the catalogue; individual copies retain that
+recipe and their material. No lights or main-tower arrangements were changed.
+
+The complete form is raised 1.05 m. A conservative envelope for every rotation
+phase, at size 1.8 m with ratio 0.5 and spacing 1.5, remains above the deck,
+below the structural ceiling and clear of the backdrop and control stand.
+This bound does not cover arbitrary member offsets, larger spacing or a changed
+ratio; those edits need their own space review. Branch envelopes intentionally
+overlap. Motion remains prescribed, not a linked rigid-body simulation.
+
+The staged reference passes 30 native checks for real desktop slider input,
+motion, materials, clearance, copied staging and independent edits; 478 source
+and geometry checks; and editor move/rotate/copy/validate/save/reload checks in
+an isolated fixture. The export references 170 actual GLB model files. This is
+not physical-headset acceptance. Runtime slider settings remain session-only.
+
+Screenshots: `ada_run/sphere-fractal-live/desktop-moving.png` and `controls.png`.
+
+![Staged living fractal](evidence/sphere-fractal-staged.png)
+
+![Pink physical controls](evidence/sphere-fractal-controls.png)

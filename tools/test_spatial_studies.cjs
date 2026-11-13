@@ -34,6 +34,16 @@ async function main(){
   for(const e of entries){const b=fs.readFileSync(path.join(web,'public',e.model.url));assert.equal(b.readUInt32LE(0),0x46546c67);assert(JSON.parse(b.subarray(20,20+b.readUInt32LE(12))).meshes.length);}
   const draft=structuredClone(payload.rooms),floor=draft.floors[1],part=entries[0];model.place(floor,part,[part.position[0]+.2,part.position[1],part.position[2]],payload);model.turn(floor,part);model.pasteObject(floor,model.copyObject(floor,part,payload,1),.4);
   assert.deepEqual(floor.copies.at(-1).config.only_parts,[part.id]);
+  const staging=model.listEntries(payload.rooms.floors[1],payload,manifest,1).filter(e=>e.kind==='part'&&e.artifactId==='fractal-stage');
+  if(ref.trial==='spatial_lab_ca573ae619'){
+   assert.equal(staging.length,10);
+   const stage=staging.find(e=>e.id==='LeftFoot');assert(stage);
+   model.place(floor,stage,[stage.position[0]-.2,stage.position[1],stage.position[2]],payload);model.turn(floor,stage);model.pasteObject(floor,model.copyObject(floor,stage,payload,1),.4);
+   assert.deepEqual(floor.copies.at(-1).config.only_parts,['LeftFoot']);
+   assert.equal(floor.copies.at(-1).config.recipe_document,'res://commons/void/trials/spatial_lab_ca573ae619/stage/recipe.json');
+   for(const e of staging){const b=fs.readFileSync(path.join(web,'public',e.model.url));assert.equal(b.readUInt32LE(0),0x46546c67);const gltf=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)));assert(gltf.meshes.length);assert(gltf.materials.some(m=>m.pbrMetallicRoughness?.baseColorFactor),'staging GLB has actual materials');}
+   checks.push('Ten staging pieces expose real GLBs, local materials and independent move/rotate/copy with the local recipe retained');
+  }
   const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rooms:draft,revision:payload.revision,validateOnly:true})});assert.equal(response.status,200,await response.text());
   const fixture=fs.mkdtempSync(path.join(out,'save-fixture-')),td=path.join(fixture,'commons/void/trials',ref.trial);fs.mkdirSync(td,{recursive:true});fs.copyFileSync(path.join(root,'commons/void/trials/playable.json'),path.join(fixture,'commons/void/trials/playable.json'));const raw=JSON.stringify(payload.rooms)+'\n';fs.writeFileSync(path.join(td,'rooms.json'),raw);saveLayout(fixture,draft,layoutRevision(raw),path.join(fixture,'Desktop'),ref.trial);assert.deepEqual(read(path.join(td,'rooms.json')),draft);assert.deepEqual(read(path.join(fixture,'Desktop/trials',ref.trial,'rooms.json')),draft);assert.throws(()=>saveLayout(fixture,draft,'stale',path.join(fixture,'Desktop'),ref.trial),LayoutConflict);
   checks.push(recipe+': native/Web poses, all exported member GLBs, independent move/rotate/copy and save/reload pass');

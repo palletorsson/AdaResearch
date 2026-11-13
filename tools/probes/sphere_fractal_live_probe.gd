@@ -11,10 +11,26 @@ func run() -> void:
 	var controls: Node3D=station("fractal-controls")
 	check("separate control stand binds its own editable study",controls.target==item)
 	check("saved depth creates 156 independent objects",item._members.size()==156)
+	var stage: Node3D=station("fractal-stage")
+	check("ten staging boards and blocks remain independently editable",stage.part_defaults.size()==10)
+	check("ivory terminal material is a local override",item.get_node("Root_1_1_1/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("eee8dc")))
+	check("generation two uses pink instead of its source traffic pattern",item.get_node("Root_1_1/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("e64b91")))
+	check("control handles use the same pink",controls.sliders.speed.get_node("SliderOrigin/InteractableSlider/HandleOrigin/HandleMesh").material_override.albedo_color.is_equal_approx(Color("e64b91")))
+	# All-time conservative envelope: add each inherited child offset plus its
+	# rotated cube-envelope radius. This covers every phase, not only pictures.
+	var lower: float=INF;var upper: float=-INF;var radius: float=0
+	for generation in 4:
+		var child_size: float=1.8*pow(.5,generation)
+		var distance: float=1.5*1.8*(1.0-pow(.5,generation))
+		var reach: float=distance+sqrt(3.0)*child_size/2
+		lower=minf(lower,1.05+1.8-reach);upper=maxf(upper,1.05+1.8+reach);radius=maxf(radius,reach)
+	check("largest setting clears the platform across every spin phase",lower>.12)
+	check("largest setting stays below the structural ceiling",upper<5.64)
+	check("backdrop and controls stay outside the complete motion envelope",radius<2.8 and absf(stage.get_node("Backdrop").position.z)-.05-radius>.7 and Vector2(controls.get_parent().position.x,controls.get_parent().position.z).length()-radius>.9)
 	var initial: Transform3D=item.get_node("Root_1").transform
 	await frames(35)
 	check("native recursive parts move without touching a control",not item.get_node("Root_1").transform.is_equal_approx(initial))
-	game.place_player(Vector3(2.2,-5.94,3.8));await frames(10)
+	game.place_player(controls.global_position+Vector3(0,.06,1.4));await frames(10)
 	Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 	await drag_slider(controls.sliders.speed,0.0)
 	check("real desktop speed slider can hold the pose",item.runtime_speed<.1)
@@ -62,8 +78,16 @@ func run() -> void:
 	item.apply_grid_config({"recipe":"lab_sphere_fractal","bindings":item.bindings,"parts":{}})
 	await frames(15)
 	check("control readouts follow reloaded editor settings",absf(controls.sliders.speed.get_normalized_value()-.5)<.001 and absf(controls.sliders.size.get_normalized_value()-(1.2-.4)/1.4)<.001)
-	await photograph("desktop-moving",Vector3(4,-3.5,5),Vector3(.4,-4.8,.2))
-	await photograph("controls",Vector3(2.4,-4.45,3.55),Vector3(2.2,-4.82,2.4))
+	await photograph("desktop-moving",Vector3(0,-2.8,7),Vector3(0,-3.6,-.2))
+	await photograph("controls",Vector3(3.05,-4.45,4.3),Vector3(2.85,-4.82,3.15))
+	var edit_base: Vector3=stage.get_node("LeftFoot").position
+	stage.apply_grid_config({"parts":{"LeftFoot":{"position":[edit_base.x-.2,edit_base.y,edit_base.z],"rotation":[0,20,0]}}})
+	check("a staging block can move and rotate independently",stage.get_node("LeftFoot").position.distance_to(edit_base+Vector3(-.2,0,0))<.001 and absf(stage.get_node("LeftFoot").rotation_degrees.y-20)<.001)
+	var stage_copy: Node3D=load("res://commons/modular/sphere_fractal_stage.tscn").instantiate()
+	stage_copy.apply_grid_config({"only_parts":["Backdrop"]})
+	stage_copy.position=Vector3(-7,-6,0);game.add_child(stage_copy);await frames(3)
+	check("catalogue stage and isolated copies retain the local recipe and ivory finish",stage_copy.get_child_count()==1 and stage_copy.has_node("Backdrop") and stage_copy.get_node("Backdrop/Source/FittedVisual").get_child(0).material_override.albedo_color.is_equal_approx(Color("eee8dc")))
+	stage_copy.queue_free()
 	await item.prepare_editor_preview()
 	initial=item.get_node("Root_1").transform;await frames(15)
 	check("editor export remains fixed at authored pose",item.preview_frozen and item.get_node("Root_1").transform.is_equal_approx(initial))

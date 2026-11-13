@@ -28,7 +28,7 @@
             0
           ],
           "facing": 0,
-          "height": 0,
+          "height": 1.05,
           "scale": 1,
           "config": {
             "recipe": "lab_sphere_fractal",
@@ -45,7 +45,8 @@
               "reverse": 0.25,
               "seed": 17,
               "phase": 16.75
-            }
+            },
+            "studio_finish": true
           }
         },
         {
@@ -53,14 +54,31 @@
           "artifact": "sphere_fractal_controls",
           "station": "SE",
           "position": [
-            2.2,
-            2.4
+            2.85,
+            3.15
           ],
           "height": 0,
           "facing": 0,
           "scale": 1,
           "config": {
-            "target_id": "variation"
+            "target_id": "variation",
+            "studio_finish": true
+          }
+        },
+        {
+          "id": "fractal-stage",
+          "artifact": "sphere_fractal_stage",
+          "station": "NW",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "recipe": "fractal_stage",
+            "recipe_document": "res://commons/void/trials/spatial_lab_ca573ae619/stage/recipe.json"
           }
         }
       ],
