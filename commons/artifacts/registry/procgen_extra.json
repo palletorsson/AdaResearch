@@ -13534,6 +13534,51 @@
         2
       ]
     },
+    "record_piles": {
+      "lookup_name": "record_piles",
+      "scene": "res://algorithms/proceduralgeneration/growth_systems/record_piles/record_piles.tscn",
+      "name": "Record Piles (192 records, 14 places)",
+      "description": "The comparison of the hall PG_Branching_Growth laid on the floor: stored records against distinct positions. The work has no rule of its own. It reads the records of the lesson's model on its floor (branching_growth_algorithm.gd, stepped by the hall's desk) and sets every record down as one disc at its position, two metres to the study's one; records stored at one position lie on each other, every tenth disc pink, the number over the pile. The targets stand as posts with the ring a site has to stand inside; a post turns green when its target is reached. With the rule's random terms off the cap of 192 records is spent after eight steps on 14 positions - piles of 40, 30, 30, 20 - with one target of eight reached; with the desk's VARIATION every record gets its own place. A plate changes what is shown: every record, or one disc a place (what a drawing of the tree shows). Where no lesson stands, own_steps steps an instance of the same lesson script.",
+      "category": "procedural_generation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "proceduralgeneration"
+      ],
+      "sequence": "proceduralgeneration",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "branching",
+        "growth",
+        "nearest-target",
+        "records",
+        "redundancy",
+        "walkable"
+      ],
+      "qfep_connection": "A count of what was stored is not a count of what came to exist: the pile shows the work that an outline keeps out of sight.",
+      "dev_themes": [
+        "procedural",
+        "generation"
+      ],
+      "dna": {
+        "axes": {
+          "shows": [
+            "records",
+            "places"
+          ]
+        },
+        "fixture": {
+          "own_steps": 8
+        },
+        "predicted_degeneracy": {
+          "pair": "shows: records ~ places",
+          "percent": 0.7,
+          "arithmetic": "The axis has two values. After eight steps 192 records stand on 14 places. As piles they show from the side 2 x 0.09 m wide and 0.04 m a disc: 0.18 x 0.04 x 192 = 1.4 square metres; as one disc a place they show 14 x 0.18 x 0.04 = 0.1. The posts stand out to 12 m north and 6 m west, so the frame fitted to the whole work shows some 200 square metres of its plane: 1.3 / 200 = 0.7 %. A small number for the still, because the work is far-flung; in the hall the piles stand at arm's length."
+        }
+      }
+    },
     "colonization_floor": {
       "lookup_name": "colonization_floor",
       "scene": "res://algorithms/proceduralgeneration/growth_systems/colonization_floor/colonization_floor.tscn",

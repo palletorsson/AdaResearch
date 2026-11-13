@@ -43085,11 +43085,34 @@
               "note": "fit pass: edge: north 0.8 m (0 of 5 samples past the slab have ground); moved 1.8 m"
             }
           }
+        },
+        {
+          "id": "record-piles",
+          "artifact": "record_piles",
+          "station": "SW",
+          "position": [
+            0,
+            4.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Record piles | the lesson's stored records laid on the floor two metres to the study's one, records at one position stacked; reads the model the desk steps; eight posts out to 12 m north"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / 192 RECORDS, HOW MANY PLACES?\nStep the rule at the desk. Every disc is one stored record.",
+          "position": [
+            -2.2,
+            7.2
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
