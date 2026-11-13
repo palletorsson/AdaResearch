@@ -214,6 +214,47 @@
 				}
 			}
 		},
+		"stone_river": {
+			"lookup_name": "stone_river",
+			"map_ready": true,
+			"name": "The Route After a Stone Disappears",
+			"class_name": "",
+			"scene": "res://algorithms/graphtheory/stone_river/stone_river.tscn",
+			"description": "The lesson's river at the size of a body. A river ten cells wide and six deep, a metre a cell, between the hall floor and a fenced north bank that can only be reached over the stones: 34 stones at seed 40, a crossing of seven. A body steps from a stone to a stone that shares an edge; water holds it off. Balls lie on the shortest way from where the body stands to the bank it is making for, found with the tutorial's own breadth-first search (the study's route.gd). The river takes a stone on that way - never the one a body stands on; three can be down at once, the fourth sinking lets the oldest rise. Axis impatience: still (only by a plate), patient (every 20 s), impatient (every 8 s). Built from the tower's prefabs: timber panels, trace balls and concrete barriers through the spatial lab's adapter; the museum tape barrier, the pink triangle sign and tripod work lights from the wider catalogue.",
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"sequence": "graphtheory",
+			"interaction": "walk",
+			"size_group": "room",
+			"tags": [
+				"graph",
+				"pathfinding",
+				"breadth-first",
+				"replanning",
+				"stepping-stones",
+				"walkable"
+			],
+			"qfep_connection": "A route is a record of what was available when it was found: the body learns it when the next stone is gone.",
+			"dev_themes": [
+				"algorithms",
+				"graphs"
+			],
+			"dna": {
+				"axes": {
+					"impatience": [
+						"still",
+						"patient",
+						"impatient"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "impatience: still ~ patient ~ impatient",
+					"percent": 0.0,
+					"arithmetic": "The axis is a rate: how often the river takes a stone while a body is on it. On a bench no body stands on the river, so nothing sinks at any value and the three stills are the same picture; the only difference is one line of the board's text. This axis is declared for the map token and is invisible in a still by law - the sweep will say INERT, and that verdict is a fact about the bench, not about the river."
+				}
+			}
+		},
 		"two_travelers": {
 			"lookup_name": "two_travelers",
 			"map_ready": true,

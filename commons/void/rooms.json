@@ -48218,11 +48218,36 @@
             "plinth": "0",
             "pin": "1"
           }
+        },
+        {
+          "id": "stone-river",
+          "artifact": "stone_river",
+          "station": "SW",
+          "position": [
+            1.0,
+            0.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "impatience": "patient",
+            "west_end_fenced": false,
+            "editor_label": "Stone river | a river 10 x 6 m of stepping stones, its west end the wall of the hall below (x -4); a fenced north bank; the river takes a stone on the body's way every 20 s"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / CROSS THE RIVER BY ITS STONES\nThe balls show the shortest way. The river will take a stone.",
+          "position": [
+            -1.2,
+            5.9
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
