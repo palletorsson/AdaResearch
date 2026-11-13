@@ -123,6 +123,8 @@ func _process(delta: float) -> void:
 		var still := false
 		for b in area.get_overlapping_bodies():
 			if b is CharacterBody3D:
+				var off: Vector3 = (b as CharacterBody3D).global_position - area.global_position
+				if Vector2(off.x, off.z).length() > 0.3: continue      # its middle is not on the plate: a body stopped by a fence beside one is not standing on it
 				someone = true
 				var v: Vector3 = (b as CharacterBody3D).velocity
 				if Vector2(v.x, v.z).length() < 0.3: still = true
