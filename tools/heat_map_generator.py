@@ -89,9 +89,26 @@ def get_heat():
     if os.path.exists(disc_path):
         with open(disc_path, encoding='utf-8') as f:
             discoveries = json.load(f)
+        # A discovery is hot while it is fresh. Most entries record a repair that
+        # already landed, and nothing marks them resolved, so without an age limit
+        # the last three ever written sat at 60 forever (2026-11-14: gate-f, gate-o
+        # and verify_sequence, all fixed weeks earlier, were three of four items).
+        max_age = timedelta(days=14)
+        now_utc = datetime.now().astimezone()
+
+        def _fresh(d):
+            try:
+                ts = datetime.fromisoformat(str(d.get("timestamp", "")).replace("Z", "+00:00"))
+            except ValueError:
+                return False
+            if ts.tzinfo is None:
+                ts = ts.astimezone()
+            return now_utc - ts <= max_age
+
         recent = [d for d in discoveries.get("discoveries", [])
                   if d.get("lod", 0) >= 3
-                  and d.get("status") != "resolved"]  # deep discoveries, not yet resolved
+                  and d.get("status") != "resolved"  # deep discoveries, not yet resolved
+                  and _fresh(d)]
         for disc in recent[-3:]:  # last 3 unresolved deep discoveries
             heat.append({
                 "item": disc.get("topic", "unknown")[:60],

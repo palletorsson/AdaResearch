@@ -863,6 +863,30 @@
       "topic": "gates",
       "insight": "Gate N (check_tools_reachable.py) scopes its ignored listing by git pathspec ('-- tools') since 2026-10-23: ada_run/void-trial-runtime stages are 40 junctions each into the repo and Git for Windows descends junctions, so an unscoped 'ls-files --ignored' walked the repo once per stage (763 stages = 2h+, killed). Scoped: 2.8s, same verdict. tools/void_trial_prune.py tears stages down junction-aware (os.rmdir a junction, never descend; chmod the read-only openxr_action_map.tres copy; stale by CREATION time, since a half teardown rewrites mtime). 692 stale stages removed, repo folder counts unchanged.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-10-31T08:18:11.406873+00:00",
+      "topic": "verify_sequence",
+      "insight": "2026-10-31: the spine's whole verify_sequence error surface is map_info.title (20 of 20 errors, 26 sequences). Titles are a catalogue line (the game board reads m_data.info); a byte-level insert after lookup_name keeps indent/EOL so git shows +1 line. 15 remain: 14 primitives (author's, proposed in forum 261031-ovz37) + untracked Trans_Playground.",
+      "lod": 3,
+      "status": "resolved",
+      "resolved_note": "2026-11-14 breath: the title repair landed 2026-10-31; the 15 that remain are proposed to their authors (forum 261031-ovz37)"
+    },
+    {
+      "timestamp": "2026-11-01T16:39:30.708854+00:00",
+      "topic": "gate-f",
+      "insight": "2026-11-01: gate F's no_route at z=61 since 09-30 was the Point_Lines chicane (map rows 29-34, 3 cells wide): endless_museum._extent_of(node, true) counts every CollisionShape3D, so the Area3D pads of anamorphic_cross and health_cross (2.8 m across in passage mode) sealed the corridor as if they were bodies. Fix: get_museum_occupied_cells() -> [] on both artifacts (Ada 90259ec07); walk PASS z=142, 9/15 gates. A zone in a narrow passage must declare the hook or the walk map calls the passage closed.",
+      "lod": 3,
+      "status": "resolved",
+      "resolved_note": "2026-11-14 breath: fixed in Ada 90259ec07; gate F walked PASS z=142 afterwards"
+    },
+    {
+      "timestamp": "2026-11-06T08:26:01.861210+00:00",
+      "topic": "gate-o",
+      "insight": "2026-11-06: gate O's three Catalyst maps (2314 int cells, tracked-clean since 504128dc3) quoted in 129bdba0a - structure ints as strings, utilities 0 as the EMPTY token not \"0\" (GridUtilitiesComponent skips empty and would look up \"0\" as a utility code). Third data-shape repair after 6f117a373 (09-10) and the 09-18 biome maps; check_cell_types.py reads 0 across 2837 maps.",
+      "lod": 3,
+      "status": "resolved",
+      "resolved_note": "2026-11-14 breath: fixed in Ada 129bdba0a; gate O PASS (0 non-string cells in 2840 maps)"
     }
   ]
 }
