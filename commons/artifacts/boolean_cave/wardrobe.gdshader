@@ -113,7 +113,7 @@ float sequins(vec3 p, vec3 n, vec3 to_eye, float size, out float disc, out vec3 
 	vec2 id = floor(q);
 	vec2 f = fract(q) - 0.5;
 	disc = 1.0 - smoothstep(0.46 - w, 0.46 + w, length(f));
-	far = smoothstep(0.25, 0.5, w);
+	far = smoothstep(0.2, 0.45, sqrt(dot(pw, abs(u)) * dot(pw, abs(v))) / size);   // by AREA: a disc 10 px wide and 3 tall is not a 3 px disc
 	disc = mix(disc, 0.78, far);
 	tilt = normalize(n + (h33(vec3(id, 3.0)) - 0.5) * 0.9);
 	return pow(max(dot(tilt, to_eye), 0.0), 36.0) * disc * (1.0 - far);
@@ -225,7 +225,7 @@ void fragment() {
 		vec2 q = vec2(dot(wpos, u), dot(wpos, v)) / pitch;
 		vec3 pw = fwidth(wpos);
 		float aw = max(dot(pw, abs(u)), dot(pw, abs(v))) / pitch;
-		float sfar = smoothstep(0.1, 0.24, aw);                             // COMFORT: studs 10 px apart fold into the hide, gone at 4 px
+		float sfar = smoothstep(0.1, 0.22, sqrt(dot(pw, abs(u)) * dot(pw, abs(v))) / pitch);   // COMFORT: by the stud's AREA - on a grazing wall a stud is a sliver, not gone
 		vec2 id = floor(q);
 		vec2 f = fract(q) - 0.5;
 		// a pyramid stud (four crisp faces, so it reads as metal from any side) in a sunken dark collar, every other cell;
@@ -256,7 +256,7 @@ void fragment() {
 		vec3 R = reflect(-to_eye_r, wn);
 		vec3 bq = vec3(wpos.x * 40.0, wpos.y * 1.5, wpos.z * 40.0) / cell;
 		float br = mix(vnoise(bq), 0.5, smoothstep(0.3, 0.7, length(fwidth(bq))));
-		emit = studio(R, tint, length(fwidth(R))) * tint * 0.85 * (0.88 + 0.12 * br);
+		emit = studio(R, tint, length(fwidth(R))) * tint * 0.85 * (0.97 + 0.06 * br);
 	} else if (mode == 5) {
 		// GLITTER: each flake flashes its own colour
 		col = hue.rgb * 0.5;
@@ -304,7 +304,9 @@ void fragment() {
 		float cord = 1.0 - smoothstep(0.035 - w, 0.075 + w, mg);
 		cord = max(cord, 1.0 - smoothstep(0.07, 0.1, length(g)));               // a knot where two cords cross
 		vec2 rw2 = fwidth(r);
-		cord = mix(cord, 0.32, smoothstep(0.125, 0.25, max(rw2.x, rw2.y)));     // far: the net's average, no moire - from either cord (COMFORT)
+		vec3 npw = fwidth(wpos);
+		float nw = min(max(rw2.x, rw2.y), (dot(npw, abs(u)) + dot(npw, abs(v))) / (0.06 * cell));
+		cord = mix(cord, 0.21, smoothstep(0.12, 0.3, nw));     // far: the net's true cover, from 8.3 px a mesh to 3.3 - from either cord (COMFORT)
 		col = mix(hue.rgb * 0.85, vec3(0.012), cord);
 		rough = mix(0.45, 0.22, cord);
 		spec = mix(0.5, 0.85, cord);
@@ -367,10 +369,9 @@ void fragment() {
 		emit = (hue.rgb * 1.2 + vec3(0.08)) * pow(rim, 1.25) * (0.75 + 0.25 * fibre);
 	} else {
 		// DRAG: everything at once - a hot pink swirl, iridescence, glitter, a burning rim. The swirl still circles;
-		// where the sequins are sewn on does not (they slid across the dress), and the grazing pink rim is trimmed
+		// its sequin islands circle with it in one 30 s loop (a still pattern left some strokes bare), and the grazing pink rim is trimmed
 		// (0.8 -> 0.55), where the pink burnt out to a flat sheet that hid the form (COMFORT)
-		float sw = vnoise(wpos * 1.5 / cell + orbit * 0.5) * 0.65 + vnoise(wpos * 3.0 / cell - orbit * 0.35) * 0.35;
-		float sewn = vnoise(wpos * 1.5 / cell) * 0.65 + vnoise(wpos * 3.0 / cell) * 0.35;
+		float sw = vnoise(wpos * 1.5 / cell + orbit * 0.4) * 0.65 + vnoise(wpos * 3.0 / cell - orbit * 0.3) * 0.35;
 		vec3 base = mix(vec3(1.0, 0.08, 0.58), vec3(1.0, 0.0, 1.0), sw);
 		base = mix(base, hue.rgb, 0.1);
 		vec3 iris = spectrum(nv * 1.3 + 4.0 * turn);
@@ -385,7 +386,7 @@ void fragment() {
 		vec3 tilt;
 		float far;
 		float glint = sequins(wpos, wnrm, to_eye, 0.03 * cell, disc, tilt, far);
-		float worn = smoothstep(0.58, 0.64, sewn) * disc;
+		float worn = smoothstep(0.58, 0.64, sw) * disc;
 		if (worn > 0.0) {
 			wn = normalize(mix(wn, tilt, worn * (1.0 - far)));
 			bent = true;
