@@ -164,6 +164,8 @@ func _ready() -> void:
 		atmosphere.environment.fog_depth_curve=1.5
 		atmosphere.environment.fog_density=1.0
 		atmosphere.get_node("WarmSun").directional_shadow_max_distance=28.0
+	# Stickers (commons/stickers/, 2026-11-13): hosted on works and floors by name, so they stream with their floor.
+	if trial_id.is_empty() and FileAccess.file_exists("res://commons/data/stickers/placements.json"): add_child(load("res://commons/stickers/sticker_world.gd").new())   # load, not preload: a broken sticker script must never stop the Void compiling
 	var start_floor := int(Architecture.Content.Source.definition(trial_id).get("start_floor", 0))
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--void-start-floor="): start_floor=clampi(int(arg.trim_prefix("--void-start-floor=")),0,building.spec.levels.size()-1)

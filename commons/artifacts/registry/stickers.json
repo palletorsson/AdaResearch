@@ -1,0 +1,69 @@
+{
+  "registry_info": {
+    "name": "stickers",
+    "description": "Stickers in VR: the visitors' board, the sticker bench and the worn sticker pad. One truth with the encyclopedia's /stickers page (SVG and three.js): commons/data/stickers/{designs,boards,placements}.json, read and watched by commons/stickers/sticker_data.gd.",
+    "category": "annotation",
+    "theoretical_grounding": "A sticker is a claim stuck on a surface by someone: every sticker records who stuck it, a peel is an event that leaves residue, and nothing is counted."
+  },
+  "artifacts": {
+    "sticker_board": {
+      "lookup_name": "sticker_board",
+      "name": "Sticker board / the visitors' board",
+      "scene": "res://commons/artifacts/sticker_board/sticker_board.tscn",
+      "category": "annotation",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "board": "visitors"
+      },
+      "parameters": {
+        "board": "Which board of commons/data/stickers/boards.json (default visitors): its w x h in metres and its paper colour",
+        "face_height": "Height of the face's centre above the floor, metres (default 1.35)"
+      },
+      "description": "A paper board in a thin timber frame on a stand, with its stickers: the same board the encyclopedia's /stickers page draws in SVG and in three.js, drawn from the same files and redrawn within a second of a change. Its face is a StaticBody3D whose collider's front is exactly the paper (stickers lie on it), carrying meta sticker_host {kind: board, id} for the sticker pad. A sticker lies on the face only (n = +Z, at.z = 0): the pad refuses the board's back. A peel leaves residue: the sticker's silhouette in #c4bba6 at 0.42 of its alpha (stickers.ts RESIDUE), beneath the stickers that are on. Each sticker is its drawn box, die-cut border included. Origin on the floor under the middle of the board; the face looks along +Z.",
+      "footprint": [1.68, 1.97, 0.5],
+      "size": [1.68, 1.97, 0.5],
+      "interactions": [
+        "Sticker pad (inventory, worn): tap the trigger / LMB / F on the board to stick the selected sticker",
+        "Hold the trigger on a sticker to peel it (it stays as residue, with who peeled it)"
+      ],
+      "tags": ["annotation", "stickers", "board", "visitors", "svg"]
+    },
+    "sticker_bench": {
+      "lookup_name": "sticker_bench",
+      "name": "Sticker bench / box, sphere, cylinder, slab",
+      "scene": "res://commons/artifacts/sticker_bench/sticker_bench.tscn",
+      "category": "annotation",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {},
+      "parameters": {},
+      "description": "A 3.2 x 0.8 m table at 0.8 m with four primitives to stick on - a box, a sphere, a cylinder and a slab - placed by the numbers of stickers.ts BENCH, so a sticker stuck on the sphere in the encyclopedia's three.js view is on this sphere too. Each primitive is a host {kind: primitive, id} whose frame is its own centre. On the sphere and the cylinder's side a sticker is a grid laid on the curve (it hugs the body as the three.js decal does; the side is clipped at the rims); on the box, the slab and the cylinder's caps it is flat. A pink triangle (snap90) keeps quarter turns of the primitive's frame on every face, its top included. Origin on the floor under the middle of the table; its front faces +Z.",
+      "footprint": [3.2, 1.4, 0.8],
+      "size": [3.2, 1.4, 0.8],
+      "tags": ["annotation", "stickers", "primitives", "bench"]
+    },
+    "sticker_pad": {
+      "lookup_name": "sticker_pad",
+      "name": "Sticker pad (worn inventory tool)",
+      "scene": "res://commons/stickers/sticker_pad.tscn",
+      "category": "tool",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "default_params": {
+        "sheet": "starter",
+        "size": "design"
+      },
+      "parameters": {
+        "sheet": "A sheet of designs.json (starter, cards, here, sieve, notes, stamps, marks); empty = every design",
+        "sticker": "The design to start from (default: the sheet's first)",
+        "size": "design (the design's own size_m) or the long side in metres",
+        "reach": "Aim reach in metres (default 4)"
+      },
+      "description": "The inventory's worn sticker tool (items.json mount 'worn', the tape roll's contract): aims from the right controller or the desktop camera, shows the sticker it would stick as a ghost (red where it cannot), a tap sticks it, a hold of 0.3 s on a sticker peels it, a tap at nothing takes the next design of the sheet. Every stick and peel is an op written to user://stickers/outbox.json, as the server will store it, and posted to the encyclopedia's /api/stickers/ops. Worn, or shown as the hand's miniature (a small sheet of stickers); placed only as an association plinth's example (QFEP_Phi_Term, beside the board), where picking it up collects the inventory item.",
+      "footprint": [0.12, 0.09, 0.003],
+      "size": [0.12, 0.09, 0.003],
+      "tags": ["tool", "stickers", "inventory", "worn"]
+    }
+  }
+}

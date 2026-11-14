@@ -1,0 +1,6 @@
+{"version": 1, "revision": 3,
+"boards": [
+  {"id":"visitors","title":"The visitors' board","w":1.6,"h":1,"paper":"#f4f0e6","note":"The same board in SVG (/stickers Board), in three.js (/stickers 3D) and in VR (the sticker_board artifact)."},
+  {"id":"research","title":"The research, in stickers","w":2.4,"h":1.36,"paper":"#f4f0e6","note":"One sticker per spine sequence of Ada Research, in spine order: its idea as a motif, its name, its question; the colour is its QFEP phase. Derived by tools/stickers_seed.ts from commons/maps/curriculum_spine.json and the sequence files."},
+  {"id":"readings","title":"Paradoxes and punctums","w":2.4,"h":1.36,"paper":"#f4f0e6","note":"What the texts hold true at once (paradoxes: the split badges) and the details in them that prick (punctums: the photograph prints), each with the line it reads. Chosen from 112 candidates read out of the hall texts and the framework; tools/stickers_seed.ts checks that every line is still in its text (commons/data/stickers/readings.json)."}
+]}

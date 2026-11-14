@@ -51384,11 +51384,104 @@
           "height": 0,
           "scale": 180,
           "config": {}
+        },
+        {
+          "id": "stickers-board",
+          "artifact": "sticker_board",
+          "station": "NE",
+          "position": [
+            2.6,
+            -3.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "visitors",
+            "editor_label": "Sticker board | the visitors' board: the same board as the web's /stickers (SVG and three.js); stick and peel with the sticker pad"
+          }
+        },
+        {
+          "id": "stickers-bench",
+          "artifact": "sticker_bench",
+          "station": "NW",
+          "position": [
+            -2.4,
+            -2.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Sticker bench | box, sphere, cylinder, slab: the same four bodies as /stickers 3D; a sticker stuck here shows there"
+          }
+        },
+        {
+          "id": "stickers-research",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            0.0,
+            -5.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "research",
+            "editor_label": "Research board | one sticker per spine sequence, in spine order: the whole research on one board (the same board at /stickers)"
+          }
+        },
+        {
+          "id": "stickers-pad",
+          "artifact": "sticker_pad",
+          "station": "NE",
+          "position": [
+            4.75,
+            -3.0
+          ],
+          "facing": 0,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "sheet": "starter",
+            "editor_label": "Sticker pad | the example on its plinth: take it to stick and peel anywhere"
+          }
+        },
+        {
+          "id": "stickers-pad-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            4.75,
+            -3.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "stickers",
+            "holds": "stickers-pad",
+            "top": 1.0,
+            "size": [
+              0.36,
+              0.3
+            ],
+            "editor_label": "Association plinth / stickers"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "STICKERS / STICK, PEEL, LEAVE A TRACE\nthe same board and bench at /stickers on the web",
+          "position": [
+            0.1,
+            -1.0
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {
