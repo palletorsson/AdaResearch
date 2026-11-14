@@ -4336,6 +4336,91 @@
 				1.0
 			],
 			"qfep_connection": "The room's whole material is revealed to be one slot: voronoi, tartan, rothko rotate through the GridMultiMesh override every few seconds while the geometry never moves. The original material is kept aside for restoration \u2014 the grid's look was always a swap-in, held in place by nothing but not-yet-being-replaced."
+		},
+		"wardrobe_tunnel": {
+			"dna": {
+				"axes": {
+					"skin": [
+						"latex",
+						"pvc",
+						"rubber",
+						"leather",
+						"chrome",
+						"glitter",
+						"sequin",
+						"holo",
+						"fishnet",
+						"rainbow",
+						"neon",
+						"pearl",
+						"velvet",
+						"drag"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "skin: rubber ~ leather",
+					"percent": 4.0,
+					"arithmetic": "From outside, as the canonical camera stands, every variant is the same black latex shell; only the mouth differs, about an eighth of the frame, and mostly in shadow. Rubber is its blue at 0.62 of the albedo, matte; leather is a near-black teal whose studs, that far off, fold into the hide's average. Two dark blue-greens about 0.3 apart in value over an eighth of the frame: about 4 % in the hottest pixels. Every other skin carries a mirror, a pattern, a glow or a pale colour into the mouth."
+				}
+			},
+			"name": "Wardrobe tunnel: a skin to stand inside",
+			"lookup_name": "wardrobe_tunnel",
+			"description": "One skin of the boolean cave's wardrobe (commons/artifacts/boolean_cave/wardrobe.gdshader) as a ROOM: a 2.4 x 2.6 x 7.6 m tunnel whose floor, walls, ceiling and far end all wear it, in its own colour, inside a shell of black latex with the skin's name on the lintel. Worn on a swatch or a carved stroke a skin is a surface you look at; here it is the place you stand in - latex, PVC, rubber, studded leather, chrome, glitter, sequin, holographic foil, fishnet, the pride rainbow, neon, pearl, velvet or drag (axis skin). The wardrobe's comfort pass is what makes that bearable for minutes in a headset: its fine patterns fade to their own average before they could sizzle, and every motion loops with TIME's 30 s rollover. Fourteen stand on Shader_11_QueerRubber, seven a side, beside the boards that show the same queer materials on bodies.",
+			"scene": "res://commons/artifacts/wardrobe_tunnel/wardrobe_tunnel.tscn",
+			"category": "shaders",
+			"sequence": "shaders",
+			"artifact_type": "shaders",
+			"capacity": "STAND IN a material: a shader's skin as a room, not a swatch",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"tags": [
+				"shader",
+				"wardrobe",
+				"queer",
+				"material",
+				"walkable",
+				"tunnel",
+				"room",
+				"vr",
+				"desktop"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"shaders"
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 22,
+				"clearance": {
+					"front": 2,
+					"back": 0,
+					"left": 0,
+					"right": 0
+				},
+				"player_position": "inside",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "edge"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.8,
+					3.2,
+					7.8
+				],
+				"aabb_center": [
+					0.0,
+					1.6,
+					-3.9
+				],
+				"max_dimension_m": 7.8
+			}
 		}
 	}
 }

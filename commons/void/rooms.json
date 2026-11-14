@@ -37428,11 +37428,300 @@
               ]
             }
           }
+        },
+        {
+          "id": "side-slab-east",
+          "artifact": "void_slab_extension",
+          "station": "SE",
+          "position": [
+            21,
+            0.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 20.0,
+            "depth": 10.0,
+            "seed": 1051,
+            "editor_label": "Side slab / the wardrobe as rooms: seven skins, latex to sequin"
+          }
+        },
+        {
+          "id": "side-slab-west",
+          "artifact": "void_slab_extension",
+          "station": "SW",
+          "position": [
+            -21,
+            0.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 20.0,
+            "depth": 10.0,
+            "seed": 1052,
+            "editor_label": "Side slab / the wardrobe as rooms, II: seven skins, holo to drag"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-latex",
+          "artifact": "wardrobe_tunnel",
+          "station": "SE",
+          "position": [
+            22.5,
+            8.4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "latex",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: latex, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-pvc",
+          "artifact": "wardrobe_tunnel",
+          "station": "SE",
+          "position": [
+            22.5,
+            5.6
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "pvc",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: PVC, the wet look, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-rubber",
+          "artifact": "wardrobe_tunnel",
+          "station": "SE",
+          "position": [
+            22.5,
+            2.8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "rubber",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: rubber, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-leather",
+          "artifact": "wardrobe_tunnel",
+          "station": "SE",
+          "position": [
+            22.5,
+            0.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "leather",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: studded leather, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-chrome",
+          "artifact": "wardrobe_tunnel",
+          "station": "NE",
+          "position": [
+            22.5,
+            -2.8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "chrome",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: chrome, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-glitter",
+          "artifact": "wardrobe_tunnel",
+          "station": "NE",
+          "position": [
+            22.5,
+            -5.6
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "glitter",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: glitter, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-sequin",
+          "artifact": "wardrobe_tunnel",
+          "station": "NE",
+          "position": [
+            22.5,
+            -8.4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "sequin",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: sequins, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-holo",
+          "artifact": "wardrobe_tunnel",
+          "station": "SW",
+          "position": [
+            -22.5,
+            8.4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "holo",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: holographic foil, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-fishnet",
+          "artifact": "wardrobe_tunnel",
+          "station": "SW",
+          "position": [
+            -22.5,
+            5.6
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "fishnet",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: fishnet, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-rainbow",
+          "artifact": "wardrobe_tunnel",
+          "station": "SW",
+          "position": [
+            -22.5,
+            2.8
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "rainbow",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: the pride rainbow, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-neon",
+          "artifact": "wardrobe_tunnel",
+          "station": "SW",
+          "position": [
+            -22.5,
+            0.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "neon",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: club neon, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-pearl",
+          "artifact": "wardrobe_tunnel",
+          "station": "NW",
+          "position": [
+            -22.5,
+            -2.8
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "pearl",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: pearl, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-velvet",
+          "artifact": "wardrobe_tunnel",
+          "station": "NW",
+          "position": [
+            -22.5,
+            -5.6
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "velvet",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: velvet, a skin to stand inside"
+          }
+        },
+        {
+          "id": "wardrobe-tunnel-drag",
+          "artifact": "wardrobe_tunnel",
+          "station": "NW",
+          "position": [
+            -22.5,
+            -8.4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "skin": "drag",
+            "exterior_walk": true,
+            "editor_label": "Wardrobe tunnel: drag, all at once, a skin to stand inside"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "THE WARDROBE AS ROOMS\nA skin on a body is looked at; a skin on four walls is stood in.",
+          "position": [
+            19.2,
+            0.0
+          ]
+        },
+        {
+          "label": "THE WARDROBE AS ROOMS, II\nFoil, net, flag, tube, nacre, pile and drag: walk in.",
+          "position": [
+            -19.2,
+            0.0
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

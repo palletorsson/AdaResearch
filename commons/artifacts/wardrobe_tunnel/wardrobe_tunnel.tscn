@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/wardrobe_tunnel/wardrobe_tunnel.gd" id="1_tunnel"]
+
+[node name="WardrobeTunnel" type="Node3D"]
+script = ExtResource("1_tunnel")
