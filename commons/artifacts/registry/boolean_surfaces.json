@@ -86,6 +86,59 @@
 			},
 			"qfep_connection": "The verbs become architecture: a cut is a place a body can be, a shared region can roll away, and a union that is connected is still not passable until the band between its parts is smoothed. Each face says which operation made it - an absence given a surface, in its own colour."
 		},
+		"boolean_cave": {
+			"dna": {
+				"axes": {
+					"size": [
+						"small",
+						"big"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "size: small ~ big",
+					"percent": 20.0,
+					"arithmetic": "The only pair. Framed by its AABB, each fills the frame, so the difference is proportion and furniture, not scale: the small one is a 1 x 0.7 x 1 m block on a 0.82 m stand with its console at its side (the stand and the console about 40 % of the frame), the big one a 7.6 x 4.2 x 7 m block with the console a speck at its foot. Same satin, same light: the block's silhouette moves across about half the frame, a fifth of the hottest pixels."
+				}
+			},
+			"name": "Boolean cave: paint your own cave from basic booleans",
+			"lookup_name": "boolean_cave",
+			"description": "A block and a brush. Aim at the block and hold (the VR trigger, or the left mouse button on the desktop crosshair): booleans are stamped along the stroke where you aim - difference carves, union builds - as a sphere, a cube or a cylinder; held still, a carve drills. The player's own movement is the carving pass, the Random Boolean Carving's walks steered by a hand. Each stroke keeps its colour, so the walls say which stroke opened them. Two sizes: small, a 1 m block on a stand with a 4 - 16 cm brush (a cave held in view, at the carvings' scale); big, a 7.6 x 4.2 x 7 m block whose carves stand on a floor 4 cm over the slab with 2.2 m of headroom at least, so whatever is carved can be walked into. A console beside it: carve / build, sphere / cube / cylinder, smaller / bigger, undo, reset. Godot's CSG (Manifold) is used as a hidden calculator, baked to a mesh and a collision shape a few times a second; what is painted is saved to user://boolean_cave/ and replayed when the floor loads.",
+			"scene": "res://commons/artifacts/boolean_cave/boolean_cave.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "MAKE WITH the verbs: carve and build a cave of your own, then walk into it",
+			"dev_themes": [
+				"boolean_surfaces",
+				"construction_kit",
+				"interaction"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"boolean",
+				"paint",
+				"sculpt",
+				"cave",
+				"walkable",
+				"interactive",
+				"vr",
+				"desktop"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"interaction": "point",
+			"parameters": {
+				"footprint": [8, 4, 8],
+				"size_group": "room"
+			},
+			"qfep_connection": "The verbs handed over: the hall shows union, intersection and difference as finished objects; here a visitor performs them, and the cave that results is a record of a body's movement - each stroke its own colour, each carve a place the one who carved it can then stand in."
+		},
 		"csg_union_demo": {
 			"dna": {
 				"promoted": "2026-08-11",

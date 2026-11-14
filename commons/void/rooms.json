@@ -46633,6 +46633,57 @@
             "seed": 161,
             "editor_label": "Side slab / the yard's west room: Passes, a box carved from the inside out"
           }
+        },
+        {
+          "id": "side-slab-east",
+          "artifact": "void_slab_extension",
+          "station": "NE",
+          "position": [
+            21,
+            -0.8
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 20.0,
+            "depth": 10.0,
+            "seed": 1613,
+            "editor_label": "Side slab / the yard's east room: paint your own cave, small and big"
+          }
+        },
+        {
+          "id": "boolean-cave-big",
+          "artifact": "boolean_cave",
+          "station": "NE",
+          "position": [
+            26.9,
+            1.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "size": "big",
+            "exterior_walk": true,
+            "editor_label": "Boolean cave (big): carve your way in - difference carves, union builds"
+          }
+        },
+        {
+          "id": "boolean-cave-small",
+          "artifact": "boolean_cave",
+          "station": "NE",
+          "position": [
+            24.0,
+            -6.8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "size": "small",
+            "editor_label": "Boolean cave (small): a cave on a stand, painted with a hand-sized brush"
+          }
         }
       ],
       "props": [],
@@ -46903,6 +46954,13 @@
           "position": [
             -19.9,
             0.2
+          ]
+        },
+        {
+          "label": "PAINT YOUR OWN CAVE\nAim and hold: difference carves, union builds. Small on a stand, big to walk in.",
+          "position": [
+            20.3,
+            -3.4
           ]
         }
       ],
