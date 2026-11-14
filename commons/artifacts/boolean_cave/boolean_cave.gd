@@ -17,6 +17,11 @@ extends Node3D
 ##               over the slab with at least 2.2 m of headroom (the shape stood on the floor), so whatever you carve
 ##               you can walk into; a BUILD stands where you aim
 ##   the console: CARVE / BUILD, SPHERE / CUBE / CYLINDER, SMALLER / BIGGER, UNDO, RESET
+##   the WARDROBE beside it (Palle, 2026-11-14: "apply the most fetish and queer shaders super extravaganza for the
+##               editor"): fifteen swatches - satin, latex, pvc, rubber, leather, chrome, glitter, sequin, holo, fishnet,
+##               rainbow, neon, pearl, velvet, drag - the skin the next strokes wear (each still in its own colour), and
+##               DRESS THE BLOCK, which puts the chosen skin on the block itself. The skins are wardrobe.gdshader, most of
+##               them the project's queer shaders ported to world space; satin is the carver's own and the default.
 ##
 ## The booleans are Godot's own (CSG on Manifold), used as a CALCULATOR: a hidden CSGCombiner3D that holds, only for the
 ## length of one cut, one CHUNK of the cave (a CSGMesh3D), the stamps that reach into it (CSG primitives) and the chunk's
@@ -47,9 +52,9 @@ const VERBS := ["carve", "build"]
 const SHAPES := ["sphere", "cube", "cylinder"]
 const SPEC := {
 	"small": {"block": Vector3(1.0, 0.7, 1.0), "lift": 0.82, "radius": [0.04, 0.16], "segments": [10, 6], "rate": 10.0,
-		"flush": 0.35, "chunks": Vector2i(2, 2), "console": Vector3(-0.55, 0.0, 0.95), "grounded": false},
+		"flush": 0.35, "chunks": Vector2i(2, 2), "console": Vector3(-1.1, 0.0, 0.35), "grounded": false},
 	"big": {"block": Vector3(7.6, 4.2, 7.0), "lift": 0.0, "radius": [0.55, 1.5], "segments": [12, 7], "rate": 4.0,
-		"flush": 1.5, "chunks": Vector2i(4, 4), "console": Vector3(-2.4, 0.0, 4.35), "grounded": true},
+		"flush": 1.5, "chunks": Vector2i(4, 4), "console": Vector3(-4.6, 0.0, 3.0), "grounded": true},
 }
 const DRILL := 0.33                   # how much further along the aim a stamp may go than the last, in radii
 const SNAPSHOTS := 10                 # strokes UNDO can step back through without rebuilding
@@ -63,6 +68,10 @@ const FLOOR := 0.04                   # a big carve's floor over the slab: block
 const HEADROOM := 2.2                 # a big carve is never lower than this, so a body fits where it carved
 const POINTABLE := 1 << 20            # layer 21: what the crosshair and the VR pointer reach
 const SATIN := Color(0.7, 0.7, 0.8)   # advanced_carver.gd's block: albedo 0.7 0.7 0.8, metallic 0.3, roughness 0.7
+## The wardrobe, in wardrobe.gdshader's own order after satin (index - 1 IS the shader's mode).
+const SKINS := ["satin", "latex", "pvc", "rubber", "leather", "chrome", "glitter", "sequin", "holo", "fishnet", "rainbow",
+	"neon", "pearl", "velvet", "drag"]
+const WARDROBE := preload("res://commons/artifacts/boolean_cave/wardrobe.gdshader")
 const HUES := [Color(0.62, 0.30, 0.92), Color(0.86, 0.22, 0.52), Color(0.30, 0.42, 0.95), Color(0.20, 0.78, 0.72),
 	Color(0.95, 0.52, 0.20), Color(0.95, 0.85, 0.30), Color(0.40, 0.85, 0.35), Color(0.98, 0.45, 0.45)]
 
@@ -73,6 +82,10 @@ const HUES := [Color(0.62, 0.30, 0.92), Color(0.86, 0.22, 0.52), Color(0.30, 0.4
 @export_range(0.0, 1.0) var brush := 0.4
 ## Keep what is painted: saved after each stroke to user://boolean_cave/, replayed when the floor loads.
 @export var keep := true
+## What the next strokes are made of (the wardrobe); each stroke keeps its own colour.
+@export_enum("satin", "latex", "pvc", "rubber", "leather", "chrome", "glitter", "sequin", "holo", "fishnet", "rainbow", "neon", "pearl", "velvet", "drag") var skin := "satin"
+## What the block itself is made of.
+@export_enum("satin", "latex", "pvc", "rubber", "leather", "chrome", "glitter", "sequin", "holo", "fishnet", "rainbow", "neon", "pearl", "velvet", "drag") var block_skin := "satin"
 
 var _cave: CSGCombiner3D            # the calculator: empty but for the length of one cut
 var _view: Node3D                    # the chunks as they are drawn
@@ -104,10 +117,12 @@ var _snapshot_due := false           # a stroke ended: snapshot once its cuts ar
 var _aim_hit := Vector3.INF          # where the stroke's pointer last met the cave (INF: off it)
 var _cut_next := 0                   # round robin over the chunks waiting to be cut
 var _notice := ""
+var _block_mat: Material             # the block's own material now (the one DRESS swaps on every chunk's surfaces)
+var _swatches := {}
 
 
 func _ready() -> void:
-	for key in ["size", "verb", "shape", "brush", "keep"]:
+	for key in ["size", "verb", "shape", "brush", "keep", "skin", "block_skin"]:
 		if has_meta("config_" + key): _take({key: get_meta("config_" + key)})
 	# a frame later: the tower adds a work and THEN configures it, so building now would build the default size and
 	# load its save twice (a review measured every stamp after the first batch doubled)
@@ -120,6 +135,10 @@ func _take(config: Dictionary) -> void:
 	if config.has("shape") and str(config["shape"]) in SHAPES: shape = str(config["shape"])
 	if config.has("brush"): brush = clampf(float(str(config["brush"])), 0.0, 1.0)
 	if config.has("keep"): keep = str(config["keep"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
+	if config.has("skin") and str(config["skin"]) in SKINS: skin = str(config["skin"])
+	if config.has("block_skin") and str(config["block_skin"]) in SKINS:
+		if _built != "" and str(config["block_skin"]) != block_skin: dress_block(str(config["block_skin"]))
+		else: block_skin = str(config["block_skin"])
 
 
 func apply_grid_config(config: Dictionary) -> void:
@@ -146,6 +165,8 @@ func _build() -> void:
 	_chunks.clear()
 	_stamps.clear()
 	_strokes = 0
+	_swatches.clear()
+	_block_mat = _skin_material(block_skin, -1)
 	var spec: Dictionary = SPEC[size]
 	var block: Vector3 = spec.block
 	if size == "small":
@@ -194,6 +215,7 @@ func _build() -> void:
 	_ghost.visible = false
 	add_child(_ghost)
 	_build_console(spec)
+	_build_wardrobe(spec)
 	_built = size
 	_key = _save_key()
 	_snapshot()
@@ -399,7 +421,7 @@ func stamp(c: Vector3, v: String, s: String, r: float, k: int, axis := Vector3.F
 	c = c.clamp(lo, hi)
 	var rec := {"c": [snappedf(c.x, 0.001), snappedf(c.y, 0.001), snappedf(c.z, 0.001)],
 		"a": [snappedf(axis.x, 0.001), snappedf(axis.y, 0.001), snappedf(axis.z, 0.001)], "v": v, "s": s,
-		"r": snappedf(r, 0.001), "k": k}
+		"r": snappedf(r, 0.001), "k": k, "m": skin}
 	_stamps.append(rec)
 	_queue.append(rec)
 	if not _loading: _mark(rec)
@@ -422,7 +444,7 @@ func _operands(rec: Dictionary) -> Array:
 	var c := Vector3(rec.c[0], rec.c[1], rec.c[2])
 	var r := float(rec.r)
 	var op := CSGShape3D.OPERATION_SUBTRACTION if rec.v == "carve" else CSGShape3D.OPERATION_UNION
-	var mat := _stroke_material(int(rec.k))
+	var mat := _skin_material(str(rec.get("m", "satin")), int(rec.k))
 	var seg: Array = SPEC[size].segments
 	var nodes := []
 	var grounded: bool = SPEC[size].grounded and rec.v == "carve"
@@ -531,7 +553,7 @@ func _compute(chunk: Dictionary, recs: Array) -> Array:
 		var box := CSGBox3D.new()
 		box.size = chunk.hi - chunk.lo
 		box.position = (chunk.lo + chunk.hi) * 0.5
-		box.material = _satin()
+		box.material = _block_mat
 		_cave.add_child(box)
 	elif chunk.mesh != null:
 		var cut := CSGMesh3D.new()
@@ -729,8 +751,89 @@ func _build_console(spec: Dictionary) -> void:
 			_buttons[key] = b
 
 
+## The wardrobe: a rack beside the console, one swatch per skin - a ball in the next stroke's colour wearing it - and
+## DRESS THE BLOCK. A swatch is pressed like a button (a pointable body with the pointer_event signal).
+func _build_wardrobe(spec: Dictionary) -> void:
+	var rack := Node3D.new()
+	rack.name = "Wardrobe"
+	rack.position = (spec.console as Vector3) + Vector3(-1.25, 0.0, 0.0)
+	add_child(rack)
+	var board := MeshInstance3D.new()
+	var face := BoxMesh.new()
+	face.size = Vector3(1.05, 0.78, 0.04)
+	board.mesh = face
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.09, 0.07, 0.11)
+	dark.roughness = 0.6
+	board.material_override = dark
+	board.position = Vector3(0, 1.08, 0)
+	board.rotation.x = -0.35
+	rack.add_child(board)
+	var post := MeshInstance3D.new()
+	var rod := BoxMesh.new()
+	rod.size = Vector3(0.06, 0.95, 0.06)
+	post.mesh = rod
+	post.position = Vector3(0, 0.47, 0)
+	post.material_override = _satin()
+	rack.add_child(post)
+	var title := Label3D.new()
+	title.text = "THE WARDROBE"
+	title.font_size = 30
+	title.pixel_size = 0.0014
+	title.outline_size = 4
+	title.position = Vector3(0, 0.33, 0.03)
+	board.add_child(title)
+	for i in SKINS.size():
+		var col := i % 5
+		var row := i / 5
+		var at := Vector3((col - 2) * 0.19, 0.17 - row * 0.17, 0.05)
+		var body := StaticBody3D.new()
+		body.name = "Swatch_" + SKINS[i]
+		body.collision_layer = POINTABLE
+		body.collision_mask = 0
+		body.position = at
+		var holder := CollisionShape3D.new()
+		var ball_shape := SphereShape3D.new()
+		ball_shape.radius = 0.06
+		holder.shape = ball_shape
+		body.add_child(holder)
+		var ball := MeshInstance3D.new()
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.055
+		sphere.height = 0.11
+		ball.mesh = sphere
+		ball.name = "Ball"
+		body.add_child(ball)
+		var label := Label3D.new()
+		label.text = SKINS[i].to_upper()
+		label.font_size = 18
+		label.pixel_size = 0.0012
+		label.outline_size = 3
+		label.position = Vector3(0, -0.075, 0.03)
+		body.add_child(label)
+		var key: String = "skin:" + SKINS[i]
+		body.add_user_signal("pointer_event", [{"name": "event", "type": TYPE_OBJECT}])
+		body.connect("pointer_event", func(event): if event != null and int(event.event_type) == XRToolsPointerEvent.Type.PRESSED: press(key))
+		board.add_child(body)
+		_swatches[SKINS[i]] = body
+	var dress := _button("dress", "DRESS THE BLOCK", Vector3(0, -0.33, 0.03), 0.5)
+	board.add_child(dress)
+	_buttons["dress"] = dress
+	_refresh_wardrobe()
+
+
+## Each swatch wears its skin in the colour the NEXT stroke will have; the chosen one stands out.
+func _refresh_wardrobe() -> void:
+	var k := _stroke if _painting else _strokes
+	for name in _swatches:
+		var body: StaticBody3D = _swatches[name]
+		var ball: MeshInstance3D = body.get_node("Ball")
+		ball.material_override = _skin_material(name, k, 0.3)        # a swatch's own fine cell: the whole pattern on an 11 cm ball
+		body.scale = Vector3.ONE * (1.35 if name == skin else 1.0)
+
+
 ## A button the crosshair and the VR pointer both press: a pointable body (layer 21) carrying the pointer_event signal.
-func _button(key: String, text: String, at: Vector3) -> Node3D:
+func _button(key: String, text: String, at: Vector3, width := 0.23) -> Node3D:
 	var body := StaticBody3D.new()
 	body.name = "Button_" + key
 	body.collision_layer = POINTABLE
@@ -738,7 +841,7 @@ func _button(key: String, text: String, at: Vector3) -> Node3D:
 	body.position = at
 	var holder := CollisionShape3D.new()
 	var box := BoxShape3D.new()
-	box.size = Vector3(0.23, 0.095, 0.04)
+	box.size = Vector3(width, 0.095, 0.04)
 	holder.shape = box
 	body.add_child(holder)
 	var cap := MeshInstance3D.new()
@@ -761,11 +864,17 @@ func _button(key: String, text: String, at: Vector3) -> Node3D:
 
 ## What a console button does (also a probe's way in).
 func press(key: String) -> void:
+	if key.begins_with("skin:"):
+		var name := key.trim_prefix("skin:")
+		if name in SKINS: skin = name
+		_refresh_label()
+		return
 	match key:
 		"carve", "build": verb = key
 		"sphere", "cube", "cylinder": shape = key
 		"smaller": brush = clampf(brush - 0.2, 0.0, 1.0)
 		"bigger": brush = clampf(brush + 0.2, 0.0, 1.0)
+		"dress": dress_block(skin)
 		"undo": undo()
 		"reset": reset()
 	_refresh_label()
@@ -773,9 +882,10 @@ func press(key: String) -> void:
 
 func _refresh_label() -> void:
 	if _label == null: return
-	_label.text = "PAINT YOUR OWN CAVE\n%s with a %s, %d cm   -   %d strokes, %d booleans%s" % [
-		"DIFFERENCE: carve" if verb == "carve" else "UNION: build", shape, roundi(radius() * 100.0), _strokes, _stamps.size(),
-		("\n" + _notice) if _notice != "" else ""]
+	_label.text = "PAINT YOUR OWN CAVE\n%s with a %s, %d cm, in %s   -   %d strokes, %d booleans%s" % [
+		"DIFFERENCE: carve" if verb == "carve" else "UNION: build", shape, roundi(radius() * 100.0), skin.to_upper(), _strokes,
+		_stamps.size(), ("\n" + _notice) if _notice != "" else ""]
+	_refresh_wardrobe()
 	for key in _buttons:
 		var on: bool = key == verb or key == shape
 		var cap: MeshInstance3D = _buttons[key].get_node("Cap")
@@ -841,19 +951,59 @@ func _satin() -> StandardMaterial3D:
 	return m
 
 
-## One material per hue, shared by every stroke of that hue: a baked chunk carries at most nine surfaces.
-func _stroke_material(k: int) -> StandardMaterial3D:
-	var hue: Color = HUES[posmod(k, HUES.size())]
-	var key := "stroke_%d" % posmod(k, HUES.size())
+## A stroke's material: its skin in its hue (k: the stroke's index; -1: the block). One material per skin and hue,
+## shared - a baked chunk carries one surface per skin-and-hue it holds. Satin is the StandardMaterial3D strokes always
+## had (the default, and every stroke saved before the wardrobe).
+func _skin_material(which: String, k: int, cell := -1.0) -> Material:
+	var hue: Color = SATIN if k < 0 else HUES[posmod(k, HUES.size())]
+	var key := "skin_%s_%d_%.2f" % [which, (-1 if k < 0 else posmod(k, HUES.size())), cell]
 	if _materials.has(key): return _materials[key]
-	var m := StandardMaterial3D.new()
-	m.albedo_color = hue
-	m.roughness = 0.45
-	m.metallic = 0.15
-	m.emission_enabled = true
-	m.emission = hue * 0.18
+	var m: Material
+	if which == "satin" or not which in SKINS:
+		var sm := StandardMaterial3D.new()
+		sm.albedo_color = hue
+		if k < 0:
+			sm.metallic = 0.3
+			sm.roughness = 0.7
+		else:
+			sm.roughness = 0.45
+			sm.metallic = 0.15
+			sm.emission_enabled = true
+			sm.emission = hue * 0.18
+		m = sm
+	else:
+		var wm := ShaderMaterial.new()
+		wm.shader = WARDROBE
+		wm.set_shader_parameter("mode", SKINS.find(which) - 1)
+		wm.set_shader_parameter("hue", hue)
+		wm.set_shader_parameter("cell", cell if cell > 0.0 else (0.35 if size == "small" else 1.0))
+		wm.set_shader_parameter("shimmer", 1.0)
+		m = wm
 	_materials[key] = m
 	return m
+
+
+## Put a skin on the block itself: the block's surfaces on every chunk (and in every snapshot, which share the meshes)
+## change material; nothing is re-cut.
+func dress_block(which: String) -> void:
+	if not which in SKINS: return
+	var old := _block_mat
+	block_skin = which
+	_block_mat = _skin_material(which, -1)
+	if old == _block_mat: return
+	var meshes := {}
+	for chunk in _chunks:
+		for m in [chunk.mesh, chunk.block_mesh]:
+			if m != null: meshes[m] = true
+	for snap in _snapshots:
+		for m in snap.meshes:
+			if m != null: meshes[m] = true
+	for m in meshes:
+		var mesh: ArrayMesh = m
+		for i in mesh.get_surface_count():
+			if mesh.surface_get_material(i) == old: mesh.surface_set_material(i, _block_mat)
+	if keep and _built != "": _save()
+	_refresh_label()
 
 
 func _mark_material(k: int) -> StandardMaterial3D:
@@ -883,7 +1033,7 @@ func _save() -> void:
 	DirAccess.make_dir_recursive_absolute("user://boolean_cave")
 	var file := FileAccess.open("user://boolean_cave/%s.json" % _key, FileAccess.WRITE)
 	if file == null: return
-	file.store_string(JSON.stringify({"size": size, "stamps": _stamps}))
+	file.store_string(JSON.stringify({"size": size, "block_skin": block_skin, "stamps": _stamps}))
 	file.close()
 
 
@@ -899,6 +1049,7 @@ func _load() -> void:
 		moved = true
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not (data is Dictionary) or str(data.get("size", "")) != size: return
+	if str(data.get("block_skin", block_skin)) != block_skin: dress_block(str(data.get("block_skin", block_skin)))
 	await _replay(data.get("stamps", []))
 	if moved and keep: _save()
 	_refresh_label()
@@ -916,7 +1067,7 @@ func state() -> Dictionary:
 		for s in m.get_surface_count():
 			var n := m.surface_get_array_index_len(s)
 			tris += (n if n > 0 else m.surface_get_array_len(s)) / 3
-	return {"size": size, "verb": verb, "shape": shape, "radius": snappedf(radius(), 0.001), "stamps": _stamps.size(),
+	return {"size": size, "verb": verb, "shape": shape, "skin": skin, "block_skin": block_skin, "radius": snappedf(radius(), 0.001), "stamps": _stamps.size(),
 		"strokes": _strokes, "queued": _queue.size(), "pending": _pending(), "live": _cave.get_child_count(), "snapshots": _snapshots.size(),
 		"carved": carved, "chunks": _chunks.size(), "triangles": tris, "key": _key}
 
