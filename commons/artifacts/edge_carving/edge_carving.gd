@@ -31,6 +31,7 @@ const COL_R := 0.32         # the column's radius
 const COL_H := 1.25         # the column's height
 const TURNS := 3.25
 const WANDER := 0.15        # the random walk's reach at lambda 1 (m)
+const WRAP_ADVANCE := 0.68  # a capital's advance as a share of the font size, for breaking the plinth's words into lines
 
 @export_enum("cannot_claim", "leaves_out", "still_open", "not_yet", "foreclosed", "dark_spot", "does_not_fit") var kind := "cannot_claim"
 @export var reading := ""   # a readings.json id (kind edge): its words and where they were read
@@ -238,7 +239,7 @@ func _words() -> void:
 					where = str(r.get("hall", "")).replace("_", " ") if str(r.get("hall", "")) != "" else str(r.get("file", "")).get_file().get_basename().replace("_", " ")
 	# a kind whose colour is near black (foreclosed, dark spot) is lettered in the stone's colour, to read on the dark plinth
 	var kc: Color = k.colour if k.colour.get_luminance() > 0.2 else Color("#e4ddcd")
-	var label := _label(k.label, 30, kc, 0.29)
+	var label := _label(k.label, 30, kc, 0.6)
 	label.position = Vector3(0, PLINTH - 0.065, PLINTH_W / 2.0 + 0.002)
 	if words != "":
 		var body := _label(words.to_upper(), 22, Color("#efe9dc"), 0.7)
@@ -249,18 +250,37 @@ func _words() -> void:
 
 func _label(t: String, size: int, colour: Color, width_m: float) -> Label3D:
 	var l := Label3D.new()
-	l.text = t
 	l.font_size = size
 	l.pixel_size = 0.0012
+	# the lines are broken here, not by autowrap: the exported text (export_void_editor.gd records a Label3D's text, not
+	# its width) then breaks the same way wherever it is drawn - Godot, the web's floor editor, the 3D sticker view
+	l.text = wrap_words(t, maxi(8, int(width_m / (l.pixel_size * size * WRAP_ADVANCE))))
 	l.modulate = colour
 	l.outline_size = 0
 	l.width = width_m / l.pixel_size
-	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.autowrap_mode = TextServer.AUTOWRAP_OFF
 	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	l.double_sided = false
 	add_child(l)
 	return l
+
+
+## Greedy word wrap: lines of at most max_chars characters, broken at spaces (a longer word keeps its own line).
+static func wrap_words(t: String, max_chars: int) -> String:
+	var lines := PackedStringArray()
+	var line := ""
+	for w in t.split(" ", false):
+		if line == "":
+			line = w
+		elif line.length() + 1 + w.length() <= max_chars:
+			line += " " + w
+		else:
+			lines.append(line)
+			line = w
+	if line != "":
+		lines.append(line)
+	return "\n".join(lines)
 
 
 func _mat(c: Color, rough: float) -> StandardMaterial3D:

@@ -8,6 +8,7 @@ extends SceneTree
 ##   B2  the config reached the build (the kind's own label, the reading's own words)
 ##   B3  every kind's carving bites: more triangles than the plain column
 ##   B4  the stone keeps its mesh through the residency's pause and restore
+##   B5  the plinth's words carry their own line breaks (the exporter records a label's text, not its width)
 ## Writes <out>/edge_carving_bench.json, exit code = failed checks.
 ##   godot --headless --path . --xr-mode off --script res://tools/probes/edge_carving_bench.gd -- --out=<dir>
 const Carving := preload("res://commons/artifacts/edge_carving/edge_carving.gd")
@@ -66,6 +67,7 @@ func run() -> void:
 	var b1 := true
 	var b2 := true
 	var b3 := true
+	var b5 := true
 	for i in ROW.size():
 		var c: Node3D = mounts[i].get_node("Artifact")
 		var stones := _stones(c)
@@ -80,6 +82,13 @@ func run() -> void:
 		b1 = b1 and stones.size() == 1 and str(stones[0].name) == "Stone" and faces > 0 and plinths.size() == 1 and labels.size() == 3
 		b2 = b2 and labels.size() >= 2 and texts[0] == Carving.KINDS[ROW[i][0]].label and str(texts[1]).length() > 8
 		b3 = b3 and faces > plain_faces
+		for l in labels:
+			var lab := l as Label3D
+			b5 = b5 and lab.autowrap_mode == TextServer.AUTOWRAP_OFF
+			# the escape, not a raw line break: a raw one is the file's own line ending (CR LF in a CRLF checkout)
+			b5 = b5 and not lab.text.contains("\r")
+			for line in lab.text.split("\n"):
+				b5 = b5 and line.length() <= 42 and line == line.strip_edges()
 	# B4: the residency's pause (process DISABLED, the mount hidden) and restore, then the meshes again
 	for m in mounts:
 		m.process_mode = Node.PROCESS_MODE_DISABLED
@@ -98,6 +107,7 @@ func run() -> void:
 		{"check": "B2 the config reached the build: the kind's own label and the reading's own words", "ok": b2},
 		{"check": "B3 every kind's carving bites: more triangles than the plain column (%d)" % plain_faces, "ok": b3},
 		{"check": "B4 each stone keeps its mesh through the residency's pause and restore", "ok": b4},
+		{"check": "B5 the plinth's words carry their own line breaks (autowrap off, lines of at most 42 characters), so an exported text breaks the same way on the web", "ok": b5},
 	]
 	var failed := 0
 	for c in checks:

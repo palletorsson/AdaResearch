@@ -355,7 +355,17 @@ One node, made by one gated line in `game.gd` (see "Switched on from outside thi
   sides. The plinth's front carries the kind, the reading's words and where they were read. CSG (CSGCombiner3D, a
   CSGPolygon3D carried along a Path3D), with collision. It builds ONCE, at the frame's end: the tower adds a work and
   THEN calls `apply_grid_config`, and a build in `_ready` plus one on the config left two of everything, the second
-  renamed (`tools/probes/edge_carving_bench.gd` B1 failed on that and passes now).
+  renamed (`tools/probes/edge_carving_bench.gd` B1 failed on that and passes now). The plinth's words are broken into
+  lines by the carving itself (`wrap_words`, autowrap off), because the exporter records a Label3D's text and not its
+  width: so the lines are the same in Godot and on the web (bench B5).
+- **On the web, in three.js:** `/stickers?work=QFEP_Phi_Term/edge-carving-dark-spot` (any `<floor map>/<work id>`) opens
+  the 3D view on that work's exported GLB - the mesh Godot's CSG made, triangle for triangle - with its plinth words
+  (the targets route passes a work's exported labels through, `cleanLabels`; Sticker3D letters them outside what a
+  sticker can take). The whole floor, words included, is the floor editor: `/lab-editor?mode=void&floor=199&select=a:edge-carving-not-yet`
+  (an editor: dragging a selected work moves it and saves; Esc deselects). The models exist only after an export; after
+  a change to the carving, export the floor's carvings again:
+  `python tools/export_void_floors.py 199 ada_run/live-preview-exports/tower/199-stickers "--preview-items=[\"edge-carving-dark-spot\"]"`
+  (the ids in the list; the floor editor's automatic export does the same for a work that has no model yet).
 
 All four are in `commons/artifacts/registry/stickers.json`, with the pad's token `sticker_pad`.
 
@@ -496,10 +506,11 @@ Three shared files do it. None is edited from here (forum thread 261113-pcs7b):
   (`stickers-pad-plinth`, config `item: stickers`, `holds: stickers-pad`). Picking the pad up from the plinth collects
   the item, which puts it on the belt, so a desktop player reaches it with Tab as a VR player does. The mind map stands
   there too (`stickers-mindmap`, board `mindmap`, at (17, 0) facing 270), and on the west side the seven edges carved
-  (`edge-carving-<kind>`, at x -16.5, z -4.5 to 4.5 every 1.5 m, facing 90). Both stand where they do because the
-  floor's two `tt` rows (`f2_tt_3_9`, `f2_tt_9_9`, scale 180) draw a 180 x 216 m screen at x -17.77 and about 18.2 that
-  hid what stood behind it (measured 2026-11-14, `tools/probes/edge_carvings_tower.gd`; forum 261114-i43dq). The rows are
-  read here, not walked: the probe stands the boards and the bench but not the plinth.
+  (`edge-carving-<kind>`, at x -16.5, z -4.5 to 4.5 every 1.5 m, facing 90). They were first placed at x -18.5 and 19,
+  where the floor's two `tt` rows then drew a 180 x 216 m screen (scale 180) that hid them (measured 2026-11-14,
+  `tools/probes/edge_carvings_tower.gd`; forum 261114-i43dq). Those rows were fixed the same day (09bf27e5b: four QFEP
+  panels at 0.5 with their tutorial, `f2_tt_3_9` and `f4_tt_2_2` removed); the works stayed where they had moved. The
+  rows are read here, not walked: the probe stands the boards and the bench but not the plinth.
 - `commons/void/game.gd`: one line after the floor stream is configured. It makes the StickerWorld only in the main
   tower and only when `res://commons/data/stickers/placements.json` exists. It uses `load()`, not `preload()`, so a
   broken sticker script cannot stop the Void from compiling.
