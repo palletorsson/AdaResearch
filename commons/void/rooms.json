@@ -51136,12 +51136,14 @@
           "station": "SW",
           "position": [
             -18,
-            11
+            0
           ],
-          "facing": 0,
-          "height": 0,
-          "scale": 180,
-          "config": {}
+          "facing": 90,
+          "height": 1.2,
+          "scale": 0.5,
+          "config": {
+            "tutorial": "entropy_axioms"
+          }
         },
         {
           "id": "f1_microstate_counter_2_5",
@@ -51453,19 +51455,6 @@
           }
         },
         {
-          "id": "f2_tt_3_9",
-          "artifact": "tt",
-          "station": "SW",
-          "position": [
-            -18,
-            12
-          ],
-          "facing": 270,
-          "height": 0,
-          "scale": 180,
-          "config": {}
-        },
-        {
           "id": "f2_lambda_promenade_6_9",
           "artifact": "lambda_promenade",
           "station": "SE",
@@ -51484,12 +51473,14 @@
           "station": "SE",
           "position": [
             18,
-            12
+            4.5
           ],
           "facing": 270,
-          "height": 0,
-          "scale": 180,
-          "config": {}
+          "height": 1.2,
+          "scale": 0.5,
+          "config": {
+            "tutorial": "phi_queer"
+          }
         },
         {
           "id": "stickers-board",
@@ -51744,12 +51735,14 @@
           "station": "SW",
           "position": [
             -18,
-            12
+            0
           ],
-          "facing": 0,
-          "height": 0,
-          "scale": 180,
-          "config": {}
+          "facing": 90,
+          "height": 1.2,
+          "scale": 0.5,
+          "config": {
+            "tutorial": "edge_of_chaos"
+          }
         },
         {
           "id": "f3_emergence_zone_2_2",
@@ -51846,19 +51839,6 @@
       "walls": [],
       "artifacts": [
         {
-          "id": "f4_tt_2_2",
-          "artifact": "tt",
-          "station": "SW",
-          "position": [
-            -18,
-            12
-          ],
-          "facing": 0,
-          "height": 0,
-          "scale": 180,
-          "config": {}
-        },
-        {
           "id": "f4_lambda_slider_5_5",
           "artifact": "lambda_slider",
           "station": "NW",
@@ -51950,12 +51930,14 @@
           "station": "SW",
           "position": [
             -18,
-            12
+            0
           ],
           "facing": 90,
-          "height": 0,
-          "scale": 180,
-          "config": {}
+          "height": 1.2,
+          "scale": 0.5,
+          "config": {
+            "tutorial": "qfep_synthesis"
+          }
         },
         {
           "id": "f5_grab_sphere_F_5_2",
