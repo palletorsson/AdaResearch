@@ -37,6 +37,10 @@ uniform float suture_energy : hint_range(0.0, 8.0) = 2.6;
 uniform float grain : hint_range(0.0, 4.0) = 1.0;
 uniform float glow : hint_range(0.0, 2.0) = 0.35;
 uniform float seed_offset = 0.0;
+/// Light the coloured parts from within, the dark ones not (0 = off). Added 2026-11-14 for the carved columns on
+/// Boolean_Verbs: under the tower's lilac sky their grooves rendered darker than the sky itself, so a groove read as
+/// paint, not light. Scaled by how saturated-bright the limb is, so a black body stays black.
+uniform float self_lit : hint_range(0.0, 2.0) = 0.0;
 
 varying vec3 wpos;
 varying vec3 wnrm;
@@ -155,6 +159,8 @@ void fragment() {
 		emit = vec3(0.0);
 		rim = 0.30;
 	}
+
+	emit += limb * self_lit * smoothstep(0.2, 0.6, max(limb.r, max(limb.g, limb.b)));
 
 	// THE FUSION LIGHTS. Added to emission, so it reads in a cavity with no sun
 	// and blooms under glow — the wayfinding in a building whose plan is its own

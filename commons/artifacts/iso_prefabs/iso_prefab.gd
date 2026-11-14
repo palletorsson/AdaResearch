@@ -17,6 +17,13 @@ extends Node3D
 ##   PASSES       passes: a 16 x 5 x 9 m box carved from one chamber outward by five movements (a random walk, a sine, a
 ##                spiral, branches, a grid) - walked into, not looked at (Palle, 2026-11-13: "add inner-out different
 ##                passes of movement inside a bigger and larger box so we can walk into strange places")
+##   COLUMNS      column_sine, column_helix, column_chance, column_sine_helix, column_helix_chance, column_sine_chance,
+##                column_middle: seven black columns 4.5 m tall and 1.35 m across, each carved by a ball run along three grooves whose turn is a
+##                weighted sum of a sine, a steady turn (a helix) and a random walk - a triangle of columns, the pure
+##                laws at its corners, their mixtures between (Palle, 2026-11-14: "make these but carved sculptures
+##                using sine and randomness, what is inbetween a helix etc"). In the rhizome skin like the passes, but
+##                OUTDOOR (mesh meta outdoor): no inside's probe, and the skin's colour is the vertex's own (black, a
+##                groove in its law's colour)
 ##
 ## The carvings are the Random Boolean Carving (algorithms/proceduralgeneration/constraint_solvers/randomboolean,
 ## Palle: "they use sine and random etc to carve in a space in cubes"): its demo's six carvings - a cube minus faceted
@@ -46,7 +53,7 @@ extends Node3D
 ## Geometry: tools/iso_prefabs.py (the expressions, their checks, the march) -> bake_forms.gd -> forms/<form>.res.
 ## Walked in the tower by tools/probes/iso_prefabs_walk.gd.
 const FORMS_DIR := "res://commons/artifacts/iso_prefabs/forms/"
-const FORMS := ["tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere", "passes"]
+const FORMS := ["tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere", "passes", "column_sine", "column_helix", "column_chance", "column_sine_helix", "column_helix_chance", "column_sine_chance", "column_middle"]
 const FINISHES := ["provenance", "satin", "cast"]
 const SHADER := preload("res://commons/artifacts/iso_prefabs/iso_prefab.gdshader")
 const RHIZOME := preload("res://commons/artifacts/radial_inside/rhizome_surface.gdshader")
@@ -54,7 +61,7 @@ const RHIZOME := preload("res://commons/artifacts/radial_inside/rhizome_surface.
 const SKINS := ["wetflesh", "nacre", "chitin", "film", "lymph", "bone"]
 const PATH_COLOUR := Color(1, 0.5, 0)                 # advanced_carver.gd path_line_color
 
-@export_enum("tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere", "passes") var form := "tunnel"
+@export_enum("tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere", "passes", "column_sine", "column_helix", "column_chance", "column_sine_helix", "column_helix_chance", "column_sine_chance", "column_middle") var form := "tunnel"
 @export_enum("provenance", "satin", "cast") var finish := "provenance"
 ## The grown-body skin of a form that asks for it (the passes); see the header.
 @export_enum("wetflesh", "nacre", "chitin", "film", "lymph", "bone") var skin := "wetflesh"
@@ -68,6 +75,11 @@ const PATH_COLOUR := Color(1, 0.5, 0)                 # advanced_carver.gd path_
 @export var plaque := false
 ## A rigid form (cast, die) held where it was put until something takes it.
 @export var frozen := false
+## Where the plaque's lectern stands, in the piece's own frame, when a placement wants it elsewhere than its form says
+## (config plaque_at [x, y, z]; the seven columns stand close, so each placement picks the side that is free).
+var plaque_at := Vector3.INF
+## ...and which way it faces, degrees about y in the piece's frame (config plaque_turn; 0 = toward the piece's +z).
+var plaque_turn := 0.0
 
 static var _materials := {}
 var _body: CollisionObject3D
@@ -79,7 +91,7 @@ var _built := ""
 
 
 func _ready() -> void:
-	for key in ["form", "finish", "skin", "plaque", "frozen", "path_line", "body_turn"]:
+	for key in ["form", "finish", "skin", "plaque", "frozen", "path_line", "body_turn", "plaque_at", "plaque_turn"]:
 		if has_meta("config_" + key): _take({key: get_meta("config_" + key)})
 	_build()
 
@@ -92,6 +104,10 @@ func _take(config_data: Dictionary) -> void:
 	if config_data.has("body_turn"): body_turn = posmod(roundi(float(str(config_data["body_turn"])) / 90.0) * 90, 360)
 	if config_data.has("plaque"): plaque = str(config_data["plaque"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
 	if config_data.has("frozen"): frozen = str(config_data["frozen"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
+	if config_data.has("plaque_at") and config_data["plaque_at"] is Array and (config_data["plaque_at"] as Array).size() >= 3:
+		var at: Array = config_data["plaque_at"]
+		plaque_at = Vector3(float(at[0]), float(at[1]), float(at[2]))
+	if config_data.has("plaque_turn"): plaque_turn = float(str(config_data["plaque_turn"]))
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -100,7 +116,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _build() -> void:
-	var key := "%s|%s|%s|%s|%s|%s|%s" % [form, finish, plaque, frozen, path_line, body_turn, skin]
+	var key := "%s|%s|%s|%s|%s|%s|%s|%s|%s" % [form, finish, plaque, frozen, path_line, body_turn, skin, plaque_at, plaque_turn]
 	if key == _built: return
 	var mesh := load(FORMS_DIR + form + ".res") as ArrayMesh
 	if mesh == null:
@@ -109,7 +125,7 @@ func _build() -> void:
 	if _built.get_slice("|", 0) != form or _body == null:
 		_build_body(mesh)
 		_build_interior(mesh)
-	_mesh.material_override = _skin_material(skin) if str(mesh.get_meta("skin_shader", "")) == "rhizome" else _material(finish)
+	_mesh.material_override = _skin_material(skin, bool(mesh.get_meta("outdoor", false))) if str(mesh.get_meta("skin_shader", "")) == "rhizome" else _material(finish)
 	if _body is StaticBody3D: _body.rotation_degrees.y = float(body_turn)
 	if _sign != null:
 		_sign.queue_free()
@@ -173,19 +189,25 @@ func _material(which: String) -> ShaderMaterial:
 
 ## One shared grown-body material per skin. The suture floor is radial_inside's measured one (0.88: below it a smooth
 ## body is a seam everywhere); the passes' tie runs over 0.9 m, so it lights the mouth where two movements met.
-func _skin_material(which: String) -> ShaderMaterial:
-	var key := "rhizome|" + which
+## An OUTDOOR form (the columns) takes its colour whole from its vertices (limb_mix 1: a black skin stays black, not the
+## tint's grey) and glows more (0.9: a groove's own colour lights it, so a yellow reads yellow in the tower's lilac light
+## and not khaki; the black skin's colour is too dark to glow), in a material of its own, so the passes' stays as it was.
+func _skin_material(which: String, outdoor := false) -> ShaderMaterial:
+	var key := "rhizome|" + which + ("|outdoor" if outdoor else "")
 	if _materials.has(key): return _materials[key]
 	var m := ShaderMaterial.new()
 	m.shader = RHIZOME
 	m.set_shader_parameter("mode", maxi(0, SKINS.find(which)))
 	m.set_shader_parameter("tint", Color(1, 1, 1, 1))
 	m.set_shader_parameter("suture_color", Color(1.0, 0.94, 0.86, 1.0))   # warm white: the one unsaturated glow inside
-	m.set_shader_parameter("limb_mix", 0.85)
+	m.set_shader_parameter("limb_mix", 1.0 if outdoor else 0.85)
 	m.set_shader_parameter("suture_floor", 0.88)
-	m.set_shader_parameter("suture_energy", 1.8)
+	# outdoors: the grooves lit from within (they rendered darker than the sky), and a crossing at hand height lit at 1.0,
+	# not the inside's 1.8, so it does not bloom in a headset (a judge, from the renders)
+	m.set_shader_parameter("suture_energy", 1.0 if outdoor else 1.8)
+	m.set_shader_parameter("self_lit", 0.22 if outdoor else 0.0)
 	m.set_shader_parameter("grain", 1.0)
-	m.set_shader_parameter("glow", 0.35)
+	m.set_shader_parameter("glow", 0.9 if outdoor else 0.35)
 	m.set_shader_parameter("seed_offset", 161.0 * 0.31)
 	_materials[key] = m
 	return m
@@ -197,7 +219,7 @@ func _build_interior(mesh: ArrayMesh) -> void:
 	if _interior != null:
 		_interior.queue_free()
 		_interior = null
-	if str(mesh.get_meta("skin_shader", "")) != "rhizome": return
+	if str(mesh.get_meta("skin_shader", "")) != "rhizome" or bool(mesh.get_meta("outdoor", false)): return
 	var box: Array = mesh.get_meta("aabb", [[-0.5, 0, -0.5], [0.5, 1, 0.5]])
 	var lo := Vector3(float(box[0][0]), float(box[0][1]), float(box[0][2]))
 	var hi := Vector3(float(box[1][0]), float(box[1][1]), float(box[1][2]))
@@ -259,7 +281,9 @@ func _build_plaque(mesh: ArrayMesh) -> Node3D:
 	var box: Array = mesh.get_meta("aabb", [[-0.5, 0, -0.5], [0.5, 1, 0.5]])
 	var stand := Node3D.new()
 	stand.name = "IsoPlaque"
-	stand.position = Vector3(float(box[0][0]) + 0.5, 0, float(box[1][2]) + 0.55)
+	# a narrow form (a column) bakes where its lectern stands beside it: at the corner it would stand in front of it
+	stand.position = plaque_at if plaque_at != Vector3.INF else mesh.get_meta("plaque_at", Vector3(float(box[0][0]) + 0.5, 0, float(box[1][2]) + 0.55))
+	stand.rotation_degrees.y = plaque_turn
 	add_child(stand)
 	var post := MeshInstance3D.new()
 	var rod := BoxMesh.new()

@@ -26,6 +26,10 @@ Its demo (all_patterns_demo.tscn) carves six 10 m cubes; the forms `carved_*` he
 the finish `satin` is the demo's material: albedo (0.7, 0.7, 0.8), metallic 0.3, roughness 0.7, its SSAO stood in for by
 the occlusion baked into each vertex.
 
+Palle, 2026-11-14, after the cave a visitor paints: "make these but carved sculptures using sine and randomness, what is
+inbetween a helix etc". The forms `column_*` are seven columns carved by one rule - a ball run along three grooves - in a
+triangle whose corners are a sine, a helix and chance, and whose sides and middle are their mixtures (see THE COLUMNS).
+
   python tools/iso_prefabs.py check [form ...]     build each form, measure it, run its checks; print a table
   python tools/iso_prefabs.py export [form ...]    ... and write ada_run/iso_prefabs/<form>.bin + manifest.json
   python tools/iso_prefabs.py views [form ...]     sections and heights as PNG in ada_run/iso_prefabs/views/
@@ -1000,6 +1004,204 @@ def part_colours(verts, normals, h):
     return np.concatenate([rgb, tie[:, None]], axis=1)
 
 
+# ---------------------------------------------------------------- the columns: between a sine, a helix and chance
+# Palle, 2026-11-14: "make these but carved sculptures using sine and randomness, what is inbetween a helix etc".
+# Seven columns, each a black cylinder carved by a ball run along three grooves a third of a turn apart. One rule carves
+# them all; what differs is the law that turns a groove as it climbs - a weighted sum of three movements:
+#   SINE    theta = A sin(2 pi y / wave)    the groove swings out and comes back
+#   HELIX   theta = 2 pi y / pitch           it keeps turning, one way
+#   CHANCE  theta = W(y)                     how fast it turns is drawn as it climbs: a random walk, one per groove
+# theta(y) = s SINE + h HELIX + c CHANCE, with s + h + c = 1. The pure laws stand at the corners of a triangle, half of
+# each of two at the middles of its sides, a third of each at its centre - a ternary diagram made of columns. Every
+# column draws the SAME three walks, so a column with chance in it carries a share of exactly the chance the pure one
+# does: the mixtures are mixtures, not new draws. Seen from in front, a helix's groove is a sine as well (a helix seen
+# from the side IS a sine); only walking round the two tells them apart.
+# Coloured as PARTS for the rhizome surface, as the passes are: the column's skin black, a groove's wall in the colour
+# of its law - sine blue, helix green, chance red, a mixture their weighted sum - and COLOR.a lit where two grooves met,
+# which only chance makes them do.
+
+# Palle, 2026-11-14, on first sight of them: "make them bigger". Every length x1.5 - 4.5 m tall, 1.35 m across - and the
+# laws as they were: three swings, a turn and a half, the same walks (their rate per metre / 1.5, their knots x1.5).
+COLUMN_SCALE = 1.5
+COLUMN_R = 0.45 * COLUMN_SCALE  # the column's radius
+COLUMN_H = 3.0 * COLUMN_SCALE   # and its height
+COLUMN_RIM = 0.08 * COLUMN_SCALE  # its top edge, rounded
+COLUMN_TOOL = 0.17 * COLUMN_SCALE  # the ball that carves
+COLUMN_RIDE = 0.41 * COLUMN_SCALE  # the ball's centre from the axis: just inside the skin, a groove 0.21 (x1.5) deep and the
+#                               core keeps 0.24 m whatever the grooves do
+COLUMN_Y = (0.4 * COLUMN_SCALE, 2.6 * COLUMN_SCALE)  # the carved height: a solid foot and a solid head
+COLUMN_GROOVES = 3
+COLUMN_K = 0.06 * COLUMN_SCALE  # a groove's lip rounded over three voxels (at 0.03 the lip marched into a sawtooth)
+SINE_A = 0.75                 # radians either way: a groove swings 43 degrees out and back
+# a swing as long as A x pitch: the sine then turns at most as fast as the helix (4.28 rad/m at 1.0), so sine + helix halts
+# once a swing instead of hooking back - and two swings, not three: at three the pure sine's strokes ran 71 degrees from
+# vertical, a groove spread wider than the black between, and on a quarter of its height the face was all blue (a judge)
+SINE_WAVE = SINE_A * 1.467 * COLUMN_SCALE  # metres a swing takes, out and back: two in the carved height
+HELIX_PITCH = 1.467 * COLUMN_SCALE  # metres a turn takes: one and a half turns
+# CHANCE draws the groove's TURNING RATE, not its angle: a rate every CHANCE_KNOT metres, eased between, summed up the
+# column into the angle turned - a random walk of the direction, so a groove wanders as a hand would. The first cut drew
+# the angle itself, a step every 6 cm: each step threw the groove 13 cm sideways, the grooves smeared into each other,
+# and from in front the chance columns were sheets of colour with black islands, not paths.
+CHANCE_RATE = 2.6 / COLUMN_SCALE  # radians per metre: the spread of a drawn turning rate (the helix turns at 4.3 / 1.5)
+CHANCE_KNOT = 0.22 * COLUMN_SCALE  # metres between two drawn rates
+# chosen as a stone is: legible by column_seed_survey() (one X, at eye height, no bare side) AND at half and a third of
+# chance no two grooves ever run fused - 1659 passed the first and failed the second: its walks fused into a yellow leaf
+# at half chance and a white ghost at a third (two judges, measured); 2154 is one of 23 in 1000 that pass both
+COLUMN_SEED = 2154
+COLUMN_BODY = (0.035, 0.03, 0.045)
+COLUMN_HUES = {'sine': (0.15, 0.38, 1.0), 'helix': (0.2, 1.0, 0.36), 'chance': (1.0, 0.16, 0.26)}
+COLUMNS = {                   # (sine, helix, chance)
+    'column_sine': (1.0, 0.0, 0.0),
+    'column_helix': (0.0, 1.0, 0.0),
+    'column_chance': (0.0, 0.0, 1.0),
+    'column_sine_helix': (0.5, 0.5, 0.0),
+    'column_helix_chance': (0.0, 0.5, 0.5),
+    'column_sine_chance': (0.5, 0.0, 0.5),
+    'column_middle': (1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0),
+}
+
+
+def column_walks(seed=None):
+    """The three walks every column draws, one per groove and the same in every column: W(y), the angle a groove has
+    turned by height y when its turning rate is drawn (a unit normal every CHANCE_KNOT metres, a smooth spline between)
+    and summed up the column."""
+    from scipy.interpolate import CubicSpline
+    y0, y1 = COLUMN_Y
+    # counted, not stepped: at 1.5x, arange(y0, y1 + knot, knot) rounded to 11 knots instead of 12, one draw fewer per
+    # groove, and every chance column silently got new walks (a review caught it: seed 1659 stopped being legible)
+    knots = y0 + CHANCE_KNOT * np.arange(int(round((y1 - y0) / CHANCE_KNOT)) + 2)
+    ys = np.linspace(y0, y1, 2400)
+    rng = np.random.RandomState(COLUMN_SEED if seed is None else seed)
+    out = []
+    for _ in range(COLUMN_GROOVES):
+        rate = CubicSpline(knots, rng.normal(0.0, 1.0, len(knots)))(ys)
+        out.append((ys, np.r_[0.0, np.cumsum((rate[1:] + rate[:-1]) * 0.5 * np.diff(ys))]))
+    return out
+
+
+def column_seed_survey(seeds=range(1600, 1700), weights=(0.0, 0.0, 1.0)):
+    """Why COLUMN_SEED: for each seed, read off the pure chance column's three grooves (their angles at 1200 heights) -
+    how often two CROSS (their angles swap sides while near), the longest stretch two run FUSED (closer than a groove's
+    width, 0.83 rad), and how much of the height leaves a BARE side (all three within a third of a turn, so one side of
+    the column shows no groove). Chance, legible: crossings 2..6, no fused run over 0.6 m x COLUMN_SCALE (two grooves
+    crossing at a shallow angle run together for about half a metre: that is the X), a bare side under 15 %."""
+    rows = []
+    for seed in seeds:
+        ys, th = None, []
+        for j, (wy, w) in enumerate(column_walks(seed)):
+            ys = wy
+            th.append(np.pi / 2 + 2 * np.pi * j / COLUMN_GROOVES + weights[2] * CHANCE_RATE * w)
+        th = np.array(th)
+        cross, fused = 0, 0.0
+        for a in range(COLUMN_GROOVES):
+            for b in range(a + 1, COLUMN_GROOVES):
+                d = np.angle(np.exp(1j * (th[a] - th[b])))
+                cross += int(np.sum((np.sign(d[1:]) != np.sign(d[:-1])) & (np.abs(d[1:]) < 0.5) & (np.abs(d[:-1]) < 0.5)))
+                run = best = 0
+                for near in np.abs(d) < 0.83:
+                    run = run + 1 if near else 0
+                    best = max(best, run)
+                fused = max(fused, best * (ys[-1] - ys[0]) / len(ys))
+        srt = np.sort(np.mod(th, 2 * np.pi), axis=0)
+        gaps = np.diff(np.vstack([srt, srt[:1] + 2 * np.pi]), axis=0)
+        bare = float((gaps.max(axis=0) > 4.19).mean())
+        rows.append(dict(seed=seed, crossings=cross, fused=round(float(fused), 2), bare=round(bare, 3),
+                         legible=2 <= cross <= 6 and fused <= 0.6 * COLUMN_SCALE and bare < 0.15))
+    return rows
+
+
+def column_strands(weights, spacing=0.02):
+    """The grooves' centre lines in metres (the column's axis at x = z = 0, its foot at y = 0), resampled every
+    `spacing` metres along their length. The first groove faces +z, the column's front."""
+    s, hx, c = weights
+    y0, y1 = COLUMN_Y
+    ys = np.linspace(y0, y1, 2400)
+    out = []
+    for j, (wy, w) in enumerate(column_walks()):
+        theta = (np.pi / 2 + 2 * np.pi * j / COLUMN_GROOVES
+                 + s * SINE_A * np.sin(2 * np.pi * (ys - y0) / SINE_WAVE)
+                 + hx * 2 * np.pi * (ys - y0) / HELIX_PITCH
+                 + c * CHANCE_RATE * np.interp(ys, wy, w))
+        pts = np.stack([COLUMN_RIDE * np.cos(theta), ys, COLUMN_RIDE * np.sin(theta)], axis=1)
+        arc = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(pts, axis=0), axis=1))]
+        at = np.linspace(0.0, arc[-1], max(2, int(arc[-1] / spacing) + 1))
+        out.append(np.stack([np.interp(at, arc, pts[:, k]) for k in range(3)], axis=1))
+    return out
+
+
+def ball_run(points, r):
+    """A ball of radius r run along a densely sampled line: the union of the balls at its points (2 cm apart against a
+    17 cm ball, so the ripple between two is 0.3 mm), measured exactly through a k-d tree."""
+    from scipy.spatial import cKDTree
+    tree = cKDTree(np.asarray(points, float))
+    return leaf(lambda p: tree.query(p)[0] - r)
+
+
+def column_hue(weights):
+    """A mixture's colour, mixed on the colour wheel: the weighted mean of its laws' hues, at their saturation - so half
+    sine and half helix is cyan, half helix and half chance yellow, half sine and half chance violet - fading to white
+    as the hues cancel (a third of each). An RGB sum made the mixtures pastel: the yellow read as beige in the tower."""
+    import colorsys
+    hsv = [colorsys.rgb_to_hsv(*COLUMN_HUES[k]) for k in ('sine', 'helix', 'chance')]
+    vec = sum(w * np.exp(2j * np.pi * h) for w, (h, _, _) in zip(weights, hsv))
+    # full saturation while the mean still points somewhere (two hues 139 degrees apart leave 0.35: helix + chance kept
+    # only 0.6 of it on a wider ramp and read cream), white as it cancels (a third of each leaves 0.13)
+    sat = sum(w * s for w, (_, s, _) in zip(weights, hsv)) * float(np.clip((abs(vec) - 0.15) / 0.15, 0.0, 1.0))
+    return np.array(colorsys.hsv_to_rgb((np.angle(vec) / (2 * np.pi)) % 1.0, sat, 1.0))
+
+
+def _column(name):
+    body = cyl((0.0, (COLUMN_H - FLOOR_SINK) / 2, 0.0), 'y', COLUMN_R, (COLUMN_H + FLOOR_SINK) / 2, COLUMN_RIM)
+    return ON_FLOOR(D(body, *[ball_run(s, COLUMN_TOOL) for s in column_strands(COLUMNS[name])], k=COLUMN_K))
+
+
+def column_colours(name, verts, normals):
+    """COLOR for the rhizome surface: rgb the column's black skin, or on a groove's wall the colour of the column's law;
+    a = how near the runner-up groove is - 1 where two grooves met."""
+    from scipy.spatial import cKDTree
+    probe = verts + normals * 0.04 * COLUMN_SCALE       # into the groove's air: inside the ball that cut it
+    dist = np.stack([cKDTree(s).query(probe)[0] - COLUMN_TOOL for s in column_strands(COLUMNS[name])], axis=1)
+    dist.sort(axis=1)
+    first, second = dist[:, 0], dist[:, 1]
+    # 1 on a groove's wall (where the probe is 0.04 S inside its ball), 0 on the skin a few cm past the lip. The ramp first
+    # stopped at 0.9 on the wall: the grooves wore 90 % of their colour and the crossing light (smoothstep 0.88..1 on
+    # COLOR.a) peaked at 6 % - a review measured it
+    on = np.clip((0.05 * COLUMN_SCALE - first) / (0.09 * COLUMN_SCALE), 0.0, 1.0)
+    #                                                     (narrower showed the simplified mesh's triangles as a sawtooth)
+    rgb = np.array(COLUMN_BODY) * (1.0 - on[:, None]) + column_hue(COLUMNS[name])[None, :] * on[:, None]
+    tie = np.clip(1.0 - (second - first) / (0.3 * COLUMN_SCALE), 0.0, 1.0) * on
+    # and a lit PATCH round each crossing, not only the 4 cm band where two balls tie (narrower than the mesh's vertex
+    # spacing, so no render showed it): the trough wall is a ball's radius from the crossing point, the patch ~0.4 m wide
+    # The shader lights only COLOR.a above 0.88 (smoothstep 0.88..1), so the patch is written IN that band, easing from
+    # 0.98 at its core to 0.88 half a metre out - a linear 0..1 ramp left a 1.4 cm fade. And it is a disc of light round
+    # the crossing, groove and skin alike: cut off at the grooves' lips it was a ragged star along the mesh's triangles.
+    xs = column_crossings(name)
+    if len(xs):
+        near = cKDTree(np.array(xs)).query(verts)[0]
+        r0, r1 = 0.15 * COLUMN_SCALE, 0.5 * COLUMN_SCALE
+        x = np.clip((near - r0) / (r1 - r0), 0.0, 1.0)
+        tie = np.maximum(tie, np.where(near < r1, 0.88 + 0.10 * (1.0 - x * x * (3.0 - 2.0 * x)), 0.0))
+    return np.concatenate([rgb, tie[:, None]], axis=1)
+
+
+def column_crossings(name):
+    """Where two grooves' centre lines cross (their angles swap sides while near): the points, in metres."""
+    s, hx, c = COLUMNS[name]
+    ys, th = None, []
+    for j, (wy, w) in enumerate(column_walks()):
+        ys = wy
+        th.append(np.pi / 2 + 2 * np.pi * j / COLUMN_GROOVES + s * SINE_A * np.sin(2 * np.pi * (wy - wy[0]) / SINE_WAVE)
+                  + hx * 2 * np.pi * (wy - wy[0]) / HELIX_PITCH + c * CHANCE_RATE * w)
+    out = []
+    for a in range(COLUMN_GROOVES):
+        for b in range(a + 1, COLUMN_GROOVES):
+            d = np.angle(np.exp(1j * (th[a] - th[b])))
+            for i in np.where((np.sign(d[1:]) != np.sign(d[:-1])) & (np.abs(d[1:]) < 0.5))[0]:
+                m = th[b][i] + d[i] / 2.0
+                out.append([COLUMN_RIDE * np.cos(m), ys[i], COLUMN_RIDE * np.sin(m)])
+    return out
+
+
 # ---------------------------------------------------------------- the catalogue of forms
 
 FORMS = {
@@ -1085,6 +1287,29 @@ for _name, _spec in CARVINGS.items():
     FORMS[_name] = dict(build=_carving_builder(_name), verb='difference', h=0.022, hc=0.045, cbudget=5000, budget=9000,
                         extent=(1.8, 3.2, 1.8), title=_spec['label'], expression=_expr, principle=_why,
                         rigid=False, carving=True)
+_COLUMN_TEXT = {
+    'column_sine': ('Sine', 'difference(column, ball along theta = A sin(2 pi y / wave))',
+                    'The groove swings out and comes back. From in front it draws a sine; from the side, a pendulum that climbs.'),
+    'column_helix': ('Helix', 'difference(column, ball along theta = 2 pi y / pitch)',
+                     "The groove keeps turning one way: every stroke you see leans the same way. The sine's lean out and come back."),
+    'column_chance': ('Chance', 'difference(column, ball along theta = W(y), W summed from drawn turns)',
+                      'How fast each groove turns is drawn as it climbs: three random walks. At eye height two of them cross: they fuse, and the wall lights.'),
+    'column_sine_helix': ('Sine + helix', 'theta = A/2 sin(2 pi y / wave) + pi y / pitch',
+                          'Turning and swinging at once: the groove turns, halts, turns again.'),
+    'column_helix_chance': ('Helix + chance', 'theta = pi y / pitch + W(y) / 2',
+                            'A turn that drifts: the groove still winds, but no two of its steps are alike.'),
+    'column_sine_chance': ('Sine + chance', 'theta = A/2 sin(2 pi y / wave) + W(y) / 2',
+                           'A swing with chance in it: the rhythm survives, each beat lands somewhere else.'),
+    'column_middle': ('A third of each', 'theta = (sine + helix + chance) / 3',
+                      'What lies between a sine, a helix and chance: all three laws at a third - and all three lights: blue, green and red make white.'),
+}
+for _name in COLUMNS:
+    _title, _expr, _why = _COLUMN_TEXT[_name]
+    # pure chance is the one that lights where its grooves cross: a denser mesh there, so the light's rim is smooth
+    FORMS[_name] = dict(build=(lambda n=_name: _column(n)), verb='difference', h=0.024, hc=0.06, cbudget=3000,
+                        budget=40000 if COLUMNS[_name][2] == 1.0 else 24000,
+                        extent=(COLUMN_R + 0.5, COLUMN_H + 0.4, COLUMN_R + 0.5), colours='column', skin_shader='rhizome', title=_title, expression=_expr,
+                        principle=_why, column=True)
 
 
 # ---------------------------------------------------------------- marching, measuring
@@ -1236,6 +1461,8 @@ def mesh_of(name, h=None, purpose='render'):
         colours, role, band = data_colours(f, verts, normals, h, rigid, spec.get('ao_reach', 0.6))
         if spec.get('colours') == 'parts':
             colours = part_colours(verts, normals, h)
+        elif spec.get('colours') == 'column':
+            colours = column_colours(name, verts, normals)
         if spec.get('carving'):                         # P8 (d): the demo's cutters are smooth-shaded (smooth_faces): a cave
             cut = colours[:, 0] > 0.5                    # wall's normal points to the centre of its nearest cutter
             if cut.any():
@@ -1447,6 +1674,24 @@ def checks(name, m):
         inside = evaluate(f, np.array([[q[0] * k, q[1] * k + lift, q[2] * k] for q, _ in points]))[0]
         need('every cutter left air where it stood', inside.min(), inside.min() > 0.0, '> 0 (outside the solid)')
         need('it is still one block (largest dimension m)', (v.max(axis=0) - v.min(axis=0)).max(), (v.max(axis=0) - v.min(axis=0)).max() <= 10.0 * k + 0.05, '<= 2.85')
+    elif name in COLUMNS:
+        strands = column_strands(COLUMNS[name])
+        inside = evaluate(f, np.concatenate(strands))[0]
+        need('every groove left air where its ball ran', inside.min(), inside.min() > 0.0, '> 0 (outside the solid)')
+        ys = np.linspace(COLUMN_Y[0], COLUMN_Y[1], 150)     # over the carved height (foot and head are whole)
+        axis = evaluate(f, np.stack([np.zeros_like(ys), ys, np.zeros_like(ys)], axis=1))[0]
+        need('the core holds: solid round the axis at every carved height (thinnest, m)', -axis.max(), -axis.max() >= 0.15 * COLUMN_SCALE, '>= %.2f' % (0.15 * COLUMN_SCALE))
+        v = m['verts']
+        span = max(v[:, 0].max() - v[:, 0].min(), v[:, 2].max() - v[:, 2].min())
+        need('one column, no wider than it was cut from (m)', span, span <= 2 * COLUMN_R + 0.01, '<= %.2f' % (2 * COLUMN_R + 0.01))
+        cut = float((m['colours'][:, :3] != np.array(COLUMN_BODY, np.float32)).any(axis=1).mean())
+        need('the grooves wear their law (share of vertices coloured)', cut, 0.2 <= cut <= 0.8, '0.2 .. 0.8')
+        a = m['colours'][:, 3].astype(float)              # what the rhizome shader lights: smoothstep(0.88, 1, COLOR.a)
+        x = np.clip((a - 0.88) / 0.12, 0.0, 1.0)
+        lit = float((x * x * (3.0 - 2.0 * x)).max())
+        chance = COLUMNS[name][2]
+        need('grooves meet, and the wall lights, only by chance (brightest crossing light, 0..1)', lit,
+             lit == 0.0 if chance == 0 else (lit >= 0.5 if chance == 1.0 else True), '0 without chance, >= 0.5 for chance alone')
     elif name == 'boulder':
         w = walk_profile(f, line((-1.2, 0), (1.2, 0), 120))
         need('a seat, not a step: height (m)', w['top'], 0.35 <= w['top'] <= 0.75, '0.35 .. 0.75')
@@ -1520,6 +1765,14 @@ def extras_of(name):
                 'walk_floors': [round(float(h), 3) for h in plan['floors']['walk']],
                 'chamber': [round(float(v), 3) for v in plan['room']],
                 'skylights': [[round(float(q[0]), 3), round(float(q[2]), 3)] for q in list(plan['skylights']) + list(plan['tips'])]}
+    if name in COLUMNS:                                  # the grooves' centre lines, every 8 cm (for a probe, or a line)
+        return {'shader': FORMS[name].get('skin_shader', ''), 'outdoor': True,
+                'weights': [round(float(w), 4) for w in COLUMNS[name]],
+                'hue': [round(float(c), 4) for c in column_hue(COLUMNS[name])],
+                'paths': [[[round(float(v), 3) for v in q] for q in s[::4]] for s in column_strands(COLUMNS[name])],
+                'line': False, 'seed': COLUMN_SEED,
+                'plaque_at': [round(COLUMN_R + 0.6, 3), 0.0, 0.5]}  # beside it (north, local +x), not in front (a lectern 1 m
+        #                                                         out in front hid the lower half of the grooves)
     spec = CARVINGS.get(name)
     if spec is None:
         return {}

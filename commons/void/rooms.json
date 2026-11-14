@@ -46613,7 +46613,10 @@
             "length": 42.0,
             "depth": 10.0,
             "seed": 161,
-            "editor_label": "Side slab / the yard's north room: the six carvings of the Random Boolean Carving and the dome"
+            "editor_label": "Side slab / the yard's north room: the six carvings of the Random Boolean Carving and the dome",
+            "open": [
+              "+x"
+            ]
           }
         },
         {
@@ -46622,16 +46625,20 @@
           "station": "SW",
           "position": [
             -21,
-            0.0
+            -4.5
           ],
           "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
-            "length": 20.0,
+            "length": 29.0,
             "depth": 10.0,
             "seed": 161,
-            "editor_label": "Side slab / the yard's west room: Passes, a box carved from the inside out"
+            "editor_label": "Side slab / the yard's west room: Passes, a box carved from the inside out",
+            "feet": [
+              -4.5,
+              13.5
+            ]
           }
         },
         {
@@ -46684,6 +46691,199 @@
           "config": {
             "size": "small",
             "editor_label": "Boolean cave (small): a cave on a stand, painted with a hand-sized brush"
+          }
+        },
+        {
+          "id": "iso-column-sine",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -29.0,
+            -10.472
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_sine",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              -1.3,
+              0.0,
+              -0.4
+            ],
+            "plaque_turn": -90.0,
+            "editor_label": "Column / Sine | three grooves turned by sine | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "iso-column-chance",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -21.0,
+            -10.472
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_chance",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              1.0,
+              0.0,
+              0.9
+            ],
+            "plaque_turn": 51.9,
+            "editor_label": "Column / Chance | three grooves turned by chance | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "iso-column-helix",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -25.0,
+            -17.4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_helix",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              0.0,
+              0.0,
+              1.3
+            ],
+            "plaque_turn": 0.0,
+            "editor_label": "Column / Helix | three grooves turned by helix | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "iso-column-sine-helix",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -27.0,
+            -13.936
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_sine_helix",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              -0.7,
+              0.0,
+              -1.4
+            ],
+            "plaque_turn": -90.0,
+            "editor_label": "Column / 1/2 Sine + 1/2 Helix | three grooves turned by 1/2 sine + 1/2 helix | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "iso-column-helix-chance",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -23.0,
+            -13.936
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_helix_chance",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              0.6,
+              0.0,
+              1.25
+            ],
+            "plaque_turn": 0.0,
+            "editor_label": "Column / 1/2 Helix + 1/2 Chance | three grooves turned by 1/2 helix + 1/2 chance | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "iso-column-sine-chance",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -25.0,
+            -10.472
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_sine_chance",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              -1.2,
+              0.0,
+              1.0
+            ],
+            "plaque_turn": -90.0,
+            "editor_label": "Column / 1/2 Sine + 1/2 Chance | three grooves turned by 1/2 sine + 1/2 chance | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "iso-column-middle",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -25.0,
+            -12.781
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "column_middle",
+            "skin": "wetflesh",
+            "plaque": true,
+            "exterior_walk": true,
+            "plaque_at": [
+              1.3,
+              0.0,
+              -0.0
+            ],
+            "plaque_turn": 0.0,
+            "editor_label": "Column / 1/3 Sine + 1/3 Helix + 1/3 Chance | three grooves turned by 1/3 sine + 1/3 helix + 1/3 chance | iso prefab, difference; between a sine, a helix and chance"
+          }
+        },
+        {
+          "id": "column-seat",
+          "artifact": "iso_prefab",
+          "station": "NW",
+          "position": [
+            -19.6,
+            -12.9
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "boulder",
+            "finish": "satin",
+            "plaque": false,
+            "editor_label": "Boulder / a stone to sit on at the way into the seven columns"
           }
         }
       ],
@@ -46962,6 +47162,13 @@
           "position": [
             20.3,
             -3.4
+          ]
+        },
+        {
+          "label": "SINE, HELIX, CHANCE\nBlue sine, green helix, red chance; between, their mixes; white, all three.",
+          "position": [
+            -26.8,
+            -9.25
           ]
         }
       ],

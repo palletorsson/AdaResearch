@@ -7,7 +7,11 @@ extends Node3D
 ## keeps its edge walkable. A visitor on the slab belongs to this floor (void_floor_extension) and is inside the tower
 ## (void_exterior_walk). One placement per side per floor, so each floor's slab can grow or shrink on its own.
 ##   config: length (2..42 m), depth (1..10 m), rail (true), beams (count, default by area), seed, drop (the storey
-##   below, default: the tower's own gap), colour
+##   below, default: the tower's own gap), colour, open (["-x"] / ["+x"]: an end that meets another slab, left without
+##   its side rail - 2026-11-14, where the north slab meets the west slab reaching the north-west corner of Boolean_Verbs;
+##   a rail there stood across the way from one to the other. The rails do not collide either way), feet ([min, max]:
+##   the stretch of local x where the floor below has an edge to take a foot - a slab that runs past the end of the
+##   building otherwise sets beams down in mid-air; a foot drawn outside is drawn again, 2026-11-14)
 var length := 12.0
 var depth := 6.0
 var rail := true
@@ -15,13 +19,15 @@ var beams := -1
 var seed_value := 7
 var drop := -1.0
 var colour := Color("d6d4cf")
+var open_ends: Array = []
+var feet_span := Vector2.ZERO
 var parts: Node3D
 
 func _ready() -> void:
 	add_to_group("void_floor_extension")
 	add_to_group("void_exterior_walk")
 	var config := {}
-	for key in ["length", "depth", "rail", "beams", "seed", "drop", "colour"]:
+	for key in ["length", "depth", "rail", "beams", "seed", "drop", "colour", "open", "feet"]:
 		if has_meta("config_" + key): config[key] = get_meta("config_" + key)
 	apply_grid_config(config)
 
@@ -33,6 +39,11 @@ func apply_grid_config(config: Dictionary) -> void:
 	seed_value = int(config.get("seed", seed_value))
 	drop = float(config.get("drop", drop))
 	if config.has("colour"): colour = Color(str(config.colour))
+	if config.has("open"):
+		open_ends = []
+		for end in (config["open"] if config["open"] is Array else str(config["open"]).split(",", false)): open_ends.append(str(end).strip_edges())
+	if config.has("feet") and config["feet"] is Array and (config["feet"] as Array).size() >= 2:
+		feet_span = Vector2(float(config["feet"][0]), float(config["feet"][1]))
 	_build()
 
 func _storey_below() -> float:
@@ -57,12 +68,14 @@ func _build() -> void:
 	if rail:
 		var steel := Color("5d6168")
 		for side in [-1, 1]:
+			if ("+x" if side > 0 else "-x") in open_ends: continue
 			_box("SideRail", Vector3(side * length * .5, 1.0, depth * .5), Vector3(.05, .05, depth), steel, false)
 		_box("OuterRail", Vector3(0, 1.0, depth), Vector3(length, .05, .05), steel, false)
 		var x := -length * .5
 		while x <= length * .5 + .01:
 			_box("Post", Vector3(x, .5, depth), Vector3(.05, 1.0, .05), steel, false); x += 2.0
 		for side in [-1, 1]:
+			if ("+x" if side > 0 else "-x") in open_ends: continue
 			var z := 2.0
 			while z < depth:
 				_box("Post", Vector3(side * length * .5, .5, z), Vector3(.05, 1.0, .05), steel, false); z += 2.0
@@ -74,7 +87,13 @@ func _build() -> void:
 	var feet: Array[Vector3] = []
 	for i in n:
 		var top := Vector3(rng.randf_range(-length * .5 + .2, length * .5 - .2), -thick, rng.randf_range(depth * .25, depth - .15))
-		var foot := Vector3(clampf(top.x + rng.randf_range(-length * .45, length * .45), -length * .5 - 1.0, length * .5 + 1.0), -gap, rng.randf_range(-.6, .05))
+		var fx := clampf(top.x + rng.randf_range(-length * .45, length * .45), -length * .5 - 1.0, length * .5 + 1.0)
+		if feet_span != Vector2.ZERO:
+			var tries := 0
+			while (fx < feet_span.x or fx > feet_span.y) and tries < 24:
+				fx = clampf(top.x + rng.randf_range(-length * .45, length * .45), -length * .5 - 1.0, length * .5 + 1.0); tries += 1
+			fx = clampf(fx, feet_span.x, feet_span.y)
+		var foot := Vector3(fx, -gap, rng.randf_range(-.6, .05))
 		tops.append(top); feet.append(foot)
 	var steel_dark := Color("474b51")
 	for i in n: _rod("Beam", tops[i], feet[i], .055, steel_dark)

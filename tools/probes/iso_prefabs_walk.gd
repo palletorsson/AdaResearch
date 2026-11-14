@@ -188,11 +188,11 @@ func run() -> void:
 	for form in works:
 		var s: Dictionary = works[form].state()
 		drawn[form] = [int(s.triangles), int(s.collision_triangles), bool(s.rigid)]
-	var whole: bool = works.size() == 27 and drawn.values().all(func(v): return v[0] > 1000 and (v[1] > 300 or v[2]))
+	var whole: bool = works.size() == 34 and drawn.values().all(func(v): return v[0] > 1000 and (v[1] > 300 or v[2]))
 	var lines := 0
 	for form in works:
 		if str(form).begins_with("carved") and works[form].find_child("IsoPath", true, false) != null: lines += 1
-	checks.append({"check": "all twenty-seven mounted (the twenty, the six carvings and the passes), drawn, with collision; five carvings draw their path, as in the demo (Grid Tunnels does not)",
+	checks.append({"check": "all thirty-four mounted (the twenty, the six carvings, the passes and the seven columns), drawn, with collision; five carvings draw their path, as in the demo (Grid Tunnels does not)",
 		"ok": whole and lines == 5, "count": works.size(), "path_lines": lines, "drawn": drawn})
 	if works.size() < 20:
 		_finish(folder, result)

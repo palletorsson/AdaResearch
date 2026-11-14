@@ -100,6 +100,11 @@ func _bake(form: String, info: Dictionary) -> Dictionary:
 		for key in ["seed", "cutters", "pattern"]:
 			if extras.has(key): mesh.set_meta(key, extras[key])
 	if extras.has("shader") and str(extras["shader"]) != "": mesh.set_meta("skin_shader", str(extras["shader"]))
+	# a column (2026-11-14) stands in the open: its skin without the inside's probe; and the law that carved it
+	if extras.has("outdoor"): mesh.set_meta("outdoor", bool(extras["outdoor"]))
+	for key in ["weights", "hue"]:
+		if extras.has(key): mesh.set_meta(key, extras[key])
+	if extras.has("plaque_at"): mesh.set_meta("plaque_at", Vector3(float(extras["plaque_at"][0]), float(extras["plaque_at"][1]), float(extras["plaque_at"][2])))
 	if extras.has("walks"):                     # the passes: each pass's line on the floor, so a probe can walk it
 		var walks := {}
 		for name in extras["walks"]:
