@@ -64,6 +64,25 @@
       "footprint": [0.12, 0.09, 0.003],
       "size": [0.12, 0.09, 0.003],
       "tags": ["tool", "stickers", "inventory", "worn"]
+    },
+    "edge_carving": {
+          "lookup_name": "edge_carving",
+          "name": "Edge carving / an edge of the research, carved",
+          "scene": "res://commons/artifacts/edge_carving/edge_carving.tscn",
+          "category": "annotation",
+          "map_ready": true,
+          "include_in_map_data": true,
+          "default_params": {
+                "kind": "cannot_claim",
+                "reading": "",
+                "seed": 1
+          },
+          "parameters": {
+                "kind": "Which kind of edge: cannot_claim, leaves_out, still_open, not_yet, foreclosed, dark_spot, does_not_fit - it sets how the helix is carved and where it stops",
+                "reading": "A readings.json id (kind edge, commons/data/stickers/readings.json): its words stand on the plinth with where they were read",
+                "seed": "The random walk that pulls the helix toward chance"
+          },
+          "description": "One of the research's edges - where it says, in its own words, that it stops - as a stone column carved along a helix (sine in three dimensions, its radius breathing on a second sine) that a seeded random walk pulls toward chance: between a helix and a wandering line. The kind of edge sets how the carving stops: true up to a claim line then chance above (cannot claim), turns left uncarved (leaves out), the groove running out of the top (still open), roughed in only (not yet), sealed inside and seen through a slot (foreclosed), a window into a black hollow at the core (dark spot), a helix wider than the column biting out of its sides (does not fit). The edge's words on the plinth; the same edge is a sticker at /stickers (board 'edges')."
     }
   }
 }

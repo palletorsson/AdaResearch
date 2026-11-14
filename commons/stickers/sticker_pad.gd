@@ -11,8 +11,16 @@ extends Node3D
 ##   tap     (< 0.3 s) on a surface: STICK - an `add` op through StickerData; the host is what the hit belongs to: a
 ##           node with meta sticker_host first (the board, the bench), else a Void work (its mount), else a Void
 ##           floor (its walls and slab), else refused. A board takes a sticker on its FACE only (n = +Z, at.z = 0):
-##           a hit on its back is refused, "THE BACK OF THE BOARD" (stickers.ts settle: a board has no back)
-##   hold    (>= 0.3 s) on a sticker: PEEL it - a peel is an event; the sticker stays as residue, with who peeled
+##           a hit on its back is refused, "THE BACK OF THE BOARD" (stickers.ts settle: a board has no back). On a
+##           board with DEPTH too it sticks ON the paper (at.z = 0): the aim passes through the stickers that hang in
+##           front (they have no body) to the cork, and the new sticker stays there until the web moves it out in depth
+##   hold    (>= 0.3 s, the aim held still) on a sticker: PEEL it - a peel is an event; the sticker stays as residue,
+##           with who peeled. On a board with depth, the first HANGING sticker the aim's ray passes through (before any
+##           on the paper)
+##   drag    press on a sticker of a board, turn the aim (more than DRAG_DEG before the hold is up) and let go on
+##           ANOTHER sticker of that board: TIE the two with a thread (a `tie` op, its word TIE_WORD - a question the
+##           web answers with a word op). While dragging, a line runs from the first sticker's pin to the aim. Let go
+##           anywhere else and nothing is tied (within the hold's time it is a tap, as before)
 ##   tap at nothing: the next design of the sheet
 ##   turn    VR: the right wrist's twist (twice the roll, 15 degree steps, as the prism turns a prefab); desktop: Q / E
 ##           (Shift: a quarter turn), counted from the CONTRACT's zero - stickers.ts's one meaning of a turn (refUp:
@@ -48,9 +56,15 @@ const LINE_REFUSED := Color("ff5068")
 const LABEL_PX := 0.0007                                  # the ghost's words at arm's length (28 px font: 2 cm)
 const LABEL_NEAR := 0.9                                   # metres from the eye at which they are LABEL_PX
 const LABEL_GROW_MOST := 5.0
+const DRAG_DEG := 2.0         # the aim turned this far from where the trigger went down (before HOLD): a drag, not a hold
+## A thread tied in VR has no keyboard for its word: a question on its tag, for the web (/stickers) to answer with a
+## word op. 1 character, inside stickers.ts WORD_MAX.
+const TIE_WORD := "?"
+const LINE_TIE := Color("b3121b")                         # the drag's line: stickers.ts THREAD_RED
 
 signal stuck(sticker: Dictionary)
 signal peeled(id: String)
+signal tied(thread: Dictionary)
 signal refused(reason: String)
 signal stepped(design: String)
 
@@ -69,6 +83,8 @@ var extra_exclude: Array = []       # RIDs a test (or a host) wants the ray to l
 var _pressed := false
 var _press_t := 0.0
 var _press_aim: Dictionary = {}
+var _press_dir := Vector3.ZERO      # the aim's direction when the trigger went down
+var _dragging := false              # the press began on a board's sticker and the aim has turned away: a tie in the making
 var _consumed := false
 var _model: Node3D = null
 var _ghost: MeshInstance3D = null
@@ -129,14 +145,17 @@ func put_away() -> void:
 	visible = false
 	_hide_aim()
 
-## The trigger pressed while worn: the aim is taken now; a release within HOLD is a tap, a longer press a peel.
+## The trigger pressed while worn: the aim is taken now; a release within HOLD is a tap, a longer press with the aim
+## held still a peel, and a press on a board's sticker whose aim turns away before HOLD a drag (a tie, on release).
 func fire_worn() -> void:
 	if worn_on == null or not worn_active or _pressed:
 		return
 	_pressed = true
 	_press_t = 0.0
 	_consumed = false
+	_dragging = false
 	_press_aim = _aim_state()
+	_press_dir = -worn_on.global_basis.z.normalized()
 
 func release_worn() -> void:
 	if not _pressed:
@@ -145,7 +164,25 @@ func release_worn() -> void:
 	if _consumed:
 		return
 	_consumed = true
+	if _dragging:
+		_dragging = false
+		var st := _aim_state()
+		var a: Dictionary = _press_aim.get("target", {})
+		var b: Dictionary = st.get("target", {})
+		if not b.is_empty() and str(b.get("id", "")) != str(a.get("id", "")):
+			_tie(a, b)
+			return
+		if _press_t >= HOLD:
+			_refuse("LET GO ON ANOTHER STICKER OF THIS BOARD TO TIE A THREAD")
+			return
 	_tap(_press_aim)
+
+## Whether the press has become a DRAG: it began on a sticker of a board, and the aim has turned more than DRAG_DEG.
+func _drag_began() -> bool:
+	var t: Dictionary = _press_aim.get("target", {})
+	if t.is_empty() or str((_press_aim.get("host", {}) as Dictionary).get("kind", "")) != "board":
+		return false
+	return rad_to_deg((-worn_on.global_basis.z.normalized()).angle_to(_press_dir)) > DRAG_DEG
 
 ## The grip (if a hook forwards it): peel what the aim points at, now.
 func grip_worn() -> bool:
@@ -185,7 +222,9 @@ func _physics_process(delta: float) -> void:
 	_draw(aim)
 	if _pressed:
 		_press_t += delta
-		if not _consumed and _press_t >= HOLD:
+		if not _consumed and not _dragging and _drag_began():
+			_dragging = true
+		if not _consumed and not _dragging and _press_t >= HOLD:
 			_consumed = true
 			_hold(_press_aim)
 
@@ -243,7 +282,8 @@ func _aim_state() -> Dictionary:
 	st.frame = frame
 	var node: Variant = found.get("node")
 	st.surface = StickerLayer.surface_of(node, host)
-	st.target = _sticker_under(host, at_l, st.surface, n_l)
+	var inv := frame.affine_inverse()
+	st.target = _sticker_under(host, at_l, st.surface, n_l, [inv * origin, inv.basis * dir])
 	var d: Dictionary = data.design(str(st.design))
 	if d.is_empty():
 		st.reason = "NO STICKER ON THIS SHEET"
@@ -298,12 +338,21 @@ func _size_for(d: Dictionary) -> float:
 
 ## The top sticker of this host that holds the point: on a body the layer knows, one whose print covers it (its
 ## projector's box, on a surface facing it: sticker_layer.gd holds, with the hit's normal n_l); elsewhere one whose quad
-## holds it, within a thickness (a quad on a body that is not flat).
-func _sticker_under(host: Dictionary, at_l: Vector3, surface: Dictionary = {}, n_l := Vector3.ZERO) -> Dictionary:
+## holds it, within a thickness (a quad on a body that is not flat). On a board with DEPTH a sticker may HANG in front
+## of the paper (drawn at its at.z): the aim passes through it - it has no body - to the paper, so a hanging sticker is
+## found along the aim's RAY (`ray`: [origin, direction] in the host frame), the first one the ray meets, and it comes
+## before any sticker on the paper behind it. (Read at the paper's point as if it lay there, a hold peeled whichever
+## sticker's footprint the paper point fell in: from the side, a sticker other than the one aimed at.)
+func _sticker_under(host: Dictionary, at_l: Vector3, surface: Dictionary = {}, n_l := Vector3.ZERO, ray: Array = []) -> Dictionary:
 	var best := {}
 	var best_z := -INF
+	var deep := 0.0
+	if str(host.get("kind", "")) == "board" and data.has_method("board_depth"):
+		deep = float(data.board_depth(str(host.get("id", ""))))
+	var hung := {}
+	var hung_t := INF
 	for s0 in data.stickers_on(StickerData.host_key(host)):
-		var s := StickerLayer.drawn_as(s0, host)   # where it is drawn (a board sticker on the face)
+		var s := StickerLayer.drawn_as(s0, host, deep)   # where it is drawn (a board sticker on the face, or at its depth)
 		if str(s.get("state", "on")) != "on":
 			continue
 		var d: Dictionary = data.design(str(s.get("design", "")))
@@ -311,6 +360,12 @@ func _sticker_under(host: Dictionary, at_l: Vector3, surface: Dictionary = {}, n
 			continue
 		var size_l := float(s.get("size", 0.2))
 		var e := StickerData.extent(d, size_l)
+		if StickerLayer.hangs(s, host, deep):
+			var t := _ray_quad(ray, s, e) if ray.size() == 2 else INF
+			if t < hung_t:
+				hung_t = t
+				hung = s
+			continue
 		var inside := false
 		if not surface.is_empty():
 			inside = StickerLayer.holds(s, d, at_l, surface, n_l)
@@ -321,7 +376,26 @@ func _sticker_under(host: Dictionary, at_l: Vector3, surface: Dictionary = {}, n
 		if inside and float(s.get("z", 0)) > best_z:
 			best = s
 			best_z = float(s.get("z", 0))
-	return best
+	return hung if not hung.is_empty() else best
+
+## Where the aim's ray ([origin, direction], host frame) meets a hanging sticker's quad - its plane through `at` facing n,
+## inside its extent `e` - as a distance along the ray; INF where it misses.
+static func _ray_quad(ray: Array, s: Dictionary, e: Vector2) -> float:
+	var o: Vector3 = ray[0]
+	var dir: Vector3 = ray[1]
+	var b := StickerData.basis(StickerData.v3(s.get("n")), StickerData.v3(s.get("up")))
+	var n: Vector3 = b.n
+	var den := dir.dot(n)
+	if absf(den) < 1e-9:
+		return INF
+	var at := StickerData.v3(s.get("at"))
+	var t := (at - o).dot(n) / den
+	if t <= 0.0:
+		return INF
+	var rel: Vector3 = o + dir * t - at
+	if absf(rel.dot(b.right)) > e.x / 2.0 or absf(rel.dot(b.up)) > e.y / 2.0:
+		return INF
+	return t
 
 # ==== doing ====
 
@@ -355,6 +429,18 @@ func _peel(id: String) -> bool:
 	peeled.emit(id)
 	return true
 
+## TIE the sticker the drag began on to the one it ended on (StickerData.tie: applyOps' rules first - the same board,
+## not already tied - then the outbox), its word TIE_WORD.
+func _tie(a: Dictionary, b: Dictionary) -> bool:
+	var t: Dictionary = data.tie(str(a.get("id", "")), str(b.get("id", "")), TIE_WORD)
+	if t.is_empty():
+		_refuse("NOT TIED: " + str(data.last_error).to_upper())
+		return false
+	notice = ""
+	_pulse(0.1, 0.4)
+	tied.emit(t)
+	return true
+
 func _refuse(reason: String) -> void:
 	notice = reason
 	if _label != null:
@@ -369,6 +455,7 @@ func _pulse(amplitude: float, seconds: float) -> void:
 func _cancel() -> void:
 	_pressed = false
 	_consumed = false
+	_dragging = false
 	_press_aim = {}
 
 ## The wrist's twist about the aim, as a turn (InventoryPrism._wrist_yaw): twice the roll, 15 degree steps, a dead zone.
@@ -470,6 +557,18 @@ func _draw(st: Dictionary) -> void:
 	var to: Vector3 = st.end
 	if worn_on is Camera3D:   # from the eye a line is a dot: start it a little ahead
 		from += Vector3(st.dir) * minf(.25, from.distance_to(to) * .5)
+	if _pressed and _dragging:
+		# a drag: no ghost; the line runs from the pin of the sticker it began on to the aim, and says what letting go does
+		var a: Dictionary = _press_aim.get("target", {})
+		var b: Dictionary = st.get("target", {})
+		var a_frame: Transform3D = _press_aim.get("frame", Transform3D.IDENTITY)
+		from = a_frame * StickerData.v3(StickerData.pin_of(a, data.design(str(a.get("design", "")))))
+		var over := not b.is_empty() and str(b.get("id", "")) != str(a.get("id", ""))
+		_ghost.hide()
+		_label.text = "LET GO: TIE A THREAD" if over else "LET GO ON ANOTHER STICKER TO TIE"
+		_label.modulate = Color("1d1d1f") if over else LINE_REFUSED
+		_label.global_transform = Transform3D(Basis.IDENTITY, to + Vector3.UP * 0.04 * grow)
+		_line_mat.albedo_color = Color(LINE_TIE, 0.95 if over else 0.6)
 	var im := _line.mesh as ImmediateMesh
 	im.clear_surfaces()
 	im.surface_begin(Mesh.PRIMITIVE_LINES)

@@ -40,7 +40,12 @@ extends Node3D
 ## stickers that are on - a peel is an event that leaves residue, never a deletion. Materials and pictures come from
 ## StickerData (one per design).
 ##
-## A board sticker is drawn on the board's FACE whatever an older record says (drawn_as: stickers.ts settle).
+## A board sticker is drawn on the board's FACE whatever an older record says (drawn_as: stickers.ts settle) - or, on a
+## board with DEPTH, where settle() puts it: anywhere from the paper to `depth` in front of it, facing out. One in front
+## of the paper HANGS: it is drawn flat, its quad at its own at.z (never printed onto the paper behind it, which its
+## projector would reach when it hangs within half its depth of it), at least LIFT from the paper, and it has a BACK
+## ("Backs_<design>": its silhouette in a card's colour, facing -n), so a visitor walking round the layers sees a card
+## from behind, not nothing. Its cord and its threads are the board's (sticker_board/sticker_threads.gd).
 ##
 ## The host sets `host` (and `surface`) before adding the layer; the layer redraws itself whenever the placements or
 ## designs change. It has no _process: a floor's residency pauses and hides it with its floor at no cost.
@@ -73,6 +78,7 @@ var surface: Dictionary = {} # {shape: "sphere", r} or {shape: "cylinder", r, h}
 var data: Node = null
 var drawn := 0               # stickers drawn (state on)
 var residue := 0             # peeled stickers drawn as residue
+var backs := 0               # hanging stickers' backs drawn
 var lifts: Dictionary = {}   # id -> the lift each live sticker is drawn at (its place in the stack), for probes
 var _sig := ""
 
@@ -84,6 +90,17 @@ func _ready() -> void:
 
 func host_key() -> String:
 	return StickerData.host_key(host)
+
+## How far in front of its paper this host's stickers may hang: a board's depth (boards.json, read as the server reads
+## it); 0 for a flat board and for every other host.
+func depth() -> float:
+	if data == null or str(host.get("kind", "")) != "board" or not data.has_method("board_depth"):
+		return 0.0
+	return float(data.board_depth(str(host.get("id", ""))))
+
+## Whether a record (as drawn: drawn_as) HANGS in front of a board's paper rather than lying on it.
+static func hangs(s: Dictionary, h: Dictionary, board_depth: float) -> bool:
+	return str(h.get("kind", "")) == "board" and board_depth > 0.0 and float(StickerData.a3(s.get("at"))[2]) > 0.0
 
 func _designs_changed() -> void:
 	_sig = ""
@@ -104,54 +121,68 @@ func redraw() -> void:
 		return
 	var surf := body()
 	var list: Array = data.stickers_on(host_key())
-	var sig := "%d|%s|%s" % [int(data.revisions.get("designs", -1)), JSON.stringify(surf), JSON.stringify(list)]
+	var deep := depth()
+	var sig := "%d|%s|%s|%s" % [int(data.revisions.get("designs", -1)), JSON.stringify(surf), deep, JSON.stringify(list)]
 	if sig == _sig:
 		return
 	_sig = sig
+	var on_board := str(host.get("kind", "")) == "board"
 	var on: Array = []
 	var off: Array = []
 	for s0 in list:
-		var s := drawn_as(s0, host)
+		var s := drawn_as(s0, host, deep)
 		if str(s.get("state", "on")) == "on":
 			on.append(s)
 		else:
 			off.append(s)
 	on.sort_custom(_earlier)
 	var groups: Dictionary = {}     # node name -> [design, peeled, [[sticker, lift, shape]]]
-	var feet: Array = []            # [footprint, lift, a grid] of each live sticker so far, in the order of the stack
+	var feet: Array = []            # [footprint, lift, a grid, height] of each live sticker so far, in the stack's order
 	lifts = {}
 	for s in on:
 		var d: Dictionary = data.design(str(s.get("design", "")))
 		if d.is_empty():
 			continue   # a design this game does not have (yet): its stickers wait for it
-		var g := shape_of(s, d, surf)
+		var hang := hangs(s, host, deep)
+		# a hanging sticker is its quad at its own depth (no paper under it to print on); one on a body, the print
+		var g := {"laid": false, "curved": false} if hang else shape_of(s, d, surf)
 		var foot := footprint(s, d, g)
 		var curved := bool(g.get("curved", false))
-		var lift := LIFT
+		# on a board every sticker faces +Z, so the stack compares HEIGHTS (at.z + lift): a later sticker lies a step
+		# over every earlier one it overlaps, at whatever depth either hangs; elsewhere lifts over one surface
+		var height := float(StickerData.a3(s.get("at"))[2]) if on_board else 0.0
+		var base := maxf(0.0, LIFT - height) if hang else LIFT
+		var lift := base
 		for f in feet:
 			if boxes_overlap(foot, f[0]):
-				lift = maxf(lift, float(f[1]) + (CURVED_STACK if curved or bool(f[2]) else STACK))
-		lift = minf(lift, LIFT + STACK_HEIGHT)
-		feet.append([foot, lift, curved])
+				lift = maxf(lift, float(f[1]) + float(f[3]) - height + (CURVED_STACK if curved or bool(f[2]) else STACK))
+		lift = minf(lift, base + STACK_HEIGHT)
+		feet.append([foot, lift, curved, height])
 		lifts[str(s.get("id", ""))] = lift
 		_group(groups, s, g, lift, false)
+		if hang:
+			_group(groups, s, g, lift, false, "Backs_")
 	for s in off:
 		var d: Dictionary = data.design(str(s.get("design", "")))
 		if not d.is_empty():
-			_group(groups, s, shape_of(s, d, surf), RESIDUE_LIFT, true)
+			_group(groups, s, {"laid": false, "curved": false} if hangs(s, host, deep) else shape_of(s, d, surf), RESIDUE_LIFT, true)
 	var keep: Dictionary = {}
 	drawn = 0
 	residue = 0
+	backs = 0
 	for node_name in groups:
 		var grp: Array = groups[node_name]
 		var key: String = grp[0]
 		var peeled: bool = grp[1]
-		var mat: Material = data.residue_material(key) if peeled else data.material(key)
-		var flat := str(node_name).begins_with("Stickers_") or str(node_name).begins_with("Residue_")
-		var ok := _fill(node_name, mat, grp[2], key) if flat else _fill_laid(node_name, mat, grp[2])
+		var back := str(node_name).begins_with("Backs_")
+		var mat: Material = data.back_material(key) if back else (data.residue_material(key) if peeled else data.material(key))
+		var flat := back or str(node_name).begins_with("Stickers_") or str(node_name).begins_with("Residue_")
+		var ok := _fill(node_name, mat, grp[2], key, back) if flat else _fill_laid(node_name, mat, grp[2])
 		if ok:
 			keep[node_name] = true
-			if peeled:
+			if back:
+				backs += (grp[2] as Array).size()
+			elif peeled:
 				residue += (grp[2] as Array).size()
 			else:
 				drawn += (grp[2] as Array).size()
@@ -166,10 +197,12 @@ static func _earlier(a: Dictionary, b: Dictionary) -> bool:
 	var zb := int(b.get("z", 0))
 	return za < zb or (za == zb and str(a.get("id", "")) < str(b.get("id", "")))
 
-func _group(groups: Dictionary, s: Dictionary, g: Dictionary, lift: float, peeled: bool) -> void:
+func _group(groups: Dictionary, s: Dictionary, g: Dictionary, lift: float, peeled: bool, prefix := "") -> void:
 	var key := str(s.get("design", ""))
 	var node_name: String
-	if not bool(g.get("laid", false)):
+	if prefix != "":
+		node_name = prefix + key
+	elif not bool(g.get("laid", false)):
 		node_name = ("Residue_" if peeled else "Stickers_") + key
 	elif bool(g.get("curved", false)):
 		node_name = ("CurvedResidue_" if peeled else "Curved_") + key
@@ -179,7 +212,7 @@ func _group(groups: Dictionary, s: Dictionary, g: Dictionary, lift: float, peele
 		groups[node_name] = [key, peeled, []]
 	(groups[node_name][2] as Array).append([s, lift, g])
 
-func _fill(node_name: String, mat: Material, entries: Array, design_id: String) -> bool:
+func _fill(node_name: String, mat: Material, entries: Array, design_id: String, back := false) -> bool:
 	var d: Dictionary = data.design(design_id)
 	if d.is_empty() or mat == null:
 		return false   # a design this game does not have (yet), or its picture not drawn: its stickers wait for it
@@ -197,7 +230,11 @@ func _fill(node_name: String, mat: Material, entries: Array, design_id: String) 
 	var batch := mmi.multimesh
 	batch.instance_count = entries.size()
 	for i in entries.size():
-		batch.set_instance_transform(i, pose(entries[i][0], d, float(entries[i][1])))
+		var xf := pose(entries[i][0], d, float(entries[i][1]))
+		if back:
+			# the same quad turned to face -n (columns -right, up, -n: a turn, not a mirror), in the same plane
+			xf = Transform3D(Basis(-xf.basis.x, xf.basis.y, -xf.basis.z), xf.origin)
+		batch.set_instance_transform(i, xf)
 	return true
 
 ## The laid stickers of one design (or their residue) as one ArrayMesh in the host frame. The node carries metas for
@@ -254,15 +291,17 @@ func _fill_laid(node_name: String, mat: Material, entries: Array) -> bool:
 	mi.set_meta("lifts", lift_list)
 	return true
 
-## The record as it is drawn: on a BOARD it lies on the face whatever an older record says (stickers.ts settle: n = +Z,
-## at.z = 0, up laid on the face; the server settles every op since, so the truth holds no other). three.js does not do
-## this: its board host is the face plane only, so an older record on the back gets no decal there and its 3D view
-## lists it as unseated, a translucent quad at its own pose. Elsewhere the record itself.
-static func drawn_as(s: Dictionary, h: Dictionary) -> Dictionary:
+## The record as it is drawn: on a BOARD it faces out of the face whatever an older record says (stickers.ts settle:
+## n = +Z, up laid on the face), ON the paper (at.z = 0) - or, on a board with depth `board_depth`, anywhere from the
+## paper to that depth in front of it (at.z clamped to [0, depth]); the server settles every op since, so the truth
+## holds no other. three.js does not do the first: its board host is the face plane only, so an older record on the
+## back gets no decal there and its 3D view lists it as unseated, a translucent quad at its own pose. Elsewhere the
+## record itself.
+static func drawn_as(s: Dictionary, h: Dictionary, board_depth := 0.0) -> Dictionary:
 	if str(h.get("kind", "")) != "board":
 		return s
 	var c := s.duplicate()
-	StickerData.settle(c, null)
+	StickerData.settle(c, null, board_depth)
 	return c
 
 ## A flat sticker's quad in its host frame: basis columns right * w, up * h, n; origin at + n * lift.
@@ -785,7 +824,12 @@ static func centre_of(s: Dictionary, surf: Dictionary, lift: float) -> Vector3:
 func world_positions() -> Dictionary:
 	var out: Dictionary = {}
 	var surf := body()
+	var deep := depth()
 	for s0 in data.stickers_on(host_key()):
-		var s := drawn_as(s0, host)
-		out[str(s.get("id", ""))] = global_transform * centre_of(s, surf, LIFT)
+		var s := drawn_as(s0, host, deep)
+		var id := str(s.get("id", ""))
+		if hangs(s, host, deep):
+			out[id] = global_transform * centre_of(s, {}, float(lifts.get(id, maxf(0.0, LIFT - float(StickerData.a3(s.get("at"))[2])))))
+		else:
+			out[id] = global_transform * centre_of(s, surf, LIFT)
 	return out

@@ -174,6 +174,26 @@ func run() -> void:
 	if research_mount != null:
 		var face2: Vector3 = research_mount.global_transform * Vector3(0, 1.35, 0)
 		await _shot(face2 + Vector3(0.0, 0.05, 2.35), face2, folder.path_join("research.png"))
+	# T7 the edges of the research, carved: seven columns on the floor's west side, each built with its stone
+	var carvings := []
+	for k in ["cannot-claim", "leaves-out", "still-open", "not-yet", "foreclosed", "dark-spot", "does-not-fit"]:
+		var m: Node3D = content.exhibits.get("%d/edge-carving-%s" % [floor, k])
+		if m != null: carvings.append(m)
+	var stones := 0
+	for m in carvings:
+		stones += m.find_children("Stone", "CSGCombiner3D", true, false).size()
+	checks.append({"check": "T7 the seven edge carvings stand on the floor, each with its carved stone", "ok": carvings.size() == 7 and stones == 7,
+		"carvings": carvings.size(), "stones": stones})
+	if carvings.size() == 7:
+		var mid: Vector3 = (carvings[3] as Node3D).global_position
+		await _shot(mid + Vector3(4.6, 1.7, 2.6), mid + Vector3(0, 0.8, 0), folder.path_join("carvings.png"))
+		await _shot((carvings[5] as Node3D).global_position + Vector3(1.9, 1.25, 0.6), (carvings[5] as Node3D).global_position + Vector3(0, 0.85, 0), folder.path_join("carving_close.png"))
+	# the hanging mind map board, from the hall and from the side (its depth)
+	var mind: Node3D = content.exhibits.get("%d/stickers-mindmap" % floor)
+	if mind != null:
+		var c3: Vector3 = mind.global_transform * Vector3(0, 1.4, 0.45)
+		await _shot(c3 + (mind.global_transform.basis.z.normalized() * 4.2) + Vector3(0, 0.3, 0), c3, folder.path_join("mindmap.png"))
+		await _shot(c3 + (mind.global_transform.basis.z.normalized() * 1.6) + (mind.global_transform.basis.x.normalized() * 2.4) + Vector3(0, 0.2, 0), c3, folder.path_join("mindmap_side.png"))
 	# T6 residency: the body two floors up, then back
 	var shown_before := false
 	if board_mount != null:

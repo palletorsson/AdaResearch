@@ -12,10 +12,10 @@
 // --check writes nothing and exits 1 when designs.json is not what the rules derive (a starter design edited by
 // hand, or rules changed without a re-seed).
 import {readFileSync, writeFileSync, mkdirSync, existsSync, renameSync} from 'fs';
-import {readingDesigns, starterDesigns, type CardTerm, type Reading, type ResearchTerm} from '../../ada_encyclopedia/src/lib/sticker-starter';
+import {EDGE_KINDS, readingDesigns, starterDesigns, type CardTerm, type Reading, type ResearchTerm} from '../../ada_encyclopedia/src/lib/sticker-starter';
 import {
   BENCH, boardsText, cleanBoardsDoc, cleanDesignsDoc, cleanPlacementsDoc, DEFAULT_BOARD, designsText, emptyBoards,
-  emptyPlacements, placementsText, upForTurn, type Placed, type DesignsDoc,
+  emptyPlacements, placementsText, upForTurn, applyOps, cleanOp, type Placed, type DesignsDoc, type Op,
 } from '../../ada_encyclopedia/src/lib/stickers';
 
 const DIR = 'commons/data/stickers';
@@ -62,7 +62,16 @@ const READINGS = readingsArg || `${DIR}/readings.json`;
 const spineOrder = new Map((spine.spine.sequences as {name: string; phase: string; order: number}[]).map(s => [s.name, s]));
 const even = (s: string) => s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[*`]/g, '')
   .replace(/(^|[^\w])_+|_+(?=[^\w]|$)/g, '$1').replace(/\s+/g, ' ').trim();
-const blocksOf = (body: string): string[] => {
+// a JSON source (the misfit ledger) is read as its string values, each one block - the words as they read, escapes
+// decoded - so a quote is checked against the text, never against its JSON spelling
+const stringsOf = (v: unknown, out: string[] = []): string[] => {
+  if (typeof v === 'string') out.push(v);
+  else if (Array.isArray(v)) v.forEach(x => stringsOf(x, out));
+  else if (v && typeof v === 'object') Object.values(v).forEach(x => stringsOf(x, out));
+  return out;
+};
+const blocksOf = (body: string, file = ''): string[] => {
+  if (file.endsWith('.json')) return stringsOf(JSON.parse(body)).map(even).filter(Boolean);
   const out: string[] = [];
   for (const chunk of body.replace(/<!--[\s\S]*?-->/g, '\n\n').split(/\r?\n[ \t]*\r?\n/)) {
     let para: string[] = [];
@@ -94,14 +103,15 @@ const unread: string[] = [];
 if (existsSync(READINGS)) {
   for (const r of (JSON.parse(readFileSync(READINGS, 'utf-8')) as {readings: Reading[]}).readings) {
     const where = `${r.id}:`;
-    if (r.kind !== 'paradox' && r.kind !== 'punctum') { unread.push(`${where} kind must be 'paradox' or 'punctum'`); continue; }
+    if (r.kind !== 'paradox' && r.kind !== 'punctum' && r.kind !== 'edge') { unread.push(`${where} kind must be 'paradox', 'punctum' or 'edge'`); continue; }
+    if (r.kind === 'edge' && !(r.edge && r.edge in EDGE_KINDS)) { unread.push(`${where} an edge needs an edge kind: ${Object.keys(EDGE_KINDS).join(', ')}`); continue; }
     if (!r.a || (r.kind === 'paradox' && !r.b)) { unread.push(`${where} a ${r.kind} needs ${r.kind === 'paradox' ? 'a and b' : 'a'}`); continue; }
     if (!spineOrder.has(r.sequence) && r.sequence !== 'framework') { unread.push(`${where} sequence '${r.sequence}' is not a spine sequence (or 'framework')`); continue; }
     if (!existsSync(r.file)) { unread.push(`${where} ${r.file} is gone`); continue; }
     const pieces = piecesOf(r.quote);
     const short = pieces.find(p => wordCount(p) < 3);
     if (!pieces.length || short !== undefined) { unread.push(`${where} every piece of the quote needs three words or more: "${short ?? ''}"`); continue; }
-    const missing = missingInOrder(blocksOf(readFileSync(r.file, 'utf-8')), pieces);
+    const missing = missingInOrder(blocksOf(readFileSync(r.file, 'utf-8'), r.file), pieces);
     if (missing !== null) { unread.push(`${where} no longer in ${r.file} (in order, each inside one paragraph): "${missing.slice(0, 70)}"`); continue; }
     const said = even(r.quote).toLowerCase();
     const over = [r.a, r.b ?? ''].flatMap(piecesOf).find(p => !said.includes(p.toLowerCase()));
@@ -247,5 +257,69 @@ if (args.has('--readings-board')) {
     pdoc.revision += 1;
     write('placements.json', placementsText(pdoc));
     console.log(`placements.json: ${added} readings laid on the board 'readings' (revision ${pdoc.revision})`);
+  }
+}
+
+// THE MINDMAP BOARD: the readings hung as a mind map on a board with depth (commons/data/stickers/mindmap.json: each
+// sticker's place and depth, and the threads the texts hold between them). Laid once, THROUGH THE OPS - cleaned and
+// applied as the server applies them - so it follows the rules every medium follows; from then on its stickers and
+// threads change by ops in any medium, and a sticker or thread already there (or cut) is never laid again.
+if (args.has('--mindmap-board')) {
+  const MM = JSON.parse(readFileSync(`${DIR}/mindmap.json`, 'utf-8'));
+  const bdoc = cleanBoardsDoc(read('boards.json') ?? emptyBoards()).doc!;
+  if (!bdoc.boards.some(b => b.id === MM.board.id)) {
+    const c = cleanBoardsDoc({boards: [...bdoc.boards, MM.board]});
+    if (!c.doc) throw new Error(`mindmap.json board: ${c.error}`);
+    bdoc.boards = c.doc.boards;
+    bdoc.revision += 1;
+    write('boards.json', boardsText(bdoc));
+    console.log(`boards.json: the board '${MM.board.id}' added (revision ${bdoc.revision})`);
+  }
+  const pdoc = cleanPlacementsDoc(read('placements.json') ?? emptyPlacements(), now).doc!;
+  const ops: Op[] = [];
+  const clean = (raw: unknown) => { const c = cleanOp(raw, now); if (!c.op) throw new Error(`mindmap.json: ${c.error}`); return c.op; };
+  for (const s of MM.stickers as {id: string; design: string; at: [number, number, number]; turn: number; size: number}[]) {
+    if (pdoc.stickers.some(x => x.id === s.id)) continue;
+    ops.push(clean({op_id: `seed-${s.id}`, op: 'add', sticker: {id: s.id, design: s.design, host: {kind: 'board', id: MM.board.id}, at: s.at, n: [0, 0, 1],
+      up: upForTurn(s.turn), size: s.size, z: 0, by: 'starter', t: now, state: 'on', moves: 0}}));
+  }
+  for (const th of MM.threads as {id: string; a: string; b: string; word: string; why?: string; colour?: string}[]) {
+    if ((pdoc.threads ?? []).some(x => x.id === th.id)) continue;
+    ops.push(clean({op_id: `seed-${th.id}`.slice(0, 64), op: 'tie', thread: {id: th.id, a: th.a, b: th.b, word: th.word, why: th.why, colour: th.colour}}));
+  }
+  if (ops.length) {
+    const out = applyOps(pdoc, ops, 'starter', now, new Map(merged.designs.map(d => [d.id, d])), new Map(bdoc.boards.map(b => [b.id, b])));
+    const failed = out.results.filter(r => !r.ok);
+    for (const f of failed) console.log(`  not laid: ${f.op_id}: ${f.error}`);
+    if (out.changed) {
+      write('placements.json', placementsText(out.doc));
+      console.log(`placements.json: ${ops.length - failed.length} of ${ops.length} mindmap ops applied (revision ${out.doc.revision})`);
+    }
+  }
+}
+
+// THE EDGES BOARD: where the research says it stops - one torn piece of map per edge, ordered by kind (what it cannot
+// claim, leaves out, has open, has not yet, forecloses, hides, cannot fit), then by the spine; in the free slots
+if (args.has('--edges-board')) {
+  const EDGES_BOARD = {id: 'edges', title: 'The edges of the research', w: 2.4, h: 1.36, paper: '#f4f0e6',
+    note: "Where the research says, in its own words, that it stops: what it cannot claim, leaves out, has not yet built or walked, still holds open, forecloses, keeps in a dark spot or cannot fit. Each a torn piece of the research's map with the line it was read from; tools/stickers_seed.ts checks every line is still in its text (commons/data/stickers/readings.json, kind edge)."};
+  const bdoc = cleanBoardsDoc(read('boards.json') ?? emptyBoards()).doc!;
+  if (!bdoc.boards.some(b => b.id === EDGES_BOARD.id)) {
+    bdoc.boards.push(EDGES_BOARD);
+    bdoc.revision += 1;
+    write('boards.json', boardsText(bdoc));
+    console.log(`boards.json: the board 'edges' added (revision ${bdoc.revision})`);
+  }
+  const pdoc = cleanPlacementsDoc(read('placements.json') ?? emptyPlacements(), now).doc!;
+  const kindRank = Object.keys(EDGE_KINDS);
+  const rank = (r: Reading) => kindRank.indexOf(r.edge ?? '') * 100 + (spineOrder.get(r.sequence)?.order ?? 99);
+  const ordered = readings.filter(r => r.kind === 'edge').sort((p, q) => rank(p) - rank(q))
+    .map(r => starter.designs.find(d => d.id === `edge_${r.id}`.slice(0, 41)))
+    .filter((d): d is NonNullable<typeof d> => !!d);
+  const added = layOnGrid(pdoc, EDGES_BOARD.id, ordered.map(d => ({id: `seed-${d.id}`.slice(0, 64).replace(/_/g, '-'), design: d.id})), i => ((i * 23) % 7) - 3);
+  if (added) {
+    pdoc.revision += 1;
+    write('placements.json', placementsText(pdoc));
+    console.log(`placements.json: ${added} edges laid on the board 'edges' (revision ${pdoc.revision})`);
   }
 }

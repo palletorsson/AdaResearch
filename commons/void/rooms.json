@@ -51575,6 +51575,148 @@
             ],
             "editor_label": "Association plinth / stickers"
           }
+        },
+        {
+          "id": "stickers-mindmap",
+          "artifact": "sticker_board",
+          "station": "NE",
+          "position": [
+            17.0,
+            0.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "mindmap",
+            "editor_label": "Mind map board | the 28 paradoxes and punctums hung in depth on cords, tied by their threads (the same board at /stickers?board=mindmap)"
+          }
+        },
+        {
+          "id": "edge-carving-cannot-claim",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            -4.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "cannot_claim",
+            "reading": "cantor_limit",
+            "seed": 1,
+            "editor_label": "Edge carving | cannot claim: an edge of the research carved along a helix that order and chance pull apart (readings.json cantor_limit)"
+          }
+        },
+        {
+          "id": "edge-carving-leaves-out",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            -3.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "leaves_out",
+            "reading": "hand_delight",
+            "seed": 2,
+            "editor_label": "Edge carving | leaves out: an edge of the research carved along a helix that order and chance pull apart (readings.json hand_delight)"
+          }
+        },
+        {
+          "id": "edge-carving-still-open",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            -1.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "still_open",
+            "reading": "whose_body",
+            "seed": 3,
+            "editor_label": "Edge carving | still open: an edge of the research carved along a helix that order and chance pull apart (readings.json whose_body)"
+          }
+        },
+        {
+          "id": "edge-carving-not-yet",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            0.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "not_yet",
+            "reading": "held_the_edge",
+            "seed": 4,
+            "editor_label": "Edge carving | not yet: an edge of the research carved along a helix that order and chance pull apart (readings.json held_the_edge)"
+          }
+        },
+        {
+          "id": "edge-carving-foreclosed",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            1.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "foreclosed",
+            "reading": "fit_the_rails",
+            "seed": 5,
+            "editor_label": "Edge carving | foreclosed: an edge of the research carved along a helix that order and chance pull apart (readings.json fit_the_rails)"
+          }
+        },
+        {
+          "id": "edge-carving-dark-spot",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            3.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "dark_spot",
+            "reading": "body_knows",
+            "seed": 6,
+            "editor_label": "Edge carving | dark spot: an edge of the research carved along a helix that order and chance pull apart (readings.json body_knows)"
+          }
+        },
+        {
+          "id": "edge-carving-does-not-fit",
+          "artifact": "edge_carving",
+          "station": "NW",
+          "position": [
+            -16.5,
+            4.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "kind": "does_not_fit",
+            "reading": "surface_carries",
+            "seed": 7,
+            "editor_label": "Edge carving | does not fit: an edge of the research carved along a helix that order and chance pull apart (readings.json surface_carries)"
+          }
         }
       ],
       "props": [],

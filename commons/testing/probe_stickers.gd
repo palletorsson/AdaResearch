@@ -57,6 +57,26 @@ extends Node3D
 ##     the pink reaches where the projector puts it (3 mm) on the sphere (axis, diagonal) and the cylinder
 ##   U3 a flat print ends at its face: a 0.25 m swatch by the edge of a box's top and a cylinder's cap reaches no
 ##     further (geometry, 0.5 mm), and seen from above nothing of it is drawn outside the face's outline (pixels)
+## A HANGING board with threads, apart from the rest (MINDMAP_AT): board "mindmap" of the copy (4.2 x 2.8 m, depth 0.9,
+## hang; its stickers hang 0.1 to 0.82 m in front of the cork, tied by threads). The contract's pinOf and threadCurve are
+## RESTATED here (_contract_pin, _contract_curve), not taken from StickerData's port, so a fault in either shows:
+##   TH every thread drawnThreads gives is drawn, and no other: a tube whose rings' centres lie on the contract's curve
+##     (1 cm), in the thread's colour, the agreed colour (#8e0c16) thicker than every other
+##   TC cut and peeled: a cut written into the copy as the server writes it (the file watch) is not drawn within 2 s and
+##     tied again is drawn again; this device's untie / retie, and a peel / restore of a tied end, the same at once
+##   DP depth: every live sticker's quad stands at its at.z (1 mm) and at its x, y (1 cm), and each hanging one has a back
+##   CD cords: one per live sticker, from the board's top edge (y = h / 2) straight down to its pin at its depth (cordOf,
+##     1 mm), a rod at every depth a cord hangs from; the flat board (visitors) has none
+##   TG tags: each drawn thread's tag holds its word (in capitals) on a billboard Label3D at u = 0.5 of its curve, in front
+##     of the string (1 cm); seen from 2 m at a headset's 25 px per degree the word's capitals are at least 12 px tall
+##   FT the frame time with the mind map in view (its stickers, threads, cords and tags all drawn), against the same view
+##     without it (vsync off), and what a redraw costs; the board does no per-frame work
+##   PD the pad on a deep board: a tap on the cork sticks ON the paper (at.z = 0, drawn at LIFT), as on a flat board, and
+##     on a hanging board it hangs on a cord like the rest
+##   PH a HOLD aimed from the side at a hanging sticker peels that one: found along the aim's ray, not at the cork behind
+##   TV a DRAG ties: the trigger down on one hanging sticker, let go on another of the board: one tie op, drawn at once,
+##     nothing peeled; let go on the cork past the hold: nothing tied or peeled, and the pad says why
+## Pictures: mindmap_front_3m.png, mindmap_side.png, mindmap_edge.png, mindmap_tag_2m.png.
 ##   G negative: posting is off - no POST was attempted, the real truth files and the real outbox are untouched
 ## Writes ada_run/stickers/probe/{probe_result.json, pad_ops.json, board.png, bench.png, pad.png, peeled.png,
 ## refused.png, box_top.png, curved.png, curved_side.png, ghost_sphere.png, void.png, stack_*.png, proj_*.png, edge_*.png}
@@ -69,7 +89,8 @@ extends Node3D
 ## Options after the --: --out=<folder> (the pictures and the result), --probe-dir=user://<folder> (the copy of the truth:
 ## a folder per run), --layer-script=<path> and --pad-script=<path> (a scratch copy of an older sticker_layer.gd or
 ## sticker_pad.gd: the board's and the bench's layers, the probe's own hosts and the worn pad are made from it, to show
-## which checks bite on the old code).
+## which checks bite on the old code), --board-script=<path> (a scratch copy of an older sticker_board.gd: the mind map
+## board of TH .. PD is made from it, its layer from --layer-script when that is given too).
 
 const StickerData := preload("res://commons/stickers/sticker_data.gd")
 const StickerWorld := preload("res://commons/stickers/sticker_world.gd")
@@ -92,6 +113,14 @@ const MUSEUM_YAW := 30.0     # the rooms.json row's config; the GLB frame takes 
 const BOX := 0.6             # the work's body: a box of this side at (0, 0.4, 0) in the Artifact
 ## where the probe's own hosts for X, X2, U2 and U3 stand, in a row along +X (clear of the board, the bench and the tower)
 const TEST_ROW := Vector3(4.6, 1.4, 4.0)
+# --- the hanging board with threads (TH .. PD) ---
+const MINDMAP := "mindmap"
+## far out along +Z and facing +Z (lit from the front like the visitors' board): seen from 3 m in front, the rest of the
+## probe's room lies behind it, hidden; from its side there is nothing behind it
+const MINDMAP_AT := Vector3(-12.0, 0.0, 30.0)
+const AGREED_HEX := "#8e0c16"   # the mind map's legend: a thread two or three readers found on their own, drawn thicker
+const HEADSET_PPD := 25.0       # pixels per degree at the middle of a Quest 3's view: the tag check's eye
+const TAG_CAPS_PX := 12         # the least height of a tag's capitals there, seen from 2 m
 
 ## floor_content.gd's surface as StickerWorld reads it (signals, roots, exhibits, data)
 class FakeContent extends Node3D:
@@ -127,6 +156,8 @@ var probe_dir := PROBE_DIR          # --probe-dir=user://<folder>: this run's co
 ## so a check is shown to BITE: it fails on the old code and passes on the new.
 var layer_script: Script = StickerLayer
 var pad_script: Script = null
+var board_script: Script = null     # --board-script=: the mind map board's script (TH .. PD), else the scene's own
+var redraw_costs: Dictionary = {}   # what the mind map's redraws cost (TC measures them, FT reports them)
 var data: Node = null
 var board: Node3D = null
 var bench: Node3D = null
@@ -147,7 +178,10 @@ func _ready() -> void:
 			layer_script = load(value)
 		elif a.begins_with("--pad-script="):
 			pad_script = load(value)
-	report["scripts"] = {"layer": layer_script.resource_path if layer_script != null else "", "pad": pad_script.resource_path if pad_script != null else "res://commons/stickers/sticker_pad.tscn", "probe_dir": probe_dir}
+		elif a.begins_with("--board-script="):
+			board_script = load(value)
+	report["scripts"] = {"layer": layer_script.resource_path if layer_script != null else "", "pad": pad_script.resource_path if pad_script != null else "res://commons/stickers/sticker_pad.tscn",
+		"board": board_script.resource_path if board_script != null else "res://commons/artifacts/sticker_board/sticker_board.tscn", "probe_dir": probe_dir}
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	_write()   # the first result: the watchdog sees the probe alive
 	_quiet_hud()
@@ -978,6 +1012,8 @@ func _run() -> void:
 		{"rows": cfg_rows, "truth_spelled_otherwise": spelled, "copy_outbox": copy_outbox, "flush_outside_the_tree": cfg_flush, "posts_attempted": cfg_posts})
 	# X, X2, U2, U3 - the stack past its old cap, the projector's print on a curve, a flat print cut at its face
 	await _stack_projector_edge()
+	# TH, TC, DP, CD, TG, FT, PD - the hanging board with threads
+	await _threads_section()
 	# the pad's ops, with the stickers as this device drew them: for the server's cleanOp + applyOps to be run over
 	var f := FileAccess.open(out_dir.path_join("pad_ops.json"), FileAccess.WRITE)
 	if f != null:
@@ -1001,6 +1037,541 @@ func _run() -> void:
 	_write()
 	print("[probe_stickers] %d/%d" % [passed, report.checks.size()])
 	get_tree().quit(0 if passed == report.checks.size() else 1)
+
+# ---- the hanging board with threads: the mind map ----
+
+## TH, TC, DP, CD, TG, FT and PD on board "mindmap" of the probe's copy, stood apart (MINDMAP_AT): made from
+## --board-script when given (an older sticker_board.gd), its layer from --layer-script when that is given.
+func _threads_section() -> void:
+	# its floor: a mesh, no body (no surface the pad could take)
+	var slab := MeshInstance3D.new()
+	slab.name = "MindMapFloor"
+	var sbm := BoxMesh.new()
+	sbm.size = Vector3(12, 0.1, 10)
+	slab.mesh = sbm
+	slab.position = MINDMAP_AT + Vector3(0, -0.05, 2.0)
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color("8f8a84")
+	slab.material_override = smat
+	add_child(slab)
+	var mm: Node3D = null
+	if board_script != null:
+		mm = Node3D.new()
+		mm.set_script(board_script)
+	else:
+		mm = load("res://commons/artifacts/sticker_board/sticker_board.tscn").instantiate()
+	mm.name = "MindMapBoard"
+	mm.set_meta("config_board", MINDMAP)
+	mm.position = MINDMAP_AT
+	add_child(mm)
+	if layer_script != StickerLayer and mm.get("layer") is Node3D:
+		mm.set("layer", _swap_layer(mm.get("layer")))
+	await _ticks(0.3)
+	await _frames(4)
+	var face: Node3D = mm.get_node_or_null("Face")
+	var tnode: Node3D = mm.get_node_or_null("Face/Threads")
+	var mlayer: Node3D = mm.get_node_or_null("Face/StickerLayer")
+	var fx: Transform3D = face.global_transform if face != null else Transform3D(Basis(), MINDMAP_AT)
+	var spec: Dictionary = data.board_spec(MINDMAP)
+	var w := float(spec.get("w", 1.0))
+	var h := float(spec.get("h", 1.0))
+	redraw_costs["first_build_ms"] = float(tnode.get("rebuild_ms")) if tnode != null else -1.0
+	var live: Array = []
+	for s in data.stickers_on("board:" + MINDMAP):
+		if str(s.get("state", "on")) == "on":
+			live.append(s)
+	# what the contract draws (drawnThreads over this device's view of the truth)
+	var want: Array = StickerData.drawn_threads({"stickers": data.stickers, "threads": data.threads}, MINDMAP)
+	report["mindmap"] = {"board": spec, "live_stickers": live.size(), "threads_in_view": (data.threads as Array).size(), "threads_drawn_by_contract": want.size(),
+		"face_at": _v(fx.origin)}
+	# the pictures, the board as the truth holds it: from 3 m in front, from its side, edge-on
+	var centre := fx.origin
+	photo.fov = 60.0
+	await _shoot(Transform3D(Basis(), centre + Vector3(0, 0, 3.0)).looking_at(centre + Vector3(0, 0, 0.3)), "mindmap_front_3m.png")
+	await _shoot(Transform3D(Basis(), centre + Vector3(3.2, 0.1, 1.6)).looking_at(centre + Vector3(0.6, -0.1, 0.45)), "mindmap_side.png")
+	await _shoot(Transform3D(Basis(), centre + Vector3(-4.0, 0.4, 0.45)).looking_at(centre + Vector3(0, 0, 0.45)), "mindmap_edge.png")
+	photo.fov = 50.0
+	# TH - every thread the contract draws, along the contract's curve, in its colour; the agreed colour thicker
+	var strings: MeshInstance3D = tnode.get_node_or_null("Strings") as MeshInstance3D if tnode != null else null
+	var drawn_ids := _drawn_ids(tnode)
+	var by_id := {}
+	var th_missing: Array = []
+	var th_worst := 0.0
+	var agreed_r: Array = []
+	var other_r: Array = []
+	var colour_bad: Array = []
+	for e in want:
+		var tid := str(e.thread.get("id", ""))
+		by_id[tid] = e
+		var rings := _tube_rings(strings, drawn_ids.find(tid))
+		var centres: Array = rings.centres
+		if centres.size() < 2:
+			th_missing.append(tid)
+			continue
+		var p := _contract_pin(e.a)
+		var q := _contract_pin(e.b)
+		for j in centres.size():
+			th_worst = maxf(th_worst, (centres[j] as Vector3).distance_to(fx * _contract_curve(p, q, float(j) / float(centres.size() - 1))))
+		var r: float = (rings.radii as Array).max()
+		if str(e.thread.get("colour", "")).to_lower() == AGREED_HEX:
+			agreed_r.append(r)
+		else:
+			other_r.append(r)
+		var want_c := Color(str(e.thread.get("colour", StickerData.THREAD_RED)))
+		var got_c: Color = rings.colour
+		if absf(got_c.r - want_c.r) > 0.01 or absf(got_c.g - want_c.g) > 0.01 or absf(got_c.b - want_c.b) > 0.01:
+			colour_bad.append([tid, got_c.to_html(false), want_c.to_html(false)])
+	var th_extra := drawn_ids.filter(func(i): return not by_id.has(str(i)))
+	var thicker: bool = not agreed_r.is_empty() and not other_r.is_empty() and float(agreed_r.min()) > float(other_r.max())
+	_check("TH every thread drawnThreads gives for '%s' (%d) is drawn, and no other: a tube whose rings lie on the contract's curve (pinOf to pinOf, threadCurve's sag; 1 cm), in its colour, the agreed colour %s thicker than every other" % [MINDMAP, want.size(), AGREED_HEX],
+		strings != null and not want.is_empty() and th_missing.is_empty() and th_extra.is_empty() and th_worst < 0.01 and colour_bad.is_empty() and thicker,
+		{"want": want.size(), "drawn": drawn_ids.size(), "missing": th_missing, "extra": th_extra, "worst_m": th_worst, "colour_bad": colour_bad,
+		"radius_agreed_m": [agreed_r.min() if not agreed_r.is_empty() else -1, agreed_r.max() if not agreed_r.is_empty() else -1],
+		"radius_other_m": [other_r.min() if not other_r.is_empty() else -1, other_r.max() if not other_r.is_empty() else -1]})
+	# DP - every live sticker at its depth (its quad's origin at at.z, 1 mm; at its x, y, 1 cm); a back for each one that hangs
+	var dp_worst_z := 0.0
+	var dp_worst_xy := 0.0
+	var dp_rows: Array = []
+	var hanging := 0
+	for s in live:
+		var at := StickerData.v3(s.get("at"))
+		if at.z > 0.0:
+			hanging += 1
+		var near := _nearest_point(_instances(mlayer, "Stickers_" + str(s.get("design", ""))), fx * at)
+		var o: Vector3 = fx.affine_inverse() * near if near.is_finite() else Vector3(INF, INF, INF)
+		var dz := absf(o.z - at.z)
+		var dxy := Vector2(o.x - at.x, o.y - at.y).length()
+		dp_worst_z = maxf(dp_worst_z, dz)
+		dp_worst_xy = maxf(dp_worst_xy, dxy)
+		if dp_rows.size() < 8 or dz > 0.001:
+			dp_rows.append({"id": s.get("id", ""), "at_z": at.z, "drawn_z": snappedf(o.z, 0.0001)})
+	var backs := 0
+	var backs_face_out := true
+	if mlayer != null:
+		for c in mlayer.get_children():
+			if c is MultiMeshInstance3D and str(c.name).begins_with("Backs_"):
+				var bm: MultiMesh = (c as MultiMeshInstance3D).multimesh
+				for i in bm.instance_count:
+					backs += 1
+					var col_z: Vector3 = fx.basis.inverse() * ((c as MultiMeshInstance3D).global_transform.basis * bm.get_instance_transform(i).basis).z
+					backs_face_out = backs_face_out and col_z.z < 0.0
+	_check("DP depth: each of the %d live stickers of '%s' stands at its at.z (its quad's origin, 1 mm) and its x, y (1 cm), %d of them hanging in front of the paper, each with a back facing away" % [live.size(), MINDMAP, hanging],
+		mlayer != null and not live.is_empty() and hanging > 0 and dp_worst_z <= 0.001 and dp_worst_xy < 0.01 and backs == hanging and backs_face_out,
+		{"live": live.size(), "hanging": hanging, "worst_z_m": dp_worst_z, "worst_xy_m": dp_worst_xy, "backs": backs, "backs_face_away": backs_face_out, "rows": dp_rows})
+	# CD - a cord per live sticker, from the top edge down to its pin (cordOf); a rod at each depth; none on a flat board
+	var cords: MeshInstance3D = tnode.get_node_or_null("Cords") as MeshInstance3D if tnode != null else null
+	var cord_ids: Array = cords.get_meta("ids", []) if cords != null else []
+	var cd_missing: Array = []
+	var cd_worst := 0.0
+	var cord_depths := {}
+	for s in live:
+		var rr := _tube_rings(cords, cord_ids.find(str(s.get("id", ""))))
+		if (rr.centres as Array).size() != 2:
+			cd_missing.append(s.get("id", ""))
+			continue
+		var pin := _contract_pin(s)
+		var top := Vector3(pin.x, h / 2.0, pin.z)
+		cd_worst = maxf(cd_worst, maxf((rr.centres[0] as Vector3).distance_to(fx * top), (rr.centres[1] as Vector3).distance_to(fx * pin)))
+		cord_depths[snappedf(pin.z, 0.001)] = true
+	var rods: Node = tnode.get_node_or_null("Rods") if tnode != null else null
+	var rod_depths: Array = rods.get_meta("depths", []) if rods != null else []
+	var rods_ok: bool = not cord_depths.is_empty() and cord_depths.keys().all(func(z): return rod_depths.any(func(r): return absf(float(r) - float(z)) < 0.0015))
+	var flat_cords: Node = board.get_node_or_null("Face/Threads/Cords")
+	var flat_none: bool = (flat_cords == null or (flat_cords.get_meta("ids", []) as Array).is_empty()) and board.get_node_or_null("Rail") == null
+	_check("CD cords: on the hanging board one cord per live sticker (%d), from its top edge (y = h / 2) straight down to the sticker's pin at its depth (cordOf, 1 mm), on a rail, a rod at every depth a cord hangs from; the flat board ('visitors') has neither" % live.size(),
+		cords != null and cd_missing.is_empty() and cord_ids.size() == live.size() and cd_worst <= 0.001 and rods_ok and mm.get_node_or_null("Rail") != null and flat_none,
+		{"cords": cord_ids.size(), "live": live.size(), "missing": cd_missing, "worst_m": cd_worst, "cord_depths": cord_depths.size(), "rod_depths": rod_depths.size(),
+		"rail": mm.get_node_or_null("Rail") != null, "flat_board_has_none": flat_none})
+	# TG - the tags: the word, on a billboard at u = 0.5, in front of the string; seen from 2 m with a headset's eye
+	var tg_missing: Array = []
+	var tg_text: Array = []
+	var tg_still: Array = []
+	var tg_worst := 0.0
+	var front_tag: Node3D = null
+	var front_z := -INF
+	for e in want:
+		var tid := str(e.thread.get("id", ""))
+		var tag: Node3D = tnode.get_node_or_null("Tags/Tag_" + tid) as Node3D if tnode != null else null
+		var label: Label3D = tag.get_node_or_null("Word") as Label3D if tag != null else null
+		if label == null:
+			tg_missing.append(tid)
+			continue
+		if label.text != str(e.thread.get("word", "")).to_upper():
+			tg_text.append([tid, label.text, e.thread.get("word", "")])
+		if label.billboard != BaseMaterial3D.BILLBOARD_ENABLED:
+			tg_still.append(tid)
+		tg_worst = maxf(tg_worst, tag.global_position.distance_to(fx * _contract_curve(_contract_pin(e.a), _contract_pin(e.b), 0.5)))
+		var tz: float = (fx.affine_inverse() * tag.global_position).z
+		if tz > front_z:
+			front_z = tz
+			front_tag = tag
+	var caps_px := 0
+	var tag_word := ""
+	if front_tag != null:
+		var at_tag := front_tag.global_position
+		var vp_h := get_viewport().get_visible_rect().size.y
+		photo.fov = vp_h / HEADSET_PPD   # the camera keeps its height: vertical degrees, HEADSET_PPD pixels each
+		var img: Image = await _shoot(Transform3D(Basis(), at_tag + fx.basis.z.normalized() * 2.0).looking_at(at_tag), "mindmap_tag_2m.png")
+		var card: MeshInstance3D = front_tag.get_node_or_null("Card") as MeshInstance3D
+		var card_m: Vector2 = (card.mesh as QuadMesh).size if card != null and card.mesh is QuadMesh else Vector2(0.15, 0.04)
+		var scale_px := float(img.get_height()) / vp_h
+		var ppm := (float(img.get_height()) / 2.0) / (2.0 * tan(deg_to_rad(photo.fov) / 2.0))
+		var mid := photo.unproject_position(at_tag) * scale_px
+		caps_px = _ink_height(img, Rect2(mid - card_m * ppm / 2.0, card_m * ppm).grow(-2.0))
+		tag_word = (front_tag.get_node("Word") as Label3D).text
+		photo.fov = 50.0
+	_check("TG the tags: each drawn thread's word, in capitals, on a Label3D that faces the viewer (billboard), at u = 0.5 of its curve in front of the string (1 cm); seen from 2 m at %d px per degree (a Quest 3's) the capitals of '%s' stand %d px tall (at least %d)" % [int(HEADSET_PPD), tag_word, caps_px, TAG_CAPS_PX],
+		tnode != null and not want.is_empty() and tg_missing.is_empty() and tg_text.is_empty() and tg_still.is_empty() and tg_worst < 0.01 and caps_px >= TAG_CAPS_PX,
+		{"tags": want.size() - tg_missing.size(), "missing": tg_missing, "wrong_words": tg_text, "not_billboard": tg_still, "worst_m": tg_worst, "caps_px_at_2m": caps_px, "word": tag_word})
+	# TC - cut and peeled: (a) the file watch, a cut written into the copy as the server writes it, then tied again;
+	# (b) this device's own untie / retie, and a peel / restore of a tied end
+	var t_file := str(want[1].thread.get("id", "")) if want.size() > 1 else ""
+	var watch_cut_ms := -1
+	var watch_back_ms := -1
+	if t_file != "":
+		var doc: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(probe_dir.path_join("placements.json")))
+		for t in doc.get("threads", []):
+			if str(t.get("id", "")) == t_file:
+				t["state"] = "cut"
+				t["cut"] = {"by": "probe:server", "t": "2026-11-14T12:00:00Z"}
+		doc.revision = int(doc.revision) + 1
+		_put(probe_dir.path_join("placements.json"), JSON.stringify(doc, "  "))
+		watch_cut_ms = await _until(func(): return tnode != null and not _drawn_ids(tnode).has(t_file) and tnode.get_node_or_null("Tags/Tag_" + t_file) == null, 4000)
+		for t in doc.get("threads", []):
+			if str(t.get("id", "")) == t_file:
+				t["state"] = "tied"
+				t.erase("cut")
+		doc.revision = int(doc.revision) + 1
+		_put(probe_dir.path_join("placements.json"), JSON.stringify(doc, "  "))
+		watch_back_ms = await _until(func(): return tnode != null and _drawn_ids(tnode).has(t_file) and tnode.get_node_or_null("Tags/Tag_" + t_file) != null, 4000)
+	var t0 := str(want[0].thread.get("id", "")) if not want.is_empty() else ""
+	var end_a := str(want[0].a.get("id", "")) if not want.is_empty() else ""
+	var n_all := _drawn_ids(tnode).size()
+	var steps := {"untie": false, "retie": false, "peel": false, "restore": false}
+	if t0 != "" and tnode != null:
+		var ok_u: bool = data.untie(t0)
+		await _frames(2)
+		redraw_costs["untie_ms"] = float(tnode.get("rebuild_ms"))
+		var cut_rec: Dictionary = data.thread(t0)
+		steps.untie = ok_u and not _drawn_ids(tnode).has(t0) and tnode.get_node_or_null("Tags/Tag_" + t0) == null and _drawn_ids(tnode).size() == n_all - 1 \
+			and str(cut_rec.get("state", "")) == "cut" and str((cut_rec.get("cut", {}) as Dictionary).get("by", "")) == str(data.by)
+		var ok_r: bool = data.retie(t0)
+		await _frames(2)
+		redraw_costs["retie_ms"] = float(tnode.get("rebuild_ms"))
+		steps.retie = ok_r and _drawn_ids(tnode).has(t0) and tnode.get_node_or_null("Tags/Tag_" + t0) != null and _drawn_ids(tnode).size() == n_all \
+			and not data.thread(t0).has("cut")
+		var of_a: Array = want.filter(func(e): return str(e.a.get("id", "")) == end_a or str(e.b.get("id", "")) == end_a).map(func(e): return str(e.thread.get("id", "")))
+		var ok_p: bool = data.peel(end_a)
+		await _frames(2)
+		redraw_costs["peel_ms"] = float(tnode.get("rebuild_ms"))
+		var ids_p := _drawn_ids(tnode)
+		steps.peel = ok_p and of_a.all(func(i): return not ids_p.has(i)) and ids_p.size() == n_all - of_a.size() and not (tnode.get("cord_ids") as Array).has(end_a)
+		var ok_s: bool = data.restore(end_a)
+		await _frames(2)
+		var ids_s := _drawn_ids(tnode)
+		steps.restore = ok_s and of_a.all(func(i): return ids_s.has(i)) and ids_s.size() == n_all and (tnode.get("cord_ids") as Array).has(end_a)
+	_check("TC cut and peeled: a cut the copy's file brings (the watch) is not drawn within 2 s, tag and all, and drawn again within 2 s when it is tied again; this device's untie hides a thread at once (cut, with who cut it) and its retie shows it again; a peeled end hides every thread it holds and its cord, and restored they are back",
+		watch_cut_ms >= 0 and watch_cut_ms <= 2000 and watch_back_ms >= 0 and watch_back_ms <= 2000 and steps.values().all(func(v): return v),
+		{"file_thread": t_file, "watch_cut_ms": watch_cut_ms, "watch_tied_again_ms": watch_back_ms, "own_thread": t0, "peeled_end": end_a, "steps": steps})
+	# FT - the frame time with the mind map in view against the same view without it, vsync off; the redraws' cost
+	photo.global_transform = Transform3D(Basis(), centre + Vector3(0, 0, 3.0)).looking_at(centre + Vector3(0, 0, 0.3))
+	photo.fov = 60.0
+	var vsync_was := DisplayServer.window_get_vsync_mode()
+	var fps_was := Engine.max_fps
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	Engine.max_fps = 0
+	var with_a: Dictionary = await _frame_stats(240)
+	# without it: out of the tree, not only hidden (a hidden node still runs its scripts every frame)
+	remove_child(mm)
+	var without: Dictionary = await _frame_stats(240)
+	add_child(mm)
+	var with_b: Dictionary = await _frame_stats(240)
+	DisplayServer.window_set_vsync_mode(vsync_was)
+	Engine.max_fps = fps_was
+	photo.fov = 50.0
+	var full_ms := -1.0
+	if tnode != null and tnode.has_method("_again"):
+		tnode.call("_again")
+		full_ms = float(tnode.get("rebuild_ms"))
+	redraw_costs["full_redraw_ms"] = full_ms
+	var layer_ms := -1.0
+	if mlayer != null:
+		mlayer.set("_sig", "")
+		var tl := Time.get_ticks_usec()
+		mlayer.call("redraw")
+		layer_ms = float(Time.get_ticks_usec() - tl) / 1000.0
+	redraw_costs["layer_redraw_ms"] = layer_ms
+	var added := func(key: String) -> float:
+		return (float(with_a[key].mean_ms) + float(with_b[key].mean_ms)) / 2.0 - float(without[key].mean_ms)
+	var added_frame: float = added.call("frame_ms")
+	var added_gpu: float = added.call("render_gpu_ms")
+	var still := tnode != null and mlayer != null and not tnode.is_processing() and not tnode.is_physics_processing() and not mlayer.is_processing() and not mlayer.is_physics_processing()
+	var full_set := tnode != null and _drawn_ids(tnode).size() == want.size() and (tnode.get("cord_ids") as Array).size() == live.size()
+	_check("FT the frame time with '%s' in view (%d stickers, %d threads, %d cords and their tags drawn) against the same view without it, vsync off: it adds %.2f ms a frame (GPU %.2f ms; at most 2 ms each); no per-frame work on the threads or the layer; a redraw after a cut costs %.1f ms (at most 50)" % [MINDMAP, live.size(), want.size(), live.size(), added_frame, added_gpu, float(redraw_costs.get("untie_ms", -1.0))],
+		full_set and still and added_frame <= 2.0 and added_gpu <= 2.0 and float(redraw_costs.get("untie_ms", INF)) <= 50.0,
+		{"with": with_a, "without": without, "with_again": with_b, "added_frame_ms": added_frame, "added_gpu_ms": added_gpu, "no_process": still, "redraws": redraw_costs.duplicate()})
+	# PD - the pad on a deep board: a tap on the cork where nothing hangs in front sticks ON the paper (at.z = 0)
+	var best := Vector2.ZERO
+	var best_d := -1.0
+	for ix in range(-int((w / 2.0 - 0.25) * 10.0), int((w / 2.0 - 0.25) * 10.0) + 1):
+		for iy in range(-int((h / 2.0 - 0.25) * 10.0), int((h / 2.0 - 0.25) * 10.0) + 1):
+			var pt := Vector2(ix, iy) / 10.0
+			var dmin := INF
+			for s in live:
+				var sat := StickerData.v3(s.get("at"))
+				dmin = minf(dmin, pt.distance_to(Vector2(sat.x, sat.y)))
+			if dmin > best_d:
+				best_d = dmin
+				best = pt
+	var spot := fx * Vector3(best.x, best.y, 0.0)
+	aim_cam.global_transform = Transform3D(Basis(), spot + fx.basis.z.normalized() * 1.2).looking_at(spot)
+	await _ticks(0.1)
+	var before := int(data.pending.size())
+	var aimed: Dictionary = pad.get("aim")
+	pad.fire_worn()
+	await get_tree().physics_frame
+	pad.release_worn()
+	await _frames(3)
+	var op: Dictionary = data.pending[-1].op if data.pending.size() == before + 1 else {}
+	_made_add(op)
+	var st: Dictionary = op.get("sticker", {})
+	var sid := str(st.get("id", ""))
+	var drawn_near := _nearest_point(_instances(mlayer, "Stickers_" + str(st.get("design", ""))), spot)
+	var local: Vector3 = fx.affine_inverse() * drawn_near if drawn_near.is_finite() else Vector3(INF, INF, INF)
+	var on_paper: bool = sid != "" and (st.get("host", {}) as Dictionary) == {"kind": "board", "id": MINDMAP} and float(st.at[2]) == 0.0 and StickerData.a3(st.n) == [0.0, 0.0, 1.0]
+	var at_lift: bool = absf(local.z - StickerLayer.LIFT) <= 0.001 and Vector2(local.x - best.x, local.y - best.y).length() < 0.01
+	var corded: bool = tnode != null and (tnode.get("cord_ids") as Array).has(sid)
+	_check("PD the pad on a deep board: a tap on the cork (nothing hangs in front at %s) sticks ON the paper, at.z = 0 and n = +Z as on a flat board, drawn there at LIFT (1 mm), and on a hanging board it hangs on a cord like the rest" % str(best),
+		on_paper and at_lift and corded,
+		{"aim_ok": aimed.get("ok", false), "op": op, "drawn_local": _v(local), "corded": corded, "clear_m": best_d})
+	# PH - a HOLD aimed at a hanging sticker from the side peels THAT sticker: the frontmost one, its middle aimed at from
+	# 1 m away and 35 degrees off its normal, toward the board's middle (the ray goes on to the cork 0.5 m or more aside,
+	# where read as if it lay on the paper it picked another sticker's footprint, or none)
+	var front: Dictionary = {}
+	for s in live:
+		if front.is_empty() or float(StickerData.v3(s.get("at")).z) > float(StickerData.v3(front.get("at")).z):
+			front = s
+	var ph := {"ok": false}
+	if not front.is_empty():
+		var fat := StickerData.v3(front.get("at"))
+		var side := -signf(fat.x) if fat.x != 0.0 else 1.0
+		var eye_l := fat + Vector3(-side * sin(deg_to_rad(35.0)), 0.0, cos(deg_to_rad(35.0))) * 1.0
+		aim_cam.global_transform = Transform3D(Basis(), fx * eye_l).looking_at(fx * fat)
+		await _ticks(0.1)
+		var held_aim: Dictionary = pad.get("aim")
+		var on_before: Array = live.filter(func(s): return str(data.sticker(str(s.get("id", ""))).get("state", "")) == "on").map(func(s): return str(s.get("id", "")))
+		pad.fire_worn()
+		await _ticks(0.45)
+		pad.release_worn()
+		await _frames(3)
+		var peeled_now: Array = on_before.filter(func(i): return str(data.sticker(i).get("state", "")) == "peeled")
+		var target_id := str((held_aim.get("target", {}) as Dictionary).get("id", ""))
+		var paper_hit: Vector3 = fx.affine_inverse() * Vector3(held_aim.end) if held_aim.has("end") else Vector3.ZERO
+		ph = {"ok": peeled_now == [str(front.get("id", ""))], "aimed_at": front.get("id", ""), "at_z": fat.z, "target": target_id, "peeled": peeled_now,
+			"ray_reached": _v(paper_hit), "paper_point_off_m": snappedf(Vector2(paper_hit.x - fat.x, paper_hit.y - fat.y).length(), 0.001)}
+		if bool(ph.ok):
+			data.restore(str(front.get("id", "")))   # as it was (a restore is an op of its own: kept in the outbox like the rest)
+			await _frames(2)
+	_check("PH a HOLD aimed from the side (35 degrees) at the frontmost hanging sticker of '%s' peels that sticker and no other, though the aim's ray goes on to the cork elsewhere: a hanging sticker is found along the ray" % MINDMAP,
+		bool(ph.ok), ph)
+	# TV - a DRAG ties: the trigger down on the frontmost hanging sticker, the aim turned onto another sticker of the board
+	# not yet tied to it (before the hold is up), let go: one `tie` op of the two with the pad's question for a word,
+	# drawn at once, nothing peeled. A drag let go on the cork past the hold: nothing tied, nothing peeled, refused in words.
+	var tv_refused: Array = []
+	pad.refused.connect(func(reason): tv_refused.append(reason))
+	var tie_word := str((pad.get_script() as Script).get_script_constant_map().get("TIE_WORD", "?"))
+	var tied_pairs := {}
+	for t in data.threads:
+		if str(t.get("state", "")) == "tied":
+			tied_pairs[str(t.get("a", "")) + "|" + str(t.get("b", ""))] = true
+			tied_pairs[str(t.get("b", "")) + "|" + str(t.get("a", ""))] = true
+	var by_z: Array = live.filter(func(s): return str(data.sticker(str(s.get("id", ""))).get("state", "")) == "on")
+	by_z.sort_custom(func(p1, p2): return StickerData.v3(p1.get("at")).z > StickerData.v3(p2.get("at")).z)
+	var tv := {"ok": false, "why": "no two stickers to tie"}
+	if by_z.size() >= 2:
+		var sa: Dictionary = by_z[0]
+		var eye_w: Vector3 = fx * (StickerData.v3(sa.get("at")) + Vector3(0, 0, 1.2))
+		var sb: Dictionary = {}
+		for cand in by_z.slice(1):
+			if tied_pairs.has(str(sa.get("id", "")) + "|" + str(cand.get("id", ""))):
+				continue
+			aim_cam.global_transform = Transform3D(Basis(), eye_w).looking_at(fx * StickerData.v3(cand.get("at")))
+			await _ticks(0.05)
+			if str(((pad.get("aim") as Dictionary).get("target", {}) as Dictionary).get("id", "")) == str(cand.get("id", "")):
+				sb = cand
+				break
+		aim_cam.global_transform = Transform3D(Basis(), eye_w).looking_at(fx * StickerData.v3(sa.get("at")))
+		await _ticks(0.1)
+		var start_target := str(((pad.get("aim") as Dictionary).get("target", {}) as Dictionary).get("id", ""))
+		if not sb.is_empty() and start_target == str(sa.get("id", "")):
+			var before_tv := int(data.pending.size())
+			var n_threads := _drawn_ids(tnode).size()
+			pad.fire_worn()
+			await get_tree().physics_frame
+			aim_cam.global_transform = Transform3D(Basis(), eye_w).looking_at(fx * StickerData.v3(sb.get("at")))
+			await _ticks(0.05)   # well inside the hold (0.3 s)
+			pad.release_worn()
+			await _frames(3)
+			var tie_op: Dictionary = data.pending[-1].op if data.pending.size() == before_tv + 1 else {}
+			var th: Dictionary = tie_op.get("thread", {})
+			var tid := str(th.get("id", ""))
+			var word_node: Label3D = tnode.get_node_or_null("Tags/Tag_%s/Word" % tid) as Label3D if tnode != null and tid != "" else null
+			var still_on: bool = str(data.sticker(str(sa.get("id", ""))).get("state", "")) == "on" and str(data.sticker(str(sb.get("id", ""))).get("state", "")) == "on"
+			var tie_ok: bool = str(tie_op.get("op", "")) == "tie" and str(th.get("a", "")) == str(sa.get("id", "")) and str(th.get("b", "")) == str(sb.get("id", "")) \
+				and str(th.get("word", "")) == tie_word and still_on and _drawn_ids(tnode).has(tid) and _drawn_ids(tnode).size() == n_threads + 1 \
+				and word_node != null and word_node.text == tie_word.to_upper()
+			# the negative: a drag from it let go on clear cork, past the hold
+			var clear := Vector2.ZERO
+			var clear_d := -1.0
+			for ix in range(-int((w / 2.0 - 0.25) * 10.0), int((w / 2.0 - 0.25) * 10.0) + 1):
+				for iy in range(-int((h / 2.0 - 0.25) * 10.0), int((h / 2.0 - 0.25) * 10.0) + 1):
+					var pt := Vector2(ix, iy) / 10.0
+					var dmin := pt.distance_to(best)
+					for s in live:
+						var sat := StickerData.v3(s.get("at"))
+						dmin = minf(dmin, pt.distance_to(Vector2(sat.x, sat.y)))
+					if dmin > clear_d:
+						clear_d = dmin
+						clear = pt
+			var before_neg := int(data.pending.size())
+			tv_refused.clear()
+			aim_cam.global_transform = Transform3D(Basis(), eye_w).looking_at(fx * StickerData.v3(sa.get("at")))
+			await _ticks(0.1)
+			pad.fire_worn()
+			await get_tree().physics_frame
+			aim_cam.global_transform = Transform3D(Basis(), eye_w).looking_at(fx * Vector3(clear.x, clear.y, 0.0))
+			await _ticks(0.5)    # past the hold: a hold would have peeled by now, had the aim stayed
+			var neg_target := str(((pad.get("aim") as Dictionary).get("target", {}) as Dictionary).get("id", ""))
+			pad.release_worn()
+			await _frames(3)
+			var neg_ok: bool = data.pending.size() == before_neg and neg_target == "" and str(data.sticker(str(sa.get("id", ""))).get("state", "")) == "on" and tv_refused.size() == 1
+			tv = {"ok": tie_ok and neg_ok, "from": sa.get("id", ""), "to": sb.get("id", ""), "op": tie_op, "drawn": _drawn_ids(tnode).has(tid), "tag": word_node.text if word_node != null else "",
+				"both_still_on": still_on, "let_go_on_cork": {"at": str(clear), "target": neg_target, "ops_made": data.pending.size() - before_neg, "refused": tv_refused.duplicate(), "not_peeled": str(data.sticker(str(sa.get("id", ""))).get("state", "")) == "on"}}
+		else:
+			tv = {"ok": false, "why": "no second sticker the aim finds from the first one's eye, or the first not under the aim", "start_target": start_target, "second": sb.get("id", "")}
+	_check("TV a DRAG on the pad ties: the trigger down on a hanging sticker of '%s', the aim turned onto another of its stickers inside the hold, let go - one tie op of the two, its word the pad's question ('%s'), drawn at once, neither peeled; let go on the cork past the hold, nothing is tied or peeled and the pad says why" % [MINDMAP, tie_word],
+		bool(tv.ok), tv)
+
+## The ids of the threads a board's Threads node draws (Strings' meta), [] when there is none.
+func _drawn_ids(tnode: Node) -> Array:
+	var s: Node = tnode.get_node_or_null("Strings") if tnode != null else null
+	return (s.get_meta("ids", []) as Array).duplicate() if s != null else []
+
+## The k-th tube of a mesh sticker_threads.gd makes (Strings, Cords: metas ranges, rings, sides): each ring's centre
+## (world) and radius, and its first vertex's colour. Empty when the mesh or the tube is not there.
+func _tube_rings(mi: MeshInstance3D, k: int) -> Dictionary:
+	var out := {"centres": [], "radii": [], "colour": Color(0, 0, 0, 0)}
+	if mi == null or mi.mesh == null or mi.mesh.get_surface_count() == 0:
+		return out
+	var ranges: Array = mi.get_meta("ranges", [])
+	var sides := int(mi.get_meta("sides", 0))
+	if k < 0 or k >= ranges.size() or sides <= 0:
+		return out
+	var arrays := (mi.mesh as ArrayMesh).surface_get_arrays(0)
+	var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+	var cols: PackedColorArray = arrays[Mesh.ARRAY_COLOR]
+	var first := int(ranges[k][0])
+	var count := int(ranges[k][1])
+	for j in count / sides:
+		var c := Vector3.ZERO
+		for i in sides:
+			c += verts[first + j * sides + i]
+		c /= float(sides)
+		out.centres.append(mi.global_transform * c)
+		out.radii.append(verts[first + j * sides].distance_to(c))
+	if cols.size() > first:
+		out.colour = cols[first]
+	return out
+
+## stickers.ts pinOf, RESTATED here (not StickerData.pin_of, so a fault in the port shows too): the middle of the top edge
+## of the sticker's DRAWN box (the design box grown by its cut margin, `size` on its long side), inset by min(8% of its
+## height, 2 cm), in the host frame.
+func _contract_pin(s: Dictionary) -> Vector3:
+	var d: Dictionary = data.design(str(s.get("design", "")))
+	var size := float(s.get("size", 0.2))
+	var eh := size
+	if not d.is_empty():
+		var m := 0.0
+		if d.get("cut") is Dictionary and float((d.cut as Dictionary).get("m", 0.0)) > 0.0:
+			m = float(d.cut.m)
+		var bw := float(d.get("w", 100.0)) + 2.0 * m
+		var bh := float(d.get("h", 100.0)) + 2.0 * m
+		eh = size * bh / bw if bw >= bh else size
+	var n := StickerData.v3(s.get("n")).normalized()
+	var up0 := StickerData.v3(s.get("up"))
+	var up := (up0 - n * up0.dot(n)).normalized()
+	return StickerData.v3(s.get("at")) + up * (eh / 2.0 - minf(eh * 0.08, 0.02))
+
+## stickers.ts threadCurve(p, q).at(u), RESTATED: a quadratic Bezier whose control point hangs min(0.12, span / 6) below
+## the pins' middle (-Y of the host frame).
+static func _contract_curve(p: Vector3, q: Vector3, u: float) -> Vector3:
+	var c := (p + q) / 2.0 - Vector3(0.0, minf(0.12, p.distance_to(q) / 6.0), 0.0)
+	return (1.0 - u) * (1.0 - u) * p + 2.0 * u * (1.0 - u) * c + u * u * q
+
+## The point of `points` nearest `p` (Vector3(INF, ...) when there is none).
+func _nearest_point(points: Array, p: Vector3) -> Vector3:
+	var best := Vector3(INF, INF, INF)
+	var best_d := INF
+	for q in points:
+		var d := (q as Vector3).distance_to(p)
+		if d < best_d:
+			best_d = d
+			best = q
+	return best
+
+## Frames until `cond` holds, at most `limit_ms`: the milliseconds it took, -1 when it never did.
+func _until(cond: Callable, limit_ms: int) -> int:
+	var t0 := Time.get_ticks_msec()
+	while Time.get_ticks_msec() - t0 < limit_ms:
+		await get_tree().process_frame
+		if cond.call():
+			return Time.get_ticks_msec() - t0
+	return -1
+
+## The height in pixels of the ink in a rectangle of a picture (a tag's card): the rows holding dark brown pixels - the
+## tag's ink (#5a3a2a); its card, its edge and the cork through its hole are all lighter - first to last.
+func _ink_height(img: Image, r: Rect2) -> int:
+	var first := -1
+	var last := -1
+	for y in range(maxi(0, int(r.position.y)), mini(img.get_height(), int(r.end.y))):
+		var n := 0
+		for x in range(maxi(0, int(r.position.x)), mini(img.get_width(), int(r.end.x))):
+			var c := img.get_pixel(x, y)
+			if maxf(c.r, maxf(c.g, c.b)) < 0.55 and c.r > c.b:
+				n += 1
+		if n >= 2:
+			if first < 0:
+				first = y
+			last = y
+	return last - first + 1 if first >= 0 else 0
+
+## n frames measured (after 30 to settle): the time between frames, and the viewport's render time on the CPU and the GPU.
+func _frame_stats(n: int) -> Dictionary:
+	var vp := get_viewport().get_viewport_rid()
+	RenderingServer.viewport_set_measure_render_time(vp, true)
+	await _frames(30)
+	var wall: Array = []
+	var cpu: Array = []
+	var gpu: Array = []
+	var last := Time.get_ticks_usec()
+	for i in n:
+		await get_tree().process_frame
+		var now := Time.get_ticks_usec()
+		wall.append(float(now - last) / 1000.0)
+		last = now
+		cpu.append(RenderingServer.viewport_get_measured_render_time_cpu(vp))
+		gpu.append(RenderingServer.viewport_get_measured_render_time_gpu(vp))
+	RenderingServer.viewport_set_measure_render_time(vp, false)
+	return {"frame_ms": _stats(wall), "render_cpu_ms": _stats(cpu), "render_gpu_ms": _stats(gpu)}
+
+static func _stats(v: Array) -> Dictionary:
+	var s := v.duplicate()
+	s.sort()
+	var sum := 0.0
+	for x in s:
+		sum += float(x)
+	return {"mean_ms": snappedf(sum / maxf(1.0, float(s.size())), 0.001), "p50_ms": snappedf(float(s[s.size() / 2]), 0.001),
+		"p95_ms": snappedf(float(s[int(s.size() * 0.95)]), 0.001), "max_ms": snappedf(float(s[-1]), 0.001), "frames": s.size()}
 
 # ---- the Void in miniature ----
 

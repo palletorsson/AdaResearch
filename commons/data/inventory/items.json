@@ -108,7 +108,7 @@
       "doc": "Stick and peel the stickers of commons/data/stickers/ on any surface (the same stickers the encyclopedia's /stickers designs and sticks in SVG and three.js): a tap sticks, a hold on a sticker peels it (it stays as residue, with who peeled), a tap at nothing steps to the sheet's next design. commons/stickers/sticker_pad.gd.",
       "defaults": {"sheet": "starter", "sticker": "here_pink_triangle", "size": "design"},
       "knobs": [
-        {"key": "sheet", "label": "Sheet", "choices": [ "starter", "research", "paradox", "punctum", "cards", "here", "sieve", "notes", "stamps", "marks" ], "names": [ "starter sheet", "the research (one per sequence)", "paradoxes (from the texts)", "punctums (from the texts)", "cards", "here", "sieve", "notes", "stamps", "marks" ]},
+        {"key": "sheet", "label": "Sheet", "choices": [ "starter", "research", "paradox", "punctum", "edge", "cards", "here", "sieve", "notes", "stamps", "marks" ], "names": [ "starter sheet", "the research (one per sequence)", "paradoxes (from the texts)", "punctums (from the texts)", "edges of the research", "cards", "here", "sieve", "notes", "stamps", "marks" ]},
         {"key": "size", "label": "Size", "choices": [ "design", "0.08", "0.15", "0.25", "0.4" ], "names": [ "as designed", "8 cm", "15 cm", "25 cm", "40 cm" ]}
       ]
     },
