@@ -101,6 +101,12 @@ func run() -> void:
 		checks.append({"check": "a body can walk up to a plate and is held off by it", "ok": reached and stopped > 0.25 and stopped < 1.2, "plate": first, "stopped_m_from_the_plate": snappedf(stopped, .01)})
 		await _shot(cam, base + Vector3(-1.2, 1.7, 4.4), base + Vector3(1.5, 2.9, -1.5), folder.path_join("threads.png"))
 		await _shot(cam, base + Vector3(-9.5, 5.0, 8.4), base + Vector3(1.0, 0.6, 0.5), folder.path_join("overview.png"))
+		var stickers: Node3D = game.building.content.exhibits.get("%d/%s" % [floor, "argument-stickers"])
+		if stickers != null:
+			await _shot(cam, stickers.global_position + Vector3(0.6, 1.5, 3.4), stickers.global_position + Vector3(0, 1.35, 0), folder.path_join("stickers.png"))
+			await _shot(cam, stickers.global_position + Vector3(-2.6, 1.6, 1.5), stickers.global_position + Vector3(0.6, 1.3, 0.3), folder.path_join("stickers_side.png"))
+		checks.append({"check": "the thread words lie on text tape along the floor, one strip a thread", "ok": int(s.tapes) == int(s.threads), "tapes": int(s.tapes)})
+		await _shot(cam, base + Vector3(-1.0, 1.65, 5.2), base + Vector3(-0.6, 0.0, 3.2), folder.path_join("tape.png"))
 		if grid != null and grid.has_method("cell_point"):
 			var g: Dictionary = grid.state()
 			checks.append({"check": "the grid shows the workbench's four sets, and the opposite of the diagonal is not one of its rows", "ok": Array(g.rows) == ["0000", "1000", "1100", "1110"] and str(g.new_row) == "1111"

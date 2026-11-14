@@ -50757,6 +50757,22 @@
             "stage": "new_row",
             "editor_label": "The grid and the row that is not on it | the workbench's four sets as a 4 x 4 floor grid, the opposite of the diagonal on a plank outside; EVERYTHING carries it in"
           }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NE",
+          "position": [
+            3.4,
+            -6.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_russell",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_russell)"
+          }
         }
       ],
       "props": [],
@@ -50921,6 +50937,22 @@
               4.6
             ],
             "editor_label": "The hall's argument on cardboard | plates, stickers and red threads round the hero, lettered from commons/data/arguments/Godel_Incompleteness.json; a stand-in until the sticker app's cardboard lands"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NE",
+          "position": [
+            0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_godel",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_godel)"
           }
         }
       ],

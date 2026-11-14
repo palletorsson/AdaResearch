@@ -9,7 +9,8 @@ extends Node3D
 ## This work only stands it up: each PLATE a sheet of cardboard propped on two crates, its notes in marker on the
 ## front and in pink on the back; its STICKERS stuck along the bottom (yellow: a claim of mine, red: what it is not,
 ## blue: a question I still have, white: the hall text, word for word); a pole behind each plate, and between the
-## poles the red THREADS, each with its word on a tag; two work lights and a ring of tape for the HERO.
+## poles the red THREADS, each with its word on a tag and the same word printed on TEXT TAPE along the floor from
+## plate to plate (the tape rolls' printed strip); two work lights and a ring of tape for the HERO.
 ##
 ## It is a stand-in and says so: the sticker app's cardboard constructions (commons/data/stickers/constructions.json:
 ## walls you can stick on, peel from and scribble on, in SVG, three.js and VR) are the real medium, and their VR
@@ -20,6 +21,7 @@ extends Node3D
 ## `hall` is the axis: which hall's argument stands here. The file gives every place in the floor's own frame, so
 ## the row stands at [0, 0] with facing 0.
 const City := preload("res://algorithms/graphtheory/prefab_city.gd")
+const Strip := preload("res://commons/artifacts/tape_roll/strip.gd")
 const DIR := "res://commons/data/arguments/"
 const NOTE_FONT := "res://commons/font/handwriting/PatrickHand.ttf"
 const TITLE_FONT := "res://commons/font/handwriting/ArchitectsDaughter.ttf"
@@ -44,6 +46,7 @@ var _city = City.new()
 var _doc: Dictionary = {}
 var _root: Node3D
 var _tops := {}
+var _feet := {}
 var _used := {}
 var _counts := {"plates": 0, "notes": 0, "stickers": 0, "threads": 0}
 var _fonts := {}
@@ -86,6 +89,7 @@ func _build() -> void:
 	_root.position = Vector3(-stands_at.x, 0, -stands_at.y)
 	add_child(_root)
 	_tops.clear()
+	_feet.clear()
 	_used.clear()
 	_counts = {"plates": 0, "notes": 0, "stickers": 0, "threads": 0}
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(DIR + hall + ".json"))
@@ -152,6 +156,7 @@ func _plate(plate: Dictionary) -> void:
 	for side in [-1.0, 1.0]: _city.part(holder, "crate", Vector3(side * 0.38, 0, -0.42), _jitter(str(plate.get("id", "")) + str(side), 14.0), Vector3(0.5, 0.5, 0.5), false)
 	_city.part(holder, "timber_plank_2m", Vector3(0, 0.3, -0.36), 0, Vector3(0.05, POLE - 0.3, 0.18), false)
 	_tops[str(plate.get("id", ""))] = _root.to_local(holder.to_global(Vector3(0, POLE, -0.36)))
+	_feet[str(plate.get("id", ""))] = _root.to_local(holder.to_global(Vector3(0, 0, 0.55)))
 	# the front, in marker
 	var left: float = -PLATE_W * 0.5 + 0.07
 	var wide: float = PLATE_W - 0.14
@@ -253,6 +258,17 @@ func _thread(thread: Dictionary) -> void:
 	var along: float = 0.34 + 0.32 * float(hash(a + b) % 100) / 100.0
 	tag.position = from.lerp(to, along) - Vector3(0, sag * 4.0 * along * (1.0 - along) + 0.12, 0)
 	_root.add_child(tag)
+	# the same word on TEXT TAPE along the floor, from the foot of one plate to the foot of the other: the printed
+	# tape of the tape rolls (commons/artifacts/tape_roll/strip.gd), which prints a note along its own length
+	if _feet.has(a) and _feet.has(b):
+		var strip: MeshInstance3D = Strip.new()
+		strip.set("tape_width", 0.075)
+		var phrase := str(thread.get("word", "")) + "   ·   "
+		strip.set("print_source", func(_from: Vector3, _to: Vector3, _length: float) -> String: return phrase)
+		strip.position.y = 0.0015 * float(int(_counts["threads"]) % 12)
+		_root.add_child(strip)
+		strip.call("draw_surface_path", PackedVector3Array([_feet[a], _feet[b]]), Vector3.UP)
+		_counts["tapes"] = int(_counts.get("tapes", 0)) + 1
 	_counts["threads"] = int(_counts["threads"]) + 1
 
 
@@ -284,7 +300,7 @@ func _hero(hero: Dictionary) -> void:
 func state() -> Dictionary:
 	var tops := {}
 	for id in _tops: tops[id] = [snappedf((_tops[id] as Vector3).x, 0.01), snappedf((_tops[id] as Vector3).z, 0.01)]
-	return {"hall": hall, "title": str(_doc.get("title", "")), "plates": int(_counts["plates"]), "notes": int(_counts["notes"]), "stickers": int(_counts["stickers"]), "threads": int(_counts["threads"]),
+	return {"hall": hall, "title": str(_doc.get("title", "")), "plates": int(_counts["plates"]), "notes": int(_counts["notes"]), "stickers": int(_counts["stickers"]), "threads": int(_counts["threads"]), "tapes": int(_counts.get("tapes", 0)),
 		"tops": tops, "written": (_doc.get("plates", []) as Array).size(), "stickers_written": (_doc.get("stickers", []) as Array).size(), "threads_written": (_doc.get("threads", []) as Array).size(),
 		"prefab_parts": int(_city.parts), "build_ms": _build_ms}
 
