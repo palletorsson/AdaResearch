@@ -49357,6 +49357,22 @@
             "ground": "finite",
             "editor_label": "Fresh ground | the tutorial's energy field for a body: 64 timber panels, twelve ball bodies; step on and the clock runs - a panel pays whoever reaches it, once; you are one of the bodies"
           }
+        },
+        {
+          "id": "breeding-yard",
+          "artifact": "prefab_breeder",
+          "station": "NW",
+          "position": [
+            -18.0,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "judge": "visitor",
+            "editor_label": "The breeding yard | six forms grown from prefab genomes, west of shaft A, facing east; stand on a pad to keep one and breed five children from it; KEEP writes a recipe"
+          }
         }
       ],
       "props": [],
@@ -49367,6 +49383,13 @@
           "position": [
             2.6,
             6.9
+          ]
+        },
+        {
+          "label": "WEST / THE BREEDING YARD\nStand in front of the form you like. It has children.",
+          "position": [
+            -9.5,
+            6.2
           ]
         }
       ],

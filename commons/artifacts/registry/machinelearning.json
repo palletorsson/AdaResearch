@@ -44,6 +44,52 @@
         }
       }
     },
+    "prefab_breeder": {
+      "lookup_name": "prefab_breeder",
+      "map_ready": true,
+      "name": "The Breeding Yard",
+      "class_name": "",
+      "scene": "res://algorithms/machinelearning/prefab_breeder/prefab_breeder.tscn",
+      "description": "New forms bred from the tower's own prefabs. Six forms stand in a row, each grown from a genome whose genes are ten of the spatial lab's inputs: which prefab, on which face of which earlier part it sits, how big, which way up, and whether the whole is mirrored. Standing still on the pad in front of one keeps it and turns the other five into its varied children (one to three genes changed), as visitors chose in Karl Sims's Galapagos. Nothing is trained: something selects, and the axis judge is who - visitor; sentence (a written taste: TALL 2 points a metre, MIRRORED 3, FEW KINDS -1 a kind, choosing every two and a half seconds while a body stands on its plate); nobody (one kept by lot). KEEP puts the last chosen form on a shelf behind the row and writes it as a recipe file - genome and parts, each a prefab id with a place, a turn and an envelope - that the lab adapter can build again; kept recipes are read back when the floor is built. They are proposals, not catalogue entries.",
+      "category": "machinelearning",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "machinelearning",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "evolution",
+        "interactive-evolution",
+        "selection",
+        "genome",
+        "prefabs",
+        "generative",
+        "walkable"
+      ],
+      "qfep_connection": "A written taste and a visitor's choice give selection different histories; neither speaks for everyone. The yard keeps what was chosen and says who chose it.",
+      "dev_themes": [
+        "machine-learning",
+        "evolution"
+      ],
+      "dna": {
+        "axes": {
+          "judge": [
+            "visitor",
+            "sentence",
+            "nobody"
+          ]
+        },
+        "fixture": {
+          "generations": 12,
+          "keep_folder": "user://bred_prefabs_bench"
+        },
+        "predicted_degeneracy": {
+          "pair": "judge: visitor ~ nobody",
+          "percent": 3.0,
+          "arithmetic": "With the fixture's twelve generations the visitor's yard is the six founders (a visitor cannot choose in advance), nobody's is twelve generations of drift from one of them, the sentence's is six tall mirrored towers of one or two kinds. visitor and nobody are both unselected assemblies of three to seven parts on the same six plots: each form covers about a third of its 2 x 2 m plot from the bench's standpoint and the two sets share no silhouette, so about 2 x 6 x 1.3 = 16 square metres differ of a yard of 15 x 8 that fills about half the frame: 6 %; a flat rasteriser merges thin planks and panels, so 3 % as the floor."
+        }
+      }
+    },
     "vogue_timeline": {
       "lookup_name": "vogue_timeline",
       "name": "Vogue — a phrase of your own",
