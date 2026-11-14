@@ -49341,11 +49341,35 @@
               "note": "8 -> 10 m: the evolved-creatures field stands wholly past the column row."
             }
           }
+        },
+        {
+          "id": "fresh-ground",
+          "artifact": "fresh_ground",
+          "station": "SW",
+          "position": [
+            0,
+            -0.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "ground": "finite",
+            "editor_label": "Fresh ground | the tutorial's energy field for a body: 64 timber panels, twelve ball bodies; step on and the clock runs - a panel pays whoever reaches it, once; you are one of the bodies"
+          }
         }
       ],
       "props": [],
       "impact_cells": [],
-      "route": [],
+      "route": [
+        {
+          "label": "AHEAD / FRESH GROUND\nStep onto the panels. You are one of the bodies.",
+          "position": [
+            2.6,
+            6.9
+          ]
+        }
+      ],
       "supply_leads": false
     },
     {

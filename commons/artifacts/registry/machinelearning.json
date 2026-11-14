@@ -1,5 +1,49 @@
 {
   "artifacts": {
+    "fresh_ground": {
+      "lookup_name": "fresh_ground",
+      "map_ready": true,
+      "name": "Fresh Ground",
+      "class_name": "",
+      "scene": "res://algorithms/machinelearning/fresh_ground/fresh_ground.tscn",
+      "description": "The tutorial's energy field at the size of a body, and the visitor is one of the bodies. Sixty-four timber panels, a metre each; twelve bodies - trace balls, a colour a family, as big as their energy - wait on them. The clock starts when the visitor steps on. A panel under a body pays that body and is gone; energy drains with time; over the threshold a body divides. The visitor is paid, drained and divided by the same numbers (a pink disc under the feet is the visitor's energy, pink balls the visitor's children). The rule is the tutorial's own model (ml-environment/population.gd: reset, step, available, make_body and its constants). Axis ground: finite (the floor is eaten in about eight seconds and the last body stops near twenty-five), returns (a panel comes back after four seconds: the field carries thirty-two bodies), barren (nothing is laid: ten seconds). Two plates begin again with the next seed. Built from the tower's prefabs: timber panels let into the floor, trace balls, traffic pyramids.",
+      "category": "machinelearning",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "machinelearning",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "evolution",
+        "selection",
+        "energy",
+        "environment",
+        "population",
+        "walkable"
+      ],
+      "qfep_connection": "No judge ranks the bodies and still something selects: the ground. Every panel a visitor takes is one another body did not get.",
+      "dev_themes": [
+        "machine-learning",
+        "evolution"
+      ],
+      "dna": {
+        "axes": {
+          "ground": [
+            "finite",
+            "returns",
+            "barren"
+          ]
+        },
+        "fixture": {
+          "prerun": 12
+        },
+        "predicted_degeneracy": {
+          "pair": "ground: finite ~ barren",
+          "percent": 1.0,
+          "arithmetic": "The fixture runs the model twelve seconds with nobody on the field. finite is then bare floor with about twenty-nine balls still alive, barren is bare floor with none (twelve bodies with 1.5 energy draining 0.15 a second stop at ten seconds). They differ by the balls: about 29 x 0.1 square metres = 3 square metres of a field of 64 that fills about half the frame: 2.3 %; a flat rasteriser sees small balls poorly, so 1 % as the floor. returns differs from both by some twenty panels of a square metre each."
+        }
+      }
+    },
     "vogue_timeline": {
       "lookup_name": "vogue_timeline",
       "name": "Vogue — a phrase of your own",
