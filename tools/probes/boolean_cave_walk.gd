@@ -82,16 +82,27 @@ func _hit(target: Node3D, from: Vector3, toward: Vector3, mask := 1 << 20) -> Di
 	return target.get_world_3d().direct_space_state.intersect_ray(q)
 
 
+## Until everything painted is cut in (a chunk a frame), then two physics frames for the shapes to be met.
+func _settled(work: Node3D) -> void:
+	var guard := 0
+	while (not work.settled() or work._loading) and guard < 2000:
+		await process_frame
+		guard += 1
+	await physics_frame
+	await physics_frame
+
+
 func _hold(work: Node3D, from: Vector3, toward: Vector3, seconds: float) -> int:
 	var target: Node3D = work.cave()
 	var before: int = work.state().stamps
 	pointer.global_position = from
+	pointer.look_at(toward, Vector3.UP)                # the drill needs the pointer still aimed at where it began
 	var first := _hit(target, from, toward)
 	if first.is_empty() or first.collider != target: return -1
 	_report(XRToolsPointerEvent.Type.PRESSED, target, first.position)
 	await create_timer(seconds).timeout
 	_report(XRToolsPointerEvent.Type.RELEASED, target, first.position)
-	for i in 3: await physics_frame
+	await _settled(work)
 	return int(work.state().stamps) - before
 
 
@@ -187,12 +198,13 @@ func run() -> void:
 		_report(XRToolsPointerEvent.Type.PRESSED, target, first.position)
 		for i in 30:
 			var aim: Vector3 = mid + small.global_basis * Vector3(-0.3 + i * 0.02, 0.1 - 0.14 * sin(i * 0.35), 0.5)
+			pointer.look_at(aim, Vector3.UP)
 			await physics_frame
 			var h := _hit(target, from, aim)
 			if not h.is_empty(): _report(XRToolsPointerEvent.Type.MOVED, target, h.position)
 			await create_timer(0.06).timeout
 		_report(XRToolsPointerEvent.Type.RELEASED, target, first.position)
-		for i in 3: await physics_frame
+		await _settled(small)
 		painted = int(small.state().stamps)
 	await _shot(small.to_global(Vector3(0.3, 1.32, 1.25)), small.to_global(Vector3(0.0, 1.15, 0.4)), folder.path_join("small_painted.png"), 42.0)
 	# the groove reads as one: the stamps' centres spread across the face, not stacked in one place

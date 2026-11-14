@@ -24,9 +24,10 @@ extends Node3D
 ## collision shape, and the calculator is emptied - so Godot never runs a second, deferred pass at the end of the frame.
 ## Measured: a pass costs about 2 ms per live operand and about 9 us per triangle of the cave it cuts (43 ms at 4.5k
 ## triangles, 130 ms at 13k), so the block is cut in chunks (big 4 x 4, small 2 x 2) and a stamp re-cuts only the chunks
-## it reaches: the cost of a stroke does not grow with the cave. A stamp shows at once as a see-through mark in its
-## stroke's colour; the cut follows at the next flush (small: a few times a second; big: every 1.5 s and when the stroke
-## ends).
+## it reaches: the cost of a stroke does not grow with the cave; and a frame cuts at most ONE chunk, with at most CUT_MAX
+## of its stamps (a review measured 50 - 182 ms when one frame cut every chunk six stamps reached). A stamp shows at once
+## as a see-through mark in its stroke's colour; it is handed to its chunks at the next flush (small: a few times a
+## second; big: every 1.5 s and when the stroke ends) and cut over the frames that follow.
 ##
 ## The cave a body sees and walks on is one MeshInstance3D per chunk and ONE StaticBody3D with a CollisionShape3D per
 ## chunk (the baked trimesh, back faces colliding), on layer 1 (a body walks on it) and layer 21 (the pointables, which
@@ -36,8 +37,10 @@ extends Node3D
 ## cave (a held desktop press reports camera-plane points off the block).
 ##
 ## UNDO returns to the cave as it was before the last stroke (the last ten strokes keep a snapshot; older ones are
-## rebuilt from the block). What is painted is kept (export keep): every stamp is saved to
-## user://boolean_cave/<key>.json when a stroke ends and replayed, in batches a frame apart, when the floor loads.
+## rebuilt from the block); UNDO and RESET wait while the one who presses stands inside the big block, where the solid
+## coming back would shut them in. A BUILD is refused where it would close over the builder's body. What is painted is
+## kept (export keep): every stamp is saved to user://boolean_cave/<key>.json - the key names the floor by its MAP, so a
+## floor inserted below does not lose it - when a stroke ends, and replayed, a chunk a frame, when the floor loads.
 
 const SIZES := ["small", "big"]
 const VERBS := ["carve", "build"]
@@ -52,7 +55,10 @@ const DRILL := 0.33                   # how much further along the aim a stamp m
 const SNAPSHOTS := 10                 # strokes UNDO can step back through without rebuilding
 const BATCH := 12                     # stamps cut in per frame when a cave is rebuilt or loaded
 const HOLD := 0.2                     # seconds without a pointer event before a held brush drills on its own
-const STALE := 10.0                   # seconds without a pointer event after which a stroke is over
+const STALE := 10.0                   # seconds without a pointer hit on the cave after which a stroke is over
+const CUT_MAX := 8                    # stamps one chunk takes in one cut (one cut a frame)
+const BODY := 1.75                    # from the eyes to the feet: the body a build must not close over
+const INSIDE_MARGIN := 0.5            # how far round the big block UNDO / RESET count you as inside it
 const FLOOR := 0.04                   # a big carve's floor over the slab: block material, in the stroke's colour
 const HEADROOM := 2.2                 # a big carve is never lower than this, so a body fits where it carved
 const POINTABLE := 1 << 20            # layer 21: what the crosshair and the VR pointer reach
@@ -93,12 +99,19 @@ var _materials := {}
 var _built := ""
 var _loading := false
 var _key := ""
+var _gen := 0                        # a build or replay supersedes the replay before it
+var _snapshot_due := false           # a stroke ended: snapshot once its cuts are in
+var _aim_hit := Vector3.INF          # where the stroke's pointer last met the cave (INF: off it)
+var _cut_next := 0                   # round robin over the chunks waiting to be cut
+var _notice := ""
 
 
 func _ready() -> void:
 	for key in ["size", "verb", "shape", "brush", "keep"]:
 		if has_meta("config_" + key): _take({key: get_meta("config_" + key)})
-	_build()
+	# a frame later: the tower adds a work and THEN configures it, so building now would build the default size and
+	# load its save twice (a review measured every stamp after the first batch doubled)
+	_build.call_deferred()
 
 
 func _take(config: Dictionary) -> void:
@@ -124,6 +137,10 @@ func _build() -> void:
 		_refresh_label()
 		return
 	for child in get_children(): child.queue_free()
+	_gen += 1
+	_loading = false
+	_painting = false
+	_snapshot_due = false
 	_queue.clear()
 	_snapshots.clear()
 	_chunks.clear()
@@ -203,7 +220,7 @@ func _make_chunks(spec: Dictionary) -> void:
 			col.name = view.name
 			_solid.add_child(col)
 			var chunk := {"lo": lo, "hi": hi, "clip_lo": clip_lo, "clip_hi": clip_hi, "mesh": null, "shape": null, "view": view, "col": col,
-				"block_mesh": null, "block_shape": null}
+				"block_mesh": null, "block_shape": null, "pending": []}
 			var out := _compute(chunk, [])
 			chunk.block_mesh = out[0]
 			chunk.block_shape = out[1]
@@ -241,14 +258,17 @@ func pointer_event(event: Variant) -> void:
 			var at := _surface(from, event.position)
 			if at != Vector3.INF and mine: _show_ghost(at, (at - from).normalized())
 			if _painting and who == _pointer:
-				_last_event = _now()
-				if at != Vector3.INF: _paint(at, (at - from).normalized(), from)
+				_aim_hit = at
+				if at != Vector3.INF:
+					_last_event = _now()
+					_paint(at, (at - from).normalized(), from)
 		XRToolsPointerEvent.Type.PRESSED:
 			if _painting: return
 			var from := _origin(who, event.position)
 			var at := _surface(from, event.position)
 			_pointer = who
 			begin_stroke()
+			_aim_hit = at
 			if at != Vector3.INF: _paint(at, (at - from).normalized(), from)
 		XRToolsPointerEvent.Type.RELEASED:
 			if _painting and who == _pointer: end_stroke()
@@ -280,6 +300,8 @@ func begin_stroke() -> void:
 	_last_centre = Vector3.INF
 	_last_time = -1.0
 	_last_event = _now()
+	_aim_hit = Vector3.INF
+	_notice = ""
 
 
 func end_stroke() -> void:
@@ -287,28 +309,49 @@ func end_stroke() -> void:
 	_painting = false
 	_pointer = null
 	_flush()
-	_snapshot()
+	_snapshot_due = true
 	if keep: _save()
 	_refresh_label()
 
 
-## A brush held still keeps drilling at its rate - held still meaning the stroke's pointer has reported nothing for HOLD
-## seconds and still aims where it last painted (a desktop pointer sends nothing while the mouse rests); between a moving
-## stroke's events it does not (measured in the tower: drilling between events took the stamps of a moving stroke and
-## made one deep hole instead of a groove). A stroke whose pointer has gone quiet for STALE seconds is over. And the queue
-## is cut in on time.
+## A brush held still keeps drilling at its rate - held still meaning the stroke's pointer has met the cave nowhere new for
+## HOLD seconds and is still aimed at where the drill began (a desktop pointer sends nothing while the mouse rests);
+## between a moving stroke's events it does not (measured in the tower: drilling between events took the stamps of a
+## moving stroke and made one deep hole instead of a groove). A stroke ends when its pointer has not met the cave for
+## STALE seconds, and a desktop stroke when the left button is up (after Escape the desktop hand stops passing mouse
+## events on, so the release can be lost). One chunk is cut a frame; once all is cut, the marks go and the stroke's
+## snapshot is taken.
 func _process(_delta: float) -> void:
 	var now := _now()
 	if _painting:
-		if now - _last_event >= STALE or not is_instance_valid(_pointer):
+		if not is_instance_valid(_pointer) or now - _last_event >= STALE:
 			end_stroke()
-		elif _last_hit != Vector3.INF and now - _last_event >= HOLD:
+		elif _pointer.has_method("is_dragging") and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			end_stroke()
+		elif _last_hit != Vector3.INF and now - _last_event >= HOLD and _still_on(_last_hit):
 			var from := _pointer.global_position
-			var to_hit := (_last_hit - from).normalized()
-			if to_hit.dot(-_pointer.global_basis.z) > 0.99 or not _pointer is XRToolsFunctionPointer:
-				_paint(_last_hit, to_hit, from)
+			_paint(_last_hit, (_last_hit - from).normalized(), from)
 	if not _queue.is_empty() and not _loading and now - _last_flush >= float(SPEC[size].flush):
 		_flush()
+	if _pending() > 0:
+		_cut_one()
+	elif _queue.is_empty():
+		if _trail != null and _trail.get_child_count() > 0: _clear_trail()
+		if _snapshot_due:
+			_snapshot_due = false
+			_snapshot()
+
+
+## Is the stroke's pointer still on `anchor`? Its ray is its -Z (the VR FunctionPointer's, and the desktop hand's, which
+## copies the camera), and where it last met the cave must be within a quarter brush of it, across the aim (the surface
+## behind a drill recedes ALONG the aim). Without this a desktop press held off the block drilled the old spot on.
+func _still_on(anchor: Vector3) -> bool:
+	var from := _pointer.global_position
+	var aim := (anchor - from).normalized()
+	if aim.dot(-_pointer.global_basis.z) < 0.99: return false
+	if _aim_hit == Vector3.INF: return false
+	var d := _aim_hit - anchor
+	return (d - aim * d.dot(aim)).length() < radius() * 0.25
 
 
 ## One step of a stroke, at most at the brush's rate. Moved across the surface, a stamp lands where the ray meets it;
@@ -325,14 +368,26 @@ func _paint(at: Vector3, aim: Vector3, from: Vector3) -> void:
 		if lateral.length() < r * 0.25:
 			if verb == "build": return                 # a build held still does not pile up toward the builder
 			centre = _last_centre + aim * r * DRILL
+			at = _last_hit                             # the drill keeps its anchor: a slow sweep adds up to a move
 		else:
 			var advance := (centre - _last_centre).dot(aim)
 			if advance > r * DRILL: centre -= aim * (advance - r * DRILL)
-	if verb == "build" and centre.distance_to(from) < r + 0.6: return    # never build over the one who builds
+	if verb == "build" and _over_body(centre, r, from): return          # never build over the one who builds
 	stamp(_cave.to_local(centre), verb, shape, r, _stroke, _cave.global_basis.inverse() * aim)
 	_last_hit = at
 	_last_centre = centre
 	_last_time = now
+
+
+## Would a build here close over the one who builds? Measured against the body - the camera down BODY metres to the
+## feet - with the shape's corner reach (a review: measured from the pointer alone, a build aimed 0.9 m ahead on the
+## floor reached the legs and shoved the body). With no camera (a bench), the pointer stands in for the eyes.
+func _over_body(centre: Vector3, r: float, from: Vector3) -> bool:
+	var reach := r * (sqrt(3.0) if shape == "cube" else (sqrt(2.0) if shape == "cylinder" else 1.0)) + 0.35
+	var cam: Camera3D = get_viewport().get_camera_3d() if is_inside_tree() else null
+	var eye := cam.global_position if cam != null else from
+	var feet := eye - Vector3.UP * BODY
+	return Geometry3D.get_closest_point_to_segment(centre, eye, feet).distance_to(centre) < reach
 
 
 ## One boolean, in the cave's frame (also the replay's and a probe's way in): queued, marked at once in its stroke's
@@ -420,27 +475,50 @@ func _operands(rec: Dictionary) -> Array:
 	return nodes
 
 
-## Cut the queued stamps in: each chunk they reach, once, with all of them.
+## Hand the queued stamps to the chunks they reach; the cutting is spread over the frames that follow (_cut_one).
 func _flush() -> void:
 	_last_flush = _now()
-	_clear_trail()
 	if _queue.is_empty(): return
 	for chunk in _chunks:
 		var cell := AABB(chunk.clip_lo, chunk.clip_hi - chunk.clip_lo)
-		var mine := _queue.filter(func(rec): return _reach(rec).intersects(cell))
+		for rec in _queue:
+			if _reach(rec).intersects(cell): chunk.pending.append(rec)
+	_queue.clear()
+
+
+## Cut ONE chunk with up to CUT_MAX of the stamps waiting for it, the chunks taken in turn.
+func _cut_one() -> void:
+	var n := _chunks.size()
+	for step in n:
+		var chunk: Dictionary = _chunks[(_cut_next + step) % n]
+		if chunk.pending.is_empty(): continue
+		_cut_next = (_cut_next + step + 1) % n
+		var recs: Array = chunk.pending.slice(0, CUT_MAX)
+		chunk.pending = chunk.pending.slice(CUT_MAX)
 		if chunk.mesh == null and chunk.block_mesh != null:
 			# carved away entirely: a carve has nothing to take from, and CSG would read a first carve as a solid -
 			# so an empty chunk takes the stamps from its first build on
 			var first_build := -1
-			for i in mine.size():
-				if mine[i].v == "build":
+			for i in recs.size():
+				if recs[i].v == "build":
 					first_build = i
 					break
-			mine = mine.slice(first_build) if first_build >= 0 else []
-		if mine.is_empty(): continue
-		var out := _compute(chunk, mine)
+			recs = recs.slice(first_build) if first_build >= 0 else []
+		if recs.is_empty(): return
+		var out := _compute(chunk, recs)
 		_show_chunk(chunk, out[0], out[1])
-	_queue.clear()
+		return
+
+
+func _pending() -> int:
+	var n := 0
+	for chunk in _chunks: n += chunk.pending.size()
+	return n
+
+
+## Everything painted is cut in.
+func settled() -> bool:
+	return _queue.is_empty() and _pending() == 0
 
 
 ## The calculator: one chunk as it is (or its cell of the block), these stamps and the chunk's own cell, ONE forced pass,
@@ -485,10 +563,19 @@ func _snapshot() -> void:
 	while _snapshots.size() > SNAPSHOTS + 1: _snapshots.pop_front()
 
 
-## Take the last stroke back: to the snapshot taken before it, else rebuilt from the block without it.
+## Take the last stroke back: to the snapshot taken before it, else rebuilt from the block without it. Not while the
+## one who presses stands inside the big block: the solid coming back would shut them in (a review measured a body left
+## in an invisible 1.9 x 1.75 m cell).
 func undo() -> void:
 	if _stamps.is_empty() or _loading or _painting: return
+	if _inside():
+		_notice = "Step out of the cave first: undo would close it around you."
+		_refresh_label()
+		return
 	_flush()
+	while _pending() > 0:
+		await get_tree().process_frame
+	_snapshot_due = false
 	var last := int(_stamps.back().k)
 	var rest := _stamps.filter(func(s): return int(s.k) != last)
 	var found := -1
@@ -503,35 +590,59 @@ func undo() -> void:
 	else:
 		await _replay(rest)
 	_strokes = maxi(0, last)
+	_notice = ""
 	if keep: _save()
 	_refresh_label()
 
 
 func reset() -> void:
 	if _loading: return
+	if _inside():
+		_notice = "Step out of the cave first: reset would close it around you."
+		_refresh_label()
+		return
 	await _replay([])
 	_strokes = 0
+	_notice = ""
 	if keep: _save()
 	_refresh_label()
 
 
-## Rebuild from the block: every stamp again, BATCH a frame (a long cave does not stall the floor's arrival).
+## Is the one who presses inside the big block (or within INSIDE_MARGIN of it)?
+func _inside() -> bool:
+	if not SPEC[size].grounded or not is_inside_tree(): return false
+	var cam := get_viewport().get_camera_3d()
+	if cam == null: return false
+	var block: Vector3 = SPEC[size].block
+	var box := AABB(Vector3(-block.x * 0.5 - INSIDE_MARGIN, -0.5, -block.z * 0.5 - INSIDE_MARGIN),
+		Vector3(block.x + 2.0 * INSIDE_MARGIN, block.y + 1.0, block.z + 2.0 * INSIDE_MARGIN))
+	return box.has_point(_view.to_local(cam.global_position))
+
+
+## Rebuild from the block: BATCH stamps at a time, each batch cut a chunk a frame before the next is handed out. A newer
+## build or replay supersedes this one at its next frame.
 func _replay(stamps: Array) -> void:
+	_gen += 1
+	var gen := _gen
 	_loading = true
 	_painting = false
 	_queue.clear()
+	for chunk in _chunks: chunk.pending.clear()
 	_clear_trail()
 	_stamps.clear()
 	_reset_block()
 	_snapshots.clear()
-	for rec in stamps:
-		_stamps.append(rec)
-		_queue.append(rec)
-		if _queue.size() >= BATCH:
-			_flush()
+	_snapshot_due = false
+	var i := 0
+	while i < stamps.size():
+		for rec in stamps.slice(i, i + BATCH):
+			_stamps.append(rec)
+			_queue.append(rec)
+		i += BATCH
+		_flush()
+		while _pending() > 0:
 			await get_tree().process_frame
-			if not is_inside_tree(): return
-	_flush()
+			if gen != _gen or not is_inside_tree(): return
 	_strokes = 0
 	for rec in _stamps: _strokes = maxi(_strokes, int(rec.k) + 1)
 	_snapshot()
@@ -662,8 +773,9 @@ func press(key: String) -> void:
 
 func _refresh_label() -> void:
 	if _label == null: return
-	_label.text = "PAINT YOUR OWN CAVE\n%s with a %s, %d cm   -   %d strokes, %d booleans" % [
-		"DIFFERENCE: carve" if verb == "carve" else "UNION: build", shape, roundi(radius() * 100.0), _strokes, _stamps.size()]
+	_label.text = "PAINT YOUR OWN CAVE\n%s with a %s, %d cm   -   %d strokes, %d booleans%s" % [
+		"DIFFERENCE: carve" if verb == "carve" else "UNION: build", shape, roundi(radius() * 100.0), _strokes, _stamps.size(),
+		("\n" + _notice) if _notice != "" else ""]
 	for key in _buttons:
 		var on: bool = key == verb or key == shape
 		var cap: MeshInstance3D = _buttons[key].get_node("Cap")
@@ -686,7 +798,8 @@ func _show_ghost(at: Vector3, aim: Vector3) -> void:
 	_ghost.global_position = at + aim * r * (0.55 if verb == "carve" else -0.2)
 	_ghost.global_basis = _cave.global_basis
 	_ghost.visible = true
-	var key := "%s|%.3f|%d" % [shape, r, _strokes % HUES.size()]
+	var k := (_stroke if _painting else _strokes) % HUES.size()
+	var key := "%s|%.3f|%d" % [shape, r, k]
 	if key == _ghost_key: return
 	_ghost_key = key
 	var m: Mesh
@@ -710,7 +823,7 @@ func _show_ghost(at: Vector3, aim: Vector3) -> void:
 	var paint := StandardMaterial3D.new()
 	paint.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	paint.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	paint.albedo_color = Color(HUES[_strokes % HUES.size()], 0.28 if size == "small" else 0.16)   # a metre-wide brush, fainter
+	paint.albedo_color = Color(HUES[k], 0.28 if size == "small" else 0.16)   # a metre-wide brush, fainter
 	paint.cull_mode = BaseMaterial3D.CULL_DISABLED
 	paint.no_depth_test = true
 	_ghost.material_override = paint
@@ -756,13 +869,13 @@ func _mark_material(k: int) -> StandardMaterial3D:
 
 ## ---- keeping what is painted ----
 
-func _save_key() -> String:
+func _save_key(by_map := true) -> String:
 	var parts := []
 	var node: Node = self
 	for i in 3:
 		node = node.get_parent()
 		if node == null: break
-		parts.push_front(str(node.name))
+		parts.push_front(str(node.get_meta("map", node.name)) if by_map else str(node.name))
 	return "_".join(parts).validate_filename() + "_" + size
 
 
@@ -775,11 +888,19 @@ func _save() -> void:
 
 
 func _load() -> void:
+	if _loading: return
 	var path := "user://boolean_cave/%s.json" % _key
-	if not FileAccess.file_exists(path): return
+	var moved := false
+	if not FileAccess.file_exists(path):
+		# a save from before the key named the floor's map (it named the floor's index, which an insert below shifts)
+		var old := "user://boolean_cave/%s.json" % _save_key(false)
+		if old == path or not FileAccess.file_exists(old): return
+		path = old
+		moved = true
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not (data is Dictionary) or str(data.get("size", "")) != size: return
 	await _replay(data.get("stamps", []))
+	if moved and keep: _save()
 	_refresh_label()
 
 
@@ -796,7 +917,7 @@ func state() -> Dictionary:
 			var n := m.surface_get_array_index_len(s)
 			tris += (n if n > 0 else m.surface_get_array_len(s)) / 3
 	return {"size": size, "verb": verb, "shape": shape, "radius": snappedf(radius(), 0.001), "stamps": _stamps.size(),
-		"strokes": _strokes, "queued": _queue.size(), "live": _cave.get_child_count(), "snapshots": _snapshots.size(),
+		"strokes": _strokes, "queued": _queue.size(), "pending": _pending(), "live": _cave.get_child_count(), "snapshots": _snapshots.size(),
 		"carved": carved, "chunks": _chunks.size(), "triangles": tris, "key": _key}
 
 
