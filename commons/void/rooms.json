@@ -50721,6 +50721,42 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "Russell_Paradox",
+            "stands_at": [
+              0,
+              0
+            ],
+            "editor_label": "The hall's argument on cardboard | plates, stickers and red threads round the hero, lettered from commons/data/arguments/Russell_Paradox.json; a stand-in until the sticker app's cardboard lands"
+          }
+        },
+        {
+          "id": "diagonal-grid",
+          "artifact": "diagonal_grid",
+          "station": "SW",
+          "position": [
+            0,
+            1.8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "stage": "new_row",
+            "editor_label": "The grid and the row that is not on it | the workbench's four sets as a 4 x 4 floor grid, the opposite of the diagonal on a plank outside; EVERYTHING carries it in"
+          }
         }
       ],
       "props": [],
@@ -50866,6 +50902,26 @@
           "height": 1,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            0,
+            4.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "Godel_Incompleteness",
+            "stands_at": [
+              0,
+              4.6
+            ],
+            "editor_label": "The hall's argument on cardboard | plates, stickers and red threads round the hero, lettered from commons/data/arguments/Godel_Incompleteness.json; a stand-in until the sticker app's cardboard lands"
+          }
         }
       ],
       "props": [],

@@ -1,0 +1,284 @@
+{
+  "version": 1,
+  "hall": "Godel_Incompleteness",
+  "title": "True but unprovable: what is being said, and by whom? (worked out on cardboard)",
+  "note": "The authored thinking for one hall, in the first person, by the pass (Claude), for Palle's request of 2026-11-14 (see Russell_Paradox.json). Written to be laid out by the sticker app's cardboard constructions; stood in the tower meanwhile by the argument_floor artifact. 'at' is the floor's own frame in metres (x east, z south), 'yaw' in degrees. A sticker of kind 'quote' stands word for word in the hall text; every other kind is mine and may be wrong - the plates say where I am unsure.",
+  "hero": {
+    "row": "f2_provability_sorter_5_11",
+    "artifact": "provability_sorter",
+    "at": [0, 0],
+    "lights": [[-3.4, 3.6], [3.4, 3.6]],
+    "why": "The theorem pulls two words apart, TRUE and PROVABLE, and the sorter is the only work that shows them as two regions with a gap between. The machine and the plaque are about how the gap is found, the tower about what happens when you try to close it, the four small works about what checking can still do. Nothing in this hall proves the theorem - the hall says so - so the hero is the picture of what it claims.",
+    "staging": "The sorter stands in the middle of the floor. Two plates flank it (WHAT IT SAYS on its left, WHY 'TRUE' on its right); the threads run out from these two to the works round the walls and back to the tower behind the arrival."
+  },
+  "plates": [
+    {
+      "id": "says",
+      "title": "1  WHAT IT SAYS, AND ITS THREE CONDITIONS",
+      "by": "f2_provability_sorter_5_11",
+      "at": [-2.9, 2.3], "yaw": 40,
+      "front": [
+        "Take a theory. Three things must hold:",
+        "(a) its proofs can be CHECKED by rule - a machine could tell a proof from a non-proof;",
+        "(b) it can do ENOUGH ARITHMETIC;",
+        "(c) it does not prove falsehoods about the numbers.",
+        "Then there is a sentence about numbers that is TRUE and that this theory cannot PROVE.",
+        "I used to say this without the three conditions. Without them it is not a theorem, it is a mood."
+      ],
+      "back": [
+        "drop (a): take ALL true sentences as axioms. complete! but no rule can list them.",
+        "drop (b): small theories can be complete. the bench's 0, S0, SS0 system is decidable.",
+        "drop (c): a theory that proves everything proves this too. worthless."
+      ]
+    },
+    {
+      "id": "three_stops",
+      "title": "2  THREE WAYS A SEARCH STOPS",
+      "by": "f2_godel_sentence_machine_7_4",
+      "at": [3.0, -5.3], "yaw": 15,
+      "front": [
+        "The machine jams and says TRUE BUT UNPROVABLE. I believed it. I should not have.",
+        "A jam shows me one attempt ending. It could be:",
+        "SLOW - not enough steps yet (my bench: SSS0 with a budget of two);",
+        "BROKEN - a link missing in the candidate (the checker rejects it);",
+        "IMPOSSIBLE - no candidate will ever do.",
+        "Only the third is Goedel. And the third cannot be seen by watching a search. It has to be PROVED."
+      ],
+      "back": [
+        "the machine is a timed sculpture of an argument. so is this cardboard.",
+        "question for me: when I say 'I could not find it', which of the three do I mean?"
+      ]
+    },
+    {
+      "id": "find_check",
+      "title": "3  FINDING IS NOT CHECKING",
+      "by": "f2_synthesis_stand_2_8",
+      "at": [-3.2, 6.1], "yaw": 35,
+      "front": [
+        "A proof is a finite thing. Hand me one and I can check it step by step and be done.",
+        "Finding one is different: I may look for ever, rejecting candidates easily, each time.",
+        "Everything in this hall lives in that difference.",
+        "Condition (a) on plate 1 is only about checking. It promises nothing about finding.",
+        "So 'unprovable' never means 'we looked and gave up'. It means: among all the finite things that could be handed over, none passes the check."
+      ],
+      "back": [
+        "TRY + KEEP at the bench: write down what I expect BEFORE the step. leave the wrong guess in the record.",
+        "a revision of understanding has a history."
+      ]
+    },
+    {
+      "id": "trick",
+      "title": "4  HOW A SENTENCE GETS TO TALK ABOUT ITSELF",
+      "by": "f2_godel_statement_plaque_4_10",
+      "at": [12.3, 6.1], "yaw": -50,
+      "front": [
+        "Step 1. Give every symbol a number, so every formula and every proof is a number.",
+        "Step 2. 'p is a proof of f' is then a relation between two numbers - and it is ARITHMETIC. The theory can state it.",
+        "Step 3. So the theory can state: 'no number is a proof of formula number f'.",
+        "Step 4 (the hard one). Build f so that the formula it names is that very sentence.",
+        "Result: a sentence about numbers that, read through the code, says: I have no proof here.",
+        "Numbering alone does nothing. It is step 2 - arithmetic strong enough to FOLLOW a proof - that lets the inside talk about the inside."
+      ],
+      "back": [
+        "step 4 is the diagonal again (plate 10): feed a thing its own number.",
+        "I can say step 4. I could not carry it out on this cardboard. The hall links a course chapter; read it."
+      ]
+    },
+    {
+      "id": "why_true",
+      "title": "5  WHY 'TRUE'?  AND WHO SAYS SO?",
+      "by": "f2_provability_sorter_5_11",
+      "at": [2.9, 2.3], "yaw": -40,
+      "front": [
+        "G says: I have no proof in this theory.",
+        "Suppose it HAD a proof. The theory would be proving a sentence that says it has none: a falsehood. Condition (c) forbids that.",
+        "So it has no proof. But that is exactly what it says. So it is true.",
+        "Look who drew that conclusion: not the theory. Me, standing outside it, trusting (c).",
+        "'True but unprovable' is always said from one step outside, about a theory one trusts.",
+        "And the theory cannot hand me that trust itself: it cannot prove its own (c). (The second theorem. I am stating it, not showing it.)"
+      ],
+      "back": [
+        "the sorter's nested regions ASSUME soundness. the areas measure nothing.",
+        "so the gap on the sorter is not seen from inside the inner region. where am I standing when I see it?"
+      ]
+    },
+    {
+      "id": "tower",
+      "title": "6  ADD IT AS AN AXIOM? THE GAP MOVES UP",
+      "by": "f2_incompleteness_tower_9_11",
+      "at": [-2.7, 8.4], "yaw": 105,
+      "front": [
+        "Turn round. The tower is behind you.",
+        "Obvious repair: G is true, so add G as an axiom.",
+        "The new theory still meets (a), (b), (c). So it has its own G. Add that. Again.",
+        "Each platform holds what the one below could not prove.",
+        "This is not like Russell. There the repair worked, once, for good.",
+        "Here the repair works every time and is never finished. No list a rule can write is all of arithmetic's truths."
+      ],
+      "back": [
+        "the truths are all THERE (as a set). what does not exist is a RULE that lists them.",
+        "Russell: the totality does not exist. Goedel: it exists and cannot be generated. different absences."
+      ]
+    },
+    {
+      "id": "not_say",
+      "title": "7  WHAT IT DOES NOT SAY",
+      "by": "f2_provability_sorter_5_11",
+      "at": [-5.8, -1.6], "yaw": 75,
+      "front": [
+        "NOT: 'everything is uncertain'. It is a precise theorem about precise theories.",
+        "NOT: 'my conviction is true but unprovable'. Which language? which axioms? which rules? where is the argument?",
+        "NOT: 'proof is pointless'. The theorem is itself proved.",
+        "NOT: 'so minds beat machines'. That is an interpretation people argue about. It is not the theorem.",
+        "NOT: 'there are truths nobody can ever know'. G is known true - by stepping outside. It is unprovable IN THAT THEORY."
+      ],
+      "back": [
+        "every one of these I have heard said with Goedel's name on it. two of them I have said.",
+        "Hofstadter's 'I' as a strange loop: an analogy worth having. file under analogy."
+      ]
+    },
+    {
+      "id": "checking",
+      "title": "8  WHAT CHECKING CAN STILL DO (THIS ONE IS ABOUT ME)",
+      "by": "f2_critic_regress_stack_10_3",
+      "at": [-3.2, -5.3], "yaw": 20,
+      "front": [
+        "Four small works. Rice: no general test for what a program DOES - but this program, this property, often yes.",
+        "A gauge: its green means something only after I have seen it go red.",
+        "Critics: each sees something. Add one and the blind spot moves. It does not go.",
+        "A seam: the same question asked twice, the two answers side by side.",
+        "I am an AI writing fluent cardboard about incompleteness. So: what did I CHECK?",
+        "The quotes: a tool reads them against the hall text. The maths: standard results, stated not proved. Plate 4 step 4: not done here. That is the honest list."
+      ],
+      "back": [
+        "a limit on checking everything is not a licence to check nothing.",
+        "plant a fault in this cardboard and see if anyone finds it? (I have not. maybe someone should.)"
+      ]
+    },
+    {
+      "id": "blank",
+      "title": "9  HIDE THE GAP OR SHOW IT",
+      "by": "f2_print_gallery_recursion_10_5",
+      "at": [-12.3, 5.9], "yaw": 50,
+      "front": [
+        "A picture of the room, with the picture in it, and the picture in that.",
+        "Follow it inward: there is a place where the drawing cannot close on itself.",
+        "Escher left it blank and signed the blank.",
+        "That is the right manners for a system describing itself: say where the description stops.",
+        "The theory cannot prove its own soundness. The picture cannot draw its own centre. I cannot check my own fluency from inside it."
+      ],
+      "back": [
+        "three returns that are NOT the same: a repeated operation, a nested picture, a sentence about its own proof.",
+        "do not let the word 'self-reference' glue them together (Russell plate 2 again)."
+      ]
+    },
+    {
+      "id": "versus_russell",
+      "title": "10  RUSSELL'S GRID AGAIN - AND WHY NOTHING BREAKS THIS TIME",
+      "by": "f2_provability_sorter_5_11",
+      "at": [5.8, -1.6], "yaw": -75,
+      "front": [
+        "One floor up: a grid, a diagonal, a row that says the opposite. With 'everything' on the list it broke.",
+        "Here the same move: a sentence fed its own number, saying the opposite of 'I am provable'.",
+        "Why no contradiction?",
+        "Because 'provable' IS on the list: arithmetic can define it (plate 4 step 2).",
+        "'True' is NOT: arithmetic cannot define its own truth. If it could, 'I am not true' would be a sentence, and that is the liar - a contradiction.",
+        "So Goedel walks the one open path: say it with PROVABLE instead of TRUE, and the flipped row lands - true, and outside what can be proved."
+      ],
+      "back": [
+        "this answers my open question on Russell plate 7: truth's repair IS another outside (Tarski). stated, not proved, here.",
+        "choice / contradiction / reach (Russell plate 9). this is reach."
+      ]
+    }
+  ],
+  "stickers": [
+    {"id": "s-checkable", "plate": "says", "kind": "claim", "text": "(a) checkable"},
+    {"id": "s-arithmetic", "plate": "says", "kind": "claim", "text": "(b) enough arithmetic"},
+    {"id": "s-sound", "plate": "says", "kind": "claim", "text": "(c) proves no falsehood"},
+    {"id": "s-mood", "plate": "says", "kind": "not", "text": "without the conditions: a mood"},
+    {"id": "q-essential", "plate": "says", "kind": "quote", "a": "The assumptions and the phrase \"in that theory\" are essential.", "quote": "The assumptions and the phrase \"in that theory\" are essential.", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "q-three", "plate": "three_stops", "kind": "quote", "a": "a slow search, a broken search", "b": "and a proof that no search can succeed are three different things", "quote": "a slow search, a broken search and a proof that no search can succeed are three different things", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-slow", "plate": "three_stops", "kind": "claim", "text": "SLOW"},
+    {"id": "s-broken", "plate": "three_stops", "kind": "claim", "text": "BROKEN"},
+    {"id": "s-impossible", "plate": "three_stops", "kind": "claim", "text": "IMPOSSIBLE (must be proved)"},
+    {"id": "s-which", "plate": "three_stops", "kind": "question", "text": "which one do I mean?"},
+    {"id": "q-search-check", "plate": "find_check", "kind": "quote", "a": "Searching for such an object and checking one that has already been supplied are different tasks.", "quote": "Searching for such an object and checking one that has already been supplied are different tasks.", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-finite-thing", "plate": "find_check", "kind": "claim", "text": "a proof is a finite thing"},
+    {"id": "s-not-gave-up", "plate": "find_check", "kind": "not", "text": "NOT 'we looked and gave up'"},
+    {"id": "q-numbering", "plate": "trick", "kind": "quote", "a": "Numbering the strings alone would not provide this expressive capacity.", "quote": "Numbering the strings alone would not provide this expressive capacity.", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-follow-proof", "plate": "trick", "kind": "claim", "text": "arithmetic can follow a proof"},
+    {"id": "s-own-number", "plate": "trick", "kind": "claim", "text": "feed it its own number"},
+    {"id": "s-not-done", "plate": "trick", "kind": "question", "text": "step 4: said, not done here"},
+    {"id": "s-outside", "plate": "why_true", "kind": "claim", "text": "said from one step outside"},
+    {"id": "s-trust", "plate": "why_true", "kind": "claim", "text": "about a theory one trusts"},
+    {"id": "s-where", "plate": "why_true", "kind": "question", "text": "where am I standing when I see the gap?"},
+    {"id": "q-gap", "plate": "tower", "kind": "quote", "a": "Adding the sentence moves the gap up.", "b": "It does not close it.", "quote": "Adding the sentence moves the gap up. It does not close it.", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-every-time", "plate": "tower", "kind": "claim", "text": "works every time. never finished."},
+    {"id": "s-no-rule", "plate": "tower", "kind": "claim", "text": "the truths are there. no rule lists them."},
+    {"id": "q-belief", "plate": "not_say", "kind": "quote", "a": "Incompleteness does not certify every unsupported belief", "quote": "Incompleteness does not certify every unsupported belief", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-not-uncertain", "plate": "not_say", "kind": "not", "text": "NOT 'everything is uncertain'"},
+    {"id": "s-not-minds", "plate": "not_say", "kind": "not", "text": "NOT 'minds beat machines'"},
+    {"id": "s-not-unknowable", "plate": "not_say", "kind": "not", "text": "NOT 'unknowable'"},
+    {"id": "q-green", "plate": "checking", "kind": "quote", "a": "a green light you have never seen fail", "b": "is a claim about the instrument as much as about the world", "quote": "a green light you have never seen fail is a claim about the instrument as much as about the world", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "q-critic", "plate": "checking", "kind": "quote", "a": "add a critic and the blind spot moves, and never goes", "quote": "add a critic and the blind spot moves, and never goes", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "q-fluent", "plate": "checking", "kind": "quote", "a": "fluent agreement is no substitute", "quote": "fluent agreement is no substitute for identifying the input, the rule and the result we actually checked", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-what-checked", "plate": "checking", "kind": "question", "text": "what did I check?"},
+    {"id": "q-hide-show", "plate": "blank", "kind": "quote", "a": "hide the gap or show it", "quote": "hide the gap or show it", "file": "commons/maps/Godel_Incompleteness/final.md"},
+    {"id": "s-signed", "plate": "blank", "kind": "claim", "text": "he signed the blank"},
+    {"id": "s-three-returns", "plate": "blank", "kind": "not", "text": "three returns, NOT one"},
+    {"id": "s-provable-on", "plate": "versus_russell", "kind": "claim", "text": "PROVABLE is on the list"},
+    {"id": "s-true-off", "plate": "versus_russell", "kind": "claim", "text": "TRUE is not"},
+    {"id": "s-one-path", "plate": "versus_russell", "kind": "claim", "text": "the one open path"},
+    {"id": "s-reach", "plate": "versus_russell", "kind": "claim", "text": "REACH"}
+  ],
+  "threads": [
+    {"a": "says", "b": "why_true", "word": "true - says who?", "why": "Plate 1 uses the word 'true'; plate 5 asks from where it is said: from outside, trusting condition (c)."},
+    {"a": "says", "b": "find_check", "word": "(a) is about checking", "why": "The first condition promises that proofs can be checked by rule. It promises nothing about finding them."},
+    {"a": "find_check", "b": "three_stops", "word": "so a stopped search proves nothing", "why": "Because finding can go on for ever, a search that stops has shown slow or broken, never impossible."},
+    {"a": "three_stops", "b": "trick", "word": "impossible must be proved", "why": "The third way a search stops cannot be watched; it needs the construction on plate 4."},
+    {"a": "says", "b": "trick", "word": "(b) is what lets it talk", "why": "Enough arithmetic is exactly what lets relations between code numbers follow a proof."},
+    {"a": "trick", "b": "why_true", "word": "it says: I have no proof", "why": "The sentence built on plate 4 is the one plate 5 reasons about."},
+    {"a": "why_true", "b": "tower", "word": "then add it", "why": "Once G is seen to be true, the obvious move is to make it an axiom. The tower is what happens."},
+    {"a": "tower", "b": "says", "word": "(a)(b)(c) still hold", "why": "The enlarged theory meets the same three conditions, so the theorem applies to it again."},
+    {"a": "trick", "b": "versus_russell", "word": "the diagonal again", "why": "Feeding a formula its own number is the step onto the diagonal that the Russell grid shows on the floor above."},
+    {"a": "versus_russell", "b": "why_true", "word": "provable in, true out", "why": "Provability is definable in arithmetic, truth is not; that is why the result is a gap and not a contradiction."},
+    {"a": "versus_russell", "b": "tower", "word": "a different absence", "why": "Russell: the totality does not exist. Here it exists and cannot be listed by a rule."},
+    {"a": "not_say", "b": "says", "word": "keep the conditions", "why": "Every misuse on plate 7 drops one of the three conditions or the words 'in that theory'."},
+    {"a": "not_say", "b": "why_true", "word": "known - from outside", "why": "G is not unknowable; it is known true by the outside argument on plate 5."},
+    {"a": "checking", "b": "three_stops", "word": "see it fail first", "why": "A gauge that has never gone red and a search that has only stopped tell me equally little."},
+    {"a": "checking", "b": "blank", "word": "the blind spot moves", "why": "Add a critic and the blind spot moves; follow the picture inward and the gap is still there."},
+    {"a": "blank", "b": "why_true", "word": "cannot close on itself", "why": "The theory cannot prove its own soundness; the drawing cannot draw its own centre."},
+    {"a": "checking", "b": "find_check", "word": "this program, this property", "why": "Rice forbids a general test, as incompleteness forbids a final list; particular checks remain, and they are finite things."},
+    {"a": "blank", "b": "tower", "word": "show it", "why": "The tower is the honest ending of the two: it shows the gap on every level."}
+  ],
+  "visual_arguments": [
+    {
+      "id": "search_and_check",
+      "title": "ONE GATE THAT CHECKS, A ROW WITHOUT END",
+      "at": [9.5, -4.8], "size": [5.0, 3.0],
+      "claim": "Any one candidate can be checked and settled. The row of candidates has no last one.",
+      "from_the_hall": "The bench: 0, S0, SS0; a budget of steps; a candidate with a missing middle step rejected.",
+      "built_from": ["crate (a candidate proof)", "timber_panel_1x1 (the checking gate, as in the harbour)", "work_light (green over an accepted candidate)", "museum_tape_barrier (where the row is cut off for want of floor, and says so)"],
+      "what_stands": "A gate with a crate in it. Beyond the gate a row of crates running to the edge of the slab, each a little further apart.",
+      "what_you_do": "Stand at the gate: the crate in it is checked, step by step, and passes or is refused; the next is brought. The counter says how many were refused. It never says 'none will pass'.",
+      "what_it_shows": "Refusing candidates one by one is checking. 'No candidate passes' is a different kind of sentence, and no amount of standing at the gate produces it."
+    },
+    {
+      "id": "gap_moves_up",
+      "title": "LAY THE MISSING PLANK",
+      "at": [-9.6, -4.8], "size": [4.6, 3.4],
+      "claim": "Adding what was missing makes a new level with something missing.",
+      "from_the_hall": "The tower: 'Adding the sentence moves the gap up. It does not close it.'",
+      "built_from": ["construction_cube and wp (three landings, as on the connectivity floor)", "timber_plank_2m (the missing piece)", "pentagonal_bipyramid_7 (the sentence that cannot be reached from below)"],
+      "what_stands": "A landing with a gap in its floor and, across the gap, a crystal. A plate lays the plank. Crossing it brings you onto the next landing: another gap, another crystal.",
+      "what_you_do": "Lay the plank and cross, three times. The third landing ends at tape: the tower goes on, the floor does not.",
+      "what_it_shows": "The repair is real each time and never the last. That is what 'no rule lists all the truths' feels like in the legs."
+    }
+  ],
+  "open": [
+    "Plate 4 step 4 (the fixed point) is said, not carried out. A visual argument for it would have to be honest about that.",
+    "Plate 5's last line states the second incompleteness theorem without an argument.",
+    "Plate 10 states Tarski's undefinability of truth as a known result; I have not worked it through on cardboard.",
+    "The tower stands behind the arrival, off the main slab; plate 6 tells the visitor to turn round. Whether that works has to be judged standing there."
+  ]
+}

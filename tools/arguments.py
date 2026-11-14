@@ -41,6 +41,10 @@ def check(path):
     visuals = {'visual:' + v['id'] for v in doc.get('visual_arguments', [])}
     if doc.get('hero', {}).get('row') not in rows:
         findings.append('%s: the hero row %s is not on the floor' % (path.name, doc.get('hero', {}).get('row')))
+    else:
+        stands = next(a['position'] for a in floor['artifacts'] if a['id'] == doc['hero']['row'])
+        if [float(v) for v in doc['hero'].get('at', [])] != [float(v) for v in stands]:
+            findings.append('%s: the hero is written at %s and stands at %s' % (path.name, doc['hero'].get('at'), stands))
     plates = {}
     for p in doc.get('plates', []):
         if p['id'] in plates:

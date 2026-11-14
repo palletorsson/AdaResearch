@@ -6,6 +6,8 @@
   "hero": {
     "row": "f1_russell_paradox_workbench_6_3",
     "artifact": "russell_paradox_workbench",
+    "at": [0, 7],
+    "lights": [[-3.6, 8.3], [3.6, 8.3]],
     "why": "It is the only work in the hall where the argument is actually run: two buttons, both refused, then one step of the slider and the same question holds. Everything else in the hall is a picture of it, a cousin of it, or a contrast to it. The plates stand round it and the threads start from it.",
     "staging": "Two plates flank it like the leaves of an open folder (THE DEMAND on its left, THE REPAIR on its right); two work lights cross on it; every thread in the hall can be followed back to one of these two plates."
   },
@@ -51,7 +53,7 @@
       "id": "diagonal",
       "title": "3  THE SHAPE: A GRID AND ITS DIAGONAL",
       "by": "visual:grid",
-      "at": [-2.4, 2.4], "yaw": 20,
+      "at": [-3.4, 3.6], "yaw": 62,
       "front": [
         "Rows: the things. Columns: the same things. A mark where the row contains the column.",
         "Walk the diagonal: does each thing contain itself?",
@@ -243,7 +245,7 @@
     {
       "id": "grid",
       "title": "THE GRID AND THE ROW THAT IS NOT ON IT",
-      "at": [0.0, 2.4], "size": [4.4, 4.4],
+      "at": [0.0, 1.8], "size": [4.4, 4.4],
       "claim": "A row that disagrees with the diagonal at every place cannot be one of the rows.",
       "from_the_hall": "The workbench's own four sets at cell 6: 0 contains nothing, 1 contains 0, 2 contains 0 and 1, 3 contains 0, 1 and 2.",
       "built_from": ["timber_panel_1x1 (sixteen cells, let into the floor)", "trace_point_ball (a mark: this row contains this column)", "timber_plank_4m (the new row, laid outside the grid)", "traffic_pyramid_5 (the four diagonal places)"],
@@ -254,7 +256,7 @@
     {
       "id": "two_doors",
       "title": "IN AND OUT, WALKED",
-      "at": [4.9, 3.2], "size": [4.0, 2.4],
+      "at": [4.9, -5.6], "size": [4.0, 2.4],
       "claim": "Each answer delivers you to the other one. Your body has somewhere to go; the set does not.",
       "from_the_hall": "The workbench's two buttons at cell 5, and the sentence 'Your hand has somewhere to go; the proposed set does not.'",
       "built_from": ["do_not_cross_barrier (the corridor walls)", "timber_panel_1x1 (two one-way gates, as in the harbour)", "pink_triangle_sign (which way the rule sends you)"],
