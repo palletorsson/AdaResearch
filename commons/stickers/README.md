@@ -361,7 +361,9 @@ One node, made by one gated line in `game.gd` (see "Switched on from outside thi
 - **On the web, in three.js:** `/stickers?work=QFEP_Phi_Term/edge-carving-dark-spot` (any `<floor map>/<work id>`) opens
   the 3D view on that work's exported GLB - the mesh Godot's CSG made, triangle for triangle - with its plinth words
   (the targets route passes a work's exported labels through, `cleanLabels`; Sticker3D letters them outside what a
-  sticker can take). The whole floor, words included, is the floor editor: `/lab-editor?mode=void&floor=199&select=a:edge-carving-not-yet`
+  sticker can take). All seven together, each where it stands on the floor: `/stickers?work=QFEP_Phi_Term/edge-carving-*`
+  (a prefix and `*` stands every work of the floor whose id begins so, up to 24; the work list offers each such group,
+  and each work in it is its own sticker host). The whole floor, words included, is the floor editor: `/lab-editor?mode=void&floor=199&select=a:edge-carving-not-yet`
   (an editor: dragging a selected work moves it and saves; Esc deselects). The models exist only after an export; after
   a change to the carving, export the floor's carvings again:
   `python tools/export_void_floors.py 199 ada_run/live-preview-exports/tower/199-stickers "--preview-items=[\"edge-carving-dark-spot\"]"`
