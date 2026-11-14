@@ -72,6 +72,36 @@ void plane_axes(vec3 n, out vec3 u, out vec3 v) {
 	else { u = vec3(1.0, 0.0, 0.0); v = vec3(0.0, 1.0, 0.0); }
 }
 
+// A painted studio for mirrors: the tower's even lilac sky leaves a mirror nothing to show (a judge: a block dressed in
+// chrome read as a plain pale box), so a reflection also sees a dark floor, a hard horizon with a white line along it,
+// and six tall strip softboxes round the world.
+vec3 studio(vec3 R, vec3 tint) {
+	float sky = smoothstep(-0.02, 0.02, R.y);
+	float line = 1.0 - smoothstep(0.0, 0.05, abs(R.y));
+	float strip = smoothstep(0.93, 0.98, abs(sin(atan(R.z, R.x) * 3.0))) * (1.0 - smoothstep(0.55, 0.75, abs(R.y - 0.15)));
+	vec3 below = vec3(0.025, 0.02, 0.035);
+	vec3 above = mix(vec3(0.32, 0.28, 0.4), tint, 0.3) * (0.55 + 0.45 * clamp(R.y, 0.0, 1.0));
+	return mix(below, above, sky) + vec3(1.0) * (line * 0.8 + strip * 1.8);
+}
+
+// Sequins: discs in offset rows (scales), each tilted its own way; returns the glint, gives the disc mask and its
+// tilted normal. Its edge is softened by its own derivative; far off, the discs' average.
+float sequins(vec3 p, vec3 n, vec3 to_eye, float size, float dist, out float disc, out vec3 tilt) {
+	vec3 u; vec3 v;
+	plane_axes(n, u, v);
+	vec2 q = vec2(dot(p, u), dot(p, v)) / size;
+	q.x += 0.5 * mod(floor(q.y), 2.0);
+	vec2 id = floor(q);
+	vec2 f = fract(q) - 0.5;
+	float fr = length(f);
+	float fw = fwidth(fr);
+	disc = 1.0 - smoothstep(0.43 - fw, 0.49 + fw, fr);
+	disc = mix(disc, 0.78, clamp((fwidth(q.x) - 0.2) / 0.4, 0.0, 1.0));
+	tilt = normalize(n + (h33(vec3(id, 3.0)) - 0.5) * 0.9);
+	float fade = clamp(1.6 - dist / (8.0 * size / 0.024), 0.0, 1.0);
+	return pow(max(dot(tilt, to_eye), 0.0), 36.0) * disc * fade;
+}
+
 // Glitter flakes: a third of the cells hold a flake whose facet leans out of the surface; it lights when its facet
 // faces the eye, so a moving head makes it twinkle. Faded with distance, where a flake is smaller than a pixel.
 float flakes(vec3 p, vec3 n, vec3 to_eye, float size, float dist) {
@@ -111,20 +141,21 @@ void fragment() {
 		spec = 1.0;
 		clear = 1.0;
 		clear_r = 0.02;
-		vec3 sheen = spectrum(rim * 1.6 + n1 * 0.3 + t * 0.03) * pow(rim, 2.5);
-		emit = sheen * 0.9 + hue.rgb * pow(rim, 4.0) * 0.6;
+		vec3 sheen = spectrum(rim * 1.6 + n1 * 0.3 + t * 0.03) * pow(rim, 4.0);
+		emit = sheen * 0.8 + hue.rgb * pow(rim, 6.0) * 0.5;
 	} else if (mode == 1) {
 		// PVC, the wet look: a mirror-wet plastic, rippled, a cyan rim (pop_plastic's)
-		vec3 q = wpos * 3.0 / cell;
+		vec3 q = wpos / cell * vec3(7.0, 0.6, 7.0);
 		vec3 g = vec3(vnoise(q + vec3(7.0, 0.0, 0.0)), vnoise(q + vec3(0.0, 13.0, 0.0)), vnoise(q + vec3(0.0, 0.0, 29.0))) - 0.5;
-		wn = normalize(wn + g * 0.3);
+		g.y *= 0.3;
+		wn = normalize(wn + g * 0.6);
 		bent = true;
-		col = mix(hue.rgb, spectrum(nv * 1.7 + 0.15), 0.3 * rim);
+		col = hue.rgb * 0.3;
 		rough = 0.02;
 		spec = 1.0;
 		clear = 1.0;
 		clear_r = 0.0;
-		emit = vec3(0.0, 1.0, 1.0) * pow(rim, 3.0) * 0.35;
+		emit = studio(reflect(-to_eye, wn), vec3(1.0)) * (0.08 + 0.92 * pow(rim, 4.0)) * 1.2;
 	} else if (mode == 2) {
 		// RUBBER: thick and matte, the light lying soft along its edge
 		col = hue.rgb * 0.62;
@@ -172,11 +203,12 @@ void fragment() {
 		}
 	} else if (mode == 4) {
 		// CHROME: a mirror, tinted by the stroke
-		col = mix(vec3(0.95), hue.rgb, 0.35);
+		vec3 tint = mix(vec3(1.0), hue.rgb, 0.35);
+		col = tint * 0.15;
 		metal = 1.0;
 		rough = 0.04;
 		spec = 1.0;
-		emit = hue.rgb * pow(rim, 3.0) * 0.2;
+		emit = studio(reflect(-to_eye, wn), tint) * tint * 0.85;
 	} else if (mode == 5) {
 		// GLITTER
 		col = hue.rgb * 0.5;
@@ -184,24 +216,15 @@ void fragment() {
 		metal = 0.6;
 		spec = 0.8;
 		float tw = flakes(wpos, wn, to_eye, 0.012 * cell, dist);
-		emit = mix(hue.rgb, vec3(1.0), 0.6) * tw * 4.0 + hue.rgb * 0.07;
+		vec3 fc = floor(wpos / (0.012 * cell));
+		emit = mix(vec3(1.0), spectrum(h13(fc + 41.0)), 0.55) * tw * 4.0 + hue.rgb * 0.07;
 	} else if (mode == 6) {
 		// SEQUINS: discs in offset rows (scales), each tilted its own way, each its own glint
-		vec3 u; vec3 v;
-		plane_axes(wnrm, u, v);
-		vec2 q = vec2(dot(wpos, u), dot(wpos, v)) / (0.024 * cell);
-		q.x += 0.5 * mod(floor(q.y), 2.0);
-		vec2 id = floor(q);
-		vec2 f = fract(q) - 0.5;
-		float fr = length(f);
-		float fw = fwidth(fr);
-		float disc = 1.0 - smoothstep(0.43 - fw, 0.49 + fw, fr);
-		disc = mix(disc, 0.78, clamp((fwidth(q.x) - 0.2) / 0.4, 0.0, 1.0));
-		vec3 tilt = normalize(wnrm + (h33(vec3(id, 3.0)) - 0.5) * 0.9);
+		float disc;
+		vec3 tilt;
+		float glint = sequins(wpos, wnrm, to_eye, 0.024 * cell, dist, disc, tilt);
 		wn = normalize(mix(wnrm, tilt, disc));
 		bent = true;
-		float fade = clamp(1.6 - dist / (8.0 * cell), 0.0, 1.0);
-		float glint = pow(max(dot(tilt, to_eye), 0.0), 36.0) * disc * fade;
 		col = mix(hue.rgb * 0.08, hue.rgb, disc);
 		metal = mix(0.2, 1.0, disc);
 		rough = mix(0.6, 0.08, disc);
@@ -209,9 +232,9 @@ void fragment() {
 		emit = (hue.rgb + vec3(0.4)) * glint * 2.5;
 	} else if (mode == 7) {
 		// HOLO: foil whose spectrum turns with the view, crossed by fine diffraction lines
-		float k = nv * 1.4 + dot(wpos, vec3(0.7, 1.1, 0.4)) * 2.5 / cell + t * 0.04;
+		float k = dot(reflect(-to_eye, wn), vec3(0.45, 0.75, 0.45)) * 3.0 + dot(wpos, vec3(0.7, 1.1, 0.4)) * 0.6 / cell + t * 0.04;
 		vec3 rb = spectrum(k);
-		col = mix(rb, hue.rgb, 0.2);
+		col = mix(vec3(0.8, 0.8, 0.85), mix(rb, hue.rgb, 0.15), 0.55);
 		metal = 0.85;
 		rough = 0.1;
 		spec = 1.0;
@@ -228,6 +251,7 @@ void fragment() {
 		float mg = min(g.x, g.y);
 		float w = fwidth(mg);
 		float cord = 1.0 - smoothstep(0.035 - w, 0.075 + w, mg);
+		cord = max(cord, 1.0 - smoothstep(0.07, 0.1, length(g)));               // a knot where two cords cross
 		cord = mix(cord, 0.32, clamp((fwidth(r.x) - 0.15) / 0.35, 0.0, 1.0));   // far: the net's average, no moire
 		col = mix(hue.rgb * 0.85, vec3(0.012), cord);
 		rough = mix(0.45, 0.22, cord);
@@ -235,7 +259,7 @@ void fragment() {
 		emit = hue.rgb * (1.0 - cord) * 0.5;
 	} else if (mode == 9) {
 		// RAINBOW: the six bands of the flag, through the world's height
-		float b = wpos.y / (0.12 * cell);
+		float b = -wpos.y / (0.12 * cell);                                        // red on top, as the flag hangs
 		float fb = fract(b);
 		float k = mod(floor(b), 6.0);
 		vec3 c0 = vec3(0.89, 0.01, 0.01);
@@ -263,16 +287,19 @@ void fragment() {
 		rough = 0.3;
 		spec = 0.5;
 		emit = hue.rgb * (pow(rim, 2.2) * 3.0 + 0.05) * (0.85 + 0.15 * sin(t * 2.0));
+		float d = abs(fract(wpos.y / (0.45 * cell)) - 0.5) * 0.45 * cell;
+		float core = 1.0 - smoothstep(0.004 * cell, 0.009 * cell, d);
+		emit += mix(hue.rgb, vec3(1.0), core) * (core * 3.0 + exp(-d / (0.03 * cell))) * (1.0 - smoothstep(0.5, 0.8, abs(wn.y)));
 	} else if (mode == 11) {
 		// PEARL: pale nacre, its colour arriving only at the edge
 		float n1 = vnoise(wpos * 3.0 / cell);
-		vec3 sp = spectrum(nv * 0.8 + n1 * 0.3);
-		col = mix(vec3(0.95, 0.93, 0.95), mix(sp, hue.rgb, 0.5), 0.22 + 0.1 * n1);
+		vec3 orient = mix(vec3(1.0, 0.78, 0.88), vec3(0.80, 0.95, 0.90), n1);
+		col = mix(vec3(0.96, 0.94, 0.95), mix(orient, hue.rgb, 0.25), 0.12 + 0.4 * rim);
 		rough = 0.2;
 		spec = 0.8;
 		clear = 1.0;
 		clear_r = 0.05;
-		emit = sp * pow(rim, 2.0) * 0.3;
+		emit = vec3(0.95, 0.92, 0.96) * 0.1 + orient * pow(rim, 2.0) * 0.35;
 	} else if (mode == 12) {
 		// VELVET: the light gathered at the rim, the face itself deep
 		float fibre = vnoise(wpos * 140.0 / cell);
@@ -286,14 +313,25 @@ void fragment() {
 		// DRAG: everything at once - a hot pink swirl, iridescence, glitter, a burning rim
 		float sw = vnoise(wpos * 1.5 / cell + vec3(t * 0.1)) * 0.65 + vnoise(wpos * 3.0 / cell - vec3(t * 0.07)) * 0.35;
 		vec3 base = mix(vec3(1.0, 0.08, 0.58), vec3(1.0, 0.0, 1.0), sw);
-		base = mix(base, hue.rgb, 0.25);
+		base = mix(base, hue.rgb, 0.1);
 		vec3 iris = spectrum(nv * 1.3 + t * 0.15);
-		col = mix(base, iris, 0.3);
+		col = mix(base, iris, 0.2);
 		metal = 0.4;
 		rough = 0.15;
 		spec = 1.0;
 		float tw = flakes(wpos, wn, to_eye, 0.01 * cell, dist);
 		emit = col * 0.22 + vec3(1.0, 0.8, 0.9) * tw * 3.0 + vec3(1.0, 0.08, 0.58) * pow(rim, 2.0) * 0.8;
+		float disc;
+		vec3 tilt;
+		float glint = sequins(wpos, wnrm, to_eye, 0.03 * cell, dist, disc, tilt);
+		float worn = smoothstep(0.58, 0.64, sw) * disc;
+		if (worn > 0.0) {
+			wn = normalize(mix(wn, tilt, worn));
+			bent = true;
+			metal = mix(metal, 1.0, worn);
+			rough = mix(rough, 0.08, worn);
+			emit += (vec3(1.0, 0.3, 0.7) + vec3(0.4)) * glint * 2.5 * worn;
+		}
 	}
 
 	if (bent) NORMAL = normalize((VIEW_MATRIX * vec4(wn, 0.0)).xyz);

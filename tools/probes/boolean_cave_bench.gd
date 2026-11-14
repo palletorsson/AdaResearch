@@ -220,7 +220,8 @@ func _run() -> void:
 	var lane_to := big.to_global(Vector3(0.0, 1.3, -5.0))
 	var face := _hit(big.cave(), lane_from, lane_to, 1)
 	var face_z: float = big.cave().to_local(face.position).z if not face.is_empty() else -99.0
-	_check("big, before any carve: a ray along the lane at chest height stops at the block's face (the check bites)", absf(face_z - 3.5) < 0.05, {"stopped_at_z": snappedf(face_z, 0.001)})
+	var face_at: float = (Cave.SPEC.big.block as Vector3).z * 0.5
+	_check("big, before any carve: a ray along the lane at chest height stops at the block's face (the check bites)", absf(face_z - face_at) < 0.05, {"stopped_at_z": snappedf(face_z, 0.001), "face_at": face_at})
 	big.press("bigger")
 	big.press("bigger")
 	var stamps := 0

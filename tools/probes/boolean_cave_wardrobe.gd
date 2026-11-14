@@ -152,6 +152,9 @@ func run() -> void:
 	var small: Node3D = works["small"]
 	for w in [big, small]: await w.reset()
 
+	# ---- the black monolith, as it stands (Palle: "make the cube very bigger and black") ----
+	await _shot(big.to_global(Vector3(-2.0, 3.0, 13.0)), big.to_global(Vector3(0.0, 2.0, 0.0)), folder.path_join("big_black_monolith.png"), 70.0)
+
 	# ---- the rack ----
 	await _shot(small.to_global(Vector3(-2.35, 1.3, 1.2)), small.to_global(Vector3(-2.35, 1.05, 0.35)), folder.path_join("wardrobe_rack.png"), 50.0)
 

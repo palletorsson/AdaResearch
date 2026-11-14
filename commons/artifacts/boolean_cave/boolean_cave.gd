@@ -13,7 +13,7 @@ extends Node3D
 ##
 ##   size small  a 1.0 x 0.7 x 1.0 m block on a stand; the brush 4 - 16 cm, free in three dimensions: a cave you hold
 ##               in view, at the carvings' scale
-##        big    a 7.6 x 4.2 x 7 m block on the floor; the brush 0.55 - 1.5 m, and a CARVE reaches down to a floor 4 cm
+##        big    a 20 x 5.5 x 9 m BLACK block on the floor; the brush 0.55 - 1.5 m, and a CARVE reaches down to a floor 4 cm
 ##               over the slab with at least 2.2 m of headroom (the shape stood on the floor), so whatever you carve
 ##               you can walk into; a BUILD stands where you aim
 ##   the console: CARVE / BUILD, SPHERE / CUBE / CYLINDER, SMALLER / BIGGER, UNDO, RESET
@@ -52,9 +52,13 @@ const VERBS := ["carve", "build"]
 const SHAPES := ["sphere", "cube", "cylinder"]
 const SPEC := {
 	"small": {"block": Vector3(1.0, 0.7, 1.0), "lift": 0.82, "radius": [0.04, 0.16], "segments": [10, 6], "rate": 10.0,
-		"flush": 0.35, "chunks": Vector2i(2, 2), "console": Vector3(-1.1, 0.0, 0.35), "grounded": false},
-	"big": {"block": Vector3(7.6, 4.2, 7.0), "lift": 0.0, "radius": [0.55, 1.5], "segments": [12, 7], "rate": 4.0,
-		"flush": 1.5, "chunks": Vector2i(4, 4), "console": Vector3(-4.6, 0.0, 3.0), "grounded": true},
+		"flush": 0.35, "chunks": Vector2i(2, 2), "console": Vector3(-1.1, 0.0, 0.35), "grounded": false,
+		"block_hue": Color(0.7, 0.7, 0.8)},
+	# Palle, 2026-11-14: "make the cube very bigger and black" - 20 x 5.5 x 9 m (it was 7.6 x 4.2 x 7): nine metres is
+	# as far out as a side slab may reach (his 11-09 rule, ten), five and a half stays under the floor above
+	"big": {"block": Vector3(20.0, 5.5, 9.0), "lift": 0.0, "radius": [0.55, 1.5], "segments": [12, 7], "rate": 4.0,
+		"flush": 1.5, "chunks": Vector2i(10, 5), "console": Vector3(-11.2, 0.0, 3.0), "grounded": true,
+		"block_hue": Color(0.03, 0.028, 0.035)},
 }
 const DRILL := 0.33                   # how much further along the aim a stamp may go than the last, in radii
 const SNAPSHOTS := 10                 # strokes UNDO can step back through without rebuilding
@@ -243,10 +247,24 @@ func _make_chunks(spec: Dictionary) -> void:
 			_solid.add_child(col)
 			var chunk := {"lo": lo, "hi": hi, "clip_lo": clip_lo, "clip_hi": clip_hi, "mesh": null, "shape": null, "view": view, "col": col,
 				"block_mesh": null, "block_shape": null, "pending": []}
-			var out := _compute(chunk, [])
-			chunk.block_mesh = out[0]
-			chunk.block_shape = out[1]
-			_show_chunk(chunk, out[0], out[1])
+			# an uncut cell is a plain box, built directly - no CSG pass - so fifty chunks cost the floor's arrival
+			# nothing; its first cut takes it into the calculator as a CSGMesh3D like any other
+			var box := BoxMesh.new()
+			box.size = hi - lo
+			var arrays := box.get_mesh_arrays()
+			var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+			var centre := (lo + hi) * 0.5
+			for v in verts.size(): verts[v] += centre
+			arrays[Mesh.ARRAY_VERTEX] = verts
+			var mesh := ArrayMesh.new()
+			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+			mesh.surface_set_material(0, _block_mat)
+			var shape := ConcavePolygonShape3D.new()
+			shape.backface_collision = true
+			shape.set_faces(mesh.get_faces())
+			chunk.block_mesh = mesh
+			chunk.block_shape = shape
+			_show_chunk(chunk, mesh, shape)
 			_chunks.append(chunk)
 
 
@@ -955,7 +973,7 @@ func _satin() -> StandardMaterial3D:
 ## shared - a baked chunk carries one surface per skin-and-hue it holds. Satin is the StandardMaterial3D strokes always
 ## had (the default, and every stroke saved before the wardrobe).
 func _skin_material(which: String, k: int, cell := -1.0) -> Material:
-	var hue: Color = SATIN if k < 0 else HUES[posmod(k, HUES.size())]
+	var hue: Color = (SPEC[size].block_hue as Color) if k < 0 else HUES[posmod(k, HUES.size())]
 	var key := "skin_%s_%d_%.2f" % [which, (-1 if k < 0 else posmod(k, HUES.size())), cell]
 	if _materials.has(key): return _materials[key]
 	var m: Material

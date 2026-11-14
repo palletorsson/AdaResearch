@@ -46646,7 +46646,7 @@
           "height": 0,
           "scale": 1,
           "config": {
-            "length": 20.0,
+            "length": 30.0,
             "depth": 10.0,
             "seed": 1613,
             "editor_label": "Side slab / the yard's east room: paint your own cave, small and big"
@@ -46657,14 +46657,15 @@
           "artifact": "boolean_cave",
           "station": "NE",
           "position": [
-            26.9,
-            1.0
+            26.1,
+            -0.8
           ],
           "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
             "size": "big",
+            "block_skin": "latex",
             "exterior_walk": true,
             "editor_label": "Boolean cave (big): carve your way in - difference carves, union builds"
           }
@@ -46674,8 +46675,8 @@
           "artifact": "boolean_cave",
           "station": "NE",
           "position": [
-            24.0,
-            -6.8
+            24.5,
+            12.8
           ],
           "facing": 270,
           "height": 0,
