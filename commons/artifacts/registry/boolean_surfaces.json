@@ -29,7 +29,8 @@
 						"carved_branches",
 						"carved_perlin",
 						"carved_grid",
-						"carved_sphere"
+						"carved_sphere",
+						"passes"
 					],
 					"finish": [
 						"provenance",
@@ -45,7 +46,7 @@
 			},
 			"name": "Isosurface prefabs: twenty pieces the verbs make",
 			"lookup_name": "iso_prefab",
-			"description": "Twenty construction prefabs (and the Random Boolean Carving's six carvings) made as isosurfaces: signed-distance shapes combined with union, intersection and difference (and smooth union, twist, revolve, sweep, noise), marched into meshes, and given collision a body and a ball meet - the things the tower's primitive kit cannot be: a tunnel and a crossing to walk through, a dome to be inside, a wall whose three cuts are sized for a body, a hand and a ball, a sieve, a basin, a gutter ramp, a mould and the cast that fills it, a hump bridge with a culvert, a die, a gyroid screen, a stile whose smoothed half a body can climb and whose plain union it cannot, a mound and stones blended into the floor, a pipe tee bored after it was joined, a spiral ramp a metre up in one turn, a funnel with a throat, a chute and a noise boulder. Each face is painted by where it came from (orange: a difference cut it; sea-green: an intersection trimmed it; yellow: a smooth union's band). What two convex shapes share is convex, so the cast and the die are rigid bodies that roll; everything a difference made stands still. Geometry from tools/iso_prefabs.py (the expressions and their checks), baked by bake_forms.gd.",
+			"description": "Twenty construction prefabs (and the Random Boolean Carving's six carvings) made as isosurfaces: signed-distance shapes combined with union, intersection and difference (and smooth union, twist, revolve, sweep, noise), marched into meshes, and given collision a body and a ball meet - the things the tower's primitive kit cannot be: a tunnel and a crossing to walk through, a dome to be inside, a wall whose three cuts are sized for a body, a hand and a ball, a sieve, a basin, a gutter ramp, a mould and the cast that fills it, a hump bridge with a culvert, a die, a gyroid screen, a stile whose smoothed half a body can climb and whose plain union it cannot, a mound and stones blended into the floor, a pipe tee bored after it was joined, a spiral ramp a metre up in one turn, a funnel with a throat, a chute and a noise boulder. Each face is painted by where it came from (orange: a difference cut it; sea-green: an intersection trimmed it; yellow: a smooth union's band). What two convex shapes share is convex, so the cast and the die are rigid bodies that roll; everything a difference made stands still. And one box to walk into, the passes (16 x 5 x 9 m, form passes): a spiral room round a pillar, carved out to the box's faces by a grid corridor, a random walk whose floor climbs and drops, a sine, and branches that leave through the roof as light; its skin (export skin) is the rhizome surface shader, a hue per pass and the walls lit where two met. Geometry from tools/iso_prefabs.py (the expressions and their checks), baked by bake_forms.gd.",
 			"scene": "res://commons/artifacts/iso_prefabs/iso_prefab.tscn",
 			"category": "boolean_surfaces",
 			"sequence": "boolean_surfaces",

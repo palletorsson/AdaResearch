@@ -13,9 +13,13 @@ extends SceneTree
 ##   by one; a ball let go at the top of the chute ends in the basin; a trace ball dropped in the pipe tee leaves by an
 ##   end; a ball runs down the gutter; the basin keeps a ball;
 ##   the die, thrown, lands flat on a face; the cast, dropped over the mould, settles in its cup;
-##   the landing's way off is still clear.
+##   the landing's way off is still clear;
+##   THE PASSES (the west side slab): a body walks in by the grid's mouth to the spiral room, round the room's pillar,
+##   in by the walk's mouth up its random floor (above 0.6 m) and down into the room, and from the far end in by the
+##   sine; and walking at the room's back wall it is stopped (the box is closed but at its mouths).
 ##
 ##   godot --path <stage> --script res://tools/probes/iso_prefabs_walk.gd -- --no-bridges --void-start-floor=<161> --out=<dir>
+##   (--only=passes: mount, then the passes alone)
 ##
 ## iso.json: one check each, with what was read; pictures of the two wings, the yard, inside the dome, the ramp's top.
 const PREFIX := "iso-"
@@ -36,8 +40,13 @@ func _initialize() -> void:
 func _shot(at: Vector3, target: Vector3, path: String) -> void:
 	cam.global_position = at
 	cam.look_at(target, Vector3.UP)
+	# the walker's own body is hidden while the picture is taken (a camera at its eyes sits inside its head);
+	# hiding draws nothing differently for physics
+	var shown := body.visible if body != null else false
+	if body != null: body.visible = false
 	for i in 8: await process_frame
 	eye.get_texture().get_image().save_png(path)
+	if body != null: body.visible = shown
 
 
 func _w(form: String) -> Node3D:
@@ -134,8 +143,10 @@ func _wait(seconds: float) -> void:
 
 func run() -> void:
 	var folder := ""
+	var only := ""
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="): folder = arg.trim_prefix("--out=")
+		if arg.begins_with("--only="): only = arg.trim_prefix("--only=")
 	DirAccess.make_dir_recursive_absolute(folder)
 	load("res://commons/void/room_source.gd").use_main_tower = true
 	game = load("res://commons/void/void.tscn").instantiate()
@@ -177,13 +188,18 @@ func run() -> void:
 	for form in works:
 		var s: Dictionary = works[form].state()
 		drawn[form] = [int(s.triangles), int(s.collision_triangles), bool(s.rigid)]
-	var whole: bool = works.size() == 26 and drawn.values().all(func(v): return v[0] > 1000 and (v[1] > 300 or v[2]))
+	var whole: bool = works.size() == 27 and drawn.values().all(func(v): return v[0] > 1000 and (v[1] > 300 or v[2]))
 	var lines := 0
 	for form in works:
 		if str(form).begins_with("carved") and works[form].find_child("IsoPath", true, false) != null: lines += 1
-	checks.append({"check": "all twenty-six mounted (the twenty and the six carvings), drawn, with collision; five carvings draw their path, as in the demo (Grid Tunnels does not)",
+	checks.append({"check": "all twenty-seven mounted (the twenty, the six carvings and the passes), drawn, with collision; five carvings draw their path, as in the demo (Grid Tunnels does not)",
 		"ok": whole and lines == 5, "count": works.size(), "path_lines": lines, "drawn": drawn})
 	if works.size() < 20:
+		_finish(folder, result)
+		return
+	if only == "passes":
+		if works.has("passes"): await _passes(checks, folder)
+		result["passed"] = checks.all(func(c): return c.ok)
 		_finish(folder, result)
 		return
 	# pictures of the yard
@@ -368,6 +384,9 @@ func run() -> void:
 	await _shot(cup + Vector3(0.9, 1.1, 0.9), cup, folder.path_join("cast_in_mould.png"))
 	checks.append({"check": "the cast, dropped over the mould, settles in its cup (its lowest point under the mould's top)", "ok": Vector2(sat.x, sat.z).length() < 0.06 and sat.y < -0.25,
 		"offset_from_cup_top": sat})
+	# ---- THE PASSES: walked from each mouth, the walk's floor climbing; photographed in every skin ----
+	if works.has("passes"):
+		await _passes(checks, folder)
 	# the landing's way off
 	game.place_player(Vector3(-7.8, level + 0.3, 1.9))
 	for i in 40: await physics_frame
@@ -376,6 +395,62 @@ func run() -> void:
 	game.place_player(Vector3(0, level + 0.3, 7.8))
 	result["passed"] = checks.all(func(c): return c.ok)
 	_finish(folder, result)
+
+
+## The passes' lines live in the baked mesh (meta "walks", box frame, each from its mouth inward).
+func _passes(checks: Array, folder: String) -> void:
+	var box: Node3D = _w("passes")
+	var mesh: ArrayMesh = (box.find_child("IsoMesh", true, false) as MeshInstance3D).mesh
+	var walks: Dictionary = mesh.get_meta("walks", {})
+	var pts := func(name: String) -> Array:
+		var out := []
+		for q in walks.get(name, PackedVector2Array()): out.append(_at("passes", q.x, q.y))
+		return out
+	await _shot(Vector3(-14.5, level + 2.6, 0.0), _at("passes", 0.0, 3.0, 1.6), folder.path_join("passes_outside.png"))
+	await _shot(_at("passes", 14.0, -7.0, 7.5), _at("passes", 0.0, 0.0, 1.5), folder.path_join("passes_aerial.png"))
+	var grid: Array = pts.call("grid")
+	await _place(grid[0])
+	var r := await _path(grid.slice(1))
+	checks.append({"check": "passes: a body walks in by the grid's mouth, by right angles, to the spiral room", "ok": r.reached, "end_local": _local("passes", r.end)})
+	var ring: Array = pts.call("spiral")
+	r = await _path(ring)
+	checks.append({"check": "passes: and round the room's pillar along the spiral", "ok": r.reached, "end_local": _local("passes", r.end)})
+	await _shot(_at("passes", 1.2, 1.0, 1.55), _at("passes", -0.6, -1.4, 1.2), folder.path_join("passes_room.png"))
+	await _shot(_at("passes", 0.6, 0.2, 1.2), _at("passes", 0.0, 1.1, 4.4), folder.path_join("passes_branches.png"))
+	# the walk, one step at a time: each step's end, its rise, and how far the body went (a jump is not a walk)
+	var walk: Array = pts.call("walk")
+	await _place(walk[0])
+	var steps := []
+	var top := -1.0
+	var whole_walk := true
+	for k in range(1, walk.size()):
+		var before := body.global_position
+		var s := await _path([walk[k]])
+		top = maxf(top, float(s.top))
+		steps.append({"to": k, "reached": s.reached, "at_local": _local("passes", s.end), "top": s.top,
+			"moved": snappedf(before.distance_to(s.end), 0.01)})
+		if k == 5: await _shot(walk[3] + Vector3(0, 0.7 + 1.6, 0), s.end + Vector3(0, 1.0, 0), folder.path_join("passes_walk_top.png"))
+		if not s.reached:
+			whole_walk = false
+			break
+	checks.append({"check": "passes: in by the walk's mouth, up its random floor (feet above 0.6 m) and down into the room",
+		"ok": whole_walk and top >= 0.6, "top": snappedf(top, 0.01), "steps": steps})
+	var sine: Array = pts.call("sine")
+	await _place(sine[0])
+	r = await _path(sine.slice(1))
+	checks.append({"check": "passes: from the far end in by the sine to the room", "ok": r.reached, "end_local": _local("passes", r.end)})
+	await _shot(_at("passes", 7.4, -1.0, 1.5), _at("passes", 3.0, -1.6, 1.0), folder.path_join("passes_sine.png"))
+	# the negative: at the room's back wall a body is stopped, 0.3 m of wall before the box's back face
+	await _place(_at("passes", 0.0, -1.9))
+	r = await _path([_at("passes", 0.0, -6.0)], 0.5, 0.22, 600)
+	var back := _local("passes", r.end).z
+	checks.append({"check": "passes: walking into the room's back wall, a body is stopped inside the box", "ok": not r.reached and back > -4.2, "stopped_at_local_z": snappedf(back, 0.01)})
+	# the skins, for the choice: the room and the walk in each
+	for skin in box.SKINS:
+		box.apply_grid_config({"skin": skin})
+		await _shot(_at("passes", 1.2, 1.0, 1.55), _at("passes", -0.6, -1.4, 1.2), folder.path_join("skin_%s_room.png" % skin))
+		await _shot(_at("passes", -5.0, 3.6, 1.6), _at("passes", -5.2, -1.0, 1.3), folder.path_join("skin_%s_walk.png" % skin))
+	box.apply_grid_config({"skin": "wetflesh"})
 
 
 func _finish(folder: String, result: Dictionary) -> void:

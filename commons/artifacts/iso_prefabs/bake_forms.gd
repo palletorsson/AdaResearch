@@ -28,6 +28,12 @@ func _initialize() -> void:
 	var report := {}
 	var old_report: Variant = JSON.parse_string(FileAccess.get_file_as_string(TARGET + "report.json")) if FileAccess.file_exists(TARGET + "report.json") else null
 	if old_report is Dictionary: report = old_report
+	# JSON reads every number back as a float: whole ones go back to ints, so rebaking one form changes only its row
+	for form in report:
+		if report[form] is Dictionary:
+			for key in report[form]:
+				var v: Variant = report[form][key]
+				if v is float and is_equal_approx(v, roundf(v)): report[form][key] = int(v)
 	for form in manifest:
 		if not only.is_empty() and not only.has(form): continue
 		report[form] = _bake(str(form), manifest[form])
@@ -93,6 +99,15 @@ func _bake(form: String, info: Dictionary) -> Dictionary:
 		mesh.set_meta("line", bool(extras.get("line", true)))
 		for key in ["seed", "cutters", "pattern"]:
 			if extras.has(key): mesh.set_meta(key, extras[key])
+	if extras.has("shader") and str(extras["shader"]) != "": mesh.set_meta("skin_shader", str(extras["shader"]))
+	if extras.has("walks"):                     # the passes: each pass's line on the floor, so a probe can walk it
+		var walks := {}
+		for name in extras["walks"]:
+			var line := PackedVector2Array()
+			for q in extras["walks"][name]: line.append(Vector2(float(q[0]), float(q[1])))
+			walks[name] = line
+		mesh.set_meta("walks", walks)
+	if extras.has("chamber"): mesh.set_meta("chamber", Vector3(float(extras["chamber"][0]), float(extras["chamber"][1]), float(extras["chamber"][2])))
 	if nh > 0:
 		var points := PackedVector3Array()
 		for i in nh: points.append(Vector3(hull[3 * i], hull[3 * i + 1], hull[3 * i + 2]))

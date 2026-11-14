@@ -12902,6 +12902,22 @@
       "recipe": [],
       "config": {"form": "spiral_ramp", "finish": "satin"},
       "placement": {"artifact": "iso_prefab", "source_floor": 161, "source_id": "iso-spiral-ramp", "height": 0, "scale": 1, "config": {"form": "spiral_ramp", "finish": "satin", "plaque": true}}
+    },
+    {
+      "id": "iso_passes",
+      "title": "Passes / difference(box, spiral + grid + walk + sine + branches)",
+      "map": "Boolean_Verbs",
+      "family": "Isosurface / passes",
+      "dimensions": [16.0, 4.997, 9.0],
+      "anchor": "Base centre",
+      "behaviour": "A walk-in box, 16 x 5 x 9 m: two mouths on its long side, one at its far end; inside, a spiral room round a pillar, a random walk whose floor climbs and drops, a sine, a grid corridor, branches up through the roof as light. Its skin is the rhizome surface: a hue per pass, the walls lit where two met. Collision a body meets. Stands on the west side slab of Boolean_Verbs; place it on a slab or an open floor, mouths toward the way in.",
+      "scene": "res://commons/artifacts/iso_prefabs/iso_prefab.tscn",
+      "token": "iso_prefab",
+      "icon": "body",
+      "learn": "difference(box, spiral + grid + walk + sine + branches): Five movements carve a box from the inside out: each pass keeps its colour, and where two met the wall lights.",
+      "recipe": [],
+      "config": {"form": "passes", "skin": "wetflesh"},
+      "placement": {"artifact": "iso_prefab", "source_floor": 161, "source_id": "iso-passes", "height": 0, "scale": 1, "config": {"form": "passes", "skin": "wetflesh", "plaque": false, "exterior_walk": true}}
     }
   ]
 }

@@ -14,6 +14,9 @@ extends Node3D
 ##   UNION        stile, mound, stones, pipe_tee                                          (melt, join, then bore)
 ##   FIELD        spiral_ramp, funnel, chute, boulder                                     (twist, revolve, sweep, noise)
 ##   CARVINGS     carved_walk, carved_spiral, carved_branches, carved_perlin, carved_grid, carved_sphere
+##   PASSES       passes: a 16 x 5 x 9 m box carved from one chamber outward by five movements (a random walk, a sine, a
+##                spiral, branches, a grid) - walked into, not looked at (Palle, 2026-11-13: "add inner-out different
+##                passes of movement inside a bigger and larger box so we can walk into strange places")
 ##
 ## The carvings are the Random Boolean Carving (algorithms/proceduralgeneration/constraint_solvers/randomboolean,
 ## Palle: "they use sine and random etc to carve in a space in cubes"): its demo's six carvings - a cube minus faceted
@@ -30,16 +33,31 @@ extends Node3D
 ## material (0.7 0.7 0.8, metallic 0.3, roughness 0.7, its demo's SSAO stood in for by baked occlusion; the inside of a cut
 ## a little warmer); cast is one pale material.
 ##
+## `skin` is for the forms that ask for the grown-body shader instead (the mesh's meta skin_shader = "rhizome": the
+## passes): commons/artifacts/radial_inside/rhizome_surface.gdshader, whose COLOR.rgb is the pass a wall belongs to and
+## COLOR.a how tied the nearest two passes are - so each movement keeps its colour and the walls light where two met.
+## `finish` does nothing to those forms; `skin` does nothing to the others. Wetflesh by default: a panel of three judges
+## (the four reference images Palle gave, wayfinding by colour, comfort in a headset) put it first, 2026-11-13. The seams
+## are warm white, not the shader's pink - that pink is the walk pass's own hue. Such a form is an INSIDE, so it carries an
+## interior ReflectionProbe over its box: the tower's flat lilac ambient stays out and the skin's own rims and seams
+## are the light in there (Forward+ and Mobile, the headset; the Compatibility renderer has no probes and shows the
+## skin in the tower's light).
+##
 ## Geometry: tools/iso_prefabs.py (the expressions, their checks, the march) -> bake_forms.gd -> forms/<form>.res.
 ## Walked in the tower by tools/probes/iso_prefabs_walk.gd.
 const FORMS_DIR := "res://commons/artifacts/iso_prefabs/forms/"
-const FORMS := ["tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere"]
+const FORMS := ["tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere", "passes"]
 const FINISHES := ["provenance", "satin", "cast"]
 const SHADER := preload("res://commons/artifacts/iso_prefabs/iso_prefab.gdshader")
+const RHIZOME := preload("res://commons/artifacts/radial_inside/rhizome_surface.gdshader")
+## rhizome_surface.gdshader's own modes, in its order: the index IS the mode.
+const SKINS := ["wetflesh", "nacre", "chitin", "film", "lymph", "bone"]
 const PATH_COLOUR := Color(1, 0.5, 0)                 # advanced_carver.gd path_line_color
 
-@export_enum("tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere") var form := "tunnel"
+@export_enum("tunnel", "crossing", "thresholds", "sieve", "dome", "basin", "gutter_ramp", "mould", "cast", "hump_bridge", "die", "gyroid_screen", "stile", "mound", "stones", "pipe_tee", "spiral_ramp", "funnel", "chute", "boulder", "carved_walk", "carved_spiral", "carved_branches", "carved_perlin", "carved_grid", "carved_sphere", "passes") var form := "tunnel"
 @export_enum("provenance", "satin", "cast") var finish := "provenance"
+## The grown-body skin of a form that asks for it (the passes); see the header.
+@export_enum("wetflesh", "nacre", "chitin", "film", "lymph", "bone") var skin := "wetflesh"
 ## A carving's path drawn as its demo draws it (an orange line); Grid Tunnels has none, as in the demo.
 @export var path_line := true
 ## The body (mesh, collision, path line) turned about y in quarter turns, the plaque left in front: a carving can show its
@@ -56,11 +74,12 @@ var _body: CollisionObject3D
 var _mesh: MeshInstance3D
 var _sign: Node3D
 var _line: Node3D
+var _interior: ReflectionProbe
 var _built := ""
 
 
 func _ready() -> void:
-	for key in ["form", "finish", "plaque", "frozen", "path_line", "body_turn"]:
+	for key in ["form", "finish", "skin", "plaque", "frozen", "path_line", "body_turn"]:
 		if has_meta("config_" + key): _take({key: get_meta("config_" + key)})
 	_build()
 
@@ -68,6 +87,7 @@ func _ready() -> void:
 func _take(config_data: Dictionary) -> void:
 	if config_data.has("form") and str(config_data["form"]) in FORMS: form = str(config_data["form"])
 	if config_data.has("finish") and str(config_data["finish"]) in FINISHES: finish = str(config_data["finish"])
+	if config_data.has("skin") and str(config_data["skin"]) in SKINS: skin = str(config_data["skin"])
 	if config_data.has("path_line"): path_line = str(config_data["path_line"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
 	if config_data.has("body_turn"): body_turn = posmod(roundi(float(str(config_data["body_turn"])) / 90.0) * 90, 360)
 	if config_data.has("plaque"): plaque = str(config_data["plaque"]).to_lower() in ["true", "1", "1.0", "on", "yes"]
@@ -80,7 +100,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _build() -> void:
-	var key := "%s|%s|%s|%s|%s|%s" % [form, finish, plaque, frozen, path_line, body_turn]
+	var key := "%s|%s|%s|%s|%s|%s|%s" % [form, finish, plaque, frozen, path_line, body_turn, skin]
 	if key == _built: return
 	var mesh := load(FORMS_DIR + form + ".res") as ArrayMesh
 	if mesh == null:
@@ -88,7 +108,8 @@ func _build() -> void:
 		return
 	if _built.get_slice("|", 0) != form or _body == null:
 		_build_body(mesh)
-	_mesh.material_override = _material(finish)
+		_build_interior(mesh)
+	_mesh.material_override = _skin_material(skin) if str(mesh.get_meta("skin_shader", "")) == "rhizome" else _material(finish)
 	if _body is StaticBody3D: _body.rotation_degrees.y = float(body_turn)
 	if _sign != null:
 		_sign.queue_free()
@@ -148,6 +169,51 @@ func _material(which: String) -> ShaderMaterial:
 	m.set_shader_parameter("finish", maxi(0, FINISHES.find(which)))
 	_materials[which] = m
 	return m
+
+
+## One shared grown-body material per skin. The suture floor is radial_inside's measured one (0.88: below it a smooth
+## body is a seam everywhere); the passes' tie runs over 0.9 m, so it lights the mouth where two movements met.
+func _skin_material(which: String) -> ShaderMaterial:
+	var key := "rhizome|" + which
+	if _materials.has(key): return _materials[key]
+	var m := ShaderMaterial.new()
+	m.shader = RHIZOME
+	m.set_shader_parameter("mode", maxi(0, SKINS.find(which)))
+	m.set_shader_parameter("tint", Color(1, 1, 1, 1))
+	m.set_shader_parameter("suture_color", Color(1.0, 0.94, 0.86, 1.0))   # warm white: the one unsaturated glow inside
+	m.set_shader_parameter("limb_mix", 0.85)
+	m.set_shader_parameter("suture_floor", 0.88)
+	m.set_shader_parameter("suture_energy", 1.8)
+	m.set_shader_parameter("grain", 1.0)
+	m.set_shader_parameter("glow", 0.35)
+	m.set_shader_parameter("seed_offset", 161.0 * 0.31)
+	_materials[key] = m
+	return m
+
+
+## An inside's own dark: a ReflectionProbe over the form's box, interior (no sky), its ambient a deep violet, updated
+## once. Only a rhizome form gets one; it turns with the body.
+func _build_interior(mesh: ArrayMesh) -> void:
+	if _interior != null:
+		_interior.queue_free()
+		_interior = null
+	if str(mesh.get_meta("skin_shader", "")) != "rhizome": return
+	var box: Array = mesh.get_meta("aabb", [[-0.5, 0, -0.5], [0.5, 1, 0.5]])
+	var lo := Vector3(float(box[0][0]), float(box[0][1]), float(box[0][2]))
+	var hi := Vector3(float(box[1][0]), float(box[1][1]), float(box[1][2]))
+	var probe := ReflectionProbe.new()
+	probe.name = "IsoInterior"
+	probe.size = hi - lo
+	probe.position = (lo + hi) * 0.5
+	probe.interior = true
+	probe.box_projection = true
+	probe.blend_distance = 0.5
+	probe.update_mode = ReflectionProbe.UPDATE_ONCE
+	probe.ambient_mode = ReflectionProbe.AMBIENT_COLOR
+	probe.ambient_color = Color("2a1838")
+	probe.ambient_color_energy = 0.7
+	_interior = probe
+	_body.add_child(probe)
 
 
 ## The walk that carved a carving, drawn as its demo draws it - orange, unlit - as thin tubes (a one-pixel line
@@ -236,7 +302,7 @@ func _build_plaque(mesh: ArrayMesh) -> Node3D:
 
 func state() -> Dictionary:
 	var mesh: ArrayMesh = _mesh.mesh if _mesh != null else null
-	return {"form": form, "finish": finish, "rigid": _body is RigidBody3D, "frozen": frozen,
+	return {"form": form, "finish": finish, "skin": skin, "rigid": _body is RigidBody3D, "frozen": frozen,
 		"triangles": (mesh.surface_get_array_index_len(0) / 3) if mesh != null else 0,
 		"collision_triangles": (mesh.get_meta("collision_faces", PackedVector3Array()) as PackedVector3Array).size() / 3 if mesh != null else 0,
 		"body_at": _body.global_position if _body != null else Vector3.ZERO,

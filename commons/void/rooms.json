@@ -46580,6 +46580,25 @@
           }
         },
         {
+          "id": "iso-passes",
+          "artifact": "iso_prefab",
+          "station": "SW",
+          "position": [
+            -26.0,
+            0.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "form": "passes",
+            "skin": "wetflesh",
+            "plaque": false,
+            "exterior_walk": true,
+            "editor_label": "Passes | difference(box, spiral + grid + walk + sine + branches) | iso prefab, difference; the boolean floor yard"
+          }
+        },
+        {
           "id": "side-slab-north",
           "artifact": "void_slab_extension",
           "station": "NW",
@@ -46595,6 +46614,24 @@
             "depth": 10.0,
             "seed": 161,
             "editor_label": "Side slab / the yard's north room: the six carvings of the Random Boolean Carving and the dome"
+          }
+        },
+        {
+          "id": "side-slab-west",
+          "artifact": "void_slab_extension",
+          "station": "SW",
+          "position": [
+            -21,
+            0.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 20.0,
+            "depth": 10.0,
+            "seed": 161,
+            "editor_label": "Side slab / the yard's west room: Passes, a box carved from the inside out"
           }
         }
       ],
@@ -46859,6 +46896,13 @@
           "position": [
             -5.95,
             -0.6
+          ]
+        },
+        {
+          "label": "PASSES / CARVED FROM THE INSIDE OUT\nFive movements, five colours; where two met, the wall lights.",
+          "position": [
+            -19.9,
+            0.2
           ]
         }
       ],

@@ -775,7 +775,231 @@ def _carving_builder(name):
     return lambda: _carved(name)
 
 
-# ---------------------------------------------------------------- the catalogue of forms
+
+# ---------------------------------------------------------------- the passes: a box to walk into (Palle, 2026-11-13)
+# "Take the best shader and add inner-out different passes of movement inside a bigger and larger box so we can walk
+# into strange places." A box 16 x 5 x 9 m carved from the inside out by the Random Boolean Carving's own movements, at
+# a body's size:
+#   SPIRAL    the inner room: a pass coiled one and a quarter turns out from a pillar
+#   GRID      straight runs and right angles, from a mouth in the building face to the room, with a dead-end stub
+#   WALK      from a second mouth in the building face to the room, every step drawn at random - sideways, and up or
+#             down: its floor climbs and drops like a random walk's height
+#   SINE      out of the room's east side, snaking to the far end of the box
+#   BRANCHES  out of the room's ceiling: a trunk that forks and forks again and leaves through the roof as light
+# Every pass keeps 0.3 m of wall to the box's outer faces except at its mouth (checked: the faces are sampled), and
+# 0.3 m to the passes it does not meet. A pass breathes (its radius swells and narrows along its length) and opens
+# into a pocket with a skylight. Coloured as PARTS for the rhizome surface shader: COLOR.rgb is the pass a wall
+# belongs to, COLOR.a how near the runner-up pass is - 1 where two passes fused, which the shader lights.
+
+PASS_BOX = (8.0, 2.5, 4.5)      # half extents: 16 x 5 x 9 m; +z is the face toward the building
+PASS_Y = 1.05                   # a pass's axis over its floor; radius 1.32 +- 0.16, so a floor 1.3 - 2.1 m wide
+PASS_FLOOR = 0.004              # the floor at the outer faces, so a mouth meets the slab without a step
+PASS_FLOOR_IN = 0.06            # the floor inside: 6 cm of the box's own material over the slab, drawn in the skin
+PASS_FLOOR_RAMP = 0.9           # from the faces to the inside floor, over this much (3.6 degrees)
+PASS_HUES = {'spiral': (0.62, 0.30, 0.92), 'walk': (0.86, 0.22, 0.52), 'sine': (0.30, 0.42, 0.95),
+             'grid': (0.20, 0.78, 0.72), 'branches': (0.95, 0.52, 0.20), 'box': (0.90, 0.88, 0.84)}
+
+
+def passes_plan(seed=161):
+    rng = np.random.RandomState(seed)
+    hx, hy, hz = PASS_BOX
+    room = np.array([0.0, 0.0, -0.3])
+    paths, floors, mouths = {}, {}, []
+    # SPIRAL: the room, coiled out from its pillar
+    paths['spiral'] = [room + np.array([np.cos(a) * r, 0.0, np.sin(a) * r])
+                       for a, r in zip(0.3 * np.pi + np.linspace(0, 2.5 * np.pi, 60), np.linspace(1.15, 1.6, 60))]
+    # GRID: in from the building face at x 4.6, by right angles, to the room's north-east; a stub runs on east
+    paths['grid'] = [np.array(v, float) for v in ((4.6, 0, hz + 1.2), (4.6, 0, 2.7), (2.0, 0, 2.7), (2.0, 0, 1.4), (1.2, 0, 0.9))]
+    paths['grid_stub'] = [np.array([4.6, 0, 2.7]), np.array([6.3, 0, 2.7])]
+    mouths.append(dict(face='+z', at=4.6, name='grid'))
+    # WALK: in from the building face at x -5.2, south down the west of the box, then east into the room's south-west.
+    # Each 1.2 m step is drawn: sideways within the lane, and the floor up or down 0.3 m (never below the slab, never
+    # over 0.9 m), level again where it meets the room
+    for _ in range(64):                                 # drawn again until the walk climbs at least 0.6 m somewhere
+        walk, heights = [np.array([-5.2, 0, hz + 1.2]), np.array([-5.2, 0, 3.3])], [0.0, 0.0]
+        z, h = 3.3, 0.0
+        while z > -2.2:
+            z = max(z - 1.2, -2.6)
+            h = float(np.clip(h + rng.choice([-0.35, 0.35, 0.35]), 0.0, 0.9))
+            walk.append(np.array([float(np.clip(-5.25 + rng.uniform(-0.35, 0.35), -5.6, -4.9)), 0, z]))
+            heights.append(h)
+        if max(heights) >= 0.6:
+            break
+    for x in (-3.9, -2.6):
+        h = max(0.0, h - 0.45)
+        walk.append(np.array([x, 0, -2.6]))
+        heights.append(h)
+    walk.append(np.array([-1.3, 0, -1.8]))             # onto the room's floor, so no sill where they meet
+    heights.append(0.0)
+    heights[-2] = 0.0
+    paths['walk'] = walk
+    floors['walk'] = heights
+    mouths.append(dict(face='+z', at=-5.2, name='walk'))
+    # SINE: out of the room's east side to the far end
+    xs = np.arange(2.7, hx + 0.95, 0.45)
+    paths['sine'] = [np.array([1.5, 0.0, -1.0])] + [np.array([x, 0.0, -1.55 + 0.95 * np.sin(2 * np.pi * (x - xs[0]) / 4.3)]) for x in xs]
+    mouths.append(dict(face='+x', at=float(paths['sine'][-1][2]), name='sine'))
+    # BRANCHES: up out of the room's ceiling over the coil's north side, forking twice, out through the roof
+    base = np.array([0.0, 2.0, 1.1])
+    trunk_top = base + np.array([0.0, 1.15, 0.0])
+    branches = [(base, trunk_top, 0.55)]
+    tips = []
+    for sx in (-1, 1):
+        a = trunk_top + np.array([0.8 * sx + rng.uniform(-0.15, 0.15), 0.95, 0.35 * sx + rng.uniform(-0.15, 0.15)])
+        branches.append((trunk_top, a, 0.42))
+        for sz in (-1, 1):
+            tip = a + np.array([0.45 * sx + rng.uniform(-0.15, 0.15), 2 * hy + 0.4 - a[1], 0.5 * sz + rng.uniform(-0.1, 0.1)])
+            branches.append((a, tip, 0.3))
+            tips.append(tip)
+    # pockets: where the walk is highest, and the middle of the sine; each with a skylight
+    top = int(np.argmax(heights))
+    pockets = [(np.array([walk[top][0], heights[top], walk[top][2]]), 1.7, 'walk')]
+    mid = paths['sine'][len(paths['sine']) // 2]
+    pockets.append((np.array([mid[0], 0.0, max(mid[2], -hz + 0.35 + 1.75)]), 1.7, 'sine'))
+    skylights = [q for q, _, _ in pockets]
+    return dict(room=room, paths=paths, floors=floors, mouths=mouths, branches=branches, tips=tips, pockets=pockets,
+                skylights=skylights, pillar=room)
+
+
+def _floor_along(points, heights):
+    """The height of a pass's floor under a plan point: along the nearest segment of its line, interpolated."""
+    a = np.array([[q[0], q[2]] for q in points[:-1]], float)
+    b = np.array([[q[0], q[2]] for q in points[1:]], float)
+    ha, hb = np.array(heights[:-1], float), np.array(heights[1:], float)
+
+    def at(p):
+        xz = p[:, [0, 2]]
+        best_d = np.full(len(p), np.inf)
+        best_h = np.zeros(len(p))
+        for i in range(len(a)):
+            ab = b[i] - a[i]
+            t = np.clip(((xz - a[i]) @ ab) / max(ab @ ab, 1e-9), 0.0, 1.0)
+            d = np.linalg.norm(xz - (a[i] + t[:, None] * ab), axis=1)
+            m = d < best_d
+            best_d = np.where(m, d, best_d)
+            best_h = np.where(m, ha[i] + t * (hb[i] - ha[i]), best_h)
+        return best_h
+    return at
+
+
+def _pass_part(points, phase, heights=None):
+    """One pass as a field: spheres along its line, the radius breathing with the distance walked; with `heights`,
+    its axis follows its floor and the air is cut flat at that floor."""
+    pts = np.array(points, float)
+    hs = np.zeros(len(pts)) if heights is None else np.array(heights, float)
+    length = np.r_[0, np.cumsum(np.linalg.norm(np.diff(pts, axis=0), axis=1))]
+    dense = []
+    for i in range(len(pts) - 1):
+        n = max(1, int(np.linalg.norm(pts[i + 1] - pts[i]) / 0.35))
+        for t in np.linspace(0, 1, n, endpoint=False):
+            q = pts[i] + (pts[i + 1] - pts[i]) * t
+            sw = length[i] + (length[i + 1] - length[i]) * t
+            dense.append((q, hs[i] + (hs[i + 1] - hs[i]) * t, 1.32 + 0.16 * np.sin(2 * np.pi * sw / 3.4 + phase)))
+    dense.append((pts[-1], hs[-1], 1.32))
+    centres = np.array([[q[0], h + PASS_Y, q[2]] for q, h, _ in dense])
+    radii = np.array([r for _, _, r in dense])
+
+    def d(p):
+        best = np.full(len(p), np.inf)
+        for c, r in zip(centres, radii):
+            best = np.minimum(best, np.linalg.norm(p - c, axis=1) - r)
+        return best
+    tube = leaf(d)
+    if heights is None:
+        return tube
+    floor = _floor_along(points, heights)
+    return I(tube, leaf(lambda p: floor(p) - p[:, 1]))
+
+
+def pass_parts(plan=None):
+    """The passes as separate fields (for the carving and for the colours), each with its name."""
+    plan = plan or passes_plan()
+    groups = {}
+    for k, (name, pts) in enumerate(plan['paths'].items()):
+        hue = name.split('_')[0]
+        groups.setdefault(hue, []).append(_pass_part(pts, phase=k * 1.3, heights=plan['floors'].get(name)))
+    floors = {name.split('_')[0]: _floor_along(plan['paths'][name], hs) for name, hs in plan['floors'].items()}
+    for q, r, hue in plan['pockets']:
+        pocket = sphere((q[0], q[1] + 1.35, q[2]), r)
+        if hue in floors:                                # a pocket on a climbing pass keeps that pass's floor
+            pocket = I(pocket, leaf(lambda p, fl=floors[hue]: fl(p) - p[:, 1]))
+        groups[hue].append(pocket)
+        groups[hue].append(cyl((q[0], q[1] + 1.35 + 2.5, q[2]), 'y', 0.45, 2.5))
+    groups['branches'] = [capsule(a, b, r) for a, b, r in plan['branches']]
+    parts = [(hue, SU(0.4, *fs) if len(fs) > 1 else fs[0]) for hue, fs in groups.items()]
+    # a smooth union swells below both fields where they meet, so a climbing pass is cut at its floor AFTER the blend
+    return [(hue, I(f, leaf(lambda p, fl=floors[hue]: fl(p) - p[:, 1])) if hue in floors else f) for hue, f in parts]
+
+
+def pass_floor(x, z):
+    """The passes' floor height at plan points: PASS_FLOOR_IN inside, ramped down to PASS_FLOOR at the outer faces."""
+    hx, _, hz = PASS_BOX
+    inner = np.minimum(hx - np.abs(x), hz - np.abs(z))
+    return PASS_FLOOR + (PASS_FLOOR_IN - PASS_FLOOR) * np.clip(inner / PASS_FLOOR_RAMP, 0.0, 1.0)
+
+
+def _passes():
+    plan = passes_plan()
+    hx, hy, hz = PASS_BOX
+    # the box goes FLOOR_SINK into the slab (dropped from the mesh), so under a pass there is material to draw a floor
+    box = rbox((0, hy - FLOOR_SINK / 2, 0), (hx, hy + FLOOR_SINK / 2, hz), 0.25)
+    air = I(SU(0.5, *[f for _, f in pass_parts(plan)]), leaf(lambda p: pass_floor(p[:, 0], p[:, 2]) - p[:, 1]), role=CUT)
+    pillar = cyl((plan['pillar'][0], hy, plan['pillar'][2]), 'y', 0.5, hy, 0.2)
+    return ON_FLOOR(U(D(box, air, k=0.15), pillar))
+
+
+def passes_faces(f, plan, inset=0.12, step=0.2):
+    """The box's outer faces sampled just inside: how many points are open, and which of those are not at a mouth
+    or a light shaft (a pass that broke out where it should not)."""
+    hx, hy, hz = PASS_BOX
+    pts, where = [], []
+    us = np.arange(-hx + 0.4, hx - 0.4 + 1e-6, step)
+    ws = np.arange(-hz + 0.4, hz - 0.4 + 1e-6, step)
+    ys = np.arange(0.3, 2 * hy - 0.3 + 1e-6, step)
+    for u in us:
+        for y in ys:
+            pts += [(u, y, hz - inset), (u, y, -hz + inset)]
+            where += ['+z', '-z']
+    for w in ws:
+        for y in ys:
+            pts += [(hx - inset, y, w), (-hx + inset, y, w)]
+            where += ['+x', '-x']
+    for u in us:
+        for w in ws:
+            pts.append((u, 2 * hy - inset, w))
+            where.append('top')
+    pts = np.array(pts)
+    d, _, _ = evaluate(f, pts)
+    lights = [(q[0], q[2]) for q in list(plan['tips']) + list(plan['skylights'])]
+    stray = []
+    for p, face, dv in zip(pts, where, d):
+        if dv <= 0:
+            continue
+        if face == 'top' and any(np.hypot(p[0] - x, p[2] - z) < 0.8 for x, z in lights):
+            continue
+        if any(m['face'] == face and abs((p[0] if face in ('+z', '-z') else p[2]) - m['at']) < 1.9 for m in plan['mouths']):
+            continue
+        stray.append([round(float(v), 2) for v in p] + [face])
+    return int((d > 0).sum()), stray
+
+
+def part_colours(verts, normals, h):
+    """COLOR for the rhizome surface: rgb = the nearest pass's hue (the box's own on its outer faces), a = how near the
+    runner-up pass is - 1 at a tie, where two passes fused - which the shader lights."""
+    parts = pass_parts()
+    names = [n for n, _ in parts]
+    probe = verts + normals * 0.05
+    dist = np.stack([evaluate(f, probe)[0] for _, f in parts], axis=1)
+    order = np.argsort(dist, axis=1)
+    first = dist[np.arange(len(dist)), order[:, 0]]
+    second = dist[np.arange(len(dist)), order[:, 1]]
+    inside = first < 0.35                                  # on a carved wall: a pass is right there
+    hues = np.array([PASS_HUES[n] for n in names])
+    rgb = np.where(inside[:, None], hues[order[:, 0]], np.array(PASS_HUES['box']))
+    tie = np.clip(1.0 - (second - first) / 0.9, 0.0, 1.0) * inside
+    return np.concatenate([rgb, tie[:, None]], axis=1)
+
+
 # ---------------------------------------------------------------- the catalogue of forms
 
 FORMS = {
@@ -836,6 +1060,10 @@ FORMS = {
     'chute': dict(build=_chute, verb='field', h=0.02, hc=0.022, cbudget=4000, title='Chute',
                   expression='difference(sweep(trough, curve) + legs, sweep(bore, curve))',
                   principle='A section carried along a curve: a slide for a ball, from 1.2 m down into a basin.'),
+    'passes': dict(build=_passes, verb='difference', h=0.08, hc=0.12, cbudget=8000, budget=64000, extent=(9.5, 5.6, 6.0), colours='parts',
+                   skin_shader='rhizome', title='Passes',
+                   expression='difference(box, spiral + grid + walk + sine + branches)',
+                   principle='Five movements carve a box from the inside out: each pass keeps its colour, and where two met the wall lights.'),
     'boulder': dict(build=_boulder, verb='field', h=0.025, title='Boulder',
                     expression='smooth_union(floor, ellipsoid + noise)',
                     principle='A boundary made from values: the noise moves every point of it in or out.'),
@@ -1006,6 +1234,8 @@ def mesh_of(name, h=None, purpose='render'):
         if not rigid:                                   # what lies under the floor (or on it) is never seen
             verts, normals, _, faces = clip_above(verts, normals, np.zeros((len(verts), 4)), faces, 0.003)
         colours, role, band = data_colours(f, verts, normals, h, rigid, spec.get('ao_reach', 0.6))
+        if spec.get('colours') == 'parts':
+            colours = part_colours(verts, normals, h)
         if spec.get('carving'):                         # P8 (d): the demo's cutters are smooth-shaded (smooth_faces): a cave
             cut = colours[:, 0] > 0.5                    # wall's normal points to the centre of its nearest cutter
             if cut.any():
@@ -1167,6 +1397,44 @@ def checks(name, m):
         need('and round inside it (r 1.2)', c2, c2 >= 0.1, '>= 0.1 m')
         hs = surface_height(f, [(0, 0)], top=4.0)
         need('ceiling over the middle (the oculus is open)', hs[0], hs[0] < 0.01, 'open')
+    elif name == 'passes':
+        plan = passes_plan()
+        worst = {}
+        for k, pts in plan['paths'].items():
+            hs = plan['floors'].get(k, [0.0] * len(pts))
+            dense = []
+            for (a, ha), (b, hb) in zip(zip(pts[:-1], hs[:-1]), zip(pts[1:], hs[1:])):
+                # a body on a slope rests on it a little higher than on the flat: r (sec(slope) - 1)
+                lift = WALKER_R * (np.sqrt(1.0 + ((hb - ha) / max(np.hypot(b[0] - a[0], b[2] - a[2]), 1e-6)) ** 2) - 1.0)
+                for t in np.linspace(0, 1, 6, endpoint=False):
+                    dense.append((a[0] + (b[0] - a[0]) * t, a[2] + (b[2] - a[2]) * t, ha + (hb - ha) * t + lift))
+            dense.append((pts[-1][0], pts[-1][2], hs[-1]))
+            # a body stands ON its floor: the lowest sample is lifted 6 cm, so what is measured is walls and ceiling
+            # (on a level pass the floor is a 4 mm sheet over the slab and the sampling missed it either way)
+            ys = np.linspace(WALKER_R + 0.06, WALKER_H - WALKER_R, 7)
+            centres = np.array([(x, max(fl, float(pass_floor(x, z))) + y, z) for x, z, fl in dense[::2] for y in ys])
+            worst[k] = round(free_radius(f, centres) - WALKER_R, 3)
+        need('every pass leaves a standing body room (worst, m)', min(worst.values()), min(worst.values()) >= 0.05, '>= 0.05 m ' + json.dumps(worst))
+        flat = [k for k in plan['paths'] if k not in plan['floors']]
+        off = 0.0
+        for k in flat:
+            xz = np.array([(q[0], q[2]) for q in plan['paths'][k] if abs(q[0]) < PASS_BOX[0] and abs(q[2]) < PASS_BOX[2]])
+            off = max(off, float(np.abs(surface_height(f, xz, top=1.0) - pass_floor(xz[:, 0], xz[:, 1])).max()))
+        need('the level passes stand on their own floor, 6 cm up inside (worst off, m)', off, off < 0.02, '< 0.02')
+        wk = [(q, hq) for q, hq in zip(plan['paths']['walk'], plan['floors']['walk']) if abs(q[2]) < PASS_BOX[2]]
+        got = surface_height(f, [(q[0], q[2]) for q, _ in wk], top=1.6)
+        want = np.array([max(hq, float(pass_floor(q[0], q[2]))) for q, hq in wk])
+        need('the walk climbs and drops (highest floor, m)', float(got.max()), got.max() >= 0.55, '>= 0.55')
+        need('and its floor is where its steps put it (worst, m)', float(np.abs(got - want).max()), np.abs(got - want).max() < 0.06, '< 0.06')
+        opened, stray = passes_faces(f, plan)
+        need('the box is closed but at its mouths and light shafts (stray openings)', len(stray), not stray, '0 ' + json.dumps(stray[:4]))
+        mouths = 0
+        for mo in plan['mouths']:
+            p = (mo['at'], 1.0, PASS_BOX[2] - 0.12) if mo['face'] == '+z' else (PASS_BOX[0] - 0.12, 1.0, mo['at'])
+            mouths += int(evaluate(f, np.array([p]))[0][0] > 0)
+        need('mouths open (grid, walk, sine)', mouths, mouths == 3, '3')
+        lit = int(sum(evaluate(f, np.array([(x, 2 * PASS_BOX[1] - 0.05, z)]))[0][0] > 0 for x, _, z in plan['tips']))
+        need('the branches come out through the roof (tips open)', lit, lit == len(plan['tips']), str(len(plan['tips'])))
     elif name in CARVINGS:
         spec = CARVINGS[name]
         paths, points = carving_paths(spec)
@@ -1241,7 +1509,17 @@ def collision_of(name, render):
 
 def extras_of(name):
     """What a form's artifact needs beyond its mesh: for a carving, the path(s) its cutters were set along (the demo
-    draws them as an orange line, path_line_color (1, 0.5, 0); Grid Tunnels does not)."""
+    draws them as an orange line, path_line_color (1, 0.5, 0); Grid Tunnels does not); for the passes, their lines, so a
+    probe can walk each one."""
+    if name == 'passes':
+        plan = passes_plan()
+        outside_in = {'grid': plan['paths']['grid'], 'walk': plan['paths']['walk'], 'sine': plan['paths']['sine'][::-1],
+                      'spiral': plan['paths']['spiral'], 'grid_stub': plan['paths']['grid_stub']}
+        return {'shader': FORMS[name].get('skin_shader', ''),
+                'walks': {k: [[round(float(q[0]), 3), round(float(q[2]), 3)] for q in v] for k, v in outside_in.items()},
+                'walk_floors': [round(float(h), 3) for h in plan['floors']['walk']],
+                'chamber': [round(float(v), 3) for v in plan['room']],
+                'skylights': [[round(float(q[0]), 3), round(float(q[2]), 3)] for q in list(plan['skylights']) + list(plan['tips'])]}
     spec = CARVINGS.get(name)
     if spec is None:
         return {}
