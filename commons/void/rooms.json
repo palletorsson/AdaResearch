@@ -52160,8 +52160,8 @@
           "id": "f1_grab_sphere_F_4_2",
           "artifact": "grab_sphere_F",
           "position": [
-            -4,
-            5
+            -3.4,
+            6.2
           ],
           "station": "SW",
           "height": 1.15,
@@ -52173,8 +52173,8 @@
           "id": "f1_lambda_slider_5_2",
           "artifact": "lambda_slider",
           "position": [
-            -2,
-            5
+            -2.8,
+            4.0
           ],
           "station": "SW",
           "height": 0.95,
@@ -52201,8 +52201,8 @@
           "id": "f1_phi_slider_2_3",
           "artifact": "phi_slider",
           "position": [
-            2,
-            5
+            2.8,
+            4.0
           ],
           "station": "SE",
           "height": 0.95,
@@ -52231,11 +52231,11 @@
           "artifact": "qfep_balance_workbench",
           "position": [
             0,
-            -6
+            3.4
           ],
           "station": "NE",
           "height": 0,
-          "facing": 180,
+          "facing": 0,
           "scale": 1,
           "config": {
             "comparison": "on"
@@ -52259,20 +52259,20 @@
           "artifact": "qfep_formula_3d",
           "position": [
             0,
-            9
+            1.2
           ],
           "station": "SE",
-          "height": 1.5,
+          "height": 2.9,
           "facing": 0,
-          "scale": 1,
+          "scale": 1.6,
           "config": {}
         },
         {
           "id": "f1_grab_sphere_E_2_9",
           "artifact": "grab_sphere_E",
           "position": [
-            -4,
-            6
+            -2.8,
+            6.2
           ],
           "station": "SW",
           "height": 1.15,
@@ -52284,14 +52284,30 @@
           "id": "f1_grab_sphere_lambda_3_9",
           "artifact": "grab_sphere_lambda",
           "position": [
-            -4,
-            7
+            -2.2,
+            6.2
           ],
           "station": "SW",
           "height": 1.15,
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "total-line",
+          "artifact": "total_line",
+          "station": "NW",
+          "position": [
+            0,
+            -3.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "weight": "half",
+            "editor_label": "One number is a line on this floor | a 6 m painted floor: east is F, north is E; stand still and it keeps the place; every place on the red line gives the same total"
+          }
         }
       ],
       "props": [],

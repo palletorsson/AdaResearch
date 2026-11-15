@@ -708,6 +708,49 @@
           "arithmetic": "From outside the funnel is the same card pyramid at every ratio (two sides of 7.8 m2 and a back of 9.6 m2: about 25 m2). What differs: the lines where the doors come through the card (each 2 cm wide and 3.2 q^k long: 9.6 m of line against 12.8 m, 0.06 m2 apart) and what is seen through the mouth (1.1 x 2.1 m: the first inner door at 4 m from the tip, two thirds the size, against 4.5 m and three quarters; perhaps a fifth of that opening changes: 0.46 m2). 0.52 of 25: 2 %. The plank, rails and board do not change."
         }
       }
+    },
+    "total_line": {
+      "lookup_name": "total_line",
+      "map_ready": true,
+      "name": "One Number Is a Line on This Floor",
+      "class_name": "",
+      "scene": "res://commons/artifacts/total_line/total_line.tscn",
+      "description": "A playground for the QFEP introduction hall: the console's question - can two different arrangements give the same number? - at body size. A painted floor six metres square: a step east is F, a step north is E, and the floor is banded by the console's own total, F - lambda E + 0.3 phi. Stand still and the floor keeps that place: a flag, and a red line through every other place with the same total. Walk the line: the large number on the stand does not move, and the four-axis shape beside it does - the pale outline remembers what the total cannot. Plates beside the floor set lambda (0, a half, 1) and phi (0, 1): with lambda at zero the lines run north and a walk in E changes nothing; with phi raised the kept number is found somewhere else. It measures nothing; it is the hall's arithmetic laid out. Axis weight: zero, half, one - the lambda the floor starts with.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "qfep",
+        "total",
+        "level-set",
+        "compensation",
+        "equal-score",
+        "playground",
+        "visual-argument"
+      ],
+      "qfep_connection": "One number can summarise several contributions while concealing how they compensated for one another: here the concealment has a shape, a line, and a body can stand at both ends of it.",
+      "dev_themes": [
+        "qfep",
+        "measurement",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "weight": [
+            "zero",
+            "half",
+            "one"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "weight: half ~ one",
+          "percent": 9.0,
+          "arithmetic": "The floor is 36 m2 of bands a tenth of the total wide. At weight half the bands are 0.54 m wide and lean 27 degrees from north; at one they are 0.42 m wide and lean 45. Two sets of stripes of about that width at 18 degrees to each other disagree over roughly half the floor, but neighbouring bands differ only by a tenth of the ramp and a 8 % tone step, so about a fifth of the disagreeing area reads as a different colour: 36 x 0.5 x 0.2 = 3.6 m2, of a subject (floor, stand, plates, board) of about 40 m2: 9 %. The stand's shape changes one vertex (lambda 0.5 to 1 on a 0.75 m axis): under 0.3 m2. Zero against half is further apart: the lines stand upright."
+        }
+      }
     }
   }
 }
