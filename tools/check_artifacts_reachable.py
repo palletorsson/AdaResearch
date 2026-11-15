@@ -386,6 +386,32 @@ def unborn(rows, in_head):
     return rows
 
 
+def needs_unlanded(rows, in_head, read):
+    """Mark each row whose OWN res:// references reach a file a clone lacks:
+    needs_unlanded=[paths].
+
+    The fifth shape of the landable over-promise. From 2026-11-04 to 11-15
+    gate M read 'landable 1' every morning, and the row was
+    commons/scenes/em/em_void_copy.gd, whose line 3 preloads
+    res://commons/void/museum_copy_capture.gd -- also untracked (forum
+    261104-n6ipo). Landing it alone hands a clone a script that does not
+    parse. A vendored dependency does not count: no commit could land it.
+    Pure (`read` is injected), so the selftest feeds it; marks, never drops."""
+    for r in rows:
+        missing = []
+        for ref in RES_REF.findall(read(r["path"]) or ""):
+            dep = ref.strip().rstrip('"\'')
+            if (not dep or dep.endswith("/") or not dep.endswith(FOLLOW)
+                    or "%s" in dep or "%d" in dep or "{" in dep
+                    or dep.startswith(VENDORED) or dep == r["path"]):
+                continue
+            if dep not in in_head and dep not in missing:
+                missing.append(dep)
+        if missing:
+            r["needs_unlanded"] = sorted(missing)
+    return rows
+
+
 def read_file(rel):
     try:
         return (ROOT / rel).read_text(encoding="utf-8", errors="replace")
@@ -540,6 +566,18 @@ def selftest():
                   "unborn" not in rows[0] and rows[1].get("unborn") is True
                   and rows[2].get("unborn") is True and len(rows) == 3))
 
+    # 12. The unlanded dependency. m/copy.gd preloads m2/capture.gd, which no
+    #     commit has: landing m/copy.gd alone breaks a clone, so it is marked.
+    #     m/whole.gd preloads only a landed file and a vendored one: unmarked.
+    srcs = {"m/copy.gd": 'const C = preload("res://m2/capture.gd")',
+            "m/whole.gd": 'const A = preload("res://r/ok.gd")\n'
+                          'const K = preload("res://addons/kit/thing.gd")'}
+    rows = [{"token": "t", "registry": "r", "path": p} for p in sorted(srcs)]
+    needs_unlanded(rows, {"reg.json", "r/ok.gd"}, lambda rel: srcs.get(rel, ""))
+    cases.append(("marks a row that preloads an unlanded file",
+                  rows[0].get("needs_unlanded") == ["m2/capture.gd"]
+                  and "needs_unlanded" not in rows[1] and len(rows) == 2))
+
     bad =[name for name, ok in cases if not ok]
     for name, ok in cases:
         print("  %-52s %s" % (name, "ok" if ok else "FAIL"))
@@ -589,18 +627,22 @@ def main():
                 r["claimed_by"] = claimed[r["path"]]
     beside_dirty(split["stranded"], dirty_tracked() if paths else set())
     unborn(split["stranded"], in_head)
+    needs_unlanded(split["stranded"], in_head, read_file)
     unclaimed = [r for r in split["stranded"] if "claimed_by" not in r]
     landed_beside = [r for r in unclaimed if "beside_dirty" not in r]
-    free = [r for r in landed_beside if "unborn" not in r]
+    born = [r for r in landed_beside if "unborn" not in r]
+    free = [r for r in born if "needs_unlanded" not in r]
     floor = ("%d gitignored on purpose (a rule decides them, not a commit), "
              "%d touched within %dh (somebody's open buffer), %d stranded "
              "(%d of them claimed in the forum, %d more beside an uncommitted "
              "tracked file, %d more in a folder no commit has touched -- a "
-             "system being born). Landable by an agent today: %d."
+             "system being born, %d more loading a file no commit has). "
+             "Landable by an agent today: %d."
              % (len(split["ignored"]), len(split["live"]), int(HOLD_HOURS),
                 len(split["stranded"]), len(split["stranded"]) - len(unclaimed),
                 len(unclaimed) - len(landed_beside),
-                len(landed_beside) - len(free), len(free)))
+                len(landed_beside) - len(born), len(born) - len(free),
+                len(free)))
 
     report = {
         "registries_in_head": sum(1 for p in in_head
@@ -616,7 +658,8 @@ def main():
         "stranded": len(split["stranded"]),
         "claimed_in_the_forum": len(claimed),
         "beside_uncommitted_tracked": len(unclaimed) - len(landed_beside),
-        "unborn_folder": len(landed_beside) - len(free),
+        "unborn_folder": len(landed_beside) - len(born),
+        "needs_unlanded": len(born) - len(free),
         "landable_today": len(free),
         "floor_reading": floor,
         "split": split,
