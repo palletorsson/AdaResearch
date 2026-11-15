@@ -664,6 +664,50 @@
           "arithmetic": "The two differ by the lettering of one sentence on one card of six: three lines of 5 cm letters against 2.4 cm ones, on a patch of about 1.3 x 0.4 m: half a square metre of thin strokes in a row of cards 8.8 m wide and 2.2 m high that fills about a third of the frame: 0.9 % of the subject, a third of it ink: 0.4 %. The axis is true to its subject: the hall's point is that this difference is small and is not evidence."
         }
       }
+    },
+    "halving_door": {
+      "lookup_name": "halving_door",
+      "map_ready": true,
+      "name": "Every Door, Half as Far",
+      "class_name": "",
+      "scene": "res://commons/artifacts/halving_door/halving_door.tscn",
+      "description": "A playable space for the non-Euclidean hall: the disk's rule for distance, walked along one line. A plank goes out over the slab's edge to a cardboard funnel six metres long; through its mouth a door is seen, and behind it a door half the size, half as far from the tip, and so on. Inside, every door is as far as the last was (4.2 m of walking) and as large when reached, and the tip stays six metres ahead: there is no last door. The visitor is not made smaller: the funnel is made larger round the visitor, about its own tip, by exactly the visitor's steps (scale e^(metres/6)), the door behind papered over. The body is not moved, except sideways on the way out by however far the walls pushed it off the plank's line. A flag on the funnel's back marks how far the last visitor got. Axis ratio: half, two_thirds, three_quarters - any ratio under one gives a rim that is never reached. Benched in tools/probes/halving_door_bench.py. Not tried in a headset.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "hyperbolic",
+        "poincare",
+        "distance",
+        "rim",
+        "self-similar",
+        "playground",
+        "non-euclidean",
+        "visual-argument"
+      ],
+      "qfep_connection": "A boundary that can be drawn and pointed at, and that no walk arrives at: the distance belongs to the rule for a step, not to the picture.",
+      "dev_themes": [
+        "geometry",
+        "foundations",
+        "space"
+      ],
+      "dna": {
+        "axes": {
+          "ratio": [
+            "half",
+            "two_thirds",
+            "three_quarters"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "ratio: two_thirds ~ three_quarters",
+          "percent": 2.0,
+          "arithmetic": "From outside the funnel is the same card pyramid at every ratio (two sides of 7.8 m2 and a back of 9.6 m2: about 25 m2). What differs: the lines where the doors come through the card (each 2 cm wide and 3.2 q^k long: 9.6 m of line against 12.8 m, 0.06 m2 apart) and what is seen through the mouth (1.1 x 2.1 m: the first inner door at 4 m from the tip, two thirds the size, against 4.5 m and three quarters; perhaps a fifth of that opening changes: 0.46 m2). 0.52 of 25: 2 %. The plank, rails and board do not change."
+        }
+      }
     }
   }
 }

@@ -50835,6 +50835,22 @@
             "across": "ten",
             "editor_label": "A small planet | a door onto a world ten metres across with a biome on it, hanging north of the tower: walk straight 31.4 m and the door comes back over the horizon"
           }
+        },
+        {
+          "id": "halving-door",
+          "artifact": "halving_door",
+          "station": "NE",
+          "position": [
+            10,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "ratio": "half",
+            "editor_label": "Every door, half as far | a plank over the north edge to a cardboard funnel 6 m long; inside every door is as far as the last and the tip stays 6 m ahead: the disk's rim, walked"
+          }
         }
       ],
       "props": [],

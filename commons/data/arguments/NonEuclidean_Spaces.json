@@ -595,26 +595,30 @@
     {
       "id": "halving_door",
       "form": "playground",
-      "status": "written",
+      "status": "standing: row halving-door",
       "title": "EVERY DOOR, HALF AS FAR",
       "at": [
-        0.0,
-        0.0
+        10.0,
+        -8.3
       ],
       "size": [
-        8.0,
-        3.0
+        3.2,
+        9.0
       ],
       "claim": "A rim can be at a finite distance on the picture and infinitely many steps away for the one walking toward it.",
       "from_the_hall": "'The visible rim is infinitely far away in that metric.'",
       "built_from": [
-        "a row of stencil doorways, each showing the same corridor at half the size",
-        "the rig scaled at each crossing so the corridor always looks full size"
+        "a plank with rails out over the north edge",
+        "a cardboard funnel six metres long lying on two beams: a door, and behind it the same door at half the size, nine of them built",
+        "a crate beside each door (the lab's crate), a pink line along the floor to the tip",
+        "paper over the door behind, seen from inside only",
+        "a flag on the funnel's back"
       ],
-      "what_stands": "A corridor of doors that from outside shrinks to a point three metres away.",
-      "what_you_do": "Walk through door after door. From inside every door is as far as the last; from outside you were seen shrinking toward a point you never reached.",
-      "what_it_shows": "The Poincare disk's rule for distance, walked along one line.",
-      "needs": "scaling the player (XROrigin world scale; the desktop walker has no such thing yet)"
+      "what_stands": "North of shaft B a plank goes out over the edge to a cardboard funnel that narrows to a point six metres out. Through its mouth: a door, a smaller door, a smaller door.",
+      "what_you_do": "Walk in. Every door is 4.2 m of walking after the last and as large when you reach it; the tip stays six metres ahead. Walk back out through the paper, door by door: the flag on the funnel's back marks how far you got.",
+      "what_it_shows": "The Poincare disk's rule for distance, walked along one line: a step counts for more the nearer the rim it is taken, so the rim is a finite way off on the picture and no number of steps away. With `ratio` two_thirds or three_quarters the same, with more doors.",
+      "how": "I wrote that this needed the player scaled. It does not: the funnel is made larger round the visitor, about its own tip, by exactly the visitor's steps (scale e^(metres/6)), and the tip is kept six metres ahead. The funnel is the same under its own ratio, so one funnel between 1 and 2 times its size is all that is ever shown, the doors renumbered; the door behind is papered over because the hall cannot be made larger too. No stencil. The body is not moved, except sideways on the way out by however far the walls pushed it off the plank's line.",
+      "measured": "tools/probes/halving_door_bench.py (python, before building): the ground under the feet slides under 0.1 % of a step; a door every 4.159 m; after 100 m, 24 doors and 0.35 thousandths of a mm from the tip. tools/probes/halving_door_walk.gd, the tower's walker: ten doors in 42 m, the next door 2.95 to 2.97 m ahead at each, the tip 6.00 m ahead at each, 5.8 mm from it on the picture; beside the axis the wall comes nearer by the rule; out by the way it came, the funnel as built, no fall counted (7 of 7). Not tried in a headset."
     }
   ],
   "open": [
@@ -622,7 +626,7 @@
     "Plate 7's story of Gauss measuring a mountain triangle is unchecked and marked so.",
     "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing stood with a column 0.55 m in front of its door and could not be entered; moved to [-9.5, 8].",
     "The hall text does not mention Seven Spaces at all. Plate 8 is the only words on the floor about it besides its own.",
-    "One more playable space is written under visual_arguments and not built: the halving door, which needs the player scaled. Three corners and home stands (five by its axis; no five-cornered row is placed), and so do the mirrored lap and the walked tiling. The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
+    "All the playable spaces written under visual_arguments now stand: three corners and home (five by its axis; no five-cornered row is placed), the mirrored lap, the walked tiling, the small planet and the halving door. The stencil doorway is proven in the tower's desktop renderer only; none of these has been tried in a headset."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_noneuclid). Near the cork: what the hall text says. In front: what I made of it.",
