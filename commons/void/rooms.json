@@ -50741,7 +50741,7 @@
           "station": "NE",
           "position": [
             17,
-            0
+            3.6
           ],
           "facing": 270,
           "height": 0,
@@ -50786,6 +50786,22 @@
             "corners": "three",
             "board_east": "true",
             "editor_label": "Three corners and you are home | a block with a closed corridor and one door: three right-angled corners close the walk (270 on a flat floor); beside the standing 180"
+          }
+        },
+        {
+          "id": "mirror-lap",
+          "artifact": "mirror_lap",
+          "station": "NE",
+          "position": [
+            17,
+            -5.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lap": "first",
+            "editor_label": "One lap and your left is your right | a corridor joined to itself the other way up: after a lap the word LEFT is on your right and reads backwards; a second lap puts it back"
           }
         }
       ],

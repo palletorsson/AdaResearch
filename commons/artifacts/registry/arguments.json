@@ -303,6 +303,49 @@
           "arithmetic": "From outside the three are one closed cardboard block; what differs is the sign on the door's screen (one numeral, 25 cm high) and the words on the board (about 3.4 x 1.5 m, mostly the same lines). Changed lettering covers perhaps a tenth of the board: 0.5 square metres of a scene of about 60 that fills half the frame: 0.4 %; a flat rasteriser reads lettering poorly: 0.3 %. The axis lives inside, in what a walk does; a still of the outside will call it decoration and I predict so."
         }
       }
+    },
+    "mirror_lap": {
+      "lookup_name": "mirror_lap",
+      "map_ready": true,
+      "name": "One Lap and Your Left Is Your Right",
+      "class_name": "",
+      "scene": "res://commons/artifacts/mirror_lap/mirror_lap.tscn",
+      "description": "A playable non-Euclidean space for the non-Euclidean hall: a corridor joined to itself the other way up - a Moebius band laid on a floor. Go in: the word LEFT stands on your left. Walk a lap of left turns and come to it again: it stands on your right and reads backwards, every corner now turns right, and the door stays shut, because outside nothing is mirrored. A second lap puts everything back. Nothing is bent and every triangle keeps 180 degrees. Built as it must be for a body that cannot be mirrored: two blocks either side of one shared stretch; lap one goes round the north block, lap two round the south block, its mirror image; the shared stretch's word, skirtings, door lettering and end openings are turned over while a block hides them. The body is never moved. Axis lap: first, second (which sheet the door opens onto).",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "non-euclidean",
+        "moebius",
+        "non-orientable",
+        "handedness",
+        "mirror",
+        "impossible-space",
+        "playground",
+        "visual-argument",
+        "walkable"
+      ],
+      "qfep_connection": "Left and right are not properties of a body or of a place but of a way round a space; one lap and the word for your hand is on the other hand, and nothing says which of you turned.",
+      "dev_themes": [
+        "geometry",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "lap": [
+            "first",
+            "second"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "lap: first ~ second",
+          "percent": 0.0,
+          "arithmetic": "The two differ only inside, under a roof: the word and the skirtings change walls and two openings change places. From any standpoint outside, the block is the same closed cardboard box with the same door and the same board: 0 %. That is a fact about standing outside a roof, not about the axis; from the door, looking in, the red word alone is about 2.2 x 0.55 m and moves 1.1 m."
+        }
+      }
     }
   }
 }

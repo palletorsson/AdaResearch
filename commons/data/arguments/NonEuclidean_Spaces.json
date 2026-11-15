@@ -516,27 +516,28 @@
     {
       "id": "mirror_lap",
       "form": "playground",
-      "status": "written",
+      "status": "standing: row mirror-lap",
       "title": "ONE LAP AND YOUR LEFT IS YOUR RIGHT",
       "at": [
-        -17.0,
-        -6.0
+        17.0,
+        -5.2
       ],
       "size": [
-        7.0,
-        4.0
+        4.4,
+        7.4
       ],
       "claim": "A space can be flat everywhere and still not let you keep your handedness: go round once and the world is mirrored.",
       "from_the_hall": "Not in the hall text. The standing words on this floor already read the wrong way round from behind.",
       "built_from": [
-        "a ring corridor",
-        "a stencil doorway (as the wing's) showing the corridor's mirrored copy",
-        "a standing word inside"
+        "two cardboard blocks either side of one shared stretch of corridor, the south half the mirror image of the north half",
+        "the word LEFT in thick red letters, two skirtings and the door's lettering under one node that is turned over",
+        "four wall pieces that open and close the stretch's ends"
       ],
-      "what_stands": "A corridor that closes on itself with a red word standing in it.",
-      "what_you_do": "Walk one lap: the word reads backwards. Walk another: it reads forwards again.",
-      "what_it_shows": "A Moebius band's worth of floor: orientation is a property of the whole space, not of any piece of it. Here the stencil doorway is needed - the mirrored copy and the plain one are both in view at the seam.",
-      "needs": "a mirrored copy drawn through a stencil mask (negative scale flips the faces: check culling); the body is not mirrored, only what it sees"
+      "what_stands": "A cardboard block 4.4 by 7.4 m on the east wing with 'one lap / IN' on its door and a board beside it. STRAIGHT was moved south to make room.",
+      "what_you_do": "Go in: LEFT stands on your left. A lap of left turns: it stands on your right and reads backwards, every corner turns right, and the door is shut. A second lap: as it was, and out.",
+      "what_it_shows": "A Moebius band's worth of floor: orientation belongs to the way round a space, not to any piece of it. Every triangle in there keeps 180: this is not curvature.",
+      "how": "A body cannot be mirrored, so lap two is built as the mirror image of lap one, round a second block. The shared stretch is walked both times and its handed things are turned over while the body is on the far side of a block. The body is never moved. I wrote that this one would need the stencil doorway: it does not - the two sheets are never in view together.",
+      "measured": "tools/probes/mirror_lap_walk.gd, the tower's walker: word on the left; after one lap on the right, turned over, the door holds and the old way north is walled; after two as it was, and out by the door (6 of 6)."
     },
     {
       "id": "walked_tiling",
@@ -592,7 +593,7 @@
     "Plate 7's story of Gauss measuring a mountain triangle is unchecked and marked so.",
     "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing stood with a column 0.55 m in front of its door and could not be entered; moved to [-9.5, 8].",
     "The hall text does not mention Seven Spaces at all. Plate 8 is the only words on the floor about it besides its own.",
-    "Three more playable spaces are written under visual_arguments and not built: one lap and mirrored, a walked hyperbolic tiling, the halving door. Three corners and home stands (five by its axis; no five-cornered row is placed). The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
+    "Two more playable spaces are written under visual_arguments and not built: a walked hyperbolic tiling, the halving door. Three corners and home stands (five by its axis; no five-cornered row is placed), and so does the mirrored lap. The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_noneuclid). Near the cork: what the hall text says. In front: what I made of it.",
