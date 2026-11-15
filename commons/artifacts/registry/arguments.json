@@ -932,6 +932,50 @@
           "arithmetic": "The only difference is two words, RESIST and EMBRACE, standing over the two sign plates: letters 0.28 m tall, about 1.5 m and 1.7 m long, on a subject of track, stand, five plates and board of about 30 m2 seen. Two strips of 0.45 m2 of which lettering covers perhaps half: 0.45 m2 of 30: 1.5 %. That is small on purpose: the hall's own point is that nothing else changes when the words appear. One plate's highlight changes too."
         }
       }
+    },
+    "step_spiral": {
+      "lookup_name": "step_spiral",
+      "map_ready": true,
+      "name": "The Same Rule in Larger Steps",
+      "class_name": "",
+      "scene": "res://commons/artifacts/step_spiral/step_spiral.tscn",
+      "description": "A playground for the QFEP edge-of-chaos hall: which changes belong to the model, and which to the way its calculation is run. One rule - go round the pole at one rate, a circle - computed a step at a time from the same start for the same model time (one turn), in two step sizes side by side: stones and tape on the floor, amber for the coarse steps and cyan for the fine. Every step leaves the circle a little, so each computation ends outside it, the coarse one further: a spiral the step size made. A stand gives the two ends and the difference between them. A plate halves both step sizes; one adds a wall that clips whatever passes it, as an earlier version of the hall's screen did: then the two ends agree and both are wrong, and the coarse path is a ring the wall made. A ball runs the coarse path; RUN FASTER moves it three times as fast along the same stones. Benched in tools/probes/step_spiral_bench.py. Axis pair: coarse, fine.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "step-size",
+        "integration",
+        "numerical",
+        "artefact",
+        "clipping",
+        "comparison",
+        "playground",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "A pattern can be made by the rule or by the way the rule is run; agreement between two step sizes is a reason for trust, and a number that reports agreement can improve while nothing becomes truer.",
+      "dev_themes": [
+        "qfep",
+        "simulation",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "pair": [
+            "coarse",
+            "fine"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "pair: coarse ~ fine",
+          "percent": 5.0,
+          "arithmetic": "Both values draw the rule's circle, the pole, the stand, the plates and the board alike, and both draw the 48-step path (amber at fine, cyan at coarse: the same stones in another colour). What differs: coarse adds the 24-step path, a spiral of 24 tapes ending 3.55 m out (about 17 m of tape 6 cm wide: 1.0 m2, and 25 stones); fine adds the 96-step path instead (about 11 m of tape: 0.7 m2, 97 small stones). So roughly 1.7 m2 of marks exchanged and 0.9 m2 recoloured on a subject of about 50 m2 (a 7.6 m disc of floor seen, stand 9, plates 4, board 5): 5 %."
+        }
+      }
     }
   }
 }

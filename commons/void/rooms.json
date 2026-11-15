@@ -53505,10 +53505,10 @@
           "artifact": "emergence_zone",
           "station": "NW",
           "position": [
-            -14,
-            -8
+            -17.0,
+            -5.0
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.8,
           "scale": 1,
           "config": {}
@@ -53518,10 +53518,10 @@
           "artifact": "turing_pattern",
           "station": "NE",
           "position": [
-            0,
-            -8
+            -3.6,
+            2.4
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.8,
           "scale": 1,
           "config": {}
@@ -53531,10 +53531,10 @@
           "artifact": "edge_core",
           "station": "NE",
           "position": [
-            14,
-            -8
+            3.6,
+            2.2
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 1.5,
           "scale": 1,
           "config": {}
@@ -53544,10 +53544,10 @@
           "artifact": "lambda_slider",
           "station": "SW",
           "position": [
-            -14,
-            8
+            3.2,
+            6.0
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.5,
           "scale": 1,
           "config": {
@@ -53559,10 +53559,10 @@
           "artifact": "droplet_cusp",
           "station": "SE",
           "position": [
-            0,
-            8
+            -3.4,
+            5.4
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.95,
           "scale": 1,
           "config": {}
@@ -53572,14 +53572,30 @@
           "artifact": "edge_of_chaos_unlocked",
           "station": "SE",
           "position": [
-            14,
-            8
+            0,
+            3.4
           ],
-          "facing": 90,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
             "comparison_study": "on"
+          }
+        },
+        {
+          "id": "step-spiral",
+          "artifact": "step_spiral",
+          "station": "NW",
+          "position": [
+            -0.6,
+            -4.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pair": "coarse",
+            "editor_label": "The same rule in larger steps | one rule (a circle round a pole), one start, one model time, two step sizes: two spirals on the floor; a plate halves the steps, one adds a clipping wall"
           }
         }
       ],
