@@ -1,0 +1,887 @@
+{
+  "version": 1,
+  "hall": "QFEP_E_Term",
+  "title": "A count of endings, and what it leaves out (worked out on cardboard)",
+  "note": "The authored thinking for one hall, in the first person, by the pass (Claude), for Palle's request of 2026-11-14 (see Russell_Paradox.json). 'at' is the floor's own frame in metres (x east, z south), 'yaw' in degrees. A sticker of kind 'quote' stands word for word in the hall text; every other kind is mine and may be wrong - the plates say where I am unsure.",
+  "hero": {
+    "row": "f1_entropy_fan_6_5",
+    "artifact": "entropy_fan",
+    "at": [
+      0,
+      3.6
+    ],
+    "lights": [],
+    "why": "The fan is what the hall text is about: a branching diagram that counts its leaves, with CYCLE, ONE, OPEN and PRUNE.",
+    "staging": "The visitor arrived inside the particle spray, with the fan at the far north edge; the pass restaged the floor (94f96be64). The fan is straight ahead of the arrival with its four buttons toward the visitor, the spray on the west wing; north of the fan the tree taped on the floor."
+  },
+  "plates": [
+    {
+      "id": "multiply",
+      "title": "1  A FEW CHOICES, MANY FUTURES",
+      "by": "f1_entropy_fan_6_5",
+      "at": [
+        2.4,
+        6.6
+      ],
+      "yaw": -30,
+      "front": [
+        "How quickly can a few choices become many possible futures? Faster than I can picture.",
+        "One continuation at each of four levels: one path. Two: sixteen. Three: eighty-one.",
+        "It grows by multiplication: every earlier choice can be followed by all the later ones.",
+        "The fan draws all eighty-one at once. On the floor behind it I can only walk one.",
+        "That difference is the rest of this cardboard."
+      ],
+      "back": [
+        "3 x 3 x 3 x 3 = 81; 2 x 2 x 2 x 2 = 16. I did the sums; the fan's readout and the floor's stand agree with them."
+      ]
+    },
+    {
+      "id": "shared",
+      "title": "2  TWO ENDINGS SHARE A BEGINNING",
+      "by": "visual:drawn_tree",
+      "at": [
+        -1.8,
+        1.4
+      ],
+      "yaw": 20,
+      "front": [
+        "Pick two endings. Walk back from each until the paths meet.",
+        "L R R L and L R R R part at the last fork. L R R L and R L L R part at START.",
+        "They are different outcomes, and most of some histories is the same history.",
+        "Shared beginnings are how the count stays honest: it is not sixteen unrelated things.",
+        "I had been thinking of futures as a list. They are a tree, and the trunk is the past."
+      ],
+      "back": [
+        "walked: the lit path shows the shared part; the tape beyond the fork is where they separate."
+      ]
+    },
+    {
+      "id": "equal",
+      "title": "3  EQUAL LEAF WEIGHTS",
+      "by": "f1_entropy_fan_6_5",
+      "at": [
+        3.6,
+        1.6
+      ],
+      "yaw": -30,
+      "front": [
+        "The fan's readout says: equal leaf weights. Every ending is given the same probability. Then H is the logarithm of the count.",
+        "Nats here, bits on the last floor. The unit changes the number, not which endings are counted.",
+        "The logarithm is why four forks of two add up: four times ln 2.",
+        "But 'equal' was assigned, not found. Nobody watched travellers.",
+        "A count of endings is an inventory. It is not yet a forecast."
+      ],
+      "back": [
+        "4 x 0.693 = 2.77 = ln 16. checked."
+      ]
+    },
+    {
+      "id": "walked",
+      "title": "4  COUNTED, AND AS WALKED",
+      "by": "visual:drawn_tree",
+      "at": [
+        5.9,
+        -2.2
+      ],
+      "yaw": -75,
+      "front": [
+        "The stand gives the entropy twice. Counted: ln 16 = 2.77. As walked: from where travellers actually arrived.",
+        "Three walks. Two ended at the same place, one elsewhere: 0.64.",
+        "Sixteen endings were drawn. Two were used.",
+        "The hall: a strongly preferred branch could make the actual distribution much more concentrated. I preferred a branch near the stand.",
+        "To know what will happen I need the arrivals as well as the drawing."
+      ],
+      "back": [
+        "0.64 = -(2/3 ln 2/3 + 1/3 ln 1/3). three walks is a tiny sample; that was the last floor's point."
+      ]
+    },
+    {
+      "id": "which",
+      "title": "5  HOW MANY IS NOT WHICH",
+      "by": "visual:drawn_tree",
+      "at": [
+        -6.2,
+        1.0
+      ],
+      "yaw": 70,
+      "front": [
+        "PRUNE A: four gates, eight endings. PRUNE B: four gates, eight endings.",
+        "The same count. The same entropy, 2.08. Not one ending in common.",
+        "The hall says it of the fan: twenty-seven tells us how many endings remain, not which ones. Here I could walk to the difference.",
+        "A cut made early takes everything after it: each gate here removes two endings; on the fan each removes three.",
+        "To compare two closures I need the paths, not the total."
+      ],
+      "back": [
+        "the stand prints the closed paths by name (L L R, L R R ...) because the number would not tell them apart."
+      ]
+    },
+    {
+      "id": "lost",
+      "title": "6  OPEN RETURNS THE ENDINGS, NOT THE ARRIVALS",
+      "by": "visual:drawn_tree",
+      "at": [
+        6.1,
+        -4.9
+      ],
+      "yaw": -80,
+      "front": [
+        "Two beads hung at one ending. PRUNE A closed the gate in front of it. The beads were gone.",
+        "OPEN: the gate is gone, the ending is back, the tape is back. The rod is empty.",
+        "The stand: 3 arrivals hung behind gates when they closed. OPEN returns the endings, not the arrivals.",
+        "On the fan the same endings return at a touch, and the hall says that ease is part of the experiment's limit.",
+        "I made the button a little less easy. It still costs nothing to press."
+      ],
+      "back": [
+        "what the beads stand for is thin: three walks by a test walker. I do not want them to carry more than that."
+      ]
+    },
+    {
+      "id": "never",
+      "title": "7  PROHIBITED, OR NEVER DRAWN",
+      "by": "visual:drawn_tree",
+      "at": [
+        -6.1,
+        -4.9
+      ],
+      "yaw": 80,
+      "front": [
+        "An amber gate marks an option that was there and was refused. I can walk up to it.",
+        "A third way at every fork was never drawn at all. There is nothing to walk up to.",
+        "A picture of the permitted future can hide how the permissions were chosen.",
+        "Counting its endings cannot recover what was left out before the counting began.",
+        "Sixteen, or eight, or eighty-one: each number already contains somebody's decision about what a branch is."
+      ],
+      "back": [
+        "including mine. two ways at each fork, four forks: I chose that because it fits the floor."
+      ]
+    },
+    {
+      "id": "ask",
+      "title": "8  YOU CANNOT YET ASK IT TO GROW OTHERWISE",
+      "by": "visual:drawn_tree",
+      "at": [
+        -3.6,
+        -7.3
+      ],
+      "yaw": 15,
+      "front": [
+        "Who drew the tree? Who can ask for another branch, or refuse the condition for reaching one?",
+        "The fan has four buttons, and the hall is exact about them: you can reopen it; you cannot yet ask it to grow otherwise.",
+        "On the floor I left room for one kind of asking. Stand still at a last fork and a third way is drawn, in pink, to an ending nobody specified. Seventeen.",
+        "Only at the last forks. Only one more. Only forward.",
+        "So the answer to the hall's question is still: I did. Now with a suggestion box."
+      ],
+      "back": [
+        "the hall asks that what a model leaves out keep the capacity to challenge and change its terms. a third way at a last fork is a small part of that, and I should not call it more."
+      ]
+    },
+    {
+      "id": "care",
+      "title": "9  MORE ENDINGS IS NOT MORE WAYS TO LIVE",
+      "by": "f1_entropy_fan_6_5",
+      "at": [
+        -2.4,
+        6.6
+      ],
+      "yaw": 30,
+      "front": [
+        "Keeping every branch open is not automatically care. The hall: a closure might protect a place in which a more vulnerable body can continue.",
+        "My gates cannot tell which kind they are. Amber for all of them.",
+        "The count goes down by the same amount whether a gate shuts someone out or keeps something safe.",
+        "So the number is on neither side. It has to be asked: closed by whom, for whom, and can it be answered?",
+        "More endings on a screen. More ways to live. I can count the first."
+      ],
+      "back": [
+        "I do not know how to build the second as a floor. that is an open item, not a modesty."
+      ]
+    }
+  ],
+  "stickers": [
+    {
+      "id": "q-few-choices",
+      "plate": "multiply",
+      "kind": "quote",
+      "a": "How quickly can a few choices become many possible futures?",
+      "quote": "How quickly can a few choices become many possible futures?",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "q-by-multiplication",
+      "plate": "multiply",
+      "kind": "quote",
+      "a": "The number of outcomes grows by multiplication because each earlier choice can be followed by several later choices.",
+      "quote": "The number of outcomes grows by multiplication because each earlier choice can be followed by several later choices.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-walk-one",
+      "plate": "multiply",
+      "kind": "claim",
+      "text": "The fan draws all eighty-one at once. On the floor behind it I can only walk one."
+    },
+    {
+      "id": "q-history-identical",
+      "plate": "shared",
+      "kind": "quote",
+      "a": "The leaves are different outcomes even though much of their history is identical.",
+      "quote": "The leaves are different outcomes even though much of their history is identical.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-trunk-is-past",
+      "plate": "shared",
+      "kind": "claim",
+      "text": "They are a tree, and the trunk is the past."
+    },
+    {
+      "id": "q-unit-changes",
+      "plate": "equal",
+      "kind": "quote",
+      "a": "The unit changes the number,",
+      "quote": "The unit changes the number, not which endings are counted.",
+      "file": "commons/maps/QFEP_E_Term/final.md",
+      "b": "not which endings are counted."
+    },
+    {
+      "id": "q-drawn-not-likely",
+      "plate": "equal",
+      "kind": "quote",
+      "a": "Eighty-one drawn leaves do not tell you that a traveller is equally likely to arrive at each one.",
+      "quote": "Eighty-one drawn leaves do not tell you that a traveller is equally likely to arrive at each one.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-not-a-forecast",
+      "plate": "equal",
+      "kind": "claim",
+      "text": "A count of endings is an inventory. It is not yet a forecast."
+    },
+    {
+      "id": "q-inventory-of-paths",
+      "plate": "walked",
+      "kind": "quote",
+      "a": "To model that situation, we would need probabilities as well as an inventory of paths.",
+      "quote": "To model that situation, we would need probabilities as well as an inventory of paths.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-two-were-used",
+      "plate": "walked",
+      "kind": "claim",
+      "text": "Sixteen endings were drawn. Two were used."
+    },
+    {
+      "id": "q-how-many-not-which",
+      "plate": "which",
+      "kind": "quote",
+      "a": "Twenty-seven tells us how many endings remain,",
+      "quote": "Twenty-seven tells us how many endings remain, not which ones.",
+      "file": "commons/maps/QFEP_E_Term/final.md",
+      "b": "not which ones."
+    },
+    {
+      "id": "q-total-not-history",
+      "plate": "which",
+      "kind": "quote",
+      "a": "The total cannot stand in for the history of what was removed.",
+      "quote": "The total cannot stand in for the history of what was removed.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-none-in-common",
+      "plate": "which",
+      "kind": "claim",
+      "text": "The same count. Not one ending in common."
+    },
+    {
+      "id": "q-reopening",
+      "plate": "lost",
+      "kind": "quote",
+      "a": "Outside this little machine, reopening a route may not restore the lives or histories lost when it closed.",
+      "quote": "Outside this little machine, reopening a route may not restore the lives or histories lost when it closed.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-rod-is-empty",
+      "plate": "lost",
+      "kind": "claim",
+      "text": "The rod is empty."
+    },
+    {
+      "id": "q-permitted-future",
+      "plate": "never",
+      "kind": "quote",
+      "a": "A picture of the permitted future can hide the history of how the permissions were chosen.",
+      "quote": "A picture of the permitted future can hide the history of how the permissions were chosen.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "s-nothing-to-walk-up-to",
+      "plate": "never",
+      "kind": "claim",
+      "text": "There is nothing to walk up to."
+    },
+    {
+      "id": "q-who-drew",
+      "plate": "ask",
+      "kind": "quote",
+      "a": "Who drew the tree?",
+      "quote": "Who drew the tree?",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "q-cannot-yet",
+      "plate": "ask",
+      "kind": "quote",
+      "a": "You can reopen it.",
+      "quote": "You can reopen it. You cannot yet ask it to grow otherwise.",
+      "file": "commons/maps/QFEP_E_Term/final.md",
+      "b": "You cannot yet ask it to grow otherwise."
+    },
+    {
+      "id": "s-only-forward",
+      "plate": "ask",
+      "kind": "claim",
+      "text": "Only at the last forks. Only one more. Only forward."
+    },
+    {
+      "id": "s-suggestion-box",
+      "plate": "ask",
+      "kind": "claim",
+      "text": "Now with a suggestion box."
+    },
+    {
+      "id": "q-not-automatically-care",
+      "plate": "care",
+      "kind": "quote",
+      "a": "Keeping every branch open is not automatically care.",
+      "quote": "Keeping every branch open is not automatically care.",
+      "file": "commons/maps/QFEP_E_Term/final.md"
+    },
+    {
+      "id": "q-endings-ways",
+      "plate": "care",
+      "kind": "quote",
+      "a": "more endings on a screen",
+      "quote": "Stay with the difference between more endings on a screen and more ways to live.",
+      "file": "commons/maps/QFEP_E_Term/final.md",
+      "b": "more ways to live."
+    },
+    {
+      "id": "s-count-the-first",
+      "plate": "care",
+      "kind": "claim",
+      "text": "More endings on a screen. I can count the first."
+    },
+    {
+      "id": "x-0",
+      "plate": "multiply",
+      "kind": "claim",
+      "text": "1, 16, 81: by multiplication"
+    },
+    {
+      "id": "x-1",
+      "plate": "shared",
+      "kind": "claim",
+      "text": "endings share a trunk"
+    },
+    {
+      "id": "x-2",
+      "plate": "equal",
+      "kind": "not",
+      "text": "NOT a forecast"
+    },
+    {
+      "id": "x-3",
+      "plate": "walked",
+      "kind": "claim",
+      "text": "counted 2.77 / walked 0.64 nats"
+    },
+    {
+      "id": "x-4",
+      "plate": "which",
+      "kind": "not",
+      "text": "NOT which"
+    },
+    {
+      "id": "x-5",
+      "plate": "lost",
+      "kind": "not",
+      "text": "NOT restored by OPEN"
+    },
+    {
+      "id": "x-6",
+      "plate": "never",
+      "kind": "question",
+      "text": "what was left out before the counting began?"
+    },
+    {
+      "id": "x-7",
+      "plate": "ask",
+      "kind": "question",
+      "text": "who may ask for another branch?"
+    },
+    {
+      "id": "x-8",
+      "plate": "care",
+      "kind": "question",
+      "text": "closed by whom, for whom?"
+    }
+  ],
+  "threads": [
+    {
+      "a": "multiply",
+      "b": "care",
+      "word": "many is not more",
+      "why": "Many possible futures are not, by that count, more ways to live."
+    },
+    {
+      "a": "multiply",
+      "b": "equal",
+      "word": "counted how?",
+      "why": "Eighty-one, sixteen: the count becomes an entropy only by weighing every ending alike."
+    },
+    {
+      "a": "equal",
+      "b": "walked",
+      "word": "equal was assigned",
+      "why": "Equal weights were assigned; the walked tally is what was found."
+    },
+    {
+      "a": "walked",
+      "b": "lost",
+      "word": "then the gate",
+      "why": "Arrivals hung where travellers went; then a gate closed in front of them."
+    },
+    {
+      "a": "care",
+      "b": "shared",
+      "word": "a tree, not a list",
+      "why": "Endings are not a list to be lengthened: they share beginnings."
+    },
+    {
+      "a": "shared",
+      "b": "which",
+      "word": "paths, not totals",
+      "why": "Shared beginnings are why two prunings with one total are different things."
+    },
+    {
+      "a": "which",
+      "b": "never",
+      "word": "closed, or never drawn",
+      "why": "Which endings were closed can be named; what was never drawn cannot even be pointed at."
+    },
+    {
+      "a": "never",
+      "b": "ask",
+      "word": "so ask",
+      "why": "What was never drawn can only arrive by being asked for."
+    },
+    {
+      "a": "equal",
+      "b": "shared",
+      "word": "the log adds the forks",
+      "why": "The logarithm turns the forks' multiplication into addition along the shared trunk."
+    }
+  ],
+  "visual_arguments": [
+    {
+      "id": "drawn_tree",
+      "form": "playground",
+      "status": "standing: row drawn-tree",
+      "title": "WHO DREW THE TREE?",
+      "at": [
+        0,
+        -3.3
+      ],
+      "size": [
+        10.4,
+        8.4
+      ],
+      "claim": "A count of endings says neither which endings nor who arrives at them; a reopened route does not return what was lost when it closed; and what was never drawn can only arrive by being asked for.",
+      "from_the_hall": "'Eighty-one drawn leaves do not tell you that a traveller is equally likely to arrive at each one.' ... 'Twenty-seven tells us how many endings remain, not which ones.' ... 'You can reopen it. You cannot yet ask it to grow otherwise.'",
+      "built_from": [
+        "white tape from START through four forks of two to sixteen blue plates",
+        "a rod behind every ending, a bead for each arrival",
+        "eight amber gates, four standing at a time",
+        "a pink tape and plate at a last fork where a third way was asked for",
+        "a stand with the count, the entropy twice, the closed paths by name, and what was lost",
+        "three plates: PRUNE A, PRUNE B, OPEN"
+      ],
+      "what_stands": "North of the fan a white tree taped on the floor, fanning out to a row of sixteen blue plates with thin rods behind them, and a dark stand beyond.",
+      "what_you_do": "Walk from START to an ending: the path lights and a bead is hung. Do it again. Press PRUNE A, then PRUNE B, then OPEN, and read the stand each time. Stand still at a last fork.",
+      "what_it_shows": "ln 16 as counted against what was walked; two prunings of eight with nothing in common; beads lost behind gates and not returned; and a seventeenth ending that was not in the first drawing.",
+      "measured": "tools/probes/drawn_tree_walk.gd, the tower's walker: ln 16 by the fan's own rule; three arrivals at two endings: 0.64 nats; PRUNE A: 8 endings, 4 gates, 2 beads lost, the gate holds a body; PRUNE B: 8 other endings, the same entropy; OPEN: 16 endings, no beads, 3 lost; a third way asked for: 17 (7 of 7). Not tried in a headset."
+    }
+  ],
+  "open": [
+    "Plate 9: how to build 'more ways to live' as a floor, as against more endings, the pass does not know. The gates cannot tell a closure that shelters from one that shuts out.",
+    "Plate 8: asking is possible only at the last forks, only for one more ending, only forward. Who drew the tree is still the pass.",
+    "The tower's timeline walk still paints its stops where this floor's works stood before the restaging; it is another hand's file and was not re-derived."
+  ],
+  "hanging_board": {
+    "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_qfepe). Near the cork: what the hall text says. In front: what I made of it.",
+    "board": {
+      "id": "arg_qfepe",
+      "title": "The count: what the hall says, and what I made of it",
+      "w": 3.8,
+      "h": 2.4,
+      "paper": "#c9a978",
+      "depth": 0.9,
+      "hang": true,
+      "note": "An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_E_Term.json)."
+    },
+    "stickers": [
+      {
+        "reading": "few_choices",
+        "id": "ae-few-choices",
+        "design": "punctum_few_choices",
+        "at": [
+          -1.6,
+          0.48,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "history_identical",
+        "id": "ae-history-identical",
+        "design": "punctum_history_identical",
+        "at": [
+          -1.309,
+          0.76,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "unit_changes",
+        "id": "ae-unit-changes",
+        "design": "paradox_unit_changes",
+        "at": [
+          -1.018,
+          0.48,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "drawn_not_likely",
+        "id": "ae-drawn-not-likely",
+        "design": "punctum_drawn_not_likely",
+        "at": [
+          -0.727,
+          0.76,
+          0.12
+        ],
+        "turn": 2,
+        "size": 0.27
+      },
+      {
+        "reading": "how_many_not_which",
+        "id": "ae-how-many-not-which",
+        "design": "paradox_how_many_not_which",
+        "at": [
+          -0.436,
+          0.48,
+          0.12
+        ],
+        "turn": 4,
+        "size": 0.27
+      },
+      {
+        "reading": "total_not_history",
+        "id": "ae-total-not-history",
+        "design": "punctum_total_not_history",
+        "at": [
+          -0.145,
+          0.76,
+          0.12
+        ],
+        "turn": -3,
+        "size": 0.27
+      },
+      {
+        "reading": "reopening",
+        "id": "ae-reopening",
+        "design": "punctum_reopening",
+        "at": [
+          0.145,
+          0.48,
+          0.12
+        ],
+        "turn": -1,
+        "size": 0.27
+      },
+      {
+        "reading": "permitted_future",
+        "id": "ae-permitted-future",
+        "design": "punctum_permitted_future",
+        "at": [
+          0.436,
+          0.76,
+          0.12
+        ],
+        "turn": 1,
+        "size": 0.27
+      },
+      {
+        "reading": "who_drew",
+        "id": "ae-who-drew",
+        "design": "punctum_who_drew",
+        "at": [
+          0.727,
+          0.48,
+          0.12
+        ],
+        "turn": 3,
+        "size": 0.27
+      },
+      {
+        "reading": "cannot_yet",
+        "id": "ae-cannot-yet",
+        "design": "paradox_cannot_yet",
+        "at": [
+          1.018,
+          0.76,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "not_automatically_care",
+        "id": "ae-not-automatically-care",
+        "design": "punctum_not_automatically_care",
+        "at": [
+          1.309,
+          0.48,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "endings_ways",
+        "id": "ae-endings-ways",
+        "design": "paradox_endings_ways",
+        "at": [
+          1.6,
+          0.76,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "walk_one",
+        "id": "ae-walk-one",
+        "design": "paradox_walk_one",
+        "at": [
+          -1.6,
+          -0.67,
+          0.55
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "trunk_is_past",
+        "id": "ae-trunk-is-past",
+        "design": "punctum_trunk_is_past",
+        "at": [
+          -1.2,
+          -0.37,
+          0.55
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "not_a_forecast",
+        "id": "ae-not-a-forecast",
+        "design": "paradox_not_a_forecast",
+        "at": [
+          -0.8,
+          -0.67,
+          0.55
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "two_were_used",
+        "id": "ae-two-were-used",
+        "design": "paradox_two_were_used",
+        "at": [
+          -0.4,
+          -0.37,
+          0.55
+        ],
+        "turn": 2,
+        "size": 0.27
+      },
+      {
+        "reading": "none_in_common",
+        "id": "ae-none-in-common",
+        "design": "paradox_none_in_common",
+        "at": [
+          0.0,
+          -0.67,
+          0.55
+        ],
+        "turn": 4,
+        "size": 0.27
+      },
+      {
+        "reading": "rod_is_empty",
+        "id": "ae-rod-is-empty",
+        "design": "punctum_rod_is_empty",
+        "at": [
+          0.4,
+          -0.37,
+          0.55
+        ],
+        "turn": -3,
+        "size": 0.27
+      },
+      {
+        "reading": "nothing_to_walk_up_to",
+        "id": "ae-nothing-to-walk-up-to",
+        "design": "punctum_nothing_to_walk_up_to",
+        "at": [
+          0.8,
+          -0.67,
+          0.55
+        ],
+        "turn": -1,
+        "size": 0.27
+      },
+      {
+        "reading": "suggestion_box",
+        "id": "ae-suggestion-box",
+        "design": "punctum_suggestion_box",
+        "at": [
+          1.2,
+          -0.37,
+          0.55
+        ],
+        "turn": 1,
+        "size": 0.27
+      },
+      {
+        "reading": "count_the_first",
+        "id": "ae-count-the-first",
+        "design": "paradox_count_the_first",
+        "at": [
+          1.6,
+          -0.67,
+          0.55
+        ],
+        "turn": 3,
+        "size": 0.27
+      }
+    ],
+    "threads": [
+      {
+        "id": "ath-ae-few-choices-ae-walk-one",
+        "a": "ae-few-choices",
+        "b": "ae-walk-one",
+        "word": "all drawn, one walked",
+        "why": "Many futures drawn at once; a traveller walks one.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-history-identical-ae-trunk-is-past",
+        "a": "ae-history-identical",
+        "b": "ae-trunk-is-past",
+        "word": "the shared trunk",
+        "why": "Much of the history is identical: the trunk of the tree is the past.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-unit-changes-ae-not-a-forecast",
+        "a": "ae-unit-changes",
+        "b": "ae-not-a-forecast",
+        "word": "a number of what?",
+        "why": "The unit changes the number; either way it numbers an inventory.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-drawn-not-likely-ae-two-were-used",
+        "a": "ae-drawn-not-likely",
+        "b": "ae-two-were-used",
+        "word": "sixteen drawn, two used",
+        "why": "Drawn leaves are not arrivals: sixteen were drawn and two were used.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-how-many-not-which-ae-none-in-common",
+        "a": "ae-how-many-not-which",
+        "b": "ae-none-in-common",
+        "word": "eight and eight",
+        "why": "How many, not which: two prunings of eight with no ending in common.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-total-not-history-ae-none-in-common",
+        "a": "ae-total-not-history",
+        "b": "ae-none-in-common",
+        "word": "name the paths",
+        "why": "The total cannot stand in for what was removed; the paths have to be named.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-reopening-ae-rod-is-empty",
+        "a": "ae-reopening",
+        "b": "ae-rod-is-empty",
+        "word": "back, and empty",
+        "why": "Reopening returns the route; the rod where arrivals hung is empty.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-permitted-future-ae-nothing-to-walk-up-to",
+        "a": "ae-permitted-future",
+        "b": "ae-nothing-to-walk-up-to",
+        "word": "never drawn",
+        "why": "What was never drawn leaves nothing to walk up to.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-who-drew-ae-suggestion-box",
+        "a": "ae-who-drew",
+        "b": "ae-suggestion-box",
+        "word": "I did",
+        "why": "Who drew the tree: the pass did, and left a suggestion box.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-cannot-yet-ae-suggestion-box",
+        "a": "ae-cannot-yet",
+        "b": "ae-suggestion-box",
+        "word": "a little, in one place",
+        "why": "The fan cannot yet be asked; the floor can, a little, in one place.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-not-automatically-care-ae-count-the-first",
+        "a": "ae-not-automatically-care",
+        "b": "ae-count-the-first",
+        "word": "amber for all of them",
+        "why": "Open is not automatically care, and the count cannot tell a gate that shelters from one that shuts out.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ae-endings-ways-ae-count-the-first",
+        "a": "ae-endings-ways",
+        "b": "ae-count-the-first",
+        "word": "only the first",
+        "why": "More endings and more ways to live: only the first can be counted here.",
+        "colour": "#8e0c16"
+      }
+    ]
+  }
+}

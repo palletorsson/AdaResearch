@@ -52642,8 +52642,8 @@
           "artifact": "microstate_counter",
           "station": "NW",
           "position": [
-            -10.5,
-            -7.2
+            -12.2,
+            -7.4
           ],
           "facing": 0,
           "height": 0,
@@ -52733,6 +52733,78 @@
           "config": {
             "drawn": "open",
             "editor_label": "Who drew the tree? | sixteen endings taped on the floor from START; walk a path and a bead is hung; PRUNE A/B close gates, OPEN returns endings not beads; a third way can be asked for at a last fork"
+          }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            1.4,
+            5.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_E_Term",
+            "stands_at": [
+              1.4,
+              5.6
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the fan to the tree taped on the floor, its gates and its asked-for branch (commons/data/arguments/QFEP_E_Term.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -8.9,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepe",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepe)"
+          }
+        },
+        {
+          "id": "word-81",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "81",
+            "tall": 1.6,
+            "fit_width": 3.0,
+            "editor_label": "81 in standing red letters | the fan's count of endings; on the east wing, facing WHO across the floor"
+          }
+        },
+        {
+          "id": "word-who",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            -4.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "WHO",
+            "tall": 1.5,
+            "fit_width": 4.0,
+            "editor_label": "WHO in standing red letters | who drew the tree, and who may ask for another branch; on the west wing"
           }
         }
       ],
