@@ -52040,6 +52040,78 @@
             "sixth": "large",
             "editor_label": "A sentence, its scope, its evidence | six cards behind the large sentence; stand before one and its check is run and recorded; the sixth is an AI's claim with no procedure"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            1.2,
+            2.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "Crisis_Synthesis",
+            "stands_at": [
+              1.2,
+              2.9
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the formula round the sliders, diagram, atrium and wall to the six cards (commons/data/arguments/Crisis_Synthesis.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_synthesis",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_synthesis)"
+          }
+        },
+        {
+          "id": "word-equals",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            -4.8
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "=",
+            "tall": 1.2,
+            "fit_width": 2.6,
+            "editor_label": "= in standing red letters | the sign that gathers a desire before anyone knows what it measures; on the east wing"
+          }
+        },
+        {
+          "id": "word-may",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            4.6
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "MAY",
+            "tall": 1.5,
+            "fit_width": 4.0,
+            "editor_label": "MAY in standing red letters | the permission in the large sentence, without a reason to obey it; on the west wing"
+          }
         }
       ],
       "props": [],
