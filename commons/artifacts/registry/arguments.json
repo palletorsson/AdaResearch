@@ -1021,6 +1021,50 @@
           "arithmetic": "Found cut, the gate uses 0.10 and stands 0.24 m open; found connected it uses the offered 0.50 and stands 1.20 m open: each of its two panels (1.2 x 2.2 m) stands 0.48 m further out, uncovering 2 x 0.48 x 2.2 = 2.1 m2 of what lies behind and covering as much. The route strip (0.14 x 1.75 m) turns from grey to cyan: 0.25 m2. Three lines of the stand change. About 2.4 m2 of a subject of some 60 m2 (two gates 23, rail 6, stand 7, plates, board, floor between): 4 %. The neighbour gate differs by its own clock, not by the axis."
         }
       }
+    },
+    "asked_read_measured": {
+      "lookup_name": "asked_read_measured",
+      "map_ready": true,
+      "name": "Asked, Read Back, Measured",
+      "class_name": "",
+      "scene": "res://commons/artifacts/asked_read_measured/asked_read_measured.tscn",
+      "description": "A robot station for the QFEP synthesis hall: its three things to check against one another, on a body tall enough to watch. A mast three metres tall on a sprung foot; PULSE strikes it and it sways. A stand has three columns for each of three properties: what a plate asked for, what the property reads back, and what was measured from the mast's own motion (the time of a swing, and how much of a swing is left after one more); under them the tip's place over the last twelve seconds. Damping is taken at once. Stiffness is read back at once and does nothing until REBUILD: the rings on the foot are the spring as built. Drag is asked, read back and used by nothing. BREATHE / STEADY gives or stops a slow imposed sway; steady, the mast goes on moving, and the stand says steady is not still. Axis built: soft, middle, stiff.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "readback",
+        "measurement",
+        "stiffness",
+        "damping",
+        "trace",
+        "robot-station",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "What was requested, what a property reports and what a body does are three accounts; only the third is the body's, and it needs a trace kept over time.",
+      "dev_themes": [
+        "qfep",
+        "simulation",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "built": [
+            "soft",
+            "middle",
+            "stiff"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "built: middle ~ stiff",
+          "percent": 1.0,
+          "arithmetic": "At rest the mast stands upright at every value. What differs is the spring on its foot: six rings against nine (three more rings, each a torus 0.32 m across and 0.06 thick: about 0.02 m2 seen each, 0.06 m2), and two figures on the stand (9 against 16, twice). On a subject of some 30 m2 (stand 13, mast, plates 5, board 5, floor between): 0.06 + 0.1 of lettering: under 1 %. The axis is honest and small in a still: what it changes is the time of a swing, which a still cannot hold. Soft against stiff is twice that."
+        }
+      }
     }
   }
 }

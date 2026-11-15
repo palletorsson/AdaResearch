@@ -53876,11 +53876,11 @@
           "artifact": "grab_sphere_F",
           "station": "NW",
           "position": [
-            -15,
-            -8
+            -1.5,
+            2.6
           ],
           "facing": 180,
-          "height": 0.4,
+          "height": 1.15,
           "scale": 1,
           "config": {}
         },
@@ -53889,12 +53889,12 @@
           "artifact": "qfep_formula_3d",
           "station": "NW",
           "position": [
-            -5,
-            -8
+            0,
+            2.2
           ],
-          "facing": 180,
-          "height": 2,
-          "scale": 1,
+          "facing": 0,
+          "height": 2.8,
+          "scale": 1.5,
           "config": {}
         },
         {
@@ -53902,8 +53902,8 @@
           "artifact": "queer_morphology_specimen",
           "station": "NE",
           "position": [
-            5,
-            -8
+            0,
+            5.0
           ],
           "facing": 0,
           "height": 0.105,
@@ -53915,10 +53915,10 @@
           "artifact": "entropy_ceiling",
           "station": "NE",
           "position": [
-            15,
-            -8
+            3.2,
+            4.6
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -53928,10 +53928,10 @@
           "artifact": "entropy_meter",
           "station": "SW",
           "position": [
-            -15,
-            7
+            -3.2,
+            4.6
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -53941,10 +53941,10 @@
           "artifact": "grasp_cabinet",
           "station": "SW",
           "position": [
-            -5,
-            7
+            -3.4,
+            1.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -53954,11 +53954,11 @@
           "artifact": "grab_sphere_E",
           "station": "SE",
           "position": [
-            5,
-            7
+            0.5,
+            2.6
           ],
           "facing": 180,
-          "height": 0.4,
+          "height": 1.15,
           "scale": 1,
           "config": {}
         },
@@ -53967,11 +53967,11 @@
           "artifact": "grab_sphere_lambda",
           "station": "SE",
           "position": [
-            15,
-            7
+            -0.5,
+            2.6
           ],
           "facing": 180,
-          "height": 0.4,
+          "height": 1.15,
           "scale": 1,
           "config": {}
         },
@@ -53980,13 +53980,29 @@
           "artifact": "grab_sphere_phi",
           "station": "SE",
           "position": [
-            0,
-            0
+            1.5,
+            2.6
           ],
           "facing": 180,
-          "height": 0.4,
+          "height": 1.15,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "asked-read-measured",
+          "artifact": "asked_read_measured",
+          "station": "NW",
+          "position": [
+            0.0,
+            -4.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "built": "middle",
+            "editor_label": "Asked, read back, measured | a 3 m mast on a sprung foot; plates ask for stiffness, damping, drag; a stand keeps asked, read back and measured apart, and the tip's trace"
+          }
         }
       ],
       "props": [],
