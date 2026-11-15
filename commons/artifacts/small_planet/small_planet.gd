@@ -399,6 +399,7 @@ func _build_planet() -> void:
 	night.albedo_color = Color("2c2440")
 	night.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	night.cull_mode = BaseMaterial3D.CULL_FRONT
+	night.disable_fog = true           # sixty metres off, the tower's haze would swallow the sky and its stars
 	var dome_node := MeshInstance3D.new()
 	dome_node.mesh = dome
 	dome_node.material_override = night
@@ -426,6 +427,7 @@ func _build_planet() -> void:
 	var glow := StandardMaterial3D.new()
 	glow.vertex_color_use_as_albedo = true
 	glow.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	glow.disable_fog = true
 	stars_node.material_override = glow
 	stars_node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_sky.add_child(stars_node)
