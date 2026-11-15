@@ -53057,10 +53057,10 @@
           "artifact": "rigid_sculpture",
           "station": "NW",
           "position": [
-            -15,
-            -8
+            -2.0,
+            5.6
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.05,
           "scale": 1,
           "config": {}
@@ -53070,10 +53070,10 @@
           "artifact": "fluid_form",
           "station": "NW",
           "position": [
-            -5,
-            -8
+            2.0,
+            5.6
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.05,
           "scale": 1,
           "config": {}
@@ -53083,8 +53083,8 @@
           "artifact": "phi_slider",
           "station": "NE",
           "position": [
-            5,
-            -8
+            0,
+            4.8
           ],
           "facing": 0,
           "height": 1.1,
@@ -53099,10 +53099,10 @@
           "artifact": "preserved_pattern",
           "station": "NE",
           "position": [
-            15,
-            -8
+            -2.6,
+            2.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.05,
           "scale": 2.5,
           "config": {}
@@ -53112,10 +53112,10 @@
           "artifact": "transforming_pattern",
           "station": "SW",
           "position": [
-            -15,
-            7
+            0,
+            2.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.05,
           "scale": 1,
           "config": {
@@ -53127,8 +53127,8 @@
           "artifact": "lambda_promenade",
           "station": "SE",
           "position": [
-            0,
-            7
+            -9.9,
+            7.9
           ],
           "facing": 180,
           "height": 0,
@@ -53375,6 +53375,22 @@
             "reading": "surface_carries",
             "seed": 7,
             "editor_label": "Edge carving | does not fit: an edge of the research carved along a helix that order and chance pull apart (readings.json surface_carries)"
+          }
+        },
+        {
+          "id": "signed-walk",
+          "artifact": "signed_walk",
+          "station": "SE",
+          "position": [
+            10.0,
+            6.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "labels": "hidden",
+            "editor_label": "A weight, a change, a product | a 5 m track read once a second; plates set phi to -1, 0, +1; a stand keeps weight, change and product apart; looks stay as dots; RESIST / EMBRACE can be shown"
           }
         }
       ],

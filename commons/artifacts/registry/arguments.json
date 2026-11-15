@@ -887,6 +887,50 @@
           "arithmetic": "The field, posts, plates, stand and board are the same at every value. What moves is the lit strip, one metre wide and ten long (10 m2 of a subject of about 85 m2: field 60, stand 9, plates 4, board 5, approach). From gap (1.25 m west of the middle) to west (2.25 m west) the strip shifts by its own width, so about 10 m2 of floor changes between lit and unlit and 10 m2 the other way, but the strip is a pale wash over pale card, perhaps a quarter of full contrast: 20 x 0.25 = 5 m2 of 85: 6 %. One plate's highlight moves and one line on the stand. Gap against east is no further in area but crosses the posts."
         }
       }
+    },
+    "signed_walk": {
+      "lookup_name": "signed_walk",
+      "map_ready": true,
+      "name": "A Weight, a Change, a Product",
+      "class_name": "",
+      "scene": "res://commons/artifacts/signed_walk/signed_walk.tscn",
+      "description": "A playground for the QFEP phi hall: its three separate quantities, with a body for the changing one. A track five metres long: where the visitor stands on it is a reading from 0 to 1, and it is looked at once a second. A stand keeps three numbers apart: the weight phi (plates: -1, 0, +1; it starts at 0), the change since the last look, and their product, with an arrow up or down. A positive weight and a falling reading give a negative product; negative times negative is positive, and the stand says the arithmetic does not say whether that is good. The last looks stay on the track as dots, so that a slow walk and a fast one over the same stretch can be told apart; SNAPSHOT keeps only the latest, and then there is no change to show. EARLIER LABELS puts RESIST and EMBRACE over the two signs, and nothing else changes. Axis labels: hidden, shown.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "phi",
+        "sign",
+        "change",
+        "rate",
+        "history",
+        "labels",
+        "playground",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "Change can have a direction without that direction meaning improvement: a weight, a change and their product are three numbers, and a word hung over a sign is a fourth thing that the arithmetic never contained.",
+      "dev_themes": [
+        "qfep",
+        "change",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "labels": [
+            "hidden",
+            "shown"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "labels: hidden ~ shown",
+          "percent": 1.5,
+          "arithmetic": "The only difference is two words, RESIST and EMBRACE, standing over the two sign plates: letters 0.28 m tall, about 1.5 m and 1.7 m long, on a subject of track, stand, five plates and board of about 30 m2 seen. Two strips of 0.45 m2 of which lettering covers perhaps half: 0.45 m2 of 30: 1.5 %. That is small on purpose: the hall's own point is that nothing else changes when the words appear. One plate's highlight changes too."
+        }
+      }
     }
   }
 }
