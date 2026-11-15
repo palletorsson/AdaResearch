@@ -1,4 +1,4 @@
-{"version": 1, "revision": 14,
+{"version": 1, "revision": 15,
 "boards": [
   {"id":"visitors","title":"The visitors' board","w":1.6,"h":1,"paper":"#f4f0e6","note":"The same board in SVG (/stickers Board), in three.js (/stickers 3D) and in VR (the sticker_board artifact)."},
   {"id":"research","title":"The research, in stickers","w":2.4,"h":1.36,"paper":"#f4f0e6","note":"One sticker per spine sequence of Ada Research, in spine order: its idea as a motif, its name, its question; the colour is its QFEP phase. Derived by tools/stickers_seed.ts from commons/maps/curriculum_spine.json and the sequence files."},
@@ -20,5 +20,6 @@
   {"id":"arg_escher","title":"Escher: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/Escher_Impossible.json).","depth":0.9,"hang":true},
   {"id":"arg_brouwer","title":"Brouwer: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/Brouwer_Intuitionism.json).","depth":0.9,"hang":true},
   {"id":"arg_florensky","title":"Florensky: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/Florensky_Paraconsistent.json).","depth":0.9,"hang":true},
-  {"id":"arg_synthesis","title":"Synthesis: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/Crisis_Synthesis.json).","depth":0.9,"hang":true}
+  {"id":"arg_synthesis","title":"Synthesis: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/Crisis_Synthesis.json).","depth":0.9,"hang":true},
+  {"id":"arg_qfepintro","title":"Four rails: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Introduction.json).","depth":0.9,"hang":true}
 ]}

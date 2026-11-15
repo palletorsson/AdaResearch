@@ -52308,6 +52308,78 @@
             "weight": "half",
             "editor_label": "One number is a line on this floor | a 6 m painted floor: east is F, north is E; stand still and it keeps the place; every place on the red line gives the same total"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            1.4,
+            5.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_Introduction",
+            "stands_at": [
+              1.4,
+              5.6
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the console round the rails and the formula to the painted floor (commons/data/arguments/QFEP_Introduction.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepintro",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepintro)"
+          }
+        },
+        {
+          "id": "word-equal",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0.5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "EQUAL",
+            "tall": 1.4,
+            "fit_width": 5.0,
+            "editor_label": "EQUAL in standing red letters | what the total says of two arrangements; on the east wing, facing WHICH across the floor"
+          }
+        },
+        {
+          "id": "word-which",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            1.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "WHICH",
+            "tall": 1.4,
+            "fit_width": 5.0,
+            "editor_label": "WHICH in standing red letters | what the total cannot say and the outline can; on the west wing"
+          }
         }
       ],
       "props": [],
