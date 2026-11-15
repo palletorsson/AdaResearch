@@ -542,26 +542,28 @@
     {
       "id": "walked_tiling",
       "form": "playground",
-      "status": "written",
+      "status": "standing: row walked-tiling",
       "title": "FIVE SQUARES AT EVERY CORNER",
       "at": [
-        0.0,
-        0.0
+        10.0,
+        6.3
       ],
       "size": [
-        6.0,
-        6.0
+        5.2,
+        5.2
       ],
       "claim": "On a hyperbolic floor a square walk does not close: forward, left, forward, left, forward, left, forward leaves you somewhere else, turned.",
-      "from_the_hall": "The bench's DISK, and the wing's rooms 5 to 7, which are travelled by trigger from a deck.",
+      "from_the_hall": "The bench's DISK and 'The visible rim is infinitely far away in that metric'; the wing's rooms 5 to 7 are travelled by trigger from a deck, this one is walked.",
       "built_from": [
-        "the wing's geometry_kernel.gd",
-        "a deck of floor tiles redrawn round the body as it steps (the tiling moves, the body's deck does not)"
+        "one round deck whose skin is a shader that draws the tiling round the walker",
+        "a pink square of 1.4 m painted on the deck itself, with START",
+        "a red pointer at the walker's feet"
       ],
-      "what_stands": "A round deck of pale tiles, five meeting at every corner, crowding toward a rim.",
-      "what_you_do": "Step from tile to tile. The tile you stand on is always the big one in the middle. Count tiles within three steps: far more than a flat floor has.",
-      "what_it_shows": "The disk's 'rim you cannot reach' as something the feet find out: there is too much room. HyperRogue and Hyperbolica are the games to look at.",
-      "needs": "a walked recentring (each step a hyperbolic translation of the drawn tiling); room-scale in a headset, stick on a desktop"
+      "what_stands": "A deck 5.2 m across south of shaft B, covered in square tiles of which five meet at every corner, crowding toward a dark rim; a board east of it, read from the deck.",
+      "what_you_do": "Stand still on START: the tile under you turns red, home. Walk the pink square back to START. Home is 2.4 m away and its arrow has turned 159 degrees; the pointer at your feet shows where it went.",
+      "what_it_shows": "The same paces and the same four turns close on the slab and do not close on this floor. With `corner` four the tiles stay where they are and the walk closes; with three (a cube's skin, rounded, six tiles in all) home is 1.2 m away and turned the other way.",
+      "how": "The body is never moved. Each step is composed as a motion of the floor (a pair of complex numbers) and the deck's shader folds every fragment into the tile the walker stands in. The arithmetic is the work's own, not the wing's kernel, which has no composition of motions.",
+      "measured": "tools/probes/walked_tiling_bench.py (python, before building): a 1.4 m square ends 2.444 m from home turned 158.9 on five, 0 on four, 1.233 m turned -73.1 on three. tools/probes/walked_tiling_walk.gd, the tower's walker: 2.66 m / 168, 0.14 m, 1.31 m / -80 (it stops a hand's width from each corner)."
     },
     {
       "id": "halving_door",
@@ -593,7 +595,7 @@
     "Plate 7's story of Gauss measuring a mountain triangle is unchecked and marked so.",
     "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing stood with a column 0.55 m in front of its door and could not be entered; moved to [-9.5, 8].",
     "The hall text does not mention Seven Spaces at all. Plate 8 is the only words on the floor about it besides its own.",
-    "Two more playable spaces are written under visual_arguments and not built: a walked hyperbolic tiling, the halving door. Three corners and home stands (five by its axis; no five-cornered row is placed), and so does the mirrored lap. The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
+    "One more playable space is written under visual_arguments and not built: the halving door, which needs the player scaled. Three corners and home stands (five by its axis; no five-cornered row is placed), and so do the mirrored lap and the walked tiling. The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_noneuclid). Near the cork: what the hall text says. In front: what I made of it.",

@@ -346,6 +346,53 @@
           "arithmetic": "The two differ only inside, under a roof: the word and the skirtings change walls and two openings change places. From any standpoint outside, the block is the same closed cardboard box with the same door and the same board: 0 %. That is a fact about standing outside a roof, not about the axis; from the door, looking in, the red word alone is about 2.2 x 0.55 m and moves 1.1 m."
         }
       }
+    },
+    "walked_tiling": {
+      "lookup_name": "walked_tiling",
+      "map_ready": true,
+      "name": "Five Squares at Every Corner",
+      "class_name": "",
+      "scene": "res://commons/artifacts/walked_tiling/walked_tiling.tscn",
+      "description": "A playable non-Euclidean space for the non-Euclidean hall: a round deck, 5.2 m across, that shows under and round the one who walks it a floor of square tiles of which five meet at every corner - the disk's geometry under the feet. True to size where you stand, squeezed toward a rim that keeps three metres from you. A pink square, 1.4 m a side, is painted on the deck itself. Stand still on START: the tile under you turns red, home, with an arrow pointing north. Walk the square back to START: on the slab the walk closes, on this floor home is 2.4 m away and its arrow has turned 159 degrees; a pointer at your feet shows where it went. Axis corner: five, four (a flat floor: the tiles stay put and the walk closes), three (a cube's skin, rounded: six tiles in all; home 1.2 m away, turned the other way). The body is never moved: its steps are composed as motions of the floor and the deck's shader draws the tiling from them.",
+      "category": "annotation",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "non-euclidean",
+        "hyperbolic",
+        "tiling",
+        "holonomy",
+        "curvature",
+        "poincare-disk",
+        "sphere",
+        "playground",
+        "visual-argument",
+        "walkable",
+        "shader"
+      ],
+      "qfep_connection": "The same four turns and the same paces: whether you are home afterwards is not a fact about the walk but about the floor it was made on.",
+      "dev_themes": [
+        "geometry",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "corner": [
+            "five",
+            "four",
+            "three"
+          ]
+        },
+        "framing": 0.6,
+        "predicted_degeneracy": {
+          "pair": "corner: five ~ four",
+          "percent": 4.0,
+          "arithmetic": "The deck is a disk of 21 square metres; its tiles' dark lines (4 cm wide, about 3.5 m of edge to a square metre of floor) cover about a seventh of it in either tiling, and the two grids coincide only near START, so most line pixels differ: about 5 square metres of changed deck. The deck fills perhaps a third of the frame from the bench's standpoint: 5 / 21 x 0.33 = 8 %; lines seen at a low angle thin out, so 4 %. The floor of this prediction is not a rasteriser's - a flat rasteriser cannot run the deck's shader and sees one plain disk: 0 %."
+        }
+      }
     }
   }
 }

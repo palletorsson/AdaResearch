@@ -50803,6 +50803,22 @@
             "lap": "first",
             "editor_label": "One lap and your left is your right | a corridor joined to itself the other way up: after a lap the word LEFT is on your right and reads backwards; a second lap puts it back"
           }
+        },
+        {
+          "id": "walked-tiling",
+          "artifact": "walked_tiling",
+          "station": "SE",
+          "position": [
+            10.0,
+            6.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "corner": "five",
+            "editor_label": "Five squares at every corner | a deck that shows a hyperbolic floor round the one who walks it; a pink square to walk: back on START, home is 2.4 m away and turned"
+          }
         }
       ],
       "props": [],
