@@ -52824,10 +52824,10 @@
           "artifact": "qfep_chalkboard",
           "station": "NW",
           "position": [
-            -18,
-            -10
+            -3.2,
+            7.1
           ],
-          "facing": 0,
+          "facing": 20,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -52837,10 +52837,10 @@
           "artifact": "crystal_formation",
           "station": "NW",
           "position": [
-            -10,
-            -10
+            -4.6,
+            -1.6
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.5,
           "scale": 1,
           "config": {}
@@ -52850,10 +52850,10 @@
           "artifact": "edge_particles",
           "station": "NE",
           "position": [
-            0,
-            -10
+            5.9,
+            0.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.8,
           "scale": 0.4,
           "config": {}
@@ -52863,10 +52863,10 @@
           "artifact": "ordered_grid",
           "station": "NE",
           "position": [
-            10,
-            -10
+            -4.6,
+            1.4
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.5,
           "scale": 1,
           "config": {}
@@ -52876,10 +52876,10 @@
           "artifact": "chaos_particles",
           "station": "NE",
           "position": [
-            18,
-            -10
+            5.9,
+            -4.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.8,
           "scale": 0.4,
           "config": {}
@@ -52889,8 +52889,8 @@
           "artifact": "lambda_hall",
           "station": "SW",
           "position": [
-            -15,
-            5
+            1.0,
+            -0.6
           ],
           "facing": 0,
           "height": 0,
@@ -52905,8 +52905,8 @@
           "artifact": "phase_cube",
           "station": "SW",
           "position": [
-            -5,
-            6
+            -4.6,
+            4.4
           ],
           "facing": 0,
           "height": 0.8,
@@ -52918,10 +52918,10 @@
           "artifact": "bifurcation_walkway",
           "station": "SE",
           "position": [
-            6,
-            7
+            17.5,
+            5.5
           ],
-          "facing": 270,
+          "facing": 90,
           "height": 0,
           "scale": 0.8,
           "config": {}
@@ -52931,8 +52931,8 @@
           "artifact": "dissolving_form",
           "station": "SE",
           "position": [
-            15,
-            7
+            5.9,
+            -2.0
           ],
           "facing": 0,
           "height": 0.8,
@@ -52944,13 +52944,29 @@
           "artifact": "complexity_pattern",
           "station": "SE",
           "position": [
-            0,
-            0
+            5.9,
+            3.6
           ],
           "facing": 0,
           "height": 0.8,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "worn-path",
+          "artifact": "worn_path",
+          "station": "NW",
+          "position": [
+            -17.2,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "lit": "gap",
+            "editor_label": "The light recommends, the feet decide | a field of tiles that darken where feet go; three rows of posts with aligned gaps; plates move the lit strip; the stand counts where feet went"
+          }
         }
       ],
       "props": [],

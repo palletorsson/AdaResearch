@@ -842,6 +842,50 @@
           "arithmetic": "Both close four gates and take eight endings off the floor; they differ in WHICH. Each state shows four amber gates (0.9 x 1.0 m frames of 6 cm bar: about 0.15 m2 of bar each) and four small subtrees (a fork plate, two ending plates, two tapes, two rods: about 0.5 m2 each) that the other does not: 2 x 4 x 0.65 = 5.2 m2 exchanged, but thin: tapes and bars cover perhaps a quarter of that: 1.3 m2 of a subject (tree 10 x 6 m of sparse marks, stand 7, plates 2, board 5: about 40 m2 seen): 3 %. One plate's highlight moves. The stand prints the same count and the same entropy for both, which is the point."
         }
       }
+    },
+    "worn_path": {
+      "lookup_name": "worn_path",
+      "map_ready": true,
+      "name": "The Light Recommends, the Feet Decide",
+      "class_name": "",
+      "scene": "res://commons/artifacts/worn_path/worn_path.tscn",
+      "description": "A playground for the QFEP lambda hall: a recommendation, an arrangement and a record of use, kept apart. A field six metres by ten of card tiles that darken where feet have gone. Three rows of posts cross it, each with one gap, and the gaps line up. A lit strip runs the length of the field: at first through the gaps. Plates move the light west or east, where it points at posts; the feet still go through the gaps, and the worn path says so. A stand counts crossings, the share of steps taken on the lit strip, where the field is most worn and how far the light lies from that. One plate lights what was worn: the recommendation follows use. Another sweeps the field. It records where feet went and no reason. Axis lit: gap, west, east - where the light lies when the field is found.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "recommendation",
+        "invitation",
+        "desire-path",
+        "arrangement",
+        "trace",
+        "playground",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "Which available alternatives are made inviting, and by what: a light that can be moved, or an arrangement that cannot? And when the next visitor sees where the first one walked, whose decision is theirs?",
+      "dev_themes": [
+        "qfep",
+        "persuasion",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "lit": [
+            "gap",
+            "west",
+            "east"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "lit: gap ~ west",
+          "percent": 6.0,
+          "arithmetic": "The field, posts, plates, stand and board are the same at every value. What moves is the lit strip, one metre wide and ten long (10 m2 of a subject of about 85 m2: field 60, stand 9, plates 4, board 5, approach). From gap (1.25 m west of the middle) to west (2.25 m west) the strip shifts by its own width, so about 10 m2 of floor changes between lit and unlit and 10 m2 the other way, but the strip is a pale wash over pale card, perhaps a quarter of full contrast: 20 x 0.25 = 5 m2 of 85: 6 %. One plate's highlight moves and one line on the stand. Gap against east is no further in area but crosses the posts."
+        }
+      }
     }
   }
 }
