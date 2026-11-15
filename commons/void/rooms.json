@@ -51320,8 +51320,8 @@
           "artifact": "magritte_pipe",
           "station": "SW",
           "position": [
-            -14,
-            8
+            -2.6,
+            5.6
           ],
           "facing": 0,
           "height": 0.8,
@@ -51334,7 +51334,7 @@
           "station": "NE",
           "position": [
             0,
-            -8
+            4.4
           ],
           "facing": 0,
           "height": 0,
@@ -51348,8 +51348,8 @@
           "artifact": "penrose_triangle",
           "station": "NE",
           "position": [
-            14,
-            -8
+            4.6,
+            2.4
           ],
           "facing": 0,
           "height": 1.6,
@@ -51363,8 +51363,8 @@
           "artifact": "planar_lift",
           "station": "NW",
           "position": [
-            -14,
-            -8
+            -4.6,
+            -3.6
           ],
           "facing": 180,
           "height": 0.95,
@@ -51376,8 +51376,8 @@
           "artifact": "impossible_trident",
           "station": "SE",
           "position": [
-            14,
-            8
+            -4.8,
+            2.2
           ],
           "facing": 0,
           "height": 0,
@@ -51385,19 +51385,19 @@
           "config": {}
         },
         {
-          "id": "endless-stair",
-          "artifact": "endless_stair",
+          "id": "roof-stair",
+          "artifact": "roof_stair",
           "station": "NW",
           "position": [
-            0.6,
-            -2.2
+            0,
+            -0.6
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "agreement": "moved",
-            "editor_label": "A stair that only goes up and comes back | a stairwell round a block, up a ramp: four rising flights and you are at the door again; the wall inside counts what was taken back"
+            "walkers": "both",
+            "editor_label": "The roof where everyone climbs | a door onto a roof drawn like a print: wide steps round a tower, four rising flights back to the door, robed walkers going up and down"
           }
         }
       ],

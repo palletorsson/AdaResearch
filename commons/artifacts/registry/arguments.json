@@ -485,6 +485,53 @@
           "arithmetic": "On a bench (no tower) the planet stands behind its door. A ball 6 m across beside one 10 m across: seen from the bench's standpoint the larger fills about 2.8 times the area of the smaller, and the frame is fitted to the larger subject each time, so the door shrinks instead: the door and board (about 8 square metres of facing) change scale by 10/6 and the ball's grass pattern is laid afresh. Most of the subject's pixels differ: I expect well over 12 %; 12 % is the floor (ball outlines alone)."
         }
       }
+    },
+    "roof_stair": {
+      "lookup_name": "roof_stair",
+      "map_ready": true,
+      "name": "The Roof Where Everyone Climbs",
+      "class_name": "",
+      "scene": "res://commons/artifacts/roof_stair/roof_stair.tscn",
+      "description": "The stair that only goes up and comes back, in the open and drawn like a print: a door on the floor leads to a roof where wide steps, 2.2 m across, climb round a tower past a pavilion on every corner. No light, a tone for each way a face looks, engraved lines; robed walkers trudge up along the tower and others down along the parapet, and small figures walk on the tower's walls as if the walls were floors. Every flight goes up; after four you are in the door's pavilion again. One honest lap stands; the body lives on two of its flights and is set down 1.2 m and turned half about at the corner where it would step onto the third - unseen in the open because everything in view is the same after a half turn and a drop of 1.2 m: the tower repeats on four sides and every 1.2 m, the clouds come in opposite pairs, every walker is placed from where the body stands. Tablets on the tower count metres climbed, above the door and taken back. The roof hangs 160 m south of the tower in a sky of its own. Axis walkers: both, up, none. An original place in the manner of an impossible print. Not tried in a headset.",
+      "category": "annotation",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "escher",
+        "penrose-stairs",
+        "impossible-figure",
+        "lithograph",
+        "locally-valid",
+        "holonomy",
+        "playground",
+        "visual-argument",
+        "walkable",
+        "shader"
+      ],
+      "qfep_connection": "For the stair to close unseen, the whole world round it had to be made the same from two places: an impossible object is paid for by the uniformity of everything else.",
+      "dev_themes": [
+        "geometry",
+        "foundations",
+        "perception"
+      ],
+      "dna": {
+        "axes": {
+          "walkers": [
+            "both",
+            "up",
+            "none"
+          ]
+        },
+        "framing": 0.9,
+        "predicted_degeneracy": {
+          "pair": "walkers: both ~ up",
+          "percent": 0.6,
+          "arithmetic": "On a bench the roof stands behind its door. both and up differ by the pale walkers coming down: five figures, of which three or four are on the three sides in view; each about 1.4 x 0.6 m seen from the side, 0.8 square metres: 3 square metres of a subject (tower 3.2 m wide and tall, stair 7.6 m across) of about 150 that fills most of the frame: 2 %; pale robes against pale stone change tone, not outline: 0.6 %. none removes the seven dark ones too and differs by far more."
+        }
+      }
     }
   }
 }
