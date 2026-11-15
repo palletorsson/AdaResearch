@@ -128,6 +128,92 @@
           "arithmetic": "At rest, before a candidate has been checked, the three stations are the same station: the same row, gate and robot. They differ by the words on the gate's screen ('asked for ...', about 0.3 x 0.2 m of lettering) and one line of the board. That is the point of the work - slow and impossible look alike from outside - and it means a still cannot tell them apart: about 0.06 square metres of 25 that fill half the frame, 0.1 %; with the board's line, 0.3 %. The sweep will say INERT; the difference is in what happens after eight candidates, which a still does not hold."
         }
       }
+    },
+    "walked_triangle": {
+      "lookup_name": "walked_triangle",
+      "map_ready": true,
+      "name": "The Walked Triangle",
+      "class_name": "",
+      "scene": "res://commons/artifacts/walked_triangle/walked_triangle.tscn",
+      "description": "A visual argument in the form of a playground, for the non-Euclidean hall: what counts as straight. A walkable dome - the cap of a sphere six metres in radius, 6.4 m across and 0.9 m high - with two cones as corners A and B; the body stepping onto it is corner C. The sides are drawn on the surface as the straightest paths that stay on it, the board gives the three angles and their sum, more than 180 and growing with the triangle. A plank through the dome from cone to cone is the shorter way that has left the space. North of the dome the same three coordinate pairs are read as a plane on a mat: 180, wherever the body stands. The model is the tutorial's own (noneuclid-lineage/surface_triangle.gd: corner, edge, measure), read once as sphere and once as plane. Axis reading: both, sphere, plane.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "non-euclidean",
+        "sphere",
+        "geodesic",
+        "triangle",
+        "angle-sum",
+        "playground",
+        "visual-argument",
+        "walkable"
+      ],
+      "qfep_connection": "The record of three pairs travels between the plane and the dome; the angles do not. What counts as straight is a decision about the space the corners belong to.",
+      "dev_themes": [
+        "geometry",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "reading": [
+            "both",
+            "sphere",
+            "plane"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "reading: both ~ sphere",
+          "percent": 2.0,
+          "arithmetic": "both and sphere differ by the mat north of the dome: a dark sheet 3.4 x 3.0 m with three balls, three tapes and a line of words - about 10 square metres of a scene of 80 that fills about half the frame: 6 %; the mat is dark and flat against a grey floor, so a flat rasteriser sees mostly its outline: 2 % as the floor. plane removes the dome (32 square metres of pale cap) and differs from both by far more."
+        }
+      }
+    },
+    "standing_word": {
+      "lookup_name": "standing_word",
+      "map_ready": true,
+      "name": "A Word Standing on the Floor",
+      "class_name": "",
+      "scene": "res://commons/artifacts/standing_word/standing_word.tscn",
+      "description": "One word in thick red letters, as tall as a person, standing on the slab: a landmark for a hall's idea. From the front it reads; from behind it is the same letters the wrong way round. Solid: a body walks round it. Axis word: ERROR, NULL, INFINITY, TRUE, PROVABLE, EVERYTHING - the words the foundations halls keep coming back to; text, when not empty, stands instead. tall is the height of a capital in metres, deep the extrusion, fit_width the most room along the floor (a longer word is made smaller, not cut). A TextMesh in commons/font/static/Roboto_Condensed-ExtraBold.ttf (Roboto-Black cannot be used: its P and R do not triangulate).",
+      "category": "annotation",
+      "complexity": "basic",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "read",
+      "size_group": "medium",
+      "tags": [
+        "word",
+        "letters",
+        "landmark",
+        "paradox",
+        "typography"
+      ],
+      "qfep_connection": "A word has a side it is said from: read from behind, the same letters are the wrong way round and nobody arranged it.",
+      "dev_themes": [
+        "annotation",
+        "language"
+      ],
+      "dna": {
+        "axes": {
+          "word": [
+            "ERROR",
+            "NULL",
+            "INFINITY",
+            "TRUE",
+            "PROVABLE",
+            "EVERYTHING"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "word: ERROR ~ TRUE",
+          "percent": 6.0,
+          "arithmetic": "Two words of the same red letters at the same height share a letter shape here and there (ERROR and TRUE share R, U-less; E at different places) but no letter stands in the same place, so most of the lettered area differs: letters cover about a third of the frame from the bench's standpoint and two different words overlap in perhaps half of their strokes: 0.33 x 0.5 = 16 %; a flat rasteriser sees the faces without the extrusion's sides, so 6 % as the floor."
+        }
+      }
     }
   }
 }

@@ -50593,6 +50593,22 @@
           "facing": 180,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "walked-triangle",
+          "artifact": "walked_triangle",
+          "station": "NW",
+          "position": [
+            -3.4,
+            0.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "reading": "both",
+            "editor_label": "The walked triangle | a walkable dome 6.4 m across with two cones; the body is the third corner and the angle sum grows; the same three pairs read as a plane on a mat to its north"
+          }
         }
       ],
       "props": [],
@@ -50772,6 +50788,60 @@
           "config": {
             "board": "arg_russell",
             "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_russell)"
+          }
+        },
+        {
+          "id": "word-error",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0.5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "word": "ERROR",
+            "tall": 1.5,
+            "fit_width": 7.5,
+            "editor_label": "ERROR in standing red letters | what both answers at the bench amount to; a landmark on the east wing, read from the middle of the floor"
+          }
+        },
+        {
+          "id": "word-null",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "word": "NULL",
+            "tall": 1.6,
+            "fit_width": 6.0,
+            "editor_label": "NULL in standing red letters | the set that contains nothing, where the four sets begin; a landmark on the west wing"
+          }
+        },
+        {
+          "id": "word-infinity",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            0.4,
+            -4.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "word": "INFINITY",
+            "tall": 0.7,
+            "fit_width": 4.2,
+            "editor_label": "INFINITY in standing red letters | behind the hotel that is full and takes one more"
           }
         }
       ],
@@ -50969,6 +51039,42 @@
           "config": {
             "asks": "SSSSSSSS0",
             "editor_label": "The checking station | a robot brings candidate derivations to a gate that checks them with the bench's own checker; three plates ask for SSS0, SSSSSSSS0 or 0S"
+          }
+        },
+        {
+          "id": "word-true",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "word": "TRUE",
+            "tall": 1.6,
+            "fit_width": 6.0,
+            "editor_label": "TRUE in standing red letters | one of the two words the theorem pulls apart; on the west wing, the hero between it and PROVABLE"
+          }
+        },
+        {
+          "id": "word-provable",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "word": "PROVABLE",
+            "tall": 1.3,
+            "fit_width": 8.5,
+            "editor_label": "PROVABLE in standing red letters | the other word; on the east wing, facing TRUE across the floor"
           }
         }
       ],
