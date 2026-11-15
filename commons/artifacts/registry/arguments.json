@@ -260,6 +260,49 @@
           "arithmetic": "The work is 41 m long and 3 m deep: a thin band. narrow and none differ by a pink line 4 cm wide swung 2.5 degrees over 34 m (1.4 square metres laid, 1.4 lifted) and by the stake (a pole 1.7 m high with a ball and a tag, about 0.3 square metres seen from the side): 3.1 square metres of a band of 123 that fills perhaps 8 % of the frame: 0.2 %. This axis is made to be walked, not photographed whole; I expect the critic to call it small from the bench's standpoint and predict so."
         }
       }
+    },
+    "cornered_block": {
+      "lookup_name": "cornered_block",
+      "map_ready": true,
+      "name": "Three Corners and You Are Home",
+      "class_name": "",
+      "scene": "res://commons/artifacts/cornered_block/cornered_block.tscn",
+      "description": "A playable non-Euclidean space for the non-Euclidean hall: a square block with a closed corridor round it and one door. Keep the block on your left and count the corners, each a right angle drawn on the floor: after three you stand at the door again - a closed walk of 270 degrees on a floor that is flat under every step. The 90 too many sit at one point inside the block, as at the corner of a cube. The inside has three quarter-sectors where the building has four: the four sides are built alike, the numbers and the door are lettered from where the body stands, and when the body turns onto a side the glued space does not have it is turned about the block's middle by a quarter in the same frame. Axis corners: three, four (an ordinary block), five (450 degrees: the disk's surplus at one point). Not tried in a headset.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "non-euclidean",
+        "cone-point",
+        "angle-sum",
+        "holonomy",
+        "impossible-space",
+        "playground",
+        "visual-argument",
+        "walkable"
+      ],
+      "qfep_connection": "The floor is ordinary under every step and the walk still closes after three right angles: what a space is cannot be read off any one piece of it.",
+      "dev_themes": [
+        "geometry",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "corners": [
+            "three",
+            "four",
+            "five"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "corners: three ~ five",
+          "percent": 0.3,
+          "arithmetic": "From outside the three are one closed cardboard block; what differs is the sign on the door's screen (one numeral, 25 cm high) and the words on the board (about 3.4 x 1.5 m, mostly the same lines). Changed lettering covers perhaps a tenth of the board: 0.5 square metres of a scene of about 60 that fills half the frame: 0.4 %; a flat rasteriser reads lettering poorly: 0.3 %. The axis lives inside, in what a walk does; a still of the outside will call it decoration and I predict so."
+        }
+      }
     }
   }
 }

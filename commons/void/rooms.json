@@ -50770,6 +50770,23 @@
             "fit_width": 6.0,
             "editor_label": "180 in standing red letters | the sum that was taken for a fact about triangles and is a fact about where they live; on the west wing"
           }
+        },
+        {
+          "id": "three-corners",
+          "artifact": "cornered_block",
+          "station": "NW",
+          "position": [
+            -17,
+            -6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "corners": "three",
+            "board_east": "true",
+            "editor_label": "Three corners and you are home | a block with a closed corridor and one door: three right-angled corners close the walk (270 on a flat floor); beside the standing 180"
+          }
         }
       ],
       "props": [],

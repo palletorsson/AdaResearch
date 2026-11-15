@@ -491,27 +491,27 @@
     {
       "id": "three_cornered_block",
       "form": "playground",
-      "status": "written",
+      "status": "standing: row three-corners",
       "title": "THREE CORNERS AND YOU ARE HOME",
       "at": [
-        17.0,
+        -17.0,
         -6.0
       ],
       "size": [
-        6.0,
-        6.0
+        4.8,
+        4.8
       ],
       "claim": "A walk with three right-angled corners can close on a floor that is flat under every step, if all the curvature sits at one point inside the block you walk round.",
       "from_the_hall": "The bench's SPHERE triangle with three right angles, and room 3 of the wing ('Three right angles. The same position; a different direction.').",
       "built_from": [
-        "a closed corridor round a square block (timber_panel walls)",
-        "a numeral on each side that is re-lettered while it is out of sight",
-        "its sibling with five corners"
+        "a closed cardboard corridor round a square block, four sides built alike, one door with a paper screen",
+        "a number on each face of the block, lettered from where the body stands"
       ],
-      "what_stands": "A block with a corridor round it and one door. Inside, each side carries a number.",
-      "what_you_do": "Walk round counting corners. After three right turns you stand at 1 again and the door is there. In the sibling it takes five.",
-      "what_it_shows": "270 and 450 on flat floor: the dome's excess gathered into one point (a cube's corner, laid out), and its opposite. No stencil is needed: the block hides the side being changed. Leaving by a door that has moved needs the body turned by a quarter; game.place_player takes a yaw.",
-      "needs": "a way out that does not show the trick: a short bent vestibule in which the body is turned"
+      "what_stands": "A cardboard block 4.8 m square on the west wing beside the standing 180, with '3 corners / IN' on its door and a board beside it.",
+      "what_you_do": "Go in, keep the block on your left, count the corners. After three you stand at 1 and the door again, and leave by the door you came in by.",
+      "what_it_shows": "270 on flat floor: the dome's excess gathered into one point (a cube's corner, laid out). The same work with `corners` five closes after five (450: the disk's surplus at one point), with four it is an ordinary block.",
+      "how": "The inside has three quarter-sectors, the building four. The body is turned about the block's middle by a quarter when it steps onto a side the glued space does not have, in the frame the faces are re-lettered. No stencil: the block hides the fourth side.",
+      "measured": "tools/probes/cornered_block_walk.gd, the tower's walker: faces read 1, 2, 3, 1; turned once by a quarter; 3 cm from where it stood after coming in; out by the same door; five corners read 1, 2, 3, 4, 5, 1. Desktop only: the headset path (the player body's teleport) is written and not tried."
     },
     {
       "id": "mirror_lap",
@@ -592,7 +592,7 @@
     "Plate 7's story of Gauss measuring a mountain triangle is unchecked and marked so.",
     "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing stood with a column 0.55 m in front of its door and could not be entered; moved to [-9.5, 8].",
     "The hall text does not mention Seven Spaces at all. Plate 8 is the only words on the floor about it besides its own.",
-    "Four more playable spaces are written under visual_arguments and not built: three corners and home (and five), one lap and mirrored, a walked hyperbolic tiling, the halving door. The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
+    "Three more playable spaces are written under visual_arguments and not built: one lap and mirrored, a walked hyperbolic tiling, the halving door. Three corners and home stands (five by its axis; no five-cornered row is placed). The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_noneuclid). Near the cork: what the hall text says. In front: what I made of it.",
