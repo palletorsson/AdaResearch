@@ -797,6 +797,50 @@
           "arithmetic": "At rest the twelve rows are under card at every source, so the row itself does not change. What does: the stand's forty-eight evidence cells (0.14 m square: from half to nine tenths about 19 of them turn from dark to cyan, 0.37 m2), two plates trade their highlight (2 x 0.7 m2), and two lines of figures. 1.8 m2 of a subject of about 40 m2 (row 24, stand 8, plates 3.5, board 5): 4 %. Tenth against nine tenths is further: about 38 cells."
         }
       }
+    },
+    "drawn_tree": {
+      "lookup_name": "drawn_tree",
+      "map_ready": true,
+      "name": "Who Drew the Tree?",
+      "class_name": "",
+      "scene": "res://commons/artifacts/drawn_tree/drawn_tree.tscn",
+      "description": "A playground for the QFEP E-term hall: the fan's tree, to be the traveller in. Sixteen endings from four forks of two, taped on the floor from START. A walked path lights, and a bead is hung at the ending reached. A stand gives the entropy twice: counted, as if every ending were equally likely (ln 16), and as walked, from where travellers arrived. PRUNE A and PRUNE B each close four amber gates and leave eight endings: the same count and entropy, different endings; what lay beyond a gate is no longer drawn, and beads that hung there are lost. OPEN returns the endings, not the beads, and the stand says how many were lost. And what the fan cannot do: stand still at one of the eight last forks and a third way is drawn to an ending nobody specified - only at the last forks, where room was left, and the board says so. Axis drawn: open, pruned_a, pruned_b.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "entropy",
+        "possibility",
+        "branching",
+        "pruning",
+        "counting",
+        "playground",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "A count of endings says neither which endings nor who arrives at them, and a reopened route does not return what was lost when it closed. Who drew the tree, and where may another branch be asked for?",
+      "dev_themes": [
+        "qfep",
+        "entropy",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "drawn": [
+            "open",
+            "pruned_a",
+            "pruned_b"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "drawn: pruned_a ~ pruned_b",
+          "percent": 3.0,
+          "arithmetic": "Both close four gates and take eight endings off the floor; they differ in WHICH. Each state shows four amber gates (0.9 x 1.0 m frames of 6 cm bar: about 0.15 m2 of bar each) and four small subtrees (a fork plate, two ending plates, two tapes, two rods: about 0.5 m2 each) that the other does not: 2 x 4 x 0.65 = 5.2 m2 exchanged, but thin: tapes and bars cover perhaps a quarter of that: 1.3 m2 of a subject (tree 10 x 6 m of sparse marks, stand 7, plates 2, board 5: about 40 m2 seen): 3 %. One plate's highlight moves. The stand prints the same count and the same entropy for both, which is the point."
+        }
+      }
     }
   }
 }

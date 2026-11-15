@@ -52642,8 +52642,8 @@
           "artifact": "microstate_counter",
           "station": "NW",
           "position": [
-            -14,
-            -8
+            -10.5,
+            -7.2
           ],
           "facing": 0,
           "height": 0,
@@ -52656,7 +52656,7 @@
           "station": "NE",
           "position": [
             0,
-            -8
+            3.6
           ],
           "facing": 0,
           "height": 0,
@@ -52670,8 +52670,8 @@
           "artifact": "possibility_space_cloud",
           "station": "NE",
           "position": [
-            14,
-            -8
+            10.5,
+            -7.2
           ],
           "facing": 0,
           "height": 0,
@@ -52683,8 +52683,8 @@
           "artifact": "random_cubes",
           "station": "SW",
           "position": [
-            -14,
-            8
+            -10.5,
+            7.2
           ],
           "facing": 180,
           "height": 0.5,
@@ -52696,8 +52696,8 @@
           "artifact": "particle_chaos",
           "station": "SE",
           "position": [
-            0,
-            8
+            -16.5,
+            5.0
           ],
           "facing": 180,
           "height": 1,
@@ -52709,14 +52709,30 @@
           "artifact": "lambda_slider",
           "station": "SE",
           "position": [
-            14,
-            8
+            10.5,
+            7.2
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "calibration": "none"
+          }
+        },
+        {
+          "id": "drawn-tree",
+          "artifact": "drawn_tree",
+          "station": "NW",
+          "position": [
+            0,
+            -3.3
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {
-            "calibration": "none"
+            "drawn": "open",
+            "editor_label": "Who drew the tree? | sixteen endings taped on the floor from START; walk a path and a bead is hung; PRUNE A/B close gates, OPEN returns endings not beads; a third way can be asked for at a last fork"
           }
         }
       ],
