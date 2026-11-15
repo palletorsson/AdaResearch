@@ -53771,6 +53771,78 @@
             "route": "cut",
             "editor_label": "What the hand offers, what the body uses | a rail whose value is offered, a gate that opens by the value it uses, a route that can be made and cut; cut it and the gate keeps its last value"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -3.8,
+            1.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_Sandbox",
+            "stands_at": [
+              -3.8,
+              1.2
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the two handles and the reactor to the rail and the two gates (commons/data/arguments/QFEP_Sandbox.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepsandbox",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepsandbox)"
+          }
+        },
+        {
+          "id": "word-offered",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "OFFERED",
+            "tall": 1.2,
+            "fit_width": 6.0,
+            "editor_label": "OFFERED in standing red letters | what the hand offers; on the west wing, facing USED across the floor"
+          }
+        },
+        {
+          "id": "word-used",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "USED",
+            "tall": 1.5,
+            "fit_width": 4.0,
+            "editor_label": "USED in standing red letters | what the body still uses; on the east wing"
+          }
         }
       ],
       "props": [],
