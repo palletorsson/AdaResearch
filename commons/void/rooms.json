@@ -51367,6 +51367,22 @@
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "endless-stair",
+          "artifact": "endless_stair",
+          "station": "NW",
+          "position": [
+            0.6,
+            -2.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "agreement": "moved",
+            "editor_label": "A stair that only goes up and comes back | a stairwell round a block, up a ramp: four rising flights and you are at the door again; the wall inside counts what was taken back"
+          }
         }
       ],
       "props": [],

@@ -393,6 +393,50 @@
           "arithmetic": "The deck is a disk of 21 square metres; its tiles' dark lines (4 cm wide, about 3.5 m of edge to a square metre of floor) cover about a seventh of it in either tiling, and the two grids coincide only near START, so most line pixels differ: about 5 square metres of changed deck. The deck fills perhaps a third of the frame from the bench's standpoint: 5 / 21 x 0.33 = 8 %; lines seen at a low angle thin out, so 4 %. The floor of this prediction is not a rasteriser's - a flat rasteriser cannot run the deck's shader and sees one plain disk: 0 %."
         }
       }
+    },
+    "endless_stair": {
+      "lookup_name": "endless_stair",
+      "map_ready": true,
+      "name": "A Stair That Only Goes Up and Comes Back",
+      "class_name": "",
+      "scene": "res://commons/artifacts/endless_stair/endless_stair.tscn",
+      "description": "A visual argument in the form of a playground, for the Escher hall: the staircase that goes up on all four sides and comes back to where it started, at body size. A square stairwell round a block, 5 m square and 4.9 m high, its door a flight above the floor at the top of a ramp. Keep the block on your left and climb: every flight rises 0.6 m, and after four you are at the door again. It keeps the other agreement the hall names, a moved room: what stands is one honest lap; the body lives on two of its flights, and at the corner where it would step onto the third it is set down 1.2 m and turned half about onto the first, a place built to look exactly like the one it left, while the numbers on the block are lettered from where it stands. The wall inside keeps count: metres climbed, metres above the door, metres taken back. Axis agreement: moved, kept (one up all the way round: the four rising flights cannot close and the stair ends 1.8 m above its door). Not tried in a headset.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "escher",
+        "penrose-stairs",
+        "impossible-figure",
+        "locally-valid",
+        "holonomy",
+        "impossible-space",
+        "playground",
+        "visual-argument",
+        "walkable"
+      ],
+      "qfep_connection": "Every flight is honest and every corner is honest; what cannot be had is all of them at once under one up. The stair closes by changing the agreement, and keeps the receipt on its wall.",
+      "dev_themes": [
+        "geometry",
+        "foundations",
+        "perception"
+      ],
+      "dna": {
+        "axes": {
+          "agreement": [
+            "moved",
+            "kept"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "agreement: moved ~ kept",
+          "percent": 0.3,
+          "arithmetic": "From outside the two are one closed cardboard stairwell with the same ramp and door; only the board's words differ (3.4 x 1.5 m, about half its lines): perhaps 1 square metre of lettering changed in a scene of 70 that fills half the frame: 0.7 %; lettering reads poorly at this size: 0.3 %. The axis is what a climb does; a still of the outside will call it decoration and I predict so."
+        }
+      }
     }
   }
 }
