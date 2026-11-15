@@ -977,6 +977,49 @@
           "arithmetic": "Both values draw the rule's circle, the pole, the stand, the plates and the board alike, and both draw the 48-step path (amber at fine, cyan at coarse: the same stones in another colour). What differs: coarse adds the 24-step path, a spiral of 24 tapes ending 3.55 m out (about 17 m of tape 6 cm wide: 1.0 m2, and 25 stones); fine adds the 96-step path instead (about 11 m of tape: 0.7 m2, 97 small stones). So roughly 1.7 m2 of marks exchanged and 0.9 m2 recoloured on a subject of about 50 m2 (a 7.6 m disc of floor seen, stand 9, plates 4, board 5): 5 %."
         }
       }
+    },
+    "offered_used": {
+      "lookup_name": "offered_used",
+      "map_ready": true,
+      "name": "What the Hand Offers, What the Body Uses",
+      "class_name": "",
+      "scene": "res://commons/artifacts/offered_used/offered_used.tscn",
+      "description": "A playground for the QFEP sandbox hall: its wiring study with a receiver a body can test with itself. A rail five metres long: where the visitor last walked along it is the value offered, and a puck stays there. North of it a gate of two sliding panels stands open by the value it uses. A strip between them is the route: at first cut. Walk the rail: the puck follows, the gate does not. CONNECT / CUT makes the route and the gate takes what the rail offers; open it and walk through. Close it, cut the route and walk the rail back: the gate stays shut, having kept the last value it was given. OTHER MAPPING turns the consequence round: the same number closes what it opened, and the stand says someone wrote both. A second gate beside it moves by itself; no route leads to it. The stand always shows both sides: offered at the rail, used at the gate. Axis route: cut, connected.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "control",
+        "receiver",
+        "connection",
+        "memory",
+        "mapping",
+        "playground",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "A control changes a system only where a route carries it and a mapping uses it; cutting the route leaves the last decision in force; and the consequence of a number was written by someone.",
+      "dev_themes": [
+        "qfep",
+        "control",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "route": [
+            "cut",
+            "connected"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "route: cut ~ connected",
+          "percent": 4.0,
+          "arithmetic": "Found cut, the gate uses 0.10 and stands 0.24 m open; found connected it uses the offered 0.50 and stands 1.20 m open: each of its two panels (1.2 x 2.2 m) stands 0.48 m further out, uncovering 2 x 0.48 x 2.2 = 2.1 m2 of what lies behind and covering as much. The route strip (0.14 x 1.75 m) turns from grey to cyan: 0.25 m2. Three lines of the stand change. About 2.4 m2 of a subject of some 60 m2 (two gates 23, rail 6, stand 7, plates, board, floor between): 4 %. The neighbour gate differs by its own clock, not by the axis."
+        }
+      }
     }
   }
 }

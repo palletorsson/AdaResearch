@@ -53687,8 +53687,8 @@
           "artifact": "lambda_slider",
           "station": "NW",
           "position": [
-            -14,
-            -8
+            -2.6,
+            5.0
           ],
           "facing": 0,
           "height": 0,
@@ -53702,8 +53702,8 @@
           "artifact": "phi_slider",
           "station": "NE",
           "position": [
-            0,
-            -8
+            2.6,
+            5.0
           ],
           "facing": 0,
           "height": 0.1,
@@ -53718,8 +53718,8 @@
           "artifact": "qfep_reactor",
           "station": "NE",
           "position": [
-            14,
-            -8
+            0,
+            1.2
           ],
           "facing": 0,
           "height": 0.3,
@@ -53733,10 +53733,10 @@
           "artifact": "reactive_particles",
           "station": "SE",
           "position": [
-            0,
-            8
+            6.0,
+            1.6
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 1,
           "scale": 1,
           "config": {
@@ -53748,13 +53748,29 @@
           "artifact": "qfep_formula_3d",
           "station": "SE",
           "position": [
-            14,
-            8
+            -5.6,
+            2.0
           ],
           "facing": 0,
-          "height": 0.05,
+          "height": 1.6,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "offered-used",
+          "artifact": "offered_used",
+          "station": "NW",
+          "position": [
+            0.6,
+            -4.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "route": "cut",
+            "editor_label": "What the hand offers, what the body uses | a rail whose value is offered, a gate that opens by the value it uses, a route that can be made and cut; cut it and the gate keeps its last value"
+          }
         }
       ],
       "props": [],
