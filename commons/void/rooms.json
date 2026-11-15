@@ -50467,6 +50467,94 @@
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "meeting-point",
+          "artifact": "meeting_point",
+          "station": "NW",
+          "position": [
+            0,
+            -5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "shortfall": "narrow",
+            "editor_label": "Where do they meet? | the fifth postulate the length of the slab: a first line, P, the gold line, four lines that fall short; a body in the lane carries a pink line and its meeting runs away"
+          }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -0.4,
+            1.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "Euclid_Parallel",
+            "stands_at": [
+              -0.4,
+              1.6
+            ],
+            "editor_label": "The hall's argument on cardboard | seven plates, stickers and red threads from the plaque past the lines and the triangle to the lane (commons/data/arguments/Euclid_Parallel.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NE",
+          "position": [
+            0,
+            -7.8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_euclid",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_euclid)"
+          }
+        },
+        {
+          "id": "word-parallel",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            1.2
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "PARALLEL",
+            "tall": 1.3,
+            "fit_width": 7.2,
+            "editor_label": "PARALLEL in standing red letters | the word that cannot be confirmed by looking; on the east wing, facing GIVEN across the floor"
+          }
+        },
+        {
+          "id": "word-given",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            1.2
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "GIVEN",
+            "tall": 1.5,
+            "fit_width": 6.0,
+            "editor_label": "GIVEN in standing red letters | what the five postulates are: granted, not measured and not proved; on the west wing"
+          }
         }
       ],
       "props": [],

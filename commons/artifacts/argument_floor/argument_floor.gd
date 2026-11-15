@@ -37,7 +37,7 @@ const FOOT := 0.2
 const POLE := 2.7
 const PIXEL := 0.0011
 
-@export_enum("Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces") var hall := "Russell_Paradox"
+@export_enum("Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces", "Euclid_Parallel") var hall := "Russell_Paradox"
 ## Where this row stands on its floor. The file's places are in the floor's frame; a row that cannot stand at the
 ## floor's middle (another work is there) says where it stands and everything is shifted back.
 @export var stands_at := Vector2.ZERO
@@ -60,7 +60,7 @@ func _ready() -> void:
 
 
 func _take(config_data: Dictionary) -> void:
-	if config_data.has("hall") and str(config_data["hall"]) in ["Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces"]: hall = str(config_data["hall"])
+	if config_data.has("hall") and str(config_data["hall"]) in ["Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces", "Euclid_Parallel"]: hall = str(config_data["hall"])
 	if config_data.has("stands_at"):
 		var given: Variant = config_data["stands_at"]
 		if given is String: given = (given as String).split_floats(",")

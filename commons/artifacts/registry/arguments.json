@@ -37,7 +37,8 @@
           "hall": [
             "Russell_Paradox",
             "Godel_Incompleteness",
-            "NonEuclidean_Spaces"
+            "NonEuclidean_Spaces",
+            "Euclid_Parallel"
           ]
         },
         "predicted_degeneracy": {
@@ -213,6 +214,50 @@
           "pair": "word: ERROR ~ TRUE",
           "percent": 6.0,
           "arithmetic": "Two words of the same red letters at the same height share a letter shape here and there (ERROR and TRUE share R, U-less; E at different places) but no letter stands in the same place, so most of the lettered area differs: letters cover about a third of the frame from the bench's standpoint and two different words overlap in perhaps half of their strokes: 0.33 x 0.5 = 16 %; a flat rasteriser sees the faces without the extrusion's sides, so 6 % as the floor."
+        }
+      }
+    },
+    "meeting_point": {
+      "lookup_name": "meeting_point",
+      "map_ready": true,
+      "name": "Where Do They Meet?",
+      "class_name": "",
+      "scene": "res://commons/artifacts/meeting_point/meeting_point.tscn",
+      "description": "A visual argument in the form of a playground, for the Euclid hall: the fifth postulate at the size of the floor. A first line on text tape the length of the slab; a point P a metre and a half off it; the gold line through P with no shortfall; four lines through P that fall 20, 10, 5 and 3 degrees short of two right angles, each with a cone where it meets the first line (4, 9, 17 and 29 m along). A body in the lane between the lines carries a pink line from P and a stake where that line meets the first: at the body's feet on the first line, running away east as the body steps toward the gold line, off the edge of the building. On the gold line the reading is withheld (the instrument's threshold, 0.05 degrees, and it says so); beyond it the meeting is behind P. Nothing shows that the gold line never meets: it is accepted, not walked. Axis shortfall: where the pink line rests - wide (8 degrees), narrow (2.5), none. The row stands at x 0 of its floor, facing 0.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "euclid",
+        "parallel-postulate",
+        "fifth-postulate",
+        "lines",
+        "playground",
+        "visual-argument",
+        "walkable",
+        "text-tape"
+      ],
+      "qfep_connection": "An assumption held so long it reads like a result: every line but one has a meeting that can be walked to, and the one that has none is the one that was asked for like a favour.",
+      "dev_themes": [
+        "geometry",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "shortfall": [
+            "wide",
+            "narrow",
+            "none"
+          ]
+        },
+        "framing": 0.5,
+        "predicted_degeneracy": {
+          "pair": "shortfall: narrow ~ none",
+          "percent": 0.2,
+          "arithmetic": "The work is 41 m long and 3 m deep: a thin band. narrow and none differ by a pink line 4 cm wide swung 2.5 degrees over 34 m (1.4 square metres laid, 1.4 lifted) and by the stake (a pole 1.7 m high with a ball and a tag, about 0.3 square metres seen from the side): 3.1 square metres of a band of 123 that fills perhaps 8 % of the frame: 0.2 %. This axis is made to be walked, not photographed whole; I expect the critic to call it small from the bench's standpoint and predict so."
         }
       }
     }
