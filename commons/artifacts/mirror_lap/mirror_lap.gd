@@ -151,7 +151,7 @@ func _box(parent: Node3D, solid: StaticBody3D, at: Vector3, size: Vector3, paint
 	mesh.material_override = paint
 	mesh.position = at
 	parent.add_child(mesh)
-	if solid != null: _city.wall(solid, at, size)
+	if solid != null: _city.wall(solid, at - Vector3(0, size.y * 0.5, 0), size)   # wall() takes the base of the box
 	return mesh
 
 
@@ -175,7 +175,7 @@ func _plug(key: String, at: Vector3, paint: Material) -> void:
 	add_child(body)
 	var size := Vector3(W, HIGH, T)
 	var visual: MeshInstance3D = _box(body, null, at, size, paint)
-	var shape: CollisionShape3D = _city.wall(body, at, size)
+	var shape: CollisionShape3D = _city.wall(body, at - Vector3(0, size.y * 0.5, 0), size)
 	_plugs[key] = [visual, shape]
 
 
@@ -272,7 +272,7 @@ func _build_once() -> void:
 	var door_body := StaticBody3D.new()
 	door_body.name = "DoorShut"
 	add_child(door_body)
-	_door_shape = _city.wall(door_body, Vector3(-X_OUT - T * 0.5, DOOR_HIGH * 0.5, 0), Vector3(T, DOOR_HIGH, DOOR))
+	_door_shape = _city.wall(door_body, Vector3(-X_OUT - T * 0.5, 0, 0), Vector3(T, DOOR_HIGH, DOOR))
 	# the door from outside: a paper screen that is walked through
 	var front := MeshInstance3D.new()
 	front.mesh = sheet_mesh

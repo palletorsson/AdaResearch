@@ -189,7 +189,7 @@ func _box(parent: Node3D, solid: StaticBody3D, at: Vector3, size: Vector3, paint
 	mesh.material_override = paint
 	mesh.position = at
 	parent.add_child(mesh)
-	if solid != null: _city.wall(solid, at, size)
+	if solid != null: _city.wall(solid, at - Vector3(0, size.y * 0.5, 0), size)   # wall() takes the base of the box
 
 
 func _panel(parent: Node3D, size: Vector2, paint: Material) -> MeshInstance3D:
