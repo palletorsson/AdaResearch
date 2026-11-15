@@ -51779,6 +51779,78 @@
             "rule": "four",
             "editor_label": "What follows? | seven doors with a sentence over each; report P or not-P by standing on a plate and the doors that follow open; a third plate reads the reports classically: everything opens"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            1.6,
+            0.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "Florensky_Paraconsistent",
+            "stands_at": [
+              1.6,
+              0.4
+            ],
+            "editor_label": "The hall's argument on cardboard | eight plates, stickers and red threads from the gate past the sphere to the yard of doors and the box (commons/data/arguments/Florensky_Paraconsistent.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_florensky",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_florensky)"
+          }
+        },
+        {
+          "id": "word-both",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "BOTH",
+            "tall": 1.6,
+            "fit_width": 6.0,
+            "editor_label": "BOTH in standing red letters | two reports that disagree, kept; on the east wing, facing ANYTHING across the floor"
+          }
+        },
+        {
+          "id": "word-anything",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "ANYTHING",
+            "tall": 1.2,
+            "fit_width": 8.0,
+            "editor_label": "ANYTHING in standing red letters | what both would license if the rule let it, and here does not; on the west wing"
+          }
         }
       ],
       "props": [],
