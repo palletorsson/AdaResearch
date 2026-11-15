@@ -752,6 +752,50 @@
           "arithmetic": "The floor is 36 m2 of bands a tenth of the total wide. At weight half the bands are 0.54 m wide and lean 27 degrees from north; at one they are 0.42 m wide and lean 45. Two sets of stripes of about that width at 18 degrees to each other disagree over roughly half the floor, but neighbouring bands differ only by a tenth of the ramp and a 8 % tone step, so about a fifth of the disagreeing area reads as a different colour: 36 x 0.5 x 0.2 = 3.6 m2, of a subject (floor, stand, plates, board) of about 40 m2: 9 %. The stand's shape changes one vertex (lambda 0.5 to 1 on a 0.75 m axis): under 0.3 m2. Zero against half is further apart: the lines stand upright."
         }
       }
+    },
+    "guessing_walk": {
+      "lookup_name": "guessing_walk",
+      "map_ready": true,
+      "name": "Whose Expectation Meets It?",
+      "class_name": "",
+      "scene": "res://commons/artifacts/guessing_walk/guessing_walk.tscn",
+      "description": "A playground for the QFEP F-term hall: its prediction study with a body for a predictor. Twelve bits lie under card in two lanes: the south lane is EXPECT 0, the north lane EXPECT 1. A stand shows forty-eight bits the source gave before. Walk: each row is uncovered as it is stepped into, and an amber bar marks a bit that refused the guess. AGAIN covers the same twelve bits: walked in the other lane the row has not changed and the misses have. Plates set the source (p 0.1, 0.5, 0.9): 0.1 and 0.9 are equally uncertain and ask for opposite lanes. One plate does what the hall warns of, CHANGE THE WORLD INSTEAD: every bit that refused the walker is rewritten to where the walker stood and stamped; no misses, and the stand says the row is no longer a sample of its source. The row is the first twelve of the hall workbench's own stored draws. Axis source: tenth, half, nine_tenths.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "qfeplaboratory",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "prediction",
+        "entropy",
+        "expectation",
+        "error",
+        "sample",
+        "playground",
+        "visual-argument",
+        "qfep"
+      ],
+      "qfep_connection": "When a world is called difficult, whose expectation is meeting it? The expectation can be changed with a step; the plate at the end changes the world instead, and says what that costs.",
+      "dev_themes": [
+        "qfep",
+        "prediction",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "source": [
+            "tenth",
+            "half",
+            "nine_tenths"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "source: half ~ nine_tenths",
+          "percent": 4.0,
+          "arithmetic": "At rest the twelve rows are under card at every source, so the row itself does not change. What does: the stand's forty-eight evidence cells (0.14 m square: from half to nine tenths about 19 of them turn from dark to cyan, 0.37 m2), two plates trade their highlight (2 x 0.7 m2), and two lines of figures. 1.8 m2 of a subject of about 40 m2 (row 24, stand 8, plates 3.5, board 5): 4 %. Tenth against nine tenths is further: about 38 cells."
+        }
+      }
     }
   }
 }

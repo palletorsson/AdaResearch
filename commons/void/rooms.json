@@ -52398,7 +52398,7 @@
           "artifact": "tt",
           "position": [
             -16,
-            9
+            8.0
           ],
           "station": "SW",
           "height": 1.2,
@@ -52412,8 +52412,8 @@
           "id": "f2_lambda_slider_2_2",
           "artifact": "lambda_slider",
           "position": [
-            4,
-            6
+            3.0,
+            4.4
           ],
           "station": "SE",
           "height": 0.95,
@@ -52428,7 +52428,7 @@
           "artifact": "science_screen",
           "position": [
             16,
-            9
+            8.0
           ],
           "station": "SE",
           "height": 1.5,
@@ -52443,11 +52443,11 @@
           "artifact": "shannon_workbench",
           "position": [
             0,
-            -6
+            3.4
           ],
           "station": "NE",
           "height": 0,
-          "facing": 180,
+          "facing": 0,
           "scale": 1,
           "config": {
             "prediction_study": "on",
@@ -52458,12 +52458,12 @@
           "id": "f2_film_shannon_threshold_8_5",
           "artifact": "film_shannon_threshold",
           "position": [
-            0,
-            7
+            -4.3,
+            5.7
           ],
           "station": "SE",
           "height": 0,
-          "facing": 0,
+          "facing": 45,
           "scale": 1,
           "config": {
             "plinth": "0",
@@ -52521,6 +52521,22 @@
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "guessing-walk",
+          "artifact": "guessing_walk",
+          "station": "NW",
+          "position": [
+            0,
+            -4.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "source": "nine_tenths",
+            "editor_label": "Whose expectation meets it? | twelve hidden bits in two lanes, EXPECT 0 and EXPECT 1; walk and count the misses; AGAIN: same bits, other lane; one plate changes the world instead"
+          }
         }
       ],
       "props": [],
