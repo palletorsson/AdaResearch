@@ -139,7 +139,8 @@
         "So one of the three geometries can be walked here, and one can only be pictured."
       ],
       "back": [
-        "I think that last claim is Hilbert's theorem (no complete surface of constant negative curvature in ordinary space). I have not checked the statement. a saddle has it in a patch only."
+        "I think that last claim is Hilbert's theorem (no complete surface of constant negative curvature in ordinary space). I have not checked the statement. a saddle has it in a patch only.",
+        "the wing behind the door on the south edge does picture them and lets you travel in the picture. its own first note: 'Physical support stays Euclidean.'"
       ]
     },
     {
@@ -161,6 +162,27 @@
       "back": [
         "Gauss is said to have measured a triangle between three mountain tops. I have not checked the story.",
         "choice / contradiction / reach (Russell plate 9)."
+      ]
+    },
+    {
+      "id": "door",
+      "title": "8  A DOOR IS NOT A CURVATURE",
+      "by": "f2_noneuclidean_wing_13_4",
+      "at": [
+        -12.3,
+        6.2
+      ],
+      "yaw": 32,
+      "front": [
+        "Behind this door stand seven rooms that are not behind this door. Look past the frame: sky.",
+        "The first is bigger than its doorway allows. Every tile of its floor is an ordinary flat tile.",
+        "So nothing in there is bent. What changed is which piece of floor is next to which.",
+        "Three different things are called non-Euclidean on this floor: a bent surface (the dome), a rule for distance (the disk), a gluing (this door).",
+        "A gluing leaves every triangle at 180 - unless the triangle goes round a seam that turns you."
+      ],
+      "back": [
+        "room 3 in there carries an arrow round three right angles and it comes back turned. that one IS curvature. a door that only moves you is not.",
+        "the last line on the front is my understanding, not checked: a seam that turns you is a cone point, and a triangle round it gains or loses exactly that turn."
       ]
     }
   ],
@@ -314,6 +336,32 @@
       "plate": "which",
       "kind": "question",
       "text": "did Gauss really measure it?"
+    },
+    {
+      "id": "x-9",
+      "plate": "door",
+      "kind": "not",
+      "text": "NOT bent. glued."
+    },
+    {
+      "id": "x-10",
+      "plate": "door",
+      "kind": "claim",
+      "text": "bent / measured / glued"
+    },
+    {
+      "id": "x-11",
+      "plate": "door",
+      "kind": "question",
+      "text": "does a turning seam change the sum? check"
+    },
+    {
+      "id": "q-portal-no-curvature",
+      "plate": "door",
+      "kind": "quote",
+      "a": "a portal does not create curvature.",
+      "quote": "Connected Euclidean rooms: a portal does not create curvature.",
+      "file": "commons/artifacts/noneuclidean_wing/noneuclidean_wing.gd"
     }
   ],
   "threads": [
@@ -376,6 +424,18 @@
       "b": "which",
       "word": "say where you are",
       "why": "Which space the corners belong to is the question the world has to answer, not the bench."
+    },
+    {
+      "a": "bend",
+      "b": "door",
+      "word": "a gluing is not a bend",
+      "why": "The saddle is bent and proves nothing; the door bends nothing and still gives a room that will not fit."
+    },
+    {
+      "a": "straight",
+      "b": "door",
+      "word": "next to what?",
+      "why": "What counts as straight depends on the space; the door changes the space by changing what is next to what."
     }
   ],
   "visual_arguments": [
@@ -403,12 +463,136 @@
       "what_stands": "A dome 6.4 m across with two cones and a plank through it; north of it a mat with the same three pairs read as a plane.",
       "what_you_do": "Step onto the dome: you are the third corner. Walk away from the cones and read the sum on the board; the mat keeps 180.",
       "what_it_shows": "The sum is a fact about the space the corners belong to. The record travels between the two readings; the angles do not."
+    },
+    {
+      "id": "seven_spaces",
+      "form": "playground",
+      "status": "standing: row f2_noneuclidean_wing_13_4 (not the pass's work: commons/artifacts/noneuclidean_wing with its Void adapter; the pass moved it clear of a column)",
+      "title": "SEVEN SPACES",
+      "at": [
+        -9.5,
+        8.0
+      ],
+      "size": [
+        2.4,
+        0.3
+      ],
+      "claim": "A door can lead to more room than there is behind it, and a room can be flat, round or hyperbolic while the deck you stand on stays ordinary.",
+      "from_the_hall": "The hall's own installed wing. Its door is a stencil doorway (Godot 4.5's stencil buffer): a quad writes stencil 5, a copy of the first room is drawn only where stencil is 5.",
+      "built_from": [
+        "a door frame on the slab",
+        "seven chambers 60 m above it and five more spaces behind two doors in the first (overlapping rooms, a growing corner walk, a forced perspective, a repeating gallery, a column forest, a labyrinth)"
+      ],
+      "what_stands": "A dark frame on the south edge with a carried point on a pedestal beside it. From the side: sky behind it. From the front: a room.",
+      "what_you_do": "Walk through. Next / Previous / Museum on the desk in each chamber; the point is carried through every room.",
+      "what_it_shows": "1 a room that will not fit, 2 a corridor that returns your point, 3 an arrow that does not return (three right angles), 4 the disk's edge, 5 hyperbolic galleries H2 x R, 6 H3, 7 a straight aim and a curved path.",
+      "measured": "tools/probes/noneuclid_wing_visit.gd: at [-5, 8] a column stood 0.55 m in front of the door and the tower's walker never got in; at [-9.5, 8] it enters, stands in each of the seven chambers and returns (4 of 4)."
+    },
+    {
+      "id": "three_cornered_block",
+      "form": "playground",
+      "status": "written",
+      "title": "THREE CORNERS AND YOU ARE HOME",
+      "at": [
+        17.0,
+        -6.0
+      ],
+      "size": [
+        6.0,
+        6.0
+      ],
+      "claim": "A walk with three right-angled corners can close on a floor that is flat under every step, if all the curvature sits at one point inside the block you walk round.",
+      "from_the_hall": "The bench's SPHERE triangle with three right angles, and room 3 of the wing ('Three right angles. The same position; a different direction.').",
+      "built_from": [
+        "a closed corridor round a square block (timber_panel walls)",
+        "a numeral on each side that is re-lettered while it is out of sight",
+        "its sibling with five corners"
+      ],
+      "what_stands": "A block with a corridor round it and one door. Inside, each side carries a number.",
+      "what_you_do": "Walk round counting corners. After three right turns you stand at 1 again and the door is there. In the sibling it takes five.",
+      "what_it_shows": "270 and 450 on flat floor: the dome's excess gathered into one point (a cube's corner, laid out), and its opposite. No stencil is needed: the block hides the side being changed. Leaving by a door that has moved needs the body turned by a quarter; game.place_player takes a yaw.",
+      "needs": "a way out that does not show the trick: a short bent vestibule in which the body is turned"
+    },
+    {
+      "id": "mirror_lap",
+      "form": "playground",
+      "status": "written",
+      "title": "ONE LAP AND YOUR LEFT IS YOUR RIGHT",
+      "at": [
+        -17.0,
+        -6.0
+      ],
+      "size": [
+        7.0,
+        4.0
+      ],
+      "claim": "A space can be flat everywhere and still not let you keep your handedness: go round once and the world is mirrored.",
+      "from_the_hall": "Not in the hall text. The standing words on this floor already read the wrong way round from behind.",
+      "built_from": [
+        "a ring corridor",
+        "a stencil doorway (as the wing's) showing the corridor's mirrored copy",
+        "a standing word inside"
+      ],
+      "what_stands": "A corridor that closes on itself with a red word standing in it.",
+      "what_you_do": "Walk one lap: the word reads backwards. Walk another: it reads forwards again.",
+      "what_it_shows": "A Moebius band's worth of floor: orientation is a property of the whole space, not of any piece of it. Here the stencil doorway is needed - the mirrored copy and the plain one are both in view at the seam.",
+      "needs": "a mirrored copy drawn through a stencil mask (negative scale flips the faces: check culling); the body is not mirrored, only what it sees"
+    },
+    {
+      "id": "walked_tiling",
+      "form": "playground",
+      "status": "written",
+      "title": "FIVE SQUARES AT EVERY CORNER",
+      "at": [
+        0.0,
+        0.0
+      ],
+      "size": [
+        6.0,
+        6.0
+      ],
+      "claim": "On a hyperbolic floor a square walk does not close: forward, left, forward, left, forward, left, forward leaves you somewhere else, turned.",
+      "from_the_hall": "The bench's DISK, and the wing's rooms 5 to 7, which are travelled by trigger from a deck.",
+      "built_from": [
+        "the wing's geometry_kernel.gd",
+        "a deck of floor tiles redrawn round the body as it steps (the tiling moves, the body's deck does not)"
+      ],
+      "what_stands": "A round deck of pale tiles, five meeting at every corner, crowding toward a rim.",
+      "what_you_do": "Step from tile to tile. The tile you stand on is always the big one in the middle. Count tiles within three steps: far more than a flat floor has.",
+      "what_it_shows": "The disk's 'rim you cannot reach' as something the feet find out: there is too much room. HyperRogue and Hyperbolica are the games to look at.",
+      "needs": "a walked recentring (each step a hyperbolic translation of the drawn tiling); room-scale in a headset, stick on a desktop"
+    },
+    {
+      "id": "halving_door",
+      "form": "playground",
+      "status": "written",
+      "title": "EVERY DOOR, HALF AS FAR",
+      "at": [
+        0.0,
+        0.0
+      ],
+      "size": [
+        8.0,
+        3.0
+      ],
+      "claim": "A rim can be at a finite distance on the picture and infinitely many steps away for the one walking toward it.",
+      "from_the_hall": "'The visible rim is infinitely far away in that metric.'",
+      "built_from": [
+        "a row of stencil doorways, each showing the same corridor at half the size",
+        "the rig scaled at each crossing so the corridor always looks full size"
+      ],
+      "what_stands": "A corridor of doors that from outside shrinks to a point three metres away.",
+      "what_you_do": "Walk through door after door. From inside every door is as far as the last; from outside you were seen shrinking toward a point you never reached.",
+      "what_it_shows": "The Poincare disk's rule for distance, walked along one line.",
+      "needs": "scaling the player (XROrigin world scale; the desktop walker has no such thing yet)"
     }
   ],
   "open": [
     "Plate 6's claim about the disk (no whole surface in the room has its distances) is from memory of Hilbert's theorem and is marked so.",
     "Plate 7's story of Gauss measuring a mountain triangle is unchecked and marked so.",
-    "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing at [-5, 8] still overlaps a column and was left."
+    "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing stood with a column 0.55 m in front of its door and could not be entered; moved to [-9.5, 8].",
+    "The hall text does not mention Seven Spaces at all. Plate 8 is the only words on the floor about it besides its own.",
+    "Four more playable spaces are written under visual_arguments and not built: three corners and home (and five), one lap and mirrored, a walked hyperbolic tiling, the halving door. The stencil doorway is proven in the tower's desktop renderer only; the headset's renderer has not been tried."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_noneuclid). Near the cork: what the hall text says. In front: what I made of it.",
