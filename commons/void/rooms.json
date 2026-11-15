@@ -51489,8 +51489,8 @@
           "artifact": "brouwer_choice_sequence",
           "station": "NW",
           "position": [
-            -15,
-            -8
+            0,
+            4.4
           ],
           "facing": 0,
           "height": 0,
@@ -51504,8 +51504,8 @@
           "artifact": "intractable_evidence",
           "station": "NW",
           "position": [
-            -5,
-            -8
+            -2.9,
+            4.6
           ],
           "facing": 0,
           "height": 0,
@@ -51517,8 +51517,8 @@
           "artifact": "constructive_proof",
           "station": "NE",
           "position": [
-            5,
-            -8
+            5.8,
+            1.6
           ],
           "facing": 0,
           "height": 1.1,
@@ -51530,8 +51530,8 @@
           "artifact": "cantor_diagonal_workbench",
           "station": "NE",
           "position": [
-            15,
-            -8
+            2.6,
+            -0.6
           ],
           "facing": 0,
           "height": 0,
@@ -51545,8 +51545,8 @@
           "artifact": "excluded_middle_demo",
           "station": "SW",
           "position": [
-            -15,
-            8
+            3.3,
+            4.8
           ],
           "facing": 0,
           "height": 0.65,
@@ -51558,8 +51558,8 @@
           "artifact": "angle_sum_triangle",
           "station": "SW",
           "position": [
-            -5,
-            8
+            -5.8,
+            2.8
           ],
           "facing": 0,
           "height": 1.1,
@@ -51571,8 +51571,8 @@
           "artifact": "constructive_staircase",
           "station": "SE",
           "position": [
-            5,
-            8
+            -3.0,
+            0.4
           ],
           "facing": 0,
           "height": 0.45,
@@ -51584,13 +51584,45 @@
           "artifact": "parallel_lines",
           "station": "SE",
           "position": [
-            15,
-            8
+            -5.6,
+            -2.6
           ],
           "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "made-walk",
+          "artifact": "made_walk",
+          "station": "NW",
+          "position": [
+            -1.5,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "author": "hand",
+            "editor_label": "Only what you have made | a walkway out over the north edge that grows by the visitor's own choices of 0 or 1, one plank a choice; wait and nothing comes"
+          }
+        },
+        {
+          "id": "clock-walk",
+          "artifact": "made_walk",
+          "station": "NE",
+          "position": [
+            9.6,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "author": "clock",
+            "editor_label": "This one does not wait | the same walkway laid by a rule and a clock, 0, 1, 0, 1 every two seconds, and taken up again when it is full"
+          }
         }
       ],
       "props": [],

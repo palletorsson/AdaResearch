@@ -533,6 +533,48 @@
           "arithmetic": "On a bench the roof stands behind its door. both and up differ by the pale walkers coming down: five figures, of which three or four are on the three sides in view; each about 1.4 x 0.6 m seen from the side, 0.8 square metres: 3 square metres of a subject (tower 3.2 m wide and tall, stair 7.6 m across) of about 150 that fills most of the frame: 2 %; pale robes against pale stone change tone, not outline: 0.6 %. none removes the seven dark ones too and differs by far more."
         }
       }
+    },
+    "made_walk": {
+      "lookup_name": "made_walk",
+      "map_ready": true,
+      "name": "Only What You Have Made",
+      "class_name": "",
+      "scene": "res://commons/artifacts/made_walk/made_walk.tscn",
+      "description": "A visual argument in the form of a playground, for the Brouwer hall: the choice sequence as a walkway out over the edge of the slab. A deck at the edge and beyond it nothing. Stand still on 0 or on 1 and one plank is laid ahead, to the left for 0, to the right for 1, with its bead and its value; walk out onto it; wait, and nothing comes. The walkway is the row: 0, 1 and 1, 0 are different shapes under the feet. The board answers the finite question (does your row hold a 1? yes, plank 3: a witness is an address you can stand on) and leaves the other open (will a 1 ever come? your zeros do not say). Sixteen planks fill the instrument, not the row. Axis author: hand (it waits), clock (a rule lays 0, 1, 0, 1 every two seconds whoever is there and takes the planks up again when it is full). Stands at a slab edge, facing 0; a body that steps off is brought back by the tower.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "brouwer",
+        "intuitionism",
+        "choice-sequence",
+        "witness",
+        "construction",
+        "playground",
+        "visual-argument",
+        "walkable"
+      ],
+      "qfep_connection": "What is underfoot is exactly what was chosen; ahead there is no floor waiting to be revealed. And the two plates were there before the foot: the freedom had a shape.",
+      "dev_themes": [
+        "logic",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "author": [
+            "hand",
+            "clock"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "author: hand ~ clock",
+          "percent": 2.0,
+          "arithmetic": "At the moment a still is taken hand has no planks (nobody chose) and clock has laid some: after the bench's settle of a third of a second, none; after two seconds, one. So the two stills differ by the two plates (0.45 square metres, shown only by hand), the board's words, and at most one plank of 1.5 square metres: about 2.5 square metres of a scene of 12 that fills a third of the frame: 7 %; if the still falls before the first plank, 2 %. I predict the lower number and say why: the clock's row is a thing in time."
+        }
+      }
     }
   }
 }
