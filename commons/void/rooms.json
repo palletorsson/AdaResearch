@@ -52967,6 +52967,78 @@
             "lit": "gap",
             "editor_label": "The light recommends, the feet decide | a field of tiles that darken where feet go; three rows of posts with aligned gaps; plates move the lit strip; the stand counts where feet went"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -5.6,
+            2.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_Lambda_Spectrum",
+            "stands_at": [
+              -5.6,
+              2.9
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads round the hall, from the door and chalkboard to the west wing field (commons/data/arguments/QFEP_Lambda_Spectrum.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfeplambda",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfeplambda)"
+          }
+        },
+        {
+          "id": "word-lit",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17.5,
+            -6.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "LIT",
+            "tall": 1.5,
+            "fit_width": 3.2,
+            "editor_label": "LIT in standing red letters | the preference a visitor can move; at the north end of the east wing, facing BUILT across the walkway"
+          }
+        },
+        {
+          "id": "word-built",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17.5,
+            7.9
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "BUILT",
+            "tall": 1.3,
+            "fit_width": 3.4,
+            "editor_label": "BUILT in standing red letters | the preference already in the rows and the posts; at the south end of the east wing"
+          }
         }
       ],
       "props": [],

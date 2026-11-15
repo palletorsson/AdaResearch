@@ -37,7 +37,7 @@ const FOOT := 0.2
 const POLE := 2.7
 const PIXEL := 0.0011
 
-@export_enum("Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces", "Euclid_Parallel", "Escher_Impossible", "Brouwer_Intuitionism", "Florensky_Paraconsistent", "Crisis_Synthesis", "QFEP_Introduction", "QFEP_F_Term", "QFEP_E_Term") var hall := "Russell_Paradox"
+@export_enum("Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces", "Euclid_Parallel", "Escher_Impossible", "Brouwer_Intuitionism", "Florensky_Paraconsistent", "Crisis_Synthesis", "QFEP_Introduction", "QFEP_F_Term", "QFEP_E_Term", "QFEP_Lambda_Spectrum") var hall := "Russell_Paradox"
 ## Where this row stands on its floor. The file's places are in the floor's frame; a row that cannot stand at the
 ## floor's middle (another work is there) says where it stands and everything is shifted back.
 @export var stands_at := Vector2.ZERO
@@ -60,7 +60,7 @@ func _ready() -> void:
 
 
 func _take(config_data: Dictionary) -> void:
-	if config_data.has("hall") and str(config_data["hall"]) in ["Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces", "Euclid_Parallel", "Escher_Impossible", "Brouwer_Intuitionism", "Florensky_Paraconsistent", "Crisis_Synthesis", "QFEP_Introduction", "QFEP_F_Term", "QFEP_E_Term"]: hall = str(config_data["hall"])
+	if config_data.has("hall") and str(config_data["hall"]) in ["Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces", "Euclid_Parallel", "Escher_Impossible", "Brouwer_Intuitionism", "Florensky_Paraconsistent", "Crisis_Synthesis", "QFEP_Introduction", "QFEP_F_Term", "QFEP_E_Term", "QFEP_Lambda_Spectrum"]: hall = str(config_data["hall"])
 	if config_data.has("stands_at"):
 		var given: Variant = config_data["stands_at"]
 		if given is String: given = (given as String).split_floats(",")
