@@ -1,0 +1,658 @@
+{
+  "version": 1,
+  "hall": "NonEuclidean_Spaces",
+  "title": "What counts as straight? (worked out on cardboard)",
+  "note": "The authored thinking for one hall, in the first person, by the pass (Claude), for Palle's request of 2026-11-14 (see Russell_Paradox.json). 'at' is the floor's own frame in metres (x east, z south), 'yaw' in degrees. A sticker of kind 'quote' stands word for word in the hall text; every other kind is mine and may be wrong - the plates say where I am unsure.",
+  "hero": {
+    "row": "f2_triangle_curvature_workbench_11_2",
+    "artifact": "triangle_curvature_workbench",
+    "at": [
+      -3.4,
+      6.4
+    ],
+    "lights": [
+      [
+        -1.5,
+        8.3
+      ]
+    ],
+    "why": "The bench is where the hall's question is asked: one record of three corners and a slider with three stops - DISK, PLANE, SPHERE - that changes what a side is. The dome in the middle of the floor is its SPHERE stop made walkable, not a second hero.",
+    "staging": "The bench stood at [-3, 10], a metre beyond the slab's south edge, in the air where nobody could reach it (the tower validator: 'leaves the structural floor'). The pass moved it onto the slab at the visitor's left hand on arrival, with a ring of tape and one work light; plate 1 stands at the right hand, and the threads run north across the floor from the dome to the disk and the surfaces."
+  },
+  "plates": [
+    {
+      "id": "straight",
+      "title": "1  WHAT COUNTS AS STRAIGHT",
+      "by": "f2_triangle_curvature_workbench_11_2",
+      "at": [
+        1.8,
+        6.4
+      ],
+      "yaw": -25,
+      "front": [
+        "The triangle did not change. I changed what a side is.",
+        "On the plane a side is the straight segment between two corners.",
+        "On the sphere that segment would dive through the inside. So a side is the shortest way that STAYS ON the surface.",
+        "'Straight' was never one thing. It means: shortest, among the paths this space allows.",
+        "I had been treating the plane's answer as the meaning of the word."
+      ],
+      "back": [
+        "the bench is on your left as you land: one slider, three stops - DISK, PLANE, SPHERE. this cardboard is about what the slider changes."
+      ]
+    },
+    {
+      "id": "record",
+      "title": "2  THE SAME THREE PAIRS, READ TWICE",
+      "by": "walked-triangle",
+      "at": [
+        0.6,
+        2.2
+      ],
+      "yaw": -80,
+      "front": [
+        "Three pairs of numbers. On the plane they place points. On the sphere they name directions from the centre.",
+        "What travels: the record. What does not: distances, angles, the sum.",
+        "On the dome I measured 183 on top and 190 two metres out. On the mat: 180, every time.",
+        "The excess grows with the ground the triangle encloses.",
+        "So the sum was never a fact about triangles. It was a fact about where they live."
+      ],
+      "back": [
+        "on a sphere: (sum - 180, in radians) = area / R x R. the dome's R is 6 m.",
+        "my 190 triangle should then enclose about 6.3 square metres. plausible. somebody pace it out."
+      ]
+    },
+    {
+      "id": "chord",
+      "title": "3  THE SHORTER WAY THAT LEFT",
+      "by": "walked-triangle",
+      "at": [
+        -5.9,
+        4.7
+      ],
+      "yaw": 35,
+      "front": [
+        "A plank goes through the dome from cone to cone.",
+        "It is shorter than the red line on the surface. It is not a side of the triangle.",
+        "'Shorter' is only a complaint if I forget which space the corners belong to.",
+        "First say where you are. Then ask what is straight.",
+        "(Russell, one floor down, did the same thing to 'everything': say within what, then ask.)"
+      ],
+      "back": [
+        "a tunnel is a fine way to travel. it is just not geometry ON the sphere."
+      ]
+    },
+    {
+      "id": "rim",
+      "title": "4  A RIM YOU CANNOT REACH",
+      "by": "f2_poincare_disk_5_11",
+      "at": [
+        3.2,
+        3.7
+      ],
+      "yaw": 5,
+      "front": [
+        "The disk lies flat on its stand and stands for a space whose rim is infinitely far away.",
+        "A step near the rim counts for more than a step in the middle.",
+        "So the picture's size is not the space's size, and its curved lines are that space's straight ones.",
+        "The picture ends. The thing it shows does not.",
+        "I keep mistaking the edge of a drawing for the edge of the world. This object is built to catch me at it."
+      ],
+      "back": [
+        "angles in the disk are true. lengths are not. a map can keep one honesty and give up another.",
+        "which honesty did my dome keep? both - on a sphere you can. (plate 6)"
+      ]
+    },
+    {
+      "id": "bend",
+      "title": "5  A BEND IS NOT A METRIC",
+      "by": "f2_hyperbolic_surface_2_12",
+      "at": [
+        4.9,
+        -2.7
+      ],
+      "yaw": 0,
+      "front": [
+        "Saddle, dome, slider. I see a bend and think I am seeing the geometry.",
+        "A bend in my room is a shape IN flat space. A metric is a rule for distance.",
+        "Roll a flat sheet into a tube: it is bent, and its triangles still add to 180.",
+        "So the silhouette proves nothing. The triangle's sum does.",
+        "The slider changes its own sketch. It does not govern the room."
+      ],
+      "back": [
+        "test for any curved thing here: draw a triangle ON it and add the corners. do not judge it from the side."
+      ]
+    },
+    {
+      "id": "floor",
+      "title": "6  THE FLOOR STAYED FLAT. THEN I BUILT A DOME",
+      "by": "walked-triangle",
+      "at": [
+        -0.7,
+        -4.6
+      ],
+      "yaw": -70,
+      "front": [
+        "The hall says the benches do not bend the museum: we walk between them on the same ordinary floor.",
+        "Then I put a dome on that floor and let you be a corner. Is that cheating?",
+        "No - but it is luck. A dome is bent in the room AND round in its distances. On a sphere the two agree.",
+        "For the disk they cannot: nothing I could build in this room has the disk's distances everywhere.",
+        "So one of the three geometries can be walked here, and one can only be pictured."
+      ],
+      "back": [
+        "I think that last claim is Hilbert's theorem (no complete surface of constant negative curvature in ordinary space). I have not checked the statement. a saddle has it in a patch only."
+      ]
+    },
+    {
+      "id": "which",
+      "title": "7  WHICH ONE IS THE WORLD?",
+      "by": "f2_riemann_sphere_7_13",
+      "at": [
+        -0.9,
+        -7.5
+      ],
+      "yaw": 10,
+      "front": [
+        "Three geometries, each consistent. Mathematics allows all of them.",
+        "Which one the world has is not decided by the triangle on the bench.",
+        "That needs a measurement of the world: a triangle big enough, and corners I trust.",
+        "This is the first of the three edges: a CHOICE. Nothing broke.",
+        "Next floor a rule does break. Keep the difference."
+      ],
+      "back": [
+        "Gauss is said to have measured a triangle between three mountain tops. I have not checked the story.",
+        "choice / contradiction / reach (Russell plate 9)."
+      ]
+    }
+  ],
+  "stickers": [
+    {
+      "id": "s-what-a-side-is",
+      "plate": "straight",
+      "kind": "claim",
+      "text": "The triangle did not change. I changed what a side is."
+    },
+    {
+      "id": "s-record-travels",
+      "plate": "record",
+      "kind": "claim",
+      "text": "What travels: the record. What does not: distances, angles, the sum."
+    },
+    {
+      "id": "q-not-sameness",
+      "plate": "record",
+      "kind": "quote",
+      "a": "This continuity is useful,",
+      "quote": "This continuity is useful, but it is not sameness in every respect.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md",
+      "b": "but it is not sameness in every respect."
+    },
+    {
+      "id": "q-not-broken",
+      "plate": "record",
+      "kind": "quote",
+      "a": "The changed sum need not be a broken triangle.",
+      "quote": "The changed sum need not be a broken triangle.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md"
+    },
+    {
+      "id": "q-chord-left",
+      "plate": "chord",
+      "kind": "quote",
+      "a": "A straight chord would take a shorter route",
+      "quote": "A straight chord would take a shorter route through the sphere's interior, but that route has left the space in which this triangle lives.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md",
+      "b": "but that route has left the space"
+    },
+    {
+      "id": "s-which-space",
+      "plate": "chord",
+      "kind": "claim",
+      "text": "if I forget which space the corners belong to."
+    },
+    {
+      "id": "q-rim-far",
+      "plate": "rim",
+      "kind": "quote",
+      "a": "The visible rim is infinitely far away",
+      "quote": "The visible rim is infinitely far away in that metric.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md"
+    },
+    {
+      "id": "q-limit-of-access",
+      "plate": "rim",
+      "kind": "quote",
+      "a": "A limit of access",
+      "quote": "A limit of access can look like a limit of the object until the two are separated.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md",
+      "b": "can look like a limit of the object"
+    },
+    {
+      "id": "s-picture-ends",
+      "plate": "rim",
+      "kind": "claim",
+      "text": "The picture ends. The thing it shows does not."
+    },
+    {
+      "id": "s-bend-not-metric",
+      "plate": "bend",
+      "kind": "claim",
+      "text": "A bend in my room is a shape IN flat space. A metric is a rule for distance."
+    },
+    {
+      "id": "q-not-the-museum",
+      "plate": "floor",
+      "kind": "quote",
+      "a": "Neither operation bends the museum around you.",
+      "quote": "Neither operation bends the museum around you.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md"
+    },
+    {
+      "id": "s-not-decided",
+      "plate": "which",
+      "kind": "claim",
+      "text": "is not decided by the triangle on the bench."
+    },
+    {
+      "id": "q-precise-unfamiliar",
+      "plate": "which",
+      "kind": "quote",
+      "a": "An operation can remain precise",
+      "quote": "An operation can remain precise when its result becomes unfamiliar.",
+      "file": "commons/maps/NonEuclidean_Spaces/final.md",
+      "b": "when its result becomes unfamiliar."
+    },
+    {
+      "id": "x-0",
+      "plate": "straight",
+      "kind": "not",
+      "text": "NOT one thing"
+    },
+    {
+      "id": "x-1",
+      "plate": "record",
+      "kind": "claim",
+      "text": "183 on top. 190 two metres out."
+    },
+    {
+      "id": "x-2",
+      "plate": "chord",
+      "kind": "claim",
+      "text": "say where you are, then ask"
+    },
+    {
+      "id": "x-3",
+      "plate": "rim",
+      "kind": "question",
+      "text": "which honesty did my dome keep?"
+    },
+    {
+      "id": "x-4",
+      "plate": "bend",
+      "kind": "not",
+      "text": "NOT the silhouette"
+    },
+    {
+      "id": "x-5",
+      "plate": "floor",
+      "kind": "question",
+      "text": "is the dome cheating?"
+    },
+    {
+      "id": "x-6",
+      "plate": "floor",
+      "kind": "question",
+      "text": "Hilbert's theorem? check"
+    },
+    {
+      "id": "x-7",
+      "plate": "which",
+      "kind": "claim",
+      "text": "CHOICE"
+    },
+    {
+      "id": "x-8",
+      "plate": "which",
+      "kind": "question",
+      "text": "did Gauss really measure it?"
+    }
+  ],
+  "threads": [
+    {
+      "a": "straight",
+      "b": "record",
+      "word": "so read it twice",
+      "why": "If straight depends on the space, the same record can be read in two spaces and give two sums."
+    },
+    {
+      "a": "record",
+      "b": "chord",
+      "word": "what a side may not do",
+      "why": "The record travels; the chord shows what does not: a side must stay in the space."
+    },
+    {
+      "a": "straight",
+      "b": "chord",
+      "word": "shortest - among which?",
+      "why": "The plank is shorter and is not straight here, because it is not among the allowed paths."
+    },
+    {
+      "a": "record",
+      "b": "rim",
+      "word": "a third reading",
+      "why": "The disk is a third interpretation of a retained record: angles kept, lengths not."
+    },
+    {
+      "a": "rim",
+      "b": "bend",
+      "word": "picture is not the space",
+      "why": "The disk looks flat and is not; the saddle looks curved and that proves nothing. Both say: do not judge from outside."
+    },
+    {
+      "a": "bend",
+      "b": "floor",
+      "word": "bent and round agree",
+      "why": "On a sphere the bend in the room and the rule for distance happen to agree, which is why a dome can be walked."
+    },
+    {
+      "a": "rim",
+      "b": "floor",
+      "word": "cannot be built here",
+      "why": "The disk's distances cannot be had on any whole surface in this room; it stays a picture."
+    },
+    {
+      "a": "record",
+      "b": "which",
+      "word": "three consistent sums",
+      "why": "Less than, equal to, more than 180: three readings, each consistent."
+    },
+    {
+      "a": "floor",
+      "b": "which",
+      "word": "walked is not chosen",
+      "why": "Being able to walk one geometry here does not make it the world's."
+    },
+    {
+      "a": "chord",
+      "b": "which",
+      "word": "say where you are",
+      "why": "Which space the corners belong to is the question the world has to answer, not the bench."
+    }
+  ],
+  "visual_arguments": [
+    {
+      "id": "walked_triangle",
+      "form": "playground",
+      "status": "standing: row walked-triangle",
+      "title": "THE WALKED TRIANGLE",
+      "at": [
+        -3.4,
+        0.5
+      ],
+      "size": [
+        6.4,
+        6.4
+      ],
+      "claim": "The same three corners have a different angle sum on a surface whose straightest paths are not the plane's.",
+      "from_the_hall": "The bench's PLANE and SPHERE, and the tutorial's record of three coordinate pairs read twice.",
+      "built_from": [
+        "a walkable cap of a sphere (a mesh of its own)",
+        "traffic_pyramid_5 (corners A and B)",
+        "timber_plank_4m (the chord through the dome)",
+        "trace_point_ball (the three points on the mat)"
+      ],
+      "what_stands": "A dome 6.4 m across with two cones and a plank through it; north of it a mat with the same three pairs read as a plane.",
+      "what_you_do": "Step onto the dome: you are the third corner. Walk away from the cones and read the sum on the board; the mat keeps 180.",
+      "what_it_shows": "The sum is a fact about the space the corners belong to. The record travels between the two readings; the angles do not."
+    }
+  ],
+  "open": [
+    "Plate 6's claim about the disk (no whole surface in the room has its distances) is from memory of Hilbert's theorem and is marked so.",
+    "Plate 7's story of Gauss measuring a mountain triangle is unchecked and marked so.",
+    "The bench and the hall's film were moved onto the slab by the pass (from [-3, 10] and [4, 11] to [-3.4, 6.4] and [3.2, 8.3]); noneuclidean_wing at [-5, 8] still overlaps a column and was left."
+  ],
+  "hanging_board": {
+    "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_noneuclid). Near the cork: what the hall text says. In front: what I made of it.",
+    "board": {
+      "id": "arg_noneuclid",
+      "title": "Straight: what the hall says, and what I made of it",
+      "w": 3.8,
+      "h": 2.4,
+      "paper": "#c9a978",
+      "depth": 0.9,
+      "hang": true,
+      "note": "An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/NonEuclidean_Spaces.json)."
+    },
+    "stickers": [
+      {
+        "reading": "chord_left",
+        "id": "an-chord-left",
+        "design": "paradox_chord_left",
+        "at": [
+          -1.5,
+          0.49,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.3
+      },
+      {
+        "reading": "limit_of_access",
+        "id": "an-limit-of-access",
+        "design": "paradox_limit_of_access",
+        "at": [
+          -1.0,
+          0.75,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.3
+      },
+      {
+        "reading": "not_sameness",
+        "id": "an-not-sameness",
+        "design": "paradox_not_sameness",
+        "at": [
+          -0.5,
+          0.49,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.3
+      },
+      {
+        "reading": "not_the_museum",
+        "id": "an-not-the-museum",
+        "design": "punctum_not_the_museum",
+        "at": [
+          0.0,
+          0.75,
+          0.12
+        ],
+        "turn": 2,
+        "size": 0.3
+      },
+      {
+        "reading": "precise_unfamiliar",
+        "id": "an-precise-unfamiliar",
+        "design": "paradox_precise_unfamiliar",
+        "at": [
+          0.5,
+          0.49,
+          0.12
+        ],
+        "turn": 4,
+        "size": 0.3
+      },
+      {
+        "reading": "not_broken",
+        "id": "an-not-broken",
+        "design": "punctum_not_broken",
+        "at": [
+          1.0,
+          0.75,
+          0.12
+        ],
+        "turn": -3,
+        "size": 0.3
+      },
+      {
+        "reading": "rim_far",
+        "id": "an-rim-far",
+        "design": "punctum_rim_far",
+        "at": [
+          1.5,
+          0.49,
+          0.12
+        ],
+        "turn": -1,
+        "size": 0.3
+      },
+      {
+        "reading": "what_a_side_is",
+        "id": "an-what-a-side-is",
+        "design": "paradox_what_a_side_is",
+        "at": [
+          -1.5,
+          -0.67,
+          0.55
+        ],
+        "turn": -4,
+        "size": 0.3
+      },
+      {
+        "reading": "which_space",
+        "id": "an-which-space",
+        "design": "punctum_which_space",
+        "at": [
+          -0.9,
+          -0.37,
+          0.55
+        ],
+        "turn": -2,
+        "size": 0.3
+      },
+      {
+        "reading": "record_travels",
+        "id": "an-record-travels",
+        "design": "paradox_record_travels",
+        "at": [
+          -0.3,
+          -0.67,
+          0.55
+        ],
+        "turn": 0,
+        "size": 0.3
+      },
+      {
+        "reading": "bend_not_metric",
+        "id": "an-bend-not-metric",
+        "design": "paradox_bend_not_metric",
+        "at": [
+          0.3,
+          -0.37,
+          0.55
+        ],
+        "turn": 2,
+        "size": 0.3
+      },
+      {
+        "reading": "picture_ends",
+        "id": "an-picture-ends",
+        "design": "paradox_picture_ends",
+        "at": [
+          0.9,
+          -0.67,
+          0.55
+        ],
+        "turn": 4,
+        "size": 0.3
+      },
+      {
+        "reading": "not_decided",
+        "id": "an-not-decided",
+        "design": "punctum_not_decided",
+        "at": [
+          1.5,
+          -0.37,
+          0.55
+        ],
+        "turn": -3,
+        "size": 0.3
+      }
+    ],
+    "threads": [
+      {
+        "id": "ath-an-chord-left-an-what-a-side-is",
+        "a": "an-chord-left",
+        "b": "an-what-a-side-is",
+        "word": "a side must stay",
+        "why": "The chord is shorter and has left the space: so what changed was what a side may be.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-chord-left-an-which-space",
+        "a": "an-chord-left",
+        "b": "an-which-space",
+        "word": "say where you are",
+        "why": "Shorter is only a complaint if I forget which space the corners belong to.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-not-sameness-an-record-travels",
+        "a": "an-not-sameness",
+        "b": "an-record-travels",
+        "word": "what travels",
+        "why": "The continuity is the record of three pairs; distances, angles and the sum do not travel with it.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-limit-of-access-an-picture-ends",
+        "a": "an-limit-of-access",
+        "b": "an-picture-ends",
+        "word": "the picture ends",
+        "why": "A limit of the picture or the interface is not a limit of the thing shown.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-rim-far-an-picture-ends",
+        "a": "an-rim-far",
+        "b": "an-picture-ends",
+        "word": "a rim never reached",
+        "why": "The disk ends on the table; the space it shows has no edge to reach.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-not-the-museum-an-bend-not-metric",
+        "a": "an-not-the-museum",
+        "b": "an-bend-not-metric",
+        "word": "bent is not round",
+        "why": "The benches bend nothing; and a bend, where there is one, is not yet a rule for distance.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-not-broken-an-record-travels",
+        "a": "an-not-broken",
+        "b": "an-record-travels",
+        "word": "not broken: elsewhere",
+        "why": "A changed sum is the same record read in another space.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-precise-unfamiliar-an-not-decided",
+        "a": "an-precise-unfamiliar",
+        "b": "an-not-decided",
+        "word": "precise, not decided",
+        "why": "Each reading is precise; which one the world has is a different kind of question.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-an-record-travels-an-not-decided",
+        "a": "an-record-travels",
+        "b": "an-not-decided",
+        "word": "three sums, one world",
+        "why": "The record allows three sums; the bench cannot say which the world has.",
+        "colour": "#8e0c16"
+      }
+    ]
+  }
+}

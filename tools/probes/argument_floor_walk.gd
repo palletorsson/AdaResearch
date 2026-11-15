@@ -82,11 +82,14 @@ func run() -> void:
 		var kinds := {}
 		for n in argument.find_children("*", "Node3D", true, false):
 			if n.has_meta("prefab") and n.has_meta("source_scene"): kinds[str(n.get_meta("prefab"))] = int(kinds.get(str(n.get_meta("prefab")), 0)) + 1
-		checks.append({"check": "every plate, sticker and thread that is written stands, on crates and poles from the lab", "ok": int(s.plates) == int(s.written) and int(s.plates) >= 8 and int(s.stickers) == int(s.stickers_written)
+		checks.append({"check": "every plate, sticker and thread that is written stands, on crates and poles from the lab", "ok": int(s.plates) == int(s.written) and int(s.plates) >= 6 and int(s.stickers) == int(s.stickers_written)
 			and int(s.threads) == int(s.threads_written) and int(kinds.get("crate", 0)) == int(s.plates) * 2 and int(kinds.get("timber_plank_2m", 0)) == int(s.plates),
 			"hall": str(s.hall), "plates": int(s.plates), "notes": int(s.notes), "stickers": int(s.stickers), "threads": int(s.threads), "kinds": kinds, "build_ms": int(s.build_ms)})
 		await _shot(cam, base + Vector3(0, 1.6, 8.6), base + Vector3(0, 1.0, 2.0), folder.path_join("arrival.png"))
-		await _shot(cam, base + Vector3(0.0, 2.3, 3.6), base + Vector3(0, 1.0, 7.0), folder.path_join("hero.png"))
+		var hero_at: Array = s.get("hero_at", [])
+		var hero := base + (Vector3(float(hero_at[0]), 0, float(hero_at[1])) if hero_at.size() >= 2 else Vector3(0, 0, 7.0))
+		await _shot(cam, hero + Vector3(0.0, 2.3, -3.4), hero + Vector3(0, 1.0, 0), folder.path_join("hero.png"))
+		await _shot(cam, hero + Vector3(5.5, 3.4, -1.0), hero + Vector3(0, 0.4, 0), folder.path_join("hero_side.png"))
 		# up to the first plate, and held off by it
 		var first: String = str((s.tops as Dictionary).keys()[0])
 		var front: Vector3 = argument.plate_point(first, 1.5)

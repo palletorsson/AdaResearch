@@ -50484,8 +50484,8 @@
           "id": "f2_film_curvature_triangle_4_1",
           "artifact": "film_curvature_triangle",
           "position": [
-            4,
-            11
+            3.2,
+            8.3
           ],
           "station": "SE",
           "height": 0,
@@ -50500,8 +50500,8 @@
           "id": "f2_triangle_curvature_workbench_11_2",
           "artifact": "triangle_curvature_workbench",
           "position": [
-            -3,
-            10
+            -3.4,
+            6.4
           ],
           "station": "SW",
           "height": 0,
@@ -50608,6 +50608,78 @@
           "config": {
             "reading": "both",
             "editor_label": "The walked triangle | a walkable dome 6.4 m across with two cones; the body is the third corner and the angle sum grows; the same three pairs read as a plane on a mat to its north"
+          }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            0.6,
+            5.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "NonEuclidean_Spaces",
+            "stands_at": [
+              0.6,
+              5.4
+            ],
+            "editor_label": "The hall's argument on cardboard | seven plates, stickers and red threads from the arrival to the dome, the disk and the surfaces (commons/data/arguments/NonEuclidean_Spaces.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NE",
+          "position": [
+            2.3,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_noneuclid",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_noneuclid)"
+          }
+        },
+        {
+          "id": "word-straight",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "STRAIGHT",
+            "tall": 1.3,
+            "fit_width": 8.5,
+            "editor_label": "STRAIGHT in standing red letters | the word the hall changes the meaning of; on the east wing, facing 180 across the floor"
+          }
+        },
+        {
+          "id": "word-180",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "180",
+            "tall": 1.6,
+            "fit_width": 6.0,
+            "editor_label": "180 in standing red letters | the sum that was taken for a fact about triangles and is a fact about where they live; on the west wing"
           }
         }
       ],

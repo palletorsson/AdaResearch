@@ -37,7 +37,7 @@ const FOOT := 0.2
 const POLE := 2.7
 const PIXEL := 0.0011
 
-@export_enum("Russell_Paradox", "Godel_Incompleteness") var hall := "Russell_Paradox"
+@export_enum("Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces") var hall := "Russell_Paradox"
 ## Where this row stands on its floor. The file's places are in the floor's frame; a row that cannot stand at the
 ## floor's middle (another work is there) says where it stands and everything is shifted back.
 @export var stands_at := Vector2.ZERO
@@ -60,7 +60,7 @@ func _ready() -> void:
 
 
 func _take(config_data: Dictionary) -> void:
-	if config_data.has("hall") and str(config_data["hall"]) in ["Russell_Paradox", "Godel_Incompleteness"]: hall = str(config_data["hall"])
+	if config_data.has("hall") and str(config_data["hall"]) in ["Russell_Paradox", "Godel_Incompleteness", "NonEuclidean_Spaces"]: hall = str(config_data["hall"])
 	if config_data.has("stands_at"):
 		var given: Variant = config_data["stands_at"]
 		if given is String: given = (given as String).split_floats(",")
@@ -272,11 +272,13 @@ func _thread(thread: Dictionary) -> void:
 	_counts["threads"] = int(_counts["threads"]) + 1
 
 
-## The hero: a ring of tape on the floor round it and two work lights crossing on it.
+## The hero: a ring of tape on the floor round it and two work lights crossing on it. A file may say `"ring": false`
+## for a hero whose place has no floor that was judged (the ring would hang in the air): nothing is laid then.
 func _hero(hero: Dictionary) -> void:
 	var at: Array = hero.get("at", [])
 	if at.size() < 2: return
 	var centre := Vector3(float(at[0]), 0, float(at[1]))
+	if hero.get("ring", true) == false: return
 	var ring := MeshInstance3D.new()
 	var tape := TorusMesh.new()
 	tape.inner_radius = 1.72
@@ -302,7 +304,7 @@ func state() -> Dictionary:
 	for id in _tops: tops[id] = [snappedf((_tops[id] as Vector3).x, 0.01), snappedf((_tops[id] as Vector3).z, 0.01)]
 	return {"hall": hall, "title": str(_doc.get("title", "")), "plates": int(_counts["plates"]), "notes": int(_counts["notes"]), "stickers": int(_counts["stickers"]), "threads": int(_counts["threads"]), "tapes": int(_counts.get("tapes", 0)),
 		"tops": tops, "written": (_doc.get("plates", []) as Array).size(), "stickers_written": (_doc.get("stickers", []) as Array).size(), "threads_written": (_doc.get("threads", []) as Array).size(),
-		"prefab_parts": int(_city.parts), "build_ms": _build_ms}
+		"prefab_parts": int(_city.parts), "build_ms": _build_ms, "hero_at": (_doc.get("hero", {}) as Dictionary).get("at", []), "hero_ring": (_doc.get("hero", {}) as Dictionary).get("ring", true) != false}
 
 
 func plate_point(id: String, off: float = 1.6) -> Vector3:
