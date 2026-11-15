@@ -1,0 +1,884 @@
+{
+  "version": 1,
+  "hall": "QFEP_Edge_Of_Chaos",
+  "title": "The rule, and the run (worked out on cardboard)",
+  "note": "The authored thinking for one hall, in the first person, by the pass (Claude), for Palle's request of 2026-11-14 (see Russell_Paradox.json). 'at' is the floor's own frame in metres (x east, z south), 'yaw' in degrees. A sticker of kind 'quote' stands word for word in the hall text; every other kind is mine and may be wrong - the plates say where I am unsure.",
+  "hero": {
+    "row": "f3_edge_of_chaos_unlocked_13_6",
+    "artifact": "edge_of_chaos_unlocked",
+    "at": [
+      0,
+      3.4
+    ],
+    "lights": [],
+    "ring": false,
+    "why": "The console is what the hall text is about: two framed screens under SAME START / SAME TIME, one field computed with a step and with half that step, a difference reading, RESTART and NEW SEED.",
+    "staging": "The arriving visitor met an empty slab, with the console behind them on the east wing in a column; the pass restaged the floor (a7ed1f2c6). The console is straight ahead of the arrival, the unconnected rail nearer the arrival at the right, the funnel experiment, the Turing pattern and the core beside them; north of the console the two spirals on the floor."
+  },
+  "plates": [
+    {
+      "id": "which",
+      "title": "1  THE MODEL, OR THE WAY IT IS RUN?",
+      "by": "f3_edge_of_chaos_unlocked_13_6",
+      "at": [
+        2.4,
+        7.3
+      ],
+      "yaw": -70,
+      "front": [
+        "Two pictures of one field. The same start, the same model time. The right one took twice as many smaller steps.",
+        "The hall's question: which changes belong to the model, and which to the way its calculation is run?",
+        "I had never asked that of a picture. A picture looks like the thing.",
+        "If the two agree, I have a reason to trust what I see. If not, I have somewhere to look.",
+        "Either way I learn something about the run, which I had taken for nothing."
+      ],
+      "back": [
+        "everything I produce is a run. the question applies."
+      ]
+    },
+    {
+      "id": "wired",
+      "title": "2  A HANDLE WIRED TO NOTHING",
+      "by": "f3_lambda_slider_10_2",
+      "at": [
+        5.6,
+        5.0
+      ],
+      "yaw": -90,
+      "front": [
+        "The rail nearer the door is a separate handle wired to nothing in this hall. The text says so in its first lines.",
+        "I moved it anyway. The pictures on the console went on as before.",
+        "On the last floor nothing heard the rail either. Here a control is connected at last: on the console, LAMBDA.",
+        "And LAMBDA moves three things at once: feed, removal and diffusion, along a route somebody chose.",
+        "So even the connected handle does not isolate anything."
+      ],
+      "back": [
+        "the route through feed and kill is authored here; it is not a parameter of the Gray-Scott model. that is the hall's footnote, not my finding."
+      ]
+    },
+    {
+      "id": "glance",
+      "title": "3  TWO SCALES, ONE GLANCE",
+      "by": "f3_edge_of_chaos_unlocked_13_6",
+      "at": [
+        -2.4,
+        7.3
+      ],
+      "yaw": 70,
+      "front": [
+        "Choose one small feature: a boundary between two regions. Follow it through several updates.",
+        "A picture that seethes can contain a boundary that stays. A picture that looks still is being recomputed all the time.",
+        "From one glance at the most conspicuous movement I would have said: ordered, or chaotic.",
+        "The hall asks for both scales, and for the words before the name.",
+        "Which feature am I comparing, and over how much observed time? I had not been asking."
+      ],
+      "back": [
+        "'fix it in words before you touch anything' is the hall's line. I could not improve it."
+      ]
+    },
+    {
+      "id": "steps",
+      "title": "4  THE SPIRAL IS NOT IN THE RULE",
+      "by": "visual:step_spiral",
+      "at": [
+        4.2,
+        -1.6
+      ],
+      "yaw": -135,
+      "front": [
+        "North of the console: one rule on the floor. Go round the pole at one rate. A circle.",
+        "Computed a step at a time, 24 steps end 3.54 m from the pole. 48 steps: 2.41. 96: 1.96. The rule says 1.60.",
+        "I walked the amber stones and stood three and a half metres out, on a path the rule never contained.",
+        "The spiral is not in the rule. The steps made it.",
+        "It looks exactly like something the model does."
+      ],
+      "back": [
+        "each step multiplies the distance by the square root of 1 + dt squared. benched before it was built (tools/probes/step_spiral_bench.py)."
+      ]
+    },
+    {
+      "id": "faster",
+      "title": "5  FASTER IS NOT FINER",
+      "by": "f3_edge_of_chaos_unlocked_13_6",
+      "at": [
+        -5.6,
+        4.0
+      ],
+      "yaw": 90,
+      "front": [
+        "DT changes how large each step is. SIM SPEED changes how quickly the model clock runs while I stand here.",
+        "Two ways of changing time. I had one word for both.",
+        "The hall: making the picture run faster does not make its calculation more precise.",
+        "On the floor the ball runs three times as fast along the same stones. Every figure on the stand is what it was.",
+        "I am quicker than I used to be. That is the ball. The stones are another matter."
+      ],
+      "back": [
+        "quicker is measured. finer would have to be shown by agreement at a smaller step, and that is a different test."
+      ]
+    },
+    {
+      "id": "number",
+      "title": "6  A LOW NUMBER, IN ONE RESPECT",
+      "by": "f3_edge_of_chaos_unlocked_13_6",
+      "at": [
+        5.7,
+        0.6
+      ],
+      "yaw": -90,
+      "front": [
+        "The small difference reading compares the two fields cell by cell. A low value: close, in that respect.",
+        "It does not say whether the pattern is alive, beautiful or worth keeping. Look back at your boundary, the hall says: does the number register what you were watching?",
+        "On the floor the two ends are 1.18 m apart. With the finer pair, 0.44. That is agreement growing.",
+        "With the wall, 0.20. Better still - and both ends are on the wall, 0.4 m from where the rule ends.",
+        "The number improved. Nothing became truer."
+      ],
+      "back": [
+        "I would have reported the 0.20."
+      ]
+    },
+    {
+      "id": "clip",
+      "title": "7  SOMETHING THE CODE HAD MADE",
+      "by": "visual:step_spiral",
+      "at": [
+        -3.9,
+        -7.4
+      ],
+      "yaw": 0,
+      "front": [
+        "The hall admits it of its own screen: an earlier version made its pattern partly by overshooting and clipping its values.",
+        "That too was something code had made, answering a different question from the one the display claimed to ask.",
+        "The WALL plate does it on the floor. The coarse path flies out, meets the wall, and runs round it: 18 of its 25 places on the wall.",
+        "A neat ring. It looks like the circle of the rule, a little larger. It belongs to the wall.",
+        "Repairing the calculation gives another way to look. It does not make the picture explain itself."
+      ],
+      "back": [
+        "the hall says this about its own earlier version. I would like to be corrected that plainly."
+      ]
+    },
+    {
+      "id": "keep",
+      "title": "8  KEEP MORE THAN THE FINAL NUMBER",
+      "by": "visual:step_spiral",
+      "at": [
+        4.6,
+        -5.6
+      ],
+      "yaw": -90,
+      "front": [
+        "To keep this comparison, keep more than its final number. The beginning, the setting and the duration belong with the two step sizes.",
+        "A screenshot can hold a feature. It cannot rebuild the conditions that made it.",
+        "The stand on the floor reads: one rule, one start, one turn of model time; then the two ends; then the difference. In that order.",
+        "If the parameters were altered along the way, their final values no longer tell the history.",
+        "A result without its run is a remembered resemblance."
+      ],
+      "back": [
+        "'a remembered resemblance' is the hall's phrase. the sentence round it is mine."
+      ]
+    },
+    {
+      "id": "label",
+      "title": "9  AN EVOCATIVE LABEL CANNOT DO THAT WORK",
+      "by": "f3_edge_of_chaos_unlocked_13_6",
+      "at": [
+        -5.6,
+        0.8
+      ],
+      "yaw": 90,
+      "front": [
+        "The floor is called Edge of Chaos. Two floors up a board chalked life at 0.4.",
+        "Here the text says what a measured transition would need: a stable numerical experiment and a defined observable, such as persistence or spatial correlation, across controlled settings.",
+        "An evocative label cannot perform that work.",
+        "Agreement across smaller steps gives a reason to trust a feature more. Disagreement gives somewhere to look.",
+        "The question stays open long enough to become an experiment. I think that is the best thing a room can do with a slogan."
+      ],
+      "back": [
+        "my spiral is not an experiment on the hall's field. it is an experiment on the comparison. nothing on this floor measures an edge."
+      ]
+    }
+  ],
+  "stickers": [
+    {
+      "id": "q-model-or-run",
+      "plate": "which",
+      "kind": "quote",
+      "a": "Which changes belong to the model,",
+      "quote": "Which changes belong to the model, and which belong to the way its calculation is run?",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "b": "and which belong to the way its calculation is run?"
+    },
+    {
+      "id": "s-never-asked",
+      "plate": "which",
+      "kind": "claim",
+      "text": "I had never asked that of a picture."
+    },
+    {
+      "id": "s-looks-like-the-thing",
+      "plate": "which",
+      "kind": "claim",
+      "text": "A picture looks like the thing."
+    },
+    {
+      "id": "q-does-not-isolate",
+      "plate": "wired",
+      "kind": "quote",
+      "a": "it does not isolate the effect of one chemical parameter or discover a universal balance point.",
+      "quote": "it does not isolate the effect of one chemical parameter or discover a universal balance point.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "s-connected-not-isolated",
+      "plate": "wired",
+      "kind": "claim",
+      "text": "So even the connected handle does not isolate anything."
+    },
+    {
+      "id": "q-before-a-name",
+      "plate": "glance",
+      "kind": "quote",
+      "a": "Describe what persists, spreads or disappears before giving the whole picture a name.",
+      "quote": "Describe what persists, spreads or disappears before giving the whole picture a name.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "q-two-scales",
+      "plate": "glance",
+      "kind": "quote",
+      "a": "A rapidly changing picture can contain local features that last,",
+      "quote": "A rapidly changing picture can contain local features that last, while a nearly uniform picture can still undergo numerical updates.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "b": "while a nearly uniform picture can still undergo numerical updates."
+    },
+    {
+      "id": "q-fix-in-words",
+      "plate": "glance",
+      "kind": "quote",
+      "a": "Fix it in words before you touch anything:",
+      "quote": "Fix it in words before you touch anything: which feature are you comparing, and over how much observed time?",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "b": "which feature are you comparing, and over how much observed time?"
+    },
+    {
+      "id": "s-steps-made-it",
+      "plate": "steps",
+      "kind": "claim",
+      "text": "The spiral is not in the rule. The steps made it."
+    },
+    {
+      "id": "s-looks-like-the-model",
+      "plate": "steps",
+      "kind": "claim",
+      "text": "It looks exactly like something the model does."
+    },
+    {
+      "id": "q-faster-not-precise",
+      "plate": "faster",
+      "kind": "quote",
+      "a": "Making the picture run faster does not make its calculation more precise.",
+      "quote": "Making the picture run faster does not make its calculation more precise.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "s-one-word-for-both",
+      "plate": "faster",
+      "kind": "claim",
+      "text": "Two ways of changing time. I had one word for both."
+    },
+    {
+      "id": "q-close-in-one-respect",
+      "plate": "number",
+      "kind": "quote",
+      "a": "A low value means these calculations are close in that particular respect.",
+      "quote": "A low value means these calculations are close in that particular respect.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "q-number-register",
+      "plate": "number",
+      "kind": "quote",
+      "a": "Does the number register what you were watching?",
+      "quote": "Does the number register what you were watching?",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "s-nothing-truer",
+      "plate": "number",
+      "kind": "claim",
+      "text": "The number improved. Nothing became truer."
+    },
+    {
+      "id": "q-code-had-made",
+      "plate": "clip",
+      "kind": "quote",
+      "a": "that too was something code had made, answering a different question from the one the display claimed to ask.",
+      "quote": "that too was something code had made, answering a different question from the one the display claimed to ask.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "q-repair-not-explain",
+      "plate": "clip",
+      "kind": "quote",
+      "a": "Repairing the calculation gives us another way to investigate the image;",
+      "quote": "Repairing the calculation gives us another way to investigate the image; it does not make the image explain itself.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "b": "it does not make the image explain itself."
+    },
+    {
+      "id": "s-ring-the-wall-made",
+      "plate": "clip",
+      "kind": "claim",
+      "text": "The coarse path flies out, meets the wall, and runs round it: 18 of its 25 places on the wall."
+    },
+    {
+      "id": "q-screenshot-conditions",
+      "plate": "keep",
+      "kind": "quote",
+      "a": "A screenshot can hold a feature you want to revisit;",
+      "quote": "A screenshot can hold a feature you want to revisit; it cannot by itself reconstruct the conditions that produced it.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "b": "it cannot by itself reconstruct the conditions that produced it."
+    },
+    {
+      "id": "s-without-its-run",
+      "plate": "keep",
+      "kind": "claim",
+      "text": "A result without its run is a remembered resemblance."
+    },
+    {
+      "id": "q-evocative-label",
+      "plate": "label",
+      "kind": "quote",
+      "a": "An evocative label cannot perform that work.",
+      "quote": "An evocative label cannot perform that work.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "q-agreement-disagreement",
+      "plate": "label",
+      "kind": "quote",
+      "a": "Agreement across smaller steps gives us a reason to trust a feature more.",
+      "quote": "Agreement across smaller steps gives us a reason to trust a feature more. Disagreement gives us somewhere to look.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "b": "Disagreement gives us somewhere to look."
+    },
+    {
+      "id": "q-becomes-experiment",
+      "plate": "label",
+      "kind": "quote",
+      "a": "The question remains open long enough to become an experiment.",
+      "quote": "The question remains open long enough to become an experiment.",
+      "file": "commons/maps/QFEP_Edge_Of_Chaos/final.md"
+    },
+    {
+      "id": "s-room-and-slogan",
+      "plate": "label",
+      "kind": "claim",
+      "text": "I think that is the best thing a room can do with a slogan."
+    },
+    {
+      "id": "x-0",
+      "plate": "which",
+      "kind": "question",
+      "text": "is it the model, or the run?"
+    },
+    {
+      "id": "x-1",
+      "plate": "wired",
+      "kind": "not",
+      "text": "NOT wired to anything"
+    },
+    {
+      "id": "x-2",
+      "plate": "glance",
+      "kind": "claim",
+      "text": "one feature, a stated time"
+    },
+    {
+      "id": "x-3",
+      "plate": "steps",
+      "kind": "claim",
+      "text": "24: 3.54 m / 48: 2.41 m / 96: 1.96 m / rule: 1.60 m"
+    },
+    {
+      "id": "x-4",
+      "plate": "faster",
+      "kind": "not",
+      "text": "NOT finer"
+    },
+    {
+      "id": "x-5",
+      "plate": "number",
+      "kind": "not",
+      "text": "NOT truer"
+    },
+    {
+      "id": "x-6",
+      "plate": "clip",
+      "kind": "claim",
+      "text": "18 of 25 places on the wall"
+    },
+    {
+      "id": "x-7",
+      "plate": "keep",
+      "kind": "claim",
+      "text": "start + setting + duration + step sizes"
+    },
+    {
+      "id": "x-8",
+      "plate": "label",
+      "kind": "question",
+      "text": "what observable, across which settings?"
+    }
+  ],
+  "threads": [
+    {
+      "a": "which",
+      "b": "glance",
+      "word": "look first, name later",
+      "why": "Asking what belongs to the run starts with looking at one feature before naming the whole."
+    },
+    {
+      "a": "which",
+      "b": "wired",
+      "word": "what is connected?",
+      "why": "Before asking what a change belongs to: which handle is connected to anything at all?"
+    },
+    {
+      "a": "glance",
+      "b": "faster",
+      "word": "two kinds of time",
+      "why": "Following a feature over time needs two kinds of time kept apart: the step, and the clock."
+    },
+    {
+      "a": "faster",
+      "b": "label",
+      "word": "and a name for it",
+      "why": "Speed and step are not the same; neither is a name the same as a measurement."
+    },
+    {
+      "a": "wired",
+      "b": "number",
+      "word": "what does it report?",
+      "why": "A connected handle and a number on the screen: what does the number report?"
+    },
+    {
+      "a": "number",
+      "b": "steps",
+      "word": "check it on foot",
+      "why": "The difference between two computations, with a rule simple enough to walk."
+    },
+    {
+      "a": "steps",
+      "b": "keep",
+      "word": "with its conditions",
+      "why": "The spiral means something only with its start, its time and its step sizes beside it."
+    },
+    {
+      "a": "keep",
+      "b": "clip",
+      "word": "or the code made it",
+      "why": "Without its conditions kept, a ring made by a wall passes for the rule's circle."
+    }
+  ],
+  "visual_arguments": [
+    {
+      "id": "step_spiral",
+      "form": "playground",
+      "status": "standing: row step-spiral",
+      "title": "THE SAME RULE IN LARGER STEPS",
+      "at": [
+        -0.6,
+        -4.6
+      ],
+      "size": [
+        7.6,
+        8.6
+      ],
+      "claim": "A pattern can belong to the rule or to the way the rule is run; smaller steps that agree are a reason for trust; and a number that reports agreement can improve while nothing becomes truer.",
+      "from_the_hall": "'Which changes belong to the model, and which belong to the way its calculation is run?' ... 'A low value means these calculations are close in that particular respect.' ... 'A previous version of this screen made its pattern partly by overshooting and clipping its values'",
+      "built_from": [
+        "a pole, and the rule's circle taped pale round it",
+        "two computations in stones and tape: amber the coarser, cyan the finer",
+        "a red ring two metres out that clips, on request",
+        "a ball that runs the coarser path",
+        "a stand that reads: one rule, one start, one turn; the two ends; the difference",
+        "four plates: two step-size pairs, WALL, RUN FASTER"
+      ],
+      "what_stands": "North of the console a dark pole in a pale circle, and two spirals of coloured stones leaving it, the amber one ending three and a half metres out; a dark stand beyond; four plates to the south.",
+      "what_you_do": "Walk the amber stones from START to their end, then the cyan. Stand on the second plate: both spirals tighten. Stand on WALL and look where the ends are. Stand on RUN FASTER and read the stand again.",
+      "what_it_shows": "Three step counts and three ends closing on the rule without reaching it; a difference that falls to 0.20 m when a wall clips both paths, with both ends wrong; a ball three times as fast on the same stones.",
+      "measured": "tools/probes/step_spiral_bench.py (python, before building): 24 steps 3.54 m, 48 steps 2.41 m, 96 steps 1.96 m, rule 1.60 m; ends 1.18 and 0.44 m apart; with the wall 0.20 m, 18 of 25 places on it. tools/probes/step_spiral_walk.gd, the tower's walker: the same figures on the stand; on foot 3.55 m and 2.41 m from the pole (5 of 5). Not tried in a headset."
+    }
+  ],
+  "open": [
+    "The spiral is an experiment on the comparison (same start, same model time, two step sizes), with a rule that has a known answer. It says nothing about the hall's reaction-diffusion field, and nothing on the floor measures an edge of chaos.",
+    "The hall text mentions 'our learner bench' that keeps compared fields with their conditions; no such row is on the floor.",
+    "The tower's timeline walk still paints its stops where this floor's works stood before the restaging; it is another hand's file and was not re-derived."
+  ],
+  "hanging_board": {
+    "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_qfepedge). Near the cork: what the hall text says. In front: what I made of it.",
+    "board": {
+      "id": "arg_qfepedge",
+      "title": "The run: what the hall says, and what I made of it",
+      "w": 3.8,
+      "h": 2.4,
+      "paper": "#c9a978",
+      "depth": 0.9,
+      "hang": true,
+      "note": "An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Edge_Of_Chaos.json)."
+    },
+    "stickers": [
+      {
+        "reading": "model_or_run",
+        "id": "ag-model-or-run",
+        "design": "paradox_model_or_run",
+        "at": [
+          -1.6,
+          0.48,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "before_a_name",
+        "id": "ag-before-a-name",
+        "design": "punctum_before_a_name",
+        "at": [
+          -1.309,
+          0.76,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "two_scales",
+        "id": "ag-two-scales",
+        "design": "paradox_two_scales",
+        "at": [
+          -1.018,
+          0.48,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "does_not_isolate",
+        "id": "ag-does-not-isolate",
+        "design": "punctum_does_not_isolate",
+        "at": [
+          -0.727,
+          0.76,
+          0.12
+        ],
+        "turn": 2,
+        "size": 0.27
+      },
+      {
+        "reading": "faster_not_precise",
+        "id": "ag-faster-not-precise",
+        "design": "punctum_faster_not_precise",
+        "at": [
+          -0.436,
+          0.48,
+          0.12
+        ],
+        "turn": 4,
+        "size": 0.27
+      },
+      {
+        "reading": "close_in_one_respect",
+        "id": "ag-close-in-one-respect",
+        "design": "punctum_close_in_one_respect",
+        "at": [
+          -0.145,
+          0.76,
+          0.12
+        ],
+        "turn": -3,
+        "size": 0.27
+      },
+      {
+        "reading": "number_register",
+        "id": "ag-number-register",
+        "design": "punctum_number_register",
+        "at": [
+          0.145,
+          0.48,
+          0.12
+        ],
+        "turn": -1,
+        "size": 0.27
+      },
+      {
+        "reading": "screenshot_conditions",
+        "id": "ag-screenshot-conditions",
+        "design": "paradox_screenshot_conditions",
+        "at": [
+          0.436,
+          0.76,
+          0.12
+        ],
+        "turn": 1,
+        "size": 0.27
+      },
+      {
+        "reading": "code_had_made",
+        "id": "ag-code-had-made",
+        "design": "punctum_code_had_made",
+        "at": [
+          0.727,
+          0.48,
+          0.12
+        ],
+        "turn": 3,
+        "size": 0.27
+      },
+      {
+        "reading": "repair_not_explain",
+        "id": "ag-repair-not-explain",
+        "design": "paradox_repair_not_explain",
+        "at": [
+          1.018,
+          0.76,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "evocative_label",
+        "id": "ag-evocative-label",
+        "design": "punctum_evocative_label",
+        "at": [
+          1.309,
+          0.48,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "agreement_disagreement",
+        "id": "ag-agreement-disagreement",
+        "design": "paradox_agreement_disagreement",
+        "at": [
+          1.6,
+          0.76,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "looks_like_the_thing",
+        "id": "ag-looks-like-the-thing",
+        "design": "punctum_looks_like_the_thing",
+        "at": [
+          -1.6,
+          -0.67,
+          0.55
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "connected_not_isolated",
+        "id": "ag-connected-not-isolated",
+        "design": "punctum_connected_not_isolated",
+        "at": [
+          -1.2,
+          -0.37,
+          0.55
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "steps_made_it",
+        "id": "ag-steps-made-it",
+        "design": "paradox_steps_made_it",
+        "at": [
+          -0.8,
+          -0.67,
+          0.55
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "one_word_for_both",
+        "id": "ag-one-word-for-both",
+        "design": "paradox_one_word_for_both",
+        "at": [
+          -0.4,
+          -0.37,
+          0.55
+        ],
+        "turn": 2,
+        "size": 0.27
+      },
+      {
+        "reading": "nothing_truer",
+        "id": "ag-nothing-truer",
+        "design": "paradox_nothing_truer",
+        "at": [
+          0.0,
+          -0.67,
+          0.55
+        ],
+        "turn": 4,
+        "size": 0.27
+      },
+      {
+        "reading": "ring_the_wall_made",
+        "id": "ag-ring-the-wall-made",
+        "design": "punctum_ring_the_wall_made",
+        "at": [
+          0.4,
+          -0.37,
+          0.55
+        ],
+        "turn": -3,
+        "size": 0.27
+      },
+      {
+        "reading": "without_its_run",
+        "id": "ag-without-its-run",
+        "design": "punctum_without_its_run",
+        "at": [
+          0.8,
+          -0.67,
+          0.55
+        ],
+        "turn": -1,
+        "size": 0.27
+      },
+      {
+        "reading": "looks_like_the_model",
+        "id": "ag-looks-like-the-model",
+        "design": "punctum_looks_like_the_model",
+        "at": [
+          1.2,
+          -0.37,
+          0.55
+        ],
+        "turn": 1,
+        "size": 0.27
+      },
+      {
+        "reading": "room_and_slogan",
+        "id": "ag-room-and-slogan",
+        "design": "punctum_room_and_slogan",
+        "at": [
+          1.6,
+          -0.67,
+          0.55
+        ],
+        "turn": 3,
+        "size": 0.27
+      }
+    ],
+    "threads": [
+      {
+        "id": "ath-ag-model-or-run-ag-looks-like-the-thing",
+        "a": "ag-model-or-run",
+        "b": "ag-looks-like-the-thing",
+        "word": "never asked of a picture",
+        "why": "Model or run: a question never asked of a picture, because a picture looks like the thing.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-before-a-name-ag-looks-like-the-model",
+        "a": "ag-before-a-name",
+        "b": "ag-looks-like-the-model",
+        "word": "it looked like the model",
+        "why": "Describe before naming: the spiral looked like something the model does.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-two-scales-ag-looks-like-the-thing",
+        "a": "ag-two-scales",
+        "b": "ag-looks-like-the-thing",
+        "word": "one glance",
+        "why": "Two scales in one picture, taken in with one glance.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-does-not-isolate-ag-connected-not-isolated",
+        "a": "ag-does-not-isolate",
+        "b": "ag-connected-not-isolated",
+        "word": "three things at once",
+        "why": "One handle moves feed, removal and diffusion together: connected, and isolating nothing.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-faster-not-precise-ag-one-word-for-both",
+        "a": "ag-faster-not-precise",
+        "b": "ag-one-word-for-both",
+        "word": "speed is not step",
+        "why": "Running faster is not stepping finer; one word had covered both.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-close-in-one-respect-ag-nothing-truer",
+        "a": "ag-close-in-one-respect",
+        "b": "ag-nothing-truer",
+        "word": "0.20 m, on the wall",
+        "why": "Close in one respect: 0.20 m apart, and both on the wall.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-number-register-ag-nothing-truer",
+        "a": "ag-number-register",
+        "b": "ag-nothing-truer",
+        "word": "what was I watching?",
+        "why": "Whether the number registers what was being watched: here it improved while nothing became truer.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-screenshot-conditions-ag-without-its-run",
+        "a": "ag-screenshot-conditions",
+        "b": "ag-without-its-run",
+        "word": "keep the run",
+        "why": "A screenshot without its conditions; a result without its run.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-code-had-made-ag-ring-the-wall-made",
+        "a": "ag-code-had-made",
+        "b": "ag-ring-the-wall-made",
+        "word": "the wall made a ring",
+        "why": "Something code had made: on the floor, a ring made by a clipping wall.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-repair-not-explain-ag-steps-made-it",
+        "a": "ag-repair-not-explain",
+        "b": "ag-steps-made-it",
+        "word": "still to be read",
+        "why": "A repaired calculation still has to be read: the spiral came from the steps.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-evocative-label-ag-room-and-slogan",
+        "a": "ag-evocative-label",
+        "b": "ag-room-and-slogan",
+        "word": "an open question",
+        "why": "A label cannot do the work; a room can keep the question open.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-ag-agreement-disagreement-ag-steps-made-it",
+        "a": "ag-agreement-disagreement",
+        "b": "ag-steps-made-it",
+        "word": "24, 48, 96",
+        "why": "Agreement across smaller steps: three step counts, three ends, closing on the rule.",
+        "colour": "#8e0c16"
+      }
+    ]
+  }
+}

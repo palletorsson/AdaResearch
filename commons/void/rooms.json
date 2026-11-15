@@ -53597,6 +53597,78 @@
             "pair": "coarse",
             "editor_label": "The same rule in larger steps | one rule (a circle round a pole), one start, one model time, two step sizes: two spirals on the floor; a plate halves the steps, one adds a clipping wall"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -5.6,
+            2.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_Edge_Of_Chaos",
+            "stands_at": [
+              -5.6,
+              2.4
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the two-screen console and the unconnected rail to the two spirals on the floor"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepedge",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepedge)"
+          }
+        },
+        {
+          "id": "word-rule",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "RULE",
+            "tall": 1.5,
+            "fit_width": 4.0,
+            "editor_label": "RULE in standing red letters | what the model says; on the east wing, facing RUN across the floor"
+          }
+        },
+        {
+          "id": "word-run",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            4.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "RUN",
+            "tall": 1.5,
+            "fit_width": 3.4,
+            "editor_label": "RUN in standing red letters | the way the model was computed; on the west wing"
+          }
         }
       ],
       "props": [],

@@ -1,4 +1,4 @@
-{"version": 1, "revision": 19,
+{"version": 1, "revision": 20,
 "boards": [
   {"id":"visitors","title":"The visitors' board","w":1.6,"h":1,"paper":"#f4f0e6","note":"The same board in SVG (/stickers Board), in three.js (/stickers 3D) and in VR (the sticker_board artifact)."},
   {"id":"research","title":"The research, in stickers","w":2.4,"h":1.36,"paper":"#f4f0e6","note":"One sticker per spine sequence of Ada Research, in spine order: its idea as a motif, its name, its question; the colour is its QFEP phase. Derived by tools/stickers_seed.ts from commons/maps/curriculum_spine.json and the sequence files."},
@@ -25,5 +25,6 @@
   {"id":"arg_qfepf","title":"The guess: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_F_Term.json).","depth":0.9,"hang":true},
   {"id":"arg_qfepe","title":"The count: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_E_Term.json).","depth":0.9,"hang":true},
   {"id":"arg_qfeplambda","title":"The invitation: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Lambda_Spectrum.json).","depth":0.9,"hang":true},
-  {"id":"arg_qfepphi","title":"The sign: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Phi_Term.json).","depth":0.9,"hang":true}
+  {"id":"arg_qfepphi","title":"The sign: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Phi_Term.json).","depth":0.9,"hang":true},
+  {"id":"arg_qfepedge","title":"The run: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Edge_Of_Chaos.json).","depth":0.9,"hang":true}
 ]}
