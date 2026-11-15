@@ -86,6 +86,48 @@
           "arithmetic": "grid and new_row differ by the plank (4 x 0.25 m), its four yellow balls (0.1 square metres each) and one line of floor words: about 1.6 square metres of a scene of 30 that fills about half the frame: 2.7 %; a flat rasteriser sees the low plank and small balls poorly, so 1.2 % as the floor. everything differs from both by nine more panels."
         }
       }
+    },
+    "checking_station": {
+      "lookup_name": "checking_station",
+      "map_ready": true,
+      "name": "The Checking Station",
+      "class_name": "",
+      "scene": "res://commons/artifacts/checking_station/checking_station.tscn",
+      "description": "A visual argument in the form of a robot station, for the Goedel hall: three ways a search stops, and finding is not checking. A robot of a construction cube on trace balls brings candidates to a gate of crates and a timber panel. Each candidate is a derivation in the hall's own toy syntax (axiom 0, rule w -> Sw), one step longer than the last, every fourth with a middle line lost; the gate checks it against what was asked with the bench's own checker (foundations-lineage/derivation.gd: verify) and passes it through or has it pushed aside. The station counts what it checked and never says 'none will pass'. Axis asks: SSS0 (the fourth candidate passes), SSSSSSSS0 (eight refusals, then the ninth: slow, not impossible), 0S (nothing the rule makes ends in an S: impossible, and the station looks exactly as it does while it is being slow - the reason is an argument on the board, not a check at the gate). Three plates ask. The motion is kinematic.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "watch",
+      "size_group": "room",
+      "tags": [
+        "goedel",
+        "proof",
+        "search",
+        "checking",
+        "robot",
+        "station",
+        "visual-argument"
+      ],
+      "qfep_connection": "A machine that only refuses cannot tell you whether it is being slow or facing the impossible. That difference is made by an argument, from outside.",
+      "dev_themes": [
+        "logic",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "asks": [
+            "SSS0",
+            "SSSSSSSS0",
+            "0S"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "asks: SSSSSSSS0 ~ 0S",
+          "percent": 0.3,
+          "arithmetic": "At rest, before a candidate has been checked, the three stations are the same station: the same row, gate and robot. They differ by the words on the gate's screen ('asked for ...', about 0.3 x 0.2 m of lettering) and one line of the board. That is the point of the work - slow and impossible look alike from outside - and it means a still cannot tell them apart: about 0.06 square metres of 25 that fill half the frame, 0.1 %; with the board's line, 0.3 %. The sweep will say INERT; the difference is in what happens after eight candidates, which a still does not hold."
+        }
+      }
     }
   }
 }

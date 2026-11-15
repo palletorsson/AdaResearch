@@ -590,7 +590,9 @@
       ],
       "what_stands": "Four rows by four columns. Balls on the cells below the diagonal (row 1 has column 0; row 2 has 0 and 1; row 3 has 0, 1 and 2). The diagonal is empty: none contains itself. Beside the grid, on a plank, the opposite of the diagonal: a ball at every place. It is the set of all four - U - and it is not one of the four rows.",
       "what_you_do": "Stand on a diagonal cell: the new row's ball above that column lights, and the board says in which place it disagrees with that row. Then stand on the plate EVERYTHING: the plank is carried into the grid as a fifth row, a fifth column appears for it, and its own diagonal cell cannot be filled or left empty - it blinks.",
-      "what_it_shows": "With a list that is not everything, the argument produces an outside. With a list that claims to be everything, the same argument has nowhere to put what it produces."
+      "what_it_shows": "With a list that is not everything, the argument produces an outside. With a list that claims to be everything, the same argument has nowhere to put what it produces.",
+      "form": "prefab_assemblage",
+      "status": "standing: row diagonal-grid"
     },
     {
       "id": "two_doors",
@@ -612,7 +614,9 @@
       ],
       "what_stands": "Two gates side by side, IN and OUT, opening onto one corridor bent into a loop: through IN you come out facing OUT, through OUT you come out facing IN.",
       "what_you_do": "Walk it. A counter on the board counts your laps and shows 'R is in R' and 'R is not in R' alternately; it never settles while you keep walking, and it shows nothing when you stop between the gates.",
-      "what_it_shows": "The loop is not a difficulty in deciding. It is what the rule does to either decision."
+      "what_it_shows": "The loop is not a difficulty in deciding. It is what the rule does to either decision.",
+      "form": "playground",
+      "status": "written"
     },
     {
       "id": "outside",
@@ -635,7 +639,9 @@
       ],
       "what_stands": "A small fenced yard with four crates. Just outside its gate, a crystal: the result of the filter. A second, larger fence takes the crystal in as a member - and a new crystal stands outside that one. A third. The outermost ring is tape, left open.",
       "what_you_do": "Walk out through the three gates. Each time you step over a threshold the crystal you just passed dims (it is a member now) and the next one lights.",
-      "what_it_shows": "'Nothing is everything' as a walk: the argument that was a contradiction is, after the repair, a way of always finding the next thing."
+      "what_it_shows": "'Nothing is everything' as a walk: the argument that was a contradiction is, after the repair, a way of always finding the next thing.",
+      "form": "prefab_assemblage",
+      "status": "written"
     }
   ],
   "open": [

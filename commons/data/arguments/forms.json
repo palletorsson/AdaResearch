@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "note": "Palle, 2026-11-15: 'Think of what we can represent the artifact and maps as: a playground, prefab assemblages, robotic unit stations, 3D mind mapping, a hero artifact, biomes etc.' This is the pass's answer as data: six forms an idea can take in the tower, what each is good for, what makes it, and the test for choosing it; then, hall by hall for the foundations crisis, which forms stand, which are written and which are only a guess from the hall's name (marked so: a guess is to be read against the hall's text and its works' code before anything is built). An idea usually wants two or three forms, not one: a hero to point at, a mind map to say what it means, and one form a body or a machine actually does. tools/arguments.py --check holds every visual argument's 'form' against this list.",
+  "forms": [
+    {
+      "id": "hero_artifact",
+      "is": "One work per hall staged as the centre: a ring of tape, two work lights, every thread tied back to it.",
+      "good_for": "Saying which work carries the hall's sentence. Without it a floor of ten works has no first thing to look at.",
+      "made_with": "argument_floor's hero (ring, work lights from the catalogue); the hall's own artifact, not a new one.",
+      "test": "If only this one work stood on the floor, would the hall still say its sentence?"
+    },
+    {
+      "id": "mind_map",
+      "is": "The working-out in language: cardboard plates in marker, stickers, red threads with a word each, the same words on text tape along the floor.",
+      "good_for": "Relations between ideas, wrong turns, what something is NOT, open questions. The layer that says what the other forms mean.",
+      "made_with": "commons/data/arguments/<hall>.json; the sticker app (readings, hanging boards, later cardboard constructions); the tape rolls' printed strip.",
+      "test": "Is there something here that can only be said, not done or shown? Then it belongs on a plate. Keep the plates few."
+    },
+    {
+      "id": "playground",
+      "is": "The idea as something a body undergoes: a loop, a limit, a one-way, a climb, a floor that changes under you.",
+      "good_for": "Constraints and impossibilities that are felt before they are understood: you cannot get back, it never closes, there is always one more step.",
+      "made_with": "the place kit (playground_spec_hall, place_spec) and walkable prefab scenes through prefab_city.gd (wedges, gates, decks, water).",
+      "test": "Can the visitor's own walk be the argument - and does the tower's walker fail or succeed in the way the idea says?"
+    },
+    {
+      "id": "prefab_assemblage",
+      "is": "The idea built from the tower's real parts so that it can be counted, rearranged, taken apart: a grid of panels, nested fences, a row of crates.",
+      "good_for": "Ideas about collections, construction and totality: what is on the list, what is built from what, what is left outside.",
+      "made_with": "the spatial lab's inputs through lab_input.gd / prefab_city.gd; forms bred in the breeding yard (ada_run/bred_prefabs).",
+      "test": "Is the idea about things and their arrangement? Then every thing in it should be a part someone could pick up."
+    },
+    {
+      "id": "robot_station",
+      "is": "A machine doing a procedure without us: bringing, checking, sorting, laying, for as long as it runs.",
+      "good_for": "Rules, searches and checks - and what a rule does when nobody interprets it. A robot can be wrong, slow or stuck in ways a diagram cannot.",
+      "made_with": "kinematic stations from prefabs (checking_station); the Unit's drones where their model fits; always the hall's own model for the procedure.",
+      "test": "Is the idea about what a procedure can and cannot establish by running? Then let one run, and count honestly what it has established."
+    },
+    {
+      "id": "biome",
+      "is": "Something that grows and is not finished: the tower's living layer inside a bounded place.",
+      "good_for": "Ideas about becoming, about what is not decided in advance, and about living with what does not resolve.",
+      "made_with": "biome_box (the biome in a glass grid box), the nature system; a live work under a body must ask to be woken.",
+      "test": "Does the idea deny that everything is already there? Then show something that is still arriving."
+    }
+  ],
+  "halls": [
+    {
+      "hall": "Euclid_Parallel",
+      "status": "guess",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "playground"
+      ],
+      "why": "Guess from the name, not yet read: a postulate you cannot check by walking any finite length - two tapes to walk between."
+    },
+    {
+      "hall": "NonEuclidean_Spaces",
+      "status": "guess",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "playground",
+        "biome"
+      ],
+      "why": "Guess, not yet read: a triangle walked on a curved floor; growth that makes its own curvature (a ruffled leaf is hyperbolic)."
+    },
+    {
+      "hall": "Russell_Paradox",
+      "status": "standing",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "prefab_assemblage",
+        "playground"
+      ],
+      "why": "Standing: hero (workbench), mind map (plates, stickers, tape), assemblage (the grid). Written, not built: the loop IN and OUT (playground), nested fences (assemblage)."
+    },
+    {
+      "hall": "Godel_Incompleteness",
+      "status": "standing",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "robot_station",
+        "playground"
+      ],
+      "why": "Standing: hero (provability sorter), mind map, robot station (the checking station: slow and impossible look alike from outside). Written, not built: lay the missing plank (playground)."
+    },
+    {
+      "hall": "Escher_Impossible",
+      "status": "guess",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "playground"
+      ],
+      "why": "Guess, not yet read: a stair of wedges and cubes that is right at every landing and cannot close; the walker's failure is the argument."
+    },
+    {
+      "hall": "Brouwer_Intuitionism",
+      "status": "guess",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "prefab_assemblage",
+        "biome"
+      ],
+      "why": "Guess, not yet read: an assemblage that exists only as far as it has been built; a sequence that is still growing. (Russell plate 10 sends its 'found or made?' here.)"
+    },
+    {
+      "hall": "Florensky_Paraconsistent",
+      "status": "guess",
+      "forms": [
+        "hero_artifact",
+        "mind_map",
+        "biome"
+      ],
+      "why": "Guess, not yet read: two growths holding one ground without one winning; threads that are allowed to contradict. (Russell plate 9 asks for a fourth way here.)"
+    },
+    {
+      "hall": "Crisis_Synthesis",
+      "status": "guess",
+      "forms": [
+        "mind_map"
+      ],
+      "why": "Guess, not yet read: the hall as the mind map of the sequence - the halls' boards tied to each other, choice / contradiction / reach / and what the last three add."
+    }
+  ]
+}

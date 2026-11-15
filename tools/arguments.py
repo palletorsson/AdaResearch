@@ -74,6 +74,10 @@ def check(path):
                     findings.append('%s: sticker %s letters more than its quote: %r' % (path.name, s['id'], half))
         elif not s.get('text'):
             findings.append('%s: sticker %s has no words' % (path.name, s['id']))
+    palette = {f['id'] for f in json.loads((DIR / 'forms.json').read_text(encoding='utf-8'))['forms']}
+    for v in doc.get('visual_arguments', []):
+        if v.get('form') not in palette:
+            findings.append('%s: the visual argument %s has no form of the palette (%s)' % (path.name, v['id'], v.get('form')))
     for t in doc.get('threads', []):
         for end in (t.get('a'), t.get('b')):
             if end not in plates:
@@ -207,7 +211,7 @@ if __name__ == '__main__':
         print(sheet(want[0].split('=', 1)[1]))
         sys.exit(0)
     found = []
-    files = sorted(DIR.glob('*.json'))
+    files = sorted(f for f in DIR.glob('*.json') if f.name != 'forms.json')
     for f in files:
         found += check(f)
     for line in found:

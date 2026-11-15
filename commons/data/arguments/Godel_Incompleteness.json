@@ -609,26 +609,28 @@
   "visual_arguments": [
     {
       "id": "search_and_check",
-      "title": "ONE GATE THAT CHECKS, A ROW WITHOUT END",
+      "title": "THE CHECKING STATION",
       "at": [
-        9.5,
-        -4.8
+        0,
+        -3.9
       ],
       "size": [
-        5.0,
-        3.0
+        6.4,
+        4.0
       ],
       "claim": "Any one candidate can be checked and settled. The row of candidates has no last one.",
       "from_the_hall": "The bench: 0, S0, SS0; a budget of steps; a candidate with a missing middle step rejected.",
       "built_from": [
-        "crate (a candidate proof)",
-        "timber_panel_1x1 (the checking gate, as in the harbour)",
-        "work_light (green over an accepted candidate)",
-        "museum_tape_barrier (where the row is cut off for want of floor, and says so)"
+        "crate (a candidate derivation)",
+        "timber_panel_1x1 and two crate posts (the gate)",
+        "construction_cube on trace_point_ball wheels with a plank pusher (the robot)",
+        "museum_tape_barrier (where the row is cut off for want of floor)"
       ],
-      "what_stands": "A gate with a crate in it. Beyond the gate a row of crates running to the edge of the slab, each a little further apart.",
-      "what_you_do": "Stand at the gate: the crate in it is checked, step by step, and passes or is refused; the next is brought. The counter says how many were refused. It never says 'none will pass'.",
-      "what_it_shows": "Refusing candidates one by one is checking. 'No candidate passes' is a different kind of sentence, and no amount of standing at the gate produces it."
+      "what_stands": "A robot, a row of candidates each one step longer than the last, a gate. The gate checks each candidate with the bench's own checker and passes it or has it pushed aside.",
+      "what_you_do": "Stand on a plate to ask for SSS0, SSSSSSSS0 or 0S, and say first whether one will pass. Watch the refusals.",
+      "what_it_shows": "Slow and impossible look exactly alike from outside. The station counts what it refused and never says 'none will pass': that sentence is made by an argument about the rule, which is on the board, not at the gate.",
+      "form": "robot_station",
+      "status": "standing: row checking-station"
     },
     {
       "id": "gap_moves_up",
@@ -650,7 +652,9 @@
       ],
       "what_stands": "A landing with a gap in its floor and, across the gap, a crystal. A plate lays the plank. Crossing it brings you onto the next landing: another gap, another crystal.",
       "what_you_do": "Lay the plank and cross, three times. The third landing ends at tape: the tower goes on, the floor does not.",
-      "what_it_shows": "The repair is real each time and never the last. That is what 'no rule lists all the truths' feels like in the legs."
+      "what_it_shows": "The repair is real each time and never the last. That is what 'no rule lists all the truths' feels like in the legs.",
+      "form": "playground",
+      "status": "written"
     }
   ],
   "open": [
