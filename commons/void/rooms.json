@@ -54003,6 +54003,78 @@
             "built": "middle",
             "editor_label": "Asked, read back, measured | a 3 m mast on a sprung foot; plates ask for stiffness, damping, drag; a stand keeps asked, read back and measured apart, and the tip's trace"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -2.4,
+            0.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_Synthesis",
+            "stands_at": [
+              -2.4,
+              0.0
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the specimen in its jar to the mast that keeps asked, read back and measured apart"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepsynth",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepsynth)"
+          }
+        },
+        {
+          "id": "word-steady",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            -4.4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "STEADY",
+            "tall": 1.2,
+            "fit_width": 5.0,
+            "editor_label": "STEADY in standing red letters | what was given to the body; on the east wing, north of STILL"
+          }
+        },
+        {
+          "id": "word-still",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            4.2
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "STILL",
+            "tall": 1.2,
+            "fit_width": 4.0,
+            "editor_label": "STILL in standing red letters | what would be something else; on the east wing, south of STEADY"
+          }
         }
       ],
       "props": [],
