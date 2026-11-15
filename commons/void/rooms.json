@@ -52537,6 +52537,78 @@
             "source": "nine_tenths",
             "editor_label": "Whose expectation meets it? | twelve hidden bits in two lanes, EXPECT 0 and EXPECT 1; walk and count the misses; AGAIN: same bits, other lane; one plate changes the world instead"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            1.4,
+            5.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_F_Term",
+            "stands_at": [
+              1.4,
+              5.6
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the workbench to the walk of twelve hidden bits and its last plate (commons/data/arguments/QFEP_F_Term.json)"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepf",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepf)"
+          }
+        },
+        {
+          "id": "word-difficult",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            3.5
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "DIFFICULT",
+            "tall": 1.2,
+            "fit_width": 5.6,
+            "editor_label": "DIFFICULT in standing red letters | what a world is called by an expectation that does not fit it; on the east wing, facing WHOSE across the floor"
+          }
+        },
+        {
+          "id": "word-whose",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            -2.2
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "WHOSE",
+            "tall": 1.4,
+            "fit_width": 4.0,
+            "editor_label": "WHOSE in standing red letters | whose expectation is meeting it; on the west wing"
+          }
         }
       ],
       "props": [],

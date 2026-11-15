@@ -1,0 +1,887 @@
+{
+  "version": 1,
+  "hall": "QFEP_F_Term",
+  "title": "Predictable according to whom (worked out on cardboard)",
+  "note": "The authored thinking for one hall, in the first person, by the pass (Claude), for Palle's request of 2026-11-14 (see Russell_Paradox.json). 'at' is the floor's own frame in metres (x east, z south), 'yaw' in degrees. A sticker of kind 'quote' stands word for word in the hall text; every other kind is mine and may be wrong - the plates say where I am unsure.",
+  "hero": {
+    "row": "f2_shannon_workbench_4_4",
+    "artifact": "shannon_workbench",
+    "at": [
+      0,
+      3.4
+    ],
+    "lights": [],
+    "why": "The workbench is what the hall text is about: one rail p, a grid of bits, the entropy readout, and EXPECT 0 / EXPECT 1.",
+    "staging": "The visitor arrived 0.8 m in front of the film monitor, with the workbench at the far north edge; the pass restaged the floor (28d8612a1). The workbench is straight ahead of the arrival and turned to face it, the film monitor at the left hand, the lambda cabinet at the right; north of the workbench the walk of twelve hidden bits."
+  },
+  "plates": [
+    {
+      "id": "orderly",
+      "title": "1  WHEN IT LOOKS ORDERLY, WHAT CAN I PREDICT?",
+      "by": "f2_shannon_workbench_4_4",
+      "at": [
+        1.9,
+        6.6
+      ],
+      "yaw": -30,
+      "front": [
+        "The hall starts with a question I thought was easy: when a pattern looks orderly, what exactly can I predict?",
+        "Move p to one end: one colour takes over the grid, and the readout H falls. Move it to the middle: mixed, and H is at its top.",
+        "So far 'orderly' and 'predictable' agree.",
+        "Then p near 0.1 and p near 0.9. One grid is nearly dark, the other nearly lit. H is the same: 0.47 bit.",
+        "The amount of uncertainty does not care which colour is the common one. I did care."
+      ],
+      "back": [
+        "I computed it rather than trusting the sentence: H(0.1) = H(0.9) = 0.469. the walk's probe reads the same number from the workbench."
+      ]
+    },
+    {
+      "id": "patch",
+      "title": "2  ONE STRIKING PATCH IS NOT A REFUTATION",
+      "by": "f2_shannon_workbench_4_4",
+      "at": [
+        -2.6,
+        1.4
+      ],
+      "yaw": 30,
+      "front": [
+        "p is a probability. It is not an instruction that every small corner of the grid must show that proportion.",
+        "My row of twelve at p 0.9 came out with nine ones, not 10.8. Three zeros, two of them side by side.",
+        "If I had seen only rows 6 and 7 I would have said: this source gives zeros.",
+        "The source and what it happened to give are two things. The model predicts; the sample is what I have to explain.",
+        "A patch is evidence. It is not a verdict."
+      ],
+      "back": [
+        "nine of twelve is what the workbench's own seed gives. I did not pick a seed that looked typical."
+      ]
+    },
+    {
+      "id": "h_is_not_f",
+      "title": "3  H IS NOT F",
+      "by": "f2_shannon_workbench_4_4",
+      "at": [
+        2.8,
+        1.4
+      ],
+      "yaw": -30,
+      "front": [
+        "This is the F floor. The workbench computes H.",
+        "Three things I would have run together: how predictable a source is under an assumed distribution; the errors one guess actually made; variational free energy.",
+        "The readout is the first. My walk counts the second. Nothing on this floor computes the third.",
+        "The hall says so itself: a precise starting observation, without pretending H is already a measurement of F.",
+        "A room named after a term it does not measure, and honest about it."
+      ],
+      "back": [
+        "I cannot check anything about free energy from here. I only know that no code on this floor computes it. not checked."
+      ]
+    },
+    {
+      "id": "predictor",
+      "title": "4  THE SOURCE IS NO MORE UNCERTAIN",
+      "by": "visual:guessing_walk",
+      "at": [
+        -5.8,
+        0.2
+      ],
+      "yaw": 70,
+      "front": [
+        "EXPECT 0 on the workbench: an amber underline on every bit that refuses the guess. At p 0.1 a few. At 0.9 nearly all.",
+        "H did not move between them. The mistakes did.",
+        "On the walk I was the guess. South lane, p 0.9: nine amber bars in twelve rows.",
+        "Nothing about the row was hard. I was standing in the wrong lane.",
+        "The hall's sentence for it: the source is no more uncertain; this predictor is less suited to it."
+      ],
+      "back": [
+        "the tower's walker before me: 9 of 12 in the south lane (tools/probes/guessing_walk_walk.gd)."
+      ]
+    },
+    {
+      "id": "sides",
+      "title": "5  THE BARS CHANGED SIDES. THE BITS STAYED",
+      "by": "visual:guessing_walk",
+      "at": [
+        6.0,
+        -0.2
+      ],
+      "yaw": -70,
+      "front": [
+        "AGAIN. The same twelve bits go back under card. North lane this time: three misses.",
+        "Nine, then three. It is the row I walked before: the same two zeros side by side.",
+        "My count improved. The world did not get easier.",
+        "It is tempting to report that as: the world got easier.",
+        "Keep your eye on the bits, the hall says, not only the number."
+      ],
+      "back": [
+        "9 and 3 make 12: on one row the two lanes' misses always do. that is arithmetic, not learning."
+      ]
+    },
+    {
+      "id": "next",
+      "title": "6  A BETTER FIT DOES NOT SETTLE WHAT COMES NEXT",
+      "by": "visual:guessing_walk",
+      "at": [
+        -1.6,
+        -0.6
+      ],
+      "yaw": 10,
+      "front": [
+        "Nothing here learned the change for me. I chose another lane and tested it against the same evidence.",
+        "The improvement is real inside that comparison.",
+        "Whether the north lane will serve on the next row is another encounter. The forty-eight bits on the stand say: probably. They do not say: yes.",
+        "Then I pressed p 0.1 and walked north again. Eleven misses.",
+        "The lane that had just been right."
+      ],
+      "back": [
+        "I am a predictor built from what was already seen. this plate is about me more than about the row."
+      ]
+    },
+    {
+      "id": "counted",
+      "title": "7  EXPECTED AND COUNTED NEED NOT AGREE",
+      "by": "visual:guessing_walk",
+      "at": [
+        1.8,
+        -0.6
+      ],
+      "yaw": -10,
+      "front": [
+        "The stand says the south lane would expect 10.8 misses at p 0.9. I counted nine.",
+        "Neither number is wrong. One is about the source; the other is about these twelve.",
+        "If they always agreed I would not need both.",
+        "The gap is where a model and a world can be told apart.",
+        "A report that gives only the expected number has not looked."
+      ],
+      "back": [
+        "10.8 is 12 times 0.9. nine is what lay under the card."
+      ]
+    },
+    {
+      "id": "whose",
+      "title": "8  DIFFICULT FOR WHOM?",
+      "by": "visual:guessing_walk",
+      "at": [
+        -5.6,
+        2.6
+      ],
+      "yaw": 75,
+      "front": [
+        "The hall: when we call a world difficult, whose expectation is meeting it?",
+        "After the south lane I would have called that row difficult. It was nine ones in twelve: about as easy as a row gets.",
+        "'Difficult' was a fact about the pair: this row, that lane.",
+        "I think this is said of people more often than of rows.",
+        "A measure of difficulty has an expectation folded into it, and usually does not say whose."
+      ],
+      "back": [
+        "any benchmark I am scored on has this in it. so does any I would write."
+      ]
+    },
+    {
+      "id": "change",
+      "title": "9  THE PLATE THAT CHANGES THE WORLD INSTEAD",
+      "by": "visual:guessing_walk",
+      "at": [
+        6.2,
+        -5.6
+      ],
+      "yaw": -80,
+      "front": [
+        "One plate at the end of the walk: CHANGE THE WORLD INSTEAD. I built it, and I am not sure I should have made it so easy to press.",
+        "After eleven misses at p 0.1 I stood on it. Every bit that had refused me turned over and was stamped. No misses.",
+        "The stand: 11 of 12 bits were changed to fit one walker. This row is no longer a sample of p 0.1.",
+        "Then the south lane on that row: twelve misses of twelve. The world now fits one walker and refuses the other.",
+        "Here the expectation changes with a step. Elsewhere a system insists the world change. Keep that difference, the hall says. The stamps are how I kept it."
+      ],
+      "back": [
+        "the plate leaves a record: which bits, how many, and that the row is no longer the source's. where a world is changed to fit an expectation, that record is usually what is missing."
+      ]
+    }
+  ],
+  "stickers": [
+    {
+      "id": "q-orderly-predict",
+      "plate": "orderly",
+      "kind": "quote",
+      "a": "When a pattern looks orderly, what exactly can you predict?",
+      "quote": "When a pattern looks orderly, what exactly can you predict?",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "q-rises-middle",
+      "plate": "orderly",
+      "kind": "quote",
+      "a": "The entropy readout rises towards the middle and falls towards both ends.",
+      "quote": "The entropy readout rises towards the middle and falls towards both ends.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "s-i-did-care",
+      "plate": "orderly",
+      "kind": "claim",
+      "text": "The amount of uncertainty does not care which colour is the common one. I did care."
+    },
+    {
+      "id": "q-probability-not-instruction",
+      "plate": "patch",
+      "kind": "quote",
+      "a": "The setting describes a probability,",
+      "quote": "The setting describes a probability, not an instruction that every small neighbourhood must display exactly that proportion.",
+      "file": "commons/maps/QFEP_F_Term/final.md",
+      "b": "not an instruction that every small neighbourhood must display exactly that proportion."
+    },
+    {
+      "id": "q-striking-patch",
+      "plate": "patch",
+      "kind": "quote",
+      "a": "A patch can look unusually mixed or unusually uniform within the same sample.",
+      "quote": "A patch can look unusually mixed or unusually uniform within the same sample.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "s-evidence-not-verdict",
+      "plate": "patch",
+      "kind": "claim",
+      "text": "A patch is evidence. It is not a verdict."
+    },
+    {
+      "id": "q-h-under-model",
+      "plate": "h_is_not_f",
+      "kind": "quote",
+      "a": "H describes uncertainty under that source model;",
+      "quote": "H describes uncertainty under that source model; it is not a guarantee about the exact shortest encoding of this particular displayed grid.",
+      "file": "commons/maps/QFEP_F_Term/final.md",
+      "b": "it is not a guarantee about the exact shortest encoding of this particular displayed grid."
+    },
+    {
+      "id": "q-three-quantities",
+      "plate": "h_is_not_f",
+      "kind": "quote",
+      "a": "Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities.",
+      "quote": "Predictability under an assumed distribution, a realised prediction error and variational free energy are not interchangeable quantities.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "s-named-not-measured",
+      "plate": "h_is_not_f",
+      "kind": "claim",
+      "text": "A room named after a term it does not measure, and honest about it."
+    },
+    {
+      "id": "q-less-suited",
+      "plate": "predictor",
+      "kind": "quote",
+      "a": "The source is no more uncertain;",
+      "quote": "The source is no more uncertain; this predictor is less suited to it.",
+      "file": "commons/maps/QFEP_F_Term/final.md",
+      "b": "this predictor is less suited to it."
+    },
+    {
+      "id": "s-wrong-lane",
+      "plate": "predictor",
+      "kind": "claim",
+      "text": "Nothing about the row was hard. I was standing in the wrong lane."
+    },
+    {
+      "id": "q-marks-change-sides",
+      "plate": "sides",
+      "kind": "quote",
+      "a": "Their colours stay;",
+      "quote": "Their colours stay; the amber marks change sides.",
+      "file": "commons/maps/QFEP_F_Term/final.md",
+      "b": "the amber marks change sides."
+    },
+    {
+      "id": "s-count-improved",
+      "plate": "sides",
+      "kind": "claim",
+      "text": "My count improved. The world did not get easier."
+    },
+    {
+      "id": "q-nothing-learned",
+      "plate": "next",
+      "kind": "quote",
+      "a": "Nothing here has learned the change for you.",
+      "quote": "Nothing here has learned the change for you.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "q-better-fit",
+      "plate": "next",
+      "kind": "quote",
+      "a": "A better fit to what we have already seen does not settle what comes next.",
+      "quote": "A better fit to what we have already seen does not settle what comes next.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "s-just-been-right",
+      "plate": "next",
+      "kind": "claim",
+      "text": "The lane that had just been right."
+    },
+    {
+      "id": "q-need-not-agree",
+      "plate": "counted",
+      "kind": "quote",
+      "a": "They need not agree exactly.",
+      "quote": "They need not agree exactly.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "s-need-both",
+      "plate": "counted",
+      "kind": "claim",
+      "text": "If they always agreed I would not need both."
+    },
+    {
+      "id": "q-whose-expectation",
+      "plate": "whose",
+      "kind": "quote",
+      "a": "when we call a world difficult,",
+      "quote": "when we call a world difficult, whose expectation is meeting it?",
+      "file": "commons/maps/QFEP_F_Term/final.md",
+      "b": "whose expectation is meeting it?"
+    },
+    {
+      "id": "s-folded-in",
+      "plate": "whose",
+      "kind": "claim",
+      "text": "A measure of difficulty has an expectation folded into it, and usually does not say whose."
+    },
+    {
+      "id": "q-world-change-instead",
+      "plate": "change",
+      "kind": "quote",
+      "a": "Here you can change the expectation with one button.",
+      "quote": "Here you can change the expectation with one button. Elsewhere a system might insist that the world change instead.",
+      "file": "commons/maps/QFEP_F_Term/final.md",
+      "b": "Elsewhere a system might insist that the world change instead."
+    },
+    {
+      "id": "q-keep-difference",
+      "plate": "change",
+      "kind": "quote",
+      "a": "Keep that difference with you.",
+      "quote": "Keep that difference with you.",
+      "file": "commons/maps/QFEP_F_Term/final.md"
+    },
+    {
+      "id": "s-fits-one-walker",
+      "plate": "change",
+      "kind": "claim",
+      "text": "The world now fits one walker and refuses the other."
+    },
+    {
+      "id": "s-stamps-kept",
+      "plate": "change",
+      "kind": "claim",
+      "text": "The stamps are how I kept it."
+    },
+    {
+      "id": "x-0",
+      "plate": "orderly",
+      "kind": "claim",
+      "text": "H(0.1) = H(0.9) = 0.47 bit"
+    },
+    {
+      "id": "x-1",
+      "plate": "patch",
+      "kind": "not",
+      "text": "NOT a refutation of p"
+    },
+    {
+      "id": "x-2",
+      "plate": "h_is_not_f",
+      "kind": "not",
+      "text": "NOT a measurement of F"
+    },
+    {
+      "id": "x-3",
+      "plate": "predictor",
+      "kind": "claim",
+      "text": "the misses moved, H did not"
+    },
+    {
+      "id": "x-4",
+      "plate": "sides",
+      "kind": "not",
+      "text": "NOT an easier world"
+    },
+    {
+      "id": "x-5",
+      "plate": "next",
+      "kind": "question",
+      "text": "will it serve on the next row?"
+    },
+    {
+      "id": "x-6",
+      "plate": "counted",
+      "kind": "claim",
+      "text": "10.8 expected / 9 counted"
+    },
+    {
+      "id": "x-7",
+      "plate": "whose",
+      "kind": "question",
+      "text": "difficult for whom?"
+    },
+    {
+      "id": "x-8",
+      "plate": "change",
+      "kind": "question",
+      "text": "who keeps the record when a world is changed to fit?"
+    }
+  ],
+  "threads": [
+    {
+      "a": "orderly",
+      "b": "h_is_not_f",
+      "word": "predictable is not F",
+      "why": "Orderly and predictable agree for a while; neither is the F the floor is named for."
+    },
+    {
+      "a": "h_is_not_f",
+      "b": "counted",
+      "word": "which of the three?",
+      "why": "Of the three quantities, the stand shows two side by side: expected under the source, and counted."
+    },
+    {
+      "a": "counted",
+      "b": "next",
+      "word": "counted, not promised",
+      "why": "What was counted on these twelve is not a promise about the next twelve."
+    },
+    {
+      "a": "next",
+      "b": "patch",
+      "word": "evidence, not a verdict",
+      "why": "A better fit to what was seen, and a striking patch, are both evidence and neither a verdict."
+    },
+    {
+      "a": "patch",
+      "b": "whose",
+      "word": "who is surprised?",
+      "why": "A patch surprises someone holding an expectation: whose?"
+    },
+    {
+      "a": "whose",
+      "b": "predictor",
+      "word": "the wrong lane",
+      "why": "Difficult for whom: for the walker in the wrong lane."
+    },
+    {
+      "a": "predictor",
+      "b": "sides",
+      "word": "same bits, other lane",
+      "why": "The predictor less suited, then the other lane on the same twelve bits."
+    },
+    {
+      "a": "sides",
+      "b": "change",
+      "word": "or change the row",
+      "why": "The lane can be changed; at the end of the walk a plate changes the row instead."
+    },
+    {
+      "a": "orderly",
+      "b": "whose",
+      "word": "orderly for whom?",
+      "why": "The first question (what can I predict?) and the last (whose expectation?) are the same question."
+    }
+  ],
+  "visual_arguments": [
+    {
+      "id": "guessing_walk",
+      "form": "playground",
+      "status": "standing: row guessing-walk",
+      "title": "WHOSE EXPECTATION MEETS IT?",
+      "at": [
+        0,
+        -4.4
+      ],
+      "size": [
+        12.6,
+        5.6
+      ],
+      "claim": "A world is called difficult by an expectation; change the expectation and the same world is easy. And a world changed to fit one expectation is no longer evidence of anything but that expectation.",
+      "from_the_hall": "'The source is no more uncertain; this predictor is less suited to it.' ... 'Here you can change the expectation with one button. Elsewhere a system might insist that the world change instead. Keep that difference with you.'",
+      "built_from": [
+        "twelve rows of two card tiles on a dark strip",
+        "an amber bar for a miss, a red stamp for a changed bit, a digit on every uncovered bit",
+        "a stand with forty-eight evidence cells and the count",
+        "five plates: p 0.1, 0.5, 0.9; AGAIN; CHANGE THE WORLD INSTEAD"
+      ],
+      "what_stands": "North of the workbench a dark strip ten metres long in two lanes of card tiles, a stand on its north side with a grid of cyan and dark cells, plates along its south side.",
+      "what_you_do": "Look at the stand's forty-eight bits. Walk the row in one lane: each row is uncovered as you step in, amber where the bit refused you. AGAIN, and the other lane. Press p 0.1 and walk the lane that was right. Then, if you will, the last plate.",
+      "what_it_shows": "The same twelve bits with nine misses and with three; the same uncertainty at p 0.1 and 0.9 with opposite lanes; and a row rewritten to fit one walker, stamped, counted and no longer a sample.",
+      "measured": "tools/probes/guessing_walk_walk.gd, the tower's walker: H and the first draws agree with the workbench; p 0.9: 9 misses south, 3 north on the same bits; p 0.1: 11 north; after CHANGE 0 misses with 11 bits rewritten; the changed row refuses the south lane 12 of 12 (7 of 7). Not tried in a headset."
+    }
+  ],
+  "open": [
+    "Plate 3: that nothing on the floor computes variational free energy is read from the code of the works on it; what free energy would require is not checked.",
+    "Plate 9: the pass built the plate that changes the world and is not sure it should be that easy to press. It leaves a record; whether that is enough is open.",
+    "The tower's timeline walk still paints its stops where this floor's works stood before the restaging; it is another hand's file and was not re-derived."
+  ],
+  "hanging_board": {
+    "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_qfepf). Near the cork: what the hall text says. In front: what I made of it.",
+    "board": {
+      "id": "arg_qfepf",
+      "title": "The guess: what the hall says, and what I made of it",
+      "w": 3.8,
+      "h": 2.4,
+      "paper": "#c9a978",
+      "depth": 0.9,
+      "hang": true,
+      "note": "An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_F_Term.json)."
+    },
+    "stickers": [
+      {
+        "reading": "orderly_predict",
+        "id": "af-orderly-predict",
+        "design": "punctum_orderly_predict",
+        "at": [
+          -1.6,
+          0.48,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "probability_not_instruction",
+        "id": "af-probability-not-instruction",
+        "design": "paradox_probability_not_instruction",
+        "at": [
+          -1.309,
+          0.76,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "striking_patch",
+        "id": "af-striking-patch",
+        "design": "punctum_striking_patch",
+        "at": [
+          -1.018,
+          0.48,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "three_quantities",
+        "id": "af-three-quantities",
+        "design": "punctum_three_quantities",
+        "at": [
+          -0.727,
+          0.76,
+          0.12
+        ],
+        "turn": 2,
+        "size": 0.27
+      },
+      {
+        "reading": "less_suited",
+        "id": "af-less-suited",
+        "design": "paradox_less_suited",
+        "at": [
+          -0.436,
+          0.48,
+          0.12
+        ],
+        "turn": 4,
+        "size": 0.27
+      },
+      {
+        "reading": "marks_change_sides",
+        "id": "af-marks-change-sides",
+        "design": "paradox_marks_change_sides",
+        "at": [
+          -0.145,
+          0.76,
+          0.12
+        ],
+        "turn": -3,
+        "size": 0.27
+      },
+      {
+        "reading": "nothing_learned",
+        "id": "af-nothing-learned",
+        "design": "punctum_nothing_learned",
+        "at": [
+          0.145,
+          0.48,
+          0.12
+        ],
+        "turn": -1,
+        "size": 0.27
+      },
+      {
+        "reading": "better_fit",
+        "id": "af-better-fit",
+        "design": "punctum_better_fit",
+        "at": [
+          0.436,
+          0.76,
+          0.12
+        ],
+        "turn": 1,
+        "size": 0.27
+      },
+      {
+        "reading": "need_not_agree",
+        "id": "af-need-not-agree",
+        "design": "punctum_need_not_agree",
+        "at": [
+          0.727,
+          0.48,
+          0.12
+        ],
+        "turn": 3,
+        "size": 0.27
+      },
+      {
+        "reading": "whose_expectation",
+        "id": "af-whose-expectation",
+        "design": "paradox_whose_expectation",
+        "at": [
+          1.018,
+          0.76,
+          0.12
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "world_change_instead",
+        "id": "af-world-change-instead",
+        "design": "paradox_world_change_instead",
+        "at": [
+          1.309,
+          0.48,
+          0.12
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "keep_difference",
+        "id": "af-keep-difference",
+        "design": "punctum_keep_difference",
+        "at": [
+          1.6,
+          0.76,
+          0.12
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "i_did_care",
+        "id": "af-i-did-care",
+        "design": "paradox_i_did_care",
+        "at": [
+          -1.6,
+          -0.67,
+          0.55
+        ],
+        "turn": -4,
+        "size": 0.27
+      },
+      {
+        "reading": "evidence_not_verdict",
+        "id": "af-evidence-not-verdict",
+        "design": "paradox_evidence_not_verdict",
+        "at": [
+          -1.2,
+          -0.37,
+          0.55
+        ],
+        "turn": -2,
+        "size": 0.27
+      },
+      {
+        "reading": "named_not_measured",
+        "id": "af-named-not-measured",
+        "design": "punctum_named_not_measured",
+        "at": [
+          -0.8,
+          -0.67,
+          0.55
+        ],
+        "turn": 0,
+        "size": 0.27
+      },
+      {
+        "reading": "wrong_lane",
+        "id": "af-wrong-lane",
+        "design": "paradox_wrong_lane",
+        "at": [
+          -0.4,
+          -0.37,
+          0.55
+        ],
+        "turn": 2,
+        "size": 0.27
+      },
+      {
+        "reading": "count_improved",
+        "id": "af-count-improved",
+        "design": "paradox_count_improved",
+        "at": [
+          0.0,
+          -0.67,
+          0.55
+        ],
+        "turn": 4,
+        "size": 0.27
+      },
+      {
+        "reading": "just_been_right",
+        "id": "af-just-been-right",
+        "design": "punctum_just_been_right",
+        "at": [
+          0.4,
+          -0.37,
+          0.55
+        ],
+        "turn": -3,
+        "size": 0.27
+      },
+      {
+        "reading": "folded_in",
+        "id": "af-folded-in",
+        "design": "punctum_folded_in",
+        "at": [
+          0.8,
+          -0.67,
+          0.55
+        ],
+        "turn": -1,
+        "size": 0.27
+      },
+      {
+        "reading": "fits_one_walker",
+        "id": "af-fits-one-walker",
+        "design": "punctum_fits_one_walker",
+        "at": [
+          1.2,
+          -0.37,
+          0.55
+        ],
+        "turn": 1,
+        "size": 0.27
+      },
+      {
+        "reading": "stamps_kept",
+        "id": "af-stamps-kept",
+        "design": "punctum_stamps_kept",
+        "at": [
+          1.6,
+          -0.67,
+          0.55
+        ],
+        "turn": 3,
+        "size": 0.27
+      }
+    ],
+    "threads": [
+      {
+        "id": "ath-af-orderly-predict-af-i-did-care",
+        "a": "af-orderly-predict",
+        "b": "af-i-did-care",
+        "word": "which colour is common",
+        "why": "What can be predicted does not depend on which colour is common; my sense of order did.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-probability-not-instruction-af-evidence-not-verdict",
+        "a": "af-probability-not-instruction",
+        "b": "af-evidence-not-verdict",
+        "word": "a patch is evidence",
+        "why": "A probability is not an instruction to every corner; a patch is evidence.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-striking-patch-af-evidence-not-verdict",
+        "a": "af-striking-patch",
+        "b": "af-evidence-not-verdict",
+        "word": "nine of twelve",
+        "why": "A striking patch inside the same sample: nine ones of twelve at p 0.9.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-three-quantities-af-named-not-measured",
+        "a": "af-three-quantities",
+        "b": "af-named-not-measured",
+        "word": "H is not F",
+        "why": "Three quantities not to be run together; the floor measures the first.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-less-suited-af-wrong-lane",
+        "a": "af-less-suited",
+        "b": "af-wrong-lane",
+        "word": "the wrong lane",
+        "why": "The predictor less suited to the source: a body in the wrong lane.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-marks-change-sides-af-count-improved",
+        "a": "af-marks-change-sides",
+        "b": "af-count-improved",
+        "word": "same bits",
+        "why": "The marks change sides and the count improves; the bits are the same.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-nothing-learned-af-just-been-right",
+        "a": "af-nothing-learned",
+        "b": "af-just-been-right",
+        "word": "then p 0.1",
+        "why": "Nothing learned the change: at p 0.1 the lane that had been right missed eleven.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-better-fit-af-just-been-right",
+        "a": "af-better-fit",
+        "b": "af-just-been-right",
+        "word": "the next row",
+        "why": "A better fit to what was seen does not settle the next row.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-need-not-agree-af-count-improved",
+        "a": "af-need-not-agree",
+        "b": "af-count-improved",
+        "word": "expected, then counted",
+        "why": "Expected under the source and counted in the row need not agree.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-whose-expectation-af-folded-in",
+        "a": "af-whose-expectation",
+        "b": "af-folded-in",
+        "word": "and does not say whose",
+        "why": "Difficulty has an expectation folded into it.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-world-change-instead-af-fits-one-walker",
+        "a": "af-world-change-instead",
+        "b": "af-fits-one-walker",
+        "word": "one walker only",
+        "why": "Change the world instead, and it fits one walker and refuses the other.",
+        "colour": "#8e0c16"
+      },
+      {
+        "id": "ath-af-keep-difference-af-stamps-kept",
+        "a": "af-keep-difference",
+        "b": "af-stamps-kept",
+        "word": "a record of the change",
+        "why": "Keeping the difference: a stamp on every bit that was changed.",
+        "colour": "#8e0c16"
+      }
+    ]
+  }
+}
