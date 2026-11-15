@@ -437,6 +437,54 @@
           "arithmetic": "From outside the two are one closed cardboard stairwell with the same ramp and door; only the board's words differ (3.4 x 1.5 m, about half its lines): perhaps 1 square metre of lettering changed in a scene of 70 that fills half the frame: 0.7 %; lettering reads poorly at this size: 0.3 %. The axis is what a climb does; a still of the outside will call it decoration and I predict so."
         }
       }
+    },
+    "small_planet": {
+      "lookup_name": "small_planet",
+      "map_ready": true,
+      "name": "A Small Planet",
+      "class_name": "",
+      "scene": "res://commons/artifacts/small_planet/small_planet.tscn",
+      "description": "A non-Euclidean biome: a world ten metres across with grass, flowers, stones, trees, mushrooms and five beetles on it, no edge and no end. A door on the floor leads onto it. Walk straight for 31.4 m and the door you came by rises over the horizon in front of you; the beetles walk straight too and every two of their lines cross twice - there are no parallels; a quarter round, left, a quarter, left, a quarter brings you to the door after three right angles, and the door has turned by a quarter. The planet hangs 160 m north of the tower, a ball seen from the floor; the door moves the body there. On the planet the body is not moved again: the ground under its feet is flat and still, and the planet, what grows on it and its own sky of stars are turned under the body by exactly its steps. Axis across: six, ten, twenty metres. Not tried in a headset.",
+      "category": "annotation",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "non-euclidean",
+        "sphere",
+        "planet",
+        "biome",
+        "geodesic",
+        "great-circle",
+        "no-parallels",
+        "holonomy",
+        "playground",
+        "walkable",
+        "endless"
+      ],
+      "qfep_connection": "A world can be finite and have no edge: walking straight is how you come home, and what lives there walks lines that all meet.",
+      "dev_themes": [
+        "geometry",
+        "foundations",
+        "ecology"
+      ],
+      "dna": {
+        "axes": {
+          "across": [
+            "six",
+            "ten",
+            "twenty"
+          ]
+        },
+        "framing": 0.85,
+        "predicted_degeneracy": {
+          "pair": "across: six ~ ten",
+          "percent": 12.0,
+          "arithmetic": "On a bench (no tower) the planet stands behind its door. A ball 6 m across beside one 10 m across: seen from the bench's standpoint the larger fills about 2.8 times the area of the smaller, and the frame is fitted to the larger subject each time, so the door shrinks instead: the door and board (about 8 square metres of facing) change scale by 10/6 and the ball's grass pattern is laid afresh. Most of the subject's pixels differ: I expect well over 12 %; 12 % is the floor (ball outlines alone)."
+        }
+      }
     }
   }
 }

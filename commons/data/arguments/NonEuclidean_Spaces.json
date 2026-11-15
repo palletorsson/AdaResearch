@@ -566,6 +566,33 @@
       "measured": "tools/probes/walked_tiling_bench.py (python, before building): a 1.4 m square ends 2.444 m from home turned 158.9 on five, 0 on four, 1.233 m turned -73.1 on three. tools/probes/walked_tiling_walk.gd, the tower's walker: 2.66 m / 168, 0.14 m, 1.31 m / -80 (it stops a hand's width from each corner)."
     },
     {
+      "id": "small_planet",
+      "form": "biome",
+      "status": "standing: row small-planet",
+      "title": "A SMALL PLANET",
+      "at": [
+        -9.2,
+        -6.9
+      ],
+      "size": [
+        2.1,
+        0.3
+      ],
+      "claim": "A world can be finite and have no edge: walk straight and you come home; nothing that walks straight on it stays apart from anything else that does.",
+      "from_the_hall": "The bench's SPHERE, and Palle's word on 2026-11-15: a non-Euclidean biome, a small curved sphere of about ten metres that is endless.",
+      "built_from": [
+        "a door frame on the floor",
+        "a ball ten metres across hanging 160 m north of the tower with grass, flowers, stones, trees and mushrooms scattered on it",
+        "five beetles, each on its own great circle, the circles drawn",
+        "a shell of stars round it that turns with it"
+      ],
+      "what_stands": "A dark door with a pink lintel north of shaft A; beyond the slab's edge, far off, a small green ball in the sky.",
+      "what_you_do": "Go through the door. Walk. 31.4 m straight on, the door comes up over the horizon in front of you. A quarter round, left, a quarter, left, a quarter: the door again, turned by a quarter.",
+      "what_it_shows": "The sphere as a place to be in rather than a model on a bench: no parallels (every two beetle lines cross twice), a triangle with three right angles under the feet, and a straight line that closes.",
+      "how": "The door moves the body to the planet, as the wing's door does to its chambers. After that the body is not moved: the ground under it is flat and still, and the planet, its biome and its sky are turned under it by its steps and follow it.",
+      "measured": "tools/probes/small_planet_walk.gd, the tower's walker: on the planet 160 m from the door with no fall counted; after 6.3 m the door is 3.5 m below the top; after 30.6 m it is 0.8 m ahead and leads back to the floor; three quarters with left turns end at the door, turned 94 degrees; out through the turned door (6 of 6). Not tried in a headset."
+    },
+    {
       "id": "halving_door",
       "form": "playground",
       "status": "written",
