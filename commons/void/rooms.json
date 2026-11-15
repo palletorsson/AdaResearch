@@ -53392,6 +53392,78 @@
             "labels": "hidden",
             "editor_label": "A weight, a change, a product | a 5 m track read once a second; plates set phi to -1, 0, +1; a stand keeps weight, change and product apart; looks stay as dots; RESIST / EMBRACE can be shown"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -5.6,
+            2.7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "QFEP_Phi_Term",
+            "stands_at": [
+              -5.6,
+              2.7
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the signed rail to the two patterns, the promenade and the track south of shaft B"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_qfepphi",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_qfepphi)"
+          }
+        },
+        {
+          "id": "word-plus",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            10,
+            -5.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "PLUS",
+            "tall": 0.8,
+            "fit_width": 2.4,
+            "editor_label": "PLUS in standing red letters | a direction; north of shaft B, in front of BETTER"
+          }
+        },
+        {
+          "id": "word-better",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            10,
+            -7.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "BETTER",
+            "tall": 1.35,
+            "fit_width": 6.0,
+            "editor_label": "BETTER in standing red letters | what a direction is taken to mean; north of shaft B, larger, behind PLUS"
+          }
         }
       ],
       "props": [],

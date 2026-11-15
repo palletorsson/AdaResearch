@@ -263,8 +263,8 @@ func _build_once() -> void:
 		var at: Vector2 = plate["at"]
 		_plate_tiles.append(_box(self, Vector3(at.x, 0.012, at.y), Vector3(PLATE, 0.02, PLATE), _city.flat(PALE, 0.8)))
 		_city.floor_words(self, Vector3(at.x, 0.035, at.y), str(plate["says"]), 46 if plate.has("phi") else 26, DARK).outline_size = 0
-	_floor_words.append(_city.floor_words(self, Vector3(-2.2, 0.035, 2.45), "RESIST", 40, PALE))
-	_floor_words.append(_city.floor_words(self, Vector3(0.0, 0.035, 2.45), "EMBRACE", 40, PALE))
+	_floor_words.append(_city.floor_words(self, Vector3(-2.2, 0.035, 1.05), "RESIST", 40, PALE))
+	_floor_words.append(_city.floor_words(self, Vector3(0.0, 0.035, 1.05), "EMBRACE", 40, PALE))
 	# the stand: three numbers in three places
 	var stand := Node3D.new()
 	stand.name = "Stand"
