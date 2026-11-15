@@ -576,6 +576,49 @@
           "arithmetic": "At the moment a still is taken hand has no planks (nobody chose) and clock has laid some: after the bench's settle of a third of a second, none; after two seconds, one. So the two stills differ by the two plates (0.45 square metres, shown only by hand), the board's words, and at most one plank of 1.5 square metres: about 2.5 square metres of a scene of 12 that fills a third of the frame: 7 %; if the still falls before the first plank, 2 %. I predict the lower number and say why: the clock's row is a thing in time."
         }
       }
+    },
+    "consequence_yard": {
+      "lookup_name": "consequence_yard",
+      "map_ready": true,
+      "name": "What Follows?",
+      "class_name": "",
+      "scene": "res://commons/artifacts/consequence_yard/consequence_yard.tscn",
+      "description": "A visual argument in the form of a playground, for the Florensky hall: explosion and its refusal, as doors. Seven doors in a row, a sentence over each: P (the door is open), not-P, P and not-P, P or not-P, P or the alarm rang, Q (the alarm rang), not-Q. Stand still on a plate to give or take back a report, P or not-P; every door whose sentence follows swings open and can be walked through. Behind Q hangs a bell. Under the four-valued rule of the hall's working copy (told true, told false, both, neither) both reports can be held and five doors open, the bell's stays shut: no support; with no reports nothing opens, not even P or not-P. A third plate reads the same reports classically: with both, nothing can fit them, so nothing can fail - all seven open and the visitor can go in and ring an alarm nobody reported. Axis rule: four, classical.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "florensky",
+        "paraconsistent",
+        "explosion",
+        "belnap",
+        "four-valued",
+        "consequence",
+        "playground",
+        "visual-argument",
+        "walkable"
+      ],
+      "qfep_connection": "Keeping two reports that disagree costs two places in memory. What it licenses is a rule somebody chose - and the rule is what lets a body through.",
+      "dev_themes": [
+        "logic",
+        "foundations"
+      ],
+      "dna": {
+        "axes": {
+          "rule": [
+            "four",
+            "classical"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "rule: four ~ classical",
+          "percent": 1.5,
+          "arithmetic": "With no reports (the state a still is taken in) four opens nothing and classical opens one door, 'P or not-P': one leaf of 0.95 x 2.15 m swung away from its opening, uncovering a dark bay: about 2 square metres changed of a front of 8.9 x 2.6 = 23 that fills about a third of the frame: 3 %; the leaf is pale against a pale wall behind: 1.5 %. The board's two changed lines are below what a still resolves."
+        }
+      }
     }
   }
 }
