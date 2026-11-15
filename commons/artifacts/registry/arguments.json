@@ -620,6 +620,49 @@
           "arithmetic": "With no reports (the state a still is taken in) four opens nothing and classical opens one door, 'P or not-P': one leaf of 0.95 x 2.15 m swung away from its opening, uncovering a dark bay: about 2 square metres changed of a front of 8.9 x 2.6 = 23 that fills about a third of the frame: 3 %; the leaf is pale against a pale wall behind: 1.5 %. The board's two changed lines are below what a still resolves."
         }
       }
+    },
+    "six_cards": {
+      "lookup_name": "six_cards",
+      "map_ready": true,
+      "name": "A Sentence, Its Scope, Its Evidence",
+      "class_name": "",
+      "scene": "res://commons/artifacts/six_cards/six_cards.tscn",
+      "description": "A visual argument in the form of a robot station, for the Crisis Synthesis hall: the hall's six cards at body size. Six cardboard cards on crates, each with a sentence in large letters, its scope, its evidence and a record. Stand still on the mark before a card and its check is run there and then, and the record is written with what it does not show: a failed membership case (the diagonal row against four sets), a search to a budget (the Goedel hall's own checker; 4 stops short, 8 finds it), a measured return (four heights, the differences summed round), an exhibited witness (a row of eight looked through for a 1), a countermodel (both reports held, the alarm under the four-valued tables). The sixth card carries a claim from the cardboard on these floors, written by the AI that wrote this description, with no procedure attached: its mark runs nothing and says so. Axis sixth: large (its letters as large as the checked ones, as the hall asks), small.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "evidence",
+        "warrant",
+        "record",
+        "checking",
+        "ai",
+        "robot-station",
+        "visual-argument",
+        "synthesis"
+      ],
+      "qfep_connection": "Five warrants and no common certificate; and one sentence by the writer of all this, as large as the rest, with nothing behind it. Size is not evidence, and the card says who it is.",
+      "dev_themes": [
+        "logic",
+        "foundations",
+        "language"
+      ],
+      "dna": {
+        "axes": {
+          "sixth": [
+            "large",
+            "small"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "sixth: large ~ small",
+          "percent": 0.4,
+          "arithmetic": "The two differ by the lettering of one sentence on one card of six: three lines of 5 cm letters against 2.4 cm ones, on a patch of about 1.3 x 0.4 m: half a square metre of thin strokes in a row of cards 8.8 m wide and 2.2 m high that fills about a third of the frame: 0.9 % of the subject, a third of it ink: 0.4 %. The axis is true to its subject: the hall's point is that this difference is small and is not evidence."
+        }
+      }
     }
   }
 }
