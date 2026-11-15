@@ -18,7 +18,7 @@ extends Node3D
 ## six tiles in all, home 1.2 m away and turned the other way, and 6.28 m straight ahead is where you stand).
 ##
 ## The body is never moved. Its steps are composed as motions of the floor (a pair of complex numbers a, b for
-## z -> (a z + b) / (-k conj(b) z + conj(a)), k the curv of the curvature), and the deck's shader draws the tiling
+## z -> (a z + b) / (-k conj(b) z + conj(a)), k being -1, 0 or +1 with the curvature), and the deck's shader draws the tiling
 ## from that. The arithmetic is this file's own: the wing's geometry_kernel.gd keeps points of H3 and has no
 ## composition of motions.
 const City := preload("res://algorithms/graphtheory/prefab_city.gd")
