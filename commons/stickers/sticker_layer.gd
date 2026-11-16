@@ -47,8 +47,44 @@ extends Node3D
 ## ("Backs_<design>": its silhouette in a card's colour, facing -n), so a visitor walking round the layers sees a card
 ## from behind, not nothing. Its cord and its threads are the board's (sticker_board/sticker_threads.gd).
 ##
+## A TWO-SIDED board (stock cardboard: a wall of a construction, sticker_construction) has a back as well as a front:
+## a record whose normal points back is drawn on the back face (drawn_as: settle with the board's sidedness, n = -Z,
+## at.z = -CARDBOARD), its lift along -Z, out of the cardboard; the body is the wall's box collider, so a back sticker
+## is printed on the back face exactly as a front one is on the front (cut at its edge when it reaches past it). Front
+## and back stickers never stack on each other: their footprints lie CARDBOARD apart along z.
+##
+## SCRIBBLES (stickers.ts Stroke, PENS, drawnStrokes, strokeZ): the pen strokes on a board's faces, drawn here too, so
+## every board host shows its scribbles - a paper board its front's, a cardboard wall both faces' (a back stroke on a
+## board that has no back is not drawn, as the web's updateStrokes skips it). Each face's strokes are ONE mesh
+## ("Strokes_front", "Strokes_back"), in the record's order, a later line over an earlier one: each stroke a flat RIBBON
+## at stroke_z(face) in the board frame, its width, and the rest from its pen as the contract gives it (StickerData.PENS):
+## its cap (round: a half disc at each end; square: half the width on past each end), its join (miter: a corner mitred up
+## to StickerData.MITER_LIMIT times the half width and bevelled past it; round: a round corner, a gentle one mitred up to
+## ROUND_MITER so the line stays one strip), its opacity, and its soft edge (`soft` > 0: the line blurred by a Gaussian
+## whose deviation is soft times its width - the spray's 0.2 - as the alpha across a ribbon soft_reach(soft) widths each
+## side). It is the web's ribbon (cardboard3d.ts strokeRibbon), so one strip covers each part of a line once and a
+## translucent pen keeps one opacity along it. Wound to face out of its face only: a front stroke is not seen from behind
+## the cardboard. A stroke's ribbon is made once and kept while its pen, width, colour, face and points stay; a face's
+## mesh is made again exactly when the list of its ribbons changed.
+## INK LIES ON THE CARDBOARD (stickers.ts drawnStrokes): a sticker on a face is drawn over every scribble on that face,
+## whichever came first, as the web paints a face (paper, scribbles, residue, stickers). A sticker's material (alpha
+## scissor with alpha to coverage) is drawn in the see-through pass, its solid part written to depth first in the depth
+## prepass; the ink is kept under it twice over. By ORDER: the scribbles' material sorts before every other see-through
+## surface (STROKE_PRIORITY), so the stickers and the residue of their face are drawn after it. By DEPTH: the ribbon lies
+## STROKE_LIFT (0.6 mm) off its face and its shader pulls it STROKE_PULL (0.4 mm) toward the eye, so from any side it
+## stays behind a sticker (LIFT, 2 mm) and the residue (RESIDUE_LIFT, 1.2 mm) and in front of its face. Either alone kept
+## the ink under in the probe's views (CI, square on and 55 degrees off); round 1 had neither - a 3 mm pull and the
+## stickers' own order, which sorts by distance - and its lines lay over the stickers seen 55 degrees off.
+##
 ## The host sets `host` (and `surface`) before adding the layer; the layer redraws itself whenever the placements or
-## designs change. It has no _process: a floor's residency pauses and hides it with its floor at no cost.
+## designs change. It has no _process of its own: a floor's residency pauses and hides it with its floor at no cost.
+## STAGED (a cardboard construction's walls, sticker_construction.gd sets `staged` before the layer enters the tree): the
+## layer then draws nothing at once. What a redraw has to do - each design's picture, the stickers, each scribble's
+## ribbon not yet made, the faces' meshes - is done one piece at a time in _process, within a budget of each frame
+## SHARED by every staged layer and thread drawer (stage_may, stage_spent: FRAME_BUDGET_MS), and _process is off again
+## when it is drawn; a change meanwhile plans the pass again (what was made is kept). busy() says whether it is still
+## drawing. So a wall of 100 scribbles costs no frame more than a few milliseconds (the research construction's first
+## build held the main thread 210 to 293 ms in one frame, 2026-11-15).
 
 const StickerData := preload("res://commons/stickers/sticker_data.gd")
 const LIFT := 0.002          # off the surface (stickers.ts / the contract)
@@ -72,6 +108,75 @@ const CAP_SIDES := 96        # a cylinder's cap, cut as three.js cuts the bench'
 # --- the stack ---
 const FOOT_SLACK := 0.001    # a footprint's box reaches this far each way along its n (more than a grid's sag)
 const TOUCH := 0.00001       # footprints that only touch (overlapping by less than 0.01 mm) are not a pile
+# --- the scribbles: the pens are the contract's (StickerData.PENS: cap, join, opacity, soft; StickerData.MITER_LIMIT) ---
+## a round join's gentle corner (up to a 32 degree turn) is mitred too, so its line stays one strip (a choice of the
+## views, cardboard3d.ts ROUND_MITER: the mitre's tip stands at most 4 % of the half width past the round join's arc)
+const ROUND_MITER := 1.04
+const ROUND_STEP := PI / 12.0  # a round cap or join in steps of at most 15 degrees
+## How far a scribble is pulled toward the eye (metres, along the eye's ray). Ink lies on the cardboard: the ribbon lies
+## STROKE_LIFT (0.6 mm) off its face, under the residue (RESIDUE_LIFT, 1.2 mm) and every sticker (LIFT, 2 mm and up).
+## Pulled 0.4 mm along the eye's ray it stands at most 1.0 mm off its face from any side (a pull along the ray rises off
+## the face by at most its own length), so by depth it never comes up to the residue or a sticker, and it stays 0.6 mm
+## or more clear of the face it lies on.
+const STROKE_PULL := 0.0004
+## The scribbles sort before every other see-through surface (Material.render_priority: lower is drawn first) - the
+## stickers (alpha to coverage puts them in the see-through pass) and the residue (priority 0) - so on one face those are
+## drawn after the ink, over it. The line being drawn and the eraser's mark sort over the face's lines (sorting_offset,
+## sticker_pen.gd), still before the stickers.
+const STROKE_PRIORITY := -1
+## The scribbles' one material: the ribbon's colour (linear) and its pen's opacity per vertex; UV.x runs across the
+## ribbon (-1 one edge, 0 the centre line, +1 the other; a round cap's rim is 1) and UV.y is the pen's `soft` (0: a hard
+## edge), whose alpha across a ribbon soft_reach(soft) widths each side is the line one width wide blurred by a Gaussian
+## of soft widths (erf: Abramowitz and Stegun 7.1.26, within 1.5e-7; cardboard3d.ts softAlpha). Depth is not written (one
+## face's strokes lie in one plane: the record's order decides), back faces are culled (a front stroke is not seen
+## through the cardboard), and the ribbon is lit as the face under it is.
+const STROKE_SHADER := """shader_type spatial;
+render_mode blend_mix, depth_draw_never, cull_back, skip_vertex_transform;
+uniform float pull = 0.0004;
+float erf_as(float x) {
+	float s = sign(x);
+	float a = abs(x);
+	float t = 1.0 / (1.0 + 0.3275911 * a);
+	float y = 1.0 - (((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t) * exp(-a * a);
+	return s * y;
+}
+void vertex() {
+	VERTEX = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	NORMAL = normalize(MODELVIEW_NORMAL_MATRIX * NORMAL);
+	VERTEX -= normalize(VERTEX) * pull;
+}
+void fragment() {
+	float ink = 1.0;
+	float soft = UV.y;
+	if (soft > 0.0) {
+		float x = abs(UV.x) * (0.5 + 3.0 * soft);
+		float k = soft * 1.41421356237;
+		ink = 0.5 * (erf_as((x + 0.5) / k) - erf_as((x - 0.5) / k));
+	}
+	ALBEDO = COLOR.rgb;
+	ALPHA = COLOR.a * ink;
+	ROUGHNESS = 0.75;
+}
+"""
+# --- staged drawing (STAGED) ---
+## The share of each frame staged drawing may take (ms), SHARED by every staged layer and thread drawer: a piece of work
+## starts while its frame has spent nothing yet, or still has room for the most a piece of its kind has cost; so a frame
+## carries about this much, or one piece alone where a single piece costs more (a 2000-point line's ribbon, 9 ms).
+const FRAME_BUDGET_MS := 3.0
+
+static var _stroke_material: ShaderMaterial = null
+static var _budget_frame := -1
+static var _budget_spent := 0        # usec of staged work in this frame
+static var _stage_costs: Dictionary = {}   # piece kind -> the most one such piece has cost (usec)
+static var stage_frame_most := 0     # usec: the most staged work one frame has carried (probes; stage_reset())
+static var stage_frames := 0         # frames that carried staged work (probes)
+static var _stage_kinds: Dictionary = {}   # piece kind -> [pieces, usec in all, the most one cost] since stage_reset()
+static var _pictured: Dictionary = {}      # designs whose picture a staged piece has had made (forgotten when the designs change)
+static var stage_slow: Array = []          # staged pieces of a layer that took over 5 ms: [kind, host, design, ms] (probes)
+static var _stage_frame_log: Array = []    # each frame's staged work (usec) since stage_reset(), the frame being drawn not yet in it
+static var _budget_other := 0              # usec of this frame's staged work but the designs' pictures (StickerData.texture)
+static var stage_frame_most_other := 0     # the most of that one frame carried (probes)
+static var stage_marks: Array = []         # [process frame, usec, kind] of each staged piece since stage_reset() (probes; the first 4000)
 
 var host: Dictionary = {}
 var surface: Dictionary = {} # {shape: "sphere", r} or {shape: "cylinder", r, h}: the host's analytic body; {} = body()
@@ -80,12 +185,24 @@ var drawn := 0               # stickers drawn (state on)
 var residue := 0             # peeled stickers drawn as residue
 var backs := 0               # hanging stickers' backs drawn
 var lifts: Dictionary = {}   # id -> the lift each live sticker is drawn at (its place in the stack), for probes
+var sided := false           # the host is a two-sided board (a cardboard wall): it has a back to draw on
+var strokes_drawn := {"front": 0, "back": 0}   # scribbles drawn on each face
+var stroke_builds := 0       # ribbons made (a probe reads how many a change made again)
+var staged := false          # set before the layer enters the tree: it draws a piece at a time (STAGED)
+var stage_usec := 0          # what this layer's staged pieces have cost in all (probes)
+var stage_pieces := 0        # how many pieces they were
 var _sig := ""
+var _stroke_sigs := {"front": "", "back": ""}
+var _kept: Dictionary = {}   # stroke id -> {rec, head, sig, ribbon, version}: each ribbon made once
+var _next_version := 1
+var _stage: Array = []       # the pieces of the pass still to do: [kind, arg]
+var _restage := false        # something changed: the pass is planned again
 
 func _ready() -> void:
 	data = StickerData.get_or_create(get_tree())
 	data.placements_changed.connect(redraw)
 	data.designs_changed.connect(_designs_changed)
+	set_process(false)
 	redraw()
 
 func host_key() -> String:
@@ -104,6 +221,7 @@ static func hangs(s: Dictionary, h: Dictionary, board_depth: float) -> bool:
 
 func _designs_changed() -> void:
 	_sig = ""
+	_pictured.clear()
 	redraw()
 
 ## The body this host's stickers print on (host frame): `surface` when the host set one; else, for a board or a bench
@@ -115,14 +233,170 @@ func body() -> Dictionary:
 		return box_of(get_parent())
 	return {}
 
-## Draw this host's stickers again, when they (or the designs, or the body) changed since the last time.
+## Draw this host's stickers again, when they (or the designs, or the body) changed since the last time; and its
+## scribbles, face by face, when they changed. A staged layer plans the pass and draws it piece by piece (STAGED).
 func redraw() -> void:
 	if data == null:
 		return
+	if staged:
+		_restage = true
+		set_process(true)
+		return
+	_sided_now()
+	_draw_stickers()
+	_draw_strokes()
+
+func _sided_now() -> void:
+	sided = str(host.get("kind", "")) == "board" and data.has_method("board_sided") and bool(data.board_sided(str(host.get("id", ""))))
+
+## Whether a staged layer is still drawing what changed (always false for a layer that draws at once).
+func busy() -> bool:
+	return staged and (_restage or not _stage.is_empty())
+
+## A staged layer's pass, a piece at a time within the frame's shared budget; off again when it is drawn.
+func _process(_delta: float) -> void:
+	if not staged or data == null:
+		set_process(false)
+		return
+	while true:
+		if _restage:
+			_restage = false
+			_stage = [["plan", null]]
+		if _stage.is_empty():
+			set_process(false)
+			return
+		var piece: Array = _stage[0]
+		if not stage_may(str(piece[0])):
+			return
+		_stage.pop_front()
+		var t0 := Time.get_ticks_usec()
+		match str(piece[0]):
+			"plan":
+				_plan()
+			"picture":
+				data.material(str(piece[1]))
+				_pictured[str(piece[1])] = true
+			"stickers":
+				_draw_stickers()
+			"ribbon":
+				_kept_of(piece[1])
+			"material":
+				stroke_material()
+			"strokes":
+				_draw_strokes()
+		var spent := Time.get_ticks_usec() - t0
+		stage_usec += spent
+		stage_pieces += 1
+		stage_spent(str(piece[0]), spent)
+		if spent > 5000 and stage_slow.size() < 40:
+			stage_slow.append([str(piece[0]), host_key(), str(piece[1]) if piece[1] is String else "", snappedf(float(spent) / 1000.0, 0.001)])
+
+## What a staged pass does, in order: each design's picture this session has not made (a first rasterising is the
+## dearest piece, 3 to 9 ms), the stickers when what they are drawn from changed, the ribbon of each scribble not yet
+## made (one that reads the same as the one made is kept, at a hash's cost), the session's stroke material, and the faces'
+## meshes when the list of their ribbons changed. A layer nothing of whose host changed is done with its plan (an op on
+## one wall costs the seven others a fraction of a millisecond each, not a frame's turn for every piece).
+func _plan() -> void:
+	_sided_now()
+	var seen := {}
+	for s in data.stickers_on(host_key()):
+		var d := str(s.get("design", ""))
+		if d != "" and not seen.has(d) and not _pictured.has(d):
+			seen[d] = true
+			_stage.append(["picture", d])
+	if _stickers_sig() != _sig:
+		_stage.append(["stickers", null])
+	var faces_changed := false
+	var versions := {"front": [], "back": []}   # Arrays: a packed array held in a Dictionary is a value (an append lands on a copy)
+	if str(host.get("kind", "")) == "board" and data.has_method("strokes_on"):
+		for s in data.strokes_on(str(host.get("id", ""))):
+			var face := str(s.get("face", "front"))
+			if face != "front" and not (face == "back" and sided):
+				continue
+			var had: Dictionary = _kept.get(str(s.get("id", "")), {})
+			if not had.is_empty() and not is_same(had.rec, s) and str(had.sig) == _stroke_sig(s):
+				had.rec = s     # a truth read again: the same line
+			if had.is_empty() or not is_same(had.rec, s):
+				_stage.append(["ribbon", s])
+				faces_changed = true
+			else:
+				(versions[face] as Array).append(str(had.version))
+	for face in versions:
+		var list: Array = versions[face]
+		if ",".join(PackedStringArray(list)) != str(_stroke_sigs.get(face, "")) or (list.is_empty() != (get_node_or_null("Strokes_" + str(face)) == null)):
+			faces_changed = true
+	if faces_changed:
+		if _stroke_material == null:
+			_stage.append(["material", null])   # the session's first: its shader made in a piece of its own
+		_stage.append(["strokes", null])
+
+## Whether a staged piece of `kind` may start in this frame: the frame has spent nothing on staged work yet, or the
+## most such a piece has cost still fits in FRAME_BUDGET_MS.
+static func stage_may(kind: String) -> bool:
+	_stage_roll()
+	return _budget_spent == 0 or _budget_spent + int(_stage_costs.get(kind, 0)) <= int(FRAME_BUDGET_MS * 1000.0)
+
+## A staged piece of `kind` that took `usec`: charged to this frame's budget, and kept as what such a piece costs.
+static func stage_spent(kind: String, usec: int) -> void:
+	_stage_roll()
+	if _budget_spent == 0:
+		stage_frames += 1
+	_budget_spent += usec
+	stage_frame_most = maxi(stage_frame_most, _budget_spent)
+	if kind != "picture":
+		_budget_other += usec
+		stage_frame_most_other = maxi(stage_frame_most_other, _budget_other)
+	_stage_costs[kind] = maxi(int(_stage_costs.get(kind, 0)), usec)
+	var k: Array = _stage_kinds.get(kind, [0, 0, 0])
+	_stage_kinds[kind] = [int(k[0]) + 1, int(k[1]) + usec, maxi(int(k[2]), usec)]
+	if stage_marks.size() < 4000:
+		stage_marks.append([_budget_frame, usec, kind])
+
+## Since stage_reset() (probes): the most staged work one frame carried (ms), in how many frames, and each kind of
+## piece: how many, their mean and the most one cost (ms).
+static func stage_report() -> Dictionary:
+	var kinds := {}
+	for kind in _stage_kinds:
+		var k: Array = _stage_kinds[kind]
+		kinds[kind] = {"n": k[0], "mean_ms": snappedf(float(k[1]) / maxf(1.0, float(k[0])) / 1000.0, 0.001), "most_ms": snappedf(float(k[2]) / 1000.0, 0.001)}
+	var log := _stage_frame_log.duplicate()
+	if _budget_spent > 0:
+		log.append(_budget_spent)
+	log.sort()
+	var at := func(share: float) -> float: return float(log[mini(log.size() - 1, int(log.size() * share))]) / 1000.0 if not log.is_empty() else 0.0
+	return {"frame_most_ms": float(stage_frame_most) / 1000.0, "frames": stage_frames, "kinds": kinds, "slow": stage_slow.duplicate(),
+		"frame_p50_ms": at.call(0.5), "frame_p95_ms": at.call(0.95), "frame_second_most_ms": float(log[-2]) / 1000.0 if log.size() >= 2 else 0.0,
+		"frames_over_8ms": log.filter(func(v): return int(v) > 8000).size(), "frame_most_but_pictures_ms": float(stage_frame_most_other) / 1000.0}
+
+static func stage_reset() -> void:
+	stage_frame_most = 0
+	stage_frame_most_other = 0
+	stage_frames = 0
+	_stage_kinds = {}
+	stage_slow = []
+	_stage_frame_log = []
+	stage_marks = []
+	_budget_spent = 0
+	_budget_other = 0
+
+static func _stage_roll() -> void:
+	var f := Engine.get_process_frames()
+	if f != _budget_frame:
+		if _budget_spent > 0 and _stage_frame_log.size() < 20000:
+			_stage_frame_log.append(_budget_spent)
+		_budget_frame = f
+		_budget_spent = 0
+		_budget_other = 0
+
+## What this host's stickers are drawn from, as one string: when it is the one drawn, nothing is drawn again.
+func _stickers_sig() -> String:
+	return "%d|%s|%s|%s|%s" % [int(data.revisions.get("designs", -1)), JSON.stringify(body()), depth(), sided, JSON.stringify(data.stickers_on(host_key()))]
+
+func _draw_stickers() -> void:
 	var surf := body()
 	var list: Array = data.stickers_on(host_key())
 	var deep := depth()
-	var sig := "%d|%s|%s|%s" % [int(data.revisions.get("designs", -1)), JSON.stringify(surf), deep, JSON.stringify(list)]
+	var sig := _stickers_sig()
 	if sig == _sig:
 		return
 	_sig = sig
@@ -130,7 +404,7 @@ func redraw() -> void:
 	var on: Array = []
 	var off: Array = []
 	for s0 in list:
-		var s := drawn_as(s0, host, deep)
+		var s := drawn_as(s0, host, deep, sided)
 		if str(s.get("state", "on")) == "on":
 			on.append(s)
 		else:
@@ -149,7 +423,9 @@ func redraw() -> void:
 		var foot := footprint(s, d, g)
 		var curved := bool(g.get("curved", false))
 		# on a board every sticker faces +Z, so the stack compares HEIGHTS (at.z + lift): a later sticker lies a step
-		# over every earlier one it overlaps, at whatever depth either hangs; elsewhere lifts over one surface
+		# over every earlier one it overlaps, at whatever depth either hangs; elsewhere lifts over one surface. On a
+		# wall's back every sticker faces -Z at one at.z: they stack among themselves (a back footprint lies CARDBOARD
+		# from every front one, more than twice FOOT_SLACK, so a back and a front sticker never overlap)
 		var height := float(StickerData.a3(s.get("at"))[2]) if on_board else 0.0
 		var base := maxf(0.0, LIFT - height) if hang else LIFT
 		var lift := base
@@ -295,13 +571,14 @@ func _fill_laid(node_name: String, mat: Material, entries: Array) -> bool:
 ## n = +Z, up laid on the face), ON the paper (at.z = 0) - or, on a board with depth `board_depth`, anywhere from the
 ## paper to that depth in front of it (at.z clamped to [0, depth]); the server settles every op since, so the truth
 ## holds no other. three.js does not do the first: its board host is the face plane only, so an older record on the
-## back gets no decal there and its 3D view lists it as unseated, a translucent quad at its own pose. Elsewhere the
-## record itself.
-static func drawn_as(s: Dictionary, h: Dictionary, board_depth := 0.0) -> Dictionary:
+## back gets no decal there and its 3D view lists it as unseated, a translucent quad at its own pose. On a TWO-SIDED
+## board (`sided`: a cardboard wall) a record whose normal points back is on the back face (n = -Z, at.z = -CARDBOARD).
+## Elsewhere the record itself.
+static func drawn_as(s: Dictionary, h: Dictionary, board_depth := 0.0, two_sided := false) -> Dictionary:
 	if str(h.get("kind", "")) != "board":
 		return s
 	var c := s.duplicate()
-	StickerData.settle(c, null, board_depth)
+	StickerData.settle(c, null, board_depth, two_sided)
 	return c
 
 ## A flat sticker's quad in its host frame: basis columns right * w, up * h, n; origin at + n * lift.
@@ -826,10 +1103,282 @@ func world_positions() -> Dictionary:
 	var surf := body()
 	var deep := depth()
 	for s0 in data.stickers_on(host_key()):
-		var s := drawn_as(s0, host, deep)
+		var s := drawn_as(s0, host, deep, sided)
 		var id := str(s.get("id", ""))
 		if hangs(s, host, deep):
 			out[id] = global_transform * centre_of(s, {}, float(lifts.get(id, maxf(0.0, LIFT - float(StickerData.a3(s.get("at"))[2])))))
 		else:
 			out[id] = global_transform * centre_of(s, surf, LIFT)
 	return out
+
+# ==== the scribbles ====
+
+## Draw this board's scribbles again where they changed: one mesh per face ("Strokes_front", "Strokes_back"), made
+## again exactly when the list of that face's ribbons changed (one drawn, erased, brought back, changed). A back stroke
+## on a board without a back is not drawn. The mesh carries metas for probes: ids (in order), ranges ([first vertex,
+## count] per stroke) and z (stroke_z of its face).
+func _draw_strokes() -> void:
+	var faces := {"front": [], "back": []}
+	if str(host.get("kind", "")) == "board" and data.has_method("strokes_on"):
+		for s in data.strokes_on(str(host.get("id", ""))):
+			var face := str(s.get("face", "front"))
+			if faces.has(face) and (face == "front" or sided):
+				(faces[face] as Array).append(s)
+	var live: Dictionary = {}
+	for face in faces:
+		var kept: Array = []
+		var versions := PackedStringArray()
+		for s in faces[face]:
+			var k := _kept_of(s)
+			kept.append(k)
+			versions.append(str(k.version))
+			live[str(s.get("id", ""))] = true
+		var sig := ",".join(versions)
+		var node_name := "Strokes_" + str(face)
+		if sig == str(_stroke_sigs.get(face, "")) and (kept.is_empty() == (get_node_or_null(node_name) == null)):
+			continue
+		_stroke_sigs[face] = sig
+		strokes_drawn[face] = kept.size()
+		var old := get_node_or_null(node_name)
+		if kept.is_empty():
+			if old != null:
+				remove_child(old)
+				old.queue_free()
+			continue
+		_fill_strokes(node_name, kept, StickerData.stroke_z(str(face)))
+	for id in _kept.keys():
+		if not live.has(id):
+			_kept.erase(id)
+
+## A stroke's ribbon, made once: kept while the record is the same one (an op leaves an untouched stroke's record as it
+## was), or one that reads the same (a truth read again: its points compared by their hash and count, which costs a
+## fourteenth of writing them out - 0.9 ms against 13 ms for the research walls' 700 strokes).
+func _kept_of(s: Dictionary) -> Dictionary:
+	var id := str(s.get("id", ""))
+	var had: Dictionary = _kept.get(id, {})
+	if not had.is_empty() and is_same(had.rec, s):
+		return had
+	var sig := _stroke_sig(s)
+	if not had.is_empty() and str(had.sig) == sig:
+		had.rec = s
+		return had
+	var k := {"rec": s, "sig": sig, "ribbon": stroke_ribbon(s), "version": _next_version}
+	_next_version += 1
+	stroke_builds += 1
+	_kept[id] = k
+	return k
+
+## What a stroke's ribbon is made from, as one string: its face, pen, width, colour, and its points by their hash and
+## count.
+static func _stroke_sig(s: Dictionary) -> String:
+	var pts: Variant = s.get("points", [])
+	return "%s|%s|%s|%s|%s" % [s.get("face", ""), s.get("pen", ""), s.get("width", 0.0), s.get("colour", ""),
+		str((pts as Array).hash()) + ":" + str((pts as Array).size()) if pts is Array else str(pts)]
+
+## One face's ribbons as one ArrayMesh in the board frame, in the order given (no depth written: a later ribbon is drawn
+## over an earlier one).
+func _fill_strokes(node_name: String, kept: Array, z: float) -> void:
+	var verts := PackedVector3Array()
+	var norms := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var cols := PackedColorArray()
+	var idx := PackedInt32Array()
+	var ids: Array = []
+	var ranges: Array = []
+	for k in kept:
+		var r: Dictionary = k.ribbon
+		var base := verts.size()
+		verts.append_array(r.verts)
+		norms.append_array(r.norms)
+		uvs.append_array(r.uvs)
+		cols.append_array(r.cols)
+		for i in (r.idx as PackedInt32Array):
+			idx.append(base + i)
+		ids.append(str((k.rec as Dictionary).get("id", "")))
+		ranges.append([base, (r.verts as PackedVector3Array).size()])
+	var mi := get_node_or_null(node_name) as MeshInstance3D
+	if mi == null:
+		mi = MeshInstance3D.new()
+		mi.name = node_name
+		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(mi)
+	var mesh := ArrayMesh.new()
+	if not idx.is_empty():
+		var arrays: Array = []
+		arrays.resize(Mesh.ARRAY_MAX)
+		arrays[Mesh.ARRAY_VERTEX] = verts
+		arrays[Mesh.ARRAY_NORMAL] = norms
+		arrays[Mesh.ARRAY_TEX_UV] = uvs
+		arrays[Mesh.ARRAY_COLOR] = cols
+		arrays[Mesh.ARRAY_INDEX] = idx
+		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	mi.mesh = mesh
+	mi.material_override = stroke_material()
+	mi.set_meta("ids", ids)
+	mi.set_meta("ranges", ranges)
+	mi.set_meta("z", z)
+
+## The one material every scribble is drawn with (STROKE_SHADER), shared by every layer: sorted before every other
+## see-through surface (STROKE_PRIORITY), pulled STROKE_PULL toward the eye.
+static func stroke_material() -> ShaderMaterial:
+	if _stroke_material == null:
+		var sh := Shader.new()
+		sh.code = STROKE_SHADER
+		_stroke_material = ShaderMaterial.new()
+		_stroke_material.shader = sh
+		_stroke_material.render_priority = STROKE_PRIORITY
+		_stroke_material.set_shader_parameter("pull", STROKE_PULL)
+	return _stroke_material
+
+## How far a soft pen's ribbon reaches each side of its centre line, in widths: half the line and three deviations
+## (`soft` widths each; cardboard3d.ts softReach). The spray's: 1.1.
+static func soft_reach(soft: float) -> float:
+	return 0.5 + 3.0 * soft
+
+## One stroke as a ribbon (cardboard3d.ts strokeRibbon, ported): {verts, norms, uvs, cols, idx} in the board frame at
+## z = stroke_z(face). Its pen is the contract's (StickerData.PENS): its CAP ends the line (round: a half disc at each
+## end; square: half its width on past each end) and draws a dot (a stroke whose points are all one point: a round
+## pen's disc, a square pen's square); its JOIN turns a corner. ONE strip: the segments meet at a corner in shared
+## vertices, mitred (along the bisector, hw / cos(turn / 2) out), so no part of a line is covered twice; only a corner
+## too sharp for that - past StickerData.MITER_LIMIT for a miter join (the chisel), past ROUND_MITER for a round one - is
+## broken, each segment ending square to itself there and the outer side filled: a round join's arc, a miter join's
+## bevel. A soft pen's ribbon (soft > 0) reaches soft_reach(soft) widths each side of its centre line, its uv.y its
+## `soft` (the shader's blur). Every triangle is wound as Godot's front face seen from OUTSIDE its face (clockwise from +Z
+## on the front; from -Z, where x reads mirrored, on the back), so a front stroke is culled from behind the cardboard;
+## normals out of the face; colour the stroke's (linear) with its pen's opacity as alpha; uv (across, soft).
+static func stroke_ribbon(s: Dictionary) -> Dictionary:
+	var pen: Dictionary = StickerData.PENS.get(str(s.get("pen", "")), StickerData.PENS.fine)
+	var soft := maxf(0.0, float(pen.get("soft", 0.0)))
+	var face := str(s.get("face", "front"))
+	var back := face == "back"
+	var z := StickerData.stroke_z(face)
+	var width := float(s.get("width", pen.width))
+	var hw := width * soft_reach(soft) if soft > 0.0 else width / 2.0
+	# an object, not a Dictionary: a packed array held in a Dictionary is a value, and an append to it lands on a copy
+	var out := _Ribbon.new()
+	out.back = back
+	var pts: Array = []
+	for p in s.get("points", []):
+		if not (p is Array and (p as Array).size() == 2):
+			continue
+		var v := Vector2(float(p[0]), float(p[1]))
+		if pts.is_empty() or (pts[-1] as Vector2).distance_to(v) > 1e-7:
+			pts.append(v)
+	var square := str(pen.get("cap", "round")) == "square"
+	var miter := str(pen.get("join", "round")) == "miter"
+	if pts.size() == 1:
+		var c: Vector2 = pts[0]
+		if not square:
+			_fan(out, c, 0.0, TAU, hw)
+		else:
+			var a := _vert(out, c + Vector2(-hw, -hw), -1.0)
+			var b := _vert(out, c + Vector2(hw, -hw), -1.0)
+			var cc := _vert(out, c + Vector2(hw, hw), 1.0)
+			var d := _vert(out, c + Vector2(-hw, hw), 1.0)
+			_rtri(out, a, b, cc)
+			_rtri(out, a, cc, d)
+	elif pts.size() > 1:
+		var dir: Array = []
+		for i in pts.size() - 1:
+			dir.append(((pts[i + 1] as Vector2) - (pts[i] as Vector2)).normalized())
+		var last := dir.size() - 1
+		var starts: Array = []
+		var ends: Array = []
+		var d0: Vector2 = dir[0]
+		var dl: Vector2 = dir[last]
+		starts.append(_pair(out, (pts[0] as Vector2) - (d0 * hw if square else Vector2.ZERO), Vector2(-d0.y, d0.x), hw))
+		for i in range(1, last + 1):
+			var a: Vector2 = dir[i - 1]
+			var b: Vector2 = dir[i]
+			var turn := atan2(a.x * b.y - a.y * b.x, a.x * b.x + a.y * b.y)
+			var ratio := 1.0 / cos(turn / 2.0)
+			var p: Vector2 = pts[i]
+			if absf(turn) < 1e-9 or ratio <= (StickerData.MITER_LIMIT if miter else ROUND_MITER):
+				var m := Vector2(-a.y - b.y, a.x + b.x).normalized()
+				var shared := _pair(out, p, m, hw * ratio)
+				ends.append(shared)
+				starts.append(shared)
+				continue
+			ends.append(_pair(out, p, Vector2(-a.y, a.x), hw))
+			starts.append(_pair(out, p, Vector2(-b.y, b.x), hw))
+			# the outer side of the corner: the right of a left turn, the left of a right turn
+			var side := -1.0 if turn > 0.0 else 1.0
+			var oa := Vector2(-a.y * side, a.x * side)
+			var ob := Vector2(-b.y * side, b.x * side)
+			if not miter:
+				_fan(out, p, atan2(oa.y, oa.x), turn, hw)
+			else:
+				_rtri(out, _vert(out, p, 0.0), _vert(out, p + oa * hw, 1.0), _vert(out, p + ob * hw, 1.0))
+		ends.append(_pair(out, (pts[last + 1] as Vector2) + (dl * hw if square else Vector2.ZERO), Vector2(-dl.y, dl.x), hw))
+		for i in last + 1:
+			var la: int = starts[i][0]
+			var ra: int = starts[i][1]
+			var lb: int = ends[i][0]
+			var rb: int = ends[i][1]
+			_rtri(out, ra, rb, lb)
+			_rtri(out, ra, lb, la)
+		if not square:
+			_fan(out, pts[0], atan2(d0.x, -d0.y), PI, hw)            # from the left of the start, round behind it
+			_fan(out, pts[last + 1], atan2(-dl.x, dl.y), PI, hw)     # from the right of the end, round ahead of it
+	var n := out.pos.size()
+	var verts := PackedVector3Array()
+	var norms := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var cols := PackedColorArray()
+	verts.resize(n)
+	norms.resize(n)
+	uvs.resize(n)
+	cols.resize(n)
+	var hex := str(s.get("colour", "#16191e"))
+	var colour := (Color(hex) if Color.html_is_valid(hex) else Color("16191e")).srgb_to_linear()
+	colour.a = float(pen.opacity)
+	var normal := Vector3(0.0, 0.0, -1.0 if back else 1.0)
+	for i in n:
+		var q: Vector2 = out.pos[i]
+		verts[i] = Vector3(q.x, q.y, z)
+		norms[i] = normal
+		uvs[i] = Vector2(out.across[i], soft)
+		cols[i] = colour
+	return {"verts": verts, "norms": norms, "uvs": uvs, "cols": cols, "idx": out.idx}
+
+## A ribbon's vertex `across` of the way over it (-1 right edge, 0 the centre line, +1 left edge; a round rim is 1).
+static func _vert(out: _Ribbon, p: Vector2, across: float) -> int:
+	out.pos.append(p)
+	out.across.append(across)
+	return out.pos.size() - 1
+
+## A ribbon's left and right vertices at p, `k` out along the normal `nrm`.
+static func _pair(out: _Ribbon, p: Vector2, nrm: Vector2, k: float) -> Array:
+	return [_vert(out, p + nrm * k, 1.0), _vert(out, p - nrm * k, -1.0)]
+
+## One ribbon triangle wound as Godot's front face seen from outside its face (none for a sliver).
+static func _rtri(out: _Ribbon, a: int, b: int, c: int) -> void:
+	var pos := out.pos
+	var pa := pos[a]
+	var area := (pos[b].x - pa.x) * (pos[c].y - pa.y) - (pos[b].y - pa.y) * (pos[c].x - pa.x)
+	if not (absf(area) > 1e-14):
+		return
+	# counter-clockwise seen from +Z is area > 0; Godot's front face is clockwise seen from outside
+	if (area > 0.0) == out.back:
+		out.idx.append_array([a, b, c])
+	else:
+		out.idx.append_array([a, c, b])
+
+## A round cap or corner: a fan about c from the angle `from` through `sweep`, in steps of at most ROUND_STEP.
+static func _fan(out: _Ribbon, c: Vector2, from: float, sweep: float, hw: float) -> void:
+	var steps := maxi(1, ceili(absf(sweep) / ROUND_STEP))
+	var centre := _vert(out, c, 0.0)
+	var prev := _vert(out, c + Vector2(cos(from), sin(from)) * hw, 1.0)
+	for k in range(1, steps + 1):
+		var a := from + sweep * float(k) / float(steps)
+		var v := _vert(out, c + Vector2(cos(a), sin(a)) * hw, 1.0)
+		_rtri(out, centre, prev, v)
+		prev = v
+
+## A ribbon as it is made: its vertices in the board plane, how far across the ribbon each lies, its triangles, and
+## whether it is wound for the back.
+class _Ribbon:
+	var pos := PackedVector2Array()
+	var across := PackedFloat32Array()
+	var idx := PackedInt32Array()
+	var back := false

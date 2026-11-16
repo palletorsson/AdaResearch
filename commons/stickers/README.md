@@ -6,7 +6,12 @@ stickers from the same files and change them through the same ops. On 2026-11-14
 paradoxes and punctums in 2.5D in VR, and for an editor that moves, adds and removes stickers and ties connections:
 a board may now have DEPTH (its stickers hang in front of the paper) and HANG (each on a cord), and THREADS tie two
 stickers of a board with a word (Threads and hanging boards, below). The full editor is the web's (`/stickers`): in VR
-the pad sticks, peels, and ties two stickers by a drag from one to the other (Not done yet says what is missing).
+the pad sticks, peels, and ties two stickers by a drag from one to the other (Not done yet says what is missing). Later
+that day he asked for temporary CONSTRUCTIONS of cardboard, like 3D mind mapping on tables: walls read from different
+directions, stickers clustered on them, scribbles in graffiti pens of different kinds and sizes, and red thread between
+the walls. A wall is a board of stock `cardboard`, two-sided (a sticker or a scribble on either face); the construction
+stands its walls on tables (`commons/artifacts/sticker_construction/`, below), and a worn PEN writes on any board's face
+(`sticker_pen.gd`, below). The first construction is the research mind map rebuilt in cardboard (`research`).
 
 ## One truth, three media
 
@@ -14,7 +19,8 @@ the pad sticks, peels, and ties two stickers by a drag from one to the other (No
 |---|---|---|
 | `commons/data/stickers/designs.json` | what a sticker looks like: a vector model of layers plus the SVG string derived from it | the encyclopedia (`POST /api/stickers` with `doc: designs`) |
 | `commons/data/stickers/boards.json` | the boards every medium draws (`visitors` 1.6 x 1.0 m; `research`, `readings` and `edges`, 2.4 x 1.36 m, flat; `mindmap`, 4.2 x 2.8 m of cork with `depth` 0.9 and `hang`) | the encyclopedia (`doc: boards`) |
-| `commons/data/stickers/placements.json` | where every sticker is, its state and who stuck it, the THREADS tied between stickers (`threads`), plus the op ids already applied | the encyclopedia only, through ops (`POST /api/stickers/ops`) |
+| `commons/data/stickers/placements.json` | where every sticker is, its state and who stuck it, the THREADS tied between stickers (`threads`), the SCRIBBLES on boards' faces (`strokes`: pen, width, colour, points in the board's frame, who drew it, erased or on), plus the op ids already applied | the encyclopedia only, through ops (`POST /api/stickers/ops`) |
+| `commons/data/stickers/constructions.json` | the CONSTRUCTIONS: tables (w, d, h, at, yaw) and walls (a cardboard board standing on a table at `at`, turned `yaw`) | the encyclopedia (`POST /api/stickers` with `doc: constructions`, saved whole) |
 | `commons/data/stickers/mindmap.json` | the mind map's SEED: its board, seven themes (one depth each), 28 stickers and 31 threads with what ties each two (`seen_by`: the readers' lenses) | laid once by `tools/stickers_seed.ts --mindmap-board`; from then on the stickers and threads change by ops |
 | `commons/data/stickers/readings.json` | AUTHORED: the paradoxes, punctums and EDGES read out of the texts, each with its verbatim quote, file and lettering (an edge also names its kind: `cannot_claim`, `leaves_out`, `still_open`, `not_yet`, `foreclosed`, `dark_spot`, `does_not_fit`) | by hand; `tools/stickers_seed.ts` checks every quote is still in its text |
 
@@ -35,8 +41,18 @@ The rules live in `ada_encyclopedia/src/lib/stickers.ts`. `sticker_data.gd` port
 `settle` (with a board's depth), `RESIDUE`, `hostKey`, `cleanBoard`'s reading of `depth` and `hang` (`clean_board`,
 `board_spec`), `applyOps` with its threads (`tie`, `untie`, `retie`, `word`), the words a thread op carries
 (`cleanWord`, `cleanWhy`), and the geometry every medium draws a thread and a cord with: `pinOf`, `threadCurve` (its
-`at(u)` is `curve_at`), `cordOf` and `drawnThreads`. Change one, change both. The game never writes the truth. It reads
-it, applies its own ops over it the same way the server does, and posts those ops.
+`at(u)` is `curve_at`), `cordOf` and `drawnThreads`. Since 2026-11-14 also the cardboard: `CARDBOARD` (0.005 m),
+`twoSided`, `settle` with a board's sidedness (a normal that points back puts a sticker on the back face, `n = -Z`,
+`at.z = -CARDBOARD`), `cleanBoard`'s `stock`, `cleanConstruction`, `cleanConstructionsDoc`, `wallsOf`, `rotY`,
+`wallPoint`, `wallYaw`, `drawnWallThreads`, `applyOps` tying two stickers on two walls of one construction, and the
+scribbles: `PENS`, `PEN_LIST`, `PEN_COLOURS`, `STROKE_POINTS`, `STROKE_LIFT`, `cleanStroke`, `drawnStrokes`, `strokeZ`
+and the ops `scribble`, `erase`, `unerase` (one id space for stickers, threads and strokes). Since 2026-11-15 also the
+rule that A THREAD NEVER PASSES THROUGH CARDBOARD (`THREAD_OVER`, `THREAD_CLEAR`, `wallLines`, `overWalls` with its
+`intoWall`, `threadPieces`, `overBoard`, and the `over` of `drawnWallThreads`; The cardboard construction, below) and
+the pens' drawing numbers (`PENS` `join` and `soft`, now a number, `MITER_LIMIT`, `PEN_COLOUR_NAMES`, `STROKE_STEP`,
+`STROKE_DOT`). `letterStrokes` and `flattenPath` (lettering as pen strokes) are not ported: the game does not letter.
+Change one, change both. The game never writes the truth. It reads it, applies its own ops over it the same way the
+server does, and posts those ops.
 
 The ports that decide what is stored (the turns, `settle`, `apply_ops`) work in double precision on `[x, y, z]`
 Arrays, never in `Vector3`, whose components are 32-bit. They also do the arithmetic in the server's order: `Math.hypot`
@@ -59,6 +75,7 @@ sticker is the size of the printed one, border included.
 | host | frame | in Godot |
 |---|---|---|
 | `{kind: board, id}` | the middle of the board's face, x right, y up, z out. A sticker on a board faces out of it, `n = +Z`, and lies on the paper, `at.z = 0`; on a board with `depth` it hangs anywhere from the paper to `depth` in front of it, `at.z` in `[0, depth]` | the `Face` StaticBody3D of `sticker_board` |
+| `{kind: board, id}` of stock `cardboard` (a WALL) | the same frame: the front face at z = 0, the back face at z = -CARDBOARD. A sticker on the back has `n = -Z`, `at.z = -0.005`; a scribble's points are in this frame as seen from the FRONT on either face (a back seen from behind shows board x at -x). The frame stands in its construction where `wallPoint` puts its origin, turned `R_y(wallYaw)` | the `Wall_<board>` StaticBody3D of `sticker_construction` |
 | `{kind: primitive, id: box\|sphere\|cylinder\|slab}` | that primitive's centre on the bench (BENCH in stickers.ts) | each primitive's StaticBody3D in `sticker_bench` |
 | `{kind: void_work, floor, work, body?}` | the frame of the work's exported GLB | `Artifact.global_transform * Transform3D(Basis(UP, deg_to_rad(-museum_yaw)))`, `museum_yaw` from the rooms.json row's config, 0 when absent |
 | `{kind: void_floor, floor}` | the `Floor<i>` node | `Building/Floor<i>` |
@@ -99,6 +116,14 @@ without them every board is flat); and a design that may not turn freely is snap
   (and sets `why` when the op carries one, even an empty one).
 - **A thread is drawn** while it is tied and both its stickers exist, are on that board and are on (`drawnThreads`): a
   peeled end hides it, a restored end shows it again, and an end moved to another board hides it until it comes back.
+- **Between two walls.** A `tie` may also join two stickers on two WALLS of one construction (`applyOps` with the walls,
+  `wallsOf`; refused for walls of two constructions, a wall and a paper board, or a wall and a primitive). Such a thread
+  is drawn by its construction, between the pins `drawnWallThreads` gives in the construction's frame.
+- **A scribble is an event too.** `scribble` adds a stroke: a pen (`fine`, `marker`, `chisel`, `spray`), a width inside
+  that pen's range, a colour, 2 to 2000 points in the board's frame, cleaned as `cleanOp` cleans it (4 places, within
+  10 m) and kept on the board by `applyOps` (points past its edge are put back on it). It is refused on a board's back
+  when the board has none (a paper board) and on a board the boards do not hold. `erase` keeps it, `state: erased`, with
+  who erased it and when; `unerase` brings it back; a second erase or unerase is skipped.
 - **A peel is an event.** The sticker stays, with `state: peeled` and `peel: {by, t}`. It is drawn as RESIDUE (stickers.ts
   `RESIDUE`): its silhouette, which is the art's alpha including the border, in one flat colour `#c4bba6` at 0.42 of that
   alpha. It is always drawn beneath the stickers that are on, and it is never deleted. Godot takes the colour as a
@@ -211,8 +236,34 @@ board's Face, the bench's box and slab).
   layers sees a card from behind. On a board the stack compares heights (`at.z` plus the lift): a later sticker lies a
   step over an earlier one it overlaps at about the same depth, and stickers at different depths never stack. A peeled
   hanging sticker leaves its residue where it hung. Its cord and its threads are the board's (below).
-- The layer has no `_process`. It redraws on `placements_changed` / `designs_changed`, and only when its own stickers
-  (or its board's depth) changed. A floor's residency pauses and hides it with its floor at no cost.
+- **A two-sided board** (stock `cardboard`: a wall). A record whose normal points back is drawn on the BACK face
+  (`drawn_as` with the board's sidedness: `n = -Z`, `at.z = -CARDBOARD`), lifted along -Z out of the cardboard; the body
+  is the wall's box collider, so a back sticker is printed on the back face as a front one is on the front, cut at its
+  edge. Front and back stickers never stack on each other (their footprints lie 5 mm apart). An older record written
+  behind a wall (`at.z = -0.03`) is drawn on the back face, as `settle` stores it.
+- **Scribbles** (`strokes`, `drawnStrokes`): every board host draws them, a paper board its front's, a wall both faces'.
+  A back stroke on a board without a back is not drawn (the web's `updateStrokes` skips it too). Each face's strokes are
+  ONE mesh (`Strokes_front`, `Strokes_back`), in the record's order, a later line over an earlier one: each stroke a flat
+  RIBBON at `strokeZ(face)` (0.6 mm off the face, out of the cardboard), its width, its pen's cap and join as `PENS`
+  gives them (round: a half disc at each end and round corners; the chisel's square cap, half the width on past each
+  end, its corners mitred up to `MITER_LIMIT`, bevelled past it), its pen's opacity, and its pen's softness (`PENS`
+  `soft`, carried per vertex: the spray's line blurred by a Gaussian of 0.2 widths, as the alpha across the ribbon).
+  It is the web's ribbon (`cardboard3d.ts` `strokeRibbon`): one strip covers each part of a line once, so a translucent
+  pen keeps one opacity along it, and it is wound to face out of its face only. INK LIES UNDER THE STICKERS of its face
+  (the contract since 2026-11-15; the web's views draw it so too): the ribbon's shader pulls it only 0.4 mm toward the
+  eye (`STROKE_PULL`) and its material sorts before the stickers' (`STROKE_PRIORITY` -1), so a sticker on the same face
+  is drawn over every line there, whichever came first (check CI). Either change alone keeps the ink under; round 1's
+  3 mm pull at priority 0 drew it over every sticker. A stroke's ribbon is made once and kept while its pen, width,
+  colour, face and points stay; a face's mesh is made again only when the list of its ribbons changed. Blending is in
+  linear light, as in three.js: where two strokes of the 0.95 chisel overlap the ink reads visibly darker (32 against 12
+  in sRGB in `wall_back_close.png`), more than in the SVG view, which blends in sRGB.
+- It redraws on `placements_changed` / `designs_changed`, and only when its own stickers (or its board's depth)
+  changed. A layer on a board, the bench or a Void work draws at once and has no `_process`. A layer on a construction's
+  wall draws STAGED (`staged`): its plan, its pictures, its stickers, its ribbons, the material and the strokes' mesh are
+  pieces done in `_process` within a budget of 3 ms a frame (`FRAME_BUDGET_MS`) that every staged layer and the
+  construction share (`stage_may`, `stage_spent`), and `_process` stops once it is drawn (`busy()`). The plan skips
+  what is already drawn, and a stroke is known by a hash and the count of its points (0.9 ms for 700 strokes instead of
+  13 ms as JSON). A floor's residency pauses and hides it with its floor at no cost.
 
 ## Threads and hanging boards (`commons/artifacts/sticker_board/`)
 
@@ -255,6 +306,102 @@ this device's own ops at once), and nothing is redrawn when nothing it is made f
   `Rods` carries `depths`; `Tags` holds `Tag_<thread id>` (`Word`: the Label3D, `Card`: its card). The node keeps
   `drawn_ids`, `cord_ids`, `rebuild_ms` and `redraws`.
 
+## The cardboard construction (`commons/artifacts/sticker_construction/`)
+
+`sticker_construction` (config `construction`, default `research`) stands a construction of `constructions.json` from
+that file and `boards.json` through StickerData: the same construction the encyclopedia's /stickers 3D view stands
+(`cardboard3d.ts` `standConstruction`), by the same contract (`wallPoint`, `wallYaw`). Its frame is the floor under its
+origin, +Y up: the node's own frame.
+
+- **A table** is a top 6 cm thick whose upper face is the table's `h`, on four 6 cm legs set in 12 cm along its width and
+  10 cm along its depth (the bench's table, so the two read as one furniture), at `at` turned `yaw`; one StaticBody3D
+  with a box collider for the top and for each leg.
+- **A wall** is its board as a slab of cardboard in the board's own frame: w x h, `CARDBOARD` (5 mm) thick, the front
+  face at z = 0 and the back at z = -0.005, the four cut edges showing the corrugation (C flute, 128 flutes a metre; the
+  two liners pale bands at the faces, the fluted medium a wave between them). The faces are the board's paper colour
+  times a pale grain (2.5 mm cells, faint streaks along the flutes, a few darker specks), smoothed between cells: the
+  web's `cardboardGrain`, as a shader, so nothing is loaded. The frame stands where `wallPoint` puts the board frame's
+  origin, turned `R_y(wallYaw)` (check CW: every corner of every wall within 1 mm of the contract restated, measured
+  0.004 mm). Each wall is ONE body (`Wall_<board>`, meta `sticker_host {kind: board, id}`) whose one box collider is
+  exactly the slab, and ONE StickerLayer that draws both faces (Drawing, above): the pad sticks and peels on either face,
+  the pen writes on either.
+- **A thread never passes through cardboard** (the contract, 2026-11-15). Where a thread's curve, seen from above,
+  runs into a standing wall's cardboard below that wall's top edge, the thread goes over the edge: up the near face,
+  over, down the far face. `overWalls` holds every PIECE to every wall: starting from the one curve between the pins,
+  the first piece (from the first pin) that runs into a wall goes over the wall it meets first - two points
+  `THREAD_CLEAR` (3 mm) off that wall's near and far face and `THREAD_OVER` (4 mm) above its top edge, where the
+  piece's line crosses the cardboard's middle, or at the wall's end when the line grazes the wall and leaves by its end
+  - and the pieces are held again, until none runs into any wall. The near face is the one the line comes in through;
+  a line that comes in by the wall's end, or starts within the cardboard's thickness (just past the wall before, when
+  two stand back to back), comes from the side the other pin is not on. A piece that stays above the top edge passes
+  over. A thread goes over one wall twice at most (there and back, round a wall's end), so a sticker on a face pressed
+  against another wall - which no thread can reach without passing through cardboard - is not chased round them for
+  ever. The first rule (11-15) tested only the rest of the curve from the last point over a wall: the review found a
+  piece up to a tall wall passing through a low wall in its way, a near side flipped when two walls stand back to back,
+  and rare grazes at a wall's end (2 to 5 of 17,500 random ties on the research walls); the refined rule passes none of
+  them through (tests/stickers/cardboard.test.ts; the parity's property: none over the research walls with every
+  sticker mirrored onto the other face and every pair tied, none over eleven odd layouts, none in 87,500 random ties on
+  the research walls). ITS KNOWN LIMITS: two walls that cross, meet at a joint (a T or a V at any angle but square, a
+  square T or corner whose end wall is taller than the other by more than THREAD_OVER), or stand back to back with
+  less than 4 mm between them (or touch back to back offset along their length): the points over one wall can fall
+  inside the other, and a thread may then pass through it (in the parity's random constructions 5 of 2224 threads, all
+  at one crossing of two walls of different heights; two 0.8 m walls 2 mm apart let 152 of 256 threads through; a V of
+  30 degrees with pins within 12 mm of its joint 121 of 1960, the review of 11-16). And a curve that clears a lower
+  wall's top by less than a string's radius stays one curve, its string resting up to its radius into that edge (walls
+  of different heights only; the rule passes over at the top edge itself so that its own hop of 3.08 mm counts as over).
+  The research has none of these, and the plan does not stop anyone standing walls so; going over walls that close
+  together at the taller top, and passing over only at top + 3 mm, is the rule's next step. The parity counts threads
+  through such walls apart (crossing, at a joint or close back to back, unless they meet only end to end at tops within
+  THREAD_OVER) and fails on any other. Near a pin the 5.3 mm lift off its face (below) can carry a string a millimetre
+  or two into a neighbouring wall's end: on the U one thread, 1.6 mm into cb_edges' end, in both media. `threadPieces(p, q,
+  over)` cuts the thread there; its tag hangs at the middle of the longest piece. On one wall, a thread from its front
+  to its back goes over its top edge the same way (`overBoard`, in the board's frame). The truth's research has three
+  such threads, each over the sign table's two walls: from the U to the front of 'everything worked', which faces out. The clearances keep the thread's centre line out of the cardboard; a
+  2.8 mm tube clears the top edge by 0.28 mm, and the agreed colour's 4 mm tube rests 0.9 mm into it, as thread
+  rests on an edge.
+- **The threads** (`construction_threads.gd`, extending the board's `sticker_threads.gd` and keeping its tube, tag, mesh
+  and material code): every thread a wall holds within itself (`drawnThreads`, as a board draws its own; one from its
+  front to its back over its top edge by `overBoard`, carried by `wallPoint`) and every thread tied between two of its
+  walls (`drawnWallThreads` and its `over`), DRAWN IN PIECES (`threadPieces`): each piece a tube along `threadCurve` in
+  the construction's frame, 16 chords and 8 sides, a ball where two pieces meet, the agreed colour thicker, a red pin
+  head at each end. Only the pin ends are lifted off their faces as a board lifts a string off its paper (LIFT + r + 0.5
+  mm, along that face's outward normal), so every ring stays within 6.5 mm of the contract's pieces; the points over an
+  edge are the contract's own. The tag stands at the middle of the tag piece: FLAT on a face, facing out, when that
+  piece runs along the faces its ends stand on (a wall's own thread, two walls side by side; as the web's `endFaces`
+  decides), above the string on a hop over an edge, otherwise hanging below its string's middle in the open, a
+  billboard as on a board. A billboard on a face turned toward an eye behind the wall and its edge passed through the
+  5 mm of board: from behind, slivers of the front's tags showed on the back (the first `construction_behind.png`);
+  flat, the cardboard hides them (check CT counts 0 tag pixels on a back seen 35 degrees off its normal). The web hides
+  such a tag from the far side instead (`tagSeen`), which needs a test every frame.
+- **What is not stood:** a wall whose board is gone, is not cardboard, or whose table is not there (`missing` says why);
+  a thread with an end on such a wall.
+- **It follows the truth** (StickerData's file watch, a second; this device's own ops at once) and builds again only
+  what changed: a table whose record changed, a wall whose board's size or paper changed (one whose place changed is
+  only moved); the layers redraw their own stickers and scribbles and the threads their own (check CU: a wall moved in
+  the file stands at its new place within 0.4 to 0.7 s, the same body; a repapered wall is made again within 1.1 s and
+  no other).
+- **It builds ONCE, at the frame's end** (`_queue_build`): the tower adds a work and THEN calls `apply_grid_config`, and a
+  build in `_ready` plus one on the config would build twice (`edge_carving.gd`, `tools/probes/edge_carving_bench.gd`
+  B1; check CB). That build only PLANS: the tables and the walls are then made one piece a frame, the walls' layers
+  draw their stickers and scribbles and the threads their pieces (look, plan, the wall's own, six threads between walls
+  a piece, commit), all within the shared 3 ms a frame, and `_process` stops when everything is drawn (`drawing()`).
+  The shared looks (the tags' shaders, font and materials, the boxes and slabs by size) are made once a session, one a
+  frame, before the first build (`_warm`).
+- **The cost** (an RTX 3070 at 1280 x 800, other Godot runs alongside): round 1 built `research` (4 tables, 8 walls, 35
+  stickers, 700 scribbles, 33 threads and their tags) in one frame, 210 to 293 ms on the main thread (492 ms under the
+  measure below). Staged (2026-11-15): the build's own slice 0.63 ms, then 73 frames of 2.6 ms at the median and 4.0 ms
+  at the 95th percentile, everything drawn in 0.64 s; in the running tower at floor 199 2.6 and 3.7 ms, drawn 4.7 s
+  after the floor began to load. What stays is once a session and outside the slicing: the renderer's first draw of
+  each new shader holds one long frame (the walls' faces and edges 115 to 148 ms, the strokes' 88 to 160 ms, the tags'
+  35 to 56 ms, with a warm shader cache too), the first pictures (`StickerData.texture`'s SVG rasters, up to 27 ms) and
+  the tags' first card material (11.5 to 25 ms). A second construction, everything warm, draws in 0.2 to 0.3 s with no
+  frame over 7.3 ms. An op on a wall's stickers or scribbles shows within about 3 frames; a tie or a cut between walls
+  about 0.6 s later (every thread is drawn again each pass). In view from its open side it adds 0.30 ms a frame (0.12
+  ms of GPU), and nothing of it runs per frame once drawn (check CC).
+- For probes: `walls` (board id -> body), `tables`, `missing`, `builds`, `made` (tables and walls made, over all
+  builds), `build_ms`, `build_frame`, `drawing()`, `stage_cost()`; the Threads node keeps `kinds` (thread id -> `wall`
+  or `between`, also a meta of `Strings`, with `pieces`), `flat_tags` and `busy()`.
+
 ## The pad (`sticker_pad.gd`, worn)
 
 The pad follows the tape roll's WORN contract exactly (`wear`, `put_away`, `fire_worn`, `release_worn`, `apply_config`,
@@ -269,9 +416,12 @@ In VR that is the right controller's trigger. On a desktop it is the left mouse 
   drawn at 0.4 of that size (check Z).
 - **Tap** (< 0.3 s) on a surface: **stick**. This is an `add` op. The host is the first that applies: a node with meta
   `sticker_host` (the board, the bench), then a Void work (its mount), then a Void floor (its slab, walls and props),
-  else the tap is refused. A board takes a sticker on its face only. The `Face` body's box collider also answers a ray
-  from behind, and that hit is refused with "THE BACK OF THE BOARD" (check Q). An accepted one is sent with `n = +Z`
-  and `at.z = 0`. **On a board with depth too:** the aim passes through the stickers that hang in front (they have no
+  else the tap is refused. A paper board takes a sticker on its face only. The `Face` body's box collider also answers a
+  ray from behind, and that hit is refused with "THE BACK OF THE BOARD" (check Q). An accepted one is sent with `n = +Z`
+  and `at.z = 0`. **A cardboard wall takes one on either face:** a hit on its back is sent with `n = [0, 0, -1]` and
+  `at.z = -CARDBOARD` and drawn there; a hold from behind peels the back sticker under the aim, never the front one 5 mm
+  away through the cardboard (the pick keeps to the face the aim hit); a hit on a wall's cut edge is refused, "THE EDGE
+  OF THE BOARD" (check CP). **On a board with depth too:** the aim passes through the stickers that hang in front (they have no
   body) to the cork, and the sticker is stuck ON the paper, `at.z = 0`, as on a flat board; on a hanging board it then
   hangs on a cord down the cork like the rest (check PD). Moving it out in depth is the web's (`/stickers`), not the
   pad's.
@@ -306,6 +456,54 @@ In VR that is the right controller's trigger. On a desktop it is the left mouse 
   `size` (`design` or 0 means the design's own `size_m`; otherwise metres) and `reach`.
 - The pad also builds a small sheet of stickers (the next design, large, and the two after it). The inventory shows it
   as the hand's miniature, and the association plinth holds it as its example.
+- **A drag ties across walls too:** from a sticker on one wall of a construction to one on another wall of it, a `tie`
+  op the server's rules allow (`StickerData.tie` refuses walls of two constructions).
+
+## The pen (`sticker_pen.gd`, worn)
+
+A graffiti pen for any board's face: the front of any board, either face of a cardboard wall. It keeps the pad's WORN
+contract, so the inventory's wand forwards the trigger unchanged. Config (the inventory's knobs): `pen` (`fine`,
+`marker`, `chisel`, `spray`: stickers.ts `PENS`; or `eraser`), `width` (`pen`, the pen's own; `thin`, its least;
+`thick`, its most; or metres, kept inside the pen's range as `cleanStroke` keeps it), `colour` (`#rrggbb`, or a name of
+`PEN_COLOUR_NAMES`: black, white, thread red - `red` too - pink, blue, yellow, green, orange), `reach` and `mode`
+(`auto`, `tip`, `aim`).
+
+- **In VR** (worn on an XRController3D) the TIP stands 8 cm ahead of the controller. Hold the trigger with the tip
+  within 1.5 cm of a face, over its board, and the pen is down on that face at the tip's foot. It stays down while the
+  trigger is held and the tip stays within 2 cm of that face's plane over the board (a hand pushed through the
+  cardboard, which stops nothing in VR, still writes on the face it went down on, up to 10 cm behind it); lifted, the
+  line is sent, and touched down again the pen begins another (check PV). Which face: the back of a wall when the tip is
+  behind the middle of the cardboard; a paper board only its front. Within 12 cm the tip's foot shows on the face as a
+  faint disc of the stroke's width, full when touching.
+- **On a desktop** (worn on the camera) hold the left button (or F) aiming at a face: the pen is down on the face the aim
+  hit, and each point is where the aim's ray crosses that face's plane, kept on the board (the web's 3D pen,
+  `cardboard3d.ts` `facePoint`: a drag off the board runs along its edge). A press on anything that is not a board's
+  face is refused in words once (`THE PEN WRITES ON A BOARD OR A CARDBOARD WALL`, `AIM AT A BOARD TO WRITE ON IT`,
+  `THE BACK OF THE BOARD`, `THE EDGE OF THE BOARD`).
+- **The points** (the web's `penStrokes`, `pens.ts` `thinStroke`): in the board's frame as a stroke stores them - x and
+  y as seen from the FRONT, on the back too, so a line drawn left to right on a back seen from behind runs from +x to -x
+  - kept on the board, one kept whenever the pen has moved `STROKE_STEP` (2 mm) from the last kept one. At the line's
+  end the pen's own last place is kept too, in the last kept point's place when it lies within 1 mm of it (no line ends
+  in a sliver). A press that did not move is a DOT: two points `STROKE_DOT` (0.5 mm) apart, inward from the edge it is
+  near. A still hand is never still
+  to the last bit (the aim's crossing and a tracked tip wander by nanometres), so an end within 0.05 mm of the last point
+  is that point: kept as pens.ts keeps it, a still press was stored as one point twice and not as a dot. A line of more
+  than 2000 points (`STROKE_POINTS`) goes on as the next stroke from where the last one ends, so nothing is resampled
+  away.
+- **One op a stroke:** at the line's end each stroke is ONE `scribble` op through `StickerData.scribble` - `cleanOp`'s
+  cleaning, `applyOps`' rules first, then the outbox and the POST, as the pad's ops go - drawn at once by the board's
+  StickerLayer. While the line is being drawn the pen shows it itself, in ribbons of 64 points made with the layer's
+  `stroke_ribbon` and its material (so what is shown is what will be drawn; only the last ribbon is made again); on the
+  line's end they go.
+- **The eraser** (`pen: eraser`): a press takes off the line under the tip (VR) or the aim (desktop) - the latest line
+  of that face within its half width plus `ERASE_REACH` (4 mm; on a desktop at least 6 px at the aim's distance), as
+  the web's `strokeAt` picks it - as ONE `erase` op; a hold does not sweep. Before the press a blue mark (#2e85ff, half
+  opaque, 4 mm wider than the line) lies over the line that would go, and the words name whose line it is. With no line
+  under it the press is refused in words (NO LINE HERE TO ERASE; on a table or at nothing, THE ERASER TAKES LINES OFF A
+  BOARD OR A CARDBOARD WALL) and nothing is sent. An erased line stays in the record with who erased it; only the web
+  brings one back (`unerase`, "Bring back the last erased").
+- **The pen** is a dark barrel with its band and its nib in the ink's colour; the inventory shows it as the hand's
+  miniature.
 
 ## In the Void (`sticker_world.gd`)
 
@@ -369,7 +567,50 @@ One node, made by one gated line in `game.gd` (see "Switched on from outside thi
   `python tools/export_void_floors.py 199 ada_run/live-preview-exports/tower/199-stickers "--preview-items=[\"edge-carving-dark-spot\"]"`
   (the ids in the list; the floor editor's automatic export does the same for a work that has no model yet).
 
-All four are in `commons/artifacts/registry/stickers.json`, with the pad's token `sticker_pad`.
+All four are in `commons/artifacts/registry/stickers.json`, with the pad's token `sticker_pad`, the construction's
+`sticker_construction` and the pen's `sticker_pen`.
+
+## On the web: the Board view, the plan and 3D (`/stickers`)
+
+The encyclopedia's page draws the same truth (SVG in Design and Board, three.js in 3D) and changes it through the same
+ops and the same two whole-document saves (boards, constructions).
+
+- **Addresses.** `?board=<id>#board` opens a board (`&face=back` its back, `&tool=pen` or `&tool=eraser` a tool in hand).
+  `?construction=<id>` opens a construction: standing, in the 3D tab (a bare link opens 3D; `&from=open`, `left`,
+  `behind`, `right` or `above` is the side the camera starts from), or its plan in the Board tab (`#board`). The two
+  tabs read and write the one key. `?work=<floor>/<work>` opens a Void work in 3D (`<prefix>*`: the works of a floor
+  whose ids begin so).
+- **A cardboard board in the Board view** shows Front or Back. The back is drawn as seen from behind (the board's x
+  mirrored), and each face shows only its own stickers and scribbles; a stick, a move or a turn on the back goes out
+  with `n = [0, 0, -1]`. The Pens card, on every board (a paper board has its front only; the VR pen writes and erases
+  there too): Stick, Pen, Eraser (S, P, E), the pens of `PENS` with a width inside the pen's range, the eight
+  `PEN_COLOURS` by their names. A drag is ONE `scribble` op, sent when the button is let go; the eraser takes the latest
+  line under it (`erase`), and "Bring back the last erased" sends `unerase`, for a line erased in any medium. A thread to the
+  other face, or to another wall of the construction, is pinned on this face and named, and its far end opens that
+  wall; "Tie to" lists the construction's other walls.
+- **The plan** ("Which board": a construction's plan, from above): x to the right and z down the page, the tables, each
+  wall a thick line of cardboard with a mark on the side its front faces, the threads between walls as straight lines
+  between their pins (a thread bends over a wall in height only, so from above it stays straight). Drag a table or a
+  wall (a wall's foot stays on a table top, and over another table it moves onto that one); R and Shift+R turn 15
+  degrees; the arrows move 1 cm, 10 cm with Shift. Add a wall (a new cardboard board is saved first, then the wall),
+  take one out (its board, stickers, scribbles and threads stay), open a face (double-click, Enter, Shift+Enter for the
+  back). Every change saves the whole constructions document against the revision its draft BEGAN from (a drag, a run
+  of keys): when another browser saved in between, the save is refused (409), the page reloads and says so, rather than
+  writing the old construction over the other's move. An Add stands its wall on the plan as it is when its new board
+  has been saved, built on whatever came in meanwhile (this plan's own drag, or another browser's move the poll took):
+  standing a wall changes nothing else. A refusal shows the construction as the server holds
+  it.
+- **3D** stands the construction as Godot does (`cardboard3d.ts` `standConstruction`, by `wallPoint` and `wallYaw`).
+  The walls are two-sided hosts (stick, move and nudge on either face; tables and cut edges stop the ray), the same
+  pens and eraser sit in a row under the stage, and the threads between walls are drawn in pieces over the walls they
+  would pass through, with a ball where two pieces meet; each pin end is lifted off its face as VR lifts it (the first
+  piece from the lift to none at its first point over a wall, the last from none to the lift), so a thread between
+  two walls side by side does not lie half in their cardboard; a tag hangs at the middle of its longest piece and is
+  hidden from beyond the face it runs along (`tagSeen`). Ink lies under the stickers: ink, the line being drawn and the
+  eraser's mark draw before the residue and the stickers of their face.
+- **The poll.** Every 3 s an open page asks `/api/stickers?since=<placements revision>&boards=..&constructions=..&designs=..`
+  and reloads when any of the four changed elsewhere (VR, another browser, a seed). The route reads the three
+  revisions off the files' heads (`peekRevision`), so designs.json (1.7 MB) is not parsed every 3 s.
 
 ## Checks
 
@@ -414,6 +655,67 @@ All four are in `commons/artifacts/registry/stickers.json`, with the pad's token
   up (TH, TG), a cut thread still drawn (TC), the cords 2 cm too high (CD), the tag at `u = 0.4` (TG), one radius for
   every thread (TH), hanging stickers 3 mm off their depth (DP), a redraw every frame (FT: 5.4 ms a frame more) and a
   pad that hangs what it sticks 0.3 m out (PD).
+- **The cardboard (CB .. CC, in the same probe).** The probe copies `constructions.json` too, seeds the copy with a
+  sticker on cb_gap's BACK behind a front one, an older record behind cb_hand (`at.z = -0.03`) and a back scribble on the
+  paper board `visitors`, and stands the copy's construction `research` apart (`CARDBOARD_AT`, turned 20 degrees) in the
+  tower's order. It RESTATES `wallPoint` (`_contract_wall_point`), as it restates `pinOf` and `threadCurve`, and since
+  the second round `wallLines`, `intoWall`, `overWalls`, `overBoard` and `threadPieces` in doubles (a third
+  implementation: change it with the contract and the port). The copy is seeded with two threads that must go over
+  cardboard too: from cb_gap's front to its back, and from its back to cb_worked; since the third round (2026-11-16) also
+  a second construction of its own (two walls back to back, touching, and four walls 0.8, 0.45, 0.5 and 0.9 m high in a
+  row, every pair of their stickers tied: 281 threads, 235 over a wall, 0 of 3.9 million samples inside cardboard but
+  from a pin pressed between the two backs; round 2's walk fails CT there, 5 threads through), and W2, the pen handed
+  over as the game does it (a real plinth holding a sticker_pen: on its cap, inert, picked up into graffiti, on the belt
+  and in the hand, one scribble when worn). On 2026-11-16 (third round) 56 checks, all passing; the second round's 55
+  were these: the 43 above, G, and CB one build at the frame's end, then staged, 4 tables, 8 walls,
+  each collider exactly its slab, the build's own slice 0.63 ms, the staged frames 2.6 ms at the median and 4.0 at the
+  95th percentile, at most three named once-a-session pieces over 8 ms (round 1's code under the same measure: 492 ms
+  in one frame); CW every wall corner within 0.004 mm of the contract,
+  every table corner within 0.002 mm (the same corners against a turn the wrong way: 1620 mm); CF 35 front and 2 back
+  stickers each on its face (1 mm), 163 front and 537 back scribbles each face's in order on `strokeZ`, inside its pen's
+  reach, wound out of its face, the paper board's back scribble not drawn, and cb_gap square on with its threads and
+  stickers hidden: 5527 red fine-liner pixels from behind, 0 from in front (3866 dark marker pixels there); CT 16
+  threads between walls and 19 within one, 5 of them over a wall (the truth's three over the sign's two walls, the
+  seeded front-to-back thread over cb_gap's top edge, 3 mm off each face and 3.08 to 4 mm over the edge, the seeded
+  thread to cb_worked over three walls), every ring within 6.5 mm of the restated pieces (the pin lift), each word on
+  its tag at the middle of its tag piece, a cut one gone and back when tied (615 and 650 ms, staged), 0 tag pixels on
+  cb_counted's back seen 35 degrees off its normal, and THE PROPERTY on what is drawn: 0 of 846648 points (every 0.4 mm
+  along every thread, against every wall) inside cardboard, where the one-curve versions of the 5 would pass through
+  (233 points); with 127 more pairs tied in the probe, 46 of 162 threads over a wall, 0 of 6.1 million points inside;
+  CP from in front the front sticker, from behind the back one at the same place, a tap from behind stored with
+  `n = [0, 0, -1]` and `at.z = -0.005` at the hit and drawn there (0.0 mm), a hold from behind peeling the back one only,
+  the cut edge refused; PN a 0.2 m drag at 1 mm a frame one op of 101 points (one every 2 mm), first and last on the aim
+  (0.0 mm), shown while drawn (130 vertices) and gone after, the same on cb_gap's back seen from behind, a still press
+  the dot `[[0.21, -0.23], [0.2105, -0.23]]`, a 2101-point line two strokes (2000 and 102 points, the second from the
+  first's end), a press on a table or at nothing refused with no op; PV a tip 1 cm off the face writes, lifted to 3 cm
+  the line is sent before the trigger is let go, 5 cm through the air writes nothing, down at 5 mm a second line (33
+  and 27 points, each on its own path), and 1 cm behind cb_gap's back it writes on the back; CU a wall moved in the file
+  stands at its new place within 0.4 to 0.7 s, the same body, a repapered wall made again within 1.1 s and no other (35
+  to 51 ms); CC the construction in view from its open side adds 0.04 ms of GPU a frame and no measurable frame time
+  (-0.15 ms, the run's noise), with no `_process` anywhere in it; since the staging, 0.30 ms (0.12 ms of GPU) and no
+  per-frame work once drawn; CI ink under stickers: a 2 cm line drawn after a sticker and across it changes 0 pixels of
+  the sticker's middle, square on and at 55 degrees, on a front and on a back, and shows beside it; PS the pens' shapes
+  from the contract: the chisel's square cap and its mitred right angle reach half the width times the root of 2 (7.071
+  mm), its 150-degree corner is bevelled (5.0 mm), fine and marker reach 5.0 mm everywhere, the spray 1.1 widths with
+  soft 0.2; PE five presses of the eraser, each ONE `erase` of the line its mark showed first (aimed at a crossing it
+  takes the later line, then the earlier; on cb_gap's back by the aim; by the tip on a front, and nothing in the air;
+  by the tip on a back), each line erased by `vr:probe` and no longer drawn, and refused with no op at no line and on a
+  table. Pictures: `construction_open.png`,
+  `construction_behind.png`, `wall_back_close.png`, `pen_lines.png`, `cf_gap_front.png`, `cf_gap_back.png`,
+  `ct_counted_behind.png`; `pen_ops.json` holds every op the pen made. `--only=cardboard` runs the room, J, these and G
+  (30 s); `--construction-script=`, `--pen-script=` and `--threads-script=` run them on scratch copies. Twelve scratch
+  mutants each failed exactly the checks meant for them (and a clean run passed all): built in `_ready` and again on the
+  config (CB); every wall turned the wrong way (CW); every wall made again on every build (CU); the layer settling a
+  wall's records as a paper board's (CF, and CP, which looks at the back sticker it stuck); every scribble on the front's
+  plane (CF); the pad picking a wall's stickers as a paper board's (CP); the committed pad, which refuses every back
+  (CP); every frame's point kept (PN, and PV, which counts the 2 mm keep too); a back's points mirrored (PN); a tip that
+  never lifts (PV); the tags as billboards (CT); no threads between walls (CT). In the second round each new check was
+  bitten by its own mutant: no over points, and no `overBoard` (CT); a boolean softness, and no mitre (PS); the
+  eraser taking the first line, refusing nothing, and sweeping on a hold (PE); a construction built in one frame (CB:
+  eight frames over 8 ms, the worst 75.8 ms); round 1's 3 mm pull at priority 0 (CI). Either half of the ink rule alone
+  passes CI, which the layer's doc says. C and D counted every heart on
+  `visitors` as the pad's; since 2026-11-15 the truth holds a heart stuck there on the web, so they count the hearts
+  there before the tap.
 - **The print against three.js:** `tools/probes/stickers_fix2_parity.gd` (headless, `--script`, `-- --out=<json>
   [--layer=<path>]`) dumps the layer's curved print (`curved_mesh` at lift 0) for fourteen records on the bench's sphere
   and cylinder. A node runner from the encyclopedia puts the same records through `sticker-decal.ts` `stickerDecal` on
@@ -470,6 +772,51 @@ All four are in `commons/artifacts/registry/stickers.json`, with the pad's token
   }
   fs.writeFileSync(outPath, JSON.stringify({boards: out}));
   ```
+- **The cardboard constructions against the server's:** `python tools/probes/stickers_cardboard_parity.py [--mutants]
+  [--fuzz=5000]` runs `stickers_apply_ops.gd` (an optional 6th argument `<constructions.json>`; the boards may be `-`)
+  and `stickers_cardboard_geometry.gd` (`wall_point` at 8 points of every wall and every sticker's pin, `wall_yaw`,
+  `drawn_wall_threads`, `drawn_strokes`, `stroke_z`, `walls_of`, the cleaning of boards, constructions and strokes)
+  against `tools/probes/stickers_cardboard_runner.ts` (the same through stickers.ts). On 2026-11-14: 86 fixture ops in
+  four variants (with and without the boards and the walls) and 5000 seeded random ops, 0 differences; the geometry 0
+  beyond 1e-9 (largest 2.02e-23, Godot's and V8's cos(PI/2)); 15 one-rule mutants each break only their own runs.
+  On 2026-11-15 the geometry probe gained `--mode=over` (the over runs: `wall_lines`, every thread between walls with
+  its `over`, pieces, tag and each piece's control point, `over_board` on every one-board thread, and 54 named cases):
+  over the truth's research walls with every on sticker mirrored onto the other face and every pair tied (2116 threads
+  between walls, going over 0, 1, 2 or 3 walls 525, 1002, 533 and 56 times; 167 front-to-back threads on one wall),
+  over nine odd layouts (walls side by side with and without a gap, back to back, at 37 degrees, on tables 0.45 to 1.4
+  m high, three in a row) and over seeded random constructions: 0 differences in every run, the largest 8.88e-16
+  (Godot's sin and cos on Windows are x87's, one ulp off V8's at a random yaw; every count, tag and index agrees, as
+  `SKIN` keeps each decision 1e-9 from a boundary). The gate: `python tools/probes/stickers_cardboard_parity.py
+  --fuzz=5000 --mutants --workers=6`, about 6 minutes for 253 Godot runs (2026-11-16: 360 s). It exits 0 only when every
+  run shows 0 differences; when the named cases (59 since the refined rule: 43 over walls, 9 over a board, 7 of pieces,
+  among them the review's cases - a low wall in the way of the piece up to a tall one, two walls back to back from
+  front to front, a pin pressed between them) give the outcome each was built for (FIXTURE INTENT); when THE PROPERTY
+  holds on the contract's answers (every drawn piece of every thread, sampled every 0.4 mm, out of every wall's
+  cardboard, but from a pin pressed against another wall; threads through walls too close to each other - crossing,
+  or back to back with under 4 mm between them away from their ends - are counted apart, the rule's known limit); and
+  when each of 30 mutants bites within its declared runs (the over rule's: the rule held once, the old walk, the old
+  near side, the old threshold, a cap of one crossing a wall, no cap - a hang counts -, the middle line instead of the
+  slab, no clamp to the wall's end, the near side flipped, the tag on the last of equals, the walls' order reversed, the
+  front face as the line, no skin, no vertex, no bottom). On 2026-11-16 the property found 0 threads through cardboard
+  in the research (2116 threads, 1591 over a wall), in eleven odd layouts (1911, 1418; 54 from a pressed pin, 24 of
+  those through, allowed) and in the random constructions (2224, 1788), with 5 counted apart there, at one crossing of
+  two walls of different heights; as one curve 1591, 1418 and 1788 of them would pass through. `tools/probes/stickers_cardboard_node.gd` (C1 .. C13,
+  headless) checks the node on a copy: reading constructions.json, `board_sided`, `wall_threads` and `strokes_on`, a
+  back stick, a tie between walls drawn at once, scribble / erase / unerase, the watch, the headset copy, a document
+  that does not clean, the POST size cap (`MAX_BODY`), the truth untouched, and (C13) no piece of any thread between the
+  research walls or across one wall lies inside cardboard (sampled every 0.4 mm: 1678 threads over a wall, 178 over a
+  top edge; as plain curves all of them would pass through).
+- **The web's own checks** (from the encyclopedia): `npx tsx --test tests/stickers/*.test.ts` (127 tests on
+  2026-11-16) and the three type gates `npx tsc -p tests/stickers/tsconfig.json --noEmit`, `tsconfig.svg.json` and
+  `tsconfig.three.json`. `cardboard.test.ts` holds the contract (the U property: every pair of stickers on the fronts
+  and backs of the seeded U tied, no piece inside any wall, sampled every 0.4 mm, and without the rule more than 40
+  would pass through; since the refined rule also two walls back to back, a pin pressed between them, walls of
+  different heights in a row, and the rule over eight odd layouts - three of these fail against the first rule);
+  `three-cardboard.test.ts` holds the 3D drawing to it (the tubes' centre lines as drawn, 2.6 million samples; the
+  pin ends lifted as VR lifts them, so a thread between two walls side by side stays out of both; ink under stickers by
+  three.js's own transparent sort); `svg-cardboard.test.ts` the Board view (the pens, the eraser and Bring back on a
+  paper board too) and the plan (a drag begun at one revision, the page refreshed by the poll mid-drag, the save sent
+  with the revision the drag began from).
 - **The round trip:** `python tools/stickers_roundtrip.py` (needs the encyclopedia's dev server on :3003) copies the
   truth into a sandbox, posts an add the way the page does, lets the game (`tools/probes/stickers_roundtrip.gd`) see it
   by its own file watch, then has the game stick one and post it, and reads it back from `GET /api/stickers?sandbox=`.
@@ -516,6 +863,29 @@ Three shared files do it. None is edited from here (forum thread 261113-pcs7b):
 - `commons/void/game.gd`: one line after the floor stream is configured. It makes the StickerWorld only in the main
   tower and only when `res://commons/data/stickers/placements.json` exists. It uses `load()`, not `preload()`, so a
   broken sticker script cannot stop the Void from compiling.
+- **The construction and the pen (2026-11-15):** on floor 199 the row `stickers-cardboard` (artifact
+  `sticker_construction`, config `construction: research`) at (4.0, 2.5) facing 0, its open side toward the spawn row;
+  in `items.json` the item `graffiti` (token `sticker_pen`, mount `worn`, knobs `pen` - fine, marker, chisel, spray,
+  eraser - `width` and `colour`), right after the sticker pad, with no `collect`; and, as the pad has one, the pen on
+  a plinth of its own near the pad's (`stickers-pen`, `stickers-pen-plinth`, config `item: graffiti`, at (5.55,
+  -4.35)): taking it collects the item, which is the only way a desktop player reaches a worn item (measured in the
+  running tower 2026-11-16: it lies on its cap, 0.0 mm off, inert; the desktop grab collects graffiti and the belt then
+  holds it). Not at (5.55, -3.0), where its cap's corner stood 13 mm from the floor's timeline walk and the two plinths'
+  access footprints overlapped; the example lies ACROSS its cap (facing 90) with a pink band and nib (config `colour`),
+  because the dark barrel along the dark cap showed a visitor only its 16 mm end. Where the construction stands was measured in
+  the running tower (a scratch probe standing the construction on the floor as `floor_content.gd` mounts a work): at (0,
+  2.0) facing 0 the floor under it is clear and no work's box overlaps it, but the floor's TIMELINE WALK
+  (`commons/data/artifact_timeline_walk.json`, derived by `tools/artifact_timeline.py` from rooms.json, routed round
+  shafts, columns and walls, not round works) has the Lambda Promenade's stand (#1033) at (-1.25, 3.75), in the
+  construction's open mouth 0.85 m from its sign table, and its next leg to (6.75, -3.75) runs through the U and under
+  the right table's back corner (the leg arriving at #1033 passes 6 cm from the left table). At (4.0, 2.5) facing 0 the
+  floor is clear too, nothing overlaps (the promenade 1.98 m off, the pad's plinth 3.93 m), no stand lies in its
+  footprint, every leg of the walk clears every table by 0.97 m or more, shaft B is 1.25 m off, and from the spawn's eye
+  the first thing a ray to the construction meets is its sign wall. Measured again on 2026-11-15 after floor 199 was
+  restaged that evening (another session brought the hall's own works to the arrival and stood its argument there):
+  built once at (4.0, 0, 2.5), 240 rays find the floor under it clear, no part of another work is in its box (the
+  nearest the fluid form 0.22 m off and the signed walk 0.34 m), all eight walls' faces are clear from the spawn's eye
+  (0, 1.6, 7.8), and none of its 33 threads passes through cardboard.
 
 ## Not done yet
 
@@ -525,7 +895,7 @@ Three shared files do it. None is edited from here (forum thread 261113-pcs7b):
   `user://stickers/<doc>.json` and calls `call_group("sticker_data", "reload")`; this node already reads that copy
   when it is newer. It also proposes a `{k: sticker}` uplink in `vr_link.py`. Until then, `pull_vr_stickers.py` is
   the wire.
-- **Only stick, peel and tie in VR.** Move (in depth too), restore, note and front, and the threads' untie, retie and
+- **Only stick, peel, tie and scribble in VR.** Move (in depth too), restore, note and front, and the threads' untie, retie and
   word, exist as ops and in the web views (`/stickers`), but have no gesture here yet; `sticker_data.gd` makes each of
   them the way the server cleans it (`untie`, `retie`, `relabel`) for a gesture to call. The inventory forwards only the
   trigger to a worn item (`fire_worn` / `release_worn`) and the pad's tap, hold and drag are taken, so cutting a thread
@@ -557,4 +927,29 @@ Three shared files do it. None is edited from here (forum thread 261113-pcs7b):
 - Not yet walked in a headset. The running tower was checked once on 2026-11-13 by a scripted run at floor 199 with no
   input: it made the StickerWorld, drew the board and the bench, and hosted a work sticker and a floor sticker. The
   probe also stands in a miniature Void with the real node names and metas. Nor is the mind map, nor the drag that
-  ties: its 2 degrees (between a hold and a drag) and the tags' 15 px from 2 m are numbers to try on a wrist.
+  ties: its 2 degrees (between a hold and a drag) and the tags' 15 px from 2 m are numbers to try on a wrist. Nor the
+  construction and the pen: the pen's 8 cm tip, its 1.5 cm touch and 2 cm lift, and the 55 cm gaps either side of the
+  sign table into the construction's U are numbers to try with a body.
+- **The pen is tested worn** on the probe's camera and on a plain node standing in for a controller, not through the
+  inventory's wand. **Bringing a line back** (`unerase`) is the web's only: the pen's trigger writes or erases.
+- **The grip in VR PLACE mode** on a worn pen or pad flashes NO TAPE LAID: `becoming_catalyst.gd` sends the grip to the
+  worn item's `undo_last`, which only the tape roll has (found by the review, 2026-11-15). An undo of the pen's own last
+  line (an `erase` of it), or of the pad's last sticker, would need that call to speak of more than tape; the file is
+  not this folder's.
+- **The first draw of each new shader** holds one long frame once a session (the walls' faces and edges 115 to 148 ms,
+  the strokes 88 to 160 ms, the tags 35 to 56 ms on a desktop, with a warm shader cache too): the staging cannot move
+  it. StandardMaterial3D variants the tower already compiles (a grain or flute texture, the ink's profile as a
+  texture, as the web draws it) or a warm-up at load would. `StickerData.texture` rasterises each design on the main
+  thread (up to 27 ms for the first): ThorVG, the alpha fix and the mipmaps could run on a waited WorkerThreadPool task,
+  with only `ImageTexture.create_from_image` left on the main thread.
+- **A tie or a cut between walls shows about 0.6 s later**, because every thread is drawn again each pass; a tube kept
+  per thread by what it is made of would show it within a few frames.
+- **A cardboard board on a `sticker_board`** (no construction) would draw a front-to-back thread straight through it:
+  `sticker_threads.gd` does not apply `overBoard` yet. No such board stands today.
+- **A long pen line is a heavy op.** Each 2000-point pending scribble costs about 2 ms on every reload of the view, and
+  the outbox is rewritten whole on every op (30 such lines are about 1 MB; measured by the port). The pen keeps one
+  point every 2 mm and no fewer.
+- **The pen does not letter.** `letterStrokes` and `flattenPath` (stickers.ts: lettering as pen strokes, which laid the
+  walls' titles and the backs' words) are not ported; lettering needs the sticker alphabet's glyphs too.
+- **Tags may sit on each other** where two threads' middles meet (on cb_gap's front, THE LIMIT and EVERY LEVEL), as on
+  the web: a tag stands at its curve's middle, nothing moves it aside.

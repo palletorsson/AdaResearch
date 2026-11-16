@@ -45,6 +45,10 @@ extends Node3D
 ##     goes to `refused` with its reason and is no longer drawn; M2 the truth then holding them drops them from `sent`
 ##   W through the inventory as the game routes it: the items.json item "stickers" worn by InventoryHand.sync_worn, the
 ##     trigger through InventoryWand.press / release (neither changed); skipped, and said so, without that item
+##   W2 the pen as the game hands it over: an association_plinth (item graffiti) holding a sticker_pen example as the
+##     floor stands them - the pen lies ON the cap (1 mm) and stands inert; the shell picked up collects graffiti
+##     (Items.collected(), on a copy in the probe's folder), the hand holds it on its belt and in the hand, the example
+##     back home; worn through sync_worn, the wand's press / release make one scribble of the item's default pen
 ##   T naming a Void work: by its mount's name (no scan of floor_content's exhibits), an id a node name cannot hold
 ##     scanned once and then cached; the cost of a call with 2001 exhibits held
 ##   Y configure() fails closed: post "false", "" or absent on a node pointed elsewhere -> off, with no script error and
@@ -77,6 +81,71 @@ extends Node3D
 ##   TV a DRAG ties: the trigger down on one hanging sticker, let go on another of the board: one tie op, drawn at once,
 ##     nothing peeled; let go on the cork past the hold: nothing tied or peeled, and the pad says why
 ## Pictures: mindmap_front_3m.png, mindmap_side.png, mindmap_edge.png, mindmap_tag_2m.png.
+## The CARDBOARD CONSTRUCTION of the copy (constructions.json 'research': 4 tables, 8 two-sided walls), stood apart
+## (CARDBOARD_AT, turned CARDBOARD_YAW) in the tower's order. The contract's wallPoint, overWalls, overBoard,
+## threadPieces and wallLines are RESTATED here (_contract_wall_point, _c_over_walls ...), as pinOf and threadCurve are,
+## in doubles, so a fault in the port shows too. The copy also holds, for CT, a thread on cb_gap from its front to its
+## back (over its top edge) and one from that back to a front of cb_worked (over cb_gap, cb_edges and cb_worked):
+##   CB it builds ONCE at the frame's end when the tower adds it and THEN configures it: one build, 4 tables (a collider
+##     per top and leg), 8 walls (one box collider each, exactly the slab), one Tables, Walls and Threads node, none
+##     missing; and NO FRAME STALLED: the bodies' build, each frame of the shared looks made before it and the frames of
+##     the staged drawing after it (its walls' stickers, scribbles and threads, sticker_layer.gd STAGED) at most 8 ms of
+##     the main thread - of the staged frames 95 %, and all but at most 3, each of those a once-a-session piece named in
+##     the result (StickerData's first SVG rasters, a first material), at most 50 ms - all drawn within 15 s; the frames'
+##     own times (vsync off) against the same view before it, the longest of them with what this lane did in them (the
+##     renderer's first draw of each new shader is one long frame a session, which no slicing of the drawing moves); what
+##     round 1 did is the "before" run (--construction-script with its scripts: one frame of some 250 ms)
+##   CW every wall stands where wallPoint puts its board frame: its 8 corners, front (z = 0) and back (z = -CARDBOARD),
+##     within 1 mm; every table's top at h, its corners where at and yaw put them (1 mm)
+##   CF each face draws its own: every live sticker on the face settle gives it (a normal that points back on the back,
+##     n = -Z, at.z = -CARDBOARD; an older record at at.z = -0.03 too), at its x, y and its face (1 mm); every scribble of a
+##     face in that face's mesh, in the record's order, on stroke_z of its face, within its pen's reach of its line,
+##     wound to face out of its face; a back scribble on a PAPER board (seeded in the copy) not drawn; and seen in
+##     pixels: the back's red fine-liner words are there from behind and nowhere from in front
+##   CT every thread the construction holds is drawn and no other, in its pieces: between two walls (drawnWallThreads,
+##     over every wall in its way) and within one (drawnThreads; from its front to its back over its top edge), each
+##     piece's rings on the restated curve of the restated piece (1 cm: the pin ends are lifted off their faces), its
+##     word on its tag at the middle of the longest piece; A THREAD NEVER PASSES THROUGH CARDBOARD: no point of any drawn
+##     thread's centre line, tried every 0.4 mm, lies inside any wall's cardboard - the truth's threads, the two seeded
+##     ones, and every pair of 17 stickers (two fronts a wall and the seeded back) tied here and cut again - while the
+##     plain curves of the same threads would pass through; the seeded front-to-back thread goes over cb_gap's top edge
+##     in three pieces; a thread between walls cut is gone (drawn again within a few frames, staged) and tied again is back.
+##     The restated overWalls is the refined rule (2026-11-16): every PIECE held to every wall, a piece passing over a
+##     wall when its lowest point there is at or above the top edge, the near face the one the line comes in through.
+##     And on a SECOND construction of the copy (ODD: two walls back to back, touching and aligned; four walls of
+##     different heights in a row - cardboard.test.ts's shapes), stood apart, every pair of its 26 stickers on two walls
+##     tied: drawn as restated, and no sample of a drawn centre line, every 0.4 mm, 0.1 mm or more inside cardboard,
+##     unless one of its pins lies on a face pressed against another wall (the pair's backs); the test's row thread goes
+##     over the 0.45 m wall and then the 0.5 m one, the pair's front to front over both. Round 2's walk (only the rest of
+##     the curve from the last far point, the old threshold top + THREAD_OVER, the near side p's) fails here
+##   CI ink lies on the cardboard: a thick line drawn after a sticker, across it, on a front and on a back, is not seen
+##     where the sticker is (no pixel of the sticker's middle differs from the same view without the line, square on and
+##     55 degrees off), and is seen beside it
+##   CP the pad on a wall's BACK: aimed from behind, the sticker under the aim is the back one (from in front, the front
+##     one at the same place); a tap sticks one with n = [0, 0, -1] and at.z = -CARDBOARD, drawn on the back; a hold from
+##     behind peels the back one and not the front one; the wall's cut edge is refused
+##   PS the pens are the contract's (stickers.ts PENS, MITER_LIMIT, RESTATED): each pen's ribbon reaches half its width
+##     (the spray 0.5 + 3 x 0.2 widths), carries its softness, ends in its cap and turns a corner by its join (the
+##     chisel's 90 degree corner mitred, a sharper one bevelled; a round pen's corner round)
+##   PN the pen on the desktop: a drag on a wall's face is ONE scribble op, its points on the face where the aim crossed
+##     it (1 mm), about one every 2 mm (STROKE_STEP), drawn within a few frames (and shown while drawn); on the back the
+##     same, in the board frame as seen from the front; a press that does not move a dot (STROKE_DOT); a line past
+##     STROKE_POINTS two strokes, the second from where the first ends; a press on a table or at nothing refused, no op
+##   PV the pen in VR: with the trigger held the tip writes only within 1.5 cm of a face; lifted to 3 cm the line is
+##     sent and the air writes nothing; touched down again it is a second line
+##   PE the eraser (the pen's knob "eraser"): by the aim and by the tip, on a front and on a back, a press takes the
+##     LATEST line under it (pens.ts strokeAt, RESTATED) as ONE erase op - the line kept in the record as erased, by this
+##     device, and no longer drawn - and the mark showed that line before; a hold does not sweep (one op a press); where
+##     there is no line it is refused in words and makes no op
+##   CU it follows the truth and builds only what changed: a wall moved in the copy's constructions.json stands at its
+##     new wallPoint within 2 s, the same body moved (not made again), every other wall untouched; a wall's paper changed
+##     in boards.json makes that wall again and no other
+##   CC the frame time with the construction in view against the same view without it (vsync off), and no per-frame
+##     work in it once it is drawn
+## Pictures: construction_open.png, construction_behind.png, wall_back_close.png, pen_lines.png, ct_over_top.png,
+## ct_sign_walls.png, odd_construction.png, odd_row_side.png, odd_pair_top.png (the second construction, every pair
+## tied), odd_row_thread.png, odd_pair_thread.png, odd_pair_thread_above.png (the test's two threads alone, the rest cut
+## after CT has looked), ci_*.png, pe_*.png.
 ##   G negative: posting is off - no POST was attempted, the real truth files and the real outbox are untouched
 ## Writes ada_run/stickers/probe/{probe_result.json, pad_ops.json, board.png, bench.png, pad.png, peeled.png,
 ## refused.png, box_top.png, curved.png, curved_side.png, ghost_sphere.png, void.png, stack_*.png, proj_*.png, edge_*.png}
@@ -90,7 +159,11 @@ extends Node3D
 ## a folder per run), --layer-script=<path> and --pad-script=<path> (a scratch copy of an older sticker_layer.gd or
 ## sticker_pad.gd: the board's and the bench's layers, the probe's own hosts and the worn pad are made from it, to show
 ## which checks bite on the old code), --board-script=<path> (a scratch copy of an older sticker_board.gd: the mind map
-## board of TH .. PD is made from it, its layer from --layer-script when that is given too).
+## board of TH .. PD is made from it, its layer from --layer-script when that is given too), --construction-script=<path>
+## and --pen-script=<path> (a scratch copy of sticker_construction.gd or sticker_pen.gd: the construction of CB .. CU,
+## the pen of PN and PV; the walls' layers are made from --layer-script too), --threads-script=<path> (the
+## construction's Threads made again from a scratch script after its build), --only=cardboard (the room, J, CB .. CU and
+## G only: a mutant's run in a quarter of the time).
 
 const StickerData := preload("res://commons/stickers/sticker_data.gd")
 const StickerWorld := preload("res://commons/stickers/sticker_world.gd")
@@ -98,7 +171,7 @@ const StickerLayer := preload("res://commons/stickers/sticker_layer.gd")
 const PROBE_DIR := "user://stickers_probe"
 const OUT := "res://ada_run/stickers/probe"
 const REAL := "res://commons/data/stickers"
-const DOCS := ["designs", "boards", "placements"]
+const DOCS := ["designs", "boards", "placements", "constructions"]
 # --- the Void in miniature: chosen so that no frame on the way is the identity ---
 const TOWER_AT := Vector3(0.5, 0, -9.0)
 const TOWER_YAW := 25.0
@@ -121,6 +194,40 @@ const MINDMAP_AT := Vector3(-12.0, 0.0, 30.0)
 const AGREED_HEX := "#8e0c16"   # the mind map's legend: a thread two or three readers found on their own, drawn thicker
 const HEADSET_PPD := 25.0       # pixels per degree at the middle of a Quest 3's view: the tag check's eye
 const TAG_CAPS_PX := 12         # the least height of a tag's capitals there, seen from 2 m
+# --- the cardboard construction (CB .. CU) ---
+const CONSTRUCTION := "research"
+## far out along +X, apart from the rest, and TURNED: no frame on the way from a wall to the world is the identity
+const CARDBOARD_AT := Vector3(12.0, 0.0, 30.0)
+const CARDBOARD_YAW := 20.0
+## the contract's numbers, RESTATED (stickers.ts CARDBOARD, STROKE_LIFT, THREAD_OVER, THREAD_CLEAR, PENS, MITER_LIMIT):
+## a fault in the port's shows
+const CB_THICK := 0.005
+const CB_STROKE_LIFT := 0.0006
+const CB_THREAD_OVER := 0.004
+const CB_THREAD_CLEAR := 0.003
+const CB_SKIN := 1e-9           # intoWall's SKIN
+const CB_MITER_LIMIT := 2.0
+const CB_PENS := {"fine": {"cap": "round", "join": "round", "soft": 0.0}, "marker": {"cap": "round", "join": "round", "soft": 0.0},
+	"chisel": {"cap": "square", "join": "miter", "soft": 0.0}, "spray": {"cap": "round", "join": "round", "soft": 0.2}}
+const SAMPLE_STEP := 0.0004     # a drawn thread's centre line is tried this often against every wall's cardboard
+## A SECOND, small construction of the copy (CT), the shapes of cardboard.test.ts "two walls back to back" and "walls of
+## different heights in a row": two walls back to back on one table, touching and aligned (the same extent along their
+## length), and four walls in a row on tables at x 0, 0.3, 0.6 and 1.2 facing +x, 0.8, 0.45, 0.5 and 0.9 m high (the
+## tables 0.28 m wide, so they stand apart: the walls stand as in the test). Two stickers on each face of each wall, and
+## the test's own pair (from the first's front, 1.2 m up, to the last's back, 1.4 m up, its one curve clearing the 0.45 m
+## wall by 15 mm and running into the 0.5 m one), every pair on two walls tied in the copy. Stood apart and turned.
+const ODD := "probe_odd"
+const ODD_AT := Vector3(12.0, 0.0, 21.5)
+const ODD_YAW := -35.0
+const ODD_DESIGN := "mark_heart"   # 100 x 100 with a 4 margin: its drawn box is its size square
+const ODD_SIZE := 0.08
+const ODD_SEEN := 0.0001        # a sample counts as inside from 0.1 mm in (cardboard.test.ts SEEN), and a pin that near
+                                # another wall's cardboard is on a face pressed against it
+## W2: where the pen's association plinth stands while it is checked (in front of the board's left, clear of it)
+const PLINTH_AT := Vector3(-5.5, 0.0, 2.5)
+const PEN_TIP := 0.08           # sticker_pen.gd TIP_REACH at scale 1: where the tip is ahead of the hand
+const ERASE_TIP_REACH := 0.004  # sticker_pen.gd ERASE_REACH: the eraser's reach past a line's half width (the tip)
+const ERASE_PX := 6             # ... and on the desktop at least this many pixels at the aim's distance (pens.ts)
 
 ## floor_content.gd's surface as StickerWorld reads it (signals, roots, exhibits, data)
 class FakeContent extends Node3D:
@@ -157,6 +264,10 @@ var probe_dir := PROBE_DIR          # --probe-dir=user://<folder>: this run's co
 var layer_script: Script = StickerLayer
 var pad_script: Script = null
 var board_script: Script = null     # --board-script=: the mind map board's script (TH .. PD), else the scene's own
+var construction_script: Script = null   # --construction-script=: the construction's script (CB .. CU), else the scene's
+var pen_script: Script = null       # --pen-script=: the pen's script (PN, PV), else the scene's
+var threads_script: Script = null   # --threads-script=: the construction's Threads (CT), made again from it after the build
+var only_cardboard := false         # --only=cardboard
 var redraw_costs: Dictionary = {}   # what the mind map's redraws cost (TC measures them, FT reports them)
 var data: Node = null
 var board: Node3D = null
@@ -165,6 +276,8 @@ var photo: Camera3D = null
 var aim_cam: Camera3D = null
 var pad: Node3D = null
 var made: Array = []          # every op the pad made, with the sticker as this device drew it (pad_ops.json)
+var pen_made: Array = []      # every scribble and erase op the pen made (pen_ops.json)
+var cb_con: Node3D = null     # the construction of CB .. CC, while it stands
 
 func _ready() -> void:
 	out_dir = ProjectSettings.globalize_path(OUT)
@@ -180,8 +293,19 @@ func _ready() -> void:
 			pad_script = load(value)
 		elif a.begins_with("--board-script="):
 			board_script = load(value)
+		elif a.begins_with("--construction-script="):
+			construction_script = load(value)
+		elif a.begins_with("--pen-script="):
+			pen_script = load(value)
+		elif a.begins_with("--threads-script="):
+			threads_script = load(value)
+		elif a == "--only=cardboard":
+			only_cardboard = true
 	report["scripts"] = {"layer": layer_script.resource_path if layer_script != null else "", "pad": pad_script.resource_path if pad_script != null else "res://commons/stickers/sticker_pad.tscn",
-		"board": board_script.resource_path if board_script != null else "res://commons/artifacts/sticker_board/sticker_board.tscn", "probe_dir": probe_dir}
+		"board": board_script.resource_path if board_script != null else "res://commons/artifacts/sticker_board/sticker_board.tscn",
+		"construction": construction_script.resource_path if construction_script != null else "res://commons/artifacts/sticker_construction/sticker_construction.tscn",
+		"pen": pen_script.resource_path if pen_script != null else "res://commons/stickers/sticker_pen.tscn",
+		"threads": threads_script.resource_path if threads_script != null else "", "probe_dir": probe_dir, "only_cardboard": only_cardboard}
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	_write()   # the first result: the watchdog sees the probe alive
 	_quiet_hud()
@@ -226,6 +350,42 @@ func _run() -> void:
 	seeded.stickers.append({"id": "probe-legacy-back", "design": "note_done", "host": {"kind": "board", "id": "visitors"},
 		"at": [0.5, -0.36, -0.03], "n": [0.0, 0.0, -1.0], "up": [0.0, 1.0, 0.0], "size": 0.2, "z": 82, "by": "probe",
 		"t": "2026-11-13T12:00:00Z", "state": "on", "moves": 0})
+	# ... and on the cardboard construction (CF, CP): a sticker on a wall's BACK, behind a front one of that wall (the
+	# pad must tell them apart through 5 mm of cardboard), one an older device wrote behind another wall (n = -Z, at.z =
+	# -0.03: settle with the wall's back puts it on the back face), and a BACK scribble on a paper board, which has no
+	# back (the layer must not draw it; applyOps refuses such an op, so only a hand-written file holds one)
+	var behind_of: Dictionary = {}
+	for s in seeded.stickers:
+		if behind_of.is_empty() and str(s.host.get("kind", "")) == "board" and str(s.host.get("id", "")) == "cb_gap" and str(s.get("state", "on")) == "on":
+			behind_of = s
+	if not behind_of.is_empty():
+		seeded.stickers.append({"id": "probe-cb-back", "design": "note_done", "host": {"kind": "board", "id": "cb_gap"},
+			"at": [float(behind_of.at[0]), float(behind_of.at[1]), -CB_THICK], "n": [0.0, 0.0, -1.0], "up": [0.0, 1.0, 0.0], "size": 0.12, "z": 300,
+			"by": "probe", "t": "2026-11-15T12:00:00Z", "state": "on", "moves": 0})
+		report["cb_back_behind"] = str(behind_of.id)
+	seeded.stickers.append({"id": "probe-cb-legacy-back", "design": "mark_heart", "host": {"kind": "board", "id": "cb_hand"},
+		"at": [0.27, -0.2, -0.03], "n": [0.0, 0.0, -1.0], "up": [0.0, 1.0, 0.0], "size": 0.1, "z": 301,
+		"by": "probe", "t": "2026-11-15T12:00:00Z", "state": "on", "moves": 0})
+	# ... and two threads that may not pass through cardboard (CT): on cb_gap from its front sticker to the one behind it
+	# (over its top edge: overBoard), and from that back to a front of cb_worked, the sign wall that faces away behind
+	# cb_edges (over cb_gap itself, cb_edges and cb_worked: overWalls)
+	if not behind_of.is_empty():
+		if not seeded.get("threads") is Array:
+			seeded["threads"] = []
+		seeded.threads.append({"id": "probe-th-cb-over-top", "a": str(behind_of.id), "b": "probe-cb-back", "word": "over the top", "colour": "#b3121b",
+			"by": "probe", "t": "2026-11-15T12:00:00Z", "state": "tied"})
+		for s in seeded.stickers:
+			if str(s.host.get("kind", "")) == "board" and str(s.host.get("id", "")) == "cb_worked" and str(s.get("state", "on")) == "on":
+				seeded.threads.append({"id": "probe-th-cb-through", "a": "probe-cb-back", "b": str(s.id), "word": "through", "colour": "#b3121b",
+					"by": "probe", "t": "2026-11-15T12:00:00Z", "state": "tied"})
+				break
+	if not seeded.get("strokes") is Array:
+		seeded["strokes"] = []
+	seeded.strokes.append({"id": "probe-st-paper-back", "host": {"kind": "board", "id": "visitors"}, "face": "back", "pen": "marker",
+		"width": 0.008, "colour": "#b3121b", "points": [[-0.2, 0.0], [0.2, 0.05]], "by": "probe", "t": "2026-11-15T12:00:00Z", "state": "on"})
+	# ... and a second construction, its walls' boards, stickers on both faces of every wall and every pair on two walls
+	# tied (CT: the refined rule over walls back to back and walls of different heights in a row)
+	_seed_odd(seeded)
 	_put(probe_dir.path_join("placements.json"), JSON.stringify(seeded, "  "))
 	data = StickerData.get_or_create(get_tree())
 	data.configure({"data_dir": probe_dir, "outbox": probe_dir.path_join("outbox.json"), "post": false, "copy_dir": "", "by": "vr:probe"})
@@ -285,6 +445,10 @@ func _run() -> void:
 	var again: Node = StickerData.get_or_create(get_tree())
 	var under_root: Node = get_tree().root.get_node_or_null("StickerData")
 	_check("J one StickerData under the root, the same node each time", again == data and under_root == data and not bool(data.post_enabled), {"under_root": under_root != null, "post_enabled": data.post_enabled})
+	if only_cardboard:
+		await _cardboard_section()
+		await _finish(real_before)
+		return
 	# A - the board
 	var copy: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(probe_dir.path_join("placements.json")))
 	var want_on := 0
@@ -359,6 +523,8 @@ func _run() -> void:
 	await _ticks(0.1)
 	var before := int(data.pending.size())
 	var drawn_before := int(blayer.get("drawn"))
+	# the board may already hold hearts (people stick them on the web: the truth's 'visitors' held one on 2026-11-15)
+	var hearts_before := _instances(blayer, "Stickers_mark_heart").size()
 	var aimed: Dictionary = pad.get("aim")
 	pad.fire_worn()
 	await get_tree().physics_frame
@@ -374,7 +540,7 @@ func _run() -> void:
 			if str(entry.op.get("op", "")) == "add" and str(entry.op.get("sticker", {}).get("id", "")) == new_id:
 				on_disk += 1
 	var hearts := _instances(blayer, "Stickers_mark_heart")
-	var heart_err: float = hearts[0].distance_to(spot) if hearts.size() == 1 else INF
+	var heart_err: float = _nearest(hearts, spot) if hearts.size() == hearts_before + 1 else INF
 	var host_ok: bool = new_id != "" and str(last.sticker.host.get("kind", "")) == "board" and str(last.sticker.host.get("id", "")) == "visitors" and str(last.sticker.design) == "mark_heart"
 	var face_ok: bool = new_id != "" and StickerData.a3(last.sticker.n) == [0.0, 0.0, 1.0] and float(last.sticker.at[2]) == 0.0
 	_check("C a TAP on the board writes one add op to the probe outbox (on disk too), settled on the face (n = +Z, at.z = 0), and the sticker is drawn at the hit, within 1 cm",
@@ -459,7 +625,8 @@ func _run() -> void:
 	var seen := paper_grey - residue_grey
 	_check("D a HOLD (0.45 s) on it peels it: kept as peeled, with who peeled, drawn as residue and no longer as a sticker, and the residue is SEEN: its middle at least 8 grey levels darker than clean paper in peeled.png",
 		str(peeled_one.get("state", "")) == "peeled" and str(peeled_one.get("peel", {}).get("by", "")) == "vr:probe" and str(last_op.get("op", "")) == "peel"
-		and data.pending.size() == before + 2 and int(blayer.get("drawn")) == drawn_before and residue_count == 1 and _instances(blayer, "Stickers_mark_heart").is_empty() and seen >= 8.0,
+		and data.pending.size() == before + 2 and int(blayer.get("drawn")) == drawn_before and residue_count == 1 and _instances(blayer, "Stickers_mark_heart").size() == hearts_before
+		and _nearest(_instances(blayer, "Stickers_mark_heart"), spot) > 0.01 and seen >= 8.0,
 		{"state": peeled_one.get("state", ""), "peel": peeled_one.get("peel", {}), "pending": data.pending.size(), "drawn": blayer.get("drawn"), "residue": residue_count,
 		"residue_middle_grey": snappedf(residue_grey, 0.01), "paper_grey": snappedf(paper_grey, 0.01), "papers": papers.map(func(p): return snappedf(p, 0.01)), "darker_by": snappedf(seen, 0.01),
 		"centroid_uv": [snappedf(c_uv.x, 0.001), snappedf(c_uv.y, 0.001)], "residue_colour": "#" + StickerData.RESIDUE_COLOR.to_html(false), "residue_alpha": StickerData.RESIDUE_ALPHA})
@@ -944,6 +1111,8 @@ func _run() -> void:
 			worn_ok and said_press == "worn" and said_release == "worn" and str(iop.get("op", "")) == "add" and (istk.get("host", {}) as Dictionary) == {"kind": "board", "id": "visitors"}
 			and str(istk.get("design", "")) == want_design and idrawn < 0.01 and mini_inert and put_away,
 			{"worn": worn_ok, "press": said_press, "release": said_release, "design": istk.get("design", ""), "want_design": want_design, "drawn_error_m": idrawn, "mini_inert": mini_inert, "put_away": put_away})
+		# W2 - the pen as the game hands it over: taken from its association plinth, then through the inventory
+		await _pen_from_plinth(hand, wand, inv_cam, holder, items_lib, face, blayer)
 	# T - naming a Void work: by its mount's name, never a scan of every exhibit; an odd id scanned once, then cached
 	var dot_mount := _build_work(tower.content, tower.root, DOT_ID)
 	await get_tree().physics_frame
@@ -1014,11 +1183,22 @@ func _run() -> void:
 	await _stack_projector_edge()
 	# TH, TC, DP, CD, TG, FT, PD - the hanging board with threads
 	await _threads_section()
+	# CB .. CU - the cardboard construction, the pad on its backs, the pen
+	await _cardboard_section()
+	await _finish(real_before)
+
+## The end of every run: the pad's (and the pen's) ops written out, G, the verdict.
+func _finish(real_before: Dictionary) -> void:
 	# the pad's ops, with the stickers as this device drew them: for the server's cleanOp + applyOps to be run over
 	var f := FileAccess.open(out_dir.path_join("pad_ops.json"), FileAccess.WRITE)
 	if f != null:
 		f.store_string(JSON.stringify({"by": data.by, "made": made}, " ") + "\n")
 		f.close()
+	# ... and the pen's, for the same
+	var pf := FileAccess.open(out_dir.path_join("pen_ops.json"), FileAccess.WRITE)
+	if pf != null:
+		pf.store_string(JSON.stringify({"by": data.by, "ops": pen_made}, " ") + "\n")
+		pf.close()
 	# G - negative: nothing was posted, nothing real was written
 	var flushed: bool = data.flush()
 	var real_after := _fingerprints()
@@ -1037,6 +1217,2072 @@ func _run() -> void:
 	_write()
 	print("[probe_stickers] %d/%d" % [passed, report.checks.size()])
 	get_tree().quit(0 if passed == report.checks.size() else 1)
+
+# ---- the cardboard construction: CB, CW, CF, CT, CP, PN, PV, CU ----
+
+## W2 THE PEN AS THE GAME HANDS IT OVER (rooms.json stickers-pen on stickers-pen-plinth, items.json graffiti): an
+## association_plinth (item graffiti, holds the pen's mount, top 1 m, cap 0.36 x 0.3) and a sticker_pen example stood as
+## floor_content stands them - both mounts under one floor root, each named by its row id, the example 1 m up, each work
+## configured after it is added - apart (PLINTH_AT), and taken away after. The plinth SEATS the pen on its cap (the
+## bottom of its meshes within 1 mm of the cap's top, on the cap), and the pen stands inert (not worn, nothing shown but
+## its model, nothing held, no notice); the shell picked up (its picked_up, as XR Tools emits it when a hand takes it)
+## COLLECTS the item: Items.collected() gains graffiti (a collected.json in the probe's folder: a player's is never
+## touched) and the probe's InventoryHand, in group inventory_hands as the desktop's is, holds it on its belt and in the
+## hand, and the example is back home, frozen. Then worn through sync_worn on a camera aimed at the visitors' board, a
+## wand press, the aim turned a little and a release make ONE scribble op of the item's default pen there (the pen
+## through the inventory's wand: W for the pen), drawn by the board's layer.
+func _pen_from_plinth(hand: Node, wand: Node3D, inv_cam: Camera3D, holder: Node3D, items_lib: Variant, face: Node3D, blayer: Node3D) -> void:
+	if (items_lib.item("graffiti") as Dictionary).is_empty():
+		report["skipped"] = (report.get("skipped", []) as Array) + ["W2: commons/data/inventory/items.json has no 'graffiti' item"]
+		print("[probe_stickers] SKIP  W2 (no 'graffiti' item in items.json)")
+		return
+	var collected_was := str(items_lib.collected_path)
+	var probe_collected := probe_dir.path_join("collected.json")
+	if FileAccess.file_exists(probe_collected):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(probe_collected))
+	items_lib.collected_path = probe_collected
+	var before: Array = (items_lib.collected() as Array).duplicate()
+	var floor_root := Node3D.new()
+	floor_root.name = "PlinthFloor"
+	floor_root.position = PLINTH_AT
+	add_child(floor_root)
+	var pen_mount := Node3D.new()
+	pen_mount.name = "stickers-pen"
+	pen_mount.position = Vector3(0.0, 1.0, 0.0)
+	floor_root.add_child(pen_mount)
+	var pen_work: Node3D = pen_script.new() if pen_script != null else load("res://commons/stickers/sticker_pen.tscn").instantiate()
+	pen_work.name = "Artifact"
+	pen_mount.add_child(pen_work)
+	pen_work.apply_grid_config({"pen": "marker", "editor_label": "probe"})
+	var plinth_mount := Node3D.new()
+	plinth_mount.name = "stickers-pen-plinth"
+	floor_root.add_child(plinth_mount)
+	var plinth: Node3D = load("res://commons/artifacts/association_plinth/association_plinth.tscn").instantiate()
+	plinth.name = "Artifact"
+	plinth_mount.add_child(plinth)
+	plinth.apply_grid_config({"item": "graffiti", "holds": "stickers-pen", "top": 1.0, "size": [0.36, 0.3]})
+	await _until(func(): return is_instance_valid(plinth.get("example")), 3000)
+	await _frames(3)
+	var shell: Node3D = plinth.get("example")
+	# seated: the bottom of its meshes on the cap's top; on the cap
+	var box := AABB()
+	var first := true
+	for m in pen_mount.find_children("*", "MeshInstance3D", true, false):
+		if (m as MeshInstance3D).mesh != null and (m as Node3D).is_visible_in_tree():
+			var b: AABB = (m as MeshInstance3D).global_transform * (m as MeshInstance3D).get_aabb()
+			box = b if first else box.merge(b)
+			first = false
+	var cap_top: float = plinth.global_position.y + float(plinth.get("top"))
+	var size: Vector2 = plinth.get("size")
+	var local_min: Vector3 = plinth.global_transform.affine_inverse() * box.position
+	var local_max: Vector3 = plinth.global_transform.affine_inverse() * box.end
+	var gap_mm := (box.position.y - cap_top) * 1000.0
+	var on_cap: bool = not first and minf(local_min.x, local_max.x) >= -(size.x + 0.04) / 2.0 and maxf(local_min.x, local_max.x) <= (size.x + 0.04) / 2.0 \
+		and minf(local_min.z, local_max.z) >= -(size.y + 0.04) / 2.0 and maxf(local_min.z, local_max.z) <= (size.y + 0.04) / 2.0
+	# inert as a work: nothing shown but its model, nothing held, no notice (over 30 physics frames)
+	await _ticks(0.5)
+	var model: Node = pen_work.get_node_or_null("Pen")
+	var shown: Array = []
+	for n in pen_work.find_children("*", "VisualInstance3D", true, false):
+		if (n as VisualInstance3D).is_visible_in_tree() and (model == null or not model.is_ancestor_of(n)):
+			shown.append(str(pen_work.get_path_to(n)))
+	var inert: bool = pen_work.get("worn_on") == null and shown.is_empty() and model != null and (model as Node3D).is_visible_in_tree() and str(pen_work.get("notice")) == "" \
+		and (pen_work.get("touch") as Dictionary).is_empty() and (pen_work.get("line") as Dictionary).is_empty() and (pen_work.get("hot") as Dictionary).is_empty()
+	await _shoot(Transform3D(Basis(), PLINTH_AT + Vector3(0.12, 1.3, 0.6)).looking_at(PLINTH_AT + Vector3(0.0, 1.0, 0.0)), "w2_pen_plinth.png")
+	# taken: the shell's picked_up, as XR Tools emits it
+	var home: Transform3D = plinth.get("home")
+	hand.add_to_group("inventory_hands")
+	var belt_before: Array = hand.call("belt")
+	if shell != null and shell.has_signal("picked_up"):
+		shell.emit_signal("picked_up", shell)
+	await _frames(4)
+	var after: Array = (items_lib.collected() as Array).duplicate()
+	var belt_after: Array = hand.call("belt")
+	var current := str(hand.get("current"))
+	var on_disk: Variant = JSON.parse_string(FileAccess.get_file_as_string(probe_collected)) if FileAccess.file_exists(probe_collected) else null
+	var back_home: bool = shell != null and is_instance_valid(shell) and shell.global_transform.origin.distance_to(home.origin) < 0.001 and shell is RigidBody3D and (shell as RigidBody3D).freeze
+	var words := str((plinth.get_node("Words") as Label3D).text) if plinth.get_node_or_null("Words") != null else ""
+	# through the inventory: worn on the camera, the trigger through the wand, one scribble on the visitors' board
+	var worn: Node3D = hand.call("sync_worn", inv_cam, holder)
+	var spot3: Vector3 = face.global_transform * Vector3(0.45, -0.3, 0.0)
+	inv_cam.global_transform = Transform3D(Basis(), spot3 + Vector3(0, 0, 1.1)).looking_at(spot3)
+	await _ticks(0.1)
+	var pending_before := int(data.pending.size())
+	var front_before := int((blayer.get("strokes_drawn") as Dictionary).get("front", 0)) if blayer.get("strokes_drawn") is Dictionary else 0
+	var said_press: String = wand.press()
+	for i in 12:
+		inv_cam.rotate_object_local(Vector3.UP, deg_to_rad(0.25))
+		await get_tree().physics_frame
+	var said_release: String = wand.release()
+	await _frames(4)
+	var sop: Dictionary = data.pending[-1].op if data.pending.size() == pending_before + 1 else {}
+	if not sop.is_empty():
+		pen_made.append(sop)
+	var stroke: Dictionary = sop.get("stroke", {})
+	var front_after := int((blayer.get("strokes_drawn") as Dictionary).get("front", 0)) if blayer.get("strokes_drawn") is Dictionary else 0
+	var defaults: Dictionary = (items_lib.item("graffiti") as Dictionary).get("defaults", {})
+	var worn_ok: bool = worn != null and worn.get_parent() == inv_cam and worn.get("worn_on") == inv_cam and str(worn.get_script().resource_path).ends_with("sticker_pen.gd")
+	var scribbled: bool = str(sop.get("op", "")) == "scribble" and (stroke.get("host", {}) as Dictionary) == {"kind": "board", "id": "visitors"} and str(stroke.get("face", "")) == "front" \
+		and str(stroke.get("pen", "")) == str(defaults.get("pen", "marker")) and str(stroke.get("colour", "")).to_lower() == str(defaults.get("colour", "")).to_lower() and (stroke.get("points", []) as Array).size() >= 2
+	hand.call("set_current", "")
+	hand.call("sync_worn", inv_cam, holder)
+	var put_away: bool = worn != null and not worn.visible
+	hand.remove_from_group("inventory_hands")
+	remove_child(floor_root)
+	floor_root.queue_free()
+	items_lib.collected_path = collected_was
+	_check("W2 the pen as the game hands it over: on its association plinth (item graffiti, as rooms.json stands it) the pen lies ON the cap (its bottom %.2f mm off the cap's top) and stands inert; taken (the shell's picked_up), Items.collected() gains graffiti (a copy in the probe's folder), the inventory hand holds it on its belt and in the hand, the example is back home and the plinth says so; worn through sync_worn, the wand's press and release on the visitors' board make ONE scribble of the item's default pen (%s, %s), drawn there" % [gap_mm, str(defaults.get("pen", "")), str(defaults.get("colour", ""))],
+		absf(gap_mm) <= 1.0 and on_cap and inert and not before.has("graffiti") and after.has("graffiti") and on_disk is Dictionary and (on_disk.get("collected", []) as Array).has("graffiti")
+		and belt_after.has("graffiti") and current == "graffiti" and back_home and words.contains("IN YOUR INVENTORY")
+		and worn_ok and said_press == "worn" and said_release == "worn" and scribbled and front_after == front_before + 1 and put_away,
+		{"seat": {"bottom_gap_mm": snappedf(gap_mm, 0.01), "on_cap": on_cap, "box_min": StickerData.a3(box.position), "box_max": StickerData.a3(box.end), "cap_top": snappedf(cap_top, 0.0001)},
+		"inert": inert, "shown_besides_its_model": shown, "collected_before": before, "collected_after": after, "collected_json": on_disk, "belt_before": belt_before, "belt_after": belt_after,
+		"hand_current": current, "example_back_home": back_home, "plinth_words": words, "worn": worn_ok, "press": said_press, "release": said_release,
+		"scribble": {"op": sop.get("op", ""), "host": stroke.get("host", {}), "face": stroke.get("face", ""), "pen": stroke.get("pen", ""), "colour": stroke.get("colour", ""), "points": (stroke.get("points", []) as Array).size()},
+		"front_strokes_drawn": [front_before, front_after], "put_away": put_away, "collected_path_restored": str(items_lib.collected_path)})
+
+## The construction as the copy's file holds it (raw: not through the port's cleaning) and its boards by id.
+func _raw_doc(doc: String) -> Dictionary:
+	var d: Variant = JSON.parse_string(FileAccess.get_file_as_string(probe_dir.path_join(doc + ".json")))
+	return d if d is Dictionary else {}
+
+## The second construction ODD into the copy (never the truth): its six cardboard boards into boards.json, the
+## construction into constructions.json, and into `seeded` (placements) two stickers on each face of each wall, the test's
+## own pair, and a thread tied between every two of them on two different walls. The boards are cardboard.test.ts's: the
+## pair 0.8 x 0.6, the row 0.6 wide and 0.8, 0.45, 0.5 and 0.9 high.
+func _seed_odd(seeded: Dictionary) -> void:
+	var sizes := {"po_out": [0.8, 0.6], "po_in": [0.8, 0.6], "po_a": [0.6, 0.8], "po_mid": [0.6, 0.45], "po_tall": [0.6, 0.5], "po_far": [0.6, 0.9]}
+	var bdoc := _raw_doc("boards")
+	var cdoc := _raw_doc("constructions")
+	if not bdoc.get("boards") is Array or not cdoc.get("constructions") is Array:
+		report["odd_seeded"] = false
+		return
+	for bid in sizes:
+		bdoc.boards.append({"id": bid, "title": bid.replace("_", " "), "w": sizes[bid][0], "h": sizes[bid][1], "paper": "#c4a27a", "stock": "cardboard",
+			"note": "The probe's: a wall of the second construction (probe_stickers.gd CT)."})
+	var tables := [{"id": "pair", "w": 1.0, "d": 0.6, "h": 0.74, "at": [0.6, -1.6], "yaw": 0}]
+	var walls := [{"board": "po_out", "table": "pair", "at": [0.0, 0.005], "yaw": 0}, {"board": "po_in", "table": "pair", "at": [0.0, -0.005], "yaw": 180}]
+	var row := [["t1", 0.0, "po_a"], ["t2", 0.3, "po_mid"], ["t3", 0.6, "po_tall"], ["t4", 1.2, "po_far"]]
+	for r in row:
+		tables.append({"id": r[0], "w": 0.28, "d": 0.6, "h": 0.74, "at": [r[1], 0.0], "yaw": 0})
+		walls.append({"board": r[2], "table": r[0], "at": [0.0, 0.0], "yaw": 90})
+	cdoc.constructions.append({"id": ODD, "title": "Odd layouts (the probe's)", "tables": tables, "walls": walls})
+	_put(probe_dir.path_join("boards.json"), JSON.stringify(bdoc, " "))
+	_put(probe_dir.path_join("constructions.json"), JSON.stringify(cdoc, " "))
+	# the stickers: a pin (pinOf: the top edge's middle, inset) at x = -0.6 and 0.4 of the half width and 0.2 of the
+	# height up from the middle, on the front and on the back (n = -Z at -CARDBOARD, as settle stores it)
+	var rise := ODD_SIZE / 2.0 - minf(ODD_SIZE * 0.08, 0.02)   # a square drawn box: its pin this far over its middle
+	var made_odd: Array = []
+	var z := 400
+	for bid in sizes:
+		var half := float(sizes[bid][0]) / 2.0
+		var pin_y := float(sizes[bid][1]) * 0.2
+		for face in ["f", "b"]:
+			for xi in [0, 1]:
+				var x := -half * 0.6 if xi == 0 else half * 0.4
+				var back: bool = face == "b"
+				made_odd.append({"id": "po-%s-%s%d" % [bid, face, xi], "design": ODD_DESIGN, "host": {"kind": "board", "id": bid}, "at": [x, pin_y - rise, -CB_THICK if back else 0.0],
+					"n": [0.0, 0.0, -1.0 if back else 1.0], "up": [0.0, 1.0, 0.0], "size": ODD_SIZE, "z": z, "by": "probe", "t": "2026-11-16T12:00:00Z", "state": "on", "moves": 0})
+				z += 1
+	# the test's pair: from po_a's front at (0, 1.2, 0) to po_far's back at (1.2 - CARDBOARD, 1.4, 0), construction frame
+	made_odd.append({"id": "po-row-from", "design": ODD_DESIGN, "host": {"kind": "board", "id": "po_a"}, "at": [0.0, 1.2 - 0.74 - 0.4 - rise, 0.0],
+		"n": [0.0, 0.0, 1.0], "up": [0.0, 1.0, 0.0], "size": ODD_SIZE, "z": z, "by": "probe", "t": "2026-11-16T12:00:00Z", "state": "on", "moves": 0})
+	made_odd.append({"id": "po-row-to", "design": ODD_DESIGN, "host": {"kind": "board", "id": "po_far"}, "at": [0.0, 1.4 - 0.74 - 0.45 - rise, -CB_THICK],
+		"n": [0.0, 0.0, -1.0], "up": [0.0, 1.0, 0.0], "size": ODD_SIZE, "z": z + 1, "by": "probe", "t": "2026-11-16T12:00:00Z", "state": "on", "moves": 0})
+	if not seeded.get("threads") is Array:
+		seeded["threads"] = []
+	var tied := 0
+	for i in made_odd.size():
+		for j in range(i + 1, made_odd.size()):
+			var a: Dictionary = made_odd[i]
+			var b: Dictionary = made_odd[j]
+			if str(a.host.id) == str(b.host.id):
+				continue
+			seeded.threads.append({"id": "pt-%s-%s" % [str(a.id).trim_prefix("po-"), str(b.id).trim_prefix("po-")], "a": str(a.id), "b": str(b.id), "word": "odd",
+				"colour": "#b3121b", "by": "probe", "t": "2026-11-16T12:00:00Z", "state": "tied"})
+			tied += 1
+	seeded.stickers.append_array(made_odd)
+	report["odd_seeded"] = {"boards": sizes.size(), "stickers": made_odd.size(), "threads": tied}
+
+## CB .. CU on construction CONSTRUCTION of the probe's copy, stood apart (CARDBOARD_AT, turned CARDBOARD_YAW): made
+## from --construction-script when given, its walls' layers from --layer-script, the pad from --pad-script, the pen
+## from --pen-script.
+func _cardboard_section() -> void:
+	var cdoc := _raw_doc("constructions")
+	var craw: Dictionary = {}
+	for c in cdoc.get("constructions", []):
+		if str(c.get("id", "")) == CONSTRUCTION:
+			craw = c
+	var braw: Dictionary = {}
+	for b in _raw_doc("boards").get("boards", []):
+		braw[str(b.get("id", ""))] = b
+	var tables_by: Dictionary = {}
+	for t in craw.get("tables", []):
+		tables_by[str(t.id)] = t
+	# a floor under it: a body with no host (a surface the pen refuses), clear of the probe's room
+	var ground := StaticBody3D.new()
+	ground.name = "CardboardFloor"
+	ground.position = CARDBOARD_AT + Vector3(0, -0.05, 0)
+	add_child(ground)
+	var gs := CollisionShape3D.new()
+	var gb := BoxShape3D.new()
+	gb.size = Vector3(10, 0.1, 10)
+	gs.shape = gb
+	ground.add_child(gs)
+	var gm := MeshInstance3D.new()
+	var gbm := BoxMesh.new()
+	gbm.size = gb.size
+	gm.mesh = gbm
+	var gmat := StandardMaterial3D.new()
+	gmat.albedo_color = Color("8f8a84")
+	gm.material_override = gmat
+	ground.add_child(gm)
+	# CB - in the tower's order: a paused mount, the work added with its defaults, THEN its config, then live; the frames
+	# timed (vsync off) with the photo camera on where it will stand, before it and until all of it is drawn
+	photo.global_transform = Transform3D(Basis(), CARDBOARD_AT + Basis(Vector3.UP, deg_to_rad(CARDBOARD_YAW)) * Vector3(0.0, 1.75, 5.0)).looking_at(CARDBOARD_AT + Vector3(0, 0.95, 0))
+	photo.fov = 60.0
+	var vsync_cb := DisplayServer.window_get_vsync_mode()
+	var fps_cb := Engine.max_fps
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	Engine.max_fps = 0
+	await _frames(20)
+	var before_frames: Array = await _frame_deltas(150)
+	StickerLayer.stage_reset()
+	var mount := Node3D.new()
+	mount.name = "CardboardMount"
+	mount.process_mode = Node.PROCESS_MODE_DISABLED
+	mount.position = CARDBOARD_AT
+	mount.rotation_degrees.y = CARDBOARD_YAW
+	add_child(mount)
+	var con: Node3D = null
+	if construction_script != null:
+		con = Node3D.new()
+		con.set_script(construction_script)
+	else:
+		con = load("res://commons/artifacts/sticker_construction/sticker_construction.tscn").instantiate()
+	con.name = "Artifact"
+	mount.add_child(con)
+	con.apply_grid_config({"construction": CONSTRUCTION, "editor_label": "probe"})
+	mount.process_mode = Node.PROCESS_MODE_INHERIT
+	cb_con = con
+	var t_drawn := Time.get_ticks_msec()
+	var during: Array = []
+	var during_frames: Array = []   # [the frame that took it (the one before this process_frame), ms]
+	var last_us := Time.get_ticks_usec()
+	for i in 1500:
+		await get_tree().process_frame
+		var now_us := Time.get_ticks_usec()
+		during.append(float(now_us - last_us) / 1000.0)
+		during_frames.append([Engine.get_process_frames() - 1, float(now_us - last_us) / 1000.0])
+		last_us = now_us
+		if i >= 3 and not _cardboard_drawing():
+			break
+	var drawn_ms := Time.get_ticks_msec() - t_drawn
+	var still_drawing := _cardboard_drawing()
+	var stage_cb: Dictionary = StickerLayer.stage_report()
+	var after_frames: Array = await _frame_deltas(150)
+	DisplayServer.window_set_vsync_mode(vsync_cb)
+	Engine.max_fps = fps_cb
+	photo.fov = 50.0
+	await _ticks(0.2)
+	var walls: Dictionary = con.get("walls") if con.get("walls") is Dictionary else {}
+	var tables: Dictionary = con.get("tables") if con.get("tables") is Dictionary else {}
+	if layer_script != StickerLayer:
+		for bid in walls:
+			var old := (walls[bid] as Node3D).get_node_or_null("StickerLayer") as Node3D
+			if old != null:
+				_swap_layer(old)
+		await _settle_cardboard()
+	if threads_script != null and con.get_node_or_null("Threads") != null:
+		# the threads under test: the construction's Threads made again from the given script (same name, construction)
+		var old_t: Node = con.get_node("Threads")
+		con.remove_child(old_t)
+		old_t.free()
+		var fresh_t: Node3D = Node3D.new()
+		fresh_t.set_script(threads_script)
+		fresh_t.name = "Threads"
+		fresh_t.set("construction_id", CONSTRUCTION)
+		con.add_child(fresh_t)
+		con.set("threads", fresh_t)
+		await _settle_cardboard()
+	var named: Dictionary = {}
+	for n in con.get_children():
+		for k in ["Tables", "Walls", "Threads"]:
+			if str(n.name).begins_with(k):
+				named[k] = int(named.get(k, 0)) + 1
+	var tables_n := con.get_node_or_null("Tables")
+	var walls_n := con.get_node_or_null("Walls")
+	var table_bodies: Array = tables_n.get_children().filter(func(n): return n is StaticBody3D) if tables_n != null else []
+	var wall_bodies: Array = walls_n.get_children().filter(func(n): return n is StaticBody3D) if walls_n != null else []
+	var collider_bad: Array = []
+	for b in table_bodies:
+		var shapes: Array = (b as Node).get_children().filter(func(n): return n is CollisionShape3D and not n.disabled and n.shape != null)
+		if shapes.size() != 5:
+			collider_bad.append([str(b.name), shapes.size()])
+	for b in wall_bodies:
+		var box := StickerLayer.box_of(b)
+		var spec: Dictionary = braw.get(str(((b as Node).get_meta("sticker_host", {}) as Dictionary).get("id", "")), {})
+		var size_ok: bool = not box.is_empty() and StickerData.v3(box.size).distance_to(Vector3(float(spec.get("w", 0)), float(spec.get("h", 0)), CB_THICK)) < 1e-6 \
+			and StickerData.v3(box.at).distance_to(Vector3(0, 0, -CB_THICK / 2.0)) < 1e-6
+		if not size_ok:
+			collider_bad.append([str(b.name), box])
+	var builds := int(_or(con.get("builds"), -1))
+	report["cb_first_build_ms"] = snappedf(float(_or(con.get("build_ms"), -1.0)), 0.01)
+	var made_c: Dictionary = (con.get("made") as Dictionary).duplicate() if con.get("made") is Dictionary else {}
+	var missing: Array = (con.get("missing") as Array).duplicate() if con.get("missing") is Array else ["(none kept)"]
+	var n_tables: int = (craw.get("tables", []) as Array).size()
+	var n_walls: int = (craw.get("walls", []) as Array).size()
+	# no frame stalled: the build's own slice, each frame of the shared looks made before it, each frame of staged work
+	var build_ms := float(_or(con.get("build_ms"), -1.0))
+	var warm: Array = (con.get("warm_ms") as Array).duplicate() if con.get("warm_ms") is Array else []
+	var warm_most: float = warm.reduce(func(m, v): return maxf(m, float(v)), 0.0)
+	var staged_most := float(stage_cb.get("frame_most_ms", 0.0))
+	var staged_other := float(stage_cb.get("frame_most_but_pictures_ms", 0.0))
+	var pictures: Dictionary = (stage_cb.get("kinds", {}) as Dictionary).get("picture", {"n": 0, "mean_ms": 0.0, "most_ms": 0.0})
+	var staged_second := float(stage_cb.get("frame_second_most_ms", 0.0))
+	var staged_p95 := float(stage_cb.get("frame_p95_ms", 0.0))
+	var stalls := {"build_ms": snappedf(build_ms, 0.001), "warm_ms": warm, "staged_frame_most_ms": snappedf(staged_most, 0.001), "staged_frames": stage_cb.get("frames", 0),
+		"staged_frame_second_most_ms": snappedf(staged_second, 0.001), "staged_frame_p95_ms": snappedf(staged_p95, 0.001), "staged_frame_p50_ms": stage_cb.get("frame_p50_ms", 0.0),
+		"staged_frame_most_but_pictures_ms": snappedf(staged_other, 0.001), "pictures": pictures,
+		"staged_frames_over_8ms": stage_cb.get("frames_over_8ms", 0),
+		"pieces": stage_cb.get("kinds", {}), "slow_pieces": stage_cb.get("slow", []), "drawn_after_ms": drawn_ms, "still_drawing": still_drawing,
+		"frames_before": _stats_over(before_frames, 8.0), "frames_while": _stats_over(during, 8.0), "frames_after": _stats_over(after_frames, 8.0),
+		"worst_frames_while": _worst(during, 8)}
+	# the longest frames while it was drawn, each with what this lane did in it: the build, the staged pieces
+	var marks: Array = StickerLayer.stage_marks.duplicate()
+	var long_frames := during_frames.duplicate()
+	long_frames.sort_custom(func(p, q): return float(p[1]) > float(q[1]))
+	var explained: Array = []
+	for lf in long_frames.slice(0, 8):
+		var fr := int(lf[0])
+		var in_it: Array = marks.filter(func(m): return int(m[0]) == fr).map(func(m): return "%s %.2f" % [str(m[2]), float(m[1]) / 1000.0])
+		explained.append({"frame": fr, "ms": snappedf(float(lf[1]), 0.01), "build": int(_or(con.get("build_frame"), -2)) == fr, "staged_pieces": in_it,
+			"after_the_build": fr - int(_or(con.get("build_frame"), fr))})
+	stalls["longest_frames"] = explained
+	report["cb_stalls"] = stalls
+	var over8 := int(stage_cb.get("frames_over_8ms", 0))
+	_check("CB the construction builds ONCE at the frame's end when the tower adds it and THEN configures it: one build, %d tables (a collider for the top and each leg), %d walls (one box collider each, exactly the slab: w x h x CARDBOARD behind the front face), one Tables, Walls and Threads node, none missing; and no frame stalled by its own work: the build's own slice %.2f ms (its tables and walls are made after it, staged), the shared looks' frames at most %.2f ms, the staged making and drawing in %d frames, half of them %.2f ms or less, 95 %% %.2f ms, %d over 8 ms (at most 3, each a once-a-session piece named in slow_pieces: a first SVG raster, a first material; the most %.2f ms, at most 50), drawn in %d ms; the frames themselves at most %.1f ms while it was drawn (longest_frames: the renderer's first draw of each new shader), %.1f before it (%d of 150 over 8 ms)" % [n_tables, n_walls,
+			build_ms, warm_most, int(stage_cb.get("frames", 0)), float(stage_cb.get("frame_p50_ms", 0.0)), staged_p95, over8, staged_most, drawn_ms,
+			float(_stats_over(during, 8.0).max), float(_stats_over(before_frames, 8.0).max), int(_stats_over(before_frames, 8.0).over)],
+		builds == 1 and int(made_c.get("tables", 0)) == n_tables and int(made_c.get("walls", 0)) == n_walls and missing.is_empty()
+		and int(named.get("Tables", 0)) == 1 and int(named.get("Walls", 0)) == 1 and int(named.get("Threads", 0)) == 1
+		and table_bodies.size() == n_tables and wall_bodies.size() == n_walls and collider_bad.is_empty() and n_walls > 0
+		and build_ms >= 0.0 and build_ms <= 8.0 and warm_most <= 8.0 and staged_p95 <= 8.0 and over8 <= 3 and staged_most <= 50.0
+		and not still_drawing and con.has_method("drawing"),
+		{"builds": builds, "made": made_c, "missing": missing, "nodes": named, "tables": table_bodies.size(), "walls": wall_bodies.size(),
+		"colliders_bad": collider_bad, "stalls": stalls})
+	# CW - every wall's 8 corners where wallPoint puts them; every table's top at h, its corners where at and yaw put them
+	var cframe: Transform3D = con.global_transform
+	var cw_worst := 0.0
+	var cw_flipped := 0.0
+	var cw_rows: Array = []
+	for w in craw.get("walls", []):
+		var bid := str(w.board)
+		var body: Node3D = walls.get(bid)
+		var b: Dictionary = braw.get(bid, {})
+		var t: Dictionary = tables_by.get(str(w.table), {})
+		if body == null or b.is_empty() or t.is_empty():
+			cw_rows.append({"board": bid, "stood": body != null})
+			cw_worst = INF
+			continue
+		var worst := 0.0
+		var flipped := 0.0
+		for p in _slab_corners(b):
+			var got: Vector3 = body.global_transform * p
+			worst = maxf(worst, got.distance_to(cframe * _contract_wall_point(t, w, b, p)))
+			flipped = maxf(flipped, got.distance_to(cframe * _contract_wall_point(t, w, b, p, -1.0)))
+		cw_worst = maxf(cw_worst, worst)
+		cw_flipped = maxf(cw_flipped, flipped)
+		cw_rows.append({"board": bid, "worst_mm": snappedf(worst * 1000.0, 0.0001)})
+	var tw_worst := 0.0
+	for t in craw.get("tables", []):
+		var body: Node3D = tables.get(str(t.id))
+		if body == null:
+			tw_worst = INF
+			continue
+		var hw := float(t.w) / 2.0
+		var hd := float(t.d) / 2.0
+		for corner in [Vector3(-hw, float(t.h), -hd), Vector3(hw, float(t.h), -hd), Vector3(hw, float(t.h), hd), Vector3(-hw, float(t.h), hd)]:
+			tw_worst = maxf(tw_worst, (body.global_transform * corner).distance_to(cframe * _contract_table_point(t, corner)))
+		var top := body.get_node_or_null("Top") as MeshInstance3D
+		var top_face := top.position.y + (top.mesh as BoxMesh).size.y / 2.0 if top != null and top.mesh is BoxMesh else INF
+		tw_worst = maxf(tw_worst, absf(top_face - float(t.h)))
+	_check("CW every wall stands where wallPoint puts its board frame: its 8 corners, the front face's (z = 0) and the back's (z = -CARDBOARD), within 1 mm of the contract RESTATED; every table's top at its h, its corners where at and yaw put them (1 mm)",
+		cw_rows.size() == n_walls and cw_worst < 0.001 and tw_worst < 0.001 and n_walls > 0,
+		{"worst_wall_mm": snappedf(cw_worst * 1000.0, 0.0001), "worst_table_mm": snappedf(tw_worst * 1000.0, 0.0001), "walls": cw_rows,
+		"with_the_turn_the_wrong_way_mm": snappedf(cw_flipped * 1000.0, 0.1)})
+	# the pictures of it as the truth holds it: from its open side, from behind
+	photo.fov = 60.0
+	await _shoot(Transform3D(Basis(), cframe * Vector3(0.0, 1.75, 5.0)).looking_at(cframe * Vector3(0.0, 0.95, 0.3)), "construction_open.png")
+	await _shoot(Transform3D(Basis(), cframe * Vector3(0.7, 1.95, -4.5)).looking_at(cframe * Vector3(0.0, 0.95, -0.6)), "construction_behind.png")
+	photo.fov = 50.0
+	# CF - each face draws its own stickers and scribbles
+	var cf_rows: Array = []
+	var cf_ok := n_walls > 0
+	var faces_seen := {"stickers_front": 0, "stickers_back": 0, "strokes_front": 0, "strokes_back": 0}
+	for w in craw.get("walls", []):
+		var bid := str(w.board)
+		var body: Node3D = walls.get(bid)
+		var layer: Node3D = body.get_node_or_null("StickerLayer") as Node3D if body != null else null
+		if layer == null:
+			cf_ok = false
+			cf_rows.append({"board": bid, "layer": false})
+			continue
+		var row := _face_report(layer, bid)
+		cf_rows.append(row)
+		cf_ok = cf_ok and bool(row.ok)
+		for k in faces_seen:
+			faces_seen[k] = int(faces_seen[k]) + int(row.get(k, 0))
+	# the negative: a BACK scribble on the paper board 'visitors' (in the copy) is not drawn - it has no back
+	var paper_layer: Node3D = board.get("layer") if board != null else null
+	var paper_back_drawn: int = int((paper_layer.get("strokes_drawn") as Dictionary).get("back", 0)) if paper_layer != null and paper_layer.get("strokes_drawn") is Dictionary else 0
+	var paper_back_node: bool = paper_layer != null and paper_layer.get_node_or_null("Strokes_back") != null
+	# and in pixels: cb_gap seen square on from in front and from behind with its threads and stickers hidden - the
+	# back's red fine-liner words are there from behind and nowhere from in front
+	var gap: Node3D = walls.get("cb_gap")
+	var red := {"front": -1, "back": -1, "front_dark": -1}
+	if gap != null:
+		var tn := con.get_node_or_null("Threads") as Node3D
+		var hidden: Array = []
+		if tn != null and tn.visible:
+			tn.visible = false
+			hidden.append(tn)
+		var gl := gap.get_node_or_null("StickerLayer")
+		if gl != null:
+			for c in gl.get_children():
+				if c is GeometryInstance3D and (c as GeometryInstance3D).visible and not str(c.name).begins_with("Strokes_"):
+					(c as GeometryInstance3D).visible = false
+					hidden.append(c)
+		var spec_g: Dictionary = braw.get("cb_gap", {"w": 0.8, "h": 0.6})
+		var gw := float(spec_g.get("w", 0.8)) / 2.0 - 0.01
+		var gh := float(spec_g.get("h", 0.6)) / 2.0 - 0.01
+		var img_f := await _shoot(Transform3D(Basis(), gap.global_transform * Vector3(0, 0, 0.95)).looking_at(gap.global_transform * Vector3.ZERO), "cf_gap_front.png")
+		var rect_f := _screen_rect([gap.global_transform * Vector3(-gw, -gh, 0), gap.global_transform * Vector3(gw, -gh, 0), gap.global_transform * Vector3(gw, gh, 0), gap.global_transform * Vector3(-gw, gh, 0)])
+		red.front = _count_px(img_f, rect_f, "red")
+		red.front_dark = _count_px(img_f, rect_f, "dark")
+		var img_b := await _shoot(Transform3D(Basis(), gap.global_transform * Vector3(0, 0, -0.95)).looking_at(gap.global_transform * Vector3(0, 0, -CB_THICK)), "cf_gap_back.png")
+		var rect_b := _screen_rect([gap.global_transform * Vector3(-gw, -gh, -CB_THICK), gap.global_transform * Vector3(gw, -gh, -CB_THICK), gap.global_transform * Vector3(gw, gh, -CB_THICK), gap.global_transform * Vector3(-gw, gh, -CB_THICK)])
+		red.back = _count_px(img_b, rect_b, "red")
+		for c in hidden:
+			(c as Node3D).visible = true
+	_check("CF each face draws its own: every live sticker of a wall on the face settle gives it (a normal pointing back on the back: n = -Z at -CARDBOARD, an older record at at.z = -0.03 too), at its x, y and off its face by its lift (1 mm); every scribble of a face in that face's mesh in the record's order, on stroke_z of its face, inside its pen's reach of its line, wound to face out of its face; a back scribble on a PAPER board not drawn; seen square on, cb_gap's red fine-liner words show from behind (%d px) and not from in front (%d px)" % [int(red.back), int(red.front)],
+		cf_ok and int(faces_seen.stickers_back) >= 2 and int(faces_seen.strokes_back) > 0 and int(faces_seen.strokes_front) > 0 and paper_back_drawn == 0 and not paper_back_node
+		and int(red.back) >= 300 and int(red.front) <= 5 and int(red.front_dark) >= 300,
+		{"walls": cf_rows, "totals": faces_seen, "paper_board_back_scribbles_drawn": paper_back_drawn, "paper_board_has_Strokes_back": paper_back_node, "pixels": red})
+	# CT - every thread the construction holds, in its pieces, and none through cardboard; and on a second construction of
+	# walls back to back and walls of different heights in a row (ODD), stood now, looked at, photographed and taken away
+	var odd := await _stand_odd()
+	var odd_ct := _odd_threads(odd, braw, cdoc)
+	var odd_con: Node3D = odd.get("con")
+	if odd_con != null and is_instance_valid(odd_con):
+		var of: Transform3D = odd_con.global_transform
+		photo.fov = 60.0
+		await _shoot(Transform3D(Basis(), of * Vector3(0.6, 1.6, 1.7)).looking_at(of * Vector3(0.6, 1.05, -0.5)), "odd_construction.png")
+		photo.fov = 50.0
+		# the row from its side: the test's thread over the 0.45 m wall, then the 0.5 m one
+		await _shoot(Transform3D(Basis(), of * Vector3(0.45, 1.3, 0.75)).looking_at(of * Vector3(0.45, 1.2, 0.0)), "odd_row_side.png")
+		# the pair's top edges, along them: threads up one front, over both edges, down the other
+		await _shoot(Transform3D(Basis(), of * Vector3(1.25, 1.4, -1.45)).looking_at(of * Vector3(0.6, 1.33, -1.6)), "odd_pair_top.png")
+		# the test's two threads alone, every other thread of it cut in the copy as this device cuts one: the row's from
+		# beside the row, and the pair's along the two walls' plane (their top edges end-on, the hop in profile)
+		var keep := ["pt-row-from-row-to", "pt-po_out-f0-po_in-f0"]
+		var cut_ops: Array = []
+		for t in data.threads:
+			var tid := str(t.get("id", ""))
+			if tid.begins_with("pt-") and not keep.has(tid) and str(t.get("state", "")) == "tied":
+				cut_ops.append({"op_id": data.new_id("op"), "op": "untie", "id": tid})
+		data.submit(cut_ops)
+		await _frames(2)
+		await _until(func(): return not (is_instance_valid(odd_con) and bool(odd_con.call("drawing"))), 30000)
+		await _frames(3)
+		await _shoot(Transform3D(Basis(), of * Vector3(0.6, 1.27, 1.05)).looking_at(of * Vector3(0.6, 1.2, 0.0)), "odd_row_thread.png")
+		await _shoot(Transform3D(Basis(), of * Vector3(0.8, 1.37, -1.6)).looking_at(of * Vector3(0.6, 1.335, -1.6)), "odd_pair_thread.png")
+		await _shoot(Transform3D(Basis(), of * Vector3(0.95, 1.55, -1.1)).looking_at(of * Vector3(0.6, 1.25, -1.6)), "odd_pair_thread_above.png")
+		odd_ct["cut_for_the_pictures"] = cut_ops.size()
+	for k in ["mount", "ground"]:
+		var n: Node = odd.get(k)
+		if n != null and is_instance_valid(n):
+			remove_child(n)
+			n.queue_free()
+	await _frames(2)
+	var plain: Dictionary = {}
+	var ct := _construction_threads(con, craw, braw, tables_by, plain)
+	var tnode := con.get_node_or_null("Threads") as Node3D
+	var through_cb := _through_cardboard(tnode, walls, braw, plain)
+	# the seeded thread from cb_gap's front to its back: three pieces, the middle one the hop over its top edge
+	var over_top := {"ok": false, "why": "not drawn"}
+	var otid := "probe-th-cb-over-top"
+	if tnode != null and _drawn_ids(tnode).has(otid) and gap != null:
+		var sm := tnode.get_node_or_null("Strings") as MeshInstance3D
+		var rn := int(sm.get_meta("rings", 17))
+		var oc: Array = _tube_rings(sm, _drawn_ids(tnode).find(otid)).centres
+		var gh := float(braw.get("cb_gap", {}).get("h", 0.6)) / 2.0
+		var ginv := gap.global_transform.affine_inverse()
+		var hop_lowest := INF
+		var hop_highest := -INF
+		var hop_z := [INF, -INF]
+		var hop_at: Array = []
+		if oc.size() == 3 * rn:
+			for i in rn:
+				var v: Vector3 = ginv * (oc[rn + i] as Vector3)
+				hop_lowest = minf(hop_lowest, v.y - gh)
+				hop_highest = maxf(hop_highest, v.y - gh)
+				hop_z = [minf(hop_z[0], v.z), maxf(hop_z[1], v.z)]
+				if i == rn / 2:
+					hop_at = [v.x, v.y, v.z]
+		var drawn_pieces := int((sm.get_meta("pieces", {}) as Dictionary).get(otid, 0))
+		over_top = {"ok": drawn_pieces == 3 and oc.size() == 3 * rn and hop_lowest > 0.0 and hop_highest <= CB_THREAD_OVER + 0.0005 and hop_z[0] < -CB_THICK and hop_z[1] > 0.0,
+			"pieces": drawn_pieces, "hop_over_the_top_edge_mm": [snappedf(hop_lowest * 1000.0, 0.01), snappedf(hop_highest * 1000.0, 0.01)],
+			"hop_from_to_z_mm": [snappedf(float(hop_z[1]) * 1000.0, 0.01), snappedf(float(hop_z[0]) * 1000.0, 0.01)], "plain_curve_through": (through_cb.plain_through as Array).has(otid),
+			"hop_at": hop_at}
+	# pictures: the seeded thread's hop over cb_gap's top edge, seen along the edge (the cardboard edge-on), and the sign
+	# walls with the threads over their top edges
+	if gap != null:
+		var gt := gap.global_transform
+		var gh2 := float(braw.get("cb_gap", {}).get("h", 0.6)) / 2.0
+		var hop_x := 0.0
+		var hop := over_top.get("hop_at", []) as Array
+		if hop.size() == 3:
+			hop_x = float(hop[0])
+		await _shoot(Transform3D(Basis(), gt * Vector3(hop_x + 0.2, gh2 + 0.012, -CB_THICK / 2.0)).looking_at(gt * Vector3(hop_x, gh2 - 0.02, -CB_THICK / 2.0)), "ct_over_top.png")
+		await _shoot(Transform3D(Basis(), gt * Vector3(hop_x + 0.35, gh2 + 0.1, 0.3)).looking_at(gt * Vector3(hop_x, gh2 - 0.06, -CB_THICK / 2.0)), "ct_over_top_front.png")
+	var edges_w: Node3D = walls.get("cb_edges")
+	if edges_w != null:
+		var et := edges_w.global_transform
+		await _shoot(Transform3D(Basis(), et * Vector3(0.75, 0.62, -0.75)).looking_at(et * Vector3(0.0, 0.28, -0.22)), "ct_sign_walls.png")
+	# the property over many threads: every pair of 17 stickers - two fronts of each wall and the seeded back - tied by
+	# this device (in the probe's copy), and cut again after
+	var many := {"ok": false, "why": "no threads node"}
+	if tnode != null:
+		var pick: Array = []
+		for w in craw.get("walls", []):
+			var on_w: Array = data.stickers_on("board:" + str(w.board)).filter(func(s): return str(s.get("state", "")) == "on" and float(StickerData.a3(s.get("n"))[2]) > 0.0)
+			pick.append_array(on_w.slice(0, 2))
+		if str(data.sticker("probe-cb-back").get("state", "")) == "on":
+			pick.append(data.sticker("probe-cb-back"))
+		var tied_pairs := {}
+		for t in data.threads:
+			if str(t.get("state", "")) == "tied":
+				tied_pairs[[str(t.a), str(t.b)].hash()] = true
+				tied_pairs[[str(t.b), str(t.a)].hash()] = true
+		var ops: Array = []
+		var new_ids: Array = []
+		for i in pick.size():
+			for j in range(i + 1, pick.size()):
+				var ia := str(pick[i].id)
+				var ib := str(pick[j].id)
+				if tied_pairs.has([ia, ib].hash()):
+					continue
+				var th_id: String = data.new_id("th")
+				new_ids.append(th_id)
+				ops.append({"op_id": data.new_id("op"), "op": "tie", "thread": {"id": th_id, "a": ia, "b": ib, "word": "probe", "colour": StickerData.THREAD_RED}})
+		var t_many := Time.get_ticks_msec()
+		var res_many: Array = data.submit(ops)
+		await _settle_cardboard()
+		var ok_ties := res_many.filter(func(r): return bool(r.ok)).size()
+		var plain_many: Dictionary = {}
+		var ct_many := _construction_threads(con, craw, braw, tables_by, plain_many)
+		var through_many := _through_cardboard(tnode, walls, braw, plain_many)
+		var drawn_many := _drawn_ids(tnode).size()
+		var cuts: Array = []
+		for th_id in new_ids:
+			cuts.append({"op_id": data.new_id("op"), "op": "untie", "id": th_id})
+		data.submit(cuts)
+		await _settle_cardboard()
+		many = {"ok": ok_ties == ops.size() and not ops.is_empty() and bool(ct_many.ok) and int(through_many.inside) == 0 and int(through_many.plain_inside) > 0
+			and drawn_many == ct.between + ct.within + ops.size() and _drawn_ids(tnode).size() == int(ct.between) + int(ct.within),
+			"stickers": pick.size(), "tied_here": ops.size(), "ties_ok": ok_ties, "drawn": drawn_many, "drawn_in_ms": Time.get_ticks_msec() - t_many,
+			"threads_over_a_wall": ct_many.over_threads, "points_over_walls": ct_many.over_points, "pieces_restated_worst_m": ct_many.worst_m,
+			"restated_ok": ct_many.ok, "pieces_bad": (ct_many.pieces_bad as Array).slice(0, 5), "tag_bad": (ct_many.tag_bad as Array).slice(0, 5),
+			"through": through_many, "after_the_cut_drawn": _drawn_ids(tnode).size()}
+	var neg := {"ok": false}
+	var between: Array = ct.get("between_ids", [])
+	if tnode != null and not between.is_empty():
+		var tid := str(between[0])
+		var had := _drawn_ids(tnode).has(tid)
+		data.untie(tid)
+		var gone_ms := await _until(func(): return not _drawn_ids(tnode).has(tid) and tnode.get_node_or_null("Tags/Tag_" + tid) == null, 2000)
+		var gone := gone_ms >= 0
+		data.retie(tid)
+		var back_ms := await _until(func(): return _drawn_ids(tnode).has(tid) and tnode.get_node_or_null("Tags/Tag_" + tid) != null, 2000)
+		var back_again := back_ms >= 0
+		await _settle_cardboard()
+		neg = {"ok": had and gone and back_again, "thread": tid, "drawn_before": had, "gone_when_cut": gone, "gone_within_ms": gone_ms, "back_when_tied": back_again, "back_within_ms": back_ms}
+	# and from behind a wall, 35 degrees off its normal: nothing of its front's tags shows through the cardboard (a
+	# billboard tag 12 mm off the face turns to this eye and its edge passed through the board: white slivers on the back)
+	var through := -1
+	var counted: Node3D = walls.get("cb_counted")
+	if counted != null:
+		var kx := counted.global_transform
+		var img_k := await _shoot(Transform3D(Basis(), kx * Vector3(0.62, 0.12, -0.9)).looking_at(kx * Vector3(0.0, 0.0, -CB_THICK)), "ct_counted_behind.png")
+		var spec_k: Dictionary = braw.get("cb_counted", {"w": 0.8, "h": 0.6})
+		var kw := float(spec_k.get("w", 0.8)) / 2.0 - 0.01
+		var kh := float(spec_k.get("h", 0.6)) / 2.0 - 0.01
+		through = _count_px(img_k, _screen_rect([kx * Vector3(-kw, -kh, -CB_THICK), kx * Vector3(kw, -kh, -CB_THICK), kx * Vector3(kw, kh, -CB_THICK), kx * Vector3(-kw, kh, -CB_THICK)]), "paper")
+	var odd_through: Dictionary = odd_ct.get("through", {})
+	_check("CT every thread the construction holds is drawn and no other, in its pieces: %d between two walls (drawnWallThreads; %d of all its threads over a wall, %d points over edges) and %d within one wall (drawnThreads), each piece's rings on the RESTATED piece's curve (pinOf, wallPoint, overWalls - every piece held to every wall - overBoard, threadPieces; 1 cm), its word on its tag at the middle of the longest piece; no point of any drawn centre line, tried every 0.4 mm, inside any wall's cardboard (%d inside of %d tried; %d inside of %d for every pair of %d stickers tied here, while %d plain curves would pass through), the seeded thread from cb_gap's front to its back over its top edge in three pieces; a thread between walls cut is gone (staged) and tied again is back; seen from behind cb_counted 35 degrees off its normal, none of its front's tags shows through its back (%d paper pixels). On a SECOND construction (two walls back to back, touching and aligned; four walls of different heights in a row) %d threads tied across its %d walls, %d over a wall, as restated: %d samples 0.1 mm or more inside cardboard of %d tried (%d threads with a pin on a face pressed against the other wall not held to it), while %d of their plain curves would pass through; the test's row thread over the 0.45 m wall and then the 0.5 m one (%d points), the pair front to front over both (%d points)" % [
+			int(ct.get("between", 0)), int(ct.get("over_threads", 0)), int(ct.get("over_points", 0)), int(ct.get("within", 0)), int(through_cb.inside), int(through_cb.tried),
+			int((many.get("through", {}) as Dictionary).get("inside", -1)), int((many.get("through", {}) as Dictionary).get("tried", 0)), int(many.get("stickers", 0)),
+			((many.get("through", {}) as Dictionary).get("plain_through", []) as Array).size(), through,
+			int(odd_ct.get("threads", 0)), int(odd_ct.get("walls", 0)), int(odd_ct.get("over_a_wall", 0)), int(odd_through.get("inside", -1)), int(odd_through.get("tried", 0)),
+			int(odd_ct.get("pressed_threads", 0)), int(odd_ct.get("plain_through_n", 0)), int((odd_ct.get("row_case", {}) as Dictionary).get("over_points", -1)),
+			int((odd_ct.get("pair_case", {}) as Dictionary).get("over_points", -1))],
+		bool(ct.ok) and int(through_cb.inside) == 0 and int(through_cb.plain_inside) > 0 and bool(over_top.ok) and bool(many.ok) and bool(neg.ok) and through >= 0 and through <= 5
+		and bool(odd_ct.get("ok", false)),
+		{"threads": ct, "through_cardboard": through_cb, "over_the_top": over_top, "many": many, "cut_and_tied": neg, "tag_paper_px_on_the_back": through,
+		"tags_flat_on_a_face": int(_or(tnode.get("flat_tags"), -1)) if tnode != null else -1, "second_construction": odd_ct})
+	# CI - ink lies on the cardboard
+	await _ink_under_stickers(walls, braw)
+	# CP - the pad on a wall's back
+	await _pad_on_backs(walls)
+	await _shoot(Transform3D(Basis(), gap.global_transform * Vector3(0.12, 0.04, -0.7)).looking_at(gap.global_transform * Vector3(0.0, -0.02, -CB_THICK)) if gap != null else Transform3D(), "wall_back_close.png")
+	# PN, PV - the pen
+	await _pen_checks(con, walls)
+	var worked: Node3D = walls.get("cb_worked")
+	if worked != null:
+		await _shoot(Transform3D(Basis(), worked.global_transform * Vector3(-0.12, -0.05, 0.85)).looking_at(worked.global_transform * Vector3(-0.12, -0.08, 0.0)), "pen_lines.png")
+	# CU - it follows the truth and builds only what changed
+	await _construction_follows(con, cdoc, braw, tables_by)
+	# CC - the frame time with the construction in view against the same view without it (out of the tree), vsync off,
+	# once what CU changed is drawn
+	await _settle_cardboard()
+	var cf2: Transform3D = con.global_transform
+	photo.global_transform = Transform3D(Basis(), cf2 * Vector3(0.0, 1.75, 5.0)).looking_at(cf2 * Vector3(0.0, 0.95, 0.3))
+	photo.fov = 60.0
+	var vsync_was := DisplayServer.window_get_vsync_mode()
+	var fps_was := Engine.max_fps
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	Engine.max_fps = 0
+	var with_a: Dictionary = await _frame_stats(240)
+	remove_child(mount)
+	var without: Dictionary = await _frame_stats(240)
+	add_child(mount)
+	var with_b: Dictionary = await _frame_stats(240)
+	DisplayServer.window_set_vsync_mode(vsync_was)
+	Engine.max_fps = fps_was
+	photo.fov = 50.0
+	var added := func(key: String) -> float:
+		return (float(with_a[key].mean_ms) + float(with_b[key].mean_ms)) / 2.0 - float(without[key].mean_ms)
+	var still := not con.is_processing() and not con.is_physics_processing()
+	var strokes_drawn := 0
+	for bid in con.get("walls"):
+		var layer := (con.get("walls")[bid] as Node3D).get_node_or_null("StickerLayer") as Node3D
+		if layer != null:
+			still = still and not layer.is_processing() and not layer.is_physics_processing()
+			for f in ["front", "back"]:
+				strokes_drawn += int((layer.get("strokes_drawn") as Dictionary).get(f, 0)) if layer.get("strokes_drawn") is Dictionary else 0
+	var tn2 := con.get_node_or_null("Threads") as Node3D
+	still = still and tn2 != null and not tn2.is_processing() and not tn2.is_physics_processing()
+	var added_frame: float = added.call("frame_ms")
+	var added_gpu: float = added.call("render_gpu_ms")
+	_check("CC the frame time with the construction in view from its open side (%d scribbles, its stickers, threads and tags drawn) against the same view without it, vsync off: it adds %.2f ms a frame (GPU %.2f ms; at most 2 ms each); nothing of it works per frame once it is drawn (the staged _process of its layers and its threads is off again)" % [strokes_drawn, added_frame, added_gpu],
+		added_frame <= 2.0 and added_gpu <= 2.0 and still,
+		{"added_frame_ms": snappedf(added_frame, 0.001), "added_gpu_ms": snappedf(added_gpu, 0.001), "with": with_a, "without": without, "with_again": with_b, "no_per_frame_work": still,
+		"first_build_ms": report.get("cb_first_build_ms", -1.0)})
+
+## The corners of a wall's slab in its board frame: the front face's four (z = 0) and the back face's (z = -CARDBOARD).
+func _slab_corners(b: Dictionary) -> Array:
+	var x := float(b.get("w", 0.8)) / 2.0
+	var y := float(b.get("h", 0.6)) / 2.0
+	var out: Array = []
+	for z in [0.0, -CB_THICK]:
+		for c in [Vector2(-x, -y), Vector2(x, -y), Vector2(x, y), Vector2(-x, y)]:
+			out.append(Vector3(c.x, c.y, z))
+	return out
+
+## stickers.ts wallPoint, RESTATED (not StickerData.wall_point, so a fault in the port shows too): a point p of a wall's
+## board frame in its construction's frame - turned by the wall's yaw and moved to its foot on the table, then turned by
+## the table's yaw and moved to the table; the board's centre h / 2 over the table's top. R_y turns +Z toward +X.
+## `turn` -1 turns the other way (the check's contrast: what a wrong turn would measure).
+static func _contract_wall_point(t: Dictionary, w: Dictionary, b: Dictionary, p: Vector3, turn := 1.0) -> Vector3:
+	var a := deg_to_rad(float(w.get("yaw", 0.0))) * turn
+	var wx := p.x * cos(a) + p.z * sin(a)
+	var wz := -p.x * sin(a) + p.z * cos(a)
+	var x := float(w.at[0]) + wx
+	var z := float(w.at[1]) + wz
+	var ta := deg_to_rad(float(t.get("yaw", 0.0))) * turn
+	return Vector3(float(t.at[0]) + x * cos(ta) + z * sin(ta), float(t.h) + float(b.get("h", 0.6)) / 2.0 + p.y, float(t.at[1]) - x * sin(ta) + z * cos(ta))
+
+## A point of a table's own frame (its centre on the floor, turned by its yaw) in the construction's frame, RESTATED.
+static func _contract_table_point(t: Dictionary, p: Vector3) -> Vector3:
+	var ta := deg_to_rad(float(t.get("yaw", 0.0)))
+	return Vector3(float(t.at[0]) + p.x * cos(ta) + p.z * sin(ta), p.y, float(t.at[1]) - p.x * sin(ta) + p.z * cos(ta))
+
+## One wall's faces as its layer draws them: {ok, board, stickers_front, stickers_back, strokes_front, strokes_back, bad}.
+func _face_report(layer: Node3D, bid: String) -> Dictionary:
+	var row := {"board": bid, "ok": true, "stickers_front": 0, "stickers_back": 0, "strokes_front": 0, "strokes_back": 0, "bad": []}
+	# the stickers: every flat print (MultiMesh instances, the layer's frame) and every cut one's centre
+	var drawn: Array = []        # [origin, n.z or NAN]
+	for c in layer.get_children():
+		var nm := str(c.name)
+		if c is MultiMeshInstance3D and nm.begins_with("Stickers_"):
+			var mm: MultiMesh = (c as MultiMeshInstance3D).multimesh
+			for i in mm.instance_count:
+				var xf := mm.get_instance_transform(i)
+				drawn.append([xf.origin, xf.basis.z.normalized().z])
+		elif c is MeshInstance3D and nm.begins_with("Clipped_") and c.has_meta("centres"):
+			for p in (c.get_meta("centres") as PackedVector3Array):
+				drawn.append([p, NAN])
+	var lifts: Dictionary = layer.get("lifts") if layer.get("lifts") is Dictionary else {}
+	for s in data.stickers_on("board:" + bid):
+		if str(s.get("state", "on")) != "on":
+			continue
+		# settle on a two-sided wall, RESTATED: a normal that points back is on the back face, at -CARDBOARD
+		var back := float(s.n[2]) < 0.0
+		var lift := float(lifts.get(str(s.id), StickerLayer.LIFT))
+		var want := Vector3(float(s.at[0]), float(s.at[1]), (-CB_THICK - lift) if back else lift)
+		# the nearest print in all three axes: a front and a back sticker may share an x, y (probe-cb-back does)
+		var best: Array = []
+		var best_d := INF
+		for e in drawn:
+			var d := (e[0] as Vector3).distance_to(want)
+			if d < best_d:
+				best_d = d
+				best = e
+		var err: float = (best[0] as Vector3).distance_to(want) if not best.is_empty() else INF
+		var nz: float = float(best[1]) if not best.is_empty() else 0.0
+		var facing_ok: bool = is_nan(nz) or (nz < -0.99 if back else nz > 0.99)
+		if err > 0.001 or not facing_ok:
+			(row.bad as Array).append({"sticker": str(s.id), "face": "back" if back else "front", "error_mm": snappedf(err * 1000.0, 0.01), "drawn_n_z": nz})
+		row["stickers_back" if back else "stickers_front"] = int(row["stickers_back" if back else "stickers_front"]) + 1
+	if drawn.size() != int(row.stickers_front) + int(row.stickers_back):
+		(row.bad as Array).append({"drawn": drawn.size(), "records": int(row.stickers_front) + int(row.stickers_back)})
+	# the scribbles: drawnStrokes RESTATED over the view, one mesh a face
+	for face in ["front", "back"]:
+		var want_ids: Array = []
+		for s in data.strokes:
+			var h: Dictionary = s.get("host", {})
+			if str(s.get("state", "")) == "on" and str(h.get("id", "")) == bid and str(s.get("face", "")) == face:
+				want_ids.append(str(s.id))
+		var mi := layer.get_node_or_null("Strokes_" + face) as MeshInstance3D
+		var got_ids: Array = (mi.get_meta("ids", []) as Array) if mi != null else []
+		row["strokes_" + face] = got_ids.size()
+		if got_ids != want_ids:
+			(row.bad as Array).append({"face": face, "strokes_wanted": want_ids.size(), "strokes_drawn": got_ids.size()})
+			continue
+		if mi == null or mi.mesh == null or mi.mesh.get_surface_count() == 0:
+			continue
+		var arrays := (mi.mesh as ArrayMesh).surface_get_arrays(0)
+		var verts: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+		var idx: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+		var want_z := (-CB_THICK - CB_STROKE_LIFT) if face == "back" else CB_STROKE_LIFT
+		var z_bad := 0
+		for v in verts:
+			if absf(v.z - want_z) > 1e-6:
+				z_bad += 1
+		# Godot's front face is clockwise seen from outside: (b - a) x (c - a) points INTO the face (-Z under a front
+		# scribble, +Z under a back one)
+		var wind_bad := 0
+		for k in range(0, idx.size(), 3):
+			var cz := (verts[idx[k + 1]] - verts[idx[k]]).cross(verts[idx[k + 2]] - verts[idx[k]]).z
+			if absf(cz) > 1e-12 and (cz > 0.0) != (face == "back"):
+				wind_bad += 1
+		var reach_bad := 0
+		var ranges: Array = mi.get_meta("ranges", [])
+		for i in got_ids.size():
+			var s: Dictionary = data.stroke(str(got_ids[i]))
+			var reach := _pen_reach(s)
+			for j in range(int(ranges[i][0]), int(ranges[i][0]) + int(ranges[i][1])):
+				if _dist_to_line(Vector2(verts[j].x, verts[j].y), s.get("points", [])) > reach:
+					reach_bad += 1
+		if z_bad > 0 or wind_bad > 0 or reach_bad > 0:
+			(row.bad as Array).append({"face": face, "off_stroke_z": z_bad, "wound_into_the_eye": wind_bad, "past_its_reach": reach_bad, "vertices": verts.size()})
+	row.ok = (row.bad as Array).is_empty()
+	return row
+
+## How far a scribble's ribbon may reach from its line: half its width (a soft pen's edge 0.5 + 3 x soft widths), times
+## the longest a corner or a square end stands out (a miter join's mitre up to MITER_LIMIT, a square cap's corner sqrt
+## 2; a round join's gentle mitre ROUND_MITER). The pens' caps, joins and softness are the contract's, RESTATED
+## (CB_PENS, CB_MITER_LIMIT); how far a round join's gentle corner stands out is the view's choice (sticker_layer.gd).
+func _pen_reach(s: Dictionary) -> float:
+	var spec: Dictionary = CB_PENS.get(str(s.get("pen", "fine")), CB_PENS.fine)
+	var w := float(s.get("width", 0.003))
+	var soft := float(spec.soft)
+	var hw := w * (0.5 + 3.0 * soft) if soft > 0.0 else w / 2.0
+	var corner := CB_MITER_LIMIT if str(spec.join) == "miter" else StickerLayer.ROUND_MITER
+	var end := sqrt(2.0) if str(spec.cap) == "square" else 1.0
+	return hw * maxf(corner, end) + 2e-5
+
+## The distance from a point to a polyline of [x, y] points (to its one point when it has one).
+static func _dist_to_line(p: Vector2, pts: Array) -> float:
+	if pts.is_empty():
+		return INF
+	var best := p.distance_to(Vector2(float(pts[0][0]), float(pts[0][1])))
+	for i in range(1, pts.size()):
+		var a := Vector2(float(pts[i - 1][0]), float(pts[i - 1][1]))
+		var b := Vector2(float(pts[i][0]), float(pts[i][1]))
+		best = minf(best, p.distance_to(Geometry2D.get_closest_point_to_segment(p, a, b)))
+	return best
+
+## Pixels of one kind in a rectangle of a picture: "red" (a red ink: r >= 90 and over twice g and b), "dark" (a black
+## ink: every channel under 60) or "paper" (a tag's card, #f6f0e2 lit: every channel over 200; cardboard is under 140).
+static func _count_px(img: Image, r: Rect2, kind: String) -> int:
+	var n := 0
+	for y in range(maxi(0, int(r.position.y)), mini(img.get_height(), int(r.end.y))):
+		for x in range(maxi(0, int(r.position.x)), mini(img.get_width(), int(r.end.x))):
+			var c := img.get_pixel(x, y)
+			var r8 := c.r * 255.0
+			var g8 := c.g * 255.0
+			var b8 := c.b * 255.0
+			if kind == "red" and r8 >= 90.0 and r8 > 2.0 * g8 and r8 > 2.0 * b8:
+				n += 1
+			elif kind == "dark" and r8 < 60.0 and g8 < 60.0 and b8 < 60.0:
+				n += 1
+			elif kind == "paper" and r8 > 200.0 and g8 > 200.0 and b8 > 200.0:
+				n += 1
+	return n
+
+## CT's measure: every tied thread of the view whose two stickers are on and on walls of the construction, against the
+## Threads node's tubes - between two walls (pins wallPoint of pinOf in the construction's frame, over every wall in
+## the way by overWalls over wallLines) or within one (pins in the wall's board frame, over its top edge by overBoard when
+## it joins the faces, carried by wallPoint), all RESTATED in doubles; drawn in the restated pieces (threadPieces), each
+## piece's tube's rings on its piece's curve (1 cm: the pin ends are lifted off their faces by LIFT + r + 0.5 mm), its
+## tag's word, its tag near the middle of the restated tag piece (5 cm). `plain` (thread id -> [p, q], the construction's
+## frame, Vector3) is filled for _through_cardboard's contrast: the one curve each would be without the rule.
+func _construction_threads(con: Node3D, craw: Dictionary, braw: Dictionary, tables_by: Dictionary, plain: Dictionary = {}, ends: Dictionary = {}) -> Dictionary:
+	var out := {"ok": false, "between": 0, "within": 0, "between_ids": [], "missing": [], "extra": [], "wrong_kind": [], "worst_m": 0.0, "tag_bad": [],
+		"pieces_bad": [], "over_threads": 0, "over_points": 0, "over_walls_per_thread": {}}
+	var tnode := con.get_node_or_null("Threads") as Node3D
+	var strings := tnode.get_node_or_null("Strings") as MeshInstance3D if tnode != null else null
+	if strings == null:
+		return out
+	var ids := _drawn_ids(tnode)
+	var kinds: Dictionary = strings.get_meta("kinds", {})
+	var rings_n := int(strings.get_meta("rings", 17))
+	var walls_by: Dictionary = {}
+	for w in craw.get("walls", []):
+		walls_by[str(w.board)] = w
+	var lines := _c_wall_lines(craw, braw, tables_by)
+	var cframe: Transform3D = con.global_transform
+	var want: Dictionary = {}
+	for t in data.threads:
+		if str(t.get("state", "")) != "tied":
+			continue
+		var a: Dictionary = data.sticker(str(t.get("a", "")))
+		var b: Dictionary = data.sticker(str(t.get("b", "")))
+		if a.is_empty() or b.is_empty() or str(a.get("state", "")) != "on" or str(b.get("state", "")) != "on":
+			continue
+		var ha: Dictionary = a.get("host", {})
+		var hb: Dictionary = b.get("host", {})
+		if str(ha.get("kind", "")) != "board" or str(hb.get("kind", "")) != "board" or not walls_by.has(str(ha.get("id", ""))) or not walls_by.has(str(hb.get("id", ""))):
+			continue
+		var wa: Dictionary = walls_by[str(ha.id)]
+		var wb: Dictionary = walls_by[str(hb.id)]
+		var ta: Dictionary = tables_by.get(str(wa.table), {})
+		var tb: Dictionary = tables_by.get(str(wb.table), {})
+		var la := _c_pin(a)
+		var lb := _c_pin(b)
+		var p := _c_wall_point(ta, wa, braw.get(str(ha.id), {}), la)
+		var q := _c_wall_point(tb, wb, braw.get(str(hb.id), {}), lb)
+		var kind := "wall" if str(ha.id) == str(hb.id) else "between"
+		var over: Array = []
+		if kind == "between":
+			over = _c_over_walls(p, q, lines)
+		else:
+			for v in _c_over_board(la, lb, braw.get(str(ha.id), {})):
+				over.append(_c_wall_point(ta, wa, braw.get(str(ha.id), {}), v))
+		want[str(t.id)] = {"kind": kind, "p": p, "q": q, "over": over, "word": str(t.get("word", ""))}
+		plain[str(t.id)] = [cframe * _v3d(p), cframe * _v3d(q)]
+		ends[str(t.id)] = {"p": p, "q": q, "a": str(ha.id), "b": str(hb.id), "over": over}
+	var piece_counts: Dictionary = strings.get_meta("pieces", {})
+	for tid in want:
+		var e: Dictionary = want[tid]
+		if str(e.kind) == "between":
+			out.between = int(out.between) + 1
+			(out.between_ids as Array).append(tid)
+		else:
+			out.within = int(out.within) + 1
+		if not (e.over as Array).is_empty():
+			out.over_threads = int(out.over_threads) + 1
+			out.over_points = int(out.over_points) + (e.over as Array).size()
+			out.over_walls_per_thread[tid] = (e.over as Array).size() / 2
+		var pc := _c_pieces(e.p, e.q, e.over)
+		var pieces: Array = pc.pieces
+		var rings := _tube_rings(strings, ids.find(tid))
+		var centres: Array = rings.centres
+		if centres.size() < 2:
+			(out.missing as Array).append(tid)
+			continue
+		if str(kinds.get(tid, "")) != str(e.kind):
+			(out.wrong_kind as Array).append([tid, kinds.get(tid, ""), e.kind])
+		if centres.size() != pieces.size() * rings_n or int(piece_counts.get(tid, 1)) != pieces.size():
+			(out.pieces_bad as Array).append([tid, "drawn %d rings in %s pieces, restated %d pieces" % [centres.size(), str(piece_counts.get(tid, "?")), pieces.size()]])
+			continue
+		for j in pieces.size():
+			for i in rings_n:
+				var want_at := cframe * _v3d(_c_curve_at(pieces[j][0], pieces[j][1], float(i) / float(rings_n - 1)))
+				out.worst_m = maxf(float(out.worst_m), (centres[j * rings_n + i] as Vector3).distance_to(want_at))
+		var tag := tnode.get_node_or_null("Tags/Tag_" + str(tid)) as Node3D
+		var word := tag.get_node_or_null("Word") as Label3D if tag != null else null
+		var tp: Array = pieces[int(pc.tag)]
+		var mid := cframe * _v3d(_c_curve_at(tp[0], tp[1], 0.5))
+		if word == null or word.text != str(e.word).to_upper() or tag.global_position.distance_to(mid) > 0.05:
+			(out.tag_bad as Array).append([tid, word.text if word != null else "", snappedf(tag.global_position.distance_to(mid), 0.001) if tag != null else -1.0])
+	out.extra = ids.filter(func(i): return not want.has(str(i)))
+	out.worst_m = snappedf(float(out.worst_m), 0.00001)
+	out.ok = not want.is_empty() and int(out.between) > 0 and (out.missing as Array).is_empty() and (out.extra as Array).is_empty() and (out.wrong_kind as Array).is_empty() \
+		and (out.pieces_bad as Array).is_empty() and float(out.worst_m) < 0.01 and (out.tag_bad as Array).is_empty()
+	return out
+
+## The second construction ODD stood apart (ODD_AT, turned ODD_YAW) on a floor of its own, in the tower's order, made as
+## the first one is (--construction-script, --layer-script, --threads-script), and waited for until it is drawn
+## (staged, at most 30 s). {con, mount, ground, drawn_ms, still_drawing}.
+func _stand_odd() -> Dictionary:
+	var ground := StaticBody3D.new()
+	ground.name = "OddFloor"
+	ground.position = ODD_AT + Vector3(0, -0.05, 0)
+	add_child(ground)
+	var gs := CollisionShape3D.new()
+	var gb := BoxShape3D.new()
+	gb.size = Vector3(6, 0.1, 6)
+	gs.shape = gb
+	ground.add_child(gs)
+	var gm := MeshInstance3D.new()
+	var gbm := BoxMesh.new()
+	gbm.size = gb.size
+	gm.mesh = gbm
+	var gmat := StandardMaterial3D.new()
+	gmat.albedo_color = Color("8f8a84")
+	gm.material_override = gmat
+	ground.add_child(gm)
+	var mount := Node3D.new()
+	mount.name = "OddMount"
+	mount.process_mode = Node.PROCESS_MODE_DISABLED
+	mount.position = ODD_AT
+	mount.rotation_degrees.y = ODD_YAW
+	add_child(mount)
+	var con: Node3D = null
+	if construction_script != null:
+		con = Node3D.new()
+		con.set_script(construction_script)
+	else:
+		con = load("res://commons/artifacts/sticker_construction/sticker_construction.tscn").instantiate()
+	con.name = "Artifact"
+	mount.add_child(con)
+	con.apply_grid_config({"construction": ODD, "editor_label": "probe"})
+	mount.process_mode = Node.PROCESS_MODE_INHERIT
+	var t0 := Time.get_ticks_msec()
+	var busy := func() -> bool: return is_instance_valid(con) and con.has_method("drawing") and bool(con.call("drawing"))
+	await _frames(3)
+	await _until(func(): return not busy.call(), 30000)
+	if layer_script != StickerLayer:
+		var walls: Dictionary = con.get("walls") if con.get("walls") is Dictionary else {}
+		for bid in walls:
+			var old := (walls[bid] as Node3D).get_node_or_null("StickerLayer") as Node3D
+			if old != null:
+				_swap_layer(old)
+	if threads_script != null and con.get_node_or_null("Threads") != null:
+		var old_t: Node = con.get_node("Threads")
+		con.remove_child(old_t)
+		old_t.free()
+		var fresh_t: Node3D = Node3D.new()
+		fresh_t.set_script(threads_script)
+		fresh_t.name = "Threads"
+		fresh_t.set("construction_id", ODD)
+		con.add_child(fresh_t)
+		con.set("threads", fresh_t)
+	await _frames(2)
+	await _until(func(): return not busy.call(), 30000)
+	await _frames(2)
+	return {"con": con, "mount": mount, "ground": ground, "drawn_ms": Time.get_ticks_msec() - t0, "still_drawing": busy.call()}
+
+## CT on the second construction ODD: every thread it holds drawn in its pieces as the RESTATED contract has them (as on
+## the first: _construction_threads), and THE PROPERTY at 0.1 mm (ODD_SEEN) on what is drawn - no sample of a drawn
+## centre line, every 0.4 mm, against every wall - but for a thread with a pin on a face pressed against another wall
+## (the touching backs of the pair: no thread reaches it without passing through cardboard, and its pin is lifted INTO
+## the other wall), which is counted; the one curves of the same threads would pass through. And the test's own two:
+## the row's thread over the 0.45 m wall, then the 0.5 m one (4 points, at 1.194 and 1.244 m: its one curve clears the
+## first by 15 mm and the piece up to the second does not), and the pair's front to front over both walls (4 points or
+## more, every one over the top edges).
+func _odd_threads(odd: Dictionary, braw: Dictionary, cdoc: Dictionary) -> Dictionary:
+	var con: Node3D = odd.get("con")
+	if con == null or not is_instance_valid(con):
+		return {"ok": false, "why": "the second construction did not stand"}
+	var craw: Dictionary = {}
+	for c in cdoc.get("constructions", []):
+		if str(c.get("id", "")) == ODD:
+			craw = c
+	var tables_by: Dictionary = {}
+	for t in craw.get("tables", []):
+		tables_by[str(t.id)] = t
+	var walls: Dictionary = con.get("walls") if con.get("walls") is Dictionary else {}
+	var plain: Dictionary = {}
+	var ends: Dictionary = {}
+	var ct := _construction_threads(con, craw, braw, tables_by, plain, ends)
+	var lines := _c_wall_lines(craw, braw, tables_by)
+	var pressed: Dictionary = {}
+	var pressed_pins := {}
+	for tid in ends:
+		var e: Dictionary = ends[tid]
+		for k in [["p", "a"], ["q", "b"]]:
+			var deep := _c_depth_in(e[k[0]], lines, str(e[k[1]]))
+			if deep > -ODD_SEEN:
+				pressed[tid] = true
+				pressed_pins[str(e[k[1]]) + ":" + str(e[k[0]])] = true
+	var plain_free: Dictionary = {}
+	for tid in plain:
+		if not pressed.has(tid):
+			plain_free[tid] = plain[tid]
+	var tnode := con.get_node_or_null("Threads") as Node3D
+	var through := _through_cardboard(tnode, walls, braw, plain_free, ODD_SEEN, pressed)
+	var pieces_drawn: Dictionary = (tnode.get_node("Strings") as Node).get_meta("pieces", {}) if tnode != null and tnode.get_node_or_null("Strings") != null else {}
+	var case_of := func(tid: String) -> Dictionary:
+		var e: Dictionary = ends.get(tid, {})
+		var over: Array = e.get("over", [])
+		return {"thread": tid, "over_points": over.size(), "over_heights_m": over.map(func(v): return snappedf(float(v[1]), 0.000001)),
+			"pieces_drawn": int(pieces_drawn.get(tid, -1)), "plain_curve_through": (through.plain_through as Array).has(tid), "pressed": pressed.has(tid)}
+	var row: Dictionary = case_of.call("pt-row-from-row-to")
+	var pair: Dictionary = case_of.call("pt-po_out-f0-po_in-f0")
+	var top_pair := 0.74 + 0.6 + CB_THREAD_OVER
+	# (its one curve runs 0.4 mm into the 0.5 m wall below its top edge, at the cardboard's near face: counted from 0.1 mm)
+	var row_want := [0.74 + 0.45 + CB_THREAD_OVER, 0.74 + 0.45 + CB_THREAD_OVER, 0.74 + 0.5 + CB_THREAD_OVER, 0.74 + 0.5 + CB_THREAD_OVER]   # 1.194, 1.244
+	var row_heights: Array = row.over_heights_m
+	var row_ok: bool = int(row.over_points) == 4 and row_heights.size() == 4 and range(4).all(func(i): return absf(float(row_heights[i]) - float(row_want[i])) < 1e-5) \
+		and int(row.pieces_drawn) == 5 and bool(row.plain_curve_through)
+	var pair_ok: bool = int(pair.over_points) >= 4 and int(pair.over_points) % 2 == 0 and (pair.over_heights_m as Array).all(func(y): return absf(float(y) - top_pair) < 1e-6) \
+		and int(pair.pieces_drawn) == int(pair.over_points) + 1
+	var over_walls := 0
+	for tid in ends:
+		if not ((ends[tid] as Dictionary).over as Array).is_empty():
+			over_walls += 1
+	return {"ok": bool(ct.ok) and int(through.inside) == 0 and int(through.plain_inside) > 0 and int(through.threads) == ends.size() and row_ok and pair_ok and not bool(odd.get("still_drawing", true)),
+		"walls": walls.size(), "threads": ends.size(), "over_a_wall": over_walls, "pressed_threads": pressed.size(), "pressed_pins": pressed_pins.size(),
+		"drawn_in_ms": odd.get("drawn_ms", -1), "still_drawing": odd.get("still_drawing", true),
+		"restated_ok": ct.ok, "pieces_restated_worst_m": ct.worst_m, "pieces_bad": (ct.pieces_bad as Array).slice(0, 5), "pieces_bad_n": (ct.pieces_bad as Array).size(),
+		"tag_bad": (ct.tag_bad as Array).slice(0, 5), "missing": (ct.missing as Array).slice(0, 5), "extra": (ct.extra as Array).slice(0, 5),
+		"through": through, "plain_through_n": (through.plain_through as Array).size(), "row_case": row, "row_ok": row_ok, "pair_case": pair, "pair_ok": pair_ok}
+
+## A THREAD NEVER PASSES THROUGH CARDBOARD, on what is drawn: every drawn thread's centre line (its tubes' ring centres,
+## piece by piece, straight from one to the next as the tube is) tried every SAMPLE_STEP against every wall's slab -
+## inside when |x| < w / 2, |y| < h / 2 and -CARDBOARD < z < 0 in the wall's board frame (a segment whose box misses the
+## slab's cannot have a point in it, and is counted without being walked). With `plain` (thread id -> [p, q]), the same
+## for the one curve each thread would be without the rule (threadCurve p to q, as 16 chords). {tried, walked, inside,
+## inside_threads, plain_inside, plain_through: the threads whose one curve would pass through}. `margin`: a drawn sample
+## counts as inside from this far in (0: anywhere inside); `skip` (thread id -> true): drawn threads not tried (counted).
+func _through_cardboard(tnode: Node3D, walls: Dictionary, braw: Dictionary, plain: Dictionary = {}, margin := 0.0, skip: Dictionary = {}) -> Dictionary:
+	var out := {"threads": 0, "tried": 0, "walked": 0, "inside": 0, "inside_threads": [], "deepest_mm": 0.0, "plain_inside": 0, "plain_through": [],
+		"margin_mm": snappedf(margin * 1000.0, 0.001), "not_tried": 0}
+	var strings := tnode.get_node_or_null("Strings") as MeshInstance3D if tnode != null else null
+	if strings == null:
+		return out
+	var slabs: Array = []
+	for bid in walls:
+		var b: Dictionary = braw.get(bid, {})
+		slabs.append([bid, (walls[bid] as Node3D).global_transform.affine_inverse(), float(b.get("w", 0.8)) / 2.0, float(b.get("h", 0.6)) / 2.0])
+	var ids := _drawn_ids(tnode)
+	out.threads = ids.size()
+	for k in ids.size():
+		if skip.has(str(ids[k])):
+			out.not_tried = int(out.not_tried) + 1
+			continue
+		var c: Array = _tube_rings(strings, k).centres
+		var rings_n := int(strings.get_meta("rings", 17))
+		var hits := _line_in_slabs(c, rings_n, slabs, out, margin)
+		if hits > 0:
+			(out.inside_threads as Array).append([ids[k], hits])
+	for tid in plain:
+		var pq: Array = plain[tid]
+		var pts: Array = []
+		for i in 17:
+			pts.append(_contract_curve(pq[0], pq[1], float(i) / 16.0))
+		var probe_out := {"tried": 0, "walked": 0, "inside": 0, "deepest_mm": 0.0}
+		# 0.1 mm into the cardboard at least: a curve between two pins on one face lies in that face's plane, a hair
+		# inside it or outside by the rounding of the frames, and passes through nothing
+		var hits := _line_in_slabs(pts, 17, slabs, probe_out, 0.0001)
+		out.plain_inside = int(out.plain_inside) + hits
+		if hits > 0:
+			(out.plain_through as Array).append(tid)
+	return out
+
+## How many of the points of a polyline (in runs of `run` points: a tube's pieces) tried every SAMPLE_STEP lie inside
+## one of `slabs` ([board, world -> board frame, w / 2, h / 2]), at least `margin` from its every side; the counts land
+## in `out`.
+func _line_in_slabs(pts: Array, run: int, slabs: Array, out: Dictionary, margin := 0.0) -> int:
+	var hits := 0
+	for j in pts.size() / run:
+		for i in range(run - 1):
+			var a: Vector3 = pts[j * run + i]
+			var b: Vector3 = pts[j * run + i + 1]
+			var n := maxi(1, ceili(a.distance_to(b) / SAMPLE_STEP))
+			for sl in slabs:
+				out.tried = int(out.tried) + n + 1
+				var inv: Transform3D = sl[1]
+				var la := inv * a
+				var lb := inv * b
+				var hw: float = sl[2]
+				var hh: float = sl[3]
+				if maxf(la.x, lb.x) <= -hw or minf(la.x, lb.x) >= hw or maxf(la.y, lb.y) <= -hh or minf(la.y, lb.y) >= hh \
+						or maxf(la.z, lb.z) <= -CB_THICK or minf(la.z, lb.z) >= 0.0:
+					continue
+				out.walked = int(out.walked) + n + 1
+				for s in n + 1:
+					var v := la.lerp(lb, float(s) / float(n))
+					if absf(v.x) < hw - margin and absf(v.y) < hh - margin and v.z > -CB_THICK + margin and v.z < -margin:
+						hits += 1
+						out.inside = int(out.inside) + 1
+						out.deepest_mm = maxf(float(out.deepest_mm), minf(-v.z, v.z + CB_THICK) * 1000.0)
+	return hits
+
+# ---- the contract RESTATED in doubles: pinOf, wallPoint, wallLines, intoWall, overWalls, overBoard, threadPieces ----
+
+static func _v3d(a: Array) -> Vector3:
+	return Vector3(float(a[0]), float(a[1]), float(a[2]))
+
+## stickers.ts pinOf in doubles: the middle of the top edge of the DRAWN box, inset by min(8 % of its height, 2 cm).
+func _c_pin(s: Dictionary) -> Array:
+	var d: Dictionary = data.design(str(s.get("design", "")))
+	var size := float(s.get("size", 0.2))
+	var eh := size
+	if not d.is_empty():
+		var m := 0.0
+		if d.get("cut") is Dictionary and float((d.cut as Dictionary).get("m", 0.0)) > 0.0:
+			m = float(d.cut.m)
+		var bw := float(d.get("w", 100.0)) + 2.0 * m
+		var bh := float(d.get("h", 100.0)) + 2.0 * m
+		eh = size * bh / bw if bw >= bh else size
+	var at: Array = s.get("at", [0.0, 0.0, 0.0])
+	var n0: Array = s.get("n", [0.0, 0.0, 1.0])
+	var u0: Array = s.get("up", [0.0, 1.0, 0.0])
+	var nl := sqrt(float(n0[0]) ** 2 + float(n0[1]) ** 2 + float(n0[2]) ** 2)
+	var n := [float(n0[0]) / nl, float(n0[1]) / nl, float(n0[2]) / nl]
+	var ud: float = float(u0[0]) * n[0] + float(u0[1]) * n[1] + float(u0[2]) * n[2]
+	var up := [float(u0[0]) - n[0] * ud, float(u0[1]) - n[1] * ud, float(u0[2]) - n[2] * ud]
+	var ul: float = sqrt(float(up[0]) ** 2 + float(up[1]) ** 2 + float(up[2]) ** 2)
+	var k := eh / 2.0 - minf(eh * 0.08, 0.02)
+	return [float(at[0]) + up[0] / ul * k, float(at[1]) + up[1] / ul * k, float(at[2]) + up[2] / ul * k]
+
+## stickers.ts wallPoint in doubles (as _contract_wall_point): a point of a wall's board frame in its construction's.
+static func _c_wall_point(t: Dictionary, w: Dictionary, b: Dictionary, p: Array) -> Array:
+	var a := deg_to_rad(float(w.get("yaw", 0.0)))
+	var wx := float(p[0]) * cos(a) + float(p[2]) * sin(a)
+	var wz := -float(p[0]) * sin(a) + float(p[2]) * cos(a)
+	var x := float(w.at[0]) + wx
+	var z := float(w.at[1]) + wz
+	var ta := deg_to_rad(float(t.get("yaw", 0.0)))
+	return [float(t.at[0]) + x * cos(ta) + z * sin(ta), float(t.get("h", 0.0)) + float(b.get("h", 0.6)) / 2.0 + float(p[1]), float(t.at[1]) - x * sin(ta) + z * cos(ta)]
+
+## stickers.ts wallLines: each wall seen from above, {a, b, n, bottom, top}, in the construction's frame.
+static func _c_wall_lines(craw: Dictionary, braw: Dictionary, tables_by: Dictionary) -> Array:
+	var out: Array = []
+	for w in craw.get("walls", []):
+		var t: Dictionary = tables_by.get(str(w.table), {})
+		var b: Dictionary = braw.get(str(w.board), {})
+		if t.is_empty() or b.is_empty():
+			continue
+		var bw := float(b.get("w", 0.8))
+		var bh := float(b.get("h", 0.6))
+		var a := _c_wall_point(t, w, b, [-bw / 2.0, -bh / 2.0, -CB_THICK / 2.0])
+		var e := _c_wall_point(t, w, b, [bw / 2.0, -bh / 2.0, -CB_THICK / 2.0])
+		var yaw := deg_to_rad(float(t.get("yaw", 0.0)) + float(w.get("yaw", 0.0)))
+		out.append({"board": str(w.board), "a": [a[0], a[2]], "b": [e[0], e[2]], "n": [sin(yaw), cos(yaw)], "bottom": float(t.get("h", 0.0)), "top": float(t.get("h", 0.0)) + bh})
+	return out
+
+## stickers.ts threadCurve(p, q).at(u) in doubles: the control point min(0.12, span / 6) below the pins' middle.
+static func _c_curve_at(p: Array, q: Array, u: float) -> Array:
+	var span := sqrt((float(q[0]) - float(p[0])) ** 2 + (float(q[1]) - float(p[1])) ** 2 + (float(q[2]) - float(p[2])) ** 2)
+	var c := [(float(p[0]) + float(q[0])) / 2.0, (float(p[1]) + float(q[1])) / 2.0 - minf(0.12, span / 6.0), (float(p[2]) + float(q[2])) / 2.0]
+	var a := (1.0 - u) * (1.0 - u)
+	var b := 2.0 * u * (1.0 - u)
+	var d := u * u
+	return [a * float(p[0]) + b * c[0] + d * float(q[0]), a * float(p[1]) + b * c[1] + d * float(q[1]), a * float(p[2]) + b * c[2] + d * float(q[2])]
+
+## stickers.ts intoWall: where the piece threadCurve(p, q) first runs into the wall's cardboard below its top edge,
+## {lo, near, far}; {} when it never does. It passes over the wall when its lowest point over the stretch inside the
+## cardboard is at or above the TOP EDGE (not the edge + THREAD_OVER: the piece between a wall's own two points, which
+## sags a little between them, passes over it). The near face is the one the line comes in through (the side of zIn,
+## where it enters the cardboard); a line in by the wall's end, or starting within the cardboard's thickness (just past
+## the wall before it, two back to back), comes from the side q is not on (-sign(z1)); one inside it end to end, from
+## p's side (sign(z0), or 1).
+static func _c_into_wall(p: Array, q: Array, w: Dictionary) -> Dictionary:
+	var p0 := float(p[0])
+	var p1 := float(p[1])
+	var p2 := float(p[2])
+	var q0 := float(q[0])
+	var q1 := float(q[1])
+	var q2 := float(q[2])
+	var span := sqrt((q0 - p0) ** 2 + (q1 - p1) ** 2 + (q2 - p2) ** 2)
+	var cy := (p1 + q1) / 2.0 - minf(0.12, span / 6.0)
+	var length := sqrt((q0 - p0) ** 2 + (q2 - p2) ** 2)
+	var off := CB_THICK / 2.0 + CB_THREAD_CLEAR
+	var a: Array = w.a
+	var b: Array = w.b
+	var nn: Array = w.n
+	var hw := sqrt((float(b[0]) - float(a[0])) ** 2 + (float(b[1]) - float(a[1])) ** 2) / 2.0
+	if not (hw > CB_SKIN):
+		return {}
+	var mx := (float(a[0]) + float(b[0])) / 2.0
+	var mz := (float(a[1]) + float(b[1])) / 2.0
+	var ex := (float(b[0]) - float(a[0])) / (2.0 * hw)
+	var ez := (float(b[1]) - float(a[1])) / (2.0 * hw)
+	var x0 := (p0 - mx) * ex + (p2 - mz) * ez
+	var z0 := (p0 - mx) * float(nn[0]) + (p2 - mz) * float(nn[1])
+	var x1 := (q0 - mx) * ex + (q2 - mz) * ez
+	var z1 := (q0 - mx) * float(nn[0]) + (q2 - mz) * float(nn[1])
+	var lo := 0.0
+	var hi := 1.0
+	for ax in [[x0, x1, hw - CB_SKIN], [z0, z1, CB_THICK / 2.0 - CB_SKIN]]:
+		var v0: float = ax[0]
+		var d: float = float(ax[1]) - v0
+		var h: float = ax[2]
+		if absf(d) < 1e-15:
+			if not (absf(v0) < h):
+				hi = -1.0
+			continue
+		lo = maxf(lo, minf((-h - v0) / d, (h - v0) / d))
+		hi = minf(hi, maxf((-h - v0) / d, (h - v0) / d))
+	if not ((hi - lo) * length > CB_SKIN):
+		return {}
+	var y_at := func(u: float) -> float: return (1.0 - u) * (1.0 - u) * p1 + 2.0 * u * (1.0 - u) * cy + u * u * q1
+	var ys: Array = [y_at.call(lo), y_at.call(hi)]
+	var den := p1 - 2.0 * cy + q1
+	if absf(den) > 1e-15:
+		var sv := (p1 - cy) / den
+		if sv > lo and sv < hi:
+			ys.append(y_at.call(sv))
+	if ys.min() >= float(w.top) or ys.max() < float(w.bottom):
+		return {}
+	var s := minf(hi, maxf(lo, z0 / (z0 - z1))) if absf(z1 - z0) > 1e-15 else (lo + hi) / 2.0
+	var xs := x0 + s * (x1 - x0)
+	var px := mx + ex * xs
+	var pz := mz + ez * xs
+	var z_in := z0 + lo * (z1 - z0)
+	var band := CB_THICK / 2.0 - CB_SKIN
+	var side := 1.0
+	if absf(z_in) >= band - 1e-12:
+		side = signf(z_in)
+	elif absf(z1) >= band:
+		side = -signf(z1)
+	elif z0 < 0.0:
+		side = -1.0
+	var k := side * off
+	var top := float(w.top) + CB_THREAD_OVER
+	return {"lo": lo, "near": [px + float(nn[0]) * k, top, pz + float(nn[1]) * k], "far": [px - float(nn[0]) * k, top, pz - float(nn[1]) * k]}
+
+## stickers.ts overWalls: every PIECE held to every wall. From the one curve p..q, the pieces are scanned from p; in the
+## first that runs into any wall, the wall it meets first (the least lo; of equals the first in the walls' order) puts
+## its near and far points after the piece's start, and it all begins again, until no piece runs into any wall. A wall
+## is gone over twice at most (there and back, round its end): a sticker on a face pressed against another wall is not
+## chased round them for ever.
+static func _c_over_walls(p: Array, q: Array, lines: Array) -> Array:
+	var met: Array = []
+	met.resize(lines.size())
+	met.fill(0)
+	var pts: Array = [p, q]
+	while true:
+		var at := -1
+		var wall := -1
+		var hit := {}
+		var k := 0
+		while k + 1 < pts.size() and at < 0:
+			for i in lines.size():
+				if int(met[i]) >= 2:
+					continue
+				var h := _c_into_wall(pts[k], pts[k + 1], lines[i])
+				if not h.is_empty() and (hit.is_empty() or float(h.lo) < float(hit.lo)):
+					hit = h
+					wall = i
+			if not hit.is_empty():
+				at = k
+			k += 1
+		if hit.is_empty():
+			break
+		met[wall] = int(met[wall]) + 1
+		pts.insert(at + 1, hit.far)
+		pts.insert(at + 1, hit.near)
+	return pts.slice(1, pts.size() - 1)
+
+## How far a point (the construction's frame) lies inside the nearest wall's cardboard but `except` (> 0 inside; the
+## least of its distances to the slab's sides: along the wall, through the cardboard, from its bottom and top edge), as
+## cardboard.test.ts depthIn: a pin within PRESSED_SEEN of another wall is on a face pressed against it.
+static func _c_depth_in(pt: Array, lines: Array, except := "") -> float:
+	var deep := -INF
+	for w in lines:
+		if str(w.get("board", "")) == except:
+			continue
+		var a: Array = w.a
+		var b: Array = w.b
+		var nn: Array = w.n
+		var hw := sqrt((float(b[0]) - float(a[0])) ** 2 + (float(b[1]) - float(a[1])) ** 2) / 2.0
+		var mx := (float(a[0]) + float(b[0])) / 2.0
+		var mz := (float(a[1]) + float(b[1])) / 2.0
+		var ex := (float(b[0]) - float(a[0])) / (2.0 * hw)
+		var ez := (float(b[1]) - float(a[1])) / (2.0 * hw)
+		var x := (float(pt[0]) - mx) * ex + (float(pt[2]) - mz) * ez
+		var z := (float(pt[0]) - mx) * float(nn[0]) + (float(pt[2]) - mz) * float(nn[1])
+		deep = maxf(deep, minf(minf(hw - absf(x), CB_THICK / 2.0 - absf(z)), minf(float(pt[1]) - float(w.bottom), float(w.top) - float(pt[1]))))
+	return deep
+
+## stickers.ts overBoard: on one cardboard board (its frame), a thread between its two faces over the top edge.
+static func _c_over_board(p: Array, q: Array, b: Dictionary) -> Array:
+	if str(b.get("stock", "")) != "cardboard":
+		return []
+	var w := float(b.get("w", 0.8))
+	var h := float(b.get("h", 0.6))
+	return _c_over_walls(p, q, [{"a": [-w / 2.0, -CB_THICK / 2.0], "b": [w / 2.0, -CB_THICK / 2.0], "n": [0.0, 1.0], "bottom": -h / 2.0, "top": h / 2.0}])
+
+## stickers.ts threadPieces: [p, ...over, q] pairwise, and the longest (the first of equals within 1e-12).
+static func _c_pieces(p: Array, q: Array, over: Array) -> Dictionary:
+	var pts: Array = [p] + over + [q]
+	var pieces: Array = []
+	for i in range(1, pts.size()):
+		pieces.append([pts[i - 1], pts[i]])
+	var tag := 0
+	var best := -1.0
+	for i in pieces.size():
+		var a: Array = pieces[i][0]
+		var b: Array = pieces[i][1]
+		var l := sqrt((float(b[0]) - float(a[0])) ** 2 + (float(b[1]) - float(a[1])) ** 2 + (float(b[2]) - float(a[2])) ** 2)
+		if l > best + 1e-12:
+			best = l
+			tag = i
+	return {"pieces": pieces, "tag": tag}
+
+## CI: INK LIES ON THE CARDBOARD (stickers.ts drawnStrokes). On a front (cb_worked's first sticker whose picture is
+## opaque over its middle third) and on a back (probe-cb-back, on cb_gap's), a 2 cm green marker line drawn NOW - after
+## the sticker - across its middle and 6 cm past each side; seen square on and 55 degrees off its normal, with the line
+## and with that face's lines hidden: in the sticker's middle third no pixel differs by more than 8 levels (the sticker
+## pixels win), and beside the sticker the line is seen. Then PS: the pens are the contract's.
+func _ink_under_stickers(walls: Dictionary, braw: Dictionary) -> void:
+	var rows: Array = []
+	var ok := true
+	for spec in [["cb_worked", "front", ""], ["cb_gap", "back", "probe-cb-back"]]:
+		var bid := str(spec[0])
+		var face := str(spec[1])
+		var body: Node3D = walls.get(bid)
+		var layer := body.get_node_or_null("StickerLayer") as Node3D if body != null else null
+		var row := {"board": bid, "face": face, "ok": false}
+		rows.append(row)
+		if layer == null:
+			ok = false
+			continue
+		var s: Dictionary = data.sticker(str(spec[2])) if str(spec[2]) != "" else {}
+		if s.is_empty():
+			for c in data.stickers_on("board:" + bid):
+				if str(c.get("state", "")) == "on" and float(StickerData.a3(c.get("n"))[2]) > 0.0 and _opaque_middle(c):
+					s = c
+					break
+		if s.is_empty() or str(s.get("state", "")) != "on" or not _opaque_middle(s):
+			row["why"] = "no sticker opaque over its middle third on that face"
+			ok = false
+			continue
+		var d: Dictionary = data.design(str(s.design))
+		var e := StickerData.extent(d, float(s.get("size", 0.2)))
+		var at := Vector2(float(s.at[0]), float(s.at[1]))
+		var hw := float(braw.get(bid, {}).get("w", 0.8)) / 2.0 - 0.005
+		var a := Vector2(maxf(-hw, at.x - e.x / 2.0 - 0.06), at.y)
+		var b := Vector2(minf(hw, at.x + e.x / 2.0 + 0.06), at.y)
+		var line: Dictionary = data.scribble(bid, face, "marker", [[a.x, a.y], [b.x, b.y]], "#2f8f4f", 0.02)
+		await _settle_cardboard()
+		row["sticker"] = str(s.id)
+		row["line"] = str(line.get("id", ""))
+		var bx := body.global_transform
+		var zf := -CB_THICK if face == "back" else 0.0
+		var out := -1.0 if face == "back" else 1.0
+		var strokes_node := layer.get_node_or_null("Strokes_" + face) as Node3D
+		var views := {}
+		for deg in [0.0, 55.0]:
+			var r := deg_to_rad(deg)
+			var eye: Vector3 = bx * Vector3(at.x + 0.6 * sin(r), at.y, zf + out * 0.6 * cos(r))
+			var xf := Transform3D(Basis(), eye).looking_at(bx * Vector3(at.x, at.y, zf))
+			var tag := "ci_%s_%s_%d" % [bid, face, int(deg)]
+			var img_with := await _shoot(xf, tag + ".png")
+			if strokes_node != null:
+				strokes_node.visible = false
+			var img_without := await _shoot(xf, tag + "_without.png")
+			if strokes_node != null:
+				strokes_node.visible = true
+			var zz := zf + out * StickerLayer.LIFT
+			var inner := _screen_rect([bx * Vector3(at.x - e.x / 6.0, at.y - e.y / 6.0, zz), bx * Vector3(at.x + e.x / 6.0, at.y - e.y / 6.0, zz),
+				bx * Vector3(at.x + e.x / 6.0, at.y + e.y / 6.0, zz), bx * Vector3(at.x - e.x / 6.0, at.y + e.y / 6.0, zz)])
+			var bx0 := at.x + e.x / 2.0 + 0.012
+			var bx1 := minf(b.x - 0.004, at.x + e.x / 2.0 + 0.05)
+			var beside := _screen_rect([bx * Vector3(bx0, at.y - 0.006, zf), bx * Vector3(bx1, at.y - 0.006, zf), bx * Vector3(bx1, at.y + 0.006, zf), bx * Vector3(bx0, at.y + 0.006, zf)])
+			var din := _diff_rect(img_with, img_without, inner)
+			var dout := _diff_rect(img_with, img_without, beside)
+			views[str(int(deg))] = {"sticker_middle": din, "beside": dout}
+			ok = ok and int(din.pixels) > 50 and int(din.over8) == 0 and int(dout.pixels) > 20 and float(dout.share_off) >= 0.5
+		row["views"] = views
+		row["ok"] = not line.is_empty()
+		ok = ok and not line.is_empty()
+	_check("CI ink lies on the cardboard: a 2 cm line drawn AFTER a sticker, across it, on a wall's front and on a back, is under it - in the sticker's middle no pixel differs from the same view without the line by more than 8 levels, square on and 55 degrees off - and is seen beside it",
+		ok, {"faces": rows, "stroke_pull_mm": StickerLayer.STROKE_PULL * 1000.0, "stroke_priority": StickerLayer.STROKE_PRIORITY})
+	_pens_from_contract()
+
+## Whether a sticker's picture is opaque (alpha 0.9 and more) over the middle third of its drawn box.
+func _opaque_middle(s: Dictionary) -> bool:
+	var tex: Texture2D = data.texture(str(s.get("design", "")))
+	if tex == null:
+		return false
+	var img: Image = tex.get_image()
+	if img == null:
+		return false
+	if img.is_compressed():
+		img.decompress()
+	for j in range(img.get_height() / 3, img.get_height() * 2 / 3, 2):
+		for i in range(img.get_width() / 3, img.get_width() * 2 / 3, 2):
+			if img.get_pixel(i, j).a < 0.9:
+				return false
+	return true
+
+## PS: the pens are the contract's (stickers.ts PENS: cap, join, soft; MITER_LIMIT; RESTATED in CB_PENS). Each pen's
+## ribbon (sticker_layer.gd stroke_ribbon) of a line with a right-angle corner, and of one with a sharp corner (a turn
+## of 150 degrees, past any miter limit of 2 and the round pens' gentle mitre): every vertex's uv.y its softness; its
+## start reaching hw (a round cap) or hw x sqrt 2 (a square cap's corner); its right-angle corner reaching hw (round) or
+## the mitre's hw x sqrt 2 (miter, 1.41 <= MITER_LIMIT); its sharp corner hw for both (round; a bevel), where hw is half
+## the width, a soft pen's 0.5 + 3 x soft widths.
+func _pens_from_contract() -> void:
+	var rows := {}
+	var ok := true
+	var turn := deg_to_rad(150.0)
+	for pen in CB_PENS:
+		var spec: Dictionary = CB_PENS[pen]
+		var w := 0.01
+		var soft := float(spec.soft)
+		var hw := w * (0.5 + 3.0 * soft) if soft > 0.0 else w / 2.0
+		# the layer under test's (--layer-script), else the repo's
+		var right: Dictionary = layer_script.call("stroke_ribbon", {"face": "front", "pen": pen, "width": w, "colour": "#16191e", "points": [[0.0, 0.0], [0.1, 0.0], [0.1, 0.1]]})
+		var sharp: Dictionary = layer_script.call("stroke_ribbon", {"face": "front", "pen": pen, "width": w, "colour": "#16191e", "points": [[0.0, 0.0], [0.1, 0.0], [0.1 + 0.1 * cos(turn), 0.1 * sin(turn)]]})
+		var start_reach := 0.0
+		var corner_reach := 0.0
+		var soft_bad := 0
+		for k in (right.verts as PackedVector3Array).size():
+			var v: Vector3 = right.verts[k]
+			if absf(float(right.uvs[k].y) - soft) > 1e-6:
+				soft_bad += 1
+			if v.x <= 1e-9:
+				start_reach = maxf(start_reach, Vector2(v.x, v.y).length())
+			if Vector2(v.x - 0.1, v.y).length() < hw * 1.6:
+				corner_reach = maxf(corner_reach, Vector2(v.x - 0.1, v.y).length())
+		var sharp_reach := 0.0
+		for k in (sharp.verts as PackedVector3Array).size():
+			var v: Vector3 = sharp.verts[k]
+			if absf(float(sharp.uvs[k].y) - soft) > 1e-6:
+				soft_bad += 1
+			if Vector2(v.x - 0.1, v.y).length() < hw * 4.0:
+				sharp_reach = maxf(sharp_reach, Vector2(v.x - 0.1, v.y).length())
+		var want_start := hw * sqrt(2.0) if str(spec.cap) == "square" else hw
+		var want_corner := hw * sqrt(2.0) if str(spec.join) == "miter" and sqrt(2.0) <= CB_MITER_LIMIT else hw
+		var row := {"hw_mm": snappedf(hw * 1000.0, 0.001), "start_mm": snappedf(start_reach * 1000.0, 0.001), "want_start_mm": snappedf(want_start * 1000.0, 0.001),
+			"right_corner_mm": snappedf(corner_reach * 1000.0, 0.001), "want_right_corner_mm": snappedf(want_corner * 1000.0, 0.001),
+			"sharp_corner_mm": snappedf(sharp_reach * 1000.0, 0.001), "want_sharp_corner_mm": snappedf(hw * 1000.0, 0.001), "uv_soft_off": soft_bad, "soft": soft}
+		row["ok"] = absf(start_reach - want_start) < 1e-6 and absf(corner_reach - want_corner) < 1e-6 and absf(sharp_reach - hw) < 1e-6 and soft_bad == 0
+		ok = ok and bool(row.ok)
+		rows[pen] = row
+	_check("PS the pens are the contract's (PENS, MITER_LIMIT, RESTATED): each ribbon carries its pen's softness (the spray 0.2) and reaches its half width (the spray 0.5 + 3 x 0.2 widths), ends in its cap (the chisel's square corner hw x sqrt 2 past its start, a round pen's disc hw) and turns a corner by its join (the chisel's right angle mitred to hw x sqrt 2, a round pen's round; a turn of 150 degrees bevelled or round, hw)",
+		ok, {"pens": rows, "miter_limit": StickerData.MITER_LIMIT})
+
+## CP: the pad aimed at a wall's back - the sticker under the aim is the back one (from in front, the front one at the
+## same place, 5 mm of cardboard away), a tap sticks one on the back (n = -Z, at.z = -CARDBOARD), drawn there, a hold
+## from behind peels the back one and leaves the front one; the wall's cut edge is refused.
+func _pad_on_backs(walls: Dictionary) -> void:
+	var gap: Node3D = walls.get("cb_gap")
+	var cp := {"ok": false, "why": "no wall cb_gap, or no sticker seeded on its back"}
+	var back_rec: Dictionary = data.sticker("probe-cb-back")
+	var front_id := str(report.get("cb_back_behind", ""))
+	if gap != null and not back_rec.is_empty() and front_id != "":
+		if aim_cam == null:
+			aim_cam = Camera3D.new()
+			aim_cam.name = "AimCam"
+			add_child(aim_cam)
+		if pad == null:
+			if pad_script != null:
+				pad = pad_script.new()
+				pad.name = "StickerPad"
+			else:
+				pad = load("res://commons/stickers/sticker_pad.tscn").instantiate()
+		pad.apply_grid_config({"sheet": "marks", "sticker": "mark_heart", "size": "0.1"})
+		pad.wear(aim_cam, 0.4, false)
+		pad.set("turn", 0.0)
+		var cp_refused: Array = []
+		pad.refused.connect(func(reason): cp_refused.append(reason))
+		var gx := gap.global_transform
+		var spot := Vector2(float(back_rec.at[0]), float(back_rec.at[1]))
+		var layer := gap.get_node_or_null("StickerLayer") as Node3D
+		# from in front and from behind, the same place
+		aim_cam.global_transform = Transform3D(Basis(), gx * Vector3(spot.x, spot.y, 0.8)).looking_at(gx * Vector3(spot.x, spot.y, 0.0))
+		await _ticks(0.1)
+		var front_target := str(((pad.get("aim") as Dictionary).get("target", {}) as Dictionary).get("id", ""))
+		aim_cam.global_transform = Transform3D(Basis(), gx * Vector3(spot.x, spot.y, -0.8)).looking_at(gx * Vector3(spot.x, spot.y, -CB_THICK))
+		await _ticks(0.1)
+		var back_aim: Dictionary = pad.get("aim")
+		var back_target := str((back_aim.get("target", {}) as Dictionary).get("id", ""))
+		# a tap from behind at another place of the back
+		var tap_at := Vector2(-0.22, -0.16)
+		aim_cam.global_transform = Transform3D(Basis(), gx * Vector3(tap_at.x, tap_at.y, -0.8)).looking_at(gx * Vector3(tap_at.x, tap_at.y, -CB_THICK))
+		await _ticks(0.1)
+		var tap_aim: Dictionary = pad.get("aim")
+		var before := int(data.pending.size())
+		pad.fire_worn()
+		await get_tree().physics_frame
+		pad.release_worn()
+		await _settle_cardboard()
+		var op: Dictionary = data.pending[-1].op if data.pending.size() == before + 1 else {}
+		_made_add(op)
+		var st: Dictionary = op.get("sticker", {})
+		var lift := float((layer.get("lifts") as Dictionary).get(str(st.get("id", "")), StickerLayer.LIFT)) if layer != null and layer.get("lifts") is Dictionary else StickerLayer.LIFT
+		var drawn_err := INF
+		var drawn_nz := 0.0
+		if layer != null and not st.is_empty():
+			for c in layer.get_children():
+				if c is MultiMeshInstance3D and str(c.name) == "Stickers_" + str(st.get("design", "")):
+					var mm: MultiMesh = (c as MultiMeshInstance3D).multimesh
+					for i in mm.instance_count:
+						var xf := mm.get_instance_transform(i)
+						var d := xf.origin.distance_to(Vector3(float(st.at[0]), float(st.at[1]), -CB_THICK - lift))
+						if d < drawn_err:
+							drawn_err = d
+							drawn_nz = xf.basis.z.normalized().z
+		var stuck_ok: bool = str(op.get("op", "")) == "add" and str((st.get("host", {}) as Dictionary).get("id", "")) == "cb_gap" \
+			and StickerData.a3(st.get("n")) == [0.0, 0.0, -1.0] and float(StickerData.a3(st.get("at"))[2]) == -CB_THICK \
+			and absf(float(st.at[0]) - tap_at.x) < 0.001 and absf(float(st.at[1]) - tap_at.y) < 0.001 and drawn_err < 0.001 and drawn_nz < -0.99
+		# a hold from behind on the seeded back sticker: it peels, the front one behind it stays
+		aim_cam.global_transform = Transform3D(Basis(), gx * Vector3(spot.x, spot.y, -0.8)).looking_at(gx * Vector3(spot.x, spot.y, -CB_THICK))
+		await _ticks(0.1)
+		pad.fire_worn()
+		await _ticks(0.45)
+		pad.release_worn()
+		await _frames(3)
+		var back_state := str(data.sticker("probe-cb-back").get("state", ""))
+		var front_state := str(data.sticker(front_id).get("state", ""))
+		# the cut edge, from above: refused, no op
+		var before_edge := int(data.pending.size())
+		cp_refused.clear()
+		aim_cam.global_transform = Transform3D(Basis(), gx * Vector3(0.1, 0.8, -CB_THICK / 2.0)).looking_at(gx * Vector3(0.1, 0.3, -CB_THICK / 2.0), gx.basis * Vector3(0, 0, -1))
+		await _ticks(0.1)
+		var edge_aim: Dictionary = pad.get("aim")
+		pad.fire_worn()
+		await get_tree().physics_frame
+		pad.release_worn()
+		await _frames(2)
+		var edge_ok: bool = str(edge_aim.get("reason", "")) == "THE EDGE OF THE BOARD" and data.pending.size() == before_edge and cp_refused.size() == 1
+		cp = {"ok": front_target == front_id and back_target == "probe-cb-back" and bool(tap_aim.get("ok", false)) and stuck_ok and back_state == "peeled" and front_state == "on" and edge_ok,
+			"aimed_from_in_front": front_target, "aimed_from_behind": back_target, "want": {"front": front_id, "back": "probe-cb-back"},
+			"tap_op": op, "drawn_on_the_back_mm": snappedf(drawn_err * 1000.0, 0.001), "drawn_n_z": drawn_nz,
+			"hold_from_behind": {"back": back_state, "front": front_state}, "edge": {"reason": edge_aim.get("reason", ""), "ops": data.pending.size() - before_edge, "refused": cp_refused.duplicate()}}
+	_check("CP the pad on a wall's BACK: aimed from behind, the sticker under the aim is the back one (from in front, the front one at the same place); a tap sticks one with n = [0, 0, -1] and at.z = -CARDBOARD at the hit (1 mm), drawn on the back; a hold from behind peels the back one and leaves the front one; the wall's cut edge is refused (THE EDGE OF THE BOARD) and makes no op",
+		bool(cp.ok), cp)
+
+## PN and PV: the pen, worn on the aim camera (the desktop) and then on a hand (VR, its tip).
+func _pen_checks(con: Node3D, walls: Dictionary) -> void:
+	var worked: Node3D = walls.get("cb_worked")
+	var gap: Node3D = walls.get("cb_gap")
+	if worked == null or gap == null:
+		_check("PN the pen on the desktop", false, {"why": "no wall cb_worked or cb_gap"})
+		_check("PV the pen in VR", false, {"why": "no wall cb_worked or cb_gap"})
+		return
+	if pad != null:
+		pad.put_away()
+	if aim_cam == null:
+		aim_cam = Camera3D.new()
+		aim_cam.name = "AimCam"
+		add_child(aim_cam)
+	var pen_node: Node3D = null
+	if pen_script != null:
+		pen_node = pen_script.new()
+	else:
+		pen_node = load("res://commons/stickers/sticker_pen.tscn").instantiate()
+	pen_node.name = "StickerPen"
+	var pen_refused: Array = []
+	pen_node.apply_grid_config({"pen": "marker", "width": "0.01", "colour": "#1f4f8f", "mode": "aim"})
+	pen_node.wear(aim_cam, 1.0, false)
+	pen_node.refused.connect(func(reason): pen_refused.append(reason))
+	var wl := worked.get_node_or_null("StickerLayer") as Node3D
+	var wx := worked.global_transform
+	# a drag from A to B on cb_worked's front, the aim turned 1 mm a frame (so the 2 mm keep shows), the eye still
+	var a := Vector2(-0.32, -0.21)
+	var b := Vector2(-0.12, -0.19)
+	var eye: Vector3 = wx * Vector3(-0.22, -0.2, 0.9)
+	aim_cam.global_transform = Transform3D(Basis(), eye).looking_at(wx * Vector3(a.x, a.y, 0.0))
+	await _ticks(0.05)
+	var before := int(data.pending.size())
+	var front_before := int((wl.get("strokes_drawn") as Dictionary).get("front", 0)) if wl != null else 0
+	pen_node.fire_worn()
+	var steps := 200
+	var preview_verts := 0
+	for i in steps + 1:
+		var p := a.lerp(b, float(i) / float(steps))
+		aim_cam.global_transform = Transform3D(Basis(), eye).looking_at(wx * Vector3(p.x, p.y, 0.0))
+		await get_tree().physics_frame
+		if i == steps / 2:
+			preview_verts = _preview_vertices(pen_node)
+	await get_tree().physics_frame
+	pen_node.release_worn()
+	var drawn_cond := func() -> bool:
+		return not _cardboard_drawing() and wl != null and wl.get_node_or_null("Strokes_front") != null and int((wl.get("strokes_drawn") as Dictionary).get("front", 0)) == front_before + 1
+	var drawn_ms := await _until(drawn_cond, 2000)
+	await _frames(1)
+	var drag := _pen_op(before)
+	var drag_eval := _line_eval(drag, a, b, "cb_worked", "front", 0.00185)
+	var wl_front := wl.get_node_or_null("Strokes_front") if wl != null else null
+	var drawn_now: bool = wl != null and int((wl.get("strokes_drawn") as Dictionary).get("front", 0)) == front_before + 1 \
+		and wl_front != null and (wl_front.get_meta("ids", []) as Array).has(str((drag.get("stroke", {}) as Dictionary).get("id", "")))
+	var preview_after := _preview_vertices(pen_node)
+	var drag_ok: bool = bool(drag_eval.ok) and str((drag.get("stroke", {}) as Dictionary).get("pen", "")) == "marker" and float((drag.get("stroke", {}) as Dictionary).get("width", 0)) == 0.01 \
+		and str((drag.get("stroke", {}) as Dictionary).get("colour", "")) == "#1f4f8f" and int(drag_eval.points) >= 95 and int(drag_eval.points) <= 106 and drawn_now and preview_verts > 0 and preview_after == 0
+	# the same on cb_gap's BACK, seen from behind: the points in the board frame as seen from the front
+	var gx := gap.global_transform
+	var a2 := Vector2(0.28, 0.17)
+	var b2 := Vector2(0.08, 0.2)
+	var eye2: Vector3 = gx * Vector3(0.18, 0.18, -0.9)
+	aim_cam.global_transform = Transform3D(Basis(), eye2).looking_at(gx * Vector3(a2.x, a2.y, -CB_THICK))
+	await _ticks(0.05)
+	var before2 := int(data.pending.size())
+	pen_node.fire_worn()
+	for i in 101:
+		var p := a2.lerp(b2, float(i) / 100.0)
+		aim_cam.global_transform = Transform3D(Basis(), eye2).looking_at(gx * Vector3(p.x, p.y, -CB_THICK))
+		await get_tree().physics_frame
+	await get_tree().physics_frame
+	pen_node.release_worn()
+	await _frames(2)
+	var back_op := _pen_op(before2)
+	var back_eval := _line_eval(back_op, a2, b2, "cb_gap", "back", 0.00185)
+	# a press that does not move: a dot, two points DOT (0.5 mm) apart
+	var c := Vector2(0.21, -0.23)
+	aim_cam.global_transform = Transform3D(Basis(), wx * Vector3(c.x, c.y, 0.9)).looking_at(wx * Vector3(c.x, c.y, 0.0))
+	await _ticks(0.05)
+	var before3 := int(data.pending.size())
+	pen_node.fire_worn()
+	await _ticks(0.1)
+	pen_node.release_worn()
+	await _frames(2)
+	var dot := _pen_op(before3)
+	var dot_pts: Array = (dot.get("stroke", {}) as Dictionary).get("points", [])
+	var dot_ok: bool = dot_pts.size() == 2 and Vector2(float(dot_pts[0][0]), float(dot_pts[0][1])).distance_to(c) < 0.001 \
+		and absf(Vector2(float(dot_pts[1][0]), float(dot_pts[1][1])).distance_to(Vector2(float(dot_pts[0][0]), float(dot_pts[0][1]))) - 0.0005) < 0.00011
+	# a line past STROKE_POINTS: rows across cb_worked's front, 2.5 mm a frame - two strokes, the second from where the
+	# first ends (physics at 240 ticks a second for it, so 2101 frames take seconds)
+	var tick_rate := Engine.physics_ticks_per_second
+	Engine.physics_ticks_per_second = 240
+	var row_pts := 240
+	var path: Array = []
+	for k in 2101:
+		var row := k / row_pts
+		var col := k % row_pts
+		var x := -0.3 + 0.0025 * float(col if row % 2 == 0 else row_pts - 1 - col)
+		path.append(Vector2(x, 0.24 - 0.012 * float(row)))
+	var eye4: Vector3 = wx * Vector3(0.0, 0.12, 1.1)
+	aim_cam.global_transform = Transform3D(Basis(), eye4).looking_at(wx * Vector3(path[0].x, path[0].y, 0.0))
+	await get_tree().physics_frame
+	var before4 := int(data.pending.size())
+	pen_node.fire_worn()
+	for p in path:
+		aim_cam.global_transform = Transform3D(Basis(), eye4).looking_at(wx * Vector3(p.x, p.y, 0.0))
+		await get_tree().physics_frame
+	await get_tree().physics_frame
+	pen_node.release_worn()
+	await _frames(2)
+	Engine.physics_ticks_per_second = tick_rate
+	var long_ops: Array = []
+	for e in data.pending.slice(before4):
+		if str(e.op.get("op", "")) == "scribble":
+			long_ops.append(e.op)
+	var long_ok := false
+	var long_rows: Array = []
+	if long_ops.size() == 2:
+		var p1: Array = long_ops[0].stroke.points
+		var p2: Array = long_ops[1].stroke.points
+		long_ok = p1.size() == 2000 and p2.size() >= 2 and p2[0] == p1[-1] and p1.size() + p2.size() - 1 >= 2100
+		long_rows = [p1.size(), p2.size(), p1[-1], p2[0]]
+	for op in long_ops:
+		pen_made.append(op)
+	# the negatives: a press on a table's top (no host: the left table, 35 cm in front of its walls) and at nothing -
+	# refused in words, no op
+	var cx := con.global_transform
+	var table_top: Vector3 = cx * Vector3(-1.0, 0.74, 0.1)
+	var over_it: Vector3 = cx * Vector3(-0.6, 1.5, 0.1)
+	var before5 := int(data.pending.size())
+	pen_refused.clear()
+	aim_cam.global_transform = Transform3D(Basis(), over_it).looking_at(table_top)
+	await _ticks(0.05)
+	pen_node.fire_worn()
+	await _ticks(0.1)
+	pen_node.release_worn()
+	aim_cam.global_transform = Transform3D(Basis(), over_it).looking_at(over_it + cx.basis * Vector3(2.0, 10.0, 0.3))
+	await _ticks(0.05)
+	pen_node.fire_worn()
+	await _ticks(0.1)
+	pen_node.release_worn()
+	await _frames(2)
+	var neg_ok: bool = data.pending.size() == before5 and pen_refused.size() == 2 and str(pen_refused[0]) == "THE PEN WRITES ON A BOARD OR A CARDBOARD WALL" and str(pen_refused[1]) == "AIM AT A BOARD TO WRITE ON IT"
+	_check("PN the pen on the desktop: a drag on a wall's face is ONE scribble op (its pen, width and colour), its points on the face where the aim crossed it (1 mm), one kept every 2 mm (STROKE_STEP: %d over 0.2 m), drawn in %d ms (staged) and shown while drawn; on a back seen from behind the same, in the board frame as seen from the front; a press that does not move a dot (STROKE_DOT, 0.5 mm); a line of 2101 points two strokes, the second from where the first ends; a press on a table or at nothing refused in words, no op" % [int(drag_eval.points), drawn_ms],
+		drag_ok and bool(back_eval.ok) and dot_ok and long_ok and neg_ok,
+		{"drag": drag_eval, "drawn": drawn_now, "drawn_within_ms": drawn_ms, "shown_while_drawn_vertices": preview_verts, "shown_after": preview_after, "back": back_eval, "dot": dot_pts, "long_line": long_rows,
+		"refused": pen_refused.duplicate(), "ops_from_the_negatives": data.pending.size() - before5})
+	# PV - in VR: the tip writes within 1.5 cm of a face, the air writes nothing, lifted the line is sent
+	var hand := Node3D.new()
+	hand.name = "FakeHand"
+	add_child(hand)
+	pen_node.apply_grid_config({"pen": "fine", "width": "pen", "colour": "#b3121b", "mode": "tip"})
+	pen_node.wear(hand, 1.0, true)
+	var into: Vector3 = -(wx.basis * Vector3(0, 0, 1)).normalized()
+	var place := func(p: Vector2, out: float) -> void:
+		hand.global_transform = Transform3D(Basis.looking_at(into, Vector3.UP), wx * Vector3(p.x, p.y, out) - into * PEN_TIP)
+	var p0 := Vector2(-0.33, 0.13)
+	var p1 := Vector2(-0.23, 0.13)
+	var p2 := Vector2(-0.18, 0.14)
+	var p3 := Vector2(-0.1, 0.14)
+	place.call(p0, 0.01)
+	await get_tree().physics_frame
+	var before6 := int(data.pending.size())
+	pen_node.fire_worn()
+	for i in 51:
+		place.call(p0.lerp(p1, float(i) / 50.0), 0.01)
+		await get_tree().physics_frame
+	for i in 6:
+		place.call(p1, 0.01 + 0.004 * float(i))      # up to 3 cm off the face: lifted past 2 cm
+		await get_tree().physics_frame
+	var sent_while_held := int(data.pending.size()) - before6
+	for i in 26:
+		place.call(p1.lerp(p2, float(i) / 25.0), 0.03)     # through the air
+		await get_tree().physics_frame
+	for i in 41:
+		place.call(p2.lerp(p3, float(i) / 40.0), 0.005)    # down again
+		await get_tree().physics_frame
+	pen_node.release_worn()
+	await _frames(2)
+	var tip_ops: Array = []
+	for e in data.pending.slice(before6):
+		if str(e.op.get("op", "")) == "scribble":
+			tip_ops.append(e.op)
+	for op in tip_ops:
+		pen_made.append(op)
+	var first := _line_eval(tip_ops[0], p0, p1, "cb_worked", "front", 0.00185) if tip_ops.size() >= 1 else {"ok": false}
+	var second := _line_eval(tip_ops[1], p2, p3, "cb_worked", "front", 0.00185) if tip_ops.size() >= 2 else {"ok": false}
+	# and its back: the tip 1 cm behind cb_gap's back
+	var into_b: Vector3 = (gx.basis * Vector3(0, 0, 1)).normalized()
+	var place_b := func(p: Vector2, out: float) -> void:
+		hand.global_transform = Transform3D(Basis.looking_at(into_b, Vector3.UP), gx * Vector3(p.x, p.y, -CB_THICK - out) - into_b * PEN_TIP)
+	var q0 := Vector2(-0.3, 0.24)
+	var q1 := Vector2(-0.2, 0.24)
+	place_b.call(q0, 0.01)
+	await get_tree().physics_frame
+	var before7 := int(data.pending.size())
+	pen_node.fire_worn()
+	for i in 51:
+		place_b.call(q0.lerp(q1, float(i) / 50.0), 0.01)
+		await get_tree().physics_frame
+	pen_node.release_worn()
+	await _frames(2)
+	var back_tip_op := _pen_op(before7)
+	var tip_back := _line_eval(back_tip_op, q0, q1, "cb_gap", "back", 0.00185)
+	_check("PV the pen in VR: the trigger held, the tip writes only within 1.5 cm of a face - drawn 1 cm off cb_worked's front, lifted to 3 cm (the line sent while the trigger is still held), carried 5 cm through the air (nothing written), down again at 5 mm: two lines, each on its own path (1 mm); the tip 1 cm behind cb_gap's back writes on the back",
+		tip_ops.size() == 2 and sent_while_held == 1 and bool(first.ok) and bool(second.ok) and bool(tip_back.ok),
+		{"ops": tip_ops.size(), "sent_before_the_release": sent_while_held, "first": first, "second": second, "back": tip_back})
+	# PE - the eraser, on the lines just drawn
+	await _settle_cardboard()
+	await _eraser_checks(pen_node, hand, walls, {"back_aim": [a2, b2], "tip_front": [p0, p1], "tip_front_2": [p2, p3], "tip_back": [q0, q1]})
+	pen_node.put_away()
+
+## PE: the eraser - the pen's knob set to "eraser" - worn on the aim camera (the desktop) and then on the hand (VR, its
+## tip), on lines this run drew: two crossing lines on cb_worked's front (the later one is the latest under the
+## crossing), PN's line on cb_gap's back, PV's lines on cb_worked's front and cb_gap's back. What each press should take is
+## the RESTATED strokeAt (_c_stroke_at: the latest of that face's lines in the record's order within half its width and the
+## reach); each press makes exactly one erase op of it, the line is kept in the record as erased by this device and its
+## face no longer draws it, and the mark showed that line before the press. A hold that moves over other lines takes no
+## more; a press where there is no line, or on a table, is refused in words and makes no op.
+func _eraser_checks(pen_node: Node3D, hand: Node3D, walls: Dictionary, lines: Dictionary) -> void:
+	var worked: Node3D = walls.get("cb_worked")
+	var gap: Node3D = walls.get("cb_gap")
+	var refused_e: Array = []
+	var on_refused := func(reason: String) -> void:
+		refused_e.append(reason)
+	pen_node.refused.connect(on_refused)
+	var wx := worked.global_transform
+	var gx := gap.global_transform
+	var rows := {}
+	# two lines crossing at a bare place of cb_worked's front (no line within 2 cm of it), the first found row by row
+	var cross := Vector2(INF, INF)
+	for k in 231:
+		var c := Vector2(-0.35 + 0.035 * float(k % 21), -0.25 + 0.05 * float(k / 21))
+		if _c_stroke_at("cb_worked", "front", c, 0.02).is_empty():
+			cross = c
+			break
+	if not is_finite(cross.x):
+		_check("PE the eraser", false, {"why": "no bare place on cb_worked's front for the crossing lines"})
+		return
+	var l1: Dictionary = data.scribble("cb_worked", "front", "marker", [[cross.x - 0.04, cross.y], [cross.x + 0.04, cross.y]], "#c0661a", 0.01)
+	var l2: Dictionary = data.scribble("cb_worked", "front", "fine", [[cross.x, cross.y - 0.04], [cross.x, cross.y + 0.04]], "#1f4f8f", 0.003)
+	await _settle_cardboard()
+	pen_node.apply_grid_config({"pen": "eraser", "mode": "aim"})
+	pen_node.wear(aim_cam, 1.0, false)
+	var aim_at := func(body_x: Transform3D, p: Vector2, z: float, out: float) -> void:
+		var xf := Transform3D(Basis(), body_x * Vector3(p.x, p.y, z + out * 0.9)).looking_at(body_x * Vector3(p.x, p.y, z))
+		aim_cam.global_transform = xf
+	# 1 - the aim on the crossing: the latest there marked and taken by one press; held along the earlier line, no more
+	aim_at.call(wx, cross, 0.0, 1.0)
+	await _ticks(0.08)
+	var reach1 := _aim_reach(wx * Vector3(cross.x, cross.y, 0.0))
+	var want1 := _c_stroke_at("cb_worked", "front", cross, reach1)
+	var mark1 := _mark_of(pen_node)
+	var before1 := int(data.pending.size())
+	pen_node.fire_worn()
+	for i in 30:
+		aim_at.call(wx, cross + Vector2(0.001 * float(i), 0.0), 0.0, 1.0)
+		await get_tree().physics_frame
+	pen_node.release_worn()
+	await _settle_cardboard()
+	rows["aim_front_latest"] = _erase_row(before1, want1, mark1, "cb_worked", "front", str(l2.get("id", "")))
+	await _shoot(Transform3D(Basis(), wx * Vector3(cross.x + 0.05, cross.y + 0.03, 0.45)).looking_at(wx * Vector3(cross.x, cross.y, 0.0)), "pe_crossing_after.png")
+	# 2 - a second press there: now the earlier line is the latest under it
+	aim_at.call(wx, cross, 0.0, 1.0)
+	await _ticks(0.08)
+	var want2 := _c_stroke_at("cb_worked", "front", cross, _aim_reach(wx * Vector3(cross.x, cross.y, 0.0)))
+	var mark2 := _mark_of(pen_node)
+	var before2 := int(data.pending.size())
+	pen_node.fire_worn()
+	await _ticks(0.05)
+	pen_node.release_worn()
+	await _settle_cardboard()
+	rows["aim_front_again"] = _erase_row(before2, want2, mark2, "cb_worked", "front", str(l1.get("id", "")))
+	# 3 - a press where there is no line: refused in words, no op
+	var bare := cross
+	var before3 := int(data.pending.size())
+	refused_e.clear()
+	aim_at.call(wx, bare, 0.0, 1.0)
+	await _ticks(0.08)
+	var none_there := _c_stroke_at("cb_worked", "front", bare, _aim_reach(wx * Vector3(bare.x, bare.y, 0.0))).is_empty()
+	pen_node.fire_worn()
+	await _ticks(0.05)
+	pen_node.release_worn()
+	await _frames(2)
+	rows["no_line"] = {"ok": none_there and int(data.pending.size()) == before3 and refused_e == ["NO LINE HERE TO ERASE"], "nothing_there": none_there,
+		"ops": int(data.pending.size()) - before3, "refused": refused_e.duplicate()}
+	# 4 - a press on a table (no board): refused in the eraser's words
+	var cx := cb_con.global_transform
+	var before4 := int(data.pending.size())
+	refused_e.clear()
+	aim_cam.global_transform = Transform3D(Basis(), cx * Vector3(-0.6, 1.5, 0.1)).looking_at(cx * Vector3(-1.0, 0.74, 0.1))
+	await _ticks(0.05)
+	pen_node.fire_worn()
+	await _ticks(0.05)
+	pen_node.release_worn()
+	await _frames(2)
+	rows["table"] = {"ok": int(data.pending.size()) == before4 and refused_e == ["THE ERASER TAKES LINES OFF A BOARD OR A CARDBOARD WALL"], "ops": int(data.pending.size()) - before4, "refused": refused_e.duplicate()}
+	# 5 - the aim from behind on cb_gap's back, on PN's back line
+	var bk: Array = lines.back_aim
+	var on_back: Vector2 = (bk[0] as Vector2).lerp(bk[1], 0.5)
+	aim_at.call(gx, on_back, -CB_THICK, -1.0)
+	await _ticks(0.08)
+	var want5 := _c_stroke_at("cb_gap", "back", on_back, _aim_reach(gx * Vector3(on_back.x, on_back.y, -CB_THICK)))
+	var mark5 := _mark_of(pen_node)
+	await _shoot(Transform3D(Basis(), gx * Vector3(on_back.x - 0.04, on_back.y + 0.03, -CB_THICK - 0.42)).looking_at(gx * Vector3(on_back.x, on_back.y, -CB_THICK)), "pe_mark_back.png")
+	var before5 := int(data.pending.size())
+	pen_node.fire_worn()
+	await _ticks(0.05)
+	pen_node.release_worn()
+	await _settle_cardboard()
+	rows["aim_back"] = _erase_row(before5, want5, mark5, "cb_gap", "back", "")
+	# 6 - the tip (VR) over PV's first line on cb_worked's front: hovering 3 cm off, marked and not taken; pressed in the
+	# air, nothing; down to 5 mm, taken; held and carried onto PV's second line, nothing more
+	pen_node.apply_grid_config({"pen": "eraser", "mode": "tip"})
+	pen_node.wear(hand, 1.0, true)
+	var into: Vector3 = -(wx.basis * Vector3(0, 0, 1)).normalized()
+	var place := func(p: Vector2, out: float) -> void:
+		hand.global_transform = Transform3D(Basis.looking_at(into, Vector3.UP), wx * Vector3(p.x, p.y, out) - into * PEN_TIP)
+	var tf: Array = lines.tip_front
+	var t_at: Vector2 = (tf[0] as Vector2).lerp(tf[1], 0.5)
+	var tf2: Array = lines.tip_front_2
+	place.call(t_at, 0.03)
+	await _ticks(0.08)
+	var hover_mark := _mark_of(pen_node)
+	var want6 := _c_stroke_at("cb_worked", "front", t_at, ERASE_TIP_REACH)
+	var before6 := int(data.pending.size())
+	pen_node.fire_worn()
+	await _ticks(0.05)
+	var in_the_air := int(data.pending.size()) - before6
+	place.call(t_at, 0.005)
+	await _ticks(0.05)
+	for i in 31:
+		place.call(t_at.lerp((tf2[0] as Vector2).lerp(tf2[1], 0.5), float(i) / 30.0), 0.005)
+		await get_tree().physics_frame
+	pen_node.release_worn()
+	await _settle_cardboard()
+	var r6 := _erase_row(before6, want6, hover_mark, "cb_worked", "front", "")
+	r6["ops_in_the_air"] = in_the_air
+	r6.ok = bool(r6.ok) and in_the_air == 0
+	rows["tip_front"] = r6
+	# 7 - the tip 5 mm behind cb_gap's back, on PV's back line
+	var into_b: Vector3 = (gx.basis * Vector3(0, 0, 1)).normalized()
+	var place_b := func(p: Vector2, out: float) -> void:
+		hand.global_transform = Transform3D(Basis.looking_at(into_b, Vector3.UP), gx * Vector3(p.x, p.y, -CB_THICK - out) - into_b * PEN_TIP)
+	var tb: Array = lines.tip_back
+	var b_at: Vector2 = (tb[0] as Vector2).lerp(tb[1], 0.5)
+	place_b.call(b_at, 0.005)
+	await _ticks(0.08)
+	var want7 := _c_stroke_at("cb_gap", "back", b_at, ERASE_TIP_REACH)
+	var mark7 := _mark_of(pen_node)
+	var before7 := int(data.pending.size())
+	pen_node.fire_worn()
+	await _ticks(0.05)
+	pen_node.release_worn()
+	await _settle_cardboard()
+	rows["tip_back"] = _erase_row(before7, want7, mark7, "cb_gap", "back", "")
+	pen_node.refused.disconnect(on_refused)
+	var all_ok := true
+	for k in rows:
+		all_ok = all_ok and bool(rows[k].ok)
+	_check("PE the eraser: by the aim and by the tip, on a front and on a back, one press takes the LATEST line under it (strokeAt RESTATED; at a crossing the later line, then the earlier) as ONE erase op - kept in the record as erased by this device, no longer drawn on its face - the mark showing that line before; a hold carried over other lines takes no more, a press in the air nothing; where there is no line, and on a table, refused in words, no op",
+		all_ok, {"presses": rows, "crossing_at": [cross.x, cross.y], "aim_reach_mm": snappedf(reach1 * 1000.0, 0.01), "tip_reach_mm": ERASE_TIP_REACH * 1000.0})
+
+## What one eraser press did, against the line it should have taken (`want`; and `known`, the line drawn for it, when
+## given): {ok, ...}.
+func _erase_row(before: int, want: Dictionary, mark: String, board_id: String, face: String, known: String) -> Dictionary:
+	var ops: Array = []
+	for e in data.pending.slice(before):
+		ops.append(e.op)
+	for op in ops:
+		pen_made.append(op)
+	var id := str(want.get("id", ""))
+	var rec: Dictionary = data.stroke(id)
+	var layer: Node = (walls_of(board_id) as Node).get_node_or_null("StickerLayer") if walls_of(board_id) != null else null
+	var mesh: Node = layer.get_node_or_null("Strokes_" + face) if layer != null else null
+	var still_drawn: bool = mesh != null and (mesh.get_meta("ids", []) as Array).has(id)
+	var row := {"ok": false, "want": id, "marked": mark, "ops": ops.map(func(o): return [str(o.get("op", "")), str(o.get("id", ""))]),
+		"state": str(rec.get("state", "")), "erased_by": str((rec.get("erased", {}) as Dictionary).get("by", "")), "still_drawn": still_drawn}
+	row.ok = id != "" and (known == "" or id == known) and mark == id and ops.size() == 1 and str(ops[0].get("op", "")) == "erase" and str(ops[0].get("id", "")) == id \
+		and str(rec.get("state", "")) == "erased" and str((rec.get("erased", {}) as Dictionary).get("by", "")) == str(data.by) and not still_drawn
+	return row
+
+## The wall body of a board of the construction (null when it is not stood).
+func walls_of(board_id: String) -> Node3D:
+	return (cb_con.get("walls") as Dictionary).get(board_id) if cb_con != null and cb_con.get("walls") is Dictionary else null
+
+## The line the pen's eraser has marked ("" when none).
+static func _mark_of(pen_node: Node3D) -> String:
+	var m := pen_node.get_node_or_null("EraseMark") as MeshInstance3D
+	return str(m.get_meta("stroke", "")) if m != null and m.visible else ""
+
+## pens.ts strokeAt, RESTATED over the view's strokes (drawnStrokes: on, on that board and face, in the record's order):
+## the latest whose centre line passes within half its width and `tol` of the point; {} when none.
+func _c_stroke_at(board_id: String, face: String, pt: Vector2, tol: float) -> Dictionary:
+	var list: Array = (data.strokes as Array).filter(func(s): return str(s.get("state", "")) == "on" and str((s.get("host", {}) as Dictionary).get("id", "")) == board_id and str(s.get("face", "")) == face)
+	for i in range(list.size() - 1, -1, -1):
+		if _dist_to_line(pt, list[i].get("points", [])) <= float(list[i].get("width", 0.0)) / 2.0 + tol:
+			return list[i]
+	return {}
+
+## The desktop eraser's reach at a point of a face (cardboard3d.ts ERASE_PX on screen, at least ERASE_TIP_REACH): 6
+## pixels at the aim camera's distance, as the pen works it out.
+func _aim_reach(at: Vector3) -> float:
+	var h := float(get_viewport().get_visible_rect().size.y)
+	return maxf(ERASE_TIP_REACH, float(ERASE_PX) * 2.0 * aim_cam.global_position.distance_to(at) * tan(deg_to_rad(aim_cam.fov) / 2.0) / maxf(1.0, h))
+
+## The scribble op the pen made since `before` pending ops (the last one), {} when it made none or more than one.
+func _pen_op(before: int) -> Dictionary:
+	var ops: Array = []
+	for e in data.pending.slice(before):
+		if str(e.op.get("op", "")) == "scribble":
+			ops.append(e.op)
+	for op in ops:
+		pen_made.append(op)
+	return ops[0] if ops.size() == 1 else {}
+
+## A scribble op against the line it was drawn along: on that board and face, its first point at a and its last at b
+## (1 mm), every point within 1 mm of the segment, every step but the last at least `least` (the 2 mm keep, rounded to
+## 0.1 mm) and the last at least 0.5 mm.
+func _line_eval(op: Dictionary, a: Vector2, b: Vector2, board_id: String, face: String, least: float) -> Dictionary:
+	var s: Dictionary = op.get("stroke", {})
+	var pts: Array = s.get("points", [])
+	var out := {"ok": false, "points": pts.size(), "board": str((s.get("host", {}) as Dictionary).get("id", "")), "face": str(s.get("face", ""))}
+	if pts.size() < 2:
+		return out
+	var first := Vector2(float(pts[0][0]), float(pts[0][1]))
+	var last := Vector2(float(pts[-1][0]), float(pts[-1][1]))
+	var off := 0.0
+	var short := 0
+	for i in pts.size():
+		var p := Vector2(float(pts[i][0]), float(pts[i][1]))
+		off = maxf(off, p.distance_to(Geometry2D.get_closest_point_to_segment(p, a, b)))
+		if i > 0:
+			var step := p.distance_to(Vector2(float(pts[i - 1][0]), float(pts[i - 1][1])))
+			if step < (0.0005 if i == pts.size() - 1 else least):
+				short += 1
+	out.first_mm = snappedf(first.distance_to(a) * 1000.0, 0.01)
+	out.last_mm = snappedf(last.distance_to(b) * 1000.0, 0.01)
+	out.off_line_mm = snappedf(off * 1000.0, 0.01)
+	out.short_steps = short
+	out.ok = out.board == board_id and out.face == face and first.distance_to(a) < 0.001 and last.distance_to(b) < 0.001 and off < 0.001 and short == 0
+	return out
+
+## The vertices of the line the pen shows while it is drawn (its "Line" node's chunks), 0 when none.
+static func _preview_vertices(pen_node: Node) -> int:
+	var line := pen_node.get_node_or_null("Line")
+	var n := 0
+	if line == null:
+		return 0
+	for c in line.get_children():
+		if c is MeshInstance3D and not c.is_queued_for_deletion() and (c as MeshInstance3D).mesh != null and (c as MeshInstance3D).mesh.get_surface_count() > 0:
+			n += ((c as MeshInstance3D).mesh as ArrayMesh).surface_get_array_len(0)
+	return n
+
+## CU: a wall moved in the copy's constructions.json and a wall's paper changed in its boards.json, as the server would
+## write them: the moved wall's body stands at its new wallPoint within 2 s, the same body (moved, not made again), and
+## no other wall moves; the repapered wall is made again and no other. The copy is put back after.
+func _construction_follows(con: Node3D, cdoc: Dictionary, braw: Dictionary, tables_by: Dictionary) -> void:
+	var walls: Dictionary = con.get("walls") if con.get("walls") is Dictionary else {}
+	var cu := {"ok": false, "why": "no walls cb_gap and cb_reset"}
+	if walls.has("cb_gap") and walls.has("cb_reset"):
+		var c_text := FileAccess.get_file_as_string(probe_dir.path_join("constructions.json"))
+		var b_text := FileAccess.get_file_as_string(probe_dir.path_join("boards.json"))
+		var ids_before := {}
+		var xf_before := {}
+		for bid in walls:
+			ids_before[bid] = (walls[bid] as Node).get_instance_id()
+			xf_before[bid] = (walls[bid] as Node3D).global_transform
+		var made_before := int((con.get("made") as Dictionary).get("walls", 0))
+		var builds_before := int(_or(con.get("builds"), 0))
+		# the wall moved: cb_gap 9 cm further along its table
+		var moved: Dictionary = cdoc.duplicate(true)
+		moved.revision = int(moved.get("revision", 0)) + 1
+		var moved_wall: Dictionary = {}
+		for c in moved.constructions:
+			if str(c.id) == CONSTRUCTION:
+				for w in c.walls:
+					if str(w.board) == "cb_gap":
+						w.at = [float(w.at[0]) + 0.09, float(w.at[1])]
+						moved_wall = w
+		_put(probe_dir.path_join("constructions.json"), JSON.stringify(moved, " "))
+		var cframe: Transform3D = con.global_transform
+		var want_at: Vector3 = cframe * _contract_wall_point(tables_by.get(str(moved_wall.get("table", "")), {}), moved_wall, braw.get("cb_gap", {}), Vector3.ZERO)
+		var move_ms := await _until(func(): return is_instance_valid(con.get("walls").get("cb_gap")) and (con.get("walls").get("cb_gap") as Node3D).global_position.distance_to(want_at) < 0.001, 3000)
+		await _frames(2)
+		walls = con.get("walls")
+		var same_body: bool = walls.has("cb_gap") and (walls.cb_gap as Node).get_instance_id() == int(ids_before.cb_gap)
+		var others_still := true
+		for bid in walls:
+			if bid != "cb_gap" and (not xf_before.has(bid) or not (walls[bid] as Node3D).global_transform.is_equal_approx(xf_before[bid]) or (walls[bid] as Node).get_instance_id() != int(ids_before[bid])):
+				others_still = false
+		var made_after_move := int((con.get("made") as Dictionary).get("walls", 0))
+		# a wall's paper changed: cb_reset's
+		var boards_doc: Dictionary = JSON.parse_string(b_text)
+		boards_doc.revision = int(boards_doc.get("revision", 0)) + 1
+		for b in boards_doc.boards:
+			if str(b.id) == "cb_reset":
+				b.paper = "#b5916a"
+		_put(probe_dir.path_join("boards.json"), JSON.stringify(boards_doc, " "))
+		var repaper_ms := await _until(func(): return int((con.get("made") as Dictionary).get("walls", 0)) >= made_after_move + 1, 3000)
+		await _frames(2)
+		walls = con.get("walls")
+		var remade: bool = walls.has("cb_reset") and (walls.cb_reset as Node).get_instance_id() != int(ids_before.cb_reset)
+		var others_kept := true
+		for bid in walls:
+			if bid != "cb_reset" and (walls[bid] as Node).get_instance_id() != int(ids_before[bid]):
+				others_kept = false
+		var made_after := int((con.get("made") as Dictionary).get("walls", 0))
+		var rebuild_ms := float(_or(con.get("build_ms"), -1.0))
+		# the copy put back
+		_put(probe_dir.path_join("constructions.json"), c_text)
+		_put(probe_dir.path_join("boards.json"), b_text)
+		cu = {"ok": move_ms >= 0 and move_ms <= 2000 and same_body and others_still and made_after_move == made_before and repaper_ms >= 0 and repaper_ms <= 2000 and remade and others_kept and made_after == made_before + 1,
+			"moved_within_ms": move_ms, "moved_body_kept": same_body, "other_walls_untouched": others_still, "walls_made_by_the_move": made_after_move - made_before,
+			"repapered_within_ms": repaper_ms, "repapered_wall_made_again": remade, "other_walls_kept": others_kept, "walls_made_by_the_paper": made_after - made_after_move,
+			"builds": int(_or(con.get("builds"), 0)) - builds_before, "last_build_ms": snappedf(rebuild_ms, 0.01)}
+	_check("CU it follows the truth and builds only what changed: a wall moved in the copy's constructions.json stands at its new wallPoint (1 mm) within 2 s, the same body moved, not made again, every other wall untouched; a wall's paper changed in boards.json makes that wall again (within 2 s) and no other",
+		bool(cu.ok), cu)
+
+static func _or(v: Variant, dflt: Variant) -> Variant:
+	return dflt if v == null else v
 
 # ---- the hanging board with threads: the mind map ----
 
@@ -1563,6 +3809,42 @@ func _frame_stats(n: int) -> Dictionary:
 		gpu.append(RenderingServer.viewport_get_measured_render_time_gpu(vp))
 	RenderingServer.viewport_set_measure_render_time(vp, false)
 	return {"frame_ms": _stats(wall), "render_cpu_ms": _stats(cpu), "render_gpu_ms": _stats(gpu)}
+
+## The times between n frames (ms), as they come.
+func _frame_deltas(n: int) -> Array:
+	var out: Array = []
+	var last := Time.get_ticks_usec()
+	for i in n:
+		await get_tree().process_frame
+		var now := Time.get_ticks_usec()
+		out.append(float(now - last) / 1000.0)
+		last = now
+	return out
+
+## Frame times: how many, the most, the 95th and 50th percentile, how many over `limit` ms.
+static func _stats_over(v: Array, limit: float) -> Dictionary:
+	if v.is_empty():
+		return {"n": 0, "max": 0.0, "p95": 0.0, "p50": 0.0, "over": 0}
+	var s := v.duplicate()
+	s.sort()
+	return {"n": s.size(), "max": snappedf(float(s[-1]), 0.001), "p95": snappedf(float(s[int(s.size() * 0.95)]), 0.001), "p50": snappedf(float(s[s.size() / 2]), 0.001),
+		"over": s.filter(func(x): return float(x) > limit).size()}
+
+## The n longest of some frame times (ms).
+static func _worst(v: Array, n: int) -> Array:
+	var s := v.duplicate()
+	s.sort()
+	return s.slice(maxi(0, s.size() - n)).map(func(x): return snappedf(float(x), 0.001))
+
+## Whether the construction of CB .. CC is still building or drawing (staged); false for one that cannot say.
+func _cardboard_drawing() -> bool:
+	return cb_con != null and is_instance_valid(cb_con) and cb_con.has_method("drawing") and bool(cb_con.call("drawing"))
+
+## Frames until the construction has drawn what changed (at most 5 s), and two more.
+func _settle_cardboard() -> void:
+	await _frames(1)
+	await _until(func(): return not _cardboard_drawing(), 5000)
+	await _frames(2)
 
 static func _stats(v: Array) -> Dictionary:
 	var s := v.duplicate()
@@ -2193,6 +4475,7 @@ func _swap_layer(old: Node3D) -> Node3D:
 	var parent := old.get_parent()
 	var host_was: Dictionary = old.get("host")
 	var surface_was: Dictionary = old.get("surface")
+	var staged_was: bool = old.get("staged") == true
 	var layer_name := str(old.name)
 	parent.remove_child(old)
 	old.free()
@@ -2200,6 +4483,8 @@ func _swap_layer(old: Node3D) -> Node3D:
 	fresh.name = layer_name
 	fresh.set("host", host_was.duplicate(true))
 	fresh.set("surface", surface_was.duplicate(true))
+	if staged_was:
+		fresh.set("staged", true)   # (an older layer without it draws at once)
 	parent.add_child(fresh)
 	return fresh
 

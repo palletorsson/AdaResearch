@@ -75,8 +75,9 @@ def main():
     sandbox = f'rt-{stamp}'
     box = SANDBOXES / sandbox
     box.mkdir(parents=True, exist_ok=False)
-    for name in ('designs.json', 'boards.json', 'placements.json'):
-        shutil.copyfile(DATA / name, box / name)
+    for name in ('designs.json', 'boards.json', 'placements.json', 'constructions.json'):
+        if (DATA / name).exists():   # constructions.json: without it the sandbox has no walls, and a tie between two is refused
+            shutil.copyfile(DATA / name, box / name)
     before = truth_md5()
     web_id = f'rt-web-{stamp}'
     report = {'web_id': web_id, 'sandbox': str(box.relative_to(ROOT)).replace('\\', '/'), 'truth_md5_before': before}

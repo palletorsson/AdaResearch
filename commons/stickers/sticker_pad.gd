@@ -10,10 +10,13 @@ extends Node3D
 ##           because the wand draws none for a worn item
 ##   tap     (< 0.3 s) on a surface: STICK - an `add` op through StickerData; the host is what the hit belongs to: a
 ##           node with meta sticker_host first (the board, the bench), else a Void work (its mount), else a Void
-##           floor (its walls and slab), else refused. A board takes a sticker on its FACE only (n = +Z, at.z = 0):
-##           a hit on its back is refused, "THE BACK OF THE BOARD" (stickers.ts settle: a board has no back). On a
-##           board with DEPTH too it sticks ON the paper (at.z = 0): the aim passes through the stickers that hang in
-##           front (they have no body) to the cork, and the new sticker stays there until the web moves it out in depth
+##           floor (its walls and slab), else refused. A paper board takes a sticker on its FACE only (n = +Z, at.z =
+##           0): a hit on its back is refused, "THE BACK OF THE BOARD" (stickers.ts settle: a paper board has no back).
+##           A CARDBOARD wall (two-sided: sticker_construction) takes one on either face: a hit on its back is stuck
+##           there, n = -Z and at.z = -CARDBOARD (settle with the board's sidedness), and peeled there; its cut edges
+##           take none ("THE EDGE OF THE BOARD"). On a board with DEPTH too it sticks ON the paper (at.z = 0): the aim
+##           passes through the stickers that hang in front (they have no body) to the cork, and the new sticker stays
+##           there until the web moves it out in depth
 ##   hold    (>= 0.3 s, the aim held still) on a sticker: PEEL it - a peel is an event; the sticker stays as residue,
 ##           with who peeled. On a board with depth, the first HANGING sticker the aim's ray passes through (before any
 ##           on the paper)
@@ -274,11 +277,15 @@ func _aim_state() -> Dictionary:
 	# the surface's normal in the host frame: a normal goes by the basis's transpose (right for a scaled frame too)
 	var n_l := (frame.basis.transposed() * nw).normalized()
 	var host: Dictionary = found.host
-	if str(host.get("kind", "")) == "board" and n_l.z < 0.99:
-		# a board has no back to stick on (stickers.ts settle: n = +Z): the Face body's box answers from behind too
-		st.reason = "THE BACK OF THE BOARD" if n_l.z < 0.0 else "THE EDGE OF THE BOARD"
+	# a paper board has no back to stick on (stickers.ts settle: n = +Z): the Face body's box answers from behind too.
+	# A cardboard wall (two-sided) takes a sticker on its back as on its front (settle: n = -Z, at.z = -CARDBOARD); its
+	# cut edges take none on either board
+	var sided: bool = str(host.get("kind", "")) == "board" and data.has_method("board_sided") and bool(data.board_sided(str(host.get("id", ""))))
+	if str(host.get("kind", "")) == "board" and n_l.z < 0.99 and not (sided and n_l.z <= -0.99):
+		st.reason = "THE BACK OF THE BOARD" if n_l.z < 0.0 and not sided else "THE EDGE OF THE BOARD"
 		return st
 	st.host = host
+	st.sided = sided
 	st.frame = frame
 	var node: Variant = found.get("node")
 	st.surface = StickerLayer.surface_of(node, host)
@@ -293,9 +300,9 @@ func _aim_state() -> Dictionary:
 	# than 45 degrees) against the normal the truth will hold - three.js's newPose, so a first stick reads the same
 	# turn in every medium; then the pose the server will store (on a board n = +Z and at.z = 0, a non-free design
 	# snapped to the quarter turns of the host frame: stickers.ts turnOf / allowedUp)
-	var n_kept: Array = StickerData.server_pose(host, at_l, n_l, StickerData.ref_up(n_l), null).n
+	var n_kept: Array = StickerData.server_pose(host, at_l, n_l, StickerData.ref_up(n_l), null, 0.0, sided).n
 	var up_l: Array = StickerData.up_at_turn(n_kept, StickerData.allowed_turn(d, turn))
-	var pose: Dictionary = StickerData.server_pose(host, at_l, n_l, up_l, d)
+	var pose: Dictionary = StickerData.server_pose(host, at_l, n_l, up_l, d, 0.0, sided)
 	var b := StickerData.basis(StickerData.v3(pose.n), StickerData.v3(pose.up))
 	# a host frame may be scaled (a scaled work): sizes are in its units, as paper on it would be
 	var along_right: Vector3 = frame.basis * Vector3(b.right)
@@ -347,13 +354,20 @@ func _sticker_under(host: Dictionary, at_l: Vector3, surface: Dictionary = {}, n
 	var best := {}
 	var best_z := -INF
 	var deep := 0.0
+	var sided := false
 	if str(host.get("kind", "")) == "board" and data.has_method("board_depth"):
 		deep = float(data.board_depth(str(host.get("id", ""))))
+		sided = data.has_method("board_sided") and bool(data.board_sided(str(host.get("id", ""))))
 	var hung := {}
 	var hung_t := INF
 	for s0 in data.stickers_on(StickerData.host_key(host)):
-		var s := StickerLayer.drawn_as(s0, host, deep)   # where it is drawn (a board sticker on the face, or at its depth)
+		# where it is drawn: a board sticker on the face, at its depth, or on a cardboard wall's back (n = -Z)
+		var s := StickerLayer.drawn_as(s0, host, deep, sided)
 		if str(s.get("state", "on")) != "on":
+			continue
+		# on a wall a sticker is under the aim only on the face the aim hit: one on the other face lies 5 mm away
+		# through the cardboard, and the box below (its depth along n) would reach it
+		if sided and n_l != Vector3.ZERO and (float(StickerData.a3(s.get("n"))[2]) < 0.0) != (n_l.z < 0.0):
 			continue
 		var d: Dictionary = data.design(str(s.get("design", "")))
 		if d.is_empty():

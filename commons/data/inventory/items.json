@@ -113,6 +113,24 @@
       ]
     },
     {
+      "id": "graffiti",
+      "name": "Graffiti pen",
+      "instance": false,
+      "token": "sticker_pen",
+      "prefab": "",
+      "unlock": "",
+      "mount": "worn",
+      "size": [0.016, 0.016, 0.136],
+      "scale": 1.0,
+      "doc": "Write on a board's face - the front of any board, either face of a cardboard wall - with one of the sticker app's pens (fine liner, marker, chisel, spray) at its width and in its colour, or rub a line out with the eraser: in VR hold the trigger with the tip on the face, on a desktop hold the left button aiming at it. Each line is one scribble op, kept as data (placements.json strokes) and drawn in every medium; an erased line stays in the record and can be brought back on the web. commons/stickers/sticker_pen.gd.",
+      "defaults": {"pen": "marker", "width": "pen", "colour": "#16191e"},
+      "knobs": [
+        {"key": "pen", "label": "Pen", "choices": [ "fine", "marker", "chisel", "spray", "eraser" ], "names": [ "fine liner", "marker", "chisel marker", "spray", "eraser" ]},
+        {"key": "width", "label": "Width", "choices": [ "pen", "thin", "thick", "0.003", "0.008", "0.016", "0.05" ], "names": [ "the pen's own", "its thinnest", "its thickest", "3 mm", "8 mm", "16 mm", "5 cm" ]},
+        {"key": "colour", "label": "Colour", "choices": [ "#16191e", "#f4f1e9", "#b3121b", "#eb0d85", "#1f4f8f", "#f2d318", "#2f8f4f", "#c0661a" ], "names": [ "black", "white", "thread red", "pink", "blue", "yellow", "green", "orange" ]}
+      ]
+    },
+    {
       "id": "plank",
       "name": "Plank (1 m, timber)",
       "token": "timber_plank_1m",

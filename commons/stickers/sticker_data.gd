@@ -1,12 +1,15 @@
 extends Node
 ## THE STICKERS' TRUTH, IN THE GAME. One node, "StickerData" under the root (get_or_create), shared by every sticker
 ## node: the board, the bench, the Void's StickerWorld and the worn pad. It reads the three documents the
-## encyclopedia writes - commons/data/stickers/{designs,boards,placements}.json - whose rules are
+## encyclopedia writes - commons/data/stickers/{designs,boards,placements,constructions}.json - whose rules are
 ## ada_encyclopedia/src/lib/stickers.ts; the numbers and the op merge below (basis, drawBox / extent, the turns
-## refUp / turnOf / upAtTurn / allowedTurn / allowedUp, settle with a board's depth, RESIDUE, host keys, cleanBoard's
-## depth and hang, applyOps with its threads - tie / untie / retie / word - and the geometry every medium draws a thread
-## and a hanging board's cord with: pinOf, threadCurve, cordOf, drawnThreads) are PORTED from that file, as
-## sticky_map.gd copies sticky-map.ts. Change one, change both.
+## refUp / turnOf / upAtTurn / allowedTurn / allowedUp, settle with a board's depth and its back, RESIDUE, host keys,
+## cleanBoard's depth, hang and stock, applyOps with its threads - tie / untie / retie / word, between two walls of one
+## construction too - and its scribbles - scribble / erase / unerase - cleanStroke, cleanConstruction,
+## cleanConstructionsDoc, wallsOf, and the geometry every medium draws a thread, a hanging board's cord, a wall and a
+## scribble with: pinOf, threadCurve, cordOf, drawnThreads, wallPoint, wallYaw, wallLines, overWalls, threadPieces,
+## overBoard, drawnWallThreads, drawnStrokes, strokeZ) are PORTED from that file, as sticky_map.gd copies sticky-map.ts.
+## Change one, change both.
 ##
 ## A THREAD ties two stickers on one board (placements.json `threads`): a string from pin to pin with a word on a tag.
 ## Like a sticker it is never deleted: an untie cuts it (kept, with who cut it) and a retie ties it again. It is drawn
@@ -14,6 +17,18 @@ extends Node
 ## its stickers anywhere from its paper to `depth` metres in front of it (settle clamps at.z to [0, depth]); with `hang`
 ## every live sticker hangs on a cord from the board's top edge (cord_of). The board artifact draws both
 ## (commons/artifacts/sticker_board/).
+##
+## A CONSTRUCTION (constructions.json, Palle 2026-11-14) is cardboard walls standing on tables: a temporary 3D mind map
+## read from every side. A wall is a board of stock `cardboard`, flat and TWO-SIDED (two_sided): a sticker whose normal
+## points back sits on its back face (settle: n = -Z, at.z = -CARDBOARD), and a red thread may tie a sticker on one wall
+## to one on another wall of the same construction (apply_ops with the walls, walls_of; drawn_wall_threads gives such a
+## thread's pins in the construction's frame, wall_point). A THREAD NEVER PASSES THROUGH CARDBOARD: where it would, it
+## goes over the wall's top edge, by points THREAD_OVER above it and THREAD_CLEAR off its faces (over_walls over the
+## construction's wall_lines between walls, over_board between the two faces of one wall), and a medium draws it in
+## thread_pieces. A SCRIBBLE is a pen stroke on a board's face - its front, or
+## the back of a cardboard wall - kept in placements.json like a sticker (`strokes`); an erase is an event that keeps it
+## with who erased it, an unerase brings it back (drawn_strokes, stroke_z, PENS). Sticker, thread and stroke ids are one
+## space.
 ##
 ## WHAT IS DRAWN = the truth as read + this device's own ops applied over it by the same rules as the server. An op is
 ## made here (stick, peel ...), applied at once, written to the OUTBOX (user://stickers/outbox.json, tmp + rename) and
@@ -38,6 +53,7 @@ extends Node
 signal placements_changed
 signal designs_changed
 signal boards_changed
+signal constructions_changed
 signal posted(reply: Dictionary)
 
 const SELF := "res://commons/stickers/sticker_data.gd"
@@ -45,11 +61,11 @@ const NODE_NAME := "StickerData"
 const DATA_DIR := "res://commons/data/stickers"
 const OUTBOX := "user://stickers/outbox.json"
 ## a test sandbox's id, as the encyclopedia's stickers-store.ts SANDBOX_ID
-const SANDBOX_ID := "^[a-z0-9][a-z0-9_-]{0,47}$"
+const SANDBOX_ID := "^[a-z0-9][a-z0-9_-]{0,47}\\z"   # \z: PCRE's $ would let "abc\n" through (see STICKER_ID)
 ## where a headset's newer copy of a document would land (user:// on the Quest); read only on Android, and only when its
 ## revision is HIGHER than the shipped one, so a stale copy can never shadow the truth
 const HEADSET_COPY := "user://stickers"
-const DOCS := ["designs", "boards", "placements"]
+const DOCS := ["designs", "boards", "placements", "constructions"]
 const VERSION := 1
 # --- from stickers.ts ---
 const VIEW := 100.0                 # a design's long side, design units
@@ -63,15 +79,54 @@ const MAX_DEPTH := 2.0              # MAX_DEPTH: the most a board's stickers may
 const THREAD_RED := "#b3121b"       # THREAD_RED: a thread tied without a colour
 const WORD_MAX := 24                # WORD_MAX: a thread's tag, in characters (UTF-16 units, as JS counts them)
 const WHY_MAX := 300                # WHY_MAX: why the two belong together (read, not drawn)
-const STICKER_ID := "^[a-z0-9][a-z0-9_-]{2,63}$"   # STICKER_ID: placements, threads and op ids
-const ID_RX := "^[a-z][a-z0-9_]{1,40}$"            # ID: designs, sheets, boards
-const HEX_RX := "^#[0-9a-fA-F]{6}$"                # HEX
+## The patterns end in \z, not $: JS's $ (no m flag) is the end of the text, PCRE's $ also matches before a final
+## newline, so "abc\n" passed here and not on the server (measured: ^[a-z]{2}$ finds "ab\n", ^[a-z]{2}\z does not).
+const STICKER_ID := "^[a-z0-9][a-z0-9_-]{2,63}\\z"  # STICKER_ID: placements, threads, strokes and op ids
+const ID_RX := "^[a-z][a-z0-9_]{1,40}\\z"           # ID: designs, sheets, boards, constructions, tables
+const HEX_RX := "^#[0-9a-fA-F]{6}\\z"               # HEX
+## ISO: a record's time as cleanStroke keeps it (JS's \d is [0-9] only)
+const ISO_RX := "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(:[0-9]{2}(\\.[0-9]+)?)?Z\\z"
 ## JS's \s (what String.prototype.trim and /\s+/ take as white space), for a thread's word and why
 const JS_SPACE := "[\\t\\n\\x{0B}\\f\\r \\x{A0}\\x{1680}\\x{2000}-\\x{200A}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}\\x{FEFF}]"
+## CARDBOARD: a cardboard wall's thickness, metres. A board of stock cardboard is flat and two-sided: in its frame the
+## front face is z = 0 and the back face z = -CARDBOARD.
+const CARDBOARD := 0.005
+## A THREAD NEVER PASSES THROUGH CARDBOARD (stickers.ts THREAD_OVER, THREAD_CLEAR): where a thread would run into a wall's
+## cardboard below its top edge it goes over that edge, by two points THREAD_OVER above the edge, THREAD_CLEAR off the
+## near and the far face (metres; over_walls).
+const THREAD_OVER := 0.004
+const THREAD_CLEAR := 0.003
+const TABLES_MAX := 24              # TABLES_MAX, WALLS_MAX: the most a construction holds
+const WALLS_MAX := 64
+## The pens, as every medium draws them (PENS): a nib's default width and its range (metres), how opaque, the cap of its
+## line, how it joins at a corner ("miter" up to MITER_LIMIT times the half width, then bevelled; "round" otherwise), and
+## how soft its edge is: 0 is a hard edge, else the edge is a Gaussian whose deviation is `soft` times the width (a
+## spray). A stroke carries its own width within its pen's range.
+const PENS := {
+	"fine": {"title": "Fine liner", "width": 0.003, "min": 0.001, "max": 0.006, "opacity": 1.0, "cap": "round", "join": "round", "soft": 0.0},
+	"marker": {"title": "Marker", "width": 0.008, "min": 0.003, "max": 0.02, "opacity": 1.0, "cap": "round", "join": "round", "soft": 0.0},
+	"chisel": {"title": "Chisel marker", "width": 0.016, "min": 0.006, "max": 0.04, "opacity": 0.95, "cap": "square", "join": "miter", "soft": 0.0},
+	"spray": {"title": "Spray", "width": 0.05, "min": 0.015, "max": 0.15, "opacity": 0.55, "cap": "round", "join": "round", "soft": 0.2},
+}
+const MITER_LIMIT := 2.0            # MITER_LIMIT: a miter join stands out at most this many half widths, then is bevelled
+const PEN_LIST := ["fine", "marker", "chisel", "spray"]
+## PEN_COLOURS: graffiti colours, and their names in the same order (PEN_COLOUR_NAMES)
+const PEN_COLOURS := ["#16191e", "#f4f1e9", "#b3121b", "#eb0d85", "#1f4f8f", "#f2d318", "#2f8f4f", "#c0661a"]
+const PEN_COLOUR_NAMES := ["black", "white", "thread red", "pink", "blue", "yellow", "green", "orange"]
+const STROKE_POINTS := 2000         # STROKE_POINTS: a scribble's most points
+## What a pen keeps of a moving tip (STROKE_STEP, STROKE_DOT): a point each STROKE_STEP metres along the line; a press
+## that does not move is a dot, two points STROKE_DOT apart along +x.
+const STROKE_STEP := 0.002
+const STROKE_DOT := 0.0005
+const STROKE_LIFT := 0.0006         # STROKE_LIFT: how far a scribble is drawn off its face (metres), on the paper, not in it
 # --- this node ---
 const SENT_KEPT := 2000
 const REFUSED_KEPT := 200
 const MAX_BATCH := 200              # the route takes 400
+## a POST's ops in characters of JSON: the route refuses a body over 512 KiB (413) whole, and a scribble may carry
+## STROKE_POINTS points (30 of 2000 points measured 1 020 572 characters, 34 000 each), so 200 ops in one POST could be
+## refused for ever and never leave the outbox (tools/probes/stickers_cardboard_node.gd C11)
+const MAX_BODY := 480000
 const WATCH_EVERY := 1.0
 const RETRY_FIRST := 5.0
 const RETRY_MOST := 60.0
@@ -123,10 +178,16 @@ var designs: Dictionary = {}        # id -> design, as in designs.json (with its
 var design_order: Array = []        # ids in file order
 var sheets: Array = []              # [{id, title, designs: [ids]}]
 var boards: Dictionary = {}         # id -> board, as boards.json has it (clean_board reads it as the server does)
-var truth: Dictionary = {"version": VERSION, "revision": -1, "stickers": [], "threads": [], "applied": []}
+var truth: Dictionary = {"version": VERSION, "revision": -1, "stickers": [], "threads": [], "strokes": [], "applied": []}
 var stickers: Array = []            # what is drawn: the truth with this device's ops over it
 var threads: Array = []             # the threads of that view, every one (cut ones too: drawn_threads picks)
-var revisions: Dictionary = {"designs": -1, "boards": -1, "placements": -1}
+var strokes: Array = []             # the scribbles of that view, every one (erased ones too: drawn_strokes picks)
+## the constructions as the server reads them (cleanConstructionsDoc without the boards: a wall whose board went is not
+## drawn), and wallsOf of them: board id -> the construction it stands in, which a tie between two walls needs
+var constructions: Array = []
+var wall_map: Dictionary = {}
+var constructions_error := ""       # why constructions.json does not clean ("" when it does); what it held is kept
+var revisions: Dictionary = {"designs": -1, "boards": -1, "placements": -1, "constructions": -1}
 
 # ---- the outbox ----
 var pending: Array = []             # [{by, t, op}] not yet answered
@@ -142,6 +203,8 @@ var _by_host: Dictionary = {}       # host key -> [stickers]
 var _hosts: Dictionary = {}         # host key -> host
 var _by_id: Dictionary = {}
 var _thread_by_id: Dictionary = {}
+var _stroke_by_id: Dictionary = {}
+var _strokes_by_board: Dictionary = {}   # board id -> [strokes] in the record's order
 var _hashes: Dictionary = {}        # doc -> md5 of the text applied
 var _stamps: Dictionary = {}        # doc -> "mtime|mtime of the copy"
 var _hot: Dictionary = {}           # doc -> ticks left to re-read the text after an mtime change (1 s mtime resolution)
@@ -161,6 +224,7 @@ var _since_try := 0.0
 var _rng := RandomNumberGenerator.new()
 
 static var _shared: Node = null
+static var _rx_cache: Dictionary = {}   # pattern -> RegEx, compiled once (a scribble's or a tie's checks run per op)
 
 ## The one StickerData of this game: found under the root, or made and added there (deferred: a node's _ready may be
 ## running under the root's own setup, when add_child is refused). The node works before it enters the tree; it
@@ -239,9 +303,11 @@ func configure(opts: Dictionary) -> void:
 	_hashes.clear()
 	_stamps.clear()
 	pending = [];sent = [];refused = []
+	constructions = [];wall_map = {};constructions_error = ""
 	ensure_loaded()
 	designs_changed.emit()
 	boards_changed.emit()
+	constructions_changed.emit()
 
 func _ready() -> void:
 	add_to_group("sticker_data")   # get_tree().call_group("sticker_data", "reload"): a bridge that wrote a newer copy
@@ -349,6 +415,11 @@ func _reload(doc: String, loud: bool) -> bool:
 			_apply_placements(r.data)
 			if loud:
 				_recompute()
+		"constructions":
+			_apply_constructions(r.data)
+			if loud:
+				constructions_changed.emit()
+				_recompute()   # which walls may be tied comes from here: this device's own ties are applied again
 	return true
 
 func _apply_designs(d: Dictionary) -> void:
@@ -381,10 +452,12 @@ func _apply_boards(d: Dictionary) -> void:
 func _apply_placements(d: Dictionary) -> void:
 	var list: Variant = d.get("stickers", [])
 	var tlist: Variant = d.get("threads", [])   # a file from before threads reads as none
+	var slist: Variant = d.get("strokes", [])   # and one from before scribbles as no strokes
 	var applied: Variant = d.get("applied", [])
 	truth = {"version": VERSION, "revision": int(d.get("revision", 0)),
 		"stickers": (list as Array).filter(func(s): return s is Dictionary and s.get("host") is Dictionary) if list is Array else [],
 		"threads": (tlist as Array).filter(func(t): return t is Dictionary and str(t.get("id", "")) != "") if tlist is Array else [],
+		"strokes": (slist as Array).filter(func(s): return s is Dictionary and str(s.get("id", "")) != "" and s.get("host") is Dictionary) if slist is Array else [],
 		"applied": (applied as Array).map(func(a): return str(a)) if applied is Array else []}
 	revisions["placements"] = int(truth.revision)
 	# what the truth holds now is no longer this device's to carry
@@ -396,19 +469,36 @@ func _apply_placements(d: Dictionary) -> void:
 	if sent.size() != before:
 		_save_outbox()
 
+## The constructions as the server reads them (stickers-store.ts readConstructions: cleanConstructionsDoc WITHOUT the
+## boards) and the walls a tie may join (wallsOf). A document that does not clean is refused by the server whole (every
+## op POST answers 422 until it is mended), so what was held is kept, and the reason is kept in constructions_error.
+func _apply_constructions(d: Dictionary) -> void:
+	var c := clean_constructions_doc(d)
+	if not c.has("doc"):
+		constructions_error = str(c.get("error", "does not clean"))
+		push_warning("stickers: constructions.json does not read as the server reads it (%s); the constructions held are kept" % constructions_error)
+		return
+	constructions_error = ""
+	constructions = c.doc.constructions
+	wall_map = walls_of(c.doc)
+	revisions["constructions"] = int(c.doc.revision)
+
 ## The view: the truth, then every op of this device not yet in it (sent, then pending, each with its own who and when).
+## The strokes are copied as a list, not one by one: an erase or an unerase copies the stroke it changes (_apply_one), so
+## the truth's records are never changed and 700 scribbles are not copied on every reload.
 func _recompute() -> void:
 	var doc := {"version": VERSION, "revision": int(truth.revision), "stickers": (truth.stickers as Array).duplicate(true),
-		"threads": (truth.get("threads", []) as Array).duplicate(true), "applied": (truth.applied as Array).duplicate()}
+		"threads": (truth.get("threads", []) as Array).duplicate(true), "strokes": (truth.get("strokes", []) as Array).duplicate(),
+		"applied": (truth.applied as Array).duplicate()}
 	var st := _merge_state(doc)
 	for e in sent + pending:
-		_apply_one(doc, st, e.op, str(e.get("by", by)), str(e.get("t", iso_now())), designs, boards)
+		_apply_one(doc, st, e.op, str(e.get("by", by)), str(e.get("t", iso_now())), designs, boards, wall_map)
 	_view = doc
 	_index()
 	placements_changed.emit()
 
 func _index() -> void:
-	_by_host = {};_hosts = {};_by_id = {};_thread_by_id = {}
+	_by_host = {};_hosts = {};_by_id = {};_thread_by_id = {};_stroke_by_id = {};_strokes_by_board = {}
 	for s in _view.stickers:
 		var key := host_key(s.host)
 		if not _by_host.has(key):
@@ -418,8 +508,16 @@ func _index() -> void:
 		_by_id[str(s.get("id", ""))] = s
 	for t in _view.threads:
 		_thread_by_id[str(t.get("id", ""))] = t
+	for s in _view.get("strokes", []):
+		_stroke_by_id[str(s.get("id", ""))] = s
+		var h: Variant = s.get("host")
+		var bid: String = str(h.get("id", "")) if h is Dictionary else ""
+		if not _strokes_by_board.has(bid):
+			_strokes_by_board[bid] = []
+		_strokes_by_board[bid].append(s)
 	stickers = _view.stickers
 	threads = _view.threads
+	strokes = _view.get("strokes", [])
 
 # ==== what the media ask ====
 
@@ -478,6 +576,59 @@ func thread(id: String) -> Dictionary:
 func threads_on(board_id: String) -> Array:
 	ensure_loaded()
 	return drawn_threads(_view, board_id)
+
+## Whether a board has a back a sticker or a scribble may sit on (stickers.ts twoSided): a cardboard wall.
+func board_sided(id: String) -> bool:
+	return two_sided(board_spec(id))
+
+## A construction as the server reads it ({id, title, note?, tables, walls}), {} when there is none.
+func construction(id: String) -> Dictionary:
+	ensure_loaded()
+	for c in constructions:
+		if str(c.get("id", "")) == id:
+			return c
+	return {}
+
+## The construction a board stands in as a wall (wallsOf), "" when it stands in none.
+func construction_of(board_id: String) -> String:
+	ensure_loaded()
+	return str(wall_map.get(board_id, ""))
+
+## The wall a board is: {construction, wall, table} as cleaned (wall_point takes the table and the wall), {} when the
+## board stands in no construction or its table is not there.
+func wall_of(board_id: String) -> Dictionary:
+	var c := construction(construction_of(board_id))
+	for w in c.get("walls", []):
+		if str(w.get("board", "")) == board_id:
+			for t in c.get("tables", []):
+				if str(t.get("id", "")) == str(w.get("table", "")):
+					return {"construction": c, "wall": w, "table": t}
+	return {}
+
+## The threads a construction draws between its walls (stickers.ts drawnWallThreads over the view): [{thread, a, b, p,
+## q, over}], tied, both ends on, on two different walls of it, each pin in the construction's frame, with the points it
+## goes over the walls in between by (over_walls); draw thread_pieces(p, q, over), thread_curve for each piece. A thread
+## within one wall is that board's own (threads_on; over its top edge by over_board when it joins the two faces).
+func wall_threads(construction_id: String) -> Array:
+	var c := construction(construction_id)
+	return drawn_wall_threads(_view, c, boards, designs) if not c.is_empty() else []
+
+## The scribbles a board draws (stickers.ts drawnStrokes over the view): on, on that board and that face ("" = both), in
+## the record's order, a later one over an earlier. A back stroke's points are its plane read from the FRONT (x as on
+## the front), drawn at stroke_z("back"). The records are the truth's own (the view copies a stroke only when this
+## device erases or unerases it): read them, never change them.
+func strokes_on(board_id: String, face := "") -> Array:
+	ensure_loaded()
+	var out: Array = []
+	for s in _strokes_by_board.get(board_id, []):
+		if str(s.get("state", "")) == "on" and (face == "" or str(s.get("face", "")) == face):
+			out.append(s)
+	return out
+
+## A stroke of the view, by id ({} when there is none).
+func stroke(id: String) -> Dictionary:
+	ensure_loaded()
+	return _stroke_by_id.get(id, {})
 
 ## The design drawn: its stored SVG through ThorVG at RASTER px on its long side, edges bled, mipmapped. Cached. The
 ## SVG's viewBox is the drawn box (the border included), so the texture covers exactly the quad extent() gives.
@@ -574,13 +725,14 @@ func quad_mesh() -> QuadMesh:
 # ==== making ops (the pad, a test) ====
 
 ## Stick `design_id` on `host` at the pose given in the host's frame (Vector3s or [x, y, z]). The record is written as
-## the server will store it (server_pose). Returns the sticker as drawn, {} if refused.
+## the server will store it (server_pose). On a cardboard wall a normal that points back (n.z < 0) sticks it on the
+## wall's back. Returns the sticker as drawn, {} if refused.
 func stick(design_id: String, host: Dictionary, at: Variant, n: Variant, up: Variant, size: float) -> Dictionary:
 	ensure_loaded()
 	if not designs.has(design_id):
 		last_error = "no design %s" % design_id
 		return {}
-	var pose := server_pose(host, at, n, up, designs[design_id], _depth_of(boards, host))
+	var pose := server_pose(host, at, n, up, designs[design_id], _depth_of(boards, host), _sided_of(boards, host))
 	var id := new_id("vr")
 	var s := {"id": id, "design": design_id, "host": host.duplicate(true), "at": pose.at, "n": pose.n, "up": pose.up,
 		"size": r4(clampf(size, 0.01, 4.0)), "z": 0, "by": by, "t": iso_now(), "state": "on", "moves": 0}
@@ -595,19 +747,18 @@ func restore(id: String) -> bool:
 
 ## TIE two stickers of one board with a word (and why), as the server's cleanOp leaves a tie: the word's white space
 ## run together and trimmed, 1 to WORD_MAX characters; why the same, cut at WHY_MAX; a colour #rrggbb in lower case, or
-## THREAD_RED. Two different sticker ids, both on the same board and not already tied (applyOps' rules, applied here
-## first). Returns the thread as drawn, {} if refused (last_error says why).
+## THREAD_RED. Two different sticker ids, both on the same board - or on two walls of one construction - and not already
+## tied (applyOps' rules, applied here first). Returns the thread as drawn, {} if refused (last_error says why).
 func tie(a: String, b: String, word: String, why := "", colour := "") -> Dictionary:
 	var w := clean_word(word)
 	if w == "":
 		last_error = "word must be 1 to %d characters" % WORD_MAX
 		return {}
-	var rx := RegEx.create_from_string(STICKER_ID)
-	if a == b or rx.search(a) == null or rx.search(b) == null:
+	if a == b or not _is(STICKER_ID, a) or not _is(STICKER_ID, b):
 		last_error = "a and b must be two different sticker ids"
 		return {}
 	var th := {"id": new_id("th"), "a": a, "b": b, "word": w,
-		"colour": colour.to_lower() if RegEx.create_from_string(HEX_RX).search(colour) != null else THREAD_RED}
+		"colour": colour.to_lower() if _is(HEX_RX, colour) else THREAD_RED}
 	var y := clean_why(why)
 	if y != "":
 		th["why"] = y
@@ -634,6 +785,43 @@ func relabel(id: String, word: String, why = null) -> bool:
 		op["why"] = y
 	return bool(submit([op])[0].ok)
 
+## SCRIBBLE: a stroke of `pen` (PENS) on a board's face, "front" or "back" (the back only of a cardboard wall), through
+## `points` in the board's frame (metres; [x, y] or Vector2; a back stroke's points as its plane is read from the FRONT),
+## in `colour` (#rrggbb; PEN_COLOURS[0] when ""), `width` metres (null: the pen's own; clamped to its range). The op is
+## cleaned as the server's cleanOp cleans it (cleanStroke: the width rounded, the colour in lower case, each point within
+## 10 m rounded to 4 places, 2 to STROKE_POINTS of them), and applyOps' rules refuse what the server would: a back on
+## paper, a board the boards do not hold; points past the board are put back on it. Returns the stroke as drawn, {} if
+## refused (last_error says why). A Vector2 is 32-bit: the 4 places come out the same unless a point lies on a half.
+func scribble(board_id: String, face: String, pen: String, points: Array, colour := "", width: Variant = null) -> Dictionary:
+	ensure_loaded()
+	var pts: Array = []
+	for p in points:
+		if p is Vector2:
+			pts.append([float(p.x), float(p.y)])
+		elif p is Array and (p as Array).size() == 2:
+			pts.append([p[0], p[1]])
+		else:
+			pts.append(p)   # cleanStroke refuses it, with its words
+	var id := new_id("st")
+	var c := clean_stroke({"id": id, "host": {"kind": "board", "id": board_id}, "face": face, "pen": pen, "width": width,
+		"colour": colour if colour != "" else str(PEN_COLOURS[0]), "points": pts}, iso_now())
+	if not c.has("stroke"):
+		last_error = str(c.error)
+		return {}
+	var s: Dictionary = c.stroke
+	var op := {"op_id": new_id("op"), "op": "scribble", "stroke": {"id": s.id, "host": s.host, "face": s.face, "pen": s.pen,
+		"width": s.width, "colour": s.colour, "points": s.points}}
+	var res := submit([op])
+	return stroke(id) if bool(res[0].ok) else {}
+
+## ERASE a scribble: kept, with who erased it and when. One already erased is skipped.
+func erase(id: String) -> bool:
+	return bool(submit([{"op_id": new_id("op"), "op": "erase", "id": id}])[0].ok)
+
+## Bring an erased scribble back (unerase). One that is on is skipped.
+func unerase(id: String) -> bool:
+	return bool(submit([{"op_id": new_id("op"), "op": "unerase", "id": id}])[0].ok)
+
 ## Ops of this device: applied here at once (by the shared rules), written to the outbox, posted. An op that fails here
 ## (no such sticker or thread, a move of a peeled one, a tie the rules refuse) is not kept. Returns each op's local
 ## result.
@@ -644,7 +832,7 @@ func submit(ops: Array) -> Array:
 	var st := _merge_state(_view)
 	var kept := false
 	for op in ops:
-		var r := _apply_one(_view, st, op, by, t, designs, boards)
+		var r := _apply_one(_view, st, op, by, t, designs, boards, wall_map)
 		results.append(r)
 		if bool(r.ok) and not bool(r.get("skipped", false)):
 			pending.append({"by": by, "t": t, "op": op})
@@ -712,10 +900,15 @@ func flush() -> bool:
 		return false
 	var who := str(pending[0].get("by", by))
 	var ops: Array = []
+	var chars := 0
 	_batch_ids = {}
 	for e in pending:
 		if str(e.get("by", by)) != who or ops.size() >= MAX_BATCH:
 			break
+		var cost := JSON.stringify(e.op).length() + 1
+		if not ops.is_empty() and chars + cost > MAX_BODY:
+			break   # the rest go in the next POST, which the answer to this one starts
+		chars += cost
 		ops.append(e.op)
 		_batch_ids[str(e.op.op_id)] = true
 	posts_attempted += 1
@@ -872,32 +1065,34 @@ static func allowed_up(d: Variant, n: Variant, up: Variant) -> Array:
 	return up_at_turn(n, allowed_turn(d, turn_of(n, up)))
 
 ## A placement as every medium must read it (stickers.ts settle): a sticker on a BOARD faces out of its face (n = +Z: a
-## board has no back to stick on) - flat ON the paper (at.z = 0), or on a board with DEPTH anywhere from the paper to
-## `depth` in front of it (at.z clamped to [0, depth], rounded to 4 places) - and a design that may not turn freely keeps
-## a turn its rule allows, read against the stored normal, on every host. Changes `s` in place.
-static func settle(s: Dictionary, d: Variant, depth := 0.0) -> void:
+## paper board has no back to stick on) - flat ON the paper (at.z = 0), or on a board with DEPTH anywhere from the paper
+## to `depth` in front of it (at.z clamped to [0, depth], rounded to 4 places); on a TWO-SIDED (cardboard) board, `sided`,
+## a sticker whose normal points back (n.z < 0) sits on the back face (n = -Z, at.z = -CARDBOARD) - and a design that may
+## not turn freely keeps a turn its rule allows, read against the stored normal, on every host. Changes `s` in place.
+static func settle(s: Dictionary, d: Variant, depth := 0.0, sided := false) -> void:
 	var host: Variant = s.get("host")
 	if host is Dictionary and str(host.get("kind", "")) == "board":
-		s["n"] = [0.0, 0.0, 1.0]
+		var back: bool = sided and float(a3(s.get("n"))[2]) < 0.0
+		s["n"] = [0.0, 0.0, -1.0 if back else 1.0]
 		var at := a3(s.get("at"))
-		s["at"] = [at[0], at[1], r4(js_clamp(at[2], 0.0, depth)) if depth > 0.0 else 0.0]
+		s["at"] = [at[0], at[1], -CARDBOARD if back else (r4(js_clamp(at[2], 0.0, depth)) if depth > 0.0 and not sided else 0.0)]
 		var up := a3(s.get("up"))
-		var u: Array = basis3([0.0, 0.0, 1.0], [up[0], up[1], 0.0]).up
+		var u: Array = basis3(s.n, [up[0], up[1], 0.0]).up
 		s["up"] = [r4(u[0]), r4(u[1]), 0.0]
 	if d is Dictionary and str(d.get("turn", "free")) != "free":
 		s["up"] = allowed_up(d, s.get("n"), s.get("up"))
 
 ## The pose the server will STORE for a sticker given in a host frame: cleanOp's numbers (each vector clamped and
 ## rounded to 4 places; n normalised, up made perpendicular to it, both rounded again) and then settle() - with the
-## board's depth, as the server settles it - repeated until nothing moves: a fixed point, so the server's cleaning of
-## this pose changes nothing and this device draws, before the answer, what the truth will hold after it. {at, n, up}
-## as Arrays.
-static func server_pose(host: Dictionary, at: Variant, n: Variant, up: Variant, d: Variant, depth := 0.0) -> Dictionary:
+## board's depth and whether it has a back, as the server settles it - repeated until nothing moves: a fixed point, so
+## the server's cleaning of this pose changes nothing and this device draws, before the answer, what the truth will hold
+## after it. {at, n, up} as Arrays.
+static func server_pose(host: Dictionary, at: Variant, n: Variant, up: Variant, d: Variant, depth := 0.0, sided := false) -> Dictionary:
 	var s := {"host": host, "at": _vec(at, 100.0), "n": _vec(n, 2.0), "up": _vec(up, 2.0)}
 	for i in 6:
 		var b := basis3(s.n, s.up)
 		var next := {"host": host, "at": s.at, "n": [r4(b.n[0]), r4(b.n[1]), r4(b.n[2])], "up": [r4(b.up[0]), r4(b.up[1]), r4(b.up[2])]}
-		settle(next, d, depth)
+		settle(next, d, depth, sided)
 		next["at"] = _vec(next.at, 100.0)
 		next["n"] = _vec(next.n, 2.0)
 		next["up"] = _vec(next.up, 2.0)
@@ -922,22 +1117,28 @@ static func host_key(h: Variant) -> String:
 			return "artifact:%s" % h.get("token", "")
 	return ""
 
-## applyOps of stickers.ts: ops in order; an op_id applied before is skipped; an op on a sticker or a thread that does
-## not exist, or a move of a peeled sticker, fails alone; an add or a move is settled (settle) by its design and by its
-## board's depth (`board_map`: id -> board as boards.json has it, read by clean_board's rules; without it every board is
-## flat). A TIE needs two stickers that exist on the SAME board and are not already tied; an UNTIE cuts it (kept, with
-## who cut it), a RETIE ties it again (refused while another tied thread holds the same two), a WORD relabels it. `who`
-## and `now` are the request's: a peel or a cut records who did it and when. Returns {doc, results, changed}; the doc
-## given is not changed.
-static func apply_ops(doc: Dictionary, ops: Array, who: String, now: String, design_map: Variant = null, board_map: Variant = null) -> Dictionary:
+## applyOps of stickers.ts: ops in order; an op_id applied before is skipped; an op on a sticker, a thread or a stroke
+## that does not exist, or a move of a peeled sticker, fails alone; an add or a move is settled (settle) by its design,
+## by its board's depth and by whether its board has a back (`board_map`: id -> board as boards.json has it, read by
+## clean_board's rules; without it every board is flat paper). A TIE needs two stickers that exist on the SAME board, or
+## on two walls of ONE construction (`wall_map_in`: board id -> its construction, walls_of; without it two boards are
+## two boards), and are not already tied; an UNTIE cuts it (kept, with who cut it), a RETIE ties it again (refused while
+## another tied thread holds the same two), a WORD relabels it. A SCRIBBLE draws a stroke on a board's face - the back
+## only of a cardboard board - its points kept within the board (clamped to it, rounded to 4 places, when the boards are
+## given); an ERASE keeps it with who erased it, an UNERASE brings it back. Sticker, thread and stroke ids are one space.
+## `who` and `now` are the request's: a peel, a cut, an erase and a scribble record who did it and when. Returns {doc,
+## results, changed}; the doc given is not changed.
+static func apply_ops(doc: Dictionary, ops: Array, who: String, now: String, design_map: Variant = null, board_map: Variant = null, wall_map_in: Variant = null) -> Dictionary:
 	var out := {"version": VERSION, "revision": int(doc.get("revision", 0)), "stickers": (doc.get("stickers", []) as Array).duplicate(true),
 		"threads": (doc.get("threads", []) as Array).duplicate(true) if doc.get("threads") is Array else [],
+		# a list copy: an erase or an unerase copies the stroke it changes (_apply_one), so the doc given keeps its own
+		"strokes": (doc.get("strokes", []) as Array).duplicate() if doc.get("strokes") is Array else [],
 		"applied": (doc.get("applied", []) as Array).duplicate()}
 	var st := _merge_state(out)
 	var results: Array = []
 	var changed := false
 	for op in ops:
-		var r := _apply_one(out, st, op, who, now, design_map, board_map)
+		var r := _apply_one(out, st, op, who, now, design_map, board_map, wall_map_in)
 		results.append(r)
 		if bool(r.ok) and not bool(r.get("skipped", false)):
 			changed = true
@@ -958,13 +1159,28 @@ static func _merge_state(doc: Dictionary) -> Dictionary:
 	var tlist: Array = doc.get("threads", [])
 	for i in tlist.size():
 		tindex[str(tlist[i].get("id", ""))] = i
+	var sindex: Dictionary = {}
+	var slist: Array = doc.get("strokes", []) if doc.get("strokes") is Array else []
+	for i in slist.size():
+		sindex[str(slist[i].get("id", ""))] = i
 	var seen: Dictionary = {}
 	for a in doc.get("applied", []):
 		seen[str(a)] = true
-	return {"index": index, "tindex": tindex, "seen": seen, "top": top}
+	return {"index": index, "tindex": tindex, "sindex": sindex, "seen": seen, "top": top}
 
-## One op into `doc` (changed in place), stickers.ts applyOps' loop body.
-static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String, now: String, design_map: Variant, board_map: Variant = null) -> Dictionary:
+## applyOps' taken(): sticker, thread and stroke ids are one space.
+static func _taken(st: Dictionary, id: String) -> bool:
+	return st.index.has(id) or st.tindex.has(id) or st.sindex.has(id)
+
+## applyOps' skip(): an op that changes nothing (a second untie, a peel of a peeled sticker ...) is still applied once.
+static func _skip(st: Dictionary, doc: Dictionary, op_id: String) -> Dictionary:
+	st.seen[op_id] = true
+	doc.applied.append(op_id)
+	return {"op_id": op_id, "ok": true, "skipped": true}
+
+## One op into `doc` (changed in place), stickers.ts applyOps' loop body, its branches in the same order (tie; untie,
+## retie, word; scribble; erase, unerase; add; the sticker ops) and every refusal in the same words.
+static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String, now: String, design_map: Variant, board_map: Variant = null, wall_map_in: Variant = null) -> Dictionary:
 	if not op is Dictionary:
 		return {"op_id": "?", "ok": false, "error": "op must be an object"}
 	var op_id := str(op.get("op_id", ""))
@@ -972,13 +1188,18 @@ static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String
 		return {"op_id": op_id, "ok": true, "skipped": true}
 	if not doc.get("threads") is Array:
 		doc["threads"] = []
+	if not doc.get("strokes") is Array:
+		doc["strokes"] = []
+	if not st.has("sindex"):
+		st["sindex"] = {}
 	var list: Array = doc.stickers
 	var tlist: Array = doc.threads
+	var slist: Array = doc.strokes
 	var kind := str(op.get("op", ""))
 	if kind == "tie":
 		var th: Dictionary = op.thread if op.get("thread") is Dictionary else {}
 		var tid := str(th.get("id", ""))
-		if st.tindex.has(tid) or st.index.has(tid):
+		if _taken(st, tid):
 			return {"op_id": op_id, "ok": false, "error": "thread %s already exists" % tid}
 		var a_id := str(th.get("a", ""))
 		var b_id := str(th.get("b", ""))
@@ -986,8 +1207,12 @@ static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String
 			return {"op_id": op_id, "ok": false, "error": "thread %s: no sticker %s" % [tid, a_id if not st.index.has(a_id) else b_id]}
 		var ha: Variant = list[int(st.index[a_id])].get("host")
 		var hb: Variant = list[int(st.index[b_id])].get("host")
-		if not ha is Dictionary or not hb is Dictionary or str(ha.get("kind", "")) != "board" or str(hb.get("kind", "")) != "board" or ha.get("id") != hb.get("id"):
-			return {"op_id": op_id, "ok": false, "error": "thread %s: a thread ties two stickers on the same board" % tid}
+		var on_boards: bool = ha is Dictionary and hb is Dictionary and str(ha.get("kind", "")) == "board" and str(hb.get("kind", "")) == "board"
+		# oneConstruction: both on boards, the first a wall (!!walls?.get(ha.id)) of the construction the second is a wall of
+		var one_construction: bool = on_boards and wall_map_in is Dictionary and _truthy((wall_map_in as Dictionary).get(ha.get("id"))) \
+			and (wall_map_in as Dictionary).get(ha.get("id")) == (wall_map_in as Dictionary).get(hb.get("id"))
+		if not on_boards or (ha.get("id") != hb.get("id") and not one_construction):
+			return {"op_id": op_id, "ok": false, "error": "thread %s: a thread ties two stickers on one board, or on two walls of one construction" % tid}
 		if _tied_pair(tlist, a_id, b_id, null):
 			return {"op_id": op_id, "ok": false, "error": "thread %s: those two are already tied" % tid}
 		# {id, a, b, word, colour: colour ?? THREAD_RED, by, t: now, state: 'tied'}, why only when it says something
@@ -1010,16 +1235,12 @@ static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String
 		var t: Dictionary = tlist[int(st.tindex[id])]
 		if kind == "untie":
 			if str(t.get("state", "")) == "cut":
-				st.seen[op_id] = true
-				doc.applied.append(op_id)
-				return {"op_id": op_id, "ok": true, "skipped": true}
+				return _skip(st, doc, op_id)
 			t["state"] = "cut"
 			t["cut"] = {"by": who, "t": now}
 		elif kind == "retie":
 			if str(t.get("state", "")) == "tied":
-				st.seen[op_id] = true
-				doc.applied.append(op_id)
-				return {"op_id": op_id, "ok": true, "skipped": true}
+				return _skip(st, doc, op_id)
 			if _tied_pair(tlist, str(t.get("a", "")), str(t.get("b", "")), str(t.get("id", ""))):
 				return {"op_id": op_id, "ok": false, "error": "thread %s: those two are already tied by another thread" % str(t.get("id", ""))}
 			t["state"] = "tied"
@@ -1032,12 +1253,67 @@ static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String
 				t.erase("word")
 			if op.has("why"):
 				t["why"] = op.why
+	elif kind == "scribble":
+		var stk: Dictionary = op.stroke if op.get("stroke") is Dictionary else {}
+		var sid := str(stk.get("id", ""))
+		if _taken(st, sid):
+			return {"op_id": op_id, "ok": false, "error": "stroke %s already exists" % sid}
+		var sh: Dictionary = stk.host if stk.get("host") is Dictionary else {}
+		var bid := str(sh.get("id", ""))
+		# boards?.get(st.host.id): the server's boards are cleaned, so a record that does not clean is not there
+		var board: Dictionary = clean_board((board_map as Dictionary).get(bid)) if board_map is Dictionary else {}
+		if board_map is Dictionary and board.is_empty():
+			return {"op_id": op_id, "ok": false, "error": "stroke %s: no board %s" % [sid, bid]}
+		if str(stk.get("face", "")) == "back" and not two_sided(board):
+			return {"op_id": op_id, "ok": false, "error": "stroke %s: board %s has no back (it is not cardboard)" % [sid, bid]}
+		var points: Array = []
+		var raw_points: Array = stk.points if stk.get("points") is Array else []
+		if board.is_empty():
+			for p in raw_points:
+				points.append([p[0], p[1]] if p is Array and (p as Array).size() >= 2 else p)
+		else:
+			# r4(clamp(x, -board.w / 2, board.w / 2)) written out (-w / 2 is (-w) / 2, the same double): js_clamp, then
+			# js_round(v * 10000) / 10000 + 0, the same operations in the same order. The view re-applies this device's
+			# pending scribbles on every reload: 30 of 2000 points took 167 to 313 ms through a2 / js_clamp / r4 and take
+			# 62 to 67 ms written out (measured 2026-11-14), and the parity shows the numbers unchanged.
+			var hw := float(board.w) / 2.0
+			var hh := float(board.h) / 2.0
+			for p in raw_points:
+				var q: Array = p if p is Array and (p as Array).size() >= 2 else [0.0, 0.0]
+				var x := minf(hw, maxf(-hw, float(q[0]))) * 10000.0
+				var y := minf(hh, maxf(-hh, float(q[1]))) * 10000.0
+				var cx := ceilf(x)
+				var cy := ceilf(y)
+				points.append([(cx if cx - 0.5 <= x else cx - 1.0) / 10000.0 + 0.0, (cy if cy - 0.5 <= y else cy - 1.0) / 10000.0 + 0.0])
+		var s := {"id": stk.get("id"), "host": {"kind": "board", "id": sh.get("id")}, "face": stk.get("face"), "pen": stk.get("pen"),
+			"width": stk.get("width"), "colour": stk.get("colour"), "points": points, "by": who, "t": now, "state": "on"}
+		st.sindex[sid] = slist.size()
+		slist.append(s)
+	elif kind == "erase" or kind == "unerase":
+		var id := str(op.get("id", ""))
+		if not st.sindex.has(id):
+			return {"op_id": op_id, "ok": false, "error": "no stroke %s" % id}
+		var i := int(st.sindex[id])
+		if kind == "erase":
+			if str(slist[i].get("state", "")) == "erased":
+				return _skip(st, doc, op_id)
+			var s: Dictionary = (slist[i] as Dictionary).duplicate()   # its own copy: the doc given keeps its stroke
+			s["state"] = "erased"
+			s["erased"] = {"by": who, "t": now}
+			slist[i] = s
+		else:
+			if str(slist[i].get("state", "")) == "on":
+				return _skip(st, doc, op_id)
+			var s: Dictionary = (slist[i] as Dictionary).duplicate()
+			s["state"] = "on"
+			s.erase("erased")
+			slist[i] = s
 	elif kind == "add":
 		if not op.get("sticker") is Dictionary:
 			return {"op_id": op_id, "ok": false, "error": "add needs a sticker"}
 		var s: Dictionary = (op.sticker as Dictionary).duplicate(true)
 		var sid := str(s.get("id", ""))
-		if st.index.has(sid) or st.tindex.has(sid):
+		if _taken(st, sid):
 			return {"op_id": op_id, "ok": false, "error": "sticker %s already exists" % sid}
 		if design_map is Dictionary and not (design_map as Dictionary).has(str(s.get("design", ""))):
 			return {"op_id": op_id, "ok": false, "error": "no design %s" % s.get("design", "")}
@@ -1048,7 +1324,7 @@ static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String
 		st.top = int(st.top) + 1
 		s["z"] = st.top
 		s.erase("peel")
-		settle(s, _design_of(design_map, s), _depth_of(board_map, s.get("host")))
+		settle(s, _design_of(design_map, s), _depth_of(board_map, s.get("host")), _sided_of(board_map, s.get("host")))
 		st.index[sid] = list.size()
 		list.append(s)
 	else:
@@ -1065,35 +1341,32 @@ static func _apply_one(doc: Dictionary, st: Dictionary, op: Variant, who: String
 					s["size"] = op.size
 				if op.get("host") is Dictionary:
 					s["host"] = op.host
-				settle(s, _design_of(design_map, s), _depth_of(board_map, s.get("host")))
+				settle(s, _design_of(design_map, s), _depth_of(board_map, s.get("host")), _sided_of(board_map, s.get("host")))
 				s["moves"] = int(s.get("moves", 0)) + 1
 			"peel":
 				if str(s.get("state", "on")) == "peeled":
-					st.seen[op_id] = true
-					doc.applied.append(op_id)
-					return {"op_id": op_id, "ok": true, "skipped": true}
+					return _skip(st, doc, op_id)
 				s["state"] = "peeled"
 				s["peel"] = {"by": who, "t": now}
 			"restore":
 				if str(s.get("state", "on")) == "on":
-					st.seen[op_id] = true
-					doc.applied.append(op_id)
-					return {"op_id": op_id, "ok": true, "skipped": true}
+					return _skip(st, doc, op_id)
 				s["state"] = "on"
 				s.erase("peel")
 				st.top = int(st.top) + 1
 				s["z"] = st.top
 			"note":
-				var note := str(op.get("note", "")).strip_edges()
-				if note != "":
-					s["note"] = note
+				# if (op.note) s.note = op.note; else delete s.note - as given: cleanOp trimmed it before
+				if _truthy(op.get("note")):
+					s["note"] = op.note
 				else:
 					s.erase("note")
 			"front":
 				st.top = int(st.top) + 1
 				s["z"] = st.top
 			_:
-				return {"op_id": op_id, "ok": false, "error": "op must be add, move, peel, restore, note, front, tie, untie, retie or word"}
+				# cleanOp refuses any other op before applyOps sees it; here it is refused too, in cleanOp's words
+				return {"op_id": op_id, "ok": false, "error": "op %s: op must be add, move, peel, restore, note, front, tie, untie, retie, word, scribble, erase or unerase" % op_id}
 	st.seen[op_id] = true
 	doc.applied.append(op_id)
 	return {"op_id": op_id, "ok": true}
@@ -1111,6 +1384,13 @@ static func _depth_of(board_map: Variant, host: Variant) -> float:
 		return 0.0
 	var b: Variant = (board_map as Dictionary).get(str(host.get("id", "")))
 	return clean_depth(b) if b is Dictionary else 0.0
+
+## Whether a host is a board with a back (applyOps' sidedOf: h.kind === 'board' && twoSided(boards?.get(h.id))): a
+## cardboard board `board_map` holds; false for every other host and without a board map (every board is then paper).
+static func _sided_of(board_map: Variant, host: Variant) -> bool:
+	if not board_map is Dictionary or not host is Dictionary or str(host.get("kind", "")) != "board":
+		return false
+	return two_sided(clean_board((board_map as Dictionary).get(str(host.get("id", "")))))
 
 ## applyOps' tiedPair: whether a TIED thread (other than `except`) holds stickers a and b, either way round.
 static func _tied_pair(tlist: Array, a: String, b: String, except: Variant) -> bool:
@@ -1153,31 +1433,41 @@ static func num(v: Variant, lo: float, hi: float, dflt: Variant = null) -> Varia
 			return js_clamp(t.to_float(), lo, hi)
 	return dflt
 
-## A board's depth as cleanBoard reads it: num(depth, 0, MAX_DEPTH, 0), kept (rounded to 4 places) only above 0.
+## A board's depth as cleanBoard reads it: num(depth, 0, MAX_DEPTH, 0), kept (rounded to 4 places) only above 0. A
+## cardboard wall keeps none (clean_board); settle never reads the depth of a two-sided board, so applyOps needs no
+## second rule for it here.
 static func clean_depth(raw: Dictionary) -> float:
 	var depth := float(num(raw.get("depth"), 0.0, MAX_DEPTH, 0.0))
 	return r4(depth) if depth > 0.0 else 0.0
 
-## stickers.ts cleanBoard: {id, title, w, h, paper, note?, depth?, hang?} or {} when the record has no valid id or no
-## w and h. A board hangs only with a depth (hang === true and depth > 0).
+## stickers.ts twoSided: a board of stock cardboard has a back (a sticker or a scribble may sit on it).
+static func two_sided(b: Variant) -> bool:
+	return b is Dictionary and (b as Dictionary).get("stock") is String and b.stock == "cardboard"
+
+## stickers.ts cleanBoard: {id, title, w, h, paper, note?, stock?, depth?, hang?} or {} when the record has no valid id
+## or no w and h. A board of stock cardboard (the only stock) is a wall: flat, no depth, no hang. A board hangs only with
+## a depth (hang === true and depth > 0).
 static func clean_board(raw: Variant) -> Dictionary:
 	if not raw is Dictionary:
 		return {}
 	var o: Dictionary = raw
 	var id: Variant = o.get("id")
-	if not id is String or RegEx.create_from_string(ID_RX).search(id) == null:
+	if not _is(ID_RX, id):
 		return {}
 	var w: Variant = num(o.get("w"), 0.2, 12.0)
 	var h: Variant = num(o.get("h"), 0.2, 6.0)
 	if w == null or h == null:
 		return {}
 	var paper: Variant = o.get("paper")
-	var title := _js_trim(str(o.title).left(60)) if o.get("title") is String else ""
+	var title := _js_trim(_js_slice(o.title, 60)) if o.get("title") is String else ""
 	var b := {"id": id, "title": title if title != "" else id, "w": r4(float(w)), "h": r4(float(h)),
-		"paper": (paper as String).to_lower() if paper is String and RegEx.create_from_string(HEX_RX).search(paper) != null else "#f4f0e6"}
-	var note := _js_trim(str(o.note).left(400)) if o.get("note") is String else ""
+		"paper": (paper as String).to_lower() if _is(HEX_RX, paper) else "#f4f0e6"}
+	var note := _js_trim(_js_slice(o.note, 400)) if o.get("note") is String else ""
 	if note != "":
 		b["note"] = note
+	if o.get("stock") is String and o.stock == "cardboard":
+		b["stock"] = "cardboard"
+		return b
 	var depth := float(num(o.get("depth"), 0.0, MAX_DEPTH, 0.0))
 	if depth > 0.0:
 		b["depth"] = r4(depth)
@@ -1248,12 +1538,440 @@ static func drawn_threads(doc: Dictionary, board_id: String) -> Array:
 		out.append({"thread": t, "a": a, "b": b})
 	return out
 
+# ==== constructions: cardboard walls on tables (stickers.ts cleanConstruction ... drawnWallThreads), in doubles ====
+# A construction's frame is the floor under its origin, +Y up. A table stands at `at` [x, z] turned `yaw` degrees about
+# +Y (turning +Z toward +X), its top `h` above the floor, `w` along its x and `d` along its z. A wall's foot - the middle
+# of its board's bottom edge, on the front face - stands at `at` [x, z] on its table's top, in the table's frame, turned
+# `yaw`: the board's centre is h / 2 above it and its front faces R_y(table.yaw + wall.yaw) * +Z. The board IS the wall.
+
+## stickers.ts cleanConstruction: {construction: {id, title, tables, walls, note?}} or {error} in the server's words.
+## Each table's numbers clamped (w and d 0.3 to 6 m, h 0.3 to 1.5 m) and rounded, at within 30 m, yaw in [0, 360); each
+## wall on a table of the construction, its foot put back on the table's top, a board standing once.
+static func clean_construction(raw: Variant) -> Dictionary:
+	if not (raw is Dictionary or raw is Array):   # !raw || typeof raw !== 'object': a list is an object without keys
+		return {"error": "construction must be an object"}
+	var o: Dictionary = raw if raw is Dictionary else {}
+	var id: Variant = o.get("id")
+	if not _is(ID_RX, id):
+		return {"error": "construction.id is not a valid id"}
+	var title := _js_trim(_js_slice(o.title, 80)) if o.get("title") is String else ""
+	var tables: Array = []
+	var walls: Array = []
+	var c := {"id": id, "title": title if title != "" else id, "tables": tables, "walls": walls}
+	var note := _js_trim(_js_slice(o.note, 400)) if o.get("note") is String else ""
+	if note != "":
+		c["note"] = note
+	for r in (o.tables if o.get("tables") is Array else []):
+		var t: Dictionary = r if r is Dictionary else {}
+		var tid: Variant = t.get("id")
+		if not _is(ID_RX, tid) or tables.any(func(x): return x.id == tid):
+			return {"error": "construction %s: each table needs an id of its own" % id}
+		var w: Variant = num(t.get("w"), 0.3, 6.0)
+		var d: Variant = num(t.get("d"), 0.3, 6.0)
+		var h: Variant = num(t.get("h"), 0.3, 1.5)
+		var at: Variant = _vec2(t.get("at"), 30.0)
+		if w == null or d == null or h == null or at == null:
+			return {"error": "construction %s: table %s needs w, d, h (m) and at [x, z] within 30 m" % [id, tid]}
+		tables.append({"id": tid, "w": r4(float(w)), "d": r4(float(d)), "h": r4(float(h)), "at": at, "yaw": _yaw_of(t.get("yaw"))})
+	if tables.size() > TABLES_MAX:
+		return {"error": "construction %s: at most %d tables" % [id, TABLES_MAX]}
+	for r in (o.walls if o.get("walls") is Array else []):
+		var wl: Dictionary = r if r is Dictionary else {}
+		var board_id: Variant = wl.get("board")
+		if not _is(ID_RX, board_id):
+			return {"error": "construction %s: each wall names its board" % id}
+		if walls.any(func(x): return x.board == board_id):
+			return {"error": "construction %s: board %s stands twice" % [id, board_id]}
+		var table: Dictionary = {}
+		if wl.get("table") is String:   # c.tables.find(t => t.id === wl.table)
+			for t in tables:
+				if t.id == wl.table:
+					table = t
+					break
+		if table.is_empty():
+			return {"error": "construction %s: wall %s stands on no table of it" % [id, board_id]}
+		var at: Variant = _vec2(wl.get("at"), 6.0)
+		if at == null:
+			return {"error": "construction %s: wall %s needs at [x, z] on its table" % [id, board_id]}
+		# its foot on the table's top
+		walls.append({"board": board_id, "table": table.id, "at": [r4(js_clamp(at[0], -float(table.w) / 2.0, float(table.w) / 2.0)),
+			r4(js_clamp(at[1], -float(table.d) / 2.0, float(table.d) / 2.0))], "yaw": _yaw_of(wl.get("yaw"))})
+	if walls.size() > WALLS_MAX:
+		return {"error": "construction %s: at most %d walls" % [id, WALLS_MAX]}
+	return {"construction": c}
+
+## stickers.ts cleanConstructionsDoc: {doc: {version, revision, constructions}} or {error}. With `board_map` (id ->
+## board) every wall's board must be in it and of stock cardboard. A board stands in one wall at most, in the whole
+## document: a sticker's frame must be one place. The server READS the document without the boards (a wall whose board
+## went is not drawn) and SAVES it against them.
+static func clean_constructions_doc(raw: Variant, board_map: Variant = null) -> Dictionary:
+	if not (raw is Dictionary or raw is Array):
+		return {"error": "the constructions document must be an object"}
+	var o: Dictionary = raw if raw is Dictionary else {}
+	var out: Array = []
+	var standing := {}
+	for r in (o.constructions if o.get("constructions") is Array else []):
+		var c := clean_construction(r)
+		if not c.has("construction"):
+			return {"error": c.error}
+		var k: Dictionary = c.construction
+		if out.any(func(x): return x.id == k.id):
+			return {"error": "construction %s appears twice" % k.id}
+		for w in k.walls:
+			if standing.has(w.board):
+				return {"error": "board %s stands in %s and in %s" % [w.board, standing[w.board], k.id]}
+			standing[w.board] = k.id
+			if board_map is Dictionary:
+				var b: Variant = (board_map as Dictionary).get(w.board)
+				if not b is Dictionary:
+					return {"error": "construction %s: no board %s" % [k.id, w.board]}
+				if not two_sided(b):
+					return {"error": "construction %s: board %s is not cardboard" % [k.id, w.board]}
+		out.append(k)
+	return {"doc": {"version": VERSION, "revision": maxi(0, int(float(num(o.get("revision"), 0.0, 1e9, 0.0)))), "constructions": out}}
+
+## stickers.ts wallsOf: board id -> the construction it stands in.
+static func walls_of(doc: Variant) -> Dictionary:
+	var m := {}
+	if doc is Dictionary:
+		for c in doc.get("constructions", []):
+			if c is Dictionary:
+				for w in c.get("walls", []):
+					if w is Dictionary:
+						m[str(w.get("board", ""))] = str(c.get("id", ""))
+	return m
+
+## R_y(deg) applied to (x, 0, z) (stickers.ts rotY): +Z turns toward +X as deg grows, as Godot's Basis(UP, rad) turns
+## it. [x', z'], in the server's order of operations: (deg * PI) / 180, x c + z s, (-x) s + z c.
+static func rot_y(deg: float, x: float, z: float) -> Array:
+	var r := (deg * PI) / 180.0
+	var c := cos(r)
+	var s := sin(r)
+	return [x * c + z * s, -x * s + z * c]
+
+## A point `p` of a wall's board frame in its construction's frame (stickers.ts wallPoint): [x, y, z]. `table` and
+## `wall` as cleaned (clean_construction), `board_rec` a board with its h (as cleaned: clean_board).
+static func wall_point(table: Dictionary, wall: Dictionary, board_rec: Dictionary, p: Variant) -> Array:
+	var q := a3(p)
+	var wat: Array = wall.get("at", [0.0, 0.0])
+	var tat: Array = table.get("at", [0.0, 0.0])
+	var wxz := rot_y(float(wall.get("yaw", 0.0)), q[0], q[2])
+	var txz := rot_y(float(table.get("yaw", 0.0)), float(wat[0]) + wxz[0], float(wat[1]) + wxz[1])
+	return [float(tat[0]) + txz[0], float(table.get("h", 0.0)) + float(board_rec.get("h", 0.0)) / 2.0 + q[1], float(tat[1]) + txz[1]]
+
+## The board's +Z (its front) in the construction's frame is R_y(wall_yaw) * +Z (stickers.ts wallYaw), in degrees.
+static func wall_yaw(table: Dictionary, wall: Dictionary) -> float:
+	return float(table.get("yaw", 0.0)) + float(wall.get("yaw", 0.0))
+
+## The threads a construction draws between its walls (stickers.ts drawnWallThreads): tied, both stickers on, on two
+## DIFFERENT walls of it (a thread within one wall is that board's own: drawn_threads, over its top edge by over_board
+## when it joins the two faces). Each comes with its pins in the construction's frame and the points it goes over the
+## walls in between by (over_walls over the construction's wall_lines): [{thread, a, b, p, q, over}] in the doc's order;
+## a medium draws thread_pieces(p, q, over). `board_map`: id -> board with its w and h, read by clean_board's rules (a
+## record that does not clean is not there: its stickers have no pin and its wall no line).
+static func drawn_wall_threads(doc: Dictionary, c: Dictionary, board_map: Variant, design_map: Variant = null) -> Array:
+	var by_id := {}
+	for s in doc.get("stickers", []):
+		if s is Dictionary:
+			by_id[str(s.get("id", ""))] = s
+	var wall_by := {}
+	for w in c.get("walls", []):
+		if w is Dictionary:
+			wall_by[str(w.get("board", ""))] = w
+	var table_by := {}
+	for t in c.get("tables", []):
+		if t is Dictionary:
+			table_by[str(t.get("id", ""))] = t
+	var lines: Array = wall_lines(c, board_map).values()
+	var out: Array = []
+	for t in doc.get("threads", []):
+		if not t is Dictionary:
+			continue
+		var a: Variant = by_id.get(str(t.get("a", "")))
+		var b: Variant = by_id.get(str(t.get("b", "")))
+		if str(t.get("state", "")) != "tied" or a == null or b == null or str(a.get("state", "")) != "on" or str(b.get("state", "")) != "on":
+			continue
+		var ha: Variant = a.get("host")
+		var hb: Variant = b.get("host")
+		if not ha is Dictionary or not hb is Dictionary or str(ha.get("kind", "")) != "board" or str(hb.get("kind", "")) != "board" \
+				or str(ha.get("id", "")) == str(hb.get("id", "")):
+			continue
+		var p := _wall_pin(a, wall_by, table_by, board_map, design_map)
+		var q := _wall_pin(b, wall_by, table_by, board_map, design_map)
+		if not p.is_empty() and not q.is_empty():
+			out.append({"thread": t, "a": a, "b": b, "p": p, "q": q, "over": over_walls(p, q, lines)})
+	return out
+
+## drawnWallThreads' pin(): a board sticker's pin (pin_of) in the construction's frame, [] when its board is no wall of
+## it, its table is not there or the boards do not hold its board.
+static func _wall_pin(s: Dictionary, wall_by: Dictionary, table_by: Dictionary, board_map: Variant, design_map: Variant) -> Array:
+	var h: Variant = s.get("host")
+	if not h is Dictionary or str(h.get("kind", "")) != "board":
+		return []
+	var bid := str(h.get("id", ""))
+	var w: Variant = wall_by.get(bid)
+	var b: Dictionary = clean_board((board_map as Dictionary).get(bid)) if board_map is Dictionary else {}
+	var t: Variant = table_by.get(str(w.get("table", ""))) if w is Dictionary else null
+	if not w is Dictionary or b.is_empty() or not t is Dictionary:
+		return []
+	return wall_point(t, w, b, pin_of(s, _design_of(design_map, s)))
+
+# ==== a thread never passes through cardboard (stickers.ts overWalls, intoWall, threadPieces, overBoard, wallLines) ====
+# Where a thread's curve, seen from above, runs into a standing wall's cardboard below the wall's top edge, the thread
+# goes over that edge: up the near face to the edge, over it, down the far face. A WALL LINE is a wall as seen from
+# above, in the frame the thread's pins are in: {a, b: [x, z] the two ends of the line of its cardboard's middle, n:
+# [x, z] its front's direction, bottom, top: the heights of its bottom and its top edge}. In doubles, in the contract's
+# order of operations and with its comparisons, strict where it is strict.
+
+## stickers.ts overWalls: the points a thread from `p` to `q` is drawn through, in order from p to q ([x, y, z] each, two
+## a wall gone over; [] when its curve meets no wall). It holds every PIECE to every wall: starting from the one curve
+## p..q it scans the pieces from p and, in the first piece that runs into any wall (_into_wall), takes the wall it meets
+## first (the least `lo`; of equals the first in the walls' order), puts that wall's two points - THREAD_CLEAR off its
+## near and its far face, THREAD_OVER above its top edge, where the piece's line crosses the cardboard's middle (or, for
+## a line that grazes the wall and leaves by its end, at that end) - after the piece's start, and holds the pieces again,
+## until none runs into any wall. A wall is gone over twice at most (there and back, round a wall's end; `met`): a
+## sticker on a face pressed against another wall cannot be reached without passing through cardboard, and its thread
+## is not chased round them for ever. `walls`: wall lines, a list (in order) or a Dictionary of them (wall_lines; its
+## values, in order).
+static func over_walls(p: Variant, q: Variant, walls: Variant) -> Array:
+	var all: Array = []
+	if walls is Dictionary:
+		all = (walls as Dictionary).values()
+	elif walls is Array:
+		all = walls
+	var met := PackedInt32Array()
+	met.resize(all.size())   # zero-filled: how often the thread has gone over each wall
+	var pts: Array = [a3(p), a3(q)]
+	var from := 0   # the pieces before the last insertion did not change and the walls only drop out: they stay clear
+	while true:
+		var at := -1
+		var wall := -1
+		var hit := {}
+		var k := from
+		while k + 1 < pts.size() and at < 0:   # the pieces from p: the first that runs into any wall
+			for i in all.size():
+				if met[i] >= 2:
+					continue   # over a wall twice at most (there and back)
+				var h := _into_wall(pts[k], pts[k + 1], all[i])
+				if not h.is_empty() and (hit.is_empty() or float(h.lo) < float(hit.lo)):
+					hit = h
+					wall = i
+			if not hit.is_empty():
+				at = k
+			k += 1
+		if hit.is_empty():
+			break
+		met[wall] += 1
+		pts.insert(at + 1, hit.far)
+		pts.insert(at + 1, hit.near)
+		from = at
+	return pts.slice(1, pts.size() - 1)
+
+## stickers.ts intoWall: where the piece thread_curve(p, q) first runs into the wall's cardboard below its top edge
+## (`lo`, a share of the way along it) and the two points it goes over that wall by: {lo, near, far}; {} when it never
+## does. It passes over a wall when its lowest point over the stretch inside the cardboard is at or above the top edge.
+## The near face is the one the line comes in through (the side of zIn, where it enters the cardboard); a line that
+## comes in by the wall's end, or starts within the cardboard's thickness, comes from the side q is not on
+## (-sign(z1)); a line within the thickness from end to end, from the side p is on (Math.sign(z0) || 1).
+static func _into_wall(p: Array, q: Array, w: Variant) -> Dictionary:
+	if not w is Dictionary:
+		return {}
+	var curve := thread_curve(p, q)
+	var length := hypot2(float(q[0]) - float(p[0]), float(q[2]) - float(p[2]))
+	var off := CARDBOARD / 2.0 + THREAD_CLEAR
+	const SKIN := 1e-9   # the cardboard a hair thinner than it is: a pin ON a face, or a thread along a face, is outside it
+	var wa := _xz(w.get("a"))
+	var wb := _xz(w.get("b"))
+	var wn := _xz(w.get("n"))
+	var hw := hypot2(wb[0] - wa[0], wb[1] - wa[1]) / 2.0
+	if not (hw > SKIN):
+		return {}
+	var mx: float = (wa[0] + wb[0]) / 2.0
+	var mz: float = (wa[1] + wb[1]) / 2.0
+	var ex: float = (wb[0] - wa[0]) / (2.0 * hw)
+	var ez: float = (wb[1] - wa[1]) / (2.0 * hw)
+	var p0: float = p[0]
+	var p1: float = p[1]
+	var p2: float = p[2]
+	var q0: float = q[0]
+	var q1: float = q[1]
+	var q2: float = q[2]
+	# the line in the wall's own terms: x along the wall from its middle, z out of its front from the cardboard's middle
+	var x0: float = (p0 - mx) * ex + (p2 - mz) * ez
+	var z0: float = (p0 - mx) * wn[0] + (p2 - mz) * wn[1]
+	var x1: float = (q0 - mx) * ex + (q2 - mz) * ez
+	var z1: float = (q0 - mx) * wn[0] + (q2 - mz) * wn[1]
+	# the stretch of the line (s in [lo, hi]) inside the cardboard: |x| < hw and |z| < CARDBOARD / 2
+	var lo := 0.0
+	var hi := 1.0
+	for ax in [[x0, x1, hw - SKIN], [z0, z1, CARDBOARD / 2.0 - SKIN]]:
+		var v0: float = ax[0]
+		var d: float = float(ax[1]) - v0
+		var h: float = ax[2]
+		if absf(d) < 1e-15:
+			if not (absf(v0) < h):
+				hi = -1.0
+			continue
+		var ta := (-h - v0) / d
+		var tb := (h - v0) / d
+		lo = maxf(lo, minf(ta, tb))
+		hi = minf(hi, maxf(ta, tb))
+	if not ((hi - lo) * length > SKIN):
+		return {}   # never inside its cardboard
+	# the curve's height over that stretch (quadratic in s, its x and z linear): its lowest and its highest
+	var cy: float = curve.c[1]
+	var ys: Array = [float(curve_at(curve, lo)[1]), float(curve_at(curve, hi)[1])]
+	var den: float = p1 - 2.0 * cy + q1
+	if absf(den) > 1e-15:
+		var sv: float = (p1 - cy) / den
+		if sv > lo and sv < hi:
+			ys.append(float(curve_at(curve, sv)[1]))
+	if _js_min(ys) >= _f(w.get("top")) or _js_max(ys) < _f(w.get("bottom")):
+		return {}   # passes over it, or under it
+	# over the edge where the line crosses the cardboard's middle, kept within the wall
+	var s := minf(hi, maxf(lo, z0 / (z0 - z1))) if absf(z1 - z0) > 1e-15 else (lo + hi) / 2.0
+	var xs := x0 + s * (x1 - x0)
+	var px := mx + ex * xs
+	var pz := mz + ez * xs
+	# near: the face the line comes in through; in by an end, or from within the cardboard's thickness: not q's side
+	var z_in := z0 + lo * (z1 - z0)
+	var band := CARDBOARD / 2.0 - SKIN
+	var side := signf(z_in) if absf(z_in) >= band - 1e-12 else (-signf(z1) if absf(z1) >= band else (1.0 if z0 > 0.0 else (-1.0 if z0 < 0.0 else 1.0)))
+	var k := side * off
+	var top := _f(w.get("top")) + THREAD_OVER
+	return {"lo": lo, "near": [px + wn[0] * k, top, pz + wn[1] * k], "far": [px - wn[0] * k, top, pz - wn[1] * k]}
+
+## stickers.ts threadPieces: the pieces a thread is drawn in, [p, ...over, q] pairwise ([[from, to], ...], [x, y, z]
+## each), and the one its tag hangs on: the longest, the first of equals (within 1e-12), its tag at
+## curve_at(thread_curve(piece[0], piece[1]), 0.5). {pieces, tag}; with no points, the one curve p to q.
+static func thread_pieces(p: Variant, q: Variant, over: Array = []) -> Dictionary:
+	var pts: Array = [a3(p)]
+	for v in over:
+		pts.append(a3(v))
+	pts.append(a3(q))
+	var pieces: Array = []
+	for i in range(1, pts.size()):
+		pieces.append([pts[i - 1], pts[i]])
+	var tag := 0
+	var best := -1.0
+	for i in pieces.size():
+		var a: Array = pieces[i][0]
+		var b: Array = pieces[i][1]
+		var l := hypot3(float(b[0]) - float(a[0]), float(b[1]) - float(a[1]), float(b[2]) - float(a[2]))
+		if l > best + 1e-12:
+			best = l
+			tag = i
+	return {"pieces": pieces, "tag": tag}
+
+## stickers.ts overBoard: on ONE two-sided board, a thread between a sticker on its front and one on its back goes over
+## the board's top edge (both pins in the board's frame, where the top edge is y = h / 2 and the cardboard's middle z =
+## -CARDBOARD / 2): its points, as over_walls gives them. On one face, or on a board that is not cardboard, [].
+## `board_rec`: a board with its w and h (board_spec, clean_board).
+static func over_board(p: Variant, q: Variant, board_rec: Variant) -> Array:
+	if not two_sided(board_rec):
+		return []
+	var w := _f(board_rec.get("w"))
+	var h := _f(board_rec.get("h"))
+	return over_walls(p, q, [{"a": [-w / 2.0, -CARDBOARD / 2.0], "b": [w / 2.0, -CARDBOARD / 2.0], "n": [0.0, 1.0], "bottom": -h / 2.0, "top": h / 2.0}])
+
+## stickers.ts wallLines: the walls of a construction as seen from above, by board id in the walls' order, in the
+## construction's frame: {a, b} the ends of its cardboard's middle line (wall_point of the middle of its bottom edge's
+## ends), n its front's direction (R_y(wall_yaw) * +Z), bottom the table's top, top that plus the board's h. `board_map`:
+## id -> board with its w and h, read by clean_board's rules (a wall whose board does not clean, or whose table is not
+## there, has no line).
+static func wall_lines(c: Dictionary, board_map: Variant) -> Dictionary:
+	var tables := {}
+	for t in c.get("tables", []):
+		if t is Dictionary:
+			tables[str(t.get("id", ""))] = t
+	var out := {}
+	for w in c.get("walls", []):
+		if not w is Dictionary:
+			continue
+		var t: Variant = tables.get(str(w.get("table", "")))
+		var b: Dictionary = clean_board((board_map as Dictionary).get(str(w.get("board", "")))) if board_map is Dictionary else {}
+		if not t is Dictionary or b.is_empty():
+			continue
+		var mid := -CARDBOARD / 2.0   # the cardboard's middle, behind its front face
+		var a := wall_point(t, w, b, [-float(b.w) / 2.0, -float(b.h) / 2.0, mid])
+		var e := wall_point(t, w, b, [float(b.w) / 2.0, -float(b.h) / 2.0, mid])
+		var n := rot_y(wall_yaw(t, w), 0.0, 1.0)
+		out[str(w.get("board", ""))] = {"a": [a[0], a[2]], "b": [e[0], e[2]], "n": [n[0], n[1]], "bottom": float(t.get("h", 0.0)),
+			"top": float(t.get("h", 0.0)) + float(b.h)}
+	return out
+
+# ==== scribbles (stickers.ts cleanStroke, drawnStrokes, strokeZ) ====
+
+## stickers.ts cleanStroke: a stroke as stored, {stroke} or {error} in the server's words. A scribble op's stroke is
+## cleaned the same way (with state on and no erased); applyOps then sets its by, t and state. Its pen one of PEN_LIST,
+## its width within the pen's range (the pen's own when it gives none) rounded to 4 places, its colour #rrggbb in lower
+## case, 2 to STROKE_POINTS points, each [x, y] within 10 m rounded to 4 places.
+static func clean_stroke(raw: Variant, now: String) -> Dictionary:
+	if not (raw is Dictionary or raw is Array):
+		return {"error": "stroke must be an object"}
+	var o: Dictionary = raw if raw is Dictionary else {}
+	var id: Variant = o.get("id")
+	if not _is(STICKER_ID, id):
+		return {"error": "stroke.id is not a valid id"}
+	var h: Variant = o.get("host")
+	if not (h is Dictionary and (h as Dictionary).get("kind") is String and h.kind == "board" and _is(ID_RX, (h as Dictionary).get("id"))):
+		return {"error": "stroke %s: a scribble is drawn on a board (host {kind: 'board', id})" % id}
+	var face: Variant = o.get("face")
+	if not (face is String and (face == "front" or face == "back")):
+		return {"error": "stroke %s: face must be front or back" % id}
+	var pen_id: Variant = o.get("pen")
+	if not (pen_id is String and PENS.has(pen_id)):
+		return {"error": "stroke %s: pen must be %s" % [id, ", ".join(PackedStringArray(PEN_LIST))]}
+	var pen: Dictionary = PENS[pen_id]
+	var width := float(num(o.get("width"), float(pen.min), float(pen.max), float(pen.width)))
+	var colour: Variant = o.get("colour")
+	if not _is(HEX_RX, colour):
+		return {"error": "stroke %s: colour must be #rrggbb" % id}
+	var raw_points: Array = o.points if o.get("points") is Array else []
+	if raw_points.size() < 2 or raw_points.size() > STROKE_POINTS:
+		return {"error": "stroke %s: 2 to %d points" % [id, STROKE_POINTS]}
+	var points: Array = []
+	for p in raw_points:
+		var q: Variant = _vec2(p, 10.0)
+		if q == null:
+			return {"error": "stroke %s: each point is [x, y] in metres, within 10 m" % id}
+		points.append(q)
+	var who := _js_trim(_js_slice(o.by, 60)) if o.get("by") is String else ""
+	var s := {"id": id, "host": {"kind": "board", "id": h.id}, "face": face, "pen": pen_id, "width": r4(width), "colour": (colour as String).to_lower(),
+		"points": points, "by": who if who != "" else "someone", "t": o.t if _is(ISO_RX, o.get("t")) else now,
+		"state": "erased" if o.get("state") is String and o.state == "erased" else "on"}
+	var e0: Variant = o.get("erased")
+	if s.state == "erased" and (e0 is Dictionary or e0 is Array):
+		var e: Dictionary = e0 if e0 is Dictionary else {}
+		var eb := _js_slice(e.by, 60) if e.get("by") is String else ""
+		s["erased"] = {"by": _js_trim(eb if eb != "" else "someone"), "t": e.t if _is(ISO_RX, e.get("t")) else now}
+	return {"stroke": s}
+
+## The scribbles a board draws (stickers.ts drawnStrokes): on, on that board and that face ("" = both), in the record's
+## order (a later one over an earlier). Ink lies on the cardboard: a sticker on the same face is drawn over every
+## scribble there, whichever came first.
+static func drawn_strokes(doc: Dictionary, board_id: String, face := "") -> Array:
+	var out: Array = []
+	for s in (doc.strokes if doc.get("strokes") is Array else []):
+		if not s is Dictionary:
+			continue
+		var h: Variant = s.get("host")
+		if str(s.get("state", "")) == "on" and h is Dictionary and (h as Dictionary).get("id") is String and h.id == board_id \
+				and (face == "" or str(s.get("face", "")) == face):
+			out.append(s)
+	return out
+
+## The plane a face's scribbles are drawn on, in the board's frame (stickers.ts strokeZ): STROKE_LIFT off the face, out
+## of the cardboard.
+static func stroke_z(face: String) -> float:
+	return -CARDBOARD - STROKE_LIFT if face == "back" else STROKE_LIFT
+
 ## A thread's word as cleanOp keeps it: its white space (JS's \s) run together, trimmed, 1 to WORD_MAX characters
 ## counted as JS counts them (UTF-16 units); "" when it is not one.
 static func clean_word(v: Variant) -> String:
 	if not v is String:
 		return ""
-	var w := _js_trim(RegEx.create_from_string(JS_SPACE + "+").sub(v, " ", true))
+	var w := _js_trim(_rx(JS_SPACE + "+").sub(v, " ", true))
 	return w if w != "" and _utf16_len(w) <= WORD_MAX else ""
 
 ## Why, as cleanOp keeps it: white space run together, trimmed, then cut at WHY_MAX (UTF-16 units; not trimmed again,
@@ -1261,17 +1979,60 @@ static func clean_word(v: Variant) -> String:
 static func clean_why(v: Variant) -> String:
 	if not v is String:
 		return ""
-	var w := _js_trim(RegEx.create_from_string(JS_SPACE + "+").sub(v, " ", true))
+	var w := _js_trim(_rx(JS_SPACE + "+").sub(v, " ", true))
 	while _utf16_len(w) > WHY_MAX:
 		w = w.left(w.length() - 1)
 	return w
 
 static func _js_trim(s: String) -> String:
-	var rx := RegEx.create_from_string("^" + JS_SPACE + "+|" + JS_SPACE + "+$")
-	return rx.sub(s, "", true)
+	return _rx("^" + JS_SPACE + "+|" + JS_SPACE + "+\\z").sub(s, "", true)
 
 static func _utf16_len(s: String) -> int:
 	return s.to_utf16_buffer().size() / 2
+
+## stickers.ts str(v, max)'s cut: v.slice(0, max), counted in UTF-16 units as JS counts them (a character past the BMP
+## is two). Where the cut would split such a pair JS keeps half of it, which a Godot String cannot hold: it is cut before.
+static func _js_slice(v: Variant, n: int) -> String:
+	var s := str(v)
+	if _utf16_len(s) <= n:
+		return s
+	var units := 0
+	var i := 0
+	while i < s.length():
+		var step := 2 if s.unicode_at(i) > 0xFFFF else 1
+		if units + step > n:
+			break
+		units += step
+		i += 1
+	return s.left(i)
+
+## A pattern compiled once: the rules run per op, and a scribble's or a tie's checks would compile it every time.
+static func _rx(pattern: String) -> RegEx:
+	var r: RegEx = _rx_cache.get(pattern)
+	if r == null:
+		r = RegEx.create_from_string(pattern)
+		_rx_cache[pattern] = r
+	return r
+
+## typeof v === 'string' && RX.test(v)
+static func _is(pattern: String, v: Variant) -> bool:
+	return v is String and _rx(pattern).search(v) != null
+
+## stickers.ts vec2(v, lim): exactly two finite numbers, each within +-lim (not clamped: past it there is none), rounded
+## to 4 places; null otherwise.
+static func _vec2(v: Variant, lim: float) -> Variant:
+	if not v is Array or (v as Array).size() != 2:
+		return null
+	for x in v:
+		if not (x is float or x is int) or not is_finite(float(x)) or absf(float(x)) > lim:
+			return null
+	return [r4(float(v[0])), r4(float(v[1]))]
+
+## stickers.ts yawOf: a turn in degrees as stored, num(v, -3600, 3600, 0) brought into [0, 360) by JS's % (fmod), rounded
+## to 4 places, with no 360 and no negative zero.
+static func _yaw_of(v: Variant) -> float:
+	var d := float(num(v, -3600.0, 3600.0, 0.0))
+	return fmod(r4(fmod(fmod(d, 360.0) + 360.0, 360.0)), 360.0) + 0.0
 
 # ==== small things (the double-precision ones as stickers.ts computes them) ====
 
@@ -1319,6 +2080,59 @@ static func hypot3(x: float, y: float, z: float) -> float:
 		comp = (prelim - sum) - summand
 		sum = prelim
 	return sqrt(sum) * big
+
+## Math.hypot of two as V8 computes it (hypot3's way): an infinity first, then a NaN, then scaled by the larger,
+## Kahan-summed in the arguments' order.
+static func hypot2(x: float, y: float) -> float:
+	if is_inf(x) or is_inf(y):
+		return INF
+	if is_nan(x) or is_nan(y):
+		return NAN
+	var ax := absf(x)
+	var ay := absf(y)
+	var big := ay if ay > ax else ax
+	if big == 0.0:
+		return 0.0
+	var sum := 0.0
+	var comp := 0.0
+	for v in [ax, ay]:
+		var k: float = float(v) / big
+		var summand := k * k - comp
+		var prelim := sum + summand
+		comp = (prelim - sum) - summand
+		sum = prelim
+	return sqrt(sum) * big
+
+## Math.min / Math.max of a list of numbers: NaN when one is NaN (minf and maxf would drop it).
+static func _js_min(vals: Array) -> float:
+	var r := INF
+	for v in vals:
+		var x := float(v)
+		if is_nan(x):
+			return NAN
+		if x < r:
+			r = x
+	return r
+
+static func _js_max(vals: Array) -> float:
+	var r := -INF
+	for v in vals:
+		var x := float(v)
+		if is_nan(x):
+			return NAN
+		if x > r:
+			r = x
+	return r
+
+## A number of a record as JS would do arithmetic with it here: the number, NaN when there is none.
+static func _f(v: Variant) -> float:
+	return float(v) if v is float or v is int else NAN
+
+## [x, z] of a wall line: two numbers, [NaN, NaN] when it is not (a wall without its ends draws no line).
+static func _xz(v: Variant) -> Array:
+	if v is Array and (v as Array).size() >= 2:
+		return [_f(v[0]), _f(v[1])]
+	return [NAN, NAN]
 
 static func norm3(a: Array) -> Array:
 	var l := hypot3(float(a[0]), float(a[1]), float(a[2]))

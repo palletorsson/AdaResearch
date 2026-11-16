@@ -53652,6 +53652,61 @@
             "fit_width": 6.0,
             "editor_label": "BETTER in standing red letters | what a direction is taken to mean; north of shaft B, larger, behind PLUS"
           }
+        },
+        {
+          "id": "stickers-cardboard",
+          "artifact": "sticker_construction",
+          "station": "SE",
+          "position": [
+            4.0,
+            2.5
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "construction": "research",
+            "editor_label": "Cardboard construction | the research in cardboard: walls on tables read from every side, stickers and scribbles on both faces, red thread between walls (/stickers?construction=research)"
+          }
+        },
+        {
+          "id": "stickers-pen",
+          "artifact": "sticker_pen",
+          "station": "NE",
+          "position": [
+            5.55,
+            -4.35
+          ],
+          "facing": 90,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "pen": "marker",
+            "colour": "#eb0d85",
+            "editor_label": "Graffiti pen | the example on its plinth: take it to write on boards and cardboard walls, or to rub a line out (its pen knob: eraser)"
+          }
+        },
+        {
+          "id": "stickers-pen-plinth",
+          "artifact": "association_plinth",
+          "station": "NE",
+          "position": [
+            5.55,
+            -4.35
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "graffiti",
+            "holds": "stickers-pen",
+            "top": 1.0,
+            "size": [
+              0.36,
+              0.3
+            ],
+            "editor_label": "Association plinth / graffiti"
+          }
         }
       ],
       "props": [],

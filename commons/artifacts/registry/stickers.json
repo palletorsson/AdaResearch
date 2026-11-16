@@ -83,6 +83,84 @@
                 "seed": "The random walk that pulls the helix toward chance"
           },
           "description": "One of the research's edges - where it says, in its own words, that it stops - as a stone column carved along a helix (sine in three dimensions, its radius breathing on a second sine) that a seeded random walk pulls toward chance: between a helix and a wandering line. The kind of edge sets how the carving stops: true up to a claim line then chance above (cannot claim), turns left uncarved (leaves out), the groove running out of the top (still open), roughed in only (not yet), sealed inside and seen through a slot (foreclosed), a window into a black hollow at the core (dark spot), a helix wider than the column biting out of its sides (does not fit). The edge's words on the plinth; the same edge is a sticker at /stickers (board 'edges')."
+    },
+    "sticker_construction": {
+      "lookup_name": "sticker_construction",
+      "name": "Sticker construction / the research in cardboard",
+      "scene": "res://commons/artifacts/sticker_construction/sticker_construction.tscn",
+      "category": "annotation",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "default_params": {
+        "construction": "research"
+      },
+      "parameters": {
+        "construction": "Which construction of commons/data/stickers/constructions.json (default research): its tables and its walls, each wall a board of boards.json of stock cardboard"
+      },
+      "description": "A temporary construction of cardboard on tables, a 3D mind map read from every side (Palle, 2026-11-14): the construction of constructions.json stood from that file and boards.json, the same construction the encyclopedia's /stickers 3D view stands, by the same contract (stickers.ts wallPoint, wallYaw; ported in sticker_data.gd). Each table is a wooden top at its height on four legs; each wall is its board as a slab of cardboard 5 mm thick (CARDBOARD), the front face at z = 0 and the back at z = -0.005 of the board's frame, its cut edges showing the corrugation. A wall is ONE body carrying meta sticker_host {kind: board, id}, its box collider exactly the slab, and one StickerLayer drawing BOTH faces: the stickers on each (a sticker whose normal points back is on the back) and the scribbles on each (pen strokes as ribbons at strokeZ, each pen's width, cap and opacity, the spray soft), so the sticker pad sticks and peels on either face and the sticker pen writes on either. Red thread runs between the walls with its word on a tag (drawnWallThreads), drawn in pieces: a thread never passes through cardboard - it goes over the top edge of every wall in its way (overWalls, threadPieces), and a wall's own thread from its front to its back goes over its top edge (overBoard); a tag lies flat on a face when its piece runs along the faces its ends stand on, stands above its string on a hop over an edge, and otherwise hangs below it. It follows the truth (the file watch, a second) and builds again only what changed; it builds once, at the frame's end, and then stands staged, its tables, walls, stickers, scribbles and threads made within 3 ms a frame. Tables and walls collide. Origin on the floor at the construction's own origin, +Y up; the research construction spans x -1.75..1.75 and z -1.4..2.3, its open side toward +Z.",
+      "footprint": [
+        3.5,
+        1.34,
+        3.7
+      ],
+      "size": [
+        3.5,
+        1.34,
+        3.7
+      ],
+      "interactions": [
+        "Sticker pad (inventory, worn): tap a wall's front OR back to stick the selected sticker there; hold on a sticker to peel it",
+        "Sticker pen (inventory, worn): hold the trigger with the tip on a face (VR) or the left button aiming at one (desktop) to write; with its eraser a press takes the line under it off",
+        "Sticker pad: drag from a sticker to a sticker on another wall to tie them with red thread"
+      ],
+      "tags": [
+        "annotation",
+        "stickers",
+        "cardboard",
+        "construction",
+        "mind map",
+        "threads",
+        "scribbles"
+      ]
+    },
+    "sticker_pen": {
+      "lookup_name": "sticker_pen",
+      "name": "Sticker pen (worn inventory tool)",
+      "scene": "res://commons/stickers/sticker_pen.tscn",
+      "category": "tool",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "default_params": {
+        "pen": "marker",
+        "width": "pen",
+        "colour": "#16191e"
+      },
+      "parameters": {
+        "pen": "fine, marker, chisel or spray (stickers.ts PENS: a fine liner, a marker, a square-nibbed chisel marker, a soft spray), or eraser (a press takes the latest line under the tip or the aim off its face: one erase op)",
+        "width": "pen (the pen's own width), thin (its least), thick (its most), or metres - kept inside the pen's range",
+        "colour": "#rrggbb, or a name of stickers.ts PEN_COLOUR_NAMES: black, white, thread red (or red), pink, blue, yellow, green, orange",
+        "reach": "The desktop's aim reach in metres (default 4)",
+        "mode": "auto (the tip on a VR controller, the aim on the desktop camera), tip or aim"
+      },
+      "description": "The inventory's worn graffiti pen (items.json mount 'worn', the tape roll's and the sticker pad's contract): writes on a board's face - the front of any board, either face of a cardboard wall - in one of the contract's pens. In VR the tip stands 8 cm ahead of the controller: hold the trigger with it within 1.5 cm of a face and the pen is down there, lifted past 2 cm; on a desktop hold the left button aiming at a face. The points (in the board's frame, a point about every 2 mm) become ONE scribble op on the line's end, written to user://stickers/outbox.json as the server will store it and posted to the encyclopedia's /api/stickers/ops; the board's layer draws it at once, the same stroke the /stickers SVG and three.js views draw. A still press is a dot; a line past 2000 points goes on as the next stroke. With the eraser a press takes off the line under it - the latest of that face within its half width plus 4 mm - as ONE erase op; the line stays in the record, and bringing it back is the web's (/stickers, Bring back the last erased).",
+      "footprint": [
+        0.016,
+        0.016,
+        0.136
+      ],
+      "size": [
+        0.016,
+        0.016,
+        0.136
+      ],
+      "tags": [
+        "tool",
+        "stickers",
+        "inventory",
+        "worn",
+        "pen",
+        "scribbles"
+      ]
     }
   }
 }
