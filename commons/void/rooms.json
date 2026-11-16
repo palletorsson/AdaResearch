@@ -55187,6 +55187,78 @@
             "panel": "up",
             "editor_label": "The way round | a plank footbridge from the north edge into the cave's near mouth; a panel gangway from its far mouth back round its east side, 1.7 m short of the floor; plates lay the last panel"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -3.6,
+            6.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "SpeculativeComputation_Rhizome_Network",
+            "stands_at": [
+              -3.6,
+              6.6
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the grower by the arrival to the footbridge, the cave and the gap on the east wing"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_specrhiz",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_specrhiz)"
+          }
+        },
+        {
+          "id": "word-see",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "SEE",
+            "tall": 1.4,
+            "fit_width": 3.8,
+            "editor_label": "SEE in standing red letters | what a body can do with every connection; on the west wing, facing ENTER across the floor"
+          }
+        },
+        {
+          "id": "word-enter",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            1.6
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "ENTER",
+            "tall": 1.3,
+            "fit_width": 5.2,
+            "editor_label": "ENTER in standing red letters | what it can do with some; on the east wing, where the last panel is"
+          }
         }
       ],
       "props": [],
