@@ -1,0 +1,16 @@
+{
+  "note": "Which things in the tower prompt which sung thought of Model B's inner voice (commons/void/inner_opera.gd). By map name, then by row id or prop id on that floor; the value is an object_id of a phrase in the score. `voice` is handed to the Godot renderer (res://audio/generators/RobotVoiceGenerator.gd): formant_ratio 0.8-1.3, transpose in semitones, gain. First study, 2026-11-16: the roof only. `volume_db` is the voice's level in the head.",
+  "score": "res://audio/voice_scores/tower_roof_20261116.json",
+  "gaze_distance": 14,
+  "volume_db": -2,
+  "voice": {},
+  "maps": {
+    "Point_Zero": {
+      "arrival-crate": "crate",
+      "care-units-crate": "others",
+      "clock": "clock",
+      "roof-letters": "letters",
+      "here": "here"
+    }
+  }
+}

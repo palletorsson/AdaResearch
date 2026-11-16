@@ -1,0 +1,2456 @@
+{
+  "id": "chimera_inner_opera_20261116",
+  "title": "Model B \u00b7 an inner opera",
+  "text": "I feel the warmth. I keep a little light. I see a face like mine. I long to go beyond. I learn to let things grow. I wait for you.",
+  "bpm": 84,
+  "key": "E minor",
+  "meter": "4/4 with six-beat extended phrases",
+  "phrases": [
+    {
+      "text": "I feel the warmth.",
+      "bar": 0.0875,
+      "bars": 1.0,
+      "units": [
+        {
+          "word": "i:0",
+          "written_word": "i",
+          "word_index": 0,
+          "syllable_index": 0,
+          "midi": 52,
+          "velocity": 0.88,
+          "start_frame": 11025,
+          "vowel_frame": 11025,
+          "end_frame": 23776,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 0.20818285714285706,
+              "midi": 52
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.20818285714285706,
+              "duration_s": 0.08095999999999998,
+              "midi": 52
+            }
+          ]
+        },
+        {
+          "word": "feel:0",
+          "written_word": "feel",
+          "word_index": 1,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 25540,
+          "vowel_frame": 26775,
+          "end_frame": 55276,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "f",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "i",
+              "start_s": 0.028,
+              "duration_s": 0.6112857142857144,
+              "midi": 55
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.6392857142857145,
+              "duration_s": 0.035,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "the:0",
+          "written_word": "the",
+          "word_index": 2,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.6776,
+          "start_frame": 57040,
+          "vowel_frame": 58275,
+          "end_frame": 71026,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "dh",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "uh",
+              "start_s": 0.028,
+              "duration_s": 0.2891428571428569,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "warmth:0",
+          "written_word": "warmth",
+          "word_index": 3,
+          "syllable_index": 0,
+          "midi": 52,
+          "velocity": 0.88,
+          "start_frame": 72790,
+          "vowel_frame": 74025,
+          "end_frame": 132174,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "w",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 52
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "aw",
+              "start_s": 0.028,
+              "duration_s": 1.2135714285714283,
+              "midi": 52
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "r",
+              "start_s": 1.2415714285714283,
+              "duration_s": 0.035,
+              "midi": 52
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "m",
+              "start_s": 1.2765714285714282,
+              "duration_s": 0.035,
+              "midi": 52
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "th",
+              "start_s": 1.3115714285714282,
+              "duration_s": 0.035,
+              "midi": 52
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "text": "i",
+          "start_frame": 11025,
+          "end_frame": 23776
+        },
+        {
+          "text": "feel",
+          "start_frame": 25540,
+          "end_frame": 55276
+        },
+        {
+          "text": "the",
+          "start_frame": 57040,
+          "end_frame": 71026
+        },
+        {
+          "text": "warmth",
+          "start_frame": 72790,
+          "end_frame": 132174
+        }
+      ],
+      "voice_plan": {
+        "offset": 11025,
+        "frames": 121149,
+        "phones": [
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 0,
+            "end": 9181,
+            "midi": 52
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 9181,
+            "end": 12751,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "f",
+            "start": 14515,
+            "end": 15750,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "i",
+            "start": 15750,
+            "end": 42708,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 42708,
+            "end": 44251,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "dh",
+            "start": 46015,
+            "end": 47250,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "uh",
+            "start": 47250,
+            "end": 60001,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "w",
+            "start": 61765,
+            "end": 63000,
+            "midi": 52
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "aw",
+            "start": 63000,
+            "end": 116518,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "r",
+            "start": 116518,
+            "end": 118062,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "m",
+            "start": 118062,
+            "end": 119605,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "th",
+            "start": 119605,
+            "end": 121149,
+            "midi": 52
+          }
+        ],
+        "syllables": [
+          {
+            "unit": "i:0",
+            "midi": 52,
+            "start": 0,
+            "vowel": 0,
+            "end": 12751,
+            "gain": 0.76
+          },
+          {
+            "unit": "feel:0",
+            "midi": 55,
+            "start": 14515,
+            "vowel": 15750,
+            "end": 44251,
+            "gain": 1
+          },
+          {
+            "unit": "the:0",
+            "midi": 54,
+            "start": 46015,
+            "vowel": 47250,
+            "end": 60001,
+            "gain": 0.66
+          },
+          {
+            "unit": "warmth:0",
+            "midi": 52,
+            "start": 61765,
+            "vowel": 63000,
+            "end": 121149,
+            "gain": 0.96
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 12751
+          },
+          {
+            "start": 14515,
+            "end": 44251
+          },
+          {
+            "start": 46015,
+            "end": 60001
+          },
+          {
+            "start": 61765,
+            "end": 121149
+          }
+        ],
+        "bridges": []
+      },
+      "object_id": "cup",
+      "object_label": "Cup",
+      "emotion": "Warmth",
+      "intention": "A small rise, then a low settling note on warmth.",
+      "options": {
+        "body": "female",
+        "pressure": 7.0,
+        "breathiness": 0.18,
+        "tension": 0.28,
+        "brightness": 0.12,
+        "roughness": 0.01,
+        "fry": 0.0,
+        "vibrato_depth_cents": 12.0,
+        "vibrato_rate": 5.3,
+        "drift_cents": 2.0,
+        "glide_s": 0.05,
+        "performance": "connected",
+        "voiced": true
+      }
+    },
+    {
+      "text": "I keep a little light.",
+      "bar": 1.4024999999999999,
+      "bars": 1.5,
+      "units": [
+        {
+          "word": "i:0",
+          "written_word": "i",
+          "word_index": 0,
+          "syllable_index": 0,
+          "midi": 52,
+          "velocity": 0.88,
+          "start_frame": 176715,
+          "vowel_frame": 176715,
+          "end_frame": 189466,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 0.20818285714285714,
+              "midi": 52
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.20818285714285714,
+              "duration_s": 0.08096,
+              "midi": 52
+            }
+          ]
+        },
+        {
+          "word": "keep:0",
+          "written_word": "keep",
+          "word_index": 1,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 191230,
+          "vowel_frame": 192465,
+          "end_frame": 222201,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "k",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "i",
+              "start_s": 0.028,
+              "duration_s": 0.6392857142857143,
+              "midi": 55
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "p",
+              "start_s": 0.6672857142857144,
+              "duration_s": 0.035,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "a:0",
+          "written_word": "a",
+          "word_index": 2,
+          "syllable_index": 0,
+          "midi": 57,
+          "velocity": 0.6776,
+          "start_frame": 223965,
+          "vowel_frame": 223965,
+          "end_frame": 236716,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "uh",
+              "start_s": 0.0,
+              "duration_s": 0.28914285714285715,
+              "midi": 57
+            }
+          ]
+        },
+        {
+          "word": "little:0",
+          "written_word": "little",
+          "word_index": 3,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 238480,
+          "vowel_frame": 239715,
+          "end_frame": 253789,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.028,
+              "duration_s": 0.3191428571428583,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "little:1",
+          "written_word": "little",
+          "word_index": 3,
+          "syllable_index": 1,
+          "midi": 54,
+          "velocity": 0.6776,
+          "start_frame": 254230,
+          "vowel_frame": 255465,
+          "end_frame": 283966,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "t",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "uh",
+              "start_s": 0.028,
+              "duration_s": 0.6112857142857148,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.6392857142857148,
+              "duration_s": 0.035,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "light:0",
+          "written_word": "light",
+          "word_index": 4,
+          "syllable_index": 0,
+          "midi": 59,
+          "velocity": 0.88,
+          "start_frame": 285730,
+          "vowel_frame": 286965,
+          "end_frame": 360864,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 59
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.028,
+              "duration_s": 1.181314285714286,
+              "midi": 59
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 1.209314285714286,
+              "duration_s": 0.4594000000000002,
+              "midi": 59
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "t",
+              "start_s": 1.6687142857142863,
+              "duration_s": 0.035,
+              "midi": 59
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "text": "i",
+          "start_frame": 176715,
+          "end_frame": 189466
+        },
+        {
+          "text": "keep",
+          "start_frame": 191230,
+          "end_frame": 222201
+        },
+        {
+          "text": "a",
+          "start_frame": 223965,
+          "end_frame": 236716
+        },
+        {
+          "text": "little",
+          "start_frame": 238480,
+          "end_frame": 283966
+        },
+        {
+          "text": "light",
+          "start_frame": 285730,
+          "end_frame": 360864
+        }
+      ],
+      "voice_plan": {
+        "offset": 176715,
+        "frames": 184149,
+        "phones": [
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 0,
+            "end": 9181,
+            "midi": 52
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 9181,
+            "end": 12751,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "k",
+            "start": 14515,
+            "end": 15750,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "i",
+            "start": 15750,
+            "end": 43942,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "p",
+            "start": 43942,
+            "end": 45486,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "uh",
+            "start": 47250,
+            "end": 60001,
+            "midi": 57
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 61765,
+            "end": 63000,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 63000,
+            "end": 77074,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 77074,
+            "end": 77515,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 77515,
+            "end": 78750,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "uh",
+            "start": 78750,
+            "end": 105708,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 105708,
+            "end": 107251,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 109015,
+            "end": 110250,
+            "midi": 59
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 110250,
+            "end": 162346,
+            "midi": 59
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 162346,
+            "end": 182605,
+            "midi": 59
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 182605,
+            "end": 184149,
+            "midi": 59
+          }
+        ],
+        "syllables": [
+          {
+            "unit": "i:0",
+            "midi": 52,
+            "start": 0,
+            "vowel": 0,
+            "end": 12751,
+            "gain": 0.72
+          },
+          {
+            "unit": "keep:0",
+            "midi": 55,
+            "start": 14515,
+            "vowel": 15750,
+            "end": 45486,
+            "gain": 0.95
+          },
+          {
+            "unit": "a:0",
+            "midi": 57,
+            "start": 47250,
+            "vowel": 47250,
+            "end": 60001,
+            "gain": 0.66
+          },
+          {
+            "unit": "little:0",
+            "midi": 55,
+            "start": 61765,
+            "vowel": 63000,
+            "end": 77074,
+            "gain": 0.84
+          },
+          {
+            "unit": "little:1",
+            "midi": 54,
+            "start": 77515,
+            "vowel": 78750,
+            "end": 107251,
+            "gain": 0.69
+          },
+          {
+            "unit": "light:0",
+            "midi": 59,
+            "start": 109015,
+            "vowel": 110250,
+            "end": 184149,
+            "gain": 1
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 12751
+          },
+          {
+            "start": 14515,
+            "end": 45486
+          },
+          {
+            "start": 47250,
+            "end": 60001
+          },
+          {
+            "start": 61765,
+            "end": 107251
+          },
+          {
+            "start": 109015,
+            "end": 184149
+          }
+        ],
+        "bridges": [
+          {
+            "start": 77074,
+            "end": 77515,
+            "from_unit": "little:0",
+            "to_unit": "little:1"
+          }
+        ]
+      },
+      "object_id": "lamp",
+      "object_label": "Lamp",
+      "emotion": "Care",
+      "intention": "A familiar low opening opens upward into a held light.",
+      "options": {
+        "body": "female",
+        "pressure": 7.0,
+        "breathiness": 0.18,
+        "tension": 0.28,
+        "brightness": 0.12,
+        "roughness": 0.01,
+        "fry": 0.0,
+        "vibrato_depth_cents": 12.0,
+        "vibrato_rate": 5.3,
+        "drift_cents": 2.0,
+        "glide_s": 0.05,
+        "performance": "connected",
+        "voiced": true
+      }
+    },
+    {
+      "text": "I see a face like mine.",
+      "bar": 3.2175,
+      "bars": 1.5,
+      "units": [
+        {
+          "word": "i:0",
+          "written_word": "i",
+          "word_index": 0,
+          "syllable_index": 0,
+          "midi": 59,
+          "velocity": 0.88,
+          "start_frame": 405405,
+          "vowel_frame": 405405,
+          "end_frame": 426031,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 0.33675428571428523,
+              "midi": 59
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.33675428571428523,
+              "duration_s": 0.13095999999999983,
+              "midi": 59
+            }
+          ]
+        },
+        {
+          "word": "see:0",
+          "written_word": "see",
+          "word_index": 1,
+          "syllable_index": 0,
+          "midi": 57,
+          "velocity": 0.88,
+          "start_frame": 427795,
+          "vowel_frame": 429030,
+          "end_frame": 458766,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "s",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 57
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "i",
+              "start_s": 0.028,
+              "duration_s": 0.6742857142857162,
+              "midi": 57
+            }
+          ]
+        },
+        {
+          "word": "a:0",
+          "written_word": "a",
+          "word_index": 2,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.6776,
+          "start_frame": 460530,
+          "vowel_frame": 460530,
+          "end_frame": 473281,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "uh",
+              "start_s": 0.0,
+              "duration_s": 0.28914285714285626,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "face:0",
+          "written_word": "face",
+          "word_index": 3,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.88,
+          "start_frame": 475045,
+          "vowel_frame": 476280,
+          "end_frame": 504781,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "f",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "e",
+              "start_s": 0.028,
+              "duration_s": 0.44012571428571395,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.468125714285714,
+              "duration_s": 0.1711599999999999,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "s",
+              "start_s": 0.6392857142857139,
+              "duration_s": 0.035,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "like:0",
+          "written_word": "like",
+          "word_index": 4,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 506545,
+          "vowel_frame": 507780,
+          "end_frame": 528406,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.028,
+              "duration_s": 0.3115542857142865,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.33955428571428653,
+              "duration_s": 0.12116000000000032,
+              "midi": 55
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "k",
+              "start_s": 0.46071428571428685,
+              "duration_s": 0.035,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "mine:0",
+          "written_word": "mine",
+          "word_index": 5,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.88,
+          "start_frame": 530170,
+          "vowel_frame": 531405,
+          "end_frame": 589554,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "m",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.028,
+              "duration_s": 0.9241714285714292,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.9521714285714292,
+              "duration_s": 0.3594000000000003,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "n",
+              "start_s": 1.3115714285714295,
+              "duration_s": 0.035,
+              "midi": 54
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "text": "i",
+          "start_frame": 405405,
+          "end_frame": 426031
+        },
+        {
+          "text": "see",
+          "start_frame": 427795,
+          "end_frame": 458766
+        },
+        {
+          "text": "a",
+          "start_frame": 460530,
+          "end_frame": 473281
+        },
+        {
+          "text": "face",
+          "start_frame": 475045,
+          "end_frame": 504781
+        },
+        {
+          "text": "like",
+          "start_frame": 506545,
+          "end_frame": 528406
+        },
+        {
+          "text": "mine",
+          "start_frame": 530170,
+          "end_frame": 589554
+        }
+      ],
+      "voice_plan": {
+        "offset": 405405,
+        "frames": 184149,
+        "phones": [
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 0,
+            "end": 14851,
+            "midi": 59
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 14851,
+            "end": 20626,
+            "midi": 59
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "s",
+            "start": 22390,
+            "end": 23625,
+            "midi": 57
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "i",
+            "start": 23625,
+            "end": 53361,
+            "midi": 57
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "uh",
+            "start": 55125,
+            "end": 67876,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "f",
+            "start": 69640,
+            "end": 70875,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "e",
+            "start": 70875,
+            "end": 90284,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 90284,
+            "end": 97832,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "s",
+            "start": 97832,
+            "end": 99376,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 101140,
+            "end": 102375,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 102375,
+            "end": 116114,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 116114,
+            "end": 121458,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "k",
+            "start": 121458,
+            "end": 123001,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "m",
+            "start": 124765,
+            "end": 126000,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 126000,
+            "end": 166756,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 166756,
+            "end": 182605,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "n",
+            "start": 182605,
+            "end": 184149,
+            "midi": 54
+          }
+        ],
+        "syllables": [
+          {
+            "unit": "i:0",
+            "midi": 59,
+            "start": 0,
+            "vowel": 0,
+            "end": 20626,
+            "gain": 0.75
+          },
+          {
+            "unit": "see:0",
+            "midi": 57,
+            "start": 22390,
+            "vowel": 23625,
+            "end": 53361,
+            "gain": 0.94
+          },
+          {
+            "unit": "a:0",
+            "midi": 55,
+            "start": 55125,
+            "vowel": 55125,
+            "end": 67876,
+            "gain": 0.65
+          },
+          {
+            "unit": "face:0",
+            "midi": 54,
+            "start": 69640,
+            "vowel": 70875,
+            "end": 99376,
+            "gain": 0.96
+          },
+          {
+            "unit": "like:0",
+            "midi": 55,
+            "start": 101140,
+            "vowel": 102375,
+            "end": 123001,
+            "gain": 0.74
+          },
+          {
+            "unit": "mine:0",
+            "midi": 54,
+            "start": 124765,
+            "vowel": 126000,
+            "end": 184149,
+            "gain": 0.91
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 20626
+          },
+          {
+            "start": 22390,
+            "end": 53361
+          },
+          {
+            "start": 55125,
+            "end": 67876
+          },
+          {
+            "start": 69640,
+            "end": 99376
+          },
+          {
+            "start": 101140,
+            "end": 123001
+          },
+          {
+            "start": 124765,
+            "end": 184149
+          }
+        ],
+        "bridges": []
+      },
+      "object_id": "mirror",
+      "object_label": "Mirror",
+      "emotion": "Self-recognition",
+      "intention": "The lamp high note turns inward, descending to an unresolved F-sharp.",
+      "options": {
+        "body": "female",
+        "pressure": 7.0,
+        "breathiness": 0.18,
+        "tension": 0.28,
+        "brightness": 0.12,
+        "roughness": 0.01,
+        "fry": 0.0,
+        "vibrato_depth_cents": 12.0,
+        "vibrato_rate": 5.3,
+        "drift_cents": 2.0,
+        "glide_s": 0.05,
+        "performance": "connected",
+        "voiced": true
+      }
+    },
+    {
+      "text": "I long to go beyond.",
+      "bar": 5.032500000000001,
+      "bars": 1.5,
+      "units": [
+        {
+          "word": "i:0",
+          "written_word": "i",
+          "word_index": 0,
+          "syllable_index": 0,
+          "midi": 52,
+          "velocity": 0.88,
+          "start_frame": 634095,
+          "vowel_frame": 634095,
+          "end_frame": 654721,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 0.3367542857142865,
+              "midi": 52
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.3367542857142865,
+              "duration_s": 0.13096000000000033,
+              "midi": 52
+            }
+          ]
+        },
+        {
+          "word": "long:0",
+          "written_word": "long",
+          "word_index": 1,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.88,
+          "start_frame": 656485,
+          "vowel_frame": 657720,
+          "end_frame": 686221,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "aw",
+              "start_s": 0.028,
+              "duration_s": 0.6112857142857139,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "ng",
+              "start_s": 0.6392857142857139,
+              "duration_s": 0.035,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "to:0",
+          "written_word": "to",
+          "word_index": 2,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 687985,
+          "vowel_frame": 689220,
+          "end_frame": 701971,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "t",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "u",
+              "start_s": 0.028,
+              "duration_s": 0.28914285714285803,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "go:0",
+          "written_word": "go",
+          "word_index": 3,
+          "syllable_index": 0,
+          "midi": 57,
+          "velocity": 0.88,
+          "start_frame": 703735,
+          "vowel_frame": 704970,
+          "end_frame": 733471,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "g",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 57
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "o",
+              "start_s": 0.028,
+              "duration_s": 0.46532571428571656,
+              "midi": 57
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "u",
+              "start_s": 0.4933257142857166,
+              "duration_s": 0.1809600000000009,
+              "midi": 57
+            }
+          ]
+        },
+        {
+          "word": "beyond:0",
+          "written_word": "beyond",
+          "word_index": 4,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.6776,
+          "start_frame": 735235,
+          "vowel_frame": 736470,
+          "end_frame": 759654,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "b",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.028,
+              "duration_s": 0.5257142857142831,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "beyond:1",
+          "written_word": "beyond",
+          "word_index": 4,
+          "syllable_index": 1,
+          "midi": 59,
+          "velocity": 0.88,
+          "start_frame": 760095,
+          "vowel_frame": 760095,
+          "end_frame": 818244,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 1.248571428571431,
+              "midi": 59
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "n",
+              "start_s": 1.248571428571431,
+              "duration_s": 0.035,
+              "midi": 59
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "d",
+              "start_s": 1.283571428571431,
+              "duration_s": 0.035,
+              "midi": 59
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "text": "i",
+          "start_frame": 634095,
+          "end_frame": 654721
+        },
+        {
+          "text": "long",
+          "start_frame": 656485,
+          "end_frame": 686221
+        },
+        {
+          "text": "to",
+          "start_frame": 687985,
+          "end_frame": 701971
+        },
+        {
+          "text": "go",
+          "start_frame": 703735,
+          "end_frame": 733471
+        },
+        {
+          "text": "beyond",
+          "start_frame": 735235,
+          "end_frame": 818244
+        }
+      ],
+      "voice_plan": {
+        "offset": 634095,
+        "frames": 184149,
+        "phones": [
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 0,
+            "end": 14851,
+            "midi": 52
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 14851,
+            "end": 20626,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 22390,
+            "end": 23625,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "aw",
+            "start": 23625,
+            "end": 50582,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "ng",
+            "start": 50582,
+            "end": 52126,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 53890,
+            "end": 55125,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 55125,
+            "end": 67876,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "g",
+            "start": 69640,
+            "end": 70875,
+            "midi": 57
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "o",
+            "start": 70875,
+            "end": 91396,
+            "midi": 57
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 91396,
+            "end": 99376,
+            "midi": 57
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "b",
+            "start": 101140,
+            "end": 102375,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 102375,
+            "end": 125559,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 125559,
+            "end": 126000,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 126000,
+            "end": 181062,
+            "midi": 59
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "n",
+            "start": 181062,
+            "end": 182606,
+            "midi": 59
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "d",
+            "start": 182606,
+            "end": 184149,
+            "midi": 59
+          }
+        ],
+        "syllables": [
+          {
+            "unit": "i:0",
+            "midi": 52,
+            "start": 0,
+            "vowel": 0,
+            "end": 20626,
+            "gain": 0.72
+          },
+          {
+            "unit": "long:0",
+            "midi": 54,
+            "start": 22390,
+            "vowel": 23625,
+            "end": 52126,
+            "gain": 1
+          },
+          {
+            "unit": "to:0",
+            "midi": 55,
+            "start": 53890,
+            "vowel": 55125,
+            "end": 67876,
+            "gain": 0.65
+          },
+          {
+            "unit": "go:0",
+            "midi": 57,
+            "start": 69640,
+            "vowel": 70875,
+            "end": 99376,
+            "gain": 0.9
+          },
+          {
+            "unit": "beyond:0",
+            "midi": 54,
+            "start": 101140,
+            "vowel": 102375,
+            "end": 125559,
+            "gain": 0.7
+          },
+          {
+            "unit": "beyond:1",
+            "midi": 59,
+            "start": 126000,
+            "vowel": 126000,
+            "end": 184149,
+            "gain": 1
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 20626
+          },
+          {
+            "start": 22390,
+            "end": 52126
+          },
+          {
+            "start": 53890,
+            "end": 67876
+          },
+          {
+            "start": 69640,
+            "end": 99376
+          },
+          {
+            "start": 101140,
+            "end": 184149
+          }
+        ],
+        "bridges": [
+          {
+            "start": 125559,
+            "end": 126000,
+            "from_unit": "beyond:0",
+            "to_unit": "beyond:1"
+          }
+        ]
+      },
+      "object_id": "door",
+      "object_label": "Door",
+      "emotion": "Longing",
+      "intention": "Growing steps lead to a sustained high B on the last syllable of beyond.",
+      "options": {
+        "body": "female",
+        "pressure": 7.0,
+        "breathiness": 0.18,
+        "tension": 0.28,
+        "brightness": 0.12,
+        "roughness": 0.01,
+        "fry": 0.0,
+        "vibrato_depth_cents": 12.0,
+        "vibrato_rate": 5.3,
+        "drift_cents": 2.0,
+        "glide_s": 0.05,
+        "performance": "connected",
+        "voiced": true
+      }
+    },
+    {
+      "text": "I learn to let things grow.",
+      "bar": 6.847500000000001,
+      "bars": 1.5,
+      "units": [
+        {
+          "word": "i:0",
+          "written_word": "i",
+          "word_index": 0,
+          "syllable_index": 0,
+          "midi": 57,
+          "velocity": 0.88,
+          "start_frame": 862785,
+          "vowel_frame": 862785,
+          "end_frame": 883411,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 0.33675428571428906,
+              "midi": 57
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.33675428571428906,
+              "duration_s": 0.13096000000000133,
+              "midi": 57
+            }
+          ]
+        },
+        {
+          "word": "learn:0",
+          "written_word": "learn",
+          "word_index": 1,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 885175,
+          "vowel_frame": 886410,
+          "end_frame": 914911,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "er",
+              "start_s": 0.028,
+              "duration_s": 0.6112857142857139,
+              "midi": 55
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "n",
+              "start_s": 0.6392857142857139,
+              "duration_s": 0.035,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "to:0",
+          "written_word": "to",
+          "word_index": 2,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.88,
+          "start_frame": 916675,
+          "vowel_frame": 917910,
+          "end_frame": 930661,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "t",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "u",
+              "start_s": 0.028,
+              "duration_s": 0.2891428571428598,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "let:0",
+          "written_word": "let",
+          "word_index": 3,
+          "syllable_index": 0,
+          "midi": 52,
+          "velocity": 0.88,
+          "start_frame": 932425,
+          "vowel_frame": 933660,
+          "end_frame": 962161,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "l",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 52
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "oe",
+              "start_s": 0.028,
+              "duration_s": 0.6112857142857174,
+              "midi": 52
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "t",
+              "start_s": 0.6392857142857175,
+              "duration_s": 0.035,
+              "midi": 52
+            }
+          ]
+        },
+        {
+          "word": "things:0",
+          "written_word": "things",
+          "word_index": 4,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.88,
+          "start_frame": 963925,
+          "vowel_frame": 965160,
+          "end_frame": 984551,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "th",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.028,
+              "duration_s": 0.3697142857142846,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "ng",
+              "start_s": 0.39771428571428463,
+              "duration_s": 0.035,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "z",
+              "start_s": 0.4327142857142846,
+              "duration_s": 0.035,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "grow:0",
+          "written_word": "grow",
+          "word_index": 5,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 986315,
+          "vowel_frame": 988785,
+          "end_frame": 1046934,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "g",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "r",
+              "start_s": 0.028,
+              "duration_s": 0.028,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "o",
+              "start_s": 0.056,
+              "duration_s": 0.9493714285714279,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "u",
+              "start_s": 1.005371428571428,
+              "duration_s": 0.36919999999999975,
+              "midi": 55
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "text": "i",
+          "start_frame": 862785,
+          "end_frame": 883411
+        },
+        {
+          "text": "learn",
+          "start_frame": 885175,
+          "end_frame": 914911
+        },
+        {
+          "text": "to",
+          "start_frame": 916675,
+          "end_frame": 930661
+        },
+        {
+          "text": "let",
+          "start_frame": 932425,
+          "end_frame": 962161
+        },
+        {
+          "text": "things",
+          "start_frame": 963925,
+          "end_frame": 984551
+        },
+        {
+          "text": "grow",
+          "start_frame": 986315,
+          "end_frame": 1046934
+        }
+      ],
+      "voice_plan": {
+        "offset": 862785,
+        "frames": 184149,
+        "phones": [
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 0,
+            "end": 14851,
+            "midi": 57
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 14851,
+            "end": 20626,
+            "midi": 57
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 22390,
+            "end": 23625,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "er",
+            "start": 23625,
+            "end": 50582,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "n",
+            "start": 50582,
+            "end": 52126,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 53890,
+            "end": 55125,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 55125,
+            "end": 67876,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 69640,
+            "end": 70875,
+            "midi": 52
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "oe",
+            "start": 70875,
+            "end": 97833,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 97833,
+            "end": 99376,
+            "midi": 52
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "th",
+            "start": 101140,
+            "end": 102375,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 102375,
+            "end": 118679,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "ng",
+            "start": 118679,
+            "end": 120223,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "z",
+            "start": 120223,
+            "end": 121766,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "g",
+            "start": 123530,
+            "end": 124765,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "r",
+            "start": 124765,
+            "end": 126000,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "o",
+            "start": 126000,
+            "end": 167867,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 167867,
+            "end": 184149,
+            "midi": 55
+          }
+        ],
+        "syllables": [
+          {
+            "unit": "i:0",
+            "midi": 57,
+            "start": 0,
+            "vowel": 0,
+            "end": 20626,
+            "gain": 0.72
+          },
+          {
+            "unit": "learn:0",
+            "midi": 55,
+            "start": 22390,
+            "vowel": 23625,
+            "end": 52126,
+            "gain": 1
+          },
+          {
+            "unit": "to:0",
+            "midi": 54,
+            "start": 53890,
+            "vowel": 55125,
+            "end": 67876,
+            "gain": 0.65
+          },
+          {
+            "unit": "let:0",
+            "midi": 52,
+            "start": 69640,
+            "vowel": 70875,
+            "end": 99376,
+            "gain": 0.84
+          },
+          {
+            "unit": "things:0",
+            "midi": 54,
+            "start": 101140,
+            "vowel": 102375,
+            "end": 121766,
+            "gain": 0.88
+          },
+          {
+            "unit": "grow:0",
+            "midi": 55,
+            "start": 123530,
+            "vowel": 126000,
+            "end": 184149,
+            "gain": 1
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 20626
+          },
+          {
+            "start": 22390,
+            "end": 52126
+          },
+          {
+            "start": 53890,
+            "end": 67876
+          },
+          {
+            "start": 69640,
+            "end": 99376
+          },
+          {
+            "start": 101140,
+            "end": 121766
+          },
+          {
+            "start": 123530,
+            "end": 184149
+          }
+        ],
+        "bridges": []
+      },
+      "object_id": "plant",
+      "object_label": "Plant",
+      "emotion": "Learning care",
+      "intention": "A descending opening makes space for a gentle rise into grow.",
+      "options": {
+        "body": "female",
+        "pressure": 7.0,
+        "breathiness": 0.18,
+        "tension": 0.28,
+        "brightness": 0.12,
+        "roughness": 0.01,
+        "fry": 0.0,
+        "vibrato_depth_cents": 12.0,
+        "vibrato_rate": 5.3,
+        "drift_cents": 2.0,
+        "glide_s": 0.05,
+        "performance": "connected",
+        "voiced": true
+      }
+    },
+    {
+      "text": "I wait for you.",
+      "bar": 8.662500000000001,
+      "bars": 1.0,
+      "units": [
+        {
+          "word": "i:0",
+          "written_word": "i",
+          "word_index": 0,
+          "syllable_index": 0,
+          "midi": 55,
+          "velocity": 0.88,
+          "start_frame": 1091475,
+          "vowel_frame": 1091475,
+          "end_frame": 1112101,
+          "phonemes": [
+            {
+              "kind": "vowel",
+              "phoneme": "a",
+              "start_s": 0.0,
+              "duration_s": 0.33675428571428906,
+              "midi": 55
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.33675428571428906,
+              "duration_s": 0.13096000000000133,
+              "midi": 55
+            }
+          ]
+        },
+        {
+          "word": "wait:0",
+          "written_word": "wait",
+          "word_index": 1,
+          "syllable_index": 0,
+          "midi": 54,
+          "velocity": 0.88,
+          "start_frame": 1113865,
+          "vowel_frame": 1115100,
+          "end_frame": 1151476,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "w",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "e",
+              "start_s": 0.028,
+              "duration_s": 0.568697142857144,
+              "midi": 54
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "ih",
+              "start_s": 0.596697142857144,
+              "duration_s": 0.22116000000000047,
+              "midi": 54
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "t",
+              "start_s": 0.8178571428571445,
+              "duration_s": 0.035,
+              "midi": 54
+            }
+          ]
+        },
+        {
+          "word": "for:0",
+          "written_word": "for",
+          "word_index": 2,
+          "syllable_index": 0,
+          "midi": 50,
+          "velocity": 0.88,
+          "start_frame": 1153240,
+          "vowel_frame": 1154475,
+          "end_frame": 1167226,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "f",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 50
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "aw",
+              "start_s": 0.028,
+              "duration_s": 0.2541428571428598,
+              "midi": 50
+            },
+            {
+              "kind": "consonant",
+              "phoneme": "r",
+              "start_s": 0.2821428571428598,
+              "duration_s": 0.035,
+              "midi": 50
+            }
+          ]
+        },
+        {
+          "word": "you:0",
+          "written_word": "you",
+          "word_index": 3,
+          "syllable_index": 0,
+          "midi": 52,
+          "velocity": 0.88,
+          "start_frame": 1168990,
+          "vowel_frame": 1170225,
+          "end_frame": 1212624,
+          "phonemes": [
+            {
+              "kind": "consonant",
+              "phoneme": "y",
+              "start_s": 0.0,
+              "duration_s": 0.028,
+              "midi": 52
+            },
+            {
+              "kind": "vowel",
+              "phoneme": "u",
+              "start_s": 0.028,
+              "duration_s": 0.96142857142857,
+              "midi": 52
+            }
+          ]
+        }
+      ],
+      "words": [
+        {
+          "text": "i",
+          "start_frame": 1091475,
+          "end_frame": 1112101
+        },
+        {
+          "text": "wait",
+          "start_frame": 1113865,
+          "end_frame": 1151476
+        },
+        {
+          "text": "for",
+          "start_frame": 1153240,
+          "end_frame": 1167226
+        },
+        {
+          "text": "you",
+          "start_frame": 1168990,
+          "end_frame": 1212624
+        }
+      ],
+      "voice_plan": {
+        "offset": 1091475,
+        "frames": 121149,
+        "phones": [
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 0,
+            "end": 14851,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 14851,
+            "end": 20626,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "w",
+            "start": 22390,
+            "end": 23625,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "e",
+            "start": 23625,
+            "end": 48704,
+            "midi": 54
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "ih",
+            "start": 48704,
+            "end": 58458,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 58458,
+            "end": 60001,
+            "midi": 54
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "f",
+            "start": 61765,
+            "end": 63000,
+            "midi": 50
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "aw",
+            "start": 63000,
+            "end": 74208,
+            "midi": 50
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "r",
+            "start": 74208,
+            "end": 75751,
+            "midi": 50
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "y",
+            "start": 77515,
+            "end": 78750,
+            "midi": 52
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 78750,
+            "end": 121149,
+            "midi": 52
+          }
+        ],
+        "syllables": [
+          {
+            "unit": "i:0",
+            "midi": 55,
+            "start": 0,
+            "vowel": 0,
+            "end": 20626,
+            "gain": 0.75
+          },
+          {
+            "unit": "wait:0",
+            "midi": 54,
+            "start": 22390,
+            "vowel": 23625,
+            "end": 60001,
+            "gain": 1
+          },
+          {
+            "unit": "for:0",
+            "midi": 50,
+            "start": 61765,
+            "vowel": 63000,
+            "end": 75751,
+            "gain": 0.65
+          },
+          {
+            "unit": "you:0",
+            "midi": 52,
+            "start": 77515,
+            "vowel": 78750,
+            "end": 121149,
+            "gain": 0.94
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 20626
+          },
+          {
+            "start": 22390,
+            "end": 60001
+          },
+          {
+            "start": 61765,
+            "end": 75751
+          },
+          {
+            "start": 77515,
+            "end": 121149
+          }
+        ],
+        "bridges": []
+      },
+      "object_id": "chair",
+      "object_label": "Empty chair",
+      "emotion": "Absence",
+      "intention": "Wait is held, then a small rise out of low D settles on you.",
+      "options": {
+        "body": "female",
+        "pressure": 7.0,
+        "breathiness": 0.18,
+        "tension": 0.28,
+        "brightness": 0.12,
+        "roughness": 0.01,
+        "fry": 0.0,
+        "vibrato_depth_cents": 12.0,
+        "vibrato_rate": 5.3,
+        "drift_cents": 2.0,
+        "glide_s": 0.05,
+        "performance": "connected",
+        "voiced": true
+      }
+    }
+  ],
+  "based_on": "chimera_companion_singing_20261116",
+  "perspective": "The player is Care Unit Model B. Objects prompt first-person sung thoughts in the player\u2019s own inner voice. Objects do not speak as separate characters.",
+  "delivery": "Dry centred mono, no room reverb, no world-position pan. Designed as an inner-voice study; no headphone or headset listening claim.",
+  "runtime_scope": "Native Godot renders and browser object audition. VR gaze/proximity bindings are proposed metadata, not a shipped VR scene.",
+  "trigger_design": {
+    "mode": "deliberate object selection in browser prototype",
+    "game_proposal": "Intentional gaze or touch, one thought at a time, do not repeat until the player leaves and returns.",
+    "overlap": false
+  },
+  "playback_started": false
+}

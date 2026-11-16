@@ -30,6 +30,7 @@ const DRESS_WAIT := 4.0                   # after this the roof's rows are no lo
 const FADER := "opening"                # this node's own layer on the XR rig's fade
 const SOUND_SECONDS := 3.0
 const RATE := 22050
+const OPERA := "res://commons/void/inner_opera.gd"
 
 var game: Node3D
 var veil: MeshInstance3D
@@ -49,6 +50,11 @@ var report := {"seen_outside_while_black": false, "inside_when_landed": false, "
 
 func _ready() -> void:
 	game = get_parent() as Node3D
+	# Model B's inner voice (commons/void/inner_opera.gd) lives for the whole game, not only for a start on the roof:
+	# it is added here so that game.gd, which carries another hand's work, is not touched a second time.
+	if game != null and ResourceLoader.exists(OPERA) and not game.has_meta("inner_opera_added"):
+		game.set_meta("inner_opera_added", true)
+		game.add_child.call_deferred((load(OPERA) as GDScript).new())
 	var args := OS.get_cmdline_user_args()
 	forced = args.has("--opening")
 	if game == null or args.has("--no-opening") or not _applies():
