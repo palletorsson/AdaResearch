@@ -1336,6 +1336,50 @@
           "arithmetic": "Fifty-six metres of bridge and gangway are the same at both values. What differs is one timber panel, 2 x 2 m, at the floor's edge on the east wing (4 m2, seen at a slant: about 1.5 m2), two plate tiles that turn yellow, a floor word and two lines on the stand. On a subject whose frame holds the whole gangway (some 300 m2 of frame): about 0.5 %. The axis is one panel: that is its point."
         }
       }
+    },
+    "joint_more": {
+      "lookup_name": "joint_more",
+      "map_ready": true,
+      "name": "A Joint More",
+      "class_name": "",
+      "scene": "res://commons/artifacts/joint_more/joint_more.tscn",
+      "description": "A playground for the laboratory hall: the operation its body cannot yet do, with more room. The workshop's body, thirteen joints and twelve connections, drawn on the floor six metres tall. Standing still on bare floor plants a joint, joined by a rule to the nearest joint; standing still on a joint holds it (a line follows the visitor), and the joint then planted is joined to the held one; holding a joint and standing on another makes the two neighbours, which may close a loop. Authored joints and connections cannot be taken away; CLEAR removes what was added. A stand keeps positions and neighbours as two lists and counts connected parts and loops. The names stay: l_hand is still l_hand. Axis figure: authored, limb, loop.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "body",
+        "joint",
+        "connection",
+        "neighbour",
+        "description",
+        "playground",
+        "visual-argument",
+        "assembly"
+      ],
+      "qfep_connection": "A body here is a description with two lists, positions and neighbours; being able to revise either is one freedom, and being able to add to them is another that someone has to make available.",
+      "dev_themes": [
+        "bodies",
+        "description",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "figure": [
+            "authored",
+            "limb",
+            "loop"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "figure: authored ~ loop",
+          "percent": 0.4,
+          "arithmetic": "The thirteen discs and twelve straw lines are the same. Loop adds one turquoise line from l_hand to head: 3.3 m long and 0.09 m wide, 0.3 m2 flat on the floor (about 0.12 m2 seen at a slant), and two lines of figures on the stand. Limb adds one disc, one name and one line of 2.4 m: about the same. On a subject of some 45 m2 of frame: about 0.4 %. The axis is one connection or one joint: small in area by its nature, and the stand's figures are where it reads."
+        }
+      }
     }
   }
 }

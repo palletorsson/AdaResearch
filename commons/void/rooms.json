@@ -55277,11 +55277,11 @@
           "artifact": "flex_connector",
           "station": "SW",
           "position": [
-            -4,
-            7
+            5.6,
+            4.4
           ],
           "height": 0.95,
-          "facing": 0,
+          "facing": 270,
           "scale": 1,
           "config": {}
         },
@@ -55290,8 +55290,8 @@
           "artifact": "MolecularDesigner",
           "station": "NW",
           "position": [
-            -4.7,
-            -1.36
+            -1.8,
+            0.8
           ],
           "height": 0,
           "facing": 0,
@@ -55338,11 +55338,11 @@
           "artifact": "boolean_neck",
           "station": "SE",
           "position": [
-            0,
-            7
+            -3.6,
+            6.6
           ],
           "height": 0.95,
-          "facing": 0,
+          "facing": 90,
           "scale": 1,
           "config": {}
         },
@@ -55351,13 +55351,29 @@
           "artifact": "bridge_cut",
           "station": "SE",
           "position": [
-            4,
-            7
+            3.6,
+            6.6
           ],
           "height": 0.95,
-          "facing": 0,
+          "facing": 270,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "joint-more",
+          "artifact": "joint_more",
+          "station": "NW",
+          "position": [
+            -17.0,
+            0.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "figure": "authored",
+            "editor_label": "A joint more | the workshop's body drawn on the floor, 13 joints and 12 connections; stand still to plant a joint, hold one to choose its neighbour, join two; positions and neighbours counted apart"
+          }
         }
       ],
       "props": [],
