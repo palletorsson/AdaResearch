@@ -1603,6 +1603,54 @@
           "arithmetic": "Tilting turns a 6 m line 6 cm wide by 8 degrees (it sweeps away from 0.36 m2 and onto 0.36 m2, and changes from gold to pale), moves the two outer wedges' edges by 8 degrees at 0.95 m radius (0.063 m2 each way), and changes three lines on the stand. Flat on the floor, seen at a slant, about 0.4 m2 of some 55 m2 of frame: 0.7 %. Hidden takes away the line and two wedges (0.36 + 0.75 m2): about 1.5 %."
         }
       }
+    },
+    "one_line_three_errors": {
+      "lookup_name": "one_line_three_errors",
+      "map_ready": true,
+      "name": "One Line, Three Errors",
+      "class_name": "",
+      "scene": "res://commons/artifacts/one_line_three_errors/one_line_three_errors.tscn",
+      "description": "A playground for the gradient hall: the plane of candidate lines as a floor. A step east is more slope, a step north more intercept; where a body stands is one line, drawn as a plank among five observation posts with red sticks for what it misses by. Three bars give that one line's error under three rules - squared, Huber, and the exhibit's wavy rule - on one scale. Three arrows at the feet are one step downhill for each rule, with a disc where the step lands and the error before and after. OUTLIER lifts the fifth observation; STEP lengthens the arrows from 0.5 to 1.2 of the gradient, and a tip turns red where the step lands worse. The observations and rules are the tutorial's own. Axes outlier: off, on; step: short, long.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "machinelearning",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "gradient",
+        "loss",
+        "regression",
+        "outlier",
+        "huber",
+        "step-size",
+        "playground",
+        "visual-argument",
+        "machine-learning"
+      ],
+      "qfep_connection": "One candidate and the same observations are scored three ways and sent three ways; which difference counts is decided by the rule of error, and how far to follow it is a second decision.",
+      "dev_themes": [
+        "measurement",
+        "judgement",
+        "learning"
+      ],
+      "dna": {
+        "axes": {
+          "outlier": [
+            "off",
+            "on"
+          ],
+          "step": [
+            "short",
+            "long"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "step: short ~ long",
+          "percent": 0.7,
+          "arithmetic": "Found with nobody on the field, the candidate is the tutorial's start. Long against short lengthens three arrows 7 cm wide from 0.5 to 1.2 times their gradient (at the start about 2.3, 0.5 and 1.5 m more of shaft, less where the field ends: 0.25 m2 on the floor), moves three discs and their labels, turns one plate tile yellow (0.7 m2 on the floor, about 0.2 m2 seen) and changes two lines on the stand. On a subject of some 60 m2 of frame: about 0.4 m2: 0.7 %. Outlier off against on lifts one ball and its post 2.4 m (0.1 m2), lengthens one red stick, and changes three bars by up to a metre: about 0.6 m2: 1 %."
+        }
+      }
     }
   }
 }

@@ -49943,12 +49943,12 @@
           "id": "f2_film_learning_step_9_7",
           "artifact": "film_learning_step",
           "position": [
-            5,
-            8
+            4.2,
+            5.4
           ],
           "station": "SE",
           "height": 0,
-          "facing": 180,
+          "facing": 270,
           "scale": 1,
           "config": {
             "plinth": "0",
@@ -49960,7 +49960,7 @@
           "artifact": "loss_function_comparator",
           "position": [
             0,
-            -5
+            3.6
           ],
           "station": "NE",
           "height": 1,
@@ -49968,6 +49968,23 @@
           "scale": 1.2,
           "config": {
             "plinth": "1.0"
+          }
+        },
+        {
+          "id": "one-line-three-errors",
+          "artifact": "one_line_three_errors",
+          "station": "NW",
+          "position": [
+            -0.6,
+            -3.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "outlier": "off",
+            "step": "short",
+            "editor_label": "One line, three errors | a floor of candidate lines: where you stand is a plank among five posts; three arrows at the feet, one step downhill for three rules of error"
           }
         }
       ],
