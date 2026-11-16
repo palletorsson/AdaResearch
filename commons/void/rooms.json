@@ -50891,10 +50891,10 @@
           "artifact": "euclid_postulates_plaque",
           "station": "NE",
           "position": [
-            0,
-            -10
+            -0.4,
+            -8.2
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -50920,10 +50920,10 @@
           "artifact": "self_membership_set",
           "station": "NW",
           "position": [
-            -14,
-            -7
+            -5.8,
+            0.2
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -50933,10 +50933,10 @@
           "artifact": "barber_paradox",
           "station": "NE",
           "position": [
-            14,
-            -7
+            5.9,
+            1.6
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -50946,10 +50946,10 @@
           "artifact": "russell_set_box",
           "station": "SW",
           "position": [
-            -14,
-            8
+            -5.6,
+            -2.2
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -50959,10 +50959,10 @@
           "artifact": "liar_loop",
           "station": "SE",
           "position": [
-            14,
-            8
+            5.9,
+            -1.4
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51084,6 +51084,38 @@
             "tall": 0.7,
             "fit_width": 4.2,
             "editor_label": "INFINITY in standing red letters | behind the hotel that is full and takes one more"
+          }
+        },
+        {
+          "id": "in-and-out",
+          "artifact": "in_and_out",
+          "station": "NE",
+          "position": [
+            9.2,
+            -6.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "rule": "unrestricted",
+            "editor_label": "In and out, walked | a railed corridor round an island with a gate IN and a gate OUT; each answer is sent to the other; WITHIN U opens a way out beside OUT"
+          }
+        },
+        {
+          "id": "fence-beyond",
+          "artifact": "fence_beyond",
+          "station": "NW",
+          "position": [
+            -10.2,
+            -5.9
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "fences": "one",
+            "editor_label": "Every fence has something beyond it | a plank-rail yard of four things and the one thing outside it; FENCE IT IN builds the next fence; the fourth is tape"
           }
         }
       ],

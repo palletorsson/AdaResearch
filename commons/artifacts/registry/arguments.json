@@ -1426,6 +1426,94 @@
           "arithmetic": "Between path and note the two trails are the same. What differs is one plate tile turning yellow (0.64 m2 on the floor, about 0.25 m2 seen at a slant) and one line on the stand. On a subject of some 60 m2 of frame: under 0.5 %. Destination against path removes both trails: 782 dots of 0.06 m (about 2.8 m2 flat, 1 m2 seen) and three lines of figures: about 2 %."
         }
       }
+    },
+    "in_and_out": {
+      "lookup_name": "in_and_out",
+      "map_ready": true,
+      "name": "In And Out, Walked",
+      "class_name": "",
+      "scene": "res://commons/artifacts/in_and_out/in_and_out.tscn",
+      "description": "A playground for the Russell hall: the workbench's two buttons as two gates on one corridor. A corridor round an island, fenced with plank rails, with a gate IN and a gate OUT across it. Walking through IN is the answer that R belongs to R, and the rule sends the walker on to OUT; through OUT, on to IN. A stand shows the rule, the answer, what the rule replies, and counts the answers tried and the answers that settled: none. Walking out of the corridor is the thing the proposed set cannot do. WITHIN U changes one phrase of the rule and takes away one rail beside OUT: under the rule that filters an existing collection, OUT holds. Axis rule: unrestricted, within_u.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "russell",
+        "self-membership",
+        "contradiction",
+        "separation",
+        "loop",
+        "playground",
+        "visual-argument",
+        "foundations"
+      ],
+      "qfep_connection": "A rule can be such that either answer to it is sent to the other; that is a property of the rule, not a difficulty in deciding, and one restricting phrase changes what can be built.",
+      "dev_themes": [
+        "foundations",
+        "logic",
+        "limits"
+      ],
+      "dna": {
+        "axes": {
+          "rule": [
+            "unrestricted",
+            "within_u"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "rule: unrestricted ~ within_u",
+          "percent": 0.6,
+          "arithmetic": "The corridor, the gates and the stand are the same. Within U takes away one rail (a 1 m plank on edge, 0.25 m2, and its share of collider nothing to see), turns one plate tile yellow (0.7 m2 on the floor, about 0.25 m2 seen), and changes three lines on the stand (the rule gains a second line). On a subject of some 40 m2 of frame: about 0.25 m2 + lettering: 0.6 %."
+        }
+      }
+    },
+    "fence_beyond": {
+      "lookup_name": "fence_beyond",
+      "map_ready": true,
+      "name": "Every Fence Has Something Beyond It",
+      "class_name": "",
+      "scene": "res://commons/artifacts/fence_beyond/fence_beyond.tscn",
+      "description": "A prefab assemblage for the Russell hall: cell 6 of its workbench as a yard. A plank-rail fence holds four things, 0 to 3; outside its gate stands one more thing, the four taken together. FENCE IT IN builds a wider fence that takes that thing in as a member with a number; the same filter then gives all five together, outside again; once more; the fourth fence is two sides of tape, where the floor ends before the argument does. A stand counts what is inside the outermost fence and what is outside it (always one), and says which fence the visitor stands inside, or that they stand outside all of them with that one thing. Axis fences: one, two, three, tape.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "russell",
+        "separation",
+        "domain",
+        "outside",
+        "ordinal",
+        "prefab-assemblage",
+        "visual-argument",
+        "foundations"
+      ],
+      "qfep_connection": "Whatever collection is fenced, the filter that made a contradiction now makes one more thing that is not inside the fence; a restriction leaves an outside, and the outside can be walked to.",
+      "dev_themes": [
+        "foundations",
+        "limits",
+        "outside"
+      ],
+      "dna": {
+        "axes": {
+          "fences": [
+            "one",
+            "two",
+            "three",
+            "tape"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "fences: three ~ tape",
+          "percent": 0.8,
+          "arithmetic": "From three to tape nothing is taken away: two lengths of red tape 4.8 m long and 0.06 m high are added (0.58 m2), five thin posts, one more crystal with its ring of light (0.2 m2) and its name, and two lines on the stand. On a subject of some 50 m2 of frame: about 0.9 m2 seen at a slant: under 1 %. One against two adds a whole fence of plank rails 2.8 m square (11 m of plank 0.25 m high: 2.8 m2): about 4 %."
+        }
+      }
     }
   }
 }

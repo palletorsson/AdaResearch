@@ -140,10 +140,10 @@
       "title": "6  THE BARBER: NOBODY MINDS",
       "by": "f1_barber_paradox_3_6",
       "at": [
-        11.4,
-        -5.4
+        6.5,
+        3.6
       ],
-      "yaw": -110,
+      "yaw": -20,
       "front": [
         "A barber who shaves exactly those here who do not shave themselves - and lives here.",
         "Same two-way turn. Conclusion: there is no such barber. Fine. Nobody is upset.",
@@ -160,10 +160,10 @@
       "title": "7  THE LIAR: SAME TURN, DIFFERENT MATERIAL",
       "by": "f1_liar_loop_9_6",
       "at": [
-        11.4,
-        6.6
+        6.4,
+        -3.6
       ],
-      "yaw": -60,
+      "yaw": 200,
       "front": [
         "THIS STATEMENT IS FALSE. The lamp flickers.",
         "The lamp is a timer. Logic does not make a light blink. (I liked the blinking too much.)",
@@ -181,10 +181,10 @@
       "title": "8  WHAT THE PICTURES CAN AND CANNOT DO",
       "by": "f1_russell_set_box_6_6",
       "at": [
-        -11.4,
-        6.6
+        -3.6,
+        -2.6
       ],
-      "yaw": 60,
+      "yaw": 80,
       "front": [
         "Boxes in boxes. Braces in braces. My eye goes inward and I feel I am seeing the paradox.",
         "I am not. A thousand more boxes would not settle whether R is in R.",
@@ -221,10 +221,10 @@
       "title": "10  WHAT THE REPAIR LEAVES OUTSIDE",
       "by": "visual:outside",
       "at": [
-        -3.0,
-        -2.4
+        -5.4,
+        -3.7
       ],
-      "yaw": 70,
+      "yaw": 90,
       "front": [
         "The hall asks: which restriction makes further work possible, and what does it leave outside?",
         "It leaves outside the one thing I wanted most: the collection of everything.",
@@ -598,50 +598,54 @@
       "id": "two_doors",
       "title": "IN AND OUT, WALKED",
       "at": [
-        4.9,
-        -5.6
+        9.2,
+        -6.0
       ],
       "size": [
         4.0,
-        2.4
+        3.0
       ],
       "claim": "Each answer delivers you to the other one. Your body has somewhere to go; the set does not.",
       "from_the_hall": "The workbench's two buttons at cell 5, and the sentence 'Your hand has somewhere to go; the proposed set does not.'",
       "built_from": [
-        "do_not_cross_barrier (the corridor walls)",
-        "timber_panel_1x1 (two one-way gates, as in the harbour)",
-        "pink_triangle_sign (which way the rule sends you)"
+        "timber_plank_1m, timber_plank_2m (the corridor's rails, on edge at hip height, and its posts)",
+        "two gates: tall posts and a name board each, IN and OUT",
+        "floor lettering (which gate the rule sends you to; the way in; the way out that WITHIN U opens)",
+        "a raised stand behind the corridor, and a reading board beside the plate"
       ],
-      "what_stands": "Two gates side by side, IN and OUT, opening onto one corridor bent into a loop: through IN you come out facing OUT, through OUT you come out facing IN.",
-      "what_you_do": "Walk it. A counter on the board counts your laps and shows 'R is in R' and 'R is not in R' alternately; it never settles while you keep walking, and it shows nothing when you stop between the gates.",
-      "what_it_shows": "The loop is not a difficulty in deciding. It is what the rule does to either decision.",
+      "what_stands": "A railed corridor round an island marked R, four metres by three, north-east of the middle of the floor. A gate IN crosses its west end and a gate OUT its east end. The way in is the middle of the south side. A stand raised behind it shows the rule, your answer, what the rule replies, and two counts: answers tried, answers that settled.",
+      "what_you_do": "Go in and walk through IN: you have said R belongs to R; the stand says it then fails its own condition, and sends you to OUT. Through OUT it sends you to IN. Four answers in two laps, none settled; the rail beside OUT holds you. Walk out the way you came: a body has somewhere to go. Then stand on WITHIN U: the rule gains one phrase, one rail beside OUT is gone, OUT holds, and you leave beside it.",
+      "what_it_shows": "The loop is not a difficulty in deciding. It is what the rule does to either decision. One restricting phrase changes what can be built, and it is seen as one missing rail.",
       "form": "playground",
-      "status": "written"
+      "status": "standing: row in-and-out",
+      "measured": "Walked by the tower's own walker (tools/probes/in_and_out_walk.gd, seven checks): two laps give four answers and none settled; the walker is held 1.44 m short of the outside by the rail beside OUT; within U, OUT settles one answer and the walker leaves through the opened side."
     },
     {
       "id": "outside",
       "title": "EVERY FENCE HAS SOMETHING BEYOND IT",
       "at": [
-        -4.2,
-        -5.6
+        -10.2,
+        -5.9
       ],
       "size": [
-        4.6,
-        4.6
+        4.8,
+        4.8
       ],
       "claim": "Whatever collection you fence, filtering it by 'does not contain itself' gives something that is not inside the fence.",
       "from_the_hall": "Cell 6: 'The result is U again. But U is not one of those four members.'",
       "built_from": [
-        "barrier (three nested rings of fence)",
-        "crate (the members)",
-        "pentagonal_bipyramid_7 (the result, standing just outside each ring)",
-        "museum_tape_barrier (the outermost, unfinished ring)"
+        "timber_plank_1m, timber_plank_2m, timber_plank_4m (three nested fences of rails on edge, with posts)",
+        "crate (the four members, numbered 0 to 3)",
+        "pentagonal_bipyramid_7 (the result of the filter, standing just outside each fence, with a ring of light under the one that is outside now)",
+        "red tape on thin posts (the fourth fence, two sides only)",
+        "a raised stand behind the yard, a reading board and the plate FENCE IT IN beside the way in"
       ],
-      "what_stands": "A small fenced yard with four crates. Just outside its gate, a crystal: the result of the filter. A second, larger fence takes the crystal in as a member - and a new crystal stands outside that one. A third. The outermost ring is tape, left open.",
-      "what_you_do": "Walk out through the three gates. Each time you step over a threshold the crystal you just passed dims (it is a member now) and the next one lights.",
-      "what_it_shows": "'Nothing is everything' as a walk: the argument that was a contradiction is, after the repair, a way of always finding the next thing.",
+      "what_stands": "A fenced yard with four crates, north-west of the middle of the floor, its gates toward the east. Just outside the gate, a crystal named { 0, 1, 2, 3 }. A stand raised behind the yard counts what is inside the outermost fence and what is outside it.",
+      "what_you_do": "Stand on FENCE IT IN: a wider fence takes the crystal in as member 4, and a new crystal, { 0, 1, 2, 3, 4 }, stands outside that one. Again: six inside. The fourth fence is tape on two sides, where the floor ends before the argument does. Walk in through the gates and out again: the stand says which fence you stand inside, or that you stand outside every fence here, and that so does one more thing.",
+      "what_it_shows": "'Nothing is everything' as a walk: inside goes 4, 5, 6, 7 and outside stays 1. The argument that was a contradiction is, after the repair, a way of always finding the next thing.",
       "form": "prefab_assemblage",
-      "status": "written"
+      "status": "standing: row fence-beyond",
+      "measured": "Walked by the tower's own walker (tools/probes/fence_beyond_walk.gd, seven checks): inside 4, 5, 6, 7 with one outside each time; the second fence holds a body at 1.64 m and lets it through its gate; from the yard out through three gates the walker stands outside every fence."
     }
   ],
   "open": [
