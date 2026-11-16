@@ -1,15 +1,51 @@
 {
-  "note": "The viewfinder's numbers (commons/void/camcorder_hud.gd reads them; commons/void/hud_config.gd carries them). A file of this shape sent to a running game with `python tools/push_hud_config.py <file>` is laid over this one and takes effect within half a second, no build. Only the keys you want to change need be in the sent file. vr: frame_width_m and frame_height_m are the plane's size, distance_m how far in front of the eyes it floats, so the corner symbols sit about atan(frame_width_m / 2 / distance_m) degrees out to the side (2.1 at 1.2 = 41). vertical_offset_m moves the whole plane down (negative) or up. pixels_wide is the sharpness of the plane's picture (its height follows the plane's shape). text_scale and margin_scale multiply the letter size and the gap between the frame's edge and the symbols. sung_line_at is where the foot of the sung line sits, 0 the top of the plane and 1 the bottom; sung_line_width is how much of the width it may take before it wraps. desktop: the same text_scale, margin_scale and sung_line_width; sung_line_at 0 keeps the line just above the bottom row.",
+  "note": "The viewfinder's numbers (commons/void/camcorder_hud.gd reads them; commons/void/hud_config.gd carries them). A file of this shape sent to a running game with `python tools/push_hud_config.py <file>` (or single values with --set) is laid over this one and takes effect within half a second, no build. Only the keys you want to change need be sent. vr: the plane in a headset. frame_width_m and frame_height_m are its size, distance_m how far in front of the eyes it floats (its edge is atan(frame_width_m / 2 / distance_m) degrees out to the side: 1.66 at 1.2 = 35), vertical_offset_m moves the whole plane down (negative) or up, pixels_wide is the sharpness of its picture. text_scale multiplies the letter size. elements places each item on the plane: `at` [x, y] as shares of the picture (0 0 top left, 1 1 bottom right; y is the middle of the item's row), `align` left / center / right (which edge of the item sits at x), `show`, and for the two texts `width` (the share of the picture's width they may take; the map's name is cut with an ellipsis, the sung line wraps upward). Palle 2026-11-16: in a headset everything in one row at the bottom, nearer the middle: the map's name left, the charge right, the sung line between; the REC plate and the corner marks are off there. desktop: no elements, so the overlay keeps its corners; margin_scale, sung_line_at (0 = just above the bottom row) and sung_line_width are for that layout.",
   "vr": {
-    "frame_width_m": 2.1,
-    "frame_height_m": 1.575,
+    "frame_width_m": 1.66,
+    "frame_height_m": 0.9545,
     "distance_m": 1.2,
     "vertical_offset_m": -0.095,
-    "pixels_wide": 2048,
+    "pixels_wide": 1600,
     "text_scale": 1.0,
-    "margin_scale": 1.0,
-    "sung_line_at": 0.74,
-    "sung_line_width": 0.45
+    "elements": {
+      "level": {
+        "show": true,
+        "at": [
+          0.15,
+          0.86
+        ],
+        "align": "left",
+        "width": 0.2
+      },
+      "sung": {
+        "show": true,
+        "at": [
+          0.5,
+          0.86
+        ],
+        "align": "center",
+        "width": 0.28
+      },
+      "charge": {
+        "show": true,
+        "at": [
+          0.85,
+          0.86
+        ],
+        "align": "right"
+      },
+      "rec": {
+        "show": false,
+        "at": [
+          0.5,
+          0.1
+        ],
+        "align": "center"
+      },
+      "brackets": {
+        "show": false
+      }
+    }
   },
   "desktop": {
     "text_scale": 1.0,

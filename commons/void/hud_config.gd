@@ -32,6 +32,13 @@ func _ready() -> void:
 	if parsed is Dictionary: shipped = parsed
 
 
+# What is sent is laid over what the game has, key by key at every depth: one item's place can be sent alone.
+static func _lay_over(base: Dictionary, over: Dictionary) -> void:
+	for key in over:
+		if over[key] is Dictionary and base.get(key) is Dictionary: _lay_over(base[key], over[key])
+		else: base[key] = over[key]
+
+
 func _process(delta: float) -> void:
 	_since += delta
 	if _since < EVERY: return
@@ -47,9 +54,7 @@ func _process(delta: float) -> void:
 	if text != "":
 		var parsed: Variant = JSON.parse_string(text)
 		if parsed is Dictionary:
-			for section in parsed:
-				if parsed[section] is Dictionary and merged.get(section) is Dictionary: (merged[section] as Dictionary).merge(parsed[section], true)
-				else: merged[section] = parsed[section]
+			_lay_over(merged, parsed)
 		else:
 			problem = "the sent file is not a JSON object; nothing was changed"
 	if problem == "":

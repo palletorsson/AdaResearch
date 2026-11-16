@@ -1,7 +1,8 @@
 """Send the viewfinder's numbers to a running game. No build, no restart.
 
     python tools/push_hud_config.py my_hud.json            to the Quest on the cable
-    python tools/push_hud_config.py --set vr.frame_width_m=2.6 --set vr.sung_line_at=0.7
+    python tools/push_hud_config.py --set vr.frame_width_m=2.0 --set vr.elements.sung.at=[0.5,0.8]
+    python tools/push_hud_config.py --set vr.elements.rec.show=true
     python tools/push_hud_config.py my_hud.json --desktop  to the game running on this PC
     python tools/push_hud_config.py --show                 what the game last used
     python tools/push_hud_config.py --reset                take the sent file away: back to the game's own
@@ -41,7 +42,7 @@ def read_applied(desktop):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('file', nargs='?', type=Path)
-    ap.add_argument('--set', action='append', default=[], metavar='section.key=number')
+    ap.add_argument('--set', action='append', default=[], metavar='section.key=value')
     ap.add_argument('--desktop', action='store_true')
     ap.add_argument('--show', action='store_true')
     ap.add_argument('--reset', action='store_true')
@@ -72,11 +73,17 @@ def main():
             return 2
         for item in args.set:
             path, _, value = item.partition('=')
-            section, _, key = path.partition('.')
-            if not key or not value:
-                print('--set wants section.key=number, e.g. vr.frame_width_m=2.6; got', item)
+            keys = path.split('.')
+            if len(keys) < 2 or not value:
+                print('--set wants section.key=value, e.g. vr.frame_width_m=2.6 or vr.elements.sung.at=[0.5,0.8]; got', item)
                 return 2
-            config.setdefault(section, {})[key] = float(value)
+            try: parsed = json.loads(value)
+            except ValueError: parsed = value
+            node = config
+            for key in keys[:-1]:
+                if not isinstance(node.get(key), dict): node[key] = {}
+                node = node[key]
+            node[keys[-1]] = parsed
         if args.file is None and not args.set:
             print('Nothing to send: give a file or --set section.key=number.')
             return 2

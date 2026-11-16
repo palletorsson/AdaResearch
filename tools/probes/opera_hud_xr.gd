@@ -27,13 +27,13 @@ func _save() -> void:
 	file.close()
 
 
-# How much of the middle band of the plane's picture, where the sung line is drawn, is inked.
-func _ink(image: Image) -> int:
+# How much of a part of the plane's picture is inked (the part given as shares of its width and height).
+func _ink(image: Image, x0 := 0.38, x1 := 0.62, y0 := 0.80, y1 := 0.92) -> int:
 	var count := 0
 	var w := image.get_width()
 	var h := image.get_height()
-	for y in range(int(h * 0.68), int(h * 0.76)):
-		for x in range(int(w * 0.30), int(w * 0.70)):
+	for y in range(int(h * y0), int(h * y1)):
+		for x in range(int(w * x0), int(w * x1)):
 			if image.get_pixel(x, y).a > 0.3: count += 1
 	return count
 
@@ -92,8 +92,12 @@ func run() -> void:
 	while_sung.save_png(folder.path_join("hud_while_sung.png"))
 	root.get_texture().get_image().save_png(folder.path_join("window_while_sung.png"))
 	var ink_sung := _ink(while_sung)
-	checks.append({"check": "the thought for the crate comes, and while it sounds its words are on the plane's picture, in the band below the middle", "ok": heard.size() >= 1
-		and bool(heard[0].get("on_display", false)) and line == str(heard[0].text) and line != "" and ink_sung > 2000, "heard": heard, "line_on_the_plane": line, "inked_pixels_in_the_band": ink_sung,
+	var ink_left := _ink(while_sung, 0.10, 0.36, 0.80, 0.92)
+	var ink_right := _ink(while_sung, 0.64, 0.90, 0.80, 0.92)
+	var ink_above := _ink(while_sung, 0.0, 1.0, 0.0, 0.70)
+	checks.append({"check": "the thought for the crate comes, and while it sounds the plane's picture is one row at the bottom: the map's name left, the words in the middle, the charge right, and nothing above it", "ok": heard.size() >= 1
+		and bool(heard[0].get("on_display", false)) and line == str(heard[0].text) and line != "" and ink_sung > 2000 and ink_left > 2000 and ink_right > 2000 and ink_above == 0, "heard": heard, "line_on_the_plane": line, "inked_pixels_in_the_band": ink_sung,
+		"inked_left_middle_right_above": [ink_left, ink_sung, ink_right, ink_above],
 		"came_after_s": snappedf(waited, 0.1)})
 	_save()
 	waited = 0.0
@@ -103,22 +107,25 @@ func run() -> void:
 	var after: Image = await _picture(display)
 	after.save_png(folder.path_join("hud_after.png"))
 	var ink_after := _ink(after)
-	checks.append({"check": "THE NEGATIVE: when the voice has ended the line is off the plane's picture: the band is empty again", "ok": str(display.get("sung")) == "" and ink_after == 0,
+	checks.append({"check": "THE NEGATIVE: when the voice has ended the line is off the plane's picture: the middle of the row is empty again, the name and the charge stay", "ok": str(display.get("sung")) == "" and ink_after == 0
+		and _ink(after, 0.10, 0.36, 0.80, 0.92) > 2000 and _ink(after, 0.64, 0.90, 0.80, 0.92) > 2000,
 		"inked_pixels_in_the_band": ink_after, "cleared_after_s": snappedf(waited, 0.1)})
 	# ---- the viewfinder's numbers from a file sent to the running game
 	var quad := (frame as MeshInstance3D).mesh as QuadMesh
 	var shipped_width := quad.size.x
+	var shipped_height := quad.size.y
 	var sent := FileAccess.open("user://hud_config.json", FileAccess.WRITE)
-	sent.store_string(JSON.stringify({"vr": {"frame_width_m": 2.6, "sung_line_at": 0.6}}))
+	sent.store_string(JSON.stringify({"vr": {"frame_width_m": 2.6, "elements": {"sung": {"at": [0.5, 0.5]}}}}))
 	sent.close()
 	waited = 0.0
 	while waited < 3.0 and not is_equal_approx(quad.size.x, 2.6):
 		await process_frame
 		waited += root.get_process_delta_time()
 	var report: Variant = JSON.parse_string(FileAccess.get_file_as_string("user://hud_config_applied.json"))
-	checks.append({"check": "a config file put where the game looks (frame 2.6 m wide, sung line higher) changes the plane within a second, nothing restarted, and the game writes back what it used",
-		"ok": is_equal_approx(quad.size.x, 2.6) and is_equal_approx(quad.size.y, 1.575) and report is Dictionary and bool(report.applied) and is_equal_approx(float(report.values.frame_width_m), 2.6)
-		and is_equal_approx(float(report.values.sung_line_at), 0.6) and is_equal_approx(float(report.values.distance_m), 1.2), "took_s": snappedf(waited, 0.01), "plane_metres": [quad.size.x, quad.size.y],
+	checks.append({"check": "a config file put where the game looks (frame 2.6 m wide, the sung line moved to the middle, nothing else named) changes the plane within a second, nothing restarted; the other items keep their places; the game writes back what it used",
+		"ok": is_equal_approx(quad.size.x, 2.6) and is_equal_approx(quad.size.y, shipped_height) and report is Dictionary and bool(report.applied) and is_equal_approx(float(report.values.frame_width_m), 2.6)
+		and Array(report.values.elements.sung.at) == [0.5, 0.5] and str(report.values.elements.sung.align) == "center" and Array(report.values.elements.level.at).size() == 2
+		and is_equal_approx(float(report.values.distance_m), 1.2), "took_s": snappedf(waited, 0.01), "plane_metres": [quad.size.x, quad.size.y],
 		"written_back": report.get("values") if report is Dictionary else null})
 	_save()
 	sent = FileAccess.open("user://hud_config.json", FileAccess.WRITE)
