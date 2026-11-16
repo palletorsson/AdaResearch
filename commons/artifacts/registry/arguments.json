@@ -1066,6 +1066,50 @@
           "arithmetic": "At rest the mast stands upright at every value. What differs is the spring on its foot: six rings against nine (three more rings, each a torus 0.32 m across and 0.06 thick: about 0.02 m2 seen each, 0.06 m2), and two figures on the stand (9 against 16, twice). On a subject of some 30 m2 (stand 13, mast, plates 5, board 5, floor between): 0.06 + 0.1 of lettering: under 1 %. The axis is honest and small in a still: what it changes is the time of a swing, which a still cannot hold. Soft against stiff is twice that."
         }
       }
+    },
+    "room_to_tell_apart": {
+      "lookup_name": "room_to_tell_apart",
+      "map_ready": true,
+      "name": "Room To Tell Apart",
+      "class_name": "",
+      "scene": "res://commons/artifacts/room_to_tell_apart/room_to_tell_apart.tscn",
+      "description": "A playground for the algorithmic bias hall: its table of words at the size of a body. Twenty-four posts in two fields of twelve, a warm or grey band and a number on each, no word. A rail: walk along it and the warm twelve are pressed toward one place, to a fifth of their spread, while the grey twelve spread. A stand counts three things for each colour: how many are present (always twelve), how many have room round them (a body's width to the nearest other post), and how many are hidden behind another from where the visitor stands. The rail changes the second, the visitor's feet the third, nothing the first. Open, a body walks between the warm posts; pressed, they are one thing to walk round. Standing still between two warm posts keeps that pair where it was when the rest are pressed. OTHER GROUPING makes another twelve warm. Axis pressed: open, half, pressed.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "criticalalgorithms",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "representation",
+        "compression",
+        "distinction",
+        "grouping",
+        "embedding-analogy",
+        "playground",
+        "visual-argument",
+        "bias"
+      ],
+      "qfep_connection": "Being present in a representation and having room in it to be told apart are two counts; a control changes the second while the first stays full, and the grouping it acts on was chosen by someone.",
+      "dev_themes": [
+        "critical",
+        "representation",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "pressed": [
+            "open",
+            "half",
+            "pressed"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "pressed: half ~ pressed",
+          "percent": 3.0,
+          "arithmetic": "Twenty-four posts, each 0.14 m wide and 1.3 m tall with a number above: about 0.25 m2 seen each. Between half and pressed the warm twelve move 0.9 m on average and close from 0.58 m apart to 0.21 (at pressed they overlap one another in the picture: perhaps 1.2 m2 of the 3 m2 they showed is lost behind another post), and the grey twelve move 0.2 to 0.6 m each (displaced, not hidden: each leaves and covers about 0.2 m2). On a subject of some 60 m2 of frame (the two fields, rail, stand, board): (1.2 + 12 x 0.2 x 2 x 0.3 seen as change) / 60: about 3 %. Open against half is the same grey movement and a warm movement of 0.9 m with no overlap: a little more."
+        }
+      }
     }
   }
 }

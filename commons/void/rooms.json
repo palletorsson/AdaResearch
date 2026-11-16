@@ -54092,12 +54092,12 @@
           "id": "f1_bias_visualizer_2_2",
           "artifact": "bias_visualizer",
           "position": [
-            -3,
-            8
+            -3.8,
+            6.6
           ],
           "station": "SW",
           "height": 0.72,
-          "facing": 0,
+          "facing": 90,
           "scale": 1,
           "config": {}
         },
@@ -54105,12 +54105,12 @@
           "id": "f1_science_screen_7_2",
           "artifact": "science_screen",
           "position": [
-            4,
-            8
+            3.8,
+            6.6
           ],
           "station": "SE",
           "height": 1.5,
-          "facing": 0,
+          "facing": 270,
           "scale": 1,
           "config": {
             "mode": "scatter"
@@ -54134,7 +54134,7 @@
           "artifact": "bias_from_inside",
           "position": [
             0,
-            -4
+            4.0
           ],
           "station": "NE",
           "height": 1.085,
@@ -54146,14 +54146,30 @@
           "id": "f1_filled_pocket_8_6",
           "artifact": "filled_pocket",
           "position": [
-            5,
-            -5
+            5.4,
+            -1.0
           ],
           "station": "NE",
           "height": 0.95,
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "room-to-tell-apart",
+          "artifact": "room_to_tell_apart",
+          "station": "NW",
+          "position": [
+            0.0,
+            -4.0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "pressed": "open",
+            "editor_label": "Room to tell apart | 24 posts in two fields; a rail presses the warm twelve together and spreads the grey; a stand counts present, room round it, hidden from where you stand"
+          }
         }
       ],
       "props": [],
