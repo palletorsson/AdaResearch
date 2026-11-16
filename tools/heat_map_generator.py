@@ -33,10 +33,24 @@ def get_heat():
         keywords = ['meander', 'facade', 'mosaic', 'pattern', 'floor', 'museum',
                      'presentation', 'LOD', 'primitive', 'command', 'oversight',
                      'blog', 'encyclopedia', 'capture', 'shader']
+        # The keyword list dates from 2026-03-29 and the commit vocabulary moved on:
+        # on 2026-11-16 the last 20 subjects were ten feat(arguments): and ten
+        # feat: add X artifact, so this channel found nothing and the map printed
+        # 0 items. A conventional-commit scope names its own topic, so count it too.
+        scope_re = re.compile(r'^[A-Za-z]+\(([^)]+)\)!?:')
         for line in result.stdout.strip().split('\n'):
+            hit = set()
             for kw in keywords:
                 if kw.lower() in line.lower():
-                    topics[kw.lower()] = topics.get(kw.lower(), 0) + 1
+                    hit.add(kw.lower())
+            m = scope_re.match(line.strip())
+            if m:
+                for scope in m.group(1).split(','):
+                    scope = scope.strip().lower()
+                    if scope:
+                        hit.add(scope)
+            for topic in hit:
+                topics[topic] = topics.get(topic, 0) + 1
 
         for topic, count in sorted(topics.items(), key=lambda x: -x[1]):
             heat.append({
