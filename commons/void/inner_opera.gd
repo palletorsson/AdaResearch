@@ -41,6 +41,7 @@ var by_floor := {}                        # floor index -> {row or prop id: obje
 var bound := {}                           # "floor/id" -> instance id of the node that was bound
 var gaze_distance := 14.0
 var volume_db := -2.0
+var renderer := "model_b"
 var heard: Array = []
 var _since_ready := 0.0
 var _look_again := 0.0
@@ -64,9 +65,9 @@ func _ready() -> void:
 	voice.connect("finished", _on_finished)
 	voice.connect("failed", _on_failed)
 	voice.connect("rendered", func(id, seconds, cached): print("[opera] ready: '%s' (%s)" % [id, "kept from an earlier run" if cached else "made in %.1f s" % seconds]))
-	score_error = str(voice.call("load_score", score_path, voice_options))
+	score_error = str(voice.call("load_score", score_path, voice_options, renderer))
 	quiet = args.has("--opera-quiet")
-	print("[opera] Godot voice; score %s%s" % [score_path, "" if score_error.is_empty() else "  ERROR: " + score_error])
+	print("[opera] Godot voice (%s); score %s%s" % [str(voice.get("renderer_name")), score_path, "" if score_error.is_empty() else "  ERROR: " + score_error])
 	game.set_meta("inner_opera", self)
 
 
@@ -78,6 +79,7 @@ func _read_bindings() -> bool:
 	gaze_distance = float(parsed.get("gaze_distance", gaze_distance))
 	if parsed.get("voice") is Dictionary: voice_options = parsed.voice
 	volume_db = float(parsed.get("volume_db", volume_db))
+	renderer = str(parsed.get("renderer", renderer))
 	if not FileAccess.file_exists(score_path):
 		print("[opera] no score at %s" % score_path)
 		return false

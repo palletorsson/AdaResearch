@@ -24,8 +24,10 @@ signal finished(object_id: String)
 signal failed(object_id: String, message: String)
 signal rendered(object_id: String, seconds: float, from_cache: bool)
 
-const Robot := preload("res://audio/generators/RobotVoiceGenerator.gd")
-const VERSION := "robot-gd-1"
+## Two renderers, both GDScript: `model_b` (audio/generators/ModelBVoice.gd: the voice learned from the Rust engine's
+## source and tuned against the recordings of the approved voice) and `robot` (the kit's RobotVoiceGenerator.gd).
+const RENDERERS := {"model_b": preload("res://audio/generators/ModelBVoice.gd"), "robot": preload("res://audio/generators/RobotVoiceGenerator.gd")}
+const VERSION := "gd-2"
 const RATE := 44100
 const CACHE := "user://inner_voice/"
 const LATE := 2.5
@@ -34,7 +36,8 @@ const LATE := 2.5
 
 var phrases := {}                         # object id -> the phrase of the score
 var order: Array[String] = []
-var options := {}                         # the renderer's: formant_ratio, transpose, gain, seed
+var options := {}                         # the renderer's own settings
+var renderer_name := "model_b"
 var score_id := ""
 var streams := {}                         # object id -> AudioStreamWAV
 var costs := {}                           # object id -> {"seconds": render time, "cached": bool, "length_s": ...}
@@ -62,7 +65,10 @@ func _ready() -> void:
 
 
 ## "" when the score can be used, otherwise why not. Every phrase is put in line to be rendered.
-func load_score(path: String, renderer_options: Dictionary = {}) -> String:
+func load_score(path: String, renderer_options: Dictionary = {}, renderer := "") -> String:
+	if not renderer.is_empty():
+		if not RENDERERS.has(renderer): return "no renderer called " + renderer
+		renderer_name = renderer
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not parsed is Dictionary or not parsed.get("phrases") is Array: return "not a phrase document: " + path
 	options = renderer_options.duplicate()
@@ -70,7 +76,7 @@ func load_score(path: String, renderer_options: Dictionary = {}) -> String:
 	for phrase in parsed.phrases:
 		if not phrase is Dictionary or str(phrase.get("object_id", "")).is_empty() or not phrase.get("voice_plan") is Dictionary:
 			return "a phrase without an object_id or a voice_plan in " + path
-		var wrong: String = Robot.validate_plan(phrase.voice_plan, options)
+		var wrong: String = RENDERERS[renderer_name].validate_plan(phrase.voice_plan, options)
 		if not wrong.is_empty(): return "%s: %s" % [str(phrase.object_id), wrong]
 		phrases[str(phrase.object_id)] = phrase
 		order.append(str(phrase.object_id))
@@ -80,11 +86,14 @@ func load_score(path: String, renderer_options: Dictionary = {}) -> String:
 
 ## Other settings for the renderer (formant_ratio 0.8-1.3, transpose in semitones, gain): everything is made again.
 ## "" when they can be used, otherwise why not; then nothing changes.
-func retune(renderer_options: Dictionary) -> String:
+func retune(renderer_options: Dictionary, renderer := "") -> String:
+	var with_renderer: String = renderer_name if renderer.is_empty() else renderer
+	if not RENDERERS.has(with_renderer): return "no renderer called " + with_renderer
 	for id in order:
-		var wrong: String = Robot.validate_plan(phrases[id].voice_plan, renderer_options)
+		var wrong: String = RENDERERS[with_renderer].validate_plan(phrases[id].voice_plan, renderer_options)
 		if not wrong.is_empty(): return wrong
 	stop()
+	renderer_name = with_renderer
 	options = renderer_options.duplicate()
 	_generation += 1
 	streams.clear()
@@ -154,7 +163,7 @@ func _on_player_finished() -> void:
 
 func _key(object_id: String) -> String:
 	var phrase: Dictionary = phrases[object_id]
-	return "%s_%s_%s" % [score_id, object_id, (VERSION + JSON.stringify(phrase.voice_plan) + JSON.stringify(options)).sha1_text().substr(0, 16)]
+	return "%s_%s_%s" % [score_id, object_id, (VERSION + renderer_name + JSON.stringify(phrase.voice_plan) + JSON.stringify(options)).sha1_text().substr(0, 16)]
 
 
 func _want_rendered(object_id: String) -> void:
@@ -180,8 +189,8 @@ func _keep(object_id: String, bytes: PackedByteArray, seconds: float, from_cache
 
 
 ## On a worker thread. Everything it touches is its own, except the bytes it leaves under the lock.
-func _render(plan: Dictionary, renderer_options: Dictionary) -> void:
-	var pcm: PackedFloat32Array = Robot.render_phrase(plan, renderer_options)
+func _render(plan: Dictionary, renderer_options: Dictionary, renderer: GDScript) -> void:
+	var pcm: PackedFloat32Array = renderer.render_phrase(plan, renderer_options)
 	var bytes := PackedByteArray()
 	bytes.resize(pcm.size() * 2)
 	for i in pcm.size(): bytes.encode_s16(i * 2, int(clampf(pcm[i], -1.0, 1.0) * 32767.0))
@@ -226,7 +235,7 @@ func _process(delta: float) -> void:
 		_task_began = Time.get_ticks_msec()
 		_task_generation = _generation
 		var plan: Dictionary = (phrases[_task_for].voice_plan as Dictionary).duplicate(true)
-		_task = WorkerThreadPool.add_task(_render.bind(plan, options.duplicate()), false, "Model B's inner voice")
+		_task = WorkerThreadPool.add_task(_render.bind(plan, options.duplicate(), RENDERERS[renderer_name]), false, "Model B's inner voice")
 
 
 func _exit_tree() -> void:
