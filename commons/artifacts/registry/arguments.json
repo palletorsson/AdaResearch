@@ -1381,6 +1381,50 @@
           "arithmetic": "The thirteen discs and twelve straw lines are the same. Loop adds one turquoise line from l_hand to head: 3.3 m long and 0.09 m wide, 0.3 m2 flat on the floor (about 0.12 m2 seen at a slant), and two lines of figures on the stand. Limb adds one disc, one name and one line of 2.4 m: about the same. On a subject of some 45 m2 of frame: about 0.4 %. The axis is one connection or one joint: small in area by its nature, and the stand's figures are where it reads."
         }
       }
+    },
+    "two_arrivals": {
+      "lookup_name": "two_arrivals",
+      "map_ready": true,
+      "name": "Two Arrivals",
+      "class_name": "",
+      "scene": "res://commons/artifacts/two_arrivals/two_arrivals.tscn",
+      "description": "A robot station for the last hall: the next record its text asks about, for a walk. A line from START to END; the work keeps the last two walks, the earlier in blue and the latest in amber. A stand reads them twice: as a record of the destination (both arrived: the same) and as a record of the path (metres, seconds, longest pause, distance from the line). One plate chooses whether the next walk's record holds its path or only its destination; a walk kept without its path does not get one back. Three plates at END offer a note for the latest walk in the hall's three words (carefully, reluctantly, with delight), and the stand says somebody else wrote them. Found with two example walks. Axis keeps: destination, path, note.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "record",
+        "trace",
+        "destination",
+        "path",
+        "memory",
+        "robot-station",
+        "visual-argument",
+        "synthesis"
+      ],
+      "qfep_connection": "A record keeps what was chosen to be kept; a destination closes the question of how it was reached, a path reopens it, two alternatives allow a return, a note keeps a reason in someone else's words - and none keeps the event.",
+      "dev_themes": [
+        "records",
+        "accountability",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "keeps": [
+            "destination",
+            "path",
+            "note"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "keeps: path ~ note",
+          "percent": 0.2,
+          "arithmetic": "Between path and note the two trails are the same. What differs is one plate tile turning yellow (0.64 m2 on the floor, about 0.25 m2 seen at a slant) and one line on the stand. On a subject of some 60 m2 of frame: under 0.5 %. Destination against path removes both trails: 782 dots of 0.06 m (about 2.8 m2 flat, 1 m2 seen) and three lines of figures: about 2 %."
+        }
+      }
     }
   }
 }

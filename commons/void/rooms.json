@@ -55463,8 +55463,8 @@
           "id": "f2_tt_2_1",
           "artifact": "tt",
           "position": [
-            5.0,
-            8.0
+            3.6,
+            6.4
           ],
           "station": "SE",
           "height": 1.4,
@@ -55483,8 +55483,8 @@
           "id": "f2_edge_ground_synthesis_5_2",
           "artifact": "edge_ground_synthesis",
           "position": [
-            2.0,
-            8.0
+            5.4,
+            1.8
           ],
           "station": "SE",
           "height": 0,
@@ -55503,12 +55503,12 @@
           "id": "f2_bias_from_inside_8_2",
           "artifact": "bias_from_inside",
           "position": [
-            -1.0,
-            8.0
+            -5.4,
+            1.6
           ],
           "station": "SW",
           "height": 1.085,
-          "facing": 180,
+          "facing": 90,
           "scale": 1,
           "config": {
             "fit": {
@@ -55523,12 +55523,12 @@
           "id": "f2_qfep_formula_3d_11_2",
           "artifact": "qfep_formula_3d",
           "position": [
-            -4.0,
-            8.5
+            0,
+            1.2
           ],
           "station": "SW",
-          "height": 2,
-          "facing": 180,
+          "height": 3.0,
+          "facing": 0,
           "scale": 1,
           "config": {
             "fit": {
@@ -55543,12 +55543,12 @@
           "id": "f2_florensky_sphere_2_5",
           "artifact": "florensky_sphere",
           "position": [
-            5.0,
-            6.0
+            5.4,
+            4.4
           ],
           "station": "SE",
           "height": 1.1,
-          "facing": 180,
+          "facing": 270,
           "scale": 1,
           "config": {
             "fit": {
@@ -55563,8 +55563,8 @@
           "id": "f2_accountability_ledger_11_10",
           "artifact": "accountability_ledger",
           "position": [
-            -4,
-            2
+            -3.2,
+            5.4
           ],
           "station": "SW",
           "height": 0.65,
@@ -55580,13 +55580,29 @@
           "artifact": "assembly_return",
           "position": [
             0,
-            0
+            2.6
           ],
           "station": "SE",
           "height": 0,
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "two-arrivals",
+          "artifact": "two_arrivals",
+          "station": "NW",
+          "position": [
+            0.0,
+            -4.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "keeps": "path",
+            "editor_label": "Two arrivals | a line from START to END; the last two walks kept in blue and amber; a stand reads them as a destination and as a path; a plate chooses what is kept; three words for a note"
+          }
         }
       ],
       "props": [],
