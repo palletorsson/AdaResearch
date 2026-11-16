@@ -5,6 +5,9 @@ extends SceneTree
 ## there at the size the headset gets; while the voice sounds the line is on the plane's own picture, where a
 ## headset shows it; when the voice ends the line is gone from it. Nothing is played aloud (--opera-quiet).
 ##
+## Then the viewfinder's numbers: a config file put at user://hud_config.json changes the plane while the game runs
+## (and one that cannot be read changes nothing).
+##
 ##   godot --path . --xr-mode off --script res://tools/probes/opera_hud_xr.gd -- --void-start-floor=0 --opera-quiet --out=<dir>
 ##
 ## <dir>/hud_xr.json, hud_while_sung.png and hud_after.png (the plane's picture), window_while_sung.png.
@@ -45,6 +48,7 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="): folder = arg.trim_prefix("--out=")
 	DirAccess.make_dir_recursive_absolute(folder)
+	if FileAccess.file_exists("user://hud_config.json"): DirAccess.remove_absolute("user://hud_config.json")
 	load("res://commons/void/room_source.gd").use_main_tower = true
 	game = load("res://commons/void/void.tscn").instantiate()
 	game.force_xr = true
@@ -101,6 +105,40 @@ func run() -> void:
 	var ink_after := _ink(after)
 	checks.append({"check": "THE NEGATIVE: when the voice has ended the line is off the plane's picture: the band is empty again", "ok": str(display.get("sung")) == "" and ink_after == 0,
 		"inked_pixels_in_the_band": ink_after, "cleared_after_s": snappedf(waited, 0.1)})
+	# ---- the viewfinder's numbers from a file sent to the running game
+	var quad := (frame as MeshInstance3D).mesh as QuadMesh
+	var shipped_width := quad.size.x
+	var sent := FileAccess.open("user://hud_config.json", FileAccess.WRITE)
+	sent.store_string(JSON.stringify({"vr": {"frame_width_m": 2.6, "sung_line_at": 0.6}}))
+	sent.close()
+	waited = 0.0
+	while waited < 3.0 and not is_equal_approx(quad.size.x, 2.6):
+		await process_frame
+		waited += root.get_process_delta_time()
+	var report: Variant = JSON.parse_string(FileAccess.get_file_as_string("user://hud_config_applied.json"))
+	checks.append({"check": "a config file put where the game looks (frame 2.6 m wide, sung line higher) changes the plane within a second, nothing restarted, and the game writes back what it used",
+		"ok": is_equal_approx(quad.size.x, 2.6) and is_equal_approx(quad.size.y, 1.575) and report is Dictionary and bool(report.applied) and is_equal_approx(float(report.values.frame_width_m), 2.6)
+		and is_equal_approx(float(report.values.sung_line_at), 0.6) and is_equal_approx(float(report.values.distance_m), 1.2), "took_s": snappedf(waited, 0.01), "plane_metres": [quad.size.x, quad.size.y],
+		"written_back": report.get("values") if report is Dictionary else null})
+	_save()
+	sent = FileAccess.open("user://hud_config.json", FileAccess.WRITE)
+	sent.store_string("{ this is not json")
+	sent.close()
+	waited = 0.0
+	while waited < 1.5:
+		await process_frame
+		waited += root.get_process_delta_time()
+	report = JSON.parse_string(FileAccess.get_file_as_string("user://hud_config_applied.json"))
+	checks.append({"check": "THE NEGATIVE: a sent file that cannot be read changes nothing (the plane stays 2.6 m) and the game says it refused it",
+		"ok": is_equal_approx(quad.size.x, 2.6) and report is Dictionary and not bool(report.applied) and str(report.problem) != "", "plane_metres": [quad.size.x, quad.size.y],
+		"said": str(report.problem) if report is Dictionary else ""})
+	_save()
+	DirAccess.remove_absolute("user://hud_config.json")
+	waited = 0.0
+	while waited < 3.0 and not is_equal_approx(quad.size.x, shipped_width):
+		await process_frame
+		waited += root.get_process_delta_time()
+	checks.append({"check": "with the sent file taken away the plane goes back to the game's own numbers", "ok": is_equal_approx(quad.size.x, shipped_width), "plane_metres": [quad.size.x, quad.size.y]})
 	result["passed"] = checks.all(func(c): return c.ok)
 	_save()
 	print("[opera_hud_xr] ", "PASSED" if result.passed else "FAILED")

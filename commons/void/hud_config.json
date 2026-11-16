@@ -1,0 +1,20 @@
+{
+  "note": "The viewfinder's numbers (commons/void/camcorder_hud.gd reads them; commons/void/hud_config.gd carries them). A file of this shape sent to a running game with `python tools/push_hud_config.py <file>` is laid over this one and takes effect within half a second, no build. Only the keys you want to change need be in the sent file. vr: frame_width_m and frame_height_m are the plane's size, distance_m how far in front of the eyes it floats, so the corner symbols sit about atan(frame_width_m / 2 / distance_m) degrees out to the side (2.1 at 1.2 = 41). vertical_offset_m moves the whole plane down (negative) or up. pixels_wide is the sharpness of the plane's picture (its height follows the plane's shape). text_scale and margin_scale multiply the letter size and the gap between the frame's edge and the symbols. sung_line_at is where the foot of the sung line sits, 0 the top of the plane and 1 the bottom; sung_line_width is how much of the width it may take before it wraps. desktop: the same text_scale, margin_scale and sung_line_width; sung_line_at 0 keeps the line just above the bottom row.",
+  "vr": {
+    "frame_width_m": 2.1,
+    "frame_height_m": 1.575,
+    "distance_m": 1.2,
+    "vertical_offset_m": -0.095,
+    "pixels_wide": 2048,
+    "text_scale": 1.0,
+    "margin_scale": 1.0,
+    "sung_line_at": 0.74,
+    "sung_line_width": 0.45
+  },
+  "desktop": {
+    "text_scale": 1.0,
+    "margin_scale": 1.0,
+    "sung_line_at": 0.0,
+    "sung_line_width": 0.62
+  }
+}

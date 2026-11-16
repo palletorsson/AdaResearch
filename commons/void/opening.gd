@@ -31,6 +31,7 @@ const FADER := "opening"                # this node's own layer on the XR rig's 
 const SOUND_SECONDS := 3.0
 const RATE := 22050
 const OPERA := "res://commons/void/inner_opera.gd"
+const HUD_CONFIG := "res://commons/void/hud_config.gd"
 
 var game: Node3D
 var veil: MeshInstance3D
@@ -55,6 +56,10 @@ func _ready() -> void:
 	if game != null and ResourceLoader.exists(OPERA) and not game.has_meta("inner_opera_added"):
 		game.set_meta("inner_opera_added", true)
 		game.add_child.call_deferred((load(OPERA) as GDScript).new())
+	# the viewfinder's numbers from a file that can be sent to a running game (commons/void/hud_config.gd), added the same way
+	if game != null and ResourceLoader.exists(HUD_CONFIG) and not game.has_meta("hud_config_added"):
+		game.set_meta("hud_config_added", true)
+		game.add_child.call_deferred((load(HUD_CONFIG) as GDScript).new())
 	var args := OS.get_cmdline_user_args()
 	forced = args.has("--opening")
 	if game == null or args.has("--no-opening") or not _applies():
