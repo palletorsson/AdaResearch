@@ -1292,6 +1292,49 @@
           "arithmetic": "The field, its lines and the stand are the same at every value; the walls are never drawn. What differs is chalk on the floor: found has 11 marks, checked has 14 of which 3 carry a red stroke. Three yellow strokes of 0.9 x 0.06 m and three red strokes are added (about 0.25 m2 with their tags), and four lines of figures change on the stand. Seen at a slant on a subject of some 60 m2 of frame: under 0.5 %. Signed against found adds seven broken yellow strokes: about the same."
         }
       }
+    },
+    "way_round": {
+      "lookup_name": "way_round",
+      "map_ready": true,
+      "name": "The Way Round",
+      "class_name": "",
+      "scene": "res://commons/artifacts/way_round/way_round.tscn",
+      "description": "A prefab assemblage for the rhizome network hall: the way to its cave and round it, from the lab's own planks and panels. The cave stands out over the void with its near mouth seven metres past the floor's north edge; a plank footbridge (4 m and 2 m planks, joints staggered, plank rails) goes into that mouth. From the cave's far mouth a gangway of two-metre panels goes round its north-east corner and back down its east side, from which the passages can be followed with the eyes. The gangway stops 1.7 m short of the floor: seen from the east wing, not entered. A plate on the floor and one on the gangway lay or lift the last panel; laid, there is a way out of the cave that is not the way in. Keeps the floor awake and the visitor on it wherever they are out there. Axis panel: up, laid.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "bridge",
+        "circuit",
+        "connection",
+        "rhizome",
+        "exterior",
+        "prefab-assemblage",
+        "visual-argument",
+        "network"
+      ],
+      "qfep_connection": "A connection that can be seen is not yet one a body can enter; one added link turns a visit that must retrace itself into a circuit, and who may add it is a question about the rule, not the network.",
+      "dev_themes": [
+        "networks",
+        "space",
+        "access"
+      ],
+      "dna": {
+        "axes": {
+          "panel": [
+            "up",
+            "laid"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "panel: up ~ laid",
+          "percent": 0.5,
+          "arithmetic": "Fifty-six metres of bridge and gangway are the same at both values. What differs is one timber panel, 2 x 2 m, at the floor's edge on the east wing (4 m2, seen at a slant: about 1.5 m2), two plate tiles that turn yellow, a floor word and two lines on the stand. On a subject whose frame holds the whole gangway (some 300 m2 of frame): about 0.5 %. The axis is one panel: that is its point."
+        }
+      }
     }
   }
 }

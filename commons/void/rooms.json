@@ -55120,8 +55120,8 @@
           "id": "f2_rhizome_grower_4_2",
           "artifact": "rhizome_grower",
           "position": [
-            11.0,
-            7.5
+            0,
+            4.8
           ],
           "station": "SE",
           "height": 0,
@@ -55144,8 +55144,8 @@
           "id": "f2_film_rhizome_routes_1_15",
           "artifact": "film_rhizome_routes",
           "position": [
-            14,
-            -5.5
+            3.9,
+            5.2
           ],
           "station": "NE",
           "height": 0,
@@ -55168,7 +55168,24 @@
           "facing": 180,
           "scale": 1,
           "config": {
-            "passage_study": "true"
+            "passage_study": "true",
+            "exterior_walk": true
+          }
+        },
+        {
+          "id": "way-round",
+          "artifact": "way_round",
+          "station": "NW",
+          "position": [
+            0.0,
+            -8.2
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "panel": "up",
+            "editor_label": "The way round | a plank footbridge from the north edge into the cave's near mouth; a panel gangway from its far mouth back round its east side, 1.7 m short of the floor; plates lay the last panel"
           }
         }
       ],
