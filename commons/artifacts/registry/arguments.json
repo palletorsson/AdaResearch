@@ -1156,6 +1156,50 @@
           "arithmetic": "The furniture does not move. What differs is tape at eye height, 12 mm wide. At sixty the long table shows 11 red pairs and 4 half tapes and the ring 15 red pairs; at ninety the table shows 21 red pairs and the ring the same 15. So ten pairs go from nothing or a half tape to a full red tape: about 10 x 1.6 m x 0.012 m = 0.19 m2 of tape, and two lines of figures on the stand. On a subject of some 50 m2 of frame: about 0.4 %. Thirty against sixty changes more (4 table pairs, 6 ring pairs and the head's four half tapes). The axis is thin in a still by its nature: it draws lines of sight."
         }
       }
+    },
+    "two_reports": {
+      "lookup_name": "two_reports",
+      "map_ready": true,
+      "name": "Two Reports",
+      "class_name": "",
+      "scene": "res://commons/artifacts/two_reports/two_reports.tscn",
+      "description": "A robot station for the paraconsistent engineering hall: the small rule table its text asks for. Two report slips (the door is open; the door is closed), two reasoners that are told what the visitor tells them, and seven questions each answers with a lamp: does this follow? The classical reasoner, told both, lights every row, an unrelated lamp among them (on, and off): explosion. The paraconsistent one (the Logic of Paradox: true, false or both) keeps both reports and lights four; the lamp does not follow; and the last row shows the rule it gave up. Two real doors stand beside the slips, one open and one shut: WHERE FROM? gives each report its source, hour and door, and then neither reasoner has a contradiction. Axis told: nothing, one, both.",
+      "category": "annotation",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "paraconsistency",
+        "explosion",
+        "provenance",
+        "logic-of-paradox",
+        "rule-table",
+        "robot-station",
+        "visual-argument",
+        "contradiction"
+      ],
+      "qfep_connection": "Two accounts can share a system without one disappearing if the rules of inference stop a contradiction from licensing everything; and provenance may show the accounts never contradicted.",
+      "dev_themes": [
+        "logic",
+        "provenance",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "told": [
+            "nothing",
+            "one",
+            "both"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "told: nothing ~ one",
+          "percent": 0.3,
+          "arithmetic": "The doors, slips, lamp post and cabinets stand the same at every value. Between nothing and one: one slip card turns yellow (0.9 x 0.62 m = 0.56 m2), one plate tile (0.7 m2 on the floor, seen at a slant: 0.25 m2), four small lamps of 0.018 m2 each and eight lines of lettering change shade. On a subject of some 70 m2 of frame: about 1 m2 / 70 = 1.4 % at most, and under 0.5 % at the hottest twentieth because the changes are scattered. Both against one adds the second card, nine more lamps in red, the lit bulb and the red footer: larger."
+        }
+      }
     }
   }
 }

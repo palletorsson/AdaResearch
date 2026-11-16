@@ -54478,8 +54478,8 @@
           "id": "f1_florensky_sphere_6_3",
           "artifact": "florensky_sphere",
           "position": [
-            0,
-            8
+            -4.2,
+            4.8
           ],
           "station": "SE",
           "height": 1.1,
@@ -54491,12 +54491,12 @@
           "id": "f1_merge_conflict_visualizer_4_4",
           "artifact": "merge_conflict_visualizer",
           "position": [
-            -3,
-            7
+            0,
+            5.2
           ],
           "station": "SW",
           "height": 0,
-          "facing": 180,
+          "facing": 0,
           "scale": 1,
           "config": {
             "merge": "junction",
@@ -54507,12 +54507,12 @@
           "id": "f1_shannon_workbench_10_5",
           "artifact": "shannon_workbench",
           "position": [
-            3.5,
-            8.0
+            3.4,
+            7.7
           ],
           "station": "SE",
           "height": 0,
-          "facing": 0,
+          "facing": 270,
           "scale": 1,
           "config": {
             "fit": {
@@ -54567,8 +54567,8 @@
           "id": "f1_cap_theorem_walk_8_8",
           "artifact": "cap_theorem_walk",
           "position": [
-            2,
-            4
+            3.6,
+            4.9
           ],
           "station": "SE",
           "height": 0,
@@ -54580,12 +54580,12 @@
           "id": "f1_tt_6_9",
           "artifact": "tt",
           "position": [
-            -5.0,
-            8.0
+            -3.6,
+            7.8
           ],
           "station": "SW",
           "height": 1.4,
-          "facing": 270,
+          "facing": 90,
           "scale": 1,
           "config": {
             "fit": {
@@ -54615,6 +54615,22 @@
               ],
               "note": "9.8 x 9.4 m, 3.7 m past the north edge and round two columns: into the open middle; the small works there make way."
             }
+          }
+        },
+        {
+          "id": "two-reports",
+          "artifact": "two_reports",
+          "station": "NE",
+          "position": [
+            17.0,
+            0.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "told": "nothing",
+            "editor_label": "Two reports | the door is open; the door is closed: a classical and a paraconsistent reasoner answer seven questions each; two real doors; WHERE FROM? names the doors"
           }
         }
       ],
