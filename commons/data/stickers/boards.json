@@ -1,4 +1,4 @@
-{"version": 1, "revision": 24,
+{"version": 1, "revision": 25,
 "boards": [
   {"id":"visitors","title":"The visitors' board","w":1.6,"h":1,"paper":"#f4f0e6","note":"The same board in SVG (/stickers Board), in three.js (/stickers 3D) and in VR (the sticker_board artifact)."},
   {"id":"research","title":"The research, in stickers","w":2.4,"h":1.36,"paper":"#f4f0e6","note":"One sticker per spine sequence of Ada Research, in spine order: its idea as a motif, its name, its question; the colour is its QFEP phase. Derived by tools/stickers_seed.ts from commons/maps/curriculum_spine.json and the sequence files."},
@@ -30,5 +30,6 @@
   {"id":"arg_qfepsandbox","title":"The route: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Sandbox.json).","depth":0.9,"hang":true},
   {"id":"arg_qfepsynth","title":"The readback: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/QFEP_Synthesis.json).","depth":0.9,"hang":true},
   {"id":"arg_critbias","title":"The room: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/CriticalAlgorithms_Algorithmic_Bias_Visualization.json).","depth":0.9,"hang":true},
-  {"id":"arg_critethics","title":"The seating: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/CriticalAlgorithms_Applied_Ethics.json).","depth":0.9,"hang":true}
+  {"id":"arg_critethics","title":"The seating: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/CriticalAlgorithms_Applied_Ethics.json).","depth":0.9,"hang":true},
+  {"id":"arg_specpara","title":"The two accounts: what the hall says, and what I made of it","w":3.8,"h":2.4,"paper":"#c9a978","note":"An argument's stickers hung in depth: the hall text's own lines near the cork, the reader's lines in front, tied by red thread (commons/data/arguments/SpeculativeComputation_Paraconsistent_Engineering.json).","depth":0.9,"hang":true}
 ]}
