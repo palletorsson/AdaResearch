@@ -216,6 +216,7 @@ func _on_rendered(id: String, seconds: float, cached: bool) -> void:
 	if (voice.get("streams") as Dictionary).size() == buttons.size():
 		_tell("all %d phrases are ready" % buttons.size())
 		if checking: _report()
+		elif OS.get_cmdline_user_args().has("--sing-all") and singing_all.is_empty(): _sing_all.call_deferred()      # sung once, unasked, when ready
 
 
 func _retune() -> void:
