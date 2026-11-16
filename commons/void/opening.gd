@@ -106,9 +106,19 @@ func _find_crate() -> Node3D:
 	return null
 
 
+## Has everything that stands on the roof been stood there? What is in the crate with the visitor should not
+## arrive after the veil has lifted.
+func _dressed() -> bool:
+	var content: Object = game.get("building").get("content")
+	var exhibits: Dictionary = content.get("exhibits")
+	for item in content.get("data").get("floors")[0].get("artifacts", []):
+		if not exhibits.has("0/%s" % str(item.get("id", ""))): return false
+	return true
+
+
 ## Is the visitor known to be inside the crate, now?
 func _inside() -> bool:
-	if not bool(game.get("ready_for_play")): return false
+	if not bool(game.get("ready_for_play")) or not _dressed(): return false
 	if crate == null or not is_instance_valid(crate): crate = _find_crate()
 	if crate == null: return false
 	var active := get_viewport().get_camera_3d()

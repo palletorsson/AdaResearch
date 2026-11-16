@@ -66,15 +66,18 @@
           "artifact": "care_unit_crate",
           "station": "SW",
           "position": [
-            -1.2,
-            3.4
+            -5,
+            2.05
           ],
-          "facing": 270,
+          "facing": 180,
           "height": 0,
           "scale": 1,
           "config": {
-            "face": "slatted",
-            "editor_label": "The other three | a slatted transport crate beside the arrival crate: three more Model B bodies, strapped and tagged NOT ACTIVATED; the visitor is the one that woke"
+            "face": "open",
+            "shell": "off",
+            "bays": 4,
+            "empty": 1,
+            "editor_label": "The other three | INSIDE the arrival crate, against its back wall: four bays, three Model B bodies strapped and tagged NOT ACTIVATED, one bay empty with its straps open - the visitor's"
           }
         }
       ],

@@ -1,18 +1,21 @@
 extends SceneTree
-## THE OTHER THREE on the roof (Point_Zero; Palle, 2026-11-16)
-## A transport crate beside the arrival crate with three more Model B bodies that did not wake. Read in the
-## running tower with its own walker (which lifts the opening's veil at once: a scripted body):
-##   the crate stands on the roof with three bodies in it, and they are the visitor's own body, not stand-ins;
-##   the three stand inside the crate's boards, on its floor, a bay apart, facing its front;
-##   the crate holds a body off: the walker aimed at the middle bay stops at the boards;
-##   the axis: `closed` shows boards and no slats, `open` neither, `slatted` restores;
-##   it does not stand in the arrival crate's way: the walker goes from the spawn out through the struck panel.
+## THE OTHER THREE, in the one box (Point_Zero; Palle, 2026-11-16)
+## The visitor wakes in the arrival crate; against its back wall stand four bays, three with bodies of the same
+## model that did not wake, one empty with its straps open. Read in the running tower with its own walker (which
+## lifts the opening's veil at once: a scripted body):
+##   the row has no crate of its own: four bays, the second empty, three bodies, and they are the visitor's own
+##     body, not stand-ins;
+##   the three stand inside the ARRIVAL crate (asked of that crate), behind the place where the visitor wakes,
+##     facing the panel that is struck;
+##   the visitor wakes a step in front of the empty bay, inside the crate, and is not caught in the row: aimed
+##     at the row, the walker is held off it;
+##   the crate is still left the same way: the walker goes from the spawn out through the struck panel.
 ##
 ##   godot --path <stage> --script res://tools/probes/care_unit_crate_look.gd -- --no-bridges
 ##       --void-start-floor=0 --out=<dir>
 ##
-## crate.json: checks with what was read. beside.png (from the south side of the arrival crate, where its
-## lettering is read), front.png, near.png, closed.png, open.png.
+## crate.json: checks with what was read. waking.png (what is ahead at the spawn), behind.png (turned round at the
+## spawn), empty_bay.png, from_outside.png (through the fallen side).
 const ID := "care-units-crate"
 var game: Node3D
 var body: CharacterBody3D
@@ -74,7 +77,13 @@ func run() -> void:
 		await physics_frame
 	var mount: Node3D = game.building.content.exhibits.get("%d/%s" % [floor, ID])
 	work = mount.get_node_or_null("Artifact") if mount != null else null
-	if work != null and work.has_method("state"):
+	var crate: Node3D = null
+	var props: Dictionary = game.building.content.props
+	for key in props:
+		if str(key).begins_with("0/") and props[key] != null:
+			var found := (props[key] as Node).get_node_or_null("Prefab") as Node3D
+			if found != null and found.has_method("break_panel"): crate = found
+	if work != null and work.has_method("state") and crate != null:
 		for i in 200: await physics_frame
 		level = float(game.building.spec.levels[floor]) + game.building.global_position.y
 		body = game.body
@@ -83,63 +92,64 @@ func run() -> void:
 		eye.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		root.add_child(eye)
 		cam = Camera3D.new()
-		cam.fov = 80
+		cam.fov = 90
 		eye.add_child(cam)
 		cam.current = true
 		var s: Dictionary = work.state()
-		checks.append({"check": "the crate stands on the roof with three bodies in it, and they are the visitor's own body, not stand-ins", "ok": int(s.units) == 3 and str(s.kind) == "android" and str(s.face) == "slatted"
-			and bool(s.slats_shown) and not game.has_meta("opening"), "kind": str(s.kind), "build_ms": int(s.build_ms)})
+		checks.append({"check": "the row has no crate of its own: four bays, the second empty, three bodies, and they are the visitor's own body, not stand-ins",
+			"ok": not bool(s.shell) and int(s.bays) == 4 and int(s.empty) == 1 and int(s.units) == 3 and str(s.kind) == "android" and work.has_node("Bay1") and not work.get_node("Bay1").has_node("Unit")
+			and not game.has_meta("opening"), "kind": str(s.kind), "build_ms": int(s.build_ms)})
 		_save()
-		var places: Array = s.unit_places
-		var inside := true
-		var locals := []
-		for place in places:
-			var p: Vector3 = work.to_local(Vector3(place[0], place[1], place[2]))
-			locals.append([snappedf(p.x, 0.01), snappedf(p.y, 0.01), snappedf(p.z, 0.01)])
-			inside = inside and absf(p.x) < 1.3 and absf(p.z) < 0.5 and absf(p.y - 0.12) < 0.02
+		var all_inside := true
+		var in_crate := []
+		for place in s.unit_places:
+			var at := Vector3(place[0], place[1], place[2])
+			all_inside = all_inside and bool(crate.inside(at + Vector3(0, 0.9, 0)))
+			var p: Vector3 = crate.to_local(at)
+			in_crate.append([snappedf(p.x, 0.01), snappedf(p.z, 0.01)])
+		var spawn: Vector3 = game.spawn_for(0)
+		var spawn_in_crate: Vector3 = crate.to_local(spawn)
 		var facing: Vector3 = (work.get_node("Bay2/Unit") as Node3D).global_transform.basis.z
-		var front: Vector3 = work.global_transform.basis.z
-		checks.append({"check": "the three stand inside the crate's boards, on its floor, a bay apart, facing its front", "ok": inside and absf(float(locals[1][0]) - float(locals[0][0]) - 0.95) < 0.01
-			and facing.dot(front) < -0.99, "places_in_the_crate": locals})
+		var to_panel: Vector3 = crate.global_transform.basis.z * -1.0
+		checks.append({"check": "the three stand inside the ARRIVAL crate (asked of that crate), behind the place where the visitor wakes, facing the panel that is struck",
+			"ok": all_inside and in_crate.all(func(p): return float(p[1]) > spawn_in_crate.z + 0.8) and facing.dot(to_panel) < -0.99, "bodies_in_the_crate_x_z": in_crate,
+			"spawn_in_the_crate_x_z": [snappedf(spawn_in_crate.x, 0.01), snappedf(spawn_in_crate.z, 0.01)]})
 		_save()
-		await _shot(Vector3(-5.0, level + 1.65, 4.6), Vector3(-2.2, level + 1.3, 3.2), "beside.png")
-		await _shot(_at(0.0, 3.4) + Vector3(0, 1.6, 0), _at(0.0, 0.0) + Vector3(0, 1.25, 0), "front.png")
-		await _shot(_at(0.5, 1.5) + Vector3(0, 1.6, 0), _at(-0.1, 0.0) + Vector3(0, 1.45, 0), "near.png")
-		game.place_player(_at(0.0, 3.0) + Vector3(0, 0.3, 0))
-		for i in 30: await physics_frame
-		await _go(_at(0.0, 0.0), 300)
-		var stopped: float = work.to_local(body.global_position).z
-		checks.append({"check": "the crate holds a body off: the walker aimed at the middle bay stops at the boards", "ok": stopped > 0.7 and stopped < 1.1, "stopped_m_from_its_middle": snappedf(stopped, 0.01)})
-		_save()
-		work.apply_grid_config({"face": "closed"})
-		var closed: Dictionary = work.state()
-		await _shot(_at(0.0, 3.4) + Vector3(0, 1.6, 0), _at(0.0, 0.0) + Vector3(0, 1.25, 0), "closed.png")
-		work.apply_grid_config({"face": "open"})
-		var open: Dictionary = work.state()
-		await _shot(_at(0.0, 3.4) + Vector3(0, 1.6, 0), _at(0.0, 0.0) + Vector3(0, 1.25, 0), "open.png")
-		work.apply_grid_config({"face": "slatted"})
-		var back: Dictionary = work.state()
-		checks.append({"check": "the axis: `closed` shows boards and no slats, `open` neither, `slatted` restores", "ok": bool(closed.planks_shown) and not bool(closed.slats_shown) and not bool(open.planks_shown)
-			and not bool(open.slats_shown) and bool(back.slats_shown) and not bool(back.planks_shown)})
-		_save()
-		var crate: Node3D = null
-		var props: Dictionary = game.building.content.props
-		for key in props:
-			if str(key).begins_with("0/") and props[key] != null:
-				var found := (props[key] as Node).get_node_or_null("Prefab") as Node3D
-				if found != null and found.has_method("break_panel"): crate = found
 		game.place_player_at_spawn(0)
 		for i in 40: await physics_frame
-		var started_inside: bool = crate != null and bool(crate.inside(body.global_position + Vector3(0, 0.9, 0)))
-		if crate != null: crate.break_panel(false)
+		var woke_inside: bool = bool(crate.inside(body.global_position + Vector3(0, 0.9, 0)))
+		var here: Vector3 = body.global_position
+		var eye_at := Vector3(here.x, level + 1.62, here.z)
+		game.place_player(Vector3(13.5, level + 0.3, 7.6))            # out of its own pictures
 		for i in 20: await physics_frame
-		var out: Vector3 = crate.to_global(Vector3(0, 0, -4.4)) if crate != null else Vector3.ZERO
+		await _shot(eye_at, eye_at + to_panel * 1.2, "waking.png")
+		await _shot(eye_at, eye_at - to_panel * 1.0 + Vector3(0, -0.25, 0), "behind.png")
+		var vacant: Vector3 = (work.get_node("Bay1") as Node3D).global_position
+		await _shot(eye_at + to_panel * 0.35, vacant + Vector3(0, 1.0, 0), "empty_bay.png")
+		game.place_player_at_spawn(0)
+		for i in 40: await physics_frame
+		var row: Vector3 = work.global_position
+		await _go(Vector3(row.x + 0.4, body.global_position.y, row.z), 300)
+		var short: float = crate.to_local(body.global_position).z
+		var row_z: float = crate.to_local(row).z
+		checks.append({"check": "the visitor wakes a step in front of the empty bay, inside the crate, and is not caught in the row: aimed at the row, the walker is held off it",
+			"ok": woke_inside and absf(crate.to_local(here).x - crate.to_local(vacant).x) < 0.6 and short < row_z - 0.3 and short > spawn_in_crate.z + 0.2,
+			"woke_x_z": [snappedf(crate.to_local(here).x, 0.01), snappedf(crate.to_local(here).z, 0.01)], "empty_bay_x": snappedf(crate.to_local(vacant).x, 0.01), "held_at_z": snappedf(short, 0.01), "row_z": snappedf(row_z, 0.01)})
+		_save()
+		game.place_player_at_spawn(0)
+		for i in 40: await physics_frame
+		crate.break_panel(false)
+		for i in 20: await physics_frame
+		var out: Vector3 = crate.to_global(Vector3(0, 0, -4.4))
 		await _go(Vector3(out.x, body.global_position.y, out.z), 900)
 		var left: float = Vector2(body.global_position.x - out.x, body.global_position.z - out.z).length()
-		checks.append({"check": "it does not stand in the arrival crate's way: the walker goes from the spawn out through the struck panel", "ok": started_inside and left < 0.2, "short_of_the_place_outside_m": snappedf(left, 0.01)})
+		game.place_player(Vector3(13.5, level + 0.3, 7.6))
+		for i in 20: await physics_frame
+		await _shot(crate.to_global(Vector3(0.5, 1.62, -4.6)), crate.to_global(Vector3(0, 1.2, 1.0)), "from_outside.png")
+		checks.append({"check": "the crate is still left the same way: the walker goes from the spawn out through the struck panel", "ok": left < 0.2, "short_of_the_place_outside_m": snappedf(left, 0.01)})
 		result["passed"] = checks.all(func(c): return c.ok)
 	else:
-		checks.append({"check": "the roof holds the crate", "ok": false})
+		checks.append({"check": "the roof holds the row and the arrival crate", "ok": false})
 	_save()
 	print("[care_unit_crate_look] ", "PASSED" if result.passed else "FAILED")
 	quit()

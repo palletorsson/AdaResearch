@@ -12,6 +12,11 @@ extends Node3D
 ##
 ## `face` is the axis: slatted (the three are seen between the boards), closed (a crate like any other: the
 ## lettering is all there is to go on), open (no boards across the front).
+##
+## ONE BOX (Palle, the same day: "Will the player step out of that box as one of the units? Then should we remove
+## the other box?"). With `shell` off the work is only the bays: a row that stands INSIDE the arrival crate, against
+## its back wall, behind the place where the visitor wakes. `bays` is how many, `empty` which one has nobody in
+## it: its straps hang open and its tag says UNIT 1 OF 4. That bay is the visitor's.
 const WIDE := 3.0
 const DEEP := 1.15
 const HIGH := 2.35
@@ -29,6 +34,9 @@ const STRAP := Color("15151a")
 const TAG := Color("e9e2cf")
 
 @export_enum("slatted", "closed", "open") var face := "slatted"
+@export var shell := true                 # off: no crate of its own, only the bays
+@export var bays := 3
+@export var empty := -1                   # which bay stands empty (0 is the first); -1: none
 
 var _grain: ImageTexture
 var _slats: Node3D
@@ -39,7 +47,10 @@ var _build_ms := 0
 
 
 func _ready() -> void:
-	if has_meta("config_face"): _take({"face": get_meta("config_face")})
+	var given := {}
+	for key in ["face", "shell", "bays", "empty"]:
+		if has_meta("config_" + key): given[key] = get_meta("config_" + key)
+	_take(given)
 	var began := Time.get_ticks_msec()
 	_build_once()
 	_build_ms = Time.get_ticks_msec() - began
@@ -48,12 +59,24 @@ func _ready() -> void:
 
 func _take(config_data: Dictionary) -> void:
 	if config_data.has("face") and FACES.has(str(config_data["face"])): face = str(config_data["face"])
+	if config_data.has("shell"): shell = not (str(config_data["shell"]).to_lower() in ["off", "false", "0", "no"])
+	if config_data.has("bays"): bays = clampi(int(str(config_data["bays"])), 1, 4)
+	if config_data.has("empty"): empty = int(str(config_data["empty"]))
 
 
+## The tower hands a row its config after the work is built: what changes the build is built again.
 func apply_grid_config(config_data: Dictionary) -> void:
-	var before := face
+	var before := [face, shell, bays, empty]
 	_take(config_data)
-	if is_inside_tree() and _slats != null and face != before: _found()
+	if not is_inside_tree() or _slats == null or before == [face, shell, bays, empty]: return
+	if before.slice(1) != [shell, bays, empty]:
+		for child in get_children():
+			remove_child(child)
+			child.queue_free()
+		_units.clear()
+		_kind = "figure"
+		_build_once()
+	_found()
 
 
 func _found() -> void:
@@ -180,6 +203,17 @@ func _unit() -> Node3D:
 func _build_once() -> void:
 	var front: float = DEEP * 0.5
 	var top: float = BASE + HIGH
+	_slats = Node3D.new()
+	_slats.name = "Slats"
+	add_child(_slats)
+	_planks = Node3D.new()
+	_planks.name = "Planks"
+	add_child(_planks)
+	if shell: _build_shell(front, top)
+	_build_bays()
+
+
+func _build_shell(front: float, top: float) -> void:
 	# skids and floor
 	for x in [-WIDE * 0.5 + 0.2, 0.0, WIDE * 0.5 - 0.2]: _box(self, Vector3(x, 0.04, 0), Vector3(0.16, 0.08, DEEP), _wood(STRIP))
 	_box(self, Vector3(0, BASE - 0.02, 0), Vector3(WIDE, 0.04, DEEP), _wood(PLANK_ALT))
@@ -195,15 +229,9 @@ func _build_once() -> void:
 		_box(self, Vector3(0, y, -front - 0.03), Vector3(WIDE, 0.12, 0.05), _wood(STRIP))
 		for x in [-WIDE * 0.5 - 0.03, WIDE * 0.5 + 0.03]: _box(self, Vector3(x, y, 0), Vector3(0.05, 0.12, DEEP), _wood(STRIP))
 	# the front, three ways
-	_slats = Node3D.new()
-	_slats.name = "Slats"
-	add_child(_slats)
 	for y in [BASE + 0.26, BASE + 1.02, BASE + 2.1]: _box(_slats, Vector3(0, y, front), Vector3(WIDE, 0.2, BOARD), _wood(PLANK if y < 1.0 or y > 2.0 else PLANK_ALT))
 	_mark(_slats, Vector3(-0.2, BASE + 2.1, front + BOARD * 0.5 + 0.002))
 	_label(_slats, Vector3(1.0, BASE + 0.26, front + BOARD * 0.5 + 0.002), "QTY 3", 58, Color("1c1a17"))
-	_planks = Node3D.new()
-	_planks.name = "Planks"
-	add_child(_planks)
 	_boards(_planks, Vector3(0, BASE + HIGH * 0.5, front), WIDE, HIGH, false, 9)
 	_mark(_planks, Vector3(-0.2, BASE + 1.75, front + BOARD * 0.5 + 0.002))
 	_label(_planks, Vector3(1.0, BASE + 1.45, front + BOARD * 0.5 + 0.002), "QTY 3", 58, Color("1c1a17"))
@@ -217,33 +245,69 @@ func _build_once() -> void:
 	shape.shape = block
 	shape.position = Vector3(0, top * 0.5, 0)
 	solid.add_child(shape)
-	# the three bays: a body, foam at the shoulders and the ankles, two straps, a tag
-	for k in 3:
+	# dividers between the bays
+	for x in [-0.475, 0.475]: _box(self, Vector3(x, BASE + HIGH * 0.5, -0.05), Vector3(BOARD, HIGH, DEEP - 0.14), _wood(PLANK_ALT))
+
+
+## The bays: a body, foam at the shoulders and the ankles, two straps, a tag. One bay may stand empty, its straps
+## hanging open: the place of the one that woke.
+func _build_bays() -> void:
+	var pitch: float = 0.95 if shell else 0.76
+	var floor_at: float = BASE if shell else 0.0
+	var number := 2
+	for k in bays:
 		var bay := Node3D.new()
-		bay.name = "Bay%d" % (k + 2)
-		bay.position = Vector3(BAYS[k], BASE, -0.08)
+		var vacant: bool = k == empty
+		bay.name = "Bay%d" % (1 if vacant else number)
+		bay.position = Vector3((float(k) - float(bays - 1) * 0.5) * pitch, floor_at, -0.08 if shell else 0.0)
 		add_child(bay)
+		var reach: float = pitch * 0.5 - 0.07
+		for side in [-1.0, 1.0]:
+			_box(bay, Vector3(side * reach, 1.36, 0), Vector3(0.12, 0.3, 0.5), _flat(FOAM, 0.98))
+			_box(bay, Vector3(side * (reach - 0.05), 0.14, 0), Vector3(0.14, 0.28, 0.5), _flat(FOAM, 0.98))
+		_box(bay, Vector3(0, 1.9, -0.2), Vector3(0.5, 0.16, 0.2), _flat(FOAM, 0.98))
+		var tag: MeshInstance3D
+		if vacant:
+			# the straps hang open from either side
+			for y in [0.62, 1.22]:
+				for side in [-1.0, 1.0]:
+					var loose := Node3D.new()
+					loose.position = Vector3(side * (pitch * 0.5 - 0.03), y, 0.2)
+					loose.rotation_degrees.z = side * (78.0 if y > 1.0 else 84.0)
+					bay.add_child(loose)
+					_box(loose, Vector3(-side * (pitch * 0.25 - 0.03), 0, 0), Vector3(pitch * 0.5 - 0.06, 0.05, 0.012), _flat(STRAP, 0.6))
+			tag = _box(bay, Vector3(pitch * 0.5 - 0.1, 0.8, 0.215), Vector3(0.17, 0.11, 0.004), _flat(TAG, 0.9))
+			tag.rotation_degrees.z = 12.0
+			var mine: Label3D = _label(tag, Vector3(0, 0, 0.004), "MODEL B\nUNIT 1 OF 4", 22, Color("1c1a17"))
+			mine.pixel_size = 0.0006
+			continue
 		var unit := _unit()
 		unit.name = "Unit"
 		bay.add_child(unit)
 		_units.append(unit)
-		for side in [-1.0, 1.0]:
-			_box(bay, Vector3(side * 0.36, 1.36, 0), Vector3(0.12, 0.3, 0.5), _flat(FOAM, 0.98))
-			_box(bay, Vector3(side * 0.3, 0.14, 0), Vector3(0.16, 0.28, 0.5), _flat(FOAM, 0.98))
-		_box(bay, Vector3(0, 1.9, -0.2), Vector3(0.5, 0.16, 0.2), _flat(FOAM, 0.98))
-		for y in [0.62, 1.22]: _box(bay, Vector3(0, y, 0.2), Vector3(0.84, 0.05, 0.012), _flat(STRAP, 0.6))
-		var tag := _box(bay, Vector3(0.24, 1.08, 0.215), Vector3(0.17, 0.11, 0.004), _flat(TAG, 0.9))
+		for y in [0.62, 1.22]: _box(bay, Vector3(0, y, 0.2), Vector3(pitch - 0.08, 0.05, 0.012), _flat(STRAP, 0.6))
+		tag = _box(bay, Vector3(0.24, 1.08, 0.215), Vector3(0.17, 0.11, 0.004), _flat(TAG, 0.9))
 		tag.rotation_degrees.z = -7.0
-		var words: Label3D = _label(tag, Vector3(0, 0, 0.004), "MODEL B\nUNIT %d OF 4\nNOT ACTIVATED" % (k + 2), 22, Color("1c1a17"))
+		var words: Label3D = _label(tag, Vector3(0, 0, 0.004), "MODEL B\nUNIT %d OF 4\nNOT ACTIVATED" % number, 22, Color("1c1a17"))
 		words.pixel_size = 0.0006
-	# dividers between the bays
-	for x in [-0.475, 0.475]: _box(self, Vector3(x, BASE + HIGH * 0.5, -0.05), Vector3(BOARD, HIGH, DEEP - 0.14), _wood(PLANK_ALT))
+		number += 1
+	if not shell:
+		# a row inside another crate: a body cannot walk through the packed ones
+		var held := StaticBody3D.new()
+		held.name = "Row"
+		add_child(held)
+		var shape := CollisionShape3D.new()
+		var block := BoxShape3D.new()
+		block.size = Vector3(float(bays) * pitch, 2.0, 0.5)
+		shape.shape = block
+		shape.position = Vector3(0, 1.0, 0)
+		held.add_child(shape)
 
 
 ## ---- for a test ----
 
 func state() -> Dictionary:
-	return {"face": face, "units": _units.size(), "kind": _kind, "slats_shown": _slats.visible, "planks_shown": _planks.visible, "build_ms": _build_ms,
+	return {"face": face, "shell": shell, "bays": bays, "empty": empty, "units": _units.size(), "kind": _kind, "slats_shown": _slats.visible, "planks_shown": _planks.visible, "build_ms": _build_ms,
 		"unit_places": _units.map(func(u): return [u.global_position.x, u.global_position.y, u.global_position.z])}
 
 
