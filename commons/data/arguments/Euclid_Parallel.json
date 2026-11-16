@@ -413,32 +413,33 @@
     {
       "id": "three_wedges",
       "form": "playground",
-      "status": "written",
+      "status": "standing: row three-wedges",
       "title": "THREE CORNERS ON ONE STRAIGHT LINE",
       "at": [
-        -10.0,
-        6.0
+        -10.2,
+        6.1
       ],
       "size": [
-        5.0,
-        4.0
+        6.6,
+        5.0
       ],
-      "claim": "The triangle's three angles fill a straight angle because of the parallel through the top corner, not because they keep measuring so.",
+      "claim": "Any line through the top corner is filled by three wedges. What the parallel gives is that the outer two are the corners at A and B - and that it gives it is granted, not measured.",
       "from_the_hall": "'Draw the gold line through C in the direction of AB. Euclid's triangle-sum argument makes a related construction.'",
       "built_from": [
-        "timber_panel_1x1 cut as three coloured wedges",
-        "tape_roll printed strip (the gold parallel through C)",
-        "traffic_pyramid_5 (A and B)"
+        "traffic_pyramid_5 (A and B)",
+        "trace_point_ball (C, when nobody is)",
+        "flat wedges drawn on the floor in three colours, again whenever C moves; two edges; a gold line through C",
+        "a raised stand behind the base, a reading board and the plate THE GUIDE at the east side of the field"
       ],
-      "what_stands": "A triangle in tape with cones at A and B; the body is C. Through the body a gold line in the direction of AB.",
-      "what_you_do": "Walk: the wedges at A and B are copied beside you, either side of your own, along the gold line. They fill it exactly, wherever you stand.",
-      "what_it_shows": "The reason for 180. One floor down the same three wedges, copied on the dome, overlap."
+      "what_stands": "South of shaft A: a base between two cones, A and B, and a field north of it. A ball is C until a body steps in. From C two edges run to A and B and a gold line runs through it in the direction of AB; three wedges lie along the line at C, the outer two in the colours of the corners at A and B.",
+      "what_you_do": "Step in and walk: you are C. The outer wedges stay the corners at A and B and the three fill the line, wherever you stand. Stand on THE GUIDE: the line tilts eight degrees. It is still filled - and the outer wedges are no longer the corners. Again: the line is hidden, and there are three numbers, a sum and a count of places. Stand nearly in a row with A and B: the reading is withheld.",
+      "what_it_shows": "The reason for 180 is the equality the parallel gives, not the filling of a line and not the pile of readings. One floor down the same three sides on the planet do not add to a straight angle.",
+      "measured": "Benched first (tools/probes/three_wedges_bench.py: 3,319 places read, corners add to 180 and the parallel's wedges equal the corners to 1e-13 degrees; tilted eight degrees the line is still filled and the outer wedges are off by exactly +8 and -8; the same sides on a sphere of radius 8 m add to 185.95). Walked by the tower's own walker (tools/probes/three_wedges_walk.gd, seven checks): three places with different corners, 180 each time; withheld at a smallest corner of 9.8 degrees; tilted, hidden and parallel again by the plate."
     }
   ],
   "open": [
     "Plate 5's claim that the angle sum and the fifth postulate stand or fall together (given the other four) is from memory and marked so.",
-    "Plate 7's two thousand years is from reading and from the hall's intent file, not checked further.",
-    "The second visual argument (three wedges) is written and not built."
+    "Plate 7's two thousand years is from reading and from the hall's intent file, not checked further."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_euclid). Near the cork: what the hall text says. In front: what I made of it.",

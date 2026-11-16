@@ -1559,6 +1559,50 @@
           "arithmetic": "Each step lays one set of planks (2.06 m by 1.08 m, 2.2 m2 of deck, seen at a slant and from below the upper ones), takes away one bar with its board (0.62 m2), and shows one more crystal with its name. The third set lies along the far west side behind the posts and rails of the nearer landings, so about half of it is seen: some 1.1 m2 + 0.6 + 0.2 on a subject of some 75 m2 of frame (6.6 m by 5.3 m with the stand, mostly air between posts): 2.5 %. None against one is nearer the camera and unhidden: about 4 %."
         }
       }
+    },
+    "three_wedges": {
+      "lookup_name": "three_wedges",
+      "map_ready": true,
+      "name": "Three Corners On One Straight Line",
+      "class_name": "",
+      "scene": "res://commons/artifacts/three_wedges/three_wedges.tscn",
+      "description": "A playground for the Euclid hall: Proposition I.32 with the body as C. A and B stand on the floor with the base between them; a visitor in the field is C, with two edges from their feet and a gold line through them in the direction of AB. Three wedges lie along the line at their feet: their own corner, and at either side a wedge in the colour of the corner at A and at B. Parallel, the outer two are those corners wherever the visitor stands. A plate tilts the line eight degrees - the line is still filled, and the outer wedges are no longer the corners - then hides it: three numbers, a sum and a count of places measured. Nearly in a row, the reading is withheld under a stated tolerance. Axis guide: parallel, tilted, hidden.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "euclid",
+        "parallel",
+        "angle-sum",
+        "construction",
+        "proof",
+        "playground",
+        "visual-argument",
+        "foundations"
+      ],
+      "qfep_connection": "Any line through a corner is filled by three wedges; what the parallel gives is that two of them are the other two corners, and that it gives it is granted, not measured.",
+      "dev_themes": [
+        "foundations",
+        "assumption",
+        "measurement"
+      ],
+      "dna": {
+        "axes": {
+          "guide": [
+            "parallel",
+            "tilted",
+            "hidden"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "guide: parallel ~ tilted",
+          "percent": 0.7,
+          "arithmetic": "Tilting turns a 6 m line 6 cm wide by 8 degrees (it sweeps away from 0.36 m2 and onto 0.36 m2, and changes from gold to pale), moves the two outer wedges' edges by 8 degrees at 0.95 m radius (0.063 m2 each way), and changes three lines on the stand. Flat on the floor, seen at a slant, about 0.4 m2 of some 55 m2 of frame: 0.7 %. Hidden takes away the line and two wedges (0.36 + 0.75 m2): about 1.5 %."
+        }
+      }
     }
   }
 }
