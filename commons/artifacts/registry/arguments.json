@@ -1201,6 +1201,51 @@
           "arithmetic": "The doors, slips, lamp post and cabinets stand the same at every value. Between nothing and one: one slip card turns yellow (0.9 x 0.62 m = 0.56 m2), one plate tile (0.7 m2 on the floor, seen at a slant: 0.25 m2), four small lamps of 0.018 m2 each and eight lines of lettering change shade. On a subject of some 70 m2 of frame: about 1 m2 / 70 = 1.4 % at most, and under 0.5 % at the hottest twentieth because the changes are scattered. Both against one adds the second card, nine more lamps in red, the lit bulb and the red footer: larger."
         }
       }
+    },
+    "four_stations": {
+      "lookup_name": "four_stations",
+      "map_ready": true,
+      "name": "Four Stations, One Walk",
+      "class_name": "",
+      "scene": "res://commons/artifacts/four_stations/four_stations.tscn",
+      "description": "A robot station for the situated computation hall: the next experiment its text proposes, with the visitor's own walk as the subject. A field six metres square with a line up its middle and four stations at its corners. Each sees only what comes within 3.4 m of it and each has its own definition of DANGEROUS (off the line; fast; near me; staying). After a walk from START to END every station says what it saw (how long, what share, how fast, how far off the line, how near), what the word means to it, and its verdict; the walk stays on the floor as a trace coloured by who saw each step. ONE DEFINITION leaves only disagreement from evidence; ONE RECORD leaves only disagreement from definitions; with both they agree. Found with an example walk. Axis sharing: own, one_definition, one_record, both.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "situated",
+        "criterion",
+        "observation",
+        "evidence",
+        "definition",
+        "robot-station",
+        "visual-argument",
+        "judgement"
+      ],
+      "qfep_connection": "A judgement has a subject, an assertion, a criterion and the conditions it was made under; holding the subject fixed, disagreement can be split into what each judge saw and what each judge means.",
+      "dev_themes": [
+        "situated-knowledge",
+        "measurement",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "sharing": [
+            "own",
+            "one_definition",
+            "one_record",
+            "both"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "sharing: one_record ~ both",
+          "percent": 0.3,
+          "arithmetic": "The field, the stations, the arcs and the example trace are the same at every value. What changes is lettering on four panels (1.9 x 1.56 m each, of which the changing lines cover perhaps a fifth) and two plate tiles. Between one_record and both: one verdict word changes (SW from NOT DANGEROUS to DANGEROUS: about 0.15 m2 and a colour), three 'means' lines change, one tile turns yellow (0.25 m2 seen at a slant), one tally line. On a subject of some 80 m2 of frame: about 0.6 m2: under 1 %, and less at the hottest twentieth. Own against one_definition flips three verdict words: a little more."
+        }
+      }
     }
   }
 }
