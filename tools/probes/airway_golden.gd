@@ -4,11 +4,12 @@ extends SceneTree
 ## The references are not in this repo; point at the kit's folder.
 ##
 ##   godot --headless --path . --xr-mode off --script res://tools/probes/airway_golden.gd -- \
-##       --golden=<kit>/vendor/chimera/tests/golden [--only=geometry|voice] [--scenario=sustain-male] \
+##       --golden=<kit>/vendor/chimera/tests/golden [--only=geometry|planning|voice] [--scenario=sustain-male] \
 ##       [--samples=N] [--out=res://ada_run/airway_golden.json]
 
 const Tract := preload("res://audio/airway/human_tract.gd")
 const Voice := preload("res://audio/airway/airway_voice.gd")
+const Phonetics := preload("res://audio/airway/phonetics.gd")
 
 
 func _arg(key: String, fallback: String) -> String:
@@ -26,8 +27,9 @@ func _initialize() -> void:
 	var golden := _arg("golden", "")
 	var only := _arg("only", "")
 	var report := {}
-	if only != "voice": report["geometry"] = _geometry(golden)
-	if only != "geometry": report["voice"] = _voice(golden)
+	if only == "" or only == "geometry": report["geometry"] = _geometry(golden)
+	if only == "" or only == "planning": report["planning"] = _planning(golden)
+	if only == "" or only == "voice": report["voice"] = _voice(golden)
 	var out := _arg("out", "")
 	if out != "":
 		var file := FileAccess.open(out, FileAccess.WRITE)
@@ -85,6 +87,68 @@ func _geometry(golden: String) -> Dictionary:
 			worst_at = "case %d (%s)" % [ci, body]
 	return {"cases": (cases as Array).size(), "worst_relative_difference": worst, "worst_at": worst_at, "wrong_grid_sizes": wrong_sizes,
 		"ms_a_posture": float(Time.get_ticks_usec() - began) / 1000.0 / float((cases as Array).size())}
+
+
+# Two lists of gestures: how many differ in shape (count, label, which targets), and the worst relative
+# difference of any number.
+func _gestures(want: Array, got: Array, into: Dictionary, where: String) -> void:
+	if want.size() != got.size():
+		into["shape"] = int(into.get("shape", 0)) + 1
+		if not into.has("first"): into["first"] = "%s: %d gestures against %d" % [where, got.size(), want.size()]
+		return
+	for i in want.size():
+		var w: Dictionary = want[i]
+		var g: Dictionary = got[i]
+		var same := str(w.get("label", "")) == str(g.get("label", "")) and (w.targets as Dictionary).size() == (g.targets as Dictionary).size()
+		for key in w.targets:
+			if not g.targets.has(key): same = false
+		for key in ["speed", "releaseHold", "tag"]:
+			if (w.get(key) != null) != (g.get(key) != null): same = false
+		if not same:
+			into["shape"] = int(into.get("shape", 0)) + 1
+			if not into.has("first"): into["first"] = "%s gesture %d: %s against %s" % [where, i, JSON.stringify(g), JSON.stringify(w)]
+			continue
+		var worst := 0.0
+		for key in ["t0", "t1", "rampIn", "rampOut", "strength", "speed", "releaseHold", "tag"]:
+			if w.get(key) != null: worst = maxf(worst, _rel(float(w[key]), float(g[key]), 1e-9))
+		for key in w.targets: worst = maxf(worst, _rel(float(w.targets[key]), float(g.targets[key]), 1e-9))
+		if worst > float(into.get("worst", 0.0)):
+			into["worst"] = worst
+			into["worst_at"] = "%s gesture %d (%s)" % [where, i, str(w.get("label", ""))]
+
+
+func _planning(golden: String) -> Dictionary:
+	var f: Variant = JSON.parse_string(FileAccess.get_file_as_string(golden + "/planning.json"))
+	if not f is Dictionary: return {"error": "no planning.json at " + golden}
+	var report := {}
+	var klatt := {"cases": (f.klatt as Array).size(), "worst": 0.0}
+	for c in f.klatt:
+		var durs := Phonetics.klatt_durations_with(c.segments, c.infos)
+		for i in durs.size(): klatt["worst"] = maxf(float(klatt.worst), _rel(float(c.durs[i]), durs[i], 1e-9))
+	report["klatt"] = klatt
+	var utterances := {"cases": (f.utterances as Array).size()}
+	for c in f.utterances:
+		var plan := Phonetics.plan_utterance(c.segments, c.opts)
+		_gestures(c.plan.gestures, plan.gestures, utterances, str(c.name))
+		utterances["worst_end"] = maxf(float(utterances.get("worst_end", 0.0)), _rel(float(c.plan.end), float(plan.end), 1e-9))
+	report["utterances"] = utterances
+	var phrases := {"cases": (f.phrases as Array).size()}
+	for c in f.phrases: _gestures(c.plan.gestures, Phonetics.plan_phrases(c.phrases, c.opts).gestures, phrases, "phrases")
+	report["phrases"] = phrases
+	var songs := {"cases": (f.songs as Array).size()}
+	for c in f.songs: _gestures(c.plan.gestures, Phonetics.plan_song(c.notes, c.opts).gestures, songs, str(c.name))
+	report["songs"] = songs
+	var notes := {"cases": (f.notes as Array).size()}
+	for i in (f.notes as Array).size():
+		var c: Dictionary = f.notes[i]
+		var got: Array = []
+		match str(c.kind):
+			"on": got = Phonetics.plan_note_on(c.syl, float(c.midi), c.opts)
+			"off": got = Phonetics.plan_note_off(c.syl, float(c.midi), str(c.body))
+			"melisma": got = Phonetics.plan_melisma(float(c.midi), float(c.opts.vibrato), float(c.opts.tag))
+		_gestures(c.gestures, got, notes, "note %d (%s)" % [i, str(c.kind)])
+	report["notes"] = notes
+	return report
 
 
 func _voice(golden: String) -> Dictionary:
