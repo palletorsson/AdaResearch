@@ -386,6 +386,7 @@ func _build_feedback() -> void:
 	fade.extra_cull_margin = 100
 	camera.add_child(fade)
 	fade.hide()
+	add_child(preload("res://commons/void/opening.gd").new()) # black until the visitor is known to be inside the arrival crate
 	if not vr:
 		desktop_help = CanvasLayer.new()
 		add_child(desktop_help)
