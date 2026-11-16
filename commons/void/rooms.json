@@ -60,6 +60,22 @@
           "height": 0,
           "facing": 0,
           "scale": 1
+        },
+        {
+          "id": "care-units-crate",
+          "artifact": "care_unit_crate",
+          "station": "SW",
+          "position": [
+            -1.2,
+            3.4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "face": "slatted",
+            "editor_label": "The other three | a slatted transport crate beside the arrival crate: three more Model B bodies, strapped and tagged NOT ACTIVATED; the visitor is the one that woke"
+          }
         }
       ],
       "impact_cells": [],

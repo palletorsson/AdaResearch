@@ -1696,6 +1696,49 @@
           "arithmetic": "Rings and block both spread their things over the whole field (24 and 25 things about 0.3 m across, discs 0.54 m across, lines to four posts); blobs gathers 12 in three heaps. Between rings and block every thing moves, but the cover is alike: some 25 discs of 0.23 m2 and 25 small objects moved by under a metre each, half of them landing on ground another had: about 3 m2 changed on the floor, a third of it seen at a slant, on a subject of some 65 m2 of frame: 1.5 %. Blobs against either takes away twelve things and their discs as well: about 3 %."
         }
       }
+    },
+    "care_unit_crate": {
+      "lookup_name": "care_unit_crate",
+      "map_ready": true,
+      "name": "The Other Three",
+      "class_name": "",
+      "scene": "res://commons/artifacts/care_unit_crate/care_unit_crate.tscn",
+      "description": "The rest of the consignment on the roof: a wooden transport crate lettered CARE UNIT - MODEL B, slatted at the front, holding three more bodies of the visitor's own model, strapped in their bays between blocks of foam, each with a tag: UNIT 2, 3 and 4 OF 4, NOT ACTIVATED. They were delivered with the visitor's crate; the visitor is the one that woke. Nothing happens here. The bodies are the visitor's own (ada_android), unpainted and with nothing lit. Axis face: slatted, closed, open.",
+      "category": "set",
+      "complexity": "simple",
+      "include_in_map_data": true,
+      "sequence": "primitives",
+      "interaction": "look",
+      "size_group": "body",
+      "tags": [
+        "model-b",
+        "care-unit",
+        "crate",
+        "delivery",
+        "roof",
+        "arrival",
+        "set"
+      ],
+      "qfep_connection": "The visitor is one of a batch: the same body four times, three still packed. What separates them is not the model but having woken.",
+      "dev_themes": [
+        "arrival",
+        "body",
+        "delivery"
+      ],
+      "dna": {
+        "axes": {
+          "face": [
+            "slatted",
+            "closed",
+            "open"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "face: slatted ~ open",
+          "percent": 9.0,
+          "arithmetic": "Open takes away three boards across the front, each 3.0 m by 0.2 m (1.8 m2), with the lettering and the quantity on two of them; behind them the dark bodies and foam show instead of pale wood. Seen from the usual three-quarter view the front is about 60 % of the subject, some 7 m2 of 12 m2 seen: 1.8 of 12 at full contrast, a little foreshortened: 9 %. Closed against slatted covers the three bodies with pale boards: about 5.2 m2 of the same 12: 30 % or more."
+        }
+      }
     }
   }
 }
