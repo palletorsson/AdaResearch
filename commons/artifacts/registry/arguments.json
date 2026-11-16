@@ -1514,6 +1514,51 @@
           "arithmetic": "From three to tape nothing is taken away: two lengths of red tape 4.8 m long and 0.06 m high are added (0.58 m2), five thin posts, one more crystal with its ring of light (0.2 m2) and its name, and two lines on the stand. On a subject of some 50 m2 of frame: about 0.9 m2 seen at a slant: under 1 %. One against two adds a whole fence of plank rails 2.8 m square (11 m of plank 0.25 m high: 2.8 m2): about 4 %."
         }
       }
+    },
+    "gap_moves_up": {
+      "lookup_name": "gap_moves_up",
+      "map_ready": true,
+      "name": "Lay The Missing Plank",
+      "class_name": "",
+      "scene": "res://commons/artifacts/gap_moves_up/gap_moves_up.tscn",
+      "description": "A playground for the Goedel hall, built round its incompleteness tower: four landings at the corners of a square, each half a metre higher than the last, with a ramp from the floor to the first. Between a landing and the next the rails and stringers stand and the planks do not; across the gap stands a crystal, a sentence true up there and not reachable from here. A plate lays the planks - the sentence is added as an axiom - and the visitor walks up to a landing with another gap and another sentence. Three times; the fourth landing ends at tape, and the next sentence stands on a shelf straight above the first landing. A stand counts planks laid and gaps open: always one. Axis planks: none, one, two, three.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "foundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "goedel",
+        "incompleteness",
+        "axiom",
+        "regress",
+        "tower",
+        "playground",
+        "visual-argument",
+        "foundations"
+      ],
+      "qfep_connection": "Adding the missing sentence is a real repair each time and never the last one: the gap is not closed, it is one level up, and a walk round the tower ends above where it began.",
+      "dev_themes": [
+        "foundations",
+        "limits",
+        "regress"
+      ],
+      "dna": {
+        "axes": {
+          "planks": [
+            "none",
+            "one",
+            "two",
+            "three"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "planks: two ~ three",
+          "percent": 2.5,
+          "arithmetic": "Each step lays one set of planks (2.06 m by 1.08 m, 2.2 m2 of deck, seen at a slant and from below the upper ones), takes away one bar with its board (0.62 m2), and shows one more crystal with its name. The third set lies along the far west side behind the posts and rails of the nearer landings, so about half of it is seen: some 1.1 m2 + 0.6 + 0.2 on a subject of some 75 m2 of frame (6.6 m by 5.3 m with the stand, mostly air between posts): 2.5 %. None against one is nearer the camera and unhidden: about 4 %."
+        }
+      }
     }
   }
 }

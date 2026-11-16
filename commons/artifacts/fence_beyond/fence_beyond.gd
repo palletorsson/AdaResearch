@@ -121,6 +121,7 @@ func _physics_process(delta: float) -> void:
 	if _still >= 0.8 and region != "":
 		_still = -99.0
 		_stage = _stage % 4 + 1
+		fences = STAGES[_stage - 1]
 		_show()
 		_tell()
 

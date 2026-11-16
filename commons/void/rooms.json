@@ -51135,10 +51135,10 @@
           "artifact": "negative_control_fixture",
           "station": "NW",
           "position": [
-            -15,
-            -8
+            9.35,
+            -7.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51148,10 +51148,10 @@
           "artifact": "critic_regress_stack",
           "station": "NW",
           "position": [
-            -5,
-            -8
+            11.0,
+            -7.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51161,10 +51161,10 @@
           "artifact": "godel_sentence_machine",
           "station": "NE",
           "position": [
-            5,
-            -8
+            5.9,
+            0.5
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51174,10 +51174,10 @@
           "artifact": "rice_verifier_booth",
           "station": "NE",
           "position": [
-            15,
-            -8
+            7.7,
+            -7.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51187,10 +51187,10 @@
           "artifact": "print_gallery_recursion",
           "station": "SW",
           "position": [
-            -15,
-            8
+            -10.4,
+            4.6
           ],
-          "facing": 270,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -51200,10 +51200,10 @@
           "artifact": "synthesis_stand",
           "station": "SW",
           "position": [
-            -5,
-            8
+            16.4,
+            6.4
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 0,
           "scale": 1,
           "config": {
@@ -51216,10 +51216,10 @@
           "artifact": "fluency_seam",
           "station": "SE",
           "position": [
-            5,
-            8
+            12.7,
+            -7.8
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51229,10 +51229,10 @@
           "artifact": "godel_statement_plaque",
           "station": "SE",
           "position": [
-            15,
-            8
+            14.0,
+            4.6
           ],
-          "facing": 180,
+          "facing": 270,
           "height": 1.2,
           "scale": 1,
           "config": {}
@@ -51255,10 +51255,10 @@
           "artifact": "incompleteness_tower",
           "station": "SE",
           "position": [
-            0,
-            12
+            -17.0,
+            -6.0
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 1,
           "scale": 1,
           "config": {}
@@ -51349,6 +51349,22 @@
             "tall": 1.3,
             "fit_width": 8.5,
             "editor_label": "PROVABLE in standing red letters | the other word; on the east wing, facing TRUE across the floor"
+          }
+        },
+        {
+          "id": "gap-moves-up",
+          "artifact": "gap_moves_up",
+          "station": "NW",
+          "position": [
+            -12.7,
+            -4.35
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "planks": "none",
+            "editor_label": "Lay the missing plank | four rising landings round the tower; a plate lays the planks across each gap and the next gap is one level up; the fourth ends at tape"
           }
         }
       ],

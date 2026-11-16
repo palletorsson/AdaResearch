@@ -95,10 +95,10 @@
       "title": "4  HOW A SENTENCE GETS TO TALK ABOUT ITSELF",
       "by": "f2_godel_statement_plaque_4_10",
       "at": [
-        12.3,
-        6.1
+        12.6,
+        6.6
       ],
-      "yaw": -50,
+      "yaw": -90,
       "front": [
         "Step 1. Give every symbol a number, so every formula and every proof is a number.",
         "Step 2. 'p is a proof of f' is then a relation between two numbers - and it is ARITHMETIC. The theory can state it.",
@@ -139,12 +139,12 @@
       "title": "6  ADD IT AS AN AXIOM? THE GAP MOVES UP",
       "by": "f2_incompleteness_tower_9_11",
       "at": [
-        -2.7,
-        8.4
+        -9.4,
+        -6.6
       ],
-      "yaw": 105,
+      "yaw": 100,
       "front": [
-        "Turn round. The tower is behind you.",
+        "The tower stands ahead of me, inside the wooden stair built round it.",
         "Obvious repair: G is true, so add G as an axiom.",
         "The new theory still meets (a), (b), (c). So it has its own G. Add that. Again.",
         "Each platform holds what the one below could not prove.",
@@ -182,10 +182,10 @@
       "title": "8  WHAT CHECKING CAN STILL DO (THIS ONE IS ABOUT ME)",
       "by": "f2_critic_regress_stack_10_3",
       "at": [
-        -3.2,
-        -5.3
+        6.3,
+        -6.2
       ],
-      "yaw": 20,
+      "yaw": 0,
       "front": [
         "Four small works. Rice: no general test for what a program DOES - but this program, this property, often yes.",
         "A gauge: its green means something only after I have seen it go red.",
@@ -636,32 +636,36 @@
       "id": "gap_moves_up",
       "title": "LAY THE MISSING PLANK",
       "at": [
-        -9.6,
-        -4.8
+        -17.0,
+        -6.0
       ],
       "size": [
-        4.6,
-        3.4
+        6.6,
+        4.6
       ],
       "claim": "Adding what was missing makes a new level with something missing.",
       "from_the_hall": "The tower: 'Adding the sentence moves the gap up. It does not close it.'",
       "built_from": [
-        "construction_cube and wp (three landings, as on the connectivity floor)",
-        "timber_plank_2m (the missing piece)",
-        "pentagonal_bipyramid_7 (the sentence that cannot be reached from below)"
+        "timber_panel_2x2 (four landings at the corners of a square, half a metre apart in height, and a shelf above the first)",
+        "timber_plank_2m (the planks that are laid across a gap, four abreast; the rails)",
+        "stringers and posts (what stands across a gap before its planks do)",
+        "pentagonal_bipyramid_7 (the sentence across each gap; the fourth on the shelf)",
+        "a bar with a board across each gap, tape across the last",
+        "a stand in the well of the square, a reading board and the plate START AGAIN by the foot of the ramp"
       ],
-      "what_stands": "A landing with a gap in its floor and, across the gap, a crystal. A plate lays the plank. Crossing it brings you onto the next landing: another gap, another crystal.",
-      "what_you_do": "Lay the plank and cross, three times. The third landing ends at tape: the tower goes on, the floor does not.",
-      "what_it_shows": "The repair is real each time and never the last. That is what 'no rule lists all the truths' feels like in the legs.",
+      "what_stands": "A square stair of four landings round the incompleteness tower itself, in the north-west of the floor: a ramp from the floor to the first landing, T, then three gaps where the rails and stringers stand and the planks do not. Across each gap, on the next landing, a crystal: a sentence true up there and not reachable from here. The fourth landing, two metres up, ends at tape; the next crystal stands on a shelf straight above the first landing.",
+      "what_you_do": "Walk up to T. The bar across the gap says G0 is true up there and no planks lead to it from T. Stand on ADD IT: the planks are laid, G0 is an axiom now, and you walk up to T + G0, where there is another gap and G1. Three times. On the fourth landing the stand says the tower goes on and the floor does not. It counts planks laid, and gaps open: always one.",
+      "what_it_shows": "The repair is real each time and never the last. After one turn of the tower the gap is where it was, one level up: straight above the place the walk began.",
       "form": "playground",
-      "status": "written"
+      "status": "standing: row gap-moves-up",
+      "measured": "Walked by the tower's own walker (tools/probes/gap_moves_up_walk.gd, seven checks): the landings stand 0.50, 1.00, 1.50 and 2.00 m above the floor; without planks the walker is held at the bar; with three sets laid it reaches the fourth landing and is held by the tape; gaps open reads 1 at every stage; it walks down again to the floor."
     }
   ],
   "open": [
     "Plate 4 step 4 (the fixed point) is said, not carried out. A visual argument for it would have to be honest about that.",
     "Plate 5's last line states the second incompleteness theorem without an argument.",
     "Plate 10 states Tarski's undefinability of truth as a known result; I have not worked it through on cardboard.",
-    "The tower stands behind the arrival, off the main slab; plate 6 tells the visitor to turn round. Whether that works has to be judged standing there."
+    "The tower now floats in the well of the wooden stair built round it; whether it reads from the landings, or is hidden by the rails, has to be judged standing there."
   ],
   "hanging_board": {
     "note": "The hall's new stickers on a board with depth, in the sticker app's own medium (commons/data/stickers; laid through its ops by tools/arguments_stickers.ts, drawn in VR by sticker_board, on the web at /stickers?board=arg_godel). Near the cork: what the hall text says. In front: what I made of it. A red thread: how one led to the other.",
