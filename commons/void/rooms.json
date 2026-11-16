@@ -55603,6 +55603,78 @@
             "keeps": "path",
             "editor_label": "Two arrivals | a line from START to END; the last two walks kept in blue and amber; a stand reads them as a destination and as a path; a plate chooses what is kept; three words for a note"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            6.4,
+            7.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "PostCrisis_Synthesis",
+            "stands_at": [
+              6.4,
+              7.9
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the two bodies and the ledger to the line that keeps a walk; the last plate stands behind the arrival"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_postcrisis",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_postcrisis)"
+          }
+        },
+        {
+          "id": "word-arrived",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "ARRIVED",
+            "tall": 1.2,
+            "fit_width": 6.0,
+            "editor_label": "ARRIVED in standing red letters | what the record keeps of the hand; on the west wing, facing MISSING across the floor"
+          }
+        },
+        {
+          "id": "word-missing",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "MISSING",
+            "tall": 1.2,
+            "fit_width": 6.0,
+            "editor_label": "MISSING in standing red letters | what it does not; on the east wing"
+          }
         }
       ],
       "props": [],
