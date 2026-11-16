@@ -10,6 +10,12 @@ extends Node
 ## Then, still in black, the crate lands: a rumble that rises, the blow, boards that rattle and settle. The veil
 ## lifts while the rattle dies away, and what is seen first is the inside of the crate.
 ##
+## ON THE HEADSET the first build of this stayed black for good: the body there is the XR rig's, which has no
+## `scripted_input`, and bool(null) is a script error - every frame, before the lift and before the give-up. It had
+## only been run on the desktop. So: the walker test reads that property without assuming it is there; a timer
+## that does not pass through _process clears the black whatever happens; the XR rig is run by the probe (--xr);
+## and each stage prints a line to the log ([opening]), which is what the headset can be asked afterwards.
+##
 ## Only at a start on the roof with an arrival crate. Not after a fall or a retry: this node is made once, by the
 ## game's _ready, and frees itself. If the visitor is never found inside the crate the veil lifts anyway after
 ## GIVE_UP seconds, without the sound: nobody is left in the dark. Under a scripted walker (a probe's
@@ -20,6 +26,8 @@ const IMPACT_AT := 0.55                   # seconds into the sound at which the 
 const HOLD_AFTER_IMPACT := 0.7            # still black, hearing it
 const LIFT_SECONDS := 2.4
 const GIVE_UP := 10.0
+const DRESS_WAIT := 4.0                   # after this the roof's rows are no longer waited for
+const FADER := "opening"                # this node's own layer on the XR rig's fade
 const SOUND_SECONDS := 3.0
 const RATE := 22050
 
@@ -35,6 +43,7 @@ var since_landed := 0.0
 var lifted := 0.0
 var sound: AudioStreamPlayer
 var forced := false
+var told := -1
 var report := {"seen_outside_while_black": false, "inside_when_landed": false, "crate_closed_when_landed": false, "gave_up": false, "scripted": false, "waited_s": 0.0, "sound_played": false}
 
 
@@ -73,6 +82,10 @@ func _ready() -> void:
 	layer.add_child(sheet)
 	game.set_meta("opening", self)
 	_hang()
+	_shade(1.0)
+	# whatever happens in _process, nobody is left in the dark
+	get_tree().create_timer(GIVE_UP + LIFT_SECONDS + 4.0, true).timeout.connect(_rescue)
+	print("[opening] black from the first frame; camera %s" % str(get_viewport().get_camera_3d()))
 
 
 ## A start on the roof, where an arrival crate stands.
@@ -106,9 +119,27 @@ func _find_crate() -> Node3D:
 	return null
 
 
+## The staging's own camera has the XR rig's fade in front of it: hold that black too, on a layer of this node's.
+func _shade(alpha: float) -> void:
+	XRToolsFade.set_fade(FADER, Color(0, 0, 0, alpha))
+
+
+func _rescue() -> void:
+	if veil == null: return
+	print("[opening] RESCUED by the timer at stage %s after %.1f s: the black is cleared" % [stage, waited])
+	report.gave_up = true
+	_done()
+
+
+## A probe's walker says so itself. The XR rig's body has no such property: null, and not an error.
+static func scripted(body: Variant) -> bool:
+	return body is Object and is_instance_valid(body) and (body as Object).get("scripted_input") == true
+
+
 ## Has everything that stands on the roof been stood there? What is in the crate with the visitor should not
-## arrive after the veil has lifted.
+## arrive after the veil has lifted. Not waited for beyond DRESS_WAIT seconds.
 func _dressed() -> bool:
+	if waited > DRESS_WAIT: return true
 	var content: Object = game.get("building").get("content")
 	var exhibits: Dictionary = content.get("exhibits")
 	for item in content.get("data").get("floors")[0].get("artifacts", []):
@@ -141,8 +172,12 @@ func _process(delta: float) -> void:
 	match stage:
 		"waiting":
 			waited += delta
-			var body: Variant = game.get("body")
-			if not forced and body != null and bool(body.get("scripted_input")):
+			if int(waited) != told:
+				told = int(waited)
+				var active := get_viewport().get_camera_3d()
+				print("[opening] waiting %d s: ready %s, roof dressed %s, crate %s, camera inside %s, steady %d" % [told, str(game.get("ready_for_play")), str(_dressed()), str(crate != null and is_instance_valid(crate)),
+					str(crate != null and is_instance_valid(crate) and active != null and bool(crate.call("inside", active.global_position))), steady])
+			if not forced and scripted(game.get("body")):
 				report.scripted = true
 				_done()
 				return
@@ -151,12 +186,14 @@ func _process(delta: float) -> void:
 				report.crate_closed_when_landed = not bool(crate.get("broken"))
 				report.waited_s = waited
 				stage = "landed"
+				print("[opening] inside the crate after %.2f s (closed: %s): it lands" % [waited, str(report.crate_closed_when_landed)])
 				if report.crate_closed_when_landed: _land()
 				else: since_landed = IMPACT_AT + HOLD_AFTER_IMPACT      # an opened crate has already landed: no sound
 			elif waited > GIVE_UP:
 				report.gave_up = true
 				report.waited_s = waited
 				stage = "lifting"
+				print("[opening] GAVE UP after %.1f s: the visitor was not found inside the crate; lifting without the sound" % waited)
 		"landed":
 			since_landed += delta
 			if since_landed >= IMPACT_AT + HOLD_AFTER_IMPACT: stage = "lifting"
@@ -166,10 +203,13 @@ func _process(delta: float) -> void:
 			var alpha := 1.0 - t * t * (3.0 - 2.0 * t)
 			paint.albedo_color.a = alpha
 			sheet.color.a = alpha
+			_shade(alpha)
 			if t >= 1.0: _done()
 
 
 func _done() -> void:
+	_shade(0.0)
+	print("[opening] lifted: %s" % str(report))
 	game.set_meta("opening_report", report.duplicate())
 	game.remove_meta("opening")
 	if veil.get_parent() != null: veil.get_parent().remove_child(veil)
@@ -180,6 +220,10 @@ func _done() -> void:
 		sound.reparent(game)
 		sound.finished.connect(sound.queue_free)
 	queue_free()
+
+
+func _exit_tree() -> void:
+	XRToolsFade.set_fade(FADER, Color(0, 0, 0, 0))
 
 
 ## How black it is: 1 black, 0 lifted. For a test.

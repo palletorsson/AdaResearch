@@ -7,7 +7,7 @@ extends Node3D
 ## front, and in it three more bodies of the same model, strapped in their bays, tagged, and not awake. Nothing
 ## happens here. They are what the visitor was a minute ago.
 ##
-## The bodies are the visitor's own body (commons/void/ada_android.gd), unpainted and with nothing lit. That
+## The bodies are the visitor's own body (commons/void/ada_android.gd) in the same grey suit, with nothing lit. That
 ## script is looked for when the crate is built; where it is absent a plain packed figure stands in each bay.
 ##
 ## `face` is the axis: slatted (the three are seen between the boards), closed (a crate like any other: the
@@ -171,7 +171,7 @@ func _unit() -> Node3D:
 		if script != null:
 			var body := script.new() as Node3D
 			if body != null and body.has_method("assemble"):
-				body.call("assemble", 1, false, false)
+				body.call("assemble", 1, false, true)          # with the knit: the grey suit the visitor's own body wears
 				var lit: Variant = body.get("_pink")
 				if lit is StandardMaterial3D:
 					(lit as StandardMaterial3D).emission_enabled = false

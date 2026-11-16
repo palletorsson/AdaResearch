@@ -15,6 +15,8 @@ extends SceneTree
 ##
 ##   godot --path <stage> --script res://tools/probes/void_opening.gd -- --no-bridges --void-start-floor=0
 ##       --opening --out=<dir>
+## With --xr the game is built with the XR rig (no headset): the walker test on a body that has no
+## `scripted_input`, the first frame black, and the black ending by itself. The headset's first build failed there.
 ##
 ## opening.json: checks with what was read. first.png, outside.png, landed.png, lifting.png, inside.png.
 var game: Node3D
@@ -65,14 +67,47 @@ func _black() -> float:
 	return float(opening.blackness()) if opening != null and is_instance_valid(opening) else 0.0
 
 
+## The XR rig, without a headset: the body is the rig's own, which has no `scripted_input`. The first headset
+## build stayed black for good on exactly that. No pose here, so the camera may never be inside the crate: what is
+## asked is that nothing errors and the black always ends.
+func _xr_run(checks: Array) -> void:
+	result = {"floor": int(game.checkpoint), "xr": true, "checks": checks, "passed": false}
+	var Opening: GDScript = load("res://commons/void/opening.gd")
+	var plain := Node3D.new()
+	checks.append({"check": "the walker test on a body without `scripted_input` is false, and no error; on a null, false", "ok": Opening.scripted(plain) == false and Opening.scripted(null) == false
+		and not ("scripted_input" in game.body), "the_rig_body_has_the_property": "scripted_input" in game.body, "body": str(game.body.get_class())})
+	plain.free()
+	var first: float = await _look("first.png")
+	checks.append({"check": "the first frame drawn is black", "ok": game.has_meta("opening") and first < 0.01, "picture_brightness": snappedf(first, 0.0001)})
+	_save()
+	game.scene_loaded(); game.scene_visible()
+	var seconds := 0.0
+	while seconds < 22.0 and game.has_meta("opening"):
+		await process_frame
+		seconds += root.get_process_delta_time()
+	var report: Dictionary = game.get_meta("opening_report", {})
+	var after: float = await _look("after.png")
+	checks.append({"check": "with the XR rig the black always ends: lifted within the give-up time, by the opening itself and not by the timer", "ok": not game.has_meta("opening") and seconds < 16.0 and not report.is_empty()
+		and after > 0.01, "ended_after_s": snappedf(seconds, 0.1), "report": report, "picture_brightness_after": snappedf(after, 0.0001)})
+	result["passed"] = checks.all(func(c): return c.ok)
+	_save()
+	print("[void_opening --xr] ", "PASSED" if result.passed else "FAILED")
+	quit()
+
+
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="): folder = arg.trim_prefix("--out=")
 	DirAccess.make_dir_recursive_absolute(folder)
 	load("res://commons/void/room_source.gd").use_main_tower = true
 	game = load("res://commons/void/void.tscn").instantiate()
+	var xr: bool = OS.get_cmdline_user_args().has("--xr")
+	game.force_xr = xr
 	root.add_child(game); current_scene = game
 	var checks := []
+	if xr:
+		await _xr_run(checks)
+		return
 	result = {"floor": int(game.checkpoint), "checks": checks, "passed": false}
 	var opening: Variant = game.get_meta("opening", null)
 	var first: float = await _look("first.png")
