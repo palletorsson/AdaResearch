@@ -50076,10 +50076,10 @@
           "artifact": "enhanced_kmeans",
           "station": "NW",
           "position": [
-            -10.0,
-            -6.5
+            0,
+            3.0
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0.65,
           "scale": 0.2,
           "config": {
@@ -50125,10 +50125,10 @@
           "artifact": "random_forest_visualization",
           "station": "SE",
           "position": [
-            0.0,
-            0.5
+            -17,
+            0
           ],
-          "facing": 180,
+          "facing": 90,
           "height": 2.4,
           "scale": 0.6,
           "config": {
@@ -50144,6 +50144,22 @@
               ],
               "note": "fit pass: edge: south 5.0 m (2 of 10 samples past the slab have ground; moved 7.5 m"
             }
+          }
+        },
+        {
+          "id": "fourth-centre",
+          "artifact": "fourth_centre",
+          "station": "NW",
+          "position": [
+            0,
+            -3.7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "cohort": "blobs",
+            "editor_label": "You are the fourth centre | crates, cones and balls that do not move; three posts and the visitor are the centres; stand still and each thing is given to its nearest"
           }
         }
       ],

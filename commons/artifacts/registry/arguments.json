@@ -1652,6 +1652,50 @@
           "arithmetic": "Found with nobody on the field, the candidate is the tutorial's start. Long against short lengthens three arrows 7 cm wide from 0.5 to 1.2 times their gradient (at the start about 2.3, 0.5 and 1.5 m more of shaft, less where the field ends: 0.25 m2 on the floor), moves three discs and their labels, turns one plate tile yellow (0.7 m2 on the floor, about 0.2 m2 seen) and changes two lines on the stand. On a subject of some 60 m2 of frame: about 0.4 m2: 0.7 %. Outlier off against on lifts one ball and its post 2.4 m (0.1 m2), lengthens one red stick, and changes three bars by up to a metre: about 0.6 m2: 1 %."
         }
       }
+    },
+    "fourth_centre": {
+      "lookup_name": "fourth_centre",
+      "map_ready": true,
+      "name": "You Are The Fourth Centre",
+      "class_name": "",
+      "scene": "res://commons/artifacts/fourth_centre/fourth_centre.tscn",
+      "description": "A playground for the classification hall: its tutorial table with the body as the centre that is moved. The tutorial's own observations stand on a field as crates, cones and balls that do not move; three centres are posts and the fourth is the visitor. Moving clears the colours; standing still asks for an assignment, each thing to its nearest centre with a line to it, and a stand counts how many changed group without moving. MEANS sends the three posts to the mean of their things and lays a disc at the mean of the visitor's. The things are of three kinds and the rule never looks at the kind. DATASET changes the sample. Axis cohort: blobs, rings, block.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "machinelearning",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "k-means",
+        "clustering",
+        "centre",
+        "assignment",
+        "boundary",
+        "playground",
+        "visual-argument",
+        "machine-learning"
+      ],
+      "qfep_connection": "A thing changes group when a centre moves, not when it does; the boundary belongs to the meeting of the things and the centres, and the rule that draws it never asks what a thing is.",
+      "dev_themes": [
+        "measurement",
+        "categories",
+        "learning"
+      ],
+      "dna": {
+        "axes": {
+          "cohort": [
+            "blobs",
+            "rings",
+            "block"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "cohort: rings ~ block",
+          "percent": 1.5,
+          "arithmetic": "Rings and block both spread their things over the whole field (24 and 25 things about 0.3 m across, discs 0.54 m across, lines to four posts); blobs gathers 12 in three heaps. Between rings and block every thing moves, but the cover is alike: some 25 discs of 0.23 m2 and 25 small objects moved by under a metre each, half of them landing on ground another had: about 3 m2 changed on the floor, a third of it seen at a slant, on a subject of some 65 m2 of frame: 1.5 %. Blobs against either takes away twelve things and their discs as well: about 3 %."
+        }
+      }
     }
   }
 }
