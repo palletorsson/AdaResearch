@@ -1111,6 +1111,50 @@
           "arithmetic": "Twenty-four posts, each 0.14 m wide and 1.3 m tall with a number above: about 0.25 m2 seen each. Between half and pressed the warm twelve move 0.9 m on average and close from 0.58 m apart to 0.21 (at pressed they overlap one another in the picture: perhaps 1.2 m2 of the 3 m2 they showed is lost behind another post), and the grey twelve move 0.2 to 0.6 m each (displaced, not hidden: each leaves and covers about 0.2 m2). On a subject of some 60 m2 of frame (the two fields, rail, stand, board): (1.2 + 12 x 0.2 x 2 x 0.3 seen as change) / 60: about 3 %. Open against half is the same grey movement and a warm movement of 0.9 m with no overlap: a little more."
         }
       }
+    },
+    "seat_you_take": {
+      "lookup_name": "seat_you_take",
+      "map_ready": true,
+      "name": "The Seat You Take",
+      "class_name": "",
+      "scene": "res://commons/artifacts/seat_you_take/seat_you_take.tscn",
+      "description": "A playground for the applied ethics hall: its two miniature seating plans at the size of a body, with the sightlines the hall says a future version could compare. A long table with a head seat and six along its sides; a round table with six seats on a ring. A seat faces another when the other lies within a turn of the neck either side of where the seat points. Tapes at eye height: red between two seats that face each other, a half tape from a seat that faces one that does not face it back. Standing on a seat's disc lights its own tapes and the stand says whom that seat faces and who faces it. NECK changes the turn (30, 60, 90 degrees); ANGLE THE CHAIRS turns the side seats toward the head. Every seat is empty: it counts where a neck can reach, not who is listened to. Axis neck: thirty, sixty, ninety.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "seating",
+        "sightline",
+        "participation",
+        "affordance",
+        "access",
+        "playground",
+        "visual-argument",
+        "ethics"
+      ],
+      "qfep_connection": "A plan distributes who can face whom before anyone speaks, and that distribution can be counted; the count changes with the body assumed, and every change gives one seat access by taking it from others.",
+      "dev_themes": [
+        "critical",
+        "design",
+        "participation"
+      ],
+      "dna": {
+        "axes": {
+          "neck": [
+            "thirty",
+            "sixty",
+            "ninety"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "neck: sixty ~ ninety",
+          "percent": 0.4,
+          "arithmetic": "The furniture does not move. What differs is tape at eye height, 12 mm wide. At sixty the long table shows 11 red pairs and 4 half tapes and the ring 15 red pairs; at ninety the table shows 21 red pairs and the ring the same 15. So ten pairs go from nothing or a half tape to a full red tape: about 10 x 1.6 m x 0.012 m = 0.19 m2 of tape, and two lines of figures on the stand. On a subject of some 50 m2 of frame: about 0.4 %. Thirty against sixty changes more (4 table pairs, 6 ring pairs and the head's four half tapes). The axis is thin in a still by its nature: it draws lines of sight."
+        }
+      }
     }
   }
 }
