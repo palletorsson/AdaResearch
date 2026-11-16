@@ -55374,6 +55374,78 @@
             "figure": "authored",
             "editor_label": "A joint more | the workshop's body drawn on the floor, 13 joints and 12 connections; stand still to plant a joint, hold one to choose its neighbour, join two; positions and neighbours counted apart"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            6.4,
+            7.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "AdvancedLaboratory_Lab_Equipment_Simulation",
+            "stands_at": [
+              6.4,
+              7.9
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the workshop of bodies along the south band to the figure on the west wing"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_labequip",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_labequip)"
+          }
+        },
+        {
+          "id": "word-position",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            -3.4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "POSITION",
+            "tall": 1.0,
+            "fit_width": 5.8,
+            "editor_label": "POSITION in standing red letters | one list of the description; on the east wing, beside NEIGHBOUR"
+          }
+        },
+        {
+          "id": "word-neighbour",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            3.4
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "NEIGHBOUR",
+            "tall": 1.0,
+            "fit_width": 5.8,
+            "editor_label": "NEIGHBOUR in standing red letters | the other list; on the east wing, beside POSITION"
+          }
         }
       ],
       "props": [],
