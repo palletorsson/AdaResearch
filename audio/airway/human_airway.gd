@@ -41,6 +41,8 @@ var seal_rate := 5.0
 var seal_lo := 0.03
 var seal_hi := 0.4
 var seal_ease := 0.03
+var _sinus := 0
+var _sinus_port := 0
 var _has_base := false
 var _base_ph := PackedFloat64Array()
 var _base_or := PackedFloat64Array()
@@ -93,8 +95,8 @@ func _init(fs: float, body: Variant, min_sections := 8) -> void:
 	# the piriform fossae branch off about 2.6 cm above the glottis
 	var fossa_node := net.node_of(pharynx, int(minf(float(n_ph - 1), _round((2.6 / 8.8) * float(n_ph)))))
 	net.connect_nodes(fossa_node, net.first_node(fossa))
-	var sinus := net.add_cavity("sinus", 14.0 * k * k * k)
-	net.add_port(net.node_of(nasal, int(_round(float(n_na) * 0.45))), sinus, 0.12 * k * k, 0.5 * k, 0.0, 0.0, 0.0, false)
+	_sinus = net.add_cavity("sinus", 14.0 * k * k * k)
+	_sinus_port = net.add_port(net.node_of(nasal, int(_round(float(n_na) * 0.45))), _sinus, 0.12 * k * k, 0.5 * k, 0.0, 0.0, 0.0, false)
 	net.add_radiation(net.last_node(oral))
 	net.add_radiation(net.last_node(nasal))
 	net.finalize()
@@ -107,6 +109,21 @@ func _init(fs: float, body: Variant, min_sections := 8) -> void:
 	ph_min.fill(0.0)
 	or_min.fill(0.0)
 	dx_stable = (Net.C_SOUND / fs) / 0.97
+
+
+## Once the network stands at its first posture: only the throat and the mouth change shape, and only the
+## glottis and the velum port change area, so everything else is worked out once; and the nose (with its
+## sinus) is left out of the stepping while the velum is shut and the nose is silent. Neither changes the
+## sound beyond the network's own silence.
+func settle() -> void:
+	net.freeze_static_nodes([pharynx, oral], [glottis_port, velum_port])
+	var nodes := PackedInt32Array()
+	var group := PackedInt32Array([velum_port, _sinus_port])
+	for i in net.tube_n[nasal]:
+		nodes.append(net.node_of(nasal, i))
+		if i < net.tube_n[nasal] - 1: group.append(net.tube_branch[nasal] + i)
+	nodes.append(_sinus)
+	net.set_sleep_group(nodes, group, velum_port)
 
 
 static func _round(x: float) -> float:

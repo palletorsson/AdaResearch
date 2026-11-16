@@ -29,7 +29,8 @@ var status: Label
 var singing_all: Array[String] = []
 var renderer := "model_b"
 var renderer_button: Button
-const RESTS := {"model_b": {"formant_ratio": 1.12, "transpose": 0.0, "gain": 1.0, "air": 0.62, "flow_sharpness": 0.45},
+const RESTS := {"airway": {"formant_ratio": 1.0, "transpose": 0.0, "gain": 1.0, "air": 0.62, "flow_sharpness": 0.45},
+	"model_b": {"formant_ratio": 1.12, "transpose": 0.0, "gain": 1.0, "air": 0.62, "flow_sharpness": 0.45},
 	"robot": {"formant_ratio": 1.0, "transpose": 0.0, "gain": 0.35, "air": 0.62, "flow_sharpness": 0.45}}
 var checking := false
 
@@ -67,6 +68,8 @@ func _ready() -> void:
 	voice.connect("failed", func(id, message): _tell("NOT SUNG  %s:  %s" % [id, message]))
 	var kept: Variant = JSON.parse_string(FileAccess.get_file_as_string(BINDINGS)) if FileAccess.file_exists(BINDINGS) else null
 	if kept is Dictionary and RESTS.has(str(kept.get("renderer", ""))): renderer = str(kept.renderer)
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--voice=") and RESTS.has(arg.trim_prefix("--voice=")): renderer = arg.trim_prefix("--voice=")
 	var settings := _kept_settings()
 	var number := 1
 	for group in SCORES:
@@ -148,6 +151,7 @@ func _show_settings() -> void:
 
 func _settings() -> Dictionary:
 	var out := {"formant_ratio": snappedf((sliders["formant_ratio"] as HSlider).value, 0.01), "transpose": (sliders["transpose"] as HSlider).value, "gain": snappedf((sliders["gain"] as HSlider).value, 0.01)}
+	if renderer == "airway": out.erase("formant_ratio")          # a body has its own size: only pitch and level are the bench's to change
 	if renderer == "model_b":
 		out["air"] = snappedf((sliders["air"] as HSlider).value, 0.01)
 		out["flow_sharpness"] = snappedf((sliders["flow_sharpness"] as HSlider).value, 0.01)
@@ -155,12 +159,13 @@ func _settings() -> Dictionary:
 
 
 func _name_voice() -> void:
-	renderer_button.text = "MODEL B  (learned from the engine)   -   click for ROBOT" if renderer == "model_b" else "ROBOT  (the kit's)   -   click for MODEL B"
+	renderer_button.text = {"airway": "AIRWAY  (the physical voice: lungs, folds, mouth; slow to make)   -   click for MODEL B",
+		"model_b": "MODEL B  (formant voice, quick)   -   click for ROBOT", "robot": "ROBOT  (the kit's)   -   click for AIRWAY"}[renderer]
 
 
 ## The other voice, at its own resting settings; everything is made again.
 func _other_voice() -> void:
-	renderer = "robot" if renderer == "model_b" else "model_b"
+	renderer = {"airway": "model_b", "model_b": "robot", "robot": "airway"}[renderer]
 	for key in sliders: (sliders[key] as HSlider).value = float(RESTS[renderer][key])
 	_name_voice()
 	_retune()
@@ -232,13 +237,20 @@ func _keep() -> void:
 		return
 	parsed["voice"] = _settings()
 	parsed["renderer"] = renderer
+	# the phrases as made now travel with the game, so a headset plays them without making them
+	var shipped := 0
+	DirAccess.make_dir_recursive_absolute("res://audio/voice_cache")
+	for id in buttons:
+		if not bool(voice.call("is_ready", id)): continue
+		var made: Variant = (voice.get("streams") as Dictionary).get(id)
+		if made is AudioStreamWAV and (made as AudioStreamWAV).save_to_wav("res://audio/voice_cache/" + str(voice.call("_key", id)) + ".wav") == OK: shipped += 1
 	var file := FileAccess.open(BINDINGS, FileAccess.WRITE)
 	if file == null:
 		_tell("the tower's bindings file cannot be written here")
 		return
 	file.store_string(JSON.stringify(parsed, "  ") + "\n")
 	file.close()
-	_tell("kept for the tower:  %s  %s" % [renderer, str(_settings())])
+	_tell("kept for the tower:  %s  %s   (%d phrases as made now travel with the game)" % [renderer, str(_settings()), shipped])
 
 
 func _report() -> void:

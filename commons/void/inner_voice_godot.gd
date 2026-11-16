@@ -24,12 +24,18 @@ signal finished(object_id: String)
 signal failed(object_id: String, message: String)
 signal rendered(object_id: String, seconds: float, from_cache: bool)
 
-## Two renderers, both GDScript: `model_b` (audio/generators/ModelBVoice.gd: the voice learned from the Rust engine's
-## source and tuned against the recordings of the approved voice) and `robot` (the kit's RobotVoiceGenerator.gd).
-const RENDERERS := {"model_b": preload("res://audio/generators/ModelBVoice.gd"), "robot": preload("res://audio/generators/RobotVoiceGenerator.gd")}
-const VERSION := "gd-2"
+## Three renderers, all GDScript: `airway` (audio/generators/AirwayVoice.gd: the physical voice, lungs and folds and a
+## moving mouth; it is the voice that was approved, and slow to make), `model_b` (audio/generators/ModelBVoice.gd: a
+## formant voice tuned against the recordings of the approved voice, quick) and `robot` (the kit's
+## RobotVoiceGenerator.gd).
+const RENDERERS := {"airway": preload("res://audio/generators/AirwayVoice.gd"), "model_b": preload("res://audio/generators/ModelBVoice.gd"),
+	"robot": preload("res://audio/generators/RobotVoiceGenerator.gd")}
+const VERSION := "gd-3"
 const RATE := 44100
 const CACHE := "user://inner_voice/"
+## Renders that travel with the game (made on a PC by the bench's KEEP, as .wav so an export carries them): looked in
+## first, so a headset need not make a phrase the slow voice takes minutes over.
+const SHIPPED := "res://audio/voice_cache/"
 const LATE := 2.5
 
 @export var volume_db := -6.0
@@ -168,10 +174,20 @@ func _key(object_id: String) -> String:
 
 func _want_rendered(object_id: String) -> void:
 	if streams.has(object_id) or _line.has(object_id) or _task_for == object_id: return
-	var kept := CACHE + _key(object_id) + ".s16"
-	if FileAccess.file_exists(kept):
+	var shipped := SHIPPED + _key(object_id) + ".wav"
+	if ResourceLoader.exists(shipped):
+		var made: Resource = load(shipped)
+		if made is AudioStream:
+			streams[object_id] = made
+			costs[object_id] = {"seconds": 0.0, "cached": true, "shipped": true, "length_s": (made as AudioStream).get_length()}
+			rendered.emit(object_id, 0.0, true)
+			return
+	for folder in [CACHE]:
+		var kept := str(folder) + _key(object_id) + ".s16"
+		if not FileAccess.file_exists(kept): continue
 		var bytes := FileAccess.get_file_as_bytes(kept)
-		if bytes.size() == int(phrases[object_id].voice_plan.frames) * 2:
+		# a render is at least the phrase long (the airway voice adds a lead and a release)
+		if bytes.size() >= int(phrases[object_id].voice_plan.frames) * 2 and bytes.size() % 2 == 0:
 			_keep(object_id, bytes, 0.0, true)
 			return
 	_line.append(object_id)

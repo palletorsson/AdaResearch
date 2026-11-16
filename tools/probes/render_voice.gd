@@ -3,7 +3,7 @@ extends SceneTree
 ## or listened to. Nothing is played.
 ##
 ##   godot --headless --audio-driver Dummy --path . --script res://tools/probes/render_voice.gd --
-##       --score=res://audio/voice_scores/chimera_inner_opera_20261116.json --renderer=robot|model_b
+##       --score=res://audio/voice_scores/chimera_inner_opera_20261116.json --renderer=robot|model_b|airway [--only=<object_id>]
 ##       --out=<dir> [--options={"formant_ratio":1.12}]
 ##
 ## <dir>/<object_id>.wav (16-bit mono 44.1 kHz) and <dir>/render.json: per phrase the seconds it took, its length,
@@ -12,17 +12,20 @@ func _initialize() -> void:
 	var score := ""
 	var which := "model_b"
 	var out := ""
+	var only := ""
 	var options := {}
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--score="): score = arg.trim_prefix("--score=")
 		if arg.begins_with("--renderer="): which = arg.trim_prefix("--renderer=")
 		if arg.begins_with("--out="): out = arg.trim_prefix("--out=")
+		if arg.begins_with("--only="): only = arg.trim_prefix("--only=")
 		if arg.begins_with("--options="): options = JSON.parse_string(arg.trim_prefix("--options="))
 	DirAccess.make_dir_recursive_absolute(out)
-	var renderer: GDScript = load("res://audio/generators/RobotVoiceGenerator.gd" if which == "robot" else "res://audio/generators/ModelBVoice.gd")
+	var renderer: GDScript = load({"robot": "res://audio/generators/RobotVoiceGenerator.gd", "airway": "res://audio/generators/AirwayVoice.gd"}.get(which, "res://audio/generators/ModelBVoice.gd"))
 	var parsed: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(score))
 	var report := {"renderer": which, "options": options, "phrases": {}}
 	for phrase in parsed.phrases:
+		if only != "" and str(phrase.object_id) != only: continue
 		var began := Time.get_ticks_msec()
 		var pcm: PackedFloat32Array = renderer.render_phrase(phrase.voice_plan, options)
 		var seconds := float(Time.get_ticks_msec() - began) / 1000.0

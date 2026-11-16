@@ -322,6 +322,7 @@ func _init(rate: float, body: Variant = "male", oversample := 0, min_sections :=
 	target[Tract.TT_Y] = tip[1]
 	airway.apply(x, 0.0)
 	airway.net.snap_to_targets()
+	airway.settle()
 	# smaller bodies radiate more high-frequency energy at their higher pitch
 	var sc := airway.body_scale
 	if sc >= 1.0: pass

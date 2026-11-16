@@ -88,6 +88,25 @@ var rad_of := PackedInt32Array()
 var moving := PackedInt32Array()
 var walled := PackedInt32Array()
 var free_nodes := PackedInt32Array()
+var vol_nodes := PackedInt32Array()
+var branches := PackedInt32Array()
+## Branches whose inertance, resistance and losses never change (both ends keep their shape): worked out once.
+var b_static := PackedByteArray()
+var sb_l := PackedFloat64Array()
+var sb_r := PackedFloat64Array()
+var sb_kf := PackedFloat64Array()
+var sb_kb := PackedFloat64Array()
+## Set when something outside adds flow at nodes through `ext_flow`.
+var use_ext_flow := false
+## A part of the network behind a port (the nose behind the velum) that is left out of the stepping while
+## the port is shut and the part is silent: see `set_sleep_group`.
+var asleep := false
+var _sleep_nodes := PackedInt32Array()
+var _sleep_branches := PackedInt32Array()
+var _sleep_mask := PackedByteArray()
+var _sleep_gate := -1
+var _lists_awake: Array = []
+var _lists_asleep: Array = []
 
 var n_branches := 0
 var b_a := PackedInt32Array()
@@ -297,12 +316,23 @@ func finalize() -> void:
 	moving.clear()
 	walled.clear()
 	free_nodes.clear()
+	vol_nodes.clear()
+	branches.clear()
+	b_static = _bytes(b)
+	sb_l = _zeros(b)
+	sb_r = _zeros(b)
+	sb_kf = _zeros(b)
+	sb_kb = _zeros(b)
+	_sleep_mask = _bytes(n)
+	for j in b: branches.append(j)
 	for k in n:
 		vol[k] = maxf(area[k], min_node_area) * dx[k]
 		inv_a[k] = 1.0 / maxf(area[k], 1e-6)
 		moving.append(k)
+		vol_nodes.append(k)
 		if has_wall[k] == 1: walled.append(k)
 		if fixed[k] == 0: free_nodes.append(k)
+	_lists_awake = [walled, free_nodes, vol_nodes, branches]
 
 
 ## Courant number of the shortest section that is not a given pressure.
@@ -313,10 +343,10 @@ func check_cfl() -> float:
 	return (C_SOUND * t) / min_dx
 
 
-## From now on only these tubes' sections change shape; every other node keeps the geometry it has
-## (its per-sample terms are worked out here, once). Exactly what the full loop computes for a node whose
-## steps are zero, so the sound is the same.
-func freeze_static_nodes(moving_tubes: Array) -> void:
+## From now on only these tubes change shape and only these ports change area; every other node and
+## branch keeps the geometry it has, and its per-sample terms are worked out here, once. They are exactly
+## what the full loops compute for a node or branch whose steps are zero, so the sound is the same.
+func freeze_static_nodes(moving_tubes: Array, moving_ports: Array) -> void:
 	moving.clear()
 	var is_moving := _bytes(n_nodes)
 	for tube in moving_tubes:
@@ -335,6 +365,115 @@ func freeze_static_nodes(moving_tubes: Array) -> void:
 		half_l[k] = dx[k] * ia
 		half_r[k] = wall_perim[k] * dx[k] * sa * ia * ia * visc_f[k]
 		vol[k] = (a if a > min_node_area else min_node_area) * dx[k]
+	# the volume the moving walls displace reaches only the moving nodes and their neighbours
+	var reached := is_moving.duplicate()
+	for j in n_branches:
+		if is_moving[b_a[j]] == 1: reached[b_b[j]] = 1
+		if is_moving[b_b[j]] == 1: reached[b_a[j]] = 1
+	vol_nodes.clear()
+	for k in n_nodes:
+		if reached[k] == 1: vol_nodes.append(k)
+	var visc := sqrt((RHO * MU * viscous_omega) / 2.0) * viscous_scale
+	var half_rho := 0.5 * RHO
+	for j in n_branches:
+		var a := b_a[j]
+		var b := b_b[j]
+		b_static[j] = 0
+		if is_moving[a] == 1 or is_moving[b] == 1 or moving_ports.has(j): continue
+		var kf := 0.0
+		var kb := 0.0
+		if b_kind[j] == KIND_SERIES:
+			var a_eff := minf(amin[a], amin[b])
+			if minf(area[a], area[b]) < closed_area or a_eff < closed_area: continue
+			sb_l[j] = half_rho * (half_l[a] + half_l[b])
+			sb_r[j] = 0.5 * visc * (half_r[a] + half_r[b])
+			var ef := inv_amin[a] - inv_a[b]
+			var eb := inv_amin[b] - inv_a[a]
+			if ef > 0.0:
+				kf = half_rho * ef * ef
+				kb += 0.1 * half_rho * ef * ef
+			if eb > 0.0:
+				kb += half_rho * eb * eb
+				kf += 0.1 * half_rho * eb * eb
+			branch_area[j] = a_eff
+		else:
+			var ap := port_area[j]
+			if ap < closed_area or port_area_step[j] != 0.0 or port_area_target[j] != ap: continue
+			var ip := 1.0 / ap
+			var l := RHO * port_len[j] * ip
+			if port_half[j] == 1: l += half_rho * (half_l[a] + half_l[b])
+			sb_l[j] = l
+			var w := port_slit[j]
+			var r := (12.0 * MU * port_len[j] * w * w) * ip * ip * ip if w > 0.0 else visc * 2.0 * sqrt(PI) * port_len[j] * sqrt(ap) * ip * ip
+			sb_r[j] = r + port_extra_r[j]
+			var ex_f := ip - inv_a[b]
+			var ex_b := ip - inv_a[a]
+			var kin := port_kin[j] * half_rho * ip * ip
+			kf = kin + port_kex[j] * half_rho * (ex_f * ex_f if ex_f > 0.0 else 0.0)
+			kb = kin + port_kex[j] * half_rho * (ex_b * ex_b if ex_b > 0.0 else 0.0)
+			branch_area[j] = ap
+		sb_kf[j] = kf
+		sb_kb[j] = kb
+		b_static[j] = 1
+	_lists_awake = [walled, free_nodes, vol_nodes, branches]
+	if _sleep_gate >= 0: set_sleep_group(_sleep_nodes, _sleep_branches, _sleep_gate)
+
+
+## A part of the network (these nodes and branches) that hangs on the rest only through the port `gate`.
+## While that port is shut and the part has fallen silent (below 1e-9, the network's own silence), its
+## states are set to nothing and it is left out of the stepping; it is taken up again when the port is told
+## to open, or when a squeezed neighbour pushes air into it.
+func set_sleep_group(nodes: PackedInt32Array, group_branches: PackedInt32Array, gate: int) -> void:
+	_sleep_nodes = nodes
+	_sleep_branches = group_branches
+	_sleep_gate = gate
+	_sleep_mask.fill(0)
+	for k in nodes: _sleep_mask[k] = 1
+	var skip := _bytes(n_branches)
+	for j in group_branches: skip[j] = 1
+	var lists: Array = []
+	for list: PackedInt32Array in [walled, free_nodes, vol_nodes]:
+		var kept := PackedInt32Array()
+		for k in list:
+			if _sleep_mask[k] == 0: kept.append(k)
+		lists.append(kept)
+	var kept_branches := PackedInt32Array()
+	for j in branches:
+		if skip[j] == 0: kept_branches.append(j)
+	lists.append(kept_branches)
+	_lists_asleep = lists
+	asleep = false
+
+
+func _consider_sleep() -> void:
+	var gate := _sleep_gate
+	var shut := port_area_target[gate] < closed_area
+	if asleep:
+		if not shut: asleep = false
+		return
+	if not shut or absf(port_area[gate] - port_area_target[gate]) > 1e-12: return
+	var loudest := 0.0
+	for k in _sleep_nodes:
+		loudest = maxf(loudest, maxf(maxf(absf(p[k]), absf(wall_v[k])), maxf(maxf(absf(vol_src1[k]), absf(vol_src2[k])), absf(wall_y[k]) * 1e3)))
+		if rad_of[k] >= 0: loudest = maxf(loudest, absf(rad_ul[rad_of[k]]))
+	for j in _sleep_branches: loudest = maxf(loudest, maxf(absf(u[j]), absf(mom[j])))
+	if loudest >= 1e-9: return
+	for k in _sleep_nodes:
+		p[k] = 0.0
+		wall_v[k] = 0.0
+		wall_y[k] = 0.0
+		wall_u[k] = 0.0
+		vol_src1[k] = 0.0
+		vol_src2[k] = 0.0
+		if rad_of[k] >= 0:
+			rad_ul[rad_of[k]] = 0.0
+			rad_u[rad_of[k]] = 0.0
+	for j in _sleep_branches:
+		u[j] = 0.0
+		mom[j] = 0.0
+	port_area[gate] = port_area_target[gate]
+	port_area_step[gate] = 0.0
+	asleep = true
 
 
 # ---------------------------------------------------------------- control rate
@@ -401,6 +540,7 @@ func begin_block(samples: int) -> void:
 	for j in n_branches:
 		if b_kind[j] == KIND_PORT: port_area_step[j] = (port_area_target[j] - port_area[j]) * inv
 	_flush_tiny()
+	if _sleep_gate >= 0: _consider_sleep()
 
 
 func _flush_tiny() -> void:
@@ -504,9 +644,13 @@ func step() -> float:
 	var vol_on := enable_volume_source
 	if vol_on: inj.fill(0.0)
 	a_inv_lsum.fill(0.0)
-	for k in n:
-		a_flow[k] = ext_flow[k]
-	ext_flow.fill(0.0)
+	if use_ext_flow:
+		for k in n: a_flow[k] = ext_flow[k]
+		ext_flow.fill(0.0)
+	else:
+		a_flow.fill(0.0)
+	var sleeping := asleep
+	var mask := _sleep_mask
 	for k in moving:
 		var a := a_area[k] + area_step[k]
 		if a < 0.0: a = 0.0
@@ -544,15 +688,24 @@ func step() -> float:
 						var share := sp / float(n_open)
 						for e in range(s0, s1):
 							var m := nbr_list[e]
-							if minf(a_area[m], a_amin[m]) >= sq or amin_target[m] >= sq: inj[m] += share
+							if minf(a_area[m], a_amin[m]) >= sq or amin_target[m] >= sq:
+								inj[m] += share
+								if sleeping and mask[m] == 1:
+									sleeping = false
+									asleep = false
 				else:
 					inj[k] += raw
 		a_vol[k] = v
+	var lists: Array = _lists_asleep if sleeping else _lists_awake
+	var l_walled: PackedInt32Array = lists[0]
+	var l_free: PackedInt32Array = lists[1]
+	var l_vol: PackedInt32Array = lists[2]
+	var l_branches: PackedInt32Array = lists[3]
 	if vol_on:
 		var c := vol_lp_coef
 		var v1 := vol_src1
 		var v2 := vol_src2
-		for k in n:
+		for k in l_vol:
 			var s1 := v1[k] + c * (inj[k] - v1[k])
 			v1[k] = s1
 			var s2 := v2[k] + c * (s1 - v2[k])
@@ -578,7 +731,8 @@ func step() -> float:
 	var a_bb := b_b
 	var a_kind := b_kind
 	var a_isj := is_junction
-	for j in nb:
+	var a_static := b_static
+	for j in l_branches:
 		var a := a_ba[j]
 		var b := a_bb[j]
 		var l := 0.0
@@ -586,7 +740,13 @@ func step() -> float:
 		var kf := 0.0
 		var kb := 0.0
 		var a_eff := 0.0
-		if a_kind[j] == 0:
+		if a_static[j] == 1:
+			l = sb_l[j]
+			r = sb_r[j]
+			kf = sb_kf[j]
+			kb = sb_kb[j]
+			a_eff = a_barea[j]
+		elif a_kind[j] == 0:
 			var ma := a_amin[a]
 			var mb := a_amin[b]
 			a_eff = ma if ma < mb else mb
@@ -660,7 +820,7 @@ func step() -> float:
 	var a_wv := wall_v
 	var a_wy := wall_y
 	var sqrt_min := sqrt(min_a)
-	for k in walled:
+	for k in l_walled:
 		var m := wall_m[k]
 		var r := wall_r[k]
 		var v := ((m * it - 0.5 * r) * a_wv[k] + a_p[k] - wall_k[k] * a_wy[k]) / (m * it + 0.5 * r)
@@ -677,7 +837,7 @@ func step() -> float:
 	var rad_total := wall_rad_sum
 	var a_radof := rad_of
 	var floor_on := enable_junction_floor
-	for k in free_nodes:
+	for k in l_free:
 		var rr := a_radof[k]
 		if a_area[k] < closed or a_amin[k] < closed:
 			if rr >= 0:
