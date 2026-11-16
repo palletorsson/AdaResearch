@@ -55031,6 +55031,78 @@
             "record": "found",
             "editor_label": "Marks and walls | a field of 5 x 4 cells with walls that cannot be seen; six sources' chalk marks, felt or told, some wrong; the visitor's body checks, adds and strikes"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            6.3,
+            7.7
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "SpeculativeComputation_Collective_Knowledge",
+            "stands_at": [
+              6.3,
+              7.7
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the growing helix and the round table to the marked floor"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_speccoll",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_speccoll)"
+          }
+        },
+        {
+          "id": "word-counted",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "COUNTED",
+            "tall": 1.2,
+            "fit_width": 6.0,
+            "editor_label": "COUNTED in standing red letters | what a pile is; on the west wing, facing CHECKED across the floor"
+          }
+        },
+        {
+          "id": "word-checked",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "CHECKED",
+            "tall": 1.2,
+            "fit_width": 6.0,
+            "editor_label": "CHECKED in standing red letters | what makes it knowledge; on the east wing"
+          }
         }
       ],
       "props": [],
